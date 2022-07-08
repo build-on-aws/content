@@ -28,7 +28,7 @@ BuildOn.AWS readers are hands-on builders. They personally manipulate code, data
 
 Content may be about programming languages (React, Vue.js, CSS…), address generic topics about a category (compute, database, machine learning, networking, cloud) or a particular technology (Docker, Javascript, BGP, TLS1.3), or help a builder solve a problem they are facing.
 
-Not sure what to write about? Check out our idea backlog [here](/contribute).
+Not sure what to write about? Check out our idea backlog [here](https://github.com/build-on-aws/content/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
 
 ## Writing style
 
@@ -77,7 +77,7 @@ You'll need to meet the following prerequisites to publish your content:
 
 ### 1. Submit a Content Proposal
 
-Before writing your content, submit a content proposals as a GitHub Issue in the BuildOn.AWS content repository [here](https://github.com/nazreen/eureka-content/issues/new?assignees=jennapederson&labels=content+proposal&template=content-proposal-template.md).
+Before writing your content, submit a content proposals as a GitHub Issue in the BuildOn.AWS content repository [here](https://github.com/build-on-aws/content/issues/new?assignees=jennapederson&labels=content+proposal&template=content-proposal-template.md).
 
 ### 2. Proposal Review
 
@@ -127,15 +127,15 @@ content/
 
 The instructions below are to clone the repo locally. If you would like to do this via the GitHub UI and need assistance, reach out to
 
-1. Fork this [repo](https://github.com/nazreen/eureka-content/fork) to your own account (it will remain private in your account)
+1. Fork this [repo](https://github.com/build-on-aws/content/fork) to your own account (it will remain private in your account)
 1. Clone your repo locally. i.e. `git clone git@github.com:YOUR_GITHUB_ACCOUNT/content.git`
-1. Create a folder named for the title of your post. This is called the "slug" and will become the URL of your post i.e. `what-happens-when-you-type-a-url-into-your-browser`
+1. Inside the `posts` folder, create a folder named for the title of your post. This is called the "slug" and will become the URL of your post i.e. `posts/what-happens-when-you-type-a-url-into-your-browser`
 1. Name your main post file `index.md` (created in [Step 3: Write Your First Draft](#3-write-your-first-draft)) and store it in the content folder from the previous step
 1. If you have images, create a subfolder folder named `images`
     1. Add any images (`jpg`, `png`, `webp`, `svg`, `gif`) to the `images` folder
 1. Commit your changes i.e. `git add posts/what-happens-when-you-type-a-url-into-your-browser`
 1. Push your changes to your fork i.e. `git push origin main`
-1. Create a pull request of your changes into the [content repo](https://github.com/nazreen/eureka-content/)
+1. Create a pull request of your changes into the [content repo](https://github.com/build-on-aws/content/)
     1. On the Pulls page of your fork (https://github.com/YOUR_GITHUB_ACCOUNT/content/pulls), select the New Pull Request button
     1. In the Comparing Changes section, make sure the base repository is `build-on-aws/content` and the head repository is `YOUR_GITHUB_ACCOUNT/content` and both are set to `main` branch
     1. Select Create Pull Request button
