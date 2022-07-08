@@ -2,12 +2,9 @@
 layout: blog.11ty.js
 title: How to Install Docker
 description: This post covers how to install docker on any platform
-hero: https://images.unsplash.com/photo-1651065567117-ac52c1a62e21?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2127&q=80
-heroCropMode: bottom
-heroColor: dark
-tags:
-    - docker
-    - containers
+authorGithubAlias: aws-nazreen
+authorName: Nazreen Mohamad
+date: 2022-07-07
 ---
 
 
