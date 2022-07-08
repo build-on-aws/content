@@ -1,59 +1,58 @@
-# Contributing Guidelines
+# Contributing Guide
 
-Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional
-documentation, we greatly value feedback and contributions from our community.
+* [Ways to Contribute](#ways-to-contribute)
+  * [Contribute Content](#contribute-content)
+  * [Suggest Content Ideas](#suggest-content-ideas)
+  * [Report or Fix a Content Issue](#report-or-fix-a-content-issue)
+  * [Other Ways to Contribute](#others-ways-to-contribute)
+* [Ask for Help](#ask-for-help)
+* [How Your Content is Licensed](#how-your-content-is-licensed)
+* [BuildOn.AWS Code of Conduct](#buildonaws-code-of-conduct)
 
-Please read through this document before submitting any issues or pull requests to ensure we have all the necessary
-information to effectively respond to your bug report or contribution.
+[BuildOn.AWS](https://blog.buildon.aws) welcomes anyone to contribute content, suggest content ideas, update outdated content, and file issues related to the platform or with content.
 
+This content is community driven and you are the best person to drive the kind of content you'd like to see published here.
 
-## Reporting Bugs/Feature Requests
+## Ways to Contribute
 
-We welcome you to use the GitHub issue tracker to report bugs or suggest features.
+### Contribute Content
 
-When filing an issue, please check existing open, or recently closed, issues to make sure somebody else hasn't already
-reported the issue. Please try to include as much information as you can. Details like these are incredibly useful:
+If you'd like to write content for BuildOn.AWS, read through the [Author Quick Start](/AUTHOR_QUICK_START.md) and then submit your proposal [here](https://github.com/nazreen/eureka-content/issues/new?assignees=jennapederson&labels=content+proposal&template=content-proposal-template.md).
 
-* A reproducible test case or series of steps
-* The version of our code being used
-* Any modifications you've made relevant to the bug
-* Anything unusual about your environment or deployment
+Looking for an idea? Check out our backlog [here](/contribute).
 
+### Suggest Content Ideas
 
-## Contributing via Pull Requests
-Contributions via pull requests are much appreciated. Before sending us a pull request, please ensure that:
+Are we missing some content? Do you have an idea you'd like to suggest, but you're not able to create the content yourself? Check out our current backlog [here](/contribute) and then submit an issue [here](https://github.com/nazreen/eureka-content/issues/new?assignees=jennapederson&labels=wish+list&template=idea-suggestion-template.md) to suggest your idea.
 
-1. You are working against the latest source on the *main* branch.
-2. You check existing open, and recently merged, pull requests to make sure someone else hasn't addressed the problem already.
-3. You open an issue to discuss any significant work - we would hate for your time to be wasted.
+### Report or Fix a Content Issue
 
-To send us a pull request, please:
+If you encounter an issue with a piece of content such as typos, broken links, broken code, or out of date information and you believe it should be fixed, you can submit an issue to report it [here](https://github.com/nazreen/eureka-content/issues/new?assignees=jennapederson&labels=bug&template=issue-template.md) or update it with a pull request.
 
-1. Fork the repository.
-2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
-3. Ensure local tests pass.
-4. Commit to your fork using clear commit messages.
-5. Send us a pull request, answering any default questions in the pull request interface.
-6. Pay attention to any automated CI failures reported in the pull request, and stay involved in the conversation.
+We also have a list of open content ideas and open issues [here](/contribute) that you can choose from.
 
-GitHub provides additional document on [forking a repository](https://help.github.com/articles/fork-a-repo/) and
-[creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
+## Others Ways to Contribute
 
+### Translation
 
-## Finding contributions to work on
-Looking at the existing issues is a great way to find something to contribute on. As our projects, by default, use the default GitHub issue labels (enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any 'help wanted' issues is a great place to start.
+We welcome translations of existing content. Process TBD.
 
+### Participate in Monthly Office Hours
 
-## Code of Conduct
-This project has adopted the [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct).
-For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq) or contact
-opensource-codeofconduct@amazon.com with any additional questions or comments.
+We host monthly office hours to answer your questions about content and the process of getting your content published on BuildOn.AWS.
 
+To be scheduled.
 
-## Security issue notifications
-If you discover a potential security issue in this project we ask that you notify AWS/Amazon Security via our [vulnerability reporting page](http://aws.amazon.com/security/vulnerability-reporting/). Please do **not** create a public github issue.
+## Ask For Help
 
+If you already have a content proposal or pull request for your content open, you can ask your question there and your reviewer will work with you to help.
 
-## Licensing
+You can also attend [monthly office hours](#participate-in-monthly-office-hours) to ask questions and get help.
 
-See the [LICENSE](LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+## How Your Content is Licensed
+
+Your content contributions will be licensed under the [CC BY 4.0 License](/LICENSE).
+
+## BuildOn.AWS Code of Conduct
+
+By participating on this platform you agree to abide by the [Code of Conduct](/CODE_OF_CONDUCT.md).

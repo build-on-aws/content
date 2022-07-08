@@ -1,6 +1,6 @@
 ## Content Pull Request Checklist
 
-Please check to make sure your content submission meets the following requirements:
+Please check to make sure your content submission meets the following requirements by adding an `x` between the brackets:
 
 - [ ] Your content resides in a folder named for the URL slug and the main file is named `index.md` (e.g. `how-to-make-coffee/index.md`).
 - [ ] You have reviewed the [Content Review Checklist](TBD).

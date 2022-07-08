@@ -1,8 +1,8 @@
-BuildOn.AWS is a community content platform where hands-on builders can find content to learn about a technology, solve a problem or to contribute content to share their knowledge to help others. Content is written by builders, for builders.
+[BuildOn.AWS](https://blog.buildon.aws) is a community content platform where hands-on builders can find content to learn about a technology, solve a problem or to contribute content to share their knowledge to help others. Content is written by builders, for builders.
 
 ## How to write for BuildOn.AWS
 
-Interested in writing for BuildOn.AWS?
+Interested in writing for [BuildOn.AWS](https://blog.buildon.aws)?
 
 - Read the [Quick Start](/AUTHOR_QUICK_START.md) to learn how to propose a topic and get it published
 - Review the [Content Review Checklist](/CONTENT_REVIEW_CHECKLIST.md) before submitting your pull request
