@@ -1,7 +1,7 @@
 ---
 layout: blog.11ty.js
-title: Picturesocial - How to containerize an App in less than 15 minutes
-description: In this episode you're going to learn about the basics of containers, but most importantly how to containerize an App in an easy and reusable way for a modern web application.
+title: Picturesocial - What’s Kubernetes and Why should I care?
+description: Everybody talks about Kubernetes and this episode will help you understand how it works and why should I care about Kubernetes in the first place.
 tags:
   - containers
   - ecr
