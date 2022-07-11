@@ -68,10 +68,10 @@ Notice you have the choice between x86 based Mac Mini (`mac1.metal`) and Apple s
 Alternatively, I may use the AWS CLI, as following:
 
 ```zsh
-➜  ~ aws ec2 allocate-hosts                   \
-          --instance-type mac2.metal          \
-          --availability-zone us-east-2b      \
-          --quantity 1 
+aws ec2 allocate-hosts                   \
+     --instance-type mac2.metal          \
+     --availability-zone us-east-2b      \
+     --quantity 1 
 {
     "HostIds": [
         "h-0fxxxxxxx90"
