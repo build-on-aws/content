@@ -98,7 +98,7 @@ $$
 
 
 # What is next?
-in [part 3](./AIX_Intro-B3.ipynb) we walk through an example of lime, using InceptionV3, resnet152, and LIME library.
+in [part 3](./AIX_Intro-B3.md) we walk through an example of lime, using InceptionV3, resnet152, and LIME library.
 
 
 # References

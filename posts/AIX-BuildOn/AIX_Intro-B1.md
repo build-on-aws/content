@@ -134,7 +134,7 @@ LIME and SHAP are two of the most commonly used local explanability models using
 # What is next?
 Next we focus on two of the most famous feature importance methods for post-hoc local explainability, LIME and SHAP. The entries will have accompanying code for object detection using pre-trained imagenet models. We then change our attention from perturbation based methods to to back propagation methods and describe DeepLIFT.
 
-**Rnd of part 1. [Next: Lime](./AIX_Intro-B2.md)
+**Rnd of part 1. [Next: Lime](./AIX_Intro-B2.ipynb)
 
 # References
 1. https://arxiv.org/pdf/1602.04938v1.pdf
