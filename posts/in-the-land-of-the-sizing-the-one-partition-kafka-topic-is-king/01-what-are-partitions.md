@@ -4,9 +4,12 @@ title: In the land of the sizing, the one-partition Kafka topic is king
 description: Understand what are partitions in Apache Kafka, and the impact they have on your workloads.
 tags:
   - apache-kafka
+  - kafka-streams
+  - kafka-connect
   - streaming-data
   - stream-processing
   - data-streams
+  - data-analytics
   - amazon-msk
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
