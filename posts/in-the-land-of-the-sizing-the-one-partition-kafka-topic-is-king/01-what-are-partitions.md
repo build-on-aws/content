@@ -38,9 +38,9 @@ To illustrate this bottleneck scenario, let's say you have a broker running on a
 
 Surely, you could take different actions to remediate this bottleneck scenario, such decreasing the retention policy for the topic, executing multiple brokers in different processes, increasing the limit of file handles per process, and perhaps just adding more brokers in different nodes. But this scenario suits the need for your understanding that creating partitions arbitrarily has a direct impact on the amount of resources consumed by your Kafka brokers. If a topic with 1 partition could quickly exhaust the broker's node in less than 3 days, what would happen if the topic had more partitions? Any partition takes a toll on the brokers, because partitions, not topics, are your unit-of-storage.
 
-While all of this happens at an infrastructure level, it may be hard for you, as a developer, to think about partitions. In a matter of fact, have you ever wondered why you never had to worry about partitions while writing and reading events with Kafka? Well, Kafka is a magnificent piece of technology when it comes to client APIs. From the producer standpoint, every time you invoke the `send()` function to write a new event, there is an internal process triggered that takes care of deciding which partition that event should go to. This process is called partitioning, and it is performed by a component called [partitioner](https://kafka.apache.org/32/javadoc/org/apache/kafka/clients/producer/Partitioner.html).
+While all of this happens at an infrastructure level, it may be hard for you, as a developer, to think about partitions. In a matter of fact, have you ever wondered why you never had to worry about partitions while writing and reading events with Kafka? Well, Kafka is a magnificent piece of technology when it comes to client APIs. From the producer standpoint, every time you invoke the `send()` function to write a new event, there is an internal process triggered that takes care of deciding which partition that event should go to. This process is called partitioning, and it can be customized by a component called [partitioner](https://kafka.apache.org/32/javadoc/org/apache/kafka/clients/producer/Partitioner.html).
 
-Mind, though, that there are different partitioners, each one with their own logic to determine which partition to use. If the topic has only 1 partition, then unsurprisingly, the event goes to that partition regardless of the partitioner. However, if there are two or more partitions available, then the partitioner will apply its programmed logic to decide which one to use. Which logic is this depends on the partitioner used. Producers in Kafka come with a default partitioner configured. Unless you changed this explicitly in the configuration, the logic is checking whether the event has a key assigned. If the event does have a key, then it will use it to write the event to one specific partition. The `partitionForKey()` method below describes how the key is used along with the number of available partitions. It returns the partition index as an integer.
+Here is how partitioning works. If the event produced has a partition assigned, then it will use it. Otherwise, if a custom partitioner was configured via the `partitioner.class` property, then it will execute this partitioner to compute which partition to use. If there is no custom partitioner configured, then Kafka tries to compute which partition to use based on the keys. The `partitionForKey()` method below describes how the key is used along with the number of available partitions.
 
 ```
 public static int partitionForKey(final byte[] serializedKey, final int numPartitions) {
@@ -48,53 +48,13 @@ public static int partitionForKey(final byte[] serializedKey, final int numParti
 }
 ```
 
-If the event doesn't have a key, then the default partitioner fallback to reading which partition to use from an internal cache created during the producer bootstrap. This internal cache is used to remember what was the last partition used to ensure a sticky approach. If there is no last partition used, which is likely the case of when the producer is writing an event for the first time, then a forced round-robin between the available partitions will be used. Just like the `partitionForKey()` method, the `partition()` method returns the partition index as an integer, as you can see below.
+If the event doesn't have a key or if the property `partitioner.ignore.keys` is set to true, then Kafka fallback to compute which partition to use based on factors such as broker load, the amount of data produced to each partition, etc.
 
-```
-public int partition(String topic, Cluster cluster) {
-    Integer part = indexCache.get(topic);
-    if (part == null) {
-        return nextPartition(topic, cluster, -1);
-    }
-    return part;
-}
-
-public int nextPartition(String topic, Cluster cluster, int prevPartition) {
-    List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
-    Integer oldPart = indexCache.get(topic);
-    Integer newPart = oldPart;
-    // Check that the current sticky partition for the topic is either not set or that the partition that 
-    // triggered the new batch matches the sticky partition that needs to be changed.
-    if (oldPart == null || oldPart == prevPartition) {
-        List<PartitionInfo> availablePartitions = cluster.availablePartitionsForTopic(topic);
-        if (availablePartitions.size() < 1) {
-            Integer random = Utils.toPositive(ThreadLocalRandom.current().nextInt());
-            newPart = random % partitions.size();
-        } else if (availablePartitions.size() == 1) {
-            newPart = availablePartitions.get(0).partition();
-        } else {
-            while (newPart == null || newPart.equals(oldPart)) {
-                int random = Utils.toPositive(ThreadLocalRandom.current().nextInt());
-                newPart = availablePartitions.get(random % availablePartitions.size()).partition();
-            }
-        }
-        // Only change the sticky partition if it is null or prevPartition matches the current sticky partition.
-        if (oldPart == null) {
-            indexCache.putIfAbsent(topic, newPart);
-        } else {
-            indexCache.replace(topic, prevPartition, newPart);
-        }
-        return indexCache.get(topic);
-    }
-    return indexCache.get(topic);
-}
-```
-
-Consumers work similarly. Every time you invoke the `poll()` function from the consumer to read events, the events will be read from partitions selected by an internal process triggered beforehand that takes care of deciding how to assign the partitions to consumers. This process is called assignment, and it is performed by a component called [assignor](https://kafka.apache.org/32/javadoc/org/apache/kafka/clients/consumer/ConsumerPartitionAssignor.html). To better understand how assignors work, you need to understand how Kafka handles consumers. All consumers must belong to a consumer group. This is the reason the `group.id` property in the consumer API is mandatory. Every group has a group coordinator, which oversees who joins and leaves the group.
+Consumers work similarly. Every time you invoke the `poll()` function from the consumer to read events, the events will be read from partitions selected by an internal process triggered beforehand that takes care of deciding how to assign the partitions to consumers. This process is called assignment, and it can be customized by a component called [assignor](https://kafka.apache.org/32/javadoc/org/apache/kafka/clients/consumer/ConsumerPartitionAssignor.html). To better understand how assignors work, you need to understand how Kafka handles consumers. All consumers must belong to a consumer group. This is the reason the `group.id` property in the consumer API is mandatory. Every group has a group coordinator, which oversees who joins and leaves the group.
 
 Once one or more consumers join the group, the group coordinator executes the partition assignment by executing the assignors configured. This partition assignment can be triggered by discrete events. It may happen when a consumer dies, perhaps because of hardware or software malfunctioning. It may also happen if the consumer becomes so busy that stops to respond to any heartbeat checking about its liveness. And it may also happen if a brand new consumer joins the group. By the way, this assignment process is also known as rebalancing.
 
-Mind, again, that there are different assignors, each one with their own logic, to determine how the assignment should occur. Consumers in Kafka come with a default assignor configured. Unless you changed this explicitly in the configuration, the logic is applying the best effort to distribute the available partitions evenly amongst the range of consumers. If there are more partitions than consumers, then the first consumers from the list (which are ordered in a lexicographic manner) will receive one extra partition each. The method `assign()` below describes how this works. As result, this method returns a `java.util.Map` containing the assigned partitions for each member ID, which is how Kafka identifies consumers internally.
+Consumers in Kafka come with a default assignor configured. It tries to distribute the available partitions evenly amongst the range of consumers. But if there are more partitions than consumers, then the first consumers from the list (which are ordered in a lexicographic manner) will receive one extra partition each. The method `assign()` below describes how this works. As result, this method returns a `java.util.Map` containing the assigned partitions for each member ID, which is how Kafka identifies consumers internally.
 
 ```
 public Map<String, List<TopicPartition>> assign(Map<String, Integer> partitionsPerTopic,
