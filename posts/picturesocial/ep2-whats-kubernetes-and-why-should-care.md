@@ -1,9 +1,9 @@
 ---
 layout: blog.11ty.js
 title: Picturesocial - What’s Kubernetes and Why should I care?
-description: Everybody talks about Kubernetes and this episode will help you understand how it works and why should I care about Kubernetes in the first place.
+description: Deploying an EKS Cluster? Infraestructure as a Code?, Terraform?, in this episode we are going to simplify and learn how to deploy an EKS Cluster using Terraform in less than 15 minutes
 tags:
-  - containers
+  - terraform
   - kubernetes
   - eks
   - picturesocial
@@ -15,7 +15,7 @@ date: 2022-07-11
 
 ## Introduction
 
-In the last post [Picturesocial - How to containerize an App in less than 15 minutes](https://quip-amazon.com/lAO3AANFdhlv) we discussed Containers and the steps needed to containerize an application. Creating a container without thinking where to deploy it it’s like having your home inside a cargo container floating in the middle of the ocean. As wonderful and terrifying as that sounds, you will definitely need power, water, gas, garbage collection, food and may be some human interaction if you want to lead a healthy and productive life. In this post we are going to learn about Kubernetes, one of the most important pieces in the Picturesocial architecture.
+In the last post [Picturesocial - How to containerize an App in less than 15 minutes](/picturesocial/ep1-how-to-containerize-app-less-than-15-min) we discussed Containers and the steps needed to containerize an application. Creating a container without thinking where to deploy it it’s like having your home inside a cargo container floating in the middle of the ocean. As wonderful and terrifying as that sounds, you will definitely need power, water, gas, garbage collection, food and may be some human interaction if you want to lead a healthy and productive life. In this post we are going to learn about Kubernetes, one of the most important pieces in the Picturesocial architecture.
 
 Picturesocial will have several APIs and we want to have independence in how the services are maintained, deployed and developed. So we decided to use a containerized architecture. This is not as complex as it sound, it just means that you are using containers and a container orchestrator. A container orchestrator is the component in charge of handling all the containers, replicas, networking, storage and infrastructure needed. When we talk about container orchestrators, the most popular one today, is Kubernetes, thanks to its active community, support and ecosystem.
 
@@ -177,7 +177,7 @@ spec:
 ```
 
 Services always detect changes in the backend, so if a pod goes offline or is being replaced by a new one, the Service will stop sending traffic and reroute to the working pods. This is why I emphasize that synchronous communication between pods must be made using Services and not calling the pods directly, even if your API is composed of just one pod.
-[Image: images/img01.jpg]
+![ep2!](picturesocial/images/02-01.jpg "ep2")
 
 ### Namespace
 
@@ -185,7 +185,7 @@ Kubernetes was conceived as a multi-tenant container orchestrator. That means th
 
 My suggestion is to group the resources of a business domain in a namespace, that way it is easier to find the resources you need and also to allow teams to maintain specific business domains independently in a software project.
 
-[Image: images/img02.jpg]
+![ep2!](picturesocial/images/02-02.jpg "ep2")
 
 ## What kind of applications should I host on Kubernetes?
 
