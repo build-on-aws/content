@@ -42,7 +42,7 @@ While all of this happens at an infrastructure level, it may be hard for you, as
 
 Here is how partitioning works. If the event produced has a partition assigned, then it will use it. Otherwise, if a custom partitioner was configured via the `partitioner.class` property, then it will execute this partitioner to compute which partition to use. If there is no custom partitioner configured, then Kafka tries to compute which partition to use based on the key assigned. The `partitionForKey()` method below describes how the key is used along with the number of available partitions.
 
-```
+```java
 public static int partitionForKey(final byte[] serializedKey, final int numPartitions) {
     return Utils.toPositive(Utils.murmur2(serializedKey)) % numPartitions;
 }
@@ -54,9 +54,9 @@ Consumers work similarly. Every time you invoke the `poll()` function from the c
 
 Once one or more consumers join the group, the group coordinator executes the partition assignment by executing the assignors configured. This partition assignment can be triggered by discrete events. It may happen when a consumer dies, perhaps because of hardware or software malfunctioning. It may also happen if the consumer becomes so busy that stops to respond to any heartbeat checking about its liveness. And it may also happen if a brand new consumer joins the group. By the way, this assignment process is also known as rebalancing.
 
-Consumers in Kafka come with a default assignor configured. It tries to distribute the available partitions evenly amongst the range of consumers. But if there are more partitions than consumers, then the first consumers from the list (which are ordered in a lexicographic manner) will receive one extra partition each. The method `assign()` below describes how this works. As result, this method returns a `java.util.Map` containing the assigned partitions for each member ID, which is how Kafka identifies consumers internally.
+Consumers in Kafka come with a list of assignors configured. It defaults to the [RangeAssignor](https://kafka.apache.org/32/javadoc/org/apache/kafka/clients/consumer/RangeAssignor.html), which tries to distribute the available partitions evenly amongst the range of consumers. But if there are more partitions than consumers, then the first consumers from the list (which are ordered in a lexicographic manner) will receive one extra partition each. The `assign()` method below from the RangeAssignor implementation describes how this works. As result, this method returns a `java.util.Map` containing the assigned partitions for each member ID, which is how Kafka identifies consumers internally.
 
-```
+```java
 public Map<String, List<TopicPartition>> assign(Map<String, Integer> partitionsPerTopic,
                                                 Map<String, Subscription> subscriptions) {
     Map<String, List<MemberInfo>> consumersPerTopic = consumersPerTopic(subscriptions);
@@ -89,6 +89,57 @@ public Map<String, List<TopicPartition>> assign(Map<String, Integer> partitionsP
 }    
 ```
 
+While the RangeAssignor does a good enough job distributing the partitions amongst the consumers, it doesn't provide any safety measures to prevent stop-the-world rebalances. This is a problem that prevents continuous processing of events, as the rebalance first need to finish before the consumers resume their operations and fetch new events from the partitions. For this reason, newer clusters are encouraged to use the [CooperativeStickyAssignor](https://kafka.apache.org/32/javadoc/org/apache/kafka/clients/consumer/CooperativeStickyAssignor.html) assignor. This assignor uses cooperative rebalancing to prevent stop-the-world pauses, and focus on moving only the partitions changing ownership, instead of all the partitions all over again. The `assign()` method below from the CooperativeStickyAssignor implementation describes how this works.
+
+```java
+public Map<String, List<TopicPartition>> assign(Map<String, Integer> partitionsPerTopic,
+                                                Map<String, Subscription> subscriptions) {
+    Map<String, List<TopicPartition>> assignments = super.assign(partitionsPerTopic, subscriptions);
+
+    Map<TopicPartition, String> partitionsTransferringOwnership = super.partitionsTransferringOwnership == null ?
+        computePartitionsTransferringOwnership(subscriptions, assignments) :
+        super.partitionsTransferringOwnership;
+
+    adjustAssignment(assignments, partitionsTransferringOwnership);
+    return assignments;
+}
+
+private void adjustAssignment(Map<String, List<TopicPartition>> assignments,
+                                Map<TopicPartition, String> partitionsTransferringOwnership) {
+    for (Map.Entry<TopicPartition, String> partitionEntry : partitionsTransferringOwnership.entrySet()) {
+        assignments.get(partitionEntry.getValue()).remove(partitionEntry.getKey());
+    }
+}
+
+private Map<TopicPartition, String> computePartitionsTransferringOwnership(Map<String, Subscription> subscriptions,
+                                                                            Map<String, List<TopicPartition>> assignments) {
+    Map<TopicPartition, String> allAddedPartitions = new HashMap<>();
+    Set<TopicPartition> allRevokedPartitions = new HashSet<>();
+
+    for (final Map.Entry<String, List<TopicPartition>> entry : assignments.entrySet()) {
+        String consumer = entry.getKey();
+
+        List<TopicPartition> ownedPartitions = subscriptions.get(consumer).ownedPartitions();
+        List<TopicPartition> assignedPartitions = entry.getValue();
+
+        Set<TopicPartition> ownedPartitionsSet = new HashSet<>(ownedPartitions);
+        for (TopicPartition tp : assignedPartitions) {
+            if (!ownedPartitionsSet.contains(tp))
+                allAddedPartitions.put(tp, consumer);
+        }
+
+        Set<TopicPartition> assignedPartitionsSet = new HashSet<>(assignedPartitions);
+        for (TopicPartition tp : ownedPartitions) {
+            if (!assignedPartitionsSet.contains(tp))
+                allRevokedPartitions.add(tp);
+        }
+    }
+
+    allAddedPartitions.keySet().retainAll(allRevokedPartitions);
+    return allAddedPartitions;
+}
+```
+
 How your code writes events into partitions and reads from them is one of those processes that are so well encapsulated that developers rarely pay attention to. Reason I called Kafka's client API is a magnificent piece of technology. It makes you believe you are dealing with this high-level construct called topic, but in reality, the whole partition plumbing is being handled behind the scenes. This is even more true when you are working with integration platforms like [Kafka Connect](https://kafka.apache.org/documentation/#connect), or stream processing technologies such as [Kafka Streams](https://kafka.apache.org/documentation/streams), [ksqlDB](https://ksqldb.io/), and [Amazon Kinesis Data Analytics](https://aws.amazon.com/kinesis/data-analytics). They will be discussed in more details on the part three of this blog post series.
 
 The way your data is distributed across the cluster is another way to see partitions as a unit-of-storage. To implement horizontal scalability, each broker from the cluster hosts one or multiple partitions. As you add new brokers to your cluster; you increase the storage capacity of the cluster to store events, as the total storage capacity of a cluster is dictated by the sum of all broker's storage. With a cluster containing 4 brokers, each one with the storage capacity of 1TB, you can store up to 4TB of data. But how your data will leverage all this capacity depends directly on the partitions.
@@ -97,13 +148,13 @@ To illustrate this, let's say you start a cluster with 2 brokers. Once the clust
 
 This happens because partitions are not automatically reassigned as brokers are added or removed to/from a cluster. So in this case, the partitions may still live in the 2 original brokers and, with more data coming in, they may become slow as they can start running out of disk space, out of file handles, out of memory, swapping frequently, etc. To resolve this problem, you have two choices. You can bounce the cluster so when it gets back, the partitions are reassigned, but this leads to cluster unavailability. The other option is forcing this reassign while the cluster is online using the `kafka-reassign-partitions` tool available in the `/bin` folder of your Kafka distribution. You can do this by first generating a reassignment recommendation given the new layout of your cluster.
 
-```
+```bash
 kafka-reassign-partitions --bootstrap-server <BROKER_ENDPOINT> --broker-list 2,3 --topics-to-move-json-file partitions-to-reassign.json --generate
 ```
 
 Mind that the property `broker-list` was set to `2,3`, which correspond to the broker ids of the newly added brokers. The `partitions-to-reassign.json` file provided as a parameter is a file you must create yourself and it should contain information about which one or more partitions you intend to reassign. You should create this file using the following syntax:
 
-```
+```json
 {
    "topics": [
       {
@@ -116,7 +167,7 @@ Mind that the property `broker-list` was set to `2,3`, which correspond to the b
 
 Once the command completes, you should obtain a content similar to this:
 
-```
+```json
 Current partition replica assignment
 {"version":1,"partitions":[{"topic":"test","partition":0,"replicas":[0],"log_dirs":["any"]},{"topic":"test","partition":1,"replicas":[1],"log_dirs":["any"]},{"topic":"test","partition":2,"replicas":[0],"log_dirs":["any"]},{"topic":"test","partition":3,"replicas":[1],"log_dirs":["any"]}]}
 
@@ -126,7 +177,7 @@ Proposed partition reassignment configuration
 
 Save the contents of the proposed partition reassignment configuration into a new file. You may tweak the file with your own proposal, or just settle with what was recommended by Kafka. To execute the reassignment, use the command below:
 
-```
+```bash
 kafka-reassign-partitions.sh --bootstrap-server <BROKER_ENDPOINT> --reassignment-json-file new-reassignment-file.json --execute
 ```
 
@@ -166,13 +217,13 @@ All of this may get you thinking about creating as many partitions as you need. 
 
 The easiest way to measure write and read throughput is by using the tools `kafka-producer-perf-test` and `kafka-consumer-perf-test` that are available in the `/bin` folder of your Kafka distribution. For example, to test if a partition can handle 2,000 events per second, with each event containing 1024 bytes of payload size, you can send 100,000 from a machine using this command:
 
-```
+```bash
 kafka-producer-perf-test --producer.config config.properties --throughput 2000 --num-records 100000 --record-size 1024 --topic <TOPIC_NAME>
 ```
 
 This command will produce an output similar to this:
 
-```
+```bash
 7501 records sent, 1499.3 records/sec (1.46 MB/sec), 2124.3 ms avg latency, 1307.0 ms max latency.
 9870 records sent, 1273.6 records/sec (1.23 MB/sec), 2343.6 ms avg latency, 1452.0 ms max latency.
 8805 records sent, 1358.9 records/sec (1.32 MB/sec), 2713.4 ms avg latency, 1982.0 ms max latency.
@@ -189,13 +240,13 @@ The 100,000 events are sent in batches. On each batch, it is calculated how many
 
 Measuring read throughput is similar. For example, to test how much throughput a single partition can handle if it tries to process 100,000, you can use this command:
 
-```
+```bash
 kafka-consumer-perf-test --bootstrap-server <BROKER_ENDPOINT> --messages 100000 --topic <TOPIC_NAME>
 ```
 
 This command will produce an output similar to this:
 
-```
+```bash
 start.time, end.time, data.consumed.in.MB, MB.sec, data.consumed.in.nMsg, nMsg.sec, rebalance.time.ms, fetch.time.ms, fetch.MB.sec, fetch.nMsg.sec
 2022-06-29 17:26:05:891, 2022-06-29 17:26:21:816, 98.1252, 6.1617, 100489, 6310.1413, 1767, 14158, 6.9307, 7097.6833
 ```
@@ -233,13 +284,13 @@ Speaking of consumers, they may also leverage replicas. When a consumer polls fo
 
 As you can see, replicas play an important role in how Kafka ensures data consistency. Therefore, it is important for you to know exactly how to keep track of the exact details of replicas in your cluster. The tool `kafka-topics` that are available in the `/bin` folder of your Kafka distribution can be used to investigate the details about the topic's partitions, replicas, and which replicas are ISRs.
 
-```
+```bash
 kafka-topics --bootstrap-server <BROKER_ENDPOINT> --topic <TOPIC_NAME> --describe
 ```
 
 This command will produce an output similar to this:
 
-```
+```bash
 Topic: replicasTest    TopicId: VAE9FZCOTH2OlLLM8Mn82A    PartitionCount: 4    ReplicationFactor: 3    Configs: segment.bytes=1073741824
     Topic: replicasTest    Partition: 0    Leader: 2    Replicas: 2,1,0    Isr: 2,1,0    Offline:
     Topic: replicasTest    Partition: 1    Leader: 1    Replicas: 1,0,2    Isr: 1,0,2    Offline:
