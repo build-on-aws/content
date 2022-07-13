@@ -167,7 +167,7 @@ Mind that the property `broker-list` was set to `2,3`, which correspond to the b
 
 Once the command completes, you should obtain a content similar to this:
 
-```json
+```bash
 Current partition replica assignment
 {"version":1,"partitions":[{"topic":"test","partition":0,"replicas":[0],"log_dirs":["any"]},{"topic":"test","partition":1,"replicas":[1],"log_dirs":["any"]},{"topic":"test","partition":2,"replicas":[0],"log_dirs":["any"]},{"topic":"test","partition":3,"replicas":[1],"log_dirs":["any"]}]}
 
