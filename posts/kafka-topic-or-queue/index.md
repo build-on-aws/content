@@ -1,4 +1,15 @@
-# Topic or a Queue: What exactly is Apache Kafka?
+---
+layout: blog.11ty.js
+title: Topic or a Queue - What exactly is Apache Kafka?
+description: Debunk a common misconception with Apache Kafka.
+tags:
+  - kafka
+  - messaging systems
+  - distributed systems
+authorGithubAlias: abhirockzz
+authorName: Abhishek Gupta
+date: 2022-07-14
+---
 
 The number of myths and misconceptions associated with a technology is directly proportional to it's popularity i.e. the more tenured and widely-used a technology is, the likelihood of misnomers floating around is quite high. [Apache Kafka](https://kafka.apache.org/) is no different! It's sometimes referred to as a "queuing service" (terrible!), "pub/sub system" (acceptable, but not quite there), "messaging system" (not too bad) etc. 
 
