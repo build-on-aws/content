@@ -1,4 +1,16 @@
-# Data processing with Kafka Streams: An overview of stateless operations
+---
+layout: blog.11ty.js
+title: Data processing with Kafka Streams - An overview of stateless operations
+description: Learn stateless operations in Kafka Streams with practical examples.
+tags:
+  - kafka
+  - data
+  - stream processing
+  - java
+authorGithubAlias: abhirockzz
+authorName: Abhishek Gupta
+date: 2022-07-14
+---
 
 [Apache Kafka](https://kafka.apache.org/documentation/) serves as a key component in data architectures. It has a rich ecosystem for building scalable data intensive services including data pipelines, microservices, etc.
 
