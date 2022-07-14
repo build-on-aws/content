@@ -14,7 +14,7 @@ In this blog post, you will get an overview of these stateless operations along 
 
 To work with Kafka Streams, you need to start by creating an instance of [KafkaStreams](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/KafkaStreams.html) that serves as the entry point of your stream processing application. It needs a [Topology](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/Topology.html) along with a `java.util.Properties` object for additional configuration.
 
-```
+```java
 Properties config = new Properties();
 
 config.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, App.APP_ID);
@@ -25,7 +25,7 @@ config.setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String
 
 A `Topology` is what defines your stream processing application - it's an *acyclic graph of sources, processors, and sinks*. Once you have defined the `Topology`, create the `KafkaStreams` instance and start processing.
 
-```
+```java
 //details omitted
 Topology topology = ....;
 
@@ -46,7 +46,7 @@ It is available in multiple flavors - `map`, `mapValues`, `flatMap`, `flatMapVal
 
 For e.g., to convert key *and* value to uppercase, use the `map` method as such:
 
-```
+```java
 stream.map(new KeyValueMapper<String, String, KeyValue<String, String>>() {
     @Override
     public KeyValue<String, String> apply(String k, String v) {
@@ -57,7 +57,7 @@ stream.map(new KeyValueMapper<String, String, KeyValue<String, String>>() {
 
 If all you need to alter is the value, use [mapValues](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#mapValues(org.apache.kafka.streams.kstream.ValueMapper)) :
 
-```
+```java
 stream.mapValues(value -> value.toUpperCase());
 ```
 
@@ -65,7 +65,7 @@ stream.mapValues(value -> value.toUpperCase());
 
 Say you have a stream of records `(foo <-> a,b,c)`, `(bar <-> d,e)` etc., where `foo` and `bar` are keys and `"a,b,c"`, `"d,e"` are CSV string values. You want the resulting stream to be as follows: `(foo,a)`, `(foo,b)`, `(foo,c)`, `(bar,d)`, `(bar,e)`. Here is an example of how this can be achieved:
 
-```
+```java
 stream.flatMap(new KeyValueMapper<String, String, Iterable<? extends KeyValue<? extends String, ? extends String>>>() {
     @Override
     public Iterable<? extends KeyValue<? extends String, ? extends String>> apply(String k, String csvRecord) {
@@ -82,12 +82,11 @@ Each record in the stream gets `flatMap`ped such that each CSV (comma separated)
 
 There is also [flatMapValues](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#flatMapValues(org.apache.kafka.streams.kstream.ValueMapper)) in case you only want to accept a value from the stream and return a collection of values.
 
-
 ### Include/Exclude data using `filter`
 
 For example, if values in a topic are words and you want to include the ones which are greater than a specified length. You can use [filter](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#filter(org.apache.kafka.streams.kstream.Predicate)) since it allows you *include* records based on a criteria which can be defined using a [Predicate](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/Predicate.html). The result is a new `KStream` instance with the filtered records:
 
-```
+```java
 KStream<String, String> stream = builder.stream("words");
 stream.filter(new Predicate<String, String>() {
     @Override
@@ -99,7 +98,7 @@ stream.filter(new Predicate<String, String>() {
 
 [filterNot](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#filterNot(org.apache.kafka.streams.kstream.Predicate)) lets you *exclude* records based on a criteria. Here is an example (lambda style):
 
-```
+```java
 KStream<String, String> stream = builder.stream("words");
 stream.filterNot((key,value) -> value.startsWith("foo"));
 ```
@@ -108,7 +107,7 @@ stream.filterNot((key,value) -> value.startsWith("foo"));
 
 Grouping is often a pre-requisite to stateful aggregations in Kafka Streams. To group records by their key, you can make sure of [groupByKey](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#groupByKey()) as such:
 
-```
+```java
 StreamsBuilder builder = new StreamsBuilder();
 KStream<String, String> stream = builder.stream(INPUT_TOPIC); 
        
@@ -119,7 +118,7 @@ KGroupedStream<String,String> kgs = stream.groupByKey();
 
 [groupBy](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#groupBy(org.apache.kafka.streams.kstream.KeyValueMapper)) is a generic version of `groupByKey` which gives you the ability to group based on a *different* key using a [KeyValueMapper](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KeyValueMapper.html):
 
-```
+```java
 stream.groupBy(new KeyValueMapper<String, String, String>() {
     @Override
     public String apply(String k, String v) {
@@ -130,7 +129,7 @@ stream.groupBy(new KeyValueMapper<String, String, String>() {
 
 `groupByKey` and `groupBy` allow you to specify a different [Serde](https://kafka.apache.org/32/javadoc/org/apache/kafka/common/serialization/Serde.html) (`Serializer` and `Deserializer`) instead of the default ones. Just use the [overloaded version](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#groupBy(org.apache.kafka.streams.kstream.KeyValueMapper,org.apache.kafka.streams.kstream.Grouped)) which accepts a [Grouped](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/Grouped.html) object:
 
-```
+```java
 stream.groupByKey(Grouped.with(Serdes.Bytes(), Serdes.Long()));
 ```
 
@@ -142,7 +141,7 @@ Not all stateless computations return intermediate results such as a `KStream`, 
 
 You can use the [to](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#to(java.lang.String)) method to store the records of a `KStream` to a topic in Kafka.
 
-```
+```java
 KStream<String, String> stream = builder.stream("words");
 
 stream.mapValues(value -> value.toUpperCase())
@@ -151,14 +150,14 @@ stream.mapValues(value -> value.toUpperCase())
 
 An [overloaded version](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#to(java.lang.String,org.apache.kafka.streams.kstream.Produced)) of `to` allows you to specify a [Produced](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/Produced.html) object to customize the `Serdes` and partitioner:
 
-```
+```java
 stream.mapValues(value -> value.toUpperCase())
       .to("output-topic",Produced.with(Serdes.Bytes(), Serdes.Long()));
 ```
 
 You are not limited to a fixed/static topic name. [TopicNameExtractor](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/processor/TopicNameExtractor.html) allows you to include custom logic to choose a specific topic in a dynamic manner. Here is a simplified example - say you are using a `map` operation to convert each record to its upper case, and need to store it in a topic that has the original name with `_uppercase` appended to it:
 
-```
+```java
 stream.mapValues(value -> value.toUpperCase())
     .to(new TopicNameExtractor<String, String>() {
         @Override
@@ -176,7 +175,7 @@ In this example, we make use of the `RecordContext` (contains record metadata) t
 
 [print](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#print(org.apache.kafka.streams.kstream.Printed)) is useful for debugging purposes - you can log each record in the `KStream`. It also accepts an instance of [Printed](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/Printed.html) to configure the behavior. 
 
-```
+```java
 StreamsBuilder builder = new StreamsBuilder();
 KStream<String, String> stream = builder.stream(INPUT_TOPIC);
 stream.mapValues(v -> v.toUpperCase()).print(Printed.toSysOut());
@@ -206,7 +205,7 @@ Since `print` is a terminal operation, you no longer have access to the original
 Here is an example of the flexibility that peek offers - not only can you log each key-value pair, but you can also materialized them to an output topic (unlike the `print` operation) using the same chain of method calls:
 
 
-```
+```java
 StreamsBuilder builder = new StreamsBuilder();
 KStream<String, String> stream = builder.stream(INPUT_TOPIC);
 
@@ -222,7 +221,7 @@ While developing your processing pipelines with Kafka Streams DSL, you will find
 Say you want to transform records, store the result in a topic and then continue to process the new (transformed) records, here is how you get this done:
 
 
-```
+```java
 StreamsBuilder builder = new StreamsBuilder();
 KStream<String, String> stream1 = builder.stream(INPUT_TOPIC);
 
@@ -237,7 +236,7 @@ stream2.filter((k,v) -> v.length > 5).to(LENGTHY_WORDS_TOPIC);
 
 Since `to` is terminal operation, a new `KStream` (`stream2`) had to created. The [through](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#through(java.lang.String)) method can help simplify this. You can rewrite the above using a single chain of calls:
 
-```
+```java
 StreamsBuilder builder = new StreamsBuilder();
 KStream<String, String> stream = builder.stream(INPUT_TOPIC);
 
@@ -251,7 +250,7 @@ stream.mapValues(v -> v.toUpperCase())
 
 Say you have streaming data coming into two different Kafka topics each of which is represented by a `KStream`. You can [merge](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#merge(org.apache.kafka.streams.kstream.KStream)) the contents of these `KStream`s into a single one, if you so wish to.
 
-```
+```java
 StreamsBuilder builder = new StreamsBuilder(); 
 
 KStream<String, String> stream1 = builder.stream("topic1");
@@ -266,7 +265,7 @@ stream1.merge(stream2).to("output-topic");
 
 [selectKey](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#selectKey(org.apache.kafka.streams.kstream.KeyValueMapper)) allows you to derive a new key (it can have a different data type as well) with the help of a `KeyValueMapper`.
 
-```
+```java
 StreamsBuilder builder = new StreamsBuilder();
 KStream<Integer, String> stream = builder.stream(INPUT_TOPIC);
 
