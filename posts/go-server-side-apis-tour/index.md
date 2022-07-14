@@ -1,4 +1,15 @@
-# Go net/http package: A quick tour of the server side APIs
+---
+layout: blog.11ty.js
+title: Go net/http package: A quick tour of the server side APIs
+description: Covers important server-side components in the Go `net/http` package.
+tags:
+  - go
+  - programming
+  - http
+authorGithubAlias: abhirockzz
+authorName: Abhishek Gupta
+date: 2022-07-14
+---
 
 The [Go](http://go.dev/) programming language (also sometimes referred to as `Golang`) is known for its comprehensive, robust and well-documented [standard library](https://pkg.go.dev/std). This includes the [net/http](https://golang.org/pkg/net/http/) package, which provides the server and client side APIs for HTTP services. 
 
