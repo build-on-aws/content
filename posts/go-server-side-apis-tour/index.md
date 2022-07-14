@@ -11,7 +11,7 @@ In this blog post, I will provide a break down of the important server-side comp
 - The default multiplexer
 - How to use functions to handle HTTP requests
 
-Let's start off with the fundamental building blocks - `ServeMux` and `Server` are 
+Let's start off with the fundamental building blocks - `ServeMux` and `Server` 
 
 ### `ServeMux` - HTTP multiplexer
 
