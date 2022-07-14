@@ -5,7 +5,7 @@ description: Learn stateless operations in Kafka Streams with practical examples
 tags:
   - kafka
   - data
-  - stream processing
+  - stream-processing
   - java
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
