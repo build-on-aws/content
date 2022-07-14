@@ -4,8 +4,8 @@ title: Topic or a Queue - What exactly is Apache Kafka?
 description: Debunk a common misconception with Apache Kafka.
 tags:
   - kafka
-  - messaging systems
-  - distributed systems
+  - messaging-systems
+  - distributed-systems
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2022-07-14
