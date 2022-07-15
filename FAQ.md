@@ -32,10 +32,10 @@ The resulting URL mapping will be:
 
 Please don’t syndicate to other platforms right now as we don’t want to drive traffic back to BuildOn.AWS during the soft launch. The canonical link helps surface the original content in search results.
 
-#### Why was my content proposal not accepted? Do you have feedback for me?
+### Why was my content proposal not accepted? Do you have feedback for me?
 
 We will add feedback to your content proposal issue if we have suggestions for improvements. In some cases, the content is not 
 
-#### How do I optimize my content for SEO?
+### How do I optimize my content for SEO?
 
 TODO
