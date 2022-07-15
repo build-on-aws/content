@@ -25,8 +25,8 @@ posts
 Where `posts/become-cli-ninja-on-mac/01-start-an-ec2-mac-instance.md` is part 1 and `posts/become-cli-ninja-on-mac/02-remotely-connect-a-mac-instance.md` is part 2.
 
 The resulting URL mapping will be:
-https://blog.buildon.aws/posts/become-cli-ninja-on-mac/01-start-on-an-ec2-mac-instance
-https://blog.buildon.aws/posts/become-cli-ninja-on-mac/02-remotely-connect-a-mac-instance
+- https://blog.buildon.aws/posts/become-cli-ninja-on-mac/01-start-on-an-ec2-mac-instance
+- https://blog.buildon.aws/posts/become-cli-ninja-on-mac/02-remotely-connect-a-mac-instance
 
 ### I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?
 
