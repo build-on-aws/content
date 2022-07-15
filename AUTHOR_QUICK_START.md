@@ -126,6 +126,8 @@ content/
     │   ├── index.md
 ```
 
+Note: If you have a series of posts, refer to the [FAQ](/FAQ.md#i-have-a-series-of-posts-how-do-i-link-them-together) for the layout of the directory structure.
+
 The instructions below are to clone the repo locally. If you would like to do this via the GitHub UI and need assistance, reach out to
 
 1. Fork this [repo](https://github.com/build-on-aws/content/fork) to your own account (it will remain private in your account)
@@ -134,7 +136,7 @@ The instructions below are to clone the repo locally. If you would like to do th
 1. Name your main post file `index.md` (created in [Step 3: Write Your First Draft](#3-write-your-first-draft)) and store it in the content folder from the previous step
 1. If you have images, create a subfolder folder named `images`
     1. Add any images (`jpg`, `png`, `webp`, `svg`, `gif`) to the `images` folder
-1. Commit your changes i.e. `git add posts/what-happens-when-you-type-a-url-into-your-browser`
+1. Commit your changes i.e. `git add posts/what-happens-when-you-type-a-url-into-your-browser; git commit -m "Adding new post"`
 1. Push your changes to your fork i.e. `git push origin main`
 1. Create a pull request of your changes into the [content repo](https://github.com/build-on-aws/content/)
     1. On the Pulls page of your fork (https://github.com/YOUR_GITHUB_ACCOUNT/content/pulls), select the New Pull Request button
