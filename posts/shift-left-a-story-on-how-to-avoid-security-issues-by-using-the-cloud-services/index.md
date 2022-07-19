@@ -1,7 +1,7 @@
 ---
 layout: blog.11ty.js
 title: Shift Left! A story on how to avoid security issues by using the cloud services
-description: Learn on how you can avoid security incidents by leveraging a fully managed cloud services portfolio in your CI/CD pipeline.
+description: Learn how you can avoid security incidents by leveraging a fully managed cloud services portfolio in your CI/CD pipeline.
 tags:
   - amazon-codeguru
   - amazon-codeguru-reviewer
