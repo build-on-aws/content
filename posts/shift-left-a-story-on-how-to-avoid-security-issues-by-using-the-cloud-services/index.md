@@ -77,7 +77,7 @@ First things first, we need to establish a relationship between _GitHub Actions_
 
 However, there is a much better way (*more secure*), as you can use _OpenID Connect_ and _IAM Roles_ which will generate short-lived tokens with the help of _AWS Secure Token Service_ ( _STS_ ) for a particular set of permissions IAM associated with that role.
 
-To use a better path, we just need two elements for that – an _IAM Role_ and a custom _OIDC_ provider. They are created via _AWS CDK_ definitions inside the file `[infrastructure/lib/infrastructure-shared-stack.ts](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/infrastructure/lib/infrastructure-shared-stack.ts)`:
+To use a better path, we just need two elements for that – an _IAM Role_ and a custom _OIDC_ provider. They are created via _AWS CDK_ definitions inside the file [infrastructure/lib/infrastructure-shared-stack.ts](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/infrastructure/lib/infrastructure-shared-stack.ts):
 
 
 ```typescript
@@ -127,7 +127,7 @@ roleForAmazonCodeGuruReviewer.addManagedPolicy(
 // ... and here is a place when we add more permissions, see the original file.
 ```
 
-After that, you can create a _GitHub Actions_ pipeline that will have variables configured to work with your account (details are inside `[.github/workflows/codeguru-reviewer-java.yml](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/.github/workflows/codeguru-reviewer-java.yml)` file):
+After that, you can create a _GitHub Actions_ pipeline that will have variables configured to work with your account (details are inside [.github/workflows/codeguru-reviewer-java.yml](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/.github/workflows/codeguru-reviewer-java.yml) file):
 
 ```yaml
   # Configure AWS Credentials.
