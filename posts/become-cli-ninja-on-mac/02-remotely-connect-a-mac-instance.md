@@ -350,6 +350,8 @@ And after a few seconds, you should see the familiar macOS desktop.
 
 ### Change the resolution of the EC2 Mac instance screen 
 
+> These instructions work on x86 EC2 Mac instance. At the moment, there is no possibility to change resolution on EC2 mac M1 instances.
+
 Once connected, you most probably want to increase the screen resolution. 
 
 To do so, you use `displayplacer`, [the open source command line tool developed by Jake Hilborn](https://github.com/jakehilborn/displayplacer).
