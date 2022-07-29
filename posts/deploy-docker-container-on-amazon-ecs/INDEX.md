@@ -1,3 +1,15 @@
+---
+layout: blog.11ty.js
+title: Deploy Docker Containers on Amazon ECS
+description: Learn how to deploy a container with the Amazon ECS wizard
+tags:
+  - containers
+  - aws-ecs
+authorGithubAlias: cobusbernard-amazon
+authorName: Cobus Bernard
+date: 2022-07-29
+---
+
 # Deploy Docker Containers on Amazon ECS
 ## Overview
 Amazon Elastic Container Service (Amazon ECS) is the AWS service you use to run Docker applications on a scalable cluster. In this how-to guide, you will learn how to run a Docker-enabled sample application on an Amazon ECS cluster behind a load balancer, test the sample application, and delete your resources to avoid charges. This tutorial uses AWS Fargate, which has a ~USD 0.004 (less than half a USD cent)
