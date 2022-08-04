@@ -47,7 +47,7 @@ The most common option is probably to use [SSH](https://en.wikipedia.org/wiki/Se
 
 - at launch time, or afterwards, you have associated a [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) with your EC2 Mac instance. The security Group is configured to authorize inbound TCP 22 traffic from your laptop IP address or your client network IP range.
 
-Assuming these two pre-requisites are met, connecting to a macOS instance is no different than connecting a Linux server. The user name associated with your key pair is `ec2-user` and you have to use the `-i` option to refer to your private key, stored on your laptop.
+Assuming these three pre-requisites are met, connecting to a macOS instance is no different than connecting a Linux server. The user name associated with your key pair is `ec2-user` and you have to use the `-i` option to refer to your private key, stored on your laptop.
 
 Using the AWS Console, find the IP address of your EC2 instance. Alternatively, you may use the command line interface using this command (I assume you have only one `mac1.metal` instance running and I obfuscated the IP address – 1.0.0.0)
 
@@ -88,13 +88,13 @@ I chose to start with SSH because many of you are familiar with this tool. Howev
 
 The first area of improvement is the networking. SSH requires your instance to live in a public subnet of your VPC, to have a public IP address and to have a Security Group rule allowing inbound TCP traffic on port 22.  As EC2 Mac instances are mostly used for development use cases, such as continuous integration and continuous deployment pipelines, all these network constraints do not make sense.  Most of you would like to keep these build, test, and deploy instances in private subnets, without public IP addresses attached to it, and without Security Group rules allowing inbound traffic. 
 
-The second are of improvement is in terms of access control. SSH authenticates users with a keypair. You have the private part of the keypair on your laptop and the public part is injected on macOS file system as part as the[ EC2 macOS Init process](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#ec2-macos-init) (if you are curious, macOS Init fetches the public key from the instance meta-data service at [this address](http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key/)). Good security practices mandate to securely store private keys and rotate keypair on a regular basis.  How do you that at scale on a fleet of EC2 instances?
+The second area of improvement is in terms of access control. SSH authenticates users with a keypair. You have the private part of the keypair on your laptop and the public part is injected on macOS file system as part as the[ EC2 macOS Init process](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#ec2-macos-init) (if you are curious, macOS Init fetches the public key from the instance meta-data service at [this address](http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key/)). Good security practices mandate to securely store private keys and rotate keypair on a regular basis.  How do you do that at scale on a fleet of EC2 instances?
 
-To improve your security and management posture, there is another option to connect to your EC2 Mac instance: [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) (SSM). AWS SSM is a versatile service that is able to initiate a shell connection to your instance, with the help of an agent running on the host macOS. The agent comes pre-installed on AMI provided by AWS.
+To improve your security and management posture, there is another option to connect to your EC2 Mac instance: [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) (SSM). AWS SSM is a versatile service that is able to initiate a shell connection to your instance, with the help of an agent running on the host macOS. The agent comes pre-installed on AMIs provided by AWS.
 
 There are two advantages of connecting through SSM over SSH. First, there is no inbound network connection from your network. The SSM agent polls the SSM service, and the service takes care of forwarding informations, such as keystrokes, to the instance. This means the EC2 Mac instance might have just a private IP address, sits in a private VPC, and no Security Group is required. Secondly, there is no need to use SSH keypairs to manage user authentication. You manage connection permissions from IAM, granting AWS users or roles permission to connect or not to your instance.
 
-To work, the agent running on the instance must have permissions to call SSM APIs. To grant permissions, you create an IAM Role, add permissions to the role, and attach the role to the EC2 instance. You can do so in the [IAM Console](https://us-east-1.console.aws.amazon.com/iamv2/home) or using the CLI.
+To be functional, the agent running on the instance must have permissions to call SSM APIs. To grant permissions, you create an IAM Role, add permissions to the role, and attach the role to the EC2 instance. You can do so in the [IAM Console](https://us-east-1.console.aws.amazon.com/iamv2/home) or using the CLI.
 
 In this blog, I show you the steps using the CLI. One of the CLI command requires the instance Id of your EC2 Mac instance. It searches the instance based on it's name. I assume my instance is named "macOS Monterey". Please adapt it to your configuration.
 
@@ -198,7 +198,7 @@ aws ec2 associate-iam-instance-profile \
 }
 ```
 
-This is a bit long, but this is a one time operation. Now you can reuse the role and attach to instances at launch time or at any moment after launch. Once the role is attached to the instance, all processes running on macOS, including the SSM agent, is authorized to call SSM API, which is required to establish a connection to your instance.
+This is a bit long, but this is a one time operation. Now you can reuse the role and attach to instances at launch time or at any moment after launch. Once the role is attached to the instance, all processes running on macOS, including the SSM agent, are authorized to call SSM API, which is required to establish a connection to your instance.
 
 Ok, now that the initial setup is done, let's connect to the instance. You can do so using the AWS Console or the CLI.
 
@@ -240,19 +240,19 @@ sh-3.2$ diskutil list
 /dev/disk1 (external, physical):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      GUID_partition_scheme                        *214.7 GB   disk1
-   1:                        EFI ⁨EFI⁩                     209.7 MB   disk1s1
-   2:                 Apple_APFS ⁨Container disk2⁩         214.5 GB   disk1s2
+   1:                        EFI EFI                     209.7 MB   disk1s1
+   2:                 Apple_APFS Container disk2         214.5 GB   disk1s2
 
 /dev/disk2 (synthesized):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      APFS Container Scheme -                      +214.5 GB   disk2
                                  Physical Store disk1s2
-   1:                APFS Volume ⁨Macintosh HD - Data⁩     48.3 GB    disk2s1
-   2:                APFS Volume ⁨Preboot⁩                 267.0 MB   disk2s2
-   3:                APFS Volume ⁨Recovery⁩                1.1 GB     disk2s3
-   4:                APFS Volume ⁨Macintosh HD⁩            15.2 GB    disk2s4
-   5:              APFS Snapshot ⁨com.apple.os.update-...⁩ 15.2 GB    disk2s4s1
-   6:                APFS Volume ⁨VM⁩                      20.5 KB    disk2s6
+   1:                APFS Volume Macintosh HD - Data     48.3 GB    disk2s1
+   2:                APFS Volume Preboot                 267.0 MB   disk2s2
+   3:                APFS Volume Recovery                1.1 GB     disk2s3
+   4:                APFS Volume Macintosh HD            15.2 GB    disk2s4
+   5:              APFS Snapshot com.apple.os.update-... 15.2 GB    disk2s4s1
+   6:                APFS Volume VM                      20.5 KB    disk2s6
 
 sh-3.2$ id
 uid=502(ssm-user) gid=20(staff) groups=20(staff),12(everyone),61(localaccounts),701(com.apple.sharepoint.group.1),100(_lpoperator)
@@ -268,7 +268,7 @@ To avoid having to remember two different commands, some advanced users configur
 
 When discovering a new environment, or when you want to install a set of tools on a new instance, or simply to use the graphical user interface you know and love from macOS, you might want to connect to your EC2 Mac instance using the traditional macOS GUI.
 
-The good news is that all the required tools are provided by macOS, no installation is necessary. However, the server side is disabled by default and must be enabled before to attempt to connect. Usually, you use the **System Preferences** application and the **Sharing** tab to do so, but here we just have a CLI. Let's see how to enable screen sharing with the CLI.
+The good news is that all the required tools are provided by macOS, no installation is necessary. However, the server side Screen Sharing capability is disabled by default and must be enabled before to attempt to connect. Usually, you use the **System Preferences** application and the **Sharing** tab to do so, but here we just have a CLI. Let's see how to enable screen sharing with the CLI.
 
 The first step is to connect to your instance using either SSH or SSM as decsribe before.
 
@@ -305,7 +305,7 @@ You can create tunnels either using SSH or SSM. I start with SSH and will show t
 
 ### SSH Tunnels to connect to Apple Remote Desktop
 
- When you create a SSH tunnel, the SSH client on your machine becomes a server and starts to accept incoming connections on localhost. Every data received on those connections are encrypted, and optionally compressed, before being sent to the remote server : your EC2 Mac instance.  The SSH server on macOS decrypts and decompress the data, then send it over the network to the destination you specified on the client. In this case it forwards the traffic to the Apple Remote Desktop Server running on the instance.
+ When you create a SSH tunnel, the SSH client on your machine becomes a server and starts to accept incoming connections on localhost. Every data received on this connection is encrypted, and optionally compressed, before being sent to the remote server: your EC2 Mac instance.  The SSH server on macOS decrypts and decompresses the data, then send it over the network to the destination you specified on the client. In this case it forwards the traffic to the Apple Remote Desktop Server running on the instance (`localhost:5900`).
 
 [You can learn more about SSH tunnels on this site](https://www.ssh.com/academy/ssh/tunneling/example). The whole process is illustrated below:
 
@@ -320,9 +320,9 @@ ssh -C -N -L 5900:localhost:5900 -i /path/my-key-pair.pem ec2-user@1.0.0.0
 
 Let's explain the options I used:
 
-- `-i`, as usual, allows to specify the private part of thes keypair used for authentication 
+- `-i`, as usual, allows to specify the private part of the keypair used for authentication 
 
-- `-L` is the SSH tunneling option. It tells the SSH client on your machine to start to listen to incoming connections on TCP port 5900, and to forward all traffic received to the destination host (`1.0.0.0`). Once on the destination host, to send the traffic to `localhost:5900` which is the adress of the ARD server.
+- `-L` is the SSH tunneling option. It tells the SSH client on your machine to start to listen to incoming connections on TCP port 5900 (`5900:`), and to forward all traffic received to the destination host (`1.0.0.0`). Once on the destination host, to send the traffic to `localhost:5900` which is the adress of the ARD server.
 
 - `-C` tells SSH to compress the traffic in the tunnel
 
@@ -410,15 +410,15 @@ displayplacer "id:69784AF1-CD7D-B79B-E5D4-60D937407F68 res:1024x768 hz:60 color_
 displayplacer "id:69784AF1-CD7D-B79B-E5D4-60D937407F68 res:1440x900 origin:(0,0) degree:0"
 ```
 
-The nice thing is that it is not necessary to restart your VNC client, it adjustes automatically. 
+The nice thing is that it is not necessary to restart your VNC client, it adjusts automatically. 
 
 ### SSM Tunnels to connect to Apple Remote Desktop
 
-As I explained ealier, SSH connections and tunnels require your instances to be publicly available on the Internet. It also requires you to manage the installation, secured storage, and rotation of keypairs.
+As I explained ealier, SSH connections and tunnels require your instances to be publicly available on the Internet. It also requires you to manage the generation, secured storage, and rotation of keypairs.
 
 For these reasons, you may chose to use AWS Systems Manager Session Manager (SSM) to connect to your instances.  SSM also supports tunneling. 
 
-Once the tunnel is started, all the rest, opening the client, connect to the server, resize the display, is similar between SSH and SSM tunnels.
+Once the tunnel is started, all the rest: opening the client, connect to the server, and resize the display is similar between SSH and SSM tunnels.
 
 Before starting an SSM tunnel for Apple Remote Desktop, be sure the EC2 Mac instance is attached to an IAM role that has permissions to use SSM APIs, as described earlier.  
 
