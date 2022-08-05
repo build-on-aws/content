@@ -10,7 +10,10 @@ authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-08-02
 ---
-
+This is a 10-part series:
+1. [What is Broken Access Control?](https://blog.buildon.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control)
+2. [What is a Cryptographic Failure?](https://blog.buildon.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure)
+3. [Title of part 3]()
 
 # What is Broken Access Control?
 
