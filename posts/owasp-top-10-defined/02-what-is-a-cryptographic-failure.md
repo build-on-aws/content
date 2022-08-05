@@ -1,7 +1,7 @@
 ---
 layout: blog.11ty.js
 title: What is a Cryptographic Failure?
-description: Cryptographic Failures is yet anotehr one of the OWASP Top 10 vulnerabilities and this articles explains what that involves and ways to migitate it.
+description: Cryptographic Failures is yet another one of the OWASP Top 10 vulnerabilities and this articles explains what that involves and ways to migitate it.
 tags:
   - owasp-top-10
   - network-security
@@ -13,7 +13,8 @@ date: 2022-08-04
 This is a 10-part series:
 1. [What is Broken Access Control?](https://blog.buildon.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control)
 2. [What is a Cryptographic Failure?](https://blog.buildon.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure)
-3. [Title of part 3]()
+3. [What is an Injection Attack?](https://blog.buildon.aws/posts/owasp-top-10-defined/what-is-an-injection-attack)
+
 
 > You can read technical details of this OWASP Top 10 attack at [[https://owasp.org/Top10/A02_2021-Cryptographic_Failures/]
 
