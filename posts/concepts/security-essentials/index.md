@@ -1,4 +1,12 @@
-Security Essentials page
+---
+layout: blog.11ty.js
+title: AWS Security Essentials
+description: An essential guide to securing your cloud environment on AWS.
+tags:
+authorGithubAlias: 8carroll
+authorName: Brandon Carroll
+date: 2021-08-10
+---
 
 ## Introduction
 
