@@ -16,8 +16,6 @@ This is a 10-part series:
 3. [What is an Injection Attack?](https://blog.buildon.aws/posts/owasp-top-10-defined/what-is-an-injection-attack)
 
 
-# What is Broken Access Control?
-
 ## Overview of Access Control
 
 To understand the workings of a broken access control attack, one must fist understand the goal we are trying to acheive through the use of access control.  So what is access control and what is our expectation of the mechanism?  
@@ -90,6 +88,8 @@ But with such a wide range of possible vulnerabilities how does one go about pre
 ## Prevention
 
 Prevention to Broken Access should be an interative process where the current security state is compared to latest vulnerability research and updates applied as necessary.  In the case of the SSH example above the solution might be as simple as chaning the prompt to be more obscure, stating `Login Failed - incorrect username or password` no matter whether it was a password or username failure.  For other vulnerabilities the solution may become more involved to actually fix the problem.  In some cases it may be more convenient to implement a service such as [AWS WAF](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html) and make use of the free managed rules that protect agains some of the OWASP Top 10.
+
+## Conclusion
 
 Whatever the case may be, diving into a topic such as this makes it very clear that several factors much be considered when protecting your resources.  This underscores the importance to continue to educate yourself in the latest security trends and how each vendor in use recommends they be mitigated through best practices.  There will never be a completely secure infrastructure, however following best practices and performing due dilligence will help to stay as far ahead as possible in this ever changing landscape.
 
