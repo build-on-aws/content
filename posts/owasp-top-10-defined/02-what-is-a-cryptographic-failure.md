@@ -54,7 +54,7 @@ Of course, this was prior to AES encryption.  Back then we could really see a di
 ## CWE-331: Insufficient Entropy
 In this last of the noteable CWE we are talking about entrophy.  In this case we are talking about a lack of randomness in generated data.  This could be a userID, a passphrase, or other information that if guessed could expose data.  At times a random string us used to generate encryption keys.  If the keys are generated from a string that lacks sufficient entrophy then it could be guessed and your data can be exposed.
 
-## Preventative Measures
+## Prevention
 The following is just a few recommended measures you can take to prevent or minimize Cryptographic Failures.  
 
 1. Don't store sensitive data in your code. Take the time to explore ways to securely access creadentials.  I recommend looking into a Key Management System (KMS).
@@ -62,6 +62,7 @@ The following is just a few recommended measures you can take to prevent or mini
 3. Encrypt data at rest using those same up-to-date, standard, strong algorithms mentioned in number two.
 4. Encrypt data in transit the same way, using up-to-date, standard, strong algorithms.
 
+## Conclusion
   
 This is not meant to be an exhausted list, but the hope is that it get's you thinking in terms of secure algoriths and non-hard-coded secure information.  Following these ideas will get you started, but you should always go through vendor and provider information and follow best practices.
 
