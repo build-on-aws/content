@@ -1,0 +1,115 @@
+August-10-2022 - This file will be removed when index.md is complete.  It is being used as a scratch pad.
+
+
+
+### Assigning a Security Contact*
+![Assigning a Security Contact](_img/security-contacts.png_)
+[Update the primary and alternate contact information](_https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html_)
+### Locking Down Unused Regions*
+![Enable or disable regions](_img/enable-disable-regions.png_)
+
+
+Prior to 2019, new regions simply 'appeared' in an AWS account and the accout user could create resources immediately.  That behavior was changed to an opt-in model.  For new AWS Regions, you will opt in to enable your account to operate in those Regions. This makes it easier for you to select the regions where you can create and manage AWS resources. You can use IAM permissions policies to control which IAM principals (users and roles) can perform these actions.
+[Specifying which AWS Regions your account can use](_https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html_)
+[Setting permissions to enable accounts for upcoming AWS Regions](_https://aws.amazon.com/blogs/security/setting-permissions-to-enable-accounts-for-upcoming-aws-regions/_)
+
+## Identity and Access*
+
+
+### Securing the root user*
+1. Use IAM users for day-to-day access to your account, even if you're the only person accessing it.
+2. Eliminate the use of root access keys. Instead, rotate them to IAM access keys, and then delete the root access keys.
+3. Use an [MFA device](_https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html_) for the root user of your account.
+[What are some best practices for securing my AWS account and its resources?](_https://aws.amazon.com/premiumsupport/knowledge-center/security-best-practices/_)
+- Workshop: [Protect the Root User](_https://catalog.us-east-1.prod.workshops.aws/workshops/f21a1ec6-e7bc-482c-a6fc-9f53d28f8ac7/en-US/b-securing-your-account/2-protect-root-user_)
+
+### Multi-Factor Authentication*
+[Multi-Factor Authentication](_https://aws.amazon.com/iam/features/mfa/_)
+[Using multi-factor authentication (MFA) in AWS](_https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html_)
+
+### IAM roles / groups to limit access*
+[IAM roles](_https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html_)
+[Create IAM User Groups](_https://catalog.us-east-1.prod.workshops.aws/workshops/f21a1ec6-e7bc-482c-a6fc-9f53d28f8ac7/en-US/b-securing-your-account/4-use-iam-user-groups/4-2-use-iam-user-groups_)
+[Access Delegation Round](_https://identity-round-robin.awssecworkshops.com/delegation/_)
+
+### SSO for console and CLI*
+[Configuring the AWS CLI to use AWS Single Sign-On](_https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html_)
+[How to retrieve short-term credentials for CLI use with AWS Single Sign-on](_https://aws.amazon.com/blogs/security/aws-single-sign-on-now-enables-command-line-interface-access-for-aws-accounts-using-corporate-credentials/_)
+[AWS Single Sign-On](_https://aws.amazon.com/single-sign-on/_)
+- Workshop: [Create Users in SSO](_https://catalog.us-east-1.prod.workshops.aws/workshops/f21a1ec6-e7bc-482c-a6fc-9f53d28f8ac7/en-US/b-securing-your-account/3-create-multiple-users/2-1-create-sso-users_)
+
+### Regular key / password rotation*
+[How to Rotate Access Keys for IAM Users](_https://aws.amazon.com/blogs/security/how-to-rotate-access-keys-for-iam-users/_)
+[Managing access keys for IAM users](_https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html_)
+[Managing aged access keys through AWS Config remediations](_https://aws.amazon.com/blogs/mt/managing-aged-access-keys-through-aws-config-remediations/_)
+
+### IAM Access Analyzer*
+
+
+### Organization Policies - SCP*
+
+
+### Secure Access to Resources - Session Manager*
+
+
+## Protection and Prevention*
+
+
+### Security Groups*
+
+
+### WAF with Managed Rules*
+
+
+### Automate best practice compliance with AWS Security Hub*
+
+
+### S3 Block Public Access*
+
+
+### Data Encryption with KMS*
+
+
+### Don’t add secrets to your code - AWS Secrets Manager*
+
+### Network Segmentation and VPC Security*
+
+### Manage Multi-accounts with Control Tower*
+
+
+## Detection*
+
+
+### Billing Alarms*
+
+
+### Configuration Monitoring with AWS Config*
+
+
+### Discover Sensitive Data with Amazon Macie*
+
+
+### Compliance Reports with AWS Artifact*
+
+
+## Response*
+
+
+### Investigate Amazon GuardDuty Findings*
+
+
+### Using CloudTrail*
+
+
+## Recovery*
+
+
+## Backups*
+
+
+## Multiple AZs*
+
+
+
+## References*
+Look at https://maturitymodel.security.aws.dev/en/0.-introduction/ for content.
