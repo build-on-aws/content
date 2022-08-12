@@ -93,7 +93,7 @@ When your proposal has been reviewed, a reviewer will label your issue with `acc
 
 After your content proposal has been `accepted`, you'll write your content in [Markdown](https://www.markdownguide.org/basic-syntax/). You'll add the front matter, which contains metadata about your post. The front matter specifies your blog layout, title, description, and tags.
 
-Use the [template](/raw/main/CONTENT_TEMPLATE.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
+Use the [template](https://github.com/build-on-aws/content/raw/main/CONTENT_TEMPLATE.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
 ```
 ---
 layout: blog.11ty.js
