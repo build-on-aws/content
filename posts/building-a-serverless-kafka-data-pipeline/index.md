@@ -11,15 +11,19 @@ authorName: Banjo Obayomi
 date: 2022-08-16
 ---
 
-Serverless services allow us to build applications without having to worry about the underlying infrastructure. When it comes to Apache Kafka this allows developers to avoid provisioning, scaling, and managing resource utilization of their clusters. In this post I will explore the tradeoffs of Serverless Kafka and walk through setting up a cluster.
+Serverless services allow us to build applications without having to worry about the underlying infrastructure. When it comes to Apache Kafka this allows developers to avoid provisioning, scaling, and managing resource utilization of their clusters. In this post I will explore the tradeoffs of using Amazon MSK (Managed Streaming for Apache Kafka) Serverless and walk through setting up a cluster.
 
 ![Architecture of our solution](images/serverless_kafka_infra.png "Architecture of our solution")
 
 ## Serverless Kafka Tradeoffs
 
-Apache Kafka is a distributed event store and stream-processing platform. Kafka provides a mechanism to decouple data processing from the source and target destinations as it's highly scalable and resilient. Kafka is very customizable, based on your workload, which introduces operational overhead. With Serverless Kafka the tradeoff is you lose the flexibility of being able to configure the capacity of your cluster while gaining the ability to use Kafka through a single interface that just provides an endpoint for clients.  
+Apache Kafka is a distributed event store and stream-processing platform. Kafka provides a mechanism to decouple data processing from the source and target destinations as it's highly scalable and resilient. Kafka is very customizable, based on your workload, which introduces operational overhead. With Amazon MSK Serverless the tradeoff is you lose the flexibility of being able to configure the capacity of your cluster while gaining...
 
-Serverless Kafka provides 200 Mib/s for ingress and 400 Mib/s of egress which are great for workloads when you don't know much data is needed to process. When workloads grow in size, and the serverless cluster is unable to keep up with the write/read throughput, you can explore using the [Managed AWS Kafka](https://aws.amazon.com/msk/) cluster that provides the flexibility to tune the cluster for your workload but at a higher operational cost.
+* The ability to use Kafka through a single interface that provides an endpoint for clients. 
+* Throughput based scaling so you don't need to monitor cluster capacity or reassign Apache Kafka partitions.
+* Throughput based pricing so you pay for the data volume you stream and retain, and don’t have to worry about idle brokers and storage
+
+Amazon MSK Serverless provides 200 Mib/s for ingress and 400 Mib/s of egress which are great for workloads when you don't know much data is needed to process. When workloads grow in size, and the serverless cluster is unable to keep up with the write/read throughput, you can explore using the [Managed AWS Kafka](https://aws.amazon.com/msk/) cluster that provides the flexibility to tune the cluster for your workload but at a higher operational cost.
 
 
 ## Starting a Serverless Kafka Cluster
