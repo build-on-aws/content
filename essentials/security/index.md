@@ -44,12 +44,21 @@ Following these practices from the onset will help to provide secure access to y
 
 ## Securing the Infrastructure You Build
 
+As you build out your cloud infrastructure you'll begin by creating a [Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) (VPC).  This is a virtual network that you define (a default exists as well) that allows you to then launch resources.  A VPC resembles a traditional network.  It has a CIDR range assigned to it and within the VPC you create subnets.  Your subnets can be used to provide isolation.  Subnets can be public or private.  Public subnets have a route to an Internet gateway.  Private subnets have a routing table as well but do not have a route to an Internet gateway  At the subnet level, a network access control list (ACL) allows or denies specific inbound or outbound traffic. You can use the default network ACL for your VPC, or you can create a custom network ACL for your VPC.  Network ACLs are numbered lists, processed in top-down order, and are not stateful.  This means that you will need an inbound and outbound network ACL to allow bi-directional traffic.  
+
+As you deploy resources into your VPC you can associate Security Groups with them.  A Security Group controls the traffic that is allowed to reach and leave the resources that it is associated with.  Security Group rules are similar to Network ACLs.  When creating them you match on port, protocol, and addresses. In many cases Network ACLs will be configured to match on the same ports, protocols, and addresses of a Security Group.  This will add another layer of protection to the resource.  Security Groups are stateful.  You can look at them much in the same way as a Stateful Firewall.  When you create an entry to allow a specific type of traffic, you do not need to create a rule to match the return traffic.  Being stateful, the return traffic will be allowed.
+
+To add an additional layer of infrastructure security you can deploy the AWS Network Firewall.  The AWS Network Firewall is a managed service that deploys protection for your Amazon VPC.  The AWS Network Firewall provides more fine-grained protection than Security Groups. This is done through the congfiguration of custom [Suricata Rules](https://suricata.readthedocs.io/en/suricata-6.0.0/rules/). For example, you can configure the [AWS Network Firewall to protect against Malware attacks](https://aws.amazon.com/blogs/security/how-to-deploy-aws-network-firewall-to-help-protect-your-network-from-malware/).  Taking this a step further you can deploy another managed service, AWS Shield Advanced to protect against DDoS threats.
+
+
 1. VPC Security
 2. Security Groups
 3. Network Firewall
 4. Secure Management Connectivity
 5. DDoS Mitigation
 6. 
+
+
 
 ## Securing the Resources You Create
 
