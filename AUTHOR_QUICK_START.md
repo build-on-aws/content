@@ -93,7 +93,7 @@ When your proposal has been reviewed, a reviewer will label your issue with `acc
 
 After your content proposal has been `accepted`, you'll write your content in [Markdown](https://www.markdownguide.org/basic-syntax/). You'll add the front matter, which contains metadata about your post. The front matter specifies your blog layout, title, description, and tags.
 
-Use the [template](/raw/main/CONTENT_TEMPLATE.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
+Use the [template](https://github.com/build-on-aws/content/raw/main/CONTENT_TEMPLATE.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
 ```
 ---
 layout: blog.11ty.js
@@ -113,7 +113,7 @@ While writing your draft, review the [Content Review Checklist](/CONTENT_REVIEW_
 
 ### 4. Submit Pull Request for Review and Publishing
 
-Once you've written your content, add your content to the content repo forked into your own account and submit a pull request from your fork to the BuildOn.AWS content repository main branch. You can do this using the GitHub UI or clone the repo locally.
+Once you've written your content, add your content to the content repo forked into your own account and submit a pull request from your fork to the BuildOn.AWS content repository main branch. You can do this using the GitHub UI or clone the repo locally. The instructions below are to clone the repo locally.
 
 At the end of these steps, you'll end up with your directory structure looking like this:
 
@@ -128,10 +128,12 @@ content/
 
 Note: If you have a series of posts, refer to the [FAQ](/FAQ.md#i-have-a-series-of-posts-how-do-i-link-them-together) for the layout of the directory structure.
 
-The instructions below are to clone the repo locally. If you would like to do this via the GitHub UI and need assistance, reach out to
+If you already have a fork and have cloned the repo locally, make sure your fork/local clone and main branch are up to date by [syncing your fork in GitHub](sync-fork.png) and doing a `git pull` locally. Then proceed to step 3 below.
 
 1. Fork this [repo](https://github.com/build-on-aws/content/fork) to your own account (it will remain private in your account)
 1. Clone your repo locally. i.e. `git clone git@github.com:YOUR_GITHUB_ACCOUNT/content.git`
+1. Create a new branch for this piece of content: `git checkout -b my-post`
+    - Each branch/pull request should only contain *one piece of content*. If you are creating a post series, multiple posts can be in the same branch/pull request, but they will be reviewed and published together and time to review will take longer.
 1. Inside the `posts` folder, create a folder named for the title of your post. This is called the "slug" and will become the URL of your post i.e. `posts/what-happens-when-you-type-a-url-into-your-browser`
 1. Name your main post file `index.md` (created in [Step 3: Write Your First Draft](#3-write-your-first-draft)) and store it in the content folder from the previous step
 1. If you have images, create a subfolder folder named `images`
@@ -140,12 +142,12 @@ The instructions below are to clone the repo locally. If you would like to do th
 1. Push your changes to your fork i.e. `git push origin main`
 1. Create a pull request of your changes into the [content repo](https://github.com/build-on-aws/content/)
     1. On the Pulls page of your fork (https://github.com/YOUR_GITHUB_ACCOUNT/content/pulls), select the New Pull Request button
-    1. In the Comparing Changes section, make sure the base repository is `build-on-aws/content` and the head repository is `YOUR_GITHUB_ACCOUNT/content` and both are set to `main` branch
+    1. In the Comparing Changes section, make sure the base repository is `build-on-aws/content` with the branch set to `main` and the head repository is `YOUR_GITHUB_ACCOUNT/content` with the branch set to `my-post` as you specified in step 3 above.
     1. Select Create Pull Request button
     1. Add a title to the pull request and fill out the pull request template 
     1. In the side menu, select the Gear icon to add the label `ready for review`
 
-Your content is now submitted and a reviewer will start to review your content!
+Your content is now submitted and will be queued for review. When a reviewer starts to review your content, they will add the label `review in process`.
 
 #### Example
 
