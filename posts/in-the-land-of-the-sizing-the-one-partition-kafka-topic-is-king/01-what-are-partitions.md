@@ -251,7 +251,7 @@ Once you have measured the write and read throughput that a single partition can
 
 `NUM_PARTITIONS = MAX(T/W, T/R)`
 
-Here, `T` is your target throughput, `W` is your measured write throughput, and `R` is your measured read throughput. The result is how many partitions you need for a topic. Of course, very few things in life are guaranteed, except for the fact that every once in a while [Corey Quinn](https://twitter.com/QuinnyPig) will say something snark about AWS. Other than this, use this formula at your discretion. And please, take also into account that the measured read throughput doesn't consider business logic processing. You should think about this as well.
+Here, `T` is your target throughput, `W` is your measured write throughput, and `R` is your measured read throughput. The result is how many partitions you need for a topic. With that said, use this formula at your discretion. Also, take into account that the measured read throughput doesn't consider business logic processing. You should think about this as well.
 
 ## Partitions as your unit-of-durability
 
