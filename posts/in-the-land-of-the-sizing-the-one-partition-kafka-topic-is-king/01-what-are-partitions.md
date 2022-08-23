@@ -18,7 +18,7 @@ Just like any other technology, [Apache Kafka](https://kafka.apache.org/) also h
 
 Why is this important? You may ask. Well, sizing Kafka partitions wrongly affects many aspects of the system, such as consistency, parallelism, and durability. Worse, it may also affect how much load Kafka can handle. Hence why often the decision about how many partitions to set for a topic is handled by Ops teams, as we see this to be only an infrastructure matter. In reality, it's an architectural design decision that affects even the amount of code you write. In this three-part series of blog posts, I will share everything you need to build more confidence about how to size Kafka partitions correctly, and to spot a poor decision when you see one. This first part will peel off the concept of partitions, and highlight the effect they have on Kafka.
 
-# Part 1: What are Kafka partitions?
+## Part 1: What are Kafka partitions?
 
 Going to the doctor's office for your annual check-up is one of those annoying situations in life. You go because you need to, not because you want to. Once you are there; you promptly do everything you are told and answer as many questions your physician asks you, with that inner feeling that you want to hear that everything is okay. The reality, however, is rather disappointing. There are always things to discuss, even more so as you get older. Though your physician may try their best to explain the nuts and bolts of your situation, you don't really care about the nitty details. You care about concrete things, such as whether you can do that thing you love again.
 
@@ -26,7 +26,7 @@ But what does all of this has to do with Kafka? Well, explaining what partitions
 
 Partitions are Kafka's unit-of-storage, unit-of-parallelism, and unit-of-durability.
 
-## Partitions as the unit-of-storage
+### Partitions as the unit-of-storage
 
 Despite what most people think, Kafka doesn't store data into topics. Physically, topics are just folders from the broker's node used to organize the files that build up a partition on disk. Every new event written into a "topic" is actually written into a partition, which comprises multiple log segment files and their indexes. By default, each log segment file can grow to up to 1GB of size as you can read it [here](https://kafka.apache.org/documentation/#brokerconfigs_log.segment.bytes). When this 1GB water-mark is reached; Kafka flushes all events to disk and a new log segment file is created, along with its index file. New events are then appended to this new log segment file. For each log segment and index file, the broker has to create a [file handle](https://datacadamia.com/file/file_descriptor) as read requests may need to be served. If you have worked with infrastructure before, you know how file handles affects scaling. Having multiple file handles open in a single node is surely a source of bottleneck.
 
@@ -34,7 +34,7 @@ To illustrate this bottleneck scenario, let's say you have a broker running on a
 
 Surely, you could take different actions to remediate this bottleneck scenario, such decreasing the retention policy for the topic, executing multiple brokers in different processes, increasing the limit of file handles per process, and perhaps just adding more brokers in different nodes. But this scenario suits the need for your understanding that creating partitions arbitrarily has a direct impact on the amount of resources consumed by your Kafka brokers. If a topic with 1 partition could quickly exhaust the broker's node in less than 3 days, what would happen if the topic had more partitions? Any partition takes a toll on the brokers, because partitions, not topics, are your unit-of-storage.
 
-### Storage from the developer perspective
+#### Storage from the developer perspective
 
 While all of this happens at an infrastructure level, it may be hard for you, as a developer, to think about partitions. Have you ever wondered why you never had to worry about partitions while writing and reading events with Kafka? Well, Kafka is a magnificent piece of technology when it comes to client APIs. From the producer standpoint, every time you invoke the `send()` function to write a new event, there is an internal process triggered that takes care of deciding which partition that event should go to. This process is known as partitioning, and it can be customized by a component called [partitioner](https://kafka.apache.org/32/javadoc/org/apache/kafka/clients/producer/Partitioner.html).
 
@@ -140,7 +140,7 @@ private Map<TopicPartition, String> computePartitionsTransferringOwnership(Map<S
 
 How your code writes events into partitions and reads from them is one of those processes that are so well encapsulated that developers rarely pay attention to it. It's the reason I call Kafka's client API a magnificent piece of technology. It makes you believe you are dealing with this high-level construct called topic, but in reality, the whole partition plumbing is being handled behind the scenes. This is even more true when you are working with integration platforms like [Kafka Connect](https://kafka.apache.org/documentation/#connect), or stream processing technologies such as [Kafka Streams](https://kafka.apache.org/documentation/streams), [ksqlDB](https://ksqldb.io/), and [Amazon Kinesis Data Analytics](https://docs.aws.amazon.com/streams/latest/dev/getting-started.html). They will be discussed in more details on the part three of this blog post series.
 
-### Storage from the Ops perspective
+#### Storage from the Ops perspective
 
 The way your data is distributed across the cluster is another way to see partitions as a unit-of-storage. To implement horizontal scalability, each broker from the cluster hosts one or multiple partitions. As you add new brokers to your cluster; you increase the storage capacity of the cluster to store events, as the total storage capacity of a cluster is dictated by the sum of all broker's storage. With a cluster containing 4 brokers, each one with the storage capacity of 1TB, you can store up to 4TB of data. But how your data will leverage all this capacity depends directly on the partitions.
 
@@ -183,7 +183,7 @@ kafka-reassign-partitions.sh --bootstrap-server <BROKER_ENDPOINT> --reassignment
 
 This command may take a while to complete if you have large partitions, depending on your network bandwidth, and surely how many partitions you are reassigning. Eventually, the partitions will become available across all the brokers you selected in the reassignment JSON file. Of course, assuming that the command didn't fail to complete. The point that matters here is that you won't leverage the full capacity of your cluster if you don't have your data distributed across the cluster, and this happens at a partition level.
 
-## Partitions as the unit-of-parallelism
+### Partitions as the unit-of-parallelism
 
 Kafka was designed from the ground up to completely isolate producers and consumers. However, with Kafka, this is not just in an API level design like we see in other messaging systems. Kafka also allows producers and consumers to scale independently. This means that your producers may get crazy and write more data than the consumers can handle, and the consumers will still process those events as fast as they can without Kafka having to apply any back-pressure strategy. This is possible because Kafka acts as a buffer between producers and consumers, with persistence enabled by default. So higher write throughput doesn't affect slow read throughput. But why will read throughput ever be slower than writing?
 
@@ -193,7 +193,7 @@ To understand this, you must understand what happens when events are processed i
 
 As you can see from this narrative, processing events are not straightforward. While the narrative focused on explaining the stages of event processing, it intentionally gave you a positive perspective that everything just works. However, in the real world, lots of errors can happen during event processing, including the processing attempt of poison pills. These are events that can't be processed because they have invalid formats, wrong data types, or business-related problems such as events with integrity issues. When these events are polled, consumers may try to reprocess them unsuccessfully multiple times, while further events in the partition are blocked by the ones in the head. This is known as the [head-of-line blocking](https://en.wikipedia.org/wiki/Head-of-line_blocking) problem. This problem was originally coined in the context of computer networking, but it also applies in the world of streaming data with Kafka. This is one of the most common problems that can slow down your read throughput.
 
-### Scaling things up and out
+#### Scaling things up and out
 
 Another factor that causes read throughput slow down is how many consumers you use to process events. It can be challenging to get things processed fast with only one consumer processing events. In Kafka, multiple consumers can be used to process events simultaneously. If you increase the number of consumers, processing will be presumably faster, as long each consumer is running on different machines. Why? because as mentioned before, processing events doesn't come for free when it comes to resources utilization. Let's say processing 10,000 events requires 85% of the machine resources running your consumer. This means that to process 20,000 events, two machines with identical configuration are required. This way, you can scale out the event processing just by adding more consumer machines, right?
 
@@ -205,7 +205,7 @@ Having multiple partitions also helps to solve another problem, which is the bro
 
 Suppose you have 6 brokers and you decide to create a topic with 12 partitions. Kafka will distribute the partitions in such a way that each broker will end up with 2 partitions. Now your producers and consumers can start network connections with different brokers concurrently and remove the bottleneck from the equation. Of course, the actual distribution is a bit more complicated than this, as you will see later when I discuss replicas. But for now, just know that the broker bottleneck is a solved problem if you create multiple partitions.
 
-### How many partitions do I need?
+#### How many partitions do I need?
 
 All of this may get you thinking about creating as many partitions as you need. Incidentally, your instinct will be to create empirical ways to come up with a usable number. I don't fancy criticizing any method. Whatever works for you is the best method you should use. However, if I could be of any help, here is a method that has been proved to produce good "good enough" numbers. Since partitions are your unit-of-parallelism, you can use your target throughput, measured in events per second, as criteria. You start by measuring the write throughput that you can achieve with a single partition, and then the read throughput. While measuring this, it is important to consider only one partition because this is your unit of scale.
 
@@ -253,7 +253,7 @@ Once you have measured the write and read throughput that a single partition can
 
 Here, `T` is your target throughput, `W` is your measured write throughput, and `R` is your measured read throughput. The result is how many partitions you need for a topic. With that said, use this formula at your discretion. Also, take into account that the measured read throughput doesn't consider business logic processing. You should think about this as well.
 
-## Partitions as your unit-of-durability
+### Partitions as your unit-of-durability
 
 Kafka as storage for your data streams wouldn't be very useful if it couldn't ensure data consistency. As with any distributed system, failures are a constant, and a well-designed architecture should consider failures happening any time. Luckily for us, Kafka's architecture includes durability built-in, with your data replicated across the cluster, and ultimately on each broker's disk.
 
@@ -265,7 +265,7 @@ This is important because knowing this will allow you to better understand how m
 
 The allocation is primarily focused on distributing the replicas evenly between the brokers, but this is not the only criteria. Starting from Kafka 0.10.0, if the brokers are configured to contain information about the rack they should belong to, then the allocation will also take this into consideration and assign partition replicas to different racks as much as possible. This is useful to ensure that if an entire rack fails, your data is safe and sound in another rack. For cloud-based deployments, building blocks such as availability zones should be used as racks.
 
-### Leaders and followers
+#### Leaders and followers
 
 Now that you know the relationship between partitions and replicas, know that there are two types of replicas: leaders and followers. Leader replicas are the ones responsible for processing write requests. When a producer sends events to Kafka, the leader replica is the one taking care of writing them off to guarantee consistency. From this perspective, leader replicas are notably your actual partitions. They are elected by a component of the cluster called controller, which is a broker from the cluster with the additional responsibility of handling leader's election. The other replicas, called followers, have the job of staying up-to-date with leaders in terms of event data. They do this by replicating all events from the leader. If a follower stays up-to-date with the leader, that follower is marked as an ISR, acronym for an in-sync replica. ISRs are super important because if a leader replica dies, one of the ISRs will be promoted to be the new leader for the partition. Followers that don't stay up-to-date with the leader for longer than what specified in the property `replica.lag.time.max.ms` will be marked as out-of-sync replicas. Anecdotally, they don't use OSR as an acronym. 🤷🏻
 
@@ -289,7 +289,7 @@ Topic: replicasTest    TopicId: VAE9FZCOTH2OlLLM8Mn82A    PartitionCount: 4    R
     Topic: replicasTest    Partition: 3    Leader: 2    Replicas: 2,0,1    Isr: 2,0,1    Offline:
 ```
 
-### Busy clusters with replication
+#### Busy clusters with replication
 
 Why aren't all replicas ISRs? You may ask. A replica may become out-of-sync with the leader because of reasons such as network congestion or to fall behind because the broker is busy. This is important because you should never forget that replicating entire partitions over the network is computationally expensive. When creating partitions, keep in mind that they will have replicas, and those replicas will be distributed over the cluster. If you create more partitions than your cluster may have been sized to handle, you can create contention problems on your brokers by being more busy replicating partitions than actually storing them and making them available for reads. This happens because the way Kafka handles replication is not very different from how consumers read data.
 
@@ -299,7 +299,7 @@ To stay in-sync, brokers with replicas send fetch requests to the brokers that c
 
 If you create more replicas than your cluster can handle, you may exhaust both the pool of network threads and the pool of I/O threads with too many fetch requests related to replication. The default value set for the network thread pool is `3` and the default value set for the I/O thread pool is `8`. In theory, a naïve solution to resolve the problem of busy threads is increasing these pools in higher numbers. However, doing this doesn't solve the problem. In fact, it may actually make the situation worse, as more threads mean more context switching between the CPUs. If you don't have enough CPUs in the broker node, then this is likely to happen. Having partitions as your unit-of-durability is a good thing for the sake of data consistency, but you must use this information wisely to avoid problems with busy clusters.
 
-# Summary
+## Summary
 
 In this blog post, I discussed how partitions affect your system if you configure them wrongly. The role partitions play with Kafka was explored in scenarios of common traps, such as bottlenecks generated by running out of file handles, cluster storage not fully leveraged, decreased event processing speed, and busy clusters with replication. The discussion around these traps provides you with a good understanding of how Kafka handles your data using partitions. I also explained to you the impact that partitions have on many aspects of the system, such as consistency, parallelism, and durability.
 
