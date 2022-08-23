@@ -112,7 +112,11 @@ For serverless security you should be familiar with AWS Lambda, Amazon API Gatew
 
 ![](/security/images/srm-lambda.png)
 
-While many techniques are similar regarding serverless security, they will vary slightly.  Even so, you must continue to use authentication and authorization mechanisms.  No doubt you will continue to provide [data encryption and integrity](https://docs.aws.amazon.com/lambda/latest/dg/security-dataprotection.html).  Your security strategy should also include [monitoring, logging, and configuration management](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/security-logging-monitoring.html).  And you will still need to provide DoS and Infrastructure Protection to some degree which can be done with AWS Sheild and AWS Sheild Advanced.
+While many techniques are similar regarding serverless security, they will vary slightly.  Even so, you must continue to use authentication and authorization mechanisms.  No doubt you will continue to provide [data encryption and integrity](https://docs.aws.amazon.com/lambda/latest/dg/security-dataprotection.html).  
+
+### Inventory and Configuration
+
+Your security strategy should also include [monitoring, logging, and configuration management](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/security-logging-monitoring.html).  And you will still need to provide DoS and Infrastructure Protection to some degree which can be done with AWS Sheild and AWS Sheild Advanced.
 
 
 ## Securing your data
@@ -122,7 +126,15 @@ While many techniques are similar regarding serverless security, they will vary 
 2. KMS
 3. VPN
 
-The next essential for cloud security is the protection of data.  In AWS data is stored in S3.  S3 have several controls to protect the data.  The article, [Top 10 security best practices for securing data in Amazon S3](https://aws.amazon.com/blogs/security/top-10-security-best-practices-for-securing-data-in-amazon-s3/) covers the most fundamental techniques.  These techniques include blocking public S3 buckets at the organization level, using bucket policies to verify all access granted is restricted and specific, encryption, and protection.  For Encryption you can make use of [Server-side encryption with Amazon S3-managed encryption keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html), Server-side encryption with customer master keys (CMKs) stored in AWS KMS ([SSE-KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-s3.html)) or Client-side encryption. 
+### S3 Security
+
+The next essential for cloud security is the protection of data.  In AWS data is stored in S3.  S3 have several controls to protect the data.  The article, [Top 10 security best practices for securing data in Amazon S3](https://aws.amazon.com/blogs/security/top-10-security-best-practices-for-securing-data-in-amazon-s3/) covers the most fundamental techniques.  These techniques include blocking public S3 buckets at the organization level, using bucket policies to verify all access granted is restricted and specific, encryption, and protection.  
+
+### KMS
+
+For Encryption you can make use of [Server-side encryption with Amazon S3-managed encryption keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html), Server-side encryption with customer master keys (CMKs) stored in AWS KMS ([SSE-KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-s3.html)) or Client-side encryption. 
+
+### VPN
 
 When your data is not at rest you can use [Client or Site-tosite VPN](https://aws.amazon.com/vpn/) to protect the data in transit.
 
@@ -134,7 +146,15 @@ When your data is not at rest you can use [Client or Site-tosite VPN](https://aw
 3. VPC Flow Logs
 4. Amazon GuardDuty
 
-After covering the essentials of cloud security in the above areas it's beneficial to close out our list of essentials by discussing how you can monitor your environment.  AWS offers several managed services to assist in this regard, along with self-service options.  For example, you can [use VPC Flow Logs to log and view network traffic flows](https://aws.amazon.com/blogs/aws/vpc-flow-logs-log-and-view-network-traffic-flows/), or you can make use of Amazon CloudWatch to [analyze AWS WAF Logs](https://aws.amazon.com/blogs/mt/analyzing-aws-waf-logs-in-amazon-cloudwatch-logs/) or even to [create alarms for EC2 instances](https://aws.amazon.com/blogs/mt/use-tags-to-create-and-maintain-amazon-cloudwatch-alarms-for-amazon-ec2-instances-part-1/).  Aditionally, [AWS CloudTrail](https://aws.amazon.com/cloudtrai) monitors and records account activity across your AWS infrastructure, giving you control over storage, analysis, and remediation actions. This is essential for creating an administrative audit trail, identifying security incidents, and for troubleshooting operational issues.
+### AWS VPC Flow Logs and Amazon CloudWatch
+
+After covering the essentials of cloud security in the above areas it's beneficial to close out our list of essentials by discussing how you can monitor your environment.  AWS offers several managed services to assist in this regard, along with self-service options.  For example, you can [use VPC Flow Logs to log and view network traffic flows](https://aws.amazon.com/blogs/aws/vpc-flow-logs-log-and-view-network-traffic-flows/), or you can make use of Amazon CloudWatch to [analyze AWS WAF Logs](https://aws.amazon.com/blogs/mt/analyzing-aws-waf-logs-in-amazon-cloudwatch-logs/) or even to [create alarms for EC2 instances](https://aws.amazon.com/blogs/mt/use-tags-to-create-and-maintain-amazon-cloudwatch-alarms-for-amazon-ec2-instances-part-1/).  
+
+### AWS CloudTrail
+
+Aditionally, [AWS CloudTrail](https://aws.amazon.com/cloudtrai) monitors and records account activity across your AWS infrastructure, giving you control over storage, analysis, and remediation actions. This is essential for creating an administrative audit trail, identifying security incidents, and for troubleshooting operational issues.
+
+### Amazon GuardDuty
 
 Finally, Amazon GuardDuty can be used to provide threat detection, and even to take it a step further by causing the published findings to initiate auto-remediation actions within your AWS Environment.
 
