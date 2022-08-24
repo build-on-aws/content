@@ -13,7 +13,7 @@ date: 2022-08-15
 
 Quick guide on how to create a container image with your old Java EE Application Server.
 
-<p align="center"><img src="images/duke-love.png"/></p>
+<p align="center"><img src="images/duke-love.png" alt="Java Duke making a heart with his hands"/></p>
 
 Java EE still in production and will be there for much more time, 
 and I know many companies that run Java EE applications using 
@@ -158,22 +158,22 @@ target platform, docker file and also tagging this image as jboss:latest
 
 Open your AWS Console go to Amazon Elastic Container Registry and click "Create Repository"
 
-![](images/ecr-01.png)
+![Screen shot instructions to create ECR repository](images/ecr-01.png)
 
 Type javaee-app1 as the name of this repository and use default config for other parameters:
 
-![](images/ecr-02.png)
+![Screen shot instructions for naming the repository](images/ecr-02.png)
 
 Now you can see it listed, click the repository link:
 
-![](images/ecr-03.png)
+![Screen shot instructions with created repository](images/ecr-03.png)
 
 Now let's click on "View push commands"
-![](images/ecr-04.png)
+![Screen shot instructions for viewing push commands](images/ecr-04.png)
 
 And now you can copy it into a notes document to use later:
 
-![](images/ecr-05.png)
+![Screen shot instructions with push commands](images/ecr-05.png)
 
 It's all good with ECR, now we can push our image in this private repository!
 
@@ -195,15 +195,15 @@ It's time to push it to Amazon ECR:
 
     docker push 649770145326.dkr.ecr.us-east-1.amazonaws.com/javaee-app1:latest
 
-![](images/ecr-06.png)
+![Screen shot with docker push results](images/ecr-06.png)
 
 The image should be listed in your ECR AWS Console:
 
-![](images/ecr-07.png)
+![Screen shot ECR Console listing the docker image](images/ecr-07.png)
 
 Click in the image link to access some required information:
 
-![](images/ecr-08.png)
+![Screen shot with container information](images/ecr-08.png)
 
 Now you have URI for your image, copy this information to use next with AWS App Runner.
 
@@ -211,25 +211,25 @@ Now you have URI for your image, copy this information to use next with AWS App 
 
 Log into AWS App Runner console and click "Create new service" 
 and paste the Container image URI:
-![](images/app-01.png)
+![Screen shot with AWS App Runner console](images/app-01.png)
 
 Choose Automatic deployment and ask it to create as new service role:
-![](images/app-02.png)
+![Screen shot with AWS App Runner instruction](images/app-02.png)
 
 Give a name to your service and use default parameters or customize it for your workload:
-![](images/app-03.png)
+![Screen shot with App Runner console to name your app](images/app-03.png)
 
-![](images/app-04.png)
+![Screen shot with App Runner review and create screen](images/app-04.png)
 
 Click "Crete & deploy" and in some minutes your app will be ready!
 
-![](images/app-05.png)
+![Screen shot App Runner create & deploy instruction](images/app-05.png)
 
 Now we can click the link and access our JBoss Application Server:
 
-![](images/app-06.png)
+![Screen shot with App Runner deployed app](images/app-06.png)
 
-![](images/app-07.png)
+![Screen shot with browser showing your running app](images/app-07.png)
 
 You can change your Java EE App and run docker build, tag and push commands to update 
 your App Runner automatically.
