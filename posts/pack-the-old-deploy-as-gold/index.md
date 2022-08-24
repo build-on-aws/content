@@ -10,7 +10,6 @@ authorGithubAlias: vsenger
 authorName: Vinicius Senger
 date: 2022-08-15
 ---
-# Pack the old, deploy as gold!
 
 Quick guide on how to create a container image with your old Java EE Application Server.
 
@@ -43,7 +42,7 @@ That's the basic steps we need to do it:
 
 Let's build it!
 
-### 1. Download JBoss
+## 1. Download JBoss
 
 I used the version 4.2.3, but you can use any other with small changes or even
 another application server.
@@ -58,7 +57,7 @@ Create a project directory and unzip Jboss there.
     unzip <downloaded_jboss.zip>
 
 
-### 2. Create a simple Java EE Application
+## 2. Create a simple Java EE Application
 
 Let's create a very simple Java EE application that can be replaced by your real app.
 In your project directory we need to create this:
@@ -95,12 +94,12 @@ Create the classical web.xml in myapp/WEB-INF:
 
 Your Java App is done!
 
-### 3. Install Docker
+## 3. Install Docker
 
 Follow the [docker website](https://docs.docker.com/get-docker/) instructions 
 to download and install it.
 
-### 4. Create a Docker File
+## 4. Create a Docker File
 
 Now we have the jboss app server and also our simple Java EE app ready and we
 need to create a Docker File to describe the commands that will build the image. 
@@ -148,14 +147,14 @@ the port to 0.0.0.0:
 
 Now we are ready to build the image!
 
-### 5. Build the docker image
+## 5. Build the docker image
 
 To build the image we are going to run a docker command line command with the
 target platform, docker file and also tagging this image as jboss:latest
 
     docker build --platform=linux/amd64  --no-cache --progress=plain -f javaee.DockerFile . -t javaee-app1:latest
 
-### 6. Create an Amazon Elastic Container Registry private repository
+## 6. Create an Amazon Elastic Container Registry private repository
 
 Open your AWS Console go to Amazon Elastic Container Registry and click "Create Repository"
 
@@ -178,7 +177,7 @@ And now you can copy it into a notes document to use later:
 
 It's all good with ECR, now we can push our image in this private repository!
 
-### 7. Tag and push image to ECR
+## 7. Tag and push image to ECR
 
 Retrieve a token to authentic your Docker client to our registry, 
 which is the first command that you copied from the console:
@@ -208,7 +207,7 @@ Click in the image link to access some required information:
 
 Now you have URI for your image, copy this information to use next with AWS App Runner.
 
-### 8. Create an AWS App Runner service using ECR image URI
+## 8. Create an AWS App Runner service using ECR image URI
 
 Log into AWS App Runner console and click "Create new service" 
 and paste the Container image URI:
@@ -235,4 +234,4 @@ Now we can click the link and access our JBoss Application Server:
 You can change your Java EE App and run docker build, tag and push commands to update 
 your App Runner automatically.
 
-Hoe you enjoy this tutorial and please feel free to provide us any feedback!
+Hope you enjoy this tutorial and please feel free to provide us any feedback!
