@@ -1,10 +1,10 @@
 ---
 layout: blog.11ty.js
-title: Pack the old, deploy as gold!
+title: Pack the Old, Deploy as Gold!
 description: This post will guide you to pack your old Java EE application as a container and deploy it to AWS AppRunner
 tags:
   - java
-  - container
+  - containers
 
 authorGithubAlias: vsenger
 authorName: Vinicius Senger
