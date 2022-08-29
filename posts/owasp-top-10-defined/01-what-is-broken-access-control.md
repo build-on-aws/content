@@ -12,7 +12,7 @@ date: 2022-08-29
 ---
 
 This is a 10-part series:
-1. [What is Broken Access Control?](01-what-is-broken-access-control)
+1. What is Broken Access Control? (this post)
 2. [What is a Cryptographic Failure?](02-what-is-a-cryptographic-failure)
 3. [What is an Injection Attack?](what-is-an-injection-attack)
 
