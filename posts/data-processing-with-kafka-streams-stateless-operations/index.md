@@ -12,13 +12,13 @@ authorName: Abhishek Gupta
 date: 2022-07-14
 ---
 
-[Apache Kafka](https://kafka.apache.org/documentation/) serves as a key component in data architectures. It has a rich ecosystem for building scalable data intensive services including data pipelines, microservices, etc.
+[Apache Kafka](https://kafka.apache.org/documentation/) serves as a key component in data architectures. It has a rich ecosystem for building scalable data intensive services including data pipelines, etc.
 
 - With Kafka client ([Producer](https://kafka.apache.org/documentation/#producerapi) and [Consumer](https://kafka.apache.org/documentation/#consumerapi)) APIs, you can choose from a variety of [programming languages](https://cwiki.apache.org/confluence/display/kafka/clients) to produce and consume data from Kafka topics.
 - You can integrate heterogenous data systems using [Kafka Connect](https://kafka.apache.org/documentation/#connect) with it's extensive suite of pre-built connectors and a framework that allows you to build custom integrations if you wish to.
 - You can use [Kafka Streams](https://kafka.apache.org/documentation/streams/) (Java library) for developing streaming applications to process data flowing through Kafka topics.
 
-Common requirements in data processing include filtering data, transforming it from one form to another, applying an action to each data record etc. These are often categorized as **stateless** operations because they don't mutate data.  Kafka Streams is an ideal candidate if you want to apply stateless transformations on streaming data in Kafka. The [KStream](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html) abstraction (part of Kafka Streams DSL API) offers functions such as `filter`, `map`, `groupBy` etc. 
+Common requirements in data processing include filtering data, transforming it from one form to another, applying an action to each data record etc. These are often categorized as **stateless** operations. Kafka Streams is an ideal candidate if you want to apply stateless transformations on streaming data in Kafka. The [KStream](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html) abstraction (part of Kafka Streams DSL API) offers functions such as `filter`, `map`, `groupBy` etc. 
 
 In this blog post, you will get an overview of these stateless operations along with practical examples and code snippets. I have grouped them into the following categories: `map`, `filter`, `group`, `terminal` along with some miscellaneous features.
 
@@ -117,7 +117,7 @@ stream.filterNot((key,value) -> value.startsWith("foo"));
 
 ### Use `group`ing to prepare data for stateful operations
 
-Grouping is often a pre-requisite to stateful aggregations in Kafka Streams. To group records by their key, you can make sure of [groupByKey](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#groupByKey()) as such:
+Grouping is often a pre-requisite to [stateful aggregations](https://kafka.apache.org/32/documentation/streams/core-concepts#streams_state) in Kafka Streams. To group records by their key, you can make sure of [groupByKey](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#groupByKey()) as such:
 
 ```java
 StreamsBuilder builder = new StreamsBuilder();
@@ -151,7 +151,7 @@ Not all stateless computations return intermediate results such as a `KStream`, 
 
 **Save record to a topic**
 
-You can use the [to](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#to(java.lang.String)) method to store the records of a `KStream` to a topic in Kafka.
+You may want to write the results of a stateless operation back to Kafka - most likely, in a different topic. You can use the [to](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#to(java.lang.String)) method to store the records of a `KStream` to a topic in Kafka.
 
 ```java
 KStream<String, String> stream = builder.stream("words");
