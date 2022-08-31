@@ -12,4 +12,4 @@ Is this pull request linked to a Content Proposal or Idea Suggestion issue? If s
 
 #Issue Number
 
-By submitting this pull request, I confirm I own this content, have permission to use each image included in this content, and that it will be released under the [CC BY 4.0 License](/LICENSE).
+By submitting this pull request, I confirm I own this content, have permission to use each image included in this content, and that it will be released under the [CC BY 4.0 SA License](/LICENSE).
