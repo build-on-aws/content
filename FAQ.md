@@ -34,7 +34,7 @@ Please don’t syndicate to other platforms right now as we don’t want to driv
 
 ### Why was my content proposal not accepted? Do you have feedback for me?
 
-We will add feedback to your content proposal issue if we have suggestions for improvements. In some cases, the content is not 
+We will add feedback to your content proposal issue if we have suggestions for improvements. In many cases, the content is not a good fit for this platform and that is why it was not accepted.
 
 ### How do I optimize my content for SEO?
 
