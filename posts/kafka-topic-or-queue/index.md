@@ -4,7 +4,7 @@ title: Topic or a Queue - What exactly is Apache Kafka?
 description: Debunk a common misconception with Apache Kafka.
 tags:
   - apache-kafka
-  - pub-systems
+  - pub-sub
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2022-08-31
