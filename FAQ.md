@@ -2,7 +2,7 @@
 
 ### I have a series of posts. How do I link them together?
 
-Currently, there is no built-in support for series, however you can accomplish this using simple [Markdown](https://www.markdownguide.org/basic-syntax/). Example:
+Currently, there is no built-in support for a series of posts, however you can accomplish this using simple [Markdown](https://www.markdownguide.org/basic-syntax/). Example:
 
 ```
 This is a 3-part series:
@@ -16,13 +16,17 @@ You can then structure the layout of your files like this:
 ```
 posts
 ├── become-cli-ninja-on-mac
-│   ├── 01-start-an-ec2-mac-instance.md
-│   ├── 02-remotely-connect-a-mac-instance.md
-│   ├── images
-│   │   ├── archi-ssh-tunnel.png
+│   ├── 01-start-an-ec2-mac-instance
+│   │   ├── index.md
+│   │   ├── images
+│   │   │   archi-ssh-tunnel.png
+│   ├── 02-remotely-connect-a-mac-instance
+│   │   ├── index.md
+│   │   ├── images
+│   │   │   ├── archi-ssh-tunnel.png
 ```
 
-Where `posts/become-cli-ninja-on-mac/01-start-an-ec2-mac-instance.md` is part 1 and `posts/become-cli-ninja-on-mac/02-remotely-connect-a-mac-instance.md` is part 2.
+Where `posts/become-cli-ninja-on-mac/01-start-an-ec2-mac-instance/index.md` is part 1 and `posts/become-cli-ninja-on-mac/02-remotely-connect-a-mac-instance/index.md` is part 2.
 
 The resulting URL mapping will be:
 - https://blog.buildon.aws/posts/become-cli-ninja-on-mac/01-start-on-an-ec2-mac-instance
