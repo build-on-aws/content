@@ -39,7 +39,7 @@ First, we'll run the attack from the search box on the GUI.  The following anima
 
 As you can see in the above animated GIF, we get a nice alert pop-up with the text we entered.  This is not supposed to happen.  We shouldn't be able to interact with the page using the search box in this way.  What you are seeing here is a DOM XSS attack.
 
-Next, lets formulate the attack from the command line using the `curl` command.  When I run the command I'll run it against the URL of the Juice Shop applicaiton and I have created an environment variable using the command `export JUICESHOP_URL=<Your Juice Shop URL>`. 
+Next, lets formulate the attack from the command line using the `curl` command.  When I run the command, I'll run it against the URL of the Juice Shop applicaiton and I have created an environment variable using the command `export JUICESHOP_URL=<Your Juice Shop URL>`. 
 
 Let's run a similar command to initiate an XSS attack.
 
@@ -52,7 +52,7 @@ And the result is that the page was served as seen below.  Nothing blocked.  Att
 
 ![Results of an XSS attack using CURL from the CLI](images/03-what-is-an-injection-attack-02.png)
 
-Remember, this is just one simple example, however there are several CWE's that involve scripting attacks of other sorts.  So how can we prevent attacks like this?  Let's look at one solution.
+Remember, this is just one simple example, however there are several CWEs that involve scripting attacks of other sorts.  So how can we prevent attacks like this?  Let's look at one solution.
 
 ## Prevention
 
@@ -68,4 +68,4 @@ In the above output, you can see the "Request blocked" notification was returned
 
 ## Conclusion
 
-I've said it throughout this series, but I'll say it again: this is not meant to be an exhasutive list of attacks or prevention mechanisms.  Instead, the hope is that it spurs a bit of thinking on anyone reading this.  Trying to keep up with every vulnerability, every CVE, every potential issue is quite a chore, however much can be accomplished by just having a sense for the common attacks and employing the tools avaiable to establish a base level of protection.  From there you can always get into the weeds with specific attacks that your organization is succeptible to.  That's the fun part!  
+I've said it throughout this series, but I'll say it again: this is not meant to be an exhasutive list of attacks or prevention mechanisms.  Instead, the hope is that it spurs a bit of thinking on anyone reading this.  Trying to keep up with every vulnerability, every CWE, every potential issue is quite a chore, however much can be accomplished by just having a sense for the common attacks and employing the tools avaiable to establish a base level of protection.  From there you can always get into the weeds with specific attacks that your organization is succeptible to.  That's the fun part!  
