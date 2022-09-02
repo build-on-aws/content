@@ -31,13 +31,13 @@ For this example, we're going to look at an example of a Cross Site Scripting (X
 
 That being said, my server is up and running, as you can see below.  Let's look at an attack.
 
-![](images/03-what-is-an-injection-attack-01.png)
+![A Screenshot of the OWASP Juice Shop UI](images/03-what-is-an-injection-attack-01.png)
 
-First, we'll run the attack from the search box on the GUI.
+First, we'll run the attack from the search box on the GUI.  The following animated GIF shows the attack in action.  What we are doing here is entering a bit of javascript code in the search box of the web UI.  This causes the browser to display an alert rather than a search result.  
 
-![](images/03-what-is-an-injection-attack-03.gif)
+![Animated GIF of an injection attack using OWASP Juicebox](images/03-what-is-an-injection-attack-03.gif)
 
-As you can see, we get a nice alert pop-up with the text we entered.  This is not supposed to happen.  We shouldn't be able to interact with the page using the search box in this way.  What you are seeing here is a DOM XSS attack.
+As you can see in the above animated GIF, we get a nice alert pop-up with the text we entered.  This is not supposed to happen.  We shouldn't be able to interact with the page using the search box in this way.  What you are seeing here is a DOM XSS attack.
 
 Next, lets formulate the attack from the command line using the `curl` command.  When I run the command I'll run it against the URL of the Juice Shop applicaiton and I have created an environment variable using the command `export JUICESHOP_URL=<Your Juice Shop URL>`. 
 
@@ -50,19 +50,19 @@ curl -X POST  $JUICESHOP_URL -F "user='<script><alert>Hello></alert></script>'"
 
 And the result is that the page was served as seen below.  Nothing blocked.  Attack successful.
 
-![](images/03-what-is-an-injection-attack-02.png)
+![Results of an XSS attack using CURL from the CLI](images/03-what-is-an-injection-attack-02.png)
 
-Remember, this is just one simple example, however there are several CVE's that involve scripting attacks of other sorts.  So how can we prevent attacks like this?  Let's look at one solution.
+Remember, this is just one simple example, however there are several CWE's that involve scripting attacks of other sorts.  So how can we prevent attacks like this?  Let's look at one solution.
 
 ## Prevention
 
 As far as prevention goes, I'm not going to give you the definitive guide.  The intent here is to simply show you that attacks like this exist, they are on the OWASP Top 10, and can be mitigated in many cases by using the right tools.  For the example I provided here, I'm going to use a AWS WAF and deploy the simple managed rules.
 
-![](images/03-what-is-an-injection-attack-04.png)
+![Adding Managed Rules to a Web ACL in AWS WAF](images/03-what-is-an-injection-attack-04.png)
 
 With those core rules in place, we should have some protection against XSS.  Let's try the same attack again.
 
-![](images/03-what-is-an-injection-attack-05.png)
+![Output of an XSS attack from the CLI using CURL](images/03-what-is-an-injection-attack-05.png)
 
 In the above output, you can see the "Request blocked" notification was returned.  We now have protection for our server against XSS attacks.  
 
