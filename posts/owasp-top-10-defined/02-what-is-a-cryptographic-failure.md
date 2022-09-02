@@ -19,7 +19,7 @@ It’s probably safe to say that organizations should control who can see their 
 
 ## Notable Common Weakness Enumerations (CWEs)
 
-There are several weaknesses in this area.  The following list are noteable CWE's.  
+There are several weaknesses in this area.  The following list are noteable CWEs.  
 - [CWE-259: Use of Hard-coded Password](https://cwe.mitre.org/data/definitions/259.html)
 - [CWE-327: Broken or Risky Crypto Algorithm](https://cwe.mitre.org/data/definitions/327.html)
 - [CWE-331 Insufficient Entropy](https://cwe.mitre.org/data/definitions/331.html)
