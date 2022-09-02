@@ -191,7 +191,7 @@ We want this to be the best place for hands-on builders to learn about a technol
 
 ### Content Licensing
 
-Any content you contribute and publish on BuildOn.AWS will be licensed as CC BY 4.0. You can read the full license terms [here](/LICENSE).
+Any content you contribute and publish on BuildOn.AWS will be licensed as CC BY-SA 4.0. You can read the full license terms [here](/LICENSE).
 
 ### Code of Conduct
 
