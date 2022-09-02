@@ -28,13 +28,13 @@ A key takeway here is that they are not all the same.  If you have a look at the
 
 ## CWE-259: Use of Hard-coded Password
 
-CWE-259 is defined as the "Use of Hard-coded Passwords" and upon first look you might wonder what this one has to do with a cryptographic failure.  Let's take a journey together in software development.  Imagine that we work for an organization that is developing an app and, at some point, a password is needed to connect to a database.  Being the agile developers that the organization employs an admin account is created for the database.  The admin account has full permissions.  That username and password is then hard coded into your application.  Now the app can read the database and nobody will run into issues, Right?  
+CWE-259 is defined as the "Use of Hard-coded Passwords" and upon first look you might wonder what this one has to do with a cryptographic failure.  Let's take a journey together in software development.  Imagine that we work for an organization that is developing an app and, at some point, a password is needed to connect to a database.  One of the developers creates an admin account for the database.  The admin account has full permissions.  That username and password is then hard coded into your application.  Now the app can read the database and nobody will run into issues, Right?  
 
 Wrong!  It may work for a short time, but if the password is discovered and published publically then anyone with the password can access the database.  
 
 How is this a cryptographic failure?  I see two ways.  First, the credentials are stored in clear text.  The failure is that cryptographic algorithms were not used to store or even communicate sensitive data.  And while this example is the storage of a password in data at rest, it becomes data in transit as soon as the password is passed to the database for authentication.  In this case, we wonder if encryption is being used on the data.
 
-Another spin on this can be found in the variant [CVE-321, Use of Hard-coded Cryptographic Key](https://cwe.mitre.org/data/definitions/321.html). Let's imagine that encryption is used, but again the developers decide to store the encryption key in the code.  Once again we have a huge issue.
+Another spin on this can be found in the variant [CWE-321, Use of Hard-coded Cryptographic Key](https://cwe.mitre.org/data/definitions/321.html). Let's imagine that encryption is used, but again the developers decide to store the encryption key in the code.  Once again we have a huge issue.
 
 Well, this is just one example.  Let's look at the second example of a Cryptographic Failure.
 
