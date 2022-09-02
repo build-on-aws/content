@@ -31,7 +31,7 @@ Lifecycle rules should be flexible and designed to process data based on certain
 
 The diagram below provides an illustration that shows several different object types and what typical access patterns may look like over the object's life span.
 
-![Line graph showing access frequency over time for feature length film, patient medical records, and student transcript data objects](/posts/anatomy-of-data-objects-through-lifecycle-management/images/access-frequency-image1.jpg "Data Object Types")
+![Line graph showing access frequency over time for feature length film, patient medical records, and student transcript data objects](images/access-frequency-image1.jpg "Data Object Types")
 
 We will discuss these object types in more detail later. For now, let's take a closer look at the stages of lifecycle management and discuss how each is reliant upon processes and tools for managing data.  
 
