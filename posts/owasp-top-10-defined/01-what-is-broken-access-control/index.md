@@ -13,8 +13,8 @@ date: 2022-08-29
 
 This is a 10-part series:
 1. What is Broken Access Control? (this post)
-2. [What is a Cryptographic Failure?](02-what-is-a-cryptographic-failure)
-3. [What is an Injection Attack?](what-is-an-injection-attack)
+2. [What is a Cryptographic Failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)
+3. [What is an Injection Attack?](/posts/owasp-top-10-defined/what-is-an-injection-attack/)
 
 ## Overview of Access Control
 
