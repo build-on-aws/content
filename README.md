@@ -15,7 +15,7 @@ Check out [CONTRIBUTING](/CONTRIBUTING.md) for other ways to contribute to Build
 
 ## Content Licensing
 
-Content published on BuildOn.AWS is licensed as CC BY 4.0. You can read the full license terms [here](/LICENSE).
+Content published on BuildOn.AWS is licensed as CC BY-SA 4.0. You can read the full license terms [here](/LICENSE).
 
 ## Code of Conduct
 
