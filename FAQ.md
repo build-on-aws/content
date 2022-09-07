@@ -6,31 +6,49 @@ Currently, there is no built-in support for a series of posts, however you can a
 
 ```
 This is a 3-part series:
-1. [Title of part 1]()
-1. [Title of part 2]()
-1. [Title of part 3]()
+1. What is broken access control? (this post)
+1. [What is a cryptographic failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)
+1. [What is an injection attack?](/posts/owasp-top-10-defined/03-what-is-an-injection-attack/)
 ```
+
+_Note: Add a trailing slash at the end._
 
 You can then structure the layout of your files like this:
 
 ```
 posts
-├── become-cli-ninja-on-mac
-│   ├── 01-start-an-ec2-mac-instance
+├── owasp-top-10-defined
+│   ├── 01-what-is-broken-access-control
 │   │   ├── index.md
 │   │   ├── images
-│   │   │   archi-ssh-tunnel.png
-│   ├── 02-remotely-connect-a-mac-instance
+│   │   │   ├── broken-access-control.png
+│   ├── 02-what-is-a-cryptographic-failure
 │   │   ├── index.md
 │   │   ├── images
-│   │   │   ├── archi-ssh-tunnel.png
+│   │   │   ├── cryptographic-failure.png
+│   ├── 03-what-is-an-injection-attack
+│   │   ├── index.md
+│   │   ├── images
+│   │   │   ├── what-is-an-injection-attack.png
 ```
 
-Where `posts/become-cli-ninja-on-mac/01-start-an-ec2-mac-instance/index.md` is part 1 and `posts/become-cli-ninja-on-mac/02-remotely-connect-a-mac-instance/index.md` is part 2.
+Where `posts/owasp-top-10-defined/01-what-is-broken-access-control/index.md` is part 1, `posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/index.md` is part 2, and `posts/owasp-top-10-defined/03-what-is-an-injection-attack/index.md` is part 3.
 
 The resulting URL mapping will be:
-- https://blog.buildon.aws/posts/become-cli-ninja-on-mac/01-start-on-an-ec2-mac-instance
-- https://blog.buildon.aws/posts/become-cli-ninja-on-mac/02-remotely-connect-a-mac-instance
+- https://blog.buildon.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control/
+- https://blog.buildon.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/
+- https://blog.buildon.aws/posts/owasp-top-10-defined/03-what-is-an-injection-attack/
+
+You can see an example of this in the repo [here](/posts/owasp-top-10-defined).
+
+### How do I link to other posts in my series or other posts on the BuildOn.AWS site?
+
+You can reference them using absolute paths like this:
+
+- `[What is a cryptographic failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)`
+- `[A cool tutorial](/tutorials/a-cool-tutorial/)`
+
+_Note: Please do not hard code the full URL in the post_
 
 ### I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?
 
