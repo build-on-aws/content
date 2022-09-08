@@ -133,7 +133,7 @@ If you already have a fork and have cloned the repo locally, make sure your fork
 1. Fork this [repo](https://github.com/build-on-aws/content/fork) to your own account (it will remain private in your account)
 1. Clone your repo locally. i.e. `git clone git@github.com:YOUR_GITHUB_ACCOUNT/content.git`
 1. Create a new branch for this piece of content: `git checkout -b my-post`
-    - Each branch/pull request should only contain *one piece of content*. If you are creating a post series, multiple posts can be in the same branch/pull request, but they will be reviewed and published together and time to review will take longer.
+    - Each branch/pull request should only contain *one piece of content*, even if you are publishing a series of posts so they can be reviewed and published independently.
 1. Inside the `posts` folder, create a folder named for the title of your post. This is called the "slug" and will become the URL of your post i.e. `posts/what-happens-when-you-type-a-url-into-your-browser`
 1. Name your main post file `index.md` (created in [Step 3: Write Your First Draft](#3-write-your-first-draft)) and store it in the content folder from the previous step
 1. If you have images, create a subfolder folder named `images`
@@ -166,7 +166,7 @@ For a post titled `What Happens When You Type a URL Into Your Browser` which is 
 * Inclusive language
 * Adheres to the [Content Guidelines](/CONTENT_GUIDELINES.md)
 
-A reviewer may make small changes for you, but for any `changes requested`, you’ll incorporate feedback and requested/suggested changes to your draft, and re-add the `ready for review` label until the pull request is approved by a reviewer. Once it is approved, it will be merged and published immediately.
+A reviewer may make small changes for you, but for any `changes requested`, you’ll incorporate feedback and requested/suggested changes to your draft, and re-add the `ready for review` label until the pull request is approved by a reviewer. Once it is approved, it will be merged and published.
 
 ### 6. Do NOT Share Your Content Yet
 
