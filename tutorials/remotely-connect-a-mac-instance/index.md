@@ -17,7 +17,7 @@ date: 2022-07-09
 
 This is a six parts article about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy.
 
-- When reading [part one](01-start-an-ec2-mac-instance.md), you learn how to allocate a Mac mini host and start it.
+- When reading [part one](../start-an-ec2-mac-instance/index.md), you learn how to allocate a Mac mini host and start it.
 
 - This is the second part, you will learn how to remotely connect to the EC2 Mac instance you just started.
 
@@ -78,7 +78,7 @@ ec2-user@ip-172-31-44-83 ~ %
 
 Once you are connected, feel free to explore your instance. You will verify it is a regular macOS installation 😍.
 
-![SSH exploration of your EC2 instance](images/02/ssh-ec2-instance.png)
+![SSH exploration of your EC2 instance](images/ssh-ec2-instance.png)
 
 `ec2-user` is included in the `/etc/sudoers` file and you can elevate privileges to root with the `sudo` command, without password.
 
@@ -204,15 +204,15 @@ Ok, now that the initial setup is done, let's connect to the instance. You can d
 
 Using the AWS Console, I navigate to EC2 section if not done already. I select the instance I want to connect to. I select the **Connect** button.
 
-![EC2 Instance Connect 1](images/02/ec2-connect-1.png)
+![EC2 Instance Connect 1](images/ec2-connect-1.png)
 
 On the next screen I verify the instance meets the pre-requisites and select **Connect** again.
 
-![EC2 Instance Connect 2](images/02/ec2-connect-2.png)
+![EC2 Instance Connect 2](images/ec2-connect-2.png)
 
 When the instance has correct permission, and if you followed the above instructions, it should have, a black screen opens in your browser. It is a browser based shell connection to your instance.
 
-![EC2 Instance Connect 3](images/02/ec2-connect-3.png)
+![EC2 Instance Connect 3](images/ec2-connect-3.png)
 
 Alternatively, you may use the command line to connect using SSM.
 
@@ -309,7 +309,7 @@ You can create tunnels either using SSH or SSM. I start with SSH and will show t
 
 [You can learn more about SSH tunnels on this site](https://www.ssh.com/academy/ssh/tunneling/example). The whole process is illustrated below:
 
-![SSH Tunneling illustrated](images/02/archi-ssh-tunnel.png)
+![SSH Tunneling illustrated](images/archi-ssh-tunnel.png)
 
 To start an SSH tunnel, collect your instance public IP address as described before. Then, use the following command:
 
@@ -338,15 +338,15 @@ open vnc://localhost
 
 The ARD authentication screen appears. Type the username (`ec2-user`) and the password you choose when you enabled ARD.
 
-![VNC Credentials](images/02/vnc-credentials.png)
+![VNC Credentials](images/vnc-credentials.png)
 
 When the VNC authentication succeeds, you are presented with the standard macOS login screen. Enter your credentials again.
 
-![macOS authentication](images/02/vnc-mac-login.png)
+![macOS authentication](images/vnc-mac-login.png)
 
 And after a few seconds, you should see the familiar macOS desktop.
 
-![macOS desktop](images/02/vnc-mac-desktop.png)
+![macOS desktop](images/vnc-mac-desktop.png)
 
 ### Change the resolution of the EC2 Mac instance screen 
 

@@ -19,11 +19,11 @@ This is a six parts article about EC2 Mac instances and advanced CLI usage on ma
 
 - This is the first part, you learn how to allocate a Mac mini host and start it.
 
-- When reading [part 2](02-remotely-connect-a-mac-instance.md), you will learn how to remotely connect to the EC2 Mac instance you just started.
+- When reading [part 2](../remotely-connect-a-mac-instance/index.md), you will learn how to remotely connect to the EC2 Mac instance you just started.
 
 - Part three teaches you how to securely give your Mac permissions to access other AWS services, such as [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html), or [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html).  
 
-- Part four is dedicated to the installation of your toolchain from the command line and reuse your installation on multiple machines using[ Amazon Machine Images](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html). We also cover how to resize your EBS volume to make room for your tools.
+- Part four is dedicated to the installation of your toolchain from the command line and reuse your installation on multiple machines using [Amazon Machine Images](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html). We also cover how to resize your EBS volume to make room for your tools.
 
 - Part five is about the usage of macOS keychain to store your build secrets and how to use the keychain from the command-line only.
 
@@ -43,7 +43,7 @@ For this serie of blog posts, I assume you're somewhat familiar with Amazon EC2.
 
 The introduction of EC2 Mac instances brings to all Apple developers the flexibility, scalability and security of AWS. Now it is possible to have one or multiple development machines running in the cloud, running different macOS or Xcode versions. It gives you the flexibility you need to build and test your iOS, macOS, watchOS, tvOS, ipadOS applications without having to manage a local fleet of machines. The AWS cloud APIs gives you the possibility to image, snapshot, start, stop machines in an automated way, bringing the same level of flexibility and automation you have today with Linux-based or Windows-based development pipelines.
 
-![Mac Mini](images/01/mac-mini-ec2.png)
+![Mac Mini](images/mac-mini-ec2.png)
 
 EC2 Mac instances are Mac mini computers that we racked up in our datacenters and connected to the rest of the AWS infrastructure. We use the Mac thunderbird port to connect the machine to [AWS Nitro](https://aws.amazon.com/ec2/nitro/). Nitro is the virtualisation system built by AWS, it allows to access [the VPC network](https://aws.amazon.com/vpc/getting-started/), [the EBS volumes](https://aws.amazon.com/ebs/getting-started/), and other functions. 
 
@@ -55,13 +55,13 @@ Second, the billing depends on dedicated host allocation, not when an EC2 instan
 
 To check our [Saving Plans](https://aws.amazon.com/savingsplans/) pricing and options, go to [Saving Plans Compute Pricing page](https://aws.amazon.com/savingsplans/compute-pricing/), then select **EC2 Instance Savings Plans** tab. You can then the length of your plan (**one year or three years**), the payment option (**all upfront, partial upfront, or nothing upfront**), one the **`mac`** instances family, and the AWS Region. Note that, at this time, **OS** must be `linux` (🙄 yes, I know) and **Tenancy** must be **Dedicated Host**.
 
-![Saving Plans](images/01/saving-plans.png)
+![Saving Plans](images/saving-plans.png)
 
 ## Acquire a dedicated host
 
 If you want to use an EC2 Mac instance for your development workflow, the first step is therefore to reserve a host for your own usage. You can use the [AWS Console](https://eu-central-1.console.aws.amazon.com) or the [command line interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to do so. The **Dedicated Hosts** section is available in the EC2 console.
 
-![AWS Console EC2 dedicated hosts](images/01/dedicated-host.png)
+![AWS Console EC2 dedicated hosts](images/dedicated-host.png)
 
 Notice you have the choice between x86 based Mac Mini (`mac1.metal`) and Apple silicon Mac Mini, featuring M1 SoC with 8 CPU cores, 8 GPU cores, 16 GiB of memory, and a 16 core Apple Neural Engine (`mac2.metal`)
 
@@ -113,11 +113,11 @@ When starting any EC2 instance, AWS expects you to share a couple of details. Th
 
 - an Amazon Machine Image. This is a disk snapshot containing the operating system and some AWS-specific tools and agents already installed.  You can specify your own AMI if you have one (more about this in the part four of this blog serie). AWS provides you with the three last major versions of macOS. It means that, at the time of this writing, you can start an EC2 Mac instance running macOS Monterey 12.4, macOS Big Sur 11.6.6, or macOS Catalina 10.15.7.
 
-![macOS AMIs](images/01/macos-amis.png)
+![macOS AMIs](images/macos-amis.png)
 
 Once you have all these parameters, the procedure is no different from starting any EC2 instance type. I just have to ensure I select a macOS AMI version that suits my requirements. I select the `mac2.metal` instance type and select host **Tenancy** and the **Host** I just created.
 
-![ec2 launch mac instance](images/01/ec2-mac-launch.png)
+![ec2 launch mac instance](images/ec2-mac-launch.png)
 
 Alternatively, I may use the command line:
 
@@ -144,7 +144,7 @@ Alternatively, I may use the command line:
 ... redacted for brevity ....
 ```
  
-Give us a few minutes to start your instance. It will receive a public IP address (when started in the default or a public VPC). And you will soon be able to SSH connect to it. More about this in [the second part of this blog serie](02-remotely-connect-a-mac-instance.md).
+Give us a few minutes to start your instance. It will receive a public IP address (when started in the default or a public VPC). And you will soon be able to SSH connect to it. More about this in [the second part of this blog serie](../remotely-connect-a-mac-instance/index.md).
 
 Similarly you can stop, reboot or terminate your instance. Reboot is pretty obvious, it tells the operating system to perform a shutdown and restart cycle. This is equivalent to selecting **Restart** from the  menu on your locale machine.
 
@@ -156,7 +156,7 @@ For security reasons, the underlying host is entirely scrubbed to erase any data
 
 You can change the instance state by using the **Instance state** drop down menu in the console.
 
-![EC2 Instance state menu with stop, reboot, and terminate](images/01/ec2-actions.png)
+![EC2 Instance state menu with stop, reboot, and terminate](images/ec2-actions.png)
 
 Alternatively, you may use the CLI.
 
@@ -185,4 +185,4 @@ You can not release a host during the first 24h after allocating it, as per [mac
 
 ---
 
-Congrats 🎉👏🥳 ! You launched your first EC2 Mac instance. In the [next article of this serie](02-remotely-connect-a-mac-instance.md), you're going to learn how to remotely connect to it.
+Congrats 🎉👏🥳 ! You launched your first EC2 Mac instance. In the [next article of this serie](../remotely-connect-a-mac-instance/index.md), you're going to learn how to remotely connect to it.
