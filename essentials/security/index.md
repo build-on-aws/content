@@ -118,11 +118,11 @@ The next essential for cloud security is the protection of data. In AWS data is 
 
 ### Encrypting data at rest
 
-For encryption, AWS Key Management Service (KMS) allows you to create and control keys used to encrypt or digitally sign your data. There are a few options available to those who wish to encrypt their data on AWS. One such method is to use [Server-side encryption with Amazon S3-managed encryption keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html). Using this method the encryption happens after the data is sent to AWS using keys that are managed by AWS. 
+For encryption, AWS Key Management Service (KMS) allows you to create and control keys used to encrypt or digitally sign your data. There are a few options available to those who wish to encrypt their data on AWS. One such method is to use [Server-side encryption with Amazon S3-managed encryption keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html). Using this method the encryption happens after the data is sent to AWS using keys that are managed by AWS.
 
 The second option is to encrypt the data once it's in AWS, but rather than using keys that are created and managed by AWS, you can perform server-side encryption with customer master keys (CMKs) that are stored in AWS KMS ([SSE-KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-s3.html).
 
-The third option for storing encrypted data on AWS is to use Client-side encryption. With Client-side encryption the data is encrypted prior to being transferred to AWS. 
+The third option for storing encrypted data on AWS is to use Client-side encryption. With Client-side encryption the data is encrypted prior to being transferred to AWS.
 
 An example of how both client-side encryption and server-side encryption benefits customers can be seen in the image below.
 
@@ -130,7 +130,7 @@ An example of how both client-side encryption and server-side encryption benefit
 
 ### Virtual Private Networks (VPN)
 
-There are several technologies that fall within the definition of a VPN. The idea behind a VPN is that your Data in transit maintains its integrity and can be securely exchanged between two parties. AWS offers multiple technologies that help to keep your data-in-transit secure. One of those is known as AWS PrivateLink. An [AWS PrivateLink](https://www.youtube.com/watch?v=_mHLkFeTuFo) provides encrypted, private connectivity between VPCs, AWS services, and your on-premises networks. This is done without exposing your traffic to the public internet. This too could be considered a Virtual Private Network. 
+There are several technologies that fall within the definition of a VPN. The idea behind a VPN is that your Data in transit maintains its integrity and can be securely exchanged between two parties. AWS offers multiple technologies that help to keep your data-in-transit secure. One of those is known as AWS PrivateLink. An [AWS PrivateLink](https://www.youtube.com/watch?v=_mHLkFeTuFo) provides encrypted, private connectivity between VPCs, AWS services, and your on-premises networks. This is done without exposing your traffic to the public internet. This too could be considered a Virtual Private Network.
 
 However, in most cases, a discussion of VPN revolves around the use of data encryption. Depending on the circumstances, you may need to provide encryption between a client and your AWS cloud resources. This situation would require [Client VPN](https://aws.amazon.com/vpn/client-vpn/). On the other hand, you might be passing data between your data center or branch office and your AWS resources. You can accomplish this using IPSec tunnels between your on-premises resources and your our Amazon Virtual Private Clouds (VPC) or AWS Transit Gateway. This secure connectivity is known as [Site-to-Site VPN](https://aws.amazon.com/vpn/site-to-site-vpn/).
 
