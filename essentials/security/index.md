@@ -2,13 +2,18 @@
 layout: blog.11ty.js
 title: AWS Security Essentials
 description: An essential guide to securing your cloud environment on AWS.
-tags:
+tags: 
+    - security
+    - essentials
+    - aws
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2021-08-10
 ---
 
 ## Introduction
+
+Securing your account and cloud resources can be a daunting task.  Security practices must be constantly reassesed and adjusted as bad actors continue to evolve their techniques.  This guide will provide you with essential tasks that you can perform from day one of your cloud journey.  The following practices are considered essential to an organizations security posture but are by no means definitive nor are they a guarantee of assured protection.  These practices can be considred proper due diligence and should be applied where applicable.  For each of the following areas additional links are provided that dive deeper into each topic.
 
 ## What is cloud security?
 
@@ -18,7 +23,11 @@ What is cloud security?  Much like the traditional security you find in on-premi
 Security and Compliance is a shared responsibility between AWS and the customer. By following this shared model, customers can reduce the operational burden as AWS assumes responsability for operating, managing, and controlling the components "of the cloud."  This leaves customers to do what they do best, and implement their services assuming responsability of securing those services "in the cloud."
 Read more about the [Shared Responsibility Model](_https://aws.amazon.com/compliance/shared-responsibility-model/_) here.
 
+![shared-responsability-model](/images/srm.png)
+
 ## Get Started by Securing Your AWS Account.
+
+One of the most crucial things you can as you get stared with the AWS cloud is to secure your account?  Poor account security practices can cause consideratble damage to an organizations reputation leaving them open to theft of intellectual property, inadvertant exposure of customer data, and hefty financial consequences.  There are a few areas to secure.  These areas are:
 
 1. Secure the root user
 2. Assigning Security Contacts
@@ -29,7 +38,7 @@ Read more about the [Shared Responsibility Model](_https://aws.amazon.com/compli
 
 ### Root User
 
-When you create an AWS account you start with what is known as the root user.  This is the first AWS user that exists inside your AWS account.  AWS recommends that you do not use this account for day-to-day operations.  However, you should still follow [recommended practices](https://docs.aws.amazon.com/accounts/latest/reference/best-practices-root-user.html) to secure this account.  This involves locking away your root user access keys, using a strong password, and enabling AWS multi-factor authentication.  In addition to locking down the root user you will then want to [create an IAM user](https://aws.amazon.com/premiumsupport/knowledge-center/create-new-iam-user/) in your account.  This account can be assigned admin rights and should then be used for all administrative tasks.
+When you create an AWS account you start with what is known as the root user.  This is the first AWS user that exists inside your AWS account.  AWS recommends that you do not use this account for day-to-day operations.  However, you should still follow [recommended practices](https://docs.aws.amazon.com/accounts/latest/reference/best-practices-root-user.html) to secure this account.  This involves locking away your root user access keys, using a strong password, and enabling AWS multi-factor authentication.  In addition to locking down the root user you will then want to [create an IAM user](https://aws.amazon.com/premiumsupport/knowledge-center/create-new-iam-user/) in your account.  An IAM user is a resource in IAM that has associated credentials and permissions.  When you create an IAM user, it can be assigned admin rights and should then be used for all administrative tasks.  
 
 ### Security Contacts
 
@@ -56,6 +65,8 @@ Following these practices from the onset will help to provide secure access to y
 
 ## Securing the Infrastructure You Build
 
+The infrastructure you build is often overlooked as it's part of the underlying architecture and not something that's customer facing.  However, if the infrastructure fails the services you provide your customers fails. For this reason it's imperitave that the infrastructure is secured from day one.  In the followin section we will cover essential security practices for:
+
 1. VPC Security
 2. Security Groups
 3. Network Firewall
@@ -74,11 +85,9 @@ As you deploy resources into your VPC you can associate Security Groups with the
 To add an additional layer of infrastructure security you can deploy the AWS Network Firewall.  The AWS Network Firewall is a managed service that deploys protection for your Amazon VPC.  The AWS Network Firewall provides more fine-grained protection than Security Groups. This is done through the congfiguration of custom [Suricata Rules](https://suricata.readthedocs.io/en/suricata-6.0.0/rules/). For example, you can configure the [AWS Network Firewall to protect against Malware attacks](https://aws.amazon.com/blogs/security/how-to-deploy-aws-network-firewall-to-help-protect-your-network-from-malware/).  Taking this a step further you can deploy another managed service, AWS Shield Advanced to protect against DDoS threats.
 
 
-
-
-5. Secure Management Connectivity
-
 ## Securing the Resources You Create
+
+As you create resources in the AWS cloud you must consider how to secure them based on current best practices.  This is true if you deploy an EC2 instace, a database, serverless resources.  In this section we will provide some essential security steps to secure the resources you create.
 
 1. EC2
 2. Databases
@@ -110,7 +119,7 @@ Be sure to check the database specific [documentation](https://docs.aws.amazon.c
 
 For serverless security you should be familiar with AWS Lambda, Amazon API Gateway, Amazon DynamoDB, Amazon SQS, as well as Identity and Access Management.  With Serverless security, AWS takes a greater responsability as compared to the shared responsability model.  As a customer you would be responsible for the data, applications, and IAM, as well as data encryption and integrity authentication, and monitoring and logging.  You can see this in the image below.
 
-![](/security/images/srm-lambda.png)
+![serverless-responsability-model](/images/srm-lambda.png)
 
 While many techniques are similar regarding serverless security, they will vary slightly.  Even so, you must continue to use authentication and authorization mechanisms.  No doubt you will continue to provide [data encryption and integrity](https://docs.aws.amazon.com/lambda/latest/dg/security-dataprotection.html).  
 
@@ -118,9 +127,12 @@ While many techniques are similar regarding serverless security, they will vary 
 
 Your security strategy should also include [monitoring, logging, and configuration management](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/security-logging-monitoring.html).  And you will still need to provide DoS and Infrastructure Protection to some degree which can be done with AWS Sheild and AWS Sheild Advanced.
 
+> Todo: link to the config/secret management content from the DevOps topic collection, and the logging / monitoring / app metrics from observability topic collection
+
 
 ## Securing your data
 
+Customers store a great deal of data in the AWS cloud.  This data contains information that is critical to the operation of an organization.  It includes customer data, intellectual property, orders linked directly to revenue, and more.  In this section we will share essentials on how to configure data that is stored on AWS as well as data that is transferred over the network to and from AWS.
 
 1. S3
 2. KMS
@@ -132,29 +144,44 @@ The next essential for cloud security is the protection of data.  In AWS data is
 
 ### KMS
 
-For Encryption you can make use of [Server-side encryption with Amazon S3-managed encryption keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html), Server-side encryption with customer master keys (CMKs) stored in AWS KMS ([SSE-KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-s3.html)) or Client-side encryption. 
+There are a few options available to those who wish to encrypt their data on AWS.  One such method is to use [Server-side encryption with Amazon S3-managed encryption keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html).  Using this method the encryption happens after the data is sent to AWS using keys that are managed by AWS.  
 
-### VPN
+The second option is to encrypt the data once it's in AWS but rather than using keys that are created and managed by AWS, you can perform server-side encryption with customer master keys (CMKs) that are stored in AWS KMS ([SSE-KMS](https://docs.aws.amazon.com/kms/latest/developerguide/services-s3.html).
 
-When your data is not at rest you can use [Client or Site-tosite VPN](https://aws.amazon.com/vpn/) to protect the data in transit.
+The third option for storing encrypted data on AWS is to use  Client-side encryption. With Client-side encryption the data is encrypted prior to being transferred to AWS.  
+
+An example of how both client-side encryption and server-side encryption benefits customers can be seen in the image below.
+
+![Client-side encryption](/images/client-server-side-enc.png)
+
+
+
+### Virtual Private Networks (VPN)
+
+There are several technologies that fall within the definition of a VPN.  The idea behind a VPN is that your Data in transit maintains its integrity and can be securely exchanged between two parties.  AWS offers multiple technologies that help to keep your data-in-transit secure.  One of those is known as AWS PrivateLink.  An [AWS PrivateLink](https://www.youtube.com/watch?v=_mHLkFeTuFo) provides encrypted, private connectivity between VPCs, AWS services, and your on-premises networks.  This is done without exposing your traffic to the public internet. This too could be considered a Virtual Private Network.  
+
+However, in most cases, a discussion of VPN revolves around the use of data encryption.  Depending on the circumstances, you may need to provide encryption between a client and your AWS cloud resources. This situation would require [Client VPN](https://aws.amazon.com/vpn/client-vpn/).  On the other hand, you might be passing data between your data center or branch office and your AWS resources.  You can accomplish this using IPSec tunnels between your on-premises resources and your our Amazon Virtual Private Clouds (VPC) or AWS Transit Gateway.  This secure connectivity is known as [Site-to-Site VPN](https://aws.amazon.com/vpn/site-to-site-vpn/). 
+
+A final area to mention in regards to encrypting data-in-transit has to do with managing your cloud resources using the AWS Console.  While you would not normally refer to this connectivity as a VPN, it is worthy to note that your session to the AWS console uses TLS encryption.  Thus your configurations are kept confidential as you build your secure architecture.  TLS is also used with the AWS API.
 
 
 ## Monitoring your environment
 
-1. AWS CloudTrail
-2. Amazon CloudWatch
-3. VPC Flow Logs
-4. Amazon GuardDuty
+With each of the above aspects secured its essential that you monitor what's happening in your environment.  This will help to identify threats and offer the ability to proactively mitigate them.  In this sestion we wil discuss how to:
 
-### AWS VPC Flow Logs and Amazon CloudWatch
+1. Gain Visibility Into Traffic Flows
+2. Gain Visibility Into Account Activity
+3. Detect Threats
 
-After covering the essentials of cloud security in the above areas it's beneficial to close out our list of essentials by discussing how you can monitor your environment.  AWS offers several managed services to assist in this regard, along with self-service options.  For example, you can [use VPC Flow Logs to log and view network traffic flows](https://aws.amazon.com/blogs/aws/vpc-flow-logs-log-and-view-network-traffic-flows/), or you can make use of Amazon CloudWatch to [analyze AWS WAF Logs](https://aws.amazon.com/blogs/mt/analyzing-aws-waf-logs-in-amazon-cloudwatch-logs/) or even to [create alarms for EC2 instances](https://aws.amazon.com/blogs/mt/use-tags-to-create-and-maintain-amazon-cloudwatch-alarms-for-amazon-ec2-instances-part-1/).  
+### Visibility Into Traffic Flows
 
-### AWS CloudTrail
+After covering the essentials of cloud security in the above areas it's beneficial to close out our list of essentials by discussing how you can monitor your environment.  AWS offers several managed services to assist in this regard, along with self-service options.  For example, you can [use VPC Flow Logs to log and view network traffic flows](https://aws.amazon.com/blogs/aws/vpc-flow-logs-log-and-view-network-traffic-flows/), or you can make use of Amazon CloudWatch to [analyze AWS WAF Logs](https://aws.amazon.com/blogs/mt/analyzing-aws-waf-logs-in-amazon-cloudwatch-logs/) or even to [create alarms for EC2 instances](https://aws.amazon.com/blogs/mt/use-tags-to-create-and-maintain-amazon-cloudwatch-alarms-for-amazon-ec2-instances-part-1/).  You can learn more about AWS CloudWatch in [this Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/a8e9c6a6-0ba9-48a7-a90d-378a440ab8ba/en-US).
+
+### Visibility Into Account Activity
 
 Aditionally, [AWS CloudTrail](https://aws.amazon.com/cloudtrai) monitors and records account activity across your AWS infrastructure, giving you control over storage, analysis, and remediation actions. This is essential for creating an administrative audit trail, identifying security incidents, and for troubleshooting operational issues.
 
-### Amazon GuardDuty
+### Detecting Threats
 
 Finally, Amazon GuardDuty can be used to provide threat detection, and even to take it a step further by causing the published findings to initiate auto-remediation actions within your AWS Environment.
 
