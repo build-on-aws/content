@@ -126,7 +126,7 @@ The third option for storing encrypted data on AWS is to use Client-side encrypt
 
 An example of how both client-side encryption and server-side encryption benefits customers can be seen in the image below.
 
-![Client-side encryption](/images/client-server-side-enc.png)
+![Client-side encryption](images/client-server-side-enc.png)
 
 ### Virtual Private Networks (VPN)
 
