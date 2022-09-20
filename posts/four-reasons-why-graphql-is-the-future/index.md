@@ -1,5 +1,4 @@
 ---
-layout: blog.11ty.js
 title: Four Reasons Why GraphQL Is The Future
 description: The cracks of REST API design are starting to show in an age where everyone needs fast and cheap while being kind to the planet. GraphQL offers a new approach and here are four reasons why it is primed to become the norm not the exception.
 tags:

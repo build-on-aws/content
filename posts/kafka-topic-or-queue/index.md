@@ -1,5 +1,4 @@
 ---
-layout: blog.11ty.js
 title: Topic or a Queue - What exactly is Apache Kafka?
 description: Debunk a common misconception with Apache Kafka.
 tags:

@@ -1,5 +1,4 @@
 ---
-layout: blog.11ty.js
 title: What is Broken Access Control?
 description: Broken Access Control is one of the OWASP Top 10 vulnerabilities and this articles explains what that involves and ways to migitate it.
 tags:

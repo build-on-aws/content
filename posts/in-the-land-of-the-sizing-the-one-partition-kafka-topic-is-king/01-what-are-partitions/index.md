@@ -1,5 +1,4 @@
 ---
-layout: blog.11ty.js
 title: In the land of the sizing, the one-partition Kafka topic is king
 description: Understand what are partitions in Apache Kafka, and the impact they have on your workloads.
 tags:
