@@ -1,5 +1,5 @@
 ---
-layout: blog.11ty.js
+
 title: 
 description: 
 tags:
@@ -13,7 +13,6 @@ date: 2016-01-31
 **EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
 ## Front Matter Instructions
 
-- `layout: blog.11ty.js` - do not change this
 - `title` - the title of your post, in [Title Case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case) (all major words capitalized), less than 100 characters i.e. What Happens When You Type a URL Into Your Browser
 - `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters
 - `tags` - help readers discover posts on the same topics. Use `kebab-case`.

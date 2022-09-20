@@ -96,7 +96,6 @@ After your content proposal has been `accepted`, you'll write your content in [M
 Use the [template](https://github.com/build-on-aws/content/raw/main/CONTENT_TEMPLATE.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
 ```
 ---
-layout: blog.11ty.js
 title: What Happens When You Type a URL Into Your Browser
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 tags:

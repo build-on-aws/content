@@ -1,5 +1,4 @@
 ---
-layout: blog.11ty.js
 title: The Anatomy of Data Objects Through Lifecycle Management
 description: By learning some basic concepts, you can manage your data more effectively throughout the various stages of lifecycle management
 tags:
