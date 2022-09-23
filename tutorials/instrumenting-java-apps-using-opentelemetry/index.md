@@ -1,3 +1,19 @@
+---
+layout: blog.11ty.js
+title: Instrumenting Java Applications with OpenTelemetry
+description: Hands-on tutorial showing how to implement OpenTelemetry in a Java application.
+tags:
+    - OpenTelemetry
+    - Java
+    - Observability
+    - Grafana
+    - Prometheus
+    - aws
+authorGithubAlias: riferrei
+authorName: Ricardo Ferreira
+date: 2022-09-25
+---
+
 # Instrumenting Java Applications using OpenTelemetry
 
 ## Introduction
