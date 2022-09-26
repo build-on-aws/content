@@ -865,7 +865,7 @@ Open the AWS console. Configure the console to point to the region you have impl
 
 ![AWS Console](images/fig_14.png)
 
-Then, go the AWS X-Ray service by clicking [here](https://us-east-1.console.aws.amazon.com/xray/home?region=us-east-1#/traces?timeRange=PT15M). You should be able to see the generated traces if you click in the menu option `Traces`, right under `Service map`.
+Then, go the AWS X-Ray service by clicking [here](https://us-east-1.console.aws.amazon.com/xray/home?region=us-east-1#/traces?timeRange=PT15M). You should be able to see the generated traces if you click in the menu option `Traces`, right under `X-Ray Traces`.
 
 ![AWS X-Ray Traces](images/fig_15.png)
 
