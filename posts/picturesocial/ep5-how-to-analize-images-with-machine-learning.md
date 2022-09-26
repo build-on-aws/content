@@ -1,35 +1,30 @@
 ---
 layout: blog.11ty.js
 title: Picturesocial - How to analyze images with Machine Learning?
-description: Image recognition sounds like some high tech computer science topic, and it is. Fortunately Amazon Rekognition abstract the complexity of creating your own algorithms into a REST API. In this episode you are going to learn how to add image recognition on an API using Amazon Rekognition.
+description: Image recognition sounds like some high tech computer science topic, and it is. Fortunately, there are tools that abstract the complexity of creating your own algorithms into a REST API. In this post, you are going to learn how to add image recognition to your Picturesocial app with an API.
 tags:
-  - ai
-  - machine-learning
+  - ai-ml
   - dotnet
-  - picturesocial
 authorGithubAlias: jyapurv
 authorName: Jose Yapur
 date: 2022-07-11
 ---
-# Picturesocial - How to analyze images with Machine Learning?
 
-We started this journey with Containers, Registries, Kubernetes, Terraform and some other AWS services that enabled us to deploy our first API, but this journey is just starting. The Core of Picturesocial is the capability to add tags automatically based on the pictures uploaded to our social network platform, and this is what we are going to learn in this episode by using Artificial Intelligence services with Picture and Pattern recognition.
+We started this journey with containers, registries, Kubernetes, Terraform, and some other tools that enabled us to deploy our first API, but this journey is just starting. The core of Picturesocial is the capability to add tags automatically based on the pictures uploaded to our social network platform and this is what we are going to learn in this post by using artificial intelligence services with picture and pattern recognition.
 
-### What is Image Detection?
+## What is Image Detection?
 
 As humans, we are very good at recognizing things we have seen before. You can look at this picture and almost instantly recognize that it shows a cat lying on a laptop with some flowers in the background. If you know a little bit more about cats, maybe you can also tell that this is an adorable Persian cat.
-![ep5](/picturesocial/images/05-01.jpg "Picture of a cat laying over a laptop")
-Computers do not posses this innate ability to recognize different things in an image, but they can be trained to do so. [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a machine learning technique that can be used to allow computers to recognize objects in images with varying confidence levels. In order for it to work, deep learning requires us to train models with thousands of labeled images: cat photos labeled “cat”, dog photos labeled “dog”, and so on. This can take up a significant amount of data, time and compute resources, making it harder for us to train deep learning models on our own.
+![Picture of a cat laying over a laptop](images/05-01.jpg "Picture of a cat laying over a laptop")
+Computers do not possess this innate ability to recognize different things in an image, but they can be trained to do so. [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a machine learning technique that can be used to allow computers to recognize objects in images with varying confidence levels. In order for it to work, deep learning requires us to train models with thousands of labeled images: cat photos labeled “cat”, dog photos labeled “dog”, and so on. This can take up a significant amount of data, time and compute resources, making it harder for us to train deep learning models on our own.
 
 Luckily for us, we are able to add image detection capabilities to Picturesocial without having to create, train, or deploy our own machine learning models using simple, easy to use API’s.
 
-### What is Amazon Rekognition?
+## The Solution
 
-[Amazon Rekognition](https://aws.amazon.com/rekognition/faqs/) is an Artificial Intelligence service that can be used to make our applications capable of analyzing images with a simple API. It does not require any deep learning knowledge, we just need to call the Rekognition APIs to receive information about our pictures.
+On Picturesocial, we will use Amazon Rekognition to automatically tag the images uploaded by our users. This is an artificial intelligence service that requires no deep learning knowledge and will make our application capable of analyzing images with a simple API. To do this, we will use an Amazon Rekognition API called [`DetectLabels`](https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectLabels.html) that receives an image as input and outputs a list of labels. A label can be an object, scene, or concept. For example, the cat picture above could contain labels such as `Cat`, `Computer`, `Flower` (objects), `Office` (scene), and `Indoors` (concept).
 
-On Picturesocial, we will use Rekognition to automatically tag the images uploaded by our users. To do so, we will use a Rekognition API called [`DetectLabels`](https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectLabels.html) that receives an image as input and outputs a list of labels. A label can be object, scene, or concept. For example, the cat picture above could contain labels such as ‘Cat’, ‘Computer’, ‘Flower’ (objects), ‘Office’ (scene), and ‘Indoors’ (concept).
-
-First, we will send our image to Rekognition so it can identify different things on it. To do so, we will create a request specifying the S3 Bucket in which our image is stored and its file name. We also tell the service the maximum number of labels we want to retrieve and the minimum confidence level for each label. The confidence level means how certain Rekognition is about the label assigned to an image.
+First, we will send our image to Amazon Rekognition so it can identify different things on it. To do so, we will create a request specifying the Amazon S3 Bucket in which our image is stored and its file name. We also tell the service the maximum number of labels we want to retrieve and the minimum confidence level for each label. The confidence level means how certain Amazon Rekognition is about the label assigned to an image.
 
 **Sample Request**
 
@@ -47,7 +42,7 @@ First, we will send our image to Rekognition so it can identify different things
 ```
 
 
-Rekognition will analyze our image and return a response containing a list of labels and the level of confidence for each label. Labels for more common objects will also have a list of instances with the location where that object is located in the image.
+Amazon Rekognition will analyze our image and return a response containing a list of labels and the level of confidence for each label. Labels for more common objects will also have a list of instances with the location where that object is located in the image.
 
 **Sample Response**
 
@@ -88,48 +83,48 @@ Rekognition will analyze our image and return a response containing a list of la
 }
 ```
 
-The image below is an interpretation of these results. Rekognition was able to identify a laptop and a cat on this image within the bounded areas.
-![ep5](/picturesocial/images/05-02.jpg "Picture of a cat laying over a laptop with labels")
-On this episode, we are going to develop an API that will be in charge of detecting the relevant attributes, known as Labels, of pictures stored on a S3 Bucket using Amazon Rekognition. This API will be created using .NET 6.0 with the Web API Template, also, we are going to have a method that will receive two parameters: 1/ the name of the file and 2/ the name of the bucket, but we are going to implement the routing method just to receive the name of the file and set the bucket as default. So, let’s code!
+The image below is an interpretation of these results. Amazon Rekognition was able to identify a laptop and a cat on this image within the bounded areas.
+![Picture of a cat laying over a laptop with labels](images/05-02.jpg "Picture of a cat laying over a laptop with labels")
+In this post, we are going to develop an API that will be in charge of detecting the relevant attributes, known as labels, of pictures stored on an S3 Bucket using Amazon Rekognition. This API will be created using .NET 6.0 with the Web API Template. Also, we are going to have a method that will receive two parameters: 1) the name of the file and 2) the name of the bucket. But we are going to implement the routing method just to receive the name of the file and set the bucket as default. So, let’s code!
 
-### **Pre-requisites:**
+## Prerequisites
 
-* An AWS Account https://aws.amazon.com/free/
-* If you are using Linux of MacOS you can continue to the next bullet point, if you are using Microsoft Windows I suggest you to use WSL2 https://docs.microsoft.com/en-us/windows/wsl/install
-* Install Git https://github.com/git-guides/install-git
-* Install AWS CLI 2 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-* Install .NET 6 https://dotnet.microsoft.com/en-us/download
+* An [AWS Account](https://aws.amazon.com/free/).
+* If you are using Linux or macOS, you can continue to the next bullet point. If you are using Microsoft Windows, I suggest you to use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install).
+* Install [Git](https://github.com/git-guides/install-git).
+* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+* Install [.NET 6](https://dotnet.microsoft.com/en-us/download).
 
-OR
+Or
 
-* If this is your first time working with AWS CLI or you need a refresh on how to set up your credentials, I suggest you to follow this step-by-step of how to configure your local environment https://aws.amazon.com/es/getting-started/guides/setup-environment/ in this same link you can also follow steps to configure Cloud9, that will be very helpful if you don’t want to install everything from scratch.
+If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
 
-### Walkthrough
+## Walk-through
 
-* First we are going to create the Web API using the .NET CLI. The API name should be specified using the -n parameter, in our case “pictures”
+1. First we are going to create the web API using the .NET CLI. The API name should be specified using the -n parameter, in our case "pictures".
 
 ```
 dotnet new webapi -n pictures
 ```
 
-* Now we are going to open the newly created project using VS Code,  we are going to use the following command from the terminal. This’s the cool way but you can always just open the IDE and find the folder :D
+2. Now, we are going to open the newly created project using VS Code. We are going to use the following command from the terminal. This is the cool way but you can always just open the IDE and find the folder :D
 
 ```
 code pictures/
 ```
 
-* Now, if we look at the project structure, you are going to realize that a Default Controller called “WeatherForecastController.cs” is already in place, as well as a “WeatherForecast.cs”
+3. Now, if we look at the project structure, you are going to realize that a Default Controller called `WeatherForecastController.cs` is already in place, as well as a `WeatherForecast.cs`
 
-![ep5](/picturesocial/images/05-03.jpg "Picture of a API file structure")
+![Picture of an API file structure](images/05-03.jpg "Picture of an API file structure")
 
-* We are going to rename the controller file as “PictureController.cs” and we’ll delete the “WeatherForecast.cs” class.
-* Now let’s add the Nuggets that we are going to use for this project, in the same terminal that we use to create the Web API let’s position our folder cursor in “pictures”
+4. We are going to rename the controller file as `PictureController.cs` and we’ll delete the “WeatherForecast.cs” class.
+5. Now let’s add the Nuggets that we are going to use for this project. In the same terminal that we used to create the web API let's position our cursor in `pictures`
 
 ```
 cd pictures
 ```
 
-* And using .NET CLI we are going to add the following packages, inside the pictures directory.
+6. And using .NET CLI we are going to add the following packages, inside the pictures directory.
 
 ```
 dotnet add package AWSSDK.Rekognition
@@ -137,7 +132,7 @@ dotnet add package AWSSDK.SecurityToken
 dotnet add package AWSSDK.Core
 ```
 
-* Let’s create the Class for handle the lists of Labels from the Amazon Rekognition response, we are gonna name it Labels.cs
+7. Let’s create the Class for handling the lists of labels from the Amazon Rekognition response. We are gonna name it `Labels.cs`.
 
 ```
 namespace pictures
@@ -150,7 +145,7 @@ namespace pictures
 }
 ```
 
-* Now, we are going to open PictureController.cs and add the package reference on the Top. This way we can use the packages added in the project inside our API.
+8. Now, we are going to open `PictureController.cs` and add the package reference on the top. This way, we can use the packages added in the project inside our API.
 
 ```
 using Microsoft.AspNetCore.Mvc;
@@ -162,7 +157,7 @@ using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
 ```
 
-* We are going to create a route for our API Controller, so we can call the API with the following url format http://url/api/pictures/photo.jpg
+9. We are going to create a route for our API Controller, so we can call the API with the following url format `http://url/api/pictures/photo.jpg`.
 
 ```
 namespace pictures.Controllers;
@@ -170,7 +165,7 @@ namespace pictures.Controllers;
 [Route("api/[controller]")]
 ```
 
-* We have to change the Controller name to be identical as this:
+10. We have to change the Controller name to this:
 
 ```
 public class PictureController : ControllerBase
@@ -327,7 +322,7 @@ Hosting environment: Development
 
 * And let’s upload a picture into our S3 Bucket, for example in my case I uploaded 2.
 
-![ep5](/picturesocial/images/05-04.jpg "Picture of an S3 bucket console with files")
+![Picture of an S3 bucket console with files](images/05-04.jpg "Picture of an S3 bucket console with files")
 * I’m going to compose the URL request using one of my pictures as example and paste it in the browser
 
 ```
@@ -385,4 +380,4 @@ Hosting environment: Development
 [git clone https://github.com/aws-samples/picture-social-sample/](https://github.com/aws-samples/picture-social-sample.git) -b ep5
 ```
 
-If you get here that means that you are now using Artificial Intelligence services on AWS! The next episode we are going to learn about service integration and access at pod level using Kubernetes and IAM with Open ID Connect and we are going to deploy this API to Kubernetes! 
+If you get here that means that you are now using Artificial Intelligence services on AWS! In the next post we are going to learn about service integration and access at pod level using Kubernetes and IAM with Open ID Connect and we are going to deploy this API to Kubernetes! 
