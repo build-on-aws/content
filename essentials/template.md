@@ -1,5 +1,4 @@
 ---
-layout: blog.11ty.js
 title: <Title>
 description: <Description>
 tags:
