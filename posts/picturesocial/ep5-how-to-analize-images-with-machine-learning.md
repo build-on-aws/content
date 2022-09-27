@@ -1,10 +1,10 @@
 ---
-layout: blog.11ty.js
 title: Picturesocial - How to analyze images with Machine Learning?
 description: Image recognition sounds like some high tech computer science topic, and it is. Fortunately, there are tools that abstract the complexity of creating your own algorithms into a REST API. In this post, you are going to learn how to add image recognition to your Picturesocial app with an API.
 tags:
   - ai-ml
   - dotnet
+  - csharp
 authorGithubAlias: jyapurv
 authorName: Jose Yapur
 date: 2022-07-11
@@ -28,7 +28,7 @@ First, we will send our image to Amazon Rekognition so it can identify different
 
 **Sample Request**
 
-```
+```json
 {
     "Image": {
         "S3Object": {
@@ -46,7 +46,7 @@ Amazon Rekognition will analyze our image and return a response containing a lis
 
 **Sample Response**
 
-```
+```json
 {
     "Labels": [
         {
@@ -134,7 +134,7 @@ dotnet add package AWSSDK.Core
 
 7. Let’s create the Class for handling the lists of labels from the Amazon Rekognition response. We are gonna name it `Labels.cs`.
 
-```
+```csharp
 namespace pictures
 {
     public class Labels
@@ -147,7 +147,7 @@ namespace pictures
 
 8. Now, we are going to open `PictureController.cs` and add the package reference on the top. This way, we can use the packages added in the project inside our API.
 
-```
+```csharp
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -159,7 +159,7 @@ using Amazon.Rekognition.Model;
 
 9. We are going to create a route for our API Controller, so we can call the API with the following url format `http://url/api/pictures/photo.jpg`.
 
-```
+```csharp
 namespace pictures.Controllers;
 [ApiController]
 [Route("api/[controller]")]
@@ -167,29 +167,30 @@ namespace pictures.Controllers;
 
 10. We have to change the Controller name to this:
 
-```
+```csharp
 public class PictureController : ControllerBase
 ```
 
-* And also define the HTTP Method GET and the route. Also, we are going to create the Method “DetectLabels” that will receive 2 parameters: 1/ file name included extension as String and 2/ bucket name, set as default in the same method as String. We are using an async method as Rekognition will detect labels asynchronously and also we are returning the response as a JSON array of Labels.
-* At this point you should create an S3 bucket in the same region that you are using for Amazon Rekognition, in our case is gonna be us-east-1, and you are going to use the name as default in the method definition.
+11. Then we define the HTTP Method GET and the route. We are going to create the Method “DetectLabels” that will receive 2 parameters: 1) file name including the file extension as a `String` and 2) bucket name set as default in the same method, as a `String`. We are using an async method as Amazon Rekognition will detect labels asynchronously. We are also returning the response as a JSON array of Labels.
 
-```
+12. At this point, create an S3 bucket in the same region that you are using for Amazon Rekognition, in our case it is gonna be `us-east-1`, and you are going to use the bucket name as default in the method definition.
+
+```csharp
 [HttpGet("{photo}")]
 public async Task<IEnumerable<Labels>> DetectLabels(string photo, string? bucket = "REPLACE-WITH-YOUR-BUCKET-NAME")
 {
 ```
 
-* Now, we are gonna initialize the Amazon Rekognition Client and set the region for us-east-1 as well as initialize the List that will contain the objects of Labels that we are going to use as output.
+13. Now, we are going to initialize the `AmazonRekognitionClient` and set the region for `us-east-1`. We will initialize the `List` that will contain the objects of `Labels` that we are going to use as output.
 
-```
+```csharp
 var rekognitionClient = new AmazonRekognitionClient(Amazon.RegionEndpoint.USEast1);
 var responseList = new List<Labels>();
 ```
 
-* We are going to prepare the payload for Amazon Rekognition to detect the labels from images stored on a S3 Bucket, and I will specify that I only need a maximum of 10 Labels per response (MaxLabels) and only the ones that have more than 80% of confidence (MinConfidence)
+14. We are going to prepare the payload for Amazon Rekognition to detect the labels from images stored on an S3 Bucket. I will specify that I only need a maximum of 10 labels per response (`MaxLabels`) and only the ones that have more than 80% of confidence (`MinConfidence`).
 
-```
+```csharp
 DetectLabelsRequest detectlabelsRequest = new DetectLabelsRequest()
 {
     Image = new Image()
@@ -205,9 +206,9 @@ DetectLabelsRequest detectlabelsRequest = new DetectLabelsRequest()
 };
 ```
 
-* And finally, we are going to send the request asynchronously, and save just the Label name and probability inside our Labels List and finally return the list.
+15. We are going to send the request asynchronously and save just the Label name and probability inside our Labels List. Then we'll return the list.
 
-```
+```csharp
 var detectLabelsResponse = await rekognitionClient.DetectLabelsAsync(detectlabelsRequest);
 foreach (Label label in detectLabelsResponse.Labels)
     responseList.Add(new Labels{
@@ -217,9 +218,9 @@ foreach (Label label in detectLabelsResponse.Labels)
 return responseList;
 ```
 
-* The final PicturesController.cs should look like this:
+The final `PicturesController.cs` file should look like this:
 
-```
+```csharp
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -265,9 +266,9 @@ public class PictureController : ControllerBase
 }
 ```
 
-* Now we are going to edit the launchSettings.json inside the Properties folder and replace it by the following example. Here we are saying that we are going to use the port 5075 for HTTP only.
+16. Now, we are going to edit the `launchSettings.json` file inside the `Properties` folder and replace it with the following example. Here, we are saying that we are going to use the port 5075 for HTTP only.
 
-```
+```json
 {
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
@@ -301,13 +302,13 @@ public class PictureController : ControllerBase
 }
 ```
 
-* We are gonna save everything and test it by running the following command in the Terminal:
+17. We are going to save everything and test it by running the following command in the Terminal:
 
 ```
 dotnet run
 ```
 
-* You should get something similar to this output, just clic or copy the URL.
+You should get something similar to this output:
 
 ```
 info: Microsoft.Hosting.Lifetime[0]
@@ -320,18 +321,21 @@ info: Microsoft.Hosting.Lifetime[0]
 Hosting environment: Development
 ```
 
-* And let’s upload a picture into our S3 Bucket, for example in my case I uploaded 2.
+Note the URL the app is listening on above: http://localhost:5075. We'll use that in the next step.
 
-![Picture of an S3 bucket console with files](images/05-04.jpg "Picture of an S3 bucket console with files")
-* I’m going to compose the URL request using one of my pictures as example and paste it in the browser
+18 Let’s upload a picture into our S3 bucket. For example, in my case I uploaded two pictures.
+
+![Image of an S3 bucket console with two image files](images/05-04.jpg "Image of an S3 bucket console with two image files")
+
+19. Let's compose the URL request using one of my pictures as example and paste it in the browser.
 
 ```
 [http://localhost:5075/api/pictures/1634160049537.jpg](http://localhost:5075/api/pictures/wendy.jpg)
 ```
 
-* The result should look similar to this:
+The result will be similar to this:
 
-```
+```json
 {
 "name": "Furniture",
 "probability": 99.809166
@@ -374,10 +378,10 @@ Hosting environment: Development
 }
 ```
 
-* And we have our hashtags ready for Picturesocial! If you wanna clone the whole API Project you can do it with the following command:
+Now, we have our hashtags ready for Picturesocial! If you want to clone the API Project, you can do it with the following command:
 
 ```
 [git clone https://github.com/aws-samples/picture-social-sample/](https://github.com/aws-samples/picture-social-sample.git) -b ep5
 ```
 
-If you get here that means that you are now using Artificial Intelligence services on AWS! In the next post we are going to learn about service integration and access at pod level using Kubernetes and IAM with Open ID Connect and we are going to deploy this API to Kubernetes! 
+If you got here, that means you are now using artificial intelligence services to label images! In the next post, we are going to learn about service integration, access at the pod level using Kubernetes, AWS IAM with Open ID Connect, and then we will deploy this API to Kubernetes!
