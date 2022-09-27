@@ -12,11 +12,11 @@ authorName: Abhishek Gupta
 date: 2022-07-14
 ---
 
-[Apache Kafka](https://kafka.apache.org/documentation/) serves as a key component in data architectures. It has a rich ecosystem for building scalable data intensive services including data pipelines, etc.
+[Apache Kafka](https://kafka.apache.org/documentation/) serves as a key component in data architectures. It has a rich ecosystem for building scalable data-intensive services including data pipelines, etc.
 
-- With Kafka client ([Producer](https://kafka.apache.org/documentation/#producerapi) and [Consumer](https://kafka.apache.org/documentation/#consumerapi)) APIs, you can choose from a variety of [programming languages](https://cwiki.apache.org/confluence/display/kafka/clients) to produce and consume data from Kafka topics.
-- You can integrate heterogenous data systems using [Kafka Connect](https://kafka.apache.org/documentation/#connect) with it's extensive suite of pre-built connectors and a framework that allows you to build custom integrations if you wish to.
-- You can use [Kafka Streams](https://kafka.apache.org/documentation/streams/) (Java library) for developing streaming applications to process data flowing through Kafka topics.
+- Kafka ([Producer](https://kafka.apache.org/documentation/#producerapi) and [Consumer](https://kafka.apache.org/documentation/#consumerapi)) client APIs allow you to choose from a variety of [programming languages](https://cwiki.apache.org/confluence/display/kafka/clients) to produce and consume data from Kafka topics.
+- You can integrate heterogenous data systems using [Kafka Connect](https://kafka.apache.org/documentation/#connect) which has an extensive suite of pre-built connectors and a framework that allows you to build custom integrations.
+- You can use [Kafka Streams](https://kafka.apache.org/documentation/streams/) (Java library) to develop streaming applications to process data flowing through Kafka topics.
 
 Common requirements in data processing include filtering data, transforming it from one form to another, applying an action to each data record etc. These are often categorized as **stateless** operations. Kafka Streams is an ideal candidate if you want to apply stateless transformations on streaming data in Kafka. The [KStream](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html) abstraction (part of Kafka Streams DSL API) offers functions such as `filter`, `map`, `groupBy` etc. 
 
@@ -56,7 +56,7 @@ Let's dive into the specifics of the Kafka Streams APIs which implement these st
 
 It is available in multiple flavors - `map`, `mapValues`, `flatMap`, `flatMapValues`
 
-For e.g., to convert key *and* value to uppercase, use the `map` method as such:
+For example, to convert key *and* value to uppercase, use the `map` method:
 
 ```java
 stream.map(new KeyValueMapper<String, String, KeyValue<String, String>>() {
@@ -246,7 +246,7 @@ KStream<String, String> stream2 = builder.stream(OUTPUT_TOPIC);
 stream2.filter((k,v) -> v.length > 5).to(LENGTHY_WORDS_TOPIC);
 ```
 
-Since `to` is terminal operation, a new `KStream` (`stream2`) had to created. The [through](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#through(java.lang.String)) method can help simplify this. You can rewrite the above using a single chain of calls:
+Since `to` is terminal operation, a new `KStream` (`stream2`) had to be created. The [through](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#through(java.lang.String)) method can help simplify this. You can rewrite the above using a single chain of calls:
 
 ```java
 StreamsBuilder builder = new StreamsBuilder();
@@ -260,7 +260,7 @@ stream.mapValues(v -> v.toUpperCase())
 
 **merge**
 
-Say you have streaming data coming into two different Kafka topics each of which is represented by a `KStream`. You can [merge](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#merge(org.apache.kafka.streams.kstream.KStream)) the contents of these `KStream`s into a single one, if you so wish to.
+Say you have streaming data coming into two different Kafka topics, each of which is represented by a `KStream`. You can [merge](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#merge(org.apache.kafka.streams.kstream.KStream)) the contents of these `KStream`s into a single stream.
 
 ```java
 StreamsBuilder builder = new StreamsBuilder(); 
@@ -275,7 +275,7 @@ stream1.merge(stream2).to("output-topic");
 
 **selectKey**
 
-[selectKey](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#selectKey(org.apache.kafka.streams.kstream.KeyValueMapper)) allows you to derive a new key (it can have a different data type as well) with the help of a `KeyValueMapper`.
+With the help of a `KeyValueMapper`, [selectKey](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#selectKey(org.apache.kafka.streams.kstream.KeyValueMapper)) allows you to derive a new key with a different data type.
 
 ```java
 StreamsBuilder builder = new StreamsBuilder();
@@ -297,4 +297,4 @@ stream.selectKey(new KeyValueMapper<Integer, String, String>() {
 
 This blog post summarized most of the key stateless operations available in Kafka Streams along with code examples. You can combine them to build powerful streaming applications with the flexibility to adopt a functional programming style (using [Java Lambda Expressions](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html)) or a more traditional, explicit way of defining your data processing logic.
 
-Happy Build-ing!
+Happy Building!
