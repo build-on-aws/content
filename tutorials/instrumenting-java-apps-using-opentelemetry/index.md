@@ -11,11 +11,50 @@ tags:
     - aws
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
-date: 2022-09-25
+date: 2022-10-05
 ---
 
-# Instrumenting Java Applications using OpenTelemetry
+# Overview
 
+In this tutorial, you will learn how to instrument an existing microservice written in Java and SpringBoot to produce telemetry data using OpenTelemetry. You will learn the differences between instrumenting the microservice using an automatic approach, where everything is automatically discovered for you, and the manual approach, where you make the code observable with instrumentation that you provide using the OpenTelemetry SDK. You will also learn how to send this telemetry data to a compatible backend using the OpenTelemetry collector, and eventually switch to another compatible backend without any modifications in the microservice code.
+
+## What you will learn
+
+- How to use the OpenTelemetry Java agent with a microservice
+- How to configure and implement the OpenTelemetry collector
+- Differences between black-box and white-box instrumentation
+- How to write your own telemetry data with the OpenTelemetry SDK
+- How to send generated traces to Grafana Tempo and AWS X-Ray
+- How to send generated metrics to Prometheus and Amazon CloudWatch
+- How to switch between observability backends without code changes
+
+## Sidebar
+<!-- Update with the appropriate values -->
+| Info                | Level                                  |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | Beginner                               |
+| ⏱ Time to complete  | 45 minutes                                 |
+| 💰 Cost to complete | Free when using the AWS Free Tier |
+
+## Prerequisites
+
+Before starting this tutorial, you will need the following:
+
+ - [Docker](https://www.docker.com/get-started) 4.11+ (Required)
+ - [Java](https://openjdk.org/install) 17+ (Required)
+ - [Maven](https://maven.apache.org/download.cgi) 3.8.6+ (Required)
+ - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (Optional. Only required for the bonus section.)
+
+ ## Sections
+ - [Introduction](#introduction)
+ - [Getting started with the existing code](#getting-started-with-the-existing-code)
+ - [Automatic instrumentation with the OpenTelemetry agent](#automatic-instrumentation-with-the-opentelemetry-agent)
+ - [Sending telemetry data to the collector](#sending-telemetry-data-to-the-collector)
+ - [Manual instrumentation with the OpenTelemetry SDK](#manual-instrumentation-with-the-opentelemetry-sdk)
+ - [Custom metrics with the OpenTelemetry SDK](#custom-metrics-with-the-opentelemetry-sdk)
+ - [Sending all the metrics to Prometheus](#sending-all-the-metrics-to-prometheus)
+ - [Bonus: switching the observability backend to AWS](#bonus-switching-the-observability-backend-to-aws)
+ 
 ## Introduction
 
 [OpenTelemetry](https://opentelemetry.io/) is one of those technologies that you know you must learn and start using as soon as possible, but every time you get to work with you find it more complicated than it should. If this is you, don't worry. You're not alone. Many other people also complain about OpenTelemetry being complicated. However, it is important for you to understand that some of this complexity is incidental because OpenTelemetry is not a ready-to-use library. It is a [framework](https://opentelemetry.io/docs/concepts/components).
@@ -23,12 +62,6 @@ date: 2022-09-25
 If you implemented observability before, you probably did so by leveraging technologies like agents and libraries that did the job of offloading from your hands much of the work related to collect, process, and transmit telemetry data to observability backends. But this simplicity had a price: you end up locked to that ‌observability backend. OpenTelemetry was created with the main purpose of providing a neutral and extensible way for developers to instrument their applications so telemetry data could be collected, processed, and transmitted to compatible observability backends. With OpenTelemetry, you trade the benefit of vendor portability for a little less encapsulation in how observability must be implemented. Therefore, you are exposed to the moving parts that comprise the implementation.
 
 The good news is that once you understand these moving parts, OpenTelemetry becomes less complicated. It is just a matter of knowing what these moving parts are, how to implement them, and how to integrate them with your observability backend. And you know what? This is exactly what this tutorial is about. I will work with you, step by step, to create an end to end scenario using OpenTelemetry that will even allow for a migration of observability backend. Let's get to it.
-
-## Requirements
-
-* [Docker](https://www.docker.com/get-started) 4.11+
-* [Java](https://openjdk.org/install) 17+
-* [Maven](https://maven.apache.org/download.cgi) 3.8.6+
 
 ## Getting started with the existing code
 
