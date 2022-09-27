@@ -1,5 +1,5 @@
 ---
-title: Go net/http package: A quick tour of the server side APIs
+title: 'Go net/http package: A quick tour of the server side APIs'
 description: Learn how to use the Go net/http library to build your web apps and services
 tags:
   - go
