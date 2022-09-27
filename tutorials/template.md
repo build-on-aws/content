@@ -8,7 +8,7 @@ tags:
     - aws
 authorGithubAlias: <github alias>
 authorName: <Name Surname>
-date: <sample publish date in YYYY-MM-DD format>
+date: <expected publish date in YYYY-MM-DD format>
 ---
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
@@ -37,6 +37,10 @@ Before starting this tutorial, you will need the following:
 
  - An AWS Account (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)).
  - <!-- any other pre-requisites you will need -->
+
+## Sections
+ - [Title of Section 1](#title-of-section-1) <!-- Uses the name of the section with dashes -->
+ - [Title of Section 2](#title-of-section-2) <!-- Uses the name of the section with dashes -->
 
 ---
 
