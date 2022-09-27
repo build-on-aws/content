@@ -1,15 +1,14 @@
 ---
-layout: blog.11ty.js
 title: Data processing with Kafka Streams - An overview of stateless operations
 description: Learn stateless operations in Kafka Streams with practical examples.
 tags:
-  - kafka
+  - apache-kafka
   - data
   - stream-processing
   - java
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: 2022-07-14
+date: 2022-09-27
 ---
 
 [Apache Kafka](https://kafka.apache.org/documentation/) serves as a key component in data architectures. It has a rich ecosystem for building scalable data-intensive services including data pipelines, etc.
@@ -67,7 +66,7 @@ stream.map(new KeyValueMapper<String, String, KeyValue<String, String>>() {
     });
 ```
 
-If all you need to alter is the value, use [mapValues](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#mapValues(org.apache.kafka.streams.kstream.ValueMapper)) :
+If you only need to alter the value, use [mapValues](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#mapValues(org.apache.kafka.streams.kstream.ValueMapper)) :
 
 ```java
 stream.mapValues(value -> value.toUpperCase());
@@ -90,7 +89,7 @@ stream.flatMap(new KeyValueMapper<String, String, Iterable<? extends KeyValue<? 
     })
 ```
 
-Each record in the stream gets `flatMap`ped such that each CSV (comma separated) value is first split into its constituents and a [KeyValue](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/KeyValue.html) pair is created for each part of the CSV string.
+Each record in the stream gets `flatMap`ped such that each CSV (comma-separated) value is first split into its constituents, and a [KeyValue](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/KeyValue.html) pair is created for each part of the CSV string.
 
 There is also [flatMapValues](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#flatMapValues(org.apache.kafka.streams.kstream.ValueMapper)) in case you only want to accept a value from the stream and return a collection of values.
 
@@ -117,7 +116,7 @@ stream.filterNot((key,value) -> value.startsWith("foo"));
 
 ### Use `group`ing to prepare data for stateful operations
 
-Grouping is often a pre-requisite to [stateful aggregations](https://kafka.apache.org/32/documentation/streams/core-concepts#streams_state) in Kafka Streams. To group records by their key, you can make sure of [groupByKey](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#groupByKey()) as such:
+Grouping is often a prerequisite to [stateful aggregations](https://kafka.apache.org/32/documentation/streams/core-concepts#streams_state) in Kafka Streams. To group records by their key, you can use [groupByKey](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#groupByKey()) as such:
 
 ```java
 StreamsBuilder builder = new StreamsBuilder();
@@ -179,7 +178,7 @@ stream.mapValues(value -> value.toUpperCase())
     });
 ```
 
-In this example, we make use of the `RecordContext` (contains record metadata) to get the name of the source topic.
+In this example, we make use of `RecordContext` (contains record metadata) to get the name of the source topic.
 
 > In all the above cases, the sink/target topic should pre-exist in Kafka
 
@@ -193,7 +192,7 @@ KStream<String, String> stream = builder.stream(INPUT_TOPIC);
 stream.mapValues(v -> v.toUpperCase()).print(Printed.toSysOut());
 ```
 
-This will print out the records e.g. if you pass in `(foo, bar)` and `(john,doe)` to the input topic, they will get converted to uppercase and logged as such:
+This will print out the records e.g. if you pass in `(foo, bar)` and `(john, doe)` to the input topic, they will get converted to uppercase and logged as such:
 
 ```
 [KSTREAM-MAPVALUES-0000000001]: foo, BAR
@@ -204,17 +203,17 @@ This will print out the records e.g. if you pass in `(foo, bar)` and `(john,doe)
 
 **Do something for every record**
 
-[foreach](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#foreach(org.apache.kafka.streams.kstream.ForeachAction)) is yet another terminal operation, but accepts a [ForeachAction](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/ForeachAction.html) using which you can specify *what* you want to do with each record in the the `KStream`.
+[foreach](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#foreach(org.apache.kafka.streams.kstream.ForeachAction)) is yet another terminal operation, but accepts a [ForeachAction](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/ForeachAction.html) so you can specify *what* you want to do with each record in the the `KStream`.
 
 ### Miscellaneous features
 
-Here are some other useful operations offered by the Kafka Streams API.
+Here are some other useful operations offered by the Kafka Streams API:
 
 **peek**
 
 Since `print` is a terminal operation, you no longer have access to the original `KStream`. This where [peek](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#peek(org.apache.kafka.streams.kstream.ForeachAction)) comes in handy because it returns the same `KStream` instance. Just like `foreach`, it accepts a `ForeachAction` which can use to specify what you *want* to do for each record.
 
-Here is an example of the flexibility that peek offers - not only can you log each key-value pair, but you can also materialized them to an output topic (unlike the `print` operation) using the same chain of method calls:
+The flexibility that peek means that not only can you log each key-value pair, but you can also materialize them to an output topic (unlike the `print` operation) using the same chain of method calls:
 
 
 ```java
