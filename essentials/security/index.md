@@ -153,4 +153,3 @@ Additionally, [AWS CloudTrail](https://aws.amazon.com/cloudtrai) monitors and re
 Finally, Amazon GuardDuty can be used to provide threat detection, and even to take it a step further by causing the published findings to initiate auto-remediation actions within your AWS Environment.
 
 By addressing each of these operational areas you will be well on your way to providing essential security features to your cloud environment.
-
