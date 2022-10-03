@@ -12,8 +12,6 @@ date: <expected publish date in YYYY-MM-DD format>
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 
-# Overview
-
 A short description of what the use-case is / what this tutorial helps you solve. Limited to 100 words.
 
 ## What you will learn
