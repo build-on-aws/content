@@ -12,8 +12,6 @@ date: <expected publish date in YYYY-MM-DD format>
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 
-# Introduction
-
 An introduction to what choice we are helping someone make, limited to 100 words.
 
 <!-- Each branch of the decision tree has 2+ options to it, and we show that here by splitting it into branch and option sections -->
