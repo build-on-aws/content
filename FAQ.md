@@ -43,12 +43,30 @@ You can see an example of this in the repo [here](/posts/owasp-top-10-defined).
 
 ### How do I link to other posts in my series or other posts on the BuildOn.AWS site?
 
-You can reference them using absolute paths like this:
+You can reference them using absolute paths like this, but **omit the `.md`** as we turn the markdown into an HTML document:
 
 - `[What is a cryptographic failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)`
 - `[A cool tutorial](/tutorials/a-cool-tutorial/)`
 
 _Note: Please do not hard code the full URL in the post_
+
+### How do I show images in my post?
+
+Store your images (jpg, png, webp, svg, gif) in an `images` subdirectory of your post.
+
+```
+posts
+├── what-happens-when-you-type-a-url-in-your-browser
+│   ├── index.md
+│   ├── images
+│   │   ├── the-internet.jpg
+```
+
+_Note: Do not share images across posts or even posts in a series._
+
+To show images in your post, you'll link to them using a relative path:
+
+`![Put your alt-text here](images/the-internet.jpg) "Put your image title/caption here"`
 
 ### I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?
 
