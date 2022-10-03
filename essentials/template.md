@@ -12,8 +12,6 @@ date: <expected publish date in YYYY-MM-DD format>
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 
-# Overview
-
 Introduction paragraph to the topic.
 
 ## Section 1
