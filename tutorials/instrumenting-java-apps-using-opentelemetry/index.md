@@ -1,7 +1,6 @@
 ---
-layout: blog.11ty.js
-title: Instrumenting Java Applications with OpenTelemetry
-description: Hands-on tutorial showing how to implement OpenTelemetry in a Java application.
+title: "Instrumenting Java Applications with OpenTelemetry"
+description: "Hands-on tutorial showing how to implement OpenTelemetry in a Java application."
 tags:
     - OpenTelemetry
     - Java
@@ -13,8 +12,6 @@ authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2022-10-05
 ---
-
-# Overview
 
 In this tutorial, you will learn how to instrument an existing microservice written in Java and SpringBoot to produce telemetry data using OpenTelemetry. You will learn the differences between instrumenting the microservice using an automatic approach, where everything is automatically discovered for you, and the manual approach, where you make the code observable with instrumentation that you provide using the OpenTelemetry SDK. You will also learn how to send this telemetry data to a compatible backend using the OpenTelemetry collector, and eventually switch to another compatible backend without any modifications in the microservice code.
 
