@@ -1,5 +1,15 @@
-
-# Billing and Cost Optimization Essentials
+---
+title: "Billing and Cost Optimizations Essentials"
+description: "An essential guide to billing and cost optimizations in the cloud."
+tags:
+    - cost-optimization
+    - billing
+    - essentials
+    - aws
+authorGithubAlias: cobusbernard-amazon
+authorName: Cobus Bernard
+date: 2021-10-05
+---
 
 When using the cloud to host your applications and systems, it is important to understand how the billing model works, and how you can optimize your costs. The cloud allows you to trade fixed expenses (such as data centers and physical servers) for variable expenses, and only pay for the resources as you consume them. There are a number of different billing dimensions, depending on the type of resource you use. These can range from the amount of time a resource is running; how much data is stored, transferred, or processed; or the number of API invocations made.
 
