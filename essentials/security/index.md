@@ -17,7 +17,7 @@ Securing your account and cloud resources can be a daunting task. Security pract
 
 ### What is Cloud Security?
 
-What is cloud security? Much like the traditional security you find in on-premises networks, cloud security involves the practice of building secure, high-performing, resilient, and efficient infrastructure for your applications. Cloud security involves the implementation of controls designed to prevent attack as well as controls to detect, respond, and remediate should the need be. Cloud Security can involve a mix of Network and Infrastructure security, Host and Endpoint Security, Data Protection and Encryption, Identity Management, Application Security, and Logging, Monitoring and Threat Detection. Cloud Security is not a single thing, but rather a practice that makes use of tools and techniques to protect an organizations data, resources, and processes.
+What is cloud security? Much like the traditional security you find in on-premises networks, cloud security involves the practice of building secure, high-performing, resilient, and efficient infrastructure for your applications. Cloud security involves the implementation of controls designed to prevent unathorized access as well as controls to detect, respond, and remediate should the need be. Cloud Security can involve a mix of Network and Infrastructure security, Host and Endpoint Security, Data Protection and Encryption, Identity Management, Application Security, and Logging, Monitoring and Threat Detection. Cloud Security is not a single thing, but rather a practice that makes use of tools and techniques to protect an organizations data, resources, and processes.
 
 ## What is the Shared Responsibility Model?
 
@@ -36,7 +36,7 @@ When you create an AWS account you start with what is known as the root user. Th
 
 ### Security Contacts
 
-Next, you should assign alternate security contacts to your account. The alternate security contact will receive security-related notifications, including notifications from the AWS Abuse Team. You can learn more about the importance of setting this contact information early in your account setup in the blog post:[Update the alternate security contact across your AWS accounts for timely security notifications](https://aws.amazon.com/blogs/security/update-the-alternate-security-contact-across-your-aws-accounts-for-timely-security-notifications/).
+Next, you should assign alternate security contacts to your account. The alternate security contact will receive security-related notifications, including notifications from the AWS Trust & Safety team. You can learn more about the importance of setting this contact information early in your account setup in the blog post:[Update the alternate security contact across your AWS accounts for timely security notifications](https://aws.amazon.com/blogs/security/update-the-alternate-security-contact-across-your-aws-accounts-for-timely-security-notifications/).
 
 ### Region Control
 
@@ -48,7 +48,7 @@ At this point, you have secured the root user, created an one or more IAM users,
 
 ### IAM Groups
 
-The next step in securing your account is to setup [AWS IAM user groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html) to control access. Rather than control individual users' access by setting policies directly on the user, it is best to create a group, assign the required permissions to it, and then assign users to the group. They will inherit the permissions of that group. This offers a more scalable way of providing access control to many users.
+The next step in securing your account is to setup [AWS IAM user groups](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html) to control access. Rather than control individual users' access by setting policies directly on the user, it is best to create a group, assign the required permissions to it, and then assign users to the group. They will inherit the permissions of that group. This offers a more scalable way of providing access control to many users. IAM and IAM groups are important to understand because they span across multiple services.  IAM is one service that interacts to some degree with all AWS services so be sure to spend time getting familiar with IAM.
 
 Following these practices from the onset will help to provide secure access to your AWS resources. Next we will discuss how to secure the infrastructure you build on AWS.
 
@@ -62,7 +62,9 @@ As you build out your cloud infrastructure you'll begin by creating an [Amazon V
 
 ### Security Groups
 
-As you deploy resources into your VPC you can associate [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) with them. A Security Group controls the traffic that is allowed to reach and leave the resources that it is associated with. They are similar to a firewall, but instead of using just a list or range of IP addresses, it can use the resource reference to keep an updated list of IP addresses based on the ones assigned to each resource in the group. As an example, if you create an autoscaling group to spin up Amazon EC2 instances, each instance is assigned a new IP when it starts up. By adding a security group to these instances, you can grant access to your database server's security group via the EC2 instances' security group ID, and any new EC2 instance launched with have access to the database without needing to add its IP address to the allowed list. Security Group rules are similar to Network ACLs as when creating them, you match on port, protocol, and addresses, but the are stateful - you can think of them much in the same way as a Stateful Firewall. When you create an entry to allow a specific type of traffic, you do not need to create a rule to match the return traffic, being stateful, the return traffic will be allowed. To better understand how Security Groups and ACLs interact, [this comparison is useful](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Security.html#VPC_Security_Comparison).
+As you deploy EC2 resources into your VPC you will associate a [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) with them. A Security Group controls the traffic that is allowed to reach and leave the EC2 resources. Security Groups are similar to a firewall, but instead of using just a list or range of IP addresses, they can point to something called a resource reference. A resource reference is a named group that maintains an updated list of IP addresses assigned to each resource in the group. As an example, if you create an autoscaling group to spin up Amazon EC2 instances, each instance is assigned a new IP when it starts up. By adding a security group to these instances, you can grant access to your database server's security group via the EC2 instances' security group ID, and any new EC2 instance launched with have access to the database without needing to add its IP address to the allowed list. 
+
+Security Group rules are similar to Network ACLs as when creating them, you match on port, protocol, and addresses, but the are stateful - you can think of them much in the same way as a Stateful Firewall. When you create an entry to allow a specific type of traffic, you do not need to create a rule to match the return traffic, being stateful, the return traffic will be allowed. To better understand how Security Groups and ACLs interact, [this comparison is useful](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Security.html#VPC_Security_Comparison).
 
 ### AWS Network Firewall and DDoS Protection
 
@@ -76,7 +78,7 @@ As you create resources in the AWS cloud you must consider how to secure them ba
 
 As you create resources in AWS, you should take care to follow recommended security best practices for the type of resource you are working with. For EC2 instances security begins by [controlling network access](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/infrastructure-security.html#control-network-traffic) to your instances, for example, through configuring your VPC and security groups - see the [Amazon VPC Security](#amazon-vpc-security) section.
 
-Another aspect of instance security is that of managing the credentials used to connect to your instances. This starts with the IAM user permissions you assign, but extends to the group assigned. This provides a level of security for the user working with the EC2 instance, but not for the instance itself. You should also configure [IAM roles](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) that are attached to the instance and permissions associated with those roles. To access an EC2 instance, instead of opening up the port for [SSH](https://en.wikipedia.org/wiki/Secure_Shell), or setting up a [bastion / jump host](https://aws.amazon.com/blogs/mt/replacing-a-bastion-host-with-amazon-ec2-systems-manager/), you should use [EC2 Instance connect](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-methods.html).
+Another aspect of instance security is that of managing the credentials used to connect to your instances. This starts with the IAM user permissions you assign, but extends to the group assigned. This provides a level of security for the user working with the EC2 instance, but not for the instance itself. You should also configure [IAM roles](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html) that are attached to the instance and permissions associated with those roles. To access an EC2 instance, instead of opening up the port for [SSH](https://en.wikipedia.org/wiki/Secure_Shell), or setting up a [jump server](https://aws.amazon.com/blogs/mt/replacing-a-bastion-host-with-amazon-ec2-systems-manager/), you should use [EC2 Instance connect](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-methods.html).
 
 You should ensure that the guest operating system and software deployed to the it is [up-to-date with any operating system updates and security patches](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/update-management.html). You can find more details on [Security in Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security.html)
 
@@ -88,6 +90,11 @@ Securing your database is an import aspect of your security approach. As mention
 
 To access a database, some form of authentication is required. This can take the form of a username and password, which should be [rotated on a regular basis](https://aws.amazon.com/blogs/security/rotate-amazon-rds-database-credentials-automatically-with-aws-secrets-manager/). You can alternatively make use of [Amazon RDS Proxy](https://aws.amazon.com/rds/proxy/) to leverage IAM roles to manage access to the database for you. Some of the database services, like [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), make use of [IAM roles](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/authentication-and-access-control.html) to provide access, so you do not need to manage any credentials yourself.
 
+### Console-based SSH Access
+
+SSH is one of the most common methods of managing your EC2 instances and AMAzon EC2 Instance Connect allows you to use SSH to connect to your EC2 instances using one-tiome SSH keys directly in the AWS Console.  The following articles provides a walkthrough of how to [enable EC2 Instance Connect](https://aws.amazon.com/blogs/security/use-ec2-instance-connect-to-provide-secure-ssh-access-to-ec2-instances-with-private-ip-addresses/) and explains the typical use case.  You can also generate SSH keys when you create your EC2 instance, download them locally and use them to connect to your instance, however this means you must protect those keys, ensure they are stored somewhere that you will not lose acccess to, and can only connect to your instance from a machine that has those keys downloaded.  EC2 instance connect provides the same SSH access, securely, from your AWS Console, across machines, in a simple to use manner.
+
+
 ### Minimum permissions
 
 Restricting access to your database only to services / infrastructure that require it is a recommended best practice. This can be done by [setting up security groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.RDSSecurityGroups.html) for your RDS instances, [Amazon Neptune](https://aws.amazon.com/neptune/) [databases](https://docs.aws.amazon.com/neptune/latest/userguide/get-started-security.html), or for [Amazon Redshift](https://aws.amazon.com/redshift/) [clusters](https://docs.aws.amazon.com/redshift/latest/dg/r_Database_objects.html).
@@ -98,15 +105,29 @@ Backup up your data should be a priority, and also running frequent restores to 
 
 ### Serverless Security
 
-For serverless security, you should be familiar with [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon API Gateway](https://aws.amazon.com/api-gateway/), Amazon DynamoDB, [Amazon SQS](https://aws.amazon.com/sqs/), as well as [Identity and Access Management](https://aws.amazon.com/iam/). With Serverless security, AWS takes a greater responsibility as compared to the shared responsibility model. As a customer you would be responsible for the data, applications, IAM, data encryption and integrity, authentication, monitoring and logging. You can see this in the image below.
+For serverless security, you should be familiar with [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon API Gateway](https://aws.amazon.com/api-gateway/), Amazon DynamoDB, [Amazon SQS](https://aws.amazon.com/sqs/), as well as [Identity and Access Management](https://aws.amazon.com/iam/). With Serverless security, AWS takes a greater responsibility as compared to the shared responsibility model but there is still a customer responsibility to be aware of.  What changes in a serverless environment is that the burden of managing the infrastructure, compute, execution environment, and runtime language is handled by AWS.  The customer responsability includes the Customer Function Code and Libraries, REsource Configuration, and Identity and Access Management.  You can see this in the image below.
 
 ![Shared responsibility model for serverless](images/srm-lambda.png)
 
-While many techniques are similar regarding serverless security, they will vary slightly. Even so, you must continue to use authentication and authorization mechanisms. No doubt you will continue to provide [data encryption and integrity](https://docs.aws.amazon.com/lambda/latest/dg/security-dataprotection.html).
+Some details on security practices that are part of the customer responsability are shared below.  For additional details see the documentation detailing [Security in AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/lambda-security.html).
 
-### Inventory and Configuration
+#### Customer Function Code and Libraries.
 
-Your security strategy should also include [monitoring, logging, and configuration management](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/security-logging-monitoring.html). And you will still need to provide DoS and Infrastructure Protection to some degree which can be done with AWS Shield and AWS Shield Advanced.
+AWS Lambda provides runtimes that run your function code in an Amazon Linux–based execution environment. However, if you use additional libraries with your function, you're responsible for updating the libraries. Ensuring your librarioes are up to date can help to maintain your security posture.
+
+#### Resource Configuration
+
+AWS Lambda integrates with several AWS resources such as Amazon DynamoDB, Amazon EventBridge, Simple Notification Service, among others.  It is recommended that you follow the recommended security practices for each service you employ as part of you function.  Individual service documentation will provide additional guidance.
+
+#### Identity and Access Managemenment
+
+Executuion of AWS Lambda functions may require specific IAM permissions and roles.  More details can be found in the [Permissions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html) section of the AWS Lambda developer guide.
+
+#### Inventory and Configuration
+
+Your security strategy should also include [monitoring, logging, and configuration management](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/security-logging-monitoring.html). For example, many organizations enable accounting of their devices using TACACS+, RADIUS or thought the use of Active Directory Logs.  This ensures that an audit trail is created for all administrative activity.  Within the AWS cloud this an be done with AWS CloudTrail.  AWS CloudTrail enables auditing, security monitoring, and operational troubleshooting by tracking user activity and API usage.   The AWS Serverless Application Repository is integrated with AWS CloudTrail. The link above provides additional details.
+
+In addition DoS and Infrastructure Protection still applies to serverless environments and this can be done with AWS Shield and AWS Shield Advanced. Monitoring and detecting threats is discussed more in the section, "[Monitoring Your Environment](#monitoring-your-environment)" found later in this document.
 
 ## Securing your data
 
@@ -138,7 +159,7 @@ A final area to mention in regards to encrypting data-in-transit has to do with 
 
 ## Monitoring your environment
 
-With each of the above aspects secured its essential that you monitor what's happening in your environment. This will help to identify threats and offer the ability to proactively mitigate them.
+With each of the above aspects secured its essential that you monitor what's happening in your environment. This will help to identify threats and offer the ability to proactively mitigate them.  
 
 ### Visibility Into Traffic Flows
 
