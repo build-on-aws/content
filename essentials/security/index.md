@@ -1,7 +1,6 @@
 ---
-layout: blog.11ty.js
-title: AWS Security Essentials
-description: An essential guide to securing your cloud environment on AWS.
+title: "AWS Security Essentials"
+description: "An essential guide to securing your cloud environment on AWS."
 tags:
     - security
     - essentials
