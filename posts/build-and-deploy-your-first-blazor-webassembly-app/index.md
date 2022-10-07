@@ -11,29 +11,29 @@ authorName: François Bouteruche
 date: 2022-07-11
 ---
 
-If you’ve clicked to read this post, you’ve probably read or heard something about Blazor WebAssembly and you want to know more. You are probably curious about the promise of allowing C# developers to build client-side applications based on open web standards. If you are old enough, the last time you heard this kind of promises, it was about Silverlight, a proprietary plugin that allowed .NET developers to develop XAML based applications that ran in the browser.
+If you’re old enough, Blazor WebAssembly's promise of allowing C# developers to build client-side applications based on open web standards might sound familiar. The last time we heard these kinds of promises, it was about Silverlight, a proprietary plugin that allowed .NET developers to develop XAML-based applications that ran in the browser.
 
-The story is quite different this time because there is an addition to the promise: “based on open web standards”. So where are the open web standards? Well, it is all about WebAssembly. WebAssembly has nothing to do with Blazor, .NET or C#. WebAssembly (abbreviated Wasm) is a binary instruction format. It is designed as portable compilation target for programming languages, enabling deployment on the web for client and server applications. Its initial design goals are to be efficient and fast, open and debuggable, safe and part of the open web platform. The open standards for WebAssembly are developed in a W3C Community Group and a W3C Working Group. As a result, WebAssembly 1.0 has shipped in the four major browsers.  
+The story is quite different this time because there is an addition to the promise: “based on open web standards”. So where are the open web standards? Well, it is all about WebAssembly. WebAssembly has nothing to do with Blazor, .NET or C#. WebAssembly (abbreviated Wasm) is a binary instruction format. It is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications. Its initial design goals are to be fast and efficient, open and debuggable, safe and part of the open web platform. The open standards for WebAssembly are developed in a W3C Community Group and a W3C Working Group. As a result, WebAssembly 1.0 has shipped in the four major browsers.  
 
-So the “based on open web standards” promise is fulfilled. You can add to this that the framework itself is developed under the MIT license in the [ASP.NET Core GitHub repository](https://github.com/dotnet/aspnetcore).
+So the “based on open web standards” promise is fulfilled. Plus, the framework itself is developed under the MIT license in the [ASP.NET Core GitHub repository](https://github.com/dotnet/aspnetcore).
 
-So let’s dive deeper into what Blazor WebAssembly is, how it works, how you can create and build a Blazor WebAssembly application, how the solution is structured, how you can deploy it and what you need to know if you want to integrate some AWS services in it.
+So let’s dive deeper into what Blazor WebAssembly is, how it works, how you can create and build a Blazor WebAssembly application, how the solution is structured, how you can deploy it, and what you need to know if you want to integrate AWS services with it.
 
 
 ## Blazor WebAssembly, a component-based SPA framework
 
-I think that, at a point in time, all good ideas end up in .NET. The .NET solution for rich client-side UI is Blazor. Blazor is a component-based framework. Those who are familiar with Angular, React, Vue.js or  Svelte will be at home on that part. It leverages the [Razor syntax](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0). Razor is a markup syntax for embedding .NET based code into webpages.
+I think, at some point in time, all good ideas end up in .NET. The .NET solution for rich client-side UI is Blazor. Blazor is a component-based framework. Those familiar with Angular, React, Vue.js or Svelte will be at home on that part. It leverages the [Razor syntax](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0). Razor is a markup syntax for embedding .NET based code into webpages.
 
-Blazor comes with two hosting model:
+Blazor comes with two hosting models:
 
-* **Blazor server:** the component graph is held on the server side. SignalR is used to maintain a connection between the client and the server through WebSockets. User interaction are sent to the server. Blazor rerenders the component graph. A UI diff is calculated and sent back to the browser in binary format. This model allows you to address browser that doesn’t support WebAssembly or that are running on very low resource devices.
+* **Blazor server:** the component graph is held on the server side. SignalR is used to maintain a connection between the client and the server through WebSockets. User interactions are sent to the server. Blazor rerenders the component graph. A UI diff is calculated and sent back to the browser in binary format. This model allows you to address browsers that don’t support WebAssembly or that are running on very low-resource devices.
 * **Blazor WebAssembly:** it is a single-page application (SPA) framework for building rich client-side web app with .NET. As WebAssembly is an open web standard supported in all major browsers, Blazor WebAssembly applications run in all major browsers.
 
-Blazor server has some advantages but requires network hops for every user interaction. Handling all the user interactions on the client-side reduces the server load. It  also enables to serve the application from a Content Delivery Network service like any static content. The good news is that whatever the hosting model you choose, the component model is the same. You can switch from one to another without too much pain if you use abstractions that allow your components to be agnostic to the hosting model.
+Blazor server has some advantages but requires network hops for every user interaction. Handling all the user interactions on the client-side reduces the server load. It  also enables to serve the application from a Content Delivery Network service like any static content. The good news is that whatever hosting model you choose, the component model is the same. You can switch from one to another without too much pain if you use abstractions that allow your components to be agnostic to the hosting model.
 
 ## How does Blazor WebAssembly work?
 
-To answer this question, the important part of the name is *WebAssembly*. It has been initially designed for allowing the execution in the browser of applications built with other programming languages than JavaScript. It has now gone outside the browser thanks to WebAssembly runtimes like [wasmtime](https://github.com/bytecodealliance/wasmtime) and initiative like the [WebAssembly System Interface (WASI)](https://wasi.dev/).
+To answer this question, the important part of the name is *WebAssembly*. It has been initially designed for allowing the execution in the browser of applications built with programming languages other than JavaScript. It has now gone outside the browser thanks to WebAssembly runtimes like [wasmtime](https://github.com/bytecodealliance/wasmtime) and initiative like the [WebAssembly System Interface (WASI)](https://wasi.dev/).
 
 Ok, so my .NET code is compiled to Wasm format? Well... it depends. Until the release of .NET 6, your code wasn't compiled to Wasm. Blazor relies on the open source cross-platform Mono .NET runtime. Mono has been compiled to a Wasm module. Your code is still compiled to .NET Standard Intermediate Language code (IL code). The Wasm version of Mono interprets your IL assemblies or dependencies to execute them.
 
@@ -45,13 +45,13 @@ In .NET 6, the support for Ahead of Time (AOT) compilation has been added. It is
 </PropertyGroup>
 ```
 
-AOT compilation occurs only when you publish your application to avoid slowing down your development workflow. AOT compilation adds indeed several minutes to your build on small projects and potentially much more on large projects.
+AOT compilation occurs only when you publish your application to avoid slowing down your development workflow. AOT compilation adds several minutes to your build on small projects and potentially much more on large projects.
 
 The size of your binary will also be larger than if you compile your application to IL code as the IL instruction set has higher level abstraction instructions.
 
-Using AOT compilation is a tradeoff between runtime performance for CPU intensive application and load-time performance. If your application is not CPU intensive, you may not see any benefits from AOT compilation or at least not enough to pay for the extra size to download. 
+Using AOT compilation is a tradeoff between runtime performance for CPU intensive application and load-time performance. If your application is not CPU intensive, you may not see any benefits from AOT compilation, or at least not enough to pay for the extra size to download. 
 
-## How to create your first Blazor WebAssembly application?
+## How to create your first Blazor WebAssembly application
 
 Before creating your first Blazor WebAssembly application, you need to decide how you want to serve it.
 
