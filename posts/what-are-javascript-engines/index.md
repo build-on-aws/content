@@ -98,3 +98,5 @@ arewefastyet
 Any web developer needs to be aware of the differences inherent in the browsers that display the code that we work so hard to produce, debug, and maintain. Why do certain scripts work slowly on one browser, but more quickly on another?
 
 Mobile developers, similarly, especially those who write hybrid mobile apps using a webview to display their content, or those using a runtime like NativeScript, will want to know what engines are interpreting their JavaScript code. Mobile web developers should understand the limitations inherent to and possibilities offered by the various browsers on their small devices. Keeping up with the changes in JavaScript engines will really pay off as you evolve as a web, mobile, or app developer.
+
+> This article originally appeared in 2015 on the Telerik Developer Network, and has since been revised and updated for 2022.
