@@ -10,17 +10,16 @@ authorName: Jen Looper
 date: 2022-11-01
 ---
 
-An introduction to the topic, limited to 100 words.
+Writing code for the web sometimes feels a little magical in that we write a sequence of characters and things happen in a browser. But understanding the tech behind the magic can help you better tune your craft as a programmer. At least you might feel slightly less idiotic when trying to explain what is going on behind the scenes in a JavaScript-powered web or mobile stack.
 
 ## Intro
-
-Writing code for the web sometimes feels a little magical in that we write a sequence of characters and things happen in a browser. But understanding the tech behind the magic can help you better tune your craft as a programmer. At least you might feel slightly less idiotic when trying to explain what is going on behind the scenes in a JavaScript-powered web or mobile stack.
 
 Many years ago when I was a graduate student instructor, I was whining to a professor about not grasping a particularly thorny point of French grammar well enough to teach it to my undergraduate class. I remember her words at the time: “Sometimes, the only way to learn something is to teach it.”
 
 Faced with trying to explain to engineers how NativeScript works behind the scenes by using a JavaScript engine at runtime to bridge to native APIs, it’s easy to get lost in the weeds. Any JavaScript developer, in fact, might be curious about the engines that underlie this technology that we use on a daily basis. Let’s break down what a JavaScript engine does, why different platforms use different engines, how they have evolved over the years, and why we, as developers, should care.
 
 ## First, a little terminology
+
 A ‘JavaScript engine’ is often termed a type of virtual machine. A ‘virtual machine’ refers to the software-driven emulation of a given computer system. There are many types of virtual machines, and they are classified by how precisely they are able to emulate or substitute for actual physical machines.
 
 A ‘system virtual machine’, for example, provides a complete emulation of a platform on which an operating system can be executed. Mac users are familiar with Parallels, a system virtual machine that allows you to run Windows on your Mac.
