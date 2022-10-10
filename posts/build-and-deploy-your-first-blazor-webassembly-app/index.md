@@ -20,7 +20,7 @@ So the “based on open web standards” promise is fulfilled. Plus, the framewo
 Let’s dive deeper into what Blazor WebAssembly is, how it works, how you can create and build a Blazor WebAssembly application, how the solution is structured, how you can deploy it, and what you need to know if you want to integrate AWS services with it.
 
 
-## Blazor WebAssembly, a component-based SPA framework
+## Blazor WebAssembly: A component-based SPA framework
 
 I think, at some point in time, all good ideas end up in .NET. The .NET solution for rich client-side UI is Blazor. Blazor is a component-based framework. Those familiar with Angular, React, Vue.js or Svelte will be at home on that part. It leverages the [Razor syntax](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-6.0). Razor is a markup syntax for embedding .NET based code into webpages.
 
@@ -69,7 +69,7 @@ dotnet new blazorwasm -ho
 
 To host your ASP.NET Core backend app, you can use a service like [AWS App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html). You package your backend application as a container image and AWS App Runner, a fully managed service, will deploy it and run it for you. 
 
-## How to build your first Blazor WebAssembly application?
+## How to build your first Blazor WebAssembly application
 
 
 To build and run your application on your local machine for development purpose whatever the hosting model you choose, you use the standard command of the dotnet cli:
@@ -117,7 +117,7 @@ For those who are familiar with ASP.NET Core project structure, nothing specific
 
 ![Visual Studio Solution Explorer displaying the content of a hosted Blazor WebAssembly solution](./images/blazorwasm-hosted-solution.jpg) 
 
-## How to deploy your Blazor WebAssembly application?
+## How to deploy your Blazor WebAssembly application
 
 ### Standalone Blazor WebAssembly application
 
