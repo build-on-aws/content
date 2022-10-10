@@ -12,7 +12,7 @@ date: 2022-10-14
 
 This is a 10-part series about Picturesocial:
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
-2. [What’s Kubernetes and why should I care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-i-care/)
+2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
 4. How to deploy an app to Kubernetes (this post)
 5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
@@ -28,7 +28,7 @@ I divided the diagram above into the five steps explained below to clarify the a
 
 1. First, we have to build our container image, setting an image name and a tag. Once the image is created, we can test the container locally before going further.
 2. Once that the container works properly, we have to push the image into a container registry. In our case, we are going to use Amazon ECR. All the required steps to get here are in our [first post](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/).
-3. When the container image is stored on the container registry, we have to create a Kubernetes manifest so we can send instructions to the cluster to create a pod, a replica set, and a service. We also tell the cluster where to retrieve the container image and how to update the application version. If you want to remember how, this a good time to review the [second post](/posts/picturesocial/02-whats-kubernetes-and-why-should-i-care/).
+3. When the container image is stored on the container registry, we have to create a Kubernetes manifest so we can send instructions to the cluster to create a pod, a replica set, and a service. We also tell the cluster where to retrieve the container image and how to update the application version. If you want to remember how, this a good time to review the [second post](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/).
 4. Now, we are ready to create our Kubernetes cluster in order to get the credentials. This is done once per project. We learn how to create and connect to a Kubernetes cluster in our [third post](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/).
 5. And last but not least, we use Kubectl to deploy our application to Kubernetes using the Manifest. We are going to learn about this final step in the walk-through below.
 
