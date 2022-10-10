@@ -13,7 +13,7 @@ date: 2022-10-13
 
 This is a 10-part series about Picturesocial:
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
-2. [What’s Kubernetes and why should I care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-care/)
+2. [What’s Kubernetes and why should you care?](posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. How to deploy a Kubernetes cluster using Terraform (this post)
 4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
 5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
