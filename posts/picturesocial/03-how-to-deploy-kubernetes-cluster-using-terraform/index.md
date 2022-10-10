@@ -18,7 +18,7 @@ This is a 10-part series about Picturesocial:
 4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
 5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
 
-In our last post, [Picturesocial - What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-care/), we learned about Kubernetes and why are we using it in Picturesocial. In this post, we are going to learn about infrastructure as a code and specifically how to deploy a Kubernetes cluster using Terraform. 
+In our last post, [Picturesocial - What’s Kubernetes and why should you care?](posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/), we learned about Kubernetes and why are we using it in Picturesocial. In this post, we are going to learn about infrastructure as a code and specifically how to deploy a Kubernetes cluster using Terraform. 
 
 I have been working on IT projects for years and something recurrent in my experience has been how developers work together with sysadmins, esspecially when the application pushes changes to the infrastructure and the way things are done traditionally. The application has to be adapted to the infrastructure or the infrastructure has to be adapted to the application. What happens if those infrastructure changes mean you can’t rollback easily?
 
