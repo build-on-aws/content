@@ -7,8 +7,15 @@ tags:
   - csharp
 authorGithubAlias: jyapurv
 authorName: Jose Yapur
-date: 2022-07-11
+date: 2022-10-15
 ---
+
+This is a 10-part series about Picturesocial:
+1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
+2. [What’s Kubernetes and why should I care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-i-care/)
+3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
+4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
+5. How to analyze images with Machine Learning? (this post)
 
 We started this journey with containers, registries, Kubernetes, Terraform, and some other tools that enabled us to deploy our first API, but this journey is just starting. The core of Picturesocial is the capability to add tags automatically based on the pictures uploaded to our social network platform and this is what we are going to learn in this post by using artificial intelligence services with picture and pattern recognition.
 
@@ -103,13 +110,13 @@ If this is your first time working with AWS CLI or you need a refresher on how t
 
 1. First we are going to create the web API using the .NET CLI. The API name should be specified using the -n parameter, in our case "pictures".
 
-```
+```bash
 dotnet new webapi -n pictures
 ```
 
 2. Now, we are going to open the newly created project using VS Code. We are going to use the following command from the terminal. This is the cool way but you can always just open the IDE and find the folder :D
 
-```
+```bash
 code pictures/
 ```
 
@@ -120,13 +127,13 @@ code pictures/
 4. We are going to rename the controller file as `PictureController.cs` and we’ll delete the “WeatherForecast.cs” class.
 5. Now let’s add the Nuggets that we are going to use for this project. In the same terminal that we used to create the web API let's position our cursor in `pictures`
 
-```
+```bash
 cd pictures
 ```
 
 6. And using .NET CLI we are going to add the following packages, inside the pictures directory.
 
-```
+```bash
 dotnet add package AWSSDK.Rekognition
 dotnet add package AWSSDK.SecurityToken
 dotnet add package AWSSDK.Core
