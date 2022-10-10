@@ -13,10 +13,10 @@ date: 2022-10-11
 
 This is a 10-part series about Picturesocial:
 1. How to containerize an app in less than 15 minutes (this post)
-2. [What’s Kubernetes and Why should I care?](/posts/picturesocial/ep2-whats-kubernetes-and-why-should-care/)
-3. [How to deploy a Kubernetes cluster on AWS using Terraform](/posts/picturesocial/ep3-how-to-deploy-kubernetes-aws-terraform/)
-4. [How to deploy an App to Kubernetes](/posts/picturesocial/ep4-how-to-deploy-an-app-to-kubernetes/)
-5. [How to analyze images with Machine Learning?](/posts/picturesocial/ep5-how-to-analize-images-with-machine-learning/)
+2. [What’s Kubernetes and why should I care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-care/)
+3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
+4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
+5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
 
 Containers is undoubtedly a hot topic. Some of us are have been working with these concepts for years, others are just getting started. Either way, I would like to be your buddy and guide you through your container journey. Together, in this series, we will build Picturesocial, a new Social Media platform to share photos. As we build it, we will make architecture decisions and explore trade-offs. 
 
@@ -193,6 +193,6 @@ docker push [aws account id].dkr.ecr.[aws region].amazonaws.com/helloworld:lates
 
 If you read this far, that means you made it. Congratulations! You containerized your very first application. 
 
-The next [post](/posts/picturesocial/ep2-whats-kubernetes-and-why-should-care/) will be focused on learning about container orchestrators, specifically Kubernetes. I will answer the question: What is Kubernetes and why should I care?
+The next [post](/posts/picturesocial/02-whats-kubernetes-and-why-should-care/) will be focused on learning about container orchestrators, specifically Kubernetes. I will answer the question: What is Kubernetes and why should I care?
 
 I hope you enjoyed this reading!
