@@ -1,6 +1,6 @@
 ---
-title: Picturesocial - What’s Kubernetes and why should I care?
-description: In this post, we are going to learn how to deploy an EKS Cluster using Terraform in less than 15 minutes.
+title: Picturesocial - What’s Kubernetes and why should you care?
+description: In this post, we are going to learn about the foundational concepts of Kubernetes, one of the most important pieces in the Picturesocial architecture.
 tags:
   - terraform
   - kubernetes
