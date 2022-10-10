@@ -17,7 +17,7 @@ The story is quite different this time because there is an addition to the promi
 
 So the “based on open web standards” promise is fulfilled. Plus, the framework itself is developed under the MIT license in the [ASP.NET Core GitHub repository](https://github.com/dotnet/aspnetcore).
 
-So let’s dive deeper into what Blazor WebAssembly is, how it works, how you can create and build a Blazor WebAssembly application, how the solution is structured, how you can deploy it, and what you need to know if you want to integrate AWS services with it.
+Let’s dive deeper into what Blazor WebAssembly is, how it works, how you can create and build a Blazor WebAssembly application, how the solution is structured, how you can deploy it, and what you need to know if you want to integrate AWS services with it.
 
 
 ## Blazor WebAssembly, a component-based SPA framework
@@ -47,7 +47,7 @@ In .NET 6, the support for Ahead of Time (AOT) compilation has been added. It is
 
 AOT compilation occurs only when you publish your application to avoid slowing down your development workflow. AOT compilation adds several minutes to your build on small projects and potentially much more on large projects.
 
-The size of your binary will also be larger than if you compile your application to IL code as the IL instruction set has higher level abstraction instructions.
+The size of your binary will also be larger than if you compile your application to IL code. That's because the IL instruction set has higher level abstraction instructions.
 
 Using AOT compilation is a tradeoff between runtime performance for CPU intensive application and load-time performance. If your application is not CPU intensive, you may not see any benefits from AOT compilation, or at least not enough to pay for the extra size to download. 
 
@@ -98,10 +98,10 @@ If you create a new standalone Blazor WebAssembly solution, you will start with 
 
 * Program.cs which configures the middleware your application use and starts the application
 * App.razor which is the root Razor component of your application
-* shared Razor components like the MainLayout.razor or the NavMenu.razor components
+* Shared Razor components like the MainLayout.razor or the NavMenu.razor components
 * Razor componnents that are related to pages like the Index.razor or Counter.razor components
 
-Your project also contains a wwwroot folder which contains the static assets of your application like css files, icon files, images and your index.html file which is the main entry point to your application.
+Your project also contains a wwwroot folder which contains the static assets of your application like css files, icon files, images and your index.html file, which is the main entry point to your application.
 
 ![Visual Studio Solution Explorer displaying the content of a standalone Blazor WebAssembly solution](./images/blazorwasm-standalone-solution.jpg) 
 
@@ -135,13 +135,13 @@ Then, in the directory containing the .csproj file, you simply run the following
 dotnet aws deploy
 ```
 
-The tool will suggest you the best way to deploy your application. For a standalone Blazor WebAssembly application, it will recommend to deploy it on Amazon S3 and to serve it. You’ll have to answer a few questions and then, the tool will automatically provision the required resources in your AWS account and deploy your application.
+The tool will suggest the best way to deploy your application. For a standalone Blazor WebAssembly application, it will recommend to deploy it on Amazon S3 and to serve it. You’ll have to answer a few questions, and then the tool will automatically provision the required resources in your AWS account and deploy your application.
 
 ### Hosted Blazor WebAssembly application
 
-If you prefer the hosted Blazor WebAssembly application model, you can still use the AWS .NET deployment tool. It will recommend you three different service to host your ASP.NET Core application that will serve your Blazor WebAssembly application: AWS Elastic Beanstalk on Linux, Amazon Elastic Container Service using Fargate and AWS App Runner.
+If you prefer the hosted Blazor WebAssembly application model, you can still use the AWS .NET deployment tool. It will recommend three different services to host your ASP.NET Core application that will serve your Blazor WebAssembly application: AWS Elastic Beanstalk on Linux, Amazon Elastic Container Service using Fargate, and AWS App Runner.
 
-I won’t go into the details of these services here and their differences. Just know that, by default, my favorite one is AWS App Runner as long it meets my requirements because it the more managed and straightforward to use from the three.
+I won’t go into the details of these services and their differences here. Just know that, by default, my favorite one is AWS App Runner as long it meets my requirements, because it's the most managed and straightforward to use of the three.
 
 If you use the [AWS Toolkit for Visual Studio](https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.AWSToolkitforVisualStudio2022) to integrate the AWS .NET deployment tool inside Visual Studio, you‘ll get this nice UI.
 
@@ -152,21 +152,21 @@ By default, the ASP.NET Core server project is not containerized. By selecting t
 ![Visual Studio displaying the results of of a deployment with the new Publish to AWS exerience for the server part of a hosted Blazor WebAssembly application](./images/blazorwasm-hosted-solution-deployed.jpg) 
 
 
-## What to know about Blazor WebAssembly app consuming AWS services?
+## What to know about Blazor WebAssembly app consuming AWS services
 
-You can find getting started content to help you with your first steps with Blazor WebAssembly on AWS like this [post](https://aws.amazon.com/blogs/developer/run-blazor-based-net-web-applications-on-aws-serverless/) and this [one about Blazor WebAssembly and Amplify](https://aws.amazon.com/blogs/devops/deploy-net-blazor-webassembly-application-to-aws-amplify/). But the most important information relies in what they miss: the limitations you will likely encounter. Let me light up your lantern here.
+You can find content to help with your first steps with Blazor WebAssembly on AWS like this [post](https://aws.amazon.com/blogs/developer/run-blazor-based-net-web-applications-on-aws-serverless/) and this [one about Blazor WebAssembly and Amplify](https://aws.amazon.com/blogs/devops/deploy-net-blazor-webassembly-application-to-aws-amplify/). But the most important information lies in what they miss: the limitations you will likely encounter. Let's dive in.
 
 ### Blazor WebAssembly authentication and authorization with Amazon Cognito
 
-Blazor WebAssembly default authentication and authorization mechanism is built on top of OpenID Connect protocol. It is a nowadays a kind of standard choice for SPAs.
+Blazor WebAssembly's default authentication and authorization mechanism is built on top of OpenID Connect protocol. It is nowadays a standard choice for SPAs.
 
-When you work with AWS and you want to implement scenarios where you want to grant permissions to your end users to interact with some of your AWS services, using [Amazon Cognito](https://aws.amazon.com/cognito/) is the most straightforward option. Amazon Cognito is a fully managed identity service that manages user identities, federation with external SAML and OpenID Connect identity providers and user permissions to access AWS services. While Amazon Cognito implements itself parts of the OpenID Connect protocol, it is not a fully OpenID Connect compliant provider. 
+When you work with AWS and you want to implement scenarios and grant permissions to your end users to interact with some of your AWS services, using [Amazon Cognito](https://aws.amazon.com/cognito/) is the most straightforward option. Amazon Cognito is a fully managed identity service that manages user identities, federation with external SAML and OpenID Connect identity providers and user permissions to access AWS services. While Amazon Cognito implements itself parts of the OpenID Connect protocol, it is not a fully OpenID Connect compliant provider. 
 
 Thus, if you use Amazon Cognito as you OpenID Connect provider for your Blazor WebAssembly application, you will experience time-out when sign-in because it doesn’t support the prompt=none parameter. You may want to build your custom version of the AuthenticationService.js file as mentioned [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/additional-scenarios?view=aspnetcore-6.0#build-a-custom-version-of-the-authenticationmsal-javascript-library), but I don’t recommend this workaround. You will find yourself maintaining your own fork of this library which is highly sensitive since it is related to identity.
 
 ### AWS service APIs call from Blazor WebAssembly, why it is not supported
 
-Another limitation comes from the [non-support of the System.Security.Cryptography APIs on Blazor WebAssembly since .NET 5](https://docs.microsoft.com/en-us/dotnet/core/compatibility/cryptography/5.0/cryptography-apis-not-supported-on-blazor-webassembly). To make an API call to AWS services, you need to sign your request with the AWS Sigv4 algorithm. The AWS SDK for .NET relies on the System.Security.Cryptography APIs. So, you can’t use the AWS SDK for .NET to make API call to AWS services. 
+Another limitation comes from the [lack of support for the System.Security.Cryptography APIs on Blazor WebAssembly since .NET 5](https://docs.microsoft.com/en-us/dotnet/core/compatibility/cryptography/5.0/cryptography-apis-not-supported-on-blazor-webassembly). To make an API call to AWS services, you need to sign your request with the AWS Sigv4 algorithm. The AWS SDK for .NET relies on the System.Security.Cryptography APIs. So you can’t use the AWS SDK for .NET to make API call to AWS services. 
 
 ### Backend For Frontend pattern is your Best Friend Forever
 
@@ -176,10 +176,10 @@ You can use it for encapsulating interactions with Amazon Cognito and calls to A
 
 ## Conclusion
 
-Blazor WebAssembly may be a viable option to you but I highly recommend you to build a proof of concept to get your hands dirty and get a deep understanding of what you will get and the trade-off you’ll have to make. When you know the Razor syntax, it is pretty straightforward to start with Blazor WebAssembly. And if you have already worked with ASP.NET MVC or Razor Pages, you know Razor.
+Blazor WebAssembly may be a viable option to you, but I highly recommend you to build a proof of concept to get your hands dirty and get a deep understanding of what you will get and the trade-offs you’ll have to make. When you know the Razor syntax, it's pretty straightforward to start with Blazor WebAssembly. And if you have already worked with ASP.NET MVC or Razor Pages, you know Razor.
 
-If your team has already frontend development skills with JavaScript or TypeScript, I highly recommend you to consider what would be the benefits for switching to Blazor WebAssembly. JavaScript and TypeScript communities are large and vibrant with a high pace of innovation. 
+If your team already has frontend development skills with JavaScript or TypeScript, I highly recommend you carefully measure the benefits of switching to Blazor WebAssembly; JavaScript and TypeScript communities are large and vibrant with a high pace of innovation. 
 
-If your team is a highly skilled .NET development team and you have few to no knowledge on frontend development with JavaScript or TypeScript, then Blazor WebAssembly is probably your fastest way to frontend development. Some team has chosen for this exact reason like Steve Peirce testifies in this [post](https://medium.com/powered4-tv/why-we-chose-blazor-wasm-for-our-spa-c62524cde4a9). They already are in production with Blazor WebAssembly for an on-demand video service and are happy.
+If your team is a highly skilled .NET development team and you have little to no knowledge of frontend development with JavaScript or TypeScript, then Blazor WebAssembly is probably your fastest way to accomplish frontend development. Some teams have chosen Blazor WebAssembly for this exact reason, as Steve Peirce testifies in this [post](https://medium.com/powered4-tv/why-we-chose-blazor-wasm-for-our-spa-c62524cde4a9). They already are in production with Blazor WebAssembly for an on-demand video service and are happy.
 
-If you want to know more on Blazor WebAssembly on AWS, you can watch this [video](https://www.youtube.com/watch?v=hyJVWM36dP0).
+If you want to know more about Blazor WebAssembly on AWS, you can watch this [video](https://www.youtube.com/watch?v=hyJVWM36dP0).
