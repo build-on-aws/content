@@ -77,7 +77,7 @@ Here are some of ML tools and libraries that the hackathon teams used to prepare
 
 In addition, the hackathon teams used the popular open source machine learning library [Scikit-Learn](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html) to build and train ML models using a variety supervised and unsupervised ML algorithms. 
 
-:bulb: Tip: If you look for guidance which ML algorithm to pick, here's a great [cheat sheet](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html).
+Tip: If you look for guidance which ML algorithm to pick, here's a great [cheat sheet](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html).
 
 Now, let's have a look at the winning projects of the AWS Disaster Response hackathon.
 
@@ -86,37 +86,27 @@ Now, let's have a look at the winning projects of the AWS Disaster Response hack
 ### 1st Place: **DisaVu**
 The team around DisaVu built a solution to direct relief resources to where they are needed most using a sophisticated machine learning approach that is able to detect the extent of damage caused by natural disasters based on satellite images.
 
-Check out the team's
-:earth_americas: [hackathon project page](https://devpost.com/software/disavu) and
-:computer: [GitHub code repo](https://github.com/SrzStephen/DisaVu).
+Check out the team's [hackathon project page](https://devpost.com/software/disavu) and [GitHub code repo](https://github.com/SrzStephen/DisaVu).
 
 ### 2nd Place: **Thunderstorm Prediction**
 This team focused on thunderstorm predictions by finding correlations between the atmospheric conditions at the time of the lightning strike to predict the occurrence of lightning and thunderstorms. 
 
-Check out the team's
-:earth_americas: [hackathon project page](https://devpost.com/software/lighting-prediction-in-india-using-ml) and 
-:computer: [GitHub code repo](https://github.com/suryaremanan/Thunderstorm-Prediction-Using-ML). 
+Check out the team's [hackathon project page](https://devpost.com/software/lighting-prediction-in-india-using-ml) and [GitHub code repo](https://github.com/suryaremanan/Thunderstorm-Prediction-Using-ML). 
 
 ### 3rd Place: **Wildfire Mitigation**
 This team from Accenture Federal Services focused on wildfire mitigation. They developed a computer vision model to identify dead and diseased trees in near real-time using open-source Landsat data from their work with Federal, state, and local land managers. 
 
-Check out the team's
-:earth_americas: [hackathon project page](https://devpost.com/software/wildfire-mitigation-computer-vision-id-of-hazard-fuels) and 
-:computer: [GitHub code repo](https://github.com/MarjorieRWillner/DisasterHack).
+Check out the team's [hackathon project page](https://devpost.com/software/wildfire-mitigation-computer-vision-id-of-hazard-fuels) and [GitHub code repo](https://github.com/MarjorieRWillner/DisasterHack).
 
 ### Best Solution to The Challenge: **Soteria**
 The team around Soteria used machine learning with satellite imagery to map natural disaster impacts for faster emergency response. 
 
-Check out the team's
-:earth_americas: [hackathon project page](https://devpost.com/software/soteria-yolciw) and
-:computer: [GitHub code repo](https://github.com/Soteria-ai/Soteria). 
+Check out the team's [hackathon project page](https://devpost.com/software/soteria-yolciw) and [GitHub code repo](https://github.com/Soteria-ai/Soteria). 
 
 ### Best Technical Implementation: **Global Fire Spread Prediction** 
 The tech team at SatelliteVu applied their knowledge of wildfires, satellite imagery, and machine learning to demonstrate a fire spread prediction system. 
 
-Check out the team's
-:earth_americas: [hackathon project page](https://devpost.com/software/global-fire-spread-prediction-system) and
-:computer: [GitHub code repo](https://github.com/SatelliteVu/SatelliteVu-AWS-Disaster-Response-Hackathon). 
+Check out the team's [hackathon project page](https://devpost.com/software/global-fire-spread-prediction-system) and [GitHub code repo](https://github.com/SatelliteVu/SatelliteVu-AWS-Disaster-Response-Hackathon). 
 
 And we have received many more amazing projects. Two honorary mentions, for example, include an [AI for Disaster Assistant](https://devpost.com/software/ai-wonder-girls-disaster-response) to support humanitarian workers and civilians to achieve faster response in earthquake emergencies, and another team exploring [migratory birds](https://devpost.com/software/earthquake-anticipation-using-migratory-birds-behaviour) and their ability to sense subtle, local geomagnetic disturbances, and their change in behavior, to forecast earthquakes. 
 
@@ -129,8 +119,8 @@ If you want to run the projects' sample code, [sign-up for a free SageMaker Stud
 ### Learn more about data science and machine learning
 If you are interested in learning more about how to get started with data science and machine learning on AWS, here are a few recommendations: 
 
-:woman_student: If you are looking for a self-paced digital course with hands-on exercises, check out the [Practical Data Science on the AWS Cloud](https://www.coursera.org/specializations/practical-data-science) Specialization on Coursera, developed in collaboration with [DeepLearning.AI](https://www.deeplearning.ai/). 
+If you are looking for a self-paced digital course with hands-on exercises, check out the [Practical Data Science on the AWS Cloud](https://www.coursera.org/specializations/practical-data-science) Specialization on Coursera, developed in collaboration with [DeepLearning.AI](https://www.deeplearning.ai/). 
 
-:book: If you prefer reading, have a look at the [Data Science on AWS](https://www.amazon.com/Data-Science-AWS-End-End/dp/1492079391) O'Reilly book which I co-authored together with my colleague Chris Fregly. The book discusses how to implement end-to-end, continuous AI and Machine Learning Pipelines. All of the code is publicly available on [GitHub](https://github.com/data-science-on-aws/data-science-on-aws).
+If you prefer reading, have a look at the [Data Science on AWS](https://www.amazon.com/Data-Science-AWS-End-End/dp/1492079391) O'Reilly book which I co-authored together with my colleague Chris Fregly. The book discusses how to implement end-to-end, continuous AI and Machine Learning Pipelines. All of the code is publicly available on [GitHub](https://github.com/data-science-on-aws/data-science-on-aws).
 
-:studio_microphone: We also host monthly meetups discussing use cases, best practices and the latest AI/ML technologies. If you're interested in joining us, follow the link on [datascienceonaws.com](http://www.datascienceonaws.com/).
+We also host monthly meetups discussing use cases, best practices and the latest AI/ML technologies. If you're interested in joining us, follow the link on [datascienceonaws.com](http://www.datascienceonaws.com/).
