@@ -1,16 +1,24 @@
 ---
-layout: blog.11ty.js
-title: Picturesocial - What’s Kubernetes and Why should I care?
-description: Deploying an EKS Cluster? Infraestructure as a Code?, Terraform?, in this episode we are going to simplify and learn how to deploy an EKS Cluster using Terraform in less than 15 minutes
+title: Picturesocial - What’s Kubernetes and why should I care?
+description: In this post, we are going to learn how to deploy an EKS Cluster using Terraform in less than 15 minutes.
 tags:
   - terraform
   - kubernetes
   - eks
-  - picturesocial
 authorGithubAlias: jyapurv
 authorName: Jose Yapur
-date: 2022-07-11
+date: 2022-10-12
 ---
+
+This is a 10-part series about Picturesocial:
+1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
+2. What’s Kubernetes and why should I care? (this post)
+3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
+4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
+5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
+
+
+
 # Picturesocial - What’s Kubernetes and Why should I care?
 
 ## Introduction
