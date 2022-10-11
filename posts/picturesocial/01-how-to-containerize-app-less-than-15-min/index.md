@@ -1,5 +1,4 @@
 ---
-layout: blog.11ty.js
 title: "Picturesocial - How to containerize an app in less than 15 minutes"
 description: In this post, you're going to learn about the basics of containers, but most importantly how to containerize an app in an easy and reusable way for a modern web application.
 tags:
