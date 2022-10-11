@@ -45,7 +45,7 @@ Block storage provides fine grained control over storing data. A major advantage
 
 Block storage provides granular control over how data is stored. By choosing blocks carefully, you can fine-tune and optimize your storage to be as fast as possible. This makes it popular for any workloads that are particularly performance sensitive. The key characteristics of block storage is high IOPS(input/output operations per second) and low latency.
 
-Cloud based compute resources, such as virtual machines, can attach block storage as disk volumes, and it supports booting operating systems for VMs and cloud compute. Cloud compute resources can add block storage without down time. Block storage is durable and can be moved from server to server by changing the route to the server.
+Cloud based compute resources, such as virtual machines, can attach block storage as disk volumes, and it supports booting operating systems for VMs and cloud compute. Cloud compute resources can add block storage without down time. Block storage is durable and can be moved from its current server by attaching it to another server.
 
 The key features of block storage are:
 
