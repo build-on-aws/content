@@ -179,7 +179,7 @@ Pods shouldn’t be called directly because as we discussed earlier they are eph
 
 Services always detect changes in the backend, so if a pod goes offline or is being replaced by a new one, the Service will stop sending traffic and reroute to the working pods. This is why I emphasize that synchronous communication between pods must be made using Services and not calling the pods directly, even if your API is composed of just one pod.
 
-![Image showing communication to pods happens between service and pod, not directly](picturesocial/images/02-01.jpg "Communication to pods happens between service and pod, not directly")
+![Image showing communication to pods happens between service and pod, not directly](images/02-service-api-direct-to-pod.jpg "Communication to pods happens between service and pod, not directly")
 
 ### Namespace
 
@@ -187,7 +187,7 @@ Kubernetes was conceived as a multi-tenant container orchestrator. That means th
 
 My suggestion is to group the resources of a business domain in a namespace, that way it is easier to find the resources you need and also to allow teams to maintain specific business domains independently in a software project.
 
-![Image showing service api 1 is contained within namespace 1 and service api 2 is contained within namespace 2](picturesocial/images/02-02.jpg "Service api 1 is contained within namespace 1 and service api 2 is contained within namespace 2")
+![Image showing service api 1 is contained within namespace 1 and service api 2 is contained within namespace 2](images/02-namespaces.jpg "Service api 1 is contained within namespace 1 and service api 2 is contained within namespace 2")
 
 ## What kind of applications should I host on Kubernetes?
 

@@ -22,7 +22,7 @@ So far we have learned about containers, Kubernetes, and Terraform. Now, it’s 
 ## Containerized Application Development Flow
 
 To understand the basic flow of application deployment into Kubernetes, we have to understand the complete flow of containerized application development. I designed this diagram to help summarize the Build, Push, Compose, Connect, Deploy process.
-![Diagram showing the Build, Push, Compose, Connect, Deploy process](images/04-01.jpg "Diagram showing the Build, Push, Compose, Connect, Deploy process")
+![Diagram showing the Build, Push, Compose, Connect, Deploy process](images/04-containerized-app-development-flow.jpg "Diagram showing the Build, Push, Compose, Connect, Deploy process")
 
 I divided the diagram above into the five steps explained below to clarify the activities involved:
 
@@ -116,7 +116,7 @@ Now that we have the kubeconfig, we have established a trust relationship betwee
 kubectl get nodes
 ```
 
-![Image showing output of kubectl get nodes command](images/04-02.jpg "Image showing output of kubectl get nodes command")
+![Image showing output of kubectl get nodes command](images/04-kubctl-get-nodes.jpg "Image showing output of kubectl get nodes command")
 
 4. In addition to nodes, you can also check for pods by running the command below. But keep in mind that we haven’t deploy anything yet. Also, if you don’t specify a namespace in the command, it will return everything from the “default” namespace. 
 
@@ -124,7 +124,7 @@ kubectl get nodes
 kubectl get pods
 ```
 
-![Image showing output of kubectl get pods command](images/04-03.jpg "Image showing output of kubectl get pods command")
+![Image showing output of kubectl get pods command](images/04-kubectl-get-pods.jpg "Image showing output of kubectl get pods command")
 
 5. We can also specify the pods in all namespaces, including the ones that Kubernetes needs to run properly by adding the `—all-namespaces` parameter.
 
@@ -132,7 +132,7 @@ kubectl get pods
 kubectl get pods --all-namespaces
 ```
 
-![Image showing output of kubectl get pods --all-namespaces](images/04-04.jpg "Image showing output of kubectl get pods --all-namespaces")
+![Image showing output of kubectl get pods --all-namespaces](images/04-kubectl-get-pods-namespaces.jpg "Image showing output of kubectl get pods --all-namespaces")
 
 6. Similarily with services, we can check all the services in the cluster. As you can see, you have the default service that will handle the kubecontrol requests and the kube-dns that will handle the calls to the coredns of the cluster. It’s important that we don’t edit or delete any of the those services or pods, believe me :)
 
@@ -140,7 +140,7 @@ kubectl get pods --all-namespaces
 kubectl get services --all-namespaces
 ```
 
-![Image showing output of kubectl get services --all-namespaces](images/04-05.jpg "Image showing output of kubectl get services --all-namespaces")
+![Image showing output of kubectl get services --all-namespaces](images/04-kubectl-get-services-namespaces.jpg "Image showing output of kubectl get services --all-namespaces")
 
 7. We can also check the replica sets of the cluster by running this command:
 
@@ -148,7 +148,7 @@ kubectl get services --all-namespaces
 kubectl get rs --all-namespaces
 ```
 
-![Image showing output of kubectl get rs --all-namespaces](images/04-06.jpg "Image showing output of kubectl get rs --all-namespaces")
+![Image showing output of kubectl get rs --all-namespaces](images/04-kubectl-get-rs-namespaces.jpg "Image showing output of kubectl get rs --all-namespaces")
 
 As shown above, the commands for running the basics are pretty simple and self explanatory. 
 
@@ -222,7 +222,7 @@ kubectl create namespace tests
 kubectl apply -f manifest.yml -n tests
 ```
 
-![Image showing output of kubectl apply -f manifest.yml -n tests command](images/04-07.jpg "Image showing output of kubectl apply -f manifest.yml -n tests command")
+![Image showing output of kubectl apply -f manifest.yml -n tests command](images/04-kubectl-apply.jpg "Image showing output of kubectl apply -f manifest.yml -n tests command")
 
 13. Now you can check the deployment, the pods, and the service. Don’t forget to always pass the parameter, namespace. For pods, you should get two replicas of the same pod.
 
@@ -230,7 +230,7 @@ kubectl apply -f manifest.yml -n tests
 kubectl get pods -n tests
 ```
 
-![Image showing output of kubectl get pods -n tests command](images/04-08.jpg "Image showing output of kubectl get pods -n tests command")
+![Image showing output of kubectl get pods -n tests command](images/04-kubectl-get-pods-tests.jpg "Image showing output of kubectl get pods -n tests command")
 
 14. If you want to see details from a specific pod, you can run the following command, where `podName` is the name of the pod that you want to check. It also includes the scheduling from the Kubernetes Control Plane to that specific pod and the history of all events.
 
@@ -238,8 +238,8 @@ kubectl get pods -n tests
 kubectl describe pod **podName** -n tests
 ```
 
-![Part 1: Image showing output of kubectl describe pod **podName** -n tests command](images/04-09.jpg "Part 1: Image showing output of kubectl describe pod **podName** -n tests command")
-![Part 2: Image showing output of kubectl describe pod **podName** -n tests command](images/04-10.jpg "Part 2: Image showing output of kubectl describe pod **podName** -n tests command")
+![Part 1: Image showing output of kubectl describe pod **podName** -n tests command](images/04-kubectl-describe-pod-tests.jpg "Part 1: Image showing output of kubectl describe pod **podName** -n tests command")
+![Part 2: Image showing output of kubectl describe pod **podName** -n tests command](images/04-kubectl-describe-pod-tests-output.jpg "Part 2: Image showing output of kubectl describe pod **podName** -n tests command")
 
 15. You can also stream the logs from an specific pod by running the following command and specifying the `podName`.
 
@@ -247,7 +247,7 @@ kubectl describe pod **podName** -n tests
 kubectl logs **podName** -f -n tests
 ```
 
-![Image showing output of kubectl logs **podName** -f -n tests command](images/04-11.jpg "Image showing output of kubectl logs **podName** -f -n tests command")
+![Image showing output of kubectl logs **podName** -f -n tests command](images/04-kubectl-logs.jpg "Image showing output of kubectl logs **podName** -f -n tests command")
 
 16. I recommend you to store the Kubernetes logs for observability into CloudWatch, but we are going to cover this in the next post. You can take a look to the official [EKS documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/implementing-logging-monitoring-cloudwatch/kubernetes-eks-logging.html) for more information.
 
@@ -257,11 +257,11 @@ kubectl logs **podName** -f -n tests
 kubectl get services -n tests
 ```
 
-![Image showing output of kubectl get services -n tests command](images/04-12.jpg "Image showing output of kubectl get services -n tests command")
+![Image showing output of kubectl get services -n tests command](images/04-kubectl-get-services-output.jpg "Image showing output of kubectl get services -n tests command")
 
 18. Now, you can open the browser and test your application. Be sure to use http instead of https for this specific test. We are going to learn how to protect your API endpoints in a future post.
 
-![Image showing browser open to the application URL rendering Hello Jose text](images/04-13.jpg "Image showing browser open to the application URL rendering Hello Jose text")
+![Image showing browser open to the application URL rendering Hello Jose text](images/04-hello-jose-output.jpg "Image showing browser open to the application URL rendering Hello Jose text")
 
 That simple "Hello Jose" from the API is the response from the call to a load balancer that chose one of the two pods to send the request to. Then "Hello Jose" was rendered in your browser as the output. I highly suggest you to try this only locally and not exposing it to Internet. We are going to learn how to expose endpoints to the outside world using other security layers like API Gateways and Layer 7 load balancers in the next posts.
 
@@ -277,7 +277,7 @@ As soon as a pod is deleted, Kubernetes will provision another clone because the
 kubectl get pods -w -n tests
 ```
 
-![Image showing output of kubectl get pods -w -n tests command, showing the stream of pods](images/04-14.jpg "Image showing output of kubectl get pods -w -n tests command, showing the stream of pods")
+![Image showing output of kubectl get pods -w -n tests command, showing the stream of pods](images/04-kubectl-get-pods-tests-output.jpg "Image showing output of kubectl get pods -w -n tests command, showing the stream of pods")
 
 20. You can also set an autoscale rule for your deployment by running the following command. Where `—max` is the number of max replicas that will handle this HPA or Horizontal Pod Autoscaler, `—min` is the number of minimum replicas running, and `—cpu-percent` is the percentage of CPU of all the current pods from this deployment. In the case of exceeding the number specified, it will scale up.
 
