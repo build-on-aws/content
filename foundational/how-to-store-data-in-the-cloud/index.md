@@ -15,7 +15,7 @@ Whether you're building a web site, cloud application or backing up data, you ne
 
 ## Object Storage
 
-Object storage is designed for holding massive volumes of data by distributing across multiple nodes, or buckets. Objects are made up of data, metadata, and a unique object id. Object ids look like file paths, but differ from hierarchical file system by storing object ids in a flat address space that scales horizontally because it is not hierarchical like a file system.      
+Object storage is designed for holding massive volumes of data by distributing across multiple nodes, or buckets. Objects are made up of data, metadata, and a unique object id. Object ids look like file paths, but differ from hierarchical file system by storing object IDs in a flat, non-hierarchical address space that scales horizontally.      
 
 Object storage is durable because it stores data redundantly stored across nodes. Data is stored according to rules that determine which node to use based on the object id. Nodes use [block storage](#block-storage) and data are distributed across nodes to keep node size balanced which prevents scaling issues. When nodes are filled, the object store adds new nodes to store more data. Alternatively, when objects are deleted, nodes are removed. Object stores are elastic because they can grow or shrink as needed.
 
