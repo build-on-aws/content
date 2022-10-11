@@ -35,7 +35,7 @@ In addition to efficiently scaling, rich metadata associated with an object allo
 
 Block storage stores data in fixed-size pieces of storage called blocks. A collection of blocks forms a volume that can be treated as a unit of storage, such as a hard drive. 
 
-When writing data, block storage splits files across blocks with a unique identifier. To retrieve data, the storage server uses the unique id to find the blocks with the data and returns the parts of the file. In practice, this process is transparent to us because a file system is used to manage blocks. The file system implements a lookup table of unique ids stored in blocks.
+When writing data, block storage splits files across blocks with a unique identifier. To retrieve data, the storage server uses the unique id to find the blocks with the data and returns the parts of the file. In practice, this process is transparent to us because a file system is used to manage blocks. The file system implements a lookup table of unique ids stored in blocks that manage the efficient storage of data.
 
 Think of blocks as low-level components that manage storing data efficiently. Operating systems implement file systems enable us to work with data as files and directories
 
