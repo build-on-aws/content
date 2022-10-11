@@ -27,7 +27,7 @@ Objects can't be changed, but a new object can be created from a current object 
 
 Object storage is built to store petabytes of data that don't change often and have associated metadata. Object storage is ideal for WORM data (write once, read many) such as backups, log files, data lakes, video, and imagery. In addition, object storage can efficiently hold large data sets for machine learning and data collected by IoT devices.
 
-Object storage is also ideal for workloads requiring low latency to data. Because object storage uses a flat address space to index data, workloads can retrieve data faster than hierarchical file systems.
+In addition to scalability, object storage delivers low latency performance. Objects can be retrieved rapidly because it uses a flat address space to index data, which is faster than traversing a hierarchical file system.
 
 In addition to efficiently scaling, rich metadata associated with an object allows for better analytics and versioning which lets multiple users concurrently work on a file.
 
