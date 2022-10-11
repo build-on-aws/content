@@ -11,43 +11,32 @@ authorName: Vinicius Senger
 date: 2022-08-15
 ---
 
-Quick guide on how to create a container image with your old Java EE Application Server.
+How to Create a Container Image With Your Old Java EE Application Server
 
 <p align="center"><img src="images/duke-love.png" alt="Java Duke making a heart with his hands"/></p>
 
-Java EE still in production and will be there for much more time, 
-and I know many companies that run Java EE applications using 
-Apache Tomcat and Jboss and when they consider migrating to AWS 
-most of them consider Amazon EC2 as first choice and more similar 
-to running in your own infrastructure, kind of classical lift and shift approach! 
-But with the containers' generation we have much more options to pack the old 
-Java EE application and deploy as gold containerized app and that's what we are going
-to show step-by-step how to do it.
+Java EE is still in production and will likely remain there for a while. I know many companies that run Java EE applications using Apache Tomcat and Jboss, and when they consider migrating to AWS, most of them consider Amazon EC2 first; it's similar to running in your own infrastructure -- kind of a classical lift and shift approach. But thanks to containerization, we have more ways to pack the old Java EE application and deploy as gold containerized apps.
 
-For this tutorial I choose JBoss 4.2.3 as example, but you can replace it by your 
-choice of Java EE application server very easily and in the end of this tutorial
-you will have a simple Java EE application built with Docker and running with a public URL.
+For this tutorial I chose JBoss 4.2.3 as an example, but you can replace it with your choice of Java EE application servers very easily. At the end of this tutorial, you will have a simple Java EE application built with Docker and running with a public URL.
 
-That's the basic steps we need to do it:
+Here are the basic steps we need to do it:
 
 1. Download a copy of Jboss 4.2.3
-2. Install Docker
-3. Create a simple Java EE application (or use your existing one!)
+2. Create a simple Java EE application (or use your existing one!)
+3. Install Docker
 4. Create a Docker File
 5. Build and tag the docker image
 6. Create an Amazon Elastic Container Registry private repository
 7. Tag and push image to ECR
 8. Create an AWS App Runner service using ECR image URI
-9. Done!
 
-Let's build it!
+... And you'll be done. Now let's build it!
 
 ## 1. Download JBoss
 
-I used the version 4.2.3, but you can use any other with small changes or even
-another application server.
+I used the version 4.2.3, but you can use any other version -- or even another application server -- with small changes.
 
-[Here is the link to download Jboss 4.2.3](https://sourceforge.net/projects/jboss/files/JBoss/JBoss-4.2.3.GA/jboss-4.2.3.GA-jdk6.zip/download
+[You can download Jboss 4.2.3 here.](https://sourceforge.net/projects/jboss/files/JBoss/JBoss-4.2.3.GA/jboss-4.2.3.GA-jdk6.zip/download
 )
 
 Create a project directory and unzip Jboss there.
@@ -57,10 +46,9 @@ Create a project directory and unzip Jboss there.
     unzip <downloaded_jboss.zip>
 
 
-## 2. Create a simple Java EE Application
+## 2. Create a Simple Java EE Application
 
-Let's create a very simple Java EE application that can be replaced by your real app.
-In your project directory we need to create this:
+Let's create a very simple Java EE application that can be replaced by your real app. In your project directory, create this:
 
     myapp
       --WEB-INF
@@ -96,14 +84,13 @@ Your Java App is done!
 
 ## 3. Install Docker
 
-Follow the [docker website](https://docs.docker.com/get-docker/) instructions 
-to download and install it.
+Follow the [docker website](https://docs.docker.com/get-docker/) instructions to download and install it.
 
 ## 4. Create a Docker File
 
-Now we have the jboss app server and also our simple Java EE app ready and we
-need to create a Docker File to describe the commands that will build the image. 
-Create a file named javaee.DockerFile in your project directory with the following code:
+We have the jboss app server and also our simple Java EE app ready, so now we need to create a Docker File to describe the commands that will build the image.
+
+Start by creating a file named javaee.DockerFile in your project directory with the following code:
 
     FROM amazoncorretto:8
     
@@ -117,12 +104,13 @@ Create a file named javaee.DockerFile in your project directory with the followi
 
 
 Now let's explain this file step-by-step:
+
 Our image will be based on a public Amazon Corretto 8 image that will provide us 
 the right SDK to run JBoss:
 
     FROM amazoncorretto:8
 
-This line doesn't have any practical impact, but it can inform container's services
+This line doesn't have any practical impact, but it can inform the container's services
 that we need to expose the port number 8080, and they can configure it automatically:
 
     EXPOSE 8080
