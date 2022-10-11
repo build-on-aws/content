@@ -5,6 +5,8 @@ tags:
   - ai-ml
   - dotnet
   - csharp
+  - rekognition
+  - s3
 authorGithubAlias: jyapurv
 authorName: Jose Yapur
 date: 2022-10-15
@@ -22,7 +24,7 @@ We started this journey with containers, registries, Kubernetes, Terraform, and 
 ## What is Image Detection?
 
 As humans, we are very good at recognizing things we have seen before. You can look at this picture and almost instantly recognize that it shows a cat lying on a laptop with some flowers in the background. If you know a little bit more about cats, maybe you can also tell that this is an adorable Persian cat.
-![Picture of a cat laying over a laptop](images/05-01.jpg "Picture of a cat laying over a laptop")
+![Picture of a cat laying over a laptop](images/05-cat.jpg "Picture of a cat laying over a laptop")
 Computers do not possess this innate ability to recognize different things in an image, but they can be trained to do so. [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a machine learning technique that can be used to allow computers to recognize objects in images with varying confidence levels. In order for it to work, deep learning requires us to train models with thousands of labeled images: cat photos labeled “cat”, dog photos labeled “dog”, and so on. This can take up a significant amount of data, time and compute resources, making it harder for us to train deep learning models on our own.
 
 Luckily for us, we are able to add image detection capabilities to Picturesocial without having to create, train, or deploy our own machine learning models using simple, easy to use API’s.
@@ -91,7 +93,7 @@ Amazon Rekognition will analyze our image and return a response containing a lis
 ```
 
 The image below is an interpretation of these results. Amazon Rekognition was able to identify a laptop and a cat on this image within the bounded areas.
-![Picture of a cat laying over a laptop with labels](images/05-02.jpg "Picture of a cat laying over a laptop with labels")
+![Picture of a cat laying over a laptop with labels](images/05-cat-with-overlays.jpg "Picture of a cat laying over a laptop with labels")
 In this post, we are going to develop an API that will be in charge of detecting the relevant attributes, known as labels, of pictures stored on an S3 Bucket using Amazon Rekognition. This API will be created using .NET 6.0 with the Web API Template. Also, we are going to have a method that will receive two parameters: 1) the name of the file and 2) the name of the bucket. But we are going to implement the routing method just to receive the name of the file and set the bucket as default. So, let’s code!
 
 ## Prerequisites
@@ -122,7 +124,7 @@ code pictures/
 
 3. Now, if we look at the project structure, you are going to realize that a Default Controller called `WeatherForecastController.cs` is already in place, as well as a `WeatherForecast.cs`
 
-![Picture of an API file structure](images/05-03.jpg "Picture of an API file structure")
+![Picture of an API file structure](images/05-app-structure.jpg "Picture of an API file structure")
 
 4. We are going to rename the controller file as `PictureController.cs` and we’ll delete the “WeatherForecast.cs” class.
 5. Now let’s add the Nuggets that we are going to use for this project. In the same terminal that we used to create the web API let's position our cursor in `pictures`
@@ -332,7 +334,7 @@ Note the URL the app is listening on above: http://localhost:5075. We'll use tha
 
 18 Let’s upload a picture into our S3 bucket. For example, in my case I uploaded two pictures.
 
-![Image of an S3 bucket console with two image files](images/05-04.jpg "Image of an S3 bucket console with two image files")
+![Image of an S3 bucket console with two image files](images/05-s3-objects.jpg "Image of an S3 bucket console with two image files")
 
 19. Let's compose the URL request using one of my pictures as example and paste it in the browser.
 
