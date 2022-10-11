@@ -19,7 +19,7 @@ Object storage is designed for holding massive volumes of data by distributing a
 
 Object storage is durable because it stores data redundantly stored across nodes. Data is stored according to rules that determine which node to use based on the object id. Nodes use [block storage](#block-storage) and data are distributed across nodes to keep node size balanced which prevents scaling issues. When nodes are filled, the object store adds new nodes to store more data. Alternatively, when objects are deleted, nodes are removed. Object stores are elastic because they can grow or shrink as needed.
 
-To get an object, an HTTP request is sent to the object store's REST API, which retrieves the data from the storage nodes using a lookup table of object ids. The lookup tables are also stored in nodes.
+To retrieve an object, an HTTP request is sent to the object store's REST API, which retrieves the data from the storage nodes using a lookup table of object ids. The lookup tables are also stored in nodes.
 
 Objects can't be changed, but a new object can be created from a current object with the same object id. Metadata tracks the version of these Objects. In addition to versions, metadata can track the owner of the object and when it was created making tracking, indexing, and concurrent writes possible.   
 
