@@ -629,7 +629,7 @@ But you don't have to settle for this. You can use the OpenTelemetry SDK to prov
 </properties>
 ```
 
-These properties will be throughout many parts of the code. Still in the `pom.xml` file:
+These properties will be used throughout many parts of the code. Still in the `pom.xml` file:
 
 5. Add the following dependencies:
 
