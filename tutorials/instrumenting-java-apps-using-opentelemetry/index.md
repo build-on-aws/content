@@ -72,7 +72,7 @@ git clone https://github.com/build-on-aws/instrumenting-java-apps-using-opentele
 
 You can use any tool to work with the files from this repository, including [Vim](https://www.vim.org/). But I would highly recommend using a full-fetched IDE, such as [Visual Studio Code](https://code.visualstudio.com/), for this, as you may need to work with different files simultaneously. It will make your life less dreadful.
 
-Now let's make sure everything works as expected. Finishing this section successfully is paramount for you to start and complete the next ones. First, check if the microservice can be compiled, built, and executed. This will require you to have Java and Maven properly installed in your machine. Once you have this, execute the script `run-microservice.sh` to execute the microservice.
+Now let's make sure everything works as expected. Finishing this section successfully is paramount for you to start and complete the next ones. First, check if the microservice can be compiled, built, and executed. This will require you to have Java and Maven properly installed in your machine. Once you have this, execute the script `run-microservice.sh` to build the microservice and execute it.
 
 ```log
 
