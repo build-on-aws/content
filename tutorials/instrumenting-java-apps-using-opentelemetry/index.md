@@ -205,7 +205,7 @@ We will fix this later. But for now, you can visualize the traces and metrics cr
 
 3. Edit the file `run-microservice.sh`.
 
-Here is how the updated script should look like.
+Here is how the updated file should look like.
 
 ```bash
 #!/bin/bash
@@ -263,7 +263,9 @@ The function of the collector is to work as the glue between your instrumented c
 
 Why don't send the telemetry data directly to the observability backend? You may ask. Although sometimes you actually can if the observability backend support the native protocol from OpenTelemetry called [OTLP](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/otlp.md), it is often a best practice to use a collector instead. For example, you can co-locate the collector with your application to minimize the chances of data being lost while transmitted over the network. This is useful for edge-based scenarios such as IoT or just if the observability backend sits far away from the application. You can also use the collector to buffer data before sending to the observability backend. If you have a high-volume telemetry data generation, this can protect your observability backend from bursts and being overloaded. You can also use the collector as a gateway for multiple applications to send telemetry data to the same collector, which can process and send the collected data to the observability backend. Finally, the collector acts as a layer of indirection between your application and the observability backend. This is useful to allow you to change, upgrade, and replace the observability backend without downtime to your applications.
 
-Using the collector is straightforward. All you need to do is to create a configuration file that describes how the processing pipeline should work. A processing pipeline comprises three components: one or more receivers, optional processors, and one or more exporters. To illustrate this, create a file named `collector-config-local.yaml` and enter with the following content.
+Using the collector is straightforward. All you need to do is to create a configuration file that describes how the processing pipeline should work. A processing pipeline comprises three components: one or more receivers, optional processors, and one or more exporters.
+
+1. Create a file named `collector-config-local.yaml` with the following content:
 
 ```yaml
 receivers:
@@ -286,7 +288,9 @@ service:
       exporters: [logging]
 ```
 
-In this example, we want the collector to expose an endpoint over the port **5555** that will accept connections over **gRPC** using the **OTLP** protocol. Then, we will export any data received to the logging, whether this data are traces or metrics. To create an instance of the collector, run the following command:
+In this example, we want the collector to expose an endpoint over the port **5555** that will accept connections over **gRPC** using the **OTLP** protocol. Then, we will export any data received to the logging, whether this data are traces or metrics.
+
+2. Execute the collector with a container:
 
 ```bash
 docker run -v $(pwd)/collector-config-local.yaml:/etc/otelcol/config.yaml -p 5555:5555 otel/opentelemetry-collector:latest
@@ -316,7 +320,11 @@ You should see the following output:
 2022-08-25T19:40:25.896Z        info    service/collector.go:128        Everything is ready. Begin running and processing data.
 ```
 
-Leave this collector running for now. Open the `run-microservice.sh` script and update its contents to this:
+Leave this collector running for now.
+
+3. Edit the file `run-microservice.sh`.
+
+Here is how the updated file should look like.
 
 ```bash
 #!/bin/bash
@@ -336,7 +344,15 @@ export OTEL_RESOURCE_ATTRIBUTES=service.name=hello-app,service.version=1.0
 java -javaagent:./${AGENT_FILE} -jar target/hello-app-1.0.jar
 ```
 
-Save the changes and execute the microservice. Then, send a HTTP request to its API. You will notice that in the logs from the collector, there will be the following output:
+Save the changes and execute the microservice. Then, send a HTTP request to its API.
+
+4. Send an HTTP request to it.
+
+```bash
+curl -X GET http://localhost:8888/hello
+```
+
+You will notice that in the logs from the collector, there will be the following output:
 
 ```log
 2022-08-25T19:50:23.289Z        info    TracesExporter  {"kind": "exporter", "data_type": "traces", "name": "logging", "#spans": 2}
@@ -405,7 +421,11 @@ Attributes:
         {"kind": "exporter", "data_type": "traces", "name": "logging"}
 ```
 
-This means that the generated root span from the microservice was successfully transmitted to the collector, which then exported the data to the logging. You may notice that it will take a couple seconds for the data to actually be printed into the collector logging. This is because by default the collector tries to buffer data as much as it can and flush periodically to the configured exporters. You can tweak this behavior by adding a batch processor to the processing pipeline that flushes the data every second. Stop both the microservice and the collector. Then, change the collector configuration file to this:
+This means that the generated root span from the microservice was successfully transmitted to the collector, which then exported the data to the logging. You may notice that it will take a couple seconds for the data to actually be printed into the collector logging. This is because by default the collector tries to buffer data as much as it can and flush periodically to the configured exporters. You can tweak this behavior by adding a batch processor to the processing pipeline that flushes the data every second. Stop both the microservice and the collector.
+
+5. Edit the file `collector-config-local.yaml`
+
+Here is how the updated file should look like.
 
 ```yaml
 receivers:
@@ -437,7 +457,11 @@ service:
 
 As you can see, we have added a processor into the processing pipeline to change the batching behavior, and applied that processor for both the metrics and traces pipelines. This means that if the microservice now sends either traces or metrics to the collector, it will flush whatever has been buffered every second or until the buffer reaches 1K of size. You can check this behavior by executing the collector again, then executing the microservice one more time, and sending another HTTP request to its API. Once you are done with the tests, make sure to stop the collector's execution to free up the port **5555**.
 
-Now that the microservice is properly sending telemetry data to the collector, and the collector works as expected, you can start preparing the collector to transmit telemetry data to the observability backend. Therefore, it is a good idea to have the collector being executed along with the observability backend. You can do this by adding a new service in the file `docker-compose.yaml` that represent the collector. Open the file `docker-compose.yaml` and add the following service before Grafana Tempo:
+Now that the microservice is properly sending telemetry data to the collector, and the collector works as expected, you can start preparing the collector to transmit telemetry data to the observability backend. Therefore, it is a good idea to have the collector being executed along with the observability backend. You can do this by adding a new service in the file `docker-compose.yaml` that represent the collector.
+
+6. Edit the file `docker-compose.yaml`
+
+You need to include the following service before Grafana Tempo:
 
 ```yaml
 collector:
@@ -465,7 +489,9 @@ So far, you have been using the logging from the console to visualize telemetry 
 
 Reason why you are going to configure the collector to send the traces to Grafana Tempo. Grafana Tempo is a tracing backend compatible with OpenTelemetry and other technologies that can process the received spans and make them available for visualization using Grafana. As you may expect, all the changes will occur in the collector configuration file.
 
-Open the file `collector-config-local.yaml` and update it with the following content:
+1. Edit the file `collector-config-local.yaml`
+
+Here is how the updated file should look like.
 
 ```yaml
 receivers:
@@ -501,23 +527,47 @@ service:
 
 Before testing this new configuration, let's understand what was done. We have added a new exporter called `otlp` that sends telemetry data to the endpoint `tempo:4317`. The port **4317** is being used by Grafana Tempo to receive any type of telemetry data; and since TLS is disabled in that port, the option `insecure` was used. Then, we have updated the traces pipeline to include another exporter along with the logging. Think about how powerful this is. Instead of just replacing the existing exporter, we added another one. This is useful for scenarios where you want to broadcast the same telemetry data to multiple observability backends — whether because you are executing them side-by-side or because you are working in a migration project.
 
-Save the contents of the `collector-config-local.yaml` file. Now execute the observability backend along with the collector, by running the command:
+2. Start the observability backend using:
 
 ```bash
 docker compose up -d
 ```
 
-If it is not running at this point, also execute the microservice by running the `run-microservice.sh` script. To check if Grafana Tempo can receive the traces generated by the microservice, send a couple HTTP requests to its API. Then, open your browser and point to the following location: [http://localhost:3000](http://localhost:3000/).
+3. Execute the script `run-microservice.sh`.
 
-Click on the option `Explore` on Grafana. Then, in the drop-down in the top, select the option `Tempo`. You should see the following screen:
+```bash
+sh run-microservice.sh
+```
+
+4. Send a couple HTTP requests to the microservice API.
+
+5. Open your browser and point to the following location: [http://localhost:3000](http://localhost:3000/).
+
+6. Click on the option `Explore` on Grafana.
+
+7. In the drop-down in the top, select the option `Tempo`.
+
+You should see the following screen:
 
 ![Grafana Tempo](images/fig_6.png)
 
-Click on the `Search` tab. In the `Service Name` drop-down that shows up, select the option `hello-app`. Then in the `Span Name` drop-down select the option `/hello`. Finally, click on the blue button named `Run query` in the upper right corder of the UI. You should see the following result:
+8. Click on the `Search` tab.
+
+9. In the `Service Name` drop-down that shows up, select the option `hello-app`.
+
+10. In the `Span Name` drop-down select the option `/hello`.
+
+11. Click on the blue button named `Run query` in the upper right corder of the UI.
+
+You should see the following result:
 
 ![Searching Traces](images/fig_7.png)
 
-These are the two traces generated when you sent two HTTP requests to the microservice API. To visualize the trace, click in the link over the `Trace ID`. You will see that Grafana splits the screen in two, and on the right side of the screen, it will show the details of the selected trace.
+These are the two traces generated when you sent two HTTP requests to the microservice API. To visualize the trace:
+
+12. Click in the link over the `Trace ID`.
+
+You will see that Grafana splits the screen in two, and on the right side of the screen, it will show the details of the selected trace.
 
 ![Viewing Trace Timeline](images/fig_8.png)
 
@@ -533,7 +583,11 @@ In the previous section, you learned how to configure the collector to send trac
 
 For tools like this to make sense, whoever sees the execution timeline needs to truly believe that what is shown is the actual code execution. In the case above, we are seeing is that it took **9.95ms** to complete that request sent to the microservice API represented by the `/hello` root span. **4.83ms** was spent with code for the `HelloAppController`, executed within the context of the microservice API call. In this example, `HelloAppController` is a child-span created automatically by the OpenTelemetry agent for Java.
 
-Now let's look into the actual microservice code. Go to **src/main/java** folder, you will see the code implementation for the microservice. In particular, look into the code of the Java class `HelloAppController.java`.
+Now let's look into the actual microservice code.
+
+1. Go to **src/main/java** folder. You will see the code for the microservice.
+
+2. Look into the code of the Java class `HelloAppController.java`.
 
 ```java
 @RestController
@@ -564,7 +618,9 @@ This is why I mentioned before that black-box instrumentation sometimes is not a
 
 But you don't have to settle for this. You can use the OpenTelemetry SDK to provide white-box instrumentation to your code to fit your needs. By the way, the OpenTelemetry SDK is another moving part that you have to be aware of. In this section, you are going to change the code of the microservice to highlight other important parts of the code, and make sure that the traces sent to Grafana Tempo are going to show all of that.
 
-Open the file `pom.xml`. Then, add the following properties right after the XML tag `parent`:
+3. Open the file `pom.xml`.
+
+4. Add the following properties right after the XML tag `parent`:
 
 ```xml
 <properties>
@@ -573,7 +629,9 @@ Open the file `pom.xml`. Then, add the following properties right after the XML 
 </properties>
 ```
 
-These properties will be throughout many parts of the code. Still in the `pom.xml` file, add the following dependencies:
+These properties will be throughout many parts of the code. Still in the `pom.xml` file:
+
+5. Add the following dependencies:
 
 ```xml
 <dependency>
@@ -601,7 +659,11 @@ These properties will be throughout many parts of the code. Still in the `pom.xm
 </dependency>    
 ```
 
-Save the changes made in the file. You now have everything you need to write code using the OpenTelemetry SDK for Java. Go back to the Java class `HelloAppControlller.java` that contains the code of the microservice. Change its code to the following version:
+6. Save the changes made in the `pom.xml` file.
+
+You now have everything you need to write code using the OpenTelemetry SDK for Java. Go back to the Java class `HelloAppControlller.java` that contains the code of the microservice.
+
+7. Change its code to the following version:
 
 ```java
 package tutorial.buildon.aws.o11y;
@@ -657,7 +719,17 @@ Before testing this new version of the code, let's understand what was done. We 
 
 Within the `hello()` method, we have added a section that creates a span called `mySpan`, that will represent the portion of the code that verifies if the response is valid. While creating spans, it is important to always call the method `end()` to share how long that span duration was. Here, you control the time it takes. Also, we have added the annotation `@WithSpan` to the method `buildResponse()`. This means that whenever that method is executed, a span will be created for it, including the correct start and end time of its duration.
 
-Save the changes made to the `HelloAppController.java` file. If the microservice is running, stop it and execute it again so the next test could reflect the changes you made. Once the microservice is up and running, send a couple of HTTP request to the microservice API. Then, go back to Grafana and search for the newly generated traces. Select one of them to visualize its details. This is how the timeline should look like right now.
+8. Save the changes made to the `HelloAppController.java` file.
+
+If the microservice is running, stop it and execute it again so the next test could reflect the changes you made. Once the microservice is up and running:
+
+9. Send a couple of HTTP request to the microservice API.
+
+10. Go to Grafana and search for the newly generated traces.
+
+11. Select one of them to visualize its details.
+
+This is how the timeline should look like right now.
 
 ![Complete Trace Timeline](images/fig_10.png)
 
@@ -669,7 +741,9 @@ If there is such thing of observability well implemented, I would say that it sh
 
 Now that you have learned how to use the OpenTelemetry SDK to create custom spans, let's see how to do the same for metrics. The ability to create your own metrics is important because sometimes you need to provide insight about certain aspects of the code that are tricky to monitor. In this section, you will change the code of the microservice to create and update two metrics: one that will count every time the microservice is executed, and another one to monitor the amount of memory the JVM is consuming.
 
-Go back to the Java class `HelloAppControlller.java` that contains the code of the microservice. Change its code to the following version:
+1. Edit the Java class `HelloAppController.java`.
+
+Change its code to the following version:
 
 ```java
 package tutorial.buildon.aws.o11y;
@@ -773,11 +847,17 @@ numberOfExecutions.add(1);
 
 As you can see, the fundamental difference between synchronous and asynchronous metrics is that for the synchronous ones, you need to control when and where in the code its value will be updated. For the sake of knowing how to look for this metrics in the observability backend, mind that we have used specific names for each metric. The metric that counts when the microservice is executed is called `custom.metric.number.of.exec`, and the metric that monitors the amount of memory consumed by the JVM is called `custom.metric.heap.memory`.
 
-Save the changes made to the `HelloAppController.java` file. Now that we have the metrics properly implemented, it is time to configure the collector to send them to Prometheus.
+2. Save the changes made to the `HelloAppController.java` file.
+
+Now that we have the metrics properly implemented, it is time to configure the collector to send them to Prometheus.
 
 ## Sending all the metrics to Prometheus
 
-Now that the microservice has been instrumented to produce metrics, we need to configure the collector to send them to Prometheus. Right now, the collector is sending all metrics to logging. To change this, update the processing pipeline from the `collector-config-local.yaml` file to the following:
+Now that the microservice has been instrumented to produce metrics, we need to configure the collector to send them to Prometheus. Right now, the collector is sending all metrics to logging. To change this, update the processing pipeline from the `collector-config-local.yaml` file.
+
+1. Edit the file `collector-config-local.yaml`
+
+Here is how the updated file should look like.
 
 ```yaml
 receivers:
@@ -816,7 +896,11 @@ service:
 
 In this new version of the processing pipeline, we have added a new exporter called `prometheus` that will be used to send the metrics to Prometheus. We have also updated the metrics pipeline to include this exporter. This new exporter behaves differently though. Instead of pushing the metrics to Prometheus, it will expose all the metrics in an endpoint using the port **6666**. This endpoint will be used by Prometheus to pull the metrics. This process in Prometheus is called [scrapping](https://prometheus.io/docs/prometheus/latest/getting_started/#configure-prometheus-to-monitor-the-sample-targets). For this reason, you need to update the Prometheus configuration to gather metrics from this endpoint.
 
-Go to the **o11y-backend** folder, and open the file `prometheus.yaml`. Update its contents to the following:
+2. Go to the **o11y-backend** folder.
+
+3. Open the file `prometheus.yaml`.
+
+Here is how the updated file should look like.
 
 ```yaml
 global:
@@ -830,25 +914,47 @@ scrape_configs:
       - targets: [ 'collector:6666' ]
 ```
 
-After making these changes, you will need to restart the containers for Prometheus and the collector. The easiest way to do this is restart all the containers at once:
+After making these changes, you will need to restart the containers for Prometheus and the collector.
+
+4. Restart the containers
 
 ```bash
 docker compose restart
 ```
 
-With all the containers up and running, it is now time to test all of this. If the microservice is running, stop it and execute it again so the next test could reflect the changes you made in the previous section. Once the microservice is up and running, send about a dozen HTTP requests to the microservice API. Then, go to Grafana, click on the `Explore` option, make sure to select `Prometheus` in the drop-down box, and then click in the button `Metrics browser`. You should see all metrics collected from the microservice.
+With all the containers up and running, it is now time to test all of this. If the microservice is running, stop it and execute it again so the next test could reflect the changes you made in the previous section. Once the microservice is up and running:
+
+5. Send about a dozen HTTP requests to the microservice API.
+
+6. Go to Grafana, click on the `Explore` option.
+
+7. Make sure to select `Prometheus` in the drop-down box.
+
+8. Click in the button `Metrics browser`.
+
+You should see all metrics collected from the microservice.
 
 ![Browsing Metrics](images/fig_11.png)
 
 As you can see, all the metrics coming from the microservice are now being stored in Prometheus, with each metric using the prefix `default` for the namespace. Along with the metrics created automatically by the OpenTelemetry agent for Java, there is the metrics `default_custom_metric_heap_memory` and `default_custom_metric_number_of_exec`, which were created programmatically in the previous section.
 
-Let's now visualize the metrics. Select the metric `default_custom_metric_number_of_exec` and then click in the `Use query` button. You should see the following.
+Let's now visualize the metrics.
+
+9. Select the metric `default_custom_metric_number_of_exec`.
+
+10. Click in the `Use query` button.
+
+You should see the following.
 
 ![Viewing the Number of Executions Metric](images/fig_12.png)
 
 Since this metric is monotonic, the graph itself is not very exciting, given that its value only increments. But the table sitting below the graph is useful for you to check the current value for this metric. It should be the number of HTTP requests you sent to the microservice API.
 
-The metric `default_custom_metric_heap_memory` should provide a better visualization. Repeat the steps you did above for the metric `default_custom_metric_number_of_exec`. Here is what you should see.
+The metric `default_custom_metric_heap_memory` should provide a better visualization.
+
+11. Repeat the steps `8` until `10` but for the metric `default_custom_metric_heap_memory`.
+
+Here is what you should see.
 
 ![Viewing the Memory Usage Metric](images/fig_13.png)
 
@@ -860,13 +966,19 @@ At this point, you have now completed all the objectives of this tutorial. You i
 
 However, there is one important aspect that you didn't have the chance to test: how much vendor neutral OpenTelemetry really is. This is why we provided you with this bonus section. You will switch the observability backend completely to AWS and everything that you have implemented so far **must** **work**. This means that you are going to get rid of Grafana Tempo, Prometheus, and Grafana, and replace them for AWS services that can handle traces and metrics. Specifically, you will send the traces to [AWS X-Ray](https://aws.amazon.com/xray) and the metrics to [Amazon CloudWatch](https://aws.amazon.com/cloudwatch).
 
-You can start by stopping all the containers being used so far for the observability backend and the collector.
+1. Stop all the containers.
 
 ```bash
 docker compose down
 ```
 
-If it is currently running, you can stop the microservice as well. No changes have to be made in the microservice code. Since the microservice essentially sends all telemetry data to an **OTLP** endpoint running on port **5555**, you are going to create an alternative processing pipeline for the collector. Therefore, create a new file called `collector-config-aws.yaml` with the following content:
+2. If it is currently running, stop the microservice as well.
+
+No changes have to be made in the microservice code. Since the microservice essentially sends all telemetry data to an **OTLP** endpoint running on port **5555**, you are going to create an alternative processing pipeline for the collector.
+
+3. Create a file called `collector-config-aws.yaml`.
+
+Add the following content:
 
 ```yaml
 receivers:
@@ -904,7 +1016,11 @@ This processing pipeline is very similar to the one you have used before, except
 
 These are exporters that are not available in the [default distribution of the OpenTelemetry collector](https://github.com/open-telemetry/opentelemetry-collector), but it is available in the [contributors’ version of the collector](https://github.com/open-telemetry/opentelemetry-collector-contrib), and the distribution [AWS OpenDistro for OpenTelemetry](https://aws-otel.github.io/). It may be a little confusing using [distributions](https://opentelemetry.io/docs/concepts/distributions/) of the collector instead of the official one, but this is a standard practice. As long as the distributions are created from the official code of the collector, you're going to be fine. Many observability vendors use this practice, as they derive from the official code to be inline with the spec and latest developments — but adding their specific support to help their community users.
 
-For this reason, you will use the collector from the AWS OpenDistro for OpenTelemetry in this tutorial. To configure the service for the collector, create a new Docker Compose file called `docker-compose-aws.yaml` with the following content:
+For this reason, you will use the collector from the AWS OpenDistro for OpenTelemetry in this tutorial. To configure the service for the collector:
+
+4. Create a new Docker Compose file called `docker-compose-aws.yaml`.
+
+Add the following content:
 
 ```yaml
 version: '3.0'
@@ -927,37 +1043,57 @@ services:
 
 Here, we are defining a container called `collector` that will use the AWS OpenDistro for OpenTelemetry distribution of the collector. We will provide the file `collector-config-aws.yaml` as parameter to define the processing pipeline for this collector. This container image was created to obtain the AWS credentials in different ways, but in this case, you will provide the credentials via the configured credentials stored in the `˜/.aws/credentials` file. Assuming you can have different profiles configured in that file, you are informing which one to use via the environment variabled `AWS_PROFILE`. You can learn different ways to provide the AWS credentials [here](https://github.com/aws-observability/aws-otel-collector/blob/main/docs/developers/docker-demo.md).
 
-This is it. You are ready to send the telemetry data from the microservice to AWS. Start the container for this collector:
+This is it. You are ready to send the telemetry data from the microservice to AWS.
+
+5. Start the container for this collector:
 
 ```bash
 docker compose -f docker-compose-aws.yaml up -d
 ```
 
-Now execute the microservice by running the script `run-microservice.sh`. Then, send a couple of HTTP requests to its API. This should be enough for you to verify if everything is working.
+6. Now execute the microservice by running the script `run-microservice.sh`.
 
-Open the AWS console. Configure the console to point to the region you have implemented in the `collector-config-aws.yaml` file. Here, you have used `us-east-1`.
+Then, send a couple of HTTP requests to its API. This should be enough for you to verify if everything is working.
+
+7. Open the AWS console.
+
+8. Configure the console to point to the region you have implemented in the `collector-config-aws.yaml` file which is `us-east-1`.
 
 ![AWS Console](images/fig_14.png)
 
-Then, go the AWS X-Ray service by clicking [here](https://us-east-1.console.aws.amazon.com/xray/home?region=us-east-1#/traces?timeRange=PT15M). You should be able to see the generated traces if you click in the menu option `Traces`, right under `X-Ray Traces`.
+9. Go the AWS X-Ray service by clicking [here](https://us-east-1.console.aws.amazon.com/xray/home?region=us-east-1#/traces?timeRange=PT15M).
+
+You should be able to see the generated traces if you click in the menu option `Traces`, right under `X-Ray Traces`.
 
 ![AWS X-Ray Traces](images/fig_15.png)
 
-If you want to see the details of each trace, click in the link created over the column `ID`. This is what you should see.
+10. Click in the link created over the column `ID`.
+
+This is what you should see.
 
 ![Viewing Trace Timeline](images/fig_16.png)
 
 As you can see, everything that you could see with Grafana before it is being shown here. Meaning that you were able to successfully switch the observability backend for traces without changing a single line of code for the microservice.
 
-Let's now verify the metrics. Go to the Amazon CloudWatch service by clicking [here](https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#metricsV2:graph=~()). Then, click on `All metrics`. This is what you should see.
+Let's now verify the metrics.
+
+11. Go to the Amazon CloudWatch service by clicking [here](https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#metricsV2:graph=~()).
+
+12. Then, click on `All metrics`.
+
+This is what you should see.
 
 ![Amazon CloudWatch Metrics](images/fig_17.png)
 
-As you can see from the image above, there are `255` metrics collected from your microservice. These are the `253` metrics collected automatically by the OpenTelemetry agent for Java, plus the two custom metrics you implemented. Let's look at the metric `custom.metric.number.of.exec`.
+As you can see from the image above, there are `429` metrics collected from your microservice. These are the `427` metrics collected automatically by the OpenTelemetry agent for Java, plus the two custom metrics you implemented.
+
+13. Look at the metric `custom.metric.number.of.exec`.
 
 ![Filtering for the Number of Executions Metric](images/fig_18.png)
 
-Once you find the metric, you can select it and add to the visualization. To speed things up for you, you can use the source below to implement a gauge that ranges from `0` to `10` that sums the metric for the period of `one` hour. Just click in the tab named `Source` and paste this JSON code.
+Once you find the metric, you can select it and add to the visualization. To speed things up for you, you can use the source below to implement a gauge that ranges from `0` to `10` that sums the metric for the period of `one` hour.
+
+14. Click in the tab named `Source` and paste the following JSON code.
 
 ```json
 {
