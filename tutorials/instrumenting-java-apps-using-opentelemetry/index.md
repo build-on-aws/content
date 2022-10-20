@@ -64,7 +64,9 @@ The good news is that once you understand these moving parts, OpenTelemetry beco
 
 To keep things focused and entertained, you are going to implement this observability scenario by using a code that contains an existing microservice written in [Java](https://openjdk.org/) and [Spring Boot](https://spring.io/projects/spring-boot), and a pre-configured observability backend. This observability backend is based on [Grafana Tempo](https://grafana.com/oss/tempo) for handling tracing data, [Prometheus](https://prometheus.io/) for metrics, and [Grafana](https://grafana.com/oss/grafana) for visualizing both types of telemetry data. The repository containing this existing code can be found [here](https://github.com/build-on-aws/instrumenting-java-apps-using-opentelemetry).
 
-However, instead of using the complete code already implemented, you are going to use a specific branch of this code that is incomplete. In this tutorial, you will implement the missing part to do things like transmitting traces to Grafana Tempo and metrics to Prometheus using OpenTelemetry. For this reason, clone the repository but using the following branch:
+However, instead of using the complete code already implemented, you are going to use a specific branch of this code called `build-on-aws-tutorial` that is incomplete. In this tutorial, you will implement the missing part to do things like transmitting traces to Grafana Tempo and metrics to Prometheus using OpenTelemetry.
+
+1. Clone the repository using the tutorial branch:
 
 ```bash
 git clone https://github.com/build-on-aws/instrumenting-java-apps-using-opentelemetry -b build-on-aws-tutorial
@@ -72,7 +74,15 @@ git clone https://github.com/build-on-aws/instrumenting-java-apps-using-opentele
 
 You can use any tool to work with the files from this repository, including [Vim](https://www.vim.org/). But I would highly recommend using a full-fetched IDE, such as [Visual Studio Code](https://code.visualstudio.com/), for this, as you may need to work with different files simultaneously. It will make your life less dreadful.
 
-Now let's make sure everything works as expected. Finishing this section successfully is paramount for you to start and complete the next ones. First, check if the microservice can be compiled, built, and executed. This will require you to have Java and Maven properly installed in your machine. Once you have this, execute the script `run-microservice.sh` to build the microservice and execute it.
+Now let's make sure everything works as expected. Finishing this section successfully is paramount for you to start and complete the next ones. First, check if the microservice can be compiled, built, and executed. This will require you to have Java and Maven properly installed in your machine. The script `run-microservice.sh` builds the code and also execute the microservice at the same time.
+
+2. Execute the script `run-microservice.sh`.
+
+```bash
+sh run-microservice.sh
+```
+
+This is the log output from the microservice:
 
 ```log
 
@@ -96,13 +106,15 @@ Now let's make sure everything works as expected. Finishing this section success
 2022-08-24 14:11:23.344  INFO 4523 --- [           main] tutorial.buildon.aws.o11y.HelloApp       : Started HelloApp in 4.905 seconds (JVM running for 5.849)
 ```
 
-This should expose a REST API over the port **8888**. To test if the API is accepting requests, send an HTTP request to it.
+The microservice exposes an REST API over the port **8888**. To test if the API is accepting requests:
+
+3. Send an HTTP request to it.
 
 ```bash
 curl -X GET http://localhost:8888/hello
 ```
 
-You must receive a reply like this:
+You should receive a reply like this:
 
 ```json
 {"message":"Hello World","valid":true}
@@ -110,21 +122,35 @@ You must receive a reply like this:
 
 Once you are done with the tests, stop the `run-microservice.sh` to shut down the microservice. You can do this by pressing `Ctrl+C`. From this point on, every time you need to execute the microservice again with a new version of the code that you changed, just execute the same script.
 
-You can now check the observability backend. As mentioned before, this is based on Grafana Tempo, Prometheus, and Grafana. The code contains a `docker-compose.yaml` file with the three services pre-configured. To execute them, start up the services using:
+You can now check the observability backend. As mentioned before, this is based on Grafana Tempo, Prometheus, and Grafana. The code contains a `docker-compose.yaml` file with the three services pre-configured.
+
+4. Start the observability backend using:
 
 ```bash
 docker compose up -d
 ```
 
-It may take several minutes until this command completes, as the respective container images need to be downloaded. But once it finishes, you should have Grafana Tempo running on port **3200**, Prometheus running on port **9090**, and Grafana running on port **3000**. Let's check if they are actually running. Starting with Grafana Tempo, open a browser and point the location to [http://localhost:3200/status](http://localhost:3200/status). You should see the following page:
+It may take several minutes until this command completes, as the respective container images need to be downloaded. But once it finishes, you should have Grafana Tempo running on port **3200**, Prometheus running on port **9090**, and Grafana running on port **3000**. Let's check if they are actually running.
+
+5. Open a browser and point the location to [http://localhost:3200/status](http://localhost:3200/status).
+
+You should see the following page:
 
 ![Grafana Tempo](images/fig_1.png)
 
-You will learn later in this tutorial that Grafana Tempo is also leveraging the port **4317** to receive spans generated by the microservice. Now let's check Prometheus. Point your browser to [http://localhost:9090/status](http://localhost:9090/status) and you should see the following page:
+You will learn later in this tutorial that Grafana Tempo is also leveraging the port **4317** to receive spans generated by the microservice. Now let's check Prometheus.
+
+6. Point your browser to [http://localhost:9090/status](http://localhost:9090/status).
+
+You should see the following page:
 
 ![Prometheus](images/fig_2.png)
 
-This means it is running OK. Finally, let's check Grafana. Point your browser to [http://localhost:3000](http://localhost:3000/) and you should see the following page:
+This means it is running OK. Finally, let's check Grafana.
+
+7. Point your browser to [http://localhost:3000](http://localhost:3000/).
+
+You should see the following page:
 
 ![Grafana](images/fig_3.png)
 
@@ -132,7 +158,9 @@ Just like the others, this means it is running OK. Before we wrap up and get you
 
 ![DataSources](images/fig_4.png)
 
-This means that once telemetry data for traces and metrics are transmitted to the respective backends — notably Grafana Tempo and Prometheus — you will be able to visualize them here. At this point, you can stop the observability backend by running the command:
+This means that once telemetry data for traces and metrics are transmitted to the respective backends — notably Grafana Tempo and Prometheus — you will be able to visualize them here.
+
+8. Stop the observability backend using:
 
 ```bash
 docker compose down
@@ -148,7 +176,9 @@ When black-box instrumentation is not available, you can use white-box instrumen
 
 For the microservice of this tutorial, we will use both approaches so you can learn the differences. We will start with black-box instrumentation and later on you will practice white-box instrumentation. Since this microservice has been written in Java, we can leverage Java's agent architecture to attach an agent that can automatically add instrumentation code during the JVM bootstrap.
 
-To do this, edit the file `run-microservice.sh`. You will change its code to instruct the script to download the agent for OpenTelemetry that will instrument the microservice during bootstrap. If the agent was downloaded before, meaning that its file is available locally, then the script will simply reuse it. Here is how the script should look like.
+1. Edit the file `run-microservice.sh`.
+
+You will change its code to instruct the script to download the agent for OpenTelemetry that will instrument the microservice during bootstrap. If the agent was downloaded before, meaning that its file is available locally, then the script will simply reuse it. Here is how the updated script should look like.
 
 ```bash
 #!/bin/bash
@@ -163,13 +193,19 @@ fi
 java -javaagent:./${AGENT_FILE} -jar target/hello-app-1.0.jar
 ```
 
-If you try to execute the microservice by running the script `run-microservice.sh` after this change, you will notice that nothing much will happen. It will continue to serve HTTP requests sent to the API as it would normally do. However, be sure that traces and metrics are being generated already. They are just not being properly processed. The OpenTelemetry agent is configured by default to export telemetry data to a local OTLP endpoint running on port **4317**. Reason why you will see in the logs messages like this:
+2. Execute the script `run-microservice.sh`.
+
+After the changes, you will notice that nothing much will happen. It will continue to serve HTTP requests sent to the API as it would normally do. However, be sure that traces and metrics are being generated already. They are just not being properly processed. The OpenTelemetry agent is configured by default to export telemetry data to a local OTLP endpoint running on port **4317**. Reason why you will see in the logs messages like this:
 
 ```log
 [otel.javaagent 2022-08-25 11:18:14:865 -0400] [OkHttp http://localhost:4317/...] ERROR io.opentelemetry.exporter.internal.grpc.OkHttpGrpcExporter - Failed to export spans. The request could not be executed. Full error message: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:4317
 ```
 
-We will fix this later. But for now, you can visualize the traces and metrics created using plain old logging. Yes, the oldest debugging technique is available for the OpenTelemetry agent as well. To enable logging for your telemetry data, change the `run-microservice.sh` script to add environment variables that will tell the agent where to export the data. Here is how the script should look like:
+We will fix this later. But for now, you can visualize the traces and metrics created using plain old logging. Yes, the oldest debugging technique is available for the OpenTelemetry agent as well. To enable logging for your telemetry data:
+
+3. Edit the file `run-microservice.sh`.
+
+Here is how the updated script should look like.
 
 ```bash
 #!/bin/bash
@@ -187,7 +223,15 @@ export OTEL_METRICS_EXPORTER=logging
 java -javaagent:./${AGENT_FILE} -jar target/hello-app-1.0.jar
 ```
 
-Save the changes and execute the microservice. Then, send a HTTP request to its API. You will notice that in the logs there will be an entry like this:
+4. Execute the script `run-microservice.sh`.
+
+5. Send an HTTP request to it.
+
+```bash
+curl -X GET http://localhost:8888/hello
+```
+
+You will notice that in the logs there will be an entry like this:
 
 ```log
 2022-08-25 11:36:27.883  INFO 53938 --- [nio-8888-exec-1] t.buildon.aws.o11y.HelloAppController    : The response is valid.
