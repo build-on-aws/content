@@ -393,4 +393,4 @@ Now, we have our hashtags ready for Picturesocial! If you want to clone the API 
 [git clone https://github.com/aws-samples/picture-social-sample/](https://github.com/aws-samples/picture-social-sample.git) -b ep5
 ```
 
-If you got here, that means you are now using artificial intelligence services to label images! In the next post, we are going to learn about service integration, access at the pod level using Kubernetes, AWS IAM with Open ID Connect, and then we will deploy this API to Kubernetes!
+If you got here, that means you are now using artificial intelligence services to label images!
