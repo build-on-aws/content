@@ -637,13 +637,13 @@ These properties will be throughout many parts of the code. Still in the `pom.xm
 <dependency>
     <groupId>io.opentelemetry</groupId>
     <artifactId>opentelemetry-api</artifactId>
-    <version>1.17.0</version>
+    <version>1.18.0</version>
 </dependency>
 
 <dependency>
     <groupId>io.opentelemetry.instrumentation</groupId>
     <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-    <version>1.17.0-alpha</version>
+    <version>1.18.0-alpha</version>
 </dependency>
 
 <dependency>
