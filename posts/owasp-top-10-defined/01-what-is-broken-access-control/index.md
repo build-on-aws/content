@@ -17,11 +17,11 @@ This is a 10-part series:
 
 ## Overview of Access Control
 
-To understand the workings of a broken access control attack, one must fist understand the goal we are trying to acheive through the use of access control.  So what is access control and what is our expectation of the mechanism?  
+To understand the workings of a broken access control attack, one must first understand the goal we are trying to acheive through the use of access control.  So what is access control and what is our expectation of the mechanism?  
 
 > Not every closed door is locked.  - Norm Kelly
 
-The easiest analogy for me to convey access control always goes back to a home with a front door.  Entering that front door places a person in a trusted positon. After all, we don't invite just anyone into our homes.  No, we are selective about who get's an invite and for that reason we have a front door.  In most cases that door is going to have a lock on it.  In some communities, the people who live there are trusting and rarely bolt the lock. This cannot be the case with our networks. Unfortunaly as things go, we often find networks that appear to have the front door shut, but are not locked.  This can come if the form of a weak password policy, vulnerabilities in the network protcocols used for access, or even in the software platform that's being accessed.  
+The easiest analogy for me to convey access control always goes back to a home with a front door.  Entering that front door places a person in a trusted positon. After all, we don't invite just anyone into our homes.  No, we are selective about who gets an invite and for that reason we have a front door.  In most cases that door is going to have a lock on it.  In some communities, the people who live there are trusting and rarely bolt the lock. This cannot be the case with our networks. Unfortunaly as things go, we often find networks that appear to have the front door shut, but are not locked.  This can come if the form of a weak password policy, vulnerabilities in the network protcocols used for access, or even in the software platform that's being accessed.  
 
 Access-control is the formal mechanism to provide trusted access to an organization's technical and business resources.  But access control is a much broader topic than can be covered in a single article.  There are many types or categories of access control, ranging from Role-based Access Control (RBAC), Rule-based Access Control, Port-based Access Control, and so on.  Within access control, there are various phases to provide not only the authentication of the attempting party, but authorization, management, and auditing.  Access control failures can occur in any of these types or phases.
 
