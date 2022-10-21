@@ -47,6 +47,7 @@ Before starting this tutorial, you will need the following:
  - [Getting started with the existing code](#getting-started-with-the-existing-code)
  - [Automatic instrumentation with the OpenTelemetry agent](#automatic-instrumentation-with-the-opentelemetry-agent)
  - [Sending telemetry data to the collector](#sending-telemetry-data-to-the-collector)
+ - [Sending all the traces to Grafana Tempo](#sending-all-the-traces-to-grafana-tempo)
  - [Manual instrumentation with the OpenTelemetry SDK](#manual-instrumentation-with-the-opentelemetry-sdk)
  - [Custom metrics with the OpenTelemetry SDK](#custom-metrics-with-the-opentelemetry-sdk)
  - [Sending all the metrics to Prometheus](#sending-all-the-metrics-to-prometheus)
