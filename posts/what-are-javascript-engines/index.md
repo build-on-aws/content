@@ -10,7 +10,7 @@ authorName: Jen Looper
 date: 2022-11-01
 ---
 
-## Intro
+![banner](./images/banner.png)
 
 Writing code for the web sometimes feels a little magical in that we write a sequence of characters in a file, open that file in a browser, and watch it come alive. But understanding the tech behind the magic can help you better tune your craft as a programmer. 
 
