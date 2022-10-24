@@ -4,6 +4,8 @@ description: This post will guide you to pack your old Java EE application as a 
 tags:
   - java
   - containers
+  - app-runner
+  - ecr
 authorGithubAlias: vsenger
 authorName: Vinicius Senger
 date: 2022-10-19
