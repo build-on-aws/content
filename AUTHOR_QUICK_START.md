@@ -64,6 +64,8 @@ BuildOn.AWS content is not your traditional marketing content. It doesn't try to
 Wondering what type of content fits this content platform? Here are some examples written by the BuildOn.AWS team.
 
 * [What happens when you type a URL into your browser?](https://aws.amazon.com/blogs/mobile/what-happens-when-you-type-a-url-into-your-browser/)
+* [Four Reasons Why GraphQL Is The Future](https://blog.buildon.aws/posts/four-reasons-why-graphql-is-the-future/)
+* [Topic or a Queue - What exactly is Apache Kafka?](https://blog.buildon.aws/posts/kafka-topic-or-queue/)
 * [10 Ways to Use Serverless Functions](https://dev.to/aws/10-ways-to-use-serverless-functions-bme)
 * [Protecting from vulnerabilities in Java: How we managed the log4j crisis](https://medium.com/i-love-my-local-farmer-engineering-blog/protecting-from-vulnerabilities-in-java-how-we-managed-the-log4j-crisis-68d3e90a7586)
 * [How to debug machine learning models to catch issues early and often](https://towardsdatascience.com/a-quick-guide-to-managing-machine-learning-experiments-af84da6b060b)
@@ -96,7 +98,7 @@ After your content proposal has been `accepted`, you'll write your content in [M
 Use the [template](https://github.com/build-on-aws/content/raw/main/CONTENT_TEMPLATE.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
 ```
 ---
-title: What Happens When You Type a URL Into Your Browser
+title: "What Happens When You Type a URL Into Your Browser"
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 tags:
   - dns-lookup
@@ -143,7 +145,7 @@ If you already have a fork and have cloned the repo locally, make sure your fork
     1. On the Pulls page of your fork (https://github.com/YOUR_GITHUB_ACCOUNT/content/pulls), select the New Pull Request button
     1. In the Comparing Changes section, make sure the base repository is `build-on-aws/content` with the branch set to `main` and the head repository is `YOUR_GITHUB_ACCOUNT/content` with the branch set to `my-post` as you specified in step 3 above.
     1. Select Create Pull Request button
-    1. Add a title to the pull request and fill out the pull request template 
+    1. Add your content title to the pull request and fill out the pull request template 
     1. In the side menu, select the Gear icon to add the label `ready for review`
 
 Your content is now submitted and will be queued for review. When a reviewer starts to review your content, they will add the label `review in process`.
