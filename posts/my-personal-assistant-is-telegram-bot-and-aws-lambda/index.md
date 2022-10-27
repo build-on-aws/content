@@ -1,34 +1,33 @@
 ---
 layout: blog.11ty.js
 title: My Personal Assistant is Telegram Bot (and AWS Lambda)
-description: Every developers should have personal (bot) assistant to get things (or boring tasks) done. 
+description: Every developer should have personal (bot) assistant to get things (or boring tasks) done.
 tags:
-  - telegram 
-  - bot 
+  - telegram
+  - bot
   - serverless
-authorGithubAlias: donnieprakoso 
+authorGithubAlias: donnieprakoso
 authorName: Donnie Prakoso
 date: 2022-07-07
 ---
 
-We often need tools to get things done. As a developer, one of my productivity hacks is to use Telegram bots to help me get things done quickly. From checking the bus schedule for commuting, to image resizing. Most of the small, unpleasant tasks I delegate to the Telegram bot. Simply put, Telegram bot is my personal assistant. 
+We often need tools to get things done. As a developer, one of my productivity hacks is to use Telegram bots to help me get things done quickly. From checking the bus schedule for commuting, to image resizing. Most of the small, unpleasant tasks I delegate to the Telegram bot. Simply put, Telegram bot is my personal assistant.
 
-If that opening line got your interest, this article will provide you the base foundation to build Telegram bot. Plus, with ready-to-deploy codes which you can find on this Github repo.
+If that opening line got your interest, this article will provide you the base foundation to build Telegram bot. Plus, with ready-to-deploy code which you can find on this Github repo.
 
 > You can find the source code in this Github repo: [donnieprakoso/telegram-bot-boilerplate](https://github.com/donnieprakoso/telegram-bot-boilerplate).
 
+Now, let's get more technical.
 
-Now, let's get more technical. 
-
-To interact with Telegram bots — such as getting messages or photos — we can use the polling method ([getUpdates](https://core.telegram.org/bots/api#getting-updates)) and webhook ([setWebhook](https http://core.telegram.org/bots/api#setwebhook)). Of these two methods, I'm more comfortable using a webhook because I don't have to develop polling mechanisms that use resources inefficiently. With a webhook, if there is a message, Telegram will make a `POST` request to the webhook URL which will trigger our backend to process the request.
+To interact with Telegram bots — such as getting messages or photos — we can use either polling ([getUpdates](https://core.telegram.org/bots/api#getting-updates)) or webhooks ([setWebhook](https http://core.telegram.org/bots/api#setwebhook)). Of these two methods, I'm more comfortable using a webhook because I don't have to develop polling mechanisms that use resources inefficiently. With a webhook, if there is a message, Telegram will make a `POST` request to the webhook URL which will trigger our backend to process the request.
 
 ![](images/TelegramBot-Page-1.drawio.png)
 
-In this article, I will explain how I built a Telegram bot that integrates with webhooks and serverless APIs. For the serverless API, I will use the Amazon API Gateway integrated with an AWS Lambda function. This article won't explain how I built a bot to notify me about bus schedules or resizing images. However, I will explain the basic concepts using the same source code that I am currently using for all of my bots.
+In this article, you will learn how to build a Telegram bot that integrate with serverless APIs. This article provides an overview of the basic concept, workflow, and requirements. You can extend the functionality by adding business logic based on your needs. For the serverless API, you will use the Amazon API Gateway and an AWS Lambda function.
 
 ![](images/TelegramBot-Page-2.drawio.png)
 
-Like my other articles, all of the stacks here will use the AWS CDK for provisioning resources so we get a consistent deployment. If you haven't used the AWS CDK, please install the CDK first, and follow the tutorial for bootstrapping.
+All the stacks here will use the AWS CDK to provision resources, so you'll get a consistent deployment. If you are new to the AWS CDK, please [install the CDK first](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) and then follow the [tutorial for bootstrapping](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html).
 
 ## Let's Get Started!
 
@@ -46,7 +45,7 @@ In this step we will deploy the serverless API. The output of this step is the A
 
 #### Code Review: SSM Parameter Store
 
-The first thing we need to define in the CDK app is to create resources to store the Telegram token. Of course we want to avoid hard coding in this application. We will use the AWS SSM Parameter Store which we can later retrieve inside the AWS Lambda function. The parameter name that we use is `telegram_token` which you can find in the SSM Parameter Store dashboard, with a dummy value of `TELEGRAM_TOKEN` which we will need to change manually later.
+The first thing we need to define in the CDK app is to create resources to store the Telegram token. Of course we want to avoid hard coding in this application. We will use the [AWS SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) which we can later retrieve inside the AWS Lambda function. The parameter name that we use is `telegram_token` which you can find in the SSM Parameter Store dashboard, with a dummy value of `TELEGRAM_TOKEN` which we will need to change manually later.
 
 ```python
 ssm_telegram_token = _ssm.StringParameter(self, id="{}-ssm-telegram-token".format(
@@ -96,11 +95,11 @@ fnLambda_handle.add_environment(
     "SSM_TELEGRAM_TOKEN", ssm_telegram_token.parameter_name)
 ```
 
-*But what about the code for AWS Lambda?*
+_But what about the code for AWS Lambda?_
 
 Here we define `AssetCode` which we can get in `lambda-functions/webhook` folder. There is only 1 main file which is `app.py`, and let's evaluate what this AWS Lambda (`lambda-functions/webhook/app.py`) will do:
 
-The first thing it will do is get the Telegram token for the SSM Parameter Store using string `SSM_TELEGRAM_TOKEN` from the environment variables. To do this, we just need to call `os.getenv("SSM_TELEGRAM_TOKEN")`. The important thing here is how we construct the `TELEGRAM_BASE_URL` variable which is the Telegram endpoint to interact with bots.
+The first thing it will do is get the Telegram token for the SSM Parameter Store using string `SSM_TELEGRAM_TOKEN` from the environment variables. To do this, we need to call `os.getenv("SSM_TELEGRAM_TOKEN")`. The important thing here is how we construct the `TELEGRAM_BASE_URL` variable which is the Telegram endpoint to interact with bots.
 
 ```python
 # Get SSM Parameter Store for Telegram Token
@@ -122,7 +121,9 @@ def send_message(chat_ID, text):
                                  data=data)
 ```
 
-After that, we define the `handler` function which is the main function that will be triggered by AWS Lambda. In the context of my use case, I need to be able to interact with media images as well as text. Therefore, here I define two key properties, namely `text` to be able to parse requests for text messages, and also `photo` to process messages with images.
+Once we have defined the `send_message` function, the next part is to define the `handler` function. The `handler⁣` function is the main event loop function that processes events. When the Lambda function receives an event, it passes the event (and runtime context) to the `handler⁣` function.
+
+In this case, the webhooks calls will invoke this Lambda function. For this Lambda function, I need to be able to interact with media images as well as text. Therefore, here I define two key properties, namely `text` to be able to parse requests for text messages, and also `photo` to process messages with images.
 
 ```python
 def handler(event, context):
@@ -152,7 +153,7 @@ def handler(event, context):
 
 #### Code Review: REST API with Amazon API Gateway
 
-Back to the CDK app, after defining the SSM Parameter Store, IAM, and AWS Lambda, it's time to define the Amazon API Gateway. 
+Back to the CDK app, after defining the SSM Parameter Store, IAM, and AWS Lambda, it's time to define the Amazon API Gateway.
 
 Here I define a REST API — you can use any API type supported by Amazon API Gateway, such as the HTTP API. After that, I defined the integration for AWS Lambda. We also need to define a resource for this API path URI, and by defining `add_resource("telegram")`, Telegram can use our webhook URL at `exampledomain.com/telegram` using the `POST` method.
 
@@ -166,8 +167,8 @@ int_webhook = _ag.LambdaIntegration(fnLambda_handle)
 
 res_data = api.root.add_resource('telegram')
 res_data.add_method('POST', int_webhook)
-```        
-        
+```
+
 ```python
 core.CfnOutput(self,
                "{}-output-apiEndpointURL".format(stack_prefix),
@@ -204,15 +205,16 @@ Click the `telegram_token` parameter and click the `Edit` button.
 Change the value of `TELEGRAM_TOKEN` to the value of the Telegram token you got.
 
 ![](images/ssm-3.png)
+
 ### Step 5: Configure the Webhook
 
-After that, all you need to do now is set up your bot using a webhook. For that, you need to open the following URL and replace it with the appropriate variable:
+After that, set up your bot using a webhook. For that, you need to open the following URL and replace it with the appropriate variable:
 
 `https://api.telegram.org/bot{TELEGRAM TOKEN}/setWebhook?url={API ENDPOINT URL}`
 
 Change `{TELEGRAM TOKEN}` to your Telegram token. Then, change `{URL API ENDPOINT}` to the URL of Amazon API Gateway and add `/telegram`, for example: `https://XYZ.execute-api.ap-southeast-1.amazonaws.com/prod/telegram `.
 
-After that, you just need to open a browser and enter the URL. If successful, you will get the following response:
+After that, you need to open your browser and go to the URL. If this works, you'll get this response.:
 
 ![](images/webhook-1.png)
 
@@ -221,7 +223,6 @@ After that, you just need to open a browser and enter the URL. If successful, yo
 And that's it! At this stage, you have already done the integration for your Telegram bot and webhook. For testing, please send a message to your bot. You will get an echo response for the `text` message.
 
 ![](images/test-1.png)
-
 
 You can also send a message with a photo, and get a confirmation image received with or without a caption.
 
