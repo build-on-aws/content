@@ -1,6 +1,6 @@
 ---
 layout: blog.11ty.js
-title: My Personal Assistant is Telegram Bot (and AWS Lambda)
+title: My Personal Assistant is a Telegram Bot
 description: Every developer should have personal (bot) assistant to get things (or boring tasks) done.
 tags:
   - telegram
@@ -21,11 +21,11 @@ Now, let's get more technical.
 
 To interact with Telegram bots — such as getting messages or photos — we can use either polling ([getUpdates](https://core.telegram.org/bots/api#getting-updates)) or webhooks ([setWebhook](https http://core.telegram.org/bots/api#setwebhook)). Of these two methods, I'm more comfortable using a webhook because I don't have to develop polling mechanisms that use resources inefficiently. With a webhook, if there is a message, Telegram will make a `POST` request to the webhook URL which will trigger our backend to process the request.
 
-![](images/TelegramBot-Page-1.drawio.png)
+![Overview of request from Telegram, webhook and serverless API](images/TelegramBot-Page-1.drawio.png)
 
 In this article, you will learn how to build a Telegram bot that integrate with serverless APIs. This article provides an overview of the basic concept, workflow, and requirements. You can extend the functionality by adding business logic based on your needs. For the serverless API, you will use the Amazon API Gateway and an AWS Lambda function.
 
-![](images/TelegramBot-Page-2.drawio.png)
+![Diagram architecture](images/TelegramBot-Page-2.drawio.png)
 
 All the stacks here will use the AWS CDK to provision resources, so you'll get a consistent deployment. If you are new to the AWS CDK, please [install the CDK first](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) and then follow the [tutorial for bootstrapping](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html).
 
@@ -35,7 +35,7 @@ All the stacks here will use the AWS CDK to provision resources, so you'll get a
 
 First, we need to create a bot using [@BotFather](https://t.me/botfather). You need to run the command `/newbot` and follow the instructions from @BotFather to give it a name. Once that's all done, you'll get the URL for the bot you just created as well as a token that you can use to interact with your bot.
 
-![](images/registration-1.png)
+![Bot registration using @BotFather](images/registration-1.png)
 
 After you get the token, keep your token safe and don't share it with anyone for security reasons. We will use Telegram token in the following steps.
 
@@ -43,18 +43,18 @@ After you get the token, keep your token safe and don't share it with anyone for
 
 In this step we will deploy the serverless API. The output of this step is the API Endpoint URL that we can use to register the webhook for the Telegram bot that we just created. Before we deploy this serverless API stack, let's do a code review so you understand what the CDK app will do.
 
-#### Code Review: SSM Parameter Store
+#### Code Review: AWS Systems Manager Parameter Store
 
-The first thing we need to define in the CDK app is to create resources to store the Telegram token. Of course we want to avoid hard coding in this application. We will use the [AWS SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) which we can later retrieve inside the AWS Lambda function. The parameter name that we use is `telegram_token` which you can find in the SSM Parameter Store dashboard, with a dummy value of `TELEGRAM_TOKEN` which we will need to change manually later.
+The first thing we need to define in the CDK app is to create resources to store the Telegram token. Of course we want to avoid hard coding in this application. We will use the [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) which we can later retrieve inside the Lambda function. The parameter name that we use is `telegram_token` which you can find in the Parameter Store dashboard, with a dummy value of `TELEGRAM_TOKEN` which we will need to change manually later.
 
 ```python
 ssm_telegram_token = _ssm.StringParameter(self, id="{}-ssm-telegram-token".format(
     stack_prefix), parameter_name="telegram_token", description="Telegram Bot Token", type=_ssm.ParameterType.STRING, string_value="TELEGRAM_TOKEN")
 ```
 
-#### Code Review: IAM Roles
+#### Code Review: AWS IAM Roles
 
-The next thing we need to define are the IAM roles that define AWS Lambda access to write log groups with Amazon CloudWatch as well as access to the SSM Parameter Store. For the record, we can grant access to the AWS Lambda function by calling the `.grant_read()` function, but I prefer this approach because I can explicitly implement for [least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege.html).
+The next thing we need to define are the IAM roles that define Lambda function access to write log groups with Amazon CloudWatch as well as access to the Parameter Store. For the record, we can grant access to the Lambda function by calling the `.grant_read()` function, but I prefer this approach because I can explicitly implement for [least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege.html).
 
 ```python
 lambda_role = _iam.Role(
@@ -79,7 +79,7 @@ lambda_role.add_to_policy(ssm_policy_statement)
 
 #### Code Review: Define AWS Lambda Function
 
-After that, we will define the AWS Lambda function which is the central point in processing the request. Here, I define some properties for AWS Lambda functions, such as `handler`, `timeout`, `tracing` using AWS X-Ray, and using Python 3.8 `runtime`. For `role`, we will use `lambda_role` which we defined above. Also, for AWS Lambda to be able to get the SSM Parameter Store, we will pass an environment variable called `SSM_TELEGRAM_TOKEN`.
+After that, we will define the Lambda function which is the central point in processing the request. Here, I define some properties for Lambda functions, such as `handler`, `timeout`, `tracing` using AWS X-Ray, and using Python 3.8 `runtime`. For `role`, we will use `lambda_role` which we defined above. Also, for Lambda function to be able to get the Parameter Store, we will pass an environment variable called `SSM_TELEGRAM_TOKEN`.
 
 ```python
 fnLambda_handle = _lambda.Function(
@@ -97,12 +97,12 @@ fnLambda_handle.add_environment(
 
 _But what about the code for AWS Lambda?_
 
-Here we define `AssetCode` which we can get in `lambda-functions/webhook` folder. There is only 1 main file which is `app.py`, and let's evaluate what this AWS Lambda (`lambda-functions/webhook/app.py`) will do:
+Here we define `AssetCode` which we can get in `lambda-functions/webhook` folder. There is only 1 main file which is `app.py`, and let's evaluate what this Lambda function (`lambda-functions/webhook/app.py`) will do:
 
-The first thing it will do is get the Telegram token for the SSM Parameter Store using string `SSM_TELEGRAM_TOKEN` from the environment variables. To do this, we need to call `os.getenv("SSM_TELEGRAM_TOKEN")`. The important thing here is how we construct the `TELEGRAM_BASE_URL` variable which is the Telegram endpoint to interact with bots.
+The first thing it will do is get the Telegram token for the Parameter Store using string `SSM_TELEGRAM_TOKEN` from the environment variables. To do this, we need to call `os.getenv("SSM_TELEGRAM_TOKEN")`. The important thing here is how we construct the `TELEGRAM_BASE_URL` variable which is the Telegram endpoint to interact with bots.
 
 ```python
-# Get SSM Parameter Store for Telegram Token
+# Get Parameter Store for Telegram Token
 ssm = boto3.client('ssm')
 SSM_TELEGRAM_TOKEN = os.getenv('SSM_TELEGRAM_TOKEN')
 TELEGRAM_TOKEN = ssm.get_parameter(Name=SSM_TELEGRAM_TOKEN)[
@@ -153,9 +153,9 @@ def handler(event, context):
 
 #### Code Review: REST API with Amazon API Gateway
 
-Back to the CDK app, after defining the SSM Parameter Store, IAM, and AWS Lambda, it's time to define the Amazon API Gateway.
+Back to the CDK app, after defining the Parameter Store, IAM, and Lambda function, it's time to define the API Gateway.
 
-Here I define a REST API — you can use any API type supported by Amazon API Gateway, such as the HTTP API. After that, I defined the integration for AWS Lambda. We also need to define a resource for this API path URI, and by defining `add_resource("telegram")`, Telegram can use our webhook URL at `exampledomain.com/telegram` using the `POST` method.
+Here I define a REST API — you can use any API type supported by API Gateway, such as the HTTP API. After that, I defined the integration for Lambda function. We also need to define a resource for this API path URI, and by defining `add_resource("telegram")`, Telegram can use our webhook URL at `exampledomain.com/telegram` using the `POST` method.
 
 ```python
 api = _ag.RestApi(
@@ -178,7 +178,7 @@ core.CfnOutput(self,
 
 ### Step 3: Deployment
 
-To deploy our serverless API stack, you will first need to install all the libraries that will be used by AWS Lambda functions with the following command in the `lambda-functions/webhook` folder:
+To deploy our serverless API stack, you will first need to install all the libraries that will be used by Lambda functions with the following command in the `lambda-functions/webhook` folder:
 
 ```bash
 pip install -r requirements.txt -t .
@@ -190,21 +190,21 @@ After that, you can switch to the `cdk` folder, and deploy the serverless API wi
 cdk deploy
 ```
 
-Once the process is complete, you will get an endpoint URL from the Amazon API Gateway.
+Once the process is complete, you will get an endpoint URL from the API Gateway.
 
 ### Step 4: Configure Telegram Token
 
-Before we can use the webhook, we need to set up the Telegram token in the SSM Parameter Store. For that we need to do the following steps:
+Before we can use the webhook, we need to set up the Telegram token in the Parameter Store. For that we need to do the following steps:
 
-Go to SSM Parameter store [dashboard](https://ap-southeast-1.console.aws.amazon.com/systems-manager/parameters/?tab=Table) and use `telegram_token` as filter.
+Go to Parameter Store [dashboard](https://console.aws.amazon.com/systems-manager/parameters/?tab=Table) and use `telegram_token` as filter.
 
-![](images/ssm-1.png)
+![Parameter Store dashboard](images/ssm-1.png)
 Click the `telegram_token` parameter and click the `Edit` button.
 
-![](images/ssm-2.png)
-Change the value of `TELEGRAM_TOKEN` to the value of the Telegram token you got.
+![Edit telegram_token](images/ssm-2.png)
+Change the value of `telegram_token` to the value of the Telegram token you got.
 
-![](images/ssm-3.png)
+![Change Telegram token value](images/ssm-3.png)
 
 ### Step 5: Configure the Webhook
 
@@ -212,25 +212,25 @@ After that, set up your bot using a webhook. For that, you need to open the foll
 
 `https://api.telegram.org/bot{TELEGRAM TOKEN}/setWebhook?url={API ENDPOINT URL}`
 
-Change `{TELEGRAM TOKEN}` to your Telegram token. Then, change `{URL API ENDPOINT}` to the URL of Amazon API Gateway and add `/telegram`, for example: `https://XYZ.execute-api.ap-southeast-1.amazonaws.com/prod/telegram `.
+Change `{TELEGRAM TOKEN}` to your Telegram token. Then, change `{URL API ENDPOINT}` to the URL of API Gateway and add `/telegram`, for example: `https://XYZ.execute-api.ap-southeast-1.amazonaws.com/prod/telegram `.
 
 After that, you need to open your browser and go to the URL. If this works, you'll get this response.:
 
-![](images/webhook-1.png)
+![Activating Telegram webhook from web browser](images/webhook-1.png)
 
 ### Step 6: Testing
 
 And that's it! At this stage, you have already done the integration for your Telegram bot and webhook. For testing, please send a message to your bot. You will get an echo response for the `text` message.
 
-![](images/test-1.png)
+![Sending a text message to Telegram bot](images/test-1.png)
 
 You can also send a message with a photo, and get a confirmation image received with or without a caption.
 
-![](images/test-2.png)
+![Sending photo to Telegram bot](images/test-2.png)
 
-If you need to view the logs from your AWS Lambda, you can take a detailed look at the Amazon CloudWatch logs. Here's an example display for logs from my serverless API:
+If you need to view the logs from your Lambda, you can take a detailed look at the CloudWatch logs. Here's an example display for logs from my serverless API:
 
-![](images/cw-1.png)
+![Amazon CloudWatch logs](images/cw-1.png)
 
 ### Step 7: Cleaning Up
 
