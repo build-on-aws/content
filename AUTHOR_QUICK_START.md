@@ -64,6 +64,8 @@ BuildOn.AWS content is not your traditional marketing content. It doesn't try to
 Wondering what type of content fits this content platform? Here are some examples written by the BuildOn.AWS team.
 
 * [What happens when you type a URL into your browser?](https://aws.amazon.com/blogs/mobile/what-happens-when-you-type-a-url-into-your-browser/)
+* [Four Reasons Why GraphQL Is The Future](https://blog.buildon.aws/posts/four-reasons-why-graphql-is-the-future/)
+* [Topic or a Queue - What exactly is Apache Kafka?](https://blog.buildon.aws/posts/kafka-topic-or-queue/)
 * [10 Ways to Use Serverless Functions](https://dev.to/aws/10-ways-to-use-serverless-functions-bme)
 * [Protecting from vulnerabilities in Java: How we managed the log4j crisis](https://medium.com/i-love-my-local-farmer-engineering-blog/protecting-from-vulnerabilities-in-java-how-we-managed-the-log4j-crisis-68d3e90a7586)
 * [How to debug machine learning models to catch issues early and often](https://towardsdatascience.com/a-quick-guide-to-managing-machine-learning-experiments-af84da6b060b)
@@ -93,11 +95,10 @@ When your proposal has been reviewed, a reviewer will label your issue with `acc
 
 After your content proposal has been `accepted`, you'll write your content in [Markdown](https://www.markdownguide.org/basic-syntax/). You'll add the front matter, which contains metadata about your post. The front matter specifies your blog layout, title, description, and tags.
 
-Use the [template](/raw/main/CONTENT_TEMPLATE.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
+Use the [template](https://github.com/build-on-aws/content/raw/main/CONTENT_TEMPLATE.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
 ```
 ---
-layout: blog.11ty.js
-title: What Happens When You Type a URL Into Your Browser
+title: "What Happens When You Type a URL Into Your Browser"
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 tags:
   - dns-lookup
@@ -113,7 +114,7 @@ While writing your draft, review the [Content Review Checklist](/CONTENT_REVIEW_
 
 ### 4. Submit Pull Request for Review and Publishing
 
-Once you've written your content, add your content to the content repo forked into your own account and submit a pull request from your fork to the BuildOn.AWS content repository main branch. You can do this using the GitHub UI or clone the repo locally.
+Once you've written your content, add your content to the content repo forked into your own account and submit a pull request from your fork to the BuildOn.AWS content repository main branch. You can do this using the GitHub UI or clone the repo locally. The instructions below are to clone the repo locally.
 
 At the end of these steps, you'll end up with your directory structure looking like this:
 
@@ -126,24 +127,28 @@ content/
     │   ├── index.md
 ```
 
-The instructions below are to clone the repo locally. If you would like to do this via the GitHub UI and need assistance, reach out to
+Note: If you have a series of posts, refer to the [FAQ](/FAQ.md#i-have-a-series-of-posts-how-do-i-link-them-together) for the layout of the directory structure.
+
+If you already have a fork and have cloned the repo locally, make sure your fork/local clone and main branch are up to date by [syncing your fork in GitHub](sync-fork.png) and doing a `git pull` locally. Then proceed to step 3 below.
 
 1. Fork this [repo](https://github.com/build-on-aws/content/fork) to your own account (it will remain private in your account)
 1. Clone your repo locally. i.e. `git clone git@github.com:YOUR_GITHUB_ACCOUNT/content.git`
+1. Create a new branch for this piece of content: `git checkout -b my-post`
+    - Each branch/pull request should only contain *one piece of content*, even if you are publishing a series of posts so they can be reviewed and published independently.
 1. Inside the `posts` folder, create a folder named for the title of your post. This is called the "slug" and will become the URL of your post i.e. `posts/what-happens-when-you-type-a-url-into-your-browser`
 1. Name your main post file `index.md` (created in [Step 3: Write Your First Draft](#3-write-your-first-draft)) and store it in the content folder from the previous step
 1. If you have images, create a subfolder folder named `images`
     1. Add any images (`jpg`, `png`, `webp`, `svg`, `gif`) to the `images` folder
-1. Commit your changes i.e. `git add posts/what-happens-when-you-type-a-url-into-your-browser`
+1. Commit your changes i.e. `git add posts/what-happens-when-you-type-a-url-into-your-browser; git commit -m "Adding new post"`
 1. Push your changes to your fork i.e. `git push origin main`
 1. Create a pull request of your changes into the [content repo](https://github.com/build-on-aws/content/)
     1. On the Pulls page of your fork (https://github.com/YOUR_GITHUB_ACCOUNT/content/pulls), select the New Pull Request button
-    1. In the Comparing Changes section, make sure the base repository is `build-on-aws/content` and the head repository is `YOUR_GITHUB_ACCOUNT/content` and both are set to `main` branch
+    1. In the Comparing Changes section, make sure the base repository is `build-on-aws/content` with the branch set to `main` and the head repository is `YOUR_GITHUB_ACCOUNT/content` with the branch set to `my-post` as you specified in step 3 above.
     1. Select Create Pull Request button
-    1. Add a title to the pull request and fill out the pull request template 
+    1. Add your content title to the pull request and fill out the pull request template 
     1. In the side menu, select the Gear icon to add the label `ready for review`
 
-Your content is now submitted and a reviewer will start to review your content!
+Your content is now submitted and will be queued for review. When a reviewer starts to review your content, they will add the label `review in process`.
 
 #### Example
 
@@ -162,7 +167,7 @@ For a post titled `What Happens When You Type a URL Into Your Browser` which is 
 * Inclusive language
 * Adheres to the [Content Guidelines](/CONTENT_GUIDELINES.md)
 
-A reviewer may make small changes for you, but for any `changes requested`, you’ll incorporate feedback and requested/suggested changes to your draft, and re-add the `ready for review` label until the pull request is approved by a reviewer. Once it is approved, it will be merged and published immediately.
+A reviewer may make small changes for you, but for any `changes requested`, you’ll incorporate feedback and requested/suggested changes to your draft, and re-add the `ready for review` label until the pull request is approved by a reviewer. Once it is approved, it will be merged and published.
 
 ### 6. Do NOT Share Your Content Yet
 
@@ -187,7 +192,7 @@ We want this to be the best place for hands-on builders to learn about a technol
 
 ### Content Licensing
 
-Any content you contribute and publish on BuildOn.AWS will be licensed as CC BY 4.0. You can read the full license terms [here](/LICENSE).
+Any content you contribute and publish on BuildOn.AWS will be licensed as CC BY-SA 4.0. You can read the full license terms [here](/LICENSE).
 
 ### Code of Conduct
 

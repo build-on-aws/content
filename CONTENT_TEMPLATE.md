@@ -1,5 +1,5 @@
 ---
-layout: blog.11ty.js
+
 title: 
 description: 
 tags:
@@ -11,11 +11,11 @@ date: 2016-01-31
 ---
 
 **EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
+## Frontmatter Instructions
 
-# Front Matter Instructions
+All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/). Enclose values in "quotes" if you are using a colon.
 
-- `layout: blog.11ty.js` - do not change this
-- `title` - the sentence-case title of your post, less than 100 characters i.e. What Happens When You Type a URL Into Your Browser
+- `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser"
 - `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters
 - `tags` - help readers discover posts on the same topics. Use `kebab-case`.
 - `authorGithubAlias` - your GitHub username
@@ -24,7 +24,7 @@ date: 2016-01-31
 
 ## Header 2
 
-Do **NOT** include any h1 headers (single `#`) as this is reserved for the title of your post that is handled automatically.
+Do **NOT** include any h1 headers (single `#`) as this is reserved for the title of your post that is handled automatically. Headings should start with h2 and be implemented in semantically correct, outline form.
 
 ### Header 3
 
