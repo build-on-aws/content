@@ -34,7 +34,7 @@ The first step in understanding your billing is to be able to see what resources
 
 ![AWS Billing Dashboard showing overview of costs](images/billing_dashboard.png "AWS Billing Dashboard overview of costs")
 
-While the billing dashboard gives you an overview and a high-level breakdown of costs, you may want to look at costs in more detail. This can be done by using the [AWS Cost Explorer](https://console.aws.amazon.com/billing/home?/costexplorer#/costexplorer). It allows you to see which services were used, and the amount each contributed to your monthly spend. There is also a graph showing the different values, and you can use it to filter across a number of different dimensions, such as Region or service. Here is an example of what it might look like:
+While the billing dashboard gives you an overview and a high-level breakdown of costs, you may want to look at costs in more detail. This can be done by using the [AWS Cost Explorer](https://console.aws.amazon.com/billing/home?/costexplorer#/costexplorer). It allows you to see which services were used, and the amount each contributed to your monthly spend. There is also a graph showing the different values, and you can use it to filter across a number of different dimensions, such as Region or service. Here is an example of the billing dashboard:
 
 ![AWS Cost Explorer showing a sample monthly spend](images/cost_explorer_dashboard.png "AWS Cost Explorer showing a sample monthly spend")
 
