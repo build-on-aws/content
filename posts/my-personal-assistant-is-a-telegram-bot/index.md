@@ -7,7 +7,7 @@ tags:
   - serverless
 authorGithubAlias: donnieprakoso
 authorName: Donnie Prakoso
-date: 2022-10-28
+date: 2022-10-27
 ---
 
 We often need tools to get things done. As a developer, one of my productivity hacks is to use Telegram bots to help me get things done quickly. From checking the bus schedule for commuting, to image resizing. Most of the small, unpleasant tasks I delegate to the Telegram bot. Simply put, a Telegram bot is my personal assistant.
