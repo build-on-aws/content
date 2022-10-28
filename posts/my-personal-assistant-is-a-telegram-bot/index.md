@@ -1,17 +1,16 @@
 ---
-layout: blog.11ty.js
 title: My Personal Assistant is a Telegram Bot
 description: Every developer should have personal (bot) assistant to get things (or boring tasks) done.
 tags:
   - telegram
-  - bot
+  - bots
   - serverless
 authorGithubAlias: donnieprakoso
 authorName: Donnie Prakoso
-date: 2022-07-07
+date: 2022-10-28
 ---
 
-We often need tools to get things done. As a developer, one of my productivity hacks is to use Telegram bots to help me get things done quickly. From checking the bus schedule for commuting, to image resizing. Most of the small, unpleasant tasks I delegate to the Telegram bot. Simply put, Telegram bot is my personal assistant.
+We often need tools to get things done. As a developer, one of my productivity hacks is to use Telegram bots to help me get things done quickly. From checking the bus schedule for commuting, to image resizing. Most of the small, unpleasant tasks I delegate to the Telegram bot. Simply put, a Telegram bot is my personal assistant.
 
 If that opening line got your interest, this article will provide you the base foundation to build Telegram bot. Plus, with ready-to-deploy code which you can find on this Github repo.
 
@@ -246,7 +245,7 @@ I know that you won't do this when you're building the bot, and just a quick not
 
 And that's how you build a personal assistant with Telegram bot. I use this Telegram bot for various needs, and it is very practical because I can interact with the bot either via mobile phone or from the desktop.
 
-But, what's next? From here you have the basic foundation to build your own logic needs. You can modify the text using keywords or use captions for media images. Let me know what you've built in the comment box below!
+But, what's next? From here, you have the basic foundation to build your own logic needs. You can modify the text using keywords or use captions for media images. Let me know what you've built in the comments below!
 
 Happy building! ️
 — Donnie
