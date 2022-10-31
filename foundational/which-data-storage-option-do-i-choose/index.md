@@ -22,7 +22,7 @@ Given the requirements for scale, security, durability, and low latency, object 
 
 ## Building an E-Commerce Database
 
-A business is migrating from an on premise e-commerce platfor to a cloud based e-commerce platform. The platform they've chosen uses a relational database the holds customer data, transactions, and product inventory. As with many large B2B sites, it processes thousands of transaction per second while maintaining inventory. The database requires extremely low latency and high input/output per second (IOPS).
+A business is migrating from an on premise e-commerce platform to a cloud based e-commerce platform. The platform they've chosen uses a relational database the holds customer data, transactions, and product inventory. As with many large B2B sites, it processes thousands of transaction per second while maintaining inventory. The database requires extremely low latency and high input/output per second (IOPS).
 
 To meet these requirements, a solution must be highly optimized to support frequent read and write changes without rewriting an entire file. Direct I/O access is crucial to system performance. The storage device must attach to the database host and scale as needed. 
 
@@ -32,7 +32,7 @@ In this case, block storage meets these requirements. Similar to a Storage Area 
 
 A company is expanding it's offices across the globe. Previously, most offices maintained Network Attached Storage (NAS) for locally shared storage, but as the company has grown it needs centralized storage for business documents, media assets, database backups, and home directories for its employees. Storage has to be available 24/7, durable, scalable, low latency, and most importantly integrate with existing business systems and software.
 
-File storage is a hierarchical system of files and directories that the majority of software currently support. Employees are familiar with file storage because it works similarly to their computer's file system and NAS. However, unlike local file systems file storage in the cloud is a fully managed solution deployable at a global scale. Cloud file storage is available in all time zones and built on top of block storage which provides the durability, scalability, and low latency required by business operations. However, the hierarchical design of file storage does place limitations on the size of files, the number of files stored, and directory depth because exceeding those limits would degrade performance and increase latency. Keep in mind that file storage will meet the requirements of most business operations and software. In addition, cloud providers have file storage implementations for business processes with requirements not met by general file storage,
+File storage is a hierarchical system of files and directories that the majority of software currently support. Employees are familiar with file storage because it works similarly to their computer's file system and NAS. However, unlike local file systems file storage in the cloud is a fully managed solution deployable at a global scale. Cloud file storage is available in all time zones and built on top of block storage which provides the durability, scalability, and low latency required by business operations. File sharing protocols, such as SMB and NFS, are included with cloud file systems and applications natively connect to cloud storage.  However, the hierarchical design of file storage placed limitations on the size of files, the number of files stored, and directory depth because exceeding those limits would degrade performance and increase latency. Keep in mind that file storage will meet the requirements of most business operations and software. In addition, cloud providers have other storage implementations for business processes with requirements not met by general file storage.
 
 ## Once More with Feeling
 
@@ -40,4 +40,4 @@ Object storage is the choice for elastic scaling into the petabytes, where secur
 
 Block storage is the choice where applications need direct I/O access and optimized for high throughput of data read/write. It provides durability by storing data redundantly and can be directly attached to a host server.
 
-File storage is a general purpose storage solution that fulfills most business requirements by providing a shared file system accessible by business applications. It is available globally, and has the similar durability and security features as the block storage it is built on.
+File storage is a general purpose storage solution that fulfills most business requirements by providing a shared file system accessible by business applications. It is available globally, and has the same durability and security features as the block storage it is built on.
