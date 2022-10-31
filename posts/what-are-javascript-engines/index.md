@@ -1,6 +1,6 @@
 ---
 title: What Are JavaScript Engines?
-description: Ever wonder what kind of technology underlies JavaScript, the language of the web? Learn about the history and evolution of the JavaScript's core.
+description: Ever wonder what kind of technology underlies JavaScript, the language of the web? Learn about the history and evolution of JavaScript's core.
 tags:
     - JavaScript
     - foundational
@@ -62,7 +62,7 @@ Once machine code is produced by the compilation process, the engine exposes all
 
 ## What JavaScript engines are out there?
 
-There is a dizzying variety of JavaScript engines available to analyze, parse and execute your client-side code. With every browser version release, the JavaScript engine might be changed or optimized to keep up with the state of the art in JavaScript code execution.
+There is a dizzying variety of JavaScript engines available to analyze, parse, and execute your client-side code. With every browser version release, the JavaScript engine might be changed or optimized to keep up with the state of the art in JavaScript code execution.
 
 It’s useful to remember, before getting totally confused by the names given to these engines, that a lot of marketing push goes into these engines and the browsers they underlie. In this [useful analysis](http://wingolog.org/archives/2011/10/28/javascriptcore-the-webkit-js-implementation) of JavaScript compilation, the author notes wryly: “In case you didn’t know, compilers are approximately 37% composed of marketing, and rebranding is one of the few things you can do to a compiler, marketing-wise, hence the name train: SquirrelFish, Nitro, SFX...”
 
@@ -78,11 +78,11 @@ Node.js** and Deno	| 	V8
 Edge*** | Blink and V8
 
 
-*JavaScriptCore was rewritten as SquirrelFish, rebranded as SquirrelFish Extreme also called Nitro. It’s still a true statement however to call JavaScriptCore the JavaScript engine that underlies WebKit implementations (such as Safari).
+*JavaScriptCore was rewritten as SquirrelFish, rebranded as SquirrelFish Extreme, also called Nitro. It’s still a true statement however to call JavaScriptCore the JavaScript engine that underlies WebKit implementations (such as Safari).
 
 **One of the factors in the decision to split io.js from Node.js had to do with the version of V8 that would be supported by the project. 
 
-***[Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) originally used [Chakra](https://github.com/chakra-core/ChakraCore) engine, some of which Microsoft open sourced. Edge was then rebuilt as a Chromium browser, with Blink and V8 JavaScript engines under the hood.
+***[Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) originally used the [Chakra](https://github.com/chakra-core/ChakraCore) engine, some of which Microsoft open sourced. Edge was then rebuilt as a Chromium browser, with Blink and V8 JavaScript engines under the hood.
 
 ## Why should we care?
 
