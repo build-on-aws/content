@@ -5,15 +5,14 @@ description: An introductory article on the different types of cloud storage and
 tags:
   - cloud storage
   - foundational
-  - 
 authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2022-09-26
 ---
 
-Whether you're building a website or a cloud application or backing up data, you need storage that is accessible and scalable. There are three main types of cloud storage: object storage, block storage, and file storage. Selecting the right type of storage will depend on what type of data you have and how you plan to access it.  
+Whether you're building a website or a cloud application or backing up data, you need storage that is accessible and scalable. There are three main types of cloud storage: 1. block storage, 2. object storage, and 3. file storage. Selecting the right type of storage will depend on what type of data you have and how you plan to access it.  
 
-## Block storage
+## 1. Block storage
 
 Block storage stores data in fixed-size pieces of storage called blocks. A collection of blocks forms a volume that can be treated as a unit of storage, such as a hard drive. 
 
@@ -36,7 +35,7 @@ Block storage offers the following features:
 - can be locally attached to cloud compute and added as needed without a performance penalty
 - durable and can be moved between cloud compute resources 
 
-## Object storage
+## 2. Object storage
 
 Object storage is designed for holding massive volumes of data by distributing across multiple nodes, or buckets. Objects are made up of data, metadata, and a unique object ID. Object IDs look like file paths, but differ from hierarchical file systems by storing object IDs in a flat, non-hierarchical address space that scales horizontally.      
 
@@ -54,7 +53,7 @@ In addition to scalability, object storage delivers low latency performance. Bec
 
 In addition to efficiently scaling, rich metadata associated with an object allows for better analytics and versioning, which lets multiple users concurrently work on a file.
 
-## File storage
+## 3. File storage
 
 In the previous section, we discussed how file storage is the way data is managed on block storage. File storage is hierarchical and mirrors how we used to store information physically with paper files and folders. Every file has a path to make it findable in the hierarchy, and files can be logically grouped in folders or directories.
 
