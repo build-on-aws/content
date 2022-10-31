@@ -13,24 +13,6 @@ date: 2022-09-26
 
 Whether you're building a website or a cloud application or backing up data, you need storage that is accessible and scalable. There are three main types of cloud storage: object storage, block storage, and file storage. Selecting the right type of storage will depend on what type of data you have and how you plan to access it.  
 
-## Object storage
-
-Object storage is designed for holding massive volumes of data by distributing across multiple nodes, or buckets. Objects are made up of data, metadata, and a unique object ID. Object IDs look like file paths, but differ from hierarchical file systems by storing object IDs in a flat, non-hierarchical address space that scales horizontally.      
-
-Object storage is durable because it stores data redundantly across nodes. Data is stored according to rules that determine which node to use based on the object ID. Nodes use [block storage](#block-storage) and data is distributed across nodes to keep node size balanced, which prevents scaling issues. When nodes are filled, the object store adds new nodes to store more data. Alternatively, when objects are deleted, nodes are removed. Object stores are elastic because they can grow or shrink as needed.
-
-To retrieve an object, an HTTP request is sent to the object store's REST API, which retrieves the data from the storage nodes using a lookup table of object IDs. The lookup tables are also stored in nodes.
-
-Objects can't be changed, but a new object can be created from a current object with the same object ID. Metadata tracks the version of these objects. In addition to versions, metadata can track the owner of the object and when it was created, making tracking, indexing, and concurrent writes possible.   
-
-### How is it used?
-
-Object storage is built to store petabytes of data that don't change often and have associated metadata. Object storage is ideal for WORM (write once, read many) data, such as backups, log files, data lakes, video, and imagery. In addition, object storage can efficiently hold large data sets for machine learning and data collected by IoT devices.
-
-In addition to scalability, object storage delivers low latency performance. Because object storage uses a flat address space to index data, workloads can retrieve data faster than hierarchical file systems.
-
-In addition to efficiently scaling, rich metadata associated with an object allows for better analytics and versioning, which lets multiple users concurrently work on a file.
-
 ## Block storage
 
 Block storage stores data in fixed-size pieces of storage called blocks. A collection of blocks forms a volume that can be treated as a unit of storage, such as a hard drive. 
@@ -54,6 +36,24 @@ Block storage offers the following features:
 - can be locally attached to cloud compute and added as needed without a performance penalty
 - durable and can be moved between cloud compute resources 
 
+## Object storage
+
+Object storage is designed for holding massive volumes of data by distributing across multiple nodes, or buckets. Objects are made up of data, metadata, and a unique object ID. Object IDs look like file paths, but differ from hierarchical file systems by storing object IDs in a flat, non-hierarchical address space that scales horizontally.      
+
+Object storage is durable because it stores data redundantly across nodes. Data is stored according to rules that determine which node to use based on the object ID. Nodes use [block storage](#block-storage) and data is distributed across nodes to keep node size balanced, which prevents scaling issues. When nodes are filled, the object store adds new nodes to store more data. Alternatively, when objects are deleted, nodes are removed. Object stores are elastic because they can grow or shrink as needed.
+
+To retrieve an object, an HTTP request is sent to the object store's REST API, which retrieves the data from the storage nodes using a lookup table of object IDs. The lookup tables are also stored in nodes.
+
+Objects can't be changed, but a new object can be created from a current object with the same object ID. Metadata tracks the version of these objects. In addition to versions, metadata can track the owner of the object and when it was created, making tracking, indexing, and concurrent writes possible.   
+
+### How is it used?
+
+Object storage is built to store petabytes of data that don't change often and have associated metadata. Object storage is ideal for WORM (write once, read many) data, such as backups, log files, data lakes, video, and imagery. In addition, object storage can efficiently hold large data sets for machine learning and data collected by IoT devices.
+
+In addition to scalability, object storage delivers low latency performance. Because object storage uses a flat address space to index data, workloads can retrieve data faster than hierarchical file systems.
+
+In addition to efficiently scaling, rich metadata associated with an object allows for better analytics and versioning, which lets multiple users concurrently work on a file.
+
 ## File storage
 
 In the previous section, we discussed how file storage is the way data is managed on block storage. File storage is hierarchical and mirrors how we used to store information physically with paper files and folders. Every file has a path to make it findable in the hierarchy, and files can be logically grouped in folders or directories.
@@ -73,3 +73,5 @@ Object storage addresses the need for storing petabytes of write-once, read-many
 Block storage is ideal for transactional workloads where low latency for read and write is required, such as a database. It can attach locally to virtual machines or cloud compute resource, and provides fine-grained control over blocks for optimized read and write throughput.
 
 File storage is appropriate for many uses, but particularly for file sharing across resources. Its hierarchical design and resemblance to a traditional filing system make it accessible to people across an organization.
+
+There are many types of databases such as relational databases (RDMS), document databases, key-value pair databases, data warehouses, and data lakes. The following [article](https://blog.buildon.aws/posts/which-data-storage-option-do-i-choose) examines the type of storage appropriate for these databases.
