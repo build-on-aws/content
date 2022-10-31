@@ -1,18 +1,17 @@
 ---
 title: "Data 101: Data Classification & Storage"
-description: "This is a deep dive to explain the foundation, trade-offs, and the "why" behind specific topics, and may include a bit of history for context. It may contain diagrams to help clarify complex ideas, and some code snippets for illustration, but is not intended to be a hands-on piece of content.
-Builders who are looking for deeper understanding around a topic, to enable them to better understand it, learning about trade-offs and the history, and the "why" behind the topic."
+description: "This is a deep dive to explain the foundation, trade-offs, and the 'why' behind specific topics, and may include a bit of history for context. It may contain diagrams to help clarify complex ideas, and some code snippets for illustration, but is not intended to be a hands-on piece of content. Builders who are looking for deeper understanding around a topic, to enable them to better understand it, learning about trade-offs and the history, and the 'why' behind the topic."
 
 tags:
-    - Data Classification
-    - Data Storage
-    - Structured Data
-    - Unstructured Data
-    - Databases
-    - Data Warehouses
-    - Datalakes
-    - foundational
-    - aws
+  - Data Classification
+  - Data Storage
+  - Structured Data
+  - Unstructured Data
+  - Databases
+  - Data Warehouses
+  - Datalakes
+  - foundational
+  - aws
 authorGithubAlias: aremutem
 authorName: Temi Aremu & Yusra Al-Sharafi
 date: 2022-10-31
