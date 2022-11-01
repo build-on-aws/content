@@ -85,8 +85,6 @@ Some benefits of using a data warehouse include: Informed decision making, conso
 ### Data Lakes
 
 A data lake stores structured, semi-structured and unstructured data, supporting the ability to store raw data from all sources without the need to process or transform it at that time at any scale.  Typically, the primary purpose of a data lake is to analyze the data to gain insights. By having all your data consolidated in one location, you’re able to perform analytics like data transformations and machine learning over data sources like log files, data from click streams and social media stored in the data lake. Another benefit of storing data in a data lake is the ability to store data in a variety of formats including JSON, ORC, and Parquet. The ability to harness more data, from multiple sources, in less time, and empowering users from multiple lines of business to collaborate and analyze data in different ways leads to better, faster decision making. Examples of where data lakes can add value include: aiding customer interactions by helping combine data to empower the business, increasing operational efficiencies that in turn help reduce operational costs and increase quality.
-and improving research and development innovation choices. Within databases you can store different types of data because data is typically stored in its original format or  after undergoing data processing.
-
 
 ## Putting it all Together
 
