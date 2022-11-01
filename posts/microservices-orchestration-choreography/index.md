@@ -18,6 +18,19 @@ The approach to building distributed systems by decoupling services has been don
 
 The idea of implementing patterns to build distributed systems isn't new to the microservcies world. This has been an approach taken since the time of monoliths and Service Oriented Architecture architected applications where you would see a need to say send a message or an event to a job that is polling a queue to work on the next item. Over the years due to the complexity of business processes growing and with systems built to reflect the real-world tend to adopt behaviours like parallel processing, long term wait on status updates, rollback and a few others.
 
+So before we start with the patterns lets get some key concepts understood.
+
+
+## Events and messages
+
+While you will notice the terms events and messages being used interchangeably, there is a distinction based on what kind of systems are within scope of messaging.
+
+An architecture that uses messaging has a specific format that is framed earlier when building APIs (similar to a function call), where the API knows what is being called and what the expected response is.
+
+In an event-driven architecture, disparate systems that comprise a set of complex processes and transactions must be 'told' that something has occurred and a flow to handle it must be initiated.
+For example, if a flight is delayed for any reason, the airline must deal with customers who may miss flights and others who may wish to cancel them, as well as notify subsequent airlines that passengers may be late.
+This could include providing meal vouchers and arranging for temporary lodging for passengers who are stranded overnight.
+
 ## Patterns in distributed systems
 
 ### Choreography
