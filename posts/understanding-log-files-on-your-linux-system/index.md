@@ -1,10 +1,6 @@
  ---
-layout: blog.11ty.js
-title: Understanding Log Files on your Linux System
-description: Log files in Linux represent point in time events for activity related to the OS, system devices and applications running on the system. Learn how to leverage logs to troubleshoot issues, debug applications, and keep servers reliable at all times.
-hero:
-heroCropMode: bottom
-heroColor: dark
+title: "Understanding Log Files on your Linux System"
+description: "Log files in Linux represent point in time events for activity related to the OS, system devices and applications running on the system. Learn how to leverage logs to troubleshoot issues, debug applications, and keep servers reliable at all times."
 tags:
   - Linux
   - system adminstration
@@ -13,7 +9,6 @@ authorGithubAlias: cie247
 authorName: Curtis Evans
 date: 2022-10-19
 ---
-# Understanding Log Files on your Linux System
 
 Whether you’re a new user, or experienced Site Reliability Engineer, system logs are a vital source of information available on servers to help keep operations reliable. Logs are available on all system types, and their existence is very prevalent on machines running Linux. From boot sequences, and process threads, to user activity, practically every operation produces a written record of an event that is logged, allowing operators access to information and visibility across the entire server. But how does one go about locating and viewing these critical logs?
 
@@ -34,10 +29,10 @@ Log file entries of note include:
 Applications developed to run on Linux can also create logs as evidenced by several sub-directories in the graphic. Print services write logs to the `./cups` sub-directory, and information captured by webservers is written to `./apache2`. Developers simply modify the code so that output is written to a location most suited for the application. As a best practice, developers can use a unique sub-directory to manage logs associated with each application. Two very important utilities found in the /var/log directory are `syslog` and `dmesg`.
 
 ### What is *Syslog*?
-Syslog is used for generating message logs and has been the standard on Linux systems for years. Recently, distributions have been updated to ship with `journald`, a utility used in conjunction with syslog for collecting and storing message data. The concept of syslog can be easily broken down into the following components,
+Syslog is used for generating message logs and has been the standard on Linux systems for years. Recently, distributions have been updated to ship with `journald`, a utility used in conjunction with syslog for collecting and storing message data. The concept of syslog can be easily broken down into the following components:
 
 1. The syslog *protocol* [RFC 5424](https://tools.ietf.org/html/rfc5424), which is a transport protocol that specifies how to transmit logs over the network. It is also the data format that defines the structure of a message. By default, syslog uses ports `514` for plaintext and `6514` to encrypt messages requiring additional security.
-2. The syslog _daemon_ process, for receiving and processing system messages. It listens for events through `/dev/log`, where applications write message details. Because of its flexibility, the daemon can write locally to the system or to a remote server making it possible to centralize event logs across a distributed, multi-server environment. There are different implementations of syslog including [rsyslogd](https://www.rsyslog.com/) and [syslog-ng](https://www.syslog-ng.com/).
+2. The syslog *daemon* process, for receiving and processing system messages. It listens for events through `/dev/log`, where applications write message details. Because of its flexibility, the daemon can write locally to the system or to a remote server making it possible to centralize event logs across a distributed, multi-server environment. There are different implementations of syslog including [rsyslogd](https://www.rsyslog.com/) and [syslog-ng](https://www.syslog-ng.com/).
 3. The syslog _message_, which is an event record structured using the syslog [message format](https://tools.ietf.org/html/rfc5424#section-6). A message is comprised of a standard header and body containing complete details about an event.
 
 Because syslog is able to forward messages to remote servers, it can send critical events to 3rd-party management platforms like SolarWinds, and New Relic, or to analytics tools like OpenSearch. Inside of these applications, data is stored, aggregated and visualized for further reporting and analysis.
@@ -53,11 +48,16 @@ Using regular expressions, operators can easily query for certain log entries. F
 
 ![Command output for dmesg command](images/dmesg-output-error-linux-log-files.png "dmesg Error output")
 
-With so many logs and utilities available on Linux, journald is becoming increasingly popular because it simplifies the log management process. Because it is based on systemd, logs can be maintained in a structured fashion and indexed by various sources. Below are some additional examples to demonstrate the flexibility in using the journald utility,
+With so many logs and utilities available on Linux, journald is becoming increasingly popular because it simplifies the log management process. Because it is based on [`systemd`](https://en.wikipedia.org/wiki/Systemd), logs can be maintained in a structured fashion and indexed by various sources. Below are some additional examples to demonstrate the flexibility in using the journald utility,
 
 The following command generates unfiltered output for **all** collected log files,
 ```bash
 $ journalctl
+```
+
+You can also "tail" the logs to see them streaming by in real time via
+```base
+journalctl -f
 ```
 
 To view user logins for the current day,
@@ -69,5 +69,7 @@ To view messages from an apache webserver,
 ```bash
 $ journalctl -f -u apache
 ```
-Understanding the importance of log files on your Linux system is crucial for troubleshooting, and ensuring applications remain stable and perform as expected. Knowing how to access, view, and manage logs reduces time and complexity for personnel responsible for system operations and application development. Reference the documentation for your chosen operating system, or execute `man journalctl` via the command line for more info and options on how to manage system logs.
 
+## Wrapping it up
+
+Understanding the importance of log files on your Linux system is crucial for troubleshooting, and ensuring applications remain stable and perform as expected. Knowing how to access, view, and manage logs reduces time and complexity for personnel responsible for system operations and application development. Reference the documentation for your chosen operating system, or execute `man journalctl` via the command line for more info and options on how to manage system logs.
