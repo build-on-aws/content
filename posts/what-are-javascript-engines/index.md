@@ -12,7 +12,7 @@ date: 2022-11-01
 
 ![banner](./images/banner.png)
 
-Writing code for the web sometimes feels a little magical in that we write a sequence of characters in a file, open that file in a browser, and watch it come alive. But understanding the tech behind the magic can help you better tune your craft as a programmer. 
+Writing code for the web sometimes feels a little magical in that we write a sequence of characters in a file, open that file in a browser, and watch it come to life. But understanding the tech behind the magic can help you better hone your craft as a programmer. 
 
 In this article, you'll discover what is going on behind the scenes in a JavaScript-powered web or mobile stack by grasping the complexities of the JavaScript engines that power browsers. Let’s break down what a JavaScript engine does, why different platforms use different engines, how they have evolved over the years, and why we, as developers, should care.
 
@@ -74,15 +74,15 @@ Mozilla	| Spidermonkey
 Chrome	| 	V8
 Safari	| 	JavaScriptCore*
 IE	| 	Chakra
-Node.js** and Deno	| 	V8
+Node.js	| 	V8
+Deno | V8
+Bun | JavaScriptCore
 Edge*** | Blink and V8
 
 
 *JavaScriptCore was rewritten as SquirrelFish, rebranded as SquirrelFish Extreme, also called Nitro. It’s still a true statement however to call JavaScriptCore the JavaScript engine that underlies WebKit implementations (such as Safari).
 
-**One of the factors in the decision to split io.js from Node.js had to do with the version of V8 that would be supported by the project. 
-
-***[Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) originally used the [Chakra](https://github.com/chakra-core/ChakraCore) engine, some of which Microsoft open sourced. Edge was then rebuilt as a Chromium browser, with Blink and V8 JavaScript engines under the hood.
+**[Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) originally used the [Chakra](https://github.com/chakra-core/ChakraCore) engine, some of which Microsoft open sourced. Edge was then rebuilt as a Chromium browser, with Blink and V8 JavaScript engines under the hood.
 
 ## Why should we care?
 
