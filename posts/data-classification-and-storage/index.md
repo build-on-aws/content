@@ -1,6 +1,6 @@
 ---
 title: "Data 101: Data Classification & Storage"
-description: "This is a deep dive to explain the foundation, trade-offs, and the 'why' behind specific topics, and may include a bit of history for context. It may contain diagrams to help clarify complex ideas, and some code snippets for illustration, but is not intended to be a hands-on piece of content. Builders who are looking for deeper understanding around a topic, to enable them to better understand it, learning about trade-offs and the history, and the 'why' behind the topic."
+description: "Understanding data classification by looking at structured, semi-structured, and unstructured data."
 
 tags:
   - Data Classification
