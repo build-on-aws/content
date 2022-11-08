@@ -60,9 +60,21 @@ Google’s [V8 engine](https://v8.dev/docs), written in C++, also [compiles](htt
 
 Once machine code is produced by the compilation process, the engine exposes all the data types, operators, objects, and functions specified in the ECMA standard to the browser, or any runtime that needs to use them, like Node.js, Deno, or Electron (which is used by Visual Studio Code).
 
+## What about runtimes?
+
+If JavaScript engines quietly run in the background, parsing code and breaking it up into readable strings so a compiler can read and compile it, runtimes tend to attract more attention. Why is that?
+
+Well-known runtimes work on top of JavaScript engines, extending their power. The best-known is Node, but Deno and Bun are newcomers to the arena. Node and Deno embed V8, and Bun embeds JavaScriptCore. Bun claims to run faster than Node or Deno because JavaScriptCore is faster than V8, handling 69,845 http requests per second vs 16,288 for Node and 12,926 for Deno. 
+
+These runtimes' goal, as stated by [Bun's docs](https://bun.sh/), "is to run most of the world's JavaScript outside of browsers, bringing performance and complexity enhancements to your future infrastructure, as well as developer productivity through better, simpler tooling." These runtimes, in fact, leverage the power of JavaScript engines to make JavaScript run outside of browsers. [NativeScript](https://nativescript.org) is a good example of a runtime built specifically for cross-platform native mobile application development built using JavaScript.
+
+These runtimes were also built to solve some of the inherent problems presented by JavaScript's single-threaded architecture. Node, for example, prioritizes asynchronous, threadless execution of routines. All these runtimes offer a curated developer experience, including built in support for well-loved APIs like fetch, websocket, and even JSX, beloved of React developers. This may be the reason that they tend to attract developer attention.
+
+Runtimes, overall, address perceived gaps in the performance of standard browser architecture and the engines that power them. As the engines evolve, so, surely, will these runtimes.
+
 ## What JavaScript engines are out there?
 
-There is a dizzying variety of JavaScript engines available to analyze, parse, and execute your client-side code. With every browser version release, the JavaScript engine might be changed or optimized to keep up with the state of the art in JavaScript code execution.
+There is a large variety of JavaScript engines available to analyze, parse, and execute your client-side code. With every browser version release, the JavaScript engine might be changed or optimized to keep up with the state of the art in JavaScript code execution.
 
 It’s useful to remember, before getting totally confused by the names given to these engines, that a lot of marketing push goes into these engines and the browsers they underlie. In this [useful analysis](http://wingolog.org/archives/2011/10/28/javascriptcore-the-webkit-js-implementation) of JavaScript compilation, the author notes wryly: “In case you didn’t know, compilers are approximately 37% composed of marketing, and rebranding is one of the few things you can do to a compiler, marketing-wise, hence the name train: SquirrelFish, Nitro, SFX...”
 
