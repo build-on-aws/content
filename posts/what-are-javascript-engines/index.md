@@ -60,7 +60,7 @@ Google’s [V8 engine](https://v8.dev/docs), written in C++, also [compiles](htt
 
 Once machine code is produced by the compilation process, the engine exposes all the data types, operators, objects, and functions specified in the ECMA standard to the browser, or any runtime that needs to use them, like Node.js, Deno, or Electron (which is used by Visual Studio Code).
 
-## What about runtimes?
+## A little detour: runtimes
 
 If JavaScript engines quietly run in the background, parsing code and breaking it up into readable strings so a compiler can read and compile it, runtimes tend to attract more attention. Why is that?
 
@@ -89,7 +89,7 @@ IE	| 	Chakra
 Node.js	| 	V8
 Deno | V8
 Bun | JavaScriptCore
-Edge*** | Blink and V8
+Edge** | Blink and V8
 
 
 *JavaScriptCore was rewritten as SquirrelFish, rebranded as SquirrelFish Extreme, also called Nitro. It’s still a true statement however to call JavaScriptCore the JavaScript engine that underlies WebKit implementations (such as Safari).
