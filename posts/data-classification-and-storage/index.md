@@ -9,7 +9,7 @@ tags:
   - Unstructured Data
   - Databases
   - Data Warehouses
-  - Datalakes
+  - Data Lakes
   - foundational
   - aws
 authorGithubAlias: aremutem
