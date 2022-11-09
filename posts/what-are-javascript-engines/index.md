@@ -1,16 +1,14 @@
 ---
-title: What Are JavaScript Engines?
-description: Ever wonder what kind of technology underlies JavaScript, the language of the web? Learn about the history and evolution of JavaScript's core.
+title: "What Are JavaScript Engines?"
+description: "Ever wonder what kind of technology underlies JavaScript, the language of the web? Learn about the history and evolution of JavaScript's core."
 tags:
-    - JavaScript
-    - foundational
-    - aws
+    - javascript
 authorGithubAlias: jlooper
 authorName: Jen Looper
-date: 2022-11-01
+date: 2022-11-09
 ---
 
-![banner](./images/banner.png)
+![Banner image asking "what are javascript engines?"](images/banner.png)
 
 Writing code for the web sometimes feels a little magical in that we write a sequence of characters in a file, open that file in a browser, and watch it come to life. But understanding the tech behind the magic can help you better hone your craft as a programmer. 
 
