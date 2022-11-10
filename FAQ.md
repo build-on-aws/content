@@ -1,5 +1,21 @@
 # Frequently Asked Questions
 
+* [Markdown Syntax](#markdown-syntax)
+  * [Where do I find the general Markdown syntax guide?](#where-do-i-find-the-general-markdown-syntax-guide)
+  * [I have a series of posts. How do I link them together?](#i-have-a-series-of-posts-how-do-i-link-them-together)
+  * [How do I link to other posts in my series or other posts on the BuildOn.AWS site?](#how-do-i-link-to-other-posts-in-my-series-or-other-posts-on-the-buildonaws-site)
+  * [How do I show images in my post?](#how-do-i-show-images-in-my-post)
+* [Miscellaneous]()
+  * [I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?](#i-published-my-post-on-my-personal-blogdevtomedium-can-i-publish-it-on-buildonaws)
+  * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
+  * [How do I optimize my content for SEO?](#how-do-i-optimize-my-content-for-seo)
+
+## Markdown Syntax
+
+### Where do I find the general Markdown syntax guide?
+
+👉 https://www.markdownguide.org/basic-syntax/
+
 ### I have a series of posts. How do I link them together?
 
 Currently, there is no built-in support for a series of posts, however you can accomplish this using simple [Markdown](https://www.markdownguide.org/basic-syntax/). Example:
@@ -67,6 +83,8 @@ _Note: Do not share images across posts or even posts in a series._
 To show images in your post, you'll link to them using a relative path:
 
 `![Put your alt-text here](images/the-internet.jpg) "Put your image title/caption here"`
+
+## Miscellaneous
 
 ### I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?
 
