@@ -140,7 +140,32 @@ Currently, the following:
 * yaml (or yml)
 * html
 * sh
-* text (or plaintext). This actually disables highlighting.
+* text (or plaintext). This one actually disables highlighting.
+
+### How do I write the same code in different languages?
+
+If you want embed the same code snippet in different languages, for example, explaining how to do some algorithm in Java, Python, Javascript, etc., put them in a list. The list must contain in all its elements a small piece of text (the title) and a code snippet, for example:
+
+````markdown 
+* Javascript
+    ```javascript
+    console.log("Hello world");
+    ```
+* Java
+    ```java
+    System.out.println("Hello world");
+    ```
+* Python
+    ```python
+    print("Hello world")
+    ```
+* Linux bash
+    ```sh
+    echo "Hello world"
+    ```
+````
+
+This will be rendered as one single code block with different tabs on the top for the different code snippets. The title of each tab will be the text in every list item.
 
 
 ## Miscellaneous
