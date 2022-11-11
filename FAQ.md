@@ -104,11 +104,11 @@ It works with the domains youtube.com, youtu.be or youtube-nocookie.com.
 
 Use standard markdown code blocks, and specify the language, for example:
 
-```markdown
-   \`\`\`java
+````markdown
+   ```java
    System.out.println("Hello World!");
-   \`\`\`
-```
+   ```
+````
 
 If you do not specify a language, we still try to guess the most adequate. But this detection is not perfect, and you will get consistent output if you explicitly indicate the language. If you want to disable syntax highlighting guessing in a code snippet, simply specify "text" or "plaintext" language. This is particularly useful for embedding the output of running commands, for example.
 
