@@ -51,9 +51,9 @@ posts
 Where `posts/owasp-top-10-defined/01-what-is-broken-access-control/index.md` is part 1, `posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/index.md` is part 2, and `posts/owasp-top-10-defined/03-what-is-an-injection-attack/index.md` is part 3.
 
 The resulting URL mapping will be:
-- https://blog.buildon.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control/
-- https://blog.buildon.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/
-- https://blog.buildon.aws/posts/owasp-top-10-defined/03-what-is-an-injection-attack/
+- https://buildon.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control/
+- https://buildon.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/
+- https://buildon.aws/posts/owasp-top-10-defined/03-what-is-an-injection-attack/
 
 You can see an example of this in the repo [here](/posts/owasp-top-10-defined).
 
@@ -83,6 +83,23 @@ _Note: Do not share images across posts or even posts in a series._
 To show images in your post, you'll link to them using a relative path:
 
 `![Put your alt-text here](images/the-internet.jpg) "Put your image title/caption here"`
+
+The caption will appear underneath the image and also on mouse over.
+
+### How do I show videos in my post?
+
+At the moment, only YouTube videos are supported. Simply place the URL of the video in a separate line, for example:
+
+```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
+
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+```
+
+It works with the domains youtube.com, youtu.be or youtube-nocookie.com.
+
 
 ## Miscellaneous
 
