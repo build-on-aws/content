@@ -13,12 +13,12 @@ authorName: Kam Chehresa
 date: 2022-11-11
 ---
 
-In this post we're going to take a React Native Todo app and address few of the common issues faced by developers. We will start by looking into offline first app development, which is basically an approach that in case users' mobile device loses connectivity how can we handle allowing the app to continue to function by persisting data on the device itself and for that we will take look into adding amplify/DataStore client library to handle that for us. We will demonstrate this without using any external environment. Next, we will gradually add integration with AWS using Amplify to add authentication. Lastly, we will use AWS Amplify DataStore to help orchestrate data synchronization between the time our device lost connectivity and the time it regained connection and update our AWS backend storage for our Todo app.
+In this post we're going to take a React Native Todo app and address few of the common issues faced by developers. We will start by looking into offline first app development, which is basically an approach that in case users' mobile device loses connectivity how can we handle allowing the app to continue to function by persisting data on the device itself and for that we will take look into adding Amplify DataStore client library to handle that for us. We will first demonstrate this without using any external environment in the cloud. Next, we will gradually add integration with AWS using Amplify to add authentication. Lastly, we will establish cloud backend resources and use AWS Amplify DataStore to help orchestrate data synchronization between the time our device lost connectivity and the time it regained connection and update our AWS backend storage for our Todo app.
 
 ## What you will learn
 
-- Handling offline data storage on device via Amplify DataStore dependency
-- Adding authorization with Amplify Auth
+- Handling offline data storage on device via Amplify DataStore.
+- Adding authorization with Amplify Auth.
 - Use of Amplify DataStore to orchestrate data synchronization between mobile app and Amplify's backend services.
 
 ## Sidebar
@@ -34,7 +34,7 @@ Before starting this tutorial, you will need the following:
 
  - An AWS Account (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)).
  - Nodejs version 14.x or latest [installed](https://nodejs.org/en/download/).
- - AWS Amplify CLI installed and configured it to connect to your AWS account - see [getting started](https://docs.amplify.aws/cli/start/install/).
+ - AWS Amplify CLI installed and configured to connect to your AWS account - see [getting started](https://docs.amplify.aws/cli/start/install/).
  - Have your [local environment setup](https://docs.expo.dev/get-started/installation/) for React Native development using Expo CLI.
  
 
@@ -266,7 +266,7 @@ Why do we care? to re-iterate, at this point we're going to persist our todo ite
 Before running the script let's head to `amplify/backend/api/amplifyDatasource/schema.graphql`. This directory and its content were just generated for us when we execute `npx amplify-app`. We're going to modify its content with our schema of todo item: 
 
 ```graphql
-type Task @model @auth(rules: [{ allow: owner }]) {
+type Task @model {
   id: ID!
   task: String!
 }
@@ -277,13 +277,12 @@ This is not the most elaborate schema but simple enough to get the point across.
 ```bash
 npx amplify-app@latest
 ```
-The end result of executing the script is that Amplify will generate the model for us under `src/models/`. In our code we will `import` from there to get a reference to our model in order to use for database operations. Take a peek under that directory and you will see number of javascript and typescript files containing the our model and other logic that DataStore requires to handle communication with local storage.
-
-We got out schema so now let's generate the resources that tell Amplify what model we need to generate:
+We got our schema setup so now let's generate the resources that tell Amplify what model we need to generate:
 
 ```bash
 npm run amplify-modelgen
 ```
+The end result of executing the script is that Amplify will generate the model for us under `src/models/`. In our code we will `import` from there to get a reference to our model in order to use for database operations. Take a peek under that directory and you will see number of javascript and typescript files containing the our model and other logic that DataStore requires to handle communication with local storage.
 
 Let's add dependencies for Amplify client libraries in addition to what React Native itself requires for local storage. Amplify DataStore library will use them under the hood to make it seamless for developers to handle database transactions:
 
@@ -432,7 +431,7 @@ App re-loading | App after re-loading
 
 Before adding authentication to our app there are few housekeeping we are required to do by Amplify. Using Amplify CLI first thing we need to is initialize our project by running the following command from the root of your project:
 
-**`amplify init - Initializes a new project, sets up deployment resources in the cloud, and makes your project ready for Amplify.`**
+**`amplify init`** initializes a new project, sets up deployment resources in the cloud, and makes your project ready for Amplify.
 ![amplify-init](images/amplify-init.png)
 resources created running `amplify init` are used by Amplify itself these are not part of your application. 
 
@@ -448,48 +447,102 @@ Currently, the Authorization mode for the DataStore in the app is set to API key
 It's time to add the necessary dependency to `App.js` so Amplify can handle user registration and authentication for us on the UI.
 
 ```bash
-npm install install aws-amplify-react-native
+npm install aws-amplify-react-native
 ```
-Inside `App.js` make the following modifications:
 
+`App.js` after adding dependency for authentication, note styles section not added here for brevity.
 
+```javascript
+import React, { useEffect, useState } from 'react';
+import { Keyboard, ScrollView, StyleSheet, Text, View, Pressable } from 'react-native';
+import TodoInput from './components/TodoInput';
+import TodoItem from './components/TodoItem';
+import { DataStore } from "aws-amplify";
+import { Task } from "./src/models";
+import { Amplify } from 'aws-amplify';
+import awsconfig from './src/aws-exports';
+import { withAuthenticator } from 'aws-amplify-react-native';
+import { Auth } from 'aws-amplify';
+
+Amplify.configure(awsconfig);
+
+function App() {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  async function fetchTasks() {
+    let dataStoreItems = await DataStore.query(Task);
+    setTasks(dataStoreItems.map((item) => item));
+    console.dir(dataStoreItems);
+  }
+
+  async function deleteTaskFromStorage(deleteItem) {
+    const todoDelete = await DataStore.query(Task, deleteItem);
+    DataStore.delete(todoDelete);
+  }
+
+  const addTask = async (task) => {
+    console.log('addTask', task);
+    if (task == null) return;
+    fetchTasks();
+    Keyboard.dismiss();
+  }
+
+  const deleteTask = (task, deleteIndex) => {
+    deleteTaskFromStorage(task);
+    setTasks(tasks.filter((value, index) => index != deleteIndex));
+  }
+
+  async function signOut() {
+    try {
+      await Auth.signOut();
+    } catch (error) {
+      console.log('error signing out: ', error);
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.heading}>TODOs</Text>
+      <ScrollView style={styles.scrollView}>
+        <Pressable style={styles.button} onPress={signOut}>
+          <Text style={styles.text}>Sing Out</Text>
+        </Pressable>
+        {
+          tasks.map((todo, index) => {
+            return (
+              <View key={index} style={styles.taskContainer}>
+                <TodoItem index={index + 1} task={todo.task} deleteTask={() => deleteTask(todo, index)} />
+              </View>
+            );
+          })
+        }
+      </ScrollView>
+      <TodoInput addTask={addTask} />
+    </View>
+  );
+}
+export default withAuthenticator(App);
+...
+```
 
 Now, we can update our datastore to use AWS Cognito using `amplify update api` 
 ![amplify-update-api](images/amplify-update-api.png)
 
-
-```bash
-Do you want to generate code for your newly created GraphQL API
-![]()
-```
-
-We can now push our changes to the cloud, for the question below select `No` since we have already created code for our GraphQL API. Run `amplify push` and monitor its progress as it will a few minutes to complete and should see something similar as screenshot below:
+We can now push our changes to the cloud. Run `amplify push` and monitor its progress as it will a few minutes to complete and should see something similar as screenshot below:
 ![ampify-push](images/amplify-push.png)
 
 At this point it's a good idea to take peek at our AWS backend that was setup for us by Amplify specifically DynamoDB which DataStore uses to store our data.
 ![ddb-before](images/ddb-before.png)
 
-Make the code changes to use withAuthenticator() inside `App.js`
-
-```javascript
-import awsconfig from './src/aws-exports';
-import { withAuthenticator } from 'aws-amplify-react-native';
-
-Amplify.configure(awsconfig);
-function App() {
-  ...
-}
-export default withAuthenticator(App);
-```
-
-Start the app to see the signin/signup UI added for us via Amplify. Tap on `Sing Up`, complete the form and you should receive an email with your confirmation code. Once you provide you confirmation code, you will be redirected to signin page. Login with username and password.
+Start the app to see the signin/signup UI added for us via Amplify. Tap on `Sing Up`, complete the form and you should receive an email with your confirmation code. Once you provide you confirmation code, you will be redirected to signin page. Login with your username and password.
 
 ![signin-signup](images/confirm-sign-up.png)|![signin-signup](images/signin.png)
 
-
 ## Testing happy path
-Once logged in we should see an empty Todo list since now our data is associated with an `@owner` that must be authenticated first before accessing any data. 
-
 We're going to do some testing by adding a few test entries, and validate DataStore has sync'd the data on our DynamoDB table.
 
 DynamoDB table before sync
@@ -504,7 +557,7 @@ Both were sync'd via DataStore into DynamoDB table
 
 ## Simulating Network Connectivity Issue
 
-To simulate a network connectivity issue - I did this by just disconnecting my WiFi - then adding a new Todo entry in the app
+To simulate a network connectivity issue - I did this by just disconnecting my WiFi on my laptop - then adding a new Todo entry in the app
 
 ![offline-add](images/offline-add.png)
 
@@ -517,7 +570,7 @@ To simulate a network connectivity issue - I did this by just disconnecting my W
 
 ## Testing a delete operation
 
-We bought our bread, so go ahead and delete it from out list in the app
+We bought our bread, so go ahead and delete it from list in the app
 ![delete-bread.png](images/delete-bread.png)
 
 Check the table and you can see that `Get bread` has been marked under `_deleted` column as `true`
