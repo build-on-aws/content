@@ -110,7 +110,7 @@ Use standard markdown code blocks, and specify the language, for example:
    ```
 ````
 
-If you do not specify a language, we still try to guess the most adequate. But this detection is not perfect, and you will get consistent output if you explicitly indicate the language. If you want to disable syntax highlighting guessing in a code snippet, simply specify "text" or "plaintext" language. This is particularly useful for embedding the output of running commands, for example.
+If you do not specify a language, autodetection takes place. Although it works reasonably in many cases, this system is not perfect, so we recommend explicitly indicating the language in order to get consistent results. If you want to disable language autodetection in a code snippet, simply specify "text" or "plaintext" language. This is particularly useful for embedding the output of some command.
 
 ### What languages does syntax highlighting support?
 
