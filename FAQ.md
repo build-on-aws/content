@@ -112,9 +112,9 @@ Use standard markdown code blocks, and specify the language, for example:
 
 If you do not specify a language, we still try to guess the most adequate. But this detection is not perfect, and you will get consistent output if you explicitly indicate the language. If you want to disable syntax highlighting guessing in a code snippet, simply specify "text" or "plaintext" language. This is particularly useful for embedding the output of running commands, for example.
 
-### What languages are supported for syntax highlighting?
+### What languages does syntax highlighting support?
 
-Currently, the following:
+Currently, the following languages are supported:
 
 * bash (or sh)
 * clojure
@@ -140,9 +140,9 @@ Currently, the following:
 * yaml (or yml)
 * html
 * sh
-* text (or plaintext). This one actually disables highlighting.
+* text (or plaintext). This one actually disables highlighting preventing incorrect guessing.
 
-### How do I write the same code in different languages?
+### How do I write the same code snippet in different languages?
 
 If you want embed the same code snippet in different languages, for example, explaining how to do some algorithm in Java, Python, Javascript, etc., put them in a list. The list must contain in all its elements a small piece of text (the title) and a code snippet, for example:
 
@@ -165,7 +165,7 @@ If you want embed the same code snippet in different languages, for example, exp
     ```
 ````
 
-This will be rendered as one single code block with different tabs on the top for the different code snippets. The title of each tab will be the text in every list item.
+This will be rendered as one single code block with different tabs on the top for the different code snippets. The title of each tab will be the text in every list item. Notice that if any of the list elements does not respect this format, the whole list will be rendered as a normal list.
 
 
 ## Miscellaneous
