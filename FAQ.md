@@ -100,6 +100,47 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
 
 It works with the domains youtube.com, youtu.be or youtube-nocookie.com.
 
+### How do I get syntax highlighting in my code snippets?
+
+Use standard markdown code blocks, and specify the language, for example:
+
+```markdown
+   ```java
+   System.out.println("Hello World!");
+   ```
+```
+
+If you do not specify a language, we still try to guess the most adequate. But this detection is not perfect, and you will get consistent output if you explicitly indicate the language. If you want to disable syntax highlighting guessing in a code snippet, simply specify "text" or "plaintext" language. This is particularly useful for embedding the output of running commands, for example.
+
+### What languages are supported for syntax highlighting?
+
+Currently, the following:
+* bash (or sh)
+* clojure
+* cpp (or c++)
+* csharp (or c#)
+* css
+* dockerfile (or docker)
+* fsharp (or f#)
+* go
+* java
+* javascript
+* json
+* kotlin
+* php
+* plaintext
+* powershell
+* python
+* ruby
+* shell
+* swift
+* typescript
+* xml
+* yaml (or yml)
+* html
+* sh
+* text (or plaintext). This actually disables highlighting.
+
 
 ## Miscellaneous
 
