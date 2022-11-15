@@ -111,7 +111,7 @@ Now we will create an Amazon S3 bucket and shall create two sub-folders within t
 
 ![S3_3](images/s3_3.png)
 
-4. Upload the [sales dataset](/dataset/SalesData.csv) in the bucket under the folder `raw_data`
+4. Upload the [sales dataset](https://myblog-imgs.s3.amazonaws.com/datasets/SalesData.csv) in the bucket under the folder `raw_data`
 
 ![Upload raw data](images/upload_csv.png)
 
