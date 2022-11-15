@@ -9,6 +9,8 @@
   * [How do I get syntax highlighting in my code snippets?](#how-do-i-get-syntax-highlighting-in-my-code-snippets)
   * [What languages does syntax highlighting support?](#what-languages-does-syntax-highlighting-support)
   * [How do I write the same code snippet in different languages?](#how-do-i-write-the-same-code-snippet-in-different-languages)
+  * [How do I embed a Mermaid diagram in my article?](#how-do-i-embed-a-mermaid-diagram-in-my-article)
+  * [How do I embed mathematical formulas or equations in my articles?](#how-do-i-embed-mathematical-formulas-or-equations-in-my-articles)
 * [Miscellaneous]()
   * [I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?](#i-published-my-post-on-my-personal-blogdevtomedium-can-i-publish-it-on-buildonaws)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
@@ -181,6 +183,39 @@ This will be rendered as one single code block with different tabs on the top fo
 ![Example of a code snippet in different languages, rendered with tabs](code-snippet-tabs.webp "Example of a code snippet in different languages, rendered with tabs")
 
 If you don't want a list of code snippets to be rendered as tabs, simply separate with an empty line every list element. Actually, if any of the list elements contains anything different to a text + a code snippet (like in the example above), it will not be rendered with tabs. 
+
+### How do I embed a Mermaid diagram in my article?
+Simply use a code snippet specifying the language as _mermaid_. For example:
+
+````markdown  
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+````
+will render something like 
+
+![An example of a mermaid diagram](mermaid-diagram.webp "An example of a mermaid diagram")
+
+Refer to the [mermaid page](https://mermaid-js.github.io/mermaid/#/) for examples and language syntax. 
+
+### How do I embed mathematical formulas or equations in my articles?
+
+You can embed inline formulas inside a paragraph by escaping it with $...$. For blocks that display standalone, centered in the screen, either enclose them with $$...$$ or use a regular code snippet with language _math_.
+
+For example, a content like this:
+````markdown
+To evaluate a model we use an error measure that uses some topological distance mechanism on the output manifold to measure distance of a prediction to an observed value or $\mathcal{E} = \lVert p-o \rVert$, where $p$ is a predicted value and $o$ is an observed value. For instance RMSE (Root Mean Square Error) is a type of distance in a multi-dimensional space.
+
+$$RMSE = \sqrt{{\frac{1}{n}} \sum_{i=1}^n(y_i-x_i)^2 }$$
+````
+will render something like this:
+![An example of some math formulas](math-formulas.webp "An example of some math formulas")
+
+Refer to the [MathJax basic tutorial](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference) for details on the syntax to write your formulas.
 
 ## Miscellaneous
 
