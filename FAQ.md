@@ -97,6 +97,9 @@ https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
 ```
+The video will be embedded in the article with a responsive layout that adjusts to the available width.
+
+![Video embedded in an article](embedded-video.webp "Video embedded in an article")
 
 It works with the domains youtube.com, youtu.be or youtube-nocookie.com.
 
@@ -168,6 +171,8 @@ If you want embed the same code snippet in different languages, for example, exp
 This will be rendered as one single code block with different tabs on the top for the different code snippets. The title of each tab will be the text in every list item. Notice that if any of the list elements does not respect this format, the whole list will be rendered as a normal list.
 
 ![Example of a code snippet in different languages, rendered with tabs](code-snippet-tabs.webp "Example of a code snippet in different languages, rendered with tabs")
+
+If you don't want a list of code snippets to be rendered as tabs, simply separate with an empty line every list element. Actually, if any of the list elements contains anything different to a text + a code snippet (like in the example above), it will not be rendered with tabs. 
 
 ## Miscellaneous
 
