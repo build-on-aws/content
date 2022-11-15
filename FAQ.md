@@ -167,6 +167,7 @@ If you want embed the same code snippet in different languages, for example, exp
 
 This will be rendered as one single code block with different tabs on the top for the different code snippets. The title of each tab will be the text in every list item. Notice that if any of the list elements does not respect this format, the whole list will be rendered as a normal list.
 
+![Example of a code snippet in different languages, rendered with tabs](code-snippet-tabs.webp "Example of a code snippet in different languages, rendered with tabs")
 
 ## Miscellaneous
 
