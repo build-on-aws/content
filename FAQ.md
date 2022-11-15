@@ -108,10 +108,14 @@ It works with the domains youtube.com, youtu.be or youtube-nocookie.com.
 Use standard markdown code blocks, and specify the language, for example:
 
 ````markdown
-   ```java
-   System.out.println("Hello World!");
+   ```javascript
+   console.log("Hello World!");
    ```
 ````
+
+This will render something like:
+
+![Example of code snippet with syntax highlighting](code-snippet-highlighting.webp "Example of code snippet with syntax highlighting")
 
 If you do not specify a language, autodetection takes place. Although it works reasonably in many cases, this system is not perfect, so we recommend explicitly indicating the language in order to get consistent results. If you want to disable language autodetection in a code snippet, simply specify "text" or "plaintext" language. This is particularly useful for embedding the output of some command.
 
