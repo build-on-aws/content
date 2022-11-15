@@ -3,13 +3,13 @@ title: "Data 101: Data Classification & Storage"
 description: "Understanding data classification by looking at structured, semi-structured, and unstructured data."
 
 tags:
-  - Data Classification
-  - Data Storage
-  - Structured Data
-  - Unstructured Data
-  - Databases
-  - Data Warehouses
-  - Data Lakes
+  - data-classification
+  - data-storage
+  - structured-data
+  - unstructured-data
+  - databases
+  - data-warehouses
+  - data-lakes
   - foundational
   - aws
 authorGithubAlias: aremutem
