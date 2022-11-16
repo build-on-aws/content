@@ -10,8 +10,6 @@ authorName: Brian Ketelsen
 date: 2022-11-15
 ---
 
-# Database Essentials
-
 Every application needs a place to store data from users, devices, and the application itself. Databases are important backend systems that are used to store, manage, update, and analyze data for all types of applications, from small back-office systems to mobile and consumer web applications with global scale.
 
 ## **Sections:**
@@ -44,10 +42,10 @@ The seven categories are:
 
 Relational databases store and provide access to data that has predefined relationships. This category of database is well suited for storing data about entities with related metadata. The database uses indexes called keys to store relationships between records in the system.
 
-An example use for relational databases is an e-commerce store which can be modeled with data tables for products, customers, and orders. A `products` table might have a field with a numeric identity like `29476` that represents an individual product in a company's catalog. That field would be the key for the `products` table, and other tables &mdash; like `orders` &mdash; can reference a product by its key instead of duplicating the product information in the `orders` table. Similarly the `customers` table would have a unique key for each customer and the `orders` table can reference the customer by storing the key to the customer instead of keeping duplicate copies of data in each table.
+An example use for relational databases is an e-commerce store which can be described with database tables for products, customers, and orders. A `products` table might have a field with a numeric identity like `29476` that represents an individual product in a company's catalog. That field would be the key for the `products` table, and other tables &mdash; like `orders` &mdash; can reference a product by its key instead of duplicating the product information in the `orders` table. Similarly the `customers` table would have a unique key for each customer and the `orders` table can reference the customer by storing the key to the customer instead of keeping duplicate copies of data in each table.
 
 
-[Amazon RDS Tutorial](https://aws.amazon.com/getting-started/hands-on/create-connect-postgresql-db/)
+[Amazon RDS Tutorial](https://aws.amazon.com/getting-started/hands-on/create-microsoft-sql-db/)
 [Amazon Aurora Tutorial](https://aws.amazon.com/getting-started/hands-on/configure-connect-serverless-mysql-database-aurora/)
 
 
@@ -57,16 +55,13 @@ A key-value database is a type of nonrelational database that uses a simple key-
 
 Game developers often use key-value databases to store the state of an individual user's gaming session as a single `value` with the user's unique identifier as the `key`. Instead of creating multiple records with individual values for each attribute of the session, the developer will create a single nested object&mdash;often encoded as `JSON` data. Then the session data can be stored or retrieved with a single call to the database, making reads and updates efficient and fast.
 
-
 [Amazon DynamoDB Tutorial](https://aws.amazon.com/getting-started/hands-on/create-nosql-table/)
 
 ## **What are document databases?**
 
-<<<<<<< HEAD
-## **What about high availability and fault tolerance?**
-=======
-A document database is a type of nonrelational database that is designed to store and query data as JSON-like documents. Document databases make it easier for developers to store and query data in a database by using the same document-model format they use in their application code. 
->>>>>>> fcc9896e0c9e3e56a236abddaf4334f547bb89c5
+A document database is a type of nonrelational database that is designed to store and query data as JSON-like documents. Document databases make it easier for developers to store and query data in a database by using the same document-model format they use in their application code.
+
+A document database is a type of nonrelational database that is designed to store and query data as JSON-like documents. Document databases make it easier for developers to store and query data in a database by using the same document-model format they use in their application code.
 
 Document databases are frequently used for content management systems where a single web page is modeled with many nested content components.
 
@@ -101,6 +96,6 @@ IoT (Internet of Things) data is commonly stored in a time-series database. Inte
 
 A ledger database provides a transparent, immutable, and cryptographically verifiable transaction log. Ledger databases are append-only, giving you an accurate history of all change history, while cryptographic verification gives you proof of data integrity.
 
-Inventory systems are good candidates for ledger databases. Inventory changes are stored as transactions in the system either adding or subtracting from inventory. Because the ledger is append-only, the system is verifiably accurate and tamper proof. 
+Inventory systems are good candidates for ledger databases. Inventory changes are stored as transactions in the system either adding or subtracting from inventory. Because the ledger is append-only, the system is verifiably accurate and tamper proof.
 
 [Getting Started with Amazon QLDB](https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started.html)
