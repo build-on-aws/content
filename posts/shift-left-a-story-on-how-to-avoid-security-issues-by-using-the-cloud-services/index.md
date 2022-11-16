@@ -3,19 +3,19 @@ layout: blog.11ty.js
 title: Shift Left! A story on how to avoid security issues by using the cloud services
 description: Learn how to avoid security incidents by leveraging a fully managed cloud services portfolio in your CI/CD pipeline.
 tags:
-- amazon-codeguru
-- amazon-codeguru-reviewer
-- java
-- python
-- security
-- aws-security
-- shift-left
-- devsecops
-- devops
-- github-actions
-  authorGithubAlias: afronski
-  authorName: Wojciech Gawroński
-  date: 2022-07-19
+  - amazon-codeguru
+  - amazon-codeguru-reviewer
+  - java
+  - python
+  - security
+  - aws-security
+  - shift-left
+  - devsecops
+  - devops
+  - github-actions
+authorGithubAlias: afronski
+authorName: Wojciech Gawroński
+date: 2022-07-19
 ---
 
 Starting on the 24th of November 2021, people that maintained JVM-based applications were terrified. Rumors that an exploit for a very popular logging library called _[Apache Log4j](https://logging.apache.org/log4j/2.x/)_ turned out to be true. [Log4shell](https://en.wikipedia.org/wiki/Log4Shell) was so severe because it could be easily exploited (even by _script kiddies_) and allowed for _remote code execution_.
@@ -48,7 +48,7 @@ The more stuff we automate during the software development phase, the more we ar
 
 Speaking about more stuff we can do: we should leverage tools that will give us insights during the code review phase and point out obvious and non-obvious security issues discovered in our implementation.
 
-A well-known technique helping with that is the _SAST_ approach, which stands for _Static Application Security Testing_. It is a testing methodology that analyzes source code to find security vulnerabilities that make your applications susceptible to attack. This is also known as the *white box testing* technique and is often represented as a tool that can be used inside your _SDLC_ process, e.g., in the CI/CD pipeline. This way, an automated solution will help you to detect problems at a much earlier stage.
+A well-known technique helping with that is the _SAST_ approach, which stands for _Static Application Security Testing_. It is a testing methodology that analyzes source code to find security vulnerabilities that make your applications susceptible to attack. This is also known as the *white box testing* technique and is often represented as a tool that can be used inside your _SDLC_ process, e.g., in the *CI*/*CD* pipeline. This way, an automated solution will help you to detect problems at a much earlier stage.
 
 As this approach seems relevant, you must be aware of one additional element: _doing the right thing on a security path has to be intuitive and easy_. Convenience is one of the elements that is often overlooked when enforcing security best practices. We can all agree that _peopleware_ (aka _humans_) is always the weakest link in the chain when it comes to security, and that’s not without reason – we tend to work around complicated and cumbersome processes.
 
@@ -175,7 +175,7 @@ Now, having a pipeline set up and properly configured, you can inspect in the sa
 
 ## Is that everything?
 
-Not at all! Having a fully-managed service added to your *CI*/*CD* pipeline, you can benefit from the constant growth and evolution done by the *Amazon CodeGuru* team on your behalf.
+Not at all! Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *Amazon CodeGuru* team on your behalf.
 
 Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all recommendations inside [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html). To give just one example – you can leverage the _[chaos engineering](https://principlesofchaos.org/)_ techniques and, with the help of the [AWS Fault Injection Simulator](https://aws.amazon.com/fis/) service, reliably manage and automate experiments in your path to a more robust and secure infrastructure.
 
