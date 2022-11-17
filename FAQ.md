@@ -204,7 +204,7 @@ Refer to the [mermaid page](https://mermaid-js.github.io/mermaid/#/) for example
 
 ### How do I embed mathematical formulas or equations in my articles?
 
-You can embed inline formulas inside a paragraph by escaping it with $...$. For blocks that display standalone, centered in the screen, either enclose them with $$...$$ or use a regular code snippet with language _math_.
+You can embed inline formulas inside a paragraph by escaping it with `$...$`. For blocks that display standalone, centered in the screen, either enclose them with `$$...$$` or use a regular code snippet with language _math_.
 
 For example, a content like this:
 ````markdown
