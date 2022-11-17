@@ -169,6 +169,10 @@ This means once telemetry data for traces and metrics are transmitted to the res
 docker compose down
 ```
 
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=XvmicNH_4lc&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=1
+
 ## Automatic instrumentation with the OpenTelemetry agent
 
 You have your microservice ready to go, the observability backend is eager to receive telemetry data, so now it is time for you to start the instrumentation process. This is the process where you teach the code how to emit telemetry data. How intrusive in your code this process is depends on a lot of factors, like which programming language you are using, the level of detail you want to provide for the observability backend, and whether you can effectively change your code for this. These factors often dictate if you are going to use black-box instrumentation or white-box instrumentation.
@@ -255,6 +259,10 @@ This is a root span, a type of trace data, generated automatically by the OpenTe
 These are metrics generated automatically by the OpenTelemetry agent, that are updated [every minute](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#periodic-metric-reader). In your case, there will be more metrics than what was shown above for brevity. What matters is the microservice already generating useful telemetry data for traces and metrics without you changing a single line of its code. And it was achieved by one of the moving parts of OpenTelemetry called the agent. An agent, whether one that is pre-packaged like this, or one that you implemented yourself, is the component responsible for collecting the generated telemetry data and sending to a destination.
 
 Now that you know your microservice is properly instrumented, we can work towards sending all this telemetry data to a useful place. We will achieve this by using the OpenTelemetry collector.
+
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=GgT7B7h0RMA&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=2
 
 ## Sending telemetry data to the collector
 
@@ -488,6 +496,10 @@ collector:
 
 Save the contents of the `docker-compose.yaml` file. The code is now in good shape so we can switch our focus to the observability backend, and how to configure the collector to send data to it.
 
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=EeU-k659lpw&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=3
+
 ## Sending all the traces to Grafana Tempo
 
 So far, you have been using the logging from the console to visualize telemetry data. While logging is great for debugging and troubleshooting purposes, it is not very useful to analyze large amounts of telemetry data. This is particularly true for traces, where you would like to see the complete flow of the code using visualizations such as the timelines or waterfalls.
@@ -579,6 +591,10 @@ You will see that Grafana splits the screen in two, and on the right side of the
 This is a much better way to visualize traces, right? Take a moment to understand the amount of information that Grafana UI is sharing with you. For each trace, it details the relationship between the root span and the child spans created within that execution. It is also telling you how much time each span took to execute, which is valuable information to measure performance. Also, if you click on each span, you will see the inner details of that span.
 
 All this information was generated without you changing a single line of the microservice code. Thanks to the support for black-box instrumentation offered by the OpenTelemetry agent for Java. However, there are situations that even when you have access to black-box instrumentation, you may need to provide additional context to the spans, and sometimes even new spans from scratch. You can achieve this by using the OpenTelemetry SDK for a particular programming language.
+
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=V5GtJRZtZ90&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=4
 
 ## Manual instrumentation with the OpenTelemetry SDK
 
@@ -742,6 +758,10 @@ Cool right? You now have a more realistic view of what the code does. You can se
 
 If there is such thing of observability well implemented, I would say that it should include practices like this where you take any measures necessary to make your code rightfully observable. And this sometimes means going beyond what black-box instrumentation offers.
 
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=KMLshL922H8&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=5
+
 ## Custom metrics with the OpenTelemetry SDK
 
 Now that you have learned how to use the OpenTelemetry SDK to create custom spans, let's see how to do the same for metrics. The ability to create your own metrics is important because sometimes you need to provide insight about certain aspects of the code that are tricky to monitor. In this section, you will change the code of the microservice to create and update two metrics: one that will count every time the microservice is executed and another one to monitor the amount of memory the JVM is consuming.
@@ -856,6 +876,10 @@ As you can see, the fundamental difference between synchronous and asynchronous 
 
 Now that we have the metrics properly implemented, it is time to configure the collector to send them to Prometheus.
 
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=2U6eKv7DWfA&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=6
+
 ## Sending all the metrics to Prometheus
 
 Now that the microservice has been instrumented to produce metrics, we need to configure the collector to send them to Prometheus. Right now, the collector is sending all metrics to logging. To change this, update the processing pipeline from the `collector-config-local.yaml` file.
@@ -964,6 +988,10 @@ Here is what you should see.
 ![Explore page showing Prometheus with a graph of the memory usage metric](images/fig_13.png)
 
 Go ahead and play with the different graph types for this visualization until you find one that looks better. As you can see, creating and maintaining your own traces and metrics using OpenTelemetry is not rocket science. This should be enough for you to leverage this technology for your observability needs. As I mentioned before, OpenTelemetry is not complicated once you understand which moving parts to work with and how to configure them.
+
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=AD3biFn-sK0&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=7
 
 ## Bonus: switching the observability backend to AWS
 
@@ -1128,5 +1156,9 @@ You should get the following visualization:
 ![Shows the guage implemented for the number of executions metric](images/fig_19.png)
 
 This is the proof that you were able to successfully switch the observability backend for metrics without changing a single line of code for the microservice. Instrument once, reuse everywhere. This is how OpenTelemetry was designed to work.
+
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=KX9-sIhfLf4&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=8
 
 Congratulations. You have now officially completed all the steps from this tutorial.
