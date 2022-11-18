@@ -1,0 +1,22 @@
+This topic is divided into the following sections which are listed in recommended order, but you can also jump to sections based on your experience. 
+1. The evolution of backend architecture (outcome: Context of backends and how they evolved)
+   1. introduction
+   2. Keeping backend and frontend separate
+   3. what is an API?
+   4. the "-ilities" of software architecture (outcome: why scalability matters)
+   5. what is three-tier architecture?
+2. Monolith vs. Distributed Architecture (outcome: distributed vs. monolithic architecture)
+   1. introduction
+   2. What is monolithic architecture?
+   3. What is distributed architecture?
+3. What is event-driven architecture? (outcome: event-driven architecture)
+   1. introduction
+   2. loosely-coupled microservices (outcome: why scalability matters)
+   3. Asynchronous Communication
+4. How to connect your frontend to your backend (outcome: connecting your front and backends)
+   1. introduction
+   2. Calling APIs
+5. API Architectural Styles 
+   1. introduction (outcome: API-driven concepts of GET and POST)
+   2. What is REST? (outcome: background on REST (theory)) (outcome: API-driven concepts of GET and POST) (outcome: API-driven concepts of GET and POST)
+   6. What is GraphQL? (outcome: background on GraphQL (theory))
