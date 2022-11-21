@@ -1,5 +1,5 @@
 ---
-title: Which Data Storage Option Do I Choose
+title: Which Data Storage Option Should I Choose?
 description: How to choose a data storage solution based on a scenario
 tags:
     - data storage
@@ -10,15 +10,15 @@ authorName: Sophia Parafina
 date: <expected publish date in YYYY-MM-DD format>
 ---
 
-Modern applications need storage for data, logs, user files, and databases. As a cloud engineer, you can choose from object storage, block storage, and file system storage. Each type of storage can meet specific business requirements, but which one should you use? Let's examine a common scenario for each type of storage, when to use them, and when not to use them.
+Modern applications need storage for data, logs, user files, and databases. As a cloud engineer, you can choose from object storage, block storage, and file system storage. Each type of storage can meet specific business requirements, but which one should you use? Let's examine a common scenario for each type of storage to learn when you should -- or shouldn't -- use them.
 
 ## When to use object storage
 
 Let's say a company is building a data lake to serve their customers better by analyzing business data they collect. In addition to the transaction data collected in a data warehouse, they collect data from log files, social media, click streams, and Internet of Things (IoT) devices.
 
-It's important to know that the data collected is customer data which requires secure and durable storage because it contains Personally Identifiable Information (PII). The data is collected continuously and requires petabyte or larger storage as it grows, it is also unstructured. Data analysts use an extraction, translation, and loading (ETL) tool that writes a schema on the fly, making the data available to analytic tools, such as [Apache Spark](https://spark.apache.org/) or [PrestoDB](https://prestodb.io/). Machine learning specialists process the data with machine learning frameworks for forecasting outcomes. The applictions used by data analytist and machine learning specialists require low latency for processing data to produce forecasts for consumer behavior, to support cross-selling and upselling.
+It's important to know that the data collected is customer data, which requires secure and durable storage because it contains Personally Identifiable Information (PII). The data is collected continuously and requires petabyte or larger storage as it grows; it is also unstructured. Data analysts use an extraction, translation, and loading (ETL) tool that writes a schema on the fly, making the data available to analytic tools like [Apache Spark](https://spark.apache.org/) or [PrestoDB](https://prestodb.io/). Machine learning specialists process the data with machine learning frameworks for forecasting outcomes. The applictions used by data analytists and machine learning specialists require low latency for processing data to produce forecasts for consumer behavior, to support cross-selling and upselling.
 
-The company's data lake requires scalability, security, durability, and low latency. Object storage is ideal for any application with these requirements for several reasons. First, object storage uses a flat address space that allows it grow as more data is added. Second, object storage uses extensible metadata which allows cloud providers to implement security and compliance models to protect the data. Third, data is written across multiple nodes for redundancy, meaning that if one node is dropped there are copies of data, making object storage durable. Finally, object storage supports the transfer of data at 100 gbps within the same region.
+In this case, the company's data lake requires scalability, security, durability, and low latency. Object storage is ideal for any application with these requirements for several reasons. First, object storage uses a flat address space that allows it grow as more data is added. Second, object storage uses extensible metadata which allows cloud providers to implement security and compliance models to protect the data. Third, data is written across multiple nodes for redundancy, meaning that if one node is dropped there are copies of data, making object storage durable. Finally, object storage supports the transfer of data at 100 gbps within the same region.
 
 Object storage is commonly used by companies that stream rich media content such as videos, perform data backup and archiving, machine learning, and big data analytics. 
 
