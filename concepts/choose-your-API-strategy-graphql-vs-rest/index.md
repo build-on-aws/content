@@ -1,6 +1,16 @@
-## REST vs. GraphQL
-
-### Introduction
+---
+title: "Chosing your API strategy: GraphQL vs REST"
+description: By learning some basic concepts, you can manage your data more effectively throughout the various stages of lifecycle management
+tags:
+  - aws
+  - explainer
+  - rest
+  - graphql
+  - architecture
+authorGithubAlias: guimathed
+authorName: Matheus Guimaraes
+date: 2022-12-17
+---
 
 Both REST and GraphQL are popular API architectural styles which can be used to build modern scalable backends. They do, however, take very different approaches. While REST models its recommendations around the capabilities of the HTTP protocol and prescribes using multiple APIs each representing a specific resource, GraphQL takes a bolder stance and defines its own mechanism with no strict reliance on HTTP and funneling all operations via a single API endpoint.
 
@@ -22,13 +32,13 @@ With GraphQL this problem is solved natively since GraphQL queries allow applica
 
 As an extesion of the issue above, REST can be less sustainable than GraphQL since potentially there is a lot of extra processing power required even for simple data operations. GraphQL is designed to be data efficient by its very nature and allows you to perform fine-grained optimization of data operations, meaning that you could at any time improve the sustainability factor of even a simple request such as optimizing how a customer's first name is retrieved. 
 
-Because of this, GraphQL is well-positioned to keep up with the early conversations about sustainable coding and software systems as they continue to evolve. You can read more about it on this post: <a href="https://www.buildon.aws/posts/four-reasons-why-graphql-is-the-future/">Four Reasons Why GraphQL Is The Future</a>
+Because of this, GraphQL is well-positioned to keep up with the early conversations about sustainable coding and software systems as they continue to evolve. You can read more about it on this post: [Four Reasons Why GraphQL Is The Future](https://buildon.aws/posts/four-reasons-why-graphql-is-the-future/).
 
 ### Operational Overhead
 
 A major advantage of REST is that it simply leverages existing standards to prescribe its implementation. Except for optional ancillary tools that help with API design, development and testing, the only requirement for a full REST implementation is making sure that both your clients and servers can communicate using HTTP which has been the mainstream ubiquotous protocol for decades.
 
-With GraphQL, you do need to run an implementation of the GraphQL runtime on a server. The GraphQL server is responsbile for hosting the single API entry point, resolving data requests, aggregating data and returning response payloads. The good news is that there are many off-the-shelf implementations that you can use without having to implement, host or maintain your own such as <a href="https://aws.amazon.com/appsync/">AWS AppSync</a>.
+With GraphQL, you do need to run an implementation of the GraphQL runtime on a server. The GraphQL server is responsbile for hosting the single API entry point, resolving data requests, aggregating data and returning response payloads. The good news is that there are many off-the-shelf implementations that you can use without having to implement, host or maintain your own such as [AWS AppSync](https://aws.amazon.com/appsync/).
 
 ### Flexibility
 Many teams still struggle with how to create a formal contract between the backend and frontend so teams can work in paralell without affecting each other or resulting in wasted effort. This is because with REST the frontend and backend hold a silent contract between them: the frontend sends a request via an API call and hopes that the data sent is in the right format, contains the right attributes and has the right values needed for the API call to succeed. There is no automatic or formal way within the REST specification of making sure that the frontend is always synched with any changes in those requirements. Therefore, the backend team has to ensure backwards compatibility as they evolve the APIs and more fields are added or changed. They can do this by applying versioning techniques or simply manually coordinating changes with the frontend teams and making sure that all frontend and API changes are released at the same time which is far from ideal.

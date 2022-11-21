@@ -1,47 +1,28 @@
-
-# How Do Backend Architectures Work?
-
-<table>
-    <tr>
-        <td>AWS Experience</td>
-        <td>Begginner</td>
-    </tr>
-   <tr>
-        <td>Time to complete</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Requires</td>
-        <td></td>
-    </tr>
-     <tr>
-        <td>Services discussed</td>
-        <td></td>
-    </tr>
-     <tr>
-        <td></> Code</td>
-        <td></td>
-    </tr>
-     <tr>
-        <td>Last Updated</td>
-        <td>Nov 15th 2022</td>
-    </tr>
-</table>
-
-## Overview
+---
+title: "How Do Backend Architectures Work?"
+description: By learning some basic concepts, you can manage your data more effectively throughout the various stages of lifecycle management
+tags:
+  - aws
+  - foundational
+  - rest
+  - graphql
+  - architecture
+authorGithubAlias: guimathed
+authorName: Matheus Guimaraes
+date: 2022-12-17
+---
 In this guide, we will learn the basics of modern backend architecture by exploring a few of the technologies and architectures that power most applications today. We will look into the improvements gained by moving away from a traditional monolith and embracing API and event-driven distributed architecture to help realize the benefits of a modern application stack.
 
 We will also learn how to integrate your client application's frontends with the backends and cover the basics of REST and GraphQL.
-
 
 ### Before starting this course, you should:
 - have basic understanding of application development
 
 ### Sections
 This topic is divided into the following sections which are listed in recommended order, but you can also jump to sections based on your experience. 
-1. The evolution of backend architecture (outcome: Context of backends and how they evolved)
-   1. introduction
-   2. Keeping backend and frontend separate
+1. [The evolution of backend architecture](#the-evolution-of-backend-architectures-from-monolith-to-distributed) (outcome: Context of backends and how they evolved)
+   1. [Introduction](#introduction)
+   2. [Keeping backend and frontend separate](#keeping-backend-and-frontend-separate)
 2. What is an API?
    1. the "-ilities" of software architecture (outcome: why scalability matters)
    2. what is three-tier architecture?
@@ -85,7 +66,6 @@ Much like a web site, an API is assigned a specific network address such as a UR
 
 Besides enhancing the re-usability factor, breaking your backend architecture into multiple APIs allows you to look after your solution more easily and efficiently by addressing aspects such as availability, scalability and security for each API rather than have to deal with the complexity of the entire application at all times.
 
-<a id="ilities"></a>
 ### The "-ilities" of software architecture
 
 There are many aspects involved in delivering great features and exciting stable user experiences. A robust application must strive to achieve high standards across a number of architectural concerns. These are sometimes referred to as "-ilities", due to their wording in English and the fact that each word ends in "ility". Some examples are:
@@ -94,7 +74,7 @@ There are many aspects involved in delivering great features and exciting stable
     - Security: a famous and self-explanatory one, this determines how secure your application is at any given point in time
     - Maintainability: this determines how easy or how difficult it is to maintain your application
 
-Depending on the nature of the application, certain aspects will be more important than others, however, besides security, which must always be a top priority concern for obvious reasons, one of the most important ones that must be factored into modern application architecture is scalability. Without making sure that your application has sufficient levels of scale for your goals, your users will have slow and poor experiences which can lead to them abandoning your service or product. Equally, you should make sure that you are not wasting processing time and, perhaps even more importantly, money during times when your application may not be as busy. This can be a challenging puzzle to solve on your own and that is why so many applications are being built or migrating to serverless technology. Serverless allows you to run your applications without having to manage any infrastructure and it will grow and shrink the scalability required by your application based on usage. You can read more about how serverless can help you accelerate to high scalability standards as well as some of these other -ilities on this post: <a href="https://aws.amazon.com/blogs/compute/getting-started-with-serverless-for-developers-part-1/">Getting started with serverless for developers</a>.
+Depending on the nature of the application, certain aspects will be more important than others, however, besides security, which must always be a top priority concern for obvious reasons, one of the most important ones that must be factored into modern application architecture is scalability. Without making sure that your application has sufficient levels of scale for your goals, your users will have slow and poor experiences which can lead to them abandoning your service or product. Equally, you should make sure that you are not wasting processing time and, perhaps even more importantly, money during times when your application may not be as busy. This can be a challenging puzzle to solve on your own and that is why so many applications are being built or migrating to serverless technology. Serverless allows you to run your applications without having to manage any infrastructure and it will grow and shrink the scalability required by your application based on usage. You can read more about how serverless can help you accelerate to high scalability standards as well as some of these other -ilities on this post: [Getting started with serverless for developers](https://aws.amazon.com/blogs/compute/getting-started-with-serverless-for-developers-part-1/).
 
 All of these qualities are at the center of architectural decisions and many specifications, patterns and tools continue to be created to aid in achieving high standards across all these different "ilities". For a long time, the most accepted approach which tried to tackle many of these challenges was what is referred to as the three-tier architecture. While some of the concepts of three-tier architecture still stand, its implementation looks a bit different than it did a few years ago as the world adapted to the mainstream adoption of microservice architecture. 
 
@@ -103,7 +83,7 @@ All of these qualities are at the center of architectural decisions and many spe
 
 The concept of a three-tier architecture is pretty simple. It states that an application should be split into three independent layers: presentation, application and data. 
 
-<img src="/imgs/three-tier-architecture-diagram.jpeg"/>
+![Diagram showing the layers of three tier architecture](images/three-tier-architecture-diagram.jpeg)
 
 Presentation refers to any UI that can be interacted with. This could be a web site, a mobile app, a kiosk, or even the feedback touch panels with the emoji faces that you see at some events and public facilities. This layer is concerned with layout, design and user experience only. Does the application look nice and on brand? Can the user achieve the most common tasks with as few mouse clicks as possible? These are typical concerns shared by the user interface and user experience designers as well as, traditionally, by the frontend developers.
 
@@ -116,7 +96,7 @@ Three-tier architecture could be summarized in three (indeed!) rules:
 2- never allow the presentation layer to talk directly to the data layer, always go through the application layer
 3- never allow the application layer to talk directly to the database, always go through the data layer
 
-Three-tier architecture was accepted as the de-facto approach for a long time because it helped to address many of <a href="#ilities">"-ilities"</a> such as improving an application's availability, scalability and maintainability by making software engineering and maintenance more manageable while also isolating and spreading the burden of catering for large number of users a bit thinner across different layers.
+Three-tier architecture was accepted as the de-facto approach for a long time because it helped to address many of [-ilities](#the--ilities-of-software-architecture) such as improving an application's availability, scalability and maintainability by making software engineering and maintenance more manageable while also isolating and spreading the burden of catering for large number of users a bit thinner across different layers.
 
 The principles of three-tier architecture still apply today, however, the implementation looks a bit different. That is because traditionally software was built as a block and all three layers would be coded, built and released together as a unit resulting in what is called a monolith. However, as more people flocked to online channels, it became obvious that the monolithic approach would struggle to keep up with modern application requirements and support the ever-growing number of digital users. This allowed distributed architecture to finally make its way onto the spotlight and become the new default approach for building applications in the digital era.
 
