@@ -120,7 +120,7 @@ curl -X GET http://localhost:8888/hello
 You should receive a reply like this:
 
 ```json
-{"message":"Hello World","valid":true}
+{"message":"Hello World"}
 ```
 
 Once you are done with the tests, stop `run-microservice.sh` to shut down the microservice. You can do this by pressing `Ctrl+C`. From this point on, every time you need to execute the microservice again with a new version of the code that you changed, just execute the same script.
@@ -194,7 +194,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.17.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 java -javaagent:./${AGENT_FILE} -jar target/hello-app-1.0.jar
@@ -221,7 +221,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.16.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 export OTEL_TRACES_EXPORTER=logging
@@ -346,7 +346,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.16.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 export OTEL_TRACES_EXPORTER=otlp
@@ -641,10 +641,11 @@ But you don't have to settle for this. You can use the OpenTelemetry SDK to prov
 
 3. Open the file `pom.xml`.
 
-4. Add the following properties right after the XML tag `parent`:
+4. Update the properties section to the following:
 
 ```xml
 <properties>
+    <maven.compiler.release>17</maven.compiler.release>
     <otel.traces.api.version>0.13.1</otel.traces.api.version>
     <otel.metrics.api.version>1.10.0-alpha-rc.1</otel.metrics.api.version>
 </properties>
@@ -658,13 +659,13 @@ These properties will be used throughout many parts of the code.
 <dependency>
     <groupId>io.opentelemetry</groupId>
     <artifactId>opentelemetry-api</artifactId>
-    <version>1.18.0</version>
+    <version>1.20.1</version>
 </dependency>
 
 <dependency>
     <groupId>io.opentelemetry.instrumentation</groupId>
     <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-    <version>1.18.0-alpha</version>
+    <version>1.20.1</version>
 </dependency>
 
 <dependency>
@@ -688,6 +689,8 @@ You now have everything you need to write code using the OpenTelemetry SDK for J
 
 ```java
 package tutorial.buildon.aws.o11y;
+
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -773,8 +776,12 @@ Change its code to the following version:
 ```java
 package tutorial.buildon.aws.o11y;
 
+import java.util.Objects;
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -788,8 +795,6 @@ import io.opentelemetry.instrumentation.annotations.WithSpan;
 
 import static tutorial.buildon.aws.o11y.Constants.*;
 import static java.lang.Runtime.*;
-
-import javax.annotation.PostConstruct;
 
 @RestController
 public class HelloAppController {
