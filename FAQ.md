@@ -102,7 +102,7 @@ Notice that standard Markdown syntax only allows texts, links and simple formatt
 ![Manual Table of Contents in an article](Manual-ToC.webp)
 
 ### How do I specify article attributes, such as the time to read it, complexity, prerequisites, etc?
-Insert a table with two columns, and make the first row in the header contain the word "Attributes" in the first cell and leave the rest empty. Then specify attribute names and values in the body of the table. For example, you can copy this table as a template:
+Insert a table with two columns, and make the first row in the header contain the word "Attributes" in the first cell and leave the second cell empty. Then specify attribute names and values in the body of the table. For example, you can copy this table as a template:
 
 ```markdown
 | Attributes                 |                                                        |
