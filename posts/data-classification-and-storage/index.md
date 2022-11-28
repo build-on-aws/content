@@ -3,13 +3,13 @@ title: "Data 101: Data Classification & Storage"
 description: "Understanding data classification by looking at structured, semi-structured, and unstructured data."
 
 tags:
-  - Data Classification
-  - Data Storage
-  - Structured Data
-  - Unstructured Data
-  - Databases
-  - Data Warehouses
-  - Data Lakes
+  - data-classification
+  - data-storage
+  - structured-data
+  - unstructured-data
+  - databases
+  - data-warehouses
+  - data-lakes
   - foundational
   - aws
 authorGithubAlias: aremutem
@@ -101,4 +101,4 @@ We now know the different characteristics of structured, unstructured, and semi-
 
 By understanding these differences, we hope you now have a bit more insight and this helps you to understand data classification and select the most effective data storage solution that fits your data needs and use cases.
 
-To learn more about data analytics on AWS, check out the Analytics on AWS (https://aws.amazon.com/big-data/datalakes-and-analytics/?nc=sn&loc=0) page that covers all-things-data on AWS. Stay updated with all the releases from BuildOn AWS here (https://aws.amazon.com/developer/learning/buildon-aws-live/).
+To learn more about data analytics on AWS, check out the [Analytics on AWS](https://aws.amazon.com/big-data/datalakes-and-analytics/?nc=sn&loc=0) page that covers all-things-data on AWS. Stay updated with all the releases from [BuildOn AWS](https://aws.amazon.com/developer/learning/buildon-aws-live/).
