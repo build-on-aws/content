@@ -1,4 +1,4 @@
- ---
+---
 title: "Understanding Log Files on your Linux System"
 description: "Log files in Linux represent point in time events for activity related to the OS, system devices, and applications running on the system. Learn how to leverage logs to troubleshoot issues, debug applications, and keep servers reliable at all times."
 tags:
