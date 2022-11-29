@@ -82,7 +82,7 @@ Simply insert a markdown table with one column, make the first row of the table 
 |-----|
 ````
 The Table of Contents can be placed anywhere in the article, and will render links to any titles found after its own position. So, it is possible to place it at the very beginning of the post, or perhaps in some cases there are some introductory paragraphs and the ToC goes right after, linking to the rest of the article. Both options are possible.
-If the automatic generation based on the detection of titles is not desirable, you can always customize the ToC and specify your own content manually. To do so, simply add rows to the ToC table. It will render them instead of the autodetected titles:
+You can also specify your own content manually for the ToC, simply adding rows to the ToC table. It will render them instead of the autodetected titles:
 ````markdown
 | ToC                                                                                                                          |
 |------------------------------------------------------------------------------------------------------------------------------|
@@ -97,27 +97,30 @@ If the automatic generation based on the detection of titles is not desirable, y
 | &nbsp; &nbsp; &nbsp; 2.1.1.1 [Sending all the metrics to Prometheus](#sending-all-the-metrics-to-prometheus)                 |
 | &nbsp; &nbsp; 2.1.2 [Bonus: switching the observability backend to AWS](#bonus-switching-the-observability-backend-to-aws)   |
  ````
-Notice that standard Markdown syntax only allows texts, links and simple formatting inside a table, not complex structures such as lists. This is how this table of contents may look like when inserted in an article:
+Notice that standard Markdown syntax only allows texts, links and simple formatting inside a table, not complex structures such as lists. In this example we use `&nbsp;` (a whitespace character in HTML) to emulate indentation for the custom ToC content.
+This is how this table of contents may look like when inserted in an article:
 
 ![Manual Table of Contents in an article](Manual-ToC.webp)
 
 ### How do I specify article attributes, such as the time to read it, complexity, prerequisites, etc?
 Insert a table with two columns, and make the first row in the header contain the word "Attributes" in the first cell and leave the second cell empty. Then specify attribute names and values in the body of the table. For example, you can copy this table as a template:
 
+
 ```markdown
-| Attributes                 |                                                        |
-|----------------------------|--------------------------------------------------------|
-| &#10003; AWS experience    | Beginner                                               |
-| &#x23F1; Time to complete  | 10 minutes                                             |
-| &#x1F4B0; Cost to complete | Fee tier eligible                                      |
-| &#x1F9E9; Requires         | An AWS Account                                         |
-| &#x1F4BE; Code             | [Download here the full guide](https://aws.amazon.com) |
-| &#x270F;  Last updated     | July 14, 2022                                          |
+| Attributes             |                                                        |
+|------------------------|--------------------------------------------------------|
+| ✅ AWS experience       | Beginner                                               |
+| ⏱ Time to complete     | 10 minutes                                             |
+| 💰 Cost to complete    | Fee tier eligible                                      |
+| 🧩 Requires            | An AWS Account                                         |
+| &#x1F4BE; Code         | [Download here the full guide](https://aws.amazon.com) |
+| &#x270F;  Last updated | July 14, 2022                                          |
 ```
+Table cells can contain simple texts with basic formatting (such as bold or italic), links, emojis (either directly or using their unicode representation), etc.
 
 This table can be placed anywhere in the article, although it usually makes more sense to have it at the very beginning. There could be cases where it fits better after some introductory content.
 
-This is how the attributes table renders on a desktop browser in an article which has some banner image before the actual content. At the bottom, you can see an auto-generated Table of Contents placed after some introductory paragraphs.
+This is how the attributes table renders on a desktop browser in an article. At the bottom, you can see an auto-generated Table of Contents placed after some introductory paragraph.
 
 ![Article featuring an automatic ToC and some attributes table](toc-and-attributes.webp)
 
