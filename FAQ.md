@@ -4,6 +4,8 @@
   * [Where do I find the general Markdown syntax guide?](#where-do-i-find-the-general-markdown-syntax-guide)
   * [I have a series of posts. How do I link them together?](#i-have-a-series-of-posts-how-do-i-link-them-together)
   * [How do I link to other posts in my series or other posts on the BuildOn.AWS site?](#how-do-i-link-to-other-posts-in-my-series-or-other-posts-on-the-buildonaws-site)
+  * [How do I create a Table of Contents for my post?](#how-do-i-create-a-table-of-contents-for-my-post)
+  * [How do I specify article attributes, such as the time to read it, complexity, prerequisites, etc?](#how-do-i-specify-article-attributes-such-as-the-time-to-read-it-complexity-prerequisites-etc)
   * [How do I show images in my post?](#how-do-i-show-images-in-my-post)
   * [How do I show videos in my post?](#how-do-i-show-videos-in-my-post)
   * [How do I get syntax highlighting in my code snippets?](#how-do-i-get-syntax-highlighting-in-my-code-snippets)
@@ -71,6 +73,56 @@ You can reference them using absolute paths like this, but **omit the `.md`** as
 - `[A cool tutorial](/tutorials/a-cool-tutorial/)`
 
 _Note: Please do not hard code the full URL in the post_
+
+### How do I create a Table of Contents for my post?
+If your post contains several chapters and they have titles, you can embed a table of contents which will dynamically display and link to the existing titles.
+Simply insert a markdown table with one column, make the first row of the table a title and place the word "ToC" in the first cell. Notice the capitalization of the keyword ToC, which has to be respected.
+````markdown
+| ToC |
+|-----|
+````
+The Table of Contents can be placed anywhere in the article, and will render links to any titles found after its own position. So, it is possible to place it at the very beginning of the post, or perhaps in some cases there are some introductory paragraphs and the ToC goes right after, linking to the rest of the article. Both options are possible.
+You can also specify your own content manually for the ToC, simply adding rows to the ToC table. It will render them instead of the autodetected titles:
+````markdown
+| ToC                                                                                                                          |
+|------------------------------------------------------------------------------------------------------------------------------|
+| My custom Table Of Contents                                                                                                  | 
+| 1. [Introduction](#introduction)                                                                                             |
+| &nbsp; 1.1 [Getting started with the existing code](#getting-started-with-the-existing-code)                                 |
+| &nbsp; 1.2 [Automatic instrumentation with the OpenTelemetry agent](#automatic-instrumentation-with-the-opentelemetry-agent) |
+| &nbsp; &nbsp; 1.2.1 [Sending telemetry data to the collector](#sending-telemetry-data-to-the-collector)                      |
+| 2. [Sending all the traces to Grafana Tempo](#sending-all-the-traces-to-grafana-tempo)                                       |
+| &nbsp; 2.1 [Manual instrumentation with the OpenTelemetry SDK](#manual-instrumentation-with-the-opentelemetry-sdk)           |
+| &nbsp; &nbsp; 2.1.1 [Custom metrics with the OpenTelemetry SDK](#custom-metrics-with-the-opentelemetry-sdk)                  |
+| &nbsp; &nbsp; &nbsp; 2.1.1.1 [Sending all the metrics to Prometheus](#sending-all-the-metrics-to-prometheus)                 |
+| &nbsp; &nbsp; 2.1.2 [Bonus: switching the observability backend to AWS](#bonus-switching-the-observability-backend-to-aws)   |
+ ````
+Notice that standard Markdown syntax only allows texts, links and simple formatting inside a table, not complex structures such as lists. In this example we use `&nbsp;` (a whitespace character in HTML) to emulate indentation for the custom ToC content.
+This is how this table of contents may look like when inserted in an article:
+
+![Manual Table of Contents in an article](Manual-ToC.webp)
+
+### How do I specify article attributes, such as the time to read it, complexity, prerequisites, etc?
+Insert a table with two columns, and make the first row in the header contain the word "Attributes" in the first cell and leave the second cell empty. Then specify attribute names and values in the body of the table. For example, you can copy this table as a template:
+
+
+```markdown
+| Attributes             |                                                        |
+|------------------------|--------------------------------------------------------|
+| ✅ AWS experience       | Beginner                                               |
+| ⏱ Time to complete     | 10 minutes                                             |
+| 💰 Cost to complete    | Fee tier eligible                                      |
+| 🧩 Requires            | An AWS Account                                         |
+| &#x1F4BE; Code         | [Download here the full guide](https://aws.amazon.com) |
+| &#x270F;  Last updated | July 14, 2022                                          |
+```
+Table cells can contain simple texts with basic formatting (such as bold or italic), links, emojis (either directly or using their unicode representation), etc.
+
+This table can be placed anywhere in the article, although it usually makes more sense to have it at the very beginning. There could be cases where it fits better after some introductory content.
+
+This is how the attributes table renders on a desktop browser in an article. At the bottom, you can see an auto-generated Table of Contents placed after some introductory paragraph.
+
+![Article featuring an automatic ToC and some attributes table](toc-and-attributes.webp)
 
 ### How do I show images in my post?
 
