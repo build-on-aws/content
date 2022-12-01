@@ -34,7 +34,7 @@ Ready to submit your content for publication? Review this checklist to make sure
 - [ ] **Product and service names:** The first use of AWS service names can be the shortened version of the service name paired with “AWS” or “Amazon”. Subsequent uses can omit “AWS” or “Amazon”. As an example, “Amazon S3” would come first, followed by “S3.” An AWS editor will verify the correct use during review.
 - [ ] **Product and service descriptions:** Product and service descriptions are in your own words, using technical language or a conversational style that resonates with builders.
 
-## Step 3: Before publishing, check to make sure the post adheres to the legal rules:
+## Step 3: Before submitting your pull request, check to make sure the post adheres to the legal rules:
 
-- [ ] **License:** Ensure you agreed to [license](/LICENSE) in the pull request body and acknowledges ownership or permission to use content including images.
+- [ ] **License:** Ensure you agreed to [license](/LICENSE) in the pull request body and acknowledge ownership or permission to use content including images.
 - [ ] **Open Source Code of Conduct**: Ensure that content adheres to the [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct).
