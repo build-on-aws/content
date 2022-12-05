@@ -1,13 +1,13 @@
 ---
-layout: AIX-Intro-B3.ipynb
-title: A Gentle Introduction to AI Explainability - part 3: LIME Example
-description: LIME Example.
+title:
+description: 
 tags:
   - AI Explainability
   - AI Fairness
   - Machine Learning
   - Artificial Intelligence
   - LIME
+  - LIME tutorial
 authorGithubAlias: cyrusmv
 authorName: Cyrus Vahid
 date: 2022-07-08
@@ -15,20 +15,17 @@ date: 2022-07-08
 ---
 
 
-# A Gentle Introduction to AI Explainability - part 3: LIME Tutorial
 
 ## Context
-In [part 2](02-lime.md) we went through the theoretical explanation of the LIME paper. In this part we implement an object detection example.
-You can find the full code [here](04-lime-example.md).
+In [part 2](02-lime) we went through the theoretical explanation of the LIME paper. In this part we implement an object detection example.
+You can find the full code [here](04-lime-example).
 
  Example: Object detection explanation
 In this example we try using LIME's image explainer on 3 pictures, one of lions and two of cheetahs using two different deep learning models, inceptionV3 and resnet152. We then look at the regions that are picked for detecting the what animal appears in the picture and see if the explanation makes sense to humans. We start with the following high resolution images. We then transforms the images and run them through our models to attain a probabilistic prediction.
 
 ## Original Images
-<figure>
-    <img src="images/originals.jpg" alt='Original Images'/>
-    <figcaption>Figure 1: Original images. Next we 1) transform the images, 2) make predictions using two different algorithms, 3) produce explanations, and 4) analyze the explanations.</figcaption>
-</figure>
+![original images](images/originals.jpg)
+Figure 1: Original images. Next we 1) transform the images, 2) make predictions using two different algorithms, 3) produce explanations, and 4) analyze the explanations.
 
 ## Images after transformation
 
@@ -62,10 +59,8 @@ for image in img:
     transformed_images.append(nimgT(get_input_tensors(image).squeeze()))
 ```
 ## transformed images 
-<figure>
-    <img src="images/processed.png" alt='transformed images'  style="float:left"/>
-    <figcaption>Figure 2: As it can be observed, the processed images are already not useful to the humans. Next we 1) make predictions using two different algorithms, 2) produce explanations, and 3) analyze the explanations.</figcaption>
-</figure>
+![transformed images](images/processed.png)
+Figure 2: As it can be observed, the processed images are already not useful to the humans. Next we 1) make predictions using two different algorithms, 2) produce explanations, and 3) analyze the explanations.
 
 
 
@@ -78,14 +73,9 @@ model2 = models.resnet152(pretrained=True)
 ## Model Predictions
 After loading the models we run a prediction on both models. The results are summarized in table 1:
 
-<figure>
-    <img src="images/inception.png" alt='predictions: inception v3'/>
-    <figcaption></figcaption>
-</figure>
-<figure>
-    <img src="images/resnet152.png" alt='predictions: resnet152' />
-    <figcaption>Table1:predictions. The table on the top includes the top5 predictions from inception v3. The other table includes the results from resnet-152. We can see that inception is quite certain about its top choice. Still we do not know why and how the model has made such decision or how did animals like gazelle made it to the top5, however low the priority maybe. the same story applies to resnet, except that for the first image the prediction gives a 70% probability for cheetah.</figcaption>
-</figure>
+![preditions: inception v3](images/inception.png)
+![preditions: resnet152](images/resnet152.png)
+Table1:predictions. The table on the top includes the top5 predictions from inception v3. The other table includes the results from resnet-152. We can see that inception is quite certain about its top choice. Still we do not know why and how the model has made such decision or how did animals like gazelle made it to the top5, however low the priority maybe. the same story applies to resnet, except that for the first image the prediction gives a 70% probability for cheetah.
 
 ## Preparing explanations
 We now Prepare to create an explainer. Let us remember what the process for creating location Lime a perturbation algorithm on the original images. It then uses the perturbed data to train an explainer model. This means we need to provide the original image and the original classification function to `LimeImageExplainer` so that LIME can produce probabilities for the perturbed dataset. 
@@ -200,29 +190,26 @@ for ax, im in zip(grid, ib):
 
 This is only the code sample for model1-e.g. inception-v3. You will find in the accompanying code notebook that we have performed the computation for both models. Next we can see the result of visualization for all three images and both models. It is notable that the segmentation includes the environment and not just the object itself. This can explain why completely different looking savanna animals were included in the top5 selection. This, however is a hypothesis as trying the model with other animals such as gazelle could clarify the role of background, environment, and climate.
 
-<figure>
-    <img src="images/inceptionexplain.png" alt='predictions: inception v3'  style="float:left"/>
-    <figcaption>Figure 3: Segmentation generated by LIME. The regions in this segmentation are used to determine the classification of the object in the image. The underlying model in this case is inceptino-v3 and LIME has performed as a model agnostic post-hoc local explainer. </figcaption>
-</figure>
+![predictions: inception v3](images/inceptionexplain.png)
+Figure 3: Segmentation generated by LIME. The regions in this segmentation are used to determine the classification of the object in the image. The underlying model in this case is inceptino-v3 and LIME has performed as a model agnostic post-hoc local explainer. 
 
-<figure>
-    <img src="images/resnetexplain.png" alt='predictions: resnet-512'  style="float:left"/>
-    <figcaption>Figure 4: Segmentation generated by LIME. The regions in this segmentation are used to determine the classification of the object in the image. The underlying model in this case is resnet-512 and LIME has performed as a model agnostic post-hoc local explainer. </figcaption>
-</figure>
+![predictions: resnet-512](images/resnetexplain.png)
+Figure 4: Segmentation generated by LIME. The regions in this segmentation are used to determine the classification of the object in the image. The underlying model in this case is resnet-512 and LIME has performed as a model agnostic post-hoc local explainer. 
 
 # What is next?
-in [part 4](05-shapley-values.md), we explore they Shapley values in the context of game theory. If you are familiar with the concepts, you can skip to [part 5](06-shap.md) and look at application of Shapley values in implementing Kernel SHAP method.
+in [part 4](05-shapley-values), we explore they Shapley values in the context of game theory. If you are familiar with the concepts, you can skip to [part 5](06-shap) and look at application of Shapley values in implementing Kernel SHAP method.
 
 
 # References
-1. https://arxiv.org/pdf/1602.04938v1.pdf
-2. https://arxiv.org/pdf/2011.07876.pdf
-3. https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/
-4. https://github.com/marcotcr/lime/tree/master/doc/notebooks
-5. https://arxiv.org/pdf/1705.07874.pdf
-6. https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/
-7. https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf
-8. https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf
-9. https://www.youtube.com/watch?v=9OFMRiAVH-w
-10 https://arxiv.org/pdf/1705.07874.pdf
+Below are a set of references I have looked up and used for this post. There are very good regerenes to learn more about AI Exlainability. If you are interested to learn more, I strongly suggest taking a look at these resources.
 
+1. LIME's original paper: https://arxiv.org/pdf/1602.04938v1.pdf
+2. Survey paper for explainability methods: https://arxiv.org/pdf/2011.07876.pdf
+3. Oreily blog for intuitive understanding of LIME: https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/
+4. LIME Open Source Library [docs]: https://github.com/marcotcr/lime/tree/master/doc/notebooks
+5. Kernel SHAP paper: https://arxiv.org/pdf/1705.07874.pdf
+6. Cooporative games in Game theory: https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/
+7. Original Shapley paper: https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf
+8. Cooporative Game Theory: https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf
+9. UBC course on Shapley Values: https://www.youtube.com/watch?v=9OFMRiAVH-w
+10 https://arxiv.org/pdf/1705.07874.pdf
