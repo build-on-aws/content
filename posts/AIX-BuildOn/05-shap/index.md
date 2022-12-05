@@ -1,7 +1,6 @@
 ---
-layout: AIX-Intro-B4.ipynb
-title: A Gentle Introduction to AI Explainability - part 4: Shapley Values
-description: Introduction to AI Explainability methods.
+title:
+description:
 tags:
   - AI Explainability
   - AI Fairness
@@ -9,17 +8,17 @@ tags:
   - Artificial Intelligence
   - Game theory
   - Shapley Values
-authorGithubAlias: cyrusmv
+  - SHAP
+authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
 
 ---
 
 
-# A Gentle Introduction to AI Explainability - part 5: SHAP
 Previously we learned [LIME](02-lime.md) as a feature attribution local explainability model and observced how finding a solution to its optimization equation can result in local linear explanations. We then loked at [Shapely values](05-shapley-values.md) and understood given a certain conditions we can find a unique solution to individual contributoins to pay-off function of a coalition. Here we combne the two and use Shapley values to find a unique solutoin for feature attribution for explainability.
 
-# Additive feature attribution methods
+## Additive feature attribution methods
 Additive feature attribution methods have a an explanation model that is a linear function of binary variables.
 $$
 \large{
@@ -43,7 +42,7 @@ features that are missing from the simplified input, which describe in binary te
 If a model changes in a way that impact of a feature increases, the attribution should never decrease.
 
 # SHAP and Explainability
-In the [previous segment](02-lime.md) of this publication, we explored LIME as a post-hox, blackbox, local explainability model. LIME has two major hyperparameters. We have seen Shapley values can be a unique solution to an attribution equation, thus we are going to explore how Shapely values can be adopted to model explanation to find a unique solution to LIME's kernel and remove dependence to hyperparameters.
+In the [previous segment](02-lime) of this publication, we explored LIME as a post-hox, blackbox, local explainability model. LIME has two major hyperparameters. We have seen Shapley values can be a unique solution to an attribution equation, thus we are going to explore how Shapely values can be adopted to model explanation to find a unique solution to LIME's kernel and remove dependence to hyperparameters.
 Feature attribution is one of the main areas of focus in explainability research and implementation. Feature attribution is essence calculates how much each input feature contributes to a decision made by the model. Self evidently, feature attribution models can be applied post-hoc and as a black-box explainer. Prominent amongst feature attribution methods are those based on Shapley values, proposed in 1952 by Nobel Prize laureate (2012) Lloyd Shapley in game theory in the context of cooperative n-person games. To understand application of Shapley values in model explanation, let us first take a brief look at n-person cooperative games and Shapley method.
 
 ## SHAP for Explainability
@@ -59,12 +58,8 @@ where $|z|$ is the number of non-zero entries in z, and $z \subseteq x$ represen
 
 Comparing this equation to shapley values, we observe that $\phi = \{\phi_i:\ 0\ \leq i\ \leq M\}$. $f$, the original model is the payout function and $x$ denotes the grand coalition. finally $z$ is permutations of possible coalitions, which we saw in the simple example s we created those permutations. 
 
-<figure>
-    <img img align="center"  src='data/SHAP.png'>
-    <figcaption>
-        Figure 13: $[E(f(z)]$, corresponding to $\phi_0$ is the expectation of the model over input features. Then as we build all the possible alliances $x_1 = \rightarrow x_{1,2} \rightarrow x_{1,2,3}$ we get the conditional expectation  of $f(x)$ for the newly added feature. We should keep in mind that the solution is dependent on the order the population is generated in the cases where the features are dependent on one another or the model $f$ is non-linear.
-    </figcaption>
-</figure>
+![SHAP](images/SHAP.png)
+Figure 1: $[E(f(z)]$, corresponding to $\phi_0$ is the expectation of the model over input features. Then as we build all the possible alliances $x_1 = \rightarrow x_{1,2} \rightarrow x_{1,2,3}$ we get the conditional expectation  of $f(x)$ for the newly added feature. We should keep in mind that the solution is dependent on the order the population is generated in the cases where the features are dependent on one another or the model $f$ is non-linear.
 
 ## Approximating SHAP values
 Instead of heavy and complicated computation of SHAP values, we can approximate them with some accuracy. Authors of [10] has proposed two model agnostic methods of which we only focus on Kernel SHAP, which is a combination of LIME and Shapley values. Later in this document, we describe DeepLift and DeepSHAP, which combined DeepLift an Shapley values and is model specific.
@@ -101,18 +96,19 @@ $\mathcal{L}$ corresponds to the weighted average of the conditional expectation
 
 
 ## What's next?
-I think the reader agrees with me that we need to stop with the theory and get into some coding examples. in the [next part](07-shap-tutorial.md) we shall explore how Shapley values are used in AI explainability.
+I think the reader agrees with me that we need to stop with the theory and get into some coding examples. in the [next part](06-shap-tutorial) we shall explore how Shapley values are used in AI explainability.
 
 
-# References
-1. https://arxiv.org/pdf/1602.04938v1.pdf
-2. https://arxiv.org/pdf/2011.07876.pdf
-3. https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/
-4. https://github.com/marcotcr/lime/tree/master/doc/notebooks
-5. https://arxiv.org/pdf/1705.07874.pdf
-6. https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/
-7. https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf
-8. https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf
-9. https://www.youtube.com/watch?v=9OFMRiAVH-w
+## References
+Below are a set of references I have looked up and used for this post. There are very good regerenes to learn more about AI Exlainability. If you are interested to learn more, I strongly suggest taking a look at these resources.
+
+1. LIME's original paper: https://arxiv.org/pdf/1602.04938v1.pdf
+2. Survey paper for explainability methods: https://arxiv.org/pdf/2011.07876.pdf
+3. Oreily blog for intuitive understanding of LIME: https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/
+4. LIME Open Source Library [docs]: https://github.com/marcotcr/lime/tree/master/doc/notebooks
+5. Kernel SHAP paper: https://arxiv.org/pdf/1705.07874.pdf
+6. Cooporative games in Game theory: https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/
+7. Original Shapley paper: https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf
+8. Cooporative Game Theory: https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf
+9. UBC course on Shapley Values: https://www.youtube.com/watch?v=9OFMRiAVH-w
 10 https://arxiv.org/pdf/1705.07874.pdf
-

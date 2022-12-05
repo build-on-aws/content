@@ -8,7 +8,7 @@ tags:
   - Artificial Intelligence
   - shapley values
   - SHAP
-authorGithubAlias: cyrusmv
+authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
 ---

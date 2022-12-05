@@ -8,7 +8,7 @@ tags:
   - Artificial Intelligence
   - LIME
   - LIME tutorial
-authorGithubAlias: cyrusmv
+authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
 
