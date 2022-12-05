@@ -33,18 +33,9 @@ In this tutorial, you will learn how to instrument an existing microservice writ
 | 💰 Cost to complete    | Fee tier eligible                                               |
 | 🧩 Prerequisites       | - [Docker](https://www.docker.com/get-started) 4.11+ (Required)<br>- [Java](https://openjdk.org/install) 17+ (Required)<br>- [Maven](https://maven.apache.org/download.cgi) 3.8.6+ (Required)<br>- [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (Optional) |
 
-| ToC                                                                                                                          |
-|------------------------------------------------------------------------------------------------------------------------------|
-| 1. [Introduction](#introduction)                                                                                             |
-| &nbsp; 1.1 [Getting started with the existing code](#getting-started-with-the-existing-code)                                 |
-| 2. [Automatic instrumentation with the OpenTelemetry agent](#automatic-instrumentation-with-the-opentelemetry-agent) |
-| 3. [Sending telemetry data to the collector](#sending-telemetry-data-to-the-collector)                      |
-| 4. [Sending all the traces to Grafana Tempo](#sending-all-the-traces-to-grafana-tempo)                                       |
-| 5. [Manual instrumentation with the OpenTelemetry SDK](#manual-instrumentation-with-the-opentelemetry-sdk)           |
-| 6. [Custom metrics with the OpenTelemetry SDK](#custom-metrics-with-the-opentelemetry-sdk)                  |
-| 7. [Sending all the metrics to Prometheus](#sending-all-the-metrics-to-prometheus)                 |
-| 8. [Bonus: switching the observability backend to AWS](#bonus-switching-the-observability-backend-to-aws)   |
- 
+| ToC |
+|-----|
+
 ## Introduction
 
 [OpenTelemetry](https://opentelemetry.io/) is one of those technologies that you know you must learn and start using as soon as possible, but every time you get to work with it, you find it more complicated than it should be. If this is you, don't worry. You're not alone. Many other people also complain about OpenTelemetry being complicated. However, it is important for you to understand that some of this complexity is incidental because OpenTelemetry is not a ready-to-use library. It is a [framework](https://opentelemetry.io/docs/concepts/components).
