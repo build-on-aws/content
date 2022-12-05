@@ -131,12 +131,12 @@ In local explanation, the surrogate model $w$ is an approximation to a single in
 
 LIME and SHAP are two of the most commonly used local explanability models using surrogates into which we take an in-depth look as they are crucial for explaining some deep learning based model, specially for transformer-based NLP models.
 
-# What is next?
+## What is next?
 Next we focus on two of the most famous feature importance methods for post-hoc local explainability, LIME and SHAP. The entries will have accompanying code for object detection using pre-trained imagenet models. We then change our attention from perturbation based methods to to back propagation methods and describe DeepLIFT.
 
 [Next: Lime](02-lime)
 
-# References
+## References
 Below are a set of references I have looked up and used for this post. There are very good regerenes to learn more about AI Exlainability. If you are interested to learn more, I strongly suggest taking a look at these resources.
 1. LIME's original paper: https://arxiv.org/pdf/1602.04938v1.pdf
 2. Survey paper for explainability methods: https://arxiv.org/pdf/2011.07876.pdf

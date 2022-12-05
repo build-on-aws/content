@@ -1,3 +1,19 @@
+---
+title:
+description:
+tags:
+  - AI Explainability
+  - AI Fairness
+  - Machine Learning
+  - Artificial Intelligence
+  - Game theory
+  - Shapley Values
+  - SHAP
+authorGithubAlias: cyrusmvahid
+authorName: Cyrus Vahid
+date: 2022-07-08
+---
+
 ```python
 import keras
 from keras.applications.vgg16 import VGG16, preprocess_input, decode_predictions
