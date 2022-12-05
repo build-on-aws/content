@@ -1,30 +1,28 @@
 ---
-layout: AIX-Intro-B1.ipynb
-title: A Gentle Introduction to AI Explainability - part 1: Introduction
-description: Introduction to AI Explainability methiods.
+title: 
+description: 
 tags:
   - AI Explainability
   - AI Fairness
   - Machine Learning
   - Artificial Intelligence
-authorGithubAlias: cyrusmv
+authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
-
+authorGithubAlias: 
 ---
 
 
-# AI Explainability
+
 In this series of blogs we learn about what AI Explainability is, we look a deeper look into local post-hoc explainability using fundamental perturbation methods such as SHAP and LIME. In the future posts, we explore other methods such as back-propagation methods, including gradient-based methods and those based in DeepLift. 
 The current publication has 5 parts, which as follows:
-- [Part 1: Introduction](01-ai-explainability-intro.md), which explores what explainability is and why we should be interested.
-- [Part 2: Local Interpretable Model-agnostic Explanation or LIME](02-lime.md), which goes deep into LIME methods. 
-- [Part3 : LIME tutorial](03-lime-tutorial.md), which runs an example on three images using Inception-V3 and resnet-152 and then uses LIME for explainability. Code notebook is located [here](04-lime-example.md)
-- [Part 4: Shapley values](05-shapley-values.md), provides a quick overview of Shapley values in game theory, which is the foundation of SHAP method. If you are already familiar with the theory, you can skip to [Part 5](06-shap.md). If you are not familiar with the concepts, I would encourge you to spend a few minutes studying this post.
-- [Part 5, SHAP method](06-shap.md), which explains how Shapley values are applied to find a unique solution to LIME's optimization problem and make the solution independent of its hyperparameters.
-- [Part 6, SHAP tutorial](07-shap-tutorial.md) walks the reader throug a practical example of how to use Kernel SHAP for understanding object detection using VGG16. The full code can be found [here](08-shap-example.md).
+- [Part 1: Introduction](01-ai-explainability-intro), which explores what explainability is and why we should be interested.
+- [Part 2: Local Interpretable Model-agnostic Explanation or LIME](02-lime), which goes deep into LIME methods. 
+- [Part3 : LIME tutorial](03-lime-tutorial), which runs an example on three images using Inception-V3 and resnet-152 and then uses LIME for explainability. Code notebook is located [here](04-lime-example)
+- [Part 4: Shapley values](05-shapley-values), provides a quick overview of Shapley values in game theory, which is the foundation of SHAP method. If you are already familiar with the theory, you can skip to [Part 5](06-shap). If you are not familiar with the concepts, I would encourge you to spend a few minutes studying this post.
+- [Part 5, SHAP method](06-shap), which explains how Shapley values are applied to find a unique solution to LIME's optimization problem and make the solution independent of its hyperparameters.
+- [Part 6, SHAP tutorial](07-shap-tutorial) walks the reader throug a practical example of how to use Kernel SHAP for understanding object detection using VGG16. The full code can be found [here](08-shap-example).
 
-# A Gentle Introduction to AI Explainability - part 1: Introduction
 
 ## Context
 This blog series focuses on model explainability for supervised learning both for blackbox models such as deep learning models as well as interpretable models such as decision trees. This blog explains motivations for explainability as well as laying out basic definitions. The subsequent set of publications, dubbed *intermediate*, will describe basic explainability methods such as SHAPLY and associated software libraries. The final segment of the present publication will focus on implementation of model explainability in blackbox domain specific fields such as transformer based architecture for NLP.
@@ -32,10 +30,7 @@ This blog series focuses on model explainability for supervised learning both fo
 ## What is explainability
 In its core, model explainability is either  to make decision process of a model understandable for humans or to provide an explanation for a single decision on a single data instance. In the case of black-box explanations, a simpler model can explain decisions made by a more complex model, we therefore can enjoy accuracy of more complex but opaque model, while explain its behaviour consistently with a simpler and less accurate model. There are practical examples for explainability, a trading system should be able to expledata and a diagnostics. Face recognition systems should explain why an image was matched to an identity. Thrshould happen in a way humans can understand the reasoning. In a face recognition system, for instance we can use latent vector representations in the higher layers as "super pixels" where the intermediary images do make sense for human observer. in Figure 1, we can observe the convolutional layers gradually produce representations that are closer to what we can understand.
 
-<figure>
-    <img src='images/cnn.jpeg' alt='CNN' heigth=50% width=50%/>
-    <figcaption>Figure 1: visual representation of a CNN model for face detection</figcaption>
-</figure>
+![Convolutional Neural networks](images/cnn.jpeg)
 
 
 ## Reasons for explainability
@@ -59,7 +54,8 @@ model $h(x)=y$ is a supervised learning model where $x\in \mathcal{X} \subseteq 
 A blackbox model in our context $b: \mathcal{X} \rightarrow \mathcal{Y}$, $b\in \mathcal{B}$, where $\mathcal{B}$ is the hypothesis space for a deep learning model.
 ### Error
 To evaluate a model we use an error measure that uses some topological distance mechanism on the output manifold to measure distance of a prediction to an observed value or $\mathcal{E} = \lVert p-o \rVert$, where $p$ is a predicted value and $o$ is an observed value. For instance RMSE (Root Mean Square Error) is a type of distance in a multi-dimensional space. 
-$$RMSE = \sqrt{{\frac{1}{n}} \sum_{i=1}^n(y_i-x_i)^2 }$$.  
+
+$RMSE = \sqrt{{\frac{1}{n}} \sum_{i=1}^n(y_i-x_i)^2 }$.  
 ### Learning
 Given dataset $\mathcal{D}$, SML learning amounts to solving optimization problem: 
 $$
@@ -116,10 +112,7 @@ As the name suggests, a black box model is a model, whose innerworkings are opaq
 
 Figure 2 shows a simplified version of a simple approximation (blue graph) that can interpret the more complicated inference graph (orange one). This is foundation of machine learning in general. If the distance between predictions and observed is within a certain range we can justify the models' predictions at posthoc.
 
-<figure>
-    <img src='images/approximation.png' alt='LIME intuition' heigth=50% width=50%/>
-    <figcaption>Figure 2: Simple approximation. The complicated orange graph can be approximated and explained by the simpler blue graph </figcaption>
-</figure>
+![LIME Intuition](images/approximation.png)
 
 More formally, finding a surrogate model results in solving the problem that is formulated below. In simpler terms, explainability though surrogate models is the process of fitting an explainable model $w$ to make predictions where the average distance between the the outcome of the surrogate model and predictions of the black-box model is bounded:
 $$
@@ -129,10 +122,7 @@ $S$ is called the ***fidelity score*** and is a measure of how well the white-bo
 
 We can see that the in figure 2, the fidelity score is twice as high as the one in Figure 1, and hence the approximation is less accurate. 
 
-<figure>
-    <img src='images/approximation1.png' alt='LIME intuition' heigth=50% width=50% />
-    <figcaption>Figure 3: Even though the orange graph still represents an approximation of the blue graph, it is not as good as the one in Figure 2 since it has a worse fidelity score. </figcaption>
-</figure>
+![LIME Intuition](images/approximation1.png)
 
 
 In the case *global* explainability, the surrogate model $w$ approximates the black-box model $b$ over a dataset $\mathcal{X} = \{x_1, x_2, \dots, x_n\} \subseteq \mathcal{D}$. Distribution in $\mathcal{X}$ should closely resemble that of $\mathcal{D}$ for the explanation to be plausible. 
@@ -144,17 +134,18 @@ LIME and SHAP are two of the most commonly used local explanability models using
 # What is next?
 Next we focus on two of the most famous feature importance methods for post-hoc local explainability, LIME and SHAP. The entries will have accompanying code for object detection using pre-trained imagenet models. We then change our attention from perturbation based methods to to back propagation methods and describe DeepLIFT.
 
-[Next: Lime](02-lime.md)
+[Next: Lime](02-lime)
 
 # References
-1. https://arxiv.org/pdf/1602.04938v1.pdf
-2. https://arxiv.org/pdf/2011.07876.pdf
-3. https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/
-4. https://github.com/marcotcr/lime/tree/master/doc/notebooks
-5. https://arxiv.org/pdf/1705.07874.pdf
-6. https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/
-7. https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf
-8. https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf
-9. https://www.youtube.com/watch?v=9OFMRiAVH-w
+Below are a set of references I have looked up and used for this post. There are very good regerenes to learn more about AI Exlainability. If you are interested to learn more, I strongly suggest taking a look at these resources.
+1. LIME's original paper: https://arxiv.org/pdf/1602.04938v1.pdf
+2. Survey paper for explainability methods: https://arxiv.org/pdf/2011.07876.pdf
+3. Oreily blog for intuitive understanding of LIME: https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/
+4. LIME Open Source Library [docs]: https://github.com/marcotcr/lime/tree/master/doc/notebooks
+5. Kernel SHAP paper: https://arxiv.org/pdf/1705.07874.pdf
+6. Cooporative games in Game theory: https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/
+7. Original Shapley paper: https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf
+8. Cooporative Game Theory: https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf
+9. UBC course on Shapley Values: https://www.youtube.com/watch?v=9OFMRiAVH-w
 10 https://arxiv.org/pdf/1705.07874.pdf
 
