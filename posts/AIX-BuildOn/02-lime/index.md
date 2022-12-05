@@ -92,12 +92,11 @@ $$
 $$
 
 
-# What is next?
+## What is next?
 in [part 3](03-lime-tutorial) we walk through an example of lime, using InceptionV3, resnet152, and LIME library.
 
 
-# References
-# References
+## References
 Below are a set of references I have looked up and used for this post. There are very good regerenes to learn more about AI Exlainability. If you are interested to learn more, I strongly suggest taking a look at these resources.
 1. LIME's original paper: https://arxiv.org/pdf/1602.04938v1.pdf
 2. Survey paper for explainability methods: https://arxiv.org/pdf/2011.07876.pdf

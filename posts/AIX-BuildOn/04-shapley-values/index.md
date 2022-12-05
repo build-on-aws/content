@@ -1,22 +1,19 @@
 ---
-layout: AIX-Intro-B3.ipynb
-title: A Gentle Introduction to AI Explainability - part 3: LIME Example
-description: LIME Example.
+title:
+description:
 tags:
   - AI Explainability
   - AI Fairness
   - Machine Learning
   - Artificial Intelligence
-  - LIME
+  - shapley values
+  - SHAP
 authorGithubAlias: cyrusmv
 authorName: Cyrus Vahid
 date: 2022-07-08
-
 ---
 
-
-# # A Gentle Introduction to AI Explainability - part 4: Shapley values
-In the [previous](02-lime.md) segment of this publication, we learned about LIME as a feature attribution method, with the drawback that finding the right hyperparameters for kernel width and model complexity could be rather arbitrary. We are going to use Shapely values to find a unique solution to solving LIME's optimization equation. Before that, we need to understand the theory behind Shapley values and how there are calculated. If you are familiar with the concept, you can skip to the next [post](06-shap.md).
+In the [previous](02-lime) segment of this publication, we learned about LIME as a feature attribution method, with the drawback that finding the right hyperparameters for kernel width and model complexity could be rather arbitrary. We are going to use Shapely values to find a unique solution to solving LIME's optimization equation. Before that, we need to understand the theory behind Shapley values and how there are calculated. If you are familiar with the concept, you can skip to the next [post](06-shap).
 In order to understand SHAP method for explainability, we need to first understand Shapley values. This post gives a quick introducory overview as a theoretical minima into Shapley values in the context of game theory. 
 
 ## Cooperative n-person games
@@ -49,11 +46,9 @@ Let us consider the sales example where A is the account manager, B the solution
 | A,B,C     | 250K   |
 
 Let us contemplate as what the payout function is telling us. 
-<figure>
-    <img img align="right" width="200" height="200" src='images/venngame.png'>
-    <figcaption>
-    </figcaption>
-</figure>
+
+![venn diagram for player contribution](images/venngame.png)
+
 - A has the highest impact on this specific sale, followed by B, and then C. 
 - A and B together can make a sale with a total value of 180. C adds 70 to the total. 
 - B individually makes a total revenue of 80 and C adds only a contribution of 20, a far cry form individual contribution of 65. This does not seem to be a good coalition. It even makes causal sense as the two technical resources have many areas of overlap in terms of skillset.
@@ -110,7 +105,10 @@ $$
 ### Additivity
 Consider two independent games $G_!$ and $G_2$. For instance the same sales team from the previous example would be working on more than one sales initiative or sometimes more than one customer account at a given time. Let's say in January they maker a sales of a total value of 250K as given in the example and in the month of February, they close another sale at the different customer for 300K. These two games are independent of one another. There are two ways of looking at this. Either we are looking at a single game of total sales in a quarter, or we can break that game to individual games based on each sales. The quarterly games of selling services for this sales team can be split into independent games. It is often done very regularly by splitting annual sales to quarterly sales and rewarding sales them on the basis of their quarterly performance. Games that can be split into independent parts are additive. More precisely, *if a game can be separated into parts, we should be able to decompose the payments.*
 ***Additivity axiom:*** let $v_i$ and $v_j$ be two arbitrary payout functions and $C \subseteq S $ be an arbitrary non-empty coalition. The solution function $\lambda$ follows the additivity axiom if: 
-$$\large{\lambda_C (v_i + v_j) = \lambda_C(v_i) = \lambda_C(v_j)}$$.
+
+$$
+\large{\lambda_C (v_i + v_j) = \lambda_C(v_i) = \lambda_C(v_j)}
+$$.
 
 ### Shapely theorm
 Given a coalitional game $(N,v)$, there is a unique payoff division $x(v) = \lambda(N, v)$ that divides the full payoff of of the grand coalition and satisfies Symmetry, Null player, and additivity axiom. 
@@ -141,18 +139,20 @@ Let us focus on player $A$. We can add $A$ first. in this case $\lambda_A = v(C_
 $$\large{ \lambda (N=\{A,B\}, v) = \{110, 50}\}$$  
 
 ## What is next? 
-in the next [part](06-shap.md) we apply Shapley theorm to find a unique solution to LIME's equation.
+in the next [part](05-shap) we apply Shapley theorm to find a unique solution to LIME's equation.
 
 
-# References
-1. https://arxiv.org/pdf/1602.04938v1.pdf
-2. https://arxiv.org/pdf/2011.07876.pdf
-3. https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/
-4. https://github.com/marcotcr/lime/tree/master/doc/notebooks
-5. https://arxiv.org/pdf/1705.07874.pdf
-6. https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/
-7. https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf
-8. https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf
-9. https://www.youtube.com/watch?v=9OFMRiAVH-w
+## References
+Below are a set of references I have looked up and used for this post. There are very good regerenes to learn more about AI Exlainability. If you are interested to learn more, I strongly suggest taking a look at these resources.
+
+1. LIME's original paper: https://arxiv.org/pdf/1602.04938v1.pdf
+2. Survey paper for explainability methods: https://arxiv.org/pdf/2011.07876.pdf
+3. Oreily blog for intuitive understanding of LIME: https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/
+4. LIME Open Source Library [docs]: https://github.com/marcotcr/lime/tree/master/doc/notebooks
+5. Kernel SHAP paper: https://arxiv.org/pdf/1705.07874.pdf
+6. Cooporative games in Game theory: https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/
+7. Original Shapley paper: https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf
+8. Cooporative Game Theory: https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf
+9. UBC course on Shapley Values: https://www.youtube.com/watch?v=9OFMRiAVH-w
 10 https://arxiv.org/pdf/1705.07874.pdf
 
