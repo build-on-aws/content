@@ -18,7 +18,7 @@ date: 2022-07-08
 
 ## Context
 In [part 2](02-lime) we went through the theoretical explanation of the LIME paper. In this part we implement an object detection example.
-You can find the full code [here](04-lime-example).
+You can find the full code [here](031-lime-example) or try the notebook directly in [github](https://github.com/cyrusmvahid/AIX-BuildOn/blob/main/04-lime-example.ipynb).
 
  Example: Object detection explanation
 In this example we try using LIME's image explainer on 3 pictures, one of lions and two of cheetahs using two different deep learning models, inceptionV3 and resnet152. We then look at the regions that are picked for detecting the what animal appears in the picture and see if the explanation makes sense to humans. We start with the following high resolution images. We then transforms the images and run them through our models to attain a probabilistic prediction.
