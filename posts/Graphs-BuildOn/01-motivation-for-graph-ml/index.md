@@ -6,6 +6,7 @@ tags:
   - grph neurl networks
   - gnn
   - dgl
+  - graph
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
