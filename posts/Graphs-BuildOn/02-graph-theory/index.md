@@ -1,10 +1,11 @@
 # Graph Neural Networks, an introduction, part 2: A gentle introduction to graph theory.
-in the [previous post](01-motivation.md), we learn why we need to pay attention to GNNs. Before we can actually learn about GNNs, we need to learn some of the basics of graph theory to be able to understand parameters of the GNN methods as well as technical aspects of the papers. If you are familiar with graph thery, please skip to [next part](03-mpnn.md).
+in the [previous post](01-motivation-for-graph-ml), we learn why we need to pay attention to GNNs. Before we can actually learn about GNNs, we need to learn some of the basics of graph theory to be able to understand parameters of the GNN methods as well as technical aspects of the papers. If you are familiar with graph thery, please skip to [next part](03-message-passing-neural-networks).
 
 This is the first of a 5-part series to gently introduce the reader to Graph Neural Networks. Part 1 intends to provide the basic terminology of graph theory as well as an brief introduction of networkx, a popular graph computation library, to the readers that are new to graphs. The next 4 parts describe 1) intuition behind GNN, 2) Message Passing Neural Network or MPNN framework, which is the foundation of out Deep Graph Library DGL, our implementation of GNN, 3) A basic understanding of DGL, and finally 4) and tutorial as how to use DGL for most common use cases. 
 
 ## The basics
-A graph $\mathcal{G}$ consists of a pair $(V, E)$, where $V$ is a set of vertices and $E$ is a set of edges.  $$V={\{v_i\}}_{i=0}^{n}\ and\ E=\{(v, w)|v, w\in V\}$$
+A graph $\mathcal{G}$ consists of a pair $(V, E)$, where $V$ is a set of vertices and $E$ is a set of edges.  
+$$V=\large {\{v_i\}}_{i=0}^{n}\ and\ E=\{(v, w)|v, w\in V\}$$
 For instance: $V=\{1,2,3\}$ and $E=\{(1,2), (1,3), (2,3)\}$ represents an undirected complete and simple graph with three vertices.  
 Below is an example of a few graphs.
 
@@ -50,10 +51,9 @@ plt.show()
 ```
 
 
-<figure>
-    <img src='./images/img0101.png' alt='Examples of Graphs' heigth=50% width=50%/>
-    <figcaption>Figure 1: Some simple examples of graphs. Counterclockwise from top left are: a complete graph where every node is connected to every node, a path graph, where the nodes form a sequential path, a 2-D graph, and a cycle, where the last node of a path graph is connected to its first node. </figcaption>
-</figure>
+![Examples of Graphs](images/img0101.png)
+
+Figure 1: Some simple examples of graphs. Counterclockwise from top left are: a complete graph where every node is connected to every node, a path graph, where the nodes form a sequential path, a 2-D graph, and a cycle, where the last node of a path graph is connected to its first node.
 
 ## Formal definitions
 ***Complete Graph***.
@@ -73,10 +73,10 @@ BPG = nx.bipartite.random_graph(4,7, .60)
 pos = pos = graphviz_layout(BPG, prog='dot')
 nx.draw(BPG, pos=pos, with_labels=True, font_color='w', font_weight='bold')
 ```
-<figure>
-    <img src='./images/img0102.png' alt='bipartite graph' heigth=50% width=50%/>
-    <figcaption>Figure 2: A bipartite graph. </figcaption>
-</figure>
+
+![bipartite graph](images/img0102.png)
+
+Figure 2: A bipartite graph.
 
 In the example below From left to right we first create a bipartite graph with `(n,m,p)=(2,4,1)`. This is obviously a bipartite graph. We then remove some of the edges. We remove edges `[(0,2), (0,3), (0,4), (0,5)]` from the original graph, The resulting graph is still a bipartite graph since since we can arrange it in two sets with no connection within each set. All the edges are interset, Please take a note that node 0 has no connection but it does not break the bipartite property of the graph. Finally we add an edge between nodes`0` and `1`. We can no longer split the graph to two sets that satisfy bipartite condition.
 
@@ -123,14 +123,15 @@ for i,g in enumerate(graphs):
     else:
         print(verdict)   
 ```
-<figure>
-    <img src='./images/img0103.png' alt='Bipartite Graphs'/>
-    <figcaption>Figure 3: bipartite check:
+![bipartite check](images/img0103.png)
+Figure 3: bipartite check
 
-<span>graph 1 is bipartite; edges=[(0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (1, 5)] and sets are: ({0, 1}, {2, 3, 4, 5}) <br />graph 2 is bipartite; edges=[(1, 2), (1, 3), (1, 4), (1, 5)] and sets are: Disconnected graph: Ambiguous solution for bipartite sets.<br />graph 3 is bipartite; edges=[(0, 1), (1, 2), (1, 3), (1, 4), (1, 5)] and sets are: ({0, 2, 3, 4, 5}, {1})<br />graph 4 is not bipartite; edges=[(0, 1), (1, 2), (1, 3), (1, 4), (1, 5), (3, 4)]e<br /></span> </figcaption>
-</figure>
+- graph 1 is bipartite; edges=[(0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (1, 5)] and sets are: ({0, 1}, {2, 3, 4, 5})
+- graph 2 is bipartite; edges=[(1, 2), (1, 3), (1, 4), (1, 5)] and sets are: Disconnected graph: Ambiguous solution for bipartite sets.
+- graph 3 is bipartite; edges=[(0, 1), (1, 2), (1, 3), (1, 4), (1, 5)] and sets are: ({0, 2, 3, 4, 5}, {1})
+- graph 4 is not bipartite; edges=[(0, 1), (1, 2), (1, 3), (1, 4), (1, 5), (3, 4)]e
 
-# Graph Isomorphism
+## Graph Isomorphism
 Two graphs which contain the same number of vertices connected in a similar way are isomorphic. 
 
 ```python
@@ -150,11 +151,9 @@ axs[1].set_axis_off()
 plt.show()
 ```
 
-<figure>
-    <img src='./images/img0104.png' alt='Isomorphic Graphs'/>
-    <figcaption>Figure 4: Isomorphic graphs. As you can see in the image, the vertices from the image on the left have been rotated to create the graph on the right side. Barring the labels, the two graphs are indetical.
-    </figcaption>
-</figure>
+![isomorphic graphs](images/img0104.png)
+Figure 4: Isomorphic graphs. As you can see in the image, the vertices from the image on the left have been rotated to create the graph on the right side. Barring the labels, the two graphs are indetical.
+
 
 To check if the two graphs isomorphic, we can use the `networkx.algorithms.is_isomorphic()` library.
 
@@ -186,7 +185,7 @@ degree view of G: [(1, 1), (2, 3), (3, 2), (0, 2)]
 
 We can observe that the degree sequence of the isomorphic graphs is the same. More intuitively, isomorphism is re-arrangement of nodes without changing the arrangement of a graph.
 
-# Neighborhood
+## Neighborhood
 In the most standard case, if two vertice are connected, we say the vertices are **adjacent**. The set of vertices that are adjacent to a node $v$ is called the **open neighborhood** of $v$, or just **neighborhood** for short. A closed neighborhood of node $v$, is its open neighborhood plus the node itself or more formally, $\mathcal{N}[v]=\mathcal{N}(v) \cup \{v\}$.
 
 In the code snippet below we create two graphs based on their degree sequence. For graph `G1`,  `sequence = [1, 2, 2, 3, 4]` means that degrees of node 0 is 1 or there are two edges connected to node 1, and similarly degrees of nodes 2 to to 4 are respectively 2, 2, 3, and 4. 
@@ -201,11 +200,9 @@ G2 = nx.random_degree_sequence_graph(sequence, seed=42)
 F = nx.compose(G1, G2)
 nx.draw_kamada_kawai(F, with_labels=True, font_color='w', font_weight='bold', node_color='black')
 ```
-<figure>
-    <img src='./images/img0105.png' alt='Neighborhood'/>
-    <figcaption>Figure 5: The open neighborhood for node 4 is {0,1,2,3,6} and the closed neighborhood is {0,1,2,4,6,4}. The adjacency matrices and neighborhood are a very core concept to Graph Neural Networks and network embeddings as they can provides are with different variations of local and global structural similarity between to graphs.
-    </figcaption>
-</figure>
+![neighbourhood](images/img0105.png)
+
+Figure 5: The open neighborhood for node 4 is {0,1,2,3,6} and the closed neighborhood is {0,1,2,4,6,4}. The adjacency matrices and neighborhood are a very core concept to Graph Neural Networks and network embeddings as they can provides are with different variations of local and global structural similarity between to graphs.
 
 We can list neighbors of a specific node
 
@@ -240,12 +237,8 @@ for i,g in enumerate(graphs):
     plt.subplot(140+i+1)
     nx.draw_kamada_kawai(g, with_labels=True, font_color='w', font_weight='bold', node_color='black')
 ```
-<figure>
-    <img src='./images/img0107.png' alt='Neighborhood'/>
-    <figcaption>Figure 7: Three different neighborhoods of node '0' with radius between 0 and 2.
-    </figcaption>
-</figure>
-
+![neighbourhoods](images/img0107.png)
+Figure 7: Three different neighborhoods of node '0' with radius between 0 and 2.
 ## Example of a path graph using `ego_graph`
 In the example below we are creating a complete graph of degree 7 and then create subgraphs, each of which is a path graph. The first path graph is created using `nx.path_graph()` and the second graphs is crated using `nx.ego_graph`, centered on node 3 and has a radius of 2.
 ```python
@@ -271,13 +264,10 @@ nx.draw_networkx_edge_labels(P2, pos, edge_lables)
 plt.axis('off')
 plt.show()
 ```
-<figure>
-    <img src='./images/img0108.png' alt='Path Graphs'/>
-    <figcaption>Figure 8: A complete graph with degree of 7 and two subgraphs. The image in the middle is a path graph of length 7 and the image on the right is an ego_graph of node 3 with radius 2.
-    </figcaption>
-</figure>
+![path graph](images/img0108.png)
+Figure 8: A complete graph with degree of 7 and two subgraphs. The image in the middle is a path graph of length 7 and the image on the right is an ego_graph of node 3 with radius 2.
 
-# Adjacency Matrix
+## Adjacency Matrix
 Definition of neighborhood can be expanded to include adjacency, defined based on different criteria to capture deeper structures in a graph. For instance a neighborhood of node $v$ with distance 2 is a neighborhood that includes nodes that are of distance 2 of node $v$.
 
 Adjacency matrix is a matrix whose rows and columns represent nodes of a graph. If there is an edge connecting the modes, then the value of the cell is 1, otherwise, the value is 0.
@@ -315,22 +305,19 @@ The adjacency matrix can be represented with mode visually expressive graphics.
 ```python
 plt.matshow(a, cmap=plt.cm.gray_r)
 ````
-<figure>
-    <img src='./images/img0109.png' alt='Adjacency Matrix'/>
-    <figcaption>Figure 9: A more expressive representation of Adjacency matrix.
-    </figcaption>
-</figure>
+![adjacency matrix](images/img0109.png)
+
+Figure 9: A more expressive representation of Adjacency matrix.
 
 
-# Weighted graphs
+## Weighted graphs
 Exoplanets are hat are outside of our solar system. Up until recently we  had not observed any planet outside of the solar systems, simply because planets do not emit enough light to be observable by telescopes. according to Newton's Law of Universal Gravitation, Objects with mass feel an attractive force that is proportional to their masses and inversely proportional to the square of the distance, or $$F=G\frac{Mm}{r^2}.$$
 
 So, if a star affects orbit of a planet that revolves around the star, the planet also does affect orbit of its star slightly. Add to that that there are potentially several planets in a solar system, , then planetary gravity does influences orbits of planets and starts in solar system. Those little wobbles, resulted by smaller mass of planets, was used to discover the first exoplanets. This is in short a multi-body system. In a simplified model of a solar system, the orbits of the planets and the stars are dependent mass of the objects and distance to the star. HEre we are ignoring the effects that the planets have on one another and assume that there is only one start in the system. This can be modeled using a graph data structure. For instance, our solar system data can be summarized as:
-<figure>
-    <img src='./images/img0110.png' alt='Planet Distances'/>
-    <figcaption>Figure 10: A table with planetary distances. This is an example of weighted adjacency matrix. Instead of a binary value to signify adjacency, we have distance as a weight.
-    </figcaption>
-</figure>
+![Planet distances](images/img0110.png)
+
+Figure 10: A table with planetary distances. This is an example of weighted adjacency matrix. Instead of a binary value to signify adjacency, we have distance as a weight.
+
 
 ## Example
 - First we create a pandas dataframe based on a weighted adjacency graph
@@ -413,11 +400,9 @@ nx.draw_circular(SSG,
 nx.draw_networkx_edge_labels(SSG, pos=nx.spring_layout(SSG), font_size=14)
 plt.show()
 ```
-<figure>
-    <img src='./images/img0111.png'   heigth=75% width=75% alt='Planet Graph'/>
-    <figcaption>Figure 11: Planet graph. We can observe each edge has two attributes, distance and Force. We have created a weighted graph with two weight attributes for each edge.
-    </figcaption>
-</figure>
+![planet graph](images/img0111.png)
+
+Figure 11: Planet graph. We can observe each edge has two attributes, distance and Force. We have created a weighted graph with two weight attributes for each edge.
 
 ## Adjacency Matrix for a Weighted Graph
 Weighted graph $\mathcal{G}=(V,E,w)$ is an undirected graph $\mathcal{G}=(V,E)$ along with a function $w:E\rightarrow \mathbb{R}^+$. The adjacency matrix of a $\mathcal{G}$ is given by:
@@ -429,7 +414,7 @@ A_{\mathcal{G}}(i,j) =
 \end{cases}
 $$
 
-# Directed Graphs
+## Directed Graphs
 So far, we have seen only graphs that are *undirected*, meaning that if there is a an edge between vertivces $v$ and $w$, then the exact relationship does also exist between $w$ and $v$. 
 
 There are a few differences between undirected and directed graphs (also digraph). 
@@ -456,11 +441,9 @@ nx.draw_circular(CDG, with_labels=True, font_color='w', font_weight='bold', ax=a
 axs[2].set_axis_off()
 plt.show()
 ```
-<figure>
-    <img src='./images/img0112.png'  alt='Directed Graph'/>
-    <figcaption>Figure 12: The images above are examples of directed graphs. In the directed graph the graph traversal is only one way, meaning that if there is a path from A to B and no path from B to A, we can not walk back to A from B. This also means that the adjacency matrix is not symmetrical.
-    </figcaption>
-</figure>
+![directerd graphs](images/img0112.png)
+
+Figure 12: The images above are examples of directed graphs. In the directed graph the graph traversal is only one way, meaning that if there is a path from A to B and no path from B to A, we can not walk back to A from B. This also means that the adjacency matrix is not symmetrical.
 
 ## Walk
 A walk in a digraph is a sequence $v_1, e_1, v_2, e_2, \cdots, v_{k-1}, e_{k-1}, v_k$, such that $e_k = (v_i, v_{i+1})$. If $v_1 = v_k$, the the walk is a **cycle**.
@@ -491,11 +474,9 @@ ax[1].set_title('a sample directed walk based on shortest distance between node 
 nx.draw(W, with_labels=True, font_color='white', node_color='black', font_weight='bold',ax=ax[1] )
 plt.show()
 ```
-<figure>
-    <img src='./images/img0113.png'  alt='Directed Walk'/>
-    <figcaption>Figure 13: A directed walk created based on shortest path between nodes between node 2 and 5. The graph on the left is the main graph and the graph on the right represents a walk.
-    </figcaption>
-</figure>
+![Directed Walk](images/img0113.png)
+
+Figure 13: A directed walk created based on shortest path between nodes between node 2 and 5. The graph on the left is the main graph and the graph on the right represents a walk.
 
 ## Random Walks.
 In the above example, if  degree of a node, is larger than one, then a random decision needs to be made as to which direction to take. If there is no weight associated with an edge, then all paths have an equal probability of being taken as the next step and sum of all probabilities should add to 1. For in the above undirected graph (left side), the probability of moving to 5 from 0 is .33. The same is true about $0\rightarrow 4$ and $0\rightarrow 8$ where total is 1.
@@ -513,11 +494,9 @@ nx.draw(a, pos=pos, with_labels=True, node_color='black', font_color='w', font_w
 nx.draw_networkx_edge_labels(a, pos=pos)
 plt.show()
 ```
-<figure>
-    <img src='./images/img0114.png'  alt='Random Walk'/>
-    <figcaption>Figure 13=4: A random walk based on weights of edges assigned manually.
-    </figcaption>
-</figure>
+![Random Walk](images/img0114.png)
 
-# What is next? 
-Next we look into [MPNN or Message Passing Neural Networks](03-mpnn.md) paradigm.
+Figure 14: A random walk based on weights of edges assigned manually.
+
+## What is next? 
+Next we look into [MPNN or Message Passing Neural Networks](03-message-passing-neural-networks) paradigm.
