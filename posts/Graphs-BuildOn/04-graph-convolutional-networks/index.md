@@ -1,7 +1,23 @@
-# Graph Neural Networks, an introduction, part 4: Graph Convolutional Networks
-In the [previous post](03-mpnn.md), we came across concept of MPNN. There is only one theoretical step is left before we can get our hands dirty, and that concept is GCN.
+---
+title: 
+description: 
+tags:
+  - graphml
+  - grph neurl networks
+  - gnn
+  - dgl
+  - graph
+  - graph theory
+  - MPNN
+  - message passing neural networks
+authorGithubAlias: cyrusmvahid
+authorName: Cyrus Vahid
+date: 2022-07-08
+---
 
-# GCN Goal
+In the [previous post](04-graph-convolutional-networks), we came across concept of MPNN. There is only one theoretical step is left before we can get our hands dirty, and that concept is GCN.
+
+## GCN Goal
 - Learn a function of signals/features on a graph $\mathcal{G}=(\mathcal{V}, \mathcal{E})$ and classify vertices according to some node label. The function  takes as input:
  - A feature description $x_i$ for every node $i$; summarized in a $N\times D$ feature matrix $X$ ($N$: number of nodes, $D$: number of input features)
  - A representative description of the graph structure in matrix form; typically in the form of an adjacency matrix A (or some function thereof)
@@ -12,20 +28,21 @@ and produces a node-level output $Z$ (an $N\times F$ feature matrix, where F is 
 - Take the input
 - Sequentially process through hidden layers, which are intermediate feature representation of a neural network.
 - Flatten the representations into the softmax probability distribution over labels.
-![image.png](attachment:image.png)
+![image.png](images/gcn.png)
+Figure 1: Intuitive repreentation of GCN. The image on the left represents a walk and C channels. THe graph then is aggregated into F feature maps in the output layers. It is notable that the graph structure (edges) have remained unchanged. labels are represented as $Y_i$. Finally hidden layer activations are represnted on the right side. Image source: https://arxiv.org/pdf/1609.02907.pdf 
 
-# Hidden Layers
+## Hidden Layers
 - $H^{(l+1)}=f(H^{(l)}, A)$, where 
  - $A$ is the adjacency matrix.
  - $H^{0} = X$
  - $H^{(L)} = Z$
 
-# Propagation Rule
+## Propagation Rule
 - $f(H^{(l)}, A) = \sigma(AH^{(l)}W^{(l)})$, where
 - $W^{(l)}$ is the weight matrix for l-th layer
 - $\sigma(.)$ is an activation function such as $ReLU$
 
-# Issues with Propagation Rule
+## Issues with Propagation Rule
 - it taken into account features of nodes that are connected to the node that is in focus and ignores features of the node itself. This problem can be solved by adding self loop to $A$. To do that we construct $\tilde{A} = I + A$
 - Nodes with high degree can change the scale off feature vector. To solve the issuer we use Normalized Laplacian.
 - The new propagation rule is: 
@@ -33,7 +50,7 @@ $$
 f(H^{(l)}, A) = \sigma(\tilde{D}^\frac{-1}{2}\tilde{A}\tilde{D}^\frac{-1}{2}H^{(l)}W^{(l)})
 $$
 
-# Loss
+## Loss
 - label information is smoothed over the graph via some form of explicit graph-based regularization.
 $$
 \mathcal{L}=\mathcal{L_0}+\mathcal{L_{reg}}, where
@@ -44,12 +61,10 @@ $$
 - The training is performed only on supervised loss, $\mathcal(L)_0$, the labeled part of the graph.
 - $f(.)$ can be a neural network-like differantiable function.
 
-
-
-# Reference:
+## Reference:
 - [https://arxiv.org/pdf/1609.02907.pdf](https://arxiv.org/pdf/1609.02907.pdf)
 
-# Hands-on Exercise
+## Hands-on Exercise
 
 
 ```python
@@ -270,7 +285,7 @@ D_hat**-1 * A_hat * X * W
 
 
 ## What is next?
-Next we implemnt a hello world example of interaction graphs or the [karate club](05-karate-club.md) using MPNN and GCN.
+Next we implemnt a hello world example of interaction graphs or the [karate club](05-GNN-example-karate-club) using MPNN and GCN.
 
 
 ```python
