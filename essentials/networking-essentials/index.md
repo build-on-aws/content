@@ -30,7 +30,7 @@ Starting your cloud networking journey can seem overwhelming. Especially if you 
 
 Similar to traditional on-premises networking, cloud networking provides the ability to build, manage, operate, and securely connect your networks across all your cloud environments and distributed cloud and edge locations. Cloud networking allows you to architect infrastructure that is resilient and highly available, helping you to deploy your applications faster, at scale, and closer to your end users when you need it.
 
-## Why is where I deploy important?
+## Why is the location of my cloud network important?
 
 <!-- When you open a website or use an application, data and requests need to travel from your computer or phone to a server that is hosting the website or application, and back again to you. This is usually done over a combination of different mediums, such as over Wi-Fi to your router at home, from there to your ISP by way of fiber, cable, ADSL, 5G, etc. Once it reaches the ISP, they in turn connect to a larger network. At some point, it is likely that your data travels through one of the many [undersea fiber cables](https://www.submarinecablemap.com/). The speed of light determines what the quickest speed through these cables can be, limiting the fastest possible response—the light inside the cable also reflects off the side as it travels, so the total distance traveled is longer than the cable itself. As an example, one of the cables between Japan and the US West coast is 21,000km in total length, which means light traveling at 299,792,458 m/s would take ~70ms to cross the total length of the cable, slowing down the website or application as multiple calls go back and forth. In extreme examples, the time can be much higher due to not only the distance traveled, but network congestion between points along the way, with responses taking multiple seconds to complete. -->
 
@@ -100,9 +100,9 @@ Yes, assuming the owner of the other VPC accepts your peering connection request
 
 ### **AWS Transit Gateway**
 
-<!-- [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) provides a hub-and-spoke design for connecting VPCs and on-premises networks as a fully managed service without requiring you to provision virtual appliances like Cisco CSRs. No VPN overlay is required, and AWS manages high availability and scalability. -->
+<!-- [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) provides a hub-and-spoke design for connecting VPCs and on-premises networks as a fully managed service. Transit Gateway acts as a highly available and scalable cloud router. -->
 
-Transit Gateway enables customers to connect thousands of VPCs. You can attach all your hybrid connectivity (VPN and Direct Connect connections) to a single Transit Gateway instance, consolidating and controlling your organization's entire AWS routing configuration in one place (refer to the figure under Transit VPC solution). Transit Gateway controls how traffic is routed among all the connected spoke networks using route tables. This hub-and-spoke model simplifies management and reduces operational costs because VPCs only connect to the Transit Gateway instance to gain access to the connected networks.
+Transit Gateway enables customers to connect thousands of VPCs. You can attach all your hybrid connectivity (VPN and Direct Connect connections) to a single Transit Gateway instance, consolidating and controlling your organization's entire AWS routing configuration in one place. Transit Gateway controls how traffic is routed among all the connected spoke networks using route tables. This hub-and-spoke model simplifies management and reduces operational costs because VPCs only connect to the Transit Gateway instance to gain access to the connected networks.
 
 ### **Transit VPC solution**
 
@@ -163,4 +163,4 @@ This scenario can also be optionally configured for IPv6. Instances launched int
 
 ## Next steps
 
-You can start building on AWS right away using the AWS Free Tier and our library of [hands-on tutorials](https://aws.amazon.com/getting-started/hands-on/?getting-started-all.sort-by=item.additionalFields.sortOrder&getting-started-all.sort-order=asc&awsf.getting-started-category=*all&awsf.getting-started-level=*all&awsf.getting-started-content-type=*all) and [getting started guides](https://aws.amazon.com/vpc/getting-started/).
+You can start building on AWS right away using the [AWS Free Tier](https://aws.amazon.com/free/) and our library of [hands-on tutorials](https://aws.amazon.com/getting-started/hands-on/?getting-started-all.sort-by=item.additionalFields.sortOrder&getting-started-all.sort-order=asc&awsf.getting-started-category=*all&awsf.getting-started-level=*all&awsf.getting-started-content-type=*all) and [getting started guides](https://aws.amazon.com/vpc/getting-started/).
