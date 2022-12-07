@@ -1,5 +1,21 @@
-# Graph Neural Networks, an introduction, part 5: Getting started with DGL
-Finally the theoretical foundation is laid through [part 3](03-mpnn.md) and [part 4](04-gcn.md) of this blog series and we are ready to get through a hello world sort of tutorial using Deep Graph Library.
+---
+title: 
+description: 
+tags:
+  - graphml
+  - grph neurl networks
+  - gnn
+  - dgl
+  - graph
+  - graph theory
+  - MPNN
+  - message passing neural networks
+  - karate club
+authorGithubAlias: cyrusmvahid
+authorName: Cyrus Vahid
+date: 2022-07-08
+---
+Finally the theoretical foundation is laid through [part 3](03-message-passing-neural-networks) and [part 4](04-graph-convolutional-networks) of this blog series and we are ready to get through a hello world sort of tutorial using Deep Graph Library.
 In this notebook, we shall implement a simple example of the Karate club, which is basically the MNIST of GNN.
 
 
@@ -28,7 +44,7 @@ examples.draw_interaction_graph(G=G, pos='c')
 
 
     
-![png](images/05-karate-club_3_0.png)
+![karate club](images/05-karate-club_3_0.png)
     
 
 
@@ -120,13 +136,10 @@ For detailed information, plase refer to the [graph convolutional network](lnk) 
 The GCN, then agregates these features, using its neighborhood, before updating the next layer with its value. 
 This is in keeping with the MPNN paradigm. For more details on MPNN, please refer to the [MPNN entry](link) from this series. Figure 1 visualizes the process.
 
-<figure>
-    <img src='images/mailbox.png'>
-    <figurecaption> 
-        
+![mpnn mailbox](images/mailbox.png)
+
 Figure1: MPNN paradigm. Next layer value for the hidden state of nove $v_1$ is the sum of current hidden values of its neighbors, passed through a function that can potentially be a neural network. the old value of the node itself is not included in the computation. Additoinally we should note that ther eis no need that we include only the immediate neighbors. We can design a definiion for what a neighbor it. We can consider to goo deeper or any other means that could help up have an effective embedding of the graph. 
-    </figurecaption>
-</figure>
+
     
 
 
@@ -362,14 +375,10 @@ draw(0)  # draw the prediction of the first epoch
 
 
     
-![png](images/05-karate-club_22_0.png)
+![karate club](images/05-karate-club_22_0.png)
     
 
-![](https://data.dgl.ai/tutorial/1_first/karate0.png)
-
-   :height: 300px
-   :width: 400px
-   :align: center
+![karate ckub](https://data.dgl.ai/tutorial/1_first/karate0.png)
 
 
 The following animation shows how the model correctly predicts the community
@@ -382,16 +391,12 @@ after a series of training epochs.
 ani = animation.FuncAnimation(fig, draw, frames=len(v_logits), interval=200)
 ```
 
-![](https://data.dgl.ai/tutorial/1_first/karate.gif)
-
-   :height: 300px
-   :width: 400px
-   :align: center
+![karate club](https://data.dgl.ai/tutorial/1_first/karate.gif)
 
 
 
-# References:
+## References:
 - https://docs.dgl.ai/en/0.2.x/tutorials/basics/1_first.html
 
-# What is next?
+## What is next?
 Next we take a look at knowledge graph embedding (KGE) using graphs. Using GNN, we can predict edges that are missing from a knowledge graph and complete them. KGE has massively important applications, which we take a look at in the last post in this introductory series, but first, let us take a look at what KE actual is in the [next post](06-kbe.md)
