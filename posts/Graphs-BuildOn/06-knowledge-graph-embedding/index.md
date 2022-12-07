@@ -3,7 +3,7 @@ title:
 description: 
 tags:
   - graphml
-  - grph neurl networks
+  - graph neurl networks
   - gnn
   - dgl
   - graph
