@@ -16,8 +16,7 @@ authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
 ---
-## Introduction
-KGE is a fundamental application of GNN and a variety of fields ranging from life sciences to personilization engines can benefit from the ability to build knowledge graphs. In the [previous post](05-karate-club.md) we learned a simple implmentation using DGL. DGL is used to develop DGL-KE. This post sets up the theoretical requirement for understanding how to use DGL-KE, while the [next post](07-dgl-ke.md) describes how SGL-KE is implmented and provides the reader with an implementation example. Finally in the [final post](08-dkrg.md) we take a look at an important example of DGL-KE in COVID19 drug repurposing research.
+KGE is a fundamental application of GNN and a variety of fields ranging from life sciences to personilization engines can benefit from the ability to build knowledge graphs. In the [previous post](05-GNN-example-karate-club) we learned a simple implmentation using DGL. DGL is used to develop DGL-KE. This post sets up the theoretical requirement for understanding how to use DGL-KE, while the [next post](07-dglke-oss-tool-for-KGE) describes how DGL-KE is implmented and provides the reader with an implementation example. Finally in the [final post](08-covid-drug-repurposing-with-DGLKE) we take a look at an important example of DGL-KE in COVID19 drug repurposing research.
 
 There has been a huge focus, both in academia and industry, on Graph Neural Networks in the past 3 years. A surge of GNN papers, toolkits, and knowledge graph embedding tools is ensued as a result of interest. We, at AWS, have created an open source library for creating, training, and performing several GNN inference tasks, called Deep Graph Library or DGL. DGL is a high performance and highly distributed Graph Neural Network library. On the top of DGL, we have released a knowledge graph embedding tool called DGL-KE, which outperforms similar products thanks to numerous innovations in distributed KGE training for link prediction task. 
 To be able efficiently and effectively apply DGL-KE to KGE tasks, it is however important to understand what the models in the core of DGL-KE do and where they perform best. This blog details out KGE models that are implemented in DGL-KE and is a fundamental to understanding of DGL-KE's functional capabilities.
@@ -495,7 +494,7 @@ $$
 ## What's Next?
 Now that we have investigated the methods that are implemented in DGL-KE, we shall explore how DGL-KE optimized computation of these methods and distributes them on multiple devices in the [next post](07-dglke-oss-tool-for-KGE).
 
-# References
+## References
 The below papers are the source for the material as well as most of the images in this review. For more detailed informaiton and to learn more about the said methods, please refer to the original papers.
 
 1.  http://semantic-web-journal.net/system/files/swj1167.pdf
