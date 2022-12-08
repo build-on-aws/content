@@ -1,3 +1,20 @@
+---
+title: 
+description: 
+tags:
+  - graphml
+  - grph neurl networks
+  - gnn
+  - dgl
+  - graph
+  - graph theory
+  - MPNN
+  - message passing neural networks
+authorGithubAlias: cyrusmvahid
+authorName: Cyrus Vahid
+date: 2022-07-08
+---
+
 In a [previous post](06-kbe.md), I describes the KGE models that are implemented as a part of DGL-KE. This blog provides  details about optimizations that are implemented by DGL-KE that makes it very efficient for multi-device and distributed training as well as providing an example that can be run on a laptop. 
 
 ## What is DGL-KE
