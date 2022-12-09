@@ -18,16 +18,16 @@ authorName: Suman Debnath
 date: 2022-11-30
 ---
 
-## What you will learn
+## What you will accomplish
 
-In this guide, you will learn:
-- How to create and setup an Amazon EMR cluster 
-- How to submit a PySpark job on EMR 
-- How to integrate EMR with Amazon S3 
+In this guide, you will:
+- Create and setup an Amazon EMR cluster 
+- Submit a PySpark job on EMR 
+- Integrate Amazon EMR with Amazon S3 
 
-## Requirements 
+## Prerequisites 
 
-Before Starting this guide, you will need:
+Before starting this guide, you will need:
 
 - An AWS account (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/))
 - An IAM user that has the access and create AWS resources. 
