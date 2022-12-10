@@ -26,6 +26,17 @@ Below is an architecture diagram of what we'll be building today:
 
 ![Architecture diagram showing the flow of pushing code to GitHub, triggering a GitHub Actions workflow that runs a test job and then a deploy job. Also shows the AWS infrastructure where container will be deployed.](images/architecture-diagram.png)
 
+| ToC                                                                            |
+|--------------------------------------------------------------------------------|
+| Steps                                                                          | 
+| 1. [Prerequisites](#1-prerequisites)                                           |
+| 2. [Configure the Flask App](#2-configure-the-flask-app)                       |
+| 3. [Provision Infrastructure Resources](#3-provision-infrastructure-resources) |
+| 4. [Setup GitHub Actions Workflow](#4-setup-github-actions-workflow)           |
+| 5. [Running the Workflow](#5-running-the-workflow)                             |
+| 6. [Check App Deployment](#6-check-app-deployment)                             |
+| 7. [Destroy Resources](#7-destroy-resources)                                   |
+
 Let's get started!
 
 ## 1. Prerequisites
@@ -106,7 +117,7 @@ EXPOSE 8080
 CMD python app.py
 ```
 
-#### Run App Locally
+### Run App Locally
 
 Let's run this app locally to make sure it works before we start configuring it for the cloud.
 
@@ -130,7 +141,7 @@ If that doesn't work, check to make sure your container is running, using the co
 
 You can also use Docker Desktop Dashboard to see if the container is running.
 
-#### Run the Test
+### Run the Test
 
 You can also make sure your unit test is working by running the following commands in your project directory:
 
@@ -142,7 +153,7 @@ $ pytest
 
 The first two commands install your app dependencies and the python test command. The third command runs your tests.
   
-#### Configure App for the Cloud
+### Configure App for the Cloud
 
 Now that we know our app works locally, we need to configure it for the cloud. We'll use Amazon ECS with AWS Fargate for our container orchestrator, but there are others you could use as well. Using Fargate, instead of Amazon EC2 instances, means we won't have to manage servers and it will manage scaling containers up and down for us.
 
@@ -392,7 +403,7 @@ Once the CDK deploy finishes, let's navigate to ECS (Elastic Container Service) 
 
 Now that we've created the infrastructure, we need to deploy our application container to the infrastructure.
 
-## 4. Setup GitHub Action Workflow
+## 4. Setup GitHub Actions Workflow
 We need a tool to implement our CI/CD pipeline to build and test our app and deploy it to that infrastructure. Today, we'll use GitHub Actions. We could even build and test our *infrastructure code* and deploy it with GitHub Actions, but we'll save that for another day.
 
 ### What Are GitHub Actions
@@ -403,7 +414,7 @@ The image below shows the parts of a workflow. A workflow runs one or more jobs 
 
 ![Shows parts of a GitHub workflow, where an event triggers a runner runs one job with 3 steps. Then shows a second runner running a second job and 4 steps.](images/parts-of-a-workflow.png)
 
-An action can be something like a starter on the GitHub Marketplace, either created by GitHub or published by someone else. For example:
+An action can be published on the GitHub Marketplace, either created by GitHub or published by someone else. For example:
 
 -   Checkout code - an action created by the GitHub organization
 	- `actions/checkout@v3`
@@ -642,7 +653,7 @@ Above, we see one task was stopped. A service deployment was completed. And the 
 
 We have success!
 
-## Destroy resources
+## 7. Destroy resources
 
 If you're done using the cloud resources we created in this project, you can destroy them now to ensure you are not billed for their use. To do that, navigate back to the `ecs-devops-sandbox-repository` project at the command line and run:
 
