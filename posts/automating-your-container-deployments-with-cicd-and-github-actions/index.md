@@ -26,6 +26,8 @@ Below is an architecture diagram of what we'll be building today:
 
 ![Architecture diagram showing the flow of pushing code to GitHub, triggering a GitHub Actions workflow that runs a test job and then a deploy job. Also shows the AWS infrastructure where container will be deployed.](images/architecture-diagram.png)
 
+Let's get started!
+
 | ToC                                                                            |
 |--------------------------------------------------------------------------------|
 | Steps                                                                          | 
@@ -36,8 +38,6 @@ Below is an architecture diagram of what we'll be building today:
 | 5. [Running the Workflow](#5-running-the-workflow)                             |
 | 6. [Check App Deployment](#6-check-app-deployment)                             |
 | 7. [Destroy Resources](#7-destroy-resources)                                   |
-
-Let's get started!
 
 ## 1. Prerequisites
 
