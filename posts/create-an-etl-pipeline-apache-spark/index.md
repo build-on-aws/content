@@ -13,9 +13,11 @@ authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2022-11-30
 ---
-## Overview
-
 In this tutorial, you will learn how you can build an ETL (Extract, Transform, and Load) pipeline for batch processing using [Amazon EMR (Amazon Elastic MapReduce)](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html) and [Spark](https://spark.apache.org/). During this process we will also learn about few of the use case of batch ETL process and how EMR can be leveraged to solve such problems.
+
+Batch ETL is a common use case across many organizations and this use case implementation learning will provide you with a starting point, using which you can build more complex data pipelines in AWS using Amazon EMR.
+
+We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) to interact with the Spark cluster. PySpark allows you to write Spark applications using Python APIs. 
 
 ## What you will accomplish
 
@@ -39,14 +41,6 @@ Before starting this guide, you will need:
 | ✅ AWS Level         | Beginner                               |
 | ⏱ Time to complete  | 45 mins - 1hr                          |
 | 💰 Cost to complete  | USD 0.30                               |
-
-# Creating an ETL Pipeline with Amazon EMR and Apache Spark
-
-In this tutorial, you will learn how you can build an ETL (Extract, Transform, and Load) pipeline for batch processing using [Amazon EMR (Amazon Elastic MapReduce)](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html) and [Spark](https://spark.apache.org/). During this process we will also learn about few of the use case of batch ETL process and how EMR can be leveraged to solve such problems. 
-
-Batch ETL is a common use case across many organizations and this use case implementation learning will provide you with a starting point, using which you can build more complex data pipelines in AWS using Amazon EMR.
-
-We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) to interact with the Spark cluster. PySpark allows you to write Spark applications using Python APIs. 
 
 ## Use case and problem statement
 
