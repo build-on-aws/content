@@ -13,6 +13,8 @@ authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2022-11-30
 ---
+## Overview
+
 In this tutorial, you will learn how you can build an ETL (Extract, Transform, and Load) pipeline for batch processing using [Amazon EMR (Amazon Elastic MapReduce)](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html) and [Spark](https://spark.apache.org/). During this process we will also learn about few of the use case of batch ETL process and how EMR can be leveraged to solve such problems.
 
 Batch ETL is a common use case across many organizations and this use case implementation learning will provide you with a starting point, using which you can build more complex data pipelines in AWS using Amazon EMR.
@@ -34,14 +36,6 @@ Before starting this guide, you will need:
 - An IAM user that has the access and create AWS resources. 
 - Basic understanding of Python
 
-## Sidebar
-<!-- Update with the appropriate values -->
-| Info                 | Level                                  |
-| -------------------  | -------------------------------------- |
-| ✅ AWS Level         | Beginner                               |
-| ⏱ Time to complete  | 45 mins - 1hr                          |
-| 💰 Cost to complete  | USD 0.30                               |
-
 ## Use case and problem statement
 
 For this tutorial, let's assume you have a vendor who provides incremental sales data at the end of every month. And the file arrives in S3 as `CSV` and it needs to be processed and made available to your data analysts for querying and analysis. 
@@ -57,7 +51,9 @@ To implement this data pipeline, we will use EMR cluster with Spark as the distr
 
 ![Img Architecture](images/Architecture.png)
 
-## Create an EMR Cluster
+## Implementation 
+
+### Step 1: Create an EMR Cluster
 
 Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's master node later on. So, lets create that first, 
 
@@ -86,7 +82,7 @@ Before we create an EMR cluster we need to create a `Key Pair`, which we would n
 
 ![emr cluster 3](images/emr_3.png)
 
-## Create an Amazon S3 bucket
+### Step 2: Create an Amazon S3 bucket
 
 Now we will create an Amazon S3 bucket and shall create two sub-folders within that, which will be used for store `RAW` and `CLEANSED` data
 
@@ -108,7 +104,7 @@ Now we will create an Amazon S3 bucket and shall create two sub-folders within t
 
 ![Upload raw data](images/upload_csv.png)
 
-## Submit the PySpark job 
+### Step 3: Submit the PySpark job 
 
 Now, that we have the dataset uploaded in S3, its time to submit the PySpark job from our EMR cluster. 
 
@@ -165,7 +161,7 @@ sudo spark-submit etl-job.py
 
 ![s3 cleaned data](images/s3_cleaned_data.png)
 
-## Validating the output using Amazon Athena
+### Step 4: Validating the output using Amazon Athena
 
 Now, the `cleansed` data is available in Amazon S3 in the form of `parquet` format, but to make it more consumable for data analysts or data scientists, and it would be great if we could enable querying the data through SQL by making it available as a database table.
 
@@ -173,7 +169,7 @@ To make that integration, we can follow a two-step approach:
 1. We need to run the Glue crawler to create a AWS Glue Data Catalog table on top of the S3 data.
 2. Once that is done, we can run a query in Amazon Athena to validate the output
 
-### Creating an AWS Glue Data Catalog
+### Step 5: Creating an AWS Glue Data Catalog
 
 1. Navigate to the AWS Glue crawler console and click on **Create Crawler** 
 
@@ -209,7 +205,7 @@ To make that integration, we can follow a two-step approach:
 
 Now that we have the Glue Data Catalog table created, we can navigate to Amazon Athena to query the data using SQL.
 
-### Querying output data using Amazon Athena standard SQL 
+### Step 6: Querying output data using Amazon Athena standard SQL 
 
 1. Open Athena query editor, you can keep Data Source as the default `AwsDataCatalog` and select `my_demo_db` for Database and run the following query. 
 
