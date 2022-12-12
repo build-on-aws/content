@@ -3,7 +3,7 @@ title: 'Creating an ETL Pipeline with Amazon EMR and Apache Spark'
 description: 'Learn how to build an ETL pipeline for batch processing with Amazon EMR and Apache Spark.'
 
 tags:
-    - data engineering
+    - data-engineering
     - analytics
     - tutorials
     - aws
