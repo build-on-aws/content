@@ -21,12 +21,38 @@ Batch ETL is a common use case across many organizations and this use case imple
 
 We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) to interact with the Spark cluster. PySpark allows you to write Spark applications using Python APIs. 
 
+## Sidebar
+<!-- Update with the appropriate values -->
+| Info                 | Level                                  |
+| -------------------  | -------------------------------------- |
+| ✅ AWS Level         | Beginner                               |
+| ⏱ Time to complete  | 30 mins - 45 mins                      |
+| 💰 Cost to complete  | USD 0.30                               |
+
 ## What you will accomplish
 
 In this guide, you will:
 - Create and setup an Amazon EMR cluster 
 - Submit a PySpark job on EMR 
 - Integrate Amazon EMR with Amazon S3 
+
+Let's get started!
+
+| ToC                                                                            |
+|--------------------------------------------------------------------------------|
+| Steps                                                                          | 
+| 1. [Prerequisites](#prerequisites)                                             |
+| 2. [Use case and problem statement](#use-case-and-problem-statement)                                             |
+| 3. [Architecture](#architecture)                                             |
+| 4. [Create an EMR Cluster](#step-1-create-an-emr-cluster)                                             |
+| 5. [Create an Amazon S3 bucket](#step-2-create-an-amazon-s3-bucket)                                             |
+| 6. [Submit the PySpark job](#step-3-submit-the-pyspark-job)                                             |
+| 7. [Validating the output using Amazon Athena](#step-4-validating-the-output-using-amazon-athena)                                             |
+| 8. [Creating an AWS Glue Data Catalog](#step-5-creating-an-aws-glue-data-catalog)                                             |
+| 9. [Querying output data using Amazon Athena standard SQL ](#step-6-querying-output-data-using-amazon-athena-standard-sql)                                             |
+| 10. [Clean up](#clean-up)                                             |
+| 11. [Conclusion](#conclusion)                                             |
+
 
 ## Prerequisites 
 
@@ -207,7 +233,7 @@ Now that we have the Glue Data Catalog table created, we can navigate to Amazon 
 
 ### Step 6: Querying output data using Amazon Athena standard SQL 
 
-1. Open Athena query editor, you can keep Data Source as the default `AwsDataCatalog` and select `my_demo_db` for Database and run the following query. 
+1. Open Athena query editor, you can keep Data Source as the default `AwsDataCatalog` and select `my_demo_db` for Database (as show in the screen shot) and run the following query. 
 
 ```sql
 SELECT * FROM "my_demo_db"."cleaned_data" limit 10;
@@ -215,7 +241,7 @@ SELECT * FROM "my_demo_db"."cleaned_data" limit 10;
 
 ![athena](images/athena_q1.png)
 
-2. Now, you can perform other SQL queries to analyze the data. For example, if we would like to know the `forcast_monthly_revenue` for each `region per segment wise`, we can run this:
+2. Now, you can perform other SQL queries to analyze the data. For example, if we would like to know the `forcast_monthly_revenue` for each `region per segment wise`, you can run this:
 
 ```sql 
 SELECT 
@@ -227,10 +253,6 @@ GROUP BY segment, region;
 
 ```
 ![athena](images/athena_q2.png)
-
-## Conclusion
-
-Congratulations! You have finished the Creating an ETL Pipeline with Amazon EMR and Apache Spark tutorial. Continue your journey with AWS by following the next steps section below.
 
 ## Clean up 
 
@@ -249,3 +271,7 @@ aws s3 rb s3://<YOUR_BUCKET_LOCATION> --force
 - Delete the **Glue Database**
 
 ![glue db delete](images/glue_db_delete.png) 
+
+## Conclusion
+
+Congratulations! You have finished the Creating an ETL Pipeline with Amazon EMR and Apache Spark tutorial. Continue your journey with AWS by following the next steps section below.
