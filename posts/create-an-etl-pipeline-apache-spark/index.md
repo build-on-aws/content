@@ -50,7 +50,7 @@ Let's get started!
 | 7. [Validating the output using Amazon Athena](#step-4-validating-the-output-using-amazon-athena)                                             |
 | 8. [Creating an AWS Glue Data Catalog](#step-5-creating-an-aws-glue-data-catalog)                                             |
 | 9. [Querying output data using Amazon Athena standard SQL ](#step-6-querying-output-data-using-amazon-athena-standard-sql)                                             |
-| 10. [Clean up](#clean-up)                                             |
+| 10. [Clean up resources](#clean-up-resources)                                             |
 | 11. [Conclusion](#conclusion)                                             |
 
 
@@ -254,7 +254,7 @@ GROUP BY segment, region;
 ```
 ![athena](images/athena_q2.png)
 
-## Clean up 
+## Clean up resources 
 
 Now that you’ve finished this walk-through, you can delete all the following resources to avoid incurring unexpected costs 
 
