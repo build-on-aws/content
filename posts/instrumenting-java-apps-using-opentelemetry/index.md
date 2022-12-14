@@ -26,33 +26,16 @@ In this tutorial, you will learn how to instrument an existing microservice writ
 - How to send generated metrics to Prometheus and Amazon CloudWatch
 - How to switch between observability backends without code changes
 
-## Sidebar
-| Info                | Level                                  |
-| ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Beginner                               |
-| ⏱ Time to complete  | 45 minutes                                 |
-| 💰 Cost to complete | Free when using the AWS Free Tier |
+| Attributes             |                                                                 |
+|------------------------|-----------------------------------------------------------------|
+| ✅ AWS experience      | Beginner                                                        |
+| ⏱ Time to complete    | 45 minutes                                                      |
+| 💰 Cost to complete    | Fee tier eligible                                               |
+| 🧩 Prerequisites       | - [Docker](https://www.docker.com/get-started) 4.11+ (Required)<br>- [Java](https://openjdk.org/install) 17+ (Required)<br>- [Maven](https://maven.apache.org/download.cgi) 3.8.6+ (Required)<br>- [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (Optional) |
 
-## Prerequisites
+| ToC |
+|-----|
 
-Before starting this tutorial, you will need the following:
-
- - [Docker](https://www.docker.com/get-started) 4.11+ (Required)
- - [Java](https://openjdk.org/install) 17+ (Required)
- - [Maven](https://maven.apache.org/download.cgi) 3.8.6+ (Required)
- - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (Optional. Only required for the bonus section.)
-
- ## Sections
- - [Introduction](#introduction)
- - [Getting started with the existing code](#getting-started-with-the-existing-code)
- - [Automatic instrumentation with the OpenTelemetry agent](#automatic-instrumentation-with-the-opentelemetry-agent)
- - [Sending telemetry data to the collector](#sending-telemetry-data-to-the-collector)
- - [Sending all the traces to Grafana Tempo](#sending-all-the-traces-to-grafana-tempo)
- - [Manual instrumentation with the OpenTelemetry SDK](#manual-instrumentation-with-the-opentelemetry-sdk)
- - [Custom metrics with the OpenTelemetry SDK](#custom-metrics-with-the-opentelemetry-sdk)
- - [Sending all the metrics to Prometheus](#sending-all-the-metrics-to-prometheus)
- - [Bonus: switching the observability backend to AWS](#bonus-switching-the-observability-backend-to-aws)
- 
 ## Introduction
 
 [OpenTelemetry](https://opentelemetry.io/) is one of those technologies that you know you must learn and start using as soon as possible, but every time you get to work with it, you find it more complicated than it should be. If this is you, don't worry. You're not alone. Many other people also complain about OpenTelemetry being complicated. However, it is important for you to understand that some of this complexity is incidental because OpenTelemetry is not a ready-to-use library. It is a [framework](https://opentelemetry.io/docs/concepts/components).
@@ -120,7 +103,7 @@ curl -X GET http://localhost:8888/hello
 You should receive a reply like this:
 
 ```json
-{"message":"Hello World","valid":true}
+{"message":"Hello World"}
 ```
 
 Once you are done with the tests, stop `run-microservice.sh` to shut down the microservice. You can do this by pressing `Ctrl+C`. From this point on, every time you need to execute the microservice again with a new version of the code that you changed, just execute the same script.
@@ -194,7 +177,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.17.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 java -javaagent:./${AGENT_FILE} -jar target/hello-app-1.0.jar
@@ -221,7 +204,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.16.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 export OTEL_TRACES_EXPORTER=logging
@@ -346,7 +329,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.16.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 export OTEL_TRACES_EXPORTER=otlp
@@ -641,10 +624,11 @@ But you don't have to settle for this. You can use the OpenTelemetry SDK to prov
 
 3. Open the file `pom.xml`.
 
-4. Add the following properties right after the XML tag `parent`:
+4. Update the properties section to the following:
 
 ```xml
 <properties>
+    <maven.compiler.release>17</maven.compiler.release>
     <otel.traces.api.version>0.13.1</otel.traces.api.version>
     <otel.metrics.api.version>1.10.0-alpha-rc.1</otel.metrics.api.version>
 </properties>
@@ -658,13 +642,13 @@ These properties will be used throughout many parts of the code.
 <dependency>
     <groupId>io.opentelemetry</groupId>
     <artifactId>opentelemetry-api</artifactId>
-    <version>1.18.0</version>
+    <version>1.20.1</version>
 </dependency>
 
 <dependency>
     <groupId>io.opentelemetry.instrumentation</groupId>
     <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-    <version>1.18.0-alpha</version>
+    <version>1.20.1</version>
 </dependency>
 
 <dependency>
@@ -688,6 +672,8 @@ You now have everything you need to write code using the OpenTelemetry SDK for J
 
 ```java
 package tutorial.buildon.aws.o11y;
+
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -773,8 +759,12 @@ Change its code to the following version:
 ```java
 package tutorial.buildon.aws.o11y;
 
+import java.util.Objects;
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -788,8 +778,6 @@ import io.opentelemetry.instrumentation.annotations.WithSpan;
 
 import static tutorial.buildon.aws.o11y.Constants.*;
 import static java.lang.Runtime.*;
-
-import javax.annotation.PostConstruct;
 
 @RestController
 public class HelloAppController {
