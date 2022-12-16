@@ -8,7 +8,7 @@ tags:
   - aws
   - vpc
 authorGithubAlias: labeveryday
-authorName: Du'An Lightfoot
+authorName: "Du\'An Lightfoot"
 date: 2022-10-21
 ---
 
