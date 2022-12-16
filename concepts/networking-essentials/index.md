@@ -16,15 +16,8 @@ Starting your cloud networking journey can seem overwhelming. Especially if you 
 
 ## **Sections**
 
-- [What is cloud networking?](#what-is-cloud-networking)
-- [Why is where I deploy important?](#why-is-where-i-deploy-important)
-- [What is Amazon VPC?](#what-is-amazon-vpc)
-- [How do resources in my Amazon VPC communicate?](#how-do-resources-in-my-amazon-vpc-communicate)
-- [How can I connect to my Amazon VPC?](#how-can-i-connect-to-my-amazon-vpc)
-- [Can I connect to other VPCs in different accounts?](#can-i-connect-to-other-vpcs-in-different-accounts)
-- [What are some security best practices for your VPC?](#what-are-some-security-best-practices-for-your-vpc)
-- [What are common VPC scenarios?](#what-are-common-vpc-scenarios)
-
+| ToC |
+|-----|
 
 ## What is cloud networking?
 
@@ -38,7 +31,7 @@ With the cloud, you can expand to new geographic regions and deploy globally in 
  
 AWS Cloud infrastructure is built around AWS Regions and Availability Zones. A Region is a physical location in the world where we have multiple Availability Zones. An Availability Zone consists of one or more discrete data centers, each with redundant power, networking, and connectivity, housed in separate facilities. These Availability Zones offer you the ability to operate production applications and databases that are more highly available, fault tolerant, and scalable than would be possible from a single data center.
 
-<!-- https://www.youtube.com/embed/UuRX2gK0IYw for when the embedded YouTube feature is complete -->
+https://www.youtube.com/embed/UuRX2gK0IYw
 
 ## What is Amazon VPC?
 
@@ -66,11 +59,7 @@ Your AWS account includes a [default VPC](https://docs.aws.amazon.com/vpc/latest
 
 ## How do resources in my Amazon VPC communicate?
 
-VPCs gives you full control over your virtual networking environment, including resource placement, connectivity, and security. Get started by setting up your VPC in the AWS Management Console. Next, add resources to it such as Amazon EC2 and Amazon Relational Database Service (Amazon RDS) instances. Finally, define how your VPCs communicate with each other across accounts, Availability Zones, or Regions.
-
-<!-- In a VPC you can use both IPv4 and IPv6 addressing. With IPv4 you select and assign a VPC CIDR (Classless Inter-Domain Routing) block from a maximum size of /16 to a minimum size of /28. You can use any public addresses you own (in select Regions). We recommend you use private RFC 1918 addresses. Once you have a CIDR, you define subnets. Subnets can be between /16 and /28 in size and are bounded by Availability Zones. Each VPC subnet must be associated with a subnet route table. -->
-
-As you create subnets, you must associate them with a main VPC route table. By default, this route table will only contain the local IPv4 and IPv6 CIDRs of the VPC. A subnet can only be associated with one subnet route table. A route table can have multiple subnet associations. The route tables are used to control traffic leaving the subnet. Each subnet has a VPC router. There is no single device for a VPC. The VPC software takes care of the routing for you. You can add more specific routes to provide traffic filtering for east/west traffic.
+VPCs gives you full control over your virtual networking environment, including resource placement, connectivity, and security. Get started by setting up your VPC in the AWS Management Console. Next, add resources to it such as Amazon EC2 and Amazon Relational Database Service (Amazon RDS) instances. Finally, define how your VPCs communicate with each other across accounts, Availability Zones, or Regions. As you create subnets, you must associate them with a main VPC route table. By default, this route table will only contain the local IPv4 and IPv6 CIDRs of the VPC. A subnet can only be associated with one subnet route table. A route table can have multiple subnet associations. The route tables are used to control traffic leaving the subnet. Each subnet has a VPC route table. There is no single device for a VPC. The VPC software takes care of the routing for you. You can add more specific routes to provide traffic filtering for east/west traffic. In a VPC you can use both IPv4 and IPv6 addressing. With IPv4 you select and assign a VPC CIDR (Classless Inter-Domain Routing) block from a maximum size of /16 to a minimum size of /28. You can use any public addresses you own (in select Regions). We recommend you use private RFC 1918 addresses. Once you have a CIDR, you define subnets. Subnets can be between /16 and /28 in size and are bounded by Availability Zones. Each VPC subnet must be associated with a subnet route table.
 
 ## How can I connect to my Amazon VPC?
 
@@ -99,8 +88,6 @@ Yes, assuming the owner of the other VPC accepts your peering connection request
 [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) provides private connectivity between VPCs, AWS services, and your on-premises networks without exposing your traffic to the public internet. AWS PrivateLink makes it easy to connect services across different accounts and VPCs to significantly simplify your network architecture. This allows customers who may want to privately expose a service/application residing in one VPC (service provider) to other VPCs (consumer) within an AWS Region in a way that only consumer VPCs initiate connections to the service provider VPC. An example of this is the ability for your private applications to access service provider APIs.
 
 ### **AWS Transit Gateway**
-
-<!-- [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) provides a hub-and-spoke design for connecting VPCs and on-premises networks as a fully managed service. Transit Gateway acts as a highly available and scalable cloud router. -->
 
 [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) enables customers to connect thousands of VPCs. You can attach all your hybrid connectivity (VPN and Direct Connect connections) to a single Transit Gateway instance, consolidating and controlling your organization's entire AWS routing configuration in one place. Transit Gateway controls how traffic is routed among all the connected spoke networks using route tables. This hub-and-spoke model simplifies management and reduces operational costs because VPCs only connect to the Transit Gateway instance to gain access to the connected networks.
 
