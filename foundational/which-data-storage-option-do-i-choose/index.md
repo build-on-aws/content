@@ -1,13 +1,13 @@
 ---
-title: Which Data Storage Option Should I Choose?
-description: How to choose a data storage solution based on a scenario
+title: "Which Data Storage Option Should I Choose?"
+description: "How to choose a data storage solution based on a scenario"
 tags:
-    - data storage
-    - post
+    - data-storage
+    - foundational
     - aws
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: <expected publish date in YYYY-MM-DD format>
+date: 2022-12-19
 ---
 
 Modern applications need storage for data, logs, user files, and databases. As a cloud engineer, you can choose from object storage, block storage, and file system storage. Each type of storage can meet specific business requirements, but which one should you use? Let's examine a common scenario for each type of storage to learn when you should -- or shouldn't -- use them.
@@ -44,12 +44,4 @@ Despite this limitation, file storage can meet the requirements of most business
 
 ## Once More with Feeling
 
-Start with your storage needs, based on the application or task requirements, to choose which solution best fits.
-
-If you need to store large volumes of data, object storage is the best choice. It offers elastic scaling into the petabytes, where security, durability, and low latency are required.
-
-If your application performs frequent reads and writes of data, block storage is the best choice. It offers applications needing direct I/O access and optimized for high throughput of data read/write, and it provides durability by storing data redundantly and can be directly attached to a host server.
-
-Finally, file storage is a flexible general purpose storage solution that fulfills most business requirements by providing a shared file system accessible by business applications. It is available globally and has the same durability and security features as the block storage it is built on.
-
-If you want to learn more about each type of storage, check out these use cases, tutorials, and guides for [block storage](https://aws.amazon.com/ebs/), [object storage](https://aws.amazon.com/s3/), and  [file storage](https://aws.amazon.com/efs/).
+Start with your storage needs, based on the application or task requirements, to choose which solution best fits.If you need to store large volumes of data, object storage is the best choice. It offers elastic scaling into the petabytes, where security, durability, and low latency are required. If your application performs frequent reads and writes of data, block storage is the best choice. It offers applications needing direct I/O access and optimized for high throughput of data read/write, and it provides durability by storing data redundantly and can be directly attached to a host server. Finally, file storage is a flexible general purpose storage solution that fulfills most business requirements by providing a shared file system accessible by business applications. It is available globally and has the same durability and security features as the block storage it is built on. If you want to learn more about each type of storage, take a look at these use cases, tutorials, and guides for in the [AWS Developer Center](https://aws.amazon.com/getting-started/hands-on/?intClick=build_on&getting-started-all.sort-by=item.additionalFields.content-latest-publish-date&getting-started-all.sort-order=desc&awsf.getting-started-category=category%23storage&awsf.getting-started-level=*all&awsf.getting-started-content-type=*all).
