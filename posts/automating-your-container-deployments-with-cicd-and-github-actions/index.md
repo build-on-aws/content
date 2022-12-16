@@ -12,9 +12,9 @@ authorName: Jenna Pederson
 date: 2022-12-15
 ---
 
-You've built out the first version of your Flask web app and even containerized it with Docker so your developer teammates can run it locally. Now, it's time to figure out how to deploy this container into the world! You want your app deployed whenever you or your teammates push a new feature up to the repo. You also want to make sure that the code you're putting out into the world is high quality and delivers value to your customers right away. To do this, we'll create a simple CI/CD pipeline to deploy our container to infrastructure in the cloud.
+You've built out the first version of your Flask web app and even containerized it with Docker so your developer teammates can run it locally. Now, it's time to figure out how to deploy this container into the world! There are two key goals you want to accomplish with your deployment: first, you want your app to stay current, deploying whenever you or your teammates push a new feature up to the repo; second, you want to make sure your code is high-quality and immediately valuable to customers. To deliver on these goals, you'll need to create a simple CI/CD pipeline to deploy our container to infrastructure in the cloud.
 
-Upon push to the main branch, we'll trigger a GitHub Actions workflow that runs two jobs:
+For the CI/CD pipeline, we'll use GitHub Actions to create a workflow with two jobs. The two jobs below will be triggered when we push code to the main branch of our code repo:
 - a test job to run unit tests against our Flask app and
 - a deploy job to create a container image and deploy that to our container infrastructure in the cloud.
 
@@ -41,7 +41,7 @@ Let's get started!
 
 ## 1. Prerequisites
 
-To work through these examples, you'll need a few bits setup first:
+To work through these examples, you'll need a few bits set up first:
 - An AWS account. You can create your account [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
 - The CDK installed. You can find instructions for installing the CDK [here](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html). Note: For the CDK to work, you'll also need to have the AWS CLI installed and configured or setup the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_DEFAULT_REGION` as environment variables. The instructions above show you how to do both.
 - Docker Desktop installed. Here are the instructions to [install Docker Desktop](https://docs.docker.com/desktop/).
@@ -375,7 +375,7 @@ service = ecs.FargateService(self,
 	service_name="ecs-devops-sandbox-service")
 ```
 
-If any of the instances fails or stops, ECS will launch another instance of your task definition to replace it and maintain the desired count of tasks in the service. We always want at least one container running, so we'll use a service. If we were running a cron-like job, we could omit the service.
+If any of the instances fails or stops, ECS will launch another instance of your task definition to replace it and maintain the desired count of tasks in the service. We always want at least one container running, so we'll use a service. If we were running a one-time or scheduled job, we could omit the service as we wouldn't need to keep it running or restart it.
 
 💰💰💰 Note: In the sample code we copied, we are using Option 1. Option 2 (commented out) creates a load balancer and related AWS resources using the `ApplicationLoadBalancedFargateService` construct. These resources have non-trivial costs if left provisioned in your account, *even if you don't use them*. If you choose Option 2, be sure to clean up (`cdk destroy`) after working through this exercise. 
 
@@ -424,7 +424,7 @@ An action can be published on the GitHub Marketplace, either created by GitHub o
 We can also run a script like:
 -   `docker build` or `docker push`
 
-This let's us string multiple actions together to build, test, package up, and deploy our app. Each step is dependent on prior steps, so if the checkout code step isn't successful, we won't run the unit test step. Then we can set each job, build, test, deploy, etc. to be dependent on the previous job. If the test job fails, the deploy job won't run.
+This let's us string multiple actions together to build, test, package up, and deploy our app. Each step is dependent on prior steps, so if the checkout code step isn't successful, we won't run the unit test step. Then we can set each job to be dependent on the previous job, so if the test job fails, the deploy job won't run and deploy broken code.
 
 We could create our workflows directly from the GitHub UI, using one of the starter workflows in GitHub (in your repository, go to Actions -> New workflow - Choose a workflow). Today, we're using a customization of the starter workflows for testing a python app and for deploying to ECS.
 
@@ -560,11 +560,11 @@ If you're following along with the sample code, you shouldn't have to change any
 
 For more details on how to configure a workflow, checkout [Creating and managing GitHub Actions workflows](https://docs.github.com/en/actions/using-workflows).
 
-Before we commit and push all these changes to GitHub, we need to set up our access key id and secret access key for AWS in our repo. You'll probably want to create an IAM user specific to this task.
+Before we commit and push all these changes to GitHub, we need to set up our access key ID and secret access key for AWS in our repo. You'll probably want to create an IAM user specific to this task.
 
 ### Create IAM user
 
-In the AWS console, navigate to the IAM service and create a new user with a user name like `github-actions-user`, making sure to give it programmatic access. Then attach the policy below, replacing the placeholder values (<YOUR_AWS_ACCOUNT_ID> and <YOUR_AWS_REGION>) with your AWS Account ID and the region you are using:
+In the AWS console, navigate to the IAM service and create a new user with a user name like `github-actions-user`, making sure to give it programmatic access. Then attach the policy below, replacing the placeholder values (<YOUR_AWS_ACCOUNT_ID> and <YOUR_AWS_REGION>) with your AWS account ID and the region you are using:
 
 ```json
 {
