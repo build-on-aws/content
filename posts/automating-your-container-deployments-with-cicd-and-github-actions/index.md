@@ -9,7 +9,7 @@ tags:
   - cdk
 authorGithubAlias: jennapederson
 authorName: Jenna Pederson
-date: 2022-12-15
+date: 2022-12-16
 ---
 
 You've built out the first version of your Flask web app and even containerized it with Docker so your developer teammates can run it locally. Now, it's time to figure out how to deploy this container into the world! There are two key goals you want to accomplish with your deployment: first, you want your app to stay current, deploying whenever you or your teammates push a new feature up to the repo; second, you want to make sure your code is high-quality and immediately valuable to customers. To deliver on these goals, you'll need to create a simple CI/CD pipeline to deploy our container to infrastructure in the cloud.
