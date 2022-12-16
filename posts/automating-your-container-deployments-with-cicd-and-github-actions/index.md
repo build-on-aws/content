@@ -667,4 +667,4 @@ In this post, you learned how to use the CDK to provision infrastructure to depl
 
 Next, you might consider exploring other ways to [use containers in the cloud](https://www.buildon.aws/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/) or creating more complex CI/CD pipelines to automate more of your infrastructure and application.
 
-If you'd like to try this out as a workshop, you can learn more about [automating CI/CD on AWS with GitHub Actions](# Automating CI/CD on AWS with GitHub Actions) that also touches on how to integrate this GitHub workflow with Amazon CodePipeline.
+If you'd like to try this out as a workshop, you can learn more about [automating CI/CD on AWS with GitHub Actions](https://www.eventbox.dev/published/lesson/automating-cicd-on-aws-with-github-actions/index.html) that also touches on how to integrate this GitHub workflow with Amazon CodePipeline.
