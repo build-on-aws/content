@@ -228,4 +228,4 @@ aws s3 rb s3://<YOUR_BUCKET_LOCATION> --force
 
 ## Conclusion
 
-Congratulations! You have finished the Creating an ETL Pipeline with Amazon EMR and Apache Spark tutorial. Continue your journey with AWS by following the next steps section below.
+Congratulations! You have finished the tutorial on creating an ETL pipeline with Amazon EMR and Apache Spark. In this tutorial, we learnt how we can extract the data from Amazon S3, and then transform the data based on our requirement, by simply using a Glue ETL (pySpark) job. And then finally analyze the data using using SQL via Amazon Athena.
