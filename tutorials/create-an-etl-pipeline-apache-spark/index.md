@@ -39,9 +39,6 @@ In this guide, you will:
 
 Let's get started!
 
-| ToC |
-|-----|
-
 ## Use case and problem statement
 
 For this tutorial, let's assume you have a vendor who provides incremental sales data at the end of every month. And the file arrives in S3 as a `CSV` file and it needs to be processed and made available to your data analysts for querying and analysis. 
