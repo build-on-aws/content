@@ -22,7 +22,7 @@ Starting on the 24th of November 2021, people that maintained JVM-based applicat
 
 It was not the first time such an incident appeared in the news headlines, but recovering from that was pretty usual – many companies spent significant time patching or remediating the issue. Unfortunately, the library's popularity definitely did not help in this case, as not only regular back-end implementations were affected, but many other workloads – like databases, messaging servers, and other critical infrastructure components.
 
-Besides the usual recovery time, our industry asked again: what can we do to protect ourselves from such an impact in the future?
+Besides, the usual recovery time, our industry asked again: what can we do to protect ourselves from such an impact in the future?
 
 ## Why should I shift to the left, though?
 
@@ -54,7 +54,7 @@ As this approach seems relevant, you must be aware of one additional element: _d
 
 To address that, cloud providers often refer to the [shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model/), where the provider takes care of the security **of the cloud** and the customer takes care of security **in the cloud**. Providing such a model simplifies the scope, but at the same time, you need more precise recommendations on the implementation details.
 
-AWS also helps with this by providing actionable advice in the form of [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html), in particular – with its _Security_ pillar. Thanks to that, you can leverage the best practices and knowledge of multiple teams built on AWS. It’s a great way to stand on the shoulder of giants and learn from someone else’s learnings.
+AWS also helps with this by providing actionable advice in the form of [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html), in particular – with its _Security_ pillar. As AWS, we have years of experience architecting solutions across a wide variety of business verticals and use cases, and from those experiences we have identified best practices and core strategies for architecting systems in the cloud collected in the document mentioned above. It’s a great way to stand on the shoulder of giants and learn from someone else’s learnings.
 
 ## Let’s talk about the tools, finally!
 
@@ -175,9 +175,9 @@ Now, having a pipeline set up and properly configured, you can inspect in the sa
 
 ## Is that everything?
 
-Not at all! Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *Amazon CodeGuru* team on your behalf.
+Not at all! 
 
-Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all recommendations inside [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html). To give just one example – you can leverage the _[chaos engineering](https://principlesofchaos.org/)_ techniques and, with the help of the [AWS Fault Injection Simulator](https://aws.amazon.com/fis/) service, reliably manage and automate experiments in your path to a more robust and secure infrastructure.
+Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *Amazon CodeGuru* team on your behalf. Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all security-related recommendations inside [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html). 
 
 I also encourage you to dive deeper into the [provided example](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example) (e.g., how it tackles multiple languages in a single repository or a new feature in _CodeGuru_: [files exclusion and rules suppression](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendation-suppression.html)).
 
