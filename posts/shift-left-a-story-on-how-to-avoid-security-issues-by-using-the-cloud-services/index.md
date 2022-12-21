@@ -60,13 +60,13 @@ AWS also helps with this by providing actionable advice in the form of [AWS Well
 
 If you look into the _SAST_ tooling landscape, you will see many choices, available as open-source or paid software. Speaking about choice, it is worth remembering that *doing the right thing on the security path should be easy*. However, adding an entirely new tool from an external provider can be challenging for organizations of any size. This is where listening to advice collected in the *AWS Well-Architected Framework* can actually pay off.
 
-If your workloads are deployed on AWS, you can easily add a convenient and fully-managed tool from the _SAST_ landscape called [Amazon CodeGuru](https://aws.amazon.com/codeguru/), which helps with reviewing code of applications written in *Python* and *Java*.
-
 ![Place of *Amazon CodeGuru* and *Amazon DevOps Guru* in the *SDLC* and *CI*/*CD* pipelines. Source: my presentation from *AWS Berlin Summit 2022*](./images/amazon-codeguru-devops-guru-place-in-ci-cd-pipeline.png)
 
-And speaking about specific examples: [Amazon CodeGuru](https://aws.amazon.com/codeguru/) scans your code and provides insights about insecure usage of AWS API and SDKs. It proactively detects secrets and credentials hardcoded inside, common vulnerabilities (like mentioned at the beginning *Log4shell*, a [Log4j log injection attack](https://docs.aws.amazon.com/codeguru/detector-library/java/log-injection/)), and provides insights about the most popular [*OWASP*](https://owasp.org/www-project-top-ten/) security risks. I have not exhausted the list, and the catalog of detected issues is available [here](https://docs.aws.amazon.com/codeguru/detector-library/).
+If your workloads are deployed on AWS, you can easily add a convenient and fully-managed tool from the _SAST_ landscape called *Amazon CodeGuru*, which helps with reviewing code of applications written in *Python* and *Java*. Notice in the image above that *CodeGuru* sits in the pipeline in the building and testing phase - which is a direct implementation of the *shift-left* approach to security when it comes to the software development life cycle (_SDLC_) processes. 
 
 ![Code areas addressed by *Amazon CodeGuru Reviewer*. Source: my presentation from *AWS Berlin Summit 2022*](./images/code-areas-addressed-by-codeguru-reviewer.png)
+
+And as you can see on the image above, [Amazon CodeGuru](https://catalog.us-east-1.prod.workshops.aws/workshops/fa518794-acd4-4178-80d3-97fa62f9deff) scans your code and provides insights about insecure usage of AWS API and SDKs. It proactively detects secrets and credentials hardcoded inside, common vulnerabilities (like mentioned at the beginning *Log4shell*, a [Log4j log injection attack](https://docs.aws.amazon.com/codeguru/detector-library/java/log-injection/)), and provides insights about the most popular [*OWASP*](/posts/owasp-top-10-defined/01-what-is-broken-access-control/) security risks. I have not exhausted the list, but you can [review the catalog of detected issues](https://docs.aws.amazon.com/codeguru/detector-library/) to learn more.
 
 ## Talk is cheap. Show me how it works!
 
@@ -128,7 +128,7 @@ roleForAmazonCodeGuruReviewer.addManagedPolicy(
 // ... and here is where we add more permissions, see the original file.
 ```
 
-After that, you can create a _GitHub Actions_ pipeline that will have variables configured to work with your account (details are inside [.github/workflows/codeguru-reviewer-java.yml](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/.github/workflows/codeguru-reviewer-java.yml) file):
+After that, you can create a _GitHub Actions_ pipeline that will have variables configured to work with your account. If you do not know how to configure that in your repository (parts referred as `secrets` in the listing below), you can refer to the other post, where we showed how to [automate your container deployments with CI/CD and GitHub Actions](/posts/automating-your-container-deployments-with-cicd-and-github-actions/). Let's have a look how to add *Amazon CodeGuru Reviewer* action that will leverage the *IAM* role mentioned above (source: [.github/workflows/codeguru-reviewer-java.yml](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/.github/workflows/codeguru-reviewer-java.yml)):
 
 ```yaml
   # Configure AWS Credentials.
@@ -175,10 +175,8 @@ Now, having a pipeline set up and properly configured, you can inspect in the sa
 
 ## Is that everything?
 
-Not at all! 
+Not at all!
 
 Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *Amazon CodeGuru* team on your behalf. Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all security-related recommendations inside [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html). 
 
 I also encourage you to dive deeper into the [provided example](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example) (e.g., how it tackles multiple languages in a single repository or a new feature in _CodeGuru_: [files exclusion and rules suppression](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendation-suppression.html)).
-
-Last but not least - if you have any questions, feel free to reach out in the comments below, my contact details on [my blog](https://awsmaniac.com/contact), or on social media: [Twitter](https://twitter.com/afronski), [Instagram](https://instagram.com/afronsky), or [LinkedIn](https://www.linkedin.com/in/afronski/).
