@@ -2,12 +2,12 @@
 title:
 description: 
 tags:
-  - AI Explainability
-  - AI Fairness
-  - Machine Learning
-  - Artificial Intelligence
-  - LIME 
-  - Local Interpretable Model-agnostic Explanation
+  - ai explainability
+  - ai fairness
+  - machine learning
+  - artificial intelligence
+  - lIME 
+  - local interpretable model-agnostic explanation
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
