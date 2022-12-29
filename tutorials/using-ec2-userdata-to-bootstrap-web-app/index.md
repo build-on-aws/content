@@ -11,7 +11,7 @@ authorName: Cobus Bernard
 date: 2023-01-03
 ---
 
-Setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming and error prone when done manually. EC2 instances have ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when it starts up, and you can automate creating the all the infrastructure along with these scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/). In this tutorial, **you will learn** to:
+Setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming and error prone when done manually. EC2 instances have ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when it starts up, and you can automate creating the all the infrastructure along with these scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots. In this tutorial, **you will learn** to:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a security group with inbound access, and an IAM instance profile.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
