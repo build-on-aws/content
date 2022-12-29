@@ -6,7 +6,7 @@ tags:
     - billing
     - essentials
     - aws
-authorGithubAlias: cobusbernard-amazon
+authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2021-10-05
 ---
