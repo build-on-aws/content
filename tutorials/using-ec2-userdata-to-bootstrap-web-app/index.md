@@ -535,7 +535,7 @@ Before we can deploy our CDK app, we need to configure CDK on the account you ar
 env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 ```
 
-This will use the Account ID and Region configured in the AWS CLI - if you have not yet set this up, please follow [this tutorial section](https://aws.amazon.com/getting-started/guides/setup-environment/module-three/). We also need to bootstrap CDK in our account — this will create the required infrastructure for CDK to manage infrastructure in your account, and only needs to be done once per account. If you have already done the bootstrapping, or are not sure, you can just run the command again, it will only bootstrap if needed. To bootstrap CDK, run `cdk bootstrap` (your account ID will be different from the placeholder ones below):
+This will use the Account ID and Region configured in the AWS CLI - if you have not yet set this up, please follow [this tutorial section](https://aws.amazon.com/getting-started/guides/setup-environment/module-three/). We also need to bootstrap CDK in our account. This will create the required infrastructure for CDK to manage infrastructure in your account, and it only needs to be done once per account. If you have already done the bootstrapping, or are not sure, you can just run the command again. It will only bootstrap if needed. To bootstrap CDK, run `cdk bootstrap` (your account ID will be different from the placeholder ones below):
 
 ```bash
 cdk bootstrap
