@@ -11,17 +11,18 @@ date: 2022-10-11
 ---
 
 This is a 10-part series about Picturesocial:
+
 1. How to containerize an app in less than 15 minutes (this post)
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
 4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
 5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
 
-Containers is undoubtedly a hot topic. Some of us are have been working with these concepts for years, others are just getting started. Either way, I would like to be your buddy and guide you through your container journey. Together, in this series, we will build Picturesocial, a new Social Media platform to share photos. As we build it, we will make architecture decisions and explore trade-offs. 
+Containers is undoubtedly a hot topic. Some of us are have been working with these concepts for years, others are just getting started. Either way, I would like to be your buddy and guide you through your container journey. Together, in this series, we will build Picturesocial, a new Social Media platform to share photos. As we build it, we will make architecture decisions and explore trade-offs.
 
 ## What is a container?
 
-But what is a container? Imagine the living room of your dreams, with a nice painting, confortable sofa for reading or hanging out, a nice coffee table and some pretty lamps. You finally feel like it’s perfect just to realize that you have to move to another apartment and start from scratch.
+But what is a container? Imagine the living room of your dreams, with a nice painting, comfortable sofa for reading or hanging out, a nice coffee table and some pretty lamps. You finally feel like it’s perfect just to realize that you have to move to another apartment and start from scratch.
 
 Now imagine that you design the exact same living room but on one of those big metal cargo containers. That living room can come with you wherever you go, it can be on a ship in the middle of the ocean, on a plane or on a truck crossing the Andes.
 
@@ -32,7 +33,7 @@ When your application is containerized, your dependencies like database or queue
 To start, we are going to learn some basic concepts about Docker containers that will help us a lot on our journey. Docker lets you deliver software in packages (containers) using operating system-level virtualization.
 
 * **Image** This is one of the most important parts of a container solution because it’s where an application and its state lives. A container image happens when your application together with a Dockerfile is built using the Docker daemon that comes when you install Docker in your environment. I always think about an image as an old fashioned ISO file, where you capture a computer with files, configurations, applications installed, etc. in a simple file that can be used almost everywhere. But compared with an ISO, a container image contains just a small part of the OS components, libraries, runtime and application, and they are much smaller in size and compute requirements.
-* **Container** When your image is deployed and executed, it is called a container. 
+* **Container** When your image is deployed and executed, it is called a container.
 * **Engine** Your container needs to run somewhere where Docker is installed. They way Docker communicates with the hardware where it is installed is through APIs. Those APIs are part of the Docker Engine. With the Docker Engine, your container gets access to compute power, storage and networking.
 * **Registry** The place where you save your container images. The registry can be public or private. A registry not only stores the latest image, but also the used tags, and some metadata about 1) when the image was uploaded 2) who uploaded the image and 3) when an image is pulled from the registry. That’s why we can’t talk about containers without a registry. Even when you work locally, your computer is the registry.
 
@@ -80,7 +81,7 @@ Some other important commands for a Dockerfile are:
 RUN mkdir demo
 ```
 
-This will create a folder named demo. 
+This will create a folder named demo.
 
 **CMD** `CMD` is used to execute bash commands but it can only be used once, if you have more than one CMD, the last one will be the only one that gets executed. CMD is only used to provide defaults for your container. For example:
 
@@ -94,7 +95,7 @@ Learn more about [Dockerfile commands](https://docs.docker.com/engine/reference/
 
 I always say that your Dockerfile is like your recipe book. You can reuse them for any similar applications. In my case, I will use the same .NET 6 Dockerfile template for all the APIs that I’ll expose on Picturesocial.
 
-Now that we have some context about containers, let’s cover more about the container registry on AWS. You can use Amazon ECR to store your container images with either private or public access. The advantage is that the access to your own images is handled by AWS IAM instead of using external credentials. 
+Now that we have some context about containers, let’s cover more about the container registry on AWS. You can use Amazon ECR to store your container images with either private or public access. The advantage is that the access to your own images is handled by AWS IAM instead of using external credentials.
 
 ## Containerizing an API and Pushing to ECR
 
@@ -114,7 +115,7 @@ If this is your first time working with AWS CLI or you need a refresher on how t
 
 ### Walk-through
 
-In this example, we will learn about how to containerize an API developed in C# using .NET 6 that returns the text passed as parameter. This is going to be the template that will work for all of the APIs of Picturesocial. We are going to containerize this application because we don’t want to change recipes, scripts, and dependencies when we go from local to cloud environments or vice versa. We want to maintain consistency across changes in the app. 
+In this example, we will learn about how to containerize an API developed in C# using .NET 6 that returns the text passed as parameter. This is going to be the template that will work for all of the APIs of Picturesocial. We are going to containerize this application because we don’t want to change recipes, scripts, and dependencies when we go from local to cloud environments or vice versa. We want to maintain consistency across changes in the app.
 
 You can follow along with this walk-through using the "ep1" branch of [this repository](https://github.com/aws-samples/picture-social-sample).
 
@@ -130,7 +131,7 @@ git clone https://github.com/aws-samples/picture-social-sample --branch ep1
 cd picture-social-sample/HelloWorld
 ```
 
-3. Now, before starting with the next steps, we are going to check if Docker is installed correctly and working. Let’s try the following command. We should get at least Docker version 20.10 as output. 
+3. Now, before starting with the next steps, we are going to check if Docker is installed correctly and working. Let’s try the following command. We should get at least Docker version 20.10 as output.
 
 ```bash
 docker --help
@@ -149,21 +150,21 @@ docker --help
 docker build -t helloworld:latest .
 ```
 
-6. While writing this, I learned that if you are using an Apple MacBook with Apple Silicon, the command to build changes a little bit. This way, we are telling Docker that we are building an image to be executed on `amd64`. 
+6. While writing this, I learned that if you are using an Apple MacBook with Apple Silicon, the command to build changes a little bit. This way, we are telling Docker that we are building an image to be executed on `amd64`.
 
 ```bash
 docker buildx build —platform=linux/amd64 -t helloworld:latest .
 ```
 
-7. Now, you can run your container by running `docker run`, using the `-d` parameter to run the container in the background, and `-p` parameter to map the port. As we can see in our Dockerfile, the container is using the port 5111 and we are mapping the same port for execution. 
+7. Now, you can run your container by running `docker run`, using the `-d` parameter to run the container in the background, and `-p` parameter to map the port. As we can see in our Dockerfile, the container is using the port 5111 and we are mapping the same port for execution.
 
 ```bash
 docker run -d -p 5111:5111 helloworld:latest
 ```
 
-8. After we run this command, we can open the browser and type: [http://localhost:5111/api/HelloWorld/johndoe](http://localhost:5111/api/HelloWorld/johndoe). We should get a “Hello johndoe” output. You can change Johndoe in the url to any value you want and test it. Now that we are printing the expected string, our container is running correctly and we can upload it to ECR.
+8. After we run this command, we can open the browser and type: [http://localhost:5111/api/HelloWorld/johndoe](http://localhost:5111/api/HelloWorld/johndoe). We should get a `Hello johndoe` output. You can change `johndoe` in the url to any value you want and test it. Now that we are printing the expected string, our container is running correctly and we can upload it to ECR.
 
-9. Now, we are going to create a private container registry, our own ECR repository named “helloworld”.
+9. Now, we are going to create a private container registry, our own ECR repository named `helloworld`.
 
 ```bash
 aws ecr create-repository --repository-name helloworld
@@ -171,7 +172,7 @@ aws ecr create-repository --repository-name helloworld
 
 10. Let’s find out the fully qualified domain name (FQDN) of our registry so we can use it in the next steps to mark our image names with the repository name. That way, we tell docker this specific image has to be used for our remote registry instead of the one running in our development environment. For this project, we are using the `us-east-1` region, so you can change that part of the FQDN. The name is composed like this:
 
-```
+```text
 [aws account id].dkr.ecr.[aws region].amazonaws.com
 #for example for account id: 777777777777 on region: us-east-1
 777777777777.dkr.ecr.us-east-1.amazonaws.com
@@ -190,7 +191,7 @@ docker tag helloworld:latest [aws account id].dkr.ecr.[aws region].amazonaws.com
 docker push [aws account id].dkr.ecr.[aws region].amazonaws.com/helloworld:latest
 ```
 
-If you read this far, that means you made it. Congratulations! You containerized your very first application. 
+If you read this far, that means you made it. Congratulations! You containerized your very first application.
 
 The next [post](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/) will be focused on learning about container orchestrators, specifically Kubernetes. I will answer the question: What is Kubernetes and why should I care?
 

@@ -15,6 +15,7 @@ date: 2022-12-16
 You've built out the first version of your Flask web app and even containerized it with Docker so your developer teammates can run it locally. Now, it's time to figure out how to deploy this container into the world! There are two key goals you want to accomplish with your deployment: first, you want your app to stay current, deploying whenever you or your teammates push a new feature up to the repo; second, you want to make sure your code is high-quality and immediately valuable to customers. To deliver on these goals, you'll need to create a simple CI/CD pipeline to deploy our container to infrastructure in the cloud.
 
 For the CI/CD pipeline, we'll use GitHub Actions to create a workflow with two jobs. The two jobs below will be triggered when we push code to the main branch of our code repo:
+
 - a test job to run unit tests against our Flask app and
 - a deploy job to create a container image and deploy that to our container infrastructure in the cloud.
 
@@ -30,7 +31,7 @@ Let's get started!
 
 | ToC                                                                            |
 |--------------------------------------------------------------------------------|
-| Steps                                                                          | 
+| Steps                                                                          |
 | 1. [Prerequisites](#1-prerequisites)                                           |
 | 2. [Configure the Flask App](#2-configure-the-flask-app)                       |
 | 3. [Provision Infrastructure Resources](#3-provision-infrastructure-resources) |
@@ -42,6 +43,7 @@ Let's get started!
 ## 1. Prerequisites
 
 To work through these examples, you'll need a few bits set up first:
+
 - An AWS account. You can create your account [here](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
 - The CDK installed. You can find instructions for installing the CDK [here](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html). Note: For the CDK to work, you'll also need to have the AWS CLI installed and configured or setup the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_DEFAULT_REGION` as environment variables. The instructions above show you how to do both.
 - Docker Desktop installed. Here are the instructions to [install Docker Desktop](https://docs.docker.com/desktop/).
@@ -56,13 +58,13 @@ Before we provision the infrastruture, let's review our containerized Flask app 
 
 First, clone the repository using the `start-here` branch:
 
-```
+```bash
 $ git clone https://github.com/jennapederson/hello-flask -b start-here
 ```
 
 We have a containerized Flask app with the following file structure:
 
-![Shows hello-flask app file structure](images/flask-app-file-structure.png)
+![Shows hello-flask app file structure](images/flask-app-file-structure.png "Shows hello-flask app file structure")
 
 In the main application file, `app.py`, there is one route that reverses the value of a string passed on the URL path and returns it:
 
@@ -102,7 +104,7 @@ unittest.main()
 
 We've already got a `Dockerfile` to set up our container image. This file is a template that gives instructions to [Docker](https://docs.docker.com/get-started/overview/) on how to create our container. The first line starting with `FROM` bases our container on a public Python image and then from there we customize it for our use. We've set up the working directory (`WORKDIR`), copy application files into that directory on the container (`COPY`), install dependencies (`RUN pip install`), open up port 8080 (`EXPOSE`), and run the command to run the app (`CMD python`).
 
-```
+```dockerfile
 FROM python:3  
 # Set application working directory  
 WORKDIR /usr/src/app  
@@ -123,13 +125,13 @@ Let's run this app locally to make sure it works before we start configuring it 
 
 Make sure Docker Desktop is running and then, from the `hello-flask` project directory, run the following command to build the container image:
 
-```
+```bash
 $ docker build -t hello-flask .
 ```
 
 When this is complete, you'll have a container image. Next, we'll run the command to run a container based on that image:
 
-```
+```bash
 $ docker run -dp 8080:8080 --name hello-flask-1 hello-flask
 ```
 
@@ -145,7 +147,7 @@ You can also use Docker Desktop Dashboard to see if the container is running.
 
 You can also make sure your unit test is working by running the following commands in your project directory:
 
-```
+```bash
 $ pip install -r requirements.txt
 $ pip install pytest
 $ pytest
@@ -203,6 +205,7 @@ First, we'll initialize a CDK app that uses Python. In a new project directory, 
 ```bash
 $ cdk init --language python
 ```
+
 This creates the file structure shown below. Today, we'll be hanging out in the `ecs_devops_sandbox_cdk/ecs_devops_sandbox_cdk_stack.py` file.
 
 ![Shows 'ecs-devops-sandbox-cdk` file structure](images/cdk-file-structure.png)
@@ -304,6 +307,7 @@ class EcsDevopsSandboxCdkStack(cdk.Stack):
 ```
 
 #### Create VPC and Task Execution Role
+
 The code below sets up our VPC and a task execution role so that the ECS task can pull our container image from Amazon ECR, the repository where we'll store our container images.
 
 ```python
@@ -331,6 +335,7 @@ execution_role.add_to_policy(iam.PolicyStatement(
 ```
 
 #### Create Container Image Repository
+
 Next, we need a place to put our container images after we've built them so that they can be deployed. The code below creates a private ECR repository.
 
 ```python
@@ -377,14 +382,15 @@ service = ecs.FargateService(self,
 
 If any of the instances fails or stops, ECS will launch another instance of your task definition to replace it and maintain the desired count of tasks in the service. We always want at least one container running, so we'll use a service. If we were running a one-time or scheduled job, we could omit the service as we wouldn't need to keep it running or restart it.
 
-💰💰💰 Note: In the sample code we copied, we are using Option 1. Option 2 (commented out) creates a load balancer and related AWS resources using the `ApplicationLoadBalancedFargateService` construct. These resources have non-trivial costs if left provisioned in your account, *even if you don't use them*. If you choose Option 2, be sure to clean up (`cdk destroy`) after working through this exercise. 
+💰💰💰 Note: In the sample code we copied, we are using Option 1. Option 2 (commented out) creates a load balancer and related AWS resources using the `ApplicationLoadBalancedFargateService` construct. These resources have non-trivial costs if left provisioned in your account, *even if you don't use them*. If you choose Option 2, be sure to clean up (`cdk destroy`) after working through this exercise.
 
 ### Deploy CDK App
+
 Now that we've created our CDK stack of resources, we can deploy it to create the infrastructure in the cloud.
 
 First, activate the python environment and install dependencies like this:
 
-```
+```bash
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
@@ -404,31 +410,36 @@ Once the CDK deploy finishes, let's navigate to ECS (Elastic Container Service) 
 Now that we've created the infrastructure, we need to deploy our application container to the infrastructure.
 
 ## 4. Setup GitHub Actions Workflow
+
 We need a tool to implement our CI/CD pipeline to build and test our app and deploy it to that infrastructure. Today, we'll use GitHub Actions. We could even build and test our *infrastructure code* and deploy it with GitHub Actions, but we'll save that for another day.
 
 ### What Are GitHub Actions
+
 GitHub Actions provide a way to implement complex orchestration and CI/CD functionality directly in GitHub by initiating a workflow on any GitHub event like a push to a branch or a merge to main or even adding a label every time an issue is opened.
 
 ### Parts of a Workflow
+
 The image below shows the parts of a workflow. A workflow runs one or more jobs that runs inside it's own runner or container. Each job has a series of steps and each step runs a specific action or script.
 
 ![Shows parts of a GitHub workflow, where an event triggers a runner runs one job with 3 steps. Then shows a second runner running a second job and 4 steps.](images/parts-of-a-workflow.png)
 
 An action can be published on the GitHub Marketplace, either created by GitHub or published by someone else. For example:
 
--   Checkout code - an action created by the GitHub organization
-	- `actions/checkout@v3`
--   Configure aws credentials - an action on the marketplace created by AWS
-	- `aws-actions/configure-aws-credentials@v1`
+- Checkout code - an action created by the GitHub organization
+  - `actions/checkout@v3`
+- Configure aws credentials - an action on the marketplace created by AWS
+  - `aws-actions/configure-aws-credentials@v1`
 
 We can also run a script like:
--   `docker build` or `docker push`
+
+- `docker build` or `docker push`
 
 This let's us string multiple actions together to build, test, package up, and deploy our app. Each step is dependent on prior steps, so if the checkout code step isn't successful, we won't run the unit test step. Then we can set each job to be dependent on the previous job, so if the test job fails, the deploy job won't run and deploy broken code.
 
 We could create our workflows directly from the GitHub UI, using one of the starter workflows in GitHub (in your repository, go to Actions -> New workflow - Choose a workflow). Today, we're using a customization of the starter workflows for testing a python app and for deploying to ECS.
 
 Let's cover the steps to create this workflow. We'll be setting up:
+
 - one workflow
 - that triggers when there's a push to the main branch
 - with two jobs, a test job and a deploy job
@@ -542,21 +553,21 @@ If you're following along with the sample code, you shouldn't have to change any
 - Lines 8-16: This sets up some environment variables to be used throughout the workflow
 - Lines 18-19: This adds read permission to the contents of the repo for all jobs
 - Lines 23-45: Configures the test job
-	- Line 27: Checks out the code
-	- Lines 28-31: Sets up Python with a specific version
-	- Lines 32-36: Installs dependencies
-	- Lines 37-42: Lints the code to check for syntax errors, stopping the build if any are found
-	- Lines 43-45: Runs the unit tests
+  - Line 27: Checks out the code
+  - Lines 28-31: Sets up Python with a specific version
+  - Lines 32-36: Installs dependencies
+  - Lines 37-42: Lints the code to check for syntax errors, stopping the build if any are found
+  - Lines 43-45: Runs the unit tests
 - Lines 47-95: Configures the deploy job
-	- Line 50: Indicates that this job depends on a successful run of the test job
-	- Lines 54-55: Checks out the code
-	- Lines 57-62: Uses an external workflow `aws-actions/configure-aws-credentials@v1` to configure our AWS credentials with the environment variables we set earlier and our access key ID and secret access key (that we'll set up in the next step)
-	- Lines 64-66: Using an external workflow `aws-actions/amazon-ecr-login@v1`, logs in to ECR using the AWS credentials we just configured
-	- Lines 68-79: Builds, tags, and pushes our container image to ECR
-		- Line 71: Uses an output from the previous step as the registry to use
-		- Lines 77-79: Runs the docker commands to build, tag, and push the image
-	- Lines 81-87: Using `aws-actions/amazon-ecs-render-task-definition@v1`, updates the ECS task definition with the values set in environment variables
-	- Lines 89-95: Uses `aws-actions/amazon-ecs-deploy-task-definition@v1` to deploy the task definition to the ECS cluster
+  - Line 50: Indicates that this job depends on a successful run of the test job
+  - Lines 54-55: Checks out the code
+  - Lines 57-62: Uses an external workflow `aws-actions/configure-aws-credentials@v1` to configure our AWS credentials with the environment variables we set earlier and our access key ID and secret access key (that we'll set up in the next step)
+  - Lines 64-66: Using an external workflow `aws-actions/amazon-ecr-login@v1`, logs in to ECR using the AWS credentials we just configured
+  - Lines 68-79: Builds, tags, and pushes our container image to ECR
+    - Line 71: Uses an output from the previous step as the registry to use
+    - Lines 77-79: Runs the docker commands to build, tag, and push the image
+  - Lines 81-87: Using `aws-actions/amazon-ecs-render-task-definition@v1`, updates the ECS task definition with the values set in environment variables
+  - Lines 89-95: Uses `aws-actions/amazon-ecs-deploy-task-definition@v1` to deploy the task definition to the ECS cluster
 
 For more details on how to configure a workflow, checkout [Creating and managing GitHub Actions workflows](https://docs.github.com/en/actions/using-workflows).
 
@@ -657,7 +668,7 @@ We have success!
 
 If you're done using the cloud resources we created in this project, you can destroy them now to ensure you are not billed for their use. To do that, navigate back to the `ecs-devops-sandbox-repository` project at the command line and run:
 
-```
+```bash
 $ cdk destroy
 ```
 

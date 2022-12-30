@@ -10,7 +10,7 @@ authorName: Donnie Prakoso
 date: 2022-10-28
 ---
 
-# Setting up VM as Remote Development
+## Setting up VM as Remote Development
 
 In this article, you will learn how to provision a virtual machine for your development environment. This will give you the freedom to work with any devices and the flexibility to configure the specifications to meet your needs.
 
@@ -45,24 +45,24 @@ AMI stands for Amazon Machine Image — a template for/from the EC2 instance, wh
 
 First open the Amazon EC2 console and navigate to "AMI Catalog"
 
-![Amazon EC2 console and navigating AMI Catalog](images/1-ami-catalog.png)
+![Amazon EC2 console and navigating AMI Catalog](images/1-ami-catalog.png "Amazon EC2 console and navigating AMI Catalog")
 
-Select the AMI you will use by clicking on the "Select" button
-![Selecting AMI](images/2-choose-ami.png)
+Select the AMI you will use by clicking on the `Select` button
+![Selecting AMI](images/2-choose-ami.png "Selecting AMI")
 
-Then, click the "Launch Instance with AMI" button — don't worry, we won't be launching the instance.
+Then, click the `Launch Instance with AMI` button — don't worry, we won't be launching the instance.
 
-![Click Launch Instance with AMI](images/3-select-ami.png)
+![Click Launch Instance with AMI](images/3-select-ami.png "Click Launch Instance with AMI")
 
 On the left, you can see the Amazon Machine Image (AMI), and this is the name of the AMI image we ordered. Copy this value to use in the next step.
 
-![Copy AMI name](images/4-copy-ami.png)
+![Copy AMI name](images/4-copy-ami.png "Copy AMI name")
 
 In addition, you also need to define the [EC2 type](https://aws.amazon.com/ec2/instance-types/) that you want to use. Remember, there's no need to start with a high specification machine, until now I still use `t2.micro` and I only need to upgrade when I need more power.
 
 ## Step 3: Apply CDK App
 
-Once you have all the information, you can now deploy EC2 with CDK. Of course, you need to do [installation of AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install) and do [bootstraping](https://docs.aws .amazon.com/cdk/v2/guide/getting_started.html#getting_started_bootstrap).
+Once you have all the information, you can now deploy EC2 with CDK. Of course, you need to do [installation of AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install) and do [bootstrapping](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_bootstrap).
 
 ### Code Review
 
@@ -214,7 +214,7 @@ At this stage, every time we reboot the instance, we need to remount it manually
 
 Automatic mounting for EBS will make it easier for us to access data every time we make changes to the EC2 specification — such as from t3.nano to t3.small — because it will be mounted automatically after the `cdk deploy` process is complete.
 
-There are several ways to mount EBS. My favorite approach is using UUID as it persists the right device for mounting. You can read more on this approach [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html#ebs- mount-after-reboot).
+There are several ways to mount EBS. My favorite approach is using UUID as it persists the right device for mounting. You can read more on this approach [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html#ebs-mount-after-reboot).
 
 First, we need to get the UUID of our EBS volume
 
@@ -263,7 +263,7 @@ ssh -i <KEY_PAIR> ubuntu@<EIP ADDRESS>
 
 For easy access, you can shorten the following command by configuring it in the `~/.ssh/config` file.
 
-```
+```text
 Host <HOST ALIAS>
      HostName <IP ADDRESS>
      ubuntu users
@@ -273,7 +273,7 @@ Host <HOST ALIAS>
 
 Here's an example of my configuration:
 
-```
+```text
 Host remote-dev
         HostName 1.2.3.4
         User ubuntu
@@ -319,7 +319,7 @@ ssh -N -L <LOCAL PORT>:localhost:<REMOTE PORT> ubuntu@<IP ADDRESS>
 
 For example, if I wanted to access port 8080 on my remote VM, I would run the following command:
 
-```
+```bash
 ssh -N -L 8080:localhost:8080 ubuntu@123.456.78.9
 ```
 
