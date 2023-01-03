@@ -2,7 +2,7 @@
 title: Getting Started with Amplify on React Native
 description: Take an existing React Native app and gradually add AWS Amplify DataStore, Amplify Auth and API to facilitate authentication and offline first development.
 tags:
-    - aws amplify auth
+    - aws-amplify-auth
     - aws amplify dataStore
     - aws amplify api
     - offline app development
@@ -17,8 +17,8 @@ In this post we're going to take a React Native Todo app and address few of the 
 
 ## What you will learn
 
-- Handling offline data storage on device via Amplify DataStore.
-- Adding authorization with Amplify Auth.
+- Handling offline data storage on-device via Amplify DataStore by adding aws-amplify library dependency to your app.
+- Adding authentication with Amplify Auth.
 - Use of Amplify DataStore to orchestrate data synchronization between mobile app and Amplify's backend services.
 
 ## Sidebar
@@ -39,28 +39,31 @@ Before starting this tutorial, you will need the following:
  
 
 ## Sections
- - [TODOs App](#todos-app)
- - [Amplify DataStore persisting data on device](#amplify-DataStore-persisting-data-on-device)
- - [Using Amplify to add authentication](#using-amplify-to-add-authentication)
- - [Testing happy path](#testing-happy-path)
- - [Simulating network connectivity issue](#simulating-network-connectivity-issue)
- - [Testing a delete operation](#testing-a-delete-operatio)
- - [Adding a Sing Out button](#adding-a-sing-out-button)
- - [What next](#what-next)
+- [What you will learn](#what-you-will-learn)
+- [Sidebar](#sidebar)
+- [Prerequisites](#prerequisites)
+- [Sections](#sections)
+- [TODOs App](#todos-app)
+- [Amplify DataStore persisting data on device](#amplify-datastore-persisting-data-on-device)
+- [Using Amplify to add authentication](#using-amplify-to-add-authentication)
+- [Testing happy path](#testing-happy-path)
+- [Simulating Network Connectivity Issue](#simulating-network-connectivity-issue)
+- [Testing a delete operation](#testing-a-delete-operation)
+- [Adding a Sing Out button](#adding-a-sing-out-button)
+- [What next](#what-next)
 
 ---
 
 ## TODOs App
-We're working off of a very simple React Native app that, for now, simply takes some tasks and displays them.
+We're working off of a very simple React Native app that for now simply takes some tasks and displays them. You can also delete the todo items and it removes them from the UI. However, what this app can not do at this time is to store these updates anywhere. If you add an item or delete an item, kill the app and re-start it none of your changes are persisted anywhere.
 
-TODOs app with todo items:
-![TODOs app](images/todosoverview.png)
+!["TODOs app with todo items"](images/todosoverview.png "TODOs app with todo items") 
 
 However, there are few problems. One is if the app is closed and or re-loaded we lose our todo items, see screenshot below. Also, our app lacks authentication, and in addition at some point we would ideally want to synchronize its data back and forth to a backend service.
 
 App re-loading | App after re-loading
 - | -
-![alt](images/2_app_reloading45.png) | ![alt](images/3_data_loss45.png)
+!["TODOs app reloading"](images/2_app_reloading45.png "TODOs app reloading") | !["TODOs after reloading"](images/3_data_loss45.png "TODOs app after reloading")
 
 First, a high level overview of the code base for the app before evolving its features. There are two main components, `TodoInput.js` and `TodoItem.js` that are then are referenced in our `App.js` to bring everything together.
 
@@ -257,15 +260,15 @@ In order to add Amplify DataStore functionality to our project without fully int
 npx amplify-app@latest
 ```
 
-As a result of running `npx amplify-app` a new script entry got added our project's `package.json`: 
+As a result of running `npx amplify-app` a new script entry was added our project's `package.json`: 
 ```json
 "amplify-modelgen": "node amplify/scripts/amplify-modelgen.js",
 ```
-Why do we care? to re-iterate, at this point we're going to persist our todo items in our device's local storage. So, we need to have some sort of schema to model our data around. Amplify DataStore is built on top of AWS AppSync and uses GraphQL schema definition language as an abstraction for how it communicates with various AWS services by using AWS Appsync as its API layer. In our case we're not using AppSync, not just yet. We just need to let DataStore's client library handle all the CRUD operations for us and that requires that our data is modeled as graphql schema. DataStore will handle all the communication protocols with the underlying local storage for us. 
+Why do we care? To re-iterate, at this point we're going to persist our todo items in our device's local storage. So, we need to have some sort of schema to model our data around. Amplify DataStore is built on top of AWS AppSync and uses GraphQL schema definition language as an abstraction for how it communicates with various AWS services by using AWS Appsync as its API layer. In our case we're not using AppSync, not just yet. We just need to let DataStore's client library handle all the CRUD operations for us and that requires that our data is modeled as graphql schema. DataStore will handle all the communication protocols with the underlying local storage for us. 
 
 Before running the script let's head to `amplify/backend/api/amplifyDatasource/schema.graphql`. This directory and its content were just generated for us when we execute `npx amplify-app`. We're going to modify its content with our schema of todo item: 
 
-```graphql
+```javascript
 type Task @model {
   id: ID!
   task: String!
@@ -418,13 +421,13 @@ these are screenshots of when we have Amplify DataStore applied to enable local 
 
 re-loading with DataStore | after re-loading
 - | -
-![1_reload_with_amplify_ds45](images/1_reload_with_amplify_ds45.png) | ![2_realoded_amplify_ds45](images/2_realoded_amplify_ds45.png)
+!["TODOs app reloading with DataStore enabled"](images/1_reload_with_amplify_ds45.png "TODOs app reloading with DataStore enabled") | !["TODOs app after reload with DataStore enabled"](images/2_realoded_amplify_ds45.png "TODOs app after reload with DataStore enabled retained previous state")
 
 
 Below we are demonstrating a delete action. We deleted what used to be item 4 `Buy Coffee` and likewise when deleting an item we used Amplify DataStore to handle the local storage delete for us. Screenshots below depict this behavior:
 App re-loading | App after re-loading
 - | -
-![1_deleted_item_reloading45](images/1_deleted_item_reloading45.png) | ![2_reloaded_after_delete45](images/2_reloaded_after_delete45.png)
+!["Deleted an item and re-loading"](images/1_deleted_item_reloading45.png "Deleted an item and re-loading") | !["After reload we show the current state with Buy Coffee deleted"](images/2_reloaded_after_delete45.png "After reload we show the current state with Buy Coffee deleted")
 
 
 ## Using Amplify to add authentication
@@ -432,17 +435,17 @@ App re-loading | App after re-loading
 Before adding authentication to our app there are few housekeeping we are required to do by Amplify. Using Amplify CLI first thing we need to is initialize our project by running the following command from the root of your project:
 
 **`amplify init`** initializes a new project, sets up deployment resources in the cloud, and makes your project ready for Amplify.
-![amplify-init](images/amplify-init.png)
+!["Output from running amplify init"](images/amplify-init.png "Output from running amplify init")
 resources created running `amplify init` are used by Amplify itself these are not part of your application. 
 
 Now that we have initialized our app the result of `amplify-status` shows the state of local resources not yet pushed to the cloud (Create/Update/Delete). In our case `amplifyDatasource` API.
-![amplify-status](images/amplify-status.png)
+!["Output from running amplify status"](images/amplify-status.png "Output from running amplify status")
 
 and a look at our AWS Amplify console we see that our app was deployed
-![amplify-console-init](images/amplify-console-init.png)
+!["AWS Amplify Console"](images/amplify-console-init.png "AWS Amplify Console")
 
 Currently, the Authorization mode for the DataStore in the app is set to API key but we want to use AWS Cognito instead. We can execute **`amplify add auth`** to first add authentication using AWS Cognito followed by `amplify status` to see where we stand 
-![amplify-add-auth](images/amplify-add-auth.png)
+!["Output from running amplify add auth"](images/amplify-add-auth.png "Output from running amplify add auth")
 
 It's time to add the necessary dependency to `App.js` so Amplify can handle user registration and authentication for us on the UI.
 
@@ -530,51 +533,51 @@ export default withAuthenticator(App);
 ```
 
 Now, we can update our datastore to use AWS Cognito using `amplify update api` 
-![amplify-update-api](images/amplify-update-api.png)
+!["Output from running amplify update api"](images/amplify-update-api.png "Output from running amplify update api")
 
 We can now push our changes to the cloud. Run `amplify push` and monitor its progress as it will a few minutes to complete and should see something similar as screenshot below:
-![ampify-push](images/amplify-push.png)
+!["Output from running amplify push"](images/amplify-push.png "Output from running amplify push")
 
 At this point it's a good idea to take peek at our AWS backend that was setup for us by Amplify specifically DynamoDB which DataStore uses to store our data.
-![ddb-before](images/ddb-before.png)
+!["A look at the DynamoDB table before data sync"](images/ddb-before.png "A look at the DynamoDB table before data sync")
 
 Start the app to see the signin/signup UI added for us via Amplify. Tap on `Sing Up`, complete the form and you should receive an email with your confirmation code. Once you provide you confirmation code, you will be redirected to signin page. Login with your username and password.
 
-![signin-signup](images/confirm-sign-up.png)|![signin-signup](images/signin.png)
+!["Default Cognito Sign Up screen"](images/confirm-sign-up.png "Default Cognito Sign Up screen")|!["Cognito Sign in screen after confirming Sing Up"](images/signin.png "Cognito Sign in screen after confirming Sing Up")
 
 ## Testing happy path
 We're going to do some testing by adding a few test entries, and validate DataStore has sync'd the data on our DynamoDB table.
 
 DynamoDB table before sync
-![empty-ddb](images/empty-ddb.png)
+!["DynamoDB table before sync"](images/empty-ddb.png "DynamoDB table before sync")
 
 adding few todo entries
-![bread-milk](images/bread-milk.png)
+!["Adding few todo entries"](images/bread-milk.png "Adding few todo entries")
 
 and validate the sync on DynamoDB side
-![ddb-bread-milk](images/ddb-bread-milk.png)
-Both were sync'd via DataStore into DynamoDB table
+!["DynamoDB table now populated with our new entries"](images/ddb-bread-milk.png "DynamoDB table now populated with our new entries")
+Both todo entries were sync'd via DataStore into DynamoDB table
 
 ## Simulating Network Connectivity Issue
 
 To simulate a network connectivity issue - I did this by just disconnecting my WiFi on my laptop - then adding a new Todo entry in the app
 
-![offline-add](images/offline-add.png)
+!["Adding new todo entry while offline"](images/offline-add.png "Adding new todo entry while offline")
 
  check DynamoDB to make sure new entry was not sync'd on a different computer
- ![ddb-with-app-offile](images/ddb-with-app-offile.png)
+ !["No sync was performed on our DynamoDB table"](images/ddb-with-app-offile.png "No sync was performed on our DynamoDB table")
 
  after establishing WiFi connection we see that our new todo has been sync'd
- ![](images/ddb-after-connection.png)
+ !["Data sync was performed right after re-establishing our network connection"](images/ddb-after-connection.png "Data sync was performed right after re-establishing our network connection")
 
 
 ## Testing a delete operation
 
 We bought our bread, so go ahead and delete it from list in the app
-![delete-bread.png](images/delete-bread.png)
+!["Deleting Get Bread item from the app"](images/delete-bread.png "Deleting Get Bread item from the app")
 
 Check the table and you can see that `Get bread` has been marked under `_deleted` column as `true`
-![ddb-bread-marked-deleted.png](images/ddb-bread-marked-deleted.png)
+!["Deletion of Get Bread item sync'd with our DynamoDB table - see _deleted column set to true"](images/ddb-bread-marked-deleted.png "Deletion of Get Bread item sync'd with our DynamoDB table - see _deleted column set to true")
 
 ## Adding a Sing Out button
 Since we can sing in to the app let's also add a feature to sing out. Amplify 
@@ -603,7 +606,7 @@ async function signOut() {
 ```
 
 reload your app
-![sign-out](images/sign-out.png)
+!["Sign Out button displayed after logout"](images/sign-out.png "Sign Out button displayed after logout")
 
 ## What next
 
