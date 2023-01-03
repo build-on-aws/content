@@ -613,7 +613,7 @@ reload your app
 In regards to Amplify DataStore, we barely have scratched surface. We did not cover all of the data operations available via DataStore
 
 - Review [Manipulating Data](https://docs.amplify.aws/lib/datastore/data-access/q/platform/react-native/#create-and-update) from Amplify docs
-- Dive deeper in [Relational Model](https://docs.amplify.aws/lib/datastore/relational/q/platform/react-native/) and how GraphQL transforms are used in Amplify
+- Dive deepe in [Relational Model](https://docs.amplify.aws/lib/datastore/relational/q/platform/react-native/) and how GraphQL transforms are used in Amplify
 - Setting up [Authorization Rules](https://docs.amplify.aws/lib/datastore/setup-auth-rules/q/platform/react-native/)
 - Look into [conflict resolution strategies](https://docs.amplify.aws/lib/datastore/conflict/q/platform/react-native/) offered.
 - Stop by and meet the AMplify team and other developers using Amplify by joining [Amplify Discord](https://discord.gg/amplify) 
