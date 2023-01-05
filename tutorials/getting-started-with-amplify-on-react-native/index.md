@@ -13,7 +13,22 @@ authorName: Kam Chehresa
 date: 2022-11-11
 ---
 
-In this post we're going to take a React Native Todo app and address few of the common issues faced by developers. We will start by looking into offline first app development, which is basically an approach that in case users' mobile device loses connectivity how can we handle allowing the app to continue to function by persisting data on the device itself and for that we will take look into adding Amplify DataStore client library to handle that for us. We will first demonstrate this without using any external environment in the cloud. Next, we will gradually add integration with AWS using Amplify to add authentication. Lastly, we will establish cloud backend resources and use AWS Amplify DataStore to help orchestrate data synchronization between the time our device lost connectivity and the time it regained connection and update our AWS backend storage for our Todo app.
+In this post we're going to take a React Native Todo app and address few of the common issues faced by developers. We will start by looking into offline first app development, which is basically an approach that in case users' mobile device loses connectivity how can we handle allowing the app to continue to function by persisting data on the device itself and for that we will take look into adding Amplify DataStore client library to handle that for us. We will first demonstrate this without using any external environment in the cloud. Next, we will gradually add integration with AWS using Amplify to add authentication and authorization to our app. Lastly, we will establish cloud backend resources and use AWS Amplify DataStore to help orchestrate data synchronization between the time our device lost connectivity and the time it regained connection and update our AWS backend storage for our Todo app.
+
+|Table of Contents|
+|---|
+|[What you will learn](#what-you-will-learn)|
+|[Sidebar](#sidebar)|
+|[Prerequisites](#prerequisites)|
+|[TODOs App](#todos-app)|
+|[Amplify DataStore persisting data on device](#amplify-datastore-persisting-data-on-device)|
+|[Using Amplify to add authentication](#using-amplify-to-add-authentication)|
+|[Testing happy path](#testing-happy-path)|
+|[Simulating Network Connectivity Issue](#simulating-network-connectivity-issue)|
+|[Testing a delete operation](#testing-a-delete-operation)|
+|[Adding a Sing Out button](#adding-a-sing-out-button)|
+|[What next](#what-next)|
+
 
 ## What you will learn
 
@@ -38,19 +53,6 @@ Before starting this tutorial, you will need the following:
  - Have your [local environment setup](https://docs.expo.dev/get-started/installation/) for React Native development using Expo CLI.
  
 
-## Sections
-- [What you will learn](#what-you-will-learn)
-- [Sidebar](#sidebar)
-- [Prerequisites](#prerequisites)
-- [Sections](#sections)
-- [TODOs App](#todos-app)
-- [Amplify DataStore persisting data on device](#amplify-datastore-persisting-data-on-device)
-- [Using Amplify to add authentication](#using-amplify-to-add-authentication)
-- [Testing happy path](#testing-happy-path)
-- [Simulating Network Connectivity Issue](#simulating-network-connectivity-issue)
-- [Testing a delete operation](#testing-a-delete-operation)
-- [Adding a Sing Out button](#adding-a-sing-out-button)
-- [What next](#what-next)
 
 ---
 
@@ -254,6 +256,8 @@ const styles = StyleSheet.create({
 
 ## Amplify DataStore persisting data on device
 
+One of the things that Amplify DataStore does is it helps with abstracting the underlying APIs you need to use to persist data into your device's local storage and we will see an example of that shortly below. Moreover, it works behind the scenes to synchronize your data to and from your cloud backend to your device's local storage. You as a developer use the `DataStore API` for your reading and writing to the device local storage, which in turn interacts with another DataStore components called `Store Engine`. This `Store Engine` handles the queries between your device's local storage and your app. Optionally you can configure it to work with another DataStore components called `Sync Engine` to sync the changes to your local data to a cloud backend in addition to sync your cloud data back to your device's local storage, for example if you were offline and there were external updates to your cloud backend. It's worth mentioning that the `Sync Engine` uses a managed GraphQL offering called `AppSync` to send your data models as GraphQL queries to your backend.
+
 In order to add Amplify DataStore functionality to our project without fully integrating with AWS cloud services we're going to first run:
 
 ```bash
@@ -444,6 +448,8 @@ Now that we have initialized our app the result of `amplify-status` shows the st
 and a look at our AWS Amplify console we see that our app was deployed
 !["AWS Amplify Console"](images/amplify-console-init.png "AWS Amplify Console")
 
+Authentication and authorization are two primary means of securing applications. Using authentication we can verify you are who you say you are or ensuring the identity of user or a system trying access our application. Authorization on the other hand determines what you can do inside the application or your access rights after your identity has been established or have been authenticated.
+
 Currently, the Authorization mode for the DataStore in the app is set to API key but we want to use AWS Cognito instead. We can execute **`amplify add auth`** to first add authentication using AWS Cognito followed by `amplify status` to see where we stand 
 !["Output from running amplify add auth"](images/amplify-add-auth.png "Output from running amplify add auth")
 
@@ -613,7 +619,7 @@ reload your app
 In regards to Amplify DataStore, we barely have scratched surface. We did not cover all of the data operations available via DataStore
 
 - Review [Manipulating Data](https://docs.amplify.aws/lib/datastore/data-access/q/platform/react-native/#create-and-update) from Amplify docs
-- Dive deepe in [Relational Model](https://docs.amplify.aws/lib/datastore/relational/q/platform/react-native/) and how GraphQL transforms are used in Amplify
+- Dive deeper in [Relational Model](https://docs.amplify.aws/lib/datastore/relational/q/platform/react-native/) and how GraphQL transforms are used in Amplify
 - Setting up [Authorization Rules](https://docs.amplify.aws/lib/datastore/setup-auth-rules/q/platform/react-native/)
 - Look into [conflict resolution strategies](https://docs.amplify.aws/lib/datastore/conflict/q/platform/react-native/) offered.
 - Stop by and meet the AMplify team and other developers using Amplify by joining [Amplify Discord](https://discord.gg/amplify) 
