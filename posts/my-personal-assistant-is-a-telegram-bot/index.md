@@ -18,7 +18,7 @@ If that opening line got your interest, this article will provide you the base f
 
 Now, let's get more technical.
 
-To interact with Telegram bots — such as getting messages or photos — we can use either polling ([getUpdates](https://core.telegram.org/bots/api#getting-updates)) or webhooks ([setWebhook](https http://core.telegram.org/bots/api#setwebhook)). Of these two methods, I'm more comfortable using a webhook because I don't have to develop polling mechanisms that use resources inefficiently. With a webhook, if there is a message, Telegram will make a `POST` request to the webhook URL which will trigger our backend to process the request.
+To interact with Telegram bots — such as getting messages or photos — we can use either polling ([getUpdates](https://core.telegram.org/bots/api#getting-updates)) or webhooks ([setWebhook](https://core.telegram.org/bots/api#setwebhook)). Of these two methods, I'm more comfortable using a webhook because I don't have to develop polling mechanisms that use resources inefficiently. With a webhook, if there is a message, Telegram will make a `POST` request to the webhook URL which will trigger our backend to process the request.
 
 ![Overview of request from Telegram, webhook and serverless API](images/TelegramBot-Page-1.drawio.png)
 
@@ -211,7 +211,7 @@ After that, set up your bot using a webhook. For that, you need to open the foll
 
 `https://api.telegram.org/bot{TELEGRAM TOKEN}/setWebhook?url={API ENDPOINT URL}`
 
-Change `{TELEGRAM TOKEN}` to your Telegram token. Then, change `{URL API ENDPOINT}` to the URL of API Gateway and add `/telegram`, for example: `https://XYZ.execute-api.ap-southeast-1.amazonaws.com/prod/telegram `.
+Change `{TELEGRAM TOKEN}` to your Telegram token. Then, change `{URL API ENDPOINT}` to the URL of API Gateway and add `/telegram`, for example: `https://XYZ.execute-api.ap-southeast-1.amazonaws.com/prod/telegram`.
 
 After that, you need to open your browser and go to the URL. If this works, you'll get this response.:
 

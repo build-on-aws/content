@@ -10,7 +10,7 @@ date: 2022-11-09
 
 ![Banner image asking "what are javascript engines?"](images/banner.png)
 
-Writing code for the web sometimes feels a little magical in that we write a sequence of characters in a file, open that file in a browser, and watch it come to life. But understanding the tech behind the magic can help you better hone your craft as a programmer. 
+Writing code for the web sometimes feels a little magical in that we write a sequence of characters in a file, open that file in a browser, and watch it come to life. But understanding the tech behind the magic can help you better hone your craft as a programmer.
 
 In this article, you'll discover what is going on behind the scenes in a JavaScript-powered web or mobile stack by grasping the complexities of the JavaScript engines that power browsers. Let’s break down what a JavaScript engine does, why different platforms use different engines, how they have evolved over the years, and why we, as developers, should care.
 
@@ -78,7 +78,7 @@ It’s useful to remember, before getting totally confused by the names given to
 
 While keeping in mind the ebb and flow around naming and renaming these engines, it’s useful to note a few of the major events in the history of the JavaScript engine. I’ve compiled a handy chart for you:
 
-| Browser, Headless Browser, or Runtime	| JavaScript Engine |
+| Browser, Headless Browser, or Runtime | JavaScript Engine |
 -- | --
 Mozilla	| Spidermonkey
 Chrome	| 	V8

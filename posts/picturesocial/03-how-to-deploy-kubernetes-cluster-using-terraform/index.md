@@ -12,13 +12,14 @@ date: 2022-10-13
 ---
 
 This is a 10-part series about Picturesocial:
+
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
 2. [What’s Kubernetes and why should you care?](posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. How to deploy a Kubernetes cluster using Terraform (this post)
 4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
 5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
 
-In our last post, [Picturesocial - What’s Kubernetes and why should you care?](posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/), we learned about Kubernetes and why are we using it in Picturesocial. In this post, we are going to learn about infrastructure as a code and specifically how to deploy a Kubernetes cluster using Terraform. 
+In our last post, [Picturesocial - What’s Kubernetes and why should you care?](posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/), we learned about Kubernetes and why are we using it in Picturesocial. In this post, we are going to learn about infrastructure as a code and specifically how to deploy a Kubernetes cluster using Terraform.
 
 I have been working on IT projects for years and something recurrent in my experience has been how developers work together with sysadmins, esspecially when the application pushes changes to the infrastructure and the way things are done traditionally. The application has to be adapted to the infrastructure or the infrastructure has to be adapted to the application. What happens if those infrastructure changes mean you can’t rollback easily?
 
@@ -36,8 +37,8 @@ For Picturesocial, I decided to use Hashicorp Terraform for our Infrastructure a
 
 Terraform is an IaC tool created by Hashicorp that helps you define a complete infrastructure in a way that you can version and reuse. It uses Hashicorp Configuration Language (HCL) for its structure. All Terraform configuration files must be saved with `.tf` extension. Some of the basic definitions are:
 
-* **Providers** This is where you tell Terraform that you are using a specific [cloud provider](https://registry.terraform.io/browse/providers). For example, if you want to deploy infrastructure to AWS, you can define the provider like the example below. Just note that the version of the provider is optional. If you don’t specify it, it will use the latest as default. 
-  ```
+* **Providers** This is where you tell Terraform that you are using a specific [cloud provider](https://registry.terraform.io/browse/providers). For example, if you want to deploy infrastructure to AWS, you can define the provider like the example below. Just note that the version of the provider is optional. If you don’t specify it, it will use the latest as default.
+  ```json
   terraform {
     required_providers {
       aws = {
@@ -47,16 +48,18 @@ Terraform is an IaC tool created by Hashicorp that helps you define a complete i
     }
   }
   ```
+
 * **Resources** This is where you actually define the infrastructure. You use the resources as pieces of infrastructure like: instances, networks, storage, etc. A resource needs two declarative parameters: 1) resource type and 2) resource id. For example, below we are defining an EC2 instance with a specific AMI and an instance type t2.micro.
-  ```
+  ```json
   resource "aws_instance" "web" {
     ami           = "ami-a1b2c3d4"
     instance_type = "t2.micro"
   }
   ```
-* **Variables** 
+
+* **Variables**
   * Input: These are the variables that you use to ask the users for information before applying any change. These kind of variables are parameters that you have to specify at the command line.
-    ```
+    ```json
     variable "project_code" {
       type = string
     }
@@ -66,12 +69,14 @@ Terraform is an IaC tool created by Hashicorp that helps you define a complete i
       default = ["us-east-1a"]
     }
     ```
+
   * Output: These are variables that will return information from execution, like final repository name, cluster id, etc.
-    ```
+    ```json
     `output "ec2_ip" { value = aws_instance.server.private_ip }`
     ```
+
   * Locals: These are variables that you set on your script and work as constants you can reference at any part of the script. The example below will create a common tag that will concat the values of variables `project_code` and `environment`.
-    ```
+    ```json
     locals {
       project_code = "pso"
       environment  = "dev"
@@ -80,8 +85,9 @@ Terraform is an IaC tool created by Hashicorp that helps you define a complete i
       project_name = "pe-${local.project_code}-${local.environment}01"
     }
     ```
+
 * **Modules** We use modules to group different resources that are used together. That way instead of having huge Terraform templates with lots of resources, we can standardize scenarios into one single object, like: Every EKS cluster needs a VPC with six subnets, two Elastic Load Balancers, two worker groups with at least three EC2 instances each, etc. Instead of creating all those resources per cluster, we can create one module and reuse it for simplification.
-  ```
+  ```json
   module "aws-vpc" {
     source = "./mods/aws-vpc"
     base_cidr_block = "11.0.0.0/16"
@@ -155,7 +161,7 @@ resource "random_integer" "suffix" {
 
 4. The file `vpc.tf` is where we set our network and the availability zones that we are going to use. Don’t panic if you don’t know what a VPC is. Read more about [how to get started with VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html).
 
-```
+```json
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.2.0"
@@ -187,8 +193,7 @@ module "vpc" {
 
 5. Now that we set the VPC, we are going to set the security groups. The security groups will allow or deny traffic to the EC2 instances of the EKS cluster. Here, we are allowing traffic to the port 22 from selected network segments named cidr_blocks.
 
-```
-
+```json
 resource "aws_security_group" "worker_group_mgmt_one" {
   name_prefix = "worker_group_mgmt_one"
   vpc_id      = module.vpc.vpc_id
@@ -239,7 +244,7 @@ resource "aws_security_group" "all_worker_mgmt" {
 
 6. The file `eks-cluster.tf` uses a public AWS module that we can use to simplify the creation of an EKS cluster. We are going to set the cluster name referencing the variable that we set on our `config.tf` file. We choose our Kubernetes version and then we also reference our VPC and subnets, defined on the `vpc.tf` file.
 
-```
+```json
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   version         = "17.24.0"
@@ -274,7 +279,7 @@ data "aws_eks_cluster_auth" "cluster" {
 
 7. And finally, we are going to check the outputs on the `outputs.tf` file. This is the file that will produce the Kubernetes Config file or kubeconfig. This is the file needed by Kubectl or the Kubernetes REST API to know who you are, if you have access, and if they can trust you. This is one of the most important pieces to get access to the EKS cluster.
 
-```
+```json
 output "cluster_id" {
   value       = module.eks.cluster_id
 }
@@ -421,7 +426,7 @@ aws eks list-clusters
 
 If everything worked as expected you will get a similar output:
 
-```
+```json
 {"clusters": ["picturesocial-129"]}
 ```
 
