@@ -12,7 +12,7 @@ authorName: Jose Yapur
 date: 2022-10-15
 ---
 
-This is a 10-part series about Picturesocial:
+This is a 8-part series about Picturesocial:
 
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
