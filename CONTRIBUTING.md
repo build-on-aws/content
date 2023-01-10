@@ -51,7 +51,7 @@ You can also attend [monthly office hours](#participate-in-monthly-office-hours)
 
 ## How Your Content is Licensed
 
-Your content contributions will be licensed under the [CC BY 4.0 License](/LICENSE).
+Your content contributions will be licensed under the [CC BY-SA 4.0 License](/LICENSE).
 
 ## BuildOn.AWS Code of Conduct
 
