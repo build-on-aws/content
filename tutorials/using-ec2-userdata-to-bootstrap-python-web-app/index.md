@@ -11,7 +11,7 @@ authorName: Cobus Bernard
 date: 2023-01-03
 ---
 
-Setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming and error prone when done manually. EC2 instances have ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when it starts up, and you can automate creating the all the infrastructure along with these scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots. In this tutorial, **you will learn** to:
+Setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming and error prone when done manually. EC2 instances have ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when it starts up, and you can automate creating the all the infrastructure along with these scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots. We will be using a bash script to install and configure Nginx and uWSGI, set up a systemd service for uWSGI, and copy our application using CDK. We will cover:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a security group with inbound access, and an IAM instance profile.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
@@ -287,7 +287,7 @@ export class Ec2CdkStack extends cdk.Stack {
 We will be using an existing sample Python web app that also includes the required scripts to install the dependencies on the instance to run it. Download a copy to your `ec2-cdk` folder using the following `git` command:
 
 ```bash
-git clone https://github.com/build-on-aws/sample-pyton-web-app
+git clone https://github.com/build-on-aws/sample-python-web-app.git
 ```
 
 The sample web application hosted in the `sample-pyton-web-app` folder is a Python application that we will be deploying. It requires Nginx and uWSGI to run. To install these components, we need to follow a number of steps. First, we need to install all the OS packages, then configure Nginx and uWSGI, ensure they are are running, and copy the sample application to the instance. A bash script file that configures all of these setup steps is provided in `sample-pyton-web-app/configure_amz_linux_sample_app.sh`. Have a look at the steps in it if you want to know more about how the instance is configured.
@@ -363,7 +363,7 @@ There is one more step before we can deploy everything: adding output to the CDK
       // Command to access the EC2 instance using SSH
       new cdk.CfnOutput(this, "Ssh Command", {
         value:
-          "ssh -i ~/.ssh/cdk-key.pem -o IdentitiesOnly=yes ec2-user@" +
+          "ssh -i ~/.ssh/ec2-cdk-key.pem -o IdentitiesOnly=yes ec2-user@" +
           ec2Instance.instancePublicIp,
       });
 ```
@@ -520,7 +520,7 @@ export class Ec2CdkStack extends cdk.Stack {
       // Command to access the EC2 instance using SSH
       new cdk.CfnOutput(this, "Ssh Command", {
         value:
-          "ssh -i ~/.ssh/cdk-key.pem -o IdentitiesOnly=yes ec2-user@" +
+          "ssh -i ~/.ssh/ec2-cdk-key.pem -o IdentitiesOnly=yes ec2-user@" +
           ec2Instance.instancePublicIp,
       });
   }
@@ -576,10 +576,10 @@ Ec2CdkStack.DownloadKeyCommand = mkdir -p ~/.ssh \
   && aws secretsmanager get-secret-value \
   --secret-id ec2-ssh-key/cdk-keypair/private \
   --query SecretString \
-  --output text > ~/.ssh/cdk-key.pem \
-  && chmod 600 ~/.ssh/cdk-key.pem
+  --output text > ~/.ssh/ec2-cdk-key.pem \
+  && chmod 600 ~/.ssh/ec2-cdk-key.pem
 Ec2CdkStack.IPAddress = 54.75.32.202
-Ec2CdkStack.SshCommand = ssh -i ~/.ssh/cdk-key.pem -o IdentitiesOnly=yes ec2-user@54.75.32.202
+Ec2CdkStack.SshCommand = ssh -i ~/.ssh/ec2-cdk-key.pem -o IdentitiesOnly=yes ec2-user@54.75.32.202
 
 Stack ARN:
 arn:aws:cloudformation:eu-west-1:123456789012:stack/Ec2CdkStack/c8bde0b0-16ed-11ec-a147-0a4fed479a1b
@@ -592,15 +592,21 @@ mkdir -p ~/.ssh \
   && aws secretsmanager get-secret-value \
   --secret-id ec2-ssh-key/cdk-keypair/private \
   --query SecretString \
-  --output text > ~/.ssh/cdk-key.pem \
-  && chmod 600 ~/.ssh/cdk-key.pem
+  --output text > ~/.ssh/ec2-cdk-key.pem \
+  && chmod 600 ~/.ssh/ec2-cdk-key.pem
 ```
 
 Let's go through each of the command steps. Firstly, the `\` at the end of the lines tells your shell that the command is split onto a new line, which is why we add it to the first 5 lines to make the command more readable. The first of the commands, `mkdir -p ~/.ssh`, creates the directory `.ssh` in your OS user's home directory, and the `-p` indicates to create the directory with parents, and to not error if it already exists - this may be the first time you use SSH on your local machine, in which case the directory may not exist. What is meant by "with parents" is that if you would like to create a new nested directory structure (e.g. `mkdir -p ~/something/very/nested/here`) it would create all the parent directories of `something`, with `very` in it, `nested` inside `very`, and `here` inside `nested` without you needing to run multiple `mkdir` commands. The second command uses the AWS CLI to call `secretsmanager` where we stored the SSH key to fetch it raw data, and we specify the `query` as `SecretString` to only bring back that field as `text`. We then use the `>` operator to tell our shell to take the output and write it to the file `~/.ssh/cd-key.pem`, overwriting any existing content (if the file does not exist, it will be created; if it did exist, we will overwrite the contents). Lastly, the [`chmod`](https://en.wikipedia.org/wiki/Chmod) command limits who can access the file - SSH requires keys to be locked down, so we limit read and write access to our OS user only.
 
-Once we have run this command, we can SSH to the instance by using the public IP address, specifying which SSH key to use with the `-i ~/.ssh/cdk-key.pem`, and to only offer that key to the server by specifying `-o IdentitiesOnly=yes` - there is quite a lot of detail in that parameter which we won't cover here. The short version is that if you have many SSH keys, the SSH server in your instance would reject your login attempt if too many incorrect keys were sent as it would try each of them in your `~/.ssh` directory with certain names.
+Once we have run this command, we can SSH to the instance by using the public IP address, specifying which SSH key to use with the `-i ~/.ssh/ec2-cdk-key.pem`, and to only offer that key to the server by specifying `-o IdentitiesOnly=yes` - there is quite a lot of detail in that parameter which we won't cover here. The short version is that if you have many SSH keys, the SSH server in your instance would reject your login attempt if too many incorrect keys were sent as it would try each of them in your `~/.ssh` directory with certain names.
 
-Lastly, to access the Python web app we just deployed, use the `Ec2CdkStack.IPAddress` value in your browser as the address to open to see the app running.
+Lastly, to access the Python web app we just deployed, use the `Ec2CdkStack.IPAddress` value in your browser as the address to open to see the app running. It will take a few minutes for the installation scrip to complete, you can follow the progress by using the `Ec2CdkStack.SshCommand` command to connect to the instance, and running `sudo less /var/log/cloud-init-output.log`, and then pressing `shift` + `f` to tail the file. Once it has completed, you should see the following:
+
+```bash
++ echo 'Custom configuration for sample application complete.'
+Custom configuration for sample application complete.
+Cloud-init v. 19.3-46.amzn2 finished at Wed, 11 Jan 2023 14:56:34 +0000. Datasource DataSourceEc2.  Up 240.85 seconds
+```
 
 ## Cleaning up your AWS environment
 
@@ -618,7 +624,7 @@ Ec2CdkStack: destroying...
 ✅  Ec2CdkStack: destroyed
 ```
 
-When the output shows `Ec2CdkStack: destroyed`, your resources have been removed. Ta-Da! Add how to clean the bucket, and check if the secretmanager value was also delete.
+When the output shows `Ec2CdkStack: destroyed`, your resources have been removed. Ta-Da! There is one more step for the cleanup: removing the S3 bucket used by CDK to upload the scripts and sample application. These resources are not deleted by CDK as a safety precaution. Open the [S3 console](https://s3.console.aws.amazon.com/s3/buckets) in your browser, and look for a bucket with a name like `cdk-<9-random-letters-and-numbers>-assets-123456789012-us-east-1` (yours will have a different random number and your account number instead of `123456789012`). If you see more than one (usually if you have used the CDK asset feature before), you can sort by `Creation Date` to see the latest created one. Open the bucket to confirm that you see 3 files: a `.zip`, `.json`, and `.sh`, each with a guid as the filename. Select all the files, then click on `actions` -> `delete`, and follow the prompts to delete the objects. Lastly, go back to the S3 console, and delete the `cdk-<9-random-letters-and-numbers>-assets-123456789012-us-east-1` bucket.
 
 ## Conclusion
 
