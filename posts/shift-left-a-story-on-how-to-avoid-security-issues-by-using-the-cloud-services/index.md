@@ -1,38 +1,31 @@
 ---
-layout: blog.11ty.js
-title: Shift Left! A story on how to avoid security issues by using the cloud services
+title: Shift Left! A story on how to avoid security issues by using cloud services
 description: Learn how to avoid security incidents by leveraging a fully managed cloud services portfolio in your CI/CD pipeline.
 tags:
-  - amazon-codeguru
-  - amazon-codeguru-reviewer
-  - java
-  - python
-  - security
-  - aws-security
+  - codeguru
+  - application-security
   - shift-left
-  - devsecops
-  - devops
   - github-actions
 authorGithubAlias: afronski
 authorName: Wojciech Gawroński
-date: 2022-07-19
+date: 2023-01-10
 ---
 
 Starting on the 24th of November 2021, people that maintained JVM-based applications were terrified. Rumors that an exploit for a very popular logging library called _[Apache Log4j](https://logging.apache.org/log4j/2.x/)_ turned out to be true. [Log4shell](https://en.wikipedia.org/wiki/Log4Shell) was so severe because it could be easily exploited (even by _script kiddies_) and allowed for _remote code execution_.
 
 It was not the first time such an incident appeared in the news headlines, but recovering from that was pretty usual – many companies spent significant time patching or remediating the issue. Unfortunately, the library's popularity definitely did not help in this case, as not only regular back-end implementations were affected, but many other workloads – like databases, messaging servers, and other critical infrastructure components.
 
-Besides, the usual recovery time, our industry asked again: what can we do to protect ourselves from such an impact in the future?
+Besides the usual recovery time, our industry asked again: what can we do to protect ourselves from such an impact in the future?
 
 ## Why should I shift to the left, though?
 
 We should start from a very simple fact: **we cannot treat security as an afterthought when developing IT systems**. This is why the impact is so severe in such a situation. In other words: we should tackle this topic as early as possible in the software development life cycle (_SDLC_).
 
-One trend in our industry has gained popularity and tackled this challenge. It is called _shift-left_ and refers to the transitioning of tough subjects tackled later in the software development process to the left-hand side – which means we deal with topics’ complexity earlier.
+One trend in our industry has gained popularity and tackled this challenge. It is called _shift-left_ and refers to the transitioning of tough subjects tackled later in the software development process to the left-hand side – which means we deal with subject's complexity earlier.
 
-![Why an early catch matters so much? Because it's cheaper and easier to fix such an issue at an early stage than later. Source: my presentation from *AWS Berlin Summit 2022*](./images/shift-left.png)
+![Slide from presentation at *AWS Berlin Summit 2022* showing slide title "Why an early catch matters so much?". Slide shows the Software Development Life Cycle with right-pointing arrow "An increasing cost of fixing the issue" and a left-pointing arrow "Shift-left: Taking care holistically about software quality earlier in the process"](images/shift-left.png)
 
-Why is that so important? Because the earlier we catch potential issues in the development process, the cheaper and less problematic fix will eventually be. That is true for common defects and software quality but also for security incidents as well.
+Why is that so important? As shown in the image above, the earlier we catch potential issues in the development process, the cheaper and less problematic fix will eventually be. That is true for common defects and software quality but also for security incidents as well.
 
 An immediate follow-up question is: is it possible to catch everything at the beginning? The answer is more complicated, but it boils down to how much investment we want to make and the risk level with which we’re comfortable. Of course, the more will we invest, the better the security state we achieve – but a question about cost-effectiveness remains open and varies case by case.
 
@@ -54,29 +47,29 @@ As this approach seems relevant, you must be aware of one additional element: _d
 
 To address that, cloud providers often refer to the [shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model/), where the provider takes care of the security **of the cloud** and the customer takes care of security **in the cloud**. Providing such a model simplifies the scope, but at the same time, you need more precise recommendations on the implementation details.
 
-AWS also helps with this by providing actionable advice in the form of [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html), in particular – with its _Security_ pillar. As AWS, we have years of experience architecting solutions across a wide variety of business verticals and use cases, and from those experiences we have identified best practices and core strategies for architecting systems in the cloud collected in the document mentioned above. It’s a great way to stand on the shoulder of giants and learn from someone else’s learnings.
+AWS also helps with this by providing actionable advice in the form of the [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html), in particular – with its _Security_ pillar. As AWS, we have years of experience architecting solutions across a wide variety of business verticals and use cases, and from those experiences we have identified best practices and core strategies for architecting systems in the cloud collected in the document mentioned above. It’s a great way to stand on the shoulder of giants and learn from someone else’s learnings.
 
 ## Let’s talk about the tools, finally!
 
 If you look into the _SAST_ tooling landscape, you will see many choices, available as open-source or paid software. Speaking about choice, it is worth remembering that *doing the right thing on the security path should be easy*. However, adding an entirely new tool from an external provider can be challenging for organizations of any size. This is where listening to advice collected in the *AWS Well-Architected Framework* can actually pay off.
 
-![Place of *Amazon CodeGuru* and *Amazon DevOps Guru* in the *SDLC* and *CI*/*CD* pipelines. Source: my presentation from *AWS Berlin Summit 2022*](./images/amazon-codeguru-devops-guru-place-in-ci-cd-pipeline.png)
+![Slide from presentation at *AWS Berlin Summit 2022* showing the CI/CD pipeline where *CodeGuru* sits in the build and test phase](images/amazon-codeguru-devops-guru-place-in-ci-cd-pipeline.png)
 
 If your workloads are deployed on AWS, you can easily add a convenient and fully-managed tool from the _SAST_ landscape called *Amazon CodeGuru*, which helps with reviewing code of applications written in *Python* and *Java*. Notice in the image above that *CodeGuru* sits in the pipeline in the building and testing phase - which is a direct implementation of the *shift-left* approach to security when it comes to the software development life cycle (_SDLC_) processes. 
 
-![Code areas addressed by *Amazon CodeGuru Reviewer*. Source: my presentation from *AWS Berlin Summit 2022*](./images/code-areas-addressed-by-codeguru-reviewer.png)
+![Slide from presentation at *AWS Berlin Summit 2022* showing slide title "Code Areas Addressed by CodeGuru Reviewer". Slide shows AWS Best Practices, Concurrency, Resource Leaks, Sensitive Information, Code Efficiency, Code Duplication, and Input Validation areas.](images/code-areas-addressed-by-codeguru-reviewer.png)
 
-And as you can see on the image above, [Amazon CodeGuru](https://catalog.us-east-1.prod.workshops.aws/workshops/fa518794-acd4-4178-80d3-97fa62f9deff) scans your code and provides insights about insecure usage of AWS API and SDKs. It proactively detects secrets and credentials hardcoded inside, common vulnerabilities (like mentioned at the beginning *Log4shell*, a [Log4j log injection attack](https://docs.aws.amazon.com/codeguru/detector-library/java/log-injection/)), and provides insights about the most popular [*OWASP*](/posts/owasp-top-10-defined/01-what-is-broken-access-control/) security risks. I have not exhausted the list, but you can [review the catalog of detected issues](https://docs.aws.amazon.com/codeguru/detector-library/) to learn more.
+And as you can see on the image above, CodeGuru scans your code and provides insights about insecure usage of AWS API and SDKs. It proactively detects secrets and credentials hardcoded inside, common vulnerabilities (like mentioned at the beginning *Log4shell*, a [Log4j log injection attack](https://docs.aws.amazon.com/codeguru/detector-library/java/log-injection/)), and provides insights about the most popular [*OWASP*](/posts/owasp-top-10-defined/01-what-is-broken-access-control/) security risks. I have not exhausted the list, but you can [review the catalog of detected issues](https://docs.aws.amazon.com/codeguru/detector-library/) to learn more.
 
 ## Talk is cheap. Show me how it works!
 
-If you would like to investigate how to use _CodeGuru_ in practice – I have prepared a _GitHub_ repository for you with the example: [aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example).
+If you would like to investigate how to use _CodeGuru_ in practice, I have prepared a [code repository](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example) for you with an example.
 
 The example contains integration with _CI/CD pipeline_ represented in the form of *GitHub Actions* for two services written in _Java_ and _Python_, where we can detect potential security and performance issues with the help of the service mentioned above.
 
-To create this integration, we must establish a relationship between _GitHub Actions_ and _Amazon CodeGuru_. The old-fashioned way would be easy: you can do this by creating _IAM User_, narrowing down the _IAM_ permissions, and creating _Access Key_ to bridge those two worlds.
+To create this integration, we must establish a relationship between _GitHub Actions_ and _CodeGuru_. The old-fashioned way would be easy: you can do this by creating _AWS IAM User_, narrowing down the _IAM_ permissions, and creating _Access Key_ to bridge those two worlds.
 
-However, there is a much better way - meaning: *more secure* one. You can use _OpenID Connect_ and _IAM Roles_, which will generate short-lived tokens with the help of _AWS Secure Token Service_ (_STS_) for a particular set of permissions IAM associated with that role.
+However, there is a much better way - meaning a *more secure* one. You can use _OpenID Connect_ and _IAM Roles_, which will generate short-lived tokens with the help of _AWS STS_ for a particular set of permissions IAM associated with that role.
 
 We need two elements to use a better path – an _IAM Role_ and a custom _OIDC_ provider. They are created via _AWS CDK_ definitions inside the file [infrastructure/lib/infrastructure-shared-stack.ts](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/infrastructure/lib/infrastructure-shared-stack.ts):
 
@@ -128,7 +121,7 @@ roleForAmazonCodeGuruReviewer.addManagedPolicy(
 // ... and here is where we add more permissions, see the original file.
 ```
 
-After that, you can create a _GitHub Actions_ pipeline that will have variables configured to work with your account. If you do not know how to configure that in your repository (parts referred as `secrets` in the listing below), you can refer to the other post, where we showed how to [automate your container deployments with CI/CD and GitHub Actions](/posts/automating-your-container-deployments-with-cicd-and-github-actions/). Let's have a look how to add *Amazon CodeGuru Reviewer* action that will leverage the *IAM* role mentioned above (source: [.github/workflows/codeguru-reviewer-java.yml](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/.github/workflows/codeguru-reviewer-java.yml)):
+After that, you can create a _GitHub Actions_ workflow with the code snippet below. Let's have a look how to add an *Amazon CodeGuru Reviewer* action that will leverage the *IAM* role mentioned above (source: [.github/workflows/codeguru-reviewer-java.yml](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/.github/workflows/codeguru-reviewer-java.yml)):
 
 ```yaml
   # Configure AWS Credentials.
@@ -161,22 +154,29 @@ After that, you can create a _GitHub Actions_ pipeline that will have variables 
       sarif_file: codeguru-results.sarif.json
 ```
 
+You'll also need to configure the following secrets variables in your GitHub repository:
+- `AWS_ROLE_FOR_CODEGURU_TO_ASSUME_ARN`
+- `AWS_REGION`
+- `AWS_CODEGURU_REVIEWER_S3_BUCKET`
+
+You can do this by following these instructions [to set up encrypted secrets for a repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).
+
 Now, we can associate the desired repository by connecting it with our _GitHub_ account inside the wizard – and schedule an initial scan:
 
-![Step 4: Associating *GitHub* repository in the *Amazon CodeGuru* wizard](./images/tutorial-4-associate-gh-repo-in-codeguru.png)
+![Shows Associate repository step in the *CodeGuru* wizard with "GitHub or GitHub Enterprise Cloud" option selected.](images/tutorial-4-associate-gh-repo-in-codeguru.png)
 
-After a few minutes, you will receive the results of the initial scan inside the _Amazon CodeGuru Reviewer_ user interface:
+After a few minutes, you will receive the results of the initial scan inside the _CodeGuru Reviewer_ user interface:
 
-![Step 5: Example recommendation from *Amazon CodeGuru Reviewer*](./images/tutorial-5-example-codeguru-recommendation.png)
+![Shows example recommendation from *CodeGuru Reviewer*](images/tutorial-5-example-codeguru-recommendation.png)
 
-Now, having a pipeline set up and properly configured, you can inspect in the same way each commit that lands on a particular branch, opened _pull request_ (_PR_), or merge. For example, here are the results for a new _PR_ that I have opened in the past:
+Now, having a pipeline set up and properly configured, you can inspect in the same way each commit that lands on a particular branch, opened _pull request_ (_PR_), or merge. For example, here are the results for a _PR_ that I have opened in the past:
 
-![Step 6: Recommendations from *Amazon CodeGuru Reviewer* inside *GitHub* *PR* *UI* after running it as a *GitHub Actions* pipeline.](./images/tutorial-6-example-recommendations-for-pr-on-gh.png)
+![Shows example recommendation from *CodeGuru Reviewer* inside *GitHub* *PR* *UI* after running it as a *GitHub Actions* pipeline.](images/tutorial-6-example-recommendations-for-pr-on-gh.png)
 
 ## Is that everything?
 
 Not at all!
 
-Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *Amazon CodeGuru* team on your behalf. Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all security-related recommendations inside [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html). 
+Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *CodeGuru* team on your behalf. Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all security-related recommendations inside the [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html). 
 
-I also encourage you to dive deeper into the [provided example](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example) (e.g., how it tackles multiple languages in a single repository or a new feature in _CodeGuru_: [files exclusion and rules suppression](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendation-suppression.html)).
+I also encourage you to dive deeper into the [provided code example](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example) to learn more such as how CodeGuru Reviewer tackles multiple languages in a single repository or how [file exclusions and rules suppression](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendation-suppression.html) works.
