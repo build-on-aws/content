@@ -14,7 +14,7 @@ date: 2023-01-04
 ---
 If you've ever had to manually manage infrastructure for multiple AWS accounts, you know how much work this can be if done by hand. Never mind all the documentation, onboarding of new team members, mistakes made along the way, and that Friday evening spent manually fixing production after one step in the deployment document had a missing step.
 
-This guide will focus on showing you a way to manage multiple AWS accounts with [Terraform](https://www.terraform.io/) and [GitHub Actions](https://github.com/features/actions), and keep the 3 environments (dev, test, and prod) infrastructure in sync. If you want to take a look at all the code, or clone it to play locally, you can do so via the [main repo](https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-main) (`git clone https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-main.git`) and [base-environments repo](https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-base-environments) (`git clone https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-base-environments.git`). It is based on the [BOA328 re:Invent talk](https://www.youtube.com/watch?v=P6Ngme9KBqs) by [Emily Freeman](https://twitter.com/editingemily), [Julie Gunderson](https://twitter.com/Julie_Gund), and [Cobus Bernard](https://twitter.com/cobusbernard) - apologies for the audio, there were issues on the day. We will cover the following topics in this guide:
+This guide will focus on showing you a way to manage multiple AWS accounts with [Terraform](https://www.terraform.io/) and [GitHub Actions](https://github.com/features/actions), and keep the 3 environments (dev, test, and prod) infrastructure in sync. If you want to take a look at all the code, or clone it to play locally, you can do so via the [main repo](https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-main) (`git clone https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-main.git`) and [base-environments repo](https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-base-environments) (`git clone https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-base-environments.git`). It's based on the [BOA328 re:Invent talk](https://www.youtube.com/watch?v=P6Ngme9KBqs) by [Emily Freeman](https://twitter.com/editingemily), [Julie Gunderson](https://twitter.com/Julie_Gund), and [Cobus Bernard](https://twitter.com/cobusbernard) - apologies for the audio, there were issues on the day. We will cover the following topics in this guide:
 
 - Use [Amazon OpenID Connect](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) to allow access from GitHub Actions to our AWS account without creating / managing long-lived credentials
 - Using S3 as a backend for Terraform [state files](https://developer.hashicorp.com/terraform/language/state)
@@ -43,9 +43,9 @@ Let's take a look at a simplified multi-account layout of infrastructure:
 
 In the diagram, there are four AWS accounts, one each for dev, test, and prod accounts, and one main account. The main account is where the [AWS IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html) are created, with access to the 3 environments via [cross-account access](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html), and the various ECR container image repositories for services. The environment accounts each have a load balancer, ECS cluster with a demo service and database running. The prod account has two copies of the demo service, with dev and test only having one. We will broadly group infrastructure into 3 buckets:
 
-1. **Globally common infrastructure:** anything that is common regardless of the number of environments in use. These include users, container images, central services, etc.
-2. **Environment common infrastructure:** anything that is the same in each environment, e.g. load-balancers, DNS, container clusters, etc, for environments like dev, test, and prod.
-3. **Service specific infrastructure:** any infrastructure / config that is required by a service or system deployed to the environment accounts. There will be a repo per service that includes the source code as well as the infrastructure, and the CI/CD pipeline will ensure both are deployed together for each service.
+1. **Globally common infrastructure:** anything that's common regardless of the number of environments in use. These include users, container images, central services, etc.
+2. **Environment common infrastructure:** anything that's the same in each environment, for example load-balancers, DNS, container clusters, etc, for environments like dev, test, and prod.
+3. **Service specific infrastructure:** any infrastructure / config that's required by a service or system deployed to the environment accounts. There will be a repo per service that includes the source code as well as the infrastructure, and the CI/CD pipeline will ensure both are deployed together for each service.
 
 ### Security
 
@@ -201,11 +201,11 @@ aws dynamodb create-table \
 
 🚨🚨🚨 **SECURITY ALERT** 🚨🚨🚨
 
->In the IAM trust policies above, it is very important to take care with the GitHub repo org and repo name, while you can add wildcards to simplify access from multiple GitHub repos in your org, it is a security concern as this will provide full, admin level access to your AWS accounts. Access to the `main` repo should be restricted to as small a group as is possible, access is only needed when onboarding new team members, or doing some maintenance on the permissions of the `base-environment` accounts. We address this by creating two different IAM roles (with corresponding trust policies): the first one has admin access (needed to create infrastructure), and is restricted to changes made to the `main` branch via `ref:refs/heads/main`. The second is limited to read-only access for all pull requests (via `ref:refs/pull/*`) - this will allow Terraform to perform the `plan` step to show what infrastructure changes will be made in the PR, but deny any changes to the infrastructure. Please note that the `git` reference is subtly different to what you usually see: `ref:refs/heads/main` instead of `refs/heads/main` - this is a property of how GitHub Actions invokes the job. You should also enable [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) on your GitHub repo, and [require 1+ reviewer approvals](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews) before merging any PR to your `main` branch.
+>In the IAM trust policies above, it's very important to take care with the GitHub repo org and repo name, while you can add wildcards to simplify access from multiple GitHub repos in your org, it's a security concern as this will provide full, admin level access to your AWS accounts. Access to the `main` repo should be restricted to as small a group as is possible, access is only needed when onboarding new team members, or doing some maintenance on the permissions of the `base-environment` accounts. We address this by creating two different IAM roles (with corresponding trust policies): the first one has admin access (needed to create infrastructure), and is restricted to changes made to the `main` branch via `ref:refs/heads/main`. The second is limited to read-only access for all pull requests (via `ref:refs/pull/*`) - this will allow Terraform to perform the `plan` step to show what infrastructure changes will be made in the PR, but deny any changes to the infrastructure. Please note that the `git` reference is subtly different to what you usually see: `ref:refs/heads/main` instead of `refs/heads/main` - this is a property of how GitHub Actions invokes the job. You should also enable [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) on your GitHub repo, and [require 1+ reviewer approvals](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews) before merging any PR to your `main` branch.
 
 ## Setting up Terraform
 
-We are now ready to start configuring Terraform to create the rest of the infrastructure in our main account. First, we create a directory inside our git repo for the main account, then a few empty files via:
+We're now ready to start configuring Terraform to create the rest of the infrastructure in our main account. First, we create a directory inside our git repo for the main account, then a few empty files via:
 
 ```bash
 mkdir infra
@@ -213,13 +213,13 @@ cd infra
 touch providers.tf variables.tf outputs.tf main-account.tf environment-accounts.tf
 ```
 
-When terraform is executed in a directory, it will concatenate all the `.tf` files, and determine the dependency graph for you. Each of the files we just created has a specific purpose - while you could put everything in a single file, it is easier to find specific parts of the infrastructure if it is grouped in a file specific for what it is for. The files are:
+When terraform is executed in a directory, it will concatenate all the `.tf` files, and determine the dependency graph for you. Each of the files we just created has a specific purpose - while you could put everything in a single file, it's easier to find specific parts of the infrastructure if it's grouped in a file specific for what it's for. The files are:
 
-- **providers.tf:** Where we configure Terraform, and all the providers we are going to use for infrastructure (AWS, GitHub).
+- **providers.tf:** Where we configure Terraform, and all the providers we're going to use for infrastructure (AWS, GitHub).
 - **variables.tf:** Any variables that we want to use in our infra - grouping them in a file makes it easier to manage them.
-- **outputs.tf:** Some values from our infrastructure are useful in other places, e.g. when we get to DNS, we will construct an output for the command to update the NS servers for our custom domain that you can copy & paste into CloudShell.
+- **outputs.tf:** Some values from our infrastructure are useful in other places, for example when we get to DNS, we will construct an output for the command to update the NS servers for our custom domain that you can copy & paste into CloudShell.
 - **main-account.tf:** All the infrastructure inside our main account.
-- **environment-accounts.tf:** Creates the base environment accounts, and any infrastructure we want to control from the main account, e.g. IAM roles to allow users to switch to the accounts.
+- **environment-accounts.tf:** Creates the base environment accounts, and any infrastructure we want to control from the main account, for example IAM roles to allow users to switch to the accounts.
 
 Add the following to the `providers.tf` file, changing the S3 bucket name to the one you used earlier for the state files:
 
@@ -263,7 +263,7 @@ Let's take a look at each section to understand what it does. First, the `terraf
   }
 ```
 
-The values inside the `backend` block defines which [backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) Terraform should use to store state, in this case the `"s3"` specifies the [S3 backend](https://developer.hashicorp.com/terraform/language/settings/backends/s3). If you do not specify a backend, it will save the state file locally in the `.terraform` directory, and it is up to you to figure out how to keep it safe and distribute it to the rest of the team. This is definitely not ideal. The fields inside are for the following:
+The values inside the `backend` block defines which [backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) Terraform should use to store state, in this case the `"s3"` specifies the [S3 backend](https://developer.hashicorp.com/terraform/language/settings/backends/s3). If you don't specify a backend, it will save the state file locally in the `.terraform` directory, and it's up to you to figure out how to keep it safe and distribute it to the rest of the team. This is definitely not ideal. The fields inside are for the following:
 
 - `bucket`: which s3 bucket to use
 - `key`: which key (if any) to use inside the bucket for the state file
@@ -298,7 +298,7 @@ This is all we need to start building the CI/CD pipeline in GitHub Actions to us
 
 ## Setting up GitHub Actions workflow
 
-We are now ready to set up our CI/CD pipeline to use Terraform. GitHub Actions uses [Yaml workflow](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) files to define each pipeline. We will be using conditional logic in the workflow to determine if it is run on a PR, or on the `main` branch. All changes should be done via a PR, reviewed, tested, and only merged after these steps. When first setting up a GitHub Actions workflow, it needs to be created on the `main` branch before any PR can have a workflow. We will be committing the Terraform code we've written so far that only initializes the backend to do this. Now, create a new file in `.github/workflows/terraform.yaml`, and add the following to it (we will cover each step further down).
+We're now ready to set up our CI/CD pipeline to use Terraform. GitHub Actions uses [Yaml workflow](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) files to define each pipeline. We will be using conditional logic in the workflow to determine if it's run on a PR, or on the `main` branch. All changes should be done via a PR, reviewed, tested, and only merged after these steps. When first setting up a GitHub Actions workflow, it needs to be created on the `main` branch before any PR can have a workflow. We will be committing the Terraform code we've written so far that only initializes the backend to do this. Now, create a new file in `.github/workflows/terraform.yaml`, and add the following to it (we will cover each step further down).
 
 > **Please ensure you update the placeholder AWS Account ID of `123456789012` with your one - there are two instances that need to be replaced:**
 
@@ -447,16 +447,16 @@ permissions:
   contents: read    # This is required for actions/checkout
 ```
 
-We are allowing it `write` permission to the JWT token to allow the job runner to request a JWT token from GitHub's OIDC provider - for more details, have a look at the [GitHub Actions Security](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#adding-permissions-settings) page. We also allow it access to read the content of the repo, but not make any changes via `contents: read`. In some scenarios you may want to allow changes, e.g. if you wanted to enforce the `terraform fmt` command's formatting by fixing any files, and committing them when the job runs.
+We're allowing it `write` permission to the JWT token to allow the job runner to request a JWT token from GitHub's OIDC provider - for more details, have a look at the [GitHub Actions Security](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#adding-permissions-settings) page. We also allow it access to read the content of the repo, but not make any changes via `contents: read`. In some scenarios you may want to allow changes, for example if you wanted to enforce the `terraform fmt` command's formatting by fixing any files, and committing them when the job runs.
 
-The steps in our pipeline are defined in the next section for `jobs`. All the jobs use the `ubuntu-latest` [GitHub runner](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) - you can look at the [full list](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on) if you need to use a different runner, e.g. if you are building an application that requires MacOS or Windows Server. We only set up a single job, and differentiate between PRs and `main` branch pushes using `if: github.event_name == 'pull_request'` and `github.ref == 'refs/heads/main' && github.event_name == 'push'`. The reasoning is that a number of steps would be duplicated (code checkout, installing / initializing Terraform) if we use multiple jobs. We also set a default `working-directory` value for `./infra` as we keep our infrastructure code in a sub-directory relative to the application code - while the first two repos in this tutorial don't have any application code, it is less confusing / error-prone to follow the same pattern across all repo's.
+The steps in our pipeline are defined in the next section for `jobs`. All the jobs use the `ubuntu-latest` [GitHub runner](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) - you can look at the [full list](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on) if you need to use a different runner, for example if you are building an application that requires MacOS or Windows Server. We only set up a single job, and differentiate between PRs and `main` branch pushes using `if: github.event_name == 'pull_request'` and `github.ref == 'refs/heads/main' && github.event_name == 'push'`. The reasoning is that a number of steps would be duplicated (code checkout, installing / initializing Terraform) if we use multiple jobs. We also set a default `working-directory` value for `./infra` as we keep our infrastructure code in a sub-directory relative to the application code - while the first two repos in this tutorial don't have any application code, it's less confusing / error-prone to follow the same pattern across all repo's.
 
 Please pay close attention to the two `Configure AWS Credentials` steps - for all the steps, except the last, we limit the permissions to not allow any changes via the PR IAM role, and then switch to the role that can make changes before the last `Terraform apply` step - we limit this to only allow changes on the `main` branch using `if: github.ref == 'refs/heads/main' && github.event_name == 'push'` in the step definition.
 
 Lastly, we use the following to output the various results of the steps in our build job - the reason we allow continuing after some steps fail is to show where and what failed. This will allow the person to address as many issues in one go as possible, instead of fixing the formatting, updating the PR, then seeing there were syntax issues, fixing that, then having the `plan` step fail, etc.
 
 ```yaml
-  `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+  #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
   #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
   #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
   #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
@@ -480,17 +480,17 @@ github.rest.issues.createComment({
               })
 ```
 
-We are now ready for the first run of our pipeline on `main`. Commit the files, and push the changes to GitHub. Head over to `https://github.com/<name>/<repo-name>/actions`, and confirm the job was successful - output should be similar to the image below:
+We're now ready for the first run of our pipeline on `main`. Commit the files, and push the changes to GitHub. Head over to `https://github.com/<name>/<repo-name>/actions`, and confirm the job was successful - output should be similar to the image below:
 
 ![Screenshot of GitHub Actions showing a successful run of the jobs called "Terraform-PR-Check"](./images/github_action_first_run.png "Successful first GitHub Actions run")
 
-We are now ready to create our environment accounts, set them up to use GitHub Actions, and create our users along with IAM policies defining their access to the `dev`, `test`, and `prod` accounts.
+We're now ready to create our environment accounts, set them up to use GitHub Actions, and create our users along with IAM policies defining their access to the `dev`, `test`, and `prod` accounts.
 
 ### Creating environment accounts
 
-Now that the base pipeline is in place, it is time to start using it. Create a new local branch using `git checkout -b add-environment-accounts`. We will be setting up three additional AWS accounts for `dev`, `test`, and `prod` using Terraform, and AWS Organizations. We will create a number of different files:
+Now that the base pipeline is in place, it's time to start using it. Create a new local branch using `git checkout -b add-environment-accounts`. We will be setting up three additional AWS accounts for `dev`, `test`, and `prod` using Terraform, and AWS Organizations. We will create a number of different files:
 
-`variables.tf` - used to define variables used for the infrastructure we are creating - we group them into a single file to make it easier to manage. Using the `+` in an email address allows you to create a unique value to register an AWS account without needing to set up multiple email accounts / mailing lists. This a requirement as the email you register an account with needs to be unique. The mails for the below will be sent to `my-email@example.com`, with the `+dev|test|prod` parts appended and viewable in the `TO` field. We also specify the IAM role name that will be used when creating the environment accounts to allow assuming roles inside them as users in the main account.
+`variables.tf` - used to define variables used for the infrastructure we're creating - we group them into a single file to make it easier to manage. Using the `+` in an email address allows you to create a unique value to register an AWS account without needing to set up multiple email accounts / mailing lists. This a requirement as the email you register an account with needs to be unique. The mails for the below will be sent to `my-email@example.com`, with the `+dev|test|prod` parts appended and viewable in the `TO` field. We also specify the IAM role name that will be used when creating the environment accounts to allow assuming roles inside them as users in the main account.
 
 ```bash
 variable "iam_account_role_name" {
