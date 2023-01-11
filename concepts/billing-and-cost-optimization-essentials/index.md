@@ -6,27 +6,17 @@ tags:
     - billing
     - essentials
     - aws
-authorGithubAlias: cobusbernard-amazon
+authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
-date: 2021-10-05
+date: 2022-10-05
 ---
 
 When using the cloud to host your applications and systems, it is important to understand how the billing model works, and how you can optimize your costs. The cloud allows you to trade fixed expenses (such as data centers and physical servers) for variable expenses, and only pay for the resources as you consume them. There are a number of different billing dimensions, depending on the type of resource you use. These can range from the amount of time a resource is running; how much data is stored, transferred, or processed; or the number of API invocations made.
 
 ## **Sections:**
 
-- [How do I view my costs?](#how-do-i-view-my-costs)
-- [Can I get an alert when my spending projection is above a certain amount?](#can-i-get-an-alert-when-my-spending-projection-is-above-a-certain-amount)
-- [What resources are free?](#what-resources-are-free)
-- [Can I pay a fixed, predictable amount per month?](#can-i-pay-a-fixed-predictable-amount-per-month)
-- [How can I reduce my monthly bill?](#how-can-i-reduce-my-monthly-bill)
-- [What are Spot Instances?](#what-are-spot-instances)
-- [Automatically scale resources based on demand](#automatically-scale-resources-based-on-demand)
-- [Optimizing compute costs](#optimizing-compute-costs)
-- [Optimizing data transfer costs](#optimizing-data-transfer-costs)
-- [Optimizing database costs](#optimizing-database-costs)
-- [How to optimize a fixed workload](#how-to-optimize-a-fixed-workload)
-- [Tools and services to help with cost optimization](#tools-and-services-to-help-with-cost-optimization)
+|ToC|
+|---|
 
 ## **How do I view my costs?**
 
@@ -46,7 +36,6 @@ Yes! This should be one of the first things you set up when creating a new AWS a
 
 The [AWS Free Tier](https://aws.amazon.com/free/) provides customers the ability to explore and try out AWS services free of charge up to specified limits for each service. The Free Tier comprises three different types of offerings: a 12-month Free Tier, an Always Free offer, and short-term trials. Services with a 12-month Free Tier allow customers to use the service for free up to specified limits for one year from the date the account was created. Services with an Always Free offer allow customers to use the service for free up to specified limits as long as they are an AWS customer. Services with a short-term trial are free to use for a specified period of time or up to a one-time limit, depending on the service selected. To see what Free Tier resources you are currently using, and how much of each you are using, open up the [Free Tier dashboard](https://console.aws.amazon.com/billing/home#/freetier) under the Billing section of your AWS account. Here is an example of what you will be able to see:
 
-<!-- The account ID is visible in the upper right of this screenshot. Please fix. -->
 ![AWS Free Tier dashboard showing overview of Free Tier quotas used](images/free_tier_dashboard.png "AWS Free Tier Dashboard overview of quotas currently used.")
 
 If you have not yet set up an account, or this is your first time using AWS, we recommend you familiarize yourself with the [AWS Management Console](https://aws.amazon.com/getting-started/hands-on/getting-started-with-aws-management-console/), and read through [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/).
@@ -56,7 +45,6 @@ If you have not yet set up an account, or this is your first time using AWS, we 
 Services on AWS are usually billed on a per-consumption rate based on different dimensions, such as the length of time the resource is running, amount of data processed or transferred, and number of requests. Some of the services have a [Free Tier](https://aws.amazon.com/free/), and your monthly costs depend on the combination of services that you use.
 
 If you are looking for a solution with a fixed, predictable cost, [Amazon Lightsail](https://aws.amazon.com/lightsail/) is a service that offers easy-to-use virtual private server (VPS) instances, containers, storage, databases, and more at a cost-effective monthly price. As an example, follow this tutorial on [deploying a WordPress site on Amazon Lightsail](https://aws.amazon.com/getting-started/hands-on/launch-a-wordpress-website/).
-<!-- The Lightsail tutorial linked above is for building a LAMP stack. Did you mean to link to a different tutorial? -->
 
 ## **How can I reduce my monthly bill?**
 
@@ -96,7 +84,7 @@ When you have optimized your workload as much as you can, and there is a fixed m
 
 **Compute Savings Plans** provide the most flexibility and help to reduce your costs by up to 66% (just like Convertible RIs). The plans automatically apply to any EC2 instance regardless of Region, instance family, operating system, or tenancy, including those that are part of Amazon EMR, Amazon ECS, or an Amazon EKS cluster. For example, you can shift from C4 to C5 instances, move a workload from Dublin to London, or migrate from EC2 to AWS Fargate, benefitting from Savings Plan prices along the way, without having to do anything.
 
-**EC2 Instance Savings Plans** apply to a specific instance family within a Region and provide the largest discount (up to 72%, just like Standard RIs). Just like with RIs, your Savings Plan covers usage of different sizes of the same instance type (such as a c5.4xlarge or c5.large) throughout a Region. You can even switch from Windows to Linux while continuing to benefit, without having to make any changes to your Savings Plan.
+**EC2 Instance Savings Plans** apply to a specific instance family within a Region and provide the largest discount (up to 72%, just like Standard RIs). Just like with RIs, your Savings Plan covers usage of different sizes of the same instance type (such as a `c5.4xlarge` or `c5.large`) throughout a Region. You can even switch from Windows to Linux while continuing to benefit, without having to make any changes to your Savings Plan.
 
 ## **Tools and services to help with cost optimization**
 

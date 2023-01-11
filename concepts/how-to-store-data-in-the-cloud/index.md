@@ -36,9 +36,9 @@ Block storage offers the following features:
 
 ## 2. Object storage
 
-Object storage is designed for holding massive volumes of data by distributing across multiple nodes, or buckets. Objects are made up of data, metadata, and a unique object ID. Object IDs look like file paths, but differ from hierarchical file systems by storing object IDs in a flat, non-hierarchical address space that scales horizontally.      
+Object storage is designed for holding massive volumes of data by distributing across multiple nodes, or buckets. Objects are made up of data, metadata, and a unique object ID. Object IDs look like file paths, but differ from hierarchical file systems by storing object IDs in a flat, non-hierarchical address space that scales horizontally.
 
-Object storage is durable because it stores data redundantly across nodes. Data is stored according to rules that determine which node to use based on the object ID. Nodes use [block storage](#block-storage) and data is distributed across nodes to keep node size balanced, which prevents scaling issues. When nodes are filled, the object store adds new nodes to store more data. Alternatively, when objects are deleted, nodes are removed. Object stores are elastic because they can grow or shrink as needed.
+Object storage is durable because it stores data redundantly across nodes. Data is stored according to rules that determine which node to use based on the object ID. Nodes use [block storage](#1-block-storage) and data is distributed across nodes to keep node size balanced, which prevents scaling issues. When nodes are filled, the object store adds new nodes to store more data. Alternatively, when objects are deleted, nodes are removed. Object stores are elastic because they can grow or shrink as needed.
 
 To retrieve an object, an HTTP request is sent to the object store's REST API, which retrieves the data from the storage nodes using a lookup table of object IDs. The lookup tables are also stored in nodes.
 

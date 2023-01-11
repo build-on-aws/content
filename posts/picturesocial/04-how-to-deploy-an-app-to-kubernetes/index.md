@@ -11,6 +11,7 @@ date: 2022-10-14
 ---
 
 This is a 10-part series about Picturesocial:
+
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
@@ -56,7 +57,7 @@ If this is your first time working with AWS CLI or you need a refresher on how t
 kubectl version
 ```
 
-You should have a version of at least `Major:"1", Minor:"23" ` to run this walk-through. Otherwise, I suggest you to [upgrade the version](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) first. 
+You should have a version of at least `Major:"1", Minor:"23" ` to run this walk-through. Otherwise, I suggest you to [upgrade the version](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) first.
 
 2. When you created the cluster, you also run a command to update the kubeconfig file. You don’t have to run it again, but just a friendly reminder that it is a necessary step to continue further.
 
@@ -118,7 +119,7 @@ kubectl get nodes
 
 ![Image showing output of kubectl get nodes command](images/04-kubctl-get-nodes.jpg "Image showing output of kubectl get nodes command")
 
-4. In addition to nodes, you can also check for pods by running the command below. But keep in mind that we haven’t deploy anything yet. Also, if you don’t specify a namespace in the command, it will return everything from the “default” namespace. 
+4. In addition to nodes, you can also check for pods by running the command below. But keep in mind that we haven’t deploy anything yet. Also, if you don’t specify a namespace in the command, it will return everything from the “default” namespace.
 
 ```bash
 kubectl get pods
@@ -208,7 +209,7 @@ spec:
   type: LoadBalancer
 ```
 
-10. Now we are ready to deploy the application to Kubernetes. Make sure you change the Amazon ECR Account ID on the manifest avoce before proceeding.
+10. Now we are ready to deploy the application to Kubernetes. Make sure you change the Amazon ECR Account ID on the manifest above before proceeding.
 
 11. We going to work using the namespace "tests" for this post. Remember that namespaces will help us handle the order of the pods and group them by business domain or affinity. So let’s create the namespace with this command:
 
@@ -271,7 +272,7 @@ That simple "Hello Jose" from the API is the response from the call to a load ba
 kubectl delete pod **podName** -n tests
 ```
 
-As soon as a pod is deleted, Kubernetes will provision another clone because the replica set has to be honored. If you want to see the stream of pods and status you can add the `-w `parameter to watch for changes.
+As soon as a pod is deleted, Kubernetes will provision another clone because the replica set has to be honored. If you want to see the stream of pods and status you can add the `-w` parameter to watch for changes.
 
 ```bash
 kubectl get pods -w -n tests
@@ -293,4 +294,4 @@ kubectl get hpa -n tests
 
 I hope you enjoy this post as much as I enjoyed writing it! And I also hope that it gave you some clarification from the previous posts. If everything went well, you learned how to deploy an application to Kubernetes, create services, access the commands to create namespaces and work through namespaces, check for object descriptions, review the logs of your application, scale your application, and create rules for autoscaling.
 
-In the [next post](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/) we are going to develop one of the core parts of Picturesocial, the API for image recognition and auto tagging using Amazon Rekognition! 
+In the [next post](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/) we are going to develop one of the core parts of Picturesocial, the API for image recognition and auto tagging using Amazon Rekognition!

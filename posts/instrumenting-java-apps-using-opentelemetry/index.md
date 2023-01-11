@@ -14,9 +14,7 @@ authorName: Ricardo Ferreira
 date: 2022-10-24
 ---
 
-In this tutorial, you will learn how to instrument an existing microservice written in Java and SpringBoot to produce telemetry data using OpenTelemetry. You will learn the differences between instrumenting the microservice using an automatic approach, where everything is automatically discovered for you, and the manual approach, where you make the code observable with instrumentation that you provide using the OpenTelemetry SDK. You will also learn how to send this telemetry data to a compatible backend using the OpenTelemetry collector, and eventually switch to another compatible backend without any modifications in the microservice code.
-
-## What you will learn
+In this tutorial, you will learn how to instrument an existing microservice written in Java and SpringBoot to produce telemetry data using OpenTelemetry. You will learn the differences between instrumenting the microservice using an automatic approach, where everything is automatically discovered for you, and the manual approach, where you make the code observable with instrumentation that you provide using the OpenTelemetry SDK. You will also learn how to send this telemetry data to a compatible backend using the OpenTelemetry collector, and eventually switch to another compatible backend without any modifications in the microservice code. In this tutorial, **you will learn**:
 
 - How to use the OpenTelemetry Java agent with a microservice
 - How to configure and implement the OpenTelemetry collector
@@ -26,33 +24,19 @@ In this tutorial, you will learn how to instrument an existing microservice writ
 - How to send generated metrics to Prometheus and Amazon CloudWatch
 - How to switch between observability backends without code changes
 
-## Sidebar
-| Info                | Level                                  |
-| ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Beginner                               |
-| ⏱ Time to complete  | 45 minutes                                 |
-| 💰 Cost to complete | Free when using the AWS Free Tier |
+## Table of Contents
 
-## Prerequisites
+| Attributes             |                                                                 |
+|------------------------|-----------------------------------------------------------------|
+| ✅ AWS experience      | Beginner                                                        |
+| ⏱ Time to complete    | 45 minutes                                                      |
+| 💰 Cost to complete    | Free tier eligible                                               |
+| 🧩 Prerequisites       | - [Docker](https://www.docker.com/get-started) 4.11+ (Required)<br>- [Java](https://openjdk.org/install) 17+ (Required)<br>- [Maven](https://maven.apache.org/download.cgi) 3.8.6+ (Required)<br>- [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (Optional) |
+| &#x1F4BE; Code         | [Download here the full guide](https://aws.amazon.com) |
 
-Before starting this tutorial, you will need the following:
+| ToC |
+|-----|
 
- - [Docker](https://www.docker.com/get-started) 4.11+ (Required)
- - [Java](https://openjdk.org/install) 17+ (Required)
- - [Maven](https://maven.apache.org/download.cgi) 3.8.6+ (Required)
- - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (Optional. Only required for the bonus section.)
-
- ## Sections
- - [Introduction](#introduction)
- - [Getting started with the existing code](#getting-started-with-the-existing-code)
- - [Automatic instrumentation with the OpenTelemetry agent](#automatic-instrumentation-with-the-opentelemetry-agent)
- - [Sending telemetry data to the collector](#sending-telemetry-data-to-the-collector)
- - [Sending all the traces to Grafana Tempo](#sending-all-the-traces-to-grafana-tempo)
- - [Manual instrumentation with the OpenTelemetry SDK](#manual-instrumentation-with-the-opentelemetry-sdk)
- - [Custom metrics with the OpenTelemetry SDK](#custom-metrics-with-the-opentelemetry-sdk)
- - [Sending all the metrics to Prometheus](#sending-all-the-metrics-to-prometheus)
- - [Bonus: switching the observability backend to AWS](#bonus-switching-the-observability-backend-to-aws)
- 
 ## Introduction
 
 [OpenTelemetry](https://opentelemetry.io/) is one of those technologies that you know you must learn and start using as soon as possible, but every time you get to work with it, you find it more complicated than it should be. If this is you, don't worry. You're not alone. Many other people also complain about OpenTelemetry being complicated. However, it is important for you to understand that some of this complexity is incidental because OpenTelemetry is not a ready-to-use library. It is a [framework](https://opentelemetry.io/docs/concepts/components).
@@ -120,7 +104,7 @@ curl -X GET http://localhost:8888/hello
 You should receive a reply like this:
 
 ```json
-{"message":"Hello World","valid":true}
+{"message":"Hello World"}
 ```
 
 Once you are done with the tests, stop `run-microservice.sh` to shut down the microservice. You can do this by pressing `Ctrl+C`. From this point on, every time you need to execute the microservice again with a new version of the code that you changed, just execute the same script.
@@ -169,6 +153,10 @@ This means once telemetry data for traces and metrics are transmitted to the res
 docker compose down
 ```
 
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=XvmicNH_4lc&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=1
+
 ## Automatic instrumentation with the OpenTelemetry agent
 
 You have your microservice ready to go, the observability backend is eager to receive telemetry data, so now it is time for you to start the instrumentation process. This is the process where you teach the code how to emit telemetry data. How intrusive in your code this process is depends on a lot of factors, like which programming language you are using, the level of detail you want to provide for the observability backend, and whether you can effectively change your code for this. These factors often dictate if you are going to use black-box instrumentation or white-box instrumentation.
@@ -190,7 +178,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.17.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 java -javaagent:./${AGENT_FILE} -jar target/hello-app-1.0.jar
@@ -217,7 +205,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.16.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 export OTEL_TRACES_EXPORTER=logging
@@ -255,6 +243,10 @@ This is a root span, a type of trace data, generated automatically by the OpenTe
 These are metrics generated automatically by the OpenTelemetry agent, that are updated [every minute](https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md#periodic-metric-reader). In your case, there will be more metrics than what was shown above for brevity. What matters is the microservice already generating useful telemetry data for traces and metrics without you changing a single line of its code. And it was achieved by one of the moving parts of OpenTelemetry called the agent. An agent, whether one that is pre-packaged like this, or one that you implemented yourself, is the component responsible for collecting the generated telemetry data and sending to a destination.
 
 Now that you know your microservice is properly instrumented, we can work towards sending all this telemetry data to a useful place. We will achieve this by using the OpenTelemetry collector.
+
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=GgT7B7h0RMA&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=2
 
 ## Sending telemetry data to the collector
 
@@ -338,7 +330,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.16.0/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 export OTEL_TRACES_EXPORTER=otlp
@@ -488,6 +480,10 @@ collector:
 
 Save the contents of the `docker-compose.yaml` file. The code is now in good shape so we can switch our focus to the observability backend, and how to configure the collector to send data to it.
 
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=EeU-k659lpw&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=3
+
 ## Sending all the traces to Grafana Tempo
 
 So far, you have been using the logging from the console to visualize telemetry data. While logging is great for debugging and troubleshooting purposes, it is not very useful to analyze large amounts of telemetry data. This is particularly true for traces, where you would like to see the complete flow of the code using visualizations such as the timelines or waterfalls.
@@ -580,6 +576,10 @@ This is a much better way to visualize traces, right? Take a moment to understan
 
 All this information was generated without you changing a single line of the microservice code. Thanks to the support for black-box instrumentation offered by the OpenTelemetry agent for Java. However, there are situations that even when you have access to black-box instrumentation, you may need to provide additional context to the spans, and sometimes even new spans from scratch. You can achieve this by using the OpenTelemetry SDK for a particular programming language.
 
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=V5GtJRZtZ90&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=4
+
 ## Manual instrumentation with the OpenTelemetry SDK
 
 In the previous section, you learned how to configure the collector to send traces to Grafana Tempo. You also learned how to visualize those traces using Grafana, where you could see all the details related to how the code was executed. Using tools like this is useful for situations where you need to troubleshoot performance-related problems in applications. Even more so when these applications are distributed, with code executed in different layers, platforms, and machines. But let's dig into what Grafana is showing a bit more.
@@ -625,10 +625,11 @@ But you don't have to settle for this. You can use the OpenTelemetry SDK to prov
 
 3. Open the file `pom.xml`.
 
-4. Add the following properties right after the XML tag `parent`:
+4. Update the properties section to the following:
 
 ```xml
 <properties>
+    <maven.compiler.release>17</maven.compiler.release>
     <otel.traces.api.version>0.13.1</otel.traces.api.version>
     <otel.metrics.api.version>1.10.0-alpha-rc.1</otel.metrics.api.version>
 </properties>
@@ -642,13 +643,13 @@ These properties will be used throughout many parts of the code.
 <dependency>
     <groupId>io.opentelemetry</groupId>
     <artifactId>opentelemetry-api</artifactId>
-    <version>1.18.0</version>
+    <version>1.20.1</version>
 </dependency>
 
 <dependency>
     <groupId>io.opentelemetry.instrumentation</groupId>
     <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-    <version>1.18.0-alpha</version>
+    <version>1.20.1</version>
 </dependency>
 
 <dependency>
@@ -672,6 +673,8 @@ You now have everything you need to write code using the OpenTelemetry SDK for J
 
 ```java
 package tutorial.buildon.aws.o11y;
+
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -742,6 +745,10 @@ Cool right? You now have a more realistic view of what the code does. You can se
 
 If there is such thing of observability well implemented, I would say that it should include practices like this where you take any measures necessary to make your code rightfully observable. And this sometimes means going beyond what black-box instrumentation offers.
 
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=KMLshL922H8&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=5
+
 ## Custom metrics with the OpenTelemetry SDK
 
 Now that you have learned how to use the OpenTelemetry SDK to create custom spans, let's see how to do the same for metrics. The ability to create your own metrics is important because sometimes you need to provide insight about certain aspects of the code that are tricky to monitor. In this section, you will change the code of the microservice to create and update two metrics: one that will count every time the microservice is executed and another one to monitor the amount of memory the JVM is consuming.
@@ -753,8 +760,12 @@ Change its code to the following version:
 ```java
 package tutorial.buildon.aws.o11y;
 
+import java.util.Objects;
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -768,8 +779,6 @@ import io.opentelemetry.instrumentation.annotations.WithSpan;
 
 import static tutorial.buildon.aws.o11y.Constants.*;
 import static java.lang.Runtime.*;
-
-import javax.annotation.PostConstruct;
 
 @RestController
 public class HelloAppController {
@@ -855,6 +864,10 @@ As you can see, the fundamental difference between synchronous and asynchronous 
 2. Save the changes made to the `HelloAppController.java` file.
 
 Now that we have the metrics properly implemented, it is time to configure the collector to send them to Prometheus.
+
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=2U6eKv7DWfA&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=6
 
 ## Sending all the metrics to Prometheus
 
@@ -964,6 +977,10 @@ Here is what you should see.
 ![Explore page showing Prometheus with a graph of the memory usage metric](images/fig_13.png)
 
 Go ahead and play with the different graph types for this visualization until you find one that looks better. As you can see, creating and maintaining your own traces and metrics using OpenTelemetry is not rocket science. This should be enough for you to leverage this technology for your observability needs. As I mentioned before, OpenTelemetry is not complicated once you understand which moving parts to work with and how to configure them.
+
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=AD3biFn-sK0&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=7
 
 ## Bonus: switching the observability backend to AWS
 
@@ -1128,5 +1145,9 @@ You should get the following visualization:
 ![Shows the guage implemented for the number of executions metric](images/fig_19.png)
 
 This is the proof that you were able to successfully switch the observability backend for metrics without changing a single line of code for the microservice. Instrument once, reuse everywhere. This is how OpenTelemetry was designed to work.
+
+🎥 Here is a video containing a hands-on implementation about this section.
+
+https://www.youtube.com/watch?v=KX9-sIhfLf4&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ&index=8
 
 Congratulations. You have now officially completed all the steps from this tutorial.

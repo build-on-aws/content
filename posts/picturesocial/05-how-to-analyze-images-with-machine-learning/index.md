@@ -13,6 +13,7 @@ date: 2022-10-15
 ---
 
 This is a 10-part series about Picturesocial:
+
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
@@ -24,7 +25,9 @@ We started this journey with containers, registries, Kubernetes, Terraform, and 
 ## What is Image Detection?
 
 As humans, we are very good at recognizing things we have seen before. You can look at this picture and almost instantly recognize that it shows a cat lying on a laptop with some flowers in the background. If you know a little bit more about cats, maybe you can also tell that this is an adorable Persian cat.
+
 ![Picture of a cat laying over a laptop](images/05-cat.jpg "Picture of a cat laying over a laptop")
+
 Computers do not possess this innate ability to recognize different things in an image, but they can be trained to do so. [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a machine learning technique that can be used to allow computers to recognize objects in images with varying confidence levels. In order for it to work, deep learning requires us to train models with thousands of labeled images: cat photos labeled “cat”, dog photos labeled “dog”, and so on. This can take up a significant amount of data, time and compute resources, making it harder for us to train deep learning models on our own.
 
 Luckily for us, we are able to add image detection capabilities to Picturesocial without having to create, train, or deploy our own machine learning models using simple, easy to use API’s.
@@ -313,13 +316,13 @@ public class PictureController : ControllerBase
 
 17. We are going to save everything and test it by running the following command in the Terminal:
 
-```
+```bash
 dotnet run
 ```
 
 You should get something similar to this output:
 
-```
+```text
 info: Microsoft.Hosting.Lifetime[0]
 Building...
 info: Microsoft.Hosting.Lifetime[14]
@@ -330,7 +333,7 @@ info: Microsoft.Hosting.Lifetime[0]
 Hosting environment: Development
 ```
 
-Note the URL the app is listening on above: http://localhost:5075. We'll use that in the next step.
+Note the URL the app is listening on above: `http://localhost:5075`. We'll use that in the next step.
 
 18 Let’s upload a picture into our S3 bucket. For example, in my case I uploaded two pictures.
 
@@ -338,9 +341,7 @@ Note the URL the app is listening on above: http://localhost:5075. We'll use tha
 
 19. Let's compose the URL request using one of my pictures as example and paste it in the browser.
 
-```
 [http://localhost:5075/api/pictures/1634160049537.jpg](http://localhost:5075/api/pictures/wendy.jpg)
-```
 
 The result will be similar to this:
 
@@ -389,8 +390,8 @@ The result will be similar to this:
 
 Now, we have our hashtags ready for Picturesocial! If you want to clone the API Project, you can do it with the following command:
 
-```
-[git clone https://github.com/aws-samples/picture-social-sample/](https://github.com/aws-samples/picture-social-sample.git) -b ep5
+```bash
+git clone https://github.com/aws-samples/picture-social-sample.git -b ep5
 ```
 
 If you got here, that means you are now using artificial intelligence services to label images!

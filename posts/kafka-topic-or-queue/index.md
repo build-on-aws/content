@@ -9,13 +9,13 @@ authorName: Abhishek Gupta
 date: 2022-08-31
 ---
 
-The number of myths and misconceptions associated with a technology is directly proportional to it's popularity i.e. the more tenured and widely-used a technology is, the likelihood of misnomers floating around is quite high. [Apache Kafka](https://kafka.apache.org/) is no different! It's sometimes referred to as a "queuing service" (terrible!), "pub/sub system" (acceptable, but not quite there), "messaging system" (not too bad) etc. 
+The number of myths and misconceptions associated with a technology is directly proportional to it's popularity i.e. the more tenured and widely-used a technology is, the likelihood of misnomers floating around is quite high. [Apache Kafka](https://kafka.apache.org/) is no different! It's sometimes referred to as a "queuing service" (terrible!), "pub/sub system" (acceptable, but not quite there), "messaging system" (not too bad) etc.
 
 > An "event streaming platform" is an accurate description by the way and [well explained in the documentation as well](https://kafka.apache.org/documentation/#intro_platform)).
 
 But something more widespread (at least in my experience and discussion with fellow developers) is the confusion around **Whether Kafka is a Topic, or a Queue?** In addition to the "too many names" problem, what compounds this confusion is the fact that the word `topic` can be interpreted in a specific way in the the world of "messaging systems" - more on this later in the blog post. 
 
-> In the case of Kafka, a *Topic* is a fundamental construct - think of it as something you send data to and receive data from. 
+> In the case of Kafka, a *Topic* is a fundamental construct - think of it as something you send data to and receive data from.
 
 ## What is a Queue?
 
@@ -60,7 +60,7 @@ Topics (sometimes also referred to as channels) are key to [Publish-Subscribe sy
 
 Since data in Kafka is durable, it's common to use the same data in a variety of ways for different requirements. Thus you will end up building *multiple* applications, each consuming data from the *same* Kafka topic(s) but processing it in a specific (and different manner). Say, one application persists data in Kafka topics to a database (perhaps using Kafka Connect), another one simply filters data based on business rules, and yet another service executes stateful operations such as aggregations (maybe with Kafka Streams?) - it all depends on what your use-cases are.
 
-![](https://kafka.apache.org/32/images/consumer-groups.png)
+![Kafka cluster with 2 server nodes, and 2 consumer groups "A" and "B"](https://kafka.apache.org/32/images/consumer-groups.png "Kafka cluster with 2 server nodes, and 2 consumer groups "A" and "B"")
 
 > Diagram from the Apache Kafka [documentation](https://kafka.apache.org)
 
