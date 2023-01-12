@@ -28,7 +28,7 @@ As humans, we are very good at recognizing things we have seen before. You can l
 
 ![Picture of a cat laying over a laptop](images/05-cat.jpg "Picture of a cat laying over a laptop")
 
-Computers do not possess this innate ability to recognize different things in an image, but they can be trained to do so. [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a machine learning technique that can be used to allow computers to recognize objects in images with varying confidence levels. In order for it to work, deep learning requires us to train models with thousands of labeled images: cat photos labeled “cat”, dog photos labeled “dog”, and so on. This can take up a significant amount of data, time and compute resources, making it harder for us to train deep learning models on our own.
+Computers do not possess this innate ability to recognize different things in an image, but they can be trained to do so. [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a machine learning technique that can be used to allow computers to recognize objects in images with varying confidence levels. In order for it to work, deep learning requires us to train models with thousands of labeled images: cat photos labeled "cat", dog photos labeled "dog", and so on. This can take up a significant amount of data, time, and compute resources, making it harder for us to train deep learning models on our own.
 
 Luckily for us, we are able to add image detection capabilities to Picturesocial without having to create, train, or deploy our own machine learning models using simple, easy to use API’s.
 
@@ -113,7 +113,7 @@ If this is your first time working with AWS CLI or you need a refresher on how t
 
 ## Walk-through
 
-1. First we are going to create the web API using the .NET CLI. The API name should be specified using the -n parameter, in our case "pictures".
+1. First we are going to create the web API using the .NET CLI. The API name should be specified using the -n parameter, in our case `pictures`.
 
 ```bash
 dotnet new webapi -n pictures
@@ -129,7 +129,7 @@ code pictures/
 
 ![Picture of an API file structure](images/05-app-structure.jpg "Picture of an API file structure")
 
-4. We are going to rename the controller file as `PictureController.cs` and we’ll delete the “WeatherForecast.cs” class.
+4. We are going to rename the controller file as `PictureController.cs` and we’ll delete the "WeatherForecast.cs" class.
 5. Now let’s add the Nuggets that we are going to use for this project. In the same terminal that we used to create the web API let's position our cursor in `pictures`
 
 ```bash
@@ -169,7 +169,7 @@ using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
 ```
 
-9. We are going to create a route for our API Controller, so we can call the API with the following url format `http://url/api/pictures/photo.jpg`.
+9. We are going to create a route for our API Controller, so we can call the API with the following URL format `http://url/api/pictures/photo.jpg`.
 
 ```csharp
 namespace pictures.Controllers;
@@ -183,7 +183,7 @@ namespace pictures.Controllers;
 public class PictureController : ControllerBase
 ```
 
-11. Then we define the HTTP Method GET and the route. We are going to create the Method “DetectLabels” that will receive 2 parameters: 1) file name including the file extension as a `String` and 2) bucket name set as default in the same method, as a `String`. We are using an async method as Amazon Rekognition will detect labels asynchronously. We are also returning the response as a JSON array of Labels.
+11. Then we define the HTTP Method GET and the route. We are going to create the Method "DetectLabels" that will receive 2 parameters: 1) file name including the file extension as a `String` and 2) bucket name set as default in the same method, as a `String`. We are using an async method as Amazon Rekognition will detect labels asynchronously. We are also returning the response as a JSON array of Labels.
 
 12. At this point, create an S3 bucket in the same region that you are using for Amazon Rekognition, in our case it is gonna be `us-east-1`, and you are going to use the bucket name as default in the method definition.
 

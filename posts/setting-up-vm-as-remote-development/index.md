@@ -22,7 +22,7 @@ This switch is for a number of reasons, but my main reason is effectiveness. I n
 
 One thing to keep in mind is that there is no one-size-fits-all solution for your development environment. Not every developer can use remote development for various reasons, and it is not the purpose of this article to persuade you to use it. The goal of this article is more on how you can gain insight or ideas to enhance your development workflow.
 
-> You can find the source code for VM provisioning with AWS CDK this Github repo: [donnieprakoso/remote-development](https://github.com/donnieprakoso/remote-development).
+> You can find the source code for VM provisioning with AWS CDK this GitHub repo: [donnieprakoso/remote-development](https://github.com/donnieprakoso/remote-development).
 
 ## Technical Overview
 
@@ -153,7 +153,7 @@ eip_association = _ec2.CfnEIPAssociation(
 
 ### Deployments
 
-There are 2 steps you need to do for deployment:
+There are two steps you need to do for deployment:
 
 1. Define context in cdk.json file
 
@@ -311,7 +311,7 @@ You can use Neovim config files which I used in this repo.
 
 ### SSH Tunneling for Web Development
 
-Often I need to access the ports opened by my application on the remote VM. Whether it's for testing with Docker, developing a static website with Hugo, or as simple as running a webserver with the `python -m http.server` module. To be able to access the port from a local laptop, you can tunnel by running the following command:
+Often I need to access the ports opened by my application on the remote VM. Whether it's for testing with Docker, developing a static website with Hugo, or as simple as running a web server with the `python -m http.server` module. To be able to access the port from a local laptop, you can tunnel by running the following command:
 
 ```bash
 ssh -N -L <LOCAL PORT>:localhost:<REMOTE PORT> ubuntu@<IP ADDRESS>
@@ -333,7 +333,7 @@ And now I can access it from my browser pointing to my `localhost`:
 
 ### Remote Coding with Visual Studio Code
 
-You can also use Visual Studio Code to do remote development using the extension pack "[Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)".
+You can also use Visual Studio Code to do remote development using the extension pack [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack).
 
 With this extension pack, you can use almost all the features in Visual Studio Code, although with a note that not all extensions can be used remotely.
 
@@ -362,7 +362,7 @@ Once the process is complete, you get a VM that has been upgraded, and still has
 
 ## Conclusion
 
-There are still many kinds of use cases that you can implement using a VM as remote development. From running mockups for AWS services using [Localstack](https://github.com/localstack/localstack) to using a VM as [Gitlab runner](https://docs.gitlab.com/runner/).
+There are still many kinds of use cases that you can implement using a VM as remote development. From running mockups for AWS services using [Localstack](https://github.com/localstack/localstack) to using a VM as [GitLab runner](https://docs.gitlab.com/runner/).
 
 The flexibility offered by VMs and configuration using CDK provides a variety of opportunities to implement use cases to support your development workflow remotely.
 

@@ -52,7 +52,7 @@ Just want the code? Grab the CDK code to create the infrastructure [here](https:
 
 ## 2. Configure the Flask App
 
-Before we provision the infrastruture, let's review our containerized Flask app and configure it to run in the cloud.
+Before we provision the infrastructure, let's review our containerized Flask app and configure it to run in the cloud.
 
 ### Review App Setup
 
@@ -624,7 +624,7 @@ In the AWS console, navigate to the IAM service and create a new user with a use
 
 ```
 
-Once the user is created, note down the “AWS ACCESS KEY ID” and the “AWS SECRET ACCESS KEY” to use in the next step. Treat these like a username and password. If you lose the “AWS SECRET ACCESS KEY”, you’ll need to generate a new one.
+Once the user is created, note down the `AWS ACCESS KEY ID` and the `AWS SECRET ACCESS KEY` to use in the next step. Treat these like a username and password. If you lose the `AWS SECRET ACCESS KEY`, you’ll need to generate a new one.
 
 For more details on creating an IAM user, following these instructions to [create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
 

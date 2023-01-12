@@ -24,7 +24,7 @@ Log file entries of note include:
 - `/var/log/syslog` which stores global system activity like notices and alerts generated at server boot time. The actual log name depends on the Linux variant, but generally Ubuntu systems use `syslog`, while other distros like Amazon Linux and CentOS use the name `/var/log/messages`.
 - `/var/log/auth.log` for storing security-related events such as failed login attempts, user password updates, and package installs performed by the root user. You can think of this log file as the system of record for activity requiring approval from pluggable authentication modules (PAM). Ubuntu uses the file `auth.log`, while Amazon Linux and CentOS use `/var/log/secure`.
 - `/var/log/kern.log` stores low-level system activity records for disk management, memory, and system tasks. The entries found in this log includes kernel events, errors, and warnings, which can be helpful for troubleshooting custom configurations.
-- `/var/log/cron` stores information about cron jobs which are tasks configured to run on a set schedule. An example would be an operation that runs every **Sunday at 4:00AM** to perform data backups. The information captured in the cron log verifies if a task runs as scheduled as well as the output results from the job.
+- `/var/log/cron` stores information about `cron` jobs which are tasks configured to run on a set schedule. An example would be an operation that runs every **Sunday at 4:00AM** to perform data backups. The information captured in the cron log verifies if a task runs as scheduled as well as the output results from the job.
 
 Applications developed to run on Linux can also create logs as evidenced by several sub-directories in the graphic above. Print services write logs to the `./cups` sub-directory, and information captured by web servers is written to `./apache2`. Developers simply modify the code so that output is written to a location most suited for the application. As a best practice, developers can use a unique sub-directory to manage logs associated with each application. Two very important utilities found in the `/var/log` directory are `syslog` and `dmesg`.
 
@@ -70,7 +70,7 @@ To view user logins for the current day:
 $ journalctl -u 'systemd-logind' --since "today" --until "tomorrow"
 ```
 
-To view messages from an apache webserver:
+To view messages from an Apache web server:
 
 ```bash
 $ journalctl -f -u apache

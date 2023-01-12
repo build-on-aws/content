@@ -12,13 +12,13 @@ date: 2022-10-27
 
 We often need tools to get things done. As a developer, one of my productivity hacks is to use Telegram bots to help me get things done quickly. From checking the bus schedule for commuting, to image resizing. Most of the small, unpleasant tasks I delegate to the Telegram bot. Simply put, a Telegram bot is my personal assistant.
 
-If that opening line got your interest, this article will provide you the base foundation to build Telegram bot. Plus, with ready-to-deploy code which you can find on this Github repo.
+If that opening line got your interest, this article will provide you the base foundation to build Telegram bot. Plus, with ready-to-deploy code which you can find on this GitHub repo.
 
-> You can find the source code in this Github repo: [donnieprakoso/telegram-bot-boilerplate](https://github.com/donnieprakoso/telegram-bot-boilerplate).
+> You can find the source code in this GitHub repo: [donnieprakoso/telegram-bot-boilerplate](https://github.com/donnieprakoso/telegram-bot-boilerplate).
 
 Now, let's get more technical.
 
-To interact with Telegram bots — such as getting messages or photos — we can use either polling ([getUpdates](https://core.telegram.org/bots/api#getting-updates)) or webhooks ([setWebhook](https://core.telegram.org/bots/api#setwebhook)). Of these two methods, I'm more comfortable using a webhook because I don't have to develop polling mechanisms that use resources inefficiently. With a webhook, if there is a message, Telegram will make a `POST` request to the webhook URL which will trigger our backend to process the request.
+To interact with Telegram bots — such as getting messages or photos — we can use either polling ([`getUpdates`](https://core.telegram.org/bots/api#getting-updates)) or webhooks ([`setWebhook`](https://core.telegram.org/bots/api#setwebhook)). Of these two methods, I'm more comfortable using a webhook because I don't have to develop polling mechanisms that use resources inefficiently. With a webhook, if there is a message, Telegram will make a `POST` request to the webhook URL which will trigger our backend to process the request.
 
 ![Overview of request from Telegram, webhook and serverless API](images/TelegramBot-Page-1.drawio.png)
 
@@ -200,7 +200,7 @@ Go to Parameter Store [dashboard](https://console.aws.amazon.com/systems-manager
 ![Parameter Store dashboard](images/ssm-1.png)
 Click the `telegram_token` parameter and click the `Edit` button.
 
-![Edit telegram_token](images/ssm-2.png)
+![Edit `telegram_token`](images/ssm-2.png)
 Change the value of `telegram_token` to the value of the Telegram token you got.
 
 ![Change Telegram token value](images/ssm-3.png)
