@@ -656,7 +656,7 @@ Above, we see one task was stopped. A service deployment was completed. And the 
 
 We have success!
 
-## 7. Destroy resources
+## 7. Cleaning up
 
 If you're done using the cloud resources we created in this project, you can destroy them now to ensure you are not billed for their use. To do that, navigate back to the `ecs-devops-sandbox-repository` project at the command line and run:
 
