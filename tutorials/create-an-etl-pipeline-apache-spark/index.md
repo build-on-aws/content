@@ -19,16 +19,16 @@ Batch ETL is a common use case across many organizations. This tutorial will pro
 
 We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) to interact with the Spark cluster. PySpark allows you to write Spark applications using Python APIs. 
 
-## Table of Content
 | Attributes          |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Beginner                               |
 | ⏱ Time to complete  | 30 mins - 45 mins                      |
 | 💰 Cost to complete | USD 0.30                               |
-| 🧩 Prerequisites       | 
-- An[AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br>
-- An IAM user that has has the access to create AWS resources. <br>
-- Basic understanding of Python
+| 🧩 Prerequisites       | - An[AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br> - An IAM user that has has the access to create AWS resources. <br> - Basic understanding of Python
+
+## Table of Content
+| ToC |
+|-----|
 
 ## What you will accomplish
 
