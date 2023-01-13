@@ -110,7 +110,11 @@ Replicas provide the ability to restore data quickly and with minimal data loss.
 
 ## Recommended next steps
 
-<!-- This section will have a bullet list of recommended next steps, which should mostly focus on tutorials for hands-on experience. -->
-
- - [Getting started with X (link)]
+- AWS Documentation
+  - [Amazon RDS: Backing up and restoring an Amazon RDS DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.BackupRestore.html)
+  - [Amazon RDS: Working with read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
+- Hot-to guide
+  - [Amazon RDS Backup & Restore Using AWS Backup](https://aws.amazon.com/getting-started/hands-on/amazon-rds-backup-restore-using-aws-backup/)
+- Well-Architected workshop
+  - [Testing Resilience of EC2, RDS, and AZ USing Chaos Engineering](https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_of_ec2_rds_and_s3/) - This lab illustrates how RDS fails over to the standby instance to maintain availability
  
