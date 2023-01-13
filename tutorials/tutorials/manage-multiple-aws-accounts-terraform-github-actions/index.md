@@ -12,14 +12,15 @@ authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-01-04
 ---
+
 If you've ever had to manually manage infrastructure for multiple AWS accounts, you know how much work this can be if done by hand. Never mind all the documentation, onboarding of new team members, mistakes made along the way, and that Friday evening spent manually fixing production after one step in the deployment document had a missing step.
 
-This guide will focus on showing you a way to manage multiple AWS accounts with [Terraform](https://www.terraform.io/) and [GitHub Actions](https://github.com/features/actions), and keep the 3 environments (dev, test, and prod) infrastructure in sync. If you want to take a look at all the code, or clone it to play locally, you can do so via the [main repo](https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-main) (`git clone https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-main.git`) and [base-environments repo](https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-base-environments) (`git clone https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-base-environments.git`). It's based on the [BOA328 re:Invent talk](https://www.youtube.com/watch?v=P6Ngme9KBqs) by [Emily Freeman](https://twitter.com/editingemily), [Julie Gunderson](https://twitter.com/Julie_Gund), and [Cobus Bernard](https://twitter.com/cobusbernard) - apologies for the audio, there were issues on the day. We will cover the following topics in this guide:
+This guide will focus on showing you a way to manage multiple AWS accounts with [Terraform](https://www.terraform.io/) and [GitHub Actions](https://github.com/features/actions), and keep the 3 environments (dev, test, and prod) infrastructure in sync. If you want to take a look at all the code, or clone it to play locally, you can do so via the [main repo](https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-main), and [base-environments repo](https://github.com/build-on-aws/multiple-accounts-with-terraform-github-actions-base-environments). It's based on the [BOA328 re:Invent talk](https://www.youtube.com/watch?v=P6Ngme9KBqs) by [Emily Freeman](https://twitter.com/editingemily), [Julie Gunderson](https://twitter.com/Julie_Gund), and [Cobus Bernard](https://twitter.com/cobusbernard) - apologies for the audio, there were issues on the day. We will cover the following topics in this guide:
 
-- Use [Amazon OpenID Connect](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) to allow access from GitHub Actions to our AWS account without creating / managing long-lived credentials
-- Using S3 as a backend for Terraform [state files](https://developer.hashicorp.com/terraform/language/state)
+- Use [Amazon OpenID Connect](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) to allow access from GitHub Actions to our AWS accounts without creating / managing long-lived credentials
+- Using S3 as a backend for Terraform [state files](https://developer.hashicorp.com/terraform/language/state), with DynamoDB for locking, and encrypting the state file at rest with KMS
 - GitHub Actions to run our CI/CD pipelines to deploy all infrastructure and services
-- Use a [Makefile](https://opensource.com/article/18/8/what-how-makefile) to simplify CI/CD commands
+- Creating a [Makefile](https://opensource.com/article/18/8/what-how-makefile) to simplify CI/CD commands
 - Manage all user access via Terraform
 - Create an ECS cluster and deploy a demo service
 
@@ -28,7 +29,8 @@ This guide will focus on showing you a way to manage multiple AWS accounts with 
 | ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 60 minutes                                                      |
 | 💰 Cost to complete    | Fee tier eligible                                               |
-| 🧩 Prerequisites       | - [Docker](https://www.docker.com/get-started) 4.11+ (Required)<br>- [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [GitHub](https://github.com) account |
+| 🧩 Prerequisites       | - [Docker](https://www.docker.com/get-started) 4.11+ (Required)<br>- [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [GitHub](https://github.com) account<br>- [Terraform](https://terraform.io/) 1.3.7+|
+| ⏰ Last Updated        | 2023-01-13                                                      |
 
 ## Table of Contents
 
@@ -74,134 +76,12 @@ This will open up a CloudShell session:
 Change the values environment variables in the commands below for your setup, then paste it into the CloudShell window - make sure to press `enter` after pasting to ensure the last command also executes.
 
 ```bash
-BUCKET_NAME="tf-gh-multi-account-buildon"
-IAM_ROLE_NAME="GitHub-Actions-Main"
-GH_ORG="build-on-aws"
-GH_TF_MAIN_REPO="multiple-accounts-with-terraform-github-actions-main"
-AWS_ACCOUNT_ID="123456789012"
-AWS_REGION="us-east-1"
-DYNAMODB_LOCK_TABLE="Terraform-Main-State-Lock"
-KMS_KEY_ALIAS="Terraform-Main"
-
-# Create local file with the IAM trust policy to allow our GitHub repo access to the IAM role for Terraform
-# This is for the main branch, and will have full admin access.
-#
-# NB: The `ref:refs/heads/main` is *not* a typo, this is how GH Actions assumes the IAM role.
-cat <<EOF > gh-iam-trust-policy.json
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Sid": "Statement1",
-    "Effect": "Allow",
-    "Principal": {
-      "Federated": "arn:aws:iam::$AWS_ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
-
-    },
-    "Action": "sts:AssumeRoleWithWebIdentity",
-    "Condition": {
-      "StringLike": {
-        "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-        "token.actions.githubusercontent.com:sub": "repo:$GH_ORG/$GH_TF_MAIN_REPO:ref:refs/heads/main"
-      }
-    }
-  }]
-}
-EOF
-
-# Create local file with the IAM trust policy to allow our GitHub repo access to the IAM role for Terraform
-# This is for any PR branches, and will have read-only access.
-#
-# NB: The `ref:refs/heads/main` is *not* a typo, this is how GH Actions assumes the IAM role.
-cat <<EOF > gh-pr-iam-trust-policy.json
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Sid": "Statement1",
-    "Effect": "Allow",
-    "Principal": {
-      "Federated": "arn:aws:iam::$AWS_ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
-
-    },
-    "Action": "sts:AssumeRoleWithWebIdentity",
-    "Condition": {
-      "StringLike": {
-        "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-        "token.actions.githubusercontent.com:sub": ["repo:$GH_ORG/$GH_TF_MAIN_REPO:ref:refs/heads/main", "repo:$GH_ORG/$GH_TF_MAIN_REPO:pull_request"]
-      }
-    }
-  }]
-}
-EOF
-
-# OpenID provider to allow GitHub Actions access to our AWS account. Thumbprint from:
-# https://github.blog/changelog/2022-01-13-github-actions-update-on-oidc-based-deployments-to-aws/
-aws iam create-open-id-connect-provider \
-  --region $AWS_REGION \
-  --url "https://token.actions.githubusercontent.com" \
-  --client-id-list "sts.amazonaws.com" \
-  --thumbprint-list "6938fd4d98bab03faadb97b34396831e3780aea1"
-
-# IAM role that will be assumed from GitHub Actions using the trust policy for the main branch
-aws iam create-role \
-  --region $AWS_REGION \
-  --role-name $IAM_ROLE_NAME \
-  --assume-role-policy-document file://gh-iam-trust-policy.json
-  
-# IAM policy giving admin access to create all our infrastructure for the main branch
-aws iam attach-role-policy \
-  --region $AWS_REGION \
-  --role-name $IAM_ROLE_NAME \
-  --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
-
-# IAM role that will be assumed from GitHub Actions using the trust policy for any pull requests
-aws iam create-role \
-  --region $AWS_REGION \
-  --role-name "$IAM_ROLE_NAME-PR" \
-  --assume-role-policy-document file://gh-pr-iam-trust-policy.json
-  
-# IAM policy giving read-only access to run terraform plan on pull requests
-aws iam attach-role-policy \
-  --region $AWS_REGION \
-  --role-name "$IAM_ROLE_NAME-PR" \
-  --policy-arn arn:aws:iam::aws:policy/ReadOnlyAccess
-
-# Creates the state file bucket for Terraform
-aws s3api create-bucket \
-  --region $AWS_REGION \
-  --bucket $BUCKET_NAME \
-  --acl private
-  
-# Add versioning to the bucket to keep copies in case something goes wrong
-aws s3api put-bucket-versioning \
-  --region $AWS_REGION \
-  --versioning-configuration Status=Enabled \
-  --bucket $BUCKET_NAME
-
-# Create the DynamoDB Terraform lock table
-aws dynamodb create-table \
-  --region $AWS_REGION \
-  --table-name $DYNAMODB_LOCK_TABLE \
-  --attribute-definitions AttributeName=LockID,AttributeType=S \
-  --key-schema AttributeName=LockID,KeyType=HASH \
-  --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
-
-# (Optional - uncomment if needed) Create a KMS encryption key and an alias for it
-# TF_KMS_KEY_ID=$(aws kms create-key \
-#   --region $AWS_REGION \
-#   --query 'KeyMetadata.KeyId' \
-#   --output text)
-
-# aws kms create-alias \
-#   --region $AWS_REGION \
-#   --alias-name "alias/$KMS_KEY_ALIAS" \
-#   --target-key-id "$TF_KMS_KEY_ID"
-
 
 ```
 
 🚨🚨🚨 **SECURITY ALERT** 🚨🚨🚨
 
->In the IAM trust policies above, it's very important to take care with the GitHub repo org and repo name, while you can add wildcards to simplify access from multiple GitHub repos in your org, it's a security concern as this will provide full, admin level access to your AWS accounts. Access to the `main` repo should be restricted to as small a group as is possible, access is only needed when onboarding new team members, or doing some maintenance on the permissions of the `base-environment` accounts. We address this by creating two different IAM roles (with corresponding trust policies): the first one has admin access (needed to create infrastructure), and is restricted to changes made to the `main` branch via `ref:refs/heads/main`. The second is limited to read-only access for all pull requests (via `ref:refs/pull/*`) - this will allow Terraform to perform the `plan` step to show what infrastructure changes will be made in the PR, but deny any changes to the infrastructure. Please note that the `git` reference is subtly different to what you usually see: `ref:refs/heads/main` instead of `refs/heads/main` - this is a property of how GitHub Actions invokes the job. You should also enable [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) on your GitHub repo, and [require 1+ reviewer approvals](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews) before merging any PR to your `main` branch.
+>In the IAM trust policies above, it's very important to take care with the GitHub repo org and repo name, while you can add wildcards to simplify access from multiple GitHub repos in your org, it's a security concern as this will provide full, admin level access to your AWS accounts. Access to the `main` repo should be restricted to as small a group as is possible, access is only needed when onboarding new team members, or doing some maintenance on the permissions of the `base-environment` accounts. We address this by creating two different IAM roles (with corresponding trust policies): the first one has admin access (needed to create infrastructure), and is restricted to changes made to the `main` branch via `ref:refs/heads/main`. The second is limited to read-only access for all pull requests (via `pull_request`) - this will allow Terraform to perform the `plan` step to show what infrastructure changes will be made in the PR, but deny any changes to the infrastructure. Please note that the `git` reference is subtly different to what you usually see: `ref:refs/heads/main` instead of `refs/heads/main` - this is a property of how GitHub Actions invokes the job. You should also enable [branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches) on your GitHub repo, and [require 1+ reviewer approvals](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews) before merging any PR to your `main` branch.
 
 ## Setting up Terraform
 
@@ -314,8 +194,9 @@ on:
              - main
         
 permissions:
-  id-token: write   # This is required for requesting the JWT
-  contents: read    # This is required for actions/checkout
+  id-token: write      # This is required for requesting the JWT
+  contents: read       # This is required for actions/checkout
+  pull-requests: write # Allows writing to the PR to add a comment
         
 jobs:
   Terraform-PR-Check:
@@ -337,7 +218,7 @@ jobs:
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1
           with:
-            terraform_version: 1.3.1
+            terraform_version: 1.3.7
 
         # Run terraform init to enable running on a clean worker node
         - name: Terraform Init
@@ -412,15 +293,12 @@ jobs:
             role-to-assume: arn:aws:iam::123456789012:role/GitHub-Actions-Main
             role-session-name: gh-actions-main
             aws-region: us-east-1
-
-
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
         # Only apply if this is on the main branch (after merging)
         - name: Terraform Apply
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: terraform apply -auto-approve -input=false
-
 ```
 
 The workflow is based on the [Terraform GitHub Actions](https://developer.hashicorp.com/terraform/tutorials/automation/github-actions) tutorial, and we will only cover a subset of details here, or where we deviate from it. The workflow is broken into sections, let's take a look at each. First up is the following section:
@@ -443,11 +321,12 @@ The `permissions` section defines what the job runner is allowed to access:
 
 ```yaml
 permissions:
-  id-token: write   # This is required for requesting the JWT
-  contents: read    # This is required for actions/checkout
+  id-token: write      # This is required for requesting the JWT
+  contents: read       # This is required for actions/checkout
+  pull-requests: write # Allows writing to the PR to add a comment
 ```
 
-We're allowing it `write` permission to the JWT token to allow the job runner to request a JWT token from GitHub's OIDC provider - for more details, have a look at the [GitHub Actions Security](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#adding-permissions-settings) page. We also allow it access to read the content of the repo, but not make any changes via `contents: read`. In some scenarios you may want to allow changes, for example if you wanted to enforce the `terraform fmt` command's formatting by fixing any files, and committing them when the job runs.
+We're allowing it `write` permission to the JWT token to allow the job runner to request a JWT token from GitHub's OIDC provider - for more details, have a look at the [GitHub Actions Security](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#adding-permissions-settings) page. We also allow it access to read the content of the repo, but not make any changes via `contents: read`. In some scenarios you may want to allow changes, for example if you wanted to enforce the `terraform fmt` command's formatting by fixing any files, and committing them when the job runs. We also allow `write` to `pull-requests` so we can write a comment to the pull request with the outcome of the job.
 
 The steps in our pipeline are defined in the next section for `jobs`. All the jobs use the `ubuntu-latest` [GitHub runner](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners) - you can look at the [full list](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on) if you need to use a different runner, for example if you are building an application that requires MacOS or Windows Server. We only set up a single job, and differentiate between PRs and `main` branch pushes using `if: github.event_name == 'pull_request'` and `github.ref == 'refs/heads/main' && github.event_name == 'push'`. The reasoning is that a number of steps would be duplicated (code checkout, installing / initializing Terraform) if we use multiple jobs. We also set a default `working-directory` value for `./infra` as we keep our infrastructure code in a sub-directory relative to the application code - while the first two repos in this tutorial don't have any application code, it's less confusing / error-prone to follow the same pattern across all repo's.
 
