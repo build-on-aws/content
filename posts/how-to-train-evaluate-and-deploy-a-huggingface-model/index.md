@@ -1,25 +1,21 @@
 ---
-layout: blog.11ty.js
 title: How to train, evaluate, and deploy a Hugging Face model
 description: Learn how to train, evaluate, and deploy a Hugging Face model
 tags:
-  - Hugging Face
-  - Natural Language Processing
-  - AI/ML
+  - hugging-face
+  - natural-language-processing
+  - ai/ml
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
 date: 2022-12-06
 ---
-
-## Intro
-
 Building Natural Language Processing (NLP) solutions doesn't have to be hard. With Hugging Face, you can leverage a streamlined developer experience to train, evaluate, and deploy NLP models. In this post I will walk through an end-to-end example of building a helpful product review classifier from a labeled dataset with an endpoint for inference on AWS.
 
 ## Prerequisites
 
 For this walk though we will be using python3.7+, git, and the following pip modules.
 
-```
+```python
 transformers
 huggingface_hub
 datasets
@@ -38,7 +34,7 @@ The data that is provided is in a nonstandard JSON format. Before we can do any 
 
 The following code simply gets the raw JSON file and turns the data into an array for processing. 
 
-```
+```python
 def get_data(url: str):
     """
     Purpose:
@@ -58,7 +54,7 @@ def get_data(url: str):
 
 This code processes each element of the array by extracting the raw text and then assigned a label of helpful or not helpful based on the score. A pandas dataframe with all the elements are returned 
 
-```
+```python
 def get_helpful_label_num(helpful_score):
     """
     Purpose:
@@ -109,7 +105,7 @@ def data_to_df(data_array):
 
 The following code is how we connect each of the functions to create a dataframe from the raw JSON files.
 
-```
+```python
 import logging
 import json
 import requests
@@ -145,7 +141,7 @@ Now that we have our data in a standard format, we can begin to train a model. W
 
 The following code uses a tokenizer to process the text and include a padding and truncation strategy Next the pandas dataframe is loaded and transformed to a Hugging Face dataset. Finally, the Datasets map method is applied as a preprocessing function over the entire dataset.
 
-```
+```python
 from transformers import TrainingArguments, Trainer
 from transformers import AutoModelForSequenceClassification
 from transformers import AutoTokenizer
@@ -179,7 +175,7 @@ tokenized_train = train_dataset.map(preprocess_function, batched=True)
 
 With the datasets prepared, we can finally train the model! The following code loads the accuracy metric, setups the training arguments, and then finally begins training. Training can take a couple hours depending on how strong your machine is, this is where leveraging AWS Sagemaker can come in handy. This [notebook](https://github.com/huggingface/notebooks/blob/main/sagemaker/01_getting_started_pytorch/sagemaker-notebook.ipynb) provides an end-to-end example of how you would train on AWS.
 
-```
+```python
 from datasets import load_metric
 import numpy as np
 
@@ -220,7 +216,7 @@ trainer.train()
 
 Once the model has finished training, you can create a [Hugging Face pipeline](https://huggingface.co/docs/transformers/main_classes/pipelines) to classify text.
 
-```
+```python
 from transformers import (
     AutoTokenizer,
     AutoModelForSequenceClassification,
@@ -242,7 +238,7 @@ print(result)
 
 Using the [Hugging Face evaluate](https://huggingface.co/docs/evaluate/index) module we can easily benchmark the model on a variety of predefined metrics such as accuracy or F1 score.
 
-```
+```python
 from transformers import (
     pipeline,
 )
@@ -297,7 +293,7 @@ Now we can finally upload our model to Hugging Face hub. The [new model url](htt
 
 Once the repo is created, you can then clone the repo and push the model artifacts from the result folder. The following code highlights how I pushed my model.
 
-```
+```bash
 git lfs install
 git clone https://huggingface.co/banjtheman/distilbert-base-uncased-helpful-amazon
 cp -r PATH_TO_MODEL/results/checkpoint-6000/* distilbert-base-uncased-helpful-amazon/
@@ -313,7 +309,7 @@ Here is the [model I uploaded](https://huggingface.co/banjtheman/distilbert-base
 
 Finally, we can deploy the model as a Sagemaker endpoint so it can be used as an API. Using Amazon Sagemaker studio (https://aws.amazon.com/sagemaker/studio/) we can deploy Hugging Face hub models from a notebook. The following code setups the settings of the endpoint.
 
-```
+```python
 import sagemaker
 from sagemaker.huggingface.model import HuggingFaceModel
 from sagemaker.serverless import ServerlessInferenceConfig
@@ -352,7 +348,7 @@ predictor = huggingface_model.deploy(
 
 This code shows how you can make predictions by passing in data and using boto3 to invoke the endpoint from a Lambda function.
 
-```
+```python
 import boto3
 import json
 
@@ -386,7 +382,8 @@ In this post, we discussed how to successfully achieve the following
 
 The flexibility of Hugging Face allows this workflow to be run locally or in the cloud. With this workflow you can easily add customizations based on your workload needs, such as changing the modeling task or hyperparameter tuning. The combination of Hugging Face to develop models and AWS for deployment and compute provides a developer first experience for building NLP solutions.
 
-To watch a presentation on building Hugging Face Models check out my [talk at re:Invent 2022](https://www.youtube.com/watch?v=XqmEf8rOhUw)
+To watch a presentation on building Hugging Face Models check out my talk at re:Invent 2022
+https://www.youtube.com/watch?v=XqmEf8rOhUw
 
 Follow Banjo on Twitter [@banjtheman](https://twitter.com/banjtheman) and [@AWSDevelopers](https://twitter.com/awsdevelopers) for more useful tips and tricks about the cloud in general and AWS.
 
