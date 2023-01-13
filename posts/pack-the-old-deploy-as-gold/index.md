@@ -11,8 +11,6 @@ authorName: Vinicius Senger
 date: 2022-10-19
 ---
 
-## How to Create a Container Image With Your Old Java EE Application Server
-
 Java EE is still in production and will likely remain there for a while. I know many companies that run Java EE applications using Apache Tomcat and JBoss, and when they consider migrating to AWS, most of them consider Amazon EC2 first; it's similar to running in your own infrastructure -- kind of a classical lift and shift approach. But thanks to containerization, we have more ways to pack the old Java EE application and deploy as gold containerized apps.
 
 For this tutorial I chose JBoss 4.2.3 as an example, but you can replace it with your choice of a Java EE application server very easily. At the end of this tutorial, you will have a simple Java EE application built with Docker and running with a public URL.
@@ -164,23 +162,23 @@ docker build --platform=linux/amd64  --no-cache --progress=plain -f javaee.Docke
 
 Open your AWS Management Console and go to ECR (or Elastic Container Registry). Select "Create Repository".
 
-![Instructions to create ECR repository](images/ecr-01.png "Instructions to create ECR repository")
+![Instructions to create ECR repository](images/ecr-01.png)
 
 Type `javaee-app1` as the name of this repository and use default config for other parameters.
 
-![Instructions for naming the repository](images/ecr-02.png "Instructions for naming the repository")
+![Instructions for naming the repository](images/ecr-02.png)
 
 Now that you can see it listed, select the repository link.
 
-![Instructions with created repository](images/ecr-03.png "Instructions with created repository")
+![Instructions with created repository](images/ecr-03.png)
 
 Now select "View push commands".
 
-![Instructions for viewing push commands](images/ecr-04.png "Instructions for viewing push commands")
+![Instructions for viewing push commands](images/ecr-04.png)
 
 Now you can copy it into a notes document to use later.
 
-![Instructions with push commands](images/ecr-05.png "Instructions with push commands")
+![Instructions with push commands](images/ecr-05.png)
 
 It's all good with ECR, so we can push our image in this private repository!
 

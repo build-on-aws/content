@@ -148,7 +148,7 @@ stream.groupByKey(Grouped.with(Serdes.Bytes(), Serdes.Long()));
 
 Not all stateless computations return intermediate results such as a `KStream`, `KTable` etc. They are often called *terminal* operations whose methods return `void`. Let's look at a few examples.
 
-#### **Save record to a topic**
+#### Save record to a topic
 
 You may want to write the results of a stateless operation back to Kafka - most likely, in a different topic. You can use the [to](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#to(java.lang.String)) method to store the records of a `KStream` to a topic in Kafka.
 

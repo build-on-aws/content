@@ -10,9 +10,7 @@ authorName: Donnie Prakoso
 date: 2022-10-28
 ---
 
-## Setting up VM as Remote Development
-
-In this article, you will learn how to provision a virtual machine for your development environment. This will give you the freedom to work with any devices and the flexibility to configure the specifications to meet your needs.
+In this article, you will learn how to provision a virtual machine for your development environment. This will give you the freedom to work with any device, and the flexibility to configure the specifications to meet your needs.
 
 ## Context
 
@@ -45,18 +43,18 @@ AMI stands for Amazon Machine Image — a template for/from the EC2 instance, wh
 
 First open the Amazon EC2 console and navigate to "AMI Catalog"
 
-![Amazon EC2 console and navigating AMI Catalog](images/1-ami-catalog.png "Amazon EC2 console and navigating AMI Catalog")
+![Amazon EC2 console and navigating AMI Catalog](images/1-ami-catalog.png)
 
 Select the AMI you will use by clicking on the `Select` button
-![Selecting AMI](images/2-choose-ami.png "Selecting AMI")
+![Selecting AMI](images/2-choose-ami.png)
 
 Then, click the `Launch Instance with AMI` button — don't worry, we won't be launching the instance.
 
-![Click Launch Instance with AMI](images/3-select-ami.png "Click Launch Instance with AMI")
+![Click Launch Instance with AMI](images/3-select-ami.png)
 
 On the left, you can see the Amazon Machine Image (AMI), and this is the name of the AMI image we ordered. Copy this value to use in the next step.
 
-![Copy AMI name](images/4-copy-ami.png "Copy AMI name")
+![Copy AMI name](images/4-copy-ami.png)
 
 In addition, you also need to define the [EC2 type](https://aws.amazon.com/ec2/instance-types/) that you want to use. Remember, there's no need to start with a high specification machine, until now I still use `t2.micro` and I only need to upgrade when I need more power.
 
