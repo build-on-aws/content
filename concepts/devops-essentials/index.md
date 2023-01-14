@@ -46,7 +46,7 @@ Using the browser based console for tools like AWS can be a great way to explore
 
 ### *Procedural* models 
 
-These are a series of steps completed in order to finish a task. This approach tells the computer what to do, step by step, and the computer executes the instructions in the order that they are written.  An example of a procedural script might be a script that backs up a database by connecting to the database, exporting the data to a file, and then copying the file to a backup location.
+These are a series of steps completed in order to finish a task. This approach tells the computer what to do, step by step, and the computer executes the instructions in the order that they are written. An example of a procedural script might be a script that backs up a database by connecting to the database, exporting the data to a file, and then copying the file to a backup location.
 
 ### *Declarative* models 
 
