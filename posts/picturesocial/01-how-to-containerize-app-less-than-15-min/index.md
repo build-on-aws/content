@@ -67,7 +67,7 @@ FROM ubuntu:20.04
 
 From the example above, we can deduce some basic info about tagging:
 
-1. `ubuntu` is the name of the image. We have millions of public images available through Docker Hub that we can use to create derivative work or just use them as it.
+1. `ubuntu` is the name of the image. We have millions of public images available through Docker Hub that we can use to create derivate work or just use them as it.
 2. `20.04` is the version of Ubuntu.
 3. Everything after `:` is the tag of the image. You can use tagging for specific versions of an app, environments, languages, etc.
 
