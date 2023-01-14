@@ -129,7 +129,7 @@ code pictures/
 
 ![Picture of an API file structure](images/05-app-structure.jpg "Picture of an API file structure")
 
-4. We are going to rename the controller file as `PictureController.cs` and we’ll delete the "WeatherForecast.cs" class.
+4. We are going to rename the controller file as `PictureController.cs` and we’ll delete the `WeatherForecast.cs` class.
 5. Now let’s add the Nuggets that we are going to use for this project. In the same terminal that we used to create the web API let's position our cursor in `pictures`
 
 ```bash
@@ -183,7 +183,7 @@ namespace pictures.Controllers;
 public class PictureController : ControllerBase
 ```
 
-11. Then we define the HTTP Method GET and the route. We are going to create the Method "DetectLabels" that will receive 2 parameters: 1) file name including the file extension as a `String` and 2) bucket name set as default in the same method, as a `String`. We are using an async method as Amazon Rekognition will detect labels asynchronously. We are also returning the response as a JSON array of Labels.
+11. Then we define the HTTP Method GET and the route. We are going to create the Method `DetectLabels` that will receive 2 parameters: 1) file name including the file extension as a `String` and 2) bucket name set as default in the same method, as a `String`. We are using an async method as Amazon Rekognition will detect labels asynchronously. We are also returning the response as a JSON array of Labels.
 
 12. At this point, create an S3 bucket in the same region that you are using for Amazon Rekognition, in our case it is gonna be `us-east-1`, and you are going to use the bucket name as default in the method definition.
 

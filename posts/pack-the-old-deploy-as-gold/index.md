@@ -101,12 +101,12 @@ Start by creating a file named `javaee.DockerFile` in your project directory wit
 FROM amazoncorretto:8
 
 EXPOSE 8080
-COPY "JBoss-4.2.3.GA" "/opt/JBoss"
-COPY "myapp" "/opt/JBoss/server/default/deploy/myapp.war"
+COPY "jboss-4.2.3.GA" "/opt/jboss"
+COPY "myapp" "/opt/jboss/server/default/deploy/myapp.war"
 
-RUN find /opt/JBoss | grep myapp
+RUN find /opt/jboss | grep myapp
 
-ENTRYPOINT ["/opt/JBoss/bin/run.sh", "-b", "0.0.0.0"]
+ENTRYPOINT ["/opt/jboss/bin/run.sh", "-b", "0.0.0.0"]
 ```
 
 Now let's explain this file step-by-step:
@@ -152,7 +152,7 @@ Now we are ready to build the image!
 
 ## 5. Build and Tag the Docker Image
 
-To build the image we are going to run a docker command line command with the target platform and docker file. We will also tag this image as JBoss:latest
+To build the image we are going to run a docker command line command with the target platform and docker file. We will also tag this image as `jboss:latest`:
 
 ```bash
 docker build --platform=linux/amd64  --no-cache --progress=plain -f javaee.DockerFile . -t javaee-app1:latest

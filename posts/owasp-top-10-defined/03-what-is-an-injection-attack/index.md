@@ -35,7 +35,7 @@ That being said, my server is up and running, as you can see below. Let's look a
 
 First, we'll run the attack from the search box on the GUI. The following animated GIF shows the attack in action. What we are doing here is entering a bit of JavaScript code in the search box of the web UI. This causes the browser to display an alert rather than a search result. 
 
-![Animated GIF of an injection attack using OWASP Juice Box](images/03-what-is-an-injection-attack-03.gif)
+![Animated GIF of an injection attack using OWASP Juice Shop](images/03-what-is-an-injection-attack-03.gif)
 
 As you can see in the above animated GIF, we get a nice alert pop-up with the text we entered. This is not supposed to happen. We shouldn't be able to interact with the page using the search box in this way. What you are seeing here is a DOM XSS attack.
 
