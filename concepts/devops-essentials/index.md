@@ -112,6 +112,8 @@ Monitoring is the process of tracking the performance, availability, and other a
 ### Observability
 Observability is a practice that focuses on understanding your system's current state through the various kinds of data it generates. It's the next logical step after implementing **Logging** and **Monitoring**. The three pillars of observability are metrics, traces and logs. Plenty of the companies who are listed for logging and monitoring also have observability offerings. The most prominment one not already mentioned in this guide is [Honeycomb](https://www.honeycomb.io)
 
+If you'd like to try out some of the concepts introduced in this section, check out our [hands-on tutorial showing how to implement OpenTelemetry in a Java application.](https://www.buildon.aws/posts/instrumenting-java-apps-using-opentelemetry/)
+
 ## Where should I start?
 As mentioned earlier, you should use two questions to find the best place to start: 
 
