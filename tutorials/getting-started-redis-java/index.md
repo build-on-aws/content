@@ -33,7 +33,7 @@ This tutorial will get you started with Amazon MemoryDB for Redis and Java using
 
 ## Prerequisites
 
-An AWS Account (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/). [Follow these steps](https://docs.aws.amazon.com/memorydb/latest/devguide/set-up.html) to complete the one-time actions you must take to start using MemoryDB, such as getting an AWS Access Key, configuring your credentials etc.
+An AWS Account (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/). [Follow these steps](https://docs.aws.amazon.com/memorydb/latest/devguide/set-up.html) to complete the one-time actions you must take to start using MemoryDB, such as getting an AWS Access Key, configuring your credentials, etc.
 
 For the purposes of this tutorial, we will use [the default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html) which is available in each AWS Region. It comes with a public subnet in each Availability Zone, an internet gateway, and settings to enable DNS resolution.
 
