@@ -13,7 +13,7 @@ The number of myths and misconceptions associated with a technology is directly 
 
 > An "event streaming platform" is an accurate description by the way and [well explained in the documentation as well](https://kafka.apache.org/documentation/#intro_platform)).
 
-But something more widespread (at least in my experience and discussion with fellow developers) is the confusion around **Whether Kafka is a Topic, or a Queue?** In addition to the "too many names" problem, what compounds this confusion is the fact that the word `topic` can be interpreted in a specific way in the the world of "messaging systems" - more on this later in the blog post. 
+But something more widespread (at least in my experience and discussion with fellow developers) is the confusion around **Whether Kafka is a Topic, or a Queue?** In addition to the "too many names" problem, what compounds this confusion is the fact that the word `topic` can be interpreted in a specific way in the world of "messaging systems" - more on this later in the blog post. 
 
 > In the case of Kafka, a *Topic* is a fundamental construct - think of it as something you send data to and receive data from.
 
@@ -70,7 +70,7 @@ See how it aligns with the general pub/sub semantics that use topics to broadcas
 
 ## To summarize...
 
-With Kafka, you can leverage **both** Queue and Pub/Sub (or topic) based messaging semantics, thanks to a combination of Consumer Groups, Topics and Partitions.  To make the most out of Kafka, you will likely end up using both of them!
+With Kafka, you can leverage **both** Queue and Pub/Sub (or topic) based messaging semantics, thanks to a combination of Consumer Groups, Topics and Partitions. To make the most out of Kafka, you will likely end up using both of them!
 
 To keep things simple, I used the Kafka Consumer client API to demonstrate the concepts, but there is more. If you haven't already, I would highly recommend reading through how Sink connectors use the same paradigm on top of [Kafka Connect](https://docs.confluent.io/platform/current/connect/concepts.html#distributed-workers) to achieve their goals.
 

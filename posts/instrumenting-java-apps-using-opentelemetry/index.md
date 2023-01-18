@@ -1142,7 +1142,7 @@ Once you find the metric, you can select it and add to the visualization. To spe
 
 You should get the following visualization:
 
-![Shows the guage implemented for the number of executions metric](images/fig_19.png)
+![Shows the gauge implemented for the number of executions metric](images/fig_19.png)
 
 This is the proof that you were able to successfully switch the observability backend for metrics without changing a single line of code for the microservice. Instrument once, reuse everywhere. This is how OpenTelemetry was designed to work.
 
