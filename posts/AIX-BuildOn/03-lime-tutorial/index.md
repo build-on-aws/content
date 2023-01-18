@@ -2,9 +2,9 @@
 title:
 description: 
 tags:
-  - AI Explainability
-  - AI Fairness
-  - Machine Learning
+  - ai Explainability
+  - ai Fairness
+  - machine learning
   - Artificial Intelligence
   - LIME
   - LIME tutorial
