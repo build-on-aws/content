@@ -24,9 +24,10 @@ This guide is intended for beginners who are looking for an overview of what Dev
 | 8. [CI/CD](#continuous-integration-and-continuous-delivery) |
 | 9. [Logging](#Logging)                                      |
 | 10. [Monitoring](#Monitoring)                               |
-| 11. [Where Should I Start?](#where-should-i-start)          |
-| 12. [Wrap Up](#wrap-up)                                     |
-| 13. [Additional Learning Resources](#resources)             |
+| 11. [Observability](#Monitoring)                            |
+| 12. [Where Should I Start?](#where-should-i-start)          |
+| 13. [Wrap Up](#wrap-up)                                     |
+| 14. [Additional Learning Resources](#resources)             |
 
 
 ## What is DevOps?
