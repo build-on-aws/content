@@ -6,7 +6,7 @@ tags:
   - network-engineer
   - cloud-networking
 authorGithubAlias: @labeveryday
-authorName: Du'An Lightfoot 
+authorName: Du'An Lightfoot  
 date: 2022-11-07
 ---
 
