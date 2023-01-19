@@ -16,7 +16,7 @@ This guide is intended for beginners who are looking for an overview of what Dev
 |-------------------------------------------------------------|
 | 1. [What Is DevOps?](#what-is-devops)                       |
 | 2. [Getting Started](#getting-started)                      |
-| 3. [Implementation Approaches](#implementation-approaches)  |
+| 3. [Infrastructure Implementation Patterns](#infrastructure-implementation-patterns)  |
 | 4. [Infrastructure as Code](#infrastructure-as-code)        |
 | 5. [Configuration Management](#configuration-management)    |
 | 6. [Containers](#containers)                                |
@@ -35,17 +35,17 @@ The term DevOps was coined in 2009 by [Patrick Debois](https://twitter.com/patri
 
 ## Getting Started
 
-In this section we’ll cover concepts such as how to decide where to start and different approaches to begin! As you’re getting started, it’s important to note that there’s no step that’s too small to count towards progress. You don’t need to dive 100% in - in fact, it’s probably better not to! At the beginning, you want to minimize risk and friction by taking on smaller actions and getting fast feedback. Then you’ll continue to improve by making small, iterative changes and building momentum. Another way to find a good starting place is by talking to the teams who will depend on your work - are there manual steps they’re taking that lead to wasted time or bottlenecks? Do they have a wish list for how they’d like to be deploying or testing their work? Sometimes, the easiest place to start is the one you already know you need. You’ve decided to make small iterative changes, but how we approach that is also important! There’s multiple ways to build out infrastructure, and each comes with different benefits and challenges. 
+In this section we’ll cover concepts such as how to decide where to start and different approaches to begin! As you’re getting started, it’s important to note that there’s no step that’s too small to count towards progress. You don’t need to dive 100% in - in fact, it’s probably better not to! At the beginning, you want to minimize risk and friction by taking on smaller actions and getting fast feedback. Then you’ll continue to improve by making small, iterative changes and building momentum. Another way to find a good starting place is by talking to the teams who will depend on your work. Are there manual steps they’re taking that lead to wasted time or bottlenecks? Do they have a wish list for how they’d like to be deploying or testing their work? Sometimes, the easiest place to start is the one you already know you need. You’ve decided to make small iterative changes, but how we approach that is also important! There’s multiple ways to build out infrastructure, and each comes with different benefits and challenges. 
 
-## Implementation Approaches
+## Infrastructure Implementation Patterns
 
 ### *ClickOps*
 
-Using the browser based console for tools like AWS can be a great way to explore which services are available to you and how they fit together, but doesn’t scale well as it’s not transparent or easy to collaborate with others and opens you up to creating more manual mistakes. 
+Using the browser based console for tools or platforms such as the [AWS console](https://console.aws.amazon.com/) can be a great way to explore which services are available to you and how they fit together. However, it doesn’t scale well as it’s not repeatable, transparent or easy to collaborate with others and opens you up to creating more manual mistakes.  
 
 ### *Procedural* 
 
-These are a series of steps completed in order to finish a task. This approach tells the program what to do, step by step, and the program executes the instructions in the order that they are written. An example of a procedural script might look like a database backup script which connects to the database, exports the data to a file, and then copies the file to a backup storage location.
+These are a series of steps automated in a programmatic way such as a script that must be completed in a specific order to finish a task. This approach tells the program what to do, step by step, and the program executes the instructions in the order that they are written. An example of a procedural script might look like a database backup script which connects to the database, exports the data to a file, and then copies the file to a backup storage location.
 
 ### *Declarative*  config
 
@@ -63,7 +63,7 @@ create-firewall --name "database firewall"
 create-firewall-rull --name "allow db access from vm" --port 3306 --protocol tcp --source <ip of vm>
 ```
 
-This script can be run once, and if you need to make any changes, you will need to modify it or write a new script. The commands need to be run in a certain order, or you will encounter errors. For example, you will not be able to create the firewall rule before the VM exists. If you need to change the name, you can't run the same command and instead need to add `update-virtual-machine --machine-id XYZ --name "My new servers"`. With **declarative**, you can approach it by specifying what you need, and leave it up to the tool to decide how to do that. Compare the above **procedural** example to the below **declarative** example (pseudo code):
+This script can be run once, and if you need to make any changes, you will need to modify it or write a new script. Repeating this script won't work because it will attempt to create brand new resources and not manage the existing ones. The commands need to be run in a certain order, or you will encounter errors. For example, you will not be able to create the firewall rule before the VM exists. If you need to change the name, you can't run the same command and instead need to add `update-virtual-machine --machine-id XYZ --name "My new servers"`. With **declarative**, you can approach it by specifying what you need, and leave it up to the tool to decide how to do that. Compare the above **procedural** example to the below **declarative** example (pseudo code):
 
 ```csharp
 virtual-machine: { name: "my server", cpu: 8, mem: 8, disk: 50 }
@@ -78,13 +78,13 @@ The **declarative** tool you use will create the resources you declared, without
 As someone applying concepts from DevOps, you will work in a number of different places throughout your stack. You may at times work directly in the source code, networking, security, data, the testing framework, or anywhere in-between due to the nature of cross team collaboration that comes with the domain. Now that we’ve discussed getting started and some approaches let’s cover some key concepts, their benefits, and examples of tools you’ll use to implement them. 
 
 ### Infrastructure As Code
-Infrastructure as code (IaC) is typically a declarative method of managing infrastructure in a way that treats your infrastructure components such as physical servers and virtual machines similarly to application code. You describe them using a markup language (such as [yaml](https://yaml.org/), [HCL](https://pkg.go.dev/github.com/hashicorp/hcl/v2) or [toml](https://toml.io/en/), which is then stored in version control allowing us to manage it in a repeatable and automated way. Configuration files can be tested and reviewed and changes to infrastructure can be made using the same processes as code changes. This can help to reduce errors and improve reliability. Additionally, IaC makes it easier to scale and manage infrastructure, especially in dynamic environments where infrastructure needs to change frequently. Some of the tools you might use for provisioning infrastructure are [HashiCorp’s Terraform](https://www.terraform.io/), [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html), or [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html). 
+Infrastructure as code (IaC) is typically a declarative method of managing infrastructure in a way that treats your infrastructure components such as physical servers and virtual machines similarly to application code. Depending on the tool you choose, you can describe them using a markup language ([yaml](https://yaml.org/), [HCL](https://pkg.go.dev/github.com/hashicorp/hcl/v2) or [toml](https://toml.io/en/) or a more general purpose language ([python](https://www.python.org/), [golang](https://go.dev/), [java](https://www.java.com/en/)) which is then stored in version control allowing us to manage it in a repeatable and automated way. Infrastructure as Code allows us to apply the same best practices and procedures we use when developing application code to our infrastructure! Configuration files can be tested and versioned and changes to infrastructure can be made using the same processes as code changes. If something goes wrong, we can roll back to the last stable version. This can help to reduce errors and improve reliability. Additionally, IaC makes it easier to scale and manage infrastructure, especially in dynamic environments where infrastructure needs to change frequently. Some of the tools you might use for provisioning infrastructure are [HashiCorp’s Terraform](https://www.terraform.io/), [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html), or [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html). 
 
 ### Configuration  Management 
 Configuration Management (CM) allows us to maintain systems in a desired state by organizing and maintaining information about our hardware and software. Think of a file that lists information such as which operating system to use, which software and their versions to install on a device, or the settings and configurations that will  applied to the system. In the past, this may have been done manually or with a procedural script that reached out to a repository and installed each tool one at a time, stopping at the first issue. CM helps build visibility and streamlines the configuration process which makes it easier to track and manage changes over time with the goal of reducing cost, complexity and errors. Some examples of Configuration Management tools are [Ansible](https://www.ansible.com/), [Chef](https://www.chef.io/), and [Puppet](www.puppet.com). 
 
 ### Secrets Management
-Secrets management allows us to securely organize and maintain information for our applications by storing, managing, and distributing sensitive information such as passwords, API keys, and cryptographic keys. It is an important aspect of security and compliance, as it helps to ensure that sensitive information is stored and transmitted in a secure manner, and that it is only accessed by authorized users. Some examples of Secrets Management tools are [HashiCorp Vault](https://www.vaultproject.io/) or [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html), [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html)
+Secrets management allows us to securely organize and maintain information for our applications by storing, managing, and distributing sensitive information such as passwords, API keys, and cryptographic keys. It is an important aspect of security and compliance, as it helps to ensure that sensitive information is stored and transmitted in a secure manner, and that it is only accessed through code and authorized procedures. Some examples of Secrets Management tools are [HashiCorp Vault](https://www.vaultproject.io/) or [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html), [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html)
 
 ### Containers
 Containers are a way of packaging and running applications in a consistent, lightweight and portable manner so they can be run on a developer's laptop, a test server, or in a production environment. The application and it's dependencies are packaged together into a container image which ensures the application will run consistently whether it's on your laptop, test server or production which makes  it easier to develop, test and deploy. Not only does this help build reliability, it also simplifies the operational overhead of running software as it provides a standardized way to run. The most common containerization tool you'll see is [Docker](https://www.docker.com/).
@@ -118,19 +118,21 @@ If you'd like to try out some of the concepts introduced in this section, check 
 As mentioned earlier, you should use two questions to find the best place to start: 
 
 1. Where is there a bottleneck or pain point for the team(s) that they are struggling with?
-1. What services or piece of infrastructure can you work on that is not mission critical?
+2. What services or piece of infrastructure can you work on that is not mission critical?
+3. What things would be greatly benefited by being automted? 
 
 Once you have found a place to start, you can decide which approach first: automate the creation of infrastructure with IaC, add an automated build to a software project (CI), implement automated deployment (CD), containerize an application, add some monitoring, or configuration / secret management.
 
 ## Wrap Up
-It's not possible to learn every DevOps concept in a post or a day, but if you continuously learn and iterate on your culture, processes and technology, and work on your gaps and pain points you'll be surprised at how quickly you'll be able to make a big difference. You and your team are not alone in this journey - there's been over a decade of other teams learning and documenting their successes and challenges. This piece will continue to be updated with references to other DevOps articles we release. You can also find additional resources below. 
+We've learned a lot in this post today! We started with an introducton to what DevOps is and how to get started, discussed different patterns you'll encounter when automating your processes and gave an overview of the key concepts you'll encounter on your journey. It's not possible to become an expert on every DevOps concept in a post or a day, but if you continuously learn and iterate on your culture, processes and technology you'll be surprised at how quickly you'll be able to make an impact. You and your team are not alone in this journey - there's been over a decade of other teams learning and documenting their successes and challenges. Stay tuned for more DevOps content! You can also find additional resources below. 
 
 ### Resources
 You can find other articles on BuildOn about DevOps here using the DevOps tag. There's a variety of DevOps meetups run around the globe. If community based learning is your thing, you should definitely look for one near you! 
 
 **Conferences:**
 * [DevOpsDays](https://devopsdays.org/)
-* We have [re:Invent](https://reinvent.awsevents.com/) every year, and many of the vendors mentioned run their own conferences and those can be a great place to learn as well! There are multiple [AWS Summits](https://aws.amazon.com/events/summits/) every year, have a look if one is in a city close to you. If you are just getting started with cloud, we recommend attending an [AWSome Day](https://aws.amazon.com/events/awsome-day/) and reading our [AWS Cloud Essentials](https://aws.amazon.com/getting-started/cloud-essentials/) page.
+* If you're looking to learn more specifically about AWS & our tools, we have lots of options! These aren't specific to DevOps but often have talks or tracks that are related to it. We have [re:Invent](https://reinvent.awsevents.com/) every year. There are multiple [AWS Summits](https://aws.amazon.com/events/summits/) every year, have a look if one is in a city close to you. If you are just getting started with cloud, we recommend attending an [AWSome Day](https://aws.amazon.com/events/awsome-day/) and reading our [AWS Cloud Essentials](https://aws.amazon.com/getting-started/cloud-essentials/) page.
+* Many of the vendors mentioned run their own conferences and those can be a great place to learn as well!
 
 **Books:**
 * [DevOps Handbook](https://www.goodreads.com/book/show/26083308-the-devops-handbook)
