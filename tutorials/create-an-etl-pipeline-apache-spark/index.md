@@ -24,7 +24,7 @@ We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) 
 | ✅ AWS Level        | Beginner                               |
 | ⏱ Time to complete  | 30 mins - 45 mins                      |
 | 💰 Cost to complete | USD 0.30                               |
-| 🧩 Prerequisites       | - An[AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br> - An IAM user that has has the access to create AWS resources. <br> - Basic understanding of Python
+| 🧩 Prerequisites       | - An [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br> - An IAM user that has has the access to create AWS resources. <br> - Basic understanding of Python
 
 ## Table of Content
 | ToC |
@@ -33,22 +33,22 @@ We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) 
 ## What you will accomplish
 
 In this guide, you will:
-- Create and setup an Amazon EMR cluster 
-- Submit a PySpark job on EMR 
+- Create and set up an Amazon EMR cluster 
+- Submit a PySpark job on Amazon EMR 
 - Integrate Amazon EMR with Amazon S3 
 
 Let's get started!
 
 ## Use case and problem statement
 
-For this tutorial, let's assume you have a vendor who provides incremental sales data at the end of every month. And the file arrives in S3 as a `CSV` file and it needs to be processed and made available to your data analysts for querying and analysis. 
+For this tutorial, let's assume you have a vendor who provides incremental sales data at the end of every month. The file arrives in S3 as a `CSV` file, it needs to be processed, and made available to your data analysts for querying and analysis. 
 
 We need to build a data pipeline such that it will take this new sales file from the S3 bucket, processes it with required transformations using Amazon EMR, and saves the cleaned and transformed data into the target S3 bucket, which will be used later on for querying. 
 
 
 ## Architecture 
 
-To implement this data pipeline, we will use an EMR cluster with Spark as the distributed processing engine. And we are going to use Amazon S3 for storing the:
+To implement this data pipeline, we will use an EMR cluster with Spark as the distributed processing engine. And we are going to use S3 for storing the:
     - `RAW` data (which is the input and unprocessed data) and 
     - `CLEANSED` data (which is output and processed data)
 
@@ -56,11 +56,11 @@ To implement this data pipeline, we will use an EMR cluster with Spark as the di
 
 ## Implementation 
 
-To implement our data processing pipeline, we need to first create an EMR cluster that will run our ETL jobs, an SSH key pair to allow connecting to the server, an S3 bucket to store the raw and processed data and finally start our job on the cluster.
+To implement our data processing pipeline, we need to first create an Amazon EMR cluster that will run our ETL jobs, an SSH key pair to allow connecting to the server, an S3 bucket to store the raw and processed data, and finally start our job on the cluster.
 
-### Step 1: Create an EMR Cluster
+### Step 1: Create an Amazon EMR Cluster
 
-Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's master node later on. So, lets create that first. 
+Before we create our cluster we need to create a `Key Pair`, which we would need to access the cluster's master node later on. So, lets create that first. 
 
 1. Login to your AWS account and navigate to the EC2 console, and click on [**Key Pairs**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html) option on the left menu bar. And then, click on `Create Key Pair` 
 
@@ -70,7 +70,7 @@ Before we create an EMR cluster we need to create a `Key Pair`, which we would n
 
 ![Key Pair 2](images/key_pair_2.png)
 
-3. Now, we can go ahead and create an `Amazon EMR cluster`. For that navigate to Amazon EMR in the console and click on **Create Cluster** to create an EMR cluster
+3. Now, we can go ahead and create an `Amazon EMR cluster`. For that, navigate to `Amazon EMR` in the console and click on **Create Cluster** to create the cluster
 
 ![emr cluster 1](images/emr_1.png)
 
@@ -83,15 +83,15 @@ Before we create an EMR cluster we need to create a `Key Pair`, which we would n
 
 ![emr cluster 2](images/emr_2.png)
 
-5. Cluster creation would take some time, and after couple of minutes, you will see that the cluster is **up and running** with a state as `Waiting` (which means the cluster is now ready and waiting to execute any ETL job)
+5. Cluster creation will take some time, and after couple of minutes, you will see that the cluster is **up and running** with a state as `Waiting` (which means the cluster is now ready and waiting to execute any ETL job)
 
 ![emr cluster 3](images/emr_3.png)
 
-### Step 2: Create an Amazon S3 bucket
+### Step 2: Create an S3 bucket
 
-Now we will create an Amazon S3 bucket and create two sub-folders within that, which will be used for store `RAW` and `CLEANSED` data
+Now we will create an S3 bucket and create two sub-folders within that, which will be used for store `RAW` and `CLEANSED` data
 
-1. Navigate to the Amazon S3 console and click on **Create Bucket** 
+1. Navigate to the S3 console and click on **Create Bucket** 
 
 ![S3_1](images/s3_1.png)
 
@@ -105,24 +105,52 @@ Now we will create an Amazon S3 bucket and create two sub-folders within that, w
 
 ![S3_3](images/s3_3.png)
 
-4. Upload the [sales dataset CSV file](https://myblog-imgs.s3.amazonaws.com/datasets/SalesData.csv) in the bucket under the folder `raw_data`
+4. Upload the [sales dataset CSV file](https://myblog-imgs.s3.amazonaws.com/datasets/SalesData.csv) in the bucket under the folder `raw_data`.
 
 ![Upload raw data](images/upload_csv.png)
 
 ### Step 3: Submit the PySpark job 
 
-Now, that we have the dataset uploaded in S3, its time to submit the PySpark job from our EMR cluster. 
+Now, that we have the dataset uploaded in S3, its time to submit the PySpark job from our cluster. 
 
-1. Navigate to the EMR console, select the `myDemoEMRCluster` which you created in earlier and click on **Connect to the Master Node Using SSH** 
+1. Navigate to the Amazon EMR console, select the `myDemoEMRCluster` which you created in earlier, and click on **Connect to the Master Node Using SSH** 
 
 ![emr_4](images//emr_4.png)
 
-2. SSH to the EMR cluster's Master node from your terminal 
+2. SSH to the cluster's master node from your terminal 
 
-3. Copy the PySpark code [`etl-job.py`](/emr-etl-job.py) and save on the `Master Node` under the home directory and make the following changes and save the file:
+3. Create a new file called `etl-job.py`, and save it on the `Master Node` under the home directory with the following content (*NB: Change the bucket name and location to match the values you used in the variables used [`S3_INPUT_DATA`, and `S3_OUTPUT_DATA`]):
 
-    - `S3_INPUT_DATA`  = 's3://<YOUR_BUCKET_LOCATION_OF_RAW_DATA>'
-    - `S3_OUTPUT_DATA` = 's3://<YOUR_BUCKET_LOCATION_OF_CLEANED_DATA>'
+```python
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+
+S3_INPUT_DATA = '<YOUR_BUCKET_LOCATION_OF_RAW_DATA>'
+S3_OUTPUT_DATA = '<YOUR_BUCKET_LOCATION_OF_CLEANED_DATA>'
+
+
+def main():
+
+    spark = SparkSession.builder.appName("My Demo ETL App").getOrCreate()
+    spark.sparkContext.setLogLevel('ERROR')
+
+    # Spark Dataframe (Raw)- Transformation 
+    df = spark.read.option("Header", True).option("InferSchema", True).csv(S3_INPUT_DATA)
+
+    replacements = {c:c.replace(' ','_') for c in df.columns if ' ' in c}
+    final_df = df.select([F.col(c).alias(replacements.get(c, c)) for c in df.columns])
+
+    print(f"Total no. of records in the source data set is : {final_df.count()}")
+
+try:
+    final_df.write.mode('overwrite').parquet(S3_OUTPUT_DATA)
+    print('The cleaned data is uploaded')
+except:
+    print('Something went wrong, please check the logs :P')
+
+if __name__ == '__main__':
+    main()
+```
 
 4. Submit the `PySpark job` and wait for the job to complete before proceeding.
 
@@ -136,11 +164,11 @@ sudo spark-submit etl-job.py
 
 ### Step 4: Validating the output using Amazon Athena
 
-Now, the `cleansed` data is available in Amazon S3 in the form of parquet format, but to make it more consumable for data analysts or data scientists, it would be great if we could enable querying the data through SQL by making it available as a database table.
+Now, the `cleansed` data is available in S3 in the form of parquet format, but to make it more consumable for data analysts or data scientists, it would be great if we could enable querying the data through SQL by making it available as a database table.
 
 To make that integration, we can follow a two-step approach:
-1. We need to run the Glue crawler to create a AWS Glue Data Catalog table on top of the S3 data.
-2. Once that is done, we can run a query in Amazon Athena to validate the output
+1. We need to run the AWS Glue crawler to create a AWS Glue Data Catalog table on top of the S3 data.
+2. Once that is done, we can run a query in Athena to validate the output
 
 ### Step 5: Creating an AWS Glue Data Catalog
 
@@ -158,9 +186,9 @@ To make that integration, we can follow a two-step approach:
 
 4. Create an **IAM role** (`AWSGlueServiceRole-default`) and attached the same. You can create a role and attach the following policies (for more details you can refer to [this](https://docs.aws.amazon.com/glue/latest/dg/crawler-prereqs.html) and follow the steps:
 
-- The AWSGlueServiceRole AWS managed policy, which grants the required permissions on the Data Catalog
+- The `AWSGlueServiceRole` AWS managed policy, which grants the required permissions on the Data Catalog
 
-- An inline policy that grants permissions on the data source (`S3_INPUT_DATA` location).
+- An inline policy that grants permissions on the data source (`S3_INPUT_DATA` location)
 
 ![glue crawler](images/glue_crawler_3.png)
 
@@ -180,12 +208,12 @@ To make that integration, we can follow a two-step approach:
 
 ![glue crawler](images/glue_run_complete.png)
 
-Now that we have the Glue Data Catalog table created, we can navigate to Amazon Athena to query the data using SQL.
+Now that we have the AWS Glue Data Catalog table created, we can navigate to Athena to query the data using SQL.
 
-Till now, we have extracted the data from Amazon S3, and then transformed the data by converting the data into parquet format
-using a Glue ETL (pySpark) job and finally we will use that cleaned data for analysis using Amazon Athena. 
+Till now, we have extracted the data from S3, and then transformed the data by converting the data into parquet format
+using a AWS Glue ETL (pySpark) job, and then used the cleaned data for analysis using Athena. 
 
-### Step 6: Querying output data using Amazon Athena standard SQL 
+### Step 6: Querying output data using Athena standard SQL 
 
 1. Open Athena query editor, you can keep Data Source as the default `AwsDataCatalog` and select `my_demo_db` for Database (as show in the screen shot) and run the following query. 
 
@@ -210,13 +238,13 @@ GROUP BY segment, region;
 
 ## Clean up resources 
 
-Now that you’ve finished this walk-through, you can delete all the following resources to avoid incurring unexpected costs 
+Now that you’ve finished this walk-through, you can delete all the following resources to avoid incurring unexpected costs:
 
 - Delete the **EMR Cluster** 
 
 ![emr terminate](images/emr_terminate.png)
 
-- Delete the **Amazon S3 bucket**
+- Delete the **S3 bucket**
 
 ```bash
 aws s3 rb s3://<YOUR_BUCKET_LOCATION> --force
@@ -228,4 +256,4 @@ aws s3 rb s3://<YOUR_BUCKET_LOCATION> --force
 
 ## Conclusion
 
-Congratulations! You have finished the tutorial on creating an ETL pipeline with Amazon EMR and Apache Spark. In this tutorial, we learnt how we can extract the data from Amazon S3, and then transform the data based on our requirement, by simply using a Glue ETL (pySpark) job. And then finally analyze the data using using SQL via Amazon Athena.
+Congratulations! You have finished the tutorial on creating an ETL pipeline with Amazon EMR and Apache Spark. In this tutorial, we learnt how we can extract the data from S3, transform the data based on our requirements by using a AWS Glue ETL (`pySpark`) job, and finally, to analyze the data using SQL via Athena.
