@@ -143,7 +143,7 @@ You can find other articles on BuildOn about DevOps here using the DevOps tag. T
 
 **Online Learning**
 * [DevOps Roadmap](https://roadmap.sh/devops)
-* [99 Days of DevOps](https://github.com/MichaelCade/90DaysOfDevOps)
+* [90 Days of DevOps](https://github.com/MichaelCade/90DaysOfDevOps)
 * [A Cloud Guru - AWS DevOps](https://acloudguru.com/learning-paths/aws-devops)
 * [2022 State of DevOps Report](https://cloud.google.com/devops/state-of-devops/)
 
