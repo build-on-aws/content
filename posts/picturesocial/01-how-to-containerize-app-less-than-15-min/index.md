@@ -39,7 +39,7 @@ To start, we are going to learn some basic concepts about Docker containers that
 
 ## The Dockerfile
 
-Now that we have some context about containers, we should look at one of the most important pieces: the Dockerfile. For me, the Dockerfile is similar to what I used to do when I was starting my career as an intern. Some of us were in charge of “writing the manual.” Yep, that manual that nobody reads and if for some reason it is needed, it never works. I’ve been a writer and consumer of a manual and the main issue is that is written by humans for humans. Instead, a Dockerfile is manually created by humans for machines, so it must be written very precisely and solves most of the interpretation issues.
+Now that we have some context about containers, we should look at one of the most important pieces: the Dockerfile. For me, the Dockerfile is similar to what I used to do when I was starting my career as an intern. Some of us were in charge of "writing the manual." Yep, that manual that nobody reads and if for some reason it is needed, it never works. I’ve been a writer and consumer of a manual and the main issue is that is written by humans for humans. Instead, a Dockerfile is manually created by humans for machines, so it must be written very precisely and solves most of the interpretation issues.
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
@@ -59,7 +59,7 @@ ENV ASPNETCORE_URLS=http://+:5111
 ENTRYPOINT ["dotnet", "HelloWorld.dll"]
 ```
 
-Most Dockerfiles start with a FROM statement, used to specify the base image you are using to create your own image. For example, imagine you want to create a container that needs to write a file on an Ubuntu 20.04 instance. Then you would use a FROM similar to this:
+Most Dockerfiles start with a `FROM` statement, used to specify the base image you are using to create your own image. For example, imagine you want to create a container that needs to write a file on an Ubuntu 20.04 instance. Then you would use a `FROM` similar to this:
 
 ```dockerfile
 FROM ubuntu:20.04
@@ -89,7 +89,7 @@ This will create a folder named demo.
 `CMD ["echo", "Hello World"]`
 ```
 
-This will print “Hello World” at Docker build time.
+This will print "Hello World" at Docker build time.
 
 Learn more about [Dockerfile commands](https://docs.docker.com/engine/reference/builder/#cmd) or access [samples for almost every single programming language or runtime](https://docs.docker.com/samples/).
 
@@ -140,11 +140,11 @@ docker --help
 4. If you open the Dockerfile, you will find the exact same structure as the one shared in this article. Don’t be afraid to change things and play with it. Here are some suggestions:
     * Add a line that will print Hello World in the docker build stage.
         ```
-        RUN echo “Hello World”
+        RUN echo "Hello World"
         ```
     * Change the WORKDIR from `app` to `api`, making sure to change all the references to `app` in the Dockerfile.
 
-5. Now, we are going to build the container image. We use the command `docker build` to specify the action and the parameter `-t` to specify the name of the image. As we learned before, The structure of the name is `imageName:tagName`. If we don’t specify a tagName, it will be created as `latest` by default. Finally, we specify the path where the Dockerfile is located. Because it’s in the root of our project, we just use a `.`.
+5. Now, we are going to build the container image. We use the command `docker build` to specify the action and the parameter `-t` to specify the name of the image. As we learned before, The structure of the name is `imageName:tagName`. If we don’t specify a `tagName`, it will be created as `latest` by default. Finally, we specify the path where the Dockerfile is located. Because it’s in the root of our project, we just use a `.`.
 
 ```bash
 docker build -t helloworld:latest .
@@ -162,7 +162,7 @@ docker buildx build —platform=linux/amd64 -t helloworld:latest .
 docker run -d -p 5111:5111 helloworld:latest
 ```
 
-8. After we run this command, we can open the browser and type: [http://localhost:5111/api/HelloWorld/johndoe](http://localhost:5111/api/HelloWorld/johndoe). We should get a `Hello johndoe` output. You can change `johndoe` in the url to any value you want and test it. Now that we are printing the expected string, our container is running correctly and we can upload it to ECR.
+8. After we run this command, we can open the browser and type: [http://localhost:5111/api/HelloWorld/johndoe](http://localhost:5111/api/HelloWorld/johndoe). We should get a `Hello johndoe` output. You can change `johndoe` in the URL to any value you want and test it. Now that we are printing the expected string, our container is running correctly and we can upload it to ECR.
 
 9. Now, we are going to create a private container registry, our own ECR repository named `helloworld`.
 

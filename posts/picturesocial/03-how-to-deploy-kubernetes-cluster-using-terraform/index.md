@@ -14,14 +14,14 @@ date: 2022-10-13
 This is a 8-part series about Picturesocial:
 
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
-2. [What’s Kubernetes and why should you care?](posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
+2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. How to deploy a Kubernetes cluster using Terraform (this post)
 4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
 5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
 
 In our last post, [Picturesocial - What’s Kubernetes and why should you care?](posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/), we learned about Kubernetes and why are we using it in Picturesocial. In this post, we are going to learn about infrastructure as a code and specifically how to deploy a Kubernetes cluster using Terraform.
 
-I have been working on IT projects for years and something recurrent in my experience has been how developers work together with sysadmins, esspecially when the application pushes changes to the infrastructure and the way things are done traditionally. The application has to be adapted to the infrastructure or the infrastructure has to be adapted to the application. What happens if those infrastructure changes mean you can’t rollback easily?
+I have been working on IT projects for years and something recurrent in my experience has been how developers work together with sysadmins, especially when the application pushes changes to the infrastructure and the way things are done traditionally. The application has to be adapted to the infrastructure or the infrastructure has to be adapted to the application. What happens if those infrastructure changes mean you can’t rollback easily?
 
 In the past, we designed applications knowing that in most of the cases the infrastructure was static and that we had to deal with the constraints as something axiomatic and immovable. As we went forward into our path to the cloud, that paradigm started to break with the possibility to have theoretically all the compute we needed at the power of our hands almost immediately. That shift helped create a new set of solutions designed for those new capabilities, one of them was Infrastructure as Code (IaC)
 
@@ -75,7 +75,7 @@ Terraform is an IaC tool created by Hashicorp that helps you define a complete i
     `output "ec2_ip" { value = aws_instance.server.private_ip }`
     ```
 
-  * Locals: These are variables that you set on your script and work as constants you can reference at any part of the script. The example below will create a common tag that will concat the values of variables `project_code` and `environment`.
+  * Locals: These are variables that you set on your script and work as constants you can reference at any part of the script. The example below will create a common tag that will concatenate the values of variables `project_code` and `environment`.
     ```json
     locals {
       project_code = "pso"
@@ -191,7 +191,7 @@ module "vpc" {
 }
 ```
 
-5. Now that we set the VPC, we are going to set the security groups. The security groups will allow or deny traffic to the EC2 instances of the EKS cluster. Here, we are allowing traffic to the port 22 from selected network segments named cidr_blocks.
+5. Now that we set the VPC, we are going to set the security groups. The security groups will allow or deny traffic to the EC2 instances of the EKS cluster. Here, we are allowing traffic to the port 22 from selected network segments named `cidr_blocks`.
 
 ```json
 resource "aws_security_group" "worker_group_mgmt_one" {
@@ -401,7 +401,7 @@ Note: You didn't use the -out option to save this plan, so Terraform can't guara
 exactly these actions if you run "terraform apply"
 ```
 
-11. Now that we are sure about what our project does, we are going to apply the changes by running the command below. You will be asked to confirm the changes by typing “yes”.
+11. Now that we are sure about what our project does, we are going to apply the changes by running the command below. You will be asked to confirm the changes by typing "yes".
 
 ```bash
 terraform apply
@@ -412,7 +412,7 @@ If you get a timeout when applying changes, just try again. It may be the chosen
 This process is going to take around 15-20 minutes, but depending on your own configuration it can be significantly more or less. Please remember that your terminal needs to be accessible and connected to the internet until the command finishes running. Once it is done, you are going to get the following message: 
     `Apply complete! Resources: 50 added, 0 changed, 0 destroyed.`
 
-12. Next, we are going to extract all the outputs that we configured on the `outputs.tf` file. Those are also part of the confirmation message that you get below the “Apply complete!" Those variables will be used to construct our `kubeconfig` file. To extract those values, we are going to use the following command:
+12. Next, we are going to extract all the outputs that we configured on the `outputs.tf` file. Those are also part of the confirmation message that you get below the "Apply complete!" Those variables will be used to construct our `kubeconfig` file. To extract those values, we are going to use the following command:
 
 ```bash
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)

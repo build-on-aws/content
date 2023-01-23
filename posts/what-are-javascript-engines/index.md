@@ -8,7 +8,7 @@ authorName: Jen Looper
 date: 2022-11-09
 ---
 
-![Banner image asking "what are javascript engines?"](images/banner.png)
+![Banner image asking "what are JavaScript engines?"](images/banner.png)
 
 Writing code for the web sometimes feels a little magical in that we write a sequence of characters in a file, open that file in a browser, and watch it come to life. But understanding the tech behind the magic can help you better hone your craft as a programmer.
 
@@ -28,7 +28,7 @@ A JavaScript engine is a kind of process virtual machine that is designed specif
 
 ## So what, exactly, is a JavaScript engine, and what does it do?
 
-The basic job of a JavaScript engine, when all is said and done, is to take the JavaScript code that a developer writes and convert it to fast, optimized code that can be interpreted by a browser or even embedded into an application. JavaScriptCore, in fact, [calls itself an “optimizing virtual machine”](http://trac.webkit.org/wiki/JavaScriptCore).
+The basic job of a JavaScript engine, when all is said and done, is to take the JavaScript code that a developer writes and convert it to fast, optimized code that can be interpreted by a browser or even embedded into an application. JavaScriptCore, in fact, [calls itself an "optimizing virtual machine"](http://trac.webkit.org/wiki/JavaScriptCore).
 
 More precisely, each JavaScript engine implements a version of ECMAScript, of which JavaScript is a dialect. As ECMAScript evolves, so do JavaScript engines. The reason there are so many different engines is each one is designed to work with a different web browser, headless browser, or runtime like Node.js.
 
@@ -74,7 +74,7 @@ Runtimes, overall, address perceived gaps in the performance of standard browser
 
 There is a large variety of JavaScript engines available to analyze, parse, and execute your client-side code. With every browser version release, the JavaScript engine might be changed or optimized to keep up with the state of the art in JavaScript code execution.
 
-It’s useful to remember, before getting totally confused by the names given to these engines, that a lot of marketing push goes into these engines and the browsers they underlie. In this [useful analysis](http://wingolog.org/archives/2011/10/28/javascriptcore-the-webkit-js-implementation) of JavaScript compilation, the author notes wryly: “In case you didn’t know, compilers are approximately 37% composed of marketing, and rebranding is one of the few things you can do to a compiler, marketing-wise, hence the name train: SquirrelFish, Nitro, SFX...”
+It’s useful to remember, before getting totally confused by the names given to these engines, that a lot of marketing push goes into these engines and the browsers they underlie. In this [useful analysis](http://wingolog.org/archives/2011/10/28/javascriptcore-the-webkit-js-implementation) of JavaScript compilation, the author notes wryly: "In case you didn’t know, compilers are approximately 37% composed of marketing, and rebranding is one of the few things you can do to a compiler, marketing-wise, hence the name train: SquirrelFish, Nitro, SFX..."
 
 While keeping in mind the ebb and flow around naming and renaming these engines, it’s useful to note a few of the major events in the history of the JavaScript engine. I’ve compiled a handy chart for you:
 

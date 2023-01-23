@@ -1,6 +1,6 @@
 ---
 title: Automate your container deployments with CI/CD and GitHub Actions
-description: Learn how test and deploy a containerized Flask app to the cloud with CI/CD with GitHub Actions.
+description: Learn how to test and deploy a containerized Flask app to the cloud with CI/CD with GitHub Actions.
 tags:
   - github-actions
   - containers
@@ -40,6 +40,7 @@ Let's get started!
 | 6. [Check App Deployment](#6-check-app-deployment)                             |
 | 7. [Destroy Resources](#7-destroy-resources)                                   |
 
+
 ## 1. Prerequisites
 
 To work through these examples, you'll need a few bits set up first:
@@ -52,7 +53,7 @@ Just want the code? Grab the CDK code to create the infrastructure [here](https:
 
 ## 2. Configure the Flask App
 
-Before we provision the infrastruture, let's review our containerized Flask app and configure it to run in the cloud.
+Before we provision the infrastructure, let's review our containerized Flask app and configure it to run in the cloud.
 
 ### Review App Setup
 
@@ -64,7 +65,7 @@ $ git clone https://github.com/jennapederson/hello-flask -b start-here
 
 We have a containerized Flask app with the following file structure:
 
-![Shows hello-flask app file structure](images/flask-app-file-structure.png "Shows hello-flask app file structure")
+![Shows hello-flask app file structure](images/flask-app-file-structure.png)
 
 In the main application file, `app.py`, there is one route that reverses the value of a string passed on the URL path and returns it:
 
@@ -382,7 +383,7 @@ service = ecs.FargateService(self,
 
 If any of the instances fails or stops, ECS will launch another instance of your task definition to replace it and maintain the desired count of tasks in the service. We always want at least one container running, so we'll use a service. If we were running a one-time or scheduled job, we could omit the service as we wouldn't need to keep it running or restart it.
 
-💰💰💰 Note: In the sample code we copied, we are using Option 1. Option 2 (commented out) creates a load balancer and related AWS resources using the `ApplicationLoadBalancedFargateService` construct. These resources have non-trivial costs if left provisioned in your account, *even if you don't use them*. If you choose Option 2, be sure to clean up (`cdk destroy`) after working through this exercise.
+💰💰💰 Note: In the sample code we copied, we are using Option 1. Option 2 (commented out) creates a load balancer and related AWS resources using the `ApplicationLoadBalancedFargateService` construct. Both of these options create resources with non-trivial costs if left provisioned in your account, *even if you don't use them*. Be sure to [clean up your resources](#7-destroy-resources) (`cdk destroy`) after working through this exercise.
 
 ### Deploy CDK App
 
@@ -624,7 +625,7 @@ In the AWS console, navigate to the IAM service and create a new user with a use
 
 ```
 
-Once the user is created, note down the “AWS ACCESS KEY ID” and the “AWS SECRET ACCESS KEY” to use in the next step. Treat these like a username and password. If you lose the “AWS SECRET ACCESS KEY”, you’ll need to generate a new one.
+Once the user is created, note down the `AWS ACCESS KEY ID` and the `AWS SECRET ACCESS KEY` to use in the next step. Treat these like a username and password. If you lose the `AWS SECRET ACCESS KEY`, you’ll need to generate a new one.
 
 For more details on creating an IAM user, following these instructions to [create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
 
@@ -664,7 +665,7 @@ Above, we see one task was stopped. A service deployment was completed. And the 
 
 We have success!
 
-## 7. Destroy resources
+## 7. Cleaning up
 
 If you're done using the cloud resources we created in this project, you can destroy them now to ensure you are not billed for their use. To do that, navigate back to the `ecs-devops-sandbox-repository` project at the command line and run:
 
