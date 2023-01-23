@@ -5,7 +5,7 @@ tags:
   - terraform
   - kubernetes
   - eks
-authorGithubAlias: jyapurv
+authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-12
 ---

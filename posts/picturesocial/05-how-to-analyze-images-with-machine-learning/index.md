@@ -7,7 +7,7 @@ tags:
   - csharp
   - rekognition
   - s3
-authorGithubAlias: jyapurv
+authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-15
 ---

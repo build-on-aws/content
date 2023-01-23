@@ -6,7 +6,7 @@ tags:
   - csharp
   - dynamodb
   - api
-authorGithubAlias: jyapurv
+authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-01-09
 ---
