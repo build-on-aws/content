@@ -37,7 +37,7 @@ Now, let’s talk about the second why:
 
 ## Speed, Agility, and Scalability
 
-Previously in this post, I mentioned two things: The first was the Pandemic which we will cover in a moment, and the second was DevOps. If you have not read the book The Phoenix Project, you should take time to do so. It will give you a clear understanding on why DevOps has changed the IT Industry so much. But until then, companies are in a business landscape that is more competitive than ever. If a company launches a new application, and that application has lag or their web app can't support the number of users of that app, their competitors can. This means the company will lose those customers. Or if a company sees an opportunity to deliver a new feature in their market, but they have to wait for infrastructure before they can deliver, then that company will lose to a competitor that can deliver those features faster.
+Previously in this post, I mentioned two things: The first was the Pandemic which we will cover in a moment, and the second was DevOps. If you have not read the book [The Phoenix Project](https://a.co/d/jgH7h6W), you should take time to do so. It will give you a clear understanding on why DevOps has changed the IT Industry so much. But until then, companies are in a business landscape that is more competitive than ever. If a company launches a new application, and that application has lag or their web app can't support the number of users of that app, their competitors can. This means the company will lose those customers. Or if a company sees an opportunity to deliver a new feature in their market, but they have to wait for infrastructure before they can deliver, then that company will lose to a competitor that can deliver those features faster.
 
 Everything that I have mentioned above was on full display during the Pandemic. More people than ever were using streaming services. Companies like Netflix had to deliver services fast, while being able to scale, and adapt to demand. Another example is how businesses, schools, and hospitals needed to scale their VPN infrastructure for their remote users. Many companies could not do this fast enough due to supply chain issues and manual processes.
 
@@ -59,7 +59,7 @@ Companies are finding ways to save on up-front infrastructure capital expenditur
 
 ## Conclusion
 
-In the book Ahead in the Cloud, Stephen Orban mentions how he transitioned his teams at Dow Jones to DevOps from 400 employees and 1,100 contractors to 450 employees and 300 contractors. During this time, network engineers and systems engineers were able to transition into new roles on the DevOps team. Unfortunately, their old positions were not back filled. 
+In the book [Ahead in the Cloud](https://a.co/d/bdIv9B6), Stephen Orban mentions how he transitioned his teams at Dow Jones to DevOps from 400 employees and 1,100 contractors to 450 employees and 300 contractors. During this time, network engineers and systems engineers were able to transition into new roles on the DevOps team. Unfortunately, their old positions were not back filled. 
 
 This is where we are in today’s industry. Organizations have transformed and we as network engineers are being challenged to evolve or die. My goal in Part 2 of this series to help you evolve!
 
