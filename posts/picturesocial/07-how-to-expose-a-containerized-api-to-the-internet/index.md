@@ -1,0 +1,179 @@
+---
+title: Picturesocial - How to expose a containerized API to the Internet?
+description: When you need control over traffic to your backend, mechanisms for authenticate requests or even redirect the whole thing to another cluster you can always trust on an external API Gateway. In this episode we are going to learn about how to expose API's using API Gateway.
+tags:
+  - dotnet
+  - csharp
+  - apigateway
+  - api
+authorGithubAlias: develozombie
+authorName: Jose Yapur
+date: 2023-01-23
+---
+
+This is a 8-part series about Picturesocial:
+
+1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
+2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
+3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
+4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
+5. [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
+6. [How to use DynamoDB on a containerized API](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/)
+7. [How to use DynamoDB on a containerized API](this post)
+
+
+Not everything is about creating and deploying, one of the most important parts of the journey is to make sure that our API’s are available to be consumed by the clients, wherever they are. The way you expose an API could represent the success or faliure of the whole project, and this is why we need to explore some of the best practices and tips. In this post we will be learning about API Gateway and how we can make sure that our backends are consumed appropriately in a secure way.
+
+But first, we need to understand where are we right now. We already created, containerized, deployed and secured the API and the infrastructure components needed for our API’s. But our services are presented as Internet Load Balancers, that means that anybody with the url can call our services without any control. So far we haven’t implemented throttling policies, api-key validation, authentication or any other security mechanism to protect our endpoints.
+
+A natural choice would be to present everything from a Layer 7 Load Balancer but managing all the API Design and considerations for presenting and cover all the points presented earlier would be a challenge, and that’s where Amazon API Gateway comes to the rescue!
+
+Picturesocial development team had a retro where they agreed to the following rules:
+
+* R1: API’s cannot be exposed directly through Kubernetes into a Public Network.
+* R2: We should avoid call the backend for content that is not refreshed constantly.
+* R3: No client application will be allowed to call the backend more than 100,000 times per second
+* R4: API’s calls needs an API key
+
+
+In the following walk-through we are going to learn how to expose our API’s while we comply with the rules using Network Load Balancers, Amazon API Gateway and VPC Link.
+
+### **Pre-requisites:**
+
+* An AWS Account https://aws.amazon.com/free/
+* If you are using Linux of MacOS you can continue to the next bullet point, if you are using Microsoft Windows I suggest you to use WSL2 https://docs.microsoft.com/en-us/windows/wsl/install
+* Install Git https://github.com/git-guides/install-git
+* Install AWS CLI 2 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+* Install .NET 6 https://dotnet.microsoft.com/en-us/download
+
+OR
+
+* If this is your first time working with AWS CLI or you need a refresh on how to set up your credentials, I suggest you to follow this step-by-step of how to configure your local environment https://aws.amazon.com/es/getting-started/guides/setup-environment/ in this same link you can also follow steps to configure Cloud9, that will be very helpful if you don’t want to install everything from scratch.
+
+### Walkthrough
+
+* Let’s explore visually what are we gonna do next. We are going to have a human calling API’s through an API Gateway, that API Gateway will have a private connection to the Kubernetes Cluster through a VPC Link and that VPC Link will call the Private Load Balancers.
+
+![API Gateway Flow](images/07-api-gateway-flow.jpg "API Gateway Flow")
+
+* Before starting to create the new API’s we need to make sure that Kubernetes Services are completely private and can only be called inside a VPC, this is where the Kubernetes Private Load Balancers help us to simplify and protect our endpoints. This was explored on an earlier post about [What’s Kubernetes and Why should I care](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/). 
+* Let’s take a look the original service manifest. Here we are creating a public LoadBalancer for the app pictures that’s exposed through the port 80.
+
+```yaml
+#########################
+# Definicion del servicio
+#########################
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: dev
+  name: pictures-lb
+spec:
+  selector:
+    app: pictures
+  ports:
+  - port: 80
+    targetPort: 5075
+  type: LoadBalancer
+```
+
+* If we wanna make this LoadBalancer reachable only under a VPC, we have to make a few changes. Kubernetes personalizations to interact with Cloud Providers come inside “annotations”, this is where we define the type of LoadBalancer and if the LoadBalancer will be internal or public. 
+
+```yaml
+#########################
+# Definicion del servicio
+#########################
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: dev
+  name: pictures-lb
+  **annotations****:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-internal:** **"true"**
+spec:
+  selector:
+    app: pictures
+  ports:
+  - port: 80
+    targetPort: 5075
+  type: LoadBalancer
+```
+
+* One we save that change through kubectl the public endpoint will no longer respond and will be reachable only inside a VPC.
+
+```bash
+`kubectl apply -f manifest.yml`
+```
+
+* Now, let’s take a look into the available LoadBalancers and copy the Full Qualified Domain Name (FQDN) from the Private LoadBalancer we just created. We can save the FQDN into a text file or something, cause we are gonna use it several times for the next steps.
+
+![Bash with kubectl service command](images/07-bash-kubectl-service.jpg "Bash with kubectl service command")
+
+* The easiest way to create an API through API Gateway, is by importing a Swagger file with the operation definition. This is pretty simple to accomplish by running the API that we made in the [previous post](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/) and run it locally going to http://localhost:5075/swagger/index.html
+
+![OAS3 with CRUD](images/07-oas3-crud.jpg "Bash with kubectl service command")
+
+* You will find the swagger.json file after the API name. Download it, we are gonna use it to create the API structure in Amazon API Gateway.
+* We have to Open the AWS Console and find API Gateway, or just clic on the [link](https://us-east-1.console.aws.amazon.com/apigateway/main/apis?region=us-east-1)
+* Let’s click on VPC and create a new one. As we are creating a REST API, we are gonna select that option as the picture bellow:
+
+![Create a VPC Link](images/07-create-vpc-link.jpg "Create a VPC Link")
+
+* On target NLB we are gonna select the same name from the Private Load Balancer FQDN. The process of VPC Link creation and connection will tike a while so we can sit and enjoy a coffee ☕
+* Now, let’s go back to API’s and click on create a new API. We are going to select IMPORT on the REST API option
+
+![REST API](images/07-rest-api.jpg "REST API")
+
+* This is where we import the Swagger JSON file that we downloaded from the first steps.
+
+![Import Swagger](images/07-import-swagger.jpg "Import Swagger")
+
+* We have an option to select the Type of Endpoint: a/ Regional b/ Edge Optimized or c/ Private. We talk about regional when the endpoint will live exclusively on its own Region, in our case us-east-1. Edge Optimized when API Gateway use Amazon CloudFront to create global replicas and optimized routes for high throughput global API’s and Private when we want the API’s accessible only through a VPC.
+* In our case we are going to select Regional and click in Import.
+* Now the whole API structure will be created in API Gateway, and we can start working on the VPC Link integration.
+
+![API Methods](images/07-methods.jpg "API Methods")
+
+* Let’s select one HTTP method to explore the flow. For example /all GET.
+
+![API Method execution flow](images/07-api-gateway-flow.jpg "API Method execution flow")
+* As we can see, we have a visual diagram with the whole method execution flow. We need to change the Integration Request to go through the VPC Link we just created.
+* It should look like this: a/ On integration type we are going to select VPC Link 🤓, b/ We are gonna check the Proxy Integration, that we we use API Gateway as a passthrough mechanism. c/ The method will still be GET, d/ We select the VPC Link that we created. e/ The endpoint URL will be the FQDN with http and the route to the API Method. And Finally we click on Save
+
+![API Gateway Integration request](images/07-integration-request.jpg "API Gateway Integration request")
+
+* You can go back to the Method Execution flow and clic the Test option to check if the API is running correctly. If everything works we have covered the first requirement. R1: API’s cannot be exposed directly through Kubernetes into a Public Network. 
+* Now it’s time to Deploy the API! Click on Actions and then Deploy API.
+
+![API Gateway Deploy](images/07-deploy-api.jpg "API Gateway Deploy")
+
+* We are going to be asked about the Stage, we click on New Stage and name it Test and then click in Deploy.
+
+![Deploy API Stage](images/07-deploy-api-stage.jpg "Deploy API Stage")
+
+* Now we can select Stages from the vertical left menu and configure other important requirements like R2: We should avoid call the backend for content that is not refreshed constantly and R3: No client application will be allowed to call the backend more than 100,000 times per second. For R2 we are gonna clic on Enable API Cache as will serve distributed replicas of the API response for static or not so changing data. You can configure the time to live of the Cache if you need more or less time.
+* For R3 we click on Enable throttling and we set the Rate to 10,000 RPS (Request per second) and we save changes 
+
+![Enabling Throttling and Cache](images/07-settings-cache-throttling.jpg "Enabling Throttling and Cache")
+
+
+* Also, if you notice, on top of the Stage settings you will get the Invoke URL for the API, we are gonna use it later for the tests.
+* It’s time to configure an API Key to complete the requirement R4: API’s calls needs an API key.
+* We have to click on API Keys from the vertical left menu and then Create an API Key. We are gonna name it test and the key will be auto generated.
+
+![Create API Key](images/07-api-key.jpg "Create API Key")
+
+* Finally we have to require API Keys for every method execution. We go back to API’s, select the Method and then Click on Method Request. We change API Key required from false to true.
+
+![API Method Request](images/07-method-request.jpg "API Method Request")
+
+* If we call the API directly without an API Key we are gonna get a 403 Error stating that the call is Forbidden.
+
+![API Request 403](images/07-api-request-403.jpg "API Request 403")
+
+* But if we use the x-api-key header and include the API Key, then we get the response correctly.
+
+![API Request 200](images/07-api-request-200.jpg "API Request 200")
+
+If you get this far you have your backend secured through API Gateway and with very few steps! Thanks for reading and don’t miss the next post about how to deal with ambiguity when you need just in time compute power for uncertain demand.
