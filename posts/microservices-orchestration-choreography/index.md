@@ -41,7 +41,7 @@ Orchestration is the simplest way to model workflows. The core idea of the orche
 
 Taking the same example of the e-commerce store, if it is re-designed with an orchestration approach, the Orders service can be that central co-ordinator that talks to Notification, Seller, and Logistics services and get the necessary things done. The communication between them is synchronous and the Orders service acts as the coordinator.
 
-![Comparison between service choreography and orchestration](images/choreography-orchestration-comparison.png)
+![A chart comparing service choreography and orchestration](images/choreography-orchestration-comparison.png)
 
 ## Orchestration vs Choreography
 
