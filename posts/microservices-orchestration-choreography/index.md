@@ -1,6 +1,6 @@
 ---
 
-title: Co-ordination patterns between microservices with orchestration and choreography
+title: Orchestration vs. Choreography: Why using different co-ordination patterns matters to developers
 description: An overview of the co-ordination patterns between services with choreography and orchestration in a distributed services architecture.
 tags:
   - microservices
@@ -14,9 +14,9 @@ date: 2023-01-25
 
 ## Oveview
 
-The idea of implementing co-ordination patterns to build distributed systems isn't new to the microservcies world. This has been an approach taken since the time of monoliths and Service Oriented Architecture architected applications where you would see a need to, say, send a message or an event to a job that is polling a queue to work on the next item. Over the years, due to the complexity of business processes growing the systems built to reflect the real-world, developers tend to implement services that adopt behaviours like parallel processing, long term wait on status updates, rollback and a few others.
+The idea of implementing co-ordination patterns to build distributed systems isn't new to the microservices world. It's been an approach taken since the time of monoliths and Service Oriented Architecture architected applications where you would see a need to, say, send a message or an event to a job that is polling a queue to work on the next item. Over the years, due to the complexity of business processes growing the systems built to reflect the real world, developers have tended to implement services that adopt behaviors like parallel processing, long term wait on status updates, rollback, and a few others.
 
-I first start with covering key concepts around events and messages in distributed systems. I then discuss the differences between choreography and orchestration - and talk about why they matter so much to developers.
+For the purpose of this post, I will start by covering key concepts around events and messages in distributed systems. I will then discuss the differences between choreography and orchestration - and talk about why they matter so much to developers.
 
 ## Events and messages
 
@@ -66,7 +66,5 @@ It is preferable to use orchestration when there are intricate workflows requiri
 
 An alternate perspective is adjusting to a hybrid system that, as necessary, combines orchestration and choreography. This is advantageous as it prevents a single point of failure (when the orchestrator malfunctions) and enables sophisticated operations. The organization's context and aim will determine the choice. 
 
-To learn more about orchestration and choreography, refer to the following resources:
-[Enterprise Integration Patterns - Choreography](https://www.enterpriseintegrationpatterns.com/patterns/conversation/Choreography.html)
-[Enterprise Integration Patterns - Orchestration](https://www.enterpriseintegrationpatterns.com/patterns/conversation/Orchestration.html)
+To learn more, check out the following Enterprise Integration Patterns resources on [Choreography](https://www.enterpriseintegrationpatterns.com/patterns/conversation/Choreography.html) and [Orchestration](https://www.enterpriseintegrationpatterns.com/patterns/conversation/Orchestration.html).
 
