@@ -1,6 +1,6 @@
 ---
 
-title: Orchestration vs. Choreography: Why using different co-ordination patterns matters to developers
+title: "Orchestration vs. Choreography: Why using different co-ordination patterns matters to developers"
 description: An overview of the co-ordination patterns between services with choreography and orchestration in a distributed services architecture.
 tags:
   - microservices
