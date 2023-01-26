@@ -133,7 +133,7 @@ If you'd like to try out some of the concepts introduced in this section, check 
 
 ## Where should I start?
 
-As mentioned earlier, you should use two questions to find the best place to start: 
+As mentioned earlier, you should use these questions to find the best place to start: 
 
 1. Where is there a bottleneck or pain point for the team(s) that they are struggling with?
 2. What services or piece of infrastructure can you work on that is not mission critical?
