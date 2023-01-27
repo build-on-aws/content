@@ -19,17 +19,17 @@ This content is community driven and you are the best person to drive the kind o
 
 :warning: January 27, 2023: BuildOn.AWS content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months.
 
-If you'd like to write content for BuildOn.AWS, read through the [Author Quick Start](/AUTHOR_QUICK_START.md) and then submit your proposal [here](https://github.com/build-on-aws/content/issues/new?assignees=jennapederson&labels=content+proposal&template=content-proposal-template.md).
+If you'd like to write content for BuildOn.AWS, read through the [Author Quick Start](/AUTHOR_QUICK_START.md) and then submit your proposal [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=content+proposal&template=content-proposal-template.md).
 
 Looking for an idea? Check out our backlog [here](https://github.com/build-on-aws/content/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
 
 ### Suggest Content Ideas
 
-Are we missing some content? Do you have an idea you'd like to suggest, but you're not able to create the content yourself? Check out our current backlog [here](/contribute) and then submit an issue [here](https://github.com/build-on-aws/content/issues/new?assignees=jennapederson&labels=wish+list&template=idea-suggestion-template.md) to suggest your idea.
+Are we missing some content? Do you have an idea you'd like to suggest, but you're not able to create the content yourself? Check out our current backlog [here](/contribute) and then submit an issue [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=wish+list&template=idea-suggestion-template.md) to suggest your idea.
 
 ### Report or Fix a Content Issue
 
-If you encounter an issue with a piece of content such as typos, broken links, broken code, or out of date information and you believe it should be fixed, you can submit an issue to report it [here](https://github.com/build-on-aws/content/issues/new?assignees=jennapederson&labels=bug&template=issue-template.md) or update it with a pull request.
+If you encounter an issue with a piece of content such as typos, broken links, broken code, or out of date information and you believe it should be fixed, you can submit an issue to report it [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=bug&template=issue-template.md) or update it with a pull request.
 
 We also have a list of open content ideas and open issues [here](https://github.com/build-on-aws/content/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) that you can choose from.
 

@@ -82,7 +82,7 @@ You'll need to meet the following prerequisites to publish your content:
 
 ### 1. Submit a Content Proposal
 
-Before writing your content, submit a content proposals as a GitHub Issue in the BuildOn.AWS content repository [here](https://github.com/build-on-aws/content/issues/new?assignees=jennapederson&labels=content+proposal&template=content-proposal-template.md).
+Before writing your content, submit a content proposals as a GitHub Issue in the BuildOn.AWS content repository [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=content+proposal&template=content-proposal-template.md).
 
 ### 2. Proposal Review
 
