@@ -17,7 +17,7 @@ This content is community driven and you are the best person to drive the kind o
 
 ### Contribute Content
 
-:warning: January 27, 2023: BuildOn.AWS content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months. :warning:
+:warning: January 27, 2023: BuildOn.AWS content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months.
 
 If you'd like to write content for BuildOn.AWS, read through the [Author Quick Start](/AUTHOR_QUICK_START.md) and then submit your proposal [here](https://github.com/build-on-aws/content/issues/new?assignees=jennapederson&labels=content+proposal&template=content-proposal-template.md).
 

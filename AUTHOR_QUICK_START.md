@@ -17,7 +17,7 @@ Interested in contributing to [BuildOn.AWS](https://www.buildon.aws)? Get starte
 
 ## What We're Looking For
 
-:warning: January 27, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months. :warning:
+:warning: January 27, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months.
 
 ### Who Writes on BuildOn
 
