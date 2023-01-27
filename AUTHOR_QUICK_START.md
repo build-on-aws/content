@@ -17,6 +17,8 @@ Interested in contributing to [BuildOn.AWS](https://blog.buildon.aws)? Get start
 
 ## What We're Looking For
 
+:warning: January 27, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months. :warning:
+
 ### Who Writes on BuildOn
 
 We are looking for people with technical knowledge to write about their experiences, share their opinions, and help others in the community. BuildOn.AWS publishes content from authors who want to share their challenges (and helpful hints) to learning a programming language, a dive deep into why it's always DNS, best practices on building microservices architectures and more.

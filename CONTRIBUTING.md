@@ -17,6 +17,8 @@ This content is community driven and you are the best person to drive the kind o
 
 ### Contribute Content
 
+:warning: January 27, 2023: BuildOn.AWS content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months. :warning:
+
 If you'd like to write content for BuildOn.AWS, read through the [Author Quick Start](/AUTHOR_QUICK_START.md) and then submit your proposal [here](https://github.com/build-on-aws/content/issues/new?assignees=jennapederson&labels=content+proposal&template=content-proposal-template.md).
 
 Looking for an idea? Check out our backlog [here](https://github.com/build-on-aws/content/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
@@ -33,21 +35,9 @@ We also have a list of open content ideas and open issues [here](https://github.
 
 ## Others Ways to Contribute
 
-### Translation
-
-We welcome translations of existing content. Process TBD.
-
-### Participate in Monthly Office Hours
-
-We host monthly office hours to answer your questions about content and the process of getting your content published on BuildOn.AWS.
-
-To be scheduled.
-
 ## Ask For Help
 
-If you already have a content proposal or pull request for your content open, you can ask your question there and your reviewer will work with you to help.
-
-You can also attend [monthly office hours](#participate-in-monthly-office-hours) to ask questions and get help.
+If you already have a content proposal or pull request for your content open, you can ask your question there and your reviewer will work with you.
 
 ## How Your Content is Licensed
 

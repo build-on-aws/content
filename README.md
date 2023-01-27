@@ -2,6 +2,8 @@
 
 ## How to write for BuildOn.AWS
 
+:warning: January 27, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months. :warning:
+
 Interested in writing for [BuildOn.AWS](https://blog.buildon.aws)?
 
 - Read the [Quick Start](/AUTHOR_QUICK_START.md) to learn how to propose a topic and get it published
