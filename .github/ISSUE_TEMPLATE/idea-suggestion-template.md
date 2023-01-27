@@ -3,7 +3,7 @@ name: 💡 Idea Suggestion Template
 about: Use this template to suggest a content idea for someone else to write on BuildOn.AWS.
 title: 
 labels: wish list
-assignees: jennapederson
+assignees: cherbk
 
 ---
 
