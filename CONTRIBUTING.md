@@ -9,9 +9,9 @@
 * [How Your Content is Licensed](#how-your-content-is-licensed)
 * [BuildOn.AWS Code of Conduct](#buildonaws-code-of-conduct)
 
-[BuildOn.AWS](https://blog.buildon.aws) welcomes anyone to contribute content, suggest content ideas, update outdated content, and file issues related to the platform or with content.
+[BuildOn.AWS](https://www.buildon.aws) welcomes anyone to contribute content, suggest content ideas, update outdated content, and file issues related to the platform or with content.
 
-This content is community driven and you are the best person to drive the kind of content you'd like to see published here.
+This content is community driven and you are the best person to drive the kind of content you'd like to see published here!
 
 ## Ways to Contribute
 

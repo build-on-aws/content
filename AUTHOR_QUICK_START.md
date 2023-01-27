@@ -1,6 +1,6 @@
 # Quick Start
 
-Interested in contributing to [BuildOn.AWS](https://blog.buildon.aws)? Get started quickly: 
+Interested in contributing to [BuildOn.AWS](https://www.buildon.aws)? Get started quickly: 
 
 * [What We're Looking For](#what-were-looking-for)
 * [Writing Style](#writing-style)
@@ -66,8 +66,8 @@ BuildOn.AWS content is not your traditional marketing content. It doesn't try to
 Wondering what type of content fits this content platform? Here are some examples written by the BuildOn.AWS team.
 
 * [What happens when you type a URL into your browser?](https://aws.amazon.com/blogs/mobile/what-happens-when-you-type-a-url-into-your-browser/)
-* [Four Reasons Why GraphQL Is The Future](https://blog.buildon.aws/posts/four-reasons-why-graphql-is-the-future/)
-* [Topic or a Queue - What exactly is Apache Kafka?](https://blog.buildon.aws/posts/kafka-topic-or-queue/)
+* [Four Reasons Why GraphQL Is The Future](https://www.buildon.aws/posts/four-reasons-why-graphql-is-the-future/)
+* [Topic or a Queue - What exactly is Apache Kafka?](https://www.buildon.aws/posts/kafka-topic-or-queue/)
 * [10 Ways to Use Serverless Functions](https://dev.to/aws/10-ways-to-use-serverless-functions-bme)
 * [Protecting from vulnerabilities in Java: How we managed the log4j crisis](https://medium.com/i-love-my-local-farmer-engineering-blog/protecting-from-vulnerabilities-in-java-how-we-managed-the-log4j-crisis-68d3e90a7586)
 * [How to debug machine learning models to catch issues early and often](https://towardsdatascience.com/a-quick-guide-to-managing-machine-learning-experiments-af84da6b060b)
@@ -154,7 +154,7 @@ Your content is now submitted and will be queued for review. When a reviewer sta
 
 #### Example
 
-For a post titled `What Happens When You Type a URL Into Your Browser` which is published at `https://blog.buildon.aws/posts/what-happens-when-you-type-a-url-into-your-browser` store your files like this:
+For a post titled `What Happens When You Type a URL Into Your Browser` which is published at `https://www.buildon.aws/posts/what-happens-when-you-type-a-url-into-your-browser` store your files like this:
 
 - Main post file: `posts/what-happens-when-you-type-a-url-into-your-browser/index.md`
 - Images: `posts/what-happens-when-you-type-a-url-into-your-browser/images/dig-command-output.png`
