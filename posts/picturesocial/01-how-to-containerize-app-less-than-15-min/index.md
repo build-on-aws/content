@@ -5,12 +5,12 @@ tags:
   - containers
   - ecr
   - docker
-authorGithubAlias: jyapurv
+authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-11
 ---
 
-This is a 10-part series about Picturesocial:
+This is an 8-part series about Picturesocial:
 
 1. How to containerize an app in less than 15 minutes (this post)
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
