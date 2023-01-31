@@ -22,11 +22,11 @@ This is a 8-part series about Picturesocial:
 7. [How to use DynamoDB on a containerized API](this post)
 
 
-Not everything is about creating and deploying, one of the most important parts of the journey is to make sure that our API’s are available to be consumed by the clients, wherever they are. The way you expose an API could represent the success or faliure of the whole project, and this is why we need to explore some of the best practices and tips. In this post we will be learning about API Gateway and how we can make sure that our backends are consumed appropriately in a secure way.
+Not everything is about creating and deploying. One of the most important parts of the journey is to make sure that our APIs are available to be consumed by the clients, wherever they are. The way you expose an API could represent the success or faliure of the whole project, and this is why we need to explore some of the best practices and tips. In this post we will be learning about API Gateway and how we can make sure that our backends are consumed appropriately in a secure way.
 
-But first, we need to understand where are we right now. We already created, containerized, deployed and secured the API and the infrastructure components needed for our API’s. But our services are presented as Internet Load Balancers, that means that anybody with the url can call our services without any control. So far we haven’t implemented throttling policies, api-key validation, authentication or any other security mechanism to protect our endpoints.
+But first, we need to understand where are we right now. We already created, containerized, deployed, and secured the API and the infrastructure components needed for our APIs. But our services are presented as Internet Load Balancers, and that means that anybody with the URL can call our services without any control. So far we haven’t implemented throttling policies, API-key validation, authentication, or any other security mechanism to protect our endpoints.
 
-A natural choice would be to present everything from a Layer 7 Load Balancer but managing all the API Design and considerations for presenting and cover all the points presented earlier would be a challenge, and that’s where Amazon API Gateway comes to the rescue!
+A natural choice would be to present everything from a Layer 7 Load Balancer, but managing all the API design and considerations for presenting and covering all the points presented earlier would be a challenge. That’s where Amazon API Gateway comes to the rescue!
 
 Picturesocial development team had a retro where they agreed to the following rules:
 
