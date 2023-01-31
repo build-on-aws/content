@@ -1,7 +1,7 @@
 ---
 name: 🐛 Issue Template
 about: Use this template to report an issue with content such as typos, broken links, broken code, out of date, etc.
-title: 
+title: "issue: TODO"
 labels: bug
 assignees: cherbk
 
