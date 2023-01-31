@@ -25,7 +25,7 @@ So far we have been lerning about containers, Kubernetes, Infraestructure as a C
 
 We choose Amazon DynamoDB because we need a modern database that support high throughput and simplify the overall data management by providing an API for all the Data Management and Operations. Also because we are using document data structures that will be better working on a non-relational and document DB as DynamoDB. But first we need to figure out the relevant field for the data structure in the APIs that we have done so far.
 
-In a previous post about [how to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/), we created an API that return the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An ID to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5), and **4/** User who uploaded the image. Now we are going to convert those attributes into a Data Model, using JSON, that we will follow for the whole API.
+In a previous post about [how to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/), we created an API that returned the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An ID to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5), and **4/** User who uploaded the image. Now we are going to convert those attributes into a Data Model, using JSON, that we will follow for the whole API.
 
 ```json
 `{  
