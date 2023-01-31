@@ -25,7 +25,7 @@ So far we have been lerning about containers, Kubernetes, Infraestructure as a C
 
 We choose Amazon DynamoDB because we need a modern database that support high throughput and simplify the overall data management by providing an API for all the Data Management and Operations. Also because we are using document data structures that will be better working on a non-relational and document DB as DynamoDB. But first we need to figure out the relevant field for the data structure in the APIs that we have done so far.
 
-In a previous post about [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/) we created an API that return the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An Id to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5) and **4/** User who uploaded the image. Now we are going to convert those attributes into a Data Model, using JSON, that we will follow for the whole API.
+In a previous post about [how to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/), we created an API that return the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An ID to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5), and **4/** User who uploaded the image. Now we are going to convert those attributes into a Data Model, using JSON, that we will follow for the whole API.
 
 ```json
 `{  
@@ -36,7 +36,7 @@ In a previous post about [How to analyze images with Machine Learning](/posts/pi
 }`
 ```
 
-That Data Model with real data will look like this in our API, this is what we call a Data Object, in this case using JSON.
+That Data Model with real data will look like this in our API. This is what we call a Data Object, in this case using JSON.
 
 ```json
 `{  
@@ -52,7 +52,7 @@ That Data Model with real data will look like this in our API, this is what we c
  }`
 ```
 
-Now that we have our data model, let’s surf some of the CRUD API specs to accommodate our Pictures API to follow the best practices. CRUD comes from Create, Read, Update and Delete, those are the basic operations that you usually do over a Data Object and we will align those operations into HTTP Methods like this:
+Now that we have our data model, let’s surf some of the CRUD API specs to accommodate our Pictures API to follow the best practices. CRUD stands for Create, Read, Update and Delete, which are the basic operations that you usually do with a Data Object, and we will align those operations into HTTP Methods like this:
 
 * Create → POST
 * Read → GET
@@ -91,7 +91,7 @@ ReadCapacityUnits=5,WriteCapacityUnits=5 \
 `--table-class STANDARD`
 ```
 
-* When we execute the command we are going to get a JSON response with the table structure, we just need to write `:q `and press Enter to finish.
+* When we execute the command, we are going to get a JSON response with the table structure. We just need to write `:q `and press Enter to finish.
 
 ```json
 {
@@ -195,8 +195,8 @@ public class PictureController : ControllerBase
     }
 ```
 
-* We declared, on top of the class, the DynamoDB variables and the Data Model variable. And using the constructor method we are going to initialize them, they are going to take the profile from the terminal to authenticate.
-* We explored Amazon Rekognition on our [previous post](https://go.aws/3PxPyga?r=lp), so I will focus now only on the added parts of the API to store the information on DynamoDB. First we declare the Create method as HttpPost and parse the request from the PictureTableRequest class that we explored earlier. The next step is just to create a PictureTable object and fill it with the results from the Amazon Rekognition detection and then just use the global variable context to save asynchronously the object into the database, as you can see this is quite straightforward and doesn't add much custom logic to our methods, it's just one line of code.
+* We declared, on top of the class, the DynamoDB variables and the Data Model variable. And using the constructor method we are going to initialize them. They will take the profile from the terminal to authenticate.
+* We explored Amazon Rekognition in our [previous post](https://go.aws/3PxPyga?r=lp), so for now I will focus only on the added parts of the API to store the information on DynamoDB. First we declare the Create method as HttpPost and parse the request from the PictureTableRequest class that we explored earlier. The next step is just to create a PictureTable object and fill it with the results from the Amazon Rekognition detection, and then just use the global variable context to save asynchronously the object into the database. As you can see this is quite straightforward and doesn't add much custom logic to our methods; it's just one line of code.
 
 ```csharp
 [HttpPost]
@@ -244,7 +244,7 @@ public async Task<PictureTable> Create([FromBody]PictureTableRequest req)
 }
 ```
 
-* We are gonna follow similar steps for the Read method using HTTP Get, where we use the Table Key to retrieve values. In this case we are receiving by the url the Id and returning the corresponding Data Object from DynamoDB by using the context and the method LoadAsync.
+* We are going to follow similar steps for the Read method using HTTP Get, where we use the Table Key to retrieve values. In this case we are receiving by the url the ID and returning the corresponding Data Object from DynamoDB by using the context and the method LoadAsync.
 
 ```csharp
 [HttpGet("{id}")]
@@ -368,13 +368,13 @@ public class PictureController : ControllerBase
 dotnet run
 ```
 
-* We are going to test it using the built-in Swagger, going to our browser and typing the following URL. The Swagger endpoint will only works when you test it locally.
+* We are going to test it using the built-in Swagger, going to our browser and typing the following URL. The Swagger endpoint will only work when you test it locally.
 
 ```bash
 http://localhost:5075/swagger/index.html
 ```
 
-* There we can see the auto documented Data Model and Methods and also test them
+* There we can see the auto documented Data Model and Methods and also test them.
 
 ![Structure of a REST API](images/06-rest-api-structure.jpg "Structure of a REST API")
 * I will create a new Picture by going to the POST option and creating a payload using the PictureTableRequest Model, in my case I will use the name of a picture and bucket that exists to test it.
