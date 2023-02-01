@@ -1,8 +1,8 @@
 ---
-title: <Title>
-description: <Description>
+title: <Highlight the core problem being solved>
+description: <Two or three sentences describing the problem, the solution, and tools or services used along the way>
 tags:
-    - <add list of what content is about here>
+    - <list key terms readers will be searching for>
     - essentials
     - aws
 authorGithubAlias: <github alias>
@@ -12,7 +12,7 @@ date: <expected publish date in YYYY-MM-DD format>
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 
-Introduction paragraph to the topic.
+Introduction paragraph to the topic. Describe a real world example to illustrate the problem the reader is facing. Explain why it's a problem. Offer the solution you'll be 
 
 ## Section 1
 
