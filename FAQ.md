@@ -15,9 +15,7 @@
   * [How do I embed mathematical formulas or equations in my articles?](#how-do-i-embed-mathematical-formulas-or-equations-in-my-articles)
   * [How do I show content under tabs?](#how-do-i-show-content-under-tabs)
 * [Miscellaneous](#miscellaneous)
-  * [I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?](#i-published-my-post-on-my-personal-blogdevtomedium-can-i-publish-it-on-buildonaws)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
-  * [How do I optimize my content for SEO?](#how-do-i-optimize-my-content-for-seo)
 
 ## Markdown Syntax
 
@@ -301,14 +299,6 @@ Images inside tabs use a similar syntax. You just need to create a markdown list
 
 ## Miscellaneous
 
-### I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?
-
-Please don’t syndicate to other platforms right now as we don’t want to drive traffic back to BuildOn.AWS during the soft launch. The canonical link helps surface the original content in search results.
-
 ### Why was my content proposal not accepted? Do you have feedback for me?
 
 We will add feedback to your content proposal issue if we have suggestions for improvements. In many cases, the content is not a good fit for this platform and that is why it was not accepted.
-
-### How do I optimize my content for SEO?
-
-TODO
