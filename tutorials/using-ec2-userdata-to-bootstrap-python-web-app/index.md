@@ -10,13 +10,12 @@ authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-01-03
 ---
-
-Setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming and error prone when done manually. EC2 instances have ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when it starts up, and you can automate creating the all the infrastructure along with these scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots. We will be using a bash script to install and configure Nginx and uWSGI, set up a systemd service for uWSGI, and copy our application using CDK. We will cover:
+Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming -- and it's tough to accomplish without any errors. EC2 instances have ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when it starts up, and you can automate creating the all the infrastructure along with these scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots to reduce errors while setting up Nginx and uWSGI. We will be using a bash script to install and configure Nginx and uWSGI, set up a systemd service for uWSGI, and copy our application using CDK. We will cover:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a security group with inbound access, and an IAM instance profile.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
 - Configure the software packages after installation using a script downloaded by the user data.
-- Deploying the application using user data.
+- Deploy the application using user data.
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -34,7 +33,7 @@ Setting up and configuring the packages required to run a Python web app using [
 
 Before we deploy the web application, we need to create an Amazon EC2 instance and supporting resources to run it. In this tutorial, we'll create a new AWS CDK app to create our infrastructure, install the dependencies for our web app, allow access to it, and finally deploy it.
 
-First, let's check if our CDK version is up to date - this guide is based on v2 of the CDK, if you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html). To check the version, run the following:
+First, let's check if our CDK version is up to date - this guide is based on v2 of the CDK. If you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html). To check the version, run the following:
 
 ```bash
 cdk --version
@@ -86,7 +85,7 @@ npm notice
 
 ### Create the code for the resource stack
 
-CDK uses the folder name for the files it generates. For this guide, we will be using `ec2-cdk`, if you named your directory differently, please replace this with the folder name you used. To start adding infrastructure, go to the file `lib/ec2-cdk-stack.ts`. This is where we will write the code for the resource stack you are going to create.
+CDK uses the folder name for the files it generates. For this guide, we will be using `ec2-cdk`. If you named your directory differently, please replace this with the folder name you used. To start adding infrastructure, go to the file `lib/ec2-cdk-stack.ts`. This is where we will write the code for the resource stack you are going to create.
 
 A resource stack is a set of cloud infrastructure resources (in your particular case, they will be all AWS resources) that will be provisioned into a specific account. The account and Region where these resources are provisioned, can be configured in the stack - we will cover this later on.
 
@@ -174,7 +173,7 @@ We also need to be able to access our instance via 2 ports: 22 and 80. SSH uses 
       );
 ```
 
-We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI - pronounced "Ay-Em-Eye") - for this guide, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) one for X86_64 CPU architecture. We will also pass the IAM role you created, the default VPC, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS regions, the `t2.micro` type may not be available, please use the `t3.micro` one. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/).
+We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI - pronounced "Ay-Em-Eye") - for this guide, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) one for X86_64 CPU architecture. We will also pass the IAM role you created, the default VPC, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS regions, the `t2.micro` type may not be available. Jus use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/).
 
 ```typescript
       // Look up the AMI Id for the Amazon Linux 2 Image with CPU Type X86_64
@@ -199,7 +198,11 @@ We're now ready to create the EC2 instance using a pre-built [Amazon Machine Ima
 
 We have now defined our AWS CDK stack to create an EC2 instance, a security group with inbound access rules, and an IAM role, attached to the EC2 instance as an IAM instance profile. Before deploying the stack, we still need to install the packages on the host OS to run your application, and also copy our sample application code to the instance.
 
-### Checkpoint 1
+<br>
+
+>  ## ✅ ✅ ✅  **Checkpoint 1**  ✅ ✅ ✅
+
+<br>
 
 Your `lib/ec2-cdk-stack.ts` file should now look like this:
 ```typescript
@@ -376,8 +379,11 @@ These three outputs will show you the following:
 
 We're now ready to deploy the stack.
 
-### Checkpoint 2
+<br>
 
+>  ## ✅ ✅ ✅  **Checkpoint 2**  ✅ ✅ ✅
+
+<br>
 We have now completed all code changes to our CDK app, and the `lib/ec2-cdk-stack.ts` file should look like this:
 
 ```typescript
@@ -596,7 +602,9 @@ mkdir -p ~/.ssh \
   && chmod 600 ~/.ssh/ec2-cdk-key.pem
 ```
 
-Let's go through each of the command steps. Firstly, the `\` at the end of the lines tells your shell that the command is split onto a new line, which is why we add it to the first 5 lines to make the command more readable. The first of the commands, `mkdir -p ~/.ssh`, creates the directory `.ssh` in your OS user's home directory, and the `-p` indicates to create the directory with parents, and to not error if it already exists - this may be the first time you use SSH on your local machine, in which case the directory may not exist. What's meant by "with parents" is that if you would like to create a new nested directory structure (e.g. `mkdir -p ~/something/very/nested/here`) it would create all the parent directories of `something`, with `very` in it, `nested` inside `very`, and `here` inside `nested` without you needing to run multiple `mkdir` commands. The second command uses the AWS CLI to call `secretsmanager` where we stored the SSH key to fetch it raw data, and we specify the `query` as `SecretString` to only bring back that field as `text`. We then use the `>` operator to tell our shell to take the output and write it to the file `~/.ssh/cd-key.pem`, overwriting any existing content (if the file does not exist, it will be created; if it did exist, we will overwrite the contents). Lastly, the [`chmod`](https://en.wikipedia.org/wiki/Chmod) command limits who can access the file - SSH requires keys to be locked down, so we limit read and write access to our OS user only.
+Let's go through each of the command steps. Firstly, the `\` at the end of the lines tells your shell that the command is split onto a new line, which is why we add it to the first 5 lines to make the command more readable. The first of the commands, `mkdir -p ~/.ssh`, creates the directory `.ssh` in your OS user's home directory, and the `-p` indicates to create the directory with parents, and to not error if it already exists - this may be the first time you use SSH on your local machine, in which case the directory may not exist. What's meant by "with parents" is that if you would like to create a new nested directory structure (e.g. `mkdir -p ~/something/very/nested/here`) it would create all the parent directories of `something`, with `very` in it, `nested` inside `very`, and `here` inside `nested` without you needing to run multiple `mkdir` commands. 
+
+The second command uses the AWS CLI to call `secretsmanager` where we stored the SSH key to fetch it raw data, and we specify the `query` as `SecretString` to only bring back that field as `text`. We then use the `>` operator to tell our shell to take the output and write it to the file `~/.ssh/cd-key.pem`, overwriting any existing content (if the file does not exist, it will be created; if it did exist, we will overwrite the contents). Lastly, the [`chmod`](https://en.wikipedia.org/wiki/Chmod) command limits who can access the file - SSH requires keys to be locked down, so we limit read and write access to our OS user only.
 
 Once we have run this command, we can SSH to the instance by using the public IP address, specifying which SSH key to use with the `-i ~/.ssh/ec2-cdk-key.pem`, and to only offer that key to the server by specifying `-o IdentitiesOnly=yes` - there is quite a lot of detail in that parameter which we won't cover here. The short version is that if you have many SSH keys, the SSH server in your instance would reject your login attempt if too many incorrect keys were sent as it would try each of them in your `~/.ssh` directory with certain names.
 
