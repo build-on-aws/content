@@ -24,7 +24,7 @@ This is a 8-part series about Picturesocial:
 
 Uncertainty, we use maths, positive thinking, prays, or whatever is within our reach to make it certain, even if the result is good or bad. Every new creation is uncertain, but we created frameworks, we collected past experiences and expectations to get the control of what it seems unpredictable. This is not strange to API’s, we use frameworks to predict the demand, and some maths for things like Amdahl Law to predict compute consumption. But right now the issue is not only about predicting the demand but having the compute capacity to serve it exactly when is needed or Just in Time. 
 
-This may seem obvious for Serverless workloads, as its handled by the cloud provider, but for Kubernetes we use scaling strategies, that we explored in previous [posts](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/), like HPA (Horizontal Pod Autoscaler) to scale our deployments or individual parts of an Application, those HPA needs compute capacity from the Node Groups to schedule new pods, otherwise the new ones are evicted. Let’s take a look to what it looks.
+This may seem obvious for Serverless workloads, as its handled by the cloud provider, but for Kubernetes we use scaling strategies, like HPA (Horizontal Pod Autoscaler), that we explored in previous [posts](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/). But HPA needs compute capacity from the Node Groups to schedule new pods, otherwise the new ones are evicted. Let’s take a look at how this process still won't solve the problem above.
 
 ![POD and worker autoscaling in Kubernetes](images/08-pod-autoscaling-kubernetes.jpg "POD and worker autoscaling in Kubernetes")
 
