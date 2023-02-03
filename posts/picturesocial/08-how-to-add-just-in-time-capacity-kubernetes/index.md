@@ -163,13 +163,13 @@ eksctl create iamidentitymapping \
 kubectl describe configmap -n kube-system aws-auth
 ```
 
-* We are gonna create an open id connect (OIDC) provider for our Cluster, this is needed for establishing the trust relationship between Karpenter and our Cluster.
+* We are gonna create an open id connect (OIDC) provider for our Cluster. This is needed for establishing the trust relationship between Karpenter and our Cluster.
 
 ```bash
 eksctl utils associate-iam-oidc-provider --cluster ${CLUSTER_NAME} --approve
 ```
 
-* And Finally we create the Kubernetes Service Account to give Karpenter permissions to launch new instances.
+* And finally we create the Kubernetes Service Account to give Karpenter permissions to launch new instances.
 
 ```bash
 eksctl create iamserviceaccount \
@@ -203,13 +203,13 @@ helm upgrade --install --namespace karpenter --create-namespace \
   --wait # for the defaulting webhook to install before creating a Provisioner
 ```
 
-* You can now check if everything is propperly installed and running before continue further 
+* You can now check if everything is properly installed and running before continuing further.
 
 ```bash
 kubectl get all -n karpenter
 ```
 
-* This YAML contains the provisioner for on-demand nodes. This is what it does: a/ Requirements: implements new on-demand nodes that are extra-large or bigger, b/ Limits: The provisioner will not use more than 1000 virtual cores and 1000GB of RAM. c/ ttlSecondsAfterEmpty: How many seconds until and empty node is terminated.
+* This YAML contains the provisioner for on-demand nodes. This is what it does: a/ Requirements: implements new on-demand nodes that are extra-large or bigger, b/ Limits: The provisioner will not use more than 1000 virtual cores and 1000GB of RAM. c/ ttlSecondsAfterEmpty: How many seconds until an empty node is terminated.
 
 ```yaml
 cat <<EOF | kubectl apply -f -
@@ -253,9 +253,9 @@ EOF
 
 ```
 
->**WARNING**: This next step deployment cloud represent generate a considerate consumption if you don’t delete it after this step by step.
+>**WARNING**: This next step can generate a considerable consumption if you don’t delete it after this step by step.
 
-* It’s time to test if it really worked! I’m going to use the [pause](https://www.ianlewis.org/en/almighty-pause-container) image, you have to change the amount of replicas from 0 to at least 1, to see how this triggers a just in time scale up to the node group.
+* It’s time to test if it really worked! I’m going to use the [pause](https://www.ianlewis.org/en/almighty-pause-container) image. You have to change the amount of replicas from 0 to at least 1 to see how this triggers a just-in-time scale up to the node group.
 
 ```yaml
 cat <<EOF > inflate.yaml
@@ -286,13 +286,13 @@ EOF
 kubectl apply -f inflate.yaml
 ```
 
-* Once you run this command, you are gonna have at least 1 new node ready in the following 1-2 minutes, and this is how Just in Time compute with Kubernetes and Karpenter, allow us to scale further in a very easy and agile way to serve the uncertain demand and put the effort on innovate through the application and not spend much time in infrastructure operation.
-* Don’t remember to delete the deployment by running:
+* Once you run this command, you are gonna have at least 1 new node ready in the following 1-2 minutes, and this is how Just-in-Time compute with Kubernetes and Karpenter allows us to scale further in a very easy and agile way to serve uncertain demand. Plus, it allows you to put your effort toward innovation through the application without spending so much time on infrastructure operation.
+* Don’t forget to delete the deployment by running:
 
 ```bash
 kubectl delete -f inflate.yaml
 ```
 
 
-And we get to the end of the series, I hope you learned and enjoyed this journey as much as I did. In this journey we learned about containers, databases, orchestrators, api gateways, autoscaling, microservices, ML services, security and many other things together and from scratch, now it's time for you to start your own journey and I look forward to join paths together in the future. If you have any problem please add an issue into our GitHub repo!
+And we've arrived at the end of the series. I hope you enjoyed and learned from this journey as much as I did. In this series, we learned about containers, databases, orchestrators, API gateways, autoscaling, microservices, ML services, security, and many other things together. Now it's time for you to start your own projects, and I look forward to joining paths together in the future. If you have any problem please add an issue into our GitHub repo!
 
