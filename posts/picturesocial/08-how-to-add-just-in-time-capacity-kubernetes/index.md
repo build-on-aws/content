@@ -34,7 +34,7 @@ This may seem obvious for Serverless workloads, as its handled by the cloud prov
 4. The demand is still going up and the auto-scaling rules forced Kubernetes Scheduler to add one more pod, but we don’t have compute power to serve the demand and we evicted the new pod.
 5. Kubernetes realizes that it needs more nodes and due to worker autoscaling rules it schedule a new EC2 instance and deploy the pod into the new node.
 
-This is a good overview of how it works, but in the real world that extra node scheduled to cover the demand will take more than 10 minutes to be ready, the users are already there and we may loose customer trust for not serving the demand. This is where we need something that observes the aggregate resource requests of unscheduled pods to make decisions on launch and terminate nodes to minimize scheduling latencies and infrastructure costs, is very helpful, this is where [Karpenter](https://karpenter.sh/) comes to the rescue.
+This is a good overview of how it works, but in the real world that extra node scheduled to cover the demand will take more than 10 minutes to be ready, the users are already there and we may loose customer trust for not serving the demand. This is where we need something that observes the aggregate resource requests of unscheduled pods to make decisions on launch and terminate nodes to minimize scheduling latencies and infrastructure costs. This is where [Karpenter](https://karpenter.sh/) comes to the rescue.
 
 [Karpenter](https://karpenter.sh/) is an open source project created by AWS that helps you solve this problem by having Just in Time nodes to serve the uncertain demand. Today we are gonna learn how to implement it and how it looks on your Kubernetes Cluster.
 
