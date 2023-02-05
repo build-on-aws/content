@@ -26,7 +26,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCat
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 100 - Beginner                                              |
-| ⏱ Time to complete     | 60 minutes                                                      |
+| ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- [Terraform](https://terraform.io/) 1.3.7+<br>- (Optional) [GitHub](https://github.com) account|
 | ⏰ Last Updated        | 2023-01-31                                                      |
