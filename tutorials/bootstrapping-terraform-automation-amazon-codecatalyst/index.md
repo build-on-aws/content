@@ -147,7 +147,7 @@ wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-auto
 
 The files created will have the following content:
 
-* `variables.tf`
+* variables.tf
     ```bash
     variable "aws_region" {
       default = "us-east-1"
@@ -165,7 +165,7 @@ The files created will have the following content:
       default = "Terraform-Main"
     }
     ```
-* `main_branch_iam_role.tf`
+* main_branch_iam_role.tf
     ```bash
     # Policy allowing the main branch in our repo to assume the role.
     data "aws_iam_policy_document" "main_branch_assume_role_policy" {
@@ -194,7 +194,7 @@ The files created will have the following content:
     }
 
     ```
-* `pr_branch_iam_role.tf`
+* pr_branch_iam_role.tf
     ```bash
     # Policy allowing the PR branches in our repo to assume the role. 
     data "aws_iam_policy_document" "pr_branch_assume_role_policy" {
@@ -308,7 +308,7 @@ The files created will have the following content:
       policy_arn = aws_iam_policy.lock_table_policy_pr_branch.arn
     }
     ```
-* `providers.tf`
+* providers.tf
     ```bash
     # Configuring the AWS provider
     provider "aws" {
@@ -318,7 +318,7 @@ The files created will have the following content:
     # Used to retrieve the AWS Account Id
     data "aws_caller_identity" "current" {}
     ```
-* `state_file_resources.tf`
+* state_file_resources.tf
     ```bash
     # Bucket used to store our state file
     resource "aws_s3_bucket" "state_file" {
@@ -361,7 +361,7 @@ The files created will have the following content:
     #   target_key_id = aws_kms_key.terraform.key_id
     # }
     ```
-* `terraform.tf`
+* terraform.tf
     ```bash
     terraform {
       backend "s3" {
