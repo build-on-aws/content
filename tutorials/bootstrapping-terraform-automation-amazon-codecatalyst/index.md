@@ -23,6 +23,8 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCat
 - Using S3 as a backend for Terraform [state files](https://developer.hashicorp.com/terraform/language/state), with [DynamoDB for locking](https://developer.hashicorp.com/terraform/language/settings/backends/s3#dynamodb-table-permissions), and encrypting the state file at rest with KMS
 - CodeCatalyst to run our CI/CD pipelines to create and update all your infrastructure
 
+## Table of Contents
+
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 100 - Beginner                                              |
@@ -30,8 +32,6 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCat
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- [Terraform](https://terraform.io/) 1.3.7+<br>- (Optional) [GitHub](https://github.com) account|
 | ⏰ Last Updated        | 2023-01-31                                                      |
-
-## Table of Contents
 
 | ToC |
 |-----|
