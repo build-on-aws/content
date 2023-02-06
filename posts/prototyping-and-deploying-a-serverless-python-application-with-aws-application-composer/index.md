@@ -1,5 +1,5 @@
 ---
-title: Prototyping and Deploying a Serverless Python Application with AWS Application Composer
+title: Building a Serverless Python Workload with AWS Application Composer
 description: A step-by-step guide on creating a serverless application to retrieve Meetup data.
 tags:
   - serverless
@@ -13,7 +13,7 @@ date: 2022-02-06
 ---
 Building a serverless application can be a challenging task for developers. It requires a good understanding of serverless computing, AWS services, and the technical skills to design and deploy the application. However, with [AWS Application Composer](https://aws.amazon.com/application-composer/), the process of prototyping and deploying a serverless application becomes much easier.
 
-This will be an intermediate guide, so some knowledge of AWS, Bash, and Python will be required to follow along. We will be building a workflow to display [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components
+This will be an intermediate guide, so some knowledge of AWS, Bash, and Python will be required to follow along. We will be building a workload to display [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components
 
 •	A scheduled Lambda function, that gets Meetup data and stores it in a databases
 •	An API to get the Meetup data
@@ -25,7 +25,7 @@ To get started, open [AWS Application Composer console](https://console.aws.amaz
 
 ## Part 1: Designing the Scheduled Lambda Function
 
-The first step in the workflow is to design a scheduled Lambda function that will retrieve Meetup data on a daily basis and store it in a DynamoDB table. Using AWS Application Composer, we can easily drag and connect resources to create a template for deployment.
+The first step is to design a scheduled Lambda function that will retrieve Meetup data on a daily basis and store it in a DynamoDB table. Using AWS Application Composer, we can easily drag and connect resources to create a template for deployment.
 
 ![AWS Application Composer Diagram](images/first_diag.png)
 
