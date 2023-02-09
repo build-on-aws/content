@@ -10,7 +10,7 @@ authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-01-03
 ---
-Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming -- and it's tough to accomplish without any errors. EC2 instances have ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when it starts up, and you can automate creating the all the infrastructure along with these scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots to reduce errors while setting up Nginx and uWSGI. We will be using a bash script to install and configure Nginx and uWSGI, set up a systemd service for uWSGI, and copy our application using CDK. We will cover:
+Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming—and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when the instances start up. You can automate creating all the infrastructure along with these scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots to reduce errors while setting up Nginx and uWSGI. We will be using a bash script to install and configure Nginx and uWSGI, set up a systemd service for uWSGI, and copy our application using CDK. We will cover how to:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a security group with inbound access, and an IAM instance profile.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
@@ -22,7 +22,7 @@ Manually setting up and configuring the packages required to run a Python web ap
 | ✅ AWS experience      | Beginner                                                        |
 | ⏱ Time to complete    | 30 minutes                                                      |
 | 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/) eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws-preview.aka.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
+| 🧩 Prerequisites       | - [AWS account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws-preview.aka.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
 
 ## Table of Contents
 
@@ -33,7 +33,7 @@ Manually setting up and configuring the packages required to run a Python web ap
 
 Before we deploy the web application, we need to create an Amazon EC2 instance and supporting resources to run it. In this tutorial, we'll create a new AWS CDK app to create our infrastructure, install the dependencies for our web app, allow access to it, and finally deploy it.
 
-First, let's check if our CDK version is up to date - this guide is based on v2 of the CDK. If you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html). To check the version, run the following:
+First, let's check if our CDK version is up to date—this guide is based on v2 of the CDK. If you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html). To check the version, run the following:
 
 ```bash
 cdk --version
@@ -85,9 +85,9 @@ npm notice
 
 ### Create the code for the resource stack
 
-CDK uses the folder name for the files it generates. For this guide, we will be using `ec2-cdk`. If you named your directory differently, please replace this with the folder name you used. To start adding infrastructure, go to the file `lib/ec2-cdk-stack.ts`. This is where we will write the code for the resource stack you are going to create.
+CDK uses the folder name for the files it generates. For this tutorial, we will be using `ec2-cdk`. If you named your directory differently, please replace this with the folder name you used. To start adding infrastructure, go to the file `lib/ec2-cdk-stack.ts`. This is where we will write the code for the resource stack you are going to create.
 
-A resource stack is a set of cloud infrastructure resources (in your particular case, they will be all AWS resources) that will be provisioned into a specific account. The account and Region where these resources are provisioned, can be configured in the stack - we will cover this later on.
+A resource stack is a set of cloud infrastructure resources (in your particular case, they will be all AWS resources) that will be provisioned into a specific account. The account and Region where these resources are provisioned, can be configured in the stack—we will cover this later on.
 
 In this resource stack, you are going to create the following resources:
 
@@ -98,7 +98,7 @@ In this resource stack, you are going to create the following resources:
 
 ### Create the EC2 instance
 
-To start creating the EC2 instance, and other resources, you first need to import the [CDK Constructs](https://docs.aws.amazon.com/cdk/v2/guide/constructs.html) and [EC2 Key pair](https://docs.aws.amazon.com/cdk/api/v1/docs/@aws-cdk_aws-ec2.CfnKeyPair.html) libraries. Run the following command in the `ec2-cdk` folder to install the libraries:
+To start creating the EC2 instance, and other resources, you first need to import the [CDK constructs](https://docs.aws.amazon.com/cdk/v2/guide/constructs.html) and [EC2 key pair](https://docs.aws.amazon.com/cdk/api/v1/docs/@aws-cdk_aws-ec2.CfnKeyPair.html) libraries. Run the following command in the `ec2-cdk` folder to install the libraries:
 
 ```bash
 npm i aws-cdk-lib cdk-ec2-key-pair
@@ -114,9 +114,9 @@ import * as keypair from 'cdk-ec2-key-pair';
 import * as path from 'path';
 ```
 
-During the course of this tutorial, there will be code checkpoints where we show what the full file should look like at that point. We do recommend following step by step by typing out or copy/pasting the sample code blocks to ensure you understand what each part is responsible for.
+During the course of this tutorial, there will be code checkpoints where we show what the full file should look like at that point. We do recommend following step by step by typing out or copying and pasting the sample code blocks to ensure you understand what each code block does.
 
-These modules provide access to all the components you need for you to deploy the web application. The first step is to find the existing default [VPC](https://docs.aws.amazon.com/vpc/) in your account by adding the following code below the placeholder comment:
+These modules provide access to all the components you need to deploy the web application. The first step is to find the existing default [VPC](https://docs.aws.amazon.com/vpc/) in your account by adding the following code below the placeholder comment:
 
 ```typescript
 // The code that defines your stack goes here
@@ -138,7 +138,7 @@ Using the `cdk-ec2-key-pair` package, we will create an SSH key pair and store i
       key.grantReadOnPublicKey; 
 ```
 
-We also need to be able to access our instance via 2 ports: 22 and 80. SSH uses port 22, and we will serve the web app via port 80 (http). To allow access, we need to set up firewall rules to allow traffic to these 2 ports by creating a [security group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html). Note that SSH access from all IP addresses is acceptable for a short time in a test environment, but not recommended for production environments. We will also create an [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) for the EC2 instance to allow it to call other AWS services, and attach a pre-built policy to read configurations out of AWS Secrets Manager (where the SSH public key will be stored):
+We also need to be able to access our instance via two ports: 22 and 80. SSH uses port 22, and we will serve the web app through port 80 (http). To allow traffic to these ports, we need to set up firewall rules by creating a [security group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html). Note that SSH access from all IP addresses is acceptable for a short time in a test environment, but not recommended for production environments. We will also create an [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) for the EC2 instance to allow it to call other AWS services, and attach a pre-built policy to read configurations out of AWS Secrets Manager (where the SSH public key will be stored):
 
 ```typescript
       // Security group for the EC2 instance
@@ -173,7 +173,7 @@ We also need to be able to access our instance via 2 ports: 22 and 80. SSH uses 
       );
 ```
 
-We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI - pronounced "Ay-Em-Eye") - for this guide, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) one for X86_64 CPU architecture. We will also pass the IAM role you created, the default VPC, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS regions, the `t2.micro` type may not be available. Jus use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/).
+We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI - pronounced "Ay-Em-Eye")—for this tutorial, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) AMI for X86_64 CPU architecture. We will also pass the IAM role you created, the default VPC, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/).
 
 ```typescript
       // Look up the AMI Id for the Amazon Linux 2 Image with CPU Type X86_64
@@ -295,7 +295,7 @@ git clone https://github.com/build-on-aws/sample-python-web-app.git
 
 The sample web application hosted in the `sample-pyton-web-app` folder is a Python application that we will be deploying. It requires Nginx and uWSGI to run. To install these components, we need to follow a number of steps. First, we need to install all the OS packages, then configure Nginx and uWSGI, ensure they're are running, and copy the sample application to the instance. A bash script file that configures all of these setup steps is provided in `sample-pyton-web-app/configure_amz_linux_sample_app.sh`. Have a look at the steps in it if you want to know more about how the instance is configured.
 
-To deploy the web application, we need to add code to our CDK application that will copy the configuration files and scripts to a location that the instance has access to, along with the sample app code - we will use S3 for this. To do so, add the following code in `lib/ec2-cdk-stack.ts` below the previous code:
+To deploy the web application, we need to add code to our CDK application that will copy the configuration files and scripts to a location that the instance has access to, along with the sample app code—we will use Amazon S3 for this. To do so, add the following code in `lib/ec2-cdk-stack.ts` below the previous code:
 
 ```typescript
       // Use an asset to allow uploading files to S3, and then download it to the EC2 instance as part of the user data
@@ -541,7 +541,7 @@ Before we can deploy our CDK app, we need to configure CDK on the account you ar
 env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 ```
 
-This will use the Account ID and Region configured in the AWS CLI - if you have not yet set this up, please follow [this tutorial section](https://aws.amazon.com/getting-started/guides/setup-environment/module-three/). We also need to bootstrap CDK in our account. This will create the required infrastructure for CDK to manage infrastructure in your account, and it only needs to be done once per account. If you have already done the bootstrapping, or aren't sure, you can just run the command again. It will only bootstrap if needed. To bootstrap CDK, run `cdk bootstrap` (your account ID will be different from the placeholder ones below):
+This will use the account ID and Region configured in the AWS CLI—if you have not yet set this up, please follow [this tutorial section](https://aws.amazon.com/getting-started/guides/setup-environment/module-three/). We also need to bootstrap CDK in our account. This will create the required infrastructure for CDK to manage infrastructure in your account, and it only needs to be done once per account. If you have already done the bootstrapping, or aren't sure, you can just run the command again. It will only bootstrap if needed. To bootstrap CDK, run `cdk bootstrap` (your account ID will be different from the placeholder ones below):
 
 ```bash
 cdk bootstrap
@@ -602,13 +602,13 @@ mkdir -p ~/.ssh \
   && chmod 600 ~/.ssh/ec2-cdk-key.pem
 ```
 
-Let's go through each of the command steps. Firstly, the `\` at the end of the lines tells your shell that the command is split onto a new line, which is why we add it to the first 5 lines to make the command more readable. The first of the commands, `mkdir -p ~/.ssh`, creates the directory `.ssh` in your OS user's home directory, and the `-p` indicates to create the directory with parents, and to not error if it already exists - this may be the first time you use SSH on your local machine, in which case the directory may not exist. What's meant by "with parents" is that if you would like to create a new nested directory structure (e.g. `mkdir -p ~/something/very/nested/here`) it would create all the parent directories of `something`, with `very` in it, `nested` inside `very`, and `here` inside `nested` without you needing to run multiple `mkdir` commands. 
+Let's go through each of the command steps. First, the `\` at the end of the lines tells your shell that the command is split onto a new line, which is why we add it to the first five lines to make the command more readable. The first of the commands, `mkdir -p ~/.ssh`, creates the directory `.ssh` in your OS user's home directory, and the `-p` indicates to create the directory with parents, and to not error if it already exists—this may be the first time you use SSH on your local machine, in which case the directory may not exist. What's meant by "with parents" is that if you would like to create a new nested directory structure (such as `mkdir -p ~/something/very/nested/here`), it would create all the parent directories of `something`, with `very` in it, `nested` inside `very`, and `here` inside `nested` without you needing to run multiple `mkdir` commands. 
 
-The second command uses the AWS CLI to call `secretsmanager` where we stored the SSH key to fetch it raw data, and we specify the `query` as `SecretString` to only bring back that field as `text`. We then use the `>` operator to tell our shell to take the output and write it to the file `~/.ssh/cd-key.pem`, overwriting any existing content (if the file does not exist, it will be created; if it did exist, we will overwrite the contents). Lastly, the [`chmod`](https://en.wikipedia.org/wiki/Chmod) command limits who can access the file - SSH requires keys to be locked down, so we limit read and write access to our OS user only.
+The second command uses the AWS CLI to call `secretsmanager` where we stored the SSH key to fetch it raw data, and we specify the `query` as `SecretString` to only bring back that field as `text`. We then use the `>` operator to tell our shell to take the output and write it to the file `~/.ssh/cd-key.pem`, overwriting any existing content (if the file does not exist, it will be created; if it did exist, we will overwrite the contents). Lastly, the [`chmod`](https://en.wikipedia.org/wiki/Chmod) command limits who can access the file—SSH requires keys to be locked down, so we limit read and write access to our OS user only.
 
-Once we have run this command, we can SSH to the instance by using the public IP address, specifying which SSH key to use with the `-i ~/.ssh/ec2-cdk-key.pem`, and to only offer that key to the server by specifying `-o IdentitiesOnly=yes` - there is quite a lot of detail in that parameter which we won't cover here. The short version is that if you have many SSH keys, the SSH server in your instance would reject your login attempt if too many incorrect keys were sent as it would try each of them in your `~/.ssh` directory with certain names.
+Once we have run this command, we can SSH to the instance by using the public IP address, specifying which SSH key to use with the `-i ~/.ssh/ec2-cdk-key.pem`, and to only offer that key to the server by specifying `-o IdentitiesOnly=yes`—there is quite a lot of detail in that parameter which we won't cover here. The short version is that if you have many SSH keys, the SSH server in your instance would reject your login attempt if too many incorrect keys were sent as it would try each of them in your `~/.ssh` directory with certain names.
 
-Lastly, to access the Python web app we just deployed, use the `Ec2CdkStack.IPAddress` value in your browser as the address to open to see the app running. It will take a few minutes for the installation scrip to complete, you can follow the progress by using the `Ec2CdkStack.SshCommand` command to connect to the instance, and running `sudo less /var/log/cloud-init-output.log`, and then pressing `shift` + `f` to tail the file. Once it has completed, you should see the following:
+Lastly, to access the Python web app we just deployed, use the `Ec2CdkStack.IPAddress` value in your browser as the address to open to see the app running. It will take a few minutes for the installation script to complete. You can follow the progress by using the `Ec2CdkStack.SshCommand` command to connect to the instance, and running `sudo less /var/log/cloud-init-output.log`, and then pressing `shift` + `f` to tail the file. Once it has completed, you should see the following:
 
 ```bash
 + echo 'Custom configuration for sample application complete.'
@@ -618,9 +618,9 @@ Cloud-init v. 19.3-46.amzn2 finished at Wed, 11 Jan 2023 14:56:34 +0000. Datasou
 
 ## Cleaning up your AWS environment
 
-You have now completed this tutorial, but we still need to clean up the resources created during this guide. If your account is still in the Free Tier, there will not be any monthly charges. Once out of the Free Tier, it will cost ~$9.45 USD per month, or $0.0126 USD per hour.
+You have now completed this tutorial, but we still need to clean up the resources created during this tutorial. If your account is still in the Free Tier, there will not be any monthly charges. Once out of the Free Tier, it will cost ~$9.45 per month, or $0.0126 per hour.
 
-To remove all the infrastructure we created, use the `cdk destroy` command. This will only remove infrastructure created during this guide in our CDK application. You will see a confirmation:
+To remove all the infrastructure we created, use the `cdk destroy` command. This will only remove infrastructure created during this tutorial in our CDK application. You will see a confirmation:
 
 ```bash
 cdk destroy
@@ -632,7 +632,7 @@ Ec2CdkStack: destroying...
 ✅  Ec2CdkStack: destroyed
 ```
 
-When the output shows `Ec2CdkStack: destroyed`, your resources have been removed. Ta-Da! There is one more step for the cleanup: removing the S3 bucket used by CDK to upload the scripts and sample application. These resources aren't deleted by CDK as a safety precaution. Open the [S3 console](https://s3.console.aws.amazon.com/s3/buckets) in your browser, and look for a bucket with a name like `cdk-<9-random-letters-and-numbers>-assets-123456789012-us-east-1` (yours will have a different random number and your account number instead of `123456789012`). If you see more than one (usually if you have used the CDK asset feature before), you can sort by `Creation Date` to see the latest created one. Open the bucket to confirm that you see 3 files: a `.zip`, `.json`, and `.sh`, each with a guid as the filename. Select all the files, then click on `actions` -> `delete`, and follow the prompts to delete the objects. Lastly, go back to the S3 console, and delete the `cdk-<9-random-letters-and-numbers>-assets-123456789012-us-east-1` bucket.
+When the output shows `Ec2CdkStack: destroyed`, your resources have been removed. There is one more step for the cleanup: removing the S3 bucket used by CDK to upload the scripts and sample application. These resources aren't deleted by CDK as a safety precaution. Open the [S3 console](https://s3.console.aws.amazon.com/s3/buckets) in your browser, and look for a bucket with a name like `cdk-<9-random-letters-and-numbers>-assets-123456789012-us-east-1` (yours will have a different random number and your account number instead of `123456789012`). If you see more than one (usually if you have used the CDK asset feature before), you can sort by `Creation Date` to see the latest created one. Open the bucket to confirm that you see three files: a `.zip`, `.json`, and `.sh`, each with a guid as the filename. Select all the files, then choose `actions` -> `delete`, and follow the prompts to delete the objects. Lastly, go back to the S3 console, and delete the `cdk-<9-random-letters-and-numbers>-assets-123456789012-us-east-1` bucket.
 
 ## Conclusion
 
