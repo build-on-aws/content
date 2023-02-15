@@ -10,12 +10,14 @@ authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-01-03
 ---
-Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when the instance start up. You can automate creating all the infrastructure and scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots to reduce errors while setting up Nginx and uWSGI. We will be using a bash script to install and configure Nginx and uWSGI, set up a systemd service for uWSGI, and copy our application using CDK. We will cover how to:
+Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when the instance start up. You can automate creating all the infrastructure and scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots to reduce errors while setting up Nginx and uWSGI. We will be using a bash script to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. We will cover how to:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a security group with inbound access, and an IAM instance profile.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
 - Configure the software packages after installation using a script downloaded by the user data.
 - Deploy the application using user data.
+
+## Table of Contents
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -23,8 +25,6 @@ Manually setting up and configuring the packages required to run a Python web ap
 | ⏱ Time to complete    | 30 minutes                                                      |
 | 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/) eligible                                               |
 | 🧩 Prerequisites       | - [AWS account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws-preview.aka.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
-
-## Table of Contents
 
 | ToC |
 |-----|
