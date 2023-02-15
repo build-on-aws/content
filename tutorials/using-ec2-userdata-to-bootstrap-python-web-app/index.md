@@ -173,7 +173,7 @@ We also need to be able to access our instance via two ports: 22 and 80. SSH use
       );
 ```
 
-We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI - pronounced "Ay-Em-Eye")—for this tutorial, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) AMI for X86_64 CPU architecture. We will also pass the IAM role you created, the default VPC, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/).
+We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI - pronounced "Ay-Em-Eye")—for this tutorial, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) AMI for X86_64 CPU architecture. We will also pass the IAM role you created, the default VPC, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Just use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/).
 
 ```typescript
       // Look up the AMI Id for the Amazon Linux 2 Image with CPU Type X86_64
