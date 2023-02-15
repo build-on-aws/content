@@ -366,7 +366,7 @@ The files created will have the following content:
     terraform {
       backend "s3" {
         bucket         = "tf-state-files"
-        key            = "terraform-bootstrap-state-file/"
+        key            = "terraform-bootstrap-state-file"
         region         = "us-east-1"
         dynamodb_table = "TerraformMainStateLock"
         kms_key_id     = "alias/s3" # Optionally change this to the custom KMS alias you created - "alias/terraform"
