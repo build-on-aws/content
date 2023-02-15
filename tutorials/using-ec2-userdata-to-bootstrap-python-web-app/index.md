@@ -25,6 +25,8 @@ Manually setting up and configuring the packages required to run a Python web ap
 | ⏱ Time to complete    | 30 minutes                                                      |
 | 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/) eligible                                               |
 | 🧩 Prerequisites       | - [AWS account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws-preview.aka.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
+| ⏰ Last Updated        | 2023-02-15                                                      |
+
 
 | ToC |
 |-----|
