@@ -366,7 +366,7 @@ The files created will have the following content:
     terraform {
       backend "s3" {
         bucket         = "tf-state-files"
-        key            = "terraform-bootstrap-state-file"
+        key            = "terraform-bootstrap-state-file/terraform.tfstate"
         region         = "us-east-1"
         dynamodb_table = "TerraformMainStateLock"
         kms_key_id     = "alias/s3" # Optionally change this to the custom KMS alias you created - "alias/terraform"
@@ -495,7 +495,7 @@ Next, we will move the state file we just created with all the details of our in
 terraform {
   backend "s3" {
     bucket         = "tf-state-files"
-    key            = "terraform-bootstrap-state-files"
+    key            = "terraform-bootstrap-state-files/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "TerraformMainStateLock"
     kms_key_id     = "alias/s3" # Optionally change this to the custom KMS alias you created - "alias/terraform"
@@ -585,7 +585,7 @@ The base infrastructure is now in place to allow us to start using our workflow 
 terraform {
   backend "s3" {
     bucket         = "tf-state-files"
-    key            = "terraform-state-file/"
+    key            = "terraform-state-file/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "TerraformMainStateLock"
     kms_key_id     = "alias/s3" # Optionally change this to the custom KMS alias you created - "alias/terraform"
