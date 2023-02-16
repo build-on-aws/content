@@ -7,7 +7,7 @@ tags:
     - data-backup
     - disaster-recovery
     - explainers
-    - aws
+    - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2022-01-25
