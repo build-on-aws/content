@@ -14,7 +14,7 @@ date: 2023-02-16
 
 When I arrived at Amazon as a developer in 2005 (before AWS was even a thing) I was handed an actual, physical pager (Figure 1). Why? Because developers at Amazon not only design and implement their services, but they deploy and manage operation of them as well. For that operations piece, developers take turn being “oncall” and available to diagnose and fix any problems. Hence, the pager.
 
-All this is to say, Amazon was doing DevOps before “DevOps” was even a term. [Amazon.com](http://amazon.com/) runs thousands of systems on AWS to run it worldwide marketplaces, video delivery, and other consumer services.  When the opportunity comes to re-architect, Amazon developers do so with DevOps in mind, so as to make it easier during oncall to deliver the best experience to their customers. 
+All this is to say, Amazon was doing DevOps before “DevOps” was even a term. [Amazon.com](http://amazon.com/) runs thousands of systems on AWS to power its worldwide marketplaces, video delivery, and other consumer services.  When the opportunity comes to re-architect, Amazon developers do so with DevOps in mind, so as to make it easier during oncall to deliver the best experience to their customers. 
 
 <br><br>
 ![Actual pager used at Amazon.com](images/figure01.png)<br>
