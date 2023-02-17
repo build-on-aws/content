@@ -61,9 +61,9 @@ Figure 5 shows how they did it.  Using [Amazon API Gateways](https://docs.aws.am
 Since there is no shared ownership of code or infrastructure between teams, each team can deploy whenever they want, getting new features or fixes into production with no need to coordinate between teams. Using multiple API Gateways here enables the team to isolate each module from one another and perform a staggered deployment to less critical modules first and rollback if any issues arise without impacting the more critical ones.
 
 
-## Amazon Global Ops Robotics - The systems that run Amazon warehouses
+## Amazon Fulfillment Technologies and Robotics - The systems that run Amazon warehouses
 
-I’ve covered the trucks going between fulfillment centers (FCs), now let’s talk about the FCs themselves. Globally, Amazon operates more than 175 FCs  with over 150 million square feet of space. Amazon Global Ops Robotics is the Amazon organization that designs, deploys, and operates the services powering the FCs. This includes systems for receiving items, determining where they go in the warehouse, telling associates where to find them to fulfill a customer order, generating shipping info, determining which box to use, and so on.
+I’ve covered the trucks going between fulfillment centers (FCs), now let’s talk about the FCs themselves. Globally, Amazon operates more than 175 FCs  with over 150 million square feet of space. Amazon Fulfillment Technologies and Robotics is the Amazon organization that designs, deploys, and operates the services powering the FCs. This includes systems for receiving items, determining where they go in the warehouse, telling associates where to find them to fulfill a customer order, generating shipping info, determining which box to use, and so on.
 
 As you might expect by now, each of these services is independently deployable, but here they take independent deployment to the next level by using cell-based architecture. With cell-based architecture each cell is a complete, independent instance of the service (Figure 6). Each cell is independent and does not share state with other cells. Incoming requests are deterministically routed to a specific cell based on some partition key.
 
@@ -75,7 +75,7 @@ For the systems that power Amazon’s FCs, a natural key is the FC itself. FCs d
 
 <br><br>
 ![FCs assigned to cells](images/figure07.png)<br>
-*Figure 7. Global Ops Robotics assigns FCs to cells such that each geographic region is serviced by FCs distributed across different cells.*
+*Figure 7. Fulfillment Technologies and Robotics assigns FCs to cells such that each geographic region is serviced by FCs distributed across different cells.*
 
 Now assume a fault occurs, whether a bug in newly deployed software, or an infrastructure issue. A resilient architecture can mitigate such failures, and that is exactly what a cell-based architecture does. The fault is isolated to just the affected cell, possibly impacted that FC’s operations. But the the other cells are protected by fault isolation, and continue successfully serving requests. In the case here, such a fault might impair one of the FCs in our group (Figure 8), but because FCs in this geographic area are in different cells, they can continue serving the customers in that area with the remaining FCs.
 
@@ -100,4 +100,4 @@ In each of these three use cases, you have seen how continuous, automated, indep
 * [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](https://www.buildon.aws/concepts/devops-essentials/)
 * [Reliable scalability: How Amazon.com scales in the cloud - re:Invent 2022](https://bit.ly/reliable2022) [all three examples, plus others]
 * [Building federated GraphQL on AWS Lambda](https://aws.amazon.com/blogs/compute/building-federated-graphql-on-aws-lambda/) [IMDb]
-* [The Story Behind Improving Resiliency of Large Scale Systems Through Cellularization](https://www.youtube.com/watch?v=ebLJMA1q3Go) [Amazon Global Ops Robotics]
+* [The Story Behind Improving Resiliency of Large Scale Systems Through Cellularization](https://www.youtube.com/watch?v=ebLJMA1q3Go) [Amazon Fulfillment Technologies and Robotics]
