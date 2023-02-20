@@ -1,6 +1,6 @@
 ---
-title: Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life
-description: Gain insights into the DevOps strategies used at Amazon.com, illustrated with actual architectures from systems like IMDb, warehouse management, and transportation. See how they design for continuous, automated, independent deployments to drive innovation and resilience. 
+title: "Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life"
+description: "Gain insights into the DevOps strategies used at Amazon.com, illustrated with actual architectures from systems like IMDb, warehouse management, and transportation. See how they design for continuous, automated, independent deployments to drive innovation and resilience."
 tags:
   - amazon
   - devops
