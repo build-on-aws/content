@@ -1,6 +1,6 @@
 ---
 title: "Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life"
-description: "Gain insights into the DevOps strategies used at Amazon.com, illustrated with actual architectures from systems like IMDb, warehouse management, and transportation. See how they design for continuous, automated, independent deployments to drive innovation and resilience."
+description: "Insights into the DevOps strategies used at Amazon.com, illustrated with actual architectures from systems like IMDb, warehouse management, and transportation."
 tags:
   - amazon
   - devops
@@ -18,9 +18,9 @@ All this is to say, Amazon was doing DevOps before “DevOps” was even a term.
 
 <br><br>
 ![Actual pager used at Amazon.com](images/figure01.png)<br>
-*Figure 1. Not mine, but an actual pager used at [Amazon.com](http://amazon.com/)*
+*Figure 1. Not mine, but an actual pager used at Amazon.com*
 
-Here I will share several examples of [Amazon.com](http://amazon.com/) teams and their applications, and how they architected for [continuous](https://aws.amazon.com/devops/continuous-delivery/), automated, independent deployment of the [microservices](https://aws.amazon.com/devops/what-is-devops/#microservices) behind those applications, using infrastructure as code. This enables innovation by allowing changes to get to production sooner without disrupting other components. And it makes oncall easier by aligning the business logic with the microservices and the teams that own them, so that any emergent problem gets to the right team sooner.
+Here I will share several examples of Amazon.com teams and their applications, and how they architected for [continuous](https://aws.amazon.com/devops/continuous-delivery/), automated, independent deployment of the [microservices](https://aws.amazon.com/devops/what-is-devops/#microservices) behind those applications, using infrastructure as code. This enables innovation by allowing changes to get to production sooner without disrupting other components. And it makes oncall easier by aligning the business logic with the microservices and the teams that own them, so that any emergent problem gets to the right team sooner.
 
 ## IMDb
 
@@ -28,7 +28,7 @@ The Internet Movie Database, or IMDb, is the world’s most popular source for m
 
 The backend is responsible for serving show titles, actors’ names, aggregate star ratings, images, release years... the list goes on and on. GraphQL was a good fit here, and using federated GraphQL, the backend could be divided into multiple microservices, each focused on a specific set of business logic — one serving images, another handling ratings, while another knows which actors are in which shows. Federated GraphQL enables each of these services to know only the schema it needs to know, while clients can request data that spans multiple microservices.
 
-Here is how it works. Figure 2 shows a GraphQL query on the left (abbreviated) for the “Known for” webpage widget on the Jackie Chan page here: https://www.imdb.com/name/nm0000329/. Actors have IDs that start with `nm` (for example Jackie is `nm0000329)`. And shows — including movies or TV series — have `tt` IDs. The query is sent to a gateway which knows the entire schema, and routes each of the pieces to the appropriate microservice (known as graphlets), each fronted by an [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html). Lambda is serverless which means you can just run your code, no servers needed.  The top microservice in figure 2 knows which movies to show, the next one down knows the metadata about the movies (title, year, etc.), and so on.
+Here is how it works. Figure 2 shows a GraphQL query on the left (abbreviated) for the “Known for” webpage widget on the Jackie Chan page here: [https://www.imdb.com/name/nm0000329/](https://www.imdb.com/name/nm0000329/). Actors have IDs that start with `nm` (for example Jackie is `nm0000329`). And shows — including movies or TV series — have `tt` IDs. The query is sent to a gateway which knows the entire schema, and routes each of the pieces to the appropriate microservice (known as graphlets), each fronted by an [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html). Lambda is serverless which means you can just run your code, no servers needed.  The top microservice in figure 2 knows which movies to show, the next one down knows the metadata about the movies (title, year, etc.), and so on.
 
 <br><br>
 ![IMDb federated GraphQL in action](images/figure02.png)<br>
@@ -39,7 +39,7 @@ The gateway and each of the graphlets are separate stacks, independently deploya
 
 ## Amazon Relay - Amazon’s mobile app for Truckers
 
-Let’s take a look at another part of Amazon’s business, and maybe the one for which it is best known: shipping. The items you buy on [Amazon.com](http://amazon.com/) need to be in the right place at the right time. Between fulfillment centers (what Amazon calls warehouses), post offices, and vendor facilities, there are tens of thousands of places Amazon moves the items between in North America, and they do it with “big-rig” trucks (Figure 3)
+Let’s take a look at another part of Amazon’s business, and maybe the one for which it is best known: shipping. The items you buy on Amazon.com need to be in the right place at the right time. Between fulfillment centers (what Amazon calls warehouses), post offices, and vendor facilities, there are tens of thousands of places Amazon moves the items between in North America, and they do it with “big-rig” trucks (Figure 3)
 
 <br><br>
 ![Amazon 18-wheeler truck, also known as a “big-rig”](images/figure03.png)<br>
@@ -53,7 +53,7 @@ Amazon has over the years developed sophisticated models to put items in the rig
 
 Similar to IMDb, the Relay team designed a gateway that the app talks to, and they put the business logic into multiple backend services they call “modules.” For example, one service determines warehouse access and generates the gate pass you see in figure 4, and another module calculates load execution (where and when drivers need to be). The gateway and the modules are independently deployable, in their own pipelines.
 
-Figure 5 shows how they did it.  Using [Amazon API Gateways](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) they can present a single point of externalization using a domain name, and then use path-based routing so each call goes to the right service. So requests to  `example/com/message` go to the module that runs the messaging feature, while `example.com/navigate` requests go to the navigation module. API Gateway lets you create these API mappings for a given path to a specified Lambda. New modules are serverless, using Lambda, [DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) (NoSQL database), and [SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html) (queue service). Older ones were updated to put Lambda out front, to integrate with the API Gateways.
+Figure 5 shows how they did it.  Using [Amazon API Gateways](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) they can present a single point of externalization using a domain name, and then use path-based routing so each call goes to the right service. So requests to  `example.com/message` go to the module that runs the messaging feature, while `example.com/navigate` requests go to the navigation module. API Gateway lets you create these API mappings for a given path to a specified Lambda. New modules are serverless, using Lambda, [DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) (NoSQL database), and [SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html) (queue service). Older ones were updated to put Lambda out front, to integrate with the API Gateways.
 
 <br><br>![Amazon Relay app works using a gateway and independent backend services ](images/figure05.png)<br>
 *Figure 5. Amazon Relay app works using a gateway and independent backend services called “modules”*
