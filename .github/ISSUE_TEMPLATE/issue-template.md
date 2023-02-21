@@ -1,9 +1,9 @@
 ---
 name: 🐛 Issue Template
 about: Use this template to report an issue with content such as typos, broken links, broken code, out of date, etc.
-title: 
+title: "issue: TODO"
 labels: bug
-assignees: jennapederson
+assignees: cherbk
 
 ---
 
@@ -19,4 +19,4 @@ assignees: jennapederson
 
 ### Screenshots
 
-### Does this content need to be updated by a certain date? If so, by what date?
+### Does this content/behavior need to be updated by a certain date? If so, by what date?

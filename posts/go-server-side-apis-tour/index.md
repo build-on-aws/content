@@ -22,20 +22,19 @@ In this blog post, I will provide a break down of the important server-side comp
 - The default multiplexer
 - How to use functions to handle HTTP requests
 
-Let's start off with the fundamental building blocks - `ServeMux` and `Server` 
+Let's start off with the fundamental building blocks - `ServeMux` and `Server`.
 
 ## `ServeMux` - HTTP multiplexer
 
-[ServeMux](https://pkg.go.dev/net/http#ServeMux) is is responsible for matching the URL in the HTTP request to an appropriate handler and executing it. You can create one by calling [NewServeMux](https://pkg.go.dev/net/http#NewServeMux). 
+[ServeMux](https://pkg.go.dev/net/http#ServeMux) is responsible for matching the URL in the HTTP request to an appropriate handler and executing it. You can create one by calling [NewServeMux](https://pkg.go.dev/net/http#NewServeMux).
 
-The way you associate HTTP URLs to their respective handler implementations is by using `Handle` and/or `HandleFunc` methods in `ServeMux` instance.
+The way you associate HTTP URLs to their respective handler implementations is by using `Handle` and / or `HandleFunc` methods in `ServeMux` instance.
 
 ## Types of HTTP Handlers
 
-**Handle**
+### **Handle**
 
 One way is to use the [`Handle` method](https://golang.org/pkg/net/http/#ServeMux.Handle) which accepts a `String` and an [`http.Handler`](https://golang.org/pkg/net/http/#Handler) (which is an `interface`).
-
 
 ```go
 func (mux *ServeMux) Handle(pattern string, handler Handler)
@@ -64,7 +63,7 @@ mux.Handle("/", home{})
 
 In this example, a request to the root URL of the server (e.g. http://locahost:8080/) will map to the implementation in the `ServeHTTP` associated with the `home` struct.
 
-**HandleFunc**
+### **HandleFunc**
 
 Let's see an example of how to use [`HandleFunc`](https://golang.org/pkg/net/http/#ServeMux.HandleFunc) to assign a function to a request path without creating an explicit type. Like `Handle`, it is just another method in `http.ServeMux`. But, instead of an `interface`, it accepts a function as the implementation.
 
@@ -78,14 +77,13 @@ In this example, the handler associated with `/posts`, will simply return HTTP 2
 
 ```go
 mux.HandleFunc("/posts", func(rw http.ResponseWriter, req *http.Request) {
-	rw.Write([]byte("Visit http://bit.ly/just-enough-go to get started"))
+    rw.Write([]byte("Visit http://bit.ly/just-enough-go to get started"))
 })
 ```
 
 ## HTTP `Server`
 
-Once you have the handler and the mux defined, create an instance of a `http.Server` to tie everything together. Here is how you instantiate a server - `Addr` is the address on which the server listens e.g. `http://localhost:8080` and `Handler` is an `http.Handler` instance. Start the server with [`ListenAndServe`](https://golang.org/pkg/net/http/#Server.ListenAndServe) method.
-
+Once you have the `handler` and the `mux` defined, create an instance of a `http.Server` to tie everything together. Here is how you instantiate a server - `Addr` is the address on which the server listens e.g. `http://localhost:8080` and `Handler` is an `http.Handler` instance. Start the server with [`ListenAndServe`](https://golang.org/pkg/net/http/#Server.ListenAndServe) method.
 
 ```go
 server := http.Server{Addr: ":8080", Handler: mux}
@@ -100,27 +98,27 @@ So far, we covered multiple components including `ServeMux` and how to define ha
 package main
 
 import (
-	"log"
-	"net/http"
+    "log"
+    "net/http"
 )
 
 func main() {
-	mux := http.NewServeMux()
+    mux := http.NewServeMux()
 
-	mux.Handle("/", home{})
+    mux.Handle("/", home{})
 
-	mux.HandleFunc("/posts", func(rw http.ResponseWriter, req *http.Request) {
-		rw.Write([]byte("Visit http://bit.ly/just-enough-go to get started"))
-	})
+    mux.HandleFunc("/posts", func(rw http.ResponseWriter, req *http.Request) {
+        rw.Write([]byte("Visit http://bit.ly/just-enough-go to get started"))
+    })
 
-	server := http.Server{Addr: ":8080", Handler: mux}
-	log.Fatal(server.ListenAndServe())
+    server := http.Server{Addr: ":8080", Handler: mux}
+    log.Fatal(server.ListenAndServe())
 }
 
 type home struct{}
 
 func (h home) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
-	rw.Write([]byte("Welcome to the \"Just Enough Go\" blog series!!"))
+    rw.Write([]byte("Welcome to the \"Just Enough Go\" blog series!!"))
 }
 ```
 
@@ -162,9 +160,9 @@ type HandlerFunc func(ResponseWriter, *Request)
 
 Here is a simplified example:
 
-```
+```go
 func welcome(rw http.ResponseWriter, req *http.Request) {
-	rw.Write([]byte("Welcome to Just Enough Go"))
+    rw.Write([]byte("Welcome to Just Enough Go"))
 }
 ...
 http.ListenAndServe(":8080", http.HandlerFunc(welcome))
@@ -176,18 +174,18 @@ We defined a standalone function (`welcome`) with the required signature and use
 
 Here is the code listing that you can run:
 
-```
+```go
 package main
 
 import "net/http"
 
 func main() {
-	http.Handle("/welcome", http.HandlerFunc(welcome))
-	http.ListenAndServe(":8080", nil)
+    http.Handle("/welcome", http.HandlerFunc(welcome))
+    http.ListenAndServe(":8080", nil)
 }
 
 func welcome(rw http.ResponseWriter, req *http.Request) {
-	rw.Write([]byte("Welcome to Just Enough Go"))
+    rw.Write([]byte("Welcome to Just Enough Go"))
 }
 ```
 
