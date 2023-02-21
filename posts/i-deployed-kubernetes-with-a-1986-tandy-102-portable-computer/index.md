@@ -1,6 +1,6 @@
 ---
 title: "I deployed Kubernetes with a 1986 Tandy 102 Portable Computer"
-description: Making old computers do modern thigs is fun and helps me learn things. In this post, experience my adventure deploying a Kubernetes application from a TRS-80 Model 102, also known as Tandy 102, portable computer made in 1986. Enjoy the wonders of how, actually, little things have changed in the world of computing in the last 40 years.
+description: Making old computers do modern thigs is fun and helps me learn things. In this post, experience my adventure deploying a Kubernetes application from a TRS-80 Model 102, also known as Tandy 102, a portable computer made in 1986. Enjoy the wonders of how surprisingly little things have changed in the world of computing in the last 40 years.
 tags:
   - containers
   - kubernets
@@ -17,7 +17,7 @@ date: 2023-02-21
 
 I love making the outdated technology I collect do things it was never built to do, forcing the very old to work with the very new. Deploying Kubernetes with a 1986 Tandy 102 Portable Computer is exactly that. And it turns out, a 37-year-old computer can do some very modern things, things that would've seemed like science fiction to the people of the 1980s. But this project also tells us something about the cloud: that given the growth of cloud computing in this day and age, the importance of optimizing your local hardware is diminishing. The oldest personal computers were inspired by mainframe-connected terminals, and with the rise of the cloud, we seem to be returning to some extent to that age, treating our machines as glorified terminals for something way bigger, up in a cloud. And that's a good thing.
 
-Keep reading for some nostalgia, terminals, and serial connections -- but more importantly to see how a bygone era of computing gives us a window into a cloud-connected future, in which our computing isn't delimited to our machine's capabilities. (Disclaimer: Computers in 1986 weren't built to deploy Kubernetes, so please do not use this hardware in any production environments, or for anything too important.)
+Keep reading for some nostalgia, terminals, and serial connections - but more importantly to see how a bygone era of computing gives us a window into a cloud-connected future, in which our computing isn't delimited to our machine's capabilities. (Disclaimer: Computers in 1986 weren't built to deploy Kubernetes, so please do not use this hardware in any production environments, or for anything too important.)
 
 ## Portable computing
 
@@ -140,9 +140,9 @@ This command will "dial" into the Telnet server, showing me the login prompt. An
 ![Picture of the terminal connected to the login prompt on the Telnet server](images/DSC00058.jpg)
 ## Conclusion
 
-The reason why I decided to do some Kubernetes, is because my good friend Jacquie and I did a Live Stream that day, where she taught me how to use Kubernetes and how to deploy my first application to Amazon EKS. You can check out the recording [HERE](https://www.twitch.tv/videos/1740165035). I will not get into the weeds on how I do Kubernetes on this system. Here is a [Git Repo](https://github.com/gogococo/whack_a_pod) with the code and instructions I have used (Thank you, [Jacquie](https://twitter.com/devopsjacquie)!).
+The reason I decided to do some Kubernetes is that my good friend Jacquie and I did a Live Stream one day, in which she taught me how to use Kubernetes and how to deploy my first application to Amazon EKS. You can check out the recording [HERE](https://www.twitch.tv/videos/1740165035). I will not get into the weeds of how I do Kubernetes on this system. Here is a [Git Repo](https://github.com/gogococo/whack_a_pod) with the code and instructions I have used (Thank you, [Jacquie](https://twitter.com/devopsjacquie)!).
 
-The big question is, "Should You do this yourself?" Well, absolutely! Treat this as a nice experiment and a learning opportunity, but also a chance to show appreciation to how far we have come in the world of computing in the last 40 years. And to come to the fact that we should all very grateful for the technology we have to do our jobs. And maybe, just maybe, that 3 year old Macbook is actually good after all.
+The big question is, "Should you do this yourself?" Absolutely! Treat this as a nice experiment and a learning opportunity, but also as a chance to show appreciation for how far we have come in the world of computing in the last 40 years. And to see that we should all very grateful for the technology we have to do our jobs. And maybe, just maybe, that a 3 year old Macbook is actually good after all.
 
 Enjoy the video of the deployment in action (sped up for your convenience):
 
