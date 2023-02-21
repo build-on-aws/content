@@ -3,7 +3,7 @@ title: "I deployed Kubernetes with a 1986 Tandy 102 Portable Computer"
 description: Making old computers do modern thigs is fun and helps me learn things. In this post, experience my adventure deploying a Kubernetes application from a TRS-80 Model 102, also known as Tandy 102, a portable computer made in 1986. Enjoy the wonders of how surprisingly little things have changed in the world of computing in the last 40 years.
 tags:
   - containers
-  - kubernets
+  - kubernetes
   - retro-tech
   - tandy
   - terminal
