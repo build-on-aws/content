@@ -63,7 +63,7 @@ Since there is no shared ownership of code or infrastructure between teams, each
 
 ## Amazon Fulfillment Technologies and Robotics - The systems that run Amazon warehouses
 
-I’ve covered the trucks going between fulfillment centers (FCs), now let’s talk about the FCs themselves. Globally, Amazon operates more than 175 FCs  with over 150 million square feet of space. Amazon Fulfillment Technologies and Robotics is the Amazon organization that designs, deploys, and operates the services powering the FCs. This includes systems for receiving items, determining where they go in the warehouse, telling associates where to find them to fulfill a customer order, generating shipping info, determining which box to use, and so on.
+I’ve covered the trucks going between fulfillment centers (FCs), now let’s talk about the FCs themselves. Globally, Amazon operates more than 500 FCs. Amazon Fulfillment Technologies and Robotics is the Amazon organization that designs, deploys, and operates the services powering the FCs. This includes systems for receiving items, determining where they go in the warehouse, telling associates where to find them to fulfill a customer order, generating shipping info, determining which box to use, and so on.
 
 As you might expect by now, each of these services is independently deployable, but here they take independent deployment to the next level by using cell-based architecture. With cell-based architecture each cell is a complete, independent instance of the service (Figure 6). Each cell is independent and does not share state with other cells. Incoming requests are deterministically routed to a specific cell based on some partition key.
 
