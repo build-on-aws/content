@@ -1,6 +1,6 @@
 ---
-title: Building a Serverless Python Workload with AWS Application Composer
-description: A step-by-step guide on creating a serverless application to retrieve Meetup data.
+title: How I Used AWS Application Composer to Make Analyzing My Meetup Data Easy
+description: A step-by-step guide on how I creatED a serverless application to retrieve Meetup data.
 tags:
   - serverless
   - python
@@ -11,9 +11,9 @@ authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
 date: 2022-02-06
 ---
-Building a serverless application can be a challenging task for developers. It requires a good understanding of serverless computing, AWS services, and the technical skills to design and deploy the application. However, with [AWS Application Composer](https://aws.amazon.com/application-composer/), the process of prototyping and deploying a serverless application becomes much easier.
+Building a serverless application can be a challenging task for developers. It requires a good understanding of serverless computing, AWS services, and the technical skills to design and deploy the application. However, with [AWS Application Composer](https://aws.amazon.com/application-composer/), the process of building a serverless application becomes much easier.
 
-This will be an intermediate guide, so some knowledge of AWS, Bash, and Python will be required to follow along. We will be building a workload to display [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components
+In this post, I will share how I built a prototype application to easily analyze meetup data. This will be an intermediate level guide, so some knowledge of AWS, Bash, and Python will be required to follow along. I will walk through the steps to build a workload that displays [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components
 
 •	A scheduled Lambda function, that gets Meetup data and stores it in a databases
 •	An API to get the Meetup data
@@ -141,7 +141,7 @@ streamlit run meetup_st.py
 
 ### Conclusion
 
-In this post, we showed a step-by-step workflow on how to successfully achieve the following:
+In this post, I showed a step-by-step workflow on how to successfully achieve the following:
 
 * Design a Serverless Python Application with AWS Application Composer
 * Deploy the Application using SAM
