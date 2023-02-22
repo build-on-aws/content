@@ -21,11 +21,11 @@ This is a 8-part series about Picturesocial:
 6. [How to use DynamoDB on a containerized API](this post)
 
 
-So far we have been lerning about containers, Kubernetes, Infraestructure as a Code and even intelligent services like Amazon Rekognition. Now it’s time to add a database to store the needed data models that will be used on our social media platform.
+So far you have been lerning about containers, Kubernetes, Infraestructure as a Code and even intelligent services like Amazon Rekognition. Now it’s time to add a database to store the needed data models that will be used on our social media platform.
 
-We choose Amazon DynamoDB because we need a modern database that support high throughput and simplify the overall data management by providing an API for all the Data Management and Operations. Also because we are using document data structures that will be better working on a non-relational and document DB as DynamoDB. But first we need to figure out the relevant field for the data structure in the APIs that we have done so far.
+I choose Amazon DynamoDB because the Picturesocial need a modern database that support high throughput and simplify the overall data management by providing an API for all the Data Management and Operations. Also because I'm using document data structures that will be better working on a non-relational and document DB as DynamoDB. But first I need to figure out the relevant field for the data structure in the APIs that I have done so far.
 
-In a previous post about [how to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/), we created an API that returned the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An ID to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5), and **4/** User who uploaded the image. Now we are going to convert those attributes into a Data Model, using JSON, that we will follow for the whole API.
+In a previous post about [how to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/), I created an API that returned the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An ID to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5), and **4/** User who uploaded the image. Now I'm going to convert those attributes into a Data Model, using JSON, that I will follow for the whole API.
 
 ```json
 `{  
@@ -61,7 +61,7 @@ Now that we have our data model, let’s surf some of the CRUD API specs to acco
 
 This way we don’t have to know much about the method names, we just know what it does just following the HTTP Method and understanding the Data Model. You can learn about the different HTTP Methods and purposes by visiting the Restfull documentation [here](https://restfulapi.net/http-methods/).
 
-Now we are gonna put all this together and start coding!
+Now we are goint to put all this together and start coding!
 
 ### **Pre-requisites:**
 
@@ -77,7 +77,7 @@ If this is your first time working with AWS CLI or you need a refresher on how t
 
 ### Walkthrough
 
-* First, we are gonna create the DynamoDB Table needed for this walkthrough, this table will be named Pictures. We will use the Terminal of our preference with AWS CLI 2 installed and logged in.
+* First, we are going to create the DynamoDB Table needed for this walkthrough, this table will be named Pictures. We will use the Terminal of our preference with AWS CLI 2 installed and logged in.
 
 ```bash
 aws dynamodb create-table \
@@ -91,7 +91,7 @@ ReadCapacityUnits=5,WriteCapacityUnits=5 \
 `--table-class STANDARD`
 ```
 
-* When we execute the command, we are going to get a JSON response with the table structure. We just need to write `:q `and press Enter to finish.
+* When we execute the command, we are going to get a JSON response with the table structure. We just need to write `:q `and press Enter to finish. The command `:q ` is what we use to exit the current view of the terminal when we are in text mode. This also apply to console text editors like VIM.
 
 ```json
 {
@@ -129,13 +129,13 @@ ReadCapacityUnits=5,WriteCapacityUnits=5 \
 }
 ```
 
-* Now the table is ready for the code! But we need to clone our repo first by choosing the branch “Ep7”
+* Now the table is ready for the code! But we need to clone our repo first by choosing the branch “Ep7”, this repo contains all the code needed for replicate this walkthrough.
 
 ```bash
 git clone https://github.com/aws-samples/picture-social-sample.git -b ep7
 ```
 
-* But first, we need to add the AWS Packages to our project by going to Pictures folder and running the following commands, those were explored on our previous posts and the one new AWSSDK.DynamoDBv2
+* But first, we need to add the AWS Packages to our project by going to Pictures folder and running the following commands, which were explored on our previous posts and the one new AWSSDK.DynamoDBv2
 
 ```bash
 dotnet add package AWSSDK.SecurityToken
@@ -434,4 +434,7 @@ http://localhost:5075/swagger/index.html
 }
 ```
 
-This is the end of this post, we are making a good progress in our journey to create Picturesocial. I hope you enjoy this post and don’t stop following the next posts of the series to find all the content that we create. The next post will be about exposing our APIs to the Internet using API Gateway and VPC Link! 
+We are making a good progress in our journey to create Picturesocial so far we have learned how to create an API, containerized it, deploy a Kubernetes cluster, use infraestructure as a code and deploy our API to Kubernetes and now we learned how to add Database support!
+The next post will be about exposing our APIs to the Internet using API Gateway and VPC Link! 
+
+[Continue to the next post about API Gateway and VPC Link](picturesocial/07-how-to-expose-a-containerized-api-to-the-internet).
