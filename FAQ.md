@@ -13,10 +13,9 @@
   * [How do I write the same code snippet in different languages?](#how-do-i-write-the-same-code-snippet-in-different-languages)
   * [How do I embed a Mermaid diagram in my article?](#how-do-i-embed-a-mermaid-diagram-in-my-article)
   * [How do I embed mathematical formulas or equations in my articles?](#how-do-i-embed-mathematical-formulas-or-equations-in-my-articles)
+  * [How do I show content under tabs?](#how-do-i-show-content-under-tabs)
 * [Miscellaneous](#miscellaneous)
-  * [I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?](#i-published-my-post-on-my-personal-blogdevtomedium-can-i-publish-it-on-buildonaws)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
-  * [How do I optimize my content for SEO?](#how-do-i-optimize-my-content-for-seo)
 
 ## Markdown Syntax
 
@@ -280,16 +279,26 @@ will render something like this:
 
 Refer to the [MathJax basic tutorial](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference) for details on the syntax to write your formulas.
 
+### How do I show content under tabs?
+Code snippets in different languages can be grouped under tabs, like we saw above. But it is not the only content that can be displayed under tabs. Other possible elements include:
+* Mermaid diagrams (which are a type of code snippet with language `mermaid`).
+* Math formulas (when they are represented as code snippets with language `math`).
+* Images. Notice in this case images do not support captions.
+
+Mermaid diagrams and math formulas use the same syntax as code snippets in different languages ([see above](#how-do-i-write-the-same-code-snippet-in-different-languages)), since they are a particular type of code snippet.
+Images inside tabs use a similar syntax. You just need to create a markdown list where each element consists on a text (which will be used for the tab title) followed by an image, for example:
+
+````markdown 
+* Image 1
+  ![Image 1 title](https://domain.com/aaa.png)
+* Image 2
+  ![Image 2 title](https://domain.com/bbb.png)
+* Image 3
+  ![Image 3 title](https://domain.com/ccc.png)
+````
+
 ## Miscellaneous
-
-### I published my post on my personal blog/Dev.to/Medium. Can I publish it on BuildOn.AWS?
-
-Please don’t syndicate to other platforms right now as we don’t want to drive traffic back to BuildOn.AWS during the soft launch. The canonical link helps surface the original content in search results.
 
 ### Why was my content proposal not accepted? Do you have feedback for me?
 
 We will add feedback to your content proposal issue if we have suggestions for improvements. In many cases, the content is not a good fit for this platform and that is why it was not accepted.
-
-### How do I optimize my content for SEO?
-
-TODO

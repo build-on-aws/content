@@ -5,12 +5,12 @@ tags:
   - terraform
   - kubernetes
   - eks
-authorGithubAlias: jyapurv
+authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-12
 ---
 
-This is a 10-part series about Picturesocial:
+This is an 8-part series about Picturesocial:
 
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
 2. What’s Kubernetes and why should you care? (this post)
@@ -110,11 +110,11 @@ Pods are the smallest objects in Kubernetes and are the place where the containe
 * Pods are ephemeral. That means if the container inside fails, the most probable outcome is that Kubernetes will delete that pod and create a new one. When you deploy new versions of a container you also create new pods and Kubernetes will be in charge of updating the backend of the balancing service.
 * A container image must be specified. It is defined as the repository name and the image name. For example: `[aws account id].dkr.ecr.[aws region].amazonaws.com/imageName`
 * It’s a good practice to establish resource limits. We have two kinds of boundaries: 
-  * **Requests** This is what the Pod will get as a guarantee. It’s like when you order a pizza and you have a 30-minutes guarantee. That doesn’t mean that the pizza can’t arrive sooner. It’s just an indicator of how many orders a single delivery person can handle. It’s the same for Requests. They specify your compute allocation guarantee in a cluster. If you have only one pod, chances are, you will get more compute than what has been guaranteed.
-  * **Limits** This is the hard limit for any pod. If you specify a Limit, even if you have available resources, the pod won’t consume beyond the specified limit. Using the same example of the delivery person, it’s like telling them that under no circumstance can they deliver more than 3 pizzas at the same time.
+  * **`Requests`** This is what the Pod will get as a guarantee. It’s like when you order a pizza and you have a 30-minutes guarantee. That doesn’t mean that the pizza can’t arrive sooner. It’s just an indicator of how many orders a single delivery person can handle. It’s the same for Requests. They specify your compute allocation guarantee in a cluster. If you have only one pod, chances are, you will get more compute than what has been guaranteed.
+  * **`Limits`** This is the hard limit for any pod. If you specify a Limit, even if you have available resources, the pod won’t consume beyond the specified limit. Using the same example of the delivery person, it’s like telling them that under no circumstance can they deliver more than 3 pizzas at the same time.
 * The units that we commonly use in Kubernetes are:
-  * **Mebibytes (MiB)** (expressed as Mi) Used as memory measurements. To convert from MiB to MB you multiply the MiB x 1.049
-  * **Millicores (mc)** (expressed as m) Used as CPU measurements. 1 CPU Core is represented as 1000 millicores. For example 250m is 1/4 of a CPU Core.
+  * **`Mebibytes (MiB)`** (expressed as Mi) Used as memory measurements. To convert from MiB to MB you multiply the MiB x 1.049
+  * **`Millicores (mc)`** (expressed as m) Used as CPU measurements. 1 CPU Core is represented as 1000 millicores. For example 250m is 1/4 of a CPU Core.
 
 ```yaml
 containers:
@@ -143,11 +143,11 @@ spec:
 
 ### Services
 
-Pods shouldn’t be called directly because as we discussed earlier they are ephemeral. This means the pod name and ip are dynamic. That’s where Services come to the rescue and offer a single point for calling one or multiple pods from the same ReplicaSet. We are going to focus on two Service types:
+Pods shouldn’t be called directly because as we discussed earlier they are ephemeral. This means the pod name and IPs are dynamic. That’s where Services come to the rescue and offer a single point for calling one or multiple pods from the same ReplicaSet. We are going to focus on two Service types:
 
 * **LoadBalancer** This kind of Service is used when you need to expose a ReplicaSet _outside_ of the Kubernetes cluster. That could be your private network or publicly to the internet. In the case of EKS, take note of two things:
 
-  * Service name must always start with a letter and use “-” as a separator, for example: `picturesocial-pictures`
+  * Service name must always start with a letter and use "-" as a separator, for example: `picturesocial-pictures`
   * *For private load balancers* A Service annotation must be present. Here is an example where you specify that the service will be exposed internally only:
     ```yaml
     kind: Service
@@ -189,7 +189,7 @@ Kubernetes was conceived as a multi-tenant container orchestrator. That means th
 
 My suggestion is to group the resources of a business domain in a namespace, that way it is easier to find the resources you need and also to allow teams to maintain specific business domains independently in a software project.
 
-![Image showing service api 1 is contained within namespace 1 and service api 2 is contained within namespace 2](images/02-namespaces.jpg "Service api 1 is contained within namespace 1 and service api 2 is contained within namespace 2")
+![Image showing service API 1 is contained within namespace 1 and service API 2 is contained within namespace 2](images/02-namespaces.jpg "Service API 1 is contained within namespace 1 and service API 2 is contained within namespace 2")
 
 ## What kind of applications should I host on Kubernetes?
 

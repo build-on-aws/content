@@ -26,9 +26,9 @@ Let's start off with the fundamental building blocks - `ServeMux` and `Server`.
 
 ## `ServeMux` - HTTP multiplexer
 
-[ServeMux](https://pkg.go.dev/net/http#ServeMux) is is responsible for matching the URL in the HTTP request to an appropriate handler and executing it. You can create one by calling [NewServeMux](https://pkg.go.dev/net/http#NewServeMux).
+[ServeMux](https://pkg.go.dev/net/http#ServeMux) is responsible for matching the URL in the HTTP request to an appropriate handler and executing it. You can create one by calling [NewServeMux](https://pkg.go.dev/net/http#NewServeMux).
 
-The way you associate HTTP URLs to their respective handler implementations is by using `Handle` and/or `HandleFunc` methods in `ServeMux` instance.
+The way you associate HTTP URLs to their respective handler implementations is by using `Handle` and / or `HandleFunc` methods in `ServeMux` instance.
 
 ## Types of HTTP Handlers
 
@@ -83,7 +83,7 @@ mux.HandleFunc("/posts", func(rw http.ResponseWriter, req *http.Request) {
 
 ## HTTP `Server`
 
-Once you have the handler and the mux defined, create an instance of a `http.Server` to tie everything together. Here is how you instantiate a server - `Addr` is the address on which the server listens e.g. `http://localhost:8080` and `Handler` is an `http.Handler` instance. Start the server with [`ListenAndServe`](https://golang.org/pkg/net/http/#Server.ListenAndServe) method.
+Once you have the `handler` and the `mux` defined, create an instance of a `http.Server` to tie everything together. Here is how you instantiate a server - `Addr` is the address on which the server listens e.g. `http://localhost:8080` and `Handler` is an `http.Handler` instance. Start the server with [`ListenAndServe`](https://golang.org/pkg/net/http/#Server.ListenAndServe) method.
 
 ```go
 server := http.Server{Addr: ":8080", Handler: mux}

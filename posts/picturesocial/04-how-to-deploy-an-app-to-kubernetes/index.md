@@ -5,12 +5,12 @@ tags:
   - containers
   - kubernetes
   - eks
-authorGithubAlias: jyapurv
+authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-14
 ---
 
-This is a 10-part series about Picturesocial:
+This is an 8-part series about Picturesocial:
 
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
@@ -65,7 +65,7 @@ You should have a version of at least `Major:"1", Minor:"23" ` to run this walk-
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
 ```
 
-This downloads a kubeconfig file into your local terminal with: a) the cluster name, b) kubernetes api url, c) key to connect. That file is saved by default in `/.kube/config`. You can see an example below, from Kubernetes official documentation:
+This downloads a kubeconfig file into your local terminal with: a) the cluster name, b) kubernetes api URL, c) key to connect. That file is saved by default in `/.kube/config`. You can see an example below, from Kubernetes official documentation:
 
 ```yaml
 apiVersion: v1
@@ -119,7 +119,7 @@ kubectl get nodes
 
 ![Image showing output of kubectl get nodes command](images/04-kubctl-get-nodes.jpg "Image showing output of kubectl get nodes command")
 
-4. In addition to nodes, you can also check for pods by running the command below. But keep in mind that we haven’t deploy anything yet. Also, if you don’t specify a namespace in the command, it will return everything from the “default” namespace.
+4. In addition to nodes, you can also check for pods by running the command below. But keep in mind that we haven’t deploy anything yet. Also, if you don’t specify a namespace in the command, it will return everything from the "default" namespace.
 
 ```bash
 kubectl get pods
