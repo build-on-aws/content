@@ -1,6 +1,6 @@
 ---
 title: "I deployed Kubernetes with a 1986 Tandy 102 Portable Computer"
-description: "Making old computers do modern thigs is fun and helps me learn things. In this post, experience my adventure deploying a Kubernetes application from a TRS-80 Model 102, also known as Tandy 102, a portable computer made in 1986. Enjoy the wonders of how surprisingly little things have changed in the world of computing in the last 40 years."
+description: "Making old computers do modern things is fun and helps me learn things. In this post, experience my adventure deploying a Kubernetes application from a TRS-80 Model 102, also known as Tandy 102, a portable computer made in 1986. Enjoy the wonders of how surprisingly little things have changed in the world of computing in the last 40 years."
 tags:
   - containers
   - kubernetes
@@ -32,7 +32,7 @@ The TRS-80 Model 102 had capabilities of being connected to the internet, althou
 
 The amazing thing about this system is that it has a Serial Interface. To be precise, it has an RS-232 port on its back. That means we can use a serial device and do some communicating over it. Perfect. Let me introduce you to an amazing little device: [WiModem232](https://www.cbmstuff.com/index.php?route=product/product&product_id=59?#:~:text=The%20WiModem232%20is%20an%20internet,a%20BBS%20of%20your%20own!). This is a serial WiFi Modem, a small ESP32-powered device that emulates a normal dial-up modem but is actually connected to my local WiFi network. It supports all the native Modem commands (Hayes) and will actually do a few other things.
 
-![WiModem232 plugged into the back of the Tandy 102 Computer with a serial cable. The modem is sitting on top of the compuiter](images/DSC00036.JPG)
+![WiModem232 plugged into the back of the Tandy 102 Computer with a serial cable. The modem is sitting on top of the computer](images/DSC00036.JPG)
 To make this work, I need to plug in the modem to the back of the Tandy 102, but as they are both female connectors, I will be using a longer cable that will adapt the two. On top of this, the Modem needs some power, so I hook up a Mini-USB cable to get it connected to power. The little display is on, and it’s time to configure the modem. For this, I will need the Tandy 102 and its built-in Terminal application.
 
 ![Tandy 102 screen showing its applications in a grid layout. The BASIC application is currently selected](images/DSC00045.JPG)
