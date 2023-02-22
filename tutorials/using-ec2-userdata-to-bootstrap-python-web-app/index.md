@@ -200,11 +200,7 @@ We're now ready to create the EC2 instance using a pre-built [Amazon Machine Ima
 
 We have now defined our AWS CDK stack to create an EC2 instance, a security group with inbound access rules, and an IAM role, attached to the EC2 instance as an IAM instance profile. Before deploying the stack, we still need to install the packages on the host OS to run your application, and also copy our sample application code to the instance.
 
-<br>
-
->  ## ✅ ✅ ✅  **Checkpoint 1**  ✅ ✅ ✅
-
-<br>
+> #### ✅ ✅ ✅  **Checkpoint 1**  ✅ ✅ ✅
 
 Your `lib/ec2-cdk-stack.ts` file should now look like this:
 ```typescript
@@ -381,11 +377,8 @@ These three outputs will show you the following:
 
 We're now ready to deploy the stack.
 
-<br>
+> #### ✅ ✅ ✅  **Checkpoint 2**  ✅ ✅ ✅
 
->  ## ✅ ✅ ✅  **Checkpoint 2**  ✅ ✅ ✅
-
-<br>
 We have now completed all code changes to our CDK app, and the `lib/ec2-cdk-stack.ts` file should look like this:
 
 ```typescript
