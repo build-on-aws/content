@@ -152,7 +152,10 @@ spec:
 
 ![Deploy API Stage](images/07-deploy-api-stage.jpg "Deploy API Stage")
 
-* Now we can select Stages from the vertical left menu and configure other important requirements like R2: We should avoid calling the backend for content that is not refreshed constantly and R3: No client application will be allowed to call the backend more than 100,000 times per second. For R2 we are going to click on Enable API Cache, as it will serve distributed replicas of the API response for static or not so changing data. You can configure the time to live of the cache if you need more or less time.
+* Now we can select Stages from the vertical left menu and configure other important requirements like: 
+  * R2: We should avoid calling the backend for content that is not refreshed constantly and 
+  * R3: No client application will be allowed to call the backend more than 100,000 times per second. 
+* For R2 we are going to click on Enable API Cache, as it will serve distributed replicas of the API response for static or not so changing data. You can configure the time to live of the cache if you need more or less time.
 * For R3 we click on Enable Throttling and we set the Rate to 10,000 RPS (Request per second) and we'll save changes. 
 
 ![Enabling Throttling and Cache](images/07-settings-cache-throttling.jpg "Enabling Throttling and Cache")
