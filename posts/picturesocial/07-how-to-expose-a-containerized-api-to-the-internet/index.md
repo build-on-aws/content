@@ -1,10 +1,10 @@
 ---
 title: Picturesocial - How to expose a containerized API to the Internet?
-description: When you need control over traffic to your backend, mechanisms for authenticate requests or even redirect the whole thing to another cluster you can always trust on an external API Gateway. In this episode we are going to learn about how to expose API's using API Gateway.
+description: An API Gateway is very useful when you need control over traffic to your backend, mechanisms for authenticate requests, or even redirect the request to another cluster. In this episode we are going to learn about how to expose API's using API Gateway.
 tags:
   - dotnet
   - csharp
-  - apigateway
+  - api-gateway
   - api
 authorGithubAlias: develozombie
 authorName: Jose Yapur
@@ -24,7 +24,7 @@ This is a 8-part series about Picturesocial:
 
 Not everything is about creating and deploying. One of the most important parts of the journey is to make sure that our APIs are available to be consumed by the clients, wherever they are. The way you expose an API could represent the success or faliure of the whole project, and this is why we need to explore some of the best practices and tips. In this post we will be learning about API Gateway and how we can make sure that our backends are consumed appropriately in a secure way.
 
-But first, we need to understand where are we right now. We already created, containerized, deployed, and secured the API and the infrastructure components needed for our APIs. But our services are presented as Internet Load Balancers, and that means that anybody with the URL can call our services without any control. So far we haven’t implemented throttling policies, API-key validation, authentication, or any other security mechanism to protect our endpoints.
+But first, we need to understand where are we right now. We already [created and conainerized](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/), [deployed](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/), and secured the API and the infrastructure components needed for our APIs. But our services are presented as Internet Load Balancers, and that means that anybody with the URL can call our services without any control. So far we haven’t implemented throttling policies, API-key validation, authentication, or any other security mechanism to protect our endpoints.
 
 A natural choice would be to present everything from a Layer 7 Load Balancer, but managing all the API design and considerations for presenting and covering all the points presented earlier would be a challenge. That’s where Amazon API Gateway comes to the rescue!
 
@@ -158,7 +158,7 @@ spec:
 ![Enabling Throttling and Cache](images/07-settings-cache-throttling.jpg "Enabling Throttling and Cache")
 
 
-* Also, if you notice, on top of the Stage settings you will get the Invoke URL for the API, we are gonna use it later for the tests.
+* Also, if you notice, on top of the Stage settings you will get the Invoke URL for the API, we are going to use it later for the tests.
 * It’s time to configure an API Key to complete the requirement R4: API’s calls needs an API key.
 * We have to click on API Keys from the vertical left menu and then Create an API Key. We are going to name it test and the key will be auto generated.
 
@@ -176,4 +176,6 @@ spec:
 
 ![API Request 200](images/07-api-request-200.jpg "API Request 200")
 
-If you get this far you have your backend secured through API Gateway and with very few steps! Thanks for reading and don’t miss the next post about how to deal with ambiguity when you need just in time compute power for uncertain demand.
+If you get this far you have your backend secured through API Gateway and with very few steps! If you want to learn more you can go to the [API Gateway Developer guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-protect.html) for more information Thanks for reading and don’t miss the next post about how to deal with ambiguity when you need just in time compute power for uncertain demand.
+
+[Continue to the next post about Just-in-time compute power with Kubernetes](picturesocial/08-how-to-add-just-in-time-capacity-kubernetes)
