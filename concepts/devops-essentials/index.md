@@ -83,7 +83,11 @@ As someone applying concepts from DevOps, you will work in a number of different
 
 ### Infrastructure as Code
 
-Infrastructure as Code (IaC) is typically a declarative method of managing infrastructure in a way that treats your infrastructure components, such as physical servers and virtual machines, similar to application code. Depending on the tool you choose, you can describe them using a markup language ([YAML](https://yaml.org/), [HCL](https://pkg.go.dev/github.com/hashicorp/hcl/v2), or [TOML](https://toml.io/en/)), or a more general-purpose language ([Python](https://www.python.org/), [Go](https://go.dev/), or [Java](https://www.java.com/en/)), which is then stored in version control allowing us to manage it in a repeatable and automated way. Infrastructure as code allows us to apply the same best practices and procedures we use when developing application code to our infrastructure. Configuration files can be tested and versioned and changes to infrastructure can be made using the same processes as code changes. If something goes wrong, we can roll back to the last stable version. This can help to reduce errors and improve reliability. Additionally, IaC makes it easier to scale and manage infrastructure, especially in dynamic environments where infrastructure needs to change frequently. Some of the tools you might use for provisioning infrastructure are [HashiCorp’s Terraform](https://www.terraform.io/), [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html), or [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html). 
+Infrastructure as Code (IaC) is typically a declarative method of managing infrastructure in a way that treats your infrastructure components, such as physical servers and virtual machines, similar to application code. Depending on the tool you choose, you can describe them using a markup language ([YAML](https://yaml.org/), [HCL](https://pkg.go.dev/github.com/hashicorp/hcl/v2), or [TOML](https://toml.io/en/)), or a more general-purpose language ([Python](https://www.python.org/), [Go](https://go.dev/), or [Java](https://www.java.com/en/)), which is then stored in version control allowing us to manage it in a repeatable and automated way. Infrastructure as code allows us to apply the same best practices and procedures we use when developing application code to our infrastructure. Configuration files can be tested and versioned and changes to infrastructure can be made using the same processes as code changes. If something goes wrong, we can roll back to the last stable version. This can help to reduce errors and improve reliability. Additionally, IaC makes it easier to scale and manage infrastructure, especially in dynamic environments where infrastructure needs to change frequently. Some of the tools you might use for provisioning infrastructure are [HashiCorp’s Terraform](https://www.terraform.io/), [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html), or [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html).
+
+See it in action: 
+* [Bootstrapping your Terraform automation with Amazon CodeCatalyst](../../tutorials/bootstrapping-terraform-automation-amazon-codecatalyst/)
+* [💡Improve your AWS CloudFormation Skills (all levels) with this workshop! ☁️](https://twitter.com/lindavivah/status/1606310817917554691)
 
 ### Configuration management
 
@@ -112,6 +116,8 @@ You’re likely to hear the terms "CI/CD" and "pipelines" a lot throughout your 
 These practices can help to improve the speed and quality of software development by allowing for fast feedback and reducing manual gates and time spent waiting. This can help to reduce the time required to deliver new features and improvements to users, and can make it easier to iterate and evolve software over time.
 
 Pipelines built using these concepts can apply to a number of things including application code, infrastructure code, security checks, and more. They can exist as a single pipeline, or possibly as multiple pipelines that are chained together. 
+
+See it in action: [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](../../posts/how-amazon-does-devops-in-real-life/)
 
 ### Logging
 
