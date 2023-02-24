@@ -8,7 +8,7 @@ tags:
   - api
 authorGithubAlias: develozombie
 authorName: Jose Yapur
-date: 2023-02-29
+date: 2023-03-01
 ---
 
 This is a 8-part series about Picturesocial:
