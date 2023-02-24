@@ -1,6 +1,6 @@
 ---
-title: Picturesocial - How to add just in time compute capacity to a Kubernetes Cluster
-description: Adding compute power to a Kubernetes Cluster could be challenging, mostly because when the demand of compute triggers a scale in instance count the time it takes for new instances to be ready could take up to 10 minutes. In this video we are going to learn about Karpenter, an open source project that helps to have the power you need just when you need it.
+title: Picturesocial - How to add just-in-time compute capacity to a Kubernetes Cluster
+description: Adding compute power to a Kubernetes Cluster could be challenging and scaling times may be uncertain. In this post we are going to learn about Karpenter, an open source project that helps to have the power you need just when you need it.
 tags:
   - kubernetes
   - containers
@@ -22,19 +22,19 @@ This is a 8-part series about Picturesocial:
 7. [How to use DynamoDB on a containerized API](/posts/07-how-to-expose-a-containerized-api-to-the-internet/)
 8. [How to add just in time compute capacity to a Kubernetes Cluster](this post)
 
-Uncertainty, we use maths, positive thinking, prays, or whatever is within our reach to make it certain, even if the result is good or bad. Every new creation is uncertain, but we created frameworks, we collected past experiences and expectations to get the control of what it seems unpredictable. This is not strange to API’s, we use frameworks to predict the demand, and some maths for things like Amdahl Law to predict compute consumption. But right now the issue is not only about predicting the demand but having the compute capacity to serve it exactly when is needed or Just in Time. 
+In the face of uncertainty, we use logic, positive thinking, prayer, or whatever else seems like it might make an outcome more dependable. But sometimes you just need the right tool. For example, APIs often use frameworks to predict demand, but they cannot always provision compute capacity to serve it exactly when it's needed -- or Just in Time. Facing this uncertain availability, what tool can help?
 
 This may seem obvious for Serverless workloads, as its handled by the cloud provider, but for Kubernetes we use scaling strategies, like HPA (Horizontal Pod Autoscaler), that we explored in previous [posts](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/). But HPA needs compute capacity from the Node Groups to schedule new pods, otherwise the new ones are evicted. Let’s take a look at how this process still won't solve the problem above.
 
 ![POD and worker autoscaling in Kubernetes](images/08-pod-autoscaling-kubernetes.jpg "POD and worker autoscaling in Kubernetes")
 
 1. We have a node with 4 pods and around 35% of compute power free to scale current deployments.
-2. An increase in the demand made a deployment scale to one extra replicas, we now have a node with 5 pods and around 17% of compute power free to scale current deployments.
-3. Another increase in the demand made a deployment scale to one more replicas, we now have a node with 6 pods and around 5% of compute power free.
+2. An increase in the demand made a deployment scale to one extra replicas. We now have a node with 5 pods and around 17% of compute power free to scale current deployments.
+3. Another increase in the demand made a deployment scale to one more replicas. We now have a node with 6 pods and around 5% of compute power free.
 4. The demand is still going up and the auto-scaling rules forced Kubernetes Scheduler to add one more pod, but we don’t have compute power to serve the demand and we evicted the new pod.
-5. Kubernetes realizes that it needs more nodes and due to worker autoscaling rules it schedule a new EC2 instance and deploy the pod into the new node.
+5. Kubernetes realizes that it needs more nodes and due to worker autoscaling rules it schedule a new EC2 instance and deploys the pod into the new node.
 
-This is a good overview of how it works, but in the real world that extra node scheduled to cover the demand will take more than 10 minutes to be ready, the users are already there and we may loose customer trust for not serving the demand. This is where we need something that observes the aggregate resource requests of unscheduled pods to make decisions on launch and terminate nodes to minimize scheduling latencies and infrastructure costs. This is where [Karpenter](https://karpenter.sh/) comes to the rescue.
+In the real world that extra node scheduled to cover the demand will take more than 10 minutes to be ready, the users are already there and we may lose customer trust for not serving the demand. This is where we need something that observes the aggregate resource requests of unscheduled pods to make decisions on launch and terminate nodes to minimize scheduling latencies and infrastructure costs. This is where [Karpenter](https://karpenter.sh/) comes to the rescue.
 
 [Karpenter](https://karpenter.sh/) is an open source project created by AWS that helps you solve this problem by having Just in Time nodes to serve the uncertain demand. Today we are gonna learn how to implement it and how it looks on your Kubernetes Cluster.
 
@@ -53,7 +53,7 @@ OR
 
 ### Walkthrough
 
-* We are gonna start opening our Terminal and creating a variable to set the Karpenter version that we are gonna use as well as the region, that in our case is us-east-1, the cluster name and finally the identify profile of the current session.
+* We are going to start opening our Terminal and creating a variable to set the Karpenter version that we are gonna use as well as the region, that in our case is us-east-1, the cluster name and finally the identify profile of the current session.
 
 ```bash
 export KARPENTER_VERSION=v0.16.0
@@ -62,7 +62,7 @@ export CLUSTER_NAME=ekspicturesocial02
 export ACCOUNT_ID=$(aws sts get-caller-identity —output text —query Account)
 ```
 
-* Not it’s time to add Karpenter as Cluster extension by running a CloudFormation script.
+* Now it’s time to add Karpenter as Cluster extension by running a CloudFormation script.
 
 ```bash
 TEMPOUT=$(mktemp)
@@ -146,7 +146,7 @@ Resources:
             Resource: !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/KarpenterNodeRole-${ClusterName}"
 ```
 
-* We are gonna use eksctl command line tool to create an IAM Identity mapping to our cluster, this will create the Karpenter role node to our config map as well as allow the nodes to be managed by the cluster.
+* We are going to use eksctl command line tool to create an IAM Identity mapping to our cluster, this will create the Karpenter role node to our config map as well as allow the nodes to be managed by the cluster.
 
 ```bash
 eksctl create iamidentitymapping \
@@ -163,7 +163,7 @@ eksctl create iamidentitymapping \
 kubectl describe configmap -n kube-system aws-auth
 ```
 
-* We are gonna create an open id connect (OIDC) provider for our Cluster. This is needed for establishing the trust relationship between Karpenter and our Cluster.
+* We are going to create an Open ID Connect (OIDC) provider for our Cluster. This is needed for establishing the trust relationship between Karpenter and our Cluster.
 
 ```bash
 eksctl utils associate-iam-oidc-provider --cluster ${CLUSTER_NAME} --approve
@@ -286,7 +286,7 @@ EOF
 kubectl apply -f inflate.yaml
 ```
 
-* Once you run this command, you are gonna have at least 1 new node ready in the following 1-2 minutes, and this is how Just-in-Time compute with Kubernetes and Karpenter allows us to scale further in a very easy and agile way to serve uncertain demand. Plus, it allows you to put your effort toward innovation through the application without spending so much time on infrastructure operation.
+* Once you run this command, you are going to have at least 1 new node ready in the following 1-2 minutes, and this is how Just-in-Time compute with Kubernetes and Karpenter allows us to scale further in a very easy and agile way to serve uncertain demand. Plus, it allows you to put your effort toward innovation through the application without spending so much time on infrastructure operation.
 * Don’t forget to delete the deployment by running:
 
 ```bash
@@ -294,5 +294,8 @@ kubectl delete -f inflate.yaml
 ```
 
 
-And we've arrived at the end of the series. I hope you enjoyed and learned from this journey as much as I did. In this series, we learned about containers, databases, orchestrators, API gateways, autoscaling, microservices, ML services, security, and many other things together. Now it's time for you to start your own projects, and I look forward to joining paths together in the future. If you have any problem please add an issue into our GitHub repo!
+And we've arrived at the end of the series. I hope you enjoyed and learned from this journey as much as I did. In this series, we learned about containers, databases, orchestrators, API gateways, autoscaling, microservices, ML services, security, and many other things together. Now it's time for you to start your own projects, and I look forward to joining paths together in the future. If you have any problem please add an issue into our[GitHub repo](https://github.com/aws-samples/picture-social-sample), also if you want to learn more about Kubernetes on AWS here are some good deep dive resources that you can use:
+
+* [EKS Workshop](https://www.eksworkshop.com/)
+* [Deploying an EKS Cluster with Terraform](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks) 
 
