@@ -11,7 +11,7 @@ authorName: Jose Yapur
 date: 2023-02-27
 ---
 
-This is a 8-part series about Picturesocial:
+This is an 8-part series about Picturesocial:
 
 1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
@@ -21,9 +21,9 @@ This is a 8-part series about Picturesocial:
 6. [How to use DynamoDB on a containerized API](this post)
 
 
-So far you have been lerning about containers, Kubernetes, Infraestructure as a Code and even intelligent services like Amazon Rekognition. Now it’s time to add a database to store the needed data models that will be used on our social media platform.
+So far you have been learning about containers, Kubernetes, Infraestructure as a Code and even intelligent services like Amazon Rekognition. Now it’s time to add a database to store the needed data models that will be used on our social media platform.
 
-I choose Amazon DynamoDB because the Picturesocial need a modern database that support high throughput and simplify the overall data management by providing an API for all the Data Management and Operations. Also because I'm using document data structures that will be better working on a non-relational and document DB as DynamoDB. But first I need to figure out the relevant field for the data structure in the APIs that I have done so far.
+I choose Amazon DynamoDB because the Picturesocial application needs a modern database that will support high throughput and simplify the overall data management by providing an API for all the Data Management and Operations. Also because I'm using document data structures that will be better working on a non-relational and document DB as DynamoDB. But first I need to figure out the relevant field for the data structure in the APIs that I have done so far.
 
 In a previous post about [how to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/), I created an API that returned the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An ID to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5), and **4/** User who uploaded the image. Now I'm going to convert those attributes into a Data Model, using JSON, that I will follow for the whole API.
 
@@ -52,14 +52,14 @@ That Data Model with real data will look like this in our API. This is what we c
  }`
 ```
 
-Now that we have our data model, let’s surf some of the CRUD API specs to accommodate our Pictures API to follow the best practices. CRUD stands for Create, Read, Update and Delete, which are the basic operations that you usually do with a Data Object, and we will align those operations into HTTP Methods like this:
+Now that we have our data model, let’s surf some of the CRUD API specs to make our Pictures API to follow the best practices. CRUD stands for Create, Read, Update and Delete, which are the basic operations that you usually do with a Data Object, and we will align those operations into HTTP Methods like this:
 
 * Create → POST
 * Read → GET
 * Update → PUT
 * Delete → DELETE
 
-This way we don’t have to know much about the method names, we just know what it does just following the HTTP Method and understanding the Data Model. You can learn about the different HTTP Methods and purposes by visiting the Restfull documentation [here](https://restfulapi.net/http-methods/).
+This way we don’t have to know much about the method names, we just know what it does just following the HTTP Method and understanding the Data Model. You can learn about the different HTTP Methods and purposes by visiting the Restful documentation [here](https://restfulapi.net/http-methods/).
 
 Now we are goint to put all this together and start coding!
 
@@ -91,7 +91,7 @@ ReadCapacityUnits=5,WriteCapacityUnits=5 \
 `--table-class STANDARD`
 ```
 
-* When we execute the command, we are going to get a JSON response with the table structure. We just need to write `:q `and press Enter to finish. The command `:q ` is what we use to exit the current view of the terminal when we are in text mode. This also apply to console text editors like VIM.
+* When we execute the command, we are going to get a JSON response with the table structure. We just need to type `:q `and press Enter to finish. The command `:q ` is what we use to exit the current view of the terminal when we are in text mode. This also apply to console text editors like VIM.
 
 ```json
 {
@@ -129,13 +129,13 @@ ReadCapacityUnits=5,WriteCapacityUnits=5 \
 }
 ```
 
-* Now the table is ready for the code! But we need to clone our repo first by choosing the branch “Ep7”, this repo contains all the code needed for replicate this walkthrough.
+* Now the table is ready for the code! Start by cloning the sample repository and choosing the "Ep7" branch. This repo contains all the code needed for replicate this walkthrough.
 
 ```bash
 git clone https://github.com/aws-samples/picture-social-sample.git -b ep7
 ```
 
-* But first, we need to add the AWS Packages to our project by going to Pictures folder and running the following commands, which were explored on our previous posts and the one new AWSSDK.DynamoDBv2
+* Before we can code, we need to add the AWS Packages to our project by going to Pictures folder and running the following commands, which were explored on our previous posts and the one new AWSSDK.DynamoDBv2
 
 ```bash
 dotnet add package AWSSDK.SecurityToken
@@ -144,7 +144,7 @@ dotnet add package AWSSDK.DynamoDBv2
 dotnet add package AWSSDK.Rekognition
 ```
 
-* We are going to open the cloned repo on VS Code and explore the file PictureTable.cs, which contain the classes PictureTable and PictureTableRequest, the first is the one that define the Table Data Model and the second is the Payload Data Model for creating new items.
+* We are going to open the cloned repository in VS Code and explore the file PictureTable.cs, which contains the classes PictureTable and PictureTableRequest. The first is the one that defines the Table Data Model and the second is the Payload Data Model for creating new items.
 
 ```csharp
 using Amazon.DynamoDBv2.DataModel;
@@ -175,7 +175,7 @@ public class PictureTableRequest
 ```
 
 * Open the Controller Picture by going to Controllers/PictureController.cs, there we have 3 Methods: Create, Read and Delete using the corresponding HTTP Method.
-* On top of the class, we declare the DynamoDB variables and the Data Model variable. And using the constructor method we are going to initialize them, they are going to take the profile from the terminal to authenticate.
+* On top of the class, we declare the DynamoDB variables and the Data Model variable. And using the constructor method we are going to initialize them, which will use the default AWS profile from your shell's environment.
 * We are not adding an Authorize header to the controller because this will be handled by Amazon API Gateway and will be explored with more detail in the next episode.
 
 ```csharp
@@ -195,8 +195,8 @@ public class PictureController : ControllerBase
     }
 ```
 
-* We declared, on top of the class, the DynamoDB variables and the Data Model variable. And using the constructor method we are going to initialize them. They will take the profile from the terminal to authenticate.
-* We explored Amazon Rekognition in our [previous post](https://go.aws/3PxPyga?r=lp), so for now I will focus only on the added parts of the API to store the information on DynamoDB. First we declare the Create method as HttpPost and parse the request from the PictureTableRequest class that we explored earlier. The next step is just to create a PictureTable object and fill it with the results from the Amazon Rekognition detection, and then just use the global variable context to save asynchronously the object into the database. As you can see this is quite straightforward and doesn't add much custom logic to our methods; it's just one line of code.
+* We declared, on top of the class, the DynamoDB variables and the Data Model variable. And using the constructor method we are going to initialize them. They are going to read the AWS profile from the environment to authenticate.
+* We explored Amazon Rekognition in our [previous post](https://go.aws/3PxPyga?r=lp), so for now I will focus only on the added parts of the API to store the information on DynamoDB. First we declare the Create method as HttpPost and parse the request from the PictureTableRequest class that we explored earlier. The next step is to create a PictureTable object and fill it with the results from the Amazon Rekognition detection, and then use the global variable context to save asynchronously the object into the database. As you can see this is quite straightforward and doesn't add much custom logic to our methods; it's one line of code.
 
 ```csharp
 [HttpPost]
@@ -244,7 +244,7 @@ public async Task<PictureTable> Create([FromBody]PictureTableRequest req)
 }
 ```
 
-* We are going to follow similar steps for the Read method using HTTP Get, where we use the Table Key to retrieve values. In this case we are receiving by the url the ID and returning the corresponding Data Object from DynamoDB by using the context and the method LoadAsync.
+* We are going to follow similar steps for the Read method using HTTP Get, where we use the Table Key to retrieve values. In this case we are reading the ID from the query string in the URL and returning the corresponding Data Object from DynamoDB by using the context and the method LoadAsync.
 
 ```csharp
 [HttpGet("{id}")]
@@ -255,7 +255,8 @@ public async Task<PictureTable> Read(string id)
 }
 ```
 
-* And finally the Delete method using HTTP Delete, where we also use the LoadAsync method to get the Data Object and then the DeleteAsync method to use the previous object to point what to delete.
+* And finally the Delete method using HTTP Delete, where we also use the LoadAsync method to get the Data Object and then the DeleteAsync method will take the model object as a parameter to describe the object that needs to be deleted.
+
 
 ```csharp
 [HttpDelete("{id}")]
@@ -368,7 +369,7 @@ public class PictureController : ControllerBase
 dotnet run
 ```
 
-* We are going to test it using the built-in Swagger, going to our browser and typing the following URL. The Swagger endpoint will only work when you test it locally.
+* We are going to test it using the built-in Swagger server. Go to your browser and type the following URL. The Swagger endpoint will only work when you test it locally.
 
 ```bash
 http://localhost:5075/swagger/index.html
@@ -390,7 +391,7 @@ http://localhost:5075/swagger/index.html
 * The result will be a view similar to the following:
 
 ![API Response Body](images/06-api-response-body.jpg "API Response Body")
-* Where the most important part to test the other methods will be the id. We are going to copy that and test the Read.
+* The most important part of the response is the id. We are going to copy that and use it to test the Read method.
 
 ![API Response Body from DynamoDB](images/06-api-response-from-dynamodb.jpg "API Response Body from DynamoDB")
 * As we can see, we get exactly the same information that we had using the Create method, with the difference that this  time we are retrieving the object directly from the Database and not evaluating the image through Amazon Rekognition. This also improved significantly the response time from the Read vs the Create.
@@ -434,7 +435,7 @@ http://localhost:5075/swagger/index.html
 }
 ```
 
-We are making a good progress in our journey to create Picturesocial so far we have learned how to create an API, containerized it, deploy a Kubernetes cluster, use infraestructure as a code and deploy our API to Kubernetes and now we learned how to add Database support!
+We are making a good progress in our journey to create Picturesocial. So far we have learned how to create an API, containerized it, deployed a Kubernetes cluster, used infraestructure as a code and deployed our API to Kubernetes. Finally we learned how to add Database support!
 The next post will be about exposing our APIs to the Internet using API Gateway and VPC Link! 
 
 [Continue to the next post about API Gateway and VPC Link](picturesocial/07-how-to-expose-a-containerized-api-to-the-internet).
