@@ -110,7 +110,7 @@ A bus can be implemented on AWS using [Amazon EventBridge](https://docs.aws.amaz
 
 A receiver of a message can produce other messages. These messages are events that describe what happened when applying its business logic. For example, an order system can send a message (a `NewOrder` event) to a payment system. The payment system can then send messages to the delivery system in case the payment is correct (a `PaidOrder` event), or to a fraud management system if something suspicious is found during the payment (a `PossibleFraud` event).
 
-![Sample event-driven architecture](images/event-driven-architecture.png)
+![Sample event-driven architecture](images/sample-event-driven-architecture.png)
 
 Chaining multiple events and event processors together, where each event processor can be both the source or the receiver of events, creates an event-driven architecture.
 
