@@ -102,7 +102,7 @@ Figure 6. Configuring backup replication to another Region by modifying an exist
 
 To prevent any impact on your primary DB during the automatic backup window, the backup is taken from the standby instance (as shown in Figure 1), when using MariaDB, MySQL, Oracle, or PostgreSQL engines. Otherwise, storage I/O might be suspended briefly while the backup process initializes (typically under a few seconds).
 
-For database engines that do not enable the copying of automated backups, you can instead implement the strategy shown in Figure 1-⑥. Here we use the cross-Region read replica as the source for automated backup. This backup will provide he PITR needed if we need to restore to a known good state prior to data deletion or corruption.
+For database engines that do not enable the copying of automated backups, you can instead implement the strategy shown in Figure 1-⑥. Here we use the cross-Region read replica as the source for automated backup. This backup will provide the PITR needed if we need to restore to a known good state prior to data deletion or corruption.
 
 ## Summary
 
