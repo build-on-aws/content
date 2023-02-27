@@ -32,3 +32,6 @@ Remember to include the language type used when creating code blocks with ` ``` 
 ## Conclusion
 
 The conclusion should be no more than one paragraph in length, and it should 1/ Reiterate how all the components you've discussed fit together to make up the larger topic, 2/ Why the broad topic of the post is important to understand, and 3/ Next steps for readers who want to learn more about the topic - including links to 2-3 other sources that dive deeper than this post.
+
+Also end with this line to ask for feedback:
+If you enjoyed this piece, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>

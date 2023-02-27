@@ -60,4 +60,4 @@ Remember to include the language type used when creating code blocks with ` ``` 
 Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation. Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
 
 Also end with this line to ask for feedback:
-If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
