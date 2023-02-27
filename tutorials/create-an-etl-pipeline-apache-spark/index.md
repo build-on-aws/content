@@ -43,16 +43,16 @@ Let's get started!
 
 For this tutorial, let's assume you have a vendor who provides incremental sales data at the end of every month. And the file arrives in S3 as a `CSV` file and it needs to be processed and made available to your data analysts for querying and analysis. 
 
-We need to build a data pipeline such that it will take this new sales file from the S3 bucket, processes it with required transformations using Amazon EMR, and saves the cleaned and transformed data into the target S3 bucket, which will be used later on for querying. 
-
-
 ## Architecture 
 
-To implement this data pipeline, we will use an EMR cluster with Spark as the distributed processing engine. And we are going to use Amazon S3 for storing the:
-    - `RAW` data (which is the input and unprocessed data) and 
-    - `CLEANSED` data (which is output and processed data)
+To implement this data pipeline, we will use an EMR cluster with Spark as the distributed processing engine. And we are going to use S3 for storing the:
 
-![Img Architecture](images/Architecture-1.png)
+-  `RAW` data (which is the input and unprocessed data) and 
+-  `CLEANSED` data (which is output and processed data)
+
+We need to build a data pipeline such that it will take this new sales file from the S3 bucket, processes it with required transformations using Amazon EMR, and saves the cleaned and transformed data into the target S3 bucket, which will be used later on for querying using Amazon Athena. 
+
+![Img Architecture](images/Architecture.png)
 
 ## Implementation 
 
@@ -72,20 +72,20 @@ Before we create an EMR cluster we need to create a `Key Pair`, which we would n
 
 3. Now, we can go ahead and create an `Amazon EMR cluster`. For that navigate to Amazon EMR in the console and click on **Create Cluster** to create an EMR cluster
 
-![emr cluster 1](images/emr_1.png)
+![emr cluster 1](images/emr_1-new.png)
 
 4. Provide `Cluster name` as `MyDemoEMRCluster` to your EMR cluster, and select the following:
     - Select the **latest release** of EMR under **Software configuration** section
-    - Select **Spark: Spark 3.3.0 on Hadoop 3.2.1 YARN with and Zeppelin 0.10.1** under **Application** section, 
+    - Select **Spark** under **Application bundle** section, 
     - Select the right **EC2 key pair** (which you created in the previous step) under the **Security and access** section
  
    Keep everything else as default and click on Create cluster, it will create a cluster with 3 instances. 
 
-![emr cluster 2](images/emr_2.png)
+![emr cluster 2](images/emr_2-new.png)
 
 5. Cluster creation would take some time, and after couple of minutes, you will see that the cluster is **up and running** with a state as `Waiting` (which means the cluster is now ready and waiting to execute any ETL job)
 
-![emr cluster 3](images/emr_3.png)
+![emr cluster 3](images/emr_3-new.png)
 
 ### Step 2: Create an Amazon S3 bucket
 
@@ -93,11 +93,11 @@ Now we will create an Amazon S3 bucket and create two sub-folders within that, w
 
 1. Navigate to the Amazon S3 console and click on **Create Bucket** 
 
-![S3_1](images/s3_1.png)
+![S3_1](images/s3_1-new.png)
 
 2. Create a **bucket** (e.g. `etl-batch-emr-demo`) 
 
-![S3_2](images//s3_2.png)
+![S3_2](images//s3_2-new.png)
 
 3. Once the bucket is created, create two sub-folders namely 
     - `cleaned_data` 
@@ -105,32 +105,40 @@ Now we will create an Amazon S3 bucket and create two sub-folders within that, w
 
 ![S3_3](images/s3_3.png)
 
-4. Upload the [sales dataset CSV file](https://myblog-imgs.s3.amazonaws.com/datasets/SalesData.csv) in the bucket under the folder `raw_data`
+4. Upload the [sales dataset CSV file](https://github.com/aws-samples/data-engineering-on-aws/blob/main/dataset/SalesData.csv) in the bucket under the folder `raw_data`
 
-![Upload raw data](images/upload_csv.png)
+![Upload raw data](images/upload_csv-new.png)
 
 ### Step 3: Submit the PySpark job 
 
 Now, that we have the dataset uploaded in S3, its time to submit the PySpark job from our EMR cluster. 
 
-1. Navigate to the EMR console, select the `myDemoEMRCluster` which you created in earlier and click on **Connect to the Master Node Using SSH** 
+1. Sign in to the AWS Management Console, and open the [Amazon EMR console](https://console.aws.amazon.com/emr/)
 
-![emr_4](images//emr_4.png)
+2. Under **EMR on EC2** in the left navigation pane, choose **Clusters**, and then select the `myDemoEMRCluster` cluster where you want to retrieve the public DNS name.
 
-2. SSH to the EMR cluster's Master node from your terminal 
+3. Note the **Primary node public DNS** value in the Summary section of the cluster details page.
 
-3. Copy the PySpark code [`etl-job.py`](/emr-etl-job.py) and save on the `Master Node` under the home directory and make the following changes and save the file:
+![emr_4](images//emr_4-new.png)
+
+4. SSH to the EMR cluster's Master node from your terminal 
+
+```bash
+ssh -i "mykey-emr.pem" root@ec2-18-219-203-79.us-east-2.compute.amazonaws.com
+```
+
+5. Copy the PySpark code [`etl-job.py`](/emr-etl-job.py) and save on the `Master Node` under the home directory and make the following changes and save the file:
 
     - `S3_INPUT_DATA`  = 's3://<YOUR_BUCKET_LOCATION_OF_RAW_DATA>'
     - `S3_OUTPUT_DATA` = 's3://<YOUR_BUCKET_LOCATION_OF_CLEANED_DATA>'
 
-4. Submit the `PySpark job` and wait for the job to complete before proceeding.
+6. Submit the `PySpark job` and wait for the job to complete before proceeding.
 
 ```bash
 sudo spark-submit etl-job.py 
 ``` 
 
-5. Once the job completes, check the S3 bucket under the folder `cleaned_data`, you will see the new transformed and processed data in parquet format 
+7. Once the job completes, check the S3 bucket under the folder `cleaned_data`, you will see the new transformed and processed data in parquet format 
 
 ![s3 cleaned data](images/s3_cleaned_data.png)
 
