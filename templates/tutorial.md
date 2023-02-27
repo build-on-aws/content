@@ -2,7 +2,7 @@
 title: <Highlight the core problem being solved>
 description: <Two or three sentences describing the problem, the solution, and tools or services used along the way>
 tags:
-    - <list key terms readers will be searching for>
+    - <list key terms readers will be searching for using kebab-case, e.g. ci-cd, NOT "ci cd", or "CI-CD">
     - essentials
     - aws
 authorGithubAlias: <github alias>
@@ -20,14 +20,6 @@ Introduction paragraph to the topic. Describe a real world example to illustrate
 - with what you will
 - learn in this tutorial
 
-## Sidebar
-<!-- Update with the appropriate values -->
-| Info                | Level                                  |
-| ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Beginner                               |
-| ⏱ Time to complete  | 15 minutes                                 |
-| 💰 Cost to complete | Free when using the AWS Free Tier |
-
 ## Prerequisites
 
 Before starting this tutorial, you will need the following:
@@ -36,12 +28,23 @@ Before starting this tutorial, you will need the following:
  - <!-- any other pre-requisites you will need -->
 
 ## Sections
- - [Title of Section 1](#title-of-section-1) <!-- Name your sections according to the core actions the reader must perform -->
- - [Title of Section 2](#title-of-section-2) <!-- Be sure to insert the name of the section with dashes in parentheses for internal linking -->
+<!-- Update with the appropriate values -->
+| Info                | Level                                  |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | Beginner                               |
+| ⏱ Time to complete  | 15 minutes                             |
+| 💰 Cost to complete | Free when using the AWS Free Tier      |
+| 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | 2023-02-10                             |
+
+| ToC |
+|-----|
 
 ---
 
-## <Title of Section 1>
+## <Title of Section 1 - please note that it starts with a double `##`>
 
 From here onwards, split the tutorial into logical sections with a descriptive title. Focus titles on the core action steps in each section.
 
@@ -55,3 +58,6 @@ Remember to include the language type used when creating code blocks with ` ``` 
 ## Conclusion
 
 Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation. Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
+
+Also end with this line to ask for feedback:
+If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
