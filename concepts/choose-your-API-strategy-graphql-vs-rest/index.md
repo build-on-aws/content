@@ -1,6 +1,6 @@
 ---
 title: "Choosing your API strategy: GraphQL vs REST"
-description: By learning some basic concepts, you can manage your data more effectively throughout the various stages of lifecycle management
+description: By learning some basic concepts, you can manage your data more effectively throughout the various stages of lifecycle management.
 tags:
   - aws
   - explainer
