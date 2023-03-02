@@ -7,7 +7,7 @@ tags:
   - infrastructure as code
 authorGithubAlias: gaonkarr
 authorName: gaonkarr
-date: 2016-03-01
+date: 2023-03-02 
 ---
 
 Infrastructure as Code (IaC) has been revolutionary for over a decade now. We can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to create the infrastructure. This is great as now I don't have to click in the AWS Management Console to set up everything, or create scripts and run using the CLI.
