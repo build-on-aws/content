@@ -73,7 +73,7 @@ If you don’t have a personal access token, [create the token](https://docs.Git
 
 Choose **Create a project**.
 
-| ![Create a GitLab project](./images/1%20-%2gitlab10k.png) |
+| ![Create a GitLab project](./images/1%20-%20gitlab10k.png) |
 |-|
 
 Then choose **Import project**.
