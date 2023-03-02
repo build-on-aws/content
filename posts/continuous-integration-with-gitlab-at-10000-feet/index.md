@@ -51,8 +51,11 @@ The example application is available on GitHub. Deploying it on the public GitLa
 For this example you will need:
 
 - a GitHub account and a personal access token
-- a public GitLab account (https://GitLab.com/users/sign_up)
-- a *"Pay as you call"* API key from openweather.org (https://openweathermap.org/api)
+- a *"Pay as you call"* API key from [openweather.org](https://openweathermap.org/api)
+- a validated [public GitLab account](https://gitlab.com/users/sign_up)*
+
+> ***Note**: To use free CI/CD minutes on shared runners, you'll need to validate your account with a credit card. If you prefer not to provide one, you can run pipelines by bringing your own runners and disabling shared runners for your project. This is required to discourage and reduce abuse on GitLab infrastructure. GitLab will not charge your card, it will only be used for validation.
+
 
 
 **Step 1. Import a repository in GitLab**
