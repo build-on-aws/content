@@ -31,7 +31,9 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCat
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- [Terraform](https://terraform.io/) 1.3.7+<br>- (Optional) [GitHub](https://github.com) account|
-| ⏰ Last Updated        | 2023-01-31                                                      |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/bootstrapping-terraform-automation)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated        | 2023-02-22                                                      |
 
 | ToC |
 |-----|
@@ -960,7 +962,7 @@ We have now reached the end of this tutorial, you can either keep the current se
 
 ## Conclusion
 
-Congratulations! You've now bootstrapped Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow.
+Congratulations! You've now bootstrapped Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
 
 <!-- ## Bootstrapping with AWS CLI and CloudShell -->
 
