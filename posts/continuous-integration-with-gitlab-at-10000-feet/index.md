@@ -73,27 +73,27 @@ If you don’t have a personal access token, [create the token](https://docs.Git
 
 Choose **Create a project**.
 
-| ![Create a GitLab project](./images/1%20-%20GitLab10k.png) |
+| ![Create a GitLab project](./images/1%20-%2gitlab10k.png) |
 |-|
 
 Then choose **Import project**.
 
-| ![GitLab Import project](./images/2%20-%20GitLab10k.png) |
+| ![GitLab Import project](./images/2%20-%20gitlab10k.png) |
 |-|
 
 Choose **GitHub**.
 
-| ![Choose GitHub to import project](./images/3%20-%20GitLab10k.png) |
+| ![Choose GitHub to import project](./images/3%20-%20gitlab10k.png) |
 |-|
 
 Authenticate to GitHub with your **Personal Access Token**.
 
-| ![Authenticate to GitHub](./images/4%20-%20GitLab10k.png) |
+| ![Authenticate to GitHub](./images/4%20-%20gitlab10k.png) |
 |-|
 
 Import repositories from GitHub (search with user_name/continuous-integration-weather-app). Choose **Import**.
 
-| ![Import repositories from GitHub](./images/5%20-%20GitLab10k.png) |
+| ![Import repositories from GitHub](./images/5%20-%20gitlab10k.png) |
 |-|
 
 You will be notified when the import is complete. Select the link to go to the repository.
@@ -105,7 +105,7 @@ You will be notified when the import is complete. Select the link to go to the r
 
 The pipeline is triggered when new code or updates are committed. You can trigger the pipeline by adding the Openweather API key to the app.py file. Choose **app.py** to open the file.
 
-| ![Open app.py file](./images/7%20-%20GitLab10k.png) |
+| ![Open app.py file](./images/7%20-%20gitlab10k.png) |
 |-|
 
 To edit the app.py file, choose the down arrow next to **Open in Web IDE**; choose **Edit - Edit this file only**.
@@ -179,15 +179,15 @@ The `build_job` script defines the tasks:
 
 You can examine the progress of a stage by choosing the blue colored icon under **Stages**.
 
-| ![Pipeline progress](./images/11%20-%20GitLab10k.png) |
+| ![Pipeline progress](./images/11%20-%20gitlab10k.png) |
 |-|
 
 Choose `build_job` to see the build log.
 
-| ![Examine `build_job`](./images/12%20-%20GitLab10k.png) |
+| ![Examine `build_job`](./images/12%20-%20gitlab10k.png) |
 |-|
 
-| ![Build log](./images/13%20-%20GitLab10k.png) |
+| ![Build log](./images/13%20-%20gitlab10k.png) |
 |-|
 
 When the pipeline finishes building the test container, it pushes it into the GitLab Container Registry.
@@ -203,7 +203,7 @@ test_job:
 ```
 If the container passes the unit test, the runner logs the result of the test and any additional output.
 
-| ![Unit test success](./images/14%20-%20GitLab10k.png) |
+| ![Unit test success](./images/14%20-%20gitlab10k.png) |
 |-|
 
 The last stage in the pipeline is the release stage. The test image is pulled from the Container Registry and tagged as ‘latest.’ 
@@ -212,7 +212,7 @@ The last stage in the pipeline is the release stage. The test image is pulled fr
 release_job:
   stage: release
   script:
-    - docker login -u "GitLab-ci-token" -p "$CI_BUILD_TOKEN" $CI_REGISTRY
+    - docker login -u "GITLAB-CI-TOKEN" -p "$CI_BUILD_TOKEN" $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE:test
     - docker tag $CI_REGISTRY_IMAGE:test $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:latest
@@ -220,7 +220,7 @@ release_job:
 
 The release image is pushed into the **Container Registry**.
 
-| ![GitLab Container Repository](./images/15%20-%20GitLab10k.png) |
+| ![GitLab Container Repository](./images/15%20-%20gitlab10k.png) |
 |-|
 
 The CI portion of the pipeline is complete and the release artifact is ready for deployment into production.
