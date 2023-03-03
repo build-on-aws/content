@@ -128,7 +128,7 @@ Now, that we have the dataset uploaded in S3, it's time to submit the PySpark jo
 ssh -i "mykey-emr.pem" root@ec2-18-219-203-79.us-east-2.compute.amazonaws.com
 ```
 
-5. Copy the PySpark code [`etl-job.py`](/emr-etl-job.py) and save on the `Master Node` under the home directory and make the following changes and save the file:
+5. Copy the PySpark code [`etl-job.py`](https://github.com/aws-samples/data-engineering-on-aws/blob/main/create-an-etl-pipeline-apache-spark/emr-etl-job.py) and save on the `Master Node` under the home directory and make the following changes and save the file:
 
     - `S3_INPUT_DATA`  = 's3://<YOUR_BUCKET_LOCATION_OF_RAW_DATA>'
     - `S3_OUTPUT_DATA` = 's3://<YOUR_BUCKET_LOCATION_OF_CLEANED_DATA>'
