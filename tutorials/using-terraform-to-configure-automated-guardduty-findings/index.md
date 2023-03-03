@@ -1,0 +1,834 @@
+# How to Configure Automated Incident Response for GuardDuty Findings with Terraform
+
+
+## Introduction
+   
+In this tutorial, learn how to automate Amazon GuardDuty findings to perform automated incident response, and configure it all using Terraform. 
+
+Amazon GuardDuty offers threat detection enabling you to continuously monitor and protect your AWS accounts, workloads, and data stored in Amazon Simple Storage Service (Amazon S3). GuardDuty analyzes continuous metadata streams generated from your account and network activity found in AWS CloudTrail Events, Amazon Virtual Private Cloud (VPC) Flow Logs, and domain name system (DNS) Logs. GuardDuty also uses integrated threat intelligence such as known malicious IP addresses, anomaly detection, and machine learning (ML) to more accurately identify threats.
+
+Amazon GuardDuty makes it easy for you to continuously monitor your AWS accounts, workloads, and data stored in Amazon S3. GuardDuty operates completely independently from your resources, so there is no risk of performance or availability impacts to your workloads. The service is fully managed with integrated threat intelligence, anomaly detection, and ML. Amazon GuardDuty delivers detailed and actionable alerts that are easy to integrate with existing event management and workflow systems. There are no upfront costs and you pay only for the events analyzed, with no additional software to deploy or threat intelligence feed subscriptions required.
+
+[Terraform](https://www.terraform.io/) is an Infrastructure as code (IaC) tool created by Hashicorp that allows you to manage infrastructure with configuration files rather than a user interface. With Terrafom you can build, change, and destroy your infrastructure using human readable, declarative configuration files. You can build, change, and destroy AWS infrastructure using Terraform. This is done through the use of a Terraform plugin called a [Provider](https://registry.terraform.io/). The AWS Provider allows Terraform to interact with the AWS application programming interface (API).
+
+This tutorial will use AWS Cloud9 to perform the Terraform configuration.  AWS Cloud9 is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes pre-packaged with essential tools for popular programming languages including JavaScript, Python, PHP, as well as Terraform, so you don’t need to install files or configure your development machine to start this workshop. Cloud9 runs on an EC2 instance that was created for you when this workshop was started. 
+
+## What you will accomplish
+
+The process you will accomplish through this tutorial is:
+
+1. A "malicious" host interacts with a "compromised" host causing GuardDuty to report a finding.
+2. The finding is matched in an EventBridge rule that does two things:
+   1. Triggers an SNS rule that sends an email to a defined admin with easy to read text explaining the finding.
+   2. Triggers a Lambda function that moves the compromised host to a forensic security group where it is isolated for furter investigation.
+
+
+## Prerequisites
+
+You will need an AWS account to complete this tutorial. If you do not have an AWS account, create a new AWS account to get started.
+
+## Implementation
+
+## Step 1. Load the initial configuration
+
+This tutorial makes use of an AWS CloudFormation template to provising initial resources.  
+
+1.1. Navigate to [AWS CloudFormation in the AWS Management Console](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/) and create a stack by clicking the `create stack` button.  
+
+![Create Stack](static/images/0001.png)
+
+1.2 . Select **Upload Template File** and upload the [gd-iac-initial.yml](assets/gd-iac-initial.yml) file.  Then click **Next**.  
+
+![Upload YAML file](static/images/0002.png)
+
+1.3. Enter a stack name and click **Next**.
+
+![](static/images/0003.png)
+
+1.4. Click **Next** on the **Configure stack options** page.
+
+![](static/images/0004.png)
+
+1.5. On the **Review** page, scroll to the botton and click the check box to **acknowledge that AWS CloudFormation might create IAM resources** then click **Next**. 
+
+![](static/images/0005.png)
+
+1.6. Watch for the stack to be in a **Create Complete** state.
+
+![](static/images/0006.png)
+
+## Step 2. Access Cloud9 and Initialize Terraform. 
+
+2.1. Open [AWS Cloud9 in the AWS Management Console](https://us-west-2.console.aws.amazon.com/cloud9control/home?region=us-west-2#/) and open the environment in the Cloud9 IDE.
+
+![](static/images/0007.png)
+
+2.2. In the Cloud9 preferences, disable the use of **AWS managed temporary credentials**.
+
+![](static/images/0008.png)
+
+2.3.  Extract and then Drag-and-Drop the **[gd-iac-terraform-initial](assets/gd-iac-terraform-initial.zip)** folder to the root of the Cloud9 Instance.
+
+![](static/images/0009.png)
+
+2.4. Change into the **gd-iac-terraform-initial** directory and perform a **terraform init**, **terraform plan**, and **terraform apply.**  
+
+
+![](static/images/0010.png)
+
+
+A succesful apply will resemble the following:
+
+![](static/images/0012.png)
+
+2.5. Verify that there are two new EC2 instances, one named **GuardDuty-Example: Compromised Instance** and the other named **GuardDuty-Example: Malicious Instance**.
+
+![](static/images/0011.png)
+
+## Step 3: Create an S3 Bucket to store a threat list
+
+3.1. Begin by creating a variable in the `modules/s3/variables.tf` for the vpc_id.
+
+
+```
+variable "vpc_id" {}
+
+```
+
+3.2. Next, in the `modules/s3/main.tf` file, get the current AWS user account number, create an S3 bucket resource.
+
+
+
+```
+ # GET CURRENT AWS ACCOUNT NUMBER
+ 
+ data "aws_caller_identity" "current" {}
+
+  # CREATE AN S3 BUCKET
+ 
+ resource "aws_s3_bucket" "bucket" {
+   bucket = "guardduty-example-${data.aws_caller_identity.current.account_id}-us-east-1"
+   force_destroy = true
+ }
+```
+
+
+3.3. Next enable VPC Flow logs to the S3 bucket. This is not required, however it will allow us to view the logs that GuardDuty sees.
+
+
+```
+# VPC FLOW LOGS
+ resource "aws_flow_log" "flow_log_example" {
+   log_destination      = aws_s3_bucket.bucket.arn
+   log_destination_type = "s3"
+   traffic_type         = "ALL"
+   vpc_id               = var.vpc_id
+ }
+```
+
+
+3.4. Lastly, output the bucket_id and bucket_arn values in the `modules/s3/outputs.tf` file.
+
+
+```
+# S3 Bucket id
+ output "bucket_id" {
+   value       = aws_s3_bucket.bucket.id
+   description = "Output of s3 bucket id."
+ }
+ # S3 Bucket arn
+ output "bucket_arn" {
+   value       = aws_s3_bucket.bucket.arn
+   description = "Output of s3 bucket arn."
+ }
+```
+
+
+3.5. Now return to the `root/main.tf` file and add the S3 bucket. 
+
+```
+# # CREATES S3 BUCKET
+module "s3_bucket" {
+  source = "./modules/s3"
+  vpc_id = module.vpc.vpc_id
+}
+```
+
+> **Why are you creating an S3 bucket?**  You are primarily creating an S3 bucket to hold a text file that will be refered to by GuardDuty. GuardDuty uses two types of lists. 1.) a Trusted IP list, and 2.) a Threat IP list. Our S3 bucket will host the Threat IP List. The secondary reason is to store VPC flow logs. GuardDuty uses VPC flow logs, but you do not need to enable them for GuardDuty to use them. Here, we enable VPC FLow Logs so that we can use the data in other tools if we want to later on.]
+
+## Step 4: Create the GuardDuty Terraform Modules
+
+4.1. The GuardDuty Module files have been created for you but like the S3 files, they are empty. Start with the `modules/guardduty/variables.tf` file. Here you will need to create two variables. The first is a variable called `bucket` which we will use to define the S3 bucket threat list details. The second will be for the malicious IP that we will have added to the bucket.
+
+
+```
+variable "bucket" {
+
+}
+
+variable "malicious_ip" {
+
+}
+```
+
+4.2. Next move to the `modules/guardduty/main.tf` file.
+
+In this file you will add three resources. The first resource is the [GuardDuty detector](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/guardduty_detector). You'll note in the provider documentation that the options are all optional, nothing is required other than declaring the resource. However, we will set the `enabled` value to `true` in our example and also change the `finding_publishing_frequency` to 15 minutes. The default is one hour.
+
+```
+
+# ENABLE THE DETECTOR
+resource "aws_guardduty_detector" "gd-tutorial" {
+  enable = true
+  finding_publishing_frequency = "FIFTEEN_MINUTES"
+
+}
+
+```
+
+4.3. Next we will [upload a file to the S3 bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) that we created in a previous step. This is not required, but for demonstration purposes we want to use the IP address of one of the EC2 instances to ensure that findings are generated in this tutorial. So in the code below we are uploading a text file to our S3 bucket, calling it MyThreatIntelSet, and the content of the file will be the IP address found in the variable `var.malicious_ip`. 
+
+```
+
+# ADD THE EIP/MALICIOUS IP TO THE BUCKET AS A TEXT FILE.
+resource "aws_s3_object" "MyThreatIntelSet" {
+  content = var.malicious_ip
+  bucket  = var.bucket
+  key     = "MyThreatIntelSet"
+}
+
+```
+
+4.4. Finally we will create a resource, `aws_guardduty_threatintelset` that tells GuardDuty that it should use (this is what the `activate = true` does) the file located at the `location` defined.
+
+```
+
+# HAVE GUARDDUTY LOOK AT THE TEXT FILE IN S3
+resource "aws_guardduty_threatintelset" "Example-Threat-List" {
+  activate    = true
+  detector_id = aws_guardduty_detector.gd-tutorial.id
+  format      = "TXT"
+  location    = "https://s3.amazonaws.com/${aws_s3_object.MyThreatIntelSet.bucket}/${aws_s3_object.MyThreatIntelSet.key}"
+  name        = "MyThreatIntelSet"
+}
+
+```
+
+> For GuardDuty we don't need to output anything at this point in time.
+
+4.5. Next move to the `root/main.tf` file and call the GuardDuty module. We need to provide the bucket ID and the malicious IP. You can see that these are coming from the s3 module and the compute module.
+
+```
+
+module "guardduty" {
+  source       = "./modules/guardduty"
+  bucket       = module.s3_bucket.bucket_id
+  malicious_ip = module.compute.malicious_ip
+}
+
+```
+
+
+## Step 5: Create the SNS Terraform Module
+
+In this section we will use [Terraform](https://www.terraform.io/) to create an SNS Rule. SNS is the Simple Notification Service and it enabled you to send notification when certain critiera is met. SNS itself doesn't match an action to send a message, rather we will use EventBridge for that. However since EventBridge will need a rule to send notifications we create the SNS rule first. 
+
+
+5.1. Beginning in the `modules/sns/variables.tf` file you will need to create two variables. 
+
+1. `sns_name` to name the SNS topic that we will create.
+2. `email` to hold the email address we will use to subscribe to our notifications.
+
+Below is an example of our variables for SNS.
+
+```
+
+variable "sns_name" {
+  description = "Name of the SNS Topic to be created"
+  default     = "GuardDuty-Example"
+}
+
+variable "email" {
+ description = "Email address for SNS"
+}
+
+```
+
+5.2. Next we will create the SNS topic and subscription in the `modules/sns/main.tf` file.
+
+Start by creating a topic resource.
+
+```
+
+# Create the SNS topic
+ 
+ resource "aws_sns_topic" "gd_sns_topic" {
+   name = var.sns_name
+ }
+
+```
+
+In the above code you are creating a resource which is called "gd_sns_topic" by Terraform. In the AWS console this will be called "GuardDuty-Example". This is because we are calling the variable `var.sns_name` and it has a default set to "GuardDuty-Example".
+
+5.3. Next create an SNS Policy Resource. The `arn` and `policy` are required values. The policy being created here is an [AWS IAM Policy Document](https://developer.hashicorp.com/terraform/tutorials/aws/aws-iam-policy?_ga=2.3643440.1670455977.1666808943-645029333.1658185431). This policy document is allowing the service principal `events.amazonaws.com` to publish to the topic.
+
+
+```
+
+resource "aws_sns_topic_policy" "gd_sns_topic_policy" {
+   arn = aws_sns_topic.gd_sns_topic.arn
+   policy                                   = jsonencode(
+         {
+             Id        = "ID-GD-Topic-Policy"
+             Statement = [
+                 {
+                     Action    = "sns:Publish"
+                     Effect    = "Allow"
+                     Principal = {
+                         Service = "events.amazonaws.com"
+                     }
+                     Resource  = aws_sns_topic.gd_sns_topic.arn
+                     Sid       = "SID-GD-Example"
+                 },
+             ]
+             Version   = "2012-10-17"
+         }
+     )
+ }
+ 
+
+```
+
+5.5. Next you will create the topic subscription. The topic subscription calls the ARN, sets the protocol to be used, in this case email, and the email address to send the notificaiton to. The email address in this case will be hard coded but you can configure it to prompt for the email address when you apply the terraform. Also, the `endpoint_auto_confirm` being set to `false` means that the owner of the email will get an email with a link that they must click on to subscribe to the notifications.
+
+```
+
+# Create the topic subscription 
+ 
+ resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
+   topic_arn              = aws_sns_topic.gd_sns_topic.arn
+   protocol               = "email"
+   endpoint               = var.email
+   endpoint_auto_confirms = false
+ }
+
+```
+
+
+5.6. Next, in the `modules/sns/outputs.tf` file we want to output the ARN of the topic so we can reference that in the EventBridge configuration we will perform later.
+
+```
+
+output "sns_topic_arn" {
+  value       = aws_sns_topic.gd_sns_topic.arn
+  description = "Output of ARN to call in the eventbridge rule."
+}
+
+```
+
+5.7. Finally, return to the `root/main.tf` file and add the SNS topic. This is where you will set the email address to be subscribed.
+
+> Note that you will need to enter your email address in the code below.
+
+```
+
+# Creates an SNS Topic
+
+ module "guardduty_sns_topic" {
+   source = "./modules/sns"
+   email  = 'youremailaddress@domain.com'
+ }
+
+
+```
+
+
+## Step 6: Create the EventBridge Terraform Module
+
+In this section you will use [Terraform](https://www.terraform.io/) to create an Eventbridge Rule. The EventBridge Rule will tie two elements of this solution together.  
+
+How does EventBridge work?  EventBridge receives an event, an indicator of a change in environment, and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. In this case, GuardDuty creates an event for Amazon EventBridge when any change in findings takes place. The event matches and Amazon EventBridge rule to a target, in this case its an SNS rule. The SNS rule takes the finding data and generates an email notification to the subscribed user. This can be seen in the image below. 
+
+![the process](/static/eventbridge/boa313_process_001.jpg)
+
+
+6.1. The EventBridge rule will need information about GuardDuty as well as SNS. Begin by creating a variable that can be used for the SNS topic ARN. Do this in the `modules/eventbridge/variables.tf` file.
+
+
+```
+ variable "sns_topic_arn" {
+ }
+
+```
+
+
+
+6.2. Next create an Event Rule Resource in the `modules/eventbridge/main.tf` file. You will need to define the source as well as the type of event we are looking for.
+
+```
+
+ # EVENT RULE RESOURCE
+ resource "aws_cloudwatch_event_rule" "GuardDuty-Event-EC2-MaliciousIPCaller" {
+   name        = "GuardDuty-Event-EC2-MaliciousIPCaller"
+   description = "GuardDuty Event: UnauthorizedAccess:EC2/MaliciousIPCaller.Custom"
+
+   event_pattern = <<EOF
+ {
+   "source": ["aws.guardduty"],
+   "detail": {
+     "type": ["UnauthorizedAccess:EC2/MaliciousIPCaller.Custom"]
+   }
+ }
+ EOF
+ }
+
+```
+
+6.3. Next define the Event Target Resource. When creating this resource you can add an extra bit of readability into the email notification by defining an [Input Transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-input-transformer-tutorial.html). This customizes what EventBridge passes to the event target. Below we are getting the GuardDuty ID, the Region, and the EC2 Instance ID and we are creating an input tempalte that elaborates a bit on the message. You can see below that we have created an input template that makes use of the detail information in the GuardDuty finding in the email message that is sent.
+
+```
+
+# EVENT TARGET RESOURCE FOR SNS NOTIFICATIONS
+ resource "aws_cloudwatch_event_target" "sns" {
+
+   rule      = aws_cloudwatch_event_rule.GuardDuty-Event-EC2-MaliciousIPCaller.name
+   target_id = "GuardDuty-Example"
+   arn       = var.sns_topic_arn
+
+   input_transformer {
+     input_paths = {
+       gdid     = "$.detail.id",
+       region   = "$.detail.region",
+       instanceid = "$.detail.resource.instanceDetails.instanceId"
+     }
+     input_template = "\"First GuardDuty Finding for the GuardDuty-IAC tutorial. | ID:<gdid> | The EC2 instance: <instanceid>, may be compromised and should be investigated. Go to https://console.aws.amazon.com/guardduty/home?region=<region>#/findings?macros=current&fId=<gdid>\""
+   }
+ }
+
+```
+
+6.4. In the first Event rule that we created we are looking for the **GuardDuty-Event-EC2-MaliciousIPCaller** event. Create a second event rule to look for the **GuardDuty-Event-IAMUser-MaliciousIPCaller** finding and send an email notification for that as well. 
+
+```
+
+# EVENT RULE RESOURCE
+ resource "aws_cloudwatch_event_rule" "GuardDuty-Event-IAMUser-MaliciousIPCaller" {
+   name        = "GuardDuty-Event-IAMUser-MaliciousIPCaller"
+   description = "GuardDuty Event: UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom"
+   event_pattern = <<EOF
+ {
+   "source": ["aws.guardduty"],
+   "detail": {
+     "type": ["UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom", "Discovery:S3/MaliciousIPCaller.Custom"]
+   }
+ }
+ EOF
+ }
+
+ #EVENT TARGET RESOURCE FOR SNS NOTIFICATIONS
+ resource "aws_cloudwatch_event_target" "iam-sns" {
+
+   rule      = aws_cloudwatch_event_rule.GuardDuty-Event-IAMUser-MaliciousIPCaller.name
+   target_id = "GuardDuty-Example"
+   arn       = var.sns_topic_arn
+
+   input_transformer {
+     input_paths = {
+       gdid     = "$.detail.id",
+       region   = "$.detail.region",
+       userName = "$.detail.resource.accessKeyDetails.userName"
+     } 
+     input_template = "\"Second GuardDuty Finding for the GuardDuty-IAC tutorial. | ID:<gdid> | AWS Region:<region>. An AWS API operation was invoked (userName: <userName>) from an IP address that is included on your threat list and should be investigated.Go to https://console.aws.amazon.com/guardduty/home?region=<region>#/findings?macros=current&fId=<gdid>\""
+   }
+ }
+
+```
+
+
+6.5. Once you have the resources created in the module, go back to the `root/main.tf` file and add the EventBridge rule.
+
+```
+
+# Create the EventBridge rule
+
+module "guardduty_eventbridge_rule" {
+  source                          = "./modules/eventbridge"
+  sns_topic_arn                   = module.guardduty_sns_topic.sns_topic_arn
+}
+
+```
+
+
+
+
+## Step 7: Create the Lambda Terraform Module
+
+In this section we will use [Terraform](https://www.terraform.io/) to create a Lambda function that perform a remediation function for our environment. What we want to do with this 
+tutorial is have our compromised host get moved to a new security group. Similar to the way that EventBridge used SNS to generate an email, EventBridge will invole a Lambda function as see below.
+
+![Invoke Function](/static/lambda/boa313_lambda_2.jpg)
+
+One thing to keep in mind is that there are many possibilities here. For more information please see the [Creating custom responses to GuardDuty findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html) documentation as well as [Automatically block suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/) for more information.
+
+
+
+Beforew we get started, lets see what needs to happen for this to work.
+
+Currently, our GuardDuty Findings are matched in an EventBridge rule to a target, currently an SNS rule that sends an email. To enhance this functionality we will have EventBridge use AWS Lambda as a target.
+
+
+Because we are going to have AWS Lambda access other resources on our behalf, we need to [create an IAM role to delegate permissions to the service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html). This is called a **service role** and AWS Lambda will *assume* this role when it changes the security group of our EC2 instance.
+
+The following image shows how the first three code blocks fit together to allow the AWS Lambda service to assume a role that can make changes to the security groups assigned to the EC2 instances.
+
+
+![IAM policy assigned to Lambda](/static/lambda/boa313_lambda_1.jpg)
+
+7.1. Start in the `modules/lambda/main.tf` by creating the IAM policy document. This is the trust relationship for the policy.
+
+```
+
+data "aws_iam_policy_document" "GD-EC2MaliciousIPCaller-policy-document" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+  }
+}
+
+```
+
+7.2. Next, create the inline policy that will be applied to the role AWS Lambda will assume.
+
+```
+
+resource "aws_iam_role_policy" "GD-EC2MaliciousIPCaller-inline-role-policy" {
+  name = "GD-EC2MaliciousIPCaller-inline-role-policy"
+  role = aws_iam_role.GD-Lambda-EC2MaliciousIPCaller-role.id
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : [
+          "ssm:PutParameter",
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:CreateSecurityGroup",
+          "ec2:DescribeSecurityGroups",
+          "ec2:RevokeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress",
+          "ec2:UpdateSecurityGroupRuleDescriptionsEgress",
+          "ec2:UpdateSecurityGroupRuleDescriptionsIngress",
+          "ec2:DescribeInstances",
+          "ec2:UpdateSecurityGroupRuleDescriptionsIngress",
+          "ec2:DescribeVpcs",
+          "ec2:ModifyInstanceAttribute",
+          "lambda:InvokeFunction",
+          "cloudwatch:PutMetricData",
+          "xray:PutTraceSegments",
+          "xray:PutTelemetryRecords"
+        ],
+        "Resource" : "*",
+        "Effect" : "Allow"
+      },
+      {
+        "Action" : [
+          "logs:*"
+        ],
+        "Resource" : "arn:aws:logs:*:*:*",
+        "Effect" : "Allow"
+      },
+      {
+        "Action" : [
+          "sns:Publish"
+        ],
+        "Resource" : var.sns_topic_arn,
+        "Effect" : "Allow"
+      }      
+    ]
+  })
+}
+
+
+```
+
+7.3. And now create the IAM role that AWS Lambda will assume.
+
+```
+
+resource "aws_iam_role" "GD-Lambda-EC2MaliciousIPCaller-role" {
+  name               = "GD-Lambda-EC2MaliciousIPCaller-role1"
+  assume_role_policy = data.aws_iam_policy_document.GD-EC2MaliciousIPCaller-policy-document.json
+}
+
+```
+
+> The Python code we will use for the Lambda function has been created for you. The code can be found in the /modules/lambda/code folder and it's called index.py.
+
+7.4. Create a data resource pointing to the code.
+
+```
+
+data "archive_file" "python_lambda_package" {
+  type        = "zip"
+  source_file = "${path.module}/code/index.py"
+  output_path = "index.zip"
+}
+
+```
+
+7.5. Next we need to give EventBridge permission to access Lambda.
+
+```
+
+resource "aws_lambda_permission" "GuardDuty-Hands-On-RemediationLambda" {
+  statement_id  = "GuardDutyTerraformRemediationLambdaEC2InvokePermissions"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.GuardDuty-Example-Remediation-EC2MaliciousIPCaller.function_name
+  principal     = "events.amazonaws.com"
+}
+
+```
+
+The above block will give EventBridge permission to invoke the Lambda function.
+
+7.6. Finally we create the Lambda function resource. To do this we will need to create a few variables that will let us pass some info. Edit the `modules/lambda/variables.tf` file with the following variables:
+
+```
+
+variable "sns_topic_arn" {}
+
+variable "compromised_instance_id" {}
+
+variable "forensic_sg_id" {}
+
+```
+
+7.7. Next, return to the `modules/lambda/main.tf` file and create the Lambda function resource. Note that in the code block below that we are using Python 3.9. Also, we are referecing the python code we zipped in index.zip. And lastly we are setting a few environment variables in the resource, `INSTANCE_ID`, `FORENSICS_SH`, and `TOPIC_ARN`. These will be passed into our Lambda function environment from the variables that we created.
+
+```
+
+# Create the Lambda function Resource
+
+resource "aws_lambda_function" "GuardDuty-Example-Remediation-EC2MaliciousIPCaller" {
+  function_name    = "GuardDuty-Example-Remediation-EC2MaliciousIPCaller"
+  filename         = "index.zip"
+  source_code_hash = data.archive_file.python_lambda_package.output_base64sha256
+  role             = aws_iam_role.GD-Lambda-EC2MaliciousIPCaller-role.arn
+  runtime          = "python3.9"
+  handler          = "index.handler"
+  timeout          = 10
+  environment {
+    variables = {
+      INSTANCE_ID  = var.compromised_instance_id
+      FORENSICS_SG = var.forensic_sg_id
+      TOPIC_ARN    = var.sns_topic_arn
+    }
+  }
+}
+
+```
+
+
+7.8. In the `root/main.tf` file call the Lambda module, set the SNS topic ARN, the Compromised Instance ID, and the Forensic Security group. Note that these values are coming from the GuardDuty Module, the Compute Module, and the VPC Module.
+
+```
+
+module "lambda" {
+  source                  = "./modules/lambda"
+  sns_topic_arn           = module.guardduty_sns_topic.sns_topic_arn
+  compromised_instance_id = module.compute.compromised_instance_id
+  forensic_sg_id          = module.vpc.forensic_sg_id
+}
+
+```
+
+7.9. The Forensic Security group has not been created yet. Return to the `modules/vpc/main.tf` and add a security group to use for forensics.
+
+```
+
+# FORENSIC SECURITY GROUP
+ resource "aws_security_group" "forensic_sg" {
+   vpc_id = aws_vpc.vpc.id
+   name   = "${var.vpc_name}-ForensicSecurityGroup"
+
+   ingress {
+     protocol    = "icmp"
+     self        = true
+     from_port   = -1
+     to_port     = -1
+     cidr_blocks = ["10.0.0.0/24"]
+   }
+
+   egress {
+     from_port   = 0
+     to_port     = 0
+     protocol    = "-1"
+     cidr_blocks = ["0.0.0.0/0"]
+   }
+
+   tags = {
+     Name = "${var.vpc_name}-ForensicSecurityGroup"
+   }
+ }
+
+```
+
+7.10. To access the `forensic_sg_id` we need to output that from the VPC module. Return to the `modules/vpc/outputs.tf` file and output the Security group ID.
+
+
+```
+
+ output "forensic_sg_id" {
+   value       = aws_security_group.forensic_sg.id
+   description = "Output of forensic sg id created - to place the EC2 instance(s)."
+ }
+
+```
+
+
+7.11. Now we need to adjust the EventBridge Rule to send the finding data to Lambda. We will do that in the next section. Return to the `modules/eventbridge/main.tf` file. Add an event target resource for the Lambda Function that looks at the `aws_cloudwatch_event_rule.GuardDuty-Event-EC2-MaliciousIPCaller.name` rule and sets the target ID to `GuardDuty-Example-Remediation`. You will need the ARN of the Lambda Function here. This can be output from the Lambda Module.
+
+```
+
+#EVENT TARGET RESOURCE FOR LAMBDA REMEDIATION FUCTION
+
+resource "aws_cloudwatch_event_target" "lambda_function" {
+
+  rule      = aws_cloudwatch_event_rule.GuardDuty-Event-EC2-MaliciousIPCaller.name
+  target_id = "GuardDuty-Example-Remediation"
+  arn       = var.lambda_remediation_function_arn
+}
+
+
+```
+
+7.12. Add the output to the Lambda Module (`modules/lambda/outputs.tf`) if you haven't done so already.
+
+```
+
+output "lambda_remediation_function_arn" {
+  value = aws_lambda_function.GuardDuty-Example-Remediation-EC2MaliciousIPCaller.arn
+}
+
+```
+
+7.13. The variable also needs to be applied in the EventBridge module(`modules/eventbridge/variables.tf`).
+
+```
+
+variable "lambda_remediation_function_arn" {
+
+}
+
+```
+
+
+7.14. And finally, add the ` lambda_remediation_function_arn` to the `root/main.tf` file. This goes in the EventBridge Rule which is already created. The output below is the entire code block, some of which already exists. Be sure to only add the `lambda_remediation_function_arn = module.lambda.lambda_remediation_function_arn` code to the existing block.
+
+```
+
+module "guardduty_eventbridge_rule" {
+  source                          = "./modules/eventbridge"
+  sns_topic_arn                   = module.guardduty_sns_topic.sns_topic_arn
+  lambda_remediation_function_arn = module.lambda.lambda_remediation_function_arn
+}
+
+```
+
+## Step 8: Apply The Configuration to your AWS Account.
+
+8.1. Perform a `terraform init`.  This will initialize all of the modules that you have added code to in this tutorial.  The output should resemble the following.
+
+![](/static/images/0013.png)
+
+8.1. Do a `terraform plan`.
+8.2. Do a `terraform apply` to push the changes to AWS. Once applied your should have an output that resembles the following:
+
+![](static/images/0014.png)
+
+
+## Step 9: Verify The Solution in the AWS Management Console
+
+In this section we will walk through the entire solution in the AWS console and verify that the security group has been moved once the finding shows up in GuardDuty and EventBridge triggers the Lambda Function.
+
+You should also have recieved an email to confirm your subscription.  You must subscribe to recieve the notifications you have configured.
+
+![](static/images/0015.png)
+
+After subscribing navigate to the AWS Management Console to verifying that there are two EC2 instances and they are both in the Initial Security Group. 
+
+> Depending on how long you have waited, if the remediation Lambda function is already applied you may not see them in the same group. 
+
+
+First check the Compromised Host.
+
+![sec group verificaiton](static/images/0016.png)
+
+Next check the Malicious Host.
+
+![sec group verification](images/0017.png)
+
+Next ensure that GuardDuty is reporting findings.
+
+![GD findings](static/images/0018.png)
+
+Now check that the eventbridge rule is looking for that finding.
+
+![EventBridge Rule](/static/images/0019.png)
+
+Next check the target of the EventBridge Rule. You should see one SNS target and one Lambda target.
+
+![Targets](/static/images/0020.png)
+
+Check the SNS rule to see what it does. It should be sending an email to the address you set.
+
+![SNS topic](/static/images/0021.png)
+
+Next Check the Lambda Function. You can get there from the EventBridge Rule or by navigating there directly. 
+
+![Lambda Function](/static/images/0022.png)
+
+Finally check that the Lambda Function has moved the Compromised host to a new Security Group.
+
+![Security Group Changed](/static/images/0023.png)
+
+Depending on the time you have waited, if your configuration matches the screenshots above you have successfully created an entire AWS Security solution using Terraform. Congratulations! 
+
+In the next section we will perform a clean-up of our environment and share additional resources.
+
+
+## Conclusion
+
+At this point in the tutorial you are likley getting emails every 15 minutes as GuardDuty reports its Findings. If you prefer to keep the configurations to reference later but stop the emails you can simply unsubscribe from the topic. See the example below on how to delete the subscription.
+
+![delete subscription](/static/images/0024.png)
+
+To remove the entire configuration we will use the `terraform destroy` command from the CLI of our Cloud9 instance. 
+
+When finshed your output should resemble the following.
+
+![destroy](/static/images/0025.png)
+
+Next you will need to empty the S3 bucket that was created for the Cloud9 instance. 
+
+![destroy](/static/images/0026.png)
+
+Finally navigate to CloudFormation and delete the CloudFormation stack you created. Be sure to delete the one with the name you gave earlier in this workshop. Two stacks were created and both will be deleted when you delete the parent stack.
+
+![destroy](/static/images/0027.png)
+
+As you can see from this tutorial, much can be done to automate what happends when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda.  For additional ideas on how to automate Incident Response, see the articles "[How to use Amazon GuardDuty and AWS Web Application Firewall to automatically block suspicious hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/)" and "[Automatically block suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/)."
+
+
+
+
+
+
+
+
+
