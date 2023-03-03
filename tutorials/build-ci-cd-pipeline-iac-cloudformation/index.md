@@ -25,7 +25,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)|
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/ci-cd-iac-cloudformation)                            |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/ci-cd-iac-aws-cloudformation)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-03-02                                                      |
 
@@ -47,7 +47,7 @@ Follow steps in the documentation to set [Setting up CodeCatalyst](https://docs.
 #### <b>IAM Roles </b>
 We need to create CloudCatalyst service roles in our AWS account. These will be using these to provide permission to CodeCatalyst. This is one time activity only.
 
-Simply deploy a CloudFormation stack named `CodeCatalyst-IAM-roles` in any region with the template provided [here](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-cloudformation/cloudformation-templates/IAM_roles_CodeCatalyst.json). This will create 2 new AWS Identity and Access Management (IAM) roles - `main_branch_IAM_role` and `pr_branch_IAM_role` in your AWS account.
+Simply deploy a CloudFormation stack named `CodeCatalyst-IAM-roles` in any region with the template provided [here](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/cloudformation-templates/IAM_roles_CodeCatalyst.json). This will create 2 new AWS Identity and Access Management (IAM) roles - `main_branch_IAM_role` and `pr_branch_IAM_role` in your AWS account.
 
 > Please note, the `main_branch_IAM_role` provides full access to AWS resources in EC2 and CloudFormation services, as those will be used by sample CloudFormation template mentioned in this blog. Please use this role carefully and delete it when not required.
 
@@ -141,7 +141,7 @@ You will find an empty repository `3-tier-app`, with a readme.md, devfile.yaml a
 
 You can use your own CloudFormation template, or simply use one of the sample templates. 
 
-For this blog, I am using the a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer from. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
+For this blog, I am using the a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer from. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
 
 >In real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation templates. However, to keep your first deployment with CodeCatalyst simple, lets deploy everything in a single template.
 
@@ -150,7 +150,7 @@ Let's ensure we commit our changes to our git repo using the following commands:
 # go to the root folder of the repo and run following
 
 $ cd 3-tier-app/
-$ wget https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json
+$ wget https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json
 
 # check git status
 $ git status
@@ -231,7 +231,7 @@ Actions:
   DeployAWSCloudFormationstack_7c:
     Identifier: aws/cfn-deploy@v1
     Configuration:
-      parameter-overrides: KeyName=testKey,SSHLocation=54.10.10.2/32,WebServerInstanceType=t2.micro
+      parameter-overrides: SSHLocation=54.10.10.2/32,WebServerInstanceType=t2.micro
       capabilities: CAPABILITY_IAM,CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
       template: VPC_AutoScaling_With_Public_IPs.json
       region: us-west-2
@@ -347,7 +347,7 @@ Actions:
   DeployAWSCloudFormationstack_7c:
     Identifier: aws/cfn-deploy@v1
     Configuration:
-      parameter-overrides: KeyName=testKey,SSHLocation=54.10.10.2/32,WebServerInstanceType=t2.micro
+      parameter-overrides: SSHLocation=54.10.10.2/32,WebServerInstanceType=t2.micro
       capabilities: CAPABILITY_IAM,CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
       no-execute-changeset: "1"
       template: VPC_AutoScaling_With_Public_IPs.json
@@ -411,7 +411,7 @@ Switched to a new branch 'test-pr-workflow'
 - If you are using your own CloudFormation template, make any changes to the template to create a change set.
 
 - For the sample CloudFormation template used in this blog,
-  - simply replace its content with [this already modified template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs-3-subnets.json). Make sure the name of template file is same(*VPC_AutoScaling_With_Public_IPs.json*), as workflow has filename mentioned in it, or
+  - simply replace its content with [this already modified template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs-3-subnets.json). Make sure the name of template file is same(*VPC_AutoScaling_With_Public_IPs.json*), as workflow has filename mentioned in it, or
   - you can make following changes to the template :
 
     Add following JSON code to the sample CloudFormation template under `Resources` section. 
