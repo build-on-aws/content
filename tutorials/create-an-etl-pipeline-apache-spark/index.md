@@ -94,17 +94,17 @@ Now we will create an Amazon S3 bucket and create two sub-folders within that, w
 
 1. Navigate to the Amazon S3 console and click on **Create Bucket**.
 
-![S3_1](images/s3_1-new.png)
+![Bucket Creation UI](images/s3_1-new.png)
 
 2. Create a **bucket** (e.g. `etl-batch-emr-demo`).
 
-![S3_2](images//s3_2-new.png)
+![Bucket Creation UI](images//s3_2-new.png)
 
 3. Once the bucket is created, create two sub-folders named: 
     - `cleaned_data` 
     - `raw_data`
 
-![S3_3](images/s3_3.png)
+![Bucket Creation UI](images/s3_3.png)
 
 4. Upload the [sales dataset CSV file](https://github.com/aws-samples/data-engineering-on-aws/blob/main/dataset/SalesData.csv) in the bucket under the folder `raw_data`.
 
@@ -120,7 +120,7 @@ Now, that we have the dataset uploaded in S3, it's time to submit the PySpark jo
 
 3. Note the **Primary node public DNS** value in the Summary section of the cluster details page.
 
-![emr_4](images//emr_4-new.png)
+![EMR Cluster](images//emr_4-new.png)
 
 4. SSH to the EMR cluster's Master node from your terminal 
 
