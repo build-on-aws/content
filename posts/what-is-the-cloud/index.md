@@ -1,6 +1,6 @@
 ---  
 title: "What is the cloud?"  
-description: The cloud is computing and storage that lives in warehouses full of servers. But what does that actually mean?  
+description: The cloud is computing and storage that lives on servers in data centers. But what does that actually mean?  
 tags:  
 - cloud
 - basics
@@ -23,7 +23,7 @@ Networking initially meant connecting various terminals or dummy nodes to a shar
   
 The internet fundamentally changed things. We weren’t just sending messages back and forth anymore; we were visiting digital locations called websites. These websites needed a place to store their text and images, and eventually they even started doing more than just displaying stored information; they began to facilitate sales, coordinate deliveries, and much more. All the storage and computing for these countless websites had to come from somewhere, and that somewhere was a server.  
   
-What’s a server? It’s basically just a high-powered computer with no dedicated monitor. Think of it as raw computing and storage to be called upon by people anywhere in the world. In fact, I could have a server under my desk right now that hosted a website that you could visit.  
+If you don't know already, a server is basically just a high-powered computer with no dedicated monitor. Think of it as raw computing and storage to be called upon by people anywhere in the world. In fact, I could put a server under my desk right now to host a website for you to visit.  
   
 All these servers, owned by countless people and businesses, were the beginning of the cloud.  
   
@@ -31,24 +31,24 @@ All these servers, owned by countless people and businesses, were the beginning 
   
 We are nearly a quarter of the way into the 21st century, and the way we use servers has dramatically changed. Why? Because of cloud service providers like Amazon Web Services, Google Cloud Platform, and Microsoft Azure.  
   
-Remember how websites started doing more complex stuff than just storing images and text back in the ‘90s? Well, businesses are doing even more now: collecting and storing vast amounts of customer data, running call centers, gathering data, and so on. And that takes a ton of storage and compute power. In the past, companies would use their own servers to power all of this, but that approach presented two problems. First off, buying and maintaining your own servers is a painful investment early in the life of a business. Secondly, so-called “on-premise” servers create infrastuctural rigidity.  
+Remember how websites started doing more complex stuff than just storing images and text back in the ‘90s? Well, businesses are doing even more now: collecting and storing vast amounts of customer data, running call centers, developing complex artificial intelligences, and so on. And that takes a ton of storage and compute power. In the past, companies would use their own servers to power all of this, but that approach presented two problems. First off, buying and maintaining your own servers is a painful investment early in the life of a business. Secondly, so-called “on-premise” servers create infrastuctural rigidity.  
   
 Here’s what I mean: imagine you’re a store that gets fifty times more customers around Black Friday and the holiday season than the rest of the year. With on-premise servers, you have two options: you can buy enough servers to support your needs most of the year, and have everything break down on Black Friday (in which case you’d sacrifice tons of profit), or you can buy the servers to support your needs on Black Friday, then let all that extra capacity go to waste for the rest of the year.  
   
 Cloud services offer a third way: they allow businesses to provision servers that live in massive warehouses called data centers on an as-needed basis, granting companies more flexibility — or elasticity — in responding to their ever-changing computing and storage needs.  
   
-This “cloud” of servers isn’t just for big companies, though. I know individual students and researchers who pay a few bucks to access what is essentially a super computer for a few days to run models that would normally crash their own computers. In short, the cloud makes expensive resources available temporarily and at a much lower price — democratizing the computing and storage that once upon a time was only accessible to large research facilities and corporations.  
+This “cloud” of servers isn’t just for big companies. I know individual students and researchers who pay a few bucks to access what is essentially a super computer for a few days to run models that would normally crash their own computers. In short, the cloud makes expensive resources available temporarily and at a much lower price — democratizing the computing and storage that once upon a time was only accessible to large research facilities and corporations.  
 
 ## So how would I define the cloud for Rocky?
   
-If I were talking to Rocky, I could tell him about personal computers and data centers winking back and forth at one another a million times per second along underground or underwater fiberoptic cables. I could even talk about the services that allow businesses and individuals to leverage those computing resources are great distances and minimal costs.  
+If I were talking to Rocky, I could tell him about personal computers and data centers winking back and forth at one another a million times per second along underground or underwater fiberoptic cables. I could even talk about the services that allow businesses and individuals to leverage those computing resources over great distances and at minimal cost.  
 
-But defining the cloud simply by its physical apparatus or its services is a little like defining first love by a pounding heart and sweaty hands: it’s no less than those things, but it’s certainly far more.  
+But defining the cloud simply by its physical apparatus or implementation is a little like defining first love by a pounding heart and sweaty hands: it’s no less than those things, but it’s certainly far more.  
 
 The cloud is the sum of our data and computing power, humanity’s most impressive technological advances gathered and made accessible to most anyone. It is the printing press, the telephone, the satellite broadcast, all rolled into one and exploded into something new, yet familiar — a glove for a hand we never knew we had until now.  
 
-The cloud has irrevocably changed the world, and not just _the_ world, but _your_ world. It evolved the internet from a network of distinct nodes chattering back and forth into one, unimaginably powerful computer. Open your browser on a laptop built fifteen years ago or yesterday, and you can watch TV, play games, publish writing to millions of readers, explore humanity’s knowledge preserved for millennia, buy nearly anything, assuming you have the money — and if you don’t, apply for the credit to buy it anyway. We’ve evolved, too, collectively and individually, thanks to the cloud. We are globalized, more knowledgeable and connected than ever before.  
+And that means the cloud is irrevocably changing the world - and not just _the_ world, but _your_ world. It evolved the internet from a network of distinct nodes chattering back and forth into one, unimaginably powerful computer. Open your browser on a laptop built fifteen years ago or yesterday, and you can watch TV, play games, ask an AI to write an article for you, publish that article to millions of readers, explore humanity’s knowledge preserved for millennia, buy nearly anything, assuming you have the money — and if you don’t, apply for the credit to buy it anyway. We’ve evolved, too, collectively and individually, thanks to the cloud. We are globalized, more knowledgeable and connected than ever before.  
 
-In short, the cloud is the technology the future will be built upon.  
+In short, the cloud is the foundation of much of the technology you use everyday, and it is the technology upon which the future will be built.  
 
 If you want to learn more about the cloud — how it’s changed over time, how it’s shaped various industries, and where it’s going in the future — check out my explainer video on it and my follow-up conversation with Brian Ketelsen, a principal developer advocate at AWS.  
