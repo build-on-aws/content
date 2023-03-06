@@ -24,7 +24,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 | ✅ AWS experience      | 100 - Beginner                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)|
+| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- AWS CloudFormation basic understanding|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/ci-cd-iac-aws-cloudformation)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-03-02                                                      |
@@ -37,7 +37,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 ## Pre-requisites
 
 #### <b> AWS account. </b>
- Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here]().
+ Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://portal.aws.amazon.com/billing/signup#/start/email).
 
 #### <b>CodeCatalyst account. </b>
 
@@ -47,7 +47,13 @@ Follow steps in the documentation to set [Setting up CodeCatalyst](https://docs.
 #### <b>IAM Roles </b>
 We need to create CloudCatalyst service roles in our AWS account. These will be using these to provide permission to CodeCatalyst. This is one time activity only.
 
-Simply deploy a CloudFormation stack named `CodeCatalyst-IAM-roles` in any region with the template provided [here](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/cloudformation-templates/IAM_roles_CodeCatalyst.json). This will create 2 new AWS Identity and Access Management (IAM) roles - `main_branch_IAM_role` and `pr_branch_IAM_role` in your AWS account.
+Simply deploy a CloudFormation stack. You can find detailed instuctions on how to deploy this stack using AWS Console [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html#GettingStarted.Walkthrough.createstack).
+
+- Stack name `CodeCatalyst-IAM-roles` 
+- Region: any (preferred `us-west-2`)
+- Download the template provided [here](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/IAM_roles_CodeCatalyst.json) and upload this in CloudFormation console -> Create new stack -> Template -> Upload a template.
+
+This will create 2 new AWS Identity and Access Management (IAM) roles - `main_branch_IAM_role` and `pr_branch_IAM_role` in your AWS account.
 
 > Please note, the `main_branch_IAM_role` provides full access to AWS resources in EC2 and CloudFormation services, as those will be used by sample CloudFormation template mentioned in this blog. Please use this role carefully and delete it when not required.
 
@@ -79,19 +85,20 @@ Follow same steps for the `pr_branch_IAM_role`.
 #### <b>Project </b>
 Next, we create a new Project inside the space. We can have multiple projects inside a space.
 
-To create a project click on the `Create Project` button, select `Start from scratch`, and give your project a name - we will use `CloudFormationCodeCatalyst` `ThreeTierApp`
+To create a project click on the `Create Project` button, select `Start from scratch`, and give your project a name - we will use `ThreeTierApp`
 
 ![CodeCatalyst Create Project dialog](images/cc_create_project.png)
 </br>
  
 #### <b>Repository</b> 
-Now we create a new repository for our code - in our case the CloudFormation template and other resources. Click `Code` in the left-side navigation menu, then select `Source repositories`, `Add repository` and choose `Create repository`. Set a repository name ( we will use `3-tier-app` in this tutorial), add a description and any files for the .gitignore file :
+Now we create a new repository for our code - in our case the CloudFormation template and other resources. Click `Code` in the left-side navigation menu, then select `Source repositories`, `Add repository` and choose `Create repository`. Set a repository name ( we will use `3-tier-app` in this tutorial), add a description and `none` for the .gitignore file :
 
 ![CodeCatalyst Create Repository dialog](images/cc_create_repository.png)
 </br>
  
 #### <b>Environment </b>
-Lastly, we need to setup the AWS environment where our CloudFormation stack will be deployed by automated workflows. 
+Lastly, we need to setup the AWS environment where our CloudFormation stack will be deployed by automated workflows. This is my non-production environment where my sample CloudFormation template will be deployed.   
+
 From the left navigation panel, select `CI/CD`, `Environments` and click on `Create Environment`. In the Environment details enter following :
 - Environment name : `PreProdEnv`
 - Environment type : `Non-production`
@@ -112,15 +119,15 @@ To work on our infrastructure as code with CloudFormation, we need a <b>Dev Envi
   - GoLand
   - PyCharm Professional
 
-For this blog, we will be using AWS Cloud9 for our development environment. 
+For this blog, we will be using `AWS Cloud9` for our development environment. 
 
 From the left navigation panel, select `Code`, `Dev Environments`, and click on `Create Dev Environment`. In the `Create dev environment and open with AWS Cloud9` dialog box select following : 
 - Repository : `Clone a repository` 
 - Repository : Select the repo that you want to clone. We created a repo `3-tier-app1` above, so select same. 
-- Branch : `Work in existing branch` <s>or Work in new branch.</s> 
+- Branch : `Work in existing branch`
 - Alias : `bootstrap`
 
-By default, it will launch a Small (2vCPU, 4 GB RAM), 16 Gib storage with 15minutes timeout. You can optionally configure the development environment.
+By default, it will launch a Small (2vCPU, 4 GB RAM), 16 Gib storage with 15minutes timeout.
 
 ![CodeCatalyst Create Dev Environment IDE dialog](images/cc_create_dev_environment_cloud9.png) 
 
@@ -135,13 +142,13 @@ On the welcome screen, you can modify the Dev Environment Settings if you want.
 </br>
 </br>
 
-You will find an empty repository `3-tier-app`, with a readme.md, devfile.yaml and some hidden folders. The `devfile.yaml`, contains the definition to build your application libraries and toolchain. 
+You will find an empty repository `3-tier-app`, with a readme.md, devfile.yaml and some hidden folders. The `devfile.yaml`, contains the definition to build your application libraries and toolchain. You can ignore it for purpose of this tutorial.
 
 ### Sample CloudFormation template
 
 You can use your own CloudFormation template, or simply use one of the sample templates. 
 
-For this blog, I am using the a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer from. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
+For this blog, I am using the a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer from. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
 
 >In real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation templates. However, to keep your first deployment with CodeCatalyst simple, lets deploy everything in a single template.
 
@@ -150,14 +157,14 @@ Let's ensure we commit our changes to our git repo using the following commands:
 # go to the root folder of the repo and run following
 
 $ cd 3-tier-app/
-$ wget https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json
+$ wget https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json
 
 # check git status
 $ git status
 
 # add changed files, commit and push to the git repo
 $ git add . -A
-$ git commit -m "Adding main branch workflow"
+$ git commit -m "Uploading first CloudFormation template"
 $ git push
 ```
 
@@ -192,13 +199,13 @@ To https://git.us-west-2.codecatalyst.aws/v1/CloudFormation-CodeCatalyst/ThreeTi
 ```
 </br>
 
-You can verify in the CodeCatalyst console if the CloudFormation template is successfully updated in the repo.
+You can verify if the CloudFormation template is successfully updated in the repo - in the CodeCatalyst console, click `Code` in the left-side navigation menu, then select `Source repositories`. A new file `VPC_AutoScaling_With_Public_IPs.json` should be added to the repo.
 
 </br>
 
 ## Setting up workflows to deploy non-prod environment
 
-Next step is to created automated workflows. The intention is whenever a commit is push to the main branch, trigger automated actions. In our case, we are defining only one action - deploy the updated CloudFormation template and/or update the stack.
+Next step is to create automated workflows. The intention is whenever a commit is pushed to the main branch, trigger automated actions. In our case, we are defining only one action - deploy the updated CloudFormation template and/or update the stack.
 
 Now you have 2 options for creating a workflow : 
 1. Create Workflow using Code Catalyst Console in Visual drag-drop method [navigate to CI/CD -> Workflows]
@@ -315,10 +322,10 @@ Lets say you now want to make changes to the infrastructure. For example, we wan
 
 As a **best practice**, you should never make changes directly to the main branch. We should always create a separate branch on which changes will be done, and once these changes are approved by reviewers they will be merged with main branch. There are many git branching strategies that you can explore and use for your specific org/team needs. 
 
-For this blog, I am keeping it simple. I am creating a Pull Request (PR) from the main branch, anytime I need to make changes. Also, remember this is my non-prod environment. You might have different strategies and more tests for your production environment deployment.
+For this blog, I am keeping it simple. Anytime I need to make changes, I am creating a new branch. I then create a Pull Request (PR) to merge the new branch with main branch. As shown in the image, anytime a PR is opened, CodeCatalyst will automatically run PR workflow to create a changeset. Once a reviewer approves the PR merge, then `main_workflow` we created earlier will merge the code and deploy changes to `PreProdEnv`, my non-prod environment. You might have different branching strategies and more tests for your production environment deployment.
 
 
-![Branches and workflows used in the blog](images/branching_workflows_blog_sequence.png)"Branches and workflows used in the blog"
+![Branches and workflows used in the blog](images/branching_workflows_blog_sequence.png)
 
 We are going to first write a PR workflow, so that anytime a new Pull request is created CodeCatalyst will first run this workflow. In this PR workflow, we are **NOT deploying** any changes to the PreProdEnv. When a PR is opened or revised, we are simply creating a CloudFormation changeset. 
 
@@ -408,11 +415,14 @@ Switched to a new branch 'test-pr-workflow'
 
 ### Make changes to Cloudformation template
 
-- If you are using your own CloudFormation template, make any changes to the template to create a change set.
+- If you are using **your own CloudFormation template**, make any changes to the template to create a change set.
 
-- For the sample CloudFormation template used in this blog,
-  - simply replace its content with [this already modified template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/cloudformation-templates/VPC_AutoScaling_With_Public_IPs-3-subnets.json). Make sure the name of template file is same(*VPC_AutoScaling_With_Public_IPs.json*), as workflow has filename mentioned in it, or
-  - you can make following changes to the template :
+- **For the sample CloudFormation template** used in this blog, you have 2 options : 
+  - simply **replace its content** with [this already modified template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/VPC_AutoScaling_With_Public_IPs-3-subnets.json). Make sure the name of template file is same(*VPC_AutoScaling_With_Public_IPs.json*), as workflow has filename mentioned in it, 
+  
+      OR
+
+  - you can **make following changes** to the template :
 
     Add following JSON code to the sample CloudFormation template under `Resources` section. 
 
@@ -455,7 +465,6 @@ Switched to a new branch 'test-pr-workflow'
             "Public2" : { "CIDR" : "10.0.1.0/24" },
             "Public3" : { "CIDR" : "10.0.2.0/24" } 
           },
-            ...
     ```
 
     ```JSON
@@ -464,7 +473,6 @@ Switched to a new branch 'test-pr-workflow'
           "DependsOn" : "PublicRoute",
           "Properties" : {
             "VPCZoneIdentifier" : [{ "Ref" : "PublicSubnet1" }, { "Ref" : "PublicSubnet2" },  { "Ref" : "PublicSubnet3" }],
-            ...
     ```
     ```JSON
         "PublicApplicationLoadBalancer" : {
@@ -525,33 +533,45 @@ In the CodeCatalyst Console, navigate to Code -> Repository. You can see the 2 b
 ## Create Pull Request and merge code
 Now that we have all changes in the branch named `test-pr-workflow`, you can ask others to review the changes by creating a pull request. 
 
-Perform following steps to create pull request to compare the changes in the test branch with the main branch. Goto Code -> Pull requests in the CodeCatalyst console. Click on `Create pull request` and enter following details
+Perform following steps to create pull request to compare the changes in the test branch with the main branch. Goto Code -> Pull requests in the CodeCatalyst console. Click on `Create pull request` and enter following details:
+
+- Source repository : `3-tier-app`
+- Source branch : `test-pr-workflow`
+- Destination branch : `main`
+- Pull request title: `Merge new third subnet`
+- Pull request description: `New third subnet created and added to VPC, RouteTable, NACL, LoadBalancer, ASG`
 
 ![CodeCatalyst Create Pull request Dialog](images/cc_create_pull_request.png)
 </br>
  
 You can optionally add reviewers to approve/deny the merge.
 
-Note, that our source branch is `test-pr-workflow` and our destination for merge is the main branch. Once this PR is created, it will trigger the `PR_Branch_Workflow` that will create a CloudFormation changeset (and not make any deployments!). You can goto CloudFormation Console, Changeset and verify the changes proposed by the new pull request. 
+Note, that our source branch is `test-pr-workflow` and our destination for merge is the `main` branch. Once this PR is created, it will trigger the `PR_Branch_Workflow` that will create a CloudFormation changeset (and not make any deployments!). 
+
+>To see the active run for `PR_Branch_Workflow`, in the CodeCatalyst console, navigate to the `CI/CD` -> `Workflows` page and ensure you select the `test-pr-workflow` branch. By default, the Workflows page always shows the `main` branch. You have to switch branches to see the active workflow in other branches.
+
+
+You can goto CloudFormation Console, Changeset and verify the changes proposed by the new pull request. 
 
 ![Console CloudFormation Changeset ](images/console_cfn_change_set.png)
 </br>
 
 A reviewer will confirm the changes and then click on `Merge` 
 
-If there are conflicts, or if the merge can't be completed, the merge button is inactive, and a `Not mergeable` label is displayed.
+If there are conflicts, or if the merge can't be completed, the merge button is inactive, and a `Not mergeable` label is displayed.  In that case, you must obtain approval from any required approvers, resolve conflicts locally if necessary, and push those changes before you can merge.
 
 ![CodeCatalyst Mergeable request all green](images/cc_mergeable_request.png)
  
 </br>
 At this point you have 2 options for merge strategies. :
 
-1. **Fast forward merge** - Merges the branches and moves the destination branch pointer to the tip of the source branch. This is the default merge strategy in Git.
+1. **Fast forward merge** (select this option) - Merges the branches and moves the destination branch pointer to the tip of the source branch. This is the default merge strategy in Git. Select this option for this blog. 
 </br>
 
 2. **Squash and merge** - Combines all commits from the source branch into single merge commit in the destination branch.
 
-You can optionally, delete the source branch after merging this pull request. In our case the source branch is `test-pr-workflow` and I am deleting this branch to keep my branching structure clean and simple. 
+You can optionally, delete the source branch after merging this pull request. 
+In our case, the source branch is `test-pr-workflow` and I am deleting this branch to keep my branching structure clean and simple. 
 
 ![CodeCatalyst Merge Pull request](images/cc_merge_pull_request.png)
 </br>
