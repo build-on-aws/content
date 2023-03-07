@@ -62,7 +62,7 @@ For this example you will need:
 
 The [application repository](https://GitHub.com/build-on-aws/continuous-integration-weather-app) is on GitHub. We will import the repository to GitLab by [forking the repository](https://docs.GitHub.com/en/get-started/quickstart/fork-a-repo) to your GitHub account. Choose **New Project** to get started.
 
-> Caution: Use the public Gitlab service to ensure the docker:dind service for building and testing containers is available.
+> Caution: Use the public GitLab service to ensure the docker:dind service for building and testing containers is available.
 
 | ![Create a new GitLab project](./images/0%20-%20gitlab10k.png) |
 |-|
