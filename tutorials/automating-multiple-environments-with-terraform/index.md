@@ -1184,3 +1184,7 @@ We have now reached the end of this tutorial, you can either keep the current se
       }
       ```
 1. Run `cd _bootstrap && terraform destroy` - this will error as you are removing the S3 bucket and the DynamoDB table during the run and it tries to save the state afterwards, but the resources no longer exists.
+
+## Conclusion
+
+Congratulations! You've now set up a multi-AWS environment CI/CD pipeline using Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
