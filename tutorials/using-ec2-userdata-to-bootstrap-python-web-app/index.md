@@ -1,9 +1,5 @@
 ---
-<<<<<<< HEAD
 title: "Bootstrapping an Amazon EC2 instance using user-data to run a Python web app"
-=======
-title: "Bootstrapping an EC2 instance using user-data to run a Python web app"
->>>>>>> 5e6aad1 (Another WIP)
 description: "Installing Nginx, uWSGI, and Python on an EC2 instance when it boots the first time using user-data."
 tags:
     - aws
@@ -14,11 +10,7 @@ authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-01-03
 ---
-<<<<<<< HEAD
 Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when the instance start up. You can automate creating all the infrastructure and scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots to reduce errors while setting up Nginx and uWSGI. We will be using a bash script to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. We will cover how to:
-=======
-Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when the instance start up. You can automate creating all the infrastructure and scripts using [CDK](https://docs.aws.amazon.com/cdk/api/v2/) to configure your instance when it first boots to reduce errors while setting up Nginx and uWSGI. We will be using a bash script to install and configure Nginx and uWSGI, set up a systemd service for uWSGI, and copy our application using CDK. We will cover how to:
->>>>>>> 5e6aad1 (Another WIP)
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a security group with inbound access, and an IAM instance profile.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
@@ -33,12 +25,9 @@ Manually setting up and configuring the packages required to run a Python web ap
 | ⏱ Time to complete    | 30 minutes                                                      |
 | 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/) eligible                                               |
 | 🧩 Prerequisites       | - [AWS account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws-preview.aka.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
-<<<<<<< HEAD
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/sample-python-web-app)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-02-22                                                      |
-=======
->>>>>>> 5e6aad1 (Another WIP)
 
 | ToC |
 |-----|
@@ -212,15 +201,7 @@ We're now ready to create the EC2 instance using a pre-built [Amazon Machine Ima
 
 We have now defined our AWS CDK stack to create an EC2 instance, a security group with inbound access rules, and an IAM role, attached to the EC2 instance as an IAM instance profile. Before deploying the stack, we still need to install the packages on the host OS to run your application, and also copy our sample application code to the instance.
 
-<<<<<<< HEAD
 > #### ✅ ✅ ✅  **Checkpoint 1**  ✅ ✅ ✅
-=======
-<br>
-
->  ## ✅ ✅ ✅  **Checkpoint 1**  ✅ ✅ ✅
-
-<br>
->>>>>>> 5e6aad1 (Another WIP)
 
 Your `lib/ec2-cdk-stack.ts` file should now look like this:
 ```typescript
@@ -397,16 +378,8 @@ These three outputs will show you the following:
 
 We're now ready to deploy the stack.
 
-<<<<<<< HEAD
 > #### ✅ ✅ ✅  **Checkpoint 2**  ✅ ✅ ✅
 
-=======
-<br>
-
->  ## ✅ ✅ ✅  **Checkpoint 2**  ✅ ✅ ✅
-
-<br>
->>>>>>> 5e6aad1 (Another WIP)
 We have now completed all code changes to our CDK app, and the `lib/ec2-cdk-stack.ts` file should look like this:
 
 ```typescript
@@ -666,8 +639,4 @@ When the output shows `Ec2CdkStack: destroyed`, your resources have been removed
 
 ## Conclusion
 
-<<<<<<< HEAD
 Congratulations! You have finished the Build a Web Application on Amazon EC2 tutorial using CDK to provision all infrastructure, and configured your EC2 instance to install and configure OS packages to run the sample Python web app. If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
-=======
-Congratulations! You have finished the Build a Web Application on Amazon EC2 tutorial using CDK to provision all infrastructure, and configured your EC2 instance to install and configure OS packages to run the sample Python web app.
->>>>>>> 5e6aad1 (Another WIP)
