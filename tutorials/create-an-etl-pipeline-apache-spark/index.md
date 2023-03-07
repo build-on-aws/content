@@ -53,7 +53,7 @@ To implement this data pipeline, we will use an EMR cluster with Spark as the di
 
 We need to build a data pipeline such that it will take this new sales file from the S3 bucket, process it with required transformations using Amazon EMR, and save the cleaned and transformed data into the target S3 bucket, which will be used later on for querying using Amazon Athena. 
 
-![Img Architecture](images/Architecture.png)
+![Pipeline Architecture](images/Architecture.png)
 
 ## Implementation 
 
