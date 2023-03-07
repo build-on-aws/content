@@ -297,7 +297,7 @@ While you could do this with pull requests, it will add quite a bit of time for 
 
 ### Set up permission for Terraform in environment accounts
 
-Next, we need to create the IAM roles and policies in the new accounts, and update our existing IAM roles with additional policies to allow them to assume these new roles in the environment accounts. First, we need to define additional `AWS` providers to allow Terraform to create infrastructure in our new accounts. Terraform provider [alias](https://developer.hashicorp.com/terraform/language/providers/configuration#alias-multiple-provider-configurations) allow you to configure multiple providers, with different configurations. In our case, we will create the default one to use our Main account, and then set up 3 additional ones, each for `dev`, `test`, and `prod`, and use IAM role switching to access them. We will use the IAM role created as part of our new accounts to do this. Add the following to the `providers.tf` file - since we created the new AWS accounts using Terraform, we can reference the account IDs via those resources:
+Next, we need to create the IAM roles and policies in the new accounts, and update our existing IAM roles with additional policies to allow them to assume these new roles in the environment accounts. First, we need to define additional `AWS` providers to allow Terraform to create infrastructure in our new accounts. Terraform provider [aliases](https://developer.hashicorp.com/terraform/language/providers/configuration#alias-multiple-provider-configurations) allow you to configure multiple providers with different configurations. In our case, we will create the default provider to use our Main account, and then set up 3 additional ones for `dev`, `test`, and `prod`, and use IAM role switching to access them. We will use the IAM role created as part of our new accounts to do this. Add the following to the `providers.tf` file - since we created the new AWS accounts using Terraform, we can reference the account IDs via those resources:
 
 ```bash
 provider "aws" {
@@ -331,9 +331,9 @@ provider "aws" {
 Now that we can access the environment accounts with these new providers, we need to also create IAM roles for the `main` and PR branches inside each account for our workflows to use, as well as a read-only one for all users. To add these roles in each account, run the following commands:
 
 ```bash
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/_bootstrap/env_accounts_main_branch_iam_role.tf
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/_bootstrap/env_accounts_pr_branch_iam_role.tf
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/_bootstrap/env_accounts_users_read_only_iam_role.tf
+wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform/main/env_accounts_main_branch_iam_role.tf
+wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform/main/env_accounts_pr_branch_iam_role.tf
+wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform/main/env_accounts_users_read_only_iam_role.tf
 ```
 
 The contents of each file are:
@@ -620,7 +620,7 @@ We have everything in place now to start adding infrastructure to our environmen
 In your terminal, clone the repo - type `git clone `, and then paste the URL from the dialog (yours will be different based on your user alias, Space, and Project name):
 
 ```bash
-cd .. # We were still in the main-infra directory previously
+cd .. # We were still in the main-infra directory previously - replace the repo URL with your one
 git clone https://cobusbernard@git.us-west-2.codecatalyst.aws/v1/Cobus-AWS/TerraformMultiAccount/environments-infra
 ```
 
@@ -747,7 +747,7 @@ provider "aws" {
 }
 ```
 
-Before we can test that everything is working, we need to cover Terraform Worspaces, and how we will be using them.
+Before we can test that everything is working, we need to cover Terraform Workspaces, and how we will be using them.
 
 ### Workspace configuration
 
@@ -826,10 +826,13 @@ This would use the `prod` environment's values on the `dev` one. Luckily, there 
 
 ### Makefile for commands
 
-We will be creating a [Makefile](https://opensource.com/article/18/8/what-how-makefile) to wrap our commands and provide a single command for `init`, `plan`, and `apply`. Create a `Makefile` (no file extension) in the root of the project with the following (don't worry, we will cover it in detail below):
+We will be creating a [Makefile](https://opensource.com/article/18/8/what-how-makefile) to wrap our commands and provide a single command for `init`, `plan`, and `apply`. Create a `Makefile` (no file extension) in the root of the project with the following command:
 
 ```bash
-wget 
+wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform-environment-infra/main/Makefile
+```
+
+Our `Makefile` should have the following content - please note that tabs and not spaces are required for indentation:
 
 ```bash
 .PHONY: default validate plan apply destroy
@@ -942,7 +945,45 @@ This now allows us to run `terraform plan` with the correct Workspace and `.tfva
 ENV=dev make plan
 ```
 
-It is recommended to test the `Makefile` now by running `ENV=dev make plan` - if you get an error, please ensure that you use tabs to indent the lines, not spaces. We are now ready to set up our workflows for our `main` and PR branches to test and apply changes to our infrastructure.
+It is recommended to test the `Makefile` now by running `ENV=dev make plan` - if you get an error, please ensure that you use tabs to indent the lines, not spaces. We are now ready to set up our workflows for our `main` and PR branches to test and apply changes to our infrastructure. The output should have the following:
+
+```bash
+$ ENV=dev make plan
+
+Initializing Terraform ...
+Initializing modules...
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using previously-installed hashicorp/aws v4.57.0
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+Creating the dev workspace ...
+Workspace "dev" already exists
+make: [plan] Error 1 (ignored)
+Switching to the [dev] workspace ...
+```
+
+For subsequent runs, you will notice there is an error in the output highlighted in red, this is normal due to how we set up our `Makefile` to always run the `terraform workspace new` command with each run, and can be safely ignored.
+
+```bash
+# Example of error output
+
+Creating the dev workspace ...
+Workspace "dev" already exists
+make: [plan] Error 1 (ignored)
+Switching to the [dev] workspace ...
+```
 
 ### Workflows
 
@@ -951,8 +992,8 @@ Similar to before with the `Main-Infra` repository, we will be creating a workfl
 ```bash
 mkdir -p .codecatalyst/workflows
 
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform-environment-infra/.codecatalyst/workflows/main_branch.yml
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform-environment-infra/.codecatalyst/workflows/pr_branch.yml
+wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform-environment-infra/main/.codecatalyst/workflows/main_branch.yml
+wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform-environment-infra/main/.codecatalyst/workflows/pr_branch.yml
 ```
 
 Here is the content of each file:
@@ -1053,7 +1094,7 @@ You can now navigate to `CI/CD` -> `Workflows`, and then select `All repositorie
 
 ## Using our workflow
 
-Now that we have everything set up, let's create a VPC in each of our accounts. First, let's create a branch to work on and use our PR workflow to test. In the `environments-infra` repo, run the following:
+Now that we have everything set up, let's create a VPC in each of our environment accounts. First, let's create a branch to work on and use our PR workflow to test. In the `environments-infra` repo, run the following:
 
 ```bash
 git checkout -b add-vpc
