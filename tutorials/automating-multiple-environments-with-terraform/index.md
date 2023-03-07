@@ -340,8 +340,8 @@ The contents of each file are:
 
 * env_accounts_main_branch_iam_role.tf
     ```bash
-    # Policy allowing the main branch in our repo to assume the role.
-    data "aws_iam_policy_document" "env_accounts_main_branch_assume_role_policy" {
+    # Policy allowing the PR branches in our repo to assume the role from each environment account.
+    data "aws_iam_policy_document" "env_accounts_pr_branch_assume_role_policy" {
       statement {
         actions = ["sts:AssumeRole"]
         effect  = "Allow"
@@ -354,63 +354,95 @@ The contents of each file are:
       }
     }
 
-
     # Dev Account IAM Roles
     # =====================
 
-    # Role to allow the main branch to use this dev AWS account
-    resource "aws_iam_role" "dev_main_branch" {
+    # Role to allow the PR branch to use this dev AWS account
+    resource "aws_iam_role" "dev_pr_branch" {
       provider           = aws.dev
-      name               = "Main-Branch-Infrastructure"
-      assume_role_policy = data.aws_iam_policy_document.env_accounts_main_branch_assume_role_policy.json
+      name               = "PR-Branch-Infrastructure"
+      assume_role_policy = data.aws_iam_policy_document.env_accounts_pr_branch_assume_role_policy.json
     }
 
-    # Allow role admin rights in the account to create all infra
-    resource "aws_iam_role_policy_attachment" "dev_admin_policy_main_branch" {
+    # Allow role read-only rights in the account to run "terraform plan"
+    resource "aws_iam_role_policy_attachment" "dev_readonly_policy_pr_branch" {
       provider   = aws.dev
-      role       = aws_iam_role.dev_main_branch.name
-      policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+      role       = aws_iam_role.dev_pr_branch.name
+      policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
     }
 
 
     # Test Account IAM Roles
     # ======================
 
-    # Role to allow the main branch to use this test AWS account
-    resource "aws_iam_role" "test_main_branch" {
+    # Role to allow the PR branch to use this test AWS account
+    resource "aws_iam_role" "test_pr_branch" {
       provider           = aws.test
-      name               = "Main-Branch-Infrastructure"
-      assume_role_policy = data.aws_iam_policy_document.env_accounts_main_branch_assume_role_policy.json
+      name               = "PR-Branch-Infrastructure"
+      assume_role_policy = data.aws_iam_policy_document.env_accounts_pr_branch_assume_role_policy.json
     }
 
-    # Allow role admin rights in the account to create all infra
-    resource "aws_iam_role_policy_attachment" "test_admin_policy_main_branch" {
+    # Allow role read-only rights in the account to run "terraform plan"
+    resource "aws_iam_role_policy_attachment" "test_readonly_policy_pr_branch" {
       provider   = aws.test
-      role       = aws_iam_role.test_main_branch.name
-      policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+      role       = aws_iam_role.test_pr_branch.name
+      policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
     }
 
 
     # Prod Account IAM Roles
-    # =====================
+    # ======================
 
-    # Role to allow the main branch to use this prod AWS account
-    resource "aws_iam_role" "prod_main_branch" {
+    # Role to allow the PR branch to use this prod AWS account
+    resource "aws_iam_role" "prod_pr_branch" {
       provider           = aws.prod
-      name               = "Main-Branch-Infrastructure"
-      assume_role_policy = data.aws_iam_policy_document.env_accounts_main_branch_assume_role_policy.json
+      name               = "PR-Branch-Infrastructure"
+      assume_role_policy = data.aws_iam_policy_document.env_accounts_pr_branch_assume_role_policy.json
     }
 
-    # Allow role admin rights in the account to create all infra
-    resource "aws_iam_role_policy_attachment" "prod_admin_policy_main_branch" {
+    # Allow role read-only rights in the account to run "terraform plan"
+    resource "aws_iam_role_policy_attachment" "prod_readonly_policy_pr_branch" {
       provider   = aws.prod
-      role       = aws_iam_role.prod_main_branch.name
-      policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+      role       = aws_iam_role.prod_pr_branch.name
+      policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+    }
+
+    # Adding permission to the PR-Branch role in the Main account to assume the 
+    # PR-Branch role in each environment account.
+    data "aws_iam_policy_document" "pr_branch_assume_role_in_environment_account_policy" {
+      statement {
+        actions = ["sts:AssumeRole"]
+        effect  = "Allow"
+        resources = [
+          aws_iam_role.dev_pr_branch.arn,
+          aws_iam_role.test_pr_branch.arn,
+          aws_iam_role.prod_pr_branch.arn
+        ]
+      }
+    }
+
+    # Since the IAM role was created as part of the bootstrapping, we need to 
+    # reference it using a data source to add the additional policy to allow
+    # role switching.
+    data "aws_iam_role" "pr_branch" {
+      name = "PR-Branch-Infrastructure"
+    }
+
+    resource "aws_iam_policy" "pr_branch_role_assume_environment_accounts_roles" {
+      name        = "PR-Branch-Assume-Environment-Account-Role"
+      path        = "/"
+      description = "Policy allowing the PR branch role to assume the equivalent role in the environment accounts."
+      policy      = data.aws_iam_policy_document.pr_branch_assume_role_in_environment_account_policy.json
+    }
+
+    resource "aws_iam_role_policy_attachment" "pr_branch_role_assume_environment_accounts_roles" {
+      role       = data.aws_iam_role.pr_branch.name
+      policy_arn = aws_iam_policy.pr_branch_role_assume_environment_accounts_roles.arn
     }
     ```
 * env_accounts_pr_branch_iam_role.tf
     ```bash
-    # Policy allowing the PR branches in our repo to assume the role. 
+    # Policy allowing the PR branches in our repo to assume the role from each environment account. 
     data "aws_iam_policy_document" "env_accounts_pr_branch_assume_role_policy" {
       statement {
         actions = ["sts:AssumeRole"]
@@ -919,9 +951,87 @@ Similar to before with the `Main-Infra` repository, we will be creating a workfl
 ```bash
 mkdir -p .codecatalyst/workflows
 
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform/.codecatalyst/workflows/main_branch.yml
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform/.codecatalyst/workflows/pr_branch.yml
+wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform-environment-infra/.codecatalyst/workflows/main_branch.yml
+wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform-environment-infra/.codecatalyst/workflows/pr_branch.yml
 ```
+
+Here is the content of each file:
+
+* main_branch.yml
+    ```bash
+    Name: Environment-Account-Main-Branch
+    SchemaVersion: "1.0"
+
+    Triggers:
+      - Type: Push
+        Branches:
+          - main
+
+    Actions:
+      Terraform-Main-Branch-Apply:
+        Identifier: aws/build@v1
+        Inputs:
+          Sources:
+            - WorkflowSource
+          Variables:
+            - Name: TF_VAR_tf_caller
+              Value: Main-Branch-Infrastructure
+        Environment:
+          Connections:
+            - Role: Main-Branch-Infrastructure
+              Name: "123456789012" # Replace with your AWS Account ID here.
+          Name: MainAccount
+        Configuration:
+          Steps:
+            - Run: export TF_VERSION=1.3.7 && wget -O terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
+            - Run: unzip terraform.zip && rm terraform.zip && mv terraform /usr/bin/terraform && chmod +x /usr/bin/terraform
+            # We will run plan for each environment before we run apply as mistakes 
+            # can still happen, and we don't want plan for test or prod to fail
+            # after we applied changes to dev.
+            - Run: ENV=dev make plan
+            - Run: ENV=test make plan
+            - Run: ENV=prod make plan
+            - Run: ENV=dev make apply
+            - Run: ENV=test make apply
+            - Run: ENV=prod make apply
+        Compute:
+          Type: EC2
+    ```
+ * pr_branch.yml
+    ```bash
+    Name: Environment-Account-PR-Branch
+    SchemaVersion: "1.0"
+
+    Triggers:
+      - Type: PULLREQUEST
+        Events:
+          - OPEN
+          - REVISION
+
+    Actions:
+      Terraform-PR-Branch-Plan:
+        Identifier: aws/build@v1
+        Inputs:
+          Sources:
+            - WorkflowSource
+          Variables:
+            - Name: TF_VAR_tf_caller
+              Value: PR-Branch-Infrastructure
+        Environment:
+          Connections:
+            - Role: PR-Branch-Infrastructure
+              Name: "123456789012" # Replace with your AWS Account ID here.
+          Name: MainAccount
+        Configuration: 
+          Steps:
+            - Run: export TF_VERSION=1.3.7 && wget -O terraform.zip "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
+            - Run: unzip terraform.zip && rm terraform.zip && mv terraform /usr/bin/terraform && chmod +x /usr/bin/terraform
+            - Run: ENV=dev make plan
+            - Run: ENV=test make plan
+            - Run: ENV=prod make plan
+        Compute:
+          Type: EC2
+    ```   
 
 To use these workflows, please update the AWS Account Id from `123456789012` to your one in both of these files.
 
@@ -981,20 +1091,20 @@ variable "public_subnet_ranges" {
 Lastly, we need to set the values for the two new variables in each of the environment `tfvars` files. We will be using different IP ranges for each accounts to show the difference, but it is also good practice if you intent to set up [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) between them at some point - you cannot have overlapping IP ranges when using peering. Add the following to each of the `.tfvars` files - the content is split with a tab per file below:
 
 * dev.tfvars
-  ```bash
-  vpc_cidr="10.0.0.0/16"
-  public_subnet_ranges=[ "10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24"]
-  ```
+    ```bash
+    vpc_cidr="10.0.0.0/16"
+    public_subnet_ranges=[ "10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24"]
+    ```
 * test.tfvars
-  ```bash
-  vpc_cidr="10.30.0.0/16"
-  public_subnet_ranges=[ "10.30.10.0/24", "10.30.11.0/24", "10.30.12.0/24"]
-  ```
+    ```bash
+    vpc_cidr="10.30.0.0/16"
+    public_subnet_ranges=[ "10.30.10.0/24", "10.30.11.0/24", "10.30.12.0/24"]
+    ```
 * prod.tfvars
-  ```bash
-  vpc_cidr="10.50.0.0/16"
-  public_subnet_ranges=[ "10.50.10.0/24", "10.50.11.0/24", "10.50.12.0/24"]
-  ```
+    ```bash
+    vpc_cidr="10.50.0.0/16"
+    public_subnet_ranges=[ "10.50.10.0/24", "10.50.11.0/24", "10.50.12.0/24"]
+    ```
 
 We will now commit the VPC changes to our branch, and then create a new PR:
 
@@ -1004,4 +1114,7 @@ git commit -m "Add new VPC"
 git push --set-upstream origin add-vpc
 ```
 
-Navigate to `Code` -> `Source repositories`, click on `environments-infra`, and then on the `Actions` dropdown, selecting `Create pull request`. Set the `Source branch` to `add-vpc`, and the `Destination branch` to `main`, and add a descriptive `Pull request title` and `Pull request description`.
+Navigate to `Code` -> `Source repositories`, click on `environments-infra`, and then on the `Actions` dropdown, selecting `Create pull request`. Set the `Source branch` to `add-vpc`, and the `Destination branch` to `main`, and add a descriptive `Pull request title` and `Pull request description`. Once created, navigate to `CI/CD`, `Workflow`, and select `All repositories` in the first dropdown. You should see the workflow for `Environment-Account-PR-Branch` for the `add-vpc` branch running under `Recent runs`. You can click on it to watch the progress. Once all the steps have completed successfully, expand the `ENV=dev make plan` step to view the output of the `plan` step - it should show you the proposed infrastructure to create the VPC. Similarly, you will see the `test` and `prod` infrastructure in each of their respective steps.
+
+Once you have reviewed the changes, merge the PR by navigating to `Code`, `Pull requests`, and then clicking on the PR. Finally, click the `Merge` button, and accept the merg. You can now navigate to `CI/CD`, `Workflows`, and again select `All repositories` from the first dropdown, then select the currently running workflow for the `Environment-Account-Main-Branch` on the `main` branch under `Recent runs`. It should complete successfully.
+
