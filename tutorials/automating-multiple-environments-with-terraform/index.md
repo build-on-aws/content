@@ -1157,5 +1157,30 @@ git push --set-upstream origin add-vpc
 
 Navigate to `Code` -> `Source repositories`, click on `environments-infra`, and then on the `Actions` dropdown, selecting `Create pull request`. Set the `Source branch` to `add-vpc`, and the `Destination branch` to `main`, and add a descriptive `Pull request title` and `Pull request description`. Once created, navigate to `CI/CD`, `Workflow`, and select `All repositories` in the first dropdown. You should see the workflow for `Environment-Account-PR-Branch` for the `add-vpc` branch running under `Recent runs`. You can click on it to watch the progress. Once all the steps have completed successfully, expand the `ENV=dev make plan` step to view the output of the `plan` step - it should show you the proposed infrastructure to create the VPC. Similarly, you will see the `test` and `prod` infrastructure in each of their respective steps.
 
-Once you have reviewed the changes, merge the PR by navigating to `Code`, `Pull requests`, and then clicking on the PR. Finally, click the `Merge` button, and accept the merg. You can now navigate to `CI/CD`, `Workflows`, and again select `All repositories` from the first dropdown, then select the currently running workflow for the `Environment-Account-Main-Branch` on the `main` branch under `Recent runs`. It should complete successfully.
+![CodeCatalyst workflow view showing the details of the ENV=dev make plan output with resources to create the VPC](./images/tf_plan_output_multiple_accounts.png)
 
+Once you have reviewed the changes, merge the PR by navigating to `Code`, `Pull requests`, and then clicking on the PR. Finally, click the `Merge` button, and accept the merge. You can now navigate to `CI/CD`, `Workflows`, and again select `All repositories` from the first dropdown, then select the currently running workflow for the `Environment-Account-Main-Branch` on the `main` branch under `Recent runs`. It should complete successfully, and create a VPC in each account.
+
+## Clean up
+
+We have now reached the end of this tutorial, you can either keep the current setup and expand on it, or delete all the resources created if you are not. To clean up your environment, we will follow the following steps:
+
+1. In `environments-infra`, run `git checkout main` and `git pull` to ensure you have the latest version, then:
+    1. `ENV=prod make destroy` and confirm
+    1. `ENV=test make destroy` and confirm
+    1. `ENV=dev make destroy` and confirm
+1. In `main-infra`, run `git checkout main` and `git pull` to ensure you have the latest version, then:
+    1. Run `terraform destroy` and confirm
+    1. Edit `_bootstrap/state_file_resources.tf` to replace the `aws_s3_bucket` resource with:
+      ```bash
+      resource "aws_s3_bucket" "state_file" {
+        bucket = var.state_file_bucket_name
+
+          force_destroy = true
+
+          lifecycle {
+            prevent_destroy = false
+          }
+      }
+      ```
+1. Run `cd _bootstrap && terraform destroy` - this will error as you are removing the S3 bucket and the DynamoDB table during the run and it tries to save the state afterwards, but the resources no longer exists.
