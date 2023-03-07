@@ -35,6 +35,8 @@ Then we'll configure each resource based on our use case. For the EventBridge Sc
 
 Next, we will configure the properties for the Lambda Function. We will create a folder called ‘functions’ later that will hold the code, and we use the python3.9 runtime. Because the Lambda is connected to the DynamoDB Table, we get the necessary IAM policy and environment variables added to access the table. Finally, we add one more environment variable for the [Meetup API Key](https://www.meetup.com/api/general/).
 
+**Note: You must have a [Meetup Pro Subscription](https://www.meetup.com/lp/meetup-pro-features) to get access to the API**
+
 ![Lambda properties](images/lambda_pic.png)
 
 For DynamoDB, we will just change the ID of the Table.
@@ -53,9 +55,7 @@ It’s important to note that Application Composer does not create code or deplo
 
 The `get_meetup_data.py` handler function will call the Meetup GraphQL endpoint to retrieve data and store it in the DynamoDB table. You can view the code [here](https://github.com/aws-banjo/serverless_meetup_example/blob/main/functions/load_meetup_data.py).
 
-Next, we can deploy the Lambda Function using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/). AWS Application Composer already did the hard work of designing the infrastructure components that we need to create, so we can focus on the code so we can have a “push button” deploy.
-
-We can run the following to deploy the application:
+Next, we can deploy the Lambda Function using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/). AWS Application Composer already did the hard work of designing the infrastructure components that we need to create, so we can focus on the code so we can have a “push button” deploy. SAM reads the `template.yaml` file created by AWS Application Composer so we can now run the following to deploy the application:
 
 ```bash
 sam build
