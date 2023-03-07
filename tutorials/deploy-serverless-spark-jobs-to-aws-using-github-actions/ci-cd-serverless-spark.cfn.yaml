@@ -1,0 +1,198 @@
+# This template is used to update the stack created by canary1_001.yaml
+AWSTemplateFormatVersion: 2010-09-09
+Description: EMR Serverless Application stack
+
+Parameters:
+  GitHubRepo:
+    Default: "your_name/repo_name"
+    Description: The GitHub Repository that is allowed to assume your GitHub OIDC Role (<username|org>/<repo> - repo can be *)
+    Type: String
+
+  CreateOIDCProvider:
+    Default: true
+    Description: Only one Provider for a specific URL can be created per account, choose false if your account already has a GitHub OIDC Provider
+    Type: String
+    AllowedValues:
+      - true
+      - false
+
+Conditions:
+  # Create a condition that matches on the parameter string value being treated
+  # as true/on.
+  ShouldCreateOIDCProvider: !Equals [!Ref CreateOIDCProvider, true]
+
+Resources:
+  ## Resources for Production Deployments - EMR Serverless Spark app and S3 bucket for artifacts/logs
+  ProductionSparkApplication:
+    Type: AWS::EMRServerless::Application
+    Properties:
+      Name: prod-spark
+      ReleaseLabel: emr-6.8.0
+      Type: Spark
+      MaximumCapacity:
+        Cpu: 200 vCPU
+        Memory: 100 GB
+
+  ProductionArtifactsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub gh-actions-serverless-spark-prod-${AWS::AccountId}
+
+  ### A bucket for sample data
+  DataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub gh-actions-serverless-spark-data-${AWS::AccountId}
+
+  ### IAM Roles - We only use one role for the demo
+  # The role has
+  # - read/write access to the Glue Data Catalog
+  # - read access to the S3 sample data bucket
+  # - write access to the prod/test buckets
+  EMRServerlessJobRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - emr-serverless.amazonaws.com
+            Action:
+              - "sts:AssumeRole"
+      Description: "Service role for EMR Serverless jobs"
+      RoleName: !Sub gh-actions-job-execution-role-${AWS::AccountId}
+      Policies:
+        - PolicyName: GlueAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "glue:GetDatabase"
+                  - "glue:GetDataBases"
+                  - "glue:CreateTable"
+                  - "glue:GetTable"
+                  - "glue:GetTables"
+                  - "glue:GetPartition"
+                  - "glue:GetPartitions"
+                  - "glue:CreatePartition"
+                  - "glue:BatchCreatePartition"
+                  - "glue:GetUserDefinedFunctions"
+                Resource: "*"
+        - PolicyName: S3Access
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "s3:ListBucket"
+                Resource:
+                  - !GetAtt DataBucket.Arn
+                  - !GetAtt ProductionArtifactsBucket.Arn
+              - Effect: Allow
+                Action:
+                  - "s3:GetObject"
+                Resource:
+                  - !Sub "${DataBucket.Arn}/*"
+                  - !Sub "${ProductionArtifactsBucket.Arn}/*"
+              - Effect: Allow
+                Action:
+                  - "s3:PutObject"
+                Resource:
+                  - !Sub "${ProductionArtifactsBucket.Arn}/*"
+              - Effect: Allow
+                Action:
+                  - "s3:DeleteObject"
+                Resource:
+                  - !Sub "${ProductionArtifactsBucket.Arn}/github/output/*"
+
+  ### GitHub OIDC Provider
+  GithubOidc:
+    Type: AWS::IAM::OIDCProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ThumbprintList: [6938fd4d98bab03faadb97b34396831e3780aea1]
+      ClientIdList:
+        - sts.amazonaws.com
+
+  ### This is the role that GitHub uses to
+  # - Start EMR Serverless Jobs
+  # - Upload artifacts to S3
+  GitHubOIDCRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: "sts:AssumeRoleWithWebIdentity"
+            Condition:
+              StringLike:
+                "token.actions.githubusercontent.com:sub": !Sub "repo:${GitHubRepo}:*"
+              "ForAllValues:StringEquals":
+                "token.actions.githubusercontent.com:iss": "https://token.actions.githubusercontent.com"
+                "token.actions.githubusercontent.com:aud": sts.amazonaws.com
+            Effect: Allow
+            Principal:
+              Federated:
+                !If [
+                  ShouldCreateOIDCProvider,
+                  !Ref GithubOidc,
+                  !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com",
+                ]
+        Version: 2012-10-17
+      RoleName: !Sub gh-actions-oidc-role-${AWS::AccountId}
+      Description: >-
+        This role is used via GitHub Actions to deploy and run Spark jobs
+      MaxSessionDuration: 3600
+      Policies:
+        - PolicyDocument:
+            Statement:
+              - Action:
+                  - "emr-serverless:DescribeApplication"
+                  - "emr-serverless:GetJobRun"
+                  - "emr-serverless:StartApplication"
+                  - "emr-serverless:StartJobRun"
+                Effect: Allow
+                Resource:
+                  - !GetAtt
+                    - ProductionSparkApplication
+                    - Arn
+              - Action: "emr-serverless:GetJobRun"
+                Effect: Allow
+                Resource:
+                  - !Sub "${ProductionSparkApplication.Arn}/jobruns/*"
+              - Action: "iam:PassRole"
+                Condition:
+                  StringLike:
+                    "iam:PassedToService": emr-serverless.amazonaws.com
+                Effect: Allow
+                Resource: !GetAtt
+                  - EMRServerlessJobRole
+                  - Arn
+            Version: 2012-10-17
+          PolicyName: EMRServerlessAccess
+        - PolicyDocument:
+            Statement:
+              - Action:
+                  - "s3:ListBucket"
+                Effect: Allow
+                Resource: "*"
+              - Action:
+                  - "s3:PutObject"
+                Effect: Allow
+                Resource:
+                  - !Sub "${ProductionArtifactsBucket.Arn}/github/pyspark/jobs/*"
+            Version: 2012-10-17
+          PolicyName: S3Access
+
+
+Outputs:
+  ProductionApplicationId:
+    Value: !Ref ProductionSparkApplication
+  ProductionS3Bucket:
+    Value: !Ref ProductionArtifactsBucket
+  EMRServerlessJobExecutionRoleArn:
+    Value: !GetAtt EMRServerlessJobRole.Arn
+  GitHubOIDCRoleArn:
+    Value: !GetAtt GitHubOIDCRole.Arn
