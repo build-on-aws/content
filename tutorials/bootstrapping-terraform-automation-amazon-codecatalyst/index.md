@@ -489,6 +489,8 @@ terraform {
       version = "~> 4.33"
     }
   }
+  
+  required_version = "= 1.3.7"
 }
 ```
 
@@ -580,6 +582,8 @@ terraform {
       version = "~> 4.33"
     }
   }
+
+  required_version = "= 1.3.7"
 }
 ```
 
