@@ -15,7 +15,7 @@ In the movie Creed, aging boxer Rocky Balboa mentors a young upstart named Donni
 
 Even my parents knew enough about the cloud in 2015 to laugh at that joke — but most average people aren’t too far off from Rocky’s confusion. Even if we know what the cloud _isn’t_ (a literal cloud), a lot of us would be hard-pressed to explain in simple terms what the cloud actually _is_. It turns out, that explanation is a little tougher than it seems.  
 
-![A silhouette stands in front of a neon blue cloud](./images/<filename>)
+![A silhouette stands in front of a neon blue cloud](./images/AdobeStock_277292661.jpg)
 
 ## A brief history of computing
 
@@ -24,6 +24,8 @@ To understand the cloud, you’ve got to understand the conditions that created 
 Networking initially meant connecting various terminals or dummy nodes to a shared computer (usually a mainframe). Then, when computers got smaller and more people had them, it meant connecting computers to each other over larger distances, using shared protocols for how the information exchange would happen. But again, this was mostly for communication purposes — just on a steadily growing scale.  
   
 The internet fundamentally changed things. We weren’t just sending messages back and forth anymore; we were visiting digital locations called websites. These websites needed a place to store their text and images, and eventually they even started doing more than just displaying stored information; they began to facilitate sales, coordinate deliveries, and much more. All the storage and computing for these countless websites had to come from somewhere, and that somewhere was a server.  
+
+![A silhouette stands in front of a neon blue cloud](./images/AdobeStock_277292661.jpg)
   
 If you don't know already, a server is basically just a high-powered computer with no dedicated monitor. Think of it as raw computing and storage to be called upon by people anywhere in the world. In fact, I could put a server under my desk right now to host a website for you to visit.  
   
@@ -40,6 +42,8 @@ Here’s what I mean: imagine you’re a store that gets fifty times more custom
 Cloud services offer a third way: they allow businesses to provision servers that live in massive warehouses called data centers on an as-needed basis, granting companies more flexibility — or elasticity — in responding to their ever-changing computing and storage needs.  
   
 This “cloud” of servers isn’t just for big companies. I know individual students and researchers who pay a few bucks to access what is essentially a super computer for a few days to run models that would normally crash their own computers. In short, the cloud makes expensive resources available temporarily and at a much lower price — democratizing the computing and storage that once upon a time was only accessible to large research facilities and corporations.  
+
+![A silhouette stands in front of a neon blue cloud](./images/AdobeStock_277292661.jpg)
 
 ## So how would I define the cloud for Rocky?
   
