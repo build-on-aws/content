@@ -15,9 +15,9 @@ Building a serverless application can be a challenging task for developers. It r
 
 In this post, I will share how I built a prototype application to easily analyze meetup data. This will be an intermediate level guide, so some knowledge of AWS, Bash, and Python will be required to follow along. I will walk through the steps to build a workload that displays [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components:
 
-•	A scheduled Lambda function that gets Meetup data and stores it in a database
-•	An API to get the Meetup data
-•	A prototype front-end application to display the data
+* A scheduled Lambda function that gets Meetup data and stores it in a database
+* An API to get the Meetup data
+* A prototype front-end application to display the data
 
 To get started, open [AWS Application Composer console](https://console.aws.amazon.com/composer/home) and create a new project.
 
