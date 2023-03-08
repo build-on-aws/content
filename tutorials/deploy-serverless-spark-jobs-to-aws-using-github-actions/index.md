@@ -55,7 +55,7 @@ In order to follow along, you'll need:
 
 We also need to create some infrastructure for our jobs to run. For the purposes of this tutorial, we're only going to create one set of resources. In a production environment, you could easily create an additional set of resources and change your workflows to run in different accounts or environments.
 
-- EMR Serverless application - We'll EMR 6.9.0 with Spark 3.2.1
+- EMR Serverless application - We'll use EMR 6.9.0 with Spark 3.2.1
 - S3 buckets - This will contain our integration test artifacts, versioned production releases, and any job output
 - IAM role - We'll create a single IAM role that can be used by our GitHub Action with a limited set of permissions to deploy and run Spark jobs
 
@@ -82,7 +82,7 @@ aws cloudformation create-stack \
     --parameters ParameterKey=GitHubRepo,ParameterValue=USERNAME/REPO ParameterKey=CreateOIDCProvider,ParameterValue=true
 ```
 
-Once the stack is created, navigate to the Outputs tab on the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create) for your stack as you'll need these values later.
+Once the stack is created, navigate to the Outputs tab for the stack you created on the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks) as you'll need these values later.
 
 Now let's get started!
 
@@ -90,7 +90,7 @@ Now let's get started!
 
 First, [Create a new repository](https://github.com/new) on GitHub. For the rest of this tutorial, we'll assume you used `ci-cd-serverless-spark` for the repository name. The repository can be public or private.
 
-![](images/github-crepo-create.png)
+![](images/github-repo-create.png)
 
 In this step, we'll create our initial source code structure as well as our first GitHub Action that will be configured to run on every `git push`. Assuming you're running in a standard terminal, we'll create a `test_basic.py` file in the `pyspark/tests` directory and a `requirements-dev.txt` file in the `pyspark` directory.
 
@@ -149,7 +149,9 @@ This performs a few steps:
 - Install our `pytest` dependency from `requirements-dev.txt
 - Run `pytest`
 
-With these three files added, we can now `git add` and `git push` our code.
+With these three files added, we can now `git add` and `git push` our code. Your directory structure should look like this:
+
+![](images/dirtree-step1.png)
 
 ```bash
 git add .
@@ -163,9 +165,11 @@ Great! Now whenever you `git push`, the unit tests in `pyspark/tests` will be ru
 
 ## Add PySpark analysis and unit test
 
-As mentioned, we'll be using the NOAA GSOD dataset. What I want to do is make it easy to create a year-over-year analysis for an optional specific location, provided as a parameter to the Spark job.
+As mentioned, we'll be using the NOAA GSOD dataset. What we'll do in this this first commit is add our main PySpark entrypoint script and a new class that can return the largest values from a Spark DataFrame.
 
-Let's take a quick look at the data.
+Let's take a quick look at the data. The raw structure is fairly typical and straight-forward. We have an S3 bucket with CSV files split into yearly partitions. Each CSV file is a specific weather station ID. If we open one of the files, it contains daily weather readings including min, max, and mean measures of temperature, wind, and pressure as well as information about the amount and type of precipitation. You can find more information about the dataset on [noaa.gov](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00516).
+
+The station ID for Boeing Field in Seattle, WA is `72793524234`. Let's take a look at the the data from that station for 2022 - it's located at `s3://noaa-gsod-pds/2022/72793524234.csv`.
 
 ```
 +-----------+----------+--------+----------+---------+---------------------------+----+---------------+----+---------------+------+--------------+----+--------------+-----+----------------+----+---------------+-----+-----+----+--------------+----+--------------+----+---------------+-----+------+
@@ -177,8 +181,6 @@ Let's take a quick look at the data.
 |72793524234|2023-01-04|47.54554|-122.31475|7.6      |SEATTLE BOEING FIELD, WA US|42.6|24             |30.3|24             |1010.6|24            |9.7 |24            |10.0 |24              |2.3 |24             |14.0 |21.0 |51.1|              |35.1|              |0.0 |G              |999.9|000000|
 +-----------+----------+--------+----------+---------+---------------------------+----+---------------+----+---------------+------+--------------+----+--------------+-----+----------------+----+---------------+-----+-----+----+--------------+----+--------------+----+---------------+-----+------+
 ```
-
-The raw structure is fairly typical and straight-forward. We have an S3 bucket with CSV files split into yearly partitions. Each CSV file is a specific weather station ID. If we open one of the files, it contains daily weather readings including min, max, and mean measures of temperature, wind, and pressure as well as information about the amount and type of precipitation. You can find more information about the dataset on [noaa.gov](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00516).
 
 Our job is simple: we're going to extract "extreme weather events" across all stations from a single year.
 
@@ -271,6 +273,10 @@ def test_extract_latest_daily_value(mock_views_df):
     assert ew.findLargest(mock_views_df, "TEMP").TEMP == 44.1
 ```
 
+Your directory structure should now look like this:
+
+![](images/dirtree-step2.png)
+
 Now that's done, simply go ahead and commit and push your changes.
 
 ```bash
@@ -279,7 +285,7 @@ git commit -am "Add pyspark code"
 git push
 ```
 
-Using the GitHub Action we created before, your new unit test will automatically run and validate that your analysis code is running correctly.
+Using the GitHub Action we created before, your new unit test will automatically run and validate that your analysis code is running correctly. For extra credit, feel free to make the test fail and see what happens when you commit and push the failing test.
 
 ## Create an integration test to run on new pull requests
 
@@ -315,7 +321,66 @@ if __name__ == "__main__":
     assert max_precip == 1.55, f"expected max precip of 1.55, got: {max_precip}. failing job."
 ```
 
-Now in `.github/workflows`, create an `integration-test.yaml` file.
+We'll also create a `run-job.sh` script in the `pyspark` directory - this script runs an EMR Serverless job and waits for it to complete.
+
+```bash
+#!/usr/bin/env bash
+
+# This script kicks off an EMR Serverless job and waits for it to complete.
+# If the job does not run successfully, the script errors out.
+APPLICATION_ID=$1
+JOB_ROLE_ARN=$2
+S3_BUCKET=$3
+JOB_VERSION=$4
+ENTRY_POINT=$5
+SPARK_JOB_PARAMS=(${@:6})
+
+# Convert the passed Spark job params into a JSON array
+# WARNING: Assumes there are job params
+printf -v SPARK_ARGS '"%s",' "${SPARK_JOB_PARAMS[@]}"
+
+# Start the job
+JOB_RUN_ID=$(aws emr-serverless start-job-run \
+    --name ghuni-${ENTRY_POINT} \
+    --application-id $APPLICATION_ID \
+    --execution-role-arn $JOB_ROLE_ARN \
+    --job-driver '{
+        "sparkSubmit": {
+            "entryPoint": "s3://'${S3_BUCKET}'/github/pyspark/jobs/'${JOB_VERSION}'/'${ENTRY_POINT}'",
+            "entryPointArguments": ['${SPARK_ARGS%,}'],
+            "sparkSubmitParameters": "--py-files s3://'${S3_BUCKET}'/github/pyspark/jobs/'${JOB_VERSION}'/job_files.zip"
+        }
+    }' --query 'jobRunId' --output text)
+
+echo "Job submitted: ${APPLICATION_ID}/${JOB_RUN_ID}"
+
+# Wait for it to complete
+JOB_STATUS="running"
+while [ "$JOB_STATUS" != "SUCCESS" -a "$JOB_STATUS" != "FAILED" ]; do
+    sleep 30
+    JOB_STATUS=$(aws emr-serverless get-job-run --application-id $APPLICATION_ID --job-run-id $JOB_RUN_ID --query 'jobRun.state' --output text)
+    echo "Job ($JOB_RUN_ID) status is: ${JOB_STATUS}"
+done
+
+if [ "$JOB_STATUS" = "FAILED" ]; then
+    ERR_MESSAGE=$(aws emr-serverless get-job-run --application-id $APPLICATION_ID --job-run-id $JOB_RUN_ID --query 'jobRun.stateDetails' --output text)
+    echo "Job failed: ${ERR_MESSAGE}"
+    exit 1;
+fi
+```
+
+Now in `.github/workflows`, create an `integration-test.yaml` file. In here, we'll finally replace a few values from our CloudFormation stack.
+
+Again, take a look at the Outputs tab in the stack you created in the [CloudFormation Console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks) or use this AWS CLI command.
+
+```bash
+# Change "gh-actions-demo" to the name of the stack you created
+aws cloudformation describe-stacks \
+  --query 'Stacks[?StackName==`gh-actions-demo`][].Outputs' \
+  --output text
+```
+
+Replace the `APPLICATION_ID`, `S3_BUCKET_NAME`, `JOB_ROLE_ARN`, and `OIDC_ROLE_ARN` values below with the appropriate values from your stack.
 
 ```yaml
 name: PySpark Integration Tests
@@ -324,11 +389,10 @@ on:
     types: [opened, reopened, synchronize]
 
 env:
-  TEST_APPLICATION_ID: 00f5trm1fv0d3p09
-  SAMPLE_DATA_S3_BUCKET_NAME: ant309-test-${{ secrets.AWS_ACCOUNT_ID }}
-  TEST_S3_BUCKET_NAME: ant309-test-${{ secrets.AWS_ACCOUNT_ID }}
-  JOB_ROLE_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/reinvent-demo-EMRServerlessJobRole-1PEFB3BVE11PV
-  OIDC_ROLE_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/reinvent-demo-GitHubOIDCRole-17QJZ0JHMZMHU
+  APPLICATION_ID: 00f5trm1fv0d3p09
+  S3_BUCKET_NAME: gh-actions-serverless-spark-123456789012
+  JOB_ROLE_ARN: arn:aws:iam::123456789012:role/gh-actions-job-execution-role-123456789012
+  OIDC_ROLE_ARN: arn:aws:iam::123456789012:role/gh-actions-oidc-role-123456789012
   AWS_REGION: us-east-1
       
 jobs:
@@ -353,16 +417,19 @@ jobs:
         run: |
           echo Uploading $GITHUB_SHA to S3
           cd jobs && zip -r job_files.zip . && cd ..
-          aws s3 sync jobs s3://$TEST_S3_BUCKET_NAME/github/pyspark/jobs/$GITHUB_SHA/
+          aws s3 cp integration_test.py s3://$S3_BUCKET_NAME/github/pyspark/jobs/$GITHUB_SHA/
+          aws s3 cp jobs/job_files.zip s3://$S3_BUCKET_NAME/github/pyspark/jobs/$GITHUB_SHA/
 
       - name: Start pyspark job
         run: |
-          scripts/integration_test.sh $TEST_APPLICATION_ID $JOB_ROLE_ARN $TEST_S3_BUCKET_NAME $GITHUB_SHA validation.py s3://${SAMPLE_DATA_S3_BUCKET_NAME}/github/traffic/
+          scripts/integration_test.sh $APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME $GITHUB_SHA integration_test.py s3://${S3_BUCKET_NAME}/github/traffic/
 ```
 
 ## Ship it!
 
 OK, so we've taken our brand new repository and added unit tests, integration tests, and now we want to begin shipping things to production. In order to do this, we'll create a new GitHub Action based on whenever somebody adds a tag to our repository. If the tag matches a semantic version (e.g. `v1.0.2`), we'll automatically package up our project and ship it to S3!
+
+> **Note**: In a production environment, we could make use of different environments or accounts to isolate production and test resources, but for this demo we dont'.
 
 In theory, tags will only be applied when new code has been verified and ready to ship. This approach allows us to easily run new versions of code when ready, or rollback to an older version if a regression is identified.
 
@@ -376,8 +443,8 @@ on:
       - "v*.*.*"
 
 env:
-  PROD_S3_BUCKET_NAME: ant309-prod-${{ secrets.AWS_ACCOUNT_ID }}
-  OIDC_ROLE_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/reinvent-demo-GitHubOIDCRole-17QJZ0JHMZMHU
+  S3_BUCKET_NAME: gh-actions-serverless-spark-123456789012
+  OIDC_ROLE_ARN: arn:aws:iam::123456789012:role/gh-actions-oidc-role-123456789012
   AWS_REGION: us-east-1
 
 jobs:
@@ -402,7 +469,8 @@ jobs:
         run: |
           echo Uploading ${{github.ref_name}} to S3
           cd jobs && zip -r job_files.zip . && cd ..
-          aws s3 sync jobs s3://$PROD_S3_BUCKET_NAME/github/pyspark/jobs/${{github.ref_name}}/
+          aws s3 cp integration_test.py s3://$S3_BUCKET_NAME/github/pyspark/jobs/$GITHUB_SHA/
+          aws s3 cp jobs/job_files.zip s3://$S3_BUCKET_NAME/github/pyspark/jobs/$GITHUB_SHA/
 ```
 
 ```bash
@@ -434,11 +502,10 @@ Create the file `.github/workflows/run-job.yaml`
 name: Fetch Data
 
 env:
-  PROD_APPLICATION_ID: 00f5trm3rnk3hl09
-  SAMPLE_DATA_S3_BUCKET_NAME: ant309-prod-${{ secrets.AWS_ACCOUNT_ID }}
-  PROD_S3_BUCKET_NAME: ant309-prod-${{ secrets.AWS_ACCOUNT_ID }}
-  JOB_ROLE_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/reinvent-demo-EMRServerlessJobRole-1PEFB3BVE11PV
-  OIDC_ROLE_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/reinvent-demo-GitHubOIDCRole-17QJZ0JHMZMHU
+  APPLICATION_ID: 00f5trm3rnk3hl09
+  S3_BUCKET_NAME: gh-actions-serverless-spark-123456789012
+  JOB_ROLE_ARN: arn:aws:iam::123456789012:role/gh-actions-job-execution-role-123456789012
+  OIDC_ROLE_ARN: arn:aws:iam::123456789012:role/gh-actions-oidc-role-123456789012
   AWS_REGION: us-east-1
   JOB_VERSION: v0.0.5
 
@@ -477,7 +544,7 @@ jobs:
       - name: Start pyspark job
         run: |
           echo "running ${{ (steps.get-latest-tag.outputs.tag || github.event.inputs.job_version) || env.JOB_VERSION}} of our job"
-          scripts/integration_test.sh $PROD_APPLICATION_ID $JOB_ROLE_ARN $PROD_S3_BUCKET_NAME ${{ (steps.get-latest-tag.outputs.tag || github.event.inputs.job_version) || env.JOB_VERSION}} main.py s3://${SAMPLE_DATA_S3_BUCKET_NAME}/github/traffic/ s3://${PROD_S3_BUCKET_NAME}/github/output/views/
+          scripts/integration_test.sh $PROD_APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME ${{ (steps.get-latest-tag.outputs.tag || github.event.inputs.job_version) || env.JOB_VERSION}} main.py s3://${S3_BUCKET_NAME}/github/traffic/ s3://${S3_BUCKET_NAME}/github/output/views/
 ```
 
 Commit and push the file.

@@ -23,26 +23,20 @@ Conditions:
 
 Resources:
   ## Resources for Production Deployments - EMR Serverless Spark app and S3 bucket for artifacts/logs
-  ProductionSparkApplication:
+  SparkApplication:
     Type: AWS::EMRServerless::Application
     Properties:
       Name: prod-spark
-      ReleaseLabel: emr-6.8.0
+      ReleaseLabel: emr-6.9.0
       Type: Spark
       MaximumCapacity:
         Cpu: 200 vCPU
         Memory: 100 GB
 
-  ProductionArtifactsBucket:
+  ArtifactsBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub gh-actions-serverless-spark-prod-${AWS::AccountId}
-
-  ### A bucket for sample data
-  DataBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub gh-actions-serverless-spark-data-${AWS::AccountId}
 
   ### IAM Roles - We only use one role for the demo
   # The role has
@@ -89,24 +83,19 @@ Resources:
                 Action:
                   - "s3:ListBucket"
                 Resource:
-                  - !GetAtt DataBucket.Arn
-                  - !GetAtt ProductionArtifactsBucket.Arn
+                  - arn:aws:s3:::noaa-gsod-pds
+                  - !GetAtt ArtifactsBucket.Arn
               - Effect: Allow
                 Action:
                   - "s3:GetObject"
                 Resource:
-                  - !Sub "${DataBucket.Arn}/*"
-                  - !Sub "${ProductionArtifactsBucket.Arn}/*"
+                  - arn:aws:s3:::noaa-gsod-pds/*
+                  - !Sub "${ArtifactsBucket.Arn}/*"
               - Effect: Allow
                 Action:
                   - "s3:PutObject"
                 Resource:
-                  - !Sub "${ProductionArtifactsBucket.Arn}/*"
-              - Effect: Allow
-                Action:
-                  - "s3:DeleteObject"
-                Resource:
-                  - !Sub "${ProductionArtifactsBucket.Arn}/github/output/*"
+                  - !Sub "${ArtifactsBucket.Arn}/*"
 
   ### GitHub OIDC Provider
   GithubOidc:
@@ -156,12 +145,12 @@ Resources:
                 Effect: Allow
                 Resource:
                   - !GetAtt
-                    - ProductionSparkApplication
+                    - SparkApplication
                     - Arn
               - Action: "emr-serverless:GetJobRun"
                 Effect: Allow
                 Resource:
-                  - !Sub "${ProductionSparkApplication.Arn}/jobruns/*"
+                  - !Sub "${SparkApplication.Arn}/jobruns/*"
               - Action: "iam:PassRole"
                 Condition:
                   StringLike:
@@ -182,16 +171,16 @@ Resources:
                   - "s3:PutObject"
                 Effect: Allow
                 Resource:
-                  - !Sub "${ProductionArtifactsBucket.Arn}/github/pyspark/jobs/*"
+                  - !Sub "${ArtifactsBucket.Arn}/github/pyspark/jobs/*"
             Version: 2012-10-17
           PolicyName: S3Access
 
 
 Outputs:
   ProductionApplicationId:
-    Value: !Ref ProductionSparkApplication
+    Value: !Ref SparkApplication
   ProductionS3Bucket:
-    Value: !Ref ProductionArtifactsBucket
+    Value: !Ref ArtifactsBucket
   EMRServerlessJobExecutionRoleArn:
     Value: !GetAtt EMRServerlessJobRole.Arn
   GitHubOIDCRoleArn:
