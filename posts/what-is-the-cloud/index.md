@@ -25,7 +25,7 @@ Networking initially meant connecting various terminals or dummy nodes to a shar
   
 The internet fundamentally changed things. We weren’t just sending messages back and forth anymore; we were visiting digital locations called websites. These websites needed a place to store their text and images, and eventually they even started doing more than just displaying stored information; they began to facilitate sales, coordinate deliveries, and much more. All the storage and computing for these countless websites had to come from somewhere, and that somewhere was a server.  
 
-![A silhouette stands in front of a neon blue cloud](./images/AdobeStock_277292661.jpg)
+![Technicians work in a room with an old mainframe computer](./images/AdobeStock_277292661.jpg)
   
 If you don't know already, a server is basically just a high-powered computer with no dedicated monitor. Think of it as raw computing and storage to be called upon by people anywhere in the world. In fact, I could put a server under my desk right now to host a website for you to visit.  
   
@@ -43,7 +43,7 @@ Cloud services offer a third way: they allow businesses to provision servers tha
   
 This “cloud” of servers isn’t just for big companies. I know individual students and researchers who pay a few bucks to access what is essentially a super computer for a few days to run models that would normally crash their own computers. In short, the cloud makes expensive resources available temporarily and at a much lower price — democratizing the computing and storage that once upon a time was only accessible to large research facilities and corporations.  
 
-![A silhouette stands in front of a neon blue cloud](./images/AdobeStock_277292661.jpg)
+![Many racks of servers, stacked on top of one another](./images/AdobeStock_178997580.jpg)
 
 ## So how would I define the cloud for Rocky?
   
