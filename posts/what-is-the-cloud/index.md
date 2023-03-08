@@ -15,6 +15,8 @@ In the movie Creed, aging boxer Rocky Balboa mentors a young upstart named Donni
 
 Even my parents knew enough about the cloud in 2015 to laugh at that joke — but most average people aren’t too far off from Rocky’s confusion. Even if we know what the cloud _isn’t_ (a literal cloud), a lot of us would be hard-pressed to explain in simple terms what the cloud actually _is_. It turns out, that explanation is a little tougher than it seems.  
 
+![A silhouette stands in front of a neon blue cloud](./images/<filename>)
+
 ## A brief history of computing
 
 To understand the cloud, you’ve got to understand the conditions that created it. The second half of the 20th century saw the rapid, parallel rise of personal computers and of networking, culminating in the internet at the end of the eighties and beginning of the nineties.  
