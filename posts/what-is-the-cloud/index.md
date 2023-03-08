@@ -25,7 +25,7 @@ Networking initially meant connecting various terminals or dummy nodes to a shar
   
 The internet fundamentally changed things. We weren’t just sending messages back and forth anymore; we were visiting digital locations called websites. These websites needed a place to store their text and images, and eventually they even started doing more than just displaying stored information; they began to facilitate sales, coordinate deliveries, and much more. All the storage and computing for these countless websites had to come from somewhere, and that somewhere was a server.  
 
-![Technicians work in a room with an old mainframe computer](./images/AdobeStock_277292661.jpg)
+![Technicians work in a room with an old mainframe computer](./images/AdobeStock_104450030.jpg)
   
 If you don't know already, a server is basically just a high-powered computer with no dedicated monitor. Think of it as raw computing and storage to be called upon by people anywhere in the world. In fact, I could put a server under my desk right now to host a website for you to visit.  
   
