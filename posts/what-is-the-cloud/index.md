@@ -45,10 +45,10 @@ If I were talking to Rocky, I could tell him about personal computers and data c
 
 But defining the cloud simply by its physical apparatus or implementation is a little like defining first love by a pounding heart and sweaty hands: it’s no less than those things, but it’s certainly far more.  
 
-The cloud is the sum of our data and computing power, humanity’s most impressive technological advances gathered and made accessible to most anyone. It is the printing press, the telephone, the satellite broadcast, all rolled into one and exploded into something new, yet familiar — a glove for a hand we never knew we had until now.  
+The cloud is the sum of our data and computing power, humanity’s most impressive technological advances gathered and made accessible to most anyone. It is the printing press, the telephone, the satellite broadcast, all rolled into one and exploded into something new, yet familiar — a (boxing) glove for a hand we never knew we had until now.  
 
 And that means the cloud is irrevocably changing the world - and not just _the_ world, but _your_ world. It evolved the internet from a network of distinct nodes chattering back and forth into one, unimaginably powerful computer. Open your browser on a laptop built fifteen years ago or yesterday, and you can watch TV, play games, ask an AI to write an article for you, publish that article to millions of readers, explore humanity’s knowledge preserved for millennia, buy nearly anything, assuming you have the money — and if you don’t, apply for the credit to buy it anyway. We’ve evolved, too, collectively and individually, thanks to the cloud. We are globalized, more knowledgeable and connected than ever before.  
 
 In short, the cloud is the foundation of much of the technology you use everyday, and it is the technology upon which the future will be built.  
 
-If you want to learn more about the cloud — how it’s changed over time, how it’s shaped various industries, and where it’s going in the future — check out my explainer video on it and my follow-up conversation with Brian Ketelsen, a principal developer advocate at AWS.  
+If you want to learn more about the cloud — how it’s changed over time, how it’s shaped various industries, and where it’s going in the future — check out my explainer video on it and my follow-up conversation with Brian Ketelsen, a principal developer advocate at AWS.
