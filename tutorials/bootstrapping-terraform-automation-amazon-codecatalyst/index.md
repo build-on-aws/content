@@ -895,7 +895,7 @@ We have now reached the end of this tutorial, you can either keep the current se
 
 To remove all the resources we created in this project, follow the following steps in your dev environment:
 
-1. Make sure you are on the `main` branch by running `git checkout main`, then run `terraform destroy`, and type `yes` to confirm - this will remove the VPC we created
+1. Make sure you are on the `main` branch by running `git checkout main` and `git pull` to ensure you have the latest changes, then run `terraform destroy`, and type `yes` to confirm - this will remove the VPC we created
 1. To delete all the bootstrapping resourced, first change into the directory by running `cd _bootstrap`. Before we can delete everything, we need to update our S3 state file bucket. We need to change the lifecycle policy to allow the deletion, and add `force_destroy = true` to also delete all the objects in the bucket. Edit `_bootstrap/state_file_resources.tf`, and replace the first `aws_s3_bucket` resource with:
     ```bash
     # Bucket used to store our state file

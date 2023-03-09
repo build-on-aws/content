@@ -41,10 +41,10 @@ As a first step, we need to set up a CI/CD pipeline for all the shared infrastru
 
 To set up our pipeline, make sure you are logged into your AWS and CodeCatalyst accounts to set up our project, environment, repository, and CI/CD pipelines. In CodeCatalyst:
 
-1. Create a new `Project` called `TerraformMultiAccount` using the `Start from scratch` option
-1. Create a code repository called `main-infra` in the project, using `Terraform` for the `.gitignore file`
-1. Link an AWS account to our project project via the `Environments` section with the name `MainAccount`
-1. Create a `dev environment` using `Cloud9`, and cloning the `main-infra` repository using the `main` branch
+1. Create a new Project called `TerraformMultiAccount` using the "Start from scratch" option
+1. Create a code repository called `main-infra` in the project, using Terraform for the `.gitignore file`
+1. Link an AWS account to our project via the CI/CD -> Environments section with the name "MainAccount"
+1. Create a Dev environment using Cloud9 under CI/CD -> Environments, and cloning the `main-infra` repository using the `main` branch
 1. Launch the `dev environment`, and configure the AWS CLI using `aws configure` with the credentials of an IAM user in your AWS account
 
 ### Bootstrapping Terraform
@@ -59,40 +59,59 @@ unzip terraform.zip
 rm terraform.zip
 sudo mv terraform /usr/bin/terraform
 sudo chmod +x /usr/bin/terraform
-
-# Set up required resources for Terraform to use to bootstrap
-cd main-infra
-mkdir -p _bootstrap
-cd _bootstrap
-wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/main_branch_iam_role.tf
-wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/pr_branch_iam_role.tf
-wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/providers.tf
-wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/state_file_resources.tf
-wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/terraform.tf
-wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/variables.tf
 ```
 
-Now edit `variables.tf` and change the `state_file_bucket_name` value to a unique value - for this tutorial, we will use `tf-multi-account` - you should use a different, unique bucket name. Now run `terraform init` and `terraform apply` to create the state file, lock table, and IAM roles for our CI/CD pipeline. If you would like to use a different AWS region, you can update the `aws_region` variable with the appropriate string. Next, open `terraform.tf` and uncomment the `terraform` block, updating the `bucket` value with your bucket name, and also the `region` if you changed it. Afterwards, run `terraform init -migrate-state` to migrate the state file to the newly create S3 bucket for it.
+For the next commands, please run them in the `main-infra` directory:
+
+```bash
+# Set up required resources for Terraform to use to bootstrap
+mkdir -p _bootstrap
+wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/main_branch_iam_role.tf
+wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/pr_branch_iam_role.tf
+wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/providers.tf
+wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/state_file_resources.tf
+wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/variables.tf
+```
+
+We will now create the required infrastructure to store our state file using S3 as a backend, DynamoDB for managing the lock to ensure only one change is made at a time, and setting up two IAM roles for our workflows to use. Edit `variables.tf` and change the `state_file_bucket_name` value to a unique value - for this tutorial, we will use `tf-multi-account` - you should use a different, unique bucket name. We need to initialize the Terraform backend, and then apply these changes to create the state file, lock table, and IAM roles for our CI/CD pipeline. If you would like to use a different AWS region, you can update the `aws_region` variable with the appropriate string. Run the following commands for this:
+
+```bash
+terraform init
+terraform apply
+```
+
+We now have our resources tracked in a state file, but it stored locally in our Dev environment, and we need to configure it to use the S3 backend. We first need to add a backend configuration, and then migrate the state file to it. Use the following command to add it:
+
+```bash
+wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/terraform.tf
+```
+
+Edit `_bootstrap/terraform.tf` and change the `bucket` key to the name of your bucket - Terraform variables cannot be used in backend configuration, so this needs to be done by hand. If you changed the region being used in the `provider` block, please also update the `region` key in `terraform.tf`. We are now ready to migrate our state file to the S3 bucket by running the following:
+
+```bash
+terraform init -migrate-state
+```
 
 Next, we need to allow the two new IAM roles access to our CodeCatalyst Space and projects. In your Space, navigate to the `AWS accounts` tab, click your AWS account number, and then on Manage roles from the AWS Management Console. This will open a new tab, select `Add an existing role you have created in IAM`, and select `Main-Branch-Infrastructure` from the dropdown. Click `Add role`. This will take you to a new page with a green `Successfully added IAM role Main-Branch-Infrastructure.` banner at the top. Click on `Add IAM role`, and follow the same process to add the `PR-Branch-Infrastructure` role. Once done, you can close this window and go back to the CodeCatalyst one.
 
 Lastly, we need to create the workflows that will run `terraform plan` for all pull requests (PRs), and then `terraform apply` for any PRs that are merged to the `main` branch. Run the following commands:
 
 ```bash
-cd ..
 mkdir -p .codecatalyst/workflows
-cd .codecatalyst/workflows
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/main/.codecatalyst/workflows/main_branch.yml
-wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/main/.codecatalyst/workflows/pr_branch.yml
-cd ../../
+
+wget -P .codecatalyst/workflows .codecatalyst/workflows https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/main/.codecatalyst/workflows/main_branch.yml
+wget -P .codecatalyst/workflows https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/main/.codecatalyst/workflows/pr_branch.yml
+
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/providers.tf
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/terraform.tf
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/variables.tf
 ```
 
-Now edit `.codecatalyst/workflows/main_branch.yml` and `.codecatalyst/workflows/pr_branch.yml`, replacing the `123456789012` AWS account ID with your one. In `terraform.tf`, change the `bucket` value to match your state file bucket created earlier, and optionally `region` if you are using a different region (remember to also edit `variables.tf` to change the region if you do). Finally, we need to commit all the changes:
+Now edit `.codecatalyst/workflows/main_branch.yml` and `.codecatalyst/workflows/pr_branch.yml`, replacing the `123456789012` AWS account ID with your one. In `terraform.tf`, change the `bucket` value to match your state file bucket created earlier, and optionally `region` if you are using a different region - this should match the region you used in the `_bootstrap/terraform.tf` backend configuration as we are using the same bucket. You can change the `aws_region` variable in `variables.tf` to set the region to create infrastructure in. Finally, we need to commit all the changes after making sure our Terraform code is properly formatted:
 
 ```bash
+terraform fmt
+
 git add .
 git commit -m "Setting main infra ci-cd workflows"
 git push
@@ -114,7 +133,7 @@ We need to create and modify the following resources:
 1. **IAM policies**: One each for the `main` and PR branch roles allowing them to assume the equivalent IAM role in environment accounts
 1. **IAM roles**: Add the policy to assume the new environment account IAM roles
 
-To do this, add the following to the `variables.tf` file to define the three email addresses we will use to create child accounts, and also the name of the IAM role to create to allow access to the account. This IAM role is created in each of the environment accounts with admin permissions, and can be [assumed](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) from the top-level account. We will be setting up additional IAM roles for our workflows in the environment accounts further down.
+To do this, add the following to the `variables.tf` file in the root of `main-infra` to define the three email addresses we will use to create child accounts, and also the name of the IAM role to create to allow access to the account. This IAM role is created in each of the environment accounts with admin permissions, and can be [assumed](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) from the top-level account. We will be setting up additional IAM roles for our workflows in the environment accounts further down.
 
 > 💡 Tip: You can use `+` in an email address to set up additional, unique email strings that will all be delivered to the same email inbox, e.g. if your email is `john@example.com`, you can use `john+aws-dev@example.com`. This is useful as each AWS account needs a globally unique email address, but managing multiple inboxes can become a problem.
 
@@ -185,9 +204,9 @@ resource "aws_organizations_account" "prod" {
 }
 ```
 
-> 💡 Tip: If you are applying this strategy to existing AWS accounts and using the [import](https://developer.hashicorp.com/terraform/cli/import) function of Terraform, take note of the instructions on how to avoid recreating the account when importing in the [resource page](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account#import).
+> 💡 Tip: If you are applying this strategy to existing AWS accounts and using the [import](https://developer.hashicorp.com/terraform/cli/import) function of Terraform, take note of the instructions on how to avoid recreating the account when importing in the [resource page](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account#import). You will also need to import the AWS Organization if you already one set up in your account by running `terraform import aws_organizations_organization.org 123456789012`, and replacing the number with your AWS account ID.
 
-Let's look at these changes and then apply them by running `terraform plan` in your CodeCatalyst environment's terminal. Since we have not yet initialized Terraform for this new repository, we need to run `terraform init` as well (**NB: If you are following on from the [previous tutorial](https://www.buildon.aws/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst/), you can still run these steps, it will not cause any issues**):
+Let's look at these changes and then apply them by running `terraform init` first, and then `terraform plan` in your CodeCatalyst environment's terminal.  (**Please note: If you are following on from the [previous tutorial](https://www.buildon.aws/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst/), you can still run these steps, it will not cause any issues**):
 
 ```bash
 terraform init
@@ -297,7 +316,7 @@ While you could do this with pull requests, it will add quite a bit of time for 
 
 ### Set up permission for Terraform in environment accounts
 
-Next, we need to create the IAM roles and policies in the new accounts, and update our existing IAM roles with additional policies to allow them to assume these new roles in the environment accounts. First, we need to define additional `AWS` providers to allow Terraform to create infrastructure in our new accounts. Terraform provider [aliases](https://developer.hashicorp.com/terraform/language/providers/configuration#alias-multiple-provider-configurations) allow you to configure multiple providers with different configurations. In our case, we will create the default provider to use our Main account, and then set up 3 additional ones for `dev`, `test`, and `prod`, and use IAM role switching to access them. We will use the IAM role created as part of our new accounts to do this. Add the following to the `providers.tf` file - since we created the new AWS accounts using Terraform, we can reference the account IDs via those resources:
+Next, we need to create the IAM roles and policies in the new accounts, and update our existing IAM roles with additional policies to allow them to assume these new roles in the environment accounts. First, we need to define additional `AWS` providers to allow Terraform to create infrastructure in our new accounts. Terraform provider [aliases](https://developer.hashicorp.com/terraform/language/providers/configuration#alias-multiple-provider-configurations) allow you to configure multiple providers with different configurations. In our case, we will create the default provider to use our Main account, and then set up 3 additional ones for `dev`, `test`, and `prod`, and use IAM role switching to access them. We will use the IAM role created as part of our new accounts to do this. Add the following to the `providers.tf` file in the root of `main-infra` - since we created the new AWS accounts using Terraform, we can reference the account IDs via those resources:
 
 ```bash
 provider "aws" {
@@ -328,7 +347,7 @@ provider "aws" {
 }
 ```
 
-Now that we can access the environment accounts with these new providers, we need to also create IAM roles for the `main` and PR branches inside each account for our workflows to use, as well as a read-only one for all users. To add these roles in each account, run the following commands:
+Now that we can access the environment accounts with these new providers, we need to also create IAM roles for the `main` and PR branches inside each account for our workflows to use, as well as a read-only one for all users. This will ensure that the `ReadOnly` role we use for PR branches in the `main` account can only assume the equivalent `ReadOnly` role in each of the environment accounts, the `AdministratorAccess` one the same in each one, and the a `ReadOnly` role for our team members in each of the environment accounts - they should not be changing anything by hand via the AWS Console, AWS CLI, or API calls. To add these roles in each account, run the following commands:
 
 ```bash
 wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform/main/env_accounts_main_branch_iam_role.tf
@@ -336,7 +355,7 @@ wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments
 wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments-with-terraform/main/env_accounts_users_read_only_iam_role.tf
 ```
 
-The contents of each file are:
+The contents of each file that we downloaded should be the following:
 
 * env_accounts_main_branch_iam_role.tf
     ```bash
@@ -581,7 +600,7 @@ The contents of each file are:
     }
     ```
 
-We are creating a default, read-only role for users (developers, DevOps/SRE teams, etc) to use as all changes should be via Terraform, but we need to provide them with access to look at console. We'll be setting up the users further down. The IAM roles above will look very similar to the original ones we created, but with the trust policy changed to allow assuming these roles from our `main-infra` account instead of being assumed by the CodeCatalyst task runner - the runner will assume a role in the main account, and from there assume another role in each of our environment accounts.
+We are creating a default, read-only role for users (developers, DevOps/SRE teams, etc) to use as all changes should be via Terraform, but we need to provide them with access to look at the console. We'll be setting up the users further down. The IAM roles above will look very similar to the original ones we created, but with the trust policy changed to allow assuming these roles from our `main-infra` account instead of being assumed by the CodeCatalyst task runner - the runner will assume a role in the main account, and from there assume another role in each of our environment accounts.
 
 ```bash
   statement {
@@ -613,34 +632,35 @@ git push
 
 ## Setting up workflows for environment accounts
 
-We have everything in place now to start adding infrastructure to our environment accounts, and need to create a new repository to store any infrastructure in. While we could use the `main-infra` account to do this, we treat that as a sensitive repository since it controls all the infrastructure we need to manage our AWS accounts, and want to limit access to it. We will use a new repository called `environments-infra` to manage the day-to-day infrastructure. First, create a new repository in CodeCatalyst under `Code` -> `Source repositories` by clicking the `Add repository` button. Use `environments-infra` for the name, `Manages the dev, test, and prod accounts' infrastructure.` for the description, and select `Terraform` for the `.gitignore` file. Once created, click on the `Clone repository` button, then on the `Copy` button to copy the `git clone` URL (don't close this dialog afterwards, we still need to generate a Personal access token):
+We have everything in place now to start adding infrastructure to our environment accounts, and need to create a new repository to store any infrastructure in. While we could use the `main-infra` account to do this, we treat that as a sensitive repository since it controls all the infrastructure we need to manage our AWS accounts, and want to limit access to it. We will use a new repository called `environments-infra` to manage the day-to-day infrastructure. First, create a new repository in CodeCatalyst under `Code` -> `Source repositories` by clicking the `Add repository` button. Use `environments-infra` for the name, `Manages the dev, test, and prod accounts' infrastructure.` for the description, and select `Terraform` for the `.gitignore` file. Once created, click on the `Clone repository` button, then on the `Copy` button to copy the `git clone` URL:
 
 ![CodeCatalyst repository clone dialog showing the git clone URL for new repo](./images/new_repo_clone_command.png)
 
-In your terminal, clone the repo - type `git clone `, and then paste the URL from the dialog (yours will be different based on your user alias, Space, and Project name):
+The Dev environment is configured to use the AWS CodeCommit credentials helper, you can leave it as-is and generate a Personal access token to use from the `Clone repository` dialog we just used, or edit `~/.gitconfig` and change the credentials helper under `[credential]` from `helper = !aws codecommit credential-helper $@` to `helper = /aws/mde/credential-helper`. This enables you to clone CodeCatalyst repositories without needing to specify a Personal access token every time.
+
+To clone the new repo, in your terminal, change to the `/projects` directory to clone the `environments-infra` repo, and then type `git clone `, and paste the URL from the dialog (yours will be different based on your user alias, Space, and Project name):
 
 ```bash
-cd .. # We were still in the main-infra directory previously - replace the repo URL with your one
-git clone https://cobusbernard@git.us-west-2.codecatalyst.aws/v1/Cobus-AWS/TerraformMultiAccount/environments-infra
+# Ensure to replace the URL with your one without the "< >" brackets.
+git clone <Your clone URL>
 ```
 
-It will now prompt you for a password, use the `Create token` button, and then click on the `Copy` button next to it, and paste that into the terminal as your password:
+If you didn't change the credentials helper, it will now prompt you for a password, in the `Clone repository` dialog in CodeCatalyst, use the `Create token` button, and then click on the `Copy` button next to it, and paste that into the terminal as your password:
 
 ```bash
 Cloning into 'environments-infra'...
-Password for 'https://cobusbernard@git.us-west-2.codecatalyst.aws/v1/Cobus-AWS/TerraformMultiAccount/environments-infra':
 remote: Counting objects: 4, done.
 Unpacking objects: 100% (4/4), 1.11 KiB | 567.00 KiB/s, done.
 ```
 
 ### Configuring Terraform
 
-We need to define a backend for environment accounts first, please create `terraform.tf` with the following - it is the same as for the `main-infra` repo, except we changed the `key` by adding in `-enviroments`:
+We need to define a backend for environment accounts first, please create `terraform.tf` in the `environments-infra` with the following - it is the same as for the `main-infra` repo, except we changed the `key` by adding in `-enviroments`:
 
 ```bash
 terraform {
   backend "s3" {
-    bucket         = "tf-multi-account"
+    bucket         = "tf-state-files"
     key            = "terraform-environments-state-file/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "TerraformMainStateLock"
@@ -658,7 +678,7 @@ terraform {
 }
 ```
 
-Let's confirm the backend configuration is correct by initializing Terraform by running `terraform init`:
+Let's confirm the backend configuration is correct by initializing Terraform by changing into the `environment-infra` directory, and then running `terraform init`:
 
 ```bash
 $ terraform init
@@ -689,7 +709,7 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
 
-We will use `variables.tf` again to manage our variables, and the first ones we need to add is `aws_region` and `tf_caller` - we will be using the `aws_caller_identity` data source to determine who is calling `terraform plan` and using the appropriate role for a user vs our workflows. Create `variable.tf` with the following content:
+We will use `variables.tf` again to manage our variables, this time in the `environments-infra` directory, and the first ones we need to add is `aws_region` and `tf_caller` - we will be using the `aws_caller_identity` data source to determine who is calling `terraform plan` and using the appropriate role for a user vs our workflows. Create `variable.tf` with the following content:
 
 ```bash
 variable "aws_region" {
@@ -753,7 +773,7 @@ Before we can test that everything is working, we need to cover Terraform Worksp
 
 A Terraform [Workspaces](https://developer.hashicorp.com/terraform/language/state/workspaces) allows you to store the state file associated with that workspace in a different location, allowing you to reuse the same infrastructure definition for multiple sets of infrastructure. To clarify, we will be creating a single folder with Terraform files, but applying those to our three environments, and each one will need to store the state file independently so we don't overwrite the state by using the same backend configuration. Workspaces simplify this for us as it will change the location of the state file defined in our backend relative to the workspace name. To use this, we will name our workspaces the same as our environments by running the following commands:
 
-```text
+```bash
 terraform workspace new dev
 terraform workspace new test
 terraform workspace new prod
@@ -763,7 +783,7 @@ terraform workspace select dev
 
 You should see the following output:
 
-```text
+```bash
 $ terraform workspace new dev
 Created and switched to workspace "dev"!
 
@@ -1076,10 +1096,10 @@ Here is the content of each file:
 
 To use these workflows, please update the AWS Account Id from `123456789012` to your one in both of these files.
 
-Before we commit and push all the changes to kick off the workflows, we first need to include our `*.tfvars` files. As you will see in the comment in the file, it is generally not recommended as the typical use-case for them is developer / local specific overrides. In our case, we want them to be maintained in version control, so we will be adding them with the `-f` flag to force git to add them. Any future changes will be picked up by git, but any new ones that are added will still be ignored, providing a way for users to still use them locally. Use the following to add them:
+Before we commit and push all the changes to kick off the workflows, we first need to include our `*.tfvars` files. As you will see in the comment in the file, it is generally not recommended as the typical use-case for them is developer / local specific overrides. In our case, we want them to be maintained in version control, so we will be adding them with the `-f` flag to force git to add them. Any future changes will be picked up by git, but any new ones that are added will still be ignored, providing a way for users to still use them locally. Use the following to add them in the `environments-infra` directory:
 
 ```bash
-git add -f env_account_vars/*.tfvars
+git add -f env_accounts_vars/*.tfvars
 ```
 
 We now have all the base setup completed, let's commit all the changes, and then continue. Run the following:
