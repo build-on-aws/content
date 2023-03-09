@@ -379,6 +379,13 @@ JOB_RUN_ID=$(aws emr-serverless start-job-run \
             "entryPointArguments": ['${SPARK_ARGS%,}'],
             "sparkSubmitParameters": "--py-files s3://'${S3_BUCKET}'/github/pyspark/jobs/'${JOB_VERSION}'/job_files.zip"
         }
+    }' \
+    --configuration-overrides '{
+        "monitoringConfiguration": {
+            "s3MonitoringConfiguration": {
+                "logUri": "s3://'${S3_BUCKET}'/logs/"
+            }
+        }
     }' --query 'jobRunId' --output text)
 
 echo "Job submitted: ${APPLICATION_ID}/${JOB_RUN_ID}"
