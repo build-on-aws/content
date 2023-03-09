@@ -29,9 +29,24 @@ Resources:
       Name: prod-spark
       ReleaseLabel: emr-6.9.0
       Type: Spark
+      InitialCapacity:
+        - Key: Driver
+          Value:
+            WorkerCount: 1
+            WorkerConfiguration:
+              Cpu: 4 vCPU
+              Memory: 16 GB
+              Disk: 20 GB
+        - Key: Executor
+          Value:
+            WorkerCount: 4
+            WorkerConfiguration:
+              Cpu: 4 vCPU
+              Memory: 16 GB
+              Disk: 20 GB
       MaximumCapacity:
-        Cpu: 200 vCPU
-        Memory: 100 GB
+        Cpu: 400 vCPU
+        Memory: 3000 GB
 
   ArtifactsBucket:
     Type: AWS::S3::Bucket
@@ -179,9 +194,13 @@ Resources:
 Outputs:
   ApplicationId:
     Value: !Ref SparkApplication
+    Description: APPLICATION_ID
   S3BucketName:
     Value: !Ref ArtifactsBucket
+    Description: S3_BUCKET_NAME
   JobRoleArn:
     Value: !GetAtt EMRServerlessJobRole.Arn
+    Description: JOB_ROLE_ARN
   OIDCRoleArn:
     Value: !GetAtt GitHubOIDCRole.Arn
+    Description: OIDC_ROLE_ARN

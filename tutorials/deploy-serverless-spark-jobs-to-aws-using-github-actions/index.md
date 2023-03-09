@@ -194,6 +194,8 @@ For the structure of our PySpark job, we'll create the following files in the `p
 import sys
 from datetime import date
 
+from jobs.extreme_weather import ExtremeWeather
+
 from pyspark.sql import SparkSession
 
 if __name__ == "__main__":
@@ -203,7 +205,7 @@ if __name__ == "__main__":
     """
     spark = SparkSession.builder.appName("ExtremeWeather").getOrCreate()
 
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 1 and sys.argv[1].isnumeric():
         year = sys.argv[1]
     else:
         year = date.today().year
@@ -220,8 +222,9 @@ if __name__ == "__main__":
         {"description": "Highest precipitation", "column_name": "PRCP", "units": "inches"},
     ]
 
+    ew = ExtremeWeather()
     for stat in stats_to_gather:
-        max_row = findLargest(df, stat["column_name"])
+        max_row = ew.findLargest(df, stat["column_name"])
         print(
             f"  {stat['description']}: {max_row[stat['column_name']]}{stat['units']} on {max_row.DATE} at {max_row.NAME} ({max_row.LATITUDE}, {max_row.LONGITUDE})"
         )
@@ -536,9 +539,9 @@ jobs:
       - name: Copy pyspark file to S3
         run: |
           echo Uploading ${{github.ref_name}} to S3
-          cd jobs && zip -r job_files.zip . && cd ..
+          zip -r job_files.zip jobs
           aws s3 cp entrypoint.py s3://$S3_BUCKET_NAME/github/pyspark/jobs/${{github.ref_name}}/
-          aws s3 cp jobs/job_files.zip s3://$S3_BUCKET_NAME/github/pyspark/jobs/${{github.ref_name}}/
+          aws s3 cp job_files.zip s3://$S3_BUCKET_NAME/github/pyspark/jobs/${{github.ref_name}}/
 ```
 
 ```bash
