@@ -177,11 +177,11 @@ Resources:
 
 
 Outputs:
-  ProductionApplicationId:
+  ApplicationId:
     Value: !Ref SparkApplication
-  ProductionS3Bucket:
+  S3BucketName:
     Value: !Ref ArtifactsBucket
-  EMRServerlessJobExecutionRoleArn:
+  JobRoleArn:
     Value: !GetAtt EMRServerlessJobRole.Arn
-  GitHubOIDCRoleArn:
+  OIDCRoleArn:
     Value: !GetAtt GitHubOIDCRole.Arn
