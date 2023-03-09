@@ -350,6 +350,7 @@ We'll also create a `run-job.sh` script in the `pyspark/scripts` directory - thi
 
 ```bash
 #!/usr/bin/env bash
+set -e
 
 # This script kicks off an EMR Serverless job and waits for it to complete.
 # If the job does not run successfully, the script errors out.
@@ -366,7 +367,7 @@ printf -v SPARK_ARGS '"%s",' "${SPARK_JOB_PARAMS[@]}"
 
 # Start the job
 JOB_RUN_ID=$(aws emr-serverless start-job-run \
-    --name ghuni-${ENTRY_POINT} \
+    --name ${ENTRY_POINT} \
     --application-id $APPLICATION_ID \
     --execution-role-arn $JOB_ROLE_ARN \
     --job-driver '{
@@ -536,8 +537,8 @@ jobs:
         run: |
           echo Uploading ${{github.ref_name}} to S3
           cd jobs && zip -r job_files.zip . && cd ..
-          aws s3 cp entrypoint.py s3://$S3_BUCKET_NAME/github/pyspark/jobs/$GITHUB_SHA/
-          aws s3 cp jobs/job_files.zip s3://$S3_BUCKET_NAME/github/pyspark/jobs/$GITHUB_SHA/
+          aws s3 cp entrypoint.py s3://$S3_BUCKET_NAME/github/pyspark/jobs/${{github.ref_name}}/
+          aws s3 cp jobs/job_files.zip s3://$S3_BUCKET_NAME/github/pyspark/jobs/${{github.ref_name}}/
 ```
 
 ```bash
@@ -570,7 +571,7 @@ The last step is getting our code to run in production. For this, we'll create a
 Create the file `.github/workflows/run-job.yaml`
 
 ```yaml
-name: Fetch Data
+name: ETL Job
 
 env:
   #### BEGIN: BE SURE TO REPLACE THESE VALUES
@@ -593,7 +594,7 @@ on:
         default: latest
 
 jobs:
-  github-views:
+  extreme-weather:
     runs-on: ubuntu-20.04
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
@@ -617,7 +618,7 @@ jobs:
       - name: Start pyspark job
         run: |
           echo "running ${{ (steps.get-latest-tag.outputs.tag || github.event.inputs.job_version) || env.JOB_VERSION}} of our job"
-          bash scripts/run-job.sh $PROD_APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME ${{ (steps.get-latest-tag.outputs.tag || github.event.inputs.job_version) || env.JOB_VERSION}} main.py s3://${S3_BUCKET_NAME}/github/traffic/ s3://${S3_BUCKET_NAME}/github/output/views/
+          bash scripts/run-job.sh $APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME ${{ (steps.get-latest-tag.outputs.tag || github.event.inputs.job_version) || env.JOB_VERSION}} entrypoint.py s3://${S3_BUCKET_NAME}/github/traffic/ s3://${S3_BUCKET_NAME}/github/output/views/
 ```
 
 Commit and push the file.
