@@ -7,7 +7,7 @@ tags:
   - cicd
 authorGitHubAlias: spara
 authorName: Sophia Parafina
-date: 2023-02-21
+date: 2023-03-10
 ---
 
 Continuous Integration and Continuous Delivery (CI/CD) is a method for implementing [DevOps](https://aws.amazon.com/devops/what-is-devops/). It is both a process and infrastructure that enables developers to rapidly and incrementally build and deliver software updates. In this article, we start with a high level overview of Continuous Integration, examining how it improves software quality and rapid delivery. To better understand the process, we’ll use a concrete example of each step to illustrate the process and demonstrate how DevOps and CI improves the software development process.
