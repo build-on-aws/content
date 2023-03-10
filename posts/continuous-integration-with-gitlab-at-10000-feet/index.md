@@ -2,7 +2,7 @@
 title: Continuous Integration with GitLab at 10,000 Feet
 description: Learn how to build, test, and deploy a containerized Flask app with GitLab CI/CD.
 tags:
-  - GitLab
+  - gitlab
   - containers
   - cicd
 authorGitHubAlias: spara
