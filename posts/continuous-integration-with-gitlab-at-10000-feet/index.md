@@ -228,3 +228,5 @@ The CI portion of the pipeline is complete and the release artifact is ready for
 ## Summary
 
 By examining each stage in the pipeline, we can see how Continuous Integration automates the software delivery process. Developers can start the process by committing their changes, and the code is built and tested automatically as it passes through the stages. By including testing as part of the build process, errors and regressions can be discovered before the software is accepted as a release candidate. Continuous Integration is an important tool for DevOps enabling organizations to deliver high quality software rapidly.
+
+If you want to learn more about DevOps, checkout [What is DevOps](https://aws.amazon.com/devops/what-is-devops/); and if you want to setup GitLab, try the [DevOps Modernization Workshop](https://aws.amazon.com/devops/what-is-devops/).
