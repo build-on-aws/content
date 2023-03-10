@@ -5,7 +5,7 @@ tags:
   - gitlab
   - containers
   - cicd
-authorGitHubAlias: spara
+authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2023-03-10
 ---
