@@ -150,7 +150,7 @@ You can use your own CloudFormation template, or simply use one of the sample te
 
 For this blog, I am using a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer form. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
 
->In real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation templates. However, to keep your first deployment with CodeCatalyst simple, lets deploy everything in a single template.
+>In the real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation templates. However, to keep your first deployment with CodeCatalyst simple, let's deploy everything in a single template.
 
 Let's ensure we commit our changes to our git repo using the following commands:
 ```bash
