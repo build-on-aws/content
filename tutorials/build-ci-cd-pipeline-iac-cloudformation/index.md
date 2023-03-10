@@ -37,11 +37,11 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 ## Pre-requisites
 
 #### <b> AWS account. </b>
- Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://portal.aws.amazon.com/billing/signup#/start/email).
+Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://portal.aws.amazon.com/billing/signup#/start/email).
 
 #### <b>CodeCatalyst account. </b>
 
-Follow steps in the documentation to set [Setting up CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html)
+Follow steps in the documentation to [set up CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html)
 
 
 #### <b>IAM Roles </b>
