@@ -22,8 +22,6 @@ This show is as interactive as our audience makes it, so join us as we work thro
 
 [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 
-[**Darko Mesaros**](https://twitter.com/darkosubotica), Senior Developer Advocate @ AWS
-
 [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
 
 
