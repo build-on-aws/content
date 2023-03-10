@@ -28,8 +28,8 @@ Apache Spark is one of the most popular frameworks for data processing both on-p
 <!-- Update with the appropriate values -->
 | Info                | Level                                  |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Beginner                               |
-| ⏱ Time to complete  | 45 minutes                             |
+| ✅ AWS Level        | Intermediate                               |
+| ⏱ Time to complete  | 60 minutes                             |
 | 💰 Cost to complete | ~$10                                    |
 | 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [GitHub Account](https://github.com) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
@@ -51,25 +51,25 @@ In order to follow along, you'll need:
  - An AWS account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
  - A GitHub account - sign up for free at [github.com](https://github.com/).
  - The `git` command
-- (optional) VS Code
+- An editor (VS Code, vim, emacs, Notepad.exe)
 
-We also need to create some infrastructure for our jobs to run. For the purposes of this tutorial, we're only going to create one set of resources. In a production environment, you could easily create an additional set of resources and change your workflows to run in different accounts or environments.
+We also need to create some infrastructure for our jobs to run. For the purposes of this tutorial, we're only going to create one set of resources. In a real-world environment, you might create test, staging, and production environments and change your workflows to run in these different environments or even completely different AWS accounts. These are the resources we need:
 
-- EMR Serverless application - We'll use EMR 6.9.0 with Spark 3.2.1
-- S3 buckets - This will contain our integration test artifacts, versioned production releases, and any job output
-- IAM role - We'll create a single IAM role that can be used by our GitHub Action with a limited set of permissions to deploy and run Spark jobs
-
-You can create these resources by downloading the [CloudFormation template](./ci-cd-serverless-spark.cfn.yaml) and using the AWS CLI, or by navigating to the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create) and uploading the template there.
+- EMR Serverless application - We'll use EMR 6.9.0 with Spark 3.3.0
+- S3 bucket - This will contain our integration test artifacts, versioned production releases, and logs from each job run
+- IAM roles
+  - One role used by our GitHub Action with a limited set of permissions to deploy and run Spark jobs, and view the logs
+  - One role used by the Spark job that can access data on S3
 
 ### Creating Demo Resources
 
 > **Note**: This demo can only be run in `us-east-1` region - if you want to use another region, you will need to [create your EMR Serverless application with a VPC](https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/vpc-access.html).
 
-1. Create the CloudFormation stack in the console or via the CLI
+You can create these resources by downloading the [CloudFormation template](./ci-cd-serverless-spark.cfn.yaml) and either using the AWS CLI, or by navigating to the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create) and uploading the template there.
 
 There are two parameters you can set when creating the stack:
 
-- `GitHubRepo` is the `user/repo` format of your GitHub repository that you want your OIDC role to be able to access.
+- `GitHubRepo` is the `user/repo` format of your GitHub repository that you want your OIDC role to be able to access. We create the repository in the next step and will be something like `<your-github-username>/ci-cd-serverless-spark`
 - `CreateOIDCProvider` allows you to disable creating the OIDC endpoint for GitHub in your AWS account if it already exists.
 
 ```bash
@@ -90,6 +90,8 @@ Now let's get started!
 
 First, [Create a new repository](https://github.com/new) on GitHub. For the rest of this tutorial, we'll assume you used `ci-cd-serverless-spark` for the repository name. The repository can be public or private.
 
+> **Note** Make sure you use the same repository name that you did when you created the CloudFormation Stack above!
+
 ![](images/github-repo-create.png)
 
 In this step, we'll create our initial source code structure as well as our first GitHub Action that will be configured to run on every `git push`. Assuming you're running in a standard terminal, we'll create a `test_basic.py` file in the `pyspark/tests` directory and a `requirements-dev.txt` file in the `pyspark` directory.
@@ -98,14 +100,16 @@ In this step, we'll create our initial source code structure as well as our firs
 # First clone your repository
 git clone github.com/<USERNAME>/<REPOSITORY>
 
+# Change into the cloned repository
+# Make the directories we'll need for the rest of the tutorial
 cd ci-cd-serverless-spark
-mkdir -p pyspark/tests
+mkdir -p .github/workflows pyspark/tests pyspark/jobs pyspark/tests
 ```
 
 - Create a `test_basic.py` file in `pyspark/tests` that contains only the following simple assertion.
 
 ```python
-def test_s3_uri():
+def test_is_this_on():
     assert 1 == 1
 ```
 
@@ -115,7 +119,9 @@ def test_s3_uri():
 pytest==7.1.2
 ```
 
-Next we need to create our GitHub Action to run unit tests when we push our code. We'll create a `unit-tests.yaml` file in the `.github/workflows` directory. The file should look like this:
+Next we need to create our GitHub Action to run unit tests when we push our code. If you're not familiar with GitHub Actions, it's a way to automate all your software workflows by creating workflow files in your GitHub repository that can be triggered by a wide variety of actions on GitHub. The first GitHub Action we're going to create automatically runs `pytest` every single time we push a new commit to our repository. 
+
+To do this, create a `unit-tests.yaml` file in the `.github/workflows` directory. The file should look like this:
 
 ```yaml
 name: Spark Job Unit Tests
@@ -146,7 +152,7 @@ This performs a few steps:
 
 - Checkout the code
 - Install Python 3.7.10 (the version that EMR Serverless uses)
-- Install our `pytest` dependency from `requirements-dev.txt
+- Install our `pytest` dependency from `requirements-dev.txt`
 - Run `pytest`
 
 With these three files added, we can now `git add` and `git push` our code. Your directory structure should look like this:
@@ -188,7 +194,7 @@ Our job is simple: we're going to extract "extreme weather events" across all st
 
 For the structure of our PySpark job, we'll create the following files in the `pyspark` directory:
 
-- An `entrypoint.py` file that will be where we initialize our job
+- An `entrypoint.py` file that will be where we initialize our job and run the analysis
 
 ```python
 import sys
@@ -311,7 +317,13 @@ git commit -am "Add pyspark code"
 git push
 ```
 
-Using the GitHub Action we created before, your new unit test will automatically run and validate that your analysis code is running correctly. For extra credit, feel free to make the test fail and see what happens when you commit and push the failing test.
+Using the GitHub Action we created before, your new unit test will automatically run and validate that your analysis code is running correctly.
+
+In the GitHub UI, in the "Actions" tab, you should now have two workflow runs for your unit tests.
+
+![](images/github-unit-test-workflows.png)
+
+For extra credit, feel free to make the test fail and see what happens when you commit and push the failing test.
 
 ## Create an integration test to run on new pull requests
 
@@ -407,22 +419,14 @@ fi
 if [ "$JOB_STATUS" = "SUCCESS" ]; then
     echo "Job succeeded! Printing application logs:"
     echo "  s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz"
-    aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip
+    aws s3 ls s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz \
+        && aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip \
+        || echo "No job output"
 fi
 ```
 
-Now in `.github/workflows`, create an `integration-test.yaml` file. In here, we'll finally replace a few values from our CloudFormation stack.
+Now in the `.github/workflows` directory, we're going to create a new workflow for running our integration test! Create an `integration-test.yaml` file. In here, we'll replace environment variables using a few values from our CloudFormation stack.
 
-Again, take a look at the Outputs tab in the stack you created in the [CloudFormation Console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks) or use this AWS CLI command.
-
-```bash
-# Change "gh-serverless-spark-demo" to the name of the stack you created
-aws cloudformation describe-stacks \
-  --query 'Stacks[?StackName==`gh-serverless-spark-demo`][].Outputs' \
-  --output text
-```
-
-Replace the `APPLICATION_ID`, `S3_BUCKET_NAME`, `JOB_ROLE_ARN`, and `OIDC_ROLE_ARN` values below with the appropriate values from your stack.
 
 ```yaml
 name: PySpark Integration Tests
@@ -470,7 +474,18 @@ jobs:
           bash scripts/run-job.sh $APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME $GITHUB_SHA integration_test.py s3://${S3_BUCKET_NAME}/github/traffic/
 ```
 
-For this portion, we're going to create a new branch and push the files into that branch.
+To find the right values to replace, take a look at the "Outputs" tab in the stack you created in the [CloudFormation Console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks) or use this AWS CLI command.
+
+```bash
+# Change "gh-serverless-spark-demo" to the name of the stack you created
+aws cloudformation describe-stacks \
+  --query 'Stacks[?StackName==`gh-serverless-spark-demo`][].Outputs' \
+  --output text
+```
+
+Replace the `APPLICATION_ID`, `S3_BUCKET_NAME`, `JOB_ROLE_ARN`, and `OIDC_ROLE_ARN` values with the appropriate values from your stack.
+
+So we can see how integration tests integrate (hah!) with pull requests, we're going to commit these changes by creating a new branch, pushing the files into that branch, then opening a pull request.
 
 The `integration-test` workflow we created will run whenever somebody opens a new pull request. 
 
@@ -481,7 +496,7 @@ git commit -m "Add integration test"
 git push --set-upstream origin feature/integration-test
 ```
 
-Once pushed, go to your GitHub repository and you will see a notification that the new branch `feature/integration-test` had a recent and can create a new **pull request**.
+Once pushed, go to your GitHub repository and you will see a notification that the new branch `feature/integration-test` had a recent push and can create a new **pull request**.
 
 ![](images/github-pull-request.png)
 
@@ -495,6 +510,8 @@ You will see the status of the **deploy-and-validate** pull request workflow. Th
 
 ![](images/github-pr-complete.png)
 
+If you want to, you can use the [EMR Serverless Console](https://us-east-1.console.aws.amazon.com/emr/home?region=us-east-1#/serverless) to view the status of the jobs as well.
+
 Once the checks finish, go ahead and click the **Merge pull request** button on the pull request page and now any new pull requests to your repo will require this integration check to pass before merging!
 
 In your local repository, on your desktop/laptop, return to the main branch and do a git pull.
@@ -504,7 +521,7 @@ git checkout main
 git pull
 ```
 
-## Ship it!
+## Ship it! 🚢
 
 OK, so we've taken our brand new repository and added unit tests, integration tests, and now we want to begin shipping things to production. In order to do this, we'll create a new GitHub Action based on whenever somebody adds a tag to our repository. If the tag matches a semantic version (e.g. `v1.0.2`), we'll automatically package up our project and ship it to S3!
 
@@ -565,10 +582,10 @@ git push
 
 Now let's create a new release.
 
-- Return to the GitHub UI and click on the "Releases" link on the right-hand side.
-- Then click on the "Create a new release" button.
-- Click on "Choose a tag" and in the "Find or create a new tag" box, type in `v0.0.1`.
-- Then click on the "Create new tag: v0.0.1 on publish" button below that.
+- Return to the GitHub UI and click on the **Releases** link on the right-hand side.
+- Then click on the **Create a new release** button.
+- Click on **Choose a tag** and in the **Find or create a new tag** box, type in `v0.0.1`.
+- Then click on the **Create new tag: v0.0.1 on publish** button below that.
 
 ![](images/github-create-tag.png)
 
@@ -576,7 +593,7 @@ If you want you can fill in the release title or description, or just click the 
 
 When you do this, a new tag is added to the repository and will trigger the Action we just created.
 
-Return to the main page of your repository and click on the "Actions" button. You should see a new "Package and Deploy Spark Job" Action running. Click on the job, then the "deploy" link and you'll see GitHub deploying your new code to S3.
+Return to the main page of your repository and click on the **Actions** button. You should see a new **Package and Deploy Spark Job** Action running. Click on the job, then the **deploy** link and you'll see GitHub deploying your new code to S3.
 
 ![](images/github-deploy.png)
 
@@ -584,7 +601,7 @@ Return to the main page of your repository and click on the "Actions" button. Yo
 
 The last step is getting our code to run in production. For this, we'll create a new GitHub Action that can both automatically run the latest version of our deployed code, or manually run the same job with a set of custom parameters.
 
-Create the file `.github/workflows/run-job.yaml`
+Create the file `.github/workflows/run-job.yaml` and make sure to replace the environment variables at the top.
 
 ```yaml
 name: ETL Job
@@ -637,7 +654,9 @@ jobs:
           bash scripts/run-job.sh $APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME ${{ (steps.get-latest-tag.outputs.tag || github.event.inputs.job_version) || env.JOB_VERSION}} entrypoint.py s3://${S3_BUCKET_NAME}/github/traffic/ s3://${S3_BUCKET_NAME}/github/output/views/
 ```
 
-Commit and push the file.
+...just checking. Did you replace the 4 variables after `BEGIN: BE SURE TO REPLACE THESE VALUES`? Because I sure didn't! But if you didn't, it's a good chance to remind you that this GitHub Action could be running in an entirely different account with an entirely different set of permissions. This is the awesome power of OIDC and CI/CD workflows. 
+
+Now that you've triple-checked the placeholder values are replaced, commit and push the file.
 
 ```bash
 git commit -am "Add run job"
@@ -646,11 +665,11 @@ git push
 
 Once pushed, this Action will run your job every day at 02:30 UTC time. But for now, let's go ahead and trigger it manually.
 
-Return to the GitHub UI, click on the Actions tab and click on "Fetch Data" on the left-hand side. Click on the "Run workflow" button and you're presented with some parameters we configured in the Action above.
+Return to the GitHub UI, click on the Actions tab and click on **ETL Job** on the left-hand side. Click on the "Run workflow" button and you're presented with some parameters we configured in the Action above.
 
 ![](images/github-run-job.png)
 
-Feel free to change the git tag we want to use, but we can just leave it as `latest`. Click the green "Run workflow" button and this will kick off an EMR Serverless job!
+Feel free to change the git tag we want to use, but we can just leave it as `latest`. Click the green **Run workflow** button and this will kick off an EMR Serverless job!
 
 The GitHub Action we created starts the job, waits for it to finish, and then we can take a look at the output.
 
@@ -664,7 +683,7 @@ If the job is successful, the job output is logged as part of the GitHub Action.
 
 You can also view the logs with the following `aws s3 cp` command, assuming you have `gunzip` installed.
 
-Replace `S3_BUCKET` with the bucket from your CloudFormation stack and `APPLICATION_ID` and `JOB_RUN_ID` with the values from your "Fetch Data" GitHub Action.
+Replace `S3_BUCKET` with the bucket from your CloudFormation stack and `APPLICATION_ID` and `JOB_RUN_ID` with the values from your **Fetch Data** GitHub Action.
 
 ```
 aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip
