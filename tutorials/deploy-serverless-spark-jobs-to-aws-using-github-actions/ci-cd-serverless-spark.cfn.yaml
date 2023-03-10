@@ -182,6 +182,11 @@ Resources:
                   - "s3:ListBucket"
                 Effect: Allow
                 Resource: "*"
+              - Effect: Allow
+                Action:
+                  - "s3:GetObject"
+                Resource:
+                  - !Sub "${ArtifactsBucket.Arn}/logs/*"
               - Action:
                   - "s3:PutObject"
                 Effect: Allow

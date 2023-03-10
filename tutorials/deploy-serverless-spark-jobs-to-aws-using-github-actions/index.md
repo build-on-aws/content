@@ -403,6 +403,11 @@ if [ "$JOB_STATUS" = "FAILED" ]; then
     echo "Job failed: ${ERR_MESSAGE}"
     exit 1;
 fi
+
+if [ "$JOB_STATUS" = "SUCCESS" ]; then
+    OUTPUT=$(aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip)
+    echo -e $OUTPUT
+fi
 ```
 
 Now in `.github/workflows`, create an `integration-test.yaml` file. In here, we'll finally replace a few values from our CloudFormation stack.
@@ -651,6 +656,25 @@ The GitHub Action we created starts the job, waits for it to finish, and then we
 ## View the output
 
 This job just logs the output to `stdout`. When logs are enabled, EMR Serverless writes the driver `stdout` to a standard path on S3.
+
+If the job is successful, the job output is logged as part of the GitHub Action. You can also view the logs with the following `aws s3 cp` command, assuming you have `gunzip` installed.
+
+Replace `S3_BUCKET` with the bucket from your CloudFormation stack and `APPLICATION_ID` and `JOB_RUN_ID` with the values from your "Fetch Data" GitHub Action.
+
+```
+aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip
+```
+
+```
+The amount of weather readings in 2023 is: 736662
+
+Here are some extreme weather stats for 2023:
+  Highest temperature: 120.7°F on 2023-01-14 00:00:00 at ONSLOW AIRPORT, AS (-21.6666666, 115.1166666)
+  Highest all-day average temperature: 104.4°F on 2023-01-12 00:00:00 at MARBLE BAR, AS (-21.1833333, 119.75)
+  Highest wind gust: 106.1mph on 2023-01-25 00:00:00 at ST GEORGE ISLAND AIRPORT, AK US (56.57484, -169.66265)
+  Highest average wind speed: 78.5mph on 2023-02-04 00:00:00 at MOUNT WASHINGTON, NH US (44.27018, -71.30336)
+  Highest precipitation: 17.04inches on 2023-02-06 00:00:00 at INHAMBANE, MZ (-23.8666666, 35.3833333)
+```
 
 ## Conclusion
 
