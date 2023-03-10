@@ -64,34 +64,34 @@ Before we create the CI/CD pipeline and workflows, lets setup CodeCatalyst.
 ![Setting up a CodeCatalyst Space, Project, Repo,  Environment inside AWS account](images/cc_create_components.png)
 
 #### <b>Space </b>
-Lets start with our CodeCatalyst Space. A space represents you, your company, department or group and your development teams can manage projects inside it. 
+Lets start with our CodeCatalyst Space. A space represents you, your company, your department, or your group. Your development teams can manage projects inside it. 
 
-Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws), add a name(we will use `CloudFormation CodeCatalyst`), add the AWS Account ID to link for billing. Follow the prompts to link your AWS Account with CodeCatalyst.
+Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws), add a name (we will use `CloudFormation CodeCatalyst`), and add the AWS Account ID to link for billing. Follow the prompts to link your AWS Account with CodeCatalyst.
 
-Please note, `012345678901` is a placeholder, replace it with your own account ID. You can find your account ID in the top right of your AWS Console. Before you can create the space, follow the `Verify in the AWS console` link and complete the verification! You should get green tick to proceed!
+Please note, `012345678901` is a placeholder; replace it with your own account ID. You can find your account ID in the top right of your AWS Console. Before you can create the space, follow the `Verify in the AWS console` link and complete the verification. You should get green tick to proceed!
 
-At the time of writing this blog, CodeCatalyst is in public preview, and only one region is currently supported.
+(At the time this writing, CodeCatalyst is in public preview, and only one region is currently supported.)
 
 ![CodeCatalyst Create Space dialog](images/cc_create_space.png)
 </br>
 
-Once the space is created, goto the `AWS Accounts` tab, click on your account ID and then click on `Manage roles from the AWS Management Console`. 
+Once the space is created, go to the `AWS Accounts` tab, click on your account ID, and then click on `Manage roles from the AWS Management Console`. 
 
-This will open a new browser tab to `Add IAM role to Amazon CodeCatalyst space`. In the dialog, select option `Add an existing role you have created in IAM` and select the `main_branch_IAM_role` from the dropdown. Click `Add role`. 
-Follow same steps for the `pr_branch_IAM_role`. 
+This will open a new browser tab to `Add IAM role to Amazon CodeCatalyst space`. In the dialog, select the option `Add an existing role you have created in IAM` and select the `main_branch_IAM_role` from the dropdown. Click `Add role`. 
+Follow the same steps for the `pr_branch_IAM_role`. 
 
 ![Console Add IAM role to Amazon CodeCatalyst space dialog](images/console_add_iam_role_to_codecatalyst.png)
  
 #### <b>Project </b>
 Next, we create a new Project inside the space. We can have multiple projects inside a space.
 
-To create a project click on the `Create Project` button, select `Start from scratch`, and give your project a name - we will use `ThreeTierApp`
+To create a project click on the `Create Project` button, select `Start from scratch`, and give your project a name - we will use `ThreeTierApp`.
 
 ![CodeCatalyst Create Project dialog](images/cc_create_project.png)
 </br>
  
 #### <b>Repository</b> 
-Now we create a new repository for our code - in our case the CloudFormation template and other resources. Click `Code` in the left-side navigation menu, then select `Source repositories`, `Add repository` and choose `Create repository`. Set a repository name ( we will use `3-tier-app` in this tutorial), add a description and `none` for the .gitignore file :
+Now we'll create a new repository for our code - in our case the CloudFormation template and other resources. Click `Code` in the left-side navigation menu, then select `Source repositories`, `Add repository`, and choose `Create repository`. Set a repository name ( we will use `3-tier-app` in this tutorial), add a description and `none` for the .gitignore file :
 
 ![CodeCatalyst Create Repository dialog](images/cc_create_repository.png)
 </br>
@@ -99,7 +99,7 @@ Now we create a new repository for our code - in our case the CloudFormation tem
 #### <b>Environment </b>
 Lastly, we need to setup the AWS environment where our CloudFormation stack will be deployed by automated workflows. This is my non-production environment where my sample CloudFormation template will be deployed.   
 
-From the left navigation panel, select `CI/CD`, `Environments` and click on `Create Environment`. In the Environment details enter following :
+From the left navigation panel, select `CI/CD`, `Environments`, and click on `Create Environment`. In the Environment details enter following:
 - Environment name : `PreProdEnv`
 - Environment type : `Non-production`
 - Description : `Pre-production environment to learn, test and experiment with CloudFormation`
@@ -111,7 +111,7 @@ From the left navigation panel, select `CI/CD`, `Environments` and click on `Cre
 
 ## Setting up a Dev Environment
 
-To work on our infrastructure as code with CloudFormation, we need a <b>Dev Environment</b>. You have option to use following support IDEs (Integrated Development Environments) : 
+To work on our infrastructure as code with CloudFormation, we need a <b>Dev Environment</b>. You have the option to use the following support IDEs (Integrated Development Environments): 
 - AWS Cloud9
 - Visual Studio Code
 - JetBrains IDEs
