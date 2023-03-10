@@ -405,8 +405,9 @@ if [ "$JOB_STATUS" = "FAILED" ]; then
 fi
 
 if [ "$JOB_STATUS" = "SUCCESS" ]; then
-    OUTPUT=$(aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip)
-    echo -e $OUTPUT
+    echo "Job succeeded! Printing application logs:"
+    echo "  s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz"
+    aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip
 fi
 ```
 
@@ -657,7 +658,11 @@ The GitHub Action we created starts the job, waits for it to finish, and then we
 
 This job just logs the output to `stdout`. When logs are enabled, EMR Serverless writes the driver `stdout` to a standard path on S3.
 
-If the job is successful, the job output is logged as part of the GitHub Action. You can also view the logs with the following `aws s3 cp` command, assuming you have `gunzip` installed.
+If the job is successful, the job output is logged as part of the GitHub Action.
+
+![](images/github-job-output.png)
+
+You can also view the logs with the following `aws s3 cp` command, assuming you have `gunzip` installed.
 
 Replace `S3_BUCKET` with the bucket from your CloudFormation stack and `APPLICATION_ID` and `JOB_RUN_ID` with the values from your "Fetch Data" GitHub Action.
 
