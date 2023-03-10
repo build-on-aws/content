@@ -121,7 +121,7 @@ To work on our infrastructure as code with CloudFormation, we need a <b>Dev Envi
 
 For this blog, we will be using `AWS Cloud9` for our development environment. 
 
-From the left navigation panel, select `Code`, `Dev Environments`, and click on `Create Dev Environment`. In the `Create dev environment and open with AWS Cloud9` dialog box select following : 
+From the left navigation panel, select `Code`, `Dev Environments`, and click on `Create Dev Environment`. In the `Create dev environment and open with AWS Cloud9` dialog box select following: 
 - Repository : `Clone a repository` 
 - Repository : Select the repo that you want to clone. We created a repo `3-tier-app1` above, so select same. 
 - Branch : `Work in existing branch`
@@ -142,13 +142,13 @@ On the welcome screen, you can modify the Dev Environment Settings if you want.
 </br>
 </br>
 
-You will find an empty repository `3-tier-app`, with a readme.md, devfile.yaml and some hidden folders. The `devfile.yaml`, contains the definition to build your application libraries and toolchain. You can ignore it for purpose of this tutorial.
+You will find an empty repository `3-tier-app`, with a readme.md, devfile.yaml, and some hidden folders. The `devfile.yaml`, contains the definition to build your application libraries and toolchain. You can ignore it for the purpose of this tutorial.
 
 ### Sample CloudFormation template
 
 You can use your own CloudFormation template, or simply use one of the sample templates. 
 
-For this blog, I am using the a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer from. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
+For this blog, I am using a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer form. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
 
 >In real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation templates. However, to keep your first deployment with CodeCatalyst simple, lets deploy everything in a single template.
 
