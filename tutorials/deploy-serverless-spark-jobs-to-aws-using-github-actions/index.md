@@ -76,7 +76,7 @@ There are two parameters you can set when creating the stack:
 # Make sure to replace the ParameterValue for GitHubRepo below
 aws cloudformation create-stack \
     --region us-east-1 \
-    --stack-name gh-severless-spark-demo \
+    --stack-name gh-serverless-spark-demo \
     --template-body file://./ci-cd-serverless-spark.cfn.yaml \
     --capabilities CAPABILITY_NAMED_IAM \
     --parameters ParameterKey=GitHubRepo,ParameterValue=USERNAME/REPO ParameterKey=CreateOIDCProvider,ParameterValue=true
@@ -103,7 +103,7 @@ git clone github.com/<USERNAME>/<REPOSITORY>
 # Change into the cloned repository
 # Make the directories we'll need for the rest of the tutorial
 cd ci-cd-serverless-spark
-mkdir -p .github/workflows pyspark/tests pyspark/jobs pyspark/tests
+mkdir -p .github/workflows pyspark/tests pyspark/jobs pyspark/tests pyspark/scripts
 ```
 
 - Create a `test_basic.py` file in `pyspark/tests` that contains only the following simple assertion.
@@ -278,8 +278,7 @@ def mock_views_df():
         .config("spark.ui.enabled", False)
         .getOrCreate()
     )
-  sqlContext = SQLContext(spark)
-  return sqlContext.createDataFrame(
+  return spark.createDataFrame(
     [
       ("72793524234","2023-01-01",47.54554,-122.31475,7.6,"SEATTLE BOEING FIELD, WA US",44.1,24,42.7,24,1017.8,16,017.4,24,8.1,24,1.4,24,6.0,999.9,48.9,"",39.9,"",0.01,"G",999.9,"010000"),
       ("72793524234","2023-01-02",47.54554,-122.31475,7.6,"SEATTLE BOEING FIELD, WA US",37.8,24,34.0,24,1010.1,16,010.2,24,5.2,24,2.5,24,13.0,999.9,50.0,"",30.0,"",0.01,"G",999.9,"100000"),
@@ -290,7 +289,7 @@ def mock_views_df():
   )
 ```
 
-Then update the `test_basic.py` file with a new test.
+Then update the `test_basic.py` file with a new test. _Feel free to leave the old test in the file_
 
 ```python
 from jobs.extreme_weather import ExtremeWeather
@@ -302,7 +301,7 @@ def test_extract_latest_daily_value(mock_views_df):
 And add the following dependency to the `requirements-dev.txt` file:
 
 ```
-pyspark==3.2.1
+pyspark==3.3.0
 ```
 
 Your directory structure should now look like this:
@@ -427,6 +426,17 @@ fi
 
 Now in the `.github/workflows` directory, we're going to create a new workflow for running our integration test! Create an `integration-test.yaml` file. In here, we'll replace environment variables using a few values from our CloudFormation stack.
 
+To find the right values to replace, take a look at the "Outputs" tab in the stack you created in the [CloudFormation Console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks) or use this AWS CLI command.
+
+```bash
+# Change "gh-serverless-spark-demo" to the name of the stack you created
+aws cloudformation describe-stacks \
+  --query 'Stacks[?StackName==`gh-serverless-spark-demo`][].Outputs' \
+  --output text
+```
+
+Replace the `APPLICATION_ID`, `S3_BUCKET_NAME`, `JOB_ROLE_ARN`, and `OIDC_ROLE_ARN` values with the appropriate values from your stack.
+
 
 ```yaml
 name: PySpark Integration Tests
@@ -456,7 +466,7 @@ jobs:
         working-directory: ./pyspark
     steps:
       - uses: actions/checkout@v3
-      - name: Configure AWS credentials from Test account
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ env.OIDC_ROLE_ARN }}
@@ -473,17 +483,6 @@ jobs:
         run: |
           bash scripts/run-job.sh $APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME $GITHUB_SHA integration_test.py s3://${S3_BUCKET_NAME}/github/traffic/
 ```
-
-To find the right values to replace, take a look at the "Outputs" tab in the stack you created in the [CloudFormation Console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks) or use this AWS CLI command.
-
-```bash
-# Change "gh-serverless-spark-demo" to the name of the stack you created
-aws cloudformation describe-stacks \
-  --query 'Stacks[?StackName==`gh-serverless-spark-demo`][].Outputs' \
-  --output text
-```
-
-Replace the `APPLICATION_ID`, `S3_BUCKET_NAME`, `JOB_ROLE_ARN`, and `OIDC_ROLE_ARN` values with the appropriate values from your stack.
 
 So we can see how integration tests integrate (hah!) with pull requests, we're going to commit these changes by creating a new branch, pushing the files into that branch, then opening a pull request.
 
@@ -510,7 +509,11 @@ You will see the status of the **deploy-and-validate** pull request workflow. Th
 
 ![](images/github-pr-complete.png)
 
-If you want to, you can use the [EMR Serverless Console](https://us-east-1.console.aws.amazon.com/emr/home?region=us-east-1#/serverless) to view the status of the jobs as well.
+If you want to, you can use the [EMR Serverless Console](https://us-east-1.console.aws.amazon.com/emr/home?region=us-east-1#/serverless) to view the status of the jobs.
+
+If you haven't setup EMR Studio before, click the **Get started** button and then **Create and launch EMR Studio**.
+
+![](images/emr-studio-create.png)
 
 Once the checks finish, go ahead and click the **Merge pull request** button on the pull request page and now any new pull requests to your repo will require this integration check to pass before merging!
 
@@ -560,7 +563,7 @@ jobs:
         working-directory: ./pyspark
     steps:
       - uses: actions/checkout@v3
-      - name: Configure AWS credentials from Test account
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ env.OIDC_ROLE_ARN }}
