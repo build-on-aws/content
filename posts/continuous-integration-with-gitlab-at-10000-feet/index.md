@@ -10,22 +10,22 @@ authorName: Sophia Parafina
 date: 2023-02-21
 ---
 
-Continuous Integration and Continuous Delivery (CI/CD) is a method for implementing [DevOps](https://aws.amazon.com/devops/what-is-devops/). It is both a process and infrastructure that enables developers to rapidly and incrementally build and deliver software updates. In this article, we start with a high level overview of Continuous Integration and how it improves software quality and rapid delivery. To better understand the process, we’ll use a concrete example of each step to illustrate the process and demonstrate how DevOps and CI improves the software development process.
+Continuous Integration and Continuous Delivery (CI/CD) is a method for implementing [DevOps](https://aws.amazon.com/devops/what-is-devops/). It is both a process and infrastructure that enables developers to rapidly and incrementally build and deliver software updates. In this article, we start with a high level overview of Continuous Integration, examining how it improves software quality and rapid delivery. To better understand the process, we’ll use a concrete example of each step to illustrate the process and demonstrate how DevOps and CI improves the software development process.
 
-DevOps emphasizes testing, incremental updates, and frequent releases. CI is a software development process that implements DevOps practices. It is offten described as a pipeline, where code is submitted, built, tested, and published through a series of iterative stages. Each stage is a step towards delivering software. code Changes are built and tested automatically through the pipeline. If the change fails a stage or creates a regression, the stage detects the error and stops the process until it is resolved. When the error is fixed, the code moves to the next stage. The pipeline ensures software quality because the process stops when the software fails to meet the conditions of a stage. In DevOps, code changes are small and incremental, allowing for rapid releases.
+So what is continuous integration in simple terms? Think about it like this: DevOps emphasizes testing, incremental updates, and frequent releases; CI is a software development process that implements DevOps practices. It is often described as a pipeline, in which code is submitted, built, tested, and published through a series of iterative stages. Each stage is a step toward delivering software. Code changes are built and tested automatically through the pipeline. If the change fails a stage or creates a regression, the stage detects the error and stops the process until it is resolved. When the error is fixed, the code moves to the next stage. The pipeline ensures software quality because the process stops when the software fails to meet the conditions of a stage. In DevOps, code changes are small and incremental, allowing for rapid releases.
 
 | ![CI/CD pipeline](./images/pipeline.jpg) |
 |-|
 
-The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and another team picks up the process (https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html). 
+The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and [another team's starts](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html). 
 
 ## GitLab
 
-There are many CI/CD solutions and in this article, we’ll use GitLab (https://gitlab.com/), a DevOps software package. GitLab contains essential DevOps tools for delivering software such as repositories, testing, packaging, and releasing software.. In addition it provides additional support for configuration, monitoring, and governance. We’ll step through the Continuous Integration process by building a project and running through the stages in a simple pipeline. The pipeline has the following stages:
+There are many CI/CD solutions and in this article, we’ll use [GitLab](https://gitlab.com/), a DevOps software package. GitLab contains essential DevOps tools for delivering software such as repositories, testing, packaging, and releasing software. In addition it provides additional support for configuration, monitoring, and governance. We’ll walk through the Continuous Integration process by building a project and running through the stages in a simple pipeline. The pipeline has the following stages:
 
 - build - create a test container with a Python Flask application
 - test - performs a unit test on the container
-- release - the test container is tagged for release.
+- release - the test container is tagged for release
 
 > Note: The example demonstrates Continuous Integration concepts and takes a short cut when handling secrets, such as API keys to external services. The best practice is to store secrets in a vault or key store and configure GitLab to retrieve the key during the build process. Establishing and adding a key store is beyond the scope of this example.
 
@@ -56,7 +56,7 @@ For this example you will need:
 
 > ***Note**: To use free CI/CD minutes on shared runners, you'll need to validate your account with a credit card. If you prefer not to provide one, you can run pipelines by bringing your own runners and disabling shared runners for your project. This is required to discourage and reduce abuse on GitLab infrastructure. GitLab will not charge your card, it will only be used for validation.
 
-
+All right, let's get to it!
 
 **Step 1. Import a repository in GitLab**
 
@@ -161,10 +161,10 @@ services:
 
 The `build_job` script defines the tasks:
    
-- logging into the GitLab registry, 
-- building the image from the Dockerfile, 
-- tagging the image as test,
-- pushing the image to the GitLab image repository.
+- logging into the GitLab registry 
+- building the image from the Dockerfile 
+- tagging the image as test
+- pushing the image to the GitLab image repository
    
 ```
   build_job:
@@ -227,4 +227,4 @@ The CI portion of the pipeline is complete and the release artifact is ready for
 
 ## Summary
 
-By examining each stage in the pipeline, we can see how Continuous Integration automates the software delivery process. Developers can start the process by committing their changes, and the code is built and tested automatically as it passes through the stages. By including testing as part of the build process, errors and regressions can be discovered before the software is accepted as a release candidate. Continuous Integration is an important tool for DevOps enabling organizations to deliver high quality software rapidly
+By examining each stage in the pipeline, we can see how Continuous Integration automates the software delivery process. Developers can start the process by committing their changes, and the code is built and tested automatically as it passes through the stages. By including testing as part of the build process, errors and regressions can be discovered before the software is accepted as a release candidate. Continuous Integration is an important tool for DevOps enabling organizations to deliver high quality software rapidly.
