@@ -20,8 +20,6 @@ Each episode, we reproduce the problems found in the top questions and build cod
 
 [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 
-[**Darko Mesaros**](https://twitter.com/darkosubotica), Senior Developer Advocate @ AWS
-
 [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
 
 ## What is the Collective?
