@@ -149,7 +149,7 @@ Here is a code snippet of using the ChatGPT API endpoint
 
 ### Creating the Chat Interface
 
-I developed this quiz using my go-to tool for building web applications with Python, [Streamlit](https://streamlit.io/). Streamlit allows builders to easily create interactive web apps that provide instant feedback on user responses.
+I developed the chat interface using my go-to tool for building web applications with Python, [Streamlit](https://streamlit.io/). Streamlit allows builders to easily create interactive web apps that provide instant feedback on user responses.
 
 This code creates a simple interface with a text input for the user to enter their query, and a "Send" button to submit it. When the user clicks the "Send" button, the `get_answer_from_chatgpt()` function is called to get a response from the ChatGPT and the referenced documents.
 
@@ -188,7 +188,7 @@ def app() -> None:
 
 ```
 
-The quiz data is loaded from a JSON file and rendered using interactive widgets, making it simple for users to interact with the quiz. Additionally, I included links to documentation for each question, allowing developers to further explore the topics covered in the quiz.
+The dataframe contains the text data, along with links to the corresponding ground truth information indicating how the chatbot responded. This allows for easy validation and verification of the chatbot's accuracy and can aid in identifying areas for improvement.
 
 ## Conclusion
 
