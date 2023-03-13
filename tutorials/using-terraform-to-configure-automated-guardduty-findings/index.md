@@ -1,17 +1,34 @@
 # How to Configure Automated Incident Response for GuardDuty Findings with Terraform
 
+| Attributes             |                                                                 |
+|------------------------|-----------------------------------------------------------------|
+| ✅ AWS experience      | 200 - Intermediate                                             |
+| ⏱ Time to complete     | 60 minutes                                                      |
+| 💰 Cost to complete    | < $2.00 USD                                              |
+| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)|
+| ⏰ Last Updated        | 2023-03-06                                                      |
+| 💾 Code         | [Download the code](https://github.com/build-on-aws/bootstrapping-terraform-automation) |
 
-## Introduction
+
+## Table of Content
+| ToC |
+|-----|
+
+
    
-In this tutorial, learn how to automate Amazon GuardDuty findings to perform automated incident response, and configure it all using Terraform. 
+Threat detection and incident response can be a time-consuming and manual process for many organizations. This leads to inconsistent response processes, inconsistent security outcomes, and increased risk. In this tutorial, you will learn how to automate threat detection findings and automate your incident response process, reducing the time to respond to threats. As many organizations are preferring to use a standard IaC tool for consistent configurations among vendors, this tutorial will show how to configure this solution using Terraform.
+
+### About Amazon GuardDuty
 
 Amazon GuardDuty offers threat detection enabling you to continuously monitor and protect your AWS accounts, workloads, and data stored in Amazon Simple Storage Service (Amazon S3). GuardDuty analyzes continuous metadata streams generated from your account and network activity found in AWS CloudTrail Events, Amazon Virtual Private Cloud (VPC) Flow Logs, and domain name system (DNS) Logs. GuardDuty also uses integrated threat intelligence such as known malicious IP addresses, anomaly detection, and machine learning (ML) to more accurately identify threats.
 
 Amazon GuardDuty makes it easy for you to continuously monitor your AWS accounts, workloads, and data stored in Amazon S3. GuardDuty operates completely independently from your resources, so there is no risk of performance or availability impacts to your workloads. The service is fully managed with integrated threat intelligence, anomaly detection, and ML. Amazon GuardDuty delivers detailed and actionable alerts that are easy to integrate with existing event management and workflow systems. There are no upfront costs and you pay only for the events analyzed, with no additional software to deploy or threat intelligence feed subscriptions required.
 
-[Terraform](https://www.terraform.io/) is an Infrastructure as code (IaC) tool created by Hashicorp that allows you to manage infrastructure with configuration files rather than a user interface. With Terrafom you can build, change, and destroy your infrastructure using human readable, declarative configuration files. You can build, change, and destroy AWS infrastructure using Terraform. This is done through the use of a Terraform plugin called a [Provider](https://registry.terraform.io/). The AWS Provider allows Terraform to interact with the AWS application programming interface (API).
+### About Terraform
 
-This tutorial will use AWS Cloud9 to perform the Terraform configuration.  AWS Cloud9 is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes pre-packaged with essential tools for popular programming languages including JavaScript, Python, PHP, as well as Terraform, so you don’t need to install files or configure your development machine to start this workshop. Cloud9 runs on an EC2 instance that was created for you when this workshop was started. 
+[Terraform](https://www.terraform.io/) is an Infrastructure as code (IaC) tool created by Hashicorp that allows you to manage infrastructure with configuration files rather than a user interface. With Terraform you can build, change, and destroy your infrastructure using human readable, declarative configuration files. You can build, change, and destroy AWS infrastructure using Terraform. This is done through the use of a Terraform plugin called a [Provider](https://registry.terraform.io/). The AWS Provider allows Terraform to interact with the AWS application programming interface (API).
+
+This tutorial will use AWS Cloud9 to perform the Terraform configuration. AWS Cloud9 is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes pre-packaged with essential tools for popular programming languages including JavaScript, Python, PHP, and Terraform, so you don’t need to install files or configure your development machine to start this workshop. Cloud9 runs on an EC2 instance that was created for you when this workshop was started. 
 
 ## What you will accomplish
 
@@ -20,7 +37,7 @@ The process you will accomplish through this tutorial is:
 1. A "malicious" host interacts with a "compromised" host causing GuardDuty to report a finding.
 2. The finding is matched in an EventBridge rule that does two things:
    1. Triggers an SNS rule that sends an email to a defined admin with easy to read text explaining the finding.
-   2. Triggers a Lambda function that moves the compromised host to a forensic security group where it is isolated for furter investigation.
+   2. Triggers a Lambda function that moves the compromised host to a forensic security group where it is isolated for further investigation.
 
 
 ## Prerequisites
@@ -29,65 +46,423 @@ You will need an AWS account to complete this tutorial. If you do not have an AW
 
 ## Implementation
 
+## Step 0. Create the initial YAML file
+
+0.1. On your local machine create a text file called `gd-iac-initial.yml`.
+0.2. Copy the following contents into the file.
+
+```
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS CloudFormation template for dynamic Cloud 9 setups. Creates a Cloud9
+  bootstraps the instance.
+Parameters:
+  ExampleC9InstanceType:
+    Description: Example Cloud9 instance type
+    Type: String
+    Default: t3.small
+    AllowedValues:
+      - t2.micro
+      - t3.micro
+      - t3.small
+      - t3.medium
+    ConstraintDescription: Must be a valid Cloud9 instance type
+  ExampleC9EnvType: 
+    Description: Environment type.
+    Default: self
+    Type: String
+    AllowedValues: 
+      - self
+      - 3rdParty
+    ConstraintDescription: must specify self or 3rdParty.
+  ExampleOwnerArn: 
+    Type: String
+    Description: The Arn of the Cloud9 Owner to be set if 3rdParty deployment.
+    Default: ""
+  ExampleC9InstanceVolumeSize: 
+    Type: Number
+    Description: The Size in GB of the Cloud9 Instance Volume. 
+    Default: 15
+
+Conditions: 
+  Create3rdPartyResources: !Equals [ !Ref ExampleC9EnvType, 3rdParty ]
+
+Resources:
+################## PERMISSIONS AND ROLES #################
+  ExampleC9Role:
+    Type: AWS::IAM::Role
+    Properties:
+      Tags:
+        - Key: Environment
+          Value: AWS Example
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - ec2.amazonaws.com
+            - ssm.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AdministratorAccess
+      Path: "/"
+
+  ExampleC9LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName:
+          Fn::Join:
+          - ''
+          - - ExampleC9LambdaPolicy-
+            - Ref: AWS::Region
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*
+          - Effect: Allow
+            Action:
+            - cloudformation:DescribeStacks
+            - cloudformation:DescribeStackEvents
+            - cloudformation:DescribeStackResource
+            - cloudformation:DescribeStackResources
+            - ec2:DescribeInstances
+            - ec2:AssociateIamInstanceProfile
+            - ec2:ModifyInstanceAttribute
+            - ec2:ReplaceIamInstanceProfileAssociation
+            - iam:ListInstanceProfiles
+            - iam:PassRole
+            Resource: "*"
+
+################## LAMBDA BOOTSTRAP FUNCTION ################
+
+  ExampleC9BootstrapInstanceLambda:
+    Description: Bootstrap Cloud9 instance
+    Type: Custom::ExampleC9BootstrapInstanceLambda
+    DependsOn:
+    - ExampleC9BootstrapInstanceLambdaFunction
+    - ExampleC9Instance
+    - ExampleC9InstanceProfile
+    - ExampleC9LambdaExecutionRole
+    Properties:
+      Tags:
+        - Key: Environment
+          Value: AWS Example
+      ServiceToken:
+        Fn::GetAtt:
+        - ExampleC9BootstrapInstanceLambdaFunction
+        - Arn
+      REGION:
+        Ref: AWS::Region
+      StackName:
+        Ref: AWS::StackName
+      EnvironmentId:
+        Ref: ExampleC9Instance
+      LabIdeInstanceProfileName:
+        Ref: ExampleC9InstanceProfile
+      LabIdeInstanceProfileArn:
+        Fn::GetAtt:
+        - ExampleC9InstanceProfile
+        - Arn
+
+  ExampleC9BootstrapInstanceLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Tags:
+        - Key: Environment
+          Value: AWS Example
+      Handler: index.lambda_handler
+      Role:
+        Fn::GetAtt:
+        - ExampleC9LambdaExecutionRole
+        - Arn
+      Runtime: python3.9
+      MemorySize: 256
+      Timeout: '600'
+      Code:
+        ZipFile: |
+          from __future__ import print_function
+          import boto3
+          import json
+          import os
+          import time
+          import traceback
+          import cfnresponse
+          
+          def lambda_handler(event, context):
+              # logger.info('event: {}'.format(event))
+              # logger.info('context: {}'.format(context))
+              responseData = {}
+
+              status = cfnresponse.SUCCESS
+              
+              if event['RequestType'] == 'Delete':
+                  responseData = {'Success': 'Custom Resource removed'}
+                  cfnresponse.send(event, context, status, responseData, 'CustomResourcePhysicalID')              
+          
+              if event['RequestType'] == 'Create':
+                  try:
+                      # Open AWS clients
+                      ec2 = boto3.client('ec2')
+          
+                      # Get the InstanceId of the Cloud9 IDE
+                      instance = ec2.describe_instances(Filters=[{'Name': 'tag:Name','Values': ['aws-cloud9-'+event['ResourceProperties']['StackName']+'-'+event['ResourceProperties']['EnvironmentId']]}])['Reservations'][0]['Instances'][0]
+                      # logger.info('instance: {}'.format(instance))
+          
+                      # Create the IamInstanceProfile request object
+                      iam_instance_profile = {
+                          'Arn': event['ResourceProperties']['LabIdeInstanceProfileArn'],
+                          'Name': event['ResourceProperties']['LabIdeInstanceProfileName']
+                      }
+                      # logger.info('iam_instance_profile: {}'.format(iam_instance_profile))
+          
+                      # Wait for Instance to become ready before adding Role
+                      instance_state = instance['State']['Name']
+                      # logger.info('instance_state: {}'.format(instance_state))
+                      while instance_state != 'running':
+                          time.sleep(5)
+                          instance_state = ec2.describe_instances(InstanceIds=[instance['InstanceId']])
+                          # logger.info('instance_state: {}'.format(instance_state))
+          
+                      # attach instance profile
+                      response = ec2.associate_iam_instance_profile(IamInstanceProfile=iam_instance_profile, InstanceId=instance['InstanceId'])
+                      # logger.info('response - associate_iam_instance_profile: {}'.format(response))
+                      r_ec2 = boto3.resource('ec2')
+  
+                      responseData = {'Success': 'Started bootstrapping for instance: '+instance['InstanceId']}
+                      cfnresponse.send(event, context, status, responseData, 'CustomResourcePhysicalID')
+                      
+                  except Exception as e:
+                      status = cfnresponse.FAILED
+                      print(traceback.format_exc())
+                      responseData = {'Error': traceback.format_exc(e)}
+                  finally:
+                      cfnresponse.send(event, context, status, responseData, 'CustomResourcePhysicalID')
+################## SSM BOOTSRAP HANDLER ###############
+  ExampleC9OutputBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties: 
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption: 
+        ServerSideEncryptionConfiguration: 
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+  ExampleC9SSMDocument: 
+    Type: AWS::SSM::Document
+    Properties: 
+      Tags:
+        - Key: Environment
+          Value: AWS Example
+      DocumentType: Command
+      DocumentFormat: YAML
+      Content: 
+        schemaVersion: '2.2'
+        description: Bootstrap Cloud9 Instance
+        mainSteps:
+        - action: aws:runShellScript
+          name: ExampleC9bootstrap
+          inputs:
+            runCommand:
+            - "#!/bin/bash"
+            - date
+            - echo LANG=en_US.utf-8 >> /etc/environment
+            - echo LC_ALL=en_US.UTF-8 >> /etc/environment
+            - . /home/ec2-user/.bashrc
+            - yum -y remove aws-cli; yum -y install sqlite telnet jq strace tree gcc glibc-static python3 python3-pip gettext bash-completion
+            - echo '=== CONFIGURE default python version ==='
+            - PATH=$PATH:/usr/bin
+            - alternatives --set python /usr/bin/python3
+            - echo '=== INSTALL and CONFIGURE default software components ==='
+            - sudo -H -u ec2-user bash -c "pip install --user -U boto boto3 botocore awscli"
+            - echo '=== Resizing the Instance volume'
+            - !Sub SIZE=${ExampleC9InstanceVolumeSize}
+            - !Sub REGION=${AWS::Region}
+            - |
+              INSTANCEID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
+              VOLUMEID=$(aws ec2 describe-instances \
+                --instance-id $INSTANCEID \
+                --query "Reservations[0].Instances[0].BlockDeviceMappings[0].Ebs.VolumeId" \
+                --output text --region $REGION)
+              aws ec2 modify-volume --volume-id $VOLUMEID --size $SIZE --region $REGION
+              while [ \
+                "$(aws ec2 describe-volumes-modifications \
+                  --volume-id $VOLUMEID \
+                  --filters Name=modification-state,Values="optimizing","completed" \
+                  --query "length(VolumesModifications)"\
+                  --output text --region $REGION)" != "1" ]; do
+              sleep 1
+              done
+              if [ $(readlink -f /dev/xvda) = "/dev/xvda" ]
+              then
+                sudo growpart /dev/xvda 1
+                STR=$(cat /etc/os-release)
+                SUB="VERSION_ID=\"2\""
+                if [[ "$STR" == *"$SUB"* ]]
+                then
+                  sudo xfs_growfs -d /
+                else
+                  sudo resize2fs /dev/xvda1
+                fi
+              else
+                sudo growpart /dev/nvme0n1 1
+                STR=$(cat /etc/os-release)
+                SUB="VERSION_ID=\"2\""
+                if [[ "$STR" == *"$SUB"* ]]
+                then
+                  sudo xfs_growfs -d /
+                else
+                  sudo resize2fs /dev/nvme0n1p1
+                fi
+              fi
+            - mkdir /home/ec2-user/.aws
+            - echo '[default]' > /home/ec2-user/.aws/config
+            - echo 'output = json' >> /home/ec2-user/.aws/config
+            - chmod 600 /home/ec2-user/.aws/config && chmod 600 /home/ec2-user/.aws/credentials
+            - echo 'PATH=$PATH:/usr/local/bin' >> /home/ec2-user/.bashrc
+            - echo 'export PATH' >> /home/ec2-user/.bashrc
+            - echo '=== CLEANING /home/ec2-user ==='
+            - for f in cloud9; do rm -rf /home/ec2-user/$f; done
+            - chown -R ec2-user:ec2-user /home/ec2-user/
+            - echo '=== PREPARE REBOOT in 1 minute with at ==='
+            - FILE=$(mktemp) && echo $FILE && echo '#!/bin/bash' > $FILE && echo 'reboot -f --verbose' >> $FILE && at now + 1 minute -f $FILE
+            - echo "Bootstrap completed with return code $?"
+  
+  ExampleC9BootstrapAssociation: 
+    Type: AWS::SSM::Association
+    DependsOn: ExampleC9OutputBucket 
+    Properties: 
+      Name: !Ref ExampleC9SSMDocument
+      OutputLocation: 
+        S3Location:
+          OutputS3BucketName: !Ref ExampleC9OutputBucket
+          OutputS3KeyPrefix: bootstrapoutput
+      Targets:
+        - Key: tag:SSMBootstrap
+          Values:
+          - Active
+
+################## INSTANCE #####################
+  ExampleC9InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: "/"
+      Roles:
+      - Ref: ExampleC9Role
+
+  ExampleC9Instance:
+    Description: "-"
+    DependsOn: ExampleC9BootstrapAssociation
+    Type: AWS::Cloud9::EnvironmentEC2
+    Properties:
+      Description: AWS Cloud9 instance for Examples
+      AutomaticStopTimeMinutes: 3600
+      InstanceType:
+        Ref: ExampleC9InstanceType
+      Name:
+        Ref: AWS::StackName
+      OwnerArn: !If [Create3rdPartyResources, !Ref ExampleOwnerArn, !Ref "AWS::NoValue" ]
+      Tags: 
+        - 
+          Key: SSMBootstrap
+          Value: Active
+        - 
+          Key: Environment
+          Value: AWS Example
+
+Outputs: 
+  Cloud9IDE:
+    Value:
+      Fn::Join:
+      - ''
+      - - https://
+        - Ref: AWS::Region
+        - ".console.aws.amazon.com/cloud9/ide/"
+        - Ref: ExampleC9Instance
+        - "?region="
+        - Ref: AWS::Region
+```
+
+0.3. Save the file.
+
 ## Step 1. Load the initial configuration
 
-This tutorial makes use of an AWS CloudFormation template to provising initial resources.  
+This tutorial makes use of an AWS CloudFormation template to provisioning initial resources.  
 
 1.1. Navigate to [AWS CloudFormation in the AWS Management Console](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/) and create a stack by clicking the `create stack` button.  
 
-![Create Stack](static/images/0001.png)
+![Create Stack](images/0001.png)
 
-1.2 . Select **Upload Template File** and upload the [gd-iac-initial.yml](assets/gd-iac-initial.yml) file.  Then click **Next**.  
+1.2 . Select **Upload Template File** and upload the [gd-iac-initial.yml](assets/gd-iac-initial.yml) file that you created in the previous step. Then click **Next**.  
 
-![Upload YAML file](static/images/0002.png)
+![Upload YAML file](images/0002.png)
 
 1.3. Enter a stack name and click **Next**.
 
-![](static/images/0003.png)
+![](images/0003.png)
 
 1.4. Click **Next** on the **Configure stack options** page.
 
-![](static/images/0004.png)
+![](images/0004.png)
 
-1.5. On the **Review** page, scroll to the botton and click the check box to **acknowledge that AWS CloudFormation might create IAM resources** then click **Next**. 
+1.5. On the **Review** page, scroll to the bottom and click the check box to **acknowledge that AWS CloudFormation might create IAM resources** then click **Next**. 
 
-![](static/images/0005.png)
+![](images/0005.png)
 
 1.6. Watch for the stack to be in a **Create Complete** state.
 
-![](static/images/0006.png)
+![](images/0006.png)
 
 ## Step 2. Access Cloud9 and Initialize Terraform. 
 
 2.1. Open [AWS Cloud9 in the AWS Management Console](https://us-west-2.console.aws.amazon.com/cloud9control/home?region=us-west-2#/) and open the environment in the Cloud9 IDE.
 
-![](static/images/0007.png)
+![](images/0007.png)
 
 2.2. In the Cloud9 preferences, disable the use of **AWS managed temporary credentials**.
 
-![](static/images/0008.png)
+![](images/0008.png)
 
 2.3.  Extract and then Drag-and-Drop the **[gd-iac-terraform-initial](assets/gd-iac-terraform-initial.zip)** folder to the root of the Cloud9 Instance.
 
-![](static/images/0009.png)
+![](images/0009.png)
 
 2.4. Change into the **gd-iac-terraform-initial** directory and perform a **terraform init**, **terraform plan**, and **terraform apply.**  
 
 
-![](static/images/0010.png)
+![](images/0010.png)
 
 
-A succesful apply will resemble the following:
+A successful apply will resemble the following:
 
-![](static/images/0012.png)
+![](images/0012.png)
 
 2.5. Verify that there are two new EC2 instances, one named **GuardDuty-Example: Compromised Instance** and the other named **GuardDuty-Example: Malicious Instance**.
 
-![](static/images/0011.png)
+![](images/0011.png)
 
 ## Step 3: Create an S3 Bucket to store a threat list
 
-3.1. Begin by creating a variable in the `modules/s3/variables.tf` for the vpc_id.
+3.1. Begin by creating a variable in the `modules/s3/variables.tf` for the `vpc_id`.
 
 
 ```
@@ -127,7 +502,7 @@ variable "vpc_id" {}
 ```
 
 
-3.4. Lastly, output the bucket_id and bucket_arn values in the `modules/s3/outputs.tf` file.
+3.4. Lastly, output the `bucket_id` and `bucket_arn` values in the `modules/s3/outputs.tf` file.
 
 
 ```
@@ -154,7 +529,7 @@ module "s3_bucket" {
 }
 ```
 
-> **Why are you creating an S3 bucket?**  You are primarily creating an S3 bucket to hold a text file that will be refered to by GuardDuty. GuardDuty uses two types of lists. 1.) a Trusted IP list, and 2.) a Threat IP list. Our S3 bucket will host the Threat IP List. The secondary reason is to store VPC flow logs. GuardDuty uses VPC flow logs, but you do not need to enable them for GuardDuty to use them. Here, we enable VPC FLow Logs so that we can use the data in other tools if we want to later on.]
+> **Why are you creating an S3 bucket?**  You are primarily creating an S3 bucket to hold a text file that will be referred to by GuardDuty. GuardDuty uses two types of lists. 1.) a Trusted IP list, and 2.) a Threat IP list. Our S3 bucket will host the Threat IP List. The secondary reason is to store VPC flow logs. GuardDuty uses VPC flow logs, but you do not need to enable them for GuardDuty to use them. Here, we enable VPC FLow Logs so that we can use the data in other tools if we want to later on.]
 
 ## Step 4: Create the GuardDuty Terraform Modules
 
@@ -186,7 +561,7 @@ resource "aws_guardduty_detector" "gd-tutorial" {
 
 ```
 
-4.3. Next we will [upload a file to the S3 bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) that we created in a previous step. This is not required, but for demonstration purposes we want to use the IP address of one of the EC2 instances to ensure that findings are generated in this tutorial. So in the code below we are uploading a text file to our S3 bucket, calling it MyThreatIntelSet, and the content of the file will be the IP address found in the variable `var.malicious_ip`. 
+4.3. Next we will [upload a file to the S3 bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) that we created in a previous step. This is not required, but for demonstration purposes we want to use the IP address of one of the EC2 instances to ensure that findings are generated in this tutorial. In the code below we are uploading a text file to our S3 bucket, calling it MyThreatIntelSet, and the content of the file will be the IP address found in the variable `var.malicious_ip`. 
 
 ```
 
@@ -214,7 +589,7 @@ resource "aws_guardduty_threatintelset" "Example-Threat-List" {
 
 ```
 
-> For GuardDuty we don't need to output anything at this point in time.
+> For GuardDuty we don't need to output anything at this time.
 
 4.5. Next move to the `root/main.tf` file and call the GuardDuty module. We need to provide the bucket ID and the malicious IP. You can see that these are coming from the s3 module and the compute module.
 
@@ -231,7 +606,7 @@ module "guardduty" {
 
 ## Step 5: Create the SNS Terraform Module
 
-In this section we will use [Terraform](https://www.terraform.io/) to create an SNS Rule. SNS is the Simple Notification Service and it enabled you to send notification when certain critiera is met. SNS itself doesn't match an action to send a message, rather we will use EventBridge for that. However since EventBridge will need a rule to send notifications we create the SNS rule first. 
+In this section we will use [Terraform](https://www.terraform.io/) to create an SNS Rule. SNS is the Simple Notification Service and it enabled you to send notification when certain criteria is met. SNS itself doesn't match an action to send a message, rather we will use EventBridge for that. However since EventBridge will need a rule to send notifications we create the SNS rule first. 
 
 
 5.1. Beginning in the `modules/sns/variables.tf` file you will need to create two variables. 
@@ -268,7 +643,7 @@ Start by creating a topic resource.
 
 ```
 
-In the above code you are creating a resource which is called "gd_sns_topic" by Terraform. In the AWS console this will be called "GuardDuty-Example". This is because we are calling the variable `var.sns_name` and it has a default set to "GuardDuty-Example".
+In the above code you are creating a resource which is called `gd_sns_topic` by Terraform. In the AWS console this will be called "GuardDuty-Example." This is because we are calling the variable `var.sns_name` and it has a default set to "GuardDuty-Example."
 
 5.3. Next create an SNS Policy Resource. The `arn` and `policy` are required values. The policy being created here is an [AWS IAM Policy Document](https://developer.hashicorp.com/terraform/tutorials/aws/aws-iam-policy?_ga=2.3643440.1670455977.1666808943-645029333.1658185431). This policy document is allowing the service principal `events.amazonaws.com` to publish to the topic.
 
@@ -299,7 +674,7 @@ resource "aws_sns_topic_policy" "gd_sns_topic_policy" {
 
 ```
 
-5.5. Next you will create the topic subscription. The topic subscription calls the ARN, sets the protocol to be used, in this case email, and the email address to send the notificaiton to. The email address in this case will be hard coded but you can configure it to prompt for the email address when you apply the terraform. Also, the `endpoint_auto_confirm` being set to `false` means that the owner of the email will get an email with a link that they must click on to subscribe to the notifications.
+5.5. Next you will create the topic subscription. The topic subscription calls the ARN, sets the protocol to be used, in this case email, and the email address to send the notification to. The email address in this case will be hard coded but you can configure it to prompt for the email address when you apply the terraform. Also, the `endpoint_auto_confirm` being set to `false` means that the owner of the email will get an email with a link that they must click on to subscribe to the notifications.
 
 ```
 
@@ -345,14 +720,14 @@ output "sns_topic_arn" {
 
 ## Step 6: Create the EventBridge Terraform Module
 
-In this section you will use [Terraform](https://www.terraform.io/) to create an Eventbridge Rule. The EventBridge Rule will tie two elements of this solution together.  
+In this section you will use [Terraform](https://www.terraform.io/) to create an EventBridge Rule. The EventBridge Rule will tie two elements of this solution together.  
 
-How does EventBridge work?  EventBridge receives an event, an indicator of a change in environment, and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. In this case, GuardDuty creates an event for Amazon EventBridge when any change in findings takes place. The event matches and Amazon EventBridge rule to a target, in this case its an SNS rule. The SNS rule takes the finding data and generates an email notification to the subscribed user. This can be seen in the image below. 
+How does EventBridge work? EventBridge receives an event, an indicator of a change in environment, and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. In this case, GuardDuty creates an event for Amazon EventBridge when any change in findings takes place. The event matches and Amazon EventBridge rule to a target, in this case its an SNS rule. The SNS rule takes the finding data and generates an email notification to the subscribed user. This can be seen in the image below. 
 
 ![the process](/static/eventbridge/boa313_process_001.jpg)
 
 
-6.1. The EventBridge rule will need information about GuardDuty as well as SNS. Begin by creating a variable that can be used for the SNS topic ARN. Do this in the `modules/eventbridge/variables.tf` file.
+6.1. The EventBridge rule will need information about GuardDuty and SNS. Begin by creating a variable that can be used for the SNS topic ARN. Do this in the `modules/eventbridge/variables.tf` file.
 
 
 ```
@@ -363,7 +738,7 @@ How does EventBridge work?  EventBridge receives an event, an indicator of a cha
 
 
 
-6.2. Next create an Event Rule Resource in the `modules/eventbridge/main.tf` file. You will need to define the source as well as the type of event we are looking for.
+6.2. Next create an Event Rule Resource in the `modules/eventbridge/main.tf` file. You will need to define the source and the type of event we are looking for.
 
 ```
 
@@ -384,7 +759,7 @@ How does EventBridge work?  EventBridge receives an event, an indicator of a cha
 
 ```
 
-6.3. Next define the Event Target Resource. When creating this resource you can add an extra bit of readability into the email notification by defining an [Input Transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-input-transformer-tutorial.html). This customizes what EventBridge passes to the event target. Below we are getting the GuardDuty ID, the Region, and the EC2 Instance ID and we are creating an input tempalte that elaborates a bit on the message. You can see below that we have created an input template that makes use of the detail information in the GuardDuty finding in the email message that is sent.
+6.3. Next define the Event Target Resource. When creating this resource you can add an extra bit of readability into the email notification by defining an [Input Transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-input-transformer-tutorial.html). This customizes what EventBridge passes to the event target. Below we are getting the GuardDuty ID, the Region, and the EC2 Instance ID and we are creating an input template that elaborates a bit on the message. You can see below that we have created an input template that makes use of the detail information in the GuardDuty finding in the email message that is sent.
 
 ```
 
@@ -464,15 +839,15 @@ module "guardduty_eventbridge_rule" {
 ## Step 7: Create the Lambda Terraform Module
 
 In this section we will use [Terraform](https://www.terraform.io/) to create a Lambda function that perform a remediation function for our environment. What we want to do with this 
-tutorial is have our compromised host get moved to a new security group. Similar to the way that EventBridge used SNS to generate an email, EventBridge will invole a Lambda function as see below.
+tutorial is have our compromised host get moved to a new security group. Similar to the way that EventBridge used SNS to generate an email, EventBridge will involve a Lambda function as see below.
 
 ![Invoke Function](/static/lambda/boa313_lambda_2.jpg)
 
-One thing to keep in mind is that there are many possibilities here. For more information please see the [Creating custom responses to GuardDuty findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html) documentation as well as [Automatically block suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/) for more information.
+One thing to keep in mind is that there are many possibilities here. For more information please see the [Creating custom responses to GuardDuty findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html) documentation and [Automatically block suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/).
 
 
 
-Beforew we get started, lets see what needs to happen for this to work.
+Before we get started, lets see what needs to happen for this to work.
 
 Currently, our GuardDuty Findings are matched in an EventBridge rule to a target, currently an SNS rule that sends an email. To enhance this functionality we will have EventBridge use AWS Lambda as a target.
 
@@ -608,7 +983,7 @@ variable "forensic_sg_id" {}
 
 ```
 
-7.7. Next, return to the `modules/lambda/main.tf` file and create the Lambda function resource. Note that in the code block below that we are using Python 3.9. Also, we are referecing the python code we zipped in index.zip. And lastly we are setting a few environment variables in the resource, `INSTANCE_ID`, `FORENSICS_SH`, and `TOPIC_ARN`. These will be passed into our Lambda function environment from the variables that we created.
+7.7. Next, return to the `modules/lambda/main.tf` file and create the Lambda function resource. Note that in the code block below that we are using Python 3.9. Also, we are referencing the python code we zipped in index.zip. And lastly we are setting a few environment variables in the resource, `INSTANCE_ID`, `FORENSICS_SH`, and `TOPIC_ARN`. These will be passed into our Lambda function environment from the variables that we created.
 
 ```
 
@@ -742,23 +1117,23 @@ module "guardduty_eventbridge_rule" {
 
 ## Step 8: Apply The Configuration to your AWS Account.
 
-8.1. Perform a `terraform init`.  This will initialize all of the modules that you have added code to in this tutorial.  The output should resemble the following.
+8.1. Perform a `terraform init`. This will initialize all of the modules that you have added code to in this tutorial. The output should resemble the following.
 
-![](/static/images/0013.png)
+![](/images/0013.png)
 
 8.1. Do a `terraform plan`.
 8.2. Do a `terraform apply` to push the changes to AWS. Once applied your should have an output that resembles the following:
 
-![](static/images/0014.png)
+![](images/0014.png)
 
 
 ## Step 9: Verify The Solution in the AWS Management Console
 
 In this section we will walk through the entire solution in the AWS console and verify that the security group has been moved once the finding shows up in GuardDuty and EventBridge triggers the Lambda Function.
 
-You should also have recieved an email to confirm your subscription.  You must subscribe to recieve the notifications you have configured.
+You should also have received an email to confirm your subscription. You must subscribe to receive the notifications you have configured.
 
-![](static/images/0015.png)
+![](images/0015.png)
 
 After subscribing navigate to the AWS Management Console to verifying that there are two EC2 instances and they are both in the Initial Security Group. 
 
@@ -767,7 +1142,7 @@ After subscribing navigate to the AWS Management Console to verifying that there
 
 First check the Compromised Host.
 
-![sec group verificaiton](static/images/0016.png)
+![sec group verification](images/0016.png)
 
 Next check the Malicious Host.
 
@@ -775,27 +1150,27 @@ Next check the Malicious Host.
 
 Next ensure that GuardDuty is reporting findings.
 
-![GD findings](static/images/0018.png)
+![GD findings](images/0018.png)
 
-Now check that the eventbridge rule is looking for that finding.
+Now check that the EventBridge rule is looking for that finding.
 
-![EventBridge Rule](/static/images/0019.png)
+![EventBridge Rule](/images/0019.png)
 
 Next check the target of the EventBridge Rule. You should see one SNS target and one Lambda target.
 
-![Targets](/static/images/0020.png)
+![Targets](/images/0020.png)
 
 Check the SNS rule to see what it does. It should be sending an email to the address you set.
 
-![SNS topic](/static/images/0021.png)
+![SNS topic](/images/0021.png)
 
 Next Check the Lambda Function. You can get there from the EventBridge Rule or by navigating there directly. 
 
-![Lambda Function](/static/images/0022.png)
+![Lambda Function](/images/0022.png)
 
 Finally check that the Lambda Function has moved the Compromised host to a new Security Group.
 
-![Security Group Changed](/static/images/0023.png)
+![Security Group Changed](/images/0023.png)
 
 Depending on the time you have waited, if your configuration matches the screenshots above you have successfully created an entire AWS Security solution using Terraform. Congratulations! 
 
@@ -804,25 +1179,25 @@ In the next section we will perform a clean-up of our environment and share addi
 
 ## Conclusion
 
-At this point in the tutorial you are likley getting emails every 15 minutes as GuardDuty reports its Findings. If you prefer to keep the configurations to reference later but stop the emails you can simply unsubscribe from the topic. See the example below on how to delete the subscription.
+At this point in the tutorial you are likely getting emails every 15 minutes as GuardDuty reports its Findings. If you prefer to keep the configurations to reference later but stop the emails you can simply unsubscribe from the topic. See the example below on how to delete the subscription.
 
-![delete subscription](/static/images/0024.png)
+![delete subscription](/images/0024.png)
 
 To remove the entire configuration we will use the `terraform destroy` command from the CLI of our Cloud9 instance. 
 
-When finshed your output should resemble the following.
+When finished your output should resemble the following.
 
-![destroy](/static/images/0025.png)
+![destroy](/images/0025.png)
 
 Next you will need to empty the S3 bucket that was created for the Cloud9 instance. 
 
-![destroy](/static/images/0026.png)
+![destroy](/images/0026.png)
 
 Finally navigate to CloudFormation and delete the CloudFormation stack you created. Be sure to delete the one with the name you gave earlier in this workshop. Two stacks were created and both will be deleted when you delete the parent stack.
 
-![destroy](/static/images/0027.png)
+![destroy](/images/0027.png)
 
-As you can see from this tutorial, much can be done to automate what happends when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda.  For additional ideas on how to automate Incident Response, see the articles "[How to use Amazon GuardDuty and AWS Web Application Firewall to automatically block suspicious hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/)" and "[Automatically block suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/)."
+As you can see from this tutorial, much can be done to automate what happens when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda. For additional ideas on how to automate Incident Response, see the articles "[How to use Amazon GuardDuty and AWS Web Application Firewall to automatically block suspicious hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/)" and "[Automatically block suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/)."
 
 
 
