@@ -77,7 +77,7 @@ For the systems that power Amazon’s FCs, a natural key is the FC itself. FCs d
 ![FCs assigned to cells](images/figure07.png)<br>
 *Figure 7. Fulfillment Technologies and Robotics assigns FCs to cells such that each geographic region is serviced by FCs distributed across different cells.*
 
-Now assume a fault occurs, whether a bug in newly deployed software, or an infrastructure issue. A resilient architecture can mitigate such failures, and that is exactly what a cell-based architecture does. The fault is isolated to just the affected cell, possibly impacted that FC’s operations. But the the other cells are protected by fault isolation, and continue successfully serving requests. In the case here, such a fault might impair one of the FCs in our group (Figure 8), but because FCs in this geographic area are in different cells, they can continue serving the customers in that area with the remaining FCs.
+Now assume a fault occurs, whether a bug in newly deployed software, or an infrastructure issue. A resilient architecture can mitigate such failures, and that is exactly what a cell-based architecture does. The fault is isolated to just the affected cell, possibly impacted that FC’s operations. But the other cells are protected by fault isolation, and continue successfully serving requests. In the case here, such a fault might impair one of the FCs in our group (Figure 8), but because FCs in this geographic area are in different cells, they can continue serving the customers in that area with the remaining FCs.
 
 <br><br>
 ![failure is constrained to one cell using fault isolation](images/figure08.png)<br>
