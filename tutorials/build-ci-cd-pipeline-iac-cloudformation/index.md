@@ -24,7 +24,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 | ✅ AWS experience      | 100 - Beginner                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- AWS [CloudFormation basic understanding](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-howdoesitwork.html)|
+| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- AWS [CloudFormation basic understanding](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-howdoesitwork.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/ci-cd-iac-aws-cloudformation)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-03-02                                                      |
@@ -37,17 +37,17 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 ## Pre-requisites
 
 #### <b> AWS account. </b>
-Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://portal.aws.amazon.com/billing/signup#/start/email).
+Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 #### <b>CodeCatalyst account. </b>
 
-Follow steps in the documentation to [set up CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html)
+Follow steps in the documentation to [set up CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 
 #### <b>IAM Roles </b>
 We need to create CloudCatalyst service roles in our AWS account. These will be using these to provide permission to CodeCatalyst. This is one time activity only.
 
-Simply deploy a CloudFormation stack. You can find detailed instructions on how to deploy this stack using AWS Console [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html#GettingStarted.Walkthrough.createstack).
+Simply deploy a CloudFormation stack. You can find detailed instructions on how to deploy this stack using AWS Console [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html#GettingStarted.Walkthrough.createstack?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 - Stack name `CodeCatalyst-IAM-roles` 
 - Region: any (preferred `us-west-2`)
@@ -66,7 +66,7 @@ Before we create the CI/CD pipeline and workflows, lets setup CodeCatalyst.
 #### <b>Space </b>
 Lets start with our CodeCatalyst Space. A space represents you, your company, your department, or your group. Your development teams can manage projects inside it. 
 
-Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws), add a name (we will use `CloudFormation CodeCatalyst`), and add the AWS Account ID to link for billing. Follow the prompts to link your AWS Account with CodeCatalyst.
+Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), add a name (we will use `CloudFormation CodeCatalyst`), and add the AWS Account ID to link for billing. Follow the prompts to link your AWS Account with CodeCatalyst.
 
 Please note, `012345678901` is a placeholder; replace it with your own account ID. You can find your account ID in the top right of your AWS Console. Before you can create the space, follow the `Verify in the AWS console` link and complete the verification. You should get green tick to proceed!
 
@@ -150,7 +150,7 @@ You can use your own CloudFormation template, or simply use one of the sample te
 
 For this blog, I am using a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer form. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
 
->In the real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation [nested stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html). There are benefits to it - the networking team can manage this independently, and once networking infrastructure will not change more often as compared to the application resources. It also allows us to keep the template body size within the [CloudFormation Quotas](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html).  However, to keep your first deployment with CodeCatalyst simple, let's deploy everything in a single template.
+>In the real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation [nested stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). There are benefits to it - the networking team can manage this independently, and once networking infrastructure will not change more often as compared to the application resources. It also allows us to keep the template body size within the [CloudFormation Quotas](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).  However, to keep your first deployment with CodeCatalyst simple, let's deploy everything in a single template.
 
 Let's ensure we commit our changes to our git repo using the following commands:
 ```bash
@@ -318,7 +318,7 @@ If you open the Website link, you can access the sample application deployed by 
  
 </br>
  
-> It might happen that the run fails due to errors. Read through the logs to understand any issue and remediate it. If you get internal error, at this point it is good to check the stack deployment in the CloudFormation dashboard of AWS Management Console. If the CloudFormation stack has rolled back, then delete the stack manually, fix the issues, and run the workflow again. You can find help in [Documentation for Troubleshooting](https://docs.aws.amazon.com/codecatalyst/latest/userguide/troubleshooting.html), [Premium Support center](https://support.console.aws.amazon.com/support/home#/) or [AWS re:Post](https://repost.aws/tags/TAT_2FdxcETxyhEvwsLjVZaA/amazon-code-catalyst). 
+> It might happen that the run fails due to errors. Read through the logs to understand any issue and remediate it. If you get internal error, at this point it is good to check the stack deployment in the CloudFormation dashboard of AWS Management Console. If the CloudFormation stack has rolled back, then delete the stack manually, fix the issues, and run the workflow again. You can find help in [Documentation for Troubleshooting](https://docs.aws.amazon.com/codecatalyst/latest/userguide/troubleshooting.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Premium Support center](https://support.console.aws.amazon.com/support/home#/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) or [AWS re:Post](https://repost.aws/tags/TAT_2FdxcETxyhEvwsLjVZaA/amazon-code-catalyst?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). 
 
 
 ## Make code changes with Pull Request Workflow
@@ -333,7 +333,7 @@ Once a reviewer approves the changes and proceeds with merging the pull request 
 
 ![Branches and workflows used in the blog](images/branching_workflows_blog_sequence.png)
 
-We are going to first write a PR workflow so that anytime a new Pull request is created, CodeCatalyst will first run this workflow. In this PR workflow, we are **NOT deploying** any changes to the PreProdEnv. When a PR is opened or revised, we are validating it using [super-linter](https://github.com/marketplace/actions/super-linter) and then creating a CloudFormation changeset. 
+We are going to first write a PR workflow so that anytime a new Pull request is created, CodeCatalyst will first run this workflow. In this PR workflow, we are **NOT deploying** any changes to the PreProdEnv. When a PR is opened or revised, we are validating it using [super-linter](https://github.com/marketplace/actions/super-linter?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and then creating a CloudFormation changeset. 
 
 Create a new file `pr_branch.yaml` in the hidden `.codecatalyst/workflows/` directory and paste the following. 
 
@@ -405,7 +405,7 @@ Actions:
 
 In the above Pull Request Workflow, notice the following definitions :
 
-1. In the `Super-Linter_0d` action, we are defining `VALIDATE_CLOUDFORMATION: "true"` environment variable. This ensures that our CloudFormation template is validated using the `cfn-lint` github action. [cfn-lint](https://github.com/aws-cloudformation/cfn-lint) is an open source tool that helps validate AWS CloudFormation yaml/json templates against the [AWS CloudFormation Resource Specification](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-resource-specification.html) and additional checks. This includes checking valid values for resource properties and best practices.
+1. In the `Super-Linter_0d` action, we are defining `VALIDATE_CLOUDFORMATION: "true"` environment variable. This ensures that our CloudFormation template is validated using the `cfn-lint` github action. [cfn-lint](https://github.com/aws-cloudformation/cfn-lint?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) is an open source tool that helps validate AWS CloudFormation yaml/json templates against the [AWS CloudFormation Resource Specification](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-resource-specification.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and additional checks. This includes checking valid values for resource properties and best practices.
 
 2. In the `CreateChangeSet` action, the `no-execute-changeset: "1"` option in the workflow below, it indicates whether to run the change set or have it reviewed. Default is `'0'`, which means it will run the change set. We don't want it to execute the changes; we just want to see the changes that will happen if PR is merged, hence we set it to `'1'`. Do not execute the changeset.
 
@@ -733,11 +733,11 @@ You can optionally confirm the newly created subnet in the VPC console.
 
 ## Cleanup
 
-We have now reached the end of this tutorial: we learned how to create workflows, how to pull request, how to use actions - to create ChangeSet, to deploy CloudFormation stack and to run cfn-lint on our template before we make infrastructure changes. You can further explore the features of CodeCatalyst like inviting team members, or creating issues. If you no longer wish to explore, then delete all the resources we created here. Clean up CloudFormation stacks in your AWS account. Open the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation), delete the `PreProdEnvStack` and `CodeCatalyst-IAM-roles`.
+We have now reached the end of this tutorial: we learned how to create workflows, how to pull request, how to use actions - to create ChangeSet, to deploy CloudFormation stack and to run cfn-lint on our template before we make infrastructure changes. You can further explore the features of CodeCatalyst like inviting team members, or creating issues. If you no longer wish to explore, then delete all the resources we created here. Clean up CloudFormation stacks in your AWS account. Open the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), delete the `PreProdEnvStack` and `CodeCatalyst-IAM-roles`.
 
 To delete the project we created in CodeCatalyst. In the left-hand navigation, go to `Project settings`, click on `Delete project`, and follow the instructions to delete the project.
 
-Lastly, to delete the CodeCatalyst space, go to [CodeCatalyst dashboard](https://codecatalyst.aws/spaces/), then `Space settings` tab and click on `Delete space`.
+Lastly, to delete the CodeCatalyst space, go to [CodeCatalyst dashboard](https://codecatalyst.aws/spaces/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), then `Space settings` tab and click on `Delete space`.
 
 </br>
 
