@@ -46,364 +46,6 @@ You will need an AWS account to complete this tutorial. If you do not have an AW
 
 ## Implementation
 
-## Step 0. Create the initial YAML file
-
-0.1. On your local machine create a text file called `gd-iac-initial.yml`.
-0.2. Copy the following contents into the file.
-
-```
----
-AWSTemplateFormatVersion: '2010-09-09'
-Description: AWS CloudFormation template for dynamic Cloud 9 setups. Creates a Cloud9
-  bootstraps the instance.
-Parameters:
-  ExampleC9InstanceType:
-    Description: Example Cloud9 instance type
-    Type: String
-    Default: t3.small
-    AllowedValues:
-      - t2.micro
-      - t3.micro
-      - t3.small
-      - t3.medium
-    ConstraintDescription: Must be a valid Cloud9 instance type
-  ExampleC9EnvType: 
-    Description: Environment type.
-    Default: self
-    Type: String
-    AllowedValues: 
-      - self
-      - 3rdParty
-    ConstraintDescription: must specify self or 3rdParty.
-  ExampleOwnerArn: 
-    Type: String
-    Description: The Arn of the Cloud9 Owner to be set if 3rdParty deployment.
-    Default: ""
-  ExampleC9InstanceVolumeSize: 
-    Type: Number
-    Description: The Size in GB of the Cloud9 Instance Volume. 
-    Default: 15
-
-Conditions: 
-  Create3rdPartyResources: !Equals [ !Ref ExampleC9EnvType, 3rdParty ]
-
-Resources:
-################## PERMISSIONS AND ROLES #################
-  ExampleC9Role:
-    Type: AWS::IAM::Role
-    Properties:
-      Tags:
-        - Key: Environment
-          Value: AWS Example
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Principal:
-            Service:
-            - ec2.amazonaws.com
-            - ssm.amazonaws.com
-          Action:
-          - sts:AssumeRole
-      ManagedPolicyArns:
-      - arn:aws:iam::aws:policy/AdministratorAccess
-      Path: "/"
-
-  ExampleC9LambdaExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Principal:
-            Service:
-            - lambda.amazonaws.com
-          Action:
-          - sts:AssumeRole
-      Path: "/"
-      Policies:
-      - PolicyName:
-          Fn::Join:
-          - ''
-          - - ExampleC9LambdaPolicy-
-            - Ref: AWS::Region
-        PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-          - Effect: Allow
-            Action:
-            - logs:CreateLogGroup
-            - logs:CreateLogStream
-            - logs:PutLogEvents
-            Resource: arn:aws:logs:*:*:*
-          - Effect: Allow
-            Action:
-            - cloudformation:DescribeStacks
-            - cloudformation:DescribeStackEvents
-            - cloudformation:DescribeStackResource
-            - cloudformation:DescribeStackResources
-            - ec2:DescribeInstances
-            - ec2:AssociateIamInstanceProfile
-            - ec2:ModifyInstanceAttribute
-            - ec2:ReplaceIamInstanceProfileAssociation
-            - iam:ListInstanceProfiles
-            - iam:PassRole
-            Resource: "*"
-
-################## LAMBDA BOOTSTRAP FUNCTION ################
-
-  ExampleC9BootstrapInstanceLambda:
-    Description: Bootstrap Cloud9 instance
-    Type: Custom::ExampleC9BootstrapInstanceLambda
-    DependsOn:
-    - ExampleC9BootstrapInstanceLambdaFunction
-    - ExampleC9Instance
-    - ExampleC9InstanceProfile
-    - ExampleC9LambdaExecutionRole
-    Properties:
-      Tags:
-        - Key: Environment
-          Value: AWS Example
-      ServiceToken:
-        Fn::GetAtt:
-        - ExampleC9BootstrapInstanceLambdaFunction
-        - Arn
-      REGION:
-        Ref: AWS::Region
-      StackName:
-        Ref: AWS::StackName
-      EnvironmentId:
-        Ref: ExampleC9Instance
-      LabIdeInstanceProfileName:
-        Ref: ExampleC9InstanceProfile
-      LabIdeInstanceProfileArn:
-        Fn::GetAtt:
-        - ExampleC9InstanceProfile
-        - Arn
-
-  ExampleC9BootstrapInstanceLambdaFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      Tags:
-        - Key: Environment
-          Value: AWS Example
-      Handler: index.lambda_handler
-      Role:
-        Fn::GetAtt:
-        - ExampleC9LambdaExecutionRole
-        - Arn
-      Runtime: python3.9
-      MemorySize: 256
-      Timeout: '600'
-      Code:
-        ZipFile: |
-          from __future__ import print_function
-          import boto3
-          import json
-          import os
-          import time
-          import traceback
-          import cfnresponse
-          
-          def lambda_handler(event, context):
-              # logger.info('event: {}'.format(event))
-              # logger.info('context: {}'.format(context))
-              responseData = {}
-
-              status = cfnresponse.SUCCESS
-              
-              if event['RequestType'] == 'Delete':
-                  responseData = {'Success': 'Custom Resource removed'}
-                  cfnresponse.send(event, context, status, responseData, 'CustomResourcePhysicalID')              
-          
-              if event['RequestType'] == 'Create':
-                  try:
-                      # Open AWS clients
-                      ec2 = boto3.client('ec2')
-          
-                      # Get the InstanceId of the Cloud9 IDE
-                      instance = ec2.describe_instances(Filters=[{'Name': 'tag:Name','Values': ['aws-cloud9-'+event['ResourceProperties']['StackName']+'-'+event['ResourceProperties']['EnvironmentId']]}])['Reservations'][0]['Instances'][0]
-                      # logger.info('instance: {}'.format(instance))
-          
-                      # Create the IamInstanceProfile request object
-                      iam_instance_profile = {
-                          'Arn': event['ResourceProperties']['LabIdeInstanceProfileArn'],
-                          'Name': event['ResourceProperties']['LabIdeInstanceProfileName']
-                      }
-                      # logger.info('iam_instance_profile: {}'.format(iam_instance_profile))
-          
-                      # Wait for Instance to become ready before adding Role
-                      instance_state = instance['State']['Name']
-                      # logger.info('instance_state: {}'.format(instance_state))
-                      while instance_state != 'running':
-                          time.sleep(5)
-                          instance_state = ec2.describe_instances(InstanceIds=[instance['InstanceId']])
-                          # logger.info('instance_state: {}'.format(instance_state))
-          
-                      # attach instance profile
-                      response = ec2.associate_iam_instance_profile(IamInstanceProfile=iam_instance_profile, InstanceId=instance['InstanceId'])
-                      # logger.info('response - associate_iam_instance_profile: {}'.format(response))
-                      r_ec2 = boto3.resource('ec2')
-  
-                      responseData = {'Success': 'Started bootstrapping for instance: '+instance['InstanceId']}
-                      cfnresponse.send(event, context, status, responseData, 'CustomResourcePhysicalID')
-                      
-                  except Exception as e:
-                      status = cfnresponse.FAILED
-                      print(traceback.format_exc())
-                      responseData = {'Error': traceback.format_exc(e)}
-                  finally:
-                      cfnresponse.send(event, context, status, responseData, 'CustomResourcePhysicalID')
-################## SSM BOOTSRAP HANDLER ###############
-  ExampleC9OutputBucket:
-    Type: AWS::S3::Bucket
-    DeletionPolicy: Delete
-    Properties: 
-      VersioningConfiguration:
-        Status: Enabled
-      BucketEncryption: 
-        ServerSideEncryptionConfiguration: 
-          - ServerSideEncryptionByDefault:
-              SSEAlgorithm: AES256
-
-  ExampleC9SSMDocument: 
-    Type: AWS::SSM::Document
-    Properties: 
-      Tags:
-        - Key: Environment
-          Value: AWS Example
-      DocumentType: Command
-      DocumentFormat: YAML
-      Content: 
-        schemaVersion: '2.2'
-        description: Bootstrap Cloud9 Instance
-        mainSteps:
-        - action: aws:runShellScript
-          name: ExampleC9bootstrap
-          inputs:
-            runCommand:
-            - "#!/bin/bash"
-            - date
-            - echo LANG=en_US.utf-8 >> /etc/environment
-            - echo LC_ALL=en_US.UTF-8 >> /etc/environment
-            - . /home/ec2-user/.bashrc
-            - yum -y remove aws-cli; yum -y install sqlite telnet jq strace tree gcc glibc-static python3 python3-pip gettext bash-completion
-            - echo '=== CONFIGURE default python version ==='
-            - PATH=$PATH:/usr/bin
-            - alternatives --set python /usr/bin/python3
-            - echo '=== INSTALL and CONFIGURE default software components ==='
-            - sudo -H -u ec2-user bash -c "pip install --user -U boto boto3 botocore awscli"
-            - echo '=== Resizing the Instance volume'
-            - !Sub SIZE=${ExampleC9InstanceVolumeSize}
-            - !Sub REGION=${AWS::Region}
-            - |
-              INSTANCEID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
-              VOLUMEID=$(aws ec2 describe-instances \
-                --instance-id $INSTANCEID \
-                --query "Reservations[0].Instances[0].BlockDeviceMappings[0].Ebs.VolumeId" \
-                --output text --region $REGION)
-              aws ec2 modify-volume --volume-id $VOLUMEID --size $SIZE --region $REGION
-              while [ \
-                "$(aws ec2 describe-volumes-modifications \
-                  --volume-id $VOLUMEID \
-                  --filters Name=modification-state,Values="optimizing","completed" \
-                  --query "length(VolumesModifications)"\
-                  --output text --region $REGION)" != "1" ]; do
-              sleep 1
-              done
-              if [ $(readlink -f /dev/xvda) = "/dev/xvda" ]
-              then
-                sudo growpart /dev/xvda 1
-                STR=$(cat /etc/os-release)
-                SUB="VERSION_ID=\"2\""
-                if [[ "$STR" == *"$SUB"* ]]
-                then
-                  sudo xfs_growfs -d /
-                else
-                  sudo resize2fs /dev/xvda1
-                fi
-              else
-                sudo growpart /dev/nvme0n1 1
-                STR=$(cat /etc/os-release)
-                SUB="VERSION_ID=\"2\""
-                if [[ "$STR" == *"$SUB"* ]]
-                then
-                  sudo xfs_growfs -d /
-                else
-                  sudo resize2fs /dev/nvme0n1p1
-                fi
-              fi
-            - mkdir /home/ec2-user/.aws
-            - echo '[default]' > /home/ec2-user/.aws/config
-            - echo 'output = json' >> /home/ec2-user/.aws/config
-            - chmod 600 /home/ec2-user/.aws/config && chmod 600 /home/ec2-user/.aws/credentials
-            - echo 'PATH=$PATH:/usr/local/bin' >> /home/ec2-user/.bashrc
-            - echo 'export PATH' >> /home/ec2-user/.bashrc
-            - echo '=== CLEANING /home/ec2-user ==='
-            - for f in cloud9; do rm -rf /home/ec2-user/$f; done
-            - chown -R ec2-user:ec2-user /home/ec2-user/
-            - echo '=== PREPARE REBOOT in 1 minute with at ==='
-            - FILE=$(mktemp) && echo $FILE && echo '#!/bin/bash' > $FILE && echo 'reboot -f --verbose' >> $FILE && at now + 1 minute -f $FILE
-            - echo "Bootstrap completed with return code $?"
-  
-  ExampleC9BootstrapAssociation: 
-    Type: AWS::SSM::Association
-    DependsOn: ExampleC9OutputBucket 
-    Properties: 
-      Name: !Ref ExampleC9SSMDocument
-      OutputLocation: 
-        S3Location:
-          OutputS3BucketName: !Ref ExampleC9OutputBucket
-          OutputS3KeyPrefix: bootstrapoutput
-      Targets:
-        - Key: tag:SSMBootstrap
-          Values:
-          - Active
-
-################## INSTANCE #####################
-  ExampleC9InstanceProfile:
-    Type: AWS::IAM::InstanceProfile
-    Properties:
-      Path: "/"
-      Roles:
-      - Ref: ExampleC9Role
-
-  ExampleC9Instance:
-    Description: "-"
-    DependsOn: ExampleC9BootstrapAssociation
-    Type: AWS::Cloud9::EnvironmentEC2
-    Properties:
-      Description: AWS Cloud9 instance for Examples
-      AutomaticStopTimeMinutes: 3600
-      InstanceType:
-        Ref: ExampleC9InstanceType
-      Name:
-        Ref: AWS::StackName
-      OwnerArn: !If [Create3rdPartyResources, !Ref ExampleOwnerArn, !Ref "AWS::NoValue" ]
-      Tags: 
-        - 
-          Key: SSMBootstrap
-          Value: Active
-        - 
-          Key: Environment
-          Value: AWS Example
-
-Outputs: 
-  Cloud9IDE:
-    Value:
-      Fn::Join:
-      - ''
-      - - https://
-        - Ref: AWS::Region
-        - ".console.aws.amazon.com/cloud9/ide/"
-        - Ref: ExampleC9Instance
-        - "?region="
-        - Ref: AWS::Region
-```
-
-0.3. Save the file.
-
 ## Step 1. Load the initial configuration
 
 This tutorial makes use of an AWS CloudFormation template to provisioning initial resources.  
@@ -412,7 +54,7 @@ This tutorial makes use of an AWS CloudFormation template to provisioning initia
 
 ![Create Stack](images/0001.png)
 
-1.2 . Select **Upload Template File** and upload the [gd-iac-initial.yml](assets/gd-iac-initial.yml) file that you created in the previous step. Then click **Next**.  
+1.2 . Select **Upload Template File** and upload the [gd-iac-initial.yml](https://github.com/8carroll/gd-iac-terraform-initial/blob/main/gd-iac-initial.yml) file. Then click **Next**.  
 
 ![Upload YAML file](images/0002.png)
 
@@ -442,9 +84,13 @@ This tutorial makes use of an AWS CloudFormation template to provisioning initia
 
 ![](images/0008.png)
 
-2.3.  Extract and then Drag-and-Drop the **[gd-iac-terraform-initial](assets/gd-iac-terraform-initial.zip)** folder to the root of the Cloud9 Instance.
+2.3.  From the terminal in your Cloud9 instance, clone the initial code repo. 
 
-![](images/0009.png)
+```
+git clone https://github.com/8carroll/gd-iac-terraform-initial.git
+```
+
+
 
 2.4. Change into the **gd-iac-terraform-initial** directory and perform a **terraform init**, **terraform plan**, and **terraform apply.**  
 
@@ -456,7 +102,7 @@ A successful apply will resemble the following:
 
 ![](images/0012.png)
 
-2.5. Verify that there are two new EC2 instances, one named **GuardDuty-Example: Compromised Instance** and the other named **GuardDuty-Example: Malicious Instance**.
+2.5. Verify that there are two new EC2 instances, one named **IAC Tutorial: Compromised Instance** and the other named **IAC Tutorial: Malicious Instance**.
 
 ![](images/0011.png)
 
@@ -522,10 +168,10 @@ variable "vpc_id" {}
 3.5. Now return to the `root/main.tf` file and add the S3 bucket. 
 
 ```
-# # CREATES S3 BUCKET
+# CREATES S3 BUCKET
 module "s3_bucket" {
-  source = "./modules/s3"
-  vpc_id = module.vpc.vpc_id
+  source = "./s3"
+  vpc_id = module.iac_vpc.vpc_attributes.id
 }
 ```
 
@@ -594,7 +240,7 @@ resource "aws_guardduty_threatintelset" "Example-Threat-List" {
 4.5. Next move to the `root/main.tf` file and call the GuardDuty module. We need to provide the bucket ID and the malicious IP. You can see that these are coming from the s3 module and the compute module.
 
 ```
-
+# Enable GuardDuty
 module "guardduty" {
   source       = "./modules/guardduty"
   bucket       = module.s3_bucket.bucket_id
@@ -711,7 +357,7 @@ output "sns_topic_arn" {
 
  module "guardduty_sns_topic" {
    source = "./modules/sns"
-   email  = 'youremailaddress@domain.com'
+   email  = "youremailaddress@domain.com"
  }
 
 
@@ -783,6 +429,8 @@ How does EventBridge work? EventBridge receives an event, an indicator of a chan
 ```
 
 6.4. In the first Event rule that we created we are looking for the **GuardDuty-Event-EC2-MaliciousIPCaller** event. Create a second event rule to look for the **GuardDuty-Event-IAMUser-MaliciousIPCaller** finding and send an email notification for that as well. 
+
+> This finding will not show up, its primarily there to practice creating the resources.
 
 ```
 
@@ -1012,48 +660,33 @@ resource "aws_lambda_function" "GuardDuty-Example-Remediation-EC2MaliciousIPCall
 7.8. In the `root/main.tf` file call the Lambda module, set the SNS topic ARN, the Compromised Instance ID, and the Forensic Security group. Note that these values are coming from the GuardDuty Module, the Compute Module, and the VPC Module.
 
 ```
-
+# CREATE THE LAMBDA FUNCTION
 module "lambda" {
   source                  = "./modules/lambda"
   sns_topic_arn           = module.guardduty_sns_topic.sns_topic_arn
   compromised_instance_id = module.compute.compromised_instance_id
-  forensic_sg_id          = module.vpc.forensic_sg_id
+  forensic_sg_id          = module.forensic-security-group.security_group_id
 }
 
 ```
 
-7.9. The Forensic Security group has not been created yet. Return to the `modules/vpc/main.tf` and add a security group to use for forensics.
+7.9. The Forensic Security group has not been created yet. Add a security group to use for forensics.
 
 ```
 
-# FORENSIC SECURITY GROUP
- resource "aws_security_group" "forensic_sg" {
-   vpc_id = aws_vpc.vpc.id
-   name   = "${var.vpc_name}-ForensicSecurityGroup"
+# CREATES THE FORENSICS_SG SECUIRTY GROUP
+module "forensic-security-group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "4.17.1"
 
-   ingress {
-     protocol    = "icmp"
-     self        = true
-     from_port   = -1
-     to_port     = -1
-     cidr_blocks = ["10.0.0.0/24"]
-   }
-
-   egress {
-     from_port   = 0
-     to_port     = 0
-     protocol    = "-1"
-     cidr_blocks = ["0.0.0.0/0"]
-   }
-
-   tags = {
-     Name = "${var.vpc_name}-ForensicSecurityGroup"
-   }
- }
+  name        = "FORENSIC_SG"
+  description = "Forensic Security group "
+  vpc_id      = module.iac_vpc.vpc_attributes.id
+}
 
 ```
 
-7.10. To access the `forensic_sg_id` we need to output that from the VPC module. Return to the `modules/vpc/outputs.tf` file and output the Security group ID.
+7.10. To access the `forensic-security-group` we need to output it. In the `root/outputs.tf` file and output the Security group ID.
 
 
 ```
