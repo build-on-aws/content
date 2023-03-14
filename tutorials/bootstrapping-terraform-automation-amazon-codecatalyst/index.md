@@ -143,7 +143,6 @@ wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-auto
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/pr_branch_iam_role.tf
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/providers.tf
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/state_file_resources.tf
-wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/terraform.tf
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/variables.tf
 ```
 
@@ -363,25 +362,6 @@ The files created will have the following content:
     #   target_key_id = aws_kms_key.terraform.key_id
     # }
     ```
-* terraform.tf
-    ```bash
-    terraform {
-      backend "s3" {
-        bucket         = "tf-state-files"
-        key            = "terraform-bootstrap-state-file/terraform.tfstate"
-        region         = "us-east-1"
-        dynamodb_table = "TerraformMainStateLock"
-        kms_key_id     = "alias/s3" # Optionally change this to the custom KMS alias you created - "alias/terraform"
-      }
-
-      required_providers {
-        aws = {
-          source  = "hashicorp/aws"
-          version = "~> 4.33"
-        }
-      }
-    }
-    ```
 
 Once done, edit the `_bootstrap/variable.tf` file and update the `state_file_bucket_name` (S3 bucket names are globally unique), and optionally the `state_file_lock_table_name` variables with the values for your S3 bucket name for the state file, DynamoDB table name for locks, and optionally change the `aws_region` if you want to use a different region.
 
@@ -491,7 +471,7 @@ aws_dynamodb_table.state_file_lock: Creation complete after 7s [id=TerraformMain
 Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
 ```
 
-Next, we will move the state file we just created with all the details of our infrastructure to our S3 bucket. Terraform backend configuration [does not allow](https://stackoverflow.com/questions/65838989/variables-may-not-be-used-here-during-terraform-init) any variable / local interpolation, so we need to update the `bucket` and `region` values manually in `terraform.tf` after uncommenting the `terraform` configuration block - replace them with your values:
+Next, we will move the state file we just created with all the details of our infrastructure to our S3 bucket. To do this, we need to configure a Terraform [backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) using S3. Create `_bootstrap/terraform.tf` with the following, and update the `bucket` and `region` values with your values:
 
 ```bash
 terraform {
@@ -512,7 +492,9 @@ terraform {
 }
 ```
 
-Now run `terraform init -migrate-state`, and you should see the following output:
+It would be easier if we could reference `region` and `state_file_bucket` variables in the Terraform backend configuration, but it [does not allow](https://stackoverflow.com/questions/65838989/variables-may-not-be-used-here-during-terraform-init) any variable / local interpolation.
+
+To migrate the state file to S3, run `terraform init -migrate-state`, and you should see the following output:
 
 ```bash
 $ terraform init -migrate-state
