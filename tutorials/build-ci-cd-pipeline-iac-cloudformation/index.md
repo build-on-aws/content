@@ -10,9 +10,9 @@ authorName: gaonkarr
 date: 2023-03-02 
 ---
 
-Infrastructure as Code (IaC) has been revolutionary for over a decade now. We can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to create the infrastructure. This is great as now I don't have to click in the AWS Management Console to set up everything, or create scripts and run using the CLI.
+Infrastructure as Code (IaC) has been revolutionary for over a decade now. We can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to perform CRUD(create, read, update and delete) operations on the infrastructure. This is great as now I don't have to click in the AWS Management Console to set up everything, or create scripts and run using the CLI. Without Infrastructure as code setting up infrastructure was time consuming and error-prone. 
 
-However, we are not done yet. Just writing CloudFormation templates and updating stacks manually is not using the ultimate superpower of defining IaC. The real purpose of defining IaC is to go through the same CI/CD pipeline as an application does during software development, applying the same versioning, track changes, code reviews, test, rollbacks to the infrastructure code. This will help you make your infrastructure more repeatable, reliable, consistent, increase in speed of deployments, reduce errors and eliminate configuration drift.
+However, we are not done yet. Just writing CloudFormation templates and updating stacks manually is not using the ultimate superpower of IaC. The real purpose of defining IaC is to send it through the same CI/CD pipeline as an application does during software development. We can now apply the same best practices of versioning, tracking changes, doing code reviews, tests, and rollbacks to the infrastructure code. This will make our infrastructure more repeatable, reliable, consistent, increase in speed of deployments, reduce errors and eliminate configuration drift.
 
 This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCatalyst for your Infrastructure as Code written with CloudFormation. The pipeline will utilize pull requests to submit, test, and review any changes requested to the infrastructure.
 
@@ -150,7 +150,7 @@ You can use your own CloudFormation template, or simply use one of the sample te
 
 For this blog, I am using a [sample template](https://raw.githubusercontent.com/build-on-aws/ci-cd-iac-aws-cloudformation/main/cloudformation-templates/VPC_AutoScaling_With_Public_IPs.json) that deploys a VPC with 2 subnets and publicly accessible Amazon EC2 instances that are in an Auto Scaling group behind a Load Balancer form. Feel free to use the same as I will be making changes to this template and run a pull request workflow.
 
->In the real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation templates. However, to keep your first deployment with CodeCatalyst simple, let's deploy everything in a single template.
+>In the real world, you would deploy the networking infrastructure and application deployment in separate CloudFormation [nested stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html). There are benefits to it - the networking team can manage this independently, and once networking infrastructure will not change more often as compared to the application resources. It also allows us to keep the template body size within the [CloudFormation Quotas](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html).  However, to keep your first deployment with CodeCatalyst simple, let's deploy everything in a single template.
 
 Let's ensure we commit our changes to our git repo using the following commands:
 ```bash
@@ -324,7 +324,7 @@ If you open the Website link, you can access the sample application deployed by 
 ## Make code changes with Pull Request Workflow
 Let's say you now want to make changes to the infrastructure. For example, we want to add a third subnet to the VPC, updating LoadBalancer and Autoscaling groups to use it. 
 
-As a **best practice**, you should never make changes directly to the main branch. We should always create a separate branch on which changes will be done, and once these changes are approved by reviewers they will be merged with the main branch. There are many git branching strategies that you can explore and use for your specific org/team needs. 
+As a **best practice**, you should never make changes directly to the main branch. We should always create a separate branch on which changes will be done, and once these changes are approved by reviewers they will be merged with the main branch. There are many git branching strategies that you can explore and use for your specific org/team needs. You can use the same strategies with CodeCatalyst.
 
 For this blog, I am keeping it simple. Anytime I need to make changes, I create a new branch _(step2)_ and I make new changes to infrastructure there _(step3)_. I then create a Pull Request (PR) to merge the new branch with the main branch. As shown in the image, anytime a PR is opened _(step4)_, CodeCatalyst will automatically run PR workflow to create a changeset _(step5)_. A ChangeSet allows you to preview how proposed changes to a stack might impact your currently running resources. You can then decide if you want to execute the changes or not.
 
