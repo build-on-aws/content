@@ -34,7 +34,7 @@ Working with distributed architectures makes it difficult to ensure exactly once
 
 ## Coupling
 
-Chaining events in an event-driven architecture helps separate and isolate the different components inside a process because each component is only interested in which events they receive or emit and not on the internal implementations of other components. Isolating components is important because it reduces the effect of "coupling". By coupling, we intend the effect of one connected system over the other. For example, if one system is slower than usual, or the data model of one system is updated, that is the effect on the other system?
+Chaining events in an event-driven architecture helps separate and isolate the different components inside a process because each component is only interested in which events they receive or emit and not on the internal implementations of other components. Isolating components is important because it reduces the effect of "coupling." By coupling, we intend the effect of one connected system over the other. For example, if one system is slower than usual, or the data model of one system is updated, that is the effect on the other system?
 
 Coupling isn’t binary or unidimensional, and can derive from different types of dependencies. For example, there can be coupling  because of the different technologies used across two connected system (for example, Java Vs .NET), their location (can they see and reach each other? With how much latency?), data formats (that’s why standards such as XML and JSON are important when integrating different systems), or performance impacts (consider what happens if one of the two systems slows down or stops).
 
@@ -140,10 +140,22 @@ Distributed transactions are one of the most complex and inefficient integration
 
 ![Sample workflow with compensating transactions (saga pattern)](images/sample-workflow-saga-pattern.png)
 
-This approach is called "saga pattern" because the sequence of transactions that needs to be applied on the data sources is called a "saga". When a transaction fails, the saga uses compensating transactions to revert all the changes that already occurred to their original values.
+This approach is called "saga pattern" because the sequence of transactions that needs to be applied on the data sources is called a "saga." When a transaction fails, the saga uses compensating transactions to revert all the changes that already occurred to their original values.
 
 ### Event sourcing
 
 With event sourcing, we store all events in a repository (event log). From the event log, we are able to reconstruct the current and any paste state of the system.
 
 Because events are immutable and contain a timestamp, the event log is append-only and effectively a time series of events. Depending on the volumes, it can be complex to store and manage all the events and being able to query in a reasonable time the event log to rebuild the state of the system at a specific time. For these reason, different solutions have been built over time but this pattern has not been widely adopted.
+
+## Conclusion
+
+The mental model of event-driven architectures is not that dissimilar to how we naturally look at the world: with a cause-effect relationship between the components of the architecture. Each component of the architecture can emit events that *cause* the processing by another component. If an order is created, then the payment should be checked.
+
+Events that are shared between components are anchored to a specific point in time (their timestamp) and are immutable because they describe something that happened in the past, such as when a file has been uploaded or a customer profile is being updated. Immutable data is much easier to share in a distributed architecture because you don't need to check for their validity.
+
+In distributed systems, you need to be prepared to the possibility to receive duplicate events. You should design your architecture to process data in an idempotent way so that, if the same event is processed twice, the final state of the system remains the same.
+
+Event-driven architecture reduce coupling among the components and make it easier for different teams to independently work on those components without having to synchronize their work and wait for other teams to complete a task before they can proceed with their own activities. In this way, each team can work at their own speed without slowing down the work of other teams.
+
+To speed up your implementations, you can apply integration patterns that solve common problems in a replicable way. Integration patterns help you think asynchronously and reduce side effects across components.
