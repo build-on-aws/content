@@ -10,7 +10,7 @@ authorName: gaonkarr
 date: 2023-03-02 
 ---
 
-Infrastructure as Code (IaC) has been revolutionary for over a decade now. We can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to perform CRUD(create, read, update and delete) operations on the infrastructure. This is great as now I don't have to click in the AWS Management Console to set up everything, or create scripts and run using the CLI. Without Infrastructure as code setting up infrastructure was time consuming and error-prone. 
+Infrastructure as Code (IaC) has been revolutionary for over a decade now. We can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to perform CRUD(create, read, update and delete) operations on the infrastructure. This is great as now we don't have to click in the AWS Management Console to set up everything, or create scripts and run using the CLI. Without Infrastructure as code setting up infrastructure was time consuming and error-prone. 
 
 However, we are not done yet. Just writing CloudFormation templates and updating stacks manually is not using the ultimate superpower of IaC. The real purpose of defining IaC is to send it through the same CI/CD pipeline as an application does during software development. We can now apply the same best practices of versioning, tracking changes, doing code reviews, tests, and rollbacks to the infrastructure code. This will make our infrastructure more repeatable, reliable, consistent, increase in speed of deployments, reduce errors and eliminate configuration drift.
 
@@ -223,7 +223,7 @@ touch .codecatalyst/workflows/main_branch.yaml
 
 Open `.codecatalyst/workflows/main_branch.yaml` in your IDE, and add the following. Remember to 
 - replace the placeholder AWS account ID `123456789012` with the value of your account, and the IAM role name `main_branch_IAM_role`, if you changed it
-- if you are using your own CloudFormation template, replace the CloudFormation filename in `template`, 
+- if you are using your own CloudFormation template, replace the CloudFormation filename in `template`
 </br>
 
 * main_branch.yaml
@@ -407,7 +407,7 @@ In the above Pull Request Workflow, notice the following definitions :
 
 1. In the `Super-Linter_0d` action, we are defining `VALIDATE_CLOUDFORMATION: "true"` environment variable. This ensures that our CloudFormation template is validated using the `cfn-lint` github action. [cfn-lint](https://github.com/aws-cloudformation/cfn-lint?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) is an open source tool that helps validate AWS CloudFormation yaml/json templates against the [AWS CloudFormation Resource Specification](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-resource-specification.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and additional checks. This includes checking valid values for resource properties and best practices.
 
-2. In the `CreateChangeSet` action, the `no-execute-changeset: "1"` option in the workflow below, it indicates whether to run the change set or have it reviewed. Default is `'0'`, which means it will run the change set. We don't want it to execute the changes; we just want to see the changes that will happen if PR is merged, hence we set it to `'1'`. Do not execute the changeset.
+2. In the `CreateChangeSet` action, the `no-execute-changeset: "1"` option in the workflow below, it indicates whether to run the change set or have it reviewed. Default is `'0'`, which means it will run the change set. We don't want it to execute the changes; we just want to see the changes that will happen if PR is merged, hence we set it to `'1'` which means we do not execute the changeset.
 
 3. In the `CreateChangeSet` action, we have added a new property `DependsOn: - Super-Linter_0d`. This tells the workflow to first run `Super-Linter_0d` action, and if it is successful, only then run the `CreateChangeSet` action.
 
