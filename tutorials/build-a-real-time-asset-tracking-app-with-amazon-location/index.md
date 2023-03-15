@@ -48,11 +48,11 @@ Before starting this tutorial, you will need the following:
 ## Deploy Cloud9 Instance
 Before we deploy our asset tracking app, we need to deploy an AWS Cloud9 Instance. Navigate to the AWS Console and select **Cloud9**. Next select **Create environment**. 
 
-image here
+![AWS Console showing how to create an environment](./images/1.1.png)
 
-Leave all options as default and provide a name.
+Set the instnace type to `t3.small` and provide a name. Select **Create**
 
-image here
+![AWS Cloud9 Console showing deployment options](./images/1.1.2.png)
 
 Once the Cloud9 instance has launched, we can begin deploying our app.
 
@@ -117,6 +117,8 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 ? Please choose the profile you want to use default
 ```
 
+![Successful Amplify Init](./images/1.3.png)
+
 Now we can use AWS Amplify to add our Amazon Location Service resources
 ```bash
 amplify add geo
@@ -156,11 +158,14 @@ Available advanced settings:
 "amplify push" builds all of your local backend resources and provisions them in the cloud
 "amplify publish" builds all of your local backend and front-end resources (if you added hosting category) and provisions them in the cloud
 ```
+![Successful Amplify Init](./images/1.2.png)
+
+
 Before we push our Amplify configuration, we need to make one small change to allow our application to work with Amazon Location Service Trackers.
 ```bash
 amplify override project
 ```
-
+![Successful Amplify Override](./images/1.4.png)
 
 Now navigate to the amplify/backend/awscloudformation/override.ts file that was just created, and replace the contents with the following:
 
@@ -189,12 +194,13 @@ export function override(resources: AmplifyRootStackTemplate) {
 }
 ```
 
-image here
+![Configuring the Amplify Override](./images/1.5.png)
 
 Save the `override.ts` file and now we can push our Amplify configuration and create our resources in the cloud.
 ```bash
 amplify push
 ```
+
 
 Selecting Y for the options presented here:
 
@@ -213,18 +219,124 @@ Selecting Y for the options presented here:
 ✔ Are you sure you want to continue? (Y/n) · yes
 ```
 
+![Successful Amplify Push](./images/1.6.png)
+
 Next start the application by running
 ```bash
 npm start
 ```
 
-Keep `npm start` running throughout this lab in order to keep the asset tracking app operational.
+Keep `npm start` running throughout this tutorial in order to keep the asset tracking app running.
 
+In your Cloud9, navigate to **Run** and then select **Preview running application** to view the app.
 
+![Selecting Preview Running Application](./images/1.7.png)
+
+You should now see your application running inside Cloud9
+
+![Application running in Cloud9](./images/1.8.png)
+
+## Setting up IoT Core Resources
+
+Now that we have our Amazon Location Service resources configured and our web app up and running, we need to configure our IoT Rule to send MQTT events to our new Amazon Location Service Tracker.
+
+Navigate to the IoT Core Console, and click on Message Routing then Rules
+
+![AWS IoT Core Console showing location of Rules Engine](./images/2.1.png)
+
+Click on **Create Rule**
+
+![AWS IoT Core Console showing how to create a rule](./images/2.2.png)
+
+Now let's give our rule the name `AssetTrackingRule` and click Next
+
+![AWS IoT Core Console showing specifying a rules properties](./images/2.3.png)
+
+Now we need our SQL statement. We will be using the topic `assets/trackers`
+
+![AWS IoT Core Console showing configuration of the SQL statement](./images/2.4.png)
+
+then click Next
+
+Now it's time to setup our Location Action. Select **Location** from the **Choose an action** dropdown
+
+![AWS IoT Core Console showing configuration of the location action](./images/2.5.png)
+
+Select **Create a Tracker** and enter the name `AssetTracker`.
+
+![AWS IoT Core Console showing configuration of the location action](./images/2.6.png)
+
+Now we can configure mapping of our payload to the rule. In order to do this, we will use substitution templates in IoT Core. Select trackerAsset01 for the Tracker name dropdown, then, for each field, copy/paste the following values:
+
+Now we need to setup our mappings to Amazon Location Tracker parameters such as latitude and longitude. 
+
+Device ID: `thing123`
+
+Longitude: `${longitude}`
+
+Latitude: `${latitude}`
+
+Timestamp value: `${timestamp()}`
+
+Finally, we need to create a new IAM Role that will give IoT Core Rules Engine permissions to update the Amazon Location Service Tracker resource. Click Create new role, give it the name `AssetTrackerIoTRule` and click Create
+
+![AWS IoT Core Console showing configuration of the location action IAM Role](./images/2.7.png)
+
+Our configuration should look like this. 
+
+![AWS IoT Core Console showing configuration of the location action](./images/2.8.png)
+
+Select **Next**
+
+![AWS IoT Core Console showing final configuration of our IoT Core rule](./images/2.9.png)
+
+Now select **Create**
+
+Now that we've created our IoT Core Rule, we can start sending messages.
+
+## Sending MQTT Messages
+From the IoT Core console, navigate to **MQTT test client** and select the **Publish to a topic** tab.
+
+Enter the following to send our first point:
+```json
+{
+  "deviceId": "thing123",
+ "latitude": "49.282301",
+"longitude": "-123.118408"
+}
+```
+
+and select **Publish**
+
+![AWS IoT Core Console showing the MQTT test client with a message published](./images/3.1.png)
+Navigate back to Cloud9 and your running application. Refresh the application and you should see the point on the map
+
+![Cloud9 showing the application running with a point on the map](./images/3.2.png)
+
+Now let's enter another point. In the **MQTT test client** enter the following, then select **Publish**
+
+```json
+{
+  "deviceId": "thing123",
+ "latitude": "49.282144",
+"longitude": "-123.117574"
+}
+```
+
+Refresh the page and you will see a second pin, with a line connecting it with the previous point. 
+![Cloud9 showing the application running with a point on the map](./images/3.3.png)
+
+## Cleaning up your AWS Environment
+In order to remove resources created as part of this tutorial, we need to complete the following steps.
+
+### Delete Cloud9
+In order to not incur charges from our Cloud9 Instance, we need to delete the environment. Follow the steps [here](https://docs.aws.amazon.com/cloud9/latest/user-guide/delete-environment.html) to remove the `AssetTracking` environment.
+
+### Delete Amazon Location Service Tracker
+Navigate to the Amazon Location Service console, select **Trackers** select `trackerAsset01` and select **Delete**, confirming you wish to delete it.
+
+### Deleting IoT Core Rule
+Navigate to the IoT Core Console, select **Message Routing** and **Rules**. Select `AssetTrackingRule` and select **Delete**, confirming you wish to delete it.
 
 ## Conclusion
-
-
-
-Also end with this line to ask for feedback:
-If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+Congratulations! You just built a simple asset tracking app using AWS Amplify, Amazon Location Service, and AWS IoT Core. If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
