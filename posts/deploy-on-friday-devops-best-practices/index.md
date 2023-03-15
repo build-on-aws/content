@@ -34,13 +34,13 @@ The **fear of Deploy** and its consequences for people and organizations is fund
 
 In this article, I will share examples of what should be avoided and practices to mitigate the risks and reduce the pain in the Deploy process, which requires technical, cultural, and process capabilities of organizations ready to Deploy on Fridays.
 
-## Independent teams
+## Keep independent teams
 
 I've heard of a recurring meeting where the goal was to define the order in which teams would make changes to services and the order to deploy in subsequent weeks. It was a synchronization and coordination meeting between the teams, as the structure of the software in relation to the organizational structure did not allow the teams to work independently. To make it worse, some services had yet to be defined owners.
 
 Deploy processes that require synchronization and coordination activities must be identified and avoided, as they slow down teams and increase management costs. In addition, every service must have well-defined owners to avoid the diffusion of responsibility during its life cycle.
 
-## Coupling
+## Identify and avoid coupling
 
 It's like a fisherman's story, but it's true, I swear! I once had to coordinate the Deploy of more than 20 services to production only because I added an element to an enumeration in one of those services. There were more than 20 pull requests in different teams and the order was important. A complete nightmare! A change that should have taken a morning took weeks to complete!
 
@@ -50,7 +50,7 @@ Mapping the coupling (sometimes coupling is inevitable) and identifying the cost
 
 [In this video](https://www.youtube.com/watch?v=esm-1QXtA2Q), Michael Nygard does an excellent job, as always, sharing concepts about coupling, especially considering its inevitability.
 
-## Small batches
+## Work in small batches deployed regularly
 
 A team I worked on wasted two weeks trying to stabilize software in January after a release freeze between Christmas and New Year's. The launch freeze was a request from the business area to minimize the risk of customers experiencing a service interruption during such as they said an important time of the year.
 
@@ -60,7 +60,7 @@ It's a great example of how **neglecting the technical aspects** of software del
 
 There is no silver bullet regarding increasing reliability in the Deploy process. However, working in small batches, deployed frequently, rather than large batches, with scheduled deployment is one of the practices that most contribute to reducing Deploy risk.
 
-## Trunk-based development
+## Use trunk-based development
 
 Have you ever encountered a repository where it's difficult to determine which branch is in production? I can't remember anything that caused me more uncertainty than the repository for a critical service with multiple open branches that, in theory, were ready for production but which contained several commits not yet deployed.
 
@@ -68,7 +68,7 @@ The main branch of a project should always be in a production-ready state, and t
 
 [Clare Liguori](https://aws.amazon.com/builders-library/authors/clare-liguori/) addressed this topic in [her article](https://aws.amazon.com/builders-library/cicd-pipeline/) on how Amazon stopped using the release captain role. The article is an excellent story, and it is interesting to note the role that trunk-based development played at that time.
 
-## Code review
+## Enforce thoughtful code reviews
 
 Some of my best learning experiences have come through rigorous code reviews. I can't remember how many times we discovered significant issues during the code review process. Code reviews minimize risk, decrease the uncertainty, improve quality, enable knowledge sharing, and encourage consistent design. They allow people who know more to demonstrate this in practice, transferring tacit knowledge through socialization.
 
@@ -78,7 +78,7 @@ It's an example of a process that depends on a well-established feedback culture
 
 **Code should only go into production after going through a rigorous review process.**
 
-## CI/CD
+## Automate deployment processes
 
 I heard about a document created by a development team that basically consisted of a series of manual steps that the operations team should perform as part of the Deploy process. Just imagine the friction of this operation. Now consider the differences between the environments and add a dash of cultural issues. Imagine doing a Deploy like that on Fridays?
 
@@ -88,7 +88,7 @@ Once a code has been reviewed, the merge to the main branch must trigger the CI/
 
 [Mark Mansour](https://aws.amazon.com/builders-library/authors/mark-mansour/) wrote about [accelerating with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/) at Amazon and the positive aspects of the practice for the customers and business. In his words "For us, automation is the only way we could have continued to grow our business".
 
-## Automated tests
+## Rely on reliable automated tests
 
 I once worked on a team whose tests were performed exclusively by people, and the software only went into production after going through one or more people who carried out tests and manual inspections. They are the most well-meaning, stressed-out people I've ever worked with during my career.
 
@@ -96,17 +96,19 @@ In addition to **team burnout** , this job doesn't work because, despite any goo
 
 Automated tests running continuously decrease the possibility that changes will negatively impact the software and are vital to increasing confidence in the Deploy process and decreasing Deploy pain.
 
-## Feature toggles and Experimentation
+## Reduce risk using feature flags
 
-Continuously delivering software gradually often means putting incomplete software into production. This way, rather than working in long-term branches until the software is complete, teams should be able to bring software into production piecemeal and control its visibility or impact through features toggles. This technique helps teams to work in small batches with low risk.
+Continuously delivering software gradually often means putting incomplete software into production. This way, rather than working in long-term branches until the software is complete, teams should be able to bring software into production piecemeal and control its visibility or impact through features flags. This technique helps teams to work in small batches with low risk.
 
-Sometimes it is desirable to enable certain functionality for a small group of users. This capability is handy to allow teams to quickly learn from users, create and validate hypotheses, observe the application and business metrics, and monitor the impact of changes for a small population, reducing risk and reducing the pain in the Deploy process.
+Sometimes it is desirable to enable certain functionality for a small group of users. This capability is handy to allow teams to quickly learn from users, observe the application and business metrics, and monitor the impact of changes for a small population, reducing risk and reducing the pain in the Deploy process.
 
-## Deploy strategies
+In [this video](https://www.youtube.com/watch?v=uouw9QxVrE8) from AWS re:Invent 2022, you can follow Sébastien Stormacq and Olivier Leplus demonstrating how AWS has been using this technique for over a decade and how you can introduce feature flags into your applications.
+
+## Reduce risk using deploy strategies
 
 To do
 
-## Monitoring and observability
+## Things will go wrong: Ensure software is easy to monitor and observable
 
 I heard about a role in an operations team whose primary assignment was to create monitoring dashboards and send messages on the internal communicator to the development teams when something was not right in the view of the person in charge of observing the dashboards. It was something like, "Guys, CPU is at 70%. Do we have a problem here?" It is another edge case (in the real world) highlighting the lack of measurement/evaluation capacity and latent cultural problems.
 
@@ -116,7 +118,7 @@ Each alarm must have an associated playbook, and each playbook may cite one or m
 
 In addition to actionable alarms, teams must be able to observe the software **without friction and intermediaries**. Monitoring dashboards with service metrics, business metrics, centralized and structured logs, and traces (including distributed when it makes sense) are essential. The software must be observable, and there must be how-to guides that show how to observe it. The main idea here is that no matter how inexperienced a firefighter is in a given context, it should be able to start fighting the fire, following steps and using the right tools for each case.
 
-## Rollback must be possible
+## Things will go wrong: Rollback must be possible
 
 Even in applications that follow best practices in organizations ready to Deploy on Fridays, in certain circumstances, there will be unexpected behavior in production, where the only option to re-establish operation will be to rollback the deployment.
 
