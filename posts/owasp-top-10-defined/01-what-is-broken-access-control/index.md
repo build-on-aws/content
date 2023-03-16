@@ -18,17 +18,17 @@ This is a 10-part series:
 
 ## Overview of Access Control
 
-To understand the workings of a broken access control attack, one must first understand the goal we are trying to achieve through the use of access control. So what is access control and what is our expectation of the mechanism? 
+To understand the workings of a broken access control attack, one must first understand the goal we are trying to achieve through the use of access control. So what is access control and what is our expectation of the mechanism?
 
 > Not every closed door is locked. - Norm Kelly
 
-The easiest analogy for me to convey access control always goes back to a home with a front door. Entering that front door places a person in a trusted position. After all, we don't invite just anyone into our homes. No, we are selective about who gets an invite and for that reason we have a front door. In most cases that door is going to have a lock on it. In some communities, the people who live there are trusting and rarely bolt the lock. This cannot be the case with our networks. Unfortunately as things go, we often find networks that appear to have the front door shut, but are not locked. This can come if the form of a weak password policy, vulnerabilities in the network protocols used for access, or even in the software platform that's being accessed. 
+The easiest analogy for me to convey access control always goes back to a home with a front door. Entering that front door places a person in a trusted position. After all, we don't invite just anyone into our homes. No, we are selective about who gets an invite and for that reason we have a front door. In most cases that door is going to have a lock on it. In some communities, the people who live there are trusting and rarely bolt the lock. This cannot be the case with our networks. Unfortunately as things go, we often find networks that appear to have the front door shut, but are not locked. This can come if the form of a weak password policy, vulnerabilities in the network protocols used for access, or even in the software platform that's being accessed.
 
 Access-control is the formal mechanism to provide trusted access to an organization's technical and business resources. But access control is a much broader topic than can be covered in a single article. There are many types or categories of access control, ranging from Role-based Access Control (RBAC), Rule-based Access Control, Port-based Access Control, and so on. Within access control, there are various phases to provide not only the authentication of the attempting party, but authorization, management, and auditing. Access control failures can occur in any of these types or phases.
 
 ## Results of Access Control Failures
 
-The results of an access control failure are often very public. These often expose customer data and personal information. Even more access control failures go unreported. Setting the business results aside, from a pure technical perspective the results of an access control failure involve the exposure of sensitive information to an unauthorized actor, possible insertion of sensitive information into sent data, and an end user executing unwanted actions on a web application that they are authenticated to. This is not an extensive list. 
+The results of an access control failure are often very public. These often expose customer data and personal information. Even more access control failures go unreported. Setting the business results aside, from a pure technical perspective the results of an access control failure involve the exposure of sensitive information to an unauthorized actor, possible insertion of sensitive information into sent data, and an end user executing unwanted actions on a web application that they are authenticated to. This is not an extensive list.
 
 ## Notable Common Weakness Enumerations (CWEs)
 
@@ -78,7 +78,7 @@ password:********
 ➜  aws_da_spec_cloud-infra-sec git:(main) ✗ 
 ```
 
-This could be considered "Broken Access Control" because the information I provide in response to an unknown user gives enough information for an unauthorized actor to attempt to guess valid users since a valid user will return the `Login Failed - incorrect password` response. 
+This could be considered "Broken Access Control" because the information I provide in response to an unknown user gives enough information for an unauthorized actor to attempt to guess valid users since a valid user will return the `Login Failed - incorrect password` response.
 
 While this is just one example, it iterates the point that Broken Access Control is a much wider topic than can be addressed in a single article.
 

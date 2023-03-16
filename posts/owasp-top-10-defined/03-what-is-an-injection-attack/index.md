@@ -25,7 +25,7 @@ In this post we are talking about injection attacks. As the name would elude, th
 
 ## Simple Example
 
-For this example, we're going to look at an example of a Cross Site Scripting (XSS) attack. To do this, I'll be using a deployment of the [OWASP Juice Shop application](https://owasp.org/www-project-juice-shop/). This is an open source web application that is intentionally insecure. You can obtain this application yourself if you wish to recreate what I'm showing here or to play around on your own with other vulnerabilities. Of course, I only recommend installing it in a lab environment that is isolated from production resources. 
+For this example, we're going to look at an example of a Cross Site Scripting (XSS) attack. To do this, I'll be using a deployment of the [OWASP Juice Shop application](https://owasp.org/www-project-juice-shop/). This is an open source web application that is intentionally insecure. You can obtain this application yourself if you wish to recreate what I'm showing here or to play around on your own with other vulnerabilities. Of course, I only recommend installing it in a lab environment that is isolated from production resources.
 
 > If you're interested in learning more about the OWASP Juice Shop, there is a [free book](https://pwning.owasp-juice.shop/) that explains the app and its vulnerabilities in more detail.
 
@@ -33,7 +33,7 @@ That being said, my server is up and running, as you can see below. Let's look a
 
 ![A Screenshot of the OWASP Juice Shop UI](images/03-what-is-an-injection-attack-01.png)
 
-First, we'll run the attack from the search box on the GUI. The following animated GIF shows the attack in action. What we are doing here is entering a bit of JavaScript code in the search box of the web UI. This causes the browser to display an alert rather than a search result. 
+First, we'll run the attack from the search box on the GUI. The following animated GIF shows the attack in action. What we are doing here is entering a bit of JavaScript code in the search box of the web UI. This causes the browser to display an alert rather than a search result.
 
 ![Animated GIF of an injection attack using OWASP Juice Shop](images/03-what-is-an-injection-attack-03.gif)
 
@@ -64,7 +64,7 @@ With those core rules in place, we should have some protection against XSS. Let'
 
 ![Output of an XSS attack from the CLI using CURL](images/03-what-is-an-injection-attack-05.png)
 
-In the above output, you can see the "Request blocked" notification was returned. We now have protection for our server against XSS attacks. 
+In the above output, you can see the "Request blocked" notification was returned. We now have protection for our server against XSS attacks.
 
 ## Conclusion
 

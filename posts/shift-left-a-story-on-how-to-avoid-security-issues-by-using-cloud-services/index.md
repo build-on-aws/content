@@ -55,7 +55,7 @@ If you look into the _SAST_ tooling landscape, you will see many choices, availa
 
 ![Slide from presentation at *AWS Berlin Summit 2022* showing the CI/CD pipeline where *CodeGuru* sits in the build and test phase](images/amazon-codeguru-devops-guru-place-in-ci-cd-pipeline.png)
 
-If your workloads are deployed on AWS, you can easily add a convenient and fully-managed tool from the _SAST_ landscape called *Amazon CodeGuru*, which helps with reviewing code of applications written in *Python* and *Java*. Notice in the image above that *CodeGuru* sits in the pipeline in the building and testing phase - which is a direct implementation of the *shift-left* approach to security when it comes to the software development life cycle (_SDLC_) processes. 
+If your workloads are deployed on AWS, you can easily add a convenient and fully-managed tool from the _SAST_ landscape called *Amazon CodeGuru*, which helps with reviewing code of applications written in *Python* and *Java*. Notice in the image above that *CodeGuru* sits in the pipeline in the building and testing phase - which is a direct implementation of the *shift-left* approach to security when it comes to the software development life cycle (_SDLC_) processes.
 
 ![Slide from presentation at *AWS Berlin Summit 2022* showing slide title "Code Areas Addressed by CodeGuru Reviewer". Slide shows AWS Best Practices, Concurrency, Resource Leaks, Sensitive Information, Code Efficiency, Code Duplication, and Input Validation areas.](images/code-areas-addressed-by-codeguru-reviewer.png)
 
@@ -72,7 +72,6 @@ To create this integration, we must establish a relationship between _GitHub Act
 However, there is a much better way - meaning a *more secure* one. You can use _OpenID Connect_ and _IAM Roles_, which will generate short-lived tokens with the help of _AWS STS_ for a particular set of permissions IAM associated with that role.
 
 We need two elements to use a better path – an _IAM Role_ and a custom _OIDC_ provider. They are created via _AWS CDK_ definitions inside the file [infrastructure/lib/infrastructure-shared-stack.ts](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example/blob/main/infrastructure/lib/infrastructure-shared-stack.ts):
-
 
 ```typescript
 // GitHub OIDC provider.
@@ -177,6 +176,6 @@ Now, having a pipeline set up and properly configured, you can inspect in the sa
 
 Not at all!
 
-Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *CodeGuru* team on your behalf. Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all security-related recommendations inside the [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html). 
+Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *CodeGuru* team on your behalf. Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all security-related recommendations inside the [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html).
 
 I also encourage you to dive deeper into the [provided code example](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example) to learn more such as how CodeGuru Reviewer tackles multiple languages in a single repository or how [file exclusions and rules suppression](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendation-suppression.html) works.

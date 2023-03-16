@@ -13,13 +13,13 @@ Whether you're building a website or a cloud application or backing up data, you
 
 ## 1. Block storage
 
-Block storage stores data in fixed-size pieces of storage called blocks. A collection of blocks forms a volume that can be treated as a unit of storage, such as a hard drive. 
+Block storage stores data in fixed-size pieces of storage called blocks. A collection of blocks forms a volume that can be treated as a unit of storage, such as a hard drive.
 
 When writing data, block storage splits files across blocks with a unique identifier. Each data block is of a fixed-size, so if say the blocks are 5kb each, and you have a 17kb file, it will be split across 4 blocks, even though it doesn't fill the last block completely (5kb + 5kb + 5kb + 2kb blocks). To retrieve data, the storage server uses the unique ID to find the blocks with the data and returns the parts of the file. In practice, this process is transparent to us because a file system is used to manage blocks. The file system implements a lookup table of unique IDs stored in blocks that manage the efficient storage of data.
 
 Think of blocks as low-level components that manage storing data efficiently. Operating systems implement file systems to enable us to work with data as files and directories.
 
-### How is it used?
+### How is block storage used?
 
 Block storage provides fine-grained control over how data is stored. A major advantage of block storage is the ability to optimize how data is distributed across blocks. Block storage can make small and frequent changes to a file without rewriting the file. This enables fast reads and writes for workloads that must be performant, such as transactional workloads or database queries.
 
@@ -32,7 +32,7 @@ Block storage offers the following features:
 - optimized storage for workloads that require high data throughput and low latency
 - built for small and frequent changes to data without rewriting a file
 - can be locally attached to cloud compute and added as needed without a performance penalty
-- durable and can be moved between cloud compute resources 
+- durable and can be moved between cloud compute resources
 
 ## 2. Object storage
 
@@ -44,7 +44,7 @@ To retrieve an object, an HTTP request is sent to the object store's REST API, w
 
 Objects can't be changed, but a new object can be created from a current object with the same object ID. Metadata tracks the version of these objects. In addition to versions, metadata can track the owner of the object and when it was created, making tracking, indexing, and concurrent writes possible.
 
-### How is it used?
+### How is object storage used?
 
 Object storage is built to store petabytes of data that don't change often and have associated metadata. Object storage is ideal for WORM (write once, read many) data, such as backups, log files, data lakes, video, and imagery. In addition, object storage can efficiently hold large data sets for machine learning and data collected by IoT devices.
 
@@ -66,7 +66,7 @@ Files can have fixed, system-defined metadata, such permissions to read, write, 
 
 The difference between file storage and block storage is that maintaining a file hierarchy doesn't scale when there are thousands of users and millions of files. The operating system must traverse the file system tree to locate files instead of reading through a flat lookup table of unique identifiers and manage locking to prevent concurrent writes that may corrupt the file. As a file system adds more users and stores more files, performance degrades.
 
-### How is it used?
+### How is file storage used?
 
 Although file storage doesn't scale like object or locally attached block storage, it supports many types of workloads where scaling or throughput are not requirements. File storage enables sharing datasets, videos, and documents among many users. File storage is user friendly; it implements data management in a way that is familiar to most computer users.
 
@@ -74,7 +74,7 @@ File storage offers the following features:
 
 - Mounted by an operating system(s) to access the files / directories
 - Able to access parts of a file if only certain sections are needed
-- Can be read by multiple systems across the network 
+- Can be read by multiple systems across the network
 
 ## Takeaways
 

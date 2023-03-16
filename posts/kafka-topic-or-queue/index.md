@@ -11,9 +11,9 @@ date: 2022-08-31
 
 The number of myths and misconceptions associated with a technology is directly proportional to it's popularity i.e. the more tenured and widely-used a technology is, the likelihood of misnomers floating around is quite high. [Apache Kafka](https://kafka.apache.org/) is no different! It's sometimes referred to as a "queuing service" (terrible!), "pub/sub system" (acceptable, but not quite there), "messaging system" (not too bad) etc.
 
-> An "event streaming platform" is an accurate description by the way and [well explained in the documentation as well](https://kafka.apache.org/documentation/#intro_platform)).
+> An "event streaming platform" is an accurate description by the way and [well explained in the documentation as well](https://kafka.apache.org/documentation/#intro_platform).
 
-But something more widespread (at least in my experience and discussion with fellow developers) is the confusion around **Whether Kafka is a Topic, or a Queue?** In addition to the "too many names" problem, what compounds this confusion is the fact that the word `topic` can be interpreted in a specific way in the world of "messaging systems" - more on this later in the blog post. 
+But something more widespread (at least in my experience and discussion with fellow developers) is the confusion around **Whether Kafka is a Topic, or a Queue?** In addition to the "too many names" problem, what compounds this confusion is the fact that the word `topic` can be interpreted in a specific way in the world of "messaging systems" - more on this later in the blog post.
 
 > In the case of Kafka, a *Topic* is a fundamental construct - think of it as something you send data to and receive data from.
 
@@ -34,7 +34,7 @@ A typical application that needs to process data in Kafka uses the Consumer clie
 
 > In fact, even with higher level components such as Kafka Connect or Kafka Streams, you end up using the Kafka Consumer API (indirectly) without being exposed to the underlying details
 
-If a single consumer does not suffice i.e. it is unable to process data quickly enough to keep up with the rate of production, you can start additional consumer instances (horizontal scaling). All these instances can be categorized under a single (logical) entity known as a **Consumer Group** and Kafka will take care of distributing the workload among these individual instances. 
+If a single consumer does not suffice i.e. it is unable to process data quickly enough to keep up with the rate of production, you can start additional consumer instances (horizontal scaling). All these instances can be categorized under a single (logical) entity known as a **Consumer Group** and Kafka will take care of distributing the workload among these individual instances.
 
 > The exact mechanics, protocol etc. of how this happens is outside the scope of this blog post
 
@@ -50,7 +50,7 @@ The maximum number of consumers (hence the parallelism) depends on the number of
 
 ## Pub/Sub systems and Topics
 
-Topics (sometimes also referred to as channels) are key to [Publish-Subscribe systems](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) - they are used to broadcast information to *all* subscribers. 
+Topics (sometimes also referred to as channels) are key to [Publish-Subscribe systems](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) - they are used to broadcast information to *all* subscribers.
 
 > See how it's different from a queue where each consumer (assuming there are multiple consumers) instance processes a *different* set of data?
 
