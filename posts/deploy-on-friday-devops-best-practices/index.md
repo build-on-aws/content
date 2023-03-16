@@ -68,7 +68,7 @@ The main branch of a project should always be in a production-ready state, and t
 
 [Clare Liguori](https://aws.amazon.com/builders-library/authors/clare-liguori/) addressed this topic in [her article](https://aws.amazon.com/builders-library/cicd-pipeline/) on how Amazon stopped using the release captain role. The article is an excellent story, and it is interesting to note the role that trunk-based development played at that time.
 
-## Enforce thoughtful code reviews
+## Encourage thoughtful code reviews
 
 Some of my best learning experiences have come through rigorous code reviews. I can't remember how many times we discovered significant issues during the code review process. Code reviews minimize risk, decrease the uncertainty, improve quality, enable knowledge sharing, and encourage consistent design. They allow people who know more to demonstrate this in practice, transferring tacit knowledge through socialization.
 
@@ -106,9 +106,13 @@ In [this video](https://www.youtube.com/watch?v=uouw9QxVrE8) from AWS re:Invent 
 
 ## Reduce risk using deploy strategies
 
-To do
+8 am, the time most of our clients start their operations. We've just deployed a critical change to the authentication process for our entire user base. We're happy to finally ship this change, as it's a technical debt payment that will make the software more secure while removing afferent coupling that has long taken a toll on us.
 
-## Things will go wrong: Ensure software is easy to monitor and observable
+8:10 am. No user can authenticate. Chaos is raging in support, and some of the most influential customers directly call the business people (including CTO and CIO). This story is longer than that, but the prologue is this, and it happened. I remember that time and the pain well. It was a nightmare!
+
+It's a perfect example of how a Deploy made for a reduced number of users (canary release) would have mitigated the Deploy risk, caused less pain, and preserved the organization's reputation. 
+
+## Ensure software is easy to monitor and observe
 
 I heard about a role in an operations team whose primary assignment was to create monitoring dashboards and send messages on the internal communicator to the development teams when something was not right in the view of the person in charge of observing the dashboards. It was something like, "Guys, CPU is at 70%. Do we have a problem here?" It is another edge case (in the real world) highlighting the lack of measurement/evaluation capacity and latent cultural problems.
 
