@@ -106,11 +106,11 @@ In [this video](https://www.youtube.com/watch?v=uouw9QxVrE8) from AWS re:Invent 
 
 ## Reduce risk using deploy strategies
 
-8 am, the time most of our clients start their operations. We've just deployed a critical change to the authentication process for our entire user base. We're happy to finally ship this change, as it's a technical debt payment that will make the software more secure while removing afferent coupling that has long taken a toll on us.
+8 am, the time most of our clients start their operations. I worked in a company as a software engineer, and we've just deployed a critical change to the authentication process for our entire user base. We're happy to finally ship that change, as it was a technical debt payment that will make the software more secure while removing afferent coupling that has long taken us a toll.
 
 8:10 am. No user can authenticate. Chaos is raging in support, and some of the most influential customers directly call the business people (including CTO and CIO). This story is longer than that, but the prologue is this, and it happened. I remember that time and the pain well. It was a nightmare!
 
-It's a perfect example of how a Deploy made for a reduced number of users (canary release) would have mitigated the Deploy risk, caused less pain, and preserved the organization's reputation. 
+It's a perfect example of how a Deploy made for a reduced number of users (canary release) would have mitigated the Deploy risk, caused less pain, and preserved the organization's reputation. Organizations ready to Deploy on Fridays master the ability to deploy to a small number of users, such as allowing changes to be monitored and observed with low risk, before they impact the entire user base.
 
 ## Ensure software is easy to monitor and observe
 
