@@ -47,7 +47,7 @@ Now we have everything we need to create a template to deploy our function. We c
 
 ## Part 2:  Deploying the Scheduled Lambda Function
 
-It’s important to note that Application Composer does not create code or deploy infrastructure for you, but rather helps you design the interface for your workflow. We'll still need to write the code for the Lambda function. In this section, we'll create the functions folder and create the Lambda function code and requirements. 
+It’s important to note that Application Composer does not create code or deploy infrastructure for you, but rather helps you design the interface for your workflow. We'll still need to write the code for the Lambda function. In this section, we'll create the functions folder and create the Lambda function code and requirements.
 
 ![Current files](images/tree_1.png)
 
@@ -60,7 +60,7 @@ We can run the following to deploy the application:
 ```bash
 sam build
 sam deploy --guided
-``` 
+```
 
 ![SAM Build](images/sam_build.png)
 ![SAM Deploy](images/sam_deploy.png)

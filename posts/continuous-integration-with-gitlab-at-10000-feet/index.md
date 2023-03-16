@@ -17,7 +17,7 @@ So what is continuous integration in simple terms? Think about it like this: Dev
 | ![CI/CD pipeline](./images/pipeline.jpg) |
 |-|
 
-The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and [another team's starts](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html). 
+The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and [another team's starts](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html).
 
 ## GitLab
 
@@ -40,7 +40,7 @@ There are many CI/CD solutions and in this article, we’ll use [GitLab](https:/
 **Stage** - a logical division in that pipeline that defines jobs  and the the order to perform them.
 
 **Runner** - software that executes a job in the pipeline. Each job is run independently of other jobs, and the runner moves on to the next job only if the previous job completes successfully.
- 
+
 **.git Choose *New Project* to get started.lab-ci.yml** - a configuration file used by GitLab to define the pipeline, the stages, and the jobs to run.
 To use GitLab CI/CD, you need:
 
@@ -62,7 +62,7 @@ All right, let's get to it!
 
 The [application repository](https://GitHub.com/build-on-aws/continuous-integration-weather-app) is on GitHub. We will import the repository to GitLab by [forking the repository](https://docs.GitHub.com/en/get-started/quickstart/fork-a-repo) to your GitHub account. Choose **New Project** to get started.
 
-> Caution: Use the public GitLab service to ensure the docker:dind service for building and testing containers is available.
+> Caution: Use the public GitLab service to ensure the `docker:dind` service for building and testing containers is available.
 
 | ![Create a new GitLab project](./images/0%20-%20gitlab10k.png) |
 |-|
@@ -118,12 +118,12 @@ Select **Edit**.
 | ![Select Edit](./images/8.1%20-%20gitlab10k.png) |
 |-|
 
-Before adding the OpenWeather API key, confirm that the project is private. In the side menu, chooes **Settings > General**.
+Before adding the OpenWeather API key, confirm that the project is private. In the side menu, choose **Settings > General**.
 
 | ![Ensure repository is private](./images/9.0%20-%20gitlab10k.png) |
 |-|
 
-Replace the OpenWeather `api_key` with your key. Note that you will incur charges if the application exceeds 1,000 API calls per day. 
+Replace the OpenWeather `api_key` with your key. Note that you will incur charges if the application exceeds 1,000 API calls per day.
 
 | ![Add Openweather API key](./images/9.1%20-%20gitlab10k.png) |
 |-|
@@ -135,7 +135,7 @@ Select **Commit changes** after adding your API key.
 
 ## Step 4: Running the pipeline, step-by-step  
 
-Choosing **Commit changes** starts the pipeline for building, testing, and releasing the application. Lets examine the `.gitlab-ci.yml` file which defines the pipeline. 
+Choosing **Commit changes** starts the pipeline for building, testing, and releasing the application. Lets examine the `.gitlab-ci.yml` file which defines the pipeline.
 
 **Choose *CI/CD* in the side bar, and choose *Pipelines* to see the pipeline as it runs**.
 
@@ -144,7 +144,7 @@ Choosing **Commit changes** starts the pipeline for building, testing, and relea
 
 The first part of `.gitlab-ci.yml` defines the stages and the order of execution of the stages. The pipeline will build a Docker image, run a unit test on the image, and releases the image when it passes the test.
 
-```
+```yaml
 stages:
   - build
   - test
@@ -153,20 +153,20 @@ stages:
 
 The build stage creates a container image with the application. To accomplish this, the pipeline runs Docker in a Docker container to create the image. This is the Docker-in-Docker service (`dind`).
 
-```
+```yaml
 image: docker:latest
 services:
   - docker:dind
 ```
 
 The `build_job` script defines the tasks:
-   
-- logging into the GitLab registry 
-- building the image from the Dockerfile 
+
+- logging into the GitLab registry
+- building the image from the Dockerfile
 - tagging the image as test
 - pushing the image to the GitLab image repository
-   
-```
+
+```yaml
   build_job:
   stage: build
   script:
@@ -194,21 +194,22 @@ When the pipeline finishes building the test container, it pushes it into the Gi
 
 After the build stage, the pipeline runs a unit test on the test container. It pulls the test image from the Container Registry and runs the test script.
 
-```
+```yaml
 test_job:
   stage: test
   script:
     - docker pull $CI_REGISTRY_IMAGE:test
     - docker run $CI_REGISTRY_IMAGE:test /app/test.py
 ```
+
 If the container passes the unit test, the runner logs the result of the test and any additional output.
 
 | ![Unit test success](./images/14%20-%20gitlab10k.png) |
 |-|
 
-The last stage in the pipeline is the release stage. The test image is pulled from the Container Registry and tagged as ‘latest.’ 
+The last stage in the pipeline is the release stage. The test image is pulled from the Container Registry and tagged as ‘latest.’
 
-```
+```yaml
 release_job:
   stage: release
   script:
