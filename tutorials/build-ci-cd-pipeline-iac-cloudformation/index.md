@@ -301,7 +301,7 @@ In your browser, navigate to the `CI/CD` -> `Workflows` page. You should see the
  
 If you click on Recent runs to expand it, you will see the details of the currently running job. Click on the job ID (Run-XXXXX) to view the different stages of the build:
 
-![CodeCatalyst Workflow run success](images/cc_main_workflow_run_success.png)
+![CodeCatalyst Workflow run is a success](images/cc_main_workflow_run_success.png)
  
 </br>
  
@@ -445,7 +445,7 @@ CodeCatalyst will then create another workflow. You can confirm this from the Co
 
 If you click on the `PR_Branch_Workflow`, you can see the workflow. As defined in the workflow yaml above, the workflow will run the action `Super-Linter_0d` first and if it is successful, only then it will run action `CreateChangeSet`.
 
- ![CodeCatalyst PR Branch Workflow sequence and dependency](images/cc_pr_workflow.png)
+ ![CodeCatalyst PR Branch Workflow visual shows the sequence and dependency](images/cc_pr_workflow.png)
 
 Now let's go back to our Dev Environment and before we start making changes to the CloudFormation template, ensure we have created a new test-pr-workflow branch. 
 
@@ -672,7 +672,7 @@ branch 'test-pr-workflow' set up to track 'origin/test-pr-workflow'.
 In your browser, navigate to the `CI/CD` -> `Workflows` page. Make sure you select the `test-pr-workflow` branch. A new run should now be active.
 
 You can confirm the new workflow has run successfully.
-![Alt text](images/cc_super_lint_success_1.png)
+![CodeCatalyst PR Branch Workflow run is a success for Super-Linter_0d action](images/cc_super_lint_success_1.png)
 </br>
 
 If you expand on _**Lint Code Base**_, you will find following text that identifies no errors :
@@ -694,12 +694,12 @@ If you expand on _**Lint Code Base**_, you will find following text that identif
 
 Now, the workflow will proceed to the next action: `CreateChangeSet`. 
 
-![CodeCatalyst PR Workflow CreateChangeSet Success](images/cc_createchangeset_success.png)
+![CodeCatalyst PR Workflow run for CreateChangeSet action is a success](images/cc_createchangeset_success.png)
 </br>
 
 Once the action is successful, you can go to CloudFormation Console, Changeset tab and verify the changes proposed by the new pull request. 
 
-![Console CloudFormation Changeset ](images/console_cfn_change_set.png)
+![Console CloudFormation Changeset created ](images/console_cfn_change_set.png)
 </br>
 
 A reviewer will confirm that all the actions have run successfully, the changeset is clean. In our case, I am the reviewer, so in my browser, I will go to the `Code` -> `Pull Requests`, and then click on `Merge`.
@@ -719,7 +719,7 @@ At this point you have 2 options for merge strategies. :
 You can optionally, delete the source branch after merging this pull request. 
 In our case, the source branch is `test-pr-workflow` and I am deleting this branch to keep my branching structure clean and simple. 
 
-![CodeCatalyst Merge Pull request](images/cc_merge_pull_request.png)
+![CodeCatalyst Merge Pull request dialog](images/cc_merge_pull_request.png)
 </br>
  
 Once you click on merge, CodeCatalyst will merge the code changes from `test-pr-workflow` to `main` branch. This will trigger the `Main_Branch_Workflow` and deploy the updated CloudFormation code to the `PreProdEnv`.
