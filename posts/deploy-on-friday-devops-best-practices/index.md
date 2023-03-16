@@ -84,7 +84,7 @@ I heard about a document created by a development team that basically consisted 
 
 **Ideally, there should be no latency involved in the Deploy process, resulting from technical aspects or manual interventions.**
 
-Once a code has been reviewed, the merge to the main branch must trigger the CI/CD conveyor belt, which must build the software, run tests, run static code analysis, run lint checks, apply quality gateways, run security checks, deploy the service to the pre-production environment, run post-deployment tests, and ultimately deploy to production.
+Once a code has been reviewed, the merge to the main branch must trigger the CI/CD pipeline, which must build the software, run automated tests, run static code analysis, run lint checks, apply quality gateways, run security checks, deploy the service to the pre-production environment, run post-deployment tests, and ultimately deploy to production.
 
 [Mark Mansour](https://aws.amazon.com/builders-library/authors/mark-mansour/) wrote about [accelerating with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/) at Amazon and the positive aspects of the practice for the customers and business. In his words "For us, automation is the only way we could have continued to grow our business".
 
@@ -92,7 +92,7 @@ Once a code has been reviewed, the merge to the main branch must trigger the CI/
 
 I once worked on a team whose tests were performed exclusively by people, and the software only went into production after going through one or more people who carried out tests and manual inspections. They are the most well-meaning, stressed-out people I've ever worked with during my career.
 
-In addition to **team burnout** , this job doesn't work because, despite any good intentions, people are bad at performing repetitive tasks. Add to this the fact that the need for changes increases as software becomes relevant. Given the increasing complexity, we have a scenario that makes it difficult to predict the impact of changes through manual testing.
+In addition to **team burnout** , this job doesn't work because, despite any good intentions, people are not good at performing repetitive tasks. Add to this the fact that the need for changes increases as software becomes relevant. Given the increasing complexity, we have a scenario that makes it difficult to predict the impact of changes through manual testing.
 
 Automated tests running continuously decrease the possibility that changes will negatively impact the software and are vital to increasing confidence in the Deploy process and decreasing Deploy pain.
 
@@ -108,9 +108,7 @@ In [this video](https://www.youtube.com/watch?v=uouw9QxVrE8) from AWS re:Invent 
 
 8 am, the time most of our clients start their operations. I worked in a company as a software engineer, and we've just deployed a critical change to the authentication process for our entire user base. We're happy to finally ship that change, as it was a technical debt payment that will make the software more secure while removing afferent coupling that has long taken us a toll.
 
-8:10 am. No user can authenticate. Chaos is raging in support, and some of the most influential customers directly call the business people (including CTO and CIO). This story is longer than that, but the prologue is this, and it happened. I remember that time and the pain well. It was a nightmare!
-
-It's a perfect example of how a Deploy made for a reduced number of users (canary release) would have mitigated the Deploy risk, caused less pain, and preserved the organization's reputation. Organizations ready to Deploy on Fridays master the ability to deploy to a small number of users, such as allowing changes to be monitored and observed with low risk, before they impact the entire user base.
+8:10 am. No user can authenticate. Chaos is raging in support, and some of the most influential customers directly call the business people (including CTO and CIO). This story is longer than that, but the prologue is this, and it happened. I remember that time and the pain well. It was a nightmare, and a perfect example of how a Deploy made for a reduced number of users (canary release) would have mitigated the Deploy risk, caused less pain, and preserved the organization's reputation. Organizations ready to Deploy on Fridays master the ability to deploy to a small number of users, such as allowing changes to be monitored and observed with low risk, before they impact the entire user base.
 
 ## Ensure software is easy to monitor and observe
 
