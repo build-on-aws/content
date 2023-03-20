@@ -1,6 +1,6 @@
 ---
 title: Build a real-time asset tracking application with Amazon Location Service
-description: <Two or three sentences describing the problem, the solution, and tools or services used along the way>
+description: Build a web app that displays an Amazon Location Service tracker's position ingested via MQTT.
 tags:
     - iot core
     - amazon location service
@@ -13,20 +13,15 @@ date: 2023-04-27
 
 
 
-Introduction paragraph to the topic. Describe a real world example to illustrate the problem the reader is facing. Explain why it's a problem. Offer the solution you'll be laying out in this post.
-
-## What you will learn
-
-- Bullet list
-- with what you will
-- learn in this tutorial
-
+Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country, or last mile deliveries around a neighborhood, knowing where your fleet is located is incredibly important. In this getting started, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to update this asset, making use of the MQTT protocol. We will cover how to:
+- Use AWS Amplify to set up a web application
+- Configure Amazon Location Service trackers
+- Connect Amazon Location Service with AWS IoT Core
 ## Prerequisites
 
 Before starting this tutorial, you will need the following:
 
  - An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
- - <!-- any other pre-requisites you will need -->
 
 ## Sections
 <!-- Update with the appropriate values -->
@@ -50,7 +45,7 @@ Before we deploy our asset tracking app, we need to deploy an AWS Cloud9 Instanc
 
 ![AWS Console showing how to create an environment](./images/1.1.png)
 
-Set the instnace type to `t3.small` and provide a name. Select **Create**
+Set the instance type to `t3.small` and provide a name. Select **Create**
 
 ![AWS Cloud9 Console showing deployment options](./images/1.1.2.png)
 
@@ -252,7 +247,7 @@ Now let's give our rule the name `AssetTrackingRule` and click Next
 
 ![AWS IoT Core Console showing specifying a rules properties](./images/2.3.png)
 
-Now we need our SQL statement. We will be using the topic `assets/trackers`
+Now we need our SQL statement. We will be using the topic `assets/trackers`. Enter `SELECT * FROM 'assets/trackers'`
 
 ![AWS IoT Core Console showing configuration of the SQL statement](./images/2.4.png)
 
@@ -262,13 +257,15 @@ Now it's time to setup our Location Action. Select **Location** from the **Choos
 
 ![AWS IoT Core Console showing configuration of the location action](./images/2.5.png)
 
-Select **Create a Tracker** and enter the name `AssetTracker`.
+Select **Create a Tracker** and enter the name `AssetTracker`. 
 
 ![AWS IoT Core Console showing configuration of the location action](./images/2.6.png)
 
-Now we can configure mapping of our payload to the rule. In order to do this, we will use substitution templates in IoT Core. Select trackerAsset01 for the Tracker name dropdown, then, for each field, copy/paste the following values:
+Select **Create tracker**
 
-Now we need to setup our mappings to Amazon Location Tracker parameters such as latitude and longitude. 
+
+
+Now we can configure mapping of our payload to the rule. In order to do this, we will use substitution templates in IoT Core. Select trackerAsset01 for the Tracker name dropdown, then, for each field, copy/paste the following values: 
 
 Device ID: `thing123`
 
