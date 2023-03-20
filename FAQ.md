@@ -145,7 +145,7 @@ _**Note:** Do not share images across posts or even posts in a series._
 
 To show images in your post, you'll link to them using a relative path:
 
-`![Put your alt-text here](images/the-internet.jpg) "Put your image title/caption here"`
+`![Put your alt-text here](images/the-internet.jpg "Put your image title/caption here")`
 
 The caption will appear underneath the image and also on mouse over.
 
