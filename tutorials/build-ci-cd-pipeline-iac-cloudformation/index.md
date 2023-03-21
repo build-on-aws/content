@@ -10,9 +10,9 @@ authorName: gaonkarr
 date: 2023-03-02 
 ---
 
-Infrastructure as Code (IaC) has been revolutionary for over a decade now. We can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to perform CRUD(create, read, update and delete) operations on the infrastructure. This is great as now we don't have to click in the AWS Management Console to set up everything, or create scripts and run using the CLI. Without Infrastructure as code setting up infrastructure was time consuming and error-prone. 
+Infrastructure as Code (IaC) dramatically changed how we do infrastructure, starting more than a decade ago. Today, we can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to perform CRUD (create, read, update and delete) operations on the infrastructure. We don't have to click into the AWS Management Console to set up everything, or create scripts and run using the CLI. In short, Infrastructure as code made setting up infrastructure less time consuming and error-prone. 
 
-However, we are not done yet. Just writing CloudFormation templates and updating stacks manually is not using the ultimate superpower of IaC. The real purpose of defining IaC is to send it through the same CI/CD pipeline as an application does during software development. We can now apply the same best practices of versioning, tracking changes, doing code reviews, tests, and rollbacks to the infrastructure code. This will make our infrastructure more repeatable, reliable, consistent, increase in speed of deployments, reduce errors and eliminate configuration drift.
+But we're not done yet. Just writing CloudFormation templates and updating stacks manually is not using the ultimate superpower of IaC. The real purpose of defining IaC is to send it through the same CI/CD pipeline as an application goes through during software development. We can now apply the same best practices of versioning, tracking changes, doing code reviews, tests, and rollbacks to the infrastructure code. This will make our infrastructure more repeatable, reliable, and consistent, increasing in speed of deployments, reducing errors, and eliminating configuration drift.
 
 This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCatalyst for your Infrastructure as Code written with CloudFormation. The pipeline will utilize pull requests to submit, test, and review any changes requested to the infrastructure.
 
@@ -41,11 +41,11 @@ Before we begin, ensure you have an AWS Account. You can create a new account by
 
 #### <b>CodeCatalyst account. </b>
 
-Follow steps in the documentation to [set up CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+Follow steps in the documentation to [set up CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 
 #### <b>IAM Roles </b>
-We need to create CloudCatalyst service roles in our AWS account. These will be using these to provide permission to CodeCatalyst. This is one time activity only.
+We need to create CloudCatalyst service roles in our AWS account. We will be using these to provide permission to CodeCatalyst. This is a one-time activity only.
 
 Simply deploy a CloudFormation stack. You can find detailed instructions on how to deploy this stack using AWS Console [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/GettingStarted.Walkthrough.html#GettingStarted.Walkthrough.createstack?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
