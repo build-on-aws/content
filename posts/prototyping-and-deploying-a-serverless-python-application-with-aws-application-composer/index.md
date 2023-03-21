@@ -13,7 +13,7 @@ date: 2023-02-27
 ---
 Building a serverless application can be a challenging task for developers. It requires a good understanding of serverless computing, AWS services, and the technical skills to design and deploy the application. However, with [AWS Application Composer](https://aws.amazon.com/application-composer/), the process of building a serverless application becomes much easier.
 
-In this post, I will share how I built a prototype application to easily analyze meetup data. This will be an intermediate level guide, so some knowledge of AWS, Bash, and Python will be required to follow along. I will walk through the steps to build a workload that displays [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components:
+In this post, I will share how I built a prototype application to easily analyze meetup data. This will be an intermediate level guide, so some knowledge of AWS, Bash, and Python will be required to follow along. You'll also need a [Meetup Pro Subscription](https://help.meetup.com/hc/en-us/articles/5379928688653-FAQs-about-Meetup-Pro) if you want to build your own version of the application. I will walk through the steps to build a workload that displays [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components:
 
 * A scheduled Lambda function that gets Meetup data and stores it in a database
 * An API to get the Meetup data
