@@ -10,7 +10,7 @@ authorName: gaonkarr
 date: 2023-03-02 
 ---
 
-Infrastructure as Code (IaC) dramatically changed how we do infrastructure, starting more than a decade ago. Today, we can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to perform CRUD (create, read, update and delete) operations on the infrastructure. We don't have to click into the AWS Management Console to set up everything, or create scripts and run using the CLI. In short, Infrastructure as code made setting up infrastructure less time consuming and error-prone. 
+Starting more than a decade ago, Infrastructure as Code (IaC) dramatically changed how we do infrastructure. Today, we can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to perform CRUD (create, read, update and delete) operations on the infrastructure. We don't have to click into the AWS Management Console to set up everything, or create scripts and run using the CLI. In short, Infrastructure as code made setting up infrastructure less time consuming and error-prone. 
 
 But we're not done yet. Just writing CloudFormation templates and updating stacks manually is not using the ultimate superpower of IaC. The real purpose of defining IaC is to send it through the same CI/CD pipeline as an application goes through during software development. We can now apply the same best practices of versioning, tracking changes, doing code reviews, tests, and rollbacks to the infrastructure code. This will make our infrastructure more repeatable, reliable, and consistent, increasing in speed of deployments, reducing errors, and eliminating configuration drift.
 
