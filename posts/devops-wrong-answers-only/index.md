@@ -19,7 +19,6 @@ Our development team owns the design and implementation of an application, while
 How do we break down walls between development and operations?
 
 ![development team and operations team separated by a wall](images/figure1.jpg "Figure 1. Development team on the left (overdressed for launch day), production on the right, operations team hiding somewhere on the right... possibly behind target") 
-Figure 1. Development team on the left (overdressed for launch day), production on the right, operations team hiding somewhere on the right... possibly behind target
 
 ### The answer
 
@@ -49,9 +48,7 @@ Skip the code review. Not only do code reviews take time to do, it take forever 
 
 And while we’re at it, take it easy testing by developers. Instead, hand it off to the test team. Customers do not care about your unit test coverage, they care about features. Let the test team do their thing, and you do yours... write code.
 
-![I asked for that new feature this morning](images/figure2.jpg) 
-Figure 2. I asked for that new feature this morning. Can’t you just use Kubernetes or something?
-
+![I asked for that new feature this morning](images/figure2.jpg "Figure 2. I asked for that new feature this morning. Can’t you just use Kubernetes or something?") 
 
 ### Why that’s wrong
 
@@ -59,8 +56,7 @@ Jeff Bezos famously said you cannot just ask folks to try better (or in this cas
 
 Code review and testing are both important mechanisms to identify problems early, and fix them. The earlier we find and fix problems, the less expensive (in both monetary cost, and cost to customer trust) they are. For code review consider using automation to help. [Amazon CodeGuru Reviewer](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html) uses machine learning and automated reasoning to identify critical issues, security vulnerabilities, and hard-to-find bugs during application development and provides recommendations to improve code quality. You can get hands-on with the CodeGuru in the[](https://catalog.us-east-1.prod.workshops.aws/workshops/fa518794-acd4-4178-80d3-97fa62f9deff/en-US/codegurupr)[Amazon Code Guru Workshop here](https://catalog.us-east-1.prod.workshops.aws/workshops/1786241d-967f-4195-99ef-5716ef485201/en-US). But you also need a human reviewer too - the machines are not quite ready to replace us yet. One process to encourage folks to do code reviews instead of coding new features is using a WIP (Work in Process) limits. This concept, [taken from Kanban](http://www.setheliot.com/blog/2016/07/20/how-wip-limits-work-to-help-you-get-more-stuff-done/), limits how much new work can be started until existing work is done, where “done” *includes* code review. This is shown in figure 3, where each yellow note represents a coding task. Developers cannot take new work (and exceed the “Develop” WIP limit of 4) until some code reviews are completed.
 
-![Limiting WIP](images/figure3.png) 
-Figure 3. Limiting WIP can streamline throughput, and incentivizes code reviews.
+![Limiting WIP](images/figure3.png "Figure 3. Limiting WIP can streamline throughput, and incentivizes code reviews.") 
 
 And continuing to explore how to find problems early, a good test suite will be your best friend. Automate it as part of your CI/CD pipeline, and ensure it is high quality (not brittle or noisy). Treat test code as your treat production code (yes, including code reviews). Include [load testing](https://docs.aws.amazon.com/prescriptive-guidance/latest/load-testing/welcome.html) and [chaos engineering](https://aws.amazon.com/blogs/architecture/verify-the-resilience-of-your-workloads-using-chaos-engineering/) to test non-functional requirements like scalability and resilience.
 
@@ -104,8 +100,7 @@ How can our development teams reduce overhead and focus on value adding activiti
 
 This one’s easy. The development team does not want to do it — that’s why we have a DevOps team! No task is too big or too small. The DevOps team will run their scripts and their infrastructure as code templates and get it done. Need a Kubernetes cluster? File a ticket to DevOps. Need to change the policy on an IAM role? Drop a message on the DevOps Slack channel.
 
-![DevOps engineer works through his ticket backlog](images/figure4.png)
-Figure 4. A DevOps engineer works through his ticket backlog (again overdressed — shirt and tie not necessary)
+![DevOps engineer works through his ticket backlog](images/figure4.png "Figure 4. A DevOps engineer works through his ticket backlog (again overdressed — shirt and tie not necessary)")
 
 ### Why that’s wrong
 
@@ -139,12 +134,11 @@ Monitoring should occur at several levels. At the lower levels metrics like CPU 
 
 A DevOps team organizes their tools and processes around such measures so as to find and fix problems early
 
-![Requests and latency on a service API](images/figure5.png)
-Figure 5. Requests and latency on a service API. Latency is a good SLI, and is measured at various percentiles.
+![Requests and latency on a service API](images/figure5.png "Figure 5. Requests and latency on a service API. Latency is a good SLI, and is measured at various percentiles.")
 
-![Order rate for amazon.com](images/figure6.png)
-Figure 6. Order rate -- a good KPI for an online retailer. When orders drop below predicted values, it indicates a serious problem with customer experience on the site.
+<br/>
 
+![Order rate for amazon.com](images/figure6.png "Figure 6. Order rate -- a good KPI for an online retailer. When orders drop below predicted values, it indicates a serious problem with customer experience on the site.")
 
 While we do not want to use our customers as front line “monitoring”, we still want to listen to their needs and add requirements to the backlog for future releases to meet those needs. Tracing and instrumentation can be used to gather objective data on how customers use your application. Also, user studies, beta releases, surveys, and social media sentiment analysis are ways to gather subjective data from your customers.
 
