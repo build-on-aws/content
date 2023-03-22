@@ -1,6 +1,6 @@
 ---
-title: How to Succeed at DevOps: Wrong Answers Only!
-description: When it comes to DevOps, you’ve got questions, and we’ve got answers. Wrong answers. Software teams have been struggling  for ages with the questions I pose here, and in that time we have all witnessed our share of bad answers from unrealistic management, or even misguided senior engineers. Let’s learn from these bad answers and see why they just don’t work.
+title: "How to Succeed at DevOps: Wrong Answers Only!"
+description: "When it comes to DevOps, you’ve got questions, and we’ve got answers. Wrong answers. Software teams have been struggling  for ages with the questions I pose here, and in that time we have all witnessed our share of bad answers from unrealistic management, or even misguided senior engineers. Let’s learn from these bad answers and see why they just don’t work."
 tags:
   - devops
   - testing
