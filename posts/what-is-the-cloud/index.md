@@ -39,9 +39,9 @@ Remember how websites started doing more complex stuff than storing images and t
   
 Here’s what I mean: imagine you’re a store that gets fifty times more customers around Black Friday and the holiday season than the rest of the year. With on-premise servers, you have two options: you can buy enough servers to support your needs most of the year, and have everything break down on Black Friday (in which case you’d sacrifice tons of profit); or you can buy the servers to support your needs on Black Friday, then let all that extra capacity go to waste for the rest of the year.  
   
-Cloud services offer a third way: they allow businesses to provision servers that live in massive warehouses called data centers on an as-needed basis, granting companies more flexibility — or elasticity — in responding to their ever-changing computing and storage needs.  
+Cloud services offer a third way: they allow businesses to provision parts of servers that live in massive warehouses called data centers on an as-needed basis, granting companies more flexibility — or elasticity — in responding to their ever-changing computing and storage needs.  
   
-This “cloud” of servers isn’t only for big companies. Individual students and researchers can pay a few bucks to access what is essentially a super computer for a few days to run models that would normally crash their own computers. In short, the cloud makes expensive resources available temporarily and at a much lower price — democratizing the computing and storage that once upon a time was only accessible to large research facilities and corporations.  
+This “cloud” of servers isn’t only for big companies. Individual students and researchers can pay a few bucks to access what is essentially a fleet of computers for a few days to run models that would normally crash their own machines. In short, the cloud makes expensive resources available temporarily and at a much lower price — democratizing the computing and storage that once upon a time was only accessible to large research facilities and corporations.  
 
 ![Many racks of servers, stacked on top of one another](./images/AdobeStock_178997580.jpg)
 
@@ -51,10 +51,12 @@ If I were talking to Rocky, I could tell him about personal computers and data c
 
 But defining the cloud simply by its physical apparatus or implementation is a little like defining first love by a pounding heart and sweaty hands: it’s no less than those things, but it’s certainly far more.  
 
-The cloud is the sum of our data and computing power, humanity’s most impressive technological advances gathered and made accessible to most anyone. It is the printing press, the telephone, the satellite broadcast, all rolled into one and exploded into something new, yet familiar — a (boxing) glove for a hand we never knew we had until now.  
+The cloud is the sum of our data and computing power, humanity’s most impressive technological advances gathered and made accessible via the internet to most anyone. It is the printing press, the telephone, the satellite broadcast, all rolled into one and exploded into something new, yet familiar — a glove for a hand we never knew we had until now.  
 
-And that means the cloud is irrevocably changing the world - and not just _the_ world, but _your_ world. It evolved the internet from a network of distinct nodes chattering back and forth into one, shared, unimaginably powerful computer. Open your browser on a laptop built fifteen years ago or yesterday, and you can watch TV, play games, ask an AI to write an article for you, publish that article to millions of readers, explore humanity’s knowledge preserved for millennia, buy nearly anything, assuming you have the money — and if you don’t, apply for the credit to buy it anyway. We’ve evolved, too, collectively and individually, thanks to the cloud. We are globalized, more knowledgeable and connected than ever before.  
+And that means the cloud is irrevocably changing the world - and not just _the_ world, but _your_ world. It evolved the internet from a network of distinct nodes chattering back and forth into one, shared, unimaginably powerful computer (which is really just countless, coordinated computers). Open your browser on a laptop built fifteen years ago or yesterday, and you can watch TV, play games, ask an AI to write an article for you, publish that article to millions of readers, explore humanity’s knowledge preserved for millennia, buy nearly anything, assuming you have the money — and if you don’t, apply for the credit to buy it anyway. We’ve evolved, too, collectively and individually, thanks to the cloud. We are globalized, more knowledgeable and connected than ever before.  
 
 **In short, the cloud is the foundation of much of the computerized technology you use everyday, and it is the technology upon which the future will be built.**  
+
+https://www.youtube.com/watch?v=zHur4SaTZ6M
 
 If you want to [learn more about the cloud](https://youtu.be/txkSFiG7ogg) — how it’s changed over time, how it’s shaped various industries, and where it’s going in the future — check out [my explainer video on it](https://youtu.be/zHur4SaTZ6M) and [my follow-up conversation with Brian Ketelsen](https://youtu.be/nGa4pHmjlfY), a principal developer advocate at AWS.
