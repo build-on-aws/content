@@ -18,10 +18,10 @@ This is an 8-part series about Picturesocial:
 3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
 4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
 5. [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
-6. [How to use DynamoDB on a containerized API](this post)
+6. How to use DynamoDB on a containerized API (this post)
+7. [How to use DynamoDB on a containerized API](/posts/picturesocial/07-how-to-expose-a-containerized-api-to-the-internet/)
 
-
-So far you have been learning about containers, Kubernetes, Infraestructure as a Code and even intelligent services like Amazon Rekognition. Now it’s time to add a database to store the needed data models that will be used on our social media platform.
+So far you have been learning about containers, Kubernetes, Infrastructure as a Code and even intelligent services like Amazon Rekognition. Now it’s time to add a database to store the needed data models that will be used on our social media platform.
 
 I choose Amazon DynamoDB because the Picturesocial application needs a modern database that will support high throughput and simplify the overall data management by providing an API for all the Data Management and Operations. Also because I'm using document data structures that will be better working on a non-relational and document DB as DynamoDB. But first I need to figure out the relevant field for the data structure in the APIs that I have done so far.
 
@@ -61,7 +61,7 @@ Now that we have our data model, let’s surf some of the CRUD API specs to make
 
 This way we don’t have to know much about the method names, we just know what it does just following the HTTP Method and understanding the Data Model. You can learn about the different HTTP Methods and purposes by visiting the Restful documentation [here](https://restfulapi.net/http-methods/).
 
-Now we are goint to put all this together and start coding!
+Now we are going to put all this together and start coding!
 
 ### **Pre-requisites:**
 
@@ -91,7 +91,7 @@ ReadCapacityUnits=5,WriteCapacityUnits=5 \
 `--table-class STANDARD`
 ```
 
-* When we execute the command, we are going to get a JSON response with the table structure. We just need to type `:q `and press Enter to finish. The command `:q ` is what we use to exit the current view of the terminal when we are in text mode. This also apply to console text editors like VIM.
+* When we execute the command, we are going to get a JSON response with the table structure. We just need to type `:q` and press Enter to finish. The command `:q` is what we use to exit the current view of the terminal when we are in text mode. This also apply to console text editors like VIM.
 
 ```json
 {
@@ -435,7 +435,7 @@ http://localhost:5075/swagger/index.html
 }
 ```
 
-We are making a good progress in our journey to create Picturesocial. So far we have learned how to create an API, containerized it, deployed a Kubernetes cluster, used infraestructure as a code and deployed our API to Kubernetes. Finally we learned how to add Database support!
-The next post will be about exposing our APIs to the Internet using API Gateway and VPC Link! 
+We are making a good progress in our journey to create Picturesocial. So far we have learned how to create an API, containerized it, deployed a Kubernetes cluster, used infrastructure as a code and deployed our API to Kubernetes. Finally we learned how to add Database support!
+The next post will be about exposing our APIs to the Internet using API Gateway and VPC Link!
 
 [Continue to the next post about API Gateway and VPC Link](picturesocial/07-how-to-expose-a-containerized-api-to-the-internet).

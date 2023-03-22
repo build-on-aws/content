@@ -54,7 +54,7 @@ Google’s [V8 engine](https://v8.dev/docs), written in C++, also [compiles](htt
 - TurboFan, an optimizing compiler that compiles that bytecode into machine code
 - SparkPlug, a compiler that supplements TurboFan
 
-> If you're interested in history, this new pipeline replaced the older Full-codegen and Crankshaft double-compiler design used previously by V8. 
+> If you're interested in history, this new pipeline replaced the older Full-codegen and Crankshaft double-compiler design used previously by V8.
 
 Once machine code is produced by the compilation process, the engine exposes all the data types, operators, objects, and functions specified in the ECMA standard to the browser, or any runtime that needs to use them, like Node.js, Deno, or Electron (which is used by Visual Studio Code).
 
@@ -62,7 +62,7 @@ Once machine code is produced by the compilation process, the engine exposes all
 
 If JavaScript engines quietly run in the background, parsing code and breaking it up into readable strings so a compiler can read and compile it, runtimes tend to attract more attention. Why is that?
 
-Well-known runtimes work on top of JavaScript engines, extending their power. The best-known is Node, but Deno and Bun are newcomers to the arena. Node and Deno embed V8, and Bun embeds JavaScriptCore. Bun claims to run faster than Node or Deno because JavaScriptCore is faster than V8, handling 69,845 http requests per second vs 16,288 for Node and 12,926 for Deno. 
+Well-known runtimes work on top of JavaScript engines, extending their power. The best-known is Node, but Deno and Bun are newcomers to the arena. Node and Deno embed V8, and Bun embeds JavaScriptCore. Bun claims to run faster than Node or Deno because JavaScriptCore is faster than V8, handling 69,845 http requests per second vs 16,288 for Node and 12,926 for Deno.
 
 These runtimes' goal, as stated by [Bun's docs](https://bun.sh/), "is to run most of the world's JavaScript outside of browsers, bringing performance and complexity enhancements to your future infrastructure, as well as developer productivity through better, simpler tooling." These runtimes, in fact, leverage the power of JavaScript engines to make JavaScript run outside of browsers. [NativeScript](https://nativescript.org) is a good example of a runtime built specifically for cross-platform native mobile application development built using JavaScript.
 
@@ -88,7 +88,6 @@ Node.js	| 	V8
 Deno | V8
 Bun | JavaScriptCore
 Edge** | Blink and V8
-
 
 *JavaScriptCore was rewritten as SquirrelFish, rebranded as SquirrelFish Extreme, also called Nitro. It’s still a true statement however to call JavaScriptCore the JavaScript engine that underlies WebKit implementations (such as Safari).
 

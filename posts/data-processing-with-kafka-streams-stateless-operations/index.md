@@ -184,7 +184,7 @@ In this example, we make use of `RecordContext` (contains record metadata) to ge
 
 #### **Debugging records**
 
-[print](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#print(org.apache.kafka.streams.kstream.Printed)) is useful for debugging purposes - you can log each record in the `KStream`. It also accepts an instance of [Printed](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/Printed.html) to configure the behavior. 
+[print](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#print(org.apache.kafka.streams.kstream.Printed)) is useful for debugging purposes - you can log each record in the `KStream`. It also accepts an instance of [Printed](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/Printed.html) to configure the behavior.
 
 ```java
 StreamsBuilder builder = new StreamsBuilder();
@@ -194,7 +194,7 @@ stream.mapValues(v -> v.toUpperCase()).print(Printed.toSysOut());
 
 This will print out the records e.g. if you pass in `(foo, bar)` and `(john, doe)` to the input topic, they will get converted to uppercase and logged as such:
 
-```
+```text
 [KSTREAM-MAPVALUES-0000000001]: foo, BAR
 [KSTREAM-MAPVALUES-0000000001]: john, DOE
 ```
@@ -214,7 +214,6 @@ Here are some other useful operations offered by the Kafka Streams API:
 Since `print` is a terminal operation, you no longer have access to the original `KStream`. This where [peek](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#peek(org.apache.kafka.streams.kstream.ForeachAction)) comes in handy because it returns the same `KStream` instance. Just like `foreach`, it accepts a `ForeachAction` which can use to specify what you *want* to do for each record.
 
 The flexibility that peek means that not only can you log each key-value pair, but you can also materialize them to an output topic (unlike the `print` operation) using the same chain of method calls:
-
 
 ```java
 StreamsBuilder builder = new StreamsBuilder();

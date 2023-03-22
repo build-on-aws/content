@@ -11,7 +11,7 @@ authorName: Abhishek Gupta
 date: 2022-09-27
 ---
 
-The [Go](http://go.dev/) programming language (also sometimes referred to as `Golang`) is known for its comprehensive, robust and well-documented [standard library](https://pkg.go.dev/std). This includes the [net/http](https://golang.org/pkg/net/http/) package, which provides the server and client side APIs for HTTP services. 
+The [Go](http://go.dev/) programming language (also sometimes referred to as `Golang`) is known for its comprehensive, robust and well-documented [standard library](https://pkg.go.dev/std). This includes the [net/http](https://golang.org/pkg/net/http/) package, which provides the server and client side APIs for HTTP services.
 
 Although the `net/http` package is quite rich in terms of functionality, some of it may be confusing for newcomers to the language. Coming from HTTP frameworks in other programming languages, I had trouble grokking some of the concepts, especially with so many occurrences of the term `Handle` - `Handler`, `Handle`, `HandleFunc` etc.
 
@@ -61,7 +61,7 @@ mux := http.NewServeMux()
 mux.Handle("/", home{})
 ```
 
-In this example, a request to the root URL of the server (e.g. http://locahost:8080/) will map to the implementation in the `ServeHTTP` associated with the `home` struct.
+In this example, a request to the root URL of the server (e.g. `http://locahost:8080/`) will map to the implementation in the `ServeHTTP` associated with the `home` struct.
 
 ### **HandleFunc**
 
@@ -124,7 +124,7 @@ func (h home) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 
 To try this:
 
-- Save the code in a file (e.g. `go-http-1.go`) 
+- Save the code in a file (e.g. `go-http-1.go`)
 - Run it - `go run go-http-1.go`
 - Access the HTTP endpoints - `curl http://localhost:8080/` and `curl http://localhost:8080/posts`
 
@@ -191,7 +191,7 @@ func welcome(rw http.ResponseWriter, req *http.Request) {
 
 To try this:
 
-- Save the code in a file (e.g. `go-http-2.go`) and 
+- Save the code in a file (e.g. `go-http-2.go`), and
 - To run - `go run go-http-2.go`
 - Access the endpoint - `curl http://localhost:8080/welcome`
 
