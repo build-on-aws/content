@@ -745,4 +745,4 @@ Lastly, to delete the CodeCatalyst space, go to [CodeCatalyst dashboard](https:/
 
 Congratulations! You've now learned how to deploy Infrastructure as Code using CloudFormation with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found any issues, or have feedback us, [please send it our way!](https://pulse.buildon.aws/survey/DEM0H5VW)
 
-For more DevOps related content, do check out DevOps Essentials guide and How Amazon Does DevOps in Real Life.
+For more DevOps related content, check out our [DevOps Essentials guide](https://www.buildon.aws/concepts/devops-essentials/) and learn about [How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/).
