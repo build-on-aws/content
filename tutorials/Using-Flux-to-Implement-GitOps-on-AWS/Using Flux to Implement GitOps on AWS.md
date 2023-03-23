@@ -37,8 +37,7 @@ GitOps has the following features compared to traditional continuous deployment.
 
 We believe GitOps is the ideal way to implement continuous deployment of Kuberentes-based clusters. The main reason is that we can go through the details of GitOps specific practices on Kuberentes.
 Based on GitOps method, Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the final state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify/deployment, observe/ alerts, and fix/operations. The process is like below:
-
-[[tutorials/Using-Flux-to-Implement-GitOps-on-AWS/images/why is GitOps.jpg](https://github.com/betty714/content/blob/f42aa0ae0e1b16ad20e8afb710c4446d11e02c33/tutorials/Using-Flux-to-Implement-GitOps-on-AWS/images/why%20is%20GitOps.jpg)](https://github.com/betty714/content/blob/d06b2196102b5fccef4fee6e66354419da61ccf6/tutorials/Using-Flux-to-Implement-GitOps-on-AWS/images/why%20is%20GitOps.jpg)
+https://github.dev/betty714/content/blob/62652acccd0e7aa1b421b897edeb14c4819b6487/tutorials/Using-Flux-to-Implement-GitOps-on-AWS/Using%20Flux%20to%20Implement%20GitOps%20on%20AWS.md#L40
 
 ## Amazon EKS-based Best Practices for GitOps 
 
