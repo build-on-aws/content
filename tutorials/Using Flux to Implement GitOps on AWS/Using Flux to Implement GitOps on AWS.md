@@ -38,14 +38,12 @@ GitOps has the following features compared to traditional continuous deployment.
 We believe GitOps is the ideal way to implement continuous deployment of Kuberentes-based clusters. The main reason is that we can go through the details of GitOps specific practices on Kuberentes.
 
 Based on GitOps method, Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the final state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify/deployment, observe/ alerts, and fix/operations. The process is like below:
-
-![![image-20230323220623340](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323220623340.png)
-
+<img width="332" alt="image" src="https://user-images.githubusercontent.com/128576816/227262258-ad173f41-35cd-4678-a1fb-39a5165f004d.png">
 ## Amazon EKS-based Best Practices for GitOps 
 
 The overall CI/CD pipeline for the best practices of this case is shown in the figure below.
 
-<img width="332" alt="image" src="https://user-images.githubusercontent.com/128576816/227261366-8bdadff4-f35c-4a76-8b1e-0ab34e63c87f.png">
+<img width="469" alt="image" src="https://user-images.githubusercontent.com/128576816/227262104-8b525a12-b16d-4216-9c7b-6c7edd6b751f.png">
 
 There are three code repositories under the CodeCommit repository. One is flux-repo , the configuration repository for Flux CD, which is used to define Flux-related resources. The other is microservices-repo, which saves microservice application configurations and deployment files. The third one is the source repository app-repo for business services. In this post, a front-end project will be as an example. We used the CodePipeline for continuous integration in the CI/CD pipeline, built and stored the docker image in Amazon ECR, and deployed the CD engine Flux as pod in the Amazon EKS environment.
 
