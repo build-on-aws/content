@@ -57,7 +57,7 @@ Let's get started setting this up! Make sure you are logged into your AWS, and C
 
 ### Setting up a CodeCatalyst Space, Project, Repo, and Environment
 
-Now, let's set up our CodeCatalyst Space and Project. Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws), add a name (we will use `Terraform CodeCatalyst`), add the AWS Account ID to link to for billing (`123456789012` is a placeholder), you can find your account ID in the top right of your AWS Console, and follow the prompts to link your AWS Account with CodeCatalyst.
+Now, let's set up our CodeCatalyst Space and Project. Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws), add a name (we will use `Terraform CodeCatalyst`), add the AWS Account ID to link to for billing (`111122223333` is a placeholder), you can find your account ID in the top right of your AWS Console, and follow the prompts to link your AWS Account with CodeCatalyst.
 
 ![Dialog showing a CodeCatalyst Space after successfully adding an AWS account to it](./images/successful_space_created.png)
 
@@ -117,8 +117,8 @@ You can verify that access is set up correctly by running `aws sts get-caller-id
 $ aws sts get-caller-identity
 {
     "UserId": "AIDACKCEVSQ6C2EXAMPLE",
-    "Account": "123456789012",
-    "Arn": "arn:aws:iam::123456789012:user/JaneDoe"
+    "Account": "111122223333",
+    "Arn": "arn:aws:iam::111122223333:user/JaneDoe"
 }
 ```
 
@@ -407,7 +407,7 @@ data.aws_iam_policy_document.pr_branch_assume_role_policy: Reading...
 data.aws_iam_policy_document.main_branch_assume_role_policy: Reading...
 data.aws_iam_policy_document.pr_branch_assume_role_policy: Read complete after 0s [id=2789987180]
 data.aws_iam_policy_document.main_branch_assume_role_policy: Read complete after 0s [id=2789987180]
-data.aws_caller_identity.current: Read complete after 0s [id=123456789012]
+data.aws_caller_identity.current: Read complete after 0s [id=111122223333]
 data.aws_iam_policy_document.pr_branch_lock_table_access: Reading...
 data.aws_iam_policy_document.pr_branch_lock_table_access: Read complete after 0s [id=813239658]
 
@@ -454,7 +454,7 @@ aws_iam_role.pr_branch: Creating...
 aws_s3_bucket.state_file: Creating...
 aws_iam_role.main_branch: Creating...
 aws_iam_policy.lock_table_policy_pr_branch: Creating...
-aws_iam_policy.lock_table_policy_pr_branch: Creation complete after 1s [id=arn:aws:iam::123456789012:policy/pr_branch_lock_table_access_policy]
+aws_iam_policy.lock_table_policy_pr_branch: Creation complete after 1s [id=arn:aws:iam::111122223333:policy/pr_branch_lock_table_access_policy]
 aws_iam_role.pr_branch: Creation complete after 1s [id=PR-Branch-Infrastructure]
 aws_iam_role.main_branch: Creation complete after 1s [id=Main-Branch-Infrastructure]
 aws_iam_role_policy_attachment.lock_table_policy_pr_branch: Creating...
@@ -612,7 +612,7 @@ mkdir -p .codecatalyst/workflows
 touch .codecatalyst/workflows/main_branch.yml
 ```
 
-Open `.codecatalyst/workflows/main_branch.yml` in your IDE, and add the following - remember to replace the placeholder AWS account ID `123456789012` with the value of your account, and the IAM role names if you changed them (you can choose between the standard CodeCatalyst workflow, or to use GitHub Actions with CodeCatalyst):
+Open `.codecatalyst/workflows/main_branch.yml` in your IDE, and add the following - remember to replace the placeholder AWS account ID `111122223333` with the value of your account, and the IAM role names if you changed them (you can choose between the standard CodeCatalyst workflow, or to use GitHub Actions with CodeCatalyst):
 
 * CodeCatalyst Workflow
     ```yml
@@ -634,7 +634,7 @@ Open `.codecatalyst/workflows/main_branch.yml` in your IDE, and add the followin
         Environment:
           Connections:
             - Role: Main-Branch-Infrastructure
-              Name: "123456789012"
+              Name: "111122223333"
           Name: TerraformBootstrap
         Configuration: 
           Steps:
@@ -668,7 +668,7 @@ Open `.codecatalyst/workflows/main_branch.yml` in your IDE, and add the followin
         Environment:
           Connections:
             - Role: Main-Branch-Infrastructure
-              Name: "123456789012"
+              Name: "111122223333"
           Name: TerraformBootstrap
         Configuration:
           Steps:
@@ -737,7 +737,7 @@ Now that we have our `main` branch workflow done, it is time to set up the pull 
 1. We remove the `terraform apply` step
 1. The trigger for the build is for when a PR to the `main` branch is opened or updated (`REVISION`)
 
-Create a new file for the PR workflow as `.codecatalyst/workflows/pr_branch.yml`, and add the following (replacing the placeholder AWS account ID of `123456789012`, and the IAM role name if you changed it) - you can choose between the standard CodeCatalyst workflow, or to use GitHub Actions with CodeCatalyst:
+Create a new file for the PR workflow as `.codecatalyst/workflows/pr_branch.yml`, and add the following (replacing the placeholder AWS account ID of `111122223333`, and the IAM role name if you changed it) - you can choose between the standard CodeCatalyst workflow, or to use GitHub Actions with CodeCatalyst:
 
 * CodeCatalyst Workflow
     ```yml
@@ -759,7 +759,7 @@ Create a new file for the PR workflow as `.codecatalyst/workflows/pr_branch.yml`
         Environment:
           Connections:
             - Role: PR-Branch-Infrastructure
-              Name: "123456789012"
+              Name: "111122223333"
           Name: TerraformBootstrap
         Configuration: 
           Steps:
@@ -797,7 +797,7 @@ Create a new file for the PR workflow as `.codecatalyst/workflows/pr_branch.yml`
         Environment:
           Connections:
             - Role: PR-Branch-Infrastructure
-              Name: "123456789012"
+              Name: "111122223333"
           Name: TerraformBootstrap
         Configuration:
           Steps:

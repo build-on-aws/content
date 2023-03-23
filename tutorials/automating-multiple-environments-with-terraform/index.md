@@ -108,7 +108,7 @@ wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-auto
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/variables.tf
 ```
 
-Now edit `.codecatalyst/workflows/main_branch.yml` and `.codecatalyst/workflows/pr_branch.yml`, replacing the `123456789012` AWS account ID with your one. In `terraform.tf`, change the `bucket` value to match your state file bucket created earlier, and optionally `region` if you are using a different region - this should match the region you used in the `_bootstrap/terraform.tf` backend configuration as we are using the same bucket. You can change the `aws_region` variable in `variables.tf` to set the region to create infrastructure in. Finally, we need to commit all the changes after making sure our Terraform code is properly formatted:
+Now edit `.codecatalyst/workflows/main_branch.yml` and `.codecatalyst/workflows/pr_branch.yml`, replacing the `111122223333` AWS account ID with your one. In `terraform.tf`, change the `bucket` value to match your state file bucket created earlier, and optionally `region` if you are using a different region - this should match the region you used in the `_bootstrap/terraform.tf` backend configuration as we are using the same bucket. You can change the `aws_region` variable in `variables.tf` to set the region to create infrastructure in. Finally, we need to commit all the changes after making sure our Terraform code is properly formatted:
 
 ```bash
 terraform fmt
@@ -205,7 +205,7 @@ resource "aws_organizations_account" "prod" {
 }
 ```
 
-> 💡 Tip: If you are applying this strategy to existing AWS accounts and using the [import](https://developer.hashicorp.com/terraform/cli/import) function of Terraform, take note of the instructions on how to avoid recreating the account when importing in the [resource page](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account#import). You will also need to import the AWS Organization if you already one set up in your account by running `terraform import aws_organizations_organization.org 123456789012`, and replacing the number with your AWS account ID.
+> 💡 Tip: If you are applying this strategy to existing AWS accounts and using the [import](https://developer.hashicorp.com/terraform/cli/import) function of Terraform, take note of the instructions on how to avoid recreating the account when importing in the [resource page](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account#import). You will also need to import the AWS Organization if you already one set up in your account by running `terraform import aws_organizations_organization.org 111122223333`, and replacing the number with your AWS account ID.
 
 Let's look at these changes and then apply them by running `terraform init` first, and then `terraform plan` in your CodeCatalyst environment's terminal.  (**Please note: If you are following on from the [previous tutorial](https://www.buildon.aws/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst/), you can still run these steps, it will not cause any issues**):
 
@@ -1041,7 +1041,7 @@ Here is the content of each file:
         Environment:
           Connections:
             - Role: Main-Branch-Infrastructure
-              Name: "123456789012" # Replace with your AWS Account ID here.
+              Name: "111122223333" # Replace with your AWS Account ID here.
           Name: MainAccount
         Configuration:
           Steps:
@@ -1082,7 +1082,7 @@ Here is the content of each file:
         Environment:
           Connections:
             - Role: PR-Branch-Infrastructure
-              Name: "123456789012" # Replace with your AWS Account ID here.
+              Name: "111122223333" # Replace with your AWS Account ID here.
           Name: MainAccount
         Configuration: 
           Steps:
@@ -1095,7 +1095,7 @@ Here is the content of each file:
           Type: EC2
     ```   
 
-To use these workflows, please update the AWS Account Id from `123456789012` to your one in both of these files.
+To use these workflows, please update the AWS Account Id from `111122223333` to your one in both of these files.
 
 Before we commit and push all the changes to kick off the workflows, we first need to include our `*.tfvars` files. As you will see in the comment in the file, it is generally not recommended as the typical use-case for them is developer / local specific overrides. In our case, we want them to be maintained in version control, so we will be adding them with the `-f` flag to force git to add them. Any future changes will be picked up by git, but any new ones that are added will still be ignored, providing a way for users to still use them locally. Use the following to add them in the `environments-infra` directory:
 
