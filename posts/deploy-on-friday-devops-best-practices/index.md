@@ -14,7 +14,7 @@ authorName: Marcelo Palladino
 date: 2023-03-15
 ---
 
-Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays (or on holiday eves, New Year's Eve, or any other date considered "important") simply because it was **too risky**. Everything seemed to make sense because **I was afraid every time we deployed**, the users felt the problems, the most experienced people on the team said that it was risky and, many times, the management people **prohibited deploying** on specific dates, unless it was to put out a fire.
+Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays (or on holiday eves, New Year's Eve, or any other date considered "important") simply because it was too risky. Everything seemed to make sense because I was afraid every time we deployed, the users felt the problems, the most experienced people on the team said that it was risky and, many times, the management people prohibited deploying on specific dates, unless it was to put out a fire.
 
 After a while, I understood the value of asking and understanding the "why" and, mainly, the "why not" of each thing.
 
@@ -26,11 +26,11 @@ After a while, I understood the value of asking and understanding the "why" and,
 - Our biggest customer has requested that we do not any deploy next week.
 - Someone knows how update this cluster? There is no documentation and we must to update due security reasons.
 
-For each situation, the answers to the "why?" or "why not?" evidence a lack of **technical** capabilities, well-established **processes** , **measurement/evaluation** capabilities, and **cultural** capabilities.
+For each situation, the answers to the "why?" or "why not?" evidence a lack of technical capabilities, well-established processes , measurement/evaluation capabilities, and cultural capabilities.
 
-Actions related to these capabilities aim to **mitigate risks** and, as a consequence, reduce the **fear of deploy** and increase organizational performance. Technical capabilities are by far the most exploited by organizations, especially in the early stages of DevOps adoption. It is possible to invest in automation of the deploy process to mitigate risks during deploy, for example. However, if the culture is not aligned or if there is not good communication between people on the teams, it is unlikely that the investment will impact the organization's performance in the long term.
+Actions related to these capabilities aim to mitigate risks and, as a consequence, reduce the "fear of deploy" and increase organizational performance. Technical capabilities are by far the most exploited by organizations, especially in the early stages of DevOps adoption. It is possible to invest in automation of the deploy process to mitigate risks during deploy, for example. However, if the culture is not aligned or if there is not good communication between people on the teams, it is unlikely that the investment will impact the organization's performance in the long term.
 
-The **fear of deploy** and its consequences for people and organizations is fundamentally based on **uncertainty** and **lack of knowledge**. By embracing the DevOps culture, organizations must invest in technical capabilities, promote knowledge creation, and develop people and processes to fight uncertainty and lack of knowledge.
+The "fear of deploy" and its consequences for people and organizations is fundamentally based on **uncertainty** and **lack of knowledge**. By embracing the DevOps culture, organizations must invest in technical capabilities, promote knowledge creation, and develop people and processes to fight uncertainty and lack of knowledge.
 
 In this article, I will share some examples of what should be avoided and practices to mitigate the risks and reduce the pain in the deployment process, which requires technical, cultural, and process capabilities of organizations ready to deploy on Fridays.
 
@@ -56,7 +56,7 @@ A team I worked on wasted two weeks trying to stabilize software in January afte
 
 That January was not a good start to the year for the team and neither for the customers. The business area discovered that there was no single time of year for the customers. The planning for that quarter was compromised due to the unexpected workload, and job satisfaction dropped dramatically during that period.
 
-It's a great example of how **neglecting the technical aspects** of software delivery leads to a **deterioration in the team's ability to evolve the software**.
+It's a great example of how neglecting the technical aspects of software delivery leads to a deterioration in the team's ability to evolve the software.
 
 There is no silver bullet regarding increasing reliability in the deployment process. However, working in small batches, deployed frequently, rather than large batches, with scheduled deployment is one of the practices that most contribute to reducing risk.
 
@@ -64,7 +64,7 @@ There is no silver bullet regarding increasing reliability in the deployment pro
 
 Have you ever encountered a repository where it's difficult to determine which branch is in production? I can't remember anything that caused me more uncertainty than the repository for a critical service with multiple open branches that, in theory, were ready for production but which contained several commits not yet deployed.
 
-The main branch of a project should always be in a production-ready state, and the **number of commits undeployed in the main branch should be kept to a minimum**. A code merged into the main branch must have been reviewed, statically analyzed, and tested in an automated way, as we will see next. Furthermore, this code should go to production continuously as quickly as possible with little or no manual intervention. If there are feature branches, they should be removed as part of the merge/deploy process.
+The main branch of a project should always be in a production-ready state, and the number of commits undeployed in the main branch should be kept to a minimum. A code merged into the main branch must have been reviewed, statically analyzed, and tested in an automated way, as we will see next. Furthermore, this code should go to production continuously as quickly as possible with little or no manual intervention. If there are feature branches, they should be removed as part of the merge/deploy process.
 
 Clare Liguori addressed this topic in [her article](https://aws.amazon.com/builders-library/cicd-pipeline/) on how Amazon stopped using the release captain role. The article is an excellent story, and it is interesting to note the role that trunk-based development played at that time.
 
@@ -76,13 +76,13 @@ The high bar in the code review has a nice side effect of forcing pull requests 
 
 It's an example of a process that depends on a well-established feedback culture in the organization. For instance, team members should feel comfortable denying a large pull request, or pull requests with multiple objectives. No egos are wanted here. **People should know the fine line between objectivity and subjectivity and respect personal preferences over their biases about how they would do something.** Code reviews should use positive language and focus on knowledge sharing, but they should be thoughtful and technically rigorous.
 
-**Code should only go into production after going through a rigorous review process.**
+Code should only go into production after going through a rigorous review process.
 
 ## Automate deployment processes
 
 I heard about a document created by a development team that basically consisted of a series of manual steps that the operations team should perform as part of the deployment process. Just imagine the friction of this operation. Now consider the differences between environments and add in a dash of cultural issues. Imagine doing a deploy like that on Fridays?
 
-**Ideally, there should be no latency involved in the deploy process, resulting from technical aspects or manual interventions.**
+Ideally, there should be no latency involved in the deploy process, resulting from technical aspects or manual interventions.
 
 Once a code has been reviewed, the merge to the main branch must trigger the `CI/CD` pipeline, which must build the software, run automated tests, run static code analysis, run lint checks, apply quality gateways, run security checks, deploy the service to the pre-production environment, run post-deployment tests, and ultimately deploy to production.
 
@@ -92,7 +92,7 @@ Mark Mansour wrote about [accelerating with continuous delivery](https://aws.ama
 
 I once worked on a team whose tests were performed exclusively by people, and the software only went into production after going through one or more people who carried out tests and manual inspections. They were the most well-meaning, stressed-out people I've ever worked with during all my career.
 
-In addition to **team burnout**, this job doesn't work because, despite any good intentions, people are not good at performing repetitive tasks. Add to this the fact that the need for changes increases as software becomes relevant, increasing complexity, we have a scenario that makes it difficult to predict the impact of changes through manual testing.
+In addition to team burnout, this job doesn't work because, despite any good intentions, people are not good at performing repetitive tasks. Add to this the fact that the need for changes increases as software becomes relevant, increasing complexity, we have a scenario that makes it difficult to predict the impact of changes through manual testing.
 
 Automated tests running continuously decrease the possibility that changes will negatively impact the software and are vital to increasing confidence and decreasing pain in the deployment process.
 
@@ -120,7 +120,7 @@ Despite all the best practices that can be done before deploying, it is inevitab
 
 Each alarm must have an associated playbook, and each playbook may link one or more tutorials and reference pages. One suggestion I have is to use the [documentation quadrant](https://www.thoughtworks.com/en-br/radar/techniques/documentation-quadrants) to connect the documentation artifacts so that they are not forgotten, easy to find, and that their consumption is oriented according to some logic. Defining a playbook for an alarm is a way to link documentation from the end to the beginning and an opportunity to transfer tacit knowledge.
 
-In addition to actionable alarms, teams must be able to observe the software **without friction and intermediaries**. Monitoring dashboards with application metrics, business metrics, centralized and structured logs, and traces (including distributed when it makes sense) are essential. The software must be observable, and there must be how-to guides that show how to observe it. The main idea here is that **no matter how inexperienced a firefighter is in a given context, it should be able to start fighting the fire, following steps and using the right tools.**
+In addition to actionable alarms, teams must be able to observe the software without friction and intermediaries. Monitoring dashboards with application metrics, business metrics, centralized and structured logs, and traces (including distributed when it makes sense) are essential. The software must be observable, and there must be how-to guides that show how to observe it. The main idea here is that **no matter how inexperienced a firefighter is in a given context, it should be able to start fighting the fire, following steps and using the right tools.**
 
 ## Things will go wrong: Rollback must be possible
 
@@ -134,7 +134,7 @@ I recommend reading Sandeep Pokkunuri's article on [ensuring rollback safety dur
 
 When I started writing this article, I thought of using my own experiences as a consultant and individual contributor to list practices based on the DevOps pillars that I saw as helpful in my day-to-day life as a builder, allowing teams to innovate quickly and at less risk. This article started with a question, *and this is the most important best practice*. Certify that your team has room to question. The most productive teams I've ever had the opportunity to work on were those that allowed themselves to question the status quo of their work and environment regularly.
 
-The DevOps pillars provide an excellent way for organizations to set clear directions while building their **technical, cultural, and process capabilities**.
+The DevOps pillars provide an excellent way for organizations to set clear directions while building their technical, cultural, and process capabilities.
 
 Finally, I want to pay special attention to something I call heroism. **Nothing corrupts the DevOps culture in an organization more than heroism.**
 
