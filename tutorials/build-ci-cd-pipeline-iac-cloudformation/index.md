@@ -5,9 +5,10 @@ tags:
   - aws
   - devops
   - infrastructure-as-code
+  - ci-cd
 authorGithubAlias: gaonkarr
-authorName: gaonkarr
-date: 2023-03-02 
+authorName: Rohini Gaonkar
+date: 2023-03-22 
 ---
 
 Starting more than a decade ago, Infrastructure as Code (IaC) dramatically changed how we do infrastructure. Today, we can define our Cloud Infrastructure in a template file in YAML/JSON and use services like AWS CloudFormation to perform CRUD (create, read, update and delete) operations on the infrastructure. We don't have to click into the AWS Management Console to set up everything, or create scripts and run using the CLI. In short, Infrastructure as code made setting up infrastructure less time consuming and error-prone. 
@@ -27,7 +28,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- AWS [CloudFormation basic understanding](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-howdoesitwork.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/ci-cd-iac-aws-cloudformation)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-03-02                                                      |
+| ⏰ Last Updated        | 2023-03-22                                                      |
 
 | ToC |
 |-----|
@@ -455,7 +456,7 @@ $ git checkout -b test-pr-workflow
 Switched to a new branch 'test-pr-workflow'
 ```
 
-### Make changes to Cloudformation template
+### Make changes to CloudFormation template
 
 - If you are using **your own CloudFormation template**, make any changes to the template to create a change set. 
 
