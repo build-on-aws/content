@@ -1,6 +1,6 @@
 ---
 title: "How to Succeed at DevOps: Wrong Answers Only!"
-description: "When it comes to DevOps, you’ve got questions, and we’ve got answers. Wrong answers. Software teams have been struggling  for ages with the questions I pose here, and in that time we have all witnessed our share of bad answers from unrealistic management, or even misguided senior engineers. Let’s learn from these bad answers and see why they just don’t work."
+description: "When it comes to DevOps, you’ve got questions, and we’ve got answers --Wrong answers. Read on to learn from the bad answers we've encountered and why they're wrong."
 tags:
   - devops
   - testing
@@ -9,6 +9,7 @@ authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-03-22
 ---
+Software teams have been struggling  for ages with the questions I pose here, and in that time we have all witnessed our share of bad answers from unrealistic management, or even misguided senior engineers. Let’s learn from these bad answers and see why they just don’t work.
 
 ## Walls
 
@@ -16,9 +17,11 @@ date: 2023-03-22
 
 Our development team owns the design and implementation of an application, while our operations team is separate, and owns deployment to production and running it there. Handoff from development to operations is often insufficient to inform the operations team of everything they needed to know. When operations integrates the systems into production, there are often unanticipated problems.
 
+It's like there is a wall between development and operations. Deploying code is a bit like shooting an arrow over that wall at a target our developers cannot see and hoping the operations team can just take care of it (Figure 1).
+
 How do we break down walls between development and operations?
 
-![development team and operations team separated by a wall](images/figure1.jpg "Figure 1. Development team on the left (overdressed for launch day), production on the right, operations team hiding somewhere on the right... possibly behind target") 
+![On the left there is a developer who is overdressed for launch day. In the middle there is a tall wall they cannot see over. Hidden behind the wall is a target](images/figure1.jpg "Figure 1. Development team on the left (overdressed for launch day), production on the right, operations team hiding somewhere on the right... possibly behind target") 
 
 ### The answer
 
@@ -26,7 +29,9 @@ We’ve decided to rename the "operations" team to be a "DevOps" team and make a
 
 ### Why that’s wrong
 
-Yes, folks taking on DevOps engineering roles is a good thing. But these DevOps engineers aren't your grandparents' operations team. They don't take a hand-off from developers and run the application in production for the them. Instead, they work with developers to create and design systems and processes that enable those developers to own their application from implementation all the way to running in production. A DevOps engineer may help implement CI/CD pipelines, create infrastructure as code templates for developers to use to stand up cloud resources, or implement observability and monitoring systems so developers have awareness of what their applications (and the users of those applications) are doing in production.
+In DevOps all team members, regardless of role, have a shared goal on delivering value to the customer. When "the wall" is there, they can have opposing goals, with developers pushed to quickly build new features and operators measured on system stability.
+
+So yes, folks taking on DevOps engineering roles is a good thing. But these DevOps engineers aren't your grandparents' operations team. They don't take a hand-off from developers and run the application in production for the them. Instead, they work with developers to create and design systems and processes that enable those developers to own their application from implementation all the way to running in production. A DevOps engineer may help implement CI/CD pipelines, create infrastructure as code templates for developers to use to stand up cloud resources, or implement observability and monitoring systems so developers have awareness of what their applications (and the users of those applications) are doing in production.
 
 <br/>
 
@@ -34,7 +39,7 @@ Yes, folks taking on DevOps engineering roles is a good thing. But these DevOps 
 
 ### The question
 
-It takes too long to deliver products and features for those products. From the time we learn a feature is needed by users, to the time that feature is delivered, is way too long.
+It takes too long to deliver products and features for those products. The time from when we learn a feature is needed by users, to the time that feature is delivered, is way too long.
 
 How can we deliver customer value faster?
 
@@ -44,19 +49,19 @@ Just go faster. Don’t you know what “faster” means?
 
 Work harder and get that code delivered!
 
-Skip the code review. Not only do code reviews take time to do, it take forever to find someone on the team to do one. Why review code that is already written, when you can be coding and releasing new features?
+Skip the code review. Not only do code reviews take time to do, it takes forever to find someone on the team to do one. Why review code that is already written, when you can be coding and releasing new features?
 
 And while we’re at it, take it easy testing by developers. Instead, hand it off to the test team. Customers do not care about your unit test coverage, they care about features. Let the test team do their thing, and you do yours... write code.
 
-![I asked for that new feature this morning](images/figure2.jpg "Figure 2. I asked for that new feature this morning. Can’t you just use Kubernetes or something?") 
+![A manager is frowning while pointing to the watch on their wrist](images/figure2.jpg "Figure 2. I asked for that new feature this morning. Can’t you just use Kubernetes or something?") 
 
 ### Why that’s wrong
 
-Jeff Bezos famously said you cannot just ask folks to try better (or in this case just go faster). Good intentions do not work because people already have good intentions. Instead we can look at [mechanisms](https://docs.aws.amazon.com/wellarchitected/latest/operational-readiness-reviews/building-mechanisms.html)using processes and tools to release sooner.
+Jeff Bezos famously said you cannot just ask folks to try better (or in this case just go faster). Good intentions do not work because people already have good intentions. Instead we can look at building [mechanisms](https://docs.aws.amazon.com/wellarchitected/latest/operational-readiness-reviews/building-mechanisms.html) using processes and tools to release sooner.
 
-Code review and testing are both important mechanisms to identify problems early, and fix them. The earlier we find and fix problems, the less expensive (in both monetary cost, and cost to customer trust) they are. For code review consider using automation to help. [Amazon CodeGuru Reviewer](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html) uses machine learning and automated reasoning to identify critical issues, security vulnerabilities, and hard-to-find bugs during application development and provides recommendations to improve code quality. You can get hands-on with the CodeGuru in the[](https://catalog.us-east-1.prod.workshops.aws/workshops/fa518794-acd4-4178-80d3-97fa62f9deff/en-US/codegurupr)[Amazon Code Guru Workshop here](https://catalog.us-east-1.prod.workshops.aws/workshops/1786241d-967f-4195-99ef-5716ef485201/en-US). But you also need a human reviewer too - the machines are not quite ready to replace us yet. One process to encourage folks to do code reviews instead of coding new features is using a WIP (Work in Process) limits. This concept, [taken from Kanban](http://www.setheliot.com/blog/2016/07/20/how-wip-limits-work-to-help-you-get-more-stuff-done/), limits how much new work can be started until existing work is done, where “done” *includes* code review. This is shown in figure 3, where each yellow note represents a coding task. Developers cannot take new work (and exceed the “Develop” WIP limit of 4) until some code reviews are completed.
+Code review and testing are both important mechanisms to identify problems early, and fix them. The earlier we find and fix problems, the less expensive (in both monetary cost, and cost to customer trust) they are. While code review can be time consuming, you can use automation to help lighten the load. Tools like [Amazon CodeGuru Reviewer](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html) use machine learning and automated reasoning to identify critical issues, security vulnerabilities, and hard-to-find bugs during application development and provides recommendations to improve code quality. You can get hands-on with the CodeGuru in the [Amazon Code Guru Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/1786241d-967f-4195-99ef-5716ef485201/en-US). But you also need a human reviewer too - the machines are not quite ready to replace us yet. One process to encourage folks to do code reviews instead of coding new features is using a WIP (Work in Process) limits. This concept, [taken from Kanban](http://www.setheliot.com/blog/2016/07/20/how-wip-limits-work-to-help-you-get-more-stuff-done/), limits how much new work can be started until existing work is done, where “done” *includes* code review. This is shown in figure 3, where each yellow note represents a coding task. Developers cannot take new work (which will cause the the “Develop” WIP limit of 4 to be exceeded) until some code reviews are completed.
 
-![Limiting WIP](images/figure3.png "Figure 3. Limiting WIP can streamline throughput, and incentivizes code reviews.") 
+![Two whiteboards, each with multiple columns and sticky notes illustrate the concept of limiting WIP](images/figure3.png "Figure 3. Limiting WIP can streamline throughput, and incentivizes code reviews.") 
 
 And continuing to explore how to find problems early, a good test suite will be your best friend. Automate it as part of your CI/CD pipeline, and ensure it is high quality (not brittle or noisy). Treat test code as your treat production code (yes, including code reviews). Include [load testing](https://docs.aws.amazon.com/prescriptive-guidance/latest/load-testing/welcome.html) and [chaos engineering](https://aws.amazon.com/blogs/architecture/verify-the-resilience-of-your-workloads-using-chaos-engineering/) to test non-functional requirements like scalability and resilience.
 
@@ -76,7 +81,7 @@ Hold the line. Get all the requirements in writing at the start, and don’t bud
 
 Or.....
 
-The customer is always right!  Give them everything they want, when they ask for it. If it is top of mind to them, then it is number one priority for you. You won’t deliver anything valuable remotely close to your timetable, but then that’s what follow-on contracts are for. Job security still guaranteed.
+The customer is always right! Give them everything they want, when they ask for it. If it is top of mind to them, then it is number one priority for you. You won’t deliver anything valuable remotely close to your timetable, but then that’s what follow-on contracts are for. Job security still guaranteed.
 
 
 ### Why that’s wrong
@@ -100,13 +105,13 @@ How can our development teams reduce overhead and focus on value adding activiti
 
 This one’s easy. The development team does not want to do it — that’s why we have a DevOps team! No task is too big or too small. The DevOps team will run their scripts and their infrastructure as code templates and get it done. Need a Kubernetes cluster? File a ticket to DevOps. Need to change the policy on an IAM role? Drop a message on the DevOps Slack channel.
 
-![DevOps engineer works through his ticket backlog](images/figure4.png "Figure 4. A DevOps engineer works through his ticket backlog (again overdressed — shirt and tie not necessary)")
+![A determined looking DevOps engineer is sitting in a cardboard box as if it's a boat, with a paddle out the side. Instead of water, they are surrounded by pages and tickets of work to do](images/figure4.png "Figure 4. A DevOps engineer works through his ticket backlog (again overdressed — shirt and tie not necessary)")
 
 ### Why that’s wrong
 
-Folks don’t like waiting on a ticket to be serviced. And folks like it even less when they have an insurmountable stream of “muck” work thrown at them. DevOps is about collaboration, not throwing it over the wall (see Figure 1).
+Folks don’t like waiting on a ticket to be serviced. And folks like it even less when they have an insurmountable stream of “[muck](https://aws.amazon.com/blogs/aws/we_build_muck_s/)” work thrown at them. DevOps is about collaboration, not throwing it over the wall (see Figure 1).
  
-A DevOps team can play a key role in creating and maintaining scripts. They can create infrastructure as code templates that are vetted to be compliant with business security and architectural policies. They can create systems that make it easy to find and deploy these templates to stand up cloud infrastructure (like the aforementioned Kubernetes cluster). They do this working with Developers and others as stakeholders. Then the developers use these scripts and infrastructure deployment processes elf-service to stand up what they need. For their part, the DevOps team focuses on removing or automating repetitive or low-value tasks. They then have more time to spend focusing on innovating and enhancing technology quality, without having to take on menial tasks
+A DevOps team can play a key role in creating and maintaining scripts. They can create infrastructure as code templates that are vetted to be compliant with business security and architectural policies. They can create systems that make it easy to find and deploy these templates to stand up cloud infrastructure (like the aforementioned Kubernetes cluster). They do this working with Developers and others as stakeholders. Then the developers use these scripts and infrastructure deployment processes to self-service, and stand up what they need. For their part, the DevOps team focuses on removing or automating repetitive or low-value tasks. They then have more time to spend focusing on innovating and enhancing technology quality, without having to take on menial tasks
  
 The line for what is self-service (using DevOps created tools) and what is done by DevOps depends on the organization. Above I describe an organization where development is almost completely self-service, but with guardrails to help developers maintain compliance with policies. In other cases DevOps may stamp out landing zones in AWS accounts, that Developers can then deploy infrastructure to (using the template library). In some organizations, they prefer security (such as IAM roles) to be a centralized function. What makes it DevOps is a culture of collaboration and ownership.
 
@@ -122,7 +127,7 @@ When our application is running in production, how do we know it is working as i
 
 ### The answer
 
-First of all, the development team lead verified it worked on her machine. Now its in production and we have other teams for that!  The DevOps team deploys it and runs it. Customer service takes the calls from frustrated users and files the bugs. And the support engineers investigate the bugs and fix some of them, and file tickets to the development team for the others. The bugs gets fixed and everyone is happy.
+First of all, the development team lead verified it worked on her machine. Now its in production and we have other teams for that! The DevOps team deploys it and runs it. Customer service takes the calls from frustrated users and files the bugs. And the support engineers investigate the bugs and fix some of them, and file tickets to the development team for the others. The bugs gets fixed and everyone is happy.
 
 ### Why that’s wrong
 
@@ -140,7 +145,7 @@ A DevOps team organizes their tools and processes around such measures so as to 
 
 ![Order rate for amazon.com](images/figure6.png "Figure 6. Order rate -- a good KPI for an online retailer. When orders drop below predicted values, it indicates a serious problem with customer experience on the site.")
 
-While we do not want to use our customers as front line “monitoring”, we still want to listen to their needs and add requirements to the backlog for future releases to meet those needs. Tracing and instrumentation can be used to gather objective data on how customers use your application. Also, user studies, beta releases, surveys, and social media sentiment analysis are ways to gather subjective data from your customers.
+While we do not want to use our customers as front line “monitoring,” we still want to listen to their needs and add requirements to the backlog for future releases to meet those needs. Tracing and instrumentation can be used to gather objective data on how customers use your application. Also, user studies, beta releases, surveys, and social media sentiment analysis are ways to gather subjective data from your customers.
 
 <br/>
 
