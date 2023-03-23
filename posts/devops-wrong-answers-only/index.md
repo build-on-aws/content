@@ -1,6 +1,6 @@
 ---
 title: "How to Succeed at DevOps: Wrong Answers Only!"
-description: "When it comes to DevOps, everyone thinks they've got the answer. These are the bad answers we've encountered and why they're wrong."
+description: "When it comes to DevOps, everyone thinks they've got the answer. These are the bad answers I've encountered. Let's explore why they just don't work."
 tags:
   - devops
   - testing
@@ -29,7 +29,7 @@ We’ve decided to rename the "operations" team to be a "DevOps" team and make a
 
 ### Why that’s wrong
 
-In DevOps all team members, regardless of role, have a shared goal of delivering value to the customer. When "the wall" is there, they can have opposing goals, with developers pushed to quickly build new features and operators evaluated by system stability.
+In DevOps all team members, regardless of role, have a shared goal of delivering value to the customer. When "the wall" is there, they can have opposing goals, with developers pushed to quickly build new features and operators evaluated based on system stability.
 
 So yes, folks taking on DevOps engineering roles is a good thing. But these DevOps engineers aren't your grandparents' operations team. They don't take a hand-off from developers and run the application in production for them. Instead, they work with developers to create and design systems and processes that enable those developers to own their application from implementation all the way to running in production. A DevOps engineer may help implement CI/CD pipelines, create infrastructure as code templates for developers to use to stand up cloud resources, or implement observability and monitoring systems so developers have awareness of what their applications (and the users of those applications) are doing in production.
 
@@ -57,7 +57,7 @@ And while we’re at it, the developers need to take it easy on testing. They sh
 
 ### Why that’s wrong
 
-Jeff Bezos famously said you cannot just ask folks to try better (or in this case just go faster). Good intentions do not work because people already have good intentions. Instead we can look at building [mechanisms](https://docs.aws.amazon.com/wellarchitected/latest/operational-readiness-reviews/building-mechanisms.html) and using processes and tools to release sooner.
+Jeff Bezos famously said you cannot just ask folks to try better (or in this case just go faster). Good intentions do not work because people already have good intentions. Instead we can look at building [mechanisms](https://docs.aws.amazon.com/wellarchitected/latest/operational-readiness-reviews/building-mechanisms.html) by using processes and tools to release sooner.
 
 Code review and testing are both important mechanisms to identify problems early, and to fix them. The earlier we find and fix problems, the less expensive they are (both in monetary cost and cost to customer trust). While code review can be time consuming, you can use automation to help lighten the load. Tools like [Amazon CodeGuru Reviewer](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html) use machine learning and automated reasoning to identify critical issues, security vulnerabilities, and hard-to-find bugs during application development - and they provide recommendations to improve code quality. You can get hands-on with the CodeGuru in the [Amazon Code Guru Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/1786241d-967f-4195-99ef-5716ef485201/en-US). But machines are not quite ready to replace us yet: you need a human reviewer, too. One process to encourage folks to do code reviews instead of coding new features is using WIP (Work in Process) limits. This concept, [taken from Kanban](http://www.setheliot.com/blog/2016/07/20/how-wip-limits-work-to-help-you-get-more-stuff-done/), limits how much new work can be started until existing work is done, where “done” *includes* the code review stage. This is shown in figure 3, where each yellow note represents a coding task. Developers cannot take new work (which will cause the “Develop” WIP limit of 4 to be exceeded) until some code reviews are completed.
 
