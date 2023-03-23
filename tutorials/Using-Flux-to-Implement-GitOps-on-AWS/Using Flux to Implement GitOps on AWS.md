@@ -36,9 +36,9 @@ GitOps has the following features compared to traditional continuous deployment.
 ## Why is GitOps 
 
 We believe GitOps is the ideal way to implement continuous deployment of Kuberentes-based clusters. The main reason is that we can go through the details of GitOps specific practices on Kuberentes.
-![why is GitOps](https://user-images.githubusercontent.com/128576816/227273622-fe73fc71-9820-4d98-9d52-d0c642db16bc.jpg)
-Based on GitOps method, Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the final state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify/deployment, observe/ alerts, and fix/operations. The process is like below:
 
+Based on GitOps method, Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the final state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify/deployment, observe/ alerts, and fix/operations. The process is like below:
+![why is GitOps](https://user-images.githubusercontent.com/128576816/227274202-235b22ee-cc7a-49e7-80d5-9de07b753da5.jpg)
 ## Amazon EKS-based Best Practices for GitOps 
 
 The overall CI/CD pipeline for the best practices of this case is shown in the figure below.
