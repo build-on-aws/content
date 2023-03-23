@@ -1,6 +1,6 @@
 ---
-title: Deploy on Friday! (DevOps best practices)
-description: Why not deploy on friday? Learn the best practices from organizations ready to Deploy on Fridays through real-world examples.
+title: "Deploy on Friday! 12 DevOps Best Practices"
+description: Why not deploy on Friday? Learn the best practices from organizations ready to deploy on Fridays through real-world examples.
 tags:
   - devops
   - deploy
