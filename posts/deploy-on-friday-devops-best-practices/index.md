@@ -16,57 +16,43 @@ date: 2023-03-15
 
 Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays (or on holiday eves, New Year's Eve, or any other date considered "important") simply because it was too risky. Everything seemed to make sense because I was afraid every time we deployed, the users felt the problems, the most experienced people on the team said that it was risky and, many times, the management people prohibited deploying on specific dates, unless it was to put out a fire.
 
-After a while, I understood the value of asking and understanding the "why" and, mainly, the "why not" of each thing.
+After a while, I understood the value of asking and understanding the "why" and, mainly, the "why not" of each thing. The answers to the "why?" or "why not?" in my experience have shown a lack of technical capabilities, well-established processes , measurement/evaluation capabilities, and cultural capabilities. Actions related to these capabilities aim to mitigate risks and, as a consequence, reduce the "fear of deploy" and increase organizational performance. Technical capabilities are by far the most exploited by organizations, especially in the early stages of DevOps adoption. It is possible to invest in automation of the deploy process to mitigate risks during deploy, for example. However, if the culture is not aligned or if there is not good communication between people on the teams, it is unlikely that the investment will impact the organization's performance in the long term.
 
-- Can someone be with us overnight to follow the deploy?
-- Can someone follow the deploy on Sunday?
-- Nobody deploys on Fridays. Do we have a deal??
-- Holiday tomorrow. No deploys, PLEASE!
-- No deploy because John had a particular problem and won't be able to be with us, ok?
-- Our biggest customer has requested that we do not any deploy next week.
-- Someone knows how update this cluster? There is no documentation and we must to update due security reasons.
+By embracing the DevOps culture, organizations must invest in technical capabilities, promote knowledge sharing and creation, and develop people and processes. In this article, I will share some examples of what should be avoided and practices to mitigate the risks and reduce the pain in the deployment process in organizations ready to deploy on Fridays.
 
-For each situation, the answers to the "why?" or "why not?" evidence a lack of technical capabilities, well-established processes , measurement/evaluation capabilities, and cultural capabilities.
+## Maintain independence between teams
 
-Actions related to these capabilities aim to mitigate risks and, as a consequence, reduce the "fear of deploy" and increase organizational performance. Technical capabilities are by far the most exploited by organizations, especially in the early stages of DevOps adoption. It is possible to invest in automation of the deploy process to mitigate risks during deploy, for example. However, if the culture is not aligned or if there is not good communication between people on the teams, it is unlikely that the investment will impact the organization's performance in the long term.
+Avoid the need for synchronization and coordination meeting between the teams. This happens when the structure of the software in relation to the organizational structure do not allow the teams to work independently. I've been dismayed to see cases where a recurring meeting was required, where the goal was to define the order in which teams would make changes to services and the order to deploy. 
 
-The "fear of deploy" and its consequences for people and organizations is fundamentally based on **uncertainty** and **lack of knowledge**. By embracing the DevOps culture, organizations must invest in technical capabilities, promote knowledge creation, and develop people and processes to fight uncertainty and lack of knowledge.
+Deploy processes that require synchronization and coordination activities must be identified and avoided, as they slow down teams and increase management costs. 
 
-In this article, I will share some examples of what should be avoided and practices to mitigate the risks and reduce the pain in the deployment process, which requires technical, cultural, and process capabilities of organizations ready to deploy on Fridays.
-
-## Keep independent teams
-
-I've heard of a recurring meeting where the goal was to define the order in which teams would make changes to services and the order to deploy in subsequent weeks. It was a synchronization and coordination meeting between the teams, as the structure of the software in relation to the organizational structure did not allow the teams to work independently. To make it worse, some services had yet to have their owners defined.
-
-Deploy processes that require synchronization and coordination activities must be identified and avoided, as they slow down teams and increase management costs. In addition, every service must have well-defined owners to avoid the diffusion of responsibility during its life cycle.
+You can learn about real-world teams that enabled independent deployment in a multi-service application reading [this article](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/) by Seth Eliot. Also, depending on your age, this may be the first time you've heard about "pager".
 
 ## Identify and avoid coupling
 
-It's like a fisherman's story, but it's true, I swear to you! I once had to coordinate the deploy of more than 20 services to production only because I added an element to an enumeration in one of those services. There were more than 20 pull requests in different teams and the order was important. A complete nightmare! A change that should have taken a morning took weeks to complete!
+It's like a fisherman's story, but it's true, I swear to you. I once had to coordinate the deploy of more than 20 services to production only because I added an element to an enumeration in one of those services. There were more than 20 pull requests in different teams and the order was important. A change that should have taken a morning took weeks to complete.
 
 That coupling and technical debt issue took a heavy toll and was a source of pain in the deploy process. We could never do that deploy on a Friday.
 
-Mapping the coupling (even when it's inevitable) and identifying the costs related is an activity that must be done continuously, to allow the analysis of cheaper ways of coupling and the design of solutions that avoid and reduce the coupling.
+Mapping the coupling (even when it's inevitable), and identifying the costs related, is an activity that must be done continuously. This allows the team to be aware of the problem and build solutions to reduce and avoid coupling when possible.
 
 [In this video](https://www.youtube.com/watch?v=esm-1QXtA2Q), Michael Nygard does an excellent job, as always, of sharing concepts about coupling, especially considering its inevitability.
 
 ## Work in small batches deployed regularly
 
-A team I worked on wasted two weeks trying to stabilize software in January after a release freeze between Christmas and New Year's. The launch freeze was a request from the business area to minimize the risk of customers experiencing a service interruption during such, as they said, an important time of the year.
+A team I worked on wasted two weeks trying to stabilize software in January after a release freeze between Christmas and New Year's. The launch freeze was a request from the management team to minimize the risk of customers experiencing a service interruption during such, as they said, an important time of the year.
 
-That January was not a good start to the year for the team and neither for the customers. The business area discovered that there was no single time of year for the customers. The planning for that quarter was compromised due to the unexpected workload, and job satisfaction dropped dramatically during that period.
+That January was not a good start to the year for the team and neither for the customers. There were so many service disruptions, the planning for that quarter was compromised due to the unexpected workload, and job satisfaction dropped dramatically during that period.
 
-It's a great example of how neglecting the technical aspects of software delivery leads to a deterioration in the team's ability to evolve the software.
-
-There is no silver bullet regarding increasing reliability in the deployment process. However, working in small batches, deployed frequently, rather than large batches, with scheduled deployment is one of the practices that most contribute to reducing risk.
+There is no silver bullet regarding increasing reliability in the deployment process. However, working in small batches, deployed frequently, rather than large batches, with scheduled deployment is one of the practices that most contribute to reducing risk, since the smaller the amount of changes, it is easier to map, understand and monitor the possible side effects.
 
 ## Use trunk-based development
 
 Have you ever encountered a repository where it's difficult to determine which branch is in production? I can't remember anything that caused me more uncertainty than the repository for a critical service with multiple open branches that, in theory, were ready for production but which contained several commits not yet deployed.
 
-The main branch of a project should always be in a production-ready state, and the number of commits undeployed in the main branch should be kept to a minimum. A code merged into the main branch must have been reviewed, statically analyzed, and tested in an automated way, as we will see next. Furthermore, this code should go to production continuously as quickly as possible with little or no manual intervention. If there are feature branches, they should be removed as part of the merge/deploy process.
+The main branch of a project should always be in a production-ready state. A code merged into the main branch must have been reviewed, statically analyzed, and tested in an automated way, as we will see next. Furthermore, this code should go to production continuously as quickly as possible with little or no manual intervention. If there are feature branches, they should be removed as part of the merge/deploy process.
 
-Clare Liguori addressed this topic in [her article](https://aws.amazon.com/builders-library/cicd-pipeline/) on how Amazon stopped using the release captain role. The article is an excellent story, and it is interesting to note the role that trunk-based development played at that time.
+Clare Liguori addressed this topic in [her article](https://aws.amazon.com/builders-library/cicd-pipeline/) on how Amazon stopped using the release captain role, who was responsible for coordinating the release of code changes for their team’s services and deploying the release to production. It is interesting to note how trunk-based development enabled the improvement of technical capabilities and processes to achieve the objective.
 
 ## Encourage thoughtful code reviews
 
@@ -80,11 +66,11 @@ Code should only go into production after going through a rigorous review proces
 
 ## Automate deployment processes
 
-I heard about a document created by a development team that basically consisted of a series of manual steps that the operations team should perform as part of the deployment process. Just imagine the friction of this operation. Now consider the differences between environments and add in a dash of cultural issues. Imagine doing a deploy like that on Fridays?
+I heard about a document created by a development team that basically consisted of a series of manual steps that the operations team should perform to do the entire deployment process. Just imagine the friction of this operation. Now consider the differences between environments and add in a dash of cultural issues. Imagine doing a deploy like that on Fridays?
 
-Ideally, there should be no latency involved in the deploy process, resulting from technical aspects or manual interventions.
+Depending on the case, it is acceptable to have some runbook to do some task during the deployment process. However, ideally, there should be no latency involved in the deploy process, resulting from technical aspects or manual interventions.
 
-Once a code has been reviewed, the merge to the main branch must trigger the `CI/CD` pipeline, which must build the software, run automated tests, run static code analysis, run lint checks, apply quality gateways, run security checks, deploy the service to the pre-production environment, run post-deployment tests, and ultimately deploy to production.
+Once code has been reviewed, the merge to the main branch must trigger the CI/CD pipeline, which must build the software, run automated tests, run static code analysis, run lint checks, apply quality gateways, run security checks, deploy the service to the pre-production environment, run post-deployment tests, and ultimately deploy to production.
 
 Mark Mansour wrote about [accelerating with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/) at Amazon and the positive aspects of the practice for the customers and business. In his words "For us, automation is the only way we could have continued to grow our business".
 
@@ -104,17 +90,20 @@ Sometimes it is desirable to enable certain functionality for a small group of u
 
 In [this video](https://www.youtube.com/watch?v=uouw9QxVrE8) from AWS re:Invent 2022, you can follow Sébastien Stormacq and Olivier Leplus demonstrating how AWS has been using this technique for over a decade and how you can introduce feature flags into your applications.
 
-## Reduce risk using deploy strategies
+## Reduce risk using canary releases
 
 8 am, the time most of our clients start their operations. I am a software engineer and we've just deployed a critical change to our entire user base. We're happy to finally ship it, as it is a technical debt payment that will make the software better by removing afferent coupling that has long taken us a high toll.
 
-8:10 am. No user can use the platform. Long story short: chaos is raging in support, and some of the most influential customers directly call the business people (including CTO and CIO). It is a nightmare, and a perfect example of how a deploy made for a reduced number of users (canary release) would have mitigated the deployment risk, caused less pain, and preserved the organization's reputation.
+8:10 am. No user can use the platform. Long story short: chaos is raging in support, and some of the most influential customers directly call the business people (including CTO and CIO). It is a nightmare, and a perfect example of how a deploy made for a reduced number of users would have mitigated the deployment risk, caused less pain, and preserved the organization's reputation.
 
-Organizations ready to deploy on Fridays master the ability to deploy to a small number of users, such as allowing changes to be monitored and observed with low risk, before they impact the entire user base.
+A canary release is a deployment strategy that allows teams release changes to a reduced number of users.
+Using this strategy, the team can deploy the new version incrementally, slowly making it visible to new users. This allows gain confidence in the deployment, allowing changes to be monitored and observed with low risk, before they impact the entire user base.
+
+Organizations ready to deploy on Fridays master the ability to deploy to a small number of users. 
 
 ## Ensure software is easy to monitor and observe
 
-I heard about a role in an operations team whose primary assignment was to create monitoring dashboards and send messages on the internal communicator to the development teams when something was not right in the view of the person in charge of observing the dashboards. It was something like, "Guys, CPU is at 70%. Do we have any problem here?" It is another edge case  highlighting the lack of measurement/evaluation capacity and latent cultural problems.
+I heard about a role in an operations team whose primary assignment was to create monitoring dashboards and send messages on the internal communicator to the development teams when something was not right in the view of the person in charge of observing the dashboards. It was something like, "Folks, CPU is at 70%. Do we have any problem here?" It is another edge case  highlighting the lack of measurement/evaluation capacity and latent cultural problems.
 
 Despite all the best practices that can be done before deploying, it is inevitable that, at some point, things will go wrong. At these times, it's necessary for the teams that own the affected services to be activated directly through alarms. Alarms should be tangible from a business perspective rather than just based on infrastructure metrics like CPU and memory. Complex processes can be associated with hundreds of software/hardware components. Good monitoring abstracts complexity in the form of **stability indices**, which are used as the basis for monitoring and alarms.
 
@@ -124,20 +113,20 @@ In addition to actionable alarms, teams must be able to observe the software wit
 
 ## Things will go wrong: Rollback must be possible
 
-Even in applications that follow best practices in organizations ready to deploy on Fridays, in certain circumstances, there will be unexpected behavior in production, where the only option to re-establish operations will be to rollback the deployment.
+Even in applications that follow best practices in organizations ready to deploy on Fridays, in certain circumstances, there will be unexpected behavior in production, where the only option to re-establish operations will be to roll back the deployment.
 
-To reduce the deploy pain, the team must have this technical capacity well developed so that there is certainty that the reversal of the release will not cause more problems for the users. **The software version being deployed must be backward compatible.**
+To reduce the deploy pain, the team must have this technical capacity well developed so that there is certainty that the reversal of the release will not cause more problems for the users. 
 
 I recommend reading Sandeep Pokkunuri's article on [ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/) to delve deeper into this subject.
 
-## Conclusion and a note on heroism
+## Identify and avoid heroism
 
-When I started writing this article, I thought of using my own experiences as a consultant and individual contributor to list practices based on the DevOps pillars that I saw as helpful in my day-to-day life as a builder, allowing teams to innovate quickly and at less risk. This article started with a question, *and this is the most important best practice*. Certify that your team has room to question. The most productive teams I've ever had the opportunity to work on were those that allowed themselves to question the status quo of their work and environment regularly.
-
-The DevOps pillars provide an excellent way for organizations to set clear directions while building their technical, cultural, and process capabilities.
-
-Finally, I want to pay special attention to something I call heroism. **Nothing corrupts the DevOps culture in an organization more than heroism.**
+I want to pay special attention to something I call heroism. **Nothing corrupts the DevOps culture in an organization more than heroism.**
 
 A hero does not share information, has difficulty transferring knowledge through socialization, and does not create opportunities for the people around. A hero is only there to be called upon to save the day, whatever their activity. I have spoken a lot about this topic in my presentations in Brazil, and I am surprised by the number of people who say they work with "heroes" in their organizations and who identify with the negative aspects of heroism.
 
-Numerous practices can be applied to avoid heroism, such as pair programming, group programming (MOB programming), monitoring review meetings, game days, group whiteboard sessions, and more. An organization ready to deploy on Fridays understands that team culture and environment matter more than individual skill. By embracing DevOps culture and encouraging practices that maximize knowledge sharing, **the organization fights heroism in favor of empowered and autonomous teams**.
+Numerous practices can be applied to avoid heroism, such as pair programming, MOB programming, monitoring review meetings, game days, group whiteboard sessions, and more. An organization ready to deploy on Fridays understands that team culture and environment matter more than individual skill. By embracing DevOps culture and encouraging practices that maximize knowledge sharing, the organization fights heroism in favor of empowered and autonomous teams.
+
+## Conclusion
+
+When I started writing this article, I thought of using my own experiences as a consultant and individual contributor to list practices that I saw as helpful in my day-to-day life as a builder, allowing teams to innovate quickly and at less risk. There are other practices that can certainly be applied and all of them can be identified by asking simple questions. Ensure that your team has room to question. The most productive teams I've ever had the opportunity to work on were those that allowed themselves to question the status quo of their work and environment regularly.
