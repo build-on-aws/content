@@ -43,7 +43,7 @@ Based on GitOps method, Git is the only actual source of the required state for 
 
 The overall CI/CD pipeline for the best practices of this case is shown in the figure below.
 
-![image-20230323220710026](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323220710026.png)
+![overview](https://github.com/betty714/content/blob/514c9da25c084b4e4c086018d1f36ae9ada57eaf/tutorials/Using-Flux-to-Implement-GitOps-on-AWS/images/overall%20cd:cd%20plipeline.png))
 
 There are three code repositories under the CodeCommit repository. One is flux-repo , the configuration repository for Flux CD, which is used to define Flux-related resources. The other is microservices-repo, which saves microservice application configurations and deployment files. The third one is the source repository app-repo for business services. In this post, a front-end project will be as an example. We used the CodePipeline for continuous integration in the CI/CD pipeline, built and stored the docker image in Amazon ECR, and deployed the CD engine Flux as pod in the Amazon EKS environment.
 
