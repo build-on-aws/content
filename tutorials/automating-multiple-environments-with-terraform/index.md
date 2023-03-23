@@ -1,11 +1,12 @@
 ---
 title: "Automating multiple environments with Terraform"
-description: "How to manage a central main account for shared infrastructure with a dev, test, and prod account with Terraform."
+description: "How to manage a central main account for shared infrastructure with a dev, test, and prod account."
 tags:
     - terraform
     - codecatalyst
     - ci-cd
     - tutorial
+    - devops
     - infrastructure-as-code
     - aws
     - github-actions
@@ -14,7 +15,7 @@ authorName: Cobus Bernard
 date: 2023-03-07
 ---
 
-As teams grow, so does the complexity of managing and coordinating changes to the application environment. While having a single account to provision all your infrastructure and deploy all systems works well for a small group of people, you will probably hit a point where there are too many people making changes at the same time to be able to manage it all. Additionally, with all your infrastructure in a single account, it becomes very difficult to apply the principle of least privilege, not to even mention the naming convention of resources. This tutorial will guide you how to split your infrastructure across multiple accounts by creating a `main` account for all common infrastructure shared by all environments (for example: users, build pipeline, build artifacts, etc.), and then an environment account for the three stages of your application: `dev`, `test`, and `prod`. The approach will make use of Terraform, Amazon CodeCatalyst, and assuming IAM roles between these accounts. It is an evolution of the [2020 HashTalks session](https://www.youtube.com/watch?v=qVcdO3OeTZo) I did. We will address the following:
+As teams grow, so does the complexity of managing and coordinating changes to the application environment. While having a single account to provision all your infrastructure and deploy all systems works well for a small group of people, you will probably hit a point where there are too many people making changes at the same time to be able to manage it all. Additionally, with all your infrastructure in a single account, it becomes very difficult to apply the principle of least privilege, not to mention the naming convention of resources. The principle of least privilege revolves around only granting the minimum permissions for a person or service to accomplish their intended task, for example, if a developer only needs access to a development database and not production, the security permissions should limit their access to only the development database. This tutorial will guide you in splitting your infrastructure across multiple accounts by creating a `main` account for all common infrastructure shared by all environments (for example: users, build pipeline, build artifacts, etc.), and then an environment account for the three stages of your application: `dev`, `test`, and `prod`. These environments will help you support a growing team, and create clear separation between your different environments by isolating them into individual AWS accounts. The approach will make use of [Terraform](https://terraform.io), [Amazon CodeCatalyst](https://codecatalyst.aws), and assuming of IAM roles between these accounts. It is an evolution of the [2020 HashTalks session](https://www.youtube.com/watch?v=qVcdO3OeTZo) I did. We will address the following:
 
 * How to split our infrastructure between multiple accounts and code repositories
 * How to set up a build and deployment pipeline to manage all changes in the environment account with Terraform
@@ -28,7 +29,7 @@ As teams grow, so does the complexity of managing and coordinating changes to th
 | ⏱ Time to complete     | 60 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- [Terraform](https://terraform.io/) 1.3.7+<br>- (Optional) [GitHub](https://github.com) account|
-| 💻 Code         | [Download here the full guide](https://github.com/build-on-aws/manage-multiple-environemnts-with-terraform) |
+| 💻 Code         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/manage-multiple-environemnts-with-terraform) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-03-07                                                      |
 
@@ -37,7 +38,7 @@ As teams grow, so does the complexity of managing and coordinating changes to th
 
 ## Setting up a CI/CD pipeline for the Main account
 
-As a first step, we need to set up a CI/CD pipeline for all the shared infrastructure in our `main` account. We will be using the approach from [Terraform bootstrapping tutorial](https://www.buildon.aws/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst/) - we won't be covering any of the details here, just following the steps, if you would like to understand more, we recommend working through that tutorial first. You can continue with this tutorial after finishing the bootstrapping one, just don't follow the cleanup steps - just skip to the [next section](#setting-up-the-new-aws-environment-accounts). Here is a condensed version of all the steps.
+As a first step, we need to set up a CI/CD pipeline for all the shared infrastructure in our `main` account. We will be using the approach from the [Terraform bootstrapping tutorial](https://www.buildon.aws/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst/). Please note, we won't be covering any of the details mentioned in that tutorial. We are just following the steps, if you would like to understand more, we recommend working through that tutorial first. You can continue with this tutorial after finishing the bootstrapping one, just don't follow the cleanup steps - just skip to the [next section](#setting-up-the-new-aws-environment-accounts). Here is a condensed version of all the steps.
 
 To set up our pipeline, make sure you are logged into your AWS and CodeCatalyst accounts to set up our project, environment, repository, and CI/CD pipelines. In CodeCatalyst:
 
@@ -73,14 +74,14 @@ wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping
 wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/variables.tf
 ```
 
-We will now create the required infrastructure to store our state file using S3 as a backend, DynamoDB for managing the lock to ensure only one change is made at a time, and setting up two IAM roles for our workflows to use. Edit `variables.tf` and change the `state_file_bucket_name` value to a unique value - for this tutorial, we will use `tf-multi-account` - you should use a different, unique bucket name. We need to initialize the Terraform backend, and then apply these changes to create the state file, lock table, and IAM roles for our CI/CD pipeline. If you would like to use a different AWS region, you can update the `aws_region` variable with the appropriate string. Run the following commands for this:
+We will now create the required infrastructure to store our state file using [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) as a backend, [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) for managing the lock to ensure only one change is made at a time, and setting up two IAM roles for our workflows to use. Edit `variables.tf` and change the `state_file_bucket_name` value to a unique value - for this tutorial, we will use `tf-multi-account` - you should use a different, unique bucket name. We need to initialize the Terraform backend, and then apply these changes to create the state file, lock table, and IAM roles for our CI/CD pipeline. If you would like to use a different AWS region, you can update the `aws_region` variable with the appropriate string. Run the following commands for this:
 
 ```bash
 terraform init
 terraform apply
 ```
 
-We now have our resources tracked in a state file, but it stored locally in our Dev environment, and we need to configure it to use the S3 backend. We first need to add a backend configuration, and then migrate the state file to it. Use the following command to add it:
+We now have our resources tracked in a state file, but it is stored locally in our Dev environment, and we need to configure it to use the S3 backend. We first need to add a backend configuration, and then migrate the state file to it. Use the following command to add it:
 
 ```bash
 wget -P _bootstrap/ https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/terraform.tf
@@ -121,7 +122,7 @@ Navigate to `CI/CD` -> `Workflows` and confirm that the `main` branch workflow `
 
 ## Setting up the new AWS environment accounts
 
-Similar to the bootstrapping of the base infrastructure, we need to bootstrap the three new AWS account for our `dev`, `test`, and `prod` environments. We will use our `main-infra` repository to manage this for us. Since we already have a bucket for storing state files in, we will use the same one, but change the `key` in the `backend` configuration block for our environment accounts to ensure we don't overwrite the current one. As we will be using different AWS accounts, we need a mechanism for our workflows to be able to access them. We will be using the IAM role [assume](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) functionality. This works by adding a trust policy to the IAM roles in each of the environment accounts by specifying that our `main` account may assume the roles in our environment accounts, and only perform actions as defined by this role. We then add an additional policy to our existing IAM workflow roles in our `main` account allowing them to assume the equivalent role in each environment account. This means that the PR branch role can only assume the PR branch role in each account to prevent accidental infrastructure changes, and similarly the `main` branch role can only assume the equivalent `main` branch role. The diagram below visualizes the process:
+Similar to the bootstrapping of the base infrastructure, we need to bootstrap the three new AWS account for our `dev`, `test`, and `prod` environments. We will use our `main-infra` repository to manage this for us. Since we already have a bucket for storing state files in, we will use the same one, but change the `key` in the `backend` configuration block for our environment accounts to ensure we don't overwrite the current one. As we will be using different AWS accounts, we need a mechanism for our workflows to be able to access them. We will be using the IAM role [assume](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) functionality. This works by specifying that our main account may assume the roles in our environment accounts, and only perform actions as defined by this role. These actions are defined in a trust policy that is added to the IAM roles. We then add an additional policy to our existing IAM workflow roles in our `main` account allowing them to assume the equivalent role in each environment account. This means that the pull request (PR) branch role can only assume the PR branch role in each account to prevent accidental infrastructure changes, and similarly the `main` branch role can only assume the equivalent `main` branch role. The diagram below visualizes the process:
 
 ![Diagram showing the PR branch IAM role requesting temp credentials, and using them to assume the role in the dev account](./images/main_account_assuming_role_in_dev.png)
 
@@ -1183,7 +1184,7 @@ Once you have reviewed the changes, merge the PR by navigating to `Code`, `Pull 
 
 ## Clean up
 
-We have now reached the end of this tutorial, you can either keep the current setup and expand on it, or delete all the resources created if you are not. To clean up your environment, we will follow the following steps:
+We have now reached the end of this tutorial, and you can either keep the current setup and expand on it, or delete all the resources created if you are not. To clean up your environment, we will follow the following steps:
 
 1. In `environments-infra`, run `git checkout main` and `git pull` to ensure you have the latest version, then:
     1. `ENV=prod make destroy` and confirm
