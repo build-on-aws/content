@@ -24,7 +24,7 @@ Manually setting up and configuring the packages required to run a Python web ap
 | ✅ AWS experience      | Beginner                                                        |
 | ⏱ Time to complete    | 30 minutes                                                      |
 | 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/) eligible                                               |
-| 🧩 Prerequisites       | - [AWS account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws-preview.aka.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
+| 🧩 Prerequisites       | - [AWS account](https://aws.amazon.com/resources/create-account/)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws-preview.aka.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/sample-python-web-app)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-02-22                                                      |
