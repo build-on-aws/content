@@ -22,7 +22,7 @@ You can learn about real-world teams that enabled independent deployment in a mu
 
 I once had to coordinate the deploy of more than 20 services to production only because I added an element to an enumeration in one of those services. There were more than 20 pull requests in different teams and the order was important. A change that should have taken a morning took weeks to complete.
 
-That coupling and technical debt issue took a heavy toll and was a source of pain in the deploy process. We could never do that deploy on a Friday.
+That coupling and technical debt issue took a heavy toll and was a source of pain in the deploy process. 
 
 Mapping the coupling (even when it's inevitable), and identifying the costs related, is an activity that must be done continuously. This allows the team to be aware of the problem and build solutions to reduce and avoid coupling when possible.
 
