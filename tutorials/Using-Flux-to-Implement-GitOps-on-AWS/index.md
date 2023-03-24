@@ -51,29 +51,29 @@ There are three code repositories under the CodeCommit repository. One is `flux-
 
 **The basic workflow is:**
 
-1)  Coding engineers write code and push the final code to app-repo;
+-  Coding engineers write code and push the final code to app-repo;
 
-2)  Code changes in the app-repo trigger AWS CodePipeline;
+-  Code changes in the app-repo trigger AWS CodePipeline;
 
-3)  AWS CodePipeline edits and packages code, generates container images, and pushes them to the container image repository/ Amazon ECR.
+-  AWS CodePipeline edits and packages code, generates container images, and pushes them to the container image repository/ Amazon ECR.
 
-4)  The CD engine Flux running in the EKS environment regularly scans the ECR container image repository and pulls container image metadata for applications.
+-  The CD engine Flux running in the EKS environment regularly scans the ECR container image repository and pulls container image metadata for applications.
 
-5)  Automatically synchronize the new container image address to the application deployment file stored in microservices-repo via git commit/push when a new version of the container image detected.
+-  Automatically synchronize the new container image address to the application deployment file stored in microservices-repo via git commit/push when a new version of the container image detected.
 
-6)  Flux regularly pulls application configurations and deployment files from the flux-repo. Since the flux-repo repository references the microservices-repo, flux checks the consistency of the workload running state of the cluster with the expectations described in the microservices-repo files. If any difference, Flux will automatically enable the EKS cluster to synchronize the differences to ensure that workloads run in the expected state.
+-  Flux regularly pulls application configurations and deployment files from the flux-repo. Since the flux-repo repository references the microservices-repo, flux checks the consistency of the workload running state of the cluster with the expectations described in the microservices-repo files. If any difference, Flux will automatically enable the EKS cluster to synchronize the differences to ensure that workloads run in the expected state.
 
 **Table of best practices**
 
 Since we have explained the GitOps concept and the architecture of the CI/CD pipeline, we will use a case to complete this practice by going through the four modules below:
 
-- Deploy the cloud infrastructure using Infrastructure as Code (IaC).
+1/ Deploy the cloud infrastructure using Infrastructure as Code (IaC).
 
-- Deploy Flux CD on AWS EKS cluster
+2/ Deploy Flux CD on AWS EKS cluster
 
-- Deploy GitOps workflow using Flux CD
+3/ Deploy GitOps workflow using Flux CD
 
-- Implement automatic deployment based on images using GitOps workflow
+4/ Implement automatic deployment based on images using GitOps workflow
 
 ### 1．Deploy Cloud Infrastructure with IaC
 
@@ -142,9 +142,9 @@ export class QuickstartStack extends cdk.Stack {
 
 In the above codes, we created an EKS cluster, defined its NodeGroup, and added the AwsLoadBalancerController plugin.
 
->**Best Practice**: We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
-
-![CodePipelineStack ](./images/CodePipelineStack.png){:height="500%" width="500%"}
+>**Best Practice**: 
+>
+>We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
 
 <img src="./images/CodePipelineStack.png" width = "100%" height = "100%" alt="图片名称" align=center />
 
@@ -152,7 +152,9 @@ While deploying a stack with a CDK command-line tool is convenient, we recommend
 
 CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
->**Best Practice**: Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
+>**Best Practice**: 
+>
+>Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
 
 Then, we execute the `cdk deploy` command to deploy the stack.
 
