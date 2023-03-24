@@ -5,8 +5,8 @@ tags:
   DevOps
   GitOps
   FluxCD
-authorGithubAlias: betty714
-authorName: bettyzheng
+authorGithubAlias: betty714, tyyzqmf
+authorName: bettyzheng, Mingfei Que
 date: 2023-03-23
 ---
 
@@ -65,13 +65,13 @@ There are three code repositories under the CodeCommit repository. One is flux-r
 
 Since we have explained the GitOps concept and the architecture of the CI/CD pipeline, we will use a case to complete this practice by going through the four modules below:
 
-- Deploying cloud infrastructure using Infrastructure as Code (IaC).
+- Deploy the cloud infrastructure using Infrastructure as Code (IaC).
 
-- Deploying Flux CD on AWS EKS cluster
+- Deploy Flux CD on AWS EKS cluster
 
-- Deploying GitOps workflow using Flux CD
+- Deploy GitOps workflow using Flux CD
 
-- Implementing automatic deployment based on images using GitOps workflow
+- Implemente automatic deployment based on images using GitOps workflow
 
 ### 1．Deploy Cloud Infrastructure with IaC
 
@@ -82,9 +82,12 @@ In the cloud, coding engineers can use the AWS Cloud Development Kit (CDK) to bu
 #### 1.1 Create a Project with CDK CLI
 
 Create a TypeScript CDK project with cdk init, which will create the folder structure and install the modules that TypeScript CDK project needs.
+
+```
 mkdir -p ~/environment/quickstart
 cd ~/environment/quickstart
 cdk init --language typescript 
+```
 
 #### 1.2 Create an EKS cluster with EKS Blueprints
 
