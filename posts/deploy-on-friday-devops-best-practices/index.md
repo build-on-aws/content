@@ -1,36 +1,26 @@
 ---
 title: "Deploy on Friday! 12 DevOps Best Practices"
-description: Why not deploy on Friday? Learn the best practices from organizations ready to deploy on Fridays through real-world examples.
+description: Why not deploy on Fridays? These 12 best practices, each with real-world examples, will help you understand how DevOps culture and practices can collaborate to mitigate risk and reduce the pain of deploy, making it less risky.
 tags:
   - devops
-  - deploy
-  - tests
-  - automation
-  - rollback
-  - monitoring
-  - observability
 authorGithubAlias: mfpalla
 authorName: Marcelo Palladino
 date: 2023-03-15
 ---
 
-Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays (or on holiday eves, New Year's Eve, or any other date considered "important") simply because it was too risky. Everything seemed to make sense because I was afraid every time we deployed, the users felt the problems, the most experienced people on the team said that it was risky and, many times, the management people prohibited deploying on specific dates, unless it was to put out a fire.
-
-After a while, I understood the value of asking and understanding the "why" and, mainly, the "why not" of each thing. The answers to the "why?" or "why not?" in my experience have shown a lack of technical capabilities, well-established processes , measurement/evaluation capabilities, and cultural capabilities. Actions related to these capabilities aim to mitigate risks and, as a consequence, reduce the "fear of deploy" and increase organizational performance. Technical capabilities are by far the most exploited by organizations, especially in the early stages of DevOps adoption. It is possible to invest in automation of the deploy process to mitigate risks during deploy, for example. However, if the culture is not aligned or if there is not good communication between people on the teams, it is unlikely that the investment will impact the organization's performance in the long term.
-
-By embracing the DevOps culture, organizations must invest in technical capabilities, promote knowledge sharing and creation, and develop people and processes. In this article, I will share some examples of what should be avoided and practices to mitigate the risks and reduce the pain in the deployment process in organizations ready to deploy on Fridays.
+Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays -- or the day before any "important" day. It makes sense: you don't want your application to break when use will be high and no one is around to fix it. But the longer I worked in some technical and cultural capacities, the clearer it became that the risk of deploying on Fridays was significantly higher because of certain bad Devops practices. Look, deploying code always entails the risk of availability loss, but that risk can be significantly diminished by adopting these 12 best practices.
 
 ## Maintain independence between teams
 
-Avoid the need for synchronization and coordination meeting between the teams. This happens when the structure of the software in relation to the organizational structure do not allow the teams to work independently. I've been dismayed to see cases where a recurring meeting was required, where the goal was to define the order in which teams would make changes to services and the order to deploy. 
+I've been dismayed to see cases where a recurring meeting was required, where the goal was to define the order in which teams would make changes to services and the order to deploy. This happens when the structure of the software in relation to the organizational structure do not allow the teams to work independently.  
 
 Deploy processes that require synchronization and coordination activities must be identified and avoided, as they slow down teams and increase management costs. 
 
-You can learn about real-world teams that enabled independent deployment in a multi-service application reading [this article](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/) by Seth Eliot. Also, depending on your age, this may be the first time you've heard about "pager".
+You can learn about real-world teams that enabled independent deployment in a multi-service application reading the Seth Eliot's [article](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/). Also, depending on your age, this may be the first time you've heard about pager.
 
 ## Identify and avoid coupling
 
-It's like a fisherman's story, but it's true, I swear to you. I once had to coordinate the deploy of more than 20 services to production only because I added an element to an enumeration in one of those services. There were more than 20 pull requests in different teams and the order was important. A change that should have taken a morning took weeks to complete.
+I once had to coordinate the deploy of more than 20 services to production only because I added an element to an enumeration in one of those services. There were more than 20 pull requests in different teams and the order was important. A change that should have taken a morning took weeks to complete.
 
 That coupling and technical debt issue took a heavy toll and was a source of pain in the deploy process. We could never do that deploy on a Friday.
 
@@ -40,7 +30,7 @@ Mapping the coupling (even when it's inevitable), and identifying the costs rela
 
 ## Work in small batches deployed regularly
 
-A team I worked on wasted two weeks trying to stabilize software in January after a release freeze between Christmas and New Year's. The launch freeze was a request from the management team to minimize the risk of customers experiencing a service interruption during such, as they said, an important time of the year.
+A team I worked on wasted two weeks trying to stabilize software in January after a release freeze during December. The launch freeze was a request from the management team to minimize the risk of customers experiencing a service interruption during such, as they said, an "important time" of the year (Christmas and New Year's).
 
 That January was not a good start to the year for the team and neither for the customers. There were so many service disruptions, the planning for that quarter was compromised due to the unexpected workload, and job satisfaction dropped dramatically during that period.
 
@@ -56,17 +46,15 @@ Clare Liguori addressed this topic in [her article](https://aws.amazon.com/build
 
 ## Encourage thoughtful code reviews
 
-Some of my best learning experiences have come through rigorous code reviews. I can't remember how many times we discovered significant issues during the code review process. Code reviews minimize risk, decrease the uncertainty, improve quality, enable knowledge sharing, and encourage consistent design. They allow people who know more to demonstrate this in practice, transferring tacit knowledge through socialization.
+Some of my best learning experiences have come through rigorous code reviews. I can't remember how many times we discovered significant issues during the code review process. Code reviews minimize risk, decrease the uncertainty, improve quality, enable knowledge sharing, and encourage consistent design. They allow people who know more to demonstrate this in practice, transferring tacit knowledge through socialization. Code reviews do take time, and some teams avoid them as a result. But they save time in the long run by ensuring higher quality deployments, fewer rollbacks, and preserving the organization's reputation. 
 
-The high bar in the code review has a nice side effect of forcing pull requests to contain good descriptions and comments explaining why the changes are made and describing the expected side effects, if any.
-
-It's an example of a process that depends on a well-established feedback culture in the organization. For instance, team members should feel comfortable denying a large pull request, or pull requests with multiple objectives. No egos are wanted here. **People should know the fine line between objectivity and subjectivity and respect personal preferences over their biases about how they would do something.** Code reviews should use positive language and focus on knowledge sharing, but they should be thoughtful and technically rigorous.
+The high bar in the code review has a nice side effect of forcing pull requests to contain good descriptions and comments explaining why the changes are made and describing the expected side effects, if any. It's an example of a process that depends on a well-established feedback culture in the organization. For instance, team members should feel comfortable denying a large pull request, or pull requests with multiple objectives. No egos are wanted here. **People should know the fine line between objectivity and subjectivity and respect personal preferences over their biases about how they would do something.** Code reviews should use positive language and focus on knowledge sharing, but they should be thoughtful and technically rigorous.
 
 Code should only go into production after going through a rigorous review process.
 
 ## Automate deployment processes
 
-I heard about a document created by a development team that basically consisted of a series of manual steps that the operations team should perform to do the entire deployment process. Just imagine the friction of this operation. Now consider the differences between environments and add in a dash of cultural issues. Imagine doing a deploy like that on Fridays?
+I heard about a document created by a development team that basically consisted of a series of manual steps that the operations team should perform to do the entire deployment process. Just imagine the friction of this operation. Now consider the differences between environments and add in a dash of cultural issues. Very, very risky. It doesn't matter if it's Friday or not.
 
 Depending on the case, it is acceptable to have some runbook to do some task during the deployment process. However, ideally, there should be no latency involved in the deploy process, resulting from technical aspects or manual interventions.
 
@@ -99,7 +87,7 @@ In [this video](https://www.youtube.com/watch?v=uouw9QxVrE8) from AWS re:Invent 
 A canary release is a deployment strategy that allows teams release changes to a reduced number of users.
 Using this strategy, the team can deploy the new version incrementally, slowly making it visible to new users. This allows gain confidence in the deployment, allowing changes to be monitored and observed with low risk, before they impact the entire user base.
 
-Organizations ready to deploy on Fridays master the ability to deploy to a small number of users. 
+Organizations "ready to deploy on Fridays" master the ability to deploy to a small number of users. 
 
 ## Ensure software is easy to monitor and observe
 
