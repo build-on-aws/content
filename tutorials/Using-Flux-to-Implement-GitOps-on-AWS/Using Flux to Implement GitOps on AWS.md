@@ -46,7 +46,7 @@ The overall CI/CD pipeline for the best practices of this case is shown in the f
 
 ![overview](./images/overview.png)
 
-There are three code repositories under the CodeCommit repository. One is flux-repo , the configuration repository for Flux CD, which is used to define Flux-related resources. The other is microservices-repo, which saves microservice application configurations and deployment files. The third one is the source repository app-repo for business services. In this post, a front-end project will be as an example. We used the CodePipeline for continuous integration in the CI/CD pipeline, built and stored the docker image in Amazon ECR, and deployed the CD engine Flux as pod in the Amazon EKS environment.
+There are three code repositories under the CodeCommit repository. One is `flux-repo`, the configuration repository for Flux CD, which is used to define Flux-related resources. The other is `microservices-repo`, which saves microservice application configurations and deployment files. The third one is the source repository `app-repo` for business services. In this post, a front-end project will be as an example. We used the CodePipeline for continuous integration in the CI/CD pipeline, built and stored the docker image in Amazon ECR, and deployed the CD engine Flux as pod in the Amazon EKS environment.
 
 **The basic workflow is:**
 
@@ -72,11 +72,11 @@ Since we have explained the GitOps concept and the architecture of the CI/CD pip
 
 - Deploy GitOps workflow using Flux CD
 
-- Implemente automatic deployment based on images using GitOps workflow
+- Implement automatic deployment based on images using GitOps workflow
 
 ### 1．Deploy Cloud Infrastructure with IaC
 
-One of the fundamental principles of the DevOps is that infrastructure get “equal status” with codes. Infrastructure as Code (IaC) use code to enables cloud infrastructure deployment and governance of the cloud environment. Coding engineers use configuration files or codes to define the infrastructure and create it by coding to ensure the consistency and repeatability. With IaC, coding engineers also manage the lifecycle of resources, such as hosting infrastructure definitions in version control repositories, and using Continuous Integration/Continuous Deployment (CI/CD) that is compatible with app coding for changing the definition of of IaC, synchronizing the environments (e.g., development, testing, production) with the changes of the IaC codes. Additionally, automatic rollback is possible in case of failures and drift detection helps to identify differences from the expected state.
+One of the fundamental principles of the DevOps is that infrastructure get **equal status** with codes. Infrastructure as Code (IaC) use code to enables cloud infrastructure deployment and governance of the cloud environment. Coding engineers use configuration files or codes to define the infrastructure and create it by coding to ensure the consistency and repeatability. With IaC, coding engineers also manage the lifecycle of resources, such as hosting infrastructure definitions in version control repositories, and using Continuous Integration/Continuous Deployment (CI/CD) that is compatible with app coding for changing the definition of of IaC, synchronizing the environments (e.g., development, testing, production) with the changes of the IaC codes. Additionally, automatic rollback is possible in case of failures and drift detection helps to identify differences from the expected state.
 
 In the cloud, coding engineers can use the AWS Cloud Development Kit (CDK) to build their infrastructure model with Python, Java, and Typescript. CDK provides advanced components that called Constructs, which preconfigure cloud resources with validated default values. It also allows coding engineers to write and share their custom constructs according to their organization's requirements. All of these will accelerate projects
 
@@ -85,8 +85,6 @@ In the cloud, coding engineers can use the AWS Cloud Development Kit (CDK) to bu
 Create a TypeScript CDK project with cdk init, which will create the folder structure and install the modules that TypeScript CDK project needs.
 
 ```shell
-mkdir -p ~/environment/quickstart
-cd ~/environment/quickstart
 cdk init --language typescript 
 ```
 
@@ -143,9 +141,7 @@ export class QuickstartStack extends cdk.Stack {
 
 In the above codes, we created an EKS cluster, defined its NodeGroup, and added the AwsLoadBalancerController plugin.
 
->**Best Practice**:
-> 
->We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
+>**Best Practice**: We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
 
 ![CodePipelineStack ](./images/CodePipelineStack.png)
 
@@ -154,14 +150,9 @@ While deploying a stack with a CDK command-line tool is convenient, we recommend
 
 CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
->**Best Practice**:
->
-> Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
+>**Best Practice**: Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
 
-Then, we execute the cdk deploy command to deploy the stack.
-```shell
-cdk deploy
-```
+Then, we execute the `cdk deploy` command to deploy the stack.
 
 Finally, we used a command to check whether the AWS Application Load Balancer has been installed successfully.
 ```shell
@@ -191,7 +182,7 @@ Flux CD is a continuous delivery tool that was developed by Weaveworks and open 
 
 The Flux CLI is a binary executable file for all platforms, which can be downloaded from the GitHub release page.
 ```shell
-curl -s https://fluxcd.io/install.sh \| sudo bash
+curl -s https://fluxcd.io/install.sh | sudo bash
 ```
 
 #### 2.2 Prepare AWS CodeCommit credentials
@@ -224,7 +215,7 @@ Install Flux on the Kubernetes cluster and configure it to manage itself from th
 flux bootstrap git \
   --url=https://git-codecommit.us-west-2.amazonaws.com/v1/repos/gitops \
   --username=__replace_with_your_Git_credential_username__ \
-  --password=__ replace_with_your_Git_credential_password__ \
+  --password=__replace_with_your_Git_credential_password__ \
   --token-auth=true \
   --path="./clusters/dev-cluster" \
   --components-extra=image-reflector-controller,image-automation-controller
@@ -344,9 +335,7 @@ resources:
 
 For the development environment, if there are differential needs, such as changing the number of service ports and replica numbers, just configure the differential settings in the overlays/development/kustomization.yaml file, without copying and modifying the existing complete-demo.yaml.
 
->**Best practice**
-> 
-> Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations for multiple environments, such as development, testing, and prod, under overlays. Support for multi-environment clusters does not adopt a multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy Flux recommended, which will make the code maintenance and merging less difficult.
+>**Best practice**: Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations for multiple environments, such as development, testing, and prod, under overlays. Support for multi-environment clusters does not adopt a multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy Flux recommended, which will make the code maintenance and merging less difficult.
 
 #### 3.4 Deploying Microservices with GitOps Workflow
 After completing the multi-cluster support for microservices, we need Flux to be aware that microservices’ configuration has been changed, so we register the CodeCommit address of the microservices repository (microservices-repo) in the Flux repository (flux-repo).
@@ -503,9 +492,7 @@ phases:
 
 ```
 
->**Best Practice**
->
-> We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
+>**Best Practice**: We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
 
 This CI process will automatically build an image and upload it to the ECR repository weaveworksdemos/front-end if any front-end code changed. The format of the image tag is **[branch]-[commit]-[build number]**.
 
@@ -584,10 +571,7 @@ patches:
 
 ```
 
->**Best practice**
->
-> We used AWS ECR to choose the automatic authentication mechanism， modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching.
-
+>**Best practice**: We used AWS ECR to choose the automatic authentication mechanism， modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching.
 
 ##### 4.2.4 Setting image update policy
 
@@ -660,7 +644,7 @@ Code changes to the front-end will automatically get CodePipeline to run.
 
 When the CodePipeline is completed, log in the AWS ECR console and query the weaveworksdemos/front-end image version:
 
-![image-20230323222247576](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222247576.png)
+![ECRImage](./images/ECRImage.png)
 
 ##### 4.3.4 Verify Flux Image Information 
 
