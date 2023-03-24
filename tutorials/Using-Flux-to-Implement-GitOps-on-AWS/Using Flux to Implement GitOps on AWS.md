@@ -97,8 +97,10 @@ You can use EKS Blueprints to easily bootstrap an EKS cluster with Amazon EKS ad
 
 Run the following codes to install project dependencies.
 
-| npm install @aws-quickstart/eks-blueprints@1.3.0 typescript@~4.8.4 --save |
-|---------------------------------------------------------------------------|
+```
+npm install @aws-quickstart/eks-blueprints@1.3.0 typescript@~4.8.4 --save
+
+```
 
 Open lib/quickstart-stack.ts and write the EKS Blueprints codes.
 
