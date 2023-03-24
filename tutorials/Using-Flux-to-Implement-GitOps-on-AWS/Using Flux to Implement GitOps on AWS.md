@@ -6,7 +6,7 @@ tags:
   GitOps
   FluxCD
 authorGithubAlias: betty714, tyyzqmf
-authorName: bettyzheng, Mingfei Que
+authorName: Betty Zheng, Mingfei Que
 date: 2023-03-23
 ---
 
@@ -117,12 +117,12 @@ In the above codes, we created an EKS cluster, defined its NodeGroup, and added 
 
 While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline responsible for deploying and updating the EKS infrastructure. This makes it easier to deploy development, testing, and production environments in different regions with the framework's code pipeline stack.
 
-CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically build, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
+CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
-| Best Practice: Defining infrastructure with CDK code and using pipelines to manage changes in multiple clusters that is also a form of implementing the GitOps concept. |
+| Best Practice: Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept. |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-Then, we execute the cdk deploy command to deploy the stack.
+Then, we execute the `cdk deploy` to deploy the stack.
 
 | cdk deploy |
 |------------|
@@ -164,13 +164,13 @@ The Flux CLI is a binary executable file for all platforms, which can be downloa
 | curl -s https://fluxcd.io/install.sh \| sudo bash |
 |---------------------------------------------------|
 
-#### 2.2 Preparing AWS CodeCommit credentials
+#### 2.2 Prepare AWS CodeCommit credentials
 
 ![image-20230323221028266](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221028266.png)
 
 
 
-#### 2.3 Installing Flux on the cluster
+#### 2.3 Install the Flux on the cluster
 
 ![image-20230323221056360](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221056360.png)
 
