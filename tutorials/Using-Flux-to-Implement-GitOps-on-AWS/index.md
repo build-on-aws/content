@@ -145,6 +145,8 @@ In the above codes, we created an EKS cluster, defined its NodeGroup, and added 
 
 ![CodePipelineStack ](./images/CodePipelineStack.png){:height="500%" width="500%"}
 
+<img src="./images/CodePipelineStack.png" width = "100%" height = "100%" alt="图片名称" align=center />
+
 While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline for deploying and updating the EKS infrastructure. This makes it easier to deploy development,testing and production across regions.
 
 CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
