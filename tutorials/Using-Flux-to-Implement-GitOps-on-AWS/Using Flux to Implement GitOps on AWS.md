@@ -61,7 +61,7 @@ There are three code repositories under the CodeCommit repository. One is flux-r
 
 6)  Flux regularly pulls application configurations and deployment files from the flux-repo. Since the flux-repo repository references the microservices-repo, flux checks the consistency of the workload running state of the cluster with the expectations described in the microservices-repo files. If any difference, Flux will automatically enable the EKS cluster to synchronize the differences to ensure that workloads run in the expected state.
 
-**Table of contents of best practices**
+**Table of best practices**
 
 Since we have explained the GitOps concept and the architecture of the CI/CD pipeline, we will use a case to complete this practice by going through the four modules below:
 
@@ -73,17 +73,20 @@ Since we have explained the GitOps concept and the architecture of the CI/CD pip
 
 - Implementing automatic deployment based on images using GitOps workflow
 
-### 1．Deploying Cloud Infrastructure with IaC
+### 1．Deploy Cloud Infrastructure with IaC
 
 One of the fundamental principles of the DevOps is that infrastructure get “equal status” with codes. Infrastructure as Code (IaC) use code to enables cloud infrastructure deployment and governance of the cloud environment. Coding engineers use configuration files or codes to define the infrastructure and create it by coding to ensure the consistency and repeatability. With IaC, coding engineers also manage the lifecycle of resources, such as hosting infrastructure definitions in version control repositories, and using Continuous Integration/Continuous Deployment (CI/CD) that is compatible with app coding for changing the definition of of IaC, synchronizing the environments (e.g., development, testing, production) with the changes of the IaC codes. Additionally, automatic rollback is possible in case of failures and drift detection helps to identify differences from the expected state.
 
 In the cloud, coding engineers can use the AWS Cloud Development Kit (CDK) to build their infrastructure model with Python, Java, and Typescript. CDK provides advanced components that called Constructs, which preconfigure cloud resources with validated default values. It also allows coding engineers to write and share their custom constructs according to their organization's requirements. All of these will accelerate projects
 
-#### 1.1 Creating a Project with CDK CLI
+#### 1.1 Create a Project with CDK CLI
 
 Create a TypeScript CDK project with cdk init, which will create the folder structure and install the modules that TypeScript CDK project needs.
+mkdir -p ~/environment/quickstart
+cd ~/environment/quickstart
+cdk init --language typescript 
 
-#### 1.2 Creating an EKS cluster with EKS Blueprints
+#### 1.2 Create an EKS cluster with EKS Blueprints
 
 **EKS Blueprints** helps you compose complete EKS clusters that are fully bootstrapped with the operational software that is needed to deploy and operate workloads. With EKS Blueprints, you describe the configuration for the desired state of your EKS environment, such as the control plane, worker nodes, and Kubernetes add-ons, as an IaC blueprint. Once a blueprint is configured, you can use it to stamp out consistent environments across multiple AWS accounts and Regions using continuous deployment automation.
 
