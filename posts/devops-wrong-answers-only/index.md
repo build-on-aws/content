@@ -7,7 +7,7 @@ tags:
   - automation
 authorGithubAlias: setheliot
 authorName: Seth Eliot
-date: 2023-03-22
+date: 2023-03-24
 ---
 Software teams have been struggling  for ages with the questions I pose here, and in that time we have all witnessed our share of bad answers from unrealistic management - or even misguided senior engineers. Let’s see why they just don’t work, and figure out the better answers together.
 
