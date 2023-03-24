@@ -5,6 +5,7 @@ tags:
   DevOps
   GitOps
   FluxCD
+  AWS EKS
 authorGithubAlias: betty714, tyyzqmf
 authorName: Betty Zheng, Mingfei Que
 date: 2023-03-23
@@ -143,7 +144,9 @@ In the above codes, we created an EKS cluster, defined its NodeGroup, and added 
 
 >**Best Practice**: We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
 
-![CodePipelineStack ](./images/CodePipelineStack.png)
+![CodePipelineStack ](./images/CodePipelineStack.png){:height="500%" width="500%"}
+
+<img src="./images/CodePipelineStack.png" width = "100%" height = "100%" alt="图片名称" align=center />
 
 While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline for deploying and updating the EKS infrastructure. This makes it easier to deploy development,testing and production across regions.
 
@@ -268,25 +271,27 @@ In this section, we used the flux bootstrap command to install Flux on the Kuber
 
 ### 3．Deploy GitOps Workflow with Flux CD
 
-For EKS with GitOps CI/CD practices and workloads running on it, configuration modifications and status changes to the EKS cluster and workloads stem from the code changes in Git (triggered by git push, or pull request and finally delivered, GitOps recommending the use of pull request), rather than directly manipulating the cluster with kubectl create/apply or helm install/upgrade as in traditional CI/CD pipelines initiated by the CI engine. Therefore, through the GitOps approach, we streamlined the traditional CI/CD pipeline to build a more efficient and simpler GitOps CI/CD pipeline.
+For GitOps CI/CD pipeline,  configuration modifications and status changes to EKS clusters and workloads running on it stem from the code changes in Git (triggered by git push or pull request. GitOps recommends pull request). The traditional CI/CD pipeline works by the CI engine triggering kubectl create/apply or helm install/upgrade to deploy the cluster.Therefore, we believe that GitOps builds a more efficient and concise CI/CD pipeline.
+
 
 > **Best practice**
 > 
-> Flux regulaly pulls the application configurations and deployment files in the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
+> Flux regularly pulls the configurations and deployment files from the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
+> Flux regularly pulls the application configurations and deployment files in the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
 
-We will demonstrate a specific application, sock shop, through practical exercises to show how it achieves continuous integration and delivery on a GitOps CI/CD pipeline.
+We will demonstrate a specific application-"sock shop" and practical exercises to show how it achieves continuous integration and delivery on a GitOps CI/CD pipeline.
 
 #### 3.1 About Sock Shop
 
-We use the user-facing section of the sock shop online store as an sample application for demonstrating and testing of microservices and cloud-native technologies. It is built with Spring Boot, Go Kit and Node and packaged in Docker containers. As a "Microservice Standard Demo", it will provide:
+We use the user-facing section of the sock shop online store as an sample. It is built with Spring Boot, Go Kit and Node. And it is packaged in Docker containers. As a "Microservice Standard Demo", it will provide:
 
-- Best practices for microservices (including examples of mistakes)
+- Best practices for microservices deployment (including examples of mistakes)
 
-- Cross-platform deployment capabilities
+- capabilities on Cross-platform deployment 
 
-- Showing the advantages of continuous integration/deployment
+- showing the advantages of continuous integration/deployment
 
-- Showing the complementary nature of DevOps and microservices
+- Demonstrate the complementary nature of DevOps and microservices
 
 - Providing a "real" testable application for various orchestration platforms
 
@@ -296,15 +301,15 @@ The reference architecture is as follows:
 
 #### 3.2 About Kustomize
 
-In addition to building the GitOps workflow, we also need to understand the applications management approach in K8s. Traditional resource inventory-based management (yaml) becomes increasingly difficult to maintain as system complexity and environment complexity increase. Multiple business applications, multiple environments (development, testing, pre-release, production), and a large number of yaml resource inventories need to be maintained and managed. Although Helm can solve some pain points, such as unified management of scattered resource files, application distribution, upgrade, rollback, etc., dealing with tiny differences between the environments in Helm is more complex and requires a complex DSL (template syntax) syntax, with a high learning curve. Therefore, the declarative configuration management tool Kustomize was born. Kustomize helps manage a large number of Kubernetes YAML resources for applications in different environments or teams in a lightweight way, and manage the nuances among the environments, making resource configurations reusable, reducing the workload of copy and change, and the error rate of configuration. The entire application configuration process does not require learning additional template syntax.
+In addition to setting up the GitOps workflow, we also need to understand how to configure Kubernetes. Traditional resource inventory-based management (yaml) becomes increasingly difficult to maintain as system complexity and environment complexity increase. complex business use cases, multiple environments (development, testing, pre-release, production), and a large number of yaml resource inventories need to be maintained and managed. Although Helm can solve some pain points, such as unified management of scattered resource files, application distribution, upgrade, rollback, etc., But Helm is hard to deal with small differences between environments. It also requires mastering complex DSL (template syntax) syntax, which is a high  barrier to sart.Therefore, the declarative configuration management tool-Kustomize was born. Kustomize helps teams manage large amounts of Kubernetes YAML resources across different environments and teams. It helps teams manage small differences across environments in a lightweight way, making resource configurations reusable, reducing copy and change effort, and also greatly reducing configuration errors. The entire application configuration process requires no additional learning of template syntax.
 
 **Kustomize solves the above problems in the following ways:**
 
-- Kustomize maintains application configuration for different environments through Base & Overlays.
+- Kustomize maintains application configuration across different environments through Base & Overlays.
 
-- Kustomize uses patch to reuse Base configuration and implements resource reuse by describing the differences between Overlay and Base application configurations.
+- Kustomize uses Patch to reuse Base configuration and implements, and resource reuse is achieved through the difference section between the Overlay description and the Base application configuration.
 
-- Kustomize manages native Kubernetes YAML files, without learning additional DSL syntax.
+- Kustomize manages native Kubernetes YAML files, without additional learning DSL syntax.
 
 According to the official website, Kustomize has become a native configuration management tool for Kubernetes, allowing users to customize application configurations without templates. Kustomize uses native K8s concepts to help create and reuse resource configurations (YAML), allowing users to use an application description file (YAML) as the basis (Base YAML) and then generate the required description file for the final deployed application through Overlays.
 
@@ -312,7 +317,7 @@ According to the official website, Kustomize has become a native configuration m
 
 #### 3.3 Multi-cluster Configuration
 
-With the understanding to the configuration management tool Kustomize, we use the Kustomization (base, overlays) to enable a multi-cluster deployment transformation.
+With the understanding to the configuration management tool-Kustomize, we use the Kustomization (base, overlays) to enable a multi-cluster deployment transformation.
 
 We created two directories in the microservice project: the base directory to store the complete resource configuration (YAML) files, and the overlays directory to store the different environment or cluster's differential configuration.
 
@@ -332,11 +337,13 @@ resources:
 
 ```
 
-For the development environment, if there are differential needs, such as changing the number of service ports and replica numbers, just configure the differential settings in the overlays/development/kustomization.yaml file, without copying and modifying the existing complete-demo.yaml.
+For the development environment, if there are differential requirement, such as changing the number of service ports and replica , just configure the differential settings in the overlays/development/kustomization.yaml file, without copying and modifying the existing complete-demo.yaml.
 
->**Best practice**: Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations for multiple environments, such as development, testing, and prod, under overlays. Support for multi-environment clusters does not adopt a multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy Flux recommended, which will make the code maintenance and merging less difficult.
+>**Best practice**: 
+>
+>Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations across multiple environments, such as development, testing, and prod under overlays. The Support for  clusters across multi-environment does not adopt the multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy that Flux recommended, which will make the code maintenance and merging less difficult.
 
-#### 3.4 Deploying Microservices with GitOps Workflow
+#### 3.4 Deploy Microservices with GitOps Workflow
 After completing the multi-cluster support for microservices, we need Flux to be aware that microservices’ configuration has been changed, so we register the CodeCommit address of the microservices repository (microservices-repo) in the Flux repository (flux-repo).
 
 ##### 3.4.1 Adding the Microservices Repository Address 
@@ -378,7 +385,7 @@ spec:
 
 ##### 3.4.2 Adding CodeCommit Credentials
 
-Find the account and password for "Preparing AWS CodeCommit Credentials". Convert the value of the data to base64 encoding before executing the command.
+Find the account and password for "Prepare AWS CodeCommit Credentials". Convert the value of the data to base64 encoding before executing the command.
 
 Then open the file base/sock-shop/basic-access-auth.yaml, and replace **BASE64_USERNAME** and **BASE64_PASSWORD** with the generated base64 encoding:
 
@@ -398,7 +405,7 @@ data:
 
 ##### 3.4.3 Deployment
 
-With the microservice's Git address added in the Flux configuration repository, Flux will automatically scan for microservices’ configuration changes. If the code is committed, and Flux will find no microservices deployed in the cluster, and there is a mismatch with the Git repository definition, Flux will automatically deploy microservices in the cluster.
+With the microservice's Git address is added in the Flux configuration repository, Flux will automatically scan for microservices’ configuration changes. If the code is committed, and Flux will find no microservices deployed in the cluster, and there is a mismatch with the Git repository definition, Flux will automatically deploy microservices in the cluster.
 
 After committing the code, execute the command "flux get kustomizations -watch" and wait for Flux to update. When the READY status of all kustomizations is True, the deployment is complete.
 
@@ -446,13 +453,13 @@ Access the DNS name of AWS Load Balancer.
 
 #### 3.5 Summary
 
-In this section, we introduced a microservice business application, Sock Shop online store, and completed the multi-cluster configuration of the service. We also built a standard GitOps workflow based on Flux, which automatically synchronizes the target cluster with the changes in the configuration files to complete the microservice deployment in the EKS cluster. Meanwhile, we introduced a practical K8s configuration management tool, Kustomize, to manage the resource files of the application. Here is summary of this section:
+In this section, we introduced a microservice business application, Sock Shop online store, and completed the multi-cluster configuration. We also built a standard GitOps workflow based on Flux, which automatically synchronizes the target cluster with the changes in the configuration files to complete the microservice deployment in the EKS cluster. Meanwhile, we introduced a practical K8s configuration management tool-Kustomize, and how to manage the resource files of the application. Here is summary of this section:
 
-- Introduction to the microservice business application
+- Sock Shop Introduction
 
-- Introduction to the configuration management tool Kustomize (base, overlays) to modify the microservice multi-cluster deployment
+- learn a configuration management tool- Kustomize (base, overlays) and how to modify the microservice multi-cluster deployment
 
-- Building a GitOps workflow and deploying microservices.
+- Build a GitOps workflow and deploy microservices.
 
 ### 4．Image-Based Automated Deployment with GitOps Workflow
 
@@ -491,7 +498,9 @@ phases:
 
 ```
 
->**Best Practice**: We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
+>**Best Practice**: 
+>
+>We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
 
 This CI process will automatically build an image and upload it to the ECR repository weaveworksdemos/front-end if any front-end code changed. The format of the image tag is **[branch]-[commit]-[build number]**.
 
