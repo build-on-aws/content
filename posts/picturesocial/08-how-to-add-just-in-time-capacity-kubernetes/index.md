@@ -1,6 +1,6 @@
 ---
 title: Picturesocial - How to add just-in-time compute capacity to a Kubernetes Cluster
-description: Adding compute power to a Kubernetes Cluster could be challenging and scaling times may be uncertain. In this post we are going to learn about Karpenter, an open source project that helps to have the power you need just when you need it.
+description: Adding compute power to a Kubernetes Cluster can be challenging because of the lengthy delay between compute demand and instance availability. In this post we are going to learn about Karpenter, an open source project that helps to have the power you need just when you need it.
 tags:
   - kubernetes
   - containers
@@ -29,8 +29,8 @@ This may seem obvious for Serverless workloads, as its handled by the cloud prov
 ![POD and worker autoscaling in Kubernetes](images/08-pod-autoscaling-kubernetes.jpg "POD and worker autoscaling in Kubernetes")
 
 1. We have a node with 4 pods and around 35% of compute power free to scale current deployments.
-2. An increase in the demand made a deployment scale to one extra replicas. We now have a node with 5 pods and around 17% of compute power free to scale current deployments.
-3. Another increase in the demand made a deployment scale to one more replicas. We now have a node with 6 pods and around 5% of compute power free.
+2. An increase in the demand made a deployment scale to one extra replica. We now have a node with 5 pods and around 17% of compute power free to scale current deployments.
+3. Another increase in the demand made a deployment scale to one more replica. We now have a node with 6 pods and around 5% of compute power free.
 4. The demand is still going up and the auto-scaling rules forced Kubernetes Scheduler to add one more pod, but we don’t have compute power to serve the demand and we evicted the new pod.
 5. Kubernetes realizes that it needs more nodes and due to worker autoscaling rules it schedule a new EC2 instance and deploys the pod into the new node.
 
