@@ -115,7 +115,7 @@ In the above codes, we created an EKS cluster, defined its NodeGroup, and added 
 
 
 
-While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline responsible for deploying and updating the EKS infrastructure. This makes it easier to deploy development, testing, and production environments in different regions with the framework's code pipeline stack.
+While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline for deploying and updating the EKS infrastructure. This makes it easier to deploy development,testing and production across regions.
 
 CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
@@ -136,12 +136,12 @@ And the output is:
 
 ![image-20230323220923490](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323220923490.png)
 
-Finally, we used a command to check whether the AWS Application Load Balancer has been installed successfully.
+Finally, we used a command to check the AWS Application Load Balancer has been installed successfully.
 
 | kubectl get pod -n kube-system |
 |--------------------------------|
 
-Check the output to confirm that the deployment of the AWS Application Load Balancer is done.
+Check the output to confirm that the deployment of AWS Application Load Balancer is done.
 
 ![image-20230323220947758](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323220947758.png)
 
@@ -153,9 +153,9 @@ This section introduces the concept of IaC and creates a custom EKS cluster with
 
 - Defined an EKS cluster quickly with EKS Blueprint while adding the AWS Application Load Balancer plugin.
 
-### 2．Deploying Flux CD on Amazon EKS Cluster
+### 2．Deploy Flux CD on Amazon EKS Cluster
 
-Flux CD is a continuous delivery tool initially developed by Weaveworks and open-sourced to CNCF. It became successful due to its ability to sense Kubernetes changes and easy setup. The most significant feature it provides is allowing teams to manage their Kubernetes deployment declaratively. Flux CD synchronizes the Kubernetes manifest files stored in the source repository with the Kubernetes cluster by regularly polling the repository, and teams don't have to worry about running kubectl or monitoring the environment to see if they have deployed the right workload. Flux CD ensures that the Kubernetes cluster always stays in sync with the configuration defined in the source repository.
+Flux CD is a continuous delivery tool that was developed by Weaveworks and open sourced to CNCF. Today it is widely used because of its ability to sense Kubernetes changes and easy setup. One of important feature is that it allows teams to manage their Kubernetes deployments in a declarative way. Flux CD synchronizes the Kubernetes manifest files stored in the source repository with the Kubernetes cluster by regularly polling the repository, and teams don't have to worry about running kubectl or monitoring the environment to see if they have deployed the right workload. Flux CD ensures that the Kubernetes cluster always stays in sync with the configuration defined in the source repository.
 
 #### 2.1 Flux CLI Installation
 
@@ -210,7 +210,7 @@ In this section, we used the flux bootstrap command to install Flux on the Kuber
 
 - Installing Flux on an Amazon EKS cluster and enabling the image automatic update feature.
 
-### 3．Deploying GitOps Workflow with Flux CD
+### 3．Deploy GitOps Workflow with Flux CD
 
 For EKS with GitOps CI/CD practices and workloads running on it, configuration modifications and status changes to the EKS cluster and workloads stem from the code changes in Git (triggered by git push, or pull request and finally delivered, GitOps recommending the use of pull request), rather than directly manipulating the cluster with kubectl create/apply or helm install/upgrade as in traditional CI/CD pipelines initiated by the CI engine. Therefore, through the GitOps approach, we streamlined the traditional CI/CD pipeline to build a more efficient and simpler GitOps CI/CD pipeline.
 
