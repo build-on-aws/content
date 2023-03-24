@@ -2,9 +2,9 @@
 title: "Using Flux to Implement GitOps on AWS"
 description: GitOps is an effective way to achieve continuous deployment based on Kuberentes clusters while meeting enterprise-level requirements such as security,separation of privileges, auditability, and agility. We would like to use demo videos to share the best practices for GitOps based on AWS EKS. It includes :1/how to deploy Flux CD in AWS EKS, 2/how to use Flux CD to build a GitOps workflow, ,3/how to use Flux realize Multi-tenant management, and 4/how to automate deployment based image update. - DevOps - GitOps - FluxCD.
 tags:
-  - DevOps
-  - GitOps
-  - FluxCD
+  DevOps
+  GitOps
+  FluxCD
 authorGithubAlias: betty714
 authorName: bettyzheng
 date: 2023-03-23
