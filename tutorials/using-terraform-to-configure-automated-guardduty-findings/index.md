@@ -7,7 +7,7 @@
 | 💰 Cost to complete    | < $2.00 USD                                              |
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)|
 | ⏰ Last Updated        | 2023-03-06                                                      |
-| 💾 Code         | [Download the code](https://github.com/build-on-aws/bootstrapping-terraform-automation) |
+| 💾 Code         | [Download the code](https://github.com/build-on-aws/automating-amazon-guardduty-with-iac) |
 
 
 ## Table of Content
@@ -42,7 +42,7 @@ The process you will accomplish through this tutorial is:
 
 ## Prerequisites
 
-You will need an AWS account to complete this tutorial. If you do not have an AWS account, create a new AWS account to get started.
+You will need an AWS account to complete this tutorial. If you do not have an AWS account, create a new AWS account to get started.  You will also need to download the sample code provided above.
 
 ## Implementation
 
