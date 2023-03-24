@@ -38,12 +38,13 @@ GitOps has the following features compared to traditional continuous deployment.
 We believe GitOps is the ideal way to implement continuous deployment of Kuberentes-based clusters. The main reason is that we can go through the details of GitOps specific practices on Kuberentes.
 Based on GitOps method, Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the final state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify/deployment, observe/ alerts, and fix/operations. The process is like below:
 
-![why is GitOps](https://github.com/betty714/content/blob/1edd0f0b25f13ebf247f73e21702f9e89c4d0e7b/tutorials/Using-Flux-to-Implement-GitOps-on-AWS/images/why%20is%20GitOps.jpg))
+![why is GitOps](./images/why%20is%20GitOps.jpg))
+
 ## Amazon EKS-based Best Practices for GitOps 
 
 The overall CI/CD pipeline for the best practices of this case is shown in the figure below.
 
-![overview](https://github.com/betty714/content/blob/514c9da25c084b4e4c086018d1f36ae9ada57eaf/tutorials/Using-Flux-to-Implement-GitOps-on-AWS/images/overall%20cd:cd%20plipeline.png)
+![overview](./images/overview.png)
 
 There are three code repositories under the CodeCommit repository. One is flux-repo , the configuration repository for Flux CD, which is used to define Flux-related resources. The other is microservices-repo, which saves microservice application configurations and deployment files. The third one is the source repository app-repo for business services. In this post, a front-end project will be as an example. We used the CodePipeline for continuous integration in the CI/CD pipeline, built and stored the docker image in Amazon ECR, and deployed the CD engine Flux as pod in the Amazon EKS environment.
 
@@ -83,7 +84,7 @@ In the cloud, coding engineers can use the AWS Cloud Development Kit (CDK) to bu
 
 Create a TypeScript CDK project with cdk init, which will create the folder structure and install the modules that TypeScript CDK project needs.
 
-```
+```shell
 mkdir -p ~/environment/quickstart
 cd ~/environment/quickstart
 cdk init --language typescript 
@@ -97,53 +98,82 @@ You can use EKS Blueprints to easily bootstrap an EKS cluster with Amazon EKS ad
 
 Run the following codes to install project dependencies.
 
-```
+```shell
 npm install @aws-quickstart/eks-blueprints@1.3.0 typescript@~4.8.4 --save
-
 ```
 
-Open lib/quickstart-stack.ts and write the EKS Blueprints codes.
+Open `lib/quickstart-stack.ts` and write the EKS Blueprints codes.
 
-[TABLE]
+```ts
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as blueprints from '@aws-quickstart/eks-blueprints';
+import { KubernetesVersion } from 'aws-cdk-lib/aws-eks';
+
+export class QuickstartStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+    const account = props?.env?.account!;
+    const region = props?.env?.region!;
+
+    const clusterProvider = new blueprints.GenericClusterProvider({
+      version: KubernetesVersion.V1_23,
+      managedNodeGroups: [
+        {
+          id: "default-ng",
+          desiredSize: 2,
+          minSize: 1,
+          maxSize: 2,
+        }
+      ]
+    });
+
+    const cluster = blueprints.EksBlueprint.builder()
+      .clusterProvider(clusterProvider)
+      .account(account)
+      .region(region)
+      .addOns(
+        new blueprints.AwsLoadBalancerControllerAddOn,
+      )
+      .teams();
+  }
+}
+
+```
 
 In the above codes, we created an EKS cluster, defined its NodeGroup, and added the AwsLoadBalancerController plugin.
 
-| Best Practice: We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints. |
-|------------------------------------------------------------------------------------------------------------------------------------------------------|
+>**Best Practice**:
+> 
+>We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
 
-![image-20230323220830677](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323220830677.png)
-
+![CodePipelineStack ](./images/CodePipelineStack.png)
 
 
 While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline responsible for deploying and updating the EKS infrastructure. This makes it easier to deploy development, testing, and production environments in different regions with the framework's code pipeline stack.
 
 CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically build, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
-| Best Practice: Defining infrastructure with CDK code and using pipelines to manage changes in multiple clusters that is also a form of implementing the GitOps concept. |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+>**Best Practice**:
+>
+> Defining infrastructure with CDK code and using pipelines to manage changes in multiple clusters that is also a form of implementing the GitOps concept.
 
 Then, we execute the cdk deploy command to deploy the stack.
-
-| cdk deploy |
-|------------|
-
-After completing the cluster deployment, search for information
-
-| kubectl get ns |
-|----------------|
-
-And the output is:
-
-![image-20230323220923490](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323220923490.png)
+```shell
+cdk deploy
+```
 
 Finally, we used a command to check whether the AWS Application Load Balancer has been installed successfully.
-
-| kubectl get pod -n kube-system |
-|--------------------------------|
-
-Check the output to confirm that the deployment of the AWS Application Load Balancer is done.
-
-![image-20230323220947758](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323220947758.png)
+```shell
+$ kubectl get pod -n kube-system
+NAME                                           READY   STATUS    RESTARTS   AGE
+aws-load-balancer-controller-6bd49cfb7-2cvlk   1/1     Running   0          5m31s
+aws-load-balancer-controller-6bd49cfb7-7lcwd   1/1     Running   0          5m31s
+aws-node-9hsvz                                 1/1     Running   0          99m
+coredns-66cb55d4f4-gdcqg                       1/1     Running   0          106m
+coredns-66cb55d4f4-gmzjt                       1/1     Running   0          106m
+kube-proxy-wr5jn                               1/1     Running   0          99m
+```
 
 #### 1.3 Summary
 
@@ -160,29 +190,48 @@ Flux CD is a continuous delivery tool initially developed by Weaveworks and open
 #### 2.1 Flux CLI Installation
 
 The Flux CLI is a binary executable file for all platforms, which can be downloaded from the GitHub release page.
-
-| curl -s https://fluxcd.io/install.sh \| sudo bash |
-|---------------------------------------------------|
+```shell
+curl -s https://fluxcd.io/install.sh \| sudo bash
+```
 
 #### 2.2 Preparing AWS CodeCommit credentials
-
-![image-20230323221028266](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221028266.png)
-
-
+Create a user in our experiment and use CodeCommit as the Git source, we need HTTPS Git credentials for AWS CodeCommit.
 
 #### 2.3 Installing Flux on the cluster
+Clone the prepared GitOps codes.The project structure is as the follows:
 
-![image-20230323221056360](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221056360.png)
+```shell
+.
+├── apps                // Define Application
+│   ├── base            // Application Infrastructure Layer
+│   └── overlays        // Application Overlays Layer
+├── clusters            // Cluster configuration portal
+│   └── dev-cluster
+├── infrastructure      // Infrastructure Shared Components
+│   ├── base            // Infrastructure Infrastructure layer
+│   └── overlays        // Infrastructure Overlays layer
+└── README.md
 
-| Best practice: The project structure we recommend is dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays). |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+```
+
+> **Best practice**
+> 
+> The project structure we recommend is dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays).
 
 Install Flux on the Kubernetes cluster and configure it to manage itself from the Git repository with flux bootstrap. If there are Flux components on the cluster, the bootstrapping command will perform an upgrade as needed. The bootstrapper is idempotent, and the command can be safely run any number of times. Replace username and password in the command below with the HTTPS Git credentials for AWS CodeCommit.
 
-[TABLE]
+```shell
+flux bootstrap git \
+  --url=https://git-codecommit.us-west-2.amazonaws.com/v1/repos/gitops \
+  --username=__replace_with_your_Git_credential_username__ \
+  --password=__ replace_with_your_Git_credential_password__ \
+  --token-auth=true \
+  --path="./clusters/dev-cluster" \
+  --components-extra=image-reflector-controller,image-automation-controller
 
-| Note: Enable the image automatic update feature, add the --components-extra=image-reflector-controller,image-automation-controller parameter when bootstrapping Flux. |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+```
+
+> **Note**: Enable the image automatic update feature, add the --components-extra=image-reflector-controller,image-automation-controller parameter when bootstrapping Flux.
 
 Use **git pull** to check the updates pushed by the bootstrapper. Three new files will appear in the clusters/dev-cluster/flux-system directory of the Git repository:
 
@@ -193,12 +242,29 @@ Use **git pull** to check the updates pushed by the bootstrapper. Three new file
 - **kustomization.yaml**: multi-cluster configuration
 
 Check if Flux is installed successfully with **flux get kustomizations --watch**. The output will look similar to:
-
-![image-20230323221206157](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221206157.png)
-
+```shell
+$ flux get kustomizations --watch
+NAME            REVISION        SUSPENDED       READY   MESSAGE                          
+flux-system     master/83b7e66  False           True    Applied revision: master/83b7e66
+infrastructure  master/83b7e66  False           True    Applied revision: master/83b7e66
+```
 Check the components deployed by flux-system with **kubectl -n flux-system get pod,services**. The output will be as follows:
 
-![image-20230323221223718](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221223718.png)
+```shell
+$ kubectl -n flux-system get pod,services
+NAME                                               READY   STATUS    RESTARTS   AGE
+pod/helm-controller-88f6889c6-sblvd                1/1     Running   0          11m
+pod/image-automation-controller-6c5f7bbbd9-8xskk   1/1     Running   0          11m
+pod/image-reflector-controller-78949bb4b4-bqn4m    1/1     Running   0          11m
+pod/kustomize-controller-784bd54978-s82dq          1/1     Running   0          11m
+pod/notification-controller-648bbb9db7-627zs       1/1     Running   0          11m
+pod/source-controller-79f7866bc7-gdt95             1/1     Running   0          11m
+
+NAME                              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/notification-controller   ClusterIP   172.20.60.72     <none>        80/TCP    11m
+service/source-controller         ClusterIP   172.20.133.44    <none>        80/TCP    11m
+service/webhook-receiver          ClusterIP   172.20.196.178   <none>        80/TCP    11m
+```
 
 #### 2.4 Summary 
 
@@ -214,8 +280,9 @@ In this section, we used the flux bootstrap command to install Flux on the Kuber
 
 For EKS with GitOps CI/CD practices and workloads running on it, configuration modifications and status changes to the EKS cluster and workloads stem from the code changes in Git (triggered by git push, or pull request and finally delivered, GitOps recommending the use of pull request), rather than directly manipulating the cluster with kubectl create/apply or helm install/upgrade as in traditional CI/CD pipelines initiated by the CI engine. Therefore, through the GitOps approach, we streamlined the traditional CI/CD pipeline to build a more efficient and simpler GitOps CI/CD pipeline.
 
-| Best practice: Flux regulaly pulls the application configurations and deployment files in the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected. |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+> **Best practice**
+> 
+> Flux regulaly pulls the application configurations and deployment files in the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
 
 We will demonstrate a specific application, sock shop, through practical exercises to show how it achieves continuous integration and delivery on a GitOps CI/CD pipeline.
 
@@ -235,9 +302,7 @@ We use the user-facing section of the sock shop online store as an sample applic
 
 The reference architecture is as follows:
 
-![image-20230323221252945](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221252945.png)
-
-
+![SockShopArchitecture](./images/SockShopArchitecture.png)
 
 #### 3.2 About Kustomize
 
@@ -253,9 +318,7 @@ In addition to building the GitOps workflow, we also need to understand the appl
 
 According to the official website, Kustomize has become a native configuration management tool for Kubernetes, allowing users to customize application configurations without templates. Kustomize uses native K8s concepts to help create and reuse resource configurations (YAML), allowing users to use an application description file (YAML) as the basis (Base YAML) and then generate the required description file for the final deployed application through Overlays.
 
-![image-20230323221343232](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221343232.png)
-
-
+![AboutKustomize](./images/AboutKustomize.png)
 
 #### 3.3 Multi-cluster Configuration
 
@@ -263,35 +326,67 @@ With the understanding to the configuration management tool Kustomize, we use th
 
 We created two directories in the microservice project: the base directory to store the complete resource configuration (YAML) files, and the overlays directory to store the different environment or cluster's differential configuration.
 
-For example, in this case, the complete configuration file for the microservice is complete-demo.yaml, and we copyed it to the base directory.
-
-| cp deploy/kubernetes/complete-demo.yaml deploy/kubernetes/base/complete-demo.yaml |
-|-----------------------------------------------------------------------------------|
+For example, in this case, the complete configuration file for the microservice is complete-demo.yaml, and we copy it to the base directory.
+```shell
+cp deploy/kubernetes/complete-demo.yaml deploy/kubernetes/base/complete-demo.yaml
+```
 
 Then we reference the file through kustomization.yaml:
+```
+# deploy/kubernetes/base/kustomization.yaml
 
-[TABLE]
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./complete-demo.yaml
+
+```
 
 For the development environment, if there are differential needs, such as changing the number of service ports and replica numbers, just configure the differential settings in the overlays/development/kustomization.yaml file, without copying and modifying the existing complete-demo.yaml.
 
-| Best practice: Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations for multiple environments, such as development, testing, and prod, under overlays. Support for multi-environment clusters does not adopt a multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy Flux recommended, which will make the code maintenance and merging less difficult. |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+>**Best practice**
+> 
+> Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations for multiple environments, such as development, testing, and prod, under overlays. Support for multi-environment clusters does not adopt a multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy Flux recommended, which will make the code maintenance and merging less difficult.
 
 #### 3.4 Deploying Microservices with GitOps Workflow
-
-> After completing the multi-cluster support for microservices, we need Flux to be aware that microservices’ configuration has been changed, so we register the CodeCommit address of the microservices repository (microservices-repo) in the Flux repository (flux-repo).
+After completing the multi-cluster support for microservices, we need Flux to be aware that microservices’ configuration has been changed, so we register the CodeCommit address of the microservices repository (microservices-repo) in the Flux repository (flux-repo).
 
 ##### 3.4.1 Adding the Microservices Repository Address 
+We return to the Flux repository, under the application layer/apps directory:
+```shell
+.
+├── base
+│   ├── kustomization.yaml
+│   └── sock-shop
+│       ├── kustomization.yaml
+│       ├── namespace.yaml
+│       ├── rbac.yaml
+│       └── tenant.yaml
+└── overlays
+    └── development
+        ├── kustomization.yaml
+        └── sock-shop
+            └── kustomization.yaml
 
-> We return to the Flux repository, under the application layer/apps directory:
->
-> ![image-20230323221450479](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221450479.png)
->
-> 
->
-> Open the tenant.yaml file under apps/base/sock-shop/, and replace MICRO_SERVICES_REPO with the microservices address: https://git-codecommit.xxx.amazonaws.com/v1/repos/microservices-repo.
->
-> ![image-20230323221520073](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221520073.png)
+```
+Open the tenant.yaml file under apps/base/sock-shop/, and replace MICRO_SERVICES_REPO with the microservices address: https://git-codecommit.xxx.amazonaws.com/v1/repos/microservices-repo.
+
+```shell
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: sock-shop-tenant
+  namespace: sock-shop
+spec:
+  interval: 1m
+  url: __MICRO_SERVICES_REPO__
+  ref:
+    branch: main
+  secretRef:
+    name: microservices-basic-access-auth
+......
+
+```
 
 ##### 3.4.2 Adding CodeCommit Credentials
 
@@ -299,7 +394,19 @@ Find the account and password for "Preparing AWS CodeCommit Credentials". Conver
 
 Then open the file base/sock-shop/basic-access-auth.yaml, and replace **BASE64_USERNAME** and **BASE64_PASSWORD** with the generated base64 encoding:
 
-![image-20230323221556126](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221556126.png)
+```shell
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: microservices-basic-access-auth
+  namespace: sock-shop
+type: Opaque
+data:
+  username: __BASE64_USERNAME__
+  password: __BASE64_PASSWORD__
+
+```
 
 ##### 3.4.3 Deployment
 
@@ -309,11 +416,45 @@ After committing the code, execute the command "flux get kustomizations -watch" 
 
 Query the **pods and services** in the sock-shop namespace, shown as below:
 
-![image-20230323221656362](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221656362.png)
+```shell
+$ kubectl get pod,service -n sock-shop
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/carts-b4d4ffb5c-z4jrj           1/1     Running   0          5m28s
+pod/carts-db-6c6c68b747-jl5pd       1/1     Running   0          5m28s
+pod/catalogue-759cc6b86-qdmvc       1/1     Running   0          5m28s
+pod/catalogue-db-96f6f6b4c-zgp5z    1/1     Running   0          5m28s
+pod/front-end-5c89db9f57-cvbdl      1/1     Running   0          5m28s
+pod/orders-7664c64d75-lqwbm         1/1     Running   0          5m28s
+pod/orders-db-659949975f-qv7pl      1/1     Running   0          5m28s
+pod/payment-7bcdbf45c9-szrfq        1/1     Running   0          5m28s
+pod/queue-master-5f6d6d4796-nkktx   1/1     Running   0          5m28s
+pod/rabbitmq-5bcbb547d7-gzhn4       2/2     Running   0          5m28s
+pod/session-db-7cf97f8d4f-9mz6v     1/1     Running   0          5m28s
+pod/shipping-7f7999ffb7-95rlc       1/1     Running   0          5m27s
+pod/user-68df64db9c-kh247           1/1     Running   0          5m27s
+pod/user-db-6df7444fc-jlkp9         1/1     Running   0          5m27s
+
+NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP                                                                     PORT(S)             AGE
+service/carts          ClusterIP      172.20.33.124    <none>                                                                          80/TCP              5m29s
+service/carts-db       ClusterIP      172.20.75.163    <none>                                                                          27017/TCP           5m29s
+service/catalogue      ClusterIP      172.20.92.254    <none>                                                                          80/TCP              5m29s
+service/catalogue-db   ClusterIP      172.20.242.255   <none>                                                                          3306/TCP            5m29s
+service/front-end      LoadBalancer   172.20.55.188    k8s-sockshop-frontend-12345678910-012345678910abc.elb.us-east-1.amazonaws.com   80:30001/TCP        5m29s
+service/orders         ClusterIP      172.20.8.252     <none>                                                                          80/TCP              5m29s
+service/orders-db      ClusterIP      172.20.40.212    <none>                                                                          27017/TCP           5m29s
+service/payment        ClusterIP      172.20.6.218     <none>                                                                          80/TCP              5m29s
+service/queue-master   ClusterIP      172.20.153.80    <none>                                                                          80/TCP              5m29s
+service/rabbitmq       ClusterIP      172.20.99.37     <none>                                                                          5672/TCP,9090/TCP   5m29s
+service/session-db     ClusterIP      172.20.37.111    <none>                                                                          6379/TCP            5m29s
+service/shipping       ClusterIP      172.20.43.252    <none>                                                                          80/TCP              5m29s
+service/user           ClusterIP      172.20.220.174   <none>                                                                          80/TCP              5m29s
+service/user-db        ClusterIP      172.20.70.57     <none>                                                                          27017/TCP           5m29s
+
+```
 
 Access the DNS name of AWS Load Balancer.
 
-![](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323221725169.png)
+![SockShopWeb](./images/SockShopWeb.png)
 
 #### 3.5 Summary
 
@@ -332,15 +473,41 @@ We choose the front-end microservice of Sock Shop as an example to demonstrate t
 #### 4.1 Defining the CodePipeline CI
 
 Front-end is a pure front-end service of Node.js to support Docker image packaging. Add a buildspec.yml file to the front-end project source code to define the CI process executed in the CodePipeline:
+```yaml
+version: 0.2
 
-[TABLE]
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - AWS_ACCOUNT_ID=`echo $REPOSITORY_URI|cut -d"." -f1`
+      - AWS_DEFAULT_REGION=`echo $REPOSITORY_URI|cut -d"." -f4`
+      - echo $AWS_ACCOUNT_ID $AWS_DEFAULT_REGION
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_HOST
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=main-$COMMIT_HASH-$CODEBUILD_BUILD_NUMBER
+      - echo $IMAGE_TAG
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
 
-| Best Practice: We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild. |
-|-----------------------------------------------------------------------------------------------------------------------------------------|
+```
 
-This CI process will automatically build an image and upload it to the ECR repository weaveworksdemos/front-end if any front-end code changed. The format of the image tag is \[branch\]-\[commit\]-\[build number\].
+>**Best Practice**
+>
+> We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
 
-![image-20230323222106277](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222106277.png)
+This CI process will automatically build an image and upload it to the ECR repository weaveworksdemos/front-end if any front-end code changed. The format of the image tag is **[branch]-[commit]-[build number]**.
 
 #### 4.2 Image Auto-Updating
 
@@ -359,17 +526,35 @@ Next, we will complete the above operations one by one.
 ##### 4.2.1 Adding an image policy to the front-end of Git repository
 
 In the microservices-repo project, we will use Kustomization overlays in the DEV environment to replace the front-end microservice with a customized and updated version. Modify the file deploy/kubernetes/overlays/development/kustomization.yaml. (Note: replace **ACCOUNT_ID** with your own ACCOUNT_ID).
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+  - name: weaveworksdemos/front-end
+    newName: __ACCOUNT_ID__.dkr.ecr.us-west-2.amazonaws.com/weaveworksdemos/front-end # {"$imagepolicy": "sock-shop:sock-shop-front-end:name"}
+    newTag: latest # {"$imagepolicy": "sock-shop:sock-shop-front-end:tag"}
 
-[TABLE]
+```
 
-| Note: The annotation \$imagepolicy is mandatory, which is for locating. If Flux discovers the image version is changed , it will locate and modify the file content according to this annotation. |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+> **Note**: The annotation `$imagepolicy` is mandatory, which is for locating. If Flux discovers the image version is changed , it will locate and modify the file content according to this annotation.
 
 ##### 4.2.2 Registing the front-end of microservice under flux-repo 
 
 In the project flux-repo, create a new file apps/overlays/development/sock-shop/registry.yaml, and replace ACCOUNT_ID with your own ACCOUNT_ID.
+```yaml
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: sock-shop-front-end
+  namespace: sock-shop
+spec:
+  image: __ACCOUNT_ID__.dkr.ecr.xxxx.amazonaws.com/weaveworksdemos/front-end
+  interval: 1m0s
 
-[TABLE]
+```
 
 ##### 4.2.3 Configuring the access credentials for AWS ECR 
 
@@ -379,20 +564,81 @@ There are two methods available for AWS ECR credentials in Flux.
 
 - Refreshing credentials (stored in the cluster through Secret)regularly with CronJob
 
-| Best practice: We used AWS ECR to choose the automatic authentication mechanism， modify clusters/dev-cluster/flux-system/kustomization.yaml and add the --aws-autologin-for-ecr parameter through patching. |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - gotk-components.yaml
+  - gotk-sync.yaml
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --aws-autologin-for-ecr
+    target:
+      version: v1
+      group: apps
+      kind: Deployment
+      name: image-reflector-controller
+      namespace: flux-system
 
-[TABLE]
+```
+
+>**Best practice**
+>
+> We used AWS ECR to choose the automatic authentication mechanism， modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching.
+
 
 ##### 4.2.4 Setting image update policy
 
-Add file gitops/apps/overlays/development/sock-shop/policy.yaml. The following rules match image versions such as master-d480788-1, master-d480788-2, and master-d480788-3.
+Add file `gitops/apps/overlays/development/sock-shop/policy.yaml`. The following rules match image versions such as master-d480788-1, master-d480788-2, and master-d480788-3.
+```yaml
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: sock-shop-front-end
+spec:
+  imageRepositoryRef:
+    name: sock-shop-front-end
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<buidnumber>.*)'
+    extract: '$buidnumber'
+  policy:
+    numerical:
+      order: asc
 
-[TABLE]
+```
 
-Add file gitops/apps/overlays/development/sock-shop/image-automation.yaml. Flux's automatic image configuration will specify a Git repository for the application configuration, including branch, path, and other information.
+Add file `gitops/apps/overlays/development/sock-shop/image-automation.yaml`. Flux's automatic image configuration will specify a Git repository for the application configuration, including branch, path, and other information.
+```yaml
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: sock-shop-front-end
+spec:
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+    push:
+      branch: main
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: sock-shop-tenant
+    namespace: sock-shop
+  update:
+    path: ./deploy/kubernetes/overlays/development
+    strategy: Setters
 
-[TABLE]
+```
 
 #### 4.3 Release and Verify 
 
@@ -402,17 +648,13 @@ We verify the entire process of automatic image updates by modifying the front-e
 
 Change the footer of the front-end page, and modify the file: front-end/public/footer.html.
 
-![image-20230323222145784](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222145784.png)
-
-Commit changes.
-
-![image-20230323222206553](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222206553.png)
+![EditFrontend](./images/EditFrontend.png)
 
 ##### 4.3.2 Check CodePipeline 
 
 Code changes to the front-end will automatically get CodePipeline to run.
 
-![image-20230323222226636](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222226636.png)
+![CheckCodePipeline](./images/CheckCodePipeline.png)
 
 ##### 4.3.3 ECR Image Version Changing Confirmation
 
@@ -423,24 +665,36 @@ When the CodePipeline is completed, log in the AWS ECR console and query the wea
 ##### 4.3.4 Verify Flux Image Information 
 
 Through Flux CLI, check if the ImageRepository and ImagePolicy successfully retrieved the latest version.
+```shell
+$ flux get images all --all-namespaces
+NAMESPACE       NAME                                    LAST SCAN               SUSPENDED       READY   MESSAGE                        
+sock-shop       imagerepository/sock-shop-front-end     2022-09-18T14:46:45Z    False           True    successful scan, found 20 tags
 
-![image-20230323222336102](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222336102.png)
+NAMESPACE       NAME                            LATEST IMAGE                                                                                    READYMESSAGE                                                                                                                      
+sock-shop       imagepolicy/sock-shop-front-end 267314483271.dkr.ecr.us-west-2.amazonaws.com/weaveworksdemos/front-end:master-1f49071-24        True Latest image tag for '267314483271.dkr.ecr.us-west-2.amazonaws.com/weaveworksdemos/front-end' resolved to: master-1f49071-24
 
+NAMESPACE       NAME                                            LAST RUN                SUSPENDED       READY   MESSAGE                                                      
+sock-shop       imageupdateautomation/sock-shop-front-end       2022-09-18T14:43:51Z    False           True    no updates made; last commit 1ff6d91 at 2022-09-18T14:34:40Z
+
+```
 ##### 4.3.5 Microservice Source Code Automatically Updates 
 
 Flux automatically updated the front-end image version.The latest commit was made by fluxcdbot, and the image tag was successfully modified to the latest version: master-1f49071-24.
 
-![image-20230323222350967](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222350967.png)
+![SourceCodeAutomaticallyUpdate](./images/SourceCodeAutomaticallyUpdate.png)
 
 ##### 4.3.6 Verify Pod Image Version
 
 Verify the pod name with kubectl get pod -n sock-shop \| grep front-end. Check the pod details with kubectl describe pod/front-end-759476784b-9r2rt -n sock-shop \| grep Image: to confirm that the image version is updated. It shows as follows:
+```shell
+$ kubectl describe pod/front-end-759476784b-9r2rt -n sock-shop | grep Image:
+    Image:          267314483271.dkr.ecr.us-west-2.amazonaws.com/weaveworksdemos/front-end:master-1f49071-24
 
-![image-20230323222419526](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222419526.png)
+```
 
 ##### 4.3.7 Confirm the static page is up-to-date.
 
-![image-20230323222446340](/Users/betzheng/Library/Application Support/typora-user-images/image-20230323222446340.png)
+![ConfirmStaticPage](./images/ConfirmStaticPage.png)
 
 #### 4.5 Summary
 
