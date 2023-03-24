@@ -143,8 +143,7 @@ In the above codes, we created an EKS cluster, defined its NodeGroup, and added 
 
 >**Best Practice**: We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
 
-![CodePipelineStack ](./images/CodePipelineStack.png)
-
+![CodePipelineStack ](./images/CodePipelineStack.png){:height="500%" width="500%"}
 
 While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline for deploying and updating the EKS infrastructure. This makes it easier to deploy development,testing and production across regions.
 
