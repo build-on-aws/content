@@ -8,7 +8,7 @@ tags:
   - karpenter
 authorGithubAlias: develozombie
 authorName: Jose Yapur
-date: 2023-03-02
+date: 2023-03-27
 ---
 
 This is a 8-part series about Picturesocial:
