@@ -6,7 +6,7 @@ tags:
   GitOps
   FluxCD
 authorGithubAlias: betty714, tyyzqmf
-authorName: bettyzheng, Mingfei Que
+authorName: Betty Zheng, Mingfei Que
 date: 2023-03-23
 ---
 
@@ -150,13 +150,13 @@ In the above codes, we created an EKS cluster, defined its NodeGroup, and added 
 ![CodePipelineStack ](./images/CodePipelineStack.png)
 
 
-While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline responsible for deploying and updating the EKS infrastructure. This makes it easier to deploy development, testing, and production environments in different regions with the framework's code pipeline stack.
+While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline for deploying and updating the EKS infrastructure. This makes it easier to deploy development,testing and production across regions.
 
-CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically build, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
+CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
 >**Best Practice**:
 >
-> Defining infrastructure with CDK code and using pipelines to manage changes in multiple clusters that is also a form of implementing the GitOps concept.
+> Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
 
 Then, we execute the cdk deploy command to deploy the stack.
 ```shell
@@ -183,9 +183,9 @@ This section introduces the concept of IaC and creates a custom EKS cluster with
 
 - Defined an EKS cluster quickly with EKS Blueprint while adding the AWS Application Load Balancer plugin.
 
-### 2．Deploying Flux CD on Amazon EKS Cluster
+### 2．Deploy Flux CD on Amazon EKS Cluster
 
-Flux CD is a continuous delivery tool initially developed by Weaveworks and open-sourced to CNCF. It became successful due to its ability to sense Kubernetes changes and easy setup. The most significant feature it provides is allowing teams to manage their Kubernetes deployment declaratively. Flux CD synchronizes the Kubernetes manifest files stored in the source repository with the Kubernetes cluster by regularly polling the repository, and teams don't have to worry about running kubectl or monitoring the environment to see if they have deployed the right workload. Flux CD ensures that the Kubernetes cluster always stays in sync with the configuration defined in the source repository.
+Flux CD is a continuous delivery tool that was developed by Weaveworks and open sourced to CNCF. Today it is widely used because of its ability to sense Kubernetes changes and easy setup. One of important feature is that it allows teams to manage their Kubernetes deployments in a declarative way. Flux CD synchronizes the Kubernetes manifest files stored in the source repository with the Kubernetes cluster by regularly polling the repository, and teams don't have to worry about running kubectl or monitoring the environment to see if they have deployed the right workload. Flux CD ensures that the Kubernetes cluster always stays in sync with the configuration defined in the source repository.
 
 #### 2.1 Flux CLI Installation
 
@@ -194,10 +194,10 @@ The Flux CLI is a binary executable file for all platforms, which can be downloa
 curl -s https://fluxcd.io/install.sh \| sudo bash
 ```
 
-#### 2.2 Preparing AWS CodeCommit credentials
+#### 2.2 Prepare AWS CodeCommit credentials
 Create a user in our experiment and use CodeCommit as the Git source, we need HTTPS Git credentials for AWS CodeCommit.
 
-#### 2.3 Installing Flux on the cluster
+#### 2.3 Install the Flux on the cluster
 Clone the prepared GitOps codes.The project structure is as the follows:
 
 ```shell
@@ -276,7 +276,7 @@ In this section, we used the flux bootstrap command to install Flux on the Kuber
 
 - Installing Flux on an Amazon EKS cluster and enabling the image automatic update feature.
 
-### 3．Deploying GitOps Workflow with Flux CD
+### 3．Deploy GitOps Workflow with Flux CD
 
 For EKS with GitOps CI/CD practices and workloads running on it, configuration modifications and status changes to the EKS cluster and workloads stem from the code changes in Git (triggered by git push, or pull request and finally delivered, GitOps recommending the use of pull request), rather than directly manipulating the cluster with kubectl create/apply or helm install/upgrade as in traditional CI/CD pipelines initiated by the CI engine. Therefore, through the GitOps approach, we streamlined the traditional CI/CD pipeline to build a more efficient and simpler GitOps CI/CD pipeline.
 
