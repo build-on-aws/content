@@ -51,29 +51,21 @@ There are three code repositories under the CodeCommit repository. One is `flux-
 
 **The basic workflow is:**
 
--  Coding engineers write code and push the final code to app-repo;
-
--  Code changes in the app-repo trigger AWS CodePipeline;
-
--  AWS CodePipeline edits and packages code, generates container images, and pushes them to the container image repository/ Amazon ECR.
-
--  The CD engine Flux running in the EKS environment regularly scans the ECR container image repository and pulls container image metadata for applications.
-
--  Automatically synchronize the new container image address to the application deployment file stored in microservices-repo via git commit/push when a new version of the container image detected.
-
--  Flux regularly pulls application configurations and deployment files from the flux-repo. Since the flux-repo repository references the microservices-repo, flux checks the consistency of the workload running state of the cluster with the expectations described in the microservices-repo files. If any difference, Flux will automatically enable the EKS cluster to synchronize the differences to ensure that workloads run in the expected state.
+1. Coding engineers write code and push the final code to app-repo;
+2. Code changes in the app-repo trigger AWS CodePipeline;
+3. AWS CodePipeline edits and packages code, generates container images, and pushes them to the container image repository/ Amazon ECR.
+4. The CD engine Flux running in the EKS environment regularly scans the ECR container image repository and pulls container image metadata for applications.
+5. Automatically synchronize the new container image address to the application deployment file stored in microservices-repo via git commit/push when a new version of the container image detected.
+6. Flux regularly pulls application configurations and deployment files from the flux-repo. Since the flux-repo repository references the microservices-repo, flux checks the consistency of the workload running state of the cluster with the expectations described in the microservices-repo files. If any difference, Flux will automatically enable the EKS cluster to synchronize the differences to ensure that workloads run in the expected state.
 
 **Table of best practices**
 
 Since we have explained the GitOps concept and the architecture of the CI/CD pipeline, we will use a case to complete this practice by going through the four modules below:
 
-1/ Deploy the cloud infrastructure using Infrastructure as Code (IaC).
-
-2/ Deploy Flux CD on AWS EKS cluster
-
-3/ Deploy GitOps workflow using Flux CD
-
-4/ Implement automatic deployment based on images using GitOps workflow
+1. Deploy the cloud infrastructure using Infrastructure as Code (IaC).
+2. Deploy Flux CD on AWS EKS cluster
+3. Deploy GitOps workflow using Flux CD
+4. Implement automatic deployment based on images using GitOps workflow
 
 ### 1．Deploy Cloud Infrastructure with IaC
 
@@ -142,19 +134,17 @@ export class QuickstartStack extends cdk.Stack {
 
 In the above codes, we created an EKS cluster, defined its NodeGroup, and added the AwsLoadBalancerController plugin.
 
->**Best Practice**: 
->
->We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
+> **Note**
+> **Best Practice:** We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
 
-<img src="./images/CodePipelineStack.png" width = "100%" height = "100%" alt="图片名称" align=center />
+![CodePipelineStack](./images/CodePipelineStack.png)
 
 While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline for deploying and updating the EKS infrastructure. This makes it easier to deploy development,testing and production across regions.
 
 CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
->**Best Practice**: 
->
->Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
+> **Note**
+> **Best Practice:** Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
 
 Then, we execute the `cdk deploy` command to deploy the stack.
 
@@ -209,9 +199,8 @@ Clone the prepared GitOps codes.The project structure is as the follows:
 
 ```
 
-> **Best practice**
-> 
-> The project structure we recommend is dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays).
+> **Note**
+> **Best Practice:** The project structure we recommend is dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays).
 
 Install Flux on the Kubernetes cluster and configure it to manage itself from the Git repository with flux bootstrap. If there are Flux components on the cluster, the bootstrapping command will perform an upgrade as needed. The bootstrapper is idempotent, and the command can be safely run any number of times. Replace username and password in the command below with the HTTPS Git credentials for AWS CodeCommit.
 
@@ -226,7 +215,8 @@ flux bootstrap git \
 
 ```
 
-> **Note**: Enable the image automatic update feature, add the --components-extra=image-reflector-controller,image-automation-controller parameter when bootstrapping Flux.
+> **Warning** 
+> Enable the image automatic update feature, add the --components-extra=image-reflector-controller,image-automation-controller parameter when bootstrapping Flux.
 
 Use **git pull** to check the updates pushed by the bootstrapper. Three new files will appear in the clusters/dev-cluster/flux-system directory of the Git repository:
 
@@ -276,10 +266,8 @@ In this section, we used the flux bootstrap command to install Flux on the Kuber
 For GitOps CI/CD pipeline,  configuration modifications and status changes to EKS clusters and workloads running on it stem from the code changes in Git (triggered by git push or pull request. GitOps recommends pull request). The traditional CI/CD pipeline works by the CI engine triggering kubectl create/apply or helm install/upgrade to deploy the cluster.Therefore, we believe that GitOps builds a more efficient and concise CI/CD pipeline.
 
 
-> **Best practice**
-> 
-> Flux regularly pulls the configurations and deployment files from the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
-> Flux regularly pulls the application configurations and deployment files in the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
+> **Note**
+> **Best Practice:** Flux regularly pulls the configurations and deployment files from the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
 
 We will demonstrate a specific application-"sock shop" and practical exercises to show how it achieves continuous integration and delivery on a GitOps CI/CD pipeline.
 
@@ -341,9 +329,8 @@ resources:
 
 For the development environment, if there are differential requirement, such as changing the number of service ports and replica , just configure the differential settings in the overlays/development/kustomization.yaml file, without copying and modifying the existing complete-demo.yaml.
 
->**Best practice**: 
->
->Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations across multiple environments, such as development, testing, and prod under overlays. The Support for  clusters across multi-environment does not adopt the multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy that Flux recommended, which will make the code maintenance and merging less difficult.
+> **Note**
+> **Best Practice:** Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations across multiple environments, such as development, testing, and prod under overlays. The Support for  clusters across multi-environment does not adopt the multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy that Flux recommended, which will make the code maintenance and merging less difficult.
 
 #### 3.4 Deploy Microservices with GitOps Workflow
 After completing the multi-cluster support for microservices, we need Flux to be aware that microservices’ configuration has been changed, so we register the CodeCommit address of the microservices repository (microservices-repo) in the Flux repository (flux-repo).
@@ -500,9 +487,8 @@ phases:
 
 ```
 
->**Best Practice**: 
->
->We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
+> **Note**
+> **Best Practice:** We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
 
 This CI process will automatically build an image and upload it to the ECR repository weaveworksdemos/front-end if any front-end code changed. The format of the image tag is **[branch]-[commit]-[build number]**.
 
@@ -581,7 +567,8 @@ patches:
 
 ```
 
->**Best practice**: We used AWS ECR to choose the automatic authentication mechanism， modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching.
+> **Note**
+> **Best Practice:** We used AWS ECR to choose the automatic authentication mechanism， modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching.
 
 ##### 4.2.4 Setting image update policy
 
