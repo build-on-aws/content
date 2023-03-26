@@ -135,6 +135,7 @@ export class QuickstartStack extends cdk.Stack {
 In the above codes, we created an EKS cluster, defined its NodeGroup, and added the AwsLoadBalancerController plugin.
 
 > **Note**
+> 
 > **Best Practice:** We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
 
 ![CodePipelineStack](./images/CodePipelineStack.png)
@@ -144,6 +145,7 @@ While deploying a stack with a CDK command-line tool is convenient, we recommend
 CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, test, and deploy new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
 > **Note**
+> 
 > **Best Practice:** Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
 
 Then, we execute the `cdk deploy` command to deploy the stack.
@@ -200,6 +202,7 @@ Clone the prepared GitOps codes.The project structure is as the follows:
 ```
 
 > **Note**
+> 
 > **Best Practice:** The project structure we recommend is dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays).
 
 Install Flux on the Kubernetes cluster and configure it to manage itself from the Git repository with flux bootstrap. If there are Flux components on the cluster, the bootstrapping command will perform an upgrade as needed. The bootstrapper is idempotent, and the command can be safely run any number of times. Replace username and password in the command below with the HTTPS Git credentials for AWS CodeCommit.
@@ -267,6 +270,7 @@ For GitOps CI/CD pipeline,  configuration modifications and status changes to EK
 
 
 > **Note**
+> 
 > **Best Practice:** Flux regularly pulls the configurations and deployment files from the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
 
 We will demonstrate a specific application-"sock shop" and practical exercises to show how it achieves continuous integration and delivery on a GitOps CI/CD pipeline.
@@ -330,6 +334,7 @@ resources:
 For the development environment, if there are differential requirement, such as changing the number of service ports and replica , just configure the differential settings in the overlays/development/kustomization.yaml file, without copying and modifying the existing complete-demo.yaml.
 
 > **Note**
+> 
 > **Best Practice:** Flux will automatically merge the base configuration with the overlays configuration according to the environment during service deployment. What we recommend is to define differential configurations across multiple environments, such as development, testing, and prod under overlays. The Support for  clusters across multi-environment does not adopt the multiple repository/multiple branch strategy, but rather different paths to manage different clusters. This is also the strategy that Flux recommended, which will make the code maintenance and merging less difficult.
 
 #### 3.4 Deploy Microservices with GitOps Workflow
@@ -488,6 +493,7 @@ phases:
 ```
 
 > **Note**
+> 
 > **Best Practice:** We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
 
 This CI process will automatically build an image and upload it to the ECR repository weaveworksdemos/front-end if any front-end code changed. The format of the image tag is **[branch]-[commit]-[build number]**.
@@ -521,7 +527,8 @@ images:
 
 ```
 
-> **Note**: The annotation `$imagepolicy` is mandatory, which is for locating. If Flux discovers the image version is changed , it will locate and modify the file content according to this annotation.
+> **Note**
+> : The annotation `$imagepolicy` is mandatory, which is for locating. If Flux discovers the image version is changed , it will locate and modify the file content according to this annotation.
 
 ##### 4.2.2 Registing the front-end of microservice under flux-repo 
 
@@ -568,6 +575,7 @@ patches:
 ```
 
 > **Note**
+> 
 > **Best Practice:** We used AWS ECR to choose the automatic authentication mechanism， modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching.
 
 ##### 4.2.4 Setting image update policy
