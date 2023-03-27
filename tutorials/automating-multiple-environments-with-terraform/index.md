@@ -1,10 +1,10 @@
 ---
-title: "Automating multiple environments with Terraform"
+title: "Automating Multiple Environments with Terraform"
 description: "How to manage a central main account for shared infrastructure with a dev, test, and prod account."
 tags:
     - terraform
     - codecatalyst
-    - ci-cd
+    - cicd
     - tutorial
     - devops
     - infrastructure-as-code
@@ -12,10 +12,12 @@ tags:
     - github-actions
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
-date: 2023-03-07
+date: 2023-03-27
 ---
 
-As teams grow, so does the complexity of managing and coordinating changes to the application environment. While having a single account to provision all your infrastructure and deploy all systems works well for a small group of people, you will probably hit a point where there are too many people making changes at the same time to be able to manage it all. Additionally, with all your infrastructure in a single account, it becomes very difficult to apply the principle of least privilege, not to mention the naming convention of resources. The principle of least privilege revolves around only granting the minimum permissions for a person or service to accomplish their intended task, for example, if a developer only needs access to a development database and not production, the security permissions should limit their access to only the development database. This tutorial will guide you in splitting your infrastructure across multiple accounts by creating a `main` account for all common infrastructure shared by all environments (for example: users, build pipeline, build artifacts, etc.), and then an environment account for the three stages of your application: `dev`, `test`, and `prod`. These environments will help you support a growing team, and create clear separation between your different environments by isolating them into individual AWS accounts. The approach will make use of [Terraform](https://terraform.io), [Amazon CodeCatalyst](https://codecatalyst.aws), and assuming of IAM roles between these accounts. It is an evolution of the [2020 HashTalks session](https://www.youtube.com/watch?v=qVcdO3OeTZo) I did. We will address the following:
+As teams grow, so does the complexity of managing and coordinating changes to the application environment. While having a single account to provision all your infrastructure and deploy all systems works well for a small group of people, you will probably hit a point where there are too many people making changes at the same time to be able to manage it all. Additionally, with all your infrastructure in a single account, it becomes very difficult to apply the principle of least privilege (according to which persons or services should have the minimum permissions to accomplish their intended task), not to mention the naming convention of resources.
+
+This tutorial will guide you in splitting your infrastructure across multiple accounts by creating a `main` account for all common infrastructure shared by all environments (for example: users, build pipeline, build artifacts, etc.), and then an environment account for the three stages of your application: `dev`, `test`, and `prod`. These environments will help you support a growing team and create clear separation between your different environments by isolating them into individual AWS accounts. The approach will make use of [Terraform](https://terraform.io), [Amazon CodeCatalyst](https://codecatalyst.aws), and assuming of IAM roles between these accounts. It is an evolution of my [2020 HashTalks session](https://www.youtube.com/watch?v=qVcdO3OeTZo). We will address the following:
 
 * How to split our infrastructure between multiple accounts and code repositories
 * How to set up a build and deployment pipeline to manage all changes in the environment account with Terraform
@@ -1208,4 +1210,4 @@ We have now reached the end of this tutorial, and you can either keep the curren
 
 ## Conclusion
 
-Congratulations! You've now set up a multi-AWS environment CI/CD pipeline using Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+Congratulations! You've now set up a multi-AWS environment CI/CD pipeline using Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
