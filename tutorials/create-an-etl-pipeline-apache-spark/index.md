@@ -61,7 +61,7 @@ To implement our data processing pipeline, we first need to create an EMR cluste
 
 ### Step 1: Create an EMR Cluster
 
-Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's master node later on. So let's do it. 
+Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's primary node later on. So let's do it. 
 
 1. Log in to your AWS account and navigate to the EC2 console and click on the [**Key Pairs**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html) option on the left menu bar. And then, click `Create Key Pair`.
 
@@ -122,13 +122,13 @@ Now, that we have the dataset uploaded in S3, it's time to submit the PySpark jo
 
 ![EMR Cluster](images//emr_4-new.png)
 
-4. SSH to the EMR cluster's Master node from your terminal 
+4. SSH to the EMR cluster's Primary node from your terminal 
 
 ```bash
 ssh -i "mykey-emr.pem" root@ec2-18-219-203-79.us-east-2.compute.amazonaws.com
 ```
 
-5. Copy the PySpark code [`etl-job.py`](https://github.com/aws-samples/data-engineering-on-aws/blob/main/create-an-etl-pipeline-apache-spark/emr-etl-job.py) and save on the `Master Node` under the home directory and make the following changes and save the file:
+5. Copy the PySpark code [`etl-job.py`](https://github.com/aws-samples/data-engineering-on-aws/blob/main/create-an-etl-pipeline-apache-spark/emr-etl-job.py) and save on the `Primary Node` under the home directory and make the following changes and save the file:
 
     - `S3_INPUT_DATA`  = 's3://<YOUR_BUCKET_LOCATION_OF_RAW_DATA>'
     - `S3_OUTPUT_DATA` = 's3://<YOUR_BUCKET_LOCATION_OF_CLEANED_DATA>'
