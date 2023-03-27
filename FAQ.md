@@ -208,6 +208,7 @@ Currently, the following languages are supported:
 * ruby
 * shell
 * swift
+* terraform (or hcl or tf)
 * typescript
 * xml
 * yaml (or yml)
