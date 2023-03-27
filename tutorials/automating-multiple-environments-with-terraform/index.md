@@ -1189,9 +1189,10 @@ Once you have reviewed the changes, merge the PR by navigating to `Code`, `Pull 
 We have now reached the end of this tutorial, and you can either keep the current setup and expand on it, or delete all the resources created if you are not. To clean up your environment, we will follow the following steps:
 
 1. In `environments-infra`, run `git checkout main` and `git pull` to ensure you have the latest version, then:
-    1. `ENV=prod make destroy` and confirm
-    1. `ENV=test make destroy` and confirm
-    1. `ENV=dev make destroy` and confirm
+    1. Edit `providers.tf` and change the `role_arn` value in the `aws` provider from `"arn:aws:iam::${local.account_id}:role/${local.iam_role_name}"` to `"arn:aws:iam::${local.account_id}:role/Org-Admin"` - since we restricted the developer role to be read-only, we need to use the administrator role created as part of setting up these accounts
+    1. `ENV=prod make destroy` and confirm to delete all the resources in the `prod` environment
+    1. `ENV=test make destroy` and confirm to delete all the resources in the `test` environment
+    1. `ENV=dev make destroy` and confirm to delete all the resources in the `dev` environment
 1. In `main-infra`, run `git checkout main` and `git pull` to ensure you have the latest version, then:
     1. Run `terraform destroy` and confirm
     1. Edit `_bootstrap/state_file_resources.tf` to replace the `aws_s3_bucket` resource with:
