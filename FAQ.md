@@ -16,7 +16,7 @@
   * [How do I show content under tabs?](#how-do-i-show-content-under-tabs)
   * [How do I show content in multiple columns?](#how-do-i-show-content-in-multiple-columns)
   * [How do I create an external post?](#how-do-i-create-an-external-post)
-  * [How do I create a series of posts?](#how-do-i-create-an-external-post)
+  * [How do I create a series of posts?](#how-do-i-create-a-series-of-posts)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
