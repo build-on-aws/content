@@ -4,7 +4,7 @@ description: Learn how to build an ETL pipeline for batch processing with Amazon
 
 tags:
     - data-engineering
-    - analytics
+    - data-analytics
     - python 
     - spark
 authorGithubAlias: debnsuma
