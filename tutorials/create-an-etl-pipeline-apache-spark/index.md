@@ -8,6 +8,7 @@ tags:
     - python 
     - spark
     - tutorial
+    - aws
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2023-03-27
