@@ -15,6 +15,7 @@
   * [How do I embed mathematical formulas or equations in my articles?](#how-do-i-embed-mathematical-formulas-or-equations-in-my-articles)
   * [How do I show content under tabs?](#how-do-i-show-content-under-tabs)
   * [How do I show content in multiple columns?](#how-do-i-show-content-in-multiple-columns)
+  * [How do I create an external post?](#how-do-i-create-an-external-post)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -322,6 +323,16 @@ Another normal paragraph not in columns.
 ````
 
 Notice the maximum number of columns supported is 4, and in smaller screens (like mobile devices) column rendering is disabled and the content will be shown vertically.
+
+### How do I create an external post?
+
+An external post does not contain content but instead, links to content in an external website. Create it just like any other post, but:
+* Do not add a markdown body in the index.md (it would not be rendered anyway)
+* Add an attribute in the FrontMatter header named "externalUrl" with the URL of the remote content you want to link to. For example:
+  ````yml
+      externalUrl: https://dzone.com/articles/demystifying-transition-to-microservices
+  ````
+* External posts support the same fields as regular posts (such as title, description, date, images, author(s), etc.).
 
 ## Miscellaneous
 
