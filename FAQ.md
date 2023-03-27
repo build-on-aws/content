@@ -14,6 +14,7 @@
   * [How do I embed a Mermaid diagram in my article?](#how-do-i-embed-a-mermaid-diagram-in-my-article)
   * [How do I embed mathematical formulas or equations in my articles?](#how-do-i-embed-mathematical-formulas-or-equations-in-my-articles)
   * [How do I show content under tabs?](#how-do-i-show-content-under-tabs)
+  * [How do I show content in multiple columns?](#how-do-i-show-content-in-multiple-columns)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -296,6 +297,31 @@ Images inside tabs use a similar syntax. You just need to create a markdown list
 * Image 3
   ![Image 3 title](https://domain.com/ccc.png)
 ````
+
+### How do I show content in multiple columns?
+
+Start a column by writing the symbol `_||` in a separate line. Write the content for this first column next. Start another column writing the symbol `_||` in a separate line again, then write the content for the second column.
+End the multiple-columns mode by writing the symbol `_==` in a separate line (or by reaching the end of the file).
+
+For example:
+
+````markdown
+Normal paragraph not in columns.
+
+_||
+
+Content of column 1
+
+_|| 
+
+Content of column 2
+
+_==
+
+Another normal paragraph not in columns.
+````
+
+Notice the maximum number of columns supported is 4, and in smaller screens (like mobile devices) column rendering is disabled and the content will be shown vertically.
 
 ## Miscellaneous
 
