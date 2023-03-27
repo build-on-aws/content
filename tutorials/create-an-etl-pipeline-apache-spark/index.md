@@ -7,6 +7,7 @@ tags:
     - data-analytics
     - python 
     - spark
+    - tutorial
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2023-03-27
