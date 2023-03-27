@@ -1,5 +1,5 @@
 ---
-title: Create an ETL Pipeline with Amazon EMR and Apache Spark
+title: "Create an ETL Pipeline with Amazon EMR and Apache Spark"
 description: Learn how to build an ETL pipeline for batch processing with Amazon EMR and Apache Spark.
 
 tags:
@@ -11,12 +11,12 @@ tags:
     - spark
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
-date: 2022-11-30
+date: 2023-03-27
 ---
 
-Extract, Transform, and Load (or ETL) - sometimes called Ingest, Transform, and Export - is vital for building a robust data engineering pipeline for any organization. Essentially, if the ETL pipeline is designed and built using the right tools and services, it brings high value to any organization for both for batch and real-time processing. But designing and building such a pipeline is a time consuming task, and it requires different skillsets considering the number of tools and frameworks in this big data space. Luckily, it's pretty easy if you're using EMR and Spark. 
+Extract, Transform, and Load (or ETL) - sometimes called Ingest, Transform, and Export - is vital for building a robust data engineering pipeline for any organization. Essentially, if the ETL pipeline is designed and built using the right tools and services, it brings high value to any organization both for batch and real-time processing. But designing and building such a pipeline is a time-consuming task, and it requires different skillsets considering the number of tools and frameworks in this big data space. Luckily, it's pretty easy if you're using EMR and Spark. 
 
-Batch ETL is a common use case across many organizations. And this tutorial will provide you with a starting point, which can help you to build more complex data pipelines in AWS using [Amazon EMR (Amazon Elastic MapReduce)](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html) and [Apache Spark](https://spark.apache.org/). Here's how to do it.
+Batch ETL is a common use case across many organizations. This tutorial will provide a starting point, which can help you to build more complex data pipelines in AWS using [Amazon EMR (Amazon Elastic MapReduce)](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html) and [Apache Spark](https://spark.apache.org/). Here's how to do it.
 
 We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) to interact with the Spark cluster. PySpark allows you to write Spark applications using Python APIs. 
 
@@ -27,8 +27,8 @@ We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) 
 | ⏱ Time to complete  | 30 mins - 45 mins                      |
 | 💰 Cost to complete | USD 0.30                               |
 | 🧩 Prerequisites       | 
-- An[AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (if you don't yet have one, please create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br>
-- An IAM user that has has the access to create AWS resources. <br>
+- An[AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (if you don't yet have one, create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br>
+- An IAM user that has the access to create AWS resources. <br>
 - Basic understanding of Python
 
 ## What you will accomplish
@@ -57,11 +57,11 @@ We need to build a data pipeline such that it will take this new sales file from
 
 ## Implementation 
 
-To implement our data processing pipeline, we first need to create an EMR cluster that will run our ETL jobs, an SSH key pair to allow connecting to the server, an S3 bucket to store the raw and processed data, and finally start our job on the cluster.
+To implement our data processing pipeline, we need to create an EMR cluster that will run our ETL jobs and an S3 bucket to store the raw and processed data. Then we can start our job on the cluster.
 
 ### Step 1: Create an EMR Cluster
 
-Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's master node later on. So let's do it. 
+Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's master node later on. So let's do that really quickly. 
 
 1. Log in to your AWS account and navigate to the EC2 console and click on the [**Key Pairs**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html) option on the left menu bar. And then, click `Create Key Pair`.
 
@@ -239,4 +239,4 @@ aws s3 rb s3://<YOUR_BUCKET_LOCATION> --force
 
 Congratulations! You have finished the tutorial on creating an ETL pipeline with Amazon EMR and Apache Spark. 
 
-In this tutorial, we learned how to build an ETL pipeline, which can be applied in different batch processing use-cases, like e-commerce sales data analysis. We learned how to extract the data from S3 and then transform the data based on our requirement by using a simple Glue ETL (pySpark) job. And then finally, we analyzed the data using SQL via Amazon Athena. If you're interested in learning more about ERM and Spark-based ETL, you may like to check this [workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/c86bd131-f6bf-4e8f-b798-58fd450d3c44/en-US/spark-etl). 
+In this tutorial, we learned how to build an ETL pipeline, which can be applied in different batch processing use-cases, like e-commerce sales data analysis. We learned how to extract the data from S3 and then transform the data based on our requirement by using a simple Glue ETL (pySpark) job. And then finally, we analyzed the data using SQL via Amazon Athena. If you're interested in learning more about ERM and Spark-based ETL, you may like to check out this [workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/c86bd131-f6bf-4e8f-b798-58fd450d3c44/en-US/spark-etl). 
