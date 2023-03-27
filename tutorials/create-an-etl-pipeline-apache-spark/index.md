@@ -47,7 +47,7 @@ For this tutorial, let's assume you have a vendor who provides incremental sales
 To implement this data pipeline, we will use an EMR cluster with Spark as the distributed processing engine. We'll use S3 for storing the:
 
 -  `RAW` data (which is the input and unprocessed data) 
--  `CLEANED` data (which is output and processed data)
+-  `CLEANSED` data (which is output and processed data)
 
 We need to build a data pipeline such that it will take this new sales file from the S3 bucket, process it with required transformations using Amazon EMR, and save the cleaned and transformed data into the target S3 bucket, which will be used later on for querying using Amazon Athena. 
 
@@ -88,7 +88,7 @@ Keep everything else as default and click on Create cluster. This will create a 
 
 ### Step 2: Create an Amazon S3 bucket
 
-Now we will create an Amazon S3 bucket and create two sub-folders within that, which will be used to store `RAW` and `CLEANED` data.
+Now we will create an Amazon S3 bucket and create two sub-folders within that, which will be used to store `RAW` and `CLEANSED` data.
 
 1. Navigate to the Amazon S3 console and click on **Create Bucket**.
 
@@ -143,7 +143,7 @@ sudo spark-submit etl-job.py
 
 ### Step 4: Validating the output using Amazon Athena
 
-Now the `cleaned` data is available in Amazon S3 in the form of parquet format, but to make it more consumable for data analysts or data scientists, it would be great if we could enable querying the data through SQL by making it available as a database table.
+Now the `cleansed` data is available in Amazon S3 in the form of parquet format, but to make it more consumable for data analysts or data scientists, it would be great if we could enable querying the data through SQL by making it available as a database table.
 
 To make that integration, we can follow a two-step approach:
 1. We need to run the Glue crawler to create an AWS Glue Data Catalog table on top of the S3 data.
@@ -159,7 +159,7 @@ To make that integration, we can follow a two-step approach:
 
 ![glue crawler](images/glue_crawler_1.png)
 
-3. Add the **data source** as S3 bucket where you have your cleaned and processed data (`s3://etl-batch-emr-demo/cleaned_data`).
+3. Add the **data source** as S3 bucket where you have your cleansed and processed data (`s3://etl-batch-emr-demo/cleaned_data`).
 
 ![glue crawler](images/glue_crawler_2.png)
 
