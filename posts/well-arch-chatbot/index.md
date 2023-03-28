@@ -29,7 +29,7 @@ And the GitHub repo with the code [here](https://github.com/banjtheman/aws_well_
 
 ## Data Collection
 
-I started by using `Selenium` and `BeautifulSoup` to scrape the HTML page of the Well-Architected Framework, and stored all the text on each page into a CSV. I also extracted the title and URL for each page so they can be referenced later.
+I started by using `Selenium` and `BeautifulSoup` to methodically scrape content from the entire [Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) page. To ensure comprehensive data extraction, I meticulously examined every section on the main page, as well as followed and scraped all associated links found in the sidebar. As a result, I captured the complete content and compiled it into a CSV file, along with the corresponding titles and URLs for easy reference and citation.
 
 Here is some of the code used to gather data for each page.
 
@@ -75,9 +75,19 @@ def get_page_info(url):
 
 ### Data Cleaning
 
-After the raw data is collected, I did some light data cleanup to normalize text and to split up any sections over 5,000 tokens as their model has an upper limit of tokens it can process. I also removed text that had less than 13 tokens, as there was bunch of text that just had service names such as "Amazon S3" and no context around what it does.
+Data cleaning is a vital step in preparing scraped data for analysis, ensuring that the resulting insights are accurate, relevant, and meaningful. In this project, I focused on three primary data cleaning techniques:
 
-![Token histogram of passages](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yzzscn0odw3ugre0a601.png)
+**Text Normalization**: To ensure consistency, I performed text normalization by converting all text to lowercase and removing any extra spaces or special characters. This step facilitated better analysis and processing by the model.
+
+**Token Limitation**: Since the model I used has a token limit of 5,000, I divided sections exceeding this limit into smaller chunks. This enabled the model to process the information effectively without losing any essential data.
+
+**Filtering Out Short Texts**: I also filtered out any text with less than 13 tokens, as these often comprised service names, like "Amazon S3," without any contextual information. By removing these short, context-less snippets, I ensured that the data fed into the model was both relevant and meaningful.
+
+These data cleaning steps helped to refine the raw data and enhance the model's overall performance, ultimately leading to more accurate and useful insights.
+
+
+
+![Token histogram of passages](images/token_hist.png)
 
 ## Creating Text Embeddings
 
@@ -99,11 +109,11 @@ This [OpenAI Notebook](https://github.com/openai/openai-cookbook/blob/main/examp
 
 Here is an example of how the text looks like as an embedding, an list of 1536 numbers that represent the text.
 
-![Example Text Embeddings](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e70p00x0rh9sl40ao3fs.png)
+![Example Text Embeddings](images/token_emb.png)
 
 With text embeddings we can now do a Search of all the text based on an input query. By asking `How do I designing VPC architectures with security components?` we get a list of the documents that has text which is relevant to the query.
 
-![Document Serach](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/koklmdbig4zs5g8niqjn.png)
+![Document Serach](images/vector_list.png)
 
 ## Prompt Engineering
 
@@ -189,6 +199,8 @@ def app() -> None:
 ```
 
 The dataframe contains the text data, along with links to the corresponding ground truth information indicating how the chatbot responded. This allows for easy validation and verification of the chatbot's accuracy and can aid in identifying areas for improvement.
+
+For more details on how to deploy and create Streamlit apps, checkout the [GitHub repo](https://github.com/banjtheman/aws_well_arch_chatbot)
 
 ## Conclusion
 
