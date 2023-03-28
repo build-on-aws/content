@@ -1,22 +1,21 @@
 ---
-title: "Good Places to Start Your DevOps Journey"
-description: A career journey used to be something very well planned and think of ahead, but during these times that's not the case anymore. Sometimes you plan ahead, sometimes things just happen and you have to make the most out of it. In this article I will tell you my personal DevOps journey and I will share with you some lessons learned and tips on good places to start your career journey. 
+title: "Where to Start Your DevOps Journey"
+description: "Lessons I learned along my personal journey into DevOps - and good places to start your own."
 tags:
   - devops
   - career
   - learning
 authorGithubAlias: andrasome
 authorName: Andra Somesan
-date: 2023-03-08
+date: 2023-03-30
 ---
 
 # Good Places to Start Your DevOps Journey
-The IT industry is always evolving and it offers a variety of opportunities. One job title in particular has received a lot of attention in the past few years, and that's DevOps Engineer.
+The IT industry is always evolving, offering new opportunities. One job title in particular has received a lot of attention in the past few years: DevOps Engineer.
 
-Until 5 years ago I knew nothing about DevOps. I do have a technical background, but until 2018 my job was to plan and design microwave transmission networks. That changed while I was working for one of my previous companies. The project I was working on has come to an end and I had to find a new position at the same company. Among other roles I've discovered the DevOps Engineer one, and it was the most attractive one. I had a talk with the manager and I was told to learn a bit of programming, scripting and a bit about databases and then to have a technical interview. I passed the interview and I became a DevOps Engineer. This is how my IT career started.
+Until 5 years ago I knew nothing about DevOps. I have a technical background, but until 2018 my job was to plan and design microwave transmission networks. That changed while I was working for one of my previous companies. The project I was working on had come to an end, and I had to find a new position at the same company. Among other roles I'd discovered "DevOps Engineer", and I was curious to learn more about it. I talked with the manager and I was told to learn a bit of programming and scripting, and to brush up on databases. Then I did a technical interview and soon after became a DevOps Engineer. This was how my IT career started.
 
-" *DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes.* " This is one definition from [AWS page](https://aws.amazon.com/devops/what-is-devops/) I find it brings everything together. DevOps is about people, processes, and the best way they can be brought up together to accelerate the pace of innovation. 
-You may see different job titles related to practical implementation of DevOps like: Platform Engineer, Site Reliability Engineer and so on. There are multiple resources online to compare them, so I'm not going to do that here. 
+But what _is_ DevOps? Here's one definition from [AWS](https://aws.amazon.com/devops/what-is-devops/) that I find captures it well: "*DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes.*" In other words, DevOps is about people, processes, and the best way they can be brought together to accelerate the pace of innovation. It's worth noting here that different roles relate to the practical implementation of DevOps - Platform Engineer, Site Reliability Engineer, and so on. If you're interested in a more granular breakdown of those roles, plenty of other resources online provide that. 
 
 # Planning your career journey
 A career was usually planned before going to college and the decision was an important one because you couldn't easly change it afterwards. Nowadays career changes and career conversions are possible, and I think this brings another component of diversity in IT. People who come from different career backgrounds, can bring their unique perspective in. Whatever the reason, if you think about trying DevOps, read on.
