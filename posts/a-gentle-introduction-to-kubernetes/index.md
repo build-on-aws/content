@@ -14,7 +14,7 @@ date: 2023-03-29
 ---
 ## Introduction to Kubernetes
 
-Kubernetes is an open-source platform that is used to manage containerized applications. It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation (CNCF), a non-profit organization that promotes the use of cloud-native technologies. Kubernetes is a Greek word that means "helmsman" or "pilot". The term was chosen by the founders of Kubernetes because the system is designed to be a pilot or conductor for a fleet of containers, just as a helmsman or pilot is responsible for steering a ship. In this context, Kubernetes acts as a control plane for managing and orchestrating containerized applications across a cluster of nodes. It ensures that applications are deployed, scaled, and managed in a reliable and efficient manner, just as a helmsman ensures that a ship is guided safely and efficiently to its destination. Sometimes Kubernetes is abbreviated as k8s.
+Kubernetes is an open-source platform that is used to manage containerized applications. It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation (CNCF), a non-profit organization that promotes the use of cloud-native technologies. Kubernetes is a Greek word that means "helmsman" or "pilot". The term was chosen by the founders of Kubernetes because the system is designed to be a pilot or conductor for a fleet of containers, just as a helmsman or pilot is responsible for steering a ship. Sometimes Kubernetes is abbreviated as k8s.
 
 Kubernetes helps developers deploy, scale, and manage their containerized applications in a more efficient and effective manner. Containers are lightweight, portable, and self-contained packages that include all the code and dependencies needed to run an application. Kubernetes provides a set of tools and APIs that make it easier to manage these containers, making it a popular choice for developers.
 
@@ -24,8 +24,8 @@ Kubernetes provides a number of benefits that make it a popular choice for manag
 ### Kubernetes Components
 Kubernetes is made up of several components that work together to manage containerized applications. Here are the key components of Kubernetes:
 1. Control Plane: This is the brain of Kubernetes, and it manages the overall state of the cluster. It includes several components:
-  * API Server: This is the main interface for interacting with the Kubernetes API. It receives requests from users and other components in the cluster, and it stores the state of the cluster in etcd.
- * etcd: This is a distributed key-value store that holds the configuration data and the state of the cluster. All changes to the cluster state are recorded in etcd.
+* API Server: This is the main interface for interacting with the Kubernetes API. It receives requests from users and other components in the cluster, and it stores the state of the cluster in etcd.
+* etcd: This is a distributed key-value store that holds the configuration data and the state of the cluster. All changes to the cluster state are recorded in etcd.
 * Controller Manager: This component runs various controllers that are responsible for maintaining the desired state of the cluster. For example, the ReplicaSet controller makes sure that the desired number of replicas of a containerized application are running.
 * Scheduler: This component is responsible for assigning containers to nodes in the cluster based on resource availability and other constraints.
 * Nodes: These are the individual computers that run containers. Each node runs a container runtime (like Docker) and communicates with the other nodes in the cluster through the Kubernetes API.
@@ -33,7 +33,6 @@ Kubernetes is made up of several components that work together to manage contain
 2. Kubernetes API: This is the main interface for interacting with the Kubernetes control plane. Users and other components can use the API to create, update, and delete resources in the cluster.
 
 3. Add-ons: These are optional components that provide additional functionality to the cluster. Some examples of add-ons include:
-
 * DNS: This provides a way for containers to discover and communicate with each other by name.
 * Dashboard: This is a web-based user interface for managing the cluster.
 * Ingress Controller: This provides a way to route external traffic to the appropriate container.
@@ -47,20 +46,18 @@ Kubernetes is made up of several components that work together to manage contain
 7. ConfigMaps and Secrets: ConfigMaps and Secrets are used to manage configuration data and sensitive information, like passwords or API keys.
 
 ### Kubernetes under the hood
-At its core, Kubernetes is a complex system of interacting components that work together to manage containerized applications. When a user deploys an application to Kubernetes, the system creates a set of objects that define how the application should be run. These objects are then scheduled onto a set of nodes in the Kubernetes cluster, which are responsible for running the actual containers that make up the application. Kubernetes monitors these objects and nodes, making decisions about when to scale the application, how to route traffic to it, and how to recover from failures. Under the hood, Kubernetes relies on a number of different technologies, including etcd for distributed state management, the Kubernetes API for communication between components, and various network plugins for managing communication between containers and nodes. All of these components work together to provide a powerful and flexible platform for running containerized applications at scale.
+At its core, Kubernetes is a complex system of interacting components that work together to manage containerized applications. When a user deploys an application to Kubernetes, the system creates a set of objects that define how the application should run. These objects are then scheduled onto a set of nodes in the Kubernetes cluster, which are responsible for running the actual containers that make up the application. Kubernetes monitors these objects and nodes, making decisions about when to scale the application, how to route traffic to it, and how to recover from failures. Under the hood, Kubernetes relies on a number of different technologies, including etcd for distributed state management, the Kubernetes API for communication between components, and various network plugins for managing communication between containers and nodes. All of these components work together to provide a powerful and flexible platform for running containerized applications at scale.
 
 ### Benefits of Kubernetes
 1. Scalability: Kubernetes allows you to easily scale your applications up or down in response to changes in demand, making it easy to handle traffic spikes and ensure that your applications remain responsive.
 
 2. Fault tolerance: Kubernetes has built-in features for automatic failover and recovery, which helps ensure that your applications remain available even in the face of failures or downtime.
 
-3. Resource optimization: Kubernetes uses advanced scheduling algorithms to make efficient use of the underlying infrastructure, ensuring that resources are allocated where they are needed most.
+3. Portability: Kubernetes provides a consistent development and deployment environment, which makes it easy to move applications between different environments, such as development, testing, and production.
 
-4. Portability: Kubernetes provides a consistent development and deployment environment, which makes it easy to move applications between different environments, such as development, testing, and production.
+4. Flexibility: Kubernetes supports a wide range of container runtimes, including Docker and containerd, and can run on a variety of different platforms, including on-premises data centers, public cloud providers, and hybrid cloud environments.
 
-5. Flexibility: Kubernetes supports a wide range of container runtimes, including Docker and containerd, and can run on a variety of different platforms, including on-premises data centers, public cloud providers, and hybrid cloud environments.
-
-6. Community: Kubernetes is open source and has a large and active community of developers, which means it's constantly evolving and improving with new features and capabilities.
+5. Community: Kubernetes is open source and has a large and active community of developers, which means it's constantly evolving and improving with new features and capabilities.
 
 ## Introduction to AWS EKS
 AWS EKS is a managed service that provides a fully-managed Kubernetes control plane on AWS. With EKS, you don't need to manage the control plane yourself, as AWS takes care of this for you. Instead, you can focus on deploying and managing your applications using Kubernetes.
