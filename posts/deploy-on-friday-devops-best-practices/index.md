@@ -1,6 +1,6 @@
 ---
-title: "Deploy on Friday! 12 DevOps Best Practices"
-description: Why not deploy on Fridays? These 12 best practices, each with real-world examples, will help you understand how DevOps culture and practices can collaborate to mitigate risk and reduce the pain of deploy, making it less risky.
+title: "12 DevOps Best Practices That Make Deploying on Fridays Less Scary"
+description: Why not deploy on Fridays? These 12 best practices, each with real-world examples, will help you understand how DevOps culture and practices can collaborate to mitigate risk and reduce the pain of deployment, making it less risky.
 tags:
   - devops
 authorGithubAlias: mfpalla
@@ -117,4 +117,9 @@ Numerous practices can be applied to avoid heroism, such as pair programming, MO
 
 ## Conclusion
 
-When I started writing this article, I thought of using my own experiences as a consultant and individual contributor to list practices that I saw as helpful in my day-to-day life as a builder, allowing teams to innovate quickly and at less risk. There are other practices that can certainly be applied and all of them can be identified by asking simple questions. Ensure that your team has room to question. The most productive teams I've ever had the opportunity to work on were those that allowed themselves to question the status quo of their work and environment regularly.
+These best practices will help you avoid pain points that DevOps teams often encounter, but the most fundamental takeaway is that your team has a culture of free inquiry - that everyone feels the freedom to ask simple questions about the process. Ensure that your team has room to question. The most productive teams are those that allowed themselves to question the status quo of their work and environment regularly.
+
+If you're interested in DevOps and want to learn more about how to implement it, check out these articles about it.
+
+- [How to Succeed at DevOps: Wrong Answers Only!](https://www.buildon.aws/posts/devops-wrong-answers-only)
+- [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life)
