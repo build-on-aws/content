@@ -17,7 +17,7 @@ To achieve this, we can use **AWS Elastic Beanstalk**, which is an easy-to-use s
 
  In addition to that, we can also build the AWS Elastic Beanstalk resources using code! 
  
- The **[AWS Cloud Development Kit (AWS CDK)](https://docs.aws.amazon.com/cdk/api/v2/)** is an open-source software development framework to define cloud infrastructure in familiar programming languages and provision it through AWS CloudFormation. It consists of three major components : a **core framework** for modeling reusable infrastructure components, a **CLI** to interact with it, and a **[Construct Library](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html)**, that has abstracted high-level components of AWS resources.
+ The **[AWS Cloud Development Kit (AWS CDK)](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)** is an open-source software development framework to define cloud infrastructure in familiar programming languages and provision it through AWS CloudFormation. It consists of three major components : a **core framework** for modeling reusable infrastructure components, a **CLI** to interact with it, and a **[Construct Library](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)**, that has abstracted high-level components of AWS resources.
 
 **CDK Pipelines** is a high-level construct library that makes it easy to set up a continuous deployment pipeline for CDK applications, powered by AWS CodePipeline. 
 
@@ -38,7 +38,7 @@ In this guide, we will learn how to :
 | ⏱ Time to complete     | 40 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment/)<br>- [AWS CDK v2.7.0 installed](https://aws.amazon.com/getting-started/guides/setup-cdk)<br>- [GitHub account](https://github.com/)|
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/)                            |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-03-28                                                     |
 
@@ -48,9 +48,9 @@ In this guide, we will learn how to :
 ## Prerequisites
 Before proceeding, ensuring we have following prerequisites setup and ready to use:
 
-* An AWS account: If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) guide for a quick overview and CLI installation steps.
-* CDK installed: Visit our [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/) guide to learn more.
-* A GitHub account : Visit [GitHub.com](https://github.com/) and follow the prompts to create your account.
+* **An AWS account and CLI installed**: If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) guide for a quick overview and CLI installation steps.
+* **CDK installed**: Visit our [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) guide to learn more.
+* A **GitHub account** : Visit [GitHub.com](https://github.com/) and follow the prompts to create your account.
 
 ## Build a Web Application
 
@@ -58,7 +58,7 @@ We will create a non-containerized application that we will deploy to the cloud.
 
 The web application will be a simple web app server that will serve static HTML files and also have a REST API endpoint. The focus of this tutorial is not to teach you how to build web applications, so feel free to use the example application, or build your own one. While this tutorial focuses on using Node.js, you can also build a similar web app with other Elastic Beanstalk supported programming languages, such as Java, .NET, PHP, Ruby, Python, Go, and Docker.
 
-You can implement this in your local computer or in an [AWS Cloud9 environment]().
+You can implement this in your local computer or in an [AWS Cloud9 environment](https://docs.aws.amazon.com/cloud9/latest/user-guide/tutorial.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Create the client app
 The first step is to create a new directory for our application.
@@ -72,7 +72,7 @@ Then we can initialize the Node.js project. This creates the package.json file t
 npm init -y
 ```
 
-If npm is not installed, install it in your local terminal following the instructions found at [Setting up your Node.js development environment](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/nodejs-devenv.html).
+If npm is not installed, install it in your local terminal following the instructions found at [Setting up your Node.js development environment](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/nodejs-devenv.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Create Express app
 We are going to use [Express](https://expressjs.com/) as our web application framework. To use it, we need to install Express as a dependency in our Node.js project.
@@ -233,7 +233,7 @@ After the GitHub repository is created, we will push the local application files
 
 Move the application source files into new folder `src`. 
 
-We are also updating `.gitignore` file. We are asking git to include all files from the `src/*` folder, except `node_modules` and `package-lock.json`. This is to ensure that every time Beanstalk deploys the application into a new virtual machine it will install the node_modules. Read more on the instructions on [handling Node.js dependencies in Elastic Beanstalk packages](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/nodejs-platform-dependencies.html).
+We are also updating `.gitignore` file. We are asking git to include all files from the `src/*` folder, except `node_modules` and `package-lock.json`. This is to ensure that every time Beanstalk deploys the application into a new virtual machine it will install the node_modules. Read more on the instructions on [handling Node.js dependencies in Elastic Beanstalk packages](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/nodejs-platform-dependencies.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 
 ```bash
@@ -291,7 +291,7 @@ export class EBApplnStack extends cdk.Stack {
 }
 ```
 
-In this file `/lib/eb-appln-stack.ts`, we will write the code for all the resources stack we are going to create in this section. You can also copy-paste contents of this file from [here]().
+In this file `/lib/eb-appln-stack.ts`, we will write the code for all the resources stack we are going to create in this section. You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts).
 
 A resource stack is a set of cloud infrastructure resources—all AWS resources in this case—that will be provisioned into a specific account. The account where these resources will be provisioned is the stack that you configured in the prerequisite. In this resource stack, we are going to create these resources:
 
@@ -302,9 +302,9 @@ A resource stack is a set of cloud infrastructure resources—all AWS resources 
 * **Elastic Beanstalk Environment**: A collection of AWS resources running an application version. Each environment runs only one application version at a time.
 
 
-### <b>Upload the app to S3 automatically</b>
+### Upload the app to S3 automatically
 
-For deploying the web app, we need to package it and upload it to [Amazon S3](https://aws.amazon.com/s3/) so that Elastic Beanstalk can deploy the application in the environment.
+For deploying the web app, we need to package it and upload it to [Amazon S3](https://aws.amazon.com/s3/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) so that Elastic Beanstalk can deploy the application in the environment.
 
 To do that, we will be using a CDK constructor called S3 Assets. The S3 Assets module will zip up files in the provided directory, and upload the zip to S3.
 
@@ -327,7 +327,7 @@ Inside the stack, under the commented line that says *The code that defines your
 This code uses the S3 Assets module and takes the folder of the web app located in the root of the CDK app, compresses into a zip file and uploads it to S3. Whenever we update the application source code and push to the GitHub repo, the file will automatically get updated in S3.
 
 
-### <b>Add the Elastic Beanstalk CDK dependencies </b>
+### Add the Elastic Beanstalk CDK dependencies 
 
 
 Next, we will create the Elastic Beanstalk application, application version, and environment so that we can deploy the web app that we just uploaded to S3 using S3 Assets.
@@ -338,7 +338,7 @@ Add the dependency to the Elastic Beanstalk module for CDK at the top of the `/l
 import * as elasticbeanstalk from 'aws-cdk-lib/aws-elasticbeanstalk';
 ```
 
-### <b>Create the Elastic Beanstalk application</b>
+### Create the Elastic Beanstalk application
 
 Now we can create the Elastic Beanstalk app. As mentioned before, an Elastic Beanstalk application is a logical collection of Elastic Beanstalk components, like a folder.
 
@@ -353,7 +353,7 @@ const app = new elasticbeanstalk.CfnApplication(this, 'Application', {
 ```
 
 
-### <b>Create Elastic Beanstalk application version</b>
+### Create Elastic Beanstalk application version
 
 Now we need to create an application version from the S3 asset that we created earlier. This piece of code will create the app version using the S3 bucket name and S3 object key that S3 Assets and CDK will provide to this method.
 
@@ -375,7 +375,7 @@ Before moving on, we want to make sure that the Elastic Beanstalk application ex
 appVersionProps.addDependency(app);
 ```
 
-### <b>Create the instance profile</b>
+### Create the instance profile
 
 To create the Elastic Beanstalk environment, we will need to provide an existing instance profile name.
 
@@ -417,7 +417,7 @@ To allow the EC2 instances in our environment to assume the role, the instance p
 To that role we then add the managed policy A`WSElasticBeanstalkWebTier`. We then create the instance profile with that role and the profile name.
 
 
-### <b>Create Elastic Beanstalk environment</b>
+### Create Elastic Beanstalk environment
 
 The last part we need to create is the Elastic Beanstalk environment. The environment is a collection of AWS resources running an application version. For the environment, we will need to give some information about the infrastructure.
 
@@ -431,9 +431,9 @@ For this particular case, we are going to put this string `'64bit Amazon Linux 2
 The option settings attribute allows us to configure the Elastic Beanstalk environment to our needs:
 
 * **IamInstanceProfile**: Here we will reference the instance profile created in the previous steps.
-* **MinSize, MaxSize, and InstanceTypes**: These are configurations for our instances and the autoscaling group that Elastic Beanstalk generates for us. These are optional parameters. If we don't set them up, Elastic Beanstalk will pick the instance type and the minimum and maximum sizes of the autoscaling group according to the platform definition. We are defining them so we can stay within the [AWS Free Tier](https://aws.amazon.com/free).
+* **MinSize, MaxSize, and InstanceTypes**: These are configurations for our instances and the autoscaling group that Elastic Beanstalk generates for us. These are optional parameters. If we don't set them up, Elastic Beanstalk will pick the instance type and the minimum and maximum sizes of the autoscaling group according to the platform definition. We are defining them so we can stay within the [AWS Free Tier](https://aws.amazon.com/free?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-For more information about these settings, see [Configuration options for Elastic Beanstalk](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options-general.html#command-options-general-autoscalingasg).
+For more information about these settings, see [Configuration options for Elastic Beanstalk](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options-general.html#command-options-general-autoscalingasg?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 To define these configuration options, add the following lines of code:
 
@@ -481,7 +481,7 @@ const elbEnv = new elasticbeanstalk.CfnEnvironment(this, 'Environment', {
 ```
 
 ## Create the CDK Pipeline stack
-### <b>Defining an empty pipeline</b>
+### Defining an empty pipeline
 
 After we define the stack that makes up our application, we can deploy it through a CI/CD pipeline.
 
@@ -535,9 +535,9 @@ export class CdkPipelineStack extends Stack {
 ```
 
 The code defines the following basic properties of the pipeline:
-* Its name.
-* Where to find the source in GitHub. This is `Source` stage. Every time we push new commits to this repo, the pipeline is triggered.
-* How to do the build and synthesis. For this use case, the `Build` stage will install latest npm packages and a standard NPM build (this type of build runs `npm run build` followed by `npx cdk synth`).
+* **Name** for the pipeline.
+* Where to find the **source in GitHub**. This is `Source` stage. Every time we push new commits to this repo, the pipeline is triggered.
+* How to do the **build and synthesis**. For this use case, the `Build` stage will install latest npm packages and a standard NPM build (this type of build runs `npm run build` followed by `npx cdk synth`).
 
 We also need to instantiate `CdkPipelineStack` with the account and aws region where we want to deploy the pipeline. Put the following code in `bin/cdk-pipeline-eb-demo.ts`. Please be sure to replace `ACCOUNT` and the `REGION` in there if necessary: 
 
@@ -567,18 +567,18 @@ CDK Pipelines use some new features of the CDK framework that we need to explici
   }
 }
 ```
-#### <b>Connect GitHub to CodePipelines</b>
+#### Connect GitHub to CodePipelines
 
 For AWS CodePipeline to read from this GitHub repo, we also need to configure the GitHub personal access token we created earlier. 
 
-This token should be stored as a plaintext secret (not a JSON secret) in AWS [Secrets Manager](https://aws.amazon.com/secrets-manager) under the exact name `github-token`. 
+This token should be stored as a plaintext secret (not a JSON secret) in AWS [Secrets Manager](https://aws.amazon.com/secrets-manager?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) under the exact name `github-token`. 
 
-Replace GITHUB_ACCESS_TOKEN with your plaintext secret and REGION in following command and run it : 
+Replace `GITHUB_ACCESS_TOKEN` with your plaintext secret and `REGION` in following command and run it : 
 
 ```bash
 aws secretsmanager  create-secret --name github-token --description "Github access token for cdk" --secret-string GITHUB_ACCESS_TOKEN --region REGION
 ```
-For more help, see [Creating and Retrieving a Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html).
+For more help, see [Creating and Retrieving a Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 If you are interested to use a different secret name other than the default name `github-token`, there is more information at the end of this blog. 
 
@@ -596,7 +596,7 @@ This should look something like this:
 
 `cdk bootstrap aws://123456789012/us-east-1`
 
-You can get the account number from the AWS Management Console, and the Region name from [this list](https://aws.amazon.com/getting-started/guides/deploy-webapp-elb/module-three/#:~:text=Region%20name%20from-,this%20list,-.).
+You can get the account number from the AWS Management Console, and the Region name from [this list](https://docs.aws.amazon.com/general/latest/gr/rande.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 
 ### Build and deploy the CDK application
@@ -628,19 +628,19 @@ Because we created a new role, we will be asked to confirm changes in our accoun
 
 ![cdk deploy confirm changes](images/CDK-deploy-confirm.png)
 
-Respond with **y**, and then the deployment will start. It takes a few minutes to complete. When it is done, we will receive a message containing the ARN [(Amazon Resource Name)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) of the CloudFormation stack that this deployment created for us.
+Respond with **y**, and then the deployment will start. It takes a few minutes to complete. When it is done, we will receive a message containing the ARN [(Amazon Resource Name)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) of the CloudFormation stack that this deployment created for us.
 
 Open the CloudFormation Management console, to see the new CloudFormation stack.
 ![Alt text](images/cloudFormation-new-stack.png)
 
-This take a couple of minutes to finish. At the end, we can find a pipeline in our [CodePipeline console](), as in the following screenshot.
+This take a couple of minutes to finish. At the end, we can find a pipeline in our [CodePipeline console](http://console.aws.amazon.com/codesuite/codepipeline/home?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), as in the following screenshot.
 
 ![CodePipeline has a new pipeline](images/codepipeline-new-pipeline.png)
 
 _Troubleshooting tip: if you see an Internal Failure error during this step while the pipeline is being created, double check you have a Secrets Manager secret with the right name configured with your GitHub token in it as mentioned in the previous section._
 
 
-### <b>Add a deploy stage for beanstalk environment</b>
+### Add a deploy stage for beanstalk environment
 
 So far, we have provisioned an empty pipeline, and the pipeline isn’t deploying our web application yet. 
 
@@ -755,7 +755,7 @@ We have to delete the `Pre-Prod-WebService` manually from the CloudFormation Con
 aws cloudformation delete-stack --stack-name Pre-Prod-WebService
 ```
 
-If the stack delete fails with the error  `Cannot delete entity, must detach all policies first.` Then delete the IAM role (name starts with _Pre-Prod-WebService-MyWebAppawselasticbeanstalkec2-randomstring_) manually from IAM Console and retry deleting the CloudFormation stack. For help, read  [Deleting roles or instance profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html) in the AWS Documentation.
+If the stack delete fails with the error  `Cannot delete entity, must detach all policies first.` Then delete the IAM role (name starts with _Pre-Prod-WebService-MyWebAppawselasticbeanstalkec2-randomstring_) manually from IAM Console and retry deleting the CloudFormation stack. For help, read  [Deleting roles or instance profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) in the AWS Documentation.
 
 Goto CloudFormation Console, check if all the three stacks that were created are deleted successfully.
 
@@ -781,9 +781,9 @@ To fix this, you need to update all the CDK packages to the same version. You ca
 
 ### Elastic Beanstalk solution stack name
 
-In the [documentation](https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html), you can read about all the supported platforms for Elastic Beanstalk. We update this page as newer platforms are added and older platforms get retired.
+In the [documentation](https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), you can read about all the supported platforms for Elastic Beanstalk. We update this page as newer platforms are added and older platforms get retired.
 
-If you are curious about how to get the right platform name, such as `64bit Amazon Linux 2 v5.7.0 running Node.js 14`, you can use the AWS CLI to get a [list of all the supported platforms.](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elasticbeanstalk/list-available-solution-stacks.html)
+If you are curious about how to get the right platform name, such as `64bit Amazon Linux 2 v5.7.0 running Node.js 14`, you can use the AWS CLI to get a [list of all the supported platforms.](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elasticbeanstalk/list-available-solution-stacks.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ```bash
 aws elasticbeanstalk list-available-solution-stacks
