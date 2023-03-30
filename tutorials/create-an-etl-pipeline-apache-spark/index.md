@@ -60,12 +60,8 @@ We need to build a data pipeline such that it will take this new sales file from
 To implement our data processing pipeline, we need to create an EMR cluster that will run our ETL jobs and an S3 bucket to store the raw and processed data. Then we can start our job on the cluster.
 
 ### Step 1: Create an EMR Cluster
-
-<<<<<<< HEAD
-Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's primary node later on. So let's do it. 
-=======
+ 
 Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's master node later on. So let's do that really quickly. 
->>>>>>> 98d6dbebf893ecbd692cfae35e1409965f9fe7a6
 
 1. Log in to your AWS account and navigate to the EC2 console and click on the [**Key Pairs**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html) option on the left menu bar. And then, click `Create Key Pair`.
 
