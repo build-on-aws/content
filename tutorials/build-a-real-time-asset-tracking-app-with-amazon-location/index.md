@@ -188,6 +188,8 @@ export function override(resources: AmplifyRootStackTemplate) {
   ]);
 }
 ```
+which updates the policy used by Amazon Cognito to display the tracker position on the map.
+
 
 ![Configuring the Amplify Override](./images/1.5.png)
 
@@ -306,7 +308,7 @@ Enter the following to send our first point:
 and select **Publish**
 
 ![AWS IoT Core Console showing the MQTT test client with a message published](./images/3.1.png)
-Navigate back to Cloud9 and your running application. Refresh the application and you should see the point on the map
+Navigate back to Cloud9 and your running application. Refresh the application and you should see the point on the map.
 
 ![Cloud9 showing the application running with a point on the map](./images/3.2.png)
 
@@ -335,5 +337,7 @@ Navigate to the Amazon Location Service console, select **Trackers** select `tra
 ### Deleting IoT Core Rule
 Navigate to the IoT Core Console, select **Message Routing** and **Rules**. Select `AssetTrackingRule` and select **Delete**, confirming you wish to delete it.
 
+## Next Steps
+Now that you've built an asset tracking solution, think about ways to send location information to AWS IoT Core. If you're interested in physical asset tracking devices, check out the [AWS Partner Device Catalog](https://devices.amazonaws.com/search?page=1&type=tracker) or if you are interested in setting up a simulated device, check out the [IoT Device Simulator Solution](https://aws.amazon.com/solutions/implementations/iot-device-simulator/) provided by AWS, which has the ability to simulate a moving device.
 ## Conclusion
 Congratulations! You just built a simple asset tracking app using AWS Amplify, Amazon Location Service, and AWS IoT Core. If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
