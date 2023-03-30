@@ -1,8 +1,8 @@
 ---
-title: Automating the provisioning of your Apache Airflow environments
-description: Managing Apache Airflow is a complex task with lots of moving pieces. Using managed services like Managed Workflows for Apache Airflow reduces some of that complexity, but we still need a way of automating how we make Apache Airflow available to our users. In this tutorial you will learn how to reliabley and consistently manage your Apache Airflow environments using CodePipelines and AWS CDK
+title: "Automate the Provisioning of Your Apache Airflow Environments"
+description: "Managing services like Managed Workflows can reduce the complexity of Apache Airflow, but we still need a way to automate how we make Apache Airflow available to users. In this tutorial, you will learn how to reliably and consistently manage your Apache Airflow environments using CodePipelines and AWS CDK."
 tags:
-    - ci-cd
+    - cicd
     - mwaa
     - aws
     - airflow
@@ -12,11 +12,11 @@ tags:
     - cdk
 
 authorGithubAlias: ricsue-aws
-authorName: Sueiras
+authorName: Ricardo Sueiras
 date: 2023-04-01
 ---
 
-Organisations across the globe are striving to provide a better service to internal and external stakeholders by enabling various divisions across the enterprise, like customer success, marketing, and finance, to make data-driven decisions. Founded upon DevOps principals, these organisations are increasingly taking a "DataOps" approach to helping them to enable the data driven business.
+Organizations across the globe are striving to provide better service to internal and external stakeholders by enabling various divisions across the enterprise - like customer success, marketing, and finance - to make data-driven decisions. Founded upon DevOps principals, these organizations are increasingly taking a "DataOps" approach to helping them to enable the data driven business.
 
 According to wikipedia: 
 
