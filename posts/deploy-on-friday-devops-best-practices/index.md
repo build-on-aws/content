@@ -32,7 +32,7 @@ Mapping the coupling (even when it's inevitable), and identifying the costs rela
 
 A team I worked on wasted two weeks trying to stabilize software in January after a release freeze during December. The launch freeze was a request from the management team to minimize the risk of customers experiencing a service interruption during such, as they said, an "important time" of the year (Christmas and New Year's).
 
-That January was not a good start to the year for the team and neither for the customers. There were so many service disruptions, the planning for that quarter was compromised due to the unexpected workload, and job satisfaction dropped dramatically during that period.
+That January was not a good start to the year for the team and neither for the customers. There were so many service disruptions, part of the planning for that quarter was compromised due to the unexpected workload, and job satisfaction dropped dramatically during that period.
 
 There is no silver bullet regarding increasing reliability in the deployment process. However, working in small batches, deployed frequently, rather than large batches, with scheduled deployment is one of the practices that most contribute to reducing risk, since the smaller the amount of changes, it is easier to map, understand and monitor the possible side effects.
 
