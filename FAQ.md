@@ -17,6 +17,7 @@
   * [How do I show content in multiple columns?](#how-do-i-show-content-in-multiple-columns)
   * [How do I create an external post?](#how-do-i-create-an-external-post)
   * [How do I create a series of posts?](#how-do-i-create-a-series-of-posts)
+  * [How do I configure post images?](#how-do-i-configure-post-images )
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -391,6 +392,26 @@ This is how these controls look like:
 * Series Table Of Contents inside a post in the series 
   ![Series Table Of Contents inside a post in the series](SeriesToc.webp)
 
+### How do I configure post images?
+
+You can configure extra images for posts in the post FrontMatter header.
+
+````yml
+---
+images:
+  background: [image URL]
+  banner: [image URL]
+  thumbnail: [image URL]
+--- 
+````
+There are three types of images here:
+* background. This image will be used as a background when the post is displayed in a carousel of highlighted posts. 
+  This image should have a 1.91:1 aspect ratio. 
+* banner. This image is used when the post is displayed in a carousel of posts in a space. This image should have a 1.91:1 aspect ratio.
+* thumbnail. This image is displayed next to the title and description of a post when shown in a feed. It should be a square image.
+
+Additionally, these images may be used to create a preview when a post is shared in social media. The banner image is preferred, if there is none then the background image, and if not, the thumbnail image.
+Notice that images should be optimized for the web, using compressed modern formats such as webp, and avoiding large high-resolution images. Some social media (for example, Twitter) refuse to use large images and may fall back to other images found in the page.
 
 ## Miscellaneous
 
