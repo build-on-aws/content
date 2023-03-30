@@ -99,11 +99,11 @@ Each alarm must have an associated playbook, and each playbook may link one or m
 
 In addition to actionable alarms, teams must be able to observe the software without friction and intermediaries. Monitoring dashboards with application metrics, business metrics, centralized and structured logs, and traces (including distributed when it makes sense) are essential. The software must be observable, and there must be how-to guides that show how to observe it. The main idea here is that **no matter how inexperienced a firefighter is in a given context, it should be able to start fighting the fire, following steps and using the right tools.**
 
-## Things will go wrong: Rollback must be possible
+## Things will go wrong
 
-Even in applications that follow best practices in organizations ready to deploy on Fridays, in certain circumstances, there will be unexpected behavior in production, where the only option to re-establish operations will be to roll back the deployment.
+Even in applications and organizations that follow best practices, in certain circumstances, there will be unexpected behavior in production, where the only option to re-establish operations will be to roll back the deployment.
 
-To reduce the deploy pain, the team must have this technical capacity well developed so that there is certainty that the reversal of the release will not cause more problems for the users. 
+The team must be able to clearly identify that the reversal will not cause more problems for users. This technical capability should be developed as much as the capability to deployment. 
 
 I recommend reading Sandeep Pokkunuri's article on [ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/) to delve deeper into this subject.
 
@@ -113,7 +113,7 @@ I want to pay special attention to something I call heroism. **Nothing corrupts 
 
 A hero does not share information, has difficulty transferring knowledge through socialization, and does not create opportunities for the people around. A hero is only there to be called upon to save the day, whatever their activity. I have spoken a lot about this topic in my presentations in Brazil, and I am surprised by the number of people who say they work with "heroes" in their organizations and who identify with the negative aspects of heroism.
 
-Numerous practices can be applied to avoid heroism, such as pair programming, MOB programming, monitoring review meetings, game days, group whiteboard sessions, and more. An organization ready to deploy on Fridays understands that team culture and environment matter more than individual skill. By embracing DevOps culture and encouraging practices that maximize knowledge sharing, the organization fights heroism in favor of empowered and autonomous teams.
+Numerous practices can be applied to avoid heroism, such as pair programming, MOB programming, monitoring review meetings, game days, group whiteboard sessions, and more. An organization "ready to deploy on Fridays" understands that team culture and environment matter more than individual skill. By embracing DevOps culture and encouraging practices that maximize knowledge sharing, the organization fights heroism in favor of empowered and autonomous teams.
 
 ## Conclusion
 
