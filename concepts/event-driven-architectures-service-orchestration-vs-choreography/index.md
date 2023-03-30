@@ -1,5 +1,5 @@
 ---
-title: Event-Driven Architectures: Service Orchestration vs. Choreography
+title: "Event-Driven Architectures: Service Orchestration vs. Choreography"
 description: Quick introduction and comparison of two architectural styles, service orchestration and service choreography, including an overview of possible implementations on AWS.
 tags:
     - distributed-architecture
