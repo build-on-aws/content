@@ -102,7 +102,7 @@ Lastly, we need to create the workflows that will run `terraform plan` for all p
 ```bash
 mkdir -p .codecatalyst/workflows
 
-wget -P .codecatalyst/workflows .codecatalyst/workflows https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/main/.codecatalyst/workflows/main_branch.yml
+wget -P .codecatalyst/workflows https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/main/.codecatalyst/workflows/main_branch.yml
 wget -P .codecatalyst/workflows https://raw.githubusercontent.com/build-on-aws/manage-multiple-environemnts-with-terraform/main/.codecatalyst/workflows/pr_branch.yml
 
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/providers.tf
