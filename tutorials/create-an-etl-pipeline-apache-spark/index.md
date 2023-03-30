@@ -11,7 +11,7 @@ tags:
     - aws
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
-date: 2023-03-29
+date: 2023-03-30
 ---
 
 Extract, Transform, and Load (or ETL) - sometimes called Ingest, Transform, and Export - is vital for building a robust data engineering pipeline for any organization. Essentially, if the ETL pipeline is designed and built using the right tools and services, it brings high value to any organization both for batch and real-time processing. But designing and building such a pipeline is a time-consuming task, and it requires different skillsets considering the number of tools and frameworks in this big data space. Luckily, it's pretty easy if you're using EMR and Spark. 
