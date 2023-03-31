@@ -125,3 +125,4 @@ If you're interested in DevOps and want to learn more about how to implement it,
 - [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life)
 - [My CI/CD pipeline is my release captain](https://aws.amazon.com/builders-library/cicd-pipeline/)
 - [Going faster with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/)
+- [Ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/)
