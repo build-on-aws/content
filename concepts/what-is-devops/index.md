@@ -11,23 +11,22 @@ date: 2023-04-01
 ---
 So, what is DevOps? Is it a tool? Is it a kind of agile process like Scrum or Kanban? Does deploying to kubernetes mean we are doing DevOps? Where does it start and when have we reached the end?
 
-This guide is for anyone looking to learn or refresh themselves on the fundamental concepts of DevOps and its principles. You’ve probably landed here because you’re looking to learn more about it and how you can apply this knowledge to the problems you are facing. This guide will not sell you products, platforms or tools as solutions to those problems. There is no one size fits all solution, however there are existing patterns, frameworks, and mechanisms that have been tested and iterated upon which you can leverage. The goal for this document is to cover core DevOps concepts to leave you with a better understanding of what DevOps is, where it came from and optional resources to support your learning journey and inspiration for your next pursuit. Feel free to read this post from start to finish or to skip to sections that you're most interested in, whichever works best for you! 
+This guide is for anyone looking to learn or refresh themselves on the fundamental concepts of DevOps and its principles. You’ve probably landed here because you’re looking to learn more about it and how you can apply this knowledge to the problems you are facing. This guide will not sell you products, platforms or tools as solutions to those problems. There is no one size fits all solution, however there are existing patterns, frameworks, and mechanisms that have been tested and iterated upon which you can leverage. The goal for this document is to cover core DevOps concepts to leave you with a better understanding of what DevOps is, where it came from and optional resources to support your learning journey and inspiration for your next pursuit. By the end of this article, you should have a better understanding of what DevOps is, the history of where it came from, and what it isn't. Feel free to read this post from start to finish or to skip to sections that you're most interested in, whichever works best for you! 
 
-By the end of this article, you should have a better understanding of what DevOps is, the history of where it came from, and what it isn't.
 
 
 | ToC |
 | --- |
 
 ## What Is Not DevOps
-Before we dive into what DevOps *is*, let's touch on what it's *not*. DevOps is not a silver bullet solution for all of your problems. It is not a product, tool or solution you can buy and be done with. It also is not changing the name of an existing operations, sysadmin or similar team and informing the rest of engineering that you now do the DevOps. It is not a solo engineer who catches all the glue work nor is it telling your developers that they've all been promoted to DevOps engineers and will now maintain the infrastructure too. This is a recipe for disaster. Adopting Agile or Scrum processes will not solve the DevOps problem for you. While embracing Agile or Scrum processes can potentially support you on your DevOps journey, they alone do not set you up to succeed. 
+Before we dive into what DevOps *is*, let's touch on what it's *not*. DevOps is not a silver bullet solution for all of your problems. It is not a product, tool or solution you can buy and be done with. It also is not changing the name of an existing operations, system administrator or similar team and informing the rest of engineering that you now do the DevOps. It is not a solo engineer who catches all the glue work nor is it telling your developers that they've all been promoted to DevOps engineers and will now maintain the infrastructure too. This is a recipe for disaster. Adopting Agile or Scrum processes will not solve the DevOps problem for you. While embracing Agile or Scrum processes can potentially support you on your DevOps journey, they alone do not set you up to succeed. 
 
 To learn more about what DevOps is not with a side of humor, check out [How to Succeed At DevOps: Wrong Answers Only!](https://www.buildon.aws/posts/devops-wrong-answers-only)
 
 ## A Bit Of History
 
 ### 1970 - *Waterfall* Methodology
-Historically software teams delivered their products utilizing the Waterfall methodology which was created in 1970 and is a model where requirements for the next 6 months are captured in business requirements documents, and you build features for multiple months before doing a big-bang release. It consists of 5 phases:
+Historically, software teams delivered their products utilizing the Waterfall methodology which was created in 1970 and is a model where requirements for the next 6 months are captured in business requirements documentation, and you build features for multiple months before doing a big-bang release. It consists of 5 phases:
 
 1. Requirements
 2. Design 
@@ -35,15 +34,15 @@ Historically software teams delivered their products utilizing the Waterfall met
 4. Verification 
 5. Maitnenance 
 
-It's a model intended for situations requiring a high degree of precision before implementing. Consider scenarios which require a high degree of scrutinty such as in the aerospace industry where mistakes could cause loss of life. 
-In software, this often meant large quanities of work accumulated over time and were eventually released in one mega deployment before the teams went back to working for another long delivery cycle. Imagine taking months, or even *years* of your code and not knowing if it'll work until you finally get to deploy it? How do you manage all of the deprecated systems? The untested changes?
+It's a model intended for situations requiring a high degree of precision before implementing. Consider scenarios which require a high amount of scrutiny such as in the aerospace industry where mistakes could cause loss of life. 
+In software, this often meant large quanities of work accumulated over time and were eventually released in one mega deployment before the teams went back to working for another long delivery cycle. Imagine taking months, or even *years* of your code and not knowing if it'll work until you finally get to deploy it? How do you manage all of the differences in the system? The untested changes?
 
 The friction involved in developing under the waterfall methodology and the single points of failure encountered along the way set the stage for a DevOps classic: [The Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project)
 
 So where did DevOps come from?
 
 ### 1953 - *Lean Manufacturing and Kanban*
-Some might say that it began almost 20 years prior to the creation of the waterfall methodology in 1953 with Toyota, Lean manufacturing and something you may have heard about before - the Kanban system. Kanban was created as a way to minimize waste by focusing on producing what is needed, when it's needed and in the amount that's needed. 
+Some might say that DevOps began almost 20 years prior to the creation of the waterfall methodology in 1953 with Toyota, Lean manufacturing and something you may have heard about before - the Kanban system. Kanban was created as a way to minimize waste by focusing on producing what is needed, when it's needed and in the amount that's needed. 
 
 They did this by reducing the seven wastes:
 
@@ -70,9 +69,8 @@ But what does that mean?
 Check out this talk from DevOpsDays Cape Town 2016 [What Is DevOps?](https://www.youtube.com/watch?v=kCRD4pNuh80) by Dan Maher. 
 
 ## The Three Ways 
-<!-- The Phoenix Project (2013), DevOps Handbook (2016)  -->
 
-The first framework we'll cover today comes from [The DevOps Handbook]() and you can see it in action in [The Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project). 
+This first framework comes from [The DevOps Handbook](https://www.goodreads.com/en/book/show/26083308) and you can see it in action in [The Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project). 
 The DevOps Handbook focuses on 3 major pillars.
 
 * First Way - Principles of Flow and Systems Thinking:
@@ -86,19 +84,17 @@ The second way emphasizes the importance of getting fast and actionable feedback
 * Third Way - Principles of Continuous Experimentation and Learning:  
 The third way focuses on creating a culture of continual learning and experimentation, where teams are encouraged to take risks and innovate in order to drive continuous improvement. Exploration and discovery are just as important as being open to making mistakes and failures. This involves fostering a culture of innovation and experimentation, where teams are empowered to try new ideas and learn from both successes and failures. Organizations should also prioritize the use of data and analytics to inform decision-making, and should invest in ongoing training and development to promote a culture of learning and growth.
 
-The idea is that by focusing on these three principles, organizations can drive bettter business outcomes and value for our customers. The DevOps Handbook provides detailed guidance on how to bring these principles to life. As we’ve continued to iterate on the concept of DevOps itself, we've continued to create other frameworks to inform and  measure our success at DevOps. 
+The idea is that by focusing on these three principles, organizations can drive bettter business outcomes and value for our customers. The DevOps Handbook provides detailed guidance on how to bring these principles to life. As we’ve continued to iterate on the concept of DevOps itself, we've continued to create other frameworks to inform and measure our success at DevOps. 
 
 ## CALMS
-CALMS is a framework that represents the five key components crucial for doing the DevOps successfully and can help teams identify areas for improvement to efficiently prioritize their time and effort. 
+CALMS is a framework that represents the five key components crucial for implementing DevOps practices successfully and can help teams identify areas for improvement to efficiently prioritize their time and effort. 
 
-* Culture - DevOps is a people first approach so it makes sense that culture is the first point we discuss. It's about more than implementing tools and processes and is about creating a collaborative coluture which emphasizes communication, trust and shared goals. This culture is a relationship between how people communicate and how they expect to be communicated with. It focuses on bridging the distance between different departments, encouraging knowledge sharing and creating a shared sense of ownership and accountability. The people and their needs drive the processes and tools, not the other way around. 
+* Culture - DevOps is a people first approach so it makes sense that culture is the first point covered. It's about more than just implementing tools and processes and is about creating a collaborative coluture which emphasizes communication, trust and shared goals. This culture is a relationship between how people communicate and how they expect to be communicated with. It focuses on bridging the distance between different departments, encouraging knowledge sharing and creating a shared sense of ownership and accountability. The people and their needs drive the processes and tools, not the other way around. 
 
-
-* Automation - 
-Teams are empowered to work more efficiently and deliver higher quality products quicker when they are freed from repetitive and mundance tasks. Leverage tools and technology to seek out ways to automate as many tasks as possible and the team is comfortable with. This uses the strength of machines to quickly compute, repetitively deliver or other similar tasks while allowing the people to excel in creative or complex tasks that push the business forward. 
+* Automation - Teams are empowered to work more efficiently and deliver higher quality products quicker when they are freed from repetitive and mundance tasks. Leverage tools and technology to seek out ways to automate as many tasks as possible and the team is comfortable with. This uses the strength of machines to quickly compute, repetitively deliver or other similar tasks while allowing the people to excel in creative or complex tasks that push the business forward. 
 
 * Lean -
-Thee Lean principle emphasizes the value of minimizing waste and focusing on delivering. When we speak about DevOps, this means optimizing processes and workflows to iliminate bottlenecks and reduce the time it takes to deliver while also prioritizing feedback. Teams can do this by visualizing their work in progress, limiting batch sizes and managing queue lengths. 
+The Lean principle emphasizes the value of minimizing waste and focusing on delivering. When we speak about DevOps, this means optimizing processes and workflows to iliminate bottlenecks and reduce the time it takes to deliver while also prioritizing feedback. Teams can do this by visualizing their work in progress, limiting batch sizes and managing queue lengths. 
 
 * Measurement - In order to continuously improve and optimize the team's processes, you need to be able to measure and track metrics related to your development, delivery and performance. Data is collected and there are mechanisms in place that provide visibility into all systems which can involve tools like monitoring or observability based software to help generate insights which inform decision making. All systems is important here. Measuring our technical systems is important but so are Key Performance Indicators. Those are the raw numbers which make up the framework of the company and illustrate it's success or failure. There's a story to be told between the infrastructure your application lives on and the actions your organization is taking.
 
@@ -111,25 +107,25 @@ So what do healthy DevOps organizations look like?
 
 ## Team topologies
 
-Team Topologies describe the different patterns of organizing teams to optimize flow of work and communication across the organization. 
+Team Topologies describe the different patterns of organizing teams to optimize the flow of work and communication across the organization. 
 
 Some of the common team patterns you'll encounter: 
 
 Functional Teams: Teams are organized by their function here such as development, testing, and operations. Each one is responsible for a particular part of the software development lifecycle and functions independently from the others. Anti-Type A vs Type 1. 
 
-Feature Teams: 
+Feature Teams: These teams are cross-functional teams that work together to deliver a specific feature or component of the product. 
 
-Service Teams: 
+Service Teams: Teams are responsible for specific parts of the software infrastructure or platform such as networking or database management. 
 
-Platform Teams:
+Platform Teams: These teams provide and maintain the underlying platform or infrastructure which supports the software development and delivery process. 
 
-Community of Practice: 
+First and foremost the best team structure is the one that works in your environment and targets the specific needs and goals of your organization. No matter which team structure you have, the key is to optimize communication and cross team collaboration. 
 
-If you're interested in deep diving this topic for more information on the patterns and anti-patterns of teams in a DevOps organization, you can learn more here: [DevOps Topologies](https://web.devopstopologies.com/)
+Across all the models and patterns the most common red flag is if silos still exist between your development and operations teams. Whichever model you're using, if there isn't open collaboration between the teams than it isn't DevOps. 
 
+If you're interested in deep diving into this topic for more information on the patterns and anti-patterns of teams in a DevOps organization, you can learn more here: [DevOps Topologies](https://web.devopstopologies.com/)
 
-
-You’ve probably heard lots of different terms for DevOps - traditionally infrastructure problems were solved by System Administrators, but more recently you may also have heard Platform Engineering or Site Reliability Engineering. It’s my opinion that all of these roles fall under the same umbrella but may have different approaches, metrics or perspectives on how to solve their problems. 
+<!-- You’ve probably heard lots of different terms for DevOps - traditionally infrastructure problems were solved by System Administrators, but more recently you may also have heard Platform Engineering or Site Reliability Engineering. It’s my opinion that all of these roles fall under the same umbrella but may have different approaches, metrics or perspectives on how to solve their problems. 
 
 Organational structure & buy in -> ability to deliver using DevOps methodology.
 An individual cannot do the devops -> explain why.
@@ -139,7 +135,7 @@ That's not to say that if your job title is devops you're out of luck etc.
 
 DevOps Engineer - not a specific kind of coder.
 Anyone can do it.
-It means someone who's responsible for shepherding & fostering DevOps principales 
+It means someone who's responsible for shepherding & fostering DevOps principales  -->
 
 ## Getting Started
 (Nice place to link to the post on "Good Places to Start Your DevOps Journey" article.)
