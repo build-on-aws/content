@@ -52,6 +52,7 @@ Before proceeding, ensuring we have following prerequisites setup and ready to u
 * **CDK installed**: Visit our [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) guide to learn more.
 * A **GitHub account** : Visit [GitHub.com](https://github.com/) and follow the prompts to create your account.
 
+
 ## Build a Web Application
 
 We will create a non-containerized application that we will deploy to the cloud. For this example, we are going to use Node.js to build a web application.
@@ -195,9 +196,15 @@ If you need help, you can read the [GitHub documentation on how to create a repo
 
 It is also a best practice to use tokens instead of passwords to access your github account via github api or command line.  Read more about [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic).
 
+Save the token at a safe place for use later. We will be using this token for two purposes : </br>
+1 .Provide authentication to stage, commit and push code from local repo to the GitHub repo. You may also use [SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) for this</br>
+2. Connect GitHub to CodePipeline, so whenever new code is committed to GitHub repo it automatically triggers pipeline execution
+
 The token should have the scopes **repo** (to read the repository) and **admin:repo_hook** (if you plan to use webhooks, true by default) as shown in below image.
 
 ![GitHub token scopes provide access to repo and admin repo hook](images/GitHub-repo-hooks.png)
+
+
 
 ### Create the CDK app
 
@@ -213,12 +220,12 @@ Please install the specific version of the CDK to match the dependencies that ar
 
 Example : 
 ```bash
-npm install -g cdk@2.70.0
+npm install cdk@2.70.0
 ```
 
 Initialize the CDK application that we will use to create the infrastructure.
 ```bash
-cdk init app —-language typescript
+npx cdk init app —-language typescript
 ```
 
 CDK will also initiate a local git repository. Rename the branch to main.
@@ -245,7 +252,7 @@ echo 'src/node_modules' >> .gitignore
 
 At this point, our folder structure should look like this:
 
-![Ideal folder structure](images/folder_structure.png)
+![Ideal folder structure](images/folder_structure_1.png)
 
 In the following commands, we are adding all the files in current folder to stage, commit and push it to our remote github repository. We are also caching the credentials using the Git credentials cache command.
 
@@ -266,11 +273,11 @@ For the first time, it will ask you username and password for the git repo and l
 
 We are going to delete the default file created by CDK and define our own code for all the ElasticBeanstalk resources stack.
 
-Simply run following code to remove the `/lib/cdk-pipeline-eb-demo.ts` and create a new file `/lib/eb-appln-stack.ts`.
+Simply run following code to remove the `./lib/cdk-pipeline-eb-demo.ts` and create a new file `./lib/eb-appln-stack.ts`.
 
 ```bash
-rm -rf /lib/cdk-pipeline-eb-demo.ts
-vi /lib/eb-appln-stack.ts
+rm -rf ./lib/cdk-pipeline-eb-demo.ts
+vi ./lib/eb-appln-stack.ts
 ```
 
 Paste following to `/lib/eb-appln-stack.ts` :
@@ -279,9 +286,17 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 // Add import statements here
 
+export interface EBEnvProps extends cdk.StackProps {
+    // Autoscaling group configuration
+  minSize?: string;
+  maxSize?: string;
+  instanceType?: string;
+  envName?: string;
+}
+
 export class EBApplnStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
+   constructor(scope: Construct, id: string, props?: EBEnvProps) {
+       super(scope, id, props);
 
     // The code that defines your stack goes here
 
@@ -290,6 +305,8 @@ export class EBApplnStack extends cdk.Stack {
   }
 }
 ```
+
+We have defined a CDK Stack and a StackProps interface to accept optional stack properties. These will be referenced during initialization later.
 
 In this file `/lib/eb-appln-stack.ts`, we will write the code for all the resources stack we are going to create in this section. You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts).
 
@@ -421,12 +438,12 @@ To that role we then add the managed policy A`WSElasticBeanstalkWebTier`. We the
 
 The last part we need to create is the Elastic Beanstalk environment. The environment is a collection of AWS resources running an application version. For the environment, we will need to give some information about the infrastructure.
 
-Let's start by creating the environment. When creating the environment we need to give it a **environment name** that will appear in the Elastic Beanstalk console — in this case, we are naming the environment `MyWebAppEnvironment`.
+Let's start by creating the environment. When creating the environment we need to give it a **environment name** that will appear in the Elastic Beanstalk console — in this case, we are naming the environment `MyWebAppEnvironment`. 
 
 Then we need to give the **application name**, which we will get from the Elastic Beanstalk application definition earlier.
 
 The **solution stack name** is the name of the managed platform that Elastic Beanstalk provides for running web applications. Using the right solution name, Elastic Beanstalk will provision the right resources for our application, for example, the Amazon EC2 instances. We should choose the right software stack depending on the framework and platform we chose to develop our web app. 
-For this particular case, we are going to put this string `'64bit Amazon Linux 2 v5.7.0 running Node.js 14'`. At the end of this blog, there is more information about solution stack names, if you are interested to know where this string came from.
+For this particular case, we are going to put this string `'64bit Amazon Linux 2 v5.8.0 running Node.js 18'`. At the end of this blog, there is more information about solution stack names, if you are interested to know where this string came from.
 
 The option settings attribute allows us to configure the Elastic Beanstalk environment to our needs:
 
@@ -448,33 +465,37 @@ const optionSettingProperties: elasticbeanstalk.CfnEnvironment.OptionSettingProp
     {
         namespace: 'aws:autoscaling:asg',
         optionName: 'MinSize',
-        value: '1',
+        value: props?.maxSize ?? '1',
     },
     {
         namespace: 'aws:autoscaling:asg',
         optionName: 'MaxSize',
-        value: '1',
+        value: props?.maxSize ?? '1',
     },
     {
         namespace: 'aws:ec2:instances',
         optionName: 'InstanceTypes',
-        value: 't2.micro',
+        value: props?.instanceType ?? 't2.micro',
     },
 ];
 ```
 
+Here, we are referring to the stack properties that we will provide during initialization. If we do not provide properties, it will consider the defaults provided here. 
+
 Finally we have the **version label**. This is an important attribute as it needs to be a reference to the application version that we created in previous step.
 
-With this information, we can now create our Elastic Beanstalk environment.
+With this information, we can now create our **Elastic Beanstalk environment**.
+
+Here we are stating that - if no `envName` property is provided during stack/stage initialization, then use the default name `"MyWebAppEnvironment"`.
 
 Add following code in the stack definition file `/lib/eb-appln-stack.ts`: 
 
 ```Typescript
 // Create an Elastic Beanstalk environment to run the application
 const elbEnv = new elasticbeanstalk.CfnEnvironment(this, 'Environment', {
-    environmentName: 'MyWebAppEnvironment',
+    environmentName: props?.envName ?? "MyWebAppEnvironment",
     applicationName: app.applicationName || appName,
-    solutionStackName: '64bit Amazon Linux 2 v5.7.0 running Node.js 14',
+    solutionStackName: '64bit Amazon Linux 2 v5.8.0 running Node.js 18',
     optionSettings: optionSettingProperties,
     versionLabel: appVersionProps.ref,
 });
@@ -590,11 +611,11 @@ If this is the first time you are using AWS CDK in this account, and in this AWS
 
 To bootstrap your AWS account and Region, run the following:
 
-`cdk bootstrap aws://ACCOUNT-NUMBER/REGION`
+`npx cdk bootstrap aws://ACCOUNT-NUMBER/REGION`
 
 This should look something like this:
 
-`cdk bootstrap aws://123456789012/us-east-1`
+`npx cdk bootstrap aws://123456789012/us-east-1`
 
 You can get the account number from the AWS Management Console, and the Region name from [this list](https://docs.aws.amazon.com/general/latest/gr/rande.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
@@ -621,7 +642,7 @@ Please note, the pipeline created by CDK pipelines is self-mutating. This means 
 
 So, as a one-time operation, deploy the pipeline stack:
 ```bash
-cdk deploy
+npx cdk deploy
 ```
 
 Because we created a new role, we will be asked to confirm changes in our account security level. Please note, the resource changes list will be longer than shown in the following image. This is for representation purposes only.
@@ -649,25 +670,30 @@ The first step is to define our own subclass of stage, which describes a single 
 Create a new file `lib/eb-stage.ts` and put the following code in it:
 
 ```Typescript
-import { CfnOutput, Stage, StageProps } from 'aws-cdk-lib';
+import {  Stage } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { EBApplnStack } from './eb-appln-stack';
+import { EBEnvProps, EBApplnStack } from './eb-appln-stack';
 
 /**
  * Deployable unit of web service app
  */
 export class CdkEBStage extends Stage {
       
-  constructor(scope: Construct, id: string, props?: StageProps) {
+  constructor(scope: Construct, id: string, props?: EBEnvProps) {
     super(scope, id, props);
 
-    const service = new EBApplnStack(this, 'WebService');
-    
+    const service = new EBApplnStack(this, 'WebService', {
+        minSize : props?.minSize, 
+        maxSize : props?.maxSize,
+        instanceType : props?.instanceType,
+        envName : props?.envName
+    } );
+
   }
 }
 ```
 
-Now, add instances of our CdkEBStage to the pipeline.
+Now, add instances of our CdkEBStage to the pipeline. 
 
 Add a new import line at the top of `lib/cdk-pipeline-stack.ts` :  
 ```Typescript
@@ -677,10 +703,19 @@ import { CdkEBStage } from './eb-stage';
 and following code after the mentioned comment: 
 ```Typescript
     // This is where we add the application stages
+
     // deploy beanstalk app
-    const deploy = new CdkEBStage(this, 'Pre-Prod');
+    // For environment with all default values :
+    // const deploy = new CdkEBStage(this, 'Pre-Prod');
+
+    // For environment with custom AutoScaling group configuration
+    const deploy = new CdkEBStage(this, 'Pre-Prod', { 
+        minSize : "1",
+        maxSize : "2"
+    });
     const deployStage = pipeline.addStage(deploy); 
 ```
+Here, we are providing custom values for the `minSize`, and `maxSize`. We are using the **default** `instanceType` and `environment name` defined in the CDK stack.  If you want to add another stage to the pipeline, make sure to add a custom value for `envName` to differentiate the Beanstalk environments.
 
 All we have to do now is to commit and push this, and the pipeline will automatically reconfigures itself to add the new stage and deploy to it. Let's run `npm run build` first to make sure there are no typos.
 
@@ -783,7 +818,7 @@ To fix this, you need to update all the CDK packages to the same version. You ca
 
 In the [documentation](https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), you can read about all the supported platforms for Elastic Beanstalk. We update this page as newer platforms are added and older platforms get retired.
 
-If you are curious about how to get the right platform name, such as `64bit Amazon Linux 2 v5.7.0 running Node.js 14`, you can use the AWS CLI to get a [list of all the supported platforms.](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elasticbeanstalk/list-available-solution-stacks.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+If you are curious about how to get the right platform name, such as `64bit Amazon Linux 2 v5.8.0 running Node.js 18`, you can use the AWS CLI to get a [list of all the supported platforms.](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/elasticbeanstalk/list-available-solution-stacks.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ```bash
 aws elasticbeanstalk list-available-solution-stacks
