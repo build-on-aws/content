@@ -1,5 +1,5 @@
 ---
-title: "Build a CI/CD Pipeline to Improve Your IaC with CloudFormation"
+title: "Build a CI/CD Pipeline to Improve Your IaC with AWS CloudFormation"
 description: A walk-through of how to create a CI/CD pipeline from scratch using Amazon CodeCatalyst, to deploy your Infrastructure as Code (IaC) with AWS CloudFormation.
 tags:
   - aws
