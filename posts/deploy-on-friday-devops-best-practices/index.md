@@ -1,11 +1,11 @@
 ---
 title: "12 DevOps Best Practices That Make Deploying on Fridays Less Scary"
-description: Why not deploy on Fridays? These 12 best practices, each with real-world examples, will help you understand how DevOps culture and practices can collaborate to mitigate risk and reduce the pain of deployment, making it less risky.
+description: Why not deploy on Fridays? These 12 best practices, each with real-world examples, will help you understand how DevOps culture and practices can collaborate to mitigate risk and reduce the pain of deployment.
 tags:
   - devops
 authorGithubAlias: mfpalla
 authorName: Marcelo Palladino
-date: 2023-03-15
+date: 2023-04-05
 ---
 
 Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays -- or the day before any "important" day. It makes sense: you don't want your application to break when use will be high and no one is around to fix it. But the longer I worked in some technical and cultural capacities, the clearer it became that the risk of deploying on Fridays was significantly higher because of certain bad Devops practices. Look, deploying code always entails the risk of availability loss, but that risk can be significantly diminished by adopting these 12 best practices.
