@@ -8,7 +8,7 @@ tags:
   - infrastructure-as-code
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
-date: 2023-03-28
+date: 2023-04-05
 ---
 We as developers want to deploy our web applications in the fastest way possible without having to manage the underlying infrastructure. The cherry on top would be packaging both the application and infrastructure as code and running it through a Continuous integration and continuous delivery(CI/CD) pipeline. That way, we could apply the same best practices of versioning, tracking changes, reviewing code, performing tests, and allowing rollbacks.
 
@@ -38,7 +38,7 @@ In this guide, we will learn how to:
 | 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment/)<br>- [AWS CDK v2.7.0 installed](https://aws.amazon.com/getting-started/guides/setup-cdk)<br>- [GitHub account](https://github.com/)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-03-28                                                     |
+| ⏰ Last Updated        | 2023-04-05                                                     |
 
 | ToC |
 |-----|
@@ -288,7 +288,7 @@ export interface EBEnvProps extends cdk.StackProps {
     // Autoscaling group configuration
   minSize?: string;
   maxSize?: string;
-  instanceType?: string;
+  instanceTypes?: string;
   envName?: string;
 }
 
@@ -473,7 +473,7 @@ const optionSettingProperties: elasticbeanstalk.CfnEnvironment.OptionSettingProp
     {
         namespace: 'aws:ec2:instances',
         optionName: 'InstanceTypes',
-        value: props?.instanceType ?? 't2.micro',
+        value: props?.instanceTypes ?? 't2.micro',
     },
 ];
 ```
@@ -605,7 +605,7 @@ aws secretsmanager  create-secret --name github-token --description "Github acce
 ```
 For more help, see [Creating and Retrieving a Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-If you are interested to use a different secret name other than the default name `github-token`, there is more information at the end of this blog. 
+If you are interested to use a different secret name other than the default name `github-token`, there is [more information](/tutorials/deploy-webapp-eb-cdk#github-token-to-connect-github-repository-with-codepipeline) at the end of this blog. 
 
 ## Deploy Web Application
 
@@ -660,7 +660,7 @@ Because we created a new role, we will be asked to confirm changes in our accoun
 Respond with **y**, and then the deployment will start. It takes a few minutes to complete. When it is done, we will receive a message containing the ARN [(Amazon Resource Name)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) of the CloudFormation stack that this deployment created for us.
 
 Open the CloudFormation Management console, to see the new CloudFormation stack.
-![Alt text](images/cloudFormation-new-stack.png)
+![New stack is in CREATE_IN_PROGRESS state in CloudFormation console](images/cloudFormation-new-stack.png)
 
 This take a couple of minutes to finish. At the end, we can find a pipeline in our [CodePipeline console](http://console.aws.amazon.com/codesuite/codepipeline/home?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), as in the following screenshot.
 
@@ -693,7 +693,7 @@ export class CdkEBStage extends Stage {
     const service = new EBApplnStack(this, 'WebService', {
         minSize : props?.minSize, 
         maxSize : props?.maxSize,
-        instanceType : props?.instanceType,
+        instanceTypes : props?.instanceTypes,
         envName : props?.envName
     } );
 
@@ -723,7 +723,7 @@ and following code after the mentioned comment:
     });
     const deployStage = pipeline.addStage(deploy); 
 ```
-Here, we are providing custom values for the `minSize`, and `maxSize`. We are using the **default** `instanceType` and `environment name` defined in the CDK stack.  If you want to add another stage to the pipeline, make sure to add a custom value for `envName` to differentiate the Beanstalk environments.
+Here, we are providing custom values for the `minSize`, and `maxSize`. We are using the **default** `instanceTypes` and `environment name` defined in the CDK stack.  If you want to add another stage to the pipeline, make sure to add a custom value for `envName` to differentiate the Beanstalk environments.
 
 All we have to do now is to commit and push this, and the pipeline will automatically reconfigures itself to add the new stage and deploy to it. Let's run `npm run build` first to make sure there are no typos.
 
