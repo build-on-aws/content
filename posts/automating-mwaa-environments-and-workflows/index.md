@@ -1,6 +1,6 @@
 ---
 title: "Automate the Provisioning of Your Apache Airflow Environments"
-description: "Managing services like Managed Workflows can reduce the complexity of Apache Airflow, but we still need a way to automate how we make Apache Airflow available to users. In this tutorial, you will learn how to reliably and consistently manage your Apache Airflow environments using CodePipelines and AWS CDK."
+description: "Managing Apache Airflow is a complex task, leading many to use managed services like Managed Workflows for Apache Airflow. In this tutorial you will learn how to reliably and consistently manage your Apache Airflow environments through the use of automation and infrastructure as code."
 tags:
     - cicd
     - mwaa
@@ -16,27 +16,7 @@ authorName: Ricardo Sueiras
 date: 2023-04-01
 ---
 
-Organizations across the globe are striving to provide better service to internal and external stakeholders by enabling various divisions across the enterprise - like customer success, marketing, and finance - to make data-driven decisions. Founded upon DevOps principals, these organizations are increasingly taking a "DataOps" approach to helping them to enable the data driven business.
-
-According to wikipedia: 
-
-> DataOps is a set of practices, processes and technologies that combines an integrated and process-oriented perspective on data with automation and methods from agile software engineering to improve quality, speed, and collaboration and promote a culture of continuous improvement in the area of data analytics.
-> 
-> [source](https://en.wikipedia.org/wiki/DataOps)
-
-DataOps grew out of frustrations trying to build a scalable, reusable data pipeline in an automated fashion.
-
-> **Additional Reading** You can read more about this in this blog post, [Build a DataOps platform to break silos between engineers and analysts](https://aws.amazon.com/blogs/big-data/build-a-dataops-platform-to-break-silos-between-engineers-and-analysts/) and [Modern data engineering in higher ed: Doing DataOps atop a data lake on AWS](https://aws.amazon.com/blogs/publicsector/modern-data-engineering-higher-ed-dataops-data-lake/)
-
-One of the tools that business has increasingly turned to in the journey to automate and streamline how they are able to extract insights from data is Apache Airflow. Apache Airflow is an open-source orchestration tool used to programmatically create workflows in Python that help you schedule, run, and manage data pipelines within your business. I speak with many customers that have tried and then adopted Apache Airflow because it is a great orchestration tool. As you scale usage and adoption, staying on top of how you manage and make Airflow available to your users can become overwhelming. 
-
-The good news is that we can borrow heavily from modern development techniques, and specifically DevOps, to help us automate many if not most of the activities we need to scale. 
-
-> **DevOps: What is it?**
-> 
-> DevOps is the combination of cultural philosophies, practices, and tools that increases an organisation’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organisations using traditional software development and infrastructure management processes. This speed enables organisations to better serve their customers and compete more effectively in the market.
-> 
-> [source](https://aws.amazon.com/devops/what-is-devops/)
+Businesses everywhere are striving to provide value for their customers by making data driven decisions. Data analytics is core to this success, but building scalable, reusable data pipelines is hard. Apache Airflow is an open source orchestration tool that many have adopted to automate and streamline how they build those data pipelines. As you scale usage and adoption, staying on top of how you manage and make Airflow available to your users can become overwhelming. The good news is that we can borrow heavily from modern development techniques, and specifically DevOps, to help reduce the time needed to create and scale those data pipelines.
 
 ## What you will learn
 
@@ -450,7 +430,7 @@ In the first part of this tutorial, we looked at how we could use AWS CDK to cre
 
 ## Automating Connections and Variables
 
-Apache Airflow allows you to store data in its metastore that you can then rely upon when you are writing your workflows. This allows you to parameterise your code and create more re-usable workflows. The two main ways Airflow helps you do this is by storing Variables and Connections. Variables are key pair values that you can then refer to via Airflow code. Connections are used by Operators to abstract connection and authentication details, thus allowing you to separate what the sys admins and security folk know (all the secret stuff that goes into connecting to stuff) versus what your developer need to know (the Connection id). Both Variables and Connections are encrypted in the Airflow metastore.
+Apache Airflow allows you to store data in its metastore that you can then rely upon when you are writing your workflows. This allows you to parameterise your code and create more re-usable workflows. The two main ways Airflow helps you do this is by storing Variables and Connections. Variables are key pair values that you can then refer to via Airflow code. Connections are used by Operators to abstract connection and authentication details, thus allowing you to separate what the sys admins and security folk know (all the secret stuff that goes into connecting to stuff like passwords which you do not want to make generally available) versus what your developer need to know (the Connection id). Both Variables and Connections are encrypted in the Airflow metastore.
 
 > **Read more** Check out this detailed post to dive even deeper into this topic - https://dev.to/aws/working-with-parameters-and-variables-in-amazon-managed-workflows-for-apache-airflow-4f5h
 
