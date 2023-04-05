@@ -13,7 +13,7 @@ date: 2023-02-27
 ---
 Building a serverless application can be a challenging task for developers. It requires a good understanding of serverless computing, AWS services, and the technical skills to design and deploy the application. However, with [AWS Application Composer](https://aws.amazon.com/application-composer/), the process of building a serverless application becomes much easier.
 
-In this post, I will share how I built a prototype application to easily analyze meetup data. This will be an intermediate level guide, so some knowledge of AWS, Bash, and Python will be required to follow along. I will walk through the steps to build a workload that displays [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components:
+In this post, I will share how I built a prototype application to easily analyze meetup data. This will be an intermediate level guide, so some knowledge of AWS, Bash, and Python will be required to follow along. You'll also need a [Meetup Pro Subscription](https://help.meetup.com/hc/en-us/articles/5379928688653-FAQs-about-Meetup-Pro) if you want to build your own version of the application. I will walk through the steps to build a workload that displays [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components:
 
 * A scheduled Lambda function that gets Meetup data and stores it in a database
 * An API to get the Meetup data
@@ -35,6 +35,8 @@ Then we'll configure each resource based on our use case. For the EventBridge Sc
 
 Next, we will configure the properties for the Lambda Function. We will create a folder called ‘functions’ later that will hold the code, and we use the python3.9 runtime. Because the Lambda is connected to the DynamoDB Table, we get the necessary IAM policy and environment variables added to access the table. Finally, we add one more environment variable for the [Meetup API Key](https://www.meetup.com/api/general/).
 
+**Note: You must have a [Meetup Pro Subscription](https://www.meetup.com/lp/meetup-pro-features) to get access to the API**
+
 ![Lambda properties](images/lambda_pic.png)
 
 For DynamoDB, we will just change the ID of the Table.
@@ -47,20 +49,18 @@ Now we have everything we need to create a template to deploy our function. We c
 
 ## Part 2:  Deploying the Scheduled Lambda Function
 
-It’s important to note that Application Composer does not create code or deploy infrastructure for you, but rather helps you design the interface for your workflow. We'll still need to write the code for the Lambda function. In this section, we'll create the functions folder and create the Lambda function code and requirements. 
+It’s important to note that Application Composer does not create code or deploy infrastructure for you, but rather helps you design the interface for your workflow. We'll still need to write the code for the Lambda function. In this section, we'll create the functions folder and create the Lambda function code and requirements.
 
 ![Current files](images/tree_1.png)
 
 The `get_meetup_data.py` handler function will call the Meetup GraphQL endpoint to retrieve data and store it in the DynamoDB table. You can view the code [here](https://github.com/aws-banjo/serverless_meetup_example/blob/main/functions/load_meetup_data.py).
 
-Next, we can deploy the Lambda Function using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/). AWS Application Composer already did the hard work of designing the infrastructure components that we need to create, so we can focus on the code so we can have a “push button” deploy.
-
-We can run the following to deploy the application:
+Next, we can deploy the Lambda Function using the [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/). AWS Application Composer already did the hard work of designing the infrastructure components that we need to create, so we can focus on the code so we can have a “push button” deploy. SAM reads the `template.yaml` file created by AWS Application Composer so we can now run the following to deploy the application:
 
 ```bash
 sam build
 sam deploy --guided
-``` 
+```
 
 ![SAM Build](images/sam_build.png)
 ![SAM Deploy](images/sam_deploy.png)

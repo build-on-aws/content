@@ -16,7 +16,9 @@ This is an 8-part series about Picturesocial:
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
 4. How to deploy an app to Kubernetes (this post)
-5. [How to analyze images with Machine Learning?](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
+5. [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
+6. [How to use DynamoDB on a containerized API](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/)
+7. [How to use DynamoDB on a containerized API](/posts/picturesocial/07-how-to-expose-a-containerized-api-to-the-internet/)
 
 So far we have learned about containers, Kubernetes, and Terraform. Now, it’s time to use the knowledge that we acquired in the previous posts to deploy a container on our Amazon EKS cluster. In this post, we are also going to learn about the Kubectl tool and some commands to handle basic Kubernetes tasks.
 
@@ -57,15 +59,15 @@ If this is your first time working with AWS CLI or you need a refresher on how t
 kubectl version
 ```
 
-You should have a version of at least `Major:"1", Minor:"23" ` to run this walk-through. Otherwise, I suggest you to [upgrade the version](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) first.
+You should have a version of at least `Major:"1", Minor:"23"` to run this walk-through. Otherwise, I suggest you to [upgrade the version](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) first.
 
-2. When you created the cluster, you also run a command to update the kubeconfig file. You don’t have to run it again, but just a friendly reminder that it is a necessary step to continue further.
+2. When you created the cluster, you also run a command to update the `kubeconfig` file. You don’t have to run it again, but just a friendly reminder that it is a necessary step to continue further.
 
 ```bash
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
 ```
 
-This downloads a kubeconfig file into your local terminal with: a) the cluster name, b) kubernetes api URL, c) key to connect. That file is saved by default in `/.kube/config`. You can see an example below, from Kubernetes official documentation:
+This downloads a `kubeconfig` file into your local terminal with: a) the cluster name, b) kubernetes api URL, c) key to connect. That file is saved by default in `/.kube/config`. You can see an example below, from Kubernetes official documentation:
 
 ```yaml
 apiVersion: v1
@@ -135,7 +137,7 @@ kubectl get pods --all-namespaces
 
 ![Image showing output of kubectl get pods --all-namespaces](images/04-kubectl-get-pods-namespaces.jpg "Image showing output of kubectl get pods --all-namespaces")
 
-6. Similarily with services, we can check all the services in the cluster. As you can see, you have the default service that will handle the kubecontrol requests and the kube-dns that will handle the calls to the coredns of the cluster. It’s important that we don’t edit or delete any of the those services or pods, believe me :)
+6. Similarly with services, we can check all the services in the cluster. As you can see, you have the default service that will handle the `kubecontrol` requests and the kube-dns that will handle the calls to the `coredns` of the cluster. It’s important that we don’t edit or delete any of the those services or pods, believe me :)
 
 ```bash
 kubectl get services --all-namespaces

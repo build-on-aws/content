@@ -18,7 +18,9 @@ This is an 8-part series about Picturesocial:
 2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
 3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
 4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
-5. How to analyze images with Machine Learning? (this post)
+5. How to analyze images with Machine Learning (this post)
+6. [How to use DynamoDB on a containerized API](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/)
+7. [How to use DynamoDB on a containerized API](/posts/picturesocial/07-how-to-expose-a-containerized-api-to-the-internet/)
 
 We started this journey with containers, registries, Kubernetes, Terraform, and some other tools that enabled us to deploy our first API, but this journey is just starting. The core of Picturesocial is the capability to add tags automatically based on the pictures uploaded to our social network platform and this is what we are going to learn in this post by using artificial intelligence services with picture and pattern recognition.
 
