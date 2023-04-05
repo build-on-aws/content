@@ -16,7 +16,7 @@ I've been dismayed to see cases where a recurring meeting was required, where th
 
 Deploy processes that require synchronization and coordination activities must be identified and avoided, as they slow down teams and increase management costs. 
 
-You can learn about real-world teams that enabled independent deployment in a multi-service application reading the Seth Eliot's [article](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/). Also, depending on your age, this may be the first time you've heard about pager.
+You can learn about real-world teams that enabled independent deployment in a multi-service application reading the Seth Eliot's [article](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/). Also, depending on your age, this may be the first time you've heard about a pager.
 
 ## Identify and avoid coupling
 
