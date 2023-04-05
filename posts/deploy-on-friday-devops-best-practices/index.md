@@ -3,7 +3,7 @@ title: "12 DevOps Best Practices That Make Deploying on Fridays Less Scary"
 description: Why not deploy on Fridays? These 12 best practices, each with real-world examples, will help you understand how DevOps culture and practices can collaborate to mitigate risk and reduce the pain of deployment.
 tags:
   - devops
-authorGithubAlias: mfpalla
+authorGithubAlias: mfpalladino
 authorName: Marcelo Palladino
 date: 2023-04-05
 ---
