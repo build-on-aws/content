@@ -82,7 +82,7 @@ cdk init --language typescript
 
 #### 1.2 Create an EKS Cluster with EKS Blueprints
 
-**EKS Blueprints** helps you compose complete EKS clusters that are fully bootstrapped with the operational software that is needed to deploy and operate workloads. With EKS Blueprints, you describe the configuration for the desired state of your EKS environment, such as the control plane, worker nodes, and Kubernetes add-ons, as an IaC blueprint. Once a blueprint is configured, you can use it to stamp out consistent environments across multiple AWS accounts and Regions using continuous deployment automation.
+**[EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/)** helps you compose complete EKS clusters that are fully bootstrapped with the operational software that is needed to deploy and operate workloads. With EKS Blueprints, you describe the configuration for the desired state of your EKS environment, such as the control plane, worker nodes, and Kubernetes add-ons, as an IaC blueprint. Once a blueprint is configured, you can use it to stamp out consistent environments across multiple AWS accounts and Regions using continuous deployment automation.
 
 You can use EKS Blueprints to easily bootstrap an EKS cluster with Amazon EKS add-ons as well as a wide range of popular open-source add-ons, including Prometheus, Karpenter, Nginx, Traefik, AWS Load Balancer Controller, Fluent Bit, Keda, ArgoCD, and more. EKS Blueprints also helps you implement relevant security controls needed to operate workloads from multiple teams in the same cluster.
 
@@ -278,7 +278,7 @@ We will demonstrate a specific application - "sock shop" - and practical exercis
 
 #### 3.1 About Sock Shop
 
-We will use the user-facing section of the sock shop online store as an sample. It is built with Spring Boot, Go Kit, and Node - and it is packaged in Docker containers. As a "Microservice Standard Demo", it will show:
+We will use the user-facing section of the **[sock shop](https://github.com/microservices-demo/microservices-demo)** online store as an sample. It is built with Spring Boot, Go Kit, and Node - and it is packaged in Docker containers. As a "Microservice Standard Demo", it will show:
 
 - Best practices for microservices deployment (including examples of mistakes)
 
@@ -713,7 +713,5 @@ We will explore each of these issues in subsequent blogs.
 - [GitOps: Cloud-native Continuous Deployment](https://www.gitops.tech/)
 - [GitOps on Kubernetes: Deciding Between Argo CD and Flux](https://thenewstack.io/gitops-on-kubernetes-deciding-between-argo-cd-and-flux/)
 - [[Tech Blog\] Bootstrapping clusters with EKS Blueprints ](https://aws.amazon.com/cn/blogs/containers/bootstrapping-clusters-with-eks-blueprints/)
-- [Amazon EKS Blueprints Quick Start ](https://aws-quickstart.github.io/cdk-eks-blueprints/)
 - [Amazon EKS Blueprints for CDK ](https://github.com/aws-quickstart/cdk-eks-blueprints)
-- <https://aws.amazon.com/cn/blogs/china/build-ci-cd-pipeline-in-gitops-on-aws-china-eks/>
-- <https://www.weave.works/technologies/gitops/>
+- [Microservices Demo](https://github.com/microservices-demo/microservices-demo)
