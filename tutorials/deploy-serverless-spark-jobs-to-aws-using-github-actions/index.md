@@ -14,7 +14,7 @@ authorName: Damon Cortesi
 date: 2023-03-10
 ---
 
-Apache Spark is one of the most popular frameworks for data processing both on-premises and in the cloud. However, data teams don’t have a lot of resources when it comes to modern Spark development practices. GitHub Actions have become a popular way of maintaining continuous integration and deployment as part of code repositories - by combining development workflows with source code, developers get immediate feedback on their changes and can interate faster. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions to measure weather trends for a provided location.
+Apache Spark is one of the most popular frameworks for data processing both on-premises and in the cloud. Despite its popularity, modern DevOps practices for Apache Spark are not well-documented or readily available to data teams. GitHub Actions have become a popular way of maintaining continuous integration and deployment as part of code repositories - by combining development workflows with source code, developers get immediate feedback on their changes and can interate faster. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions to measure weather trends for a provided location.
 
 ## What you will learn
 
@@ -119,7 +119,7 @@ def test_is_this_on():
 pytest==7.1.2
 ```
 
-Next we need to create our GitHub Action to run unit tests when we push our code. If you're not familiar with GitHub Actions, it's a way to automate all your software workflows by creating workflow files in your GitHub repository that can be triggered by a wide variety of actions on GitHub. The first GitHub Action we're going to create automatically runs `pytest` every single time we push a new commit to our repository. 
+Next we need to create our GitHub Action to run unit tests when we push our code. If you're not familiar with GitHub Actions, it's a way to automate all your software workflows by creating workflow files in your GitHub repository that can be triggered by a wide variety of actions on GitHub. The first GitHub Action we're going to create automatically runs `pytest` every single time we push a new commit to our repository.
 
 To do this, create a `unit-tests.yaml` file in the `.github/workflows` directory. The file should look like this:
 
@@ -452,7 +452,7 @@ env:
   OIDC_ROLE_ARN: arn:aws:iam::123456789012:role/gh-actions-oidc-role-123456789012
   #### END:   BE SURE TO REPLACE THESE VALUES
   AWS_REGION: us-east-1
-      
+
 jobs:
   deploy-and-validate:
     runs-on: ubuntu-20.04
@@ -486,7 +486,7 @@ jobs:
 
 So we can see how integration tests integrate (hah!) with pull requests, we're going to commit these changes by creating a new branch, pushing the files into that branch, then opening a pull request.
 
-The `integration-test` workflow we created will run whenever somebody opens a new pull request. 
+The `integration-test` workflow we created will run whenever somebody opens a new pull request.
 
 ```bash
 git checkout -b feature/integration-test
@@ -530,7 +530,7 @@ OK, so we've taken our brand new repository and added unit tests, integration te
 
 > **Note**: In a production environment, we could make use of different environments or accounts to isolate production and test resources, but for this demo we just use a single set of resources.
 
-In theory, tags will only be applied when new code has been verified and ready to ship. This approach allows us to easily run new versions of code when ready, or rollback to an older version if a regression is identified.
+In theory, tags will only be applied when new code has been verified and is ready to ship. This approach allows us to easily run new versions of code when ready, or rollback to an older version if a regression is identified.
 
 We'll create a new `deploy` workflow that only occurs when a tag is applied.
 
@@ -657,7 +657,7 @@ jobs:
           bash scripts/run-job.sh $APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME ${{ (steps.get-latest-tag.outputs.tag || github.event.inputs.job_version) || env.JOB_VERSION}} entrypoint.py s3://${S3_BUCKET_NAME}/github/traffic/ s3://${S3_BUCKET_NAME}/github/output/views/
 ```
 
-...just checking. Did you replace the 4 variables after `BEGIN: BE SURE TO REPLACE THESE VALUES`? Because I sure didn't! But if you didn't, it's a good chance to remind you that this GitHub Action could be running in an entirely different account with an entirely different set of permissions. This is the awesome power of OIDC and CI/CD workflows. 
+...just checking. Did you replace the 4 variables after `BEGIN: BE SURE TO REPLACE THESE VALUES`? Because I sure didn't! But if you didn't, it's a good chance to remind you that this GitHub Action could be running in an entirely different account with an entirely different set of permissions. This is the awesome power of OIDC and CI/CD workflows.
 
 Now that you've triple-checked the placeholder values are replaced, commit and push the file.
 
@@ -705,18 +705,19 @@ Here are some extreme weather stats for 2023:
 
 ## Conclusion
 
-So that's it! You've now got a great foundation for a GitHub repository that will automatically run unit tests when you commit code and in-depth integration tests when you open a pull request. Your ETL pipeline can also be triggered through GitHub Actions.
+Keep in mind that this GitHub Action will run daily, incurring AWS costs.
 
-A few important things to call out:
-
-- If you don't delete your EMR Serverless applications, your GitHub Action will run daily incurring AWS cost
-
-That's actually it. So make sure you delete your application. And if you don't want email notifications when your scheduled job fails, be sure to delete your `run-job.yaml` GitHub Action as well.
+Delete your EMR Serverless application in the [EMR Serverless Console](https://us-east-1.console.aws.amazon.com/emr/home?region=us-east-1#/serverless) to prevent additional cost, and if you don't want email notifications when your scheduled job fails, be sure to delete your `run-job.yaml` GitHub Action as well.
 
 ```bash
 rm .github/workflows/run-job.yaml
 git commit -am "Removed scheduled job run"
 git push
 ```
+
+We've been hard at work improving the local Spark development experience for EMR as well. Here are a few more resources for you to check out:
+- [Amazon EMR Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=AmazonEMR.emr-tools)
+- [Amazon EMR CLI](https://github.com/awslabs/amazon-emr-cli)
+- [EMR Serverless sample code](https://github.com/aws-samples/emr-serverless-samples)
 
 If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
