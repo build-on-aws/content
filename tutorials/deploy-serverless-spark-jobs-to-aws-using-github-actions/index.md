@@ -707,7 +707,7 @@ Here are some extreme weather stats for 2023:
 
 Keep in mind that this GitHub Action will run daily, incurring AWS costs.
 
-Delete your EMR Serverless application in the [EMR Serverless Console](https://us-east-1.console.aws.amazon.com/emr/home?region=us-east-1#/serverless) to prevent additional cost, and if you don't want email notifications when your scheduled job fails, be sure to delete your `run-job.yaml` GitHub Action as well.
+To prevent additional cost, delete your EMR Serverless application in the [EMR Serverless Console](https://us-east-1.console.aws.amazon.com/emr/home?region=us-east-1#/serverless). And if you don't want email notifications when your scheduled job fails, be sure to delete your `run-job.yaml` GitHub Action as well.
 
 ```bash
 rm .github/workflows/run-job.yaml
@@ -715,7 +715,7 @@ git commit -am "Removed scheduled job run"
 git push
 ```
 
-We've been hard at work improving the local Spark development experience for EMR as well. Here are a few more resources for you to check out:
+The EMR team been hard at work improving the local Spark development experience for EMR as well. Here are a few more resources for you to check out:
 - [Amazon EMR Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=AmazonEMR.emr-tools)
 - [Amazon EMR CLI](https://github.com/awslabs/amazon-emr-cli)
 - [EMR Serverless sample code](https://github.com/aws-samples/emr-serverless-samples)
