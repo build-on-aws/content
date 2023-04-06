@@ -399,7 +399,7 @@ data:
 
 ##### 3.4.3 Deployment
 
-With the microservice's Git address added in the Flux configuration repository, Flux will automatically scan for its configuration changes. If the code is committed, and Flux will find no microservices deployed in the cluster, and there is a mismatch with the Git repository definition, Flux will automatically deploy microservices in the cluster.
+With the microservice's Git address added in the Flux configuration repository, Flux will automatically scan for its configuration changes. Once codes are committed, Flux will check if there are any microservices deployed in the cluster and if they match the definition of the Git repository, otherwise, Flux automatically deploys the microservices in the cluster.
 
 After committing the code, execute the command "flux get kustomizations -watch" and wait for Flux to update. When the READY status of all kustomizations is True, the deployment is complete.
 
