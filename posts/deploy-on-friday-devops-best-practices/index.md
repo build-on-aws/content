@@ -11,6 +11,9 @@ date: 2023-04-05
 
 Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays -- or the day before any "important" day. It makes sense: you don't want your application to break when use will be high and no one is around to fix it. But the longer I worked in some technical and cultural capacities, the clearer it became that the risk of deploying on Fridays was significantly higher because of certain bad DevOps practices. Look, deploying code always entails the risk of availability loss, but that risk can be significantly diminished by adopting these 12 best practices.
 
+| ToC |
+| --- |
+
 ## Maintain independence between teams
 
 I've been dismayed to see cases where a recurring meeting was required, where the goal was to define the order in which teams would make changes to services and the order to deploy. This happens when the structure of the software in relation to the organizational structure does not allow the teams to work independently.  
