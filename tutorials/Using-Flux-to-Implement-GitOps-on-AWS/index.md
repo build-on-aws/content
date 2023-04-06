@@ -143,7 +143,7 @@ CodePipelineStack is a structure for continuous delivery of AWS CDK applications
 
 > **Note**
 > 
-> **Best Practice:** Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
+> **Takeaway:** Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
 
 Then, we execute the `cdk deploy` command to deploy the stack.
 
@@ -218,7 +218,8 @@ flux bootstrap git \
 ```
 
 > **Warning** 
-> Enable the image automatic update feature, add the --components-extra=image-reflector-controller,image-automation-controller parameter when bootstrapping Flux.
+> 
+> Enable the image automatic update feature, add the `--components-extra=image-reflector-controller,image-automation-controller` parameter when bootstrapping Flux. Otherwise, Flux will not install **image-reflector-controller** and **image-automation-controller** by default, and configurations such as automatic image updates will not take effect.
 
 Use **git pull** to check the updates pushed by the bootstrapper. Three new files will appear in the clusters/dev-cluster/flux-system directory of the Git repository:
 
@@ -270,7 +271,7 @@ For a GitOps CI/CD pipeline, configuration modifications and status changes to E
 
 > **Note**
 > 
-> **Best Practice:** Flux regularly pulls the configurations and deployment files from the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
+> **Takeaway:** Flux regularly pulls the configurations and deployment files from the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
 
 We will demonstrate a specific application - "sock shop" - and practical exercises to show how it achieves continuous integration and delivery on a GitOps CI/CD pipeline.
 
@@ -491,15 +492,11 @@ phases:
 
 ```
 
-> **Note**
-> 
-> **Best Practice:** We took the CI steps in CodePipeline with CodeBuild, and the buildspec.yml file was required for this step in CodeBuild.
-
-This CI process will automatically build an image and upload it to the ECR repository weaveworksdemos/front-end if any front-end code changed. The format of the image tag is **[branch]-[commit]-[build number]**.
+This CI process will automatically build an image and upload it to the ECR repository `weaveworksdemos/front-end` if any front-end code changed. The format of the image tag is **[branch]-[commit]-[build number]**.
 
 #### 4.2 Image Auto-Updating
 
-In an agile environment of continuous integration, such as development testing, it is too cumbersome to update a GitOps repository manually or via scripts after building and releasing new service images. Flux provides comprehensive and powerful automatic Git repository image upgrading feature. The automatic image updating feature requires Flux to enable the image updating component in configuration. If not, it can be enabled by adding the parameters --components-extra=image-reflector-controller,image-automation-controller when repeating Flux bootstrap.
+When you're working in an agile environment with continuous integration, like during development testing, updating a GitOps repository or using scripts to manage new service images can be a real hassle. Fortunately, Flux has an awesome automatic image upgrading feature that takes care of this for you. To use it, all you have to do is enable the image updating component in your configuration. If you haven't done that yet, no worries, just add the parameters `--components-extra=image-reflector-controller,image-automation-controller` when you repeat the Flux bootstrap to enable it.
 
 To achieve image-based automatic updating, we need to take the following steps:
 
@@ -575,7 +572,7 @@ patches:
 
 > **Note**
 > 
-> **Best Practice:** We used AWS ECR to choose the automatic authentication mechanism, modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching.
+> **Takeaway:** We used AWS ECR to choose the automatic authentication mechanism, modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching. This approach is simpler and more efficient when compared to using CronJob to generate credentials regularly.
 
 ##### 4.2.4 Setting image update policy
 
