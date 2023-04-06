@@ -1,6 +1,6 @@
 ---
-title: Deploy a Web App on AWS Elastic Beanstalk
-description: A walk-through of deploying web application using AWS Elastic Beanstalk and AWS CDK Pipelines.
+title: Deploy Web Application with AWS Elastic Beanstalk and AWS CDK Pipelines
+description: A walk-through of deploying web application using AWS Elastic Beanstalk and AWS CDK Pipelines to streamline your application development process with best practices like versioning, change tracking, code review, testing, and rollbacks.
 tags:
   - aws
   - devops
