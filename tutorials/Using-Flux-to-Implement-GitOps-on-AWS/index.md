@@ -34,9 +34,7 @@ GitOps has the following features compared to traditional continuous deployment.
 
 ## Why use GitOps?
 
-GitOps is the best way to implement continuous deployment of Kuberentes-based clusters. The main reason is that we can go through the details of GitOps specific practices on Kuberentes.
-
-Based on the GitOps method, Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the final state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify/deployment, observe/alerts, and fix/operations. The process is like below:
+Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the last state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify deployment, observe alerts, and fix operations. Based on the core foundational principles of GitOps, we believe GitOps is the best way to continuously deploy Kubernetes clusters. The process is like below:
 
 ![why is GitOps](./images/why%20is%20GitOps.jpg))
 
@@ -183,7 +181,7 @@ curl -s https://fluxcd.io/install.sh | sudo bash
 ```
 
 #### 2.2 Prepare AWS CodeCommit Credentials
-Create a user in our experiment and use CodeCommit as the Git source, we need HTTPS Git credentials for AWS CodeCommit.
+We should create a user and use CodeCommit as the Git source,as well as AWS CodeCommit required access by HTTPS Git credentials
 
 #### 2.3 Install Flux on the Cluster
 Clone the prepared GitOps codes. The project structure is as follows:
