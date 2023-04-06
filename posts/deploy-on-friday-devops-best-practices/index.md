@@ -3,30 +3,33 @@ title: "12 DevOps Best Practices That Make Deploying on Fridays Less Scary"
 description: Why not deploy on Fridays? These 12 best practices, each with real-world examples, will help you understand how DevOps culture and practices can collaborate to mitigate risk and reduce the pain of deployment.
 tags:
   - devops
+  - best-practices
 authorGithubAlias: mfpalladino
 authorName: Marcelo Palladino
 date: 2023-04-05
 ---
 
-Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays -- or the day before any "important" day. It makes sense: you don't want your application to break when use will be high and no one is around to fix it. But the longer I worked in some technical and cultural capacities, the clearer it became that the risk of deploying on Fridays was significantly higher because of certain bad Devops practices. Look, deploying code always entails the risk of availability loss, but that risk can be significantly diminished by adopting these 12 best practices.
+Why not deploy on a Friday? During my career, I accepted that we didn't deploy on Fridays -- or the day before any "important" day. It makes sense: you don't want your application to break when use will be high and no one is around to fix it. But the longer I worked in some technical and cultural capacities, the clearer it became that the risk of deploying on Fridays was significantly higher because of certain bad DevOps practices. Look, deploying code always entails the risk of availability loss, but that risk can be significantly diminished by adopting these 12 best practices.
 
 ## Maintain independence between teams
 
-I've been dismayed to see cases where a recurring meeting was required, where the goal was to define the order in which teams would make changes to services and the order to deploy. This happens when the structure of the software in relation to the organizational structure do not allow the teams to work independently.  
+I've been dismayed to see cases where a recurring meeting was required, where the goal was to define the order in which teams would make changes to services and the order to deploy. This happens when the structure of the software in relation to the organizational structure does not allow the teams to work independently.  
 
-Deploy processes that require synchronization and coordination activities must be identified and avoided, as they slow down teams and increase management costs. 
+Deploy processes that require synchronization and coordination activities must be identified and avoided as they slow down teams and increase management costs.
 
-You can learn about real-world teams that enabled independent deployment in a multi-service application reading the Seth Eliot's [article](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/). Also, depending on your age, this may be the first time you've heard about a pager.
+You can learn about real-world teams that enabled independent deployment in a multi-service application reading the Seth Eliot's [article](/posts/how-amazon-does-devops-in-real-life/). Also, depending on your age, this may be the first time you've heard about a pager.
 
 ## Identify and avoid coupling
 
 I once had to coordinate the deploy of more than 20 services to production only because I added an element to an enumeration in one of those services. There were more than 20 pull requests in different teams and the order was important. A change that should have taken a morning took weeks to complete.
 
-That coupling and technical debt issue took a heavy toll and was a source of pain in the deploy process. 
+That coupling and technical debt issue took a heavy toll and was a source of pain in the deploy process.
 
 Mapping the coupling (even when it's inevitable), and identifying the costs related, is an activity that must be done continuously. This allows the team to be aware of the problem and build solutions to reduce and avoid coupling when possible.
 
 [In this video](https://www.youtube.com/watch?v=esm-1QXtA2Q), Michael Nygard does an excellent job, as always, of sharing concepts about coupling, especially considering its inevitability.
+
+https://www.youtube.com/watch?v=esm-1QXtA2Q
 
 ## Work in small batches deployed regularly
 
@@ -38,15 +41,15 @@ There is no silver bullet regarding increasing reliability in the deployment pro
 
 ## Use trunk-based development
 
-Have you ever encountered a repository where it's difficult to determine which branch is in production? I can't remember anything that caused me more uncertainty than the repository for a critical service with multiple open branches that, in theory, were ready for production but which contained several commits not yet deployed.
+Have you ever encountered a repository where it's difficult to determine which branch is in production? I can't remember anything that caused me more uncertainty than the repository for a critical service with multiple open branches that, in theory, were ready for production, but which contained several commits not yet deployed.
 
-The main branch of a project should always be in a production-ready state. A code merged into the main branch must have been reviewed, statically analyzed, and tested in an automated way, as we will see next. Furthermore, this code should go to production continuously as quickly as possible with little or no manual intervention. If there are feature branches, they should be removed as part of the merge/deploy process.
+The main branch of a project should always be in a production-ready state. Code merged into the main branch must have been reviewed, statically analyzed, and tested in an automated way, as we will see next. Furthermore, this code should go to production continuously as quickly as possible with little or no manual intervention. If there are feature branches, they should be removed as part of the merge/deploy process.
 
 Clare Liguori addressed this topic in [her article](https://aws.amazon.com/builders-library/cicd-pipeline/) on how Amazon stopped using the release captain role, who was responsible for coordinating the release of code changes for their team’s services and deploying the release to production. It is interesting to note how trunk-based development enabled the improvement of technical capabilities and processes to achieve the objective.
 
 ## Encourage thoughtful code reviews
 
-Some of my best learning experiences have come through rigorous code reviews. I can't remember how many times we discovered significant issues during the code review process. Code reviews minimize risk, decrease the uncertainty, improve quality, enable knowledge sharing, and encourage consistent design. They allow people who know more to demonstrate this in practice, transferring tacit knowledge through socialization. Code reviews do take time, and some teams avoid them as a result. But they save time in the long run by ensuring higher quality deployments, fewer rollbacks, and preserving the organization's reputation. 
+Some of my best learning experiences have come through rigorous code reviews. I can't remember how many times we discovered significant issues during the code review process. Code reviews minimize risk, decrease the uncertainty, improve quality, enable knowledge sharing, and encourage consistent design. They allow people who know more to demonstrate this in practice, transferring tacit knowledge through socialization. Code reviews do take time, and some teams avoid them as a result. But they save time in the long run by ensuring higher quality deployments, fewer rollbacks, and preserving the organization's reputation.
 
 The high bar in the code review has a nice side effect of forcing pull requests to contain good descriptions and comments explaining why the changes are made and describing the expected side effects, if any. It's an example of a process that depends on a well-established feedback culture in the organization. For instance, team members should feel comfortable denying a large pull request, or pull requests with multiple objectives. No egos are wanted here. **People should know the fine line between objectivity and subjectivity and respect personal preferences over their biases about how they would do something.** Code reviews should use positive language and focus on knowledge sharing, but they should be thoughtful and technically rigorous.
 
@@ -56,9 +59,9 @@ Code should only go into production after going through a rigorous review proces
 
 I heard about a document created by a development team that basically consisted of a series of manual steps that the operations team should perform to do the entire deployment process. Just imagine the friction of this operation. Now consider the differences between environments and add in a dash of cultural issues. Very, very risky. It doesn't matter if it's Friday or not.
 
-Depending on the case, it is acceptable to have some runbook to do some task during the deployment process. However, ideally, there should be no latency involved in the deploy process, resulting from technical aspects or manual interventions.
+Depending on the case, it is acceptable to have some runbook to do a task during the deployment process. However, ideally, there should be no latency involved in the deploy process, resulting from technical aspects or manual interventions.
 
-Once code has been reviewed, the merge to the main branch must trigger the CI/CD pipeline, which must build the software, run automated tests, run static code analysis, run lint checks, apply quality gateways, run security checks, deploy the service to the pre-production environment, run post-deployment tests, and ultimately deploy to production.
+Once code has been reviewed, the merge to the main branch must trigger the CI/CD pipeline, which must build the software, run automated tests, static code analysis, lint checks, apply quality gateways, run security checks, deploy the service to the pre-production environment, run post-deployment tests, and ultimately deploy to production.
 
 Mark Mansour wrote about [accelerating with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/) at Amazon and the positive aspects of the practice for the customers and business. In his words "For us, automation is the only way we could have continued to grow our business".
 
@@ -78,16 +81,18 @@ Sometimes it is desirable to enable certain functionality for a small group of u
 
 In [this video](https://www.youtube.com/watch?v=uouw9QxVrE8) from AWS re:Invent 2022, you can follow Sébastien Stormacq and Olivier Leplus demonstrating how AWS has been using this technique for over a decade and how you can introduce feature flags into your applications.
 
+https://www.youtube.com/watch?v=uouw9QxVrE8
+
 ## Reduce risk using canary releases
 
-8 am, the time most of our clients start their operations. I am a software engineer and we've just deployed a critical change to our entire user base. We're happy to finally ship it, as it is a technical debt payment that will make the software better by removing afferent coupling that has long taken us a high toll.
+**8 am**, the time most of our clients start their operations. I am a software engineer and we've just deployed a critical change to our entire user base. We're happy to finally ship it, as it is a technical debt payment that will make the software better by removing afferent coupling that has long taken us a high toll.
 
-8:10 am. No user can use the platform. Long story short: chaos is raging in support, and some of the most influential customers directly call the business people (including CTO and CIO). It is a nightmare, and a perfect example of how a deploy made for a reduced number of users would have mitigated the deployment risk, caused less pain, and preserved the organization's reputation.
+**8:10 am**. No user can use the platform. Long story short: chaos is raging in support, and some of the most influential customers directly call the business people (including CTO and CIO). It is a nightmare, and a perfect example of how a deploy targeting a reduced number of users would have mitigated the deployment risk, caused less pain, and preserved the organization's reputation.
 
 A canary release is a deployment strategy that allows teams release changes to a reduced number of users.
 Using this strategy, the team can deploy the new version incrementally, slowly making it visible to new users. This allows gain confidence in the deployment, allowing changes to be monitored and observed with low risk, before they impact the entire user base.
 
-Organizations "ready to deploy on Fridays" master the ability to deploy to a small number of users. 
+Organizations "ready to deploy on Fridays" master the ability to deploy to a small number of users.
 
 ## Ensure software is easy to monitor and observe
 
@@ -99,11 +104,15 @@ Each alarm must have an associated playbook, and each playbook may link one or m
 
 In addition to actionable alarms, teams must be able to observe the software without friction and intermediaries. Monitoring dashboards with application metrics, business metrics, centralized and structured logs, and traces (including distributed when it makes sense) are essential. The software must be observable, and there must be how-to guides that show how to observe it. The main idea here is that **no matter how inexperienced a firefighter is in a given context, it should be able to start fighting the fire, following steps and using the right tools.**
 
+Ricardo Ferreira has a great video series on how to get started with Observability with Java:
+
+https://www.youtube.com/watch?v=XvmicNH_4lc&list=PLDqi6CuDzubz5viRapQ049TjJMOCCu9MJ
+
 ## Things will go wrong
 
 Even in applications and organizations that follow best practices, in certain circumstances, there will be unexpected behavior in production, where the only option to re-establish operations will be to roll back the deployment.
 
-The team must be able to clearly identify that the reversal will not cause more problems for users. This technical capability should be developed as much as the capability to deployment. 
+The team must be able to clearly identify that the reversal will not cause more problems for users. This technical capability should be developed as much as the capability to deployment.
 
 I recommend reading Sandeep Pokkunuri's article on [ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/) to delve deeper into this subject.
 
@@ -121,8 +130,9 @@ These best practices will help you avoid pain points that DevOps teams often enc
 
 If you're interested in DevOps and want to learn more about how to implement it, check out these articles about it.
 
-- [How to Succeed at DevOps: Wrong Answers Only!](https://www.buildon.aws/posts/devops-wrong-answers-only)
-- [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life)
+- [DevOps Essentials](/concepts/devops-essentials)
+- [How to Succeed at DevOps: Wrong Answers Only!](/posts/devops-wrong-answers-only)
+- [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](posts/how-amazon-does-devops-in-real-life)
 - [My CI/CD pipeline is my release captain](https://aws.amazon.com/builders-library/cicd-pipeline/)
 - [Going faster with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/)
 - [Ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/)
