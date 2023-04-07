@@ -8,7 +8,7 @@ tags:
   - basics
 authorGithubAlias: andrasome
 authorName: Andra Somesan
-date: 2023-04-06
+date: 2023-04-11
 ---
 
 The IT industry is always evolving, offering new opportunities. One job title in particular has received a lot of attention in the past few years: DevOps Engineer.
