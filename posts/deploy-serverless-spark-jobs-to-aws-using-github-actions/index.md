@@ -65,7 +65,7 @@ We also need to create some infrastructure for our jobs to run. For the purposes
 
 > **Note**: This demo can only be run in `us-east-1` region - if you want to use another region, you will need to [create your EMR Serverless application with a VPC](https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/vpc-access.html).
 
-You can create these resources by downloading the [CloudFormation template](https://github.com/buildon-aws/ci-cd-serverless-spark/raw/main/cloudformation-templates/ci-cd-serverless-spark.cfn.yaml) and either using the AWS CLI, or by navigating to the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create) and uploading the template there.
+You can create these resources by downloading the [CloudFormation template](https://github.com/build-on-aws/ci-cd-serverless-spark/raw/main/cloudformation-templates/ci-cd-serverless-spark.cfn.yaml) and either using the AWS CLI, or by navigating to the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create) and uploading the template there.
 
 There are two parameters you can set when creating the stack:
 
@@ -84,7 +84,7 @@ aws cloudformation create-stack \
 
 Once the stack is created, navigate to the Outputs tab for the stack you created on the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks) as you'll need these values later.
 
-> **Note**: There's a lot of copy/paste in this tutorial. If you'd like to take a look at the finished state, please refer to the [ci-cd-serverless-spark repo](https://github.com/buildon-aws/ci-cd-serverless-spark).
+> **Note**: There's a lot of copy/paste in this tutorial. If you'd like to take a look at the finished state, please refer to the [ci-cd-serverless-spark repo](https://github.com/build-on-aws/ci-cd-serverless-spark).
 
 Now let's get started!
 
