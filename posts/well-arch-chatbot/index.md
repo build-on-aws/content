@@ -85,8 +85,6 @@ Data cleaning is a vital step in preparing scraped data for analysis, ensuring t
 
 These data cleaning steps helped to refine the raw data and enhance the model's overall performance, ultimately leading to more accurate and useful insights.
 
-
-
 ![Token histogram of passages](images/token_hist.png)
 
 ## Creating Text Embeddings
@@ -111,7 +109,7 @@ Here is an example of how the text looks like as an embedding, an list of 1536 n
 
 ![Example Text Embeddings](images/token_emb.png)
 
-With text embeddings we can now do a Search of all the text based on an input query. By asking `How do I designing VPC architectures with security components?` we get a list of the documents that has text which is relevant to the query.
+With text embeddings we can now do a Search of all the text based on an input query. By asking `How do I design VPC architectures with security components?` we get a list of the documents that has text which is relevant to the query.
 
 ![Document Serach](images/vector_list.png)
 
@@ -119,7 +117,7 @@ With text embeddings we can now do a Search of all the text based on an input qu
 
 Prompt engineering is about designing prompts that elicit the most relevant and desired response from a Large Language Model (LLM) such as GPT-3.
 
-Crafting these [prompts is an art](https://platform.openai.com/docs/guides/completion/prompt-design), that many are still figuring out but a rule of thumb is the more detailed the prompt, the better the desired outcome.
+Crafting these [prompts is an art](https://platform.openai.com/docs/guides/completion/prompt-design) that many are still figuring out, but a rule of thumb is the more detailed the prompt, the better the desired outcome.
 
 OpenAI recently just released their [ChatGPT API](https://openai.com/blog/introducing-chatgpt-and-whisper-apis), which is 10x cheaper than their previous text generation API.
 
@@ -129,15 +127,13 @@ Here is what I used for the system prompt:
 
 **"You are an AWS Certified Solutions Architect. Your role is to help customers understand best practices on building on AWS. Return your response in markdown, so you can bold and highlight important steps for customers.",**
 
-and then I added one more system prompt to use the context from the text embeddings search.
+Then I added one more system prompt to use the context from the text embeddings search:
 
 **"Use the following context from the AWS Well-Architected Framework to answer the user's query.\nContext:\n{context}"**
 
-Afterwards the user prompt is the query
+Afterwards, the user prompt is the query, such as "How can I design resilient workloads?".
 
-such as "How can I design resilient workloads?"
-
-Here is a code snippet of using the ChatGPT API endpoint
+Here is a code snippet of using the ChatGPT API endpoint:
 
 ```python
     response = openai.ChatCompletion.create(
@@ -200,7 +196,7 @@ def app() -> None:
 
 The dataframe contains the text data, along with links to the corresponding ground truth information indicating how the chatbot responded. This allows for easy validation and verification of the chatbot's accuracy and can aid in identifying areas for improvement.
 
-For more details on how to deploy and create Streamlit apps, checkout the [GitHub repo](https://github.com/banjtheman/aws_well_arch_chatbot)
+For more details on how to deploy and create Streamlit apps, checkout the [GitHub repo](https://github.com/banjtheman/aws_well_arch_chatbot).
 
 ## Conclusion
 
