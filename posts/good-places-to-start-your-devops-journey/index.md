@@ -19,8 +19,6 @@ I have a technical background, but until 2018 I knew nothing about DevOps. My jo
 
 There are a lot of [wrong ideas about DevOps](https://www.buildon.aws/posts/devops-wrong-answers-only) out there, but here's one definition from [AWS](https://aws.amazon.com/devops/what-is-devops/) that I find captures it well: "*DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes.*" In other words, DevOps is about people, processes, and the best way they can be brought together to accelerate the pace of innovation.
 
-![DevOps Logo](images/devops.png)
-
 Due to the broad range of tasks you will be resoponsible for, DevOps Engineer is not an entry-level job in the industry, but this doesn't mean you can't do it. Some of the DevOps responsibilities include:
  - building and setting up new development tools and infrastructure
  - automating and improving development and release processes
