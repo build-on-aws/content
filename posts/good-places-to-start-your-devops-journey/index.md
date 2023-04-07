@@ -19,6 +19,8 @@ I have a technical background, but until 2018 I knew nothing about DevOps. My jo
 
 There are a lot of [wrong ideas about DevOps](https://www.buildon.aws/posts/devops-wrong-answers-only) out there, but here's one definition from [AWS](https://aws.amazon.com/devops/what-is-devops/) that I find captures it well: "*DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes.*" In other words, DevOps is about people, processes, and the best way they can be brought together to accelerate the pace of innovation.
 
+![DevOps Logo](images/devops.png)
+
 Due to the broad range of tasks you will be resoponsible for, DevOps Engineer is not an entry-level job in the industry, but this doesn't mean you can't do it. Some of the DevOps responsibilities include:
  - building and setting up new development tools and infrastructure
  - automating and improving development and release processes
@@ -45,7 +47,10 @@ You should never be afraid to learn or make other 2-way door decisions: they hel
 # Getting Involved
 While living in the Netherlands, I discovered Meetups and communities like AWS User Groups and ServerlessDays Amsterdam. At first, attending the events wasn't easy for me. Although I like to talk to people, I'm not an extrovert, and I was outside of my comfort zone. Seeing how welcoming the communities are and how open-minded everybody is, though, I kept coming back - and I even volunteered for one of the meetups (which turned out to be an incredible experience).
 
+
 I didn't stop there. I found out about [AWS Community Builders](https://aws.amazon.com/developer/community/community-builders/), a program for passionate people who contribute to the developer community in any way and on any technical topics - not only AWS. Being part of this community gave me the chance to connect with great people who inspired me. This eventually led me to attend re:Invent in person, where I met builders from all around the world - people who were passionate about DevOps, Serverless, Security, and everything else. These were the people to talk to and ask advice and opinions about DevOps and any other roles.
+
+![AWS Community Builders](images/cb_logo.png)
 
 Career changes are tough, but they're even harder when you do them alone. So be sure to **get involved in the community**. **Go to events**, put forth this extra level of effort, and it'll be well worth it. You can meet people who already have the position you are looking to try out and ask them about it; you can feel out the community; you can get practical advice on learning. Volunteering is a more structured way to get involved. Some meetups seek volunteers for events, and you can always ask first about the responsibilities and time commitments.
 
