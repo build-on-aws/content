@@ -1,6 +1,6 @@
 ---
-title: Building an AWS Well-Architected Chatbot with ChatGPT
-description: A step-by-step guide on how I built a Chatbot using ChatGPT
+title: I built an AWS Well-Architected Chatbot with ChatGPT. Here's what I learned
+description: Tips and guidance for building a ChatGPT Chatbot
 tags:
   - chatgpt
   - gpt3
@@ -12,20 +12,20 @@ authorName: Banjo Obayomi
 date: 2023-03-07
 ---
 
-The [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is a set of best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. However, finding the right answers to questions related to the framework can be time-consuming and challenging. In this article, we will walk through the steps of how I built an AWS Well-Architected Chatbot powered by OpenAI's ChatGPT. This chatbot can answer questions related to the framework and provide developers with quick and accurate responses and with links to supporting documents.
+The [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is a set of best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. However, finding the right answers to questions related to the framework can be time-consuming and challenging. In this article, I'll share tips and guidance on building a ChatGPT powered AWS Well-Architected chatbot. This chatbot can answer questions related to the framework and provide developers with quick and accurate responses and with links to supporting documents.
 
 ![AWS Well-Architected Chatbot](images/well_arch_chatbot.png)
 
-To accomplish this, I'll walk you through the following
+To accomplish this, I'll walk you through the following:
 
 * Data Collection
 * Creating Text Embeddings
 * Prompt Engineering
 * Creating the Chat Interface
 
-You can try the chatbot [here](https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/)
+You can try the chatbot [here].(https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/)
 
-And the GitHub repo with the code [here](https://github.com/banjtheman/aws_well_arch_chatbot)
+And the GitHub repo with the code [here].(https://github.com/banjtheman/aws_well_arch_chatbot)
 
 ## Data Collection
 
@@ -103,9 +103,9 @@ Text embeddings measure the relatedness of text strings. Embeddings are commonly
 
 An embedding is a vector (list) of floating-point numbers. The distance between two vectors measures their relatedness. Small distances suggest high relatedness and large distances suggest low relatedness.
 
-This [OpenAI Notebook](https://github.com/openai/openai-cookbook/blob/main/examples/Question_answering_using_embeddings.ipynb) provides a full end to end example of creating text embeddings
+This [OpenAI Notebook](https://github.com/openai/openai-cookbook/blob/main/examples/Question_answering_using_embeddings.ipynb) provides a full end-to-end example of creating text embeddings.
 
-Here is an example of how the text looks like as an embedding, an list of 1536 numbers that represent the text.
+Here is an example of how the text looks as an embedding, a list of 1536 numbers that represent the text.
 
 ![Example Text Embeddings](images/token_emb.png)
 
