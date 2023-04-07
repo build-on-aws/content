@@ -14,7 +14,7 @@ As you can imagine, this can be quite complicated. This article deconstructs how
 
 For this article, we’re using a fictional legacy application called Unicorn Tracker because who doesn’t love unicorns. Here’s the fictional app’s logo generated using Stable Diffusion
 
-[ADD IMAGE]
+[App logo!](https://raw.githubusercontent.com/sohanmaheshwar/content/main/posts/use-terraform-providers-using-cloudformation-custom-resources/images/unicorntracker3.jpg?token=GHSAT0AAAAAACBD7RSBVDS63LY4OJ4Y2JD2ZBQKIOQ)
 
 Lets dive straight in.  
 
