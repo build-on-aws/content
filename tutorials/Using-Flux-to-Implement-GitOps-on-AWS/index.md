@@ -289,7 +289,7 @@ We will use the user-facing section of the **[sock shop](https://github.com/micr
 
 - A "real" testable application for various orchestration platforms
 
-The **sock shop** project consists of 8 front-end and back-end microservices, where the front-end is a web page created by NodeJS. the project's name is: **front-end** in here and , and it accesses several back-end services through http requests,which are order, payment, user management, product management and shopping cart, etc. The data of the back-end services are stored in MongoDB and MySQL
+The **sock shop** project consists of 8 front-end and back-end microservices, where the front-end is a web page created by NodeJS. the project's name is: **front-end** in here. And it accesses several back-end services through http requests,which are order, payment, user management, product management and shopping cart, etc. The data of the back-end services are stored in MongoDB and MySQL
 
 The reference architecture is as follows:
 
