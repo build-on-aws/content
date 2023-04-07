@@ -289,6 +289,8 @@ We will use the user-facing section of the **[sock shop](https://github.com/micr
 
 - A "real" testable application for various orchestration platforms
 
+The **sock shop** project consists of 8 front-end and back-end microservices, where the front-end is a web page created by NodeJS. the project's name is: **front-end** in here and , and it accesses several back-end services through http requests,which are order, payment, user management, product management and shopping cart, etc. The data of the back-end services are stored in MongoDB and MySQL
+
 The reference architecture is as follows:
 
 ![SockShopArchitecture](./images/SockShopArchitecture.png)
@@ -461,7 +463,7 @@ We chose the front-end microservice of Sock Shop as an example to demonstrate th
 
 #### 4.1 Defining the CodePipeline CI
 
-Front-end is a pure front-end service of Node.js to support Docker image packaging. Add a buildspec.yml file to the front-end project source code to define the CI process executed in the CodePipeline:
+**Front-end** is a pure front-end service of Node.js to support Docker image packaging(refer to the sock shop architect in the 3.1 charpter for details). Add a buildspec.yml file to the **front-end** project source code to define the CI process executed in the CodePipeline:
 ```yaml
 version: 0.2
 
