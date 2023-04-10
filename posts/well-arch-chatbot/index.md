@@ -1,6 +1,6 @@
 ---
-title: I built an AWS Well-Architected Chatbot with ChatGPT. Here's what I learned
-description: Tips and guidance for building a ChatGPT Chatbot
+title: "I Built an AWS Well-Architected Chatbot with ChatGPT. Here's What I Learned"
+description: "Tips and guidance for building a ChatGPT Chatbot."
 tags:
   - chatgpt
   - gpt3
@@ -12,7 +12,7 @@ authorName: Banjo Obayomi
 date: 2023-03-07
 ---
 
-The [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is a set of best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. However, finding the right answers to questions related to the framework can be time-consuming and challenging. In this article, I'll share tips and guidance on building a ChatGPT powered AWS Well-Architected chatbot. This chatbot can answer questions related to the framework and provide developers with quick and accurate responses and with links to supporting documents.
+The [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is a set of best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. However, finding the right answers to questions related to the framework can be time-consuming and challenging. So I decided to build a chatbot to answer questions related to the framework and provide developers with quick and accurate responses - all with links to supporting documents. In this article, I'll share tips and guidance on building a ChatGPT powered AWS Well-Architected chatbot.
 
 ![AWS Well-Architected Chatbot](images/well_arch_chatbot.png)
 
@@ -23,9 +23,9 @@ To accomplish this, I'll walk you through the following:
 * Prompt Engineering
 * Creating the Chat Interface
 
-You can try the chatbot [here].(https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/)
+You can try my chatbot [here].(https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/)
 
-And the GitHub repo with the code [here].(https://github.com/banjtheman/aws_well_arch_chatbot)
+And check out the GitHub repo with the code [here].(https://github.com/banjtheman/aws_well_arch_chatbot)
 
 ## Data Collection
 
@@ -153,7 +153,7 @@ Here is a code snippet of using the ChatGPT API endpoint:
 
 ```
 
-### Creating the Chat Interface
+## Creating the Chat Interface
 
 I developed the chat interface using my go-to tool for building web applications with Python, [Streamlit](https://streamlit.io/). Streamlit allows builders to easily create interactive web apps that provide instant feedback on user responses.
 
