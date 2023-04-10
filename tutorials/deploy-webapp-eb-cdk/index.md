@@ -278,7 +278,7 @@ rm -rf ./lib/cdk-pipeline-eb-demo.ts
 vi ./lib/eb-appln-stack.ts
 ```
 
-Paste following to `/lib/eb-appln-stack.ts`:
+Paste following to `lib/eb-appln-stack.ts`:
 ```Typescript
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
@@ -306,7 +306,7 @@ export class EBApplnStack extends cdk.Stack {
 
 We have defined a CDK Stack and a StackProps interface to accept optional stack properties. These will be referenced during initialization later.
 
-In this file `/lib/eb-appln-stack.ts`, we will write the code for all the resources stack we are going to create in this section. You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts).
+In this file `lib/eb-appln-stack.ts`, we will write the code for all the resources stack we are going to create in this section. You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts).
 
 A resource stack is a set of cloud infrastructure resources—all AWS resources in this case—that will be provisioned into a specific account. The account where these resources will be provisioned is the stack that you configured in the prerequisite. In this resource stack, we are going to create these resources:
 
@@ -348,7 +348,7 @@ This code uses the S3 Assets module and takes the folder of the web app located 
 
 Next, we will create the Elastic Beanstalk application, application version, and environment so that we can deploy the web app that we just uploaded to S3 using S3 Assets.
 
-Add the dependency to the Elastic Beanstalk module for CDK at the top of the `/lib/eb-appln-stack.ts` file.
+Add the dependency to the Elastic Beanstalk module for CDK at the top of the `lib/eb-appln-stack.ts` file.
 
 ```Typescript
 import * as elasticbeanstalk from 'aws-cdk-lib/aws-elasticbeanstalk';
@@ -358,7 +358,7 @@ import * as elasticbeanstalk from 'aws-cdk-lib/aws-elasticbeanstalk';
 
 Now we can create the Elastic Beanstalk app. As mentioned before, an Elastic Beanstalk application is a logical collection of Elastic Beanstalk components, like a folder.
 
-Put this code under the code of the S3 Assets in the `/lib/eb-appln-stack.ts` file. This code will create the application with the name `MyWebApp` in Elastic Beanstalk.
+Put this code under the code of the S3 Assets in the `lib/eb-appln-stack.ts` file. This code will create the application with the name `MyWebApp` in Elastic Beanstalk.
 
 ```Typescript
 // Create a ElasticBeanStalk app.
@@ -430,7 +430,7 @@ The first thing the code does is to create a new IAM role **(myRole)**.
 
 To allow the EC2 instances in our environment to assume the role, the instance profile specifies Amazon EC2 as a trusted entity in the trust relationship policy.
 
-To that role we then add the managed policy A`WSElasticBeanstalkWebTier`. We then create the instance profile with that role and the profile name.
+To that role we then add the managed policy `AWSElasticBeanstalkWebTier`. We then create the instance profile with that role and the profile name.
 
 
 ### Create Elastic Beanstalk Environment
@@ -487,7 +487,7 @@ With this information, we can now create our **Elastic Beanstalk environment**.
 
 Here we are stating that - if no `envName` property is provided during stack/stage initialization, then use the default name `"MyWebAppEnvironment"`.
 
-Add following code in the stack definition file `/lib/eb-appln-stack.ts`: 
+Add following code in the stack definition file `lib/eb-appln-stack.ts`: 
 
 ```Typescript
 // Create an Elastic Beanstalk environment to run the application
@@ -781,7 +781,7 @@ Once the `Pre-prod` stage of CodePipeline has completed successfully, we can ver
 
 
 
-# Clean Up 
+## Clean Up 
 The benefit of using AWS CDK and CloudFormation for all infrastructure is that cleaning up AWS environment is easy. 
 Run the following command inside the CDK application directory:
 
@@ -811,7 +811,6 @@ Finally, CDK Pipelines create an Amazon S3 bucket to store artifacts. This bucke
 Congratulations! We have now learned how to deploy a non-containerized application in the cloud. We created a simple Node.js web application, and then we used AWS CDK to create deployment infrastructure(using AWS Elastic Beanstalk resources) and the CI/CD pipeline (using AWS CDK Pipelines).  If you enjoyed this tutorial, found any issues, or have feedback us, [please send it our way](https://pulse.buildon.aws/survey/DEM0H5VW)!
 
 For more DevOps related content, check out [How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/).
-
 
 ## More Information and Troubleshooting
 
