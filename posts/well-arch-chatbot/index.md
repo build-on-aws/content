@@ -1,15 +1,16 @@
 ---
-title: "I Built an AWS Well-Architected Chatbot with ChatGPT. Here's What I Learned"
-description: "Tips and guidance for building a ChatGPT Chatbot."
+title: "I Built an AWS Well-Architected Chatbot with ChatGPT. Here's How I Approached It"
+description: "Tips and guidance for building a ChatGPT chatbot."
 tags:
   - chatgpt
-  - gpt3
+  - gpt-3
   - python
-  - well-architected-framework
+  - well-arch-framework
   - streamlit
+  - chatbots
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
-date: 2023-03-07
+date: 2023-04-10
 ---
 
 The [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is a set of best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. However, finding the right answers to questions related to the framework can be time-consuming and challenging. So I decided to build a chatbot to answer questions related to the framework and provide developers with quick and accurate responses - all with links to supporting documents. In this article, I'll share tips and guidance on building a ChatGPT powered AWS Well-Architected chatbot.
