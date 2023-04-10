@@ -79,7 +79,7 @@ The **declarative** tool you use will create the resources you declared, without
 
 ## Core concepts and why they’re important
 
-As someone applying concepts from DevOps, you will work in a number of different places throughout your stack. You may at times work directly in the source code, networking, security, data, the testing framework, or anywhere in between due to the nature of cross-team collaboration that comes with the domain. Now that we’ve discussed getting started and some approaches, let’s cover some key concepts, their benefits, and examples of tools you will use to implement them. 
+As someone applying concepts from DevOps, you will work in a number of different places throughout your stack. You may at times work directly in the source code, networking, security, data, the testing framework, or anywhere in between due to the nature of cross-team collaboration that comes with the domain. Now that we’ve discussed getting started and some approaches, let’s cover some key concepts, their benefits, and examples of tools you will use to implement them.
 
 ### Infrastructure as Code
 
@@ -87,7 +87,7 @@ Infrastructure as Code (IaC) is typically a declarative method of managing infra
 
 ### Configuration management
 
-Configuration management (CM) allows us to maintain systems in a desired state by organizing and maintaining information about our hardware and software. Think of a file that lists information such as which operating system to use, which software and their versions to install on a device, or the settings and configurations that will be applied to the system. In the past, this may have been done manually, or with a procedural script that connected to a repository and installed each tool one at a time, stopping at the first issue. CM helps build visibility and streamlines the configuration process, which makes it easier to track and manage changes over time with the goal of reducing cost, complexity, and errors. Some examples of configuration management tools are [Ansible](https://www.ansible.com/), [Chef](https://www.chef.io/), and [Puppet](www.puppet.com). 
+Configuration management (CM) allows us to maintain systems in a desired state by organizing and maintaining information about our hardware and software. Think of a file that lists information such as which operating system to use, which software and their versions to install on a device, or the settings and configurations that will be applied to the system. In the past, this may have been done manually, or with a procedural script that connected to a repository and installed each tool one at a time, stopping at the first issue. CM helps build visibility and streamlines the configuration process, which makes it easier to track and manage changes over time with the goal of reducing cost, complexity, and errors. Some examples of configuration management tools are [Ansible](https://www.ansible.com/), [Chef](https://www.chef.io/), and [Puppet](www.puppet.com).
 
 ### Secrets management
 
@@ -105,7 +105,7 @@ As your environment scales, you’ll discover that you need a way to manage your
 
 You’re likely to hear the terms "CI/CD" and "pipelines" a lot throughout your DevOps journey. *Continuous integration (CI)* is a practice where developers regularly merge their code changes into a shared code repository, and then use automated processes to build, test, and validate the code. The goal is to detect and fix integration problems as early as possible by ensuring the testing process is repeatable and consistent. This builds trust in the process and allows developers to more easily collaborate and work on the codebase without causing conflicts or breaking the build.
 
-*Continuous delivery (CD)* is a practice where code changes are automatically built, tested, and deployed to a test environment for additional testing and bug hunting prior to pushing to production. Similarly to **CI**, the goal of **CD** is to create a repeatable process that enables rapid, reliable, and low-risk delivery of software updates. Unlike **CI**, it takes it a step further by automatically deploying the code to an environment. Typically the code is tested and then run through manually gated processes and checks before being approved and released to production. 
+*Continuous delivery (CD)* is a practice where code changes are automatically built, tested, and deployed to a test environment for additional testing and bug hunting prior to pushing to production. Similarly to **CI**, the goal of **CD** is to create a repeatable process that enables rapid, reliable, and low-risk delivery of software updates. Unlike **CI**, it takes it a step further by automatically deploying the code to an environment. Typically the code is tested and then run through manually gated processes and checks before being approved and released to production.
 
 *Continuous deployment*, also commonly abbreviated to CD, is often (and understandably) confused with continuous delivery. While it sounds similar, continuous deployment is a different practice. Just like **CI/CD**, **continuous deployment** is an automated and repeatable process intended to enable faster and more reliable production deployments. The main difference is that continuous deployments run automatically all the way from code commit to releasing and deploying the software to production without manual intervention. The only way a new code change would not be deployed is via a failed test in the pipeline.
 
@@ -119,11 +119,11 @@ Logging is the process of recording messages and events generated by an applicat
 
 ### Monitoring
 
-Monitoring is the process of tracking the performance, availability, and other aspects of a system or component. It involves collecting data and analyzing that data to identify problems or trends. It can be used to help detect and fix problems, improve performance by highlighting constraints or other issues, and to track resource usage to better plan for future capacity needs. Monitoring is commonly used to track important events and metrics related to applications, networks, infrastructure, or business metrics like number of sign-ups, transactions processed, and more. Examples of application or infrastructure monitoring tools include [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html), [OpenTelemetry](https://opentelemetry.io/), [Prometheus](https://prometheus.io/), [Grafana](https://grafana.com/), and [Datadog](https://www.datadoghq.com/). 
+Monitoring is the process of tracking the performance, availability, and other aspects of a system or component. It involves collecting data and analyzing that data to identify problems or trends. It can be used to help detect and fix problems, improve performance by highlighting constraints or other issues, and to track resource usage to better plan for future capacity needs. Monitoring is commonly used to track important events and metrics related to applications, networks, infrastructure, or business metrics like number of sign-ups, transactions processed, and more. Examples of application or infrastructure monitoring tools include [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html), [OpenTelemetry](https://opentelemetry.io/), [Prometheus](https://prometheus.io/), [Grafana](https://grafana.com/), and [Datadog](https://www.datadoghq.com/).
 
 ### Tracing
 
-Tracing is often used in distributed systems to allow seeing the flow of a user action or request through multiple, different systems inside the distrubuted system. It is easier to describe it using an example. Let's say you have a distributed system where a user is logged in via the `Login` system, which makes a call to the `Fraud` system, as well as the `Loyalty Program` system in a fictional e-commerce site. To be able to see the entire action, you would need to somehow combine the logs from all three systems in sequential order to get the full view of what occurred. Tracing allows you to do this, usually by adding a tracing ID to each call that is the same to make it easier to collate these disperate logs. Exmples of tracing frameworks include [Jaeger](https://www.jaegertracing.io/), [ZipKin](https://zipkin.io/), some of the previously mentioned commercial offerings, like [Splunk](https://www.splunk.com/), and [Datadog](https://www.datadoghq.com/).
+Tracing is often used in distributed systems to allow seeing the flow of a user action or request through multiple, different systems inside the distributed system. It is easier to describe it using an example. Let's say you have a distributed system where a user is logged in via the `Login` system, which makes a call to the `Fraud` system, as well as the `Loyalty Program` system in a fictional e-commerce site. To be able to see the entire action, you would need to somehow combine the logs from all three systems in sequential order to get the full view of what occurred. Tracing allows you to do this, usually by adding a tracing ID to each call that is the same to make it easier to collate these disparate logs. Examples of tracing frameworks include [Jaeger](https://www.jaegertracing.io/), [ZipKin](https://zipkin.io/), some of the previously mentioned commercial offerings, like [Splunk](https://www.splunk.com/), and [Datadog](https://www.datadoghq.com/).
 
 ### Observability
 
@@ -133,36 +133,38 @@ If you'd like to try out some of the concepts introduced in this section, check 
 
 ## Where should I start?
 
-As mentioned earlier, you should use these questions to find the best place to start: 
+As mentioned earlier, you should use these questions to find the best place to start:
 
 1. Where is there a bottleneck or pain point for the team(s) that they are struggling with?
 2. What services or piece of infrastructure can you work on that is not mission critical?
-3. What things would benefit the most from being automated? 
+3. What things would benefit the most from being automated?
 
 Once you have found a place to start, you can decide which of the following approaches to use: automate the creation of infrastructure with IaC, add an automated build to a software project (CI), implement automated deployment (CD), containerize an application, add some monitoring, or configuration and secret management.
 
 ## Wrap Up
 
-We've learned a lot in this post today! We started with an introducton to what DevOps is and how to get started, discussed different patterns you'll encounter when automating your processes and gave an overview of the key concepts you'll encounter on your journey. It's not possible to become an expert on every DevOps concept in a post or a day, but if you continuously learn and iterate on your culture, processes and technology you'll be surprised at how quickly you'll be able to make an impact. You and your team are not alone in this journey - there's been over a decade of other teams learning and documenting their successes and challenges. Stay tuned for more DevOps content! You can also find additional resources below. 
+We've learned a lot in this post today! We started with an introduction to what DevOps is and how to get started, discussed different patterns you'll encounter when automating your processes and gave an overview of the key concepts you'll encounter on your journey. It's not possible to become an expert on every DevOps concept in a post or a day, but if you continuously learn and iterate on your culture, processes and technology you'll be surprised at how quickly you'll be able to make an impact. You and your team are not alone in this journey - there's been over a decade of other teams learning and documenting their successes and challenges. Stay tuned for more DevOps content! You can also find additional resources below.
 
 ### Additional Resources
 
-You can find other articles on BuildOn about DevOps using the DevOps tag. If community based learning is your thing, you should definitely look for one near you, there are a variety of DevOps meetups run around the globe! 
+You can find other articles on BuildOn about DevOps using the DevOps tag. If community based learning is your thing, you should definitely look for one near you, there are a variety of DevOps meetups run around the globe!
 
 **Conferences:**
+
 * [DevOpsDays](https://devopsdays.org/)
 * If you're looking to learn more specifically about AWS & our tools, we have lots of options! These aren't specific to DevOps but often have talks or tracks that are related to it. We have [re:Invent](https://reinvent.awsevents.com/) every year. There are multiple [AWS Summits](https://aws.amazon.com/events/summits/) every year, have a look to see if one is in a city close to you. If you are just getting started with cloud, we recommend attending an [AWSome Day](https://aws.amazon.com/events/awsome-day/) and reading our [AWS Cloud Essentials](https://aws.amazon.com/getting-started/cloud-essentials/) page.
 * Many of the vendors mentioned run their own conferences and those can be a great place to learn as well!
 
 **Books:**
+
 * [DevOps Handbook](https://www.goodreads.com/book/show/26083308-the-devops-handbook)
 * [Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project)
 * [Accelerate: Building and Scaling High Performing Technology Organizations](https://www.goodreads.com/book/show/35747076-accelerate)
 * [DevOps For Dummies](https://www.goodreads.com/book/show/50128575-devops-for-dummies)
 
-**Online Learning**
+**Online Learning:**
+
 * [DevOps Roadmap](https://roadmap.sh/devops)
 * [90 Days of DevOps](https://github.com/MichaelCade/90DaysOfDevOps)
 * [A Cloud Guru - AWS DevOps](https://acloudguru.com/learning-paths/aws-devops)
 * [2022 State of DevOps Report](https://cloud.google.com/devops/state-of-devops/)
-

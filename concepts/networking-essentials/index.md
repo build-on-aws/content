@@ -118,7 +118,7 @@ For answers to frequently asked questions related to VPC security, see the Secur
 
 The configuration for this scenario includes a VPC with a single public subnet, and an internet gateway to enable communication over the internet. We recommend this configuration if you need to run a single-tier, public-facing web application, such as a blog or a simple website.
 
-This scenario can also be optionally configured for IPv6. Instances launched into the public subnet can receive IPv6 addresses, and communicate using IPv6. 
+This scenario can also be optionally configured for IPv6. Instances launched into the public subnet can receive IPv6 addresses, and communicate using IPv6.
 
 !["VPC with a single public subnet"](images/VPC-with-a-single-public-subnet.png)
 
@@ -144,7 +144,7 @@ This scenario can also be optionally configured for IPv6. Instances launched int
 
 The configuration for this scenario includes a VPC with a single private subnet, and a virtual private gateway to enable communication with your own network over an IPsec VPN tunnel. There is no internet gateway to enable communication over the internet. We recommend this scenario if you want to extend your network into the cloud using AWS infrastructure without exposing your network to the internet.
 
-This scenario can also be optionally configured for IPv6. Instances launched into the subnet can receive IPv6 addresses. We do not support IPv6 communication over an AWS Site-to-Site VPN connection on a virtual private gateway; however, instances in the VPC can communicate with each other via IPv6. 
+This scenario can also be optionally configured for IPv6. Instances launched into the subnet can receive IPv6 addresses. We do not support IPv6 communication over an AWS Site-to-Site VPN connection on a virtual private gateway; however, instances in the VPC can communicate with each other via IPv6.
 
 !["VPC with a private subnet only and AWS Site-to-Site VPN access"](images/vpc-private-subnet-only.png)
 

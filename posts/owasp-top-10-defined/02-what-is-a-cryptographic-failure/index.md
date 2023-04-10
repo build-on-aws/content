@@ -29,9 +29,9 @@ A key takeaway here is that they are not all the same. If you have a look at the
 
 ## CWE-259: Use of Hard-coded Password
 
-CWE-259 is defined as the "Use of Hard-coded Passwords" and upon first look you might wonder what this one has to do with a cryptographic failure. Let's take a journey together in software development. Imagine that we work for an organization that is developing an app and, at some point, a password is needed to connect to a database. One of the developers creates an admin account for the database. The admin account has full permissions. That username and password is then hard coded into your application. Now the app can read the database and nobody will run into issues, Right? 
+CWE-259 is defined as the "Use of Hard-coded Passwords" and upon first look you might wonder what this one has to do with a cryptographic failure. Let's take a journey together in software development. Imagine that we work for an organization that is developing an app and, at some point, a password is needed to connect to a database. One of the developers creates an admin account for the database. The admin account has full permissions. That username and password is then hard coded into your application. Now the app can read the database and nobody will run into issues, Right?
 
-Wrong! It may work for a short time, but if the password is discovered and published publicly then anyone with the password can access the database. 
+Wrong! It may work for a short time, but if the password is discovered and published publicly then anyone with the password can access the database.
 
 How is this a cryptographic failure? I see two ways. First, the credentials are stored in clear text. The failure is that cryptographic algorithms were not used to store or even communicate sensitive data. And while this example is the storage of a password in data at rest, it becomes data in transit as soon as the password is passed to the database for authentication. In this case, we wonder if encryption is being used on the data.
 
