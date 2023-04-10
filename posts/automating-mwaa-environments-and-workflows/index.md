@@ -16,9 +16,9 @@ authorName: Ricardo Sueiras
 date: 2023-04-01
 ---
 
-Businesses everywhere are striving to provide value for their customers by making data driven decisions. Data analytics is core to this success, but building scalable, reusable data pipelines is hard. Apache Airflow is an open source orchestration tool that many have adopted to automate and streamline how they build those data pipelines. As you scale usage and adoption, staying on top of how you manage and make Airflow available to your users can become overwhelming. The good news is that we can borrow heavily from modern development techniques, and specifically DevOps, to help reduce the time needed to create and scale those data pipelines.
+Businesses everywhere are striving to provide value for their customers by making data driven decisions. Data analytics is core to this success, but building scalable, reusable data pipelines is hard. Apache Airflow is an open source orchestration tool that many have adopted to automate and streamline how they build those data pipelines. As you scale usage and adoption, staying on top of how you manage and make Airflow available to your users can become overwhelming. The good news is that we can borrow heavily from modern development techniques - and specifically DevOps - to help reduce the time needed to create and scale those data pipelines.
 
-## What you will learn
+## What You Will Learn
 
 In this tutorial you will learn how you can apply DevOps techniques to help you effortlessly manage your Apache Airflow environments. We will look at some of the common challenges you are likely to encounter, and then look at the use of automation using infrastructure as code to show you how you can address these through automation. You will learn:
 
@@ -45,7 +45,7 @@ In this tutorial you will learn how you can apply DevOps techniques to help you 
 
 ## Scaling Apache Airflow
 
-Like many open source technologies, there are many ways in which you can configure and deploy Apache Airflow. For some, self managing Apache Airflow is the right path for them to take. For others, the availability of managed services such as Managed Workflows for Apache Airflow (MWAA), has helped reduce the complexity and operation burden for running Apache Airflow, and opened this up for more Builders to start using it.
+Like many open source technologies, there are many ways in which you can configure and deploy Apache Airflow. For some, self managing Apache Airflow is the right path to take. For others, the availability of managed services, such as Managed Workflows for Apache Airflow (MWAA), has helped reduce the complexity and operation burden for running Apache Airflow, and opened this up for more Builders to start using it.
 
 It is worth spending some time to understand some of the challenges scaling Apache Airflow. So what are some of the challenges? 
 
@@ -56,27 +56,26 @@ It is worth spending some time to understand some of the challenges scaling Apac
 * Deploying workflows to production can break Apache Airflow, so how do you minimise this?
 * New Python libraries are released on a frequent basis, new data tools are also constantly changing. How do you enable these for use within your Apache Airflow environments?
 
-One of the first decisions you have to make is whether you want to use a managed versus self managed Apache Airflow environment. Typically this choice depends on a number of factors based on your particular business or use case. These include:
+One of the first decisions you have to make is whether you want to use a managed versus self-managed Apache Airflow environment. Typically this choice depends on a number of factors based on your particular business or use case. These include:
 
-* whether you need the increase level of access, a greater level of control of the configuration of Apache Airflow
-* have the need to have the very latest versions or features of Apache Airflow
-* if you have the need to run workflows that use more resources that managed services provide (for example, need significant compute)
+* Whether you need the increase level of access, a greater level of control of the configuration of Apache Airflow
+* Whether have the need to have the very latest versions or features of Apache Airflow
+* Whether you have the need to run workflows that use more resources that managed services provide (for example, need significant compute)
 
-> **Total Cost Ownership** One thing to consider when assessing managed vs self managed is the cost of the managed service against the total costs of you having to do the same thing. It is important to assess a true like for like, and we often see just the actual compute and storage resources being compared without all the additional things that you need to make this available.
+> **Total Cost Ownership** One thing to consider when assessing managed vs self-managed is the cost of the managed service against the total costs of you having to do the same thing. It is important to assess a true like for like, and we often see just the actual compute and storage resources being compared without all the additional things that you need to make this available.
 >
 
 If the answer to these is yes, then it is likely that using a managed service may frustrate you.
 
 **How to navigate this tutorial**
 
-This tutorial will cover how to automate the provisioning of managed and self managed Apache Airflow environments, before looking at how some options to help you improve the developer experience and making it easier to get their workflows into production.
+This tutorial will cover how to automate the provisioning of managed and self-managed Apache Airflow environments, before looking at how some options to help you improve the developer experience and making it easier to get their workflows into production.
 
 We will start off with how we can automate managed Apache Airflow environments, using Amazon Managed Workflows for Apache Airflow (MWAA). We will look at automating the provisioning of the infrastructure using AWS Cloud Development Kit (AWS CDK). We will then show how to build a pipeline that automates the deployment of your workflow code. Finally, we will provide an end to end example that uses a GitOps approach for managing both the infrastrucutre and workflows via your git repository.
 
-Watch out for the next tutorial, where we will cater for those looking to achieve the same thing with self managed Apache Airflow. In that tutorial we will explore some options you can take, before walking through and building a GitOps approach to running your self managed Apache Airflow environments.
+Watch for the next tutorial, where we will cater to those looking to achieve the same thing with self-managed Apache Airflow. In that tutorial we will explore some options you can take, before walking through and building a GitOps approach to running your self-managed Apache Airflow environments.
 
-
-## Automating your Managed Workflow for Apache Airflow environments (MWAA)
+## Automating Your Managed Workflow for Apache Airflow Environments (MWAA)
 
 **Overview**
 
@@ -250,9 +249,9 @@ arn:aws:cloudformation:eu-west-2:704533066374:stack/mwaa-devops-vpc/85e737d0-bdb
 
 We can now look at the MwaaCdkStackDevEnv stack that creates our MWAA environment into the VPC that we just created. The code is documented to help you understand how it works and help you customise it to your own needs. You will notice that we bring in parameters we defined in the "app.py" using ```f"{mwaa_props['dagss3location']```, so you can adjust and tailor this code to your own needs if you wanted to add additional configuration parameters.
 
-First we create and tag our S3 bucket that we will use to store our workflows (the Airflow DAGS folder)
+First we create and tag our S3 bucket that we will use to store our workflows (the Airflow DAGS folder).
 
-> **Note!** that this code creates an S3 Bucket with the name of the configuration parameter and then appends "-dev", so using our example code the S3 Bucket that would get created is "mwaa-094459-devops-demo-dev"
+> **Note:** This code creates an S3 Bucket with the name of the configuration parameter and then appends "-dev", so using our example code the S3 Bucket that would get created is "mwaa-094459-devops-demo-dev".
 
 ```
         # Create MWAA S3 Bucket and upload local dags
@@ -280,7 +279,7 @@ The next section create the various IAM policies needed for MWAA to run. This us
 
 The next section is also security related, and configures security groups for the various MWAA services to communicate with each other.
 
-The next section defines what logging we want to use when creating our MWAA environment. There is a cost element associated with this, so make sure you think about what is the right level of logging for your particular use case. You can find out more about the different logging levels you can use by checking out the documentation [here](https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.aws_mwaa/CfnEnvironment.html#aws_cdk.aws_mwaa.CfnEnvironment.LoggingConfigurationProperty)
+The next section defines what logging we want to use when creating our MWAA environment. There is a cost element associated with this, so make sure you think about what is the right level of logging for your particular use case. You can find out more about the different logging levels you can use by checking out the documentation [here](https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.aws_mwaa/CfnEnvironment.html#aws_cdk.aws_mwaa.CfnEnvironment.LoggingConfigurationProperty).
 
 ```
     # **OPTIONAL** Configure specific MWAA settings - you can externalise these if you want
@@ -438,7 +437,7 @@ The Apache Airflow UI provides a way to store variables and connections details,
 
 **Integrating AWS Secret Manager**
 
-We first have to enable the integration. There are two Airflow configuration settings we need to set. We can adjust our original CDK code and add the following.  You will notice that we are using configuration parameters we define in the app.py to allow us to easily set what we want the prefix to be. We do not want to hard code the prefix for Connections and Variables, so we define some additional configuration parameters in our app.py file that will use "airflow/variables" and "airflow/connections" as the integration points within MWAA
+We first have to enable the integration. There are two Airflow configuration settings we need to set. We can adjust our original CDK code and add the following.  You will notice that we are using configuration parameters we define in the app.py to allow us to easily set what we want the prefix to be. We do not want to hard code the prefix for Connections and Variables, so we define some additional configuration parameters in our app.py file that will use "airflow/variables" and "airflow/connections" as the integration points within MWAA:
 
 
 ```
@@ -446,7 +445,7 @@ We first have to enable the integration. There are two Airflow configuration set
      'secrets.backend_kwargs' : { "connections_prefix" : f"{mwaa_props['mwaa_secrets_conn']}" , "variables_prefix" : f"{mwaa_props['mwaa_secrets_var']}" } ,
                   
 ```
-so the code now looks like
+So the code now looks like:
 
 ```
         options = {
@@ -492,7 +491,7 @@ We can update our environment by running:
 cdk deploy mwaa-devops-dev-environment
 ```
 
-And after being prompted to review security changes, CDK will make the changes and MWAA will update. This will take between 20-25 minutes, so grab yourself another cup of tea! When it finishes, you should see something like
+And after being prompted to review security changes, CDK will make the changes and MWAA will update. This will take between 20-25 minutes, so grab yourself another cup of tea! When it finishes, you should see something like:
 
 ```
 
@@ -583,7 +582,7 @@ One area of confusion I have seen is how to handle Connections when they are sto
 
 ![example screenshot from apache airflow ui configuring amazon redshift connection](images/airflow-connections-example-redshift.png)
 
-What we would do is store this in AWS Secrets Manager as follows
+What we would do is store this in AWS Secrets Manager as follows:
 
 ```
 aws secretsmanager create-secret --name airflow/connections/redshift_default --description "Connect to Amazon Redshift Cluster BuildON" --secret-string "Postgres://awsuser:XXXXX@airflow-summit.cq7hpqttbcoc.eu-west-1.redshift.amazonaws.com:5439/mwaa" --region={your region}"
@@ -622,7 +621,7 @@ Check out the full details on the Apache Airflow documentation page, [AWS Secret
 
 In this part of this tutorial, we looked at how we could automate Variable and Connections within Apache Airflow, and how these are useful in helping us creating re-usable workflows. In the next part of this tutorial, we will look at how we can build an automated pipeline to deliver our workflows into our Apache Airflow environment.
 
-## Building a workflow deployment pipeline
+## Building a Workflow Deployment Pipeline
 
 So far we have automated the provisioning of our MWAA environments using AWS CDK, and sh we now have Apache Airflow up and running. In this next part of the tutorial we are going to automate how to deploy our workflows to these environments. Before we do that, a quick recap on how MWAA loads its workflows and supporting resources.
 
@@ -653,7 +652,7 @@ We will break this down into a number of steps to make it easier to follow along
 └── requirements.txt
 ```
 
-Our CDK app is very simple, and contains the initial entry point file where we define configuration values we want to use, and then the code to build the pipeline infrastructure ("MWAAPipeline"). If we look at app.py
+Our CDK app is very simple, and contains the initial entry point file where we define configuration values we want to use, and then the code to build the pipeline infrastructure ("MWAAPipeline"). If we look at app.py:
 
 ```
 import aws_cdk as cdk 
@@ -682,7 +681,7 @@ We can see that we define the following:
 * 'dags_s3_bucket_name' which is the name of our DAGs Folder for our MWAA environment 
 
 
-The actual stack itself ("MWAAPipeline") is where we create the CodeCommit repository, and configure our CodePipeline and the CodeBuild steps. If we look at this code we can see we start by creating our code repository for our DAGs
+The actual stack itself ("MWAAPipeline") is where we create the CodeCommit repository, and configure our CodePipeline and the CodeBuild steps. If we look at this code we can see we start by creating our code repository for our DAGs.
 
 ```
         # Setup CodeCommit repo and copy initial files
@@ -776,7 +775,7 @@ We can deploy our pipeline using the following command, answering y after review
 cdk deploy mwaa-pipeline
 ```
 
-After a few minutes, you can check over in the AWS CodePipelines console, and you should now have a new pipeline. This should have executed, and it will most likely be in the process of running. When it finishes, you should now see the two workflow DAGs appear in your Apache Airflow UI. (Note! This could take 4-5 minutes before your MWAA environment picks up these DAGs)
+After a few minutes, you can check over in the AWS CodePipelines console, and you should now have a new pipeline. This should have executed, and it will most likely be in the process of running. When it finishes, you should now see the two workflow DAGs appear in your Apache Airflow UI. (Note: This could take 4-5 minutes before your MWAA environment picks up these DAGs.)
 
 ![The Apache Airflow UI showing two DAGs now in the console](images/airflowcicd-pipedags.png)
 
@@ -868,7 +867,7 @@ and then we add the stage and modify the existing ones as follows:
 ```
 
 
-We can update the pipeline by just redeploying our CDK app
+We can update the pipeline by just redeploying our CDK app:
 
 ```
 cdk deploy mwaa-pipeline
@@ -892,7 +891,7 @@ You may also need to add an approval gate. We can easily add this to our pipelin
 
 ```
 
-You also need to make sure that this step is added BEFORE the deployment stage, so in the final code in the repo we have
+You also need to make sure that this step is added BEFORE the deployment stage, so in the final code in the repo we have:
 
 ```
         pipeline.add_stage(
@@ -958,13 +957,13 @@ I can use that link which will take me straight to the AWS Console and I can the
 Once we approve, the pipeline will continue and the deployment step will update the DAGs. Congratulations, you have now automated the deployment of your DAGs!
 
 
-> ### Advanced automation topics
+> ### Advanced Automation Topics
 >
 >So far we have just scratched the surface of how you can apply DevOps principles to your data pipelines. If you want to dive deeper, there are some additional topics that you can explore to further automate and scale your Apache Airflow workflows.
 >
 >**Parameters and reusable workflows**
 >
->Creating re-usable workflows will help scale how your data pipelines are used. A common technique is to create generic workflows that are driven by parameters, driving up re-use of those workflows. There are many approaches to help you increase the reuse of your workflows, and you can read more about this by checking out this post, [Working with parameters and variables in Amazon Managed Workflows for Apache Airflow](https://dev.to/aws/working-with-parameters-and-variables-in-amazon-managed-workflows-for-apache-airflow-4f5h)
+>Creating re-usable workflows will help scale how your data pipelines are used. A common technique is to create generic workflows that are driven by parameters, driving up re-use of those workflows. There are many approaches to help you increase the reuse of your workflows, and you can read more about this by checking out this post, [Working with parameters and variables in Amazon Managed Workflows for Apache Airflow](https://dev.to/aws/working-with-parameters-and-variables-in-amazon-managed-workflows-for-apache-airflow-4f5h).
 >
 >**Using private Python library repositories**
 >
@@ -980,15 +979,15 @@ Once we approve, the pipeline will continue and the deployment step will update 
 
 **Recap and next steps**
 
-In this part of this tutorial, we showed how to build a pipeline to automate the process of delivering your workflows from your developers to your Apache Airflow environments. In the next part of this tutorial, we will bring this all together and look at an end to end fully automated solution for both infrastructure and workflows.
+In this part of this tutorial, we showed how to build a pipeline to automate the process of delivering your workflows from your developers to your Apache Airflow environments. In the next part of this tutorial, we will bring this all together and look at an end-to-end fully automated solution for both infrastructure and workflows.
 
-## Building an end to end pipeline
+## Building an End-to-End Pipeline
 
-So far we have built a way of automating the deployment of your MWAA environments and implemented a way of automating how to deploy your workflows to your MWAA environments. We will now bring this all together and build a solution that enables a GitOps approach that will automatically provision and update your MWAA environments based on configuration details stored in a git repository, and also deploy your workflows and all associated assets (for example, additional Python libraries you might define in your requirements.txt, or custom plugins you want to use in your workflows)
+So far we have built a way of automating the deployment of your MWAA environments and implemented a way of automating how to deploy your workflows to your MWAA environments. We will now bring this all together and build a solution that enables a GitOps approach that will automatically provision and update your MWAA environments based on configuration details stored in a git repository, and also deploy your workflows and all associated assets (for example, additional Python libraries you might define in your requirements.txt, or custom plugins you want to use in your workflows).
 
 This is what we will build. There will be two different git repositories used by two different groups of developers. Our MWAA admins who look after the provisioning of the infrastructure (including the deployment of support packages, Python libraries, etc) will manage the MWAA environments using one git repository. Our Airflow developers will create their code in a separate repository. Both groups will interact using git to update and make changes.
 
-![an end to end fully automated gitops pipeline for MWAA](images/airflowcici-end2end.png)
+![an end-to-end fully automated gitops pipeline for MWAA](images/airflowcici-end2end.png)
 
 We will use AWS CDK to automate this again. First of all, lets explore the files for this solution. If we look at the expanded file tree, we can see what this looks like.
 
@@ -1035,7 +1034,7 @@ We will use AWS CDK to automate this again. First of all, lets explore the files
     └── requirements.txt
 
 ```
-The setup.py is used to initialise Python, and makes sure that all the dependencies for this stack are available.  In our instance, we need the following
+The setup.py is used to initialise Python, and makes sure that all the dependencies for this stack are available.  In our instance, we need the following:
 
 ```
         "aws-cdk-lib==2.68.0",
@@ -1050,7 +1049,7 @@ The entry point for the CDK app is "app.py", where we define our AWS Account and
 
 > **Makefile** in our previous pipeline we defined the mechanism to deploy our workflows via the AWS CodeBuild Buildspec file. This time we have created a Make file and within it created a number of different tasks (test, validated, deploy, etc). To deploy our DAGs this time, all we need to do is run a "make deploy $bucket_name=" specifying the target S3 bucket we want to use.
 
-In the previous example where we automated the MWAA environment build, we defined configuration values in our app.py file. This time, we are using a different way of passing in configuration parameters. With AWS CDK you can use the "-- context" when performing the cdk deploy command, to pass in configuration values in a key/value .
+In the previous example where we automated the MWAA environment build, we defined configuration values in our app.py file. This time, we are using a different way of passing in configuration parameters. With AWS CDK you can use the "-- context" when performing the cdk deploy command, to pass in configuration values in a key/value.
 
 ```
 cdk deploy --context vpcId=vpcid --context envName=mwaademo {cdkstack} 
@@ -1082,7 +1081,7 @@ We can see how our CDK app uses this by examining the "mwaairflow_stack" file, w
 
 ```
 
-To deploy this stack, we use the following command
+To deploy this stack, we use the following command:
 
 ```
 cdk deploy --context cidr=10.192.0.0/16 --context envName=MWAAe2e --context envTags= '{"Environment":"MWAAe2e","Application":"MyApp","Reason":"Airflow"}'  --context secretsBackend=SecretsManager  --context webserverAccessMode=PUBLIC_ONLY MWAAirflowStack
@@ -1158,7 +1157,7 @@ git clone https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/mwaa-provision
 cd mwaa-provisioning
 vi requirements.txt
 ```
-We update the Amazon Provider package from
+We update the Amazon Provider package from:
 
 ```
 apache-airflow==2.4.3
@@ -1167,7 +1166,7 @@ apache-airflow-providers-amazon==6.0.0
 apache-airflow-providers-postgres==5.2.2
 apache-airflow-providers-mongo==3.0.0
 ```
-to
+to:
 ```
 apache-airflow==2.4.3
 apache-airflow-providers-salesforce==5.1.0
@@ -1175,14 +1174,14 @@ apache-airflow-providers-amazon==7.1.0
 apache-airflow-providers-postgres==5.2.2
 apache-airflow-providers-mongo==3.0.0
 ```
-We the push this change to the repo
+We the push this change to the repo:
 
 ```
 git add .
 git commit -m "update requirements.txt to update amazon provider to 7.1"
 git push
 ```
-And we see that we have kicked off the pipeline
+And we see that we have kicked off the pipeline:
 
 ![screenshot of pipeline running](images/airflowcicd-updatereqs.png)
 
@@ -1193,7 +1192,7 @@ When it is finished, when we go to the MWAA environment we can see that we have 
 
 *Updating the requirements.txt*
 
-You may be wondering why the latest requirements.txt has not been set by the MWAA environment. The reason for this is that this is going to trigger an environment restart, and so this is likely something you want to think about before doing. You could automate this, and we would add the following to the deploy part of the CodeBuild deployment stage
+You may be wondering why the latest requirements.txt has not been set by the MWAA environment. The reason for this is that this is going to trigger an environment restart, and so this is likely something you want to think about before doing. You could automate this, and we would add the following to the deploy part of the CodeBuild deployment stage:
 
 ```
 bucket_name=f"{bucket.bucket_name}"
@@ -1202,7 +1201,7 @@ latest=$(aws s3api list-object-versions --bucket $bucket_name --prefix requireme
 aws mwaa update-environment --name $mwaa_env --requirements-s3-object-version=$latest 
 ```
 
->**Tip!** If you wanted to run this separately, just set the bucket_name and mwaa_env variables to suit your environment
+>**Tip!** If you wanted to run this separately, just set the bucket_name and mwaa_env variables to suit your environment.
 
 This will trigger an environment update, using the latest version of the requirements.txt file.
 
@@ -1240,7 +1239,7 @@ cd mwaaproject/dags
 cp demo.py .
 ```
 
-We now commit this back to the repo
+We now commit this back to the repo:
 
 ```
 git add .
@@ -1271,15 +1270,15 @@ cdk destroy mwaa-devops-dev-environment
 cdk destroy mwaa-devops-vpc
 ```
 
-To delete the second part of the tutorila, the end to end stack, 
+To delete the second part of the tutorial, the end-to-end stack, 
 ```
 cdk destroy MWAAirflowStack
 ```
 
-> **Note!** The delete process will fail at some point due to not being able to delete the S3 buckets. You should delete these buckets (Empty and the Delete) and then manually delete the stacks via the CloudFormation console.
+> **Note:** The delete process will fail at some point due to not being able to delete the S3 buckets. You should delete these buckets (Empty and the Delete) and then manually delete the stacks via the CloudFormation console.
 
-### That's all folks!
+### That's All, Folks!
 
-In this tutorial we looked at some of the challenges automating Apache Airflow, and how we can apply DevOps principals to address those. In this post we looked at how you do that with Amazon's Managed Workflow for Apache Airflow (MWAA), and in the next tutorial post, we will look at how you can do the same but with self managed Apache Airflow environment.
+In this tutorial we looked at some of the challenges automating Apache Airflow, and how we can apply DevOps principals to address those. We looked at how you do that with Amazon's Managed Workflow for Apache Airflow (MWAA), and in the next tutorial post, we will look at how you can do the same but with self-managed Apache Airflow environment.
 
 If you enjoyed this tutorial, please let us know how we can better serve open source Builders by <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">completing this short survey. </a> Thank you!
