@@ -1,6 +1,6 @@
 ---
 title: "Deploy Your Web Application with AWS Elastic Beanstalk and AWS CDK Pipelines" 
-description: "A walk-through of deploying a web application using AWS Elastic Beanstalk and AWS CDK Pipelines to streamline the development process with best practices like versioning, change tracking, code review, testing, and rollbacks.
+description: "A walk-through of deploying a web application using AWS Elastic Beanstalk and AWS CDK Pipelines to streamline the development process with best practices like versioning, change tracking, code review, testing, and rollbacks."
 tags:
   - aws
   - devops
@@ -8,7 +8,7 @@ tags:
   - infrastructure-as-code
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
-date: 2023-04-07
+date: 2023-04-10
 ---
 We as developers want to deploy our web applications in the fastest way possible - without having to manage the underlying infrastructure. The cherry on top would be packaging both the application and infrastructure as code and running it through a continuous integration and continuous delivery (CI/CD) pipeline. That way, we could apply the same best practices of versioning, tracking changes, reviewing code, performing tests, and allowing rollbacks.
 
@@ -38,7 +38,7 @@ In this guide, we will learn how to:
 | 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment/)<br>- [AWS CDK v2.7.0 installed](https://aws.amazon.com/getting-started/guides/setup-cdk)<br>- [GitHub account](https://github.com/)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-04-07                                                     |
+| ⏰ Last Updated        | 2023-04-10                                                     |
 
 | ToC |
 |-----|
@@ -164,7 +164,7 @@ This code will serve the `index.html` file whenever a request for the root of th
 
 We are now ready to run our application and test if it is working locally. To do this, we are going to update `package.json` with a script to make it easier to run. In the `package.json` file, replace the scripts section as following:
 
-```JSON
+```json
 "scripts": {
     "start": "node app.js"
   },
@@ -279,7 +279,7 @@ vi ./lib/eb-appln-stack.ts
 ```
 
 Paste following to `lib/eb-appln-stack.ts`:
-```Typescript
+```typescript
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 // Add import statements here
@@ -298,20 +298,18 @@ export class EBApplnStack extends cdk.Stack {
 
     // The code that defines your stack goes here
 
-
-
   }
 }
 ```
 
-We have defined a CDK Stack and a StackProps interface to accept optional stack properties. These will be referenced during initialization later.
+We have defined a CDK `Stack` class and a `StackProps` interface to accept optional stack properties. These will be referenced during initialization later.
 
 In this file `lib/eb-appln-stack.ts`, we will write the code for all the resources stack we are going to create in this section. You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts).
 
 A resource stack is a set of cloud infrastructure resources—all AWS resources in this case—that will be provisioned into a specific account. The account where these resources will be provisioned is the stack that you configured in the prerequisite. In this resource stack, we are going to create these resources:
 
 * **IAM Instance profile and role**: A container for an AWS Identity and Access Management (IAM) role that we can use to pass role information to an Amazon EC2 instance when the instance starts.
-* **S3 Assets**: This helps us to upload the zipped application into S3 and will provide the CDK application a way to get the object location.
+* **S3 Assets**: This helps us to upload the zipped application into Amazon Simple Storage Service (S3) and will provide the CDK application a way to get the object location.
 * **Elastic Beanstalk App**: A logical collection of Elastic Beanstalk components, including environments, versions, and environment configurations.
 * **Elastic Beanstalk App Version**: A specific, labeled iteration of deployable code for a web application. An application version points to an Amazon S3 object that contains the deployable code, in this case, the zip file that we will be uploading to S3 using S3 Assets. Applications can have many versions and each application version is unique.
 * **Elastic Beanstalk Environment**: A collection of AWS resources running an application version. Each environment runs only one application version at a time.
@@ -325,13 +323,13 @@ To do that, we will be using a CDK constructor called S3 Assets. The S3 Assets m
 
 In the `lib/eb-appln-stack.ts` file, add the dependency to the top of the file.
 
-```Typescript
+```typescript
 import * as s3assets from 'aws-cdk-lib/aws-s3-assets';
 ```
 
 Inside the stack, under the commented line that says *The code that defines your stack goes here* add the following code:
 
-```Typescript
+```typescript
     // Construct an S3 asset Zip from directory up.
     const webAppZipArchive = new s3assets.Asset(this, 'WebAppZip', {
       path: `${__dirname}/../src`,
@@ -350,7 +348,7 @@ Next, we will create the Elastic Beanstalk application, application version, and
 
 Add the dependency to the Elastic Beanstalk module for CDK at the top of the `lib/eb-appln-stack.ts` file.
 
-```Typescript
+```typescript
 import * as elasticbeanstalk from 'aws-cdk-lib/aws-elasticbeanstalk';
 ```
 
@@ -360,7 +358,7 @@ Now we can create the Elastic Beanstalk app. As mentioned before, an Elastic Bea
 
 Put this code under the code of the S3 Assets in the `lib/eb-appln-stack.ts` file. This code will create the application with the name `MyWebApp` in Elastic Beanstalk.
 
-```Typescript
+```typescript
 // Create a ElasticBeanStalk app.
 const appName = 'MyWebApp';
 const app = new elasticbeanstalk.CfnApplication(this, 'Application', {
@@ -373,7 +371,7 @@ const app = new elasticbeanstalk.CfnApplication(this, 'Application', {
 
 Now we need to create an application version from the S3 asset that we created earlier. This piece of code will create the app version using the S3 bucket name and S3 object key that S3 Assets and CDK will provide to this method.
 
-```Typescript
+```typescript
 // Create an app version from the S3 asset defined earlier
 const appVersionProps = new elasticbeanstalk.CfnApplicationVersion(this, 'AppVersion', {
     applicationName: appName,
@@ -386,7 +384,7 @@ const appVersionProps = new elasticbeanstalk.CfnApplicationVersion(this, 'AppVer
 
 Before moving on, we want to make sure that the Elastic Beanstalk application exists before creating the app version. We can do this with CDK by adding a dependency, as shown in the following code snippet.
 
-```Typescript
+```typescript
 // Make sure that Elastic Beanstalk app exists before creating an app version
 appVersionProps.addDependency(app);
 ```
@@ -401,13 +399,13 @@ In this case, the role will have attached the managed policy `AWSElasticBeanstal
 
 Import the IAM module dependency in the CDK stack we have been working on:
 
-```Typescript
+```typescript
 import * as iam from 'aws-cdk-lib/aws-iam';
 ```
 
 After the code that creates the application version, add this code:
 
-```Typescript
+```typescript
 // Create role and instance profile
 const myRole = new iam.Role(this, `${appName}-aws-elasticbeanstalk-ec2-role`, {
     assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com'),
@@ -453,7 +451,7 @@ For more information about these settings, see [Configuration options for Elasti
 
 To define these configuration options, add the following lines of code:
 
-```Typescript
+```typescript
 // Example of some options which can be configured
 const optionSettingProperties: elasticbeanstalk.CfnEnvironment.OptionSettingProperty[] = [
     {
@@ -489,7 +487,7 @@ Here we are stating that - if no `envName` property is provided during stack/sta
 
 Add following code in the stack definition file `lib/eb-appln-stack.ts`: 
 
-```Typescript
+```typescript
 // Create an Elastic Beanstalk environment to run the application
 const elbEnv = new elasticbeanstalk.CfnEnvironment(this, 'Environment', {
     environmentName: props?.envName ?? "MyWebAppEnvironment",
@@ -517,7 +515,7 @@ For this step, we are only creating these predefined stages - `Source`, `Build` 
 To organize things neatly, put the pipeline definition into its own stack file. Create a new file `lib/cdk-pipeline-stack.ts`. Remember to replace `OWNER` and `REPO` in the code below:
 
 
-```Typescript
+```typescript
 import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import { Construct } from 'constructs';
 import {  Stack, StackProps } from 'aws-cdk-lib';
@@ -561,7 +559,7 @@ The code defines the following basic properties of the pipeline:
 
 We also need to instantiate `CdkPipelineStack` with the account and AWS Region where we want to deploy the pipeline. Put the following code in `bin/cdk-pipeline-eb-demo.ts`. Please be sure to replace `ACCOUNT` and the `REGION` in there if necessary: 
 
-```Typescript
+```typescript
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
@@ -678,7 +676,7 @@ The first step is to define our own subclass of stage, which describes a single 
 
 Create a new file `lib/eb-stage.ts` and put the following code in it:
 
-```Typescript
+```typescript
 import {  Stage } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { EBEnvProps, EBApplnStack } from './eb-appln-stack';
@@ -702,15 +700,15 @@ export class CdkEBStage extends Stage {
 }
 ```
 
-Now, add instances of our CdkEBStage to the pipeline. 
+Now, add instances of our `CdkEBStage` to the pipeline. 
 
 Add a new import line at the top of `lib/cdk-pipeline-stack.ts`:  
-```Typescript
+```typescript
 import { CdkEBStage } from './eb-stage';
 ```
 
 and following code after the mentioned comment: 
-```Typescript
+```typescript
     // This is where we add the application stages
 
     // deploy beanstalk app
@@ -842,7 +840,7 @@ If your pipeline creation is failing with error `Access Denied` to source code G
 
 If you have token in a different name, e.g. `github-access-token-secret`, you have to update the CDK code in `lib/cdk-pipeline-stack.ts`. Import cdk and add authentication with secret name using following code:
 
-```Typescript
+```typescript
 import * as cdk from 'aws-cdk-lib';
 
 const pipeline = new CodePipeline(this, 'Pipeline', {
