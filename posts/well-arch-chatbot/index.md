@@ -24,9 +24,9 @@ To accomplish this, I'll walk you through the following:
 * Prompt Engineering
 * Creating the Chat Interface
 
-You can try my chatbot [here].(https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/)
+You can try my chatbot [here](https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/).
 
-And check out the GitHub repo with the code [here].(https://github.com/banjtheman/aws_well_arch_chatbot)
+And check out the GitHub repo with the code [here](https://github.com/banjtheman/aws_well_arch_chatbot).
 
 ## Data Collection
 
