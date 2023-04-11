@@ -16,7 +16,7 @@
 
 
    
-Threat detection and incident response can be a time-consuming and manual process for many organizations. This leads to inconsistent response processes, inconsistent security outcomes, and increased risk. In this tutorial, you will learn how to automate threat detection findings and automate your incident response process, reducing the time to respond to threats. As many organizations are preferring to use a standard IaC tool for consistent configurations among vendors, this tutorial will show how to configure this solution using Terraform.
+Threat detection and incident response (TDIR) can be a time-consuming and manual process for many organizations. This leads to inconsistent response processes, inconsistent security outcomes, and increased risk. In this tutorial, you will learn how to automate threat detection findings and automate your incident response process, reducing the time to respond to threats. As many organizations are preferring to use a standard Infrastrucutre As Code (IaC) tool for consistent configurations among vendors, this tutorial will show how to configure this solution using Terraform.
 
 ### About Amazon GuardDuty
 
@@ -48,13 +48,13 @@ You will need an AWS account to complete this tutorial. If you do not have an AW
 
 ## Step 1. Load the initial configuration
 
-This tutorial makes use of an AWS CloudFormation template to provisioning initial resources.  
+This tutorial makes use of an AWS CloudFormation template to provisioning initial resources.  This is done so that you can focus only on the terraform configuraiton of your security solution.  THe CloudFormation teamplate creates a stack.  The stack consists of an AWS Cloud9 IDE instance.  We use this Cloud9 instance so that everyone performing this tutorial will have the same editing and implementation experience.  Additionally, when you implement the stack in US-WEST-2 you ensure that there is a t3.small instance.  If the template is deployed in other regions you may need to modify the template to use another instance type if t3.small is not available.
 
 1.1. Navigate to [AWS CloudFormation in the AWS Management Console](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/) and create a stack by clicking the `create stack` button.  
 
 ![Create Stack](images/0001.png)
 
-1.2 . Select **Upload Template File** and upload the [gd-iac-initial.yml](https://github.com/8carroll/gd-iac-terraform-initial/blob/main/gd-iac-initial.yml) file. Then click **Next**.  
+1.2 . Select **Upload Template File** and upload the [gd-iac-initial.yml](https://github.com/8carroll/gd-iac-terraform-initial/blob/main/gd-iac-initial.yml) file from the sample code repo provided above. Then click **Next**.  
 
 ![Upload YAML file](images/0002.png)
 
@@ -74,6 +74,8 @@ This tutorial makes use of an AWS CloudFormation template to provisioning initia
 
 ![](images/0006.png)
 
+At this point you have deployed the initial resources you will use to follow along with this tutorial on your own.  In the next step you will access the Cloud9 instance that the stack createed and initialize Terraform.
+
 ## Step 2. Access Cloud9 and Initialize Terraform. 
 
 2.1. Open [AWS Cloud9 in the AWS Management Console](https://us-west-2.console.aws.amazon.com/cloud9control/home?region=us-west-2#/) and open the environment in the Cloud9 IDE.
@@ -87,13 +89,14 @@ This tutorial makes use of an AWS CloudFormation template to provisioning initia
 2.3.  From the terminal in your Cloud9 instance, clone the initial code repo. 
 
 ```
-git clone https://github.com/8carroll/gd-iac-terraform-initial.git
+git clone https://github.com/build-on-aws/automating-amazon-guardduty-with-iac.git
 ```
 
 
 
-2.4. Change into the **gd-iac-terraform-initial** directory and perform a **terraform init**, **terraform plan**, and **terraform apply.**  
+2.4. Change into the **automating-amazon-guardduty-with-iac** directory and perform a **terraform init**, **terraform plan**, and **terraform apply.**  
 
+> Terraform will apply configuration in US-WEST-2.  The Cloudformation template created the Cloud9 instance in US-WEST-1.  This is intentional.  The idea is that you can do your verifications seeing only what you create with Terraform. 
 
 ![](images/0010.png)
 
@@ -106,7 +109,11 @@ A successful apply will resemble the following:
 
 ![](images/0011.png)
 
+At this point you have deployed a VPC and two EC2 instances.  The two EC2 instances will talk to one another, and later when you add one of the EC2 instances Elastic IP address to a threat list it will cause GuardDuty to produce a finding.  From this point on you will create each of the resources that are part of the actual security solution.
+
 ## Step 3: Create an S3 Bucket to store a threat list
+
+In GuardDuty there are two types of lists that it can reference.  The first type is a **Trusted IP list** and the second is a **Threat IP list**.  GuardDuty does not generate findings for IP addresses that are included in trusted IP lists.  GuardDuty **generates** findings for IP addresses that are included in threat IP lists.  Since we want to force a finding in this tutorial we are using a threat IP list.  
 
 3.1. Begin by creating a variable in the `modules/s3/variables.tf` for the `vpc_id`.
 
@@ -118,19 +125,25 @@ variable "vpc_id" {}
 
 3.2. Next, in the `modules/s3/main.tf` file, get the current AWS user account number, create an S3 bucket resource.
 
-
+> The following code will create two S3 buckets.  One bucket will store flow logs.  We wont use them in this tutorial, but there will be generated and you can explore them if you wish. Flow log data is what GuardDuty uses, but you dont have to enable them for GuardDuty to use the data.  We only enable them here so you can see them.  The other bucket we create will be used to store our Threat List.
 
 ```
  # GET CURRENT AWS ACCOUNT NUMBER
  
  data "aws_caller_identity" "current" {}
 
-  # CREATE AN S3 BUCKET
+  # CREATE TWO S3 BUCKETS
  
  resource "aws_s3_bucket" "bucket" {
    bucket = "guardduty-example-${data.aws_caller_identity.current.account_id}-us-east-1"
    force_destroy = true
  }
+
+  resource "aws_s3_bucket" "flow-log-bucket" {
+   bucket = "vpc-flow-logs-${data.aws_caller_identity.current.account_id}-us-east-1"
+   force_destroy = true
+ }
+
 ```
 
 
@@ -140,7 +153,7 @@ variable "vpc_id" {}
 ```
 # VPC FLOW LOGS
  resource "aws_flow_log" "flow_log_example" {
-   log_destination      = aws_s3_bucket.bucket.arn
+   log_destination      = aws_s3_bucket.flow-log-bucket.arn
    log_destination_type = "s3"
    traffic_type         = "ALL"
    vpc_id               = var.vpc_id
@@ -170,12 +183,15 @@ variable "vpc_id" {}
 ```
 # CREATES S3 BUCKET
 module "s3_bucket" {
-  source = "./s3"
+  source = "./modules/s3"
   vpc_id = module.iac_vpc.vpc_attributes.id
 }
 ```
 
 > **Why are you creating an S3 bucket?**  You are primarily creating an S3 bucket to hold a text file that will be referred to by GuardDuty. GuardDuty uses two types of lists. 1.) a Trusted IP list, and 2.) a Threat IP list. Our S3 bucket will host the Threat IP List. The secondary reason is to store VPC flow logs. GuardDuty uses VPC flow logs, but you do not need to enable them for GuardDuty to use them. Here, we enable VPC FLow Logs so that we can use the data in other tools if we want to later on.]
+
+
+At this point you have created two S3 buckets.  One bucket is for the VPC flow logs if you wish to explore them on your own.  The other bucket will contain the threat list that you will create in a later step.
 
 ## Step 4: Create the GuardDuty Terraform Modules
 
@@ -248,7 +264,7 @@ module "guardduty" {
 }
 
 ```
-
+In this section you enabled GuardDuty, created the threat list and added the Elastic IP address of the Malicious EC2 instance to that list.
 
 ## Step 5: Create the SNS Terraform Module
 
@@ -362,7 +378,7 @@ output "sns_topic_arn" {
 
 
 ```
-
+In this section you created the SNS topics to send you an email when a specific finding is produced.
 
 ## Step 6: Create the EventBridge Terraform Module
 
@@ -404,6 +420,8 @@ How does EventBridge work? EventBridge receives an event, an indicator of a chan
  }
 
 ```
+
+> The event pattern defined above looks at events from the source service, in this case GuardDuty, and looks for a finding with the detail type of "UnauthorizedAccess:EC2/MaliciousIPCaller.Custom."
 
 6.3. Next define the Event Target Resource. When creating this resource you can add an extra bit of readability into the email notification by defining an [Input Transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-input-transformer-tutorial.html). This customizes what EventBridge passes to the event target. Below we are getting the GuardDuty ID, the Region, and the EC2 Instance ID and we are creating an input template that elaborates a bit on the message. You can see below that we have created an input template that makes use of the detail information in the GuardDuty finding in the email message that is sent.
 
@@ -482,7 +500,7 @@ module "guardduty_eventbridge_rule" {
 ```
 
 
-
+In this section you created an EventBridge rule that uses the SNS topic you created to send an email when a GuardDuty finding is matched.  In the next section you will enhance that functionality using Lambda.
 
 ## Step 7: Create the Lambda Terraform Module
 
@@ -631,7 +649,7 @@ variable "forensic_sg_id" {}
 
 ```
 
-7.7. Next, return to the `modules/lambda/main.tf` file and create the Lambda function resource. Note that in the code block below that we are using Python 3.9. Also, we are referencing the python code we zipped in index.zip. And lastly we are setting a few environment variables in the resource, `INSTANCE_ID`, `FORENSICS_SH`, and `TOPIC_ARN`. These will be passed into our Lambda function environment from the variables that we created.
+7.7. Next, return to the `modules/lambda/main.tf` file and create the Lambda function resource. Note that in the code block below that we are using Python 3.9. Also, we are referencing the python code we zipped in index.zip. And lastly we are setting a few environment variables in the resource, `INSTANCE_ID`, `FORENSICS_SG`, and `TOPIC_ARN`. These will be passed into our Lambda function environment from the variables that we created.
 
 ```
 
@@ -691,8 +709,8 @@ module "forensic-security-group" {
 
 ```
 
- output "forensic_sg_id" {
-   value       = aws_security_group.forensic_sg.id
+output "forensic_sg_id" {
+   value       = module.forensic-security-group.security_group_id
    description = "Output of forensic sg id created - to place the EC2 instance(s)."
  }
 
@@ -748,17 +766,22 @@ module "guardduty_eventbridge_rule" {
 
 ```
 
+In this section you created a Lambda function that isolates a compromised host into a different security group.  This lambda function is called by EventBridge when a GuardDuty finding is matched by the EventBridge rule.  In the next section you will apply the entire configuration.
+
 ## Step 8: Apply The Configuration to your AWS Account.
 
 8.1. Perform a `terraform init`. This will initialize all of the modules that you have added code to in this tutorial. The output should resemble the following.
 
 ![](/images/0013.png)
 
+> Note that if you already have GuardDuty enabled in your account the apply will fail.  Ensure 
+
 8.1. Do a `terraform plan`.
 8.2. Do a `terraform apply` to push the changes to AWS. Once applied your should have an output that resembles the following:
 
 ![](images/0014.png)
 
+In this section you applied the Terraform configuration to your AWS accoount.  At this point you have 2 EC2 instances that are communicating with one another.  One is Malicious and it's IP address has been added to our Threat IP List.  When GuardDuty sees this IP talking to our compromised instance it will produce a finding.  We have an EventBridge rule that matches that finding and does two things, 1/ it sends us an email letting us know what happened, and 2/ it invokes the lambda function to change the security group of the compromised host.  In the next section we will verify the configuration in our AWS console.
 
 ## Step 9: Verify The Solution in the AWS Management Console
 
