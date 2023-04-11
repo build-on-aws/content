@@ -1,6 +1,6 @@
 ---
 title: Improving Availability and Performance with Multi-AZ Architecture - Best Practices for Multi-Account Environments
-description: This post will provide some best practises on using multiple AZs in your deployment.
+description: This post will provide some best practices on using multiple AZs in a multi-account, multi VPC environment. 
 tags:
   - Availability Zone  
   - Resilience
@@ -69,8 +69,7 @@ In this example, we will consider that three teams own three separate accounts. 
 
 *Figure 3: Multi-Account/Multi-VPC deployment architecture*
 
-_
-
+ 
 ### Challenges:
 
 As explained earlier, to effectively use Availability Zones in your architecture, you need to reduce, as much as possible, the need for traffic to cross AZ boundaries in your architecture.
