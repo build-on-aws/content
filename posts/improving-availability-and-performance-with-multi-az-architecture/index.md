@@ -1,10 +1,8 @@
 ---
-title: Improving Availability and Performance with Multi-AZ Architecture\: Best Practices for Multi-Account Environments
-description: This post will provide some best practises on using multiple AZs in your deployment
+title: Improving Availability and Performance with Multi-AZ Architecture - Best Practices for Multi-Account Environments
+description: This post will provide some best practises on using multiple AZs in your deployment.
 tags:
-  - Availability Zone
-  - VPC
-  - Transit Gateway
+  - Availability Zone  
   - Resilience
 authorGithubAlias: hechkh
 authorName: Hechmi Khelifi
