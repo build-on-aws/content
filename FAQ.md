@@ -14,6 +14,10 @@
   * [How do I embed a Mermaid diagram in my article?](#how-do-i-embed-a-mermaid-diagram-in-my-article)
   * [How do I embed mathematical formulas or equations in my articles?](#how-do-i-embed-mathematical-formulas-or-equations-in-my-articles)
   * [How do I show content under tabs?](#how-do-i-show-content-under-tabs)
+  * [How do I show content in multiple columns?](#how-do-i-show-content-in-multiple-columns)
+  * [How do I create an external post?](#how-do-i-create-an-external-post)
+  * [How do I create a series of posts?](#how-do-i-create-a-series-of-posts)
+  * [How do I configure post images?](#how-do-i-configure-post-images )
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -145,7 +149,7 @@ _**Note:** Do not share images across posts or even posts in a series._
 
 To show images in your post, you'll link to them using a relative path:
 
-`![Put your alt-text here](images/the-internet.jpg) "Put your image title/caption here"`
+`![Put your alt-text here](images/the-internet.jpg "Put your image title/caption here")`
 
 The caption will appear underneath the image and also on mouse over.
 
@@ -206,6 +210,7 @@ Currently, the following languages are supported:
 * ruby
 * shell
 * swift
+* terraform (or hcl or tf)
 * typescript
 * xml
 * yaml (or yml)
@@ -296,6 +301,117 @@ Images inside tabs use a similar syntax. You just need to create a markdown list
 * Image 3
   ![Image 3 title](https://domain.com/ccc.png)
 ````
+
+### How do I show content in multiple columns?
+
+Start a column by writing the symbol `_||` in a separate line. Write the content for this first column next. Start another column writing the symbol `_||` in a separate line again, then write the content for the second column.
+End the multiple-columns mode by writing the symbol `_==` in a separate line (or by reaching the end of the file).
+
+For example:
+
+````markdown
+Normal paragraph not in columns.
+
+_||
+
+Content of column 1
+
+_|| 
+
+Content of column 2
+
+_==
+
+Another normal paragraph not in columns.
+````
+
+Notice the maximum number of columns supported is 4, and in smaller screens (like mobile devices) column rendering is disabled and the content will be shown vertically.
+
+### How do I create an external post?
+
+An external post does not contain content but instead, links to content in an external website. Create it just like any other post, but:
+* Do not add a markdown body in the index.md (it would not be rendered anyway)
+* Add an attribute in the FrontMatter header named "externalUrl" with the URL of the remote content you want to link to. For example:
+  ````yml
+      externalUrl: https://dzone.com/articles/demystifying-transition-to-microservices
+  ````
+* External posts support the same fields as regular posts (such as title, description, date, images, author(s), etc.).
+
+### How do I create a series of posts?
+
+A series of posts is a sequential collection of posts about a topic, intended to be read in order. If a post is very large, it may be a candidate to be split into a series of posts.
+Start by creating a folder that will contain your series, and one folder for every post inside the series. Choose folder names carefully, since the public URL will be based on the folder names. You do not need to include numbers to enforce the order of the posts.
+Create a file named series.md in the root of your series folder. For example, your folders structure may look like this:
+
+````
+/posts/my-series/series.md
+/posts/my-series/introduction/index.md
+/posts/my-series/first-article/index.md
+/posts/my-series/second-article/index.md
+/posts/my-series/third-article/index.md
+/posts/my-series/conclusion/index.md
+````
+
+In the series.md, include a content similar to a post, with a FrontMatter header and an optional body. The supported fields in the header are:
+
+````markdown
+---
+title: "Title of the series"
+description: "Description of the series"
+navigationBars: [Optional. One of: top, bottom, both, none]
+posts:
+  - introduction
+  - first-article
+  - second-article
+  - third-article
+  - conclusion
+--- 
+[OPTIONAL MARKDOWN CONTENT]
+````
+The `posts` field determines the order of the posts in the series, which must be direct children of the folder where the series.md file is located (just like the example above).
+
+By creating this series.md file and folder structure, BuildOn.AWS will provide the following features:
+* A series landing page, in the URL based on the folder where the series.md is located. In our example, it would be /posts/my-series. This landing page displays the title of the series, the authors of the posts, the tags of the posts, and the markdown content of the series.md if it was provided.
+* Navigation controls. Every post in the series will display at the top and at the bottom links to navigate to the next and previous post in the series. You can customize this behaviour using the attribute `navigationBars` in the FrontMatter header, with possible values:
+  * top. Navigation controls display only at the top of the page
+  * bottom. Navigation controls display only at the bottom of the page
+  * both. Navigation controls display both at the top and bottom of the page (this is the default)
+  * none. Hide navigation controls.
+* A Series Table Of Content component that can be included in the markdown both in the series.md file and also in every post of the series, and renders a table with links to the posts in the series, based on their titles. When this component is included inside a post in a series, it highlights the current article.
+  In order to use this Series Table Of Content component, just add to the markdown the following snippet, in the desired position:
+  ````
+  
+  | SeriesToC |
+  |-----------|
+  
+  ````
+  
+This is how these controls look like:
+* Navigation controls for a series at the bottom of a post
+  ![Navigation controls for a series](SeriesNav.webp)
+* Series Table Of Contents inside a post in the series 
+  ![Series Table Of Contents inside a post in the series](SeriesToc.webp)
+
+### How do I configure post images?
+
+You can configure extra images for posts in the post FrontMatter header.
+
+````yml
+---
+images:
+  background: [image URL]
+  banner: [image URL]
+  thumbnail: [image URL]
+--- 
+````
+There are three types of images here:
+* background. This image will be used as a background when the post is displayed in a carousel of highlighted posts. 
+  This image should have a 1.91:1 aspect ratio. 
+* banner. This image is used when the post is displayed in a carousel of posts in a space. This image should have a 1.91:1 aspect ratio.
+* thumbnail. This image is displayed next to the title and description of a post when shown in a feed. It should be a square image.
+
+Additionally, these images may be used to create a preview when a post is shared in social media. The banner image is preferred, if there is none then the background image, and if not, the thumbnail image.
+Notice that images should be optimized for the web, using compressed modern formats such as webp, and avoiding large high-resolution images. Some social media (for example, Twitter) refuse to use large images and may fall back to other images found in the page.
 
 ## Miscellaneous
 

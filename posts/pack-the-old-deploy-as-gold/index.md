@@ -141,7 +141,7 @@ This is just to help us debug and be sure that our app was included in our image
 RUN find /opt/JBoss | grep myapp
 ```
 
-This is our container execution entry point where we are starting JBoss and binding 
+This is our container execution entry point where we are starting JBoss and binding
 the port to 0.0.0.0:
 
 ```dockerfile

@@ -30,8 +30,10 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCat
 | ✅ AWS experience      | 100 - Beginner                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- [Terraform](https://terraform.io/) 1.3.7+<br>- (Optional) [GitHub](https://github.com) account|
-| ⏰ Last Updated        | 2023-01-31                                                      |
+| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- [Terraform](https://terraform.io/) 1.3.7+<br>- (Optional) [GitHub](https://github.com) account|
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/bootstrapping-terraform-automation)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated        | 2023-02-22                                                      |
 
 | ToC |
 |-----|
@@ -55,7 +57,7 @@ Let's get started setting this up! Make sure you are logged into your AWS, and C
 
 ### Setting up a CodeCatalyst Space, Project, Repo, and Environment
 
-Now, let's set up our CodeCatalyst Space and Project. Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws), add a name (we will use `Terraform CodeCatalyst`), add the AWS Account ID to link to for billing (`123456789012` is a placeholder), you can find your account ID in the top right of your AWS Console, and follow the prompts to link your AWS Account with CodeCatalyst.
+Now, let's set up our CodeCatalyst Space and Project. Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws), add a name (we will use `Terraform CodeCatalyst`), add the AWS Account ID to link to for billing (`111122223333` is a placeholder), you can find your account ID in the top right of your AWS Console, and follow the prompts to link your AWS Account with CodeCatalyst.
 
 ![Dialog showing a CodeCatalyst Space after successfully adding an AWS account to it](./images/successful_space_created.png)
 
@@ -115,8 +117,8 @@ You can verify that access is set up correctly by running `aws sts get-caller-id
 $ aws sts get-caller-identity
 {
     "UserId": "AIDACKCEVSQ6C2EXAMPLE",
-    "Account": "123456789012",
-    "Arn": "arn:aws:iam::123456789012:user/JaneDoe"
+    "Account": "111122223333",
+    "Arn": "arn:aws:iam::111122223333:user/JaneDoe"
 }
 ```
 
@@ -141,7 +143,6 @@ wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-auto
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/pr_branch_iam_role.tf
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/providers.tf
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/state_file_resources.tf
-wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/terraform.tf
 wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-automation/main/_bootstrap/codecatalyst/variables.tf
 ```
 
@@ -361,25 +362,6 @@ The files created will have the following content:
     #   target_key_id = aws_kms_key.terraform.key_id
     # }
     ```
-* terraform.tf
-    ```bash
-    terraform {
-      backend "s3" {
-        bucket         = "tf-state-files"
-        key            = "terraform-bootstrap-state-file/"
-        region         = "us-east-1"
-        dynamodb_table = "TerraformMainStateLock"
-        kms_key_id     = "alias/s3" # Optionally change this to the custom KMS alias you created - "alias/terraform"
-      }
-
-      required_providers {
-        aws = {
-          source  = "hashicorp/aws"
-          version = "~> 4.33"
-        }
-      }
-    }
-    ```
 
 Once done, edit the `_bootstrap/variable.tf` file and update the `state_file_bucket_name` (S3 bucket names are globally unique), and optionally the `state_file_lock_table_name` variables with the values for your S3 bucket name for the state file, DynamoDB table name for locks, and optionally change the `aws_region` if you want to use a different region.
 
@@ -425,7 +407,7 @@ data.aws_iam_policy_document.pr_branch_assume_role_policy: Reading...
 data.aws_iam_policy_document.main_branch_assume_role_policy: Reading...
 data.aws_iam_policy_document.pr_branch_assume_role_policy: Read complete after 0s [id=2789987180]
 data.aws_iam_policy_document.main_branch_assume_role_policy: Read complete after 0s [id=2789987180]
-data.aws_caller_identity.current: Read complete after 0s [id=123456789012]
+data.aws_caller_identity.current: Read complete after 0s [id=111122223333]
 data.aws_iam_policy_document.pr_branch_lock_table_access: Reading...
 data.aws_iam_policy_document.pr_branch_lock_table_access: Read complete after 0s [id=813239658]
 
@@ -472,7 +454,7 @@ aws_iam_role.pr_branch: Creating...
 aws_s3_bucket.state_file: Creating...
 aws_iam_role.main_branch: Creating...
 aws_iam_policy.lock_table_policy_pr_branch: Creating...
-aws_iam_policy.lock_table_policy_pr_branch: Creation complete after 1s [id=arn:aws:iam::123456789012:policy/pr_branch_lock_table_access_policy]
+aws_iam_policy.lock_table_policy_pr_branch: Creation complete after 1s [id=arn:aws:iam::111122223333:policy/pr_branch_lock_table_access_policy]
 aws_iam_role.pr_branch: Creation complete after 1s [id=PR-Branch-Infrastructure]
 aws_iam_role.main_branch: Creation complete after 1s [id=Main-Branch-Infrastructure]
 aws_iam_role_policy_attachment.lock_table_policy_pr_branch: Creating...
@@ -489,13 +471,13 @@ aws_dynamodb_table.state_file_lock: Creation complete after 7s [id=TerraformMain
 Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
 ```
 
-Next, we will move the state file we just created with all the details of our infrastructure to our S3 bucket. Terraform backend configuration [does not allow](https://stackoverflow.com/questions/65838989/variables-may-not-be-used-here-during-terraform-init) any variable / local interpolation, so we need to update the `bucket` and `region` values manually in `terraform.tf` after uncommenting the `terraform` configuration block - replace them with your values:
+Next, we will move the state file we just created with all the details of our infrastructure to our S3 bucket. To do this, we need to configure a Terraform [backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) using S3. Create `_bootstrap/terraform.tf` with the following, and update the `bucket` and `region` values with your values:
 
 ```bash
 terraform {
   backend "s3" {
     bucket         = "tf-state-files"
-    key            = "terraform-bootstrap-state-files"
+    key            = "terraform-bootstrap-state-files/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "TerraformMainStateLock"
     kms_key_id     = "alias/s3" # Optionally change this to the custom KMS alias you created - "alias/terraform"
@@ -507,10 +489,14 @@ terraform {
       version = "~> 4.33"
     }
   }
+  
+  required_version = "= 1.3.7"
 }
 ```
 
-Now run `terraform init -migrate-state`, and you should see the following output:
+It would be easier if we could reference `region` and `state_file_bucket` variables in the Terraform backend configuration, but it [does not allow](https://stackoverflow.com/questions/65838989/variables-may-not-be-used-here-during-terraform-init) any variable / local interpolation.
+
+To migrate the state file to S3, run `terraform init -migrate-state`, and you should see the following output:
 
 ```bash
 $ terraform init -migrate-state
@@ -585,7 +571,7 @@ The base infrastructure is now in place to allow us to start using our workflow 
 terraform {
   backend "s3" {
     bucket         = "tf-state-files"
-    key            = "terraform-state-file/"
+    key            = "terraform-state-file/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "TerraformMainStateLock"
     kms_key_id     = "alias/s3" # Optionally change this to the custom KMS alias you created - "alias/terraform"
@@ -596,6 +582,8 @@ terraform {
       version = "~> 4.33"
     }
   }
+
+  required_version = "= 1.3.7"
 }
 ```
 
@@ -624,7 +612,7 @@ mkdir -p .codecatalyst/workflows
 touch .codecatalyst/workflows/main_branch.yml
 ```
 
-Open `.codecatalyst/workflows/main_branch.yml` in your IDE, and add the following - remember to replace the placeholder AWS account ID `123456789012` with the value of your account, and the IAM role names if you changed them (you can choose between the standard CodeCatalyst workflow, or to use GitHub Actions with CodeCatalyst):
+Open `.codecatalyst/workflows/main_branch.yml` in your IDE, and add the following - remember to replace the placeholder AWS account ID `111122223333` with the value of your account, and the IAM role names if you changed them (you can choose between the standard CodeCatalyst workflow, or to use GitHub Actions with CodeCatalyst):
 
 * CodeCatalyst Workflow
     ```yml
@@ -646,7 +634,7 @@ Open `.codecatalyst/workflows/main_branch.yml` in your IDE, and add the followin
         Environment:
           Connections:
             - Role: Main-Branch-Infrastructure
-              Name: "123456789012"
+              Name: "111122223333"
           Name: TerraformBootstrap
         Configuration: 
           Steps:
@@ -680,7 +668,7 @@ Open `.codecatalyst/workflows/main_branch.yml` in your IDE, and add the followin
         Environment:
           Connections:
             - Role: Main-Branch-Infrastructure
-              Name: "123456789012"
+              Name: "111122223333"
           Name: TerraformBootstrap
         Configuration:
           Steps:
@@ -749,7 +737,7 @@ Now that we have our `main` branch workflow done, it is time to set up the pull 
 1. We remove the `terraform apply` step
 1. The trigger for the build is for when a PR to the `main` branch is opened or updated (`REVISION`)
 
-Create a new file for the PR workflow as `.codecatalyst/workflows/pr_branch.yml`, and add the following (replacing the placeholder AWS account ID of `123456789012`, and the IAM role name if you changed it) - you can choose between the standard CodeCatalyst workflow, or to use GitHub Actions with CodeCatalyst:
+Create a new file for the PR workflow as `.codecatalyst/workflows/pr_branch.yml`, and add the following (replacing the placeholder AWS account ID of `111122223333`, and the IAM role name if you changed it) - you can choose between the standard CodeCatalyst workflow, or to use GitHub Actions with CodeCatalyst:
 
 * CodeCatalyst Workflow
     ```yml
@@ -771,7 +759,7 @@ Create a new file for the PR workflow as `.codecatalyst/workflows/pr_branch.yml`
         Environment:
           Connections:
             - Role: PR-Branch-Infrastructure
-              Name: "123456789012"
+              Name: "111122223333"
           Name: TerraformBootstrap
         Configuration: 
           Steps:
@@ -809,7 +797,7 @@ Create a new file for the PR workflow as `.codecatalyst/workflows/pr_branch.yml`
         Environment:
           Connections:
             - Role: PR-Branch-Infrastructure
-              Name: "123456789012"
+              Name: "111122223333"
           Name: TerraformBootstrap
         Configuration:
           Steps:
@@ -903,9 +891,11 @@ By clicking on the `Terraform Plan` step, you will be able to see the proposed i
 
 ## Clean up
 
-We have now reached the end of this tutorial, you can either keep the current setup and expand on it, or delete all the resources created if you are not. To remove all the resources we created in this project, follow the following steps in your dev environment:
+We have now reached the end of this tutorial, you can either keep the current setup and expand on it, or delete all the resources created if you are not. If you are planning to manage multiple AWS accounts, we recommend reading the [Automating multiple environments with Terraform](https://buildon.aws/tutorials/manage-multiple-environemnts-with-terraform) tutorial - it follows directly from this one, and you can leave the resources created in place.
 
-1. Make sure you are on the `main` branch by running `git checkout main`, then run `terraform destroy`, and type `yes` to confirm - this will remove the VPC we created
+To remove all the resources we created in this project, follow the following steps in your dev environment:
+
+1. Make sure you are on the `main` branch by running `git checkout main` and `git pull` to ensure you have the latest changes, then run `terraform destroy`, and type `yes` to confirm - this will remove the VPC we created
 1. To delete all the bootstrapping resourced, first change into the directory by running `cd _bootstrap`. Before we can delete everything, we need to update our S3 state file bucket. We need to change the lifecycle policy to allow the deletion, and add `force_destroy = true` to also delete all the objects in the bucket. Edit `_bootstrap/state_file_resources.tf`, and replace the first `aws_s3_bucket` resource with:
     ```bash
     # Bucket used to store our state file
@@ -960,7 +950,7 @@ We have now reached the end of this tutorial, you can either keep the current se
 
 ## Conclusion
 
-Congratulations! You've now bootstrapped Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow.
+Congratulations! You've now bootstrapped Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
 
 <!-- ## Bootstrapping with AWS CLI and CloudShell -->
 
