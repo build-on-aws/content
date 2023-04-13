@@ -12,19 +12,18 @@ date: 2023-04-01
 
 What is DevOps? Is it a tool? Is it a kind of agile process like Scrum or Kanban? Does deploying to Kubernetes mean we are doing DevOps? Where does it start and when have we reached the end?
 
-The short answer: it’s complicated. 
+The short answer: it’s complicated.
 
-A lot of people have [wrong ideas about DevOps](https://www.buildon.aws/posts/devops-wrong-answers-only), but this definition [from AWS](https://aws.amazon.com/devops/what-is-devops/) is one of the best I’ve seen: "DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes." 
+A lot of people have [wrong ideas about DevOps](/posts/devops-wrong-answers-only), but this definition [from AWS](https://aws.amazon.com/devops/what-is-devops/) is one of the best I’ve seen: *"DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes."*
 
 DevOps is about people and processes - and how to bring them together to accelerate the pace of innovation. By the end of this post, you should have a better understanding of what DevOps is (and isn't), its history, and how it can be applied today.
-
 
 | ToC |
 | --- |
 
 ## What Is Not DevOps
 
-Before we dive into what DevOps is, let's touch on what it's not. DevOps is not a silver-bullet solution for all of your problems. It's not a product, tool, or solution you can purchase and forget. DevOps is not a solo engineer who catches all the glue work; neither is it a superficial change to the job titles of your developers. Even embracing Agile or Scrum processes - though they can potentially support you on your DevOps journey - will not solve your DevOps problem for you.
+Before we dive into what DevOps is, let's touch on what it's not. DevOps is not a silver-bullet solution for all of your problems. It's not a product, tool, or solution you can purchase and forget about. DevOps is not a solo engineer who catches all the glue work; neither is it a superficial change to the job titles of your developers. Even embracing Agile or Scrum processes - though they can potentially support you on your DevOps journey - will not solve your DevOps problem for you.
 
 DevOps is bigger than all these things. So let's take a look at how it emerged.
 
@@ -58,11 +57,11 @@ The underlying goal of Kanban was to reduce seven common wastes:
 2. **Waiting** - Time spent waiting with machines or operators idle due to missing parts or equipment failures.
 3. **Transporting** - Moving the products or pieces when it's not needed such as changing warehouses to complete the next step when they could have been located together.
 4. **Processing** - Waste through unnecessary or wrong processing often due to poor tool or product design.
-5. **Inventory** - Having an excess of inventory on hand
+5. **Inventory** - Having an excess of inventory on hand.
 6. **Motion** - Making movements that aren't productively contributing such as looking for parts, tools, or documents.
 7. **Defects** - When the product is created incorrectly and inspection, rework, and scrapping is required.
 
-But if this approach to manufacturing predated the Waterfall methodology, why didn’t it address some of the problems in it? Well, Lean Manufacturing didn’t reach American software development processes until the 1980s and '90s. And that set the stage for the eventual rise of DevOps itself.
+But if this approach to manufacturing predated the Waterfall methodology, why didn’t it address some of the problems in it? Well, Lean Manufacturing didn’t reach software development processes until the 1980s and '90s. And that set the stage for the eventual rise of DevOps itself.
 
 This is just a quick summary of Lean Manufacturing, but you can go directly to the source to learn more with [The Toyota Way to Lean Leadership](https://www.goodreads.com/en/book/show/11722275), or dig more into Lean in software with [The Lean Startup](https://www.goodreads.com/en/book/show/10127019).
 
@@ -88,13 +87,13 @@ Here are some of the frameworks for understanding and approaching DevOps in diff
 
 This first framework comes from [The DevOps Handbook](https://www.goodreads.com/en/book/show/26083308), and you can see it in action in [The Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project). The DevOps Handbook focuses on 3 major pillars.
 
-* **First Pillar** - Principles of Flow and Systems Thinking:
+* **First Pillar** - Principles of Flow and Systems Thinking:\
 The first pillar focuses on the performance of the entire system, as an individual team's success doesn't matter if the organization as a whole fails to deliver. To begin, we focus on creating a culture of continuous improvement and ensuring that work flows smoothly and efficiently throughout the entire value stream: from development, to operations, to customer feedback, and then back again. This involves optimizing processes, breaking work into smaller chunks, and reducing friction at each stage to enable fast and reliable delivery of high quality products.
 
-* **Second Pillar** - Principles of Feedback and Amplifying Feedback Loop:
+* **Second Pillar** - Principles of Feedback and Amplifying Feedback Loop:\
 The second pillar emphasizes the importance of getting fast and actionable feedback at all stages of the development process to constantly iterate and improve using feedback loops and team collaboration. This involves fostering a culture of experimentation and learning, where feedback from customers and stakeholders is used to inform decisions and drive continuous improvement. Teams work together to identify and resolve issues as quickly as possible, and prioritize transparency and communication to promote collaboration and knowledge sharing.
   
-* **Third Way** - Principles of Continuous Experimentation and Learning:
+* **Third Way** - Principles of Continuous Experimentation and Learning:\
 The third pillar focuses on creating a culture of continual learning and experimentation, where teams are encouraged to take risks and innovate in order to drive continuous improvement. Exploration and discovery are just as important as being open to making mistakes and failures. This involves fostering a culture of innovation and experimentation, where teams are empowered to try new ideas and learn from both successes and failures. Organizations should also prioritize the use of data and analytics to inform decision making, and should invest in ongoing training and development to promote a culture of learning and growth.
 
 The idea is that by focusing on these three pillars, organizations can drive better business outcomes and value for our customers. The DevOps Handbook provides detailed guidance on how to bring these principles to life. As we’ve continued to iterate on the concept of DevOps itself, we've continued to create other frameworks to inform and measure our success at DevOps.
@@ -103,15 +102,15 @@ The idea is that by focusing on these three pillars, organizations can drive bet
 
 CALMS is a framework that represents the five key components crucial for implementing DevOps practices successfully, and it can help teams identify areas for improvement to efficiently prioritize their time and effort.
 
-* **Culture** - DevOps is a people-first approach, so it makes sense that culture is the first point covered. It's about more than just implementing tools and processes; it's about creating a collaborative culture which emphasizes communication, trust, and shared goals. This culture is a relationship between how people communicate and how they expect to be communicated with. It focuses on bridging the distance between different departments, encouraging knowledge sharing, and creating a shared sense of ownership and accountability. The people and their needs drive the processes and tools, not the other way around.
+* **Culture:** DevOps is a people-first approach, so it makes sense that culture is the first point covered. It's about more than just implementing tools and processes; it's about creating a collaborative culture which emphasizes communication, trust, and shared goals. This culture is a relationship between how people communicate and how they expect to be communicated with. It focuses on bridging the distance between different departments, encouraging knowledge sharing, and creating a shared sense of ownership and accountability. The people and their needs drive the processes and tools, not the other way around.
 
-* **Automation** - Teams are empowered to work more efficiently and deliver higher quality products more quickly when they are freed from repetitive and mundane tasks. Leverage tools and technology to seek out ways to automate as many tasks as possible that the team is comfortable with. This uses the strength of machines to quickly compute, repetitively deliver, or perform other similar tasks, while allowing the people to excel in creative or complex tasks that push the business forward.
+* **Automation:** Teams are empowered to work more efficiently and deliver higher quality products more quickly when they are freed from repetitive and mundane tasks. Leverage tools and technology to seek out ways to automate as many tasks as possible that the team is comfortable with. This uses the strength of machines to quickly compute, repetitively deliver, or perform other similar tasks, while allowing the people to excel in creative or complex tasks that push the business forward.
 
-* **Lean** - The Lean principle emphasizes the value of minimizing waste and focusing on delivering. When we speak about DevOps, this means optimizing processes and workflows to find bottlenecks, and reduce the time it takes to deliver, while also prioritizing feedback. Teams can do this by visualizing their work in progress, limiting batch sizes and managing queue lengths. One way to do this is by adoption Scrum or Kanban.
+* **Lean:** The Lean principle emphasizes the value of minimizing waste and focusing on delivering. When we speak about DevOps, this means optimizing processes and workflows to find bottlenecks, and reduce the time it takes to deliver, while also prioritizing feedback. Teams can do this by visualizing their work in progress, limiting batch sizes and managing queue lengths. One way to do this is by adoption Scrum or Kanban.
 
-* **Measurement** - In order to continuously improve and optimize the teams' processes, you need to be able to measure and track metrics related to your development, delivery, and performance. Data is collected, and there are mechanisms in place that provide visibility into all systems, which can involve tools like monitoring or observability based software to help generate insights which inform decision making. All systems is important here. Measuring our technical systems is important but so are Key Performance Indicators (KPIs). Those are the raw numbers which make up the framework of the company and illustrate it's success or failure. There's a story to be told between the infrastructure your application lives on and the actions your organization is taking.
+* **Measurement:** In order to continuously improve and optimize the teams' processes, you need to be able to measure and track metrics related to your development, delivery, and performance. Data is collected, and there are mechanisms in place that provide visibility into all systems, which can involve tools like monitoring or observability based software to help generate insights which inform decision making. All systems is important here. Measuring our technical systems is important but so are Key Performance Indicators (KPIs). Those are the raw numbers which make up the framework of the company and illustrate it's success or failure. There's a story to be told between the infrastructure your application lives on and the actions your organization is taking.
 
-* **Sharing** - Information gathered is powerless until it is shared. Within and between teams, knowledge sharing improves the overall performance of the organization and can consist of sharing best practices, lessons learned, or other information. There are user-friendly communication channels that encourage ongoing communication between development and operations. Create platforms, or processes, such as feedback cycles, as information sharing is one of the strongest ways to break down silos. Bring people from different teams and perspectives in earlier to avoid making mistakes based on poor data or assumptions.
+* **Sharing:** Information gathered is powerless until it is shared. Within and between teams, knowledge sharing improves the overall performance of the organization and can consist of sharing best practices, lessons learned, or other information. There are user-friendly communication channels that encourage ongoing communication between development and operations. Create platforms, or processes, such as feedback cycles, as information sharing is one of the strongest ways to break down silos. Bring people from different teams and perspectives in earlier to avoid making mistakes based on poor data or assumptions.
 
 These are the essential ingredients to DevOps success. If you automate everything without measuring or sharing, there's no way to validate if it's working as intended. If you measure without automation, it's difficult to validate that it was exactly the same, and that your results are correct. This level of execution requires a top-down buy in to accomplish as an individual cannot own or drive this level of organization process. That's not to say an individual can't move the needle, just that you can't be the sole owner. Internal DevOps advocacy has its place in building momentum, knowledge sharing, and helping to drive change.
 
@@ -138,7 +137,6 @@ Team Topologies describe the different patterns of organizing teams for optimizi
 A DevOps practitioner or engineer is not a specific kind of coder. This is fantastic news because it means anyone can do it. While you can't do "the DevOps" alone, you can be responsible for shepherding and advocating DevOps principles and gaining momentum within your organization.
 
 ## Getting Started
-<!-- (Nice place to link to the post on "Good Places to Start Your DevOps Journey" article.) -->
 
 So how do we know where to start and when we've reached our goals?
 
@@ -150,7 +148,7 @@ So what kind of areas do we tend to work in when we are solving problems from a 
 
 ## Wrap Up
 
-It's not possible to learn every DevOps concept from a single post or in a single day, but if you continuously learn and iterate on your culture, processes, and technology - and work on your gaps and pain points - you'll be surprised at how quickly you're able to make a big difference. You and your team are not alone in this journey; there's been over a decade of other teams learning and documenting their successes and challenges. This piece will continue to be updated with references to other DevOps articles we release. You can also find additional resources below.
+It's not possible to learn every DevOps concept from a single post or in a single day, but if you continuously learn and iterate on your culture, processes, and technology - and work on your gaps and pain points - you'll be surprised at how quickly you're able to make a big difference. You and your team are not alone in this journey; there's been over a decade of other teams learning and documenting their successes and challenges. You can also find additional resources below.
 
 ### Resources
 
