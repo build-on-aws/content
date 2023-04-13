@@ -1,7 +1,7 @@
 ---
 hasBorder: true
-title: Upcoming Build ON Live Events
 ---
+#### Upcoming Build ON Live Events
 
 Build On Live Open Source Machine Learning coming this June! 🥳
 
