@@ -1,8 +1,8 @@
 ---
-title: Deploy Serverless Spark jobs to AWS using GitHub Actions
-description: GitHub Actions have become a popular way of maintaining continuous integration and deployment as part of code repositories. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions.
+title: "Deploy Serverless Spark jobs to AWS using GitHub Actions"
+description: "GitHub Actions have become a popular way of maintaining continuous integration and deployment as part of code repositories. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions."
 tags:
-    - ci-cd
+    - cicd
     - github
     - emr-serverless
     - apache-spark
@@ -11,7 +11,7 @@ tags:
     - devops
 authorGithubAlias: dacort
 authorName: Damon Cortesi
-date: 2023-03-10
+date: 2023-04-13
 ---
 
 Apache Spark is one of the most popular frameworks for data processing both on-premises and in the cloud. Despite its popularity, modern DevOps practices for Apache Spark are not well-documented or readily available to data teams. GitHub Actions have become a popular way of maintaining continuous integration and deployment as part of code repositories - by combining development workflows with source code, developers get immediate feedback on their changes and can interate faster. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions to measure weather trends for a provided location.
@@ -33,7 +33,7 @@ Apache Spark is one of the most popular frameworks for data processing both on-p
 | 💰 Cost to complete | ~$10                                    |
 | 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [GitHub Account](https://github.com) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-03-07                            |
+| ⏰ Last Updated     | 2023-04-13                            |
 
 | ToC |
 |-----|
@@ -49,7 +49,7 @@ We'll go step-by-step to create a new repository and build up a PySpark job from
 In order to follow along, you'll need:
 
  - An AWS account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
- - A GitHub account - sign up for free at [github.com](https://github.com/).
+ - A GitHub account - sign up for free at [github.com](https://github.com/)
  - The `git` command
 - An editor (VS Code, vim, emacs, Notepad.exe)
 
@@ -88,11 +88,11 @@ Once the stack is created, navigate to the Outputs tab for the stack you created
 
 Now let's get started!
 
-## Create a unit test that runs on `git push`
+## Create a Unit Test That Runs on `git push`
 
-First, [Create a new repository](https://github.com/new) on GitHub. For the rest of this tutorial, we'll assume you used `ci-cd-serverless-spark` for the repository name. The repository can be public or private.
+First, [create a new repository](https://github.com/new) on GitHub. For the rest of this tutorial, we'll assume you used `ci-cd-serverless-spark` for the repository name. The repository can be public or private.
 
-> **Note** Make sure you use the same repository name that you did when you created the CloudFormation Stack above!
+> **Note:** Make sure you use the same repository name that you did when you created the CloudFormation Stack above!
 
 ![](images/github-repo-create.png)
 
@@ -173,11 +173,11 @@ Once you do this, return to the GitHub UI and you'll see a yellow dot next to yo
 
 Great! Now whenever you `git push`, the unit tests in `pyspark/tests` will be run to validate your code. Let's move on to creating some actual Spark code.
 
-## Add PySpark analysis and unit test
+## Add PySpark Analysis and Unit Test
 
 As mentioned, we'll be using the NOAA GSOD dataset. What we'll do next is add our main PySpark entrypoint script and a new class that can return the largest values from a Spark DataFrame.
 
-Let's take a quick look at the data. The raw structure is fairly typical and straight-forward. We have an S3 bucket with CSV files split into yearly partitions. Each CSV file is a specific weather station ID. If we open one of the files, it contains daily weather readings including min, max, and mean measures of temperature, wind, and pressure as well as information about the amount and type of precipitation. You can find more information about the dataset on [noaa.gov](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00516).
+Let's take a quick look at the data. The raw structure is fairly typical and straightforward. We have an S3 bucket with CSV files split into yearly partitions. Each CSV file is a specific weather station ID. If we open one of the files, it contains daily weather readings including min, max, and mean measures of temperature, wind, and pressure as well as information about the amount and type of precipitation. You can find more information about the dataset on [noaa.gov](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00516).
 
 The station ID for Boeing Field in Seattle, WA is `72793524234`. Let's take a look at the the data from that station for 2022 - it's located at `s3://noaa-gsod-pds/2022/72793524234.csv`.
 
@@ -196,7 +196,7 @@ Our job is simple: we're going to extract "extreme weather events" across all st
 
 For the structure of our PySpark job, we'll create the following files in the `pyspark` directory:
 
-- An `entrypoint.py` file that will be where we initialize our job and run the analysis
+- An `entrypoint.py` file that will be where we initialize our job and run the analysis:
 
 ```python
 import sys
@@ -238,7 +238,7 @@ if __name__ == "__main__":
         )
 ```
 
-- A `jobs/extreme_weather.py` file that has the actual analysis code broken down into unit-testable methods.
+- A `jobs/extreme_weather.py` file that has the actual analysis code broken down into unit-testable methods:
 
 ```python
 from pyspark.sql import DataFrame, Row
@@ -262,7 +262,7 @@ class ExtremeWeather:
       )
 ```
 
-We'll also create a new unit test for our analysis as well as some mock data.
+We'll also create a new unit test for our analysis as well as some mock data:
 
 In `pyspark/tests`, create a `conftest.py` file
 
@@ -291,7 +291,7 @@ def mock_views_df():
   )
 ```
 
-Then update the `test_basic.py` file with a new test. _Feel free to leave the old test in the file_
+Then update the `test_basic.py` file with a new test. _Feel free to leave the old test in the file._
 
 ```python
 from jobs.extreme_weather import ExtremeWeather
@@ -326,9 +326,9 @@ In the GitHub UI, in the "Actions" tab, you should now have two workflow runs fo
 
 For extra credit, feel free to make the test fail and see what happens when you commit and push the failing test.
 
-## Create an integration test to run on new pull requests
+## Create an Integration Test to Run on New Pull Requests
 
-This is awesome! But our mock data is a small slice of what's actually available and we want to make sure we catch any errors with big changes to the codebase.
+This is awesome! But our mock data is a small slice of what's actually available, and we want to make sure we catch any errors with big changes to the codebase.
 
 In order to do this, we'll create a new `integration_test.py` file that uses our existing code and runs a few validations over a known-good set of files. We'll then create a new GitHub Action to run when people create pull requests on our repository. This will help validate that any new changes we introduce still produce the expected behavior.
 
@@ -362,7 +362,7 @@ if __name__ == "__main__":
     assert max_precip == 1.55, f"expected max precip of 1.55, got: {max_precip}. failing job."
 ```
 
-We'll also create a `run-job.sh` script in the `pyspark/scripts` directory - this script runs an EMR Serverless job and waits for it to complete.
+Let's also create a `run-job.sh` script in the `pyspark/scripts` directory - this script runs an EMR Serverless job and waits for it to complete.
 
 ```bash
 #!/usr/bin/env bash
@@ -486,7 +486,7 @@ jobs:
           bash scripts/run-job.sh $APPLICATION_ID $JOB_ROLE_ARN $S3_BUCKET_NAME $GITHUB_SHA integration_test.py s3://${S3_BUCKET_NAME}/github/traffic/
 ```
 
-So we can see how integration tests integrate (hah!) with pull requests, we're going to commit these changes by creating a new branch, pushing the files into that branch, then opening a pull request.
+So we can see how integration tests integrate (ha!) with pull requests. We're going to commit these changes by creating a new branch, pushing the files into that branch, then opening a pull request.
 
 The `integration-test` workflow we created will run whenever somebody opens a new pull request.
 
@@ -505,7 +505,7 @@ To activate the `integration-test.yaml` workflow, click **Compare & pull request
 
 ![](images/github-create-pr.png)
 
-This activates the integration workflow. In the new screen, click on the **Details** link of the PySpark Integration Tests:
+This activates the integration workflow. In the new screen, click on the **Details** link of the PySpark Integration Tests.
 
 You will see the status of the **deploy-and-validate** pull request workflow. The workflow will run the `scripts/run-job.sh` shell script, which will reach out to your AWS resources and push a Spark job into your EMR Serverless application and run the `integration_test.py` script. You can monitor the progress and see the job status change from PENDING to RUNNING and then to SUCCESS.
 
@@ -513,7 +513,7 @@ You will see the status of the **deploy-and-validate** pull request workflow. Th
 
 If you want to, you can use the [EMR Serverless Console](https://us-east-1.console.aws.amazon.com/emr/home?region=us-east-1#/serverless) to view the status of the jobs.
 
-If you haven't setup EMR Studio before, click the **Get started** button and then **Create and launch EMR Studio**.
+If you haven't set up EMR Studio before, click the **Get started** button and then **Create and launch EMR Studio**.
 
 ![](images/emr-studio-create.png)
 
@@ -526,11 +526,11 @@ git checkout main
 git pull
 ```
 
-## Ship it! 🚢
+## Ship It! 🚢
 
-OK, so we've taken our brand new repository and added unit tests, integration tests, and now we want to begin shipping things to production. In order to do this, we'll create a new GitHub Action based on whenever somebody adds a tag to our repository. If the tag matches a semantic version (e.g. `v1.0.2`), we'll automatically package up our project and ship it to S3!
+Okay, so we've taken our brand new repository and added unit tests, integration tests, and now we want to begin shipping things to production. In order to do this, we'll create a new GitHub Action based on whenever somebody adds a tag to our repository. If the tag matches a semantic version (e.g. `v1.0.2`), we'll automatically package up our project and ship it to S3!
 
-> **Note**: In a production environment, we could make use of different environments or accounts to isolate production and test resources, but for this demo we just use a single set of resources.
+> **Note:** In a production environment, we could make use of different environments or accounts to isolate production and test resources, but for this demo we just use a single set of resources.
 
 In theory, tags will only be applied when new code has been verified and is ready to ship. This approach allows us to easily run new versions of code when ready, or rollback to an older version if a regression is identified.
 
@@ -589,7 +589,7 @@ Now let's create a new release.
 
 - Return to the GitHub UI and click on the **Releases** link on the right-hand side.
 - Then click on the **Create a new release** button.
-- Click on **Choose a tag** and in the **Find or create a new tag** box, type in `v0.0.1`.
+- Click on **Choose a tag** and in the **Find or create a new tag** box, type `v0.0.1`.
 - Then click on the **Create new tag: v0.0.1 on publish** button below that.
 
 ![](images/github-create-tag.png)
@@ -602,7 +602,7 @@ Return to the main page of your repository and click on the **Actions** button. 
 
 ![](images/github-deploy.png)
 
-## Configure a job runner
+## Configure a Job Runner
 
 The last step is getting our code to run in production. For this, we'll create a new GitHub Action that can both automatically run the latest version of our deployed code, or manually run the same job with a set of custom parameters.
 
