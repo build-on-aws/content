@@ -6,13 +6,15 @@ tags:
     - essentials
     - aws
 authorGithubAlias: <github alias>
-authorName: <Name Surname>
+authorName: <FirstName LastName>
 date: <expected publish date in YYYY-MM-DD format>
 ---
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 
 Introduction paragraph to the topic. Describe a real world example to illustrate the problem the reader is facing. Explain why it's a problem. Offer the solution you'll be laying out in this post.
+
+<!-- Recommended to use future tense. e.g. "In this tutorial, I WILL be showing you how to do XYZ."  -->
 
 ## What you will learn
 
@@ -37,27 +39,49 @@ Before starting this tutorial, you will need the following:
 | 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-02-10                             |
+| ⏰ Last Updated     | YYYY-MM-DD <as mentioned above>                             |
 
 | ToC |
 |-----|
+<!-- Just mention this, the platform will auto-generate the Table of Content based on headings -->
 
 ---
-
 ## <Title of Section 1 - please note that it starts with a double `##`>
 
-From here onwards, split the tutorial into logical sections with a descriptive title. Focus titles on the core action steps in each section.
+From here onwards, split the tutorial into logical sections with a descriptive title. Focus titles on the core action steps in each section. 
 
-<!-- Sample Image link -->
+<!-- Recommended to use present tense. e.g. "First off, let's build a simple application."  -->
+
+<!-- Sample Image link with required ./images/xx.xxx folder structure -->
 ![This is the alt text for the image](images/where-this-image-is-stored.png)
 <!-- Alt text should provide a description of the pertinent details of the image -->
 
 <!-- Code Blocks -->
-Remember to include the language type used when creating code blocks with ` ``` `, e.g. ` ```javascript `
+Remember to include the language type used when creating code blocks. ` ```javascript `. 
+For example, 
+```javascript
+this is javascript code
+```
+
+If you want to share a code sample file with reader, then you have two options:
+- paste the contents with code blocks like mentioned above
+- provide link to the file. Use the raw file content option on GitHub (without the token parameter, if repo is private while drafting). It should look like:   
+    `https://raw.githubusercontent.com/ORGANIZATION/REPO-NAME/main/FOLDER/FILENAME.EXTENSION`   
+    Example:
+     _You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts)._ 
+
+
+## Clean up
+
+Provide steps to clean up everything provisioned in this tutorial. 
 
 ## Conclusion
 
-Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation. Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
+<!-- Recommended to use past tense. e.g. "And that's it! We just built and deployed that thing together!"  -->
 
-Also end with this line to ask for feedback:
+Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation. 
+
+Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
+
+Also end with this line to ask for feedback:  
 If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
