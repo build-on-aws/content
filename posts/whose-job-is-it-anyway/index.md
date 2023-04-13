@@ -5,6 +5,8 @@ tags:
   - application-resilience
   - shared-responsibility
   - digital-transformation
+spaces:
+  - devops
 authorGithubAlias: aws-veliswaboya
 authorName: Veliswa Boya
 date: 2022-10-25

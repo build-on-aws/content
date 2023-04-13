@@ -4,7 +4,10 @@ description: Learn how to build, test, and deploy a containerized Flask app with
 tags:
   - gitlab
   - containers
-  - cicd
+  - ci-cd
+  - devops
+spaces:
+  - devops
 authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2023-03-10
