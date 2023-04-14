@@ -24,6 +24,7 @@
   * [How do I add customized contents for extra space pages?](#how-do-i-add-customized-contents-for-extra-space-pages)
   * [How do I add posts to a space feed?](#how-do-i-add-posts-to-a-space-feed)
   * [How do I add posts to the home page feed?](#how-do-i-add-posts-to-the-home-page-feed)
+  * [How do I pin a post in the home page?](#how-do-i-pin-a-post-in-the-home-page)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -495,6 +496,39 @@ If a post inside the /posts/ folder needs to be excluded from the home feed, the
 ```yml
 showInHomeFeed: false
 ```
+
+### How do I pin a post in the home page?
+
+A pinned post is displayed using a background image with the post title and date on top. It shows at the top of the feed in the home page (or tag/space page).
+In order to do so, edit the file /spaces/home/top.md so that it looks like this:
+
+```markdown
+---
+hasBorder: false
+---
+ 
+https://www.buildon.aws/tutorials/using-ec2-userdata-to-bootstrap-python-web-app
+```
+
+Use the full URL of the post like in this example. You can also add multiple post URL's, one per line, and in this case, they will show in a carousel loop, transitioning from one to the next every few seconds. 
+
+```markdown
+---
+hasBorder: false
+---
+
+https://www.buildon.aws/tutorials/using-ec2-userdata-to-bootstrap-python-web-app
+https://www.buildon.aws/tests/demystifying-the-transition-to-microservices?template=bgimage
+https://www.buildon.aws/tests/embedding-posts-in-markdown
+```
+
+Notice that pinned posts should have a background image with the opengraph ratio (1.91:1 or 1200x630px or equivalent). This image has to be configured in the post frontmatter header:
+```yml
+images:
+    background: <image url>
+```
+
+Similarly, posts can be pinned in smart-tags or spaces by editing the /tags/<tag>/top.md or /spaces/<space>/top.md files.
 
 ## Miscellaneous
 
