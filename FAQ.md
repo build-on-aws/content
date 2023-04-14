@@ -23,6 +23,7 @@
   * [How do I add customized contents for smart tag pages?](#how-do-i-add-customized-contents-for-smart-tag-pages)
   * [How do I add customized contents for extra space pages?](#how-do-i-add-customized-contents-for-extra-space-pages)
   * [How do I add posts to a space feed?](#how-do-i-add-posts-to-a-space-feed)
+  * [How do I add posts to the home page feed?](#how-do-i-add-posts-to-the-home-page-feed)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -480,6 +481,20 @@ spaces:
 ```
 
 In this example, the post will be part of the feed of spaces "xxx" and "yyy".
+
+### How do I add posts to the home page feed?
+
+By default, all posts inside the /posts/ folder are shown in the home feed. If you want to include in the feed a post that is outside this folder, add the following to the post frontmatter header:
+
+```yml
+showInHomeFeed: true
+```
+
+If a post inside the /posts/ folder needs to be excluded from the home feed, then add this:
+
+```yml
+showInHomeFeed: false
+```
 
 ## Miscellaneous
 
