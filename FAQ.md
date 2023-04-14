@@ -22,6 +22,7 @@
   * [How do I add multiple authors in my post?](#how-do-i-add-multiple-authors-in-my-post)
   * [How do I add customized contents for smart tag pages?](#how-do-i-add-customized-contents-for-smart-tag-pages)
   * [How do I add customized contents for extra space pages?](#how-do-i-add-customized-contents-for-extra-space-pages)
+  * [How do I add posts to a space feed?](#how-do-i-add-posts-to-a-space-feed)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -467,6 +468,18 @@ hasBorder: false
 
 https://www.youtube.com/watch?v=a9__D53WsUs
 ```
+
+### How do I add posts to a space feed?
+
+A post can be place in one or more spaces. In order to do that, given the space name(s), add the following to the post frontmatter header:
+
+```yml
+spaces:
+  - xxx
+  - yyy
+```
+
+In this example, the post will be part of the feed of spaces "xxx" and "yyy".
 
 ## Miscellaneous
 
