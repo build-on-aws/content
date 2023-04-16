@@ -169,8 +169,7 @@ This section introduced the concept of IaC and helped create a custom EKS cluste
 
 ### 2．Deploy Flux CD on Amazon EKS Cluster
 
-Flux CD is a continuous delivery tool that was developed by Weaveworks and open sourced to CNCF. Today it is widely used because of its easy setup and its ability to sense Kubernetes changes. One important feature is also that it allows teams to manage their Kubernetes deployments in a declarative way. Flux CD synchronizes the Kubernetes manifest files stored in the source repository with the Kubernetes cluster by regularly polling the repository, and teams don't have to worry about running kubectl or monitoring the environment to see if they have deployed the right workload. Flux CD ensures that the Kubernetes cluster always stays in sync with the configuration defined in the source repository.
-
+Flux CD is a continuous delivery tool that was developed by Weaveworks and open sourced to CNCF. Today it is widely used because of its easy setup and its ability to sense Kubernetes changes. One important feature is also that it allows teams to manage their Kubernetes deployments in a declarative way. Flux CD synchronizes the Kubernetes manifest files stored in the source repository with the Kubernetes cluster by regularly polling the repository. Flux CD ensures that the Kubernetes cluster is always in sync with the configuration defined in the source repository, without having to worry about the operational status of the kube ctl or monitoring the workload with additional tools and services.
 So let's install Flux.
 
 #### 2.1 Flux CLI Installation
