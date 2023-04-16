@@ -133,7 +133,7 @@ In the above codes, we created an EKS cluster, defined its NodeGroup, and added 
 
 > **Note**
 > 
-> **Best Practice:** We recommend customizing the cluster parameters via clusterProvider and adding plugins through the built-in addOns in EKS Blueprints.
+> We suggest to customize the cluster parameters via clusterProvider and add plugins through the built-in addOns in EKS Blueprints.
 
 ![CodePipelineStack](./images/CodePipelineStack.png)
 
@@ -143,7 +143,7 @@ CodePipelineStack is a structure for continuous delivery of AWS CDK applications
 
 > **Note**
 > 
-> **Takeaway:** Defining infrastructure with CDK code and using pipelines to manage changes across multiple clusters that is also a manifestation the GitOps concept.
+> We prefer to define infrastructure with CDK code and use pipelines to manage changes across multiple clusters that is also the best practice of GitOps.
 
 Then, we execute the `cdk deploy` command to deploy the stack.
 
