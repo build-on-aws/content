@@ -336,7 +336,7 @@ For the development environment, if there are differential requirements, such as
 
 > **Note**
 > 
-> Flux will automatically merge base and overlays configurations according to the environment during service deployment. We recommend to define differential configurations across multiple environments, such as development, testing, and production. We do not favor the strategy of muti-repository and muti-branch strategy here, preferring instead to use different paths in a git repository to manage clusters in mutiple enviroments. it helps simplify the process of code maintenance and merging, which is also a Flux best practice.
+> Flux will automatically merge base and overlays configurations according to the environment during service deployment. We recommend defining differential configurations across multiple environments, such as development, testing, and production. We do not favor the strategy of muti-repository and muti-branch strategy here, preferring instead to use different paths in a git repository to manage clusters in multiple environments. It helps simplify the process of code maintenance and merging, and which is also a Flux best practice.
 
 
 #### 3.4 Deploy Microservices with GitOps Workflow
