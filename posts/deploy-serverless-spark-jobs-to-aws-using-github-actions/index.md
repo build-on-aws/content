@@ -308,7 +308,7 @@ pyspark==3.3.0
 
 Your directory structure should now look like this:
 
-![](images/dirtree-step2.png)
+![Directory listing after step 2](images/dirtree-step2.png)
 
 Now that's done, simply go ahead and commit and push your changes.
 
