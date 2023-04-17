@@ -509,7 +509,7 @@ This activates the integration workflow. In the new screen, click on the **Detai
 
 You will see the status of the **deploy-and-validate** pull request workflow. The workflow will run the `scripts/run-job.sh` shell script, which will reach out to your AWS resources and push a Spark job into your EMR Serverless application and run the `integration_test.py` script. You can monitor the progress and see the job status change from PENDING to RUNNING and then to SUCCESS.
 
-![](images/github-pr-complete.png)
+![Screenshot of deploy-and-validate workflow running in GitHub Actions](images/github-pr-complete.png)
 
 If you want to, you can use the [EMR Serverless Console](https://us-east-1.console.aws.amazon.com/emr/home?region=us-east-1#/serverless) to view the status of the jobs.
 
