@@ -515,7 +515,7 @@ If you want to, you can use the [EMR Serverless Console](https://us-east-1.conso
 
 If you haven't set up EMR Studio before, click the **Get started** button and then **Create and launch EMR Studio**.
 
-![](images/emr-studio-create.png)
+![EMR Studio creation dialog](images/emr-studio-create.png)
 
 Once the checks finish, go ahead and click the **Merge pull request** button on the pull request page and now any new pull requests to your repo will require this integration check to pass before merging!
 
