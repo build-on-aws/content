@@ -592,7 +592,7 @@ Now let's create a new release.
 - Click on **Choose a tag** and in the **Find or create a new tag** box, type `v0.0.1`.
 - Then click on the **Create new tag: v0.0.1 on publish** button below that.
 
-![](images/github-create-tag.png)
+![Screenshot of creating a new release](images/github-create-tag.png)
 
 If you want you can fill in the release title or description, or just click the "Publish release" button!
 
