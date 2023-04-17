@@ -503,7 +503,7 @@ Once pushed, go to your GitHub repository and you will see a notification that t
 
 To activate the `integration-test.yaml` workflow, click **Compare & pull request** to activate the integration workflow. Once you press the button, you will get the **Open a pull request** form. Give it a name `Add integration test` and press the **Create pull request** button.
 
-![](images/github-create-pr.png)
+![Screenshot of creating a new pull request on GitHub](images/github-create-pr.png)
 
 This activates the integration workflow. In the new screen, click on the **Details** link of the PySpark Integration Tests.
 
