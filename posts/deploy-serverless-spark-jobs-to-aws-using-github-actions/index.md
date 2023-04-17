@@ -322,7 +322,7 @@ Using the GitHub Action we created before, your new unit test will automatically
 
 In the GitHub UI, in the "Actions" tab, you should now have two workflow runs for your unit tests.
 
-![](images/github-unit-test-workflows.png)
+![Screenshot of GitHub unit test workflows and status](images/github-unit-test-workflows.png)
 
 For extra credit, feel free to make the test fail and see what happens when you commit and push the failing test.
 
