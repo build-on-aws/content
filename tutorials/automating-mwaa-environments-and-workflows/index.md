@@ -10,7 +10,9 @@ tags:
     - codecommit
     - codebuild
     - cdk
-
+    - devops
+spaces:
+    - devops
 authorGithubAlias: ricsue-aws
 authorName: Ricardo Sueiras
 date: 2023-04-14
@@ -22,9 +24,9 @@ Businesses everywhere are striving to provide value for their customers by makin
 
 In this tutorial you will learn how you can apply DevOps techniques to help you effortlessly manage your Apache Airflow environments. We will look at some of the common challenges you are likely to encounter, and then look at the use of automation using infrastructure as code to show you how you can address these through automation. You will learn:
 
-- What are the common challenges when scaling Apache Airflow, and how can you address those problems
-- How to automate the provisioning of the Apache Airflow infrastructure using AWS CDK
-- How to automate the deployment of your workflows and supporting resources
+* What are the common challenges when scaling Apache Airflow, and how can you address those problems
+* How to automate the provisioning of the Apache Airflow infrastructure using AWS CDK
+* How to automate the deployment of your workflows and supporting resources
 
 ## Sections
 
@@ -302,7 +304,6 @@ The next section defines what logging we want to use when creating our MWAA envi
                 log_level="INFO"
             )
         )
-
 ```
 
 The next section allows us to define some custom Apache Airflow configuration options. These are documented on the MWAA website, but I have included some here so you can get started and tailor to your needs.
@@ -327,7 +328,6 @@ The final section actually creates our MWAA environment, using all the objects c
 
 ```python
         # Create MWAA environment using all the info above
-
         managed_airflow = mwaa.CfnEnvironment(
             scope=self,
             id='airflow-test-environment-dev',
@@ -569,7 +569,6 @@ AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-09T08:43:18.798898+00:00
 [2023-03-09, 08:43:27 UTC] {{python.py:177}} INFO - Done. Returned value was: Hello Wolrd
 [2023-03-09, 08:43:27 UTC] {{taskinstance.py:1401}} INFO - Marking task as SUCCESS. dag_id=hello_world_schedule, task_id=hello_task, execution_date=20230309T084318, start_date=20230309T084326, end_date=20230309T084327
 [2023-03-09, 08:43:27 UTC] {{local_task_job.py:159}} INFO - Task exited with return code 0
-
 ```
 
 ### Connections
@@ -725,8 +724,7 @@ You will notice that we are simply using the AWS CLI to sync the files from the 
 
 ```python
         deploy.add_to_role_policy(iam.PolicyStatement(
-            actions=[
-                "s3:*"], 
+            actions=["s3:*"], 
             effect=iam.Effect.ALLOW,
             resources=[ f"{dags_bucket_arn}", f"{dags_bucket_arn}/*" ],)
             )
@@ -756,6 +754,7 @@ The final part of the code are the different stages of the pipeline. As this is 
             project=deploy,
             outputs=[deploy_output]
         )
+
         pipeline.add_stage(
             stage_name="Source",
             actions=[source_action]
@@ -896,11 +895,13 @@ You also need to make sure that this step is added BEFORE the deployment stage, 
 
         approval = pipeline.add_stage(
             stage_name="Approve")
+
         manual_approval_action = codepipeline_actions.ManualApprovalAction(
             action_name="Approve",
             notification_topic=sns.Topic(self, "Topic"),  # optional
             notify_emails=["YOUR@EMAIL.ADDR"],
             additional_information="additional info")
+
         approval.add_action(manual_approval_action)
 
         pipeline.add_stage(
@@ -1038,9 +1039,9 @@ We will use AWS CDK to automate this again. First of all, lets explore the files
 
 The entry point for the CDK app is `app.py`, where we define our AWS Account and Region information. We then have a directory called `mwaairflow` which contains a number of key directories:
 
-* assets - this folder contains resources that you want to deploy to your MWAA environment, specifically a requirements.txt file that allows you to amend which Python libraries you want installed and available, and then packages up and deploys a plugin.zip which contains some sample code for custom Airflow operators you might want to use. In this particular example you can see we have custom Salesforce operator
-* nested_stacks - this folder contains the CDK code that provisions the VPC infrastructure, then deploys the MWAA environment, and then finally deploys the Pipeline
-* project - this folder contains the Airflow workflows that you want to deploy in the DAGs folder. This example provides some additional code around Python linting and testing which you can amend to run before you deploy your workflows
+* `assets` - this folder contains resources that you want to deploy to your MWAA environment, specifically a requirements.txt file that allows you to amend which Python libraries you want installed and available, and then packages up and deploys a plugin.zip which contains some sample code for custom Airflow operators you might want to use. In this particular example you can see we have custom Salesforce operator
+* `nested_stacks` - this folder contains the CDK code that provisions the VPC infrastructure, then deploys the MWAA environment, and then finally deploys the Pipeline
+* `project` - this folder contains the Airflow workflows that you want to deploy in the DAGs folder. This example provides some additional code around Python linting and testing which you can amend to run before you deploy your workflows
 
 > **Makefile** in our previous pipeline we defined the mechanism to deploy our workflows via the AWS CodeBuild `Buildspec` file. This time we have created a `Makefile`, and within it created a number of different tasks (test, validated, deploy, etc). To deploy our DAGs this time, all we need to do is run a `make deploy $bucket_name=` specifying the target S3 bucket we want to use.
 
@@ -1050,12 +1051,12 @@ In the previous example where we automated the MWAA environment build, we define
 cdk deploy --context vpcId=vpcid --context envName=mwaademo {cdkstack} 
 ```
 
-* `vpcId` - If you have an existing VPC that meets the MWAA requirements (perhaps you want to deploy multiple MWAA environments in the same VPC for example) you can pass in the VPCId you want to deploy into. For example, you would use `--context vpcId=vpc-095deff9b68f4e65f`.
+* `vpcId` - If you have an existing VPC that meets the MWAA requirements (perhaps you want to deploy multiple MWAA environments in the same VPC for example) you can pass in the `VPCId` you want to deploy into. For example, you would use `--context vpcId=vpc-095deff9b68f4e65f`.
 * `cidr` - If you want to create a new VPC, you can define your preferred CIDR block using this parameter (otherwise a default value of `172.31.0.0/16` will be used). For example, you would use `--context cidr=10.192.0.0/16`.
 * `subnetIds` - Is a comma separated list of subnets IDs where the cluster will be deployed. If you do not provide one, it will look for private subnets in the same AZ.
 * `envName` - a string that represents the name of your MWAA environment, defaulting to `MwaaEnvironment` if you do not set this. For example, `--context envName=MyAirflowEnv`.
 * `envTags` - allows you to set Tags for the MWAA resources, providing a json expression. For example, you would use `--context envTags='{"Environment":"MyEnv","Application":"MyApp","Reason":"Airflow"}'`.
-* `environmentClass` - allows you to configure the MWAA Workers size (either mw1.small, mw1.medium, mw1.large, defaulting to mw1.small). For example, `--context environmentClass=mw1.medium`.
+* `environmentClass` - allows you to configure the MWAA Workers size (either `mw1.small`, `mw1.medium`, `mw1.large`, defaulting to `mw1.small`). For example, `--context environmentClass=mw1.medium`.
 * `maxWorkers` - change the number of MWAA Max Workers, defaulting to 1. For example, `--context maxWorkers=2`.
 * `webserverAccessMode` - define whether you want a public or private endpoint for your MWAA Environment (using `PUBLIC_ONLY` or `PRIVATE_ONLY`). For example, you would use `--context webserverAccessMode=PUBLIC_ONLY` mode (private/public).
 * `secretsBackend` - configure whether you want to integrate with AWS Secrets Manager, using values Airflow or SecretsManager. For example, you would use `--context secretsBackend=SecretsManager`.
@@ -1161,20 +1162,20 @@ vi requirements.txt
 
 We update the Amazon Provider package from:
 
-```text
+```bash
 apache-airflow==2.4.3
 apache-airflow-providers-salesforce==5.1.0
-apache-airflow-providers-amazon==6.0.0
+apache-airflow-providers-amazon==6.0.0 # Old version
 apache-airflow-providers-postgres==5.2.2
 apache-airflow-providers-mongo==3.0.0
 ```
 
 to:
 
-```text
+```bash
 apache-airflow==2.4.3
 apache-airflow-providers-salesforce==5.1.0
-apache-airflow-providers-amazon==7.1.0
+apache-airflow-providers-amazon==7.1.0 # New version
 apache-airflow-providers-postgres==5.2.2
 apache-airflow-providers-mongo==3.0.0
 ```
@@ -1199,7 +1200,7 @@ When it is finished, when we go to the MWAA environment we can see that we have 
 
 You may be wondering why the latest `requirements.txt` has not been set by the MWAA environment. The reason for this is that this is going to trigger an environment restart, and so this is likely something you want to think about before doing. You could automate this, and we would add the following to the deploy part of the CodeBuild deployment stage:
 
-```python
+```bash
 bucket_name=f"{bucket.bucket_name}"
 mwaa_env=f"{env_name}"
 latest=$(aws s3api list-object-versions --bucket $bucket_name --prefix requirements/requirements.txt --query 'Versions[?IsLatest].[VersionId]' --output text)
