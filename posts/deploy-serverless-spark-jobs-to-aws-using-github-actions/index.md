@@ -499,7 +499,7 @@ git push --set-upstream origin feature/integration-test
 
 Once pushed, go to your GitHub repository and you will see a notification that the new branch `feature/integration-test` had a recent push and can create a new **pull request**.
 
-![](images/github-pull-request.png)
+![Screenshot of pull request notification on GitHub](images/github-pull-request.png)
 
 To activate the `integration-test.yaml` workflow, click **Compare & pull request** to activate the integration workflow. Once you press the button, you will get the **Open a pull request** form. Give it a name `Add integration test` and press the **Create pull request** button.
 
