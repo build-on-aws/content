@@ -159,7 +159,7 @@ This performs a few steps:
 
 With these three files added, we can now `git add` and `git push` our code. Your directory structure should look like this:
 
-![](images/dirtree-step1.png)
+![Directory listing after step 1](images/dirtree-step1.png)
 
 ```bash
 git add .
