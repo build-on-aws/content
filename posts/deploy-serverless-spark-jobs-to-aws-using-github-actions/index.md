@@ -169,7 +169,7 @@ git push
 
 Once you do this, return to the GitHub UI and you'll see a yellow dot next to your commit. This indicates an Action is running. Click on the yellow dot or the "Actions" tab and you'll be able to view the logs associated with your commit once the GitHub runner starts up.
 
-![](images/github-action-pytest.png)
+![Screenshot of GitHub Action unit test running](images/github-action-pytest.png)
 
 Great! Now whenever you `git push`, the unit tests in `pyspark/tests` will be run to validate your code. Let's move on to creating some actual Spark code.
 
