@@ -18,6 +18,10 @@
   * [How do I create an external post?](#how-do-i-create-an-external-post)
   * [How do I create a series of posts?](#how-do-i-create-a-series-of-posts)
   * [How do I configure post images?](#how-do-i-configure-post-images )
+  * [How do I show tweets in my post?](#how-do-i-show-tweets-in-my-post)
+  * [How do I add multiple authors in my post?](#how-do-i-add-multiple-authors-in-my-post)
+  * [How do I add customized contents for smart tag pages?](#how-do-i-add-customized-contents-for-smart-tag-pages)
+  * [How do I add customized contents for extra space pages?](#how-do-i-add-customized-contents-for-extra-space-pages)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -412,6 +416,57 @@ There are three types of images here:
 
 Additionally, these images may be used to create a preview when a post is shared in social media. The banner image is preferred, if there is none then the background image, and if not, the thumbnail image.
 Notice that images should be optimized for the web, using compressed modern formats such as webp, and avoiding large high-resolution images. Some social media (for example, Twitter) refuse to use large images and may fall back to other images found in the page.
+
+### How do I show tweets in my post?
+
+Simply place the URL of the tweet in a separate line, for example:
+
+```text
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
+
+https://twitter.com/CoolViews_/status/1624449857397092354?s=20
+```
+
+### How do I add multiple authors in my post?
+
+Add `additionalAuthors` in meta data
+
+```text
+authorGithubAlias: mainAuthorGithubAlias
+authorName: mainAuthorName
+additionalAuthors:
+  - authorGithubAlias: additionalAuthorGithubAlias1
+    authorName: additionalAuthorName1
+  - authorGithubAlias: additionalAuthorGithubAlias2
+    authorName: additionalAuthorName2
+```
+### How do I add customized contents for smart tag pages?
+
+In `tags` folder, add a folder with smart tag name, add `top.md`, `right-top.md` and `right-bottom.md` to provide customized contents for top, right top and right bottom of the page correspondingly. All Markdown syntax for posts is also supported in the markdown file. You can use `hasBorder` meta data to customize the section has border or not.
+
+For example, to add a customized top content for `aws` tag page, add a `top.md` in folder `/tags/aws`.
+
+```
+---
+hasBorder: false
+---
+
+https://www.youtube.com/watch?v=a9__D53WsUs
+```
+
+### How do I add customized contents for extra space pages?
+
+In `spaces` folder, add a folder with the space name, add `top.md`, `right-top.md` and `right-bottom.md` to provide customized contents for top, right top and right bottom of the page correspondingly. All Markdown syntax for posts is also supported in the markdown file. You can use `hasBorder` meta data to customize the section has border or not.
+
+For example, to add a customized top content for `devops` tag page, add a `top.md` in folder `/spaces/devops`.
+
+```
+---
+hasBorder: false
+---
+
+https://www.youtube.com/watch?v=a9__D53WsUs
+```
 
 ## Miscellaneous
 
