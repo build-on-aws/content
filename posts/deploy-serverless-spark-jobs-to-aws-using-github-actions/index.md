@@ -94,7 +94,7 @@ First, [create a new repository](https://github.com/new) on GitHub. For the rest
 
 > **Note:** Make sure you use the same repository name that you did when you created the CloudFormation Stack above!
 
-![](images/github-repo-create.png)
+![Screenshot of creating a new repository on GitHub](images/github-repo-create.png)
 
 In this step, we'll create our initial source code structure as well as our first GitHub Action that will be configured to run on every `git push`. Assuming you're running in a standard terminal, we'll create a `test_basic.py` file in the `pyspark/tests` directory and a `requirements-dev.txt` file in the `pyspark` directory.
 
