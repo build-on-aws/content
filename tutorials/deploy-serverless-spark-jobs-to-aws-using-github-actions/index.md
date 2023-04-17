@@ -14,19 +14,18 @@ authorName: Damon Cortesi
 date: 2023-04-13
 ---
 
-Apache Spark is one of the most popular frameworks for data processing both on-premises and in the cloud. Despite its popularity, modern DevOps practices for Apache Spark are not well-documented or readily available to data teams. GitHub Actions have become a popular way of maintaining continuous integration and deployment as part of code repositories - by combining development workflows with source code, developers get immediate feedback on their changes and can interate faster. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions to measure weather trends for a provided location.
+[Apache Spark](https://spark.apache.org/) is one of the most popular frameworks for data processing both on-premises and in the cloud. Despite its popularity, modern DevOps practices for Apache Spark are not well-documented or readily available to data teams. [GitHub Actions](https://github.com/features/actions) have become a popular way of maintaining continuous integration and deployment as part of code repositories - by combining development workflows with source code, developers get immediate feedback on their changes and can iterate faster. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions to measure weather trends for a provided location.
 
 ## What you will learn
 
-- How to use Amazon EMR Serverless
-- How to setup OpenID Connect
-- How to configure unit tests and integration tests for PySpark
+- How to use [Amazon EMR Serverless](https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html)
+- How to setup [OpenID Connect](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html)
+- How to configure unit tests and integration tests for [PySpark](https://spark.apache.org/docs/latest/api/python/)
 - How to automatically deploy your latest code
 
-
 ## Sections
-<!-- Update with the appropriate values -->
-| Info                | Level                                  |
+
+| Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Intermediate                               |
 | ⏱ Time to complete  | 60 minutes                             |
@@ -48,9 +47,9 @@ We'll go step-by-step to create a new repository and build up a PySpark job from
 
 In order to follow along, you'll need:
 
- - An AWS account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
- - A GitHub account - sign up for free at [github.com](https://github.com/)
- - The `git` command
+- An AWS account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
+- A GitHub account - sign up for free at [github.com](https://github.com/)
+- The `git` command
 - An editor (VS Code, vim, emacs, Notepad.exe)
 
 We also need to create some infrastructure for our jobs to run. For the purposes of this tutorial, we're only going to create one set of resources. In a real-world environment, you might create test, staging, and production environments and change your workflows to run in these different environments or even completely different AWS accounts. These are the resources we need:
@@ -74,11 +73,11 @@ There are two parameters you can set when creating the stack:
 
 ```bash
 # Make sure to replace the ParameterValue for GitHubRepo below
-aws cloudformation create-stack \
-    --region us-east-1 \
-    --stack-name gh-serverless-spark-demo \
-    --template-body file://./ci-cd-serverless-spark.cfn.yaml \
-    --capabilities CAPABILITY_NAMED_IAM \
+aws cloudformation create-stack \ 
+    --region us-east-1 \ 
+    --stack-name gh-serverless-spark-demo \ 
+    --template-body file://./ci-cd-serverless-spark.cfn.yaml \ 
+    --capabilities CAPABILITY_NAMED_IAM \ 
     --parameters ParameterKey=GitHubRepo,ParameterValue=USERNAME/REPO ParameterKey=CreateOIDCProvider,ParameterValue=true
 ```
 
@@ -117,7 +116,7 @@ def test_is_this_on():
 
 - Create `requirements-dev.txt` in `pyspark` that defines the Python requirements we need in our dev environment.
 
-```requirements
+```text
 pytest==7.1.2
 ```
 
@@ -181,7 +180,7 @@ Let's take a quick look at the data. The raw structure is fairly typical and str
 
 The station ID for Boeing Field in Seattle, WA is `72793524234`. Let's take a look at the the data from that station for 2022 - it's located at `s3://noaa-gsod-pds/2022/72793524234.csv`.
 
-```
+```text
 +-----------+----------+--------+----------+---------+---------------------------+----+---------------+----+---------------+------+--------------+----+--------------+-----+----------------+----+---------------+-----+-----+----+--------------+----+--------------+----+---------------+-----+------+
 |STATION    |DATE      |LATITUDE|LONGITUDE |ELEVATION|NAME                       |TEMP|TEMP_ATTRIBUTES|DEWP|DEWP_ATTRIBUTES|SLP   |SLP_ATTRIBUTES|STP |STP_ATTRIBUTES|VISIB|VISIB_ATTRIBUTES|WDSP|WDSP_ATTRIBUTES|MXSPD|GUST |MAX |MAX_ATTRIBUTES|MIN |MIN_ATTRIBUTES|PRCP|PRCP_ATTRIBUTES|SNDP |FRSHTT|
 +-----------+----------+--------+----------+---------+---------------------------+----+---------------+----+---------------+------+--------------+----+--------------+-----+----------------+----+---------------+-----+-----+----+--------------+----+--------------+----+---------------+-----+------+
@@ -302,7 +301,7 @@ def test_extract_latest_daily_value(mock_views_df):
 
 And add the following dependency to the `requirements-dev.txt` file:
 
-```
+```bsh
 pyspark==3.3.0
 ```
 
@@ -382,17 +381,17 @@ SPARK_JOB_PARAMS=(${@:6})
 printf -v SPARK_ARGS '"%s",' "${SPARK_JOB_PARAMS[@]}"
 
 # Start the job
-JOB_RUN_ID=$(aws emr-serverless start-job-run \
-    --name ${ENTRY_POINT} \
-    --application-id $APPLICATION_ID \
-    --execution-role-arn $JOB_ROLE_ARN \
+JOB_RUN_ID=$(aws emr-serverless start-job-run \ 
+    --name ${ENTRY_POINT} \ 
+    --application-id $APPLICATION_ID \ 
+    --execution-role-arn $JOB_ROLE_ARN \ 
     --job-driver '{
         "sparkSubmit": {
             "entryPoint": "s3://'${S3_BUCKET}'/github/pyspark/jobs/'${JOB_VERSION}'/'${ENTRY_POINT}'",
             "entryPointArguments": ['${SPARK_ARGS%,}'],
             "sparkSubmitParameters": "--py-files s3://'${S3_BUCKET}'/github/pyspark/jobs/'${JOB_VERSION}'/job_files.zip"
         }
-    }' \
+    }' \ 
     --configuration-overrides '{
         "monitoringConfiguration": {
             "s3MonitoringConfiguration": {
@@ -420,8 +419,8 @@ fi
 if [ "$JOB_STATUS" = "SUCCESS" ]; then
     echo "Job succeeded! Printing application logs:"
     echo "  s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz"
-    aws s3 ls s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz \
-        && aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip \
+    aws s3 ls s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz \ 
+        && aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip \ 
         || echo "No job output"
 fi
 ```
@@ -432,13 +431,12 @@ To find the right values to replace, take a look at the "Outputs" tab in the sta
 
 ```bash
 # Change "gh-serverless-spark-demo" to the name of the stack you created
-aws cloudformation describe-stacks \
-  --query 'Stacks[?StackName==`gh-serverless-spark-demo`][].Outputs' \
+aws cloudformation describe-stacks \ 
+  --query 'Stacks[?StackName==`gh-serverless-spark-demo`][].Outputs' \ 
   --output text
 ```
 
 Replace the `APPLICATION_ID`, `S3_BUCKET_NAME`, `JOB_ROLE_ARN`, and `OIDC_ROLE_ARN` values with the appropriate values from your stack.
-
 
 ```yaml
 name: PySpark Integration Tests
@@ -600,7 +598,7 @@ When you do this, a new tag is added to the repository and will trigger the Acti
 
 Return to the main page of your repository and click on the **Actions** button. You should see a new **Package and Deploy Spark Job** Action running. Click on the job, then the **deploy** link and you'll see GitHub deploying your new code to S3.
 
-![](images/github-deploy.png)
+![Screenshot of the logs of the GitHub action uploading the pyspark job](images/github-deploy.png)
 
 ## Configure a Job Runner
 
@@ -672,7 +670,7 @@ Once pushed, this Action will run your job every day at 02:30 UTC time. But for 
 
 Return to the GitHub UI, click on the Actions tab and click on **ETL Job** on the left-hand side. Click on the "Run workflow" button and you're presented with some parameters we configured in the Action above.
 
-![](images/github-run-job.png)
+![Screenshot of the GitHub dialog to start a workflow](images/github-run-job.png)
 
 Feel free to change the git tag we want to use, but we can just leave it as `latest`. Click the green **Run workflow** button and this will kick off an EMR Serverless job!
 
@@ -684,17 +682,17 @@ This job just logs the output to `stdout`. When logs are enabled, EMR Serverless
 
 If the job is successful, the job output is logged as part of the GitHub Action.
 
-![](images/github-job-output.png)
+![Screenshot of the job output from the GitHub job showing the pyspark job being submitted](images/github-job-output.png)
 
 You can also view the logs with the following `aws s3 cp` command, assuming you have `gunzip` installed.
 
 Replace `S3_BUCKET` with the bucket from your CloudFormation stack and `APPLICATION_ID` and `JOB_RUN_ID` with the values from your **Fetch Data** GitHub Action.
 
-```
+```bash
 aws s3 cp s3://${S3_BUCKET}/logs/applications/${APPLICATION_ID}/jobs/${JOB_RUN_ID}/SPARK_DRIVER/stdout.gz - | gunzip
 ```
 
-```
+```text
 The amount of weather readings in 2023 is: 736662
 
 Here are some extreme weather stats for 2023:
@@ -717,7 +715,7 @@ git commit -am "Removed scheduled job run"
 git push
 ```
 
-The EMR team been hard at work improving the local Spark development experience for EMR as well. Here are a few more resources for you to check out:
+The EMR team has been hard at work improving the local Spark development experience for EMR as well. Here are a few more resources for you to check out:
 - [Amazon EMR Toolkit for VS Code](https://marketplace.visualstudio.com/items?itemName=AmazonEMR.emr-tools)
 - [Amazon EMR CLI](https://github.com/awslabs/amazon-emr-cli)
 - [EMR Serverless sample code](https://github.com/aws-samples/emr-serverless-samples)
