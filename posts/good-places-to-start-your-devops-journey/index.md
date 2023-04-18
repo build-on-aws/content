@@ -1,5 +1,5 @@
 ---
-title: "Where to Start Your DevOps Journey"
+title: "How I Started My DevOps Journey"
 description: "Lessons I learned along my personal journey into DevOps - and good places to start your own."
 tags:
   - devops
