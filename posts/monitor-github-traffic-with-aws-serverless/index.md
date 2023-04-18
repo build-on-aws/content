@@ -1,5 +1,5 @@
 ---
-title: "Star Wars, good food, astronomy - tracking GitHub traffic with a serverless architecture"
+title: "Star Wars, Good Food, and Astronomy: Tracking GitHub Traffic with a Serverless Architecture"
 description: "Learn how to track, store, and analyze GitHub traffic metrics using AWS Lambda, Amazon DynamoDB, and Amazon S3."
 tags:
   - github-traffic-metrics
@@ -7,13 +7,12 @@ tags:
   - automation
 authorGithubAlias: TheFuz
 authorName: Mahanth Jayadeva
-date: 2023-04-11
+date: 2023-04-19
 ---
 
 At first glance, it may seem like Star Wars, good food, and astronomy have little in common. However, they all share a surprising connection to the world of GitHub metrics - [clones](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository), [forks](https://docs.github.com/en/get-started/quickstart/fork-a-repo), and [stars](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars). These are some common GitHub metrics developers use to gain insight into the popularity and usage of their repositories. Let's delve into the world of GitHub metrics and explore how we can track and store them for analysis. 
 
-With the recent launch of the [aws-resilience-hub-tools](https://github.com/aws-samples/aws-resilience-hub-tools) repository, I needed a way to track the traffic to the repository to get a better understanding of my customers’ needs. Like many others, I decided that metrics like stars, clones, forks, and views would allow me to get a pulse for the repository. Although GitHub provides this data, it is limited to the last 14 days. So, I embarked on a journey to create a solution that would allow me to capture, store, and analyze this information using GitHub APIs and AWS serverless. Let's dive in!
-
+With the recent launch of the [aws-resilience-hub-tools](https://github.com/aws-samples/aws-resilience-hub-tools) repository, I needed a way to track the traffic to the repository to get a better understanding of my customers’ needs. Like many others, I decided that metrics like stars, clones, forks, and views would allow me to get a pulse for the repository. Although GitHub provides this data, it is limited to the last 14 days. So I embarked on a journey to create a solution that would allow me to capture, store, and analyze this information using GitHub APIs and AWS serverless. Let's dive in!
 
 ## Architecture
 
@@ -21,20 +20,19 @@ With the recent launch of the [aws-resilience-hub-tools](https://github.com/aws-
 
 ![Architecture](images/arch.png)
 
-1. We start with an [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html) rule that periodically invokes an [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) function
-2. The Lambda function makes API calls to GitHub to fetch traffic data
-3. For persistence, the data is stored in an [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) table
-4. Data is then exported as a CSV file from the DynamoDB table and stored in an [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) bucket
-5. The CSV file is then ingested into [Amazon QuickSight](https://docs.aws.amazon.com/quicksight/latest/user/welcome.html) for visualization
+1. We start with an [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html) rule that periodically invokes an [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) function.
+2. The Lambda function makes API calls to GitHub to fetch traffic data.
+3. For persistence, the data is stored in an [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) table.
+4. Data is then exported as a CSV file from the DynamoDB table and stored in an [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) bucket.
+5. The CSV file is then ingested into [Amazon QuickSight](https://docs.aws.amazon.com/quicksight/latest/user/welcome.html) for visualization.
 
-Simple, powerful, cost efficient!
-
+Simple, powerful, and cost efficient!
 
 ## Walkthrough
 
 We start with the Lambda function, which does most of the magic. 
 
-[PyGithub](https://github.com/PyGithub/PyGithub) is an awesome library that allows us to query the GitHub APIs using Python, which is [one of the supported runtimes for Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). We start by importing [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) which is the AWS SDK for Python, CSV, and PyGithub libraries, and then authenticating to GitHub. Note that I'm using a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) here but you can use other forms of authentication (might require additional code/configuration). 
+[PyGithub](https://github.com/PyGithub/PyGithub) is an awesome library that allows us to query the GitHub APIs using Python, which is [one of the supported runtimes for Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). We start by importing [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html), which is the AWS SDK for Python, CSV, and PyGithub libraries, and then authenticating to GitHub. Note that I'm using a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) here, but you can use other forms of authentication (though they might require additional code/configuration). 
 
 
 ```
@@ -263,7 +261,7 @@ def lambda_handler(event, context):
     
 ```
 
-Using QuickSight, I can ingest this data and [create two datasets](https://docs.aws.amazon.com/quicksight/latest/user/create-a-data-set-s3.html). This requires creating a [manifest file](https://docs.aws.amazon.com/quicksight/latest/user/supported-manifest-file-format.html) that informs QuickSight on where the data is stored for each dataset. We use the following manifest files for the datasets. 
+Using QuickSight, I can ingest this data and [create two datasets](https://docs.aws.amazon.com/quicksight/latest/user/create-a-data-set-s3.html). This requires creating a [manifest file](https://docs.aws.amazon.com/quicksight/latest/user/supported-manifest-file-format.html) that informs QuickSight as to where the data is stored for each dataset. We use the following manifest files for the datasets. 
 
 For the dataset that will contain information on views, stars, forks, and clones (note that the S3 path to the CSV needs to be updated):
 
@@ -304,7 +302,7 @@ For the dataset that will contain information on top paths for the last two week
 ```
 
 
-After the datasets have been created we [create an analysis](https://docs.aws.amazon.com/quicksight/latest/user/creating-an-analysis.html) to define how the data is visualized. Once the analysis has been created, we need to make sure [both our datasets are added](https://docs.aws.amazon.com/quicksight/latest/user/adding-a-data-set-to-an-analysis.html). The analysis can then be used to [publish a beautiful dashboard](https://docs.aws.amazon.com/quicksight/latest/user/creating-a-dashboard.html) like the one below (at least in my humble opinion).
+After the datasets have been created, we [create an analysis](https://docs.aws.amazon.com/quicksight/latest/user/creating-an-analysis.html) to define how the data is visualized. Once the analysis has been created, we need to make sure [both our datasets are added](https://docs.aws.amazon.com/quicksight/latest/user/adding-a-data-set-to-an-analysis.html). The analysis can then be used to [publish a beautiful dashboard](https://docs.aws.amazon.com/quicksight/latest/user/creating-a-dashboard.html) like the one below (at least in my humble opinion).
 
 ![Dashboard](images/dashboard.png)
 
@@ -312,7 +310,7 @@ Finally, we add a trigger to the Lambda function. For this solution, it will be 
 
 ![trigger](images/trigger.png)
 
-Note that the entire solution has been built using AWS Serverless technology. Lambda for the compute, DynamoDB for the database, S3 for storage, QuickSight for analytics, and EventBridge for scheduling. This means there's no infrastructure that needs to be managed, and we only pay for what we use (almost all of this is included in the free tier). Since all the services used are managed by AWS, we get the added benefit of improved security and reliability i.e. no security groups/NACLs to manage, and definitely no multi-AZ configurations required (they're all managed by the service and are multi-AZ by default. Yay high availability!). 
+Note that the entire solution has been built using AWS Serverless technology. Lambda for the compute, DynamoDB for the database, S3 for storage, QuickSight for analytics, and EventBridge for scheduling. This means there's no infrastructure that needs to be managed, and we only pay for what we use (almost all of this is included in the free tier). Since all the services used are managed by AWS, we get the added benefit of improved security and reliability i.e. no security groups/NACLs to manage, and definitely no multi-AZ configurations required (they're all managed by the service and are multi-AZ by default. Yay, high availability!). 
 
 ## Conclusion
 
