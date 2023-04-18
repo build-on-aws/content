@@ -62,3 +62,4 @@ When you want to start your DevOps journey you can have a look at the [DevOps Ro
 If you're curious about DevOps as a career path, I recommend you watch [Getting started with DevOps w/ Lian Li](https://www.youtube.com/watch?v=fpglhplg-to) from **Women in Cloud Native**.
 
 You can also learn more about DevOps and other career paths in IT, what they mean and what you need to know to do the job, by watching [this great video](https://www.youtube.com/watch?v=XmWkcePhf84&t=1486s) by Nana Janashia.
+
