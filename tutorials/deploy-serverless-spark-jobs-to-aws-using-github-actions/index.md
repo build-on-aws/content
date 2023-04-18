@@ -1,9 +1,9 @@
 ---
-title: "Deploy Serverless Spark jobs to AWS using GitHub Actions"
+title: "Deploy Serverless Spark Jobs to AWS Using GitHub Actions"
 description: "GitHub Actions have become a popular way of maintaining continuous integration and deployment as part of code repositories. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions."
 tags:
     - cicd
-    - github
+    - github-actions
     - emr-serverless
     - apache-spark
     - aws
@@ -11,12 +11,12 @@ tags:
     - devops
 authorGithubAlias: dacort
 authorName: Damon Cortesi
-date: 2023-04-13
+date: 2023-04-18
 ---
 
 [Apache Spark](https://spark.apache.org/) is one of the most popular frameworks for data processing both on-premises and in the cloud. Despite its popularity, modern DevOps practices for Apache Spark are not well-documented or readily available to data teams. [GitHub Actions](https://github.com/features/actions) have become a popular way of maintaining continuous integration and deployment as part of code repositories - by combining development workflows with source code, developers get immediate feedback on their changes and can iterate faster. In this post, we show how to deploy an end-to-end Spark ETL pipeline to Amazon EMR Serverless with GitHub Actions to measure weather trends for a provided location.
 
-## What you will learn
+## What You Will Learn
 
 - How to use [Amazon EMR Serverless](https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html)
 - How to setup [OpenID Connect](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html)
@@ -32,7 +32,7 @@ date: 2023-04-13
 | 💰 Cost to complete | ~$10                                    |
 | 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [GitHub Account](https://github.com) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-04-13                            |
+| ⏰ Last Updated     | 2023-04-18                            |
 
 | ToC |
 |-----|
