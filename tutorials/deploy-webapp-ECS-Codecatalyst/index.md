@@ -312,14 +312,16 @@ Open the MyServiceAppURL link in a browser of your choice to verify the Nginx de
     }
 ```
 
+This Sample CDK project is available under cdk-ecs-infra directory in [GitHub](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) repositoy.
+
 ## DEPLOY APPLICATION
 
-In this module, you will create an Amazon CodeCatalyst project , code repository and workflow to deploy the [sample application](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) to the Amazon ECS cluster created in previous module.
+In this module, you will create an Amazon CodeCatalyst project, a code repository and a workflow to deploy a containerized [sample application](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) to the Amazon ECS cluster created in previous module. 
 
 ### Create CodeCatalyst CodeCatalystPreviewDevelopmentAdministrator role
-We need an IAM role to create workflows to build and deploy your application. Instead of creating two roles, you can create a single role called the CodeCatalystPreviewDevelopmentAdministrator role. CodeCatalystPreviewDevelopmentAdministrator role has very broad permissions which may pose a security risk. We recommend that you only use this role in tutorials and scenarios where security is less of a concern.
+You need IAM roles to create workflows to build and deploy your application. Instead of creating two roles, you can create a single role called the CodeCatalystPreviewDevelopmentAdministrator role. CodeCatalystPreviewDevelopmentAdministrator role has broad permissions which may pose a security risk. We recommend that you only use this role in tutorials and scenarios where security is less of a concern.
 
-You can create the role by navigating to summary page of your space, then click on 'Settings' tab and go to the 'AWS Account' page. Open the 'Manage roles from AWS Management Console' page and create a CodeCatalystPreviewDevelopmentAdministrator role. 
+You can create the role by navigating to the summary page of your space, then click on 'Settings' tab and go to the 'AWS Account' page. Open the 'Manage roles from AWS Management Console' page and create a CodeCatalystPreviewDevelopmentAdministrator role. 
 
 ![Create IAM Role](images/CodeCatalyst_IAMRole_1.png "Create IAM Role")
 
@@ -332,7 +334,7 @@ The role will be created as 'codeCatalystPreviewDevelopmentAdministrator', appen
 ### Create CodeCatalyst Project
 To create a CodeCatalyst project, you need to have the [CodeCatalyst](https://codecatalyst.aws/) account and space setup. If you don't have a CodeCatalyst setup already, you can follow the [Amazon CodeCatlyst setting up guide](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html)).
 
-Let's create a project in your CodeCatalyst Space. In the 'Create Project' screen, Choose 'Start from Scratch' and provide a valid name to create a project.
+Let's create a project in your CodeCatalyst Space. In the 'Create Project' page, Choose 'Start from Scratch' and provide a valid name to create a project.
 
 ![Create CodeCatalyst Project](images/CodeCatalyst_Create_Project.png "Create CodeCatalyst Project")
 
@@ -368,11 +370,11 @@ Let's create an empty workflow definition for **SampleApp** repository by naviga
 In the workflow definition, set up a trigger to start the workflow when changes gets pushed to the main branch of the repository. 
 
 ### Add Build action
-First step in the workflow is to build the application to output a Docker image. We will add **Build** action to the workflow and define a set of input variables. **Region** is used to configure the AWS region you would like your application to be deployed. Provide the same region where your ECS cluster infrastructure is provisioned. **registry** is used to configure the Docker ECR endpoints which will be used in the further build steps. In the below code, replace all occurences of **<Account-Id>** with your CodeCatalyst account id. **image** is the name of your ECR repository, which is created within the cdk project.
+First step in the workflow is to build the application to generate a Docker image. To achieve this, you can add **Build** action to the workflow and define a set of input variables. **Region** is used to configure the AWS region you would like the application to be deployed. Provide the same region where your ECS cluster infrastructure is provisioned. **registry** is used to configure the Docker ECR endpoints which will be used in the further build steps. In the below code, replace all occurences of **<Account-Id>** with your CodeCatalyst account id. **image** is the name of your ECR repository, which is created within the cdk project.
 
-Configuration section of the **Build** action includes steps to setup the AWS account & ECR repository, create Docker image , push it to ECR Repository and export a variable with the ECR Repository URI, which we will be using to pull the image to deploy the application.
+Configuration section of the **Build** action includes steps to setup the AWS account & ECR repository, create Docker image , push the Docker image to ECR Repository and export a variable with the ECR Repository URI. ECR Repository URI will be used to pull the image when deploying the application.
 
-Below code snippet shows the **Build** action configurations.
+Below code snippet shows **Build** action configurations.
 
 ```YAML
 Triggers:
@@ -401,7 +403,8 @@ Build_application:
     Environment:
       Connections:
         - Role: <CodeCatalystPreviewDevelopmentAdministrator role>
-          Name: <Account Id>
+        # Add account id within quotes. Eg: "12345678"
+          Name: <Account-Id>
       Name: Dev
     Configuration:
       Steps:
@@ -415,13 +418,13 @@ Build_application:
         - Run: export IMAGE=${registry}/${image}:${WorkflowSource.CommitId}
 ```
 ### Add Render Amazon ECS Task Definition action
-Render Amazon ECS Task Definition will update the image field in an ECS task definition file with the Docker image URI that we have exported in the **Build** action.
+**Render Amazon ECS Task Definition** action will update the image field in an ECS task definition file with the Docker image URI that we have exported in the **Build** action.
 
-Add the **Render Amazon ECS Task Definition** action and configure the **image** field with the Docker image URI that we have exported in the **Build** action, configure **container-name** field with the container's name created in the cdk project,configure **task-definition** field with the **task.json** file's name that we have added in the **SampleApp** repository. This task will output an updated task definition file at the runtime. 
+Add the **Render Amazon ECS Task Definition** action and configure **image** field with the Docker image URI that we have exported in the **Build** action, configure **container-name** field with the container's name created in the cdk project, configure **task-definition** field with **task.json**, which refers to the task.json file in the **SampleApp** repository. This task will output an updated task definition file at the runtime. 
 
-Below code snippet shows the **Render Amazon ECS Task Definition** action configurations.
+Below code snippet shows **Render Amazon ECS Task Definition** action configurations.
 
-```Yaml
+```YAML
 RenderAmazonECStaskdefinition:
     Identifier: aws/ecs-render-task-definition@v1
     Configuration:
@@ -441,21 +444,21 @@ RenderAmazonECStaskdefinition:
   ```      
 
 ### Add Deploy To Amazon ECS action
-As a final setp to your workflow, add the **Deploy To Amazon ECS** action.This action registers the task definition file that is created in the **Render Amazon ECS Task Definition** action. Upon registration, the task definition is then instantiated by your Amazon ECS service running in your Amazon ECS cluster. Instantiating a task definition is equivalent to deploying an application into Amazon ECS.
+As a final setp to your workflow, add the **Deploy To Amazon ECS** action. This action registers the task definition file that is created in the **Render Amazon ECS Task Definition** action. Upon registration, the task definition is then instantiated by your Amazon ECS service running in your Amazon ECS cluster. Instantiating a task definition is equivalent to deploying an application into Amazon ECS.
 
-Set the task definition file created in the **Render Amazon ECS Task Definition** action as an input artifact. In the configuration section of the action, configure **task-definition** to the input artifact file path,configure **cluster** to the ECS cluster's name that you have created in the cdk project, which you is available as a choiced in the drop down for you to select, if you are using the visual editor. You can find the ECS cluster name from the AWS Console - Amazon Elastic Container Service - Clusters. Configure **service** to the ECS Service's name, which will be auto populated in the drop down after you select your cluster, if you are using the visual editor. Similar to ECS cluster name, you can find ECS service name in the AWS Console - Amazon Elastic Container Service. 
+Set the task definition file created in the **Render Amazon ECS Task Definition** action as an input artifact to this action. In the configuration section of the action, configure **task-definition** to the input artifact file path, configure **cluster** to the ECS cluster ARN that you have created in the cdk project.  You can find the ECS cluster ARN from the AWS Console - Amazon Elastic Container Service - Clusters. Replace <ECS cluster ARN> with your ECS cluster ARN. Configure **service** to the ECS Service's name,which we defined in the cdk project. Alternatively, you can find ECS service name in the AWS Console - Amazon Elastic Container Service - Clusters. **Region** is used to configure the AWS region you would like your application to be deployed. Provide the same region where your ECS cluster infrastructure is provisioned. Provide the environment connection and CI / CD environment information under **Environments**.
 
-For this action to work properly, ensure that ECS cluster and ECS Service names match the infrastructure that you have already provisioned.
+For this action to work properly, ensure that ECS cluster and ECS Service names match the infrastructure that you have already provisioned in your AWS environment.
 
 Below code snippet shows the **Deploy To Amazon ECS** action configurations.
 
-```Yaml
+```YAML
     DeploytoAmazonECS:
     Identifier: aws/ecs-deploy@v1
     Configuration:
       task-definition: /artifacts/DeploytoAmazonECS/TaskDefinition/${RenderAmazonECStaskdefinition.task-definition}
       service: MyWebApp
-      cluster: CdkEcsInfraStack-EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3-IGmvMY0hVaV5
+      cluster: <ECS cluster ARN>
       region: us-west-2
     Compute:
       Type: EC2
@@ -463,8 +466,9 @@ Below code snippet shows the **Deploy To Amazon ECS** action configurations.
     Environment:
       Connections:
         - Role: <CodeCatalystPreviewDevelopmentAdministrator role>
+        # Add account id within quotes. Eg: "12345678"
           Name: <Account Id>
-      Name: Non-prod
+      Name: Non-Prod 
     DependsOn:
       - RenderAmazonECStaskdefinition
     Inputs:
@@ -473,6 +477,8 @@ Below code snippet shows the **Deploy To Amazon ECS** action configurations.
       Sources:
         - WorkflowSource
 ```
+Complete workflow definition file is available under SampleApp directory in [GitHub](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) repositoy.
+
 ### Trigger the workflow
 Now you have automated the build and deployment workflow. You can trigger the workflow by pushing a code change or workflow change to the **SampleApp** repository or by manually starting the workflow process.
 
