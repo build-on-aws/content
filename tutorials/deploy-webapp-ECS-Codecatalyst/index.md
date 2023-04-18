@@ -199,7 +199,7 @@ To create the task definition and IAM role, add the following code:
         });
 ```
 
-In the code above, you can see that you specified a task definition type to deploy to Fargate by using FargateTaskDefintion, and by using ContainerImage.fromAsset. CDK will build the container image using the Dockerfile in the SampleApp directory.
+In the code above, you can see that you specified a task definition type to deploy to Fargate by using FargateTaskDefintion, and by using ContainerImage.fromRegistry. CDK will use the Nginx container image from DockerHub
 
 Next, you need to set up the Amazon ECS cluster, define a service, create a load balancer, configure it to connect to the service, and set up the required security group rules. A service in ECS is used to launch a task definition by specifying the number of copies you want, deployment strategies, and other configurations. For this example, we will only be launching one copy of the container. A security group acts as a virtual firewall for your instance to control inbound and outbound traffic, but you do not need to configure it because the ECS Pattern you are using will do that for you. 
 
