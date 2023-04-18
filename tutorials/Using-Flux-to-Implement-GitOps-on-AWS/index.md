@@ -129,7 +129,7 @@ export class QuickstartStack extends cdk.Stack {
 
 ```
 
-In the above codes, we created an EKS cluster, defined its NodeGroup, and added the AwsLoadBalancerController plugin.
+In the previous step, we created an EKS cluster, defined its NodeGroup, and added the AwsLoadBalancerController plugin.
 
 > **Note**
 > 
@@ -147,7 +147,7 @@ CodePipelineStack is a structure for continuous delivery of AWS CDK applications
 
 Then, we execute the `cdk deploy` command to deploy the stack.
 
-Finally, we used a command to check whether the AWS Application Load Balancer has been installed successfully.
+Finally, we used a command to verify the application load banlancer has been installed successfully.
 ```shell
 $ kubectl get pod -n kube-system
 NAME                                           READY   STATUS    RESTARTS   AGE
@@ -161,7 +161,7 @@ kube-proxy-wr5jn                               1/1     Running   0          99m
 
 #### 1.3 Summary
 
-This section introduced the concept of IaC and helped create a custom EKS cluster with CDK while installing the AWS Application Load Balancer plugin, providing a prerequisite for accessing the web pages of microservices in the future. The following is a summary of this section:
+In this section, we introduced the concept of IaC, created a custom EKS cluster with CDK while installing the AWS Application Load Balancer plugin. It provids a prerequisite for accessing the web pages of microservices in the future. The following is a summary of this section:
 
 - Initialized a CDK project using cdk init.
 
@@ -201,7 +201,7 @@ Clone the prepared GitOps codes. The project structure is as follows:
 
 > **Note**
 > 
-> **Best Practice:** The project structure we recommend is dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays).
+>  We recommend to dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays).
 
 Install Flux on the Kubernetes cluster and configure it to manage itself from the Git repository with flux bootstrap. If there are Flux components on the cluster, the bootstrapping command will perform an upgrade as needed. The bootstrapper is idempotent, and the command can be safely run any number of times. Replace `username` and `password` in the command below with the HTTPS Git credentials for AWS CodeCommit.
 
