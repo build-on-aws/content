@@ -28,8 +28,8 @@ GitOps has the following features compared to traditional continuous deployment.
 | Traditional CD                                               | **GitOps**                                             |
 | :----------------------------------------------------------- | ------------------------------------------------------ |
 | Triggered by push events, such as code commits, timed tasks, manual, etc. | System constantly polls for changes                    |
-| Deployment of changes only                                   | Declared the entire system for any deployment          |
-| System would drift between deployments                       | The system will correct any drift                      |
+| Deployment of changes only                                   | Declare the entire system for any deployment          |
+| System might drift between deployments                       | The system will correct any drift                      |
 | Access to the deployment environment is a requirement        | Deployment pipeline is authorized to run within system |
 
 ## Why use GitOps?
@@ -66,7 +66,7 @@ Since we have explained the GitOps concept and the architecture of the CI/CD pip
 
 ### 1．Deploy Cloud Infrastructure with IaC
 
-One of the fundamental principles of DevOps is that infrastructure gets **equal status** with codes. Infrastructure as Code (IaC) uses code to enable cloud infrastructure deployment and governance of the cloud environment. Coding engineers use configuration files or codes to define the infrastructure and create it by coding to ensure the consistency and repeatability. With IaC, coding engineers also manage the lifecycle of resources, such as hosting infrastructure definitions in version control repositories, and using Continuous Integration/Continuous Deployment (CI/CD) that is compatible with app coding for changing the definition of IaC, synchronizing the environments (e.g., development, testing, production) with the changes of the IaC codes. Additionally, automatic rollback is possible in case of failures, and drift detection helps to identify differences from the expected state.
+One of the fundamental principles of DevOps is that infrastructure gets **equal status** with code. Infrastructure as Code (IaC) uses code to enable cloud infrastructure deployment and governance of the cloud environment. Coding engineers use configuration files or code to define the infrastructure and create it by coding to ensure the consistency and repeatability. With IaC, coding engineers also manage the lifecycle of resources, such as hosting infrastructure definitions in version control repositories, and using Continuous Integration/Continuous Deployment (CI/CD) that is compatible with app coding for changing the definition of IaC, synchronizing the environments (e.g., development, testing, production) with the changes of the IaC codes. Additionally, automatic rollback is possible in case of failures, and drift detection helps to identify differences from the expected state.
 
 In the cloud, coding engineers can use the AWS Cloud Development Kit (CDK) to build their infrastructure model with Python, Java, and Typescript. CDK provides advanced components called Constructs, which preconfigure cloud resources with validated default values. It also allows engineers to write and share their custom constructs according to their organization's requirements. All of these will accelerate projects.
 
@@ -693,7 +693,7 @@ In this section, we have detailed the entire process of automatic deployment bas
 
 ## Conclusion
 
-This blog focuses on how to use FluxCD to automate the publishing of microservices in the Amazon EKS cluster on cloud, as well as best practices for GitOps pipelines. GitOps is a continuous delivery method that encompasses a series of best practices. There are no strict restrictions on building CI/CD tools if they conform to the basic principles of GitOps. I hope you take some things from this blog to build your GitOps technology stack. For more diverse and complex production scenarios, we need to continuously optimize these practices, for example:
+This article focuses on how to use FluxCD to automate the publishing of microservices in the Amazon EKS cluster on cloud, as well as best practices for GitOps pipelines. GitOps is a continuous delivery method that encompasses a series of best practices. There are no strict restrictions on building CI/CD tools if they conform to the basic principles of GitOps. I hope you take some things from this article to build your GitOps technology stack. For more diverse and complex production scenarios, we need to continuously optimize these practices, for example:
 
 - How to Gray-Release with security and increments for critical online-production-systems?
 
