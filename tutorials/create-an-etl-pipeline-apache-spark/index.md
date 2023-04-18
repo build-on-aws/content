@@ -57,7 +57,7 @@ We need to build a data pipeline such that it will take this new sales file from
 
 ## Implementation 
 
-To implement our data processing pipeline, we need .to create an EMR cluster that will run our ETL jobs and an S3 bucket to store the raw and processed data. Then we can start our job on the cluster.
+To implement our data processing pipeline, we need to create an EMR cluster that will run our ETL jobs and an S3 bucket to store the raw and processed data. Then we can start our job on the cluster.
 
 ### Step 1: Create an EMR Cluster
  
