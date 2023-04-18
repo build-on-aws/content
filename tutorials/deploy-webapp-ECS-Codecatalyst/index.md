@@ -346,15 +346,15 @@ You can either create a new repository or link an existing GitHub repository. Fo
 ### Create CodeCatalyst Dev Environment
  Now we'll create a Dev environment, which will help us to add the sample application to the repository. You can choose an IDE of your choice from the list. For this tutorial, we recommend using AWS Cloud9 or Visual Studio Code.
 
- ![Create CodeCatalyst Dev Environment](images/CodeCatalyst_devEnv.png "Create CodeCatalyst Dev Environment")
+ ![Create CodeCatalyst Dev Environment](images/CodeCatalyst_DevEnv.png "Create CodeCatalyst Dev Environment")
  
- Next step is to download the sample application from the [Github](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) to your local machine and add it to the Dev environment. Open the task.json file in the sample application and replace the <account Id> with your account Id 
+ Next step is to download the sample application from the [Github](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) to your local machine and add it to the Dev environment. Open the task.json file from the sample application and replace the <account Id> with your account Id 
 ```json
 "executionRoleArn": "arn:aws:iam::<account_ID>:role/AppRole",
 ```
 Your sample application is ready to be uploaded to CodeCatalyst repository and you can commit the changes to the repo. 
 
-### Create CI/CD environment
+### Create CodeCatalyst CI/CD environment
 In this step, we will create a CI/CD non-production environment, which will be used to execute the workflow. You can create the CI/CD environment by navigating to the **CI/CD** section of your project, select **Environments** and click on the **Create Environment** button. You need to select an AWS account connection to execute the workflow on the selected AWS account
 
 ![Create CI/CD environment](images/CodeCatalyst-CreateCI_CD_Env.png "Create create environment")
