@@ -143,7 +143,7 @@ CodePipelineStack is a structure for continuous delivery of AWS CDK applications
 
 > **Note**
 > 
-> We prefer to define infrastructure with CDK code and use pipelines to manage changes across multiple clusters that is also the best practice of GitOps.
+> We recommend defining infrastructure with CDK code and use pipelines to manage changes across multiple clusters that is also the best practice of GitOps.
 
 Then, we execute the `cdk deploy` command to deploy the stack.
 
@@ -270,8 +270,8 @@ For a GitOps CI/CD pipeline, configuration modifications and status changes to E
 
 > **Note**
 > 
-> **Takeaway:** Flux regularly pulls the configurations and deployment files from the repository, compares the current application load status of the cluster with the expected state described in the files, and when differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that the workloads always run as expected.
-
+> Flux regularly pulls the configurations and deployment files from the repository, and compares the current application load status of the cluster with the expected state described in the files. When differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that workloads always run as expected.
+> 
 We will demonstrate a specific application - "sock shop" - and practical exercises to show how it achieves continuous integration and delivery on a GitOps CI/CD pipeline.
 
 #### 3.1 About Sock Shop
@@ -544,11 +544,11 @@ spec:
 
 ```
 
-##### 4.2.3 Configuring the access credentials for AWS ECR 
+##### 4.2.3 Configuring the access credentials for Amazon ECR 
 
-There are two methods available for AWS ECR credentials in Flux.
+There are two methods available for Amazon ECR credentials in Flux.
 
-- Automatic authentication mechanism (image-reflector-controller retrieves credentials by itself, only applicable to: AWS ECR, GCP GCR, Azure ACR)
+- Automatic authentication mechanism (image-reflector-controller retrieves credentials by itself, only applicable to: Amazon ECR, GCP GCR, Azure ACR)
 
 - Regularly refreshing credentials (stored in the cluster through Secret) with CronJob
 
@@ -574,7 +574,7 @@ patches:
 
 > **Note**
 > 
-> **Takeaway:** We used AWS ECR to choose the automatic authentication mechanism, modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching. This approach is simpler and more efficient when compared to using CronJob to generate credentials regularly.
+> We used Amazon ECR to choose the automatic authentication mechanism, modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching. This approach is simpler and more efficient when compared to using CronJob to generate credentials regularly.
 
 ##### 4.2.4 Setting image update policy
 
@@ -645,7 +645,7 @@ Code changes to the front-end will automatically get CodePipeline to run.
 
 ##### 4.3.3 ECR Image Version Changing Confirmation
 
-When the CodePipeline is completed, log in the AWS ECR console and query the weaveworksdemos/front-end image version:
+When the CodePipeline is completed, log in the Amazon ECR console and query the weaveworksdemos/front-end image version:
 
 ![ECRImage](./images/ECRImage.png)
 
