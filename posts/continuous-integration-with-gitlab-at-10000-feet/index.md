@@ -6,6 +6,7 @@ tags:
   - containers
   - ci-cd
   - devops
+  - tutorial
 spaces:
   - devops
 authorGithubAlias: spara

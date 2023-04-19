@@ -6,6 +6,7 @@ tags:
   - devops
   - infrastructure-as-code
   - ci-cd
+  - tutorial
 spaces:
   - devops
 authorGithubAlias: gaonkarr
