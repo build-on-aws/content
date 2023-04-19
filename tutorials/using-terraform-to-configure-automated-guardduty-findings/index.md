@@ -384,9 +384,7 @@ How does EventBridge work? Essentially, EventBridge receives an event - an indic
 
 ![the process](/static/eventbridge/boa313_process_001.jpg)
 
-
 6.1. The EventBridge rule will need information about GuardDuty and SNS. Begin by creating a variable that can be used for the SNS topic ARN. Do this in the `modules/eventbridge/variables.tf` file.
-
 
 ```
  variable "sns_topic_arn" {
@@ -394,9 +392,7 @@ How does EventBridge work? Essentially, EventBridge receives an event - an indic
 
 ```
 
-
-
-6.2. Next create an Event Rule Resource in the `modules/eventbridge/main.tf` file. You will need to define the source and the type of event we are looking for.
+6.2. Next, create an Event Rule Resource in the `modules/eventbridge/main.tf` file. You will need to define the source and the type of event we are looking for.
 
 ```
 
@@ -419,7 +415,7 @@ How does EventBridge work? Essentially, EventBridge receives an event - an indic
 
 > The event pattern defined above looks at events from the source service, in this case GuardDuty, and looks for a finding with the detail type of "UnauthorizedAccess:EC2/MaliciousIPCaller.Custom."
 
-6.3. Next define the Event Target Resource. When creating this resource you can add an extra bit of readability into the email notification by defining an [Input Transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-input-transformer-tutorial.html). This customizes what EventBridge passes to the event target. Below we are getting the GuardDuty ID, the Region, and the EC2 Instance ID and we are creating an input template that elaborates a bit on the message. You can see below that we have created an input template that makes use of the detail information in the GuardDuty finding in the email message that is sent.
+6.3. Next define the Event Target Resource. When creating this resource, you can add an extra bit of readability into the email notification by defining an [Input Transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-input-transformer-tutorial.html). This customizes what EventBridge passes to the event target. Below we are getting the GuardDuty ID, the Region, and the EC2 Instance ID - and we are creating an input template that elaborates a bit on the message. You can see below that we have created an input template that makes use of the detail information in the GuardDuty finding in the email message that is sent.
 
 ```
 
@@ -442,9 +438,9 @@ How does EventBridge work? Essentially, EventBridge receives an event - an indic
 
 ```
 
-6.4. In the first Event rule that we created we are looking for the **GuardDuty-Event-EC2-MaliciousIPCaller** event. Create a second event rule to look for the **GuardDuty-Event-IAMUser-MaliciousIPCaller** finding and send an email notification for that as well. 
+6.4. In the first Event rule that we created, we are looking for the **GuardDuty-Event-EC2-MaliciousIPCaller** event. Create a second event rule to look for the **GuardDuty-Event-IAMUser-MaliciousIPCaller** finding and send an email notification for that as well. 
 
-> This finding will not show up, its primarily there to practice creating the resources.
+> This finding will not show up; it's primarily there for you to practice creating the resources.
 
 ```
 
@@ -481,7 +477,6 @@ How does EventBridge work? Essentially, EventBridge receives an event - an indic
 
 ```
 
-
 6.5. Once you have the resources created in the module, go back to the `root/main.tf` file and add the EventBridge rule.
 
 ```
@@ -495,29 +490,23 @@ module "guardduty_eventbridge_rule" {
 
 ```
 
-
-In this section you created an EventBridge rule that uses the SNS topic you created to send an email when a GuardDuty finding is matched.  In the next section you will enhance that functionality using Lambda.
+In this section you created an EventBridge rule that uses the SNS topic you created to send an email when a GuardDuty finding is matched. In the next section you will enhance that functionality using Lambda.
 
 ## Step 7: Create the Lambda Terraform Module
 
-In this section we will use [Terraform](https://www.terraform.io/) to create a Lambda function that perform a remediation function for our environment. What we want to do with this 
-tutorial is have our compromised host get moved to a new security group. Similar to the way that EventBridge used SNS to generate an email, EventBridge will involve a Lambda function as see below.
+In this section we will use [Terraform](https://www.terraform.io/) to create a Lambda function that performs a remediation function for our environment. What we want to do with this tutorial is have our compromised host get moved to a new security group. Similar to the way that EventBridge used SNS to generate an email, EventBridge will involve a Lambda function as shown below.
 
 ![Invoke Function](/static/lambda/boa313_lambda_2.jpg)
 
-One thing to keep in mind is that there are many possibilities here. For more information please see the [Creating custom responses to GuardDuty findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html) documentation and [Automatically block suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/).
+One thing to keep in mind is that there are many possible approaches here. For more information, please see the documentation on [creating custom responses to GuardDuty findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html) and [automatically blocking suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/).
 
+Before we get started, let's see what needs to happen for this to work.
 
+Currently, our GuardDuty Findings are matched in an EventBridge rule to a target - currently an SNS rule that sends an email. To enhance this functionality, we will have EventBridge use AWS Lambda as a target.
 
-Before we get started, lets see what needs to happen for this to work.
-
-Currently, our GuardDuty Findings are matched in an EventBridge rule to a target, currently an SNS rule that sends an email. To enhance this functionality we will have EventBridge use AWS Lambda as a target.
-
-
-Because we are going to have AWS Lambda access other resources on our behalf, we need to [create an IAM role to delegate permissions to the service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html). This is called a **service role** and AWS Lambda will *assume* this role when it changes the security group of our EC2 instance.
+Because we are going to have AWS Lambda access other resources on our behalf, we need to [create an IAM role to delegate permissions to the service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html). This is called a **service role**, and AWS Lambda will *assume* this role when it changes the security group of our EC2 instance.
 
 The following image shows how the first three code blocks fit together to allow the AWS Lambda service to assume a role that can make changes to the security groups assigned to the EC2 instances.
-
 
 ![IAM policy assigned to Lambda](/static/lambda/boa313_lambda_1.jpg)
 
@@ -604,7 +593,7 @@ resource "aws_iam_role" "GD-Lambda-EC2MaliciousIPCaller-role" {
 
 ```
 
-> The Python code we will use for the Lambda function has been created for you. The code can be found in the /modules/lambda/code folder and it's called index.py.
+> The Python code we will use for the Lambda function has been created for you. The code can be found in the /modules/lambda/code folder, and it's called index.py.
 
 7.4. Create a data resource pointing to the code.
 
@@ -645,7 +634,7 @@ variable "forensic_sg_id" {}
 
 ```
 
-7.7. Next, return to the `modules/lambda/main.tf` file and create the Lambda function resource. Note that in the code block below that we are using Python 3.9. Also, we are referencing the python code we zipped in index.zip. And lastly we are setting a few environment variables in the resource, `INSTANCE_ID`, `FORENSICS_SG`, and `TOPIC_ARN`. These will be passed into our Lambda function environment from the variables that we created.
+7.7. Next, return to the `modules/lambda/main.tf` file and create the Lambda function resource. Note that in the code block below, we are using Python 3.9. Also, we are referencing the python code we zipped in index.zip. And lastly we are setting a few environment variables in the resource: `INSTANCE_ID`, `FORENSICS_SG`, and `TOPIC_ARN`. These will be passed into our Lambda function environment from the variables that we created.
 
 ```
 
@@ -669,7 +658,6 @@ resource "aws_lambda_function" "GuardDuty-Example-Remediation-EC2MaliciousIPCall
 }
 
 ```
-
 
 7.8. In the `root/main.tf` file call the Lambda module, set the SNS topic ARN, the Compromised Instance ID, and the Forensic Security group. Note that these values are coming from the GuardDuty Module, the Compute Module, and the VPC Module.
 
@@ -700,7 +688,7 @@ module "forensic-security-group" {
 
 ```
 
-7.10. To access the `forensic-security-group` we need to output it. In the `root/outputs.tf` file and output the Security group ID.
+7.10. To access the `forensic-security-group`, we need to output it. In the `root/outputs.tf` file and output the Security group ID.
 
 
 ```
@@ -739,7 +727,7 @@ output "lambda_remediation_function_arn" {
 
 ```
 
-7.13. The variable also needs to be applied in the EventBridge module(`modules/eventbridge/variables.tf`).
+7.13. The variable also needs to be applied in the EventBridge module (`modules/eventbridge/variables.tf`).
 
 ```
 
@@ -764,13 +752,13 @@ module "guardduty_eventbridge_rule" {
 
 In this section you created a Lambda function that isolates a compromised host into a different security group.  This lambda function is called by EventBridge when a GuardDuty finding is matched by the EventBridge rule.  In the next section you will apply the entire configuration.
 
-## Step 8: Apply The Configuration to your AWS Account.
+## Step 8: Apply The Configuration to your AWS Account
 
 8.1. Perform a `terraform init`. This will initialize all of the modules that you have added code to in this tutorial. The output should resemble the following.
 
 ![](/images/0013.png)
 
-> Note that if you already have GuardDuty enabled in your account the apply will fail.  Ensure 
+> Note that if you already have GuardDuty enabled in your account the apply will fail. Ensure 
 
 8.1. Do a `terraform plan`.
 8.2. Do a `terraform apply` to push the changes to AWS. Once applied your should have an output that resembles the following:
