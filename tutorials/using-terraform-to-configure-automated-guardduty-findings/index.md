@@ -1,4 +1,16 @@
-# How to Configure Automated Incident Response for GuardDuty Findings with Terraform
+---
+title: "How to Configure Automated Incident Response for GuardDuty Findings with Terraform"
+description: [insert description here, in " " marks]
+tags:
+  - infrastructure-as-code
+  - terraform
+  - guardduty
+  - threat-detection
+  - incident-response
+authorGithubAlias: 8carroll
+authorName: Brandon Carroll
+date: 2023-04-20
+---
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -6,31 +18,29 @@
 | ⏱ Time to complete     | 60 minutes                                                      |
 | 💰 Cost to complete    | < $2.00 USD                                              |
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)|
-| ⏰ Last Updated        | 2023-03-06                                                      |
+| ⏰ Last Updated        | 2023-04-20                                                     |
 | 💾 Code         | [Download the code](https://github.com/build-on-aws/automating-amazon-guardduty-with-iac) |
 
 
 ## Table of Content
 | ToC |
 |-----|
-
-
-   
-Threat detection and incident response (TDIR) can be a time-consuming and manual process for many organizations. This leads to inconsistent response processes, inconsistent security outcomes, and increased risk. In this tutorial, you will learn how to automate threat detection findings and automate your incident response process, reducing the time to respond to threats. As many organizations are preferring to use a standard Infrastrucutre As Code (IaC) tool for consistent configurations among vendors, this tutorial will show how to configure this solution using Terraform.
+ 
+Threat detection and incident response (TDIR) can be a time-consuming and manual process for many organizations. This leads to inconsistent response processes, inconsistent security outcomes, and increased risk. In this tutorial, you will learn how to automate threat detection findings and automate your incident response process, reducing the time to respond to threats. As many organizations prefer to use a standard Infrastructure-as-Code (IaC) tool for consistent configurations among vendors, this tutorial will show how to configure this solution using Terraform.
 
 ### About Amazon GuardDuty
 
-Amazon GuardDuty offers threat detection enabling you to continuously monitor and protect your AWS accounts, workloads, and data stored in Amazon Simple Storage Service (Amazon S3). GuardDuty analyzes continuous metadata streams generated from your account and network activity found in AWS CloudTrail Events, Amazon Virtual Private Cloud (VPC) Flow Logs, and domain name system (DNS) Logs. GuardDuty also uses integrated threat intelligence such as known malicious IP addresses, anomaly detection, and machine learning (ML) to more accurately identify threats.
+Before we dive into the tutorial, it's helpful to understand the basic function of some of the tools we'll be using. Amazon GuardDuty offers threat detection enabling you to continuously monitor and protect your AWS accounts, workloads, and data stored in Amazon Simple Storage Service (S3). GuardDuty analyzes continuous metadata streams generated from your account and network activity found in AWS CloudTrail Events, Amazon Virtual Private Cloud (VPC) Flow Logs, and domain name system (DNS) Logs. GuardDuty also uses integrated threat intelligence such as known malicious IP addresses, anomaly detection, and machine learning (ML) to more accurately identify threats.
 
-Amazon GuardDuty makes it easy for you to continuously monitor your AWS accounts, workloads, and data stored in Amazon S3. GuardDuty operates completely independently from your resources, so there is no risk of performance or availability impacts to your workloads. The service is fully managed with integrated threat intelligence, anomaly detection, and ML. Amazon GuardDuty delivers detailed and actionable alerts that are easy to integrate with existing event management and workflow systems. There are no upfront costs and you pay only for the events analyzed, with no additional software to deploy or threat intelligence feed subscriptions required.
+GuardDuty operates completely independently from your resources, so there is no risk of performance or availability impacts to your workloads. The service is fully managed with integrated threat intelligence, anomaly detection, and ML. Amazon GuardDuty delivers detailed and actionable alerts that are easy to integrate with existing event management and workflow systems. There are no upfront costs and you pay only for the events analyzed, with no additional software to deploy or threat intelligence feed subscriptions required.
 
-### About Terraform
+### About Terraform and Cloud9
 
-[Terraform](https://www.terraform.io/) is an Infrastructure as code (IaC) tool created by Hashicorp that allows you to manage infrastructure with configuration files rather than a user interface. With Terraform you can build, change, and destroy your infrastructure using human readable, declarative configuration files. You can build, change, and destroy AWS infrastructure using Terraform. This is done through the use of a Terraform plugin called a [Provider](https://registry.terraform.io/). The AWS Provider allows Terraform to interact with the AWS application programming interface (API).
+[Terraform](https://www.terraform.io/) is an Infrastructure-as-Code (IaC) tool created by Hashicorp that allows you to manage infrastructure with configuration files rather than a user interface. With Terraform you can build, change, and destroy your infrastructure using human readable, declarative configuration files. Yes, you can also build, change, and destroy AWS infrastructure using Terraform - by using a Terraform plugin called a [Provider](https://registry.terraform.io/). The AWS Provider allows Terraform to interact with the AWS application programming interface (API).
 
 This tutorial will use AWS Cloud9 to perform the Terraform configuration. AWS Cloud9 is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes pre-packaged with essential tools for popular programming languages including JavaScript, Python, PHP, and Terraform, so you don’t need to install files or configure your development machine to start this workshop. Cloud9 runs on an EC2 instance that was created for you when this workshop was started. 
 
-## What you will accomplish
+## What You Will Accomplish
 
 The process you will accomplish through this tutorial is:
 
