@@ -12,9 +12,14 @@ tags:
     - python
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
+additionalAuthors: 
+  - authorGithubAlias: cobusbernard
+    authorName: Cobus Bernard
+
 date: 2023-04-11
 ---
-Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) scripts when the instance start up. You can automate creating all the infrastructure using [AWS CDK](https://docs.aws.amazon.com/cdk/api/v2/). We will be using a combination of bash scripts and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html) to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. In todays tutorial, we are going to deploy your python based web application, from your own GitHub repositiory. We will cover how to:
+
+Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) scripts when the instance start up. You can automate creating all the infrastructure using [AWS CDK](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). We will be using a combination of bash scripts and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. In todays tutorial, we are going to deploy our python based web application, from a GitHub repository. We will cover how to:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a CI/CD Pipeline, and the required resources for it to operate.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
@@ -37,9 +42,11 @@ Manually setting up and configuring the packages required to run a Python web ap
 
 ## Introduction
 
-To deploy this web application we will be using AWS CDK to create and deploy the underlying infrastructure. This infrastructure will consist of an EC2 instance, a VPC, CI/CD pipeline, and accompanying resources required for it to operate (Security Gruoups and IAM permissions).
+To deploy this web application we will be using AWS CDK to create and deploy the underlying infrastructure. This infrastructure will consist of an EC2 instance, a VPC, CI/CD pipeline, and accompanying resources required for it to operate (Security Groups and IAM permissions).
 
-First, let's check if our CDK version is up to date—this guide is based on v2 of the CDK. If you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html). To check the version, run the following:
+
+### Setting up the CDK project
+First, let's check if our CDK version is up to date — this guide is based on v2 of the CDK. If you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). To check the version, run the following:
 
 ```bash
 cdk --version
@@ -101,16 +108,15 @@ In this resource stack, you are going to create the following resources:
 - EC2 instance: The virtual machine you will use to host your web application.
 - Security group: The virtual firewall to allow inbound requests to your web application.
 - Secrets manager secret: This is a place where you will store your Github Token that we will use to authenticate the pipeline to it.
-- CI/CD Pipeline: This pipeline will consist of AWS CodePipeline, AWS CodeBuild and AWS CodeDeploy
+- CI/CD Pipeline: This pipeline will consist of [AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), [AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Create the EC2 Instance
 
 In this segment we will be creating the EC2 instance and it's required resources. During the course of this tutorial, there will be code checkpoints where we show what the full file should look like at that point. We do recommend following step by step by typing out or copying and pasting the sample code blocks to ensure you understand what each code block does.
 
-To start off, we will be creating the needed IAM role for your EC2 instance. This role will be used to give your instance permission to interact with AWS Systems Manager and AWS CodeDeploy. This will be important later in the tutorial. To get started, make sure you import the following modules into your main stack.  (`lib/ec2-cdk-stack.ts`):
+To start off, we will be creating the needed IAM role for your EC2 instance. This role will be used to give your instance permission to interact with [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and AWS CodeDeploy. This will be important later in the tutorial. To get started, make sure you import the following modules into your main stack.  (`lib/ec2-cdk-stack.ts`):
 
 ```typescript
-
 import { readFileSync } from 'fs';
 import { Vpc, SubnetType, Peer, Port, AmazonLinuxGeneration, 
   AmazonLinuxCpuType, Instance, SecurityGroup, AmazonLinuxImage,
@@ -125,15 +131,18 @@ Then add the following lines to create a role and attach the needed managed IAM 
     const webServerRole = new Role(this, "ec2Role", {
       assumedBy: new ServicePrincipal("ec2.amazonaws.com"),
     });
+
     // IAM policy attachment to allow access to
     webServerRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName("AmazonSSMManagedInstanceCore")
     );
+
     webServerRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName("service-role/AmazonEC2RoleforAWSCodeDeploy")
     );
 ```
-Next step is to create a VPC where our EC2 instance will be residing. We are creating a VPC with three Public Subnets in this case, so there will be no NAT Gateways to worry about.
+
+Next step is to create a VPC where our EC2 instance will be residing. We are creating a VPC with three Public subnets only, so there will be no NAT Gateways, or private subnets.
 
 ```typescript
     // This VPC has 3 public subnets, and that's it
@@ -158,7 +167,7 @@ Next step is to create a VPC where our EC2 instance will be residing. We are cre
     });
 ```
 
-We also need to be able to access our instance via 80. To allow traffic to this port, we need to set up firewall rules by creating a [security group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html). Port 80 allows HTTP traffic to come to the instance from any location on the internet.
+We also need to be able to access our instance via `http` (port 80). To allow traffic to this port, we need to set up firewall rules by creating a [security group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). We will set up port 80 to allow HTTP traffic to come to the instance from any location on the internet.
 
 ```typescript
     // Security Groups
@@ -168,13 +177,14 @@ We also need to be able to access our instance via 80. To allow traffic to this 
       description: "Allows Inbound HTTP traffic to the web server.",
       allowAllOutbound: true,
     });
+
     webSg.addIngressRule(
       Peer.anyIpv4(),
       Port.tcp(80)
     );
 ```
 
-We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) (AMI - pronounced "Ay-Em-Eye")—for this tutorial, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) AMI for X86_64 CPU architecture. We will also pass the IAM role you created, the default VPC, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Just use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/).
+We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (AMI - pronounced "Ay-Em-Eye") — for this tutorial, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) AMI for X86_64 CPU architecture. We will also pass the IAM role and VPC created earlier, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Just use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ```typescript
     // the AMI to be used for the EC2 Instance
@@ -196,9 +206,10 @@ We're now ready to create the EC2 instance using a pre-built [Amazon Machine Ima
     });
 ```
 
-Finally we are attaching User Data and tagging the instance with specific tags. The user data is used to bootstrap the EC2 instance and install specific application packages on the instance's first boot. And the tags are used for deployment purposes later on.
+Finally we are attaching User Data and tagging the instance with specific tags. The user data is used to bootstrap the EC2 instance and install specific application packages on the instance's first boot. And the tags are used for by Systems Manager to identify the instance later on for deployments.
 
 Here is the user data bash script we will be attaching to the EC2 Instance. Make sure this code sits in a file named `configure_amz_linux_sample_app.sh` in the `assets` directory in the root of your CDK Application.
+
 ```bash
 #!/bin/bash -xe
 # Install OS packages
@@ -216,18 +227,19 @@ chmod +x ./install
 ./install auto
 ```
 
-Now, just use CDK to attach the User data script and add tag the instance:
+Now, use CDK to attach the User data script and add tag the instance:
+
 ```typescript
-    // Userdata - used for bootstrapping
+    // User data - used for bootstrapping
     const webSGUserData = readFileSync('./assets/configure_amz_linux_sample_app.sh','utf-8');
     webServer.addUserData(webSGUserData);
     // Tag the instance
-    cdk.Tags.of(webServer).add('application_name','PYTHONWEB')
-    cdk.Tags.of(webServer).add('STAGE','PROD')
-
+    cdk.Tags.of(webServer).add('application-name','python-web')
+    cdk.Tags.of(webServer).add('stage','prod')
 ```
 
-And for the end, just add some outputs so we can easily track down the EC2 instance IP address:
+Additionally, we will configure outputs to easily track down the EC2 instance's IP address:
+
 ```typescript
     // Output the public IP address of the EC2 instance
     new cdk.CfnOutput(this, "IP Address", {
@@ -235,7 +247,7 @@ And for the end, just add some outputs so we can easily track down the EC2 insta
     });
 ```
 
-We have now defined our AWS CDK stack to create an EC2 instance, a VPC, a security group with inbound access rules, and an IAM role, attached to the EC2 instance as an IAM instance profile. On top of that we have tagged the EC2 instance and attached a userdata script to it.
+We have now defined our AWS CDK stack to create an EC2 instance, a VPC, a security group with inbound access rules, and an IAM role, attached to the EC2 instance as an IAM instance profile. On top of that, we have tagged the EC2 instance and attached a user data script to it.
 
 > #### ✅ ✅ ✅  **Checkpoint 1**  ✅ ✅ ✅
 
@@ -263,10 +275,12 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
     const webServerRole = new Role(this, "ec2Role", {
       assumedBy: new ServicePrincipal("ec2.amazonaws.com"),
     });
+
     // IAM policy attachment to allow access to
     webServerRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName("AmazonSSMManagedInstanceCore")
     );
+    
     webServerRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName("service-role/AmazonEC2RoleforAWSCodeDeploy")
     );
@@ -292,6 +306,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
         }
       ]
     });
+
     // Security Groups
     // This SG will only allow HTTP traffic to the Web server
     const webSg = new SecurityGroup(this, 'web_sg',{
@@ -299,6 +314,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
       description: "Allows Inbound HTTP traffic to the web server.",
       allowAllOutbound: true,
     });
+
     webSg.addIngressRule(
       Peer.anyIpv4(),
       Port.tcp(80)
@@ -311,6 +327,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
       generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
       cpuType: AmazonLinuxCpuType.X86_64,
     });
+
     // The actual Web EC2 Instance for the web server
     const webServer = new Instance(this, 'web_server',{
       vpc,
@@ -322,12 +339,13 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
       securityGroup: webSg,
       role: webServerRole,
     });
-    // Userdata - used for bootstrapping
+
+    // User data - used for bootstrapping
     const webSGUserData = readFileSync('./assets/configure_amz_linux_sample_app.sh','utf-8');
     webServer.addUserData(webSGUserData);
     // Tag the instance
-    cdk.Tags.of(webServer).add('application_name','PYTHONWEB')
-    cdk.Tags.of(webServer).add('STAGE','PROD')
+    cdk.Tags.of(webServer).add('application-name','python-web')
+    cdk.Tags.of(webServer).add('stage','prod')
 
     // Output the public IP address of the EC2 instance
     new cdk.CfnOutput(this, "IP Address", {
@@ -341,9 +359,9 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
 
 Now we are going to fork the sample application to your own GitHub account and configure a Github Token to be used by the CI/CD pipeline.
 
-It is best practice to use tokens instead of passwords to access your github account via github api or command line. Read more about [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic).
+It is best practice to use tokens instead of passwords to access your github account via GitHub API or command line. Read more about [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic).
 
-Save the token at a safe place for use later. We will be using this token for two purposes:
+Save the token in a safe place for use later. We will be using this token for two purposes:
 
 1. Provide authentication to stage, commit, and push code from local repo to the GitHub repo. You may also use SSH keys for this
 2. Connect GitHub to CodePipeline, so whenever new code is committed to GitHub repo it automatically triggers pipeline execution
@@ -357,17 +375,23 @@ Now, for AWS CodePipeline to read from this GitHub repo, we need to configure th
 Replace `GITHUB_ACCESS_TOKEN` with your plaintext secret and `REGION` in following command and run it:
 
 ```bash
-aws secretsmanager  create-secret --name github-token --description "Github access token for cdk" --secret-string GITHUB_ACCESS_TOKEN --region REGION
+aws secretsmanager create-secret \ 
+  --name github-token \ 
+  --description "Github access token for cdk" \ 
+  --secret-string GITHUB_ACCESS_TOKEN \ 
+  --region REGION
 ```
+
 For more help, see [Creating and Retrieving a Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-Finally, let's now go ahead and for the [Sample Application](https://github.com/build-on-aws/sample-python-web-app) repo into our own GitHub Account. This is how we will be interacting with this application from now on. More information on forking repositories can be found [here](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+Finally, let's now go ahead and fork the [Sample Application](https://github.com/build-on-aws/sample-python-web-app) repo into our own GitHub Account. This is how we will be interacting with this application from now on. More information on forking repositories can be found [here](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 
 ### Creating the CI/CD Pipeline
 
-It's time to create a CI/CD Pipeline. This CI/CD pipeline will be responsible for testing, deploying and configuring our Web app on our EC2 Instance. The pipeline itself will consist of three phases: **1/ Source** - This is where the pipeline extracts the commit from your GitHub repository we forked earlier; **2/ Build** - A stage where we test the Application code using the `unittest` Python [Unit Testing Framework](https://docs.python.org/3/library/unittest.html); and **3/ Deploy** - Deploying and Configuring the web application on the EC2 instance using AWS CodeDeploy. Let's get back to CDK.
+It's time to create a CI/CD Pipeline. This CI/CD pipeline will be responsible for testing, deploying, and configuring our Web app on our EC2 Instance. The pipeline itself will consist of three phases: **1/ Source** - This is where the pipeline extracts the commit from your GitHub repository we forked earlier; **2/ Build** - A stage where we test the Application code using the `unittest` Python [Unit Testing Framework](https://docs.python.org/3/library/unittest.html); and **3/ Deploy** - Deploying and Configuring the web application on the EC2 instance using AWS CodeDeploy. Let's get back to CDK.
 
 To start off, let's import additional modules in our main CDK stack file `lib/ec2-cdk-stack.ts`:
+
 ```typescript
 import { Pipeline, Artifact } from 'aws-cdk-lib/aws-codepipeline';
 import { GitHubSourceAction, CodeBuildAction, CodeDeployServerDeployAction } from 'aws-cdk-lib/aws-codepipeline-actions';
@@ -377,27 +401,33 @@ import { SecretValue } from 'aws-cdk-lib';
 ```
 
 Let's now create the pipeline and its stages, this is just us defining the pipeline and the skeleton of different stages/phases:
+
 ```typescript
     // CodePipeline
     const pipeline = new Pipeline(this, 'python_web_pipeline',{
-      pipelineName: 'PythonWebApp',
+      pipelineName: 'python-webApp',
       crossAccountKeys: false, // solves the encrypted bucket issue
     });
+
     // STAGES
     // Source Stage
     const sourceStage = pipeline.addStage({
       stageName: 'Source',
     })
+    
     // Build Stage
     const buildStage = pipeline.addStage({
       stageName: 'Build',
     })
+    
     // Deploy Stage
     const deployStage = pipeline.addStage({
       stageName: 'Deploy',
     })
 ```
-We will start with the `Source` stage, as here is where we connect the pipeline to Github, so it can retrieve our code commits to be passed down the pipeline. Couple of important bits here, make sure to set up the **github token** as a **secret** in AWS Secrets Manager (check the steps above), and ensur to change the `owner` parameter to match that of your GitHub username:
+
+We will start with the `Source` stage, as here is where we connect the pipeline to Github, so it can retrieve our code commits to be passed down the pipeline. Some important parts to take note of here: make sure to set up the **github token** as a **secret** in AWS Secrets Manager (check the steps above), and ensure to change the `owner` parameter to match that of your GitHub username:
+
 ```typescript
     // Source action
     const sourceOutput = new Artifact();
@@ -408,11 +438,12 @@ We will start with the `Source` stage, as here is where we connect the pipeline 
       repo: 'sample-python-web-app',
       branch: 'main',
       output: sourceOutput,
-    })
+    });
+
     sourceStage.addAction(githubSourceAction);
 ```
 
-Onto the `Build` stage. We are actually not building anything, rather we are testing the code. In this stage we are running unit tests against our code (which we will set up later), and if succesfull it continues along to the next next stage.
+Onto the `Build` stage. We are actually not building anything, rather we are testing the code. In this stage we are running unit tests against our code (which we will set up later), and if successful it continues along to the next next stage.
 
 ```typescript
     // Build Action
@@ -421,23 +452,27 @@ Onto the `Build` stage. We are actually not building anything, rather we are tes
         buildImage: LinuxBuildImage.AMAZON_LINUX_2_3
       }
     });
+
     const pythonTestOutput = new Artifact();
+
     const pythonTestAction = new CodeBuildAction({
       actionName: 'TestPython',
       project: pythonTestProject,
       input: sourceOutput,
       outputs: [pythonTestOutput]
     });
+
     buildStage.addAction(pythonTestAction);
 ```
 
-And, finally, the `Deploy` stage. This stage uses AWS CodeDeploy to deploy and configure the Web application on the EC2 instance. For this to work, we need to have the CodeDeploy agent installed and running on the instance (which we did before with the userdata), and also we need to tell CodeDeploy which instances to target for deployment. We are doing this with tags. If you recall earlier on in this tutorial we tagged the EC2 instance with specific tags. Now we are using those tags to target the instances with CodeDeploy, and deploy the code.
+And, finally, the `Deploy` stage. This stage uses CodeDeploy to deploy and configure the Web application on the EC2 instance. For this to work, we need to have the CodeDeploy agent installed and running on the instance (which we did before with the user data), and also we need to tell CodeDeploy which instances to target for deployment. We will be using tags for this. If you recall earlier on in this tutorial we tagged the EC2 instance with specific tags. Now we are using those tags to target the instances with CodeDeploy, and deploy the code.
 
 ```typescript
     // Deploy Actions
     const pythonDeployApplication = new ServerApplication(this,"python_deploy_application",{
-      applicationName: 'PythonWebApp'
+      applicationName: 'python-webApp'
     });
+
     // Deployment group
     const pythonServerDeploymentGroup = new ServerDeploymentGroup(this,'PythonAppDeployGroup',{
       application: pythonDeployApplication,
@@ -445,22 +480,25 @@ And, finally, the `Deploy` stage. This stage uses AWS CodeDeploy to deploy and c
       installAgent: true,
       ec2InstanceTags: new InstanceTagSet(
       {
-        'application_name': ['PYTHONWEB'],
-        'STAGE':['PROD', 'STAGE']
-      }
-      )
+        'application-name': ['python-web'],
+        'stage':['prod', 'stage']
+      })
     });
+
+    // Deployment action
     const pythonDeployAction = new CodeDeployServerDeployAction({
       actionName: 'PythonAppDeployment',
       input: sourceOutput,
       deploymentGroup: pythonServerDeploymentGroup,
     });
+
     deployStage.addAction(pythonDeployAction);
 ```
 
 > #### ✅ ✅ ✅  **Checkpoint 2**  ✅ ✅ ✅
 
 We have now completed all code changes to our CDK app, and the `lib/ec2-cdk-stack.ts` file should look like this:
+
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 import { readFileSync } from 'fs';
@@ -488,10 +526,12 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
     const webServerRole = new Role(this, "ec2Role", {
       assumedBy: new ServicePrincipal("ec2.amazonaws.com"),
     });
+
     // IAM policy attachment to allow access to
     webServerRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName("AmazonSSMManagedInstanceCore")
     );
+    
     webServerRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName("service-role/AmazonEC2RoleforAWSCodeDeploy")
     );
@@ -517,6 +557,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
         }
       ]
     });
+
     // Security Groups
     // This SG will only allow HTTP traffic to the Web server
     const webSg = new SecurityGroup(this, 'web_sg',{
@@ -524,6 +565,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
       description: "Allows Inbound HTTP traffic to the web server.",
       allowAllOutbound: true,
     });
+    
     webSg.addIngressRule(
       Peer.anyIpv4(),
       Port.tcp(80)
@@ -536,6 +578,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
       generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
       cpuType: AmazonLinuxCpuType.X86_64,
     });
+
     // The actual Web EC2 Instance for the web server
     const webServer = new Instance(this, 'web_server',{
       vpc,
@@ -547,32 +590,36 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
       securityGroup: webSg,
       role: webServerRole,
     });
-    // Userdata - used for bootstrapping
+
+    // User data - used for bootstrapping
     const webSGUserData = readFileSync('./assets/configure_amz_linux_sample_app.sh','utf-8');
     webServer.addUserData(webSGUserData);
     // Tag the instance
-    cdk.Tags.of(webServer).add('application_name','PYTHONWEB')
-    cdk.Tags.of(webServer).add('STAGE','PROD')
+    cdk.Tags.of(webServer).add('application-name','python-web')
+    cdk.Tags.of(webServer).add('stage','prod')
     
     // Pipeline stuff
     // CodePipeline
-    const pipeline = new Pipeline(this, 'python_web_pipeline',{
-      pipelineName: 'PythonWebApp',
+    const pipeline = new Pipeline(this, 'python_web_pipeline', {
+      pipelineName: 'python-webApp',
       crossAccountKeys: false, // solves the encrypted bucket issue
     });
+
     // STAGES
     // Source Stage
     const sourceStage = pipeline.addStage({
       stageName: 'Source',
-    })
+    });
+    
     // Build Stage
     const buildStage = pipeline.addStage({
       stageName: 'Build',
-    })
+    });
+    
     // Deploy Stage
     const deployStage = pipeline.addStage({
       stageName: 'Deploy',
-    })
+    });
 
     // Add some action
     // Source action
@@ -584,15 +631,17 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
       repo: 'sample-python-web-app',
       branch: 'main',
       output: sourceOutput,
-    })
+    });
+
     sourceStage.addAction(githubSourceAction);
 
     // Build Action
-    const pythonTestProject = new PipelineProject(this, 'pythonTestProject',{
+    const pythonTestProject = new PipelineProject(this, 'pythonTestProject', {
       environment: {
         buildImage: LinuxBuildImage.AMAZON_LINUX_2_3
       }
     });
+    
     const pythonTestOutput = new Artifact();
     const pythonTestAction = new CodeBuildAction({
       actionName: 'TestPython',
@@ -600,29 +649,33 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
       input: sourceOutput,
       outputs: [pythonTestOutput]
     });
+
     buildStage.addAction(pythonTestAction);
 
     // Deploy Actions
-    const pythonDeployApplication = new ServerApplication(this,"python_deploy_application",{
-      applicationName: 'PythonWebApp'
+    const pythonDeployApplication = new ServerApplication(this,"python_deploy_application", {
+      applicationName: 'python-webApp'
     });
+
     // Deployment group
-    const pythonServerDeploymentGroup = new ServerDeploymentGroup(this,'PythonAppDeployGroup',{
+    const pythonServerDeploymentGroup = new ServerDeploymentGroup(this,'PythonAppDeployGroup', {
       application: pythonDeployApplication,
       deploymentGroupName: 'PythonAppDeploymentGroup',
       installAgent: true,
       ec2InstanceTags: new InstanceTagSet(
       {
-        'application_name': ['PYTHONWEB'],
-        'STAGE':['PROD', 'STAGE']
-      }
-      )
+        'application-name': ['python-web'],
+        'stage':['prod', 'stage']
+      })
     });
+
+    // Deployment action
     const pythonDeployAction = new CodeDeployServerDeployAction({
       actionName: 'PythonAppDeployment',
       input: sourceOutput,
       deploymentGroup: pythonServerDeploymentGroup,
     });
+
     deployStage.addAction(pythonDeployAction);
 
     // Output the public IP address of the EC2 instance
@@ -635,9 +688,10 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
 
 ### Additional files for Testing and Deploying
 
-To properly test and deploy our application, we will need to add some additional content to the sample repository we have forked earlier. These files are used by the CodeBuild and CodeDeploy services. On top of that we will write a simple Python unit test. Let's start with that.
+To properly test and deploy our application, we will need to add some additional content to the sample repository we have forked earlier. These files are used by the CodeBuild and CodeDeploy services. On top of that, we will write a simple Python unit test. Let's start with that.
 
 To create our tests, in the root directory of the sample application create a `tests` directory, and add the following `test_sample.py` file to it:
+
 ```python
 import unittest
 from application import application
@@ -657,12 +711,15 @@ if __name__ == '__main__':
     unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'))
     unittest.main()
 ```
+
 This test will just run the Flask application and see if it returns a `200` HTTP status code. Simple as that. On top of this file, just for posterity, let's create a `__init__.py` file in the same directory. This file can be empty so you can just create it with the following command:
+
 ```bash
 touch tests/__init__.py
 ```
 
 We are now ready to create the `buildspec.yml` file. This file is used by CodeDeploy as an instruction set of what does it need to do to build your code. In our case we are instructing it how to run the tests. In the root directory of the sample application, add the `buildspec.yml` file with the following contents:
+
 ```yaml
 version: 0.2
 
@@ -712,19 +769,22 @@ hooks:
       timeout: 300
       runas: root
 ```
-As you can see, here we are invoing 4 different scripts in different phases of the deployment. This is required to properly setup the EC2 instance before, and post code deployment. These scripts should sit in a directory called `scripts` in the root of the sample application. Thee scripts should be named like this, and should contain the following contents:
+
+As you can see, here we are involving 4 different scripts in different phases of the deployment. This is required to properly setup the EC2 instance before, and post code deployment. These scripts should sit in a directory called `scripts` in the root of the sample application. These scripts should be named as follows, and should contain the following contents:
 
 `setup_dirs.sh`
+
 ```bash
-#!/bin/bash
+#!/bin/bash -xe
 mkdir -p /var/www/SampleApp
 chown nginx:nginx /var/www
 chown nginx:nginx /var/www/SampleApp
 ```
 
 `setup_services.sh`
+
 ```bash
-#!/bin/bash
+#!/bin/bash -xe
 ## Install uWSGI as a systemd service, enable it to run at boot, then start it
 cp /var/www/SampleApp/sample-app.uwsgi.service /etc/systemd/system/mywebapp.uwsgi.service
 mkdir -p /var/log/uwsgi
@@ -737,9 +797,11 @@ mkdir -p /var/log/nginx
 chown nginx:nginx /var/log/nginx
 systemctl enable nginx.service
 ```
+
 `pipenv.sh`
+
 ```bash
-#!/bin/bash
+#!/bin/bash -xe
 
 chown nginx:nginx -R /var/www/SampleApp/
 cd /var/www/SampleApp
@@ -747,16 +809,16 @@ cd /var/www/SampleApp
 ```
 
 `start_server.sh`
+
 ```bash
-#!/bin/bash
+#!/bin/bash -xe
 systemctl restart mywebapp.uwsgi.service
 systemctl restart nginx.service
 ```
 
-Once all these files are created the sample application directory should look something like this:
+Once all these files are created, the sample application directory should look like this:
+
 ```bash
-darko@jugoplastika [~/workspace/projects/sample-python-web-app]: tree -L 2                                                                                            
-.
 ├── application.config
 ├── application.py
 ├── appspec.yml
@@ -785,11 +847,9 @@ darko@jugoplastika [~/workspace/projects/sample-python-web-app]: tree -L 2
     ├── __init__.py
     ├── __pycache__
     └── test_sample.py
-
-8 directories, 21 files
 ```
 
-Now, make sure to add, commit and push your changes to the sample code to your GitHub Repository, before we continue to the next step and deploy the infrastructure.
+Now, make sure to add, commit, and push your changes to the sample code to your GitHub Repository before we continue to the next step and deploy the infrastructure.
 
 ## Bootstrap CDK
 
@@ -816,7 +876,7 @@ Once the bootstrapping has completed, we're ready to deploy all the infrastructu
 cdk deploy
 ```
 
-You will be presented with the following output and confirmation screen. Because there are security implications for our stack, you will see a summary of these and need to confirm them before deployment proceeds.
+You will be presented with the following output and confirmation screen. Because there are security implications for our stack, you will see a summary of these and need to confirm them before deployment proceeds. This will always be shown if you are creating, modifying, or deleting any IAM policy, role, group, or user, and when you change any firewall rules.
 
 ![CDK output showing infrastructure it will create, with a security confirmation to create the required IAM role.](./images/deployment.png)
 
@@ -843,15 +903,13 @@ Stack ARN:
 arn:aws:cloudformation:us-west-2:123456789000:stack/PythonEc2BlogpostStack/59f1e560-grunf-11ed-afno1-06f3bbc9cf63
 
 ✨  Total time: 29.11s
-
 ```
 
-Your infrastructure is now deployed, the instance is spinning up, and you can use the outputs at the bottom that indicate the IP address of your web server. The application will not be immediately available, as it needs to be deployed. To check the status of the deployment head over to the AWS CodePipeline console and find the `PythonWebApp` pipeline, there you should see something similar to this:
+Your infrastructure is now deployed, the instance is spinning up, and you can use the outputs at the bottom that indicate the IP address of your web server. The application will not be immediately available, as it needs to be deployed. To check the status of the deployment head over to the AWS CodePipeline console and find the `python-webApp` pipeline, there you should see something similar to this:
 
 ![CodePipeline deployment in stages shown on the AWS Console.](./images/deployment.png)
 
-After the deployment is succesfull (the `Deploy` stage should be green), copy and then paste the IP address of your EC2 instance in your browser, and your sample application should be up and running.
-
+After the deployment is successful (the `Deploy` stage should be green), copy and then paste the IP address of your EC2 instance in your browser, and your sample application should be up and running. Congratulations! You have set up a Python web application running on an EC2 instance, with a CI/CD pipeline to test and deploy and changes!
 
 ## Cleaning up your AWS environment
 
@@ -868,7 +926,7 @@ PythonEc2BlogpostStack: destroying ...
 ✅ PythonEc2BlogpostStack: destroyed
 ```
 
-When the output shows `PythonEc2BlogpostStack: destroyed`, your resources have been removed. There is one more step for the cleanup: removing the S3 bucket used by CDK to upload the scripts and sample application. These resources aren't deleted by CDK as a safety precaution. Open the [S3 console](https://s3.console.aws.amazon.com/s3/buckets) in your browser, and look for a bucket with a name like `pythonec2blockpoststack-<randonmunbers>-us-east-1` (yours will have a different random number and your account number instead of `123456789012`). If you see more than one (usually if you have used the CDK asset feature before), you can sort by `Creation Date` to see the latest created one. Open the bucket to confirm that you see a directory called `PythonWebApp`. Select all the directory, then choose `actions` -> `delete`, and follow the prompts to delete the objects. Lastly, go back to the S3 console, and delete the bucket.
+When the output shows `PythonEc2BlogpostStack: destroyed`, your resources have been removed. There is one more step for the cleanup: removing the S3 bucket used by CDK to upload the scripts and sample application. These resources aren't deleted by CDK as a safety precaution. Open the [S3 console](https://s3.console.aws.amazon.com/s3/buckets) in your browser, and look for a bucket with a name like `pythonec2blockpoststack-<randonmunbers>-us-east-1` (yours will have a different random number and your account number instead of `123456789012`). If you see more than one (usually if you have used the CDK asset feature before), you can sort by `Creation Date` to see the latest created one. Open the bucket to confirm that you see a directory called `python-webApp`. Select all the directory, then choose `actions` -> `delete`, and follow the prompts to delete the objects. Lastly, go back to the S3 console, and delete the bucket.
 
 ## Conclusion
 
