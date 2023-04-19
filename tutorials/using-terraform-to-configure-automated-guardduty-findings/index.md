@@ -760,31 +760,31 @@ In this section you created a Lambda function that isolates a compromised host i
 
 > Note that if you already have GuardDuty enabled in your account the apply will fail. Ensure 
 
-8.1. Do a `terraform plan`.
-8.2. Do a `terraform apply` to push the changes to AWS. Once applied your should have an output that resembles the following:
+8.2. Do a `terraform plan`.
+
+8.3. Do a `terraform apply` to push the changes to AWS. Once applied your should have an output that resembles the following:
 
 ![](images/0014.png)
 
-In this section you applied the Terraform configuration to your AWS accoount.  At this point you have 2 EC2 instances that are communicating with one another.  One is Malicious and it's IP address has been added to our Threat IP List.  When GuardDuty sees this IP talking to our compromised instance it will produce a finding.  We have an EventBridge rule that matches that finding and does two things, 1/ it sends us an email letting us know what happened, and 2/ it invokes the lambda function to change the security group of the compromised host.  In the next section we will verify the configuration in our AWS console.
+In this section you applied the Terraform configuration to your AWS accoount. At this point you have two EC2 instances that are communicating with one another. One is malicious and its IP address has been added to our Threat IP List. When GuardDuty sees this IP talking to our compromised instance, it will produce a finding. We have an EventBridge rule that matches that finding and does two things: first, it sends us an email letting us know what happened, and second, it invokes the Lambda function to change the security group of the compromised host. In the next section, we will verify the configuration in our AWS console.
 
 ## Step 9: Verify The Solution in the AWS Management Console
 
 In this section we will walk through the entire solution in the AWS console and verify that the security group has been moved once the finding shows up in GuardDuty and EventBridge triggers the Lambda Function.
 
-You should also have received an email to confirm your subscription. You must subscribe to receive the notifications you have configured.
+You should also have received an email to confirm your subscription. Remember that you must subscribe to receive the notifications you have configured.
 
 ![](images/0015.png)
 
-After subscribing navigate to the AWS Management Console to verifying that there are two EC2 instances and they are both in the Initial Security Group. 
+After subscribing, navigate to the AWS Management Console to verify that there are two EC2 instances and they are both in the Initial Security Group. 
 
 > Depending on how long you have waited, if the remediation Lambda function is already applied you may not see them in the same group. 
 
-
-First check the Compromised Host.
+First check the compromised host.
 
 ![sec group verification](images/0016.png)
 
-Next check the Malicious Host.
+Next check the malicious host.
 
 ![sec group verification](images/0017.png)
 
@@ -796,7 +796,7 @@ Now check that the EventBridge rule is looking for that finding.
 
 ![EventBridge Rule](/images/0019.png)
 
-Next check the target of the EventBridge Rule. You should see one SNS target and one Lambda target.
+Next check the target of the EventBridge rule. You should see one SNS target and one Lambda target.
 
 ![Targets](/images/0020.png)
 
@@ -804,26 +804,25 @@ Check the SNS rule to see what it does. It should be sending an email to the add
 
 ![SNS topic](/images/0021.png)
 
-Next Check the Lambda Function. You can get there from the EventBridge Rule or by navigating there directly. 
+Next check the Lambda function. You can get there from the EventBridge Rule or by navigating there directly. 
 
 ![Lambda Function](/images/0022.png)
 
-Finally check that the Lambda Function has moved the Compromised host to a new Security Group.
+Finally check that the Lambda function has moved the compromised host to a new security group.
 
 ![Security Group Changed](/images/0023.png)
 
-Depending on the time you have waited, if your configuration matches the screenshots above you have successfully created an entire AWS Security solution using Terraform. Congratulations! 
+Depending on the time you have waited, if your configuration matches the screenshots above, you have successfully created an entire AWS Security solution using Terraform. Congratulations! 
 
-In the next section we will perform a clean-up of our environment and share additional resources.
-
+In the next section we will clean up our environment and share additional resources.
 
 ## Conclusion
 
-At this point in the tutorial you are likely getting emails every 15 minutes as GuardDuty reports its Findings. If you prefer to keep the configurations to reference later but stop the emails you can simply unsubscribe from the topic. See the example below on how to delete the subscription.
+At this point in the tutorial you are likely getting emails every 15 minutes as GuardDuty reports its findings. If you prefer to keep the configurations to reference later but want to stop the emails, you can simply unsubscribe from the topic. See the example below on how to delete the subscription.
 
 ![delete subscription](/images/0024.png)
 
-To remove the entire configuration we will use the `terraform destroy` command from the CLI of our Cloud9 instance. 
+To remove the entire configuration, we will use the `terraform destroy` command from the CLI of our Cloud9 instance. 
 
 When finished your output should resemble the following.
 
@@ -837,13 +836,4 @@ Finally navigate to CloudFormation and delete the CloudFormation stack you creat
 
 ![destroy](/images/0027.png)
 
-As you can see from this tutorial, much can be done to automate what happens when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda. For additional ideas on how to automate Incident Response, see the articles "[How to use Amazon GuardDuty and AWS Web Application Firewall to automatically block suspicious hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/)" and "[Automatically block suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/)."
-
-
-
-
-
-
-
-
-
+As you can see from this tutorial, much can be done to automate what happens when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda. For more ideas on how to automate Incident Response, see the articles "[How to Use Amazon GuardDuty and AWS Web Application Firewall to Automatically Block Suspicious Hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/)" and "[Automatically Block Suspicious Traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/)."
