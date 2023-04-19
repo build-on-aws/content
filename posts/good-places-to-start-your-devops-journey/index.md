@@ -6,6 +6,8 @@ tags:
   - career
   - learning
   - basics
+spaces:
+  - devops
 authorGithubAlias: andrasome
 authorName: Andra Somesan
 date: 2023-04-11

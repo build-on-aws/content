@@ -4,12 +4,14 @@ description: "How to manage a central main account for shared infrastructure wit
 tags:
     - terraform
     - codecatalyst
-    - cicd
+    - ci-cd
     - tutorial
     - devops
     - infrastructure-as-code
     - aws
     - github-actions
+spaces:
+  - devops
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-03-27
