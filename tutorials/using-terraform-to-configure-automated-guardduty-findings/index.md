@@ -380,9 +380,7 @@ In this section you created the SNS topics to send you an email when a specific 
 
 In this section you will use [Terraform](https://www.terraform.io/) to create an EventBridge Rule. The EventBridge Rule will tie two elements of this solution together.  
 
-How does EventBridge work? Essentially, EventBridge receives an event - an indicator of a change in environment - and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. In this case, GuardDuty creates an event for Amazon EventBridge when any change in findings takes place. The event matches and Amazon EventBridge rule to a target. In this case, the target is anSNS rule. The SNS rule takes the finding data and generates an email notification to the subscribed user. This can be seen in the image below. 
-
-![the process](/static/eventbridge/boa313_process_001.jpg)
+How does EventBridge work? Essentially, EventBridge receives an event - an indicator of a change in environment - and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. In this case, GuardDuty creates an event for Amazon EventBridge when any change in findings takes place. The event matches and Amazon EventBridge rule to a target. In this case, the target is anSNS rule. The SNS rule takes the finding data and generates an email notification to the subscribed user. 
 
 6.1. The EventBridge rule will need information about GuardDuty and SNS. Begin by creating a variable that can be used for the SNS topic ARN. Do this in the `modules/eventbridge/variables.tf` file.
 
@@ -494,9 +492,7 @@ In this section you created an EventBridge rule that uses the SNS topic you crea
 
 ## Step 7: Create the Lambda Terraform Module
 
-In this section we will use [Terraform](https://www.terraform.io/) to create a Lambda function that performs a remediation function for our environment. What we want to do with this tutorial is have our compromised host get moved to a new security group. Similar to the way that EventBridge used SNS to generate an email, EventBridge will involve a Lambda function as shown below.
-
-![Invoke Function](/static/lambda/boa313_lambda_2.jpg)
+In this section we will use [Terraform](https://www.terraform.io/) to create a Lambda function that performs a remediation function for our environment. What we want to do with this tutorial is have our compromised host get moved to a new security group. Similar to the way that EventBridge used SNS to generate an email, EventBridge will involve a Lambda function.
 
 One thing to keep in mind is that there are many possible approaches here. For more information, please see the documentation on [creating custom responses to GuardDuty findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html) and [automatically blocking suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/).
 
@@ -508,7 +504,7 @@ Because we are going to have AWS Lambda access other resources on our behalf, we
 
 The following image shows how the first three code blocks fit together to allow the AWS Lambda service to assume a role that can make changes to the security groups assigned to the EC2 instances.
 
-![IAM policy assigned to Lambda](/static/lambda/boa313_lambda_1.jpg)
+![IAM policy assigned to Lambda](/images/0028.png)
 
 7.1. Start in the `modules/lambda/main.tf` by creating the IAM policy document. This is the trust relationship for the policy.
 
