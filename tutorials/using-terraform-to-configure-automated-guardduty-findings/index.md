@@ -1,6 +1,6 @@
 ---
 title: "How to Configure Automated Incident Response for GuardDuty Findings with Terraform"
-description: [insert description here, in " " marks]
+description: ["In this tutorial you will learn how to configure an AWS Security solution using Terraform.  You will make use of the Amazon GuardDuty, Amazon SNS, AWS Lambda, and Amazon EvenBridge services."]
 tags:
   - infrastructure-as-code
   - terraform
@@ -42,12 +42,12 @@ This tutorial will use AWS Cloud9 to perform the Terraform configuration. AWS Cl
 
 ## What You Will Accomplish
 
-The process you will accomplish through this tutorial is:
+Here is what happens in this scenario:
 
 1. A "malicious" host interacts with a "compromised" host causing GuardDuty to report a finding.
-2. The finding is matched in an EventBridge rule that does two things:
-   1. Triggers an SNS rule that sends an email to a defined admin with easy to read text explaining the finding.
-   2. Triggers a Lambda function that moves the compromised host to a forensic security group where it is isolated for further investigation.
+2. The finding will be matched in an EventBridge rule that you will create using Terraform.  The EventBridge rule does the following two things:
+   1. It triggers an SNS rule that you will create using Terraform.  This SNS rule will send an email to a defined admin with easy to read text explaining the finding.
+   2. It triggers a Lambda function that you will create using Terraform. The Lambda function moves the compromised host to a forensic security group where it is isolated for further investigation.
 
 
 ### Prerequisites
@@ -62,25 +62,25 @@ This tutorial makes use of an AWS CloudFormation template to provision initial r
 
 ![Create Stack](images/0001.png)
 
-1.2. Select **Upload Template File** and upload the [gd-iac-initial.yml](https://github.com/8carroll/gd-iac-terraform-initial/blob/main/gd-iac-initial.yml) file from the sample code repo provided above. Then click **Next**.  
+1.2. Select **Upload Template File** and upload the `gd-iac-initial.yml` file from the sample code repo provided above. Then click **Next**.  
 
 ![Upload YAML file](images/0002.png)
 
 1.3. Enter a stack name and click **Next**.
 
-![](images/0003.png)
+![Enter Stack Name and Next](images/0003.png)
 
 1.4. Click **Next** on the **Configure stack options** page.
 
-![](images/0004.png)
+![Click Next](images/0004.png)
 
 1.5. On the **Review** page, scroll to the bottom and click the checkbox to **acknowledge that AWS CloudFormation might create IAM resources**, then click **Next**. 
 
-![](images/0005.png)
+![Acknowledge Resource Creation](images/0005.png)
 
 1.6. Watch for the stack to be in a **Create Complete** state.
 
-![](images/0006.png)
+![Look for Create Complete Message](images/0006.png)
 
 At this point you have deployed the initial resources you will use to follow along with this tutorial on your own. In the next step you will access the Cloud9 instance that the stack created and initialize Terraform.
 
@@ -88,11 +88,11 @@ At this point you have deployed the initial resources you will use to follow alo
 
 2.1. Open [AWS Cloud9 in the AWS Management Console](https://us-west-2.console.aws.amazon.com/cloud9control/home?region=us-west-2#/) and open the environment in the Cloud9 IDE.
 
-![](images/0007.png)
+![Open the Cloud9 IDE](images/0007.png)
 
 2.2. In the Cloud9 preferences, disable the use of **AWS managed temporary credentials**.
 
-![](images/0008.png)
+![Disbale Managed Credentials](images/0008.png)
 
 2.3.  From the terminal in your Cloud9 instance, clone the initial code repo. 
 
@@ -104,15 +104,15 @@ git clone https://github.com/build-on-aws/automating-amazon-guardduty-with-iac.g
 
 > Terraform will apply configuration in US-WEST-2. The Cloudformation template created the Cloud9 instance in US-WEST-1. This is intentional. The idea is that you can do your verifications seeing only what you create with Terraform. 
 
-![](images/0010.png)
+![Initialize Terraform](images/0010.png)
 
 A successful apply will resemble the following:
 
-![](images/0012.png)
+![Apply the Terraform](images/0012.png)
 
 2.5. Verify that there are two new EC2 instances, one named **IAC Tutorial: Compromised Instance** and the other named **IAC Tutorial: Malicious Instance**.
 
-![](images/0011.png)
+![Verifying two EC2 instances](images/0011.png)
 
 At this point, you have deployed a VPC and two EC2 instances. The two EC2 instances will talk to one another, and later when you add one of the EC2 instances Elastic IP address to a threat list it will cause GuardDuty to produce a finding. From this point on, you will create each of the resources that are part of the actual security solution.
 
@@ -380,7 +380,7 @@ In this section you created the SNS topics to send you an email when a specific 
 
 In this section you will use [Terraform](https://www.terraform.io/) to create an EventBridge Rule. The EventBridge Rule will tie two elements of this solution together.  
 
-How does EventBridge work? Essentially, EventBridge receives an event - an indicator of a change in environment - and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. In this case, GuardDuty creates an event for Amazon EventBridge when any change in findings takes place. The event matches and Amazon EventBridge rule to a target, in this case its an SNS rule. The SNS rule takes the finding data and generates an email notification to the subscribed user. This can be seen in the image below. 
+How does EventBridge work? Essentially, EventBridge receives an event - an indicator of a change in environment - and applies a rule to route the event to a target. Rules match events to targets based on either the structure of the event, called an event pattern, or on a schedule. In this case, GuardDuty creates an event for Amazon EventBridge when any change in findings takes place. The event matches and Amazon EventBridge rule to a target. In this case, the target is anSNS rule. The SNS rule takes the finding data and generates an email notification to the subscribed user. This can be seen in the image below. 
 
 ![the process](/static/eventbridge/boa313_process_001.jpg)
 
@@ -756,15 +756,15 @@ In this section you created a Lambda function that isolates a compromised host i
 
 8.1. Perform a `terraform init`. This will initialize all of the modules that you have added code to in this tutorial. The output should resemble the following.
 
-![](/images/0013.png)
+![Initialize the modules](/images/0013.png)
 
-> Note that if you already have GuardDuty enabled in your account the apply will fail. Ensure 
+> Note that if you already have GuardDuty enabled in your account the apply will fail. If this happens, you can disable GuardDuty and run the terraform apply again. 
 
 8.2. Do a `terraform plan`.
 
 8.3. Do a `terraform apply` to push the changes to AWS. Once applied your should have an output that resembles the following:
 
-![](images/0014.png)
+![Vew the apply complete message](images/0014.png)
 
 In this section you applied the Terraform configuration to your AWS accoount. At this point you have two EC2 instances that are communicating with one another. One is malicious and its IP address has been added to our Threat IP List. When GuardDuty sees this IP talking to our compromised instance, it will produce a finding. We have an EventBridge rule that matches that finding and does two things: first, it sends us an email letting us know what happened, and second, it invokes the Lambda function to change the security group of the compromised host. In the next section, we will verify the configuration in our AWS console.
 
@@ -774,7 +774,7 @@ In this section we will walk through the entire solution in the AWS console and 
 
 You should also have received an email to confirm your subscription. Remember that you must subscribe to receive the notifications you have configured.
 
-![](images/0015.png)
+![Email of Subscription Confirmation](images/0015.png)
 
 After subscribing, navigate to the AWS Management Console to verify that there are two EC2 instances and they are both in the Initial Security Group. 
 
