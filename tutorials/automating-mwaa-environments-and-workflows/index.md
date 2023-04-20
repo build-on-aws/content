@@ -1289,4 +1289,4 @@ cdk destroy MWAAirflowStack
 
 In this tutorial we looked at some of the challenges automating Apache Airflow, and how we can apply DevOps principals to address those. We looked at how you do that with Amazon's Managed Workflow for Apache Airflow (MWAA), and in the next tutorial post, we will look at how you can do the same but with self-managed Apache Airflow environment.
 
-If you enjoyed this tutorial, please let us know how we can better serve open source Builders by <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">completing this short survey. </a> Thank you!
+If you enjoyed this tutorial, please let us know how we can better serve open source Builders by <a href="https://pulse.buildon.aws/survey/HYUBZ0ZU" target="_blank">completing this short survey. </a> Thank you!
