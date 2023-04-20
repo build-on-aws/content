@@ -4,8 +4,10 @@ description: "A walk-through of deploying a web application using AWS Elastic Be
 tags:
   - aws
   - devops
-  - cicd
+  - ci-cd
   - infrastructure-as-code
+spaces:
+  - devops
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-04-10

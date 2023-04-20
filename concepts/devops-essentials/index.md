@@ -5,6 +5,8 @@ tags:
   - devops
   - essentials
   - aws
+spaces:
+  - devops
 authorGithubAlias: gogococo 
 authorName: Jacquie Grindrod
 date: 2023-01-12

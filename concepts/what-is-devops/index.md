@@ -5,6 +5,8 @@ tags:
   - devops
   - foundational
   - aws
+spaces:
+  - devops
 authorGithubAlias: gogococo 
 authorName: Jacquie Grindrod
 date: 2023-04-01

@@ -9,6 +9,9 @@ tags:
     - infrastructure-as-code
     - aws
     - github-actions
+    - devops
+spaces:
+  - devops
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-01-31

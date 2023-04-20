@@ -6,6 +6,9 @@ tags:
   - devops
   - infrastructure-as-code
   - ci-cd
+  - tutorial
+spaces:
+  - devops
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-03-22 
