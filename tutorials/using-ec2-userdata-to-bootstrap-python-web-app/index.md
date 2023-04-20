@@ -1,6 +1,6 @@
 ---
-title: "Bootstrapping an Amazon EC2 instance using user-data to run a Python web app"
-description: "Deploying a Python web application to an EC2 instance running nginx and uWSGI, using a CI/CD Pipeline"
+title: "Bootstrapping an Amazon EC2 Instance Using User-data to Run a Python Web App"
+description: "Deploy a Python web application to an EC2 instance running nginx and uWSGI, using a CI/CD Pipeline."
 tags:
     - aws
     - tutorial
@@ -16,10 +16,10 @@ additionalAuthors:
   - authorGithubAlias: cobusbernard
     authorName: Cobus Bernard
 
-date: 2023-04-11
+date: 2023-04-21
 ---
 
-Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) scripts when the instance start up. You can automate creating all the infrastructure using [AWS CDK](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). We will be using a combination of bash scripts and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. In todays tutorial, we are going to deploy our python based web application, from a GitHub repository. We will cover how to:
+Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) scripts when the instance start up. You can automate creating all the infrastructure using [AWS CDK](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). We will be using a combination of bash scripts and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. In today's tutorial, we are going to deploy our Python-based web application from a GitHub repository. We will cover how to:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a CI/CD Pipeline, and the required resources for it to operate.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
@@ -43,7 +43,6 @@ Manually setting up and configuring the packages required to run a Python web ap
 ## Introduction
 
 To deploy this web application we will be using AWS CDK to create and deploy the underlying infrastructure. This infrastructure will consist of an EC2 instance, a VPC, CI/CD pipeline, and accompanying resources required for it to operate (Security Groups and IAM permissions).
-
 
 ### Setting up the CDK project
 First, let's check if our CDK version is up to date — this guide is based on v2 of the CDK. If you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). To check the version, run the following:
@@ -96,11 +95,11 @@ npm notice
 ✅ All done!
 ```
 
-### Create the code for the resource stack
+### Create the Code for the Resource Stack
 
 CDK uses the folder name for the files it generates. For this tutorial, we will be using `ec2-cdk`. If you named your directory differently, please replace this with the folder name you used. To start adding infrastructure, go to the file `lib/ec2-cdk-stack.ts`. This is where we will write the code for the resource stack you are going to create.
 
-A resource stack is a set of cloud infrastructure resources (in your particular case, they will be all AWS resources) that will be provisioned into a specific account. The account and Region where these resources are provisioned, can be configured in the stack—we will cover this later on.
+A resource stack is a set of cloud infrastructure resources (in your particular case, they will be all AWS resources) that will be provisioned into a specific account. The account and Region where these resources are provisioned can be configured in the stack — which we will cover later on.
 
 In this resource stack, you are going to create the following resources:
 
