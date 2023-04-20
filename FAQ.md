@@ -34,6 +34,15 @@
 
 👉 [https://www.markdownguide.org/basic-syntax/](https://www.markdownguide.org/basic-syntax/)
 
+### How can I provide a post description for SEO purposes?
+
+The description field in the frontMatter of your post is used as a `<meta name="description">` header in the page, but if you want some more SEO friendly content in this header, simply add a seoDescription field, for example:
+
+```yml
+description: "Adding compute power to a Kubernetes Cluster can be challenging because of the lengthy delay between compute demand and instance availability. In this post we are going to learn about Karpenter, an open source project that helps to have the power you need just when you need it."
+seoDescription: "How to add compute power to Kubernetes Clusters quickly with Karpenter"
+```
+
 ### I have a series of posts. How do I link them together?
 
 Currently, there is no built-in support for a series of posts, however you can accomplish this using simple [Markdown](https://www.markdownguide.org/basic-syntax/). Example:
