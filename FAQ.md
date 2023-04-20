@@ -2,6 +2,7 @@
 
 * [Markdown Syntax](#markdown-syntax)
   * [Where do I find the general Markdown syntax guide?](#where-do-i-find-the-general-markdown-syntax-guide)
+  * [How can I provide a post description for SEO purposes?](#how-can-i-provide-a-post-description-for-seo-purposes)
   * [I have a series of posts. How do I link them together?](#i-have-a-series-of-posts-how-do-i-link-them-together)
   * [How do I link to other posts in my series or other posts on the BuildOn.AWS site?](#how-do-i-link-to-other-posts-in-my-series-or-other-posts-on-the-buildonaws-site)
   * [How do I create a Table of Contents for my post?](#how-do-i-create-a-table-of-contents-for-my-post)
@@ -25,6 +26,7 @@
   * [How do I add posts to a space feed?](#how-do-i-add-posts-to-a-space-feed)
   * [How do I add posts to the home page feed?](#how-do-i-add-posts-to-the-home-page-feed)
   * [How do I pin a post in the home page?](#how-do-i-pin-a-post-in-the-home-page)
+  * [How can I provide description for tags?](#how-can-I-provide-description-for-tags)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -538,6 +540,22 @@ images:
 ```
 
 Similarly, posts can be pinned in smart-tags or spaces by editing the /tags/<tag>/top.md or /spaces/<space>/top.md files.
+
+### How can I provide description for tags?
+
+Create a file `/tags/<tag name>/tag.md` and provide a content similar to:
+
+````markdown
+---
+description: "<SEO description for the tag>"
+
+---
+
+... Some markdown content ...
+
+````
+The description field (plain text only) will be used for SEO purposes in the tag page, and the (optional) markdown content in this file will be rendered under the tag name in the tag page. Although it supports markdown in its full extent, the content should be mostly text and links.
+
 
 ## Miscellaneous
 
