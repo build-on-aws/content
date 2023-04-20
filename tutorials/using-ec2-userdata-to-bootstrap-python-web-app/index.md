@@ -111,9 +111,9 @@ In this resource stack, you are going to create the following resources:
 
 ### Create the EC2 Instance
 
-In this segment we will be creating the EC2 instance and it's required resources. During the course of this tutorial, there will be code checkpoints where we show what the full file should look like at that point. We do recommend following step by step by typing out or copying and pasting the sample code blocks to ensure you understand what each code block does.
+In this segment we will create the EC2 instance and its required resources. During the course of this tutorial, there will be code checkpoints where we show what the full file should look like at that point. We do recommend following step-by-step by typing out or copying and pasting the sample code blocks to ensure you understand what each code block does.
 
-To start off, we will be creating the needed IAM role for your EC2 instance. This role will be used to give your instance permission to interact with [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and AWS CodeDeploy. This will be important later in the tutorial. To get started, make sure you import the following modules into your main stack.  (`lib/ec2-cdk-stack.ts`):
+To start off, we will create the needed IAM role for your EC2 instance. This role will be used to give your instance permission to interact with [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and AWS CodeDeploy. This will be important later in the tutorial. To get started, make sure you import the following modules into your main stack. (`lib/ec2-cdk-stack.ts`):
 
 ```typescript
 import { readFileSync } from 'fs';
@@ -205,7 +205,7 @@ We're now ready to create the EC2 instance using a pre-built [Amazon Machine Ima
     });
 ```
 
-Finally we are attaching User Data and tagging the instance with specific tags. The user data is used to bootstrap the EC2 instance and install specific application packages on the instance's first boot. And the tags are used for by Systems Manager to identify the instance later on for deployments.
+Finally we are attaching User Data and tagging the instance with specific tags. The user data is used to bootstrap the EC2 instance and install specific application packages on the instance's first boot. The tags are used by Systems Manager to identify the instance later on for deployments.
 
 Here is the user data bash script we will be attaching to the EC2 Instance. Make sure this code sits in a file named `configure_amz_linux_sample_app.sh` in the `assets` directory in the root of your CDK Application.
 
@@ -226,7 +226,7 @@ chmod +x ./install
 ./install auto
 ```
 
-Now, use CDK to attach the User data script and add tag the instance:
+Now, use CDK to attach the user data script and add tag the instance:
 
 ```typescript
     // User data - used for bootstrapping
