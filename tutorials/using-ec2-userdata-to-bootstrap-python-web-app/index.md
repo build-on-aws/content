@@ -19,7 +19,7 @@ additionalAuthors:
 date: 2023-04-21
 ---
 
-Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. EC2 instances have the ability to run [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) scripts when the instance start up. You can automate creating all the infrastructure using [AWS CDK](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). We will be using a combination of bash scripts and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. In today's tutorial, we are going to deploy our Python-based web application from a GitHub repository. We will cover how to:
+Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. But why do that hard work when you can automate it? Using [AWS CDK](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), we can set up [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) scripts and an infrastructure to preconfigure an EC2 instance - which in turn will turn a manual, time-intensive process into a snap. In this tutorial, we will be using a combination of bash scripts and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. Then, we are going to deploy our Python-based web application from a GitHub repository. We will cover how to:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a CI/CD Pipeline, and the required resources for it to operate.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
@@ -358,14 +358,14 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
 
 Now we are going to fork the sample application to your own GitHub account and configure a Github Token to be used by the CI/CD pipeline.
 
-It is best practice to use tokens instead of passwords to access your github account via GitHub API or command line. Read more about [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic).
+It is best practice to use tokens instead of passwords to access your GitHub account via GitHub API or command line. Read more about [creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic).
 
-Save the token in a safe place for use later. We will be using this token for two purposes:
+Save the token in a safe place for later use. We will be using this token for two purposes:
 
-1. Provide authentication to stage, commit, and push code from local repo to the GitHub repo. You may also use SSH keys for this
-2. Connect GitHub to CodePipeline, so whenever new code is committed to GitHub repo it automatically triggers pipeline execution
+1. To provide authentication to stage, commit, and push code from local repo to the GitHub repo. You may also use SSH keys for this.
+2. To connect GitHub to CodePipeline, so whenever new code is committed to GitHub repo it automatically triggers pipeline execution.
 
-The token should have the scopes **repo** (to read the repository) and **admin:repo_hook** (if you plan to use webhooks, true by default) as shown in below image.
+The token should have the scopes **repo** (to read the repository) and **admin:repo_hook** (if you plan to use webhooks, true by default) as shown in the image below.
 
 ![Github Token Scopes](./images/GitHub-repo-hooks.png)
 
@@ -387,9 +387,9 @@ Finally, let's now go ahead and fork the [Sample Application](https://github.com
 
 ### Creating the CI/CD Pipeline
 
-It's time to create a CI/CD Pipeline. This CI/CD pipeline will be responsible for testing, deploying, and configuring our Web app on our EC2 Instance. The pipeline itself will consist of three phases: **1/ Source** - This is where the pipeline extracts the commit from your GitHub repository we forked earlier; **2/ Build** - A stage where we test the Application code using the `unittest` Python [Unit Testing Framework](https://docs.python.org/3/library/unittest.html); and **3/ Deploy** - Deploying and Configuring the web application on the EC2 instance using AWS CodeDeploy. Let's get back to CDK.
+It's time to create a CI/CD Pipeline. This CI/CD pipeline will be responsible for testing, deploying, and configuring our Web app on our EC2 Instance. The pipeline itself will consist of three phases: **1/ Source** - This is where the pipeline extracts the commit from your GitHub repository we forked earlier; **2/ Build** - A stage where we test the Application code using the `unittest` Python [Unit Testing Framework](https://docs.python.org/3/library/unittest.html); and **3/ Deploy** - Deploying and configuring the web application on the EC2 instance using AWS CodeDeploy. Let's get back to CDK.
 
-To start off, let's import additional modules in our main CDK stack file `lib/ec2-cdk-stack.ts`:
+To start off, let's import additional modules into our main CDK stack file `lib/ec2-cdk-stack.ts`:
 
 ```typescript
 import { Pipeline, Artifact } from 'aws-cdk-lib/aws-codepipeline';
@@ -442,7 +442,7 @@ We will start with the `Source` stage, as here is where we connect the pipeline 
     sourceStage.addAction(githubSourceAction);
 ```
 
-Onto the `Build` stage. We are actually not building anything, rather we are testing the code. In this stage we are running unit tests against our code (which we will set up later), and if successful it continues along to the next next stage.
+On to the `Build` stage: we are not actually building anything, but rather testing the code. In this stage, we are running unit tests against our code (which we will set up later), and if successful, it continues along to the next next stage.
 
 ```typescript
     // Build Action
@@ -464,7 +464,7 @@ Onto the `Build` stage. We are actually not building anything, rather we are tes
     buildStage.addAction(pythonTestAction);
 ```
 
-And, finally, the `Deploy` stage. This stage uses CodeDeploy to deploy and configure the Web application on the EC2 instance. For this to work, we need to have the CodeDeploy agent installed and running on the instance (which we did before with the user data), and also we need to tell CodeDeploy which instances to target for deployment. We will be using tags for this. If you recall earlier on in this tutorial we tagged the EC2 instance with specific tags. Now we are using those tags to target the instances with CodeDeploy, and deploy the code.
+And finally the `Deploy` stage: this stage uses CodeDeploy to deploy and configure the web application on the EC2 instance. For this to work, we need to have the CodeDeploy agent installed and running on the instance (which we did before with the user data), and also we need to tell CodeDeploy which instances to target for deployment. We will be using tags for this. If you recall, earlier in this tutorial we tagged the EC2 instance with specific tags. Now we are using those tags to target the instances with CodeDeploy, and deploy the code.
 
 ```typescript
     // Deploy Actions
@@ -685,9 +685,9 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
 }
 ```
 
-### Additional files for Testing and Deploying
+### Additional Files for Testing and Deploying
 
-To properly test and deploy our application, we will need to add some additional content to the sample repository we have forked earlier. These files are used by the CodeBuild and CodeDeploy services. On top of that, we will write a simple Python unit test. Let's start with that.
+To properly test and deploy our application, we will need to add some additional content to the sample repository we forked earlier. These files are used by the CodeBuild and CodeDeploy services. On top of that, we will write a simple Python unit test. Let's start with that.
 
 To create our tests, in the root directory of the sample application create a `tests` directory, and add the following `test_sample.py` file to it:
 
@@ -711,13 +711,13 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-This test will just run the Flask application and see if it returns a `200` HTTP status code. Simple as that. On top of this file, just for posterity, let's create a `__init__.py` file in the same directory. This file can be empty so you can just create it with the following command:
+This test will run the Flask application and see if it returns a `200` HTTP status code. Simple as that. On top of this file, just for posterity, let's create a `__init__.py` file in the same directory. This file can be empty so you can just create it with the following command:
 
 ```bash
 touch tests/__init__.py
 ```
 
-We are now ready to create the `buildspec.yml` file. This file is used by CodeDeploy as an instruction set of what does it need to do to build your code. In our case we are instructing it how to run the tests. In the root directory of the sample application, add the `buildspec.yml` file with the following contents:
+We are now ready to create the `buildspec.yml` file. This file is used by CodeDeploy as an instruction set of what it needs to do to build your code. In our case, we are instructing it on how to run the tests. In the root directory of the sample application, add the `buildspec.yml` file with the following contents:
 
 ```yaml
 version: 0.2
@@ -745,7 +745,7 @@ phases:
       - echo Build completed on `date`
 ```
 
-Finally, let's add some much needed files for CodeDeploy. Similar to CodeBuild, CodeDeploy takes a file called `appspec.yml` as an instruction set on how to deploy your application to its final destination. On top of that file, we will be adding a few shell scripts to configure and launch the application on the server. This is needed as we need to create a specific `nginx` website, and do some service restarts. But let's first create the `appspec.yml` file in the root of the sample application directory, with the following contents:
+Finally, let's add some much needed files for CodeDeploy. Similarly to CodeBuild, CodeDeploy takes a file called `appspec.yml` as an instruction set on how to deploy your application to its final destination. On top of that file, we will be adding a few shell scripts to configure and launch the application on the server. This is needed as we need to create a specific `nginx` website, and do some service restarts. But let's first create the `appspec.yml` file in the root of the sample application directory, with the following contents:
 
 ```yaml
 version: 0.0
@@ -769,7 +769,7 @@ hooks:
       runas: root
 ```
 
-As you can see, here we are involving 4 different scripts in different phases of the deployment. This is required to properly setup the EC2 instance before, and post code deployment. These scripts should sit in a directory called `scripts` in the root of the sample application. These scripts should be named as follows, and should contain the following contents:
+As you can see, here we are involving 4 different scripts in different phases of the deployment. This is required to properly set up the EC2 instance before and after code deployment. These scripts should sit in a directory called `scripts` in the root of the sample application. These scripts should be named as follows, and should contain the following contents:
 
 `setup_dirs.sh`
 
@@ -848,7 +848,7 @@ Once all these files are created, the sample application directory should look l
     └── test_sample.py
 ```
 
-Now, make sure to add, commit, and push your changes to the sample code to your GitHub Repository before we continue to the next step and deploy the infrastructure.
+Now make sure to add, commit, and push your changes to the sample code to your GitHub Repository before we continue to the next step and deploy the infrastructure.
 
 ## Bootstrap CDK
 
@@ -904,13 +904,13 @@ arn:aws:cloudformation:us-west-2:123456789000:stack/PythonEc2BlogpostStack/59f1e
 ✨  Total time: 29.11s
 ```
 
-Your infrastructure is now deployed, the instance is spinning up, and you can use the outputs at the bottom that indicate the IP address of your web server. The application will not be immediately available, as it needs to be deployed. To check the status of the deployment head over to the AWS CodePipeline console and find the `python-webApp` pipeline, there you should see something similar to this:
+Your infrastructure is now deployed, the instance is spinning up, and you can use the outputs at the bottom that indicate the IP address of your web server. The application will not be immediately available, as it needs to be deployed. To check the status of the deployment, head over to the AWS CodePipeline console and find the `python-webApp` pipeline. There you should see something similar to this:
 
 ![CodePipeline deployment in stages shown on the AWS Console.](./images/deployment.png)
 
 After the deployment is successful (the `Deploy` stage should be green), copy and then paste the IP address of your EC2 instance in your browser, and your sample application should be up and running. Congratulations! You have set up a Python web application running on an EC2 instance, with a CI/CD pipeline to test and deploy and changes!
 
-## Cleaning up your AWS environment
+## Cleaning Up Your AWS Environment
 
 You have now completed this tutorial, but we still need to clean up the resources created during this tutorial. If your account is still in the Free Tier, there will not be any monthly charges. Once out of the Free Tier, it will cost ~$9.45 per month, or $0.0126 per hour.
 
@@ -929,4 +929,4 @@ When the output shows `PythonEc2BlogpostStack: destroyed`, your resources have b
 
 ## Conclusion
 
-Congratulations! You have finished the Build a Web Application on Amazon EC2 tutorial using CDK to provision all infrastructure, and configured your EC2 instance to install and configure OS packages to run the sample Python web app. If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+Congratulations! You have finished the Build a Web Application on Amazon EC2 tutorial using CDK to provision all infrastructure, and configured your EC2 instance to install and configure OS packages to run the sample Python web app. If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
