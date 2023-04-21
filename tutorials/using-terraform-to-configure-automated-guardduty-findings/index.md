@@ -332,7 +332,7 @@ resource "aws_sns_topic_policy" "gd_sns_topic_policy" {
 
 ```
 
-5.5. Next you will create the topic subscription. The topic subscription calls the ARN, sets the protocol to be used - in this case email - and the email address to which the notification will be sent. The email address in this case will be hard-coded, but you can configure it to prompt for the email address when you apply the Terraform. Also, the `endpoint_auto_confirm` being set to `false` means that the owner of the email will get an email with a link that they must click to subscribe to the notifications.
+5.4. Next you will create the topic subscription. The topic subscription calls the ARN, sets the protocol to be used - in this case email - and the email address to which the notification will be sent. The email address in this case will be hard-coded, but you can configure it to prompt for the email address when you apply the Terraform. Also, the `endpoint_auto_confirm` being set to `false` means that the owner of the email will get an email with a link that they must click to subscribe to the notifications.
 
 ```
 
@@ -348,7 +348,7 @@ resource "aws_sns_topic_policy" "gd_sns_topic_policy" {
 ```
 
 
-5.6. Next, in the `modules/sns/outputs.tf` file, we want to output the ARN of the topic so we can reference that in the EventBridge configuration we will perform later.
+5.5. Next, in the `modules/sns/outputs.tf` file, we want to output the ARN of the topic so we can reference that in the EventBridge configuration we will perform later.
 
 ```
 
@@ -359,7 +359,7 @@ output "sns_topic_arn" {
 
 ```
 
-5.7. Finally, return to the `root/main.tf` file and add the SNS topic. This is where you will set the email address to be subscribed.
+5.6. Finally, return to the `root/main.tf` file and add the SNS topic. This is where you will set the email address to be subscribed.
 
 > Note that you will need to enter your email address in the code below.
 
@@ -833,3 +833,4 @@ Finally navigate to CloudFormation and delete the CloudFormation stack you creat
 ![destroy](/images/0027.png)
 
 As you can see from this tutorial, much can be done to automate what happens when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda. For more ideas on how to automate Incident Response, see the articles "[How to Use Amazon GuardDuty and AWS Web Application Firewall to Automatically Block Suspicious Hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/)" and "[Automatically Block Suspicious Traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/)."
+
