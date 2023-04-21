@@ -23,9 +23,9 @@ Threat detection and incident response (TDIR) can be a time-consuming and manual
 | ⏱ Time to complete     | 60 minutes                                                      |
 | 💰 Cost to complete    | < $2.00 USD                                              |
 | 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)|
-| ⏰ Last Updated        | 2023-04-20                                                     |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | 💾 Code                | [Download the code](https://github.com/build-on-aws/automating-amazon-guardduty-with-iac) |
+| ⏰ Last Updated        | 2023-04-20                                                     |
 
 | ToC |
 |-----|
