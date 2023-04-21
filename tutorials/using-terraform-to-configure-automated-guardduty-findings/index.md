@@ -760,7 +760,7 @@ Depending on the time you have waited, if your configuration matches the screens
 
 In the next section we will clean up our environment and share additional resources.
 
-## Conclusion
+## Cleanup
 
 At this point in the tutorial you are likely getting emails every 15 minutes as GuardDuty reports its findings. If you prefer to keep the configurations to reference later but want to stop the emails, you can simply unsubscribe from the topic. See the example below on how to delete the subscription.
 
@@ -779,6 +779,8 @@ Next you will need to empty the S3 bucket that was created for the Cloud9 instan
 Finally navigate to CloudFormation and delete the CloudFormation stack you created. Be sure to delete the one with the name you gave earlier in this workshop. Two stacks were created and both will be deleted when you delete the parent stack.
 
 ![destroy](/images/0027.png)
+
+## Conclusion
 
 As you can see from this tutorial, much can be done to automate what happens when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda. For more ideas on how to automate Incident Response, see the articles "[How to Use Amazon GuardDuty and AWS Web Application Firewall to Automatically Block Suspicious Hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/)" and "[Automatically Block Suspicious Traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/)."
 
