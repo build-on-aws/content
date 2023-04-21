@@ -161,7 +161,7 @@ These modules provide access to all the components you need for you to deploy th
     });
 ```
 
-Next, you will need to define which container to use, and how it should be configured. This is done by creating a task definition to supply the container port, amount of CPU and memory it needs, and the container image to use. For this guide, we will be building an nginx container by using the publicly available nginx image and have CDK manage the build, upload, and deployment of the container for us. We will also be creating an IAM role to attach to the task definition and a ECR repository for future use when we deploy the sample application in next module.
+Next, you will need to define which container to use and how it should be configured. This is done by creating a task definition to supply the container port, the amount of CPU and memory it needs, and the container image to use. For this guide, we will be building an Nginx container by using the publicly available Nginx image and having the CDK manage the build, upload, and deployment of the container for us. We will also be creating an IAM role to attach to the task definition and an ECR repository for future use when we deploy the sample application in the next module.
 
 To create the task definition and IAM role, add the following code:  
 
