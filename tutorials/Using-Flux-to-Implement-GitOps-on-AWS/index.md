@@ -13,7 +13,7 @@ date: 2023-03-23
 
 While many enterprise companies have adopted Kubernetes in their production, they are often confused about how to achieve continuous deployment, high security, permission separation, and auditing - all while ensuring business agility with multiple Kubernetes clusters running at different stages simultaneously. Using GitOps can enable such continuous deployment based on Kubernetes clusters, while meeting enterprise-level requirements such as security and permission separation.
 
-In this blog, we will implement GitOps in an Amazon EKS environment using AWS CodeCommit, AWS CodePipeline, and Flux. We will demonstrate in detail how to set up a GitOps workflow that meet production requirements in this Amazon EKS environment, and we'll show how do microservice applications achieive continuous integration and continuous delivery on the GitOps-style CI/CD pipeline.
+In this blog, we will implement GitOps in an Amazon EKS environment using AWS CodeCommit, AWS CodePipeline, and Flux. We will demonstrate in detail how to set up a GitOps workflow that meet production requirements in this Amazon EKS environment, and we'll show how do microservice applications achieve continuous integration and continuous delivery on the GitOps-style CI/CD pipeline.
 
 But before we get into the best practices and the tutorial itself, let's synchronize on what GitOps is and why GitOps best practices matter in the first place.
 
