@@ -1,6 +1,6 @@
 ---
 title: "Bootstrapping an Amazon EC2 Instance Using User-data to Run a Python Web App"
-description: "Deploy a Python web application to an EC2 instance running nginx and uWSGI, using a CI/CD Pipeline."
+description: "Deploy a Python web application to an EC2 instance running Nginx and uWSGI, using a CI/CD Pipeline created with Amazon CDK."
 tags:
     - aws
     - tutorials
@@ -19,7 +19,7 @@ additionalAuthors:
 date: 2023-04-21
 ---
 
-Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. But why do that hard work when you can automate it? Using [AWS CDK](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), we can set up [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) scripts and an infrastructure to preconfigure an EC2 instance - which in turn will turn a manual, time-intensive process into a snap. In this tutorial, we will be using a combination of bash scripts and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. Then, we are going to deploy our Python-based web application from a GitHub repository. We will cover how to:
+Manually setting up and configuring the packages required to run a Python web app using [Nginx](https://www.nginx.com/) and [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) on a server can be time consuming — and it's tough to accomplish without any errors. But why do that hard work when you can automate it? Using [AWS CDK](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq), we can set up [user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) scripts and an infrastructure to preconfigure an EC2 instance - which in turn will turn a manual, time-intensive process into a snap. In this tutorial, we will be using a combination of bash scripts and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) to install and configure Nginx and uWSGI, set up a `systemd` service for uWSGI, and copy our application using CDK. Then, we are going to deploy our Python-based web application from a GitHub repository. We will cover how to:
 
 - Create an AWS CDK stack with an Amazon EC2 instance, a CI/CD Pipeline, and the required resources for it to operate.
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
@@ -32,7 +32,7 @@ Manually setting up and configuring the packages required to run a Python web ap
 | ✅ AWS experience      | Beginner                                                        |
 | ⏱ Time to complete    | 60 minutes                                                      |
 | 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/) eligible                                               |
-| 🧩 Prerequisites       | - [AWS account](https://aws.amazon.com/resources/create-account/)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
+| 🧩 Prerequisites       | - [AWS account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/sample-python-web-app)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-04-11                                                      |
@@ -45,7 +45,7 @@ Manually setting up and configuring the packages required to run a Python web ap
 To deploy this web application we will be using AWS CDK to create and deploy the underlying infrastructure. This infrastructure will consist of an EC2 instance, a VPC, CI/CD pipeline, and accompanying resources required for it to operate (Security Groups and IAM permissions).
 
 ### Setting up the CDK project
-First, let's check if our CDK version is up to date — this guide is based on v2 of the CDK. If you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). To check the version, run the following:
+First, let's check if our CDK version is up to date — this guide is based on v2 of the CDK. If you are still using v1, please read through the [migration docs](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq). To check the version, run the following:
 
 ```bash
 cdk --version
@@ -107,13 +107,13 @@ In this resource stack, you are going to create the following resources:
 - EC2 instance: The virtual machine you will use to host your web application.
 - Security group: The virtual firewall to allow inbound requests to your web application.
 - Secrets manager secret: This is a place where you will store your Github Token that we will use to authenticate the pipeline to it.
-- CI/CD Pipeline: This pipeline will consist of [AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), [AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+- CI/CD Pipeline: This pipeline will consist of [AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq), [AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [AWS CodeDeploy](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Create the EC2 Instance
 
 In this segment we will create the EC2 instance and its required resources. During the course of this tutorial, there will be code checkpoints where we show what the full file should look like at that point. We do recommend following step-by-step by typing out or copying and pasting the sample code blocks to ensure you understand what each code block does.
 
-To start off, we will create the needed IAM role for your EC2 instance. This role will be used to give your instance permission to interact with [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and AWS CodeDeploy. This will be important later in the tutorial. To get started, make sure you import the following modules into your main stack. (`lib/ec2-cdk-stack.ts`):
+To start off, we will create the needed IAM role for your EC2 instance. This role will be used to give your instance permission to interact with [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and AWS CodeDeploy. This will be important later in the tutorial. To get started, make sure you import the following modules into your main stack. (`lib/ec2-cdk-stack.ts`):
 
 ```typescript
 import { readFileSync } from 'fs';
@@ -166,7 +166,7 @@ Next step is to create a VPC where our EC2 instance will be residing. We are cre
     });
 ```
 
-We also need to be able to access our instance via `http` (port 80). To allow traffic to this port, we need to set up firewall rules by creating a [security group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). We will set up port 80 to allow HTTP traffic to come to the instance from any location on the internet.
+We also need to be able to access our instance via `http` (port 80). To allow traffic to this port, we need to set up firewall rules by creating a [security group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq). We will set up port 80 to allow HTTP traffic to come to the instance from any location on the internet.
 
 ```typescript
     // Security Groups
@@ -183,7 +183,7 @@ We also need to be able to access our instance via `http` (port 80). To allow tr
     );
 ```
 
-We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (AMI - pronounced "Ay-Em-Eye") — for this tutorial, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) AMI for X86_64 CPU architecture. We will also pass the IAM role and VPC created earlier, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Just use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (AMI - pronounced "Ay-Em-Eye") — for this tutorial, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) AMI for X86_64 CPU architecture. We will also pass the IAM role and VPC created earlier, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Just use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ```typescript
     // the AMI to be used for the EC2 Instance
@@ -369,7 +369,7 @@ The token should have the scopes **repo** (to read the repository) and **admin:r
 
 ![Github Token Scopes](./images/GitHub-repo-hooks.png)
 
-Now, for AWS CodePipeline to read from this GitHub repo, we need to configure the GitHub personal access token we just created. This token should be stored as a plaintext secret (not a JSON secret) in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) under the exact name `github-token`.
+Now, for AWS CodePipeline to read from this GitHub repo, we need to configure the GitHub personal access token we just created. This token should be stored as a plaintext secret (not a JSON secret) in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) under the exact name `github-token`.
 
 Replace `GITHUB_ACCESS_TOKEN` with your plaintext secret and `REGION` in following command and run it:
 
@@ -381,7 +381,7 @@ aws secretsmanager create-secret \
   --region REGION
 ```
 
-For more help, see [Creating and Retrieving a Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+For more help, see [Creating and Retrieving a Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 Finally, let's now go ahead and fork the [Sample Application](https://github.com/build-on-aws/sample-python-web-app) repo into our own GitHub Account. This is how we will be interacting with this application from now on. More information on forking repositories can be found [here](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 

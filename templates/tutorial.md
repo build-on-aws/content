@@ -36,7 +36,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Beginner                               |
 | ⏱ Time to complete  | 15 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier      |
-| 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | YYYY-MM-DD <as mentioned above>                             |

@@ -28,7 +28,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 | ✅ AWS experience      | 100 - Beginner                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- AWS [CloudFormation basic understanding](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-howdoesitwork.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
+| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- AWS [CloudFormation basic understanding](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-howdoesitwork.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/ci-cd-iac-aws-cloudformation)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-03-22                                                      |
@@ -40,7 +40,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 
 ### **AWS account**
 
-Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### **CodeCatalyst account**
 
@@ -69,6 +69,7 @@ Before we create the CI/CD pipeline and workflows, let's set up CodeCatalyst.
 ![Setting up a CodeCatalyst Space, Project, Repo,  Environment inside AWS account](images/cc_create_components.png)
 
 #### **Space**
+
 Let's start with our CodeCatalyst Space. A space represents you, your company, your department, or your group. Your development teams can manage projects inside it.
 
 Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), add a name (we will use `CloudFormation CodeCatalyst`), and add the AWS Account ID to link for billing. Follow the prompts to link your AWS Account with CodeCatalyst.
@@ -84,7 +85,7 @@ Once the space is created, go to the `AWS Accounts` tab, click on your account I
 This will open a new browser tab to `Add IAM role to Amazon CodeCatalyst space`. In the dialog, select the option `Add an existing role you have created in IAM` and select the `main_branch_IAM_role` from the dropdown. Click `Add role`. Follow the same steps for the `pr_branch_IAM_role`.
 
 ![Console Add IAM role to Amazon CodeCatalyst space dialog](images/console_add_iam_role_to_codecatalyst.png)
- 
+
 #### **Project**
 
 Next, we create a new Project inside the space. We can have multiple projects inside a space.
@@ -92,7 +93,7 @@ Next, we create a new Project inside the space. We can have multiple projects in
 To create a project, click on the `Create Project` button, select `Start from scratch`, and give your project a name - we will use `ThreeTierApp`.
 
 ![CodeCatalyst Create Project dialog](images/cc_create_project.png)
- 
+
 #### **Repository**
 
 Now we'll create a new repository for our code - in our case, the CloudFormation template and other resources. Click `Code` in the left-side navigation menu, then select `Source repositories`, `Add repository`, and choose `Create repository`. Set a repository name ( we will use `3-tier-app` in this tutorial), add a description and `none` for the .gitignore file:
@@ -116,6 +117,7 @@ From the left navigation panel, select `CI/CD`, `Environments`, and click on `Cr
 ## Setting up a Dev Environment
 
 To work on our infrastructure as code with CloudFormation, we need a **Dev Environment**. You have the option to use the following support IDEs (Integrated Development Environments):
+
 - AWS Cloud9
 - Visual Studio Code
 - JetBrains IDEs
@@ -661,6 +663,7 @@ You can confirm the new workflow has run successfully.
 </br>
 
 If you expand on _**Lint Code Base**_, you will find following text that identifies no errors:
+
 ```bash
 [INFO]   --------------------------------------------
 [INFO]   Gathering user validation information...
@@ -676,7 +679,7 @@ If you expand on _**Lint Code Base**_, you will find following text that identif
 [NOTICE]   All file(s) linted successfully with no errors detected
 ```
 
-Now the workflow will proceed to the next action: `CreateChangeSet`. 
+Now the workflow will proceed to the next action: `CreateChangeSet`.
 
 ![CodeCatalyst PR Workflow run for CreateChangeSet action is a success](images/cc_createchangeset_success.png)
 
@@ -686,7 +689,7 @@ Once the action is successful, you can go to CloudFormation Console, Changeset t
 
 A reviewer will confirm that all the actions have run successfully, the change set is clean. In our case, I am the reviewer, so in my browser, I will go to the `Code` -> `Pull Requests`, and then click on `Merge`.
 
->If there are conflicts, or if the merge can't be completed, the merge button is inactive, and a `Not mergeable` label is displayed. In that case, you must obtain approval from any required approvers, resolve conflicts locally if necessary, and push those changes to the `test-pr-workflow` before you can merge. 
+>If there are conflicts, or if the merge can't be completed, the merge button is inactive, and a `Not mergeable` label is displayed. In that case, you must obtain approval from any required approvers, resolve conflicts locally if necessary, and push those changes to the `test-pr-workflow` before you can merge.
 
 ![CodeCatalyst Mergeable request is all green](images/cc_mergeable_request.png)
 

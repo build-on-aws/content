@@ -22,7 +22,7 @@ Threat detection and incident response (TDIR) can be a time-consuming and manual
 | ✅ AWS experience      | 200 - Intermediate                                             |
 | ⏱ Time to complete     | 60 minutes                                                      |
 | 💰 Cost to complete    | < $2.00 USD                                              |
-| 🧩 Prerequisites       | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)|
+| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=grddtytf&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | 💾 Code                | [Download the code](https://github.com/build-on-aws/automating-amazon-guardduty-with-iac) |
 | ⏰ Last Updated        | 2023-04-20                                                     |
@@ -391,7 +391,7 @@ resource "aws_cloudwatch_event_rule" "GuardDuty-Event-EC2-MaliciousIPCaller" {
 
 > The event pattern defined above looks at events from the source service, in this case GuardDuty, and looks for a finding with the detail type of "UnauthorizedAccess:EC2/MaliciousIPCaller.Custom."
 
-6.3. Next define the Event Target Resource. When creating this resource, you can add an extra bit of readability into the email notification by defining an [Input Transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-input-transformer-tutorial.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). This customizes what EventBridge passes to the event target. Below we are getting the GuardDuty ID, the Region, and the EC2 Instance ID - and we are creating an input template that elaborates a bit on the message. You can see below that we have created an input template that makes use of the detail information in the GuardDuty finding in the email message that is sent.
+6.3. Next define the Event Target Resource. When creating this resource, you can add an extra bit of readability into the email notification by defining an [Input Transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-input-transformer-tutorial.html?sc_channel=el&sc_campaign=devopswave&sc_content=grddtytf&sc_geo=mult&sc_country=mult&sc_outcome=acq). This customizes what EventBridge passes to the event target. Below we are getting the GuardDuty ID, the Region, and the EC2 Instance ID - and we are creating an input template that elaborates a bit on the message. You can see below that we have created an input template that makes use of the detail information in the GuardDuty finding in the email message that is sent.
 
 ```terraform
 # EVENT TARGET RESOURCE FOR SNS NOTIFICATIONS
@@ -467,13 +467,13 @@ In this section you created an EventBridge rule that uses the SNS topic you crea
 
 In this section we will use [Terraform](https://www.terraform.io/) to create a Lambda function that performs a remediation function for our environment. What we want to do with this tutorial is have our compromised host get moved to a new security group. Similar to the way that EventBridge used SNS to generate an email, EventBridge will involve a Lambda function.
 
-One thing to keep in mind is that there are many possible approaches here. For more information, please see the documentation on [creating custom responses to GuardDuty findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [automatically blocking suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/).
+One thing to keep in mind is that there are many possible approaches here. For more information, please see the documentation on [creating custom responses to GuardDuty findings with Amazon CloudWatch Events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html?sc_channel=el&sc_campaign=devopswave&sc_content=grddtytf&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [automatically blocking suspicious traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/).
 
 Before we get started, let's see what needs to happen for this to work.
 
 Currently, our GuardDuty Findings are matched in an EventBridge rule to a target - currently an SNS rule that sends an email. To enhance this functionality, we will have EventBridge use AWS Lambda as a target.
 
-Because we are going to have AWS Lambda access other resources on our behalf, we need to [create an IAM role to delegate permissions to the service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). This is called a **service role**, and AWS Lambda will *assume* this role when it changes the security group of our EC2 instance.
+Because we are going to have AWS Lambda access other resources on our behalf, we need to [create an IAM role to delegate permissions to the service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html?sc_channel=el&sc_campaign=devopswave&sc_content=grddtytf&sc_geo=mult&sc_country=mult&sc_outcome=acq). This is called a **service role**, and AWS Lambda will *assume* this role when it changes the security group of our EC2 instance.
 
 The following image shows how the first three code blocks fit together to allow the AWS Lambda service to assume a role that can make changes to the security groups assigned to the EC2 instances.
 

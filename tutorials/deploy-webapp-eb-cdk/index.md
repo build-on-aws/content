@@ -853,5 +853,3 @@ const pipeline = new CodePipeline(this, 'Pipeline', {
          input: CodePipelineSource.gitHub('OWNER/REPO', 'main', {
                     authentication: cdk.SecretValue.secretsManager('`github-access-token-secret`'), }),
 ```
-
-If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>

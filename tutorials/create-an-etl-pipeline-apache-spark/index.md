@@ -16,7 +16,7 @@ date: 2023-03-30
 
 Extract, Transform, and Load (or ETL) - sometimes called Ingest, Transform, and Export - is vital for building a robust data engineering pipeline for any organization. Essentially, if the ETL pipeline is designed and built using the right tools and services, it brings high value to any organization both for batch and real-time processing. But designing and building such a pipeline is a time-consuming task, and it requires different skillsets considering the number of tools and frameworks in this big data space. Luckily, it's pretty easy if you're using EMR and Spark.
 
-Batch ETL is a common use case across many organizations. This tutorial will provide a starting point, which can help you to build more complex data pipelines in AWS using [Amazon EMR (Amazon Elastic MapReduce)](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Apache Spark](https://spark.apache.org/). Here's how to do it.
+Batch ETL is a common use case across many organizations. This tutorial will provide a starting point, which can help you to build more complex data pipelines in AWS using [Amazon EMR (Amazon Elastic MapReduce)](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Apache Spark](https://spark.apache.org/). Here's how to do it.
 
 We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) to interact with the Spark cluster. PySpark allows you to write Spark applications using Python APIs.
 
@@ -24,11 +24,11 @@ We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) 
 
 | Attributes          |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Beginner                               |
+| ✅ AWS Level        | 100 - Beginner                               |
 | ⏱ Time to complete  | 30 mins - 45 mins                      |
 | 💰 Cost to complete | USD 0.30                               |
 | 🧩 Prerequisites       |
-- An[AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) (if you don't yet have one, create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br>
+- An[AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (if you don't yet have one, create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br>
 - An IAM user that has the access to create AWS resources. <br>
 - Basic understanding of Python |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
@@ -67,7 +67,7 @@ To implement our data processing pipeline, we need to create an EMR cluster that
 
 Before we create an EMR cluster we need to create a `Key Pair`, which we would need to access the EMR cluster's master node later on. So let's do that really quickly.
 
-1. Log in to your AWS account and navigate to the EC2 console and click on the [**Key Pairs**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) option on the left menu bar. And then, click `Create Key Pair`.
+1. Log in to your AWS account and navigate to the EC2 console and click on the [**Key Pairs**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) option on the left menu bar. And then, click `Create Key Pair`.
 
 ![Key Pair 1](images/key_pair.png)
 
@@ -171,7 +171,7 @@ To make that integration, we can follow a two-step approach:
 
 ![glue crawler](images/glue_crawler_2.png)
 
-4. Create an **IAM role** (`AWSGlueServiceRole-default`) and attached the same. You can create a role and attach the following policies for more details you can refer to [this](https://docs.aws.amazon.com/glue/latest/dg/crawler-prereqs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and follow the steps:
+4. Create an **IAM role** (`AWSGlueServiceRole-default`) and attached the same. You can create a role and attach the following policies for more details you can refer to [this](https://docs.aws.amazon.com/glue/latest/dg/crawler-prereqs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and follow the steps:
 
 - The AWSGlueServiceRole AWS managed policy, which grants the required permissions on the Data Catalog
 
