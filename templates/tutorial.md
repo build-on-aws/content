@@ -1,8 +1,9 @@
 ---
-title: <Highlight the core problem being solved>
+title: <Highlight the core problem being solved, follow PR/marketing guidelines>
 description: <Two or three sentences describing the problem, the solution, and tools or services used along the way>
 tags:
-    - <list key terms readers will be searching for using kebab-case, e.g. ci-cd, NOT "ci cd", or "CI-CD">
+    - tutorials
+    - <tutorials tag is mandatory for tutorials. list any other key terms readers will be searching for using kebab-case, e.g. ci-cd, NOT "ci cd", or "CI-CD">
     - essentials
     - aws
 authorGithubAlias: <github alias>
@@ -33,9 +34,9 @@ Before starting this tutorial, you will need the following:
 <!-- Update with the appropriate values -->
 | Info                | Level                                  |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Beginner                               |
+| ✅ AWS Level        | 100 - Beginner                          |
 | ⏱ Time to complete  | 15 minutes                             |
-| 💰 Cost to complete | Free when using the AWS Free Tier      |
+| 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01    |
 | 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
@@ -56,11 +57,11 @@ From here onwards, split the tutorial into logical sections with a descriptive t
 ![This is the alt text for the image](images/where-this-image-is-stored.png)
 <!-- Alt text should provide a description of the pertinent details of the image, not just what it is, e.g. "Image of AWS Console" -->
 
-<!-- Sample Image link with a title below it, using required images/xx.xxx folder structure -->
-![This is the alt text for the image](images/where-this-image-is-stored.png "My image title below")
+<!-- Sample Image link with a caption below it, using required images/xx.xxx folder structure -->
+![This is the alt text for the image with caption](images/where-this-image-is-stored.png "My image caption below")
 
 <!-- Code Blocks -->
-Remember to include the language type used when creating code blocks. ` ```javascript `.
+Avoid starting and ending the code blocks with blank lines/spaces. Remember to include the language type used when creating code blocks. ` ```javascript `.
 For example,
 
 ```javascript
@@ -88,4 +89,4 @@ Provide a conclusion paragraph that reiterates what has been accomplished in thi
 Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
 
 Also end with this line to ask for feedback:
-If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
