@@ -17,7 +17,7 @@ authorName: Cobus Bernard
 date: 2023-01-31
 ---
 
-Terraform is awesome to manage all your infrastructure, but when you have more than one developer trying to make changes to the infrastructure, things can get messy very quickly if there isn't a mechanism ([CI/CD pipeline](https://www.buildon.aws/concepts/devops-essentials/#continuous-integration-and-continuous-delivery)) in place to manage it. Without one, making changes to any infrastructure requires coordination and communication, and the challenge quickly scales the more people that are involved with making these changes. Imagine having to run around shouting *"Hey Bob! Hey Jane! You done yet with that DB change? I need to add a new container build job!"*. As Jeff Bezos said:
+Terraform is awesome to manage all your infrastructure, but when you have more than one developer trying to make changes to the infrastructure, things can get messy very quickly if there isn't a mechanism ([CI/CD pipeline](/concepts/devops-essentials/#continuous-integration-and-continuous-delivery)) in place to manage it. Without one, making changes to any infrastructure requires coordination and communication, and the challenge quickly scales the more people that are involved with making these changes. Imagine having to run around shouting *"Hey Bob! Hey Jane! You done yet with that DB change? I need to add a new container build job!"*. As Jeff Bezos said:
 
 > ***"Good intentions never work, you need good mechanisms to make anything happen."***
 
@@ -152,7 +152,7 @@ wget https://raw.githubusercontent.com/build-on-aws/bootstrapping-terraform-auto
 The files created will have the following content:
 
 * variables.tf
-    ```bash
+    ```terraform
     variable "aws_region" {
       default = "us-east-1"
     }
@@ -170,7 +170,7 @@ The files created will have the following content:
     }
     ```
 * main_branch_iam_role.tf
-    ```bash
+    ```terraform
     # Policy allowing the main branch in our repo to assume the role.
     data "aws_iam_policy_document" "main_branch_assume_role_policy" {
       statement {
@@ -199,7 +199,7 @@ The files created will have the following content:
 
     ```
 * pr_branch_iam_role.tf
-    ```bash
+    ```terraform
     # Policy allowing the PR branches in our repo to assume the role. 
     data "aws_iam_policy_document" "pr_branch_assume_role_policy" {
       statement {
@@ -313,7 +313,7 @@ The files created will have the following content:
     }
     ```
 * providers.tf
-    ```bash
+    ```terraform
     # Configuring the AWS provider
     provider "aws" {
       region = var.aws_region
@@ -323,7 +323,7 @@ The files created will have the following content:
     data "aws_caller_identity" "current" {}
     ```
 * state_file_resources.tf
-    ```bash
+    ```terraform
     # Bucket used to store our state file
     resource "aws_s3_bucket" "state_file" {
       bucket = var.state_file_bucket_name
@@ -476,7 +476,7 @@ Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
 
 Next, we will move the state file we just created with all the details of our infrastructure to our S3 bucket. To do this, we need to configure a Terraform [backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) using S3. Create `_bootstrap/terraform.tf` with the following, and update the `bucket` and `region` values with your values:
 
-```bash
+```terraform
 terraform {
   backend "s3" {
     bucket         = "tf-state-files"
@@ -570,7 +570,7 @@ This will take you to a new page with a green `Successfully added IAM role Main-
 
 The base infrastructure is now in place to allow us to start using our workflow for any future changes to our infrastructure. We need to create a similar Terraform backend configuration for all the resource we will create using our workflow - as mentioned, we are intentionally keeping out bootstrapping infrastructure separate from the day-to-day infrastructure. In the root of the repo, create `terraform.tf`, with the following content - take note that the `key` for the bucket is different from what we used for the bootstrapping infrastructure, and as before, replace the `bucket`, `region`, `dynamodb_table`, and `kms_key_id` with your values:
 
-```bash
+```terraform
 terraform {
   backend "s3" {
     bucket         = "tf-state-files"
@@ -592,7 +592,7 @@ terraform {
 
 The `region` set in the above block indicates in which region the S3 bucket was created, not where we will create our resources. We also need to configure the `AWS` provider, and set the `region` to use. Will use a variable for this, you could also hard-code it, but it is more manageable to keep all the variables in a single `variables.tf` file for this purpose. Create `providers.tf` with the following content:
 
-```bash
+```terraform
 # Configuring the AWS provider
 provider "aws" {
   region = var.aws_region
@@ -601,7 +601,7 @@ provider "aws" {
 
 And the `variables.tf` file with (you can change the region here if you want to create resources in a different one):
 
-```bash
+```terraform
 variable "aws_region" {
   default = "us-east-1"
 }
@@ -840,7 +840,7 @@ git checkout -b test-pr-workflow
 
 Next, create a new file in the root of the project `vpc.tf` - we will create a VPC that has three public subnets, and the required routing tables. Add the following content to the file:
 
-```bash
+```terraform
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
@@ -894,13 +894,13 @@ By clicking on the `Terraform Plan` step, you will be able to see the proposed i
 
 ## Clean up
 
-We have now reached the end of this tutorial, you can either keep the current setup and expand on it, or delete all the resources created if you are not. If you are planning to manage multiple AWS accounts, we recommend reading the [Automating multiple environments with Terraform](https://buildon.aws/tutorials/manage-multiple-environemnts-with-terraform) tutorial - it follows directly from this one, and you can leave the resources created in place.
+We have now reached the end of this tutorial, you can either keep the current setup and expand on it, or delete all the resources created if you are not. If you are planning to manage multiple AWS accounts, we recommend reading the [Automating multiple environments with Terraform](/tutorials/automating-multiple-environments-with-terraform) tutorial - it follows directly from this one, and you can leave the resources created in place.
 
 To remove all the resources we created in this project, follow the following steps in your dev environment:
 
 1. Make sure you are on the `main` branch by running `git checkout main` and `git pull` to ensure you have the latest changes, then run `terraform destroy`, and type `yes` to confirm - this will remove the VPC we created
 1. To delete all the bootstrapping resourced, first change into the directory by running `cd _bootstrap`. Before we can delete everything, we need to update our S3 state file bucket. We need to change the lifecycle policy to allow the deletion, and add `force_destroy = true` to also delete all the objects in the bucket. Edit `_bootstrap/state_file_resources.tf`, and replace the first `aws_s3_bucket` resource with:
-    ```bash
+    ```terraform
     # Bucket used to store our state file
     resource "aws_s3_bucket" "state_file" {
       bucket = var.state_file_bucket_name
