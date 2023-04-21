@@ -18,7 +18,7 @@ date: 2023-04-24
 
 With the rise of application modernization, a significant topic of discussion is breaking down monolithic applications into microservices. Essentially, the process begins with breaking the monolith into its individual working parts, making it easier to create a virtualized application environment using tools like containers. During the process, another question arises: whether to use a single (mono) repository for all microservices or a repository for each microservice. 
 
-U a repository for each microservice has several benefits:
+Using a repository for each microservice has several benefits:
 
 * Facilitating faster software release
 * Enabling the creation of smaller teams to develop and deliver a single service
