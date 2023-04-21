@@ -894,7 +894,7 @@ By clicking on the `Terraform Plan` step, you will be able to see the proposed i
 
 ## Clean up
 
-We have now reached the end of this tutorial, you can either keep the current setup and expand on it, or delete all the resources created if you are not. If you are planning to manage multiple AWS accounts, we recommend reading the [Automating multiple environments with Terraform](https://buildon.aws/tutorials/manage-multiple-environemnts-with-terraform) tutorial - it follows directly from this one, and you can leave the resources created in place.
+We have now reached the end of this tutorial, you can either keep the current setup and expand on it, or delete all the resources created if you are not. If you are planning to manage multiple AWS accounts, we recommend reading the [Automating multiple environments with Terraform](https://www.buildon.aws/tutorials/automating-multiple-environments-with-terraform) tutorial - it follows directly from this one, and you can leave the resources created in place.
 
 To remove all the resources we created in this project, follow the following steps in your dev environment:
 
