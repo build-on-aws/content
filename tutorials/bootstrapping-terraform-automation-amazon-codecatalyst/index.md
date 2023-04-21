@@ -5,7 +5,7 @@ tags:
     - terraform
     - codecatalyst
     - ci-cd
-    - tutorial
+    - tutorials
     - infrastructure-as-code
     - aws
     - github-actions
@@ -21,7 +21,7 @@ Terraform is awesome to manage all your infrastructure, but when you have more t
 
 > ***"Good intentions never work, you need good mechanisms to make anything happen."***
 
-This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCatalyst](https://codecatalyst.aws) and [Terraform](https://www.terraform.io/). The pipeline will utilize pull requests to submit, test, and review any changes requested to the infrastructure. We will cover the following topics in this tutorial:
+This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCatalyst](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdctfbtstrpaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Terraform](https://www.terraform.io/). The pipeline will utilize pull requests to submit, test, and review any changes requested to the infrastructure. We will cover the following topics in this tutorial:
 
 - Using S3 as a backend for Terraform [state files](https://developer.hashicorp.com/terraform/language/state), with [DynamoDB for locking](https://developer.hashicorp.com/terraform/language/settings/backends/s3#dynamodb-table-permissions), and encrypting the state file at rest with KMS
 - CodeCatalyst to run our CI/CD pipelines to create and update all your infrastructure
@@ -33,7 +33,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCat
 | ✅ AWS experience      | 100 - Beginner                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [CodeCatalyst Account](https://codecatalyst.aws)<br>- [Terraform](https://terraform.io/) 1.3.7+<br>- (Optional) [GitHub](https://github.com) account|
+| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdctfbtstrpaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdctfbtstrpaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [Terraform](https://terraform.io/) 1.3.7+<br>- (Optional) [GitHub](https://github.com) account|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/bootstrapping-terraform-automation)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-02-22                                                      |
@@ -50,7 +50,7 @@ Automating your infrastructure is a great idea, but you need infrastructure to a
 1. Using Terraform without storing the state file to bootstrap, then add in the state file configurations to store it
 
 We will be using the 3rd option, have a look at the [Stack Overflow](https://stackoverflow.com/questions/47913041/initial-setup-of-terraform-backend-using-terraform/) discussion around approaches for more details on the trade-offs.
-<!-- If you prefer to use the AWS CLI, a [script](https://github.com/build-on-aws/bootstrapping-terraform-automation-for-github-actions/_bootstrap/aws_cli_tf_bootstrap.sh) is also included in the code repo for this tutorial that you can run via [AWS CloudShell](https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html) in your AWS account see the [bootstrapping with AWS CLI and CloudShell](#bootstrapping-with-aws-cli-and-cloudshell) section further down. -->
+<!-- If you prefer to use the AWS CLI, a [script](https://github.com/build-on-aws/bootstrapping-terraform-automation-for-github-actions/_bootstrap/aws_cli_tf_bootstrap.sh) is also included in the code repo for this tutorial that you can run via [AWS CloudShell](https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdctfbtstrpaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) in your AWS account see the [bootstrapping with AWS CLI and CloudShell](#bootstrapping-with-aws-cli-and-cloudshell) section further down. -->
 
 ## Getting started
 
@@ -60,7 +60,7 @@ Let's get started setting this up! Make sure you are logged into your AWS, and C
 
 ### Setting up a CodeCatalyst Space, Project, Repo, and Environment
 
-Now, let's set up our CodeCatalyst Space and Project. Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws), add a name (we will use `Terraform CodeCatalyst`), add the AWS Account ID to link to for billing (`111122223333` is a placeholder), you can find your account ID in the top right of your AWS Console, and follow the prompts to link your AWS Account with CodeCatalyst.
+Now, let's set up our CodeCatalyst Space and Project. Create a new space by clicking on `Create Space` on the [CodeCatalyst Dashboard](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdctfbtstrpaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), add a name (we will use `Terraform CodeCatalyst`), add the AWS Account ID to link to for billing (`111122223333` is a placeholder), you can find your account ID in the top right of your AWS Console, and follow the prompts to link your AWS Account with CodeCatalyst.
 
 ![Dialog showing a CodeCatalyst Space after successfully adding an AWS account to it](./images/successful_space_created.png)
 
@@ -953,7 +953,7 @@ To remove all the resources we created in this project, follow the following ste
 
 ## Conclusion
 
-Congratulations! You've now bootstrapped Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found an issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+Congratulations! You've now bootstrapped Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found an issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
 
 <!-- ## Bootstrapping with AWS CLI and CloudShell -->
 
