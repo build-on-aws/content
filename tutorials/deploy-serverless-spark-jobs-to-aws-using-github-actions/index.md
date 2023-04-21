@@ -9,6 +9,7 @@ tags:
     - aws
     - analytics
     - devops
+    - tutorials
 authorGithubAlias: dacort
 authorName: Damon Cortesi
 date: 2023-04-18
@@ -18,8 +19,8 @@ date: 2023-04-18
 
 ## What You Will Learn
 
-- How to use [Amazon EMR Serverless](https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html)
-- How to setup [OpenID Connect](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html)
+- How to use [Amazon EMR Serverless](https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- How to setup [OpenID Connect](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - How to configure unit tests and integration tests for [PySpark](https://spark.apache.org/docs/latest/api/python/)
 - How to automatically deploy your latest code
 
@@ -62,7 +63,7 @@ We also need to create some infrastructure for our jobs to run. For the purposes
 
 ### Creating Demo Resources
 
-> **Note**: This demo can only be run in `us-east-1` region - if you want to use another region, you will need to [create your EMR Serverless application with a VPC](https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/vpc-access.html).
+> **Note**: This demo can only be run in `us-east-1` region - if you want to use another region, you will need to [create your EMR Serverless application with a VPC](https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/vpc-access.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 You can create these resources by downloading the [CloudFormation template](https://github.com/build-on-aws/ci-cd-serverless-spark/raw/main/cloudformation-templates/ci-cd-serverless-spark.cfn.yaml) and either using the AWS CLI, or by navigating to the [CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create) and uploading the template there.
 
@@ -720,4 +721,4 @@ The EMR team has been hard at work improving the local Spark development experie
 - [Amazon EMR CLI](https://github.com/awslabs/amazon-emr-cli)
 - [EMR Serverless sample code](https://github.com/aws-samples/emr-serverless-samples)
 
-If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>

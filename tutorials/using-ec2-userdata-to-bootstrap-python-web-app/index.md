@@ -3,7 +3,7 @@ title: "Bootstrapping an Amazon EC2 Instance Using User-data to Run a Python Web
 description: "Deploy a Python web application to an EC2 instance running nginx and uWSGI, using a CI/CD Pipeline."
 tags:
     - aws
-    - tutorial
+    - tutorials
     - ec2
     - cdk
     - codepipeline
@@ -929,4 +929,4 @@ When the output shows `PythonEc2BlogpostStack: destroyed`, your resources have b
 
 ## Conclusion
 
-Congratulations! You have finished the Build a Web Application on Amazon EC2 tutorial using CDK to provision all infrastructure, and configured your EC2 instance to install and configure OS packages to run the sample Python web app. If you enjoyed this tutorial, found any issues, or have feedback us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+Congratulations! You have finished the Build a Web Application on Amazon EC2 tutorial using CDK to provision all infrastructure, and configured your EC2 instance to install and configure OS packages to run the sample Python web app. If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>

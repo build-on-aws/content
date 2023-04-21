@@ -11,6 +11,7 @@ tags:
     - codebuild
     - cdk
     - devops
+    - tutorials
 spaces:
     - devops
 authorGithubAlias: ricsue-aws
@@ -47,7 +48,7 @@ In this tutorial you will learn how you can apply DevOps techniques to help you 
 
 ## Scaling Apache Airflow
 
-Like many open source technologies, there are many ways in which you can configure and deploy Apache Airflow. For some, self managing Apache Airflow is the right path to take. For others, the availability of managed services, such as [Managed Workflows for Apache Airflow](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html) (MWAA), has helped reduce the complexity and operation burden for running Apache Airflow, and opened this up for more Builders to start using it.
+Like many open source technologies, there are many ways in which you can configure and deploy Apache Airflow. For some, self managing Apache Airflow is the right path to take. For others, the availability of managed services, such as [Managed Workflows for Apache Airflow](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (MWAA), has helped reduce the complexity and operation burden for running Apache Airflow, and opened this up for more Builders to start using it.
 
 It is worth spending some time to understand some of the challenges scaling Apache Airflow. So what are some of the challenges?
 
@@ -277,7 +278,7 @@ The next section create the various IAM policies needed for MWAA to run. This us
 
 The next section is also security related, and configures security groups for the various MWAA services to communicate with each other.
 
-The next section defines what logging we want to use when creating our MWAA environment. There is a cost element associated with this, so make sure you think about what is the right level of logging for your particular use case. You can find out more about the different logging levels you can use by checking out the documentation [here](https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.aws_mwaa/CfnEnvironment.html#aws_cdk.aws_mwaa.CfnEnvironment.LoggingConfigurationProperty).
+The next section defines what logging we want to use when creating our MWAA environment. There is a cost element associated with this, so make sure you think about what is the right level of logging for your particular use case. You can find out more about the different logging levels you can use by checking out the documentation [here](https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.aws_mwaa/CfnEnvironment.html#aws_cdk.aws_mwaa.CfnEnvironment.LoggingConfigurationProperty?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ```python
     # **OPTIONAL** Configure specific MWAA settings - you can externalise these if you want
