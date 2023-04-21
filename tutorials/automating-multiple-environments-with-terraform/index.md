@@ -1154,7 +1154,7 @@ variable "public_subnet_ranges" {
 }
 ```
 
-Lastly, we need to set the values for the two new variables in each of the environment `tfvars` files. We will be using different IP ranges for each accounts to show the difference, but it is also good practice if you intent to set up [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) between them at some point - you cannot have overlapping IP ranges when using peering. Add the following to each of the `.tfvars` files - the content is split with a tab per file below:
+Lastly, we need to set the values for the two new variables in each of the environment `tfvars` files. We will be using different IP ranges for each accounts to show the difference, but it is also good practice if you intent to set up [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdctfmltaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) between them at some point - you cannot have overlapping IP ranges when using peering. Add the following to each of the `.tfvars` files - the content is split with a tab per file below:
 
 * dev.tfvars
     ```bash
