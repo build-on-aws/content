@@ -226,7 +226,7 @@ chmod +x ./install
 ./install auto
 ```
 
-Now, use CDK to attach the user data script and add tag the instance:
+Now, use CDK to attach the user data script and add tags to the instance:
 
 ```typescript
     // User data - used for bootstrapping
@@ -906,7 +906,7 @@ arn:aws:cloudformation:us-west-2:123456789000:stack/PythonEc2BlogpostStack/59f1e
 
 Your infrastructure is now deployed, the instance is spinning up, and you can use the outputs at the bottom that indicate the IP address of your web server. The application will not be immediately available, as it needs to be deployed. To check the status of the deployment, head over to the AWS CodePipeline console and find the `python-webApp` pipeline. There you should see something similar to this:
 
-![CodePipeline deployment in stages shown on the AWS Console.](./images/deployment.png)
+![CodePipeline deployment in stages shown on the AWS Console.](./images/ci-cd-pipeline.png)
 
 After the deployment is successful (the `Deploy` stage should be green), copy and then paste the IP address of your EC2 instance in your browser, and your sample application should be up and running. Congratulations! You have set up a Python web application running on an EC2 instance, with a CI/CD pipeline to test and deploy and changes!
 
