@@ -142,7 +142,7 @@ To do this, add the following to the `variables.tf` file in the root of `main-in
 
 > 💡 Tip: You can use `+` in an email address to set up additional, unique email strings that will all be delivered to the same email inbox, e.g. if your email is `john@example.com`, you can use `john+aws-dev@example.com`. This is useful as each AWS account needs a globally unique email address, but managing multiple inboxes can become a problem.
 
-```bash
+```terraform
 variable "iam_account_role_name" {
   type    = string
   default = "Org-Admin"
@@ -160,7 +160,7 @@ variable "account_emails" {
 
 Create a new file called `aws_environment_accounts.tf` to create the accounts using AWS Organizations, and also to add them to OUs (Organizational Units) - this is a useful way to organize multiple AWS accounts if you need to apply specific rules to each one. Add the following to the file:
 
-```bash
+```terraform
 # Set up the organization
 resource "aws_organizations_organization" "org" {
   aws_service_access_principals = [
@@ -323,7 +323,7 @@ While you could do this with pull requests, it will add quite a bit of time for 
 
 Next, we need to create the IAM roles and policies in the new accounts, and update our existing IAM roles with additional policies to allow them to assume these new roles in the environment accounts. First, we need to define additional `AWS` providers to allow Terraform to create infrastructure in our new accounts. Terraform provider [aliases](https://developer.hashicorp.com/terraform/language/providers/configuration#alias-multiple-provider-configurations) allow you to configure multiple providers with different configurations. In our case, we will create the default provider to use our Main account, and then set up 3 additional ones for `dev`, `test`, and `prod`, and use IAM role switching to access them. We will use the IAM role created as part of our new accounts to do this. Add the following to the `providers.tf` file in the root of `main-infra` - since we created the new AWS accounts using Terraform, we can reference the account IDs via those resources:
 
-```bash
+```terraform
 provider "aws" {
   alias  = "dev"
   region = var.aws_region
@@ -363,7 +363,7 @@ wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments
 The contents of each file that we downloaded should be the following:
 
 * env_accounts_main_branch_iam_role.tf
-    ```bash
+    ```terraform
     # Policy allowing the PR branches in our repo to assume the role from each environment account.
     data "aws_iam_policy_document" "env_accounts_pr_branch_assume_role_policy" {
       statement {
@@ -465,7 +465,7 @@ The contents of each file that we downloaded should be the following:
     }
     ```
 * env_accounts_pr_branch_iam_role.tf
-    ```bash
+    ```terraform
     # Policy allowing the PR branches in our repo to assume the role from each environment account. 
     data "aws_iam_policy_document" "env_accounts_pr_branch_assume_role_policy" {
       statement {
@@ -535,7 +535,7 @@ The contents of each file that we downloaded should be the following:
     }
     ```
 * env_accounts_users_read_only_iam_role.tf
-    ```bash
+    ```terraform
     # Policy allowing users in our repo to assume the role. 
     data "aws_iam_policy_document" "env_accounts_users_assume_role_policy" {
       statement {
@@ -607,7 +607,7 @@ The contents of each file that we downloaded should be the following:
 
 We are creating a default, read-only role for users (developers, DevOps/SRE teams, etc) to use as all changes should be via Terraform, but we need to provide them with access to look at the console. We'll be setting up the users further down. The IAM roles above will look very similar to the original ones we created, but with the trust policy changed to allow assuming these roles from our `main-infra` account instead of being assumed by the CodeCatalyst task runner - the runner will assume a role in the main account, and from there assume another role in each of our environment accounts.
 
-```bash
+```terraform
   statement {
     actions = ["sts:AssumeRole"]
     effect  = "Allow"
@@ -662,7 +662,7 @@ Unpacking objects: 100% (4/4), 1.11 KiB | 567.00 KiB/s, done.
 
 We need to define a backend for environment accounts first, please create `terraform.tf` in the `environments-infra` with the following - it is the same as for the `main-infra` repo, except we changed the `key` by adding in `-enviroments`:
 
-```bash
+```terraform
 terraform {
   backend "s3" {
     bucket         = "tf-state-files"
@@ -732,7 +732,7 @@ Next, we will create `providers.tf` to configure our provider to use in a one of
 
 Add the following to the `providers.tf` file:
 
-```bash
+```terraform
 # Configuring the main account AWS provider
 provider "aws" {
   alias  = "main"
@@ -1024,7 +1024,7 @@ wget https://raw.githubusercontent.com/build-on-aws/manage-multiple-environments
 Here is the content of each file:
 
 * main_branch.yml
-    ```bash
+    ```yaml
     Name: Environment-Account-Main-Branch
     SchemaVersion: "1.0"
 
@@ -1064,7 +1064,7 @@ Here is the content of each file:
           Type: EC2
     ```
  * pr_branch.yml
-    ```bash
+    ```yaml
     Name: Environment-Account-PR-Branch
     SchemaVersion: "1.0"
 
@@ -1127,7 +1127,7 @@ git checkout -b add-vpc
 
 We will be using the `terraform-aws-modules/vpc/aws` module to help us, create a new file `vpc.tf`, and add the following to it:
 
-```bash
+```terraform
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
@@ -1144,7 +1144,7 @@ module "vpc" {
 
 We will need to add the two new variables used, `vpc_cidr` and `public_subnet_ranges`, so let's add them to our `variables.tf`:
 
-```bash
+```terraform
 variable "vpc_cidr" {
   type = string
 }
@@ -1198,7 +1198,7 @@ We have now reached the end of this tutorial, and you can either keep the curren
 1. In `main-infra`, run `git checkout main` and `git pull` to ensure you have the latest version, then:
     1. Run `terraform destroy` and confirm
     1. Edit `_bootstrap/state_file_resources.tf` to replace the `aws_s3_bucket` resource with:
-      ```bash
+      ```terraform
       resource "aws_s3_bucket" "state_file" {
         bucket = var.state_file_bucket_name
 
