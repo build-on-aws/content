@@ -52,7 +52,7 @@ Before starting this tutorial, you will need the following:
 
 ## Understanding ECS
 
-The focus of this module is to introduce you to the concepts of Amazon ECS. We will cover the components of Amazon ECS (cluster, task definition, service), what orchestration is, and how to choose which type of compute to use to run your containers. If you are already familiar with Amazon ECS, you can skip ahead to **Module 2**.
+The focus of this section is to introduce you to the concepts of Amazon ECS. We will cover the components of Amazon ECS (cluster, task definition, service), what orchestration is, and how to choose which type of compute to use to run your containers. If you are already familiar with Amazon ECS, you can skip ahead to the [Create Infrastructure](#create-infrastructure) section.
 
 ### What is Amazon ECS?
 
@@ -77,7 +77,7 @@ Amazon ECS can schedule services to run on an EC2 host (virtual machine), or usi
 Alternatively, you can use Fargate, which allows you to specify the CPU and memory requirements for each container, and which then launches the required compute to run the container for you. The main difference between Fargate and EC2 hosts is that you do not need to set up, manage, or maintain the operating system on the host when using Fargate, nor do you need to do capacity planning as it will launch exactly the amount of capacity you need.
 
 ## Create Infrastructure
-In this module, you will create an AWS CDK application that will create all the necessary infrastructure to set up an Amazon ECS cluster, and deploy a sample container to it.
+In this section, you will create an AWS CDK application that will create all the necessary infrastructure to set up an Amazon ECS cluster, and deploy a sample container to it.
 
 ### Create the CDK App
 
@@ -152,7 +152,7 @@ Edit the **lib/cdk-eb-infra-stack.ts** file to add the dependency at the top o
     import * as ecs_patterns from "aws-cdk-lib/aws-ecs-patterns";
 ```
 
-These modules provide access to all the components you need for you to deploy the web application. The first step is to find the existing default VPC in your account by adding the following code:  
+These sections provide access to all the components you need for you to deploy the web application. The first step is to find the existing default VPC in your account by adding the following code:  
 
 ```JavaScript
   // Look up the default VPC
@@ -161,7 +161,7 @@ These modules provide access to all the components you need for you to deploy th
     });
 ```
 
-Next, you will need to define which container to use and how it should be configured. This is done by creating a task definition to supply the container port, the amount of CPU and memory it needs, and the container image to use. For this guide, we will be building an Nginx container by using the publicly available Nginx image and having the CDK manage the build, upload, and deployment of the container for us. We will also be creating an IAM role to attach to the task definition and an ECR repository for future use when we deploy the sample application in the next module.
+Next, you will need to define which container to use and how it should be configured. This is done by creating a task definition to supply the container port, the amount of CPU and memory it needs, and the container image to use. For this guide, we will be building an Nginx container by using the publicly available Nginx image and having the CDK manage the build, upload, and deployment of the container for us. We will also be creating an IAM role to attach to the task definition and an ECR repository for future use when we deploy the sample application in the next section [Deploy Application](#deploy-application).
 
 To create the task definition and IAM role, add the following code:  
 
@@ -311,7 +311,7 @@ This sample CDK project is available under cdk-ecs-infra directory in [GitHub](h
 
 ## Deploy Application
 
-In this module, you will create an Amazon CodeCatalyst project, a code repository and a workflow to deploy a containerized [sample application](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) to the Amazon ECS cluster created in the previous module. 
+In this section, you will create an Amazon CodeCatalyst project, a code repository and a workflow to deploy a containerized [sample application](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) to the Amazon ECS cluster created in the [Create Infrastructure](#create-infrastructure) section. 
 
 ### Create CodeCatalyst CodeCatalystPreviewDevelopmentAdministrator Role
 
