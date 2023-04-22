@@ -1,6 +1,6 @@
 ---
 title: "S02E13 - Hot Dog or Not Hot Dog"
-authorGithubAlias: jaxx
+authorGithubAlias: gogococo
 authorName: Jacquie Grindrod
 date: 2023-03-31
 ---
