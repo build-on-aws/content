@@ -5,8 +5,11 @@ tags:
   - aws
   - build-on-live
   - twitch
-authorGithubAlias: jaxx
+authorGithubAlias: gogococo
 authorName: Jacquie Grindrod
+additionalAuthors: 
+  - authorGithubAlias: darko-mesaros
+    authorName: Darko Mesaros
 date: 2023-03-31
 ---
 
