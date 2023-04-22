@@ -1,15 +1,20 @@
 ---
-title: "S1E4 - Static S3 Website"
+title: "S01E04 - Static S3 Website"
+description:
+tags:
+  - aws
+  - build-on-live
+  - twitch
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 date: 2023-03-31
 ---
 
-Welcome to episode 4, yes 4 it's already has been a month of Build On Weekly! 🥳 
+Welcome to episode 4, yes 4 it's already has been a month of Build On Weekly! 🥳
 
 Unfortunately today you only get to listen to a bald man yell into the camera, as Jacquie is away. But he ([Darko](https://twitter.com/darkosubotica)), will be showing you how to some magical things with the latest amazing tool - **Cloud Development Kit (CDK) for Terraform.** Today is all about building the infrastructure for that static website of yours. All with the power of CDK and Terraform. 🪣
 
-We will be posting here, on buildon.aws, to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
+We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
 
 ![CDK Terraform](images/header.png)
 
@@ -17,7 +22,7 @@ We will be posting here, on buildon.aws, to share **show notes, links, socials, 
 
 https://www.youtube.com/watch?v=Lb7EjGErxSw
 
-Today, on **Deployed Weekly**, we will cover **AWS Power Tools**, again, for all of you C# fans. **Terraform and CDK** have something to tell you. Sharing some code for **Site to Site VPN over Private IPs**. A cool **workshop** you can take next week, and a **World Championship** for all of you developers, and builders out there! 
+Today, on **Deployed Weekly**, we will cover **AWS Power Tools**, again, for all of you C# fans. **Terraform and CDK** have something to tell you. Sharing some code for **Site to Site VPN over Private IPs**. A cool **workshop** you can take next week, and a **World Championship** for all of you developers, and builders out there!
 
 - **AWS PowerTools for dotnet is in alpha**: [https://github.com/awslabs/aws-lambda-powertools-dotnet](https://github.com/awslabs/aws-lambda-powertools-dotnet)
 - **CDK for TF is now GA**: [https://www.hashicorp.com/blog/cdk-for-terraform-now-generally-available](https://www.hashicorp.com/blog/cdk-for-terraform-now-generally-available)
@@ -54,10 +59,12 @@ class MyStack extends TerraformStack {
     new AwsProvider(this, 'AWS', {
       region: "us-west-2",
     });
+
     // Bucket
     const cobucket = new s3.S3Bucket(this, "cobus-website-bucket", {
       bucket: "cobus-website-bucket",
     });
+    
     // Configure the bucket for a website
     new s3.S3BucketWebsiteConfiguration(this, "cobus-websiteconfig", {
       bucket: cobucket.bucket,
@@ -68,6 +75,7 @@ class MyStack extends TerraformStack {
         key: "error.html"
       },
     });
+
     // Open up the bucket
     new s3.S3BucketPolicy(this, "cobus-policy", {
       bucket: cobucket.bucket,
@@ -85,6 +93,7 @@ class MyStack extends TerraformStack {
         ],
       }),
     });
+
     // Add files
     const absolutePath = path.resolve(__dirname, "website/");
     const files = glob("**/*.html", {
@@ -117,7 +126,7 @@ app.synth();
 
 💾 Check out the rest of the code Darko has written today, as you follow along with the video: [https://github.com/darko-mesaros/cdktf-s3-website](https://github.com/darko-mesaros/cdktf-s3-website)
 
-**Links from the discussion:**
+## Links from the discussion
 
 - CDK for Terraform is now generally available: [https://www.hashicorp.com/blog/cdk-for-terraform-now-generally-available](https://www.hashicorp.com/blog/cdk-for-terraform-now-generally-available)
 - Terraform AWS Provider on Construct hub: [https://constructs.dev/packages/@cdktf/provider-aws/v/9.0.10/api/S3Bucket?lang=typescript&submodule=s3](https://constructs.dev/packages/@cdktf/provider-aws/v/9.0.10/api/S3Bucket?lang=typescript&submodule=s3)
