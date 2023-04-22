@@ -1,13 +1,21 @@
 ---
-title: "S1E3 - Command Line Magic"
-authorGithubAlias: darko-mesaros
-authorName: Darko Mesaros
+title: "S01E03 - Command Line Magic"
+description:
+tags:
+  - aws
+  - build-on-live
+  - twitch
+authorGithubAlias: gogococo
+authorName: Jacquie Grindrod
+additionalAuthors: 
+  - authorGithubAlias: darko-mesaros
+    authorName: Darko Mesaros
 date: 2023-03-31
 ---
 
-Welcome to episode 3 of Build On Weekly! 🥳 Today Jacquie and Darko dive into installing various CLI tools and Utilities for AWS. Tools like the AWS CLI and AWS CDK (Cloud Development Kit). 
+Welcome to episode 3 of Build On Weekly! 🥳 Today Jacquie and Darko dive into installing various CLI tools and Utilities for AWS. Tools like the AWS CLI and AWS CDK (Cloud Development Kit).
 
-We will be posting here, on buildon.aws, to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀 
+We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
 ![CLI Chat](images/header.png)
 
@@ -17,7 +25,7 @@ If you miss an episode, don't worry! We will upload recordings of all our episod
 
 https://www.youtube.com/watch?v=Oc1kMmvGytY
 
-Today, on **Deployed Weekly**, we will cover a **Threat Modeling workshop**, discuss **IAM roles anywhere** and the newly released **Global tables for Amazon Neptune**. We will also check out a blog post on **tracking down NAT Gateway costs**, and wrap up with some **PowerTools for your Lambda functions**! 
+Today, on **Deployed Weekly**, we will cover a **Threat Modeling workshop**, discuss **IAM roles anywhere** and the newly released **Global tables for Amazon Neptune**. We will also check out a blog post on **tracking down NAT Gateway costs**, and wrap up with some **PowerTools for your Lambda functions**!
 
 **Links from the discussion:**
 
@@ -26,7 +34,6 @@ Today, on **Deployed Weekly**, we will cover a **Threat Modeling workshop**, dis
 - **Threat modeling workshop:** [https://catalog.workshops.aws/threatmodel/en-US](https://catalog.workshops.aws/threatmodel/en-US)
 - **Amazon Neptune Global Database:** [https://aws.amazon.com/about-aws/whats-new/2022/07/amazon-neptune-global-database/](https://aws.amazon.com/about-aws/whats-new/2022/07/amazon-neptune-global-database/)
 - **AWS Lambda Powertools for TypeScript is now GA:**[https://aws.amazon.com/blogs/compute/simplifying-serverless-best-practices-with-aws-lambda-powertools-for-typescript/](https://aws.amazon.com/blogs/compute/simplifying-serverless-best-practices-with-aws-lambda-powertools-for-typescript/)
-
 
 ## Weekly Builds - AWS CLI & CDK Up and Running
 
@@ -45,7 +52,6 @@ Here are the steps needed to install the [AWS CLI](https://docs.aws.amazon.com/c
     - The AWS CLI version 2 uses `glibc`, `groff`, and `less`. These are included by default in most major distributions of Linux.
     - We support the AWS CLI version 2 on 64-bit versions of recent distributions of CentOS, Fedora, Ubuntu, Amazon Linux 1, Amazon Linux 2 and Linux ARM.
     - Because AWS doesn't maintain third-party repositories, we can’t guarantee that they contain the latest version of the AWS CLI.
-    
     ```bash
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.7.1.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
@@ -70,12 +76,8 @@ Here are the steps needed to install the [AWS CLI](https://docs.aws.amazon.com/c
     ```bash
     msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2-2.7.1.msi
     ```
-    
 
-## Sharing is caring:
-
-
-**Links from the discussion:**
+## Links from the discussion
 
 - AWS CLI: [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - AWS CDK: [https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)

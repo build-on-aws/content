@@ -1,13 +1,21 @@
 ---
-title: "S1E2 - Breaking blocks with Terraform"
-authorGithubAlias: darko-mesaros
-authorName: Darko Mesaros
+title: "S01E02 - Breaking blocks with Terraform"
+description:
+tags:
+  - aws
+  - build-on-live
+  - twitch
+authorGithubAlias: gogococo
+authorName: Jacquie Grindrod
+additionalAuthors: 
+  - authorGithubAlias: darko-mesaros
+    authorName: Darko Mesaros
 date: 2023-03-31
 ---
 
 Welcome to episode 2 of Build On Weekly! 🥳 Today is all about Terraform and building stuff with it. Namely, in this episode, we have built a Minecraft server, running on EC2, with some Terraform Magic.
 
-We will be posting here, on buildon.aws, to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀 
+We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
 ![Jacquie and Darko before the show](images/header.png)
 
@@ -21,7 +29,7 @@ Let's look at some news, blog posts, and interesting tidbits from the previous w
 
 **Links from the discussion:**
 
-It is July 21st 2022, and today we have more news from **Infracost**, we are checking out a blog post on **Blazor WebAssembly**. AWS Open sourceed **CloudScape**, Google came out with **Carbon** an experimental new language taking to replace C++, and teach yourself some **ML GPU programming**!
+It is July 21st 2022, and today we have more news from **Infracost**, we are checking out a blog post on **Blazor WebAssembly**. AWS Open sourced **CloudScape**, Google came out with **Carbon** an experimental new language taking to replace C++, and teach yourself some **ML GPU programming**!
 
 This was another edition of - Deployed weekly
 
@@ -33,12 +41,11 @@ This was another edition of - Deployed weekly
 - Carbon Language -  An experimental successor to C++: [GitHub repo](https://github.com/carbon-language/carbon-lang)
 - Are you having fun with Machine Learning? Go and teach yourself beginner GPU programming with this wonderful notebook: [GitHub repo](https://github.com/srush/GPU-Puzzles)
 
-
 ## Weekly Builds - Infrastructure as Code, Terraform and Minecraft
 
 https://youtu.be/5jAtZQMyB_c
 
-Today, Jacquie and Darko discussed Infrastructure as Code (IaC), why should you care about it, how to approach it, and what does it take to get started. 
+Today, Jacquie and Darko discussed [Infrastructure as Code](/tags/infrastructure-as-code) (IaC), why should you care about it, how to approach it, and what does it take to get started.
 
 Speaking of getting started, on this episode we took upon the challenge of building on a Minecraft server, running on EC2, with Terraform.
 
@@ -47,6 +54,7 @@ The goal was to create a simple EC2 virtual machine running on AWS, install and 
 On top of that we will use GNU screen to monitor the launch of Minecraft. And instead of using SSH, we will be using AWS Systems Manager - Session manager to log into the system.
 
 Here is the code we ended up building:
+
 ```terraform
 # Setting up the AWS Terraform provider
 terraform {
@@ -96,11 +104,13 @@ resource "aws_instance" "minecraft" {
   instance_type               = "t2.xlarge"
   vpc_security_group_ids      = [aws_security_group.minecraft.id]
   associate_public_ip_address = true
+
 ## This role is specific to my account, so make sure to attach an IAM role relevant to your setup.
   iam_instance_profile        = "SSMEC2Role"
   root_block_device {
     volume_size = 30
   }
+
 ## This is a bash script that will be executed during the first launch of the Virtual Machine, and it sets up all we need to run Minecraft
   user_data = <<-EOF
     #!/bin/bash
@@ -117,12 +127,13 @@ resource "aws_instance" "minecraft" {
     Name = "Minecraft Server"
   }
 }
+
 output "instance_ip_addr" {
   value = aws_instance.minecraft.public_ip
 }
 ```
 
-**Links from the discussion:**
+## Links from the discussion
 
 - Infrastructure as Code: [Wiki page](https://en.wikipedia.org/wiki/Infrastructure_as_code)
 - Terraform: [Terraform documentation](https://www.terraform.io/downloads)

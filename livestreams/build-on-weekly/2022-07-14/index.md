@@ -1,11 +1,19 @@
 ---
-title: "S1E1 - Open With Open Source"
-authorGithubAlias: darko-mesaros
-authorName: Darko Mesaros
+title: "S01E01 - Open With Open Source"
+description:
+tags:
+  - aws
+  - build-on-live
+  - twitch
+authorGithubAlias: gogococo
+authorName: Jacquie Grindrod
+additionalAuthors: 
+  - authorGithubAlias: darko-mesaros
+    authorName: Darko Mesaros
 date: 2023-03-31
 ---
 
-Welcome to the first episode of Build on Weekly! 🥳 Here we introduce ourselves, say hi to chat, and tell you what this show is all about. We will be posting here, on buildon.aws, to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
+Welcome to the first episode of Build on Weekly! 🥳 Here we introduce ourselves, say hi to chat, and tell you what this show is all about. We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
 ![Jacquie and Darko on stream](images/header.png)
 
@@ -38,14 +46,13 @@ His advice for folks looking to get involved in Open Source Software? Get involv
 - Microsoft Open Sources SBOM generation tool: [https://devblogs.microsoft.com/engineering-at-microsoft/microsoft-open-sources-salus-software-bill-of-materials-sbom-generation-tool/](https://devblogs.microsoft.com/engineering-at-microsoft/microsoft-open-sources-salus-software-bill-of-materials-sbom-generation-tool/)
 - Bottle Rocket: [https://github.com/bottlerocket-os/bottlerocket](https://github.com/bottlerocket-os/bottlerocket)
 
-
 ## Weekly Builds
 
 https://youtu.be/giNSFJcNJnU
 
 During Weekly Builds we showcase tools we can leverage to build on the cloud. Today's tool is all about managing costs We have a look at Infracost, an open source tool that looks at your CloudFormation and Terraform templates and estimates for you how much they will cost to run.
 
-**Links from the discussion:**
+## Links from the discussion
 
 - Check out Infracost, an Open Source tool to help you a glance of cloud costs, before you make that deployment: [https://www.infracost.io/](https://www.infracost.io/)
 

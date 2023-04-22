@@ -1,22 +1,30 @@
 ---
-title: "S1E5 - Containers, Containers Everywhere"
-authorGithubAlias: darko-mesaros
-authorName: Darko Mesaros
+title: "S01E05 - Containers, Containers Everywhere"
+description:
+tags:
+  - aws
+  - build-on-live
+  - twitch
+authorGithubAlias: gogococo
+authorName: Jacquie Grindrod
+additionalAuthors: 
+  - authorGithubAlias: darko-mesaros
+    authorName: Darko Mesaros
 date: 2023-03-31
 ---
-Welcome to episode 5 of Build On Weekly! 🥳 
+Welcome to episode 5 of Build On Weekly! 🥳
 
 Today [Jacquie](https://twitter.com/devopsjacquie) and [Darko](https://twitter.com/darkosubotica), discuss a few things around Containers and Hybrid environments. That means running your applications On-Premises AND in the cloud. In today's episode watch Darko as he sweats trying to troubleshoot a real time demo. 😅
 
-We will be posting here, on buildon.aws, to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
+We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
 
 ![Jacquie and Darko - Episode 5](images/header.png)
 
-## Deployed Weekly 
+## Deployed Weekly
 
 https://www.youtube.com/watch?v=YI1zxP9aKqc
 
-Today on deployed weekly we take another peek at Lambda functions and .NET. What are the best strategies when running the two together. We talk about a interesting Open Source tool that helps you prototype and productionize (is that even a word?) ML Pipelines. Another wonderful CLI tool out there, for al the CLI and Tracing fans. A wrap up on the AWS Storage Day that happened the day before and finally an amazing interview/podcast over on Lex Friedman’s channel - with the best programmer in the world John Carmack
+Today on deployed weekly we take another peek at Lambda functions and .NET. What are the best strategies when running the two together. We talk about a interesting Open Source tool that helps you prototype and productionize (is that even a word?) ML Pipelines. Another wonderful CLI tool out there, for al the CLI and Tracing fans. A wrap up on the AWS Storage Day that happened the day before and finally an amazing interview/podcast over on Lex Friedman’s channel - with the best programmer in the world John Carmack.
 
 **Links from the discussion:**
 
@@ -30,13 +38,13 @@ Today on deployed weekly we take another peek at Lambda functions and .NET. What
 
 https://www.youtube.com/watch?v=558ycpVpclA
 
-Today we will be talking about a few things, you all should know about: 
+Today we will be talking about a few things, you all should know about:
 
-1. Containers and the reason we use them. 
+1. Containers and the reason we use them.
 2. Hybrid environments.
 3. Darko’s Macbook ECS cluster
 
-### Containers:
+### Containers
 
 Just a quick word this. Containers, or more precisely Containerization is application-level virtualization. The reason for this is so that software can be packaged up in these containers and run in isolated “user spaces” called containers!
 
@@ -46,9 +54,9 @@ Because we want to be able to package the entire running environment of a piece 
 
 On today's episode Jacquie and Darko talk about containers, why you should use them, how to orchestrate them and what do they have to do with a Hybrid environment.
 
-Later in the episode, check out how Darko struggles to add an extrenal "server" to his AWS ECS (Elastic Container Service) [cluster](https://macluster.rup12.net/). Plenty of fun times were had while troubleshooting. 
+Later in the episode, check out how Darko struggles to add an external "server" to his AWS ECS (Elastic Container Service) [cluster](https://macluster.rup12.net/). Plenty of fun times were had while troubleshooting.
 
-**Links from the discussion:**
+## Links from the discussion
 
 - Nathan Peck’s blog post: [https://nathanpeck.com/ingress-to-ecs-anywhere-from-anywhere-using-inlets/](https://nathanpeck.com/ingress-to-ecs-anywhere-from-anywhere-using-inlets/)
 - Darko’s cluster (if it is still running): [https://macluster.rup12.net/](https://macluster.rup12.net/)
