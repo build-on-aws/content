@@ -1,6 +1,6 @@
 ---
-title: "CI/CD Pipelines for Two Connected Services Using AWS Copilot"
-description: "0-100 MPH in Under 60 Minutes: Create a Full Microservices Infrastructure with CI/CD Pipelines for Two Connected Services using AWS Copilot"
+title: "Build Efficient CI/CD Pipelines for Connected Microservices in Under an Hour using AWS Copilot"
+description: "Build Efficient CI/CD Pipelines for Connected Microservices in Under an Hour using AWS Copilot. This should help in accelerating in deploying and hosting container based service on the AWS Cloud using Amazon ECS"
 tags:
   - aws
   - devops
@@ -13,7 +13,7 @@ spaces:
   - devops
 authorGithubAlias: kirankumar15
 authorName: Kirankumar Chandrashekar
-date: 2023-04-24 
+date: 2023-04-24
 ---
 
 With the rise of application modernization, a significant topic of discussion is breaking down monolithic applications into microservices. Essentially, the process begins with breaking the monolith into its individual working parts, making it easier to create a virtualized application environment using tools like containers. During the process, another question arises: whether to use a single (mono) repository for all microservices or a repository for each microservice. 
@@ -30,7 +30,7 @@ Creating a separate repository for each microservice benefits a team in maintain
 
 Having said this, the next question that arises is how to set up the required infrastructure easily when the microservices are interconnected with each other? 
 
-This post will show you how you can take advantage of AWS Copilot CLI - that accelerates you to go from 0-100 MPH under 60 mins for creating a full microservices infrastructure with CI/CD Pipelines for two connected services. AWS Copilot CLI is a tool for developers to build, release, and operate production-ready, containerized applications on AWS App Runner, Amazon ECS, and AWS Fargate. More information about Copilot, core concepts can be found in [the Copilot official documentation](https://aws.github.io/copilot-cli/docs/concepts/overview/).
+This post will show you how you can take advantage of AWS Copilot CLI - that accelerates you to build efficient CI/CD Pipelines for connected microservices in under an hour using AWS Copilot. AWS Copilot CLI is a tool for developers to build, release, and operate production-ready, containerized applications on [AWS App Runner](https://aws.amazon.com/apprunner/), [Amazon ECS](https://aws.amazon.com/ecs/), and [AWS Fargate](https://aws.amazon.com/fargate/). More information about Copilot, core concepts can be found in [the Copilot official documentation](https://aws.github.io/copilot-cli/docs/concepts/overview/).
 
 ## Table of Contents
 
@@ -67,7 +67,7 @@ There are some prerequisites required for you to proceed in this post. Make sure
 
 ## Initial Setup
 
-In this section, you will do the initial setup of pulling down the sample application code, initialize the application and environment on using AWS Copilot. We will start with this sample application where all the code is in a single, mono-repo, deploy the frontend and backend service as a separate unit, and then move the code into its own repository with a CI/CD process. 
+In this section, you will do the initial setup of pulling down the sample application code, initialize the application and environment on to your terminal as a starting point requirement for using Copilot. We will start with this sample application where all the code is in a single, mono-repo, deploy the frontend and backend service as a separate unit, and then move the code into its own repository with a CI/CD process. 
 
 **Step 1:** Pull down the sample application to your local workstation and change the directory to the code location:
 
@@ -181,7 +181,7 @@ image:
 
 **Step 2:** Create a DynamoDB table
 
-In this step, you will be creating the DynamoDB table required by the backend service using Copilot. The backend service uses a DynamoDB table to save to-do items. You can add storage resources to services with the `copilot storage init` command.
+In this step, you will be creating the [DynamoDB](https://aws.amazon.com/dynamodb/) table required by the backend service using Copilot. The backend service uses a DynamoDB table to save to-do items. You can add storage resources to services with the `copilot storage init` command.
 
 Run the `copilot storage init` command to create a DynamoDB table to be used by the backend service. 
 
@@ -384,4 +384,4 @@ At this point, you can go to the AWS CodePipeline console on your AWS account to
 
 ## Conclusion
 
-I hope you followed the steps outlined above and enjoyed configuring the infrastructure to host you microservices application on Amazon ECS, and also deployed a CI/CD pipeline for your application code deployment using AWS Copilot. AWS Copilot is a powerful CLI that helps you accelerate from 0 to 100 MPH under 60 mins in building the infrastructure and deployment platform that is well architected and applied with AWS best practices. Also, if you see how you reused an existing environment and application while creating the frontend service, you can add more microservices with their own CI/CD processes in a similar way as when the functionality of your application is enhanced. 
+I hope you followed the steps outlined above and enjoyed configuring the infrastructure to host you microservices application on Amazon ECS, and also deployed a CI/CD pipeline for your application code deployment using AWS Copilot. AWS Copilot is a powerful CLI that helps you accelerate building efficient CI/CD Pipelines for connected microservices in under an hour using AWS Copilot that is well architected and applied with AWS best practices. Also, if you see how you reused an existing environment and application while creating the frontend service, you can add more microservices with their own CI/CD processes in a similar way as when the functionality of your application is enhanced. 
