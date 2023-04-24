@@ -10,12 +10,12 @@ tags:
     - codedeploy
     - codebuild
     - python
+showInHomeFeed: true
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 additionalAuthors: 
   - authorGithubAlias: cobusbernard
     authorName: Cobus Bernard
-
 date: 2023-04-21
 ---
 
