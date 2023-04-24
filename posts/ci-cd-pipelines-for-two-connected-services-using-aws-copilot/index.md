@@ -72,8 +72,8 @@ In this section, you will do the initial setup of pulling down the sample applic
 **Step 1:** Pull down the sample application to your local workstation and change the directory to the code location:
 
 ```
-git clone https://github.com/aws-samples/copilot-multi-repo-connected-services.git
-cd copilot-multi-repo-connected-services/code
+git clone https://github.com/build-on-aws/automate-container-microservices-aws-copilot.git
+cd automate-container-microservices-aws-copilot/code
 ```
 
 The code directory structure should look like this:
