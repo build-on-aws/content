@@ -12,6 +12,7 @@ tags:
     - cdk
     - devops
     - tutorials
+showInHomeFeed: true
 spaces:
     - devops
 authorGithubAlias: ricsue-aws
