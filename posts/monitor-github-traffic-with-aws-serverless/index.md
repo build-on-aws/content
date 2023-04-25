@@ -2,12 +2,12 @@
 title: "Star Wars, Good Food, and Astronomy: Tracking GitHub Traffic with a Serverless Architecture"
 description: "Learn how to track, store, and analyze GitHub traffic metrics using AWS Lambda, Amazon DynamoDB, and Amazon S3."
 tags:
-  - github-traffic-metrics
+  - observability
   - serverless
   - automation
 authorGithubAlias: TheFuz
 authorName: Mahanth Jayadeva
-date: 2023-04-19
+date: 2023-04-25
 ---
 
 At first glance, it may seem like Star Wars, good food, and astronomy have little in common. However, they all share a surprising connection to the world of GitHub metrics - [clones](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository), [forks](https://docs.github.com/en/get-started/quickstart/fork-a-repo), and [stars](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars). These are some common GitHub metrics developers use to gain insight into the popularity and usage of their repositories. Let's delve into the world of GitHub metrics and explore how we can track and store them for analysis. 
@@ -32,7 +32,7 @@ Simple, powerful, and cost efficient!
 
 We start with the Lambda function, which does most of the magic. 
 
-[PyGithub](https://github.com/PyGithub/PyGithub) is an awesome library that allows us to query the GitHub APIs using Python, which is [one of the supported runtimes for Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). We start by importing [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html), which is the AWS SDK for Python, CSV, and PyGithub libraries, and then authenticating to GitHub. Note that I'm using a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) here, but you can use other forms of authentication (though they might require additional code/configuration). 
+[PyGithub](https://github.com/PyGithub/PyGithub) is an awesome library that allows us to query the GitHub APIs using Python, which is [one of the supported runtimes for Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). We start by importing [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html), which is the AWS SDK for Python, CSV, and PyGithub libraries, and then authenticating to GitHub. Note that I'm using a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) here, but you can use other forms of authentication (though they might require additional code/configuration). The personal access token is [stored as a parameter in AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html) and retrieved dynamically when the Lambda function runs. Remember, hard-coding credentials into application code is bad practice and should be avoided.
 
 
 ```
@@ -263,7 +263,7 @@ def lambda_handler(event, context):
 
 Using QuickSight, I can ingest this data and [create two datasets](https://docs.aws.amazon.com/quicksight/latest/user/create-a-data-set-s3.html). This requires creating a [manifest file](https://docs.aws.amazon.com/quicksight/latest/user/supported-manifest-file-format.html) that informs QuickSight as to where the data is stored for each dataset. We use the following manifest files for the datasets. 
 
-For the dataset that will contain information on views, stars, forks, and clones (note that the S3 path to the CSV needs to be updated):
+For the dataset that will contain information on views, stars, forks, and clones (note that the [S3 path](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#accessing-a-bucket-using-S3-format) to the CSV needs to be updated):
 
 ```
 {
@@ -282,7 +282,7 @@ For the dataset that will contain information on views, stars, forks, and clones
 }
 ```
 
-For the dataset that will contain information on top paths for the last two weeks (note that the S3 path to the CSV needs to be updated):
+For the dataset that will contain information on top paths for the last two weeks (note that the [S3 path](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html#accessing-a-bucket-using-S3-format) to the CSV needs to be updated):
 
 ```
 {
