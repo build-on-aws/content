@@ -7,6 +7,8 @@ tags:
   - serverless
   - resilience
   - deployment
+spaces:
+  - devops
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-02-16

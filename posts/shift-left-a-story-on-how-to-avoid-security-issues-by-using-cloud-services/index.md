@@ -6,6 +6,8 @@ tags:
   - application-security
   - shift-left
   - github-actions
+spaces:
+  - devops
 authorGithubAlias: afronski
 authorName: Wojciech Gawroński
 date: 2023-01-10

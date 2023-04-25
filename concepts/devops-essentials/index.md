@@ -5,6 +5,9 @@ tags:
   - devops
   - essentials
   - aws
+showInHomeFeed: true
+spaces:
+  - devops
 authorGithubAlias: gogococo 
 authorName: Jacquie Grindrod
 date: 2023-01-12
@@ -22,12 +25,12 @@ This guide is for beginners who are looking for an overview of what DevOps is an
 | 6. [Containers](#containers)                                |
 | 7. [Container orchestration](#container-orchestration)      |
 | 8. [CI/CD](#continuous-integration-and-continuous-delivery) |
-| 9. [Logging](#Logging)                                      |
-| 10. [Monitoring](#Monitoring)                               |
-| 11. [Observability](#Monitoring)                            |
+| 9. [Logging](#logging)                                      |
+| 10. [Monitoring](#monitoring)                               |
+| 11. [Observability](#observability)                            |
 | 12. [Where should I start?](#where-should-i-start)          |
 | 13. [Conclusion](#conclusion)                                     |
-| 14. [Additional Learning Resources](#resources)             |
+| 14. [Additional Learning Resources](#additional-resources)             |
 
 ## What is DevOps?
 
@@ -35,18 +38,19 @@ The term DevOps was coined in 2009 by [Patrick Debois](https://twitter.com/patri
 
 ## Getting started
 
-In this section, we will cover concepts such as how to decide where to start and different approaches to begin. As you’re getting started, it’s important to note that there’s no step that’s too small to count towards progress. You don’t need to dive all the way in - in fact, it’s probably better not to! At the beginning, you want to minimize risk and friction by taking on smaller actions and getting fast feedback. Then you will continue to improve by making small, iterative changes and building momentum. 
+In this section, we will cover concepts such as how to decide where to start and different approaches to begin. As you’re getting started, it’s important to note that there’s no step that’s too small to count towards progress. You don’t need to dive all the way in - in fact, it’s probably better not to! At the beginning, you want to minimize risk and friction by taking on smaller actions and getting fast feedback. Then you will continue to improve by making small, iterative changes and building momentum.
 
-Another way to find a good starting place is by talking to the teams who will depend on your work. Are there manual steps they’re taking that lead to wasted time or bottlenecks? Do they have a wish list for how they’d like to be deploying or testing their work? Sometimes, the easiest place to start is the one you already know you need. You’ve decided to make small iterative changes, but how we approach that is also important. There’s multiple ways to build out infrastructure, and each comes with different benefits and challenges. 
+Another way to find a good starting place is by talking to the teams who will depend on your work. Are there manual steps they’re taking that lead to wasted time or bottlenecks? Do they have a wish list for how they’d like to be deploying or testing their work? Sometimes, the easiest place to start is the one you already know you need. You’ve decided to make small iterative changes, but how we approach that is also important. There’s multiple ways to build out infrastructure, and each comes with different benefits and challenges.
 
 ## Infrastructure implementation patterns
+
 Usually there exists some infrastructure that teams use to deliver software systems, from build pipelines, to databases, web servers, load balancers, etc. There are a few ways to approach setting up this infrastructure.
 
 ### *ClickOps*
 
 Using a browser-based console for tools or platforms such as the [AWS Management Console](https://console.aws.amazon.com/) can be a great way to explore which services are available to you and how they fit together. However, it doesn’t scale well as it’s not repeatable, apparent who made the change, or easy to collaborate with others and opens you up to creating more manual mistakes.  
 
-### *Procedural* 
+### *Procedural*
 
 These are a series of steps that are programmatically automated, such as a script that must be completed in a specific order to finish a task. This approach tells the program what to do, step by step, and the program executes the instructions in the order that they are written. An example of a procedural script might look like a database backup script that connects to the database, exports the data to a file, and then copies the file to a backup storage location.
 
@@ -87,7 +91,7 @@ Infrastructure as Code (IaC) is typically a declarative method of managing infra
 
 ### Configuration management
 
-Configuration management (CM) allows us to maintain systems in a desired state by organizing and maintaining information about our hardware and software. Think of a file that lists information such as which operating system to use, which software and their versions to install on a device, or the settings and configurations that will be applied to the system. In the past, this may have been done manually, or with a procedural script that connected to a repository and installed each tool one at a time, stopping at the first issue. CM helps build visibility and streamlines the configuration process, which makes it easier to track and manage changes over time with the goal of reducing cost, complexity, and errors. Some examples of configuration management tools are [Ansible](https://www.ansible.com/), [Chef](https://www.chef.io/), and [Puppet](www.puppet.com).
+Configuration management (CM) allows us to maintain systems in a desired state by organizing and maintaining information about our hardware and software. Think of a file that lists information such as which operating system to use, which software and their versions to install on a device, or the settings and configurations that will be applied to the system. In the past, this may have been done manually, or with a procedural script that connected to a repository and installed each tool one at a time, stopping at the first issue. CM helps build visibility and streamlines the configuration process, which makes it easier to track and manage changes over time with the goal of reducing cost, complexity, and errors. Some examples of configuration management tools are [Ansible](https://www.ansible.com/), [Chef](https://www.chef.io/), and [Puppet](https://www.puppet.com).
 
 ### Secrets management
 
@@ -111,7 +115,7 @@ You’re likely to hear the terms "CI/CD" and "pipelines" a lot throughout your 
 
 These practices can help to improve the speed and quality of software development by allowing for fast feedback and reducing manual gates and time spent waiting. This can help to reduce the time required to deliver new features and improvements to users, and can make it easier to iterate and evolve software over time.
 
-Pipelines built using these concepts can apply to a number of things including application code, infrastructure code, security checks, and more. They can exist as a single pipeline, or possibly as multiple pipelines that are chained together. 
+Pipelines built using these concepts can apply to a number of things including application code, infrastructure code, security checks, and more. They can exist as a single pipeline, or possibly as multiple pipelines that are chained together.
 
 ### Logging
 
@@ -141,7 +145,7 @@ As mentioned earlier, you should use these questions to find the best place to s
 
 Once you have found a place to start, you can decide which of the following approaches to use: automate the creation of infrastructure with IaC, add an automated build to a software project (CI), implement automated deployment (CD), containerize an application, add some monitoring, or configuration and secret management.
 
-## Wrap Up
+## Conclusion
 
 We've learned a lot in this post today! We started with an introduction to what DevOps is and how to get started, discussed different patterns you'll encounter when automating your processes and gave an overview of the key concepts you'll encounter on your journey. It's not possible to become an expert on every DevOps concept in a post or a day, but if you continuously learn and iterate on your culture, processes and technology you'll be surprised at how quickly you'll be able to make an impact. You and your team are not alone in this journey - there's been over a decade of other teams learning and documenting their successes and challenges. Stay tuned for more DevOps content! You can also find additional resources below.
 

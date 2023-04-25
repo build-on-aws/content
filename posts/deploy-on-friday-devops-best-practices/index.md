@@ -4,6 +4,8 @@ description: Why not deploy on Fridays? These 12 best practices, each with real-
 tags:
   - devops
   - best-practices
+spaces:
+  - devops
 authorGithubAlias: mfpalladino
 authorName: Marcelo Palladino
 date: 2023-04-05
