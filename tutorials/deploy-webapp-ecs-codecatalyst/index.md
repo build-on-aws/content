@@ -47,7 +47,7 @@ Before starting this tutorial, you will need the following:
 - CDK installed: Visit the [**Get Started with AWS CDK guide**](/getting-started/guides/setup-cdk/) to learn more.
 - The example project code downloaded to extract the SampleApp.
 - Docker installed and running.
-- [CodeCatalyst](https://codecatalyst.aws/) Account and Space setup with Space administrator role assigned to you (if you don't have a CodeCatalyst setup already, you can follow the [Amazon CodeCatlyst setting up guide](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html)).
+- [CodeCatalyst](https://codecatalyst.aws/) Account and Space setup with Space administrator role assigned to you (if you don't have a CodeCatalyst setup already, you can follow the [Amazon CodeCatalyst setting up guide](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html)).
 
 ## Understanding ECS
 
@@ -59,7 +59,7 @@ Amazon ECS is a fully managed container orchestration service that helps you eas
 
 ### What Are the Components of ECS?
 
-An Amazon ECS cluster is a logical construct that will group all the containers deployed into a cluster. There is no cost for a cluster - only for the compute and other infrastructure you use to run your containers. 
+An Amazon ECS cluster is a logical construct that will group all the containers deployed into a cluster. There is no cost for a cluster - only for the compute and other infrastructure you use to run your containers.
 
 To launch a container, you provide a [**task definition**](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html), which contains properties like the container image location, amount of CPU and memory, logging configuration, and so on. This does not launch a container; it just provides all the configuration needed to be able to run it. To launch it, you will define a [**service**](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
 
@@ -128,7 +128,7 @@ This will output the following:
     Executing npm install...
     npm WARN deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
     ✅ All done!
-```    
+```
 
 #### Create the Code for the Resource Stack
 
@@ -208,8 +208,8 @@ Add the following code to your project below the task definition:
       serviceName: 'MyWebApp',
       assignPublicIp: true,
       publicLoadBalancer: true,
+      healthCheckGracePeriod: cdk.Duration.seconds(5),
     }); 
-    TODO: Change the healthcheck period to speed up deployment.
 ```
 
 You are passing in the VPC object that you looked up previously to specify where to create all the resources, along with the task definition that defines which container image to deploy. The `desiredCount` indicates how many copies you want, `serviceName` designates what you want to call the service, and `publicLoadBalancer` is set to true so that you can access it over the internet. The line setting the `assignPublicIp` to true is important in this example because we are using the default VPC that does not have private subnets. Best practice recommends launching services in private subnets, but that is outside the scope of this guide.
@@ -250,21 +250,21 @@ This will create the required infrastructure for CDK to manage infrastructure in
 
 Once the bootstrapping has completed, you will run `cdk deploy` to deploy the container, cluster, and all the other infrastructure required. Please note that Docker must be running to build the containerized application. You should see output similar to the following:  
 
-![Cdk deployment output](images/cdk_deploy_1.png "Cdk deployment output")
+![Cdk deployment output showing list of security related changes, and asking approval to proceed](images/cdk_deploy_1.png "Cdk deployment output")
 
 CDK will prompt you before creating the infrastructure because it is creating infrastructure that changes security configuration — in your case, by creating IAM roles and security groups. Press `y` and then `Enter` to deploy. CDK will now set up all the infrastructure you defined, and it will take a few minutes to complete.
 
 While it is running, you will see updates like this:  
 
-![Cdk deployment output](images/cdk_deploy_2.png "Cdk deployment output")
+![Cdk deployment output showing resources being created, with a progress bar](images/cdk_deploy_2.png "Cdk deployment output")
 
 Once it completes, you will see output with the link to the public URL to access your service like this:  
 
-![Cdk deployment output](images/cdk_deploy_3.png "Cdk deployment output")
+![Cdk deployment output showing the successfully completed infrastructure creation, with outputs of the loadbalancer DNS and URL to access the application](images/cdk_deploy_3.png "Cdk deployment output")
 
 Open the MyServiceAppURL link in a browser of your choice to verify the Nginx deployment.
 
-![Cdk deployment Nginx](images/cdk_Deployment_Nginx.png "Cdk deployment Nginx")
+![Default Nginx welcome page in the browser](images/cdk_Deployment_Nginx.png "Cdk deployment Nginx")
 
 #### Full code sample
 
@@ -344,11 +344,11 @@ You need IAM roles to create workflows to build and deploy your application. Ins
 
 You can create the role by navigating to the summary page of your space, then clicking on the 'Settings' tab and going to the 'AWS Account' page. Open the 'Manage roles from AWS Management Console' page and create a `CodeCatalystPreviewDevelopmentAdministrator` role.
 
-![Create IAM Role](images/CodeCatalyst_IAMRole_1.png "Create IAM Role")
+![CodeCatalyst console showing where to click to add the IAM role for CodeCatalyst](images/CodeCatalyst_IAMRole_1.png "CodeCatalyst console showing where to click to add the IAM role for CodeCatalyst")
 
 In the **Add IAM Role** page, choose to create a new CodeCatalystPreviewDevelopmentAdministrator role.
 
-![Create IAM Role](images/CodeCatalyst_IAMRole_2.png "Create IAM Role")
+![IAM console with the details of how to create the CodeCatalyst IAM role](images/CodeCatalyst_IAMRole_2.png "IAM console with the details of how to create the CodeCatalyst IAM role")
 
 The role will be created as 'codeCatalystPreviewDevelopmentAdministrator', appended with a unique identifier.
 
@@ -358,23 +358,23 @@ To create a CodeCatalyst project, you need to have the [CodeCatalyst](https://co
 
 Let's create a project in your CodeCatalyst Space. In the 'Create Project' page, choose 'Start from Scratch' and provide a valid name to create a project.
 
-![Create CodeCatalyst Project](images/CodeCatalyst_Create_Project.png "Create CodeCatalyst Project")
+![Create CodeCatalyst Project screen with name for the project as "ECS-Deployment-Tutorial"](images/CodeCatalyst_Create_Project.png "Create a CodeCatalyst Project")
 
 ### Create CodeCatalyst Repository
 
 You can either create a new repository or link an existing GitHub repository. For this tutorial, we will be creating a source repository. You can create a repository 'SampleApp' in your project by navigating to the project that we created in previous step.
 
-![Create CodeCatalyst Repository](images/CodeCatalyst_Create_Repository.png "Create CodeCatalyst Repository")
+![CodeCatalyst Repository section to create a new repository](images/CodeCatalyst_Create_Repository.png "Create CodeCatalyst Repository")
 
 ### Create CodeCatalyst Dev Environment
 
 Now we'll create a Dev environment, which will help us to add the sample application to the repository. You can choose an IDE of your choice from the list. For this tutorial, we recommend using AWS Cloud9 or Visual Studio Code.
 
-![Create CodeCatalyst Dev Environment](images/CodeCatalyst_DevEnv.png "Create CodeCatalyst Dev Environment")
+![Dropdown showing how to create a CodeCatalyst Dev Environment](images/CodeCatalyst_DevEnv.png "Create CodeCatalyst Dev Environment")
 
 Create the Dev environment with the following values:
 
-![Create a dev environment that clones the SampleApp repository using the main branch.](images/CodeCatalyst_Create_Dev_Environment.png "Create CodeCatalyst Dev Environment")
+![Create a dev environment that clones the SampleApp repository using the main branch.](images/CodeCatalyst_Create_Dev_Environment.png "Create a dev environment that clones the SampleApp repository using the main branch.")
 
 The next step is to download the sample application from [GitHub](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst) to your local machine and add it to the Dev environment. We will download the project as a `zip` file, uncompress it, and move it into our project folder with the following commands (the `adb68cd` part of the directory name may be different for you, please confirm the value, and replace as needed):
 
@@ -435,7 +435,7 @@ Next, we will create a workflow to build the sample application into a Docker im
 
 To set up a workflow, you can create a workflow definition file using the CodeCatalyst console's visual or YAML editor. Let's create an empty workflow definition for **SampleApp** repository by navigating to the CI/CD section of your project, selecting **Workflows** within CI/CD section, and then clicking on the **Create workflow** button.
 
-![Create CodeCatalyst workflow](images/CodeCatalyst_CreateWorkflow.png "Create CodeCatalyst workflow")
+![Create CodeCatalyst workflow dialog to create one for the SampleApp repository on the main branch](images/CodeCatalyst_CreateWorkflow.png "Create CodeCatalyst workflow")
 
 The default workflow will have a trigger to any push to the `main` branch, and will have the following content:
 
@@ -538,7 +538,7 @@ The code snippet below shows the **Render Amazon ECS Task Definition** action co
 
 As a final step to your workflow, add the **Deploy To Amazon ECS** action. This action registers the task definition file that is created in the **Render Amazon ECS Task Definition** action. Upon registration, the task definition is then instantiated by your Amazon ECS service running in your Amazon ECS cluster. Instantiating a task definition as a service is equivalent to deploying an application into Amazon ECS.
 
-Set the task definition file created in the **Render Amazon ECS Task Definition** action as an input artifact to this action. In the configuration section of the action, configure **task-definition** to the input artifact file path, configure **cluster** to the ECS cluster ARN that you have created in the CDK project. You can find the ECS cluster ARN from the AWS Console - Amazon Elastic Container Service - Clusters. Replace `<ECS cluster ARN>` with your ECS cluster ARN - this was part of the output after running `cdk deploy`, and should be something like `arn:aws:ecs:us-west-2:<account Id>:cluster/CdkEcsInfraStack-EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3-UdnuAwVtK2q2`. Configure **service** to the ECS Service's name, which we defined in the CDK project. Alternatively, you can find the ECS service name in the AWS Console - Amazon Elastic Container Service - Clusters. **Region** is used to configure the AWS Region in which you would like your application to be deployed. Provide the same region where your ECS cluster infrastructure is provisioned. Provide the environment connection and CI/CD environment information under **Environments**.
+Set the task definition file created in the **Render Amazon ECS Task Definition** action as an input artifact to this action. In the configuration section of the action, configure **task-definition** to the input artifact file path, configure **cluster** to the ECS cluster ARN that you have created in the CDK project. You can find the ECS cluster ARN from the AWS Console - Amazon Elastic Container Service - Clusters. Replace `<ECS cluster ARN>` with your ECS cluster ARN - this was part of the output after running `cdk deploy`, and should be something like `arn:aws:ecs:us-west-2:<account Id>:CdkEcsInfraStack-EcsDefaultClusterMnL3mNNYNVPC9C1EC7A3-UdnuAwVtK2q2`. Configure **service** to the ECS Service's name, which we defined in the CDK project. Alternatively, you can find the ECS service name in the AWS Console - Amazon Elastic Container Service - Clusters. **Region** is used to configure the AWS Region in which you would like your application to be deployed. Provide the same region where your ECS cluster infrastructure is provisioned. Provide the environment connection and CI/CD environment information under **Environments**.
 
 For this action to work properly, ensure that the ECS cluster and ECS Service names match the infrastructure that you have already provisioned in your AWS environment.
 
@@ -662,11 +662,11 @@ Actions:
 
 Use the `Commit` button to add the workflow to the repository - it will be added in the `.codecatalyst/workflows` directory as `BuildAndDeployToECS.yaml`. After it is committed, it should start running automatically. You can click on the `Run-xxxxx` link under `Recent runs` to view the execution. Once completed, it should show all the step as successful with a green checkmark:
 
-![CodeCatalyst Workflow](images/CodeCatalyst_workflow_execution.png "CodeCatalyst Workflow")
+![CodeCatalyst Workflow showing a successfully completed run](images/CodeCatalyst_workflow_execution.png "CodeCatalyst Workflow")
 
 Your **SampleApp** web application is successfully deployed to your ECS Cluster. You can verify it by refreshing your browser, which was previously displaying the Nginx welcome page.
 
-![ECS Sample application deployment](images/ECS_Deployment_SampleApp.png "ECS Sample application deployment")
+![ECS Sample application application running in the browser](images/ECS_Deployment_SampleApp.png "ECS Sample application running in the browser")
 
 ## Cleanup
 
@@ -689,9 +689,10 @@ CdkEcsInfraStack: destroying...
   ✅  CdkEcsInfraStack: destroyed
 ```
 
-ECR repository created in the cdk project needs to be deleted manually in the AWS console.
+ECR repository created in the cdk project needs to be deleted manually in the AWS console as CDK will not delete any resources storing data by default.
 
 ![ECR repository cleanup](images/ECR_cleanup.png "ECR repository cleanup")
+
 ### Cleaning Up Your CodeCatalyst Environment
 
 Clean up the resources created in this tutorial to free up the storage in your CodeCatalyst space.
