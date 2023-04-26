@@ -1,13 +1,13 @@
 ---
-title: "Build Efficient CI/CD Pipelines for Connected Microservices in Under an Hour using AWS Copilot"
-description: "Build Efficient CI/CD Pipelines for Connected Microservices in Under an Hour using AWS Copilot. This should help in accelerating in deploying and hosting container based service on the AWS Cloud using Amazon ECS"
+title: "Build Efficient CI/CD Pipelines for Connected Microservices in Under an Hour Using AWS Copilot"
+description: "Here's how to build CI/CD pipelines for connected microservices using AWS Copilot. This should accelerate deploying and hosting container-based servicew on the AWS Cloud using Amazon ECS."
 tags:
   - aws
   - devops
   - containers
   - copilot
   - service-discovery
-  - ci-cd
+  - cicd
   - tutorial
   - ecs
 spaces:
@@ -17,7 +17,7 @@ authorName: Kirankumar Chandrashekar
 date: 2023-04-24
 ---
 
-With the rise of application modernization, a significant topic of discussion is breaking down monolithic applications into microservices. Essentially, the process begins with breaking the monolith into its individual working parts, making it easier to create a virtualized application environment using tools like containers. During the process, another question arises: whether to use a single (mono) repository for all microservices or  each microservice in its own repository.
+With the rise of application modernization, a significant topic of discussion is breaking down monolithic applications into microservices. Essentially, the process begins with breaking the monolith into its individual working parts, making it easier to create a virtualized application environment using tools like containers. During the process, another question arises: whether to use a single (mono) repository for all microservices or to keep each microservice in its own repository.
 
 Using a repository for each microservice has several benefits:
 
@@ -25,9 +25,9 @@ Using a repository for each microservice has several benefits:
 * Enabling the creation of smaller teams to develop and deliver a single service
 * Allowing the team to maintain a smaller codebase, reducing complexity
 * Allowing for faster build and deployment processes with a smaller codebase
-* Allowing for the freedom to write code independently and differently from all other services (using different programming languages, libraries, approached, etc)
+* Allowing for the freedom to write code independently and differently from all other services (using different programming languages, libraries, approaches, etc)
 
-Creating a separate repository for each microservice benefits a team in maintaining its own development and release cycles. Having said this, the next question that arises is how to set up the required infrastructure easily when the microservices are interconnected with each other? As with most things, there is a trade-off, the complexity doesn't just magically disappear. In this instance, the complexity of having multiple parts of a system in single application is reduced by splitting them into separate services, and the complexity is moved to the infrastructure and coordination. Luckily the tooling and approaches to manage this have improved in the last decade as microservice architecture has matured.
+Creating a separate repository for each microservice benefits a team in maintaining its own development and release cycles. Having said this, the next question that arises is how to set up the required infrastructure easily when the microservices are interconnected with each other. As with most things, there is a trade-off: the complexity doesn't just magically disappear. In this instance, the complexity of having multiple parts of a system in single application is reduced by splitting them into separate services, and the complexity is moved to the infrastructure and coordination. Luckily the tooling and approaches to manage this have improved in the last decade as microservice architecture has matured.
 
 This tutorial will show you how you can take advantage of [AWS Copilot CLI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Copilot.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq) - that accelerates you to build efficient CI/CD Pipelines for connected microservices in under an hour using AWS Copilot. AWS Copilot CLI is a tool for developers to build, release, and operate production-ready, containerized applications on [AWS App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [AWS Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq). More information about Copilot, core concepts can be found in [the Copilot official documentation](https://aws.github.io/copilot-cli/docs/concepts/overview/).
 
@@ -50,7 +50,7 @@ This tutorial will show you how you can take advantage of [AWS Copilot CLI](http
 
 ![Architecture](images/ECS-Copilot.jpg)
 
-The architecture diagram above shows a three-tier application with an Application Load Balancer (ALB) forwarding traffic to the **frontend** ECS Service. The frontend ECS service serves the webpage content to the browser and also acts as a router, communicating to the **backend** ECS service that executes the business logic. The backend ECS service, in turn uses a DynamoDb table to insert/update/delete data. In this case, the frontend and backend are separate microservices that are maintained using their own CI/CD pipeline and Git repository. The frontend communicates with the backend using a user-friendly DNS domain name that is created as part of service discovery. The service discovery feature on Amazon ECS manages the DNS records during scale-in and scale-out events. The infrastructure above allows us to deploy each microservice as an independent unit, even though the applications depend on each other for functionality and can be accessed individually.
+The architecture diagram above shows a three-tier application with an Application Load Balancer (ALB) forwarding traffic to the **frontend** ECS Service. The frontend ECS service serves the webpage content to the browser and also acts as a router, communicating to the **backend** ECS service that executes the business logic. The backend ECS service in turn uses a DynamoDb table to insert/update/delete data. In this case, the frontend and backend are separate microservices that are maintained using their own CI/CD pipelines and Git repositories. The frontend communicates with the backend using a user-friendly DNS domain name that is created as part of service discovery. The service discovery feature on Amazon ECS manages the DNS records during scale-in and scale-out events. The infrastructure above allows us to deploy each microservice as an independent unit, even though the applications depend on each other for functionality and can be accessed individually.
 
 In the next section, you will build and deploy the above architecture using [AWS Copilot](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Copilot.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq). You will use a sample “*Todo*” application. It has a UI built using ReactJs and is served from a frontend service. Todo service allows you to organize your work and life, and that is stored on the DynamoDB table for subsequent access of the service. It also lets you add more to-dos, and also delete the ones you don’t need. The frontend service also behaves as a router to the backend service using a Nginx proxy server for the requests received from the LoadBalancer. The backend service does the actual business logic of managing the data that is stored in the DynamoDB table. The Service discovery associated with the backend service maintains the DNS records within the Route53 private hosted zone. This is essential for maintaining the correct DNS records for the frontend service to access the backend service using a user-friendly URL, since the internal IP addresses of the backend service can change due to scaling events. Both frontend and backend are deployed within the same VPC and placed within the private subnets. The Application Load Balancer is placed within the public subnets. All the infrastructure that is required for this functionality to work can be created using AWS Copilot.
 
