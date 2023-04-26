@@ -26,7 +26,7 @@ In addition to learning about Amazon ECS and its various components, you will:
 - Create the infrastructure to run your container with Amazon ECS
 - Deploy a containerized application to Amazon ECS using Amazon CodeCatalyst
 
-| Info                | Level                                  |
+| Attributes            |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Beginner                               |
 | ⏱ Time to complete  | 15-20 minutes                             |
