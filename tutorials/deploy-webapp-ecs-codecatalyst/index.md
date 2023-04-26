@@ -31,10 +31,10 @@ In addition to learning about Amazon ECS and its various components, you will:
 | ✅ AWS Level        | Beginner                               |
 | ⏱ Time to complete  | 15-20 minutes                             |
 | 💰 Cost to complete | Less than $0.02 USD if completed in under an hour.     |
-| 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) with administrator-level access*<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> [*]Accounts created within the past 24 hours might not yet have access to the services required for this tutorial.
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq) with administrator-level access*<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> [*]Accounts created within the past 24 hours might not yet have access to the services required for this tutorial.
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/automate-web-app-amazon-ecs-cdk-codecatalyst)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-04-17                             |
+| ⏰ Last Updated     | 2023-04-26                             |
 
 | ToC |
 |-----|
@@ -43,11 +43,11 @@ In addition to learning about Amazon ECS and its various components, you will:
 
 Before starting this tutorial, you will need the following:
 
-- An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
+- An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq)).
 - CDK installed: Visit the [**Get Started with AWS CDK guide**](/getting-started/guides/setup-cdk/) to learn more.
 - The example project code downloaded to extract the SampleApp.
 - Docker installed and running.
-- [CodeCatalyst](https://codecatalyst.aws/) Account and Space setup with Space administrator role assigned to you (if you don't have a CodeCatalyst setup already, you can follow the [Amazon CodeCatalyst setting up guide](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html)).
+- [CodeCatalyst](https://codecatalyst.aws/) Account and Space setup with Space administrator role assigned to you (if you don't have a CodeCatalyst setup already, you can follow the [Amazon CodeCatalyst setting up guide](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq)).
 
 ## Understanding ECS
 
@@ -61,9 +61,9 @@ Amazon ECS is a fully managed container orchestration service that helps you eas
 
 An Amazon ECS cluster is a logical construct that will group all the containers deployed into a cluster. There is no cost for a cluster - only for the compute and other infrastructure you use to run your containers.
 
-To launch a container, you provide a [**task definition**](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html), which contains properties like the container image location, amount of CPU and memory, logging configuration, and so on. This does not launch a container; it just provides all the configuration needed to be able to run it. To launch it, you will define a [**service**](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
+To launch a container, you provide a [**task definition**](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq), which contains properties like the container image location, amount of CPU and memory, logging configuration, and so on. This does not launch a container; it just provides all the configuration needed to be able to run it. To launch it, you will define a [**service**](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-In the service, you define how many copies of the container you want (or if you need it to run on every instance, a [**daemon**](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon) that needs to run on every host, and ECS will handle the orchestration of it). To expose your services to the internet, you will need to set up an Application Load Balancer to forward requests to your service. Lastly, Amazon ECS can be configured to deploy across multiple Availability Zones (AZs), and will automatically balance the deployment across the number of AZs available and update the load balancer with details of each deployment to allow traffic to be routed to it.
+In the service, you define how many copies of the container you want (or if you need it to run on every instance, a [**daemon**](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq) that needs to run on every host, and ECS will handle the orchestration of it). To expose your services to the internet, you will need to set up an Application Load Balancer to forward requests to your service. Lastly, Amazon ECS can be configured to deploy across multiple Availability Zones (AZs), and will automatically balance the deployment across the number of AZs available and update the load balancer with details of each deployment to allow traffic to be routed to it.
 
 The following diagram shows what the infrastructure would look like:  
 
@@ -71,7 +71,7 @@ The following diagram shows what the infrastructure would look like:
 
 ### Compute Capacity Planning, and Options
 
-Amazon ECS can schedule services to run on an EC2 host (virtual machine), or using AWS Fargate, a serverless compute engine for containers. When running containers, you need to account for capacity planning. As an example, if you have two hosts available in your cluster, each with 512MB of memory, the cluster will show a total of 1024MB of memory available, but you won't be able to launch a new container that requires more than 512MB of memory as there is no single host with enough memory. You can mitigate this by using capacity providers to automatically scale the cluster.
+Amazon ECS can schedule services to run on an EC2 host (virtual machine), or using [AWS Fargate](https://docs.aws.amazon.com/AmazonECS/latest/userguide/what-is-fargate.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq), a serverless compute engine for containers. When running containers, you need to account for capacity planning. As an example, if you have two hosts available in your cluster, each with 512MB of memory, the cluster will show a total of 1024MB of memory available, but you won't be able to launch a new container that requires more than 512MB of memory as there is no single host with enough memory. You can mitigate this by using capacity providers to automatically scale the cluster.
 
 Alternatively, you can use Fargate, which allows you to specify the CPU and memory requirements for each container, and which then launches the required compute to run the container for you. The main difference between Fargate and EC2 hosts is that you do not need to set up, manage, or maintain the operating system on the host when using Fargate, nor do you need to do capacity planning as it will launch exactly the amount of capacity you need.
 
@@ -81,7 +81,7 @@ In this section, you will create an AWS CDK application that will create all the
 
 ### Create the CDK App
 
-First, ensure you have CDK installed. If you do not have it installed, please follow the [**Get Started with AWS CDK guide**](/getting-started/guides/setup-cdk/).  
+First, ensure you have CDK installed. If you do not have it installed, please follow the [**Get Started with AWS CDK guide**](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq).  
 
 ```Bash
     cdk --version
@@ -134,7 +134,7 @@ This will output the following:
 
 Go to the file `lib/cdk-ecs-infra-stack.ts`. This is where you will write the code for the resource stack you are going to create.
 
-A resource stack is a set of cloud infrastructure resources (in your particular case, they will all be AWS resources) that will be provisioned into a specific account. The account/Region where these resources are provisioned can be configured in the stack (as covered in the [**Get Started with AWS CDK guide**](/getting-started/guides/setup-cdk/)).
+A resource stack is a set of cloud infrastructure resources (in your particular case, they will all be AWS resources) that will be provisioned into a specific account. The account/Region where these resources are provisioned can be configured in the stack (as covered in the [**Get Started with AWS CDK guide**](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq)).
 
 In this resource stack, you are going to create the following resources:
 
@@ -246,7 +246,7 @@ This will use the Account ID and Region configured in the AWS CLI. Before you ca
     ✅  Environment aws://0123456789012/<region> bootstrapped
 ```
 
-This will create the required infrastructure for CDK to manage infrastructure in your account. We recommend working through the [**Get Started with AWS CDK**](/getting-started/guides/setup-cdk/) guide if you are not familiar with setting up a CDK application.
+This will create the required infrastructure for CDK to manage infrastructure in your account. We recommend working through the [**Get Started with AWS CDK**](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq) guide if you are not familiar with setting up a CDK application.
 
 Once the bootstrapping has completed, you will run `cdk deploy` to deploy the container, cluster, and all the other infrastructure required. Please note that Docker must be running to build the containerized application. You should see output similar to the following:  
 
@@ -354,7 +354,7 @@ The role will be created as 'codeCatalystPreviewDevelopmentAdministrator', appen
 
 ### Create CodeCatalyst Project
 
-To create a CodeCatalyst project, you need to have the [CodeCatalyst](https://codecatalyst.aws/) account and space setup. If you don't have a CodeCatalyst setup already, you can follow the [Amazon CodeCatalyst setting up guide](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html).
+To create a CodeCatalyst project, you need to have the [CodeCatalyst](https://codecatalyst.aws/) account and space setup. If you don't have a CodeCatalyst setup already, you can follow the [Amazon CodeCatalyst setting up guide](https://docs.aws.amazon.com/codecatalyst/latest/userguide/setting-up-topnode.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 Let's create a project in your CodeCatalyst Space. In the 'Create Project' page, choose 'Start from Scratch' and provide a valid name to create a project.
 

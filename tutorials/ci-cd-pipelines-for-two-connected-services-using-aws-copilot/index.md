@@ -1,6 +1,6 @@
 ---
 title: "Build Efficient CI/CD Pipelines for Connected Microservices in Under an Hour Using AWS Copilot"
-description: "Here's how to build CI/CD pipelines for connected microservices using AWS Copilot. This should accelerate deploying and hosting container-based servicew on the AWS Cloud using Amazon ECS."
+description: "Here's how to build CI/CD pipelines for connected microservices using AWS Copilot. This should accelerate deploying and hosting container-based service on the AWS Cloud using Amazon ECS."
 tags:
   - aws
   - devops
@@ -14,7 +14,7 @@ spaces:
   - devops
 authorGithubAlias: kirankumar15
 authorName: Kirankumar Chandrashekar
-date: 2023-04-24
+date: 2023-04-26
 ---
 
 With the rise of application modernization, a significant topic of discussion is breaking down monolithic applications into microservices. Essentially, the process begins with breaking the monolith into its individual working parts, making it easier to create a virtualized application environment using tools like containers. During the process, another question arises: whether to use a single (mono) repository for all microservices or to keep each microservice in its own repository.
@@ -41,7 +41,7 @@ This tutorial will show you how you can take advantage of [AWS Copilot CLI](http
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/automate-container-microservices-aws-copilot)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-04-24                                                     |
+| ⏰ Last Updated        | 2023-04-26                                                     |
 
 | ToC |
 |-----|
@@ -266,7 +266,7 @@ def receive_health_check():
 
 ### 2. Create a DynamoDB table
 
-In this step, you will be creating the [DynamoDB](https://aws.amazon.com/dynamodb/) table required by the backend service using Copilot. The backend service uses a DynamoDB table to save to-do items. You can add storage resources to services with the `copilot storage init` command.
+In this step, you will be creating the [DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq) table required by the backend service using Copilot. The backend service uses a DynamoDB table to save to-do items. You can add storage resources to services with the `copilot storage init` command.
 
 Run the `copilot storage init` command to create a DynamoDB table to be used by the backend service.
 
@@ -350,7 +350,7 @@ Tasks
   121b23ed  RUNNING     1           12 minutes ago
 ```
 
-For the backend service, Copilot also sets up service discovery. Service discovery uses AWS Cloud Map API actions to manage HTTP and DNS namespaces for your Amazon ECS services to enable other services to send requests to your services. `COPILOT_SERVICE_DISCOVERY_ENDPOINT` is a special environment variable that the Copilot CLI sets for you when it creates the service. The format is `{env name}.{app name}.local` and requests to `/api` are passed to `http://backend.development.todo.local:10000/`. The endpoint `backend.development.todo.local` resolves to a private IP address and is routed privately within your VPC to the backend service. When configuring the frontend service, you will be using the `COPILOT_SERVICE_DISCOVERY_ENDPOINT` environment variable to access the backend service using service discovery. More information about Service Discovery can be found [here](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+For the backend service, Copilot also sets up service discovery. Service discovery uses AWS Cloud Map API actions to manage HTTP and DNS namespaces for your Amazon ECS services to enable other services to send requests to your services. `COPILOT_SERVICE_DISCOVERY_ENDPOINT` is a special environment variable that the Copilot CLI sets for you when it creates the service. The format is `{env name}.{app name}.local` and requests to `/api` are passed to `http://backend.development.todo.local:10000/`. The endpoint `backend.development.todo.local` resolves to a private IP address and is routed privately within your VPC to the backend service. When configuring the frontend service, you will be using the `COPILOT_SERVICE_DISCOVERY_ENDPOINT` environment variable to access the backend service using service discovery. More information about Service Discovery can be found [here](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### 4. Set up the CI/CD pipeline for backend
 
@@ -589,7 +589,7 @@ At this point, we have deployed both the frontend and backend services, and you 
 
 ![frontend-app-ui](images/app-ui-sample.png)
 
-If you are wondering how the frontend service knows about the backend service, then take a look at the Nginx configuration file: `backend.conf.template`. Requests to `/api` are passed to `backend.${COPILOT_SERVICE_DISCOVERY_ENDPOINT}`. `COPILOT_SERVICE_DISCOVERY_ENDPOINT` is a special environment variable that the Copilot CLI sets for you when it creates your service. It uses the format `{env name}.{app name}.local`, and requests to `/api` are passed to `http://backend.development.todo.local:10000/`. The endpoint `backend.development.todo.local` resolves to a private IP address and is routed privately within your VPC to the backend service. More information about Service Discovery can be found [here](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+If you are wondering how the frontend service knows about the backend service, then take a look at the Nginx configuration file: `backend.conf.template`. Requests to `/api` are passed to `backend.${COPILOT_SERVICE_DISCOVERY_ENDPOINT}`. `COPILOT_SERVICE_DISCOVERY_ENDPOINT` is a special environment variable that the Copilot CLI sets for you when it creates your service. It uses the format `{env name}.{app name}.local`, and requests to `/api` are passed to `http://backend.development.todo.local:10000/`. The endpoint `backend.development.todo.local` resolves to a private IP address and is routed privately within your VPC to the backend service. More information about Service Discovery can be found [here](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 We still have one more task left, and that is to set up the CI/CD pipeline to automatically deploy any changes to the frontend for us.
 
