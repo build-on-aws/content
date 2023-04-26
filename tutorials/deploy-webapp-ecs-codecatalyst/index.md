@@ -689,6 +689,9 @@ CdkEcsInfraStack: destroying...
   ✅  CdkEcsInfraStack: destroyed
 ```
 
+ECR repository created in the cdk project needs to be deleted manually in the AWS console.
+
+![ECR repository cleanup](images/ECR_cleanup.png "ECR repository cleanup")
 ### Cleaning Up Your CodeCatalyst Environment
 
 Clean up the resources created in this tutorial to free up the storage in your CodeCatalyst space.
