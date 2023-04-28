@@ -11,6 +11,8 @@ additionalAuthors:
   - authorGithubAlias: darko-mesaros
     authorName: Darko Mesaros
 date: 2023-03-31
+spaces:
+  - livestreams
 ---
 
 Welcome to the first episode of Build on Weekly! 🥳 Here we introduce ourselves, say hi to chat, and tell you what this show is all about. We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
