@@ -25,7 +25,7 @@ But before we get into the best practices and the tutorial itself, let's synchro
 | ✅ AWS experience      | 300 - Advanced                                              |
 | ⏱ Time to complete     | 90 minutes to complete                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
+| 🧩 Prerequisites    | [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-04-28 <as mentioned above>                             |
 
