@@ -10,6 +10,11 @@ tags:
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2022-03-10
+images:
+  banner: ./build-on-answered.png
+  thumbnail: ./build-on-answered.png
+  hero: ./build-on-answered.png
+  background: ./build-on-answered.png
 ---
 
 Join us for Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
