@@ -23,12 +23,12 @@ But before we get into the best practices and the tutorial itself, let's synchro
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 300 - Advanced                                              |
-| ⏱ Time to complete     | X minutes to complete                                                      |
+| ⏱ Time to complete     | 90 minutes to complete                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | YYYY-MM-DD <as mentioned above>                             |
+| ⏰ Last Updated     | 2023-04-28 <as mentioned above>                             |
 
 | ToC |
 |-----|
@@ -60,7 +60,7 @@ The overall CI/CD pipeline, according to best practices, is shown in the figure 
 
 ![overview](./images/overview.png)
 
-There are three code repositories under the CodeCommit repository. One is `flux-repo`, the configuration repository for Flux CD, which is used to define Flux-related resources. The other is `microservices-repo`, which saves microservice application configurations and deployment files. The third one is the source repository `app-repo` for business services. In this post, a front-end project will be used as an example. We used CodePipeline for continuous integration in the CI/CD pipeline, built and stored the docker image in Amazon ECR, and deployed the CD engine Flux as a pod in the Amazon EKS environment.
+There are three code repositories under the [AWS CodeCommit](https://us-east-1.console.aws.amazon.com/codesuite/codecommit/home?region=us-east-1) repository. One is `flux-repo`, the configuration repository for Flux CD, which is used to define Flux-related resources. The other is `microservices-repo`, which saves microservice application configurations and deployment files. The third one is the source repository `app-repo` for business services. In this post, a front-end project will be used as an example. We used [AWS CodePipeline](https://us-east-1.console.aws.amazon.com/codesuite/codepipeline/start?region=us-east-1) for continuous integration in the CI/CD pipeline, built and stored the docker image in [Amazon ECR](https://us-east-1.console.aws.amazon.com/ecr/home?region=us-east-1), and deployed the CD engine Flux as a pod in the [Amazon EKS](https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/home) environment.
 
 **The basic workflow is:**
 
@@ -84,7 +84,7 @@ Since we have explained the GitOps concept and the architecture of the CI/CD pip
 
 One of the fundamental principles of DevOps is that infrastructure gets **equal status** with code. Infrastructure as Code (IaC) uses code to enable cloud infrastructure deployment and governance of the cloud environment. Coding engineers use configuration files or code to define the infrastructure and create it by coding to ensure the consistency and repeatability. With IaC, coding engineers also manage the lifecycle of resources, such as hosting infrastructure definitions in version control repositories, and using Continuous Integration/Continuous Deployment (CI/CD) that is compatible with app coding for changing the definition of IaC, synchronizing the environments (e.g., development, testing, production) with the changes of the IaC codes. Additionally, automatic rollback is possible in case of failures, and drift detection helps to identify differences from the expected state.
 
-In the cloud, coding engineers can use the AWS Cloud Development Kit (CDK) to build their infrastructure model with Python, Java, and Typescript. CDK provides advanced components called Constructs, which preconfigure cloud resources with validated default values. It also allows engineers to write and share their custom constructs according to their organization's requirements. All of these will accelerate projects.
+In the cloud, coding engineers can use the [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/index.html) to build their infrastructure model with Python, Java, and Typescript. CDK provides advanced components called Constructs, which preconfigure cloud resources with validated default values. It also allows engineers to write and share their custom constructs according to their organization's requirements. All of these will accelerate projects.
 
 ### 1.1 Create a Project with CDK CLI
 
