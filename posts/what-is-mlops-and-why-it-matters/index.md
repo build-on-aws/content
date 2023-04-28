@@ -18,7 +18,7 @@ Imagine you own a music production company and want to predict the success of th
 
 That’s when a Data Scientist comes in. They start by exploring the data and identifying which features are most important for predicting revenue. They use statistical techniques to understand the relationships between the features and the revenue. They build a machine learning model to predict the revenue of a music album based on its characteristics. They train the model on historical data and use various algorithms, such as regression or random forest, to make accurate predictions.
 
-Once the model is built, they deploy it into production and use it to predict the revenue of new music album before they are released. This allows the production company to make informed decisions on the album they want to produce and how much they should invest. By using data and machine learning, the Data Scientist helped the production company solve a business problem and make better decisions. Now, they produce more successful music albums and avoid investing in albums that are likely to fail at the box office.
+Once the model is built, they deploy it into production and use it to predict the revenue of new music album before they are released. This allows the production company to make informed decisions on the album they want to produce and how much they should invest. By using data and machine learning, the Data Scientist helped the production company solve a business problem and make better decisions. Such data driven approach helps the music company increases the chances of producing successful music albums and may reduce the risk on investment.
 
 But for a consecutive success on the business the data scientist should continue to improve the model based on new data set’s. A continuous monitoring, is needed to detect when the model's performance has degraded or is no longer accurate. A standardized and reproducible approach to deploying and managing machine learning models is needed to deploy the models consistently across different environments. A clear audit trail of changes made to the model and its environment is needed to comply with regulations or to investigate any issues that arise.
 
@@ -27,7 +27,7 @@ Without aiding the data scientists  with a platform to bridge these gaps the pro
 ### Welcome to the world of MLOps
 MLOps in short Machine Learning Operations, is a magical wand that makes it possible for data scientists and engineers to deploy, monitor and manage machine learning models in a smooth and efficient way.
 
-Think MLOps as a team of superheroes who work behind the scenes to ensure that your favorite apps, such as Spotify, Netflix, or Siri, can make accurate predictions and recommendations based on your interests and behaviors. With MLOps, these superheroes can automate the whole process of training and deploying models, from collecting data to deploying models to production environments, and then monitoring their performance. They use powerful tools to make the whole process run as a well-oiled machine.
+Think MLOps as a team of heroes who work behind the scenes to ensure that your favorite apps, such as Spotify, Netflix, or Siri, can make accurate predictions and recommendations based on your interests and behaviors. With MLOps, these heroes can automate the whole process of training and deploying models, from collecting data to deploying models to production environments, and then monitoring their performance. They use powerful tools to make the whole process run as a well-oiled machine.
 
 A machine learning workflow starts with cleaning, preparing and curating the raw data. Then Feed the validated data and processed code to model building activities such as number of experiments to train, evaluate and tune the model until the model delivers the performance that’s expected. Each of those experiments needs to be tracked for performance comparison and so different set of artifacts needs to be maintained along with data set metadata. Once the Model is finalized then you register the model along with it’s metadata such as model built, performance and where it deployed. Finally define the KPI for the model and deploy it in one or more target deployments. Once the preferred model is deployed, then monitor for ongoing performance and detect data drift and concept drifts.
 
@@ -37,9 +37,9 @@ With a basic model build and deploy workflow like this, the Data Scientists can 
 
 ### How does MLOps differ from DevOps
 
-Imagine you're planning a party - DevOps is like the party planner, responsible for coordinating all the different elements of the party, from the food and decorations to the music and guest list. They make sure everything runs smoothly and that everyone has a good time.
+DevOps is like the party planner, responsible for coordinating all the different elements of the party, from the food and decorations to the music and guest list. They make sure everything runs smoothly and that everyone has a good time.
 
-Now, imagine you're baking a cake for the party- MLOps is like your trusty kitchen assistant, responsible for helping you get the perfect bake every time. They make sure you have all the right ingredients, that your oven is preheated to the right temperature, and that you don't overmix the batter. They help you get the perfect cake every time!
+If you're baking a cake for the party- MLOps is like your trusty kitchen assistant, responsible for helping you get the perfect bake every time. They make sure you have all the right ingredients, that your oven is preheated to the right temperature, and that you don't overmix the batter. They help you get the perfect cake every time!
 
 In other words, DevOps is a set of practices that help organizations streamline the entire software development process, while MLOps is a specialized practice that focuses specifically on managing the lifecycle of machine learning models. 
 
@@ -49,7 +49,7 @@ MLOps tools offer specialized support for popular machine learning frameworks an
 
 So, while both DevOps and MLOps share some similarities, such as automation and collaboration, they differ in their focus and the tools and techniques they use. 
 
-### How do I get started
+### How do YOU get started
 
 Getting started with MLOps can seem daunting exercise, but there are steps that you can follow to get started:
 
@@ -106,8 +106,9 @@ In case if there is a class imbalance presence, one way to balance the classes i
 model = LogisticRegression(class_weight='balanced')
 ```
 
-Similar to this model code progression, start small and iterate: When you're ready to start implementing MLOps in your own projects, it's important to start small and iterate. Don't try to implement all the features at once. Instead, focus on the most critical parts of the workflow and build up from there.
+Similar to this model code progression, start small and iterate: When you're ready to start implementing MLOps in your own projects, it's important to start small and iterate. Don't try to implement all the features at once. Instead, focus on the most critical parts of the workflow and build up from there. Observing from others, doing all at once led to several issues such as complex code, long development cycles and increased risk of errors. 
 
+Staring small and iterating helps in breaking down the complex process into smaller, manageable taks that can be accomplished in shorter amount of time. This approach also allows you to identify and address any issues or errors at an earlier stage and tune according to business needs, rather than waiting until the end of the deployment cycle. You can save time by making small, incremental improvements to the MLOps system, leading to more efficient and effective development cycles.
 
 ### Is there a fast track path
 You can speed up the journey by using a cloud native service that provides seamless integration to accommodate the MLOps features such as Amazon Sagemaker.
