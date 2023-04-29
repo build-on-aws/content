@@ -1,6 +1,6 @@
 ---
 title: What is DevOps?
-description: An essential guide for learning what DevOps is and it’s core concepts. 
+description: An essential guide for learning what DevOps is and its core concepts. 
 tags:
   - devops
   - foundational
