@@ -5,7 +5,7 @@ tags:
     - ecs
     - cdk
     - codecatalyst
-    - cicd
+    - ci-cd
     - tutorials
     - aws
 authorGithubAlias: kowsalyajaganathan
