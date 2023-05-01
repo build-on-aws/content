@@ -8,7 +8,7 @@ tags:
   - copilot
   - service-discovery
   - cicd
-  - tutorial
+  - tutorials
   - ecs
 spaces:
   - devops

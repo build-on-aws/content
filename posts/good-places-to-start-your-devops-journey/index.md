@@ -2,6 +2,7 @@
 title: "How I Started My DevOps Journey"
 description: "Lessons I learned along my personal journey into DevOps - and good places to start your own."
 tags:
+  - personal-journeys
   - devops
   - career
   - learning
