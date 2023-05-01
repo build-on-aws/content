@@ -7,7 +7,7 @@ tags:
   - containers
   - copilot
   - service-discovery
-  - cicd
+  - ci-cd
   - tutorials
   - ecs
 spaces:
