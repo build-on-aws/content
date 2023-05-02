@@ -27,6 +27,7 @@
   * [How do I add posts to the home page feed?](#how-do-i-add-posts-to-the-home-page-feed)
   * [How do I pin a post in the home page?](#how-do-i-pin-a-post-in-the-home-page)
   * [How can I provide description for tags?](#how-can-I-provide-description-for-tags)
+  * [How can I set the Canonical URL?](#how-can-I-set-the-canonical-url)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -556,6 +557,12 @@ description: "<SEO description for the tag>"
 ````
 The description field (plain text only) will be used for SEO purposes in the tag page, and the (optional) markdown content in this file will be rendered under the tag name in the tag page. Although it supports markdown in its full extent, the content should be mostly text and links.
 
+### How can I set the Canonical URL?
+
+Add an attribute in the FrontMatter header named "externalCanonicalUrl" with the canonical URL of the original content you want to link to. For example:
+  ````yml
+      externalCanonicalUrl: https://dzone.com/articles/demystifying-transition-to-microservices
+  ````
 
 ## Miscellaneous
 
