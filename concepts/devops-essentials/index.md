@@ -11,6 +11,11 @@ spaces:
 authorGithubAlias: gogococo 
 authorName: Jacquie Grindrod
 date: 2023-01-12
+images:
+  banner: images/devops_loop.jpeg
+  thumbnail: images/devops_loop.jpeg
+  hero: images/devops_loop.jpeg
+  background: images/devops_loop.jpeg
 ---
 
 This guide is for beginners who are looking for an overview of what DevOps is and an introduction to the core concepts they should be aware of. You’ve probably landed here because you’re looking to learn more about it and how you can apply this knowledge to the problems you are facing. You can think of this post as a guide post to help you discover where you are and where you're going next. This guide will not sell you products, platforms or tools as solutions to those problems. There is no one size fits all solution, however there are existing patterns, frameworks, and mechanisms that have been tested and iterated upon which you can leverage. Feel free to read this post from start to finish or to skip to sections that you're most interested in, whichever works best for you!

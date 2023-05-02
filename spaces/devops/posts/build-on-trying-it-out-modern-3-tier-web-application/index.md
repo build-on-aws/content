@@ -12,4 +12,9 @@ additionalAuthors:
   - authorName: Darko Mesaros
     authorGithubAlias: darko-mesaros
 date: 2023-01-19
+images:
+  banner: images/3_tier_app.jpeg
+  thumbnail: images/3_tier_app.jpeg
+  hero: images/3_tier_app.jpeg
+  background: images/3_tier_app.jpeg
 ---

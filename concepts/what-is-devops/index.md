@@ -11,6 +11,11 @@ spaces:
 authorGithubAlias: gogococo 
 authorName: Jacquie Grindrod
 date: 2023-04-01
+images:
+  banner: images/devops.jpeg
+  thumbnail: images/devops.jpeg
+  hero: images/devops.jpeg
+  background: images/devops.jpeg
 ---
 
 What is DevOps? Is it a tool? Is it a kind of agile process like Scrum or Kanban? Does deploying to Kubernetes mean we are doing DevOps? Where does it start and when have we reached the end?
