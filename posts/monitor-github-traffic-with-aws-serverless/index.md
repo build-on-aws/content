@@ -317,3 +317,4 @@ Note that the entire solution has been built using AWS Serverless technology. La
 Remember, you cannot manage what you cannot measure. With all the awesome open-source projects available on GitHub, it's important to understand the impact of your hard work. We've explored a solution to track key GitHub metrics like clones, stars, and forks, store it beyond the 14 day limit on GitHub, and analyzed the data to gain insight. This approach can be expanded to track additional metrics such as issues, pull requests, and any other data that you may find useful. 
 
 So whether you're exploring a galaxy far, far away or tracking the performance of your code, the importance of metrics cannot be understated. You too can use the power of serverless architectures to track the success of your repositories.
+
