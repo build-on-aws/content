@@ -27,6 +27,7 @@
   * [How do I add posts to the home page feed?](#how-do-i-add-posts-to-the-home-page-feed)
   * [How do I pin a post in the home page?](#how-do-i-pin-a-post-in-the-home-page)
   * [How can I provide description for tags?](#how-can-I-provide-description-for-tags)
+  * [How can I set the Canonical URL?](#how-can-I-set-the-canonical-url)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
