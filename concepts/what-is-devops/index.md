@@ -1,6 +1,6 @@
 ---
 title: What is DevOps?
-description: An essential guide for learning what DevOps is and its core concepts. 
+description: DevOps can mean a lot of different things, depending who you ask. Let's dive in and try to clarify what exactly it is.
 tags:
   - devops
   - foundational
@@ -86,20 +86,20 @@ https://www.youtube.com/watch?v=kCRD4pNuh80
 
 Here are some of the frameworks for understanding and approaching DevOps in different contexts.
 
-## The Three Pillars
+## The Three Ways
 
-This first framework comes from [The DevOps Handbook](https://www.goodreads.com/en/book/show/26083308), and you can see it in action in [The Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project). The DevOps Handbook focuses on 3 major pillars.
+This first framework comes from [The DevOps Handbook](https://www.goodreads.com/en/book/show/26083308), and you can see it in action in [The Phoenix Project](https://www.goodreads.com/book/show/17255186-the-phoenix-project). The DevOps Handbook focuses on 3 major ways.
 
-* **First Pillar** - Principles of Flow and Systems Thinking:\
-The first pillar focuses on the performance of the entire system, as an individual team's success doesn't matter if the organization as a whole fails to deliver. To begin, we focus on creating a culture of continuous improvement and ensuring that work flows smoothly and efficiently throughout the entire value stream: from development, to operations, to customer feedback, and then back again. This involves optimizing processes, breaking work into smaller chunks, and reducing friction at each stage to enable fast and reliable delivery of high quality products.
+* **First Way** - Principles of Flow and Systems Thinking:\
+The first way focuses on the performance of the entire system, as an individual team's success doesn't matter if the organization as a whole fails to deliver. To begin, we focus on creating a culture of continuous improvement and ensuring that work flows smoothly and efficiently throughout the entire value stream: from development, to operations, to customer feedback, and then back again. This involves optimizing processes, breaking work into smaller chunks, and reducing friction at each stage to enable fast and reliable delivery of high quality products.
 
-* **Second Pillar** - Principles of Feedback and Amplifying Feedback Loop:\
-The second pillar emphasizes the importance of getting fast and actionable feedback at all stages of the development process to constantly iterate and improve using feedback loops and team collaboration. This involves fostering a culture of experimentation and learning, where feedback from customers and stakeholders is used to inform decisions and drive continuous improvement. Teams work together to identify and resolve issues as quickly as possible, and prioritize transparency and communication to promote collaboration and knowledge sharing.
+* **Second Way** - Principles of Feedback and Amplifying Feedback Loop:\
+The second way emphasizes the importance of getting fast and actionable feedback at all stages of the development process to constantly iterate and improve using feedback loops and team collaboration. This involves fostering a culture of experimentation and learning, where feedback from customers and stakeholders is used to inform decisions and drive continuous improvement. Teams work together to identify and resolve issues as quickly as possible, and prioritize transparency and communication to promote collaboration and knowledge sharing.
   
 * **Third Way** - Principles of Continuous Experimentation and Learning:\
-The third pillar focuses on creating a culture of continual learning and experimentation, where teams are encouraged to take risks and innovate in order to drive continuous improvement. Exploration and discovery are just as important as being open to making mistakes and failures. This involves fostering a culture of innovation and experimentation, where teams are empowered to try new ideas and learn from both successes and failures. Organizations should also prioritize the use of data and analytics to inform decision making, and should invest in ongoing training and development to promote a culture of learning and growth.
+The third way focuses on creating a culture of continual learning and experimentation, where teams are encouraged to take risks and innovate in order to drive continuous improvement. Exploration and discovery are just as important as being open to making mistakes and failures. This involves fostering a culture of innovation and experimentation, where teams are empowered to try new ideas and learn from both successes and failures. Organizations should also prioritize the use of data and analytics to inform decision making, and should invest in ongoing training and development to promote a culture of learning and growth.
 
-The idea is that by focusing on these three pillars, organizations can drive better business outcomes and value for our customers. The DevOps Handbook provides detailed guidance on how to bring these principles to life. As we’ve continued to iterate on the concept of DevOps itself, we've continued to create other frameworks to inform and measure our success at DevOps.
+The idea is that by focusing on these three ways, organizations can drive better business outcomes and value for our customers. The DevOps Handbook provides detailed guidance on how to bring these principles to life. As we’ve continued to iterate on the concept of DevOps itself, we've continued to create other frameworks to inform and measure our success at DevOps.
 
 ## CALMS
 
