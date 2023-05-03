@@ -302,10 +302,13 @@ Now select **Create**.
 Now that we've created our IoT Core Rule, we can start sending messages.
 
 ## Sending MQTT Messages
+Now we will send a device location to AWS IoT Core and our MQTT Topic. This simulates a message that would come from an IoT Device such as an asset tracker.
 
 From the IoT Core console, navigate to **MQTT test client** and select the **Publish to a topic** tab.
 
-Enter the following to send our first point:
+For the **Topic name** enter `assets/tracker`
+
+Enter the following in **Message payload** to send our first point:
 
 ```json
 {
