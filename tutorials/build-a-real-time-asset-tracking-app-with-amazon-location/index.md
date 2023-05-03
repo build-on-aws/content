@@ -11,7 +11,7 @@ authorName: Zach Elliott
 date: 2023-04-27
 ---
 
-Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country, or last mile deliveries around a neighborhood, knowing where your fleet is located is incredibly important. In this getting started, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to update this asset, making use of the MQTT protocol. We will cover how to:
+Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country, or last mile deliveries around a neighborhood, knowing where your fleet is located is incredibly important. In this tutorial, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to update this asset, making use of the MQTT protocol. We will cover how to:
 
 - Use AWS Amplify to set up a web application
 - Configure Amazon Location Service trackers
