@@ -11,11 +11,11 @@ authorName: Zach Elliott
 date: 2023-04-27
 ---
 
-Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country, or last mile deliveries around a neighborhood, knowing where your fleet is located is incredibly important. In this tutorial, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to update this asset, making use of the MQTT protocol. We will cover how to:
+Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country, or last mile deliveries around a neighborhood, knowing where your fleet is located can add business value around loss prevention, sustainability, and cost savings. In this tutorial, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to simulate a vehicle, making use of the MQTT protocol, a lightweight messaging protocol designed for IoT use-cases. We will cover how to:
 
-- Use AWS Amplify to set up a web application
-- Configure Amazon Location Service trackers
-- Connect Amazon Location Service with AWS IoT Core
+- Use [AWS Amplify](https://aws.amazon.com/amplify/) to build a web application to display current and historical device locations on a map
+- Configure Amazon Location Service [trackers](https://docs.aws.amazon.com/location/latest/developerguide/geofence-tracker-concepts.html) to store location data
+- [Connect Amazon Location Service with AWS IoT Core](https://docs.aws.amazon.com/location/latest/developerguide/tracking-using-mqtt.html) to ingest data from MQTT via the [Iot Core Rules Engine](https://docs.aws.amazon.com/iot/latest/developerguide/location-rule-action.html)
 
 ## Prerequisites
 
@@ -42,7 +42,9 @@ Before starting this tutorial, you will need the following:
 
 ## Deploy a Cloud9 Instance
 
-Before we deploy our asset tracking app, we need to deploy an AWS Cloud9 Instance. Navigate to the AWS Console and select **Cloud9**. Next select **Create environment**. 
+To deploy our asset tracking app, we will be using AWS Cloud9. Cloud9 is a cloud-based IDE that lets you write, run, and debug your code with just a browser. Using Cloud9 makes it easy to build and deploy applications while reducing the need for local development on builder workstations. Cloud9 also comes bundled with many AWS builder tools to get started developing quickly.
+
+Navigate to the AWS Console and select **Cloud9**. Next select **Create environment**. 
 
 ![AWS Console showing how to create an environment](./images/1.1.png)
 
@@ -53,8 +55,7 @@ Set the instance type to `t3.small` and provide a name. Select **Create**.
 Once the Cloud9 instance has launched, we can begin deploying our app.
 
 ## Deploy the Tracking App
-
-From your Cloud9 terminal, clone the repo:
+Now that the Cloud9 instance has been launched, we can download the code to build our application. From your Cloud9 terminal, clone the repo:
 
 ```bash
 git clone https://github.com/aws-samples/amazon-location-samples.git
@@ -126,7 +127,7 @@ Now we can use AWS Amplify to add our Amazon Location Service resources:
 amplify add geo
 ```
 
-And select the following options:
+And select the following options. Note we change the map data provider due to [Terms of Service](https://aws.amazon.com/service-terms/#:~:text=82.5.%20In,in%20your%20business) that require us to use the HERE data provider for asset tracking use cases. Also make sure to select `Authorized and Guest users` when choosing who can access the map. If your app has authentication such as a login portal, you can choose that only authorized users can view the map resource. However for our application, we do not have a login, so unauthenticated users can access the map.
 
 ```bash
 ? Select which capability you want to add: Map (visualize the geospatial data)
@@ -245,7 +246,7 @@ You should now see your application running inside Cloud9, like this.
 
 ## Setting up IoT Core Resources
 
-Now that we have our Amazon Location Service resources configured and our web app up and running, we need to configure our IoT Rule to send MQTT events to our new Amazon Location Service Tracker.
+Now that we have our Amazon Location Service resources configured and our web app up and running, we need to configure an IoT Rule to send MQTT events to our new Amazon Location Service Tracker. This rule will watch for messages on the `assets/tracker` MQTT topic, parse the message, and send the location information to the `AssetTracker` Amazon Location Service tracker which updates the `thing123` device that is displayed on the map.
 
 Navigate to the IoT Core Console, and click on **Message Routing** then **Rules**.
 
