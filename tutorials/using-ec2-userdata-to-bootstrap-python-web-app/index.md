@@ -369,13 +369,13 @@ The token should have the scopes **repo** (to read the repository) and **admin:r
 
 ![Github Token Scopes](./images/GitHub-repo-hooks.png)
 
-Now, for AWS CodePipeline to read from this GitHub repo, we need to configure the GitHub personal access token we just created. This token should be stored as a plaintext secret (not a JSON secret) in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) under the exact name `github-token`.
+Now, for AWS CodePipeline to read from this GitHub repo, we need to configure the GitHub personal access token we just created. This token should be stored as a plaintext secret (not a JSON secret) in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) under the exact name `github-oauth-token`.
 
 Replace `GITHUB_ACCESS_TOKEN` with your plaintext secret and `REGION` in following command and run it:
 
 ```bash
 aws secretsmanager create-secret \ 
-  --name github-token \ 
+  --name github-oauth-token \ 
   --description "Github access token for cdk" \ 
   --secret-string GITHUB_ACCESS_TOKEN \ 
   --region REGION
