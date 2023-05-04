@@ -10,8 +10,8 @@ tags:
   - Shapley Values
   - SHAP
 authorGithubAlias: cyrusmvahid
-authorName: Cyrus Vahid
-date: 2022-07-08
+authorName: Cyrus Vahid & Shamika Ariyawansa
+date:
 ---
 
 ```python
