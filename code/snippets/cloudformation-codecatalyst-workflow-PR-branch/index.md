@@ -5,7 +5,7 @@ tags:
     - codecatalyst
     - cloudformation
     - ci-cd
-    - snippet
+    - snippets
     - infrastructure-as-code
     - aws
 authorGithubAlias: gaonkarr

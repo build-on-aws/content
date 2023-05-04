@@ -5,7 +5,7 @@ tags:
     - terraform
     - codecatalyst
     - ci-cd
-    - snippet
+    - snippets
     - infrastructure-as-code
     - github-actions
     - aws

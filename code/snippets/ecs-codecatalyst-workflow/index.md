@@ -5,7 +5,7 @@ tags:
     - codecatalyst
     - ecs
     - ci-cd
-    - snippet
+    - snippets
     - infrastructure-as-code
     - aws
 authorGithubAlias: kowsalyajaganathan
