@@ -11,17 +11,17 @@ authorName: Zach Elliott
 date: 2023-04-27
 ---
 
-Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country or last mile deliveries around a neighborhood, knowing where your fleet is located can add business value around loss prevention, sustainability, and [overall cost savings](https://aws.amazon.com/solutions/case-studies/geo-me-case-study/). In this tutorial, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to simulate a vehicle, making use of the MQTT protocol, a lightweight messaging protocol designed for IoT use cases. We will cover how to:
+Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country or last mile deliveries around a neighborhood, knowing where your fleet is located can add business value around loss prevention, sustainability, and [overall cost savings](https://aws.amazon.com/solutions/case-studies/geo-me-case-study/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq). In this tutorial, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to simulate a vehicle, making use of the MQTT protocol, a lightweight messaging protocol designed for IoT use cases. We will cover how to:
 
-- Use [AWS Amplify](https://aws.amazon.com/amplify/) to build a web application to display current and historical device locations on a map
-- Configure Amazon Location Service [trackers](https://docs.aws.amazon.com/location/latest/developerguide/geofence-tracker-concepts.html) to store location data
-- [Connect Amazon Location Service with AWS IoT Core](https://docs.aws.amazon.com/location/latest/developerguide/tracking-using-mqtt.html) to ingest data from MQTT via the [Iot Core Rules Engine](https://docs.aws.amazon.com/iot/latest/developerguide/location-rule-action.html)
+- Use [AWS Amplify](https://aws.amazon.com/amplify/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) to build a web application to display current and historical device locations on a map
+- Configure Amazon Location Service [trackers](https://docs.aws.amazon.com/location/latest/developerguide/geofence-tracker-concepts.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) to store location data
+- [Connect Amazon Location Service with AWS IoT Core](https://docs.aws.amazon.com/location/latest/developerguide/tracking-using-mqtt.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) to ingest data from MQTT via the [Iot Core Rules Engine](https://docs.aws.amazon.com/iot/latest/developerguide/location-rule-action.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## Prerequisites
 
 Before starting this tutorial, you will need the following:
 
- - An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
+ - An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)).
 
 ## Sections
 
@@ -30,7 +30,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate                               |
 | ⏱ Time to complete  | 45 minutes                             |
 | 💰 Cost to complete | Free tier eligible      |
-| 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email)<br>|
+| 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/aws-samples/amazon-location-samples/tree/main/maplibre-js-react-iot-asset-tracking)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-02-10                             |
@@ -114,7 +114,7 @@ Using default provider  awscloudformation
 ? Select the authentication method you want to use: AWS profile
 
 For more information on AWS Profiles, see:
-https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq
 
 ? Please choose the profile you want to use default
 ```
@@ -127,7 +127,7 @@ Now we can use AWS Amplify to add our Amazon Location Service resources:
 amplify add geo
 ```
 
-And select the following options. Note we change the map data provider due to [Terms of Service](https://aws.amazon.com/service-terms/#:~:text=82.5.%20In,in%20your%20business) that require us to use the HERE data provider for asset tracking use cases. Also make sure to select `Authorized and Guest users` when choosing who can access the map. If your app has authentication such as a login portal, you can choose that only authorized users can view the map resource. However for our application, we do not have a login, so unauthenticated users can access the map.
+And select the following options. Note we change the map data provider due to [Terms of Service](https://aws.amazon.com/service-terms/#:~:text=82.5.%20In,in%20your%20business?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) that require us to use the HERE data provider for asset tracking use cases. Also make sure to select `Authorized and Guest users` when choosing who can access the map. If your app has authentication such as a login portal, you can choose that only authorized users can view the map resource. However for our application, we do not have a login, so unauthenticated users can access the map.
 
 ```bash
 ? Select which capability you want to add: Map (visualize the geospatial data)
@@ -359,7 +359,7 @@ Navigate to the IoT Core Console, select **Message Routing** and **Rules**. Sele
 
 ## Next Steps
 
-Now that you've built an asset tracking solution, think about ways to send location information to AWS IoT Core. If you're interested in physical asset tracking devices, check out the [AWS Partner Device Catalog](https://devices.amazonaws.com/search?page=1&type=tracker) or if you are interested in setting up more simulated devices at scale, check out the [IoT Device Simulator Solution](https://aws.amazon.com/solutions/implementations/iot-device-simulator/) provided by AWS, which has the ability to simulate a moving device. Finally if you want to learn more about how the web app is built, check out the [Amplify Geo documentation](https://docs.amplify.aws/lib/geo/getting-started/q/platform/js/).
+Now that you've built an asset tracking solution, think about ways to send location information to AWS IoT Core. If you're interested in physical asset tracking devices, check out the [AWS Partner Device Catalog](https://devices.amazonaws.com/search?page=1&type=tracker?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) or if you are interested in setting up more simulated devices at scale, check out the [IoT Device Simulator Solution](https://aws.amazon.com/solutions/implementations/iot-device-simulator/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) provided by AWS, which has the ability to simulate a moving device. Finally if you want to learn more about how the web app is built, check out the [Amplify Geo documentation](https://docs.amplify.aws/lib/geo/getting-started/q/platform/js/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ## Conclusion
 
