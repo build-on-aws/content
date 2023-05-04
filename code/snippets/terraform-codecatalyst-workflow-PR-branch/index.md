@@ -5,7 +5,7 @@ tags:
     - terraform
     - codecatalyst
     - ci-cd
-    - snippet
+    - snippets
     - infrastructure-as-code
     - aws
 authorGithubAlias: cobusbernard
@@ -18,7 +18,7 @@ date: 2023-05-05
 | 💻 AWS experience      | [Hashicorp HCL](https://github.com/hashicorp/hcl) <br> [CodeCatalyst Workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
 | ⏰ Last Updated        | 2023-05-05                                                       |
 
-This snippet shows a [CodeCatalyst](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) [workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) that will run [Terraform](https://terraform.io) `validate` and `plan` to test if the Terraform code is valid on a PR. It is intended to be used on a PR branch - see [this example of the main branch workflow](../terraform-codecatalyst-workflow/). Alternative version using [GitHub Actions](../terraform-codecatalyst-github-actions-workflow-PR-branch/).
+This snippet shows a [CodeCatalyst](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) [workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) that will run [Terraform](https://terraform.io) `validate` and `plan` to test if the Terraform code is valid on a PR. It is intended to be used on a PR branch - see [this example of the main branch workflow](./terraform-codecatalyst-workflow/). Alternative version using [GitHub Actions](./terraform-codecatalyst-github-actions-workflow-PR-branch/).
 
 **Used in:**
 

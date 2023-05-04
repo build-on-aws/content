@@ -1,11 +1,11 @@
 ---
 title: "Amazon CodeCatalyst workflow for Amazon ECS"
-description: "Example CodeCatalyst workflow to deploy CloudFormation infrastructure changes."
+description: "Example CodeCatalyst workflow to build and publish a container image, and the deploy it to ECS."
 tags:
     - codecatalyst
     - ecs
     - ci-cd
-    - snippet
+    - snippets
     - infrastructure-as-code
     - aws
 authorGithubAlias: kowsalyajaganathan

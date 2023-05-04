@@ -5,7 +5,7 @@ tags:
     - codecatalyst
     - cloudformation
     - ci-cd
-    - snippet
+    - snippets
     - infrastructure-as-code
     - aws
 authorGithubAlias: gaonkarr
@@ -18,7 +18,7 @@ date: 2023-05-05
 | 💻 AWS experience      | [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_cfn_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> [CodeCatalyst Workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_cfn_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
 | ⏰ Last Updated        | 2023-05-05                                                      |
 
-This snippet shows a [CodeCatalyst](https://codecatalyst.aws/?sc_channel=el&sc_campaign=devopswave&sc_content=snp_cfn_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) [workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_cfn_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) that will run [super-linter](https://github.com/marketplace/actions/super-linter) on the CloudFormation template, and then create a changeset, but not apply any changes. It is intended to be used on a PR branch - see [this example of the main branch workflow](../cloudformation-codecatalyst-workflow/).
+This snippet shows a [CodeCatalyst](https://codecatalyst.aws/?sc_channel=el&sc_campaign=devopswave&sc_content=snp_cfn_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) [workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_cfn_cc_pr&sc_geo=mult&sc_country=mult&sc_outcome=acq) that will run [super-linter](https://github.com/marketplace/actions/super-linter) on the CloudFormation template, and then create a changeset, but not apply any changes. It is intended to be used on a PR branch - see [this example of the main branch workflow](./cloudformation-codecatalyst-workflow/).
 
 **Used in:**
 
