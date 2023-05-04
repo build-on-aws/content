@@ -11,7 +11,7 @@ authorName: Zach Elliott
 date: 2023-04-27
 ---
 
-Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country, or last mile deliveries around a neighborhood, knowing where your fleet is located can add business value around loss prevention, sustainability, and overall cost savings. You can read about how one customer, Geo.me [saved 90% by using Amazon Location Service](https://aws.amazon.com/solutions/case-studies/geo-me-case-study/) for asset tracking and other geospatial workloads. In this tutorial, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to simulate a vehicle, making use of the MQTT protocol, a lightweight messaging protocol designed for IoT use-cases. We will cover how to:
+Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country or last mile deliveries around a neighborhood, knowing where your fleet is located can add business value around loss prevention, sustainability, and [overall cost savings](https://aws.amazon.com/solutions/case-studies/geo-me-case-study/). In this tutorial, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to simulate a vehicle, making use of the MQTT protocol, a lightweight messaging protocol designed for IoT use cases. We will cover how to:
 
 - Use [AWS Amplify](https://aws.amazon.com/amplify/) to build a web application to display current and historical device locations on a map
 - Configure Amazon Location Service [trackers](https://docs.aws.amazon.com/location/latest/developerguide/geofence-tracker-concepts.html) to store location data
