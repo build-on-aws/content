@@ -29,7 +29,7 @@ By reading this article, you will learn how to build a CI/CD pipeline for Apple 
 
 Code is a liability and an investment. You invested intellectual efforts and time to write code. Writing code is the first part of the investment, but the investment goes beyond the initial writing. You write code once, but your organization will maintain and evolve that code for years, sometime for decades.
 
-Code which is not deployed is an inventory. It is similar to buying goods and storing them in a fulfillment center. The code you've invested on will only unlock value for your customers (and therefore for your organization) when it lands in their hands, as a web site, a mobile app, or some kind of functionalities they can use. The only place where code is happy is in production. Don't keep unreleased code.
+Code which is not deployed is an unsold inventory. It is similar to buying goods and storing them in a fulfillment center. The code you've invested on will only unlock value for your customers (and therefore for your organization) when it lands in their hands, as a web site, a mobile app, or some kind of functionalities they can use. The only place where code is happy is in production. Don't keep unreleased code.
 
 Automation is key to reduce the time it takes to write, test, deploy or release code into production. I can see 7 benefits when automating your CI/CD pipelines.
 
@@ -67,7 +67,7 @@ Let's tackle some of these challenges in the following sections. This post is ai
 
 ## Your macOS Machine 
 
-Using on-premised and self-managed machines for your pipelines is not a good idea. It often involves long procurement processes. You are then responsible for the physical installation and security of these machines. They are not easy to replace [when they fail](https://www.slideshare.net/AmazonWebServices/high-availability-websites-part-one/12-Everything_fails_all_the_time). 
+Using on-premises and self-managed machines for your pipelines is not a good idea. It often involves long procurement processes. You are then responsible for the physical installation and security of these machines. They are not easy to replace [when they fail](https://www.slideshare.net/AmazonWebServices/high-availability-websites-part-one/12-Everything_fails_all_the_time). 
 
 Your development team will ask you to have access to multiple machines running a mix of previous, current, and future versions of macOS and Xcode. This is often required to continue supporting older versions of your app running on older operating system versions and to test new releases as soon as beta versions of operating systems are available. Manually managing these configurations is a no-go over time.
 
@@ -91,7 +91,7 @@ My laundry list of additional tools is usually:
 
 **jq**. [jq](https://stedolan.github.io/jq/) is a command-line parser and filter for JSON documents. I use `jq` a lot in my shell scripts.
 
-**amplify**. This one is specific to AWS. [Amplify](https://docs.amplify.aws/) is a command-line tool and a set of libraries to help application developer to manage and access cloud-based services, such as REST or GraphQL API, object storage, identity management, geo location, etc.
+**amplify**. This one is specific to AWS. [Amplify](https://docs.amplify.aws/) is a command-line tool and a set of libraries to help application developers to manage and access cloud-based services, such as REST or GraphQL API, object storage, identity management, geo location, etc.
 
 I try to stay away from tools written in [Ruby]((https://www.ruby-lang.org/en/)) (such as [cocoapods](https://cocoapods.org) and [fastlane](https://fastlane.tools)) because of the extra complexity to install specific versions of Ruby and to manage the versioning of Ruby's dependencies. But that's a personal preference. Of course, you will customize this list based on your actual project requirements.
 
