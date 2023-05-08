@@ -28,6 +28,7 @@
   * [How do I pin a post in the home page?](#how-do-i-pin-a-post-in-the-home-page)
   * [How can I provide description for tags?](#how-can-I-provide-description-for-tags)
   * [How can I set the Canonical URL?](#how-can-I-set-the-canonical-url)
+  * [How do I set the Redirect URL?](#how-do-I-set-the-redirect-url)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -562,6 +563,15 @@ The description field (plain text only) will be used for SEO purposes in the tag
 Add an attribute in the FrontMatter header named "externalCanonicalUrl" with the canonical URL of the original content you want to link to. For example:
   ````yml
       externalCanonicalUrl: https://dzone.com/articles/demystifying-transition-to-microservices
+  ````
+
+### How do I set the Redirect URL?
+
+If you move a content piece to a new location, create a new PR that moves it to the intended folder, and add an attribute in the FrontMatter header named "movedFrom" with the previous/old folder location of the content.
+This will redirect traffic from old URLs to newer locations.
+
+  ````yml
+      movedFrom: /tutorials/demystifying-transition-to-microservices
   ````
 
 ## Miscellaneous
