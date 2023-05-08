@@ -28,6 +28,7 @@
   * [How do I pin a post in the home page?](#how-do-i-pin-a-post-in-the-home-page)
   * [How can I provide description for tags?](#how-can-I-provide-description-for-tags)
   * [How can I set the Canonical URL?](#how-can-I-set-the-canonical-url)
+  * [How do I set the Redirect URL?](#how-do-I-set-the-redirect-url)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -562,6 +563,13 @@ The description field (plain text only) will be used for SEO purposes in the tag
 Add an attribute in the FrontMatter header named "externalCanonicalUrl" with the canonical URL of the original content you want to link to. For example:
   ````yml
       externalCanonicalUrl: https://dzone.com/articles/demystifying-transition-to-microservices
+  ````
+
+### How do I set the Redirect URL?
+
+Add an attribute in the FrontMatter header named "movedFrom" with the previous/old URL of the original content. This will redirect users looking for the content to the new URL.
+  ````yml
+      movedFrom: /tutorials/demystifying-transition-to-microservices
   ````
 
 ## Miscellaneous
