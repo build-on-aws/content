@@ -14,15 +14,12 @@ date: 2023-05-16
 ### Introduction
 Data migration is a crucial process in today's technological world that most businesses undertake to keep their systems up-to-date. However, data migration can be complex and challenging, requiring meticulous planning and execution to prevent potential issues. One of the essential aspects of data migration is maintaining integrity, which involves creating database constraints and other necessary database objects. Additionally, using indexes correctly is crucial to avoid performance problems. 
 
-In the rush to get data transferred from one system to another, it can be easy to overlook the importance of ensuring referential integrity, creating database constraints, and using indexes effectively. Focusing solely on data migration without considering these critical factors can lead to severe issues. Therefore, you should prioritize these aspects of data migration to avoid data inconsistencies and performance issues down the line.
+Focusing solely on data migration without considering these critical factors can lead to severe issues, such as data inconsistencies and performance problems. Therefore, you should prioritize these aspects of data migration to avoid data inconsistencies and performance issues down the line. In this blog we will focus on such aspects for a Relational Database Migration.
 
-### Before we start…
-AWS Database Migration Service (AWS DMS) is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores. You can use AWS DMS to migrate your data into the AWS Cloud or between combinations of cloud and on-premises setups. AWS DMS take a minimalist approach and create only those objects required to efficiently migrate the data. Using this approach, AWS DMS creates tables, primary keys, and in some cases unique indexes, but it won't create any other objects that are not required to efficiently migrate the data from the source. Such objects, need to be created manually or through DMS Schema Conversion. Therefore, it becomes important to understand and analyse such objects.
- 
 ### Constraints
 Database constraints are rules that are enforced on the data stored within a database table to maintain its accuracy, consistency, and integrity. These constraints help ensure that the data conforms to specific criteria or conditions, such as uniqueness, data type, and relationship with other tables, and prevent the introduction of erroneous or invalid data.
-Some common types of database constraints include:
 
+Some common types of database constraints include:
 * Primary key constraint: Ensures that each record in a table has a unique identifier, used to uniquely identify each record in a table
 * Foreign key constraint: Defines a relationship between two tables, ensuring that the values in one table's column match the values in another table's column. This is also called referential integrity.
 * Unique constraint: Ensures that the values in a particular column or set of columns are unique.
@@ -50,7 +47,7 @@ After a data migration, it is important to ensure that primary keys (PKs) and in
 * Keep in mind that adding too many indexes can also negatively impact performance, so it is important to strike a balance between having enough indexes to optimize queries and not having too many indexes that can slow down the database. This is because, index management is also an overhead for database engines.
 * After adding new indexes, it is important to monitor the database's performance to ensure that the changes are having the desired effect. If performance is not improving, consider revising the index strategy or consulting with a database expert to identify other potential performance issues. If the database is hosted as a managed service on AWS, you can also reach out to AWS Premium Support for assistance.
 
- 
+
 ### DMS Schema Conversion
 Now that we have a firm grasp of indexes and constraints, which are just some of the database objects that could require migration, let's dive into how we can automate the creation of these objects with AWS DMS Schema Conversion. DMS Schema Conversion allows you to convert existing database schemas and most of the database code objects to a format that's compatible with the target database. This flexibility enables not only homogeneous migrations but also heterogeneous migrations.
 
