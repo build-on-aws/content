@@ -567,7 +567,9 @@ Add an attribute in the FrontMatter header named "externalCanonicalUrl" with the
 
 ### How do I set the Redirect URL?
 
-Add an attribute in the FrontMatter header named "movedFrom" with the previous/old URL of the original content. This will redirect users looking for the content to the new URL.
+If you move a content piece to a new location, create a new PR that moves it to the intended folder, and add an attribute in the FrontMatter header named "movedFrom" with the previous/old folder location of the content.
+This will redirect traffic from old URLs to newer locations.
+
   ````yml
       movedFrom: /tutorials/demystifying-transition-to-microservices
   ````
