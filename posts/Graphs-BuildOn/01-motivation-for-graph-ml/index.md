@@ -9,7 +9,7 @@ tags:
   - graph
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
-date: 2022-07-08
+date: 2023-05-08
 authorGithubAlias: 
 ---
 Graph neural networks have gained prominence in the past few years. It is prodominantly due to their ability to capture sparce and non-Euclidean data, while break throughs in parallel computation of large sclae graphs has made it possible to take advantage of this versatile data-structure. This blog series is an introcudtory series for those who are new to graphs and graph neural networks, and moves onto knwledge embedding through graph completion. The final part in this seies provides an example of application of knowledge embedding in drug repurposing solutions, published by AWS science team in order to create a proposal for potential effective drugs on COVID. Future publications will branch off into applications of GNNs in diffent fields, starting with personalization. The current series entries are:
