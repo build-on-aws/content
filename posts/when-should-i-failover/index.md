@@ -103,5 +103,8 @@ For the final question- “are we good to declare if business is back to normal?
 ## Conclusion:
 
 It is important to detect service impairments and be able to translate them into business terms so that business stakeholders can understand the impact. Through this blog, I showed you a way to build the level of observability to tell clear business impact. To learn more about the services mentioned in the blog, check out these resources:
+
+- [CloudWatch Synthetic Canary](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html)
+- [Disaster recovery options in the cloud](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html)
  
 Happy building!
