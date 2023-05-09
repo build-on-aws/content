@@ -1,8 +1,6 @@
 ---
 title: When Should I failover? How do I know failover happened?
-description: As a professional working in the software space, you've probably been on one or more "war rooms", where it's all hands on deck to get the systems back up and running. The first question that gets asked in those meetings is, “what’s the business impact?”. That’s the part many of us struggle with the most. I can tell you that the application is down and not taking orders but don’t ask me beyond that. When the application is failed over, the question becomes, “are we good to declare if business is back to normal?”. Many times, the answers come with a hesitation as no one knows clearly that business has been restored to normal state.
-
-In this blog, I will walk you through a server-less application and through that application I will show you a way to build observability to answer those questions confidently.
+description: As a professional working in the software space, you've probably been on one or more "war rooms", where it's all hands on deck to get the systems back up and running. The first question that gets asked in those meetings is, “what’s the business impact?”. That’s the part many of us struggle with the most. I can tell you that the application is down and not taking orders but don’t ask me beyond that. When the application is failed over, the question becomes, “are we good to declare if business is back to normal?”. Many times, the answers come with a hesitation as no one knows clearly that business has been restored to normal state. In this blog, I will walk you through a server-less application and through that application I will show you a way to build observability to answer those questions confidently.
 
 tags:
   - Resilience
@@ -11,21 +9,7 @@ authorGithubAlias: saurabh-et-al
 authorName: Saurabh Kumar
 date: 2023-05-09
 ---
-# First draft: When Should I failover? How do I know failover happened?
-
-Title: When Should I failover? How do I know failover happened?
-Alternate titles:
-
-* How do I detect service impairments, do the failover and verify system is back to normal state after failover?
-* How to tell service impairment to business stakeholders? How to show them the normal state after failover?
-* How can I build a view of system health for business stake holders? How can they know business has been restored to normal after service disruptions?
-* [Seth] Normal or abnormal? The metrics you need to understand how your applications are operating during, and after, failure
-* [Dave] Application failing? These metrics will help you make sense of your operations
-* [Dave] Learning from failure: Key metrics to understand the business impact of application failure
-
- 
-
-## Introduction:
+# When Should I failover? How do I know failover happened?
 
 As a professional working in the software space, you've probably been on one or more "war rooms", where it's all hands on deck to get the systems back up and running. The first question that gets asked in those meetings is, “what’s the business impact?”. That’s the part many of us struggle with the most. I can tell you that the application is down and not taking orders but don’t ask me beyond that. When the application is failed over, the question becomes, “are we good to declare if business is back to normal?”. Many times, the answers come with a hesitation as no one knows clearly that business has been restored to normal state.
 
