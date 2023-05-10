@@ -25,7 +25,7 @@ But before we get into the best practices and the tutorial itself, let's synchro
 | ✅ AWS experience      | 300 - Advanced                                              |
 | ⏱ Time to complete     | 90 minutes to complete                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites    | [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
+| 🧩 Prerequisites    | [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-flux-to-implement-gitops-on-aws) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-04-28 <as mentioned above>                             |
 
@@ -51,7 +51,7 @@ GitOps has the following features compared to traditional continuous deployment.
 
 Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the last state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify deployment, observe alerts, and fix operations. Based on the core foundational principles of GitOps, we believe GitOps is the best way to continuously deploy Kubernetes clusters. The process is like below:
 
-![why is GitOps](./images/why%20is%20GitOps.jpg))
+![A visualization of the GitOps process](./images/why%20is%20GitOps.jpg))
 
 ## Amazon EKS-based Best Practices for GitOps 
 
@@ -83,7 +83,7 @@ Since we have explained the GitOps concept and the architecture of the CI/CD pip
 
 One of the fundamental principles of DevOps is that infrastructure gets **equal status** with code. Infrastructure as Code (IaC) uses code to enable cloud infrastructure deployment and governance of the cloud environment. Coding engineers use configuration files or code to define the infrastructure and create it by coding to ensure the consistency and repeatability. With IaC, coding engineers also manage the lifecycle of resources, such as hosting infrastructure definitions in version control repositories, and using Continuous Integration/Continuous Deployment (CI/CD) that is compatible with app coding for changing the definition of IaC, synchronizing the environments (e.g., development, testing, production) with the changes of the IaC codes. Additionally, automatic rollback is possible in case of failures, and drift detection helps to identify differences from the expected state.
 
-In the cloud, coding engineers can use the [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/index.html) to build their infrastructure model with Python, Java, and Typescript. CDK provides advanced components called Constructs, which preconfigure cloud resources with validated default values. It also allows engineers to write and share their custom constructs according to their organization's requirements. All of these will accelerate projects.
+In the cloud, coding engineers can use the [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/index.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-flux-to-implement-gitops-on-aws) to build their infrastructure model with Python, Java, and Typescript. CDK provides advanced components called Constructs, which preconfigure cloud resources with validated default values. It also allows engineers to write and share their custom constructs according to their organization's requirements. All of these will accelerate projects.
 
 ### 1.1 Create a Project with CDK CLI
 
@@ -307,7 +307,7 @@ The **sock shop** project consists of 8 front-end and back-end microservices, wh
 
 The reference architecture is as follows:
 
-![SockShopArchitecture](./images/SockShopArchitecture.png)
+![Sock Shop Architecture](./images/SockShopArchitecture.png)
 
 ### 3.2 About Kustomize
 
@@ -323,7 +323,7 @@ In addition to setting up the GitOps workflow, we also need to understand how to
 
 According to the official website, Kustomize has become a native configuration management tool for Kubernetes, allowing users to customize application configurations without templates. Kustomize uses native K8s concepts to help create and reuse resource configurations (YAML), allowing users to use an application description file (YAML) as the basis (Base YAML) and then generate the required description file for the final deployed application through Overlays.
 
-![AboutKustomize](./images/AboutKustomize.png)
+![About Kustomize](./images/AboutKustomize.png)
 
 ### 3.3 Multi-Cluster Configuration
 
@@ -460,7 +460,7 @@ service/user-db        ClusterIP      172.20.70.57     <none>                   
 
 Access the DNS name of AWS Load Balancer.
 
-![SockShopWeb](./images/SockShopWeb.png)
+![Sock Shop Web](./images/SockShopWeb.png)
 
 ### 3.5 Summary
 
@@ -650,19 +650,19 @@ We verify the entire process of automatic image updates by modifying the front-e
 
 Change the footer of the front-end page, and modify the file: front-end/public/footer.html.
 
-![EditFrontend](./images/EditFrontend.png)
+![Edit Frontend](./images/EditFrontend.png)
 
 #### 4.3.2 Check CodePipeline 
 
 Code changes to the front-end will automatically get CodePipeline to run.
 
-![CheckCodePipeline](./images/CheckCodePipeline.png)
+![Check Code Pipeline](./images/CheckCodePipeline.png)
 
 #### 4.3.3 ECR Image Version Changing Confirmation
 
 When the CodePipeline is completed, log in the Amazon ECR console and query the weaveworksdemos/front-end image version:
 
-![ECRImage](./images/ECRImage.png)
+![ECR Image](./images/ECRImage.png)
 
 #### 4.3.4 Verify Flux Image Information 
 
@@ -683,7 +683,7 @@ sock-shop       imageupdateautomation/sock-shop-front-end       2022-09-18T14:43
 
 Flux automatically updated the front-end image version. The latest commit was made by fluxcdbot, and the image tag was successfully modified to the latest version: master-1f49071-24.
 
-![SourceCodeAutomaticallyUpdate](./images/SourceCodeAutomaticallyUpdate.png)
+![Source Code Automatically Update](./images/SourceCodeAutomaticallyUpdate.png)
 
 #### 4.3.6 Verify Pod Image Version
 
@@ -696,7 +696,7 @@ $ kubectl describe pod/front-end-759476784b-9r2rt -n sock-shop | grep Image:
 
 #### 4.3.7 Confirm the Static Page is Up-to-Date.
 
-![ConfirmStaticPage](./images/ConfirmStaticPage.png)
+![Confirm Static Page](./images/ConfirmStaticPage.png)
 
 ### 4.5 Summary
 
@@ -724,6 +724,6 @@ We will explore each of these issues in subsequent blogs.
 
 - [GitOps: Cloud-native Continuous Deployment](https://www.gitops.tech/)
 - [GitOps on Kubernetes: Deciding Between Argo CD and Flux](https://thenewstack.io/gitops-on-kubernetes-deciding-between-argo-cd-and-flux/)
-- [[Tech Blog\] Bootstrapping clusters with EKS Blueprints ](https://aws.amazon.com/cn/blogs/containers/bootstrapping-clusters-with-eks-blueprints/)
+- [[Tech Blog\] Bootstrapping clusters with EKS Blueprints ](https://aws.amazon.com/cn/blogs/containers/bootstrapping-clusters-with-eks-blueprints/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-flux-to-implement-gitops-on-aws)
 - [Amazon EKS Blueprints for CDK ](https://github.com/aws-quickstart/cdk-eks-blueprints)
 - [Microservices Demo](https://github.com/microservices-demo/microservices-demo)
