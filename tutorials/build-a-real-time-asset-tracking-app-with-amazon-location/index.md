@@ -6,6 +6,7 @@ tags:
     - amazon-location-service
     - asset-tracking
     - aws
+    - tutorials
 authorGithubAlias: zachelliottwx
 authorName: Zach Elliott
 date: 2023-05-10
