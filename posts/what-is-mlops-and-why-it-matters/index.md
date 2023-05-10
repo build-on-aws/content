@@ -21,17 +21,23 @@ In short, building, maintaining, and effectively deploying machine learning mode
 
 ## Welcome to the World of MLOps
 
-MLOps is short for Machine Learning Operations, the magical wand that makes it possible for data scientists and engineers to deploy, monitor, and manage machine learning models in a smooth and efficient way.
+MLOPS is short of Machine Learning Operations, it is a practice that combines machine learning with Devops principles to streamline and manage the lifecycle of machine learning models. It involves the integration of data engineering, model development, deployment and monitoring into a cohesive and automated process.
 
-Think of MLOps as a team of heroes who work behind the scenes to ensure that your favorite apps, such as Spotify, Netflix, or Siri, can make accurate predictions and recommendations based on your interests and behaviors. With MLOps, these heroes can automate the whole process of training and deploying models, from collecting data to deploying models to production environments, and then monitoring their performance. They use powerful tools to make the whole process run as a well-oiled machine.
+Without an established MLOps practice, challenges arise in reproducing and replicating experiments and model deployments, hindering version control. Manual management of data pipelines, model training, and deployment across environments consumes valuable time for data scientists and engineers. Siloed work and limited collaboration lead to misunderstandings, goal misalignment, and slower innovation.
 
-A machine learning workflow starts with cleaning, preparing, and curating the raw data. Then Feed the validated data and processed code to model building activities such as number of experiments to train, evaluate and tune the model until the model delivers the performance that’s expected. Each of those experiments needs to be tracked for performance comparison and so different set of artifacts needs to be maintained along with data set metadata. Once the Model is finalized then you register the model along with it’s metadata such as model built, performance and where it deployed. Finally define the KPI for the model and deploy it in one or more target deployments. Once the preferred model is deployed, then monitor for ongoing performance and detect data drift and concept drifts.
+MLOps helps, data scientists and engineers to deploy, monitor and manage machine learning models in a smooth and efficient way emphasizing collaboration, automation, and continuous improvement.
+
+A Machine Learning Operations practice starts with cleaning, preparing, and curating the raw data. Then Feed the validated data and processed code to model building activities such as number of experiments to train, evaluate and tune the model until the model delivers the performance that’s expected. Each of those experiments needs to be tracked for performance comparison and so different set of artifacts needs to be maintained along with data set metadata. Once the Model is finalized then you register the model along with it’s metadata such as model built, performance and where it deployed. Finally define the KPI for the model and deploy it in one or more target deployments. Once the preferred model is deployed, then monitor for ongoing performance and detect data drift and concept drifts
+
+Without a basic MLOps practice in place, the challenges for data scientists and engineers starts from data collection process being a ad hoc function, leading to data quality issues and introduces data structure errors during manual preprocessing step. Model selection and hyper parameter tuning relies on individual preferences, resulting in sub optimal configurations. Due to lack of documentation, reproducibility of training suffer, evaluation metrics and techniques vary, hindering comparison and hampering maintenance cycles for the model. With manual deployment practice scaling and maintenance are challenging, with improper plan to replacing models causing disruptions to production.
 
 ![A Simple path to production for a ML Model](images/figure1.jpg "Figure 1. ML MOdel Workflow") 
 
-With a basic model build and deploy workflow like this, the Data Scientists can have a a superhero sidekick to automate repetitive tasks and ensure their model is always running smoothly and producing accurate results. MLOps helps to improve collaboration with other data scientists, developers, and operations teams, making it easier to work together towards a common goal. It enables to continuously integrate and deploy your models, allowing you to release updates and improvements quickly and efficiently. And it even helps you save money by reducing the costs associated with developing and deploying machine learning models.
+A basic MLOps practice enures a structured and consistent data collection and preparation process to clean, transform and format it and delivers meaningful data features for the ML model to process in the next phase. Within this MLOps practice, engineers and data scientist can access and compare collective insights about model versioning, experimentation tracking, and model performance monitoring data and decide to select the right algorithm and framework for the ML Model. When it's time to deploy the model in different environments this practices aides by prepackaging infrastructure and environment variables avoiding manual errors. Tools are made available to track the deployed model performance such like, data drift, model accuracy, latency, and resource utilization and alerts can be enabled to monitor and report potential issues. When a model becomes outdated or less effective, planning for its retirement and replacement with a newer, improved model becomes a consistent process reducing risks. Throughout the lifecycle of the ML Model, with a collaboration practice in place, effective communications, knowledge sharing and alignment of goals between data scientists, engineers, and stakeholders is ensured.
 
-## How does MLOps differ from DevOps
+With a basic MLOps practice like this, the Data Scientists can have a a superhero sidekick to automate repetitive tasks and ensure their model is always running smoothly and producing accurate results. It helps save time and money by reducing the costs associated with developing and deploying machine learning models quickly and efficiently.
+
+## HOW DOES MLOPS DIFFER from DEVOPS
 
 DevOps is like the party planner, responsible for coordinating all the different elements of the party, from the food and decorations to the music and guest list. They make sure everything runs smoothly and that everyone has a good time.
 
@@ -47,7 +53,7 @@ So, while both DevOps and MLOps share some similarities, such as automation and 
 
 ## How do YOU get started
 
-Getting started with MLOps can seem daunting, but there are steps to simplify the process:
+Unlock the true potential of your machine learning projects! Embrace the power of MLOps to streamline your workflows, automate deployments, and enhance collaboration between software developers and operations teams. Don't let the complexity intimidate you – discover the simplified steps to kick start your MLOps journey and revolutionize your ML development process!
 
 Understand the Basics of Machine Learning: To get started with MLOps, you need to have a good understanding of the basics of machine learning. This includes concepts like supervised and unsupervised learning, feature engineering, model selection, and evaluation. You can leverage [Machine Learning Essentials for Business and Technical Decision Makers](https://explore.skillbuilder.aws/learn/course/external/view/elearning/1404/machine-learning-essentials-for-business-and-technical-decision-makers?laml=tile&tile=dt) a free online course sponsored by AWS Training and certification.
 
@@ -102,7 +108,9 @@ In case if there is a class imbalance presence, one way to balance the classes i
 model = LogisticRegression(class_weight='balanced')
 ```
 
-Similar to this model code progression, start small and iterate: When you're ready to start implementing MLOps in your own projects, it's important to start small and iterate. Don't try to implement all the features at once. Instead, focus on the most critical parts of the workflow and build up from there. Observing from others, doing all at once led to several issues such as complex code, long development cycles and increased risk of errors. 
+As you improvise this machine learning model code progression, you would have realized the operational challenges due to the lack of a machine learning practice. Note down those challenges in each steps and that will be the user requirements to kick start your MLOps journey.
+
+Similar to this model code progression, start small and iterate: When you're ready to start implementing MLOps in your own projects, it's important to start small and iterate. Don't try to implement all the features at once. Instead, focus on the most critical parts of the workflow and build up from there. Observing from others, doing all at once led to several issues such as complex code, long development cycles and increased risk of errors
 
 Staring small and iterating helps in breaking down the complex process into smaller, manageable taks that can be accomplished in shorter amount of time. This approach also allows you to identify and address any issues or errors at an earlier stage and tune according to business needs, rather than waiting until the end of the deployment cycle. You can save time by making small, incremental improvements to the MLOps system, leading to more efficient and effective development cycles.
 
@@ -123,10 +131,14 @@ SageMaker Pipeline comes in to tie all of these different steps together to auto
 
 All of these features of sagemaker can be used together, or you can pick and choose features of sagemaker that makes sense for your requirements and your use case when you're building out your machine learning pipelines.
 
-If you want to learn more check out these resources:
+In conclusion, this blog should have provided valuable insights to MLOps. By understanding MLOps tools and frameworks, reading documentation, and exploring sample projects, you can gain hands-on experience in implementing MLOps workflows. Additionally, joining communities and staying updated with the latest trends will enhance your knowledge in this rapidly evolving field.
 
-[MLOps Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/50716cb8-6a42-427f-9eeb-0465dea6e95b/en-US)
+For actionable next steps, I recommend the following resources to further your MLOps journey:
 
-[Develop ML Project with Amazon SageMaker](https://catalog.us-east-1.prod.workshops.aws/workshops/9a6bcca9-93d6-4e09-ada2-64b692267342/en-US)
+[MLOps Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/50716cb8-6a42-427f-9eeb-0465dea6e95b/en-US) - Dive into this workshop to gain a comprehensive understanding of MLOps principles, practices, and tools.
 
-[Amazon Sagemaker Workshop](https://sagemaker-workshop.com/)
+[Develop ML Project with Amazon SageMaker](https://catalog.us-east-1.prod.workshops.aws/workshops/9a6bcca9-93d6-4e09-ada2-64b692267342/en-US) - Explore this workshop to learn how to develop end-to-end machine learning projects using Amazon SageMaker, a powerful MLOps platform.
+
+[Amazon Sagemaker Workshop](https://sagemaker-workshop.com/) - Visit this website to access a workshop that provides hands-on exercises, tutorials, and resources for leveraging Amazon SageMaker in your MLOps workflows.
+
+By engaging with these resources, you can gain practical knowledge, develop essential skills, and take significant strides in your MLOps journey. Embrace the opportunities to learn, practice, and collaborate with the MLOps community as you continue to enhance your expertise in this exciting field.
