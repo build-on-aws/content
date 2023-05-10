@@ -3,7 +3,7 @@ title: "Build a Real-Time Asset Tracking Application with Amazon Location Servic
 description: "This web app will display an Amazon Location Service tracker's position ingested via MQTT."
 tags:
     - iot-core
-    - amazon-location-service
+    - location-service
     - asset-tracking
     - aws
     - tutorials
