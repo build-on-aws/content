@@ -150,7 +150,7 @@ In the previous step, we created an EKS cluster, defined its NodeGroup, and adde
 > 
 > We suggest to customize the cluster parameters via clusterProvider and add plugins through the built-in addOns in EKS Blueprints.
 
-![It is an automated pipeline for deploying and updating EKS infrastructure to facilitate cross-region deployment for development, testing and production.](./images/CodePipelineStack.png)
+![An automated pipeline for deploying and updating EKS infrastructure to facilitate cross-region deployment for development, testing, and production.](./images/CodePipelineStack.png)
 
 While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline for deploying and updating the EKS infrastructure. This makes it easier to deploy development, testing, and production across regions.
 
@@ -307,7 +307,7 @@ The **sock shop** project consists of 8 front-end and back-end microservices, wh
 
 The reference architecture is as follows:
 
-![Here is architecture of sock shop project.It consists of 8 front-end and back-end microservices](./images/SockShopArchitecture.png)
+![The architecture of sock shop project, consisting of 8 front-end and back-end microservices](./images/SockShopArchitecture.png)
 
 ### 3.2 About Kustomize
 
@@ -323,7 +323,7 @@ In addition to setting up the GitOps workflow, we also need to understand how to
 
 According to the official website, Kustomize has become a native configuration management tool for Kubernetes, allowing users to customize application configurations without templates. Kustomize uses native K8s concepts to help create and reuse resource configurations (YAML), allowing users to use an application description file (YAML) as the basis (Base YAML) and then generate the required description file for the final deployed application through Overlays.
 
-![This image show how Kustomize use an application description file (YAML) as the basis (Base YAML) and then generate the required description file for the final deployed application through Overlays.](./images/AboutKustomize.png)
+![Kustomize uses an application description file (YAML) as the basis (Base YAML) and then generates the required description file for the final deployed application through overlays](./images/AboutKustomize.png)
 
 ### 3.3 Multi-Cluster Configuration
 
@@ -650,13 +650,13 @@ We verify the entire process of automatic image updates by modifying the front-e
 
 Change the footer of the front-end page, and modify the file: front-end/public/footer.html.
 
-![Edit the footer of the front-end page](./images/EditFrontend.png)
+![The footer of the front-end page](./images/EditFrontend.png)
 
 #### 4.3.2 Check CodePipeline 
 
 Code changes to the front-end will automatically get CodePipeline to run.
 
-![This image show CodePipeline has run this task](./images/CheckCodePipeline.png)
+![CodePipeline showing it has run this task](./images/CheckCodePipeline.png)
 
 #### 4.3.3 ECR Image Version Changing Confirmation
 
@@ -683,7 +683,7 @@ sock-shop       imageupdateautomation/sock-shop-front-end       2022-09-18T14:43
 
 Flux automatically updated the front-end image version. The latest commit was made by fluxcdbot, and the image tag was successfully modified to the latest version: master-1f49071-24.
 
-![This image show source code automatically update](./images/SourceCodeAutomaticallyUpdate.png)
+![The source code, which has automatically updated](./images/SourceCodeAutomaticallyUpdate.png)
 
 #### 4.3.6 Verify Pod Image Version
 
@@ -696,7 +696,7 @@ $ kubectl describe pod/front-end-759476784b-9r2rt -n sock-shop | grep Image:
 
 #### 4.3.7 Confirm the Static Page has been Up-to-Date.
 
-![This image show the static page has been up to date](./images/ConfirmStaticPage.png)
+![The static page is now showing itself to be up to date](./images/ConfirmStaticPage.png)
 
 ### 4.5 Summary
 
