@@ -14,7 +14,7 @@ date: 2023-04-21
 
 Imagine a music production company wants to predict the success of a new album before it's released. The company hires a data scientist to build a predictive model to forecast the revenue of the album based on its characteristics, and it offers the data scientist access to data about past albums - including genre, artists, producers, budget, release date, and revenue.
 
-The data scientist starts by exploring the data and identifying which features are most important for predicting revenue. They use statistical techniques to understand the relationships between the features and the revenue, and they build a machine learning model, trained on historical data and using various algorithms, to predict revenue of future albums. Problem solved, right? Well, sort of.
+The data scientist starts by exploring the data and identifying which features are most important for predicting revenue. They use statistical techniques to understand the relationships between the features and the revenue, and they build a machine learning model, trained on historical data using various algorithms, to predict revenue of future albums. Problem solved, right? Well, sort of.
 
 Building a machine learning model is only the beginning. Continuous monitoring is needed to detect when the model's performance has degraded or is no longer accurate. A standardized and reproducible approach to deploying and managing machine learning models is needed to deploy the models consistently across different environments. A clear audit trail of changes made to the model and its environment is needed to comply with regulations or to investigate any issues that arise.
 
@@ -24,7 +24,7 @@ In this post, I'm going to explain what MLOps is and how it fits into the larger
 
 ## Welcome to the World of MLOps
 
-MLOps is short for Machine Learning Operations, a practice that combines machine learning with [Devops principles](https://www.buildon.aws/concepts/what-is-devops) to streamline and manage the lifecycle of machine learning models. Essentially MLOps helps data scientists and engineers to deploy, monitor, and manage machine learning models in a smooth and efficient way - emphasizing collaboration, automation, and continuous improvement.
+MLOps is short for Machine Learning Operations, a practice that combines machine learning with [Devops principles](https://www.buildon.aws/concepts/what-is-devops?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) to streamline and manage the lifecycle of machine learning models. Essentially MLOps helps data scientists and engineers to deploy, monitor, and manage machine learning models in a smooth and efficient way - emphasizing collaboration, automation, and continuous improvement.
 
 Okay, but what does that practically look like?
 
@@ -52,17 +52,17 @@ So while both DevOps and MLOps share some conceptual similarities, such as autom
 
 ## How Do You Get Started?
 
-Okay, we've covered what MLOps is and how it fits into the larger DevOps logic. But now it's time to unlock the true potential of your machine learning projects by embracing the power of MLOps to streamline your workflows, automate deployments, and enhance collaboration between software developers and operations teams.
+Okay, we've covered what MLOps is and how it fits into the larger DevOps logic. But now it's time to unlock the true potential of your machine learning projects by embracing the power of MLOps to streamline your ML workflows and automate deployments. Following exercise should help build your first ML model and identify key MLOps features you may need to consider to begine with.
 
 Before we dive into a short demonstration, here are some important things to do:
 
-**Understand the Basics of Machine Learning**: To get started with MLOps, you need to have a good understanding of the basics of machine learning. This includes concepts like supervised and unsupervised learning, feature engineering, model selection, and evaluation. You can leverage [Machine Learning Essentials for Business and Technical Decision Makers](https://explore.skillbuilder.aws/learn/course/external/view/elearning/1404/machine-learning-essentials-for-business-and-technical-decision-makers?laml=tile&tile=dt) a free online course sponsored by AWS Training and certification.
+**Understand the Basics of Machine Learning**: To get started with MLOps, you need to have a good understanding of the basics of machine learning. This includes concepts like supervised and unsupervised learning, feature engineering, model selection, and evaluation. You can leverage [Machine Learning Essentials for Business and Technical Decision Makers](https://explore.skillbuilder.aws/learn/course/external/view/elearning/1404/machine-learning-essentials-for-business-and-technical-decision-makers?laml=tile&tile=dt?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) a free online course sponsored by AWS Training and certification.
 
 **Learn About the Basic MLOps Tools and Frameworks**: There are many MLOps tools and frameworks available, and it's important to understand the pros and cons of each. Some popular options include [AWS MLOps Workload Orchestrator](https://aws.amazon.com/solutions/implementations/mlops-workload-orchestrator/), [Kubeflow](https://www.kubeflow.org/docs/external-add-ons/serving/), [MLflow](https://mlflow.org/), and [TensorFlow](https://www.tensorflow.org/tfx). You can start by reading the documentation for these solutions and trying out some sample projects like this [MNIST](https://static.us-east-1.prod.workshops.aws/public/80e98500-8b21-4a12-b8a4-3473e548f33f/static/code/ml-ops.zip) code that uses ConvNets based on [PyTorch](https://github.com/pytorch/examples) examples for image classification.
 
-**Practice with Other Real-World Datasets**: Once you have a basic understanding of machine learning and MLOps tools, you can start practicing with real-world datasets. Kaggle is a great resource for finding datasets like this [key indicators for Heart disease](https://www.kaggle.com/datasets/ambujdevsingh/key-indicators-of-heart-disease) which has 400K adults health status that can be used to detect key indicators for heart diseases. 
+**Practice with Other Real-World Datasets**: Once you have a basic understanding of machine learning and MLOps tools, you can start practicing with real-world datasets. Kaggle is a great resource for finding datasets like this [key indicators for Heart disease](https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease) which has 400K adults health status that can be used to detect key indicators for heart diseases. 
 
-For this challenge an example Machine Learning model code to begin with may look like this:
+This dataset can be used to apply a range of machine learning methods to predict the likelihood of heart disease. For this challenge an example Machine Learning model code to begin with may look like this:
 
 ```bash
 import pandas as pd
@@ -108,7 +108,7 @@ In case if there is a class imbalance presence, one way to balance the classes i
 model = LogisticRegression(class_weight='balanced')
 ```
 
-As you improvise with this machine learning model code progression, you might have realized the operational challenges due to the lack of a machine learning practice. Note down those challenges in each steps and that will be the user requirements to kick start your MLOps journey.
+As you improvise with this machine learning model code progression, you might have realized the operational challenges due to the lack of a MLOps. Note down those challenges in each steps and that will be the user requirements to kick start your MLOps journey.
 
 Similar to this model code progression, when you're ready to start implementing MLOps in your own projects, it's important to start small and iterate. Don't try to implement all the features at once. Instead, focus on the most critical parts of the workflow and build up from there. Trying to do everything at once leads to several issues such as complex code, long development cycles, and increased risk of errors
 
@@ -116,20 +116,19 @@ Starting small and iterating helps in breaking down the complex process into sma
 
 ## Is There a Fast Track Path?
 
-You can speed up the journey by using a cloud native service that provides seamless integration to accommodate the MLOps features such as Amazon Sagemaker.
+You can speed up the journey by using a cloud native service that provides seamless integration to accommodate the MLOps features such as [Amazon SageMaker.](https://aws.amazon.com/sagemaker/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters)
 
-![A Simple sagemaker pipeline](images/figure2.jpg "Figure 2. SageMaker Pipeline") 
+![A Simple SageMaker pipeline](images/figure2.jpg "Figure 2. SageMaker Pipeline") 
 
-On the data preparation part of the workflow, Sagemaker offers capabilities that can be plugged into any machine learning workflow. Sagemaker data wrangler can be used to build your data transformation pipeline using a graphical interface, or else you can use SageMaker processing to build your data processing jobs. In either case, the tasks performed by these jobs can be easily plugged into your machine learning pipeline. The Sagemaker feature store can be used to store curated features that can then be used as part of the pipeline for your training activities. Both the inputs and outputs generated at this stage needs to be versioned, which include your data processing code and your prepared data sets for training and validating your model. 
+On the data preparation part of the workflow, SageMaker offers capabilities that can be plugged into any machine learning workflow. SageMaker data wrangler can be used to build your data transformation pipeline using a graphical interface, or else you can use SageMaker processing to build your data processing jobs. In either case, the tasks performed by these jobs can be easily plugged into your machine learning pipeline. The SageMaker feature store can be used to store curated features that can then be used as part of the pipeline for your training activities. Both the inputs and outputs generated at this stage needs to be versioned, which include your data processing code and your prepared data sets for training and validating your model. 
 
-To aid the model-building and model-testing parts of the workflow, Sagemaker experiments helps to run experiments to train, evaluate, and tune your model until it’s performing as expected while tracking the performance for each of these experiments. Due to the continous tracking it is easier to revert back to the experiments that resulted in the best performing model, and you know the inputs that went into actually creating that model version. You can further register this model on the Sagemaker model registry to store metadata  about the best-performing models. All of the output from this stage of the workflow, such as training code and model artifacts, needs to be versioned for traceability. 
+To aid the model-building and model-testing parts of the workflow, SageMaker experiments helps to run experiments to train, evaluate, and tune your model until it’s performing as expected while tracking the performance for each of these experiments. Due to the continous tracking it is easier to revert back to the experiments that resulted in the best performing model, and you know the inputs that went into actually creating that model version. You can further register this model on the SageMaker model registry to store metadata  about the best-performing models. All of the output from this stage of the workflow, such as training code and model artifacts, needs to be versioned for traceability. 
 
-Once you find the version of the model that performs based on the minimum threshold that you have identified as a KPI, you can then use Sagemaker deployments to take that model artifact, package it, and deploy it to one or more target environments. In this deployment step, you're packaging your model, and then choosing the type of deployment option
-that meets your use case - whether that's to host services, use a persistent endpoint, or use batch transform or asyncronous inference. You can also use Sagemaker model monitor to monitor the ongoing performance of your model over time, so that you can be alerted when the system notices concept drift or data drift. 
+Once you find the version of the model that performs based on the minimum threshold that you have identified as a KPI, you can then use SageMaker deployments to take that model artifact, package it, and deploy it to one or more target environments. In this deployment step, you're packaging your model, and then choosing the type of deployment option that meets your use case - whether that's to host services, use a persistent endpoint, or use batch transform or asyncronous inference. You can also use SageMaker model monitor to monitor the ongoing performance of your model over time, so that you can be alerted when the system notices concept drift or data drift. 
 
-SageMaker Pipeline comes in to tie all of these different steps together to automate these steps, as well as incorporate all these inputs, outputs, and artifacts as part of a pipeline that has end-to-end traceability. Finally sagemaker projects provide pre-configured MLOps templates, as well as the capability to bring your own templates. Each of these templates can be instantiated multiple times to automate the process of setting up and configuring your machine learning pipelines, but also incorporate CI/CD practices, such as automated triggers and source and version control. 
+SageMaker Pipeline comes in to tie all of these different steps together to automate these steps, as well as incorporate all these inputs, outputs, and artifacts as part of a pipeline that has end-to-end traceability. Finally SageMaker projects provide pre-configured MLOps templates, as well as the capability to bring your own templates. Each of these templates can be instantiated multiple times to automate the process of setting up and configuring your machine learning pipelines, but also incorporate CI/CD practices, such as automated triggers and source and version control. 
 
-All of these features of sagemaker can be used together, or you can pick and choose features of sagemaker that makes sense for your requirements and your use case when you're building out your machine learning pipelines.
+All of these features of SageMaker can be used together, or you can pick and choose features of SageMaker that makes sense for your requirements and your use case when you're building out your machine learning pipelines.
 
 ## Conclusion
 
@@ -137,10 +136,10 @@ By understanding MLOps tools and frameworks, reading documentation, and explorin
 
 For actionable next steps, I recommend the following resources to further your MLOps journey:
 
-[MLOps Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/50716cb8-6a42-427f-9eeb-0465dea6e95b/en-US) - Dive into this workshop to gain a comprehensive understanding of MLOps principles, practices, and tools.
+[MLOps Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/50716cb8-6a42-427f-9eeb-0465dea6e95b/en-US?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) - Dive into this workshop to gain a comprehensive understanding of MLOps principles, practices, and tools.
 
-[Develop ML Project with Amazon SageMaker](https://catalog.us-east-1.prod.workshops.aws/workshops/9a6bcca9-93d6-4e09-ada2-64b692267342/en-US) - Explore this workshop to learn how to develop end-to-end machine learning projects using Amazon SageMaker, a powerful MLOps platform.
+[Develop ML Project with Amazon SageMaker](https://catalog.us-east-1.prod.workshops.aws/workshops/9a6bcca9-93d6-4e09-ada2-64b692267342/en-US?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) - Explore this workshop to learn how to develop end-to-end machine learning projects using Amazon SageMaker, a powerful MLOps platform.
 
-[Amazon Sagemaker Workshop](https://sagemaker-workshop.com/) - Visit this website to access a workshop that provides hands-on exercises, tutorials, and resources for leveraging Amazon SageMaker in your MLOps workflows.
+[Amazon SageMaker Workshop](https://sagemaker-workshop.com/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) - Visit this website to access a workshop that provides hands-on exercises, tutorials, and resources for leveraging Amazon SageMaker in your MLOps workflows.
 
 By engaging with these resources, you can gain practical knowledge, develop essential skills, and take significant strides in your MLOps journey. Embrace the opportunities to learn, practice, and collaborate with the MLOps community as you continue to enhance your expertise in this exciting field.
