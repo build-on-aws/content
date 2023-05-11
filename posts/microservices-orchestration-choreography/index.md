@@ -22,24 +22,25 @@ For the purpose of this post, I will start by covering key concepts around event
 
 Some people use 'events' and 'messages' interchangeably, but they're actually distinct in what kind of systems are included as part of the scope of communication. 
 
-An architecture that uses messaging has a specific format that is framed earlier when building APIs (similar to a function call), where the API knows what is being called and what the expected response is. An example of this is when a passenger uses a mobile application to check for the gate information for their flight. Since the mobile app needs to fetch very speicifc set of information (flight number and date) it knows which API to call and with what speific fields so that it retrieves the required information. The request in this case will be a message.
+An architecture that uses messaging has a specific format that is framed earlier when building APIs (similar to a function call), where the API knows what is being called and what the expected response is. An example of this is when a passenger uses a mobile application to check for the gate information for their flight. Since the mobile app needs to fetch very specific set of information (flight number and date) it knows which API to call and with what specific fields so that it retrieves the required information. The request in this case will be a message.
 
 In an event-driven architecture, disparate systems that comprise a set of complex processes and transactions must be 'told' that something has occurred and a flow to handle it must be initiated. For example, if a flight is delayed for any reason, the airline must deal with customers who may miss flights and others who may wish to cancel them, as well as notify subsequent airlines that passengers may be late. This could include providing meal vouchers and arranging for temporary lodging for passengers who are stranded overnight.
 
 ## Co-ordination patterns in distributed systems
 
 ### Choreography
+
 The core idea of the choreography pattern is to keep the decision logic distributed and let each service decide what needs to be done upon an event. It thus laid the foundation for Event Driven Architecture.
 
 Lets take an example of an e-commerce store which takes orders from customers through a browser. When the order is placed by a customer, the Orders service will simply emit an event to which all the involved services subscribe. Upon receiving an event, the services will react accordingly and do what they are supposed to. For example, a Logistics service that is subscribing to any new Order event emitted by the Order service will start the process of contacting a logistics partner to come and pick up the order for delivery.
 
 For all the involved services in a choreography designed system, the services are totally decoupled and independent; making this a truly distributed and decentralized architecture.
 
-
 ### Orchestration
+
 Orchestration is the simplest way to model workflows. The core idea of the orchestration pattern is to keep the decision logic centralized and have a single brain in the system.
 
-Taking the same example of the e-commerce store, if it is re-designed with an orchestration approach, the Orders service can be that central co-ordinator that talks to Notification, Seller, and Logistics services and get the necessary things done. The communication between them is synchronous and the Orders service acts as the coordinator.
+Taking the same example of the e-commerce store, if it is re-designed with an orchestration approach, the Orders service can be that central coordinator that talks to Notification, Seller, and Logistics services and get the necessary things done. The communication between them is synchronous and the Orders service acts as the coordinator.
 
 ![A chart comparing service choreography and orchestration](images/choreography-orchestration-comparison.png)
 
@@ -54,7 +55,7 @@ Most model systems favor choreography because it provides some standard asynchro
 
 A challenge when using choreography is observability and the need to track each service and the events published, the action(s) that were taken as part of an event being emitted by an origin service, and the completion of the business flow or process.
 
-Although choreography is the first choice when building decoupled asyncronous systems, it does not mean orchestration isn't an option. Orchestration has its advantages and can be used in modeling services that are involved transactionally.
+Although choreography is the first choice when building decoupled asynchronous systems, it does not mean orchestration isn't an option. Orchestration has its advantages and can be used in modeling services that are involved transactionally.
 
 Sending an One-Time Password (OTP) during login, for example, is best modeled synchronously rather than asynchronously. Another example is that when we want to render recommended items, a Recommendation service communicates with relevant services to enrich the information before it is sent to the user.
 
@@ -64,7 +65,6 @@ Depending on the work at hand, the size of the company, and a number of other va
 
 It is preferable to use orchestration when there are intricate workflows requiring levels of synchronization and coordination between thousands of microservices. This is so that complex workflows can be orchestrated smoothly. The orchestrator can function as a controlling unit.
 
-An alternate perspective is adjusting to a hybrid system that, as necessary, combines orchestration and choreography. This is advantageous as it prevents a single point of failure (when the orchestrator malfunctions) and enables sophisticated operations. The organization's context and aim will determine the choice. 
+An alternate perspective is adjusting to a hybrid system that, as necessary, combines orchestration and choreography. This is advantageous as it prevents a single point of failure (when the orchestrator malfunctions) and enables sophisticated operations. The organization's context and aim will determine the choice.
 
 To learn more, check out the following Enterprise Integration Patterns resources on [Choreography](https://www.enterpriseintegrationpatterns.com/patterns/conversation/Choreography.html) and [Orchestration](https://www.enterpriseintegrationpatterns.com/patterns/conversation/Orchestration.html).
-

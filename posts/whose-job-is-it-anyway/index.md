@@ -5,6 +5,8 @@ tags:
   - application-resilience
   - shared-responsibility
   - digital-transformation
+spaces:
+  - devops
 authorGithubAlias: aws-veliswaboya
 authorName: Veliswa Boya
 date: 2022-10-25
@@ -17,7 +19,7 @@ Continuous resilience is when teams move away from a robustness-centric approach
 
 The talk was actually based on an [awesome blog](https://medium.com/the-cloud-architect/towards-continuous-resilience-3c7fbc5d232b) written by one of my colleagues and mentor [Adrian Hornsby](https://twitter.com/adhorn) and it’s a great blog to read if you are looking to evolve your team away from being robustness-centric to instead embracing failure and moving towards continuous resilience.
 
-In this article; we will look at what team cultural changes and technical considerations during software development will enable the co-existence of application resilience and innovation. 
+In this article; we will look at what team cultural changes and technical considerations during software development will enable the co-existence of application resilience and innovation.
 The [shared responsibility model](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/shared-responsibility-model-for-resiliency.html) in software development unifies teams; we will look at this as we answer the question of who in the application team is responsible for application resilience.
 
 ## Cultural Transformation for Digital Transformation
