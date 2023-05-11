@@ -52,7 +52,7 @@ So while both DevOps and MLOps share some conceptual similarities, such as autom
 
 ## How Do You Get Started?
 
-Okay, we've covered what MLOps is and how it fits into the larger DevOps logic. But now it's time to unlock the true potential of your machine learning projects by embracing the power of MLOps to streamline your ML workflows and automate deployments. Following exercise should help build your first ML model and identify key MLOps features you may need to consider to begine with.
+Okay, we've covered what MLOps is and how it fits into the larger DevOps logic. But now it's time to unlock the true potential of your machine learning projects by embracing the power of MLOps to streamline your ML workflows and automate deployments. The following exercise should help build your first ML model and identify key MLOps features you may need to consider to begin with.
 
 Before we dive into a short demonstration, here are some important things to do:
 
