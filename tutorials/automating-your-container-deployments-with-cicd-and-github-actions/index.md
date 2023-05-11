@@ -8,8 +8,11 @@ tags:
   - infrastructure-as-code
   - cdk
   - devops
+  - tutorials
 spaces:
   - devops
+movedFrom: /posts/automating-your-container-deployments-with-cicd-and-github-actions
+showInHomeFeed: true
 authorGithubAlias: jennapederson
 authorName: Jenna Pederson
 date: 2022-12-16
@@ -41,8 +44,7 @@ Let's get started!
 | 4. [Setup GitHub Actions Workflow](#4-setup-github-actions-workflow)           |
 | 5. [Running the Workflow](#5-running-the-workflow)                             |
 | 6. [Check App Deployment](#6-check-app-deployment)                             |
-| 7. [Destroy Resources](#7-destroy-resources)                                   |
-
+| 7. [Cleaning up](#7-cleaning-up)                                               |
 
 ## 1. Prerequisites
 
@@ -386,7 +388,7 @@ service = ecs.FargateService(self,
 
 If any of the instances fails or stops, ECS will launch another instance of your task definition to replace it and maintain the desired count of tasks in the service. We always want at least one container running, so we'll use a service. If we were running a one-time or scheduled job, we could omit the service as we wouldn't need to keep it running or restart it.
 
-💰💰💰 Note: In the sample code we copied, we are using Option 1. Option 2 (commented out) creates a load balancer and related AWS resources using the `ApplicationLoadBalancedFargateService` construct. Both of these options create resources with non-trivial costs if left provisioned in your account, *even if you don't use them*. Be sure to [clean up your resources](#7-destroy-resources) (`cdk destroy`) after working through this exercise.
+💰💰💰 Note: In the sample code we copied, we are using Option 1. Option 2 (commented out) creates a load balancer and related AWS resources using the `ApplicationLoadBalancedFargateService` construct. Both of these options create resources with non-trivial costs if left provisioned in your account, *even if you don't use them*. Be sure to [clean up your resources](#7-cleaning-up) (`cdk destroy`) after working through this exercise.
 
 ### Deploy CDK App
 

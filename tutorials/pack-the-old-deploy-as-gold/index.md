@@ -1,17 +1,20 @@
 ---
-title: Pack the Old, Deploy as Gold!
-description: This post will guide you to pack your old Java EE application as a container and deploy it to AWS AppRunner.
+title: Pack the Old, Deploy as Gold! Running your Java EE applications in containers.
+description: Package Java EE applications using Tomcat/Jboss as a container and deploy them to AWS AppRunner.
 tags:
   - java
   - containers
   - app-runner
   - ecr
+  - tutorials
+movedFrom: /posts/pack-the-old-deploy-as-gold
+showInHomeFeed: true
 authorGithubAlias: vsenger
 authorName: Vinicius Senger
 date: 2022-10-19
 ---
 
-Java EE is still in production and will likely remain there for a while. I know many companies that run Java EE applications using Apache Tomcat and JBoss, and when they consider migrating to AWS, most of them consider Amazon EC2 first; it's similar to running in your own infrastructure -- kind of a classical lift and shift approach. But thanks to containerization, we have more ways to pack the old Java EE application and deploy as gold containerized apps.
+Java EE is still in production and will likely remain there for a while. I know many companies that run Java EE applications using [Apache Tomcat](https://tomcat.apache.org/) and [JBoss](https://jbossas.jboss.org/), and when they consider migrating to AWS, most of them consider Amazon EC2 first; it's similar to running in your own infrastructure -- kind of a classical lift and shift approach. But thanks to containerization, we have more ways to pack the old Java EE application and deploy as gold containerized apps.
 
 For this tutorial I chose JBoss 4.2.3 as an example, but you can replace it with your choice of a Java EE application server very easily. At the end of this tutorial, you will have a simple Java EE application built with Docker and running with a public URL.
 
@@ -28,19 +31,22 @@ Here are the basic steps we need to do it:
 
 ... And you'll be done. Now let's build it!
 
+|Toc|
+|---|
+
 ## 1. Download JBoss
 
 I used the version 4.2.3, but you can use any other version -- or even another application server -- with small changes.
 
-You can download [JBoss 4.2.3 here](https://sourceforge.net/projects/JBoss/files/JBoss/JBoss-4.2.3.GA/JBoss-4.2.3.GA-jdk6.zip/download
-).
+You can download [JBoss 4.2.3 here](https://sourceforge.net/projects/jboss/files/JBoss/JBoss-4.2.3.GA/jboss-4.2.3.GA-jdk6.zip/download).
 
 Create a project directory and unzip JBoss there.
 
 ```bash
 mkdir javaee-docker
 cd javaee-docker
-unzip <downloaded_jboss.zip>
+wget -O jboss-4.2.3.GA-jdk6.zip https://cfhcable.dl.sourceforge.net/project/jboss/JBoss/JBoss-4.2.3.GA/jboss-4.2.3.GA-jdk6.zip
+unzip jboss-4.2.3.GA-jdk6.zip
 ```
 
 ## 2. Create a Simple Java EE Application
@@ -111,7 +117,7 @@ ENTRYPOINT ["/opt/jboss/bin/run.sh", "-b", "0.0.0.0"]
 
 Now let's explain this file step-by-step:
 
-Our image will be based on a public Amazon Corretto 8 image that will provide us the right SDK to run JBoss:
+Our image will be based on a public [Amazon Corretto 8](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html?sc_channel=el&sc_campaign=devopswave&sc_content=pck_old_gld&sc_geo=mult&sc_country=mult&sc_outcome=acq) image that will provide us the right SDK to run JBoss:
 
 ```dockerfile
 FROM amazoncorretto:8
