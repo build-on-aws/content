@@ -197,5 +197,5 @@ If you are interested experimenting with other SageMaker Canvas ML models and us
 
 ## About author
 
-Viktoria is a Senior Developer Advocate and passionate about helping builders to build and innovate using new technologies. She is a content creator and frequently shares content on [LinkedIn](https://www.linkedin.com/in/semaan/). Viktoria has been named as a one of the Top Cloud Influencers in 2023 and [#9 LinkedIn Female Content Creator WorldWide](https://app.favikon.com/creators-tops/women-content-creators/all-niches/linkedin/). 
+Viktoria is a Senior Developer Advocate and passionate about helping developers to build and innovate using new technologies. She is a content creator and frequently shares content on [LinkedIn](https://www.linkedin.com/in/semaan/). Viktoria has been named as  one of the Top Cloud Influencers and [#9 LinkedIn Female Content Creator WorldWide](https://app.favikon.com/creators-tops/women-content-creators/all-niches/linkedin/). 
 
