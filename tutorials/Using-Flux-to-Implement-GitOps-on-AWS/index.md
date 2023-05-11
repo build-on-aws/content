@@ -150,7 +150,7 @@ In the previous step, we created an EKS cluster, defined its NodeGroup, and adde
 > 
 > We suggest to customize the cluster parameters via clusterProvider and add plugins through the built-in addOns in EKS Blueprints.
 
-![CodePipelineStack](./images/CodePipelineStack.png)
+![It is an automated pipeline for deploying and updating EKS infrastructure to facilitate cross-region deployment for development, testing and production.](./images/CodePipelineStack.png)
 
 While deploying a stack with a CDK command-line tool is convenient, we recommend setting up an automated pipeline for deploying and updating the EKS infrastructure. This makes it easier to deploy development, testing, and production across regions.
 
@@ -307,7 +307,7 @@ The **sock shop** project consists of 8 front-end and back-end microservices, wh
 
 The reference architecture is as follows:
 
-![Sock Shop Architecture](./images/SockShopArchitecture.png)
+![Here is architecture of sock shop project.It consists of 8 front-end and back-end microservices](./images/SockShopArchitecture.png)
 
 ### 3.2 About Kustomize
 
@@ -323,7 +323,7 @@ In addition to setting up the GitOps workflow, we also need to understand how to
 
 According to the official website, Kustomize has become a native configuration management tool for Kubernetes, allowing users to customize application configurations without templates. Kustomize uses native K8s concepts to help create and reuse resource configurations (YAML), allowing users to use an application description file (YAML) as the basis (Base YAML) and then generate the required description file for the final deployed application through Overlays.
 
-![About Kustomize](./images/AboutKustomize.png)
+![This image show how Kustomize use an application description file (YAML) as the basis (Base YAML) and then generate the required description file for the final deployed application through Overlays.](./images/AboutKustomize.png)
 
 ### 3.3 Multi-Cluster Configuration
 
@@ -460,7 +460,7 @@ service/user-db        ClusterIP      172.20.70.57     <none>                   
 
 Access the DNS name of AWS Load Balancer.
 
-![Sock Shop Web](./images/SockShopWeb.png)
+![Sock Shop web site](./images/SockShopWeb.png)
 
 ### 3.5 Summary
 
@@ -650,19 +650,19 @@ We verify the entire process of automatic image updates by modifying the front-e
 
 Change the footer of the front-end page, and modify the file: front-end/public/footer.html.
 
-![Edit Frontend](./images/EditFrontend.png)
+![Edit the footer of the front-end page](./images/EditFrontend.png)
 
 #### 4.3.2 Check CodePipeline 
 
 Code changes to the front-end will automatically get CodePipeline to run.
 
-![Check Code Pipeline](./images/CheckCodePipeline.png)
+![This image show CodePipeline has run this task](./images/CheckCodePipeline.png)
 
 #### 4.3.3 ECR Image Version Changing Confirmation
 
-When the CodePipeline is completed, log in the Amazon ECR console and query the weaveworksdemos/front-end image version:
+When the CodePipeline is completed, log in the Amazon ECR console to check the weaveworksdemos/front-end image version:
 
-![ECR Image](./images/ECRImage.png)
+![Log in the Amazon ECR console to check the weaveworksdemos/front-end image version](./images/ECRImage.png)
 
 #### 4.3.4 Verify Flux Image Information 
 
@@ -683,7 +683,7 @@ sock-shop       imageupdateautomation/sock-shop-front-end       2022-09-18T14:43
 
 Flux automatically updated the front-end image version. The latest commit was made by fluxcdbot, and the image tag was successfully modified to the latest version: master-1f49071-24.
 
-![Source Code Automatically Update](./images/SourceCodeAutomaticallyUpdate.png)
+![This image show source code automatically update](./images/SourceCodeAutomaticallyUpdate.png)
 
 #### 4.3.6 Verify Pod Image Version
 
@@ -694,9 +694,9 @@ $ kubectl describe pod/front-end-759476784b-9r2rt -n sock-shop | grep Image:
 
 ```
 
-#### 4.3.7 Confirm the Static Page is Up-to-Date.
+#### 4.3.7 Confirm the Static Page has been Up-to-Date.
 
-![Confirm Static Page](./images/ConfirmStaticPage.png)
+![This image show the static page has been up to date](./images/ConfirmStaticPage.png)
 
 ### 4.5 Summary
 
