@@ -44,6 +44,7 @@ To make this work, I need to plug in the modem to the back of the Tandy 102, but
 
 Okay, the beautiful thing about this computer is that it comes with a Terminal application built into its ROM (TELCO), and I will be using that for everything moving forward. A Terminal Application in this case is the main application you would use for any sort of communication work. This includes sending emails, uploading files, and working on a remote server (that’s foreshadowing, if you didn’t notice). And it allows you to dial systems and communicate over the serial interface. Before this will work with my modem, I need to make some configuration changes. I’ll change the Baud rate to 300, as that is the default on the modem itself. To do so, I just need to enter the following command once I open the Terminal application.
 
+
 ```text
 stat 38N1E
 ```
