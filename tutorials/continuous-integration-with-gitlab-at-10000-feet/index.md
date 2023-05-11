@@ -6,9 +6,11 @@ tags:
   - containers
   - ci-cd
   - devops
-  - tutorial
+  - tutorials
 spaces:
   - devops
+movedFrom: /posts/continuous-integration-with-gitlab-at-10000-feet
+showInHomeFeed: true
 authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2023-03-10

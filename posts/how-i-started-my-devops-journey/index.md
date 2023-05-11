@@ -2,13 +2,13 @@
 title: "How I Started My DevOps Journey"
 description: "Lessons I learned along my personal journey into DevOps - and good places to start your own."
 tags:
-  - personal-journeys
   - devops
   - career
   - learning
   - basics
 spaces:
   - devops
+movedFrom: /posts/good-places-to-start-your-devops-journey
 authorGithubAlias: andrasome
 authorName: Andra Somesan
 date: 2023-04-11
