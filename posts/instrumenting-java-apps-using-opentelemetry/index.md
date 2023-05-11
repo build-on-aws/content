@@ -9,9 +9,6 @@ tags:
     - xray
     - cloudwatch
     - java
-    - tutorials
-movedFrom: /posts/instrumenting-java-apps-using-opentelemetry
-showInHomeFeed: true
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2022-10-24
