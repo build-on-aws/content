@@ -117,7 +117,7 @@ ENTRYPOINT ["/opt/jboss/bin/run.sh", "-b", "0.0.0.0"]
 
 Now let's explain this file step-by-step:
 
-Our image will be based on a public [Amazon Corretto 8](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html) image that will provide us the right SDK to run JBoss:
+Our image will be based on a public [Amazon Corretto 8](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html?sc_channel=el&sc_campaign=devopswave&sc_content=pck_old_gld&sc_geo=mult&sc_country=mult&sc_outcome=acq) image that will provide us the right SDK to run JBoss:
 
 ```dockerfile
 FROM amazoncorretto:8
