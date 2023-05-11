@@ -1,18 +1,22 @@
 ---
-title: "Build Stock Predictions with No-Code AI Using SageMaker Canvas"
-description: How to build stock predictions with no-code AI using SageMaker Canvas
+title: "How To Build Stock Price Prediction Without Writing a Single Line of Code"
+description: "How To Build Stock Price Prediction Without Writing a Single Line of Code. In this post you will learn how to use Amazon SageMaker Canvasto generate preditions without writng code."
 tags:
   - ai
   - sagemaker
   - no-code
+  - forecast
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
 date: 2023-04-11
 ---
 
-The blazing speed of recent innovations in the Artificial Intelligence field is transforming businesses, and how people access and analyze information, and make decisions. AI used to be the specialized domain of data scientists and computer programmers. No-code/Low-code (NCLC) removes barriers allowing anyone to apply artificial intelligence without having to write a line of computer code. NCLC platforms are replacing the need for programming with a visual drag-and-drop interface.
+Artificial Intelligence used to be the specialized domain of data scientists and computer programmers. No-code/Low-code (NCLC) removes barriers allowing anyone to apply artificial intelligence without having to write a line of computer code. NCLC platforms are replacing the need for programming with a visual drag-and-drop interface.
 
-In this blog post, I will go through a step-by-step process on how to build an ML model for stock value predictions using the No-code approach with Amazon SageMaker Canvas. This example is not meant to be for investment purposes but rather to showcase the ease of development of predictions. Please do not make any financial decisions based on the forecasted results.
+In this blog post, I will go through a step-by-step process on how to build stock price predictions without writing a single line of code. I encourage you to follow along with me and ....
+
+We will be using sing the No-code approach with Amazon SageMaker Canvas. This example is not meant to be for investment purposes but rather to showcase the ease of development of predictions. ML models based on the history of stock prices are inadequate for predicting future prices as they fail to incorporate crucial elements such as policy changes and economic swings, which can significantly impact the stock market's behavior and introduce unpredictability beyond what historical data alone can capture.
+Please do not make any financial decisions based on the forecasted results.
 
 I will walk you through the following parts:
 
@@ -25,7 +29,11 @@ I will walk you through the following parts:
 
 Amazon SageMaker Canvas allows building ML models using a visual interface instead of writing code. It includes pre-built ML models for a variety of use cases including sentiment analysis, object detection on images, document analysis, and others. You can import and join data from different external resources Amazon S3, Snowflake, Google Analytics, and many more.
 
-For our example, we will create a custom model using time-series forecasting and import a dataset stored from Amazon S3. Below is an architectural diagram and the high-level steps: 
+For our example, we will create a custom model using time-series forecasting and import a dataset stored from Amazon S3. 
+
+Time series forecasting refers to the process of predicting future values or patterns in a sequence of data points that are collected over time. It involves analyzing historical patterns, trends, and seasonality within the data to make predictions about future values, enabling decision-making, planning, and understanding of future trends.
+
+Below is an architectural diagram and the high-level steps: 
 
 1. Obtain a historical dataset from Nasdaq 
 2. Modify the dataset and upload it to Amazon S3 bucket 
@@ -70,7 +78,11 @@ Save all changes. Rename file to AAPL_<todays date> for example AAPL_20230421.cs
 
 ![Dataset in excel](images/part1-04.png)
 
-As a next step, upload the dataset to an S3 bucket. You can create a new bucket or use any existing buckets.
+As a next step, upload the dataset to an Amazon S3 bucket. 
+
+An Amazon S3 bucket is a storage container provided by Amazon Web Services (AWS) that allows users to store and retrieve data in the cloud. It functions like a folder or directory where you can upload and organize files, such as documents, images, or videos. It offers a scalable and reliable storage solution, accessible from anywhere on the internet, and can be integrated with various applications and services for data storage and backup purposes.
+
+You can create a new bucket or use any existing buckets.
 To create a new S3 bucket, go to AWS Console and search for S3. Click **Create bucket**  button. Give a bucket a unique name and keep all other parameters as default. 
 
 ![Amazon S3 - create bucket](images/part1-05.png)
@@ -103,7 +115,8 @@ On the next screen, we will configure the model for training. There are two type
 * Quick build – Builds a model in a fraction of the time compared to a standard build. It results in potentially lower accuracy in exchange of greater speed. It takes about 15-20 minutes to complete Quick Build.
 * Standard build – Builds the best model from an optimized process powered by AutoML. It takes longer time but provide more accurate results. It may take around 4-5 hours to build a model using our dataset.
 
-If you are starting with experiment, it is faster to start with a quick build, validate your forecast and later to proceed with standard build. Models that are created using standard build can be shared with other team members.
+If you are starting with experiment, it is faster to start with a quick build, validate your forecast and later to proceed with standard build and it will save you money once you start using SageMaker Canvas beyond Free Tier. 
+Amazon SageMaker Canvas provides a 2-month free tier. The free tier includes workspace instance (Session-Hrs) usage up to 750 hours/month for using the SageMaker Canvas application.
 
 The first step of the training ML model process is to choose the **Target column**. Let’s pick *MarketClose* variable because it will help us to evaluate the accuracy of the model in the future by looking at the historical market close values. 
 
@@ -130,7 +143,7 @@ You can get a popup asking to validate your data you can skip it and click **Sta
 
 ## Part 3 - Using the model to generate predictions
 
-When the model training finishes, you will be navigated to the **Analyze** tab. There, you can see the average prediction accuracy, and how diffirent columns impact outcome of predictions. Please note that actual numbers might differ from the one you see on the screenshot below, due to stochastic nature of the Machine Learning process.
+When the model training finishes, you will be navigated to the **Analyze** tab. There, you can see the average prediction accuracy, and how diffirent columns impact outcome of predictions. Please note that actual numbers might differ from the one you see on the screenshot below, due to stochastic nature of the Machine Learning process. The term stochastic refers to the fact that there is an inherent uncertainty and randomness involved in ML algorithms.
 
 Canvas separates the dataset into training and test sets. The training dataset is the data Canvas uses to build the model. The test set is used to see if the model performs well with new data. The following screenshot shows how the model performed on the test set. To learn more, refer to [Evaluating Your Model’s Performance in Amazon SageMaker Canvas](https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-evaluate-model.html). 
 
@@ -144,7 +157,7 @@ To create forecast predictions, let’s provide a maximum value - 30 days window
 
 ![SageMaker Canvas - Analyze - Single Item](images/part3-02.png)
 
-Canvas generates probabilistic forecasts at three default quantiles: 10% (p10), 50% (p50), and 90% (p90). You can choose the forecast that suits your needs. For the p10 forecast, the true value is expected to be lower than the predicted value 10% of the time. With the p90 forecast, the true value is expected to be lower than the predicted value 90% of the time. If missing customer demand would result in either a significant amount of lost revenue or a poor customer experience, the p90 forecast is more useful. For our use case, p50 - Forecast expected value will suit better for evaluation.
+Canvas generates probabilistic forecasts at three default quantiles: 10% (p10), 50% (p50), and 90% (p90). "P" stands for Percentile. You can choose the forecast that suits your needs. For the p10 forecast, the true value is expected to be lower than the predicted value 10% of the time. With the p90 forecast, the true value is expected to be lower than the predicted value 90% of the time. If missing customer demand would result in either a significant amount of lost revenue or a poor customer experience, the p90 forecast is more useful. For our use case, p50 - Forecast expected value will suit better for evaluation. If we want to identify a point when it's a good time to buy stock then we would use p10 and to sell stock then we would use p90. 
 
 You can notice how prediction drops to zeros during the weekend. Let’s build a dashboard in QuickSight and filter out weekends so we could get a better picture of the predicted trend. Click **Download prediction button** at the bottom.
 
@@ -184,4 +197,5 @@ If you are interested experimenting with other SageMaker Canvas ML models and us
 
 ## About author
 
-Something about Viktoria
+Viktoria is a Senior Developer Advocate and passionate about helping builders to build and innovate using new technologies. She is a content creator and frequently shares content on [LinkedIn](https://www.linkedin.com/in/semaan/). Viktoria has been named as a one of the Top Cloud Influencers in 2023 and [#9 LinkedIn Female Content Creator WorldWide](https://app.favikon.com/creators-tops/women-content-creators/all-niches/linkedin/). 
+
