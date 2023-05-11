@@ -22,6 +22,7 @@ Two of the key practices in Kanban are to limit WIP (work in process) and to man
 
 
 This diagram in Figure 2 comes from **One day in Kanban land** by the always awesome Henrik Kniberg – you should bookmark it and check it out: [**_http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000_**](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000)
+
 A developer on one of my teams which is using Kanban once complained to me that the WIP limit seemed artificial, and that when he was ready to start new work it seemed silly to restrict him from doing so. That got me thinking about how to explain why do we limit WIP and how does limiting WIP help the team to get more stuff done. In this blog I will explain how
 
 
