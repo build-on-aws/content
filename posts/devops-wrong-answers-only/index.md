@@ -5,6 +5,8 @@ tags:
   - devops
   - testing
   - automation
+spaces:
+  - devops
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-03-24

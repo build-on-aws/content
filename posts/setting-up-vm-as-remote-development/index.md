@@ -5,6 +5,8 @@ tags:
   - remote-development
   - ec2
   - neovim
+spaces:
+  - devops
 authorGithubAlias: donnieprakoso
 authorName: Donnie Prakoso
 date: 2022-10-28

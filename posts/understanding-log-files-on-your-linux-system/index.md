@@ -4,6 +4,8 @@ description: "Log files in Linux represent point in time events for activity rel
 tags:
   - linux
   - logging
+spaces:
+  - devops
 authorGithubAlias: cie247
 authorName: Curtis Evans
 date: 2022-11-28

@@ -2,6 +2,7 @@
 
 * [Markdown Syntax](#markdown-syntax)
   * [Where do I find the general Markdown syntax guide?](#where-do-i-find-the-general-markdown-syntax-guide)
+  * [How can I provide a post description for SEO purposes?](#how-can-i-provide-a-post-description-for-seo-purposes)
   * [I have a series of posts. How do I link them together?](#i-have-a-series-of-posts-how-do-i-link-them-together)
   * [How do I link to other posts in my series or other posts on the BuildOn.AWS site?](#how-do-i-link-to-other-posts-in-my-series-or-other-posts-on-the-buildonaws-site)
   * [How do I create a Table of Contents for my post?](#how-do-i-create-a-table-of-contents-for-my-post)
@@ -18,6 +19,16 @@
   * [How do I create an external post?](#how-do-i-create-an-external-post)
   * [How do I create a series of posts?](#how-do-i-create-a-series-of-posts)
   * [How do I configure post images?](#how-do-i-configure-post-images )
+  * [How do I show tweets in my post?](#how-do-i-show-tweets-in-my-post)
+  * [How do I add multiple authors in my post?](#how-do-i-add-multiple-authors-in-my-post)
+  * [How do I add customized contents for smart tag pages?](#how-do-i-add-customized-contents-for-smart-tag-pages)
+  * [How do I add customized contents for extra space pages?](#how-do-i-add-customized-contents-for-extra-space-pages)
+  * [How do I add posts to a space feed?](#how-do-i-add-posts-to-a-space-feed)
+  * [How do I add posts to the home page feed?](#how-do-i-add-posts-to-the-home-page-feed)
+  * [How do I pin a post in the home page?](#how-do-i-pin-a-post-in-the-home-page)
+  * [How can I provide description for tags?](#how-can-I-provide-description-for-tags)
+  * [How can I set the Canonical URL?](#how-can-I-set-the-canonical-url)
+  * [How do I set the Redirect URL?](#how-do-I-set-the-redirect-url)
 * [Miscellaneous](#miscellaneous)
   * [Why was my content proposal not accepted? Do you have feedback for me?](#why-was-my-content-proposal-not-accepted-do-you-have-feedback-for-me)
 
@@ -26,6 +37,15 @@
 ### Where do I find the general Markdown syntax guide?
 
 👉 [https://www.markdownguide.org/basic-syntax/](https://www.markdownguide.org/basic-syntax/)
+
+### How can I provide a post description for SEO purposes?
+
+The description field in the frontMatter of your post is used as a `<meta name="description">` header in the page, but if you want some more SEO friendly content in this header, simply add a seoDescription field, for example:
+
+```yml
+description: "Adding compute power to a Kubernetes Cluster can be challenging because of the lengthy delay between compute demand and instance availability. In this post we are going to learn about Karpenter, an open source project that helps to have the power you need just when you need it."
+seoDescription: "How to add compute power to Kubernetes Clusters quickly with Karpenter"
+```
 
 ### I have a series of posts. How do I link them together?
 
@@ -412,6 +432,147 @@ There are three types of images here:
 
 Additionally, these images may be used to create a preview when a post is shared in social media. The banner image is preferred, if there is none then the background image, and if not, the thumbnail image.
 Notice that images should be optimized for the web, using compressed modern formats such as webp, and avoiding large high-resolution images. Some social media (for example, Twitter) refuse to use large images and may fall back to other images found in the page.
+
+### How do I show tweets in my post?
+
+Simply place the URL of the tweet in a separate line, for example:
+
+```text
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
+
+https://twitter.com/CoolViews_/status/1624449857397092354?s=20
+```
+
+### How do I add multiple authors in my post?
+
+Add `additionalAuthors` in meta data
+
+```text
+authorGithubAlias: mainAuthorGithubAlias
+authorName: mainAuthorName
+additionalAuthors:
+  - authorGithubAlias: additionalAuthorGithubAlias1
+    authorName: additionalAuthorName1
+  - authorGithubAlias: additionalAuthorGithubAlias2
+    authorName: additionalAuthorName2
+```
+### How do I add customized contents for smart tag pages?
+
+In `tags` folder, add a folder with smart tag name, add `top.md`, `right-top.md` and `right-bottom.md` to provide customized contents for top, right top and right bottom of the page correspondingly. All Markdown syntax for posts is also supported in the markdown file. You can use `hasBorder` meta data to customize the section has border or not.
+
+For example, to add a customized top content for `aws` tag page, add a `top.md` in folder `/tags/aws`.
+
+```
+---
+hasBorder: false
+---
+
+https://www.youtube.com/watch?v=a9__D53WsUs
+```
+
+### How do I add customized contents for extra space pages?
+
+In `spaces` folder, add a folder with the space name, add `top.md`, `right-top.md` and `right-bottom.md` to provide customized contents for top, right top and right bottom of the page correspondingly. All Markdown syntax for posts is also supported in the markdown file. You can use `hasBorder` meta data to customize the section has border or not.
+
+For example, to add a customized top content for `devops` tag page, add a `top.md` in folder `/spaces/devops`.
+
+```
+---
+hasBorder: false
+---
+
+https://www.youtube.com/watch?v=a9__D53WsUs
+```
+
+### How do I add posts to a space feed?
+
+A post can be place in one or more spaces. In order to do that, given the space name(s), add the following to the post frontmatter header:
+
+```yml
+spaces:
+  - xxx
+  - yyy
+```
+
+In this example, the post will be part of the feed of spaces "xxx" and "yyy".
+
+### How do I add posts to the home page feed?
+
+By default, all posts inside the /posts/ folder are shown in the home feed. If you want to include in the feed a post that is outside this folder, add the following to the post frontmatter header:
+
+```yml
+showInHomeFeed: true
+```
+
+If a post inside the /posts/ folder needs to be excluded from the home feed, then add this:
+
+```yml
+showInHomeFeed: false
+```
+
+### How do I pin a post in the home page?
+
+A pinned post is displayed using a background image with the post title and date on top. It shows at the top of the feed in the home page (or tag/space page).
+In order to do so, edit the file /spaces/home/top.md so that it looks like this:
+
+```markdown
+---
+hasBorder: false
+---
+ 
+https://www.buildon.aws/tutorials/using-ec2-userdata-to-bootstrap-python-web-app
+```
+
+Use the full URL of the post like in this example. You can also add multiple post URL's, one per line, and in this case, they will show in a carousel loop, transitioning from one to the next every few seconds. 
+
+```markdown
+---
+hasBorder: false
+---
+
+https://www.buildon.aws/tutorials/using-ec2-userdata-to-bootstrap-python-web-app
+https://www.buildon.aws/tests/demystifying-the-transition-to-microservices?template=bgimage
+https://www.buildon.aws/tests/embedding-posts-in-markdown
+```
+
+Notice that pinned posts should have a background image with the opengraph ratio (1.91:1 or 1200x630px or equivalent). This image has to be configured in the post frontmatter header:
+```yml
+images:
+    background: <image url>
+```
+
+Similarly, posts can be pinned in smart-tags or spaces by editing the /tags/<tag>/top.md or /spaces/<space>/top.md files.
+
+### How can I provide description for tags?
+
+Create a file `/tags/<tag name>/tag.md` and provide a content similar to:
+
+````markdown
+---
+description: "<SEO description for the tag>"
+
+---
+
+... Some markdown content ...
+
+````
+The description field (plain text only) will be used for SEO purposes in the tag page, and the (optional) markdown content in this file will be rendered under the tag name in the tag page. Although it supports markdown in its full extent, the content should be mostly text and links.
+
+### How can I set the Canonical URL?
+
+Add an attribute in the FrontMatter header named "externalCanonicalUrl" with the canonical URL of the original content you want to link to. For example:
+  ````yml
+      externalCanonicalUrl: https://dzone.com/articles/demystifying-transition-to-microservices
+  ````
+
+### How do I set the Redirect URL?
+
+If you move a content piece to a new location, create a new PR that moves it to the intended folder, and add an attribute in the FrontMatter header named "movedFrom" with the previous/old folder location of the content.
+This will redirect traffic from old URLs to newer locations.
+
+  ````yml
+      movedFrom: /tutorials/demystifying-transition-to-microservices
+  ````
 
 ## Miscellaneous
 
