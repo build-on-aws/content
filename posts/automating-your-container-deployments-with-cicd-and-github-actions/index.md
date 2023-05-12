@@ -4,9 +4,12 @@ description: Learn how to test and deploy a containerized Flask app to the cloud
 tags:
   - github-actions
   - containers
-  - cicd
+  - ci-cd
   - infrastructure-as-code
   - cdk
+  - devops
+spaces:
+  - devops
 authorGithubAlias: jennapederson
 authorName: Jenna Pederson
 date: 2022-12-16
