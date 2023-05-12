@@ -19,12 +19,9 @@ Two of the key practices in Kanban are to limit WIP (work in process) and to man
 ![One day in Kanban land](images/figure2.png "Figure 2.  One day in Kanban land by Henrik Kniberg")
 <br/>[[image source](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000)] by Henrik Kniberg, licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/)
 
+This diagram in Figure 2 comes from [**One day in Kanban land**](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000), by the always-awesome Henrik Kniberg – you should bookmark it and check it out.
 
-
-This diagram in Figure 2 comes from **One day in Kanban land** by the always awesome Henrik Kniberg – you should bookmark it and check it out: [**_http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000_**](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000)
-
-A developer on one of my teams which is using Kanban once complained to me that the WIP limit seemed artificial, and that when he was ready to start new work it seemed silly to restrict him from doing so. That got me thinking about how to explain why do we limit WIP and how does limiting WIP help the team to get more stuff done. In this blog I will explain how
-
+A developer on one of my teams using Kanban once complained to me that the WIP limit seemed artificial, and that when he was ready to start new work it seemed silly to restrict him from doing so. That got me thinking about how to explain why we limit WIP and how limiting WIP helps teams get more stuff done. In this blog I will explain how:
 
 1. Limiting WIP improves flow, and helps us produce more quickly and reliably
 2. Limiting WIP drives collaboration, and gets the team working together
@@ -32,8 +29,7 @@ A developer on one of my teams which is using Kanban once complained to me that 
 
 ## Limiting WIP improves flow
 
-You have a workflow where items come in, are developed, tested, deployed, and other steps towards getting “done” (or “Live!” in Figure 2). You want your workflow to... well... *flow*. That is items come in, do not spend too much time in any given workflow step, and continuously and quickly emerge out the other end into the *Done* state.
-
+You have a workflow where items come in, are developed, tested, deployed, and other steps towards getting “done” (or “Live!” in Figure 2). You want your workflow to... well... *flow*. That is, as items come in, you don't spend too much time in any given workflow step, and continuously and quickly emerge out the other end into the *Done* state.
 
 >Kanban Aside:
 >
@@ -41,10 +37,9 @@ You have a workflow where items come in, are developed, tested, deployed, and ot
 >
 > Items quickly reaching done is measured by “cycle time”, the amount of time it takes from starting an item coming into the workflow, until it reaches done.
 
-
 ![workflow without WIP limits](images/figure3.png "Figure 3. A workflow without WIP limits")
 
-Figure 3 shows an example of a workflow without WIP limits. The team is busily working on Development (such as design and coding) of many items. Everyone is busy and working hard. But look at the flow. Are items getting done continuously or are they just accumulating under *Develop*? Are items getting done quickly, or do they linger in the Develop state? It reminds me of something like Figure 4.
+Figure 3 shows an example of a workflow without WIP limits. The team is busily working on Development (such as design and coding) of many items. Everyone is busy and working hard. But look at the flow. Are items getting done continuously or are they just accumulating under *Develop*? It reminds me of something like Figure 4.
 
 ![when you do not have WIP limits](images/figure4.png "Figure 4. What happens when you do not have WIP limits")
 
@@ -52,38 +47,30 @@ What then if we applied a WIP limit to the Develop state? It might look like Fig
 
 ![workflow with WIP limits](images/figure5.png "Figure 5. A workflow with WIP limits")
 
-
 You can imagine that the WIP limit of 4 on the *Develop* state “squeezed” all the work downstream to more evenly distribute it along the work states and drive more of it to done. This “squeeze” visualization is OK as a thought exercise, but in reality what has occurred is one of the following:
-
 
 1. Developers unable to take on new work into the already full Develop column either collaborated with other developers working on items already being developed (see the next section).
 2. Or they moved their focus downstream to work on code review or validation. In this latter case this moves those items downstream creating “open slots” in Code Review and Validate as shown in Figure 6.
 
-
 ![Limiting WIP streamlines throughput](images/figure6.png "Figure 6. Limiting WIP can streamline throughput, and incentivizes code reviews")
 
-
-
 Number 1 does not necessarily help in this case as there is nowhere for an item to move to once *Develop* is complete, since Code Review is also full. So developers instead focus on action number 2 and move items downstream towards the Done state. This creates space for items to move on from Develop and therefore creates space for items to move from Backlog to Develop. This is the “pull model” of Kanban in action. So perhaps non-intuitively, it is applying WIP limits that opens up that valve in the bulging water line figure 4, focusing work downstream rather than continuously stuffing it into “the bulge”.
-
 
 >Kanban Aside:
 >
 > There are also other actions besides 1 and 2 identified. Another one is called “slack” where developers take on tasks outside of the main workflow to improve things such as efficiency, operations, or addressing technical debt. Developers might even just read a book or take training, this is called “sharpening the saw”. Slack in excess is a sign of a problem, but a little slack is a good thing.
 
-## Limiting WIP drives collaboration
+## Limiting WIP Drives Collaboration
 
-As mentioned earlier, then a developer cannot pull in a new item into *Develop* due to a WIP limit, one way she can continue to be productive is by collaborating with other developers on an item already being *Developed*. Or perhaps she looks downstream and sees QA needs help, she can pitch in there and help the QA Engineer out (perhaps helping to build out some automation). The power of collaboration is getting multiple talents and multiple perspectives so that we arrive at the best outcome (pair programming also leverages this advantage of collaboration). But another advantage of collaboration is that stuff gets done faster, and getting stuff done faster was one of our goals (and a sign of good flow).
+As mentioned earlier, when a developer cannot pull in a new item into *Develop* due to a WIP limit, one way she can continue to be productive is by collaborating with other developers on an item already being *Developed*. Or perhaps she looks downstream and sees QA needs help, she can pitch in there and help the QA Engineer out (perhaps helping to build out some automation). The power of collaboration is getting multiple talents and multiple perspectives so that we arrive at the best outcome (pair programming also leverages this advantage of collaboration). But another advantage of collaboration is that stuff gets done faster, and getting stuff done faster was one of our goals (and a sign of good flow).
 
 To illustrate how collaboration (driven by lower WIP limits) gets things done faster see the following workflows in figure 7. One has a WIP limit of 1 and one has a WIP limit of 2. Assume for simplicity that each item takes two developer-days to complete (and that all developer are equivalent). Note that the overall amount of work done (throughput) is the same — one item per day. But look at an individual item like “Item 2”. With a WIP Limit of 2 it takes two days of work to complete (this is the Cycle Time). But with developers collaborating under a WIP limit of 1, it only takes 1 day to complete. Completing items faster is preferred because
-
 
 * The code doesn’t rot as team members check in new code
 * The developer doesn’t lose the context he or she gained in writing the original code
 * And we get feedback on the item faster, speeding up our ability to inspect and adapt
 
 ![Limiting WIP improves cycle time](images/figure7.png "Figure 7. Limiting WIP improves cycle time for each item")
-
 
 >Kanban Aside:
 >
@@ -100,7 +87,6 @@ In Scrum we plan a sprint based on past velocity, and then as a team commit that
 In Kanban, we often have a continuous flow model and not a sprint one, so the Scrum method of committing to a set of sprint stories will not work. We take a different approach to team commitment. By limiting WIP we commit to ensure that the most important things (the things the top of the backlog) get the teams’ attention, and that often multiple members of the team will collaborate to deliver those items.
 
 So in Scrum we might recognize half-way through the sprint that stories will not be finished, and then swarm on a select few stories in order to finish those and meet at least part of our commitment. In Kanban we limit WIP and we ALWAYS swarm to ensure we *Stop Starting and Start Finishing*.
-
 
 ## Conclusion
 
