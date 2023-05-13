@@ -30,8 +30,6 @@ In short, limiting work in process helps you manage your overall workflow, enabl
 
 This diagram in Figure 2 comes from [**One day in Kanban land**](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000), by the always-awesome Henrik Kniberg – you should bookmark it and check it out.
 
-This diagram in Figure 2 comes from [**One day in Kanban land**](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000), by the always-awesome Henrik Kniberg – you should bookmark it and check it out.
-
 A developer on one of my teams using Kanban once complained to me that the WIP limit seemed artificial, and that when he was ready to start new work it seemed silly to restrict him from doing so. That got me thinking about how to explain why we limit WIP and how limiting WIP helps teams get more stuff done. In this blog I will explain how:
 
 1. Limiting WIP improves flow, and helps us produce more quickly and reliably
@@ -52,7 +50,6 @@ You have a workflow where items come in, are developed, tested, deployed, and ot
 
 ![Kanban board showing a workflow without WIP limits](images/figure3.png "Figure 3. A workflow without WIP limits")
 
-Figure 3 shows an example of a workflow without WIP limits. The team is busily working on Development (such as design and coding) of many items. Everyone is busy and working hard. But look at the flow. Are items getting done continuously or are they just accumulating under *Develop*? It reminds me of something like Figure 4.
 Figure 3 shows an example of a workflow without WIP limits. The team is busily working on Development (such as design and coding) of many items. Everyone is busy and working hard. But look at the flow. Are items getting done continuously or are they just accumulating under *Develop*? It reminds me of something like Figure 4.
 
 ![pipe with bulge, reminiscent of the Kanban board without WIP limits](images/figure4.png "Figure 4. What happens when you do not have WIP limits")
