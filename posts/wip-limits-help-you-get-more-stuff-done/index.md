@@ -28,6 +28,7 @@ In short, limiting work in process helps you manage your overall workflow, enabl
 ![Kanban board where a developer is blocked from taking on new work by the WIP limit](images/figure2.png "Figure 2.  One day in Kanban land by Henrik Kniberg")
 <br/>[[image source](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000)] by Henrik Kniberg, licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/)
 
+This diagram in Figure 2 comes from [**One day in Kanban land**](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000), by the always-awesome Henrik Kniberg – you should bookmark it and check it out.
 
 This diagram in Figure 2 comes from [**One day in Kanban land**](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000), by the always-awesome Henrik Kniberg – you should bookmark it and check it out.
 
@@ -40,6 +41,7 @@ A developer on one of my teams using Kanban once complained to me that the WIP l
 ## Limiting WIP improves flow
 
 You have a workflow where items come in, are developed, tested, deployed, and other steps towards getting “done” (or “Live!” in Figure 2). You want your workflow to... well... *flow*. That is, as items come in, you don't spend too much time in any given workflow step, and continuously and quickly emerge out the other end into the *Done* state.
+You have a workflow where items come in, are developed, tested, deployed, and other steps towards getting “done” (or “Live!” in Figure 2). You want your workflow to... well... *flow*. That is, as items come in, you don't spend too much time in any given workflow step, and continuously and quickly emerge out the other end into the *Done* state.
 
 > Kanban Aside:
 >
@@ -50,6 +52,7 @@ You have a workflow where items come in, are developed, tested, deployed, and ot
 
 ![Kanban board showing a workflow without WIP limits](images/figure3.png "Figure 3. A workflow without WIP limits")
 
+Figure 3 shows an example of a workflow without WIP limits. The team is busily working on Development (such as design and coding) of many items. Everyone is busy and working hard. But look at the flow. Are items getting done continuously or are they just accumulating under *Develop*? It reminds me of something like Figure 4.
 Figure 3 shows an example of a workflow without WIP limits. The team is busily working on Development (such as design and coding) of many items. Everyone is busy and working hard. But look at the flow. Are items getting done continuously or are they just accumulating under *Develop*? It reminds me of something like Figure 4.
 
 ![pipe with bulge, reminiscent of the Kanban board without WIP limits](images/figure4.png "Figure 4. What happens when you do not have WIP limits")
