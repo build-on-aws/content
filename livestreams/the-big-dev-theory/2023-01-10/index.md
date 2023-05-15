@@ -11,7 +11,6 @@ authorName: Stuart Clark
 date: 2023-01-10
 spaces:
   - livestreams
-    
 ---
 
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1778017615), where we'll explore the implementation of a modern Software Development Life Cycle and Continuous Integration/Continuous Delivery pipeline using GitHub and AWS. Our special guest, Alex Ilgayev, Head of Security Research at [Cycode](https://cycode.com/), will guide us through the necessary steps to set up the pipeline, including creating an AWS account, setting up a repository, and configuring a CI/CD pipeline. Don't miss this opportunity to learn from an expert in the field!

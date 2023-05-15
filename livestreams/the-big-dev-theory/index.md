@@ -30,22 +30,6 @@ Each episode, we chat with AWS partners and bring experts with specialized knowl
 
 ## Schedule
 
-Past episodes
-| Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
-|-|--|--|--|--|-|
-|Season 1 | **Episode 1** | 2023/01/10 | [Watch here](https://www.twitch.tv/videos/1778017615) | Cycode | TBD |
-|Season 1 | **Episode 2** | 2023/01/17 | [Watch here](https://www.twitch.tv/videos/1778034229) | Cycode | TBD |
-|Season 1 | **Episode 3** | 2023/01/24 | [Watch here](https://www.twitch.tv/videos/1778034293) | Cycode | TBD |
-|Season 1 | **Episode 4** | 2023/02/07 | [Watch here](https://www.twitch.tv/videos/1777989080) | Vercel | TBD |
-|Season 1 | **Episode 5** | 2023/02/13 | [Watch here](https://www.twitch.tv/videos/1777992194) | Vercel | TBD |
-|Season 1 | **Episode 6** | 2023/02/21 | [Watch here](https://www.twitch.tv/videos/1777986027) | Vercel | TBD |
-|Season 1 | **Episode 7** | 2023/03/07 | [Watch here](https://www.twitch.tv/videos/1777977174) | Datadog | TBD |
-|Season 1 | **Episode 8** | 2023/03/14 | [Watch here](https://www.twitch.tv/videos/1777964452) | Datadog | TBD |
-|Season 1 | **Episode 9** | 2023/03/21 | [Watch here](https://www.twitch.tv/videos/1777973888) | Datadog | TBD |
-|-|--|--|--|--|-|
-|Season 2 | **Episode 1** | 2023/04/11 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1791544011) | Snowflake | TBD |
-|Season 2 | **Episode 2** | 2023/04/18 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1797793882) | Snowflake | TBD |
-|Season 2 | **Episode 3** | 2023/05/02 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1810223487) | Snowflake | TBD |
 
 Join us for our upcoming episodes!
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
@@ -74,3 +58,21 @@ Join us for our upcoming episodes!
 |Season 5 | **Episode 4** | 2023/12/05 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Auth0 | TBD |
 |Season 5 | **Episode 5** | 2023/12/12 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Auth0 | TBD |
 |Season 5 | **Episode 6** | 2023/12/19 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Auth0 | TBD |
+
+Past episodes
+| Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
+|-|--|--|--|--|-|
+|Season 2 | **Episode 3** | 2023/05/02 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1810223487) | Snowflake | TBD |
+|Season 2 | **Episode 2** | 2023/04/18 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1797793882) | Snowflake | TBD |
+|Season 2 | **Episode 1** | 2023/04/11 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1791544011) | Snowflake | TBD |
+|-|--|--|--|--|-|
+|Season 1 | **Episode 9** | 2023/03/21 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777973888) | Datadog | TBD |
+|Season 1 | **Episode 9** | 2023/03/21 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777973888) | Datadog | TBD |
+|Season 1 | **Episode 8** | 2023/03/14 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777964452) | Datadog | TBD |
+|Season 1 | **Episode 7** | 2023/03/07 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777977174) | Datadog | TBD |
+|Season 1 | **Episode 6** | 2023/02/21 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777986027) | Vercel | TBD |
+|Season 1 | **Episode 5** | 2023/02/13 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777992194) | Vercel | TBD |
+|Season 1 | **Episode 4** | 2023/02/07 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777989080) | Vercel | TBD |
+|Season 1 | **Episode 3** | 2023/01/24 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1778034293) | Cycode | [Show notes](/livestreams/the-big-dev-theory/2023-01-24/) |
+|Season 1 | **Episode 2** | 2023/01/17 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1778034229) | Cycode | [Show notes](/livestreams/the-big-dev-theory/2023-01-17/) |
+|Season 1 | **Episode 1** | 2023/01/10 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1778017615) | Cycode | [Show notes](/livestreams/the-big-dev-theory/2023-01-10/) |

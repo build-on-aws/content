@@ -11,7 +11,6 @@ authorName: Stuart Clark
 date: 2023-01-24
 spaces:
   - livestreams
-    
 ---
 
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1778034293), we explore the steps necessary to build a secure CI/CD flow for a Java program with a vulnerable Log4j version. Our guest is Alex Ilgayev, Head of Security Research at [Cycode](https://cycode.com/) who begin by constructing a simple exploit in the Kubernetes cluster and demonstrating the potential consequences. We then examine how to update the version of Log4j through basic Static Code Analysis capabilities in the source code, thereby solving the issue. Finally, it demonstrates how to deploy a non-vulnerable version to the cloud.
