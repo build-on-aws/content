@@ -118,4 +118,3 @@ Replicas provide the ability to restore data quickly and with minimal data loss.
 - Well-Architected workshop
   - [Testing Resilience of EC2, RDS, and AZ USing Chaos Engineering](https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_of_ec2_rds_and_s3/) - This lab illustrates how RDS fails over to the standby instance to maintain availability
  
- 
