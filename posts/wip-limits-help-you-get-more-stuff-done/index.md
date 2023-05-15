@@ -1,6 +1,6 @@
 ---
-title: How Work-in-Process Limits (WIP Limits) Help You Get More Done using Kanban
-description: Kanban is a popular agile workflow management method. Learn how WIP limits work with Kanban to help you to deliver software releases faster and more reliably.
+title: How WIP Limits Help You Get More Done using Kanban
+description: Kanban is a popular agile workflow management method. Learn how Work in Process Limits (WIP limits) work with Kanban to help you to deliver software releases faster and more reliably.
 tags:
   - agile
   - kanban
