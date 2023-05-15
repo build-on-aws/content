@@ -7,4 +7,5 @@ date: 2023-05-15
 
 ---
 
-## The Architecture of BuilOn.AWS
+## The Architecture of BuildOn.AWS
+BuildOn leverages the power of Serverless (AWS Lambda, DynamoDB, API Gateway, ...), GraphQL APIs and Next.JS to ...
