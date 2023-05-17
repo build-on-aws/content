@@ -20,6 +20,7 @@
   * [How do I create a series of posts?](#how-do-i-create-a-series-of-posts)
   * [How do I configure post images?](#how-do-i-configure-post-images )
   * [How do I show tweets in my post?](#how-do-i-show-tweets-in-my-post)
+  * [How do I embed a twitch video in my post?](#how-do-i-embed-a-twitch-video-in-my-post)
   * [How do I add multiple authors in my post?](#how-do-i-add-multiple-authors-in-my-post)
   * [How do I add customized contents for smart tag pages?](#how-do-i-add-customized-contents-for-smart-tag-pages)
   * [How do I add customized contents for extra space pages?](#how-do-i-add-customized-contents-for-extra-space-pages)
@@ -441,6 +442,16 @@ Simply place the URL of the tweet in a separate line, for example:
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
 
 https://twitter.com/CoolViews_/status/1624449857397092354?s=20
+```
+
+### How do I embed a twitch video in my post?
+
+Simply place the URL of the twicth video in a separate line, for example:
+
+```text
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
+
+https://www.twitch.tv/videos/1818231252
 ```
 
 ### How do I add multiple authors in my post?
