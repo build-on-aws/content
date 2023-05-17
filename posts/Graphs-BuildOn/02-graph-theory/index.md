@@ -9,12 +9,12 @@ tags:
   - graph
   - graph theory
 authorGithubAlias: cyrusmvahid
-authorName: Cyrus Vahid
+authorName: Cyrus Vahid, Sai Kiran Jukanti and Shamika Ariyawansa
 date: 2022-07-08
 ---
-in the [previous post](01-motivation-for-graph-ml), we learn why we need to pay attention to GNNs. Before we can actually learn about GNNs, we need to learn some of the basics of graph theory to be able to understand parameters of the GNN methods as well as technical aspects of the papers. If you are familiar with graph thery, please skip to [next part](03-message-passing-neural-networks).
+In the [previous post](01-motivation-for-graph-ml), we learn why we need to pay attention to GNNs. Before we can actually learn about GNNs, we need to learn some of the basics of graph theory to be able to understand parameters of the GNN methods as well as technical aspects of the papers. If you are familiar with graph theory, please skip to [next part](03-message-passing-neural-networks).
 
-This is the first of a 5-part series to gently introduce the reader to Graph Neural Networks. Part 1 intends to provide the basic terminology of graph theory as well as an brief introduction of networkx, a popular graph computation library, to the readers that are new to graphs. The next 4 parts describe 1) intuition behind GNN, 2) Message Passing Neural Network or MPNN framework, which is the foundation of out Deep Graph Library DGL, our implementation of GNN, 3) A basic understanding of DGL, and finally 4) and tutorial as how to use DGL for most common use cases. 
+This is the first of a 5-part series to gently introduce the reader to Graph Neural Networks. Part 1 intends to provide the basic terminology of graph theory as well as an brief introduction of networkX, a popular graph computation library, to the readers that are new to graphs. The next 4 parts describe 1) Intuition behind GNN, 2) Message Passing Neural Network or MPNN framework, which is the foundation of out Deep Graph Library DGL, our implementation of GNN, 3) A basic understanding of DGL, and finally 4) and tutorial as how to use DGL for most common use cases. 
 
 ## The basics
 A graph $\mathcal{G}$ consists of a pair $(V, E)$, where $V$ is a set of vertices and $E$ is a set of edges.  
@@ -22,7 +22,7 @@ $$V=\large {\{v_i\}}_{i=0}^{n}\ and\ E=\{(v, w)|v, w\in V\}$$
 For instance: $V=\{1,2,3\}$ and $E=\{(1,2), (1,3), (2,3)\}$ represents an undirected complete and simple graph with three vertices.  
 Below is an example of a few graphs.
 
-Let us implement this simple graph using networkx. We shall draw a complete and simple bi-directional graph. The definitions are explained later in this blog.
+Let us implement this simple graph using networkX. We shall draw a complete and simple bi-directional graph. The definitions are explained later in this blog.
 
 ```python
 import networkx as nx #importing the main library
