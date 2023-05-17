@@ -32,7 +32,7 @@ In this tutorial you will learn how you can apply DevOps techniques to help you 
 
 ## Sections
 
-| Info                | Level                                  |
+| Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Intermediate                           |
 | ⏱ Time to complete  | 90 minutes                             |
