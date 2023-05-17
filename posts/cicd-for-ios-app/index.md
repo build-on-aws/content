@@ -13,17 +13,11 @@ authorName: Sébastien Stormacq
 date: 2023-05-01
 ---
 
-When it comes to building, testing, and deploying applications, software development engineers and devops engineers master the art of automation. Today, most backend or frontend web applications are built automatically and, sometimes, are also deployed to production as changes occur.
+When it comes to building, testing, and deploying applications, software development engineers and devops engineers must master the art of automation. Today, most backend or frontend web applications are built automatically and, sometimes, are also deployed to production as changes occur.
 
-It all starts from the developer. When you commit and push changes in a code repository, an automated workflow starts. A typical workflow fetches the code, build it alongside the rest of the code managed by other developers, runs a series of tests, such as security tests, unit tests, integration tests, UI tests (for frontend web and mobile applications). It then deploys the artifacts to staging and test environments, and –for the most mature organizations– the workflow also automatically deploys the changes on the production environment.
+The workflows that facilitate this process - fetching code, building it alongside code from other developers, running various tests, and even deploying the changes - are called continuous integration and continuous deployment, or CI/CD for short. CI/CD helps to reduce the time to deliver new code to your customers. It also helps to detect issues faster and to accelerate feedback cycles. The IT industry considers CI/CD as a best practice.
 
-Such workflows are called continuous integration and continuous deployment, CI/CD in short. CI/CD helps to reduce the time to deploy new code in front of your customers. It also helps to detect issues faster and to accelerate the feedback cycles. The IT industry considers CI/CD as a best practice. CI/CD is part of the DevOps practices.
-
-We wrote several articles on this blog to help you getting started with DevOps, such as this great [getting started article](/concepts/devops-essentials?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app). You can check [the full list of articles as well](/tags/devops?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app). 
-
-Creating and maintaining CI/CD workflows (also called pipelines) for Linux and Windows is well documented. However, building such pipelines to build applications for Apple OSes (iOS, iPadOS, tvOS, watchOS, macOS) is less known and it comes with its own set of challenges and specificities. One of them is that you have to use a macOS machine and you have to sign your applications before to distribute them on the AppStore.
-
-By reading this article, you will learn how to build a CI/CD pipeline for Apple OSes. This article describes the high-level process and will link to step-by-step tutorials for specific tasks that we will add over time.
+While CI/CD workflows for Linux and Windows have been thoroughly explained, though, building such pipelines to develop applications for Apple operating systems is less commonly understood. iOS, iPadOS, tvOS, watchOS, and macOS require their own unique approach to CI/CD, and building that pipeline is what we'll be learning how to do in this post.
 
 ## Benefits of Automation
 
