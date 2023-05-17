@@ -6,4 +6,5 @@ postsFeed: true
 pinnedPosts:
   - /livestreams/build-on-answered
   - /livestreams/build-on-weekly
+  - /livestreams/the-big-dev-theory
 ---
