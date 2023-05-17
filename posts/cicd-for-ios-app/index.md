@@ -2,15 +2,15 @@
 title: "Build Your iOS Applications Faster with a CI/CD Pipeline"
 description: "Learn how to automate building, signing, and testing your iOS, iPadOS, tvOS, watchOS, and macOS applications."
 tags:
-  - iOS
-  - macOS
+  - ios
+  - macos
   - devops
   - gitlab
-  - cicd
+  - ci-cd
   - pipeline
 authorGithubAlias: sebsto
 authorName: Sébastien Stormacq
-date: 2023-05-01
+date: 2023-05-17
 ---
 
 When it comes to building, testing, and deploying applications, software development engineers and devops engineers must master the art of automation. Today, most backend or frontend web applications are built automatically and, sometimes, are also deployed to production as changes occur.
