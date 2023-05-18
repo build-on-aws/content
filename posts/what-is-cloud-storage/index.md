@@ -1,4 +1,17 @@
-
+---
+title: "What is Cloud Storage?"
+description: "Learn the basics of object storage, block storage, and file storage - and why they matter to you."
+tags:
+  - basics
+  - gpt-3
+  - python
+  - well-arch-framework
+  - streamlit
+  - chatbots
+authorGithubAlias: aws-banjo
+authorName: Banjo Obayomi
+date: 2023-04-10
+---
 
 In the modern world, we all need storage, whether it’s the garage hiding your dusty exercise equipment, or your kitchen cupboards helping you find that one spice you really need, or that space under your stairs for stashing recently-orphaned child wizards. Well cloud storage has just as many options as the real world — and you use them a lot more often than you might realize.
 
