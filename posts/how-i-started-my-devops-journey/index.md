@@ -9,6 +9,7 @@ tags:
   - basics
 spaces:
   - devops
+movedFrom: /posts/good-places-to-start-your-devops-journey
 authorGithubAlias: andrasome
 authorName: Andra Somesan
 date: 2023-04-11
