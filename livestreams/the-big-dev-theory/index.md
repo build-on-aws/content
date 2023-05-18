@@ -62,9 +62,9 @@ Join us for our upcoming episodes!
 Past episodes
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
-|Season 2 | **Episode 3** | 2023/05/02 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1810223487) | Snowflake | TBD |
-|Season 2 | **Episode 2** | 2023/04/18 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1797793882) | Snowflake | TBD |
-|Season 2 | **Episode 1** | 2023/04/11 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1791544011) | Snowflake | TBD |
+|Season 2 | **Episode 3** | 2023/05/02 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1810223487) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-05-02/)|
+|Season 2 | **Episode 2** | 2023/04/18 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1797793882) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-04-18/)|
+|Season 2 | **Episode 1** | 2023/04/11 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1791544011) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-04-11/)|
 |-|--|--|--|--|-|
 |Season 1 | **Episode 9** | 2023/03/21 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777973888) | Datadog | [Show notes](/livestreams/the-big-dev-theory/2023-03-21/)|
 |Season 1 | **Episode 8** | 2023/03/14 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1777964452) | Datadog | [Show notes](/livestreams/the-big-dev-theory/2023-03-14/)|
