@@ -3,14 +3,14 @@ title: "What is Cloud Storage?"
 description: "Learn the basics of object storage, block storage, and file storage - and why they matter to you."
 tags:
   - basics
-  - gpt-3
-  - python
-  - well-arch-framework
-  - streamlit
-  - chatbots
-authorGithubAlias: aws-banjo
-authorName: Banjo Obayomi
-date: 2023-04-10
+  - cloud
+  - storage
+  - block-storage
+  - object-storage
+  - file-storage
+authorGithubAlias: damonk10
+authorName: David Priest
+date: 2023-05-25
 ---
 
 In the modern world, we all need storage, whether it’s the garage hiding your dusty exercise equipment, or your kitchen cupboards helping you find that one spice you really need, or that space under your stairs for stashing recently-orphaned child wizards. Well cloud storage has just as many options as the real world — and you use them a lot more often than you might realize.
@@ -19,7 +19,7 @@ In the same way you have lots of physical stuff, you have loads of digital stuff
 
 The three main types — or classes — of cloud storage are object, block, and file. Let’s break them down.
 
-Object Storage
+## Object Storage
 
 The class of cloud storage we encounter most often is object: it’s what stores most of the assets we see on websites every day. Essentially, object storage keeps intact unstructured objects (like documents, images, videos, and other types of data) and throws them into things called buckets. Then it can retrieve those objects wholesale and deliver them on demand.
 
@@ -31,7 +31,7 @@ Object storage also keeps track of metadata. Put simply, metadata is data about 
 
 In short, object storage keeps each file intact, and keeps track of its unique metadata, which is valuable when storing lots of different types of files.
 
-Block Storage
+## Block Storage
 
 Block storage generally gets a lot more use in business settings. It tends to be more highly performant than object storage, because it’s often supporting huge databases getting constant use — and that require extremely low latency in order to carry out their complex tasks effectively.
 
@@ -47,7 +47,7 @@ Why does all of this matter? Well, if multiple people fiddle with multiple, inte
 
 So if you have a lot of data that needs to be accessed very, very quickly in sequence and by a single operator, then block storage works great. Or if you have data that has a single writer but many readers, block storage will work well, too. That means databases will usually be best stored in block storage.
 
-File Storage
+## File Storage
 
 On the other hand, if you have multiple operators or simultaneous operations being run, then you’ll want File storage.
 
@@ -57,7 +57,7 @@ What’s more, you can also delimit user access to certain files and folders, gi
 
 In short, file storage is likely the best class of storage for businesses that depend on internal collaboration and shared data access.
 
-Takeaways
+## Takeaways
 
 Okay, we know the three kinds of storage — object, block, and file. But what’s the takeaway here for most people? Well, a few observations:
 
@@ -66,6 +66,8 @@ First, regular people use storage in really different ways from big companies. O
 The other high-level takeaway:
 
 Storage and computing used to always be linked. You bought a laptop or desktop computer, and how much computing power it had generally corresponded with how much storage it would have. Now we’re now in a situation where compute and storage in a cloud environment can become decoupled. Not only do cloud storage and compute dwarf traditional local resources — you can access vast quantities of both using machines with highly variable individual capabilities.
+
+## Conclusion
 
 Cloud storage is the unsung hero of the modern era: humanity is creating some 100 billion terabytes of data each year at this point, and that number is rapidly rising. But numbers that big are hard to visualize. So think about it like this: if every byte of data we created last year was a millimeter, our data would reach the sun... and back... over 300 million times. Okay, that still doesn’t help. Basically, the amount of data here is unimaginably big.
 
