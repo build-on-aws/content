@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1778034229
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1778034229), we look the various stages of the software development lifecycle (SDLC) and the security risks that exist in each phase, from the development and integration stages, to the delivery and deployment stages. Our guest special guest, Alex Ilgayev, Head of Security Research at [Cycode](https://cycode.com/) explores the implications of security risks in the CI/CD process, including the potential for malicious actors to gain access to sensitive data and code, or to launch attacks on applications and systems
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.

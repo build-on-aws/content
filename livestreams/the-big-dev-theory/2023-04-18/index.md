@@ -1,6 +1,6 @@
 ---
-title: "Implementing modern CI/CD pipeline using Github and AWS | The Big Dev Theory | S1 | Ep.1 Show Notes"
-description: "Join us for The Big Dev Theory: Implementing Modern CI/CD Pipeline Using Github and AWS with Cycode"
+title: "Image recognition using Python, PyTorch, OpenAI and Streamlit in Snowflake | The Big Dev Theory | S2 | Ep.2 Show Notes"
+description: "Image recognition using Python, PyTorch, OpenAI and Streamlit in Snowflake "
 tags:
     - build-on-live
     - the-big-dev-theory
@@ -8,14 +8,14 @@ tags:
     - twitch
 authorGithubAlias: bigevilbeard
 authorName: Stuart Clark
-date: 2023-01-10
+date: 2023-04-18
 spaces:
   - livestreams
 ---
 
-https://www.twitch.tv/videos/1778017615
+https://www.twitch.tv/videos/1797793882
 
-In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1778017615), where we'll explore the implementation of a modern Software Development Life Cycle and Continuous Integration/Continuous Delivery pipeline using GitHub and AWS. Our special guest, Alex Ilgayev, Head of Security Research at [Cycode](https://cycode.com/), will guide us through the necessary steps to set up the pipeline, including creating an AWS account, setting up a repository, and configuring a CI/CD pipeline. Don't miss this opportunity to learn from an expert in the field!
+In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1797793882), Dash Desai, Lead Developer Advocate at [Snowflake](https://www.snowflake.com/) will demo how to use technologies like PyTorch and OpenAI to implement image recognition applications using Python User-Defined Functions and Streamlit in Snowflake.
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.
 

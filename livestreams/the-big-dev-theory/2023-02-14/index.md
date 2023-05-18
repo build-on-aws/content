@@ -1,6 +1,6 @@
 ---
-title: "Implementing modern CI/CD pipeline using Github and AWS | The Big Dev Theory | S1 | Ep.1 Show Notes"
-description: "Join us for The Big Dev Theory: Implementing Modern CI/CD Pipeline Using Github and AWS with Cycode"
+title: "Let’s get Hands On with Next.js 13! | The Big Dev Theory | S1 | Ep.5 Show Notes"
+description: "Join us for The Big Dev Theory: Let’s get Hands On with Next.js 13 with Vercel"
 tags:
     - build-on-live
     - the-big-dev-theory
@@ -8,14 +8,15 @@ tags:
     - twitch
 authorGithubAlias: bigevilbeard
 authorName: Stuart Clark
-date: 2023-01-10
+date: 2023-02-14
 spaces:
   - livestreams
 ---
 
-https://www.twitch.tv/videos/1778017615
+https://www.twitch.tv/videos/1777992194
 
-In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1778017615), where we'll explore the implementation of a modern Software Development Life Cycle and Continuous Integration/Continuous Delivery pipeline using GitHub and AWS. Our special guest, Alex Ilgayev, Head of Security Research at [Cycode](https://cycode.com/), will guide us through the necessary steps to set up the pipeline, including creating an AWS account, setting up a repository, and configuring a CI/CD pipeline. Don't miss this opportunity to learn from an expert in the field!
+In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1777992194), we will discuss the newest features of Next.js 13, an open-source React framework with Lee Robinson VP of Developer Experience from [Vercel](https://vercel.com/). We will explore the new Image component, font optimization, script optimization, App Directory, and the future of directory structures. Additionally, we will discuss the new nested routing capabilities and data fetching techniques. This is invaluable for anyone looking to learn more about how to use Next.js to its fullest potential.
+
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.
 

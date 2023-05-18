@@ -1,6 +1,6 @@
 ---
-title: "Implementing modern CI/CD pipeline using Github and AWS | The Big Dev Theory | S1 | Ep.1 Show Notes"
-description: "Join us for The Big Dev Theory: Implementing Modern CI/CD Pipeline Using Github and AWS with Cycode"
+title: "Event-Driven Automation: Proactive Monitoring and Datadog Workflows | The Big Dev Theory | S1 | Ep.9 Show Notes"
+description: "Event-Driven Automation: Proactive Monitoring and Datadog Workflows"
 tags:
     - build-on-live
     - the-big-dev-theory
@@ -8,14 +8,14 @@ tags:
     - twitch
 authorGithubAlias: bigevilbeard
 authorName: Stuart Clark
-date: 2023-01-10
+date: 2023-03-21
 spaces:
   - livestreams
 ---
 
-https://www.twitch.tv/videos/1778017615
+https://www.twitch.tv/videos/1777973888
 
-In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1778017615), where we'll explore the implementation of a modern Software Development Life Cycle and Continuous Integration/Continuous Delivery pipeline using GitHub and AWS. Our special guest, Alex Ilgayev, Head of Security Research at [Cycode](https://cycode.com/), will guide us through the necessary steps to set up the pipeline, including creating an AWS account, setting up a repository, and configuring a CI/CD pipeline. Don't miss this opportunity to learn from an expert in the field!
+In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1777973888), we discussed event-driven automation powered by observability. We began with a recap of episodes one and two with guest Rick Sherman Manager, SRE & DevOps Advocacy at [Datadog](https://www.datadoghq.com/) and then discussed how to build proactive monitoring. We then showed how to set up Datadog monitors and explained what “event driven automation” is before demonstrating Datadog Workflows.
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.
 

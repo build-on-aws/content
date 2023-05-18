@@ -1,6 +1,6 @@
 ---
-title: "Implementing modern CI/CD pipeline using Github and AWS | The Big Dev Theory | S1 | Ep.1 Show Notes"
-description: "Join us for The Big Dev Theory: Implementing Modern CI/CD Pipeline Using Github and AWS with Cycode"
+title: "An Introduction to Serverless Applications & Monitoring with Datadog| The Big Dev Theory | S1 | Ep.8 Show Notes"
+description: "An Introduction to Serverless Applications & Monitoring with Datadog"
 tags:
     - build-on-live
     - the-big-dev-theory
@@ -8,14 +8,15 @@ tags:
     - twitch
 authorGithubAlias: bigevilbeard
 authorName: Stuart Clark
-date: 2023-01-10
+date: 2023-03-14
 spaces:
   - livestreams
 ---
 
-https://www.twitch.tv/videos/1778017615
+https://www.twitch.tv/videos/1777964452
 
-In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1778017615), where we'll explore the implementation of a modern Software Development Life Cycle and Continuous Integration/Continuous Delivery pipeline using GitHub and AWS. Our special guest, Alex Ilgayev, Head of Security Research at [Cycode](https://cycode.com/), will guide us through the necessary steps to set up the pipeline, including creating an AWS account, setting up a repository, and configuring a CI/CD pipeline. Don't miss this opportunity to learn from an expert in the field!
+In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1777964452), get an introduction to serverless applications and discuss some of the challenges related to monitoring them with our guest Rick Sherman Manager, SRE & DevOps Advocacy at [Datadog](https://www.datadoghq.com/). We will start with a quick recap of the previous episode, then move on to an introduction to serverless, highlighting that it is more than just lambda. We will then dive into the challenges associated with monitoring serverless applications, followed by a demonstration of a serverless application deployment. Finally, we will introduce Datadog Serverless for AWS and instrument the demo application.
+
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.
 
