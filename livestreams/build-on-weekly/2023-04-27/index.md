@@ -11,6 +11,8 @@ additionalAuthors:
   - authorGithubAlias: darko-mesaros
     authorName: Darko Mesaros
 date: 2023-04-27
+spaces:
+  - livestreams
 ---
 
 ![Jacquie & Darko Streaming](images/bows02e15.png)
@@ -39,7 +41,7 @@ In step 3 we deployed it to Lambda and put it all together. After it was up and 
 
 Check out the Stream VOD to watch us go through the workshop step by step as well as other results we didn't post here! 👇
 
-[Build On Weekly S02E15 Video](https://www.twitch.tv/videos/1805386602)
+(https://www.twitch.tv/videos/1805386602
 
 ## Links from today's episode
 

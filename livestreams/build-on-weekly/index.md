@@ -33,10 +33,18 @@ Everyone is friends, so join in the conversation both on or off the air with you
 
 Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
 
-| Episode | Name | Date | Link to Show Notes |
+### SEASON 02
+
+| Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
+| S02E15 | Generative AI Applications | 2023-04-27  | [Show Notes](/livestreams/build-on-weekly/2023-04-27) |
 | S02E14 | Stable Diffusion with Viktoria | 2023-04-20  | [Show Notes](/livestreams/build-on-weekly/2023-04-20) |
 | S02E13 | Hot Dog or Not Hot Dog | 2023-04-13  | [Show Notes](/livestreams/build-on-weekly/2023-04-13) |
+
+### SEASON 01
+
+| Episode | Name | Date | Link to Show Notes
+|--|--|--|--|
 | S01E06 | Local Development | 2022-08-18  | [Show Notes](/livestreams/build-on-weekly/2022-08-18) |
 | S01E05 | Containers, Containers Everywhere | 2022-08-11  | [Show Notes](/livestreams/build-on-weekly/2022-08-11) |
 | S01E04 | Static S3 Website | 2022-08-04  | [Show Notes](/livestreams/build-on-weekly/2022-08-04) |

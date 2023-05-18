@@ -10,6 +10,8 @@ tags:
   - tandy
   - terminal
   - linux
+images:
+  thumbnail: ./images/thumbnail.png
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 date: 2023-02-21
