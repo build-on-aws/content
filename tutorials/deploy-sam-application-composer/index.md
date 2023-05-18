@@ -1,5 +1,5 @@
 ---
-title: Drag-and-Drop Development: Using AWS Application Composer and AWS Serverless Application Model (SAM) on serverless applications
+title: Drag-and-Drop Development using AWS Application Composer and AWS Serverless Application Model (SAM) on serverless applications
 description: A walkthrough of how to use AWS Application Composer and AWS Serverless Application Model (SAM) to visually design and build serverless applications
 tags:
   - aws
