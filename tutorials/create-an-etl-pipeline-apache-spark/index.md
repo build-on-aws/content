@@ -32,6 +32,9 @@ We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) 
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-03-30                            |
 
+|ToC|
+|--|
+
 ## What you will accomplish
 
 In this guide, you will:
