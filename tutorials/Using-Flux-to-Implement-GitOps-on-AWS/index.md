@@ -727,3 +727,5 @@ We will explore each of these issues in subsequent blogs.
 - [[Tech Blog\] Bootstrapping clusters with EKS Blueprints ](https://aws.amazon.com/cn/blogs/containers/bootstrapping-clusters-with-eks-blueprints/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-flux-to-implement-gitops-on-aws)
 - [Amazon EKS Blueprints for CDK ](https://github.com/aws-quickstart/cdk-eks-blueprints)
 - [Microservices Demo](https://github.com/microservices-demo/microservices-demo)
+
+  
