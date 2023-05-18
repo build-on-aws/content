@@ -121,7 +121,7 @@ I strongly advise you to test your build scripts on a remote machine without usi
 
 Typically, my builds are made of six distinct phases that must be accomplished in sequence (one after the other). I code each phase with one or multiple shell scripts. The animation hereafter illustrates the whole pipeline. It is based on GitLab, but the exact same architecture applies to circleci and GitHub.
 
-![CI/CD pipeline on an EC2 Mac machine](images/ec2-mac-devops.webp)
+![CI/CD pipeline on an EC2 Mac machine](images/ec2-mac-devops.png)
 
 **Phase 1**: prepare the machine. I use this phase to prepare the machine before the build. This phase implies downloading the signing key and certificate and storing them into a temporary keychain created just for this build. I also verify if the Apple root signing certificate is correctly installed in the macOS System keychain, gather other secrets such as the Apple ID credentials and [the mobile provisioning profile](https://developer.apple.com/help/account/manage-profiles/create-a-development-provisioning-profile/).
 
