@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1777977174
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1777977174), we will provide an overview of observability, introduce Datadog as an observability platform, and demonstrate the setup of Datadog and the integration with AWS services with our guest Rick Sherman
 Manager, SRE & DevOps Advocacy at [Datadog](https://www.datadoghq.com/). Additionally, a demo application will be deployed and used to provide a hands-on demonstration of how Datadog can be used to observe applications. Finally, concepts and tips related to observing customer-owned services will be discussed.
 

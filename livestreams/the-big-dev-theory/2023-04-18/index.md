@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1797793882
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1797793882), Dash Desai, Lead Developer Advocate at [Snowflake](https://www.snowflake.com/) will demo how to use technologies like PyTorch and OpenAI to implement image recognition applications using Python User-Defined Functions and Streamlit in Snowflake.
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.

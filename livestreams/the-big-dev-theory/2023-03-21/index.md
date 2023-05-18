@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1777973888
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1777973888), we discussed event-driven automation powered by observability. We began with a recap of episodes one and two with guest Rick Sherman Manager, SRE & DevOps Advocacy at [Datadog](https://www.datadoghq.com/) and then discussed how to build proactive monitoring. We then showed how to set up Datadog monitors and explained what “event driven automation” is before demonstrating Datadog Workflows.
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.

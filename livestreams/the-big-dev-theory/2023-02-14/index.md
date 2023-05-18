@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1777992194
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1777992194), we will discuss the newest features of Next.js 13, an open-source React framework with Lee Robinson VP of Developer Experience from [Vercel](https://vercel.com/). We will explore the new Image component, font optimization, script optimization, App Directory, and the future of directory structures. Additionally, we will discuss the new nested routing capabilities and data fetching techniques. This is invaluable for anyone looking to learn more about how to use Next.js to its fullest potential.
 
 

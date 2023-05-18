@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1791544011
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1791544011), Dash Desai,and Julian Forero Developer Advocates at [Snowflake](https://www.snowflake.com/) will demo how you can get started running Python directly inside Snowflake keeping processing close to the data all while being able to use SageMaker for development. By the end of the demo, you’ll have a better understanding of Snowpark and how it can help you quickly develop and deploy data pipelines and machine learning models.
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.

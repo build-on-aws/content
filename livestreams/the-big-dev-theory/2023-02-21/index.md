@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1777986027
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1777986027), we explore how to build a modern web app with AWS integration, logging & monitoring, and environment variables, with Lee Robinson VP of Developer Experience from [Vercel](https://vercel.com/). We provide an overview of the workflow from setup to deployment, discuss the advantages of using CDK to integrate with AWS services, and explain how to use logging & monitoring. Our workflow provides a comprehensive & reliable way to develop, deploy & maintain a web app with AWS integration & any front end framework.
 
 

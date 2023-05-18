@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1810223487
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1810223487), we look at Snowpark for Python, which is Snowflakes developer framework that is pre-installed with thousands of packages from the Anaconda repository, including Facebook Prophet. During this session, Dash Desai,and Felipe Hoffa Developer Advocates at [Snowflake](https://www.snowflake.com/), will demo forecast currency values using Prophet natively inside Snowpark for Python – without any external functions or dependencies.
 
 Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.

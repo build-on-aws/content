@@ -13,6 +13,8 @@ spaces:
   - livestreams
 ---
 
+https://www.twitch.tv/videos/1777964452
+
 In this episode of The Big Dev Theory on [Twitch](https://www.twitch.tv/videos/1777964452), get an introduction to serverless applications and discuss some of the challenges related to monitoring them with our guest Rick Sherman Manager, SRE & DevOps Advocacy at [Datadog](https://www.datadoghq.com/). We will start with a quick recap of the previous episode, then move on to an introduction to serverless, highlighting that it is more than just lambda. We will then dive into the challenges associated with monitoring serverless applications, followed by a demonstration of a serverless application deployment. Finally, we will introduce Datadog Serverless for AWS and instrument the demo application.
 
 
