@@ -9,7 +9,7 @@ tags:
   - tutorials
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
-date: 2023-05-16
+date: 2023-05-19
 ---
 
 Artificial Intelligence used to be the specialized domain of data scientists and computer programmers. No-code/Low-code (NCLC) removes barriers, allowing anyone to use artificial intelligence without having to write a line of computer code. NCLC platforms are replacing the need for programming with a visual drag-and-drop interface.
