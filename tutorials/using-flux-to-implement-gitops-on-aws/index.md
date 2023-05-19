@@ -9,7 +9,7 @@ tags:
   - tutorials
 showInHomeFeed: true
 authorGithubAlias: betty714
-authorName: Betty Zheng, 
+authorName: Betty Zheng
 additionalAuthors: 
   - authorGithubAlias: tyyzqmf
     authorName: Mingfei Que
