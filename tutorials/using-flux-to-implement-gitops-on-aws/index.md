@@ -6,7 +6,8 @@ tags:
   - gitops
   - fluxcd
   - aws-eks
-  - tutorial
+  - tutorials
+showInHomeFeed: true
 authorGithubAlias: betty714
 authorName: Betty Zheng, 
 additionalAuthors: 
