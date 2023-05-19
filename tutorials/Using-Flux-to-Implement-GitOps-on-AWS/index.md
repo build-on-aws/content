@@ -9,7 +9,7 @@ tags:
   - tutorial
 authorGithubAlias: betty714, tyyzqmf
 authorName: Betty Zheng, Mingfei Que
-date: 2023-04-19
+date: 2023-04-18
 ---
 
 While many enterprise companies have adopted Kubernetes in their production, they are often confused about how to achieve continuous deployment, high security, permission separation, and auditing - all while ensuring business agility with multiple Kubernetes clusters running at different stages simultaneously. Using GitOps can enable such continuous deployment based on Kubernetes clusters, while meeting enterprise-level requirements such as security and permission separation.
@@ -728,3 +728,4 @@ We will explore each of these issues in subsequent blogs.
 - [Amazon EKS Blueprints for CDK ](https://github.com/aws-quickstart/cdk-eks-blueprints)
 - [Microservices Demo](https://github.com/microservices-demo/microservices-demo)
 
+  
