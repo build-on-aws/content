@@ -28,12 +28,12 @@ We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) 
 | ✅ AWS Level        | 100 - Beginner                               |
 | ⏱ Time to complete  | 30 mins - 45 mins                      |
 | 💰 Cost to complete | USD 0.30                               |
-| 🧩 Prerequisites       |
-- An[AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (if you don't yet have one, create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br>
-- An IAM user that has the access to create AWS resources. <br>
-- Basic understanding of Python |
+| 🧩 Prerequisites       | - An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (if you don't yet have one, create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br> - An IAM user that has the access to create AWS resources. <br> - Basic understanding of Python |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-03-30                            |
+
+|ToC|
+|--|
 
 ## What you will accomplish
 
