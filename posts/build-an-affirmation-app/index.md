@@ -56,9 +56,9 @@ import AffirmationComponent from '../components/AffirmationComponent.jsx';
 	<main>
 
 		<h1>Welcome to <span class="text-gradient">Your Affirmation App</span></h1>
-			<div class="text">
+			<section class="text">
 				<AffirmationComponent client:load affirmations={'my affirmation'} />
-			</div>
+			</section>
 	</main>
 </Layout>
 
@@ -118,9 +118,7 @@ import { useState } from 'preact/hooks';
 export default function Affirmation({affirmations}) {
 
   return (
-    <div> 
       <h3>{affirmations}</h3>
-    </div>
   );
 }
 ```
@@ -133,6 +131,8 @@ In this example, the text 'my affirmation' is being passed from index.astro to t
 Now it's time to build up a database with some sample affirmations. In the AWS Console, search for [DynamoDB](https://console.aws.amazon.com/dynamodb/). This is a serverless database you will use to store a series of affirmations. Choose Create table and name it `Affirmations`. For its partition key, enter `Id`. You can add a few helpful phrases by using the `Create Item`. Each item should have an Id and a Text, like this:
 
 ![dynamodb sample](images/dynamodb.png).
+
+> Here's a hepful [list of nice affirmations](https://github.com/annthurium/affirmations/blob/master/affirmations.js).
 
 Next, you need to create a serverless function using Lambda to query this database. Navigate to the [Lambda console](https://console.aws.amazon.com/lambda) and choose `Create function` > `Author from Scratch`. You can call it `get-affirmation-function` and use Node 18 for the runtime. In `Permissions`, and change the default execution role. You'll need to create a new role, so under `Permissions` choose `Create a new role from AWS policy templates`. You can call the role `http-affirmations-role`. Select the `Simple microservice` permissions to let your new function interact with DynamoDB. Now you can create your function.
 
