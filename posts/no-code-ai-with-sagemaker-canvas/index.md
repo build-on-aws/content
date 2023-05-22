@@ -7,6 +7,12 @@ tags:
   - no-code
   - forecast
   - tutorials
+images:
+  thumbnail: images/overview-01.png
+  banner: images/overview-01.png
+  hero: images/overview-01.png
+  background: images/overview-01.png
+
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
 date: 2023-05-19
