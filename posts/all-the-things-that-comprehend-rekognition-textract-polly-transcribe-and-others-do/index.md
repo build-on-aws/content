@@ -49,7 +49,7 @@ AWS has AIML services that take care of the task of collecting data, labeling it
 
 - Create subtitles and translate them into the language you want ⏯️ 🍿.
 
-![Create subtitles and translate them into the language you want"](images/create-subtitles-and-translate.png)
+![Create subtitles and translate them into the language you want"](images/create-subtitles-and-translate-s.png)
 
 1. Upload the .mp4 video to an [Amazon s3 bucket](https://docs.aws.amazon.com/es_es/AmazonS3/latest/userguide/UsingBucket.html).
 2. A Lambda Function makes the call to Transcribe API.
