@@ -9,7 +9,7 @@ tags:
   - sagemaker
 authorGithubAlias: sarunaaa003
 authorName: Arun Kumar. S
-date: 2023-04-21
+date: 2023-05-22
 ---
 
 Imagine a music production company wants to predict the success of a new album before it's released. The company hires a data scientist to build a predictive model to forecast the revenue of the album based on its characteristics, and it offers the data scientist access to data about past albums - including genre, artists, producers, budget, release date, and revenue.
