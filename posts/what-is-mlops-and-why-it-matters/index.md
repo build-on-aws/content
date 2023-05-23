@@ -118,7 +118,7 @@ Starting small and iterating helps in breaking down the complex process into sma
 
 You can speed up the journey by using a cloud native service that provides seamless integration to accommodate the MLOps features such as [Amazon SageMaker.](https://aws.amazon.com/sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters)
 
-![A Simple SageMaker pipeline](images/figure2.jpg "Figure 2. SageMaker Pipeline")
+![A Simple SageMaker pipeline](images/figure2.png "Figure 2. SageMaker Pipeline")
 
 On the data preparation part of the workflow, SageMaker offers capabilities that can be plugged into any machine learning workflow. SageMaker data wrangler can be used to build your data transformation pipeline using a graphical interface, or else you can use SageMaker processing to build your data processing jobs. In either case, the tasks performed by these jobs can be easily plugged into your machine learning pipeline. The SageMaker feature store can be used to store curated features that can then be used as part of the pipeline for your training activities. Both the inputs and outputs generated at this stage needs to be versioned, which include your data processing code and your prepared data sets for training and validating your model.
 
