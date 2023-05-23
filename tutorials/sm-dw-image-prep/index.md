@@ -16,6 +16,16 @@ To do this, you’ll need to prepare lots of images to train and build your ML m
 
 In this tutorial, you will use Amazon SageMaker Data Wrangler to prepare image data for use in an image classification model. Your data preparation tasks will be an essential step toward building a model that can recognize, and subsequently respond to, traffic accidents on the road.
 
+![0-architecture.png](/images/0-architecture.png)
+
+The preceeding diagram shows the tutorial's workflow. Once you set up your Amazon SageMaker Studio domain, you will download images of automobile crashes captured from CCTV and upload them into an Amazon S3 bucket. Then you will import these images into Amazon SageMaker Studio to process them.
+
+Why do we need to preprocess images? For the purpose of building an accurate machine learning model, we want to enhance the quality of the images, extract relevant features (like outlines of an automobile), and standard the data. These are all essential steps to preparing our image data, setting them into a suitable format, and enabling the machine learning model to learn from the data.
+
+For the image preparation steps in Data Wrangler, you'll first handle corrupt or defection images in the dataset. This removes unsuitable images in training our machine learning model. Then, you'll enhance the contrast to extract relevant features and resize images to standardize them. Lastly, you'll apply a custom transform to improve the model's ability to detect edges within the images.
+
+Once the transformation steps are complete, you'll export the the prepared images to another Amazon S3 bucket. You'll execute the job to process the images. Lastly, you'll clean up the environment so you don't incur charges after you're done.
+
 ## Prerequisites
 
 Before starting this guide, you will need an **AWS account**. If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) getting started guide for a quick overview. 
