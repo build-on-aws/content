@@ -185,7 +185,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
 
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
-https://www.youtube.com/embed/a9__D53WsUs"
+https://www.youtube.com/embed/a9__D53WsUs
 
 https://www.youtube.com/playlist?list=PLhr1KZpdzukesRd2CMrTsF5-7NVVdYL4H
 
