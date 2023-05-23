@@ -8,7 +8,7 @@ tags:
   - dgl
   - graph
 authorGithubAlias: cyrusmvahid
-authorName: Cyrus Vahid, Shamika and Sai Kiran Jukanti
+authorName: Cyrus Vahid, Shamika Ariyawansa and Sai Kiran Jukanti
 date: 2023-05-08
 authorGithubAlias: kirannsa
 ---
