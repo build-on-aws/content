@@ -107,7 +107,7 @@ To deploy the CAs with the Microsoft Public Key Infrastructure Quick Start
         1. **I acknowledge that AWS CloudFormation might create IAM resources with custom names.**
         2. **I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND.**
     17. Choose **Create stack**.  
-![k](./images/02-additional-capability-before-deploying-cloudformation-stack.png)
+![A prompt showing that you need to acknowledge additional capability before deploying the CloudFormation stack](./images/02-additional-capability-before-deploying-cloudformation-stack.png)
 It should take 20 to 30 minutes for the resources to deploy.
 
 ### Step 3: Allow the domain controllers to communicate with the Enterprise CA
