@@ -1,13 +1,13 @@
 ---
-title: Drag-and-Drop Development using AWS Application Composer and AWS Serverless Application Model (SAM) on serverless applications
-description: A walkthrough of how to use AWS Application Composer and AWS Serverless Application Model (SAM) to visually design and build serverless applications
+title: "Drag-and-Drop Development on Serverless Applications: Using AWS Application Composer and AWS Serverless Application Model"
+description: "AWS Application Composer and AWS Serverless Application Model (SAM) can help you visually design and build serverless applications. Here's how."
 tags:
   - aws
   - devops
-  - application composer
+  - application-composer
   - serverless
   - tutorials
-  - sam
+  - serverless-application-model
 spaces:
   - devops
 authorGithubAlias: gaonkarr
@@ -21,14 +21,14 @@ The [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/s
 
 But if we're really honest, nobody wakes up excited to maintain YAML code for their serverless application, even with SAM -- and visualizing applications' architecture is not easy.
 
-[AWS Application Composer](https://aws.amazon.com/application-composer/?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) offers one solution. It's a visual development tool that offers a drag-and-drop interface that enables developers quick and easy creation of new applications or modification of existing ones.
+[AWS Application Composer](https://aws.amazon.com/application-composer/?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) offers one solution. It's a visual development tool that offers a drag-and-drop interface that offers developers quick and easy creation of new applications or modification of existing ones.
 
 In this blog post, we will explore the benefits of using AWS SAM in combination with Application Composer for new and existing applications. We will also provide examples of how to use these tools to streamline our application development process and make it easier to manage our applications in the cloud. Let's dive in!
 
 We will learn:
 
-- how we can get started with a blank canvas and build our SAM application
-- how to load existing SAM application, visualize and optionally extend it
+- How to get started with a blank canvas and build a SAM application
+- How to load an existing SAM application, visualize and optionally extend it
 
 ## Table of Contents
 
@@ -51,11 +51,11 @@ We are going to create a simple application with 3 AWS Serverless services: [Ama
 
 ![Serverless pattern simple application with 3 AWS Serverless services, APIGateway, Lambda and DynamoDB](images/aws-serverless-pattern.png)
 
-This is a simple Serverless pattern that demonstrates how making an HTTP POST request to an Amazon API Gateway endpoint invokes an AWS Lambda function and inserts an item into an Amazon DynamoDB table.
+This is a simple serverless pattern that demonstrates how making an HTTP POST request to an Amazon API Gateway endpoint invokes an AWS Lambda function and inserts an item into an Amazon DynamoDB table.
 
-We will create a Nodejs application with 2 Lambda functions - one to insert data into the DynamoDB table and another to list data.
+We will create a Nodejs application with two Lambda functions - one to insert data into the DynamoDB table and another to list data.
 
-Let's start with creating a folder in our local computer. Name this folder `buildon-sam-app`. We will place all the contents from this blog into this folder.
+Let's start with creating a folder in our local computer. Name this folder `buildon-sam-app`. We will place all the contents from this blog post into this folder.
 
 In the AWS Management Console, go to the **Application Composer** service.
 
@@ -65,12 +65,13 @@ Click on the `Create project` button in the Application Composer Dashboard to cr
 
 ![Console Create Project Dialog box new blank project and connected mode](images/console-create-project-dialog.png)
 
-In the New blank project we have 2 modes:  Connected and Unconnected.
-Application Composer is only in our browser, it does not store any of our files in AWS account. So, selection of mode determines how and where our design files will be stored.
+In the New blank project we have 2 modes: Connected and Unconnected.
+
+Application Composer is only in our browser, it does not store any of our files in an AWS account. So the selection of mode determines how and where our design files will be stored.
 
 - In the **Connected mode**, we can provide application composer access to a local folder on our computer. It will then automatically sync and save our template file and project folders locally as we design.
 
-- In the **Unconnected mode** we have to manually import and export our template files. We have to select `Menu` > `save changes` as often as needed to save and download the latest configuration of our template file. When designing in unconnected mode, only the application template file is generated and can be manually exported.
+- In the **Unconnected mode**, we have to manually import and export our template files. We have to select `Menu` > `save changes` as often as needed to save and download the latest configuration of our template file. When designing in unconnected mode, only the application template file is generated and can be manually exported.
 
 For the sake of this blog, we will be using **Connected mode**.
 
@@ -80,7 +81,7 @@ Click on `Select folder` and provide an empty local folder.
 
 ![Browser prompts to allow access to select View and Edit files](images/console-permissions.png)
 
-Now we have a blank project. Here, I have opened a local IDE like Visual Studio Code in the same folder, to show you how the local files created automatically by Application Composer.
+Now we have a blank project. In the image below, I have opened a local IDE like Visual Studio Code in the same folder to show you how the local files are created automatically by Application Composer.
 
 ![Application Composer Console and Visual studio IDE side-by-side](images/console-app-comp-visual-studio.png)
 
@@ -90,21 +91,21 @@ The following files and folders are synced and saved to our local file system wh
 - **Project folders** – When we design a Lambda function, a general Lambda directory structure is generated.
 - **Backup template file** – A backup directory named `.aws-composer` will be created at the root of our project location and will contain a backup copy of our application template file and our project folders.
 
-The Application composer console, has two sections: `"Canvas"` and `"Template"`. You can switch between the two anytime during the designing.
+The Application composer console has two sections: `"Canvas"` and `"Template"`. You can switch between the two anytime while designing.
 
 ![Console Canvas and Template sections](images/console-option-canvas.png)
 
 In the Application Composer console, we can find most of the serverless resources available in the `Resources` tab. The `List` tab is to quickly identify resources already on the canvas/template. To make this pattern, **drag and drop** components from the `Resources` tab onto the `Canvas`.
 
-When we drag the resources on the canvas, Application composer automatically writes required the YAML code in the `Template`. Also, as this is connected mode, these changes are also done to our local template file. Any changes we make on either canvas or template, they are automatically reflected on other side.
+When we drag the resources on the canvas, Application Composer automatically writes the required YAML code in the `Template`. Also, as this is connected mode, these changes are done to our local template file. Any changes we make on either canvas or template are automatically reflected on other side.
 
-We can see in the GIF below, as we drag and drop resources (API Gateway, Lambda and, DynamoDB) on the Canvas, the template.yaml is automatically populated with its appropriate yaml definition.
+We can see in the GIF below, as we drag and drop resources (API Gateway, Lambda, and DynamoDB) on the canvas, the template.yaml is automatically populated with its appropriate yaml definition.
 
 ![Drag and drop resources gif](images/drag-drop.webp)
 
-We can customize the template further in the `"Template"` tab. OR we can select the resource on `"Canvas"` and click `"Details"` to modify resources.
+We can customize the template further in the `"Template"` tab. Or we can select the resource on `"Canvas"` and click `"Details"` to modify resources.
 
-For example, we dragged API Gateway resource, by clicking on `"Details"` we can see configurable `"Resource properties"` on the right. We can rename CloudFormation's logical ID of the resource, quickly add routes, authorizers, and CORS configuration.
+For example, we dragged API Gateway resource; by clicking on `"Details"` we can see configurable `"Resource properties"` on the right. We can rename CloudFormation's logical ID of the resource, quickly add routes, authorizers, and CORS configuration.
 
 ![Console APIGateway resources properties](images/console-apigw-resource-properties.png)
 
@@ -136,37 +137,35 @@ For our new SAM application, define following resources and their properties. Ma
 
 ### Groups
 
-We have 2 Lambda functions to `Create` and `List` customers. We can group these functions into a `Functions group` for better visibility. Click on one of the functions, and select `Group`.
+We have 2 Lambda functions to `Create` and `List` customers. We can group these functions into a `Functions group` for better visibility. Click on one of the functions and select `Group`.
 
 This will create a group. Drag and drop the other Lambda function to be part of this group. If we double-click this group we can modify its name. We will rename the group `CustomerFunctionsGroup`.
 
-![Lambda functions group properties group name](images/console-group-functions.webp)
+![Lambda functions, group properties, and group name](images/console-group-functions.webp)
 
 ### Best practices
 
-AWS Application Composer is designed to configure Infrastructure as Code definitions that follow the AWS best practices. For example, when we add a Lambda function to the canvas, Application Composer will enable `"Tracing"` by default and add Amazon CloudWatch LogGroup for the function. Lambda logs all requests handled by our function and also automatically stores logs generated by our code through Amazon CloudWatch Logs.
+AWS Application Composer is designed to configure Infrastructure-as-Code definitions that follow the AWS best practices. For example, when we add a Lambda function to the canvas, Application Composer will enable `"Tracing"` by default and add Amazon CloudWatch LogGroup for the function. Lambda logs all requests handled by our function and also automatically stores logs generated by our code through Amazon CloudWatch Logs.
 
 ### Connections
 
-Once we have all the 4 components, let's connect these. APIGateway -> Lambda -> DynamoDB.
+Once we have all four components, let's connect these: APIGateway -> Lambda -> DynamoDB.
 
-When we make these connections, Application Composer will automatically update the template to reflect this, notice the changes in the image below:  
+When we make these connections, Application Composer will automatically update the template to reflect this. Notice the changes in the image below:  
 
 ![Console resources connections updates code automatically in the template opened in Visual studio](images/console-connections-gif.webp)
 
-We have to connect the `GET /` route to `CustomerFunctionList` and the `POST /` to `CustomerFunctionCreate`. And connect both the Lambda functions to the DynamoDB table.
+We have to connect the `GET /` route to `CustomerFunctionList` and the `POST /` to `CustomerFunctionCreate`. Also connect both the Lambda functions to the DynamoDB table.
 
 We have 2 options to make these connections:
 
-- We can manually connect them using the `"Canvas"` as shown in above image. Notice that we can only make connections where service integrations are possible.
+- We can manually connect them using the `"Canvas"` as shown in the image above. (Notice that we can only make connections where service integrations are possible.)
 
- ![Console Canvas section is selected](images/console-option-canvas.png)
- </br>
-OR
+![Console Canvas section is selected](images/console-option-canvas.png)
 
-- simply copy paste following template in the `"Template"` section to see the design pattern come alive.
+Or we can simply copy and paste the following template in the `"Template"` section to see the design pattern come alive.
 
- ![Console Template section is selected](images/console-option-template.png)
+![Console Template section is selected](images/console-option-template.png)
 
 - template.yaml
 
@@ -288,7 +287,7 @@ Outputs:
     Value: !Sub https://${Api23}.execute-api.${AWS::Region}.amazonaws.com/Prod
 ```
 
-Before we proceed, add following `Output` section at the end of the `template.yaml` to get the API Endpoint once stack is created:
+Before we proceed, add the following `Output` section at the end of the `template.yaml` to get the API Endpoint once the stack is created:
 
 ```yaml
 Outputs:
@@ -309,7 +308,7 @@ In the local folder, Application Composer would have created following folder st
 
 We now have to add Nodejs code, so whenever the APIs are invoked they will add/list customer information from the DynamoDB table.
 
-Add following code in respective files:
+Add the following code in respective files:
 
 - CreateCustomer/index.js
 
@@ -440,17 +439,17 @@ exports.handler = async event => {
 
 ## Build and Deploy with AWS SAM
 
-Now that we have our design and application files created for us, let's build and deploy this using AWS Serverless Application Model (SAM).
+Now that we have our design and application files created, let's build and deploy this thing using AWS Serverless Application Model (SAM).
 
-Open a terminal in your local IDE in the same root folder where Application Composer created all the above files. Please make sure you have installed all the pre-requisites mentioned at the beginning.
+Open a terminal in your local IDE in the same root folder where Application Composer created all the above files. Make sure you installed all the pre-requisites mentioned at the beginning.
 
-As this is a Nodejs sample, let's make sure we have all the required modules installed for the application, run following command at the root of the above selected folder:  
+As this is a Nodejs sample, let's also make sure we have all the required modules installed for the application. Run the following command at the root of the above selected folder:  
 
 ```bash
 npm install aws-sdk
 ```
 
-We will be skipping the `sam init` command, as we already have a sample application created for us. We will build, deploy and test the application in this section.
+We will be skipping the `sam init` command, as we already have a sample application created for us. We will build, deploy, and test the application in this section.
 
 ### Step 1: Build the application
 
@@ -498,7 +497,7 @@ Commands you can use next
 sam deploy --guided
 ```
 
-This will ask multiple prompts to which answer them as the following output:
+This will give multiple prompts, which you can answer as follows:
 
 - Stack Name: `buildon-sam-app`
 - AWS Region: `<REGION>`
@@ -516,7 +515,8 @@ Allow SAM CLI IAM role creation: `y`
 
 This will deploy the CloudFormation stack with all the resources defined in the SAM template.yaml generated by Application Composer, including all the source code for Lambda functions.
 
-In the end, we should see prompt as following:
+In the end, we should see a prompt as follows:
+
 **Output:**
 
 ```bash
@@ -534,9 +534,9 @@ Value               https://11yakge1yd.execute-api.<REGION>.amazonaws.com/Prod
 Successfully created/updated stack - buildon-sam-app in <REGION>
 ```
 
-Note the HTTP REST API endpoint URL, we will be using this to call the API.
+Note the HTTP REST API endpoint URL; we will be using this to call the API.
 
-It will also create a local configuration file `samconfig.toml`, so that next time we run `sam deploy` it gets all the inputs from this file. The S3 bucket name is just an example here that SAM will use, we can set a different default S3 bucket here. REGION will be your AWS Region.
+It will also create a local configuration file `samconfig.toml`, so that next time we run `sam deploy` it gets all the inputs from this file. The S3 bucket name is just an example here that SAM will use, we can set a different default S3 bucket here. The REGION will be your AWS Region.
 
 - samconfig.toml
 
@@ -554,9 +554,9 @@ capabilities = "CAPABILITY_IAM"
 image_repositories = []
 ```
 
-### Step 3: Test the application
+### Step 3: Test the Application
 
-Now that our application is up and running, let's call the API and add an item to our DynamoDB table. Running following code, replace the `<API_ENDPOINT>` with URL you noted in previous step. It will look something like `https://<API>.execute-api.<REGION>.amazonaws.com/Prod`.
+Now that our application is up and running, let's call the API and add an item to our DynamoDB table. Run the following code, replacing the `<API_ENDPOINT>` with the URL you noted in previous step. It will look something like this: `https://<API>.execute-api.<REGION>.amazonaws.com/Prod`.
 
 #### Step 3.1: **Add** a customer to the table
 
@@ -591,24 +591,24 @@ curl -X GET https://<API_ENDPOINT>
 
 🎉 That's it!
 
-You can add more APIs and Lambda functions to this serverless application. Every time you have to make application changes, run step 1, and step 2 to build and deploy the application!
+You can add more APIs and Lambda functions to this serverless application. Every time you have to make application changes, run step 1 and step 2 to build and deploy the application!
 
-## Visualize an existing application
+## Visualize an Existing Application
 
-Now, let's say we want to visualize an existing application in application composer. To do so clone the git repository using following commands:
+Now let's say we want to visualize an existing application in Application Composer. To do so, clone the git repository using the following commands:
 
 ```bash
 git clone https://github.com/aws-samples/fresh-tracks.git
 cd fresh-tracks/backend/FreshTracks/
 ```
 
-Open Application Composer in the AWS Console, if you are in a design make sure it is saved and then click on the home 🏠 icon.
+Open Application Composer in the AWS Console, and if you are in a design, make sure it is saved and then click on the home 🏠 icon.
 
 This time in the `Create project` dialog box, select the radio option `Load existing project`.
 
-Use `Connected` mode again and in the `Project location` navigate to the folder `fresh-tracks/backend/FreshTracks/` that has this web applications backend `template.yaml`. Provide permissions for Application Composer in the browser to `View` the folders and files.
+Use `Connected` mode again, and in the `Project location`, navigate to the folder `fresh-tracks/backend/FreshTracks/` that has this web applications backend `template.yaml`. Provide permissions for Application Composer in the browser to `View` the folders and files.
 
-Now that Application Composer can read the folder, it will list down all the `.yaml` files it can find in the folder. Here, let's select the `template.yaml` and select `Create` to visualize it.
+Now that Application Composer can read the folder, it will list all the `.yaml` files it can find in the folder. Here let's select `template.yaml` and select `Create` to visualize it.
 
 ![Console Create Project dialog box load existing project and connected mode](images/console-load-existing-project.png)
 
@@ -618,19 +618,19 @@ Provide the `Edit` access and we can see the visualization come to life:
 
 🎉 That's it!
 
-Now, we can visualize and drag-and-drop more resources to continue building the application in Application Composer. Rest of the build and deployment steps in our IDE will remain same.
+Now, we can visualize and drag-and-drop more resources to continue building the application in Application Composer. The rest of the build and deployment steps in our IDE will remain same.
 
-## Clean up
+## Clean Up
 
-Remember to delete the CloudFormation stacks we created here using following steps:
+When you're ready to finish, remember to delete the CloudFormation stacks we created here using the following steps:
 
-1. Delete the stack. Replace STACK_NAME with the stack name, in the above example our stack name was `buildon-sam-app`.
+1. Delete the stack. Replace STACK_NAME with the stack name. In the above example our stack name was `buildon-sam-app`.
 
    ```bash
    sam delete --stack-name STACK_NAME
    ```
 
-2. Confirm the stack has been deleted in the AWS CloudFormation console or using following command. Replace STACK_NAME with the stack name and ensure the name is within single quotes.
+2. Confirm the stack has been deleted in the AWS CloudFormation console or using the following command. Replace STACK_NAME with the stack name and ensure the name is within single quotes.
 
     ```bash
     aws cloudformation list-stacks --query "StackSummaries[?contains(StackName,'STACK_NAME')].StackStatus"
@@ -640,15 +640,15 @@ Remember to delete the CloudFormation stacks we created here using following ste
 
 Congratulations! We just learned how to use AWS Application Composer to visualize and build Serverless applications. We also learned how to build and deploy these applications using the AWS SAM CLI.
 
-Please note following points:
+Please note the following points:
 
-- there is no cost for visualizing the applications in Application Composer. However, if you run commands `sam build` and `sam deploy` in your AWS Account, you will be charged for the resources it creates. This is outside of the scope of this blog and may go beyond your free tier limits.
-- Application Composer is going to help you create the visualized template, you should continue using your local testing, peer review, or regular deployment through your own current method.
+- There is no cost for visualizing applications in Application Composer. However, if you run the commands `sam build` and `sam deploy` in your AWS Account, you will be charged for the resources it creates. This is outside of the scope of this blog and may go beyond your free-tier limits.
+- Application Composer is going to help you create the visualized template, but you should continue using your local testing, peer review, or regular deployment through your own current method.
 
 You can find an amazing collection of serverless repositories on [Serverless Land](https://serverlessland.com/repos/).
 
 If you enjoyed this tutorial, found any issues, or have feedback us, [please send it our way](https://pulse.buildon.aws/survey/DEM0H5VW)!
 
-Checkout my other tutorial on how to [create a CI/CD pipeline from scratch using Amazon CodeCatalyst](https://www.buildon.aws/tutorials/build-ci-cd-pipeline-iac-cloudformation), to deploy Infrastructure as Code (IaC) with AWS CloudFormation.
+Check out my other tutorial on [how to create a CI/CD pipeline from scratch using Amazon CodeCatalyst](https://www.buildon.aws/tutorials/build-ci-cd-pipeline-iac-cloudformation), to deploy Infrastructure as Code (IaC) with AWS CloudFormation.
 
 For more DevOps related content, check out our [DevOps Essentials guide](https://www.buildon.aws/concepts/devops-essentials/) and learn about [How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/).
