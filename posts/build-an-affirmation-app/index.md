@@ -243,3 +243,7 @@ Finally, navigate to Settings > Pages to ensure that your app has GitHub Pages c
 ## Breathe!
 
 Wasn't that calming? By using easy-to-use, beautiful tooling such as Astro.dev, Lambda, Dynamodb, API Gateway, and hassle-free web hosting, you built a lovely application that looks good and helps you feel good, too. Don't forget to hydrate, listen to soothing music, touch grass, and enjoy May!
+
+## About the Author
+
+Jen Looper is the Head of Academic Advocacy at AWS and manages a team in Developer Relations all about curating the higher-ed student journey through great content, cool events, and a valuable community experience on campuses globally called [Cloud Clubs](https://s12d.com/cloud-clubs). Learn more about Academic Advocacy's initiatives [on our web site](https://s12d.com/students).
