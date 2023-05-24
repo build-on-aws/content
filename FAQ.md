@@ -431,6 +431,7 @@ images:
   background: [image URL]
   banner: [image URL]
   thumbnail: [image URL]
+  hero: [image URL]
 --- 
 ````
 There are three types of images here:
@@ -438,6 +439,7 @@ There are three types of images here:
   This image should have a 1.91:1 aspect ratio. 
 * banner. This image is used when the post is displayed in a carousel of posts in a space. This image should have a 1.91:1 aspect ratio.
 * thumbnail. This image is displayed next to the title and description of a post when shown in a feed. It should be a square image.
+* hero. This image is displayed on top of the post page in the hero component.
 
 Additionally, these images may be used to create a preview when a post is shared in social media. The banner image is preferred, if there is none then the background image, and if not, the thumbnail image.
 Notice that images should be optimized for the web, using compressed modern formats such as webp, and avoiding large high-resolution images. Some social media (for example, Twitter) refuse to use large images and may fall back to other images found in the page.
