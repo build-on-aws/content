@@ -244,6 +244,10 @@ Finally, navigate to Settings > Pages to ensure that your app has GitHub Pages c
 
 Wasn't that calming? By using easy-to-use, beautiful tooling such as Astro.dev, Lambda, Dynamodb, API Gateway, and hassle-free web hosting, you built a lovely application that looks good and helps you feel good, too. Don't forget to hydrate, listen to soothing music, touch grass, and enjoy May!
 
+## Tidy Up
+
+If you don't want your app to live on, don't forget to remove any assets you created in this tutorial. You can remove your `Affirmations` database table in the AWS Console by searching for DynamoDB and choosing the table to delete. Do the same in API Gateway for your `http-affirmations-api` asset, and in Lambda, delete the `get-affirmations` function. This will save you from any costs that fail to spark joy. Marie Kondo would be proud of you.
+
 ## About the Author
 
 Jen Looper is the Head of Academic Advocacy at AWS and manages a team in Developer Relations all about curating the higher-ed student journey through great content, cool events, and a valuable community experience on campuses globally called [Cloud Clubs](https://s12d.com/cloud-clubs). Learn more about Academic Advocacy's initiatives [on our web site](https://s12d.com/students).
