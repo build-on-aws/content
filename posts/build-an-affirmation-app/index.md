@@ -4,17 +4,17 @@ description: "May is Mental Health Month, so why not take a little time to relax
 tags:
     - astro
     - lambda
-    - dynamodb
+    - dynamoDB
 authorGithubAlias: jlooper
 authorName: Jen Looper
 date: 2023-05-12
 ---
 
-![Build a Web App to Deliver Calming and Empowering Affirmations Using Lambda and DynamoDb](images/banner.png)
+![Build a Web App to Deliver Calming and Empowering Affirmations Using Lambda and DynamoDB](images/banner.png)
 
-May is Mental Health month, and, when you think about it, coding up a very simple web app can feel like a mindfulness exercise, if done without pressure in a calm environment. Why not take a little time this month to build yourself a mindfulness app - an app that can deliver a quick affirmation to you or anyone lucky enough to come across it on the internet? Using a lightweight web framework called Astro.dev, plus a Lambda endpoint that can query a Dynamodb database, you can code up a friendly affirmation app in no time at all. Let's get started! 
+May is Mental Health month, and, when you think about it, coding up a very simple web app can feel like a mindfulness exercise, if done without pressure in a calm environment. Why not take a little time this month to build yourself a mindfulness app - an app that can deliver a quick affirmation to you or anyone lucky enough to come across it on the internet? Using a lightweight web framework called Astro.dev, plus a Lambda endpoint that can query a DynamoDB database, you can code up a friendly affirmation app in no time at all. Let's get started! 
 
-By the end of this tutorial, you will have built a web app that you can host on GitHub pages. Refresh the page every time you need a little seratonin boost. 
+By the end of this tutorial, you will have built a web app that you can host on GitHub pages. Refresh the page every time you need a little serotonin boost. 
 
 > This app was designed after the instructions given in [this helpful tutorial](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html) in the API Gateway docs. 
 
@@ -22,13 +22,11 @@ By the end of this tutorial, you will have built a web app that you can host on 
 
 ## Set Your Intention 
 
-Let's get set up to start building your app. We'll be using an interesting new framework called [Astro](https://astro.build/). Astro is part of a grouping of lightweight, highly-performant 'meta frameworks' in the JavaScript world, a framework that can use many other frameworks alongside it. Take a look at what you can do with Astro [in their excellent AI-infused docs](https://houston.astro.build/).
+Let's get set up to start building your app. We'll be using an interesting new framework called [Astro](https://astro.build/). Astro is part of a grouping of lightweight, highly-performant 'meta frameworks' in the JavaScript world, a framework that can pair with or otherwise embed other JavaScript frameworks. Take a look at what you can do with Astro [in their excellent AI-infused docs](https://houston.astro.build/).
 
 > Before starting, make sure your local computer is set up to use npm, git and node.
 
-For now, you will need to follow the installation instructions outlined [in these instructions on using the CLI](https://docs.astro.build/en/install/auto/). 
-
-You can start working anywhere on your local computer. Run the Astro setup wizard by typing `npm create astro@latest` in your terminal or command line. A wizard will launch and help you create a folder for your project. Ask the wizard to Include sample files and be sure to install dependencies. You don't need to use TypeScript in this app, so you can say 'no' to this. Initialize your new Astro folder as a git repository. The Terminal will display a message that you've successfully created your app.
+You can start working anywhere on your local computer by using Astro's [auto-installer](https://docs.astro.build/en/install/auto/). Run the Astro setup wizard by typing `npm create astro@latest` in your terminal or command line. A wizard will launch and help you create a folder for your project. Ask the wizard to Include sample files and be sure to install dependencies. You don't need to use TypeScript in this app, so you can say 'no' to this. Initialize your new Astro folder as a git repository. The Terminal will display a message that you've successfully created your app.
 
 ![A view of your terminal on a Mac](images/terminal.png)
 
@@ -41,7 +39,7 @@ Use your favorite code editor to explore the folder that was just scaffolded. I 
 > tip: type `code .` in your terminal to open the folder in 
 VS Code
 
-Now you can prune some files in the scaffolded app, leaving just one box where you'll display your affirmations. 
+Now you can prune some files in the scaffolded app, leaving the code for just one box where you'll display your affirmations. 
 
 In the `index.astro` file, replace all the code with the following:
 
@@ -96,11 +94,11 @@ import AffirmationComponent from '../components/AffirmationComponent.jsx';
 
 You'll see that an error appears in your local server, as the file called AffirmationsComponent.jsx is missing. Let's fix that.
 
-> What's going on with the above code? Astro offers an interesting syntax where it can combine front matter with style, script, and layout tags. You can progressively enhance your app to include more and more functionality by building up your components' capabilities.
+> What's going on with the above code? Astro offers an interesting syntax allowing you to combine front matter with style, script, and layout tags. You can progressively enhance your app to include more and more functionality by building up your components' capabilities.
 
 ## Embrace the Unknown
 
-Astro is great for generating static web pages such as blogs, but we need it to do a little bit more and have the ability to pull data from an endpoint and refresh an element of the page. So we need to add a framework. Let's use one of the most popular JavaScript frameworks, Preact, to allow this site to become dynamic in production.
+Astro is great for generating static web pages such as blogs, but for this app we need it to do a little bit more. It needs to have the ability to pull data from an endpoint and refresh an element of the page. So we need to add a framework. Let's use one of the most popular JavaScript frameworks, Preact, to allow this site to become dynamic in production.
 
 > [Preact](https://preactjs.com/) is a lightweight version of React, "a fast 3kB alternative to React with the same modern API"
 
@@ -128,11 +126,18 @@ In this example, the text 'my affirmation' is being passed from index.astro to t
 
 ## Capture the Moments
 
-Now it's time to build up a database with some sample affirmations. In the AWS Console, search for [DynamoDB](https://console.aws.amazon.com/dynamodb/). This is a serverless database you will use to store a series of affirmations. Choose Create table and name it `Affirmations`. For its partition key, enter `Id`. You can add a few helpful phrases by using the `Create Item`. Each item should have an Id and a Text, like this:
+Now it's time to build up a database with some sample affirmations. In the AWS Console, search for [DynamoDB](https://console.aws.amazon.com/dynamodb/). This is a serverless database you will use to store a series of affirmations. Choose `Create table` and name it `Affirmations`. For its partition key, enter `Id`. When the table is built, click its name, then click the `Explore Table Items` button. Click `Create item` and `Add new attribute > String`. Give your item a number in the `Id` value and then add a `Text` attribute to store your affirmations as strings. 
 
-![A sample dynamodb view](images/dynamodb.png).
+![Adding items in your database](images/adding.png)
 
-> Here's a hepful [list of nice affirmations](https://github.com/annthurium/affirmations/blob/master/affirmations.js).
+> Note, you don't _have_ to build out your database with an Id in this way, but if you wanted to expand your app in the future, these Ids can be useful if you wanted to enhance your API to grab a particular affirmation by its Id.
+
+Repeat this step a few times to add new affirmations.
+Each item should have an Id and a Text, like this:
+
+![A sample DynamoDB view](images/dynamodb.png).
+
+> Here's a helpful [list of nice affirmations](https://github.com/annthurium/affirmations/blob/master/affirmations.js).
 
 Next, you need to create a serverless function using Lambda to query this database. Navigate to the [Lambda console](https://console.aws.amazon.com/lambda) and choose `Create function` > `Author from Scratch`. You can call it `get-affirmation-function` and use Node 18 for the runtime. In `Permissions`, and change the default execution role. You'll need to create a new role, so under `Permissions` choose `Create a new role from AWS policy templates`. You can call the role `http-affirmations-role`. Select the `Simple microservice` permissions to let your new function interact with DynamoDB. Now you can create your function.
 
@@ -185,7 +190,7 @@ export const handler = async (event, context) => {
 };
 ```
 
-Now, to connect your function to your database, you need to use one more service: [API Gateway](https://console.aws.amazon.com/apigateway).
+Now, to connect all the pieces, you need to use one more service: [API Gateway](https://console.aws.amazon.com/apigateway).
 
 
 ## Make the Connection
@@ -194,13 +199,15 @@ In the AWS console, navigate over to https://console.aws.amazon.com/apigateway. 
 
 You need to specify that your API can use http `GET` to select elements from the database. Add `/items` as the route's name, then `Next` and `Create`:
 
-![A view of your routes that you created in APIGateway](images/route.png). 
+![A view of your routes that you created in APIGateway](images/route.png)
 
 Test your new API by visiting the URL listed in the API Gateway console. Append `/items` to the end of the URL; you should see your database items listed!
 
+> Note, you might notice that you're grabbing _all_ the data from the database in the initial call. This has a few ramifications. First, if you edit the database, you'll need to rebuild the app and redeploy it to pick up changes. Second, this architecture is best suited for small amounts of data that need to load initially. An alternate architecture might entail an edit to your endpoint to make a call to select only one Id at a time from your database.
+
 ## A Beautiful Convergence
 
-Now, the last thing to do is to configure your web app to query the database and display a new affirmation each time the screen is refreshed. Normally, Astro will fetch data once, when the component is rendered. To make the data refresh from the database each time the page is reloaded, you need to make a few edits to allow client-side rendering in Astro.
+Now, the last thing to do is to configure your web app to query the database and display a new affirmation each time the screen is refreshed. Normally, Astro will fetch data once, when the component is rendered. To make the affirmation change each time the page is reloaded, you need to make a few edits to allow client-side rendering in Astro.
 
 Go back to make some edits to your Astro app. In `index.astro`, under the first import statement, add the ability to fetch the endpoint you just created, using the URL from API Gateway:
 
@@ -228,21 +235,23 @@ And finally make sure that the <h3> tag includes just the one affirmation:
 <h3>{affirmation}</h3>
 ```
 
-Your affirmations should refresh each time you reload the page.
+Your affirmations should change each time you reload the page.
 
 ## Find your Happy Place
 
 The last thing you need to do is to celebrate your accomplishment and share it with the world. An easy way to do this is by using GitHub pages, deployed via GitHub Actions.
 
-Commit your code to GitHub, using the git integration that was created by Astro when you scaffolded your app. Make sure the repo is public. Now you'll need a GitHub action to build and deploy your app to GitHub pages, since it's not a static app but has a build step.
+Commit your code to GitHub, using the git integration that was created by Astro when you scaffolded your app. Make sure the repo is public. Now you'll need a GitHub action to build and [deploy your app to GitHub pages](https://docs.astro.build/en/guides/deploy/github/), since it's not a static app but has a build step.
 
-Navigate to your GitHub repo and visit the Actions tab. Click the 'New Workflow' button and search for Astro. Select the Astro Workflow and click `configure`. This proces creates a new folder called `.github/workflows` with a .yaml file outlining the steps needed to build your app. Commit this structure to your repo by selecting `commit changes`. 
+Navigate to your GitHub repo and visit the Actions tab. Click the 'New Workflow' button and search for Astro. Select the Astro Workflow and click `configure`. This process creates a new folder called `.github/workflows` with a .yml file outlining the steps needed to build your app. Commit this structure to your repo by selecting `commit changes`.
 
-Finally, navigate to Settings > Pages to ensure that your app has GitHub Pages configured and that your new Action is building them. GitHub should provide you a URL. A demo of this whole app is available [on this GitHub page](https://jlooper.github.io/affirmations/).
+![Your GitHub Actions workflow](images/gh-actions.png)
+
+Finally, navigate to Settings > Pages to ensure that your app has GitHub Pages configured and that your new Action is building them. GitHub should provide you with a URL. A demo of this whole app is available [on this GitHub page](https://jlooper.github.io/affirmations/).
 
 ## Breathe!
 
-Wasn't that calming? By using easy-to-use, beautiful tooling such as Astro.dev, Lambda, Dynamodb, API Gateway, and hassle-free web hosting, you built a lovely application that looks good and helps you feel good, too. Don't forget to hydrate, listen to soothing music, touch grass, and enjoy May!
+Wasn't that calming? By using easy-to-use, beautiful tooling such as Astro.dev, Lambda, DynamoDB, API Gateway, and hassle-free web hosting, you built a lovely application that looks good and helps you feel good, too. Don't forget to hydrate, listen to soothing music, touch grass, and enjoy May!
 
 ## Tidy Up
 
@@ -250,4 +259,4 @@ If you don't want your app to live on, don't forget to remove any assets you cre
 
 ## About the Author
 
-Jen Looper is the Head of Academic Advocacy at AWS and manages a team in Developer Relations all about curating the higher-ed student journey through great content, cool events, and a valuable community experience on campuses globally called [Cloud Clubs](https://s12d.com/cloud-clubs). Learn more about Academic Advocacy's initiatives [on our web site](https://s12d.com/students).
+Jen Looper is the Head of Academic Advocacy at AWS and manages a team in Developer Relations all about curating the higher-ed student journey through great content, cool events, and a valuable community experience on campuses globally called [Cloud Clubs](https://s12d.com/cloud-clubs). Learn more about Academic Advocacy's initiatives [on our website](https://s12d.com/students).
