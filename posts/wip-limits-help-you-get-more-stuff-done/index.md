@@ -26,6 +26,7 @@ In short, limiting work in process helps you manage your overall workflow, enabl
 “Limit WIP” means limit the work in process — for any given step in your workflow you limit how many items can be in that state. So a WIP Limit of 2 on your “Develop” step, as shown in Figure 2, means once two items are at that step, the team cannot start to develop any more items until at least one of the current items moves to the next step.
 
 ![Kanban board where a developer is blocked from taking on new work by the WIP limit](images/figure2.png "Figure 2.  One day in Kanban land by Henrik Kniberg")
+
 <br/>[[image source](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000)] by Henrik Kniberg, licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/)
 
 This diagram in Figure 2 comes from [**One day in Kanban land**](http://blog.crisp.se/2009/06/26/henrikkniberg/1246053060000), by the always-awesome Henrik Kniberg – you should bookmark it and check it out.

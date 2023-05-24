@@ -176,12 +176,20 @@ The caption will appear underneath the image and also on mouse over.
 
 ### How do I show videos in my post?
 
-At the moment, only YouTube videos are supported. Simply place the URL of the video in a separate line, for example:
+At the moment, only YouTube videos and playlists are supported. 
+
+Simply place the URL of the video/playlist or the embed link in a separate line, for example:
 
 ```text
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
 
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+https://www.youtube.com/embed/a9__D53WsUs
+
+https://www.youtube.com/playlist?list=PLhr1KZpdzukesRd2CMrTsF5-7NVVdYL4H
+
+https://www.youtube.com/embed/videoseries?list=PLhr1KZpdzukesRd2CMrTsF5-7NVVdYL4H
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
 ```
