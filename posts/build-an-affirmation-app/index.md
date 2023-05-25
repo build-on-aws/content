@@ -19,11 +19,15 @@ May is Mental Health month, and, when you think about it, coding up a very simpl
 
 By the end of this tutorial, you will have built a web app that you can host on GitHub pages. Refresh the page every time you need a little serotonin boost. 
 
-> This app was designed after the instructions given in [this helpful tutorial](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.htm?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq) in the Amazon API Gateway docs.
+> This app was designed after the instructions given in [this helpful tutorial](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq) in the Amazon API Gateway docs.
 
 ![Your final project - an affirmation app](images/demo.png)
 
 ## Set Your Intention 
+
+Let's think about the architecture you're going to use. First, you will build a web site connected to Lambda and DynamoDB via API Gateway, something like this:
+
+![A diagram of the architecture](images/diagram.png)
 
 Let's get set up to start building your app. We'll be using an interesting new framework called [Astro](https://astro.build/). Astro is part of a grouping of lightweight, highly-performant 'meta frameworks' in the JavaScript world, a framework that can pair with or otherwise embed other JavaScript frameworks. Take a look at what you can do with Astro [in their excellent AI-infused docs](https://houston.astro.build/).
 
@@ -35,7 +39,7 @@ You can start working anywhere on your local computer by using Astro's [auto-ins
 
 Use `cd` to enter the new folder Astro created (you can use `ls -al` to view all the folders, and it should match what you entered earlier for the project name) and make sure all dependencies are installed by typing `npm i` in the terminal. Type `npm run dev` to start your local server. At the moment, your web app looks like this:
 
-![A fresly-scaffolded Astro app](images/astro.png)
+![A freshly-scaffolded Astro app](images/astro.png)
 
 Use your favorite code editor to explore the folder that was just scaffolded. I prefer Visual Studio Code:
 
@@ -100,11 +104,11 @@ You'll see that an error appears in your local server, as the file called `Affir
 
 ## Embrace the Unknown
 
-Astro is great for generating static web pages such as blogs, but for this app we need it to do a little bit more. It needs to have the ability to pull data from an endpoint and refresh an element of the page. So we need to add a framework. Let's use one of the most popular JavaScript frameworks, Preact, to allow this site to become dynamic in production.
+Astro is great for generating static web pages such as blogs, but for this app we need it to do a little bit more. It needs to have the ability to pull data from an endpoint and refresh an element of the page. So we need to add a framework on top of Astro. Let's use one another lightweight option, Preact, to allow this site to become dynamic in production.
 
 > [Preact](https://preactjs.com/) is a lightweight version of React, "a fast 3kB alternative to React with the same modern API".
 
-You can add [frameworks](https://docs.astro.build/en/guides/integrations-guide/) progressively to an Astro app by using the Astro CLI. Type in `npx astro add preact` in the terminal of your app. Allow Astro to configure your app to suit Preact's requirements (a configuration change is needed). You will be asked a number of time to accept changes to files, please answer "yes" to all of them.
+You can add [frameworks](https://docs.astro.build/en/guides/integrations-guide/) progressively to an Astro app by using the Astro CLI. Type in `npx astro add preact` in the terminal of your app. Allow Astro to configure your app to suit Preact's requirements (a configuration change is needed). You will be asked a number of time to accept changes to files, so please answer "yes" to all of them.
 
 > Tip: use the built-in terminal in VS Code to keep your environment neat by selecting terminal > new terminal. 
 
@@ -142,7 +146,7 @@ It will take a few seconds to create you table, and once done, click on `Affirma
 
 Next, you need to create a serverless function using Lambda to query this database. Navigate to the [Lambda console](https://console.aws.amazon.com/lambda) and choose `Create function` > `Author from Scratch`. You can call it `get-affirmation-function` and use Node 18 for the runtime. In `Permissions`, and change the default execution role. You'll need to create a new role, so under `Permissions` choose `Create a new role from AWS policy templates`. You can call the role `http-affirmations-role`. Select the `Simple microservice` permissions to let your new function interact with DynamoDB. Now you can create your function.
 
-Now you need to add a bit of code in your function to query the database, so open the index.mjs file in the Lambda code editor. Add the following code and select `Deploy`:
+Now you need to add a bit of code in your function to query the database, so open the `index.mjs` file in the Lambda code editor. Add the following code and select `Deploy`:
 
 ```javascript
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -191,8 +195,7 @@ export const handler = async (event, context) => {
 };
 ```
 
-Now, to connect all the pieces, you need to use one more service: [API Gateway](https://console.aws.amazon.com/apigateway).
-
+Now, to connect all the pieces, you can use one more service: [API Gateway](https://console.aws.amazon.com/apigateway).
 
 ## Make the Connection
 
@@ -223,11 +226,11 @@ Then, replace the hard-coded affirmation where the child component is included:
 ```
 The use of `client:load` lets the app 'hydrate' the component on page load.
 
-Finally, you need to make one more change in the AffirmationComponent.jsx file. Under the `export default` statement, import your data:
+Finally, you need to make one more change in the `AffirmationComponent.jsx` file. Under the `export default` statement, import your data:
 
 ```javascript
 const num = Math.floor(Math.random() * affirmations.length);
-  const [affirmation] = useState(JSON.stringify(affirmations[num].Text));
+const [affirmation] = useState(JSON.stringify(affirmations[num].Text));
 ```
 
 And finally make sure that the `<h3>` tag includes just the one affirmation:
