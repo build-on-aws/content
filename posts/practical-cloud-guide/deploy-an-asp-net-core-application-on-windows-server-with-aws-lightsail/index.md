@@ -3,12 +3,13 @@ title: "Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail"
 description: ""
 tags:
     - tutorials
-    - <tutorials tag is mandatory for tutorials. list any other key terms readers will be searching for using kebab-case, e.g. ci-cd, NOT "ci cd", or "CI-CD">
-    - essentials
+    - lightsail
+    - "ASP.NET Core"
     - aws
-authorGithubAlias: <github alias>
-authorName: <FirstName LastName>
-date: <YYYY-MM-DD - expected publish date>
+    - "IT Pros"
+authorGithubAlias: "spara"
+authorName: "Sophia Parafina"
+date: "2023-31-05"
 ---
 
 Deploying applications is a fundamental task for IT Pros. The Run in the Cloud stage of the Practical Cloud Guide for IT Professionals uses AWS Lightsail - a managed service for Virtual Private Servers (VPS), containers, databases, storage, and networking. The goal of the Run in the Cloud is to gain experience working in the cloud without building a cloud infrastructure.

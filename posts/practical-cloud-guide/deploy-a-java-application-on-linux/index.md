@@ -1,14 +1,15 @@
 ---
-title: <Highlight the core problem being solved, follow PR/marketing guidelines>
-description: <Two or three sentences describing the problem, the solution, and tools or services used along the way>
+title: "Deploy a Java Application on Linux"
+description: "As a cloud engineer you will deploy a variety of applications on different types of servers in the cloud. Learn how to deploy a SpringBoot Java application on a AWS Lightsail Linux VPS."
 tags:
     - tutorials
-    - <tutorials tag is mandatory for tutorials. list any other key terms readers will be searching for using kebab-case, e.g. ci-cd, NOT "ci cd", or "CI-CD">
-    - essentials
-    - aws
-authorGithubAlias: <github alias>
-authorName: <FirstName LastName>
-date: <YYYY-MM-DD - expected publish date>
+    - Java
+    - SpringBoot
+    - Lightsail
+    - "IT Pros"
+authorGithubAlias: "spara"
+authorName: "Sophia Parafina"
+date: "2023-31-05"
 ---
 
 The [previous tutorial]() demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Node.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
