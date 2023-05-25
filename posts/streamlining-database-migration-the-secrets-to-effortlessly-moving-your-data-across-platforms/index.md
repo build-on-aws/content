@@ -9,7 +9,7 @@ tags:
 - database-migration
 authorGithubAlias: mpranshu
 authorName: Pranshu Mishra
-date: 2023-05-16
+date: 2023-05-25
 ---
 
 In today's rapidly evolving technological landscape, data migration has become an essential process for businesses striving to keep their systems up-to-date. With the ever-increasing volume and complexity of data, it is crucial for organizations, especially those relying on relational databases, to seamlessly transfer data from one system to another. However, data migration is not without its challenges, requiring meticulous planning and execution to mitigate potential issues effectively.
