@@ -11,12 +11,9 @@ tags:
 authorGithubAlias: jlooper
 authorName: Jen Looper
 date: 2023-05-26
-images:
-  banner: ./images/banner.png
-  thumbnail: ./images/banner.png
-  hero: ./images/banner.png
-  background: ./images/banner.png
 ---
+
+![Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and DynamoDB](images/banner.png)
 
 May is Mental Health month, and, when you think about it, coding up a very simple web app can feel like a mindfulness exercise, if done without pressure in a calm environment. Why not take a little time this month to build yourself a mindfulness app - an app that can deliver a quick affirmation to you or anyone lucky enough to come across it on the internet? Using a lightweight web framework called [Astro](https://astro.build/), plus a Lambda endpoint that can query a DynamoDB database, you can code up a friendly affirmation app in no time at all. Let's get started!
 
