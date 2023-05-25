@@ -99,7 +99,7 @@ In the Application Composer console, we can find most of the serverless resource
 
 When we drag the resources on the canvas, Application Composer automatically writes the required YAML code in the `Template`. Also, as this is connected mode, these changes are done to our local template file. Any changes we make on either canvas or template are automatically reflected on other side.
 
-We can see in the GIF below, as we drag and drop resources (API Gateway, Lambda, and DynamoDB) on the canvas, the template.yaml is automatically populated with its appropriate yaml definition.
+We can see in the GIF below, as we drag and drop resources (API Gateway, Lambda, and DynamoDB) on the `Canvas`, the `template.yaml` is automatically populated with its appropriate yaml definition.
 
 ![Drag and drop resources gif](images/drag-drop.webp)
 
@@ -141,7 +141,7 @@ We have 2 Lambda functions to `Create` and `List` customers. We can group these 
 
 This will create a group. Drag and drop the other Lambda function to be part of this group. If we double-click this group we can modify its name. We will rename the group `CustomerFunctionsGroup`.
 
-![Lambda functions, group properties, and group name](images/console-group-functions.webp)
+![Animation to show the Lambda functions, group properties and the group name](images/console-group-functions.webp)
 
 ### Best practices
 
@@ -149,11 +149,11 @@ AWS Application Composer is designed to configure Infrastructure-as-Code definit
 
 ### Connections
 
-Once we have all four components, let's connect these: APIGateway -> Lambda -> DynamoDB.
+Once we have all the four components, let's connect these: APIGateway -> Lambda -> DynamoDB.
 
 When we make these connections, Application Composer will automatically update the template to reflect this. Notice the changes in the image below:  
 
-![Console resources connections updates code automatically in the template opened in Visual studio](images/console-connections-gif.webp)
+![Console resources connections updates code automatically in the template opened in Visual studio](images/console-connections-gif-1.webp)
 
 We have to connect the `GET /` route to `CustomerFunctionList` and the `POST /` to `CustomerFunctionCreate`. Also connect both the Lambda functions to the DynamoDB table.
 
