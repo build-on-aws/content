@@ -1,5 +1,5 @@
 ---
-title: "Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and DynamoDB"
+title: "Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and AWS DynamoDB"
 description: "May is Mental Health Month, so why not take a little time to relax and build yourself a mindfulness app?"
 tags:
     - astro
@@ -10,20 +10,20 @@ tags:
     - serverless
 authorGithubAlias: jlooper
 authorName: Jen Looper
-date: 2023-05-12
+date: 2023-05-26
+images:
+  banner: ./images/banner.png
 ---
 
-![Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and DynamoDB](images/banner.png)
+May is Mental Health month, and, when you think about it, coding up a very simple web app can feel like a mindfulness exercise, if done without pressure in a calm environment. Why not take a little time this month to build yourself a mindfulness app - an app that can deliver a quick affirmation to you or anyone lucky enough to come across it on the internet? Using a lightweight web framework called [Astro](https://astro.build/), plus a Lambda endpoint that can query a DynamoDB database, you can code up a friendly affirmation app in no time at all. Let's get started!
 
-May is Mental Health month, and, when you think about it, coding up a very simple web app can feel like a mindfulness exercise, if done without pressure in a calm environment. Why not take a little time this month to build yourself a mindfulness app - an app that can deliver a quick affirmation to you or anyone lucky enough to come across it on the internet? Using a lightweight web framework called [Astro](https://astro.build/), plus a Lambda endpoint that can query a DynamoDB database, you can code up a friendly affirmation app in no time at all. Let's get started! 
-
-By the end of this tutorial, you will have built a web app that you can host on GitHub pages. Refresh the page every time you need a little serotonin boost. 
+By the end of this tutorial, you will have built a web app that you can host on GitHub pages. Refresh the page every time you need a little serotonin boost.
 
 > This app was designed after the instructions given in [this helpful tutorial](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq) in the Amazon API Gateway docs.
 
 ![Your final project - an affirmation app](images/demo.png)
 
-## Set Your Intention 
+## Set Your Intention
 
 Let's think about the architecture you're going to use. First, you will build a web site connected to Lambda and DynamoDB via API Gateway, something like this:
 
@@ -57,44 +57,44 @@ import AffirmationComponent from '../components/AffirmationComponent.jsx';
 
 ---
 <Layout title="My Affirmations">
-	<main>
+  <main>
 
-		<h1>Welcome to <span class="text-gradient">Your Affirmation App</span></h1>
-			<section class="text">
-				<AffirmationComponent client:load affirmations={'my affirmation'} />
-			</section>
-	</main>
+    <h1>Welcome to <span class="text-gradient">Your Affirmation App</span></h1>
+      <section class="text">
+        <AffirmationComponent client:load affirmations={'my affirmation'} />
+      </section>
+  </main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 80ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.text {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-		text-align: center;
-		font-size: 1.5rem;
-	}
-	
+  main {
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 80ch;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .text {
+    line-height: 1.6;
+    margin: 1rem 0;
+    border: 1px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  
 </style>
 ```
 
@@ -110,9 +110,9 @@ Astro is great for generating static web pages such as blogs, but for this app w
 
 You can add [frameworks](https://docs.astro.build/en/guides/integrations-guide/) progressively to an Astro app by using the Astro CLI. Type in `npx astro add preact` in the terminal of your app. Allow Astro to configure your app to suit Preact's requirements (a configuration change is needed). You will be asked a number of time to accept changes to files, so please answer "yes" to all of them.
 
-> Tip: use the built-in terminal in VS Code to keep your environment neat by selecting terminal > new terminal. 
+> Tip: use the built-in terminal in VS Code to keep your environment neat by selecting terminal > new terminal.
 
-Now that you have added Preact, in the `/src/components folder`, remove the Card.astro file and add a file called `components/AffirmationComponent.jsx`, a file type understood by Preact. 
+Now that you have added Preact, in the `/src/components folder`, remove the Card.astro file and add a file called `components/AffirmationComponent.jsx`, a file type understood by Preact.
 
 In your `AffirmationComponent.jsx` file, add the following code:
 
@@ -126,6 +126,7 @@ export default function Affirmation({affirmations}) {
   );
 }
 ```
+
 In this example, the text 'my affirmation' is being passed from index.astro to the child component, where it is displayed. Your app should now look like the image below. Change the hard-coded affirmation to anything you like! We'll revisit this code once we have an endpoint built to query a database full of great quotes.
 
 ![The affirmation app with a hard-coded affirmation](images/demo2.png)
@@ -138,7 +139,7 @@ Now it's time to build up a database with some sample affirmations. If you are n
 
 > Note, you don't _have_ to build out your database with an Id in this way, but if you wanted to expand your app in the future, these Ids can be useful if you wanted to enhance your API to grab a particular affirmation by its Id.
 
-It will take a few seconds to create you table, and once done, click on `Affirmations` to see your table. Let's add a few helpful phrases to our table by navigating to `Tables` -> `Explore Items` in the left-hand navigation bar, and confirming that the `Affirmations` table is selected. No we can add items by using the `Create Item` button. Each item should have an `Id` and a `Text`, like this:
+It will take a few seconds to create you table, and once done, click on `Affirmations` to see your table. Let's add a few helpful phrases to our table by navigating to `Tables` -> `Explore Items` in the left-hand navigation bar, and confirming that the `Affirmations` table is selected. Now we can add items by using the `Create Item` button. Enter a numeric number next to `Id`, and then click on `Add new attribute`, enter `Text` under the `Attribute name` column, and then the affirmation as text in the `Value` column. Each item should have an `Id` and a `Text`, like this:
 
 ![A sample DynamoDB view](images/dynamodb.png).
 
@@ -219,11 +220,13 @@ Go back to make some edits to your Astro app. In `index.astro`, under the first 
 const response = await fetch('https://your-api-url/items');
 const data = await response.json();
 ```
+
 Then, replace the hard-coded affirmation where the child component is included:
 
 ```javascript
 <AffirmationComponent client:load affirmations={data} />
 ```
+
 The use of `client:load` lets the app 'hydrate' the component on page load.
 
 Finally, you need to make one more change in the `AffirmationComponent.jsx` file. Under the `export default` statement, import your data:
@@ -259,7 +262,7 @@ Wasn't that calming? By using easy-to-use, beautiful tooling such as Astro.dev, 
 
 ## Tidy Up
 
-If you don't want your app to live on, don't forget to remove any assets you created in this tutorial. You can remove your `Affirmations` database table in the AWS Console by searching for DynamoDB and choosing the table to delete. Do the same in API Gateway for your `http-affirmations-api` asset, and in Lambda, delete the `get-affirmations` function. This will save you from any costs that fail to spark joy. Marie Kondo would be proud of you.
+If you don't want your app to live on, don't forget to remove any assets you created in this tutorial. You can remove your `Affirmations` database table in the AWS Console by searching for DynamoDB and choosing the table to delete. Do the same in API Gateway for your `http-affirmations-api` asset, and in Lambda, delete the `get-affirmations` function. This will save you from any costs that fail to spark joy. [Marie Kondo](https://en.wikipedia.org/wiki/Marie_Kondo) would be proud of you.
 
 ## About the Author
 
