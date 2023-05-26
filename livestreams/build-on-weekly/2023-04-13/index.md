@@ -1,6 +1,5 @@
 ---
 title: "S02E13 - Hot Dog or Not Hot Dog"
-description:
 tags:
   - aws
   - build-on-live
@@ -15,7 +14,7 @@ spaces:
   - livestreams
 ---
 
-![Jacquie and Darko replying to a chat message](images/bows02e13.png)
+![Jacquie and Darko replying to a chat message](images/bows02e13.webp)
 
 In today’s episode, Jacquie and Darko do the tried and tested “Hello World” of Machine Learning - trying to see if a thing is a Hot Dog 🌭 or Not a Hot Dog 🚫 🌭. Ultimately we were slightly better than a Coin Toss, but we had fun doing it.
 Oh, and check out our code in the gists below, and see if you can make it better!

@@ -1,6 +1,6 @@
 ---
 title: "Build On Weekly"
-description:
+description: "A weekly live stream about The Cloud, Open Source, Community and everything in between"
 tags:
   - aws
   - build-on-live
@@ -12,13 +12,13 @@ additionalAuthors:
     authorName: Darko Mesaros
 date: 2023-03-31
 images:
-  banner: ./images/BOW_Logo.png
-  thumbnail: ./images/BOW_Logo.png
-  hero: ./images/BOW_Logo.png
-  background: ./images/BOW_Logo.png
+  banner: ./images/BOW_Logo.webp
+  thumbnail: ./images/BOW_Logo.webp
+  hero: ./images/BOW_Logo.webp
+  background: ./images/BOW_Logo.webp
 ---
 
-![Image of Jacquie and Darko enjoying the live stream together](images/bow-header.png)
+![Image of Jacquie and Darko enjoying the live stream together](images/bow-header.webp)
 
 👋 Hello friends and welcome to Build On Weekly, a [Twitch show](https://www.twitch.tv/aws) where we build something together every week while answering questions from our favourite people - you! We'll build anything that helps you solve problems: whether it's Open Source or AWS, from operators, developers, data or security specialists to anyone in between. Join us every Thursday at 9am PT to learn live with us through hands on keyboard coding and stay for the lively conversations with expert guests.
 
@@ -52,4 +52,4 @@ Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
 | S01E02 | Breaking blocks with Terraform | 2022-07-21  | [Show Notes](/livestreams/build-on-weekly/2022-07-21) |
 | S01E01 | Open With Open Source | 2022-07-14  | [Show Notes](/livestreams/build-on-weekly/2022-07-14) |
 
-![Build On Weekly Logo](images/BOW_Logo.png)
+![Build On Weekly Logo](images/BOW_Logo.webp)

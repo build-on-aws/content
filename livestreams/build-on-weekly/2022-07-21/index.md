@@ -1,6 +1,5 @@
 ---
 title: "S01E02 - Breaking blocks with Terraform"
-description:
 tags:
   - aws
   - build-on-live
@@ -17,7 +16,7 @@ Welcome to episode 2 of Build On Weekly! 🥳 Today is all about Terraform and b
 
 We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
-![Jacquie and Darko before the show](images/header.png)
+![Jacquie and Darko before the show](images/header.webp)
 
 If you miss an episode, don't worry! We will upload recordings of all our episodes to this youtube [playlist](https://youtube.com/playlist?list=PLDqi6CuDzubwBQdL4N1tVUwWeNEtOG9vL)! Make sure to smash that like and subscribe button! 🥹
 
