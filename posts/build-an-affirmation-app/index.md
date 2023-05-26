@@ -19,7 +19,7 @@ May is Mental Health month, and, when you think about it, coding up a very simpl
 
 By the end of this tutorial, you will have built a web app that you can host on GitHub pages. Refresh the page every time you need a little serotonin boost.
 
-> This app was designed after the instructions given in [this helpful tutorial](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq) in the Amazon API Gateway docs.
+> This app was inspired by the instructions given in [this helpful tutorial](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq) in the Amazon API Gateway docs.
 
 ![Your final project - an affirmation app](images/demo.png)
 
@@ -52,59 +52,58 @@ In the `src/pages/index.astro` file, replace all the code with the following:
 ```javascript
 ---
 import Layout from '../layouts/Layout.astro';
-
 import AffirmationComponent from '../components/AffirmationComponent.jsx';
-
 ---
-<Layout title="My Affirmations">
-  <main>
 
-    <h1>Welcome to <span class="text-gradient">Your Affirmation App</span></h1>
-      <section class="text">
-        <AffirmationComponent client:load affirmations={'my affirmation'} />
-      </section>
-  </main>
+<Layout title="My Affirmations">
+	<main>
+
+		<h1>Welcome to <span class="text-gradient">Your Affirmation App</span></h1>
+			<section class="text">
+				<AffirmationComponent client:load/>
+			</section>
+	</main>
 </Layout>
 
 <style>
-  main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 80ch;
-  }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .text {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
-    text-align: center;
-    font-size: 1.5rem;
-  }
-  
+	main {
+		margin: auto;
+		padding: 1.5rem;
+		max-width: 80ch;
+	}
+	h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.text {
+		line-height: 1.6;
+		margin: 1rem 0;
+		border: 1px solid rgba(var(--accent), 25%);
+		background-color: white;
+		padding: 1rem;
+		border-radius: 0.4rem;
+		text-align: center;
+		font-size: 1.5rem;
+	}
+
 </style>
 ```
 
 You'll see that an error appears in your local server, as the file called `AffirmationsComponent.jsx` is missing. Let's fix that.
 
-> What's going on with the above code? Astro offers an interesting syntax allowing you to combine front matter with style, script, and layout tags. You can progressively enhance your app to include more and more functionality by building up your components' capabilities.
+> What's going on with the above code? Astro offers an interesting syntax allowing you to combine front matter with style, script, and layout tags. You can progressively enhance your app to include more and more functionality by building up your components' capabilities. By using `client:load` you are allowing a child component to load fresh data from a database, which is our use case.
 
 ## Embrace the Unknown
 
-Astro is great for generating static web pages such as blogs, but for this app we need it to do a little bit more. It needs to have the ability to pull data from an endpoint and refresh an element of the page. So we need to add a framework on top of Astro. Let's use one another lightweight option, Preact, to allow this site to become dynamic in production.
+Astro is great for generating static web pages such as blogs, but for this app we need it to do a little bit more. It needs to have the ability to pull data from an endpoint and refresh an element of the page. So we need to add a framework on top of Astro. Let's use another lightweight option, Preact, to allow this site to become dynamic in production.
 
 > [Preact](https://preactjs.com/) is a lightweight version of React, "a fast 3kB alternative to React with the same modern API".
 
@@ -117,17 +116,14 @@ Now that you have added Preact, in the `/src/components folder`, remove the Card
 In your `AffirmationComponent.jsx` file, add the following code:
 
 ```javascript
-import { useState } from 'preact/hooks';
-
-export default function Affirmation({affirmations}) {
-
-  return (
-      <h3>{affirmations}</h3>
-  );
-}
+const Affirmation = () => {
+  return <h3>my affirmation</h3>;
+};
+      
+export default Affirmation;
 ```
 
-In this example, the text 'my affirmation' is being passed from index.astro to the child component, where it is displayed. Your app should now look like the image below. Change the hard-coded affirmation to anything you like! We'll revisit this code once we have an endpoint built to query a database full of great quotes.
+Your app should now look like the image below. Change the hard-coded affirmation to anything you like! We'll revisit this code once we have an endpoint built to query a database full of great quotes.
 
 ![The affirmation app with a hard-coded affirmation](images/demo2.png)
 
@@ -137,24 +133,23 @@ Now it's time to build up a database with some sample affirmations. If you are n
 
 ![Adding items in your database](images/adding.png)
 
-> Note, you don't _have_ to build out your database with an Id in this way, but if you wanted to expand your app in the future, these Ids can be useful if you wanted to enhance your API to grab a particular affirmation by its Id.
-
-It will take a few seconds to create you table, and once done, click on `Affirmations` to see your table. Let's add a few helpful phrases to our table by navigating to `Tables` -> `Explore Items` in the left-hand navigation bar, and confirming that the `Affirmations` table is selected. Now we can add items by using the `Create Item` button. Enter a numeric number next to `Id`, and then click on `Add new attribute`, enter `Text` under the `Attribute name` column, and then the affirmation as text in the `Value` column. Each item should have an `Id` and a `Text`, like this:
+It will take a few seconds to create your table, and once done, click on `Affirmations` to view it. Let's add a few helpful phrases to our table by navigating to `Tables` -> `Explore Items` in the left-hand navigation bar, and confirming that the `Affirmations` table is selected. Now we can add items by using the `Create Item` button. Enter a numeric number next to `Id`, and then click on `Add new attribute`, enter `Text` under the `Attribute name` column, and then the affirmation as text in the `Value` column. Each item should have an `Id` and a `Text`, like this:
 
 ![A sample DynamoDB view](images/dynamodb.png).
 
 > Here's a helpful [list of nice affirmations](https://github.com/annthurium/affirmations/blob/master/affirmations.js).
 
-Next, you need to create a serverless function using Lambda to query this database. Navigate to the [Lambda console](https://console.aws.amazon.com/lambda) and choose `Create function` > `Author from Scratch`. You can call it `get-affirmation-function` and use Node 18 for the runtime. In `Permissions`, and change the default execution role. You'll need to create a new role, so under `Permissions` choose `Create a new role from AWS policy templates`. You can call the role `http-affirmations-role`. Select the `Simple microservice` permissions to let your new function interact with DynamoDB. Now you can create your function.
+Next, you need to create a serverless function using Lambda to query this database. Navigate to the [Lambda console](https://console.aws.amazon.com/lambda) and choose `Create function` > `Author from Scratch`. You can call it `get-affirmation-function` and use Node 18 for the runtime. Now you can create your function.
 
-Now you need to add a bit of code in your function to query the database, so open the `index.mjs` file in the Lambda code editor. Add the following code and select `Deploy`:
+Before adding any function code, make sure that it can read from your DynamoDB table. Select your function and go to the `Configuration` tab in the middle of the screen. Your function has been assigned a basic 'role' with a few permissions. Click `Add Permissions > Attach policies` in the dropdown. Search for `DynamoDB` and select the `AmazonDynamoDBReadOnlyAccess` access to let your new function interact with DynamoDB. Add this permission. Now you can write your function's code.
+
+You need to add a bit of code in your function to query the database, so open the `index.mjs` file in the Lambda code editor. Add the following code and select `Deploy`:
 
 ```javascript
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   DynamoDBDocumentClient,
-  ScanCommand,
-  GetCommand,
+  QueryCommand
 } from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({});
@@ -163,24 +158,32 @@ const dynamo = DynamoDBDocumentClient.from(client);
 
 const tableName = "Affirmations";
 
+function getRandomNumber(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 export const handler = async (event, context) => {
   let body;
   let statusCode = 200;
   const headers = {
     "Content-Type": "application/json",
   };
+  
+  let params = {
+      ExpressionAttributeValues: {
+        ':id': getRandomNumber(1,40).toString()
+      },
+      KeyConditionExpression: 'Id = :id',
+      TableName : tableName  
+  };  
 
   try {
-    switch (event.routeKey) {
-      case "GET /items":
         body = await dynamo.send(
-          new ScanCommand({ TableName: tableName })
+          new QueryCommand(params)
         );
-        body = body.Items;
-        break;
-      default:
-        throw new Error(`Unsupported route: "${event.routeKey}"`);
-    }
+  body = body.Items;
   } catch (err) {
     statusCode = 400;
     body = err.message;
@@ -195,6 +198,7 @@ export const handler = async (event, context) => {
   };
 };
 ```
+> Note, you are selecting a random affirmation by its Id - so edit the `min` and `max` variables to reflect how many affirmations you entered into your database.
 
 Now, to connect all the pieces, you can use one more service: [API Gateway](https://console.aws.amazon.com/apigateway).
 
@@ -208,41 +212,27 @@ You need to specify that your API can use http `GET` to select elements from the
 
 Test your new API by visiting the URL listed in the API Gateway console. Append `/items` to the end of the URL; you should see your database items listed!
 
-> Note, you might notice that you're grabbing _all_ the data from the database in the initial call. This has a few ramifications. First, if you edit the database, you'll need to rebuild the app and redeploy it to pick up changes. Second, this architecture is best suited for small amounts of data that need to load initially. An alternate architecture might entail an edit to your endpoint to make a call to select only one Id at a time from your database.
+> Note, you might need to tweak CORS in your API Gateway if you find that the data stops refreshing and there are errors in your browser console related to CORS. Check the CORS settings in API Gateway for your API - add `*` in the allowed headers to allow the data to get to your app.
 
 ## A Beautiful Convergence
 
-Now, the last thing to do is to configure your web app to query the database and display a new affirmation each time the screen is refreshed. Normally, Astro will fetch data once, when the component is rendered. To make the affirmation change each time the page is reloaded, you need to make a few edits to allow client-side rendering in Astro.
+The last thing to do is to configure your web app to query the database and display a new affirmation each time the screen is refreshed. Normally, Astro will fetch data once, when the component is rendered. To make the affirmation change each time the page is reloaded, you need to make a few edits to allow client-side rendering in Astro.
 
-Go back to make some edits to your Astro app. In `index.astro`, under the first import statement, add the ability to fetch the endpoint you just created, using the URL from API Gateway:
-
-```javascript
-const response = await fetch('https://your-api-url/items');
-const data = await response.json();
-```
-
-Then, replace the hard-coded affirmation where the child component is included:
+Go back to make some edits to your Astro app. Replace the hard-coded affirmation in the `AffirmationComponent.jsx` file. Add these lines to the top:
 
 ```javascript
-<AffirmationComponent client:load affirmations={data} />
-```
-
-The use of `client:load` lets the app 'hydrate' the component on page load.
-
-Finally, you need to make one more change in the `AffirmationComponent.jsx` file. Under the `export default` statement, import your data:
-
-```javascript
-const num = Math.floor(Math.random() * affirmations.length);
-const [affirmation] = useState(JSON.stringify(affirmations[num].Text));
+const data = await fetch('https://e51pzppdu1.execute-api.us-east-1.amazonaws.com/items').then((response) =>
+    response.json()
+);
 ```
 
 And finally make sure that the `<h3>` tag includes just the one affirmation:
 
 ```javascript
-<h3>{affirmation}</h3>
+return <h3>{JSON.stringify(data[0].Text)}</h3>;
 ```
 
-Your affirmations should change each time you reload the page.
+Your affirmation should change each time you reload the page.
 
 ## Find your Happy Place
 
@@ -262,7 +252,7 @@ Wasn't that calming? By using easy-to-use, beautiful tooling such as Astro.dev, 
 
 ## Tidy Up
 
-If you don't want your app to live on, don't forget to remove any assets you created in this tutorial. You can remove your `Affirmations` database table in the AWS Console by searching for DynamoDB and choosing the table to delete. Do the same in API Gateway for your `http-affirmations-api` asset, and in Lambda, delete the `get-affirmations` function. This will save you from any costs that fail to spark joy. [Marie Kondo](https://en.wikipedia.org/wiki/Marie_Kondo) would be proud of you.
+If you don't want your app to live on, don't forget to remove any assets you created in this tutorial. You can remove your `Affirmations` database table in the AWS Console by searching for DynamoDB and choosing the table to delete. Do the same in API Gateway for your `http-affirmations-api` asset, and in Lambda, delete the `get-affirmations` function. Remove the role that you created in IAM as well. This will save you from any costs that fail to spark joy. [Marie Kondo](https://en.wikipedia.org/wiki/Marie_Kondo) would be proud of you.
 
 ## About the Author
 
