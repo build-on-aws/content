@@ -109,7 +109,7 @@ For example, we dragged API Gateway resource; by clicking on `"Details"` we can 
 
 ![Console APIGateway resources properties](images/console-apigw-resource-properties.png)
 
-For our new SAM application, define following resources and their properties. Make sure you click on save every time resource properties are modified:  
+For our new SAM application, define the following resources and their properties. Make sure you click on save every time resource properties are modified:  
 
 - Resource:  **`API Gateway`**
   - Properties:  
@@ -302,7 +302,7 @@ Our design should look like this:
 
 ## Add Nodejs code
 
-In the local folder, Application Composer would have created following folder structure and files:
+In the local folder, Application Composer would have created the following folder structure and files:
 
 ![Local folder structure](images/folder-structure.png)
 
