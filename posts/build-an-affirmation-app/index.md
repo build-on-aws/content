@@ -15,7 +15,7 @@ date: 2023-05-26
 
 ![Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and DynamoDB](images/banner.png)
 
-May is Mental Health month, and, when you think about it, coding up a very simple web app can feel like a mindfulness exercise, if done without pressure in a calm environment. Why not take a little time this month to build yourself a mindfulness app - an app that can deliver a quick affirmation to you or anyone lucky enough to come across it on the internet? Using a lightweight web framework called [Astro](https://astro.build/), plus a Lambda endpoint that can query a DynamoDB database, you can code up a friendly affirmation app in no time at all. Let's get started!
+May is Mental Health Month, and when you think about it, coding up a very simple web app can feel like a mindfulness exercise - if done without pressure in a calm environment. So why not take a little time this month to build yourself a mindfulness app that can deliver a quick affirmation to you or anyone lucky enough to come across it on the internet? Using a lightweight web framework called [Astro](https://astro.build/), plus [a Lambda endpoint](https://docs.aws.amazon.com/lambda/index.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq) that can query [a DynamoDB database](https://docs.aws.amazon.com/dynamodb/index.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq), you can code up a friendly affirmation app in no time at all. Let's get started!
 
 By the end of this tutorial, you will have built a web app that you can host on GitHub pages. Refresh the page every time you need a little serotonin boost.
 
@@ -25,15 +25,15 @@ By the end of this tutorial, you will have built a web app that you can host on 
 
 ## Set Your Intention
 
-Let's think about the architecture you're going to use. First, you will build a web site connected to Lambda and DynamoDB via API Gateway, something like this:
+Let's think about the architecture you're going to use. First, you will build a web site connected to Lambda and DynamoDB via [API Gateway](https://docs.aws.amazon.com/apigateway/index.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq), something like this:
 
 ![A diagram of the architecture](images/diagram.png)
 
 Let's get set up to start building your app. We'll be using an interesting new framework called [Astro](https://astro.build/). Astro is part of a grouping of lightweight, highly-performant 'meta frameworks' in the JavaScript world, a framework that can pair with or otherwise embed other JavaScript frameworks. Take a look at what you can do with Astro [in their excellent AI-infused docs](https://houston.astro.build/).
 
-> Before starting, make sure your local computer is set up to use `npm`, `git` and `node`.
+> Before starting, make sure your local computer is set up to use `npm`, `git`, and `node`.
 
-You can start working anywhere on your local computer by using Astro's [auto-installer](https://docs.astro.build/en/install/auto/). Run the Astro setup wizard by typing `npm create astro@latest` in your terminal or command line. A wizard will launch and help you create a folder for your project. Ask the wizard to `Include sample files` and be sure to install dependencies. You don't need to use TypeScript in this app, so you can say 'no' to this. Initialize your new Astro folder as a git repository. The Terminal will display a message that you've successfully created your app.
+You can start working anywhere on your local computer by using Astro's [auto-installer](https://docs.astro.build/en/install/auto/). Run the Astro setup wizard by typing `npm create astro@latest` in your terminal or command line. A wizard will launch and help you create a folder for your project. Ask the wizard to `Include sample files` and be sure to install dependencies. You don't need to use TypeScript in this app, so you can say 'no' to this. Initialize your new Astro folder as a git repository. The terminal will display a message that you've successfully created your app.
 
 ![A view of your terminal on a Mac](images/terminal.png)
 
@@ -41,7 +41,7 @@ Use `cd` to enter the new folder Astro created (you can use `ls -al` to view all
 
 ![A freshly-scaffolded Astro app](images/astro.png)
 
-Use your favorite code editor to explore the folder that was just scaffolded. I prefer Visual Studio Code:
+Use your favorite code editor to explore the folder that was just scaffolded. I prefer Visual Studio Code.
 
 > tip: type `code .` in your terminal to open the folder in VS Code. If you were already using the VS Code terminal to run the previous commands, click on the `+` to create another terminal instance as you want to leave the app running in the background.
 
@@ -105,9 +105,9 @@ You'll see that an error appears in your local server, as the file called `Affir
 
 Astro is great for generating static web pages such as blogs, but for this app we need it to do a little bit more. It needs to have the ability to pull data from an endpoint and refresh an element of the page. So we need to add a framework on top of Astro. Let's use another lightweight option, Preact, to allow this site to become dynamic in production.
 
-> [Preact](https://preactjs.com/) is a lightweight version of React, "a fast 3kB alternative to React with the same modern API".
+> [Preact](https://preactjs.com/) is a lightweight version of React, "a fast 3kB alternative to React with the same modern API."
 
-You can add [frameworks](https://docs.astro.build/en/guides/integrations-guide/) progressively to an Astro app by using the Astro CLI. Type in `npx astro add preact` in the terminal of your app. Allow Astro to configure your app to suit Preact's requirements (a configuration change is needed). You will be asked a number of time to accept changes to files, so please answer "yes" to all of them.
+You can add [frameworks](https://docs.astro.build/en/guides/integrations-guide/) progressively to an Astro app by using the Astro CLI. Type in `npx astro add preact` in the terminal of your app. Allow Astro to configure your app to suit Preact's requirements (a configuration change is needed). You will be asked a number of times to accept changes to files, so please answer "yes" to all of them.
 
 > Tip: use the built-in terminal in VS Code to keep your environment neat by selecting terminal > new terminal.
 
@@ -204,7 +204,7 @@ Now, to connect all the pieces, you can use one more service: [API Gateway](http
 
 ## Make the Connection
 
-In the AWS console, navigate over to [https://console.aws.amazon.com/apigateway](https://console.aws.amazon.com/apigateway). Choose `Create API` > `HTTP API` > `Build`. Name your new API `http-affirmations-api`. Click the `Next` button and create an integration with the Lambda function that you just created. Then, add one route, which is the pathway that the API will use to perform various functions between the Lambda function and your database.
+In the AWS console, navigate over to [https://console.aws.amazon.com/apigateway](https://console.aws.amazon.com/apigateway). Choose `Create API` > `HTTP API` > `Build`. Name your new API `http-affirmations-api`. Click the `Next` button and create an integration with the Lambda function that you just created. Then add one route, which is the pathway that the API will use to perform various functions between the Lambda function and your database.
 
 You need to specify that your API can use http `GET` to select elements from the database. Add `/items` as the route's name, then `Next` and `Create`:
 
