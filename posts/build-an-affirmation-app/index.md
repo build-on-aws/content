@@ -10,7 +10,7 @@ tags:
     - serverless
 authorGithubAlias: jlooper
 authorName: Jen Looper
-date: 2023-05-26
+date: 2023-05-30
 ---
 
 ![Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and DynamoDB](images/banner.png)
@@ -135,7 +135,7 @@ Now it's time to build up a database with some sample affirmations. If you are n
 
 It will take a few seconds to create your table, and once done, click on `Affirmations` to view it. Let's add a few helpful phrases to our table by navigating to `Tables` -> `Explore Items` in the left-hand navigation bar, and confirming that the `Affirmations` table is selected. Now we can add items by using the `Create Item` button. Enter a numeric number next to `Id`, and then click on `Add new attribute`, enter `Text` under the `Attribute name` column, and then the affirmation as text in the `Value` column. Each item should have an `Id` and a `Text`, like this:
 
-![A sample DynamoDB view](images/dynamodb.png).
+![A sample DynamoDB view](images/dynamodb.png)
 
 > Here's a helpful [list of nice affirmations](https://github.com/annthurium/affirmations/blob/master/affirmations.js).
 
