@@ -248,7 +248,7 @@ Finally, navigate to `Settings` > `Pages` to ensure that your app has GitHub Pag
 
 ## Breathe!
 
-Wasn't that calming? By using easy-to-use, beautiful tooling such as Astro.dev, Lambda, DynamoDB, API Gateway, and hassle-free web hosting, you built a lovely application that looks good and helps you feel good, too. Don't forget to hydrate, listen to soothing music, touch grass, and enjoy May!
+Wasn't that calming? By using easy-to-use, beautiful tooling such as Astro, Lambda, DynamoDB, API Gateway, and hassle-free web hosting, you built a lovely application that looks good and helps you feel good, too. Don't forget to hydrate, listen to soothing music, touch grass, and enjoy May!
 
 ## Tidy Up
 
