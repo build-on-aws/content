@@ -1,15 +1,21 @@
 ---
 title: "Using Flux to Implement GitOps on AWS"
-description: "GitOps is an effective way to achieve continuous deployment based on Kuberentes clusters while meeting enterprise-level requirements such as security, separation of privileges, auditability, and agility. These are the best practices for GitOps based on AWS EKS."
+description: "GitOps is an effective way to achieve continuous deployment based on Kubernetes clusters while meeting enterprise-level requirements such as security, separation of privileges, auditability, and agility. These are the best practices for GitOps based on AWS EKS."
 tags:
   - devops
   - gitops
   - fluxcd
-  - aws-eks
-  - tutorial
-authorGithubAlias: betty714, tyyzqmf
-authorName: Betty Zheng, Mingfei Que
-date: 2023-04-18
+  - eks
+  - kubernetes
+  - tutorials
+  - aws
+showInHomeFeed: true
+authorGithubAlias: betty714
+authorName: Betty Zheng
+additionalAuthors: 
+  - authorGithubAlias: tyyzqmf
+    authorName: Mingfei Que
+date: 2023-05-19
 ---
 
 While many enterprise companies have adopted Kubernetes in their production, they are often confused about how to achieve continuous deployment, high security, permission separation, and auditing - all while ensuring business agility with multiple Kubernetes clusters running at different stages simultaneously. Using GitOps can enable such continuous deployment based on Kubernetes clusters, while meeting enterprise-level requirements such as security and permission separation.
@@ -27,7 +33,7 @@ But before we get into the best practices and the tutorial itself, let's synchro
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites    | [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-flux-to-implement-gitops-on-aws) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-04-28 <as mentioned above>                             |
+| ⏰ Last Updated     | 2023-05-19                           |
 
 | ToC |
 |-----|
@@ -41,7 +47,7 @@ The core idea of GitOps is to have a Git repository that always contains declara
 GitOps has the following features compared to traditional continuous deployment.
 
 | Traditional CD                                               | **GitOps**                                             |
-| :----------------------------------------------------------- | ------------------------------------------------------ |
+| ----------------------------------------------------------- | ------------------------------------------------------ |
 | Triggered by push events, such as code commits, timed tasks, manual, etc. | System constantly polls for changes                    |
 | Deployment of changes only                                   | Declare the entire system for any deployment          |
 | System might drift between deployments                       | The system will correct any drift                      |
@@ -51,9 +57,9 @@ GitOps has the following features compared to traditional continuous deployment.
 
 Git is the only actual source of the required state for the system. It supports repeatable and automated deployment, cluster management, and monitoring. Developers reuse Git workflows that are well-established in the enterprise for building, testing, scanning, and other continuous integration steps. Once the last state of the system is declared in the main Git repository branch, the GitOps tool chain is used to verify deployment, observe alerts, and fix operations. Based on the core foundational principles of GitOps, we believe GitOps is the best way to continuously deploy Kubernetes clusters. The process is like below:
 
-![A visualization of the GitOps process](./images/why%20is%20GitOps.jpg))
+![A visualization of the GitOps process](./images/why%20is%20GitOps.jpg)
 
-## Amazon EKS-based Best Practices for GitOps 
+## Amazon EKS-based Best Practices for GitOps
 
 The overall CI/CD pipeline, according to best practices, is shown in the figure below.
 
@@ -87,7 +93,7 @@ In the cloud, coding engineers can use the [AWS Cloud Development Kit (CDK)](htt
 
 ### 1.1 Create a Project with CDK CLI
 
-Create a TypeScript CDK project with cdk init, which will create the folder structure and install the modules that TypeScript CDK project needs.
+Create a TypeScript CDK project with `cdk init`, which will create the folder structure and install the modules that TypeScript CDK project needs.
 
 ```shell
 cdk init --language typescript 
@@ -97,17 +103,19 @@ cdk init --language typescript
 
 **[EKS Blueprints](https://aws-quickstart.github.io/cdk-eks-blueprints/)** helps you compose complete EKS clusters that are fully bootstrapped with the operational software that is needed to deploy and operate workloads. With EKS Blueprints, you describe the configuration for the desired state of your EKS environment, such as the control plane, worker nodes, and Kubernetes add-ons, as an IaC blueprint. Once a blueprint is configured, you can use it to stamp out consistent environments across multiple AWS accounts and Regions using continuous deployment automation.
 
-You can use EKS Blueprints to easily bootstrap an EKS cluster with Amazon EKS add-ons as well as a wide range of popular open-source add-ons, including Prometheus, Karpenter, Nginx, Traefik, AWS Load Balancer Controller, Fluent Bit, Keda, ArgoCD, and more. EKS Blueprints also helps you implement relevant security controls needed to operate workloads from multiple teams in the same cluster.
+You can use EKS Blueprints to easily bootstrap an EKS cluster with Amazon EKS add-ons as well as a wide range of popular open-source add-ons, including [Prometheus](https://prometheus.io/), [Karpenter](https://karpenter.sh/), [Nginx](https://www.nginx.com/), [Traefik](https://traefik.io/traefik/), AWS Load Balancer Controller, [Fluent Bit](https://fluentbit.io/), [Keda](https://keda.sh/), [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), and more. EKS Blueprints also helps you implement relevant security controls needed to operate workloads from multiple teams in the same cluster.
 
-Run the following codes to install project dependencies.
+Create the `quickstart` directory, and then run the following codes to install project dependencies.
 
 ```shell
+mkdir quickstart
+cd quickstart
 npm install @aws-quickstart/eks-blueprints
 ```
 
-Open `lib/quickstart-stack.ts` and write the EKS Blueprints codes.
+Open `lib/quickstart-stack.ts` and add the following EKS Blueprints code.
 
-```ts
+```typescript
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as blueprints from '@aws-quickstart/eks-blueprints';
@@ -141,13 +149,12 @@ export class QuickstartStack extends cdk.Stack {
       .teams();
   }
 }
-
 ```
 
 In the previous step, we created an EKS cluster, defined its NodeGroup, and added the AwsLoadBalancerController plugin.
 
 > **Note**
-> 
+>
 > We suggest to customize the cluster parameters via clusterProvider and add plugins through the built-in addOns in EKS Blueprints.
 
 ![An automated pipeline for deploying and updating EKS infrastructure to facilitate cross-region deployment for development, testing, and production.](./images/CodePipelineStack.png)
@@ -157,12 +164,13 @@ While deploying a stack with a CDK command-line tool is convenient, we recommend
 CodePipelineStack is a structure for continuous delivery of AWS CDK applications. When the source code of an AWS CDK application is uploaded to Git, the stack automatically builds, tests, and deploys new versions. If any application stage or stack is added, it will automatically reconfigure itself to deploy these new stages or stacks.
 
 > **Note**
-> 
+>
 > We recommend defining infrastructure with CDK code and use pipelines to manage changes across multiple clusters that is also the best practice of GitOps.
 
 Then, we execute the `cdk deploy` command to deploy the stack.
 
-Finally, we used a command to verify the application load banlancer has been installed successfully.
+Finally, we used a command to verify the application load balancer has been installed successfully.
+
 ```shell
 $ kubectl get pod -n kube-system
 NAME                                           READY   STATUS    RESTARTS   AGE
@@ -176,10 +184,9 @@ kube-proxy-wr5jn                               1/1     Running   0          99m
 
 ### 1.3 Summary
 
-In this section, we introduced the concept of IaC, created a custom EKS cluster with CDK while installing the AWS Application Load Balancer plugin. It provids a prerequisite for accessing the web pages of microservices in the future. The following is a summary of this section:
+In this section, we introduced the concept of IaC, created a custom EKS cluster with CDK while installing the AWS Application Load Balancer plugin. It provides a prerequisite for accessing the web pages of microservices in the future. The following is a summary of this section:
 
 - Initialized a CDK project using cdk init.
-
 - Defined an EKS cluster quickly with EKS Blueprint while adding the AWS Application Load Balancer plugin.
 
 ## 2．Deploy Flux CD on Amazon EKS Cluster
@@ -190,14 +197,17 @@ So let's install Flux.
 ### 2.1 Flux CLI Installation
 
 The Flux CLI is a binary executable file for all platforms, which can be downloaded from the GitHub release page.
+
 ```shell
 curl -s https://fluxcd.io/install.sh | sudo bash
 ```
 
 ### 2.2 Prepare AWS CodeCommit Credentials
+
 We should create a user and use CodeCommit as the Git source,as well as AWS CodeCommit required access by HTTPS Git credentials
 
 ### 2.3 Install Flux on the Cluster
+
 Clone the prepared GitOps codes. The project structure is as follows:
 
 ```shell
@@ -211,45 +221,45 @@ Clone the prepared GitOps codes. The project structure is as follows:
 │   ├── base            // Infrastructure Infrastructure layer
 │   └── overlays        // Infrastructure Overlays layer
 └── README.md
-
 ```
 
 > **Note**
-> 
->  We recommend to dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays).
+>
+> We recommend to dividing Flux-related resources into the infrastructure layer, cluster management layer, and application layer. We support multi-cluster deployment with Kustomization (base, overlays).
 
 Install Flux on the Kubernetes cluster and configure it to manage itself from the Git repository with flux bootstrap. If there are Flux components on the cluster, the bootstrapping command will perform an upgrade as needed. The bootstrapper is idempotent, and the command can be safely run any number of times. Replace `username` and `password` in the command below with the HTTPS Git credentials for AWS CodeCommit.
 
 ```shell
-flux bootstrap git \
-  --url=https://git-codecommit.us-west-2.amazonaws.com/v1/repos/gitops \
-  --username=__replace_with_your_Git_credential_username__ \
-  --password=__replace_with_your_Git_credential_password__ \
-  --token-auth=true \
-  --path="./clusters/dev-cluster" \
+flux bootstrap git \ 
+  --url=https://git-codecommit.us-west-2.amazonaws.com/v1/repos/gitops \ 
+  --username=__replace_with_your_Git_credential_username__ \ 
+  --password=__replace_with_your_Git_credential_password__ \ 
+  --token-auth=true \ 
+  --path="./clusters/dev-cluster" \ 
   --components-extra=image-reflector-controller,image-automation-controller
-
 ```
 
-> **Warning** 
+> **Warning**
 > 
 > Enable the image automatic update feature, add the `--components-extra=image-reflector-controller,image-automation-controller` parameter when bootstrapping Flux. Otherwise, Flux will not install **image-reflector-controller** and **image-automation-controller** by default, and configurations such as automatic image updates will not take effect.
 
 Use **git pull** to check the updates pushed by the bootstrapper. Three new files will appear in the clusters/dev-cluster/flux-system directory of the Git repository:
 
-- **gotk-components.yaml**: defined the six controllers of Flux: helm, kustomize, source, notification, image-automation, and image-reflector.
+- `gotk-components.yaml`: defined the six controllers of Flux: helm, Kustomize, source, notification, image-automation, and image-reflector.
 
-- **gotk-sync.yaml**: the Git source of Flux, the Source Controller in the cluster monitoring code changes in the GitOps repository and making the corresponding changes.
+- `gotk-sync.yaml`: the Git source of Flux, the Source Controller in the cluster monitoring code changes in the GitOps repository and making the corresponding changes.
 
-- **kustomization.yaml**: multi-cluster configuration.
+- `kustomization.yaml`: multi-cluster configuration.
 
 Check if Flux is installed successfully with **flux get kustomizations --watch**. The output will look similar to:
+
 ```shell
 $ flux get kustomizations --watch
 NAME            REVISION        SUSPENDED       READY   MESSAGE                          
 flux-system     master/83b7e66  False           True    Applied revision: master/83b7e66
 infrastructure  master/83b7e66  False           True    Applied revision: master/83b7e66
 ```
+
 Check the components deployed by flux-system with **kubectl -n flux-system get pod,services**. The output will be as follows:
 
 ```shell
@@ -268,9 +278,9 @@ service/source-controller         ClusterIP   172.20.133.44    <none>        80/
 service/webhook-receiver          ClusterIP   172.20.196.178   <none>        80/TCP    11m
 ```
 
-### 2.4 Summary 
+### 2.4 Summary
 
-In this section, we used the flux bootstrap command to install Flux on the Kubernetes cluster and introduced the three most important configuration files: **gotk-components.yaml**, **gotk-sync.yaml**, and **kustomization.yaml**. The following is a summary of this section:
+In this section, we used the flux bootstrap command to install Flux on the Kubernetes cluster and introduced the three most important configuration files: `gotk-components.yaml`, `gotk-sync.yaml`, and `kustomization.yaml`. The following is a summary of this section:
 
 - Flux client installation
 
@@ -282,11 +292,11 @@ In this section, we used the flux bootstrap command to install Flux on the Kuber
 
 For a GitOps CI/CD pipeline, configuration modifications and status changes to EKS clusters and workloads running on it stem from the code changes in Git (triggered by git push or pull requests. GitOps recommends pull request). The traditional CI/CD pipeline works by the CI engine triggering kubectl create/apply or helm install/upgrade to deploy the cluster. Therefore, GitOps builds a more efficient and concise CI/CD pipeline.
 
-
 > **Note**
-> 
+>
 > Flux regularly pulls the configurations and deployment files from the repository, and compares the current application load status of the cluster with the expected state described in the files. When differences are detected, Flux will automatically synchronize the differences to the EKS cluster, ensuring that workloads always run as expected.
-> 
+>
+
 We will demonstrate a specific application - "sock shop" - and practical exercises to show how it achieves continuous integration and delivery on a GitOps CI/CD pipeline.
 
 ### 3.1 About Sock Shop
@@ -294,13 +304,9 @@ We will demonstrate a specific application - "sock shop" - and practical exercis
 We will use the user-facing section of the **[sock shop](https://github.com/microservices-demo/microservices-demo)** online store as an sample. It is built with Spring Boot, Go Kit, and Node - and it is packaged in Docker containers. As a "Microservice Standard Demo", it will show:
 
 - Best practices for microservices deployment (including examples of mistakes)
-
-- Capabilities for Cross-platform deployment 
-
+- Capabilities for Cross-platform deployment
 - The advantages of continuous integration/deployment
-
 - The complementary nature of DevOps and microservices
-
 - A "real" testable application for various orchestration platforms
 
 The **sock shop** project consists of 8 front-end and back-end microservices, where the front-end is a web page created by NodeJS. the project's name is: **front-end** in here. And it accesses several back-end services through http requests,which are order, payment, user management, product management and shopping cart, etc. The data of the back-end services are stored in MongoDB and MySQL
@@ -311,7 +317,7 @@ The reference architecture is as follows:
 
 ### 3.2 About Kustomize
 
-In addition to setting up the GitOps workflow, we also need to understand how to configure Kubernetes. Traditional resource inventory-based management (yaml) becomes increasingly difficult to maintain as system complexity and environment complexity increase. Complex business use cases, multiple environments (development, testing, pre-release, production), and a large number of yaml resource inventories need to be maintained and managed. Although Helm can solve some pain points, such as unified management of scattered resource files, application distribution, upgrade, rollback, etc., Helm makes dealing with small differences between environments more difficult. It also requires mastering complex DSL (template syntax) syntax, which is a high  barrier to start. Therefore, the declarative configuration management tool Kustomize was born. Kustomize helps teams manage large amounts of Kubernetes YAML resources across different environments and teams. It helps teams manage small differences across environments in a lightweight way, making resource configurations reusable, reducing copy and change effort, and also greatly reducing configuration errors. The entire application configuration process requires no additional learning of template syntax.
+In addition to setting up the GitOps workflow, we also need to understand how to configure Kubernetes. Traditional resource inventory-based management (yaml) becomes increasingly difficult to maintain as system complexity and environment complexity increase. Complex business use cases, multiple environments (development, testing, pre-release, production), and a large number of yaml resource inventories need to be maintained and managed. Although Helm can solve some pain points, such as unified management of scattered resource files, application distribution, upgrade, rollback, etc., Helm makes dealing with small differences between environments more difficult. It also requires mastering complex DSL (template syntax) syntax, which is a high  barrier to start. Therefore, the declarative configuration management tool [Kustomize](https://kustomize.io/) was born. Kustomize helps teams manage large amounts of Kubernetes YAML resources across different environments and teams. It helps teams manage small differences across environments in a lightweight way, making resource configurations reusable, reducing copy and change effort, and also greatly reducing configuration errors. The entire application configuration process requires no additional learning of template syntax.
 
 **Kustomize solves the above problems in the following ways:**
 
@@ -332,33 +338,36 @@ With the understanding of the configuration management tool Kustomize, we use Ku
 We created two directories in the microservice project: the base directory to store the complete resource configuration (YAML) files, and the overlays directory to store the different environment or cluster's differential configuration.
 
 For example, in this case, the complete configuration file for the microservice is complete-demo.yaml, and we copy it to the base directory.
+
 ```shell
 cp deploy/kubernetes/complete-demo.yaml deploy/kubernetes/base/complete-demo.yaml
 ```
 
-Then we reference the file through kustomization.yaml:
-```
+Then we reference the file through `kustomization.yaml`:
+
+```yaml
 # deploy/kubernetes/base/kustomization.yaml
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./complete-demo.yaml
-
 ```
 
 For the development environment, if there are differential requirements, such as changing the number of service ports and replica, just configure the differential settings in the overlays/development/kustomization.yaml file, without copying and modifying the existing complete-demo.yaml.
 
 > **Note**
-> 
-> Flux will automatically merge base and overlays configurations according to the environment during service deployment. We recommend defining differential configurations across multiple environments, such as development, testing, and production. We do not favor the strategy of muti-repository and muti-branch strategy here, preferring instead to use different paths in a git repository to manage clusters in multiple environments. It helps simplify the process of code maintenance and merging, and which is also a Flux best practice.
-
+>
+> Flux will automatically merge base and overlays configurations according to the environment during service deployment. We recommend defining differential configurations across multiple environments, such as development, testing, and production. We do not favor the strategy of multi-repository and multi-branch strategy here, preferring instead to use different paths in a git repository to manage clusters in multiple environments. It helps simplify the process of code maintenance and merging, and which is also a Flux best practice.
 
 ### 3.4 Deploy Microservices with GitOps Workflow
+
 After completing the multi-cluster support for microservices, we need Flux to be aware that microservices’ configuration has been changed, so we register the CodeCommit address of the microservices repository (microservices-repo) in the Flux repository (flux-repo).
 
-#### 3.4.1 Adding the Microservices Repository Address 
+#### 3.4.1 Adding the Microservices Repository Address
+
 We return to the Flux repository, under the application layer/apps directory:
+
 ```shell
 .
 ├── base
@@ -375,7 +384,8 @@ We return to the Flux repository, under the application layer/apps directory:
             └── kustomization.yaml
 
 ```
-Open the tenant.yaml file under apps/base/sock-shop/, and replace MICRO_SERVICES_REPO with the microservices address: https://git-codecommit.xxx.amazonaws.com/v1/repos/microservices-repo.
+
+Open the tenant.yaml file under apps/base/sock-shop/, and replace MICRO_SERVICES_REPO with the microservices address: `https://git-codecommit.xxx.amazonaws.com/v1/repos/microservices-repo`.
 
 ```shell
 apiVersion: source.toolkit.fluxcd.io/v1beta1
@@ -391,7 +401,6 @@ spec:
   secretRef:
     name: microservices-basic-access-auth
 ......
-
 ```
 
 #### 3.4.2 Adding CodeCommit Credentials
@@ -418,7 +427,7 @@ data:
 
 With the microservice's Git address added in the Flux configuration repository, Flux will automatically scan for its configuration changes. Once codes are committed, Flux will check if there are any microservices deployed in the cluster and if they match the definition of the Git repository, otherwise, Flux automatically deploys the microservices in the cluster.
 
-After committing the code, execute the command "flux get kustomizations -watch" and wait for Flux to update. When the READY status of all kustomizations is True, the deployment is complete.
+After committing the code, execute the command `flux get kustomizations -watch` and wait for Flux to update. When the READY status of all kustomizations is True, the deployment is complete.
 
 Query the **pods and services** in the sock-shop namespace, shown as below:
 
@@ -455,7 +464,6 @@ service/session-db     ClusterIP      172.20.37.111    <none>                   
 service/shipping       ClusterIP      172.20.43.252    <none>                                                                          80/TCP              5m29s
 service/user           ClusterIP      172.20.220.174   <none>                                                                          80/TCP              5m29s
 service/user-db        ClusterIP      172.20.70.57     <none>                                                                          27017/TCP           5m29s
-
 ```
 
 Access the DNS name of AWS Load Balancer.
@@ -467,9 +475,7 @@ Access the DNS name of AWS Load Balancer.
 In this section, we introduced a microservice business application, the Sock Shop online store, and completed its multi-cluster configuration. We also built a standard GitOps workflow based on Flux, which automatically synchronizes the target cluster with the changes in the configuration files to complete the microservice deployment in the EKS cluster. Meanwhile, we introduced a practical K8s configuration management tool-Kustomize, and how to manage the resource files of the application. Here is summary of this section:
 
 - Sock Shop Introduction
-
 - Learn a configuration management tool- Kustomize (base, overlays) and how to modify the microservice multi-cluster deployment
-
 - Build a GitOps workflow and deploy microservices
 
 ## 4．Image-Based Automated Deployment with GitOps Workflow
@@ -478,7 +484,8 @@ We chose the front-end microservice of Sock Shop as an example to demonstrate th
 
 ### 4.1 Defining the CodePipeline CI
 
-**Front-end** is a pure front-end service of Node.js to support Docker image packaging(refer to the sock shop architect in the 3.1 charpter for details). Add a buildspec.yml file to the **front-end** project source code to define the CI process executed in the CodePipeline:
+**Front-end** is a pure front-end service of Node.js to support Docker image packaging(refer to the sock shop architect in the [3.1 chapter](#31-about-sock-shop) for details). Add a `buildspec.yml` file to the **front-end** project source code to define the CI process executed in the CodePipeline:
+
 ```yaml
 version: 0.2
 
@@ -506,7 +513,6 @@ phases:
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-
 ```
 
 This CI process will automatically build an image and upload it to the ECR repository `weaveworksdemos/front-end` if any front-end code changed. The format of the image tag is **[branch]-[commit]-[build number]**.
@@ -518,9 +524,7 @@ When you're working in an agile environment with continuous integration, like du
 To achieve image-based automatic updating, we need to take the following steps:
 
 - Register the image repository of the front-end microservice to allow Flux to periodically scan the ECR image repository correspondent to the front-end project.
-
 - Configure the credentials for accessing the image repository. Flux needs the credentials to access ECR image repository to read the image information.
-
 - Set the image updating policy. In most cases, we do not want all the image versions changes to trigger CD every time. Instead, we only want the specified branch (main) code changes to trigger CD. A special update policy is needed to fulfill this need.
 
 Next, we will complete the above operations one by one.
@@ -528,6 +532,7 @@ Next, we will complete the above operations one by one.
 #### 4.2.1 Adding an image policy to the front-end of Git repository
 
 In the microservices-repo project, we will use Kustomization overlays in the DEV environment to replace the front-end microservice with a customized and updated version. Modify the file deploy/kubernetes/overlays/development/kustomization.yaml. (Note: replace `ACCOUNT_ID` with your own ACCOUNT_ID).
+
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
@@ -543,9 +548,10 @@ images:
 > **Note**
 > Warning: The annotation `$imagepolicy`, which is for locating, is mandatory. If Flux discovers the image version is changed, it will locate and modify the file content according to this annotation.
 
-#### 4.2.2 Registing the Front-end of a Microservice Under Flux-repo 
+#### 4.2.2 Registering the Front-end of a Microservice Under Flux-repo
 
-In the project flux-repo, create a new file apps/overlays/development/sock-shop/registry.yaml, and replace ACCOUNT_ID with your own ACCOUNT_ID.
+In the project flux-repo, create a new file `apps/overlays/development/sock-shop/registry.yaml`, and replace `ACCOUNT_ID` with your own `ACCOUNT_ID`.
+
 ```yaml
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
@@ -556,15 +562,13 @@ metadata:
 spec:
   image: __ACCOUNT_ID__.dkr.ecr.xxxx.amazonaws.com/weaveworksdemos/front-end
   interval: 1m0s
-
 ```
 
-#### 4.2.3 Configuring the access credentials for Amazon ECR 
+#### 4.2.3 Configuring the access credentials for Amazon ECR
 
 There are two methods available for Amazon ECR credentials in Flux.
 
 - Automatic authentication mechanism (image-reflector-controller retrieves credentials by itself, only applicable to: Amazon ECR, GCP GCR, Azure ACR)
-
 - Regularly refreshing credentials (stored in the cluster through Secret) with CronJob
 
 ```yaml
@@ -584,7 +588,6 @@ patches:
       kind: Deployment
       name: image-reflector-controller
       namespace: flux-system
-
 ```
 
 > **Note**
@@ -593,7 +596,8 @@ patches:
 
 #### 4.2.4 Setting image update policy
 
-Add file `gitops/apps/overlays/development/sock-shop/policy.yaml`. The following rules match image versions such as master-d480788-1, master-d480788-2, and master-d480788-3.
+Add file `gitops/apps/overlays/development/sock-shop/policy.yaml`. The following rules match image versions such as `master-d480788-1`, `master-d480788-2`, and `master-d480788-3`.
+
 ```yaml
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
@@ -613,6 +617,7 @@ spec:
 ```
 
 Add file `gitops/apps/overlays/development/sock-shop/image-automation.yaml`. Flux's automatic image configuration will specify a Git repository for the application configuration, including branch, path, and other information.
+
 ```yaml
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
@@ -642,7 +647,7 @@ spec:
 
 ```
 
-### 4.3 Release and Verify 
+### 4.3 Release and Verify
 
 We verify the entire process of automatic image updates by modifying the front-end source code.
 
@@ -652,7 +657,7 @@ Change the footer of the front-end page, and modify the file: front-end/public/f
 
 ![The footer of the front-end page](./images/EditFrontend.png)
 
-#### 4.3.2 Check CodePipeline 
+#### 4.3.2 Check CodePipeline
 
 Code changes to the front-end will automatically get CodePipeline to run.
 
@@ -660,13 +665,14 @@ Code changes to the front-end will automatically get CodePipeline to run.
 
 #### 4.3.3 ECR Image Version Changing Confirmation
 
-When the CodePipeline is completed, log in the Amazon ECR console to check the weaveworksdemos/front-end image version:
+When the CodePipeline is completed, log in the Amazon ECR console to check the `weaveworksdemos/front-end` image version:
 
 ![Log in the Amazon ECR console to check the weaveworksdemos/front-end image version](./images/ECRImage.png)
 
-#### 4.3.4 Verify Flux Image Information 
+#### 4.3.4 Verify Flux Image Information
 
 Through Flux CLI, check if the ImageRepository and ImagePolicy successfully retrieved the latest version.
+
 ```shell
 $ flux get images all --all-namespaces
 NAMESPACE       NAME                                    LAST SCAN               SUSPENDED       READY   MESSAGE                        
@@ -677,9 +683,9 @@ sock-shop       imagepolicy/sock-shop-front-end 267314483271.dkr.ecr.us-west-2.a
 
 NAMESPACE       NAME                                            LAST RUN                SUSPENDED       READY   MESSAGE                                                      
 sock-shop       imageupdateautomation/sock-shop-front-end       2022-09-18T14:43:51Z    False           True    no updates made; last commit 1ff6d91 at 2022-09-18T14:34:40Z
-
 ```
-#### 4.3.5 Microservice Source Code Automatically Updates 
+
+#### 4.3.5 Microservice Source Code Automatically Updates
 
 Flux automatically updated the front-end image version. The latest commit was made by fluxcdbot, and the image tag was successfully modified to the latest version: master-1f49071-24.
 
@@ -688,17 +694,18 @@ Flux automatically updated the front-end image version. The latest commit was ma
 #### 4.3.6 Verify Pod Image Version
 
 Verify the pod name with kubectl get pod -n sock-shop \| grep front-end. Check the pod details with kubectl describe pod/front-end-759476784b-9r2rt -n sock-shop \| grep Image: to confirm that the image version is updated. It shows as follows:
+
 ```shell
 $ kubectl describe pod/front-end-759476784b-9r2rt -n sock-shop | grep Image:
     Image:          267314483271.dkr.ecr.us-west-2.amazonaws.com/weaveworksdemos/front-end:master-1f49071-24
 
 ```
 
-#### 4.3.7 Confirm the Static Page has been Up-to-Date.
+#### 4.3.7 Confirm the Static Page has been Up-to-Date
 
 ![The static page is now showing itself to be up to date](./images/ConfirmStaticPage.png)
 
-### 4.5 Summary
+### 4.4 Summary
 
 In this section, we have detailed the entire process of automatic deployment based on images. To summarize it, we use Flux's continuous monitoring capability for image repositories. When a change in image version is detected, it automatically modifies the image configuration in the Git repository, and completes automatic deployment by connecting to the standard GitOps workflow in the previous section. To summarize this section:
 
@@ -724,8 +731,6 @@ We will explore each of these issues in subsequent blogs.
 
 - [GitOps: Cloud-native Continuous Deployment](https://www.gitops.tech/)
 - [GitOps on Kubernetes: Deciding Between Argo CD and Flux](https://thenewstack.io/gitops-on-kubernetes-deciding-between-argo-cd-and-flux/)
-- [[Tech Blog\] Bootstrapping clusters with EKS Blueprints ](https://aws.amazon.com/cn/blogs/containers/bootstrapping-clusters-with-eks-blueprints/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-flux-to-implement-gitops-on-aws)
-- [Amazon EKS Blueprints for CDK ](https://github.com/aws-quickstart/cdk-eks-blueprints)
+- [AWS Blog: Bootstrapping clusters with EKS Blueprints](https://aws.amazon.com/cn/blogs/containers/bootstrapping-clusters-with-eks-blueprints/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-flux-to-implement-gitops-on-aws)
+- [Amazon EKS Blueprints for CDK](https://github.com/aws-quickstart/cdk-eks-blueprints)
 - [Microservices Demo](https://github.com/microservices-demo/microservices-demo)
-
-  
