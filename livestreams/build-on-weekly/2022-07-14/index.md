@@ -1,5 +1,6 @@
 ---
 title: "S01E01 - Open With Open Source"
+description: "BuildOn on Weekly stream from 2022-07-14"
 tags:
   - aws
   - build-on-live

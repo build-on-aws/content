@@ -1,5 +1,6 @@
 ---
 title: "S01E02 - Breaking blocks with Terraform"
+description: "BuildOn on Weekly stream from 2022-07-21"
 tags:
   - aws
   - build-on-live

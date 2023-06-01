@@ -1,5 +1,6 @@
 ---
 title: "S01E04 - Static S3 Website"
+description: "BuildOn on Weekly stream from 2022-08-04"
 tags:
   - aws
   - build-on-live

@@ -1,5 +1,6 @@
 ---
-title: "S02E14 - Stable Diffusion with Viktoria" 
+title: "S02E14 - Stable Diffusion with Viktoria"
+description: "BuildOn on Weekly stream from 2023-04-20"
 tags:
   - aws
   - build-on-live
@@ -23,7 +24,7 @@ On this episode we go over the ways you can get already trained models from our 
 Initially we tried to use the [Latent Diffusion](https://huggingface.co/spaces/multimodalart/latentdiffusion) pre-trained model to generate images of "a turtle in a car with a hat"...That did not quite work:
 ![Image of what is supposed to be a Turtle in a car with a hat, but ultimately its just a garbled mess of colors and shapes](images/turtlebad.webp).
 
-Later on we moved on to using [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion), and the results were WAY better! 🐢🚗🤠Check out the Stream VOD for the results! 👇
+Later on we moved on to using [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion), and the results were WAY better! 🐢🚗🤠 Check out the Stream VOD for the results! 👇
 
 https://www.twitch.tv/videos/1798894267
 

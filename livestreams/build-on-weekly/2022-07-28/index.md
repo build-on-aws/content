@@ -1,5 +1,6 @@
 ---
 title: "S01E03 - Command Line Magic"
+description: "BuildOn on Weekly stream from 2022-07-21"
 tags:
   - aws
   - build-on-live

@@ -1,5 +1,6 @@
 ---
 title: "S01E06 - Local Development"
+description: "BuildOn on Weekly stream from 2022-08-18"
 tags:
   - aws
   - build-on-live

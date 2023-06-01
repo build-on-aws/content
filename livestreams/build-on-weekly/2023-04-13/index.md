@@ -1,5 +1,6 @@
 ---
 title: "S02E13 - Hot Dog or Not Hot Dog"
+description: "BuildOn on Weekly stream from 2023-04-13"
 tags:
   - aws
   - build-on-live
@@ -30,7 +31,6 @@ Our challenge to you, should you choose to accept? Improve the code, beat chatGP
 Check out the VOD from today's episode 👇:
 
 https://www.twitch.tv/videos/1792674049
-
 
 ## Links from todays episode
 

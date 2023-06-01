@@ -1,5 +1,6 @@
 ---
 title: "S01E05 - Containers, Containers Everywhere"
+description: "BuildOn on Weekly stream from 2022-08-11"
 tags:
   - aws
   - build-on-live

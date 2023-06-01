@@ -1,5 +1,6 @@
 ---
-title: "S02E15 - Generative AI Applications" 
+title: "S02E15 - Generative AI Applications"
+description: "BuildOn on Weekly stream from 2023-04-27"
 tags:
   - aws
   - build-on-live
@@ -16,8 +17,7 @@ spaces:
 
 ![Jacquie & Darko Streaming](images/bows02e15.webp)
 
-In today's episode Jacquie and Darko try out [Banjo](https://twitter.com/banjtheman)'s new hands on [workshop about Building Generative AI Applications with SageMaker Foundational Models](https://catalog.workshops.aws/building-gen-ai-apps-with-found-models/en-US). If you want to try it out at home, use the workshop link and give it a go. Warning: it's not free and costs ~$10. 
-
+In today's episode Jacquie and Darko try out [Banjo](https://twitter.com/banjtheman)'s new hands on [workshop about Building Generative AI Applications with SageMaker Foundational Models](https://catalog.workshops.aws/building-gen-ai-apps-with-found-models/en-US). If you want to try it out at home, use the workshop link and give it a go. Warning: it's not free and costs ~$10.
 
 In step 1 we explored the Stable Diffusion Notebook using prompts given to us from our favourite folks: Chat! Here were two of our favourite prompts and they're generated images.
 
@@ -27,7 +27,7 @@ In step 1 we explored the Stable Diffusion Notebook using prompts given to us fr
 **Example #2**: Cat Eating Flan.
 ![Prompt #2: cat eating flan](images/01-cat-eating-flan.webp)
 
-In step 2 we experimented with the FLAN T5 models from Hugging Face to do text to text generation. This mostly revolved around using prompts to create recipes and translating into other languages. 
+In step 2 we experimented with the FLAN T5 models from Hugging Face to do text to text generation. This mostly revolved around using prompts to create recipes and translating into other languages.
 
 In step 3 we deployed it to Lambda and put it all together. After it was up and running we gave it two of our articles to generate taglines and images from:
 
@@ -40,7 +40,7 @@ In step 3 we deployed it to Lambda and put it all together. After it was up and 
 
 Check out the Stream VOD to watch us go through the workshop step by step as well as other results we didn't post here! 👇
 
-(https://www.twitch.tv/videos/1805386602
+https://www.twitch.tv/videos/1805386602
 
 ## Links from today's episode
 
