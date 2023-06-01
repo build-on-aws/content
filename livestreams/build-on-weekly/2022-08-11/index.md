@@ -1,6 +1,6 @@
 ---
 title: "S01E05 - Containers, Containers Everywhere"
-description:
+description: "BuildOn on Weekly stream from 2022-08-11"
 tags:
   - aws
   - build-on-live
@@ -18,7 +18,7 @@ Today [Jacquie](https://twitter.com/devopsjacquie) and [Darko](https://twitter.c
 
 We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
 
-![Jacquie and Darko - Episode 5](images/header.png)
+![Jacquie and Darko - Episode 5](images/header.webp)
 
 ## Deployed Weekly
 

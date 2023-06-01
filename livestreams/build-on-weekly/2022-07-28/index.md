@@ -1,6 +1,6 @@
 ---
 title: "S01E03 - Command Line Magic"
-description:
+description: "BuildOn on Weekly stream from 2022-07-21"
 tags:
   - aws
   - build-on-live
@@ -17,7 +17,7 @@ Welcome to episode 3 of Build On Weekly! 🥳 Today Jacquie and Darko dive into 
 
 We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
-![CLI Chat](images/header.png)
+![CLI Chat](images/header.webp)
 
 If you miss an episode, don't worry! We will upload recordings of all our episodes to this youtube [playlist](https://youtube.com/playlist?list=PLDqi6CuDzubwBQdL4N1tVUwWeNEtOG9vL)! Make sure to smash that like and subscribe button! 🥹
 

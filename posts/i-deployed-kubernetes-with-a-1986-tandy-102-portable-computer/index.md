@@ -10,6 +10,8 @@ tags:
   - tandy
   - terminal
   - linux
+images:
+  thumbnail: ./images/thumbnail.webp
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 date: 2023-02-21
@@ -22,9 +24,9 @@ Keep reading for some nostalgia, terminals, and serial connections - but more im
 
 ## Portable computing
 
-![Tandy Model 102 Portable computer](images/DSC00032.JPG "Tandy Model 102 Portable computer")
+![Tandy Model 102 Portable computer](images/DSC00032.webp "Tandy Model 102 Portable computer")
 
-![Tandy Model 102 Portable computer closeup shot of the right hand side of the computer, with the Tandy logo in focus](images/DSC00033.JPG)
+![Tandy Model 102 Portable computer closeup shot of the right hand side of the computer, with the Tandy logo in focus](images/DSC00033.webp)
 
 This right here is a [TRS-80 Model 102](https://en.wikipedia.org/wiki/TRS-80_Model_100), also known as the Tandy 102. This is a successor to the famous Model 100, a portable, battery-powered, notebook-style computer. It was actually one of the first of its kind. According to some sources, the computer was used a lot in the world of journalism. Journalists were able to quickly take notes and write articles while on the go, then send them back to news desks by dialing in using the computer’s internal modem and transferring the text files. Fascinating stuff for 1983.
 
@@ -36,11 +38,11 @@ The TRS-80 Model 102 had capabilities of being connected to the internet, althou
 
 The amazing thing about this system is that it has a Serial Interface. To be precise, it has an RS-232 port on its back. That means we can use a serial device and do some communicating over it. Perfect. Let me introduce you to an amazing little device: [WiModem232](https://www.cbmstuff.com/index.php?route=product/product&product_id=59?#:~:text=The%20WiModem232%20is%20an%20internet,a%20BBS%20of%20your%20own!). This is a serial WiFi Modem, a small ESP32-powered device that emulates a normal dial-up modem but is actually connected to my local WiFi network. It supports all the native Modem commands (Hayes) and will actually do a few other things.
 
-![WiModem232 plugged into the back of the Tandy 102 Computer with a serial cable. The modem is sitting on top of the computer](images/DSC00036.JPG "WiModem232 plugged into Tandy 102")
+![WiModem232 plugged into the back of the Tandy 102 Computer with a serial cable. The modem is sitting on top of the computer](images/DSC00036.webp "WiModem232 plugged into Tandy 102")
 
 To make this work, I need to plug in the modem to the back of the Tandy 102, but as they are both female connectors, I will be using a longer cable that will adapt the two. On top of this, the Modem needs some power, so I hook up a Mini-USB cable to get it connected to power. The little display is on, and it’s time to configure the modem. For this, I will need the Tandy 102 and its built-in Terminal application.
 
-![Tandy 102 screen showing its applications in a grid layout. The BASIC application is currently selected](images/DSC00045.JPG)
+![Tandy 102 screen showing its applications in a grid layout. The BASIC application is currently selected](images/DSC00045.webp)
 
 Okay, the beautiful thing about this computer is that it comes with a Terminal application built into its ROM (TELCO), and I will be using that for everything moving forward. A Terminal Application in this case is the main application you would use for any sort of communication work. This includes sending emails, uploading files, and working on a remote server (that’s foreshadowing, if you didn’t notice). And it allows you to dial systems and communicate over the serial interface. Before this will work with my modem, I need to make some configuration changes. I’ll change the Baud rate to 300, as that is the default on the modem itself. To do so, I just need to enter the following command once I open the Terminal application.
 
@@ -75,7 +77,7 @@ This will change the translation mode to TELNET, which will come in handy later 
 AT&W
 ```
 
-![Tandy 102 showing the WiFi Modem connected to router](images/DSC00050.JPG "Tandy 102 with the WiFi modem connected to the router")
+![Tandy 102 showing the WiFi Modem connected to router](images/DSC00050.web "Tandy 102 with the WiFi modem connected to the router")
 
 ## Cheating my way to the goal
 
@@ -144,7 +146,7 @@ ATDT192.168.1.225:23
 
 This command will "dial" into the Telnet server, showing me the login prompt. And from there, I am ready to do whatever I want, as I am now basically on a modern system and have access to all the tools I need.
 
-![Picture of the terminal connected to the login prompt on the Telnet server](images/DSC00058.JPG)
+![Picture of the terminal connected to the login prompt on the Telnet server](images/DSC00058.webp)
 
 ## Conclusion
 
