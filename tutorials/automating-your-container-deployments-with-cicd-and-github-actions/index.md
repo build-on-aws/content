@@ -8,8 +8,11 @@ tags:
   - infrastructure-as-code
   - cdk
   - devops
+  - tutorials
 spaces:
   - devops
+showInHomeFeed: true
+movedFrom: /posts/automating-your-container-deployments-with-cicd-and-github-actions
 authorGithubAlias: jennapederson
 authorName: Jenna Pederson
 date: 2022-12-16
