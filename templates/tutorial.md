@@ -32,7 +32,7 @@ Before starting this tutorial, you will need the following:
 
 ## Sections
 <!-- Update with the appropriate values -->
-| Info                | Level                                  |
+| Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 100 - Beginner                          |
 | ⏱ Time to complete  | 15 minutes                             |
