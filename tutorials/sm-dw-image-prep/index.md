@@ -20,7 +20,7 @@ To do this, you’ll need to prepare lots of images to train and build your ML m
 
 In this tutorial, you will use Amazon SageMaker Data Wrangler to prepare image data for use in an image classification model. Your data preparation tasks will be an essential step toward building a model that can recognize, and subsequently respond to, traffic accidents on the road.
 
-![architecture-diagram-of-workflow](content/tutorials/sm-dw-image-prep/images/architecture-diagram-of-workflow.png)
+![architecture-diagram-of-workflow](tutorials/sm-dw-image-prep/images/architecture-diagram-of-workflow.png)
 
 The preceeding diagram shows the tutorial's workflow. Once you set up your Amazon SageMaker Studio domain, you will download images of automobile crashes captured from CCTV and upload them into an Amazon S3 bucket. Then you will import these images into Amazon SageMaker Studio to process them.
 
@@ -59,9 +59,9 @@ If you don't have an existing SageMaker Studio domain, continue with Step 1 to r
   
 This stack assumes that you already have a public VPC set up in your account. If you do not have a public VPC, see [VPC with a single public subnet](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-dev-test.html) to learn how to create a public VPC.
 
-![create-cloudformation-stack](content/tutorials/sm-dw-image-prep/images/create-cloudformation-stack.png)
+![create-cloudformation-stack](tutorials/sm-dw-image-prep/images/create-cloudformation-stack.png)
 
-![confirm-cloudformation-stack-deployment.png](content/tutorials/sm-dw-image-prep/images/confirm-cloudformation-stack-deployment.png)
+![confirm-cloudformation-stack-deployment.png](tutorials/sm-dw-image-prep/images/confirm-cloudformation-stack-deployment.png)
 
 **Step 2:** When the stack creation completes, you can proceed to uploading some images to an Amazon S3 bucket. Don't worry, we'll get some image files from Kaggle in just a few moments.
 
@@ -269,7 +269,7 @@ The Data Wrangler kernel used for running the flow in this tutorial will accumul
 
 To delete the SageMaker Studio apps, do the following: On the SageMaker console, choose **Domains**, and then choose **StudioDomain**.  From the User profiles list, select **studio-user**, and then delete all the apps listed under Apps by choosing **Delete app**. To delete the JupyterServer, choose **Action**, then choose **Delete**.  Wait until the **Status** changes to **Deleted**.
 
-![select-domain](content/tutorials/sm-dw-image-prep/images/select-domain.png)
+![select-domain](tutorials/sm-dw-image-prep/images/select-domain.png)
 
 ![delete-apps](/images/delete-apps.png)
 
