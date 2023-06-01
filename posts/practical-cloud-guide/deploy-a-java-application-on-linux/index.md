@@ -31,8 +31,8 @@ Before starting this tutorial, you will need the following:
 - A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.
 
 ## Sections
-<!-- Update with the appropriate values -->
-| Info                | Level                                  |
+
+| Attributes                |                                  |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 100 - Beginner                          |
 | ⏱ Time to complete  | 15 minutes                             |
@@ -40,7 +40,7 @@ Before starting this tutorial, you will need the following:
 | 🧩 Prerequisites    | - An AWS account: If you don't already have an account, follow the [Setting Up Your Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial. For a quick overview for creating account follow the [Create Your AWS Account](http://%20https://aws.amazon.com/getting-started/guides/setup-environment/module-one/) instructions.<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials<br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.|
 | 💻 Code Sample         | [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | YYYY-MM-DD <as mentioned above>                             |
+| ⏰ Last Updated     | YYYY-MM-DD                              |
 
 | ToC |
 |-----|
