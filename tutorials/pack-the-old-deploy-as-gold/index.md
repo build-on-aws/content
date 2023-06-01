@@ -6,6 +6,9 @@ tags:
   - containers
   - app-runner
   - ecr
+  - tutorials
+showInHomeFeed: true
+movedFrom: /posts/pack-the-old-deploy-as-gold
 authorGithubAlias: vsenger
 authorName: Vinicius Senger
 date: 2022-10-19

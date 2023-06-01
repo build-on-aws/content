@@ -2,13 +2,14 @@
 title: "Instrumenting Java Applications with OpenTelemetry"
 description: "Hands-on tutorial showing how to implement OpenTelemetry in a Java application."
 tags:
-    - open-telemetry
-    - observability
-    - grafana
-    - prometheus
-    - xray
-    - cloudwatch
-    - java
+  - open-telemetry
+  - observability
+  - grafana
+  - prometheus
+  - xray
+  - cloudwatch
+  - java
+  - tutorials
 showInHomeFeed: true
 movedFrom: /posts/instrumenting-java-apps-using-opentelemetry
 authorGithubAlias: riferrei

@@ -5,8 +5,13 @@ tags:
   - remote-development
   - ec2
   - neovim
+  - tutorials
+  - cdk
+  - aws
 spaces:
   - devops
+showInHomeFeed: true
+movedFrom: /posts/setting-up-vm-as-remote-development
 authorGithubAlias: donnieprakoso
 authorName: Donnie Prakoso
 date: 2022-10-28
