@@ -3,13 +3,13 @@ title: "Deploy a Java Application on Linux"
 description: "As a cloud engineer you will deploy a variety of applications on different types of servers in the cloud. Learn how to deploy a SpringBoot Java application on a AWS Lightsail Linux VPS."
 tags:
     - tutorials
-    - Java
-    - SpringBoot
-    - Lightsail
-    - "IT Pros"
-authorGithubAlias: "spara"
-authorName: "Sophia Parafina"
-date: "2023-31-05"
+    - java
+    - spring-boot
+    - lightsail
+    - it-pros
+authorGithubAlias: spara
+authorName: Sophia Parafina
+date: 2023-31-05
 ---
 
 The [previous tutorial]() demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Node.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
