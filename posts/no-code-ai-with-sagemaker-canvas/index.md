@@ -2,7 +2,7 @@
 title: "How To Build Stock Price Prediction Without Writing a Single Line of Code"
 description: "How To Build Stock Price Prediction Without Writing a Single Line of Code. In this post you will learn how to use Amazon SageMaker Canvas to generate predictions without writing code."
 tags:
-  - ai
+  - ai-ml
   - sagemaker
   - no-code
   - forecast

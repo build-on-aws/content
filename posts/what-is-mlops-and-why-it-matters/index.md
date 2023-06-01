@@ -3,7 +3,7 @@ title: "What is MLOps and Why Does It Matter?"
 description: "Discover the game-changing approach to managing machine learning workflows with MLOps, and learn why it's essential for scalable, reliable, and reproducible AI."
 tags:
   - mlops
-  - machine-learning
+  - ai-ml
   - data-science
   - devops
   - sagemaker
