@@ -10,18 +10,6 @@ authorName: Ankush Agarwal
 date: 2023-06-01
 ---
 
-**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
-## Frontmatter Instructions
-
-All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/). Enclose values in "quotes" if you are using a colon.
-
-- `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser"
-- `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters
-- `tags` - help readers discover posts on the same topics. Use `kebab-case`.
-- `authorGithubAlias` - your GitHub username
-- `authorName` - how you want your name to display for the author credit of this post
-- `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
-
 ## **What is a database?**
 A database is a collection of data or information. Databases are typically accessed electronically and are used to support Online Transaction Processing (OLTP). Database Management Systems (DBMS) store data in the database and enable users and applications to interact with the data. The term “database” is commonly used to reference both the database itself as well as the DBMS.
 
