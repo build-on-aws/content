@@ -12,17 +12,23 @@ Suppose we are having coffee ☕ talking about the advances in AIML technology a
 
 - 👩🏻 "We can not only do that, but also add it to your applications as if it were another API call". 
 
-Then you would probably answer: 
+Then you may answer: 
 
-- 🧑🏽 "Really? However, before  we can use the API, it is necessary to collect the data, select an ML model that solves the problem, obtain the data, label it, and then train that model. Check if it meets the required needs and if not, make the necessary changes and retrain it, and so on, until it finds what I need to deploy it and create the API", 
+- 🧑🏽 "Really? However, first, this API MUST be reliable and before we can use this API, it is necessary to collect the data, know how to choose and train an ML model, and carry out all the phases of a machine learning project to finally obtain the API, and not to mention I don't know anything about AIML, mmm I don´t know... using an API that is not created by me makes me insecure since my data will not be protectec."
 
 and I would answer: 
 
-- 👩🏻 “Friend, that is not necessary, you can have a ready-to-use API that solves your problem".
+- 👩🏻 “Friend, that is not necessary, you can have a ready-to-use AIML API reliable without the need for machine learning experience".
 
 I tell you how.
 
-AWS has AIML services that take care of the task of collecting data, labeling it, selecting algorithms, training models, deploying it, and delivering AIML as a ready-to-use APIs within the reach of any developer, without having to worry about maintaining the infrastructure and process of AIML.
+When we think of adding AIML to our applications, we add "fun" (not to say complications) since we must think of creating the Machine Learning project as a different part of our application, and the project needs to have a [life cycle](https://docs.aws.amazon.com/wellarchitected/latest/machine-learning-lens/well-architected-machine-learning-lifecycle.html) with all the required maintenance, but integrate an AIML like API calls options is not necessarily the best option because you risk data privacy. 
+
+So we have two problems:
+- 😵‍💫 Create the Machine Learning project – without having experience in machine learning.
+- 🔐 Keep your data safe.
+
+AWS solves both of these problems by making pre-trained AIML services available to anyone with programming skills, and without the need for machine learning experience. And your data is kept safe thanks to the security standard that governs all AWS services, guaranteeing the privacy of the data ensuring that it will not be used or shared with third parties.
 
 ## How does it work? Just follow 3 simple steps:
 
@@ -47,7 +53,7 @@ AWS has AIML services that take care of the task of collecting data, labeling it
 
 ## Use Cases 
 
-- Create subtitles and translate them into the language you want ⏯️ 🍿.
+- [Create subtitles and translate them into the language you want ⏯️ 🍿.](https://github.com/build-on-aws/aiml-like-api-in-your-app/blob/main/create-subtitles-and-translate-them-into-the-language-you-want/README.md)
 
 ![Create subtitles and translate them into the language you want"](images/create-subtitles-and-translate-s.png)
 
@@ -57,9 +63,9 @@ AWS has AIML services that take care of the task of collecting data, labeling it
 4. A Lambda Function makes the call to Translate API.
 5. Subtitles file in the new language is downloaded to S3 Bucket. 
 
-Code to create this solution: repo. 
+Code to create [this solution](https://github.com/build-on-aws/aiml-like-api-in-your-app/blob/main/create-subtitles-and-translate-them-into-the-language-you-want/README.md). 
 
-- Detecting entities and sentiment from a document 🔎 📄.
+- [Detecting entities and sentiment from a document 🔎 📄.](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/detecting-entities-and-sentiment-from-a-document%20)
 
 ![Detecting entities and sentiment from a document"](images/detecting-entities-and-sentiment.png)
 
@@ -69,9 +75,9 @@ Code to create this solution: repo.
 4. A Lambda Function makes the call to the Translate API.
 5. The response is saved in an S3 bucket. 
 
-Code to create this solution: repo. 
+Code to create [this solution]((https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/detecting-entities-and-sentiment-from-a-document%20))
 
-- Make Polly Talk 🦜
+- [Make Polly Talk 🦜](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/make-polly-talk)
 
 ![Make Polly Talk"](images/make-polly-talk.png)
 
@@ -80,10 +86,10 @@ Code to create this solution: repo.
 3. Retrieves the audio.
 
 
-Code to create this solution: repo. 
+Code to create [this solution ](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/make-polly-talk)
 
 
-- Video content moderation ⏯️ 🔫 🚬
+- [Video content moderation ⏯️ 🔫 🚬](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/video-content-moderation)
 
 ![Video content moderation"](images/video-content-moderation.png)
 
@@ -92,7 +98,7 @@ Code to create this solution: repo.
 3. Once the video review is finished, a new Lambda Function retrieves the result and stores it in an s3 bucket.
 
 
-Code to create this solution: repo. 
+Code to create [this solution ](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/video-content-moderation)
 
 
 ## Conclusion
