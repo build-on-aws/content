@@ -111,7 +111,10 @@ edge featured for marry at T==2: ['sibling', 'works', 'is', 'likes']
 The image above demonstrates that for instance the edge between Mary and Tom could be presented as: $[1, 0, 0, 0, 0, 0, 0]$. If there has been an edge describing that Mary "likes" her brother, Tom, then the edge feature vector would look like $[1, 1, 0, 0, 0, 0, 0]$. As both Tom and Mary work in amazon, they are colleagues. In the example, this is a missing edge that could be predicted, but if we imagine the "colleague" relationship as a part of our data, then the feature vector would look like: $[1, 1, 0, 1, 0, 0, 0]$. 
 We might also have node features such as Tom is a 25-33 male, 180-cm tall and BMI index of 18. This could also be combined and perhaps pass through an embedding layer to create a latent feature vector, which is in agreement with the edge feature vector in terms of shapes of the two vectors. We can then calculate:
 
-$$m^{mary}_{1 \times 7} = \sum{[(tom,cheese, likes), \\(tom,vegetarian, is), \\(tom, amazon, works), \\(mary,tom, sibling), (mary,cheese, likez), \\(mary, amazon, works), \\(mary, vegetarian, is), \\(tom, mary, sibling)\large ]} $$. Finally, we can build an MLP, $U^{mary}$, that takes $m^{mary}_{1 \times 7}$ and current $h^{mary}$ before the update and assigns Mary a new state:
+$$
+m^{mary}_{1 \times 7} = \sum{[(tom,cheese, likes), \\(tom,vegetarian, is), \\(tom, amazon, works), \\(mary,tom, sibling), (mary,cheese, likez), \\(mary, amazon, works), \\(mary, vegetarian, is), \\(tom, mary, sibling)\large ]} $$
+
+Finally, we can build an MLP, $U^{mary}$, that takes $m^{mary}_{1 \times 7}$ and current $h^{mary}$ before the update and assigns Mary a new state:
 
 $$
 h^{mary}_{next}=U^{mary}(h^{mary}_{current}, m^{mary}_{1 \times 7}),\text{where U is a neural network}
