@@ -133,7 +133,7 @@ Graph $\mathcal {G} = (V,E)$ is am undirected and simple graph where $v,w \in V\
 The forward pass includes, as we have seen, a propagation and an update phase. The propagation phase in general is calculating message for the next timestep based on current state of a vertex $v$, states of all the connected vertices in $v$ 's neighborhood, and edge features of all of $v$ 's neighbors. We then use this message and value of current hidden state of node $v$ to update the node with the new value.
 
 $$
-\large \\
+\large
 m_v^{t+1}=\sum_{w \in \mathcal{N}_(v)}\mathcal{M}_t(h^t_v, h^t_w, e_{vw}) \\
 h^{t+1}_v=\mathcal {U}_t(h_v^t, m_v^{t+1}) \\
 $$
