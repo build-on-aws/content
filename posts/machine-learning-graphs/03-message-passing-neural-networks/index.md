@@ -120,7 +120,8 @@ $$
 h^{mary}_{next}=U^{mary}(h^{mary}_{current}, m^{mary}_{1 \times 7}),\text{where U is a neural network}
 $$
 
-For the readout phase we can imagine using a neural network 
+For the readout phase we can imagine using a neural network
+
 $$
 \phi(\sigma (h_{mary}\odot h_{tom} \odot h_{cheese} \odot h_{vegtn} \odot h_{amazon}))
 $$
@@ -129,16 +130,18 @@ $$
 
 Graph $\mathcal {G} = (V,E)$ is am undirected and simple graph where $v,w \in V\ and\ (v,w)\in V$. $x_v$ is edge feature vector for edge $v$ and $e_{v,w}$ is the feature vector for edge connecting $v$ and $w$.
 
-The forward pass includes, as we have seen, a propagation and an update phase. The propagation phase in general is calculating message for the next timestep based on current state of a vertex $v$, states of all the connected vertices in $v$'s neighborhood, and edge features of all of $v$'s neighbors. We then use this message and value of current hidden state of node $v$ to update the node with the new value.
+The forward pass includes, as we have seen, a propagation and an update phase. The propagation phase in general is calculating message for the next timestep based on current state of a vertex $v$, states of all the connected vertices in $v$ 's neighborhood, and edge features of all of $v$ 's neighbors. We then use this message and value of current hidden state of node $v$ to update the node with the new value.
 
 $$
-\large
-m_v^{t+1}=\sum_{w \in \mathcal{N}_(v)}\mathcal{M}_t(h^t_v, h^t_w, e_{vw})\\
-h^{t+1}_v=\mathcal {U}_t(h_v^t, m_v^{t+1})
+\large \\
+m_v^{t+1}=\sum_{w \in \mathcal{N}_(v)}\mathcal{M}_t(h^t_v, h^t_w, e_{vw}) \\
+h^{t+1}_v=\mathcal {U}_t(h_v^t, m_v^{t+1}) \\
 $$
+
 The readout phase, calculates a feature vector for the whole graph using some readout function $\mathcal {R}$:
+
 $$
-\large
+\large \\
 \hat{y} = \mathcal {R}({h_v^T} \vert v \in \mathcal{G})
 $$
 
