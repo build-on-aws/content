@@ -9,7 +9,10 @@ tags:
   - graph
   - graph-theory
 authorGithubAlias: cyrusmvahid
-authorName: Cyrus Vahid, Sai Kiran Jukanti and Shamika Ariyawansa
+authorName: Cyrus Vahid 
+additionalAuthors:
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 date: 2022-07-08
 ---
 In the [previous post](/posts/machine-learning-graphs/01-motivation-for-graph-ml), we learn why we need to pay attention to GNNs. Before we can actually learn about GNNs, we need to learn some of the basics of graph theory to be able to understand parameters of the GNN methods as well as technical aspects of the papers. If you are familiar with graph theory, please skip to [next part](/posts/machine-learning-graphs/03-message-passing-neural-networks).
