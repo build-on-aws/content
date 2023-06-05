@@ -405,7 +405,7 @@ Figure 10: A table with planetary distances. This is an example of weighted adja
     EdgeDataView([('Mercury', 'Venus', {'distance': 0.34}),  ...
     NodeDataView({'Mercury': {'mass': 0.166}, ...
     ```
-- At next step we calculate a new value for each edge based on Newton's gravitational force equation $F=G\frac{Mm}{r^2}.$ and add a new edge attribute called 'F'. 
+- At next step we calculate a new value for each edge based on Newton's gravitational force equation $F=G\frac{Mm}{r^2}.$ and add a new edge attribute called 'F'.
     ```python
     G = 6.6743 * 10**(-11)
     SSG.edges(data=True)

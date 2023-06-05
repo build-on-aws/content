@@ -15,7 +15,7 @@ authorName: Cyrus Vahid
 date: 2022-07-08
 ---
 
-Having fortified our knowledge of graphs in the [previous post]/posts/machine-learning-graphs/02-graph-theory), we are now ready to take a deeper look at the MPNN paradigm.
+Having fortified our knowledge of graphs in the [previous post](/posts/machine-learning-graphs/02-graph-theory), we are now ready to take a deeper look at the MPNN paradigm.
 
 Let us reconsider RNNs again. We calculate state of a node, $h$, and then pass it on to the next node. We are not restricted to "positive" direction of time. We can go backward. We can also stack up the layers and thus moving upwards, or downwards. Skip connections further muddle the idea of sequential time. If we take step back and consider doing a propagation step in a graph and compute a path in a graph, we have created a sequence and all things RNN can be applied to that path.
 
@@ -32,7 +32,7 @@ Let us reconsider RNNs again. We calculate state of a node, $h$, and then pass i
 
 We now create a complete graph with 6 nodes (1), drop some edges randomly (2), and assign weights to each edge(3). On the graph we have created, we can create a few path graph using some neighborhood criteria. In this example we are using shortest path between node 4 and node 0 (4). The outcome is that we have created three possible paths that can be used for graph embedding where source is 4 and target is 0 as illustrated in figure 1.
 
-```python 
+```python
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
@@ -55,7 +55,7 @@ plt.show()
 
 ![weighted graph](images/img0301.png "Figure 1: A randomly generated weighted graph. We later create walks in this graph that would take us from node 4 to node 0.")
 
-Ignoring the weights for the sake of simplicity, we can then create walks with the shortest path from node 4 to node 0. 
+Ignoring the weights for the sake of simplicity, we can then create walks with the shortest path from node 4 to node 0.
 
 ```python
 a = nx.all_shortest_paths(G, source=4, target=0, weight='weigth') #(4)
@@ -79,7 +79,7 @@ plt.show() #(5)
 
 ![different walks](images/img0302.png "Figure 2: the three graphs on the left are possible walks from node 4 to node 0 on the possible shortest paths. We should keep in mind that we do not necessary want to walk the shortest path. Walks can have different types of paths in order to collect as much information as needed. The walk on the right is created manually based on [(0,3), (3,1), (1,5), (5,3), (3,4)]. It is worth noticing that here we have created a directed graph that is easier to follow the path.")
 
-Now try to imagine on the three graphs on the left we increase the paths to all possible paths, then the graph theoretically has become a series of RNNs. If we consider time-steps $t_1, t_2, t_3$, then we can create some sort of aggregation similar to RNNs. To encode a path, such as [4, 1, 0], we could For instance, do a weighted sum. In this case, of value of 0, 1, and 4 are respectively 5, 6, 7. We already know that weight values for (0, 1), (1, 4) are .74 and .03 respectively. if we are at 0 at timestep 0, 1 at timestep 1, and 4 at timestep 2, then $m_{4}^{2}=M(5 \times .74 + 6 \times .03 = 3.88$), where $\Phi$ is some function; M can be a simple liner function, concatenation, or even a neural network. We then use a non-liner update function $U$ to update the value of the node state. In this example, $h_{4}^{2}=U_4(h_{1}^{4}, m_{4}^{2})$  
+Now try to imagine on the three graphs on the left we increase the paths to all possible paths, then the graph theoretically has become a series of RNNs. If we consider time-steps $t_1, t_2, t_3$, then we can create some sort of aggregation similar to RNNs. To encode a path, such as [4, 1, 0], we could For instance, do a weighted sum. In this case, of value of 0, 1, and 4 are respectively 5, 6, 7. We already know that weight values for (0, 1), (1, 4) are .74 and .03 respectively. If we are at 0 at timestep 0, 1 at timestep 1, and 4 at timestep 2, then $m_{4}^{2}=M(5 \times .74 + 6 \times .03 = 3.88)$, where $\Phi$ is some function; M can be a simple liner function, concatenation, or even a neural network. We then use a non-liner update function $U$ to update the value of the node state. In this example, $h_{4}^{2}=U_4(h_{1}^{4}, m_{4}^{2})$  
 
 You can observe that in this simple example we have skipped value of the destination node. This results in ignoring correlation between edge and state nodes similar to early version of MPNN [Duevenaud, 2015]
 
@@ -93,8 +93,8 @@ We shall need an encoding mechanism to captures node and edge features. We can, 
 
 The readout phase, not dissimilarly to encoder in the encoder-decoder architecture, computes a feature vector for the whole graph. The readout phase uses a readout function that can be a neural network.
 
-![world of mary](images/img0303.png "Figure 3: This is the full knowledge graph of "the world of Mary". Obviously not all edges are defined. The job of GNN is to predict what is missing.")
- 
+![world of mary](images/img0303.png "Figure 3: This is the full knowledge graph of \"the world of Mary\". Obviously not all edges are defined. The job of GNN is to predict what is missing.")
+
 Let us try an example. In the world of Marry graph above, if we want to to encode Mary, we can set hyperparameter $T$ to 2 and use message processing to propagate and update Mary's state. The figure below captures the subgraph that is used for MPNN.
 
 ![contextualized graph of world of Mary](images/img0304.png)
