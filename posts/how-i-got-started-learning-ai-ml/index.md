@@ -30,7 +30,7 @@ ML is a specific technique under AI. It uses data to train a model, and you have
 
 ## Combined Approach to solve Jerry’s problem
 
-![Plant disease predection architecture](images/figure4.jpg "Figure 4. Plant disease predection architecture")
+![Plant disease predection architecture](images/figure4.png "Figure 4. Plant disease predection architecture")
 
 Jerry uses a reactive mobile app through which Jerry he submits his plant’s picture. On the AWS reference architecture shown above, this image is picked up by a serverless architecture and goes through multiple stages. Once the data is ingested a Lambda function processes the image using Amazon Rekognition.
 
