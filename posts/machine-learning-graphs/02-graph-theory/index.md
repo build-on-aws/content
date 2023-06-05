@@ -311,10 +311,12 @@ More formally:
 
 Graph $\mathcal{G}=(V,E)$ is an undirected graph $\mathcal{G}=(V,E)$. The adjacency matrix of a $\mathcal{G}$ is given by:
 
-$$A_{\mathcal{G}}(i,j) = \begin{cases}
-  1  & \text{if (i,j)} \in E,\\
-  0 & otherwise
-\end{cases}$$
+$$
+A_{\mathcal{G}}(i,j) = \begin{cases} \\
+  1  & \text{if (i,j)} \in E, \\
+  0 & otherwise \\
+\end{cases} \\
+$$
 
 Adjacency matrix is a sparse matrix as most nodes in large graphs might not be connected.
 
