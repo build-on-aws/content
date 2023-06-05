@@ -134,7 +134,7 @@ The forward pass includes, as we have seen, a propagation and an update phase. T
 
 $$
 \large \\
-m_v^{t+1} = \sum_{w} \in \mathcal{N}_(v)}\mathcal{M}_t(h^t_v, h^t_w, e_{vw})
+m_v^{t+1} = \sum{w} \in \mathcal{N}_(v)}\mathcal{M}_t(h^t_v, h^t_w, e_{vw})
 h^{t+1}_v = \mathcal {U}_t(h_v^t, m_v^{t+1})
 $$
 
