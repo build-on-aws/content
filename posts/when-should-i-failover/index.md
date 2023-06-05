@@ -70,7 +70,7 @@ A flat line means application is healthy in both primary and standby Regions as 
 
 This also gives you a view from customer's perspective i.e. if you see a failed deep health check that means your customer's might also be seeing errors. 
 
-So far, we have built observability from system perspective, customer's perspective, and a deep health check. Let's focus on implementing business metrics next.
+So far, we have built observability from system's as well as customer's perspective and a deep health check. Let's focus on implementing business metrics next.
 
 ### Building business level health checks
 
@@ -82,12 +82,10 @@ Based on this reasoning, I have added code for instrumenting the dollar value of
 "AvgOrderValue-PrimaryRegion" graph shows 5 minute average of dollar value of orders processed in the primary Region.
 
 Further, you can enable [CloudWatch anomaly detection](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) for ‘AvgOrderValue-PrimaryRegion as shown in the picture above (gray shaded area shows the anomaly band for average order value metric). Anomaly detection uses machine learning algorithms which also account for seasonality (could be hourly, daily, or weekly) and trend changes of metrics. 
-    
-    [daily seasonality band picture]
 
-Anomaly detection gives you a powerful way to establish baselines as well as predict metrics trends in future. As discussed earlier, your average order value could be between $29.99 and $69.99 in 5 minute interval. But based on the actual orders trends, anomaly detection gives you better predictability which is closer to the real average order value as seen in the gray band above rather than a wider range of $29.99 to $69.99.
+Anomaly detection gives you a powerful way to establish baselines as well as predict metrics trends in future. As discussed earlier, your average order value could be between $29.99 and $69.99 in 5 minute interval. But based on the actual trends, anomaly detection gives you better predictability which is closer to the real average order value as seen in the gray band above rather than a wider range of $29.99 to $69.99.
 
-You can also instrument the Lambda function to emit another custom metric, 'OrderProcessedIn', which is the Region where the requests is processed in. In normal state all orders will be processed in the primary Region as shown in the first graph- ‘OrderProcessedIn-PrimaryRegion’. The corresponding graph from the standby Region on the right side-‘OrderProcessedIn-StandbyRegion’ shows no data.
+You can also instrument the Lambda function to emit another custom metric, 'OrderProcessedIn', which is the Region where the requests is processed in. In normal state all orders will be processed in the primary Region as shown in the first graph- ‘OrderProcessedIn-PrimaryRegion’. The corresponding graph from the standby Region on the right side-‘OrderProcessedIn-StandbyRegion’ shows no data as expected in normal conditions.
 
 With these custom metrics and anomaly detection, when you join the war room, you can easily tell which Region your  customer requests are being processed in and also quantify the impact if your service is impaired.
 
@@ -97,22 +95,32 @@ From operations point of view, it would be important to be able to see system le
 
 ![Full dashboard](images/overall-dashboard-normal-state.png "Figure 6. Overall health dashboard")
 
-Additionally, you can create alarms based on these metrics using either a static threshold or use anomaly bands powered by AI. I created two alarms: first one is 'DeepHealthCheckFailure' alarm based on RegionalDeepHealthCheck metric for which I used static value (count less than 2 in 5 mins for 2 consecutive times) and second one is 'LowOrderValueAlarm' based on 'AvgOrderValue' business metric for which I used anomaly detection- i.e. order value lower that average order value band. 
+Additionally, you can create alarms based on these metrics using either a static threshold or use anomaly bands powered by AI. I created two alarms: first one is 'DeepHealthCheckFailure' alarm based on RegionalDeepHealthCheck metric for which I used static value (count less than 2 in 5 mins for 2 consecutive times) as shown below:
+![DeepHealthCheckFailure alarm](images/alarm-DeepHealthCheckFailure.png "Figure 7. DeepHealthCheckFailure alarm")
 
-Further, I created a composite alarm using  'DeepHealthCheckFailure' and 'LowOrderValueAlarm' alarms. This alarm depicts the overall health of the application based on deep health check as well as business metrics.
+The second alarm is 'LowOrderValueAlarm' based on 'AvgOrderValue' business metric for which I used anomaly detection- i.e. order value lower that average order value band:
+![Business alarm- LowOrderValue](images/alarm-LowOrderValueAlarm.png "Figure 8. Business alarm- LowOrderValue")
+
+
+Further, I created a composite alarm using  'DeepHealthCheckFailure' and 'LowOrderValueAlarm' alarms. This alarm depicts the overall health of the application based on deep health check as well as business metrics. The code block below shows the composite alarm rule:
+```
+ALARM("LowOrderValueAlarm") AND 
+ALARM("DeepHealthCheckFailure")
+```
+ 
 As you would expect, 'DP-orders-overall-health-alarm-east1' alarm is green in steady state as shown in the dashboard above.
 
 ## Detecting Region-level service impairment & failing over
 
-You can design failing over from primary Region to the standby Region in multiple ways. You can perform the failover manually or automate the failover steps but initiate the failover manually or let your application failover automatically. 
+You can design failing over from primary Region to the standby Region in multiple ways. You can perform the failover manually or automate the failover steps but initiate the failover manually or let your application fail over automatically. 
 
-One of the ways is to add a new DNS record or update an existing DNS record so that the traffic is shifted from the primary Region to the standby Region. Be mindful that this failover strategy uses [a control plane operation](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/control-planes-and-data-planes.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover). Because of the complexity involved, [control planes for global services (Route53, IAM, S3, etc.) are hosted in single Region](https://aws.amazon.com/blogs/networking-and-content-delivery/creating-disaster-recovery-mechanisms-using-amazon-route-53/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover). So if you are trying to fail over from a Region the Route 53 control plane is hosted in and if control plane is also impaired, you will not be able to update the DNS record and won't be able fail over.
+One of the ways is to add a new DNS record or update an existing DNS record in Route53 so that the traffic is shifted from the primary Region to the standby Region. Be mindful that this failover strategy uses [a control plane operation](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/control-planes-and-data-planes.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover). Because of the complexity involved, [control planes for global services (Route53, IAM, S3, etc.) are hosted in single Region](https://aws.amazon.com/blogs/networking-and-content-delivery/creating-disaster-recovery-mechanisms-using-amazon-route-53/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover). So if you are trying to fail over from a Region the Route 53 control plane is hosted in and if control plane is also impaired, you will not be able to update the DNS record and won't be able fail over.
 
 Alternatively, you can implement your failover using [data plane operations](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/control-planes-and-data-planes.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) with Route 53 Application Recovery Controller or 'standby takes over primary' as discussed in [Creating Disaster Recovery Mechanisms Using Amazon Route 53](https://aws.amazon.com/blogs/networking-and-content-delivery/creating-disaster-recovery-mechanisms-using-amazon-route-53/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover). Both of these approaches remove your dependency on control plane for failing over.
 
-Another approach would be to let the application fail over automatically using [Route 53 failover policy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html#dns-failover-types-active-passive?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) based on a health check alarm associated with the DNS records.
+Another approach would be to let the application fail over automatically using [Route 53 failover policy](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html#dns-failover-types-active-passive?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) based on a health check alarm associated with the DNS records in Route53.
 
-For most implementations we usually see all stakeholders joining the war-room meeting, assess the situation and initiate the failover manually. This is because in most of the cases there are multiple application dependencies involved and before failing over an application we need to think about failing over those dependencies as well. And in order to do so, failover needs to be coordinated for all these applications and dependencies. This often involves a sequence to be followed in carrying out failover for multiple applications.
+For most implementations we usually see all stakeholders joining the war-room conference call, assess the situation and initiate the failover manually. This is because in most of the cases there are multiple application dependencies involved and before failing over an application we need to think about failing over those dependencies as well. And in order to do so, failover needs to be coordinated for all these applications and dependencies. This often involves a sequence to be followed in carrying out failover for multiple applications.
 
 For this blog, I have implemented automated failover using Route 53 failover policy when 'DeepHealthCheckFailure' alarm goes off. This is because DeviceProtectionOrders application is relatively simple and independent application, and doesn't require to follow any sequential failover activity based on other dependencies. 
 
@@ -120,14 +128,14 @@ Even if you decide to trigger failover manually, having layers of observability,
 
 
 To simulate a Region-level service impairment, I stopped the Synthetics Canary which was generating the custom health check metric. As soon as health checks are missed 2 consecutive times, the alarm goes off and Route53 starts sending traffic to the standby Region as captured in the picture below:
-![Failover initiated](images/failover-initiated.png "Figure 7. Failover initiated")
+![Failover initiated](images/failover-initiated.png "Figure 9. Failover initiated")
 
 
 ## Verifying system normal state after failing over:
 
 For the final question- “are we good to declare if business is back to normal?”, apart from the system metrics, you can look at the business metrics from the standby Region which is now serving all of your customer requests. When you observe that the business metrics, in this case, average order amount goes back to normal range, you can infer that the system has been restored to normal state and you can close the war room bridge:
 
-![Business back to normal in standby Region](images/normal-state-after-failover.png "Figure 8. Business back to normal in standby Region")
+![Business back to normal in standby Region](images/normal-state-after-failover.png "Figure 10. Business back to normal in standby Region")
 
 ## Conclusion:
 
