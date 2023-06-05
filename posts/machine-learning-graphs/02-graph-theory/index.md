@@ -310,13 +310,11 @@ Adjacency matrix is a matrix whose rows and columns represent nodes of a graph. 
 More formally:
 
 Graph $\mathcal{G}=(V,E)$ is an undirected graph $\mathcal{G}=(V,E)$. The adjacency matrix of a $\mathcal{G}$ is given by:
-$$
-A_{\mathcal{G}}(i,j) = 
-\begin{cases}
-  1  & \text{if (i,j)} \in E,\\    
-  0 & otherwise    
-\end{cases}
-$$
+
+$$A_{\mathcal{G}}(i,j) = \begin{cases}
+  1  & \text{if (i,j)} \in E,\\
+  0 & otherwise
+\end{cases}$$
 
 Adjacency matrix is a sparse matrix as most nodes in large graphs might not be connected.
 
@@ -437,10 +435,10 @@ Figure 10: A table with planetary distances. This is an example of weighted adja
 Weighted graph $\mathcal{G}=(V,E,w)$ is an undirected graph $\mathcal{G}=(V,E)$ along with a function $w:E\rightarrow \mathbb{R}^+$. The adjacency matrix of a $\mathcal{G}$ is given by:
 
 $$
-A_{\mathcal{G}}(i,j) = 
+A_{\mathcal{G}}(i,j) =
 \begin{cases}
-  w(i,j)  & \text{if (i,j)} \in E,\\    
-  0 & otherwise    
+  w(i,j)  & \text{if (i,j)} \in E,\\
+  0 & otherwise
 \end{cases}
 $$
 
