@@ -40,7 +40,7 @@ Let’s get started!
 
 ## Architecture
 
-The following architecture provides an overview of all the AWS resources and services that we will use to write real-time clickstream data to the Kafka cluster and consume it. We make use of AWS Fargate to deploy a container application that produces sample click stream data to the MSK Serverless cluster. The click stream data is consumed by an Apache Flink application running in Amazon Kinesis Data Analytics. The Kinesis Data Analytics application processes the clickstream data and writes it to Amazon OpenSearch Service for visualisation.
+The following architecture provides an overview of all the AWS resources and services that we will use to write real-time clickstream data to the Kafka cluster and consume it. We make use of AWS Fargate to deploy a container application that produces sample click stream data to the MSK Serverless cluster. The click stream data is consumed by an Apache Flink application running in Amazon Kinesis Data Analytics. More specifically, the Flink application processes the clickstream by *windowing*, which involves splitting the data stream into buckets of finite size. These windows are used to apply computations and analyze the data within each window. Finally, the resulting analyses are written to Amazon OpenSearch Service for visualisation.
 
 ![Architecture](images/architecture.jpg)
 
@@ -183,19 +183,17 @@ export BS=<Your_Cluster_Endpoint>
 
 6. Then, execute the following command to create the Kafka topics.
 ````bash
-./create_topics.sh
+bash create_topics.sh
 ````
 You will encounter warnings printed to the terminal. You may ignore them. 
 
 ![EC2 Topics](images/ec2_topics.png)
 
-7. You should see the four MSK topics (`clickstream`, `Departments_Agg`, `ClickEvents_UserId_Agg_Result`, `User_Sessions_Aggregates_With_Order_Checkout`) that have been created.
-
-
+7. You should see a single MSK topic that has been created: `clickstream`.
 
 ### Step 7: Start container application to produce clickstream data 
 
-After we have successfully created topics in the MSK cluster, the next step is to produce data to the cluster. For that we deploy a serverless Amazon ECS Fargate container that runs an application producing sample clickstream data to MSK Serverless cluster. 
+After we have successfully a created the MSK cluster, the next step is to setup the producer that will write data to the topic `clickstream` that we have created in the previous step. For that we deploy a serverless Amazon ECS Fargate container that runs an application, generating sample clickstream data to MSK Serverless cluster. 
 
 1. Navigate to the [Amazon ECS console](https://console.aws.amazon.com/ecs/v2/). On the left side menu click on `Task Definitions` to view all available Task definitions. Select the checkbox of the available Task definition and `Click Run` task option from the Deploy menu.
 
@@ -219,7 +217,9 @@ After we have successfully created topics in the MSK cluster, the next step is t
 
 ![ECS Task Running](images/ecs_task_running.png)
 
-You now successfully created a producer ECS task that will continuously produce clickstream data to the MSK Serverless cluster.
+You now successfully created a producer ECS task that will continuously generate clickstream data to the MSK Serverless cluster. 
+
+More specifically, the ECS task produces random click events. The event comprises of a user IP, a product type, an event timestamp and other information. There is also a user ID that serves as key and is associated with each event. In addition, the partition number of the event is determined by using a hash of that key. Before sending, the event data is serialized using a Avro serializer provided by the AWs Glue Schema Registry. Every generated event is sent to the previously created topic `clickstream`.
 
 ### Step 8: Check schema in AWS Glue Schema Registry
 
@@ -232,6 +232,10 @@ In the last step we have successfully created a ECS producer task. This task cre
 ![Schema Properties](images/schema_properties.png)
 
 3. Click on the Version `1` to see the Avro schema of the clickstream data produced by the ECS task.
+
+Apache Avro is a data serialization system that allows for efficent and compact encoding of structuted data, especially in big data or streaming data use cases. To this end, Avro provides a compact binary format for data storage and exchange.
+
+The producer makes use of a Avro serializer provided by the AWS Glue Schema Registry and automatically registers the schema version in the Glue Schema Registry. 
 
 ![Schema Version Definition](images/schema_version_definition.png)
 
@@ -266,6 +270,9 @@ The OpenSearch Service is already deployed in your AWS account and the Dashboard
 ![KDA Running Jobs](images/kda_running_jobs.png)
 
 8. This opens a screen with a directed acyclic graph (DAG), representing the flow of data throughout each of the operators of your application. Each blue box in the job workflow represents a series of chained operators, known as *Tasks* in Apache Flink.  
+
+As mentioned before, the Flink application processes the clickstream by windowing, i.e., dividing a continious stream of data into finite, discrete chunks or windows for processing. More precisely, the Flink application uses `EventTimeSessionWindows` to extract user sessions from the clickstream data by grouping events that are within a specified time gap of each other. Then, the application deploys `TumblingEventTimeWindows` to calculate specific aggregation characteristics within a certain period of time by dividing the clickstream in fixed-size, non-overlapping windows. For example, the total number of user sessions that include a purchase in the last 10 seconds.
+
 In addition, we can see the status of each task, as well as the Bytes Received, Bytes Sent, Records Received and Records Sent at the bottom of the screen. Note that Flink can only measure the bytes sent or received between operators. That’s why you can not see the metrics for the source or sink operator as the data is coming from outside of Flink. 
 
 ![KDA DAG](images/kda_dag.png)
@@ -302,7 +309,7 @@ In the last step we want to see the dashboard visualisation generated based on t
 
 ![OpenSearch Graphs](images/opensearch_graphs.png)
 
-You have now confirmed data flowing to OpenSearch Service and visualisations are rendered.
+You have now confirmed data flowing to OpenSearch Service and visualisations are rendered. But, how does the data come from the Flink application to Opensearch you may wonder. We make use of the [Elasticsearch Connector](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/datastream/elasticsearch/) of Apache Flink, providing sinks that can request document actions to an Elasticsearch index. You can navigate to the file `AmazonOpenSearchSink.java` in the downloaded repository to view the implementation of the connector.
 
 ## Clean up resources
 
