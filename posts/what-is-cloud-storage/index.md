@@ -15,7 +15,7 @@ date: 2023-05-25
 
 In the modern world, we all need storage, whether it’s the garage hiding your dusty exercise equipment, or your kitchen cupboards helping you find that one spice you really need, or that space under your stairs for stashing recently-orphaned child wizards. Well cloud storage has just as many options as the real world — and you use them a lot more often than you might realize.
 
-In the same way you have lots of physical stuff, you have loads of digital stuff that needs somewhere to go. Some of it is big, some small. Some you just need for a little while, and other stuff you want to hold onto for a long time. You might need to access it everyday or once a decade. And each of these functions requires a slightly different kind of storage. 
+In the same way you have lots of physical stuff, you have loads of digital stuff that needs somewhere to go. Some of it is big, some small. Some you just need for a little while, and other stuff you want to hold onto for a long time. You might need to access it everyday or once a decade. And each of these functions requires a slightly different kind of storage.
 
 The three main types — or classes — of cloud storage are object, block, and file. Let’s break them down.
 
