@@ -30,9 +30,9 @@ ML is a specific technique under AI. It uses data to train a model, and you have
 
 ## Combined Approach to solve Jerry’s problem
 
-![Plant disease predection architecture](images/figure4.png "Figure 4. Plant disease predection architecture")
+I developed a prototype reactive mobile app with reference architecture as below that Jerry uses to submit his plant’s picture. This image is picked by a serverless architecture and goes through multiple stages of iteration. Once the data is ingested a Lambda function processes the image using Amazon Rekognition.
 
-Jerry uses a reactive mobile app through which Jerry he submits his plant’s picture. On the AWS reference architecture shown above, this image is picked up by a serverless architecture and goes through multiple stages. Once the data is ingested a Lambda function processes the image using Amazon Rekognition.
+![Plant disease predection architecture](images/figure4.png "Figure 4. Plant disease predection architecture")
 
 Computer vision systems like [Amazon Rekognition](https://aws.amazon.com/rekognition/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a specific AI that can analyze images or videos of plants and identify different species based on their physical features, such as leaf shape, stem structure, and flower color. These systems use various AI techniques such as Deep Learning, Convolutional Neural Networks (CNN), and object detection algorithms to recognize and classify different plants, pests and plant diseases. CNN are a type of deep learning architecture that is specifically designed for procesing and analyzing visual data, they are capable of learning and recognizing patterns and features from visual data through multiple layers of convolutional and pooling operations.
 
