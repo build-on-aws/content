@@ -10,6 +10,16 @@ authorName: Ankush Agarwal
 date: 2023-06-01
 ---
 
+## **Introduction** 
+
+Organizations that achieve success harness the business value inherent in their data. When devising a successful big data strategy, a crucial initial step is selecting the appropriate technology to store, search, analyze, and generate reports from the data. In this post, we will address frequently asked questions about databases, data lakes, and data warehouses. We will explore their definitions, distinctions, and help you determine which option is most suitable for your needs. 
+
+But before we dive into the definitions Databases, Datawarehouse and Datalakes, let's first understand **What is a Data Store?**
+
+A data store is a digital repository that stores and safeguards the information in computer systems. A data store can be network-connected storage, distributed cloud storage, a physical hard drive, or virtual storage. It can store both structured data like information tables and unstructured data like emails, images, and videos. Organizations use data stores to retain, share, and manage information across business units.
+
+Now that you have a clear understanding of what a data store is, let's embark on an exploration of the various types of data stores available.
+
 ## **What is a database?**
 A database is a collection of data or information. Databases are typically accessed electronically and are used to support Online Transaction Processing (OLTP). Database Management Systems (DBMS) store data in the database and enable users and applications to interact with the data. The term “database” is commonly used to reference both the database itself as well as the DBMS.
 
@@ -40,16 +50,24 @@ If your application needs to store data (and nearly every interactive applicatio
 - Online gaming information
 - Student grades and scores
 - IoT device readings
-- Mobile application information
+- Mobile application information 
+
+While selecting the database we should also look into the data access paaterns, understandbly, the number of transactions, atomicity, consistency, isolation, and durability (ACID) compliance, traffic patterns(burst reads or consistent reads), latency, and access requirements for a globally distributed application in order to identify the optimal storage solution.
+
+It is also important to analyze various query patterns, random access patterns, and one-time queries when selecting a database solution. Additionally, it is crucial to consider specialized query functionalities for tasks such as text and natural language processing, time series analysis, and graph data. It is worth noting that not all databases support these functionalities, and many NoSQL databases employ an eventual consistency model. 
+
+**You might be wondering, are databases also data stores??**
+
+Discussions on data stores involve different methods to store and retrieve information. A database is one method that allows applications to store, share, and retrieve data easily. Unlike file systems, a database adheres to specific rules of how data is organized, formatted, and stored in the database. 
 
 ### **Database examples**
 
 A wide variety of databases exist. Examples include:
 
-- Relational databases: Amazon RDS for Orcale, Amazon RDS for MySQL, Amazon RDS for SQL Server, and Amazon RDS for PostgreSQL
-- Document databases: Amazon DocumentDB
-- Key-value databases: Amazon Elasticache and Amazon DynamoDB
-- Graph databases: Amazon Neptune
+- Relational databases: [Amazon RDS for Orcale, Amazon RDS for MySQL, Amazon RDS for SQL Server, and Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.html)
+- Document databases: [Amazon DocumentDB](https://docs.aws.amazon.com/documentdb/latest/developerguide/get-started-guide.html)
+- Key-value databases: [Amazon Elasticache](https://aws.amazon.com/elasticache/getting-started/) and [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html)
+- Graph databases: [Amazon Neptune](https://aws.amazon.com/neptune/getting-started/)
 
 ## **What is a data warehouse?**
 
@@ -59,7 +77,9 @@ You might be wondering, "Is a data warehouse a database?" Yes, a data warehouse 
 
 ### **Data warehouse characteristics**
 
-Data warehouses store large amounts of current and historical data from various sources. They contain a range of data, from raw ingested data to highly curated, cleansed, filtered, and aggregated data. Extract, transform, load (ETL) processes move data from its original source to the data warehouse. The ETL processes move data on a regular schedule (for example, hourly or daily), so data in the data warehouse may not reflect the most up-to-date state of the systems. Data warehouses typically have a pre-defined and fixed relational schema. Therefore, they work well with structured data. Some data warehouses also support semi-structured data.
+Data warehouses store large amounts of current and historical data from various sources. They contain a range of data, from raw ingested data to highly curated, cleansed, filtered, and aggregated data. Extract, transform, load (ETL) processes move data from its original source to the data warehouse. The ETL processes move data on a regular schedule (for example, hourly or daily), so data in the data warehouse may not reflect the most up-to-date state of the systems. Data warehouses typically have a pre-defined and fixed relational schema. Therefore, they work well with structured data. Some data warehouses also support semi-structured data.  
+
+As datawarehouses are aimed at storage and analysis of large amount of information and the datwarehouse helps to promote decision-making capabilities for reporting, analyzing on different aggregate levels using Online Analytical Processing. OLAP, short for Online Analytical Processing, is a technology that facilitates exploration and analysis of large datasets in a multidimensional way. Instead of looking at data from a single perspective, OLAP enables users to view it from multiple dimensions.
 
 Once the data is in the warehouse, business analysts can connect data warehouses with BI tools. These tools allow business analysts and data scientists to explore the data, look for insights, and generate reports for business stakeholders.
 
@@ -69,9 +89,13 @@ Data warehouses are a good option when you need to store large amounts of histor
 
 Note that data warehouses are not intended to satisfy the transaction and concurrency needs of an application. If an organization determines they will benefit from a data warehouse, they will need a separate database or databases to power their daily operations.
 
+**Did the question hit you again, are datawarehouses also data stores??**
+
+Data store is an umbrella term that includes the different hardware, technologies, formats, and architectures for storing and retrieving information whereas data warehouse is a specific type of data store for consolidating analytical data for businesses. 
+
 ### **Data warehouse examples**
 
-Amazon Redshift is a datawarehouse developed by Amazon Web Services.
+[Amazon Redshift](https://aws.amazon.com/redshift/getting-started/) is a datawarehouse developed by Amazon Web Services.
     
 
 ## **What is a data lake?**
@@ -79,10 +103,6 @@ Amazon Redshift is a datawarehouse developed by Amazon Web Services.
 A data lake is a repository of data from disparate sources that is stored in its original, raw format. Like data warehouses, data lakes store large amounts of current and historical data. What sets data lakes apart is their ability to store data in a variety of formats including JSON, BSON, CSV, TSV, Avro, ORC, and Parquet.
 
 Typically, the primary purpose of a data lake is to analyze the data to gain insights. However, organizations sometimes use data lakes simply for their cheap storage with the idea that the data may be used for analytics in the future.
-
-### **Is a data lake a database?**
-
-You might be wondering, "Is a data lake a database?" A data lake is a repository for data stored in a variety of ways including databases. With modern tools and technologies, a data lake can also form the storage layer of a database. Tools like Starburst, Presto, Dremio, and Atlas Data Lake can give a database-like view into the data stored in your data lake. In many cases, these tools can power the same analytical workloads as a data warehouse.
 
 ### **Data lake characteristics**
 
@@ -100,16 +120,23 @@ Like data warehouses, data lakes are not intended to satisfy the transaction and
 
 Data lakes can provide storage and compute capabilities, either independently or together. Amazon S3 provides flexible and scalable storage for building data lakes. Other technologies enable organizing and querying data in data lakes, including, AWS Athena, Amazon Lakeformation and AWS Glue. 
 
+### **Is data lake also a data store?**
+
+You might be thinking again, "Is a data lake also a data store?" Data stores are structured repositories optimized for efficient data retrieval, while data lakes are flexible storage systems that accommodate raw and diverse data for advanced analytics and exploration. A data lake is a centralized repository that allows you to store all your structured and unstructured data at any scale. You can store your data as-is, without having to first structure the data, and run different types of analytics, dashboards and visualizations, big data processing, real-time analytics, and machine learning workloads.
 
 ## **Database vs. data warehouse vs. data lake: which is right for me?**
 
-Nearly every interactive application will require a database. When organizations want to analyze their data from multiple sources, they may choose to complement their databases with a data warehouse, a data lake, or both. When determining if a data lake and/or data warehouse is right for your organization, consider the following questions:
+Companies are producing an ever-increasing volume of data through smart devices, the Internet of Things (IoT), social media, and various other sources. As a result, customers are seeking effective methods to manage and store this data. They often utilize databases, data warehouses, and data lakes, either individually or in combination, to store and analyze their data efficiently. Nearly every interactive application will require a database. When organizations want to analyze their data from multiple sources, they may choose to complement their databases with a data warehouse, a data lake, or both. When determining if a data lake and/or data warehouse is right for your organization, consider the following questions:
  
 - **Is my data structured, semi-structured, or unstructured?** Data warehouses support structured and semi-structured data whereas data lakes support all three.
 
 - **Will my analysis benefit from having a pre-defined, fixed schema?** Data warehouses require users to create a pre-defined, fixed schema upfront, which lends itself to more limited (but easier) data analysis. Data lakes allow users to store data in its raw, original format, which makes it easier to store data without having to apply and maintain structure. 
 
 - **Where is my data currently stored?** Data warehouses require you to create ETL processes to move your data into the warehouse. Depending on where the data is stored, a data lake may not require any data to be moved. For example, Amazon Glue is able to access data stored in an Amazon S3 bucket, which can be quite advantageous for organizations who are already storing their data there.
+
+In this following video, Temi delves into the concepts, advantages, and practical applications to assist you in selecting the optimal storage solution for your specific data requirements. 
+
+https://www.youtube.com/watch?v=8fDh2GgeD-k
 
 ## **Summary**
 
