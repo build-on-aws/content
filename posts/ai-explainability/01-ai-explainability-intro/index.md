@@ -13,29 +13,30 @@ date: 2022-07-08
 authorGithubAlias: 
 ---
 
-In this series of blogs we learn about what AI Explainability is, we look a deeper look into local post-hoc explainability using fundamental perturbation methods such as SHAP and LIME. In the future posts, we explore other methods such as back-propagation methods, including gradient-based methods and those based in DeepLift.
+In this series of blogs we learn about what AI Explainability is, we take a deeper look into local post-hoc explainability using fundamental perturbation methods such as SHAP and LIME. In future posts, we explore other methods such as back-propagation methods, including gradient-based methods and those based in DeepLift.
+
 The current publication has 5 parts, which as follows:
 
-- [Part 1: Introduction](/posts/ai-explainability/01-ai-explainability-intro), which explores what explainability is and why we should be interested.
-- [Part 2: Local Interpretable Model-agnostic Explanation or LIME](/posts/ai-explainability/02-lime), which goes deep into LIME methods.
-- [Part 3: LIME tutorial](/posts/ai-explainability/03-lime-tutorial), which runs an example on three images using Inception-V3 and resnet-152 and then uses LIME for explainability. Code notebook is located [here](04-lime-example)
+- [Part 1: Introduction](/posts/ai-explainability/01-ai-explainability-intro), explores what explainability is and why we should be interested.
+- [Part 2: Local Interpretable Model-agnostic Explanation or LIME](/posts/ai-explainability/02-lime), goes deep into LIME methods.
+- [Part 3: LIME tutorial](/posts/ai-explainability/03-lime-tutorial), runs an example on three images using Inception-V3 and resnet-152 and then uses LIME for explainability. Code notebook is located [here](04-lime-example)
 - [Part 4: Shapley values](/posts/ai-explainability/04-shapley-values), provides a quick overview of Shapley values in game theory, which is the foundation of SHAP method. If you are already familiar with the theory, you can skip to [Part 5](06-shap). If you are not familiar with the concepts, I would encourage you to spend a few minutes studying this post.
-- [Part 5: SHAP method](/posts/ai-explainability/05-shap), which explains how Shapley values are applied to find a unique solution to LIME's optimization problem and make the solution independent of its hyperparameters.
-- [Part 6: SHAP tutorial](/posts/ai-explainability/06-shap-tutorial) walks the reader through a practical example of how to use Kernel SHAP for understanding object detection using VGG16. The full code can be found [here](/posts/ai-explainability/07-shap-example).
+- [Part 5: SHAP method](/posts/ai-explainability/05-shap), explains how Shapley values are applied to find a unique solution to LIME's optimization problem and make the solution independent of its hyperparameters.
+- [Part 6: SHAP tutorial](/posts/ai-explainability/06-shap-tutorial), walks through a practical example of how to use Kernel SHAP for understanding object detection using VGG16. The full code can be found [here](/posts/ai-explainability/07-shap-example).
 
 ## Context
 
-This blog series focuses on model explainability for supervised learning both for blackbox models such as deep learning models as well as interpretable models such as decision trees. This blog explains motivations for explainability as well as laying out basic definitions. The subsequent set of publications, dubbed *intermediate*, will describe basic explainability methods such as SHAPLY and associated software libraries. The final segment of the present publication will focus on implementation of model explainability in blackbox domain specific fields such as transformer based architecture for NLP.
+This blog series focuses on model explainability for supervised learning both for blackbox models such as deep learning models as well as interpretable models such as decision trees. This blog explains motivations for explainability as well as laying out basic definitions. The subsequent set of publications, dubbed *intermediate*, will describe basic explainability methods such as SHAP (SHapley Additive exPlanations) and associated software libraries. The final segment of the present publication will focus on implementation of model explainability in blackbox domain specific fields such as transformer based architectures for NLP.
 
 ## What is explainability
 
-In its core, model explainability is either  to make decision process of a model understandable for humans or to provide an explanation for a single decision on a single data instance. In the case of black-box explanations, a simpler model can explain decisions made by a more complex model, we therefore can enjoy accuracy of more complex but opaque model, while explain its behaviour consistently with a simpler and less accurate model. There are practical examples for explainability, a trading system should be able to expledata and a diagnostics. Face recognition systems should explain why an image was matched to an identity. This should happen in a way humans can understand the reasoning. In a face recognition system, for instance we can use latent vector representations in the higher layers as "super pixels" where the intermediary images do make sense for human observer. in Figure 1, we can observe the convolutional layers gradually produce representations that are closer to what we can understand.
+In its core, model explainability is either  to make decision process of a model understandable for humans or to provide an explanation for a single decision on a single data instance. In the case of black-box explanations, a simpler model can explain decisions made by a more complex model, we therefore can enjoy accuracy of more complex but opaque model, while explain its behavior consistently with a simpler and less accurate model. There are practical examples for explainability, a trading system should be able to expledata and a diagnostics. Face recognition systems should explain why an image was matched to an identity. This should happen in a way humans can understand the reasoning. In a face recognition system, for instance we can use latent vector representations in the higher layers as "super pixels" where the intermediary images do make sense for human observer. in Figure 1, we can observe the convolutional layers gradually produce representations that are closer to what we can understand.
 
-![Convolutional Neural networks](images/cnn.jpeg)
+![Convolutional Neural networks](images/cnn.jpeg "Figure 1 - ADD REF HERE")
 
 ## Reasons for explainability
 
-[Burkart, Hurber] identify trust, causality, transferability, informativeness, fairness, accountability, making adjustments, and proxy functionality as the most common reasons for the need for AIX. Let us explore some of these reasons in more details.
+[Burkart and Hurber (2020)](https://arxiv.org/pdf/2011.07876.pdf) identify trust, causality, transferability, informativeness, fairness, accountability, making adjustments, and proxy functionality as the most common reasons for the need for AIX (Artificial Intelligence eXplainability). Let us explore some of these reasons in more details.
 
 ### Trust
 
@@ -43,11 +44,11 @@ One of the major challenges for automation, specially the kind of automation tha
 
 ### Causality
 
-Most ML inference work out probabilistic correlation amongst events and have no insight into causal structure of events, saving causal inference [[more information at CleaR conference]](https://www.cclear.cc/AcceptedPapers). For instance, the causal relation between emergence of birds of spring, such as swift, and arrival of the season has been clear for as long as human have lived in those regions where migrating birds arrive just before spring. People do acknowledge that there is a correlation between arrival of the migrant birds and changing of the season, but I do doubt anyone would consider migrant birds are causing spring to arrive. A probabilist model only considers correlation. Using explainability we can observe whether causal structure has any role in decision making.
+Most ML inference work out probabilistic correlation amongst events and have no insight into causal structure of events, saving causal inference [more information at CleaR conference](https://www.cclear.cc/AcceptedPapers). For instance, the causal relation between emergence of birds of spring, such as swift, and arrival of the season has been clear for as long as human have lived in those regions where migrating birds arrive just before spring. People do acknowledge that there is a correlation between arrival of the migrant birds and changing of the season, but I do doubt anyone would consider migrant birds are causing spring to arrive. A probabilist model only considers correlation. Using explainability we can observe whether causal structure has any role in decision making.
 
 ### Fairness
 
-There has been numerous studies that human bias has resulted in rejection of job applications whose applicant names indicating certain ethnicity or religious background. Same issues have been reported with social class bias on the basis of postal codes of the job applicants. Such human biases have resulted in the right to know legislations in Europe. As machine learning is automating such decisions, the human bias can pollute the data and therefore, the automated decisions. It is crucial that the automated algorithm can explain on what basis it makes one decision or another. Not only is explinability crucial for legislative purposes, but it is an invaluable took fir building fairness into the algorithms by first understanding the basis, the features, and the causal structure of decisions an algorithm makes. For instance, if an algorithm shows that name, age, or postal code have played any role in decision making, we can understand there human bias in historical decision-making has polluted the dataset and thus we can remedy the issues that are ingrained in the datasets.
+There has been numerous studies that human bias has resulted in rejection of job applications whose applicant names indicating certain ethnicity or religious background. Same issues have been reported with social class bias on the basis of postal codes of the job applicants. Such human biases have resulted in the 'right to know' legislation in Europe. As machine learning is automating such decisions, the human bias can pollute the data and therefore, the automated decisions. It is crucial that the automated algorithm can explain on what basis it makes one decision or another. Not only is explainability crucial for legislative purposes, but it is an invaluable took fir building fairness into the algorithms by first understanding the basis, the features, and the causal structure of decisions an algorithm makes. For instance, if an algorithm shows that name, age, or postal code have played any role in decision making, we can understand there human bias in historical decision-making has polluted the dataset and thus we can remedy the issues that are ingrained in the datasets.
 
 ### Accountability
 
@@ -57,9 +58,11 @@ Additionally, as algorithms become consistently better than humans at making cer
 
 ## Supervised learning: definitions
 
+_In order to... we shall... they are..._
+
 ### Model
 
-Model $h(x)=y$ is a supervised learning model where $x\in \mathcal{X} \subseteq \mathbb{R}^{d \times l}$ and $y \in \mathcal{Y} \subseteq \mathbb{R}^k$. In the case of SML a set of labeled data $\mathcal {D_{\tau}} = \{(x_1, y_1)\ , \dots ,(x_n, y_n)\}$ is used to train the model in order for the model to to be able to map $h$ over unseen data $\mathcal{X^\pi}=\{x^1, \dots, x^k\}$ to prediction $\mathcal{Y}=\{y^1, \dots, y^n\}$. In the simple case of single class classification and regression $l=k=1$.
+Model $h(x)=y$ is a supervised learning model (SML) where $x\in \mathcal{X} \subseteq \mathbb{R}^{d \times l}$ and $y \in \mathcal{Y} \subseteq \mathbb{R}^k$. In the case of SML a set of labeled data $\mathcal {D_{\tau}} = \{(x_1, y_1)\ , \dots ,(x_n, y_n)\}$ is used to train the model in order for the model to to be able to map $h$ over unseen data $\mathcal{X^\pi}=\{x^1, \dots, x^k\}$ to prediction $\mathcal{Y}=\{y^1, \dots, y^n\}$. In the simple case of single class classification and regression $l=k=1$.
 
 ### Blackbox model
 
@@ -81,7 +84,7 @@ Given dataset $\mathcal{D}$, SML learning amounts to solving optimization proble
 \large{ h^*=\text{arg} \min\limits_{h \in \mathcal{H}}\mathcal{E}(h(x)) }
 ```
 
-In the case of parameteric models such as a deep learning model where the model parameters are represented as $\theta$ and optimized parameters as $\theta^*$, the optimization problem can be formulated as:
+In the case of parametric models such as a deep learning model where the model parameters are represented as $\theta$ and optimized parameters as $\theta^*$, the optimization problem can be formulated as:
 
 ```math
 \large{ \theta^*=\text{arg} \min\limits_{\theta}\mathcal{E}(h(x; \theta)) }
@@ -104,7 +107,7 @@ Table 1 provided a comprehensive classification of explainability approaches.
 | Explainability Approach | Description                                                                  |
 |---                     |---                                                                            |
 | ante-hoc               | Explainability is built into the model.                                      |
-| pos-hoc                | Explainability is created after model creation.                                                            |
+| post-hoc                | Explainability is created after model creation.                                                            |
 | instance/local         | Explainability is is only applicable to a single instance of data and its close vicinity.                  |
 | agnostic               | Explainability is independent of the model itself and is applicable to many or all models.                  |
 | data independent       | Explainability mechanism works without additional data and is applicable to many or all relevant datasets. |
@@ -120,7 +123,7 @@ $$
 $$
 ```
 
-As mentioned in the previous sections, there are two approached to explanation: global and local. In the case of global explanations, explanator $e$ take a model $b$ and a dataset $\mathcal{D'}$ or $e(b, \mathcal{D'})$. Local implementation, takes a model $b$ and an instance from the dataset $(x,y) \in \mathcal{D'}$ as input. This is consistent with the intuitive definition that global explanators explain a model's inferences over a specific dataset and local explantors provide interpretation for a specific instance of data belonging to a dataset.
+As mentioned in the previous sections, there are two approached to explanation: global and local. In the case of global explanations, explanator $e$ take a model $b$ and a dataset $\mathcal{D'}$ or $e(b, \mathcal{D'})$. Local implementation, takes a model $b$ and an instance from the dataset $(x,y) \in \mathcal{D'}$ as input. This is consistent with the intuitive definition that global explanators explain a model's inferences over a specific dataset and local explanators provide interpretation for a specific instance of data belonging to a dataset.
 
 ## Characteristics of Model Explanators
 
@@ -132,11 +135,11 @@ As mentioned in the previous sections, there are two approached to explanation: 
 
 **Global Perspective:** Apart from trusting a specific local decision, it is also important to trust the model itself to be making the right decisions most of the time. This is similar to trusting decision making of a human, even though on occasions the human might make sub-optimal decisions. Inversely, making good decisions occasionally, does not make a human a good decision maker. So for an explainer to be trusted it has to make good local decisions most of the time; thus incorporating local fidelity and global perspective as quality factors for an explainers.
 
-## Post-hoc model explanation for black-box modeles via surrogate models
+## Post-hoc model explanation for blackbox models via surrogate models
 
-As the name suggests, a black box model is a model, whose inner workings are opaque to human understanding, such as deep neural networks. This is not a new sort of recognized problems. Even in the early days of neural networks criticism was levied at opaqueness of logic of neural networks through information constituency argument. One way to explain black-box models' inference is to develop a surrogate model that is a white box model capable of explaining decisions that the black-box models makes. This way we can benefit from internal complexity of a black-box model such as a ANN, while use a simple model that consistently explains the inferences the more complex model has created. Do bear in mind that justification for effectiveness of neural network is based on *universal approximation theorem*, which in turn proposes to solve complex non-linear problems using approximation to a function that behaves similarly to the problem that we want to solve. 
+As the name suggests, a blackbox model is a model, whose inner workings are opaque to human understanding, such as deep neural networks. This is not a new sort of recognized problems. Even in the early days of neural networks criticism was levied at opaqueness of logic of neural networks through information constituency argument. One way to explain black-box models' inference is to develop a surrogate model that is a white box model capable of explaining decisions that the black-box models makes. This way we can benefit from internal complexity of a black-box model such as a ANN, while use a simple model that consistently explains the inferences the more complex model has created. Do bear in mind that justification for effectiveness of neural network is based on *universal approximation theorem*, which in turn proposes to solve complex non-linear problems using approximation to a function that behaves similarly to the problem that we want to solve. 
 
-Figure 2 shows a simplified version of a simple approximation (blue graph) that can interpret the more complicated inference graph (orange one). This is foundation of machine learning in general. If the distance between predictions and observed is within a certain range we can justify the models' predictions at posthoc.
+Figure 2 shows a simplified version of a simple approximation (blue graph) that can interpret the more complicated inference graph (orange one). This is foundation of machine learning in general. If the distance between predictions and observed is within a certain range we can justify the models' predictions at post-hoc.
 
 ![LIME Intuition](images/approximation.png)
 
@@ -156,7 +159,7 @@ In the case *global* explainability, the surrogate model $w$ approximates the bl
 
 In local explanation, the surrogate model $w$ is an approximation to a single instance of data with a neighborhood, rather than the whole of the dataset. or $\mathcal{X} = \{x^{\prime}|x \in \mathcal{N}(x) \}$ and $\mathcal{N(x)}= \{x \in \mathcal{X} | d(x,x^{\prime}) < \epsilon\}\text{; where } d \text{ is distant measure in a topology.}$ In simple case of Euclidean space: $\mathcal{N(x)}= \{x \in \mathcal{X}:\  |x - x^{\prime}| < \epsilon\}$.
 
-LIME and SHAP are two of the most commonly used local explanability models using surrogates into which we take an in-depth look as they are crucial for explaining some deep learning based model, specially for transformer-based NLP models.
+LIME and SHAP are two of the most commonly used local explainability models using surrogates into which we take an in-depth look as they are crucial for explaining some deep learning based model, specially for transformer-based NLP models.
 
 ## What is next?
 
@@ -166,11 +169,13 @@ Next we focus on two of the most famous feature importance methods for post-hoc 
 
 ## References
 
-Below are a set of references I have looked up and used for this post. There are very good references to learn more about AI Exlainability. If you are interested to learn more, I strongly suggest taking a look at these resources.
+Below are a set of references I have looked up and used for this post. There are very good references to learn more about AI Explainability. If you are interested to learn more, I strongly suggest taking a look at these resources.
 
-1. [LIME's original paper](https://arxiv.org/pdf/1602.04938v1.pdf)
-2. [Survey paper for explainability methods](https://arxiv.org/pdf/2011.07876.pdf)
-3. [Oreily blog for intuitive understanding of LIME](https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/)
+1. LIME's original paper: [Ribeiro et Al. (2016) “Why Should I Trust You?”
+Explaining the Predictions of Any Classifier](https://arxiv.org/pdf/1602.04938v1.pdf)
+2. [Burkart and Huber (2020) A Survey on the Explainability of Supervised Machine
+Learning](https://arxiv.org/pdf/2011.07876.pdf)
+3. Oreily blog: [Local Interpretable Model-Agnostic Explanations (LIME): An Introduction](https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/)
 4. [LIME Open Source Library [docs]](https://github.com/marcotcr/lime/tree/master/doc/notebooks)
 5. [Kernel SHAP paper](https://arxiv.org/pdf/1705.07874.pdf)
 6. [Cooporative games in Game theory](https://vknight.org/Year_3_game_theory_course/Content/Chapter_16_Cooperative_games/)
@@ -178,3 +183,15 @@ Below are a set of references I have looked up and used for this post. There are
 8. [Cooporative Game Theory](https://www.wifa.uni-leipzig.de/fileadmin/Fakultät_Wifa/Institut_für_Theoretische_Volkswirtschaftslehre/Professur_Mikroökonomik/Cooperative_game_theory/B1_gl.pdf)
 9. [UBC course on Shapley Values](https://www.youtube.com/watch?v=9OFMRiAVH-w)
 10. [A Unified Approach to Interpreting Model Predictions](https://arxiv.org/pdf/1705.07874.pdf)
+
+
+Review Notes @mikegc (first pass):
+
+- Where does the CNN image come from?  I think it's here: https://www.mdpi.com/1424-2818/12/1/29 which references it as "Figure 1. Deep neural networks learn hierarchical feature representations. After (LeCun et al. (2015))" Use that?
+- LIne 33: "should be able to expledata and a diagnostics" - help me untie this typo pls.
+- Line 39: I added "Artificial Intelligence eXplainability" to AIX, but should we just stick to "explainability" or does this instance need AIX? AIX is not used anywhere else in the article.
+- Line 39: Missing link to ref?  https://arxiv.org/pdf/2011.07876.pdf? - I HAVE PROPOSED FIX.
+- Line 61: For readability, what is this section? Why is this section?
+- Line 65: "X π={x 1 ,…,x k } to prediction \mathcal{Y}=\{y^1, \dots, y^n\}Y={y 1,…,y n}" - Uses 'x k' and 'y n'.  Should these be consistent?
+- Line 75: Open question: Is 'math' supported by the BuildOn platform? - Asked in Slack. 
+- Line 174: Suggested links with references and a little more details as this is a 'References' section not a 'links' section. (I only looked at the first 3)
