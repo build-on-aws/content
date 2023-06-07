@@ -1,6 +1,8 @@
 # Content Review Checklist
 
-Reviewers and authors should both use this checklist to ensure content meets all of the requirements to be published on the BuildOn platform.  
+Reviewers and authors should both use this checklist to ensure content meets all of the requirements to be published on the BuildOn platform. Step 1 is overall guidance and not a hard requirement, more of a strong suggestion, whereas steps 2 & 3 deal with the technical aspects that content needs to adhere to for publishing.
+
+Community contribution are currently in an invite-only phase, and we plan to open up to the broader community in the near future.
 
 ## Step 1: Read the whole article and review it for
 
@@ -10,18 +12,18 @@ Reviewers and authors should both use this checklist to ensure content meets all
   - [ ] Break up large blocks of text with subheadings, bullet points, and numbered lists.
   - [ ] Emphasize important points using bold, italics, or underlining.
   - [ ] Add relevant images, videos, or infographics to support and illustrate the content.
-  - [ ] **Style:** Style should be conversational, educational, and opinionated. It should NOT be sales-y.
-    - [ ] Would you read this piece?
-    - [ ] Does this piece sound like it was written by a human?
-    - [ ]  Would the reader naturally search for this content?
-    - [ ] Is this helpful and useful to the reader — and is the core question answered?
-    - [ ] Does this content inspire the reader to learn, build, or experiment (even if it’s not on AWS!)?
-    - [ ]  Will the reader want to share this content with their network?
-    - [ ] Are opinions backed up with sound reasoning and evidence?
+- [ ] **Style:** Style should be conversational, educational, and opinionated. It should NOT be sales-y.
+  - [ ] Would you read this piece?
+  - [ ] Does this piece sound like it was written by a human?
+  - [ ] Would the reader naturally search for this content?
+  - [ ] Is this helpful and useful to the reader — and is the core question answered?
+  - [ ] Does this content inspire the reader to learn, build, or experiment (even if it’s not on AWS!)?
+  - [ ] Will the reader want to share this content with their network?
+  - [ ] Are opinions backed up with sound reasoning and evidence?
 - [ ] **Depth**:
   - [ ] **Blog posts** and **foundational content** should be at least 500 words in length, and they should sufficiently address the topic in the title and description. There is no maximum content length at this time.
   - [ ] **Tutorials** should have detailed explanations for each step, or a detailed description of *“we are going to set up X, Y, and Z, and to be able to do A, B, and C, please follow these steps.”* Remember to include the “why” to provide context, along with the “how.”
-- [ ] **Errors**: Check for typos, grammatical mistakes, and misspellings. Please make use of the [Style Guide](https://github.com/build-on-aws/style-guide) to run checks on the content as part of the review.
+- [ ] **Errors**: Check for typos, grammatical mistakes, and misspellings - there is a workflow step that will run a spelling, grammar, and language usage check with suggestions when you open a PR. The output will be at the bottom of the PR.
 
 ## Step 2: Once you have finished reading the article, check each of the following
 
@@ -30,13 +32,13 @@ Reviewers and authors should both use this checklist to ensure content meets all
 - [ ] **Introduction:** The first paragraph below the frontmatter is the introduction, and should not have any H heading prior to it.
 - [ ] **Syntax**: All content should follow [Markdown syntax](https://www.markdownguide.org/basic-syntax/).
 - [ ] **Correct directory:** Ensure that the content piece is in the correct directory and uses the correct template:
-  - [ ] `/posts` for technical experiences & opinion pieces, also known as “blog stye”
+  - [ ] `/posts` for technical experiences & opinion pieces, also known as “blog style”
   - [ ] `/tutorials` for any tutorial
   - [ ] `/concepts` for any essentials, foundational, or deep-dive
   - [ ] `/code/snippets` for any code snippet
   - [ ] `/livestreams` for any livestream show or show notes
 - [ ] **Tutorials:**
-  - [ ] Any tutorial needs to follow the [template provided in GitHub](https://github.com/build-on-aws/content/blob/main/templates/tutorial.md).
+  - [ ] Any tutorial needs to follow the [template provided in GitHub](/templates/tutorial.md).
   - [ ] Before the conclusion, include a Clean Up section detailing how to remove any infrastructure created.
   - [ ] Include a cost estimation for per hour, and per month (using 750 hours for the calculation).
   - [ ] Indicate if any free service tiers apply, and the threshold to determine if the reader is still in that period. E.g. “We will be using a `t2.micro` instance in this tutorial, if you are still in your initial 12-month period, this will be included in the free tier.”
@@ -57,7 +59,7 @@ Reviewers and authors should both use this checklist to ensure content meets all
 - [ ] **Tags:** Tags in a post are limited to 5 that will displayed in the feed, so ensure the most important 5 are first in the list, using the `kebab-case` convention (all lowercase, with `-` between words).
 - [ ] **Publication date:** Update the `date` field in the frontmatter to be the current or future date that the post will be published. Content with future dates will be published at the *next build* after that date.
 - [ ] **Links:** Do not add links as raw text, e.g. `start from here https://example.com`. Instead, add them as links via `[start from here](https://example.com)`.
-- [ ] **Links - relative**: To link to other content in the repo, use a relative link, not one prefixed with the full URL, e.g. `/posts/the-other-post` and not `https://buildon.aws/posts/the-other-post`.
+- [ ] **Links - relative:** To link to other content in the repo, use a relative link, not one prefixed with the full URL, e.g. `/posts/the-other-post` and not `https://buildon.aws/posts/the-other-post`.
 
 ## Step 3: Before publishing, check to make sure the post adheres to the legal rules
 

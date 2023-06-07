@@ -1,6 +1,6 @@
 # Quick Start
 
-Interested in contributing to [BuildOn.AWS](https://www.buildon.aws)? Get started quickly: 
+Interested in contributing to [BuildOn.AWS](https://www.buildon.aws)? Get started quickly:
 
 * [What We're Looking For](#what-were-looking-for)
 * [Writing Style](#writing-style)
@@ -17,15 +17,11 @@ Interested in contributing to [BuildOn.AWS](https://www.buildon.aws)? Get starte
 
 ## What We're Looking For
 
-:warning: January 27, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months.
+:warning: January 27, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](/) for updates as we open this up to more community authors in the coming months.
 
 ### Who Writes on BuildOn
 
 We are looking for people with technical knowledge to write about their experiences, share their opinions, and help others in the community. BuildOn.AWS publishes content from authors who want to share their challenges (and helpful hints) to learning a programming language, a dive deep into why it's always DNS, best practices on building microservices architectures and more.
-
-### Who Reads BuildOn
-
-BuildOn.AWS readers are hands-on builders. They personally manipulate code, data, configuration/operations, design architectures, and use APIs, command-line tools, or SDKs to build successful applications. These readers use a range of programming languages, frameworks, tools, and databases.
 
 ### What Topics We’re Looking For
 
@@ -35,7 +31,7 @@ Not sure what to write about? Check out our idea backlog [here](https://github.c
 
 ## Writing style
 
-Content on BuildOn.AWS is original content and has a friendly style. Our content reviewers will help you make sure your content is in this style so you can build trust and rapport with the technical community.
+Content on BuildOn.AWS is original content and has a friendly style. Our content reviewers will help you make sure your content is in this style so you can build trust and rapport with the technical community. We are accepting limited republishing requests for content from other platforms at this time, please submit [a request](LINK TBD) to republish.
 
 ### Be You
 
@@ -78,7 +74,7 @@ Wondering what type of content fits this content platform? Here are some example
 
 You'll need to meet the following prerequisites to publish your content:
 - Have a [GitHub SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) or [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) setup for your GitHub account
-- Have a Markdown editor or compatible IDE for writing and previewing your markdown content (e.g. VSCode, IA Writer, Obsidian, IntelliJ, etc.)
+- Have a Markdown editor or compatible IDE for writing and previewing your markdown content (e.g. VSCode, IA Writer, Obsidian, IntelliJ, etc.). We recommend installing a plugin / extension for your IDE to help with Markdown & Yaml syntax, as well as a spell checker.
 
 ### 1. Submit a Content Proposal
 
@@ -98,7 +94,8 @@ When your proposal has been reviewed, a reviewer will label your issue with `acc
 After your content proposal has been `accepted`, you'll write your content in [Markdown](https://www.markdownguide.org/basic-syntax/). You'll add the front matter, which contains metadata about your post. The front matter specifies your blog layout, title, description, and tags.
 
 Use the [template](https://github.com/build-on-aws/content/raw/main/templates/post.md) that contains the full instructions or copy the frontmatter below to the top of your content Markdown file.
-```
+
+```yaml
 ---
 title: "What Happens When You Type a URL Into Your Browser"
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -120,7 +117,7 @@ Once you've written your content, add your content to the content repo forked in
 
 At the end of these steps, you'll end up with your directory structure looking like this:
 
-```
+```text
 content/
 ├── posts/
 │   ├── what-happens-when-you-type-a-url-into-your-browser/
