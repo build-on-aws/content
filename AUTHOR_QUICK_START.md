@@ -31,7 +31,11 @@ Not sure what to write about? Check out our idea backlog [here](https://github.c
 
 ## Writing style
 
-Content on BuildOn.AWS is original content and has a friendly style. Our content reviewers will help you make sure your content is in this style so you can build trust and rapport with the technical community. We are accepting limited republishing requests for content from other platforms at this time, please submit [a request](LINK TBD) to republish.
+Content on BuildOn.AWS is original content and has a friendly style. Our content reviewers will help you make sure your content is in this style so you can build trust and rapport with the technical community.
+
+## Republishing content from other platforms
+
+We are accepting limited republishing requests for content from other platforms at this time, please submit [a request](LINK TBD) to republish. Please note that you need to be the original author for the content piece, and if accepted, we will set up a canonical link for the content piece on BuildOn.aws to point to the original location as the source of truth.
 
 ### Be You
 
@@ -153,8 +157,8 @@ Your content is now submitted and will be queued for review. When a reviewer sta
 
 For a post titled `What Happens When You Type a URL Into Your Browser` which is published at `https://www.buildon.aws/posts/what-happens-when-you-type-a-url-into-your-browser` store your files like this:
 
-- Main post file: `posts/what-happens-when-you-type-a-url-into-your-browser/index.md`
-- Images: `posts/what-happens-when-you-type-a-url-into-your-browser/images/dig-command-output.png`
+* Main post file: `/posts/what-happens-when-you-type-a-url-into-your-browser/index.md`
+* Images: `/posts/what-happens-when-you-type-a-url-into-your-browser/images/dig-command-output.png`
 
 ### 5. Address Review Feedback
 
