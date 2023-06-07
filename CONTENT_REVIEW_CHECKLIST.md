@@ -1,5 +1,7 @@
 # Content Review Checklist
 
+Ready to submit your content for publication? Review this checklist to make sure your content is ready. Taking care of these items before submitting your content will speed up the time to review. 
+
 Reviewers and authors should both use this checklist to ensure content meets all of the requirements to be published on the BuildOn platform. Step 1 is overall guidance and not a hard requirement, more of a strong suggestion, whereas steps 2 & 3 deal with the technical aspects that content needs to adhere to for publishing.
 
 Community contribution are currently in an invite-only phase, and we plan to open up to the broader community in the near future.
