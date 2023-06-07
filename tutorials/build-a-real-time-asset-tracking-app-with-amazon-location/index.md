@@ -28,7 +28,7 @@ Before starting this tutorial, you will need the following:
 
 | Info                | Level                                  |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Intermediate                               |
+| ✅ AWS Level        | 200 - Intermediate                               |
 | ⏱ Time to complete  | 45 minutes                             |
 | 💰 Cost to complete | Free tier eligible      |
 | 🧩 Prerequisites    | - [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>|

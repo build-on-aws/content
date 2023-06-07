@@ -28,7 +28,7 @@ date: 2023-04-18
 
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Intermediate                               |
+| ✅ AWS Level        | 200 - Intermediate                               |
 | ⏱ Time to complete  | 60 minutes                             |
 | 💰 Cost to complete | ~$10                                    |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdghactnssprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [GitHub Account](https://github.com) |

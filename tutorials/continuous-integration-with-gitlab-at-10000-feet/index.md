@@ -52,7 +52,7 @@ To use GitLab CI/CD, you need:
 
 ## An Example Pipeline
 
-The example application is available on GitHub. Deploying it on the public GitLab service is optional, if you just want to read along. 
+The example application is available on GitHub. Deploying it on the public GitLab service is optional, if you just want to read along.
 
 For this example you will need:
 
@@ -64,7 +64,7 @@ For this example you will need:
 
 All right, let's get to it!
 
-**Step 1. Import a repository in GitLab**
+## Step 1. Import a repository in GitLab
 
 The [application repository](https://GitHub.com/build-on-aws/continuous-integration-weather-app) is on GitHub. We will import the repository to GitLab by [forking the repository](https://docs.GitHub.com/en/get-started/quickstart/fork-a-repo) to your GitHub account. Choose **New Project** to get started.
 
@@ -75,7 +75,7 @@ The [application repository](https://GitHub.com/build-on-aws/continuous-integrat
 
 If you don’t have a personal access token, [create the token](https://docs.GitHub.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
-**Step 2: Import the repository into GitLab** 
+## Step 2: Import the repository into GitLab
 
 Choose **Create a project**.
 

@@ -35,7 +35,7 @@ In this guide, we will learn how to:
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
-| ✅ AWS experience      | 100 - Beginner                                              |
+| ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 40 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment/)<br>- [AWS CDK v2.7.0 installed](https://aws.amazon.com/getting-started/guides/setup-cdk)<br>- [GitHub account](https://github.com/)|

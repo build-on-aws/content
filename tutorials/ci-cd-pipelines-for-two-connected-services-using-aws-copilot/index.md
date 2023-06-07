@@ -35,7 +35,7 @@ This tutorial will show you how you can take advantage of [AWS Copilot CLI](http
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
-| ✅ AWS experience      | 100 - Beginner                                              |
+| ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 60 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
