@@ -12,7 +12,7 @@ date: 2023-05-10
 images:
   banner: ./images/the-big-dev-theory.png
   thumbnail: ./images/the-big-dev-theory.png
-  hero: ./image/the-big-dev-theory.png
+  hero: ./images/the-big-dev-theory.png
   background: ./images/the-big-dev-theory.png
 ---
 
