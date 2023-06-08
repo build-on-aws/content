@@ -1,7 +1,7 @@
 ---
 title: "The Practical Cloud Guide for IT Pros"
 description: "A learning journey based on a series of common tasks for IT Pros migrating from on-premise environments to the cloud."
-navigationBars: [none]
+navigationBars: none
 posts:
   - "We’re Moving to the Cloud"
   - "Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail"
