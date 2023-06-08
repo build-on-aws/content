@@ -1,6 +1,6 @@
 ---
-title: Get started with Amazon SageMaker Data Wrangler image preparation
-description: Learn how to use Amazon SageMaker Data Wrangler's image preparation feature to process image data while writing minimal code. 
+title: "Get Started with Amazon SageMaker Data Wrangler Image Preparation"
+description: "Learn how to use Amazon SageMaker Data Wrangler's image preparation feature to process image data while writing minimal code." 
 tags:
   - amazon-sagemaker-data-wrangler
   - data-preparation
@@ -12,22 +12,23 @@ authorName: Peter Chung, Munish Dabra
 date: 2023-06-01
 ---
 
-Imagine you’re working with state and local governments to respond as quickly as possible to traffic accidents. You’re working to build a machine learning (ML) model that can identify accidents from traffic footage to dispatch first responders to arrive on site. Your efforts are extremely important as it will save lives!
+Imagine you’re working with state and local governments to respond as quickly as possible to traffic accidents. You’re working to build a machine learning (ML) model that can identify accidents from traffic footage to dispatch first responders to arrive on site. Your efforts are extremely important as they will save lives!
 
-To do this, you’ll need to prepare lots of images to train and build your ML model. But you’re not too excited about having to write hundreds of lines of code. You’re more much familiar working with tabular data and aren’t so comfortable using libraries that process images. Fortunately, Amazon SageMaker Data Wrangler can help. Data Wrangler reduces the time it takes to aggregate and prepare image data for ML from weeks to minutes. You can use its single visual interface, to prepare these images without writing a single line of code. But the data scientist in you still wants to write some code. Data Wrangler can still help with that.
+To do this, you’ll need to prepare lots of images to train and build your ML model. But you’re probably not too excited about having to write hundreds of lines of code. Maybe you’re more familiar working with tabular data or aren’t comfortable using libraries that process images. Fortunately, Amazon SageMaker Data Wrangler can help. Data Wrangler reduces the time it takes to aggregate and prepare image data for ML from weeks to minutes. You can use its single visual interface to prepare these images without writing a single line of code. But if the data scientist in you still wants to write some code, Data Wrangler can still help with that, too.
 
-In this tutorial, you will use Amazon SageMaker Data Wrangler to prepare image data for use in an image classification model. Your data preparation tasks will be an essential step toward building a model that can recognize, and subsequently respond to, traffic accidents on the road.
+In this tutorial, we will use Amazon SageMaker Data Wrangler to prepare image data for use in an image classification model. The data preparation tasks will be an essential step toward building a model that can recognize, and subsequently respond to, traffic accidents on the road.
 
 ![architecture-diagram-of-workflow](/images/architecture-diagram-of-workflow.png)
 
-The preceeding diagram shows the tutorial's workflow. Once you set up your Amazon SageMaker Studio domain, you will download images of automobile crashes captured from CCTV and upload them into an Amazon S3 bucket. Then you will import these images into Amazon SageMaker Studio to process them.
+The preceding diagram shows the tutorial's workflow. Once you set up your Amazon SageMaker Studio domain, you will download images of automobile crashes captured from CCTV and upload them into an Amazon S3 bucket. Then you will import these images into Amazon SageMaker Studio to process them.
 
-Why do we need to preprocess images? For the purpose of building an accurate machine learning model, we want to enhance the quality of the images, extract relevant features (like outlines of an automobile), and standard the data. These are all essential steps to preparing our image data, setting them into a suitable format, and enabling the machine learning model to learn from the data.
+Why do we need to pre-process images? For the purpose of building an accurate machine learning model, we want to enhance the quality of the images, extract relevant features (like outlines of an automobile), and standardize the data. These are all essential steps to preparing our image data, getting them into a suitable format, and enabling the machine learning model to learn from the data.
 
-For the image preparation steps in Data Wrangler, you'll first handle corrupt or defection images in the dataset. This removes unsuitable images in training our machine learning model. Then, you'll enhance the contrast to extract relevant features and resize images to standardize them. Lastly, you'll apply a custom transform to improve the model's ability to detect edges within the images.
+For the image preparation steps in Data Wrangler, we'll first handle corrupt or defective images in the dataset. This removes unsuitable images in training our machine learning model. Then we'll enhance the contrast to extract relevant features and resize images to standardize them. Lastly, we'll apply a custom transform to improve the model's ability to detect edges within the images.
 
-Once the transformation steps are complete, you'll export the the prepared images to another Amazon S3 bucket. You'll execute the job to process the images. Lastly, you'll clean up the environment so you don't incur charges after you're done.
+Once the transformation steps are complete, we'll export the the prepared images to another Amazon S3 bucket. We'll execute the job to process the images. Lastly, we'll clean up the environment so we don't incur charges after we're done.
 
+## Sections
 | Info                | Level                                  |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 100 - Beginner                          |
@@ -39,21 +40,21 @@ Once the transformation steps are complete, you'll export the the prepared image
 
 ## Prerequisites
 
-Before starting this guide, you will need an **AWS account**. If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) getting started guide for a quick overview. 
+Before starting this guide, you will need an **AWS account**. If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) getting started guide for a quick overview.
 
 ## Implementation
 
 ### Set up your Amazon SageMaker Studio domain & dataset
 
-In this tutorial, you will use Amazon SageMaker Studio to access Amazon SageMaker Data Wrangler image preparation and processing.
+In this tutorial, we will use Amazon SageMaker Studio to access Amazon SageMaker Data Wrangler image preparation and processing.
 
 Amazon SageMaker Studio is an integrated development environment (IDE) that provides a single web-based visual interface where you can access purpose-built tools to perform all machine learning (ML) development steps, from preparing data to building, training, and deploying your ML models.
 
-If you already have a SageMaker Studio domain in the US West (Oregon) Region, follow the SageMaker Studio [setup guide](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-geospatial-roles.html) to attach the required AWS IAM policies to your SageMaker Studio account, then skip Step 1, and proceed to Step 2 where you'll upload some images to an Amazon S3 bucket.
+If you already have a SageMaker Studio domain in the US West (Oregon) Region, follow the [SageMaker Studio set-up guide](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-geospatial-roles.html) to attach the required AWS IAM policies to your SageMaker Studio account, then skip Step 1, and proceed directly to Step 2.
 
-If you don't have an existing SageMaker Studio domain, continue with Step 1 to run an AWS CloudFormation template that creates a SageMaker Studio domain and adds the permissions required for the rest of this tutorial. 
+If you don't have an existing SageMaker Studio domain, continue with Step 1 to run an AWS CloudFormation template that creates a SageMaker Studio domain and adds the permissions required for the rest of this tutorial.
 
-Step 1: Choose the [AWS CloudFormation](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/quickcreate?templateURL=https://sagemaker-sample-files.s3.amazonaws.com/libraries/sagemaker-user-journey-tutorials/v2/CFN-SM-IM-Lambda-catalog.yaml) stack link. This link opens the AWS CloudFormation console and creates your SageMaker Studio domain and a user named studio-user. It also adds the required permissions to your SageMaker Studio account. In the CloudFormation console, confirm that US West (Oregon) is the Region displayed in the upper right corner. Stack name should be sm-studio-tutorial, and should not be changed. This stack takes about 10 minutes to create all the resources.
+Step 1: Choose the [AWS CloudFormation](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/quickcreate?templateURL=https://sagemaker-sample-files.s3.amazonaws.com/libraries/sagemaker-user-journey-tutorials/v2/CFN-SM-IM-Lambda-catalog.yaml) stack link. This link opens the AWS CloudFormation console and creates your SageMaker Studio domain and a user named studio-user. It also adds the required permissions to your SageMaker Studio account. In the CloudFormation console, confirm that US West (Oregon) is the Region displayed in the upper right corner. The stack name should be sm-studio-tutorial, and should not be changed. This stack takes about 10 minutes to create all the resources.
 
 This stack assumes that you already have a public VPC set up in your account. If you do not have a public VPC, see [VPC with a single public subnet](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-dev-test.html) to learn how to create a public VPC.
 
@@ -131,7 +132,7 @@ If you noticed, Data Wrangler only imports 100 random images. This makes sense b
 
 ![import-complete](/images/import-complete.png) 
 
-### Image preparation step: corrupt images
+### Image Preparation Step: Corrupt Images
 
 Step 7: We have our data in our flow. We can now transform our data to build an accurate model. In this section, you'll use Amazon SageMaker Data Wrangler built-in transformations to run a series of image transformations steps. Hopefully this helps you become familiar with Data Wrangler’s image transformation capabilities. Image data transformation is one way to build a more robust model – augmenting your data image not only increases the size of your training set, but also helps the model generalize better.
 
@@ -151,7 +152,7 @@ After a moment the step will complete. This helps to train our model since not a
 
 ![corrupt-image-results](/images/corrupt-image-results.png)
 
-### Image preparation step: enhance contrast & resize images
+### Image Preparation Step: Enhance Contrast & Resize Images
 
 Step 8: In the next stage of our image transformation, you'll enhance the contrast and resize the images so that they are consistent. You may not be doing these steps in every use case, but these are examples of built-in transformations Data Wrangler provides to improve your image dataset. Enhancing the gamma contrast controls the overall brightness of an image. Resizing images, on the other hand, is something we all do quite often when taking our pictures. Reducing the size of an image can make it easier to share. It can also improve the image quality by discarding unnecessary pixels.
 
@@ -172,7 +173,7 @@ Choose **Resize > Crop** to crop the images by 50 pixels from each size of the i
 
 Select **Add**.
 
-### Image preparation step: custom transform
+### Image Preparation Step: Custom Transform
 
 Step 9: Here, we’ll use a custom transformation to finish our image preparation. So far, you've been using Data Wrangler's built-in transformations to improve your image dataset without writing any code. However, the built-ins available today, may not be enough to meet your use case. If you can’t find a built-in transform that meets your needs, then you can use custom transform for your image preparation workflows. In this case, we can't find a built-in transform for better edge detection, so we'll write our own.
 
@@ -205,7 +206,7 @@ You should now see all the steps within the image preparation flow.
 
 ![completed-steps](/images/completed-steps.png)
 
-### Export the prepared image data to another S3 bucket.
+### Export the Prepared Image Data to Another S3 Bucket
 
 Step 10: In this step, you'll finalize your transformations to output the results of our flow to an Amazon S3 bucket.
 
@@ -225,11 +226,11 @@ You’ve completed the entire flow from transformation and saving the output to 
 
 ![create-job](/images/create-job.png)
 
-### Create a Data Wrangler job to process images
+### Create a Data Wrangler Job to Process Images
 
-Step 11: Finally, you'll run your image processing flow with Data Wrangler and save the results to a designated Amazon S3 bucket. This is a job that can be triggered by an event, by a schedule, or manually. This makes all that you've built so far repeatable and scalable.
+Step 11: Finally, we'll run our image processing flow with Data Wrangler and save the results to a designated Amazon S3 bucket. This is a job that can be triggered by an event, by a schedule, or manually. This makes all that we've built so far repeatable and scalable.
 
-Create a job by providing a job name. You can leave the other options as blank. Select **Next**.
+Create a job by providing a job name. We can leave the other options as blank. Select **Next**.
 
 ![create-job-first-page](/images/create-job-first-page.png)
 
@@ -241,17 +242,17 @@ Finally, select **Create**.
 
 ![job-success](/images/job-success.png)
 
-You can monitor the job from Amazon SageMaker > Processing in AWS console by referring to the processing job name and/or job ARN. Processing job will take around 7 minutes to complete as you are processing the entire data set.
+We can monitor the job from Amazon SageMaker > Processing in AWS console by referring to the processing job name and/or job ARN. Processing the job will take around 7 minutes to complete as we are processing the entire data set.
 
 ![monitor-job](/images/monitor-job.png)
 
-Once the job completes, you can view the results in the Amazon S3 bucket you specified.
+Once the job completes, we can view the results in the Amazon S3 bucket you specified.
 
 ![output-results-in-s3](/images/output-results-in-s3.png)
 
 **Congratulation! You completed the tutorial to prepare image data using little to no code with Amazon SageMaker Data Wrangler!**
 
-## Clean up your AWS resources
+## Clean Up Your AWS Resources
 
 It is a best practice to delete resources that you no longer need so that you don't incur unintended charges.
 
@@ -284,7 +285,6 @@ Open the CloudFromation console. In the **CloudFormation** pane, choose **Stacks
 On **sm-studio-tutorial** stack details page, choose **Delete** to delete the stack along with the resources it created in Step 1.
 
 ![delete-cfn](/images/delete-cfn.png)  
-
 
 ## Conclusion
 
