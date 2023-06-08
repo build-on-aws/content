@@ -4,7 +4,7 @@ description: Learn how to train, evaluate, and deploy a Hugging Face model
 tags:
   - hugging-face
   - natural-language-processing
-  - ai/ml
+  - ai-ml
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
 date: 2022-12-06
