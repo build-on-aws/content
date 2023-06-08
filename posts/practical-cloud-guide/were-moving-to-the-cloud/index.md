@@ -1,5 +1,5 @@
 ---
-title: "We're Moving to the Cloud"
+title: "We're Moving to the Cloud: A Practical Guide to Cloud Migration"
 description: "Introduction to the Practical Cloud Guide, a series of articles and tutorials to help IT Administrators and Pros successfully transition to the cloud."
 tags:
   - "IT Pros"
