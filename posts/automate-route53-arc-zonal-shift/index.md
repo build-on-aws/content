@@ -1,6 +1,6 @@
 ---
 title: Fix Gray Failures Fast Using Automation and Route 53 ARC Zonal Shift
-description: 
+description: This blog article describes an application gray failure, its impact, and how to automatically respond to gray failures using Amazon Route 53 ARC Zonal Shift.
 tags:
   - Resilience
   - ARC Zonal Shift
