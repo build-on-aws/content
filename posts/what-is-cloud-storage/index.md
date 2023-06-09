@@ -45,7 +45,7 @@ In real life, it’s also not so simple as each block of data mapping neatly to 
 
 Why does all of this matter? Well, if multiple people fiddle with multiple, interconnected parts of the data at once, the operating system could be unable to put it all together when it tries, resulting in large-scale data loss.
 
-So if you have a lot of data that needs to be accessed very, very quickly in sequence and by a single operator, then block storage works great. Or if you have data that has a single writer but many readers, block storage will work well, too. That means databases will usually be best stored in block storage.
+So if you have a lot of data that needs to be accessed very, very quickly in a sequence and by a single operator, then block storage works great. Or if you have data that has a single writer but many readers, block storage will work well, too. That means databases will usually be best stored in block storage.
 
 ## File Storage
 
