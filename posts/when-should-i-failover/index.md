@@ -146,6 +146,6 @@ To answer the final question (“Are we good to declare that business is back to
 
 It is important to detect service impairments and be able to translate them into business terms so that business stakeholders can understand the impact. Through this blog, I showed you a way to build that level of observability to tell clear business impact and to use this information in making failover decisions.
 
-You can try out the concepts covered in this blog using [One Observability Workshop](https://catalog.workshops.aws/observability/en-US) as well as explore other observability tools that may help you further in answering when should you fail over.
+You can try out the concepts covered in this blog as well as explore other observability tools using [One Observability Workshop](https://catalog.workshops.aws/observability/en-US) that may help you further in answering when should you fail over.
 
 Keep building!
