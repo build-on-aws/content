@@ -6,18 +6,18 @@ tags:
   - kubernetes
   - keda
   - data
+  - aws
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
+externalCanonicalUrl: https://www.pluralsight.com/blog/cloud/auto-scaling-kinesis-data-kubernetes
 date: 2023-06-20
 ---
-
-TODO - add this as canonical URL to the front matter?? https://www.pluralsight.com/blog/cloud/auto-scaling-kinesis-data-kubernetes
 
 Want to learn how to auto-scale your Kinesis Data Streams consumer applications on Kubernetes, so you can save on costs and improve resource efficiency? This blog offers a step-by-step guide on how to do just that.
 
 ## What is Amazon Kinesis and Kinesis Data Streams?
 
-[Amazon Kinesis](https://aws.amazon.com/kinesis/) is a platform for real-time data processing, ingestion, and analysis. [Kinesis Data Streams](https://docs.aws.amazon.com/streams/latest/dev/introduction.html) is a Serverless streaming data service (part of the Kinesis streaming data platform, along with [Kinesis Data Firehose](https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html), [Kinesis Video Streams](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/what-is-kinesis-video.html), and [Kinesis Data Analytics](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/what-is.html).
+[Amazon Kinesis](https://aws.amazon.com/kinesis/?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a platform for real-time data processing, ingestion, and analysis. [Kinesis Data Streams](https://docs.aws.amazon.com/streams/latest/dev/introduction.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a Serverless streaming data service (part of the Kinesis streaming data platform, along with [Kinesis Data Firehose](https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Kinesis Video Streams](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/what-is-kinesis-video.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [Kinesis Data Analytics](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/what-is.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 Kinesis Data Streams can scale elastically and continuously adapt to changes in data ingestion rates and stream consumption rates. It can be used to build real-time data analytics applications, real-time dashboards, and real-time data pipelines.
 
@@ -33,7 +33,7 @@ Let’s start off with an overview of some of the key concepts of Kinesis Data S
   - It uses the partition key that is associated with each data record to determine which shard a given data record belongs to. 
 - Consumers get records from Amazon Kinesis Data Streams, process them and store their results in Amazon DynamoDB, Amazon Redshift, or Amazon S3 etc. 
   - These consumers are also known as Amazon Kinesis Data Streams Application. 
-  - One of the methods of developing custom consumer applications that can process data from KDS data streams is to use the [Kinesis Client Library](https://docs.aws.amazon.com/streams/latest/dev/shared-throughput-kcl-consumers.html) (`KCL`).
+  - One of the methods of developing custom consumer applications that can process data from KDS data streams is to use the [Kinesis Client Library](https://docs.aws.amazon.com/streams/latest/dev/shared-throughput-kcl-consumers.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) (`KCL`).
 
 ### How do Kinesis consumer applications scale horizontally?
 
@@ -45,7 +45,7 @@ But, you still need a way to scale your applications when the load increases. Of
 
 This is where [Kubernetes Event-driven Autoscaling](https://keda.sh) (KEDA) can help. `KEDA` is a Kubernetes-based event-driven autoscaling component that can monitor event sources like Kinesis and scale the underlying `Deployment`s (and `Pod`s) based on the number of events needing to be processed.
 
-To witness auto-scaling in action, you will work with a Java application that uses the Kinesis Client Library (`KCL`) 2.x to consume data from a Kinesis Data Stream. It will be deployed to a Kubernetes cluster on [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) and will be scaled automatically using `KEDA`. The application includes an implementation of the `ShardRecordProcessor` that processes data from the Kinesis stream and persists it to a DynamoDB table. We will use the AWS CLI to produce data to the Kinesis stream and observe the scaling of the application.
+To witness auto-scaling in action, you will work with a Java application that uses the Kinesis Client Library (`KCL`) 2.x to consume data from a Kinesis Data Stream. It will be deployed to a Kubernetes cluster on [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) and will be scaled automatically using `KEDA`. The application includes an implementation of the `ShardRecordProcessor` that processes data from the Kinesis stream and persists it to a DynamoDB table. We will use the AWS CLI to produce data to the Kinesis stream and observe the scaling of the application.
 
 ![](images/arch.png)
 
@@ -68,17 +68,17 @@ Now lets move on the practical part of this post.
 
 ## Pre-requisites
 
-In addition to an AWS account, you will need to have the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl), [Docker](https://docs.docker.com/engine/install/), Java 11 and [Maven](https://maven.apache.org/install.html) installed.
+In addition to an AWS account, you will need to have the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq), [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl), [Docker](https://docs.docker.com/engine/install/), Java 11 and [Maven](https://maven.apache.org/install.html) installed.
 
 **Setup an EKS cluster, create a DynamoDB table and a Kinesis Data Stream**
 
-There are a variety of ways in which you can create an [Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html). I prefer using [eksctl](https://eksctl.io/) CLI because of the convenience it offers. Creating an an EKS cluster using `eksctl`, can be as easy as this:
+There are a variety of ways in which you can create an [Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq). I prefer using [eksctl](https://eksctl.io/) CLI because of the convenience it offers. Creating an an EKS cluster using `eksctl`, can be as easy as this:
 
 ```bash
 eksctl create cluster --name <cluster name> --region <region e.g. us-east-1>
 ```
 
-> For details, refer to the [Getting started with Amazon EKS – eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html).
+> For details, refer to the [Getting started with Amazon EKS – eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 Create a DynamoDB table to persist application data. You can use the AWS CLI to create a table with the following command:
 
@@ -132,12 +132,12 @@ kubectl logs -f $(kubectl get pod -l=app=keda-operator -o jsonpath='{.items[0].m
 
 ## Configure IAM Roles
 
-The KEDA operator as well as the Kinesis consumer application need to invoke AWS APIs. Since both will run as `Deployment`s in EKS, we will use [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) to provide the necessary permissions.
+The KEDA operator as well as the Kinesis consumer application need to invoke AWS APIs. Since both will run as `Deployment`s in EKS, we will use [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) to provide the necessary permissions.
 
 In this particular scenario:
 
 - `KEDA` operator needs to be able to get the shard count for a Kinesis stream - it does so with using `DescribeStreamSummary` API.
-- The application (KCL library to be specific) needs to interact with Kinesis and DynamoDB - it needs a [bunch of IAM permissions](https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl2-iam.html) to do so.
+- The application (KCL library to be specific) needs to interact with Kinesis and DynamoDB - it needs a [bunch of IAM permissions](https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl2-iam.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) to do so.
 
 
 **Configure IRSA for KEDA operator**
@@ -281,7 +281,7 @@ The core infrastructure is now ready. Let's prepare and deploy the consumer appl
 
 ## Deploy KCL consumer application to EKS
 
-You first need to build the Docker image and push it to [Amazon Elastic Container Registry](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html) (ECR) (refer to the `Dockerfile` for details).
+You first need to build the Docker image and push it to [Amazon Elastic Container Registry](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) (ECR) (refer to the `Dockerfile` for details).
 
 **Build and push the Docker image to ECR**
 
