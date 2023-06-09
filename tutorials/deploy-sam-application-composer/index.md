@@ -12,7 +12,7 @@ spaces:
   - devops
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
-date: 2023-05-26
+date: 2023-06-09
 ---
 
 In today's digital age, building and deploying applications to the cloud has become essential for businesses to stay competitive. Serverless computing has gained immense popularity among developers as it offers a cost-effective and scalable solution to deploy applications without managing the underlying infrastructure.
@@ -40,7 +40,7 @@ We will learn:
 | 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [Any Supported Local IDE from list](https://aws.amazon.com/developer/tools/)<br>- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br>- [Node and NPM installed](https://docs.npmjs.com/cli/v9/configuring-npm/install)|
 | 💻 Code Sample         | Code sample used in tutorial on [Serverless Land](https://serverlessland.com/repos/?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank"> Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-05-26                                                     |
+| ⏰ Last Updated        | 2023-06-09                                                     |
 
 | ToC |
 |-----|
