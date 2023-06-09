@@ -10,6 +10,7 @@ tags:
   - serverless-application-model
 spaces:
   - devops
+showInHomeFeed: true
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-06-09
@@ -114,7 +115,7 @@ For our new SAM application, define the following resources and their properties
 - Resource:  **`API Gateway`**
   - Properties:  
     - Name: `Api`
-    - Routes: 
+    - Routes:
     - Method: `GET`; Path: `/`
     - Method: `POST`; Path: `/`
 - Resource:  **`Lambda Function`**
