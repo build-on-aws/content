@@ -1,5 +1,5 @@
 ---
-title: "When Should I Failover? How Do I Know Failover Happened?"
+title: "When Should I Fail Over? Using Observability to Answer Critical Questions in the War Room"
 description: "Building observability into your application is critical - not only from systems perspective but also from a business perspective. Learn how you can build observability and use it for making failover decisions."
 
 tags:
@@ -145,5 +145,7 @@ To answer the final question (“Are we good to declare that business is back to
 ## Conclusion
 
 It is important to detect service impairments and be able to translate them into business terms so that business stakeholders can understand the impact. Through this blog, I showed you a way to build that level of observability to tell clear business impact and to use this information in making failover decisions.
- 
-Happy building!
+
+You can try out the concepts covered in this blog using [One Observability Workshop](https://catalog.workshops.aws/observability/en-US) as well as explore other observability tools that may help you further in answering when should you fail over.
+
+Keep building!
