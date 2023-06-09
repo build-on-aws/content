@@ -71,7 +71,7 @@ mvn package
 ```
 Once the application is successfully built you should see a following message in your terminal:
 ![Flink Build](images/flink_build.png)
-Maven packages the compiled source code of the project in a distributable JAR format in the directory `target/` named `ClickStreamProcessor-1.0-Snapshot.jar`.
+Maven packages the compiled source code of the project in a distributable JAR format in the directory `flink-clickstream-consumer/target/` named `ClickStreamProcessor-1.0.jar`.
 
 ### Step 3: Upload the files to Amazon S3
 
@@ -79,7 +79,7 @@ Maven packages the compiled source code of the project in a distributable JAR fo
 
 ![Create Bucket](images/create_bucket.png)
 
-2. Provide a unique bucket name of your choice, select the region (e.g. `us-east-1`) you want to deploy your resources and click `Create Bucket` at the bottom of the page. Take note your bucket name.
+2. Provide a unique bucket name of your choice, select `us-east-1` as region and click `Create Bucket` at the bottom of the page. Take note your bucket name.
 
 ![Create Bucket 2](images/create_bucket_2.png)
 
@@ -87,7 +87,7 @@ Maven packages the compiled source code of the project in a distributable JAR fo
 
 ![Upload to Bucket](images/upload_to_bucket.png)
 
-4. Click `Add files` and select the JAR file `ClickStreamProcessor-1.0-Snapshot.jar` that you recently generated. 
+4. Click `Add files` and select the JAR file `ClickStreamProcessor-1.0.jar` that you recently generated. 
 
 ![Add Files to Bucket](images/add_files_to_bucket.png)
 
@@ -103,7 +103,7 @@ Next, we create a CloudFormation stack and automatically deploy the following re
 * `Security groups`: Security group help us to control the traffic that is allowed to reach and leave a particular resource.
 * `IAM roles`: An IAM role is an IAM identity that has specific permissions attached to it and can be assumed by an IAM user or an AWS service. For example, an IAM role can be used to grant permissions to an application running on an EC2 instance that requires access to a specific Amazon S3 bucket.
 
-Rather than creating the required resources manually we make use of the CloudFormation template to automatically deploy the resources in your account. 
+Rather than creating the required resources manually we make use of the CloudFormation template to automatically deploy the resources in your account. **Important** Make sure to deploy your resources in region `us-east-1`.
 
 1. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation/) and click on `Create Stack`. 
 
@@ -111,7 +111,7 @@ Rather than creating the required resources manually we make use of the CloudFor
 
 ![Create Stack](images/create_stack.png)
 
-3. Provide the stack with a `Stack name` of your choice (e.g. `msk-serverless-stack`). Additionally, you have to provide a value to the parameter `AssetsBucketName`. Enter the name of the S3 bucket that you created earlier as `AssetsBucketName`. You can leave the default `ClickstreamProcessor-1.0-Snapshot.jar` as `KdaAppKey` unless you have changed the name of the JAR file that you created earlier and uploaded to S3. Leave the `OpenSearchmasterUserName` as is. Click `Next`.
+3. Provide the stack with a `Stack name` of your choice (e.g. `msk-serverless-stack`). Additionally, you have to provide a value to the parameter `AssetsBucketName`. Enter the name of the S3 bucket that you created earlier as `AssetsBucketName`. You can leave the default `ClickstreamProcessor-1.0.jar` as `KdaAppKey` unless you have changed the name of the JAR file that you created earlier and uploaded to S3. Leave the `OpenSearchmasterUserName` as is. Click `Next`.
 
 ![Specify Stack Details](images/specify_stack_details.png)
 
@@ -233,11 +233,11 @@ In the last step we have successfully created a ECS producer task. This task cre
 
 3. Click on the Version `1` to see the Avro schema of the clickstream data produced by the ECS task.
 
+![Schema Version Definition](images/schema_version_definition.png)
+
 Apache Avro is a data serialization system that allows for efficent and compact encoding of structuted data, especially in big data or streaming data use cases. To this end, Avro provides a compact binary format for data storage and exchange.
 
 The producer makes use of a Avro serializer provided by the AWS Glue Schema Registry and automatically registers the schema version in the Glue Schema Registry. 
-
-![Schema Version Definition](images/schema_version_definition.png)
 
 ### Step 9: Consume clickstream data using Kinesis Data Analytics 
 
