@@ -8,14 +8,13 @@ tags:
   - best-practices
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
+externalCanonicalUrl: https://acloudguru.com/blog/engineering/how-to-use-redis-on-cloud
 date: 2023-06-25
 ---
 
-TODO - add this as canonical URL to the front matter?? https://acloudguru.com/blog/engineering/how-to-use-redis-on-cloud
-
 Its hard to operate stateful distributed systems at scale and Redis is no exception. Managed databases make life easier by taking on much of the heavy lifting. But you still need a sound architecture and apply best practices both on the server (Redis) and client (application).
 
-This blog covers a range of Redis related best practices, tips and tricks including cluster scalability, client side configuration, integration, metrics etc. Although I will be citing [Amazon MemoryDB](https://docs.aws.amazon.com/memorydb/latest/devguide/what-is-memorydb-for-redis.html) and [ElastiCache](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/WhatIs.html) for Redis from time to time, most (if not all) will be applicable to Redis clusters in general.
+This blog covers a range of Redis related best practices, tips and tricks including cluster scalability, client side configuration, integration, metrics etc. Although I will be citing [Amazon MemoryDB](https://docs.aws.amazon.com/memorydb/latest/devguide/what-is-memorydb-for-redis.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Amazon ElastiCache](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/WhatIs.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) for Redis from time to time, most (if not all) will be applicable to Redis clusters in general.
 
 > This is not meant to be an exhaustive list by any means. I simply chose ten since it's a nice, wholesome number! 
 
@@ -23,20 +22,20 @@ Let's dive right in and start off with what options you have in terms of scaling
 
 ## 1. Scalability options
 
-You can either scale *up* or *down*:
+You can either scale *up* or *out*:
 
-- Scaling Up (Vertical) - You can increase the capacity of individual nodes/instances for e.g. upgrade from [Amazon EC2](https://aws.amazon.com/ec2/instance-types/) `db.r6g.xlarge` type to `db.r6g.2xlarge`
+- Scaling Up (Vertical) - You can increase the capacity of individual nodes/instances for e.g. upgrade from [Amazon EC2](https://aws.amazon.com/ec2/instance-types/?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) `db.r6g.xlarge` type to `db.r6g.2xlarge`
 - Scaling Out (Horizontal) - You can add more nodes to the cluster
 
 The requirement to scale *out* might be be driven by few reasons.
 
-If you need to tackle a *read heavy* workload, you can choose to add more replica nodes. This applies both for a Redis clustered setup (like `MemoryDB`) or a non-clustered  primary-replica mode as in the case of [ElastiCache with cluster mode disabled](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Replication.Redis-RedisCluster.html).
+If you need to tackle a *read heavy* workload, you can choose to add more replica nodes. This applies both for a Redis clustered setup (like `MemoryDB`) or a non-clustered  primary-replica mode as in the case of [ElastiCache with cluster mode disabled](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Replication.Redis-RedisCluster.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 If you want to increase *write* capacity, you will find yourself limited by the primary-replica mode and should opt for a Redis Cluster based setup. You can increase the number of shards in your cluster - this is because only primary nodes can accept writes and each shard can only have one primary.
 
 > This has the added benefit of increasing the overall high availability as well.
 
-![](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/images/ElastiCache-NodeGroups.png)
+![](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/images/ElastiCache-NodeGroups.png?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## 2. After scaling your cluster, you better use those replicas!
 
@@ -63,11 +62,11 @@ To optimize further, you can also use `RouteByLatency` or `RouteRandomly`, both 
 
 There is a chance that your application might read stale data from replicas - this is *Eventual Consistency* in action. Since the primary to replica node replication is *asynchronous*, there is a chance that the write you sent to a primary node has not yet reflected in the read replica. This is likely when you have a high number of read replicas specially across multiple availability zones. If this is unacceptable for your use-case, you will have to resort to using primary nodes for reads as well. 
 
-The [ReplicationLag metric](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html) in MemoryDB or ElastiCache for Redis can be used to check how far behind (in seconds) the replica is in applying changes from the primary node.	
+The [ReplicationLag metric](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) in MemoryDB or ElastiCache for Redis can be used to check how far behind (in seconds) the replica is in applying changes from the primary node.	
 
 **What about Strong Consistency?**
 
-In case of `MemoryDB`, [the reads from primary nodes are strongly consistent](https://docs.aws.amazon.com/memorydb/latest/devguide/consistency.html). This is because the client application receives a successful write acknowledgement only after a write (to the primary node) is written to a *durable Multi-AZ Transaction Log*.
+In case of `MemoryDB`, [the reads from primary nodes are strongly consistent](https://docs.aws.amazon.com/memorydb/latest/devguide/consistency.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq). This is because the client application receives a successful write acknowledgement only after a write (to the primary node) is written to a *durable Multi-AZ Transaction Log*.
 
 ## 4. Remember, you can influence how your keys are distributed across a Redis cluster
 
@@ -88,13 +87,13 @@ You need to be careful about a few things before you do that:
 - How will it affect your client applications?
 - Which metrics can you monitor during this phase? (e.g. `CPUUtilization`, `CurrConnections` etc.) 
 
-Refer to some of the [best practices in the MemoryDb for Redis documentation](https://docs.aws.amazon.com/memorydb/latest/devguide/best-practices-online-resharding.html) to better plan for scaling in.
+Refer to some of the [best practices in the MemoryDb for Redis documentation](https://docs.aws.amazon.com/memorydb/latest/devguide/best-practices-online-resharding.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) to better plan for scaling in.
 
 ## 6. When things go wrong....
 
 Lets face it, failures are enviable. Whats important is whether you are prepared for them? In case of your Redis cluster, here are some things to think about:
 
-- **Have you tested how your application/service behavior in face of failures?** If not, please do! With MemoryDB and ElastiCache for Redis, you can leverage the [Failover API](https://docs.aws.amazon.com/memorydb/latest/devguide/autofailover.html#auto-failover-test) to simulate a primary node failure and trigger a failover.
+- **Have you tested how your application/service behavior in face of failures?** If not, please do! With MemoryDB and ElastiCache for Redis, you can leverage the [Failover API](https://docs.aws.amazon.com/memorydb/latest/devguide/autofailover.html#auto-failover-test?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) to simulate a primary node failure and trigger a failover.
 - **Do you have replica nodes?** If all you have is one shard with a single primary node, you are certainly going to have downtime if that node fails.
 - **Do you have multiple shards?** If all you have is one shard (with primary and replica), in case of primary node failure of that shard, the cluster cannot accept any writes.
 - **Do your shards span multiple availability zones?** If you have shards across multiple AZs, you will be better prepared to tackle AZ failure.
@@ -105,13 +104,13 @@ Lets face it, failures are enviable. Whats important is whether you are prepared
 
 > Tl;DR: It's probably the networking/security configuration
 
-This is something which trips up folks all the time! With `MemoryDB` and `ElastiCache`, your [Redis nodes are in a VPC](https://docs.aws.amazon.com/memorydb/latest/devguide/vpcs.html). If you have a client application deployed to a compute service such as [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), [EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html), [ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html), [App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html) etc., you need to ensure you have the right configuration - specifically in terms of VPC and Security Group(s).
+This is something which trips up folks all the time! With `MemoryDB` and `ElastiCache`, your [Redis nodes are in a VPC](https://docs.aws.amazon.com/memorydb/latest/devguide/vpcs.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq). If you have a client application deployed to a compute service such as [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html), [ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Amazon App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.htm?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) etc., you need to ensure you have the right configuration - specifically in terms of VPC and Security Group(s).
 
 This might vary depending on the compute platform you are using. For example, how you [configure a Lambda function to access resources in a VPC](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html) is slightly different compared to how App Runner does it (via a [VPC Connector](https://docs.aws.amazon.com/apprunner/latest/dg/network-vpc.html)), or even EKS (although conceptually, they are the same).
 
 ## 8. Redis 6 comes with Access Control Lists - use them!
 
-There is no excuse to not apply authentication (username/password) and authorization (ACL based permission) to your Redis cluster. `MemoryDB` is Redis 6 compliant and [supports ACL](https://docs.aws.amazon.com/memorydb/latest/devguide/clusters.acls.html). However, to comply with older Redis versions, it configures a *default* user per account (with username **default**) and an immutable ACL called `open-access`. If you create a `MemoryDB` cluster and associate it with this ACL:
+There is no excuse to not apply authentication (username/password) and authorization (ACL based permission) to your Redis cluster. `MemoryDB` is Redis 6 compliant and [supports ACL](https://docs.aws.amazon.com/memorydb/latest/devguide/clusters.acls.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq). However, to comply with older Redis versions, it configures a *default* user per account (with username **default**) and an immutable ACL called `open-access`. If you create a `MemoryDB` cluster and associate it with this ACL:
 
 - Clients can connect *without* authentication
 - Clients can execute *any* command on any key (no permission or authorization either)
@@ -121,7 +120,7 @@ As a best practice:
 - Add users (along with passwords), and
 - Configure access strings as per your security requirements. 
 
-You should monitor authentication failures. For example, the [AuthenticationFailures](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html) metric in MemoryDB gives you the total number of failed authenticate attempts - set an alarm on this to detect unauthorized access attempts.	
+You should monitor authentication failures. For example, the [AuthenticationFailures](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) metric in MemoryDB gives you the total number of failed authenticate attempts - set an alarm on this to detect unauthorized access attempts.	
 
 **Don't forget perimeter security**
 
@@ -140,15 +139,15 @@ client := redis.NewClusterClient(
 
 ## 9. There are things you cannot do
 
-As a managed database service, `MemoryDB` or `ElastiCache` [restrict access to some of the Redis commands](https://docs.aws.amazon.com/memorydb/latest/devguide/restrictedcommands.html). For example, you *cannot* use a subset of the [CLUSTER](https://redis.io/commands/cluster/) related commands since the  cluster management (scale, sharding etc.) is taken of by the service itself. 
+As a managed database service, `MemoryDB` or `ElastiCache` [restrict access to some of the Redis commands](https://docs.aws.amazon.com/memorydb/latest/devguide/restrictedcommands.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq). For example, you *cannot* use a subset of the [CLUSTER](https://redis.io/commands/cluster/) related commands since the  cluster management (scale, sharding etc.) is taken of by the service itself. 
 
-But, in some cases, you might be able to find alternatives. Think of monitoring slow running queries as an example. Although you *cannot* configure `latency-monitor-threshold` using [CONFIG SET](https://redis.io/commands/config-set/), you can set the `slowlog-log-slower-than` setting in the [parameter group](https://docs.aws.amazon.com/memorydb/latest/devguide/components.html#whatis.components.parametergroups) and then use `slowlog get` to compare against it.
+But, in some cases, you might be able to find alternatives. Think of monitoring slow running queries as an example. Although you *cannot* configure `latency-monitor-threshold` using [CONFIG SET](https://redis.io/commands/config-set/), you can set the `slowlog-log-slower-than` setting in the [parameter group](https://docs.aws.amazon.com/memorydb/latest/devguide/components.html#whatis.components.parametergroups?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) and then use `slowlog get` to compare against it.
 
 ## 10. Use connection pooling
 
 Your Redis server nodes (even powerful ones) have finite resources. One of them is ability to support a certain number of concurrent connections. Most Redis clients offer connection pooling as a way to efficiently manage connections to the redis server. Re-using connections not only benefits your Redis server, but client side performance is improved due to less overhead - this is critical in high volume scenarios.
 
-ElastiCache provides [a few metrics](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheMetrics.Redis.html) you can track:
+ElastiCache provides [a few metrics](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheMetrics.Redis.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) you can track:
 
 - `CurrConnections`: the number of client connections (excluding ones from read replicas)
 - `NewConnections`: the total number of connections that have been accepted by the server during a specific period.
@@ -168,10 +167,10 @@ If you don't use the right mode of connection, you will get an error. But someti
 
 ## Conclusion
 
-The architectural choices you make will ultimately be driven by your [specific requirements](https://docs.aws.amazon.com/memorydb/latest/devguide/cluster-create-determine-requirements.html). I would encourage you to explore the following blog posts for a deeper dive into performance characteristics of MemoryDB and ElastiCache for Redis and how they might impact the way design your solutions:
+The architectural choices you make will ultimately be driven by your [specific requirements](https://docs.aws.amazon.com/memorydb/latest/devguide/cluster-create-determine-requirements.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq). I would encourage you to explore the following blog posts for a deeper dive into performance characteristics of MemoryDB and ElastiCache for Redis and how they might impact the way design your solutions:
 
-- [Optimize Redis Client Performance for Amazon ElastiCache and MemoryDB](https://aws.amazon.com/blogs/database/optimize-redis-client-performance-for-amazon-elasticache/)  
-- [Best practices: Redis clients and Amazon ElastiCache for Redis](https://aws.amazon.com/blogs/database/best-practices-redis-clients-and-amazon-elasticache-for-redis/)
-- [Measuring database performance of Amazon MemoryDB for Redis](https://aws.amazon.com/blogs/database/measuring-database-performance-of-amazon-memorydb-for-redis/)
+- [Optimize Redis Client Performance for Amazon ElastiCache and MemoryDB](https://aws.amazon.com/blogs/database/optimize-redis-client-performance-for-amazon-elasticache/?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq)  
+- [Best practices: Redis clients and Amazon ElastiCache for Redis](https://aws.amazon.com/blogs/database/best-practices-redis-clients-and-amazon-elasticache-for-redis/?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- [Measuring database performance of Amazon MemoryDB for Redis](https://aws.amazon.com/blogs/database/measuring-database-performance-of-amazon-memorydb-for-redis/?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 Feel free to share your Redis tips, tricks and suggestions. Until then, Happy Building!
