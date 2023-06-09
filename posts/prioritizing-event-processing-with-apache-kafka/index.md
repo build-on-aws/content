@@ -10,7 +10,7 @@ spaces:
   - data
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
-date: 2023-06-15
+date: 2023-06-09
 ---
 Event streams are growing in popularity among developers building data oriented architectures. Different from the brick-and-mortar batch architecture, event streams allow organizations to quickly act on the data, removing the barriers that often slow them down to innovate and differentiate. However, adopting event streams is not always easy. Many business processes were designed to think in data as this passive entity that just sits in data stores, waiting to be processed.
 
