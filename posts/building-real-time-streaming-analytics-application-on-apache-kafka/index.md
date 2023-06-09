@@ -53,10 +53,10 @@ The following provides a step-by-step tutorial to implement a real-time streamin
 
 ### Step 1: Get the repository
 
-The repository `build-on-aws/building-real-time-streaming-analytics-application-on-apache-kafka` contains the required files that help us to get started. Run the following command to download the repository to your local machine:
+The repository `build-on-aws/real-time-streaming-analytics-application-using-apache-kafka` contains the required files that help us to get started. Run the following command to download the repository to your local machine:
 
 ```bash
-git clone https://github.com/build-on-aws/building-real-time-streaming-analytics-application-on-apache-kafka.git
+git clone https://github.com/build-on-aws/real-time-streaming-analytics-application-using-apache-kafka.git
 ``` 
 
 ### Step 2: Build the Flink application
