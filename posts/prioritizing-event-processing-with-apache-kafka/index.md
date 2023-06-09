@@ -1,5 +1,5 @@
 ---
-title: "My Event is Urgent than Yours: Prioritizing Event Processing with Apache Kafka"
+title: "My Event is More Urgent than Yours: Prioritizing Event Processing with Apache Kafka"
 description: "Apache Kafka doesn't support event processing prioritization. But you don't have to settle for this. Let's see how to solve this problem using the bucket priority pattern."
 tags:
   - apache-kafka
