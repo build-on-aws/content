@@ -1,5 +1,5 @@
 ---
-title: Using Redis on Cloud? Here are Ten things you should know
+title: Using Redis on Cloud? Here are Ten things You Should Know
 description: This blog covers a range of Redis related best practices, tips and tricks including cluster scalability, client side configuration, integration, metrics and more.
 tags:
   - redis
