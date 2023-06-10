@@ -28,7 +28,7 @@ We will be using the following Go libraries:
 
 ## Application overview
 
-![](images/diagram.png)
+![Application overview](images/diagram.png)
 
 Here is how the application works:
 
@@ -149,11 +149,75 @@ Check the `DynamoDB` table in the AWS console - you should see the extracted inv
 
 `DynamoDB` table is designed with source file name as the `partition` key. This allows you to retrieve all invoice data for a given image.
 
-You can also use the AWS CLI to `scan` the table:
+You can use the AWS CLI to query the `DynamoDB` table:
 
 ```bash
 aws dynamodb scan --table-name <enter table name - check the CDK output>
 ```
+
+## Lambda function code walk through
+
+Here is a quick overview of the Lambda function logic. Please note that some code (error handling, logging etc.) has been omitted for brevity since we only want to focus on the important parts.
+
+```go
+func handler(ctx context.Context, s3Event events.S3Event) {
+	for _, record := range s3Event.Records {
+
+		sourceBucketName := record.S3.Bucket.Name
+		fileName := record.S3.Object.Key
+
+		err := invoiceProcessing(sourceBucketName, fileName)
+	}
+}
+```
+
+The Lambda function is triggered when an invoice image is uploaded to the source bucket. The function iterates through the list of invoices and calls the `invoiceProcessing` function for each invoice.
+
+Let's go through the `invoiceProcessing` function.
+
+```go
+func invoiceProcessing(sourceBucketName, fileName string) error {
+
+	resp, err := textractClient.AnalyzeExpense(context.Background(), &textract.AnalyzeExpenseInput{
+		Document: &types.Document{
+			S3Object: &types.S3Object{
+				Bucket: &sourceBucketName,
+				Name:   &fileName,
+			},
+		},
+	})
+
+	for _, doc := range resp.ExpenseDocuments {
+		item := make(map[string]ddbTypes.AttributeValue)
+		item["source_file"] = &ddbTypes.AttributeValueMemberS{Value: fileName}
+
+		for _, summaryField := range doc.SummaryFields {
+
+			if *summaryField.Type.Text == "INVOICE_RECEIPT_ID" {
+				item["receipt_id"] = &ddbTypes.AttributeValueMemberS{Value: *summaryField.ValueDetection.Text}
+			} else if *summaryField.Type.Text == "TOTAL" {
+				item["total"] = &ddbTypes.AttributeValueMemberS{Value: *summaryField.ValueDetection.Text}
+			} else if *summaryField.Type.Text == "INVOICE_RECEIPT_DATE" {
+				item["receipt_date"] = &ddbTypes.AttributeValueMemberS{Value: *summaryField.ValueDetection.Text}
+			} else if *summaryField.Type.Text == "DUE_DATE" {
+				item["due_date"] = &ddbTypes.AttributeValueMemberS{Value: *summaryField.ValueDetection.Text}
+			}
+		}
+
+		_, err := dynamodbClient.PutItem(context.Background(), &dynamodb.PutItemInput{
+			TableName: aws.String(table),
+			Item:      item,
+		})
+	}
+
+	return nil
+}
+```
+
+- The `invoiceProcessing` function calls the Amazon Textract [AnalyzeExpense](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/textract#Client.AnalyzeExpense) API to extract the invoice data. 
+- The function then iterates through the list of [ExpenseDocument](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/textracttypes#ExpenseDocument)s and extracts information from specific fields - `INVOICE_RECEIPT_ID`, `TOTAL`, `INVOICE_RECEIPT_DATE`, `DUE_DATE`.
+- It then saves the extracted invoice metadata in the `DynamoDB` table.
+
 
 ## Clean up
 
