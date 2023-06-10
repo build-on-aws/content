@@ -1,5 +1,5 @@
 ---
-title: Using Redis on Cloud? Here are ten things you should know
+title: Using Redis on Cloud? Here are Ten things you should know
 description: This blog covers a range of Redis related best practices, tips and tricks including cluster scalability, client side configuration, integration, metrics etc.
 tags:
   - redis
@@ -12,7 +12,7 @@ externalCanonicalUrl: https://acloudguru.com/blog/engineering/how-to-use-redis-o
 date: 2023-06-25
 ---
 
-Its hard to operate stateful distributed systems at scale and Redis is no exception. Managed databases make life easier by taking on much of the heavy lifting. But you still need a sound architecture and apply best practices both on the server (Redis) and client (application).
+It's hard to operate stateful distributed systems at scale and Redis is no exception. Managed databases make life easier by taking on much of the heavy lifting. But you still need a sound architecture and apply best practices both on the server (Redis) and client (application).
 
 This blog covers a range of Redis related best practices, tips and tricks including cluster scalability, client side configuration, integration, metrics etc. Although I will be citing [Amazon MemoryDB](https://docs.aws.amazon.com/memorydb/latest/devguide/what-is-memorydb-for-redis.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Amazon ElastiCache](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/WhatIs.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) for Redis from time to time, most (if not all) will be applicable to Redis clusters in general.
 
@@ -27,7 +27,7 @@ You can either scale *up* or *out*:
 - Scaling Up (Vertical) - You can increase the capacity of individual nodes/instances for e.g. upgrade from [Amazon EC2](https://aws.amazon.com/ec2/instance-types/?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) `db.r6g.xlarge` type to `db.r6g.2xlarge`
 - Scaling Out (Horizontal) - You can add more nodes to the cluster
 
-The requirement to scale *out* might be be driven by few reasons.
+The requirement to scale *out* might be driven by few reasons.
 
 If you need to tackle a *read heavy* workload, you can choose to add more replica nodes. This applies both for a Redis clustered setup (like `MemoryDB`) or a non-clustered  primary-replica mode as in the case of [ElastiCache with cluster mode disabled](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Replication.Redis-RedisCluster.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
@@ -35,7 +35,7 @@ If you want to increase *write* capacity, you will find yourself limited by the 
 
 > This has the added benefit of increasing the overall high availability as well.
 
-![](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/images/ElastiCache-NodeGroups.png?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+![Amazon ElastiCache Cluster Mode](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/images/ElastiCache-NodeGroups.png?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## 2. After scaling your cluster, you better use those replicas!
 
@@ -72,7 +72,7 @@ In case of `MemoryDB`, [the reads from primary nodes are strongly consistent](ht
 
 Instead of using consistent hashing (like lot of other distributed databases), Redis uses the concept of hash slots. There are `16384` slots in total, a range of hash slots is assigned to each primary node in the cluster and each key belongs to a specific hash slot (thereby assigned to a particular node). Multi-key operations executed on a Redis cluster cannot work if keys belong to different hash slots.
 
-But, you are not completely at the mercy of the cluster! It's possible to influence the key placement by using *hash tags*. Thus, you can ensure that specific keys have the same hash slot. For example, if you are storing orders for customer ID `42` in a `HASH` named `customer:42:orders` and the customer profile info in `customer:42:profile`, you can use curly braces `{}` to define the specific substring which will be hashed. In this case, our keys are `{customer:42}:orders` and `{customer:42}:profile` - `{customer:42}` now drives the hash slot placement. Now we can be confident that both these keys will in the *same* hash slot (hence same node).
+But, you are not completely at the mercy of the cluster! It's possible to influence the key placement by using *hashtags*. Thus, you can ensure that specific keys have the same hash slot. For example, if you are storing orders for customer ID `42` in a `HASH` named `customer:42:orders` and the customer profile info in `customer:42:profile`, you can use curly braces `{}` to define the specific substring which will be hashed. In this case, our keys are `{customer:42}:orders` and `{customer:42}:profile` - `{customer:42}` now drives the hash slot placement. Now we can be confident that both these keys will in the *same* hash slot (hence same node).
 
 ## 5. Did you think about scaling (back) in?
 
@@ -91,7 +91,7 @@ Refer to some of the [best practices in the MemoryDb for Redis documentation](ht
 
 ## 6. When things go wrong....
 
-Lets face it, failures are enviable. Whats important is whether you are prepared for them? In case of your Redis cluster, here are some things to think about:
+Let's face it, failures are enviable. What's important is whether you are prepared for them? In case of your Redis cluster, here are some things to think about:
 
 - **Have you tested how your application/service behavior in face of failures?** If not, please do! With MemoryDB and ElastiCache for Redis, you can leverage the [Failover API](https://docs.aws.amazon.com/memorydb/latest/devguide/autofailover.html#auto-failover-test?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) to simulate a primary node failure and trigger a failover.
 - **Do you have replica nodes?** If all you have is one shard with a single primary node, you are certainly going to have downtime if that node fails.
@@ -120,7 +120,7 @@ As a best practice:
 - Add users (along with passwords), and
 - Configure access strings as per your security requirements. 
 
-You should monitor authentication failures. For example, the [AuthenticationFailures](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) metric in MemoryDB gives you the total number of failed authenticate attempts - set an alarm on this to detect unauthorized access attempts.	
+You should monitor authentication failures. For example, the [AuthenticationFailures](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) metric in `MemoryDB` gives you the total number of failed authenticate attempts - set an alarm on this to detect unauthorized access attempts.	
 
 **Don't forget perimeter security**
 
@@ -137,7 +137,7 @@ client := redis.NewClusterClient(
 
 > Not using it can give your errors that's not obvious enough (e.g. a generic `i/o timeout`) and make things hard to debug - this is something you need to be careful about.
 
-## 9. There are things you cannot do
+## 9. There are things you cannot do (and that's ok)
 
 As a managed database service, `MemoryDB` or `ElastiCache` [restrict access to some of the Redis commands](https://docs.aws.amazon.com/memorydb/latest/devguide/restrictedcommands.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq). For example, you *cannot* use a subset of the [CLUSTER](https://redis.io/commands/cluster/) related commands since the  cluster management (scale, sharding etc.) is taken of by the service itself. 
 
@@ -145,7 +145,7 @@ But, in some cases, you might be able to find alternatives. Think of monitoring 
 
 ## 10. Use connection pooling
 
-Your Redis server nodes (even powerful ones) have finite resources. One of them is ability to support a certain number of concurrent connections. Most Redis clients offer connection pooling as a way to efficiently manage connections to the redis server. Re-using connections not only benefits your Redis server, but client side performance is improved due to less overhead - this is critical in high volume scenarios.
+Your Redis server nodes (even powerful ones) have finite resources. One of them is ability to support a certain number of concurrent connections. Most Redis clients offer connection pooling as a way to efficiently manage connections to the Redis server. Re-using connections not only benefits your Redis server, but client side performance is improved due to less overhead - this is critical in high volume scenarios.
 
 ElastiCache provides [a few metrics](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheMetrics.Redis.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) you can track:
 
