@@ -1,6 +1,6 @@
 ---
-title: Auto-scaling Kinesis Data Streams applications on Kubernetes
-description: Auto-scaling Kinesis Data Streams applications on Kubernetes
+title: Auto-Scaling Amazon Kinesis Data Streams Applications on Kubernetes
+description: Auto-Scaling Amazon Kinesis Data Streams Applications on Kubernetes
 tags:
   - kinesis
   - kubernetes
@@ -21,8 +21,7 @@ Want to learn how to auto-scale your Kinesis Data Streams consumer applications 
 
 Kinesis Data Streams can scale elastically and continuously adapt to changes in data ingestion rates and stream consumption rates. It can be used to build real-time data analytics applications, real-time dashboards, and real-time data pipelines.
 
-Let’s start off with an overview of some of the key concepts of Kinesis Data Streams.
-
+Let’s start off with an overview of some key concepts of Kinesis Data Streams.
 
 ## Kinesis Data Streams: High-level architecture
 
@@ -45,15 +44,15 @@ But, you still need a way to scale your applications when the load increases. Of
 
 This is where [Kubernetes Event-driven Autoscaling](https://keda.sh) (KEDA) can help. `KEDA` is a Kubernetes-based event-driven autoscaling component that can monitor event sources like Kinesis and scale the underlying `Deployment`s (and `Pod`s) based on the number of events needing to be processed.
 
-To witness auto-scaling in action, you will work with a Java application that uses the Kinesis Client Library (`KCL`) 2.x to consume data from a Kinesis Data Stream. It will be deployed to a Kubernetes cluster on [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) and will be scaled automatically using `KEDA`. The application includes an implementation of the `ShardRecordProcessor` that processes data from the Kinesis stream and persists it to a DynamoDB table. We will use the AWS CLI to produce data to the Kinesis stream and observe the scaling of the application.
+To witness auto-scaling in action, you will work with a Java application that uses the Kinesis Client Library (`KCL`) 2.x to consume data from a Kinesis Data Stream. It will be deployed to a Kubernetes cluster on [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) and will be scaled automatically using `KEDA`. The application includes an implementation of the `ShardRecordProcessor` that processes data from the Kinesis stream and persists it to a `DynamoDB` table. We will use the AWS CLI to produce data to the Kinesis stream and observe the scaling of the application.
 
-![](images/arch.png)
+![High-level architecture](images/arch.jpg)
 
 Before, we dive in, here is quick overview of `KEDA`.
 
 ## What is KEDA?
 
-`KEDA` is an open-source CNCF project that's built on top of native Kubernetes primitives such as the Horizontal Pod Autoscaler and can be added to any Kubernetes cluster. Here is a high level overview of it's key components (you can refer to the [KEDA documentation](https://keda.sh/docs/) for a deep-dive):
+`KEDA` is an open-source [CNCF](https://cncf.io/) project that's built on top of native Kubernetes primitives such as the Horizontal Pod Autoscaler and can be added to any Kubernetes cluster. Here is a high level overview of it's key components (you can refer to the [KEDA documentation](https://keda.sh/docs/) for a deep-dive):
 
 1. The `keda-operator-metrics-apiserver` component in `KEDA` acts as a [Kubernetes metrics server](https://kubernetes-sigs.github.io/metrics-server/) that exposes metrics for the Horizontal Pod Autoscaler
 2. A [KEDA Scaler](https://keda.sh/docs/2.8/concepts/) integrates with an external system (such as Redis) to fetch these metrics (e.g. length of a List) to drives auto scaling of any container in Kubernetes based on the number of events needing to be processed. 
@@ -370,7 +369,7 @@ aws dynamodb describe-table --table-name kinesis-keda-demo
 aws dynamodb scan --table-name kinesis-keda-demo
 ```
 
-![](images/control-table1.png)
+![Kinesis DynamoDB control table](images/control-table1.png)
 
 **Now, let's send some data to the Kinesis stream using the AWS CLI**
 
@@ -392,7 +391,7 @@ aws dynamodb scan --table-name users
 
 Notice that the value for the `processed_by` attribute? It's the same as KCL consumer `Pod`. This will make it easier for us to verify the end to end autoscaling process.
 
-![](images/table1.png)
+![DynamoDB table](images/table1.png)
 
 
 **Create the KEDA scaler for Kinesis**
@@ -439,7 +438,7 @@ Our application was able to auto-scale to two Pods because we had specified `sha
 
 Check `kinesis-keda-demo` control table in `DynamoDB` - You should see update for the `leaseOwner`.
 
-![](images/control-table2.png)
+![Kinesis DynamoDB control table](images/control-table2.png)
 
 Let's send some more data to the Kinesis stream. 
 
@@ -454,7 +453,7 @@ aws kinesis put-record --stream-name $KINESIS_STREAM --partition-key user8@foo.c
 
 Verify the value for the `processed_by` attribute. Since we have scaled out to two `Pod`s, the value should be different for each record since each `Pod` will process a subset of the records from the Kinesis stream.
 
-![](images/table2.png)
+![DynamoDB table](images/table2.png)
 
 **Increase Kinesis stream capacity**
 
