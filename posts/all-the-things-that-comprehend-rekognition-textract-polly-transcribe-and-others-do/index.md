@@ -3,34 +3,19 @@ title: "All the things that Comprehend, Rekognition, Textract, Polly, Transcribe
 description: "AIML like API in your APP."
 tags:
     - AIML
+    - artificial intelligence
+    - machine learning
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes
 date: 2023-05-22
 ---
 
-Suppose we are having coffee ☕ talking about the advances in AIML technology and I tell you: 
+Developers those who provide solutions to computer problems, base procedures, program and maintain solutions, they are programmers, but it does not make them experts in everything that is related to code, as is the case of creating ML-dependent function, where it is necessary to be familiar with models and training of algorithms, which is not common knowledge.
 
-- 👩🏻 "We can not only do that, but also add it to your applications as if it were another API call". 
+There are some ready-to-use APIs that call existing models previously trained to fulfill ML-functions without need for ML knowledge, and additionally keep information shared with it secure. Next, I'm going to tell you about some specific ML API services and four use cases to get you familiar with them and let your imagination run wild.
 
-Then you may answer: 
 
-- 🧑🏽 "Really? However, first, this API MUST be reliable and before we can use this API, it is necessary to collect the data, know how to choose and train an ML model, and carry out all the phases of a machine learning project to finally obtain the API, and not to mention I don't know anything about AIML, mmm I don´t know... using an API that is not created by me makes me insecure since my data will not be protectec."
-
-and I would answer: 
-
-- 👩🏻 “Friend, that is not necessary, you can have a ready-to-use AIML API reliable without the need for machine learning experience".
-
-I tell you how.
-
-When we think of adding AIML to our applications, we add "fun" (not to say complications) since we must think of creating the Machine Learning project as a different part of our application, and the project needs to have a [life cycle](https://docs.aws.amazon.com/wellarchitected/latest/machine-learning-lens/well-architected-machine-learning-lifecycle.html) with all the required maintenance, but integrate an AIML like API calls options is not necessarily the best option because you risk data privacy. 
-
-So we have two problems:
-- 😵‍💫 Create the Machine Learning project – without having experience in machine learning.
-- 🔐 Keep your data safe.
-
-AWS solves both of these problems by making pre-trained AIML services available to anyone with programming skills, and without the need for machine learning experience. And your data is kept safe thanks to the security standard that governs all AWS services, guaranteeing the privacy of the data ensuring that it will not be used or shared with third parties.
-
-## How does it work? Just follow 3 simple steps:
+## How does ready-to-use ML-functions APIs work? Just follow 3 simple steps:
 
 1. Define the input, the location of the object in an Amazon S3 bucket or text.
 2. Invoke the API using input.
@@ -40,7 +25,9 @@ AWS solves both of these problems by making pre-trained AIML services available 
 ![Diagram AIML like API in your APP"](images/diagram-api-call.png)
 
 
-## Let's take a look at the APIS
+## Let's take a look at the APIs
+
+In AWS there are several [ML and AI services](https://aws.amazon.com/machine-learning/) that allow you to accelerate their adoption in applications, from those that provide you with infrastructure to train your own models to those are ready to use as pre-trained API calls, let's see some of the seconds:
 
 | API Type | How you can do | Service Name | 
 -- | -- | --
@@ -51,7 +38,7 @@ AWS solves both of these problems by making pre-trained AIML services available 
 🔎 Speech to Text | <ul> <li> Convert audio ([Supported formats](https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)) to text. </li> <li> Transcribe media in real time (streaming) or you can transcribe media files located in an Amazon S3 bucket (batch).</li> <li> Improve accuracy for your specific use case with [language customization](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html), filter content to ensure customer privacy or audience-appropriate language, analyze content in multi-channel audio, partition the speech of individual speakers </li></ul> |  [Amazon Transcribe](https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html) | 
 🔎  Translate | Translate unstructured text (UTF-8) documents or to build applications that work in [multiple languages](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html) | [Amazon Translate](https://docs.aws.amazon.com/translate/latest/dg/what-is.html)| 
 
-## Use Cases 
+## 🚀  Use Cases 
 
 - [Create subtitles and translate them into the language you want ⏯️ 🍿.](https://github.com/build-on-aws/aiml-like-api-in-your-app/blob/main/create-subtitles-and-translate-them-into-the-language-you-want/README.md)
 
@@ -107,3 +94,8 @@ Now you learned that you can use AIML as an API call to analyze images and video
 
 This is just a small part of what you can create by powering AIML applications within the reach of an API call.
 
+I leave these links for you to continue experimenting and learning:
+- Amazon Translate [Code Samples](https://github.com/aws-samples/document-translation).. [more code samples](https://docs.aws.amazon.com/translate/latest/dg/examples.html)
+- Amazon Transcribe and Amazon Comprehend [Code Samples](https://github.com/aws-samples/amazon-transcribe-comprehend-podcast)
+- Amazon Polly [Code Samples](https://docs.aws.amazon.com/polly/latest/dg/sample-code-overall.html)
+- Amazon Rekognition [Code Samples](https://github.com/aws-samples/amazon-rekognition-code-samples)
