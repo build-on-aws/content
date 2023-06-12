@@ -1,6 +1,6 @@
 ---
-title: ""
-description: ""
+title: "Start an EC2 Mac instance"
+description: Learn how to start an EC2 Mac instance"
 tags:
     - mac
     - ec2
@@ -136,7 +136,7 @@ Alternatively, we can use the command line:
         --placement HostId=h-0fxxxxxxx90                       \
         --security-group-ids sg-01000000000000032              \
         --image-id AWS_OR_YOUR_AMI_ID
-		
+
 {
     "Groups": [],
     "Instances": [
