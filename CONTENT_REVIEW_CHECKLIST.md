@@ -1,10 +1,10 @@
 # Content Review Checklist
 
-Ready to submit your content for publication? Review this checklist to make sure your content is ready. Taking care of these items before submitting your content will speed up the time to review. 
+Ready to submit your content for publication? Review this checklist to make sure your content is ready. Taking care of these items before submitting your content will speed up the time to review.
 
-Reviewers and authors should both use this checklist to ensure content meets all of the requirements to be published on the BuildOn platform. Step 1 is overall guidance and not a hard requirement, more of a strong suggestion, whereas steps 2 & 3 deal with the technical aspects that content needs to adhere to for publishing.
+Reviewers and authors should both use this checklist to ensure content meets all of the requirements to be published on BuildOn.aws. Step 1 is overall guidance and not a hard requirement, more of a strong suggestion, whereas steps 2 & 3 deal with the technical aspects that content needs to adhere to for publishing.
 
-Community contribution are currently in an invite-only phase, and we plan to open up to the broader community in the near future.
+Community contributions are currently in an invite-only phase, and we plan to open up to the broader community in the near future.
 
 ## Step 1: Read the whole article and review it for
 
@@ -13,7 +13,7 @@ Community contribution are currently in an invite-only phase, and we plan to ope
   - [ ] Use headers to introduce sections and to enable the reader to scan the content.
   - [ ] Break up large blocks of text with subheadings, bullet points, and numbered lists.
   - [ ] Emphasize important points using bold, italics, or underlining.
-  - [ ] Add relevant images, videos, or infographics to support and illustrate the content.
+  - [ ] Add original, relevant images, videos, or infographics to support and illustrate the content.
 - [ ] **Style:** Style should be conversational, educational, and opinionated. It should NOT be sales-y.
   - [ ] Would you read this piece?
   - [ ] Does this piece sound like it was written by a human?
@@ -60,7 +60,7 @@ Community contribution are currently in an invite-only phase, and we plan to ope
     - [ ] Learn how to create a simple CI/CD pipeline with GitHub Actions to deploy a Flask app running in a container to infrastructure in the cloud.
 - [ ] **Tags:** Tags in a post are limited to 5 that will displayed in the feed, so ensure the most important 5 are first in the list, using the `kebab-case` convention (all lowercase, with `-` between words).
 - [ ] **Publication date:** Update the `date` field in the frontmatter to be the current or future date that the post will be published. Content with future dates will be published at the *next build* after that date.
-- [ ] **Links:** Do not add links as raw text, e.g. `start from here https://example.com`. Instead, add them as links via `[start from here](https://example.com)`.
+- [ ] **Links:** Do not add links as raw text, e.g. `start from here https://example.com`. Instead, add them as links via Markdown `[start from here](https://example.com)`.
 - [ ] **Links - relative:** To link to other content in the repo, use a relative link, not one prefixed with the full URL, e.g. `/posts/the-other-post` and not `https://buildon.aws/posts/the-other-post`.
 
 ## Step 3: Before publishing, check to make sure the post adheres to the legal rules
