@@ -28,7 +28,7 @@ We will be using the following Go libraries:
 
 ## Application overview
 
-![Application overview](images/diagram.png)
+![Application overview](images/diagram.jpg)
 
 Here is how the application works:
 
@@ -145,7 +145,7 @@ aws s3 cp ./invoice3.jpeg s3://$SOURCE_BUCKET
 
 Check the `DynamoDB` table in the AWS console - you should see the extracted invoice information.
 
-![](images/output.png)
+![](images/output.jpg)
 
 `DynamoDB` table is designed with source file name as the `partition` key. This allows you to retrieve all invoice data for a given image.
 
