@@ -389,7 +389,7 @@ aws dynamodb scan --table-name users
 
 Notice that the value for the `processed_by` attribute? It's the same as KCL consumer `Pod`. This will make it easier for us to verify the end to end autoscaling process.
 
-![DynamoDB table](images/table1.png)
+![DynamoDB table](images/table1.jpg)
 
 ### Create the KEDA scaler for Kinesis
 
@@ -435,7 +435,7 @@ Our application was able to auto-scale to two Pods because we had specified `sha
 
 Check `kinesis-keda-demo` control table in `DynamoDB` - You should see update for the `leaseOwner`.
 
-![Kinesis DynamoDB control table](images/control-table2.png)
+![Kinesis DynamoDB control table](images/control-table2.jpg)
 
 Let's send some more data to the Kinesis stream.
 
@@ -450,7 +450,7 @@ aws kinesis put-record --stream-name $KINESIS_STREAM --partition-key user8@foo.c
 
 Verify the value for the `processed_by` attribute. Since we have scaled out to two `Pod`s, the value should be different for each record since each `Pod` will process a subset of the records from the Kinesis stream.
 
-![DynamoDB table](images/table2.png)
+![DynamoDB table](images/table2.jpg)
 
 ### Increase Kinesis stream capacity
 
