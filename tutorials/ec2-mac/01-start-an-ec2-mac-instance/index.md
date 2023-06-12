@@ -28,7 +28,9 @@ For this series of tutorial, we assume you're somewhat familiar with Amazon EC2.
 This is a 11 parts article about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy.
 
 - This is the first part, you learn how to allocate a Mac mini host and start it.
-- When reading [part 2](), you will learn how to remotely connect to the EC2 Mac instance you just started.
+
+- When reading [part 2](/tutorials/ec2-mac/02-connect-to-an-ec2-mac-instance/), you will learn how to remotely connect to the EC2 Mac instance you just started.
+
 - other parts will be added over time. **TODO : should I add the 11 parts now, or add them one by one as I publish them?**
 
 Enjoy the reading !
@@ -192,4 +194,4 @@ You can not release a host during the first 24h after allocating it, as per [mac
 
 ---
 
-Congrats 🎉👏🥳 ! You launched your first EC2 Mac instance. In the next tutorial of this series, you're going to learn how to remotely connect to it.
+Congrats 🎉👏🥳 ! You launched your first EC2 Mac instance. [In the next tutorial of this series](/tutorials/ec2-mac/02-connect-to-an-ec2-mac-instance/), you're going to learn how to remotely connect to it.

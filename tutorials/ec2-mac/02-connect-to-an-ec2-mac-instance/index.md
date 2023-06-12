@@ -27,9 +27,11 @@ For this series of tutorial, we assume you're somewhat familiar with Amazon EC2.
 
 This is a 11 parts article about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy.
 
-- When reading [part one](../01-start-an-ec2-mac-instance/index.md), you learn how to allocate a Mac mini to your AWS Account and start it.
+- When reading [part one](/tutorials/ec2-mac/01-start-an-ec2-mac-instance), you learn how to allocate a Mac mini to your AWS Account and start it.
 
 - This is the second part, you learn how to remotely connect to the EC2 Mac instance you just started.
+
+- When reading part 3, you will learn how to resize your boot volume to accommodate for more space before installing your development tools and libraries.
 
 - other parts will be added over time. **TODO : should I add the 11 parts now, or add them one by one as I publish them?**
 
@@ -40,7 +42,7 @@ Enjoy the reading !
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 100 - Beginner                                                   |
-| ⏱ Time to complete     | 10 minutes                                                      |
+| ⏱ Time to complete     | 20 minutes                                                      |
 | 💰 Cost to complete    | $22 for 24 hours                                                 |
 | 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account)|
 | 💻 Code Sample         | - none -                              |
