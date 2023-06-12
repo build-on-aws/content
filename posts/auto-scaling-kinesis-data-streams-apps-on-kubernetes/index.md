@@ -17,7 +17,7 @@ Want to learn how to auto-scale your Kinesis Data Streams consumer applications 
 
 ## What is Amazon Kinesis and Kinesis Data Streams?
 
-[Amazon Kinesis](https://aws.amazon.com/kinesis/?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a platform for real-time data processing, ingestion, and analysis. [Kinesis Data Streams](https://docs.aws.amazon.com/streams/latest/dev/introduction.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a Serverless streaming data service (part of the Kinesis streaming data platform, along with [Kinesis Data Firehose](https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Kinesis Video Streams](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/what-is-kinesis-video.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [Kinesis Data Analytics](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/what-is.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+[Amazon Kinesis](https://aws.amazon.com/kinesis/?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a platform for real-time data processing, ingestion, and analysis. [Kinesis Data Streams](https://docs.aws.amazon.com/streams/latest/dev/introduction.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a Serverless streaming data service (part of the Kinesis streaming data platform, along with [Kinesis Data Firehose](https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq)), [Kinesis Video Streams](https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/what-is-kinesis-video.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [Kinesis Data Analytics](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/what-is.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 Kinesis Data Streams can scale elastically and continuously adapt to changes in data ingestion rates and stream consumption rates. It can be used to build real-time data analytics applications, real-time dashboards, and real-time data pipelines.
 
@@ -25,13 +25,13 @@ Let’s start off with an overview of some key concepts of Kinesis Data Streams.
 
 ## Kinesis Data Streams: High-level architecture
 
-- A Kinesis data stream is a set of *shards*. Each shard has a sequence of data records. 
-- The *producers* continually push data to Kinesis Data Streams, and the *consumers* process the data in real time. 
-- *A partition key* is used to group data by shard within a stream. 
-  - Kinesis Data Streams segregates the data records belonging to a stream into multiple shards. 
-  - It uses the partition key that is associated with each data record to determine which shard a given data record belongs to. 
-- Consumers get records from Amazon Kinesis Data Streams, process them and store their results in Amazon DynamoDB, Amazon Redshift, or Amazon S3 etc. 
-  - These consumers are also known as Amazon Kinesis Data Streams Application. 
+- A Kinesis data stream is a set of *shards*. Each shard has a sequence of data records.
+- The *producers* continually push data to Kinesis Data Streams, and the *consumers* process the data in real time.
+- *A partition key* is used to group data by shard within a stream.
+  - Kinesis Data Streams segregates the data records belonging to a stream into multiple shards.
+  - It uses the partition key that is associated with each data record to determine which shard a given data record belongs to.
+- Consumers get records from Amazon Kinesis Data Streams, process them and store their results in Amazon DynamoDB, Amazon Redshift, or Amazon S3 etc.
+  - These consumers are also known as Amazon Kinesis Data Streams Application.
   - One of the methods of developing custom consumer applications that can process data from KDS data streams is to use the [Kinesis Client Library](https://docs.aws.amazon.com/streams/latest/dev/shared-throughput-kcl-consumers.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) (`KCL`).
 
 ### How do Kinesis consumer applications scale horizontally?
@@ -55,13 +55,14 @@ Before, we dive in, here is quick overview of `KEDA`.
 `KEDA` is an open-source [CNCF](https://cncf.io/) project that's built on top of native Kubernetes primitives such as the Horizontal Pod Autoscaler and can be added to any Kubernetes cluster. Here is a high level overview of it's key components (you can refer to the [KEDA documentation](https://keda.sh/docs/) for a deep-dive):
 
 1. The `keda-operator-metrics-apiserver` component in `KEDA` acts as a [Kubernetes metrics server](https://kubernetes-sigs.github.io/metrics-server/) that exposes metrics for the Horizontal Pod Autoscaler
-2. A [KEDA Scaler](https://keda.sh/docs/2.8/concepts/) integrates with an external system (such as Redis) to fetch these metrics (e.g. length of a List) to drives auto scaling of any container in Kubernetes based on the number of events needing to be processed. 
+2. A [KEDA Scaler](https://keda.sh/docs/2.8/concepts/) integrates with an external system (such as Redis) to fetch these metrics (e.g. length of a List) to drives auto scaling of any container in Kubernetes based on the number of events needing to be processed.
 3. The role of the `keda-operator` component is to *activate* and *deactivate* `Deployment` i.e. scale to and from zero.
 
 You will see the [Kinesis Stream KEDA scaler](https://keda.sh/docs/2.10/scalers/aws-kinesis/) in action that scales based on the shard count of AWS Kinesis Stream.
 
 ![](https://keda.sh/img/keda-arch.png)
-*From KEDA documentation - https://keda.sh/docs/2.8/concepts/*
+
+*[From KEDA documentation](https://keda.sh/docs/2.8/concepts/)*
 
 Now lets move on the practical part of this post.
 
@@ -69,7 +70,7 @@ Now lets move on the practical part of this post.
 
 In addition to an AWS account, you will need to have the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq), [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl), [Docker](https://docs.docker.com/engine/install/), Java 11 and [Maven](https://maven.apache.org/install.html) installed.
 
-**Setup an EKS cluster, create a DynamoDB table and a Kinesis Data Stream**
+### Setup an EKS cluster, create a DynamoDB table and a Kinesis Data Stream
 
 There are a variety of ways in which you can create an [Amazon EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq). I prefer using [eksctl](https://eksctl.io/) CLI because of the convenience it offers. Creating an an EKS cluster using `eksctl`, can be as easy as this:
 
@@ -82,10 +83,10 @@ eksctl create cluster --name <cluster name> --region <region e.g. us-east-1>
 Create a DynamoDB table to persist application data. You can use the AWS CLI to create a table with the following command:
 
 ```bash
-aws dynamodb create-table \
-    --table-name users \
-    --attribute-definitions AttributeName=email,AttributeType=S \
-    --key-schema AttributeName=email,KeyType=HASH \
+aws dynamodb create-table \ 
+    --table-name users \ 
+    --attribute-definitions AttributeName=email,AttributeType=S \ 
+    --key-schema AttributeName=email,KeyType=HASH \ 
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
 ```
 
@@ -138,8 +139,7 @@ In this particular scenario:
 - `KEDA` operator needs to be able to get the shard count for a Kinesis stream - it does so with using `DescribeStreamSummary` API.
 - The application (KCL library to be specific) needs to interact with Kinesis and DynamoDB - it needs a [bunch of IAM permissions](https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl2-iam.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) to do so.
 
-
-**Configure IRSA for KEDA operator**
+### Configure IRSA for KEDA operator
 
 Set your AWS Account ID and OIDC Identity provider as environment variables:
 
@@ -216,7 +216,7 @@ AWS_ROLE_ARN:                 arn:aws:iam::<AWS_ACCOUNT_ID>:role/keda-operator-k
 AWS_WEB_IDENTITY_TOKEN_FILE:  /var/run/secrets/eks.amazonaws.com/serviceaccount/token
 ```
 
-**Configure IRSA for the KCL consumer application**
+### Configure IRSA for the KCL consumer application
 
 Start by creating a Kubernetes Service Account:
 
@@ -282,7 +282,7 @@ The core infrastructure is now ready. Let's prepare and deploy the consumer appl
 
 You first need to build the Docker image and push it to [Amazon Elastic Container Registry](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html?sc_channel=el&sc_campaign=datamlwave&sc_content=auto-scaling-kinesis-data-streams-apps-on-kubernetes&sc_geo=mult&sc_country=mult&sc_outcome=acq) (ECR) (refer to the `Dockerfile` for details).
 
-**Build and push the Docker image to ECR**
+### Build and push the Docker image to ECR
 
 ```bash
 # create runnable JAR file
@@ -303,7 +303,7 @@ docker tag kcl-consumer-app:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.c
 docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/kcl-consumer-app:latest
 ```
 
-**Deploy the consumer application**
+### Deploy the consumer application
 
 Update the `consumer.yaml` to include the Docker image you just pushed to ECR. The rest of the manifest remains the same:
 
@@ -353,7 +353,7 @@ kubectl get pods -w
 
 ## KCL app autoscaling in action with KEDA
 
-Now that you've deployed the consumer application, the `KCL` library should jump into action. The first thing it will do is create a "control table" in DynamoDB - this should be the same as name of the KCL application (which in this case is `kinesis-keda-demo`). 
+Now that you've deployed the consumer application, the `KCL` library should jump into action. The first thing it will do is create a "control table" in DynamoDB - this should be the same as name of the KCL application (which in this case is `kinesis-keda-demo`).
 
 It might take a few minutes for the initial co-ordination to happen and the table to get created. You can check the logs of the consumer application to track the progress.
 
@@ -363,7 +363,6 @@ kubectl logs -f $(kubectl get po -l=app=kcl-consumer --output=jsonpath={.items..
 
 Once the lease allocation is complete, check the table and note the `leaseOwner` attribute:
 
-
 ```bash
 aws dynamodb describe-table --table-name kinesis-keda-demo
 aws dynamodb scan --table-name kinesis-keda-demo
@@ -371,7 +370,7 @@ aws dynamodb scan --table-name kinesis-keda-demo
 
 ![Kinesis DynamoDB control table](images/control-table1.png)
 
-**Now, let's send some data to the Kinesis stream using the AWS CLI**
+### Now, let's send some data to the Kinesis stream using the AWS CLI
 
 ```bash
 export KINESIS_STREAM=kinesis-keda-demo
@@ -384,7 +383,6 @@ aws kinesis put-record --stream-name $KINESIS_STREAM --partition-key user4@foo.c
 
 The KCL application persists each record to a target `DynamoDB` table (which is named `users` in this case). You can check the table to verify the records.
 
-
 ```bash
 aws dynamodb scan --table-name users
 ```
@@ -393,8 +391,7 @@ Notice that the value for the `processed_by` attribute? It's the same as KCL con
 
 ![DynamoDB table](images/table1.png)
 
-
-**Create the KEDA scaler for Kinesis**
+### Create the KEDA scaler for Kinesis
 
 Here is the `ScaledObject` definition. Notice that it's targeting the `kcl-consumer` `Deployment` (the one we just created) and the `shardCount` is set to `1`:
 
@@ -423,7 +420,7 @@ Create the `KEDA` Kinesis scaler:
 kubectl apply -f keda-kinesis-scaler.yaml
 ```
 
-**Verify KCL application auto-scaling**
+### Verify KCL application auto-scaling
 
 We started off with one `Pod` of our KCL application. But, thanks to `KEDA`, we should now see the second `Pod` coming up.
 
@@ -440,7 +437,7 @@ Check `kinesis-keda-demo` control table in `DynamoDB` - You should see update fo
 
 ![Kinesis DynamoDB control table](images/control-table2.png)
 
-Let's send some more data to the Kinesis stream. 
+Let's send some more data to the Kinesis stream.
 
 ```bash
 export KINESIS_STREAM=kinesis-keda-demo
@@ -455,7 +452,7 @@ Verify the value for the `processed_by` attribute. Since we have scaled out to t
 
 ![DynamoDB table](images/table2.png)
 
-**Increase Kinesis stream capacity**
+### Increase Kinesis stream capacity
 
 Let's scale out the number of shards from two to three and continue to monitor `KCL` application auto-scaling.
 
@@ -501,6 +498,6 @@ aws dynamodb delete-table --table-name users
 
 ## Conclusion
 
-In this post, you learned how to use `KEDA` to auto-scale a `KCL` application that consumes data from a Kinesis stream. 
+In this post, you learned how to use `KEDA` to auto-scale a `KCL` application that consumes data from a Kinesis stream.
 
 You can configure the KEDA scaler as per your application requirements. For example, you can set the `shardCount` to `3` and have one `Pod` for every three shards in your Kinesis stream. However, if you want to maintain a one to one mapping, you can set the `shardCount` to `1` and `KCL` will take care of distributed co-ordination and lease assignment, thereby ensuring that each `Pod` has one instance of the record processor. This is an effective approach that allows you to scale out your Kinesis stream processing pipeline to meet the demands of your applications.
