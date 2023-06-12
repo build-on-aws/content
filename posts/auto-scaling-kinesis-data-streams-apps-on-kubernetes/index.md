@@ -13,7 +13,7 @@ externalCanonicalUrl: https://www.pluralsight.com/blog/cloud/auto-scaling-kinesi
 date: 2023-06-20
 ---
 
-Want to learn how to auto-scale your Kinesis Data Streams consumer applications on Kubernetes, so you can save on costs and improve resource efficiency? This blog offers a step-by-step guide on how to do just that.
+This blog offers a step-by-step guide on how to auto-scale your Kinesis Data Streams consumer applications on Kubernetes, so you can save on costs and improve resource efficiency.
 
 ## What is Amazon Kinesis and Kinesis Data Streams?
 
