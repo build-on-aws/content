@@ -44,7 +44,7 @@ Best way to learn programming is by solving problems through code development,  
 
 - [Create subtitles and translate them into the language you want ⏯️ 🍿.](https://github.com/build-on-aws/aiml-like-api-in-your-app/blob/main/create-subtitles-and-translate-them-into-the-language-you-want/README.md)
 
-If you are passionate about providing tools for others to learn, you want to reach as many people as possible, and language is a barrier that you can remove with this app.
+If you are passionate about providing video with tools for others to learn, you want to reach as many people as possible, and language is a barrier that you can remove with this app.
 
 ![Create subtitles and translate them into the language you want"](images/create-subtitles-and-translate-s.png)
 
