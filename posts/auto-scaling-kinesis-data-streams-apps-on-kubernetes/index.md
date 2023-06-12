@@ -1,6 +1,6 @@
 ---
 title: Auto-Scaling Amazon Kinesis Data Streams Applications on Kubernetes
-description: Auto-Scaling Amazon Kinesis Data Streams Applications on Kubernetes
+description: Learn how to use to automatically scale data processing workloads deployed to Amazon EKS, based on the shard count of AWS Kinesis Stream.
 tags:
   - kinesis
   - kubernetes
