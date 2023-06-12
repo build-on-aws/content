@@ -28,7 +28,7 @@ In addition to learning about Amazon ECS and its various components, you will:
 
 | Attributes            |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Beginner                               |
+| ✅ AWS Level        | 200 - Intermediate                               |
 | ⏱ Time to complete  | 15-20 minutes                             |
 | 💰 Cost to complete | Less than $0.02 USD if completed in under an hour.     |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_ecs_codecatalyst&sc_geo=mult&sc_country=mult&sc_outcome=acq) with administrator-level access*<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> [*]Accounts created within the past 24 hours might not yet have access to the services required for this tutorial.
