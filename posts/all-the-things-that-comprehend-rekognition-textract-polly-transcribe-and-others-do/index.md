@@ -40,7 +40,11 @@ In AWS there are several [ML and AI services](https://aws.amazon.com/machine-lea
 
 ## 🚀  Use Cases 
 
+Best way to learn programming is by solving problems through code development,  same thing happens when you want to learn how to use a service, you need to use it to learn. These four use cases are real (and made-up) problems that I solved while learning.
+
 - [Create subtitles and translate them into the language you want ⏯️ 🍿.](https://github.com/build-on-aws/aiml-like-api-in-your-app/blob/main/create-subtitles-and-translate-them-into-the-language-you-want/README.md)
+
+If you are passionate about providing tools for others to learn, you want to reach as many people as possible, and language is a barrier that you can remove with this app.
 
 ![Create subtitles and translate them into the language you want"](images/create-subtitles-and-translate-s.png)
 
@@ -54,6 +58,8 @@ Code to create [this solution](https://github.com/build-on-aws/aiml-like-api-in-
 
 - [Detecting entities and sentiment from a document 🔎 📄.](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/detecting-entities-and-sentiment-from-a-document%20)
 
+There are people who have mountains of papers in their homes, letters from past lovers, medical exams, memories of their children’s school, banks, etc. What do you think of saving it neatly in the cloud? Try and learn about Textract and Comprehend with this app.
+
 ![Detecting entities and sentiment from a document"](images/detecting-entities-and-sentiment.png)
 
 1. Upload the document (PNG, JPG, PDF or TIFF) to an S3 Bucket.
@@ -66,6 +72,8 @@ Code to create [this solution]((https://github.com/build-on-aws/aiml-like-api-in
 
 - [Make Polly Talk 🦜](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/make-polly-talk)
 
+I was curious how an Italian speaking Chinese sounded, and since Polly has native voices for each language I created this notebook to play 😂.
+
 ![Make Polly Talk"](images/make-polly-talk.png)
 
 1. From a Jupyter Notebook make the call to Polly API.
@@ -77,6 +85,8 @@ Code to create [this solution ](https://github.com/build-on-aws/aiml-like-api-in
 
 
 - [Video content moderation ⏯️ 🔫 🚬](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/video-content-moderation)
+
+I´m fan of action movies and wanted to try Rekognition with the trailer of Die Hard 1, so I created this application and wow! each dataframe is pure violence 🫣... I invite you to try it with a trailer of your favorite movie.
 
 ![Video content moderation"](images/video-content-moderation.png)
 
@@ -94,7 +104,8 @@ Now you learned that you can use AIML as an API call to analyze images and video
 
 This is just a small part of what you can create by powering AIML applications within the reach of an API call.
 
-I leave these links for you to continue experimenting and learning:
+Surely you have a real or invented problem that you would like to solve using one of these services and if not I leave these links for you to continue experimenting and learning:
+
 - Amazon Translate [Code Samples](https://github.com/aws-samples/document-translation).. [more code samples](https://docs.aws.amazon.com/translate/latest/dg/examples.html)
 - Amazon Transcribe and Amazon Comprehend [Code Samples](https://github.com/aws-samples/amazon-transcribe-comprehend-podcast)
 - Amazon Polly [Code Samples](https://docs.aws.amazon.com/polly/latest/dg/sample-code-overall.html)
