@@ -26,7 +26,7 @@ Before starting this tutorial, you will need the following:
 
 ## Sections
 
-| Info                | Level                                  |
+| Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 200 - Intermediate                               |
 | ⏱ Time to complete  | 45 minutes                             |

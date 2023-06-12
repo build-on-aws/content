@@ -16,14 +16,19 @@ authorName: Sophia Parafina
 date: 2023-03-10
 ---
 
-Continuous Integration and Continuous Delivery (CI/CD) is a method for implementing [DevOps](https://aws.amazon.com/devops/what-is-devops/). It is both a process and infrastructure that enables developers to rapidly and incrementally build and deliver software updates. In this article, we start with a high level overview of Continuous Integration, examining how it improves software quality and rapid delivery. To better understand the process, we’ll use a concrete example of each step to illustrate the process and demonstrate how DevOps and CI improves the software development process.
+Continuous Integration and Continuous Delivery (CI/CD) is a method for implementing [DevOps](/concepts/what-is-devops). It is both a process and infrastructure that enables developers to rapidly and incrementally build and deliver software updates. In this article, we start with a high level overview of Continuous Integration, examining how it improves software quality and rapid delivery. To better understand the process, we’ll use a concrete example of each step to illustrate the process and demonstrate how DevOps and CI improves the software development process.
 
 So what is continuous integration in simple terms? Think about it like this: DevOps emphasizes testing, incremental updates, and frequent releases; CI is a software development process that implements DevOps practices. It is often described as a pipeline, in which code is submitted, built, tested, and published through a series of iterative stages. Each stage is a step toward delivering software. Code changes are built and tested automatically through the pipeline. If the change fails a stage or creates a regression, the stage detects the error and stops the process until it is resolved. When the error is fixed, the code moves to the next stage. The pipeline ensures software quality because the process stops when the software fails to meet the conditions of a stage. In DevOps, code changes are small and incremental, allowing for rapid releases.
 
 | ![CI/CD pipeline](./images/pipeline.jpg) |
 |-|
 
-The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and [another team's starts](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html).
+The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and [another team's starts](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html?sc_channel=el&sc_campaign=devopswave&sc_content=continuous-integration-with-gitlab-at-10000-feet&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+
+## Table of Content
+
+|ToC|
+|---|
 
 ## GitLab
 
@@ -236,4 +241,4 @@ The CI portion of the pipeline is complete and the release artifact is ready for
 
 By examining each stage in the pipeline, we can see how Continuous Integration automates the software delivery process. Developers can start the process by committing their changes, and the code is built and tested automatically as it passes through the stages. By including testing as part of the build process, errors and regressions can be discovered before the software is accepted as a release candidate. Continuous Integration is an important tool for DevOps enabling organizations to deliver high quality software rapidly.
 
-If you want to learn more about DevOps, checkout [What is DevOps](https://aws.amazon.com/devops/what-is-devops/); and if you want to setup GitLab, try the [DevOps Modernization Workshop](https://aws.amazon.com/devops/what-is-devops/).
+If you want to learn more about DevOps, checkout [What is DevOps](/concepts/what-is-devops); and if you want to setup GitLab, try one of the [DevOps Modernization Workshops](https://awsworkshop.io/categories/devops/?sc_channel=el&sc_campaign=devopswave&sc_content=continuous-integration-with-gitlab-at-10000-feet&sc_geo=mult&sc_country=mult&sc_outcome=acq).
