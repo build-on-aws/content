@@ -16,14 +16,18 @@ authorName: Sophia Parafina
 date: 2023-03-10
 ---
 
-Continuous Integration and Continuous Delivery (CI/CD) is a method for implementing [DevOps](https://aws.amazon.com/devops/what-is-devops/). It is both a process and infrastructure that enables developers to rapidly and incrementally build and deliver software updates. In this article, we start with a high level overview of Continuous Integration, examining how it improves software quality and rapid delivery. To better understand the process, we’ll use a concrete example of each step to illustrate the process and demonstrate how DevOps and CI improves the software development process.
+Continuous Integration and Continuous Delivery (CI/CD) is a method for implementing [DevOps](/concepts/what-is-devops). It is both a process and infrastructure that enables developers to rapidly and incrementally build and deliver software updates. In this article, we start with a high level overview of Continuous Integration, examining how it improves software quality and rapid delivery. To better understand the process, we’ll use a concrete example of each step to illustrate the process and demonstrate how DevOps and CI improves the software development process.
 
 So what is continuous integration in simple terms? Think about it like this: DevOps emphasizes testing, incremental updates, and frequent releases; CI is a software development process that implements DevOps practices. It is often described as a pipeline, in which code is submitted, built, tested, and published through a series of iterative stages. Each stage is a step toward delivering software. Code changes are built and tested automatically through the pipeline. If the change fails a stage or creates a regression, the stage detects the error and stops the process until it is resolved. When the error is fixed, the code moves to the next stage. The pipeline ensures software quality because the process stops when the software fails to meet the conditions of a stage. In DevOps, code changes are small and incremental, allowing for rapid releases.
 
-| ![CI/CD pipeline](./images/pipeline.jpg) |
-|-|
+![CI/CD pipeline](./images/pipeline.jpg)
 
-The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and [another team's starts](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html).
+The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and [another team's starts](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html?sc_channel=el&sc_campaign=devopswave&sc_content=continuous-integration-with-gitlab-at-10000-feet&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+
+## Table of Content
+
+|ToC|
+|---|
 
 ## GitLab
 
@@ -70,8 +74,7 @@ The [application repository](https://GitHub.com/build-on-aws/continuous-integrat
 
 > Caution: Use the public GitLab service to ensure the `docker:dind` service for building and testing containers is available.
 
-| ![Create a new GitLab project](./images/0%20-%20gitlab10k.png) |
-|-|
+![Create a new GitLab project](./images/0-gitlab10k.png)
 
 If you don’t have a personal access token, [create the token](https://docs.GitHub.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
@@ -79,65 +82,53 @@ If you don’t have a personal access token, [create the token](https://docs.Git
 
 Choose **Create a project**.
 
-| ![Create a GitLab project](./images/1%20-%20gitlab10k.png) |
-|-|
+![Create a GitLab project](./images/1-gitlab10k.png)
 
 Then choose **Import project**.
 
-| ![GitLab Import project](./images/2%20-%20gitlab10k.png) |
-|-|
+![GitLab Import project](./images/2-gitlab10k.png)
 
 Choose **GitHub**.
 
-| ![Choose GitHub to import project](./images/3%20-%20gitlab10k.png) |
-|-|
+![Choose GitHub to import project](./images/3-gitlab10k.png)
 
 Authenticate to GitHub with your **Personal Access Token**.
 
-| ![Authenticate to GitHub](./images/4%20-%20gitlab10k.png) |
-|-|
+![Authenticate to GitHub](./images/4-gitlab10k.png)
 
 Import repositories from GitHub (search with user_name/continuous-integration-weather-app). Choose **Import**.
 
-| ![Import repositories from GitHub](./images/5%20-%20gitlab10k.png) |
-|-|
+![Import repositories from GitHub](./images/5-gitlab10k.png)
 
 You will be notified when the import is complete. Select the link to go to the repository.
 
-| ![Import complete](./images/6%20-%20gitlab10k.png) |
-|-|
+![Import complete](./images/6-gitlab10k.png)
 
 ## Step 3: Start the pipeline
 
 The pipeline is triggered when new code or updates are committed. You can trigger the pipeline by adding the Openweather API key to the app.py file. Choose **app.py** to open the file.
 
-| ![Open app.py file](./images/7%20-%20gitlab10k.png) |
-|-|
+![Open app.py file](./images/7-gitlab10k.png)
 
 To edit the app.py file, choose the down arrow next to **Open in Web IDE**; choose **Edit - Edit this file only**.
 
-| ![Select Edit](./images/8.0%20-%20gitlab10k.png) |
-|-|
+![Select Edit](./images/8.0-gitlab10k.png)
 
 Select **Edit**.
 
-| ![Select Edit](./images/8.1%20-%20gitlab10k.png) |
-|-|
+![Select Edit](./images/8.1-gitlab10k.png)
 
 Before adding the OpenWeather API key, confirm that the project is private. In the side menu, choose **Settings > General**.
 
-| ![Ensure repository is private](./images/9.0%20-%20gitlab10k.png) |
-|-|
+![Ensure repository is private](./images/9.0-gitlab10k.png)
 
 Replace the OpenWeather `api_key` with your key. Note that you will incur charges if the application exceeds 1,000 API calls per day.
 
-| ![Add Openweather API key](./images/9.1%20-%20gitlab10k.png) |
-|-|
+![Add Openweather API key](./images/9.1-gitlab10k.png)
 
 Select **Commit changes** after adding your API key.
 
-| ![Commit change](./images/9.2%20-%20gitlab10k.png) |
-|-|
+![Commit change](./images/9.2-gitlab10k.png)
 
 ## Step 4: Running the pipeline, step-by-step  
 
@@ -145,8 +136,7 @@ Choosing **Commit changes** starts the pipeline for building, testing, and relea
 
 **Choose *CI/CD* in the side bar, and choose *Pipelines* to see the pipeline as it runs**.
 
-| ![Choose Pipelines](./images/10%20-%20gitlab10k.png) |
-|-|
+![Choose Pipelines](./images/10-gitlab10k.png)
 
 The first part of `.gitlab-ci.yml` defines the stages and the order of execution of the stages. The pipeline will build a Docker image, run a unit test on the image, and releases the image when it passes the test.
 
@@ -185,16 +175,13 @@ The `build_job` script defines the tasks:
 
 You can examine the progress of a stage by choosing the blue colored icon under **Stages**.
 
-| ![Pipeline progress](./images/11%20-%20gitlab10k.png) |
-|-|
+![Pipeline progress](./images/11-gitlab10k.png)
 
 Choose `build_job` to see the build log.
 
-| ![Examine `build_job`](./images/12%20-%20gitlab10k.png) |
-|-|
+![Examine `build_job`](./images/12-gitlab10k.png)
 
-| ![Build log](./images/13%20-%20gitlab10k.png) |
-|-|
+![Build log](./images/13-gitlab10k.png)
 
 When the pipeline finishes building the test container, it pushes it into the GitLab Container Registry.
 
@@ -210,8 +197,7 @@ test_job:
 
 If the container passes the unit test, the runner logs the result of the test and any additional output.
 
-| ![Unit test success](./images/14%20-%20gitlab10k.png) |
-|-|
+![Unit test success](./images/14-gitlab10k.png)
 
 The last stage in the pipeline is the release stage. The test image is pulled from the Container Registry and tagged as ‘latest.’
 
@@ -227,8 +213,7 @@ release_job:
 
 The release image is pushed into the **Container Registry**.
 
-| ![GitLab Container Repository](./images/15%20-%20gitlab10k.png) |
-|-|
+![GitLab Container Repository](./images/15-gitlab10k.png)
 
 The CI portion of the pipeline is complete and the release artifact is ready for deployment into production.
 
@@ -236,4 +221,4 @@ The CI portion of the pipeline is complete and the release artifact is ready for
 
 By examining each stage in the pipeline, we can see how Continuous Integration automates the software delivery process. Developers can start the process by committing their changes, and the code is built and tested automatically as it passes through the stages. By including testing as part of the build process, errors and regressions can be discovered before the software is accepted as a release candidate. Continuous Integration is an important tool for DevOps enabling organizations to deliver high quality software rapidly.
 
-If you want to learn more about DevOps, checkout [What is DevOps](https://aws.amazon.com/devops/what-is-devops/); and if you want to setup GitLab, try the [DevOps Modernization Workshop](https://aws.amazon.com/devops/what-is-devops/).
+If you want to learn more about DevOps, checkout [What is DevOps](/concepts/what-is-devops); and if you want to setup GitLab, try one of the [DevOps Modernization Workshops](https://awsworkshop.io/categories/devops/?sc_channel=el&sc_campaign=devopswave&sc_content=continuous-integration-with-gitlab-at-10000-feet&sc_geo=mult&sc_country=mult&sc_outcome=acq).
