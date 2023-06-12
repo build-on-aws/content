@@ -3,20 +3,22 @@ title: Using Redis on Cloud? Here are Ten things You Should Know
 description: This blog covers a range of Redis related best practices, tips and tricks including cluster scalability, client side configuration, integration, metrics and more.
 tags:
   - redis
-  - database
+  - databases
   - nosql
   - best-practices
+  - memorydb
+  - elasticache
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 externalCanonicalUrl: https://acloudguru.com/blog/engineering/how-to-use-redis-on-cloud
-date: 2023-06-25
+date: 2023-06-12
 ---
 
 It's hard to operate stateful distributed systems at scale and Redis is no exception. Managed databases make life easier by taking on much of the heavy lifting. But you still need a sound architecture and apply best practices both on the server (Redis) and client (application).
 
 This blog covers a range of Redis related best practices, tips and tricks including cluster scalability, client side configuration, integration, metrics etc. Although I will be citing [Amazon MemoryDB](https://docs.aws.amazon.com/memorydb/latest/devguide/what-is-memorydb-for-redis.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Amazon ElastiCache](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/WhatIs.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) for Redis from time to time, most (if not all) will be applicable to Redis clusters in general.
 
-> This is not meant to be an exhaustive list by any means. I simply chose ten since it's a nice, wholesome number! 
+> This is not meant to be an exhaustive list by any means. I simply chose ten since it's a nice, wholesome number!
 
 Let's dive right in and start off with what options you have in terms of scaling your Redis cluster.
 
@@ -39,7 +41,7 @@ If you want to increase *write* capacity, you will find yourself limited by the 
 
 ## 2. After scaling your cluster, you better use those replicas!
 
-The default behavior in most Redis Cluster clients (including `redis-cli`) is to redirect all *reads* to the *primary* node. If you've have added read replicas to scale read traffic, they are going to sit idle! 
+The default behavior in most Redis Cluster clients (including `redis-cli`) is to redirect all *reads* to the *primary* node. If you've have added read replicas to scale read traffic, they are going to sit idle!
 
 You need to switch to [READONLY](https://redis.io/commands/readonly/) mode to ensure that the replicas handle all the read requests are not just passive participants. Make sure to configure your Redis client appropriately - this will vary with the client and programming language.
 
@@ -60,9 +62,9 @@ To optimize further, you can also use `RouteByLatency` or `RouteRandomly`, both 
 
 ## 3. Be mindful of consistency characteristics when using read replicas
 
-There is a chance that your application might read stale data from replicas - this is *Eventual Consistency* in action. Since the primary to replica node replication is *asynchronous*, there is a chance that the write you sent to a primary node has not yet reflected in the read replica. This is likely when you have a high number of read replicas specially across multiple availability zones. If this is unacceptable for your use-case, you will have to resort to using primary nodes for reads as well. 
+There is a chance that your application might read stale data from replicas - this is *Eventual Consistency* in action. Since the primary to replica node replication is *asynchronous*, there is a chance that the write you sent to a primary node has not yet reflected in the read replica. This is likely when you have a high number of read replicas specially across multiple availability zones. If this is unacceptable for your use-case, you will have to resort to using primary nodes for reads as well.
 
-The [ReplicationLag metric](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) in MemoryDB or ElastiCache for Redis can be used to check how far behind (in seconds) the replica is in applying changes from the primary node.	
+The [ReplicationLag metric](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) in MemoryDB or ElastiCache for Redis can be used to check how far behind (in seconds) the replica is in applying changes from the primary node.
 
 **What about Strong Consistency?**
 
@@ -76,7 +78,7 @@ But, you are not completely at the mercy of the cluster! It's possible to influe
 
 ## 5. Did you think about scaling (back) in?
 
-Your application was successful, it has a lot of users and traffic. You scaled out the  cluster and things are still going great. Awesome! 
+Your application was successful, it has a lot of users and traffic. You scaled out the  cluster and things are still going great. Awesome!
 
 **But what if you need to scale back in?**
 
@@ -85,7 +87,7 @@ You need to be careful about a few things before you do that:
 - Is there enough free memory on each of the nodes?
 - Can this be done during non-peak hours?
 - How will it affect your client applications?
-- Which metrics can you monitor during this phase? (e.g. `CPUUtilization`, `CurrConnections` etc.) 
+- Which metrics can you monitor during this phase? (e.g. `CPUUtilization`, `CurrConnections` etc.)
 
 Refer to some of the [best practices in the MemoryDb for Redis documentation](https://docs.aws.amazon.com/memorydb/latest/devguide/best-practices-online-resharding.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) to better plan for scaling in.
 
@@ -116,13 +118,14 @@ There is no excuse to not apply authentication (username/password) and authoriza
 - Clients can execute *any* command on any key (no permission or authorization either)
 
 As a best practice:
+
 - Define an explicit ACL
 - Add users (along with passwords), and
 - Configure access strings as per your security requirements. 
 
-You should monitor authentication failures. For example, the [AuthenticationFailures](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) metric in `MemoryDB` gives you the total number of failed authenticate attempts - set an alarm on this to detect unauthorized access attempts.	
+You should monitor authentication failures. For example, the [AuthenticationFailures](https://docs.aws.amazon.com/memorydb/latest/devguide/metrics.memorydb.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) metric in `MemoryDB` gives you the total number of failed authenticate attempts - set an alarm on this to detect unauthorized access attempts.
 
-**Don't forget perimeter security**
+> **Don't forget perimeter security**
 
 If you've configured `TLS` on the server, don't forget to use that in your client as well! For example, using Go Redis:
 
@@ -139,7 +142,7 @@ client := redis.NewClusterClient(
 
 ## 9. There are things you cannot do (and that's ok)
 
-As a managed database service, `MemoryDB` or `ElastiCache` [restrict access to some of the Redis commands](https://docs.aws.amazon.com/memorydb/latest/devguide/restrictedcommands.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq). For example, you *cannot* use a subset of the [CLUSTER](https://redis.io/commands/cluster/) related commands since the  cluster management (scale, sharding etc.) is taken of by the service itself. 
+As a managed database service, `MemoryDB` or `ElastiCache` [restrict access to some of the Redis commands](https://docs.aws.amazon.com/memorydb/latest/devguide/restrictedcommands.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq). For example, you *cannot* use a subset of the [CLUSTER](https://redis.io/commands/cluster/) related commands since the  cluster management (scale, sharding etc.) is taken of by the service itself.
 
 But, in some cases, you might be able to find alternatives. Think of monitoring slow running queries as an example. Although you *cannot* configure `latency-monitor-threshold` using [CONFIG SET](https://redis.io/commands/config-set/), you can set the `slowlog-log-slower-than` setting in the [parameter group](https://docs.aws.amazon.com/memorydb/latest/devguide/components.html#whatis.components.parametergroups?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) and then use `slowlog get` to compare against it.
 
@@ -154,13 +157,14 @@ ElastiCache provides [a few metrics](https://docs.aws.amazon.com/AmazonElastiCac
 
 ## 11. (bonus) Use the appropriate connection mode
 
-This one is kind of obvious, but I am going to call it out anyway since this is one of the most common "getting started" mistake that I witness folks make. 
+This one is kind of obvious, but I am going to call it out anyway since this is one of the most common "getting started" mistake that I witness folks make.
 
 The connection mode that you use in your client application will depend on whether you're using a standalone Redis setup, a Redis Cluster (most likely). Most Redis clients draw a clear distinction between them. For example, if you are using the [Go Redis client](https://github.com/go-redis/redis) with `MemoryDB` or `Elasticache` cluster mode enabled), you need to use [NewClusterClient](https://pkg.go.dev/github.com/go-redis/redis#NewClusterClient) (not [NewClient](https://pkg.go.dev/github.com/go-redis/redis#NewClient)):
 
 ```go
 redis.NewClusterClient(&redis.ClusterOptions{//....})
 ```
+
 > Interestingly enough, there is [UniversalClient](https://pkg.go.dev/github.com/go-redis/redis#NewUniversalClient) option which is a bit more flexible (at the time of writing, this is in Go Redis v9)
 
 If you don't use the right mode of connection, you will get an error. But sometimes, the root cause will be hidden behind a generic error message - so you need to be watchful.
