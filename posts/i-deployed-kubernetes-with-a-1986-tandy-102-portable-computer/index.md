@@ -77,7 +77,7 @@ This will change the translation mode to TELNET, which will come in handy later 
 AT&W
 ```
 
-![Tandy 102 showing the WiFi Modem connected to router](images/DSC00050.web "Tandy 102 with the WiFi modem connected to the router")
+![Tandy 102 showing the WiFi Modem connected to router](images/DSC00050.webp)
 
 ## Cheating my way to the goal
 
