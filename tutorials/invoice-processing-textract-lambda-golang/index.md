@@ -66,9 +66,9 @@ Before starting this tutorial, you will need the following:
 Clone the project and change to the right directory:
 
 ```bash
-git clone TODO
+git clone https://github.com/build-on-aws/amazon-textract-lambda-golang-example
 
-cd TODO
+cd amazon-textract-lambda-golang-example
 ```
 
 AWS CDK is a framework that lets you define your cloud infrastructure as code in one of its supported programming and provision it through [AWS CloudFormation](https://aws.amazon.com/cloudformation/).
@@ -99,9 +99,9 @@ You can keep track of the stack creation progress in the terminal or navigate to
 
 Once the stack creation is complete, you should have:
 
-- An `S3` bucket - Source bucket to upload images.
+- A `S3` bucket - Source bucket to upload images.
 - A Lambda function to process invoice images using Amazon Textract.
-- A `DyanmoDB` table to store the invoice data for each image.
+- A `DynamoDB` table to store the invoice data for each image.
 - And a few other components (like `IAM` roles etc.)
 
 You will also see the following output in the terminal (resource names will differ in your case) - these are the names of the `S3` buckets created by CDK:
@@ -121,7 +121,7 @@ You are ready to verify the solution.
 
 ## Extract expense metadata from invoices
 
-To try the solution, you can either use an image of your own or use the sample files provided in the [GitHub repository](TODO) which has a few sample invoices. Use the AWS CLI to upload files:
+To try the solution, you can either use an image of your own or use the sample files provided in the [GitHub repository](https://github.com/build-on-aws/amazon-textract-lambda-golang-example) which has a few sample invoices. Use the AWS CLI to upload files:
 
 ```bash
 export SOURCE_BUCKET=<enter source S3 bucket name from the CDK output>
