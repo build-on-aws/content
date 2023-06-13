@@ -7,6 +7,7 @@ tags:
   - machinelearning
   - cdk
   - dynamodb
+  - lambda
   - tutorials
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
