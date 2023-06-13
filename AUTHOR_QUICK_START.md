@@ -59,11 +59,11 @@ Content is focused and doesn't ramble. Each word, each sentence is necessary to 
 
 ### What It Isn't
 
-BuildOn.AWS content is not your traditional marketing content. It doesn't try to sell readers a product or service and it's not clickbait. Calls-to-action are allowed but content doesn't prioritize them over helping the reader solve a problem.
+The content is not your traditional marketing content. It doesn't try to sell readers a product or service and it's not clickbait. Calls-to-action are allowed but content doesn't prioritize them over helping the reader solve a problem.
 
 ### Examples
 
-Wondering what type of content fits this content platform? Here are some examples written by the BuildOn.AWS team.
+Wondering what type of content fits this content platform? Here are some examples written by the AWS Developer Relations team.
 
 * [What happens when you type a URL into your browser?](https://aws.amazon.com/blogs/mobile/what-happens-when-you-type-a-url-into-your-browser/)
 * [Four Reasons Why GraphQL Is The Future](https://www.buildon.aws/posts/four-reasons-why-graphql-is-the-future/)
@@ -83,7 +83,7 @@ You'll need to meet the following prerequisites to publish your content:
 
 ### 1. Submit a Content Proposal
 
-Before writing your content, submit a content proposals as a GitHub Issue in the BuildOn.AWS content repository [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=content+proposal&template=content-proposal-template.md).
+Before writing your content, submit a content proposals as a GitHub Issue in [content](/) repository [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=content+proposal&template=content-proposal-template.md).
 
 ### 2. Proposal Review
 
@@ -98,11 +98,15 @@ When your proposal has been reviewed, a reviewer will label your issue with `acc
 
 After your content proposal has been `accepted`, you are ready to start writing. The contribution model used is similar to opensource projects:
 
-1. You create a fork of the `/content` repo into your personal account
-2. You create a branch per content piece
-3. When you are ready, create a Pull Request (PR) from that branch.
+1. You create a [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of the `/content` repo into your personal account
+2. You create a [branch](https://docs.github.com/en/get-started/quickstart/github-flow#create-a-branch) per content piece
+3. When you are ready, create a [Pull Request (PR)](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) from that branch.
 
-If you are unfamiliar with this model, please follow the [contribution guide](/CONTRIBUTION_GUIDE.md).
+If you are unfamiliar with this model, we recommend working through the following:
+
+* [Git and GitHub](https://help.github.com/articles/git-and-github-learning-resources/)
+* [The official Git Tutorial](http://git-scm.com/docs/gittutorial)
+* [Learn Git Branching](https://learngitbranching.js.org/)
 
 Once you have your branch set up, you first need to create the directory and file for your content. The directory name should be a shortened version of what your content is about, and as a sub-directory under `/posts`. The actual content piece is written in [Markdown](https://www.markdownguide.org/basic-syntax/) inside `index.md` - the full location would be `/posts/<title-name-here>/index.md`. The `index.md` file needs to have a section at the start that specifies your title, description, author(s), and tags - this is called the "front matter". You can use the [template](https://github.com/build-on-aws/content/raw/main/templates/post.md) that contains the full instructions, or copy the front matter below to the top of your content `index.md` file:
 
@@ -162,7 +166,7 @@ Your content is now submitted and will be queued for review. When a reviewer sta
 
 #### Example
 
-For a post titled `What Happens When You Type a URL Into Your Browser` which is published at `https://www.buildon.aws/posts/what-happens-when-you-type-a-url-into-your-browser` store your files like this:
+For a post titled `What Happens When You Type a URL Into Your Browser` which is published at [`https://www.buildon.aws/posts/what-happens-when-you-type-a-url-into-your-browser`](https://www.buildon.aws/posts/what-happens-when-you-type-a-url-into-your-browser) store your files like this:
 
 * Main post file: `/posts/what-happens-when-you-type-a-url-into-your-browser/index.md`
 * Images: `/posts/what-happens-when-you-type-a-url-into-your-browser/images/dig-command-output.png`
@@ -186,11 +190,11 @@ We want this to be the best place for hands-on builders to learn about a technol
 
 ### Content Licensing
 
-Any content you contribute and publish on BuildOn.AWS will be licensed as CC BY-SA 4.0. You can read the full license terms [here](/LICENSE).
+Any content you contribute and publish will be licensed as CC BY-SA 4.0. You can read the full license terms [here](/LICENSE).
 
 ### Code of Conduct
 
-BuildOn.AWS is a community content platform. To keep it a welcoming, inclusive, and respectful place for everyone, your participation as a contributor must adhere to the [Code of Conduct](/CODE_OF_CONDUCT.md).
+This is a community content platform. To keep it a welcoming, inclusive, and respectful place for everyone, your participation as a contributor must adhere to the [Code of Conduct](/CODE_OF_CONDUCT.md).
 
 ## Frequently Asked Questions
 

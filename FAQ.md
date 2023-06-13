@@ -4,8 +4,7 @@
   * [Markdown Syntax](#markdown-syntax)
   * [Where do I find the general Markdown syntax guide?](#where-do-i-find-the-general-markdown-syntax-guide)
   * [I have a series of posts. How do I link them together?](#i-have-a-series-of-posts-how-do-i-link-them-together)
-  * [How do I create a series of posts?](#how-do-i-create-a-series-of-posts)
-  * [How do I link to other posts in my series or other posts on the BuildOn.AWS site?](#how-do-i-link-to-other-posts-in-my-series-or-other-posts-on-the-buildonaws-site)
+  * [How do I link to other posts on the BuildOn.AWS site?](#how-do-i-link-to-other-posts-on-the-buildonaws-site)
   * [How do I get syntax highlighting in my code snippets?](#how-do-i-get-syntax-highlighting-in-my-code-snippets)
   * [What languages does syntax highlighting support?](#what-languages-does-syntax-highlighting-support)
   * [How do I write the same code snippet in different languages?](#how-do-i-write-the-same-code-snippet-in-different-languages)
@@ -26,7 +25,7 @@
   * [How do I specify article attributes, such as the time to read it, complexity, prerequisites, etc?](#how-do-i-specify-article-attributes-such-as-the-time-to-read-it-complexity-prerequisites-etc)
   * [How do I show content under tabs?](#how-do-i-show-content-under-tabs)
   * [How do I show content in multiple columns?](#how-do-i-show-content-in-multiple-columns)
-* [Frontmatter details](#frontmatter-details)
+* [front matter details](#front matter-details)
   * [How do I add multiple authors in my post?](#how-do-i-add-multiple-authors-in-my-post)
   * [How can I set the Canonical URL?](#how-can-i-set-the-canonical-url)
   * [How can I provide a post description for SEO purposes?](#how-can-i-provide-a-post-description-for-seo-purposes)
@@ -54,22 +53,12 @@ Content is written used [Markdown](https://spec.commonmark.org/0.30/), and has b
 
 ### I have a series of posts. How do I link them together?
 
-Currently, there is no built-in support for a series of posts, however you can accomplish this using simple [Markdown](https://www.markdownguide.org/basic-syntax/). Example:
-
-```text
-This is a 3-part series:
-1. What is broken access control? (this post)
-1. [What is a cryptographic failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)
-1. [What is an injection attack?](/posts/owasp-top-10-defined/03-what-is-an-injection-attack/)
-```
-
-_Note: Add a trailing slash at the end._
-
-You can then structure the layout of your files like this:
+A series of posts is a sequential collection of posts about a topic, intended to be read in order. If a post is very large, it may be a candidate to be split into a series of posts. Start by creating a folder that will contain your series, and one folder for every post inside the series. Choose folder names carefully, since the public URL will be based on the folder names. You do not need to include numbers to enforce the order of the posts. Create a file named series.md in the root of your series folder. For example, your folders structure may look like this:
 
 ```text
 posts
 ├── owasp-top-10-defined
+│   ├── series.md
 │   ├── 01-what-is-broken-access-control
 │   │   ├── index.md
 │   │   ├── images
@@ -94,22 +83,7 @@ The resulting URL mapping will be:
 
 You can see an example of this in the repo [here](/posts/owasp-top-10-defined).
 
-### How do I create a series of posts?
-
-A series of posts is a sequential collection of posts about a topic, intended to be read in order. If a post is very large, it may be a candidate to be split into a series of posts.
-Start by creating a folder that will contain your series, and one folder for every post inside the series. Choose folder names carefully, since the public URL will be based on the folder names. You do not need to include numbers to enforce the order of the posts.
-Create a file named series.md in the root of your series folder. For example, your folders structure may look like this:
-
-````markdown
-/posts/my-series/series.md
-/posts/my-series/introduction/index.md
-/posts/my-series/first-article/index.md
-/posts/my-series/second-article/index.md
-/posts/my-series/third-article/index.md
-/posts/my-series/conclusion/index.md
-````
-
-In the series.md, include a content similar to a post, with a FrontMatter header and an optional body. The supported fields in the header are:
+In the series.md, include a content similar to a post, with a front matter header and an optional body. The supported fields in the header are:
 
 ````markdown
 ---
@@ -117,21 +91,19 @@ title: "Title of the series"
 description: "Description of the series"
 navigationBars: [Optional. One of: top, bottom, both, none]
 posts:
-  - introduction
-  - first-article
-  - second-article
-  - third-article
-  - conclusion
+  - 01-what-is-broken-access-control
+  - 02-what-is-a-cryptographic-failure
+  - 03-what-is-an-injection-attack
 --- 
 [OPTIONAL MARKDOWN CONTENT]
 ````
 
 The `posts` field determines the order of the posts in the series, which must be direct children of the folder where the series.md file is located (just like the example above).
 
-By creating this series.md file and folder structure, BuildOn.AWS will provide the following features:
+By creating this `series.md` file and folder structure, the following features will be provided:
 
-* A series landing page, in the URL based on the folder where the series.md is located. In our example, it would be `/posts/my-series`. This landing page displays the title of the series, the authors of the posts, the tags of the posts, and the markdown content of the series.md if it was provided.
-* Navigation controls. Every post in the series will display at the top and at the bottom links to navigate to the next and previous post in the series. You can customize this behavior using the attribute `navigationBars` in the FrontMatter header, with possible values:
+* A series landing page, in the URL based on the folder where the series.md is located. In our example, it would be [`/posts/owasp-top-10-defined`](https://www.buildon.aws/posts/owasp-top-10-defined). This landing page displays the title of the series, the authors of the posts, the tags of the posts, and the markdown content of the series.md if it was provided.
+* Navigation controls. Every post in the series will display at the top and at the bottom links to navigate to the next and previous post in the series. You can customize this behavior using the attribute `navigationBars` in the front matter header, with possible values:
   * top. Navigation controls display only at the top of the page
   * bottom. Navigation controls display only at the bottom of the page
   * both. Navigation controls display both at the top and bottom of the page (this is the default)
@@ -139,12 +111,10 @@ By creating this series.md file and folder structure, BuildOn.AWS will provide t
 * A Series Table Of Content component that can be included in the markdown both in the series.md file and also in every post of the series, and renders a table with links to the posts in the series, based on their titles. When this component is included inside a post in a series, it highlights the current article.
   In order to use this Series Table Of Content component, just add to the markdown the following snippet, in the desired position:
   ````markdown
-  
   | SeriesToC |
   |-----------|
-
   ````
-  
+
 This is how these controls look like:
 
 * Navigation controls for a series at the bottom of a post
@@ -152,9 +122,9 @@ This is how these controls look like:
 * Series Table Of Contents inside a post in the series
   ![Series Table Of Contents inside a post in the series](SeriesToc.webp)
 
-### How do I link to other posts in my series or other posts on the BuildOn.AWS site?
+### How do I link to other posts on the BuildOn.AWS site?
 
-You can reference them using absolute paths like this, but **omit the `.md`** as we turn the markdown into an HTML document:
+You can reference them using absolute paths of their folders:
 
 * `[What is a cryptographic failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)`
 * `[A cool tutorial](/tutorials/a-cool-tutorial/)`
@@ -275,7 +245,7 @@ The caption will appear underneath the image and also on mouse over.
 
 ### How do I configure post images?
 
-You can configure extra images for posts in the post FrontMatter header.
+You can configure extra images for posts in the post front matter header.
 
 ````yml
 ---
@@ -483,7 +453,7 @@ Another normal paragraph not in columns.
 
 Notice the maximum number of columns supported is 4, and in smaller screens (like mobile devices) column rendering is disabled and the content will be shown vertically.
 
-## Frontmatter details
+## front matter details
 
 ### How do I add multiple authors in my post?
 
@@ -501,7 +471,7 @@ additionalAuthors:
 
 ### How can I set the Canonical URL?
 
-Add an attribute in the FrontMatter header named `externalCanonicalUrl` with the canonical URL of the original content you want to link to. For example:
+Add an attribute in the front matter header named `externalCanonicalUrl` with the canonical URL of the original content you want to link to. For example:
 
 ````yml
     externalCanonicalUrl: https://dzone.com/articles/demystifying-transition-to-microservices
@@ -509,7 +479,7 @@ Add an attribute in the FrontMatter header named `externalCanonicalUrl` with the
 
 ### How can I provide a post description for SEO purposes?
 
-The description field in the frontMatter of your post is used as a `<meta name="description">` header in the page, but if you want some more SEO friendly content in this header, simply add a seoDescription field, for example:
+The description field in the front matter of your post is used as a `<meta name="description">` header in the page, but if you want some more SEO friendly content in this header, simply add a seoDescription field, for example:
 
 ```yml
 description: "Adding compute power to a Kubernetes Cluster can be challenging because of the lengthy delay between compute demand and instance availability. In this post we are going to learn about Karpenter, an open source project that helps to have the power you need just when you need it."
@@ -521,7 +491,7 @@ seoDescription: "How to add compute power to Kubernetes Clusters quickly with Ka
 An external post does not contain content in this repo, but instead links to content on an external website. Create it just like any other post, but:
 
 * Do not add a markdown body in the index.md (it would not be rendered anyway)
-* Add an attribute in the FrontMatter header named `externalUrl` with the URL of the remote content you want to link to. For example:
+* Add an attribute in the front matter header named `externalUrl` with the URL of the remote content you want to link to. For example:
   ````yml
       externalUrl: https://dzone.com/articles/demystifying-transition-to-microservices
   ````
@@ -529,7 +499,7 @@ An external post does not contain content in this repo, but instead links to con
 
 ### How do I set the Redirect URL?
 
-If you move a content piece to a new location, create a new PR that moves it to the intended folder, and add an attribute in the FrontMatter header named `movedFrom` with the previous/old folder location of the content.
+If you move a content piece to a new location, create a new PR that moves it to the intended folder, and add an attribute in the front matter header named `movedFrom` with the previous/old folder location of the content.
 This will redirect traffic from old URLs to newer locations.
 
 ````yml
@@ -542,7 +512,7 @@ Spaces and Tags are managed by AWS, and we are currently not accepting any chang
 
 ### How do I add posts to a space feed?
 
-A post can be place in one or more spaces. In order to do that, given the space name(s), add the following to the post frontmatter header:
+A post can be place in one or more spaces. In order to do that, given the space name(s), add the following to the post front matter header:
 
 ```yml
 spaces:
@@ -554,7 +524,7 @@ In this example, the post will be part of the feed of spaces "xxx" and "yyy".
 
 ### How do I add posts to the home page feed?
 
-By default, all posts inside the /posts/ folder are shown in the home feed. If you want to include in the feed a post that is outside this folder, add the following to the post frontmatter header:
+By default, all posts inside the /posts/ folder are shown in the home feed. If you want to include in the feed a post that is outside this folder, add the following to the post front matter header:
 
 ```yml
 showInHomeFeed: true
@@ -591,7 +561,7 @@ https://www.buildon.aws/tests/demystifying-the-transition-to-microservices?templ
 https://www.buildon.aws/tests/embedding-posts-in-markdown
 ```
 
-Notice that pinned posts should have a background image with the `opengraph` ratio (1.91:1 or 1200x630px or equivalent). This image has to be configured in the post frontmatter header:
+Notice that pinned posts should have a background image with the `opengraph` ratio (1.91:1 or 1200x630px or equivalent). This image has to be configured in the post front matter header:
 
 ```yml
 images:
