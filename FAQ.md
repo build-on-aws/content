@@ -89,7 +89,7 @@ In the series.md, include a content similar to a post, with a front matter heade
 ---
 title: "Title of the series"
 description: "Description of the series"
-navigationBars: [Optional. One of: top, bottom, both, none]
+navigationBars: both
 posts:
   - 01-what-is-broken-access-control
   - 02-what-is-a-cryptographic-failure
@@ -98,7 +98,7 @@ posts:
 [OPTIONAL MARKDOWN CONTENT]
 ````
 
-The `posts` field determines the order of the posts in the series, which must be direct children of the folder where the series.md file is located (just like the example above).
+The `posts` field determines the order of the posts in the series, which must be direct children of the folder where the series.md file is located (just like the example above). The `navigationBars` determines if and where to position the navigtion bars to navigate between the different parts of a series. You can pick any of the following values: `top`, `bottom`, `both`, or `none`.
 
 By creating this `series.md` file and folder structure, the following features will be provided:
 
