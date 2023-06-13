@@ -4,7 +4,7 @@ description: Learn how to use Amazon Textract and AWS Lambda to process invoice 
 tags:
   - go
   - serverless
-  - machinelearning
+  - ai-ml
   - cdk
   - dynamodb
   - lambda
