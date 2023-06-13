@@ -1,5 +1,5 @@
 ---
-title: Datalake vs Data warehouse vs Databases: Which Meets Your Storage Needs?
+title: "Datalake vs Data warehouse vs Databases: Which Meets Your Storage Needs?"
 description: Databases, Data warehouses, and Data Lakes all have different purposes and use-cases, but understanding those differences isn't always easy. Here's a quick guide to help you navigate the sometimes-confusing world of cloud storage.
 tags:
   - databases
@@ -10,7 +10,7 @@ tags:
 authorGithubAlias: agaankus
 authorName: Ankush Agarwal
 date: 2023-06-01
----
+--- 
 
 Organizations that achieve success harness the business value inherent in their data. When devising a successful big data strategy, a crucial initial step is selecting the appropriate technology to store, search, analyze, and generate reports from the data. In this post, we will address frequently asked questions about databases, data lakes, and data warehouses. We will explore their definitions, distinctions, and help you determine which option is most suitable for your needs. 
 
@@ -87,7 +87,7 @@ Note that data warehouses are not intended to satisfy the transaction and concur
 
 ### Data warehouse Examples
 
-[Amazon Redshift](https://aws.amazon.com/redshift/getting-started/) is a data warehouse developed by Amazon Web Services. Some popular data warehouse tools are Xplenty,Teradata, Oracle 12c, Informatica, IBM Infosphere, Cloudera, and Panoply.
+[Amazon Redshift](https://aws.amazon.com/redshift/getting-started/) is a data warehouse developed by Amazon Web Services. Some popular data warehouse tools are Xplenty,Teradata, Oracle 12c, Informatica, IBM Infosphere, Cloudera, and Panoply and offerings  other cloud service providers like Azure Synapse.
     
 ## What is a Data Lake?
 
@@ -127,4 +127,10 @@ https://www.youtube.com/watch?v=8fDh2GgeD-k
 
 ## **Conclusion**
 
-Databases, data warehouses, and data lakes each have their own purpose. Nearly every modern application will require a database to store the current application data. Organizations that want to analyze their applications' current and historical data may choose to complement their databases with a data warehouse, a data lake, or both.
+Databases, data warehouses, and data lakes each have their own purpose. Nearly every modern application will require a database to store the current application data. Organizations that want to analyze their applications' current and historical data may choose to complement their databases with a data warehouse, a data lake, or both.  
+
+Want to learn more, follow the resources below- 
+
+- Databases: [Learn more about Databases on AWS](https://aws.amazon.com/products/databases/learn/) 
+- Data warehouse: [Learn about Data Warehousing on AWS](https://aws.amazon.com/training/classroom/data-warehousing-on-aws/) 
+- Data Lakes: [Learn more about building Data Lakes on AWS](https://aws.amazon.com/training/classroom/building-data-lakes/)
