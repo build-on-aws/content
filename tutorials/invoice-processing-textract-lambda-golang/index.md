@@ -1,6 +1,6 @@
 ---
 title: 'Build a Serverless Application to Automate Invoice Processing on AWS'
-description: You will learn how to use Amazon Textract and AWS Lambda to process invoice images and extract metadata using the Go programming language.
+description: Learn how to use Amazon Textract and AWS Lambda to process invoice images and extract metadata using the Go programming language.
 tags:
   - go
   - serverless
@@ -10,21 +10,21 @@ tags:
   - lambda
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: 2023-06-20
+date: 2023-06-13
 ---
 
-[Amazon Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html) is a machine learning service that automatically extracts text, handwriting, and data from scanned documents. It goes beyond simple optical character recognition (OCR) to identify, understand, and extract data from forms and tables. It helps add document text detection and analysis to applications which help businesses automate their document processing workflows and reduce manual data entry, which can save time, reduce errors, and increase productivity.
+[Amazon Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a machine learning service that automatically extracts text, handwriting, and data from scanned documents. It goes beyond simple optical character recognition (OCR) to identify, understand, and extract data from forms and tables. It helps add document text detection and analysis to applications which help businesses automate their document processing workflows and reduce manual data entry, which can save time, reduce errors, and increase productivity.
 
-In this tutorial, you will learn how to build a Serverless solution for invoice processing using Amazon Textract, [AWS Lambda](https://aws.amazon.com/lambda/) and the [Go](https://go.dev/) programming language. We will cover how to:
+In this tutorial, you will learn how to build a Serverless solution for invoice processing using Amazon Textract, [AWS Lambda](https://aws.amazon.com/lambda/?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) and the [Go](https://go.dev/) programming language. We will cover how to:
 
-- Deploy the solution using [AWS CloudFormation](https://aws.amazon.com/cloudformation/).
+- Deploy the solution using [AWS CloudFormation](https://aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 - Verify the solution.
 
 We will be using the following Go libraries:
 
 - [AWS Lambda for Go](https://github.com/aws/aws-lambda-go).
 - [AWS Go SDK](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/textract), specifically for Amazon Textract.
-- [Go bindings for AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html) to implement "Infrastructure-as-code" (IaC) for the entire solution and deploy it with the [AWS Cloud Development Kit (CDK) CLI](https://docs.aws.amazon.com/cdk/v2/guide/cli.html).
+- [Go bindings for AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) to implement "Infrastructure-as-code" (IaC) for the entire solution and deploy it with the [AWS Cloud Development Kit (CDK) CLI](https://docs.aws.amazon.com/cdk/v2/guide/cli.html?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ## Application overview
 
@@ -32,17 +32,17 @@ We will be using the following Go libraries:
 
 Here is how the application works:
 
-1. Invoice receipt images uploaded to [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) trigger a Lambda function.
-2. The Lambda function extracts invoice metadata (such as ID, date, amount) and saves it to an [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) table. 
+1. Invoice receipt images uploaded to [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) trigger a Lambda function.
+2. The Lambda function extracts invoice metadata (such as ID, date, amount) and saves it to an [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) table.
 
 ## Prerequisites
 
 Before starting this tutorial, you will need the following:
 
-- An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
+- An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq)).
 - [Go programming language](https://go.dev/dl/) (**v1.18** or higher).
-- [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install).
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+- [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 - [Git](https://git-scm.com/downloads).
 
 ## Sections
@@ -52,14 +52,13 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | 100 - Beginner                          |
 | ⏱ Time to complete  | 20 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier      |
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](TODO)                             |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/amazon-textract-lambda-golang-example)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | YYYY-MM-DD                             |
 
 | ToC |
 |-----|
 <!-- Use the above to auto-generate the table of content. Only build out a manual one if there are too many (sub) sections. -->
-
 
 ## Use AWS CDK to deploy the solution
 
@@ -71,7 +70,7 @@ git clone https://github.com/build-on-aws/amazon-textract-lambda-golang-example
 cd amazon-textract-lambda-golang-example
 ```
 
-AWS CDK is a framework that lets you define your cloud infrastructure as code in one of its supported programming and provision it through [AWS CloudFormation](https://aws.amazon.com/cloudformation/).
+AWS CDK is a framework that lets you define your cloud infrastructure as code in one of its supported programming and provision it through [AWS CloudFormation](https://aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=datamlwave&sc_content=invoice-processing-textract-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 To start the deployment, invoke the `cdk deploy` command. You will see a list of resources that will be created and will need to provide your confirmation to proceed.
 
@@ -95,7 +94,7 @@ Enter `y` to start creating the AWS resources required for the application.
 
 > If you want to see the AWS CloudFormation template which will be used behind the scenes, run `cdk synth` and check the `cdk.out` folder
 
-You can keep track of the stack creation progress in the terminal or navigate to AWS console: `CloudFormation > Stacks > TextractInvoiceProcessingGolangStack`. 
+You can keep track of the stack creation progress in the terminal or navigate to AWS console: `CloudFormation > Stacks > TextractInvoiceProcessingGolangStack`.
 
 Once the stack creation is complete, you should have:
 
@@ -132,7 +131,7 @@ aws s3 cp ./invoice1.jpeg s3://$SOURCE_BUCKET
 aws s3 ls s3://$SOURCE_BUCKET
 ```
 
-This Lambda function will extract invoice data (ID, total amount etc.) from the image and store them in a `DynamoDB` table. 
+This Lambda function will extract invoice data (ID, total amount etc.) from the image and store them in a `DynamoDB` table.
 
 Upload other files:
 
@@ -145,7 +144,7 @@ aws s3 cp ./invoice3.jpeg s3://$SOURCE_BUCKET
 
 Check the `DynamoDB` table in the AWS console - you should see the extracted invoice information.
 
-![](images/output.jpg)
+![DynamoDB table output](images/output.jpg)
 
 `DynamoDB` table is designed with source file name as the `partition` key. This allows you to retrieve all invoice data for a given image.
 
@@ -214,10 +213,9 @@ func invoiceProcessing(sourceBucketName, fileName string) error {
 }
 ```
 
-- The `invoiceProcessing` function calls the Amazon Textract [AnalyzeExpense](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/textract#Client.AnalyzeExpense) API to extract the invoice data. 
+- The `invoiceProcessing` function calls the Amazon Textract [AnalyzeExpense](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/textract#Client.AnalyzeExpense) API to extract the invoice data.
 - The function then iterates through the list of [ExpenseDocument](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/textracttypes#ExpenseDocument)s and extracts information from specific fields - `INVOICE_RECEIPT_ID`, `TOTAL`, `INVOICE_RECEIPT_DATE`, `DUE_DATE`.
 - It then saves the extracted invoice metadata in the `DynamoDB` table.
-
 
 ## Clean up
 
