@@ -54,7 +54,7 @@ Before starting this tutorial, you will need the following:
 | 💰 Cost to complete | Free when using the AWS Free Tier      |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/amazon-textract-lambda-golang-example)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | YYYY-MM-DD                             |
+| ⏰ Last Updated     | 2023-06-13                             |
 
 | ToC |
 |-----|
