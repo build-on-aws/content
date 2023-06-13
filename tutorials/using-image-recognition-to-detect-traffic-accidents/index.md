@@ -26,7 +26,7 @@ Why do we need to pre-process images? For the purpose of building an accurate ma
 
 For the image preparation steps in Data Wrangler, we'll first handle corrupt or defective images in the dataset. This removes unsuitable images in training our machine learning model. Then we'll enhance the contrast to extract relevant features and resize images to standardize them. Lastly, we'll apply a custom transform to improve the model's ability to detect edges within the images.
 
-Once the transformation steps are complete, we'll export the the prepared images to another Amazon S3 bucket. We'll execute the job to process the images. Lastly, we'll clean up the environment so we don't incur charges after we're done.
+Once the transformation steps are complete, we'll export the prepared images to another Amazon S3 bucket. We'll execute the job to process the images. Lastly, we'll clean up the environment so we don't incur charges after we're done.
 
 ## Sections
 | Info                | Level                                  |
@@ -40,7 +40,7 @@ Once the transformation steps are complete, we'll export the the prepared images
 
 ## Prerequisites
 
-Before starting this guide, you will need an **AWS account**. If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) getting started guide for a quick overview.
+Before starting this guide, you'll need an **AWS account**. If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) guide for a quick overview.
 
 ## Implementation
 
@@ -54,7 +54,7 @@ If you already have a SageMaker Studio domain in the US West (Oregon) Region, fo
 
 If you don't have an existing SageMaker Studio domain, continue with Step 1 to run an AWS CloudFormation template that creates a SageMaker Studio domain and adds the permissions required for the rest of this tutorial.
 
-Step 1: Choose the [AWS CloudFormation](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/quickcreate?templateURL=https://sagemaker-sample-files.s3.amazonaws.com/libraries/sagemaker-user-journey-tutorials/v2/CFN-SM-IM-Lambda-catalog.yaml) stack link. This link opens the AWS CloudFormation console and creates your SageMaker Studio domain and a user named studio-user. It also adds the required permissions to your SageMaker Studio account. In the CloudFormation console, confirm that US West (Oregon) is the Region displayed in the upper right corner. The stack name should be sm-studio-tutorial, and should not be changed. This stack takes about 10 minutes to create all the resources.
+Step 1: Choose the [AWS CloudFormation](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/quickcreate?templateURL=https://sagemaker-sample-files.s3.amazonaws.com/libraries/sagemaker-user-journey-tutorials/v2/CFN-SM-IM-Lambda-catalog.yaml) stack link. This link opens the AWS CloudFormation console and creates your SageMaker Studio domain and a user named studio-user. It also adds the required permissions to your SageMaker Studio account. In the CloudFormation console, confirm that US West (Oregon) is the Region displayed in the upper right corner. The stack name should be sm-studio-tutorial and should not be changed. This stack takes about 10 minutes to create all the resources.
 
 This stack assumes that you already have a public VPC set up in your account. If you do not have a public VPC, see [VPC with a single public subnet](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-dev-test.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents) to learn how to create a public VPC.
 
@@ -68,7 +68,7 @@ Step 2: When the stack creation completes, you can proceed to uploading some ima
 
 SageMaker Studio automatically creates an Amazon S3 bucket within the same Region as the Studio domain. Let's go there now. 
 
-We'll place our images files in Amazon S3 so that we can access these images from SageMaker Studio. Amazon S3 is a great place to store images files because it is durable, highly available, and inexpensive! Search for “S3” in the Management Console search bar to navigate to Amazon S3.
+We'll place our image files in Amazon S3 so that we can access these images from SageMaker Studio. Amazon S3 is a great place to store images files because it is durable, highly available, and inexpensive! Search for “S3” in the Management Console search bar to navigate to Amazon S3.
 
 ![search for s3](images/search-for-s3.png)
 
@@ -76,7 +76,7 @@ You will find a bucket with the name **sagemaker-studio-xxxxxxxx**. Select that 
 
 ![select bucket](images/select-bucket.png)
 
-Step 3: Download the files in this [sample dataset](https://www.kaggle.com/datasets/ckay16/accident-detection-from-cctv-footage?resource=download) and unzip the contents. Sample dataset contain CCTV footage data of accidents and non-accidents available from [Kaggle](https://www.kaggle.com/datasets/ckay16/accident-detection-from-cctv-footage). The dataset contains frames captured from YouTube videos of accidents and non-accidents. The images are split into train, test, and validation folders.
+Step 3: Download the files in [this sample dataset](https://www.kaggle.com/datasets/ckay16/accident-detection-from-cctv-footage?resource=download) and unzip the contents. Sample dataset contain CCTV footage data of accidents and non-accidents available from [Kaggle](https://www.kaggle.com/datasets/ckay16/accident-detection-from-cctv-footage). The dataset contains frames captured from YouTube videos of accidents and non-accidents. The images are split into train, test, and validation folders.
 
 Upload the unzipped contents of the folder by selecting **Add folder**.
 
@@ -84,7 +84,7 @@ Upload the unzipped contents of the folder by selecting **Add folder**.
 
 You're all set up! We have Amazon SageMaker studio set up and our images saved in Amazon S3. Next, let's begin working processing our images using Amazon SageMaker Data Wrangler.
 
-### Import data into a SageMaker Data Wrangler flow
+### Import Data into a SageMaker Data Wrangler Flow
 
 In this section, you'll initiate a new Data Wrangler flow within the SageMaker Studio domain. You can use this flow to prepare image data without writing code using the Data Wrangler user interface (UI).
 
@@ -168,7 +168,7 @@ Add another step to **Resize image**.
 
 ![resize image](images/21-resize-image.png)
 
-Choose **Resize > Crop** to crop the images by 50 pixels from each size of the images. Select **Preview** to see the changes to the image, then select **Add**. Doing so will essentially resize the images from 720 x 1280 to 620 x 1180.</li>
+Choose **Resize > Crop** to crop the images by 50 pixels from each size of the images. Select **Preview** to see the changes to the image, then select **Add**. Doing so will essentially resize the images from 720 x 1280 to 620 x 1180.
 
 ![resize image crop](images/resize-image-crop.png)
 
@@ -176,7 +176,7 @@ Select **Add**.
 
 ### Image Preparation Step: Custom Transform
 
-Step 9: Here, we’ll use a custom transformation to finish our image preparation. So far, you've been using Data Wrangler's built-in transformations to improve your image dataset without writing any code. However, the built-ins available today, may not be enough to meet your use case. If you can’t find a built-in transform that meets your needs, then you can use custom transform for your image preparation workflows. In this case, we can't find a built-in transform for better edge detection, so we'll write our own.
+Step 9: Here, we’ll use a custom transformation to finish our image preparation. So far, you've been using Data Wrangler's built-in transformations to improve your image dataset without writing any code. However, the built-ins available today may not be enough to meet your use case. If you can’t find a built-in transform that meets your needs, then you can use custom transform for your image preparation workflows. In this case, we can't find a built-in transform for better edge detection, so we'll write our own.
 
 Select **Add step** then **Custom transform**.
 
@@ -188,16 +188,18 @@ Give your custom transform a name like ‘Edge detection’, and select **Python
 
 Paste in the below **Python** code into the custom transform code snippet.
 
-    `# A table with your image data is stored in the 'df' variable`
-    `import cv2`
-    `import numpy as np`
-    `from pyspark.sql.functions import column`
+``` Python
+# A table with your image data is stored in the 'df' variable
+import cv2
+import numpy as np
+from pyspark.sql.functions import column
 
-    `def my_transform(image: np.ndarray) -> np.ndarray:`
-      `# To use the code snippet on your image data, modify the following lines within the function`
-      `HYST_THRLD_1, HYST_THRLD_2 = 100, 200`
-      `edges = cv2.Canny(image,HYST_THRLD_1,HYST_THRLD_2)`
-      `return edges`
+def my_transform(image: np.ndarray) -> np.ndarray:
+# To use the code snippet on your image data, modify the following lines within the function
+HYST_THRLD_1, HYST_THRLD_2 = 100, 200
+edges = cv2.Canny(image,HYST_THRLD_1,HYST_THRLD_2)
+return edges
+```
 
 ![python code sample](images/python-code-sample.png)
 
@@ -251,7 +253,7 @@ Once the job completes, we can view the results in the Amazon S3 bucket you spec
 
 ![output results in s3](images/output-results-in-s3.png)
 
-**Congratulation! You completed the tutorial to prepare image data using little to no code with Amazon SageMaker Data Wrangler!**
+**Congratulations! You completed the tutorial to prepare image data using little to no code with Amazon SageMaker Data Wrangler!**
 
 ## Clean Up Your AWS Resources
 
@@ -267,7 +269,7 @@ Once this is complete and the bucket is empty, you can delete the **sagemaker-st
 
 The Data Wrangler kernel used for running the flow in this tutorial will accumulate charges until you either stop the kernel or perform the following steps to delete the apps. For more information, see [Shut Down Resources](https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-run-and-manage-shut-down.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents) in the Amazon SageMaker Developer Guide.
 
-To delete the SageMaker Studio apps, do the following: On the SageMaker console, choose **Domains**, and then choose **StudioDomain**.  From the User profiles list, select **studio-user**, and then delete all the apps listed under Apps by choosing **Delete app**. To delete the JupyterServer, choose **Action**, then choose **Delete**.  Wait until the **Status** changes to **Deleted**.
+To delete the SageMaker Studio apps, do the following: On the SageMaker console, choose **Domains**, and then choose **StudioDomain**. From the User profiles list, select **studio-user**, and then delete all the apps listed under Apps by choosing **Delete app**. To delete the JupyterServer, choose **Action**, then choose **Delete**. Wait until the **Status** changes to **Deleted**.
 
 ![select domain](images/select-domain.png)
 
@@ -289,7 +291,7 @@ On **sm-studio-tutorial** stack details page, choose **Delete** to delete the st
 
 ## Conclusion
 
-Congratulations! You have finished the tutorial on prepare image data using Amazon SageMaker Data Wrangler.
+Congratulations! You have finished the tutorial on preparing image data using Amazon SageMaker Data Wrangler.
 
 In this tutorial, you used Amazon SageMaker Data Wrangler to prepare image data using both built-in and custom transformations. You saved your steps as a Data Wrangler flow and executed the job to save the output to an Amazon S3 bucket.
 
