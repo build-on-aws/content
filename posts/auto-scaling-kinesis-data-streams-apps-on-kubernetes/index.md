@@ -60,7 +60,7 @@ Before, we dive in, here is quick overview of `KEDA`.
 
 You will see the [Kinesis Stream KEDA scaler](https://keda.sh/docs/2.10/scalers/aws-kinesis/) in action that scales based on the shard count of AWS Kinesis Stream.
 
-![](https://keda.sh/img/keda-arch.png)
+![KEDA: high level architecture](https://keda.sh/img/keda-arch.png)
 
 *[From KEDA documentation](https://keda.sh/docs/2.8/concepts/)*
 
