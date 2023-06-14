@@ -12,7 +12,7 @@ tags:
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 showInHomeFeed: true
-date: 2023-06-20
+date: 2023-06-15
 ---
 
 [Amazon Rekognition](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a service that lets you analyze images and videos in your applications. You can identify objects, people, text, scenes, and activities, and detect inappropriate content. You can also do facial analysis, face comparison, and face search for various use cases like user verification and public safety. Amazon Rekognition is built on deep learning technology that doesn't require machine learning expertise to use. It has an easy-to-use API that can analyze any image or video file in [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
@@ -59,7 +59,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | 100 - Beginner                          |
 | ⏱ Time to complete  | 20 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier      |
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](TODO)                             |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/amazon-rekognition-lambda-golang-example)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-06-20                             |
 
@@ -72,9 +72,9 @@ Before starting this tutorial, you will need the following:
 Clone the project and change to the right directory:
 
 ```bash
-git clone TODO
+git clone https://github.com/build-on-aws/amazon-rekognition-lambda-golang-example
 
-cd TODO
+cd amazon-rekognition-lambda-golang-example
 ```
 
 The AWS Cloud Development Kit (AWS CDK) is a framework that lets you define your cloud infrastructure as code in one of its supported programming and provision it through [AWS CloudFormation](https://aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
@@ -127,7 +127,7 @@ You are ready to verify the solution.
 
 ## Extract labels from image
 
-To try the solution, you can either use an image of your own or use the sample files provided in the [GitHub repository](TODO). I will be used the AWS CLI to upload the file, but you can [use the AWS console](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) as well.
+To try the solution, you can either use an image of your own or use the sample files provided in the [GitHub repository](https://github.com/build-on-aws/amazon-rekognition-lambda-golang-example). I will be used the AWS CLI to upload the file, but you can [use the AWS console](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) as well.
 
 ```bash
 export SOURCE_BUCKET=<enter source S3 bucket name - check the CDK output>
