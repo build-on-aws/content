@@ -162,11 +162,11 @@ Select **Add step** to **Enhance image contrast**.
 
 Choose **Enhance Contrast** > Gamma contrast and set the Gamma to 0.75, and then **Preview** and **Add**.
 
-![enhance image contrast setting](images/20-enhance-image-contrast-setting.png)
+![enhance image contrast setting](images/enhance-image-contrast-setting.png)
 
 Add another step to **Resize image**.
 
-![resize image](images/21-resize-image.png)
+![resize image](images/resize-image.png)
 
 Choose **Resize > Crop** to crop the images by 50 pixels from each size of the images. Select **Preview** to see the changes to the image, then select **Add**. Doing so will essentially resize the images from 720 x 1280 to 620 x 1180.
 
