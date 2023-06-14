@@ -7,9 +7,9 @@ tags:
     - "ASP.NET Core"
     - aws
     - it-pro
-authorGithubAlias: "spara"
-authorName: "Sophia Parafina"
-date: "2023-05-31"
+authorGithubAlias: spara
+authorName: Sophia Parafina
+date: 2023-05-31
 ---
 
 Deploying applications is a fundamental task for IT Pros. The Run in the Cloud stage of the Practical Cloud Guide for IT Professionals uses AWS Lightsail - a managed service for Virtual Private Servers (VPS), containers, databases, storage, and networking. The goal of the Run in the Cloud is to gain experience working in the cloud without building a cloud infrastructure.
