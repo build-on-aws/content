@@ -13,6 +13,8 @@ authorName: Brian Ketelsen
 date: 2023-06-14
 ---
 
+Testing a change.
+
 When it comes to building, testing, and deploying applications, software development engineers and devops engineers must master the art of automation. Today, most backend or frontend web applications are built automatically and, sometimes, are also deployed to production as changes occur.
 
 The workflows that facilitate this process - fetching code, building it alongside code from other developers, running various tests, and even deploying the changes - are called continuous integration and continuous deployment, or CI/CD for short. CI/CD helps to reduce the time to deliver new code to your customers. It also helps to detect issues faster and to accelerate feedback cycles. The IT industry considers CI/CD as a best practice.
