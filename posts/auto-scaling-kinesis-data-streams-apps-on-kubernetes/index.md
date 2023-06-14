@@ -10,7 +10,7 @@ tags:
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 externalCanonicalUrl: https://www.pluralsight.com/blog/cloud/auto-scaling-kinesis-data-kubernetes
-date: 2023-06-20
+date: 2023-06-14
 ---
 
 This blog offers a step-by-step guide on how to auto-scale your Kinesis Data Streams consumer applications on Kubernetes, so you can save on costs and improve resource efficiency.
