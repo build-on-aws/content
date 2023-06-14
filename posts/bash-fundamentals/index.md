@@ -2,10 +2,10 @@
 title: "Bash Fundamentals"  
 description: "Bash is a nearly ubiquitous shell and programming tool. Here's how to get started with it."
 tags:  
-- cloud
-- basics
-- compute
-- scripting
+  - cloud
+  - basics
+  - compute
+  - scripting
 authorGithubAlias: aws-rsavela  
 authorName: Russ Savela  
 date: 2023-04-17  
