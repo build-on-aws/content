@@ -16,7 +16,7 @@ authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 date: 2023-02-21
 ---
-# I deployed Kubernetes with a 1986 Tandy 102 Portable Computer 
+## I deployed Kubernetes with a 1986 Tandy 102 Portable Computer 
 
 I love making the outdated technology I collect do things it was never built to do, forcing the very old to work with the very new. Deploying Kubernetes with a 1986 Tandy 102 Portable Computer is exactly that. And it turns out, a 37-year-old computer can do some very modern things, things that would've seemed like science fiction to the people of the 1980s. But this project also tells us something about the cloud: that given the growth of cloud computing in this day and age, the importance of optimizing your local hardware is diminishing. The oldest personal computers were inspired by mainframe-connected terminals, and with the rise of the cloud, we seem to be returning to some extent to that age, treating our machines as glorified terminals for something way bigger, up in a cloud. And that's a good thing.
 
@@ -45,7 +45,6 @@ To make this work, I need to plug in the modem to the back of the Tandy 102, but
 ![Tandy 102 screen showing its applications in a grid layout. The BASIC application is currently selected](images/DSC00045.webp)
 
 Okay, the beautiful thing about this computer is that it comes with a Terminal application built into its ROM (TELCO), and I will be using that for everything moving forward. A Terminal Application in this case is the main application you would use for any sort of communication work. This includes sending emails, uploading files, and working on a remote server (that’s foreshadowing, if you didn’t notice). And it allows you to dial systems and communicate over the serial interface. Before this will work with my modem, I need to make some configuration changes. I’ll change the Baud rate to 300, as that is the default on the modem itself. To do so, I just need to enter the following command once I open the Terminal application.
-
 
 ```text
 stat 38N1E
@@ -77,7 +76,7 @@ This will change the translation mode to TELNET, which will come in handy later 
 AT&W
 ```
 
-![Tandy 102 showing the WiFi Modem connected to router](images/DSC00050.web "Tandy 102 with the WiFi modem connected to the router")
+![Tandy 102 showing the WiFi Modem connected to router](images/DSC00050.webp "Tandy 102 with the WiFi modem connected to the router")
 
 ## Cheating my way to the goal
 
