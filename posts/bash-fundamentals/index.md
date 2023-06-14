@@ -1,4 +1,4 @@
----  
+---
 title: "Bash Fundamentals"
 description: "Bash is a nearly ubiquitous shell and programming tool. Here's how to get started with it."
 tags:
