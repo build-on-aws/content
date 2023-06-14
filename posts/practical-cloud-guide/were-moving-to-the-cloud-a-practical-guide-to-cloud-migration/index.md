@@ -2,11 +2,11 @@
 title: "We're Moving to the Cloud: A Practical Guide to Cloud Migration"
 description: "Introduction to the Practical Cloud Guide, a series of articles and tutorials to help IT Administrators and Pros successfully transition to the cloud."
 tags:
-  - "IT Pros"
-  - "migration"
-authorGithubAlias: "spara" 
-authorName: "Sophia Parafina"
-date: 2023-31-05
+  - it-pro
+  - migration
+authorGithubAlias: spara 
+authorName: Sophia Parafina
+date: 2023-05-31
 ---
 
 It’s Monday morning, you’ve heard the rumors and now it’s official:
