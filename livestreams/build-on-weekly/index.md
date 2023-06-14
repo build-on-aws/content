@@ -12,10 +12,10 @@ additionalAuthors:
     authorName: Darko Mesaros
 date: 2023-03-31
 images:
-  banner: ./images/BOW_Logo.webp
-  thumbnail: ./images/BOW_Logo.webp
-  hero: ./images/BOW_Logo.webp
-  background: ./images/BOW_Logo.webp
+  banner: ./images/BOW_Logo.png
+  thumbnail: ./images/BOW_Logo.png
+  hero: ./images/BOW_Logo.png
+  background: ./images/BOW_Logo.png
 ---
 
 ![Image of Jacquie and Darko enjoying the live stream together](images/bow-header.webp)
