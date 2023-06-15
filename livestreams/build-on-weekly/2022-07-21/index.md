@@ -1,6 +1,6 @@
 ---
-title: "S01E02 - Breaking blocks with Terraform"
-description: "BuildOn on Weekly stream from 2022-07-21"
+title: "Breaking blocks with Terraform | S01 E02 | Build On Weekly"
+description: "Do you need a Minecraft Server? Today, we deploy one with Terraform"
 tags:
   - aws
   - build-on-live

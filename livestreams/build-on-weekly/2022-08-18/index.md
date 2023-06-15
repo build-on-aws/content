@@ -1,6 +1,6 @@
 ---
-title: "S01E06 - Local Development"
-description: "BuildOn on Weekly stream from 2022-08-18"
+title: "Local Development | S01 E06 | Build On Weekly"
+description: "Let's see how Jacquie configures her local development environment, and how she automates configuring it."
 tags:
   - aws
   - build-on-live
