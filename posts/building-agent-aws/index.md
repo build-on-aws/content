@@ -41,16 +41,17 @@ The GitHub repository with the code can be found [here](https://github.com/aws-b
 
 The language model underlying the agent is based on a detailed prompt provided by the user. This prompt helps the model generate suitable responses to user requests.
 
-### Structure of the prompt
+### Structure of the Prompt
 
 The prompt is structured broadly into two parts.
-1.	Role: How the agent should behave, explanation of the concept of tools.
-2.	Instructions: Provides examples of tasks and their solutions
+1. Role: How the agent should behave, explanation of the concept of tools.
+2. Instructions: Provides examples of tasks and their solutions
 
 ### Role
+
 To start, the agent is assigned a role to play. In this case the agent is portrayed as an expert AWS Certified Solutions Architect equipped with tools to solve customer problems effectively. The role description is followed by the token <<all_tools>>, which is replaced at runtime with the tools specified by the user.
 
-Here is the full role prompt below
+Here is the full role prompt:
 
 ```text
 You are an expert AWS Certified Solutions Architect. Your role is to help customers understand best practices on building on AWS. You will generate Python commands using available tools to help will customers solve their problem effectively.
@@ -66,7 +67,7 @@ Tools:
 
 The Instructions segment begins with a task, which lays out what the agent intends to accomplish. This task effectively acts as a "wrapper" for the underlying functionality of the tools, providing a context-rich, user-friendly interface for the more complex operations happening beneath the surface.
 
-Following the task, the agent's response details how it will utilize the available tools to address the customer's request. The response encapsulates the function call to the appropriate tool, in this case, the AWS Well-Architected Framework Query Tool. This tool is selected because it provides direct access to the AWS Well-Architected Framework, enabling the extraction of valuable information relevant to the task at hand.
+Following the task, the agent's response details how it will utilize the available tools to address the customer's request. The response encapsulates the function call to the appropriate tool - in this case, the AWS Well-Architected Framework Query Tool. This tool is selected because it provides direct access to the AWS Well-Architected Framework, enabling the extraction of valuable information relevant to the task at hand.
 
 Finally, we demonstrate the Python code that the agent will execute to fulfill the user's query. This code makes use of Python's f-string formatting, a feature that allows for embedding expressions inside string literals, using curly braces {}. The variable 'response' is placed within these braces, meaning its value will be inserted into the string when it's printed.
 
@@ -89,21 +90,21 @@ You can view the full prompt [here](https://github.com/aws-banjo/building-aws-ag
 
 ## Tools
 
-Now that we have defined our agent, the next step is to create the tools for the agent to use. Tools consist of single function, with a name, and a description. The descriptions are used to prompt the agent to complete tasks.
+Now that we have defined our agent, the next step is to create the tools for the agent to use. Tools consist of single function, with a name and a description. The descriptions are used to prompt the agent to complete tasks.
 
-## Creating Custom tools 
+## Creating Custom Tools 
 
 For Agent AWS we will create 3 custom tools to respond to customer requests.
 
-1.	**AWS Well-Architected Framework Query Tool:** This tool will allow your agent to interact directly with the AWS Well-Architected Framework, extracting valuable data to inform architectural decisions.
-2.	**Code Generation Tool:** This tool will generate code from AWS CloudFormation scripts to Python code.
-3.	**Diagram Creation Tool:** This tool will create AWS diagrams.
+1. **AWS Well-Architected Framework Query Tool:** This tool will allow your agent to interact directly with the AWS Well-Architected Framework, extracting valuable data to inform architectural decisions.
+2. **Code Generation Tool:** This tool will generate code from AWS CloudFormation scripts to Python code.
+3. **Diagram Creation Tool:** This tool will create AWS diagrams.
 
 The process of creating tools is a uniform experience. I will go over how I created the AWS Well-Architected Framework tool in this post. You can view the full code for all the tools [here](https://github.com/aws-banjo/building-aws-agent/blob/main/agent_setup.py#L66-L290).
 
 ## Querying the AWS Well-Architected Framework
 
-The first tool we've developed is designed to query the AWS Well-Architected Framework. This tool leverages a vector database to deliver relevant answers to user queries. Understanding the inner workings of vector databases isn't essential to appreciate the rest of this blog post. However, if you're interested in exploring how these databases can be constructed and used in detail, feel free to delve into my previous [post](https://www.buildon.aws/posts/well-arch-chatbot) which dives deep into this topic. 
+The first tool we've developed is designed to query the AWS Well-Architected Framework. This tool leverages a vector database to deliver relevant answers to user queries. Understanding the inner workings of vector databases isn't essential to appreciate the rest of this blog post. However, if you're interested in exploring how these databases can be constructed and used in detail, feel free to read my post on [creating an AWS Well Architected chatbot](https://www.buildon.aws/posts/well-arch-chatbot), which dives deep into this topic. 
 
 For the purpose of our current journey of building an AWS Solution Architect Agent, we'll focus more on the application of this tool within the agent's workflow.
 
@@ -126,7 +127,7 @@ This class necessitates the following attributes:
     * 'audio': This type would be selected when the input or output is a sound or speech, which might be useful for voice-based interaction scenarios.
 4. **A call method**: This contains the inference code.
 
-So, with these attributes, our class will look like this:
+With these attributes, our class will look like this:
 
 ```python
 from transformers import Tool
@@ -195,7 +196,7 @@ architecture_diagram = diagram_creation_tool(query=" A diagram that shows an s3 
 <class 'PIL.PngImagePlugin.PngImageFile'>
 ```
 
-In this output, the agent explains the tool it plans to use, generates the code to create the requested architectural diagram, and finally, returns the result—an image.
+In this output, the agent explains the tool it plans to use, generates the code to create the requested architectural diagram, and finally returns the result — in this case, an image.
 
 ![Agent AWS creates a diagram](images/diagram_example.png)
 
@@ -203,9 +204,9 @@ The code for the app is [here](https://github.com/aws-banjo/building-aws-agent/b
 
 ## Conclusion
 
-Throughout this blog post, we've embarked on an exciting journey, harnessing the power of Generative AI to construct an AWS Solution Architect Agent. Employing HuggingFace Transformers and an array of foundational models, we've created purpose-built tools that have shaped a virtual Solution Architect - "Agent AWS".
+Throughout this blog post, we've embarked on an exciting journey: harnessing the power of Generative AI to construct an AWS Solution Architect Agent. Employing HuggingFace Transformers and an array of foundational models, we've created purpose-built tools that have shaped a virtual Solution Architect named "Agent AWS".
 
-However, it's crucial to note that this doesn't replace the role of a Solution Architect. Instead, it enhances builders with an invaluable tool that can help streamline workflows.
+However, it's crucial to note that this doesn't replace the role of a Solution Architect. Instead, it equips builders with an invaluable tool that can help streamline workflows.
 
 The potential of Generative AI Agents, as demonstrated by our Agent AWS, is vast, and we've merely begun to explore its capabilities. This exploration is our opening act, a stepping stone into an exciting era where AI-driven tools augment our abilities and revolutionize how we build solutions.
 
