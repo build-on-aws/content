@@ -9,7 +9,7 @@ tags:
   - cloud
 authorGithubAlias: agaankus
 authorName: Ankush Agarwal
-date: 2023-06-016
+date: 2023-06-16
 --- 
 
 Organizations that achieve success harness the business value inherent in their data. When devising a successful big data strategy, a crucial initial step is selecting the appropriate technology to store, search, analyze, and generate reports from the data. In this post, we will address frequently asked questions about databases, data lakes, and data warehouses. We will explore their definitions, distinctions, and help you determine which option is most suitable for your needs. 
