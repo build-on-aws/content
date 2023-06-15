@@ -9,7 +9,7 @@ tags:
   - low-code-no-code
 authorGithubAlias: pechung
 authorName: Peter Chung, Munish Dabra
-date: 2023-06-01
+date: 2023-06-15
 ---
 
 Imagine you’re working with state and local governments to respond as quickly as possible to traffic accidents. You’re working to build a machine learning (ML) model that can identify accidents from traffic footage to dispatch first responders to arrive on site. Your efforts are extremely important as they will save lives!
