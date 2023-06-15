@@ -24,7 +24,7 @@ This tutorial shows you how to setup and implement a real-time data pipeline usi
 | ✅ AWS Level        | 200                             |
 | ⏱ Time to complete  | 45 mins - 60 mins                      |
 | 💰 Cost to complete | USD 4.00                               |
-| 🧩 Prerequisites       | - An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - An IAM user that has the access to create AWS resources <br> - Basic understanding of CLI <br> - Java and Apache Maven installed |
+| 🧩 Prerequisites       | - An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka) <br> - An IAM user that has the access to create AWS resources <br> - Basic understanding of CLI <br> - Java and Apache Maven installed |
 | ⏰ Last Updated     | 2023-06-15                           |
 
 |ToC|
