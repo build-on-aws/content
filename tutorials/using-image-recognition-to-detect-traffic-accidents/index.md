@@ -32,7 +32,7 @@ For the image preparation steps in Data Wrangler, we'll first handle corrupt or 
 Once the transformation steps are complete, we'll export the prepared images to another Amazon S3 bucket. We'll execute the job to process the images. Lastly, we'll clean up the environment so we don't incur charges after we're done.
 
 ## Sections
-| Info                | Level                                  |
+| Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 100 - Beginner                          |
 | ⏱ Time to complete  | 120 minutes                             |
@@ -69,7 +69,7 @@ Step 2: When the stack creation completes, you can proceed to uploading some ima
 
 ![cloudformation stack complete](images/cloudformation-stack-complete.png)
 
-SageMaker Studio automatically creates an Amazon S3 bucket within the same Region as the Studio domain. Let's go there now. 
+SageMaker Studio automatically creates an Amazon S3 bucket within the same Region as the Studio domain. Let's go there now.
 
 We'll place our image files in Amazon S3 so that we can access these images from SageMaker Studio. Amazon S3 is a great place to store images files because it is durable, highly available, and inexpensive! Search for “S3” in the Management Console search bar to navigate to Amazon S3.
 
@@ -115,7 +115,7 @@ It will take a moment for Data Wrangler to load, but while that's going, notice 
 
 ![dw flow loading](images/dw-flow-loading.png)
 
-Once Data Wrangler completely loads, you can right-click the flow tab and rename your flow. Rename to whatever you like, or something like car_creash_detection_data.flow.
+Once Data Wrangler completely loads, you can right-click the flow tab and rename your flow. Rename to whatever you like, or something like `car_creash_detection_data.flow`.
 
 ![rename flow](images/rename-flow.png)
 
@@ -133,7 +133,7 @@ Navigate through the folder prefixes toward the data/train prefixes and select t
 
 If you noticed, Data Wrangler only imports 100 random images. This makes sense because you'd be here all day if it imported everything, and even longer if you had more images! After a moment, Data Wrangler will display the images in the UI.
 
-![import complete](images/import-complete.png) 
+![import complete](images/import-complete.png)
 
 ### Image Preparation Step: Corrupt Images
 
@@ -151,7 +151,7 @@ We're intentionally corrupting the images here to train our model to detect acci
 
 ![corrupt image settings](images/corrupt-image-settings.png)
 
-After a moment the step will complete. This helps to train our model since not all images data are in beautiful 4K resolution. 
+After a moment the step will complete. This helps to train our model since not all images data are in beautiful 4K resolution.
 
 ![corrupt image results](images/corrupt-image-results.png)
 
@@ -183,7 +183,7 @@ Step 9: Here, we’ll use a custom transformation to finish our image preparatio
 
 Select **Add step** then **Custom transform**.
 
-![custom transform](images/custom-transform.png)    
+![custom transform](images/custom-transform.png)
 
 Give your custom transform a name like ‘Edge detection’, and select **Python (PySpark)**.
 
@@ -191,7 +191,7 @@ Give your custom transform a name like ‘Edge detection’, and select **Python
 
 Paste in the below **Python** code into the custom transform code snippet.
 
-``` Python
+```python
 # A table with your image data is stored in the 'df' variable
 import cv2
 import numpy as np
