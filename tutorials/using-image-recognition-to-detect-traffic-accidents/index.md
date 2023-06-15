@@ -8,7 +8,10 @@ tags:
   - object-detection
   - low-code-no-code
 authorGithubAlias: pechung
-authorName: Peter Chung, Munish Dabra
+authorName: Peter Chung
+additionalAuthors: 
+ - authorGithubAlias: awsdabra
+   authorName: Munish Dabra
 date: 2023-06-15
 ---
 
