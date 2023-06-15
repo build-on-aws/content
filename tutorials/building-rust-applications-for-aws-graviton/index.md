@@ -31,7 +31,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ### Code Checkout
 
-To checkout the example project go to <insert link to aws samples repo here once its published to GitHub> and clone the repository. You should now have a `rust-link-shortener` directory containing all of the appropriate code. Check out the code on both your x86 instance and your AWS Graviton Instance.
+To checkout the example project go to [building-rust-applications-for-aws-graviton](https://github.com/build-on-aws/building-rust-applications-for-aws-graviton) and clone the repository. You should now have a `rust-link-shortener` directory containing all of the appropriate code. Check out the code on both your x86 instance and your AWS Graviton Instance.
 
 ### DynamoDB Setup
 
