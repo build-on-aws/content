@@ -25,7 +25,7 @@ This blog post is about precisely that journey - constructing an AI-powered AWS 
 
 ## Agent AWS
 
-Agent AWS is an automated, AI-powered agent that uses [HuggingFace Transformers](https://huggingface.co/docs/transformers/en/transformers_agents) paired with numerous different [foundation models](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models.html).
+Agent AWS is an automated, AI-powered agent that uses [HuggingFace Transformers](https://huggingface.co/docs/transformers/en/transformers_agents) paired with numerous different [foundation models](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=agent-aws).
 
 The "agent" is essentially a Large Language Model (LLM) with a predefined prompt and access to a specific set of “tools”, which are self-contained functions designed to perform a specific task. For instance, these tools could include a text summarizer or an image generator. Agent AWS leverages custom built tools to query AWS documentation, generate code, and create architectural diagrams.
 
