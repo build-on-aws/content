@@ -32,6 +32,7 @@ For the image preparation steps in Data Wrangler, we'll first handle corrupt or 
 Once the transformation steps are complete, we'll export the prepared images to another Amazon S3 bucket. We'll execute the job to process the images. Lastly, we'll clean up the environment so we don't incur charges after we're done.
 
 ## Sections
+
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 100 - Beginner                          |
@@ -39,7 +40,7 @@ Once the transformation steps are complete, we'll export the prepared images to 
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.84 |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents) <br> |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ? |
-| ⏰ Last Updated     | 2023-06-01 <as mentioned above> |
+| ⏰ Last Updated     | 2023-06-15 |
 
 ## Prerequisites
 
