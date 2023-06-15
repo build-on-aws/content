@@ -9,7 +9,7 @@ tags:
   - cloud
 authorGithubAlias: agaankus
 authorName: Ankush Agarwal
-date: 2023-06-01
+date: 2023-06-016
 --- 
 
 Organizations that achieve success harness the business value inherent in their data. When devising a successful big data strategy, a crucial initial step is selecting the appropriate technology to store, search, analyze, and generate reports from the data. In this post, we will address frequently asked questions about databases, data lakes, and data warehouses. We will explore their definitions, distinctions, and help you determine which option is most suitable for your needs. 
@@ -60,10 +60,10 @@ It is also important to analyze various query patterns, random access patterns, 
 
 A wide variety of databases exist. Examples include:
 
-- Relational databases: [Amazon RDS for Orcale, Amazon RDS for MySQL, Amazon RDS for SQL Server, and Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.html)
-- Document databases: [Amazon DocumentDB](https://docs.aws.amazon.com/documentdb/latest/developerguide/get-started-guide.html)
-- Key-value databases: [Amazon Elasticache](https://aws.amazon.com/elasticache/getting-started/) and [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html)
-- Graph databases: [Amazon Neptune](https://aws.amazon.com/neptune/getting-started/)
+- Relational databases: [Amazon RDS for Orcale, Amazon RDS for MySQL, Amazon RDS for SQL Server, and Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.html?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- Document databases: [Amazon DocumentDB](https://docs.aws.amazon.com/documentdb/latest/developerguide/get-started-guide.html?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- Key-value databases: [Amazon Elasticache](https://aws.amazon.com/elasticache/getting-started?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- Graph databases: [Amazon Neptune](https://aws.amazon.com/neptune/getting-started?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## **What is a Data warehouse?**
 
@@ -87,7 +87,7 @@ Note that data warehouses are not intended to satisfy the transaction and concur
 
 ### Data warehouse Examples
 
-[Amazon Redshift](https://aws.amazon.com/redshift/getting-started/) is a data warehouse developed by Amazon Web Services. Some popular data warehouse tools are Xplenty,Teradata, Oracle 12c, Informatica, IBM Infosphere, Cloudera, and Panoply and offerings  other cloud service providers like Azure Synapse.
+[Amazon Redshift](https://aws.amazon.com/redshift/getting-started?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a data warehouse developed by Amazon Web Services. Some popular data warehouse tools are Xplenty,Teradata, Oracle 12c, Informatica, IBM Infosphere, Cloudera, and Panoply and offerings  other cloud service providers like Azure Synapse.
     
 ## What is a Data Lake?
 
@@ -131,6 +131,6 @@ Databases, data warehouses, and data lakes each have their own purpose. Nearly e
 
 Want to learn more, follow the resources below- 
 
-- Databases: [Learn more about Databases on AWS](https://aws.amazon.com/products/databases/learn/) 
-- Data warehouse: [Learn about Data Warehousing on AWS](https://aws.amazon.com/training/classroom/data-warehousing-on-aws/) 
-- Data Lakes: [Learn more about building Data Lakes on AWS](https://aws.amazon.com/training/classroom/building-data-lakes/)
+- Databases: [Learn more about Databases on AWS](https://aws.amazon.com/products/databases/learn?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq) 
+- Data warehouse: [Learn about Data Warehousing on AWS](https://aws.amazon.com/training/classroom/data-warehousing-on-aws?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq) 
+- Data Lakes: [Learn more about building Data Lakes on AWS](https://aws.amazon.com/training/classroom/building-data-lakes?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq)
