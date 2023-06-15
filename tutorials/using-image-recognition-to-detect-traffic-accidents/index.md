@@ -7,6 +7,7 @@ tags:
   - augmenting-image-data
   - object-detection
   - low-code-no-code
+showInHomeFeed: true
 authorGithubAlias: pechung
 authorName: Peter Chung
 additionalAuthors: 
