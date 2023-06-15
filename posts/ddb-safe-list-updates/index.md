@@ -217,7 +217,7 @@ DynamoDB.put({
 
 In the console, our new document looks almost identical, except for the "StringSet" type on the friends attribute.
 
-![Storing the friends field as a String Set](storing-friends-as-string-set.png)
+![Storing the friends field as a String Set](images/storing-friends-as-string-set.png)
 
 Now for the **DELETE** operation:
 
@@ -264,7 +264,7 @@ true
 
 From the above experiment, a DynamoDB Set deserializes into an object with its array of items stored under the values property. If we want a Set to deserialize into an array, we need to add an unmarshalling step where we assign the values property instead of the deserialized set object itself. Remember how sets cannot be empty? If we try to remove all elements from a set, the console will stop us:
 
-![Sets cannot be empty](set-cannot-be-empty.png)
+![Sets cannot be empty](images/set-cannot-be-empty.png)
 
 However, if we remove the last element from a set in code, the attribute will be deleted from the document. This means the unmarshalling step we mentioned in gotcha #1 will need to account for the case where the property is undefined. Here's a helper function that covers both cases:
 
