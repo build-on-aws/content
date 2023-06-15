@@ -10,8 +10,34 @@ tags:
   - migrate
 authorGithubAlias: DDxPlague
 authorName: Tyler Jones
-date: 2023-06-13
+date: 2023-06-15
 ---
+## What you will learn
+
+- How to build a Rust application for AWS Graviton
+- How to port an existing Rust application to AWS Graviton
+
+## Prerequisites
+
+Before starting this tutorial, you will need the following:
+
+- An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
+- An AWS DynamoDB Table (the tutorial will cover exact configurations)
+
+## Sections
+
+| Attributes                |                                   |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | 200 - Intermediate                          |
+| ⏱ Time to complete  | 30 minutes                             |
+| 💰 Cost to complete | Free when using the AWS Free Tier or USD 2.62      |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br> - [AWS DynamoDB Table](https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#dashboard)|
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/building-rust-applications-for-aws-graviton)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | 2023-06-15                             |
+
+| ToC |
+|-----|
 
 ## Building Rust Applications For AWS Graviton
 
@@ -150,10 +176,14 @@ wrk -c64 -t30 -d 30m -L -R 90000 -s ./post.lua http://10.3.76.37:8000/shorten_ur
 
 | |C5.xlarge |C6g.xlarge |
 |--- |--- |--- |
-|Requests/Second |11947.12 |11960.24 |
-|Total Requests Served |21504877 |21528469 |
+|Requests/Second |11,947.12 |11,960.24 |
+|Total Requests Served |21,504,877 |21,528,469 |
 
 Using the same load test our AWS Graviton powered instance achieved similar request latencies across all percentiles, while serving a large number of requests per second and a larger number of total requests. Our AWS Graviton instance did all of this while being cheaper and consuming less energy. AWS Graviton instances achieve the best price/performance for Rust applications.
+
+## Cleanup
+
+Now that we're finished it's time to clean up all of the resources we created in this tutorial. Make sure to terminate any EC2 Instances you created and delete your DynamoDB table so you won't incur any additional costs.
 
 ## Conclusion
 
