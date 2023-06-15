@@ -176,7 +176,6 @@ for tool in default_tools:
         del agent.toolbox[tool]
     except:
         continue
-
 ```
 
 Now that the agent is set up, it can execute commands invoking the custom tools. Let's consider an example command:
@@ -208,7 +207,9 @@ Throughout this blog post, we've embarked on an exciting journey: harnessing the
 
 However, it's crucial to note that this doesn't replace the role of a Solution Architect. Instead, it equips builders with an invaluable tool that can help streamline workflows.
 
-The potential of Generative AI Agents, as demonstrated by our Agent AWS, is vast, and we've merely begun to explore its capabilities. This exploration is our opening act, a stepping stone into an exciting era where AI-driven tools augment our abilities and revolutionize how we build solutions.
+The potential of Generative AI Agents, as demonstrated by our Agent AWS, is vast, and we've merely begun to explore its capabilities. This exploration is our opening act, a stepping stone into an exciting era where AI-driven tools augment our abilities and revolutionize how [we build solutions](https://dzone.com/articles/chataws-deploy-aws-resources-seamlessly-chatgpt).
+
+If you are interested in learning more check out the documentation from [HuggingFace on custom tools](https://huggingface.co/docs/transformers/en/custom_tools#creating-a-new-tool) and their [foundation model leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard).
 
 Remember, this is not an endpoint but a launchpad. The agent/tool framework is a wellspring of opportunities waiting to be tapped. Equipped with this knowledge, let's embrace this thrilling journey. There's a lot more we can achieve. Now go build!
 
