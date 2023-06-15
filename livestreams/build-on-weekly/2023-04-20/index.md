@@ -1,6 +1,6 @@
 ---
-title: "S02E14 - Stable Diffusion with Viktoria"
-description: "BuildOn on Weekly stream from 2023-04-20"
+title: "Stable Diffusion with Viktoria | S02 E14 | Build On Weekly"
+description: "Playing around with Stable Diffusion on AWS"
 tags:
   - aws
   - build-on-live

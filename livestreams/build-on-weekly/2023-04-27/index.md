@@ -1,6 +1,6 @@
 ---
-title: "S02E15 - Generative AI Applications"
-description: "BuildOn on Weekly stream from 2023-04-27"
+title: "Generative AI Applications | S02 E15 | Build On Weekly"
+description: "Jacquie and Darko trying out Banjo's Generative AI Workshop"
 tags:
   - aws
   - build-on-live

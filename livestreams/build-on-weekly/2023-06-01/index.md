@@ -1,5 +1,5 @@
 ---
-title: "S02E20 - Managing Dev Environments"
+title: "Managing Dev Environments | S02 E20 | Build On Weekly"
 description: "Brian and Darko show how you can manage, and make portable your wonderful Dev Environments."
 tags:
   - aws
