@@ -52,5 +52,3 @@ Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
 | S01E03 | Command Line Magic | 2022-07-28  | [Show Notes](/livestreams/build-on-weekly/2022-07-28) |
 | S01E02 | Breaking blocks with Terraform | 2022-07-21  | [Show Notes](/livestreams/build-on-weekly/2022-07-21) |
 | S01E01 | Open With Open Source | 2022-07-14  | [Show Notes](/livestreams/build-on-weekly/2022-07-14) |
-
-![Build On Weekly Logo](images/BOW_Logo.webp)
