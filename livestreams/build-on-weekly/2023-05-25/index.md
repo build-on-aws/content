@@ -43,6 +43,7 @@ https://www.twitch.tv/videos/1846587978
 - [Data Mesh workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/23e6326b-58ee-4ab0-9bc7-3c8d730eb851/en-US)
 
 **🐦 Reach out to the hosts and guests:**
+
 Dzenan: [https://www.linkedin.com/in/dzenansoftic/](https://www.linkedin.com/in/dzenansoftic/)
 
 Vincent: [https://www.linkedin.com/in/vincent-gromakowski/](https://www.linkedin.com/in/vincent-gromakowski/)
