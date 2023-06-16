@@ -4,9 +4,10 @@ description: "Several solutions to safely modify a list attribute on a DynamoDB 
 tags:
   - databases
   - nosql
+  - dynamodb
 authorGithubAlias: robzhu
 authorName: Robert Zhu
-date: 2023-06-14
+date: 2023-06-16
 ---
 
 *Full [code](https://gist.github.com/robzhu/3a6017c85758a682c759176f92e00fa7) if you want to follow along.*
