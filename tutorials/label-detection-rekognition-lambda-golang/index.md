@@ -12,7 +12,7 @@ tags:
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 showInHomeFeed: true
-date: 2023-06-15
+date: 2023-06-16
 ---
 
 [Amazon Rekognition](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a service that lets you analyze images and videos in your applications. You can identify objects, people, text, scenes, and activities, and detect inappropriate content. You can also do facial analysis, face comparison, and face search for various use cases like user verification and public safety. Amazon Rekognition is built on deep learning technology that doesn't require machine learning expertise to use. It has an easy-to-use API that can analyze any image or video file in [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
