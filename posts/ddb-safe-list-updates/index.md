@@ -55,7 +55,7 @@ async function removeFriendByValue(friendName: string) {
 
 But this implementation has a race condition; there is a small window of time between reading the document, finding the index, and sending the update request, during which the document could be updated by another source, thus causing the operation "remove element at index X" to produce an undesired result. Luckily, there are several solutions to this common problem.
 
-# 1. Condition Expressions on the list contents
+## 1. Condition Expressions on the list contents
 
 DynamoDB supports a handy feature called a Condition Expressions, which lets us specify a condition that must be met in order for the operation to execute. In this case we want to build a rule that says, "only execute this operation if the target value is in the list":
 
@@ -124,7 +124,7 @@ async function conditionalRemoveFriendByValue(friendName) {
 
 But this technique only ensures that updates to the list attribute are safe. How can we ensure we only apply updates when the document has not changed?
 
-# 2. Condition Expression on a version attribute
+## 2. Condition Expression on a version attribute
 
 Borrowing from databases that employ multi-version concurrency control, we can introduce a "version" attribute at the root of our document. We can use the version field to set a condition expression that aborts the update when any other update has occurred. During the put operation, we can include an initial version property like so:
 
@@ -190,7 +190,7 @@ Notice that the Update Expression also increments the version attribute. The two
 1. We need to add a version attribute to every document/table for which we want to enforce this pattern.
 2. We need to create a wrapper layer that ensures all updates respect the version attribute and somehow ensure that direct update operations are avoided.
 
-# 3. Use the Set data type
+## 3. Use the Set data type
 
 In practice, a friends list would store of a list of unique foreign keys. If we know the entries are unique, we can marshal the friends field as the DynamoDB Set data type instead of a List. Compared to lists, sets have a few differences:
 
@@ -288,15 +288,15 @@ export function fromArrayToSet(values: string[]) {
 }
 ```
 
-# 4. Global Write Lock
+## 4. Global Write Lock
 
-The final solution is avoid the Transactional Memory problem by prevcenting concurrent writes. We can avoid concurrent writes by requiring any writer to obtain a distributed write lock (using a distributed lock service, such as etcd or zookeeper).
+The final solution is avoid the Transactional Memory problem by preventing concurrent writes. We can avoid concurrent writes by requiring any writer to obtain a distributed write lock (using a distributed lock service, such as etcd or zookeeper).
 
 Since there are many implementations of the global-write-lock pattern, I'll omit sample code and directly discuss the tradeoffs.
 
 This technique has two significant drawbacks: 1) a distributed lock service adds extra complexity and latency. 2) A global write lock reduces write throughout. If you’re already using a distributed lock service and you don’t need high write throughput, this solution is worth considering.
 
-# What About Transactions?
+## What About Transactions?
 
 DynamoDB also supports multi-document [transactions](https://aws.amazon.com/blogs/aws/new-amazon-dynamodb-transactions/), and this sounds like a promising solution. But, as my colleague Danilo puts it:
 
