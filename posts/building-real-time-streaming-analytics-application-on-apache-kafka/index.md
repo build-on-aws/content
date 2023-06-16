@@ -3,8 +3,8 @@ title: "Build a Real-Time Streaming Analytics Application on Apache Kafka"
 description: "Learn how to build an end-to-end real-time streaming analytics application on AWS using Apache Kafka and Apache Flink"
 tags:
   - streaming
-  - kafka
-  - flink
+  - apache-kafka
+  - apache-flink
   - aws
   - tutorials
 authorGithubAlias: Madabaru
