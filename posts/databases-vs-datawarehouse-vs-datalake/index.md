@@ -1,10 +1,10 @@
 ---
-title: "Datalake vs Data warehouse vs Databases: Which Meets Your Storage Needs?"
+title: "Data Lake vs Data Warehouse vs Databases: Which Meets Your Storage Needs?"
 description: Databases, Data warehouses, and Data Lakes all have different purposes and use-cases, but understanding those differences isn't always easy. Here's a quick guide to help you navigate the sometimes-confusing world of cloud storage.
 tags:
   - databases
   - data warehouse
-  - datalake
+  - data lake
   - storage
   - cloud
 authorGithubAlias: agaankus
@@ -14,7 +14,7 @@ date: 2023-06-16
 
 Organizations that achieve success harness the business value inherent in their data. When devising a successful big data strategy, a crucial initial step is selecting the appropriate technology to store, search, analyze, and generate reports from the data. In this post, we will address frequently asked questions about databases, data lakes, and data warehouses. We will explore their definitions, distinctions, and help you determine which option is most suitable for your needs. 
 
-But before we dive into the definitions Databases, data warehouse and Datalakes, let's first understand **What is a Data Store?**
+But before we dive into the definitions Databases, data warehouse and data lakes, let's first understand **What is a Data Store?**
 
 A data store is a digital repository that stores and safeguards the information in computer systems. A data store can be network-connected storage, distributed cloud storage, a physical hard drive, or virtual storage. It can store both structured data like information tables and unstructured data like emails, images, and videos. Organizations use data stores to retain, share, and manage information across business units.
 
@@ -85,7 +85,7 @@ Data warehouses are a good option when you need to store large amounts of histor
 
 Note that data warehouses are not intended to satisfy the transaction and concurrency needs of an application. If an organization determines they will benefit from a data warehouse, they will need a separate database or databases to power their daily operations.
 
-### Data warehouse Examples
+### Data Warehouse Examples
 
 [Amazon Redshift](https://aws.amazon.com/redshift/getting-started?sc_channel=el&sc_campaign=datamlwave&sc_content=databases-vs-datawarehouse-vs-datalake&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a data warehouse developed by Amazon Web Services. Some popular data warehouse tools are Xplenty,Teradata, Oracle 12c, Informatica, IBM Infosphere, Cloudera, and Panoply and offerings  other cloud service providers like Azure Synapse.
     
