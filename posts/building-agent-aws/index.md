@@ -35,7 +35,7 @@ The "agent" is essentially a Large Language Model (LLM) with a predefined prompt
 
 The following sections elaborates on how Agent AWS was built, focusing on the design process of the agent and tools. It shows how you can harness the potential of Generative AI for developing custom agents.
 
-The GitHub repository with the code can be found [here](https://github.com/aws-banjo/building-aws-agent).
+The GitHub repository with the code can be found [here](https://github.com/build-on-aws/building-gen-ai-agent-on-aws).
 
 ## Agent Prompt
 
@@ -86,7 +86,7 @@ I will use the following
 
 The last example employs the <<prompt>> directive, a placeholder that instructs the model on how to respond to a new, user-supplied prompt, thereby demonstrating the flexibility and adaptability of our Agent.
 
-You can view the full prompt [here](https://github.com/aws-banjo/building-aws-agent/blob/main/agent_setup.py#L20-L63).
+You can view the full prompt [here](https://github.com/build-on-aws/building-gen-ai-agent-on-aws/blob/main/agent_setup.py#L20-L63).
 
 ## Tools
 
@@ -100,7 +100,7 @@ For Agent AWS we will create 3 custom tools to respond to customer requests.
 2. **Code Generation Tool:** This tool will generate code from AWS CloudFormation scripts to Python code.
 3. **Diagram Creation Tool:** This tool will create AWS diagrams.
 
-The process of creating tools is a uniform experience. I will go over how I created the AWS Well-Architected Framework tool in this post. You can view the full code for all the tools [here](https://github.com/aws-banjo/building-aws-agent/blob/main/agent_setup.py#L66-L290).
+The process of creating tools is a uniform experience. I will go over how I created the AWS Well-Architected Framework tool in this post. You can view the full code for all the tools [here](https://github.com/build-on-aws/building-gen-ai-agent-on-aws/blob/main/agent_setup.py#L66-L290).
 
 ## Querying the AWS Well-Architected Framework
 
@@ -199,7 +199,7 @@ In this output, the agent explains the tool it plans to use, generates the code 
 
 ![Agent AWS creates a diagram](images/diagram_example.png)
 
-The code for the app is [here](https://github.com/aws-banjo/building-aws-agent/blob/main/agent_aws_st.py).
+The code for the app is [here](https://github.com/build-on-aws/building-gen-ai-agent-on-aws/blob/main/agent_aws_st.py).
 
 ## Conclusion
 
