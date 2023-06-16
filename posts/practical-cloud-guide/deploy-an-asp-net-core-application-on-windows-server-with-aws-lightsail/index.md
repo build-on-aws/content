@@ -1,5 +1,5 @@
 ---
-title: "Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail"
+title: "Deploy an ASP.NET Core Application on a Windows Server with AWS Lightsail"
 description: ""
 tags:
     - tutorials
@@ -59,6 +59,7 @@ In this tutorial you will create a Windows Server 2022 instance and deploy a ASP
 |-----|
 
 ---
+
 ## Module 1: Create an S3 bucket and upload files
 
 ### Overview
@@ -131,7 +132,7 @@ Choose **Create instance**.
 
 Choose **Microsoft Windows**, then choose **Windows Server 2022**.
 
-![Create a Windowserver instance](./images/PCG-7-lightsail.png)
+![Create a Windows server instance](./images/PCG-7-lightsail.png)
 
 Choose an instance plan, for this tutorial you can use the smallest plan, but larger plans are more responsive.
 
