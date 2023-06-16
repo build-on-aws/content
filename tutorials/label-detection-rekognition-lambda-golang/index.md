@@ -41,7 +41,6 @@ Here is how the application works:
 1. Images uploaded to [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) trigger a Lambda function.
 2. The Lambda function extracts list of labels (with their name, category and confidence level) and saves it to an [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) table.
 
-
 ## Prerequisites
 
 Before starting this tutorial, you will need the following:
@@ -138,7 +137,7 @@ aws s3 cp ./car.png s3://$SOURCE_BUCKET
 aws s3 ls s3://$SOURCE_BUCKET
 ```
 
-This Lambda function will extract labels from the image and store them in a `DynamoDB` table. 
+This Lambda function will extract labels from the image and store them in a `DynamoDB` table.
 
 Upload another file:
 
@@ -232,7 +231,7 @@ func labelDetection(sourceBucketName, fileName string) error {
 
 ## Conclusion
 
-In this tutorial, you used AWS CDK to deploy a Go Lambda function to detect labels in images using Amazon Rekognition and store the results in a DynamoDB table. Here are a few things you can try out to extend this solution: 
+In this tutorial, you used AWS CDK to deploy a Go Lambda function to detect labels in images using Amazon Rekognition and store the results in a DynamoDB table. Here are a few things you can try out to extend this solution:
 
 - Explore how to build a solution to [analyze videos](https://docs.aws.amazon.com/rekognition/latest/dg/video.html?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) stored in a `S3` bucket.
 - Even better, try to [processing streaming video](https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html?sc_channel=el&sc_campaign=datamlwave&sc_content=label-detection-rekognition-lambda-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) to extract labels in real-time.
