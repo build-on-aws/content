@@ -42,7 +42,7 @@ In this tutorial you will create a Windows Server 2022 instance and deploy a ASP
 
 ### Overview details table
 
-| Info                | Level                                  |
+| Attributes          |                                        |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level | 100 - Beginner |
 | ⏱ Time to complete  | |	
@@ -73,7 +73,7 @@ In this module, the software and deployment script is in a GitHub repository. Yo
 Step 1: Clone the `practical-cloud-guide` repository. 
 
 ```bash
-git clone <repo url>
+git clone https://github.com/build-on-aws/practical-cloud-guide-code
 ```
 
 Step 2: Open the AWS Console and choose Lightsail.
@@ -102,7 +102,8 @@ Choose **File**.
 
 ![Choose File](./images/lightsail-s3-bucket-5.png)
 
-Select `app.zip` and `deploy_iis.ps1` from the `path\to\files` and choose **Open**.
+Select `app.zip` and `deploy_iis.ps1` from `./practical-cloud-guide-code/run-to-build/windows-app-deploy
+/deploy/` and choose **Open**.
 
 ![Choose files to upload to S3](./images/lightsail-s3-bucket-6.png)
 
