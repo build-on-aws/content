@@ -110,9 +110,9 @@ To view the AZ IDs for the Availability Zones in your account:
 - Navigate to the AWS ([AWS Resource Access Manager](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-ram.html)) (RAM) console page in the AWS console.
 - You can view the AZ IDs for the current AWS Region under Your AZ ID. Alternately, you can also go to EC2 Dashboard in the console for the respective region and see the AZ IDs listed under the Zones section.
 
-![Figure 5: Determining the AZ IDs for an account in a given region](images/Determining-the-AZ-IDs.png)
-
-*Figure 5: Determining the AZ IDs for an account in a given region*
+|![Figure 5: Determining the AZ IDs for an account in a given region](images/Determining-the-AZ-IDs.png)|
+|:--:|
+|*Figure 5: Determining the AZ IDs for an account in a given region*|
 
 Some AWS-managed resources use only two AZs, such as the AWS Managed Microsoft AD. So, at minimum, ensure the two AZs you choose for your AD are preferred across all accounts.
 
