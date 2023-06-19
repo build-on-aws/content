@@ -1,6 +1,6 @@
 ---
-title: "S01E05 - Containers, Containers Everywhere"
-description: "BuildOn on Weekly stream from 2022-08-11"
+title: "Containers, Containers Everywhere | S01 E05 | Build On Weekly"
+description: "Hybrid workloads, and containers on Darko's desk"
 tags:
   - aws
   - build-on-live

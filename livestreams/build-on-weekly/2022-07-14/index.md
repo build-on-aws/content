@@ -1,6 +1,6 @@
 ---
-title: "S01E01 - Open With Open Source"
-description: "BuildOn on Weekly stream from 2022-07-14"
+title: "Open With Open Source | S01 E01 | Build On Weekly"
+description: "The first ever episode of Build On Weekly, and today we discuss all things Open Source at AWS with David Nalley"
 tags:
   - aws
   - build-on-live

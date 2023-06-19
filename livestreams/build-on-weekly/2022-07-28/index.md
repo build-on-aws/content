@@ -1,6 +1,6 @@
 ---
-title: "S01E03 - Command Line Magic"
-description: "BuildOn on Weekly stream from 2022-07-21"
+title: "Command Line Magic | S01 E03 | Build On Weekly"
+description: "Setting up and configuring the necessary AWS Command Line tools"
 tags:
   - aws
   - build-on-live

@@ -1,6 +1,6 @@
 ---
-title: "S02E13 - Hot Dog or Not Hot Dog"
-description: "BuildOn on Weekly stream from 2023-04-13"
+title: "Hot Dog or Not Hot Dog | S02 E13 | Build On Weekly"
+description: "The classic Machine Learning problem, is a thing a Hot Dog or is it not? We try to answer that question, sort of..."
 tags:
   - aws
   - build-on-live
