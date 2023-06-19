@@ -1,5 +1,5 @@
 ---
-title: Optimizing Performance and Cost with Multi-AZ Architecture: Guidelines for Multi-Account Environments
+title: Optimizing Performance and Cost with Multi-AZ Architecture - Guidelines for Multi-Account Environments
 description: This post  provides some guidelines and considerations  on using multiple AZs in a multi-account, multi VPC environment. 
 tags:
   - Availability Zone  
@@ -57,9 +57,9 @@ To illustrate the AZ usage challenges that come with multi-account/multi-VPC env
 
 In this example, we consider that three teams own three separate accounts. The network engineering team owns the **shared networking account**. The AWS Network Firewall inspects all Ingress, Egress and East/West (VPC-to-VPC) traffic in a [centralized deployment architecture](https://aws.amazon.com/blogs/networking-and-content-delivery/deployment-models-for-aws-network-firewall/). The system administration team owns the **shared services account**. In our scenario, we consider that [AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started.html) domain controllers (DC) are deployed in the **shared services account**. Finally, an application team owns an **application account** where an application is deployed. The application servers in the **application account** need to join the domain managed by the AWS Managed Microsoft AD. Usually, customers have many such application accounts for different workloads but for the simplicity of the use case we consider just one application account.
 
-![Figure 1: Multi-Account/Multi-VPC deployment architecture](images/Multi-Account-Multi-VPC-deployment-architecture.png)
-
-*Figure 1: Multi-Account/Multi-VPC deployment architecture*
+|![Figure 1: Multi-Account/Multi-VPC deployment architecture](images/Multi-Account-Multi-VPC-deployment-architecture.png) |
+|:--:|
+|*Figure 1: Multi-Account/Multi-VPC deployment architecture*|
  
 
 **Challenges**
@@ -70,9 +70,9 @@ The challenge is that different teams may not necessarily see what AZs other tea
 
 Statistically, if an organization decides to use k AZs in a given region that consists of n AZs and does not set rules on what AZs to be used, there are multiple possible [combinations](https://mathworld.wolfram.com/Combination.html) of k AZs that can be selected. For example, if we decide to deploy the architecture of Figure 1 in AWS US West 2 (Oregon) region that consists of 4 AZs (usw2-az1, usw2-az2, usw2-az3 and usw2-az4), and we decide to randomly select 2 AZs for each account, then we will have 6 possible combinations of the 2 AZs that can be chosen for each account, namely (usw2-az1, usw2-az2), (usw2-az1, usw2-az3), (usw2-az1, usw2-az4), (usw2-az2, usw2-az3), (usw2-az2, usw2-az4) and (usw2-az3, usw2-az4). The chances that the three accounts randomly choose the same two AZs is low and hence the importance of selecting the AZs to use in a systematic way.
 
-![Figure 2: East-West (VPC-to-VPC) traffic inspection scenario](images/East-West-VPC-to-VPC-traffic-inspection-scenario.png)
-
-*Figure 2: East-West (VPC-to-VPC) traffic inspection scenario*
+|![Figure 2: East-West (VPC-to-VPC) traffic inspection scenario](images/East-West-VPC-to-VPC-traffic-inspection-scenario.png)|
+|:--:|
+|*Figure 2: East-West (VPC-to-VPC) traffic inspection scenario*|
  
 Consider the East-West (VPC-to-VPC) traffic inspection scenario in Figure 2. Traffic is going from the application VPC (VPC-A) in the **application account** to the shared services VPC (VPC-B) in the **shared service account.** As the AWS Network Firewall must inspect all traffic in the inspection VPC (VPC-C) in the **shared networking account** , the outgoing flow will first be routed to the AWS Inspection VPC (VPC-C) before being sent back to the AWS Transit gateway, which will route it to the shared services VPC (VPC-B). Assuming that traffic within each VPC is routed within the same AZ as shown in the diagram, traffic generated at VPC-A AZ-B, will first be routed to VPC-C AZ-B for inspection, then routed to VPC-B AZ-B for shared services connectivity.
 
@@ -82,16 +82,17 @@ With a random selection of AZs across accounts and VPCs, and considering that di
 
 It is important to be aware that there is a difference between AWS's concepts: **Availability Zone name** and[**Availability Zone ID (AZ ID)**](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html). When you create or modify a resource from the AWS console, such as creating a new VPC, you are presented with a list of **Availability Zone names** to select from, as shown in Figure 3.
 
-![Figure 3: Availability Zone Name (create VPC)](images/Availability-Zone-Name.png)
-
-*Figure 3: Availability Zone Name (create VPC)*
+|![Figure 3: Availability Zone Name (create VPC)](images/Availability-Zone-Name.png)|
+|:--:|
+|*Figure 3: Availability Zone Name (create VPC)*|
 
 AWS maps the physical AZs randomly for the **Availability Zone names** for each AWS account in order to help distribute resources across the Availability Zones in an AWS Region instead of resources likely being concentrated in an AZ say "a" for each Region. For example, the AZ us-west-2a for your **shared networking account** in Figure 3 might not represent the same physical location as us-west-2a for the **application account**.
 
 To identify the actual location of your resources relative to your accounts _AZ ID__is used_. An AZ ID is a unique and consistent identifier for an AZ across all AWS accounts. For example, usw2-az1 is an AZ ID for an AZ in the us-west-2 Region and it represents the same physical location in every AWS account. Figure 4 shows an example of a possible mapping between AZ names and availability Zone IDs in the US West 2 region.
 
-![Figure 4: Availability Zone Name – Availability Zone ID mapping example](images/Availability-Zone-Name–Availability-Zone-ID-mapping-example.png)
-*Figure 4: Availability Zone Name – Availability Zone ID mapping example*
+|![Figure 4: Availability Zone Name – Availability Zone ID mapping example](images/Availability-Zone-Name–Availability-Zone-ID-mapping-example.png)|
+|:--:|
+|*Figure 4: Availability Zone Name – Availability Zone ID mapping example*|
  
 
 When selecting AZs to use for each account, you need to work with AZ IDs and not AZ names.
@@ -125,8 +126,9 @@ For inter-VPC communications, AWS Transit Gateway is designed to keep traffic in
 
 Figure 6 shows a traffic flow that is initiated by the application servers in the application VPC-A AZ-A and is destined to the domain controller in the shared service VPC-B AZ-B. In this scenario, we assume that the AZs A and B are the same for all the accounts. The source and destination are in two different AZs in order to illustrate the AZ related behavior.
 
-![Figure 6: Traffic flow from the application server to the domain controller.](images/Traffic-flow-from-the-application-server-to-the-domain-controller.png)
-*Figure 6: Traffic flow from the application server to the domain controller.*
+|![Figure 6: Traffic flow from the application server to the domain controller.](images/Traffic-flow-from-the-application-server-to-the-domain-controller.png)|
+|:--:|
+|*Figure 6: Traffic flow from the application server to the domain controller.*|
 
 
 Let's walk through the traffic flow from the Application Server to the Domain Controller:
@@ -142,16 +144,18 @@ Let's walk through the traffic flow from the Application Server to the Domain Co
 
 The return traffic from the DC to the application server is illustrated in Figure 7 below. One important step to pay attention to in Figure 7 is step 3. Traffic originated at AZ B is being forward to the TGW ENI in AZ A at the Inspection VPC. This is due to the enablement of the appliance mode on the inspection VPC attachment that keeps traffic in both direction symmetric.
 
-![Figure 7: Return traffic flow to the Application Server to the from the Domain Controller.](images/Return-traffic-flow-to-the-Application-Server.png)
- *Figure 7: Return traffic flow to the Application Server to the from the Domain Controller.*
+|![Figure 7: Return traffic flow to the Application Server to the from the Domain Controller.](images/Return-traffic-flow-to-the-Application-Server.png)|
+|:--:|
+| *Figure 7: Return traffic flow to the Application Server to the from the Domain Controller.*|
 
 
 This inspection scenario illustrates that you must always keep AZs in mind while designing and implementing your routing first by conserving the AZ affinity of the transit gateway and second by enabling appliance mode for stateful appliance. Sub-optimal routing implementation across the different VPCs and accounts can result in traffic bouncing between different AZs which can impact performance and cost. Adopting a convention to assign well-defined CIDR blocks for subnets in each AZ simplifies the routing tables in the **network account**. For example, in Figure 6, the /16 CIDR block for each VPC is divided into two /20 CIDR blocks, the first block is used in AZ A, and the second block is used for AZ B in all accounts simplifies the routing table by summarizing by AZ mainly when you need to implement [asymmetric routing](https://docs.aws.amazon.com/prescriptive-guidance/latest/inline-traffic-inspection-third-party-appliances/transit-gateway-asymmetric-routing.html).
 
 Centralized egress scenario is shown in Figure 8. In this case, we recommend utilizing separate NAT Gateways in each AZ and routing traffic locally within the same AZ instead of sharing a NAT Gateway across multiple Availability Zones (AZ) or routing the egress traffic via a NAT Gateway in a different AZ compared from the source. Route tables of the two TGW attachment subnets in the Central Egress VPC are shown in Figure 8. You can see that the outgoing traffic is routed to the local NAT gateway in each AZ. There is no need to enable the appliance mode on the Egress VPC D attachment.
 
-![Figure 8: Routing traffic through NAT Gateway.](images/Routing-traffic-through-NAT-Gateway.png)
-*Figure 8: Routing traffic through NAT Gateway.*
+|![Figure 8: Routing traffic through NAT Gateway.](images/Routing-traffic-through-NAT-Gateway.|png)
+|:--:|
+|*Figure 8: Routing traffic through NAT Gateway.*|
 
 
 Deployment models for AWS Network Firewall with VPC routing enhancements blog [post](https://aws.amazon.com/blogs/networking-and-content-delivery/deployment-models-for-aws-network-firewall-with-vpc-routing-enhancements/) provide multiple scenarios on how to implement AZ-aware routing for AWS Network Firewall deployments in a single account. The Centralized inspection architecture with AWS Gateway Load Balancer and AWS Transit Gateway blog [post](https://aws.amazon.com/blogs/networking-and-content-delivery/centralized-inspection-architecture-with-aws-gateway-load-balancer-and-aws-transit-gateway/) explains how to implement routing when using a third-party firewall appliance in a single account, which is also a common practice among AWS customers.
@@ -160,8 +164,9 @@ Deployment models for AWS Network Firewall with VPC routing enhancements blog [p
 
 Let's consider centralized Ingress inspection as shown in Figure 9. Traffic is sourced from the Internet through the [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) (IGW) to an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB). Without implementing AZ awareness, the ALB can use its Elastic Network Interface (ENI) in one AZ in the Ingress VPC ( **network account** ) for traffic targeting a final destination in another AZ in the application VPC ( **application account** ). For this, other than ensuring that the Ingress VPC ( **network account** ) and application VPC ( **application account** ) are using the same AZs, we also need to ensure that if the ALB selects an AZ at the Ingress VPC, the traffic is sent to the same AZ in the application VPC.
 
-![Figure 9:AZ aware load balancing scenario](images/AZ-aware-load-balancing-scenario.png)
-*Figure 9:AZ aware load balancing scenario*
+|![Figure 9:AZ aware load balancing scenario](images/AZ-aware-load-balancing-scenario.png)|
+|:--:|
+|*Figure 9:AZ aware load balancing scenario*|
  
 1. Traffic from the Internet flows in through the Internet Gateway to the [Elastic IP address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) of the ALB, which is dynamically created when you deploy an Internet-facing ALB.
 2. The ALB is associated with one public subnet in each AZ. The ALB uses its internal logic to determine which ALB ENI to send traffic to. It is here where the [cross-zone load balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/disable-cross-zone.html) setting plays an important role. If cross-zone load balancing is disabled, then the ALB will send the traffic to an ALB ENI in the same AZ as the target endpoint. If not, then ALB can send the traffic to an ALB ENI that is in an AZ different from the AZ target endpoint. This scenario is further explained in step 10 below.
