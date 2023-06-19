@@ -1,14 +1,20 @@
 ---
-title: "<[insert topic] Essentials>"
-description: "<Two or three sentences introducing the topic and key subtopics (for example, Devops might reference logging, monitoring, and observability)>"
+title: "my topic Essentials"
+description: "Two or three sentences introducing the topic and key subtopics (for example, Devops might reference logging, monitoring, and observability)"
 tags:
-    - <list the core topic and 2-3 key terms that you reference in the piece>
     - essentials
     - aws
-authorGithubAlias: <github alias>
-authorName: <Name Surname>
-date: <expected publish date in YYYY-MM-DD format>
+    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
+    - ai-ml
+authorGithubAlias: githubAliasWithoutQuotes
+authorName: Name Surname (no quotes around)
+date: YYYY-MM-DD (expected publication date)
 ---
+
+<!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
+<!-- NB: READ THE COMMENT ABOVE, AND DELETE THIS AND OTHER COMMENTS!!! -->
+
+**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
 
 ## Frontmatter Instructions (remove this _Frontmatter Instructions_ section before authoring)
 
@@ -21,7 +27,6 @@ All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes
 - `authorName` - how you want your name to display for the author credit of this post
 - `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
 
-<!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 
 Introduction (1-2 paragraphs) to the topic. Describe how this topic practically impacts builders in real-world terms, describing how it fits into a development workflow. Briefly reference some of the key components of this broad topic -- components you'll break down in more detail in the post itself. Remember to keep the post to 8-12 subtopics (sections).
 

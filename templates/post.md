@@ -2,12 +2,17 @@
 title: "Replace with your title"
 description: "Replace with your description"
 tags:
-  - tag-1
-  - tag-2
-authorGithubAlias: 
-authorName: 
-date: 2016-01-31
+    - tag-1
+    - tag-2
+    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
+    - ai-ml
+authorGithubAlias: githubAliasWithoutQuotes
+authorName: Name Surname (no quotes around)
+date: YYYY-MM-DD (expected publication date)
 ---
+
+<!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
+<!-- NB: READ THE COMMENT ABOVE, AND DELETE THIS AND OTHER COMMENTS!!! -->
 
 **EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
 ## Frontmatter Instructions

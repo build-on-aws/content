@@ -1,14 +1,20 @@
 ---
-title: "<Title>"
-description: "<Description>"
+title: "Title"
+description: "Two or three sentences introducing the topic and key subtopics (for example, Devops might reference logging, monitoring, and observability)"
 tags:
-    - <add list of what content is about here>
     - foundational
     - aws
-authorGithubAlias: <github alias>
-authorName: <Name Surname>
-date: <expected publish date in YYYY-MM-DD format>
+    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
+    - ai-ml
+authorGithubAlias: githubAliasWithoutQuotes
+authorName: Name Surname (no quotes around)
+date: YYYY-MM-DD (expected publication date)
 ---
+
+<!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
+<!-- NB: READ THE COMMENT ABOVE, AND DELETE THIS AND OTHER COMMENTS!!! -->
+
+**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
 
 ## Frontmatter Instructions (remove this _Frontmatter Instructions_ section before authoring)
 
@@ -20,8 +26,6 @@ All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes
 - `authorGithubAlias` - your GitHub username
 - `authorName` - how you want your name to display for the author credit of this post
 - `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
-
-<!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 
 An introduction to the topic, limited to 100 words.
 
