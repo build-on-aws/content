@@ -1,6 +1,6 @@
 ---
-title: <Highlight the core problem being solved, follow PR/marketing guidelines>
-description: <Two or three sentences describing the problem, the solution, and tools or services used along the way>
+title: "<Highlight the core problem being solved, follow PR/marketing guidelines>"
+description: "<Two or three sentences describing the problem, the solution, and tools or services used along the way>"
 tags:
     - tutorials
     - <tutorials tag is mandatory for tutorials. list any other key terms readers will be searching for using kebab-case, e.g. ci-cd, NOT "ci cd", or "CI-CD">
@@ -10,6 +10,18 @@ authorGithubAlias: <github alias>
 authorName: <FirstName LastName>
 date: <YYYY-MM-DD - expected publish date>
 ---
+## Frontmatter Instructions (remove this _Frontmatter Instructions_ section before authoring)
+
+All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/).
+
+- `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser" - Please put this inside double-quotes
+- `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters - Please put this inside double-quotes
+- `tags` - help readers discover posts on the same topics. Use `kebab-case`.
+- `authorGithubAlias` - your GitHub username
+- `authorName` - how you want your name to display for the author credit of this post
+- `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
+
+
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 
