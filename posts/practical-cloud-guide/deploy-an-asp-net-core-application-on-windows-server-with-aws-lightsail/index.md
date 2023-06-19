@@ -147,7 +147,7 @@ In the previous module, you created a Windows 2022 server with Lightsail. The ne
 
 ### What you will accomplish
 
-This module shows how to install and configure IIS in Windows Server 2022., and deploy a ASP.NET Core application from an S3 bucket with a Powershell Script
+This module shows how to install and configure IIS in Windows Server 2022 and deploy a ASP.NET Core application from an S3 bucket with a Powershell Script
 
 ### Implementation instructions
 
@@ -207,7 +207,7 @@ net stop was /y
 net start w3svc
 ```
 
-The second part of the script creates an directory for the application. The script downloads  app.zip from the S3 bucket you created earlier and unzips it on the directory.
+The second part of the script creates an directory for the application. The script downloads app.zip from the S3 bucket created earlier and unzips it on the directory.
 
 ```powershell
 # download and unzip the application
@@ -287,4 +287,4 @@ The `deploy_iis.ps1` Powershell script shows how you can use familiar scripting 
 
 ## What’s next?
 
-In the next section of the Practical Cloud Guide, you will deploy a Java application on a Linux server with AWS Lightsail.
+In the next section of the Practical Cloud Guide, you will deploy a [Java application on a Linux server](https://www.buildon.aws/posts/deploy-a-java-app-on-linux/) with AWS Lightsail.
