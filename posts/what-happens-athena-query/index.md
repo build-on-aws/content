@@ -350,9 +350,11 @@ Also imagine if you were simply trying to pick the `MAX` value of an integer col
 
 For this I'll use a very simple example.
 
-Imagine you want to `COUNT(*)` from a 50GB CSV file. Regardless of which query engine you use – Athena, Spark, Ray, an actual abacus – you need to loop through every. Single. Row of that CSV file. Some query engines can distribute that work, but you're still reading 50GB of data to get one number.
+Imagine you want to `COUNT(*)` from a 50GB CSV file. Regardless of which query engine you use – Athena, Spark, Ray, an actual abacus – you need to loop through every. Single. Row of that CSV file. Some query engines can distribute that work, but you're still reading 50GB of data to get one number. And if that file is gzipped, like many CSVs are, only 1 worker thread can decompress the file!
 
 For Parquet, you read a few bytes of the header and you're done. Seriously. Parquet is a binary file format and right at the top of the file is a little metadata that says "this file has X number of rows of data in it". This is why file formats like Parquet and ORC are so great for analytics - the hard work of counting things is already done by whomever generated the file! Not only that, for some data types Parquet even stores what the minimum or maximum values are for the whole column!
+
+For a quick comparision, I ran a `COUNT(*)` over 12GB of CSV files with Athena. It took 5.163 seconds and scanned (aka, listed, fetched, opened, parsed) all 12GB. I converted the dataset to Parquet and ran the same `COUNT(*)`. Run time? 840ms. Data scanned? 0. (_This is because we were able to use the file metadata to get the answer so Athena had to scan no data!!_)
 
 ## Wrap It Up
 
