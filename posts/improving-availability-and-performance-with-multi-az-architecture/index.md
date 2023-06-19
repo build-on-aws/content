@@ -153,7 +153,7 @@ This inspection scenario illustrates that you must always keep AZs in mind while
 
 Centralized egress scenario is shown in Figure 8. In this case, we recommend utilizing separate NAT Gateways in each AZ and routing traffic locally within the same AZ instead of sharing a NAT Gateway across multiple Availability Zones (AZ) or routing the egress traffic via a NAT Gateway in a different AZ compared from the source. Route tables of the two TGW attachment subnets in the Central Egress VPC are shown in Figure 8. You can see that the outgoing traffic is routed to the local NAT gateway in each AZ. There is no need to enable the appliance mode on the Egress VPC D attachment.
 
-|![Figure 8: Routing traffic through NAT Gateway.](images/Routing-traffic-through-NAT-Gateway.|png)
+|![Figure 8: Routing traffic through NAT Gateway.](images/Routing-traffic-through-NAT-Gateway.png)|
 |:--:|
 |*Figure 8: Routing traffic through NAT Gateway.*|
 
@@ -181,13 +181,13 @@ Let's consider centralized Ingress inspection as shown in Figure 9. Traffic is s
 
 While designing your cross-account load balancing, consider to [disable the cross-zone load balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/disable-cross-zone.html) if that is a possible option for you. Disabling cross-zone load balancing, comes with some limitations, such as the lack of support for stickiness and the need to properly plan the capacity in each AZ, as explained in the [documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html). [Choosing a stickiness strategy for your load balancer](https://docs.aws.amazon.com/prescriptive-guidance/latest/load-balancer-stickiness/welcome.html) describes different types of load balancer stickiness and applicable use cases, to help you choose your stickiness strategy.
 
-1. Use local resources to the AZ when possible.
+4. **Use local resources to the AZ when possible.**
 
 When the client itself manages target selection, the application instance can decide what server to connect to and hence in which AZ. For example, if we consider the scenario of Figure 2, it is possible to have the application servers configured and point to specific domain controllers in the same AZ, thereby keeping the traffic local to that AZ. This will ensure that the traffic will not cross the AZ boundary unless there is a failure or a need for to use the secondary domain controller.
 
 The same principle applies to other applications that have the flexibility to choose what target to connect to without an intermediate component, such as the load balancer.
 
-1. Regularly review and optimize AZ utilization based on performance and cost metrics.
+5. **Regularly review and optimize AZ utilization based on performance and cost metrics.**
 
 Finally, it's important to regularly review and optimize your AZ utilization based on performance and cost metrics. This includes analyzing network traffic patterns using [VPC flow](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html) for example, monitoring data transfer [charges](https://docs.aws.amazon.com/cur/latest/userguide/cur-data-transfers-charges.html), and adjusting your resource placement and routing strategies to optimize performance and minimize costs.
 
