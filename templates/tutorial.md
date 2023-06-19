@@ -5,7 +5,8 @@ tags:
     - tutorials
     - aws
     - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
-    - ai-ml
+    - tag-1
+    - tag-2
 authorGithubAlias: githubAliasWithoutQuotes
 authorName: Name Surname (no quotes around)
 date: YYYY-MM-DD (expected publication date)
