@@ -9,7 +9,7 @@ tags:
     - "IT Pros"
 authorGithubAlias: "spara"
 authorName: "Sophia Parafina"
-date: "2023-31-05"
+date: 2023-31-05
 ---
 
 The [previous tutorial]() demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Node.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
@@ -32,10 +32,10 @@ Before starting this tutorial, you will need the following:
 
 ## Sections
 <!-- Update with the appropriate values -->
-| Info                | Level                                  |
+| Info                |                                        |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 100 - Beginner                          |
-| ⏱ Time to complete  | 15 minutes                             |
+| ⏱ Time to complete  | 45 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
 | 🧩 Prerequisites    | - An AWS account: If you don't already have an account, follow the [Setting Up Your Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial. For a quick overview for creating account follow the [Create Your AWS Account](http://%20https://aws.amazon.com/getting-started/guides/setup-environment/module-one/) instructions.<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials<br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.|
 | 💻 Code Sample         | [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
