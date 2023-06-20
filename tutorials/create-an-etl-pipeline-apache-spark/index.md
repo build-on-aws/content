@@ -20,8 +20,6 @@ Batch ETL is a common use case across many organizations. This tutorial will pro
 
 We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) to interact with the Spark cluster. PySpark allows you to write Spark applications using Python APIs.
 
-## Table of Content
-
 | Attributes          |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 200 - Intermediate                               |

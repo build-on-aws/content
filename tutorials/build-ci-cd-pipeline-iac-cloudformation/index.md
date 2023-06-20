@@ -22,8 +22,6 @@ But we're not done yet. Just writing CloudFormation templates and updating stack
 
 This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCatalyst for your Infrastructure as Code written with CloudFormation. The pipeline will utilize pull requests to submit, test, and review any changes requested to the infrastructure.
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 200 - Intermediate                                              |

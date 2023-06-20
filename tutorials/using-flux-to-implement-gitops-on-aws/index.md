@@ -24,8 +24,6 @@ In this blog, we will implement GitOps in an Amazon EKS environment using AWS Co
 
 But before we get into the best practices and the tutorial itself, let's synchronize on what GitOps is and why GitOps best practices matter in the first place.
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 300 - Advanced                                              |

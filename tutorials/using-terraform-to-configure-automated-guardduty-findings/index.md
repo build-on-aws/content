@@ -15,8 +15,6 @@ date: 2023-04-20
  
 Threat detection and incident response (TDIR) can be a time-consuming and manual process for many organizations. This leads to inconsistent response processes, inconsistent security outcomes, and increased risk. In this tutorial, you will learn how to automate threat detection findings and automate your incident response process, reducing the time to respond to threats. As many organizations prefer to use a standard Infrastructure-as-Code (IaC) tool for consistent configurations among vendors, this tutorial will show how to configure this solution using Terraform.
 
-## Table of Content
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 200 - Intermediate                                             |
