@@ -8,7 +8,7 @@ tags:
   - gen-ai
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
-date: 2023-06-13
+date: 2023-06-20
 ---
 
 Generative AI has ushered in a new era of automation and efficiency, revolutionizing how we tackle a wide array of tasks. This technology empowers us, the builders, to architect intelligent tools capable of streamlining workflows, automating routine tasks, and delivering sophisticated results in real-time.
