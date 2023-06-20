@@ -54,11 +54,9 @@ Since there is no shared ownership of code or infrastructure between teams, each
 
 This architecture also makes it easier to implement a multi-Region strategy. Truckers, whether in the east or west, benefit from lower latency, as their requests are routed to an AWS Region closer to them. And this multi-Region architecture also enables a [disaster recovery strategy](https://aws.amazon.com/blogs/architecture/disaster-recovery-dr-architecture-on-aws-part-i-strategies-for-recovery-in-the-cloud?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life), where all traffic can be routed to just one of the Regions if needed. For more details on [how Amazon Relay enabled multi-Region, see this video](https://www.youtube.com/watch?v=QeW9wCB36ck&t=1339s).
 
-### Hear from the developers
+Hear firsthand from Alex Polfliet, a Senior SDE on the Relay App team:
 
-Hear firsthand from Alex Polfliet, a Senior SDE on the Relay App team.
-
-https://www.youtube.com/shorts/DeGBLSHLQKA
+https://www.youtube.com/watch?v=DeGBLSHLQKA
 
 ## Amazon Fulfillment Technologies and Robotics - The systems that run Amazon warehouses
 
