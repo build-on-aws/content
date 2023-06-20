@@ -10,16 +10,16 @@ authorName: Elizabeth Fuentes
 date: 2023-05-22
 ---
 
-Developers those who provide solutions to computer problems, base procedures, program and maintain solutions, they are programmers, but it does not make them experts in everything that is related to code, as is the case of creating ML-dependent function, where it is necessary to be familiar with models and training of algorithms, which is not common knowledge.
+Developers -- those who provide solutions to computer problems, establish base procedures, program, and maintain solutions --  are indeed programmers. However, this doesn't automatically make them experts in everything related to code. Take, for example, the creation of an ML-dependent function: it necessitates familiarity with models and algorithm training, knowledge that isn't common among all programmers.
 
-There are some ready-to-use APIs that call existing models previously trained to fulfill ML-functions without need for ML knowledge, and additionally keep information shared with it secure. Next, I'm going to tell you about some specific ML API services and four use cases to get you familiar with them and let your imagination run wild.
+Fortunately, there are ready-to-use APIs that leverage existing, previously trained models to execute ML functions, and they can be used without the need for ML knowledge. Additionally, they ensure the security of the information shared with them. Up next, i'll introduce you to some specific ML API services and four use cases to get you familiar with them and let your imagination run wild.
 
 
-## How does ready-to-use ML-functions APIs work? Just follow 3 simple steps:
+## How do ready-to-use ML-function APIs work? Just follow these 3 simple steps:
 
 1. Define the input, the location of the object in an Amazon S3 bucket or text.
-2. Invoke the API using input.
-3. Output in json format.
+2. Invoke the API using this input.
+3. Output will be in JSON format.
 
 
 ![Diagram AIML like API in your APP"](images/diagram-api-call.png)
@@ -27,24 +27,24 @@ There are some ready-to-use APIs that call existing models previously trained to
 
 ## Let's take a look at the APIs
 
-In AWS there are several [ML and AI services](https://aws.amazon.com/machine-learning/) that allow you to accelerate their adoption in applications, from those that provide you with infrastructure to train your own models to those are ready to use as pre-trained API calls, let's see some of the seconds:
+AWS offers a variety of [ML and AI services](https://aws.amazon.com/machine-learning/) designed to expedite their implementation in your applications. These services range from those that equip you with the necessary infrastructure to train your own models, to those that come as ready-to-use, pre-trained API calls. Let's now focus specifically on some examples of the latter:
 
 | API Type | How you can do | Service Name | 
 -- | -- | --
  🔎 Analysis of images (.png, .jpg) /videos (.mp4) | <ul> <li> Label detection (predefined or custom) </li>  <li> Image propereties and moderation. </li>  <li> Facial detection, comparasion and analysis. </li>  <li> Face search </li>  <li> People paths. </li>  <li> Personal Protective Equipment </li>  <li> Celebrities recognition.  </li>  <li>Text in image </li>  <li> Inappropriate or offensive content </li></ul> | [Amazon Rekognition](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html)	| 
 🔎 Detection and analysis of text in documents (PNG, JPG, PDF or TIFF)	| 	<ul> <li> Processes individual or bundled documents. </li>  <li> Detect typed and handwritten text </li>  <li> Recognize documents, like financial reports, medical records, ID document (drivers licenses and passports)  and tax forms. </li>  <li> Extract text, forms, and tables from documents with structured data. </li></ul> | [Amazon Textract](https://docs.aws.amazon.com/textract/latest/dg/what-is.html) | 
-🔎 Natural Language Processing (NLP) and text analysis	| 	Processes documents and extracts information such as: <ul> <li> Entities </li> <li> Events</li>  <li> Key phrases</li>  <li> Dominant language </li> <li> Sntiment</li>  <li> Targeted sentiment </li>  <li>Syntax analysis.</li> <li> Custom classification and entity recognition.</li>  <li> Managing custom models. </li></ul> | [Amazon comprehend](https://docs.aws.amazon.com/es_es/comprehend/latest/dg/what-is.html) | 
+🔎 Natural Language Processing (NLP) and text analysis	| 	Processes documents and extracts information such as: <ul> <li> Entities </li> <li> Events</li>  <li> Key phrases</li>  <li> Dominant language </li> <li> Sentiment</li>  <li> Targeted sentiment </li>  <li>Syntax analysis.</li> <li> Custom classification and entity recognition.</li>  <li> Managing custom models. </li></ul> | [Amazon comprehend](https://docs.aws.amazon.com/es_es/comprehend/latest/dg/what-is.html) | 
 🔎 Text to speech | <ul> <li> Supports [multiple languages and includes a variety of lifelike voices](https://docs.aws.amazon.com/polly/latest/dg/voicelist.html).</li> <li>Includes a number of [Neural Text-to-Speech (NTTS) voices](https://docs.aws.amazon.com/polly/latest/dg/NTTS-main.html), delivering ground-breaking improvements in speech quality through a new machine learning approach, thereby offering to customers the most natural and human-like text-to-speech voices posible.</li> <li>[Neural TTS technology also supports a Newscaster speaking style](https://docs.aws.amazon.com/polly/latest/dg/ntts-speakingstyles.html) that is tailored to news narration use cases. </li></ul> | [Amazon Polly](https://docs.aws.amazon.com/polly/latest/dg/what-is.html)  | 
 🔎 Speech to Text | <ul> <li> Convert audio ([Supported formats](https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)) to text. </li> <li> Transcribe media in real time (streaming) or you can transcribe media files located in an Amazon S3 bucket (batch).</li> <li> Improve accuracy for your specific use case with [language customization](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html), filter content to ensure customer privacy or audience-appropriate language, analyze content in multi-channel audio, partition the speech of individual speakers </li></ul> |  [Amazon Transcribe](https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html) | 
 🔎  Translate | Translate unstructured text (UTF-8) documents or to build applications that work in [multiple languages](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html) | [Amazon Translate](https://docs.aws.amazon.com/translate/latest/dg/what-is.html)| 
 
 ## 🚀  Use Cases 
 
-Best way to learn programming is by solving problems through code development,  same thing happens when you want to learn how to use a service, you need to use it to learn. These four use cases are real (and made-up) problems that I solved while learning.
+The most effective way to learn programming is by solving problems through code development. The same principle applies when learning how to use a service: you need to actively use it to understand it. The following four use cases are examples of both real and hypothetical problems that I tackled during my learning process.
 
-- [Create subtitles and translate them into the language you want ⏯️ 🍿.](https://github.com/build-on-aws/aiml-like-api-in-your-app/blob/main/create-subtitles-and-translate-them-into-the-language-you-want/README.md)
+- Use case 1: [Create subtitles and translate them into the language you want ⏯️ 🍿.](https://github.com/build-on-aws/aiml-like-api-in-your-app/blob/main/create-subtitles-and-translate-them-into-the-language-you-want/README.md)
 
-If you are passionate about providing video with tools for others to learn, you want to reach as many people as possible, and language is a barrier that you can remove with this app.
+If you're passionate about utilizing video as a tool for education, it would be ideal to reach as many people as possible. One common barrier to this is language. This application enables you to create subtitles and translate them into any desired language, to remove this barrier.
 
 ![Create subtitles and translate them into the language you want"](images/create-subtitles-and-translate-s.png)
 
@@ -56,9 +56,9 @@ If you are passionate about providing video with tools for others to learn, you 
 
 Code to create [this solution](https://github.com/build-on-aws/aiml-like-api-in-your-app/blob/main/create-subtitles-and-translate-them-into-the-language-you-want/README.md). 
 
-- [Detecting entities and sentiment from a document 🔎 📄.](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/detecting-entities-and-sentiment-from-a-document%20)
+- Use case 2: [Detecting entities and sentiment from a document 🔎 📄.](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/detecting-entities-and-sentiment-from-a-document%20)
 
-There are people who have mountains of papers in their homes, letters from past lovers, medical exams, memories of their children’s school, banks, etc. What do you think of saving it neatly in the cloud? Try and learn about Textract and Comprehend with this app.
+Many people possess piles of documents at home, ranging from letters from past lovers to medical records, children's school memorabilia, and bank statements, etc. Wouldn't it be convenient to neatly store these in the cloud? Explore and learn about the functionalities of Textract and Comprehend with this app.
 
 ![Detecting entities and sentiment from a document"](images/detecting-entities-and-sentiment.png)
 
@@ -70,7 +70,7 @@ There are people who have mountains of papers in their homes, letters from past 
 
 Code to create [this solution]((https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/detecting-entities-and-sentiment-from-a-document%20))
 
-- [Make Polly Talk 🦜](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/make-polly-talk)
+- Use case 3: [Make Polly Talk 🦜](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/make-polly-talk)
 
 I was curious how an Italian speaking Chinese sounded, and since Polly has native voices for each language I created this notebook to play 😂.
 
@@ -84,7 +84,7 @@ I was curious how an Italian speaking Chinese sounded, and since Polly has nativ
 Code to create [this solution ](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/make-polly-talk)
 
 
-- [Video content moderation ⏯️ 🔫 🚬](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/video-content-moderation)
+- Use case 4: [Video content moderation ⏯️ 🔫 🚬](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/video-content-moderation)
 
 I´m fan of action movies and wanted to try Rekognition with the trailer of Die Hard 1, so I created this application and wow! each dataframe is pure violence 🫣... I invite you to try it with a trailer of your favorite movie.
 
@@ -100,11 +100,11 @@ Code to create [this solution ](https://github.com/build-on-aws/aiml-like-api-in
 
 ## Conclusion
 
-Now you learned that you can use AIML as an API call to analyze images and videos, detection and analysis of text in scanned documents, analyze text using NLP to extract sentiment from dominant language and much more. In addition to being able to convert text to speech, and vice versa, and a language translator within reach of an API call.
+You've now learned that AIML can be used via an API call to perform a variety of tasks such as analyzing images and videos, detecting and analyzing text in scanned documents, and leveraging Natural Language Processing (NLP) to extract sentiment from dominant languages, among many other things. In addition, you have the capability to convert text to speech and vice versa, and to utilize a language translator, all within the reach of a single API call.
 
-This is just a small part of what you can create by powering AIML applications within the reach of an API call.
+This just scratches the surface of what can be achieved by leveraging AIML applications via API calls.
 
-Surely you have a real or invented problem that you would like to solve using one of these services and if not I leave these links for you to continue experimenting and learning:
+No doubt, there's a real or hypothetical problem you'd like to address using one of these services. Even if you don't have one in mind, I've provided these links for you to continue experimenting and learning:
 
 - Amazon Translate [Code Samples](https://github.com/aws-samples/document-translation).. [more code samples](https://docs.aws.amazon.com/translate/latest/dg/examples.html)
 - Amazon Transcribe and Amazon Comprehend [Code Samples](https://github.com/aws-samples/amazon-transcribe-comprehend-podcast)
