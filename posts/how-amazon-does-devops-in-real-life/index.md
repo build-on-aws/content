@@ -56,7 +56,7 @@ This architecture also makes it easier to implement a multi-Region strategy. Tru
 
 Hear firsthand from Alex Polfliet, a Senior SDE on the Relay App team:
 
-https://www.youtube.com/watch?v=DeGBLSHLQKA
+https://www.youtube.com/shorts/DeGBLSHLQKA
 
 ## Amazon Fulfillment Technologies and Robotics - The systems that run Amazon warehouses
 
