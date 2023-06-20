@@ -5,7 +5,7 @@ authorName: AWS Team
 authorAvatarImageUrl: /spaces/kubernetes/images/aws-logo.png
 date: 2023-05-18
 showInHomeFeed: false
-externalUrl: https://www.youtube.com/containersfromthecouch
+externalUrl: https://aws.amazon.com/eks/container_day/
 spaces:
   - kubernetes
 ---
