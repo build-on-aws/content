@@ -9,7 +9,7 @@ tags:
   - tutorials
 authorGithubAlias: Madabaru
 authorName: Felix John
-date: 2023-06-15
+date: 2023-06-20
 ---
 
 In today’s fast-paced digital world, real-time streaming analytics has become increasingly important as organisations need to understand what customers, application and products are doing right now and react promptly. For example, businesses want to analyse data in real-time to continuously monitor an application to ensure high service uptime and personalize promotional offers and product recommendations to customers. 
