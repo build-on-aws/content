@@ -34,7 +34,7 @@ Within the team is a sub-group that creates more complex examples than single sn
 
 We’re a small team consisting of several software development engineers. We start with a high level idea for how we might solve a customer problem with an application. This might be directed at consumers (Photo Asset Management), businesses (Work Item Tracker), or others within the range of AWS customers. It takes about a month to design, implement, and write the technical specification for the app. When we’re done, we hand it off to the wider Code Examples team to build out in each of the supported AWS languages.
 
-We’re going to walk you through our process and some of the decisions we made along the way. It’s messy, we learned a lot, and we needed to do a lot of research. Our initial plan survived mostly intact by the end, but we had to make plenty of little decisions that we’ll show you.
+This not a tutorial. Think of it as a case study. We’re going to walk you through our process and some of the decisions we made along the way. It’s messy, we learned a lot, and we needed to do a lot of research. Our initial plan survived mostly intact by the end, but we had to make plenty of little decisions that we’ll show you. There are links at the end pointing to instructions on how to deploy the final result.
 
 ## 2. Using ML
 
@@ -65,7 +65,7 @@ But we wanted to push further.
 
 Because Dan was going to use this app irregularly, and only download a subset of images at any given time, how low could we get his storage costs? S3 offers a number of storage tiers. Generally speaking, accepting a higher latency for object retrieval means cheaper long-term storage. This led us to S3’s longer term storage tiers. They come with a number of trade-offs for engineers.
 
-Objects can be individually moved between storage tiers. This is done with policies (to move things to longer term storage) and batch jobs (to move things to faster access storage). Our initial plan was to use a lifecycle policy to move images to the longer term storage tiers after image labeling took place. Then, when Dan asked to retrieve data, we would start a batch job to restore those images to a temporary location (probably another S3 bucket) that would be emptied after we were done handling the download (see 4. Retrieving images).
+Objects can be individually moved between storage tiers. This is done with policies (to move things to longer term storage) and batch jobs (to move things to faster access storage). Our initial plan was to use a lifecycle policy to move images to the longer term storage tiers after image labeling took place. Then, when Dan asked to retrieve data, we would start a batch job to restore those images to a temporary location (probably another S3 bucket) that would be emptied after we were done handling the download (see [4. Retrieving images](#4-retrieving-images)).
 
 We started working on this implementation, but we discovered that S3’s batch restore jobs are marked as completed when the restore starts, and not when it actually completes. We would have to track the image restoration ourselves. This would necessitate a second job tracking system in our program. A good feature for a larger app, but not one we wanted at this point.
 
@@ -136,7 +136,7 @@ We hope you’ve enjoyed this journey with us. As a team of experienced AWS engi
 
 Each of these were important for a reason, based on Dan’s use case. More than anything, this exercise reinforced for us the importance of domain-driven design in building an application. Programs are built for people, and knowing how people will use them anchored our decisions and research in this cross-service example.
 
-The code for this example is available in a few places. The main entry point is our [CDK](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/resources/cdk/photo_asset_manager). This has all the AWS managed pieces together in one place for review. There are implementations for the Lambda functions in each of the language directories (see appendix A). And there is one implementation of the [React UI](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/resources/clients/react/elros-pam).
+The code for this example is available in a few places. The main entry point is our [CDK](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/applications/photo-asset-manager/cdk/README.md). This has all the AWS managed pieces together in one place for review. There are implementations for the Lambda functions in each of the language directories (see appendix A). And there is one implementation of the [React UI](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/resources/clients/react/elros-pam).
 
 ### End result
 
@@ -156,4 +156,4 @@ Most of the application resources for this example are shared. The Lambda functi
 - [Java (V2)](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/pam_source_files)
 - [Rust](https://github.com/awsdocs/aws-doc-sdk-examples/pull/4682)
 - [Front End](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/resources/clients/react/elros-pam)
-- [CDK](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/resources/cdk/photo_asset_manager)
+- [CDK](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/applications/photo-asset-manager/cdk/README.md)
