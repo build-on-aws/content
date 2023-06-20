@@ -7,6 +7,8 @@ tags:
   - serverless
   - resilience
   - deployment
+spaces:
+  - devops
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-02-16
@@ -49,6 +51,8 @@ Figure 5 shows how they did it.  Using [Amazon API Gateways](https://docs.aws.am
 ![Amazon Relay app works using a gateway and independent backend services ](images/figure05.png "Figure 5. Amazon Relay app works using a gateway and independent backend services called \"modules\".")
 
 Since there is no shared ownership of code or infrastructure between teams, each team can deploy whenever they want, getting new features or fixes into production with no need to coordinate between teams. Using multiple API Gateways here enables the team to isolate each module from one another and perform a staggered deployment to less critical modules first and rollback if any issues arise without impacting the more critical ones.
+
+This architecture also makes it easier to implement a multi-Region strategy. Truckers, whether in the east or west, benefit from lower latency, as their requests are routed to an AWS Region closer to them. And this multi-Region architecture also enables a [disaster recovery strategy](https://aws.amazon.com/blogs/architecture/disaster-recovery-dr-architecture-on-aws-part-i-strategies-for-recovery-in-the-cloud?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life), where all traffic can be routed to just one of the Regions if needed. For more details on [how Amazon Relay enabled multi-Region, see this video](https://www.youtube.com/watch?v=QeW9wCB36ck&t=1339s).
 
 ## Amazon Fulfillment Technologies and Robotics - The systems that run Amazon warehouses
 
