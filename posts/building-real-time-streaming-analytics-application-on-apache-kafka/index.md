@@ -17,8 +17,6 @@ However, building such an end-to-end real-time streaming application with an Apa
 
 This tutorial shows you how to setup and implement a real-time data pipeline using Amazon Managed Streaming for Apache Kafka (MSK). More specifically, the guide details how streaming data can be ingested to the Kafka cluster, processed in real-time and consumed by a downstream application.
 
-## Table of Content
-
 | Attributes          |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 200                             |

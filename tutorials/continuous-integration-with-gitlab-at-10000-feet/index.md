@@ -24,8 +24,6 @@ So what is continuous integration in simple terms? Think about it like this: Dev
 
 The figure above illustrates a simple pipeline; however, stages can be added to meet business requirements. For example, a pipeline may have a test stage for unit tests that test for specific functions and it may have an integration test stage where the application is tested as a whole. Stages can also define where the responsibility of one team ends and [another team's starts](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/a-pathway-to-continuous-integrationcontinuous-delivery.html?sc_channel=el&sc_campaign=devopswave&sc_content=continuous-integration-with-gitlab-at-10000-feet&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-## Table of Content
-
 |ToC|
 |---|
 

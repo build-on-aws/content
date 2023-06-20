@@ -45,7 +45,6 @@ Before starting this tutorial, you will need the following:
  - An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
  - <!-- any other pre-requisites you will need -->
 
-## Sections
 <!-- Update with the appropriate values -->
 <!-- Please ensure tutorials are flagged as level 200 (intermediate) or higher -->
 | Attributes                |                                   |
