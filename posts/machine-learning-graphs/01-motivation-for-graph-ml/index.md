@@ -1,5 +1,5 @@
 ---
-title: Needs title
+title: Motivation for using graphs
 description: Needs description
 tags:
   - graphml
@@ -12,7 +12,9 @@ authorName: Cyrus Vahid
 additionalAuthors:
   - authorGithubAlias: kirannsa
     authorName: Sai Kiran Jukanti
-date: 2023-05-08
+  - authorGithubAlias: shamika
+    authorName: Shamika Ariyawansa  
+date: 2023-06-20
 ---
 Graph neural networks (GNN) have gained prominence in the past few years. It is predominantly due to their ability to capture sparse and non-Euclidean data, while breakthroughs in parallel computation of large scale graphs has made it possible to take advantage of this versatile data-structure. This blog series is an introductory series for those who are new to graphs and graph neural networks, and moves onto knowledge embedding through graph completion. The final part in this series provides an example of application of knowledge embedding in drug repurposing solutions, published by AWS science team in order to create a proposal for potential effective drugs on COVID. Future publications will branch off into applications of GNNs in different fields, starting with personalization. The current series entries are:
 
