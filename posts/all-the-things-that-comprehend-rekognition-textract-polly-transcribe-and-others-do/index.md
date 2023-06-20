@@ -10,7 +10,7 @@ authorName: Elizabeth Fuentes
 date: 2023-05-22
 ---
 
-Developers those who provide solutions to computer problems, base procedures, program and maintain solutions, they are programmers, but it does not make them experts in everything that is related to code, as is the case of creating ML-dependent function, where it is necessary to be familiar with models and training of algorithms, which is not common knowledge.
+Developers -- those who provide solutions to computer problems, establish base procedures, program, and maintain solutions --  are indeed programmers. However, this doesn't automatically make them experts in everything related to code. Take, for example, the creation of an ML-dependent function: it necessitates familiarity with models and algorithm training, knowledge that isn't common among all programmers.
 
 Fortunately, there are ready-to-use APIs that leverage existing, previously trained models to execute ML functions, and they can be used without the need for ML knowledge. Additionally, they ensure the security of the information shared with them. Up next, i'll introduce you to some specific ML API services and four use cases to get you familiar with them and let your imagination run wild.
 
