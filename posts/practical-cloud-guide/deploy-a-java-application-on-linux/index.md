@@ -63,16 +63,12 @@ In this module, the software is in a GitHub repository. You will clone the repos
 Step 1: Clone the practical-cloud-guide repository.
 
 ```powershell
-git clone <repo url>
+git clone https://github.com/build-on-aws/practical-cloud-guide-code
 ```
-
-Step 2: Open the AWS Console and choose **Lightsail**.
-
-![](./images/git )
 
 Step 2: Open the AWS Console and choose Lightsail.
 
-![Open AWS Lightsail](./images/PCG-5-lightsail.png)
+![Open AWS Lightsail](./images/PCG-1-lightsail.png)
 
 Step 3: Create an S3 bucket
 
@@ -96,7 +92,8 @@ Choose **File**.
 
 ![Choose File](./images/lightsail-s3-bucket-5.png)
 
-Select `HelloBuilder.jar` from the `path\to\files` and choose **Open**.
+Select `HelloBuilder.jar` from the `./practical-cloud-guide-code/run-to-build
+/linux-app-deploy/target/` and choose **Open**.
 
 ![Choose File](./images/lightsail-s3-bucket-linux-1.png)
 
