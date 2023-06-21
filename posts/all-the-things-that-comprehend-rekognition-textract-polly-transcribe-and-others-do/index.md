@@ -7,7 +7,7 @@ tags:
     - machine-learning
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes
-date: 2023-05-22
+date: 2023-06-21
 ---
 
 Developers - those who provide solutions to computer problems, establish base procedures, program, and maintain solutions - are indeed programmers, but that doesn't automatically make them experts in everything related to code. Take, for example, the creation of an ML-dependent function: it necessitates familiarity with models and algorithm training, knowledge that isn't common among all programmers.
