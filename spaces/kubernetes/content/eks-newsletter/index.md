@@ -9,6 +9,5 @@ externalUrl: https://eks.news/
 images:
   banner: ./images/eks-news.png
   hero: ./images/eks-news.png
-spaces:
-  - kubernetes
+  
 ---
