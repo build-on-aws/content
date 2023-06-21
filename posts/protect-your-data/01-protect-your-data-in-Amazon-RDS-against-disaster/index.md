@@ -1,6 +1,6 @@
 ---
-title: Protect Your Data in Amazon RDS Against Disaster or Accidental Deletion
-description: In this guide we will show how to protect data stored in Amazon Relational Database Service (Amazon RDS) from major disaster events.
+title: "Protect Your Data in Amazon RDS Against Disaster or Accidental Deletion"
+description: "In this guide we will show how to protect data stored in Amazon Relational Database Service (Amazon RDS) from major disaster events."
 tags:
     - rds
     - data-protection
@@ -13,39 +13,38 @@ authorName: Seth Eliot
 date: 2022-01-25
 ---
 
-[Disasters events](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/what-is-a-disaster.html) occur infrequently, but when they happen it is crucial that you have a strategy that enables you to protect your data. [Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) offers several capabilites to protect your data in case disaster strikes. Amazon RDS is a good choice when you need to set up, operate, and scale a relational database in the Cloud. With it you can run the database engine of your choice from among MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL.
+[Disaster events](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/what-is-a-disaster.html) occur infrequently, but when they happen it is crucial that you have a strategy that enables you to protect your data. [Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) offers several capabilites to protect your data in case disaster strikes. Amazon RDS is a good choice when you need to set up, operate, and scale a relational database in the Cloud. With it you can run the database engine of your choice from among MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL.
 
-When you think about data protection, consider two mechanisms. *Backup* is a batch operation on your entire data store or on incremental changes since the last full backup. While *replication* happens in real, or near-real, time as either logical transactions or physical blocks copied to a replica. Replication protects against loss of access to the primary data. If the primary database instance is not accessible or available, you can fail over to the replica. Backups protect against deletion or corruption of your data, and allow you to restore to the last known good state. Therefore it is a best practice to use a combination of backup and replication.
+When you think about data protection, consider two mechanisms: *Backup* is a batch operation on your entire data store or on incremental changes since the last full backup, while *replication* happens in real, or near-real, time as either logical transactions or physical blocks copied to a replica. Backups protect against deletion or corruption of your data, and they allow you to restore to the last known good state. Replication protects against loss of access to the primary data; if the primary database instance is not accessible or available, you can fail over to the replica. Therefore it is a best practice to use a combination of backup and replication.
 
 In this post I will show you multiple approaches to both replication and backup. You do not need to do all of them. Instead, consider a *defense in depth* approach with several layers of protection where function and criticality of your application determines which ones you need. Disasters will happen, and using the approaches I share here using RDS, your applicaton will be able to recover and continue to meet your objectives.
 
-Figure 1 shows an overview the multiple layers of RDS data protection this guide will cover. I will show you how to do this using the AWS Console, however these configurations can also be done using the [AWS CLI](https://aws.amazon.com/cli/) or [AWS SDK](https://aws.amazon.com/developer/tools/).
+Figure 1 shows an overview the multiple layers of RDS data protection this guide will cover. I will show you how to do this using the AWS Console, but these configurations can also be done using the [AWS CLI](https://aws.amazon.com/cli/) or [AWS SDK](https://aws.amazon.com/developer/tools/).
 
 ![Database replication and backup with Amazon RDS](images/QDvfx.png "Figure 1. Database replication and backup with Amazon RDS")
 
-## Replication to a standby instance
+## Replication to a Standby Instance
 
-Replication provides rapid recovery for a wide range of potential faults that may impact availability of the primary database instance or the availability zone (AZ) it is in. Since replication is real-time or near-real-time, there is no, or very little, data loss when failing over to a replica. Recovery times can be very short as the replica is already running, and does not need to be restored from backup.
+Replication provides rapid recovery for a wide range of potential faults that may impact availability of the primary database instance or the availability zone (AZ) it is in. Since replication is real-time or near-real-time, there is no, or very little, data loss when failing over to a replica. Recovery times can be very short as the replica is already running and does not need to be restored from backup.
 
-This is why our first layer of protection is in-Region, synchronous replication. Using [Multi-AZ Deployment](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html), a primary database instance located in one Availability Zone (AZ), is synchronously replicated to a standby database in another AZ (Figure 1-①). Locating the standby in a different AZ provides the protection of fault isolation, since AZs are located in distinct, separate sets of data centers from each other. In case of a failure of the primary instance, or a disaster event in the AZ where the primry instance is located, the standby takes over in a different AZ. This can be implemented at DB creation, or an existing DB can be modified to become Multi-AZ
+This is why our first layer of protection is in-Region, synchronous replication. Using [Multi-AZ Deployment](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html), a primary database instance located in one Availability Zone (AZ) is synchronously replicated to a standby database in another AZ (Figure 1-①). Locating the standby in a different AZ provides the protection of fault isolation, since AZs are located in distinct, separate sets of data centers from each other. In case of a failure of the primary instance, or a disaster event in the AZ where the primary instance is located, the standby takes over in a different AZ. This can be implemented at DB creation, or an existing DB can be modified to become Multi-AZ.
 
 1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
 2. In the navigation pane, choose **Databases**
 3. To create a new DB click **Create Database** / To modify an existing DB, click the radio button next to the DB name and then click **Modify**
-4. Under **Availability and durability**, make the selection for Multi-AZ DB. The wording of this selection will vary based database engine (Figure 2)
+4. Under **Availability and durability**, make the selection for Multi-AZ DB. The wording of this selection will vary based on database engine (Figure 2)
    1. For MySQL or PostGres DB, select **Multi-AZ DB instance**
    2. For MariaDB and Oracle DBs, select **Create a standby instance**
-   3. For a SQL Server DB select **Yes (Mirroring / Always on).** This is because SQL Server DB instances [use SQL Server Database Mirroring (DBM) or Always On Availability Groups (AGs)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerMultiAZ.html).
+   3. For a SQL Server DB, select **Yes (Mirroring / Always on).** This is because SQL Server DB instances [use SQL Server Database Mirroring (DBM) or Always On Availability Groups (AGs)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerMultiAZ.html).
 5. Select your other options and continue the prompts to create or modify your DB
 
 ![Availability and durability options for Amazon RDS](images/xXJ9w.png "Figure 2. Availability and durability options for Amazon RDS")
 
+The [Multi-AZ DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) option is another way to deploy Multi-AZ. It consists of a read/write instance plus two standby DB instances. Each standby is read-only, and the cluster presents read and write endpoints that handle load-balancing and rerouting connections when some DB instances aren't available. If the writer instance fails, one of the read instances is promoted to become the new writer. This is available for RDS for MySQL and RDS for PostgreSQL.
 
-The [Multi-AZ DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) option is another way to deploy Multi-AZ. It consists of a read/write instance plus two standby DB instances. Each standby is read-only, and the cluster presents read and write endpoints that handle load-balancing and rerouting connections when some DB instances aren't available. If the writer instance fails one of the read instances is promoted to become the new writer. This is available for RDS for MySQL and RDS for PostgreSQL
+## Replication to One or More Read Replica Instances
 
-## Replication to one or more read replica instances
-
-The next layer of protection is still in-Region, and enables asynchronous replication to one or more [read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html). By replicating to an instance in a different Availability Zone (AZ) than your primary and standby instances, you can achieve additional  fault isolation to protect your database data (Figure 1-②).  Read replicas are created from an already existing RDS DB instance.
+The next layer of protection is still in-Region and enables asynchronous replication to one or more [read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html). By replicating to an instance in a different Availability Zone (AZ) than your primary and standby instances, you can achieve additional fault isolation to protect your database data (Figure 1-②). Read replicas are created from an already-existing RDS DB instance.
 
 1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
 2. In the navigation pane, choose **Databases**
@@ -56,17 +55,17 @@ The next layer of protection is still in-Region, and enables asynchronous replic
 
 ![Configuring Availability Zone when adding a read replica](images/MjR7w.png "Figure 3. Configuring Availability Zone when adding a read replica")
 
-## Replication to another AWS Region
+## Replication to Another AWS Region
 
 Amazon RDS also supports cross-Region Read Replicas (Figure 1-③) for all database engines except for SQL Server. Like all read replicas, a read replica that is cross-Region can be set up with its own standby instance in a different Availability Zone (Figure 1-④). Regions are separated by large distances and are designed to be isolated from the other Regions. Therefore, securing a copy of your data in another Region provides another layer of fault isolation to our defense in depth.
 
 To create a read replica in another AWS Region, under **Network & Security** select the **Destination region** for the replica (Figure 3).
 
-## Backup within the same AWS Region
+## Back Up Within the Same AWS Region
 
-The strategies so far provide a high degree of protection for your database data. However they are all replication strategies, and therefore do not protect your data from disaster events that involve the loss or corruption of a large set of data (or the entire database) due to either accidental or malicious action. To add a layer of protection against this, you must create data backups. Automated backups provide the ability for point in time recovery (PITR) to the last known good state of your data.
+The strategies so far provide a high degree of protection for your database data. However they are all replication strategies and therefore do not protect your data from disaster events that involve the loss or corruption of a large set of data (or the entire database) due to either accidental or malicious action. To add a layer of protection against this, you must create data backups. Automated backups provide the ability for point-in-time recovery (PITR) to the last known good state of your data.
 
-Amazon RDS automated backups create a periodic snapshot of your database and also back up transaction logs between snapshots (Figure 1-⑤) to enable PITR. The transaction logs are saved every five minutes, therefore the latest restorable time should be no more than five minutes before the present. Backups are stored in Amazon S3 in-Region by default.
+Amazon RDS automated backups create a periodic snapshot of your database and also backup transaction logs between snapshots (Figure 1-⑤) to enable PITR. The transaction logs are saved every five minutes, therefore the latest restorable time should be no more than five minutes before the present. Backups are stored in Amazon S3 in-Region by default.
 
 1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
 2. In the navigation pane, choose **Databases**
@@ -74,13 +73,13 @@ Amazon RDS automated backups create a periodic snapshot of your database and als
 4. Click to expand **Additional configuration**
 5. Under **Backup**, supply the following (Figure 4):
    1. **Enable automated backups** is checked
-   2. **Backup retention period** is set from 1 to 35 days - this will determine the oldest point you can restore from
+   2. **Backup retention period** is set from 1 to 35 days - this will determine the oldest point from which you can restore
    3. **Backup window** is then the daily snapshot will be taken. You can use the [default values here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow), or set your own
    4. Note: when using the CLI or SDK you enable automated backups by using a positive nonzero value for retention period
 
 ![Configuring automated backups for RDS](images/tl5S7.png "Figure 4. Configuring automated backups for RDS")
 
-## Back up to another AWS Region
+## Back Up to Another AWS Region
 
 A discussed earlier, securing a copy of your data in another Region provides an additional layer of fault isolation to our defense in depth. Amazon RDS database can copy snapshots and transaction logs to a different AWS Region (Figure 1-⑦) when using [Oracle, PostgreSQL and Microsoft SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.html) database engines.
 
@@ -99,13 +98,13 @@ You can also modify an existing DB to enable cross-Region backup copying (Figure
 
 ![Configuring backup replication to another Region by modifying an existing DB](images/bH265.png "Figure 6. Configuring backup replication to another Region by modifying an existing DB")
 
-To prevent any impact on your primary DB during the automatic backup window, the backup is taken from the standby instance (as shown in Figure 1), when using MariaDB, MySQL, Oracle, or PostgreSQL engines. Otherwise, storage I/O might be suspended briefly while the backup process initializes (typically under a few seconds).
+To prevent any impact on your primary DB during the automatic backup window, the backup is taken from the standby instance (as shown in Figure 1) when using MariaDB, MySQL, Oracle, or PostgreSQL engines. Otherwise, storage I/O might be suspended briefly while the backup process initializes (typically for under a few seconds).
 
 For database engines that do not enable the copying of automated backups, you can instead implement the strategy shown in Figure 1-⑥. Here we use the cross-Region read replica as the source for automated backup (as always, the backup is taken from the standby instance associated with the replica). This backup will provide the PITR needed if we need to restore to a known good state prior to data deletion or corruption.
 
 ## Summary
 
-Replicas provide the ability to restore data quickly and with minimal data loss. Backups provide the ability to restore to a specific point in time, and therefore to a known good state prior to data corruption or deletion. The guide shows you how to use a combination of both approaches, putting your data in different Availability Zone and AWS Regions, to achieve the highest degree of fault isolation to protect your relational database data in RDS.
+Replicas provide the ability to restore data quickly and with minimal data loss. Backups provide the ability to restore to a specific point in time, and therefore to a known good state prior to data corruption or deletion. The guide shows you how to use a combination of both approaches, putting your data in different Availability Zone and AWS Regions to achieve the highest degree of fault isolation to protect your relational database data in RDS.
 
 ## Recommended next steps
 
