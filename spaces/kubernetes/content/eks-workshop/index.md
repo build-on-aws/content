@@ -9,6 +9,5 @@ externalUrl: https://www.eksworkshop.com/
 images:
   banner: ./images/eks-workshop.png
   hero: ./images/eks-workshop.png
-spaces:
-  - kubernetes
+
 ---
