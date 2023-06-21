@@ -1,6 +1,6 @@
 ---
 title: "Deploy a Cloud Database to Scale a LAMP App"
-description: ""
+description: "A key method for increasing application capacity is re-architecting monolithic applications and applying horizontal scaling. Managed cloud services simplify the process of breaking apart monoliths into component services. This tutorial demonstrates how to migrate and scale a monolithic application to distributed cloud architecture."
 tags:
     - tutorials
     - AWS Lightsale
