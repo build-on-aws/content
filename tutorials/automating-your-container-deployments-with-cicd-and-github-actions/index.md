@@ -35,8 +35,6 @@ Below is an architecture diagram of what we'll be building today:
 
 Let's get started!
 
-## Table of Content
-
 | ToC                                                                            |
 |--------------------------------------------------------------------------------|
 | Steps                                                                          |

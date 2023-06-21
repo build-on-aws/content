@@ -31,8 +31,6 @@ We will learn:
 - How to get started with a blank canvas and build a SAM application
 - How to load an existing SAM application, visualize and optionally extend it
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 100 - Beginner                                              |
