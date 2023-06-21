@@ -3,6 +3,7 @@ title: "The Practical Cloud Guide for IT Pros"
 description: "Introduction to the Practical Cloud Guide, a series of articles and tutorials to help IT Administrators and Pros successfully transition to the cloud"
 navigationBars: both
 posts:
+    - /
 --- 
 
 It’s Monday morning, you’ve heard the rumors and now it’s official:
