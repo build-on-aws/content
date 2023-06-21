@@ -9,6 +9,11 @@ authorName: "Sophia Parafina"
 date: 2023-31-05
 ---
 
+This is an 5-part series about Cloud Migration:
+
+| SeriesToC |
+|-----------|
+
 It’s Monday morning, you’ve heard the rumors and now it’s official:
 
 > “As my first act as the CTO, I am pleased to announce that we are moving our IT operations to the cloud. Our team is well-equipped to handle this transition and I am confident that it will bring many benefits to our organization. I look forward to seeing the results.”
