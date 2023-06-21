@@ -9,6 +9,5 @@ externalUrl: https://aws.github.io/aws-eks-best-practices/
 images:
   banner: ./images/eks-best-practices.png
   hero: ./images/eks-best-practices.png
-spaces:
-  - kubernetes
+
 ---
