@@ -1,18 +1,9 @@
 ---
-title: "We're Moving to the Cloud: A Practical Guide to Cloud Migration"
-description: "Introduction to the Practical Cloud Guide, a series of articles and tutorials to help IT Administrators and Pros successfully transition to the cloud."
-tags:
-  - "IT Pros"
-  - "migration"
-authorGithubAlias: "spara" 
-authorName: "Sophia Parafina"
-date: 2023-31-05
----
-
-This is an 5-part series about Cloud Migration:
-
-| SeriesToC |
-|-----------|
+title: "The Practical Cloud Guide for IT Pros"
+description: "Introduction to the Practical Cloud Guide, a series of articles and tutorials to help IT Administrators and Pros successfully transition to the cloud"
+navigationBars: both
+posts:
+--- 
 
 It’s Monday morning, you’ve heard the rumors and now it’s official:
 
@@ -55,5 +46,4 @@ The Practical Guide to Cloud Migration addresses these topics:
 
 ## What’s Next
 
-To start your journey, we’ll start with deploying web applications in Windows Server 2022 and Linux. These tutorials demonstrate how to create a cloud instance of a server. In addition, you will configure server networking and software and deploy applications using a script to automate the process.  Start your journey<add link to first tutorial>.
-
+To start your journey, we’ll start with deploying web applications in Windows Server 2022 and Linux. These tutorials demonstrate how to create a cloud instance of a server. In addition, you will configure server networking and software and deploy applications using a script to automate the process. 
