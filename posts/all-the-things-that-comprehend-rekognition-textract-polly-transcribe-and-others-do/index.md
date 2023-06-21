@@ -24,7 +24,7 @@ Fortunately, there are ready-to-use APIs that leverage existing, previously trai
 
 ## Let's Take a Look at the APIs
 
-AWS offers a variety of [ML and AI services](https://aws.amazon.com/machine-learning/) designed to expedite their implementation in your applications. These services range from those that equip you with the necessary infrastructure to train your own models to those that come as ready-to-use, pre-trained API calls. Let's now focus specifically on some examples of the latter:
+AWS offers a variety of [ML and AI services](https://aws.amazon.com/machine-learning/sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do) designed to expedite their implementation in your applications. These services range from those that equip you with the necessary infrastructure to train your own models to those that come as ready-to-use, pre-trained API calls. Let's now focus specifically on some examples of the latter:
 
 | API Type | How you can do | Service Name | 
 -- | -- | --
