@@ -12,9 +12,9 @@ authorName: "Sophia Parafina"
 date: 2023-31-05
 ---
 
-The [previous tutorial]() demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Node.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
+The [previous tutorial](https://www.buildon.aws/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/) demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Express.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
 
-This tutorial demonstrates how to deploy a Java application on a Linux VPS with AWS Lightsail. If you’re unfamiliar with AWS Lightsail check out the overview in the previous tutorial<add link>. We’ll use the previous DevOps scenario where the software is compiled by a CI/CD and stored in an S3 bucket. You copy the software or artifact from AWS S3 bucket or object store to deploy on a Linux VPS.
+This tutorial demonstrates how to deploy a Java application on a Linux Virtual Private Server (VPS) with AWS Lightsail. If you’re unfamiliar with AWS Lightsail check out the overview in the [previous tutorial](https://www.buildon.aws/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/). We’ll use the previous DevOps scenario where the software is compiled by a CI/CD and stored in an S3 bucket. You copy the software or artifact from AWS S3 bucket or object store to deploy on a Linux VPS.
 
 ## What you will learn
 
@@ -54,11 +54,11 @@ In DevOps, applications are typically built with Continuous Integration (CI) sof
 
 ### What you will accomplish
 
-In this module, the software is in a GitHub repository. You will clone the repository to copy the files to your local drive. The next step is to use Lightsail create an S3 bucket to store the files that can be accessed by a Windows Server deployed with AWS Lightsail.
+In this module, the software is in a GitHub repository. You will clone the repository to copy the files to your local drive. The next step is to use Lightsail create an S3 bucket to store the files that can be accessed by a Linux Server deployed with AWS Lightsail.
 
 ### Implementation Instructions
 
-> Steps 1-3 are optional if you completed the Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail tutorial<add link>.
+> Steps 1-3 are optional if you completed the Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail [tutorial(https://www.buildon.aws/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/).
 
 Step 1: Clone the practical-cloud-guide repository.
 
