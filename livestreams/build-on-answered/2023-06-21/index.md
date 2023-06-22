@@ -7,6 +7,7 @@ tags:
     - aws-stack-overflow-collective
     - aws
     - twitch
+    - resilience
 authorGithubAlias: juliegund
 authorName: Julie Gunderson
 date: 2022-06-21
@@ -32,8 +33,18 @@ In this episode we will be focusing on resilient systems. We have selected some 
 2. [Does AWS S3 cross-region replication use same URL for multiple regions?](https://stackoverflow.com/questions/29284951/does-aws-s3-cross-region-replication-use-same-url-for-multiple-regions)
 3. [What is the difference between Amazon ECS and Amazon EC2?](https://stackoverflow.com/questions/40575584/what-is-the-difference-between-amazon-ecs-and-amazon-ec2)
 
+## Show Notes
 
-##Do you have ideas for questions we should review on future shows? Let us know [HERE](https://www.pulse.aws/survey/VZHLE9FS)
+Why did [Reachability Analyzer](https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html) still claim the [security group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) was the problem, even after Seth added in inbound rule for ICMP?
+- This was definitely a case of [PEBCAK](https://en.wiktionary.org/wiki/PEBCAK). Remember when setting up the path to be analyzed, it asks for a **protocol**? Seth, specified **TCP** (from the choices TCP or UDP). Well, [ICMP](https://aws.amazon.com/what-is/icmp/) (the new rule Seth added), is not TCP, so analyzer correctly determined there was no _TCP_ path to the instance.
+
+Can we just re-run an analysis on an already defined path in Reachability Analyzer?
+* Yes! The big orange button that Seth somehow did not see
+
+  ![Analyze path button in Reachability Analyzer](images/analyze_path.webp)
+
+## Do you have ideas for questions we should review on future shows?
+Let us know [HERE](https://www.pulse.aws/survey/VZHLE9FS)
 
 ## What is the Collective?
 
