@@ -18,7 +18,7 @@ additionalAuthors:
   - authorGithubAlias: scmacdon
     authorName: Scott Macdonald
 showInHomeFeed: true
-date: 2023-06-14
+date: 2023-06-23
 ---
 
 1. [**Prologue**](#1-prologue) - Meet the team!
