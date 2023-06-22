@@ -17,7 +17,7 @@ spaces:
 
 Check out the recording here:
 
-https://www.twitch.tv/aws/video/1804141763
+https://www.twitch.tv/videos/1804141763
 
 ## Links from today's episode
 
