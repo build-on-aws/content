@@ -15,7 +15,6 @@ Using multiple Availability Zones (AZs) is crucial for achieving resilience and 
 
 However, effectively using multiple AZs in a multi-account environment can be complex and challenging. In this article, we will address those complexities and provide some guidelines on how to best use multiple AZs in your multi-account environments.
 
-
 ## Using Multiple AZs in Your Architecture 
 
 Each AWS Region consists of three or more AZs. Each AZ is one or more discrete data centers with redundant power, networking, and connectivity, independent of the other AZs within that Region. Deploying your application across multiple AZs can improve resiliency by providing redundancy and constraining the impact of failures. 
