@@ -1,5 +1,5 @@
 ---
-title: "Cloud Journeys: Building a serverless image recognition website with ML"
+title: "Cloud Journeys: Building a Serverless Image Recognition Website with Machine Learning"
 description: "The Code Examples team tells the story of how they created a serverless application that detects labels for images and lets the user download those images by label. This is the first entry in a new content category called Cloud Journeys."
 tags:
   - cdk
@@ -7,6 +7,7 @@ tags:
   - lambda
   - dynamodb
   - rekognition
+  - ai-ml
 authorGithubAlias: cpyle0819
 authorName: Corey Pyle
 additionalAuthors:
