@@ -1,18 +1,18 @@
 # A Gentle Introduction to Transformer Architecture and Relevance to Generative AI
-Description: This post is about Transformer Architecture, its relevance to GenAI, tips and guidance to Customize & Optimize with the LLM."
+**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance to Customize & Optimize with the LLM."
 
-tags:
+**Tags:**
   - Transformer Architecture
   - LLM
   - Generative AI
   - Prompt Engineering
   - Fine Tuning
 
-Author Github Alias: pcolmer99, Xiaoyuao988
+**Author Github Alias:** pcolmer99, Xiaoyuao988
 
-Author Name: Paul Colmer, Xiaoyu Xing
+**Author Name:** Paul Colmer, Xiaoyu Xing
 
-Date: 2023-06-22
+**Date:** 2023-06-22
 
 ## Transformer Architecture
 
@@ -95,7 +95,7 @@ There are many on-going research, and here to share some popular frameworks/solu
 
 ![customization options](images/GenAI_Customization.png)
 
-**Prompt Engineering** helps you improve the response accuracy without touching or updating the underneath LLM. Instead, the model is doing in-context learning. Meaning the learning and responses are based on what and how the prompts tell the LLM model. -->
+**Prompt Engineering** helps you improve the response accuracy without touching or updating the underneath LLM. Instead, the model is doing in-context learning. Meaning the learning and responses are based on what and how the prompts tell the LLM model.
 
 On the other hand, **Fine Tuning** is where the pre-trained LLM model is further tuned/updated with extra knowledge, extra parameters, so that a new fine-tuned model is generated.
 
@@ -106,7 +106,7 @@ A **prompt** is basically the information you send to the LLM model when interac
 
 A prompt can contain information such as: instruction, input/question, context, examples of output.
 
-I got inspiration from one of my friends that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, Ref [1]). With simple prompt engineering techniques (***e.g. Zero-shot Prompt***), the response may not be so accurate and even contains hallucination (not factual). However, when deploying more advanced prompt engineering techniques, the application is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so we suggest that always start from what you need.
+I got inspiration from one of my friends that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, Ref [1]). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains hallucination (not factual). However, when deploying more advanced prompt engineering techniques, the application is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so we suggest that always start from what you need.
 
 Let's look at some popular prompt engineering techniques in a high level.
 
@@ -137,6 +137,7 @@ For this kind of task, we need to ***"teach"*** the model with a ***"problem-sol
 From the figure below, you can also see that CoT are combined with Zero-shot or Few-shot prompting.
 
 ![CoT](images/CoT.png)
+
 ***image source*** - [CoT](https://arxiv.org/pdf/2201.11903.pdf)
 
 As you can see that applying chain-of-thought prompting requires manual effort, such as construct examples of what to do step-by-step.
@@ -144,6 +145,7 @@ As you can see that applying chain-of-thought prompting requires manual effort, 
 An **Automatic CoT** approach is introduced by the researching team [Auto-CoT](https://arxiv.org/abs/2210.03493), using ***"Let's think step by step"*** prompt in each demonstration examples as shown in figure below.
 
 ![Auto-CoT](images/Auto_CoT.png)
+
 ***image source*** - [Auto-CoT](https://arxiv.org/abs/2210.03493)
 
 To further improve response accuracy, **diversity of sampling** questions matters. This leads us to the **self consistency with CoT (CoT-SC)** approach. 
@@ -157,6 +159,7 @@ Like a human handling complex issues, there normally isn't an one-fit-all soluti
 This is also what self consistency with CoT approach tries to "teach" the model. It aims to "replace the naive greedy decoding used in chain-of-thought prompting". [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf).
 
 ![CoT-SC](images/CoT-SC.png)
+
 ***image source*** - [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf)
 
 
@@ -167,6 +170,7 @@ When task complexity increasing even higher, a new approach - **Tree of Thoughts
 This approach "generalizes over the popular "Chain of Thought" approach to prompting language models, and enables exploration over coherent units of text ("thoughts") that serve as intermediate steps toward problem solving".
 
 ![ToT](images/ToT.png)
+
 ***image source*** - [ToT](https://arxiv.org/pdf/2305.10601.pdf)
 
 This approach allows the LLM exploring (searching) diverse options, and self-evaluate each reasoning step based on its current status while actively looking ahead or backtracks. The goal is to make a more global comprehensive decision.
@@ -257,6 +261,7 @@ There are existing evaluation tools such as [ROUGE](https://en.wikipedia.org/wik
 Here comes the Reinforcement Learning with Human Feedback (RLHF) approach.
 
 ![RLHF](images/RLHF.png)
+
 ***image source*** - [RLHF](https://arxiv.org/pdf/2203.02155.pdf)
 
 As shown in the figure, this technique contains three parts:
