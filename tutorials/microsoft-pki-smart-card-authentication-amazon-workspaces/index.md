@@ -13,9 +13,9 @@ authorName: Austin Webber
 date: 2023-05-22
 ---
 
-Amazon WorkSpaces provides customers with the ability to use Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. Amazon WorkSpaces supports the use of smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, your users can login to their WorkSpaces using smart cards and they can use their smart cards in within their WorkSpace session to authenticate to websites or other applications. Pre-session smart card authentication requires an _Active Directory Connector_ connected to _AWS Microsoft Managed AD_ or self-managed AD, OCSP for certificate revocation checking, Root CA and smart card certificates with certain requirements, a CAC or PIV smart card, a version of the WorkSpaces client that supports smart card authentication, and a WorkSpace assigned to the user that is using a protocol that supports smart card authentication.
+Amazon WorkSpaces provides customers with the ability to use Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. Amazon WorkSpaces supports the use of smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, your users can login to their WorkSpaces using smart cards and they can use their smart cards in within their WorkSpace session to authenticate to websites or other applications. Pre-session smart card authentication requires an _Active Directory Connector_ connected to _AWS Microsoft Managed AD_ or self-managed AD, Online Certificate Status Protocol (OCSP) for certificate revocation checking, Root CA and smart card certificates with certain requirements, a CAC or PIV smart card, a version of the WorkSpaces client that supports smart card authentication, and a WorkSpace assigned to the user that is using a protocol that supports smart card authentication.
 
-In this post, we will walk through step-by-step how you can setup and configure new or existing Microsoft PKI to support smart card authentication including setting up an OCSP (Online Certificate Status Protocol) responder, proper configuration of Active Directory, domain controllers, certificate templates, Group Policy, and Amazon WorkSpaces. You can expect to have a fully functioning WorkSpaces smart card authentication environment for both Linux and Windows WorkSpaces after completing the steps in this post.
+In this post, we will walk through step-by-step how you can setup and configure new or existing Microsoft PKI to support smart card authentication including setting up an OCSP  responder, proper configuration of Active Directory, domain controllers, certificate templates, Group Policy, and Amazon WorkSpaces. You can expect to have a fully functioning WorkSpaces smart card authentication environment for both Linux and Windows WorkSpaces after completing the steps in this post.
 
 ![High-level architecture overview of the connectivity process to Amazon WorkSpaces using a smart card](./images/01_high-level-architecture-connectivity-process-amazon-workspaces-with-smart-card.png)
 
@@ -271,7 +271,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
 
 ### Section 3: Configure the Certificate Authority to allow certificates to be issued to smart card users
 
-1. Create a certificate template to allow self-enrollment smartcard logon certificates to your users:
+1. Create a certificate template to allow self-enrollment smart card logon certificates to your users:
     * Connect to your Enterprise CA with an AD user in the Domain Admins or AWS Delegated Administrators group.
     * Open **certtmpl.msc**, find the **Smartcard Logon** template, right-click it, select **Duplicate Template**.
     * Select the **General** tab, change the **Template display name** to a desired name (e.g. SmartcardWS, you will need this name later).
@@ -305,7 +305,7 @@ In this section, we will login as the smart card user, confirm the smart card is
     * Open **certmgr.msc** while logged in as your test smart card user.
     * Right-click **Personal**, select **All Tasks**, select **Request New Certificate…**
     * Select **Next**, select **Next**, check the box next to your certificate template (e.g. SmartcardWS), select **Enroll**:  
-![Image showing the "Request Certificates" window and selecting the "SmartcardWS" template created earlier](./images/23-Request-Certificates-window-selecting-SmartcardWS-template.png) 
+![Image showing the "Request Certificates" window and selecting the "SmartcardWS" template created earlier](./images/23-Request-Certificates-window-selecting-SmartcardWS-template.png)
     **Note:** If you do not see the certificate template, ensure your user has enroll permissions on the certificate template. If the computer does not have the CA certificates installed, the certificate template may not be presented. Complete a group policy update to install the certificates.
     * When prompted, enter in your smart card PIN and complete the certificate request:  
 ![Image showing a prompt to enter the authentication PIN for the smart card when enrolling a certificate on the smart card](./images/24-prompt-enter-authentication-PIN-the-smart-card.png)
@@ -419,7 +419,7 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
     * RDP into an EC2 instance or computer using your smart card and enter your PIN when prompted.  
 ![Image showing a Microsoft Remote Desktop Connection window connecting to a sample computer "ENTCA1"](./images/37-Microsoft-Remote-Desktop-Connection.png)  
 ![Image: Image showing a Windows Security prompt requesting a smart card PIN to be entered](./images/38-Windows-Security-prompt-requesting-smart-card-PIN.png)
-  * This completes in-session smart card authentication with Windows WorkSpaces.
+    * This completes in-session smart card authentication with Windows WorkSpaces.
 
 ## Section 10: Setup smart card authentication on Linux WorkSpaces (GovCloud only)
 
@@ -495,7 +495,7 @@ This indicates that the mutual TLS authentication with AD Connector was successf
     * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and confirm it is trusted.
     * The user’s certificate is not configured correctly for Windows smart card authentication.
 4. At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication:  
-![Image showing the Linux logon page returning a Sorry, that did not work Please try again. error when entering a smart card PIN](./images/42-Linux-logon-page-returning-Sorry-that-did-not-work.png) 
+![Image showing the Linux logon page returning a Sorry, that did not work Please try again. error when entering a smart card PIN](./images/42-Linux-logon-page-returning-Sorry-that-did-not-work.png)
     The above error indicates a Linux OS-level smart card authentication failure. This error and other related errors at this logon screen can be caused due to the following reasons:
     * The custom image used to create the WorkSpace does not have the correct certificates in the certificate chain added in the image.
     * A separate OS-level authentication issue. SSH into the WorkSpace and review the logs in /var/log for any errors around the timestamp.
