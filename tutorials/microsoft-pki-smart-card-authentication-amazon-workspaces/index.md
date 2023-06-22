@@ -27,6 +27,9 @@ In this post, we will walk through step-by-step how you can setup and configure 
 * US East (N. Virginia)
 * US West (Oregon)
 
+|ToC|
+|---|
+
 ## Prerequisites
 
 For this walkthrough, you should have the following prerequisites:
