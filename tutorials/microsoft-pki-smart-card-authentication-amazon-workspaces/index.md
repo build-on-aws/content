@@ -3,9 +3,11 @@ title: "Set Up and Configure Microsoft PKI for Smart Card Authentication with Am
 description: "A comprehensive guide on configuring Microsoft PKI and AWS infrastructure to support smart card authentication for your Amazon WorkSpaces."
 tags:
   - workspaces
-  - directoryservice
-  - pivauthentication
-  - microsoftpki
+  - directory-service
+  - piv-authentication
+  - microsoft-pki
+  - tutorials
+  - active-directory
 authorGithubAlias: austinwebber
 authorName: Austin Webber
 date: 2023-05-22
