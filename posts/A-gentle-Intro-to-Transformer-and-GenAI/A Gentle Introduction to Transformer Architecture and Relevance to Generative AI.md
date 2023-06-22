@@ -1,5 +1,5 @@
 # A Gentle Introduction to Transformer Architecture and Relevance to Generative AI
-**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customize your interaction with the language models."
+**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customizing your interaction with the large language models."
 
 **Tags:**
   - Transformer Architecture
@@ -140,7 +140,7 @@ From the figure below, you can also see that CoT are combined with Zero-shot or 
 
 ![CoT](images/CoT.png)
 
-                                                ***image source*** - [CoT](https://arxiv.org/pdf/2201.11903.pdf)
+  ***image source*** - [CoT](https://arxiv.org/pdf/2201.11903.pdf)
 
 As you can see that applying chain-of-thought prompting requires manual effort, such as construct examples of what to do step-by-step.
 
@@ -148,7 +148,7 @@ An **Automatic CoT** approach is introduced by the researching team [Auto-CoT](h
 
 ![Auto-CoT](images/Auto_CoT.png)
 
-   ***image source*** - [Auto-CoT](https://arxiv.org/abs/2210.03493)
+  ***image source*** - [Auto-CoT](https://arxiv.org/abs/2210.03493)
 
 To further improve response accuracy, **diversity of sampling** questions matters. This leads us to the **self consistency with CoT (CoT-SC)** approach. 
 
@@ -259,20 +259,21 @@ So benefit of PEFT:
 #### 4. Reinforcement Learning with Human Feedback (RLHF)
 
 LLM model is powerful with lots of great capabilities. But like two sides of a coin, what is "good" text is subjective and hard to define.
-There are existing evaluation tools such as [ROUGE](https://en.wikipedia.org/wiki/ROUGE_(metric)) measure the performance, but that's still not good enough.
-Here comes the Reinforcement Learning with Human Feedback (RLHF) approach.
+There are existing evaluation tools such as [ROUGE](https://en.wikipedia.org/wiki/ROUGE_(metric)), that measures model performance, but that's still not good enough.
+**Reinforcement Learning with Human Feedback (RLHF)** approach can help here.
 
 ![RLHF](images/RLHF.png)
 
   ***image source*** - [RLHF](https://arxiv.org/pdf/2203.02155.pdf)
 
-As shown in the figure, this technique contains three parts:
+As shown in the figure above, RLHF contains three parts:
    1. Supervised fine tuning (SFT).
    2. Reward Model training, based on human feedback. Basically define what "good" looks like.
-   3. Reinforcement Learning on this Reward Model. This part is to fine-tuning the model.
+   3. Reinforcement Learning on this Reward Model. This part is to further fine-tuning the model.
 
 Human feedback would be subjective, but what RLHF doing well is to aggregate human preferences at scale.
-One use case of RLHF with LLM is de-toxicity of output. 
+
+One example use case of RLHF with LLM is de-toxicity of outputs. 
 
 ### Summary - it is all about Customization and Optimization
 
