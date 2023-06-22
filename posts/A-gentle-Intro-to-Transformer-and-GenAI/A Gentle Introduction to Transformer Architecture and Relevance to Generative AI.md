@@ -1,5 +1,5 @@
 # A Gentle Introduction to Transformer Architecture and Relevance to Generative AI
-**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customization your interaction with the language models."
+**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customize your interaction with the language models."
 
 **Tags:**
   - Transformer Architecture
@@ -18,7 +18,7 @@
 
 Interest in the use of Generative AI has skyrocketed in the past few months.  Many of AWS customers are wanting to learn how they can experiment with the models on the Amazon SageMaker service, particularly in the area of natural language processing.  But what is the secret sauce behind large language models and how do they work?
 
-Let’s introduce you to the transformer architecture  The transformer architecture is a type of neural network architecture that was first proposed in a paper [Attention is All You Need](https://arxiv.org/abs/1706.03762).  It is used for a range of common use cases including:
+Let’s introduce you to the transformer architecture. The transformer architecture is a type of neural network architecture that was first proposed in a paper [Attention is All You Need](https://arxiv.org/abs/1706.03762).  It is used for a range of common use cases including:
 
 * **Language Translation** - translating from one language to another.  A use case here would be helping a non-english speaker interact with a critical government service over the internet.
 * **Text Generation** - generating stories, scripts and any text-based content that could be utilized in a social media campaign.
@@ -75,6 +75,7 @@ If you want to get started with transformer models, please have a look at the bl
 https://aws.amazon.com/blogs/machine-learning/get-started-with-generative-ai-on-aws-using-amazon-sagemaker-jumpstart/
 
 
+
 ## How to choose the right level of customization
 
 Now you know how transformer architecture works and how it is related to the LLM models on high-level.
@@ -107,7 +108,7 @@ A **prompt** is basically the information you send to the LLM model when interac
 
 A prompt can contain information such as: instruction, input/question, context, examples of output.
 
-I got inspiration from one of my friends that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, [Ref [1]](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains **hallucination** (not factual). However, when deploying more advanced prompt engineering techniques, the model is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so we suggest that always start from the technique that fits you need.
+I got inspiration from one of my friends that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, [Ref [1]](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains **hallucination** (not factual). However, when deploying more advanced prompt engineering techniques, the model is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so we suggest that always start from the technique that fits your need.
 
 Let's look at some popular prompt engineering techniques in a high level.
 
@@ -127,19 +128,19 @@ Here are some tips for few-shot prompting from the paper [In-Context Learning](h
 * Using **demonstrations** (examples) as **labels** (ground-truth).
 * Specify the overall format is crucial, e.g. when label space is unknown, using random English words as labels, is significantly better than using no labels.
 
-Few-shot prompting works well for many tasks but it still has limitations, such as handling complex arithmetic reasoning tasks.
+Few-shot prompting works well for many tasks but it still has limitations, such as handling **complex arithmetic reasoning tasks**.
 
-For this kind of task, we need to ***"teach"*** the model with a ***"problem-solving mind"*** by breaking the problem into steps, and demonstrate to the model with examples on how to solve the problem in a **step-by-step** manner. Here is where **Chain-of-Thought Prompting (CoT)** can help.
+For this kind of task, we need to ***"teach"*** the model with a ***"problem-solving mind"*** by breaking the problem into steps, and demonstrate to the model with examples on how to solve the problem in a ***step-by-step*** manner. Here is where **Chain-of-Thought Prompting (CoT)** can help.
 
 #### 3. Chain-of-Thought Prompting (CoT)
 
-**Chain-of-Thought Prompting** introduces a series of intermediate reasoning steps, which significantly improves the ability of language models to perform complex reasoning. Ref - [CoT](https://arxiv.org/pdf/2201.11903.pdf).
+**Chain-of-Thought Prompting** introduces a series of intermediate reasoning steps, which significantly improves the ability of language models to perform complex reasoning. Refer to [CoT](https://arxiv.org/pdf/2201.11903.pdf).
 
 From the figure below, you can also see that CoT are combined with Zero-shot or Few-shot prompting.
 
 ![CoT](images/CoT.png)
 
-***image source*** - [CoT](https://arxiv.org/pdf/2201.11903.pdf)
+                                                ***image source*** - [CoT](https://arxiv.org/pdf/2201.11903.pdf)
 
 As you can see that applying chain-of-thought prompting requires manual effort, such as construct examples of what to do step-by-step.
 
@@ -147,7 +148,7 @@ An **Automatic CoT** approach is introduced by the researching team [Auto-CoT](h
 
 ![Auto-CoT](images/Auto_CoT.png)
 
-***image source*** - [Auto-CoT](https://arxiv.org/abs/2210.03493)
+   ***image source*** - [Auto-CoT](https://arxiv.org/abs/2210.03493)
 
 To further improve response accuracy, **diversity of sampling** questions matters. This leads us to the **self consistency with CoT (CoT-SC)** approach. 
 
@@ -161,7 +162,7 @@ This is also what self consistency with CoT approach tries to "teach" the model.
 
 ![CoT-SC](images/CoT-SC.png)
 
-***image source*** - [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf)
+   ***image source*** - [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf)
 
 
 #### 5. Tree of Thoughts - (ToT)
@@ -172,7 +173,7 @@ This approach "generalizes over the popular "Chain of Thought" approach to promp
 
 ![ToT](images/ToT.png)
 
-***image source*** - [ToT](https://arxiv.org/pdf/2305.10601.pdf)
+  ***image source*** - [ToT](https://arxiv.org/pdf/2305.10601.pdf)
 
 This approach allows the LLM exploring (searching) diverse options, and self-evaluate each reasoning step based on its current status while actively looking ahead or backtracks. The goal is to make a more global comprehensive decision.
 
@@ -263,7 +264,7 @@ Here comes the Reinforcement Learning with Human Feedback (RLHF) approach.
 
 ![RLHF](images/RLHF.png)
 
-***image source*** - [RLHF](https://arxiv.org/pdf/2203.02155.pdf)
+  ***image source*** - [RLHF](https://arxiv.org/pdf/2203.02155.pdf)
 
 As shown in the figure, this technique contains three parts:
    1. Supervised fine tuning (SFT).
@@ -273,7 +274,7 @@ As shown in the figure, this technique contains three parts:
 Human feedback would be subjective, but what RLHF doing well is to aggregate human preferences at scale.
 One use case of RLHF with LLM is de-toxicity of output. 
 
-### Summary - it is all about Customization & Optimization
+### Summary - it is all about Customization and Optimization
 
 ![Customization-summary](images/GenAI_Customization-summary.png)
 
