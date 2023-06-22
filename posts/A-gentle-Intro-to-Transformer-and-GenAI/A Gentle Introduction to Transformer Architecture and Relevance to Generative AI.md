@@ -70,7 +70,7 @@ A few hyperparameters that relate are to our architecture include:
 * The number of parallel self-attention mechanisms we could use which would better capture diverse patterns in the data, but would require more computational power.
 * The size of the feed-forward neural network.
 
-If you want to get started with transformer models, please have a look at the blog post below entitled: [Getting Started with Generative on AWS](https://aws.amazon.com/blogs/machine-learning/get-started-with-generative-ai-on-aws-using-amazon-sagemaker-jumpstart/)
+If you want to get started with transformer models, please have a look at this blog post  [Getting Started with Generative AI on AWS](https://aws.amazon.com/blogs/machine-learning/get-started-with-generative-ai-on-aws-using-amazon-sagemaker-jumpstart/)
 
 
 
@@ -106,7 +106,7 @@ A **prompt** is basically the information you send to the LLM model when interac
 
 A prompt can contain information such as: instruction, input/question, context, examples of output.
 
-I got inspiration from a friend that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, [Ref [1]](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains **hallucination** (not factual). However, when deploying more advanced prompt engineering techniques, the model is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so start from the technique that fits your need.
+I got inspiration from a friend that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, [Ref [1]](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains **hallucination** (not factual). However, when deploying more advanced prompt engineering techniques, the model is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. Be aware that advanced prompt engineering are also more complex to begin with, so start from the technique that fits your need.
 
 Let's look at some popular prompt engineering techniques in a high level.
 
@@ -134,27 +134,25 @@ For this kind of task, we need to ***"teach"*** the model with a ***"problem-sol
 
 **Chain-of-Thought Prompting** introduces a series of intermediate reasoning steps, which significantly improves the ability of language models to perform complex reasoning. Refer to [CoT](https://arxiv.org/pdf/2201.11903.pdf).
 
-From the figure below, you can also see that CoT are combined with Zero-shot or Few-shot prompting.
+Figure below shows that CoT are combined with Zero-shot or Few-shot prompting.
 
 ![CoT](images/CoT.png)
 
   ***image source*** - [CoT](https://arxiv.org/pdf/2201.11903.pdf)
 
-As you can see that applying chain-of-thought prompting requires manual effort, such as construct examples of what to do step-by-step.
-
-An **Automatic CoT** approach is introduced by the researching team [Auto-CoT](https://arxiv.org/abs/2210.03493), using ***"Let's think step by step"*** prompt in each demonstration example as shown in figure below.
+As you can see that applying chain-of-thought prompting requires manual effort, such as construct examples of what to do step-by-step. To be more efficient, an **Automatic CoT** approach is introduced by the researching team [Auto-CoT](https://arxiv.org/abs/2210.03493), using ***"Let's think step by step"*** prompt in each demonstration example as shown in figure below.
 
 ![Auto-CoT](images/Auto_CoT.png)
 
   ***image source*** - [Auto-CoT](https://arxiv.org/abs/2210.03493)
 
-To further improve response accuracy, **diversity of sampling** questions matters. This leads us to the **self consistency with CoT (CoT-SC)** approach. 
+CoT is doing a great job, but to further improve response accuracy, **diversity of sampling** questions matters. This leads us to the **self consistency with CoT (CoT-SC)** approach. 
 
 #### 4. Self Consistency with CoT (CoT-SC)
 
 Like a human handling complex issues, there normally isn't an one-fit-all solution, we need to taking different context into consideration, and try different options.
 
-This is also what **self consistency with CoT** approach tries to "teach" the model. It aims to "replace the naive greedy decoding used in chain-of-thought prompting". Refer to [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf).
+This is also what **self consistency with CoT** approach tries to ***"teach"*** the model. It aims to "replace the naive greedy decoding used in chain-of-thought prompting". Refer to [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf).
 
 ![CoT-SC](images/CoT-SC.png)
 
@@ -163,7 +161,7 @@ This is also what **self consistency with CoT** approach tries to "teach" the mo
 
 #### 5. Tree of Thoughts - (ToT)
 
-When task complexity increasing even higher, a new approach - **Tree of Thoughts (ToT)** - is proposed by researching team [ToT](https://arxiv.org/pdf/2305.10601.pdf).
+When task's complexity increasing even higher, a new approach - **Tree of Thoughts (ToT)** - is proposed by researching team [ToT](https://arxiv.org/pdf/2305.10601.pdf).
 
 This approach "generalizes over the popular "Chain of Thought" approach to prompting language models, and enables exploration over coherent units of text ("thoughts") that serve as intermediate steps toward problem solving".
 
@@ -190,25 +188,25 @@ Here are some reference use cases of RAG that we suggest you to have a look:
 
 
 #### Summary - Prompt Engineering
-The list of Prompt Engineering techniques are getting longer in a yearly or even monthly pace. How to know which approach fits you best is also an experimentation journey. Here are some tips.
+The list of Prompt Engineering techniques are getting longer in a yearly or even monthly pace. How to know which approach fits you best is also an experimenting journey. Here are some tips.
 
 1. Define your objective, ideathon and understand your specific use cases, define what good output would look like.
 2. Then Working backwards from your specific use case.
-3. If you considering using prompt engineering (over fine tuning approach, which will be covered in the next section), start from the simple before moving the advanced/complex approach.
+3. If you considering using prompt engineering (over fine tuning approach, which will be covered in the next section), start from simple approach.
 
-   If few-shot prompting will achieve your goal, don't bother goes to chain-of-Thought.
+   If few-shot prompting will achieve your goal, don't bother goes to RAG.
 
 4. Be specific on prompt - as clear as possible on
     -  input questions 
     -  context (additional information)
     -  examples (output format)
-    -  and instructions (e.g. step-by-step instruction)
+    -  instructions (e.g. step-by-step instruction)
 
 If you want to update the pre-trained LLM to have your own customized model targeting for specific needs, **Fine Tuning** is where to go.
 
 ### Fine Tuning
 
-We all know that training a LLM is costly and time-consuming. With the exponentially increasing on size of LLMs (in terms of parameters in training), training a new LLM from scratch by each individual organization is challenging and maybe not necessary. Instead, fine-tuning on top of the LLM as the foundation model is way more promising and cost-efficient.
+We all know that training a LLM is costly and time-consuming. With the exponentially increasing on size of LLMs (in terms number of parameters), training a new LLM from scratch by each individual organization is challenging and maybe not necessary. Instead, fine-tuning on top of the LLM as the foundation model is way more promising and cost-efficient.
 
 If you have direct access to LLMs, you have the option to deploy the LLM on your own environment or host them on 3rd party platform (e.g. Amazon SageMaker JumpStart, Amazon Bedrock (preview)) to further fine-tune with your own target data and generate your own model.
 
@@ -222,7 +220,7 @@ Therefore, here we just list some of the popular ones to give you an idea on whe
 
 #### 1. Fine Tuning I, II
 Fine Tuning I is to frozen the parameters of LLM, except the last two layers (output). Therefore, the parameters of the LLM model remain unchanged.
-Fine Tuning II is updating parameters of all layers. Obviously, comparing with Fine Tuning I, Fine Tuning II can result in better performance, but also more expensive.
+Fine Tuning II is updating parameters of all layers. Obviously, comparing with Fine Tuning I, Fine Tuning II can result in better performance, but it is also more expensive.
 
 This is a good reference to understand [Fine Tuning I and II](https://github.com/rasbt/LLM-finetuning-scripts/blob/main/conventional/distilbert-movie-review/2_finetune-last-layers.ipynb).
 
@@ -238,13 +236,13 @@ An example solution: [Instruction fine-tuning for FLAN T5 XL with Amazon SageMak
 #### 3. Parameter-Efficient Fine Tuning (PEFT)
 
 As the models getting larger and larger, fine Tuning on all parameters becomes challenging on consumer hardware.
-Besides, storing and running inference with large fine-tuned model (similar size as the pre-trained LLM) are also expensive.
-This is where **Parameter-Efficient Finetuning (PEFT)** comes in.
+Besides, storing and inferencing with large fine-tuned model (similar size as the pre-trained LLM) are also expensive.
+**Parameter-Efficient Finetuning (PEFT)** can help to address these challenges.
 
 PEFT is running on pre-trained LLM with all/majority of their parameters frozen, while fine tuning a smaller number of extra/unfrozen (***e.g. 1%***) parameters.
-In this way, it significantly reduces the resource consumption during training. And also results in a much **smaller fine-tuned model** of comparable performance with full fine-tuning model. The training and inference with PEFT may allow the model to fit in a single GPU.
+In this way, it significantly reduces the resource consumption during training. And also results in a much **smaller fine-tuned model** of comparable performance with fully fine-tuned model. The training and inference with PEFT may allow the model to fit in a single GPU.
 
-[LoRA](https://arxiv.org/pdf/2106.09685.pdf)(low-rank adaptation) is one of the PEFT techniques. 
+[LoRA](https://arxiv.org/pdf/2106.09685.pdf) (low-rank adaptation) is one of the PEFT techniques. 
 This approach freezes the pre-trained model parameters, and limit trainable parameters of each individual layer of the model (***Transformer architecture***). In this way "it greatly reducing the number of trainable parameters". Hens, reduce the training time.
 
 So benefit of PEFT:
