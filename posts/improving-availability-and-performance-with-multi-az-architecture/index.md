@@ -11,15 +11,10 @@ authorName: Hechmi Khelifi
 date: 2023-06-19
 ---
  
-Using multiple AWS accounts to manage different workloads or business units within an organization is a recommended [AWS best practice](https://aws.amazon.com/blogs/mt/best-practices-for-organizational-units-with-aws-organizations/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=improving-availability-and-performance-with-multi-az-architecture). Using a multi-account strategy helps isolate and manage your resources and data. You can use [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=improving-availability-and-performance-with-multi-az-architecture) and [AWS Control Tower](https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=improving-availability-and-performance-with-multi-az-architecture) to manage your multiple AWS accounts.
+Using multiple Availability Zones (AZs) is crucial for achieving resilience and high availability of your architecture. It enables you to distribute your resources across different physical locations, which helps protect against potential failures, safaguard against single points of failure and improve availability.
 
-With multiple accounts, ensuring the effective use of [Availability Zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=improving-availability-and-performance-with-multi-az-architecture) (AZs) across all the accounts is more challenging than doing it for a single account as we will demonstrate. 
+However, effectively using multiple AZs in a multi-account environment can be complex and challenging. In this article, we will address those complexities and provide some guidelines on how to best use multiple AZs in your multi-account environments.
 
-In this post, we will cover:
-
-- the benefits of using multiple AZs in your architecture,
-- the impacts of ineffective use of multiple AZs, and
-- some guidelines for using multiple AZs in multi-account/multi-VPC environments.
 
 ## Using Multiple AZs in Your Architecture 
 
