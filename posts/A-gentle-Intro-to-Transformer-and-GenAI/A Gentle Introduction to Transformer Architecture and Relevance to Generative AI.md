@@ -1,5 +1,5 @@
 # A Gentle Introduction to Transformer Architecture and Relevance to Generative AI
-**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customizing your interaction with the large language models."
+**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customizing your interaction with the large language models.
 
 **Tags:**
   - Transformer Architecture
@@ -70,20 +70,18 @@ A few hyperparameters that relate are to our architecture include:
 * The number of parallel self-attention mechanisms we could use which would better capture diverse patterns in the data, but would require more computational power.
 * The size of the feed-forward neural network.
 
-If you want to get started with transformer models, please have a look at the blog post below entitled: Getting Started with Generative on AWS:
-
-https://aws.amazon.com/blogs/machine-learning/get-started-with-generative-ai-on-aws-using-amazon-sagemaker-jumpstart/
+If you want to get started with transformer models, please have a look at the blog post below entitled: [Getting Started with Generative on AWS](https://aws.amazon.com/blogs/machine-learning/get-started-with-generative-ai-on-aws-using-amazon-sagemaker-jumpstart/)
 
 
 
 ## How to choose the right level of customization
 
-Now you know how transformer architecture works and how it is related to the LLM models on high-level.
+Now you know how transformer architecture works and how it is related to LLMs on high-level.
 
-You may want to work with the LLM models so to build up your specific Generative AI applications. But there are challenges:
+You may want to work with the LLMs so to build up your specific Generative AI applications. But there are challenges:
 1. LLM models are powerful but also general-purposed. They may not fit good enough to your specific use case.
 2. You may or may not have direct access to the LLM model.
-3. Your organization may have massive amount of domain/industrial knowledge, and you are not sure how to better use these knowledge with GenAI capabilities.
+3. Your organization may have massive amount of domain/industrial data, and you are not sure how to better use these knowledge with GenAI capabilities.
 
 ...
 
@@ -97,7 +95,7 @@ There are many on-going research, and here to share with you some popular techni
 
 ![customization options](images/GenAI_Customization.png)
 
-**Prompt Engineering** helps you improve the response accuracy without touching or updating the underneath LLM. Instead, the model is doing **in-context learning**. Meaning the learning and responses are based on what and how the prompts tell the LLM model.
+**Prompt Engineering** helps you improve the response accuracy without touching or updating the underneath LLM. Instead, the model is doing **in-context learning**. Meaning the learning and responses are based on what and how the prompts tell the model.
 
 On the other hand, **Fine Tuning** is where the pre-trained LLM model is further tuned/updated with extra knowledge, extra parameters, so that a new fine-tuned model is generated.
 
@@ -108,7 +106,7 @@ A **prompt** is basically the information you send to the LLM model when interac
 
 A prompt can contain information such as: instruction, input/question, context, examples of output.
 
-I got inspiration from one of my friends that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, [Ref [1]](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains **hallucination** (not factual). However, when deploying more advanced prompt engineering techniques, the model is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so we suggest that always start from the technique that fits your need.
+I got inspiration from a friend that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, [Ref [1]](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains **hallucination** (not factual). However, when deploying more advanced prompt engineering techniques, the model is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so start from the technique that fits your need.
 
 Let's look at some popular prompt engineering techniques in a high level.
 
@@ -117,7 +115,7 @@ Let's look at some popular prompt engineering techniques in a high level.
 **Zero-shot prompting** is that you don't provide any examples to the LLM model.
 It's like you asking a question to a chatbot, and get an answer.
 It's simple and easy to start, but it may not perform well with accurate/relevant/factual response.
-If zero-shot prompting doesn't work well, consider using few-shot prompting.
+If zero-shot prompting doesn't work well, consider using **few-shot prompting**.
 
 #### 2. Few-shot Prompting
 
@@ -144,7 +142,7 @@ From the figure below, you can also see that CoT are combined with Zero-shot or 
 
 As you can see that applying chain-of-thought prompting requires manual effort, such as construct examples of what to do step-by-step.
 
-An **Automatic CoT** approach is introduced by the researching team [Auto-CoT](https://arxiv.org/abs/2210.03493), using ***"Let's think step by step"*** prompt in each demonstration examples as shown in figure below.
+An **Automatic CoT** approach is introduced by the researching team [Auto-CoT](https://arxiv.org/abs/2210.03493), using ***"Let's think step by step"*** prompt in each demonstration example as shown in figure below.
 
 ![Auto-CoT](images/Auto_CoT.png)
 
@@ -154,11 +152,9 @@ To further improve response accuracy, **diversity of sampling** questions matter
 
 #### 4. Self Consistency with CoT (CoT-SC)
 
-The self consistency with CoT approach is trying to teach the model to solve a problem from different angles.
-
 Like a human handling complex issues, there normally isn't an one-fit-all solution, we need to taking different context into consideration, and try different options.
 
-This is also what self consistency with CoT approach tries to "teach" the model. It aims to "replace the naive greedy decoding used in chain-of-thought prompting". [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf).
+This is also what **self consistency with CoT** approach tries to "teach" the model. It aims to "replace the naive greedy decoding used in chain-of-thought prompting". Refer to [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf).
 
 ![CoT-SC](images/CoT-SC.png)
 
@@ -182,9 +178,9 @@ This approach allows the LLM exploring (searching) diverse options, and self-eva
 
 Some of the general-purpose LLMs are pre-trained to support common tasks such as user query searching, and sentiment analysis.
 
-However, for some complex and knowledge-intensive tasks, the knowledge that already ***"learned"*** by the LLM (in parameters) may not be enough to handle those tasks properly. Hallucination problems may pop-up. In this case, external or domain specific, or more up-to-date knowledge can help to further enrich the model's knowledge.
+However, for some complex and knowledge-intensive tasks, the knowledge that already ***"learned"*** by the LLM (in parameters) may not be enough to handle those tasks properly. Hallucination problems may pop-up. In this case, external, domain specific, or more up-to-date information can help to further enrich the model's knowledge.
 
-Here comes the Retrieval Augmented Generation (RAG) approach. This approach can bring value by combining your organization data with the LLM model capability.
+Retrieval Augmented Generation (RAG) is one of the options. It can bring value by combining your organization data with the LLM model capability.
 
 Here are some reference use cases of RAG that we suggest you to have a look:
 
