@@ -5,6 +5,9 @@ tags:
   - aws
   - winging-it
   - twitch
+  - resilience
+  - chaos-engineering
+  - fault-injection-simulator
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 additionalAuthors: 
