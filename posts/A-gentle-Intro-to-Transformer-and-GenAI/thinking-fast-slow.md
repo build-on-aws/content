@@ -1,1 +1,0 @@
-https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555
