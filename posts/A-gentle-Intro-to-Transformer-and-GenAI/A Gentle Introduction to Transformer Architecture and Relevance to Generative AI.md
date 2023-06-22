@@ -1,5 +1,5 @@
 # A Gentle Introduction to Transformer Architecture and Relevance to Generative AI
-**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance to Customize & Optimize with the LLM."
+**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customization your interaction with the language models."
 
 **Tags:**
   - Transformer Architecture
@@ -18,15 +18,15 @@
 
 Interest in the use of Generative AI has skyrocketed in the past few months.  Many of AWS customers are wanting to learn how they can experiment with the models on the Amazon SageMaker service, particularly in the area of natural language processing.  But what is the secret sauce behind large language models and how do they work?
 
-Let’s introduce you to the transformer architecture  The transformer architecture is a type of neural network architecture that was first proposed in a paper Attention is All You Need - https://arxiv.org/abs/1706.03762.  It is used for a range of common use cases including:
+Let’s introduce you to the transformer architecture  The transformer architecture is a type of neural network architecture that was first proposed in a paper [Attention is All You Need](https://arxiv.org/abs/1706.03762).  It is used for a range of common use cases including:
 
-* Language Translation - translating from one language to another.  A use case here would be helping a non-english speaker interact with a critical government service over the internet.
-* Text Generation - generating stories, scripts and any text-based content that could be utilized in a social media campaign.
-* Sentiment Analysis - determining the sentiment or emotion of a piece of text or speech, to help understand why a customer may not be using a business service or product.
-* Question Answering - generating the most relevant answer, based on input, to help re-enforce the learnings within a large orgnisation as part of a cultural change and/or organisational change initiative.
-* Text Summarisation - providing a concise summary of a long document, to help explain a government policy document on a public-facing website to it’s citizens.
-* Speech Recognitiion - processing of acoustic features of the audio data to translate speech into text, to help hearing-impaired employees in government organisations.
-* Music Production - creating new music, based on original input content, to produce new music that can be weaved into a new film, tv or YouTube video by a professional musician or social media content creator.
+* **Language Translation** - translating from one language to another.  A use case here would be helping a non-english speaker interact with a critical government service over the internet.
+* **Text Generation** - generating stories, scripts and any text-based content that could be utilized in a social media campaign.
+* **Sentiment Analysis** - determining the sentiment or emotion of a piece of text or speech, to help understand why a customer may not be using a business service or product.
+* **Question Answering** - generating the most relevant answer, based on input, to help re-enforce the learnings within a large orgnisation as part of a cultural change and/or organisational change initiative.
+* **Text Summarisation** - providing a concise summary of a long document, to help explain a government policy document on a public-facing website to it’s citizens.
+* **Speech Recognitiion** - processing of acoustic features of the audio data to translate speech into text, to help hearing-impaired employees in government organisations.
+* **Music Production** - creating new music, based on original input content, to produce new music that can be weaved into a new film, tv or YouTube video by a professional musician or social media content creator.
 
 If you’re looking to solve a business problem using one or a combination of the above use cases, then it’s likely that the transformer model is a great place to start.  Let’s uncover the basics of how transformers work, which will lead to a better understanding of how we could use them in a practical context.
 
@@ -56,11 +56,11 @@ Another way of explaining the transformer architecture is to use an analogy.  Le
 
 The transformer architecture is like a communication system that allows these everyone to collaborate effectively:
 
-1. Input Sequence: This consists of conveying the party requirements such as theme, venue, activites, etc.
-2. Encoder: Each person represents a single encoder, and specilises in an aspect of the party planning: decorations, food, music, games, etc.  All the people, and therefore the stack of encoders, represent a party committee.
-3. Self-Attention: Each person pays attention to everyone else’s ideas.  They consider the relevance, importance of each party idea and how the ideas all relate to each other.  This happens as part of a brainstorming and collaboration session.
-4. Decoder: The party committee then take all of the information and ideas, weigh the importance of each idea and determine how to assemble into a party plan.
-5. Output: The output sequence generated by the transformer is the final party plan.
+1. **Input Sequence:** This consists of conveying the party requirements such as theme, venue, activites, etc.
+2. **Encoder:** Each person represents a single encoder, and specilises in an aspect of the party planning: decorations, food, music, games, etc.  All the people, and therefore the stack of encoders, represent a party committee.
+3. **Self-Attention:** Each person pays attention to everyone else’s ideas.  They consider the relevance, importance of each party idea and how the ideas all relate to each other.  This happens as part of a brainstorming and collaboration session.
+4. **Decoder:** The party committee then take all of the information and ideas, weigh the importance of each idea and determine how to assemble into a party plan.
+5. **Output:** The output sequence generated by the transformer is the final party plan.
 
 The reason it’s important to understand the architecture, is that it gives a developer a better appreciation of how to tune the model.  We typically do this using hyperparameters.  You can think of a hyperparameter as a tunable parameter that affects the output of our model.  If we think of a synthesizer keyboard containing an array of dials.  The input signal is the original sound and as we change the dials, so too the sound changes.  The dials are a great analogy of our hyperparamters that we can change during the training process.  This alters the output.  In the analogy this is the sound we are creating.
 
@@ -80,9 +80,10 @@ https://aws.amazon.com/blogs/machine-learning/get-started-with-generative-ai-on-
 Now you know how transformer architecture works and how it is related to the LLM models on high-level.
 
 You may want to work with the LLM models so to build up your specific Generative AI applications. But there are challenges:
-1. LLM models are powerful but also general. They may not fit good enough to your specific use case.
+1. LLM models are powerful but also general-purposed. They may not fit good enough to your specific use case.
 2. You may or may not have direct access to the LLM model.
 3. Your organization may have massive amount of domain/industrial knowledge, and you are not sure how to better use these knowledge with GenAI capabilities.
+
 ...
 
 The list can go on and on, but almost all these challenges are around two focusing areas: **Customization** and **Optimization**.
@@ -91,11 +92,11 @@ The list can go on and on, but almost all these challenges are around two focusi
 
 Customization is about how to interact with the pre-trained LLM models so to fit your specific need.
 
-There are many on-going research, and here to share some popular frameworks/solutions. Hopefully this could give you some guidance and tips as you starting the journey.
+There are many on-going research, and here to share with you some popular techniques. Hopefully this could give you some guidance and tips as you starting the journey.
 
 ![customization options](images/GenAI_Customization.png)
 
-**Prompt Engineering** helps you improve the response accuracy without touching or updating the underneath LLM. Instead, the model is doing in-context learning. Meaning the learning and responses are based on what and how the prompts tell the LLM model.
+**Prompt Engineering** helps you improve the response accuracy without touching or updating the underneath LLM. Instead, the model is doing **in-context learning**. Meaning the learning and responses are based on what and how the prompts tell the LLM model.
 
 On the other hand, **Fine Tuning** is where the pre-trained LLM model is further tuned/updated with extra knowledge, extra parameters, so that a new fine-tuned model is generated.
 
@@ -106,7 +107,7 @@ A **prompt** is basically the information you send to the LLM model when interac
 
 A prompt can contain information such as: instruction, input/question, context, examples of output.
 
-I got inspiration from one of my friends that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, Ref [1]). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains hallucination (not factual). However, when deploying more advanced prompt engineering techniques, the application is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so we suggest that always start from what you need.
+I got inspiration from one of my friends that, doing prompt engineering is like moving from using **System 1** to **System 2** (as referred to the book "***Thinking, Fast and Slow***" by Daniel Kahneman, [Ref [1]](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)). With simple prompt engineering techniques (e.g. ***Zero-shot Prompt***), the response may not be so accurate and even contains **hallucination** (not factual). However, when deploying more advanced prompt engineering techniques, the model is guided to e.g. ***"Let's think step by step"***, which end up with more accurate response. In addition, the advanced prompt engineering techniques also perform better on solving more complex problems, such as ***complex reasoning***, or ***knowledge-intensive tasks***. However advanced prompt engineering are also more complex to begin with, so we suggest that always start from the technique that fits you need.
 
 Let's look at some popular prompt engineering techniques in a high level.
 
@@ -276,7 +277,3 @@ One use case of RLHF with LLM is de-toxicity of output.
 
 ![Customization-summary](images/GenAI_Customization-summary.png)
 
-
-## References
-
-- [Ref [1]- Think, Fast and Slow, Daniel Kahneman](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555)
