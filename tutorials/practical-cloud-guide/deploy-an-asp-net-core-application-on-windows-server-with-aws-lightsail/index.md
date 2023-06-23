@@ -211,7 +211,7 @@ The second part of the script creates an directory for the application. The scri
 
 ```powershell
 # download and unzip the application
-$YourBucketName = "practical-cloud-guide-3"
+$YourBucketName = "practical-cloud-guide"
 $AppKey = "app.zip"
 New-Item -Path 'c:\inet\newsite' -ItemType Directory
 Copy-S3Object -BucketName $YourBucketName -Key $AppKey -LocalFile C:\inet\newsite\$AppKey
