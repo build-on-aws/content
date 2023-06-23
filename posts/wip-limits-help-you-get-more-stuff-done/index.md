@@ -9,6 +9,8 @@ tags:
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-05-16
+images:
+  hero: ./images/wip-imits.jpg
 ---
 
 Kanban has gained popularity as a tool for improving the productivity for software development teams. But many builders implementing it may not understand why we do the practices that Kanban is known for. One key practice that is necessary to achieve Kanban’s benefits is limiting work in process, also known as limiting WIP. 
