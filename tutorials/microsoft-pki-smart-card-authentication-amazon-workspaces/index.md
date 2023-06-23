@@ -10,7 +10,7 @@ tags:
   - active-directory
 authorGithubAlias: austinwebber
 authorName: Austin Webber
-date: 2023-05-22
+date: 2023-06-23
 ---
 
 Amazon WorkSpaces provides customers with the ability to use Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. Amazon WorkSpaces supports the use of smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, your users can login to their WorkSpaces using smart cards and they can use their smart cards in within their WorkSpace session to authenticate to websites or other applications. Pre-session smart card authentication requires an _Active Directory Connector_ connected to _AWS Microsoft Managed AD_ or self-managed AD, Online Certificate Status Protocol (OCSP) for certificate revocation checking, Root CA and smart card certificates with certain requirements, a CAC or PIV smart card, a version of the WorkSpaces client that supports smart card authentication, and a WorkSpace assigned to the user that is using a protocol that supports smart card authentication.
@@ -28,6 +28,16 @@ In this post, we will walk through step-by-step how you can setup and configure 
 * AWS GovCloud (US-West)
 * US East (N. Virginia)
 * US West (Oregon)
+
+| Attributes                |                                   |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | Advanced - 300                         |
+| ⏱ Time to complete  | 45 minutes                             |
+| 💰 Cost to complete | USD 1.01      |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- CAC or PIV card used for smart card authentication  <br> - If you have more than one requirement, add it here using the `<br>` html tag|
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | 2023-06-23                             |
 
 |ToC|
 |---|
