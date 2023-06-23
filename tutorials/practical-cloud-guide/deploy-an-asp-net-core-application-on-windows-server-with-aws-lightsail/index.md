@@ -35,7 +35,7 @@ In this tutorial you will create a Windows Server 2022 instance and deploy a ASP
 
 ## Lightsail Overview
 
-For this task you will deploy an ASP.NET Core application on IIS in Windows Server. The application is simple web application, but requires installing and configuring IIS in addition to deploying it. Let’s begin with a AWS Lightsail overview to familiarize working with this service.
+For this task you will deploy an ASP.NET Core application on IIS in Windows Server. The application is a simple web application, but requires installing and configuring IIS in addition to deploying the application to IIS. Let’s begin with a AWS Lightsail overview to familiarize working with this service.
 
 Open the AWS Console in a browser and use the search bar to find AWS Light Sail.
 
