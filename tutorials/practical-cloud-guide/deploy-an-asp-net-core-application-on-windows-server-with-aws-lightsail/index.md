@@ -154,7 +154,7 @@ Step 1: Add your AWS Credentials
 
 You can use an RDP client or **Use your browser** to log into the Windows server. You will download a deployment Powershell script and the ASP.NET Core application from the S3 bucket. Downloading files from S3 requires your AWS credentials, i.e. the Access Key and the Secret Key.
 
-Open a Powershell terminal from either the Windows menu bar or by searching for Powershell. The Lightsail Windows Server instances include [AWS Tools for Powershell](https://docs.aws.amazon.com/powershell/), which are a set of Window cmdlets for creating and managing AWS resources.  Set your AWS credentials with Powershell.
+Open a Powershell terminal from either the Windows menu bar or by searching for Powershell. The Lightsail Windows Server instances include [AWS Tools for Powershell](https://docs.aws.amazon.com/powershell/?sc_channel=el&sc_campaign=community-aws&sc_content=deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq), which are a set of Windows `cmdlets` for creating and managing AWS resources.  Set your AWS credentials with Powershell.
 
 ```powershell
 $YourAccessKey = "your_access_key"
