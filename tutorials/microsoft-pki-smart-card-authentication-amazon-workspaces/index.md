@@ -63,7 +63,7 @@ The solution I present here involves the following steps:
 
 If you do not already have Microsoft PKI infrastructure setup (e.g. CAs, OCSP responder), this first section is to deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and create an OCSP responder instance. If you already have PKI infrastructure setup including an OCSP responder, please skip to Section 2.
 
-### Step 1. Create Secret in Secrets Manager
+### Step 1. Create a Secret in Secrets Manager
 
 In this step, you store the AD account credentials used for deploying the template in a Secrets Manager secret. Automation uses this secret to create the CA infrastructure in your self-managed AD environment. This user account should be in the Enterprise Admins group.
 
@@ -120,13 +120,13 @@ It should take 20 to 30 minutes for the resources to deploy.
 In this step, you configure AWS security group rules so that your directory domain controllers can connect to the enterprise subordinate CA to request a certificate. To do this, you must add outbound rules to each domain controller’s AWS security group to allow all outbound traffic to the AWS security group of the enterprise subordinate CA so that the directory domain controllers can connect to the enterprise subordinate CA to request a certificate. If you are using **self-managed AD** and your domain controllers are outside of AWS, you can ensure your domain controllers allow the necessary traffic from on-premises to the enterprise subordinate CA instance.
 
 1. In the navigation pane of the _AWS VPC console_, under the **Security** heading, choose **Security Groups**.
-2. Select the AWS security group of your AWS Managed Microsoft AD directory or a different security group if using self-managed AD. When using AWS Managed Microsoft AD, the security group name is formatted like the following: d-1234567890_controllers.
+2. Select the AWS security group of your AWS Managed Microsoft AD directory or a different security group if using self-managed AD. When using AWS Managed Microsoft AD, the security group name is formatted like the following: `d-1234567890_controllers`.
 3. Switch to the **Outbound rules** tab, and choose **Edit outbound rules**.
 4. Choose **Add rule** and then do the following:
    * For **Type**, select **Custom TCP**.
-   * For **Port range**, enter 135.
+   * For **Port range**, enter `135`.
    * For **Destination**, select **Custom** and then enter the private IP assigned to the enterprise CA instance.
-   * Repeat steps a–c but change the **Port range** value for step b to 49152 – 65535.
+   * Repeat steps a–c but change the **Port range** value for step b to `49152 – 65535`.
 5. Choose **Save rules**.
 
 The domain controllers will automatically request a certificate based on the template named **LdapOverSSL-QS** that was created by the Microsoft Public Key Infrastructure on AWS Quick Start deployment. It can take up to 30 minutes for the directory domain controllers to auto-enroll the available certificates.
@@ -136,7 +136,7 @@ The domain controllers will automatically request a certificate based on the tem
 As the CloudFormation template creates and deploys a certificate template named **LdapOverSSL-QS**, ensure your domain controllers have auto-enrollment enabled in order for them to be granted a certificate to be used for authenticating users. Each domain controller that is going to authenticate smart card users **must have** a domain controller certificate. If you are using **AWS Microsoft Managed AD**, you can skip this step.
 
 1. Connect to your MGMT instance with an AD user in the Domain Admins or AWS Delegated Administrators group.
-2. Open PowerShell as Administrator and run the following commands to install the Group Policy Management console if it's not installed and open it:
+2. Open PowerShell as an Administrator and run the following commands to install the Group Policy Management console if it's not installed and open it:
 
 ```powershell
 Install-WindowsFeature GPMC
@@ -144,7 +144,7 @@ gpmc.msc
 ```
 
 1. Create or locate an existing group policy in your domain, right-click it, select **Edit…**
-2. Enable certificate autoenrollment in the policy:
+2. Enable certificate auto-enrollment in the policy:
     * In the Group Policy Management Editor, under **Computer Configuration**, and expand **Policies**.
     * Expand **Windows Settings**, expand **Security Settings**, and select **Public Key Policies.**
     * Double-click **Certificate Services Client – Auto-Enrollment** and set the following settings:  
@@ -269,7 +269,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
 ![Image showing the "Add Services" window and highlighting each entry that has a Service Type of "ldap" that are for the Windows Domain Controllers  ](./images/18-Add-Services-window.png)
     * Choose the **LDAP** service type for each Domain Controller, click **OK** and click **OK** to finish the configuration.
 
-### Section 3: Configure the Certificate Authority to allow certificates to be issued to smart card users
+## Section 3: Configure the Certificate Authority to allow certificates to be issued to smart card users
 
 1. Create a certificate template to allow self-enrollment smart card logon certificates to your users:
     * Connect to your Enterprise CA with an AD user in the Domain Admins or AWS Delegated Administrators group.
@@ -473,7 +473,7 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
 
 1. Certificate validation failed is presented in the WorkSpaces client:  
 ![Image showing the WorkSpaces client returning a "Unable to sign in" "Certification validation failed" error](./images/43-WorkSpaces-client-returning-Unable-to-sign-in.png)
-    * Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused for various reasons including the following:
+    Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused for various reasons including the following:
     * The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to _this_.
     * The Kerberos supported encryption types for your service account and domain controllers do not match. If using self-managed AD, take packet captures on each DC when reproducing the issue and analyze the Kerberos and LDAP traffic from the AD Connector IPs for any errors.
     * OCSP validation is failing. Refer to the previous Section 5 Step 4 to test OCSP validation.
@@ -490,7 +490,7 @@ This indicates that the mutual TLS authentication with AD Connector was successf
 
 3. At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication:  
 ![Image showing the Windows logon page returning a "Signing in with a smart card is not supported for your account error](./images/41-Windows-logon-page-returning-Signing-smart-card-is-not-supported.png)
-    * The above error indicates a Windows OS-level smart card authentication failure. This error and other related errors at this logon screen can be caused due to the following reasons:
+    The above error indicates a Windows OS-level smart card authentication failure. This error and other related errors at this logon screen can be caused due to the following reasons:
     * The domain controller authenticating the user does not have a certificate in the personal store. Review the Event Viewer logs on the WorkSpace.
     * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and confirm it is trusted.
     * The user’s certificate is not configured correctly for Windows smart card authentication.
