@@ -49,7 +49,7 @@ The Lightsail menu displays an option for **Instances**, or Virtual Private Serv
 
 ![Create an instance](./images/PCG-3-lightsail.png)
 
-You can choose the Instance plan. One of the advantages of Lightsail is a fixed monthly cost for a VPS.
+There are multiple instance types to choose from, one of the advantages of Lightsail is a fixed monthly cost for a VPS. For this tutorial, we are going to use the <which size you picked> instance type.
 
 ![Choose an instance plan](./images/PCG-4-lightsail.png)
 
