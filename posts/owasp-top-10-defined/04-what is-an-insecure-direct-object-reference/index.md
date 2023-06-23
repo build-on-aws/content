@@ -4,9 +4,10 @@ description: An insecure direct object reference (IDOR) is another one of the OW
 tags:
   - owasp
   - application-security
+  - security
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
-date: 2022-07-31
+date: 2022-06-23
 ---
 This is a 10-part series:
 
