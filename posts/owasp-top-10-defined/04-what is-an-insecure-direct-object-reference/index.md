@@ -50,11 +50,11 @@ To demonstrate the discovery and exploitation of an IDOR, we'll be using a deplo
 
 After deploying the application, e.g. on an Amazon EC2 instance behind a load balancer, we can create a user, browse the products, and add them to our shopping basket:
 
-![A screenshot of the OWASP Juice Shop home page](images\juice-shop-home.png)
+![A screenshot of the OWASP Juice Shop home page](images/juice-shop-home.png)
 
 Let's click on **Your Basket** in the menu bar. As you can see, my shopping basket is empty:
 
-![A screenshot of my empty basket in OWASP Juice Shop](images\juice-shop-basket.png)
+![A screenshot of my empty basket in OWASP Juice Shop](images/juice-shop-basket.png)
 
 For a regular user, there is nothing special about this page. But an attacker might be aware of the fact that a shopping basket is probably associated with a specific id. Let's do some reconnaissance and see if we can find an id. Looking at the network traffic in the web browser's developer tools, we find an interesting API request: 
 
@@ -71,15 +71,15 @@ Cookie: token=...
 
 This looks like it could contain the id of my basket (`6`), which we will investigate by looking at the response. The API returned a JSON object representing my empty shopping cart. It contains `id: 6`, which corresponds to the id that has been sent to the API. It also contains a user id, some meta data, and an empty list of products:
 
-![A screenshot showing the response sent by the API, containing the data for my own shopping basket](images\developer-tools-response-01.png)
+![A screenshot showing the response sent by the API, containing the data for my own shopping basket](images/developer-tools-response-01.png)
 
 The Firefox Developer Tools allow us to modify and replay the request. Let's try this, by changing the id to `5`:
 
-![A screenshot showing the modified request](images\developer-tools-modify-request.png)
+![A screenshot showing the modified request](images/developer-tools-modify-request.png)
 
 As you can see, the modified request returns a different basket. This time with another user id, which is different to our own, and two items in the product list:
 
-![A screenshot showing the result of the modified request, containing data from a different shopping basket](images\developer-tools-modified-request.png)
+![A screenshot showing the result of the modified request, containing data from a different shopping basket](images/developer-tools-modified-request.png)
 
 This means that we just used the basket API to access another customers' data, including what products they are interested in.
 
