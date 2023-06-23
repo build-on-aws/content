@@ -69,11 +69,11 @@ The solution I present here involves the following steps:
 10. Setup smart card authentication on Linux WorkSpaces (GovCloud only)
 11. Test smart card authentication on Linux WorkSpaces (GovCloud only)
 
-## Section 1: Deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and setup an OCSP responder
+### Section 1: Deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and setup an OCSP responder
 
 If you do not already have Microsoft PKI infrastructure setup (e.g. CAs, OCSP responder), this first section is to deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and create an OCSP responder instance. If you already have PKI infrastructure setup including an OCSP responder, please skip to Section 2.
 
-### Step 1. Create a Secret in Secrets Manager
+#### Step 1. Create a Secret in Secrets Manager
 
 In this step, you store the AD account credentials used for deploying the template in a Secrets Manager secret. Automation uses this secret to create the CA infrastructure in your self-managed AD environment. This user account should be in the Enterprise Admins group.
 
@@ -89,7 +89,7 @@ In this step, you store the AD account credentials used for deploying the templa
 5. Review the settings, and then choose **Store** to save your changes. The Secrets Manager console returns you to the list of secrets in your account with your new secret included in the list.
 6. Choose your newly created secret from the list, and take note of the **Secret ARN** value. You will need it in the next section.
 
-### Step 2: Deploy the Microsoft Public Key Infrastructure Quick Start template
+#### Step 2: Deploy the Microsoft Public Key Infrastructure Quick Start template
 
 In this step, you deploy an offline root CA and an enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start. Because you use a Quick Start template for this deployment, you only need to enter the following information—you can change the default values for any fields not explicitly mentioned here.
 
@@ -125,7 +125,7 @@ To deploy the CAs with the Microsoft Public Key Infrastructure Quick Start
 ![A prompt showing that you need to acknowledge additional capability before deploying the CloudFormation stack](./images/02-additional-capability-before-deploying-cloudformation-stack.png)
 It should take 20 to 30 minutes for the resources to deploy.
 
-### Step 3: Allow the domain controllers to communicate with the Enterprise CA
+#### Step 3: Allow the domain controllers to communicate with the Enterprise CA
 
 In this step, you configure AWS security group rules so that your directory domain controllers can connect to the enterprise subordinate CA to request a certificate. To do this, you must add outbound rules to each domain controller’s AWS security group to allow all outbound traffic to the AWS security group of the enterprise subordinate CA so that the directory domain controllers can connect to the enterprise subordinate CA to request a certificate. If you are using **self-managed AD** and your domain controllers are outside of AWS, you can ensure your domain controllers allow the necessary traffic from on-premises to the enterprise subordinate CA instance.
 
@@ -144,7 +144,7 @@ In this step, you configure AWS security group rules so that your directory doma
 
 The domain controllers will automatically request a certificate based on the template named **LdapOverSSL-QS** that was created by the Microsoft Public Key Infrastructure on AWS Quick Start deployment. It can take up to 30 minutes for the directory domain controllers to auto-enroll the available certificates.
 
-### Step 4: Setup domain controller auto-enrollment for certificates
+#### Step 4: Setup domain controller auto-enrollment for certificates
 
 As the CloudFormation template creates and deploys a certificate template named **LdapOverSSL-QS**, ensure your domain controllers have auto-enrollment enabled in order for them to be granted a certificate to be used for authenticating users. Each domain controller that is going to authenticate smart card users **must have** a domain controller certificate. If you are using **AWS Microsoft Managed AD**, you can skip this step.
 
@@ -164,7 +164,7 @@ gpmc.msc
 ![Image showing the configuration that you need to enable in Auto-Enrollment for the Certificates Service Client. Enable "Renew expired certificates..." and "Update Certificates that use certificate templates"](./images/03-auto-enrollment--certificates-service-client.png)
     * After applying the setting, close out of Group Policy Management Editor.
 
-### Step 5: Confirm the domain controllers contain required certificates
+#### Step 5: Confirm the domain controllers contain required certificates
 
 Ensure the domain controllers have a certificate in their Personal store from the certificate template **LdapOverSSL-QS**. Each domain controller that is going to authenticate smart card users **must have** a domain controller certificate.
 
@@ -176,7 +176,7 @@ Review the certificate store on each domain controller to ensure they receive a 
 ![Image showing the Personal certificate store on a domain controller, which shows an existing certificate in its certificate store](./images/04-personal-certificate-store.png)
 4. Repeat the above steps for the remaining domain controllers.
 
-### Step 6: Deploy an EC2 Windows instance and configure it as an OCSP responder instance
+#### Step 6: Deploy an EC2 Windows instance and configure it as an OCSP responder instance
 
 For pre-session authentication into WorkSpaces, Online Certificate Status Protocol (OCSP) is required for certificate revocation checking. An OCSP responder is a component of a public key infrastructure (PKI) that can be installed on Windows Server to meet this requirement. The OCSP responder is required to be publicly accessible on the internet over HTTP. In this blog post, we are only setting up one OCSP responder, which we will refer to as the OCSP instance. If you’d like to make the OCSP responder highly available, you can do so by setting up _multiple OCSP responders in an Array_.
 
@@ -248,7 +248,7 @@ For pre-session authentication into WorkSpaces, Online Certificate Status Protoc
     * The results should look similar to the following:  
 ![Image showing sample output of the tnc command against an OCSP URL](./images/16-sample-output-tnc-command-against-OCSP-URL.png)
 
-## Section 2: Create objects in Active Directory with necessary permissions
+### Section 2: Create objects in Active Directory with necessary permissions
 
 In this step, we will configure AD objects in your environment to prepare for smart card authentication and setup Kerberos Constrained Delegation on your AD Connector service account.
 
@@ -286,7 +286,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
 ![Image showing the "Add Services" window and highlighting each entry that has a Service Type of "ldap" that are for the Windows Domain Controllers  ](./images/18-Add-Services-window.png)
     * Choose the **LDAP** service type for each Domain Controller, click **OK** and click **OK** to finish the configuration.
 
-## Section 3: Configure the Certificate Authority to allow certificates to be issued to smart card users
+### Section 3: Configure the Certificate Authority to allow certificates to be issued to smart card users
 
 1. Create a certificate template to allow self-enrollment smart card logon certificates to your users:
     * Connect to your Enterprise CA with an AD user in the Domain Admins or AWS Delegated Administrators group.
@@ -307,7 +307,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
     * Right-click **Certificate Templates**, hover over **New**, select **Certificate Template to Issue**.
     * Select the certificate template you just created, select **OK**.
 
-## Section 4: Request a certificate for your test smart card user
+### Section 4: Request a certificate for your test smart card user
 
 In this section, we will login as the smart card user, confirm the smart card is functioning, request a certificate used for smart card authentication, and load the certificate onto the smart card. Some smart cards may require specific drivers to be installed in order for the smart card to function in Windows.
 
@@ -332,7 +332,7 @@ In this section, we will login as the smart card user, confirm the smart card is
         * If you are not prompted to enter your PIN during this process, please ensure your certificate template is setup correctly and that your smart card is functioning.
         * Smart cards can have multiple digital slots. Please ensure your certificate is loaded into the authentication slot in order for Windows smart card authentication to succeed.
 
-## Section 5: Verify the smart card is working with its certificate properly and test that the certificate can be verified with OCSP
+### Section 5: Verify the smart card is working with its certificate properly and test that the certificate can be verified with OCSP
 
 1. Verify the smart card is working with its certificate properly:
     * Open **certmgr.msc** while logged in as your test smart card user on a computer with the smart card inserted.
@@ -352,7 +352,7 @@ In this section, we will login as the smart card user, confirm the smart card is
 ![Image showing a successful retrieval in the "URL Retrieval Tool" with an entry showing the status "Verified"](./images/28-URL-Retrieval-Tool-with-an-entry-showing-the-status-Verified.png)
     **Note:** If the above fails after 15 seconds or returns unsuccessful, it's likely that you do not have your CA certificates installed in the local computer store that is completing this test or your OCSP responder is not configured correctly.
 
-## Section 6: Register AD Connector with WorkSpaces, create a test Windows WSP WorkSpace, import the WSP GPO template, and enable smart card redirection on WorkSpaces
+### Section 6: Register AD Connector with WorkSpaces, create a test Windows WSP WorkSpace, import the WSP GPO template, and enable smart card redirection on WorkSpaces
 
 In this section, we will register your AD Connector with WorkSpaces, create a test Windows WSP WorkSpace, import the WSP GPO template, and enable smart card direction via Group Policy.
 
@@ -388,7 +388,7 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
     * Close out of Group Policy Management Editor once it has been enabled.
     * Once deployed, reboot the test WorkSpace to update the group policy applied to the WorkSpace.
 
-## Section 7: Configure the AD Connector to use smart card authentication
+### Section 7: Configure the AD Connector to use smart card authentication
 
 1. Export all of your CA certificates used in your certificate chain in Base-64 encoded format:
     * Connect to your MGMT instance as your test smart card user.
@@ -415,7 +415,7 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
     * Repeat the above steps again for each certificate in your certificate chain that you exported.
     * After all of the certificates have been registered, select **Enable** under **Smart Card authentication**, and select **Enable**, which will enable smart card authentication for the entire AD Connector.
 
-## Section 8: Test pre-session smart card authentication on Windows WorkSpaces
+### Section 8: Test pre-session smart card authentication on Windows WorkSpaces
 
 Use the WorkSpaces client to test smart card authentication:
 
@@ -435,7 +435,7 @@ Use the WorkSpaces client to test smart card authentication:
 
 This completes pre-session smart card authentication with Windows WorkSpaces.
 
-## Section 9: Test in-session smart card authentication on Windows WorkSpaces
+### Section 9: Test in-session smart card authentication on Windows WorkSpaces
 
 Within a WorkSpaces session, test in-session smart card authentication:
 
@@ -446,7 +446,7 @@ Within a WorkSpaces session, test in-session smart card authentication:
 
 This completes in-session smart card authentication with Windows WorkSpaces.
 
-## Section 10: Setup smart card authentication on Linux WorkSpaces (GovCloud only)
+### Section 10: Setup smart card authentication on Linux WorkSpaces (GovCloud only)
 
 Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WSP protocol in the us-gov-west-1 region. To set this up, you will need to create a custom image that contains the certificates in your certificate chain.
 
@@ -483,7 +483,7 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
 9. Create a bundle from the image once the image is finished creating.
 10. Launch a WorkSpace for your test smart card user from your custom bundle.
 
-## Section 11: Test smart card authentication on Linux WorkSpaces (GovCloud only)
+### Section 11: Test smart card authentication on Linux WorkSpaces (GovCloud only)
 
 Use the WorkSpaces client to test smart card authentication:
 
