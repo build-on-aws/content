@@ -6,7 +6,7 @@ tags:
   - application-security
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
-date: 08.31.2023
+date: 2022-07-31
 ---
 This is a 10-part series:
 
