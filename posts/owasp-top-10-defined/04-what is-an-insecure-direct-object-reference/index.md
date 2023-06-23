@@ -35,7 +35,7 @@ In essence, IDOR vulnerabilities highlight the importance of properly securing o
 
 ## Impact
 
-The impact of an IDOR attack can be ...
+The impact of an IDOR attack can be:
 - Unauthorized information disclosure
 - Modification or destruction of data
 - Performing a function outside the limits of the user, potentially including privilege escalation like in our example above.
