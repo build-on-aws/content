@@ -207,7 +207,7 @@ net stop was /y
 net start w3svc
 ```
 
-The second part of the script creates an directory for the application. The script downloads app.zip from the S3 bucket created earlier and unzips it on the directory.
+The second part of the script creates an directory for the application. The script downloads `app.zip` from the S3 bucket created earlier and unzips it on the directory.
 
 ```powershell
 # download and unzip the application
