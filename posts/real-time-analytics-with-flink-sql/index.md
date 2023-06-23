@@ -230,7 +230,7 @@ You are now successfully sending data to the Kinesis Data Stream you created ear
 
 Note the `Ingestion_to_KDS` will send data to Kinesis Data Stream for approx 30 minutes. You may need to periodically rerun the notebook to sample data sent to Kinesis Data Stream. If you are working on the subsequent notebook and do not see any results check that your *note* is still running and does not need to be restarted.
 
-*[Here](../../code/snippets/real-time-analytics-with-flink-sql/Ingestion_to_KDS.zpln) is the Zeppelin note that contains the ingestion of data to KDS.*
+*[Here](https://github.com/build-on-aws/content/tree/main/code/snippets/real-time-analytics-with-flink-sql/Ingestion_to_KDS.zpln) is the Zeppelin note that contains the ingestion of data to KDS.*
 
 #### Analyze data in KDS with SQL via KDA Studio Notebooks
 
@@ -304,7 +304,7 @@ GROUP BY TUMBLE(trips.tpep_dropoff_datetime, INTERVAL '60' MINUTE)
 
 ![Number of trips that occurred in Manhattan every hour](images/Q2_output.png)
 
-*[Here](../../code/snippets/real-time-analytics-with-flink-sql/Analytics.zpln) is the Zeppelin note that contains the analytics queries.*
+*[Here](https://github.com/build-on-aws/content/tree/main/code/snippets/real-time-analytics-with-flink-sql/Analytics.zpln) is the Zeppelin note that contains the analytics queries.*
 
 #### Write the query result to S3
 
@@ -355,7 +355,7 @@ To build and deploy the KDA Studio notebooks you need to follow the below steps:
 8. To start the application, first select it and then click on Run
 9. Now your KDA Studio Notebook is deployed as a KDA application
 
-*[Here](../../code/snippets/real-time-analytics-with-flink-sql/Deployment.zpln) is the Zeppelin note that is used for deployment.*
+*[Here](https://github.com/build-on-aws/content/tree/main/code/snippets/real-time-analytics-with-flink-sql/Deployment.zpln) is the Zeppelin note that is used for deployment.*
 
 ### Clean up the data
 
