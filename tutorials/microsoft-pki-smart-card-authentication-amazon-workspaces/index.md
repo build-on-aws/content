@@ -205,12 +205,14 @@ For pre-session authentication into WorkSpaces, Online Certificate Status Protoc
 10. Connect to your OCSP instance and install the OCSP responder:
     * Connect to your OCSP instance with an AD user in the Domain Admins or AWS Delegated Administrators group.
     * Open PowerShell as Administrator and run the following commands to install the OCSP responder:  
+
       ```powershell
       Import-Module ServerManager
       Add-WindowsFeature Adcs-Online-Cert
       Install-AdcsOnlineResponder
       Install-WindowsFeature RSAT-Online-Responder
       ```
+
 11. Configure OCSP after installation:
     * Open **ocsp.msc**, right-click **Revocation Configuration**, select **Add Revocation Configuration**.
     * Select **Next**, enter a name (e.g. OCSP), select **Next**, select **Select a certificate for an Existing enterprise CA**, select **Next**.  
@@ -243,6 +245,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
 1. Install RSAT (Remote Server Administration Tools) on the MGMT instance and create AD objects:
     * Connect to your MGMT EC2 instance with an AD user in the Domain Admins or AWS Delegated Administrators group.
     * Once connected, open PowerShell as Administrator and run the following command. When prompted, enter the desired password for the test smart card user and hit enter. This command will create an AD user for your test smart card user and an AD group for the smart card users.  
+
    ```powershell
    $SmartCardTestUser = "**testuser**"
    $SmartCardUsersGroup = "**Smartcard Users**"
@@ -257,6 +260,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
 
 2. Use the SetSpn command to set a Service Principal Name (SPN) for your existing AD Connector service account to enable the service account for delegation configuration:
     * Open PowerShell and run the following commands (adjust the variables to specify your service account and any unique SPN):  
+
    ```powershell
    $ServiceAccount = "**ADConnectorSvc**"
    $UniqueSPNName = "**my/spn**"
@@ -356,7 +360,8 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
     * Connect to your test user’s WorkSpace via RDP (it must be in a running state) with an AD user in the Domain Admins or AWS Delegated Administrators group.
     * Open the Start Menu, search for **PowerShell** and open it.
     * Run all of the following commands in the PowerShell window to copy the WSP GPO template to the SYSVOL folder:  
-   ```powershell
+
+    ```powershell
    $DomainName = ("$env:USERDNSDomain".ToLower())
    New-Item \\$DomainName\SYSVOL\$DomainName\Policies\PolicyDefinitions -ItemType "Directory"
    New-Item \\$DomainName\SYSVOL\$DomainName\Policies\PolicyDefinitions\en-US -ItemType "Directory"
@@ -402,19 +407,20 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
 
 ## Section 8: Test pre-session smart card authentication on Windows WorkSpaces
 
-1. Use the WorkSpaces client to test smart card authentication:
-    * Download the latest _WorkSpaces client_ and open the client.
-    * Enter your registration code for your directory when prompted
-    * Select **Insert your smart card**, and
-    * Select your user’s certificate when prompted.  
+Use the WorkSpaces client to test smart card authentication:
+
+* Download the latest _WorkSpaces client_ and open the client.
+* Enter your registration code for your directory when prompted
+* Select **Insert your smart card**, and
+* Select your user’s certificate when prompted.  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to select a certificate for authentication](./images/34-WorkSpaces-Client-with-Certificate-Dialog.png)
 
-    * Enter the smart card pin when prompted:  
+* Enter the smart card pin when prompted:  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to enter their authentication PIN](./images/35-WorkSpaces-Client-with-Certificate-Dialog-prompt.png)
 
-    * This completes the TLS mutual authentication with AD Connector login phase.
-    * Next, you will be presented with the Windows logon page.
-    * Select **Sign-in options**, select the smart card icon, and enter your smart card PIN:  
+* This completes the TLS mutual authentication with AD Connector login phase.
+* Next, you will be presented with the Windows logon page.
+* Select **Sign-in options**, select the smart card icon, and enter your smart card PIN:  
 ![Image showing the WorkSpaces Client at the Windows logon screen where the user enters their smart card PIN again](./images/36-WorkSpaces-Client-Windows-logon-screen.png)
 
 This completes pre-session smart card authentication with Windows WorkSpaces.
@@ -422,8 +428,9 @@ This completes pre-session smart card authentication with Windows WorkSpaces.
 ## Section 9: Test in-session smart card authentication on Windows WorkSpaces
 
 Within a WorkSpaces session, test in-session smart card authentication:
-    1. Connect to the WorkSpace.
-    2. RDP into an EC2 instance or computer using your smart card and enter your PIN when prompted.  
+
+* Connect to the WorkSpace.
+* RDP into an EC2 instance or computer using your smart card and enter your PIN when prompted.  
 ![Image showing a Microsoft Remote Desktop Connection window connecting to a sample computer "ENTCA1"](./images/37-Microsoft-Remote-Desktop-Connection.png)  
 ![Image: Image showing a Windows Security prompt requesting a smart card PIN to be entered](./images/38-Windows-Security-prompt-requesting-smart-card-PIN.png)
 
@@ -441,18 +448,21 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
     * Adjust the security group attached to your WorkSpaces to _allow SSH from desired IPs._
 4. From a Windows computer in your AD environment, export ALL of the certificates in your certificate chain in DER format (not including the user certificate). You can do this using **certmgr.msc** from any AD-joined Windows computer in your environment.
 5. Use PowerShell from one of your Windows computers in your AD environment (e.g. MGMT instance) to copy the certificates onto the WorkSpace using SCP:  
+
    ```powershell
    scp C:\Users\**Administrator**\Desktop\**root.cer example\testuser**@**workspace-ip-address**:~/
    scp C:\Users\**Administrator**\Desktop\**int.cer example\testuser**@**workspace-ip-address**:~/
    ```
 
 6. Once the certificates are copied to the WorkSpace, convert each of your certificates into PEM format using Terminal:  
+
    ```powershell
    openssl x509 -inform der -in ~**/root.cer** -out **/tmp/root.pem**
    openssl x509 -inform der -in ~**/int.cer** -out **/tmp/int.pem**
    ```
 
 7. Prepare the WorkSpace for smart card authentication by running the following commands to enable smart card authentication by referring each certificate in the certificate chain:  
+
    ```powershell
    sudo su
    cd /usr/lib/skylight/
@@ -465,17 +475,21 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
 
 ## Section 11: Test smart card authentication on Linux WorkSpaces (GovCloud only)
 
-1. Use the WorkSpaces client to test smart card authentication:
-    * Open the WorkSpaces client.
-    * Enter your registration code for your directory, if prompted
-    * Select **Insert your smart card**, and select your user’s certificate when prompted.  
+Use the WorkSpaces client to test smart card authentication:
+
+* Open the WorkSpaces client.
+* Enter your registration code for your directory, if prompted
+* Select **Insert your smart card**, and select your user’s certificate when prompted.  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to select a certificate for authentication](./images/34-WorkSpaces-Client-with-Certificate-Dialog.png)
-    * Enter the smart card pin when prompted:  
+
+* Enter the smart card pin when prompted:  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to enter their authentication PIN](./images/35-WorkSpaces-Client-with-Certificate-Dialog-prompt.png)
-    * This completes the TLS mutual authentication with AD Connector login phase.
-    * Enter your PIN at the logon page.  
+
+* This completes the TLS mutual authentication with AD Connector login phase.
+* Enter your PIN at the logon page.  
 ![Image showing the WorkSpaces Client at the Linux logon page requesting the user to enter their smart card PIN again](./images/39-WorkSpaces-Client-at-the-Linux-logon-page.png)
-    * This completes pre-session smart card authentication with Linux WorkSpaces.
+
+* This completes pre-session smart card authentication with Linux WorkSpaces.
 
 ## Troubleshooting
 
