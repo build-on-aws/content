@@ -52,7 +52,7 @@ The solution I present here involves the following steps:
 3. Configure the Certificate Authority to allow certificates to be issued to smart card users
 4. Request a certificate for your individual smart card user
 5. Verify the smart card is working with its certificate properly and test that the certificate can be verified with OCSP
-6. Register AD Connector with WorkSpaces, create a test Windows WorkSpace using WSP, import the WSP GPO template, and enable smart card redirection on WorkSpaces
+6. Register AD Connector with WorkSpaces, create a test Windows WorkSpace using WorkSpaces Streaming Protocol (WSP), import the WSP GPO template, and enable smart card redirection on WorkSpaces
 7. Configure the AD Connector to use smart card authentication
 8. Test pre-session smart card authentication on Windows WorkSpaces
 9. Test in-session smart card authentication on Windows WorkSpaces
@@ -97,8 +97,8 @@ To deploy the CAs with the Microsoft Public Key Infrastructure Quick Start
     4. For **Domain Members Security Group ID**, select an existing security group that allows communication with the self-managed AD directory.
     5. For **Key Pair Name**, select an EC2 key pair in your account.
     6. For **Active Directory Domain Services Type**, select **SelfManaged** or **AWSManaged** (dependent on your AD environment).
-    7. For **Domain FQDN DNS Name**, enter the DNS name of the AD domain. In this example, I use corp.example.com.
-    8. For **Domain NetBIOS Name**, enter the NetBIOS name of the AD domain. In this example, I use CORP.
+    7. For **Domain FQDN DNS Name**, enter the DNS name of the AD domain. In this example, I use `corp.example.com`.
+    8. For **Domain NetBIOS Name**, enter the NetBIOS name of the AD domain. In this example, I use `CORP`.
     9. For **IP used for DNS (Must be accessible)**, enter the IP address of one of the AD domain controllers.
     10. For **IP used for DNS (Must be accessible)**, enter the IP address of the other AD domain controller.
     11. For **Secret ARN Containing CA Install Credentials**, enter the Secrets Manager secret ARN created in **Step 1: Create Secret in Secrets**.
@@ -126,8 +126,11 @@ In this step, you configure AWS security group rules so that your directory doma
    * For **Type**, select **Custom TCP**.
    * For **Port range**, enter `135`.
    * For **Destination**, select **Custom** and then enter the private IP assigned to the enterprise CA instance.
-   * Repeat steps a–c but change the **Port range** value for step b to `49152 – 65535`.
-5. Choose **Save rules**.
+5. Add another rule:
+   * For **Type**, select **Custom TCP**.
+   * For **Port range**, enter `49152 - 65535`.
+   * For **Destination**, select **Custom** and then enter the private IP assigned to the enterprise CA instance.
+6. Choose **Save rules**.
 
 The domain controllers will automatically request a certificate based on the template named **LdapOverSSL-QS** that was created by the Microsoft Public Key Infrastructure on AWS Quick Start deployment. It can take up to 30 minutes for the directory domain controllers to auto-enroll the available certificates.
 
@@ -295,7 +298,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
 In this section, we will login as the smart card user, confirm the smart card is functioning, request a certificate used for smart card authentication, and load the certificate onto the smart card. Some smart cards may require specific drivers to be installed in order for the smart card to function in Windows.
 
 1. Confirm the smart card is functioning in Windows,
-    * Open PowerShell, run the following command, and enter your PIN when prompted: `certutil -scinfo`
+    * Open PowerShell, run the command `certutil -scinfo`, and enter your PIN when prompted.
     * The smart card should report as available for use and no errors should be reported.  
 ![Image showing a successful sample output of the "certutil -scinfo" command](./images/22-successful-sample-output-certutil-scinfo-command.png)
     **Note**: Some smart cards may require minidrivers to be installed. Please refer to the guidance from the manufacturer of the smart card to configure it for use in Windows.
@@ -306,13 +309,14 @@ In this section, we will login as the smart card user, confirm the smart card is
     * Right-click **Personal**, select **All Tasks**, select **Request New Certificate…**
     * Select **Next**, select **Next**, check the box next to your certificate template (e.g. SmartcardWS), select **Enroll**:  
 ![Image showing the "Request Certificates" window and selecting the "SmartcardWS" template created earlier](./images/23-Request-Certificates-window-selecting-SmartcardWS-template.png)
-    **Note:** If you do not see the certificate template, ensure your user has enroll permissions on the certificate template. If the computer does not have the CA certificates installed, the certificate template may not be presented. Complete a group policy update to install the certificates.
+        **Note:** If you do not see the certificate template, ensure your user has enroll permissions on the certificate template. If the computer does not have the CA certificates installed, the certificate template may not be presented. Complete a group policy update to install the certificates.
     * When prompted, enter in your smart card PIN and complete the certificate request:  
 ![Image showing a prompt to enter the authentication PIN for the smart card when enrolling a certificate on the smart card](./images/24-prompt-enter-authentication-PIN-the-smart-card.png)
     * The certificate request should succeed:  
 ![Image showing the successful request of a certificate and successful installation of the certificate onto the smart card](./images/25-successful-request-certificate-successful-installation-certificate-onto-the-smart-card.png)
-    **Note:** If you are not prompted to enter your PIN during this process, please ensure your certificate template is setup correctly and that your smart card is functioning.
-    **Note:** Smart cards can have multiple digital slots. Please ensure your certificate is loaded into the authentication slot in order for Windows smart card authentication to succeed.
+    **Note:**
+        * If you are not prompted to enter your PIN during this process, please ensure your certificate template is setup correctly and that your smart card is functioning.
+        * Smart cards can have multiple digital slots. Please ensure your certificate is loaded into the authentication slot in order for Windows smart card authentication to succeed.
 
 ## Section 5: Verify the smart card is working with its certificate properly and test that the certificate can be verified with OCSP
 
@@ -321,8 +325,7 @@ In this section, we will login as the smart card user, confirm the smart card is
     * Expand **Personal**, select **Certificates** folder, and confirm if you see a certificate appear that is signed by your CA’s certs.  
 ![Image showing the Personal certificate store of a sample smart card user. It has the certificate we requested, in its certificate store](./images/26-Personal-certificate-store.png)
     * If the certificate appears, delete the certificate (ensure you delete the correct one), and unplug your smart card.
-    * If the certificate doesn't appear, unplug your smart card.
-    * Plug the smart card back in, click the refresh button in MMC, and the certificate should appear (it may take some time and multiple refreshes).
+    * If the certificate doesn't appear, unplug your smart card. Plug the smart card back in, click the refresh button in MMC, and the certificate should appear (it may take some time and multiple refreshes).
     * This confirms that the smart card is functioning as expected.
 
 2. Test that the certificate can be verified with OCSP:
@@ -340,7 +343,7 @@ In this section, we will login as the smart card user, confirm the smart card is
 In this section, we will register your AD Connector with WorkSpaces, create a test Windows WSP WorkSpace, import the WSP GPO template, and enable smart card direction via Group Policy.
 
 1. [Register your AD Connector](https://docs.aws.amazon.com/workspaces/latest/adminguide/register-deregister-directory.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) with WorkSpaces:
-    *Open the [WorkSpaces console](https://console.aws.amazon.com/workspaces/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq), and choose **Directories** in the navigation pane.
+    * Open the [WorkSpaces console](https://console.aws.amazon.com/workspaces/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq), and choose **Directories** in the navigation pane.
     * Select your AD Connector, choose **Actions**, select **Register**.
     * Select two subnets of your VPC that are not in the same Availability Zone. These subnets will be used to launch your WorkSpaces.
     * Choose **Register**.
@@ -392,6 +395,7 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
     * Select **Choose file**, choose the certificate exported from previous step.
     * For **OCSP responder URL**, enter your OCSP responder URL.  
 ![Image showing the "Register a certificate" dialog in AWS console where a sample exported root certificate was uploaded and a OCSP responder URL was added](./images/33-Register-a-certificate.png)
+
     * Select **Register certificate**.
     * Repeat the above steps again for each certificate in your certificate chain that you exported.
     * After all of the certificates have been registered, select **Enable** under **Smart Card authentication**, and select **Enable**, which will enable smart card authentication for the entire AD Connector.
@@ -399,34 +403,38 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
 ## Section 8: Test pre-session smart card authentication on Windows WorkSpaces
 
 1. Use the WorkSpaces client to test smart card authentication:
-    * Download the latest _WorkSpaces** client_ and open the client.
+    * Download the latest _WorkSpaces client_ and open the client.
     * Enter your registration code for your directory when prompted
     * Select **Insert your smart card**, and
-    * select your user’s certificate when prompted.  
+    * Select your user’s certificate when prompted.  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to select a certificate for authentication](./images/34-WorkSpaces-Client-with-Certificate-Dialog.png)
-    Enter the smart card pin when prompted:  
+
+    * Enter the smart card pin when prompted:  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to enter their authentication PIN](./images/35-WorkSpaces-Client-with-Certificate-Dialog-prompt.png)
+
     * This completes the TLS mutual authentication with AD Connector login phase.
     * Next, you will be presented with the Windows logon page.
     * Select **Sign-in options**, select the smart card icon, and enter your smart card PIN:  
 ![Image showing the WorkSpaces Client at the Windows logon screen where the user enters their smart card PIN again](./images/36-WorkSpaces-Client-Windows-logon-screen.png)
-    * This completes pre-session smart card authentication with Windows WorkSpaces.
 
-## Section  9: Test in-session smart card authentication on Windows WorkSpaces
+This completes pre-session smart card authentication with Windows WorkSpaces.
 
-1. Within a WorkSpaces session, test in-session smart card authentication:
-    * Connect to the WorkSpace.
-    * RDP into an EC2 instance or computer using your smart card and enter your PIN when prompted.  
+## Section 9: Test in-session smart card authentication on Windows WorkSpaces
+
+Within a WorkSpaces session, test in-session smart card authentication:
+    1. Connect to the WorkSpace.
+    2. RDP into an EC2 instance or computer using your smart card and enter your PIN when prompted.  
 ![Image showing a Microsoft Remote Desktop Connection window connecting to a sample computer "ENTCA1"](./images/37-Microsoft-Remote-Desktop-Connection.png)  
 ![Image: Image showing a Windows Security prompt requesting a smart card PIN to be entered](./images/38-Windows-Security-prompt-requesting-smart-card-PIN.png)
-    * This completes in-session smart card authentication with Windows WorkSpaces.
+
+This completes in-session smart card authentication with Windows WorkSpaces.
 
 ## Section 10: Setup smart card authentication on Linux WorkSpaces (GovCloud only)
 
 Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WSP protocol in the us-gov-west-1 region. To set this up, you will need to create a custom image that contains the certificates in your certificate chain.
 
 1. Create a temporary Linux WSP WorkSpace:
-    * _Launch a WSP **WorkSpace_ for your test user and wait for it to become available.
+    * _Launch a WSP WorkSpace_ for your test user and wait for it to become available.
 2. Connect to the WorkSpace using the client (requires smart card authentication being disabled on your AD Connector for this part).
 3. Configure the WorkSpace to allow users in a specific AD group of your choosing to SSH into the WorkSpaces:
     * Follow the steps to _Grant SSH access to Amazon Linux **WorkSpaces** administrators_.
@@ -459,7 +467,7 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
 
 1. Use the WorkSpaces client to test smart card authentication:
     * Open the WorkSpaces client.
-    * Enter your registration code for your directory if prompted
+    * Enter your registration code for your directory, if prompted
     * Select **Insert your smart card**, and select your user’s certificate when prompted.  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to select a certificate for authentication](./images/34-WorkSpaces-Client-with-Certificate-Dialog.png)
     * Enter the smart card pin when prompted:  
@@ -471,18 +479,18 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
 
 ## Troubleshooting
 
-1. Certificate validation failed is presented in the WorkSpaces client:  
+1. Certificate validation failed error in the WorkSpaces client:  
 ![Image showing the WorkSpaces client returning a "Unable to sign in" "Certification validation failed" error](./images/43-WorkSpaces-client-returning-Unable-to-sign-in.png)
-    Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused for various reasons including the following:
+    Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused due to various reasons including the following:
     * The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to _this_.
-    * The Kerberos supported encryption types for your service account and domain controllers do not match. If using self-managed AD, take packet captures on each DC when reproducing the issue and analyze the Kerberos and LDAP traffic from the AD Connector IPs for any errors.
+    * The Kerberos supported encryption types for your service account and domain controllers do not match. If you are using self-managed AD, collect the packet captures on each DC when reproducing the issue and analyze the Kerberos and LDAP traffic from the AD Connector IPs for any errors.
     * OCSP validation is failing. Refer to the previous Section 5 Step 4 to test OCSP validation.
     * The AD Connector registered certificates for smart card authentication are not correct.
     * The local computer using the WorkSpaces client does not have the certificates in the certificate chain installed in the local store.
     * The smart card is failing to redirect the certificate into the user’s personal store.
     * A proxy or local networking configuration is interfering with the authentication process.
 
-2. Unknown Error Occurred is presented in the WorkSpaces client:  
+2. WorkSpaces client returns an error - Unknown Error Occurred:  
 ![Image showing the WorkSpaces client returning a "Unknown Error Occurred" error](./images/40-WorkSpaces-client-returning-Unknown-Error-Occurred.png)
 This indicates that the mutual TLS authentication with AD Connector was successful, but an issue prevented the client from starting smart card authentication. This can be caused by the following:
     * The WSP GPO template to enable smart card redirection is not configured or is set to deny.
@@ -490,13 +498,13 @@ This indicates that the mutual TLS authentication with AD Connector was successf
 
 3. At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication:  
 ![Image showing the Windows logon page returning a "Signing in with a smart card is not supported for your account error](./images/41-Windows-logon-page-returning-Signing-smart-card-is-not-supported.png)
-    The above error indicates a Windows OS-level smart card authentication failure. This error and other related errors at this logon screen can be caused due to the following reasons:
+    The above error indicates a Windows OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
     * The domain controller authenticating the user does not have a certificate in the personal store. Review the Event Viewer logs on the WorkSpace.
-    * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and confirm it is trusted.
+    * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and ensure it is trusted.
     * The user’s certificate is not configured correctly for Windows smart card authentication.
 4. At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication:  
 ![Image showing the Linux logon page returning a Sorry, that did not work Please try again. error when entering a smart card PIN](./images/42-Linux-logon-page-returning-Sorry-that-did-not-work.png)
-    The above error indicates a Linux OS-level smart card authentication failure. This error and other related errors at this logon screen can be caused due to the following reasons:
+    The above error indicates a Linux OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
     * The custom image used to create the WorkSpace does not have the correct certificates in the certificate chain added in the image.
     * A separate OS-level authentication issue. SSH into the WorkSpace and review the logs in /var/log for any errors around the timestamp.
 
