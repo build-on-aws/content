@@ -3,18 +3,18 @@ title: "Deploy a Java Application on Linux"
 description: "As a cloud engineer you will deploy a variety of applications on different types of servers in the cloud. Learn how to deploy a SpringBoot Java application on a AWS Lightsail Linux VPS."
 tags:
     - tutorials
-    - Java
-    - SpringBoot
-    - Lightsail
-    - "IT Pros"
+    - java
+    - spring-boot
+    - lightsail
+    - it-pros
 authorGithubAlias: "spara"
 authorName: "Sophia Parafina"
-date: 2023-31-05
+date: 2023-05-31
 ---
 
-The [previous tutorial](https://www.buildon.aws/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/) demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Express.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
+The [previous tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/) demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Express.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
 
-This tutorial demonstrates how to deploy a Java application on a Linux Virtual Private Server (VPS) with AWS Lightsail. If you’re unfamiliar with AWS Lightsail check out the overview in the [previous tutorial](https://www.buildon.aws/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/). We’ll use the previous DevOps scenario where the software is compiled by a CI/CD and stored in an S3 bucket. You copy the software or artifact from AWS S3 bucket or object store to deploy on a Linux VPS.
+This tutorial demonstrates how to deploy a Java application on a Linux Virtual Private Server (VPS) with AWS Lightsail. If you’re unfamiliar with AWS Lightsail check out the overview in the [previous tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/). We’ll use the previous DevOps scenario where the software is compiled by a CI/CD and stored in an S3 bucket. You copy the software or artifact from AWS S3 bucket or object store to deploy on a Linux VPS.
 
 ## What you will learn
 
@@ -31,8 +31,8 @@ Before starting this tutorial, you will need the following:
 - A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.
 
 ## Sections
-<!-- Update with the appropriate values -->
-| Info                |                                        |
+
+| Attributes                |                                        |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 100 - Beginner                          |
 | ⏱ Time to complete  | 45 minutes                             |
@@ -40,7 +40,7 @@ Before starting this tutorial, you will need the following:
 | 🧩 Prerequisites    | - An AWS account: If you don't already have an account, follow the [Setting Up Your Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial. For a quick overview for creating account follow the [Create Your AWS Account](http://%20https://aws.amazon.com/getting-started/guides/setup-environment/module-one/) instructions.<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials<br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.|
 | 💻 Code Sample         | [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | YYYY-MM-DD <as mentioned above>                             |
+| ⏰ Last Updated     | 2023-05-31                             |
 
 | ToC |
 |-----|
@@ -58,7 +58,7 @@ In this module, the software is in a GitHub repository. You will clone the repos
 
 ### Implementation Instructions
 
-> Steps 1-3 are optional if you completed the Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail [tutorial(https://www.buildon.aws/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/).
+> Steps 1-3 are optional if you completed the Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail [tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/).
 
 Step 1: Clone the practical-cloud-guide repository.
 
@@ -119,21 +119,21 @@ Choose **Create instance**.
 
 ![Create a Linux VPS](./images/lightsail-linux-vps-1.png)
 
-Step 2: Choose the instance image.
+Step 2: Choose the instance image
 
-1. Select Linux/Unix for a platform. 
+1. Select Linux/Unix for a platform.
 2. For a Blueprint, choose OS Only.
 3. Choose Amazon Linux 2
 
 ![Choose Amazon Linux](./images/lightsail-linux-vps-2.png)
 
-Step 3: Configure the VPS with a shell script 
+Step 3: Configure the VPS with a shell script
 
 Choose **Add launch script**.
 
 ![Add a launch script](./images/lightsail-linux-vps-4.png)
 
-Configure an instance at launch by adding a shell script that runs when instance starts. The script exports your access key, secret key, and AWS region. These are temporary credentials only available at launch. The script needs your credentials to copy the SpringBoot application, HelloBuilder.jar, from your S3 bucket. Note that AWS CLI commands are available to use in the script. After the script copies the jar file, it installs Java and starts the application. 
+Configure an instance at launch by adding a shell script that runs when instance starts. The script exports your access key, secret key, and AWS region. These are temporary credentials only available at launch. The script needs your credentials to copy the SpringBoot application, HelloBuilder.jar, from your S3 bucket. Note that AWS CLI commands are available to use in the script. After the script copies the jar file, it installs Java and starts the application.
 
 Copy the script add your credentials and AWS region.
 
