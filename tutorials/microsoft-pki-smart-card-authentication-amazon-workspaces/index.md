@@ -80,11 +80,11 @@ In this step, you store the AD account credentials used for deploying the templa
 1. In the [Secrets Manager console](https://console.aws.amazon.com/secretsmanager/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq), choose **Store a new secret**.
 2. On the **Store a new secret page**, under **Select secret type**, choose **Other type of secret**.
 3. Under **Key/value pairs**, do the following:
-    1. In the first field, enter `username`, and in the same row, in the next field, enter the name of your AD account.
-    2. Choose **+ Add row**.
-    3. On the new row, in the first field, enter `password`, and on the same row, in the next field, enter the password for your AD account.
-    4. Under **Encryption key**, choose a key of your choice.
-    5. Choose **Next**.
+    * In the first field, enter `username`, and in the same row, in the next field, enter the name of your AD account.
+    * Choose **+ Add row**.
+    * On the new row, in the first field, enter `password`, and on the same row, in the next field, enter the password for your AD account.
+    * Under **Encryption key**, choose a key of your choice.
+    * Choose **Next**.
 4. On the **Store a new secret page**, for **Secret name**, enter a name for the secret, leave the default settings for the remaining fields, and choose **Next** on each of the next two pages.
 5. Review the settings, and then choose **Store** to save your changes. The Secrets Manager console returns you to the list of secrets in your account with your new secret included in the list.
 6. Choose your newly created secret from the list, and take note of the **Secret ARN** value. You will need it in the next section.
@@ -114,9 +114,9 @@ To deploy the CAs with the Microsoft Public Key Infrastructure Quick Start
     11. For **Secret ARN Containing CA Install Credentials**, enter the Secrets Manager secret ARN created in **Step 1: Create Secret in Secrets**.
     12. For **CA Deployment Type**, select **One-Tier** or **Two-Tier**.
     13. For **Use S3 for CA CRL Location**, select **No** or **Yes**.
-        1. Note: if you don’t want to use an S3 bucket to store the CRLs, set **Use S3 for CA CRL Location** to **No**. When **No** is selected, the Quick Start stores and hosts the CRLs in a file share and _Internet Information Services (IIS)_ website on the enterprise CA.
+       **Note:** If you don’t want to use an S3 bucket to store the CRLs, set **Use S3 for CA CRL Location** to **No**. When **No** is selected, the Quick Start stores and hosts the CRLs in a file share and _Internet Information Services (IIS)_ website on the enterprise CA.
     14. For **CA CRL S3 Bucket Name**, enter the name of the bucket created in Step 2: Set up S3 bucket to store certificate revocation lists (CRLs) and certificates.
-        1. Note: if you set **Use S3 for CA CRL Location** to **No**, leave this field as default.
+        **Note:** If you set **Use S3 for CA CRL Location** to **No**, leave this field as default.
     15. Select **Next** on the current screen and the following screen.
     16. Check the box next to each of the following statements.
         1. **I acknowledge that AWS CloudFormation might create IAM resources with custom names.**
