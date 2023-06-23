@@ -9,9 +9,12 @@ tags:
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-05-16
+images:
+  banner: images/header.webp
+  thumbnail: images/header.webp
+  hero: images/header.webp
+  background: images/header.webp
 ---
-
-![playful image showing WIP limit concepts covered in this post](images/header.webp)
 
 Kanban has gained popularity as a tool for improving the productivity for software development teams. But many builders implementing it may not understand why we do the practices that Kanban is known for. One key practice that is necessary to achieve Kanban’s benefits is limiting work in process, also known as limiting WIP. 
 
