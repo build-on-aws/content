@@ -1,5 +1,5 @@
 ---
-title: "Empowering SQL developers with real time data analytics and Apache Flink"
+title: "Empowering SQL Developers with Real-Time Data Analytics and Apache Flink"
 description: "Learn how to use Kinesis Data Analytics to analyze streaming data with Flink SQL and deploy a streaming application"
 tags:
   - streaming
@@ -20,23 +20,21 @@ Some common use cases for real time data analytics include:
 3. Feed real time dashboards
 4. Trigger real time notifications and alarms 
 
-To perform real-time analytics, a distinct set of tools are necessary for the collection and analysis of streaming data as compared to traditional analytic methods. The required infrastructure entails the selection of a messaging system, such as [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams/) (KDS) or Apache Kafka to support the capture of real-time data, and a real-time processing engine such as Amazon Kinesis Data Analytics or Apache Spark, to enable fast processing and analysis of incoming information.
+To perform real-time analytics, a distinct set of tools are necessary for the collection and analysis of streaming data as compared to traditional analytic methods. The required infrastructure entails the selection of a messaging system, such as [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (KDS) or Apache Kafka to support the capture of real-time data, and a real-time processing engine such as Amazon Kinesis Data Analytics or Apache Spark, to enable fast processing and analysis of incoming information.
 In this blog post we will ingest data into Kinesis Data Streams and analyze it using Kinesis Data Analytics.
-
-[Amazon Kinesis Data Analytics](https://aws.amazon.com/kinesis/data-analytics/) (KDA) is a fully managed service that allows businesses to analyze real-time streaming data using SQL or programming languages such as Java, Scala, and Python. Running on Apache Flink, Amazon KDA diminishes the complication of building, preserving, and integrating Apache Flink applications with other AWS services.
 
 Apache Flink is an open-source stream processing engine that enables businesses to process streams and batch data for analytics, ETL processes, and data pipelines. At the heart of its functioning is a streaming runtime that provides distributed processing and fault tolerance capabilities.
 Apache Flink enables developers familiar with SQL to process and analyze streaming data with ease. Flink offers SQL syntax that supports event processing, time windows, and aggregations. This combination makes it a highly effective streaming query engine.
 
-Performing SQL queries with KDA is possible by utilizing KDA Studio Notebooks. These Notebooks are backed by Apache Zeppelin, allowing you to query data streams interactively in real-time and develop stream processing applications that use common SQL, Python, and Scala. By clicking just a few buttons, you can start a serverless notebook in the AWS Management console to query data streams and receive quick results. These notebooks provide a user-friendly interactive development experience while taking advantage of powerful capabilities powered by Apache Flink.
+[Amazon Kinesis Data Analytics](https://aws.amazon.com/kinesis/data-analytics?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (KDA) is a fully managed service that allows businesses to analyze real-time streaming data using SQL or programming languages such as Java, Scala, and Python. Running on Apache Flink, Amazon KDA diminishes the complication of building, preserving, and integrating Apache Flink applications with other AWS services.
 
-## Table of Content
+Performing SQL queries with KDA is possible by utilizing KDA Studio Notebooks. These Notebooks are backed by Apache Zeppelin, allowing you to query data streams interactively in real-time and develop stream processing applications that use common SQL, Python, and Scala. By clicking just a few buttons, you can start a serverless notebook in the AWS Management console to query data streams and receive quick results. These notebooks provide a user-friendly interactive development experience while taking advantage of powerful capabilities powered by Apache Flink.
 
 | Attributes          |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 200                             |
 | ⏱ Time to complete  | 45 mins - 60 mins                      |
-| 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
+| 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | ⏰ Last Updated     | 2023-06-19                           |
 
 |ToC|
@@ -65,7 +63,7 @@ The proposed solution consists of the following elements:
 
 #### Create an Amazon S3 bucket and upload the sample data
 
-1. Go to the [S3 Console](https://s3.console.aws.amazon.com/s3/home)
+1. Go to the [S3 Console](https://s3.console.aws.amazon.com/s3/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. Click on **Create bucket**
 3. Enter a name for the bucket
 4. Leave all other settings as is and click on **Create bucket**
@@ -77,7 +75,7 @@ Your S3 bucket should look like the following screenshot.
 
 #### Create a Kinesis Data Stream
 
-1. Go to the [Kinesis Console](https://console.aws.amazon.com/kinesis/home)
+1. Go to the [Kinesis Console](https://console.aws.amazon.com/kinesis/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. Under data streams click on **Create data stream**
 3. Enter a name for the Kinesis Data Stream *yellow-cab-trip*
 4. Leave all other settings as is and click on **Create data stream**
@@ -86,7 +84,7 @@ Your S3 bucket should look like the following screenshot.
 
 #### Create Kinesis Data Analytics Studio Notebooks
 
-1. Go to the [Kinesis Data Analytics Console](https://console.aws.amazon.com/kinesisanalytics/home)
+1. Go to the [Kinesis Data Analytics Console](https://console.aws.amazon.com/kinesisanalytics/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. Click on **Studio**
 3. Click on **Create Studio Notebook**
 4. Click on **Create with custom settings** under the creation method section
@@ -107,7 +105,7 @@ Your S3 bucket should look like the following screenshot.
 
 #### Update the IAM permissions
 
-1. Go to the [_IAM Console Roles_](https://console.aws.amazon.com/iamv2/home?#/roles)
+1. Go to the [_IAM Console Roles_](https://console.aws.amazon.com/iamv2/home?#/roles?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. Search for the name of the role that you created earlier in Step 8 during the KDA Studio creation. 
 
 ![IAM Roles](images/IAM_1.png)
@@ -129,7 +127,7 @@ Let’s create a new note for the ingestion of data from S3 to Kinesis Data Stre
 
 ##### Create a note in KDA Studio Notebooks (Zeppelin)
 
-1. Go to the [_Kinesis Data Analytics Console_](https://console.aws.amazon.com/kinesisanalytics/home)
+1. Go to the [_Kinesis Data Analytics Console_](https://console.aws.amazon.com/kinesisanalytics/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. Click on **Studio**
 3. Click on the KDA studio instance you created
 4. Click **Run**
@@ -352,7 +350,7 @@ To build and deploy the KDA Studio notebooks you need to follow the below steps:
 3. Select Deploy `<Filename>`, on the top-right dropdown Actions for `<Filename>`
 4. Leave all the others as default and click **Create Streaming Application**
 5. Wait for the deployment to complete. It might take several minutes
-6. Once the deployment is complete, go to [Kinesis Data Analytics Console](https://console.aws.amazon.com/kinesisanalytics/home)
+6. Once the deployment is complete, go to [Kinesis Data Analytics Console](https://console.aws.amazon.com/kinesisanalytics/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 7. Notice your application under the Streaming applications
 8. To start the application, first select it and then click on Run
 9. Now your KDA Studio Notebook is deployed as a KDA application
@@ -365,18 +363,18 @@ To remove the resources created as part of this walkthrough, you can follow the 
 
 #### Delete Kinesis Data Stream
 
-1. Go to [**Kinesis Data Stream Console**](https://console.aws.amazon.com/kinesis/home?region=us-east-1#/streams/list)
+1. Go to [**Kinesis Data Stream Console**](https://console.aws.amazon.com/kinesis/home?region=us-east-1#/streams/list?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. Select the **data stream**
 3. Click on **Actions** and select **Delete**
 
 #### Delete the S3 bucket
 
-1. Go to [**S3 console**](https://s3.console.aws.amazon.com/s3/home)
+1. Go to [**S3 console**](https://s3.console.aws.amazon.com/s3/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. Select the **S3 bucket** and click on **Delete**
 
 #### Delete the KDA Studio Notebooks and the KDA application
 
-1. Go to [**Kinesis Data Analytics** **Console**](https://console.aws.amazon.com/kinesisanalytics/home)
+1. Go to [**Kinesis Data Analytics** **Console**](https://console.aws.amazon.com/kinesisanalytics/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. Select the **Streaming applications**
 3. Click on **Actions** and select **Delete**
 4. Click on **Studio**
@@ -386,4 +384,4 @@ To remove the resources created as part of this walkthrough, you can follow the 
 ## Conclusion
 
 In this blog post, you have learned how to use Kinesis Data Analytics Studio Notebooks to analyze streaming data by using Flink SQL as well as how to create and deploy long lasting streaming applications.
-You can also analyze data using programming languages like Java, Python and Scala as explained in [this Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/c342c6d1-2baf-4827-ba42-52ef9eb173f6/en-US/flink-on-kda).
+You can also analyze data using programming languages like Java, Python and Scala as explained in [this Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/c342c6d1-2baf-4827-ba42-52ef9eb173f6/en-US/flink-on-kda?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
