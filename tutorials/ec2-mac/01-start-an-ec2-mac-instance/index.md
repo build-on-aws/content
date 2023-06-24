@@ -8,7 +8,6 @@ tags:
     - tutorials
     - devops
     - aws
-    - devops
 spaces:
   - mac
 showInHomeFeed: true
@@ -17,15 +16,15 @@ authorName: Sébastien Stormacq
 date: 2023-06-15
 ---
 
-When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are require to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app). 
+When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are required to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app). 
 
 Getting access to a macOS-based machine might take time because of additional procurement, installation, and configuration processes. To make it easier, you can choose to start a macOS-based machine on [Amazon EC2](https://aws.amazon.com/ec2/getting-started/).
 
-This series of tutorials takes you through the typical tasks required to start, connect, or configure macOS-based machines in the AWS cloud. Each tutorial is independent from each other, you don't have to follow them all in sequence. Just pick and read the ones that cover the tasks you want to do.
+This series of tutorials takes you through the typical tasks required to start, connect, or configure macOS-based machines in the AWS cloud. Each tutorial is independent, you don't have to follow them all in sequence. Just pick and read the ones that cover the tasks you want to do.
 
 For this series of tutorial, we assume you're somewhat familiar with Amazon EC2. You can quickly jump in by reading [this short tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html). We will rather focus on the aspects that are specific to Mac on EC2.
 
-This is a 11 part article about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy.
+This is part 2 in an eleven article series about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy.
 
 - This is the first part, where you will learn how to allocate a Mac mini host and start it.
 
@@ -66,9 +65,9 @@ First, in terms of workflow, there is an additional step at the beginning, and o
 
 Second, the billing depends on dedicated host allocation, not when an EC2 instance runs or not. In other words, you pay for the time the physical host is reserved for your usage, independently of the fact the OS is running on not. Just like usual, the on-demand billing is accrued by the second. The allocation period is for 24h minimum, as per Apple macOS license. It means when you allocate a host, you can not release it before 24h. After that initial period, you may release the host whenever you want. Check [the dedicated host EC2 pricing page](https://aws.amazon.com/ec2/dedicated-hosts/pricing/) for the details. If you know you're going to spend a minimum amount per month on EC2, [Saving Plans](https://aws.amazon.com/savingsplans/compute-pricing/) allows you to save up to 44% of the on-demand price.
 
-To check our [Saving Plans](https://aws.amazon.com/savingsplans/) pricing and options, go to [Saving Plans Compute Pricing page](https://aws.amazon.com/savingsplans/compute-pricing/), then select **EC2 Instance Savings Plans** tab. You can then choose the length of your plan (**one year or three years**), the payment option (**all upfront, partial upfront, or nothing upfront**), one the **`mac`** instances family, and the AWS Region. Note that, at this time, **OS** must be `linux` and **Tenancy** must be **Dedicated Host**.
+To check our [Savings Plans](https://aws.amazon.com/savingsplans/) pricing and options, go to [Saving Plans Compute Pricing page](https://aws.amazon.com/savingsplans/compute-pricing/), then select **EC2 Instance Savings Plans** tab. You can then choose the length of your plan (**one year or three years**), the payment option (**all upfront, partial upfront, or nothing upfront**), one the **`mac`** instances family, and the AWS Region. Note that, at this time, **OS** must be `linux` and **Tenancy** must be **Dedicated Host**.
 
-![Saving Plans](images/saving-plans.png)
+![Savings Plans](images/saving-plans.png)
 
 ### Acquire a dedicated host
 
@@ -103,7 +102,7 @@ Once the host is allocated to your account, you can start or stop the operating 
 
 - Our EC2 Mac instances are protected from unwanted network access by [VPC Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html). It means we can control what incoming connection is authorised, on which ports and from what IP addresses.
 
-- Talking about networking, we can access other AWS services from macOS, using the same VPC routing mechanisms defined at network-level ([NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html), [PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html), [Site-to-Site VPN](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html), [Direct Connect](https://aws.amazon.com/directconnect/getting-started), etc.)
+- Speaking of networking, we can access other AWS services from macOS, using the same VPC routing mechanisms defined at network-level ([NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html), [PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html), [Site-to-Site VPN](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html), [Direct Connect](https://aws.amazon.com/directconnect/getting-started), etc.)
 
 - We can script (and therefore automate) the provisioning, de-provisioning of dedicated hosts, and the start and stop of instances. This opens the door to all sorts of automations you can implement to support your build and test pipelines.
 
@@ -161,7 +160,7 @@ Similarly you can stop, reboot or terminate your instance. Reboot is pretty obvi
 
 Stopping an EC2 instance is equivalent to the **Shutdown** menu option from the  menu on your local machine. It shuts down the operating system and the machine. You can restart it at a later stage.  Remember that this does not stop billing, as the billing is linked to the dedicated host allocation. Your disks (EBS volumes) are preserved.
 
-Terminating an instance is very different. It is a definitive action. Once an instance is terminated, it can not be restarted. By default, its associated disks (EBS volumes) are deleted upon termination.
+Terminating an instance is very different. It is a permanent action. Once an instance is terminated, it can not be restarted. By default, its associated disks (EBS volumes) are deleted upon termination.
 
 For security reasons, the underlying host is entirely scrubbed to erase any data from the local disk, the EFI [NVRAM](https://en.wikipedia.org/wiki/Non-volatile_random-access_memory), and [secured area of the memory](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/web) when stopping or terminating an instance.
 
