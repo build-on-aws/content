@@ -19,12 +19,10 @@ date: 2023-06-13
 A lot of things have changed in the past few years in how we handle data, from introducing different ways to store it using data warehousing, Hadoop, and NoSQL databases to offering remote storage and faster compute through cloud computing. Advancements in networking and computing have pushed more processing to happen at the edge with edge computing and the Internet of Things. Now we are seeing a diverse set of data sources sending data more often and at higher quality.
 
 ![FIGURE 1 showing a graphic of the city skyline with connectivty, to show how our lives have become connected](images/Figure1.jpeg "Source: Adobe Stock")
-Source: Adobe Stock
 
 Data volumes are increasing at an exponential clip, from terabytes to petabytes and all the way to exabytes. Organizations are looking to gain more value from their data but are challenged to capture, store, and analyze all the data being generated today. Data is growing at an exponential rate from diverse sources, with new sources and use cases showing up.
 
 ![FIGURE 2 showing a graphic of hard drives, to show how data we capture and store has grown over the decades](images/Figure2-hard-drive.jpeg "Source: Adobe Stock")
-Source: Adobe Stock
 
 In 2021, Gartners released an article on the Top 10 Data and Analytics Trends for 2021. In this article, Gartner mentioned two trends where they cite data and analytics as core business functions. They cited how business leaders are beginning to understand the importance of using data and analytics to accelerate digital business initiatives, shifting from a secondary focus to a core function for the business. In that same article, Gartner talks about how more data analytics technologies are starting to live outside of the traditional data center and cloud environments, closer to the physical assets. This means doing data analytics at the edge to reduce latency for data-centric solutions and enable more real-time value. The renewed focus on data analytics and the need for more real-time processing have evolved analytics to put more emphasis on processing in real-time.
 
@@ -80,7 +78,6 @@ Some specific examples of data streaming are logs generated from customer activi
 Let’s take a step back and talk about the data structure that supports streaming data architectures. This data structure is the commit log. A commit log works like a persistent queue composed of an ordered collection of records. Like a queue, a commit log can only be appended at the end, so older records are at the head and newer records are at the tail of the queue. The commit log is persistent in the sense that the data stored in it is not transient and can be analyzed any number of times. The data stored in a commit log can span seconds, minutes, days, months, or years!
 
 ![FIGURE 7 Shows a line of kinds, similar to a queue](images/Figure7-streamstorequeue.jpg "Source: Adobe Stock")
-Source: Adobe stock
 
 A commit log is a repository of all the mutations and events. A relational database is a subset of what is contained in the commit log. The values, mutations, and events in a commit log are captured as a snapshot of a point in time within tables in a relational database and presented using indexes to allow for querying and searching. Behind the scenes, the data you are querying databases against is a subset of the same data contained in the commit log. Going back to the fact that a commit log is really an ordered collection of data, a commit log is the ideal data structure for writing and storing streams of events, which is essentially what we call a stream store. Querying and reading through a stream store is different from a relational database and requires a different approach altogether.
 
@@ -133,7 +130,6 @@ Another important concept is not being tied to one-way processing. It is easy to
 Last, but definitely not least, is understanding when it is best to build or buy. There are three major criteria to consider when deciding between building versus buying. First is competency. Is your team able to build and maintain an infrastructure? In the beginning, we talked about data analytics becoming a core function in the business. It's important for the organization to evaluate whether it makes business sense for your team to build and maintain this in-house. This is a decision not to be taken lightly, as it will take resources away from other activities. As for opting to buy and outsource your stream source to a vendor, assess their feature portfolio for completeness. Make sure you also look beyond what the stream store provides and inspect their stream processing framework, along with the tooling around it. Make sure they provide the features you need now and in the near future. It is not a trivial exercise to change implementation when you already have a central store in place and have our valuable insights.
 
 ![FIGURE 12 Unidirectional flow](images/Figure14-buildvsbuy.jpeg "Source: Adobe Stock")
-Source: Adobe Stock
 
 ## Conclusion
 
