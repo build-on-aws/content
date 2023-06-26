@@ -8,6 +8,7 @@ tags:
     - github
     - github-actions
     - serverless
+    - databases
 authorGithubAlias: jlooper
 authorName: Jen Looper
 date: 2023-05-30
