@@ -12,17 +12,20 @@ date: 2023-06-26
 
 If, like me, you're a fan of applications that improve people’s quality of life, and if, like me, you're interested in what makes these apps work so well, you might've noticed a common component in many of them: Artificial Intelligence and Machine Learning.
 
-Applications that use AI/ML include spam filtering in our email accounts, which uses ML techniques to identify and flag spam messages; recommender systems on video streaming, ecommerce, or music platforms also use ML to suggest content that may interest us based on our interaction history; voice recognition and machine translation are also based on ML.
+Applications that use AI/ML include spam filtering in our email accounts, which uses ML techniques to identify and flag spam messages; recommender systems on video streaming, e-commerce, or music platforms also use ML to suggest content that may interest us based on our interaction history; voice recognition and machine translation are also based on ML.
 
 But have you ever wondered what AI actually is? What about ML? I am going to answer those questions and also explain the life phases of ML projects, so the next time you’re building an app that uses some amazing, new AI/ML-based service, you understand what’s behind it and what makes it so awesome.
 
 And don’t worry, I won't bore you with math 😉.
 
+|ToC|
+|---|
+
 ## What is Artificial Intelligence?
 
 Artificial Intelligence, or AI, is the result of our efforts to automate tasks normally performed by humans, such as image pattern recognition, document classification, or a computerized chess rival.
 
-![Artificial Intelligence - Machine Learning - Deep Learning - Symbolic AI](images/fig_1.png) <h4 align="center">Fig. 1. Artificial Intelligence - Machine Learning - Deep Learning and Symbolic AI.</h4> 
+![Artificial Intelligence - Machine Learning - Deep Learning - Symbolic AI](images/fig_1.png "Fig. 1. Artificial Intelligence - Machine Learning - Deep Learning and Symbolic AI. ")
 
 (Fig. 1) AI encompasses various approaches: Symbolic AI, also referred to as "good old-fashioned AI" (GOFAI), uses explicitly defined rules and symbolic representations for problem-solving. It's similar to traditional programming in the sense that predefined guidelines drive the process, however it's more advanced as it permits inference and adaptation to new situations. Machine Learning (ML) is another AI approach that allows algorithms to learn from data. Deep Learning (DL) is a subset of ML that uses multi-layered, artificial neural networks.
 
@@ -30,7 +33,7 @@ Artificial Intelligence, or AI, is the result of our efforts to automate tasks n
 
 Machine Learning, or ML, focuses on the creation of systems or models that can learn from data and improve their performance in specific tasks, without the need to be explicitly programmed, making them learn from past experiences or examples to make decisions on new data. This differs from traditional programming, where human programmers write rules in code, transforming the input data into desired results (Fig. 2).
 
-![Symbolic AI vs Machine Learning](images/fig_2.png) <h4 align="center">Fig 2. Symbolic AI vs Machine Learning.</h4> 
+![Symbolic AI vs Machine Learning](images/fig_2.png "Fig 2. Symbolic AI vs Machine Learning. ")
 
 Now, I am going to explain the most relevant terms in ML:
 
@@ -38,12 +41,7 @@ Now, I am going to explain the most relevant terms in ML:
 | ------------- | ------------- |
 | ![Model](images/fig_3.jpg)  | **Model:** A model is the representation that explains the observations. The trained model is the result of applying an ML algorithm with a data set. This trained model, now primed with specific patterns and understandings from the dataset, is subsequently used to draw inferences from new observations.  |
 | ![Algorithm](images/fig_4.jpg)  | **Algorithm:** An algorithm is a procedure implemented in code that guides a model in learning from data it's given. There are many machine learning algorithms. |
-| ![Training](images/fig_5.jpg)  | **Training:** Training is the iterative process of applying the learning algorithm. Consists in:
-* Applying the model (as is) to the variables of the observations and obtain the results according to the model.
-* Comparing the model results with the actual values.
-* Establishing a way to calculate the error between the model and reality.
-* Using the error as a basis to update the model in order to reduce the error.
-* Repeating until the model reaches the error levels that we have proposed and is capable of generalizing with observations that it has not seen in training.  |
+| ![Training](images/fig_5.jpg)  | **Training:** Training is the iterative process of applying the learning algorithm. Consists in: <br/>* Applying the model (as is) to the variables of the observations and obtain the results according to the model. <br/>* Comparing the model results with the actual values. <br/>* Establishing a way to calculate the error between the model and reality. <br/>* Using the error as a basis to update the model in order to reduce the error. <br/>* Repeating until the model reaches the error levels that we have proposed and is capable of generalizing with observations that it has not seen in training.  |
 | ![Testing](images/fig_6.jpg)  | **Testing:** Measuring the performance of a data model using test data that it hasn't been trained on.  |
 | ![Deployment](images/fig_7.jpg)  | **Deployment:** Integration of the model into a production environment.  |
 | ![Dataset](images/fig_8.jpg)  | **Dataset:** The dataset is the raw material an ML model uses and interacts with. It can consist of images, text, numerical values, and anything else that can be put together as relevant data.  |
@@ -81,21 +79,21 @@ DL is hierarchical learning where the initial layers learn elementary representa
 
 In the example shown in Fig. 3, an image is introduced into a trained model: animal classifier. Initial layers separate an image into small portions, obtaining basic representations that are increasingly abstracted, and according to their previous training, until the output layer indicates the result obtained: the probability that it is a known animal.
 
-![trained model: animal classifier](images/fig_11.png) <h4 align="center">Fig 3. Trained model: animal classifier.</h4> 
+![trained model: animal classifier](images/fig_11.png "Fig 3. Trained model: animal classifier.")
 
 ML is subdivided into several types of learning, which I will explain below.
 
 ## Types of Learning in ML
 
-![Types of learning in ML](images/fig_12.png) <h4 align="center">Fig 4. Types of learning in ML</h4> 
+![Types of learning in ML](images/fig_12.png) ("Fig 4. Types of learning in ML.")
 
 1. **Supervised Learning:** This is the type of learning we have talked about so far. Inputs and outputs of the model, also known as variables and labels respectively, are used in training to generalize model. It is able to learn from mistakes to improve predictions. It is divided into two types:
 
-- **1.1. Regression:** This is used to predict the relationship between independent variables and a dependent variable. It is based on the idea that the dependent variable can be modeled as a linear combination of the independent variables and an error term. 
+- **1.1. Regression:** This is used to predict the relationship between independent variables and a dependent variable. It is based on the idea that the dependent variable can be modeled as a linear combination of the independent variables and an error term.
 
 For example, Fig. 5 shows a simple example of how values of a property increase as its surface area increases, creating a linear relationship between both characteristics.
 
-![Example of Regression: Relationship between surface of a property and its value](images/fig_13.png) <h4 align="center">Fig. 5. Regression Example: Relationship between superficies of a property and its value.</h4> 
+![Example of Regression: Relationship between surface of a property and its value](images/fig_13.png "Fig. 5. Regression Example: Relationship between superficies of a property and its value.")
 
 - **1.2. Classification:** This is used to assign data to one of several categories (classes) based on certain characteristics. Once classifier has been trained, it can be used to make predictions about new and unknown data.
 
@@ -107,7 +105,7 @@ Binary Classification is a type of classification where each data sample is assi
 
 Clustering is commonly used for data exploration and group analysis. For example, Fig. 6.
 
-![Clustering Example](images/fig_14.png) <h4 align="center">Fig. 6. Clustering Example. </h4> 
+![Clustering Example](images/fig_14.png "Fig. 6. Clustering Example.")
 
 - **2.2. Dimensionality Reduction:** This is a technique used in machine learning to reduce the number of features (variables) in a data set, while keeping the most important information. This is achieved by removing redundant or irrelevant features, allowing machine learning models to be trained faster and with better results.
 
@@ -115,13 +113,13 @@ Clustering is commonly used for data exploration and group analysis. For example
 
 One example is [AWS Deep Racer](https://docs.aws.amazon.com/deepracer/index.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning), where models are trained to compete in races as cars within tracks (virtual or physical).
 
-![Reinforcement learning Example](images/fig_15.png) <h4 align="center">Fig. 7. Reinforcement Learning example. </h4> 
+![Reinforcement learning Example](images/fig_15.png "Fig. 7. Reinforcement Learning example.")
 
 Now that we are more clear about what AI/ML is and how it works, we can approach an ML project by identifying phases in the ML life cycle.
 
 ## Phases of the Life Cycle of a Machine Learning Project
 
-![Phases of life cycle of a Machine Learning project](images/fig_16.png) <h4 align="center">Fig. 8. Phases of life cycle of a Machine Learning project. </h4> 
+![Phases of life cycle of a Machine Learning project](images/fig_16.png "Fig. 8. Phases of life cycle of a Machine Learning project.")
 
 The ML life cycle is an iterative and cyclical process (as depicted in Fig. 8) that provides clarity and insight into the entire process, structuring it to maximize the success of an ML project.
 
@@ -149,15 +147,15 @@ We've delved into the concept of ML, explored the types of learning, explored a 
 
 From now on, every time you use an [AI/ML Service](https://aws.amazon.com/machine-learning/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning) in an application, you will do so knowing that there is an ML model working for you, and you will be able to venture out to identify what kind of learning it is.
 
-## References:
+## References
 
-- Deep Learning with Python, Second Edition - Autor François Chollet
+- [Deep Learning with Python](https://www.goodreads.com/book/show/59714701-deep-learning-with-python), Second Edition - Author François Chollet
 
 - [AWS Well-Architected machine learning lens](https://docs.aws.amazon.com/wellarchitected/latest/machine-learning-lens/machine-learning-lens.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
 
-- [Architect and build the full machine learning lifecycle with AWS: An end-to-end Amazon SageMaker demo](https://aws.amazon.com/es/blogs/machine-learning/architect-and-build-the-full-machine-learning-lifecycle-with-amazon-sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
+- [Architect and build the full machine learning lifecycle with AWS: An end-to-end Amazon SageMaker demo](https://aws.amazon.com/blogs/machine-learning/architect-and-build-the-full-machine-learning-lifecycle-with-amazon-sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
 - [SkillBuilder Machine Learning plan](https://explore.skillbuilder.aws/learn/lp/28/machine-learning-learning-plan)
 
-- [What is ai?](https://aws.amazon.com/es/machine-learning/what-is-ai/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
+- [What is ai?](https://aws.amazon.com/machine-learning/what-is-ai/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
 
 - [MLU-EXPLAIN](https://mlu-explain.github.io/)
