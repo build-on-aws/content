@@ -20,7 +20,7 @@ Join us for Episode 7 of Build On Live: Answered, the [Twitch](https://twitch.tv
 
 In this episode we will be focusing on resilient systems. We have selected some of the top viewed questions in the AWS Collective and built code and demos around the best answers to those questions!
 
-https://www.twitch.tv/videos/1856494950
+https://www.twitch.tv/videos/1856494950 
 
 ## Hosts
 
