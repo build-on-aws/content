@@ -13,9 +13,11 @@ authorName: Austin Webber
 date: 2023-06-23
 ---
 
-Amazon WorkSpaces provides customers with the ability to use Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. Amazon WorkSpaces supports the use of smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, your users can login to their WorkSpaces using smart cards and they can use their smart cards in within their WorkSpace session to authenticate to websites or other applications. Pre-session smart card authentication requires an _Active Directory Connector_ connected to _AWS Microsoft Managed AD_ or self-managed AD, Online Certificate Status Protocol (OCSP) for certificate revocation checking, Root CA and smart card certificates with certain requirements, a CAC or PIV smart card, a version of the WorkSpaces client that supports smart card authentication, and a WorkSpace assigned to the user that is using a protocol that supports smart card authentication.
+Amazon WorkSpaces provides customers with the ability to use Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. Amazon WorkSpaces supports the use of smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, your users can login to their WorkSpaces using smart cards and they can use their smart cards in within their WorkSpace session to authenticate to websites or other applications. Pre-session smart card authentication requires an [Active Directory Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) connected to [AWS Microsoft Managed AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) or self-managed AD, Online Certificate Status Protocol (OCSP) for certificate revocation checking, Root CA and smart card certificates with certain requirements, a CAC or PIV smart card, a version of the WorkSpaces client that supports smart card authentication, and a WorkSpace assigned to the user that is using a protocol that supports smart card authentication.
 
 In this post, we will walk through step-by-step how you can setup and configure new or existing Microsoft PKI to support smart card authentication including setting up an OCSP  responder, proper configuration of Active Directory, domain controllers, certificate templates, Group Policy, and Amazon WorkSpaces. You can expect to have a fully functioning WorkSpaces smart card authentication environment for both Linux and Windows WorkSpaces after completing the steps in this post.
+
+The following figure shows the high-level architecture of the Amazon WorkSpaces solution, depicting internet access by a user to access an Amazon WorkSpace using their smart card in the Amazon WorkSpaces client.
 
 ![High-level architecture overview of the connectivity process to Amazon WorkSpaces using a smart card](./images/01_high-level-architecture-connectivity-process-amazon-workspaces-with-smart-card.png)
 
@@ -59,7 +61,7 @@ For this walkthrough, you should have the following prerequisites:
 
 The solution I present here involves the following steps:
 
-1. Deploy Microsoft PKI Quick Start template and setup OCSP responder (required if you do not have PKI already setup in your AD environment)
+1. Deploy [Microsoft PKI Quick Start template](https://aws-quickstart.github.io/quickstart-microsoft-pki/) and setup OCSP responder (required if you do not have PKI already setup in your AD environment)
 2. Create objects in Active Directory with necessary permissions
 3. Configure the Certificate Authority to allow certificates to be issued to smart card users
 4. Request a certificate for your individual smart card user
@@ -73,7 +75,7 @@ The solution I present here involves the following steps:
 
 ### Section 1: Deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and setup an OCSP responder
 
-If you do not already have Microsoft PKI infrastructure setup (e.g. CAs, OCSP responder), this first section is to deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and create an OCSP responder instance. If you already have PKI infrastructure setup including an OCSP responder, please skip to Section 2.
+If you do not already have Microsoft PKI infrastructure setup (e.g. CAs, OCSP responder) in your AD environment, this first section is to deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and create an OCSP responder instance. If you already have PKI infrastructure setup including an OCSP responder, please skip to Section 2.
 
 #### Step 1. Create a Secret in Secrets Manager
 
@@ -93,37 +95,38 @@ In this step, you store the AD account credentials used for deploying the templa
 
 #### Step 2: Deploy the Microsoft Public Key Infrastructure Quick Start template
 
-In this step, you deploy an offline root CA and an enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start. Because you use a Quick Start template for this deployment, you only need to enter the following information—you can change the default values for any fields not explicitly mentioned here.
+In this step, you deploy an offline root CA and an enterprise subordinate CA by using the [Microsoft Public Key Infrastructure Quick Start](https://aws.amazon.com/quickstart/architecture/microsoft-pki/). Because you use a Quick Start template for this deployment, you only need to enter the following information—you can change the default values for any fields not explicitly mentioned here.
 
 To deploy the CAs with the Microsoft Public Key Infrastructure Quick Start
 
-1. In the AWS CloudFormation console, choose Create stack and then do the following:
+1. In the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/), choose Create stack and then do the following:
     1. For **Prepare template**, select **Template is ready**.
     2. For **Template source**, select **Amazon S3 URL**.
     3. For **Amazon S3 URL**, enter:  `https://aws-quickstart.s3.amazonaws.com/quickstart-microsoft-pki/templates/microsoft-pki.template.yaml`
     4. Choose **Next**.
 2. Specify the stack details as follows:
-    1. For **VPC CIDR**, enter the CIDR of the VPC where your self-managed AD directory resides.
-    2. For **VPC ID**, select the VPC where your self-managed AD directory resides.
-    3. For **CA(s) Subnet ID**, select a subnet in the VPC where your self-managed AD directory resides.
-    4. For **Domain Members Security Group ID**, select an existing security group that allows communication with the self-managed AD directory.
-    5. For **Key Pair Name**, select an EC2 key pair in your account.
-    6. For **Active Directory Domain Services Type**, select **SelfManaged** or **AWSManaged** (dependent on your AD environment).
-    7. For **Domain FQDN DNS Name**, enter the DNS name of the AD domain. In this example, I use `corp.example.com`.
-    8. For **Domain NetBIOS Name**, enter the NetBIOS name of the AD domain. In this example, I use `CORP`.
-    9. For **IP used for DNS (Must be accessible)**, enter the IP address of one of the AD domain controllers.
-    10. For **IP used for DNS (Must be accessible)**, enter the IP address of the other AD domain controller.
-    11. For **Secret ARN Containing CA Install Credentials**, enter the Secrets Manager secret ARN created in **Step 1: Create Secret in Secrets**.
-    12. For **CA Deployment Type**, select **One-Tier** or **Two-Tier**.
-    13. For **Use S3 for CA CRL Location**, select **No** or **Yes**.
+    1. For **Stack name**, enter a name for the stack.
+    2. For **VPC CIDR**, enter the CIDR of the VPC where your self-managed AD directory resides.
+    3. For **VPC ID**, select the VPC where your self-managed AD directory resides.
+    4. For **CA(s) Subnet ID**, select a subnet in the VPC where your self-managed AD directory resides.
+    5. For **Domain Members Security Group ID**, select an existing security group that allows communication with the self-managed AD directory.
+    6. For **Key Pair Name**, select an EC2 key pair in your account.
+    7. For **Active Directory Domain Services Type**, select **SelfManaged** or **AWSManaged** (dependent on your AD environment).
+    8. For **Domain FQDN DNS Name**, enter the DNS name of the AD domain. In this example, I use `corp.example.com`.
+    9. For **Domain NetBIOS Name**, enter the NetBIOS name of the AD domain. In this example, I use `CORP`.
+    10. For **IP used for DNS (Must be accessible)**, enter the IP address of one of the AD domain controllers.
+    11. For **IP used for DNS (Must be accessible)**, enter the IP address of the other AD domain controller.
+    12. For **Secret ARN Containing CA Install Credentials**, enter the Secrets Manager secret ARN created in **Step 1: Create Secret in Secrets**.
+    13. For **CA Deployment Type**, select **One-Tier** or **Two-Tier**.
+    14. For **Use S3 for CA CRL Location**, select **No** or **Yes**.
        **Note:** If you don’t want to use an S3 bucket to store the CRLs, set **Use S3 for CA CRL Location** to **No**. When **No** is selected, the Quick Start stores and hosts the CRLs in a file share and _Internet Information Services (IIS)_ website on the enterprise CA.
-    14. For **CA CRL S3 Bucket Name**, enter the name of the bucket created in Step 2: Set up S3 bucket to store certificate revocation lists (CRLs) and certificates.
+    15. For **CA CRL S3 Bucket Name**, enter the name of the bucket created in Step 2: Set up S3 bucket to store certificate revocation lists (CRLs) and certificates.
         **Note:** If you set **Use S3 for CA CRL Location** to **No**, leave this field as default.
-    15. Select **Next** on the current screen and the following screen.
-    16. Check the box next to each of the following statements.
+    16. Select **Next** on the current screen and the following screen.
+    17. Check the box next to each of the following statements.
         1. **I acknowledge that AWS CloudFormation might create IAM resources with custom names.**
         2. **I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND.**
-    17. Choose **Create stack**.  
+    18. Choose **Create stack**. 
 ![A prompt showing that you need to acknowledge additional capability before deploying the CloudFormation stack](./images/02-additional-capability-before-deploying-cloudformation-stack.png)
 It should take 20 to 30 minutes for the resources to deploy.
 
@@ -131,7 +134,7 @@ It should take 20 to 30 minutes for the resources to deploy.
 
 In this step, you configure AWS security group rules so that your directory domain controllers can connect to the enterprise subordinate CA to request a certificate. To do this, you must add outbound rules to each domain controller’s AWS security group to allow all outbound traffic to the AWS security group of the enterprise subordinate CA so that the directory domain controllers can connect to the enterprise subordinate CA to request a certificate. If you are using **self-managed AD** and your domain controllers are outside of AWS, you can ensure your domain controllers allow the necessary traffic from on-premises to the enterprise subordinate CA instance.
 
-1. In the navigation pane of the _AWS VPC console_, under the **Security** heading, choose **Security Groups**.
+1. In the navigation pane of the [AWS VPC console](https://console.aws.amazon.com/vpc/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq), under the **Security** heading, choose **Security Groups**.
 2. Select the AWS security group of your AWS Managed Microsoft AD directory or a different security group if using self-managed AD. When using AWS Managed Microsoft AD, the security group name is formatted like the following: `d-1234567890_controllers`.
 3. Switch to the **Outbound rules** tab, and choose **Edit outbound rules**.
 4. Choose **Add rule** and then do the following:
@@ -158,8 +161,8 @@ Install-WindowsFeature GPMC
 gpmc.msc
 ```
 
-1. Create or locate an existing group policy in your domain, right-click it, select **Edit…**
-2. Enable certificate auto-enrollment in the policy:
+3. Create or locate an existing group policy in your domain, right-click it, select **Edit…**
+4. Enable certificate auto-enrollment in the policy:
     * In the Group Policy Management Editor, under **Computer Configuration**, and expand **Policies**.
     * Expand **Windows Settings**, expand **Security Settings**, and select **Public Key Policies.**
     * Double-click **Certificate Services Client – Auto-Enrollment** and set the following settings:  
@@ -180,16 +183,16 @@ Review the certificate store on each domain controller to ensure they receive a 
 
 #### Step 6: Deploy an EC2 Windows instance and configure it as an OCSP responder instance
 
-For pre-session authentication into WorkSpaces, Online Certificate Status Protocol (OCSP) is required for certificate revocation checking. An OCSP responder is a component of a public key infrastructure (PKI) that can be installed on Windows Server to meet this requirement. The OCSP responder is required to be publicly accessible on the internet over HTTP. In this blog post, we are only setting up one OCSP responder, which we will refer to as the OCSP instance. If you’d like to make the OCSP responder highly available, you can do so by setting up _multiple OCSP responders in an Array_.
+For pre-session authentication into WorkSpaces, Online Certificate Status Protocol (OCSP) is required for certificate revocation checking. An OCSP responder is a component of a public key infrastructure (PKI) that can be installed on Windows Server to meet this requirement. The OCSP responder is required to be publicly accessible on the internet over HTTP. In this blog post, we are only setting up one OCSP responder, which we will refer to as the OCSP instance. If you’d like to make the OCSP responder highly available, you can do so by setting up [multiple OCSP responders in an Array](https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/implementing-an-ocsp-responder-part-v-high-availability/ba-p/396882).
 
-1. **Launch a standard EC2 Windows instance** using Windows Server in a public subnet (OCSP responder should be in a public subnet) and set **Auto-assign public IP** to **enable**.
+1. [Launch a standard EC2 Windows instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/EC2_GetStarted.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Windows Server in a public subnet (OCSP responder should be in a public subnet) and set **Auto-assign public IP** to **enable**.
 2. Attach a security group to the OCSP instance that allows you to **RDP (port 3389)** into it.
 3. [Allocate an Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [associate the Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) with the EC2 instance.
 4. Gather a public DNS name that resolves to the public IP address of your EC2 instance for use later when setting the OCSP responder URL:
     * Option 1: (Recommended) If you own a public domain in Route53 or another provider, [create an A record](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) that resolves to the IP address of the OCSP instance. Note down the full DNS name of this record (e.g. ocsp.mydomain.com) as you will need it in the following steps when configuring the CA for OCSP.
     * Option 2: If you do not own a public domain, you can instead use the [auto-generated public IPv4 DNS name](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) of your EC2 instance. You can find this value in the details tab of your EC2 instance in AWS console. Note down the value of the **Public IPv4 DNS** name for the following steps when configuring the CA for OCSP. If this value does not appear, please ensure **DNS hostnames** is enabled on your VPC.
-    * **Note:** If using a DNS name, it must use a top-level domain found in the _Internet Assigned Numbers Authority (IANA) Root Zone Database_.
-5. [Manually domain join](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) the OCSP instance to your AD domain, specify a desired computer name (e.g. OCSP), and restart it.
+    * **Note:** If using a DNS name, it must use a top-level domain found in the [Internet Assigned Numbers Authority (IANA) Root Zone Database](https://www.iana.org/domains/root/db).
+5. [Manually join](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) the OCSP instance to your AD domain, specify a desired computer name (e.g. OCSP), and restart it.
 6. Connect to your Enterprise CA instance (created from the Quick Start template) with an AD user in the Domain Admins or AWS Delegated Administrators group.
 7. Duplicate a new OCSP response signing certificate template:
     * Open **certtmpl.msc**, find **OCSP Response Signing** template, right-click it, select **Duplicate Template**.
@@ -213,7 +216,7 @@ For pre-session authentication into WorkSpaces, Online Certificate Status Protoc
     * Select **OK**, check the box **Include in the online certificate status protocol (OCSP) extension**.  
 ![Image showing the properties on the CA and specifically the new OCSP URL you added and a checkbox "Include in the OCSP extension" that you need to check](./images/10-properties-on-CA.png)
     * Select **OK**, select **Yes** when prompted to restart the AD CS service for the changes to take effect.
-    * **Note:** AD Connector **requires an HTTP URL** for the OCSP responder URL.
+    * **Note:** AD Connector [requires an HTTP URL](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/prereqs-clientauth.html#ocsp?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) for the OCSP responder URL.
 10. Connect to your OCSP instance and install the OCSP responder:
     * Connect to your OCSP instance with an AD user in the Domain Admins or AWS Delegated Administrators group.
     * Open PowerShell as Administrator and run the following commands to install the OCSP responder:  
@@ -367,7 +370,7 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
 2. Create a test Windows WSP WorkSpace:
     * [Launch a WSP WorkSpace](https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspace-ad-connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) for your test user and wait for it to become available.
     **Note:** Smart card authentication is only supported on WSP Windows and WSP Amazon Linux 2 WorkSpaces at this time.
-3. Allow RDP into your WorkSpaces.
+3. [Allow RDP](https://repost.aws/knowledge-center/connect-workspace-rdp) into your WorkSpaces.
 4. Import the WSP GPO template:
     * Connect to your test user’s WorkSpace via RDP (it must be in a running state) with an AD user in the Domain Admins or AWS Delegated Administrators group.
     * Open the Start Menu, search for **PowerShell** and open it.
@@ -421,7 +424,7 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
 
 Use the WorkSpaces client to test smart card authentication:
 
-* Download the latest _WorkSpaces client_ and open the client.
+* Download the latest [WorkSpaces client](https://clients.amazonworkspaces.com/) and open the client.
 * Enter your registration code for your directory when prompted
 * Select **Insert your smart card**, and
 * Select your user’s certificate when prompted.  
@@ -453,11 +456,11 @@ This completes in-session smart card authentication with Windows WorkSpaces.
 Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WSP protocol in the us-gov-west-1 region. To set this up, you will need to create a custom image that contains the certificates in your certificate chain.
 
 1. Create a temporary Linux WSP WorkSpace:
-    * _Launch a WSP WorkSpace_ for your test user and wait for it to become available.
+    * [Launch a WSP WorkSpace](https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspace-ad-connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) for your test user and wait for it to become available.
 2. Connect to the WorkSpace using the client (requires smart card authentication being disabled on your AD Connector for this part).
 3. Configure the WorkSpace to allow users in a specific AD group of your choosing to SSH into the WorkSpaces:
-    * Follow the steps to _Grant SSH access to Amazon Linux **WorkSpaces** administrators_.
-    * Adjust the security group attached to your WorkSpaces to _allow SSH from desired IPs._
+    * Follow the steps to [Grant SSH access to Amazon Linux **WorkSpaces** administrators](https://docs.aws.amazon.com/workspaces/latest/adminguide/manage_linux_workspace.html#linux_ssh?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+    * Adjust the security group attached to your WorkSpaces to [allow SSH from desired IPs.](https://docs.aws.amazon.com/workspaces/latest/adminguide/connect-to-linux-workspaces-with-ssh.html#enable-ssh-directory-level-access-linux-workspaces?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 4. From a Windows computer in your AD environment, export ALL of the certificates in your certificate chain in DER format (not including the user certificate). You can do this using **certmgr.msc** from any AD-joined Windows computer in your environment.
 5. Use PowerShell from one of your Windows computers in your AD environment (e.g. MGMT instance) to copy the certificates onto the WorkSpace using SCP:  
 
@@ -481,7 +484,7 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
    ./enable_smartcard --ca-cert **/tmp/root.pem /tmp/int.pem**
    ```
 
-8. Disconnect from the WorkSpace and _create a custom image_ from the WorkSpace.
+8. Disconnect from the WorkSpace and [create a custom image](https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html#create_custom_image_bundle?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) from the WorkSpace.
 9. Create a bundle from the image once the image is finished creating.
 10. Launch a WorkSpace for your test smart card user from your custom bundle.
 
@@ -508,9 +511,9 @@ Use the WorkSpaces client to test smart card authentication:
 1. Certificate validation failed error in the WorkSpaces client:  
 ![Image showing the WorkSpaces client returning a "Unable to sign in" "Certification validation failed" error](./images/43-WorkSpaces-client-returning-Unable-to-sign-in.png)
     Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused due to various reasons including the following:
-    * The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to _this_.
+    * The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to [this](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/enable-clientauth.html#step1?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
     * The Kerberos supported encryption types for your service account and domain controllers do not match. If you are using self-managed AD, collect the packet captures on each DC when reproducing the issue and analyze the Kerberos and LDAP traffic from the AD Connector IPs for any errors.
-    * OCSP validation is failing. Refer to the previous Section 5 Step 4 to test OCSP validation.
+    * OCSP validation is failing. Refer to the previous Section 5 Step 2 to test OCSP validation.
     * The AD Connector registered certificates for smart card authentication are not correct.
     * The local computer using the WorkSpaces client does not have the certificates in the certificate chain installed in the local store.
     * The smart card is failing to redirect the certificate into the user’s personal store.
@@ -537,28 +540,28 @@ This indicates that the mutual TLS authentication with AD Connector was successf
 ## Cleaning up
 
 1. Disable smart card authentication on the AD Connector:
-    * Open _Directory Services console_, view the details page of your AD Connector, scroll down to Smart card authentication.
+    * Open [Directory Services console](https://console.aws.amazon.com/directoryservice/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq), view the details page of your AD Connector, scroll down to Smart card authentication.
     * Select **Disable** under Smart Card authentication, which will disable smart card authentication for the entire AD Connector.
 2. Delete any existing WorkSpaces:
-    * Open _Amazon **WorkSpaces** console_, select any existing WorkSpaces and select **Delete**.
+    * Open [Amazon **WorkSpaces** console](https://console.aws.amazon.com/workspaces/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq), select any existing WorkSpaces and select **Delete**.
     * Wait for the WorkSpaces to terminate.
 3. Delete the custom bundle and image for your Linux WorkSpaces:
-    * Open _Amazon **WorkSpaces** console_, select **Bundles**, select your bundle and select **Delete**.
+    * Open [Amazon **WorkSpaces** console](https://console.aws.amazon.com/workspaces/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq), select **Bundles**, select your bundle and select **Delete**.
     * Select **Images**, select your image, and select **Delete**.
 4. Deregister the AD Connector from WorkSpaces:
-    * Open _Amazon **WorkSpaces** console_ and select **Directories**.
+    * Open [Amazon **WorkSpaces** console](https://console.aws.amazon.com/workspaces/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) and select **Directories**.
     * Select the directory, choose **Actions**, and choose **Deregister**.
 5. Delete the OCSP EC2 instance:
-    * Open _EC2 console_ and select **Instances**.
+    * Open [EC2 console](https://console.aws.amazon.com/ec2/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) and select **Instances**.
     * Locate the OCSP instance, select it, select **Instance state**, select **Terminate instance**.
 6. If you deployed the Microsoft PKI Quick Start Template:
-    * Open _CloudFormation console_ and select the created stack.
+    * Open [CloudFormation console](https://console.aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) and select the created stack.
     * Select **Delete**.
 7. If you created an S3 bucket to store the CRLs:
-    * Open _S3 console_ and select the created bucket.
+    * Open [S3 console](https://console.aws.amazon.com/s3/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) and select the created bucket.
     * Select Delete.
 8. Delete the secret in Secrets Manager:
-    * Open _Secrets Manager console_ and select **Secrets** on the left-side.
+    * Open [Secrets Manager console](https://console.aws.amazon.com/secretsmanager/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) and select **Secrets** on the left-side.
     * Choose the secret your created, select **Actions**, and select **Delete** secret.
 9. Remove the Kerberos Constrained Delegation setting from your AD Connector service account.
 10. Clean up any created DNS records, AD users, groups, and group policies your environment.
