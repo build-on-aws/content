@@ -31,11 +31,11 @@ https://www.twitch.tv/videos/1828171717
 ## Links from today's episode
 
 * [The lab: Testing resilience using chaos engineering](https://bit.ly/wa-chaos)
-* [Principles od Chaos Engineering](https://principlesofchaos.org/) 
+* [Principles of Chaos Engineering](https://principlesofchaos.org/) 
 
 
 **🐦 Reach out to the hosts and guests:**
 
 - Seth: [https://twitter.com/setheliot](https://twitter.com/setheliot)
 - Linda: [https://twitter.com/lindavivah](https://twitter.com/lindavivah)
-- Brian: [https://twitter.com/bketelsen](https://twitter.com/bketelesen)
+- Brian: [https://twitter.com/bketelsen](https://twitter.com/bketelsen)
