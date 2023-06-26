@@ -22,6 +22,7 @@ Today, Jacquie and Darko are going to follow a blog post by our colleague [Suman
 Also - do you know how much data 3M security tape holds? At 6250 bytes per inch, on 2000 inches of tape? The math is simple - not enough.
 
 Check out the recording here:
+
 https://www.twitch.tv/videos/1847253428
 
 ## Links from today's episode
