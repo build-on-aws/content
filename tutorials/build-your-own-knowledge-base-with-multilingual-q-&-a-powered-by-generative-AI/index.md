@@ -1,13 +1,13 @@
 ---
 title: "Build your own knowledge base with multilingual Q&A powered by generative AI"
-description: "AIML like API in your APP."
+description: "build a multilingual knowledge base using multiple sources, and deliver summarized results."
 tags:
     - AIML
     - artificial intelligence
     - machine learning
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes
-date: 2023-06-12
+date: 2023-06-26
 ---
 
 Organizations often accumulate a wide range of documents, including project documentation, manuals, tenders, Salesforce data, code repositories, and more. When searching through this vast amount of information, it can be a tedious process of locating the specific document and then conducting the search within it. Once you find the desired document, it may be lengthy, and you might prefer a summary of its content. 
@@ -169,7 +169,7 @@ Now that I've introduced you to [SageMaker JumpStart](https://docs.aws.amazon.co
 |3. Search for a [**Flan UL2**](https://huggingface.co/google/flan-ul2) model, and then clicl on **View model**.|![Flan UL2 search](images/fig_5.png)|
 |4. Open notebook in [Studio](https://aws.amazon.com/sagemaker/studio/)|![Flan UL2 search](images/fig_6.png)|
 |5. Create a [Sagemaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html) using [Quick setup](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html), this takes a few minutes⏳... or **Select domain and user profile** if you already have one created. |![Create a Sagemaker Domain](images/fig_7.png)![Select domain and user profile](images/fig_8.png)|
-|6. Follow the steps in jupyter notebook, explore it, and wait for me in step **5**|![Select domain and user profile](images/fig_9.png)|
+|6. Follow the steps in jupyter notebook, explore it, and wait for me in step **5**|![Select domain and user profile](images/fig_9.jpg)|
 
 In the jupyter notebook you can use FLAN-T5 model for many NLP tasks, without fine-tuning the model, such as: 
 
