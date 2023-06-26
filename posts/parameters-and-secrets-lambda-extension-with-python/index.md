@@ -224,7 +224,7 @@ export class CdkExtensionTestStack extends cdk.Stack {
       logLevel: lambda.ParamsAndSecretsLogLevel.INFO,
     })
     
-    const lambdaFunction = new lambda.Function(this, 'MyFunction', {
+    const lambdaFunction = new lambda.Function(this, 'TestExtensionsFunction', {
       runtime: lambda.Runtime.PYTHON_3_10,
       handler: 'index.lambda_handler',
       architecture: lambda.Architecture.ARM_64,
