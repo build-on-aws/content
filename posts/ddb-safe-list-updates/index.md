@@ -7,7 +7,6 @@ tags:
   - dynamodb
 spaces:
   - databases
-showInHomeFeed: true
 authorGithubAlias: robzhu
 authorName: Robert Zhu
 date: 2023-06-16

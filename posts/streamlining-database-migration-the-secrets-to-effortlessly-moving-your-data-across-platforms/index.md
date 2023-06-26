@@ -9,7 +9,6 @@ tags:
     - database-migration
 spaces:
   - databases
-showInHomeFeed: true
 authorGithubAlias: mpranshu
 authorName: Pranshu Mishra
 date: 2023-05-25

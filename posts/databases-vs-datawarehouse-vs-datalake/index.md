@@ -9,7 +9,6 @@ tags:
   - cloud
 spaces:
   - databases
-showInHomeFeed: true
 authorGithubAlias: agaankus
 authorName: Ankush Agarwal
 date: 2023-06-16

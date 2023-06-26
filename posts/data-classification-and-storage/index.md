@@ -14,7 +14,6 @@ tags:
   - aws
 spaces:
   - databases
-showInHomeFeed: true
 authorGithubAlias: aremutem
 authorName: Temi Aremu & Yusra Al-Sharafi
 date: 2022-10-31
