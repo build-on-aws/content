@@ -26,4 +26,4 @@ https://www.twitch.tv/videos/1804141763
 **🐦 Reach out to the hosts and guests:**
 
 - Darko: [https://twitter.com/darko-mesaros](https://twitter.com/darko-mesaros)
-- Brian: [https://twitter.com/bketelsen](https://twitter.com/bketelesen)
+- Brian: [https://twitter.com/bketelsen](https://twitter.com/bketelsen)
