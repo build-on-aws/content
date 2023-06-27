@@ -7,7 +7,7 @@ tags:
   - security
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
-date: 2022-06-26
+date: 2022-06-27
 ---
 This is a 10-part series:
 
