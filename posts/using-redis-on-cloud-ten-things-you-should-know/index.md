@@ -8,6 +8,8 @@ tags:
   - best-practices
   - memorydb
   - elasticache
+spaces:
+  - databases
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 externalCanonicalUrl: https://acloudguru.com/blog/engineering/how-to-use-redis-on-cloud

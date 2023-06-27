@@ -7,6 +7,8 @@ tags:
   - data lake
   - storage
   - cloud
+spaces:
+  - databases
 authorGithubAlias: agaankus
 authorName: Ankush Agarwal
 date: 2023-06-16

@@ -4,9 +4,11 @@ description: "Data migration is an essential process for businesses to keep thei
 tags:
     - cloud
     - dms
-    - database
+    - databases
     - schema-conversion
     - database-migration
+spaces:
+  - databases
 authorGithubAlias: mpranshu
 authorName: Pranshu Mishra
 date: 2023-05-25
