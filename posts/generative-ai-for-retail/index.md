@@ -44,7 +44,7 @@ According to the market research, the price of hiring a model for product photog
 
 ![Picture2](images/Picture2.png)
 You can do the same steps with different masked such as clothes, background and so on, then you can get tones of product photos in seconds.
-![Picture3](image/Picture3.png)
+![Picture3](images/Picture3.png)
 
 
 ### Scenario: Efficiently generate the advertising materials to increase sales
