@@ -1,6 +1,6 @@
 ---
 title: "Data Lake vs Data Warehouse vs Databases: Which Meets Your Storage Needs?"
-description: Databases, Data warehouses, and Data Lakes all have different purposes and use-cases, but understanding those differences isn't always easy. Here's a quick guide to help you navigate the sometimes-confusing world of cloud storage.
+description: "Databases, Data warehouses, and Data Lakes all have different purposes and use-cases, but understanding those differences isn't always easy. Here's a quick guide to help you navigate the sometimes-confusing world of cloud storage."
 tags:
   - databases
   - data warehouse
@@ -10,7 +10,7 @@ tags:
 authorGithubAlias: agaankus
 authorName: Ankush Agarwal
 date: 2023-06-16
---- 
+---
 
 Organizations that achieve success harness the business value inherent in their data. When devising a successful big data strategy, a crucial initial step is selecting the appropriate technology to store, search, analyze, and generate reports from the data. In this post, we will address frequently asked questions about databases, data lakes, and data warehouses. We will explore their definitions, distinctions, and help you determine which option is most suitable for your needs. 
 
