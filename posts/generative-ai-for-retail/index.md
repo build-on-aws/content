@@ -62,7 +62,7 @@ Take an advertisement of windbreaker as example, we will need the materials like
 ![Picture4](images/Picture4.png)
 * Then easily assemble the materials to an advertisement
 
-![My Movie 1](images/Movie1.mp4)
+![Picture5](images/Picture5.gif)
 
 
 ## Fine-tune the LoRA model with your own images data 
