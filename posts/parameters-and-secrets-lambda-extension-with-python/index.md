@@ -213,7 +213,7 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 export class CdkExtensionTestStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const secretCompleteArn = 'arn:aws:secretsmanager:eu-west-2:670984450623:secret:lambdaExtensionSecretExample-kljdzT';
+    const secretCompleteArn = 'YOUR_SECRET_ARN_HERE';
 
     const secret = sm.Secret.fromSecretAttributes(this, 'SecretFromAttributes', {
       secretCompleteArn,
