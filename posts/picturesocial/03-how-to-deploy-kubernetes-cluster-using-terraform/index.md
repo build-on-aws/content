@@ -6,6 +6,7 @@ tags:
   - kubernetes
   - eks
   - terraform
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-13

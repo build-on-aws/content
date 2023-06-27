@@ -5,6 +5,7 @@ tags:
   - owasp
   - application-security
   - security
+showInHomeFeed: true
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2022-06-27
