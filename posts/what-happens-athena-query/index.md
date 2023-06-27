@@ -64,11 +64,12 @@ CREATE EXTERNAL TABLE csv_demo (
     name string,
     last_login_at date
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 LOCATION 's3://<YOUR_BUCKET>/data/csv-example-1/'
+TBLPROPERTIES ("skip.header.line.count"="1")
 ```
 
-All this says is "create a new table, with the specified columns and data types, in the CSV format and located in this S3 bucket and prefix".
+All this says is "create a new table, with the specified columns and data types, in the CSV format and located in this S3 bucket and prefix."
 
 When you hit the **Run** button, here's what happens.
 
@@ -111,9 +112,10 @@ aws glue get-table --database-name default --name csv_demo
       "Compressed": false,
       "NumberOfBuckets": -1,
       "SerdeInfo": {
-        "SerializationLibrary": "org.apache.hadoop.hive.serde2.OpenCSVSerde",
+        "SerializationLibrary": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
         "Parameters": {
-          "serialization.format": "1"
+          "serialization.format": "1",
+          "field.delim": ","
         }
       },
       "BucketColumns": [],
@@ -130,6 +132,7 @@ aws glue get-table --database-name default --name csv_demo
     "TableType": "EXTERNAL_TABLE",
     "Parameters": {
       "EXTERNAL": "TRUE",
+      "skip.header.line.count": "1",
       "transient_lastDdlTime": "1683584242"
     },
     "CreatedBy": "arn:aws:sts::123456789012:assumed-role/Admin/your-aws-username",
@@ -144,9 +147,9 @@ aws glue get-table --database-name default --name csv_demo
 
 Let's take a quick pause to discuss an important component here - `SerDe`. What the heck is a SerDe and what is used for?!
 
-`SerDe`s are Java classes that tell Athena how to handle the data (it's short for Serializer/Deserializer). Athena supports [several serdes by default](https://docs.aws.amazon.com/athena/latest/ug/supported-serdes.html), but this is another area where I see folks get stuck. Particularly because you can create a table in the Glue Data Catalog with _ANY_ SerDe. While Athena [supports many popular data formats](https://docs.aws.amazon.com/athena/latest/ug/supported-serdes.html) like CSV, JSON, Parquet, and ORC, it doesn't support _every_ format. In addition, there can even be different SerDes for the same data type. Athena supports `LazySimpleSerDe` and `OpenCSVSerDe` for processing CSV files. For JSON, there's also both Hive JSON SerDe and OpenX JSON SerDe. Which SerDe you use depends on your data format and what features of that data format the SerDe itself supports. 
+`SerDe`s are Java classes that tell Athena how to handle the data (it's short for Serializer/Deserializer). The Glue Data Catalog lets you create a table with _ANY_ SerDe and this is another area where I see folks get stuck. While Athena [supports many popular data formats](https://docs.aws.amazon.com/athena/latest/ug/supported-serdes.html) like CSV, JSON, Parquet, and ORC, it doesn't support _every_ format. In addition, there can even be different SerDes for the same data type. Athena supports `LazySimpleSerDe` and `OpenCSVSerDe` for processing CSV files. For JSON, there's also both Hive JSON SerDe and OpenX JSON SerDe. Which SerDe you use depends on your data format and what features of that data format the SerDe itself supports. 
 
-I should also note that no data is "imported" into Athena and there's no data conversion happening or anything like. Athena is just telling the Glue Data Catalog "Hey, here's a table. It's located in this place in S3 and it uses this format. kthx!"
+I should also note that no data is "imported" into Athena and there's no data conversion happening or anything like that. Athena is just telling the Glue Data Catalog "Hey, here's a table. It's located in this place in S3 and it uses this format. kthx!"
 
 ```mermaid
 sequenceDiagram
@@ -170,23 +173,28 @@ Let's hop back into [the console](https://console.aws.amazon.com/athena/home#/qu
 SELECT * FROM csv_demo
 ```
 
-This is where quite a lot more activity happens. I'll break this up into 3 phases: validation, query, and output.
+This is where quite a lot more activity happens. I'll break this up into 3 phases: planning, execution, and output.
 
-### Validation
+### Planning
 
 1. Athena queries the Glue Data Catalog for the `csv_demo` table.
     1. If that doesn't exist, Athena will return an error.
 2. Next, Athena checks the SerDe on the table to make sure it's supported.
-3. Athena will also check to see if the user has permission to the S3 path provided in the table location.
+3. Athena makes one or more `ListObjectsV2` calls to your S3 bucket.
+    1. If the user doesn't have permission to the S3 path in the table location, Athena will return an error.
+
+Athena uses the list operation to find all the objects in order to plan your query. Sometimes...this can take a while depending on how many objects you have! _Imagine if you will a bucket with millions and millions of tiny files._ This is where "partitioning" comes in handy, and we'll talk about that below.
+
+💁 It's also important to note that this planning stage happens on a single node, the Athena coordinator.
 
 Now that Athena knows where the data is and the format to use, it's time to read some data!
 
-### Query
+### Execution
 
-First Athena needs to _plan_ the query. It uses some of the data from the validation stage as well as information it gathers from the bucket.
+Athena uses the information above to plan your query and once that's done, it can begin to distribute the work of reading and analyzing the data to it's workers. As a distributed query engine, Athena scales out the work of reading the various files from S3 to a larger number of worker systems. 
 
-1. Athena makes a `LIST_OBJECTS` call to your S3 bucket. This is to find all the objects that it needs to open in order to run your query. Sometimes...this can take a while depending on how many objects you have! _Imagine if you will a bucket with millions and millions of tiny files._ This is where "partitioning" comes in handy, and we'll talk about that below.
-2. For each object, Athena begins to distribute work to different worker nodes call `GET_OBJECT` is called to retrieve teh data from S3.
+1. Athena splits the work into chunks and communicates the work to be performed to the various workers.
+2. For each object on S3, the worker nodes call `GetObject` to retrieve the data from S3.
 
 I'm going to pause here because there's a very important thing to realize. The way that Athena works changes wildly depending on the type of files that are being read from S3. Certain file types are splittable across multiple workers while others aren't. Other file types have built-in aggregate metrics that Athena can use while other file types need to be completely read by Athena in order to compute the metrics itself.
 
@@ -206,8 +214,12 @@ For `SELECT` queries, Athena will create a new CSV file in your "Query result lo
 
 When writing is finished, Athena can begin showing the results to you. It does this simply by reading the results file from S3 and showing it to you in the console!
 
-Here's what the whole process looks like from start to finish.
+It's also important to note something else here - Athena is asynchronous and stateless - what does that mean?
+- You don't have to stick around in the console to wait for results to come back.
+- You can look at the results from previous queries (for up to 45 days).
+- Athena wants to reuse the compute resources used by your query, which is why it writes the results to S3.
 
+Here's what the whole process looks like from start to finish.
 
 ```mermaid
 sequenceDiagram
@@ -326,9 +338,9 @@ It also means that we can limit the number of files scanned for a particular Ath
 
 For a few files...not a big deal. But if you've got a billion tiny little CSV files sitting in S3...because who doesn't...it can make a **huge** difference.
 
-### Column-based Binary File Formats
+### Columnar File Formats
 
-A common approach to optimizing data on S3 is to convert row-based formats (like JSON and CSV) to binary, columnar-based formats (like Parquet and ORC). I never really understood columnar-based formats until I started diving in to how query engines like Athena read the data from S3. There are two huge benefits.
+A common approach to optimizing data on S3 is to convert row-based formats (like JSON and CSV) to binary, columnar-based formats (like Parquet and ORC). I never really understood columnar formats until I started diving in to how query engines like Athena read the data from S3. There are two huge benefits.
 
 1. When selecting specific columns from your data
 
