@@ -6,6 +6,7 @@ tags:
   - containers
   - eks
   - karpenter
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-03-27
