@@ -47,12 +47,8 @@ In this tutorial you will create a Windows Server 2022 instance and deploy a ASP
 | ✅ AWS Level | Intermediate - 200 |
 | ⏱ Time to complete  | 45 mins |
 | 💰 Cost to complete| Free Tier eligible |
-|  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/).<br>
-- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials <br>
-- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system. |
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](clone https://github.com/build-on-aws/practical-cloud-guide-code)
-- [.Net](https://dotnet.microsoft.com/en-us/download) installed 
-- [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3) for your operating system.                            |
+|  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/).<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials <br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.<br> - [.NET](https://dotnet.microsoft.com/en-us/download) installed <br>- [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3) for your operating system. |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](clone https://github.com/build-on-aws/practical-cloud-guide-code) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-05-31                             |
 
@@ -69,11 +65,11 @@ This tutorial is based on a scenario where a compiled and packaged application h
 
 ## Module 1: Clone the repository and compile
 
-In this module, the software and deployment script is in a GitHub repository. You will clone the repository to copy the files to your local drive. You will compile the application with [.NET](https://dotnet.microsoft.com/en-us/download) and package it with zip file.  
+In this module, the software and deployment script is in a GitHub repository. You will clone the repository to copy the files to your local drive. You will compile the application with [.NET](https://dotnet.microsoft.com/en-us/download) and package it in a zip file.  
 
 ### Implementation instructions
 
-Step 1: Clone the `practical-cloud-guide` repository. Build and zip the application. 
+Step 1: Clone the `practical-cloud-guide-code` repository. Build and zip the application. 
 
 ```bash
 git clone https://github.com/build-on-aws/practical-cloud-guide-code
@@ -83,7 +79,7 @@ Step 2: Compile the ASP.NET Core application.
 
 This step compiles the C# code into an executable and creates a `publish` directory.
 
-In Windows, Linux, or Macos:
+In Windows, Linux, or macOS:
 
 ```powershell
 cd ./practical-cloud-guide-code/run-to-build/windows-app-deploy/aspnetcoreapp/
@@ -101,7 +97,7 @@ cd ./practical-cloud-guide-code/run-to-build/windows-app-deploy/aspnetcoreapp/bi
 Compress-Archive -Path ./ -DestinationPath ./deploy/app.zip
 ```
 
-In Linux or Macos:
+In Linux or macOS:
 
 ```bash
 cd ./practical-cloud-guide-code/run-to-build/windows-app-deploy/aspnetcoreapp/bin/Release/net6.0/publish
@@ -124,7 +120,7 @@ Choose **Storage**.
 
 ![Choose Storage in the Lightsail menu](./images/lightsail-s3-bucket-1.png)
 
-In the **Create a new bucket** page choose the **5GB storage plan** and give the bucket a unique name, such as `<*my*>-practical-cloud-guide`. Note that bucket names must be globally unique. Select **Create Bucket**.
+In the **Create a new bucket** page choose the **5GB storage plan** and give the bucket a unique name, such as `<my>-practical-cloud-guide`. Note that bucket names must be globally unique. Select **Create Bucket**.
 
 ![Create an S3 bucket](./images/lightsail-s3-bucket-2.png)
 
@@ -169,7 +165,7 @@ Choose an instance plan, for this tutorial you can use the smallest plan, but la
 
 ![Choose an instance plan](./images/PCG-9-lightsail.png)
 
-Add a script to create a directory and download the application and deploy script. Copy this script int
+Add a script to create a directory and download the application and deploy script. Copy this script intp the **Launch script** input box. Replace the values for the access key, security key, and region with your account.
 
 ```powershell
 <powershell>
@@ -188,6 +184,8 @@ iex (Copy-S3Object -BucketName $YourBucketName -Key $YourAppKey -LocalFile C:\de
 
 > Note: Using access keys is not recommended practice, but for purposes of demonstration access keys are used in this tutorial. The keys will be deleted after the deployment.
 
+![Launch script](./images/PCG-lightsail-launch-script.png)
+
 Name your instance `Windows_Server_IIS`. Then choose **Create Instance**.
 
 ## Module 4: Deploy an ASP.NET Core application
@@ -200,13 +198,24 @@ This module shows how to install and configure IIS in Windows Server 2022 and de
 
 Step 1: Deploy IIS and an ASP.NET Core application
 
-The deploy_iis.ps1 Powershell script automates the process of installing IIS and its management tools., configuring a new website and deploying a ASP.NET Core Razor application. Let’s break down the script before running it.
+The deploy_iis.ps1 Powershell script automates the process of installing IIS and its management tools, configuring a new website, and deploying a ASP.NET Core Razor application. Let's start by logging into the server using the built in Remote Desktop Client (RDP). Choose the computer icon to open the RDP window.
 
-The first part of the script installs IIS and the management tools. To host the ASP.NET Core application, IIS requires ASP.NET Core hosting bundle. To learn more about IIS configuration see the IIS documentation. Note that the script sets ProgressPreference to SilentlyContinue to prevent cmdlet outputs from writing to the terminal.
+![RDP client](./images/PCG-lightsail-RDP.png)
 
-Set-Variable $global:ProgressPreference SilentlyContinue
+Open a Powershell terminal from the Windows Start menu. Change the directory to `C:\deploy` and use notepad to view the `deploy_iis.ps1` script.
 
 ```powershell
+cd C:\deploy
+notepad.exe ./deploy_iis.ps1
+```
+
+Let’s break down the script before running it.
+
+The first part of the script installs IIS and the management tools. To host the ASP.NET Core application, IIS requires ASP.NET Core 6.0 hosting bundle. To learn more about IIS configuration see the IIS documentation. Note that the script sets ProgressPreference to `SilentlyContinue` to prevent cmdlet outputs from writing to the terminal.
+
+```powershell
+Set-Variable $global:ProgressPreference SilentlyContinue
+
 # Install IIS
 Install-WindowsFeature Web-Server -IncludeManagementTools
 
@@ -233,10 +242,11 @@ Copy-S3Object -BucketName $YourBucketName -Key $AppKey -LocalFile $AppFile
 Expand-Archive $AppFile -DestinationPath "C:\inet\newsite"
 ```
 
-The third part of the script disables the default IIS website, configures an ApplicationPool, a website, and deploys the application. If the script runs successfully, it opens Microsoft Edge and displays the application. See the Microsoft documentation for website configuration.
+The third part of the script disables the default IIS website, configures a new ApplicationPool, a website, and deploys the application. If the script runs successfully, it opens Microsoft Edge and displays the application. See the Microsoft documentation for website configuration.
 
-At the end of the script, your AWS credentials are removed. Removing the credentials is good practice because the server does not need access to other AWS services or resources.
+At the end of the script, your AWS credentials are removed. Removing the credentials is a best security practice because the server does not need access to other AWS services or resources. In future tutorials, you will learn how to use the Identity and Access Management (IAM) service to build infrastructure with temporary credentials.
 
+```powershell
 # Create application pool
 $appPoolName = 'DemoAppPool'
 New-WebAppPool -Name $appPoolName -force
@@ -253,11 +263,11 @@ Set-ItemProperty IIS:\sites\DemoSite\DemoApp -name applicationPool -value $appPo
 Start-WebAppPool -Name $appPoolName
 Start-WebSite -Name "DemoSite"
 
-# delete AWS credentials
-Remove-AWSCredentialProfile -Force -ProfileName default
-
 # Open application on Edge
 start microsoft-edge:http://localhost:8080/DemoApp
+
+# delete AWS credentials
+Remove-AWSCredentialProfile -Force -ProfileName default
 ```
 
 Run the script to complete the installation and deployment.
