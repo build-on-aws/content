@@ -13,20 +13,20 @@ date: 2023-06-19
 ---
 
 Real-time data analytics allows businesses to stay ahead of their competitors by enabling them to identify emerging trends or changes in customer behavior while also providing them with the ability to monitor critical events in real-time.
-Some common use cases for real time data analytics include:
+Some common use cases for real-time data analytics include:
 
 1. Clickstream analytics to determine customer behavior
 2. Analyze real-time events from IoT devices
-3. Feed real time dashboards
-4. Trigger real time notifications and alarms 
+3. Feed real-time dashboards
+4. Trigger real-time notifications and alarms
 
-To perform real-time analytics, a distinct set of tools are necessary for the collection and analysis of streaming data as compared to traditional analytic methods. The required infrastructure entails the selection of a messaging system, such as [Amazon Kinesis Data Streams](https://aws.amazon.com/kinesis/data-streams?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (KDS) or Apache Kafka to support the capture of real-time data, and a real-time processing engine such as Amazon Kinesis Data Analytics or Apache Spark, to enable fast processing and analysis of incoming information.
-In this blog post we will ingest data into Kinesis Data Streams and analyze it using Kinesis Data Analytics.
+To perform real-time analytics, a distinct set of tools are necessary for the collection and analysis of streaming data as compared to traditional analytic methods. The required infrastructure entails the selection of a messaging system, such as [Amazon Kinesis Data Streams (KDS)](https://aws.amazon.com/kinesis/data-streams?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) or Apache Kafka to support the capture of real-time data, and a real-time processing engine such as Amazon Kinesis Data Analytics or Apache Spark, to enable fast processing and analysis of incoming information.
+In this blog post we will ingest data into Kinesis Data Streams and analyze it using [Amazon Kinesis Data Analytics for Apache Flink (KDA)](https://console.aws.amazon.com/kinesisanalytics/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 Apache Flink is an open-source stream processing engine that enables businesses to process streams and batch data for analytics, ETL processes, and data pipelines. At the heart of its functioning is a streaming runtime that provides distributed processing and fault tolerance capabilities.
 Apache Flink enables developers familiar with SQL to process and analyze streaming data with ease. Flink offers SQL syntax that supports event processing, time windows, and aggregations. This combination makes it a highly effective streaming query engine.
 
-[Amazon Kinesis Data Analytics](https://aws.amazon.com/kinesis/data-analytics?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (KDA) is a fully managed service that allows businesses to analyze real-time streaming data using SQL or programming languages such as Java, Scala, and Python. Running on Apache Flink, Amazon KDA diminishes the complication of building, preserving, and integrating Apache Flink applications with other AWS services.
+[Amazon Kinesis Data Analytics (KDA)](https://aws.amazon.com/kinesis/data-analytics?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a fully managed service that allows businesses to analyze real-time streaming data using SQL or programming languages such as Java, Scala, and Python. Running on Apache Flink, Amazon KDA diminishes the complication of building, preserving, and integrating Apache Flink applications with other AWS services.
 
 Performing SQL queries with KDA is possible by utilizing KDA Studio Notebooks. These Notebooks are backed by Apache Zeppelin, allowing you to query data streams interactively in real-time and develop stream processing applications that use common SQL, Python, and Scala. By clicking just a few buttons, you can start a serverless notebook in the AWS Management console to query data streams and receive quick results. These notebooks provide a user-friendly interactive development experience while taking advantage of powerful capabilities powered by Apache Flink.
 
@@ -35,7 +35,8 @@ Performing SQL queries with KDA is possible by utilizing KDA Studio Notebooks. T
 | ✅ AWS Level        | 200                             |
 | ⏱ Time to complete  | 45 mins - 60 mins                      |
 | 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
-| ⏰ Last Updated     | 2023-06-19                           |
+| 🔨 Services used | - Kinesis Data Streams <br> - Kinesis Data Analytics <br> - S3 bucket <br> - Glue Data Catalog |
+| ⏰ Last Updated     | 2023-06-28                           |
 
 |ToC|
 |--|
@@ -43,7 +44,7 @@ Performing SQL queries with KDA is possible by utilizing KDA Studio Notebooks. T
 ## What we’ll learn
 
 1. How to run SQL queries on streaming data with KDA Studio Notebooks
-2. How to deploy KDA studio notebook as a long running KDA application
+2. How to deploy KDA studio notebook as a long-running KDA application
 
 ## What we’ll build
 
@@ -59,7 +60,7 @@ The proposed solution consists of the following elements:
 
 ## Walkthrough
 
-### Setting up the environment 
+### Setting up the environment
 
 #### Create an Amazon S3 bucket and upload the sample data
 
@@ -106,7 +107,7 @@ Your S3 bucket should look like the following screenshot.
 #### Update the IAM permissions
 
 1. Go to the [_IAM Console Roles_](https://console.aws.amazon.com/iamv2/home?#/roles?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-2. Search for the name of the role that you created earlier in Step 8 during the KDA Studio creation. 
+2. Search for the name of the role that you created earlier in Step 8 during the KDA Studio creation.
 
 ![IAM Roles](images/IAM_1.png)
 
@@ -240,7 +241,7 @@ Now that we are ingesting the data into KDS, let’s create a new Zeppelin note 
 
 In order to count the number of trips for every borough in NYC we will need pickup location information.
 
-The data in `trips` table contains pickup location id (`PULocationID`), however, it does not contain information in which borough the trip was initiated. Luckily, we have the information which borough does every `LocationID` correspond to, in the separate file on S3 named `taxi_zone_with_geohash.csv`. 
+The data in `trips` table contains pickup location id (`PULocationID`), however, it does not contain information in which borough the trip was initiated. Luckily, we have the information which borough does every `LocationID` correspond to, in the separate file on S3 named `taxi_zone_with_geohash.csv`.
 
 First, we need to create a table that will represent the data in the `taxi_zone_with_geohash.csv` file.
 
@@ -282,7 +283,7 @@ GROUP BY locations.borough
 
 ##### Query 2: Count number of trips that occurred in Manhattan every hour
 
-The purpose of this query is to determine in which time windows NYC taxi demand is the highest in Manhattan. For that we will introduce streaming windows. 
+The purpose of this query is to determine in which time windows NYC taxi demand is the highest in Manhattan. For that we will introduce streaming windows.
 
 Windows in Apache Flink are a way of dividing up a stream into a series of finite sub-streams, each containing all of the events that fall within a certain time frame. This makes it possible to perform computations and analyses on those sub-streams as discrete units.
 
@@ -342,7 +343,7 @@ INSERT INTO s3_query1
 
 ### Build and deploy the KDA Studio Notebooks as a long running app
 
-KDA Studio Notebooks gave us the possibility to develop and test our queries interactively, by running and getting the results in real time. For a production Flink application, we would need to deploy the Studio Notebook. This will create an application that will run continuously, by reading data from the data sources, performing the analysis and writing the data to the defined destinations. This application will scale automatically based on the throughput of the source data stream.
+KDA Studio Notebooks gave us the possibility to develop and test our queries interactively, by running and getting the results in real-time. For a production Flink application, we would need to deploy the Studio Notebook. This will create an application that will run continuously, by reading data from the data sources, performing the analysis and writing the data to the defined destinations. This application will scale automatically based on the throughput of the source data stream.
 To build and deploy the KDA Studio notebooks you need to follow the below steps:
 
 1. Select the first option Build `<Filename>`, on the top-right dropdown Actions for `<Filename>`
