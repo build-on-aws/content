@@ -50,7 +50,7 @@ In this tutorial you will create a Windows Server 2022 instance and deploy a ASP
 |  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/).<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials <br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.<br> - [.NET](https://dotnet.microsoft.com/en-us/download) installed <br>- [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3) for your operating system. |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](clone https://github.com/build-on-aws/practical-cloud-guide-code) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-05-31                             |
+| ⏰ Last Updated     | 2023-05-31  |
 
 | ToC |
 |-----|
