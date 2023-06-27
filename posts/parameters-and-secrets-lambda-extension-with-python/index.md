@@ -37,7 +37,7 @@ Use the standard encryption and navigate to the next page, where we'll add the n
 
 ![Adding a name and description for our secret](images/secret-name-description.png)
 
-Keep all other settings as default and click through the pages until you reach 'Review'. You'll notice they give example code for retriveing your secretm using the SDK - but we don't want to use that. Instead, click 'Store' to save your secret.
+Keep all other settings as default and click through the pages until you reach 'Review'. You'll notice they give example code for retriveing your secret using the SDK - but we don't want to use that. Instead, click 'Store' to save your secret.
 
 NB - If it doesn't look like your secret has been stored immediately, press the refresh button on the page (next to ``Store a new secret``) and it should appear.
 
@@ -118,7 +118,7 @@ Click on the ``Configuration`` Tab and then the ``Permissions`` Section. Click o
 
 ![The lambda Configuration page](images/lambda-configuration.png)
 
-We could attach a policy to give us full read and write access to Secrets Manager, but that defies the rule of 'least privilege' so instead we'll add only the permission to read the secret that we want. If we were fetching from Parameter Store, we would need to add similar permissions to access from there.
+We could attach a policy to give us full read and write access to Secrets Manager, but that defies the rule of 'least privilege', so instead we'll add only the permission to read the secret that we want. If we were fetching from Parameter Store, we would need to add similar permissions to access from there.
 
 Click on ``Add Permissions`` and then ``Create inline policy``. Choose the ``JSON`` tab and then paste in the following:
 
