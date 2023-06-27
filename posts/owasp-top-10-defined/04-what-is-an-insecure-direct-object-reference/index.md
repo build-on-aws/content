@@ -37,11 +37,12 @@ In essence, IDOR vulnerabilities highlight the importance of properly securing o
 ## Impact
 
 The impact of an IDOR attack can be:
+
 - Unauthorized information disclosure
 - Modification or destruction of data
 - Performing a function outside the limits of the user, potentially including privilege escalation like in our example above.
 
-In the following example, we will see how an IDOR can result in unathorized information dsiclosure.
+In the following example, we will see how an IDOR can result in unauthorized information disclosure.
 
 ## A simple example
 
@@ -57,9 +58,9 @@ Let's click on **Your Basket** in the menu bar. As you can see, my shopping bask
 
 ![A screenshot of my empty basket in OWASP Juice Shop](images/juice-shop-basket.png)
 
-For a regular user, there is nothing special about this page. But an attacker might be aware of the fact that a shopping basket is probably associated with a specific id. Let's do some reconnaissance and see if we can find an id. Looking at the network traffic in the web browser's developer tools, we find an interesting API request: 
+For a regular user, there is nothing special about this page. But an attacker might be aware of the fact that a shopping basket is probably associated with a specific id. Let's do some reconnaissance and see if we can find an id. Looking at the network traffic in the web browser's developer tools, we find an interesting API request:
 
-```
+```text
 GET /rest/basket/6 HTTP/1.1
 Host: ...
 User-Agent: ...
@@ -92,7 +93,7 @@ In this case, the basket id is an **Insecure Direct Object Reference (IDOR)** be
 
 A seemingly easy fix to this vulnerability is to use more complex, random, and hard to guess basket ids, like UUIDs (Universally Unique Identifiers, e.g. `88c2652a-8080-4c9e-b1b0-42122b35e9a1`).
 
-However, this approach would mean that the security of our application depends on secrecy or hidden aspects of the system. This approach is commonly known as **Security by Obscurity** and is considered weak and unreliable. Determined attackers can often discover obscured ids through further analysis or reverse engineering. 
+However, this approach would mean that the security of our application depends on secrecy or hidden aspects of the system. This approach is commonly known as **Security by Obscurity** and is considered weak and unreliable. Determined attackers can often discover obscured ids through further analysis or reverse engineering.
 
 An IDOR vulnerability is a type of **Broken Access Control**, which is one of the most common web application security risks. To mitigate IDOR vulnerabilities, it is essential to implement robust security measures, such as proper authentication and authorization checks, instead of relying on hidden or undisclosed components of a system.
 
@@ -100,11 +101,11 @@ An IDOR vulnerability is a type of **Broken Access Control**, which is one of th
 
 ## How to fix the example
 
-Let's have look at the source code of the OWASP Juice Shop, which can be found at [github.com/juice-shop](https:github.com/juice-shop). 
+Let's have look at the source code of the OWASP Juice Shop, which can be found at [github.com/juice-shop](https:github.com/juice-shop).
 
 Here's an excerpt from the source file _(basket.ts)_:
 
-```
+```javascript
 module.exports = function retrieveBasket () {
   return (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
@@ -126,8 +127,7 @@ To fix this, let's retrieve the user's id from the request and compare it with t
 
 Here's the modified function:
 
-
-```
+```javascript
 module.exports = function retrieveBasket () {
   return (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id
@@ -149,6 +149,6 @@ module.exports = function retrieveBasket () {
 
 ## Conclusion
 
-Insecure Direct Object Reference (IDOR) attacks can lead to serious unintended consequences, including unauthorized access, data modification, and privilege escalation. Relying on hidden aspects of the system--also known as security by obscurity--is unreliable. 
+Insecure Direct Object Reference (IDOR) attacks can lead to serious unintended consequences, including unauthorized access, data modification, and privilege escalation. Relying on hidden aspects of the system--also known as security by obscurity--is unreliable.
 
 To prevent IDOR attacks, it is crucial to implement robust access control, validate user access rights, and perform proper authorization checks
