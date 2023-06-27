@@ -7,7 +7,7 @@ tags:
   - sql
 authorGithubAlias: dacort
 authorName: Damon Cortesi
-date: 2023-06-22
+date: 2023-06-27
 ---
 
 Hi folks, Damon here. Today I want to walk through you through what happens when you hit "SUBMIT" on the Athena console and run a query. First, a little background. I first heard about Athena when it was announced in 2016. I had just finished building a fairly typical data pipeline at the time, with data being extracted from operational databases and third-party APIs to S3, loaded into a staging data warehouse, and curated into a production data warehouse. I was floored with how easy Athena would have made several stages of my pipeline and within a year I was working as a Big Data Architect within AWS helping customers make use of EMR, Athena, and Glue. One of the most common topics of conversations was around exactly how Athena works and how to optimize queries for Athena. I've heard how people think that Athena is a Magical Mystery SQL box, but in reality it's fairly straight-forward how queries get executed. And the more you understand about it, the better you can optimize it! Let's get started.
