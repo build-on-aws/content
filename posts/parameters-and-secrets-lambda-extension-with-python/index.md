@@ -266,6 +266,6 @@ def lambda_handler(event, context):
   }
 }
 ```
-Even though I write my CDK in Typescript, you can see I've inlined the python code inside of the file, meaning all of our infrastructure allocation and the lambda code is contained inside one small file! We're also using the version of the extension rather than it's arn, although you can do that too. And because we're granting access to the function to retrieve the secret the permissions are all handled for us, so we don't need to muck about with iam at all.
+Even though I write my CDK in Typescript, you can see I've inlined the python code inside of the file, meaning all of our infrastructure allocation and the lambda code is contained inside one small file! We're also using the version of the extension rather than it's arn, although you can do that too. We're importing the secret arn, so you'll need to grab that from the Secrets Manager console page.x And because we're granting access to the function to retrieve the secret the permissions are all handled for us, so we don't need to muck about with iam at all.
 
 So now we have 3 different ways to start using the AWS Parameters and Secrets Lambda Extension! Let me know if you have any questions, problems or issues, and happy building!
