@@ -8,7 +8,7 @@ tags:
   - lime
   - local-interpretable-model-agnostic-explanation
 authorGithubAlias: cyrusmvahid
-authorName: Cyrus Vahid
+authorName: Cyrus Vahid 
 date: 2022-07-08
 
 ---
