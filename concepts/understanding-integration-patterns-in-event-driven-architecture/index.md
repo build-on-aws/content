@@ -148,7 +148,7 @@ This approach is called "saga pattern" because the sequence of transactions that
 
 ### Event sourcing
 
-With event sourcing, we store all events in a repository (event log). From the event log, we are able to reconstruct the current and any paste state of the system.
+With event sourcing, we store all events in a repository (event log). From the event log, we are able to reconstruct the current and any past state of the system.
 
 Because events are immutable and contain a timestamp, the event log is append-only and effectively a time series of events. Depending on the volumes, it can be complex to store and manage all the events and being able to query in a reasonable time the event log to rebuild the state of the system at a specific time. For these reason, different solutions have been built over time but this pattern has not been widely adopted.
 
