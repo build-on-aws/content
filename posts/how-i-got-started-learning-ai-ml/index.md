@@ -86,9 +86,9 @@ While interacting with others, I got introduced to the material being presented 
 
 ### Step - 2: Attended Formal trainings for structured and comprehensive learning
 
-1. [Machine Learning University](https://aws.amazon.com/machine-learning/mlu/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a place for beginners that helped me with a self-service pathway to understand the foundations of Machine Learning. 
+1. [Machine Learning University](https://aws.amazon.com/machine-learning/mlu/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a place for beginners that helped me with a self-service pathway to understand the foundations of Machine Learning. 
 
-2. I developed a custom [ramp-up guide](https://d1.awsstatic.com/training-and-certification/ramp-up_guides/Ramp-Up_Guide_Machine_Learning.pdf?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) that suits my learning needs to advance on specific needs such like natural language processing and computer vision
+2. I developed a custom [ramp-up guide](https://d1.awsstatic.com/training-and-certification/ramp-up_guides/Ramp-Up_Guide_Machine_Learning.pdf?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) that suits my learning needs to advance on specific needs such like natural language processing and computer vision
 
 ### Step - 3: Self-assessment allowed me to identify knowledge gaps, set my learning goals, monitor progress, and fine tune my learning style
 
@@ -100,8 +100,8 @@ While interacting with others, I got introduced to the material being presented 
 
 ### Step - 4: Practice and challenges helped me with reinforced knowledge, identify weaknesses, encourage problem-solving, and increase creativity
 
-1. Practicing helped to reinforce the concepts and skills that I learned. [AI/ML Workshops](https://workshops.aws/categories/AI%2FML?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) helped to improve the knowledge i gathered and comprehension of the concepts.
+1. Practicing helped to reinforce the concepts and skills that I learned. [AI/ML Workshops](https://workshops.aws/categories/AI%2FML?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) helped to improve the knowledge i gathered and comprehension of the concepts.
 
-2. Participating on competitions helped me to develop and refine my skills with specific technology. With repeated participation on events like [AWS Deep racer](https://aws.amazon.com/deepracer/league/?c=ml&sec=rsc?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) league increased my proficiency and efficiency with the technology.
+2. Participating on competitions helped me to develop and refine my skills with specific technology. With repeated participation on events like [AWS Deep racer](https://aws.amazon.com/deepracer/league/?c=ml&sec=rsc?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) league increased my proficiency and efficiency with the technology.
 
 Go Build and Enjoy solving real world problems!
