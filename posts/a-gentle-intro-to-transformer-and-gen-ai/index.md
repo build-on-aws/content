@@ -1,20 +1,19 @@
-# A Gentle Introduction to Transformer Architecture and Relevance to Generative AI
-**Description:** This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customizing your interaction with the large language models.
-
-**Tags:**
-  - Transformer Architecture
-  - LLM
-  - Generative AI
-  - Prompt Engineering
-  - Fine Tuning
-
-**Author Github Alias:** pcolmer99, Xiaoyuao988
-
-**Author Name:** Paul Colmer, Xiaoyu Xing
-
-**Date:** 2023-06-22
-
-## Transformer Architecture
+---
+title: "A Gentle Introduction to Transformer Architecture and Relevance to Generative AI"  
+description: "This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customizing your interaction with the large language models."
+tags:  
+  - transformer-architecture
+  - llm
+  - gen-ai
+  - prompt-engineering
+  - fine-tuning
+authorGithubAlias: pcolmer99
+authorName: Paul Colmer
+additionalAuthors: 
+  - authorGithubAlias: Xiaoyuao988
+    authorName: Xiaoyu Xing
+date: 2023-06-22  
+---
 
 Interest in the use of Generative AI has skyrocketed in the past few months.  Many of AWS customers are wanting to learn how they can experiment with the models on the Amazon SageMaker service, particularly in the area of natural language processing.  But what is the secret sauce behind large language models and how do they work?
 
