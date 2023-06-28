@@ -1,6 +1,6 @@
 ---
 title: "Build a Real-Time Streaming Analytics Application on Apache Kafka"
-description: "Learn how to build an end-to-end, real-time streaming analytics application on AWS using Apache Kafka and Apache Flink"
+description: "Learn how to build an end-to-end, real-time streaming analytics application on AWS using Apache Kafka and Apache Flink."
 tags:
   - streaming
   - apache-kafka
@@ -31,7 +31,7 @@ This tutorial shows you how to setup and implement a real-time data pipeline usi
 |ToC|
 |--|
 
-## We Will Accomplish
+## What We Will Accomplish
 
 In this tutorial, we will:
 
@@ -137,7 +137,7 @@ Wait until the status of the stack changes from `CREATE_IN_PROGRESS` to `CREATE_
 
 Once the status changes to `CREATE_COMPLETE`, the resources that were defined in the CloudFormation template have been created in your AWS account. However, there are few more resources and configurations required until we end up with an end-to-end real-time streaming application.
 
-Next, we can create the MSK cluster on AWS. There are two types of clusters available on AWS: MSK Serverless that provides on-demand capacity with automatic scaling and MSK Provisioned which grants greater control by allowing you to specify the number of brokers and amount of storage per broker in your cluster. However, MSK Provisioned does not scale automatically as your application I/O demand changes. In this tutorial, we choose MSK Serverless as we do not want to worry about the underlying infrastructure and keep the management overhead to a minimum.
+Next, we will create the MSK cluster on AWS. There are two types of clusters available on AWS: MSK Serverless that provides on-demand capacity with automatic scaling and MSK Provisioned which grants greater control by allowing you to specify the number of brokers and amount of storage per broker in your cluster. However, MSK Provisioned does not scale automatically as your application I/O demand changes. In this tutorial, we choose MSK Serverless as we do not want to worry about the underlying infrastructure and keep the management overhead to a minimum.
 
 ### Step 5: Create the MSK Serverless Cluster
 
@@ -219,7 +219,7 @@ cat create_topics.sh
 
 If you'd like, feel free to run other Kafka commands to get a better understanding of your MSK cluster.
 
-### Step 7: Start Container Application to Generate Clickstream Data
+### Step 7: Start a Container Application to Generate Clickstream Data
 
 After we have successfully created the MSK cluster, the next step is to set up the producer that will write data to the topic `clickstream` that we have created in the previous step. For that we'll deploy a serverless Amazon ECS Fargate container that runs an application, generating sample clickstream data to MSK Serverless cluster.
 
