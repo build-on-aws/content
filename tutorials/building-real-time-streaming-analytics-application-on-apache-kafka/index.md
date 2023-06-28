@@ -1,42 +1,44 @@
 ---
 title: "Build a Real-Time Streaming Analytics Application on Apache Kafka"
-description: "Learn how to build an end-to-end, real-time streaming analytics application on AWS using Apache Kafka and Apache Flink."
+description: "Learn how to build an end-to-end, real-time streaming analytics application on AWS using Apache Kafka and Apache Flink"
 tags:
   - streaming
-  - kafka
+  - apache-kafka
   - flink
+  - ecs
   - aws
   - tutorials
+showInHomeFeed: true
 authorGithubAlias: Madabaru
 authorName: Felix John
-date: 2023-06-15
+date: 2023-06-27
 ---
 
-In today’s fast-paced digital world, real-time streaming analytics have become increasingly important as organisations seek to understand what customers, applications, and products are doing right now - so they can react promptly. For example, businesses want to analyse data in real-time to continuously monitor an application, ensuring high service uptime and personalize promotional offers and product recommendations to customers. However, building such an end-to-end, real-time streaming application with Apache Kafka producer and consumer can be quite challenging. 
+In today’s fast-paced digital world, real-time streaming analytics have become increasingly important as organisations seek to understand what customers, applications, and products are doing right now - so they can react promptly. For example, businesses want to analyse data in real-time to continuously monitor an application, ensuring high service uptime and personalize promotional offers and product recommendations to customers. However, building such an end-to-end, real-time streaming application with Apache Kafka producer and consumer can be quite challenging.
 
 This tutorial shows you how to setup and implement a real-time data pipeline using Amazon Managed Streaming for Apache Kafka (MSK). More specifically, the guide details how streaming data can be ingested to the Kafka cluster, processed in real-time and consumed by a downstream application.
 
-## Table of Content
-
 | Attributes          |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | 200                             |
+| ✅ AWS Level        | Intermediate - 200                             |
 | ⏱ Time to complete  | 45 mins - 60 mins                      |
 | 💰 Cost to complete | USD 4.00                               |
-| 🧩 Prerequisites       | - An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - An IAM user that has the access to create AWS resources <br> - Basic understanding of CLI <br> - Java and Apache Maven installed |
-| ⏰ Last Updated     | 2023-06-15                           |
+| 🧩 Prerequisites       | - An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - An IAM user that has the access to create AWS resources <br> - Basic understanding of CLI <br> - Java and Apache Maven installed |
+| 💻 Code         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/real-time-streaming-analytics-application-using-apache-kafka) |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | 2023-06-27                           |
 
 |ToC|
 |--|
 
-## What We Will Accomplish
+## We Will Accomplish
 
 In this tutorial, we will:
 
-* Start a Serverless Amazon MSK Cluster 
+* Start a Serverless Amazon MSK Cluster
 * Produce streaming data to MSK Serverless using Kafka Client Container
-* Consume and process the streaming data using Amazon Kinesis Data Analytics 
-* Visualise streaming data in Amazon OpenSearch Service 
+* Consume and process the streaming data using Amazon Kinesis Data Analytics
+* Visualise streaming data in Amazon OpenSearch Service
 
 Let’s get started!
 
@@ -50,16 +52,16 @@ The following architecture provides an overview of all the AWS resources and ser
 
 The following provides a step-by-step tutorial to implement a real-time streaming analytics application on Apache Kafka. Before you start, make sure you have the following pre-requisites installed in your machine:
 
-* Java JDK 
+* Java JDK
 * Apache Maven
 
 ### Step 1: Get the Repository
 
-The repository `build-on-aws/real-time-streaming-analytics-application-using-apache-kafka` contains the required files that help us to get started. Run the following command to download the repository to your local machine:
+The repository `real-time-streaming-analytics-application-using-apache-kafka` contains the required files that help us to get started. Run the following command to download the repository to your local machine:
 
 ```bash
 git clone https://github.com/build-on-aws/real-time-streaming-analytics-application-using-apache-kafka.git
-``` 
+```
 
 ### Step 2: Build the Flink Application
 
@@ -67,7 +69,7 @@ After you have successfully installed Apache Maven on your machine, navigate to 
 
 ```bash
 cd flink-clickstream-consumer
-``` 
+```
 
 Then, you can build the Flink application from inside the `flink-clickstream-consumer` folder by running:
 
@@ -79,17 +81,17 @@ Once the application is successfully built you should see a following message in
 
 !['Build Success' message after running mvn package](images/flink_build.png)
 
-Maven packages the compiled source code of the project in a distributable JAR format in the directory `flink-clickstream-consumer/target/` named `ClickStreamProcessor-1.0.jar`. 
+Maven packages the compiled source code of the project in a distributable JAR format in the directory `flink-clickstream-consumer/target/` named `ClickStreamProcessor-1.0.jar`.
 
-If you want to better understand the inner workings of the Flink application, you can have a look at the `ClickstreamProcessor.java` file in the `src` directory. This is the entry point of the Java application where the `main` function resides. Next, we have to provide Amazon Kinesis Data Analytics the JAR file by uploading it to Amazon S3. 
+If you want to better understand the inner workings of the Flink application, you can have a look at the `ClickstreamProcessor.java` file in the `src` directory. This is the entry point of the Java application where the `main` function resides. Next, we have to provide Amazon Kinesis Data Analytics the JAR file by uploading it to Amazon S3.
 
 ### Step 3: Upload the File to Amazon S3
 
-1. Log into your AWS account, navigate to the [Amazon S3 console](https://s3.console.aws.amazon.com/s3/), and click `Create bucket`.
+1. Log into your AWS account, navigate to the [Amazon S3 console](https://s3.console.aws.amazon.com/s3/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq), and click `Create bucket`.
 
 !['Create Bucket' button in the S3 console.](images/create_bucket.png)
 
-2. Provide a unique bucket name of your choice and an AWS region (e.g. `us-east-1`) and click `Create Bucket` at the bottom of the page. Take note of your bucket name.
+2. Provide an unique bucket name of your choice and a AWS region (e.g. `us-east-1`) and click `Create Bucket` at the bottom of the page. Take note of your bucket name.
 
 !['Create Bucket' page where to specify a bucket name](images/create_bucket_2.png)
 
@@ -97,25 +99,25 @@ If you want to better understand the inner workings of the Flink application, yo
 
 !['Upload' button within the bucket objects view](images/upload_to_bucket.png)
 
-4. Click `Add files` and select the JAR file `ClickStreamProcessor-1.0.jar` that you recently generated. 
+4. Click `Add files` and select the JAR file `ClickStreamProcessor-1.0.jar` that you recently generated.
 
 !['Add files' button to select and upload local files to the S3 bucket](images/add_files_to_bucket.png)
 
-### Step 4:  Create a Stack using AWS CloudFormation 
+### Step 4:  Create a Stack using AWS CloudFormation
 
 Next, we'll create a CloudFormation stack and automatically deploy the following resources by uploading the CloudFormation template:
 
 * `Amazon OpenSearch Cluster`: This is where we can visualize the consumed clickstream data. It is deployed in private subnets of a VPC.
 * `Amazon ECS Cluster + Task definition`: The container application that generates the sample clickstream data runs inside the ECS cluster as a Fargate task.
 * `Amazon Kinesis Data Analytics`: This is where the Flink application runs, consuming the clickstream data from the MSK cluster, processing it and writing it to the OpenSearch Service.
-* `Amazon EC2 Instance (Kafka client)`: This EC2 instance serves as a Kafka client and allows us to interact with the MSK cluster by among other things creating Kafka topics. 
-* `Amazon EC2 Instance (Nginx proxy)`: This EC2 instance serves as a Nginx proxy and allows us to access the OpenSearch Dashboard from outside of the VPC, i.e., from the Internet. 
+* `Amazon EC2 Instance (Kafka client)`: This EC2 instance serves as a Kafka client and allows us to interact with the MSK cluster by, among other things, creating Kafka topics.
+* `Amazon EC2 Instance (Nginx proxy)`: This EC2 instance serves as a Nginx proxy and allows us to access the OpenSearch Dashboard from outside of the VPC, i.e., from the Internet.
 * `Security groups`: Security groups help us to control the traffic that is allowed to reach and leave a particular resource.
 * `IAM roles`: An IAM role is an IAM identity that has specific permissions attached to it and can be assumed by an IAM user or an AWS service. For example, an IAM role can be used to grant permissions to an application running on an EC2 instance that requires access to a specific Amazon S3 bucket.
 
-Rather than creating the required resources manually we make use of the CloudFormation template to automatically deploy the resources in your AWS account. 
+Rather than creating the required resources manually we make use of the CloudFormation template to automatically deploy the resources in your AWS account.
 
-1. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation/) and click on `Create Stack`. 
+1. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq) and click on `Create Stack`.
 
 2. Choose `Upload a template file` and click `Choose file` to upload the CloudFormation template file `cf_template.yml` that can be found in the root of the downloaded repository. Then, click `Next`.
 
@@ -125,27 +127,27 @@ Rather than creating the required resources manually we make use of the CloudFor
 
 !['Specify stack details' view within the CloudFormation console](images/specify_stack_details.png)
 
-4. Scroll down the page `Configure stack options` and click `Next`. 
+4. Scroll down the page `Configure stack options` and click `Next`.
 
-5. Scroll down the page `Review <Your_Stack_Name>`. Make sure to tick the box that reads, `I acknowledge that AWS CloudFormation might create IAM resources with custom names`. Lastly, click `Submit` to create the CloudFormation stack.
+5. Scroll down the page `Review <Your_Stack_Name>`. Make sure to tick the box that reads `I acknowledge that AWS CloudFormation might create IAM resources with custom names`. Lastly, click `Submit` to create the CloudFormation stack.
 
 Wait until the status of the stack changes from `CREATE_IN_PROGRESS` to `CREATE_COMPLETE`. Note: This can take some time.
 
 !['Stacks' view inside the CloudFormation console to view the status of the stacks](images/stack_progress.png)
 
-Once the status changes to `CREATE_COMPLETE`, the resources that were defined in the CloudFormation template have been created in your AWS account. However, there are few more resources and configurations required until we end up with an end-to-end real-time streaming application. 
+Once the status changes to `CREATE_COMPLETE`, the resources that were defined in the CloudFormation template have been created in your AWS account. However, there are few more resources and configurations required until we end up with an end-to-end real-time streaming application.
 
-Next, we will create the MSK cluster on AWS. There are two types of clusters available on AWS: MSK Serverless that provides on-demand capacity with automatic scaling, and MSK Provisioned which grants greater control by allowing you to specify the number of brokers and amount of storage per broker in your cluster. However, MSK Provisioned does not scale automatically as your application I/O demand changes. In this tutorial, we'll choose MSK Serverless as we do not want to worry about the underlying infrastructure and keep the management overhead to a minimum.
+Next, we can create the MSK cluster on AWS. There are two types of clusters available on AWS: MSK Serverless that provides on-demand capacity with automatic scaling and MSK Provisioned which grants greater control by allowing you to specify the number of brokers and amount of storage per broker in your cluster. However, MSK Provisioned does not scale automatically as your application I/O demand changes. In this tutorial, we choose MSK Serverless as we do not want to worry about the underlying infrastructure and keep the management overhead to a minimum.
 
 ### Step 5: Create the MSK Serverless Cluster
 
-1. Navigate to the [Amazon MSK console](https://console.aws.amazon.com/msk/) and click `Create cluster`. 
+1. Navigate to the [Amazon MSK console](https://console.aws.amazon.com/msk/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq) and click `Create cluster`.
 
-2. Choose `Custom create` and provide a cluster name of your choice (e.g. `msk-cluster`). Select `Serverless` as cluster type. Then, click `Next`. 
+2. Choose `Custom create` and provide a cluster name of your choice (e.g. `msk-cluster`). Select `Serverless` as cluster type. Then, click `Next`.
 
 !['Cluster Settings' as part of 'Create Cluster' view within the Amazon MSK console](images/msk_cluster_settings.png)
 
-3. In the `Networking` view, select the custom VPC named `MMVPC`. Then, click `Add subnet` to add a third subnet and choose the three available private subnets (`PrivateSubnetMSKOne`, `PrivateSubnetMSKTwo`, `PrivateSubnetMSKThree`) for the the different zones in `us-east-1a`, `us-east-1b` and `us-east-1c`. 
+3. In the `Networking` view, select the custom VPC named `MMVPC`. Then, click `Add subnet` to add a third subnet and choose the three available private subnets (`PrivateSubnetMSKOne`, `PrivateSubnetMSKTwo`, `PrivateSubnetMSKThree`) for the the different zones in `us-east-1a`, `us-east-1b` and `us-east-1c`.
 
 4. Rather than the default security group, select the security group named `MSK Security Group`. Lastly, click `Next`.
 
@@ -157,31 +159,31 @@ Next, we will create the MSK cluster on AWS. There are two types of clusters ava
 
 7. Finally, click `Create cluster` to create the MSK Serverless cluster.
 
-8. Once your MSK Serverless cluster status changes to `Active`, click on `View client information`. 
+8. Once your MSK Serverless cluster status changes to `Active`, click on `View client information`.
 
 !['Cluster summary' view of the created MSK cluster within the MSK console](images/msk_cluster_information.png)
 
-9. Take note of the endpoint of your MSK Serverless cluster. Notice that we use IAM access control to handle the authentication to the MSK cluster. 
+9. Take note of the endpoint of your MSK Serverless cluster. Notice that we use IAM access control to handle the authentication to the MSK cluster.
 
 ![View client information of the created MSK cluster](images/msk_cluster_endpoint.png)
 
-At the moment, MSK Serverless only supports IAM authentication. If you choose MSK Provisioned, you have the option of using IAM, TLS or SASL/SCRAM to authenticate clients and allow or deny actions. 
+At the moment, MSK Serverless only supports IAM authentication. If you choose MSK Provisioned, you have the option of using IAM, TLS or SASL/SCRAM to authenticate clients and allow or deny actions.
 
 ### Step 6: Create the Kafka Topics
 
-Now that the MSK Serverless cluster is ready and available to use, we need to create a Kafka topic to produce and consume the data. We can create Kafka topics as shown below:
+Now that the MSK Serverless cluster is ready and available to use, we need to create a Kafka topic to produce and consume the data. We can create a Kafka topics as shown below:
 
-1. Navigate to the [Amazon EC2 console](https://console.aws.amazon.com/ec2/). On the EC2 home page click on `Instances (running)`. 
+1. Navigate to the [Amazon EC2 console](https://console.aws.amazon.com/ec2/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq). On the EC2 home page click on `Instances (running)`.
 
 ![Home page of the EC2 console](images/ec2_running.png)
 
-2. On the EC2 Instances page select the checkbox for the instance named `KafkaClientInstance` and click on the `Connect` button on top right as shown in the image below. 
+2. On the EC2 Instances page select the checkbox for the instance named `KafkaClientInstance` and click on the `Connect` button on top right as shown in the image below.
 
 !['Connect' button within the EC2 instances view](images/ec2_instances_connect.png)
 
 3. On the page `Connect to instance`, ensure to select `Session Manager` and click the `Connect button`. This opens a new tab with an EC2 terminal.
 
-4. In the terminal window execute the following command to change to `ec2-user`: 
+4. In the terminal window execute the following command to change to `ec2-user`:
 
 ```bash
 sudo su - ec2-user
@@ -189,7 +191,7 @@ sudo su - ec2-user
 
 ![Terminal window view when running the sudo command](images/ec2_sudo.png)
 
-5. Execute the command below to set your MSK cluster endpoint to the shell variable BS. Please replace `<Your_Cluster_Endpoint>` with the endpoint you noted down after you created the MSK Serverless cluster. 
+5. Execute the command below to set your MSK cluster endpoint to the shell variable BS. Please replace `<Your_Cluster_Endpoint>` with the endpoint you noted down after you created the MSK Serverless cluster.
 
 ```bash
 export BS=<Your_Cluster_Endpoint> 
@@ -203,13 +205,13 @@ export BS=<Your_Cluster_Endpoint>
 bash create_topics.sh
 ```
 
-You will encounter warnings printed to the terminal. You may ignore them. 
+You will encounter warnings printed to the terminal. You may ignore them.
 
 ![Terminal window view when running the create topics command](images/ec2_topics.png)
 
-7. You should see a single MSK topic that has been created: `clickstream`. 
+7. You should see a single MSK topic that has been created: `clickstream`.
 
-You can run the following command to view the bash script and see details of the executed Kafka commands within: 
+You can run the following command to view the bash script and see details of the executed Kafka commands within:
 
 ```bash
 cat create_topics.sh
@@ -217,15 +219,15 @@ cat create_topics.sh
 
 If you'd like, feel free to run other Kafka commands to get a better understanding of your MSK cluster.
 
-### Step 7: Start a Container Application to Generate Clickstream Data 
+### Step 7: Start Container Application to Generate Clickstream Data
 
-After we have successfully created the MSK cluster, the next step is to set up the producer that will write data to the topic `clickstream` that we have created in the previous step. For that we'll deploy a serverless Amazon ECS Fargate container that runs an application, generating sample clickstream data to MSK Serverless cluster. 
+After we have successfully created the MSK cluster, the next step is to set up the producer that will write data to the topic `clickstream` that we have created in the previous step. For that we'll deploy a serverless Amazon ECS Fargate container that runs an application, generating sample clickstream data to MSK Serverless cluster.
 
-1. Navigate to the [Amazon ECS console](https://console.aws.amazon.com/ecs/v2/). On the left side menu click on `Task Definitions` to view all available Task definitions. Select the checkbox of the available Task definition and `Click Run` task option from the Deploy menu.
+1. Navigate to the [Amazon ECS console](https://console.aws.amazon.com/ecs/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq). On the left side menu click on `Task Definitions` to view all available Task definitions. Select the checkbox of the available Task definition and `Click Run` task option from the Deploy menu.
 
 !['Run task' option within the Task definitions in the ECS console](images/ecs_task_definition.png)
 
-2. On the Run Task page, select the existing cluster (`msk-serverless-[...]-cluster`) and leave the default settings. 
+2. On the Run Task page, select the existing cluster (`msk-serverless-[...]-cluster`) and leave the default settings.
 
 !['Run Task' page view within the ECS console](images/ecs_create.png)
 
@@ -243,17 +245,17 @@ After we have successfully created the MSK cluster, the next step is to set up t
 
 !['Tasks' view of the created ECS cluster](images/ecs_task_running.png)
 
-You have now successfully created a producer ECS task that will continuously generate clickstream data to the MSK Serverless cluster. 
+You now successfully created a producer ECS task that will continuously generate clickstream data to the MSK Serverless cluster.
 
 More specifically, the ECS task produces random click events. Hereby, an event comprises a user IP, a product type, an event timestamp, and other information. There is also a user ID that serves as key and is associated with each event. In addition, the partition number of the event is determined by using a hash of that key. Before sending, the event data is serialized using a Avro serializer provided by the AWs Glue Schema Registry. Every generated event is sent to the previously created topic `clickstream`.
 
 ### Step 8: Check Schema in AWS Glue Schema Registry
 
-In the last step, we successfully created an ECS producer task. Now we have to create the clickstream schema in the AWS Glue Schema Registry. 
+In the last step, we successfully created an ECS producer task. Now we have to create the clickstream schema in the AWS Glue Schema Registry.
 
-1. Navigate to the [Amazon Glue console](https://console.aws.amazon.com/glue/). Select `Stream schema registries` under `Data Catalog` from the left menu. You can see the schema registry named `serverless`. Click on it. 
+1. Navigate to the [Amazon Glue console](https://console.aws.amazon.com/glue/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq). Select `Stream schema registries` under `Data Catalog` from the left menu. You can see the schema registry named `serverless`. Click on it.
 
-2. You can see the available Schemas of the schema registry `serverless`. Click on the schema `clickstream` to see the different schema versions. You should see Version 1 here. 
+2. You can see the available Schemas of the schema registry `serverless`. Click on the schema `clickstream` to see the different schema versions. You should see Version 1 here.
 
 !['Schema properties' view including 'Schema versions' within the Glue console](images/schema_properties.png)
 
@@ -261,19 +263,19 @@ In the last step, we successfully created an ECS producer task. Now we have to c
 
 ![Schema version definition of the click event](images/schema_version_definition.png)
 
-Apache Avro is a data serialization system that allows for efficent and compact encoding of structuted data, especially in big data or streaming data use cases. To this end, Avro provides a compact binary format for data storage and exchange.
+Apache Avro is a data serialization system that allows for efficient and compact encoding of structured data, especially in big data or streaming data use cases. To this end, Avro provides a compact binary format for data storage and exchange.
 
-The producer makes use of a Avro serializer provided by the AWS Glue Schema Registry and automatically registers the schema version in the Glue Schema Registry. 
+The producer makes use of a Avro serializer provided by the AWS Glue Schema Registry and automatically registers the schema version in the Glue Schema Registry.
 
-### Step 9: Consume Clickstream Data Using Kinesis Data Analytics 
+### Step 9: Consume Clickstream Data Using Kinesis Data Analytics
 
-We have set up the MSK Serverless Cluster and are continuously writing clickstream data to the cluster. Now, we would like to consume the clickstream data from the MSK Serverless cluster using a Amazon Kinesis Data Analytics and Flink. The Apache Flink Application processes the clickstream data in real-time and writes the data to Amazon OpenSearch Service. 
+We have set up the MSK Serverless Cluster and are continuously writing clickstream data to the cluster. Now, we would like to consume the clickstream data from the MSK Serverless cluster using a Amazon Kinesis Data Analytics and Flink. The Apache Flink Application processes the clickstream data in real-time and writes the data to Amazon OpenSearch Service.
 
-The OpenSearch Service is already deployed in your AWS account and the Dashboard is already configured. What's missing are the correct runtime parameters for the Kinesis Data Analytics application. 
+The OpenSearch Service is already deployed in your AWS account and the Dashboard is already configured. What's missing are the correct runtime parameters for the Kinesis Data Analytics application.
 
-1. Navigate to the [AWS Kinesis Analytics console](https://console.aws.amazon.com/kinesisanalytics/) and click on the open streaming application `KDAFlinkCLickstream-msk-serverless-stack`. 
+1. Navigate to the [AWS Kinesis Analytics console](https://console.aws.amazon.com/kinesisanalytics/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq) and click on the open streaming application `KDAFlinkCLickstream-msk-serverless-stack`.
 
-2. Configure and update the application by clicking on the `Configure` button. 
+2. Configure and update the application by clicking on the `Configure` button.
 
 ![Flink application view within the Kinesis Data Analytics console](images/kda_configure.png)
 
@@ -281,9 +283,9 @@ The OpenSearch Service is already deployed in your AWS account and the Dashboard
 
 ![Runtime properties of the Flink application within the Kinesis Data Analytics console](images/kda_runtime_properties.png)
 
-4. Finally, save your changes. 
+4. Finally, save your changes.
 
-5. Click on the `Run` button to run the Flink application. Choose `Run without snapshot`. 
+5. Click on the `Run` button to run the Flink application. Choose `Run without snapshot`.
 
 ![KDA Run Application](images/kda_run_application.png)
 
@@ -299,7 +301,7 @@ The OpenSearch Service is already deployed in your AWS account and the Dashboard
 
 As mentioned before, the Flink application processes the clickstream by windowing, i.e., dividing a continuous stream of data into finite, discrete chunks or windows for processing. More precisely, the Flink application uses `EventTimeSessionWindows` to extract user sessions from the clickstream data by grouping events that are within a specified time gap of each other. Then, the application deploys `TumblingEventTimeWindows` to calculate specific aggregation characteristics within a certain period of time by dividing the clickstream in fixed-size, non-overlapping windows. For example, that could include the total number of user sessions that include a purchase in the last 10 seconds.
 
-In addition, we can see the status of each task, as well as the Bytes Received, Bytes Sent, Records Received, and Records Sent at the bottom of the screen. Note that Flink can only measure the bytes sent or received between operators. That’s why you can't see the metrics for the source or sink operator, as the data is coming from outside of Flink. 
+In addition, we can see the status of each task, as well as the Bytes Received, Bytes Sent, Records Received, and Records Sent at the bottom of the screen. Note that Flink can only measure the bytes sent or received between operators. That’s why you can't see the metrics for the source or sink operator, as the data is coming from outside of Flink.
 
 ![DAG to show the flow of data and data statistics](images/kda_dag.png)
 
@@ -307,17 +309,17 @@ We have now successfully setup a Kinesis Analytics application that reads messag
 
 ### Step 10: View Clickstream Data in the Amazon OpenSearch Dashboard
 
-In this final step, we want to see the dashboard visualisation generated based on the ingested data from Kinesis Analytics application. 
+In this final step, we want to see the dashboard visualisation generated based on the ingested data from Kinesis Analytics application.
 
-1. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation/) and click on the stack that we created earlier. Go to the `Outputs` tab of the stack. 
+1. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=devopswave&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq) and click on the stack that we created earlier. Go to the `Outputs` tab of the stack.
 
-2. Take note of the `OpenSearchMasterUserName` and `OpenSearchMasterPassword`. We will need the values in the next step. 
+2. Take note of the `OpenSearchMasterUserName` and `OpenSearchMasterPassword`. We will need the values in the next step.
 
 !['Outputs view' of the created stack in the CloudFormation console](images/stack_outputs.png)
 
 3. Click on the `OpenSearchDashboardEndpoint` to open the OpenSearch Dashboard login page in a new tab. As the OpenSearch Service is deployed in a VPC, we are relying on Nginx reverse proxy to access the OpenSearch Dashboard outside of the VPC. Note that we are using a self signed certificate for Nginx. However, we strongly recommend using a valid certificate for production deployments.
 
-4. If you are accessing the URL using Google Chrome, click on the `Advanced` button and click on `Proceed to <Your_EC2_DNS>`. 
+4. If you are accessing the URL using Google Chrome, click on the `Advanced` button and click on `Proceed to <Your_EC2_DNS>`.
 
 ![Warning displayed in Chrome](images/chrome_warning.png)
 
@@ -325,7 +327,7 @@ In this final step, we want to see the dashboard visualisation generated based o
 
 ![Login screen of OpenSearch Dashboard](images/opensearch_login.png)
 
-6. Select `Global` tenant on the popup dialog box. 
+6. Select `Global` tenant on the popup dialog box.
 
 7. Click on the hamburger menu on the left of the screen and click on `Dashboards` as shown below.
 
@@ -357,10 +359,10 @@ Now that you’ve finished building a real-time streaming analytics application 
 
 Congratulations! You have built a real-time streaming analytics application on Apache Kafka. More specifically, you have set up an ECS task to produce sample clickstream data to the MSK Serverless Cluster. This clickstream data is then consumed by a Flink application running in Amazon Kinesis Analytics, processed, and written to Amazon OpenSearch.
 
-If you want to learn more about streaming and Apache Kafka on AWS, you can check out the following blog posts:
+If you want to learn more about streaming and Apache Kafka on AWS, you can check out the following pieces:
 
-* [Data processing with Kafka Streams - An overview of stateless operations ](https://www.buildon.aws/posts/data-processing-with-kafka-streams-stateless-operations)
-* [In the land of the sizing, the one-partition Kafka topic is king](https://www.buildon.aws/posts/in-the-land-of-the-sizing-the-one-partition-kafka-topic-is-king/01-what-are-partitions)
-* [My Event is More Urgant than Yours: Prioritizing Event Processing with Apache Kafka](https://www.buildon.aws/posts/prioritizing-event-processing-with-apache-kafka)
+* [Data processing with Kafka Streams - An overview of stateless operations](/posts/data-processing-with-kafka-streams-stateless-operations)
+* [In the land of the sizing, the one-partition Kafka topic is king](/posts/in-the-land-of-the-sizing-the-one-partition-kafka-topic-is-king/01-what-are-partitions)
+* [My Event is More Urgent than Yours: Prioritizing Event Processing with Apache Kafka](/posts/prioritizing-event-processing-with-apache-kafka)
 
-If you enjoyed this step-by-step guide, found any issues or have feedback for us, please send it our way!
+If you enjoyed this step-by-step guide, found any issues or have feedback for us, [please send it our way!](https://pulse.buildon.aws/survey/DEM0H5VW)
