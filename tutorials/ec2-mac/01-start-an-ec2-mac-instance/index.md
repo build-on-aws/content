@@ -16,7 +16,7 @@ authorName: Sébastien Stormacq
 date: 2023-06-28
 ---
 
-When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are required to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app). 
+When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are required to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app).
 
 Getting access to a macOS-based machine might take time because of additional procurement, installation, and configuration processes. To make it easier, you can choose to start a macOS-based machine on [Amazon EC2](https://aws.amazon.com/ec2/getting-started/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=01-start-an-ec2-mac-instance).
 
@@ -24,30 +24,25 @@ This series of tutorials takes you through the typical tasks required to start, 
 
 For this series of tutorial, we assume you're somewhat familiar with Amazon EC2. You can quickly jump in by reading [this short tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=01-start-an-ec2-mac-instance). We will rather focus on the aspects that are specific to Mac on EC2.
 
-This is part 2 in an eleven article series about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy.
+This is part 1 in an 11 part series about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy. The next pieces will appear in the list below as they are published.
 
-- This is the first part, where you will learn how to allocate a Mac mini host and start it.
-
-- In [part 2](/tutorials/ec2-mac/02-connect-to-an-ec2-mac-instance/), you will learn how to remotely connect to the EC2 Mac instance you just started.
-
-- other parts will be added over time. **TODO : should I add the 11 parts now, or add them one by one as I publish them?**
+|SeriesToC|
+|---------|
 
 Enjoy the reading !
 
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
-| ✅ AWS experience      | 100 - Beginner                                                   |
+| ✅ AWS experience      | Beginner - 100                                                   |
 | ⏱ Time to complete     | 10 minutes                                                      |
 | 💰 Cost to complete    | $22 for 24 hours                                                 |
-| 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account)|
+| 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=01-start-an-ec2-mac-instance)|
 | 💻 Code Sample         | - none -                              |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-06-12                                                      |
+| ⏰ Last Updated        | 2023-06-28                                                      |
 
 | ToC |
 |-----|
-
 
 ## Why should you use a macOS machine in the cloud?
 
@@ -106,7 +101,7 @@ Once the host is allocated to your account, you can start or stop the operating 
 
 - [AWS Systems Manager agent](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-ssm-agent-macos.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=01-start-an-ec2-mac-instance) for macOS is preinstalled on EC2 Mac instances. It means we can remotely connect, create tunnels, or send commands to be executed on the host, without having to manage credentials, SSH keys, or network access.
 
-### Start, Stop, or Terminate 
+### Start, Stop, or Terminate
 
 Now that we have a Mac Mini reserved for our own usage, we can start and stop it to run macOS. When starting any EC2 instance, AWS expects you to share a couple of details. The minimal list of parameters is:
 
@@ -151,7 +146,7 @@ Alternatively, we can use the command line:
             },
 ... redacted for brevity ....
 ```
- 
+
 It will take a few minutes to start your instance, and it will be allocated a public IP address (when started in the default or a public VPC). And you will soon be able to SSH connect to it. More about this in [the second part of this blog series](../remotely-connect-a-mac-instance/index.md).
 
 Similarly you can stop, reboot or terminate your instance. Reboot is pretty obvious, it tells the operating system to perform a shutdown and restart cycle. This is equivalent to selecting **Restart** from the  menu on your locale machine.
@@ -191,4 +186,4 @@ You can not release a host during the first 24h after allocating it, as per [mac
 
 ---
 
-Congrats 🎉👏🥳 ! You launched your first EC2 Mac instance. [In the next tutorial of this series](/tutorials/ec2-mac/02-connect-to-an-ec2-mac-instance/), you're going to learn how to remotely connect to it.
+Congrats 🎉👏🥳 ! You launched your first EC2 Mac instance. If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
