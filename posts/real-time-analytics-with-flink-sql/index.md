@@ -9,7 +9,7 @@ tags:
   - sql
 authorGithubAlias: Olimbia23
 authorName: Olimbia Qirjaqi
-date: 2023-06-19
+date: 2023-06-29
 ---
 
 Real-time data analytics allows businesses to stay ahead of their competitors by enabling them to identify emerging trends or changes in customer behavior while also providing them with the ability to monitor critical events in real-time.
@@ -21,7 +21,7 @@ Some common use cases for real-time data analytics include:
 4. Trigger real-time notifications and alarms
 
 To perform real-time analytics, a distinct set of tools are necessary for the collection and analysis of streaming data as compared to traditional analytic methods. The required infrastructure entails the selection of a messaging system, such as [Amazon Kinesis Data Streams (KDS)](https://aws.amazon.com/kinesis/data-streams?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) or Apache Kafka to support the capture of real-time data, and a real-time processing engine such as Amazon Kinesis Data Analytics or Apache Spark, to enable fast processing and analysis of incoming information.
-In this blog post we will ingest data into Kinesis Data Streams and analyze it using [Amazon Kinesis Data Analytics for Apache Flink (KDA)](https://console.aws.amazon.com/kinesisanalytics/home?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+In this blog post we will ingest data into Kinesis Data Streams and analyze it using Amazon Kinesis Data Analytics for Apache Flink (KDA).
 
 Apache Flink is an open-source stream processing engine that enables businesses to process streams and batch data for analytics, ETL processes, and data pipelines. At the heart of its functioning is a streaming runtime that provides distributed processing and fault tolerance capabilities.
 Apache Flink enables developers familiar with SQL to process and analyze streaming data with ease. Flink offers SQL syntax that supports event processing, time windows, and aggregations. This combination makes it a highly effective streaming query engine.
@@ -36,7 +36,7 @@ Performing SQL queries with KDA is possible by utilizing KDA Studio Notebooks. T
 | ⏱ Time to complete  | 45 mins - 60 mins                      |
 | 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 🔨 Services used | - Kinesis Data Streams <br> - Kinesis Data Analytics <br> - S3 bucket <br> - Glue Data Catalog |
-| ⏰ Last Updated     | 2023-06-28                           |
+| ⏰ Last Updated     | 2023-06-29                           |
 
 |ToC|
 |--|
@@ -68,7 +68,7 @@ The proposed solution consists of the following elements:
 2. Click on **Create bucket**
 3. Enter a name for the bucket
 4. Leave all other settings as is and click on **Create bucket**
-5. Upload the *NYC Taxi Cab Trips* file that will represent our stream data and the reference file *Taxi Zone Geohash* that enriches the stream data
+5. Upload the [*NYC Taxi Cab Trips*](https://sharkech-public.s3.amazonaws.com/flink-on-kda/yellow_tripdata_2020-01_noHeader.csv) file that will represent our stream data and the reference file [*Taxi Zone Geohash*](https://github.com/build-on-aws/real-time-analytics-with-flink-sql/blob/main/dataset/taxi_zone_with_geohash.csv) that enriches the stream data.
 
 Your S3 bucket should look like the following screenshot.
 
@@ -231,7 +231,7 @@ You are now successfully sending data to the Kinesis Data Stream you created ear
 
 Note the `Ingestion_to_KDS` will send data to Kinesis Data Stream for approx 30 minutes. You may need to periodically rerun the notebook to sample data sent to Kinesis Data Stream. If you are working on the subsequent notebook and do not see any results check that your *note* is still running and does not need to be restarted.
 
-*[Here](https://github.com/build-on-aws/content/tree/main/code/snippets/real-time-analytics-with-flink-sql/Ingestion_to_KDS.zpln) is the Zeppelin note that contains the ingestion of data to KDS.*
+*[Here](https://github.com/build-on-aws/real-time-analytics-with-flink-sql/blob/main/zeppelin/Ingestion_to_KDS.zpln) is the Zeppelin note that contains the ingestion of data to KDS.*
 
 #### Analyze data in KDS with SQL via KDA Studio Notebooks
 
@@ -305,7 +305,7 @@ GROUP BY TUMBLE(trips.tpep_dropoff_datetime, INTERVAL '60' MINUTE)
 
 ![Number of trips that occurred in Manhattan every hour](images/Q2_output.png)
 
-*[Here](https://github.com/build-on-aws/content/tree/main/code/snippets/real-time-analytics-with-flink-sql/Analytics.zpln) is the Zeppelin note that contains the analytics queries.*
+*[Here](https://github.com/build-on-aws/real-time-analytics-with-flink-sql/blob/main/zeppelin/Analytics.zpln) is the Zeppelin note that contains the analytics queries.*
 
 #### Write the query result to S3
 
@@ -356,7 +356,7 @@ To build and deploy the KDA Studio notebooks you need to follow the below steps:
 8. To start the application, first select it and then click on Run
 9. Now your KDA Studio Notebook is deployed as a KDA application
 
-*[Here](https://github.com/build-on-aws/content/tree/main/code/snippets/real-time-analytics-with-flink-sql/Deployment.zpln) is the Zeppelin note that is used for deployment.*
+*[Here](https://github.com/build-on-aws/real-time-analytics-with-flink-sql/blob/main/zeppelin/Deployment.zpln) is the Zeppelin note that is used for deployment.*
 
 ### Clean up the data
 
@@ -386,3 +386,5 @@ To remove the resources created as part of this walkthrough, you can follow the 
 
 In this blog post, you have learned how to use Kinesis Data Analytics Studio Notebooks to analyze streaming data by using Flink SQL as well as how to create and deploy long lasting streaming applications.
 You can also analyze data using programming languages like Java, Python and Scala as explained in [this Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/c342c6d1-2baf-4827-ba42-52ef9eb173f6/en-US/flink-on-kda?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+
+Happy Building! 🎉
