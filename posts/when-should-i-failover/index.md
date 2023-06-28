@@ -5,22 +5,22 @@ description: "Building observability into your application is critical - not onl
 tags:
   - resilience
   - serverless
-  - mulitregion
+  - multiregion
   - observability
 authorGithubAlias: saurabh-et-al
 authorName: Saurabh Kumar
 date: 2023-05-09
 ---
 
-As a professional working in the software space, you've probably been in one or more "war rooms", where it's all hands on deck to get the systems back up and running. The first question that gets asked in those meetings is, “what’s the business impact?”. That’s the part many of us struggle with the most. I can tell you that the application is down and not taking orders but don’t ask me beyond that. After the application has failed over and recovered, the question becomes, “are we good to declare if business is back to normal?”. Many times, the answers come with a hesitation as no one knows clearly whether business has been restored to steady state.
+As a professional working in the software space, you've probably been in one or more "war rooms", where it's all hands on deck to get the systems back up and running. The first question that gets asked in those meetings is, “What’s the business impact?” After the application has failed over and recovered, the question becomes, “Are we good to declare if business is back to normal?” Many times, the answers come with a hesitation as no one knows clearly whether business has been restored to steady state.
 
-In this blog, I will walk you through a serverless application and through that application I will show you a way to build observability to answer those questions confidently.
+In this blog, I will walk you through a serverless application, and with that application I will show you a way to build observability to answer these questions confidently.
  
 ## Application Overview
 
 Let's walk through 'DeviceProtectionOrders' microservice. This is the service that processes the requests when your customers add a protection plan for their device(s), either directly through your website or through your clients. I have architected this service using serverless technologies - [API Gateway (a fully-managed, scalable API management service)](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover), [Lambda Functions (serverless compute)](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) and [DynamoDB (a fast, flexible NoSQL database)](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) - where AWS does the undifferentiated heavy lifting of infrastructure management and data replication. All these services are Regional in scope, meaning you don’t have to worry about which [AZ(s)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) you should deploy them to. AWS deploys them to multiple AZs, taking that complexity away from you.
 
-Since this is a critical application, I have deployed it two [AWS Regions](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover): us-east-1 (primary) and us-west2 (standby), following the [warm standby disaster recovery (DR) strategy](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover). Under normal circumstances, all requests will go to the primary Region, and in case of an event that impacts ability to run the application in the primary Region, the application would fail over and requests would go to the standby Region. Shown below is the multi-region architecture for this service:
+Since this is a critical application, I have deployed it to two [AWS Regions](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover): us-east-1 (primary) and us-west2 (standby), following the [warm standby disaster recovery (DR) strategy](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover). Under normal circumstances, all requests will go to the primary Region, and in case of an event that impacts ability to run the application in the primary Region, the application would fail over and requests would go to the standby Region. Shown below is the multi-region architecture for this service:
 
 ![Multi-region application architecture](images/multi-region-application-architecture.png "Figure 1. Multi-Region application architecture")
 
@@ -36,7 +36,7 @@ This diagram depicts two flows. First is the business flow, marked with numbers 
 
 The second flow, marked with letters A to D, represents health check implementation, which we will walk through in the "Implementing Deep Health Checks" section.
 
-### Metrics for each component:
+### Metrics for Each Component
 
 You can use metrics provided out of the box for API Gateway, Lambda, and DynamoDB to see how each of these individual services are doing. For example, [“PutItem” latency](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/metrics-dimensions.html#SuccessfulRequestLatency?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) can show how long DynamoDB writes are taking. Based your normal operations, you can establish a baseline. Anything beyond that threshold could be a symptom of an issue with DynamoDB. Similarly, [“5XX Error”, “Latency”, and other metrics](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-metrics-and-dimensions.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) from API Gateway can tell you about API Gateway service degradation. Likewise, you can observe a pattern for Lambda metrics ["Errors", "Duration", "Throttles", "ConcurrentExecutions", "Invocations"](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=when-should-i-failover) and any deviation from that pattern would be a signal of application or Lambda service impairment. Having this level of detail in one place will help you decide if you need a war room bridge and if you need to fail over.
 
