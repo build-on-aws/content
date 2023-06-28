@@ -9,6 +9,7 @@ tags:
     - event-driven
     - foundational
     - aws
+showInHomeFeed: true
 authorGithubAlias: danilop
 authorName: Danilo Poccia
 date: 2023-06-27
