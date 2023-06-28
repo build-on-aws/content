@@ -8,7 +8,6 @@ tags:
     - tutorials
     - devops
     - aws
-    - devops
 spaces:
   - mac
 showInHomeFeed: true
