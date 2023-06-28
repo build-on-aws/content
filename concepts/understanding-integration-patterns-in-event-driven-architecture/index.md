@@ -9,14 +9,15 @@ tags:
     - event-bus
     - foundational
     - aws
+showInHomeFeed: true
 authorGithubAlias: danilop
 authorName: Danilo Poccia
-date: 2023-01-31
+date: 2023-06-27
 ---
 
-A software architecture is "event-driven" when the execution of business logic is driven by the occurrence of specific events. An event in this context is a message that tells us that something has happened. For example, a new file has been uploaded in a shared repository. Or a database record has been updated. Each event contains a timestamp that anchors the information described by the event to a specific point in time. For example, an image has been updated yesterday at noon. Or a customer profile has been updated today at 8am.
+A software architecture is "event-driven" when specified events -- like a file being uploaded to a repository, or a database record being updated -- trigger the execution of business logic. Put simply, these sorts of architectures follow a simple cause-and-effect model. But the overall product doesn't have to be simple at all: by using business logic to trigger other events, which in turn run more logic, you can build highly complex processes.
 
-With this approach, event-driven architectures follow a cause-effect mental model: *"If this event happens, then run this business logic."* A complex process can be described in this way because each piece of business logic can emit other events that will in turn run more business logic.
+While event-driven architectures seem simple on the surface, understanding how to implement them is crucial, and [understanding the difference between event-driven choreography, and service orchestration](/concepts/event-driven-architectures-service-orchestration-vs-choreography). What's more, there are many potential integration patterns you can use. These are some of the fundamental concepts to help you to understand -- and to more effectively implement -- such architectures. Event-driven architectures follow a cause-effect mental model: *"If this event happens, then run this business logic."* A complex process can be described in this way because each piece of business logic can emit other events that will in turn run more business logic.
 
 ## Immutability
 
@@ -54,7 +55,7 @@ The advantages of this model are that is simple to implement, low latency, and i
 
 On the other side, this is a synchronous integration and an example of temporal coupling because everything must happen at the same time. If one of the services slows down or stops working, there is a fault that needs to be handled, for example, using the DLQ pattern we’ll see next.
 
-On AWS, a synchronous request-response model can be implemented using a REST API using the [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/index.html) or a GraphQL API using [AWS AppSync](https://docs.aws.amazon.com/appsync/latest/devguide/welcome.html).
+On AWS, a synchronous request-response model can be implemented using a REST API using the [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/index.html?sc_channel=el&sc_campaign=appswave&sc_content=understanding-integration-patterns-in-event-driven-architecture&sc_geo=mult&sc_country=mult&sc_outcome=acq) or a GraphQL API using [AWS AppSync](https://docs.aws.amazon.com/appsync/latest/devguide/welcome.html?sc_channel=el&sc_campaign=appswave&sc_content=understanding-integration-patterns-in-event-driven-architecture&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Asynchronous point-to-point queue
 
@@ -66,7 +67,7 @@ This is an asynchronous integration that reduces temporal coupling. Other advant
 
 With this approach, only one receiver can consume each message. In case of multi-tenant systems, there can be fairness issues when one of the tenants is producing more messages than the others. In that case, it could be better to dedicate a queue to the high-throughput tenant.
 
-On AWS, a message queue can be implemented using [Amazon SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html) or [Amazon MQ](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/welcome.html).
+On AWS, a message queue can be implemented using [Amazon SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html?sc_channel=el&sc_campaign=appswave&sc_content=understanding-integration-patterns-in-event-driven-architecture&sc_geo=mult&sc_country=mult&sc_outcome=acq) or [Amazon MQ](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/welcome.html?sc_channel=el&sc_campaign=appswave&sc_content=understanding-integration-patterns-in-event-driven-architecture&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Dead letter queues (DLQs)
 
@@ -104,7 +105,7 @@ A bus can handle multiple senders provided that it has the necessary information
 
 A bus can also route the same message to multiple destinations because different receivers could be interested in the content of a message.
 
-A bus can be implemented on AWS using [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/index.html). Another approach is to use multiple [Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/index.html) topics.
+A bus can be implemented on AWS using [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/index.html?sc_channel=el&sc_campaign=appswave&sc_content=understanding-integration-patterns-in-event-driven-architecture&sc_geo=mult&sc_country=mult&sc_outcome=acq). Another approach is to use multiple [Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/index.html?sc_channel=el&sc_campaign=appswave&sc_content=understanding-integration-patterns-in-event-driven-architecture&sc_geo=mult&sc_country=mult&sc_outcome=acq) topics.
 
 ### Event-driven architectures
 
@@ -132,7 +133,7 @@ Many workflow systems use a direct acyclic graph (DAG) to design a workflow. Eac
 
 ![image](images/sample-workflow.png)
 
-On AWS, a workflow can be designed and built using [AWS Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html).
+On AWS, a workflow can be designed and built using [AWS Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html?sc_channel=el&sc_campaign=appswave&sc_content=understanding-integration-patterns-in-event-driven-architecture&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Compensating transactions (saga pattern)
 
@@ -159,3 +160,10 @@ In distributed systems, you need to be prepared to the possibility to receive du
 Event-driven architecture reduce coupling among the components and make it easier for different teams to independently work on those components without having to synchronize their work and wait for other teams to complete a task before they can proceed with their own activities. In this way, each team can work at their own speed without slowing down the work of other teams.
 
 To speed up your implementations, you can apply integration patterns that solve common problems in a replicable way. Integration patterns help you think asynchronously and reduce side effects across components.
+
+To dive into some practical implementations, or read more, have a look at:
+
+- [Key Differences In Implementing Service Orchestration vs. Choreography](/concepts/event-driven-architectures-service-orchestration-vs-choreography)
+- [Automate the Provisioning of Your Apache Airflow Environments](/tutorials/automating-mwaa-environments-and-workflows)
+- [Orchestration vs. Choreography: Why using different co-ordination patterns matters to developers](/posts/microservices-orchestration-choreography)
+
