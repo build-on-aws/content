@@ -1,57 +1,61 @@
 ---
-title: 'The Power of Generative AI in Retail Industry'
-description: The Power of Generative AI in Retail Industry 
-authorGithubAlias: eric80116, raywang1021
-authorName: Eric Liou, Ray Wang
+title: "The Power of Generative AI in Retail Industry"
+description: "The Power of Generative AI in Retail Industry"
+tags:
+  - ai-ml
+  - gen-ai
+  - stable-diffusion
+authorGithubAlias: eric80116
+authorName: Eric Liou
+additionalAuthors: 
+  - authorGithubAlias: raywang1021
+    authorName: Ray Wang
 date: 2023-06-27
 ---
 
-## Introduction: Stable Diffusion in pan-retail industry 
+## Introduction: Stable Diffusion in pan-retail industry
 
 The convergence of artificial intelligence (AI) and the retail industry has introduced transformative technologies like GenAI and Stable Diffusion. GenAI utilizes machine learning algorithms to generate synthetic data that closely resembles real-world patterns, enabling retailers to enhance virtual try-on experiences, personalized recommendations, and more. Stable Diffusion complements GenAI by stabilizing the output of generative models, ensuring reliable and consistent results.
 
 To effectively leverage GenAI and Stable Diffusion, retailers must first identify their specific use cases and assess the potential return on investment (ROI). This involves evaluating how these technologies can improve customer engagement, boost sales, or optimize supply chain operations. Allocating the right roles and responsibilities is crucial, requiring the hiring of data scientists, prompt engineers, project managers, and artists. Lastly, retailers must implement risk mitigation strategies to minimize the potential licensing risks associated with using copyrighted or restricted content. By carefully navigating these considerations, retailers can leverage the power of GenAI and Stable Diffusion to stay ahead in the competitive retail landscape.
 
-## Stable Diffusion on SageMaker Solution 
+## Stable Diffusion on Amazon SageMaker solution
 
 * SageMaker Jumpstart
-    * One-click to deploy pre-trained stable diffusion model to SageMaker Endpoint without provision.
-    * You can get the code from jumpstart to inference endpoint immediately or modify the code according to your scenario.
+  * One-click to deploy pre-trained stable diffusion model to SageMaker Endpoint without provision.
+  * You can get the code from jumpstart to inference endpoint immediately or modify the code according to your scenario.
 * SageMaker Notebook Instance
 
-![Architecture1](images/Architecture1.png)
+    ![Architecture1](images/Architecture1.png)
 
-    * Requiring only a few steps to quickly deploy a web application environment for AI-generated image generation in your AWS account with CloudFormation for one-click deployment. 
-    * Amazon SageMaker Notebook Instance-hosted Jupyter notebook instance take care of underlying IT development environments (such as storage, networking, etc.) and infrastructure maintenance.
-    * The solution is built on the Stable Diffusion version 1.5, provides a great user experience with open-source project usage and supports extensions based on your needs such as ControlNet.
-    * Users can fine-tune the model with their own image data and quickly deployed for inference using automated pipeline tools.
+  * Requiring only a few steps to quickly deploy a web application environment for AI-generated image generation in your AWS account with CloudFormation for one-click deployment.
+  * Amazon SageMaker Notebook Instance-hosted Jupyter notebook instance take care of underlying IT development environments (such as storage, networking, etc.) and infrastructure maintenance.
+  * The solution is built on the Stable Diffusion version 1.5, provides a great user experience with open-source project usage and supports extensions based on your needs such as ControlNet.
+  * Users can fine-tune the model with their own image data and quickly deployed for inference using automated pipeline tools.
 * All-in-one
+  ![Architecture2](images/Architecture2.png)
+  * Requiring only a few steps to quickly deploy a web application environment for AI-generated image generation in your AWS account with CloudFormation for one-click deployment.
+  * Host the model on SageMaker Endpoint with auto-scaling capability to adjust the resource base on the request queues size.
+  * All-in-one solution can integrate with your own model seamlessly. You just upload the model to S3 bucket then it would deploy the model to SageMaker Endpoint automatically without manual configuration.
 
-![Architecture2](images/Architecture2.png)
-
-    * Requiring only a few steps to quickly deploy a web application environment for AI-generated image generation in your AWS account with CloudFormation for one-click deployment. 
-    * Host the model on SageMaker Endpoint with auto-scaling capability to adjust the resource base on the request queues size.
-    * All-in-one solution can integrate with your own model seamlessly. You just upload the model to S3 bucket then it would deploy the model to SageMaker Endpoint automatically without manual configuration.
-
-
-
-## Use case 
+## Use case
 
 ### Scenario: Lift the limit of location and model for product images
 
 According to the market research, the price of hiring a model for product photography is around $200 per hour and would raise according to how many products you need to shot. Besides the cost of venue, equipments and makeup, it would be a pressure for smaller retailers. Stable Diffusion can help to lift the limit of location and model for product images in seconds.
 
 * Select the model and choose img2img tab on the webUI
-* Type the positive prompt: a Japanese/Indian female, high detailed face, masterpiece, beautiful 
+* Type the positive prompt: a Japanese/Indian female, high detailed face, masterpiece, beautiful
 * Type the negative prompt: uglay, lowres, low detailed, muted
 * Select “inpaint upload” to upload the original photo and masked photo.
 * Adjust the Mask Blur to “1” and select mask mode to “inpaint masked“
 * Click “Generate” then you will see the results
 
 ![Picture2](images/Picture2.png)
-You can do the same steps with different masked such as clothes, background and so on, then you can get tones of product photos in seconds.
-![Picture3](images/Picture3.png)
 
+You can do the same steps with different masked such as clothes, background and so on, then you can get tones of product photos in seconds.
+
+![Picture3](images/Picture3.png)
 
 ### Scenario: Efficiently generate the advertising materials to increase sales
 
@@ -61,28 +65,27 @@ Take an advertisement of windbreaker as example, we will need the materials like
 
 * Select the model and choose txt2img tab on the webUI
 * Generate the materials with prompts separately.
-    * a photo of breathtaking forest scene, raining and foggy, lush forest in the mountain, muddy trail, majestic and astonishing forest scene, masterpiece, high resolution, high quality, hdr, fujifilm xt4, 50mm, f/1.6, sharp focus, high detailed
-    * a product photo of yellow windbreaker , masterpiece, (full body), (yellow windbreaker:1.3), sport pants, hiking boots, handsome and young man, normal eyes, high detailed face, High Detail, Sharp focus, lightly smile, nature skin, realistic, intricate, depth of field, fujifilm xt4, medium shot, hdr, 8k, highres, modelshoot style
-    * A photo of raining splatter on the (yellow windbreaker), (waterproof), masterpiece, high detail, high resolution, 8k, hdr, (micro shot),
-
-![Picture4](images/Picture4.png)
+  * a photo of breathtaking forest scene, raining and foggy, lush forest in the mountain, muddy trail, majestic and astonishing forest scene, masterpiece, high resolution, high quality, hdr, fujifilm xt4, 50mm, f/1.6, sharp focus, high detailed
+  * a product photo of yellow windbreaker , masterpiece, (full body), (yellow windbreaker:1.3), sport pants, hiking boots, handsome and young man, normal eyes, high detailed face, High Detail, Sharp focus, lightly smile, nature skin, realistic, intricate, depth of field, fujifilm xt4, medium shot, hdr, 8k, highres, modelshoot style
+  * A photo of raining splatter on the (yellow windbreaker), (waterproof), masterpiece, high detail, high resolution, 8k, hdr, (micro shot),
+  ![Picture4](images/Picture4.png)
 * Then easily assemble the materials to an advertisement
+  ![Picture6](images/Picture6.gif)
 
-![Picture6](images/Picture6.gif)
-
-
-## Fine-tune the LoRA model with your own images data 
+## Fine-tune the LoRA model with your own images data
 
 In many cases, users require more than just image generation from Stable Diffusion. They often need to utilize the model to generate images that feature specific products or models. For instance, consider a scenario where a retailer collaborates with Key Opinion Leaders (KOLs) to enable them to select endorsements online then employ Stable Diffusion model that can swiftly generate product photography for sales purposes. Therefore, users require a streamlined pipeline that automates the fine-tuning of the model using their own image data. The architecture is following.
 
 ![Architecture3](images/Architecture3.png)
-As users upload their own images data to S3 input bucket, S3 would send the event to trigger Lambda to start the SageMaker Notebook Instance for training. The instance will use pre-built lifecycle configuration to run the training scripts then export the model to S3 output bucket. Then S3 would send the event to trigger Lambda to shutdown the instance to avoid unnecessary cost. You can follow the steps below to build the pipeline.
 
+As users upload their own images data to S3 input bucket, S3 would send the event to trigger Lambda to start the SageMaker Notebook Instance for training. The instance will use pre-built lifecycle configuration to run the training scripts then export the model to S3 output bucket. Then S3 would send the event to trigger Lambda to shutdown the instance to avoid unnecessary cost. You can follow the steps below to build the pipeline.
 
 ### Step1. Create an SageMaker Notebook Instance for fine-tuning
 
-Prepare a notebook instance with GPU for fine-tuning. I choose the ml.g4dn.xlarge as example.
+Prepare a notebook instance with GPU for fine-tuning. I choose the `ml.g4dn.xlarge` as example.
+
 ![Image1](images/Image1.png)
+
 ### Step2. Prepare S3 bucket
 
 Prepare three s3 bucket for fine-tuning
@@ -94,26 +97,25 @@ Prepare three s3 bucket for fine-tuning
 ### Step3. Prepare training data
 
 Prepare your own images of products or characters, also the captions for each image. For example, I would like to create the endorsement photo with Patrick Stewart, so I prepare 6 Patrick Stewart photos(512*704) and 6 txt files with the same name. Write “zwxman” as prompt in each txt file. Then zip the folder to **training_data.zip** for later use.
-![Image2](images/Image2.png)
-### Step4. Build the training script
 
+![Image2](images/Image2.png)
+
+### Step4. Build the training script
 
 Build a training script for LoRA model training with your own images. I will following this [sample code](https://github.com/terrificdm/dreambooth-stablediffusion-sagemaker-notebook/blob/main/sd-lora-db-finetune-character.ipynb) which modified from[kohya-ss/sd-scripts](https://github.com/kohya-ss/sd-scripts) to build the training script.
 
-
 #### Install depemdencies
 
-```
+```bash
 !pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 !pip install xformers==0.0.18
 !git clone https://github.com/kohya-ss/sd-scripts
 %cd sd-scripts/
 !pip install -U -r requirements.txt
 !pip install --upgrade lion-pytorch lycoris-lora
-
 ```
 
-```
+```bash
 # fix some warnings and bugs poping up from notebook
 !pip install tensorflow==2.11.0
 !sudo rm -rf /lib64/libstdc++.so.6 /lib64/libstdc++.so.6
@@ -126,12 +128,12 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 
 #### Initialize training environment
 
-```
+```python
 from accelerate.utils import write_basic_config
 write_basic_config()
 ```
 
-```
+```text
 %%writefile dataset.toml
 [general]
 enable_bucket = true
@@ -149,7 +151,7 @@ batch_size = 2
   num_repeats = 10
 ```
 
-```
+```bash
 MODEL_NAME = "runwayml/stable-diffusion-v1-5"
 DATASET_CONFIG = "./dataset.toml"
 TRAIN_DATA_DIR = "./images/sample"
@@ -157,7 +159,7 @@ IMAGES_OUTPTS = "./images/outputs"
 !mkdir -p $IMAGES_OUTPTS
 ```
 
-```
+```bash
 !rm -rf sample training_data.zip $TRAIN_DATA_DIR
 #REMEMBER TO CHANGE YOUR OWN BUCKET NAME FOR DATA INPUT
 !aws s3 cp s3://<your s3 bucket for data input>/training_data.zip .
@@ -168,7 +170,7 @@ IMAGES_OUTPTS = "./images/outputs"
 
 #### Train model
 
-```
+```bash
 !accelerate launch train_network.py \
    --pretrained_model_name_or_path=$MODEL_NAME \
    --dataset_config=$DATASET_CONFIG \
@@ -198,7 +200,7 @@ IMAGES_OUTPTS = "./images/outputs"
 
 #### [Option] Inference the model to generate a image for verification
 
-```
+```python
 import torch
 import datetime
 
@@ -275,12 +277,10 @@ print(f"\nSeeds for generating images: {seeds}\n")
 
 #### Upload the fine-tuned model to S3
 
-```
+```bash
 #REMEMBER TO CHANGE YOUR OWN BUCKET NAME FOR MODEL OUTPUT
 !aws s3 cp ./output/lora_wta.safetensors s3://<your s3 bucket for model output>/
 ```
-
-
 
 ### Step 5. Create a notebook lifecycle configuration
 
@@ -293,7 +293,7 @@ Since we need to automatically run the training script as the instance startup, 
 
 * Type the Name and select the “Start notebook” tab then paste the following code, remember to replace your training script name
 
-```
+```bash
 ENVIRONMENT=python3
 NOTEBOOK_FILE=/home/ec2-user/SageMaker/<your training script name>.ipynb
 source /home/ec2-user/anaconda3/bin/activate "$ENVIRONMENT"
@@ -317,7 +317,7 @@ Please following the steps below
 * Click “Create function” and select Python
 * Type the following code, remember to replace your notebook instance name
 
-```
+```python
 import json
 import boto3
 import logging
@@ -333,7 +333,7 @@ def lambda_handler(event, context):
     return 0 
 ```
 
-* Set your S3 bucket of input data as trigger with Event types: s3:ObjectCreated:* 
+* Set your S3 bucket of input data as trigger with Event types: `s3:ObjectCreated:*`
 * Deploy the function
 
 ![Image5](images/Image5.png)
@@ -341,7 +341,7 @@ def lambda_handler(event, context):
 * Click “Create function” again and select Python
 * Type the following code, remember to replace your notebook instance name
 
-```
+```python
 import json
 import boto3
 import logging
@@ -357,17 +357,18 @@ def lambda_handler(event, context):
     return 0
 ```
 
-* Set your S3 bucket of model output as trigger with Event types: s3:ObjectCreated:* 
+* Set your S3 bucket of model output as trigger with Event types: `s3:ObjectCreated:*`
 * Deploy the function
 
 ![Image6](images/Image6.png)
-Now, you are all set. You can try to upload the **training_data.zip** to start the auto fine-tuning pipeline. You can see your model under s3://<your s3 bucket of model output> and generated image under under s3://<your s3 bucket of image output>.
+Now, you are all set. You can try to upload the **training_data.zip** to start the auto fine-tuning pipeline. You can see your model under `s3://<your s3 bucket of model output>` and generated image under under `s3://<your s3 bucket of image output>`.
 
 ![Image7](images/Image7.png)
 ![Picture5](images/Picture5.png)
 Of course, you can also download the model from s3 and use in WebUI directly.
 
 ![Image8](images/Image8.png)
+
 ## Conclusion
 
 In conclusion, SageMaker provides a user-friendly ML platform that enables retailers to quickly start and accelerate their ML projects. With its managed infrastructure and pre-built algorithms, retailers can reduce the overhead of infrastructure management and focus on developing and fine-tuning their ML models. Additionally, SageMaker's autoscaling feature allows for seamless handling of unpredictable demand, ensuring a reliable and scalable AI service for retailers.
