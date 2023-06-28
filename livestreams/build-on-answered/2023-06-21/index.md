@@ -10,6 +10,11 @@ tags:
     - resilience
 authorGithubAlias: juliegund
 authorName: Julie Gunderson
+additionalAuthors: 
+  - authorGithubAlias: cobusbernard
+    authorName: Cobus Bernard
+  - authorGithubAlias: setheliot
+    authorName: Seth Eliot
 date: 2022-06-21
 spaces:
   - livestreams
