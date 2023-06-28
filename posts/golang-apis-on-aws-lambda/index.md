@@ -6,6 +6,7 @@ tags:
   - serverless
   - golang
   - aws
+  - aws-sam
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-07-14
@@ -39,7 +40,7 @@ Let's start with a brief introduction to the AWS Lambda Go API Proxy.
 
 The [aws-lambda-go-api-proxy](https://github.com/awslabs/aws-lambda-go-api-proxy) package makes it easy to run Go APIs written using frameworks (such as Gin) with AWS Lambda and [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). In addition to adapter implementations for the `net/http` (Go standard library) and other frameworks such as `gorilla/mux`, `echo`, etc., `aws-lambda-go-api-proxy` also declares a `core` package that contains utility methods and interfaces to translate API Gateway proxy events into Go's default `http.Request` and `http.ResponseWriter` objects and allows you to adapt *any* framework to the AWS Lambda Go runtime.
 
-![](images/arch.jpg)
+![How does the AWS Lambda Go API Proxy work](images/arch.jpg)
 
 Here is a gist on how it works at a high level:
 
@@ -157,7 +158,7 @@ Let's deploy each of these functions to AWS Lambda using the SAM CLI.
 
 ### Pre-requisites
 
-Before you proceed, make sure you have the [Go programming language](https://go.dev/dl/) (**v1.18** or higher) and [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) installed.
+Before you proceed, make sure you have the [Go programming language](https://go.dev/dl/) (**v1.18** or higher) and [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) installed.
 
 Clone the project and change to the right directory:
 
@@ -210,7 +211,7 @@ SAM configuration environment [default]: <press enter>
 
 Once the deployment is complete, navigate to AWS `CloudFormation` console to check the deployed stack and associated resources. These include the Lambda function, [API Gateway (REST API)](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq), IAM role, etc.
 
-![](images/cfn.jpg)
+![AWS CloudFormation stack](images/cfn.jpg)
 
 You should see the API Gateway endpoint as the SAM CLI output (it will be different in your case) or the `CloudFormation` **Outputs** section. 
 
