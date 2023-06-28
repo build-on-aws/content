@@ -35,8 +35,6 @@ This is part 2 in an eleven article series about EC2 Mac instances and advanced 
 Enjoy the reading !
 
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 100 - Beginner                                                   |
