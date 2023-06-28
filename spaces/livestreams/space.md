@@ -1,6 +1,6 @@
 ---
 title: "Live Streams"
-description: "A place to find your favorite live shows, their show notes, resources and more."
+description: "A place to find your favorite live shows, their show notes, resources, and more."
 template: carousel
 postsFeed: true
 pinnedPosts:
