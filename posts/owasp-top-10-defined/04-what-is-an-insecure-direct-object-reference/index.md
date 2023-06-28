@@ -1,6 +1,6 @@
 ---
 title: What is an Insecure Direct Object Reference?
-description: An insecure direct object reference (IDOR) is another one of the OWASP Top 10 vulnerabilities. This article explains what it is and demonstrates a way to mitigate the risk.
+description: An insecure direct object reference (IDOR) is another example of Broken Access Control, the most common web application vulnerability in the OWASP Top Ten. This article explains what it is and demonstrates a way to mitigate the risk.
 tags:
   - owasp
   - application-security
