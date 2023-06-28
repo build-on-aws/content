@@ -13,7 +13,7 @@ spaces:
 showInHomeFeed: true
 authorGithubAlias: stormacq
 authorName: Sébastien Stormacq
-date: 2023-06-15
+date: 2023-06-28
 ---
 
 When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are required to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app). 
