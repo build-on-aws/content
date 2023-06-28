@@ -15,6 +15,9 @@ authorName: Danilo Poccia
 date: 2023-06-27
 ---
 
+|ToC|
+|---|
+
 A software architecture is "event-driven" when specified events -- like a file being uploaded to a repository, or a database record being updated -- trigger the execution of business logic. Put simply, these sorts of architectures follow a simple cause-and-effect model. But the overall product doesn't have to be simple at all: by using business logic to trigger other events, which in turn run more logic, you can build highly complex processes.
 
 While event-driven architectures seem simple on the surface, understanding how to implement them is crucial, and [understanding the difference between event-driven choreography, and service orchestration](/concepts/event-driven-architectures-service-orchestration-vs-choreography). What's more, there are many potential integration patterns you can use. These are some of the fundamental concepts to help you to understand -- and to more effectively implement -- such architectures. Event-driven architectures follow a cause-effect mental model: *"If this event happens, then run this business logic."* A complex process can be described in this way because each piece of business logic can emit other events that will in turn run more business logic.
