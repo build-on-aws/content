@@ -17,13 +17,13 @@ authorName: Sébastien Stormacq
 date: 2023-06-15
 ---
 
-When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are require to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app). 
+When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are required to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app). 
 
-Getting access to a macOS-based machine might take time because of additional procurement, installation, and configuration processes. To make it easier, you can choose to start a macOS-based machine on [Amazon EC2](https://aws.amazon.com/ec2/getting-started/).
+Getting access to a macOS-based machine might take time because of additional procurement, installation, and configuration processes. To make it easier, you can choose to start a macOS-based machine on [Amazon EC2](https://aws.amazon.com/ec2/getting-started/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance).
 
 This series of tutorials takes you through the typical tasks required to start, connect, or configure macOS-based machines in the AWS cloud. Each tutorial is independent from each other, you don't have to follow them all in sequence. Just pick and read the ones that cover the tasks you want to do.
 
-For this series of tutorial, we assume you're somewhat familiar with Amazon EC2. You can quickly jump in by reading [this short tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html). We will rather focus on the aspects that are specific to Mac on EC2.
+For this series of tutorial, we assume you're somewhat familiar with Amazon EC2. You can quickly jump in by reading [this short tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance). We will rather focus on the aspects that are specific to Mac on EC2.
 
 This is a 11 parts article about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy.
 
@@ -46,7 +46,7 @@ Enjoy the reading !
 | 💰 Cost to complete    | $22 for 24 hours                                                 |
 | 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account)|
 | 💻 Code Sample         | - none -                              |
-| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/TODO" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-06-12                                                      |
 
 | ToC |
@@ -56,7 +56,7 @@ Enjoy the reading !
 
 After you launched an EC2 Mac instance, you most probably want to remotely connect to it to install your favorite tools, libraries and other dependencies to build and test the applications you're developing.
 
-> Note that there are some cases where the instance is already configured at start (this article shows you how to configure an instance ready to use). In those cases, there is no need to remotely connect to your instance. It is perfectly possible to start and use a pre-configured EC2 Mac instance without ever connecting to it. But for this tutorial, we assume you started the EC2 Mac instance from one of [the AWS-provided Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#ec2-macos-images) (AMI) and you have a clean macOS installation available.
+> Note that there are some cases where the instance is already configured at start (this article shows you how to configure an instance ready to use). In those cases, there is no need to remotely connect to your instance. It is perfectly possible to start and use a pre-configured EC2 Mac instance without ever connecting to it. But for this tutorial, we assume you started the EC2 Mac instance from one of [the AWS-provided Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#ec2-macos-images?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance) (AMI) and you have a clean macOS installation available.
 
 There are at least three options to connect to your EC2 Mac instance without installing any additional tools or drivers on it: SSH, SSM, and ARD/VNC. Two of them are for command line connections (SSH and SSM). The last one is to start a full graphical use interface (ARD/VNC).
 
@@ -64,11 +64,11 @@ There are at least three options to connect to your EC2 Mac instance without ins
 
 The most common option is to use [SSH](https://en.wikipedia.org/wiki/Secure_Shell). To establish an SSH connection to your EC2 Mac instance, there are three pre-requisites:
 
-- at launch time, you have specified [the SSH keypair that will be used for user authentication](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html). Note that this can only be done at launch time. If you forgot to do it launch, you may terminate your instance and start a new one, on the same dedicated host (it might take a while to scrub the machine when you terminate it, and before it becomes available again).
+- at launch time, you have specified [the SSH keypair that will be used for user authentication](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance). Note that this can only be done at launch time. If you forgot to do it launch, you may terminate your instance and start a new one, on the same dedicated host (it might take a while to scrub the machine when you terminate it, and before it becomes available again).
 
 - the instance has been launched on a network (VPC) that has public network connectivity (a public subnet of the VPC), and your instance has a public IP address. These two parameters are the default values when launching an EC2 instance.
 
-- at launch time, or afterwards, you have associated a [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) with your EC2 Mac instance. The security Group is configured to authorize inbound TCP 22 (SSH) traffic from your laptop IP address or your client network IP range.
+- at launch time, or afterwards, you have associated a [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance) with your EC2 Mac instance. The security Group is configured to authorize inbound TCP 22 (SSH) traffic from your laptop IP address or your client network IP range.
 
 Assuming these three pre-requisites are met, connecting to a macOS instance is no different than connecting a Linux server. The user name associated with your key pair is `ec2-user` and you have to use the `-i` option to refer to your private key, stored on your laptop.
 
@@ -111,9 +111,9 @@ We chose to start with SSH because many of you are familiar with this tool. Howe
 
 The first area of improvement is the networking. SSH requires your instance to live in a public subnet of your VPC, to have a public IP address and to have a Security Group rule allowing inbound TCP traffic on port 22. As EC2 Mac instances are mostly used for development use cases, such as continuous integration and continuous deployment pipelines, all these network constraints do not make sense. Most of you would like to keep these build, test, and deploy instances in private subnets, without public IP addresses attached to it, and without Security Group rules allowing inbound traffic.
 
-The second area of improvement is in terms of access control. SSH authenticates users with a keypair. You have the private part of the keypair on your laptop and the public part is injected on macOS file system as part as the [EC2 macOS Init process](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#ec2-macos-init) (if you are curious, macOS Init fetches the public key from the instance meta-data service at [this address](http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key/)). Good security practices mandate to securely store private keys and rotate keypair on a regular basis. How do you do that at scale on a fleet of EC2 instances?
+The second area of improvement is in terms of access control. SSH authenticates users with a keypair. You have the private part of the keypair on your laptop and the public part is injected on macOS file system as part as the [EC2 macOS Init process](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#ec2-macos-init?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance) (if you are curious, macOS Init fetches the public key from the instance meta-data service at [this address](http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key/)). Good security practices mandate to securely store private keys and rotate keypair on a regular basis. How do you do that at scale on a fleet of EC2 instances?
 
-To improve your security and management posture, there is another option to connect to your EC2 Mac instance: [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) (SSM). AWS SSM is a versatile service that is able to initiate a shell connection to your instance, with the help of an agent running on the host macOS. The agent comes pre-installed on AMIs provided by AWS.
+To improve your security and management posture, there is another option to connect to your EC2 Mac instance: [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance) (SSM). AWS SSM is a versatile service that is able to initiate a shell connection to your instance, with the help of an agent running on the host macOS. The agent comes pre-installed on AMIs provided by AWS.
 
 There are two advantages of connecting through SSM over SSH. First, there is no inbound network connection from your network. The SSM agent polls the SSM service, and the service takes care of forwarding information, such as keystrokes, to the instance. This means the EC2 Mac instance might have just a private IP address, sits in a private VPC, and no Security Group is required. Secondly, there is no need to use SSH keypairs to manage user authentication. You manage connection permissions from IAM, granting AWS users or roles permission to connect or not to your instance.
 
@@ -242,7 +242,7 @@ When the instance has correct permission, and if you followed the above instruct
 
 Alternatively, you may use the command line to connect using SSM.
 
-There is a one-time installation required however. On your **local machine**, [install the SSM plugin for the AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html#install-plugin-macos).
+There is a one-time installation required however. On your **local machine**, [install the SSM plugin for the AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html#install-plugin-macos?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance).
 
 ```bash
 # Search for my EC2 Mac Instance Id, search by name=macOS Monterey
@@ -288,7 +288,7 @@ exit
 
 When using SSM, you are authenticated as `ssm-user` (and not `ec2-user` as with SSH). Both users are included in the `/etc/sudoers` file and you can elevate privileges to root with the `sudo` command, without using a password.
 
-To avoid having to remember two different commands, some advanced users configure their local `ssh` to use `aws ssm start-session` command as proxy command when SSH'ing to your hosts. If you're interested, or just curious, [check out this documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html).
+To avoid having to remember two different commands, some advanced users configure their local `ssh` to use `aws ssm start-session` command as proxy command when SSH'ing to your hosts. If you're interested, or just curious, [check out this documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance).
 
 ## GUI : connect with Apple Remote Desktop
 
