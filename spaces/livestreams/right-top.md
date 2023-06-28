@@ -4,7 +4,7 @@ hasBorder: true
 
 #### Hungry for some On Demand Videos? 🤔
 
-Interested in checking out how [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/) works? Looking to learn how generative AI can help you code? Make sure to check [this series of videos](https://www.youtube.com/playlist?list=PLDqi6CuDzubxQNgWvIA641SBSsbEVuVmt) by the most amazing Tiffany, over at the [Build On AWS YouTube Channel](https://www.youtube.com/@BuildOnAWS/playlists). (Do not forget to hit like 👍 and subscribe ♥️).
+Interested in checking out how [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/?sc_channel=el&sc_campaign=livestreams&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=livestream-spaces) works? Looking to learn how generative AI can help you code? Make sure to check [this series of videos](https://www.youtube.com/playlist?list=PLDqi6CuDzubxQNgWvIA641SBSsbEVuVmt) by the most amazing Tiffany, over at the [Build On AWS YouTube Channel](https://www.youtube.com/@BuildOnAWS/playlists). (Do not forget to hit like 👍 and subscribe ♥️).
 
 ![Thumbnail Of the CodeWhisperer playlist](./images/tiffany-codewhisperer.jpg)
 
