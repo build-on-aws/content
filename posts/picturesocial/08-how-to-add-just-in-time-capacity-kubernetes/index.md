@@ -6,6 +6,7 @@ tags:
   - containers
   - eks
   - karpenter
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-03-27
@@ -13,14 +14,8 @@ date: 2023-03-27
 
 This is a 8-part series about Picturesocial:
 
-1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
-2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
-3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
-4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
-5. [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
-6. [How to use DynamoDB on a containerized API](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/)
-7. [How to use DynamoDB on a containerized API](/posts/07-how-to-expose-a-containerized-api-to-the-internet/)
-8. [How to add just in time compute capacity to a Kubernetes Cluster](this post)
+| SeriesToC |
+|-----------|
 
 In the face of uncertainty, we use logic, positive thinking, prayer, or whatever else seems like it might make an outcome more dependable. But sometimes you just need the right tool. For example, APIs often use frameworks to predict demand, but they cannot always provision compute capacity to serve it exactly when it's needed -- or Just in Time. Facing this uncertain availability, what tool can help?
 

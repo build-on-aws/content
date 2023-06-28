@@ -25,11 +25,9 @@ Manually setting up and configuring the packages required to run a Python web ap
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
 - Test, Deploy and Configure the web application using the CI/CD pipeline.
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
-| ✅ AWS experience      | Beginner                                                        |
+| ✅ AWS experience      | 200 - Intermediate                                                        |
 | ⏱ Time to complete    | 60 minutes                                                      |
 | 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/) eligible                                               |
 | 🧩 Prerequisites       | - [AWS account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |

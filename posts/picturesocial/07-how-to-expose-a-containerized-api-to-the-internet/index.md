@@ -6,6 +6,7 @@ tags:
   - csharp
   - api-gateway
   - api
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-03-01
@@ -13,13 +14,8 @@ date: 2023-03-01
 
 This is a 8-part series about Picturesocial:
 
-1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
-2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
-3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
-4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
-5. [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
-6. [How to use DynamoDB on a containerized API](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/)
-7. How to expose a containerized API to the internet (this post)
+| SeriesToC |
+|-----------|
 
 Not everything is about creating and deploying. One of the most important parts of the journey is to make sure that our APIs are available to be consumed by the clients, wherever they are. The way you expose an API could represent the success or failure of the whole project, and this is why we need to explore some of the best practices and tips. In this post we will be learning about API Gateway and how we can make sure that our backends are consumed appropriately in a secure way.
 

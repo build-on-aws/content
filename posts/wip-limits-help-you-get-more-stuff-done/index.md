@@ -104,3 +104,9 @@ So in Scrum we might recognize half-way through the sprint that stories will not
 ## Conclusion
 
 Hopefully now you understand why limiting WIP is not just a thing we do, but is a key part of the Kanban process, and necessary so as to improve flow of value through the system.  Limiting WIP improves flow and helps us produce more quickly and reliably, drives collaboration, gets the team working together, and aids our commitment to completing valuable features.
+
+
+| Let me know what you think of this post|  |
+| ----------- | ----------- |
+| Twitter:      | [@setheliot](https://twitter.com/setheliot)       |
+| LinkedIn:   | [setheliot](https://www.linkedin.com/in/setheliot/)        |

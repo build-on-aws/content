@@ -5,15 +5,15 @@ tags:
   - owasp
   - network-security
   - application-security
+showInHomeFeed: true
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-09-02
 ---
 This is a 10-part series:
 
-1. [What is Broken Access Control?](/posts/owasp-top-10-defined/01-what-is-broken-access-control/)
-2. [What is a Cryptographic Failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)
-3. What is an Injection Attack? (this post)
+| SeriesToC |
+|-----------|
 
 In this post we are talking about injection attacks. As the name would elude, this is typically a scenario where data is injected into a query or a call, is not validated, filtered or sanitized by the application, thus resulting in unintended action from the application. This could be in the form of returning data in a query that should not be returned, causing the application to crash, or even inserting fraudulent data into a database or data stream. You get the idea, right? Overall it's a difficult type of attack to explain because there are many ways it can happen and different results that can be seen. There are however, a few notable Common Weakness Enumerations that I'll share in this post and I'll provide you with a simple example of one.
 

@@ -31,11 +31,9 @@ Creating a separate repository for each microservice benefits a team in maintain
 
 This tutorial will show you how you can take advantage of [AWS Copilot CLI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Copilot.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq) - that accelerates you to build efficient CI/CD Pipelines for connected microservices in under an hour using AWS Copilot. AWS Copilot CLI is a tool for developers to build, release, and operate production-ready, containerized applications on [AWS App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [AWS Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq). More information about Copilot, core concepts can be found in [the Copilot official documentation](https://aws.github.io/copilot-cli/docs/concepts/overview/).
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
-| ✅ AWS experience      | 100 - Beginner                                              |
+| ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 60 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq)|

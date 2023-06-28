@@ -1,17 +1,32 @@
 ---
-title: <Highlight the core problem being solved, follow PR/marketing guidelines>
-description: <Two or three sentences describing the problem, the solution, and tools or services used along the way>
+title: "Title highlighting the core problem being solved"
+description: "Two or three sentences describing the problem, the solution, and tools or services used along the way"
 tags:
     - tutorials
-    - <tutorials tag is mandatory for tutorials. list any other key terms readers will be searching for using kebab-case, e.g. ci-cd, NOT "ci cd", or "CI-CD">
-    - essentials
     - aws
-authorGithubAlias: <github alias>
-authorName: <FirstName LastName>
-date: <YYYY-MM-DD - expected publish date>
+    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
+    - tag-1
+    - tag-2
+authorGithubAlias: githubAliasWithoutQuotes
+authorName: Name Surname (no quotes around)
+date: YYYY-MM-DD (expected publication date)
 ---
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
+<!-- NB: READ THE COMMENT ABOVE, AND DELETE THIS AND OTHER COMMENTS!!! -->
+
+**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
+
+## Frontmatter Instructions (remove this _Frontmatter Instructions_ section before authoring)
+
+All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/).
+
+- `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser" - Please put this inside double-quotes
+- `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters - Please put this inside double-quotes
+- `tags` - help readers discover posts on the same topics. Use `kebab-case`.
+- `authorGithubAlias` - your GitHub username
+- `authorName` - how you want your name to display for the author credit of this post
+- `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
 
 Introduction paragraph to the topic. Describe a real world example to illustrate the problem the reader is facing. Explain why it's a problem. Offer the solution you'll be laying out in this post.
 
@@ -30,17 +45,17 @@ Before starting this tutorial, you will need the following:
  - An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
  - <!-- any other pre-requisites you will need -->
 
-## Sections
 <!-- Update with the appropriate values -->
-| Info                | Level                                  |
+<!-- Please ensure tutorials are flagged as level 200 (intermediate) or higher -->
+| Attributes                |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | 100 - Beginner                          |
+| ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 15 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | YYYY-MM-DD <as mentioned above>                             |
+| ⏰ Last Updated     | YYYY-MM-DD                             |
 
 | ToC |
 |-----|

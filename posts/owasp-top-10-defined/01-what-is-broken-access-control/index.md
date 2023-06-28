@@ -5,6 +5,7 @@ tags:
   - owasp
   - network-security
   - application-security
+showInHomeFeed: true
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-08-29
@@ -12,9 +13,8 @@ date: 2022-08-29
 
 This is a 10-part series:
 
-1. What is Broken Access Control? (this post)
-2. [What is a Cryptographic Failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)
-3. [What is an Injection Attack?](/posts/owasp-top-10-defined/03-what-is-an-injection-attack/)
+| SeriesToC |
+|-----------|
 
 ## Overview of Access Control
 
