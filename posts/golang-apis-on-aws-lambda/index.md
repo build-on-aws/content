@@ -50,7 +50,7 @@ Here is a gist on how it works at a high level:
 
 Let's look into the framework specific behavior.
 
-### `gorilla/mux` library
+### gorilla/mux library
 
 Package `gorilla/mux` implements a request router and dispatcher for matching incoming requests to their respective handler. Like `http.ServeMux` in the Go standard library, `mux.Router` matches incoming requests against a list of registered routes and calls a handler for the route that matches the URL or other conditions. Because `gorilla/mux` implements the `http.Handler` interface, it is compatible with `http.ServeMux`.
 
@@ -84,7 +84,7 @@ func main() {
   - The `Proxy` (or `ProxyWithContext`) method of the `gorillamux.GorillaMuxAdapter` object receives the `events.APIGatewayProxyRequest`, converts it into a `http.Request` object, and sends it to the `mux.Router` for routing.
   - It returns a proxy response object (`events.APIGatewayProxyResponse`) generated from the data written to the response writer (`http.ResponseWriter`).
 
-## `echo` framework
+### echo framework
 
 Echo another popular Go web framework which is minimalist, yet highly extensible.
 
@@ -122,7 +122,7 @@ The concept is similar to the previous example.
   - The `ProxyWithContext` method of the `echoadapter.EchoLambda` object receives the `events.APIGatewayProxyRequest` object and converts it into an `http.Request` object and sends it to `echo.Echo` for routing. 
   -  It returns a proxy response object (`events.APIGatewayProxyResponse`) generated from the data written to the response writer (`http.ResponseWriter`).
 
-## Go `net/http` package
+### net/http package
 
 The adapter implementation for `net/http` also works the same way. Here is the code snippet:
 
@@ -168,7 +168,7 @@ git clone https://github.com/build-on-aws/golang-apis-on-aws-lambda
 cd golang-apis-on-aws-lambda
 ```
 
-### `gorilla/mux` based Lambda function
+### gorilla/mux based Lambda function
 
 First, update the `CodeUri` in `template.yaml` to `gorilla/` (which is the local folder where the code is located).
 
@@ -246,7 +246,7 @@ You should get a `JSON` response similar to the following:
 }
 ```
 
-### `net/http` and `echo` based Lambda functions
+### net/http and echo based Lambda functions
 
 Before you deploy either of these, make sure to update the `CodeUri` in `template.yaml` to refer to the local folder where the code is located:
 
@@ -304,8 +304,8 @@ sam delete --stack-name lambda-go-echo
 
 ## Conclusion
 
-This blog post introduced you to the AWS Lambda Go API Proxy, and how it's framework/package (for `gorilla/mux`, `echo` and `net/http`) specific adapter implementations allow you to run existing Go applications as AWS Lambda functions fronted by an API Gateway. You deployed these functions using AWS SAM CLI and verified it by invoking the API Gateway endpoint.
+This blog post introduced you to the AWS Lambda Go API Proxy, and how it's framework/package (for `gorilla/mux`, `echo` and `net/http`) specific adapter implementations allow you to run existing Go applications as AWS Lambda functions fronted by an API Gateway. You learned the basic concepts with simple code examples, deployed these functions using AWS SAM CLI and verified it by invoking the API Gateway endpoint.
 
-This blog covered basic concepts with simple code examples to get you started. The AWS Lambda Go API Proxy also supports the [Gin](https://github.com/gin-gonic/gin), which one of the most popular Go web frameworks! The second part of this blog, will demonstrate how to run existing Gin framework based Go applications as AWS Lambda functions with the help of a simple (yet practical) URL shortener service.
+The AWS Lambda Go API Proxy also supports the [Gin](https://github.com/gin-gonic/gin), which one of the most popular Go web frameworks! The second part of this blog, will demonstrate how to run existing `Gin` framework based Go applications as AWS Lambda functions with the help of a simple (yet practical) URL shortener service.
 
 Stay tuned!
