@@ -4,4 +4,5 @@ description: "A series of tutorials helping you build applications on MacOS and 
 navigationBars: both
 posts:
   - 01-start-an-ec2-mac-instance
+  - 02-connect-to-an-ec2-mac-instance
 --- 

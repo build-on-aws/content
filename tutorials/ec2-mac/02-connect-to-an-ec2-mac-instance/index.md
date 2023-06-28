@@ -8,7 +8,6 @@ tags:
     - tutorials
     - devops
     - aws
-    - devops
 spaces:
   - mac
 showInHomeFeed: true
@@ -42,7 +41,7 @@ Enjoy the reading!
 | 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance)|
 | 💻 Code Sample         | - none -                              |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-06-28                                                      |
+| ⏰ Last Updated        | 2023-06-28                                                     |
 
 | ToC |
 |-----|
