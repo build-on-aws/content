@@ -8,7 +8,7 @@ tags:
 showInHomeFeed: true
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
-date: 2022-06-27
+date: 2023-06-27
 ---
 This is a 10-part series:
 
