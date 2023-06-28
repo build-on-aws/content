@@ -10,7 +10,7 @@ tags:
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid & Sai Kiran Jukanti
 date: 2022-07-08
-authorGithubAlias: 
+authorGithubAlias: kirannsa
 ---
 
 In this series of blogs we learn about what AI Explainability is, we will have a deeper look into local post-hoc explainability using fundamental perturbation methods such as SHAP and LIME. In the future posts, we explore other methods such as back-propagation methods, including gradient-based methods and those based in DeepLift.
