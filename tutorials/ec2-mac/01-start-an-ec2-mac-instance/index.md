@@ -72,12 +72,16 @@ Notice you have the choice between x86 based Mac Mini (`mac1.metal`) and Apple s
 
 Alternatively, we may use the AWS CLI, as following:
 
-```zsh
-aws ec2 allocate-hosts                   \
-     --instance-type mac2.metal          \
-     --availability-zone us-east-2b      \
-     --quantity 1 
+```bash
 
+aws ec2 allocate-hosts                   \ 
+     --instance-type mac2.metal          \ 
+     --availability-zone us-east-2b      \ 
+     --quantity 1 
+```
+
+```bash
+# Response
 {
     "HostIds": [
         "h-0fxxxxxxx90"
@@ -123,14 +127,17 @@ Once you have all these parameters, the procedure is no different from starting 
 
 Alternatively, we can use the command line:
 
-```zsh
- aws ec2 run-instances                                         \
-	    --instance-type mac2.metal                             \
-        --key-name my_key                                      \
-        --placement HostId=h-0fxxxxxxx90                       \
-        --security-group-ids sg-01000000000000032              \
+```bash
+ aws ec2 run-instances                                         \ 
+        --instance-type mac2.metal                             \ 
+        --key-name my_key                                      \ 
+        --placement HostId=h-0fxxxxxxx90                       \ 
+        --security-group-ids sg-01000000000000032              \ 
         --image-id AWS_OR_YOUR_AMI_ID
-		
+```
+
+```bash
+# Response
 {
     "Groups": [],
     "Instances": [
@@ -163,7 +170,7 @@ You can change the instance state by using the **Instance state** drop down menu
 
 Alternatively, you may use the CLI.
 
-```zsh
+```bash
 # to stop the instance
 aws ec2 stop-instances --instance-id i-08xxxxx5c
 
@@ -178,7 +185,7 @@ aws ec2 terminate-instances --instance-id i-08xxxxx5c
 
 Remember that the unit of billing is the time your dedicated host is allocated. It is not the time the instance is running. When you're done using the Mac mini, be sure to release the dedicated host from the AWS console or using the command line.
 
-```zsh
+```bash
 aws ec2 release-hosts --host-ids h-0fxxxxxxx90
 ```
 
