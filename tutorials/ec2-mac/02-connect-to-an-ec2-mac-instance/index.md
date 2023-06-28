@@ -1,5 +1,5 @@
 ---
-title: "Connect to an EC2 Mac instance"
+title: "Connect to an Amazon EC2 Mac instance"
 description: "Learn how to remotely connect to an EC2 Mac instance"
 tags:
     - mac
@@ -14,10 +14,10 @@ spaces:
 showInHomeFeed: true
 authorGithubAlias: stormacq
 authorName: Sébastien Stormacq
-date: 2023-06-15
+date: 2023-06-28
 ---
 
-When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are required to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app). 
+When developing applications for Apple systems (iPhone, iPad, Watch, TV, or Vision Pro), you are required to use a macOS machine at some point of your development workflow. Either to provide remote developers or temporary contractors a managed and secured desktop machine, or to automate your build, test, sign, and release pipelines (also known as continuous integration and continuous deployment or CI/CD ). [You can get a high level overview of a macOS-based CI/CD system by reading my first article from this series](/posts/cicd-for-ios-app).
 
 Getting access to a macOS-based machine might take time because of additional procurement, installation, and configuration processes. To make it easier, you can choose to start a macOS-based machine on [Amazon EC2](https://aws.amazon.com/ec2/getting-started/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance).
 
@@ -25,15 +25,10 @@ This series of tutorials takes you through the typical tasks required to start, 
 
 For this series of tutorial, we assume you're somewhat familiar with Amazon EC2. You can quickly jump in by reading [this short tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance). We will rather focus on the aspects that are specific to Mac on EC2.
 
-This is a 11 parts article about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy.
+This is an 11 parts article about EC2 Mac instances and advanced CLI usage on macOS, including command-line build, test, sign, archive and deploy. The next pieces will appear in the list below as they are published.
 
-- In [part one](/tutorials/ec2-mac/01-start-an-ec2-mac-instance), you learn how to allocate a Mac mini to your AWS Account and start it.
-
-- This is the second part, you will learn how to remotely connect to the EC2 Mac instance you just started.
-
-- In part 3, you will learn how to resize your boot volume to accommodate for more space before installing your development tools and libraries.
-
-- other parts will be added over time.
+|SeriesToC|
+|---------|
 
 Enjoy the reading!
 
@@ -41,13 +36,13 @@ Enjoy the reading!
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
-| ✅ AWS experience      | 100 - Beginner                                                   |
+| ✅ AWS experience      | Beginner - 100                                                  |
 | ⏱ Time to complete     | 20 minutes                                                      |
 | 💰 Cost to complete    | $22 for 24 hours                                                 |
-| 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account)|
+| 🧩 Prerequisites       | An [AWS Account](https://aws.amazon.com/resources/create-account?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance)|
 | 💻 Code Sample         | - none -                              |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-06-12                                                      |
+| ⏰ Last Updated        | 2023-06-28                                                      |
 
 | ToC |
 |-----|
@@ -60,7 +55,7 @@ After you launched an EC2 Mac instance, you most probably want to remotely conne
 
 There are at least three options to connect to your EC2 Mac instance without installing any additional tools or drivers on it: SSH, SSM, and ARD/VNC. Two of them are for command line connections (SSH and SSM). The last one is to start a full graphical use interface (ARD/VNC).
 
-## CLI : connect with SSH
+## CLI : Connect with SSH
 
 The most common option is to use [SSH](https://en.wikipedia.org/wiki/Secure_Shell). To establish an SSH connection to your EC2 Mac instance, there are three pre-requisites:
 
@@ -77,13 +72,16 @@ Using the AWS Console, find the IP address of your EC2 instance. Alternatively, 
 ```bash
 aws ec2 describe-instances \
     --query "Reservations[].Instances[? InstanceType == 'mac1.metal'].NetworkInterfaces[][].Association.PublicIp"
+```
 
+```bash
+# Response
 [
     1.0.0.0
 ]
 ```
 
-You will now use SSH with your secret key `pem` file with the `-i` option and use the default username AWS created for you on macOS: `ec2-user`. In this example, we connect to a Big Sur instance.
+You will now use SSH with your secret key `pem` file with the `-i` option and use the default username AWS created for you on macOS: `ec2-user`. In this example, we connect to a Big Sur instance (please remember to replace `1.0.0.0` with your instance's IP address from the previous command).
 
 ```bash
 ssh -i ./path_to/my_private_key.pem ec2-user@1.0.0.0
@@ -105,7 +103,7 @@ Once you are connected, feel free to explore your instance. You will verify it i
 
 `ec2-user` is included in the `/etc/sudoers` file and you can elevate privileges to root with the `sudo` command, without a password.
 
-## CLI : connect with AWS SSM
+## CLI : Connect with AWS SSM
 
 We chose to start with SSH because many of you are familiar with this tool. However, if you look at it through the prism of security and management, there are a couple of areas of improvements.
 
@@ -143,7 +141,7 @@ aws iam create-role \
     --role-name ssmAccess \
     --assume-role-policy-document file://ec2-role-trust-policy.json
 
-# Output
+# Response
 {
     "Role": {
         "Path": "/",
@@ -170,19 +168,19 @@ aws iam create-role \
 Once the role is created, we need to attach permissions to it. Instead of defining the permissions by myself, I will reuse an AWS-managed policy that contains all the permissions required by SSM. The name of the AWS managed policy is `arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore`.
 
 ```bash
- aws iam attach-role-policy \
-     --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore \
+ aws iam attach-role-policy \ 
+     --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore \ 
      --role-name ssmAccess-Profile
 ```
 
-The last three steps create an EC2 instance profile, attach the role to the profile, and attach the profile to my instance.
+The next three steps create an EC2 instance profile, attach the role to the profile, and attach the profile to my instance.
 
 ```bash
 # Create an instance profile 
 aws iam create-instance-profile \
      --instance-profile-name ssmAccess-Profile
 
-# Output
+# Response
 {
     "InstanceProfile": {
         "Path": "/",
@@ -210,7 +208,7 @@ aws ec2 associate-iam-instance-profile \
     --instance-id $INSTANCE_ID \
     --iam-instance-profile Name=" ssmAccess-Profile"
 
-# Output
+# Response
 {
     "IamInstanceProfileAssociation": {
         "AssociationId": "iip-assoc-07d308386ff04f72d",
@@ -252,7 +250,11 @@ INSTANCE_ID=$(aws ec2 describe-instances                                        
                --output text)
 
 aws ssm start-session --target $INSTANCE_ID         
+```
 
+This will now connect you to the Mac instance, you can run some commands shown below (along with their output) to verify:
+
+```bash
 Starting session with SessionId: sst-0a9c1047a20fdbd7c
 
 sh-3.2$ uname -a
@@ -282,15 +284,15 @@ sh-3.2$ diskutil list
 
 sh-3.2$ id
 uid=502(ssm-user) gid=20(staff) groups=20(staff),12(everyone),61(localaccounts),701(com.apple.sharepoint.group.1),100(_lpoperator)
-
-exit
 ```
+
+To end your SSH session, run `exit`.
 
 When using SSM, you are authenticated as `ssm-user` (and not `ec2-user` as with SSH). Both users are included in the `/etc/sudoers` file and you can elevate privileges to root with the `sudo` command, without using a password.
 
 To avoid having to remember two different commands, some advanced users configure their local `ssh` to use `aws ssm start-session` command as proxy command when SSH'ing to your hosts. If you're interested, or just curious, [check out this documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=02-connect-to-an-ec2-mac-instance).
 
-## GUI : connect with Apple Remote Desktop
+## GUI : Connect with Apple Remote Desktop
 
 When discovering a new environment, or when you want to install a set of tools on a new instance, or simply to use the graphical user interface you know and love from macOS, you might want to connect to your EC2 Mac instance using the traditional macOS GUI.
 
@@ -311,6 +313,7 @@ sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resourc
 -activate -configure -access -on \
 -restart -agent -privs -all
 
+# Response
 Starting...
 Warning: macos 10.14 and later only allows control if Screen Sharing is enabled through System Preferences.
 Activated Remote Management.
@@ -330,7 +333,7 @@ You can create tunnels either using SSH or SSM. We wil start with SSH, and will 
 
 ### SSH Tunnels to connect to Apple Remote Desktop
 
- When you create a SSH tunnel, the SSH client on your machine becomes a server and starts to accept incoming connections on localhost. Every data received on this connection is encrypted, and optionally compressed, before being sent to the remote server: your EC2 Mac instance. The SSH server on macOS decrypts and decompresses the data, then send it over the network to the destination you specified on the client. In this case it forwards the traffic to the Apple Remote Desktop Server running on the instance (`localhost:5900`).
+When you create a SSH tunnel, the SSH client on your machine becomes a server and starts to accept incoming connections on localhost. Every data received on this connection is encrypted, and optionally compressed, before being sent to the remote server: your EC2 Mac instance. The SSH server on macOS decrypts and decompresses the data, then send it over the network to the destination you specified on the client. In this case it forwards the traffic to the Apple Remote Desktop Server running on the instance (`localhost:5900`).
 
 [You can learn more about SSH tunnels on this site](https://www.ssh.com/academy/ssh/tunneling/example). The whole process is illustrated below:
 
@@ -345,7 +348,7 @@ ssh -C -N -L 5900:localhost:5900 -i /path/my-key-pair.pem ec2-user@1.0.0.0
 
 Let's explain the options used:
 
-- `-i`, allows you to specify the private part of the keypair used for authentication 
+- `-i`, allows you to specify the private part of the keypair used for authentication
 
 - `-L` is the SSH tunneling option. It tells the SSH client on your machine to start to listen to incoming connections on TCP port 5900 (`5900:`), and to forward all traffic received to the destination host (`1.0.0.0`). Once on the destination host, to send the traffic to `localhost:5900` which is the address of the ARD server.
 
@@ -373,9 +376,9 @@ And after a few seconds, you should see the familiar macOS desktop.
 
 ![macOS desktop](images/vnc-mac-desktop.png)
 
-### Change the resolution of the EC2 Mac instance screen 
+### Change the resolution of the EC2 Mac instance screen
 
-Once connected, you most probably want to increase the screen resolution. 
+Once connected, you most probably want to increase the screen resolution.
 
 To do so, you use `displayplacer`, [the open source command line tool developed by Jake Hilborn](https://github.com/jakehilborn/displayplacer).
 
@@ -433,17 +436,17 @@ displayplacer "id:69784AF1-CD7D-B79B-E5D4-60D937407F68 res:1024x768 hz:60 color_
 displayplacer "id:69784AF1-CD7D-B79B-E5D4-60D937407F68 res:1440x900 origin:(0,0) degree:0"
 ```
 
-The nice thing is that it is not necessary to restart your VNC client, it adjusts automatically. 
+The nice thing is that it is not necessary to restart your VNC client, it adjusts automatically.
 
 ### SSM Tunnels to connect to Apple Remote Desktop
 
 As explained earlier, SSH connections and tunnels require your instances to be publicly available on the Internet. It also requires you to manage the generation, secured storage, and rotation of keypairs.
 
-For these reasons, you may chose to use AWS Systems Manager Session Manager (SSM) to connect to your instances. SSM also supports tunneling. 
+For these reasons, you may chose to use AWS Systems Manager Session Manager (SSM) to connect to your instances. SSM also supports tunneling.
 
 Once the tunnel is started, all the rest: opening the client, connect to the server, and resize the display is similar between SSH and SSM tunnels.
 
-Before starting an SSM tunnel for Apple Remote Desktop, be sure the EC2 Mac instance is attached to an IAM role that has permissions to use SSM APIs, as described earlier. 
+Before starting an SSM tunnel for Apple Remote Desktop, be sure the EC2 Mac instance is attached to an IAM role that has permissions to use SSM APIs, as described earlier.
 
 To start the tunnel, use the following command:
 
@@ -478,3 +481,5 @@ When done, close the tunnel by interrupting the `aws ssm` command with `Ctrl-C`.
 ## Conclusion
 
 Congrats 🎉. You can now connect securely to your EC2 Mac instance, using either SSH, or SSM. Read part 3 where you will learn how to resize your boot volume to accommodate for more space before installing your development tools and libraries.
+
+If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
