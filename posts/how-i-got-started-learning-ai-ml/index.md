@@ -70,7 +70,7 @@ Incorporating AI/ML to solve a real life problem seemed like a difficult experie
 
 Now Jerry has a simple mobile interface through which he can submit a snap of the plant’s. the application will analyze the image using Amazon Rekognition, then provide recommendations and insights based on the analysis, leveraging the trained model and knowledge graph stored in Neptune. 
 
-### Step - 1 : Socialized to Collaborate, Improve Positive and Productive Learning Experience and got Exposed to Diverse Perspectives
+### Step - 1 : Socialized to collaborate, Improve positive and productive learning experience and got exposed to diverse perspectives
 
 While interacting with others, I got introduced to the material being presented by others, listened to concepts, asked question. By receiving feedback from others helped me understand the material and remember it more effectively. 
 
@@ -80,7 +80,7 @@ While interacting with others, I got introduced to the material being presented 
 
 3. Following [blogs](https://aws.amazon.com/blogs/machine-learning/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml), thought leaders and influencers in the AI and ML industry helped me stay up-to-date on the latest trends and technologies, and provide valuable insights and perspectives. 
 
-### Step - 2: Attended Formal trainings for structured and comprehensive learning
+### Step - 2: Attended formal trainings for structured and comprehensive learning
 
 1. [Machine Learning University](https://aws.amazon.com/machine-learning/mlu/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a place for beginners that helped me with a self-service pathway to understand the foundations of Machine Learning. 
 
