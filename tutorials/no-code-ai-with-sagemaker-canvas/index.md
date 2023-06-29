@@ -14,7 +14,8 @@ images:
   banner: images/overview-01.png
   hero: images/overview-01.png
   background: images/overview-01.png
-
+showInHomeFeed: true
+movedFrom: /posts/no-code-ai-with-sagemaker-canvas
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
 date: 2023-05-19
