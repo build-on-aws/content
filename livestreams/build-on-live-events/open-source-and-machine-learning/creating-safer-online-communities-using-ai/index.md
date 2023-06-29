@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=nI7UaHJbm5Q&t=6723s
 
 **🐦 Reach out to the hosts and guests:**
 
-Todd: [https://twitter.com/gjyoungjr](https://twitter.com/gjyoungjr)
+Todd: [https://twitter.com/gjyoungjr](https://twitter.com/recursivecodes)
 
 Mike: [https://www.linkedin.com/in/mikegchambers/](https://www.linkedin.com/in/mikegchambers/)
 

@@ -6,7 +6,7 @@ tags:
   - generative-ai
   - build-on-live
   - twitch
-  - aw
+  - aws
   - devops
 
 authorGithubAlias: darko-mesaros

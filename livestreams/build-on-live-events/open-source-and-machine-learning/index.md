@@ -36,12 +36,12 @@ Here is the schedule of the day and the show notes of each session:
 
 |  Name | Speaker | Link to Show Notes
 |--|--|--|
-| Using Large Language Models to Chat to Your Documents | Heiko Hotz, Sr. Machine Learning SA, AWS  | [Show Notes](./using-llms-to-chat-to-your-documents) |
-| Video Translation Using AI | Gilbert Young Jr, Sr. Serverless Developer, Serverless Guru | [Show Notes](./video-translation-using-ai) |
-|  Creating Safer Online Communities using AI | Todd Sharp, Principal Developer Advocate, Amazon IVS, Twitch  | [Show Notes](./creating-safer-online-communities-using-ai) |
-|  Responsibility and Security in Generative AI | Mike Chambers, Specialist Developer Advocate, AWS  | [Show Notes](./responsibility-and-security-with-generative-ai) |
-|  Reinforcement Learning With Human Feedback | Emily Webber, Principal AI/ML Specialist SA, AWS | [Show Notes](./responsibility-and-security-with-generative-ai) |
-|  Generating Code With Amazon CodeWhisperer | David Ernst, Sr. DevOps Specialist SA, AWS | [Show Notes](./generating-code-with-codewhisperer) |
+| Using Large Language Models to Chat to Your Documents | Heiko Hotz, Sr. Machine Learning SA, AWS  | [Show Notes](./open-source-and-machine-learning/using-llms-to-chat-to-your-documents) |
+| Video Translation Using AI | Gilbert Young Jr, Sr. Serverless Developer, Serverless Guru | [Show Notes](./open-source-and-machine-learning/video-translation-using-ai) |
+|  Creating Safer Online Communities using AI | Todd Sharp, Principal Developer Advocate, Amazon IVS, Twitch  | [Show Notes](./open-source-and-machine-learning/creating-safer-online-communities-using-ai) |
+|  Responsibility and Security in Generative AI | Mike Chambers, Specialist Developer Advocate, AWS  | [Show Notes](./open-source-and-machine-learning/responsibility-and-security-with-generative-ai) |
+|  Reinforcement Learning With Human Feedback | Emily Webber, Principal AI/ML Specialist SA, AWS | [Show Notes](./open-source-and-machine-learning/responsibility-and-security-with-generative-ai) |
+|  Generating Code With Amazon CodeWhisperer | David Ernst, Sr. DevOps Specialist SA, AWS | [Show Notes](./open-source-and-machine-learning/generating-code-with-codewhisperer) |
 
 If you rather check out the entire live stream from the start to the end (technical issues and all), you can do so here:
 
