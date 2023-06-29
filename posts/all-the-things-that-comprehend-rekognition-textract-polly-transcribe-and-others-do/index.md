@@ -65,7 +65,7 @@ Many people possess piles of documents at home, ranging from letters from past l
 4. A Lambda Function makes the call to the Translate API.
 5. The response is saved in an S3 bucket. 
 
-Here's the code to [create this solution]((https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/detecting-entities-and-sentiment-from-a-document%20))
+Here's the code to [create this solution](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/detecting-entities-and-sentiment-from-a-document%20)
 
 - Use case 3: [Make Polly Talk 🦜](https://github.com/build-on-aws/aiml-like-api-in-your-app/tree/main/make-polly-talk)
 
