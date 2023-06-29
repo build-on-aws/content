@@ -498,7 +498,7 @@ const elbEnv = new elasticbeanstalk.CfnEnvironment(this, 'Environment', {
 
 ### Defining an Empty Pipeline
 
-After we define the stack that makes up our application, we can deploy it through a CI/CD pipeline. If you want to learn more about CI/CD, check out the our [DevOps Essentials guide](https://www.buildon.aws/concepts/devops-essentials/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+After we define the stack that makes up our application, we can deploy it through a CI/CD pipeline. If you want to learn more about CI/CD, check out the our [DevOps Essentials guide](/concepts/devops-essentials/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 CDK Pipelines is a high-level construct library that makes it easy to set up a continuous deployment pipeline for our CDK applications, powered by [AWS CodePipeline](http://aws.amazon.com/codepipeline?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 

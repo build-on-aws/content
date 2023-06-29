@@ -156,7 +156,7 @@ We've learned a lot in this post today! We started with an introduction to what 
 
 ### Additional Resources
 
-You can find other articles on BuildOn about DevOps using the DevOps tag. If community based learning is your thing, you should definitely look for one near you, there are a variety of DevOps meetups run around the globe!
+You can find other articles on [Community.aws](/) about DevOps using the DevOps tag. If community based learning is your thing, you should definitely look for one near you, there are a variety of DevOps meetups run around the globe!
 
 **Conferences:**
 

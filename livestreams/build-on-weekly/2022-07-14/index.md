@@ -15,7 +15,7 @@ spaces:
   - livestreams
 ---
 
-Welcome to the first episode of Build on Weekly! 🥳 Here we introduce ourselves, say hi to chat, and tell you what this show is all about. We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
+Welcome to the first episode of Build on Weekly! 🥳 Here we introduce ourselves, say hi to chat, and tell you what this show is all about. We will be posting here, on [Community.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
 ![Jacquie and Darko on stream](images/header.webp)
 

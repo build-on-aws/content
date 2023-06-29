@@ -11,7 +11,6 @@ Interested in contributing content? Get started quickly:
   * [3. Write Your First Draft](#3-write-your-first-draft)
   * [4. Submit Pull Request for Review and Publishing](#4-submit-pull-request-for-review-and-publishing)
   * [5. Address Review Feedback](#5-address-review-feedback)
-  * [6. Do NOT Share Your Content Yet](#6-do-not-share-your-content-yet)
 * [The Legal Details](#the-legal-details)
 * [Frequently Asked Questions](#frequently-asked-questions)
 
@@ -19,7 +18,7 @@ Interested in contributing content? Get started quickly:
 
 :warning: January 27, 2023: Community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](/) for updates as we open this up to more community authors in the coming months.
 
-### Who Writes on BuildOn
+### Who Writes on Community.aws
 
 We are looking for people with technical knowledge to write about their experiences, share their opinions, and help others in the community. We publish content from authors who want to share their challenges (and helpful hints) to learning a programming language, a dive deep into why it's always DNS, best practices on building microservices architectures, and more.
 
@@ -66,8 +65,8 @@ The content is not your traditional marketing content. It doesn't try to sell re
 Wondering what type of content fits this content platform? Here are some examples written by the AWS Developer Relations team.
 
 * [What happens when you type a URL into your browser?](https://aws.amazon.com/blogs/mobile/what-happens-when-you-type-a-url-into-your-browser/)
-* [Four Reasons Why GraphQL Is The Future](https://www.buildon.aws/posts/four-reasons-why-graphql-is-the-future/)
-* [Topic or a Queue - What exactly is Apache Kafka?](https://www.buildon.aws/posts/kafka-topic-or-queue/)
+* [Four Reasons Why GraphQL Is The Future](/posts/four-reasons-why-graphql-is-the-future/)
+* [Topic or a Queue - What exactly is Apache Kafka?](/posts/kafka-topic-or-queue/)
 * [10 Ways to Use Serverless Functions](https://dev.to/aws/10-ways-to-use-serverless-functions-bme)
 * [Protecting from vulnerabilities in Java: How we managed the log4j crisis](https://medium.com/i-love-my-local-farmer-engineering-blog/protecting-from-vulnerabilities-in-java-how-we-managed-the-log4j-crisis-68d3e90a7586)
 * [How to debug machine learning models to catch issues early and often](https://towardsdatascience.com/a-quick-guide-to-managing-machine-learning-experiments-af84da6b060b)
@@ -166,7 +165,7 @@ Your content is now submitted and will be queued for review. When a reviewer sta
 
 #### Example
 
-For a post titled `What Happens When You Type a URL Into Your Browser` which is published at [`https://www.buildon.aws/posts/what-happens-when-you-type-a-url-into-your-browser`](https://www.buildon.aws/posts/what-happens-when-you-type-a-url-into-your-browser) store your files like this:
+For a post titled `What Happens When You Type a URL Into Your Browser` which is published at [`https://www.community.aws/posts/what-happens-when-you-type-a-url-into-your-browser`](/posts/what-happens-when-you-type-a-url-into-your-browser) store your files like this:
 
 * Main post file: `/posts/what-happens-when-you-type-a-url-into-your-browser/index.md`
 * Images: `/posts/what-happens-when-you-type-a-url-into-your-browser/images/dig-command-output.png`
