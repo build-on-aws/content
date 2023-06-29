@@ -1,5 +1,5 @@
 ---
-title: "Start an EC2 Mac instance"
+title: "Start an Amazon EC2 Mac instance"
 description: "Learn how to start an EC2 Mac instance"
 tags:
     - mac
