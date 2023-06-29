@@ -20,22 +20,8 @@ images:
 
 This guide is for beginners who are looking for an overview of what DevOps is and an introduction to the core concepts they should be aware of. You’ve probably landed here because you’re looking to learn more about it and how you can apply this knowledge to the problems you are facing. You can think of this post as a guide post to help you discover where you are and where you're going next. This guide will not sell you products, platforms or tools as solutions to those problems. There is no one size fits all solution, however there are existing patterns, frameworks, and mechanisms that have been tested and iterated upon which you can leverage. Feel free to read this post from start to finish or to skip to sections that you're most interested in, whichever works best for you!
 
-| Sections                                                    |
-|-------------------------------------------------------------|
-| 1. [What is DevOps?](#what-is-devops)                       |
-| 2. [Getting started](#getting-started)                      |
-| 3. [Infrastructure implementation patterns](#infrastructure-implementation-patterns)  |
-| 4. [Infrastructure as code](#infrastructure-as-code)        |
-| 5. [Configuration management](#configuration-management)    |
-| 6. [Containers](#containers)                                |
-| 7. [Container orchestration](#container-orchestration)      |
-| 8. [CI/CD](#continuous-integration-and-continuous-delivery) |
-| 9. [Logging](#logging)                                      |
-| 10. [Monitoring](#monitoring)                               |
-| 11. [Observability](#observability)                            |
-| 12. [Where should I start?](#where-should-i-start)          |
-| 13. [Conclusion](#conclusion)                                     |
-| 14. [Additional Learning Resources](#additional-resources)             |
+|ToC|
+|---|
 
 ## What is DevOps?
 
