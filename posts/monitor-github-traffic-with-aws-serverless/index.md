@@ -5,10 +5,18 @@ tags:
   - observability
   - serverless
   - automation
+  - quicksight
+  - s3
+  - github
+  - eventbridge
+  - devops
 authorGithubAlias: TheFuz
 authorName: Mahanth Jayadeva
 date: 2023-04-25
 ---
+
+|ToC|
+|---|
 
 At first glance, it may seem like Star Wars, good food, and astronomy have little in common. However, they all share a surprising connection to the world of GitHub metrics - [clones](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository), [forks](https://docs.github.com/en/get-started/quickstart/fork-a-repo), and [stars](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars). These are some common GitHub metrics developers use to gain insight into the popularity and usage of their repositories. Let's delve into the world of GitHub metrics and explore how we can track and store them for analysis.
 

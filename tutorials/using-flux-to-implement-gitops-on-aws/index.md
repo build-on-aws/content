@@ -9,6 +9,9 @@ tags:
   - kubernetes
   - tutorials
   - aws
+  - cdk
+  - codebuild
+  - codepipeline
 showInHomeFeed: true
 authorGithubAlias: betty714
 authorName: Betty Zheng
@@ -352,7 +355,7 @@ resources:
   - ./complete-demo.yaml
 ```
 
-For the development environment, if there are differential requirements, such as changing the number of service ports and replica, just configure the differential settings in the overlays/development/kustomization.yaml file, without copying and modifying the existing complete-demo.yaml.
+For the development environment, if there are differential requirements, such as changing the number of service ports and replica, just configure the differential settings in the `overlays/development/kustomization.yaml` file, without copying and modifying the existing complete-demo.yaml.
 
 > **Note**
 >
@@ -405,7 +408,7 @@ spec:
 
 Find the account and password for "Prepare AWS CodeCommit Credentials". Convert the value of the data to base64 encoding before executing the command.
 
-Then open the file base/sock-shop/basic-access-auth.yaml, and replace **BASE64_USERNAME** and **BASE64_PASSWORD** with the generated base64 encoding:
+Then open the file `base/sock-shop/basic-access-auth.yaml`, and replace **BASE64_USERNAME** and **BASE64_PASSWORD** with the generated base64 encoding:
 
 ```shell
 ---
@@ -589,7 +592,7 @@ patches:
 ```
 
 > **Note**
-> 
+>
 > We used Amazon ECR to choose the automatic authentication mechanism, modify `clusters/dev-cluster/flux-system/kustomization.yaml` and add the `--aws-autologin-for-ecr` parameter through patching. This approach is simpler and more efficient when compared to using CronJob to generate credentials regularly.
 
 #### 4.2.4 Setting image update policy
@@ -611,7 +614,6 @@ spec:
   policy:
     numerical:
       order: asc
-
 ```
 
 Add file `gitops/apps/overlays/development/sock-shop/image-automation.yaml`. Flux's automatic image configuration will specify a Git repository for the application configuration, including branch, path, and other information.
@@ -642,7 +644,6 @@ spec:
   update:
     path: ./deploy/kubernetes/overlays/development
     strategy: Setters
-
 ```
 
 ### 4.3 Release and Verify

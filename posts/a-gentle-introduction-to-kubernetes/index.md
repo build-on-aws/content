@@ -1,5 +1,5 @@
 ---
-title: "A Gentle Introduction to Kubernetes and EKS"
+title: "A Gentle Introduction to Kubernetes and Amazon EKS"
 description: "Making sense of containers, orchestration, and EKS."
 tags:
     - cloud
@@ -13,6 +13,9 @@ authorName: Siva Guruvareddiar
 date: 2023-04-19
 ---
 
+|ToC|
+|---|
+
 Over the past ten years, containerization has radically changed how developers build and deploy applications, making the process significantly more portable. Perhaps no platform has contributed to that uptake more than Kubernetes. As cloud technology continues to grow and mature, working as a developer without understanding Kubernetes becomes less and less viable. So what is Kubernetes (often abbreviated as K8S), and why should you care? Let's take a look.
 
 Kubernetes is an open-source platform that is used to manage containerized applications. It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation (CNCF), a non-profit organization that promotes the use of cloud-native technologies. Kubernetes is a Greek word that means "helmsman" or "pilot". The term was chosen by the founders of Kubernetes because the system is designed to be a pilot or conductor for a fleet of containers, just as a helmsman or pilot is responsible for steering ships.
@@ -21,7 +24,7 @@ Traditionally software developers build their applications in their local machin
 
 Here is where the concept of containers comes in: they are units of software that package code and its dependencies so applications run quickly and reliably across computing environments. But when you deploy and manage many containerized applications, coordination can become challenging. This is where Kubernetes helps, basically acting as an administrator. K8S helps to make many applications, each kept in their own containers, still work effectively in tandem. It helps developers deploy, scale, and manage their containerized applications in a more efficient and effective manner. As we've noted, containers are lightweight, portable, and self-contained packages that include all the code and dependencies needed to run an application - but Kubernetes provides the tools and APIs to more easily manage these containers.
 
-### Why Kubernetes
+## Why Kubernetes
 
 Kubernetes provides a number of benefits that make it a popular choice for managing containerized applications. First, it allows developers to easily deploy and scale applications, making it easier to handle traffic spikes or changes in demand. Additionally, Kubernetes offers built-in load balancing and automatic failover capabilities, which helps ensure that applications remain available and responsive. It also provides a consistent development and deployment environment, which makes it easier to move applications between different environments, such as development, testing, and production. Finally, Kubernetes is open source and has a large and active community, which means it's constantly evolving and improving with new features and capabilities.
 

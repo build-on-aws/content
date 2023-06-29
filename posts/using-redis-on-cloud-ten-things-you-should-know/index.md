@@ -16,6 +16,9 @@ externalCanonicalUrl: https://acloudguru.com/blog/engineering/how-to-use-redis-o
 date: 2023-06-12
 ---
 
+|ToC|
+|---|
+
 It's hard to operate stateful distributed systems at scale and Redis is no exception. Managed databases make life easier by taking on much of the heavy lifting. But you still need a sound architecture and apply best practices both on the server (Redis) and client (application).
 
 This blog covers a range of Redis related best practices, tips and tricks including cluster scalability, client side configuration, integration, metrics etc. Although I will be citing [Amazon MemoryDB](https://docs.aws.amazon.com/memorydb/latest/devguide/what-is-memorydb-for-redis.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Amazon ElastiCache](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/WhatIs.html?sc_channel=el&sc_campaign=datamlwave&sc_content=using-redis-on-cloud-ten-things-you-should-know&sc_geo=mult&sc_country=mult&sc_outcome=acq) for Redis from time to time, most (if not all) will be applicable to Redis clusters in general.

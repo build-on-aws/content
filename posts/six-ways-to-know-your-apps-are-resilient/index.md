@@ -13,14 +13,16 @@ authorName: Mahanth Jayadeva
 date: 2023-03-16
 ---
 
-When I talk to customers who are running applications on the cloud, they all express concern over how they’ll keep their applications running and how they’ll recover quickly when there is a failure. Yes, “*when* there is a failure,” and not “*if* there is a failure,” because everything fails eventually. Whether it’s a few lines of “untested” code, a small configuration change, or a [deep sea fiber cable being severed due to shark attacks](https://www.wired.com/2014/08/shark-cable/) (apparently it’s a thing) that disrupts connectivity, you can be sure there will always be something that could cause your applications to fail. 
+|ToC|
+|---|
+
+When I talk to customers who are running applications on the cloud, they all express concern over how they’ll keep their applications running and how they’ll recover quickly when there is a failure. Yes, “*when* there is a failure,” and not “*if* there is a failure,” because everything fails eventually. Whether it’s a few lines of “untested” code, a small configuration change, or a [deep sea fiber cable being severed due to shark attacks](https://www.wired.com/2014/08/shark-cable/) (apparently it’s a thing) that disrupts connectivity, you can be sure there will always be something that could cause your applications to fail.
 
 Although these customers are concerned about lost revenue and missed opportunities, they primarily just want to stay up and running so *their* customers get the best experience. And, as you likely know, modern applications are getting more complex all the time. How can developers and architects ensure their applications’ resilience?
 
 In this blog post, we’ll explore the importance of application resilience and share six solutions — complete with scripts from the [AWS Resilience Hub tools](https://github.com/aws-samples/aws-resilience-hub-tools) repository (`aws-resilience-hub-tools`) — that you can use today with [AWS Resilience Hub](https://docs.aws.amazon.com/resilience-hub/latest/userguide/what-is.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=knowyourappsareresilient&sc_geo=mult&sc_country=mult&sc_outcome=acq) to ensure your applications remain available, performant, and reliable, even in the face of unexpected events such as hardware failures, network outages, or natural disasters. Resilience Hub is a service that enables you to assess the resilience of your applications based on recovery targets you define. It provides two types of recommendations—resilience and operational — which will help improve the overall resilience of your application. Before exploring these tools, I advise you to familiarize yourself with how Resilience Hub works. If you do not already know this, you can [get hands-on experience with the workshop here](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US?sc_channel=el&sc_campaign=resiliencewave&sc_content=knowyourappsareresilient&sc_geo=mult&sc_country=mult&sc_outcome=acq).  
 
 Let’s take a look at how you can use the [AWS Resilience Hub tools](https://github.com/aws-samples/aws-resilience-hub-tools) repo (`aws-resilience-hub-tools`) with Resilience Hub to keep your apps up and running no matter what disaster strikes, *or when*.
-
 
 ## 1. Managing resilience targets at scale gets messy — use automation to make it easy
 
@@ -40,15 +42,13 @@ Resilience Hub assesses resilience of your application. To define which cloud re
 
 **Create a resource group for use with Resilience Hub (`create-resource-group-for-resilience-hub`) can be found [here](https://github.com/aws-samples/aws-resilience-hub-tools/tree/main/create-resource-group-for-resilience-hub).**
 
-
 ## 3. Using GitHub Actions for CI/CD? — Yes, you too can implement continuous resilience
 
-For a very long time, development and operations were performed by two distinct, separate teams. Eventually, the concept of [DevOps](https://www.buildon.aws/concepts/devops-essentials?sc_channel=el&sc_campaign=resiliencewave&sc_content=knowyourappsareresilient&sc_geo=mult&sc_country=mult&sc_outcome=acq) came to be, leveraging automation for continuous integration and continuous delivery (or deployment). Once organizations realized the value this added, a new paradigm was introduced by adding security — DevSecOps — ensuring security wasn’t sacrificed for agility. 
+For a very long time, development and operations were performed by two distinct, separate teams. Eventually, the concept of [DevOps](https://www.buildon.aws/concepts/devops-essentials?sc_channel=el&sc_campaign=resiliencewave&sc_content=knowyourappsareresilient&sc_geo=mult&sc_country=mult&sc_outcome=acq) came to be, leveraging automation for continuous integration and continuous delivery (or deployment). Once organizations realized the value this added, a new paradigm was introduced by adding security — DevSecOps — ensuring security wasn’t sacrificed for agility.
 
 This paradigm has once again shifted with the idea of continuous resilience (DevSecResOps, if you prefer, but I’m frankly done with adding more abbreviations to an already Frankensteinesque term). In [this excellent blog post](https://aws.amazon.com/blogs/architecture/continually-assessing-application-resilience-with-aws-resilience-hub-and-aws-codepipeline?sc_channel=el&sc_campaign=resiliencewave&sc_content=knowyourappsareresilient&sc_geo=mult&sc_country=mult&sc_outcome=acq), Scott and Eli describe integrating resilience checks as part of your CI/CD pipeline and use AWS CodePipeline as an example. While CodePipeline is certainly popular, it is not the only CI/CD toolset available. Customers also use GitHub Actions for orchestrating releases. The `github-actions-integration` solution provides a walkthrough of how you can add resilience checks to your pipelines by integrating Resilience Hub with [GitHub Actions](https://docs.github.com/en/actions) and contains sample code that you can use to get started. 
 
 **Integrate with GitHub Actions (`github-actions-integration`) can be found [here](https://github.com/aws-samples/aws-resilience-hub-tools/tree/main/github-actions-integration).**
-
 
 ## 4. Your data, your way — get access to the rich data you need about your application resilience
 
@@ -59,7 +59,6 @@ The `resilience-hub-csv-export` script uses [Resilience Hub APIs](https://docs.a
 ![Sample CSV export](images/csv-export.png)
 
 **CSV export for Resilience Hub (`resilience-hub-csv-export`) can be found [here](https://github.com/aws-samples/aws-resilience-hub-tools/tree/main/resilience-hub-csv-export).**
-
 
 ## 5. See your data all in one place — create interactive dashboards across your applications
 
@@ -73,13 +72,11 @@ The `resilience-hub-csv-export` script is run inside an AWS Lambda function, whi
 
 **Resilience reporter (`resilience-reporter`) can be found [here](https://github.com/aws-samples/aws-resilience-hub-tools/tree/main/resilience-reporter).**
 
-
 ## 6. Keep it secure — create security credentials across multiple accounts
 
 Daily assessments for your applications are a good idea. As datasets grow, and new features and changes are deployed, you need to know if your application resilience is still at the level you expect. For situations where you can’t integrate Resilience Hub into your CI/CD pipeline, or don’t have a CI/CD pipeline, you can still use Resilience Hub to configure daily assessments for your applications. AWS uses something called an [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=knowyourappsareresilient&sc_geo=mult&sc_country=mult&sc_outcome=acq), which gives Resilience Hub the necessary permissions to assess the resilience of your application. The solution [here](https://github.com/aws-samples/aws-resilience-hub-tools/tree/main/scheduled-assessment-role) is a CloudFormation template that can be deployed to create the IAM role that you need. This IAM role is [minimally scoped (least-privilege)](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/sec_permissions_least_privileges.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=knowyourappsareresilient&sc_geo=mult&sc_country=mult&sc_outcome=acq) and Resilience Hub is the only principal that can use it. Similar to the `create-resiliency-policy` solution, this can solution can be deployed across multiple AWS accounts using CloudFormation StackSets for when you need to run daily resilience assessments using Resilience Hub across these accounts.
 
 **Identity and Access Management (IAM) role for Resilience Hub (`scheduled-assessment-role`) can be found [here](https://github.com/aws-samples/aws-resilience-hub-tools/tree/main/scheduled-assessment-role).**
-
 
 ### Conclusion
 

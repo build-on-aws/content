@@ -201,6 +201,7 @@ export const handler = async (event, context) => {
   };
 };
 ```
+
 > Note, you are selecting a random affirmation by its Id - so edit the `min` and `max` variables to reflect how many affirmations you entered into your database.
 
 Now, to connect all the pieces, you can use one more service: [API Gateway](https://console.aws.amazon.com/apigateway).

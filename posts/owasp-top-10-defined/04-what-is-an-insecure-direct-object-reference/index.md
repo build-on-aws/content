@@ -10,6 +10,10 @@ authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-06-27
 ---
+
+|ToC|
+|---|
+
 This is a 10-part series:
 
 | SeriesToC |
@@ -31,7 +35,7 @@ In this article, we will talk about **Insecure Direct Object Reference (IDOR)** 
 
 An IDOR occurs when an application unintentionally exposes a reference to an internal implementation object, such as a record identifier in a database or a filename in a filesystem, revealing the actual identifier and format used in the backend storage.
 
-While IDOR itself may not directly constitute a security issue, it can enable attackers to mount enumeration attacks, taking advantage of the exposed format or pattern. This allows them to build a collection of valid identifiers based on the discovered format or pattern and test them against the application, trying to access associated objects. 
+While IDOR itself may not directly constitute a security issue, it can enable attackers to mount enumeration attacks, taking advantage of the exposed format or pattern. This allows them to build a collection of valid identifiers based on the discovered format or pattern and test them against the application, trying to access associated objects.
 
 In essence, IDOR vulnerabilities highlight the importance of properly securing object references and implementing robust access controls to prevent unauthorized access and potential enumeration attacks.
 

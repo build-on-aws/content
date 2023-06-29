@@ -11,6 +11,9 @@ authorName: Jose Yapur
 date: 2022-10-11
 ---
 
+|ToC|
+|---|
+
 This is an 8-part series about Picturesocial:
 
 | SeriesToC |
@@ -101,15 +104,15 @@ Let’s containerize an API and push it to ECR. Don’t worry, we are in this to
 
 ### Prerequisites
 
-* An [AWS Account](https://aws.amazon.com/free/).
+* An [AWS Account](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=01-how-to-containerize-app-less-than-15-min).
 * If you are using Linux or macOS, you can continue to the next bullet point. If you are using Microsoft Windows, I suggest you to use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install).
 * Install [Git](https://github.com/git-guides/install-git).
 * Install [Docker](https://docs.docker.com/engine/install/) on your computer.
-* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=01-how-to-containerize-app-less-than-15-min).
 
 Or
 
-If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
+If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=01-how-to-containerize-app-less-than-15-min). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
 
 ### Walk-through
 
