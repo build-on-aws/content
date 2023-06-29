@@ -9,7 +9,7 @@ tags:
   - sagemaker
 authorGithubAlias: sarunaaa003
 authorName: Arun Kumar. S
-date: 2023-06-28
+date: 2023-06-29
 ---
 
 ## Meet Jerry a community gardener
