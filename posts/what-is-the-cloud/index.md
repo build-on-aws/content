@@ -1,14 +1,14 @@
----  
-title: "What is the cloud?"  
-description: The cloud is computing and storage that lives on servers in data centers. But what does that actually mean?  
-tags:  
-- cloud
-- basics
-- compute
-- storage
-authorGithubAlias: damonk10  
-authorName: David Priest  
-date: 2023-03-15  
+---
+title: "What is the cloud?"
+description: "The cloud is computing and storage that lives on servers in data centers. But what does that actually mean?"
+tags:
+    - cloud
+    - basics
+    - compute
+    - storage
+authorGithubAlias: damonk10
+authorName: David Priest
+date: 2023-03-15
 ---
 
 In the movie Creed, aging boxer Rocky Balboa mentors a young upstart named Donnie. At one point, [Rocky asks Donnie](https://www.youtube.com/watch?v=PPlgvSL00fA) to keep an important document, and Donnie takes a photo of it on his phone. “It’s up in the cloud,” he says. Rocky looks up at the sky. “What cloud?”  

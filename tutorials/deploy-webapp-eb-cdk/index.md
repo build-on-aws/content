@@ -31,8 +31,6 @@ In this guide, we will learn how to:
   - create the deployment infrastructure (using AWS Elastic Beanstalk resources), and
   - create the CI/CD pipeline (using AWS CDK Pipelines).
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 200 - Intermediate                                              |

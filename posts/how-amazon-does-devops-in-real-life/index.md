@@ -54,6 +54,10 @@ Since there is no shared ownership of code or infrastructure between teams, each
 
 This architecture also makes it easier to implement a multi-Region strategy. Truckers, whether in the east or west, benefit from lower latency, as their requests are routed to an AWS Region closer to them. And this multi-Region architecture also enables a [disaster recovery strategy](https://aws.amazon.com/blogs/architecture/disaster-recovery-dr-architecture-on-aws-part-i-strategies-for-recovery-in-the-cloud?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life), where all traffic can be routed to just one of the Regions if needed. For more details on [how Amazon Relay enabled multi-Region, see this video](https://www.youtube.com/watch?v=QeW9wCB36ck&t=1339s).
 
+Hear firsthand from Alex Polfliet, a Senior SDE on the Relay App team:
+
+https://www.youtube.com/shorts/DeGBLSHLQKA
+
 ## Amazon Fulfillment Technologies and Robotics - The systems that run Amazon warehouses
 
 I’ve covered the trucks going between fulfillment centers (FCs), now let’s talk about the FCs themselves. Globally, Amazon operates more than 500 FCs. Amazon Fulfillment Technologies and Robotics is the Amazon organization that designs, deploys, and operates the services powering the FCs. This includes systems for receiving items, determining where they go in the warehouse, telling associates where to find them to fulfill a customer order, generating shipping info, determining which box to use, and so on.

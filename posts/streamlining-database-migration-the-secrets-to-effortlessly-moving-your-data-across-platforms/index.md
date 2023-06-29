@@ -1,12 +1,14 @@
----  
-title: "Streamlining Database Migration: The Secrets to Effortlessly Moving Your Data Across Platforms"  
+---
+title: "Streamlining Database Migration: The Secrets to Effortlessly Moving Your Data Across Platforms"
 description: "Data migration is an essential process for businesses to keep their systems up to date, but it can be a complex and challenging process. Here's how to do it more easily."
-tags:  
-- cloud
-- dms
-- database
-- schema-conversion
-- database-migration
+tags:
+    - cloud
+    - dms
+    - databases
+    - schema-conversion
+    - database-migration
+spaces:
+  - databases
 authorGithubAlias: mpranshu
 authorName: Pranshu Mishra
 date: 2023-05-25

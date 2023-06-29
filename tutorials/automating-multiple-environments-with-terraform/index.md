@@ -26,8 +26,6 @@ This tutorial will guide you in splitting your infrastructure across multiple ac
 * How to set up a build and deployment pipeline to manage all changes in the environment account with Terraform
 * How to keep `dev`, `test`, and `prod` infrastructure in sync without needed to copy files around
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 300 - Advanced                                              |

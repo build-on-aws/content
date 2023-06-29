@@ -5,6 +5,8 @@ tags:
   - databases
   - nosql
   - dynamodb
+spaces:
+  - databases
 authorGithubAlias: robzhu
 authorName: Robert Zhu
 date: 2023-06-16
