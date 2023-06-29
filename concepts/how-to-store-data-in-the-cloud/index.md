@@ -84,7 +84,7 @@ Block storage is ideal for transactional workloads where low latency for read an
 
 File storage is appropriate for many uses, but particularly for file sharing across resources. Its hierarchical design and resemblance to a traditional filing system make it accessible to people across an organization.
 
-There are many types of databases such as relational databases (RDMS), document databases, key-value pair databases, data warehouses, and data lakes. The following [article](https://blog.buildon.aws/posts/which-data-storage-option-do-i-choose) examines the type of storage appropriate for these databases.
+There are many types of databases such as relational databases (RDMS), document databases, key-value pair databases, data warehouses, and data lakes. The following [article](/posts/which-data-storage-option-do-i-choose) examines the type of storage appropriate for these databases.
 
 ## Frequently Asked Questions
 

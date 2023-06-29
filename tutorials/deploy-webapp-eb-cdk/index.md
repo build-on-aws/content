@@ -806,7 +806,7 @@ Finally, CDK Pipelines create an Amazon S3 bucket to store artifacts. This bucke
 
 Congratulations! We have now learned how to deploy a non-containerized application in the cloud. We created a simple Node.js web application, and then we used AWS CDK to create deployment infrastructure(using AWS Elastic Beanstalk resources) and the CI/CD pipeline (using AWS CDK Pipelines).  If you enjoyed this tutorial, found any issues, or have feedback for us, [please send it our way](https://pulse.buildon.aws/survey/DEM0H5VW)!
 
-For more DevOps related content, check out [How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/).
+For more DevOps related content, check out [How Amazon Does DevOps in Real Life](/posts/how-amazon-does-devops-in-real-life/).
 
 ## More Information and Troubleshooting
 
