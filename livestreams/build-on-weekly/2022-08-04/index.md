@@ -1,6 +1,6 @@
 ---
-title: "S01E04 - Static S3 Website"
-description:
+title: "Static S3 Website | S01 E04 | Build On Weekly"
+description: "A simple task as any, host a static website on Amazon S3"
 tags:
   - aws
   - build-on-live
@@ -16,7 +16,7 @@ Unfortunately today you only get to listen to a bald man yell into the camera, a
 
 We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
 
-![CDK Terraform](images/header.png)
+![CDK Terraform](images/header.webp)
 
 ## Deployed Weekly
 

@@ -5,15 +5,15 @@ tags:
   - owasp
   - network-security
   - application-security
+showInHomeFeed: true
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-08-31
 ---
 This is a 10-part series:
 
-1. [What is Broken Access Control?](/posts/owasp-top-10-defined/01-what-is-broken-access-control/)
-2. What is a Cryptographic Failure? (this post)
-3. [What is an Injection Attack?](/posts/owasp-top-10-defined/03-what-is-an-injection-attack/)
+| SeriesToC |
+|-----------|
 
 It’s probably safe to say that organizations should control who can see their data.  I don’t see this as being anything new to people these days.  VPN’s have become commonplace at the office and for remote workers.  The use of HTTPS, HTTP using TLS for data encryption, is the standard amongst the common search engines, social platforms, and most corporate web sites.  HTTPS became the defacto standard in securely processing payment transactions online.  Why?  Because it hides sensitive data like your credit card number and personally identifiable information (PII). So at a very high level, a cryptographic failure is when the mechanisms we depend on to encrypt or hide our data do not function as expected.  There are many ways this can take place and in this article we will cover a few.  Broken or Risky/Weak crypto algorithms, [Common Weakness Enumeration (CWE) 327](https://cwe.mitre.org/data/definitions/327.html) is an example of one of them.
 

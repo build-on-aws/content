@@ -34,7 +34,7 @@ In this tutorial you will learn how you can apply DevOps techniques to help you 
 
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Intermediate                           |
+| ✅ AWS Level        | 200 - Intermediate                           |
 | ⏱ Time to complete  | 90 minutes                             |
 | 💰 Cost to complete | Approx $25     |
 | 🧩 Prerequisites    | - This tutorial assumes you have a working knowledge of Apache Airflow<br> - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=mwaa_env_wrkflw&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- You will need to make sure you have enough capacity to deploy a new VPC - by default, you can deploy 5 VPCs in a region. If you are already at your limit, you will need to increase that limit or clean up one of your existing VPCs <br>- AWS CDK installed and configured (I was using 2.60.0 build 2d40d77)<br>- Access to an AWS region where Managed Workflows for Apache Airflow is supported<br> - git and jq installed<br> - The code has been developed on a Linux machine, and tested/working on a Mac. It should work on a Windows machine with the Windows Subsystem for Linux (WSL) installed although I have not tested this. If you do encounter issues, I recommend that you spin up an Amazon Cloud9 IDE environment and run through the code there.|

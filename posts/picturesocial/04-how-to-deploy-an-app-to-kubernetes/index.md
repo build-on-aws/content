@@ -5,6 +5,7 @@ tags:
   - containers
   - kubernetes
   - eks
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-14
@@ -12,13 +13,8 @@ date: 2022-10-14
 
 This is an 8-part series about Picturesocial:
 
-1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
-2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
-3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
-4. How to deploy an app to Kubernetes (this post)
-5. [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
-6. [How to use DynamoDB on a containerized API](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/)
-7. [How to use DynamoDB on a containerized API](/posts/picturesocial/07-how-to-expose-a-containerized-api-to-the-internet/)
+| SeriesToC |
+|-----------|
 
 So far we have learned about containers, Kubernetes, and Terraform. Now, it’s time to use the knowledge that we acquired in the previous posts to deploy a container on our Amazon EKS cluster. In this post, we are also going to learn about the Kubectl tool and some commands to handle basic Kubernetes tasks.
 

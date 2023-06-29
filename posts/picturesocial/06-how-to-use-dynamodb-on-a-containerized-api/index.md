@@ -6,6 +6,7 @@ tags:
   - csharp
   - dynamodb
   - api
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-02-27
@@ -13,13 +14,8 @@ date: 2023-02-27
 
 This is an 8-part series about Picturesocial:
 
-1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
-2. [What’s Kubernetes and why should you care?](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/)
-3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
-4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
-5. [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
-6. How to use DynamoDB on a containerized API (this post)
-7. [How to use DynamoDB on a containerized API](/posts/picturesocial/07-how-to-expose-a-containerized-api-to-the-internet/)
+| SeriesToC |
+|-----------|
 
 So far you have been learning about containers, Kubernetes, Infrastructure as a Code and even intelligent services like Amazon Rekognition. Now it’s time to add a database to store the needed data models that will be used on our social media platform.
 

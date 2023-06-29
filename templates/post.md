@@ -1,21 +1,25 @@
 ---
-title: 
-description: 
+title: "Replace with your title"
+description: "Replace with your description"
 tags:
-  - tag-1
-  - tag-2
-authorGithubAlias: 
-authorName: 
-date: 2016-01-31
+    - tag-1
+    - tag-2
+    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
+authorGithubAlias: githubAliasWithoutQuotes
+authorName: Name Surname (no quotes around)
+date: YYYY-MM-DD (expected publication date)
 ---
+
+<!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
+<!-- NB: READ THE COMMENT ABOVE, AND DELETE THIS AND OTHER COMMENTS!!! -->
 
 **EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
 ## Frontmatter Instructions
 
-All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/). Enclose values in "quotes" if you are using a colon.
+All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/).
 
-- `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser"
-- `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters
+- `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser" - Please put this inside double-quotes
+- `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters - Please put this inside double-quotes
 - `tags` - help readers discover posts on the same topics. Use `kebab-case`.
 - `authorGithubAlias` - your GitHub username
 - `authorName` - how you want your name to display for the author credit of this post

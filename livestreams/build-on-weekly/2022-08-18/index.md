@@ -1,6 +1,6 @@
 ---
-title: "S01E06 - Local Development"
-description:
+title: "Local Development | S01 E06 | Build On Weekly"
+description: "Let's see how Jacquie configures her local development environment, and how she automates configuring it."
 tags:
   - aws
   - build-on-live
@@ -18,7 +18,7 @@ Today [Jacquie](https://twitter.com/devopsjacquie) shows all of us and [Darko](h
 
 We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
 
-![Jacquie and Darko Episode 6](images/header.png)
+![Jacquie and Darko Episode 6](images/header.webp)
 
 ## Deployed Weekly
 
