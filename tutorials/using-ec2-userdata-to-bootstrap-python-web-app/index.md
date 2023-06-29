@@ -25,8 +25,6 @@ Manually setting up and configuring the packages required to run a Python web ap
 - Install software packages on the EC2 instance's first launch by creating a user data asset.
 - Test, Deploy and Configure the web application using the CI/CD pipeline.
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 200 - Intermediate                                                        |

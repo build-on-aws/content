@@ -12,6 +12,8 @@ tags:
   - data-lakes
   - foundational
   - aws
+spaces:
+  - databases
 authorGithubAlias: aremutem
 authorName: Temi Aremu & Yusra Al-Sharafi
 date: 2022-10-31
