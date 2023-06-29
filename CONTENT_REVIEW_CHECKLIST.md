@@ -61,7 +61,7 @@ Community contributions are currently in an invite-only phase, and we plan to op
 - [ ] **Tags:** Tags in a post are limited to 5 that will displayed in the feed, so ensure the most important 5 are first in the list, using the `kebab-case` convention (all lowercase, with `-` between words).
 - [ ] **Publication date:** Update the `date` field in the frontmatter to be the current or future date that the post will be published. Content with future dates will be published at the *next build* after that date.
 - [ ] **Links:** Do not add links as raw text, e.g. `start from here https://example.com`. Instead, add them as links via Markdown `[start from here](https://example.com)`.
-- [ ] **Links - relative:** To link to other content in the repo, use a relative link, not one prefixed with the full URL, e.g. `/posts/the-other-post` and not `https://buildon.aws/posts/the-other-post`.
+- [ ] **Links - relative:** To link to other content in the repo, use a relative link, not one prefixed with the full URL, e.g. `/posts/the-other-post` and not `https://community.aws/posts/the-other-post`.
 
 ## Step 3: Before publishing, check to make sure the post adheres to the legal rules
 

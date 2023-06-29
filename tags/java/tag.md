@@ -1,5 +1,5 @@
 ---
-description: "Java content on BuildOn.AWS."
+description: "Java content on Community.aws."
 
 ---
 Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.

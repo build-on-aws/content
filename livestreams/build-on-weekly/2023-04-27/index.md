@@ -47,8 +47,8 @@ https://www.twitch.tv/videos/1805386602
 
 - [Workshop - Building Generative AI Applications with SageMaker Foundational Models](https://catalog.workshops.aws/building-gen-ai-apps-with-found-models/en-US)
 - [Pepperoni Hug Spot](https://www.youtube.com/watch?v=qSewd6Iaj6I)
-- [BuildOn Article: I deployed Kubernetes with a 1986 Tandy 102 Portable Computer](/posts/i-deployed-kubernetes-with-a-1986-tandy-102-portable-computer).
-- [BuildOn Article: What Is DevOps](/concepts/what-is-devops)
+- [Community.aws Article: I deployed Kubernetes with a 1986 Tandy 102 Portable Computer](/posts/i-deployed-kubernetes-with-a-1986-tandy-102-portable-computer).
+- [Community.aws Article: What Is DevOps](/concepts/what-is-devops)
 
 **🐦 Reach out to the hosts and guests:**
 

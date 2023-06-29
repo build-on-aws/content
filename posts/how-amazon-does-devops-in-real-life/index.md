@@ -87,7 +87,7 @@ In each of these three use cases, you have seen how continuous, automated, indep
 
 ## To learn more
 
-* [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](https://www.buildon.aws/concepts/devops-essentials/)
+* [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](/concepts/devops-essentials/)
 * [Reliable scalability: How Amazon.com scales in the cloud - re:Invent 2022](https://bit.ly/reliable2022) [all three examples, plus others]
 * [Building federated GraphQL on AWS Lambda](https://aws.amazon.com/blogs/compute/building-federated-graphql-on-aws-lambda?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life) [IMDb]
 * [The Story Behind Improving Resiliency of Large Scale Systems Through Cellularization](https://www.youtube.com/watch?v=ebLJMA1q3Go) [Amazon Fulfillment Technologies and Robotics]

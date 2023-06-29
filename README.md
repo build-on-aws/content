@@ -1,12 +1,12 @@
 # Welcome!
 
-[BuildOn.AWS](https://blog.buildon.aws) is a community content platform where hands-on builders can find content to learn about a technology, solve a problem, or to contribute content to share their knowledge to help others. Content is written by builders, for builders.
+[Community.AWS](/) is a community content platform where hands-on builders can find content to learn about a technology, solve a problem, or to contribute content to share their knowledge to help others. Content is written by builders, for builders.
 
-## How to write for BuildOn.AWS
+## How to write for Community.AWS
 
-:warning: June 12, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](/) for updates as we open this up to more community authors in the coming months.
+:warning: June 12, 2023: Community.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](/) for updates as we open this up to more community authors in the coming months.
 
-Interested in writing for [BuildOn.AWS](https://buildon.aws)?
+Interested in writing for [Community.AWS](/)?
 
 - Read the [Quick Start](/AUTHOR_QUICK_START.md) to learn how to propose a topic and get it published
 - Review the [Content Review Checklist](/CONTENT_REVIEW_CHECKLIST.md) before submitting your pull request
@@ -14,12 +14,12 @@ Interested in writing for [BuildOn.AWS](https://buildon.aws)?
 
 ## Other Ways to Contribute
 
-Check out [CONTRIBUTING](/CONTRIBUTING.md) for other ways to contribute to BuildOn.AWS.
+Check out [CONTRIBUTING](/CONTRIBUTING.md) for other ways to contribute to Community.AWS.
 
 ## Content Licensing
 
-Content published on BuildOn.AWS is licensed as CC BY-SA 4.0. You can read the full license terms [here](/LICENSE).
+Content published on Community.AWS is licensed as CC BY-SA 4.0. You can read the full license terms [here](/LICENSE).
 
 ## Code of Conduct
 
-BuildOn.AWS is a community content platform. To keep it a welcoming, inclusive, and respectful place for everyone, your participation as a contributor must adhere to the [Code of Conduct](/CODE_OF_CONDUCT.md).
+Community.AWS is a community content platform. To keep it a welcoming, inclusive, and respectful place for everyone, your participation as a contributor must adhere to the [Code of Conduct](/CODE_OF_CONDUCT.md).
