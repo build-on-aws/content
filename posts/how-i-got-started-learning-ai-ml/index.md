@@ -7,7 +7,7 @@ tags:
   - sagemaker
 authorGithubAlias: sarunaaa003
 authorName: Arun Kumar. S
-date: 2023-06-10
+date: 2023-06-29
 ---
 
 ## Meet Jerry a young community gardener
