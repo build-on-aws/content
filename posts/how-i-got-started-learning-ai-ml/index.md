@@ -14,9 +14,7 @@ date: 2023-06-29
 
 Jerry is a passionate community gardener in the US city where I live. I met him in 2020, when he lost his whole tomato harvest due to early blights. Even after he applied fungicides, the blight spread. The next year, in order to avoid the same problems, he implemented preventative measures, planting disease-resistant cultivars and practicing good hygiene by sanitizing his tools. This time, aphids attacked and destroyed the tomato harvest again.
 
-Back In 2021, Jerry was devastated to loose all of his tomato harvest due to early blights. Even after he took efforts to apply fungicides, the blight kept spreading and affected his crops. Following year he implemented preventive practices like planting disease-resistant varieties, and practiced good hygiene by sanitizing his tools. However, this time aphids attacked his tomato plants and he lost his tomato harvest again.
-
-To overcome such challenges, jerry used to visually inspect the plants for signs of damage or infestation, such as chewed stems, or webbing and he took appropriate actions. He used traps or baits to capture pests and identify them and adjusted his fertilizer and watering cycles. I found these manual inspection rely heavily on the gardener's expertise and ability to detect subtle changes in plant health and this curiosity geared me to learn  how AI (Artificial Intelligence) and ML (Machine Learning) may be of jerry's assistance 
+To overcome such challenges, Jerry used to visually inspect the plants for signs of damage or infestation, such as chewed stems, or webbing and he took appropriate actions. He used traps or baits to capture pests and identify them and adjusted his fertilizer and watering cycles. I found these manual inspection rely heavily on the gardener's expertise and ability to detect subtle changes in plant health and this curiosity geared me to learn  how AI (Artificial Intelligence) and ML (Machine Learning) may be of Jerry's assistance 
 
 ### What is Artificial Intelligence and Machine Learning
 
@@ -36,6 +34,7 @@ Computer vision systems like [Amazon Rekognition](https://aws.amazon.com/rekogni
 Once the Plant type is classified then a predictive analysis function takes place. ML can be used to develop predictive models to identify and diagnose plants health based on the historical data  of tomato plant health and disease outbreaks.. This prediction can be used to recommend organic and natural pest management strategies by identifying patterns and anomalies. [Amazon SageMaker](https://aws.amazon.com/sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a fully managed machine learning service that provides a complete set of tools for building, training, and deploying machine learning models. With Amazon SageMaker, I can preprocess and clean the historical data, select the appropriate machine learning algorithm or framework, and train the model on the prepared dataset. SageMaker supports a wide range of popular machine learning algorithms and frameworks, such as TensorFlow, PyTorch, XGBoost, and scikit-learn, giving the flexibility to choose the one that best suits my needs. This pre trained model provides the outcome of its analysis using a text and image format.
 
 Further on the last stage this output is used to identify the user recommendation. Knowledge Graphs, are designed to store and navigate highly connected data, making it suitable for applications that require modeling complex relations and querying large-scale graph datasets. [Amazon Neptune](https://aws.amazon.com/neptune/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a fully managed graph database service that allows me to build, manage, and query graph databases. I'm able to create and manage knowledge graphs by defining entities, relationships, and properties within the graph database, then use graph query languages like SPARQL or Gremlin to traverse and extract information from the graph, enabling powerful knowledge-driven applications. Once a suitable recommendation is identified that is shared to Jerry for his actions.
+
 I found these AI/ML services can be a powerful tool to share accurate and timely information on plant health and environmental conditions and help jerry to maintain healthy plants productive gardens and, increasing his harvest.
 
 ## AI/ML Distinction That Helped Me Get Started
@@ -70,7 +69,7 @@ Incorporating AI/ML to solve a real life problem seemed like a difficult experie
 
 Now Jerry has a simple mobile interface through which he can submit a snap of the plant’s. the application will analyze the image using Amazon Rekognition, then provide recommendations and insights based on the analysis, leveraging the trained model and knowledge graph stored in Neptune.
 
-### Step - 1 : Socialized to collaborate, improve positive and productive learning experience and got exposed to diverse perspectives
+### Step - 1 : Socialized to collaborate, Improve positive and productive learning experience and got exposed to diverse perspectives
 
 While interacting with others, I got introduced to the material being presented by others, listened to concepts, asked question. By receiving feedback from others helped me understand the material and remember it more effectively.
 
