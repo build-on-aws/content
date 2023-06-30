@@ -55,7 +55,7 @@ For this walkthrough, you should have the following prerequisites:
 * A [EC2 Windows instance joined to the AD domain](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) (referred to as the MGMT EC2 instance in this post)
 * A CAC or PIV card used for smart card authentication (e.g. [Yubikey 5](https://www.yubico.com/authentication-standards/smart-card/) or Taglio PIVKey + Smart Card Reader)
 * **(Recommended)** A public domain in Route53 or a public domain in another provider using a top-level domain found in the [IANA Root Zone Database](https://www.iana.org/domains/root/db) to host a DNS record for the OCSP (Online Certificate Status Protocol) responder instance
-* **(Optional)** A public S3 bucket to store certificate revocation lists (CRLs) and public certificates of the CA(s). You aren’t required to store the certificates and CRLs in an S3 bucket. If you don’t use an S3 bucket, the CRLs will be hosted in a file share and [Internet Information Services (IIS)](https://docs.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-web-server-overview) website on the enterprise CA.|
+* **(Optional)** A public S3 bucket to store certificate revocation lists (CRLs) and public certificates of the CA(s). You aren’t required to store the certificates and CRLs in an S3 bucket. If you don’t use an S3 bucket, the CRLs will be hosted in a file share and [Internet Information Services (IIS)](https://docs.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-web-server-overview) website on the enterprise CA.
 
 ## Deploy the solution
 
@@ -174,8 +174,10 @@ Review the certificate store on each domain controller to ensure they receive a 
 
 1. On the MGMT instance, open **certlm.msc**.
 2. Right-click **Certificates – Local Computer**, select **Connect to Another Computer**, enter the name of one of the DCs, select **OK**.
-3. Expand **Personal**, select **Certificates**, and confirm a certificate exists from the **LdapOverSSL-QS** template:  
-![Image showing the Personal certificate store on a domain controller, which shows an existing certificate in its certificate store](./images/04-domain-personal-certificate-store.png)
+3. Expand **Personal**, select **Certificates**, and confirm a certificate exists from the **LdapOverSSL-QS** template:
+
+![Image showing the Personal certificate store on a domain controller, which shows an existing certificate](./images/04-domain-personal-certificate-store.png)
+
 4. Repeat the above steps for the remaining domain controllers in the domain that will be authenticating users.
 5. Run the following command in PowerShell and ensure it completes successfully without any errors:
 
