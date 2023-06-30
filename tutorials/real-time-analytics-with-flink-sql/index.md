@@ -3,10 +3,13 @@ title: "Empowering SQL Developers with Real-Time Data Analytics and Apache Flink
 description: "Learn how to use Kinesis Data Analytics to analyze streaming data with Flink SQL and deploy a streaming application"
 tags:
   - streaming
-  - flink
+  - apache-flink
   - kinesis-data-stream
   - kinesis-data-analytics
   - sql
+  - tutorials
+showInHomeFeed: true
+movedFrom: /posts/real-time-analytics-with-flink-sql
 authorGithubAlias: Olimbia23
 authorName: Olimbia Qirjaqi
 date: 2023-06-29

@@ -5,6 +5,7 @@ tags:
   - application-resilience
   - shared-responsibility
   - digital-transformation
+  - resiliency
 spaces:
   - devops
 authorGithubAlias: aws-veliswaboya
@@ -12,7 +13,10 @@ authorName: Veliswa Boya
 date: 2022-10-25
 ---
 
-During my recent talks on continuous resilience, first at a [developer conference](https://www.devconf.co.za/) here at home in South Africa, and later at the [AWS London Summit](https://aws.amazon.com/events/summits/london/agenda/), I was asked many thought-provoking questions.
+|ToC|
+|---|
+
+During my recent talks on continuous resilience, first at a [developer conference](https://www.devconf.co.za/) here at home in South Africa, and later at the [AWS London Summit](https://aws.amazon.com/events/summits/london/agenda/?sc_channel=el&sc_campaign=devops&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=whose-job-is-it-anyway), I was asked many thought-provoking questions.
 Beyond application resilience, organizations are looking to innovate for their customers. A question that I was asked a lot therefore was whether it is possible to have both application resilience AND innovation? Does the pursuit of application resilience not hold back innovation? How do teams organize in order to ensure that there is both application resilience and innovation? Who in the team is responsible for application resilience, and who is responsible for innovation?
 
 Continuous resilience is when teams move away from a robustness-centric approach to instead facing up to the fact that applications will fail at some point, and thus embracing failure with an intention to build capabilities that ensure resilience of their applications when they ultimately experience failure.
@@ -20,7 +24,7 @@ Continuous resilience is when teams move away from a robustness-centric approach
 The talk was actually based on an [awesome blog](https://medium.com/the-cloud-architect/towards-continuous-resilience-3c7fbc5d232b) written by one of my colleagues and mentor [Adrian Hornsby](https://twitter.com/adhorn) and it’s a great blog to read if you are looking to evolve your team away from being robustness-centric to instead embracing failure and moving towards continuous resilience.
 
 In this article; we will look at what team cultural changes and technical considerations during software development will enable the co-existence of application resilience and innovation.
-The [shared responsibility model](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/shared-responsibility-model-for-resiliency.html) in software development unifies teams; we will look at this as we answer the question of who in the application team is responsible for application resilience.
+The [shared responsibility model](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/shared-responsibility-model-for-resiliency.html?sc_channel=el&sc_campaign=devops&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=whose-job-is-it-anyway) in software development unifies teams; we will look at this as we answer the question of who in the application team is responsible for application resilience.
 
 ## Cultural Transformation for Digital Transformation
 
@@ -60,7 +64,7 @@ Now that the culture has been addressed, what technical considerations will supp
 In this really insightful book [Fundamentals of Software Architecture](http://fundamentalsofsoftwarearchitecture.com/) the authors contrast two architecture styles; monolithic vs distributed. Monolithic is described as a single deployment unit of ALL code whereas distributed involves multiple deployment units connected through remote access protocols. An example of a distributed architecture is a microservices architecture which is an architectural style that structures an application as a collection of loosely coupled services, which implement business capabilities.
 It is a way of breaking up a monolithic software into various components that can function separately, have specific tasks, and communicate with each other through a simple **Application Programming Interface (API)**.
 2. Continuous Integration and Delivery
-The [AWS Whitepaper on introducing DevOps](https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/introduction.html) highlights AWS capabilities that help you accelerate your DevOps journey, and services that can help remove the undifferentiated heavy lifting associated with DevOps adaptation. It expands on these essential practices when adopting DevOps — some of which I already briefly talked about previously:
+The [AWS Whitepaper on introducing DevOps](https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/introduction.html?sc_channel=el&sc_campaign=devops&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=whose-job-is-it-anyway) highlights AWS capabilities that help you accelerate your DevOps journey, and services that can help remove the undifferentiated heavy lifting associated with DevOps adaptation. It expands on these essential practices when adopting DevOps — some of which I already briefly talked about previously:
 
     - **Continuous Integration:** A software development practice where developers regularly merge their code changes into a central repository, after which automated builds and tests are run. [GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions) is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. It lets you create workflows that build and test every pull request to your repository, or deploy merged pull requests to production.
     - **Infrastructure as Code:** A practice in which infrastructure is provisioned and managed using code and software development techniques, such as version control, and continuous integration. Consider tools like [Terraform](https://www.terraform.io/) which lets you automate the provision of your infrastructure including databases, servers, and firewall policies among others – across multiple cloud platforms. If you are looking to get started with Terraform, you will find [this set of tutorials](https://learn.hashicorp.com/terraform) to be helpful.

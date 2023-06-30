@@ -5,11 +5,15 @@ tags:
   - containers
   - kubernetes
   - eks
+  - ecr
 showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-14
 ---
+
+|ToC|
+|---|
 
 This is an 8-part series about Picturesocial:
 
@@ -37,15 +41,15 @@ Now, that we have reviewed and put together what we learned from previous posts,
 
 ### Prerequisites
 
-* An [AWS Account](https://aws.amazon.com/free/).
+* An [AWS Account](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=04-how-to-deploy-an-app-to-kubernetes).
 * If you are using Linux or macOS, you can continue to the next bullet point. If you are using Microsoft Windows, I suggest you to use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install).
 * Install [Git](https://github.com/git-guides/install-git).
 * Install [Kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html).
-* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=04-how-to-deploy-an-app-to-kubernetes).
 
 Or
 
-If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
+If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=04-how-to-deploy-an-app-to-kubernetes). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
 
 ### Walk-through
 
@@ -55,7 +59,7 @@ If this is your first time working with AWS CLI or you need a refresher on how t
 kubectl version
 ```
 
-You should have a version of at least `Major:"1", Minor:"23"` to run this walk-through. Otherwise, I suggest you to [upgrade the version](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) first.
+You should have a version of at least `Major:"1", Minor:"23"` to run this walk-through. Otherwise, I suggest you to [upgrade the version](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=04-how-to-deploy-an-app-to-kubernetes) first.
 
 2. When you created the cluster, you also run a command to update the `kubeconfig` file. You don’t have to run it again, but just a friendly reminder that it is a necessary step to continue further.
 
@@ -107,7 +111,7 @@ users:
 ## Source: https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters
 ```
 
-Now that we have the kubeconfig, we have established a trust relationship between your terminal and Kubernetes that will work through kubectl.
+Now that we have the `kubeconfig`, we have established a trust relationship between your terminal and Kubernetes that will work through kubectl.
 
 3. Next, let’s look at the workers for this cluster by running the command below. The command will return the 3 workers that we created, the version of Kubernetes and the age of the worker since creation or upgrade. As shown below, each worker is on a different subnet that belongs to 3 different availability zones.
 
@@ -149,7 +153,7 @@ kubectl get rs --all-namespaces
 
 ![Image showing output of kubectl get rs --all-namespaces](images/04-kubectl-get-rs-namespaces.jpg "Image showing output of kubectl get rs --all-namespaces")
 
-As shown above, the commands for running the basics are pretty simple and self explanatory. 
+As shown above, the commands for running the basics are pretty simple and self explanatory.
 
 8. Now let’s deploy the container that we created from our first post. I have prepared a branch with everything that you will need, we are going to clone it first. And position our self in the folder that we are going to use.
 

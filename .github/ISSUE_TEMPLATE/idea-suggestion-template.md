@@ -1,6 +1,6 @@
 ---
 name: 💡 Idea Suggestion Template
-about: Use this template to suggest a content idea for someone else to write on BuildOn.AWS.
+about: Use this template to suggest a content idea for someone else to write on Community.AWS.
 title: "idea suggestion: TODO"
 labels: wish list
 assignees: cherbk
@@ -13,6 +13,6 @@ Are we missing some content? Do you have an idea you'd like to suggest, but you'
 
 ### Describe the content, including takeaways for the reader, in three to four sentences.
 
-### Why do you think this content idea should be published on BuildOn.AWS?
+### Why do you think this content idea should be published on Community.AWS?
 
 ### Anything else we should know?

@@ -31,6 +31,19 @@ Here are the basic steps we need to do it:
 
 ... And you'll be done. Now let's build it!
 
+| Attributes          |                                   |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | 200 - Intermediate                               |
+| ⏱ Time to complete  | 30 mins - 45 mins                      |
+| 💰 Cost to complete | USD 1.00                               |
+| 🧩 Prerequisites       | - An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=tutorial&sc_content=pack-the-old-deploy-as-gold&sc_geo=mult&sc_country=mult&sc_outcome=acq) (if you don't yet have one, create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_content=pack-the-old-deploy-as-gold&sc_geo=mult&sc_country=mult&sc_outcome=acq)) <br> - An IAM user that has the access to create AWS resources. <br> - Basic understanding of Java |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | 2022-10-19                            |
+
+|ToC|
+|--|
+
+
 ## 1. Download JBoss
 
 I used the version 4.2.3, but you can use any other version -- or even another application server -- with small changes.
@@ -246,4 +259,4 @@ You can change your Java EE App and run docker build, tag and push commands to u
 
 Now you have a simple Java EE application built with Docker and running with a public URL! And thanks to containerization, you have more ways to pack your old Java EE application and deploy it as a containerized app.
 
-I hope you enjoyed this tutorial, and please feel free to provide us with any feedback!
+If you enjoyed this tutorial, found any issues, or have feedback for us, [please send it our way!](https://pulse.buildon.aws/survey/DEM0H5VW).

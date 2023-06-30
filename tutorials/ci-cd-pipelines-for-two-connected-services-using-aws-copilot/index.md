@@ -10,6 +10,7 @@ tags:
   - ci-cd
   - tutorials
   - ecs
+  - fargate
 spaces:
   - devops
 authorGithubAlias: kirankumar15

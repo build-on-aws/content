@@ -50,7 +50,7 @@ Have you ever encountered a repository where it's difficult to determine which b
 
 The main branch of a project should always be in a production-ready state. Code merged into the main branch must have been reviewed, statically analyzed, and tested in an automated way, as we will see next. Furthermore, this code should go to production continuously as quickly as possible with little or no manual intervention. If there are feature branches, they should be removed as part of the merge/deploy process.
 
-Clare Liguori addressed this topic in [her article](https://aws.amazon.com/builders-library/cicd-pipeline/) on how Amazon stopped using the release captain role, who was responsible for coordinating the release of code changes for their team’s services and deploying the release to production. It is interesting to note how trunk-based development enabled the improvement of technical capabilities and processes to achieve the objective.
+Clare Liguori addressed this topic in [her article](https://aws.amazon.com/builders-library/cicd-pipeline/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=deploy-on-friday-devops-best-practices) on how Amazon stopped using the release captain role, who was responsible for coordinating the release of code changes for their team’s services and deploying the release to production. It is interesting to note how trunk-based development enabled the improvement of technical capabilities and processes to achieve the objective.
 
 ## Encourage thoughtful code reviews
 
@@ -68,7 +68,7 @@ Depending on the case, it is acceptable to have some runbook to do a task during
 
 Once code has been reviewed, the merge to the main branch must trigger the CI/CD pipeline, which must build the software, run automated tests, static code analysis, lint checks, apply quality gateways, run security checks, deploy the service to the pre-production environment, run post-deployment tests, and ultimately deploy to production.
 
-Mark Mansour wrote about [accelerating with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/) at Amazon and the positive aspects of the practice for the customers and business. In his words "For us, automation is the only way we could have continued to grow our business".
+Mark Mansour wrote about [accelerating with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=deploy-on-friday-devops-best-practices) at Amazon and the positive aspects of the practice for the customers and business. In his words "For us, automation is the only way we could have continued to grow our business".
 
 ## Build reliable automated tests
 
@@ -119,7 +119,7 @@ Even in applications and organizations that follow best practices, in certain ci
 
 The team must be able to clearly identify that the reversal will not cause more problems for users. This technical capability should be developed as much as the capability to deployment.
 
-I recommend reading Sandeep Pokkunuri's article on [ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/) to delve deeper into this subject.
+I recommend reading Sandeep Pokkunuri's article on [ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=deploy-on-friday-devops-best-practices) to delve deeper into this subject.
 
 ## Identify and avoid heroism
 
@@ -138,6 +138,6 @@ If you're interested in DevOps and want to learn more about how to implement it,
 - [DevOps Essentials](/concepts/devops-essentials)
 - [How to Succeed at DevOps: Wrong Answers Only!](/posts/devops-wrong-answers-only)
 - [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](posts/how-amazon-does-devops-in-real-life)
-- [My CI/CD pipeline is my release captain](https://aws.amazon.com/builders-library/cicd-pipeline/)
-- [Going faster with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/)
-- [Ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/)
+- [My CI/CD pipeline is my release captain](https://aws.amazon.com/builders-library/cicd-pipeline/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=deploy-on-friday-devops-best-practices)
+- [Going faster with continuous delivery](https://aws.amazon.com/builders-library/going-faster-with-continuous-delivery/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=deploy-on-friday-devops-best-practices)
+- [Ensuring rollback safety during deployments](https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=deploy-on-friday-devops-best-practices)

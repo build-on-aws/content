@@ -27,7 +27,7 @@ https://www.twitch.tv/videos/1847253428
 
 ## Links from today's episode
 
-- [Blog post from Suman](https://www.buildon.aws/tutorials/create-an-etl-pipeline-apache-spark)
+- [Blog post from Suman](/tutorials/create-an-etl-pipeline-apache-spark)
 - [Apache Spark](https://spark.apache.org/)
 
 **🐦 Reach out to the hosts and guests:**

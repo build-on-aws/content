@@ -16,6 +16,9 @@ authorName: Jen Looper
 date: 2023-05-30
 ---
 
+|ToC|
+|---|
+
 ![Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and DynamoDB](images/banner.png)
 
 May is Mental Health Month, and when you think about it, coding up a very simple web app can feel like a mindfulness exercise - if done without pressure in a calm environment. So why not take a little time this month to build yourself a mindfulness app that can deliver a quick affirmation to you or anyone lucky enough to come across it on the internet? Using a lightweight web framework called [Astro](https://astro.build/), plus [a Lambda endpoint](https://docs.aws.amazon.com/lambda/index.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq) that can query [a DynamoDB database](https://docs.aws.amazon.com/dynamodb/index.html?sc_channel=el&sc_campaign=devopswave&sc_content=build-an-affirmation-app&sc_geo=mult&sc_country=mult&sc_outcome=acq), you can code up a friendly affirmation app in no time at all. Let's get started!
@@ -201,6 +204,7 @@ export const handler = async (event, context) => {
   };
 };
 ```
+
 > Note, you are selecting a random affirmation by its Id - so edit the `min` and `max` variables to reflect how many affirmations you entered into your database.
 
 Now, to connect all the pieces, you can use one more service: [API Gateway](https://console.aws.amazon.com/apigateway).
