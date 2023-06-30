@@ -9,6 +9,9 @@ authorName: Sophia Parafina
 date: 2022-09-26
 ---
 
+|ToC|
+|---|
+
 Whether you're building a website or a cloud application or backing up data, you need storage that is accessible and scalable. There are three main types of cloud storage: block storage, object storage, and file storage. Selecting the right type of storage will depend on what type of data you have and how you plan to access it.  
 
 ## 1. Block storage

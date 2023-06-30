@@ -35,16 +35,8 @@ Below is an architecture diagram of what we'll be building today:
 
 Let's get started!
 
-| ToC                                                                            |
-|--------------------------------------------------------------------------------|
-| Steps                                                                          |
-| 1. [Prerequisites](#1-prerequisites)                                           |
-| 2. [Configure the Flask App](#2-configure-the-flask-app)                       |
-| 3. [Provision Infrastructure Resources](#3-provision-infrastructure-resources) |
-| 4. [Setup GitHub Actions Workflow](#4-setup-github-actions-workflow)           |
-| 5. [Running the Workflow](#5-running-the-workflow)                             |
-| 6. [Check App Deployment](#6-check-app-deployment)                             |
-| 7. [Cleaning up](#7-cleaning-up)                                   |
+|ToC|
+|----|
 
 ## 1. Prerequisites
 
