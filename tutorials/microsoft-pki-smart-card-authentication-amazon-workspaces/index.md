@@ -175,7 +175,7 @@ Review the certificate store on each domain controller to ensure they receive a 
 1. On the MGMT instance, open **certlm.msc**.
 2. Right-click **Certificates – Local Computer**, select **Connect to Another Computer**, enter the name of one of the DCs, select **OK**.
 3. Expand **Personal**, select **Certificates**, and confirm a certificate exists from the **LdapOverSSL-QS** template:  
-![Image showing the Personal certificate store on a domain controller, which shows an existing certificate in its certificate store](./images/04-dc-personal-certificate-store.png)
+![Image showing the Personal certificate store on a domain controller, which shows an existing certificate in its certificate store](./images/04-domain-personal-certificate-store.png)
 4. Repeat the above steps for the remaining domain controllers in the domain that will be authenticating users.
 5. Run the following command in PowerShell and ensure it completes successfully without any errors:
 
@@ -294,7 +294,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
 ![Image showing the "Delegation" tab on a sample AD user account in dsa.msc](./images/17-Delegation-sample-AD-user-dsa-msc.png)
     * Choose **Add…**, select **Users or Computers**, and add ALL of the domain controllers that the AD Connector service account will be allowed to complete TLS mutual authentication with. If using AWS Managed Microsoft AD, add all domain controllers.
     * Choose **OK** to display a list of available services used for delegation:  
-![Image showing the "Add Services" window and highlighting each entry that has a Service Type of "ldap" that are for the Windows Domain Controllers  ](./images/18-add-services-window-kcd.png)
+![Image showing the "Add Services" window and highlighting each entry that has a Service Type of "ldap" that are for the Windows Domain Controllers](./images/18-add-services-window-kcd.png)
     * Choose the **LDAP** service type for each domain controller, click **OK** and click **OK** to finish the configuration.
 
     **Note:** Please note that the Kerberos Constrained Delegation setting is specific to computer names. When using AWS Managed AD as your domain controllers, the domain controllers may be replaced with new domain controllers causing this setting to become inaccurate, which will cause users to fail to login with smart card authentication in the WorkSpaces client. You may want to consider automating the updating of this value using PowerShell in that scenario. 
@@ -539,9 +539,9 @@ Use the WorkSpaces client to test smart card authentication:
     * The Kerberos supported encryption types for your service account and domain controllers do not match. If you are using self-managed AD, collect the packet captures on each DC when reproducing the issue and analyze the Kerberos and LDAP traffic from the AD Connector IPs for any errors.
     * OCSP validation is failing. Refer to the previous Section 5 Step 2 to test OCSP validation.
     * The AD Connector registered certificates for smart card authentication are not correct.
-    * The local computer using the WorkSpaces client does not have the certificates in the certificate chain installed in the local store.
     * The smart card is failing to redirect the certificate into the user’s personal store.
     * A proxy or local networking configuration is interfering with the authentication process.
+    * A packet capture on the self-managed domain controllers during authentication may be necessary to pinpoint the root cause. If using AWS Managed Microsoft AD (of size large) and need to take a packet capture, you can use [Traffic Mirroring](https://docs.aws.amazon.com/vpc/latest/mirroring/what-is-traffic-mirroring.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 2. WorkSpaces client returns an error - Unknown Error Occurred:  
 ![Image showing the WorkSpaces client returning a "Unknown Error Occurred" error](./images/40-WorkSpaces-client-returning-Unknown-Error-Occurred.png)
