@@ -14,8 +14,6 @@ date: 2023-06-29
 
 Jerry is a passionate community gardener in the US city where I live. I met him in 2020, when he lost his whole tomato harvest due to early blights. Even after he applied fungicides, the blight spread. The next year, in order to avoid the same problems, he implemented preventative measures, planting disease-resistant cultivars and practicing good hygiene by sanitizing his tools. This time, aphids attacked and destroyed the tomato harvest again.
 
-Back In 2021, Jerry was devastated to loose all of his tomato harvest due to early blights. Even after he took efforts to apply fungicides, the blight kept spreading and affected his crops. Following year he implemented preventive practices like planting disease-resistant varieties, and practiced good hygiene by sanitizing his tools. However, this time aphids attacked his tomato plants and he lost his tomato harvest again.
-
 To overcome such challenges, jerry used to visually inspect the plants for signs of damage or infestation, such as chewed stems, or webbing and he took appropriate actions. He used traps or baits to capture pests and identify them and adjusted his fertilizer and watering cycles. I found these manual inspection rely heavily on the gardener's expertise and ability to detect subtle changes in plant health and this curiosity geared me to learn  how AI (Artificial Intelligence) and ML (Machine Learning) may be of jerry's assistance 
 
 ### What is Artificial Intelligence and Machine Learning
