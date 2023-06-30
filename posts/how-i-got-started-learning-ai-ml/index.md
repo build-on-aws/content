@@ -5,7 +5,6 @@ tags:
   - ai-ml
   - data-science
   - sagemaker
-  - ai-ml
 authorGithubAlias: sarunaaa003
 authorName: Arun Kumar. S
 date: 2023-06-10
