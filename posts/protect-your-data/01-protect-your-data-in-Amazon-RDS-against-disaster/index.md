@@ -10,7 +10,7 @@ tags:
     - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
-date: 2022-01-25
+date: 2023-06-30
 ---
 
 [Disaster events](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/what-is-a-disaster.html) occur infrequently, but when they happen it is crucial that you have a strategy that enables you to protect your data. [Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) offers several capabilities to protect your data in case disaster strikes. Amazon RDS is a good choice when you need to set up, operate, and scale a relational database in the Cloud. With it you can run the database engine of your choice from among MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL.
@@ -29,7 +29,7 @@ Replication provides rapid recovery for a wide range of potential faults that ma
 
 This is why our first layer of protection is in-Region, synchronous replication. Using [Multi-AZ Deployment](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html), a primary database instance located in one Availability Zone (AZ) is synchronously replicated to a standby database in another AZ (Figure 1-①). Locating the standby in a different AZ provides the protection of fault isolation, since AZs are located in distinct, separate sets of data centers from each other. In case of a failure of the primary instance, or a disaster event in the AZ where the primary instance is located, the standby takes over in a different AZ. This can be implemented at DB creation, or an existing DB can be modified to become Multi-AZ.
 
-1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
+1. Open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)
 2. In the navigation pane, choose **Databases**
 3. To create a new DB click **Create Database** / To modify an existing DB, click the radio button next to the DB name and then click **Modify**
 4. Under **Availability and durability**, make the selection for Multi-AZ DB. The wording of this selection will vary based on database engine (Figure 2)
@@ -46,7 +46,7 @@ The [Multi-AZ DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide
 
 The next layer of protection is still in-Region and enables asynchronous replication to one or more [read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html). By replicating to an instance in a different Availability Zone (AZ) than your primary and standby instances, you can achieve additional fault isolation to protect your database data (Figure 1-②). Read replicas are created from an already-existing RDS DB instance.
 
-1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
+1. Open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)
 2. In the navigation pane, choose **Databases**
 3. Click the radio button next to the DB name and then click **Actions**, then **Create read replica**
 4. Supply the required options. Consider the following when supplying these values
@@ -67,7 +67,7 @@ The strategies so far provide a high degree of protection for your database data
 
 Amazon RDS automated backups create a periodic snapshot of your database and also backup transaction logs between snapshots (Figure 1-⑤) to enable PITR. The transaction logs are saved every five minutes, therefore the latest restorable time should be no more than five minutes before the present. Backups are stored in Amazon S3 in-Region by default.
 
-1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
+1. Open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)
 2. In the navigation pane, choose **Databases**
 3. To create a new DB click **Create Database** / To modify an existing DB, click the radio button next to the DB name and then click **Modify**
 4. Click to expand **Additional configuration**
@@ -89,7 +89,7 @@ During DB creation you enable this feature and specify the destination Region an
 
 You can also modify an existing DB to enable cross-Region backup copying (Figure 6):
 
-1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
+1. Open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)
 2. In the navigation pane, choose **Automated backups**.
 3. On the **Current Region** tab, Click the radio button next to the DB name and then click **Actions**, then  **Manage cross-Region replication**.
 4. Under **Backup replication**, choose **Enable replication to another AWS Region**.
@@ -115,4 +115,3 @@ Replicas provide the ability to restore data quickly and with minimal data loss.
   - [Amazon RDS Backup & Restore Using AWS Backup](https://aws.amazon.com/getting-started/hands-on/amazon-rds-backup-restore-using-aws-backup/)
 - Well-Architected workshop
   - [Testing Resilience of EC2, RDS, and AZ USing Chaos Engineering](https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_of_ec2_rds_and_s3/) - This lab illustrates how RDS fails over to the standby instance to maintain availability
- 
