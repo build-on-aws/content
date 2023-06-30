@@ -26,6 +26,9 @@ ML is a specific technique under AI. It uses data to train a model, and you have
 
 ![AI / ML Hierarchy](images/figure1.jpg "Figure 1. AI / ML Hierarchy")
 
+## Combined Approach to solve Jerry’s problem
+
+I developed a prototype reactive mobile app with reference architecture as below that Jerry uses to submit his plant’s picture. This image is picked by a serverless architecture and goes through multiple stages of iteration. Once the data is ingested a Lambda function processes the image using Amazon Rekognition.
 ![Plant disease prediction architecture](images/figure4.png "Figure 4. Plant disease prediction architecture")
 
 Computer vision systems like [Amazon Rekognition](https://aws.amazon.com/rekognition/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a specific AI that can analyze images or videos of plants and identify different species based on their physical features, such as leaf shape, stem structure, and flower color. These systems use various AI techniques such as Deep Learning, Convolutional Neural Networks (CNN), and object detection algorithms to recognize and classify different plants, pests and plant diseases. CNN are a type of deep learning architecture that is specifically designed for processing and analyzing visual data, they are capable of learning and recognizing patterns and features from visual data through multiple layers of convolutional and pooling operations.
@@ -33,6 +36,7 @@ Computer vision systems like [Amazon Rekognition](https://aws.amazon.com/rekogni
 Once the Plant type is classified then a predictive analysis function takes place. ML can be used to develop predictive models to identify and diagnose plants health based on the historical data  of tomato plant health and disease outbreaks.. This prediction can be used to recommend organic and natural pest management strategies by identifying patterns and anomalies. [Amazon SageMaker](https://aws.amazon.com/sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a fully managed machine learning service that provides a complete set of tools for building, training, and deploying machine learning models. With Amazon SageMaker, I can preprocess and clean the historical data, select the appropriate machine learning algorithm or framework, and train the model on the prepared dataset. SageMaker supports a wide range of popular machine learning algorithms and frameworks, such as TensorFlow, PyTorch, XGBoost, and scikit-learn, giving the flexibility to choose the one that best suits my needs. This pre trained model provides the outcome of its analysis using a text and image format.
 
 Further on the last stage this output is used to identify the user recommendation. Knowledge Graphs, are designed to store and navigate highly connected data, making it suitable for applications that require modeling complex relations and querying large-scale graph datasets. [Amazon Neptune](https://aws.amazon.com/neptune/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a fully managed graph database service that allows me to build, manage, and query graph databases. I'm able to create and manage knowledge graphs by defining entities, relationships, and properties within the graph database, then use graph query languages like SPARQL or Gremlin to traverse and extract information from the graph, enabling powerful knowledge-driven applications. Once a suitable recommendation is identified that is shared to Jerry for his actions.
+I found these AI/ML services can be a powerful tool to share accurate and timely information on plant health and environmental conditions and help jerry to maintain healthy plants productive gardens and, increasing his harvest.
 
 ## AI/ML distinction that helped me to get started
 
@@ -76,7 +80,7 @@ While interacting with others, I got introduced to the material being presented 
 
 3. Following [blogs](https://aws.amazon.com/blogs/machine-learning/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml), thought leaders and influencers in the AI and ML industry helped me stay up-to-date on the latest trends and technologies, and provide valuable insights and perspectives.
 
-### Step - 2: Attended formal trainings for structured and comprehensive learning
+### Step - 2: Attended Formal trainings for structured and comprehensive learning
 
 1. [Machine Learning University](https://aws.amazon.com/machine-learning/mlu/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a place for beginners that helped me with a self-service pathway to understand the foundations of Machine Learning.
 
