@@ -40,7 +40,7 @@ But before we start building the API, let's have a quick look at the pros and co
 - **Simplicity:** The request-response pattern is straightforward to implement and understand, making it accessible, especially for developers new to building APIs.
 - **Error handling:** Synchronous communication simplifies error and exception handling, allowing for prompt notifications to clients.
 
-### Cons of the Request-Response Pattern:
+### Cons:
 
 - **Scalability:** The synchronous pattern can become a bottleneck when dealing with a large number of concurrent requests, potentially impacting the scalability of your application.
 - **Increased Latency:** Clients have to wait for a response before proceeding, introducing latency, especially when processing times are longer.
@@ -55,7 +55,7 @@ But now, let's start the tutorial and learn how to implement the synchronous req
 - We will call API Gateway a couple of times, which provides 1 million free calls per month.
 - We will run a Lambda function for a few time, which also provides 1 million free invocations per month.
 
-So if you follow the step-by-step guide, you'll definitely stay within the free trier. However, I've also added a section to the end that helps you remove all the resources creates during this tutorial.
+So if you follow the step-by-step guide, you'll definitely stay within the free trier. However, I've also added a section to the end that helps you remove all the resources created during this tutorial.
 
 ## Prerequisites
 
@@ -67,7 +67,7 @@ To build this example yourself, you need a free AWS account and bootstrap it wit
 
 Once you have everything set up, we can get started.
 
-## Step 1 - Create and deploy the CDK app
+## Step 1 - Create and Deploy the CDK App
 
 ### 1.1 Initialize the CDK app
 
@@ -100,7 +100,7 @@ To do this, type:
 cdk deploy
 ```
 
-This command will "synthesize" the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/) Stack, and deploy it in your AWS account.
+This command will "synthesize" the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/) template, and deploy it in your AWS account.
 
 > If `cdk deploy` throws an error, make sure that you have bootstrapped your AWS account following the instructions in the [CDK setup guide](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/).
 
@@ -112,7 +112,7 @@ Once the deployment has been completed, let's navigate to the [AWS CloudFormatio
 
 Now open and explore the stack details. In  the **Resources** tab you can see that it has deployed **CDKMetadata**, which are some configuration details for the stack.
 
-## Step 2 - Create and deploy the API
+## Step 2 - Create and Deploy the API
 
 Once everything has been set up, you can create your first real resource. 
 
@@ -214,7 +214,7 @@ Now let's click on the link, and if everything has been correctly configuredcorr
 
 Now that the API has been set up, let's create a simple AWS Lambda function.
 
-## Step 3 - Create a Lambda function
+## Step 3 - Create a Lambda Function
 
 ### 3.1 Write the Lambda function source code
 
@@ -264,7 +264,7 @@ const backendFunction = new lambda.Function(
 
 This will create a Lambda function that uses the Node.js runtime, packages and uploads everything inside the assets directory we've created above (_lambda-src/backend-function_), and configures the environment to use the `handler` function of the `index` file (_index.js_).
 
-### 3.3 Deploy the Function on AWS
+### 3.3 Deploy the function on AWS
 
 To deploy the function along with its source code, run the following command in the project directory:
 
@@ -285,7 +285,7 @@ Type `y` to confirm, and CDK will deploy the new Lambda function along with its 
 
 > **Lambda permissions:** Just like every other resource in AWS, a Lambda function doesn't have any permissions by default, i.e. it can't access any other resources in AWS. The steps above are necessary for the Lambda function to have access to the most basic functionality: The permission to send logs to AWS CloudWatch.
 
-### 3.4. Test the Lambda Function
+### 3.4. Test the Lambda function
 
 Once the function has been deployed, navigate to the Functions list in the [AWS Lambda Dashboard](console.aws.amazon.com/lambda).
 
@@ -320,7 +320,7 @@ Congratulations! You've successfully deployed and tested a Lambda function.
 
 Now that both the API and the Lambda function work, let's connect them so that a request to the API will automatically be forwarded to the function.
 
-## Step 4 - Connect the function to the API
+## Step 4 - Connect the Lambda Function to the API
 
 ### 4.1 Create a new resource and connect it to the Lambda function
 
