@@ -16,7 +16,11 @@ authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 date: 2023-02-21
 ---
-## I deployed Kubernetes with a 1986 Tandy 102 Portable Computer 
+
+|ToC|
+|---|
+
+## I deployed Kubernetes with a 1986 Tandy 102 Portable Computer
 
 I love making the outdated technology I collect do things it was never built to do, forcing the very old to work with the very new. Deploying Kubernetes with a 1986 Tandy 102 Portable Computer is exactly that. And it turns out, a 37-year-old computer can do some very modern things, things that would've seemed like science fiction to the people of the 1980s. But this project also tells us something about the cloud: that given the growth of cloud computing in this day and age, the importance of optimizing your local hardware is diminishing. The oldest personal computers were inspired by mainframe-connected terminals, and with the rise of the cloud, we seem to be returning to some extent to that age, treating our machines as glorified terminals for something way bigger, up in a cloud. And that's a good thing.
 

@@ -15,7 +15,7 @@ date: 2023-03-31
 
 Welcome to episode 3 of Build On Weekly! 🥳 Today Jacquie and Darko dive into installing various CLI tools and Utilities for AWS. Tools like the AWS CLI and AWS CDK (Cloud Development Kit).
 
-We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
+We will be posting here, on [Community.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
 ![CLI Chat](images/header.webp)
 

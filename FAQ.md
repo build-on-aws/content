@@ -4,7 +4,7 @@
   * [Markdown Syntax](#markdown-syntax)
   * [Where do I find the general Markdown syntax guide?](#where-do-i-find-the-general-markdown-syntax-guide)
   * [I have a series of posts. How do I link them together?](#i-have-a-series-of-posts-how-do-i-link-them-together)
-  * [How do I link to other posts on the BuildOn.AWS site?](#how-do-i-link-to-other-posts-on-the-buildonaws-site)
+  * [How do I link to other posts on the Community.AWS site?](#how-do-i-link-to-other-posts-on-the-communityaws-site)
   * [How do I get syntax highlighting in my code snippets?](#how-do-i-get-syntax-highlighting-in-my-code-snippets)
   * [What languages does syntax highlighting support?](#what-languages-does-syntax-highlighting-support)
   * [How do I write the same code snippet in different languages?](#how-do-i-write-the-same-code-snippet-in-different-languages)
@@ -25,7 +25,7 @@
   * [How do I specify article attributes, such as the time to read it, complexity, prerequisites, etc?](#how-do-i-specify-article-attributes-such-as-the-time-to-read-it-complexity-prerequisites-etc)
   * [How do I show content under tabs?](#how-do-i-show-content-under-tabs)
   * [How do I show content in multiple columns?](#how-do-i-show-content-in-multiple-columns)
-* [front matter details](#front matter-details)
+* [Front matter details](#front-matter-details)
   * [How do I add multiple authors in my post?](#how-do-i-add-multiple-authors-in-my-post)
   * [How can I set the Canonical URL?](#how-can-i-set-the-canonical-url)
   * [How can I provide a post description for SEO purposes?](#how-can-i-provide-a-post-description-for-seo-purposes)
@@ -77,9 +77,9 @@ Where `posts/owasp-top-10-defined/01-what-is-broken-access-control/index.md` is 
 
 The resulting URL mapping will be:
 
-* https://buildon.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control/
-* https://buildon.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/
-* https://buildon.aws/posts/owasp-top-10-defined/03-what-is-an-injection-attack/
+* https://community.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control/
+* https://community.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/
+* https://community.aws/posts/owasp-top-10-defined/03-what-is-an-injection-attack/
 
 You can see an example of this in the repo [here](/posts/owasp-top-10-defined).
 
@@ -98,11 +98,11 @@ posts:
 [OPTIONAL MARKDOWN CONTENT]
 ````
 
-The `posts` field determines the order of the posts in the series, which must be direct children of the folder where the series.md file is located (just like the example above). The `navigationBars` determines if and where to position the navigtion bars to navigate between the different parts of a series. You can pick any of the following values: `top`, `bottom`, `both`, or `none`.
+The `posts` field determines the order of the posts in the series, which must be direct children of the folder where the series.md file is located (just like the example above). The `navigationBars` determines if and where to position the navigation bars to navigate between the different parts of a series. You can pick any of the following values: `top`, `bottom`, `both`, or `none`.
 
 By creating this `series.md` file and folder structure, the following features will be provided:
 
-* A series landing page, in the URL based on the folder where the series.md is located. In our example, it would be [`/posts/owasp-top-10-defined`](https://www.buildon.aws/posts/owasp-top-10-defined). This landing page displays the title of the series, the authors of the posts, the tags of the posts, and the markdown content of the series.md if it was provided.
+* A series landing page, in the URL based on the folder where the series.md is located. In our example, it would be [`/posts/owasp-top-10-defined`](https://www.community.aws/posts/owasp-top-10-defined). This landing page displays the title of the series, the authors of the posts, the tags of the posts, and the markdown content of the series.md if it was provided.
 * Navigation controls. Every post in the series will display at the top and at the bottom links to navigate to the next and previous post in the series. You can customize this behavior using the attribute `navigationBars` in the front matter header, with possible values:
   * top. Navigation controls display only at the top of the page
   * bottom. Navigation controls display only at the bottom of the page
@@ -122,7 +122,7 @@ This is how these controls look like:
 * Series Table Of Contents inside a post in the series
   ![Series Table Of Contents inside a post in the series](SeriesToc.webp)
 
-### How do I link to other posts on the BuildOn.AWS site?
+### How do I link to other posts on the Community.AWS site?
 
 You can reference them using absolute paths of their folders:
 
@@ -546,7 +546,7 @@ In order to do so, edit the file /spaces/home/top.md so that it looks like this:
 hasBorder: false
 ---
  
-https://www.buildon.aws/tutorials/using-ec2-userdata-to-bootstrap-python-web-app
+https://www.community.aws/tutorials/using-ec2-userdata-to-bootstrap-python-web-app
 ```
 
 Use the full URL of the post like in this example. You can also add multiple post URL's, one per line, and in this case, they will show in a carousel loop, transitioning from one to the next every few seconds. 
@@ -556,9 +556,9 @@ Use the full URL of the post like in this example. You can also add multiple pos
 hasBorder: false
 ---
 
-https://www.buildon.aws/tutorials/using-ec2-userdata-to-bootstrap-python-web-app
-https://www.buildon.aws/tests/demystifying-the-transition-to-microservices?template=bgimage
-https://www.buildon.aws/tests/embedding-posts-in-markdown
+https://www.community.aws/tutorials/using-ec2-userdata-to-bootstrap-python-web-app
+https://www.community.aws/tests/demystifying-the-transition-to-microservices?template=bgimage
+https://www.community.aws/tests/embedding-posts-in-markdown
 ```
 
 Notice that pinned posts should have a background image with the `opengraph` ratio (1.91:1 or 1200x630px or equivalent). This image has to be configured in the post front matter header:

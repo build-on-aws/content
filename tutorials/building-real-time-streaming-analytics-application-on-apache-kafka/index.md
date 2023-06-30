@@ -367,8 +367,8 @@ Congratulations! You have built a real-time streaming analytics application on A
 
 If you want to learn more about streaming and Apache Kafka on AWS, you can check out the following blog posts:
 
-* [Data processing with Kafka Streams - An overview of stateless operations](https://www.buildon.aws/posts/data-processing-with-kafka-streams-stateless-operations)
-* [In the land of the sizing, the one-partition Kafka topic is king](https://www.buildon.aws/posts/in-the-land-of-the-sizing-the-one-partition-kafka-topic-is-king/01-what-are-partitions)
-* [My Event is More Urgent than Yours: Prioritizing Event Processing with Apache Kafka](https://www.buildon.aws/posts/prioritizing-event-processing-with-apache-kafka)
+* [Data processing with Kafka Streams - An overview of stateless operations](/posts/data-processing-with-kafka-streams-stateless-operations)
+* [In the land of the sizing, the one-partition Kafka topic is king](/posts/in-the-land-of-the-sizing-the-one-partition-kafka-topic-is-king/01-what-are-partitions)
+* [My Event is More Urgent than Yours: Prioritizing Event Processing with Apache Kafka](/posts/prioritizing-event-processing-with-apache-kafka)
 
 If you enjoyed this step-by-step guide, found any issues or have feedback for us, [please send it our way!](https://pulse.buildon.aws/survey/DEM0H5VW)

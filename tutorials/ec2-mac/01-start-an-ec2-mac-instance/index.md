@@ -1,5 +1,5 @@
 ---
-title: "Start an EC2 Mac instance"
+title: "Start an Amazon EC2 Mac instance"
 description: "Learn how to start an EC2 Mac instance"
 tags:
     - mac
@@ -11,7 +11,7 @@ tags:
 spaces:
   - mac
 showInHomeFeed: true
-authorGithubAlias: stormacq
+authorGithubAlias: sebsto
 authorName: Sébastien Stormacq
 date: 2023-06-28
 ---

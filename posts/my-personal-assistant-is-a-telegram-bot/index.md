@@ -5,10 +5,16 @@ tags:
   - telegram
   - bots
   - serverless
+  - cdk
+  - ssm
+  - cloudwatch
 authorGithubAlias: donnieprakoso
 authorName: Donnie Prakoso
 date: 2022-10-27
 ---
+
+|ToC|
+|---|
 
 We often need tools to get things done. As a developer, one of my productivity hacks is to use Telegram bots to help me get things done quickly. From checking the bus schedule for commuting, to image resizing. Most of the small, unpleasant tasks I delegate to the Telegram bot. Simply put, a Telegram bot is my personal assistant.
 
@@ -26,7 +32,7 @@ In this article, you will learn how to build a Telegram bot that integrate with 
 
 ![Diagram architecture](images/TelegramBot-Page-2.drawio.png)
 
-All the stacks here will use the AWS CDK to provision resources, so you'll get a consistent deployment. If you are new to the AWS CDK, please [install the CDK first](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) and then follow the [tutorial for bootstrapping](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html).
+All the stacks here will use the AWS CDK to provision resources, so you'll get a consistent deployment. If you are new to the AWS CDK, please [install the CDK first](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=my-personal-assistant-is-a-telegram-bot) and then follow the [tutorial for bootstrapping](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=my-personal-assistant-is-a-telegram-bot).
 
 ## Let's Get Started!
 
@@ -44,7 +50,7 @@ In this step we will deploy the serverless API. The output of this step is the A
 
 #### Code Review: AWS Systems Manager Parameter Store
 
-The first thing we need to define in the CDK app is to create resources to store the Telegram token. Of course we want to avoid hard coding in this application. We will use the [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) which we can later retrieve inside the Lambda function. The parameter name that we use is `telegram_token` which you can find in the Parameter Store dashboard, with a dummy value of `TELEGRAM_TOKEN` which we will need to change manually later.
+The first thing we need to define in the CDK app is to create resources to store the Telegram token. Of course we want to avoid hard coding in this application. We will use the [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=my-personal-assistant-is-a-telegram-bot) which we can later retrieve inside the Lambda function. The parameter name that we use is `telegram_token` which you can find in the Parameter Store dashboard, with a dummy value of `TELEGRAM_TOKEN` which we will need to change manually later.
 
 ```python
 ssm_telegram_token = _ssm.StringParameter(self, id="{}-ssm-telegram-token".format(
@@ -53,7 +59,7 @@ ssm_telegram_token = _ssm.StringParameter(self, id="{}-ssm-telegram-token".forma
 
 #### Code Review: AWS IAM Roles
 
-The next thing we need to define are the IAM roles that define Lambda function access to write log groups with Amazon CloudWatch as well as access to the Parameter Store. For the record, we can grant access to the Lambda function by calling the `.grant_read()` function, but I prefer this approach because I can explicitly implement for [least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege.html).
+The next thing we need to define are the IAM roles that define Lambda function access to write log groups with Amazon CloudWatch as well as access to the Parameter Store. For the record, we can grant access to the Lambda function by calling the `.grant_read()` function, but I prefer this approach because I can explicitly implement for [least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=my-personal-assistant-is-a-telegram-bot).
 
 ```python
 lambda_role = _iam.Role(

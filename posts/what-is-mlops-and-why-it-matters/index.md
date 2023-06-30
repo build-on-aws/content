@@ -12,6 +12,9 @@ authorName: Arun Kumar. S
 date: 2023-05-22
 ---
 
+|ToC|
+|---|
+
 Imagine a music production company wants to predict the success of a new album before it's released. The company hires a data scientist to build a predictive model to forecast the revenue of the album based on its characteristics, and it offers the data scientist access to data about past albums - including genre, artists, producers, budget, release date, and revenue.
 
 The data scientist starts by exploring the data and identifying which features are most important for predicting revenue. They use statistical techniques to understand the relationships between the features and the revenue, and they build a machine learning model, trained on historical data using various algorithms, to predict revenue of future albums. Problem solved, right? Well, sort of.
@@ -24,7 +27,7 @@ In this post, I'm going to explain what MLOps is and how it fits into the larger
 
 ## Welcome to the World of MLOps
 
-MLOps is short for Machine Learning Operations, a practice that combines machine learning with [Devops principles](https://www.buildon.aws/concepts/what-is-devops?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) to streamline and manage the lifecycle of machine learning models. Essentially MLOps helps data scientists and engineers to deploy, monitor, and manage machine learning models in a smooth and efficient way - emphasizing collaboration, automation, and continuous improvement.
+MLOps is short for Machine Learning Operations, a practice that combines machine learning with [Devops principles](/concepts/what-is-devops) to streamline and manage the lifecycle of machine learning models. Essentially MLOps helps data scientists and engineers to deploy, monitor, and manage machine learning models in a smooth and efficient way - emphasizing collaboration, automation, and continuous improvement.
 
 Okay, but what does that practically look like?
 
@@ -56,9 +59,9 @@ Okay, we've covered what MLOps is and how it fits into the larger DevOps logic. 
 
 Before we dive into a short demonstration, here are some important things to do:
 
-**Understand the Basics of Machine Learning**: To get started with MLOps, you need to have a good understanding of the basics of machine learning. This includes concepts like supervised and unsupervised learning, feature engineering, model selection, and evaluation. You can leverage [Machine Learning Essentials for Business and Technical Decision Makers](https://explore.skillbuilder.aws/learn/course/external/view/elearning/1404/machine-learning-essentials-for-business-and-technical-decision-makers?laml=tile&tile=dt?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) a free online course sponsored by AWS Training and certification.
+**Understand the Basics of Machine Learning**: To get started with MLOps, you need to have a good understanding of the basics of machine learning. This includes concepts like supervised and unsupervised learning, feature engineering, model selection, and evaluation. You can leverage [Machine Learning Essentials for Business and Technical Decision Makers](https://explore.skillbuilder.aws/learn/course/external/view/elearning/1404/machine-learning-essentials-for-business-and-technical-decision-makers?laml=tile&tile=dt&sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) a free online course sponsored by AWS Training and certification.
 
-**Learn About the Basic MLOps Tools and Frameworks**: There are many MLOps tools and frameworks available, and it's important to understand the pros and cons of each. Some popular options include [AWS MLOps Workload Orchestrator](https://aws.amazon.com/solutions/implementations/mlops-workload-orchestrator/), [Kubeflow](https://www.kubeflow.org/docs/external-add-ons/serving/), [MLflow](https://mlflow.org/), and [TensorFlow](https://www.tensorflow.org/tfx). You can start by reading the documentation for these solutions and trying out some sample projects like this [MNIST](https://static.us-east-1.prod.workshops.aws/public/80e98500-8b21-4a12-b8a4-3473e548f33f/static/code/ml-ops.zip) code that uses ConvNets based on [PyTorch](https://github.com/pytorch/examples) examples for image classification.
+**Learn About the Basic MLOps Tools and Frameworks**: There are many MLOps tools and frameworks available, and it's important to understand the pros and cons of each. Some popular options include [AWS MLOps Workload Orchestrator](https://aws.amazon.com/solutions/implementations/mlops-workload-orchestrator/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters), [Kubeflow](https://www.kubeflow.org/docs/external-add-ons/serving/), [MLflow](https://mlflow.org/), and [TensorFlow](https://www.tensorflow.org/tfx). You can start by reading the documentation for these solutions and trying out some sample projects like this [MNIST](https://static.us-east-1.prod.workshops.aws/public/80e98500-8b21-4a12-b8a4-3473e548f33f/static/code/ml-ops.zip) code that uses ConvNets based on [PyTorch](https://github.com/pytorch/examples) examples for image classification.
 
 **Practice with Other Real-World Datasets**: Once you have a basic understanding of machine learning and MLOps tools, you can start practicing with real-world datasets. Kaggle is a great resource for finding datasets like this [key indicators for Heart disease](https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease) which has 400K adults health status that can be used to detect key indicators for heart diseases.
 

@@ -1,9 +1,8 @@
 ---
 title: "How I got started Learning AI-ML?"
-description: "My journey into AI/ML shaped my perspective, ignited my passion, and empowered the world around me. From a humble beginning driven by curiosity, I armed the technology to reshape and enhance the life of a gardener. With each step now, AI/ML fuels my determination to unlock a future where intelligence and innovation integrate to create a better world."
+description: "My journey into AI/ML shaped my perspective, ignited my passion, and empowered the world around me. From a humble beginning driven by curiosity, I armed the technology to reshape and enhance the life of a gardener. With each step now, AI/ML fuels my determination to unlock a future where intelligence and innovation intertwine to create a better world."
 tags:
-  - artificial intelligence
-  - machine-learning
+  - ai-ml
   - data-science
   - sagemaker
   - ai-ml
@@ -16,19 +15,17 @@ date: 2023-06-10
 
 Jerry is a passionate community gardener in the US city where I live. I met him in 2020, when he lost his whole tomato harvest due to early blights. Even after he applied fungicides, the blight spread. The next year, in order to avoid the same problems, he implemented preventative measures, planting disease-resistant cultivars and practicing good hygiene by sanitizing his tools. This time, aphids attacked and destroyed the tomato harvest again.
 
-As I watched Jerry problem-solve, I noticed his dependence on visual inspections of the plants. He used traps or baits, too, to capture pests and change his cultivation practices. So much depended on his vigilance, expertise, and ability to notice subtle changes in plant health. As a builder, I began to wonder if Artificial Intelligence and Machine Learning could help improve Jerry's tomato harvests.
+Back In 2021, Jerry was devastated to loose all of his tomato harvest due to early blights. Even after he took efforts to apply fungicides, the blight kept spreading and affected his crops. Following year he implemented preventive practices like planting disease-resistant varieties, and practiced good hygiene by sanitizing his tools. However, this time aphids attacked his tomato plants and he lost his tomato harvest again.
+
+To overcome such challenges, jerry used to visually inspect the plants for signs of damage or infestation, such as chewed stems, or webbing and he took appropriate actions. He used traps or baits to capture pests and identify them and adjusted his fertilizer and watering cycles. I found these manual inspection rely heavily on the gardener's expertise and ability to detect subtle changes in plant health and this curiosity geared me to learn  how AI (Artificial Intelligence) and ML (Machine Learning) may be of jerry's assistance 
 
 ### What is Artificial Intelligence and Machine Learning
 
-Both AI and ML are related but distinct concepts. AI refers to the ability of machines to perform tasks that typically requires human intelligence, such as decision-making, recognizing patterns, and learning from experience. 
+Both AI and ML are related but distinct concepts. AI refers to the ability of machines to perform tasks that typically requires human intelligence, such as decision-making, recognizing patterns, and learning from experience.
 
 ML is a specific technique under AI. It uses data to train a model, and you have a trained model, you're capable of adding more data and predict an outcome based on the initial model. In other words ML uses algorithms and statistical models to allow machines to learn from data without being explicitly programmed.
 
 ![AI / ML Hierarchy](images/figure1.jpg "Figure 1. AI / ML Hierarchy")
-
-## Combined approach to solve Jerry’s problem
-
-I wanted to help Jerry improve his tomato harvests, so I developed a prototype reactive mobile app that he could use to submit his plants' pictures. He would snap photos of his plants on his phone, and then the images would be picked up by a serverless architecture and go through multiple stages of iteration. Once the data is ingested a Lambda function processes the image using Amazon Rekognition.
 
 ![Plant disease prediction architecture](images/figure4.png "Figure 4. Plant disease prediction architecture")
 
@@ -38,7 +35,7 @@ Once the Plant type is classified then a predictive analysis function takes plac
 
 Further on the last stage this output is used to identify the user recommendation. Knowledge Graphs, are designed to store and navigate highly connected data, making it suitable for applications that require modeling complex relations and querying large-scale graph datasets. [Amazon Neptune](https://aws.amazon.com/neptune/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a fully managed graph database service that allows me to build, manage, and query graph databases. I'm able to create and manage knowledge graphs by defining entities, relationships, and properties within the graph database, then use graph query languages like SPARQL or Gremlin to traverse and extract information from the graph, enabling powerful knowledge-driven applications. Once a suitable recommendation is identified that is shared to Jerry for his actions.
 
-## AI/ML distinction that helped me to get started 
+## AI/ML distinction that helped me to get started
 
 Over the course of finding ways to help Jerry, I learned the basic concepts of AI and ML and types of AI and ML’s available that can be used individually or in combination to address different business problems.
 
@@ -68,23 +65,23 @@ Reinforcement learning: In reinforcement learning, the machine learning model le
 
 Incorporating AI/ML to solve a real life problem seemed like a difficult experience at first, but with services like Amazon Rekognition, SageMaker and Neptune I was able build a solution for an important problem and help Jerry to be more efficient on his gardening journey.
 
-Now Jerry has a simple mobile interface through which he can submit a snap of the plant’s. the application will analyze the image using Amazon Rekognition, then provide recommendations and insights based on the analysis, leveraging the trained model and knowledge graph stored in Neptune. 
+Now Jerry has a simple mobile interface through which he can submit a snap of the plant’s. the application will analyze the image using Amazon Rekognition, then provide recommendations and insights based on the analysis, leveraging the trained model and knowledge graph stored in Neptune.
 
 ### Step - 1 : Socialized to collaborate, Improve positive and productive learning experience and got exposed to diverse perspectives
 
-While interacting with others, I got introduced to the material being presented by others, listened to concepts, asked question. By receiving feedback from others helped me understand the material and remember it more effectively. 
+While interacting with others, I got introduced to the material being presented by others, listened to concepts, asked question. By receiving feedback from others helped me understand the material and remember it more effectively.
 
 1. There are many online communities and forums dedicated to AI and ML, where you can ask questions, share your knowledge, and learn from others. AWS [re:Post](https://repost.aws/topics/TAXwEBZll0TtWxbiOoSjJrfw?categoryID=36?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is my favorite place to socialize with other members and AI/ML enthusiasts.
 
-2. Attending conferences and meetups: Attending conferences and meetups is a great way to connect with other professionals in the AI and ML industry. Some conferences and meetups I followed include the International Conference on Machine Learning (ICML), the Conference on Neural Information Processing Systems (NeurIPS), and AWS [Innovate](https://aws.amazon.com/events/innovate-online-conference/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) 
+2. Attending conferences and meetups: Attending conferences and meetups is a great way to connect with other professionals in the AI and ML industry. Some conferences and meetups I followed include the International Conference on Machine Learning (ICML), the Conference on Neural Information Processing Systems (NeurIPS), and AWS [Innovate](https://aws.amazon.com/events/innovate-online-conference/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml).
 
-3. Following [blogs](https://aws.amazon.com/blogs/machine-learning/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml), thought leaders and influencers in the AI and ML industry helped me stay up-to-date on the latest trends and technologies, and provide valuable insights and perspectives. 
+3. Following [blogs](https://aws.amazon.com/blogs/machine-learning/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml), thought leaders and influencers in the AI and ML industry helped me stay up-to-date on the latest trends and technologies, and provide valuable insights and perspectives.
 
 ### Step - 2: Attended formal trainings for structured and comprehensive learning
 
-1. [Machine Learning University](https://aws.amazon.com/machine-learning/mlu/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a place for beginners that helped me with a self-service pathway to understand the foundations of Machine Learning. 
+1. [Machine Learning University](https://aws.amazon.com/machine-learning/mlu/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a place for beginners that helped me with a self-service pathway to understand the foundations of Machine Learning.
 
-2. I developed a custom [ramp-up guide](https://d1.awsstatic.com/training-and-certification/ramp-up_guides/Ramp-Up_Guide_Machine_Learning.pdf?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) that suits my learning needs to advance on specific needs such like natural language processing and computer vision
+2. I developed a custom [ramp-up guide](https://d1.awsstatic.com/training-and-certification/ramp-up_guides/Ramp-Up_Guide_Machine_Learning.pdf?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) that suits my learning needs to advance on specific needs such like natural language processing and computer vision.
 
 ### Step - 3: Self-assessment allowed me to identify knowledge gaps, set my learning goals, monitor progress, and fine tune my learning style
 
@@ -98,7 +95,7 @@ While interacting with others, I got introduced to the material being presented 
 
 1. Practicing helped to reinforce the concepts and skills that I learned. [AI/ML Workshops](https://workshops.aws/categories/AI%2FML?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) helped to improve the knowledge I gathered and comprehension of the concepts.
 
-2. Participating on competitions helped me to develop and refine my skills with specific technology. With repeated participation on events like [AWS Deep racer](https://aws.amazon.com/deepracer/league/?c=ml&sec=rsc?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) league increased my proficiency and efficiency with the technology.
+2. Participating on competitions helped me to develop and refine my skills with specific technology. With repeated participation on events like [AWS Deep racer](https://aws.amazon.com/deepracer/league/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) league increased my proficiency and efficiency with the technology.
 
 ## How my journey transformed Jerry's gardening skills
 Following are the words of Jerry. " Ever since I embraced the power of AI/ML based mobile app, my love for growing tomatoes reached new heights. No longer limited by the challenges of pest infections and plant disease, I now have an incredible tool at my fingertips. Together with this symbolic relationship that celebrates the wonders of nature and the limitless potential of technology, not only my tomato harvest increased but I'm looking to extend this capability to my other plant types"

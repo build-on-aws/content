@@ -11,15 +11,18 @@ authorName: Seth Eliot
 date: 2023-05-16
 ---
 
-Kanban has gained popularity as a tool for improving the productivity for software development teams. But many builders implementing it may not understand why we do the practices that Kanban is known for. One key practice that is necessary to achieve Kanban’s benefits is limiting work in process, also known as limiting WIP. 
+|ToC|
+|---|
+
+Kanban has gained popularity as a tool for improving the productivity for software development teams. But many builders implementing it may not understand why we do the practices that Kanban is known for. One key practice that is necessary to achieve Kanban’s benefits is limiting work in process, also known as limiting WIP.
 
 What is limiting WIP? Essentially it just means setting a limit on the number of items that can be in each step in your workflow. It sounds simple — and I've heard complaints before that such limits feel artificial or silly — but limiting WIP actually improves flow, drives collaboration, and aids the team's commitment to completing valuable features.
 
 In short, limiting work in process helps you manage your overall workflow, enabling your team to get more done. Here's how — and why — it works.
 
 > Kanban aside
-> 
-> Sometimes WIP is said to stand for "work in progress". However I will use "work in process" for the [reasons described here](https://www.projectmanagement.com/blog/blogPostingView.cfm?blogPostingID=63334&thisPageURL=/blog-post/63334/Why-Disciplined-Agile-Uses-Work-in-Process-and-not-Work-in-Progress). 
+>
+> Sometimes WIP is said to stand for "work in progress". However I will use "work in process" for the [reasons described here](https://www.projectmanagement.com/blog/blogPostingView.cfm?blogPostingID=63334&thisPageURL=/blog-post/63334/Why-Disciplined-Agile-Uses-Work-in-Process-and-not-Work-in-Progress).
 
 ![Text that reads Limit WIP and Flow On](images/figure1.png "Figure 1. Keeping calm helps, but it is limiting WIP that will help you to get more stuff done")
 
@@ -86,7 +89,7 @@ To illustrate how collaboration (driven by lower WIP limits) gets things done fa
 > Kanban Aside:
 >
 > There is mathematical rigor behind the assertion that lower WIP (driving collaboration) gets stuff done faster (reduces cycle time). It is called [Little’s Law](https://brooker.co.za/blog/2018/06/20/littles-law.html) and can be stated as
-> 
+>
 > `CycleTime = WIP​ / Throughput`
 
 ## Limiting WIP Aids Our Commitment to Completing Valuable Features
@@ -104,7 +107,6 @@ So in Scrum we might recognize half-way through the sprint that stories will not
 ## Conclusion
 
 Hopefully now you understand why limiting WIP is not just a thing we do, but is a key part of the Kanban process, and necessary so as to improve flow of value through the system.  Limiting WIP improves flow and helps us produce more quickly and reliably, drives collaboration, gets the team working together, and aids our commitment to completing valuable features.
-
 
 | Let me know what you think of this post|  |
 | ----------- | ----------- |

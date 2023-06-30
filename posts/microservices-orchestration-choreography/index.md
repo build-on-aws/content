@@ -12,7 +12,10 @@ authorName: Mohammed Fazalullah Qudrath
 date: 2023-01-26
 ---
 
-## Oveview
+|ToC|
+|---|
+
+## Overview
 
 The idea of implementing co-ordination patterns to build distributed systems isn't new to the microservices world. It's been an approach taken since the time of monoliths and Service Oriented Architecture architected applications where you would see a need to, say, send a message or an event to a job that is polling a queue to work on the next item. Over the years, due to the complexity of business processes growing the systems built to reflect the real world, developers have tended to implement services that adopt behaviors like parallel processing, long term wait on status updates, rollback, and a few others.
 
@@ -20,7 +23,7 @@ For the purpose of this post, I will start by covering key concepts around event
 
 ## Events and messages
 
-Some people use 'events' and 'messages' interchangeably, but they're actually distinct in what kind of systems are included as part of the scope of communication. 
+Some people use 'events' and 'messages' interchangeably, but they're actually distinct in what kind of systems are included as part of the scope of communication.
 
 An architecture that uses messaging has a specific format that is framed earlier when building APIs (similar to a function call), where the API knows what is being called and what the expected response is. An example of this is when a passenger uses a mobile application to check for the gate information for their flight. Since the mobile app needs to fetch very specific set of information (flight number and date) it knows which API to call and with what specific fields so that it retrieves the required information. The request in this case will be a message.
 

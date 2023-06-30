@@ -650,4 +650,4 @@ If you enjoyed this tutorial, found any issues, or have feedback us, [please sen
 
 Check out my other tutorial on [how to create a CI/CD pipeline from scratch using Amazon CodeCatalyst](https://www.buildon.aws/tutorials/build-ci-cd-pipeline-iac-cloudformation), to deploy Infrastructure as Code (IaC) with AWS CloudFormation.
 
-For more DevOps related content, check out our [DevOps Essentials guide](https://www.buildon.aws/concepts/devops-essentials/) and learn about [How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/).
+For more DevOps related content, check out our [DevOps Essentials guide](/concepts/devops-essentials/) and learn about [How Amazon Does DevOps in Real Life](/posts/how-amazon-does-devops-in-real-life/).

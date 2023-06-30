@@ -16,7 +16,7 @@ Welcome to episode 5 of Build On Weekly! 🥳
 
 Today [Jacquie](https://twitter.com/devopsjacquie) and [Darko](https://twitter.com/darkosubotica), discuss a few things around Containers and Hybrid environments. That means running your applications On-Premises AND in the cloud. In today's episode watch Darko as he sweats trying to troubleshoot a real time demo. 😅
 
-We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
+We will be posting here, on [Community.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
 
 ![Jacquie and Darko - Episode 5](images/header.webp)
 

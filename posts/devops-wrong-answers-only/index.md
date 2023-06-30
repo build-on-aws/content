@@ -11,6 +11,10 @@ authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-03-24
 ---
+
+|ToC|
+|---|
+
 Software teams have been struggling  for ages with the questions I pose here, and in that time we have all witnessed our share of bad answers from unrealistic management - or even misguided senior engineers. Let’s see why they just don’t work, and figure out the better answers together.
 
 ## Walls
@@ -61,9 +65,9 @@ And while we’re at it, the developers need to take it easy on testing. They sh
 
 Jeff Bezos famously said you cannot just ask folks to try better (or in this case just go faster). Good intentions do not work because people already have good intentions. Instead we can look at building [mechanisms](https://docs.aws.amazon.com/wellarchitected/latest/operational-readiness-reviews/building-mechanisms.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only) by using processes and tools to release sooner.
 
-Code review and testing are both important mechanisms to identify problems early, and to fix them. The earlier we find and fix problems, the less expensive they are (both in monetary cost and cost to customer trust). While code review can be time consuming, you can use automation to help lighten the load. Tools like [Amazon CodeGuru Reviewer](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only) use machine learning and automated reasoning to identify critical issues, security vulnerabilities, and hard-to-find bugs during application development - and they provide recommendations to improve code quality. You can get hands-on with the CodeGuru in the [Amazon Code Guru Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/1786241d-967f-4195-99ef-5716ef485201/en-US?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only). But machines are not quite ready to replace us yet: you need a human reviewer, too. One process to encourage folks to do code reviews instead of coding new features is using WIP (Work in Process) limits. This concept, [taken from Kanban](https://www.buildon.aws/posts/wip-limits-help-you-get-more-stuff-done?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only), limits how much new work can be started until existing work is done, where “done” *includes* the code review stage. This is shown in figure 3, where each yellow note represents a coding task. Developers cannot take new work (which will cause the “Develop” WIP limit of 4 to be exceeded) until some code reviews are completed.
+Code review and testing are both important mechanisms to identify problems early, and to fix them. The earlier we find and fix problems, the less expensive they are (both in monetary cost and cost to customer trust). While code review can be time consuming, you can use automation to help lighten the load. Tools like [Amazon CodeGuru Reviewer](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only) use machine learning and automated reasoning to identify critical issues, security vulnerabilities, and hard-to-find bugs during application development - and they provide recommendations to improve code quality. You can get hands-on with the CodeGuru in the [Amazon Code Guru Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/1786241d-967f-4195-99ef-5716ef485201/en-US?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only). But machines are not quite ready to replace us yet: you need a human reviewer, too. One process to encourage folks to do code reviews instead of coding new features is using WIP (Work in Process) limits. This concept, [taken from Kanban](/posts/wip-limits-help-you-get-more-stuff-done?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only), limits how much new work can be started until existing work is done, where “done” *includes* the code review stage. This is shown in figure 3, where each yellow note represents a coding task. Developers cannot take new work (which will cause the “Develop” WIP limit of 4 to be exceeded) until some code reviews are completed.
 
-![Two whiteboards, each with multiple columns and sticky notes illustrate the concept of limiting WIP](images/figure3.png "Figure 3. Limiting WIP can streamline throughput, and incentivizes code reviews.") 
+![Two whiteboards, each with multiple columns and sticky notes illustrate the concept of limiting WIP](images/figure3.png "Figure 3. Limiting WIP can streamline throughput, and incentivizes code reviews.")
 
 And continuing to explore how to find problems early, a good test suite will be your best friend. Automate it as part of your CI/CD pipeline, and ensure it is high quality (not brittle or noisy). Treat test code as you treat production code (yes, including code reviews). Include [load testing](https://docs.aws.amazon.com/prescriptive-guidance/latest/load-testing/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only) and [chaos engineering](https://aws.amazon.com/blogs/architecture/verify-the-resilience-of-your-workloads-using-chaos-engineering?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only) to test non-functional requirements like scalability and resilience.
 
@@ -85,17 +89,15 @@ Or.....
 
 The customer is always right! Give them everything they want when they ask for it. If it is top of mind to them, then it is number one priority for you. You won’t deliver anything valuable remotely close to your timetable, but that’s what follow-on contracts are for. Job security guaranteed!
 
-
 ### Why that’s wrong
 
 The [tenets of agile software](https://agilemanifesto.org/) are actually quite simple, although implementation takes effort and practice. They value collaborating with customers by producing working software they can see and use, and then iterating on that.
 
-With DevOps, teams [break their work down into smaller chunks and approach product delivery collaboratively](https://www.buildon.aws/concepts/devops-essentials/), with a holistic view of the product, enabling better team transparency and quicker, more reliable deployments. By doing this you learn as you develop what works and what does not, testing each release. Using continuous integration and continuous delivery (CI/CD), you integrate with other systems as new functionality is added, instead of as a big bang at the end of a long release. You also create working software that you can share (demo or beta) with customers and stakeholders to get feedback. As customers and stakeholders give feedback and request changes to requirements, you add these to a backlog along with all the other remaining tasks to be done. By prioritizing these new asks along with the old, you can see clearly what is left to be developed, and the timeline be which requirements will and won’t be done. A prioritized backlog makes highly visible what will be delivered, and the trade-offs you make when new requirements are moved to the top of the stack. At all points, the engineering team is learning, and there will be no surprises as delivery dates approach. And yes, I said “dates” plural, because the team will continue to use feedback from real customers in production to iteratively improve the application.
-
+With DevOps, teams [break their work down into smaller chunks and approach product delivery collaboratively](/concepts/devops-essentials/), with a holistic view of the product, enabling better team transparency and quicker, more reliable deployments. By doing this you learn as you develop what works and what does not, testing each release. Using continuous integration and continuous delivery (CI/CD), you integrate with other systems as new functionality is added, instead of as a big bang at the end of a long release. You also create working software that you can share (demo or beta) with customers and stakeholders to get feedback. As customers and stakeholders give feedback and request changes to requirements, you add these to a backlog along with all the other remaining tasks to be done. By prioritizing these new asks along with the old, you can see clearly what is left to be developed, and the timeline be which requirements will and won’t be done. A prioritized backlog makes highly visible what will be delivered, and the trade-offs you make when new requirements are moved to the top of the stack. At all points, the engineering team is learning, and there will be no surprises as delivery dates approach. And yes, I said “dates” plural, because the team will continue to use feedback from real customers in production to iteratively improve the application.
 
 <br/>
 
-## Undifferentiated heavy lifting 
+## Undifferentiated heavy lifting
 
 ### The question
 
@@ -112,9 +114,9 @@ This one’s easy. The development team does not want to do it — and that’s 
 ### Why that’s wrong
 
 Folks don’t like waiting on a ticket to be serviced. And folks like it even less when they have an insurmountable stream of “[muck](https://aws.amazon.com/blogs/aws/we_build_muck_s?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=devops-wrong-answers-only)” work thrown at them. DevOps is about collaboration, not throwing it over the wall (see Figure 1).
- 
+
 A DevOps team can play a key role in creating and maintaining scripts. They can create infrastructure as code templates that are vetted to be compliant with business security and architectural policies. They can create systems that make it easy to find and deploy these templates to stand up cloud infrastructure (like the aforementioned Kubernetes cluster). They do this working with Developers and others as stakeholders. Then the developers use these scripts and infrastructure deployment processes to self-service, and stand up what they need. For their part, the DevOps team focuses on removing or automating repetitive or low-value tasks. They then have more time to spend focusing on innovating and enhancing technology quality, without having to take on menial tasks
- 
+
 The line for what is self-service (using DevOps-created tools) and what is done by DevOps depends on the organization. Above I describe an organization where development is almost completely self-service, but with guardrails to help developers maintain compliance with policies. In other cases DevOps may stamp out landing zones in AWS accounts, to which Developers can then deploy infrastructure (using the template library). In some organizations, they prefer security (such as IAM roles) to be a centralized function. What makes it DevOps is a culture of collaboration and ownership.
 
 <br/>
@@ -157,6 +159,6 @@ To help you learn DevOps I have posed questions and then offered answers so absu
 
 If you want to learn more check out these resources:
 
-* [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](https://www.buildon.aws/concepts/devops-essentials/)
-* [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/)
+* [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](/concepts/devops-essentials/)
+* [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](/posts/how-amazon-does-devops-in-real-life/)
 * [AWS re:Invent 2022 - AWS Well-Architected best practices for DevOps on AWS (DOP207)](https://www.youtube.com/watch?v=hfXokRAyorA)

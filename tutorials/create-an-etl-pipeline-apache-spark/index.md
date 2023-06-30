@@ -8,6 +8,9 @@ tags:
     - spark
     - tutorials
     - aws
+    - emr
+    - apache-spark
+    - s3
 showInHomeFeed: true
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
