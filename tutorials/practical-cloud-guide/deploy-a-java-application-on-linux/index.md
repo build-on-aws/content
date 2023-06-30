@@ -7,14 +7,16 @@ tags:
     - spring-boot
     - lightsail
     - it-pros
+    - ec2
+    - s3
 authorGithubAlias: "spara"
 authorName: "Sophia Parafina"
-date: 2023-05-31
+date: 2023-06-30
 ---
 
-The [previous tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/?sc_channel=el&sc_campaign=practical_cloud_guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Express.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
+The [previous tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/) demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Express.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
 
-This tutorial demonstrates how to deploy a Java application on a Linux Virtual Private Server (VPS) with AWS Lightsail. If you’re unfamiliar with AWS Lightsail check out the overview in the [previous tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/?sc_channel=el&sc_campaign=practical_cloud_guide&sc_geo=mult&sc_country=mult&sc_outcome=acq). We’ll use the previous DevOps scenario where the software is compiled by a CI/CD and stored in an S3 bucket. You copy the software or artifact from AWS S3 bucket or object store to deploy on a Linux VPS.
+This tutorial demonstrates how to deploy a Java application on a Linux Virtual Private Server (VPS) with AWS Lightsail. If you’re unfamiliar with AWS Lightsail check out the overview in the [previous tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/). We’ll use the previous DevOps scenario where the software is compiled by a CI/CD and stored in an S3 bucket. You copy the software or artifact from AWS S3 bucket or object store to deploy on a Linux VPS.
 
 ## What you will learn
 
@@ -22,24 +24,12 @@ This tutorial demonstrates how to deploy a Java application on a Linux Virtual P
 - Configure and deploy a Java SpringBoot application with a launch script or User data.
 - Configure the VPS network with a static IP and open a port for the Java application
 
-## Prerequisites
-
-Before starting this tutorial, you will need the following:
-
-- An AWS account: If you don't already have an account, follow the [Setting Up Your Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=practical_cloud_guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial. For a quick overview for creating account follow the [Create Your AWS Account](http://aws.amazon.com/getting-started/guides/setup-environment/module-one/?sc_channel=el&sc_campaign=practical_cloud_guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) instructions.
-- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials
-- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.
-- [Java](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) installed locally.
-- [Maven](https://maven.apache.org/index.html) installed locally.
-
-## Sections
-
 | Attributes                |                                        |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 100 - Beginner                          |
 | ⏱ Time to complete  | 45 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
-| 🧩 Prerequisites    | - An AWS account: If you don't already have an account, follow the [Setting Up Your Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=practical_cloud_guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial. For a quick overview for creating account follow the [Create Your AWS Account](http://aws.amazon.com/getting-started/guides/setup-environment/module-one/?sc_channel=el&sc_campaign=practical_cloud_guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) instructions.<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials<br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.<br>- [Java](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) installed locally.<br>- [Maven](https://maven.apache.org/index.html) installed locally.|
+| 🧩 Prerequisites    | - An AWS account: If you don't already have an account, follow the [Setting Up Your Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-a-java-application-on-linux&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial. For a quick overview for creating account follow the [Create Your AWS Account](http://aws.amazon.com/getting-started/guides/setup-environment/module-one/?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-a-java-application-on-linux&sc_geo=mult&sc_country=mult&sc_outcome=acq) instructions.<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-a-java-application-on-linux&sc_geo=mult&sc_country=mult&sc_outcome=acq) to get your AWS credentials<br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.<br>- [Java](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-a-java-application-on-linux&sc_geo=mult&sc_country=mult&sc_outcome=acq) installed locally.<br>- [Maven](https://maven.apache.org/index.html) installed locally.<br>- [Java](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-a-java-application-on-linux&sc_geo=mult&sc_country=mult&sc_outcome=acq) installed locally.<br>- [Maven](https://maven.apache.org/index.html) installed locally.|
 | 💻 Code Sample         | [GitHub](https://github.com/build-on-aws/practical-cloud-guide-code/tree/linux-app-deploy/run-to-build/linux-app-deploy)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-05-31                             |
@@ -48,11 +38,12 @@ Before starting this tutorial, you will need the following:
 |-----|
 
 ---
-## Module 1: Clone and compile the application.
+
+## Module 1: Clone and compile the application
 
 ### Overview
 
-The Java application for the tutorial is on Github. You will clone the repository (optional if you have completed this in a previous tutorial). The project uses Maven to compile and package the application into a .jar file. 
+The Java application for the tutorial is on Github. You will clone the repository (optional if you have completed this in a previous tutorial). The project uses Maven to compile and package the application into a `.jar` file.
 
 ### Implementation
 
@@ -85,17 +76,17 @@ In this module, the software is in a GitHub repository. You will clone the repos
 
 > Steps 1-2 are optional if you completed the Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail [tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/).
 
-Step 1: Open the AWS Console and choose Lightsail.
+#### Step 1: Open the AWS Console and choose Lightsail
 
 ![Open AWS Lightsail](./images/PCG-1-lightsail.png)
 
-Step 2: Create an S3 bucket
+#### Step 2: Create an S3 bucket
 
 Choose **Storage**.
 
 ![Choose Storage in the Lightsail menu](./images/lightsail-s3-bucket-1.png)
 
-In the **Create a new bucket** page choose the **5GB storage plan** and name the bucket with a unique name such as `<my>-practical-cloud-guide`. Select **Create Bucket**.
+In the **Create a new bucket** page choose the **5GB storage plan** and name the bucket with a unique name such as `my-practical-cloud-guide`. Please note that S3 bucket names are globally unique, so make sure to pick a name that is available. For the rest of this tutorial, when you see `my-practical-cloud-guide` for the S3 bucket name, please replace it with your bucket name. Select **Create Bucket**.
 
 ![Create an S3 bucket](./images/lightsail-s3-bucket-2.png)
 
@@ -132,13 +123,13 @@ You will use the AWS Lightsail console to instantiate an AWS Linux VPS and confi
 
 ### Implementation instructions
 
-Step 1: Deploy a VPS AWS Linux Server
+#### Step 1: Deploy a VPS AWS Linux Server
 
 Choose **Create instance**.
 
 ![Create a Linux VPS](./images/lightsail-linux-vps-1.png)
 
-Step 2: Choose the instance image
+#### Step 2: Choose the instance image
 
 1. Select Linux/Unix for a platform.
 2. For a Blueprint, choose OS Only.
@@ -146,7 +137,7 @@ Step 2: Choose the instance image
 
 ![Choose Amazon Linux](./images/lightsail-linux-vps-2.png)
 
-Step 3: Configure the VPS with a shell script
+#### Step 3: Configure the VPS with a shell script
 
 Choose **Add launch script**.
 
@@ -161,14 +152,14 @@ export AWS_ACCESS_KEY_ID=<your_access_key>
 export AWS_SECRET_ACCESS_KEY=<your_secret_key>
 export AWS_REGION=<your_aws_region>
 
-aws s3 cp s3://<my>-practical-cloud-guide/HelloBuilder.jar /home/ec2-user/HelloBuilder.jar
+aws s3 cp s3://my-practical-cloud-guide/HelloBuilder.jar /home/ec2-user/HelloBuilder.jar
 sudo yum -y install java-17-amazon-corretto-headless
 java -jar /home/ec2-user/HelloBuilder.jar
 ```
 
 ![Copy code to launch script window](./images/lightsail-linux-vps-5.png)
 
-**Choose your instance plan**. The smallest instance works for this tutorial but larger instances are more performant.
+**Choose your instance plan**. The smallest instance works for this tutorial, but larger instances are more performant.
 
 ![Choose your instance plan.](./images/lightsail-linux-vps-6.png)
 
@@ -180,7 +171,7 @@ Name your instance, for example `Amazon_Linux_2_Java`. Choose **Create instance*
 
 The Lightsail Linux VPS includes both a private and public IP address. However, only `port 22` and `port 80` are open by default. The Java application is running but available on port 8080. In this module, you will configure networking to open `port 8080` and add a static IP address.
 
-Step 1: Open port 8080.
+### Step 1: Open port 8080
 
 Select the name of Linux VPS to open the menu for the instance.
 
@@ -206,7 +197,7 @@ Port `8080` added to the firewall.
 
 ![Port 8080 open.](./images/lightsail-linux-networking-6.png)
 
-Step 2: Add a static IP
+### Step 2: Add a static IP
 
 When a VPS is restarted, a new public IP address is assigned to the instance. You can assign a static IP address so that the application is available at the same address when restarted.
 
@@ -234,7 +225,7 @@ Open a browser to the static IP on port 80 and the Java application returns a pa
 
 To prevent additional costs, delete the Linux VPS created for the tutorial. Deleting the S3 bucket is optional. You can keep the S3 bucket to use with other tutorials.
 
-Step 1: Delete the Amazon Linux server
+### Step 1: Delete the Amazon Linux server
 
 Choose **Instances** in the Lightsail menu and select the three red dots. Choose **Delete**.
 
@@ -244,7 +235,7 @@ Choose **Yes, delete**.
 
 ![Choose Delete.](./images/lightsail-linux-vps-delete-2.png)
 
-Step 2: Delete the S3 bucket (Optional)
+### Step 2: Delete the S3 bucket (Optional)
 
 Choose **Storage** on the Lightsail menu. Select the three vertical dots.
 
@@ -260,7 +251,7 @@ Choose **Force Delete** to delete the files and the S3 bucket.
 
 ## What did you accomplish?
 
-In this module you deployed a Linux VPS using Lightsail. The instance was configured by providing a script to download and install the jar file and a Java JDK to run the SpringBoot application. In a future tutorial, you will use the User Data feature to configure virtual machines or [Elastic Cloud Compute (EC2)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html) instances with a launch script. Note that your AWS credentials were only available at launch and not retained by the VPS.
+In this module you deployed a Linux VPS using Lightsail. The instance was configured by providing a script to download and install the jar file and a Java JDK to run the SpringBoot application. In a future tutorial, you will use the User Data feature to configure virtual machines or Amazon [Elastic Cloud Compute (EC2)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-a-java-application-on-linux&sc_geo=mult&sc_country=mult&sc_outcome=acq) instances with a launch script. Note that your AWS credentials were only available at launch and not retained by the VPS.
 
 Only ports 22 and 80 are open by default in a VPS. With Lightsail, you can open and close ports using the web console instead of manually configuring the network on the server. This is also true for adding a static IP address that ensures the application has a fixed IP address regardless if the instance has been restarted.
 
