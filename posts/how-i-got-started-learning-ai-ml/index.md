@@ -1,5 +1,5 @@
 ---
-title: "How I got started Learning AI-ML?"
+title: "How I Got Started Learning AI/ML"
 description: "My journey into AI/ML shaped my perspective, ignited my passion, and empowered the world around me. From a humble beginning driven by curiosity, I armed the technology to reshape and enhance the life of a gardener. With each step now, AI/ML fuels my determination to unlock a future where intelligence and innovation intertwine to create a better world."
 tags:
   - ai-ml
@@ -10,7 +10,7 @@ authorName: Arun Kumar. S
 date: 2023-06-29
 ---
 
-## Meet Jerry a young community gardener
+## Meet Jerry, a Young Community Gardener
 
 Jerry is a passionate community gardener in the US city where I live. I met him in 2020, when he lost his whole tomato harvest due to early blights. Even after he applied fungicides, the blight spread. The next year, in order to avoid the same problems, he implemented preventative measures, planting disease-resistant cultivars and practicing good hygiene by sanitizing his tools. This time, aphids attacked and destroyed the tomato harvest again.
 
@@ -26,7 +26,7 @@ ML is a specific technique under AI. It uses data to train a model, and you have
 
 ![AI / ML Hierarchy](images/figure1.jpg "Figure 1. AI / ML Hierarchy")
 
-## Combined Approach to solve Jerry’s problem
+## Combined Approach to Solve Jerry’s Problem
 
 I developed a prototype reactive mobile app with reference architecture as below that Jerry uses to submit his plant’s picture. This image is picked by a serverless architecture and goes through multiple stages of iteration. Once the data is ingested a Lambda function processes the image using Amazon Rekognition.
 ![Plant disease prediction architecture](images/figure4.png "Figure 4. Plant disease prediction architecture")
@@ -38,7 +38,7 @@ Once the Plant type is classified then a predictive analysis function takes plac
 Further on the last stage this output is used to identify the user recommendation. Knowledge Graphs, are designed to store and navigate highly connected data, making it suitable for applications that require modeling complex relations and querying large-scale graph datasets. [Amazon Neptune](https://aws.amazon.com/neptune/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a fully managed graph database service that allows me to build, manage, and query graph databases. I'm able to create and manage knowledge graphs by defining entities, relationships, and properties within the graph database, then use graph query languages like SPARQL or Gremlin to traverse and extract information from the graph, enabling powerful knowledge-driven applications. Once a suitable recommendation is identified that is shared to Jerry for his actions.
 I found these AI/ML services can be a powerful tool to share accurate and timely information on plant health and environmental conditions and help jerry to maintain healthy plants productive gardens and, increasing his harvest.
 
-## AI/ML distinction that helped me to get started
+## AI/ML Distinction That Helped Me Get Started
 
 Over the course of finding ways to help Jerry, I learned the basic concepts of AI and ML and types of AI and ML’s available that can be used individually or in combination to address different business problems.
 
@@ -64,13 +64,13 @@ Unsupervised learning: In unsupervised learning, the machine learning model is t
 
 Reinforcement learning: In reinforcement learning, the machine learning model learns to make decisions by interacting with an environment and receiving feedback in the form of rewards or penalties. The goal is to learn a policy that maximizes the cumulative reward over time. This is typically used for sequential decision-making tasks, such as game playing or robotics. [AWS DeepRacer](https://docs.aws.amazon.com/deepracer/latest/developerguide/deepracer-how-it-works-overview-reinforcement-learning.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a perfect example to be quoted that exhibits reinforcement learning behavior
 
-## How can you get started in the world of AI/ML
+## How Can You Get Started in the World of AI/ML
 
 Incorporating AI/ML to solve a real life problem seemed like a difficult experience at first, but with services like Amazon Rekognition, SageMaker and Neptune I was able build a solution for an important problem and help Jerry to be more efficient on his gardening journey.
 
 Now Jerry has a simple mobile interface through which he can submit a snap of the plant’s. the application will analyze the image using Amazon Rekognition, then provide recommendations and insights based on the analysis, leveraging the trained model and knowledge graph stored in Neptune.
 
-### Step - 1 : Socialized to collaborate, Improve positive and productive learning experience and got exposed to diverse perspectives
+### Step - 1 : Socialized to collaborate, improve positive and productive learning experience and got exposed to diverse perspectives
 
 While interacting with others, I got introduced to the material being presented by others, listened to concepts, asked question. By receiving feedback from others helped me understand the material and remember it more effectively.
 
@@ -80,7 +80,7 @@ While interacting with others, I got introduced to the material being presented 
 
 3. Following [blogs](https://aws.amazon.com/blogs/machine-learning/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml), thought leaders and influencers in the AI and ML industry helped me stay up-to-date on the latest trends and technologies, and provide valuable insights and perspectives.
 
-### Step - 2: Attended Formal trainings for structured and comprehensive learning
+### Step - 2: Attended formal trainings for structured and comprehensive learning
 
 1. [Machine Learning University](https://aws.amazon.com/machine-learning/mlu/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) is a place for beginners that helped me with a self-service pathway to understand the foundations of Machine Learning.
 
@@ -100,7 +100,7 @@ While interacting with others, I got introduced to the material being presented 
 
 2. Participating on competitions helped me to develop and refine my skills with specific technology. With repeated participation on events like [AWS Deep racer](https://aws.amazon.com/deepracer/league/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-i-got-started-learning-ai-ml) league increased my proficiency and efficiency with the technology.
 
-## How my journey transformed Jerry's gardening skills
+## How My Journey Transformed Jerry's Gardening Skills
 Following are the words of Jerry. " Ever since I embraced the power of AI/ML based mobile app, my love for growing tomatoes reached new heights. No longer limited by the challenges of pest infections and plant disease, I now have an incredible tool at my fingertips. Together with this symbolic relationship that celebrates the wonders of nature and the limitless potential of technology, not only my tomato harvest increased but I'm looking to extend this capability to my other plant types"
 
 My journey in learning AI/Ml and applying that knowledge to solve jerry's gardening problem led to a remarkable transformation of his gardening skills. This experience showcased the incredible potential of AI/ML to revolutionize traditional gardening practices providing innovative solutions and unlocking new level of success in the world of gardening.
