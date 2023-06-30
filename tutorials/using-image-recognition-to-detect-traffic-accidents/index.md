@@ -46,6 +46,9 @@ Once the transformation steps are complete, we'll export the prepared images to 
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ? |
 | ⏰ Last Updated     | 2023-06-15 |
 
+|ToC|
+|---|
+
 ## Prerequisites
 
 Before starting this guide, you'll need an **AWS account**. If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents) guide for a quick overview.
