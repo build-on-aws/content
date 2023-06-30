@@ -108,7 +108,7 @@ Once the deployment has been completed, let's navigate to the [AWS CloudFormatio
 
 > If you can't find the stack, make sure to choose the correct region by clicking on the name of the currently displayed Region in the navigation bar, and then choosing the Region to which you want to switch. Make sure it is the one that you used when configuring the AWS CLI.
 
-![Screenshot showing the Request Response Example Stack in the AWS CloudFormation console](images\screen-new-stack.png)
+![Screenshot showing the Request Response Example Stack in the AWS CloudFormation console](images/screen-new-stack.png)
 
 Now open and explore the stack details. In  the **Resources** tab you can see that it has deployed **CDKMetadata**, which are some configuration details for the stack.
 
@@ -120,7 +120,7 @@ Let's create an API Gateway that simply redirect any request to an existing URL.
 
 > **Pro tip:** This method is often used as a first step when migrating from a monolithic application to one using microservices and/or serverless functions. Deploying an API Gateway between the client and server creates an abstraction layer, allowing a gradual migration of individual endpoints without having to modify and redeploy the client after every single change. You can start by simply redirecting every route to the legacy app and subsequently switch individual routes to newly creates services, one by one.
 
-To get started, open _lib\request-response-example-stack.ts_ in an editor. 
+To get started, open _lib/request-response-example-stack.ts_ in an editor. 
 
 After removing a few introductory comments it should look similar to this:
 
@@ -279,7 +279,7 @@ In the screenshot below, you can see that CDK wants to deploy two changes that a
 - Allow the Lambda Service (`lambda.amazon.aws`) to assume the IAM Role attached to the Lambda function.
 - Add the `AWSLambdaBasicExecutioRole` permissions to that same IAM Role.
 
-![Screenshot showing the confirmation dialog to deploy AWS IAM changes](images\screen-confirm-permissions.png)
+![Screenshot showing the confirmation dialog to deploy AWS IAM changes](images/screen-confirm-permissions.png)
 
 Type `y` to confirm, and CDK will deploy the new Lambda function along with its IAM Role.
 
