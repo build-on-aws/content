@@ -9,6 +9,11 @@ tags:
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-05-16
+images:
+  banner: images/header_banner.webp
+  thumbnail: images/header_thumb.webp
+  hero: images/header_hero.webp
+  background: images/header_banner.webp
 ---
 
 |ToC|
