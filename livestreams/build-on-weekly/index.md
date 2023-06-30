@@ -37,6 +37,7 @@ Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
 
 | Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
+| S02E21 | Building a Translator Chatbot in <30m!| 2023-06-30  | [Show Notes](/livestreams/build-on-weekly/2023-06-30) |
 | S02E20 | Managing Development Environments| 2023-06-01  | [Show Notes](/livestreams/build-on-weekly/2023-06-01) |
 | S02E19 | Data Mesh Reference Architecture| 2023-05-25  | [Show Notes](/livestreams/build-on-weekly/2023-05-25) |
 | S02E18 | Extract, Transform, Lock and Load| 2023-05-18  | [Show Notes](/livestreams/build-on-weekly/2023-05-18) |
