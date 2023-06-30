@@ -7,18 +7,19 @@ tags:
     - asp-dotnet-core
     - aws
     - it-pros
+    - s3
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-05-31
+date: 2023-06-30
 ---
 
 Deploying applications is a fundamental task for IT Pros. The Run in the Cloud stage of the Practical Cloud Guide for IT Professionals uses AWS Lightsail - a managed service for Virtual Private Servers (VPS), containers, databases, storage, and networking. The goal of the Run in the Cloud is to gain experience working in the cloud without building a cloud infrastructure.
 
 ## Lightsail Introduction
 
-For this task you will deploy an ASP.NET Core application on IIS in Windows Server. The application is simple web applications but requires installing and configuring IIS in addition to deploying it. 
+For this task you will deploy an ASP.NET Core application on IIS in Windows Server. The application is simple web applications but requires installing and configuring IIS in addition to deploying it.
 
-Let’s begin with a AWS Lightsail overview to familiarize working with this service. Note that this is brief introduction to get familiar with the service. If you want to get started on the tutorial, go to [Module 1](#module-1-clone-the-repository-and-compile)
+Let’s begin with an AWS Lightsail overview to familiarize working with this service. Note that this is brief introduction to get familiar with the service. If you want to get started on the tutorial, go to [Module 1](#module-1-clone-the-repository-and-compile)
 
 Open the AWS Console in a browser and use the search bar to find AWS Light Sail.
 
@@ -47,10 +48,10 @@ In this tutorial you will create a Windows Server 2022 instance and deploy a ASP
 | ✅ AWS Level | Intermediate - 200 |
 | ⏱ Time to complete  | 45 mins |
 | 💰 Cost to complete| Free Tier eligible |
-|  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/).<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials <br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.<br> - [.NET](https://dotnet.microsoft.com/en-us/download) installed <br>- [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3) for your operating system. |
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](clone https://github.com/build-on-aws/practical-cloud-guide-code) |
+|  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq).<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq) to get your AWS credentials <br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system.<br> - [.NET](https://dotnet.microsoft.com/en-us/download) installed <br>- [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3) for your operating system. |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/practical-cloud-guide-code) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-05-31  |
+| ⏰ Last Updated     | 2023-06-30  |
 
 | ToC |
 |-----|
@@ -59,9 +60,9 @@ In this tutorial you will create a Windows Server 2022 instance and deploy a ASP
 
 ## Overview
 
-In [DevOps](https://www.buildon.aws/concepts/devops-essentials), applications are typically built with Continuous Integration (CI) software. Code is pushed into the CI by developers where it is built and tested and released into cloud storage. 
+In [DevOps](/concepts/devops-essentials), applications are typically built with Continuous Integration (CI) software. Code is pushed into the CI by developers where it is built and tested and released into cloud storage.
 
-This tutorial is based on a scenario where a compiled and packaged application has been pushed into [object storage (AWS S3)](https://aws.amazon.com/what-is/object-storage/) by a CI process. We'll simulate that uploading the application and an IIS configuration script to AWS S3. Note that the configuration script is for deploying and configuring the application on the Windows 2022 server and is not part of a Continuous Delivery (CD) process.
+This tutorial is based on a scenario where a compiled and packaged application has been pushed into [object storage (AWS S3)](https://aws.amazon.com/what-is/object-storage/?sc_channel=el&sc_campaign=tutorial&sc_content=deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq) by a CI process. We'll simulate that uploading the application and an IIS configuration script to AWS S3. Note that the configuration script is for deploying and configuring the application on the Windows 2022 server and is not part of a Continuous Delivery (CD) process.
 
 ## Module 1: Clone the repository and compile
 
@@ -69,7 +70,7 @@ In this module, the software and deployment script is in a GitHub repository. Yo
 
 ### Implementation instructions
 
-Step 1: Clone the `practical-cloud-guide-code` repository. Build and zip the application. 
+Step 1: Clone the `practical-cloud-guide-code` repository. Build and zip the application.
 
 ```bash
 git clone https://github.com/build-on-aws/practical-cloud-guide-code
@@ -147,7 +148,7 @@ The files will be added to the **Object list**.
 
 ## Module 3: Deploy Windows 2022 Server
 
-A common task is to deploy a Windows Server configured with IIS. We will use the AWS Lightsail console to instantiate Windows Server 2000 and configure it to install .NET core and IIS with a Powershell script. 
+A common task is to deploy a Windows Server configured with IIS. We will use the AWS Lightsail console to instantiate Windows Server 2000 and configure it to install .NET core and IIS with a Powershell script.
 
 ### Implementation instructions
 
@@ -165,7 +166,7 @@ Choose an instance plan, for this tutorial you can use the smallest plan, but la
 
 ![Choose an instance plan](./images/PCG-9-lightsail.png)
 
-Add a script to create a directory and download the application and deploy script. Copy this script intp the **Launch script** input box. Replace the values for the access key, security key, and region with your account.
+Add a script to create a directory and download the application and deploy script. Copy this script into the **Launch script** input box. Replace the values for the access key, security key, and region with your account.
 
 ```powershell
 <powershell>
