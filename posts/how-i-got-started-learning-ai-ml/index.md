@@ -103,5 +103,5 @@ Following are the words of Jerry. " Ever since I embraced the power of AI/ML bas
 
 My journey in learning AI/Ml and applying that knowledge to solve jerry's gardening problem led to a remarkable transformation of his gardening skills. This experience showcased the incredible potential of AI/ML to revolutionize traditional gardening practices providing innovative solutions and unlocking new level of success in the world of gardening.
 
-Go Build and Enjoy solving real world problems!!!
+Go Build and Enjoy solving real world problems!
 
