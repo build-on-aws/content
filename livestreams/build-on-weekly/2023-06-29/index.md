@@ -22,7 +22,7 @@ Try it out at home using the demo code here: [AWS Chatbot Translator](https://gi
 
 Check out the recording here:
 
-[Building a Translator Chatbot in <30m!](https://www.twitch.tv/videos/1860069336)
+https://www.twitch.tv/videos/1860069336
 
 ## Links from today's episode
 
