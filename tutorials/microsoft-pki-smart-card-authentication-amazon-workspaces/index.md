@@ -452,8 +452,7 @@ Use the WorkSpaces client to test smart card authentication:
 
 * Download the latest [WorkSpaces client](https://clients.amazonworkspaces.com/) and open the client.
 * Enter your registration code for your directory when prompted
-* Select **Insert your smart card**, and
-* Select your user’s certificate when prompted.  
+* Select **Insert your smart card** and select your user’s certificate when prompted.  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to select a certificate for authentication](./images/34-WorkSpaces-Client-with-Certificate-Dialog.png)
 
 * Enter the smart card pin when prompted:  
@@ -536,7 +535,7 @@ Use the WorkSpaces client to test smart card authentication:
 
 ## Troubleshooting
 
-1. Certificate validation failed error in the WorkSpaces client:  
+### Certificate validation failed error in the WorkSpaces client:  
 ![Image showing the WorkSpaces client returning a "Unable to sign in" "Certification validation failed" error](./images/43-WorkSpaces-client-returning-Unable-to-sign-in.png)
     Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused due to various reasons including the following:
     * The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to [this](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/enable-clientauth.html#step1?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
@@ -547,19 +546,19 @@ Use the WorkSpaces client to test smart card authentication:
     * A proxy or local networking configuration is interfering with the authentication process.
     * A packet capture on the self-managed domain controllers during authentication may be necessary to pinpoint the root cause. If using AWS Managed Microsoft AD (of size large) and need to take a packet capture, you can use [Traffic Mirroring](https://docs.aws.amazon.com/vpc/latest/mirroring/what-is-traffic-mirroring.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-2. WorkSpaces client returns an error - Unknown Error Occurred:  
+### Unknown Error Occurred in the WorkSpaces client:  
 ![Image showing the WorkSpaces client returning a "Unknown Error Occurred" error](./images/40-WorkSpaces-client-returning-Unknown-Error-Occurred.png)
 This indicates that the mutual TLS authentication with AD Connector was successful, but an issue prevented the client from starting smart card authentication. This can be caused by the following:
     * The WSP GPO template to enable smart card redirection is not configured or is set to deny.
     * The user certificate fails to be redirected into the WorkSpace.
 
-3. At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication:  
+### At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication:  
 ![Image showing the Windows logon page returning a "Signing in with a smart card is not supported for your account error](./images/41-Windows-logon-page-returning-Signing-smart-card-is-not-supported.png)
     The above error indicates a Windows OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
     * The domain controller authenticating the user does not have a certificate in the personal store. Review the Event Viewer logs on the WorkSpace.
     * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and ensure it is trusted.
     * The user’s certificate is not configured correctly for Windows smart card authentication.
-4. At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication:  
+### At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication:  
 ![Image showing the Linux logon page returning a Sorry, that did not work Please try again. error when entering a smart card PIN](./images/42-Linux-logon-page-returning-Sorry-that-did-not-work.png)
     The above error indicates a Linux OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
     * The custom image used to create the WorkSpace does not have the correct certificates in the certificate chain added in the image.
