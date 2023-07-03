@@ -13,6 +13,8 @@ date: 2023-07-03
 |ToC|
 |---|
 
+## Challenges
+
 When working with AWS API Gateway, there are several challenges you may encounter. Particularly in terms of observability, here are some challenges:
 
 - **Metrics and Monitoring**: API Gateway offers some basic metrics and monitoring capabilities, but they might not be sufficient for in-depth observability. You may need to integrate with AWS CloudWatch or other monitoring solutions to collect and analyze metrics like latency, error rates, and request throughput, etc.
@@ -21,8 +23,6 @@ When working with AWS API Gateway, there are several challenges you may encounte
 - **Scalability and Performance**: As API traffic grows, ensuring scalability and optimal performance becomes crucial. Monitoring and observability can help you identify bottlenecks, optimize resource allocation, and monitor the overall health and performance of backend services of the API Gateway.
 
 To overcome these challenges, it is essential to leverage additional AWS services, third-party monitoring tools, open-source frameworks to enhance observability. By combining these tools and best practices, you can gain better insights into your API Gateway, identify performance issues, debug problems, and ensure a seamless experience for your users.
-
-## Challenges
 
 Let's look at a situation. I possess a SaaS product that offers APIs through an API Gateway to clients. Each client has the capability to generate multiple API keys for various purposes. Furthermore, each API key can be linked to a different predefined usage plan.
 
