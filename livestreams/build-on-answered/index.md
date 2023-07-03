@@ -39,8 +39,8 @@ This show is as interactive as our audience makes it, so join us as we work thro
 Join us for our upcoming episodes!
 | Episode | Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|
-| **Episode 2** | March 15 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/schedule?segmentID=66b79c55-62ee-4904-bbf8-1bfd5c84e2f4) | [Show Notes](./2023-03-15) |
-| **Episode 6** -- Terraform| June 07|| [Show Notes](./2023-06-07)|
-| **Episode 7** -- Resilient Architectures| June 21 | | [Show Notes](./2023-06-21)|
+| **Episode 2** | March 15 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/schedule?segmentID=66b79c55-62ee-4904-bbf8-1bfd5c84e2f4) | [Show Notes](2023-03-15) |
+| **Episode 6** -- Terraform| June 07|| [Show Notes](2023-06-07)|
+| **Episode 7** -- Resilient Architectures| June 21 | | [Show Notes](2023-06-21)|
 
 
