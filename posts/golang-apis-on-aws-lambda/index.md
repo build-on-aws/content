@@ -1,6 +1,6 @@
 ---
-title: Can I run existing Go applications on AWS Lambda?
-description: Learn how to run Go REST APIs as AWS Lambda functions using the AWS Lambda Go API Proxy.
+title: How do I run my Go applications in a Serverless way?
+description: Learn how to run Go REST APIs as Lambda functions using the AWS Lambda Go API Proxy.
 tags:
   - lambda
   - serverless
@@ -12,17 +12,14 @@ authorName: Abhishek Gupta
 date: 2023-07-14
 ---
 
-Alternate title suggestions:
-
-- Can I lift and shift existing Go applications to AWS Lambda?
-- Can I run existing Go applications as AWS Lambda functions?
-- How do I run my Go applications in a Serverless way?
+|ToC|
+|---|
 
 The [Go](http://go.dev/) programming language has always had rich support for building REST APIs. This includes an [excellent standard library (net/http)](https://pkg.go.dev/net/http) along with many popular packages such as [gorilla mux](https://github.com/gorilla/), [Gin](https://github.com/gin-gonic/gin), [negroni](https://github.com/urfave/negroni), [echo](https://echo.labstack.com/), [fiber](https://github.com/gofiber/fiber) etc.
 
-Thanks to the [AWS Lambda Go runtime](https://docs.aws.amazon.com/lambda/latest/dg/golang-handler.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq), you can use Go to build AWS Lambda functions. Imagine a web app that needs to authenticate users, store user data, and send emails. A Serverless approach for this would to implement each functionality/API as a separate Lambda function. For example, you could have a Lambda function to handle user registration, another to handle user login, and so on.
+Thanks to the [AWS Lambda Go runtime](https://docs.aws.amazon.com/lambda/latest/dg/golang-handler.html?sc_channel=el&sc_campaign=appswave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq), you can use Go to build AWS Lambda functions. Imagine a web app that needs to authenticate users, store user data, and send emails. A Serverless approach for this would to implement each functionality/API as a separate Lambda function. For example, you could have a Lambda function to handle user registration, another to handle user login, and so on.
 
-This is great if you are building everything from scratch. But what if you wanted to run existing Go REST APIs as AWS Lambda functions? 
+This is great if you are building everything from scratch. But what if you wanted to run existing Go REST APIs as AWS Lambda functions?
 Broadly speaking, you would need to:
 
 1. Split the existing code into multiple Lambda functions.
@@ -30,7 +27,7 @@ Broadly speaking, you would need to:
 
 With the **AWS Lambda Go API Proxy**, there is an easier way!
 
-This blog will demonstrate how to run existing Go frameworks based APIs in a serverless way with AWS Lambda and Amazon API Gateway. You will walk through simple code examples for `net/http` package, `gorilla` and `echo` framework to understand how they work and deploy them using [AWS Serverless Application Model](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+This blog will demonstrate how to run existing Go frameworks based APIs in a serverless way with AWS Lambda and Amazon API Gateway. You will walk through simple code examples for `net/http` package, `gorilla` and `echo` framework to understand how they work and deploy them using [AWS Serverless Application Model](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html?sc_channel=el&sc_campaign=appswave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 > The code is available in this [GitHub repository](https://github.com/build-on-aws/golang-apis-on-aws-lambda)
 
@@ -38,7 +35,7 @@ Let's start with a brief introduction to the AWS Lambda Go API Proxy.
 
 ## AWS Lambda Go API Proxy: How does it work?
 
-The [aws-lambda-go-api-proxy](https://github.com/awslabs/aws-lambda-go-api-proxy) package makes it easy to run Go APIs written using frameworks (such as Gin) with AWS Lambda and [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). In addition to adapter implementations for the `net/http` (Go standard library) and other frameworks such as `gorilla/mux`, `echo`, etc., `aws-lambda-go-api-proxy` also declares a `core` package that contains utility methods and interfaces to translate API Gateway proxy events into Go's default `http.Request` and `http.ResponseWriter` objects and allows you to adapt *any* framework to the AWS Lambda Go runtime.
+The [aws-lambda-go-api-proxy](https://github.com/awslabs/aws-lambda-go-api-proxy) package makes it easy to run Go APIs written using frameworks (such as Gin) with AWS Lambda and [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=appswave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). In addition to adapter implementations for the `net/http` (Go standard library) and other frameworks such as `gorilla/mux`, `echo`, etc., `aws-lambda-go-api-proxy` also declares a `core` package that contains utility methods and interfaces to translate API Gateway proxy events into Go's default `http.Request` and `http.ResponseWriter` objects and allows you to adapt *any* framework to the AWS Lambda Go runtime.
 
 ![How does the AWS Lambda Go API Proxy work](images/arch.jpg)
 
@@ -79,8 +76,8 @@ func main() {
 }
 ```
 
-- In the `init` function: `gorillamux.New` function takes in a `mux.Router` (which has the `HTTP` `GET` route defined) and returns a `gorillamux.GorillaMuxAdapter`. 
-- In the `Handler` implementation: 
+- In the `init` function: `gorillamux.New` function takes in a `mux.Router` (which has the `HTTP` `GET` route defined) and returns a `gorillamux.GorillaMuxAdapter`.
+- In the `Handler` implementation:
   - The `Proxy` (or `ProxyWithContext`) method of the `gorillamux.GorillaMuxAdapter` object receives the `events.APIGatewayProxyRequest`, converts it into a `http.Request` object, and sends it to the `mux.Router` for routing.
   - It returns a proxy response object (`events.APIGatewayProxyResponse`) generated from the data written to the response writer (`http.ResponseWriter`).
 
@@ -117,9 +114,9 @@ func main() {
 
 The concept is similar to the previous example.
 
-- The `init` function sets up the router (`echo.Echo`) and passes it into the `echoadapter.New` thar returns a `echoadapter.EchoLambda` (the adapter implementation). 
+- The `init` function sets up the router (`echo.Echo`) and passes it into the `echoadapter.New` thar returns a `echoadapter.EchoLambda` (the adapter implementation).
 - In the `Handler` function:  
-  - The `ProxyWithContext` method of the `echoadapter.EchoLambda` object receives the `events.APIGatewayProxyRequest` object and converts it into an `http.Request` object and sends it to `echo.Echo` for routing. 
+  - The `ProxyWithContext` method of the `echoadapter.EchoLambda` object receives the `events.APIGatewayProxyRequest` object and converts it into an `http.Request` object and sends it to `echo.Echo` for routing.
   -  It returns a proxy response object (`events.APIGatewayProxyResponse`) generated from the data written to the response writer (`http.ResponseWriter`).
 
 ### net/http package
@@ -147,7 +144,7 @@ func main() {
 }
 ```
 
-- To use with the standard library, the `httpadapter.New` function takes in a `http.Handler` (which has the route defined) and returns a `httpadapter.HandlerAdapter` object. 
+- To use with the standard library, the `httpadapter.New` function takes in a `http.Handler` (which has the route defined) and returns a `httpadapter.HandlerAdapter` object.
 - The `ProxyWithContent` method on the `httpadapter.HandlerAdapter` can then be used as a Lambda handler.
 
 Let's see how this works in practice.
@@ -158,7 +155,7 @@ Let's deploy each of these functions to AWS Lambda using the SAM CLI.
 
 ### Pre-requisites
 
-Before you proceed, make sure you have the [Go programming language](https://go.dev/dl/) (**v1.18** or higher) and [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) installed.
+Before you proceed, make sure you have the [Go programming language](https://go.dev/dl/) (**v1.18** or higher) and [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html?sc_channel=el&sc_campaign=appswave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) installed.
 
 Clone the project and change to the right directory:
 
@@ -209,11 +206,11 @@ SAM configuration file [samconfig.toml]: <press enter>
 SAM configuration environment [default]: <press enter>
 ```
 
-Once the deployment is complete, navigate to AWS `CloudFormation` console to check the deployed stack and associated resources. These include the Lambda function, [API Gateway (REST API)](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq), IAM role, etc.
+Once the deployment is complete, navigate to AWS `CloudFormation` console to check the deployed stack and associated resources. These include the Lambda function, [API Gateway (REST API)](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html?sc_channel=el&sc_campaign=appswave&sc_content=golang-apis-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq), IAM role, etc.
 
 ![AWS CloudFormation stack](images/cfn.jpg)
 
-You should see the API Gateway endpoint as the SAM CLI output (it will be different in your case) or the `CloudFormation` **Outputs** section. 
+You should see the API Gateway endpoint as the SAM CLI output (it will be different in your case) or the `CloudFormation` **Outputs** section.
 
 ```bash
 -----------------------------------------------------------------------------------------------------
