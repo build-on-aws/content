@@ -1,5 +1,5 @@
 ---
-title: "Build On Live: Answered Episode 7 Show Notes"
+title: "Build On Live: Answered Episode 7 Show Notes - Resilient Architecture"
 description: "Join us for Build On Live: Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - build-on-live
@@ -23,7 +23,7 @@ spaces:
 
 Join us for Episode 7 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
-In this episode we will be focusing on resilient systems. We have selected some of the top viewed questions in the AWS Collective and built code and demos around the best answers to those questions!
+In this episode we will be focusing on resilient architectures. We have selected some of the top viewed questions in the AWS Collective and built code and demos around the best answers to those questions!
 
 https://www.twitch.tv/videos/1856494950 
 

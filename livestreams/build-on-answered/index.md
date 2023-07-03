@@ -9,12 +9,17 @@ tags:
     - twitch
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
+additionalAuthors: 
+  - authorGithubAlias: cobusbernard
+    authorName: Cobus Bernard
+  - authorGithubAlias: juliegund
+    authorName: Julie Gunderson
 date: 2022-03-10
 images:
-  banner: ./build-on-answered.png
-  thumbnail: ./build-on-answered.png
-  hero: ./build-on-answered.png
-  background: ./build-on-answered.png
+  banner: ./images/build-on-answered.png
+  thumbnail: ./images/build-on-answered.png
+  hero: ./images/build-on-answered.png
+  background: ./images/build-on-answered.png
 ---
 
 Join us for Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
@@ -34,6 +39,8 @@ This show is as interactive as our audience makes it, so join us as we work thro
 Join us for our upcoming episodes!
 | Episode | Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|
-| **Episode 2** | Wednesday March 15 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/schedule?segmentID=66b79c55-62ee-4904-bbf8-1bfd5c84e2f4) | Show Notes TBD |
+| **Episode 2** | March 15 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/schedule?segmentID=66b79c55-62ee-4904-bbf8-1bfd5c84e2f4) | [Show Notes](/livestreams/build-on-answered/2023-03-15) |
+| **Episode 6** -- Terraform| June 07|| [Show Notes](/livestreams/build-on-answered/2023-06-07)|
+| **Episode 7** -- Resilient Architectures| June 21 | | [Show Notes](/livestreams/build-on-answered/2023-06-21)|
 
 
