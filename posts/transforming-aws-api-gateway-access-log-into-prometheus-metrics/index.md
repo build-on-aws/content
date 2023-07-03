@@ -288,7 +288,7 @@ Let's delve deeper into the configuration details:
 
 - Next, we have two **`transforms`** configured: `apigw_access_log_transformed` and `apigw_access_log_2_metrics`. These transforms serve specific purposes:
 
-    - The `apigw_access_log_transformed` transform is responsible for modifying any `*path*` field that contains more than one digest into *`{id}`*. Here's an example:
+    - The `apigw_access_log_transformed` transform is responsible for modifying any `path` field that contains more than one digest into *`{id}`*. Here's an example:
     
         Before transforming:
 
