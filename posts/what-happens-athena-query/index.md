@@ -1,21 +1,27 @@
 ---
-title: "What happens when you run a query in Athena?"
+title: "What happens when you run a query in Amazon Athena?"
 description: "A step-by-step walkthrough of what happens behind the scenes when you click the RUN button in Athena."
 tags:
   - data-engineering
   - athena
   - sql
+  - glue
+  - glue-data-catalog
+  - presto
 authorGithubAlias: dacort
 authorName: Damon Cortesi
-date: 2023-06-27
+date: 2023-07-03
 ---
+
+|ToC|
+|---|
 
 Hi folks, Damon here. Today I want to walk through you through what happens when you hit "SUBMIT" on the Athena console and run a query. First, a little background. I first heard about Athena when it was announced in 2016. I had just finished building a fairly typical data pipeline at the time, with data being extracted from operational databases and third-party APIs to S3, loaded into a staging data warehouse, and curated into a production data warehouse. I was floored with how easy Athena would have made several stages of my pipeline and within a year I was working as a Big Data Architect within AWS helping customers make use of EMR, Athena, and Glue. One of the most common topics of conversations was around exactly how Athena works and how to optimize queries for Athena. I've heard how people think that Athena is a Magical Mystery SQL box, but in reality it's fairly straight-forward how queries get executed. And the more you understand about it, the better you can optimize it! Let's get started.
 
 First, let's call out the three main components you generally work with when using Athena.
 
 1. Amazon S3 - When Athena first launched, it only supported data stored in S3. Today, you can make use of federated queries for any data source you want, but the majority of data queried by Athena resides in S3.
-2. Glue Data Catalog - Athena stores table definitions, incuding the location and type of data, in the Glue Data Catalog.
+2. AWS Glue Data Catalog - Athena stores table definitions, including the location and type of data, in the Glue Data Catalog.
 3. Athena itself - This is the execution engine that Athena uses to query your data. Originally, Athena was powered by Presto, a distributed query engine that was open sourced by Facebook. Today, Athena uses a derivative of that engine known as Trino and can also run queries using the open source Apache Spark engine. A lot changes in 7 years. 😁
 
 **Important!** A quick note to say what I _won't_ be talking about. I won't dive into the underlying query engines too much and I also won't discuss the inner workings of how the Athena Control Plane or Data Plane works.
@@ -37,7 +43,7 @@ Now, let's get started with a everyone's favorite data type - a CSV file sitting
 | 1   | Damon  | 2023-04-18    |
 | 2   | dacort | 2023-04-22    |
 
-We'll assume you already have this file located in S3. If not and you have a shell prompt and the AWS CLI handy, you can run this command to make one. 
+We'll assume you already have this file located in S3. If not and you have a shell prompt and the AWS CLI handy, you can run this command to make one.
 
 ```bash
 echo -e "id,name,last_login_at\n1,Damon,2023-04-18\n2,dacort,2023-04-22" \
@@ -147,9 +153,9 @@ aws glue get-table --database-name default --name csv_demo
 
 Let's take a quick pause to discuss an important component here - `SerDe`. What the heck is a SerDe and what is used for?!
 
-`SerDe`s are Java classes that tell Athena how to handle the data (it's short for Serializer/Deserializer). The Glue Data Catalog lets you create a table with _ANY_ SerDe and this is another area where I see folks get stuck. While Athena [supports many popular data formats](https://docs.aws.amazon.com/athena/latest/ug/supported-serdes.html) like CSV, JSON, Parquet, and ORC, it doesn't support _every_ format. In addition, there can even be different SerDes for the same data type. Athena supports `LazySimpleSerDe` and `OpenCSVSerDe` for processing CSV files. For JSON, there's also both Hive JSON SerDe and OpenX JSON SerDe. Which SerDe you use depends on your data format and what features of that data format the SerDe itself supports. 
+`SerDe`s are Java classes that tell Athena how to handle the data (it's short for Serializer/Deserializer). The Glue Data Catalog lets you create a table with _ANY_ SerDe and this is another area where I see folks get stuck. While Athena [supports many popular data formats](https://docs.aws.amazon.com/athena/latest/ug/supported-serdes.html?sc_channel=el&sc_campaign=datamlwave&sc_content=what-happens-athena-query&sc_geo=mult&sc_country=mult&sc_outcome=acq) like CSV, JSON, Parquet, and ORC, it doesn't support _every_ format. In addition, there can even be different SerDes for the same data type. Athena supports `LazySimpleSerDe` and `OpenCSVSerDe` for processing CSV files. For JSON, there's also both Hive JSON SerDe and OpenX JSON SerDe. Which SerDe you use depends on your data format and what features of that data format the SerDe itself supports.
 
-I should also note that no data is "imported" into Athena and there's no data conversion happening or anything like that. Athena is just telling the Glue Data Catalog "Hey, here's a table. It's located in this place in S3 and it uses this format. kthx!"
+I should also note that no data is "imported" into Athena and there's no data conversion happening or anything like that. Athena is just telling the Glue Data Catalog "Hey, here's a table. It's located in this place in S3 and it uses this format. Kthx!"
 
 ```mermaid
 sequenceDiagram
@@ -191,7 +197,7 @@ Now that Athena knows where the data is and the format to use, it's time to read
 
 ### Execution
 
-Athena uses the information above to plan your query and once that's done, it can begin to distribute the work of reading and analyzing the data to it's workers. As a distributed query engine, Athena scales out the work of reading the various files from S3 to a larger number of worker systems. 
+Athena uses the information above to plan your query and once that's done, it can begin to distribute the work of reading and analyzing the data to it's workers. As a distributed query engine, Athena scales out the work of reading the various files from S3 to a larger number of worker systems.
 
 1. Athena splits the work into chunks and communicates the work to be performed to the various workers.
 2. For each object on S3, the worker nodes call `GetObject` to retrieve the data from S3.
@@ -210,11 +216,12 @@ Now that Athena has queried the files – potentially distributing the work of r
 
 For `SELECT` queries, Athena will create a new CSV file in your "Query result location" S3 bucket. As the coordinator node aggregates results from the workers nodes, it writes it into this file.
 
-> **Important Pro Tip**: If you're using `SELECT *` to generate a large result set, look into the [`UNLOAD` statement](https://docs.aws.amazon.com/athena/latest/ug/unload.html).
+> **Important Pro Tip**: If you're using `SELECT *` to generate a large result set, look into the [`UNLOAD` statement](https://docs.aws.amazon.com/athena/latest/ug/unload.html?sc_channel=el&sc_campaign=datamlwave&sc_content=what-happens-athena-query&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 When writing is finished, Athena can begin showing the results to you. It does this simply by reading the results file from S3 and showing it to you in the console!
 
 It's also important to note something else here - Athena is asynchronous and stateless - what does that mean?
+
 - You don't have to stick around in the console to wait for results to come back.
 - You can look at the results from previous queries (for up to 45 days).
 - Athena wants to reuse the compute resources used by your query, which is why it writes the results to S3.
@@ -247,8 +254,6 @@ sequenceDiagram
     Athena ->> You: Show results!
 ```
 
-
-
 ## Advanced Queries
 
 Now, a `SELECT *` is quite straightforward. Athena opens and reads data files from S3, aggregates it into a single node, and writes it back out to S3. Where things start to get interesting is when you change up file formats, aggregate data, or partition your data. We'll talk through all of these use-cases below and how they impact Athena queries.
@@ -257,18 +262,18 @@ Now, a `SELECT *` is quite straightforward. Athena opens and reads data files fr
 
 One of the benefits of Athena is that you can "partition" your data in S3 by using slash-delimited prefixes. This is a way to reduce the amount of data scanned by your query by only reading the relevant files.
 
-For example, you can seperate your data by year, month, and day if your query patterns usually filter data by dates. In S3, it would look like this.
+For example, you can separate your data by year, month, and day if your query patterns usually filter data by dates. In S3, it would look like this.
 
-```
+```text
 s3://your-bucket/data/2023/05/10/data1.csv
 s3://your-bucket/data/2023/05/10/data2.csv
 s3://your-bucket/data/2023/05/09/data3.csv
 s3://your-bucket/data/2023/05/08/data1.csv
 ```
 
-You can also use something called Hive-style partitioning. This allows Athena (and other query engines) to infer the name of the partition from the path. 
+You can also use something called Hive-style partitioning. This allows Athena (and other query engines) to infer the name of the partition from the path.
 
-```
+```text
 s3://your-bucket/data/year=2023/month=05/day=10/data1.csv
 s3://your-bucket/data/year=2023/month=05/day=10/data2.csv
 s3://your-bucket/data/year=2023/month=05/day=09/data3.csv
@@ -280,7 +285,6 @@ Where this can be really beneficial is if you typically filter your queries on t
 ```sql
 SELECT * FROM sample_data WHERE some_field = 'ok'
 ```
-
 
 ```mermaid
 sequenceDiagram
@@ -311,7 +315,6 @@ Without a partition field in your `WHERE` query, Athena needs to scan all of the
 SELECT * FROM sample_data
 WHERE year='2023' AND month='05' AND day='09' AND some_field = 'ok'
 ```
-
 
 ```mermaid
 sequenceDiagram
@@ -366,10 +369,10 @@ Imagine you want to `COUNT(*)` from a 50GB CSV file. Regardless of which query e
 
 For Parquet, you read a few bytes of the header and you're done. Seriously. Parquet is a binary file format and right at the top of the file is a little metadata that says "this file has X number of rows of data in it". This is why file formats like Parquet and ORC are so great for analytics - the hard work of counting things is already done by whomever generated the file! Not only that, for some data types Parquet even stores what the minimum or maximum values are for the whole column!
 
-For a quick comparision, I ran a `COUNT(*)` over 12GB of CSV files with Athena. It took 5.163 seconds and scanned (aka, listed, fetched, opened, parsed) all 12GB. I converted the dataset to Parquet and ran the same `COUNT(*)`. Run time? 840ms. Data scanned? 0. (_This is because we were able to use the file metadata to get the answer so Athena had to scan no data!!_)
+For a quick comparison, I ran a `COUNT(*)` over 12GB of CSV files with Athena. It took 5.163 seconds and scanned (aka, listed, fetched, opened, parsed) all 12GB. I converted the dataset to Parquet and ran the same `COUNT(*)`. Run time? 840ms. Data scanned? 0. (_This is because we were able to use the file metadata to get the answer so Athena had to scan no data!!_)
 
 ## Wrap It Up
 
-I hope this article has been useful for you to understand what happens behind the scenes when you run an Athena query. 
+I hope this article has been useful for you to understand what happens behind the scenes when you run an Athena query.
 
-If you'd like to learn more about how to improve your query performance, be sure to check out the [performance tuning tips for Athena](https://aws.amazon.com/blogs/big-data/top-10-performance-tuning-tips-for-amazon-athena/).
+If you'd like to learn more about how to improve your query performance, be sure to check out the [performance tuning tips for Athena](https://aws.amazon.com/blogs/big-data/top-10-performance-tuning-tips-for-amazon-athena/?sc_channel=el&sc_campaign=datamlwave&sc_content=what-happens-athena-query&sc_geo=mult&sc_country=mult&sc_outcome=acq).
