@@ -24,8 +24,6 @@ Companies today are making sustainability a key goal for their business in order
 - How to build a Rust application for AWS Graviton
 - How to port an existing Rust application to AWS Graviton
 
-## Sections
-
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 200 - Intermediate                          |
@@ -55,9 +53,13 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 To checkout the example project go to [building-rust-applications-for-aws-graviton](https://github.com/build-on-aws/building-rust-applications-for-aws-graviton) and clone the repository. You should now have a `rust-link-shortener` directory containing all of the appropriate code. Check out the code on both your x86 instance and your AWS Graviton Instance.
 
+```bash
+git clone https://github.com/build-on-aws/building-rust-applications-for-aws-graviton
+```
+
 ### DynamoDB Setup
 
-The link shortener application will leverage DynamoDB as its data store. Our Dynamo table will run in OnDemand mode. Lets create a table called “url_shortener” with a Partition Key of “short_url” for our application to use.
+The link shortener application will leverage DynamoDB as its data store. Our Dynamo table will run in OnDemand mode. Lets create a table called `url_shortener` with a Partition Key of `short_url` for our application to use.
 
 ![DynamoDB Setup](images/dynamo-setup.jpg)
 
@@ -65,7 +67,7 @@ Notice we have a Partition Key of **short_url(String)** and a Capacity mode of *
 
 ## Compiling for X86
 
-On your `c5.xlarge` instance navigate to the `rust-link-shortener` directory and run the following command to build the application:
+On your `c5.xlarge` instance navigate to the `building-rust-applications-for-aws-graviton` directory and run the following command to build the application:
 
 ```rust
 cargo build --release
@@ -81,11 +83,11 @@ user    10m6.078s
 sys    0m25.774s
 ```
 
-Navigate to the `rust-link-shortener/target/release` directory and the `rust-link-shortener` binary will be there ready for launch. To launch it run `./rust-link-shortener`. The application is configured to run on port 8000 and listen on all interfaces for the purposes of this demo.
+Navigate to the `target/release` directory and the `rust-link-shortener` binary will be there ready for launch. To launch it run `./rust-link-shortener`. The application is configured to run on port 8000 and listen on all interfaces for the purposes of this demo.
 
 ## Compiling for AWS Graviton (arm64)
 
-On your `c6g.xlarge` instance navigate to the `rust-link-shortener` directory and run the following command to build the application:
+On your `c6g.xlarge` instance navigate to the `building-rust-applications-for-aws-graviton` directory and run the following command to build the application:
 
 ```rust
 cargo build --release
@@ -101,7 +103,7 @@ user    12m57.304s
 sys    0m26.632s
 ```
 
-Navigate to the `rust-link-shortener/target/release` directory and the `rust-link-shortener` binary will be there ready for launch. To launch it run `./rust-link-shortener`. The application is configured to run on port 8000 and listen on all interface for the purposes of this demo.
+Navigate to the `target/release` directory and the `rust-link-shortener` binary will be there ready for launch. To launch it run `./rust-link-shortener`. The application is configured to run on port 8000 and listen on all interface for the purposes of this demo.
 
 ## Testing the Application
 
@@ -128,7 +130,7 @@ The `rlbnDueu` is our application’s identifier for our URL. In order to retrie
 To retrieve the original URL run the following command. Replace the shortened URL identifier with the identifier you got from the previous request, and make sure your IP address is correct.
 
 ```shell
-curl -X GET -d "rlbnDueu" [http://10.3.76.37:8000/get_full_url](http://127.0.0.1:8000/get_full_url) -H 'Content-Type: application/json'```
+curl -X GET -d "rlbnDueu" [http://10.3.76.37:8000/get_full_url](http://10.3.76.37:8000/get_full_url) -H 'Content-Type: application/json'```
 ```
 
 You should get output that looks like the following:
