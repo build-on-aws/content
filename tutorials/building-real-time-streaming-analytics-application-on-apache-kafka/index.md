@@ -206,7 +206,7 @@ export BS=<Your_Cluster_Endpoint>
 6. Then, execute the following command to create the Kafka topic.
 
 ```bash
-bash create_topics.sh
+bash create-topics.sh
 ```
 
 You will encounter warnings printed to the terminal. You may ignore them.
@@ -218,7 +218,7 @@ You will encounter warnings printed to the terminal. You may ignore them.
 You can run the following command to view the bash script and see details of the executed Kafka commands within:
 
 ```bash
-cat create_topics.sh
+cat create-topics.sh
 ```
 
 If you'd like, feel free to run other Kafka commands to get a better understanding of your MSK cluster. For example, run the following command to view details of the topic that you have created:
