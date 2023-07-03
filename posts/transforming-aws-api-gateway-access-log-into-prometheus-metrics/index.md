@@ -57,13 +57,13 @@ The solution's basic flow for converting API Gateway access logs into Prometheus
 
 You will need an AWS account and a basic knowledge of the AWS to begin with. Below are high-level steps. Let’s get started!
 
-### 1.  Enable API Gateway access log
+### Enable API Gateway access log
 
 We first need to enable access log of the API Gateway. Let’s say we already have an existing API Gateway.
 
-![Enable Access Log For REST API](images/enable-access-log-for-rest-api.png "Enable access log for REST API")
+![Enable Access Log For REST API](images/enable-access-log-for-rest-api.png "Enable Access Log For REST API")
 
-![Enable Access Log For HTTP API](images/enable-access-log-for-http-api.png "Enable access log for HTTP API")
+![Enable Access Log For HTTP API](images/enable-access-log-for-http-api.png "Enable Access Log For HTTP API")
 
 Here are log formats:
 
@@ -112,7 +112,7 @@ Here are log formats:
 
 There is a minor distinction in the log format between a REST API and an HTTP API. The key difference lies in the absence of the `$context.identity.apiKey` support in the log format of an HTTP API, which is exclusively available in a REST API. As a result, when utilizing an HTTP API, it becomes impossible to retrieve metrics related to the usage of API keys.
 
-### 2. Create CloudWatch Logs Subscription Filter
+### Create CloudWatch Logs Subscription Filter
 
 Before we create subscription filter to forward log to SQS queue, we need to create a lambda function. 
 
@@ -215,7 +215,7 @@ This is permission policies of the execution role of the function:
 
 And this a resource-based policy statement which enables CloudWatch Logs to in invoke the function
 
-![Lambda Function Resource Based Policy](images/lambda-function-resource-based policy.png "Lambda function resource-based policy")
+![Lambda Function Resource Based Policy](images/lambda-function-resource-based-policy.png "Lambda Function Resource Based Policy")
 
 Now that we have completed the necessary steps, we are ready to create a CloudWatch Logs subscription filter.
 
@@ -225,9 +225,9 @@ Go to **CloudWatch Logs** and navigate to API Gateway access log group, then cli
 
 We need to choose the lambda function created in the previous step, and give the subscription filter a name
 
-![Create CloudWatch Logs Subscription Filter](images/create-cwl-subsription-filter-02.png "Create CloudWatch Logs Subscription filter")
+![Create CloudWatch Logs Subscription Filter](images/create-cwl-subsription-filter-02.png "Create CloudWatch Logs Subscription Filter")
 
-### 3. Deploy and configure Vector
+### Deploy and configure Vector
 
 The deployment configuration of Vector varies depending on the deployment location (ECS or EKS). However, the configuration of Vector itself remains consistent. 
 
@@ -459,7 +459,7 @@ Please note, you have to configure proper permission to enable ECS tasks polling
 }
 ```
 
-### 4. Configure Promethues
+### Configure Promethues
 
 Let's proceed with configuring Prometheus to scrape metrics from Vector
 
@@ -473,7 +473,7 @@ scrape_configs:
 ...
 ```
 
-### 5. Verifying and visualizing metrics on Grafana
+### Verifying and visualizing metrics on Grafana
 
 First, let’s verify if everything integrate well and works as expected. We can try sending a request to API Gateway and then get metrics for that request by **Grafana Explore** web interface.
 
@@ -489,25 +489,25 @@ Then run the following PromQL to get related metrics of the request:
 
 We will get result look like this:
 
-![Prometheus Query Result](images/prometheus-query-result.png "Prometheus query result")
+![Prometheus Query Result](images/prometheus-query-result.png "Prometheus Query Result")
 
 Alright, everything works well. Let's simulate increased traffic and generate more meaningful graphs on Grafana. By generating more data and visualizations, we’ll gain deeper insights into client behavior as well as the system's performance, and be able to make informed decisions based on the metrics collected.
 
 Here are some graphs:
 
-![Grafana Dashboard](images/grafana-dashboard.png "Grafana dashboard")
+![Grafana Dashboard](images/grafana-dashboard.png "Grafana Dashboard")
 
-![Request Rate By Status](images/request-rate-by-status.png "Request rate by status")
+![Request Rate By Status](images/request-rate-by-status.png "Request Rate By Status")
 
-![Request Latency](images/request-latency.png "Request latency")
+![Request Latency](images/request-latency.png "Request Latency")
 
-![Request Rate By API Key](images/request-rate-by-api-key.png "Request rate by api key")
+![Request Rate By API Key](images/request-rate-by-api-key.png "Request Rate By API Key")
 
-![Top Highest Error Rate By API Key](images/top-highest-error-rate-by-api-key.png "Top highest error rate by api key")
+![Top Highest Error Rate By API Key](images/top-highest-error-rate-by-api-key.png "Top Highest Error Rate By API Key")
 
-![Top Error Requests](images/top-error-requests.png "Top error requests")
+![Top Error Requests](images/top-error-requests.png "Top Error Requests")
 
-![Top Slowest Requests](images/top-slowest-requests.png "Top slowest requests")
+![Top Slowest Requests](images/top-slowest-requests.png "Top Slowest Requests")
 
 ## Conclusion
 
