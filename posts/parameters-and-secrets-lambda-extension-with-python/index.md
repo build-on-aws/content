@@ -9,6 +9,7 @@ tags:
     - lambda-extensions
 authorGithubAlias: richhouse83
 authorName: Rich House
+githubUserLabel: community-builder
 date: 2023-06-26
 ---
 
