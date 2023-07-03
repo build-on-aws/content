@@ -176,7 +176,7 @@ Review the certificate store on each domain controller to ensure they receive a 
 2. Right-click **Certificates – Local Computer**, select **Connect to Another Computer**, enter the name of one of the DCs, select **OK**.
 3. Expand **Personal**, select **Certificates**, and confirm a certificate exists from the **LdapOverSSL-QS** template:
 
-![Image showing the Personal certificate store on a domain controller, which shows an existing certificate](./images/04-domain-personal-certificate-store.png)
+![Image showing the Personal certificate store on a domain controller, which shows an existing certificate](./images/04-domain-personal-certificate.png)
 
 4. Repeat the above steps for the remaining domain controllers in the domain that will be authenticating users.
 5. Run the following command in PowerShell and ensure it completes successfully without any errors:
@@ -297,7 +297,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
     * Choose **Add…**, select **Users or Computers**, and add ALL of the domain controllers that the AD Connector service account will be allowed to complete TLS mutual authentication with. If using AWS Managed Microsoft AD, add all domain controllers.
     * Choose **OK** to display a list of available services used for delegation:
 
-![Image showing the Add Services window and selecting each entry that has a Service Type of ldap for the Windows Domain Controllers](./images/18-add-services-window-kcd.png)
+![Image showing the Add Services window and selecting each entry that has a Service Type of ldap for the Windows Domain Controllers](./images/18-add-services-window-kerberoscd.png)
 
     * Choose the **LDAP** service type for each domain controller, click **OK** and click **OK** to finish the configuration.
 
