@@ -7,6 +7,9 @@ tags:
     - asset-tracking
     - aws
     - tutorials
+    - amplify
+    - cognito
+    - lambda
 authorGithubAlias: zachelliottwx
 authorName: Zach Elliott
 date: 2023-05-10
@@ -22,9 +25,7 @@ Asset tracking is critical to supply chain operations. Whether it is tracking tr
 
 Before starting this tutorial, you will need the following:
 
- - An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)).
-
-## Sections
+- An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)).
 
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
@@ -45,7 +46,7 @@ Before starting this tutorial, you will need the following:
 
 To deploy our asset tracking app, we will be using AWS Cloud9. Cloud9 is a cloud-based IDE that lets you write, run, and debug your code with just a browser. Using Cloud9 makes it easy to build and deploy applications while reducing the need for local development on builder workstations. Cloud9 also comes bundled with many AWS builder tools to get started developing quickly.
 
-Navigate to the AWS Console and select **Cloud9**. Next select **Create environment**. 
+Navigate to the AWS Console and select **Cloud9**. Next select **Create environment**.
 
 ![AWS Console showing how to create an environment](./images/1.1.png)
 
@@ -56,6 +57,7 @@ Set the instance type to `t3.small` and provide a name. Select **Create**.
 Once the Cloud9 instance has launched, we can begin deploying our app.
 
 ## Deploy the Tracking App
+
 Now that the Cloud9 instance has been launched, we can download the code to build our application. From your Cloud9 terminal, clone the repo:
 
 ```bash
@@ -115,7 +117,7 @@ Using default provider  awscloudformation
 ? Select the authentication method you want to use: AWS profile
 
 For more information on AWS Profiles, see:
-https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
 ? Please choose the profile you want to use default
 ```
@@ -173,7 +175,7 @@ amplify override project
 
 ![Successful Amplify Override](./images/1.4.png)
 
-Now navigate to the amplify/backend/awscloudformation/override.ts file that was just created, and replace the contents with the following:
+Now navigate to the `amplify/backend/awscloudformation/override.ts` file that was just created, and replace the contents with the following:
 
 ```javascript
 import { AmplifyRootStackTemplate } from "@aws-amplify/cli-extensibility-helper";
@@ -291,7 +293,7 @@ Finally, we need to create a new IAM Role that will give IoT Core Rules Engine p
 
 ![AWS IoT Core Console showing configuration of the location action IAM Role](./images/2.7.png)
 
-Our configuration should look like this. 
+Our configuration should look like this.
 
 ![AWS IoT Core Console showing configuration of the location action](./images/2.8.png)
 
@@ -304,6 +306,7 @@ Now select **Create**.
 Now that we've created our IoT Core Rule, we can start sending messages.
 
 ## Sending MQTT Messages
+
 Now we will send a device location to AWS IoT Core and our MQTT Topic. This simulates a message that would come from an IoT Device such as an asset tracker.
 
 From the IoT Core console, navigate to **MQTT test client** and select the **Publish to a topic** tab.
@@ -333,12 +336,12 @@ Now let's enter another point. In the **MQTT test client** enter the following, 
 ```json
 {
   "deviceId": "thing123",
- "latitude": "49.282144",
-"longitude": "-123.117574"
+  "latitude": "49.282144",
+  "longitude": "-123.117574"
 }
 ```
 
-Refresh the page and you will see a second pin, with a line connecting it with the previous point. 
+Refresh the page and you will see a second pin, with a line connecting it with the previous point.
 
 ![Cloud9 showing the application running with a point on the map](./images/3.3.png)
 

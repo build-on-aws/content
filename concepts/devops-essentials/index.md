@@ -20,22 +20,8 @@ images:
 
 This guide is for beginners who are looking for an overview of what DevOps is and an introduction to the core concepts they should be aware of. You’ve probably landed here because you’re looking to learn more about it and how you can apply this knowledge to the problems you are facing. You can think of this post as a guide post to help you discover where you are and where you're going next. This guide will not sell you products, platforms or tools as solutions to those problems. There is no one size fits all solution, however there are existing patterns, frameworks, and mechanisms that have been tested and iterated upon which you can leverage. Feel free to read this post from start to finish or to skip to sections that you're most interested in, whichever works best for you!
 
-| Sections                                                    |
-|-------------------------------------------------------------|
-| 1. [What is DevOps?](#what-is-devops)                       |
-| 2. [Getting started](#getting-started)                      |
-| 3. [Infrastructure implementation patterns](#infrastructure-implementation-patterns)  |
-| 4. [Infrastructure as code](#infrastructure-as-code)        |
-| 5. [Configuration management](#configuration-management)    |
-| 6. [Containers](#containers)                                |
-| 7. [Container orchestration](#container-orchestration)      |
-| 8. [CI/CD](#continuous-integration-and-continuous-delivery) |
-| 9. [Logging](#logging)                                      |
-| 10. [Monitoring](#monitoring)                               |
-| 11. [Observability](#observability)                            |
-| 12. [Where should I start?](#where-should-i-start)          |
-| 13. [Conclusion](#conclusion)                                     |
-| 14. [Additional Learning Resources](#additional-resources)             |
+|ToC|
+|---|
 
 ## What is DevOps?
 
@@ -138,7 +124,7 @@ Tracing is often used in distributed systems to allow seeing the flow of a user 
 
 Observability is a practice that focuses on understanding your system's current state through the various kinds of data it generates. It's the next logical step after implementing **Logging**, **Monitoring**, and **Tracing** - the three pillars of observability are metrics, traces and logs. Plenty of the companies who are listed for logging and monitoring also have observability offerings. The most prominent one not already mentioned in this guide is [Honeycomb](https://www.honeycomb.io).
 
-If you'd like to try out some of the concepts introduced in this section, check out our [hands-on tutorial showing how to implement OpenTelemetry in a Java application.](https://www.buildon.aws/posts/instrumenting-java-apps-using-opentelemetry/)
+If you'd like to try out some of the concepts introduced in this section, check out our [hands-on tutorial showing how to implement OpenTelemetry in a Java application.](/posts/instrumenting-java-apps-using-opentelemetry/)
 
 ## Where should I start?
 
@@ -156,7 +142,7 @@ We've learned a lot in this post today! We started with an introduction to what 
 
 ### Additional Resources
 
-You can find other articles on BuildOn about DevOps using the DevOps tag. If community based learning is your thing, you should definitely look for one near you, there are a variety of DevOps meetups run around the globe!
+You can find other articles on [Community.aws](/) about DevOps using the DevOps tag. If community based learning is your thing, you should definitely look for one near you, there are a variety of DevOps meetups run around the globe!
 
 **Conferences:**
 

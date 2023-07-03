@@ -10,6 +10,7 @@ tags:
   - ci-cd
   - tutorials
   - ecs
+  - fargate
 spaces:
   - devops
 authorGithubAlias: kirankumar15
@@ -30,8 +31,6 @@ Using a repository for each microservice has several benefits:
 Creating a separate repository for each microservice benefits a team in maintaining its own development and release cycles. Having said this, the next question that arises is how to set up the required infrastructure easily when the microservices are interconnected with each other. As with most things, there is a trade-off: the complexity doesn't just magically disappear. In this instance, the complexity of having multiple parts of a system in single application is reduced by splitting them into separate services, and the complexity is moved to the infrastructure and coordination. Luckily the tooling and approaches to manage this have improved in the last decade as microservice architecture has matured.
 
 This tutorial will show you how you can take advantage of [AWS Copilot CLI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Copilot.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq) - that accelerates you to build efficient CI/CD Pipelines for connected microservices in under an hour using AWS Copilot. AWS Copilot CLI is a tool for developers to build, release, and operate production-ready, containerized applications on [AWS App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [AWS Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicd_copilot&sc_geo=mult&sc_country=mult&sc_outcome=acq). More information about Copilot, core concepts can be found in [the Copilot official documentation](https://aws.github.io/copilot-cli/docs/concepts/overview/).
-
-## Table of Contents
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|

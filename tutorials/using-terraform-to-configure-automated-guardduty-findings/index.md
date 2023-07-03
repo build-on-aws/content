@@ -8,14 +8,19 @@ tags:
   - threat-detection
   - incident-response
   - tutorials
+  - security
+  - vpc
+  - vpc-flow-logs
+  - s3
+  - sns
+  - eventbridge
+  - lambda
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2023-04-20
 ---
  
 Threat detection and incident response (TDIR) can be a time-consuming and manual process for many organizations. This leads to inconsistent response processes, inconsistent security outcomes, and increased risk. In this tutorial, you will learn how to automate threat detection findings and automate your incident response process, reducing the time to respond to threats. As many organizations prefer to use a standard Infrastructure-as-Code (IaC) tool for consistent configurations among vendors, this tutorial will show how to configure this solution using Terraform.
-
-## Table of Content
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -782,6 +787,6 @@ Finally navigate to CloudFormation and delete the CloudFormation stack you creat
 
 ## Conclusion
 
-As you can see from this tutorial, much can be done to automate what happens when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda. For more ideas on how to automate Incident Response, see the articles "[How to Use Amazon GuardDuty and AWS Web Application Firewall to Automatically Block Suspicious Hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/)" and "[Automatically Block Suspicious Traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/)."
+As you can see from this tutorial, much can be done to automate what happens when GuardDuty presents findings by using Amazon EventBridge and AWS Lambda. For more ideas on how to automate Incident Response, see the articles "[How to Use Amazon GuardDuty and AWS Web Application Firewall to Automatically Block Suspicious Hosts](https://aws.amazon.com/blogs/security/how-to-use-amazon-guardduty-and-aws-web-application-firewall-to-automatically-block-suspicious-hosts/?sc_channel=el&sc_campaign=devopswave&sc_content=grddtytf&sc_geo=mult&sc_country=mult&sc_outcome=ac)" and "[Automatically Block Suspicious Traffic with AWS Network Firewall and Amazon GuardDuty](https://aws.amazon.com/blogs/security/automatically-block-suspicious-traffic-with-aws-network-firewall-and-amazon-guardduty/?sc_channel=el&sc_campaign=devopswave&sc_content=grddtytf&sc_geo=mult&sc_country=mult&sc_outcome=ac)."
 
 If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>

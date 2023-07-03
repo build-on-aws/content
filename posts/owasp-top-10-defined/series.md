@@ -6,4 +6,5 @@ posts:
   - 01-what-is-broken-access-control
   - 02-what-is-a-cryptographic-failure
   - 03-what-is-an-injection-attack
+  - 04-what-is-an-insecure-direct-object-reference
 --- 

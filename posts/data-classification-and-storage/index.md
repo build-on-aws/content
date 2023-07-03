@@ -12,10 +12,15 @@ tags:
   - data-lakes
   - foundational
   - aws
+spaces:
+  - databases
 authorGithubAlias: aremutem
 authorName: Temi Aremu & Yusra Al-Sharafi
 date: 2022-10-31
 ---
+
+|ToC|
+|---|
 
 The world is drowning in data. Every year, we generate more data than the year before. But what are we doing with all of those facts and figures? When properly collected, organized, stored, and analyzed, we can use data to work smarter, not harder, saving time, energy, and money across the business. In this post, we walk you through the fundamentals of data classification and data storage to help you start managing your data effectively. In the first section, we explain the different types of data and look at some real-world use cases. After that, we’ll look at what happens after you’ve identified the data you want to store and dive deeper into the various data storage options and how they relate to data analytics.
 
@@ -92,4 +97,4 @@ We now know the different characteristics of structured, unstructured, and semi-
 
 By understanding these differences, we hope you now have a bit more insight and this helps you to understand data classification and select the most effective data storage solution that fits your data needs and use cases.
 
-To learn more about data analytics on AWS, check out the [Analytics on AWS](https://aws.amazon.com/big-data/datalakes-and-analytics/?nc=sn&loc=0) page that covers all-things-data on AWS. Stay updated with all the releases from [BuildOn AWS](https://aws.amazon.com/developer/learning/buildon-aws-live/).
+To learn more about data analytics on AWS, check out the [Analytics on AWS](https://aws.amazon.com/big-data/datalakes-and-analytics/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudjourneysone) page that covers all-things-data on AWS. Stay updated with all the releases from [BuildOn AWS](https://aws.amazon.com/developer/learning/buildon-aws-live/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudjourneysone).

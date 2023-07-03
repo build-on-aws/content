@@ -6,12 +6,18 @@ tags:
   - application-security
   - shift-left
   - github-actions
+  - apache-log4j
+  - security
+  - cdk
 spaces:
   - devops
 authorGithubAlias: afronski
 authorName: Wojciech Gawroński
 date: 2023-01-10
 ---
+
+|ToC|
+|---|
 
 Starting on the 24th of November 2021, people that maintained JVM-based applications were terrified. Rumors that an exploit for a very popular logging library called _[Apache Log4j](https://logging.apache.org/log4j/2.x/)_ turned out to be true. [Log4shell](https://en.wikipedia.org/wiki/Log4Shell) was so severe because it could be easily exploited (even by _script kiddies_) and allowed for _remote code execution_.
 
@@ -47,9 +53,9 @@ A well-known technique helping with that is the _SAST_ approach, which stands fo
 
 As this approach seems relevant, you must be aware of one additional element: _doing the right thing on a security path has to be intuitive and easy_. Convenience is one of the elements that is often overlooked when enforcing security best practices. We can all agree that _peopleware_ (aka _humans_) is always the weakest link in the chain when it comes to security, and that’s not without reason – we tend to work around complicated and cumbersome processes.
 
-To address that, cloud providers often refer to the [shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model/), where the provider takes care of the security **of the cloud** and the customer takes care of security **in the cloud**. Providing such a model simplifies the scope, but at the same time, you need more precise recommendations on the implementation details.
+To address that, cloud providers often refer to the [shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=shift-left-a-story-on-how-to-avoid-security-issues-by-using-cloud-services), where the provider takes care of the security **of the cloud** and the customer takes care of security **in the cloud**. Providing such a model simplifies the scope, but at the same time, you need more precise recommendations on the implementation details.
 
-AWS also helps with this by providing actionable advice in the form of the [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html), in particular – with its _Security_ pillar. As AWS, we have years of experience architecting solutions across a wide variety of business verticals and use cases, and from those experiences we have identified best practices and core strategies for architecting systems in the cloud collected in the document mentioned above. It’s a great way to stand on the shoulder of giants and learn from someone else’s learnings.
+AWS also helps with this by providing actionable advice in the form of the [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=shift-left-a-story-on-how-to-avoid-security-issues-by-using-cloud-services), in particular – with its _Security_ pillar. As AWS, we have years of experience architecting solutions across a wide variety of business verticals and use cases, and from those experiences we have identified best practices and core strategies for architecting systems in the cloud collected in the document mentioned above. It’s a great way to stand on the shoulder of giants and learn from someone else’s learnings.
 
 ## Let’s talk about the tools, finally!
 
@@ -61,7 +67,7 @@ If your workloads are deployed on AWS, you can easily add a convenient and fully
 
 ![Slide from presentation at *AWS Berlin Summit 2022* showing slide title "Code Areas Addressed by CodeGuru Reviewer". Slide shows AWS Best Practices, Concurrency, Resource Leaks, Sensitive Information, Code Efficiency, Code Duplication, and Input Validation areas.](images/code-areas-addressed-by-codeguru-reviewer.png)
 
-And as you can see on the image above, CodeGuru scans your code and provides insights about insecure usage of AWS API and SDKs. It proactively detects secrets and credentials hardcoded inside, common vulnerabilities (like mentioned at the beginning *Log4shell*, a [Log4j log injection attack](https://docs.aws.amazon.com/codeguru/detector-library/java/log-injection/)), and provides insights about the most popular [*OWASP*](/posts/owasp-top-10-defined/01-what-is-broken-access-control/) security risks. I have not exhausted the list, but you can [review the catalog of detected issues](https://docs.aws.amazon.com/codeguru/detector-library/) to learn more.
+And as you can see on the image above, CodeGuru scans your code and provides insights about insecure usage of AWS API and SDKs. It proactively detects secrets and credentials hardcoded inside, common vulnerabilities (like mentioned at the beginning *Log4shell*, a [Log4j log injection attack](https://docs.aws.amazon.com/codeguru/detector-library/java/log-injection/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=shift-left-a-story-on-how-to-avoid-security-issues-by-using-cloud-services)), and provides insights about the most popular [*OWASP*](/posts/owasp-top-10-defined/01-what-is-broken-access-control/) security risks. I have not exhausted the list, but you can [review the catalog of detected issues](https://docs.aws.amazon.com/codeguru/detector-library/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=shift-left-a-story-on-how-to-avoid-security-issues-by-using-cloud-services) to learn more.
 
 ## Talk is cheap. Show me how it works!
 
@@ -178,6 +184,6 @@ Now, having a pipeline set up and properly configured, you can inspect in the sa
 
 Not at all!
 
-Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *CodeGuru* team on your behalf. Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all security-related recommendations inside the [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html).
+Having a fully-managed service added to your _CI/CD pipeline_, you can benefit from the constant growth and evolution done by the *CodeGuru* team on your behalf. Also, from the perspective of software development processes, AWS provides a lot more support with additional tools and techniques - and you can find all security-related recommendations inside the [AWS Well-Architected Framework: Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=shift-left-a-story-on-how-to-avoid-security-issues-by-using-cloud-services).
 
-I also encourage you to dive deeper into the [provided code example](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example) to learn more such as how CodeGuru Reviewer tackles multiple languages in a single repository or how [file exclusions and rules suppression](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendation-suppression.html) works.
+I also encourage you to dive deeper into the [provided code example](https://github.com/aws-samples/amazon-codeguru-reviewer-github-actions-shift-left-example) to learn more such as how CodeGuru Reviewer tackles multiple languages in a single repository or how [file exclusions and rules suppression](https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendation-suppression.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=shift-left-a-story-on-how-to-avoid-security-issues-by-using-cloud-services) works.

@@ -14,7 +14,7 @@ Welcome to episode 4, yes 4 it's already has been a month of Build On Weekly! �
 
 Unfortunately today you only get to listen to a bald man yell into the camera, as Jacquie is away. But he ([Darko](https://twitter.com/darkosubotica)), will be showing you how to some magical things with the latest amazing tool - **Cloud Development Kit (CDK) for Terraform.** Today is all about building the infrastructure for that static website of yours. All with the power of CDK and Terraform. 🪣
 
-We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
+We will be posting here, on [Community.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
 
 ![CDK Terraform](images/header.webp)
 

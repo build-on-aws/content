@@ -27,8 +27,6 @@ In this tutorial, you will learn how to instrument an existing microservice writ
 - How to send generated metrics to Prometheus and Amazon CloudWatch
 - How to switch between observability backends without code changes
 
-## Table of Contents
-
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 200 - Intermediate                                                        |

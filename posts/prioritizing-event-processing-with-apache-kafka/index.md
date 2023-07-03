@@ -6,12 +6,18 @@ tags:
   - stream-processing
   - data-streams
   - big-data
+  - rds
+  - aurora
 spaces:
   - data
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2023-06-09
 ---
+
+|ToC|
+|---|
+
 Event streams are growing in popularity among developers building data oriented architectures. Different from the brick-and-mortar batch architecture, event streams allow organizations to quickly act on the data, removing the barriers that often slow them down to innovate and differentiate. However, adopting event streams is not always easy. Many business processes were designed to think in data as this passive entity that just sits in data stores, waiting to be processed.
 
 For example, think about how orders from customers are prioritized at the [Amazon store](https://www.amazon.com). If an order is confirmed with same-day delivery, it should be processed faster than orders confirmed with less priority, right?. If we look at this business process from a batch-oriented lenses, we could have all the orders sitting in a data store such as [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html?sc_channel=el&sc_campaign=datamlwave&sc_content=prioritizing-event-processing-with-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq), and have a scheduled [AWS Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=prioritizing-event-processing-with-apache-kafka&sc_geo=mult&sc_country=mult&sc_outcome=acq) that picks all the orders and prioritize them based on their delivery options. Then subsequent processes can simply process the orders as they are because they trust that the prioritization has been taken care of.

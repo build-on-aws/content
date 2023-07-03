@@ -6,6 +6,9 @@ tags:
   - containers
   - eks
   - karpenter
+  - cloudformation
+  - terraform
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-03-27
@@ -34,16 +37,17 @@ In the real world that extra node scheduled to cover the demand will take more t
 
 ### **Pre-requisites:**
 
-* An AWS Account https://aws.amazon.com/free/
-* If you are using Linux of MacOS you can continue to the next bullet point, if you are using Microsoft Windows I suggest you to use WSL2 https://docs.microsoft.com/en-us/windows/wsl/install
-* Install Git https://github.com/git-guides/install-git
-* Install AWS CLI 2 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-* Install ekctl https://eksctl.io/
-* Read the EKS Workshop: https://www.eksworkshop.com/beginner/085_scaling_karpenter/ I used it for some parts of this blog post and if you wanna go deep that’s the place to explore! 🚀
+* [An AWS Account](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=08-how-to-add-just-in-time-capacity-kubernetes)
+* If you are using Linux or MacOS you can continue to the next bullet point. If you are using Microsoft Windows, I suggest you to use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
+* Install [Git](https://github.com/git-guides/install-git)
+* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=08-how-to-add-just-in-time-capacity-kubernetes)
+* Install [.NET 6](https://dotnet.microsoft.com/en-us/download)
+* Install [ekctl](https://eksctl.io/)
+* Read the [EKS Workshop](https://www.eksworkshop.com/beginner/085_scaling_karpenter/) - I used it for some parts of this blog post and if you wanna go deep that’s the place to explore! 🚀
 
 OR
 
-* If this is your first time working with AWS CLI or you need a refresh on how to set up your credentials, I suggest you to follow this step-by-step of how to configure your local environment https://aws.amazon.com/es/getting-started/guides/setup-environment/ in this same link you can also follow steps to configure Cloud9, that will be very helpful if you don’t want to install everything from scratch.
+* If this is your first time working with AWS CLI or you need a refresh on how to set up your credentials, I suggest you follow this step-by-step of how to [configure your local environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=08-how-to-add-just-in-time-capacity-kubernetes). In this same link you can also follow steps to configure Cloud9, that will be very helpful if you don’t want to install everything from scratch.
 
 ### Walkthrough
 
@@ -69,7 +73,7 @@ curl -fsSL https://karpenter.sh/"${KARPENTER_VERSION}"/getting-started/getting-s
   --parameter-overrides "ClusterName=${CLUSTER_NAME}"
 ```
 
-* This is how it looks like, the CloudFormation downloaded from karpenter.sh, that we are using.
+* This is how it looks like, the CloudFormation downloaded from `karpenter.sh`, that we are using.
 
 ```yaml
 AWSTemplateFormatVersion: "2010-09-09"
@@ -140,7 +144,7 @@ Resources:
             Resource: !Sub "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/KarpenterNodeRole-${ClusterName}"
 ```
 
-* We are going to use eksctl command line tool to create an IAM Identity mapping to our cluster, this will create the Karpenter role node to our config map as well as allow the nodes to be managed by the cluster.
+* We are going to use `eksctl` command line tool to create an IAM Identity mapping to our cluster, this will create the Karpenter role node to our config map as well as allow the nodes to be managed by the cluster.
 
 ```bash
 eksctl create iamidentitymapping \
@@ -176,7 +180,7 @@ eksctl create iamserviceaccount \
 export KARPENTER_IAM_ROLE_ARN="arn:aws:iam::${ACCOUNT_ID}:role/${CLUSTER_NAME}-karpenter"
 ```
 
-* We are going to use Helm to install in Kubernetes the Karpenter dependancies (Config Maps, Pods, Services, etc), but first we add the repo from karpenter.sh
+* We are going to use Helm to install in Kubernetes the Karpenter dependencies (Config Maps, Pods, Services, etc), but first we add the repo from karpenter.sh
 
 ```bash
 helm repo update
@@ -287,9 +291,7 @@ kubectl apply -f inflate.yaml
 kubectl delete -f inflate.yaml
 ```
 
-
 And we've arrived at the end of the series. I hope you enjoyed and learned from this journey as much as I did. In this series, we learned about containers, databases, orchestrators, API gateways, autoscaling, microservices, ML services, security, and many other things together. Now it's time for you to start your own projects, and I look forward to joining paths together in the future. If you have any problem please add an issue into our[GitHub repo](https://github.com/aws-samples/picture-social-sample), also if you want to learn more about Kubernetes on AWS here are some good deep dive resources that you can use:
 
 * [EKS Workshop](https://www.eksworkshop.com/)
 * [Deploying an EKS Cluster with Terraform](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks) 
-

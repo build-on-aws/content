@@ -17,7 +17,8 @@ images:
 
  The Big Dev Theory is a live stream broadcast every week on the AWS [Twitch](https://twitch.tv/aws) channel. Our live streams are designed to help developers learn about the advantages of our partner technologies and AWS, these events provide developers with the opportunity to learn from some of the top minds in the industry and connect with other developers who are working on similar projects. A key part of its mission to help developers build and innovate with confidence.
 
-Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.
+Join us Tuesday at 8AM PT/11 AM ET for every episode as we engage in insightful conversations with AWS partners and invite experts with deep knowledge across various technology domains. Our live streams are packed with informative and engaging content, designed to keep developers abreast of the latest trends and tools. Don't miss out! Sign up and subscribe today to access this valuable resource, helping you stay ahead in your development journey. Visit this [link](https://subscribethebigdevtheory.splashthat.com/) to sign up and subscribe to The Big Dev Theory now!
+
 
 
 ## Hosts
@@ -33,9 +34,6 @@ Each episode, we chat with AWS partners and bring experts with specialized knowl
 Join us for our upcoming episodes!
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
-|Season 2 | **Episode 4** | 2023/05/16 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Stacktape | TBD |
-|Season 2 | **Episode 5** | 2023/06/06 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Stacktape | TBD |
-|Season 2 | **Episode 6** | 2023/06/20 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Stacktape | TBD |
 |Season 2 | **Episode 7** | 2023/07/11 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JetBrains | TBD |
 |Season 2 | **Episode 8** | 2023/07/18 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JetBrains | TBD |
 |Season 2 | **Episode 9** | 2023/07/25 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JetBrains | TBD |
@@ -43,9 +41,12 @@ Join us for our upcoming episodes!
 |Season 3 | **Episode 1** | 2023/08/01 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | MongoDB  | TBD |
 |Season 3 | **Episode 2** | 2023/08/08 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | MongoDB  | TBD |
 |Season 3 | **Episode 3** | 2023/08/15 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | MongoDB | TBD |
-|Season 3 | **Episode 4** | 2023/09/12 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Mendix | TBD |
-|Season 3 | **Episode 5** | 2023/09/19 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Mendix | TBD |
-|Season 3 | **Episode 6** | 2023/09/26 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Mendix | TBD |
+|Season 3 | **Episode 4** | 2023/08/22 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | LoginID | TBD |
+|Season 3 | **Episode 5** | 2023/08/29 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | LoginID | TBD |
+|Season 3 | **Episode 6** | 2023/09/05 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | LoginID | TBD |
+|Season 3 | **Episode 7** | 2023/09/12 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Mendix | TBD |
+|Season 3 | **Episode 8** | 2023/09/19 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Mendix | TBD |
+|Season 3 | **Episode 9** | 2023/09/26 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Mendix | TBD |
 |||||||
 |Season 4 | **Episode 1** | 2023/10/03 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Avien | TBD |
 |Season 4 | **Episode 2** | 2023/10/10 (11am ET, 8am PT) |[Watch here](https://www.twitch.tv/aws/) | Avien | TBD |
@@ -61,6 +62,9 @@ Join us for our upcoming episodes!
 Past episodes
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
+|Season 2 | **Episode 4** | 2023/05/16 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1821487954) | Stacktape | [Show notes](/livestreams/the-big-dev-theory/2023-05-16/)|
+|Season 2 | **Episode 5** | 2023/06/06 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1839973932) | Stacktape | [Show notes](/livestreams/the-big-dev-theory/2023-06-06/)|
+|Season 2 | **Episode 6** | 2023/06/20 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1851832780) | Stacktape | [Show notes](/livestreams/the-big-dev-theory/2023-06-20/)|
 |Season 2 | **Episode 3** | 2023/05/02 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1810223487) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-05-02/)|
 |Season 2 | **Episode 2** | 2023/04/18 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1797793882) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-04-18/)|
 |Season 2 | **Episode 1** | 2023/04/11 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1791544011) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-04-11/)|

@@ -7,10 +7,14 @@ tags:
   - csharp
   - rekognition
   - s3
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-15
 ---
+
+|ToC|
+|---|
 
 This is an 8-part series about Picturesocial:
 
@@ -49,7 +53,6 @@ First, we will send our image to Amazon Rekognition so it can identify different
     "MinConfidence": 75
 }
 ```
-
 
 Amazon Rekognition will analyze our image and return a response containing a list of labels and the level of confidence for each label. Labels for more common objects will also have a list of instances with the location where that object is located in the image.
 
@@ -98,15 +101,15 @@ In this post, we are going to develop an API that will be in charge of detecting
 
 ## Prerequisites
 
-* An [AWS Account](https://aws.amazon.com/free/).
+* An [AWS Account](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=05-how-to-analyze-images-with-machine-learning).
 * If you are using Linux or macOS, you can continue to the next bullet point. If you are using Microsoft Windows, I suggest you to use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install).
 * Install [Git](https://github.com/git-guides/install-git).
-* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=05-how-to-analyze-images-with-machine-learning).
 * Install [.NET 6](https://dotnet.microsoft.com/en-us/download).
 
 Or
 
-If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
+If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=05-how-to-analyze-images-with-machine-learning). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
 
 ## Walk-through
 

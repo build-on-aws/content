@@ -11,6 +11,9 @@ authorName: Matheus Guimaraes
 date: 2022-08-26
 ---
 
+|ToC|
+|---|
+
 REST architecture has revolutionized the industry and powered much of the innovation of the last decades including microservice architecture which rose to prominence and rapidly became the new de-facto modern Service-Oriented Architecture (SOA) pattern.
 
 In fact, distributed systems and SOA grew to such degree that a typical modern application has a dependency on tens, hundreds or even thousands of microservices which are composed together to deliver rich user experiences. This leads to a few frontend and backend challenges.

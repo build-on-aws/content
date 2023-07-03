@@ -8,6 +8,9 @@ tags:
     - spark
     - tutorials
     - aws
+    - emr
+    - apache-spark
+    - s3
 showInHomeFeed: true
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
@@ -19,8 +22,6 @@ Extract, Transform, and Load (or ETL) - sometimes called Ingest, Transform, and 
 Batch ETL is a common use case across many organizations. This tutorial will provide a starting point, which can help you to build more complex data pipelines in AWS using [Amazon EMR (Amazon Elastic MapReduce)](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Apache Spark](https://spark.apache.org/). Here's how to do it.
 
 We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) to interact with the Spark cluster. PySpark allows you to write Spark applications using Python APIs.
-
-## Table of Content
 
 | Attributes          |                                   |
 | ------------------- | -------------------------------------- |
