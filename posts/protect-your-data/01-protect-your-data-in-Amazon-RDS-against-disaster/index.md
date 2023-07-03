@@ -32,7 +32,7 @@ Replication provides rapid recovery for a wide range of potential faults that ma
 
 This is why our first layer of protection is in-Region, synchronous replication. Using [Multi-AZ Deployment](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-your-data-rds), a primary database instance located in one Availability Zone (AZ) is synchronously replicated to a standby database in another AZ (Figure 1-①). Locating the standby in a different AZ provides the protection of fault isolation, since AZs are located in distinct, separate sets of data centers from each other. In case of a failure of the primary instance, or a disaster event in the AZ where the primary instance is located, the standby takes over in a different AZ. This can be implemented at DB creation, or an existing DB can be modified to become Multi-AZ.
 
-1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
+1. Open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)
 2. In the navigation pane, choose **Databases**
 3. To create a new DB click **Create Database** / To modify an existing DB, click the radio button next to the DB name and then click **Modify**
 4. Under **Availability and durability**, make the selection for Multi-AZ DB. The wording of this selection will vary based on database engine (Figure 2)
@@ -49,7 +49,7 @@ The [Multi-AZ DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide
 
 The next layer of protection is still in-Region and enables asynchronous replication to one or more [read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-your-data-rds). By replicating to an instance in a different Availability Zone (AZ) than your primary and standby instances, you can achieve additional fault isolation to protect your database data (Figure 1-②). Read replicas are created from an already-existing RDS DB instance.
 
-1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
+1. Open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)
 2. In the navigation pane, choose **Databases**
 3. Click the radio button next to the DB name and then click **Actions**, then **Create read replica**
 4. Supply the required options. Consider the following when supplying these values
@@ -70,7 +70,7 @@ The strategies so far provide a high degree of protection for your database data
 
 Amazon RDS automated backups create a periodic snapshot of your database and also backup transaction logs between snapshots (Figure 1-⑤) to enable PITR. The transaction logs are saved every five minutes, therefore the latest restorable time should be no more than five minutes before the present. Backups are stored in Amazon S3 in-Region by default.
 
-1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
+1. Open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)
 2. In the navigation pane, choose **Databases**
 3. To create a new DB click **Create Database** / To modify an existing DB, click the radio button next to the DB name and then click **Modify**
 4. Click to expand **Additional configuration**
@@ -92,7 +92,7 @@ During DB creation you enable this feature and specify the destination Region an
 
 You can also modify an existing DB to enable cross-Region backup copying (Figure 6):
 
-1. Open the Amazon RDS console at https://console.aws.amazon.com/rds/
+1. Open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)
 2. In the navigation pane, choose **Automated backups**.
 3. On the **Current Region** tab, Click the radio button next to the DB name and then click **Actions**, then  **Manage cross-Region replication**.
 4. Under **Backup replication**, choose **Enable replication to another AWS Region**.
