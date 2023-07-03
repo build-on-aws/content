@@ -14,6 +14,8 @@ date: 2023-07-03
 ---
 
 ## 
+| ToC |
+|-----|
 
 Storing your secrets and parameters in Secrets Manager and Parameter Store respectively is the best way to keep them secure, highly available and accessible to all your AWS Services. Quick and simple, it saves the trouble of having to have info stored on your local machine, or worse still add the secrets to your git repo, a huge no-no and likely to get you excoriated by all those who discover them. Traditionally in a lambda you could access the data through an SDK call; fine, but it could involve making the call every time your lambda runs, which can add unnecessary cost. Cache the variable inside the lambda? OK, but now you're using a lambda with insecure, or perhaps stale secrets. Far from ideal.
 
