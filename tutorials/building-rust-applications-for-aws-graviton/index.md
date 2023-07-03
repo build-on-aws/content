@@ -130,7 +130,7 @@ The `rlbnDueu` is our application’s identifier for our URL. In order to retrie
 To retrieve the original URL run the following command. Replace the shortened URL identifier with the identifier you got from the previous request, and make sure your IP address is correct.
 
 ```shell
-curl -X GET -d "rlbnDueu" [http://10.3.76.37:8000/get_full_url](http://10.3.76.37:8000/get_full_url) -H 'Content-Type: application/json'```
+curl -X GET -d "rlbnDueu" http://10.3.76.37:8000/get_full_url -H 'Content-Type: application/json'
 ```
 
 You should get output that looks like the following:
@@ -141,7 +141,7 @@ Your full URL is https://aws.amazon.com/ec2/graviton/
 
 ## Performance Testing Results
 
-Understanding the request per second each instance could process under heavy load is often a key metric used to evaluate instance and application performance. In order to compare a `c6g.xlarge` and a `c5.xlarge` instances we need to perform a load test. We discuss various load testing methodologies in the Graviton Technical Guide GitHub and recommend using  a framework like [wrk2.](https://github.com/kinvolk/wrk2) I decided to go ahead and use wrk2 to test the `shorten_url` function of our application.
+Understanding the request per second each instance could process under heavy load is often a key metric used to evaluate instance and application performance. In order to compare a `c6g.xlarge` and a `c5.xlarge` instances we need to perform a load test. We discuss various load testing methodologies in the [Graviton Technical Guide on GitHub](https://github.com/aws/aws-graviton-getting-started) and recommend using a framework like [wrk2](https://github.com/kinvolk/wrk2). I decided to go ahead and use `wrk2` to test the `shorten_url` function of our application.
 
 ### Load test Setup
 
