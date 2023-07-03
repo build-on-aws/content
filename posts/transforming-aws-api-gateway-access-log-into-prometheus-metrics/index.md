@@ -316,7 +316,7 @@ Let's delve deeper into the configuration details:
 
     - The `apigw_access_log_2_metrics` transform serves the purpose of converting messages from the previous transform into Prometheus metrics. This transform is responsible for exposing two metrics: **`http_request_count_total`** and **`http_response_latency_milliseconds`**. These metrics will include a set of labels such as *`method`*, *`path`*, *`status`*, *`gatewayId`*, and *`apiKeyId`*.
     
-    For more details, please refer to [Vector log to metrics configuration documentation](https://vector.dev/docs/reference/configuration/transforms/log_to_metric)
+        For more details, please refer to [Vector log to metrics configuration documentation](https://vector.dev/docs/reference/configuration/transforms/log_to_metric)
 
 - Lastly, we have the **`sink`** configuration named `apigw_access_log_metrics`, which is responsible for exposing the metrics to port `18687` on the Vector deployment instances. Each metric name will have a prefix based on the value configured at `default_namespace`. This configuration allows the metrics to be accessible and collected by external systems or monitoring tools
 
