@@ -1,6 +1,6 @@
 ---
 title: Building Rust Applications For AWS Graviton
-description: Learn how to migrate a Rust application from x86 based Amazon EC2 Instances to arm64-based Graviton EC2 Instances
+description: Learn how to migrate a Rust application from x86 based Amazon EC2 Instances to ARM64-based Graviton EC2 Instances
 tags:
   - graviton
   - rust
@@ -85,7 +85,7 @@ sys    0m25.774s
 
 Navigate to the `target/release` directory and the `rust-link-shortener` binary will be there ready for launch. To launch it run `./rust-link-shortener`. The application is configured to run on port 8000 and listen on all interfaces for the purposes of this demo.
 
-## Compiling for AWS Graviton (arm64)
+## Compiling for AWS Graviton (ARM64)
 
 On your `c6g.xlarge` instance navigate to the `building-rust-applications-for-aws-graviton` directory and run the following command to build the application:
 
