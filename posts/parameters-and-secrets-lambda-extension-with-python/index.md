@@ -1,6 +1,6 @@
 ---
-title: "Using the AWS Parameters and Secrets Lambda Extension with Python, a practical example"
-description: "Using the AWS Paramaters and Secrets Lambda Extension can speed up your Lambda code and save you money. In this parctical example we will go through a full example, complete with a couple of gotchas I found that could catch you out"
+title: "Using the AWS Parameters and Secrets Lambda Extension with Python: A Practical Example"
+description: "Using the AWS Paramaters and Secrets Lambda Extension can speed up your Lambda code and save you money. In this practical example we will go through a full example, complete with a couple of gotchas I found that could catch you out"
 tags:
     - python
     - lambda
@@ -10,7 +10,7 @@ tags:
 authorGithubAlias: richhouse83
 authorName: Rich House
 githubUserLabel: community-builder
-date: 2023-06-26
+date: 2023-07-03
 ---
 
 ## 
