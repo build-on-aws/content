@@ -114,7 +114,7 @@ To test the application we will use cURL to make a few example requests to verif
 The following command will shorten a URL. My instance has an IP address of 10.3.76.37, so I’m using that in my command. Make sure to replace the IP address with the address of your EC2 Instance.
 
 ```shell
-curl -X GET -d "https://aws.amazon.com/ec2/graviton/" http://10.3.76.37:8000/shorten_url -H 'Content-Type: application/json'
+curl -X POST -d "https://aws.amazon.com/ec2/graviton/" http://10.3.76.37:8000/shorten_url -H 'Content-Type: application/json'
 ```
 
 You should get output that looks like the following:
