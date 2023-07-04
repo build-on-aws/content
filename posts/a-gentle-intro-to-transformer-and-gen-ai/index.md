@@ -227,7 +227,7 @@ An example solution: [Domain-adaptation Fine-tuning (II) with Amazon SageMaker J
 
 #### 2. Instruction Fine Tuning
 
-**Instruction Fine Tuning** is to fine tuning the model with instructions (***a collection of tasks descriptions***).
+**Instruction Fine Tuning** involves fine tuning the model with instructions (***a collection of tasks descriptions***).
 This approach can improve zero-shot performance of LLM on unseen tasks.
 
 An example solution: [Instruction fine-tuning for FLAN T5 XL with Amazon SageMaker JumpStart](https://aws.amazon.com/blogs/machine-learning/instruction-fine-tuning-for-flan-t5-xl-with-amazon-sagemaker-jumpstart/#:~:text=Instruction%20fine%2Dtuning%20uses%20a,the%20weights%20of%20the%20model)
