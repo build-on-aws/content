@@ -1,6 +1,6 @@
 ---
-title: What to Consider When Moving from Batch to Realtime Data Stream Processing
-description: Learn how we evolved from batch into using real-time streaming analytics and deep-dive on streaming concepts and use cases, understand what to consider when moving your organization to real-time streaming.
+title: Six Things to Consider When Moving From Batch to Real-time Data Stream Processing
+description: Learn how we evolved from batch into using real-time streaming analytics and understand what to consider when moving your organization to real-time streaming.
 tags:
   - analytics
   - big-data
@@ -109,24 +109,24 @@ Another consideration in choosing the right stream store is support for geo-repl
 
 ![FIGURE 11 Stream store per project](images/Figure11-geo-replication.png)
 
-## Scaling storage with compute
+### Scaling storage with compute
 
 Chosen stream stores should also accommodate scaling storage without necessarily scaling compute. Be careful when selecting stream stores that tightly couple compute with storage and require you to increase compute to get more storage. There are stream stores available now that allow you to persist data into durable and cheap hot and cold tiers to provide cost-efficient storage for your ever-growing data.
 
 ![FIGURE 12 Scaling compute with storage](images/Figure12-scalingstorage.png)
 
-## Unidirectional flow of data
+### Unidirectional flow of data
 
 Another important concept is not being tied to one-way processing. It is easy to fall into the trap of building forward-only streaming architectures. Remind yourself that you might need to go back and make revisions or changes, and allow for data to be continuously updated back to the stream, reused, and refined.
 
 ![FIGURE 12 Unidirectional flow](images/Figure13-unidirectionalflow.png)
 
-## Understanding build versus buy
+### Understanding build versus buy
 
-Last, but definitely not least, is understanding when it is best to build or buy. There are three major criteria to consider when deciding between building versus buying. First is competency. Is your team able to build and maintain an infrastructure? In the beginning, we talked about data analytics becoming a core function in the business. It's important for the organization to evaluate whether it makes business sense for your team to build and maintain this in-house. This is a decision not to be taken lightly, as it will take resources away from other activities. Second is considering to buy and outsource your stream source to a vendor. Assess their feature portfolio for completeness. Make sure you also look beyond what the stream store provides and inspect their stream processing framework, along with the tooling around it. Third, make sure they provide the features you need now and in the near future. It is not a trivial exercise to change implementation when you already have a central store in place and have our valuable insights.
+Last, but definitely not least, is understanding when it is best to build or buy. There are three major criteria to consider when deciding between building versus buying. First is competency. Is your team able to build and maintain an infrastructure? In the beginning, we talked about data analytics becoming a core function in the business. It's important for the organization to evaluate whether it makes business sense for your team to build and maintain this in-house. This is a decision not to be taken lightly, as it will take resources away from other activities. Secondly, consider purchasing and outsourcing your stream source to a vendor. Assess their feature portfolio for completeness. Make sure you also look beyond what the stream store provides and inspect their stream processing framework, along with the tooling around it. Third, make sure they provide the features you need now and in the near future. It is not a trivial exercise to change implementation when you already have a central store in place and have our valuable insights.
 
 ![FIGURE 12 Unidirectional flow](images/Figure14-buildvsbuy.jpeg "Source: Adobe Stock")
 
 ## Conclusion
 
-In this blog, I talked about how data analytics have evolved from traditional data approach dealing with data in hours, days, months, or years, into data in seconds and minutes and hours through real-time analytics. I looked at the current trends and how advancements in technology are ushering in real-time analytics to gain real-time insights that benefit the business and help break down data silos. Understanding that real-time streaming use cases and applications are evolving our data analytics now and that there are important considerations when planning for your real-time streaming analytics platform is a great way to start on the right footing. This should equip you on your journey to start building out your own real-time analytics for your organization.
+In this blog, I discuss the evolution of data analytics from traditional methods, which handle data spanning hours, days, months, or years, to real-time analytics that process data within seconds, minutes, and hours. I looked at the current trends and how advancements in technology are ushering in real-time analytics to gain real-time insights that benefit the business and help break down data silos. Understanding that real-time streaming use cases and applications are evolving our data analytics now and that there are important considerations when planning for your real-time streaming analytics platform is a great way to start on the right footing. This should equip you on your journey to start building out your own real-time analytics for your organization.
