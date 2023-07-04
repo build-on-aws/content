@@ -112,7 +112,7 @@ Let's look at some popular prompt engineering techniques in a high level.
 #### 1. Zero-shot Prompting
 
 **Zero-shot prompting** is that you don't provide any examples to the LLM model.
-It's like you asking a question to a chatbot, and get an answer.
+It's like you are asking a question to a chatbot, and getting an answer.
 It's simple and easy to start, but it may not perform well with accurate/relevant/factual response.
 If zero-shot prompting doesn't work well, consider using **few-shot prompting**.
 
