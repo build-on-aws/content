@@ -2,7 +2,7 @@
 title: Transforming Amazon API Gateway Access Log Into Prometheus Metrics
 description: This post will work you through a solution to convert Amazon API Gateway access log into Prometheus metrics.
 tags:
-  - aws-api-gateway
+  - api-gateway
   - observability
   - monitoring
 authorGithubAlias: nthienan
