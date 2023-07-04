@@ -217,9 +217,9 @@ Open the Security Group associated with the MSK Serverless cluster and add an in
 Select the Cloud9 environment and choose **Open in Cloud9** to launch the IDE. Open a terminal window, clone the GitHub repository and change directory to the folder.
 
 ```bash
-git clone https://github.com/build-on-aws/opensearch-kafka-golang
+git clone https://github.com/build-on-aws/opensearch-using-kafka-golang
 
-cd opensearch-kafka-golang
+cd opensearch-using-kafka-golang
 ```
 
 Start the producer application:
