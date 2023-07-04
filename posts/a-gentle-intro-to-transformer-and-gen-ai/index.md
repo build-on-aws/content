@@ -242,7 +242,7 @@ PEFT is running on pre-trained LLM with all/majority of their parameters frozen,
 In this way, it significantly reduces the resource consumption during training. And also results in a much **smaller fine-tuned model** of comparable performance with fully fine-tuned model. The training and inference with PEFT may allow the model to fit in a single GPU.
 
 [LoRA](https://arxiv.org/pdf/2106.09685.pdf) (low-rank adaptation) is one of the PEFT techniques. 
-This approach freezes the pre-trained model parameters, and limit trainable parameters of each individual layer of the model (***Transformer architecture***). In this way "it greatly reducing the number of trainable parameters". Hens, reduce the training time.
+This approach freezes the pre-trained model parameters, and limits trainable parameters of each individual layer of the model (***Transformer architecture***). In doing so, it greatly reduces the number of trainable parameters, hence, decreasing the training time.
 
 So benefit of PEFT:
 - Less resource comsumption: less compute resource for training, less storage for hosting model
