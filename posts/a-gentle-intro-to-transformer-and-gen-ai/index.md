@@ -235,7 +235,7 @@ An example solution: [Instruction fine-tuning for FLAN T5 XL with Amazon SageMak
 #### 3. Parameter-Efficient Fine Tuning (PEFT)
 
 As models get larger and larger, fine-tuning on all parameters becomes challenging on consumer hardware. 
-Besides, storing and inferencing with large fine-tuned model (similar size as the pre-trained LLM) are also expensive.
+Besides, storing and inferencing with large fine-tuned models (of similar size to the pre-trained LLMs) can also be expensive..
 **Parameter-Efficient Finetuning (PEFT)** can help to address these challenges.
 
 PEFT is running on pre-trained LLM with all/majority of their parameters frozen, while fine tuning a smaller number of extra/unfrozen (***e.g. 1%***) parameters.
