@@ -1,18 +1,38 @@
 ---
-title: "Synchronous Request-Response with Amazon API Gateway and AWS Lambda"
+title: "Request-Response with Amazon API Gateway and AWS Lambda"
 description: Learn step-by-step how to create an API Gateway endpoint and connect it to a Lambda function, using Infrastructure as Code with the AWS Cloud Development Kit and TypeSript.
 tags:
-  - architectural-patterns
+  - tutorials
   - aws
+  - architecture-patterns
+  - application-integration
   - api-gateway
   - lambda
   - cdk
   - typescript
-  - tutorials
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-07-10
 ---
+
+## Prerequisites
+
+Before starting this tutorial, you will need the following:
+
+ - An AWS Account: [How to create a free AWS account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+  - The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+
+| Attributes| |
+| ---- | ---- |
+| ✅ AWS Level | Intermediate - 200 |
+| ⏱ Time to complete | 30 minutes |
+| 💰 Cost to complete | Free when cleaning up after the tutorial (instructions below) |
+| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a quick star rating?</a>    |
+| ⏰ Last Updated     | 2023-07-04                             |
+
+| ToC |
+|-----|
 
 ## Introduction
 
@@ -20,7 +40,7 @@ The request-response pattern is a widely used communication model in modern web 
 
 This pattern is straightforward, easy to understand, and serves as the foundation for the largest distributed system in the world: the Internet itself. Whenever you open a web page or click on a link in your browser, your browser sends a request to the server, which in turn responds with an HTML document.
 
-In this step-by-step tutorial, we will implement this pattern using Amazon API Gateway and an AWS Lambda function. 
+In this step-by-step tutorial, we will implement this pattern using Amazon API Gateway and an AWS Lambda function.
 
 ![](images/diagram-api-gw-lambda.png)
 
@@ -57,16 +77,6 @@ But now, let's start the tutorial and learn how to implement the synchronous req
 
 So if you follow the step-by-step guide, you'll definitely stay within the free trier. However, I've also added a section to the end that helps you remove all the resources created during this tutorial.
 
-## Prerequisites
-
-To build this example yourself, you need a free AWS account and bootstrap it with the AWS Cloud Development Kit (CDK).
-
-1. [Create a free AWS account](https://aws.amazon.com/free)
-2. [Install](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and [configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html) the AWS Command Line Interface
-3. [Install and bootstrap](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/) the AWS CDK
-
-Once you have everything set up, we can get started.
-
 ## Step 1 - Create and Deploy the CDK App
 
 ### 1.1 Initialize the CDK app
@@ -100,11 +110,11 @@ To do this, type:
 cdk deploy
 ```
 
-This command will "synthesize" the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/) template, and deploy it in your AWS account.
+This command will "synthesize" the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq) template, and deploy it in your AWS account.
 
-> If `cdk deploy` throws an error, make sure that you have bootstrapped your AWS account following the instructions in the [CDK setup guide](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/).
+> If `cdk deploy` throws an error, make sure that you have bootstrapped your AWS account following the instructions in the [CDK setup guide](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-Once the deployment has been completed, let's navigate to the [AWS CloudFormation dashboard](https://console.aws.amazon.com/cloudformation) in the AWS Management Console, and have a look at the new CloudFormation stack
+Once the deployment has been completed, let's navigate to the [AWS CloudFormation dashboard](https://console.aws.amazon.com/cloudformation?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq) in the AWS Management Console, and have a look at the new CloudFormation stack
 
 > If you can't find the stack, make sure to choose the correct region by clicking on the name of the currently displayed Region in the navigation bar, and then choosing the Region to which you want to switch. Make sure it is the one that you used when configuring the AWS CLI.
 
@@ -182,7 +192,7 @@ You can now monitor the status of the individual resources in the terminal outpu
 
 ### 2.3 Inspect the deployed API
 
-Open the [API Gateway](console.aws.amazon.com/apigateway/main/apis) in in the AWS Management Console and look at the list of APIs. If you can't find your resources, make sure you are in the correct region again.
+Open the [API Gateway Dashboard](console.aws.amazon.com/apigateway/main/apis?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq) in in the AWS Management Console and look at the list of APIs. If you can't find your resources, make sure you are in the correct region again.
 
 ![Screenshot of the list of APIs, including the Simple API](images/screen-simple-api.png)
 
@@ -287,7 +297,7 @@ Type `y` to confirm, and CDK will deploy the new Lambda function along with its 
 
 ### 3.4. Test the Lambda function
 
-Once the function has been deployed, navigate to the Functions list in the [AWS Lambda Dashboard](console.aws.amazon.com/lambda).
+Once the function has been deployed, navigate to the Functions list in the [AWS Lambda Dashboard](console.aws.amazon.com/lambda?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 The function name has been automatically generated from the stack name, the function name, and a random postfix, so it should start with _BackendResponseExample..._.
 
@@ -373,7 +383,7 @@ And that's it!
 
 **Congratulations!** You've created everything you need to set up a REST API using AWS API Gateway, that triggers a Lambda function on a specific endpoint, and redirects every other request to a predefined URL.
 
-There's so much more you can do with API Gateway, like authentication, throttling, API keys, etc. If you want to learn more, check out the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html).
+There's so much more you can do with API Gateway, like authentication, throttling, API keys, etc. If you want to learn more, check out the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ## Final Step - Clean-up
 
@@ -387,7 +397,7 @@ After a confirmation step, this will delete all resources that have been created
 
 The only remaining resource will be the Lambda function's source code, which has been uploaded to an assets bucket in Amazon S3. 
 
-You can delete this directly in the [S3 Dashboard](https://s3.console.aws.amazon.com/s3/buckets) of the AWS Management Console:
+You can delete this directly in the [S3 Dashboard](https://s3.console.aws.amazon.com/s3/buckets?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq) of the AWS Management Console:
 
 Look for an S3 bucket called _cdk-XYZ-assets-XYZ-your-region_. This is the bucket that has been created when you bootstrapped the account with AWS CDK. 
 
@@ -403,7 +413,7 @@ This will open a confirmation dialog. Double-check if it's the asset bucket, typ
 
 The synchronous request-response pattern is a widely used communication model in modern web and cloud architectures, and I hope that by following this tutorial, you were able to gain a clear understanding of how you can implement this pattern using Amazon API Gateway and AWS Lambda. 
 
-If you want to learn more, look out for more [AWS community articles tagged api-gateway](https://community.aws/tags/api-gateway), the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html), and the many great API Gateway resources on [Serverless Land](https://serverlessland.com/search?search=api+gateway).
+If you want to learn more, look out for more [AWS community articles tagged api-gateway](https://community.aws/tags/api-gateway), the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=tutorial&sc_content=requestresponsewithapigateway&sc_geo=mult&sc_country=mult&sc_outcome=acq), and the many great API Gateway resources on [Serverless Land](https://serverlessland.com/search?search=api+gateway).
 
 ## The Complete Source Code
 
