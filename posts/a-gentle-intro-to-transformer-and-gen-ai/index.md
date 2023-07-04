@@ -272,3 +272,11 @@ One example use case of RLHF with LLM is de-toxicity of outputs.
 
 ![Customization-summary](images/GenAI_Customization-summary.png)
 
+Customization of pre-trained LLM models to fit your specific needs is an evolving field with numerous ongoing research efforts; hopefully, the popular techniques shared here offer valuable guidance as you embark on this exciting journey.
+
+
+## Conclusion
+
+This post aims to help you understand what is Transformer Architecture, which can be used for building up large language models. The Transformer Architecture dramatically improved the performance of natural language tasks and led to an explosion in regenerative capability.
+
+We also listed customization & optimization options on how you can interact with pre-trained LLM, either through prompt-engineering or fine-tuning. Hopefully the popular techniques and best practices shared would guide and inspire you, keeping you in tuned in this fast growing field.
