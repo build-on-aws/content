@@ -80,7 +80,7 @@ Now you know how transformer architecture works and how it is related to LLMs on
 You may want to work with the LLMs so to build up your specific Generative AI applications. But there are challenges:
 1. LLM models are powerful but also general-purposed. They may not fit good enough to your specific use case.
 2. You may or may not have direct access to the LLM model.
-3. Your organization may have massive amount of domain/industrial data, and you are not sure how to better use these knowledge with GenAI capabilities.
+3. Your organization may have massive amount of domain/industrial data, and you are not sure how to better use this knowledge with GenAI capabilities.
 
 ...
 
