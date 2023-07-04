@@ -9,6 +9,8 @@ tags:
   - tutorials
   - s3
   - quicksight
+spaces:
+  - generative-ai
 images:
   thumbnail: images/overview-01.png
   banner: images/overview-01.png
