@@ -1,12 +1,13 @@
 ---
-title: Transforming AWS API Gateway Access Log Into Prometheus Metrics
-description: This post will work you through a solution to convert AWS API Gateway access log into Prometheus metrics.
+title: Transforming Amazon API Gateway Access Log Into Prometheus Metrics
+description: This post will work you through a solution to convert Amazon API Gateway access log into Prometheus metrics.
 tags:
   - aws-api-gateway
   - observability
   - monitoring
 authorGithubAlias: nthienan
 authorName: An Nguyen
+githubUserLabel: community-builder
 date: 2023-07-03
 ---
 
@@ -15,7 +16,7 @@ date: 2023-07-03
 
 ## Challenges
 
-When working with AWS API Gateway, there are several challenges you may encounter. Particularly in terms of observability, here are some challenges:
+When working with Amazon API Gateway, there are several challenges you may encounter. Particularly in terms of observability, here are some challenges:
 
 - **Metrics and Monitoring**: API Gateway offers some basic metrics and monitoring capabilities, but they might not be sufficient for in-depth observability. You may need to integrate with AWS CloudWatch or other monitoring solutions to collect and analyze metrics like latency, error rates, and request throughput, etc.
 - **Debugging**: Debugging issues within API Gateway can be tricky due to limited visibility into the inner workings of the service. It's crucial to utilize logging, metrics, and distributed tracing to identify and troubleshoot issues effectively. Additionally, thorough testing and monitoring of API Gateway configurations are essential.
@@ -44,9 +45,9 @@ There are numerous tools available that facilitate the transformation of logs in
 
 The following diagram illustrates my solution for transforming API Gateway access logs into Prometheus metrics:
 
-![Architecture Oveview](images/architecture.png "Architecture oveview")
+![Architecture Oveview](images/architecture.png "Architecture Oveview")
 
-The solution's basic flow for converting API Gateway access logs into Prometheus metrics is as follows::
+The solution's basic flow for converting API Gateway access logs into Prometheus metrics is as follows:
 
 1. API Gateway is configured to generate access logs, which are then sent to CloudWatch Logs
 2. CloudWatch Logs Subscription Filter is employed to forward the access logs to a Lambda function
@@ -221,7 +222,7 @@ Now that we have completed the necessary steps, we are ready to create a CloudWa
 
 Go to **CloudWatch Logs** and navigate to API Gateway access log group, then click on **"Create Lambda subscription filter"**
 
-![Navigate CloudWatch Logs Group](images/create-cwl-subsription-filter.png "Navigate CloudWatch Logs group")
+![Navigate CloudWatch Logs Group](images/create-cwl-subsription-filter.png "CloudWatch Logs Group")
 
 We need to choose the lambda function created in the previous step, and give the subscription filter a name
 
