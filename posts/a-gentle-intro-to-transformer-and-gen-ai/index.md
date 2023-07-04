@@ -141,7 +141,7 @@ Figure below shows that CoT are combined with Zero-shot or Few-shot prompting.
 
 As you can see that applying chain-of-thought prompting requires manual effort, such as construct examples of what to do step-by-step. To be more efficient, an **Automatic CoT** approach is introduced by the researching team [Auto-CoT](https://arxiv.org/abs/2210.03493), using ***"Let's think step by step"*** prompt in each demonstration example as shown in figure below.
 
-![Auto-CoT](images/Auto_CoT.png)
+![Auto-CoT](images/Auto_CoT.jpg)
 
   ***image source*** - [Auto-CoT](https://arxiv.org/abs/2210.03493)
 
