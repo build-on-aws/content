@@ -53,7 +53,7 @@ The concept of self-attention is important. If we are inputing a sentence, self-
 
 Another way of explaining the transformer architecture is to use an analogy.  Let’s image you’re planning a surprise party for your wife’s 40th birthday party.  You need to co-orindate with multiple people to make it a success.  Each person has a field of expertise and each is able to contribute a variety of skills to accomplish some of the tasks.
 
-The transformer architecture is like a communication system that allows these everyone to collaborate effectively:
+The transformer architecture is like a communication system that allows everyone to collaborate effectively:
 
 1. **Input Sequence:** This consists of conveying the party requirements such as theme, venue, activites, etc.
 2. **Encoder:** Each person represents a single encoder, and specilises in an aspect of the party planning: decorations, food, music, games, etc.  All the people, and therefore the stack of encoders, represent a party committee.
