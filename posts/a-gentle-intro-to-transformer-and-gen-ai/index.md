@@ -63,7 +63,7 @@ The transformer architecture is like a communication system that allows everyone
 
 The reason it’s important to understand the architecture, is that it gives a developer a better appreciation of how to tune the model.  We typically do this using hyperparameters.  You can think of a hyperparameter as a tunable parameter that affects the output of our model.  If we think of a synthesizer keyboard containing an array of dials.  The input signal is the original sound and as we change the dials, so too the sound changes.  The dials are a great analogy of our hyperparamters that we can change during the training process.  This alters the output.  In the analogy this is the sound we are creating.
 
-A few hyperparameters that relate are to our architecture include:
+A few hyperparameters that relate to our architecture include:
 
 * The number of decoder or encoder layers or in the analogy, the number of people with a skill that can assist with planning the party.
 * The number of parallel self-attention mechanisms we could use which would better capture diverse patterns in the data, but would require more computational power.
