@@ -90,7 +90,7 @@ The list can go on and on, but almost all these challenges are around two focusi
 
 Customization is about how to interact with the pre-trained LLM models so to fit your specific need.
 
-There are many on-going research, and here to share with you some popular techniques. Hopefully this could give you some guidance and tips as you starting the journey.
+There is much ongoing research, and I'm here to share with you some popular techniques. Hopefully, this can provide some guidance and tips as you start your journey.
 
 ![customization options](images/GenAI_Customization.png)
 
