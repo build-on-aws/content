@@ -210,7 +210,7 @@ We all know that training a LLM is costly and time-consuming. With the exponenti
 If you have direct access to LLMs, you have the option to deploy the LLM on your own environment or host them on 3rd party platform (e.g. Amazon SageMaker JumpStart, Amazon Bedrock (preview)) to further fine-tune with your own target data and generate your own model.
 
 Similar to prompt engineering, there are many techniques for fine-tuning. And each individual fine-tuning technique could easily fill multiple blog posts. 
-Therefore, here we just list some of the popular ones to give you an idea on where to get start.
+Therefore, here we just list some of the popular ones to give you an idea of where to start.
 
 **The goal of Fine Tuning is:**
 - Improving performance of common tasks from pre-trained model.
