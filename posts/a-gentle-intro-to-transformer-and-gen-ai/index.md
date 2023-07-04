@@ -255,7 +255,7 @@ LLM model is powerful with lots of great capabilities. But like two sides of a c
 There are existing evaluation tools such as [ROUGE](https://en.wikipedia.org/wiki/ROUGE_(metric)), that measures model performance, but that's still not good enough.
 **Reinforcement Learning with Human Feedback (RLHF)** approach can help here.
 
-![RLHF](images/RLHF.png)
+![RLHF](images/RLHF.jpg)
 
   ***image source*** - [RLHF](https://arxiv.org/pdf/2203.02155.pdf)
 
