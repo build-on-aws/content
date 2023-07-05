@@ -1,17 +1,17 @@
 ---
 title: "Optimizing Performance and Cost with Multi-AZ Architecture: Guidelines for Multi-Account Environments"
-description: "This post provides some guidelines and considerations on using multiple Availability Zones in a multi-account, multi VPC environment."
+description: "This post provides some guidelines and considerations on using multiple Availability Zones in a multi-account, multi-VPC environment."
 tags:
-  - availability-zone 
+  - az
   - resilience
   - networking
-  - aws-muli-account
+  - aws
 authorGithubAlias: hechkh
 authorName: Hechmi Khelifi
-date: 2023-06-19
+date: 2023-07-05
 ---
  
-Using multiple Availability Zones (AZs) is crucial for achieving resilience and high availability of your architecture. It enables you to distribute your resources across different physical locations, which helps protect against potential failures, safaguard against single points of failure and improve availability.
+Using multiple Availability Zones (AZs) is crucial for achieving resilience and high availability of your architecture. It enables you to distribute your resources across different physical locations, which helps protect against potential failures, safaguard against single points of failure, and improve availability.
 
 However, effectively using multiple AZs in a multi-account environment can be complex and challenging. In this article, we will address those complexities and provide some guidelines on how to best use multiple AZs in your multi-account environments.
 
