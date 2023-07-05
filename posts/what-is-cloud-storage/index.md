@@ -19,7 +19,7 @@ In the same way you have lots of physical stuff, you have loads of digital stuff
 
 The three main types — or classes — of cloud storage are object, block, and file. Let’s break them down.
 
-[a thumb drive sitting on the edge of a laptop](images/thumbdrive.jpeg)
+![A thumb drive sitting on the edge of a laptop](images/thumbdrive.jpeg)
 
 ## Object Storage
 
