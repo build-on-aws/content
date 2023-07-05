@@ -111,14 +111,14 @@ Let's look at some popular prompt engineering techniques in a high level.
 
 #### 1. Zero-shot Prompting
 
-**Zero-shot prompting** is that you don't provide any examples to the LLM model.
+**Zero-shot prompting** is that you don't provide any example to the LLM model. Since the input contains some "instruction" as prompt, it enables **in-context learning**, where you provide context to the model.
 It's like you are asking a question to a chatbot, and getting an answer.
 It's simple and easy to start, but it may not perform well with accurate/relevant/factual response.
 If zero-shot prompting doesn't work well, consider using **few-shot prompting**.
 
 #### 2. Few-shot Prompting
 
-**Few-shot prompting** enables **in-context learning**, where you provide context and examples to the model. And the model will ***"learn"*** where to focus and which output format to tweak towards.
+**Few-shot prompting** provides more context and examples to the model, so that the model will ***"learn"*** where to focus and which output format to tweak towards.
 
 Here are some tips for few-shot prompting from the paper [In-Context Learning](https://arxiv.org/abs/2202.12837).
 
