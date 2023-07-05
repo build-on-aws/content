@@ -19,7 +19,7 @@ images:
 
 Join us Tuesday at 8AM PT/11 AM ET for every episode as we engage in insightful conversations with AWS partners and invite experts with deep knowledge across various technology domains. Our live streams are packed with informative and engaging content, designed to keep developers abreast of the latest trends and tools. Don't miss out! Sign up and subscribe today to access this valuable resource, helping you stay ahead in your development journey. Visit this [link](https://subscribethebigdevtheory.splashthat.com/) to sign up and subscribe to The Big Dev Theory now!
 
-
+https://youtu.be/xdiDUEPXkoc
 
 ## Hosts
 
