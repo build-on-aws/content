@@ -13,11 +13,13 @@ authorName: David Priest
 date: 2023-05-25
 ---
 
-In the modern world, we all need storage, whether it’s the garage hiding your dusty exercise equipment, or your kitchen cupboards helping you find that one spice you really need, or that space under your stairs for stashing recently-orphaned child wizards. Well cloud storage has just as many options as the real world — and you use them a lot more often than you might realize.
+In the modern world, we all need storage, whether it’s the garage hiding your dusty exercise equipment, or your kitchen cupboards helping you find that one spice you really need, or that space under your stairs for stashing recently-orphaned child wizards. Well, cloud storage has just as many options as the real world — and you use them a lot more often than you might realize.
 
 In the same way you have lots of physical stuff, you have loads of digital stuff that needs somewhere to go. Some of it is big, some small. Some you just need for a little while, and other stuff you want to hold onto for a long time. You might need to access it everyday or once a decade. And each of these functions requires a slightly different kind of storage.
 
 The three main types — or classes — of cloud storage are object, block, and file. Let’s break them down.
+
+[a thumb drive sitting on the edge of a laptop](images/thumbdrive.jpeg)
 
 ## Object Storage
 
@@ -33,7 +35,7 @@ In short, object storage keeps each file intact, and keeps track of its unique m
 
 ## Block Storage
 
-Block storage generally gets a lot more use in business settings. It tends to be more highly performant than object storage, because it’s often supporting huge databases getting constant use — and that require extremely low latency in order to carry out their complex tasks effectively.
+Block storage generally gets a lot more use in business settings. It tends to be more highly performant than object storage, and thus it is used often to support huge databases getting constant use — and that require extremely low latency in order to carry out their complex tasks effectively.
 
 Let’s take a closer look: imagine you have a spreadsheet that you want to save on a server somewhere. Object storage would keep that file whole and distinct. So if you wanted to change just one little cell in that spreadsheet, the entire file would have to be re-written. Block storage, by contrast, breaks down that spreadsheet into uniform blocks, each of which can be edited individually. You want to change a single cell? In block storage, you’re just re-writing a couple of blocks of data. That difference may not seem like a big deal, but if you’re re-writing single cells in a massive spreadsheet a million times per day, you quickly realize how much more efficient it is to keep the data segmented.
 
