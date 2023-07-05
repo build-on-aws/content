@@ -1,6 +1,6 @@
 ---
 title: "Build On Live: Answered Episode 8 All About Terraform"
-description: "Check out the latest episode with Kerim Satirli from Hashicorp as we review some of the top viewed Terraform questions in the AWS Collective on Stack Overflow.
+description: "Check out the latest episode with Kerim Satirli from Hashicorp as we review some of the top viewed Terraform questions in the AWS Collective on Stack Overflow."
 tags:
     - iam
     - stack-overflow
@@ -13,11 +13,9 @@ authorName: Julie Gunderson
 additionalAuthors: 
   - authorGithubAlias: cobusbernard
     authorName: Cobus Bernard
-
 date: 2023-07-05
 spaces:
   - livestreams
-    
 ---
 
 Join us for Episode 8 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
@@ -36,7 +34,6 @@ In this episode we will be focusing on Terraform. We have selected some of the t
 2. [How to attach multiple IAM policies to IAM roles using Terraform?](https://stackoverflow.com/questions/45486041/how-to-attach-multiple-iam-policies-to-iam-roles-using-terraform)
 3. [Terraform: correct way to attach AWS managed policies to a role?](https://stackoverflow.com/questions/45002292/terraform-correct-way-to-attach-aws-managed-policies-to-a-role)
 4. [How do I create an SSH key in Terraform?](https://stackoverflow.com/questions/49743220/how-do-i-create-an-ssh-key-in-terraform)
-
 
 ## Do you have ideas for questions we should review on future shows?
 Let us know [HERE](https://www.pulse.aws/survey/VZHLE9FS)
