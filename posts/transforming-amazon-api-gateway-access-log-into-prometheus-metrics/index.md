@@ -8,7 +8,7 @@ tags:
 authorGithubAlias: nthienan
 authorName: An Nguyen
 githubUserLabel: community-builder
-date: 2023-07-03
+date: 2023-07-05
 ---
 
 |ToC|
@@ -56,7 +56,7 @@ The solution's basic flow for converting API Gateway access logs into Prometheus
 5. Prometheus scrapes the metrics exposed by Vector
 6. Lastly, Grafana queries the Prometheus metrics and visualizes them in the form of graphs
 
-You will need an AWS account and a basic knowledge of the AWS to begin with. Below are high-level steps. Let’s get started!
+You will need an AWS account and a basic knowledge of the AWS Console to begin with. Below are high-level steps. Let’s get started!
 
 ### Enable API Gateway access log
 
