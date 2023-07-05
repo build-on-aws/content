@@ -19,7 +19,7 @@ images:
   hero: ./images/build-on-answered.png
   background: ./images/build-on-answered.png
 ---
-![8-bit image of Julie and Cobus jumping](images/buildonansweredgif.gif)
+![8-bit image of Julie and Cobus](images/buildonansweredgifimage.gif)
 Join us for Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
 Each episode, we reproduce the problems found in the top questions and build code to test out different solutions and understand the full context of each solution.
