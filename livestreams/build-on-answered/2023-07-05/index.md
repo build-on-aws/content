@@ -22,6 +22,8 @@ spaces:
 
 Join us for Episode 8 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
+https://www.twitch.tv/videos/1863985265
+
 In this episode we will be focusing on Terraform. We have selected some of the top viewed questions in the AWS Collective and built code and demos around the best answers to those questions!
 
 ## Hosts
