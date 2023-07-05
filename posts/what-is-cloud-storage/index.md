@@ -67,7 +67,7 @@ First, regular people use storage in really different ways from big companies. O
 
 The other high-level takeaway:
 
-Storage and computing used to always be linked. You bought a laptop or desktop computer, and how much computing power it had generally corresponded with how much storage it would have. Now we’re now in a situation where compute and storage in a cloud environment can become decoupled. Not only do cloud storage and compute dwarf traditional local resources — you can access vast quantities of both using machines with highly variable individual capabilities.
+Storage and computing used to always be linked. You bought a laptop or desktop computer, and how much computing power it had generally corresponded with how much storage it would have. We’re now in a situation where compute and storage in a cloud environment can become decoupled. Not only do cloud storage and compute dwarf traditional local resources — you can access vast quantities of both using machines with highly variable individual capabilities.
 
 ## Conclusion
 
