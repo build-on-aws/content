@@ -37,10 +37,10 @@ This show is as interactive as our audience makes it, so join us as we work thro
 
 ## Schedule
 Join us for our upcoming episodes!
-| Episode | Date | Link to Watch | Link to Show Notes |
-|--|--|--|--|
-| **Episode 2** | March 15 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/schedule?segmentID=66b79c55-62ee-4904-bbf8-1bfd5c84e2f4) | [Show Notes](/livestreams/build-on-answered/2023-03-15) |
-| **Episode 6** -- Terraform| June 07|| [Show Notes](/livestreams/build-on-answered/2023-06-07)|
-| **Episode 7** -- Resilient Architectures| June 21 | | [Show Notes](/livestreams/build-on-answered/2023-06-21)|
+| Episode | Name| Date | Link to Watch | Link to Show Notes |
+|--|--|--|--|--|
+| **S01E06** | Talking Terraform with Rohini | June 07 | [Watch here](https://www.twitch.tv/videos/1850485117) | [Show Notes](/livestreams/build-on-answered/2023-06-07)|
+| **S01E07** | Resiliency and More with Seth | June 21 | [Watch here](https://www.twitch.tv/videos/1856494950 ) | [Show Notes](/livestreams/build-on-answered/2023-06-21)|
+| **S01E08**| July 5 | MORE Terraform with Kerim | [Watch here](https://www.twitch.tv/videos/1864025107 ) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
 
 
