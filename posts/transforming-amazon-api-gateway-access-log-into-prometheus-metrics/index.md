@@ -39,7 +39,7 @@ Unfortunately, API Gateway does not offer metrics specifically for tracking such
 
 As the API Gateway access log already includes all the essential information, I would utilize it to obtain insightful metrics. Given that I am utilizing the Prom stack (Prometheus, Alertmanager, Grafana) as my observability platform, I would like to find a solution to convert the API Gateway access log into Prometheus metrics. This will enable seamless integration with my current tools and framework.
 
-There are numerous tools available that facilitate the transformation of logs into Prometheus metrics. Additionally, it is possible to develop a custom tool for this purpose. Personally, I have a preference for open-source solutions, and in my experience, I have found vector.dev to be a powerful and high-performance tool for observability purposes. It effectively caters to my requirements in this particular use case.
+There are numerous tools available that facilitate the transformation of logs into Prometheus metrics. Additionally, it is possible to develop a custom tool for this purpose. Personally, I have a preference for open-source solutions, and in my experience, I have found [vector.dev](https://vector.dev) to be a powerful and high-performance tool for observability purposes. It effectively caters to my requirements in this particular use case.
 
 ### Architecture
 
@@ -68,7 +68,8 @@ We first need to enable access log of the API Gateway. Let’s say we already ha
 
 Here are log formats:
 
-* REST API
+- REST API
+
     ```json
     {
         "apiKeyId": "$context.identity.apiKey",
@@ -89,7 +90,9 @@ Here are log formats:
         "userAgent": "$context.identity.userAgent"
     }
     ```
-* HTTP API
+
+- HTTP API
+
     ```json
     {
         "apiKeyId": "-",
@@ -115,7 +118,7 @@ There is a minor distinction in the log format between a REST API and an HTTP AP
 
 ### Create CloudWatch Logs Subscription Filter
 
-Before we create subscription filter to forward log to SQS queue, we need to create a lambda function. 
+Before we create subscription filter to forward log to SQS queue, we need to create a lambda function.
 
 Here is the function:
 
@@ -183,7 +186,7 @@ def decode_cwl_event(encoded_data: str) -> dict:
 
 To ensure the proper functioning of the function, it is essential to grant the necessary permissions by utilizing both the `Execution role` and `Resource-based policy statements`. By combining these two components, the function can access the required resources and perform its tasks effectively.
 
-This is permission policies of the execution role of the function:
+This is the permission policies of the execution role of the function:
 
 ```json
 {
@@ -230,7 +233,7 @@ We need to choose the lambda function created in the previous step, and give the
 
 ### Deploy and configure Vector
 
-The deployment configuration of Vector varies depending on the deployment location (ECS or EKS). However, the configuration of Vector itself remains consistent. 
+The deployment configuration of Vector varies depending on the deployment location (ECS or EKS). However, the configuration of Vector itself remains consistent.
 
 Here is the configuration for Vector:
 
@@ -283,7 +286,7 @@ sinks:
     distributions_as_summaries: true
 ```
 
-Let's delve deeper into the configuration details: 
+Let's delve deeper into the configuration details:
 
 - First, we have the **`source`** configuration named `apigw_access_log_queue`. This configuration enables Vector deployment instances to poll messages from a specified SQS queue for further processing.
 
@@ -302,7 +305,7 @@ Let's delve deeper into the configuration details:
         }
         ```
 
-        After transforming: 
+        After transforming:
 
         ```json
         {
@@ -321,7 +324,7 @@ Let's delve deeper into the configuration details:
 
 - Lastly, we have the **`sink`** configuration named `apigw_access_log_metrics`, which is responsible for exposing the metrics to port `18687` on the Vector deployment instances. Each metric name will have a prefix based on the value configured at `default_namespace`. This configuration allows the metrics to be accessible and collected by external systems or monitoring tools
 
-This is ECS task definition for Vector deployment:
+This is an example ECS task definition for Vector deployment. Note that in the `entryPoint` field a bash script creates the `/etc/vector/vector.yaml` file by decoding the BASE64 text included in the script. In order to use this configuration you'll need to modify the `vector.yaml` file and encode it to BASE64, replacing the part of the `entryPoint` field below that begins with `c291cm`.
 
 ```json
 {
@@ -482,7 +485,7 @@ First, let’s verify if everything integrate well and works as expected. We can
 curl -X GET <API-Gateway-URL>/api/v1/user/12345
 ```
 
-Then run the following PromQL to get related metrics of the request: 
+Then run the following PromQL to get related metrics of the request:
 
 ```bash
 {job="apigw-access-log", __name__=~".+", method="GET", path=~".*/api/v1/user/{id}"}
