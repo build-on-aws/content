@@ -8,4 +8,9 @@ showInHomeFeed: false
 externalUrl: https://www.youtube.com/watch?v=j0MKG8W2NVA
 spaces:
   - generative-ai
+images:
+  banner: images/gen-ai-builders-guide.jpeg
+  thumbnail: images/gen-ai-builders-guide.jpeg
+  hero: images/gen-ai-builders-guide.jpeg
+  background: images/gen-ai-builders-guide.jpeg
 ---
