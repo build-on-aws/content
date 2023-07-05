@@ -40,7 +40,7 @@ Join us for our upcoming episodes!
 | Episode | Name| Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|--|
 | **S01E06** | Talking Terraform with Rohini | June 07 | [Watch here](https://www.twitch.tv/videos/1850485117) | [Show Notes](/livestreams/build-on-answered/2023-06-07)|
-| **S01E07** | Resiliency and More with Seth | June 21 | [Watch here](https://www.twitch.tv/videos/1856494950 ) | [Show Notes](/livestreams/build-on-answered/2023-06-21)|
-| **S01E08**| July 5 | MORE Terraform with Kerim | [Watch here](https://www.twitch.tv/videos/1864025107 ) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
+| **S01E07** | Resiliency with Seth | June 21 | [Watch here](https://www.twitch.tv/videos/1856494950 ) | [Show Notes](/livestreams/build-on-answered/2023-06-21)|
+| **S01E08**| More Terraform with Kerim | July 5 | [Watch here](https://www.twitch.tv/videos/1864025107 ) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
 
 
