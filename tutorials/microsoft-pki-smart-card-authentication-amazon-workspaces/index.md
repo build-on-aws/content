@@ -296,10 +296,9 @@ In this step, we will configure AD objects in your environment to prepare for sm
     * Choose the **Delegation** tab, Select the **Trust this user for delegation to specified services only** and **Use any authentication protocol** radio buttons:  
 ![Image showing the "Delegation" tab on a sample AD user account in dsa.msc](./images/17-Delegation-sample-AD-user-dsa-msc.png)
     * Choose **Add…**, select **Users or Computers**, and add ALL of the domain controllers that the AD Connector service account will be allowed to complete TLS mutual authentication with. If using AWS Managed Microsoft AD, add all domain controllers.
-    * Choose **OK** to display a list of available services used for delegation:
+    * Choose **OK** to display a list of available services used for delegation.
 ![Image showing the Add Services window and selecting each entry that has a Service Type of ldap for the Windows Domain Controllers](./images/18-add-services-window-kerberoscd.png)
     * Choose the **LDAP** service type for each domain controller, click **OK** and click **OK** to finish the configuration.
-
     * Please note that the Kerberos Constrained Delegation setting is specific to computer names. When using AWS Managed AD as your domain controllers, the domain controllers may be replaced with new domain controllers causing this setting to become inaccurate, which will cause users to fail to login with smart card authentication in the WorkSpaces client. You may want to consider automating the updating of this value using PowerShell in that scenario. 
 
 ### Section 3: Configure the Certificate Authority to allow certificates to be issued to smart card users
