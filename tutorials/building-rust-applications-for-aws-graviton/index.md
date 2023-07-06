@@ -29,7 +29,7 @@ Companies today are making sustainability a key goal for their business in order
 | ✅ AWS Level        | 200 - Intermediate                          |
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 2.62      |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=tutorial&sc_content=building-rust-applications-for-aws-graviton&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br> - [AWS DynamoDB Table](https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#dashboard)|
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=costwave&sc_content=building-rust-applications-for-aws-graviton&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br> - [AWS DynamoDB Table](https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#dashboard)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/building-rust-applications-for-aws-graviton)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-06-15                             |
