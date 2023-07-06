@@ -1,6 +1,6 @@
 ---
 title: Tutorial: Getting started with Amazon MemoryDB for Redis using Java
-description: <Description>
+description: Needs Description
 tags:
     - redis
     - nosql
@@ -10,7 +10,7 @@ tags:
     - aws
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: <expected publish date in YYYY-MM-DD format>
+date: 2023-07-06
 ---
 
 Amazon MemoryDB for Redis is a Redis compatible, durable, in-memory database service with which you can build applications using the same flexible and friendly Redis data structures, APIs, and commands.
@@ -25,7 +25,7 @@ This tutorial will get you started with Amazon MemoryDB for Redis and Java using
 
 ## Sidebar
 
-| Info                | Level                                  |
+| Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Beginner                               |
 | ⏱ Time to complete | 30 minutes                                 |
@@ -106,7 +106,7 @@ In **ACL settings** section, enter **ACL Name** and choose **Create user** (a ne
 
 In **User settings** section under **Create user**, enter **User name**. In **Passwords** section, enter **Password 1**
 
-> [Password constraints](https://docs.aws.amazon.com/memorydb/latest/devguide/clusters.acls.html#rbac-using): Passwords must be 16–128 printable characters. The following nonalphanumeric characters are not allowed: , "" / @.
+> [Password constraints](https://docs.aws.amazon.com/memorydb/latest/devguide/clusters.acls.html#rbac-using): Passwords must be 16–128 printable characters. The following nonalphanumeric characters are not allowed: `, "" / @`.
 
 For **Access String**, enter `on ~* &* +@all` and choose **Create** to proceed.
 
