@@ -536,26 +536,26 @@ Use the WorkSpaces client to test smart card authentication:
 
 ## Troubleshooting
 
-### Certificate validation failed error in the WorkSpaces client:  
+### Certificate validation failed error in the WorkSpaces client 
 ![Image showing the WorkSpaces client returning a "Unable to sign in" "Certification validation failed" error](./images/43-WorkSpaces-client-returning-Unable-to-sign-in.png)
 Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused due to various reasons including the following:
 
-    * The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to [this](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/enable-clientauth.html#step1?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
-    * The Kerberos supported encryption types for your service account and domain controllers do not match. If you are using self-managed AD, collect the packet captures on each DC when reproducing the issue and analyze the Kerberos and LDAP traffic from the AD Connector IPs for any errors.
-    * OCSP validation is failing. Refer to the previous Section 5 Step 2 to test OCSP validation.
-    * The AD Connector registered certificates for smart card authentication are not correct.
-    * The smart card is failing to redirect the certificate into the user’s personal store.
-    * A proxy or local networking configuration is interfering with the authentication process.
-    * A packet capture on the self-managed domain controllers during authentication may be necessary to pinpoint the root cause. If using AWS Managed Microsoft AD (of size large) and need to take a packet capture, you can use [Traffic Mirroring](https://docs.aws.amazon.com/vpc/latest/mirroring/what-is-traffic-mirroring.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+* The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to [this](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/enable-clientauth.html#step1?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+* The Kerberos supported encryption types for your service account and domain controllers do not match. If you are using self-managed AD, collect the packet captures on each DC when reproducing the issue and analyze the Kerberos and LDAP traffic from the AD Connector IPs for any errors.
+* OCSP validation is failing. Refer to the previous Section 5 Step 2 to test OCSP validation.
+* The AD Connector registered certificates for smart card authentication are not correct.
+* The smart card is failing to redirect the certificate into the user’s personal store.
+* A proxy or local networking configuration is interfering with the authentication process.
+* A packet capture on the self-managed domain controllers during authentication may be necessary to pinpoint the root cause. If using AWS Managed Microsoft AD (of size large) and need to take a packet capture, you can use [Traffic Mirroring](https://docs.aws.amazon.com/vpc/latest/mirroring/what-is-traffic-mirroring.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-### Unknown Error Occurred in the WorkSpaces client:  
+### Unknown Error Occurred in the WorkSpaces client  
 ![Image showing the WorkSpaces client returning a "Unknown Error Occurred" error](./images/40-WorkSpaces-client-returning-Unknown-Error-Occurred.png)
 This indicates that the mutual TLS authentication with AD Connector was successful, but an issue prevented the client from starting smart card authentication. This can be caused by the following:
 
     * The WSP GPO template to enable smart card redirection is not configured or is set to deny.
     * The user certificate fails to be redirected into the WorkSpace.
 
-### At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication:  
+### At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication  
 ![Image showing the Windows logon page returning a "Signing in with a smart card is not supported for your account error](./images/41-Windows-logon-page-returning-Signing-smart-card-is-not-supported.png)
 The above error indicates a Windows OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
 
@@ -563,7 +563,7 @@ The above error indicates a Windows OS-level smart card authentication failure. 
     * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and ensure it is trusted.
     * The user’s certificate is not configured correctly for Windows smart card authentication.
 
-### At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication:  
+### At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication  
 ![Image showing the Linux logon page returning a Sorry, that did not work Please try again. error when entering a smart card PIN](./images/42-Linux-logon-page-returning-Sorry-that-did-not-work.png)
     The above error indicates a Linux OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
     
