@@ -1,5 +1,5 @@
 ---
-title: Tutorial: Getting started with Amazon MemoryDB for Redis using Java
+title: "Tutorial: Getting started with Amazon MemoryDB for Redis using Java"
 description: Needs Description
 tags:
     - redis
