@@ -1,6 +1,6 @@
 ---
-title: 
-description: 
+title: Title
+description: Description
 tags:
   - ai-explainability
   - ai-fairness
@@ -8,20 +8,24 @@ tags:
   - shapley-values
   - shap
 authorGithubAlias: cyrusmvahid
-authorName: Cyrus Vahid & Sai Kiran Jukanti
+authorName: Cyrus Vahid
 date: 2022-07-08
-authorGithubAlias: kirannsa
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
+
+|ToC|
+|---|
+
+This is for titles under images
+![alt-text](url "asedfadsfdasfasdf")
 
 In this series of blogs we learn about what AI Explainability is, we will have a deeper look into local post-hoc explainability using fundamental perturbation methods such as SHAP and LIME. In the future posts, we explore other methods such as back-propagation methods, including gradient-based methods and those based in DeepLift.
 The current publication has 5 parts, which as follows:
 
-- [Part 1: Introduction](/posts/ai-explainability/01-ai-explainability-intro), which explores what explainability is and why we should be interested.
-- [Part 2: Local Interpretable Model-agnostic Explanation or LIME](/posts/ai-explainability/02-lime), which goes deep into LIME methods.
-- [Part 3: LIME tutorial](/posts/ai-explainability/03-lime-tutorial), which runs an example on three images using Inception-V3 and resnet-152 and then uses LIME for explainability. Code notebook is located [here](04-lime-example)
-- [Part 4: Shapley values](/posts/ai-explainability/04-shapley-values), provides a quick overview of Shapley values in game theory, which is the foundation of SHAP method. If you are already familiar with the theory, you can skip to [Part 5](06-shap). If you are not familiar with the concepts, I would encourage you to spend a few minutes studying this post.
-- [Part 5: SHAP method](/posts/ai-explainability/05-shap), which explains how Shapley values are applied to find a unique solution to LIME's optimization problem and make the solution independent of its hyperparameters.
-- [Part 6: SHAP tutorial](/posts/ai-explainability/06-shap-tutorial) walks the reader through a practical example of how to use Kernel SHAP for understanding object detection using VGG16. The full code can be found [here](/posts/ai-explainability/07-shap-example).
+|SeriesToC|
+|---------|
 
 ## Context
 

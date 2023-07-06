@@ -1,6 +1,6 @@
 ---
-title:
-description:
+title: Title
+description: Description
 tags:
   - ai-explainability
   - ai-fairness
@@ -11,7 +11,16 @@ tags:
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
+
+|ToC|
+|---|
+
+|SeriesToC|
+|---------|
 
 Previously we learned [LIME](/posts/ai-explainability/02-lime.md) as a feature attribution local explainability model and observed how finding a solution to its optimization equation can result in local linear explanations. We then looked at [Shapely values](05-shapley-values.md) and understood given a certain conditions we can find a unique solution to individual contributions to pay-off function of a coalition. Here we combine the two and use Shapley values to find a unique solution for feature attribution for explainability.
 

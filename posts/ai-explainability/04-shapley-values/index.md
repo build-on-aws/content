@@ -1,6 +1,6 @@
 ---
-title:
-description:
+title: Title
+description: Description
 tags:
   - ai-explainability
   - ai-fairness
@@ -10,7 +10,18 @@ tags:
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
+
+|ToC|
+|---|
+
+|SeriesToC|
+|---------|
+
+
 
 In the [previous](/posts/ai-explainability/02-lime) segment of this publication, we learned about LIME as a feature attribution method, with the drawback that finding the right hyperparameters for kernel width and model complexity could be rather arbitrary. We are going to use Shapely values to find a unique solution to solving LIME's optimization equation. Before that, we need to understand the theory behind Shapley values and how there are calculated. If you are familiar with the concept, you can skip to the next [post](/posts/ai-explainability/05-shap).
 In order to understand SHAP method for explainability, we need to first understand Shapley values. This post gives a quick introductory overview as a theoretical minima into Shapley values in the context of game theory.

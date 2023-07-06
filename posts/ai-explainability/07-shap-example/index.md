@@ -1,6 +1,6 @@
 ---
-title:
-description:
+title: Title
+description: Description
 tags:
   - ai-explainability
   - ai-fairness
@@ -10,8 +10,17 @@ tags:
   - shap
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid & Shamika Ariyawansa
-date:
+date: 2023-0706
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
+
+|ToC|
+|---|
+
+|SeriesToC|
+|---------|
 
 ```python
 import keras

@@ -1,6 +1,6 @@
 ---
-title:
-description:
+title: Title
+description: Description
 tags:
   - ai-explainability
   - ai-fairness
@@ -11,7 +11,17 @@ tags:
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
+
+|ToC|
+|---|
+
+|SeriesToC|
+|---------|
+
 in the [theoretical post](/posts/ai-explainability/05-shape) about SHAP, we explored the SHAP paper. We now take a look at a tutorial of SHAP. Here we focus on a practical tutorial in which we use VGG16 to predict objects in an image before attempting to explain it using Kernel SHAP. THe full code can be found [here](/posts/ai-explainability/07-shap-example). for the notebook refer to: https://github.com/cyrusmvahid/AIX-BuildOn/blob/main/08-shap-example.ipynb
 
 ### Loading an Image
