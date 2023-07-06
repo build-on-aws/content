@@ -2,6 +2,7 @@
 title: "Set Up and Configure Microsoft PKI for Smart Card Authentication with Amazon WorkSpaces"
 description: "A comprehensive guide on configuring Microsoft PKI and AWS infrastructure to support smart card authentication for your Amazon WorkSpaces."
 tags:
+  - aws
   - workspaces
   - directory-service
   - piv-authentication
@@ -35,8 +36,8 @@ The following figure shows the high-level architecture of the Amazon WorkSpaces 
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Advanced - 300                         |
 | ⏱ Time to complete  | 2 hours 30 minutes                         |
-| 💰 Cost to complete | USD 150/month (dependent on instance types)      |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A VPC with at least 2 private subnets (with internet access) and 1 public subnet (with internet access)<br>- Two Active Directory (AD) domain controllers in different private subnets<br>- An [AD Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A [EC2 security group](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/working-with-security-groups.html#creating-security-group&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A [EC2 Keypair](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-key-pairs.html#having-ec2-create-your-key-pair?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A [EC2 Windows instance joined to the AD domain](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A CAC or PIV card<br>- (Recommended) A public domain in Route53 or a public domain in another provider using a top-level domain found in the [IANA Root Zone Database](https://www.iana.org/domains/root/db)<br>- (Optional) A public S3 bucket|
+| 💰 Cost to complete | $150 USD/month (dependent on instance types)      |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A VPC with at least 2 private subnets (with internet access) and 1 public subnet (with internet access)<br>- Two Active Directory (AD) domain controllers in different private subnets<br>- An [AD Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A [EC2 security group](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/working-with-security-groups.html#creating-security-group&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A [EC2 Keypair](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-key-pairs.html#having-ec2-create-your-key-pair?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A [EC2 Windows instance joined to the AD domain](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- A CAC or PIV card<br>- **(Recommended)** A public domain in Route53 or a public domain in another provider using a top-level domain found in the [IANA Root Zone Database](https://www.iana.org/domains/root/db)<br>- **(Optional)** A public S3 bucket|
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-06-23                             |
 
@@ -47,15 +48,15 @@ The following figure shows the high-level architecture of the Amazon WorkSpaces 
 
 For this walkthrough, you should have the following prerequisites:
 
-* A VPC with at least **2 private subnets (with internet access)** and **1 public subnet (with internet access)** ([Example](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-web-database-servers.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq))
+* A VPC with at least **2 private subnets (with internet access)** and **1 public subnet (with internet access)** ([Example](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-web-database-servers.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)) that does not overlap with the [WorkSpaces management interface IP ranges](https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-port-requirements.html#management-ip-ranges)
 * Two Active Directory (AD) domain controllers in different private subnets (You can use [AWS Launch Wizard for Active Directory](https://docs.aws.amazon.com/launchwizard/latest/userguide/what-is-launch-wizard-active-directory.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy self-managed AD or AWS Managed Microsoft AD if you do not have AD setup. If using on-premises AD, ensure VPC connectivity to on-premises is already setup)
 * An [AD Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) configured to use those domain controllers (including the credentials to your AD Connector service account)
 * A security group that allows [outbound connectivity](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/config-firewall-for-ad-domains-and-trusts) to the AD domain controllers
 * A [EC2 Keypair](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-key-pairs.html#having-ec2-create-your-key-pair?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * A [EC2 Windows instance joined to the AD domain](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) (referred to as the MGMT EC2 instance in this post)
-* A CAC or PIV card used for smart card authentication (e.g. [Yubikey 5](https://www.yubico.com/authentication-standards/smart-card/) or Taglio PIVKey + Smart Card Reader)
+* A CAC or PIV card used for smart card authentication (e.g. [Yubikey 5](https://www.yubico.com/authentication-standards/smart-card/), Taglio PIVKey + Smart Card Reader, or equivalent products supporting CAC/PIV)
 * **(Recommended)** A public domain in Route53 or a public domain in another provider using a top-level domain found in the [IANA Root Zone Database](https://www.iana.org/domains/root/db) to host a DNS record for the OCSP (Online Certificate Status Protocol) responder instance
-* **(Optional)** A public S3 bucket to store certificate revocation lists (CRLs) and public certificates of the CA(s). You aren’t required to store the certificates and CRLs in an S3 bucket. If you don’t use an S3 bucket, the CRLs will be hosted in a file share and [Internet Information Services (IIS)](https://docs.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-web-server-overview) website on the enterprise CA.
+* **(Optional)** A public S3 bucket to store certificate revocation lists (CRLs) and public certificates of the CA(s). You aren’t required to store the certificates and CRLs in an S3 bucket. If you don’t use an S3 bucket, the CRLs will be hosted in a file share and [Internet Information Services (IIS)](https://docs.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-web-server-overview) website on the Enterprise CA.
 
 ## Deploy the solution
 
@@ -75,7 +76,7 @@ The solution I present here involves the following steps:
 
 ### Section 1: Deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and setup an OCSP responder
 
-If you do not already have Microsoft PKI infrastructure setup (e.g. CAs, OCSP responder) in your AD environment, this first section is to deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and create an OCSP responder instance. If you already have PKI infrastructure setup including an OCSP responder, please skip to Section 2.
+If you do not already have Microsoft PKI infrastructure setup (e.g. CAs, OCSP responder) in your AD environment, this first section is to deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and create an OCSP responder instance. **If you already have PKI infrastructure setup including an OCSP responder, please skip to Section 2.**
 
 #### Step 1. Create a Secret in Secrets Manager
 
@@ -91,41 +92,41 @@ In this step, you store the AD account credentials used for deploying the templa
     * Choose **Next**.
 4. On the **Store a new secret page**, for **Secret name**, enter a name for the secret, leave the default settings for the remaining fields, and choose **Next** on each of the next two pages.
 5. Review the settings, and then choose **Store** to save your changes. The Secrets Manager console returns you to the list of secrets in your account with your new secret included in the list.
-6. Choose your newly created secret from the list, and take note of the **Secret ARN** value. You will need it in the next section.
+6. Choose your newly created secret from the list, and take note of the **Secret ARN** value. You will need it in the next step.
 
 #### Step 2: Deploy the Microsoft Public Key Infrastructure Quick Start template
 
-In this step, you deploy an offline root CA and an enterprise subordinate CA by using the [Microsoft Public Key Infrastructure Quick Start](https://aws.amazon.com/quickstart/architecture/microsoft-pki/). Because you use a Quick Start template for this deployment, you only need to enter the following information—you can change the default values for any fields not explicitly mentioned here.
+In this step, you deploy an offline root CA and an enterprise subordinate CA by using the [Microsoft Public Key Infrastructure Quick Start](https://aws.amazon.com/quickstart/architecture/microsoft-pki/). Because you use a Quick Start template for this deployment, you only need to enter the following information—you can change the default values for any fields not explicitly mentioned below.
 
 To deploy the CAs with the Microsoft Public Key Infrastructure Quick Start
 
 1. In the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/), choose Create stack and then do the following:
-    1. For **Prepare template**, select **Template is ready**.
-    2. For **Template source**, select **Amazon S3 URL**.
-    3. For **Amazon S3 URL**, enter:  `https://aws-quickstart.s3.amazonaws.com/quickstart-microsoft-pki/templates/microsoft-pki.template.yaml`
-    4. Choose **Next**.
+    * For **Prepare template**, select **Template is ready**.
+    * For **Template source**, select **Amazon S3 URL**.
+    * For **Amazon S3 URL**, enter:  `https://aws-quickstart.s3.amazonaws.com/quickstart-microsoft-pki/templates/microsoft-pki.template.yaml`
+    * Choose **Next**.
 2. Specify the stack details as follows:
-    1. For **VPC CIDR**, enter the CIDR of the VPC where your AD domain controllers reside.
-    2. For **VPC ID**, select the VPC where your AD domain controllers reside.
-    3. For **CA(s) Subnet ID**, select a private subnet in the VPC where your AD domain controllers reside.
-    4. For **Domain Members Security Group ID**, select an existing security group that allows [outbound communication](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/config-firewall-for-ad-domains-and-trusts) with the AD domain controllers. This will be attached to the CA instances that are created.
-    5. For **Key Pair Name**, select any EC2 key pair in your account.
-    6. For **Active Directory Domain Services Type**, select **SelfManaged** or **AWSManaged** (dependent on your AD environment).
-    7. For **Domain FQDN DNS Name**, enter the DNS name of the AD domain. In this example, I use `corp.example.com`.
-    8. For **Domain NetBIOS Name**, enter the NetBIOS name of the AD domain. In this example, I use `CORP`.
-    9. For **IP used for DNS (Must be accessible)**, enter the IP address of one of the AD domain controllers.
-    10. For **IP used for DNS (Must be accessible)**, enter the IP address of the other AD domain controller in a different subnet.
-    11. For **Secret ARN Containing CA Install Credentials**, enter the Secrets Manager secret ARN created in **Step 1: Create Secret in Secrets Manager**.
-    12. For **CA Deployment Type**, select **One-Tier** or **Two-Tier**. Two-Tier is recommended, refer to [CA Hierachies](https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/designing-and-implementing-a-pki-part-i-design-and-planning/ba-p/396953) for more details.
-    13. For **Use S3 for CA CRL Location**, select **No** or **Yes**.
-       **Note:** If you don’t want to use an S3 bucket to store the certificate revocation lists (CRLs), set **Use S3 for CA CRL Location** to **No**. When **No** is selected, the Quick Start stores and hosts the CRLs in a file share and [Internet Information Services (IIS)](https://docs.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-web-server-overview) website on the enterprise CA. 
-    14. For **CA CRL S3 Bucket Name**, enter the name of the bucket you created to store certificate revocation lists (CRLs) and certificates.
+    * For **VPC CIDR**, enter the CIDR of the VPC where your AD domain controllers reside.
+    * For **VPC ID**, select the VPC where your AD domain controllers reside.
+    * For **CA(s) Subnet ID**, select a private subnet in the VPC where your AD domain controllers reside.
+    * For **Domain Members Security Group ID**, select an existing security group that allows [outbound communication](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/config-firewall-for-ad-domains-and-trusts) with the AD domain controllers. This will be attached to the CA instances that are created.
+    * For **Key Pair Name**, select any EC2 key pair in your account.
+    * For **Active Directory Domain Services Type**, select **SelfManaged** or **AWSManaged** (dependent on your AD environment).
+    * For **Domain FQDN DNS Name**, enter the DNS name of the AD domain. In this example, I use `corp.example.com`.
+    * For **Domain NetBIOS Name**, enter the NetBIOS name of the AD domain. In this example, I use `CORP`.
+    * For **IP used for DNS (Must be accessible)**, enter the IP address of one of the AD domain controllers.
+    * For **IP used for DNS (Must be accessible)**, enter the IP address of the other AD domain controller in a different subnet.
+    * For **Secret ARN Containing CA Install Credentials**, enter the Secrets Manager secret ARN created in **Step 1: Create Secret in Secrets Manager**.
+    * For **CA Deployment Type**, select **One-Tier** or **Two-Tier**. Two-Tier is recommended, refer to [CA Hierachies](https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/designing-and-implementing-a-pki-part-i-design-and-planning/ba-p/396953) for more details.
+    * For **Use S3 for CA CRL Location**, select **No** or **Yes**.
+       **Note:** If you don’t want to use an S3 bucket to store the certificate revocation lists (CRLs), set **Use S3 for CA CRL Location** to **No**. When **No** is selected, the Quick Start stores and hosts the CRLs in a file share and [Internet Information Services (IIS)](https://docs.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-web-server-overview) website on the Enterprise CA. 
+    * For **CA CRL S3 Bucket Name**, enter the name of the bucket you created to store certificate revocation lists (CRLs) and certificates.
         **Note:** If you set **Use S3 for CA CRL Location** to **No**, leave this field as default.
-    15. Select **Next** on the current screen and the following screen.
-    16. Check the box next to each of the following statements.
-        1. **I acknowledge that AWS CloudFormation might create IAM resources with custom names.**
-        2. **I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND.**
-    17. Choose **Create stack**.  
+    * Select **Next** on the current screen and the following screen.
+    * Check the box next to each of the following statements.
+        * **I acknowledge that AWS CloudFormation might create IAM resources with custom names.**
+        * **I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND.**
+    * Choose **Create stack**.  
 ![A prompt showing that you need to acknowledge additional capability before deploying the CloudFormation stack](./images/02-additional-capability-before-deploying-cloudformation-stack.png)
 It should take 20 to 30 minutes for the resources to deploy.
 
@@ -139,16 +140,16 @@ In this step, you configure AWS security group rules so that your directory doma
 4. Choose **Add rule** and then do the following:
    * For **Type**, select **Custom TCP**.
    * For **Port range**, enter `135`.
-   * For **Destination**, select **Custom** and then enter the private IP assigned to the enterprise CA instance.
+   * For **Destination**, select **Custom** and then enter the private IP assigned to the Enterprise CA instance.
    * Add an additional rule by repeating the same above steps, but change the **Port range** value to `49152 - 65535`.
-   * Add another additional rule by repeating the same above steps, but change the **Port range** value to `80` and the **Destination** to **Anywhere-IPv4** to allow the domain controllers to check CRLs during authentication.
+   * Add another additional rule by repeating the same above steps, but change the **Port range** value to `80` and the **Destination** to **Anywhere-IPv4** to allow the domain controllers to check CRLs during authentication. This can be restricted further based on your environment.
 5. Choose **Save rules**.
 
 When using AWS Managed Microsoft AD, the domain controllers will automatically request a certificate based on the template named **LdapOverSSL-QS** that was created by the Microsoft Public Key Infrastructure on AWS Quick Start deployment. It can take up to **30 minutes** for the directory domain controllers to auto-enroll the available certificates. If using self-managed AD, the next step discusses how you can enable auto-enrollment to accomplish the same.
 
 #### Step 4: Setup domain controller auto-enrollment for certificates (self-managed AD)
 
-As the CloudFormation template creates and deploys a certificate template named **LdapOverSSL-QS**, ensure your domain controllers have auto-enrollment enabled in order for them to be granted a certificate to be used for authenticating users. Each domain controller that is going to authenticate smart card users **must have** a domain controller certificate. If you are using **AWS Microsoft Managed AD**, you can skip this step.
+As the CloudFormation template creates and deploys a certificate template named **LdapOverSSL-QS**, ensure your domain controllers have auto-enrollment enabled in order for them to be granted a certificate to be used for authenticating users. Each domain controller that is going to authenticate smart card users **must have** a domain controller certificate. If you are using **AWS Microsoft Managed AD**, you can skip this step as it is already enabled.
 
 1. Connect to your MGMT instance with an AD user in the Domain Admins group or a group with equivalent permissions.
 2. Open PowerShell as an Administrator and run the following commands to install the Group Policy Management console if it's not installed and open it:
@@ -168,7 +169,7 @@ gpmc.msc
 
 #### Step 5: Confirm the domain controllers contain required certificates
 
-Ensure the domain controllers have a certificate in their Personal store from the certificate template **LdapOverSSL-QS**. Each domain controller that is going to authenticate smart card users **must have** a domain controller certificate.
+Each domain controller that is going to authenticate smart card users **must have** a domain controller certificate. Ensure the domain controllers have a certificate in their Personal store from the certificate template **LdapOverSSL-QS**. 
 
 Review the certificate store on each domain controller to ensure they receive a certificate from the **LdapOverSSL-QS** template:
 
@@ -189,7 +190,7 @@ certutil -DCInfo
 
 For pre-session authentication into WorkSpaces, Online Certificate Status Protocol (OCSP) is required for certificate revocation checking. An OCSP responder is a component of a public key infrastructure (PKI) that can be installed on Windows Server to meet this requirement. The OCSP responder is required to be publicly accessible on the internet over HTTP. In this blog post, we are only setting up one OCSP responder, which we will refer to as the OCSP instance. If you’d like to make the OCSP responder highly available, you can do so by setting up [multiple OCSP responders in an Array](https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/implementing-an-ocsp-responder-part-v-high-availability/ba-p/396882).
 
-1. [Launch a standard EC2 Windows instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/EC2_GetStarted.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Windows Server in a public subnet (OCSP responder should be in a public subnet) and set **Auto-assign public IP** to **enable**.
+1. [Launch a standard EC2 Windows instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/EC2_GetStarted.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Windows Server in a public subnet (OCSP responder should be in a public subnet) and set **Auto-assign public IP** to **enable**. At minimum, a t2.medium instance type or equivalent is recommended.
 2. Attach a security group to the OCSP instance that allows you to **RDP (port 3389)** into it.
 3. [Allocate an Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [associate the Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) with the EC2 instance.
 4. Gather a public DNS name that resolves to the public IP address of your EC2 instance for use later when setting the OCSP responder URL:
@@ -200,7 +201,7 @@ For pre-session authentication into WorkSpaces, Online Certificate Status Protoc
 6. Connect to your Enterprise CA instance (created from the Quick Start template) with an AD user in the Domain Admins or AWS Delegated Administrators group.
 7. Duplicate a new OCSP response signing certificate template:
     * Open **certtmpl.msc**, find **OCSP Response Signing** template, right-click it, select **Duplicate Template**.
-    * Select the **Compatibility** tab, select the operating system used by the enterprise CA. Choose **Server 2016** if using Server 2016 or newer. For **Certificate recipient**, select the Windows version used by the OCSP responder instance.
+    * Select the **Compatibility** tab, select the operating system used by the Enterprise CA. Choose **Server 2016** if using Server 2016 or newer. For **Certificate recipient**, select the Windows version used by the OCSP responder instance.
     * Select the **General** tab, give it a name (e.g. CA OCSP Response Signing), and check **Publish certificate in Active Directory**.  
 ![Image showing the settings you need to change in the "General" tab of the new Certificate Template you are creating](./images/05-general-tab-certificate-template.png)
     * Select **Security** tab, select **Add…**, select **Object Types…**, check **Computers**, select **OK**.  
@@ -301,14 +302,14 @@ In this step, we will configure AD objects in your environment to prepare for sm
 
     * Choose the **LDAP** service type for each domain controller, click **OK** and click **OK** to finish the configuration.
 
-    **Note:** Please note that the Kerberos Constrained Delegation setting is specific to computer names. When using AWS Managed AD as your domain controllers, the domain controllers may be replaced with new domain controllers causing this setting to become inaccurate, which will cause users to fail to login with smart card authentication in the WorkSpaces client. You may want to consider automating the updating of this value using PowerShell in that scenario. 
+    * Please note that the Kerberos Constrained Delegation setting is specific to computer names. When using AWS Managed AD as your domain controllers, the domain controllers may be replaced with new domain controllers causing this setting to become inaccurate, which will cause users to fail to login with smart card authentication in the WorkSpaces client. You may want to consider automating the updating of this value using PowerShell in that scenario. 
 
 ### Section 3: Configure the Certificate Authority to allow certificates to be issued to smart card users
 
 1. Create a certificate template to allow self-enrollment smart card logon certificates to your users:
     * Connect to your Enterprise CA with an AD user in the Domain Admins or AWS Delegated Administrators group.
     * Open **certtmpl.msc**, find the **Smartcard Logon** template, right-click it, select **Duplicate Template**.
-    * Select the **Compatibility** tab, select the operating system used by the enterprise CA. Choose **Server 2016** if using Server 2016 or newer. For **Certificate recipient**, select the oldest Windows version in your environment.
+    * Select the **Compatibility** tab, select the operating system used by the Enterprise CA. Choose **Server 2016** if using Server 2016 or newer. For **Certificate recipient**, select the oldest Windows version in your environment.
     * Select the **General** tab:
         * Change the **Template display name** to a desired name (e.g. SmartcardWS, you will need this name later).
         * (Optional) Select **Publish certificate in Active Directory**.
@@ -537,7 +538,8 @@ Use the WorkSpaces client to test smart card authentication:
 
 ### Certificate validation failed error in the WorkSpaces client:  
 ![Image showing the WorkSpaces client returning a "Unable to sign in" "Certification validation failed" error](./images/43-WorkSpaces-client-returning-Unable-to-sign-in.png)
-    Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused due to various reasons including the following:
+Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused due to various reasons including the following:
+
     * The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to [this](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/enable-clientauth.html#step1?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
     * The Kerberos supported encryption types for your service account and domain controllers do not match. If you are using self-managed AD, collect the packet captures on each DC when reproducing the issue and analyze the Kerberos and LDAP traffic from the AD Connector IPs for any errors.
     * OCSP validation is failing. Refer to the previous Section 5 Step 2 to test OCSP validation.
@@ -549,18 +551,22 @@ Use the WorkSpaces client to test smart card authentication:
 ### Unknown Error Occurred in the WorkSpaces client:  
 ![Image showing the WorkSpaces client returning a "Unknown Error Occurred" error](./images/40-WorkSpaces-client-returning-Unknown-Error-Occurred.png)
 This indicates that the mutual TLS authentication with AD Connector was successful, but an issue prevented the client from starting smart card authentication. This can be caused by the following:
+
     * The WSP GPO template to enable smart card redirection is not configured or is set to deny.
     * The user certificate fails to be redirected into the WorkSpace.
 
 ### At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication:  
 ![Image showing the Windows logon page returning a "Signing in with a smart card is not supported for your account error](./images/41-Windows-logon-page-returning-Signing-smart-card-is-not-supported.png)
-    The above error indicates a Windows OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
+The above error indicates a Windows OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
+
     * The domain controller authenticating the user does not have a certificate in the personal store. Review the Event Viewer logs on the WorkSpace.
     * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and ensure it is trusted.
     * The user’s certificate is not configured correctly for Windows smart card authentication.
+
 ### At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication:  
 ![Image showing the Linux logon page returning a Sorry, that did not work Please try again. error when entering a smart card PIN](./images/42-Linux-logon-page-returning-Sorry-that-did-not-work.png)
     The above error indicates a Linux OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
+    
     * The custom image used to create the WorkSpace does not have the correct certificates in the certificate chain added in the image.
     * A separate OS-level authentication issue. SSH into the WorkSpace and review the logs in /var/log for any errors around the timestamp.
 
