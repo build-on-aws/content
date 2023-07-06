@@ -8,8 +8,8 @@ tags:
     - file
     - aws
 authorGithubAlias: mpranshu
-authorName: Pranshu Mishra (no quotes around)
-date: 2023-08-01 (expected publication date)
+authorName: Pranshu Mishra
+date: 2023-08-01 
 ---
 
 ### Introduction
