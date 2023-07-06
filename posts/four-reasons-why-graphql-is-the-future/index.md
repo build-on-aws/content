@@ -6,7 +6,7 @@ tags:
   - rest-apis
   - graphql
   - microservices
-authorGithubAlias: guimathed
+authorGithubAlias: codingmatheus
 authorName: Matheus Guimaraes
 date: 2022-08-26
 ---
