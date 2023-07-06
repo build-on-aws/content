@@ -297,9 +297,7 @@ In this step, we will configure AD objects in your environment to prepare for sm
 ![Image showing the "Delegation" tab on a sample AD user account in dsa.msc](./images/17-Delegation-sample-AD-user-dsa-msc.png)
     * Choose **Add…**, select **Users or Computers**, and add ALL of the domain controllers that the AD Connector service account will be allowed to complete TLS mutual authentication with. If using AWS Managed Microsoft AD, add all domain controllers.
     * Choose **OK** to display a list of available services used for delegation:
-
 ![Image showing the Add Services window and selecting each entry that has a Service Type of ldap for the Windows Domain Controllers](./images/18-add-services-window-kerberoscd.png)
-
     * Choose the **LDAP** service type for each domain controller, click **OK** and click **OK** to finish the configuration.
 
     * Please note that the Kerberos Constrained Delegation setting is specific to computer names. When using AWS Managed AD as your domain controllers, the domain controllers may be replaced with new domain controllers causing this setting to become inaccurate, which will cause users to fail to login with smart card authentication in the WorkSpaces client. You may want to consider automating the updating of this value using PowerShell in that scenario. 
@@ -552,23 +550,23 @@ Certificate validation failed indicates a failure before or during the mutual TL
 ![Image showing the WorkSpaces client returning a "Unknown Error Occurred" error](./images/40-WorkSpaces-client-returning-Unknown-Error-Occurred.png)
 This indicates that the mutual TLS authentication with AD Connector was successful, but an issue prevented the client from starting smart card authentication. This can be caused by the following:
 
-    * The WSP GPO template to enable smart card redirection is not configured or is set to deny.
-    * The user certificate fails to be redirected into the WorkSpace.
+* The WSP GPO template to enable smart card redirection is not configured or is set to deny.
+* The user certificate fails to be redirected into the WorkSpace.
 
 ### At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication  
 ![Image showing the Windows logon page returning a "Signing in with a smart card is not supported for your account error](./images/41-Windows-logon-page-returning-Signing-smart-card-is-not-supported.png)
 The above error indicates a Windows OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
 
-    * The domain controller authenticating the user does not have a certificate in the personal store. Review the Event Viewer logs on the WorkSpace.
-    * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and ensure it is trusted.
-    * The user’s certificate is not configured correctly for Windows smart card authentication.
+* The domain controller authenticating the user does not have a certificate in the personal store. Review the Event Viewer logs on the WorkSpace.
+* The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and ensure it is trusted.
+* The user’s certificate is not configured correctly for Windows smart card authentication.
 
 ### At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication  
 ![Image showing the Linux logon page returning a Sorry, that did not work Please try again. error when entering a smart card PIN](./images/42-Linux-logon-page-returning-Sorry-that-did-not-work.png)
     The above error indicates a Linux OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
     
-    * The custom image used to create the WorkSpace does not have the correct certificates in the certificate chain added in the image.
-    * A separate OS-level authentication issue. SSH into the WorkSpace and review the logs in /var/log for any errors around the timestamp.
+* The custom image used to create the WorkSpace does not have the correct certificates in the certificate chain added in the image.
+* A separate OS-level authentication issue. SSH into the WorkSpace and review the logs in /var/log for any errors around the timestamp.
 
 ## Cleaning up
 
