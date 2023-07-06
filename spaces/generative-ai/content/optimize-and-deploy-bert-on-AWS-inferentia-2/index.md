@@ -4,6 +4,7 @@ description: "Philipp Schmid from HuggingFace steps through how to optimize and 
 externalUrl: https://www.philschmid.de/optimize-deploy-bert-inf2
 authorName: Philipp Schmid
 authorGithubAlias: philschmid
+githubUserLabel: AWS-Hero
 date: 2023-06-16
 images:
   banner: images/hf-blog-inf2.jpeg
