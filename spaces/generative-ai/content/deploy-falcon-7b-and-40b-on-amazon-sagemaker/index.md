@@ -4,6 +4,7 @@ description: "The Falcon models are taking the open-source LLM space by storm! F
 externalUrl: https://www.philschmid.de/sagemaker-falcon-llm
 authorName: Philipp Schmid
 authorGithubAlias: philschmid
+githubUserLabel: AWS-Hero
 date: 2023-06-07
 images:
   banner: images/hf-blog-falcon-sm.jpeg

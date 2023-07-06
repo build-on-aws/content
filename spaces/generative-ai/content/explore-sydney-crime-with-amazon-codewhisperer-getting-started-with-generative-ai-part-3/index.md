@@ -4,6 +4,7 @@ description: "Part 3 of a 4 part series on generative AI by AWS Hero Wendy Wong.
 externalUrl: https://dev.to/aws-heroes/explore-sydney-crime-with-amazon-codewhisperer-getting-started-with-generative-ai-part-3-5cpo
 authorName: Wendy Wong
 authorGithubAlias: wendy-wong
+githubUserLabel: AWS-Hero
 date: 2023-05-10
 images:
   banner: images/c03ydo36iiuomasrcdvd.jpg
