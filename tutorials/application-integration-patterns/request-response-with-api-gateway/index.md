@@ -192,7 +192,7 @@ You can now monitor the status of the individual resources in the terminal outpu
 
 ### 2.3 Inspect the deployed API
 
-Open the [API Gateway Dashboard](console.aws.amazon.com/apigateway/main/apis) in in the AWS Management Console and look at the list of APIs. If you can't find your resources, make sure you are in the correct region again.
+Navigate to the API Gateway Dashboard in in the AWS Management Console and look at the list of APIs. If you can't find your resources, make sure you are in the correct region again.
 
 ![Screenshot of the list of APIs, including the Simple API](images/screen-simple-api.png)
 
