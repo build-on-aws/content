@@ -86,15 +86,15 @@ Choose **Storage**.
 
 ![Choose Storage in the Lightsail menu](./images/lightsail-s3-bucket-1.png)
 
-In the **Create a new bucket** page choose the **5GB storage plan** and name the bucket with a unique name such as `my-practical-cloud-guide`. Please note that S3 bucket names are globally unique, so make sure to pick a name that is available. For the rest of this tutorial, when you see `my-practical-cloud-guide` for the S3 bucket name, please replace it with your bucket name. Select **Create Bucket**.
+In the **Create a new bucket** page choose the **5GB storage plan** and name the bucket with a unique name such as `my-practical-cloud-guide`. Please note that S3 bucket names are globally unique, so make sure to pick a name that is available. For the rest of this tutorial, when you see `<my>-practical-cloud-guide` for the S3 bucket name, please replace it with your bucket name. Select **Create Bucket**.
 
 ![Create an S3 bucket](./images/lightsail-s3-bucket-2.png)
 
-You will see a menu page for the `practical-cloud-guide` bucket, choose **Objects**.
+You will see a menu page for the `<my>-practical-cloud-guide` bucket, choose **Objects**.
 
 ![Open the Objects menu](./images/lightsail-s3-bucket-3.png)
 
-The **Object list** displays the objects in the bucket. Choose **Upload** to put the application and deployment file in the bucket.
+The **Object list** displays the objects in the bucket. Choose **Upload** to put the application and service file in the bucket.
 
 ![Upload files to S3](./images/lightsail-s3-bucket-4.png)
 
@@ -107,7 +107,11 @@ Select `HelloBuilder.jar` from the `./practical-cloud-guide-code/run-to-build
 
 ![Choose the HelloBuilder.jar](./images/lightsail-s3-bucket-linux-1.png)
 
-The file will be added to the **Object list**.
+Upload the `hellobuilder.service` file to your S3 bucket. This file congifures the application as a service and will restart the application after a reboot. Select the file and choose **Open**.
+
+![Choose the HelloBuilder.jar](./images/lightsail-s3-bucket-linux-1.1.png)
+
+The files will be added to the **Object list**.
 
 ![Files listed](./images/lightsail-s3-bucket-linux-2.png)
 
@@ -143,18 +147,56 @@ Choose **Add launch script**.
 
 ![Add a launch script](./images/lightsail-linux-vps-4.png)
 
-Configure an instance at launch by adding a shell script that runs when instance starts. The script exports your access key, secret key, and AWS region. These are temporary credentials only available at launch. The script needs your credentials to copy the SpringBoot application, HelloBuilder.jar, from your S3 bucket. Note that AWS CLI commands are available to use in the script. After the script copies the jar file, it installs Java and starts the application.
+Configure an instance at launch by adding a shell script that runs when instance starts. The script exports your access key, secret key, and AWS region. These are temporary credentials only available at launch. The script needs your credentials to copy the SpringBoot application, HelloBuilder.jar, from your S3 bucket. Note that AWS CLI commands are available to use in the script. After the script copies the jar file, it installs Java, configures the application as a service, and starts the application.
+
+To install the application as a service, use [systemd](https://systemd.io/), a Linux system and service manager. Use a service file to configure the service.
+
+```
+[Unit]
+Description=Manage Java service
+
+[Service]
+WorkingDirectory=/opt/app
+ExecStart=/bin/java -Xms128m -Xmx256m -jar HelloBuilder.jar
+User=appadmin
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
 
 Copy the script add your credentials, AWS region, and the name of your S3 bucket.
 
 ```bash
+#!
 export AWS_ACCESS_KEY_ID=<your_access_key>
 export AWS_SECRET_ACCESS_KEY=<your_secret_key>
 export AWS_REGION=<your_aws_region>
 
-aws s3 cp s3://my-practical-cloud-guide/HelloBuilder.jar /home/ec2-user/HelloBuilder.jar
+# create directory for the app
+mkdir /opt/app
+
+# download application and system service file
+aws s3 cp s3://my-practical-cloud-guide/hellobuilder.service /etc/systemd/system/hellobuilder.service
+aws s3 cp s3://my-practical-cloud-guide/HelloBuilder.jar /opt/app/HelloBuilder.jar
+
+# install java
 sudo yum -y install java-17-amazon-corretto-headless
-java -jar /home/ec2-user/HelloBuilder.jar
+
+# add application admin group and user
+sudo groupadd -r appgrp
+sudo useradd -r -s /bin/false -g appgrp appadmin
+
+sudo chown -R appgrp:appadmin /opt/app
+
+# load the service file and start the service
+sudo systemctl daemon-reload
+sudo systemctl start hellobuilder.service
+
+# restart service on boot
+sudo systemctl enable hellobuilder
 ```
 
 ![Copy code to launch script window](./images/lightsail-linux-vps-5.png)
