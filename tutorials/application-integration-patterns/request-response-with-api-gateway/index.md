@@ -340,7 +340,7 @@ First, in our stack definition file, let's add a new resource:
 const backendResource = api.root.addResource('backend')
 ```
 
-Now, you can connetc the resource, this time using a `LambdaItegration`:
+Now, you can connect the resource, this time using a `LambdaItegration`:
 
 ```typescript
 backendResource.addMethod(
