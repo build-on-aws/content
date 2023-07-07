@@ -69,29 +69,23 @@ Below are some of the common use cases for streaming
 * Data lakes
 * Microservices communication
 
-## Understanding the Stream store
+## Stream processing constructs
 
-Let’s take a step back and talk about the data structure that supports streaming data architectures. This data structure is the commit log. A commit log works like a persistent queue composed of an ordered collection of records. Like a queue, a commit log can only be appended at the end, so older records are at the head and newer records are at the tail of the queue. The commit log is persistent in the sense that the data stored in it is not transient and can be analyzed any number of times. The data stored in a commit log can span seconds, minutes, days, months, or years!
-
-![FIGURE 7 Shows a line of kinds, similar to a queue](images/Figure7-streamstorequeue.jpg "Source: Adobe Stock")
-
-A commit log is a repository of all the mutations and events. A relational database is a subset of what is contained in the commit log. The values, mutations, and events in a commit log are captured as a snapshot of a point in time within tables in a relational database and presented using indexes to allow for querying and searching. Behind the scenes, the data you are querying databases against is a subset of the same data contained in the commit log. Going back to the fact that a commit log is really an ordered collection of data, a commit log is the ideal data structure for writing and storing streams of events, which is essentially what we call a stream store. Querying and reading through a stream store is different from a relational database and requires a different approach altogether.
-
-## Stream programming constructs
-
-There are different programming constructs when working with streaming architectures.
+There are different processing constructs when working with streaming architectures.
 
 * **Aggregations**: This is simply the summarization of data to query for particular values and allow you to perform operations like sum, average, min, max, etc.
 * **Time and temporal windows**: This is another common pattern for streaming scenarios. Windowing functions allow developers to build complex queries based on temporal windows of time. An example is querying a stream against a window in time, say in the last hour, and then filtering for a specific event type or value. Temporal windows also allow you to mix with aggregation to further create complex queries. These insights can be used to build metrics used by downstream resources for business decisions or tracked by your observability stack, i.e., querying against the number of orders in the last hour.
 * **Causality and Relationships**: Stream processing also allows for detecting patterns to correlate or analyze the causality between events. This allows you to understand the relationships between one event and other events, enabling you to discern whether event A is tied to event B.
 
-![FIGURE 8 Shows the different stream programming constructs](images/Figure8-constructs.png)
+![FIGURE 8 Shows the different stream processing constructs](images/Figure8-constructs.png)
 
-Leveraging these different programming constructs allows you to take advantage of what stream processing has to offer. These constructs can be used in isolation or in tandem to allow you to create simple or complex stream queries that effectively provide insight into the most up-to-date events and data emitted by your system. Ultimately, these constructs allow you to gain meaningful insights to make timely data-driven business decisions.
+Leveraging these different processing concepts allows you to take advantage of what stream processing has to offer. These constructs can be used in isolation or in tandem to allow you to create simple or complex stream queries that effectively provide insight into the most up-to-date events and data emitted by your system. Ultimately, these constructs allow you to gain meaningful insights to make timely data-driven business decisions.
 
 ## Stream processing considerations
 
-### Transaction data into stream
+Getting started building out a real-time stream processing platform is not hard.  It does require some planning to make sure you put the right platform in place for your organization.
+
+### Converting data changes into a stream of events
 
 One consideration for organizations moving into real-time streaming would be transforming existing transactional data into a stream of events. Most organizations have transactional data residing in relational databases. The data in these databases is helpful in correlating with other streams of events and finding useful, actionable insights for your business. There are existing technologies that allow your transactional data stream to be captured using a technique called change data capture (CDC). This allows you to bring your transactional data into your streaming platform. For new systems, you should start writing streams of events directly into the stream store, thereby avoiding the otherwise two-step process of saving to a database and then generating streams through a CDC connector.
 
