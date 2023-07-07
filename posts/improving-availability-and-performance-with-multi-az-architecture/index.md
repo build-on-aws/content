@@ -11,7 +11,7 @@ authorName: Hechmi Khelifi
 date: 2023-07-06
 ---
  
-Using multiple Availability Zones (AZs) is crucial for achieving resilience and high availability of your architecture. It enables you to distribute your resources across different physical locations, which helps protect against potential failures, safaguard against single points of failure, and improve availability.
+Using multiple Availability Zones (AZs) is crucial for achieving resilience and high availability of your architecture. It enables you to distribute your resources across different physical locations, which helps protect against potential failures, safeguard against single points of failure, and improve availability.
 
 However, effectively using multiple AZs in a multi-account environment can be complex and challenging. In this article, we will address those complexities and provide some guidelines on how to best use multiple AZs in your multi-account environments.
 
