@@ -1,6 +1,6 @@
 ---
-title: "How to get the most out of Amazon CodeWhisperer: Developer Guidelines"
-description: "Unlock the power of Amazon CodeWhisperer from AWS. Learn how short, focused developer comments and intuitive variable & function names enhance coding speed, security, and efficiency. Perfect for coders at all levels!"
+title: "Quick tips on using Amazon CodeWhisperer"
+description: "Learn how short, focused developer comments and intuitive variable & function names enhance coding speed, security, and efficiency. Perfect for coders at all levels!"
 tags:
     - codewhisperer
     - python
@@ -9,7 +9,7 @@ tags:
     - aws
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
-date: 2023-07-14
+date: 2023-07-07
 ---
 
 CodeWhisperer is a powerful AI coding companion that helps developers build applications faster and more securely. I’ve done quite a few demos of CodeWhisperer since it’s launch, and the number one question developers ask me is if there’s anything they can do to improve the results when coding alongside CodeWhisperer, and the answer is yes! 
@@ -55,7 +55,7 @@ if name == "G. Michael" and song == "C. Whispers":
     print("I love this song!")
 ```
 
-In this example (which believe it or not is actually in the [official docs](https://docs.aws.amazon.com/codewhisperer/latest/userguide/whisper-code-block.html)), CodeWhisperer uses the contextual information in variable names to complete the function with a print statement that makes sense. 
+In this example (which believe it or not is actually in the [official docs](https://docs.aws.amazon.com/codewhisperer/latest/userguide/whisper-code-block.html?sc_channel=el&sc_campaign=datamlwave&sc_content=quick-tips-for-codewhisperer&sc_geo=mult&sc_country=mult&sc_outcome=acq)), CodeWhisperer uses the contextual information in variable names to complete the function with a print statement that makes sense. 
 
 However, I’m sure you can all think of bad examples of variable names you’ve seen in the wild, but let’s look at this example: 
 
@@ -76,5 +76,4 @@ To summarize, to get the best results from Amazon CodeWhisperer:
 1. Keep developer comments short and focused on smaller tasks, and 
 2. Use intuitive names for code elements like variables and functions. 
 
-I encourage you to get out there and experiment with Amazon CodeWhisperer in your projects. It’s designed to fit seamlessly into your workflow, supporting 15 programming languages and Popular IDEs like VsCode, IntelliJ Idea, and AWS Cloud9, as well as the Lambda console. With billions of lines of code in it’s knowledge base, CodeWhisperer can help you get more done faster, code with confidence and enhance your code security. 
-
+I encourage you to get out there and experiment with Amazon CodeWhisperer in your projects. It’s designed to fit seamlessly into your workflow, supporting 15 programming languages and Popular IDEs like VsCode, IntelliJ Idea, and [AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/tutorial-create-environment.html?sc_channel=el&sc_campaign=datamlwave&sc_content=quick-tips-for-codewhisperer&sc_geo=mult&sc_country=mult&sc_outcome=acq), as well as the Lambda console. With billions of lines of code in it’s knowledge base, CodeWhisperer can help you get more done faster, code with confidence and enhance your code security. 
