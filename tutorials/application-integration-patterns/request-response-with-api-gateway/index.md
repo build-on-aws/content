@@ -42,7 +42,7 @@ This pattern is straightforward, easy to understand, and serves as the foundatio
 
 In this step-by-step tutorial, we will implement this pattern using Amazon API Gateway and an AWS Lambda function.
 
-![](images/diagram-api-gw-lambda.png)
+![A diagram showing an API Gateway REST API icon, with a connecting arrow to an AWS Lambda function icon](images/diagram-api-gw-lambda.png)
 
 We will also higlight the power of the AWS Cloud Development Kit (CDK) to define the entire infrastructure as code.
 
