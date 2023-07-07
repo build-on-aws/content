@@ -161,15 +161,15 @@ import * as apigw from 'aws-cdk-lib/aws-apigateway';
 Now you can create a REST API resource inside the `constructor`:
 
 ```typescript
-  const api = new apigw.RestApi(this, 'SimpleApi', {
-    restApiName: 'Simple API'
-  });
+const api = new apigw.RestApi(this, 'SimpleApi', {
+  restApiName: 'Simple API'
+});
 ```
 
 AWS API Gateway uses _Integrations_ to define the behaviour for the individual routes of an API. To implement a redirect (more specifically, a proxy that redirects to a URL), CDK provides a preconfigured `HttpIntegration`, that can be initialized with the target URL: 
 
 ```typescript
-const redirect = new apigw.HttpIntegration('https://community.aws')
+const redirect = new apigw.HttpIntegration('https://aws.amazon.com')
 ```
 
 To apply the integration to the API, we need to connect the integration with a route and an HTTP method. In this example, we're adding the `GET` method to the API's `root` path and connect it to the `redirect` integration.
@@ -178,7 +178,7 @@ To apply the integration to the API, we need to connect the integration with a r
 api.root.addMethod('GET', redirect);
 ```
 
-With this configuration, a request to the root path of the stage, e.g. `https://your-invoke-url/prod/`, will be redirected to `https://community.aws`.
+With this configuration, a request to the root path of the stage, e.g. `https://your-invoke-url/prod/`, will be redirected to `https://aws.amazon.com`.
 
 ### 2.2 Deploy the API
 
@@ -200,7 +200,7 @@ Click on the API name to open the details with the root resource **/** and its *
 
 Click on **GET** to open the method details and have a look at the **Integration Request** on the : 
 
-The `new HttpIntegration('https://community.aws')` statement in our stack has led to the deployment of an integration of type **HTTP_PROXY** that sends a **GET** request to the specified URL:
+The `new HttpIntegration('https://aws.amazon.com')` statement in our stack has led to the deployment of an integration of type **HTTP_PROXY** that sends a **GET** request to the specified URL:
 
 ![Screenshot of the GET / method configuration](images/screen-redirect-integration.png)
 
