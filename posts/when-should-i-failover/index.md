@@ -5,11 +5,10 @@ description: "Building observability into your application is critical - not onl
 tags:
   - resilience
   - serverless
-  - multiregion
   - observability
 authorGithubAlias: saurabh-et-al
 authorName: Saurabh Kumar
-date: 2023-05-09
+date: 2023-07-07
 ---
 
 As a professional working in the software space, you've probably been in one or more "war rooms", where it's all hands on deck to get the systems back up and running. The first question that gets asked in those meetings is, “What’s the business impact?” After the application has failed over and recovered, the question becomes, “Are we good to declare if business is back to normal?” Many times, the answers come with a hesitation as no one knows clearly whether business has been restored to steady state.
