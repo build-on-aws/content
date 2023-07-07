@@ -210,7 +210,7 @@ Once complete, you need to do the following: Open the Cloud9 environment, under 
 
 Open the Security Group associated with the MSK Serverless cluster and add an inbound rule to allow the Cloud9 EC2 instance to connect to it. Choose the security group of the Cloud9 EC2 instance as the source, **9098** as the Port and **TCP** protocol.
 
-![Secutiry rule configuration](images/rule.png)
+![Security rule configuration](images/rule.png)
 
 ## You are now ready to run the application!
 
@@ -390,6 +390,16 @@ GET movies-index/_search
   }
 }
 ```
+
+## Clean up
+
+After you are done with the demo, make sure to delete all the services to avoid incurring any additional charges. You can follow the steps in the respective documentation to delete the services.
+
+- [Delete OpenSearch Serverless collection](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html#serverless-delete?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- [Delete MSK Serverless cluster](https://docs.aws.amazon.com/msk/latest/developerguide/delete-resources.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- [Delete Cloud9 environment](https://docs.aws.amazon.com/cloud9/latest/user-guide/delete-environment.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- Also delete IAM roles and policies
+
 
 ## Conclusion
 
