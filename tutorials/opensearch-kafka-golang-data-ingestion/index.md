@@ -8,6 +8,7 @@ tags:
   - aws
   - analytics
   - search-engine
+  - tutorials
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-07-07
