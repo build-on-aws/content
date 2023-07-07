@@ -23,7 +23,7 @@ There are three main cloud storage types: [object storage](https://aws.amazon.co
 
 ### Object Store
 
-Object store is a storage architecture for unstructured data that stores data as objects with metadata and unique identifiers for easy access. It's ideal for large amounts of data, such as media files, documents, logs, and backups. Object stores are highly scalable, provide high availability and durability, and are cost-effective. Amazon S3 is an Object Store service from AWS that can store and manage petabytes of data with 11 9's of durability. Amazon S3 offers a range of storage classes that you can choose from based on the data access, resiliency, and cost requirements of your workloads.
+Object store is a storage architecture for unstructured data that stores data as objects with metadata and unique identifiers for easy access. It's ideal for large amounts of data, such as media files, documents, logs, and backups. Object stores are highly scalable, provide high availability and durability, and are cost-effective. [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html)(S3) is an Object Store service from AWS that can store and manage petabytes of data with 11 9's of durability. Amazon S3 offers a range of storage classes that you can choose from based on the data access, resiliency, and cost requirements of your workloads.
 
 Here is a quick brief about few of them:
 
@@ -35,7 +35,7 @@ Here is a quick brief about few of them:
 
 ### File Storage
 
-File storage stores data in a hierarchical structure and is ideal for frequently accessed structured and unstructured data. It's a great choice for shared data workloads with multiple simultaneous users, like content management and media sharing. It's also good for accessing data over network protocols like NFS or SMB. File storage is cost-effective and easy to manage, and it scales well as your data grows. It's a better choice than block storage for large amounts of data that don't need the high performance or low latency of block storage. AWS offers Amazon Elastic File System (Amazon EFS) and Amazon FSx as File Storage Service.
+File storage stores data in a hierarchical structure and is ideal for frequently accessed structured and unstructured data. It's a great choice for shared data workloads with multiple simultaneous users, like content management and media sharing. It's also good for accessing data over network protocols like NFS or SMB. File storage is cost-effective and easy to manage, and it scales well as your data grows. It's a better choice than block storage for large amounts of data that don't need the high performance or low latency of block storage. AWS offers [Amazon Elastic File System](https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html) (Amazon EFS) and [Amazon FSx](https://aws.amazon.com/fsx/) as File Storage Service.
 
 Here is a quick brief about them:
 
@@ -46,11 +46,11 @@ In summary, if you have Linux-based workloads that require high concurrency and 
 
 ### Block Storage
 
-Block storage is a storage architecture that stores data in fixed-sized blocks, offering high-performance, low-latency access, making it suitable for low-latency access workloads like financial transaction records and ERP systems. It is commonly used for databases, enterprise applications, and transactional workloads since it can be attached as a local drive to provide fast access to data. AWS offers Amazon Elastic Block Store (EBS) as its primary block storage service. EBS provides persistent block-level storage volumes for use with Amazon EC2 instances. Additionally, AWS also provides Instance Store, a temporary block-level storage option that is directly attached to an EC2 instance.
+Block storage is a storage architecture that stores data in fixed-sized blocks, offering high-performance, low-latency access, making it suitable for low-latency access workloads like financial transaction records and ERP systems. It is commonly used for databases, enterprise applications, and transactional workloads since it can be attached as a local drive to provide fast access to data. AWS offers [Amazon Elastic Block Store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html) (EBS) and [Instance Store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) as its block storage service. EBS provides persistent block-level storage volumes for use with Amazon EC2 instances. On the other hand Instance Store is a temporary block-level storage option that is directly attached to an EC2 instance.
 
 Here is a quick brief about them:
 
-1. **EBS:** It is a good choice for workloads that require long-term persistence of data, such as databases, enterprise applications, and transactional workloads. EBS offers a range of volume types, including General Purpose SSD, Provisioned IOPS SSD, and HDDs, to meet different performance needs.
+1. **Amazon EBS:** It is a good choice for workloads that require long-term persistence of data, such as databases, enterprise applications, and transactional workloads. EBS offers a range of volume types, including General Purpose SSD, Provisioned IOPS SSD, and HDDs, to meet different performance needs.
 
 2. **Instance Store:** It is ideal for temporary storage requirements, such as caching and scratch space for compute workloads. It provides very high performance and low latency compared to EBS, but it does not provide persistent storage that is the data stored on it will be lost when the instance is stopped or terminated
 
@@ -63,13 +63,13 @@ Here is a step-by-step guide to help you choose the right storage on AWS:
 
 1. **Understand requirements:** Analyze data type, growth rate, performance levels, durability, availability, access patterns, and compliance/regulatory needs.
 
-2. **Determine storage options:** Familiarize yourself with AWS storage services like Amazon S3, Amazon EBS, Amazon EFS, Amazon FSx, and Amazon Glacier. Understand their strengths and limitations to choose the most suitable service for your needs. This blog as acts as a good starting point and its always best practice to refer [official document](https://aws.amazon.com/products/storage/).
+2. **Determine storage options:** Familiarize yourself with AWS storage services like S3, EBS, EFS and FSx. Understand their strengths and limitations to choose the most suitable service for your needs. This blog as acts as a good starting point and its always best practice to refer [official document](https://aws.amazon.com/products/storage/).
 
-3. **Evaluate performance requirements:** For low-latency persistent block storage, choose Amazon EBS. For high-throughput file storage, consider Amazon FSx or EFS. Evaluate each service's performance capabilities for your workload demands.
+3. **Evaluate performance requirements:** For low-latency persistent block storage, choose Amazon EBS. For high-throughput file storage, consider Amazon FSx or Amazon EFS. Evaluate each service's performance capabilities for your workload demands.
 
 4. **Evaluate the durability and availability requirements:** Amazon S3 offers 99.999999999% (11 nines) durability and replication across Availability Zones. Services like Amazon EBS and Amazon FSx have different characteristics. Assess these aspects to ensure data protection and accessibility as needed.
 
-5. **Consider cost implications:** Review storage costs based on data volume, storage type, data transfer, and additional features. Examine pricing models for different services and calculate anticipated costs. Consider both upfront and ongoing operational costs to make an informed decision. As an example S3 Glacier Deep Archive provides cheapest storage on AWS, but the cost may increase exponentially if data is accessed frequently. This storage is best suited for long term archival where data is rarely accessed. Also, with S3 and EFS you are charged only for amount of data stored where as with EBS you are charged for amount of storage provisioned.
+5. **Consider cost implications:** Review storage costs based on data volume, storage type, data transfer, and additional features. Examine pricing models for different services and calculate anticipated costs. Consider both upfront and ongoing operational costs to make an informed decision. As an example Amazon S3 Glacier Deep Archive provides cheapest storage on AWS, but the cost may increase exponentially if data is accessed frequently. This storage is best suited for long term archival where data is rarely accessed. Also, with S3 and EFS you are charged only for amount of data stored where as with EBS you are charged for amount of storage provisioned.
 
 6. **Security and compliance considerations:** Ensure the chosen storage service meets specific security and compliance requirements. AWS offers security features like encryption at rest and in transit, access controls, and compliance certifications. Evaluate these features to align with security and compliance needs. Example, With S3 Object Lock, you can store objects using a write-once-read-many (WORM) model. Object Lock can help prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely.
 
@@ -83,4 +83,4 @@ Here is a step-by-step guide to help you choose the right storage on AWS:
 
 ### Summary
 
-Choosing the right storage on AWS requires understanding your requirements, evaluating available options like Amazon S3, S3 Storage Classes, EBS Types, Instance Store, EFS, FSx flavours and considering performance, durability, and cost implications, ensuring security and compliance, planning for scalability, reviewing customer feedback, and conducting small-scale experiments. Hope this blog gave you some idea on how to choose best storage for your workloads.
+Choosing the right storage on AWS requires understanding your requirements, evaluating available options like Amazon S3, S3 Storage Classes, EBS Types, Instance Store, EFS, FSx flavours and considering performance, durability, and cost implications, ensuring security and compliance, planning for scalability, reviewing customer feedback, and conducting small-scale experiments. Hope this blog gave you some idea on how to choose best storage for your workloads. To dive further, you can always visit [Choosing an AWS storage service](https://aws.amazon.com/getting-started/decision-guides/storage-on-aws-how-to-choose/).
