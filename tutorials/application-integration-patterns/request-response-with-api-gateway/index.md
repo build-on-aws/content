@@ -440,7 +440,7 @@ export class RequestResponseExampleStack extends cdk.Stack {
       restApiName: 'Simple API',
     })
 
-    const redirect = new apigw.HttpIntegration('https://buildon.aws')
+    const redirect = new apigw.HttpIntegration('https://aws.amazon.com')
     
     api.root.addMethod('GET', redirect);
 
