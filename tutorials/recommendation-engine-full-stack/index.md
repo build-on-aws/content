@@ -63,7 +63,10 @@ cd recommendation-engine-full-stack
 git lfs fetch origin main
 git lfs pull origin
 ```
-
+7. Open AWS Console and check the 2 API's that have been deployed in Sagemaker.
+8. Use Cloud 9 to build the REST API's using Chalice 
+9. Integrate the Local UI with the REST API's.
+10. Following command to delete the stack. 
 
 🎥 Here is a video containing a hands-on implementation about this section.
 
