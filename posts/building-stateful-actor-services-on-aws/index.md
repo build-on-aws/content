@@ -7,7 +7,6 @@ tags:
   - concurrency
   - eks
   - kubernetes
-  - ecs
   - dotnet
   - csharp
 authorGithubAlias: bbgu1
@@ -243,4 +242,13 @@ On EKS, addons including [ADOT collector](https://docs.aws.amazon.com/eks/latest
 
 ## Conclusion
 
-Building a stateful application with traditional microservices architecture can be challenging, but an actor model and actor-based services can provide a better solution with high concurrency and reliability. I used modules of Proto.Actor as example and showed that, with an actor model and using AWS services such as EKS and DynamoDB, provide simple and reliable building blocks for your actor system.
+Building a stateful application with traditional microservices architecture can be challenging, but an actor model and actor-based services can simplify the development of microservcies and distributed systems with high concurrency and reliability. I used modules of Proto.Actor as example, and showed that an actor framework, and AWS services such as EKS and DynamoDB, provide simple and reliable building blocks for developing your actor system.
+
+To learn more about the actor model and actor frameworks, you may check out the following resources:
+- [Actor model - Wikipedia](https://en.wikipedia.org/wiki/Actor_model): This article gives an overview of the history, fundamental concepts, applications, and programming languages of the actor model of concurrent computation.  It also lists various programming languages that employ the Actor model, as well as libraries and frameworks that permit actor-style programming in languages that don't have actors built-in. 
+- [Actors: A Model of Concurrent Computation in Distributed Systems](https://direct.mit.edu/books/monograph/4794/ActorsA-Model-of-Concurrent-Computation-in): This thesis by Gul Agha provides both a syntactic definition and a denotational model of Hewitt's actor paradigm, explains how actor model addresses some central issues in distributed computing. 
+- [How the Actor Model Meets the Needs of Modern, Distributed Systems](https://doc.akka.io/docs/akka/current/typed/guide/actors-intro.html): Akka is a popular framework based on Actor model and built on the principles outlined in the [Reactive Manifesto](https://www.reactivemanifesto.org/).  This guide explains how use of actor model can overcome the challenges in building modern, distributed systems. 
+
+
+
+
