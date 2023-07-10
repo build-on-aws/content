@@ -81,7 +81,7 @@ An OpenSearch Service domain is synonymous with an OpenSearch cluster. Domains a
 
 ![Image: image.png](images/image_07.png)
 
-### **Mapping concepts across SQL and OpenSearch**
+### Mapping concepts across SQL and OpenSearch
 
 Before we use SQL to search data in your OpenSearch domain, we should understand and map concepts across SQL and OpenSearch. While SQL and OpenSearch have different terms for the way the data is organized (and different semantics), essentially their purpose is the same. So let’s start from the bottom; these roughly are:
 
