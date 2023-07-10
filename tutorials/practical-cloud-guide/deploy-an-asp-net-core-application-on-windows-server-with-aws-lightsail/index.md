@@ -319,4 +319,7 @@ The `deploy_iis.ps1` Powershell script shows how you can use familiar scripting 
 
 ## What’s next?
 
-In the next section of the Practical Cloud Guide, you will deploy a [Java application on a Linux server](/posts/deploy-a-java-app-on-linux/) with AWS Lightsail.
+In the next section of the Practical Cloud Guide, you will deploy a Java application on a Linux server with AWS Lightsail - see the link below.
+
+|SeriesToC|
+|---------|

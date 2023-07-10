@@ -1,9 +1,11 @@
 ---
 title: "The Practical Cloud Guide for IT Pros"
 description: "Introduction to the Practical Cloud Guide, a series of articles and tutorials to help IT Administrators and Pros successfully transition to the cloud"
-navigationBars: none
+navigationBars: bottom
 posts:
     - were-moving-to-the-cloud-a-practical-guide-to-cloud-migration
+    - deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail
+    - deploy-a-java-application-on-linux
 --- 
 
 | SeriesToC |
