@@ -1,6 +1,6 @@
 ---
 title: "Creating and Managing Organizations"
-description: ""
+description: "An introduction to AWS Organizations for managing AWS accounts and their access to services and resources. The article covers basic concepts, best practices, and provides links to tutorials."
 tags:
     - aws-iam
     - organizations
@@ -9,7 +9,7 @@ authorName: Sophia Parafina
 date: 2023-06-21
 ---
 
-Managing compute resources is one role of an IT Pro. As with an on-premise enterprise, cloud resources such as storage, compute, and applications need to be managed. Cloud engineers. In this article, you’ll learn about how to create an organization to manage users.
+Managing compute resources is one responsibility of an IT Pro. As a cloud engineer you will manage cloud resources such as storage, compute, and applications for your enterprise organization. In this article, you’ll learn about AWS Organization, a service to manage access to resources by creating groups and policies across the enterprise.
 
 ## What you will learn
 
@@ -24,11 +24,10 @@ Before starting this tutorial, you will need an AWS Account. If you don't yet ha
 
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | Beginner - 100                         |
+| ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 15 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-06-21                             |
 
@@ -72,7 +71,8 @@ The above tutorial will walk you through each step of the process, however, ther
 
 ![Organization support plans](./images/support_plans.png)
 
-- Secure the root or Management account. You should avoid using the the root account for administrative tasks and workloads. You should enable [multi-factor authentication](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_mfa) for the root account.
+- Secure the root or Management account. Avoid using the the root account for administrative tasks and workloads. 
+- Enable [multi-factor authentication](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_mfa) for the root account.
 - Create alternate contacts for billing, operations, and security accounts to ensure notifications are properly routed. Consider using email distribution lists to reach multiple team members.
 
 ### Organization Units (OU)
@@ -85,7 +85,7 @@ The above tutorial will walk you through each step of the process, however, ther
 
 ![Example organization structure](./images/organization.png)
 
-- You can find a list of [best practice OUs](https://aws.amazon.com/blogs/mt/best-practices-for-organizational-units-with-aws-organizations/) in this article.
+- You can find a list of [best practice OUs](https://aws.amazon.com/blogs/mt/best-practices-for-organizational-units-with-aws-organizations/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq) in this article.
 
 ### Service Control Policies
 
@@ -97,11 +97,11 @@ The above tutorial will walk you through each step of the process, however, ther
 
 ### Testing SCPs
 
-- Organizations do not have a direct way to test the effect of SCPs. However, the AWS Identity and Access Management (IAM) Access Advisor can show [last accessed services for an Organization](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-view-data-orgs.html). This function is also available through the AWS CLI with the command `aws generate-organizations-access-report` and the AWS API with [GenerateOrganizationsAccessReport](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html). The Access Identity and Access Management Guide has the details on [viewing last accessed information for Organizations](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-view-data-orgs.html).
+- Organizations do not have a direct way to test the effect of SCPs. However, the AWS Identity and Access Management (IAM) Access Advisor can show last accessed services for an Organization. This function is also available through the AWS CLI with the command `aws generate-organizations-access-report` and the AWS API with [GenerateOrganizationsAccessReport](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq). The Access Identity and Access Management Guide has the details on [viewing last accessed information for Organizations](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-view-data-orgs.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ![Organization access report](./images/organization-access-report.png)
 
-- The alternative way to test SCPs is to use AWS CloudTrail and you can follow steps on [how to create a trail for an organization](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html).
+- The alternative way to test SCPs is to use AWS CloudTrail and you can follow steps on [how to create a trail for an organization](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ## What you have accomplished
 
@@ -113,4 +113,4 @@ Links to Organizations resources are available throughout this post. You are enc
 
 ## What's next
 
-Organizations provide a framework for managing accounts through organization units and service control policies. However, OU members or accounts require fine grained control to specify who or what can access the AWS services and resources in those accounts. In the next article, you will learn about AWS Identity and Access Management (IAM) which centrally manages fine grain access across AWS services and resource.
+Organizations provide a framework for managing accounts through organization units and service control policies. However, OU members or accounts require fine grained control to specify who or what can access the AWS services and resources in those accounts. In the following article, you will learn about best practice for securing accounts and how to use [AWS Identity and Access Management (IAM)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq) to manage fine grain access across AWS services and resource.
