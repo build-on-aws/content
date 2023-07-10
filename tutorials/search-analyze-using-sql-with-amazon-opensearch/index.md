@@ -77,11 +77,11 @@ An OpenSearch Service domain is synonymous with an OpenSearch cluster. Domains a
 
 > Note: If the Sample eCommerce Orders was already ingested you will see “View data” instead, you can skip the step above in that case.**
 
-1. Click the Hamburger Icon to expand the menu, and then click on “Query Workbench”. This will open up the “Query Editor” where you can enter your SQL queries, with the results showing in the “Output” pane below that.
+5. Click the Hamburger Icon (the icon top lef under "Open Search Dashboards" - it looks like 3 horizontal lines above each other) to expand the menu, and then click on “Query Workbench”. This will open up the “Query Editor” where you can enter your SQL queries, with the results showing in the “Output” pane below that.
 
 ![Image: image.png](images/image_07.png)
 
-## **Mapping concepts across SQL and OpenSearch**
+### **Mapping concepts across SQL and OpenSearch**
 
 Before we use SQL to search data in your OpenSearch domain, we should understand and map concepts across SQL and OpenSearch. While SQL and OpenSearch have different terms for the way the data is organized (and different semantics), essentially their purpose is the same. So let’s start from the bottom; these roughly are:
 
@@ -92,13 +92,7 @@ Before we use SQL to search data in your OpenSearch domain, we should understand
 |`table`|`index`|The target against which queries, whether in SQL or OpenSearch get executed against.|
 |`schema`|*implicit*|In RDBMS, `schema` is mainly a namespace of tables and typically used as a security boundary. OpenSearch does not provide an equivalent concept for it. However when security is enabled, OpenSearch automatically applies the security enforcement so that a role sees only the data it is allowed to (in SQL jargon, its *schema*).|
 |`catalog` or `database`|`cluster` instance or domain|In SQL, `catalog` or `database` are used interchangeably and represent a set of schemas that is, a number of tables. In OpenSearch the set of indices available are grouped in a `cluster`` or domain`. The semantics also differ a bit; a `database` is essentially yet another namespace (which can have some implications on the way data is stored) while an OpenSearch `cluster` is a runtime instance, or rather a set of at least one OpenSearch instance (typically running distributed). In practice this means that while in SQL one can potentially have multiple catalogs inside an instance, in OpenSearch one is restricted to only *one*.|
-|`cluster`|`cluster` (federated)|Traditionally in SQL, *cluster* refers to a single RDMBS instance which contains a number of `catalog`s or `database`s (see above). While RDBMS tend to have only one running instance, on a single machine (*not* distributed), OpenSearch goes the opposite way and by default, is distributed and multi-instance.
-Further more, an OpenSearch `cluster` can be connected to other `cluster`s in a *federated* fashion thus `cluster` means:
-
-single cluster:: Multiple Elasticsearch instances typically distributed across machines, running within the same namespace.
-multiple clusters:: Multiple clusters, each with its own namespace, connected to each other in a federated setup.
-
-Cross-cluster search in Amazon OpenSearch Service lets you perform queries and aggregations across multiple connected domains. It often makes more sense to use multiple smaller domains instead of a single large domain, especially when you're running different types of workloads.|
+|`cluster`|`cluster` (federated)|Traditionally in SQL, *cluster* refers to a single RDMBS instance which contains a number of `catalog`s or `database`s (see above). While RDBMS tend to have only one running instance, on a single machine (*not* distributed), OpenSearch goes the opposite way and by default, is distributed and multi-instance. <br> <br>Further more, an OpenSearch `cluster` can be connected to other `cluster`s in a *federated* fashion thus `cluster` means:<br>`single cluster`: Multiple Elasticsearch instances typically distributed across machines, running within the same namespace.<br>`multiple clusters`:: Multiple clusters, each with its own namespace, connected to each other in a federated setup.<br><br>Cross-cluster search in Amazon OpenSearch Service lets you perform queries and aggregations across multiple connected domains. It often makes more sense to use multiple smaller domains instead of a single large domain, especially when you're running different types of workloads.|
 
 ## Step 3: Running Basic SQL Queries
 
@@ -120,7 +114,7 @@ Sample Results (The table of sample data ingested is `opensearch_dashboards_samp
 |opensearch_dashboards_sample_data_logs|
 |.kibana|
 
-1. Retrieve a limited set of documents (5) from the sample e-commerce table (sample results follow the SQL query below)
+2. Retrieve a limited set of documents (5) from the sample e-commerce table (sample results follow the SQL query below)
 
 ```sql
 SELECT *
@@ -140,7 +134,7 @@ Click on (+) next to the products, event and `geoip` headings (for order id 5846
 
 ![Image: image.png](images/image_11.png)
 
-1. We want retrieve a specific order, so we need to get the datatypes of all the columns in this table, using the SQL query below, and scrolling through the results to find the datatype of the column order_id.
+3. We want retrieve a specific order, so we need to get the datatypes of all the columns in this table, using the SQL query below, and scrolling through the results to find the datatype of the column order_id.
 
 ```sql
 DESCRIBE TABLES LIKE opensearch_dashboards_sample_data_ecommerce
@@ -148,7 +142,7 @@ DESCRIBE TABLES LIKE opensearch_dashboards_sample_data_ecommerce
 
 ![Image: image.png](images/image_12.png)
 
-1. Since the datatype of the column `order_id` is keyword, we need to enclose the search in quotes.
+4. Since the datatype of the column `order_id` is keyword, we need to enclose the search in quotes.
 
 ```sql
 SELECT *
@@ -156,7 +150,7 @@ FROM opensearch_dashboards_sample_data_ecommerce
 WHERE order_id = '584677'
 ```
 
-1. Use the SQL `SELECT` clause, along with `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`, and `LIMIT` to search and aggregate data. Among these clauses, `SELECT` and `FROM` are required, as they specify which fields to retrieve and which indexes to retrieve them from. All other clauses are optional.
+5. Use the SQL `SELECT` clause, along with `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`, and `LIMIT` to search and aggregate data. Among these clauses, `SELECT` and `FROM` are required, as they specify which fields to retrieve and which indexes to retrieve them from. All other clauses are optional.
 
 The complete syntax for searching and aggregating data is as follows (refer to the [link](https://opensearch.org/docs/latest/search-plugins/sql/sql/basic/) for details):
 
@@ -170,7 +164,7 @@ FROM index_name
 [LIMIT [offset, ] size]
 ```
 
-1. Use the `DISTINCT` clause to get back only unique field values. You can specify one or more field names:
+6. Use the `DISTINCT` clause to get back only unique field values. You can specify one or more field names:
 
 ```sql
 SELECT DISTINCT manufacturer
@@ -186,7 +180,7 @@ FROM opensearch_dashboards_sample_data_ecommerce
 |Gnomehouse|
 |Gnomehouse mom |
 
-1. To use an aggregate function like SUM - enclose a single field name/column or expression as a parameter. If you specify a list of one or more fields before the aggregate function, you must specify the same list as part of the `GROUP BY` clause otherwise the aggregate function will calculate the expression over all the documents in the index. Run the query below to calculate the sum of total_quantity by manufacturer.
+7. To use an aggregate function like SUM - enclose a single field name/column or expression as a parameter. If you specify a list of one or more fields before the aggregate function, you must specify the same list as part of the `GROUP BY` clause otherwise the aggregate function will calculate the expression over all the documents in the index. Run the query below to calculate the sum of total_quantity by manufacturer.
 
 Use the `GROUP BY` clause to define subsets of a result set. You can specify the field name (column name) to aggregate on in the `GROUP BY` clause. For example, the following query returns the department numbers and the total sales for each department:
 
@@ -220,7 +214,7 @@ group by manufacturer
 |Tigress Enterprises Curvy|138|
 |Tigress Enterprises MAMA|148|
 
-1. You can use an expression in the GROUP BY clause. For example, the following query returns the average sales or total_price and count of records for each year and month:
+8. You can use an expression in the GROUP BY clause. For example, the following query returns the average sales or total_price and count of records for each year and month:
 
 ```sql
 SELECT year(order_date), month(order_date), avg(taxless_total_price), count(*)
@@ -248,7 +242,7 @@ OpenSearch supports the following aggregate functions:
 |`STDDEV_POP`|Returns the population standard deviation of the results. Returns 0 when there is only one row of results.|
 |`STDDEV_SAMP`|Returns the sample standard deviation of the results. Returns null when there is only one row of results.|
 
-1. Use aggregate expressions as part of larger expressions in SELECT. The following query calculates the average commission for each manufacturer as 5% of the average sales:
+9. Use aggregate expressions as part of larger expressions in SELECT. The following query calculates the average commission for each manufacturer as 5% of the average sales:
 
 ```sql
 SELECT manufacturer, avg(taxless_total_price) * 0.05 as avg_commission 
@@ -318,7 +312,7 @@ limit 5
 |727381|
 |718424|
 
-1. The ``HAVING`` filter is applied after the ``GROUP BY`` phase, so you can use the ``HAVING`` clause to limit the groups that are included in the results.
+2. The ``HAVING`` filter is applied after the ``GROUP BY`` phase, so you can use the ``HAVING`` clause to limit the groups that are included in the results.
 
 The following query returns the list of manufacturers along with the sum of total_quantity where the sum exceeds 1,000.
 
@@ -339,7 +333,7 @@ having sum(total_quantity)> 1000
 |Pyramidustries|2142|
 |Tigress Enterprises|2388|
 
-1. Use an alias for an aggregate expression in the `HAVING` clause. The following query uses an alias to return the total quantity by manufacturer where the sum exceeds 2,000.
+3. Use an alias for an aggregate expression in the `HAVING` clause. The following query uses an alias to return the total quantity by manufacturer where the sum exceeds 2,000.
 
 ```sql
 SELECT manufacturer, sum(total_quantity) tot_qty
@@ -356,7 +350,7 @@ having tot_qty > 2000
 |Pyramidustries|2142|
 |Tigress Enterprises|2388|
 
-1. The ``DELETE`` statement deletes documents that satisfy the predicates in the ``WHERE`` clause. If you don’t specify the ``WHERE`` clause, all documents are deleted. It is disabled by default. To enable the ``DELETE`` functionality in SQL, you need to update the configuration by sending the following request using the console in Dev Tools.
+4. The ``DELETE`` statement deletes documents that satisfy the predicates in the ``WHERE`` clause. If you don’t specify the ``WHERE`` clause, all documents are deleted. It is disabled by default. To enable the ``DELETE`` functionality in SQL, you need to update the configuration by sending the following request using the console in Dev Tools.
 
 Click the hamburger icon (top left) and “Dev Tools” menu option (at the bottom) - as seen in the screenshot below.
 
@@ -366,6 +360,7 @@ In the “Dev Tools” console, enter the code below into the console left pane,
 
 ```json
 PUT _plugins/_query/settings
+
 {
   "transient": {
     "plugins.sql.delete.enabled": "true"
@@ -395,6 +390,7 @@ Statement for inserting into employees_nested:
 
 ```json
 POST employees_nested/_bulk?refresh
+
 {"index":{"_id":"1"}}
 {"id":3,"name":"Bob Smith","title":null,"projects":[{"name":"SQL Spectrum querying","started_year":1990},{"name":"SQL security","started_year":1999},{"name":"OpenSearch security","started_year":2015}]}
 {"index":{"_id":"2"}}
@@ -407,6 +403,7 @@ Statement for inserting into accounts:
 
 ```sql
 PUT accounts/_bulk?refresh
+
 {"index":{"_id":"1"}}
 {"account_number":1,"balance":39225,"firstname":"Amber","lastname":"Duke","age":32,"gender":"M","address":"880 Holmes Lane","employer":"Pyrami","email":"amberduke@pyrami.com","city":"Brogan","state":"IL"}
 {"index":{"_id":"6"}}
@@ -443,7 +440,7 @@ Result set:
 |---|---|---|---|---|
 |6|Hattie|Bond|6|Jane Smith|
 
-1. Use Cross join, also known as cartesian join, to combine each document from the first index with each document from the second. The result set is the the cartesian product of documents of both indexes. This operation is similar to the inner join without the `ON` clause that specifies the join condition.
+2. Use Cross join, also known as cartesian join, to combine each document from the first index with each document from the second. The result set is the the cartesian product of documents of both indexes. This operation is similar to the inner join without the `ON` clause that specifies the join condition.
 
 > **Note:** It’s risky to perform a cross join on two indexes of large or even medium size. It might trigger a circuit breaker that terminates the query to avoid running out of memory.
 
@@ -472,7 +469,7 @@ Result set:
 |18|Dale|Adams|4|Susan Smith|
 |18|Dale|Adams|6|Jane Smith|
 
-1. Use left outer join to retain rows from the first index if it does not satisfy the join predicate. The keyword `OUTER` is optional.
+3. Use left outer join to retain rows from the first index if it does not satisfy the join predicate. The keyword `OUTER` is optional.
 
 ```sql
 SELECT
@@ -492,7 +489,7 @@ Result set:
 |13|Nanette|Bates|null|null|
 |18|Dale|Adams|null|null|
 
-1. Use subquery which is a complete `SELECT` statement used within another statement and enclosed in parenthesis:
+4. Use subquery which is a complete `SELECT` statement used within another statement and enclosed in parenthesis:
 
 ```sql
 SELECT 
@@ -553,7 +550,7 @@ SELECT address FROM accounts where match(address,"Street Lane",operator='or')
 
 The above results contain addresses that contain “Lane” or “Street”.
 
-1. To search for text in multiple fields, use `MULTI_MATCH` function. This function maps to the `multi_match` query used in search engine, to returns the documents that match a provided text, number, date or boolean value with a given field or fields. eg. To search for** **`Dale`** **in either the** **`firstname`** **or** **`lastname`** **fields could be called from *SQL* using `multi_match` function. The `MATCHQUERY` and `MATCH_QUERY` functions are synonyms for the [`MATCH`](https://opensearch.org/docs/2.8/search-plugins/sql/full-text#match) relevance function.
+2. To search for text in multiple fields, use `MULTI_MATCH` function. This function maps to the `multi_match` query used in search engine, to returns the documents that match a provided text, number, date or boolean value with a given field or fields. eg. To search for `Dale` **in either the** `firstname` **or** `lastname` fields could be called from *SQL* using `multi_match` function. The `MATCHQUERY` and `MATCH_QUERY` functions are synonyms for the [`MATCH`](https://opensearch.org/docs/2.8/search-plugins/sql/full-text#match) relevance function.
 
 ```sql
 SELECT firstname, lastname
@@ -565,7 +562,7 @@ WHERE multi_match(['*name'], 'Dale')
 |---|---|
 |Dale|Adams|
 
-1. To return a relevance score along with every matching document, use the `SCORE`, `SCOREQUERY`, or `SCORE_QUERY` functions.
+2. To return a relevance score along with every matching document, use the `SCORE`, `SCOREQUERY`, or `SCORE_QUERY` functions.
 
 Syntax:
 
@@ -611,6 +608,7 @@ To use the SQL plugin with your own applications, send requests to the `_plugins
 
 ```json
 POST _plugins/_sql
+
 {
 "query": "SELECT * FROM accounts LIMIT 3,"
 }
@@ -620,6 +618,7 @@ You can query multiple indexes by using a comma-separated list:
 
 ```json
 POST _plugins/_sql
+
 {
   "query": "SELECT * FROM my-index1,myindex2,myindex3 LIMIT 50"
 }
@@ -629,6 +628,7 @@ You can also specify an index pattern with a wildcard expression:
 
 ```json
 POST _plugins/_sql
+
 {
   "query": "SELECT * FROM my-index* LIMIT 50"
 }
@@ -644,12 +644,13 @@ You can specify the [response format](https://opensearch.org/docs/latest/search-
 
 ```json
 POST _plugins/_sql?format=json
+
 {
 "query": "SELECT * FROM my-index LIMIT 50"
 }
 ```
 
-Another way to query your data in OpenSearch with SQL using a REST API, is to send HTTP requests to ``_````sql`` using the following format:
+Another way to query your data in OpenSearch with SQL using a REST API, is to send HTTP requests to `_sql` using the following format:
 
 ```json
 POST domain-endpoint/_plugins/_sql
@@ -664,7 +665,8 @@ For example - using the Dev Tools console - run the following SQL query (results
 SQL Query via API
 
 ```json
-POST /_plugins/_sql 
+POST /_plugins/_sql
+
 {
   "query" : "SELECT * FROM accounts"
 }
@@ -809,7 +811,7 @@ Broadly, you can classify queries into two categories—*leaf queries* and *comp
 
 **Compound queries**: Compound queries serve as wrappers for multiple leaf or compound clauses either to combine their results or to modify their behavior. They include the Boolean, disjunction max, constant score, function score, and boosting query types. To learn more, see [Compound queries](https://opensearch.org/docs/latest/opensearch/query-dsl/compound/index).
 
-> Comment: You can further explore OpenSearch, by building an application for intensive searching of data and implementing searches using SQL. OpenSearch is highly optimized for search use-cases with it’s real-time distributed search and analytics engine providing full-text search capabilities and horizontal scaling, while still providing sub-second latency for results.
+> Comment: You can further explore OpenSearch,Click the Hamburger Icon to expand the menu by building an application for intensive searching of data and implementing searches using SQL. OpenSearch is highly optimized for search use-cases with it’s real-time distributed search and analytics engine providing full-text search capabilities and horizontal scaling, while still providing sub-second latency for results.
 
 In [this article](https://stackoverflow.com/collectives/aws/articles/76223192/building-a-crud-application-in-go-for-amazon-opensearch), you can learn how to build an CRUD application for Amazon OpenSearch using the [Go](https://go.dev/) programming language. The project includes everything you need to build your own development environment, such as specific distributions like:
 
