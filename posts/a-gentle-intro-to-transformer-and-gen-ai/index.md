@@ -12,7 +12,7 @@ authorName: Paul Colmer
 additionalAuthors: 
   - authorGithubAlias: Xiaoyuao988
     authorName: Xiaoyu Xing
-date: 2023-06-22  
+date: 2023-07-10  
 ---
 
 Interest in the use of Generative AI has skyrocketed in the past few months.  Many of AWS customers are wanting to learn how they can experiment with the models on the Amazon SageMaker service, particularly in the area of natural language processing.  But what is the secret sauce behind large language models and how do they work?
