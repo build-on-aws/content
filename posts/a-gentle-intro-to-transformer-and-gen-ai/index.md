@@ -7,6 +7,8 @@ tags:
   - gen-ai
   - prompt-engineering
   - fine-tuning
+spaces:
+  - generative-ai
 authorGithubAlias: pcolmer99
 authorName: Paul Colmer
 additionalAuthors: 
