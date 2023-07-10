@@ -269,7 +269,7 @@ Human feedback would be subjective, but what RLHF doing well is to aggregate hum
 One example use case of RLHF with LLM is de-toxicity of outputs. 
 
 ### Summary - it is all about Customization and Optimization
-
+n conclusion, customization of pre-trained LLM models to fit your specific needs is an evolving field with numerous ongoing research efforts; hopefully, the popular techniques shared here offer valuable guidance as you embark on this exciting journey.
 ![Customization-summary](images/GenAI_Customization-summary.png)
 
 Customization of pre-trained LLM models to fit your specific needs is an evolving field with numerous ongoing research efforts. Hopefully, the popular techniques shared here offer valuable guidance as you embark on this exciting journey.
