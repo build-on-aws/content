@@ -170,7 +170,7 @@ WantedBy=multi-user.target
 Copy the script add your credentials, AWS region, and the name of your S3 bucket.
 
 ```bash
-#!
+#! /bin/bash
 export AWS_ACCESS_KEY_ID=<your_access_key>
 export AWS_SECRET_ACCESS_KEY=<your_secret_key>
 export AWS_REGION=<your_aws_region>
