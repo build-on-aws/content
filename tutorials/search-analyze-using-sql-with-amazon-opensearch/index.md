@@ -11,17 +11,15 @@ authorGithubAlias: ambar265
 authorName: Ambar Kumar
 date: 2023-07-10
 ---
+
 | ToC |
 |-----|
 
-_||
 Amazon OpenSearch is a community-driven, secure and fully open source search and analytics service with a rich roadmap of new and innovative functionality. It provides a REST API to send and query data on a distributed platform. It essentially helps everyone find what they need faster—from employees who need documents from their intranet to customers browsing online for the perfect pair of shoes.
 
 Amazon OpenSearch Service offers a choice of open source engines to deploy and run, including multiple versions of ALv2 Elasticsearch as well as new versions of OpenSearch. Unlike other database technologies, you structure your data in indexes instead of tables. Each json object that you send to you OpenSearch index is called a 'document' (c.f. 'row' in a relational database). The JSON keys for that document are called 'fields' (c.f. columns), and the values are values.
 
 The speed and scalability of OpenSearch and its ability to index many types of content mean that it can be used for a number of use cases including Website search, Enterprise search, Log analytics, Application performance monitoring and Security analytics.
-
-_||
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -32,8 +30,6 @@ _||
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/sample-python-web-app)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-04-11                                                      |
-
-_==
 
 Amazon OpenSearch offers a number of features to help you customize your search experience such as Full-text querying, Autocomplete, Scroll Search, customizable scoring and ranking, and more. In addition to the Search API, OpenSearch  provides the familiar SQL query syntax including aggregations, group by, and where clauses to investigate your data. You can read data as JSON documents or CSV tables so you have the flexibility to use the format that works best for you.
 
@@ -72,14 +68,14 @@ An OpenSearch Service domain is synonymous with an OpenSearch cluster. Domains a
 1. Login into OpenSearch Dashboards with the username and password you created in Step 1.11
   ![Image: image.png](images/image_03.png)
 1. After login is successful, you will see the screens below in sequence - click “Add data”, Select “Global” tenant and click on the “Add data” button under “Sample eCommerce orders”. That will ingest the sample data comprising of e-commerce orders, into this OpenSearch domain, which you will query using SQL for the rest of this tutorial.
-    _||
-    ![Image: image.png](images/image_04.png)
-    _||
-    ![Image: image.png](images/image_05.png)
-    _||
-    ![Image: image.png](images/image_06.png)
-    _==
-    > Note: If the Sample eCommerce Orders was already ingested you will see “View data” instead, you can skip the step above in that case.**
+
+![Image: image.png](images/image_04.png)
+
+![Image: image.png](images/image_05.png)
+
+![Image: image.png](images/image_06.png)
+
+> Note: If the Sample eCommerce Orders was already ingested you will see “View data” instead, you can skip the step above in that case.**
 
 1. Click the Hamburger Icon to expand the menu, and then click on “Query Workbench”. This will open up the “Query Editor” where you can enter your SQL queries, with the results showing in the “Output” pane below that.
 
