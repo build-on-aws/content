@@ -96,9 +96,7 @@ Prepare three s3 bucket for fine-tuning
 
 ### Step3. Prepare training data
 
-Prepare your own images of products or characters, also the captions for each image. For example, I would like to create the endorsement photo with Patrick Stewart, so I prepare 6 Patrick Stewart photos(512*704) and 6 txt files with the same name. Write “zwxman” as prompt in each txt file. Then zip the folder to **training_data.zip** for later use.
-
-![Image2](images/Image2.png)
+Prepare your own images of products or characters, also the captions for each image. For example, I would like to create the endorsement photo with someone, so I prepare 6 photos(512*704) and 6 txt files with the same name. Write the prompt in each txt file. Then zip the folder to **training_data.zip** for later use.
 
 ### Step4. Build the training script
 
@@ -361,13 +359,9 @@ def lambda_handler(event, context):
 * Deploy the function
 
 ![Image6](images/Image6.png)
-Now, you are all set. You can try to upload the **training_data.zip** to start the auto fine-tuning pipeline. You can see your model under `s3://<your s3 bucket of model output>` and generated image under under `s3://<your s3 bucket of image output>`.
+Now, you are all set. You can try to upload the **training_data.zip** to start the auto fine-tuning pipeline. You can see your model under `s3://<your s3 bucket of model output>` and generated image under under `s3://<your s3 bucket of image output>`. You can also download the model from s3 and use in WebUI directly.
 
 ![Image7](images/Image7.png)
-![Picture5](images/Picture5.png)
-Of course, you can also download the model from s3 and use in WebUI directly.
-
-![Image8](images/Image8.png)
 
 ## Conclusion
 
