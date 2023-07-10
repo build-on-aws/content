@@ -302,3 +302,6 @@ Deploying a VPS, either Windows or Linux. on AWS Lightsail reduces that amount o
 ## What’s next?
 
 The next set of tutorials shows how to migrate and deploy a relational database in the cloud. For now. you will continue to use AWS Lightsail, but you will perform the database deployment and migration with the AWS Command Line Interface (CLI) instead of the web console. Learning how to use the CLI is the first step towards building infrastructure with code.
+
+|SeriesToC|
+|---------|
