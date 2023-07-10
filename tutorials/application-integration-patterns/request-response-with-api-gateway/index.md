@@ -19,17 +19,17 @@ date: 2023-07-10
 
 Before starting this tutorial, you will need the following:
 
- - An AWS Account: [How to create a free AWS account](https://aws.amazon.com/getting-started/guides/setup-environment/)
-  - The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/)
+- An AWS Account: [How to create a free AWS account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 | Attributes| |
 | ---- | ---- |
 | ✅ AWS Level | Intermediate - 200 |
 | ⏱ Time to complete | 30 minutes |
 | 💰 Cost to complete | Free when cleaning up after the tutorial (instructions below) |
-| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/)<br>- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/) |
+| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a quick star rating?</a>    |
-| ⏰ Last Updated     | 2023-07-04                             |
+| ⏰ Last Updated     | 2023-07-10                             |
 
 | ToC |
 |-----|
@@ -46,21 +46,21 @@ In this step-by-step tutorial, we will implement this pattern using Amazon API G
 
 We will also higlight the power of the AWS Cloud Development Kit (CDK) to define the entire infrastructure as code.
 
-> If you want to learn more about the AWS Cloud Development Kit, have a look at the [AWS CDK Developer Guide](https://docs.aws.amazon.com/cdk/v2/guide/home.html).
+> If you want to learn more about the AWS Cloud Development Kit, have a look at the [AWS CDK Developer Guide](https://docs.aws.amazon.com/cdk/v2/guide/home.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 By the end of this tutorial, you will have gained a solid understanding of the individual components of an HTTP-based request-response API, successfully implemented synchronous communication between Amazon API Gateway and AWS Lambda, and acquired some hands-on experience building infrastructure as code with CDK.
 
 But before we start building the API, let's have a quick look at the pros and cons of the synchronous request-response pattern.
 
-## Pros and Cons of the Synchronous Request-Response Pattern:
+## Pros and Cons of the Synchronous Request-Response Pattern
 
-### Pros:
+### Pros
 
 - **Real-time interaction:** The synchronous request-response pattern enables instant feedback to the client, enhancing real-time interactions and improving the user experience.
 - **Simplicity:** The request-response pattern is straightforward to implement and understand, making it accessible, especially for developers new to building APIs.
 - **Error handling:** Synchronous communication simplifies error and exception handling, allowing for prompt notifications to clients.
 
-### Cons:
+### Cons
 
 - **Scalability:** The synchronous pattern can become a bottleneck when dealing with a large number of concurrent requests, potentially impacting the scalability of your application.
 - **Increased Latency:** Clients have to wait for a response before proceeding, introducing latency, especially when processing times are longer.
@@ -70,7 +70,8 @@ When making architectural decisions, it is important to consider these trade-off
 
 But now, let's start the tutorial and learn how to implement the synchronous request-response pattern using Amazon API Gateway and AWS Lambda.
 
-**A note on resource costs when coding along:** This tutorial uses only a minimal amount of resources, all of which are included in the [Free Tier provided by AWS](https://aws.amazon.com/free) for the first 12 months after creation of each account:
+**A note on resource costs when coding along:** This tutorial uses only a minimal amount of resources, all of which are included in the [Free Tier provided by AWS](https://aws.amazon.com/free?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) for the first 12 months after creation of each account:
+
 - A few kilobytes of code will be stored in Amazon S3, which provides 5 GB of free storage.
 - We will call API Gateway a couple of times, which provides 1 million free calls per month.
 - We will run a Lambda function for a few time, which also provides 1 million free invocations per month.
@@ -94,7 +95,7 @@ Initialize a new CDK app using the following command. We'll be using TypeScript 
 cdk init app --language=typescript
 ```
 
-This will create a CDK app with an empty stack. 
+This will create a CDK app with an empty stack.
 
 Take a look at the file structure, where you will find the required scaffolding and configuration, along with the following two TypeScript files:
 
@@ -106,13 +107,14 @@ Take a look at the file structure, where you will find the required scaffolding 
 Before adding any new resources, we can deploy the empty stack to make sure that everything has been set up.
 
 To do this, type:
-```
+
+```bash
 cdk deploy
 ```
 
-This command will "synthesize" the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/) template, and deploy it in your AWS account.
+This command will "synthesize" the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) template, and deploy it in your AWS account.
 
-> If `cdk deploy` throws an error, make sure that you have bootstrapped your AWS account following the instructions in the [CDK setup guide](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/).
+> If `cdk deploy` throws an error, make sure that you have bootstrapped your AWS account following the instructions in the [CDK setup guide](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 Once the deployment has been completed, let's navigate to the [AWS CloudFormation dashboard](https://console.aws.amazon.com/cloudformation) in the AWS Management Console, and have a look at the new CloudFormation stack
 
@@ -124,13 +126,13 @@ Now open and explore the stack details. In  the **Resources** tab you can see th
 
 ## Step 2 - Create and Deploy the API
 
-Once everything has been set up, you can create your first real resource. 
+Once everything has been set up, you can create your first real resource.
 
 Let's create an API Gateway that simply redirect any request to an existing URL.
 
 > **Pro tip:** This method is often used as a first step when migrating from a monolithic application to one using microservices and/or serverless functions. Deploying an API Gateway between the client and server creates an abstraction layer, allowing a gradual migration of individual endpoints without having to modify and redeploy the client after every single change. You can start by simply redirecting every route to the legacy app and subsequently switch individual routes to newly creates services, one by one.
 
-To get started, open _lib/request-response-example-stack.ts_ in an editor. 
+To get started, open _lib/request-response-example-stack.ts_ in an editor.
 
 After removing a few introductory comments it should look similar to this:
 
@@ -214,7 +216,7 @@ On, this page, you should be able to see a "prod" stage.
 
 > **API Gateway Stages:** On AWS, APIs are deployed in stages, like `dev`, `test`, and `prod`, representing the respective environments, or `v1`, `v2`, etc., for versioning. If you don't define a stage, the `RestApi` construct of the AWS CDK will create stage called `prod` by default.
 
-Clicking on **prod** will reveal the stage's details, including what we're most interested in: The **Invoke URL**. 
+Clicking on **prod** will reveal the stage's details, including what we're most interested in: The **Invoke URL**.
 
 This URL has been automatically created for the API. Of course, in a real-life scenario, the environment can be configured to use a much more readable, custom domain.
 
@@ -228,7 +230,7 @@ Now that the API has been set up, let's create a simple AWS Lambda function.
 
 ### 3.1 Write the Lambda function source code
 
-We'll store the Lambda function code in an assets folder inside the CDK application, so that CDK can automatically package the source and upload it into the new Lambda function. 
+We'll store the Lambda function code in an assets folder inside the CDK application, so that CDK can automatically package the source and upload it into the new Lambda function.
 
 Make sure you are in the project directory (not in _bin/_ or _lib/_) and create the following directories, as well as the file itself:
 
@@ -297,19 +299,19 @@ Type `y` to confirm, and CDK will deploy the new Lambda function along with its 
 
 ### 3.4. Test the Lambda function
 
-Once the function has been deployed, navigate to the Functions list in the [AWS Lambda Dashboard](console.aws.amazon.com/lambda).
+Once the function has been deployed, navigate to the Functions list in the [AWS Lambda Dashboard](https://console.aws.amazon.com/lambda).
 
 The function name has been automatically generated from the stack name, the function name, and a random postfix, so it should start with _BackendResponseExample..._.
 
 Click on the function name to open its details, and scroll down to the **Code source** section.
 
-The folder in the file explorer on the left contains a file called _index.js_. 
+The folder in the file explorer on the left contains a file called _index.js_.
 
 Double-click on on the file name to open its source and you can see that it's an exact copy of the file we created in our assets folder.
 
 ![Screenshot of the Lambda function source code in the AWS Management Console](images/screen-lambda-source-code.png)
 
-Now let's configure a test event. 
+Now let's configure a test event.
 
 To do this, click on the **Test** button. If you haven't configured a test event yet, this wil open the test configuration screen. Enter an **Event name**, e.g. "test-event", and click on **Save**.
 
@@ -351,7 +353,8 @@ backendResource.addMethod(
 ### 4.2 Deploy everything
 
 Run `cdk deploy` again:
-```
+
+```bash
 cdk deploy
 ```
 
@@ -383,7 +386,7 @@ And that's it!
 
 **Congratulations!** You've created everything you need to set up a REST API using AWS API Gateway, that triggers a Lambda function on a specific endpoint, and redirects every other request to a predefined URL.
 
-There's so much more you can do with API Gateway, like authentication, throttling, API keys, etc. If you want to learn more, check out the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html).
+There's so much more you can do with API Gateway, like authentication, throttling, API keys, etc. If you want to learn more, check out the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ## Final Step - Clean-up
 
@@ -399,7 +402,7 @@ The only remaining resource will be the Lambda function's source code, which has
 
 You can delete this directly in the [S3 Dashboard](https://s3.console.aws.amazon.com/s3/buckets) of the AWS Management Console:
 
-Look for an S3 bucket called _cdk-XYZ-assets-XYZ-your-region_. This is the bucket that has been created when you bootstrapped the account with AWS CDK. 
+Look for an S3 bucket called _cdk-XYZ-assets-XYZ-your-region_. This is the bucket that has been created when you bootstrapped the account with AWS CDK.
 
 I'd recommend keeping the bucket for further experiments with AWS CDK. Don't worry about costs, empty S3 buckets are completely free of charge.
 
@@ -411,13 +414,13 @@ This will open a confirmation dialog. Double-check if it's the asset bucket, typ
 
 ## Conclusion
 
-The synchronous request-response pattern is a widely used communication model in modern web and cloud architectures, and I hope that by following this tutorial, you were able to gain a clear understanding of how you can implement this pattern using Amazon API Gateway and AWS Lambda. 
+The synchronous request-response pattern is a widely used communication model in modern web and cloud architectures, and I hope that by following this tutorial, you were able to gain a clear understanding of how you can implement this pattern using Amazon API Gateway and AWS Lambda.
 
-If you want to learn more, look out for more [AWS community articles tagged api-gateway](https://community.aws/tags/api-gateway), the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html), and the many great API Gateway resources on [Serverless Land](https://serverlessland.com/search?search=api+gateway).
+If you want to learn more, look out for more [AWS community articles tagged api-gateway](https://community.aws/tags/api-gateway), the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq), and the many great API Gateway resources on [Serverless Land](https://serverlessland.com/search?search=api+gateway).
 
 ## The Complete Source Code
 
-Here is the final source code for the CDK stack (_lib/request-response-example-stack.ts_): 
+Here is the final source code for the CDK stack (_lib/request-response-example-stack.ts_):
 
 ```typescript
 import { Construct } from 'constructs';
