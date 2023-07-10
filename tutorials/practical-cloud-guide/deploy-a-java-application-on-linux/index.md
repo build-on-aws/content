@@ -11,7 +11,7 @@ tags:
     - s3
 authorGithubAlias: "spara"
 authorName: "Sophia Parafina"
-date: 2023-06-30
+date: 2023-07-10
 ---
 
 The [previous tutorial](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/) demonstrated how to create a Windows Server VPS and deploy an ASP.NET Core application. A common and similar task is deploying a Java application on a Linux server. While Javascript frameworks such as Express.js have increased in popularity for applications in the cloud, Java frameworks such as SpringBoot are equally popular in enterprise environments.
