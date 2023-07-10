@@ -511,7 +511,7 @@ Result set:
 |Amber|Duke|39225|
 |Nanette|Bates|32838|
 
-## Step 6: Using SQL Functions
+## Step 5: Using SQL Functions
 
 For a list of functions supported, [see the documentation here](https://opensearch.org/docs/latest/search-plugins/sql/functions/).
 
