@@ -34,7 +34,7 @@ This show is as interactive as our audience makes it, so join us as we work thro
 
 
 ## Schedule
-Join us for our upcoming episodes!
+Join us for our upcoming episodes on the 1st and 3rd Wednesdays of the month!!
 | Episode | Name| Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|--|
 | **S01E08**| More Terraform with Kerim | July 5 | [Watch here](https://www.twitch.tv/videos/1864025107 ) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
