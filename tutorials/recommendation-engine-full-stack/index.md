@@ -115,9 +115,9 @@ aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V3.ip
 14. There are various ways to automate these steps, but we will be using a sagemaker migration toolkit from [our GitHub Repository](https://github.com/build-on-aws/recommendation-engine-full-stack) to make this process easy. So lets move on to the next steps.
 
 ## Deploying the custom scaling model as a Sagemaker Endpoint
-1. Log onto the AWS console of the AWS Account in which you have deployed the Cloudformation templates to build thd resources for this tutorial. Make sure you are in the AWS Region in which you have deployed your stack. Copy the ARN of the Sagemaker IAM Role. We will use it for setting up the sagemaker migration toolkit, since it has the permissions necessary for creating and deploying the Sagemaker Models, Endpoint configurations and Endpoints.In my case my IAM role is in this format - `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-XXXXXXX`
+1. Log onto the AWS console of the AWS Account in which you have deployed the Cloudformation templates to build the resources for this tutorial. Make sure you are in the AWS Region in which you have deployed your stack. Copy the ARN of the Sagemaker IAM Role. We will use it for setting up the sagemaker migration toolkit, since it has the permissions necessary for creating and deploying the Sagemaker Models, Endpoint configurations and Endpoints.In my case my IAM role is in this format - `arn:aws:iam::XXXXXXXXX:role/SageMakerUserProfileRole-BuildOnAWS`
 
-2. Now, lets open Cloud 9 via the AWS Console to deploy the Custom scaling model model.joblib. Cloud9 is a browser based Integrated Development environment on AWS which makes Code devlopment super easy. Once you are logged into the AWS Cloud9 Environment, open a new terminal and execute the following command to clone the repository using the main branch.
+2. Now, lets open AWS Cloud9 via the AWS Console to deploy the Custom scaling model model.joblib. Cloud9 is a browser based Integrated Development environment on AWS which makes Code devlopment super easy. Once you are logged into the AWS Cloud9 Environment, open a new terminal (Go to Window-> New Terminal) and execute the following command to clone the repository using the main branch.
 ```bash
 git clone https://github.com/build-on-aws/recommendation-engine-full-stack 
 sudo yum install git-lfs
@@ -125,13 +125,13 @@ cd recommendation-engine-full-stack
 git lfs fetch origin main
 git lfs pull origin
 ```
-3. This is how my Cloud9 Integrated Development Environment looks like after I clone the github reporsitory.
-
-4. Here are the remaining commands to install the migration toolkit in teh Cloud 9 console which will enable us to package the custom scaling model `model.joblib` and the `inference.py`for inferencing in a format that is compatible with Sagemaker's Native SKLearn container 
+3. This is how my Cloud9 Integrated Development Environment looks like after I clone the github repository. :-  
+![Cloud 9 setup after git repo is cloned](images/cloud9.png) 
+4. Here are the remaining commands to install the migration toolkit in the Cloud9 console which will enable us to package the custom scaling model `model.joblib` and the `inference.py`for inferencing in a format that is compatible with Sagemaker's Native SKLearn container 
 ```bash
-cd recommendation-engine-full-stack/sagemaker-migration-toolkit
+cd sagemaker-migration-toolkit
 pip install wheel
-pip setup bdist_wheel
+python setup.py bdist_wheel
 pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl
 ```
 5. Next execute the below command to install the sagemaker migration toolkit. Follow steps and enter the  Sagemaker IAM role that you copied above.
@@ -179,7 +179,7 @@ cd ~/environment
 pip install chalice
 chalice new-project sagemaker-apigateway-lambda-chalice
 ```
-4. Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder. Finally this is how your config.json should be updated to look like this. Replace with the correct value for the iam_role_arn in the snippet below 
+4. Create a role `Cloud9_LambdaExecutionRole` with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder. Finally this is how your config.json should be updated to look like this. Replace with the correct value for the iam_role_arn in the snippet below 
 ```bash
 {
     "version": "2.0",
@@ -198,7 +198,7 @@ chalice new-project sagemaker-apigateway-lambda-chalice
 ```bash
 export AWS_DEFAULT_REGION=us-east-1
 ```
-6. Copy `requirements.txt` and `app.py` files from the `recommendation-engine-full-stack/apis_for_sagemaker_models chalice_custom_scaling_kmeans_api` folder to the root of the chalice project sagemaker-apigateway-lambda-chalice. Let's take a quick look at the app.py file. The `app.py` file receives teh JSON Request from the movie attributes from the front end and invokes the 2 model endpoints for the custom scaling model and the kmeans clustering model deployed on sagemaker.
+6. Copy `requirements.txt` and `app.py` files from the `recommendation-engine-full-stack/apis_for_sagemaker_models chalice_custom_scaling_kmeans_api` folder to the root of the chalice project sagemaker-apigateway-lambda-chalice. Let's take a quick look at the `app.py` file. The `app.py` file receives teh JSON Request from the movie attributes from the front end and invokes the 2 model endpoints for the custom scaling model and the kmeans clustering model deployed on sagemaker.
 Hence make sure to replace with the correct sagemaker endpoint name  for the custom scaling model and the kmeans model in this section of the code in app.py as shown below
 ```bash
 .....
@@ -217,11 +217,66 @@ responsekmeans = sagemaker.invoke_endpoint(EndpointName="kmeans-xxxxxx", Content
 .....
 ....
 ```
-
-
+7. In `sagemaker-apigateway-lambda-chalice` folder execute `chalice deploy`
+8. Once the REST API is deployed this is how your Cloud 9 console should look like :-
+9. For testing the deployed API do the following from teh Cloud 9 terminal
+```bash
+curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY 
+{ 
+    "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0", 
+    "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",
+    "Biography":"0","Horror":"0","Adventure":"0","Sport":"0","News":"0","Musical":"0",
+    "Mystery":"0","Action":"0","Comedy":"0","Sci-Fi":"1","Crime":"0","Romance":"0",
+    "Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
+}
+BODY
+```
+10. Test with Postman (Optional)
+Example of Postman POST payload is 
+```bash
+{"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
+}
+```
+11. Next we create the 2nd chalice project for teh 2nd REST API. We go to the root of the Cloud 9 environment by doing `cd ~/environment`
+on the Cloud 9 terminal and then create a new chalice project by executing
+```bash
+  chalice new-project query-athena-boto3
+```
+  - Add requirements.txt and app.py contents to the root of the project from the chalice_query_api folder. 
+  - Update role in config.json for this project by replacing with the correct iam_role_arn value. The config.json shoudl like below 
+  ```bash
+  {
+        "version": "2.0",
+        "app_name": "query-athena-boto3",
+        "iam_role_arn": "arn:aws:iam::xxxxxxxx:role/Cloud9_LambdaExecutionRole",
+        "manage_iam_role": false,
+        "stages": {
+            "dev": {
+            "api_gateway_stage": "api"
+            }
+        }
+  }
+  ```
+   - Create query_results folder in the S3 bucket that you have been using so far
+   - Execute the following command
+   ```bash 
+   cd query-athena-boto3/
+   sed -i s@BUCKET_NAME@<Replace with your bucket name>@g app.py
+   chalice deploy
+   ```
+12. Curl command for testing 
+```bash
+curl -X POST https://xxxxxxx.execute-api.us-east-1.amazonaws.com/api \ 
+-H 'Content-Type: application/json' \
+-d '{"cluster":"1.0"}'  
+```
 
 ## Integrate the API's with our fancy UI.
-9. Integrate the Local UI with the REST API's.
+1. Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
+Here is how my UI looks when everything is hooked up:<br/>
+![plot](images/myflix1.png)<br/>
+![plot](images/myflix2.png)<br/>
+![plot](images/myflix3.png)<br/>
 
 ## Clean up
 10. Following command to delete the stack. 
