@@ -168,7 +168,57 @@ sh localtest.sh
 
 
 ## Deploying the REST API's fronting the sagemaker model endpoints 
-8. Use Cloud 9 to build the REST API's using Chalice 
+1. Let us now create the API's using [Chalice framework](https://github.com/aws/chalice) which makes the creation of Lambda and API gateway very easy. Use the same Cloud 9 environment to setup Chalice and build the REST API's which will invoke the Sagemaker Model endpoints. For the purpose of next steps go to the root of the Cloud 9 environment as follows : - 
+```bash
+cd ~/environment
+```
+2. To see hidden files in Cloud9 IDE , click on the gear icon and Click on Show environment root and show hidden files. This will enable you to see teh .chalice folder once you install teh chalice frmework via the commands in the next step.
+
+3. Now install Chalice as follows:
+```bash
+pip install chalice
+chalice new-project sagemaker-apigateway-lambda-chalice
+```
+4. Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder. Finally this is how your config.json should be updated to look like this. Replace with the correct value for the iam_role_arn in the snippet below 
+```bash
+{
+    "version": "2.0",
+    "automatic_layer": true,
+    "manage_iam_role": false,
+    "iam_role_arn": "arn:aws:iam::XXXX:role/Cloud9_LambdaExecutionRole",
+    "app_name": "sagemaker-apigateway-lambda-chalice",
+    "stages": {
+      "dev": {
+        "api_gateway_stage": "api"
+      }
+    }
+}
+```
+5. Execute the below command on teh Cloud 9 terminal. Replace with correct region in which you are executing this tutorial
+```bash
+export AWS_DEFAULT_REGION=us-east-1
+```
+6. Copy `requirements.txt` and `app.py` files from the `recommendation-engine-full-stack/apis_for_sagemaker_models chalice_custom_scaling_kmeans_api` folder to the root of the chalice project sagemaker-apigateway-lambda-chalice. Let's take a quick look at the app.py file. The `app.py` file receives teh JSON Request from the movie attributes from the front end and invokes the 2 model endpoints for the custom scaling model and the kmeans clustering model deployed on sagemaker.
+Hence make sure to replace with the correct sagemaker endpoint name  for the custom scaling model and the kmeans model in this section of the code in app.py as shown below
+```bash
+.....
+......
+.....
+    res = sagemaker.invoke_endpoint(
+        EndpointName='sm-endpoint-sklearn-xxxxxx',
+        Body=result,
+        ContentType='application/json',
+        Accept='application/json'
+    )
+......
+.....
+.....
+responsekmeans = sagemaker.invoke_endpoint(EndpointName="kmeans-xxxxxx", ContentType="text/csv", Body=payload)
+.....
+....
+```
+
+
 
 ## Integrate the API's with our fancy UI.
 9. Integrate the Local UI with the REST API's.
