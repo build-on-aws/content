@@ -140,29 +140,35 @@ sagemaker_migration-configure --module-name sagemaker_migration.configure
 ```
 6. Next go to the sklearn/testing folder and download the model.joblib from the S3 bucket by executing the command as follows -
 ```bash
-cd testing/sklearn
+cd testing/sklearn/
 aws s3 cp s3://<S3 bucket from cloudformation output where all data is stored>/model.joblib ./
 ```
-7. Lets analyze the `inference.py` script inside the `testing/sklearn` folder. This `inference.py` file has the `model_fn` for loading and deserializing the model.joblib. The `input_fn` is the method that we have already modified to receive the content as `application/json` and transform it into a pandas dataframe before sending the data to the `predict_fn` which loads the dataframe into the custom scaling model and once the data is normalized, it is returned back in the correct format bas a json string via the `output_fn`.
+7. Lets analyze the `inference.py` script inside the `testing/sklearn` folder. This `inference.py` file has the `model_fn` for loading and deserializing the model.joblib. The `input_fn` is the method that we have already modified to receive the content as `application/json` and transform it into a pandas dataframe before sending the data to the `predict_fn` which loads the dataframe into the custom scaling model and once the data is normalized, it is returned back in the correct format as a json string via the `output_fn`. Here are the highlighted functions in `inference.py` file in the `testing/sklearn` folder.
 
-8. Inside the `testing/sklearn` folder, execute python test.py as shown below. This will deploy the sagemaker endpoint for the custom scaling model.
+8. 5. Execute the below command on the Cloud 9 terminal. Replace  region `us-east-1` with the correct region in which you are executing this tutorial
+```bash
+export AWS_DEFAULT_REGION=us-east-1
+```
+
+9. Inside the `testing/sklearn` folder, execute python test.py as shown below. This will deploy the sagemaker endpoint for the custom scaling model.
 ```bash
 python test.py
 ```
-Here is how the output will lookmlike on the Cloud 9 Console once the custom scaling endpoint is deployed
+Here is how the output will look like on the Cloud9 Console once the custom scaling endpoint is deployed. :-  
+![Deployment completed for model on sagemaker](images/customscalingdeployment.png) 
 
-9. (Optional steps for testing the custom endpoint after deployment). Copy teh sagemaker endpoint from above in the command below and execute to replace the SAGEMAKER-ENDPOINT in localtest.sh file
+10. (Optional steps for testing the custom endpoint after deployment). Copy the sagemaker endpoint from above in the command below and execute to replace the SAGEMAKER-ENDPOINT in localtest.sh file
 ```bash 
 sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh
 ```
 
-10. Next execute the below command and check if you have got responses in a file named prediction_response.json
+11. Next execute the below command and check if you have got responses in a file named prediction_response.json
 ```bash
 sh localtest.sh
 ```
 - You responses should look as follows: -
 
-11. This concludes the deployment of the custom scaling model. Now if you go to the AWS console, you can see that the 2 real time inferencing endpoints for the custom scaling model and the K Means clustering algoritm is now deployed in sagemaker console as follows:-
+12. This concludes the deployment of the custom scaling model. Now if you go to the AWS console, you can see that the 2 real time inferencing endpoints for the custom scaling model and the K Means clustering algoritm is now deployed in sagemaker console as follows:-
 
 
 
