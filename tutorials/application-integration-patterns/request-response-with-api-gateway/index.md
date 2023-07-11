@@ -194,13 +194,13 @@ You can now monitor the status of the individual resources in the terminal outpu
 
 ### 2.3 Inspect the deployed API
 
-Navigate to the API Gateway Dashboard in in the AWS Management Console and look at the list of APIs. If you can't find your resources, make sure you are in the correct region again.
+Navigate to the API Gateway Dashboard in in the AWS Management Console and look at the list of APIs. If you can't find your resources, make sure you are in the correct region.
 
 ![Screenshot of the list of APIs, including the Simple API](images/screen-simple-api.png)
 
 Click on the API name to open the details with the root resource **/** and its **GET** method.
 
-Click on **GET** to open the method details and have a look at the **Integration Request** on the : 
+Click on **GET** to open the method details and have a look at the **Integration Request**: 
 
 The `new HttpIntegration('https://aws.amazon.com')` statement in our stack has led to the deployment of an integration of type **HTTP_PROXY** that sends a **GET** request to the specified URL:
 
@@ -388,7 +388,7 @@ And that's it!
 
 There's so much more you can do with API Gateway, like authentication, throttling, API keys, etc. If you want to learn more, check out the [AWS API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-## Final Step - Clean-up
+##  Clean-up
 
 Feel free to continue experimenting with the API. Once you're done, you can remove everything that has been deployed by typing:
 
