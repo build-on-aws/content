@@ -60,26 +60,25 @@ In this tutorial we will be building a recommendation engine for a streaming pla
 -rw-r--r--     1 XXXXX  XXXX   2141 Jul  5 14:45 sagemaker-stack.yaml
 -rw-r--r--     1 XXXXX  XXXX   6877 Jul  7 00:57 vpc-stack.yaml
 ```
-2.The below command is used to package the CloudFormation template in "main-stack.yaml" and output the packaged template as "packaged.yaml" to an S3 bucket named "placeholder-cloudformation-s3-bucket" in the "us-east-2" region. Create your own S3 bucket in your account and use it in the command below  
+2.The below command is used to package the CloudFormation template in "main-stack.yaml" and output the packaged template as "packaged.yaml" to an S3 bucket named "placeholder-cloudformation-s3-bucket" in the "us-east-1" region. Create your own S3 bucket in your account and use it in the command below  
 ``` bash
-aws cloudformation package --template-file main-stack.yaml --output-template packaged.yaml --s3-bucket placeholder-cloudformation-s3-bucket --region us-east-2
+aws cloudformation package --template-file main-stack.yaml --output-template packaged.yaml --s3-bucket placeholder-cloudformation-s3-bucket --region us-east-1
 ```
-3. Next use execute the "aws cloudformation deploy" command to deploy the above generated CloudFormation template named package.yaml. To override the default values for the parameters provided in the main-stack.yaml for S3BucketName, SageMakerDomainName, GitHubRepo, VpcStackName, and VpcRegion you can include the --parameter-overrides option followed by the parameter key-value pairs. Here's an example of how it can be done:
+3. Next execute the "aws cloudformation deploy" command to deploy the above generated CloudFormation template named package.yaml. To override the default values for the parameters provided in the main-stack.yaml for S3BucketName, SageMakerDomainName, GitHubRepo, VpcStackName, VpcRegion, ImageId and KeyName you can include the --parameter-overrides option followed by the parameter key-value pairs. Here's an example of how I did it:
 ```bash
   aws cloudformation deploy \
   --stack-name buildonaws \
   --template-file  <Absolute path>/packaged.yaml  \
-  --parameter-overrides S3BucketName=<Provide BucketName which will hold your artifacts> \
+  --parameter-overrides S3BucketName=myfamousbucket \
                SageMakerDomainName=buildonaws \
                GitHubRepo=https://github.com/build-on-aws/recommendation-engine-full-stack \
 	       VpcStackName=MyBuildOnAWSVPC \
-	       VpcRegion=<replace with your own region> \
-               ImageId=<Provide AMI for EC2 For Amazon Linux 2023 AMI for your region> \
-	       KeyName=<Provide your keyname if you wish for troubleshooting purposes> \
+	       VpcRegion=us-east-1 \
+               ImageId=ami-06ca3ca175f37dd66 \
+	       KeyName=my-key \
 	--capabilities CAPABILITY_NAMED_IAM --region us-east-1
 ```
-  Replace the values (myfamousbucket, mydomain, myrepo, myvpc, us-east-2) with your desired default parameter values.
-
+  Replace the values (myfamousbucket, buildonaws, MyBuildOnAWSVPC, us-east-1, ami-06ca3ca175f37dd66 ,my-key) with your desired default parameter values. ami-06ca3ca175f37dd66 is the AMI for EC2 For Amazon Linux 2023 in us-east-1 region. Choose an AMI for  EC2 For Amazon Linux 2023 for teh region in which you are deploying this stack. The purpose of this EC2 Instance which will be spun up is to populate the S3 bucket with the Jupyter notebook, pre-trained models, and raw data for our tutorial. After the S3 bucket is populated, the EC2 instance is spun down.
 2. Next Login to the AWS console in which the tutorial setup will be done and validate that everything has been created properly. Look at all the Infrastructure resources that have been created for our tutorial. Go to the S3 bucket that has been created as part of this.
 3. Take a quick look at the folder structure inside the S3 bucket. Here is how the folder structure should look like :-
 ![Shows the contents of the S3 bucket created by the Cloudformation template](images/s3bucket_data.png)
