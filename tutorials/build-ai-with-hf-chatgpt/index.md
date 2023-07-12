@@ -79,12 +79,12 @@ You will be able to apply these steps to other use cases by selecting different 
 This tutorial consists of 4 parts:
 
 * Part 1 - Setup: SageMaker Studio Lab and OpenAI account.
-* Part 2 - Creating a project: Obtaining a transcript of a YouTube video.
-* Part 3 - Summarizing & Translating a video using ML models from Hugging Face.
+* Part 2 - Creating a ML project and obtaining a video transcript.
+* Part 3 - Summarizing and translating a video using ML models from Hugging Face.
 * Part 4 - Extracting steps and creating a quiz using ChatGPT APIs.
 
 
-![Solution Architecture Oveview](images/intro-01.png)
+![Solution Architecture Oveview](images/intro-01.gif)
 
 In Part 1, we will configure 2 prerequisites: accessing the [SageMaker Studio Lab Development](https://aws.amazon.com/sagemaker/studio-lab/) environment and creating [OpenAI API](https://platform.openai.com/docs/api-reference) keys for interaction with ChatGPT. What makes SageMaker Studio Lab special is that it is completely free and separate from an AWS account. If you’re new to machine learning, this free service is a fantastic way to get started. 
 
@@ -94,13 +94,51 @@ In Part 3, you will learn how to use Open Source models from the [Hugging Face H
 
 In Part 4, we will experiment with ChatGPT APIs. We will discuss prompt engineering and leverage the ChatGPT APIs to generate a step-by-step guide from a YouTube video. Additionally, we will create a quiz to test your understanding of the material.
 
-> Note: Cost
-> We will be using free resources in this tutorial.  The only potential cost that you may incur is for utilizing ChatGPT APIs if you already consumed all free credits and it will be a few cents. When you create an OpenAI account, you will be given $5 to use within the first 3 months.  This is enough to run hundreds of API requests.
+> Note: We will be using free resources in this tutorial.  The only potential cost that you may incur is for utilizing ChatGPT APIs if you already consumed all free credits and it will be a few cents. When you create an OpenAI account, you will be given $5 to use within the first 3 months.  This is enough to run hundreds of API requests.
 
 Let’s get started!
 
+## Part 1 - Setup: SageMaker Studio Lab and OpenAI account.
+
+To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/) and click **Request free account**. Fill in the required information in the form and submit your request. You will then receive an email to verify your email address. Follow the instructions in the email to complete this step.
+
+> Please note that your account request needs to be approved before you can register for a Studio Lab account. The review process typically takes up to 5 business days. Once your account request is approved, you will receive an email containing a link to the Studio Lab account registration page. This link will remain active for 7 days after your request is approved, so make sure to submit a new account request within this timeframe if needed.
+
+![SageMaker Studio Lab Sign up](images/part1-01.gif)
+
+To integrate and use Open AI models into your application, you need to register an [OpenAI account](https://platform.openai.com/signup/). Once you have completed the registration and sign-up process, you will need to create an API key. This API key is essential as it enables you to send requests to OpenAI from third-party services.
+
+Navigate to [OpenAI API keys](https://platform.openai.com/account/api-keys) page and click on **Create new secret key**, provide name, copy the key and save it. You won’t be able to access the key again!
 
 
+> Please note that the ChatGPT API currently offers a $5 credit for new users, allowing you to start experimenting with the API at no cost. This credit is available for use during the first 3 months of your account. After the initial 3-month period, the pricing will transition to a pay-as-you-go model. To get detailed information about the rates and pricing structure, I recommend visiting the pricing page on the OpenAI website.
+
+You can set usage limits and monitor your current usage by visiting the [Usage Limits page](https://platform.openai.com/account/billing/limits). 
+
+![OpenAI API key creation](images/part1-02.jpg)
+
+In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.openai.com/docs/guides/gpt/chat-completions-api) model. As shown in the table below, API calls for this model are priced at a fraction of a cent. With the free credit of $5, you will be able to run hundreds of experiments at no cost.
+
+
+*Model*	*Input*	*Output*
+4K context	$0.0015 / 1K tokens	$0.002 / 1K tokens
+16K context	$0.003 / 1K tokens	$0.004 / 1K tokens
+
+## Part 2 - Creating a ML project and obtaining a video transcript.
+
+Once you have obtained access to the Studio Lab, sing in to [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/).
+
+Under **My Project**, you can select a compute type and start project runtime based on an EC2 instance. Studio Lab provides the option to choose between a CPU (Central Processing Unit) designed for compute intensive algorithms and a GPU (Graphical Processing Unit) which is recommended for deep learning tasks, particularly transformers and computer vision.
+
+We will use the CPU option because it give us 8 hours per day to experiment compared to the GPU option with a 4-hour daily limit. Click **Start runtime**. The click button **Open project**. You may be required to solve a CAPTCHA puzzle when you start runtime.
+
+![Studio Lab - New Project](images/part2-01.jpg)
+
+A project contains files and folders, including Jupyter notebooks. You have full control over the files in your project. The image below shos the Studio Lab Launcher. Click **on default: Python** under Notebook. A new notebook will be created. 
+
+Let’s give a notebook a name and save it. From the Studio Lab menu, choose **File**, choose **Save File As**, and then choose folder and give it name. For example, `learn-with-ai.ipynb`
+
+![Studio Lab - Create Python Notebook](images/part2-01.jpg)
 
 
 <!-- Recommended to use present tense. e.g. "First off, let's build a simple application."  -->
