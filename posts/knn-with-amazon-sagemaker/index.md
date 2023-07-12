@@ -1,6 +1,6 @@
 ---
 title: "Enhancing Decision-Making with k-Nearest Neighbors with Amazon SageMaker"
-description: "This guide offers an introductory overview of Apache Spark and a comprehensive framework for its deployment and management on AWS. It accentuates optimal strategies designed to enhance the maintainability, reliability, and cost-effectiveness of big data processing tasks."
+description: "In this post, we shall delve into `k-Nearest Neighbors(k-NN)` algorithm,  one of the simplest yet very powerful algorithm, that can be used to solve very complex problems. We will start with some basic concepts, which always play an integral role irrespective of which algorithm we pick and that will help us set the premise before we dive deep into _k_-NN. We shall then proceed to solve some problems on Amazon SageMaker with the build-in _k_-NN, index based algorithm."
 tags:
   - amazon-sagemaker
   - machine-learning
