@@ -159,9 +159,9 @@ from transformers import pipeline
 
 You completed all required setup! We are ready to work on the second task as marked on the solution overview, which is to obtain a transcript of a YouTube video. I used the eductional video about [AWS Regions and Availability Zones](https://www.youtube.com/watch?v=b9rs8yzpGYk). You can choose a different video and replace a link in the youtube_url variable. To get a YouTube video url, copy URL up to "&" sign as on the screenshot below.
 
-![YouTube video URL](images/part2-03.png)
-
 > Note: I recommend starting with a video that is under 30 minutes. This will allow you to complete the tutorial more quickly, as executing commands for longer videos will take more time.
+
+![YouTube video URL](images/part2-03.png)
 
 Copy and run the following code:
 
@@ -358,10 +358,10 @@ As you continue your AI journey, I suggest to explore Hugging face library which
 
 The only limit now is your imagination!
 
+Thank you for reading this tutorial, and I hope that it equipped you with practical skills to embark on your AI/ML journey.
+
 ## About the Author
 
 Viktoria is a Senior Developer Advocate and passionate about helping developers to build and innovate using new technologies. She is a content creator and frequently shares content on [LinkedIn](https://www.linkedin.com/in/semaan/). Viktoria has been named one of the Top Cloud Influencers and one of the [Top 10 LinkedIn Female Content Creator WorldWide](https://app.favikon.com/creators-tops/women-content-creators/all-niches/linkedin/). 
-
-Thank you for reading this tutorial, and I hope that it equipped you with practical skills to embark on your AI/ML journey!
 
 If you have feedback, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it my way!</a>
