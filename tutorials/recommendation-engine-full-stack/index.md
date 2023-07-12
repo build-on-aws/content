@@ -66,16 +66,17 @@ aws cloudformation package --template-file main-stack.yaml --output-template pac
 ```
 3. Next use execute the "aws cloudformation deploy" command to deploy the above generated CloudFormation template named package.yaml. To override the default values for the parameters provided in the main-stack.yaml for S3BucketName, SageMakerDomainName, GitHubRepo, VpcStackName, and VpcRegion you can include the --parameter-overrides option followed by the parameter key-value pairs. Here's an example of how it can be done:
 ```bash
-aws cloudformation deploy \
-  --template-file <Absolute path>/packaged.yaml \
-  --stack-name buildonaws-pk1 \
-  --capabilities CAPABILITY_NAMED_IAM \
-  --region us-east-2 \
-  --parameter-overrides S3BucketName=myfamousbucket \ 
-  SageMakerDomainName=mydomain \ 
-  GitHubRepo=myrepo \
-  VpcStackName=myvpc \
-  VpcRegion=us-east-2
+  aws cloudformation deploy \
+  --stack-name buildonaws \
+  --template-file  <Absolute path>/packaged.yaml  \
+  --parameter-overrides S3BucketName=<Provide BucketName which will hold your artifacts> \
+               SageMakerDomainName=buildonaws \
+               GitHubRepo=https://github.com/pkamra/recommendation-engine-full-stack \
+	       VpcStackName=MyBuildOnAWSVPC \
+	       VpcRegion=<replace with your own region> \
+               ImageId=<Provide AMI for EC2 For Amazon Linux 2023 AMI for your region> \
+	       KeyName=<Provide your keyname if you wish for troubleshooting purposes> \
+	--capabilities CAPABILITY_NAMED_IAM --region us-east-1
 ```
   Replace the values (myfamousbucket, mydomain, myrepo, myvpc, us-east-2) with your desired default parameter values.
 
