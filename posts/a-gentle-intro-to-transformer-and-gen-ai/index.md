@@ -75,7 +75,7 @@ If you want to get started with transformer models, please have a look at this b
 
 ## How to choose the right level of customization
 
-Now you know how transformer architecture works and how it is related to LLMs on high-level.
+Now you know how transformer architecture works, and it is the fundamental building blocks of Large Language Models (LLMs). LLM is a pre-trained large transformer model, which understands and generates outputs in a human-like way.
 
 You may want to work with the LLMs so to build up your specific Generative AI applications. But there are challenges:
 1. LLM models are powerful but also general-purposed. They may not fit good enough to your specific use case.
@@ -84,7 +84,7 @@ You may want to work with the LLMs so to build up your specific Generative AI ap
 
 ...
 
-The list can go on and on, but almost all these challenges are around two focusing areas: **Customization** and **Optimization**.
+The list can go on and on, but almost all these challenges are around two focus areas: **Customization** and **Optimization**.
 
 ### Customization options
 
@@ -94,7 +94,7 @@ There is much ongoing research, and I'm here to share with you some popular tech
 
 ![customization options](images/GenAI_Customization.png)
 
-**Prompt Engineering** helps you improve the response accuracy without touching or updating the underneath LLM. Instead, the model is doing **in-context learning**. Meaning the learning and responses are based on what and how the prompts tell the model.
+**Prompt Engineering** helps you improve the response accuracy without touching or updating the underlying LLM. Instead, the model is doing **in-context learning**. Meaning the learning and responses are based on what and how the prompts inform the model.
 
 On the other hand, **Fine Tuning** is where the pre-trained LLM model is further tuned/updated with extra knowledge, extra parameters, so that a new fine-tuned model is generated.
 
@@ -111,7 +111,7 @@ Let's look at some popular prompt engineering techniques in a high level.
 
 #### 1. Zero-shot Prompting
 
-**Zero-shot prompting** is that you don't provide any example to the LLM model. Since the input contains some "instruction" as prompt, it enables **in-context learning**, where you provide context to the model.
+**Zero-shot prompting** is when you don't provide any examples to the LLM model. Since the input contains some "instruction" as prompt, it enables **in-context learning**, where you provide context to the model.
 It's like you are asking a question to a chatbot, and getting an answer.
 It's simple and easy to start, but it may not perform well with accurate/relevant/factual response.
 If zero-shot prompting doesn't work well, consider using **few-shot prompting**.
@@ -139,19 +139,19 @@ Figure below shows that CoT are combined with Zero-shot or Few-shot prompting.
 
   ***image source*** - [CoT](https://arxiv.org/pdf/2201.11903.pdf)
 
-As you can see that applying chain-of-thought prompting requires manual effort, such as construct examples of what to do step-by-step. To be more efficient, an **Automatic CoT** approach is introduced by the researching team [Auto-CoT](https://arxiv.org/abs/2210.03493), using ***"Let's think step by step"*** prompt in each demonstration example as shown in figure below.
+As you can see that applying chain-of-thought prompting requires manual effort, such as constructing examples of what to do step-by-step. To be more efficient, an **Automatic CoT** approach is introduced by the researching team [Auto-CoT](https://arxiv.org/abs/2210.03493), using ***"Let's think step by step"*** prompt in each demonstration example as shown in the figure below.
 
 ![Auto-CoT](images/Auto_CoT.png)
 
   ***image source*** - [Auto-CoT](https://arxiv.org/abs/2210.03493)
 
-CoT is doing a great job, but to further improve response accuracy, **diversity of sampling** questions matters. This leads us to the **self consistency with CoT (CoT-SC)** approach. 
+CoT is doing a great job, but to further improve response accuracy, **diversity of sampling** questions matters. This leads us to the **self consistency with CoT (CoT-SC)** approach.
 
 #### 4. Self Consistency with CoT (CoT-SC)
 
-Like a human handling complex issues, there normally isn't an one-fit-all solution, we need to taking different context into consideration, and try different options.
+Like a human handling complex issues, there normally isn't an one-size-fits-all solution, we need to take different context into consideration, and try different options.
 
-This is also what **self consistency with CoT** approach tries to ***"teach"*** the model. It aims to "replace the naive greedy decoding used in chain-of-thought prompting". Refer to [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf).
+This is also how the **self consistency with CoT** approach tries to ***"teach"*** the model. It aims to "replace the naive greedy decoding used in chain-of-thought prompting". Refer to [CoT-SC](https://arxiv.org/pdf/2203.11171.pdf).
 
 ![CoT-SC](images/CoT-SC.png)
 
@@ -160,7 +160,7 @@ This is also what **self consistency with CoT** approach tries to ***"teach"*** 
 
 #### 5. Tree of Thoughts - (ToT)
 
-When task's complexity increasing even higher, a new approach - **Tree of Thoughts (ToT)** - is proposed by researching team [ToT](https://arxiv.org/pdf/2305.10601.pdf).
+When a task's complexity increases further, a new approach - **Tree of Thoughts (ToT)** - is proposed by researching team [ToT](https://arxiv.org/pdf/2305.10601.pdf).
 
 This approach "generalizes over the popular "Chain of Thought" approach to prompting language models, and enables exploration over coherent units of text ("thoughts") that serve as intermediate steps toward problem solving".
 
@@ -187,13 +187,15 @@ Here are some reference use cases of RAG that we suggest you to have a look:
 
 
 #### Summary - Prompt Engineering
-The list of Prompt Engineering techniques are getting longer in a yearly or even monthly pace. How to know which approach fits you best is also an experimenting journey. Here are some tips.
+The list of Prompt Engineering techniques and best practices is getting longer and longer by the day. Knowing which approach fits you best is a continuous experimenting adventure.
+
+Here are some tips.
 
 1. Define your objective, ideathon and understand your specific use cases, define what good output would look like.
-2. Then Working backwards from your specific use case.
-3. If you considering using prompt engineering (over fine tuning approach, which will be covered in the next section), start from simple approach.
+2. Work backwards from your specific use case.
+3. If you are considering using prompt engineering (over fine tuning approach, which will be covered in the next section), start with a simple approach.
 
-   If few-shot prompting will achieve your goal, don't bother goes to RAG.
+   If few-shot prompting will achieve your goal, don't bother using RAG.
 
 4. Be specific on prompt - as clear as possible on
     -  input questions 
@@ -205,7 +207,7 @@ If you want to update the pre-trained LLM to have your own customized model targ
 
 ### Fine Tuning
 
-We all know that training a LLM is costly and time-consuming. With the exponentially increasing on size of LLMs (in terms number of parameters), training a new LLM from scratch by each individual organization is challenging and maybe not necessary. Instead, fine-tuning on top of the LLM as the foundation model is way more promising and cost-efficient.
+We all know that training a LLM is costly and time-consuming. With the exponentially increasing size of LLMs (in terms number of parameters), training a new LLM from scratch by each individual organization is challenging and maybe not necessary. Instead, fine-tuning on top of the LLM as the foundation model is way more promising and cost-efficient.
 
 If you have direct access to LLMs, you have the option to deploy the LLM on your own environment or host them on 3rd party platform (e.g. Amazon SageMaker JumpStart, Amazon Bedrock (preview)) to further fine-tune with your own target data and generate your own model.
 
@@ -218,8 +220,8 @@ Therefore, here we just list some of the popular ones to give you an idea of whe
 
 
 #### 1. Fine Tuning I, II
-Fine Tuning I is to frozen the parameters of LLM, except the last two layers (output). Therefore, the parameters of the LLM model remain unchanged.
-Fine Tuning II is updating parameters of all layers. Obviously, comparing with Fine Tuning I, Fine Tuning II can result in better performance, but it is also more expensive.
+Fine Tuning I is to freeze the parameters of LLM, except the last two layers (output). Therefore, the parameters of the LLM model remain unchanged.
+Fine Tuning II is updating parameters of all layers. Obviously, compared with Fine Tuning I, Fine Tuning II can result in better performance, but it is also more expensive.
 
 This is a good reference to understand [Fine Tuning I and II](https://github.com/rasbt/LLM-finetuning-scripts/blob/main/conventional/distilbert-movie-review/2_finetune-last-layers.ipynb).
 
@@ -244,7 +246,7 @@ In this way, it significantly reduces the resource consumption during training. 
 [LoRA](https://arxiv.org/pdf/2106.09685.pdf) (low-rank adaptation) is one of the PEFT techniques. 
 This approach freezes the pre-trained model parameters, and limits trainable parameters of each individual layer of the model (***Transformer architecture***). In doing so, it greatly reduces the number of trainable parameters, hence, decreasing the training time.
 
-So benefit of PEFT:
+So the benefits of PEFT:
 - Less resource comsumption: less compute resource for training, less storage for hosting model
 - Faster training
 - Better performance (not overfitting)
@@ -269,10 +271,8 @@ Human feedback would be subjective, but what RLHF doing well is to aggregate hum
 One example use case of RLHF with LLM is de-toxicity of outputs. 
 
 ### Summary - it is all about Customization and Optimization
-n conclusion, customization of pre-trained LLM models to fit your specific needs is an evolving field with numerous ongoing research efforts; hopefully, the popular techniques shared here offer valuable guidance as you embark on this exciting journey.
+In conclusion, customization of pre-trained LLM models to fit your specific needs is an evolving field with numerous ongoing research efforts. Hopefully, the popular techniques shared here offer valuable guidance as you embark on this exciting journey.
 ![Customization-summary](images/GenAI_Customization-summary.png)
-
-Customization of pre-trained LLM models to fit your specific needs is an evolving field with numerous ongoing research efforts. Hopefully, the popular techniques shared here offer valuable guidance as you embark on this exciting journey.
 
 
 ## Conclusion
