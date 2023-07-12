@@ -6,7 +6,7 @@ tags:
     - aws
     - generative-ai
     - chatgpt
-    -hugging-face
+    - hugging-face
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
 date: 2023-07-31 (expected publication date)
@@ -120,13 +120,10 @@ You can set usage limits and monitor your current usage by visiting the [Usage L
 In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.openai.com/docs/guides/gpt/chat-completions-api) model. As shown in the table below, API calls for this model are priced at a fraction of a cent. With the free credit of $5, you will be able to run hundreds of experiments at no cost.
 
 
-┌─────────────┬─────────────────────────┬───────────────────────┬
-│ Model       │ Input                   │ Output                │
-├─────────────┼───────────────── ───────┼───────────────────────┼
-│ 4K context  │ $0.0015 / 1K tokens     │ $0.002 / 1K tokens    │
-├─────────────┼─────────────────────────┼───────────────────────┼
-│ 16K context │ $0.003 / 1K tokens      │ $0.004 / 1K tokens    │
-└─────────────┴─────────────────────────┴───────────────────────┴
+| Model       | Input               | Output             |
+|-------------|---------------------|--------------------|
+| 4K context  | $0.0015 / 1K tokens | $0.002 / 1K tokens |
+| 16K context | $0.003 / 1K tokens  | $0.004 / 1K tokens |
 
 *Model*	*Input*	*Output*
 4K context	$0.0015 / 1K tokens	$0.002 / 1K tokens
