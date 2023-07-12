@@ -1,5 +1,5 @@
 ---
-title: "Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and AWS DynamoDB"
+title: "Build a Web App to Deliver Calming and Empowering Affirmations Using AWS Lambda and Amazon DynamoDB"
 description: "May is Mental Health Month, so why not take a little time to relax and build yourself a mindfulness app?"
 tags:
     - astro

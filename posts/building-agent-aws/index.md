@@ -7,6 +7,8 @@ tags:
   - huggingface
   - gen-ai
   - ai-ml
+spaces:
+  - generative-ai
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
 date: 2023-06-20

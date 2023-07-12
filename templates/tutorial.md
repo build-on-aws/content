@@ -42,8 +42,7 @@ Introduction paragraph to the topic. Describe a real world example to illustrate
 
 Before starting this tutorial, you will need the following:
 
- - An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
- - <!-- any other pre-requisites you will need -->
+ - All the standard prerequisites should be in the attribute table below, only use this section if you have detailed setup instructions.
 
 <!-- Update with the appropriate values -->
 <!-- Please ensure tutorials are flagged as level 200 (intermediate) or higher -->

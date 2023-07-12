@@ -7,16 +7,19 @@ tags:
     - aws-stack-overflow-collective
     - aws
     - twitch
-authorGithubAlias: brookejamieson
-authorName: Brooke Jamieson
+authorGithubAlias: juliegund
+authorName: Julie Gunderson
+additionalAuthors: 
+  - authorGithubAlias: cobusbernard
+    authorName: Cobus Bernard
 date: 2022-03-10
 images:
-  banner: ./build-on-answered.png
-  thumbnail: ./build-on-answered.png
-  hero: ./build-on-answered.png
-  background: ./build-on-answered.png
+  banner: ./images/build-on-answered.png
+  thumbnail: ./images/build-on-answered.png
+  hero: ./images/build-on-answered.png
+  background: ./images/build-on-answered.png
 ---
-
+![8-bit image of Julie and Cobus](images/buildonansweredgifimage.gif)
 Join us for Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
 Each episode, we reproduce the problems found in the top questions and build code to test out different solutions and understand the full context of each solution.
@@ -31,9 +34,11 @@ This show is as interactive as our audience makes it, so join us as we work thro
 
 
 ## Schedule
-Join us for our upcoming episodes!
-| Episode | Date | Link to Watch | Link to Show Notes |
-|--|--|--|--|
-| **Episode 2** | Wednesday March 15 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/schedule?segmentID=66b79c55-62ee-4904-bbf8-1bfd5c84e2f4) | Show Notes TBD |
+Join us for our upcoming episodes on the 1st and 3rd Wednesdays of the month!!
+| Episode | Name| Date | Link to Watch | Link to Show Notes |
+|--|--|--|--|--|
+| **S01E08**| More Terraform with Kerim | July 5 | [Watch here](https://www.twitch.tv/videos/1864025107 ) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
+| **S01E07** | Resiliency with Seth | June 21 | [Watch here](https://www.twitch.tv/videos/1856494950 ) | [Show Notes](/livestreams/build-on-answered/2023-06-21)|
+| **S01E06** | Talking Terraform with Rohini | June 07 | [Watch here](https://www.twitch.tv/videos/1850485117) | [Show Notes](/livestreams/build-on-answered/2023-06-07)|
 
 
