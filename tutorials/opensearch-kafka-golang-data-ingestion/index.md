@@ -8,18 +8,30 @@ tags:
   - aws
   - analytics
   - search-engine
+  - tutorials
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: 2023-07-07
+date: 2023-07-10
 ---
 
 Scalable data ingestion is a key aspect for a large-scale distributed search and analytics engine like [OpenSearch](https://opensearch.org/). One of the ways to build a real-time data ingestion pipeline is to use [Apache Kafka](https://kafka.apache.org/). It's an open-source event streaming platform used to handle high data volume (and velocity) and integrates with a variety of sources including relational and NoSQL databases. For example, one of the canonical use cases is real-time synchronization of data between heterogeneous systems (source components) to ensure that OpenSearch indexes are fresh and can be used for analytics or consumed downstream applications via dashboards and visualizations.
 
-This blog post will cover how to create a data pipeline wherein data written into Apache Kafka is ingested into [OpenSearch](https://opensearch.org/). We will be using [Amazon OpenSearch Serverless](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Amazon Managed Streaming for Apache Kafka (Amazon MSK) Serverless](https://docs.aws.amazon.com/msk/latest/developerguide/serverless.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq). [Kafka Connect](https://kafka.apache.org/documentation/#connect) is a great fit for such requirements. It provides sink connectors for OpenSearch as well as ElasticSearch (which can be used if you opt for the ElasticSearch OSS engine with Amazon OpenSearch). Sometimes though, there are specific requirements or reasons which may warrant the use of a custom solution. 
+| Attributes             |                                                                 |
+|------------------------|-----------------------------------------------------------------|
+| ✅ AWS experience      | 200 - Intermediate                                                        |
+| ⏱ Time to complete    | 60 minutes                                                      |
+| 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) eligible                                               |
+| 🧩 Prerequisites       | - [AWS account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/opensearch-using-kafka-golang)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated        | 2023-07-10                                                      |
 
-For example, you might be using a data source which is not supported by Kafka Connect (rare, but could happen) and don't want to write one from scratch. Or, this could be a one-off integration and you're  wondering if it's worth the effort to set up and configure Kafka Connect. Perhaps there are other concerns, like licensing etc.
+| ToC |
+|-----|
 
-Thankfully, Kafka and OpenSearch provide client libraries for a variety of programming languages which make it possible to write your own integration layer. This is exactly what's covered in this blog! We will make use of a custom [Go](http://go.dev/) application to ingest data using Go clients for [Kafka](https://github.com/twmb/franz-go) and [OpenSearch](https://opensearch.org/docs/latest/clients/go/). 
+This blog post will cover how to create a data pipeline wherein data written into Apache Kafka is ingested into [OpenSearch](https://opensearch.org/). We will be using [Amazon OpenSearch Serverless](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Amazon Managed Streaming for Apache Kafka (Amazon MSK) Serverless](https://docs.aws.amazon.com/msk/latest/developerguide/serverless.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq). [Kafka Connect](https://kafka.apache.org/documentation/#connect) is a great fit for such requirements. It provides sink connectors for OpenSearch as well as ElasticSearch (which can be used if you opt for the ElasticSearch OSS engine with Amazon OpenSearch).
+
+Sometimes though, there are specific requirements in your data pipeline which might need you to write your own integration layer. This is not a problem since both Kafka and OpenSearch provide client libraries for a variety of programming languages. This is exactly what's covered in this blog! We will make use of a custom [Go](http://go.dev/) application to ingest data using Go clients for [Kafka](https://github.com/twmb/franz-go) and [OpenSearch](https://opensearch.org/docs/latest/clients/go/).
 
 You will learn:
 
@@ -32,13 +44,13 @@ Before we get into the nitty-gritty, here is a quick overview of OpenSearch Serv
 
 ## Introduction to Amazon OpenSearch Serverless and Amazon MSK Serverless
 
-OpenSearch is an open-source search and analytics engine used for log analytics, real-time monitoring, and clickstream analysis. Amazon OpenSearch Service is a managed service that simplifies the deployment and scaling of OpenSearch clusters in AWS. 
+OpenSearch is an open-source search and analytics engine used for log analytics, real-time monitoring, and clickstream analysis. Amazon OpenSearch Service is a managed service that simplifies the deployment and scaling of OpenSearch clusters in AWS.
 
 > Amazon OpenSearch Service supports OpenSearch and legacy Elasticsearch OSS (up to 7.10, the final open source version of the software). When you create a cluster, you have the option of which search engine to use.
 
 You can [create an OpenSearch Service domain](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsgcreate-domain.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) (synonymous with an OpenSearch cluster) to represent a cluster, with each Amazon EC2 instance acting as a *node*. However, OpenSearch Serverless eliminates operational complexities by providing on-demand serverless configuration for OpenSearch service. It uses collections of indexes to support specific workloads, and unlike traditional clusters, it separates indexing and search components, with [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) as the primary storage for indexes. This architecture enables independent scaling of search and indexing functions.
 
-> You can refer to the details in [Comparing OpenSearch Service and OpenSearch Serverless](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-comparison?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) 
+> You can refer to the details in [Comparing OpenSearch Service and OpenSearch Serverless](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-comparison?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ![OpenSearch Serverless](https://docs.aws.amazon.com/images/opensearch-service/latest/developerguide/images/Serverless.png)
 
@@ -56,7 +68,7 @@ Here is a simplified version of the application architecture that outlines the c
 
 ![High level architecture](images/arch.jpg)
 
-The application consists of producer and consumer components, which are Go applications deployed to an `EC2` instance):
+The application consists of producer and consumer components, which are Go applications deployed to an `EC2` instance:
 
 - As the name suggests, the producer sends data to the MSK Serverless cluster.
 - The consumer application receives data (`movie` information) from the MSK Serverless topic and uses the OpenSearch Go client to index data in the `movies` collection.
@@ -121,27 +133,26 @@ func initializeKafkaClient() {
 - First, the application uses the `ec2rolecreds.New()` credentials provider to retrieve the temporary IAM credentials from the EC2 instance metadata service. The EC2 Instance role should have appropriate IAM role (with permissions) to execute required operations on MSK cluster components (more on this in the subsequent sections).
 - These credentials are then used to initialize the Kafka client with the `AWS_MSK_IAM` SASL authentication implementation in the [sasl_aws](https://pkg.go.dev/github.com/twmb/franz-go/pkg/sasl/aws) package.
 
-
 > Note: Since there are multiple Go clients for Kafka (including [Sarama](https://github.com/Shopify/sarama)), please make sure to consult their client documentation to confirm whether they support IAM authentication.
 
 Ok, with that background, let's set up the services required to run our ingestion pipeline.
 
 ## Infrastructure setup
 
-This section will help you set up the following components: 
+This section will help you set up the following components:
 
 - Required IAM roles
 - MSK Serverless Cluster
 - OpenSearch Serverless collection
 - AWS Cloud9 EC2 environment to run your application
 
-**MSK Serverless Cluster**
+### MSK Serverless Cluster
 
 You can follow [this documentation](https://docs.aws.amazon.com/msk/latest/developerguide/create-serverless-cluster.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) to setup a MSK Serverless cluster using the AWS Console. Once you do that, note down the following cluster information - VPC, Subnet, Security group (**Properties** tab) and the cluster Endpoint (click **View client information**).
 
 ![MSK cluster creation](images/msk-cluster.jpg)
 
-**Application IAM role**
+### Application IAM role
 
 There are different IAM roles you will need for this tutorial.
 
@@ -194,7 +205,7 @@ Use the following Trust policy:
 
 Finally, another IAM role to which you will attach OpenSearch Serverless [Data access policies](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) - more on this in the next step.
 
-**OpenSearch Serverless collection**
+### OpenSearch Serverless collection
 
 Create an OpenSearch Serverless collection using [the documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-getting-started.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq). While following **point 8** in [Step 2: Create a collection](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-getting-started.html#serverless-gsg-create?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq), make sure to configure **two** Data policies i.e. one each of the IAM roles created in step 2 and 3 in the previous section.
 
@@ -202,9 +213,9 @@ Create an OpenSearch Serverless collection using [the documentation](https://doc
 
 ![OpenSearch Serverless collection creation](images/aoss.jpg)
 
-**AWS Cloud9 EC2 environment**
+### AWS Cloud9 EC2 environment
 
-Use [this documentation](https://docs.aws.amazon.com/cloud9/latest/user-guide/tutorial-create-environment.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) to create an AWS Cloud9 EC2 development environment - make sure to use the **same** VPC as the MSK Serverless cluster. 
+Use [this documentation](https://docs.aws.amazon.com/cloud9/latest/user-guide/tutorial-create-environment.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq) to create an AWS Cloud9 EC2 development environment - make sure to use the **same** VPC as the MSK Serverless cluster.
 
 Once complete, you need to do the following: Open the Cloud9 environment, under **EC2 Instance**, click **Manage EC2 instance**. In the EC2 instance, navigate to Security and make a note of the attached security group.
 
@@ -305,7 +316,7 @@ After the process is complete, you should have `1500` movies indexed in the Open
 
 ## Query movies data in OpenSearch
 
-**Run a simple query**
+### Run a simple query
 
 Let's start with a simple query to list *all* the documents in the index (without any parameters or filters).
 
@@ -315,7 +326,7 @@ GET movies-index/_search
 
 ![Query all fields](images/query-all.png)
 
-**Fetch data only for specific fields**
+### Fetch data only for specific fields
 
 By default, a search request retrieves the entire JSON object that was provided when indexing the document. Use the `_source` option to retrieve the source from selected fields. For example, to retrieve only the `title`, `plot` and `genres` fields, run the following query:
 
@@ -334,7 +345,7 @@ GET movies-index/_search
 
 ![Filter specific fields](images/query-fields.jpg)
 
-**Fetch data to match the exact search term a Term Query**
+### Fetch data to match the exact search term a Term Query
 
 You can use a Term query to achieve this. For example, to search for movies with the term `christmas` in the `title` field, run the following query:
 
@@ -353,7 +364,7 @@ GET movies-index/_search
 
 ![Use Term Query](images/query-term.jpg)
 
-**Combine selective field selection with term query**
+**Combine selective field selection with term query
 
 You can use this query to only retrieve certain fields but are interested in a particular term:
 
@@ -377,7 +388,7 @@ GET movies-index/_search
 
 ![Field selection with Term Query](images/query-term-fields.jpg)
 
-**Aggregation**
+### Aggregation
 
 Use aggregations to compute summary values based on groupings of the values in a particular field. For example, you can summarize fields like `ratings`, `genre`, and `year` to search results based on the values of those fields. With aggregations, we can answer questions like ‘How many movies are in each genre?“
 
@@ -402,9 +413,8 @@ After you are done with the demo, make sure to delete all the services to avoid 
 - [Delete Cloud9 environment](https://docs.aws.amazon.com/cloud9/latest/user-guide/delete-environment.html?sc_channel=el&sc_campaign=datamlwave&sc_content=opensearch-kafka-golang&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - Also delete IAM roles and policies
 
-
 ## Conclusion
 
 To recap, you deployed a pipeline to ingest data into OpenSearch Serverless using Kafka and then queried it in different ways. Along the way, you also learned about the architectural considerations and compute options to keep in mind for production workloads as well as using Go based Kafka applications with MSK IAM authentication.
 
-This was a pretty lengthy article (I think!). Thank you reading it till the end!
+This was pretty lengthy (I think!). Thank you reading it till the end! If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
