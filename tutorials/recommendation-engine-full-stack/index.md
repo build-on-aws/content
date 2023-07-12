@@ -159,26 +159,43 @@ Here is how the output will look like on the Cloud9 Console once the custom scal
 
 10. (Optional steps for testing the custom endpoint after deployment). Copy the sagemaker endpoint from above in the command below and execute to replace the SAGEMAKER-ENDPOINT in localtest.sh file
 ```bash 
-sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh
+sed -i s@SAGEMAKER-ENDPOINT@sm-endpoint-sklearn-xxxx-xx-xx-xx-xx-xx@g localtest.sh
 ```
 
 11. Next execute the below command and check if you have got responses in a file named prediction_response.json
 ```bash
 sh localtest.sh
 ```
-- You responses should look as follows: -
+- If you send an input with movie attributes as follows:- 
+```bash
+aws sagemaker-runtime invoke-endpoint \
+	--endpoint-name ${ENDPOINT_NAME} \
+	--body '{"startYear":[2015], "runtimeMinutes":[150],"Thriller":[1],"Music":[0],"Documentary":[0],
+                    "Film-Noir":[0],"War":[0],"History":[0],"Animation":[0],"Biography":[0],
+                    "Horror":[0],"Adventure":[0],"Sport":[0],"Musical":[0],
+                    "Mystery":[0],"Action":[0],"Comedy":[0],"Sci-Fi":[1],
+                    "Crime":[0],"Romance":[0],"Fantasy":[0],"Western":[0],
+                    "Drama":[0],"Family":[0],
+                    "averageRating":[7],"numVotes":[50]}' \
+	--content-type 'application/json' 
+``` 
+Then your responses should look as follows in the `prediction_response.json` file. These values represent the movie attributes converted into numeric values and on the same scale: -
+```bash
+{"Output":"[[0.7641384601593018, 2.2621326446533203, 2.6349685192108154, -0.19743624329566956, -0.27217793464660645, -0.10682649910449982, -0.17017419636249542, -0.20378568768501282, -0.18412098288536072, -0.2402506023645401, -0.29970091581344604, -0.3280450105667114, -0.14215995371341705, -0.14177125692367554, -0.27615731954574585, -0.42369410395622253, -0.7180797457695007, 5.349470615386963, -0.43502309918403625, -0.46801629662513733, -0.22049188613891602, -0.1328728199005127, -1.1882809400558472, -0.21341808140277863, 0.5960079431533813, -0.24598699808120728]]"}
+```
 
-12. This concludes the deployment of the custom scaling model. Now if you go to the AWS console, you can see that the 2 real time inferencing endpoints for the custom scaling model and the K Means clustering algoritm is now deployed in sagemaker console as follows:-
-
-
+12. This concludes the deployment of the custom scaling model. Now if you go to the AWS console, you can see that the 2 real time inferencing endpoints for the custom scaling model and the K Means clustering algoritm is now deployed in sagemaker console as follows. :-  
+![Deployed endpoints in sagemaker](images/sagemaker-deployedendpoints.png) 
 
 
 ## Deploying the REST API's fronting the sagemaker model endpoints 
-1. Let us now create the API's using [Chalice framework](https://github.com/aws/chalice) which makes the creation of Lambda and API gateway very easy. Use the same Cloud 9 environment to setup Chalice and build the REST API's which will invoke the Sagemaker Model endpoints. For the purpose of next steps go to the root of the Cloud 9 environment as follows : - 
+
+1. Let us now create the API's using [Chalice framework](https://github.com/aws/chalice) which makes the creation of Lambda and API gateway very easy. Use the same Cloud 9 environment to setup Chalice and build the REST API's which will invoke the Sagemaker Model endpoints.  The first REST API that we will be building is the Cluster REST API which will invoke the Custom Scaling Sagemaker Endpoint and the Kmeans Clustering Endpoint and return the  cluster number to be used for returning the list of movies. For the purpose of next steps login to the same Cloud9 IDE that you have used so far and go to the root of the  Cloud9 environment by executing the following command on the Cloud9 terminal as follows : - 
 ```bash
 cd ~/environment
 ```
-2. To see hidden files in Cloud9 IDE , click on the gear icon and Click on Show environment root and show hidden files. This will enable you to see teh .chalice folder once you install teh chalice frmework via the commands in the next step.
+2. To see hidden files in Cloud9 IDE , click on the gear icon and Click on Show environment root and show hidden files. This will enable you to see the .chalice folder once you install the chalice framework via the commands in the next step. This is how the Cloud9 console should look like. :-  
+![Deployed endpoints in sagemaker](images/cloud9gear.png) 
 
 3. Now install Chalice as follows:
 ```bash
@@ -200,18 +217,21 @@ chalice new-project sagemaker-apigateway-lambda-chalice
     }
 }
 ```
-5. Execute the below command on teh Cloud 9 terminal. Replace with correct region in which you are executing this tutorial
+5. Execute the below command on the Cloud 9 terminal. Replace with correct region in which you are executing this tutorial
 ```bash
 export AWS_DEFAULT_REGION=us-east-1
 ```
-6. Copy `requirements.txt` and `app.py` files from the `recommendation-engine-full-stack/apis_for_sagemaker_models chalice_custom_scaling_kmeans_api` folder to the root of the chalice project sagemaker-apigateway-lambda-chalice. Let's take a quick look at the `app.py` file. The `app.py` file receives teh JSON Request from the movie attributes from the front end and invokes the 2 model endpoints for the custom scaling model and the kmeans clustering model deployed on sagemaker.
-Hence make sure to replace with the correct sagemaker endpoint name  for the custom scaling model and the kmeans model in this section of the code in app.py as shown below
+6. Copy `requirements.txt` and `app.py` files from the `recommendation-engine-full-stack/apis_for_sagemaker_models chalice_custom_scaling_kmeans_api` folder to the root of the chalice project sagemaker-apigateway-lambda-chalice. Let's take a quick look at the `app.py` file. The `app.py` file receives the JSON Request from the movie attributes from the front end and invokes the 2 model endpoints for the custom scaling model and the kmeans clustering model deployed on sagemaker.
+Here is how my setup looks like. :-  
+![Deployed endpoints in sagemaker](images/chaliceSetup.png) 
+
+Hence make sure to replace with the correct sagemaker endpoint name  for the custom scaling model and the kmeans model in this section of the code in `app.py` in teh chalice project `sagemaker-apigateway-lambda-chalice` as shown below
 ```bash
 .....
 ......
 .....
     res = sagemaker.invoke_endpoint(
-        EndpointName='sm-endpoint-sklearn-xxxxxx',
+        EndpointName='sm-endpoint-sklearn-xxxx-xx-xx-xx-xx-xx',
         Body=result,
         ContentType='application/json',
         Accept='application/json'
@@ -223,11 +243,18 @@ responsekmeans = sagemaker.invoke_endpoint(EndpointName="kmeans-xxxxxx", Content
 .....
 ....
 ```
-7. In `sagemaker-apigateway-lambda-chalice` folder execute `chalice deploy`
-8. Once the REST API is deployed this is how your Cloud 9 console should look like :-
+7. At the root of  `sagemaker-apigateway-lambda-chalice` folder execute 
+```bash
+chalice deploy
+```
+
+8. Once the Lambda function and API Gateway REST API endpoints are deployed you will get a REST API url on the Cloud9 console in the form as `https://xxxxxxx.execute-api.region.amazonaws.com/api/`.
+This REST API will return the Cluster Number based on the movie attributes passed to it. We will be substituting this REST API endpoint in the UI Code later on. If you go to the AWS console, you can check the Lambda function and the API Gateway REST endpoints created by Chalice.
+
+
 9. For testing the deployed API do the following from teh Cloud 9 terminal
 ```bash
-curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY 
+curl -X POST https://xxxxxxx.execute-api.us-east-2.amazonaws.com/api/ -H 'Content-Type: application/json' -d @- <<BODY 
 { 
     "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0", 
     "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",
@@ -237,19 +264,22 @@ curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-
 }
 BODY
 ```
+On succesful execution of the above request, you will get a Cluster number. Here is how my Cloud9 terminal looks like after getting back the response. :-  
+![REST API Response for Cluster Number based on movie attributes](images/clusternumber.png) 
+
 10. Test with Postman (Optional)
 Example of Postman POST payload is 
 ```bash
 {"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
 }
 ```
-11. Next we create the 2nd chalice project for teh 2nd REST API. We go to the root of the Cloud 9 environment by doing `cd ~/environment`
+11. Next we create the 2nd chalice project for the 2nd REST API which takes the Cluster Number as an input and returns back teh list of movies belonging to that Cluster from our Augmented data that we saved in the Glue database. We go to the root of the Cloud 9 environment by doing `cd ~/environment`
 on the Cloud 9 terminal and then create a new chalice project by executing
 ```bash
   chalice new-project query-athena-boto3
 ```
-  - Add requirements.txt and app.py contents to the root of the project from the chalice_query_api folder. 
-  - Update role in config.json for this project by replacing with the correct iam_role_arn value. The config.json shoudl like below 
+  - Add requirements.txt and app.py contents from the cloned github repo folder `recommendation-engine-full-stack/apis_for_sagemaker_models/chalice_query_api` folder to the root of the chalice project `query-athena-boto3`.
+  - Update role in config.json for this project by replacing with the correct iam_role_arn value. The config.json should look like below 
   ```bash
   {
         "version": "2.0",
@@ -263,29 +293,37 @@ on the Cloud 9 terminal and then create a new chalice project by executing
         }
   }
   ```
-   - Create query_results folder in the S3 bucket that you have been using so far
    - Execute the following command
    ```bash 
    cd query-athena-boto3/
    sed -i s@BUCKET_NAME@<Replace with your bucket name>@g app.py
    chalice deploy
    ```
-12. Curl command for testing 
+12. Next execute the curl command for testing the deployed API Gateway REST API endpoint. Replace `https://yyyyyyy.execute-api.us-east-2.amazonaws.com/api/` with the correct Deployed URL. In the request below I pass cluster number as 1.
 ```bash
-curl -X POST https://xxxxxxx.execute-api.us-east-1.amazonaws.com/api \ 
--H 'Content-Type: application/json' \
--d '{"cluster":"1.0"}'  
+curl -X POST https://yyyyyyy.execute-api.us-east-2.amazonaws.com/api/ -H 'Content-Type: application/json' -d '{"cluster":"1.0"}'  
 ```
+13. Next let's move on to the final step of Integrating the 2 API Gateway REST API endpoints with our UI code.
 
 ## Integrate the API's with our fancy UI.
-1. Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
-Here is how my UI looks when everything is hooked up:<br/>
+1. Download the html file locally on your machine from the Cloud9 Console and go to the cloned GitHub Repo Folder  , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI. The image below will show how to doanload the UI file and the changes for REST API endpoints that need to be made in that file. :- 
+
+![Modified UI Code](images/SetupUI.png) 
+
+Here is how my UI looks when everything is hooked up and the file is opened from the browser: Enter teh criteria like start Year, runtime Minutes, Rating, Number of Votes and the Genres:-<br/>
+
 ![plot](images/myflix1.png)<br/>
 ![plot](images/myflix2.png)<br/>
 ![plot](images/myflix3.png)<br/>
 
 ## Clean up
-10. Following command to delete the stack. 
+1. Go to the Cloud9 console and go to the root of the chalice project `sagemaker-apigateway-lambda-chalice` and execute `chalice delete`. This will delete the lambda and API gateway endpoint for the REST API #1.
+2. Go to the Cloud9 console and go to the root of the chalice project `query-athena-boto3` and execute `chalice delete`. This will delete the lambda and API gateway endpoint for the REST API #2.
+3. From the AWS console, go to Sagemaker Service -> Inference ->  Endpoints and Delete the 2 Sagemaker Model Endpoints.
+4. Delete the AWS Cloud9 Environment.
+5. Delete the contents of the S3 bucket that was created by the Cloudformation template. Thsi will allow the deletion of the S3 bucket when you delete the Cloudformation stack.
+5. Dlete the main-stack.yaml from AWS Cloudformation console which is the parent level stack for the entire nested stack and that will delete all the remaining deployed resources. 
+
 
 🎥 Here is a video containing a hands-on implementation about this section.
 
