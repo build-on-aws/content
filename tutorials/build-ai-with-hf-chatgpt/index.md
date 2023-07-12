@@ -141,7 +141,7 @@ A project contains files and folders, including Jupyter notebooks. You have full
 
 Let’s give a notebook a name and save it. From the Studio Lab menu, choose **File**, choose **Save File As**, and then choose folder and give it name. For example, `learn-with-ai.ipynb`
 
-![Studio Lab - Create Python Notebook](images/part2-01.jpg)
+![Studio Lab - Create Python Notebook](images/part2-02.png)
 
 First, we will use pip to install all the packages required to complete this tutorial. Please copy the code provided below and press Shift + Enter or click the Play button at the top to execute it.
 
@@ -159,42 +159,217 @@ First, we will use pip to install all the packages required to complete this tut
 
 Next, let's import all the necessary dependencies. Copy and run the following code:
 
-<!-- Recommended to use present tense. e.g. "First off, let's build a simple application."  -->
+```python
+#importing dependencies
 
-<!-- Sample Image link with required images/xx.xxx folder structure -->
-![This is the alt text for the image](images/where-this-image-is-stored.png)
-<!-- Alt text should provide a description of the pertinent details of the image, not just what it is, e.g. "Image of AWS Console" -->
-
-<!-- Sample Image link with a caption below it, using required images/xx.xxx folder structure -->
-![This is the alt text for the image with caption](images/where-this-image-is-stored.png "My image caption below")
-
-<!-- Code Blocks -->
-Avoid starting and ending the code blocks with blank lines/spaces. Remember to include the language type used when creating code blocks. ` ```javascript `.
-For example,
-
-```javascript
-this is javascript code
+import re
+from youtube_transcript_api import YouTubeTranscriptApi
+import torch
+import torchaudio
+import openai
+import textwrap
+from transformers import pipeline
 ```
 
-If you want to share a code sample file with reader, then you have two options:
-- paste the contents with code blocks like mentioned above
-- provide link to the file. Use the raw file content option on GitHub (without the token parameter, if repo is private while drafting). It should look like:   
-    `https://raw.githubusercontent.com/ORGANIZATION/REPO-NAME/main/FOLDER/FILENAME.EXTENSION`
-    Example:
-     _You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts)._
+
+You completed all required setup. We are ready to work on the second task (as marked on the solution overview), which is to obtain a transcript of a YouTube video. I used the eductional video about [AWS Regions and Availability Zones](https://www.youtube.com/watch?v=b9rs8yzpGYk). You can choose a different video and replace a link in the youtube_url variable. To get a YouTube video url, right-click on the video itself (not the player controls) and then select "Copy video URL" . 
+
+> Note: I recommend starting with a video that is under 10 minutes. This will allow you to complete the tutorial more quickly, as executing commands for longer videos will take more time.
+
+Copy and run the following code:
+
+```python
+# Specify the YouTube video URL
+youtube_url = "https://www.youtube.com/watch?v=b9rs8yzpGYk"
+
+# Extract the video ID from the URL using regular expressions
+match = re.search(r"v=([A-Za-z0-9_-]+)", youtube_url)
+if match:
+    video_id = match.group(1)
+else:
+    raise ValueError("Invalid YouTube URL")
+
+# Get the transcript from YouTube
+transcript = YouTubeTranscriptApi.get_transcript(video_id)
+
+# Concatenate the transcript into a single string
+transcript_text = ""
+for segment in transcript:
+    transcript_text += segment["text"] + " "
+print(transcript_text)
+```
+
+The provided code checks if a URL link is valid and then uses the *YouTubeTranscriptApi.get_transcript(video_id)* method to retrieve the YouTube transcript using the YouTube API.  This method provides accurate and official captions associated with the video.
+
+## Part 3 - Summarizing and translating a video using ML models from Hugging Face.
 
 
-## Clean up
+Now that we have the full transcript of the YouTube video, we can proceed to utilize open-source models for natural language processing tasks, such as summarization, translation, and more. These models will help us to extract valuable insights from the transcript data.
 
-Provide steps to clean up everything provisioned in this tutorial. 
+We will be using [Transformers](https://huggingface.co/docs/transformers/index) library from Hugging Face 🤗 . Transformers provides APIs and tools to easily for downloading  pretrained models. By using pretrained models, you can significantly reduce your compute costs, carbon footprint, and save valuable time and resources that would otherwise be required to train a model from scratch. 
+
+
+Let's assume that English is not your first language, and you would like to translate the YouTube transcript to Spanish. To achieve this, we can utilize a pretrained machine learning model specifically designed for translation. Translation involves converting a sequence of text from one language to another. It is a task that can be formulated as a sequence-to-sequence problem. By leveraging a pretrained sequence-to-sequence translation model, we can effectively translate the YouTube transcript from English to Spanish.
+
+You can try different pretrained translation models by updating the *model_checkpoint* variable. Hugging Face offers a wide range of over [2,500 translation models](https://huggingface.co/models?pipeline_tag=translation&sort=trending) to choose from. These models cover various languages and translation pairs, allowing you to select the one that best suits your needs.
+
+```python
+from transformers import pipeline
+
+# Replace this with your own checkpoint
+model_checkpoint = "Helsinki-NLP/opus-mt-en-es"
+translator = pipeline("translation", model=model_checkpoint)
+
+# Define the maximum sequence length
+max_length = 512
+
+# Split the input text into smaller segments
+segments = [transcript_text[i:i+max_length] for i in range(0, len(transcript_text), max_length)]
+
+# Translate each segment and concatenate the results
+translated_text = ""
+for segment in segments:
+    result = translator(segment)
+    translated_text += result[0]['translation_text']
+
+print(translated_text)
+```
+
+Next, we will proceed with summarizing the video using a pretrained model for text [summarization](https://huggingface.co/docs/transformers/tasks/summarization#inference). In this case, I will be using the original transcript in English. However, if you choose to continue with a translated transcript, you can replace the *transcript_text* variable with the *translated_text* variable that contains the translated text. By applying the summarization model to the transcript, we can generate a concise summary of the video's content.
+
+If you are using GPU instance, then change *device=-1* to *device=0* in the code below.
+
+```python
+from transformers import pipeline, AutoTokenizer
+
+# Instantiate the tokenizer and the summarization pipeline
+tokenizer = AutoTokenizer.from_pretrained('stevhliu/my_awesome_billsum_model')
+summarizer = pipeline("summarization", model='stevhliu/my_awesome_billsum_model', tokenizer=tokenizer, device=-1)
+
+# Define chunk size in number of words
+chunk_size = 200 # you may need to adjust this value depending on the average length of your words
+
+# Split the text into chunks
+words = transcript_text.split()
+chunks = [' '.join(words[i:i+chunk_size]) for i in range(0, len(words), chunk_size)]
+
+# Summarize each chunk
+summaries = []
+for chunk in chunks:
+    # Summarize the chunk
+    summary = summarizer(chunk, max_length=100, min_length=30, do_sample=False)
+
+    # Extract the summary text
+    summary_text = summary[0]['summary_text']
+
+    # Add the summary to our list of summaries
+    summaries.append(summary_text)
+
+# Join the summaries back together into a single summary
+final_summary = ' '.join(summaries)
+
+print(final_summary)
+```
+
+We were able to get a concise summary of the video's content, excluding any sponsorships, advertisements, or other extraneous information. This enables to quickly grasp the key points and main ideas from the video without being bogged down by unnecessary details. Well done on achieving this accomplishment! 
+
+We are now ready to move on to the final step, Step 4, where we will generate a step-by-step tutorial based on the summarized transcript and create a quiz to test our understanding and gained knowledge. 
+
+
+## Part 4 - Using ChatGPT APIs for summary and quiz.
+
+o begin experimenting with ChatGPT, you will need to retrieve the API keys that you created in Part 1 and replace the value within the quotation marks for the openai.api_key variable in your code.
+
+Additionally, I recommend utilizing the [OpenAI Playground](https://platform.openai.com/playground) to further explore and experiment with the OpenAI API models. The OpenAI Playground is a user-friendly web-based tool that allows you to test prompts and gain familiarity with the API's functionalities. It provides an interactive environment to fine-tune your prompts and observe the model's responses. 
+
+Let's obtain a video summary using the ChatGPT model and compare it to the summary we obtained in the previous step using open-source models.
+
+```python
+def split_text_into_chunks(text, max_chunk_size):
+    return textwrap.wrap(text, max_chunk_size)
+
+openai.api_key = "provide your key here"
+max_chunk_size = 4000
+
+transcript_chunks = split_text_into_chunks(transcript_text, max_chunk_size)
+summaries = ""
+
+for chunk in transcript_chunks:
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo-16k",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": f"{chunk}\n\nCreate short concise summary"}
+        ],
+        max_tokens=250,
+        temperature=0.5
+    )
+
+    summaries += response['choices'][0]['message']['content'].strip() + " "
+
+print("Summary:")
+print(summaries)
+```
+
+Which summary do you think is better? I found a summary created by ChatGPT to be more helpful.
+
+We can proceed by modifying the prompts and instructing ChatGPT to extract the necessary steps from the video transcript. By doing so, we can generate a step-by-step guide that provides clear instructions for us to follow along with ease. This will enable us to have a structured and guided approach while engaging with the video content. 
+
+The *system* parameter represents the instructions or context provided to the model to guide its behavior. It sets the overall behavior, tone, or role of the AI assistant. For example, "You are a technical instructor that provides step-by-step guidance." This helps set the expectation for the AI model and provides guidance on how it should respond.
+
+The *user* parameter represents the input from the user. It is where you provide your specific requests, questions, or instructions to the AI model. For example, you might use a *user* prompt like "Generate steps to follow from the transcript text."
+
+
+```python
+response = openai.ChatCompletion.create(
+model="gpt-3.5-turbo-16k",
+messages=[
+{"role": "system", "content": "You are a technical instructor."},
+{"role": "user", "content": transcript_text},
+{"role": "user", "content": "Generate steps to follow from text."},
+]
+)
+
+# The assistant's reply
+guide= response['choices'][0]['message']['content']
+
+print("Steps:")
+print(guide)
+```
+
+To finish our experiment, let’s generate a quiz based on the materials covered in the video. This quiz will help us assess our understanding and retention of the content.
+
+```python
+response = openai.ChatCompletion.create(
+model="gpt-3.5-turbo-16k",
+messages=[
+{"role": "system", "content": "You are a helpful assistant that generates questions."},
+{"role": "user", "content": transcript_text},
+{"role": "user", "content": "Generate 10 quiz questions based on the text with multiple choices."},
+]
+)
+
+# The assistant's reply
+quiz_questions = response['choices'][0]['message']['content']
+
+print("Quiz Questions:")
+print(quiz_questions)
+```
+
+You should see results similar to the screenshot below:
+
+![Quiz generated by ChatGPT](images/part4-01.png)
 
 ## Conclusion
 
-<!-- Recommended to use past tense. e.g. "And that's it! We just built and deployed that thing together!"  -->
+Well done! Yo! You have successfully completed this tutorial and learned how to get started with ML projects using Jupyter notebooks,  integrating Open Source Models from the Hugging Face library, and leveraging ChatGPT APIs to develop your own creative AI/ML solutions.
 
-Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation. 
+As you continue your AI journey, I suggest to explore Hugging face library which hosts over 250,000 models. You can apply them for different use cases. For example, you can experiment with [text-to-image](https://huggingface.co/docs/diffusers/using-diffusers/conditional_image_generation) generationto create visuals for each quiz question  or synthesize an audio file from a transcript summary  by using [text-to-speech](https://huggingface.co/tasks/text-to-speech) models. The only limit now is your imagination!
 
-Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
+## About the Author
 
-Also end with this line to ask for feedback:
-If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+Viktoria is a Senior Developer Advocate and passionate about helping developers to build and innovate using new technologies. She is a content creator and frequently shares content on [LinkedIn](https://www.linkedin.com/in/semaan/). Viktoria has been named one of the Top Cloud Influencers and one of the [Top 10 LinkedIn Female Content Creator WorldWide](https://app.favikon.com/creators-tops/women-content-creators/all-niches/linkedin/).
+
+Thank you for reading this tutorial, and I hope that it equipped you with practical skills to embark on your AI/ML journey!
+
+If you have feedback, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it my way!</a>
