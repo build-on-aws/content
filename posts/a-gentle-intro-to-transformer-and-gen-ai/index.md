@@ -75,7 +75,7 @@ If you want to get started with transformer models, please have a look at this b
 
 ## How to choose the right level of customization
 
-Now you know how transformer architecture works, and it is the fundamental building blocks of Large Language Models (LLMs). LLM is a pre-trained large transformer model, which understands and generates outputs in a human-like way.
+Now you know how transformer architecture works. And transformer architecture is the fundamental building blocks of Large Language Models (LLMs). LLM is a pre-trained large transformer model, which understands and generates outputs in a human-like way.
 
 You may want to work with the LLMs so to build up your specific Generative AI applications. But there are challenges:
 1. LLM models are powerful but also general-purposed. They may not fit good enough to your specific use case.
@@ -90,7 +90,7 @@ The list can go on and on, but almost all these challenges are around two focus 
 
 Customization is about how to interact with the pre-trained LLM models so to fit your specific need.
 
-There is much ongoing research, and I'm here to share with you some popular techniques. Hopefully, this can provide some guidance and tips as you start your journey.
+There is much ongoing research, and we are here to share with you some popular techniques. Hopefully, this can provide some guidance and tips as you start your journey.
 
 ![customization options](images/GenAI_Customization.png)
 
@@ -221,7 +221,7 @@ Therefore, here we just list some of the popular ones to give you an idea of whe
 
 #### 1. Fine Tuning I, II
 Fine Tuning I is to freeze the parameters of LLM, except the last two layers (output). Therefore, the parameters of the LLM model remain unchanged.
-Fine Tuning II is updating parameters of all layers. Obviously, compared with Fine Tuning I, Fine Tuning II can result in better performance, but it is also more expensive.
+Fine Tuning II is updating parameters of all layers. Compared with Fine Tuning I, Fine Tuning II can result in better performance, but it is also more expensive.
 
 This is a good reference to understand [Fine Tuning I and II](https://github.com/rasbt/LLM-finetuning-scripts/blob/main/conventional/distilbert-movie-review/2_finetune-last-layers.ipynb).
 
@@ -237,7 +237,7 @@ An example solution: [Instruction fine-tuning for FLAN T5 XL with Amazon SageMak
 #### 3. Parameter-Efficient Fine Tuning (PEFT)
 
 As models get larger and larger, fine-tuning on all parameters becomes challenging on consumer hardware. 
-Besides, storing and inferencing with large fine-tuned models (of similar size to the pre-trained LLMs) can also be expensive..
+Besides, storing and inferencing with large fine-tuned models (of similar size to the pre-trained LLMs) can also be expensive.
 **Parameter-Efficient Finetuning (PEFT)** can help to address these challenges.
 
 PEFT is running on pre-trained LLM with all/majority of their parameters frozen, while fine tuning a smaller number of extra/unfrozen (***e.g. 1%***) parameters.
@@ -272,6 +272,7 @@ One example use case of RLHF with LLM is de-toxicity of outputs.
 
 ### Summary - it is all about Customization and Optimization
 In conclusion, customization of pre-trained LLM models to fit your specific needs is an evolving field with numerous ongoing research efforts. Hopefully, the popular techniques shared here offer valuable guidance as you embark on this exciting journey.
+
 ![Customization-summary](images/GenAI_Customization-summary.png)
 
 
