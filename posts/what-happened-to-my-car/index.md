@@ -5,12 +5,11 @@ tags:
     - observability
     - application-resilience
     - resilience
+    - aws-well-architected
 authorGithubAlias: crichey
 authorName: Clark Richey
-date: 2023-07-05
+date: 2023-07-012
 ---
-
-# What Happened to my Car? Understanding Gray Failures
 
 In my role at Amazon, I spend most of my time talking to people about [resilience](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/resiliency-and-the-components-of-reliability.html). One of the frequent topics in these discussions is gray failures. Gray failures come up a lot because they can be highly problematic and they can also be a bit difficult to explain. An official, technical definition, would be that a gray failure is a form of differential observability, where one observer reports that the system is healthy, but another observer reports the system as unhealthy. Huh. We could expand on this definition to say that these failures are non-binary are often appear to happen randomly. Still not a lot of help, really. I'm a big believer in trying to find simple ways to explain things, and making gray failures easy to understand has continued to elude me.
 
