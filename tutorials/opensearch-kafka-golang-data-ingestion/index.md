@@ -5,13 +5,11 @@ tags:
   - opensearch
   - kafka
   - golang
-  - aws
   - analytics
-  - search-engine
   - tutorials
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: 2023-07-10
+date: 2023-07-12
 ---
 
 Scalable data ingestion is a key aspect for a large-scale distributed search and analytics engine like [OpenSearch](https://opensearch.org/). One of the ways to build a real-time data ingestion pipeline is to use [Apache Kafka](https://kafka.apache.org/). It's an open-source event streaming platform used to handle high data volume (and velocity) and integrates with a variety of sources including relational and NoSQL databases. For example, one of the canonical use cases is real-time synchronization of data between heterogeneous systems (source components) to ensure that OpenSearch indexes are fresh and can be used for analytics or consumed downstream applications via dashboards and visualizations.
