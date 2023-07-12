@@ -78,8 +78,8 @@ You will be able to apply these steps to other use cases by selecting different 
 
 This tutorial consists of 4 parts:
 
-* Part 1 - Setup: SageMaker Studio Lab and OpenAI account.
-* Part 2 - Creating a ML project and obtaining a video transcript.
+* Part 1 - Setup: SageMaker Studio Lab Project and OpenAI API keys.
+* Part 2 - Obtaining a video transcript.
 * Part 3 - Summarizing and translating a video using ML models from Hugging Face.
 * Part 4 - Extracting steps and creating a quiz using ChatGPT APIs.
 
@@ -98,7 +98,7 @@ In Part 4, we will experiment with ChatGPT APIs. We will discuss prompt engineer
 
 Let’s get started!
 
-## Part 1 - Setup: SageMaker Studio Lab and OpenAI account.
+## Part 1 - Setup: SageMaker Studio Lab Project and OpenAI API keys.
 
 To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/) and click **Request free account**. Fill in the required information in the form and submit your request. You will then receive an email to verify your email address. Follow the instructions in the email to complete this step.
 
@@ -125,11 +125,9 @@ In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.open
 | 4K context  | $0.0015 / 1K tokens | $0.002 / 1K tokens |
 | 16K context | $0.003 / 1K tokens  | $0.004 / 1K tokens |
 
-*Model*	*Input*	*Output*
-4K context	$0.0015 / 1K tokens	$0.002 / 1K tokens
-16K context	$0.003 / 1K tokens	$0.004 / 1K tokens
 
-## Part 2 - Creating a ML project and obtaining a video transcript.
+
+## Part 2 - Obtaining a video transcript.
 
 Once you have obtained access to the Studio Lab, sing in to [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/).
 
@@ -145,6 +143,21 @@ Let’s give a notebook a name and save it. From the Studio Lab menu, choose **F
 
 ![Studio Lab - Create Python Notebook](images/part2-01.jpg)
 
+First, we will use pip to install all the packages required to complete this tutorial. Please copy the code provided below and press Shift + Enter or click the Play button at the top to execute it.
+
+```python
+#installing libraries
+
+!pip install python-dotenv
+!pip install openai
+!pip install openai-whisper openai yt-dlp
+!pip install youtube_dl
+!pip install youtube_transcript_api
+!pip install torchaudio
+!pip install sentencepiece
+```
+
+Next, let's import all the necessary dependencies. Copy and run the following code:
 
 <!-- Recommended to use present tense. e.g. "First off, let's build a simple application."  -->
 
