@@ -10,7 +10,7 @@ tags:
   - commit-log
   - stream-store
   - stream-ingestion
-authorGithubAlias: aguinalf
+authorGithubAlias: franklinaws
 authorName: Franklin Aguinaldo
 date: 2023-07-12
 ---
