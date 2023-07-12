@@ -30,9 +30,9 @@ Introduction paragraph to the topic. Describe a real world example to illustrate
 
 ## What you will learn
 
-- Bullet list
-- with what you will
-- learn in this tutorial
+- How to get started SageMaker Studio Lab
+- How to utilize pretrained open-source ML models
+- How to use ChatGPT APIs
 
 ## Prerequisites
 
@@ -75,6 +75,30 @@ You will be able to apply these steps to other use cases by selecting different 
 
 
 ## Solution Overview
+
+This tutorial consists of 4 parts:
+
+* Part 1 - Setup: SageMaker Studio Lab and OpenAI account.
+* Part 2 - Creating a project: Obtaining a transcript of a YouTube video.
+* Part 3 - Summarizing & Translating a video using ML models from Hugging Face.
+* Part 4 - Extracting steps and creating a quiz using ChatGPT APIs.
+
+
+![Solution Architecture Oveview](images/intro-01.png)
+
+In Part 1, we will configure 2 prerequisites: accessing the [SageMaker Studio Lab Development](https://aws.amazon.com/sagemaker/studio-lab/) environment and creating [OpenAI API](https://platform.openai.com/docs/api-reference) keys for interaction with ChatGPT. What makes SageMaker Studio Lab special is that it is completely free and separate from an AWS account. If you’re new to machine learning, this free service is a fantastic way to get started. 
+
+In Part 2, you will learn how to get started with a machine learning project that allows you to write code directly from your browser, eliminating the need for a local setup. You will also learn how to run the code on CPU or GPU cloud instances. We will create a notebook, install libraries, and start experimenting.
+
+In Part 3, you will learn how to use Open Source models from the [Hugging Face Hub](https://huggingface.co/models) for inference. We will utilize pretrained sequence-to-sequence models to [summarize](https://huggingface.co/tasks/summarization) YouTube transcripts and [translate](https://huggingface.co/learn/nlp-course/chapter7/4?fw=tf) them to a different language.
+
+In Part 4, we will experiment with ChatGPT APIs. We will discuss prompt engineering and leverage the ChatGPT APIs to generate a step-by-step guide from a YouTube video. Additionally, we will create a quiz to test your understanding of the material.
+
+> Note: Cost
+> We will be using free resources in this tutorial.  The only potential cost that you may incur is for utilizing ChatGPT APIs if you already consumed all free credits and it will be a few cents. When you create an OpenAI account, you will be given $5 to use within the first 3 months.  This is enough to run hundreds of API requests.
+
+Let’s get started!
+
 
 
 
