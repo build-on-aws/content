@@ -71,7 +71,7 @@ aws cloudformation package --template-file main-stack.yaml --output-template pac
   --template-file  <Absolute path>/packaged.yaml  \
   --parameter-overrides S3BucketName=<Provide BucketName which will hold your artifacts> \
                SageMakerDomainName=buildonaws \
-               GitHubRepo=https://github.com/pkamra/recommendation-engine-full-stack \
+               GitHubRepo=https://github.com/build-on-aws/recommendation-engine-full-stack \
 	       VpcStackName=MyBuildOnAWSVPC \
 	       VpcRegion=<replace with your own region> \
                ImageId=<Provide AMI for EC2 For Amazon Linux 2023 AMI for your region> \
