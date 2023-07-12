@@ -170,6 +170,14 @@ Assuming a zonal gray failure has occurred and the monitoring mechanism has iden
 cdk destroy
 ```
 
+You have just deployed and tested a mechanism that responds to a zonal gray failure by automatically shifting traffic away from a degraded availability zone to a healthy availability zone. This mechanism can improve the end user experience by reducing the mean-time-to-respond to zonal gray failures.
+
 ## Conclusion
 
 This blog post discusses gray failures, how to detect them, and how to reduce the end user impact by quickly responding to gray failures. A gray failure can affect the overall availability of an application. This could impact the end user experience and drive down the application traffic/usage resulting in loss of revenue. By using the concept of differential observability and availability zone independence architectures, you can quickly detect and respond to a zonal gray failure with reduced impact to the end user experience and also prevent possible loss of revenue. Automating the [Amazon Route 53 Application Recovery Controller Zonal Shift](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift) feature helps decrease the mean-time-to-respond with little or no user intervention. This improves the overall resilience posture of the application and can help keep end users engaged. This blog post also provides a sample solution and a walk through on how to get started with automating zonal shift.
+
+### Learn more:
+
+-   [How zonal shift works](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.how-it-works.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
+-   [Best practices for zonal shifts in Route 53 ARC](https://docs.aws.amazon.com/r53recovery/latest/dg/route53-arc-best-practices.html#zonalshift.route53-arc-best-practices.zonal-shifts?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
+-   [Implementing health checks](https://aws.amazon.com/builders-library/implementing-health-checks/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
