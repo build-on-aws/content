@@ -14,7 +14,7 @@ date: 2023-07-31 (expected publication date)
 
 ## What you will learn
 
-- How to get setup free ML Dev Environment
+- How to setup free ML Dev Environment
 - How to utilize pretrained open-source ML models
 - How to use ChatGPT APIs
 
@@ -55,22 +55,22 @@ In this tutorial, we will build exactly that!
 
 I will walk you through a step-by-step process on how to configure a free ML development environment using SageMaker Studio Lab, integrate it with open-source ML models from Hugging Face, and use OpenAI's ChatGPT APIs.
 
-You will be able to apply these steps to other use cases by selecting different models or adjusting prompts.
+You will be able to apply these steps to other use cases by selecting different ML models or adjusting ChatGPT prompts.
 
 
 ## Solution Overview
 
 This tutorial consists of 4 parts:
 
-* Part 1 - Setup: SageMaker Studio Lab Project and OpenAI API keys.
-* Part 2 - Obtaining a video transcript.
-* Part 3 - Summarizing and translating a video using ML models from Hugging Face.
+* Part 1 - Setup: SageMaker Studio Lab and OpenAI API keys.
+* Part 2 - Obtaining a YouTube video transcript.
+* Part 3 - Summarizing and translating a transcript using ML models.
 * Part 4 - Extracting steps and creating a quiz using ChatGPT APIs.
 
 
 ![Solution Architecture Oveview](images/intro-01.gif)
 
-In Part 1, you will configure 2 prerequisites: accessing the [SageMaker Studio Lab Development](https://aws.amazon.com/sagemaker/studio-lab/) environment and creating [OpenAI API](https://platform.openai.com/docs/api-reference) keys for interaction with ChatGPT. What makes SageMaker Studio Lab special is that it is completely free and separate from an AWS account. If you are new to machine learning, this free service is a fantastic way to get started. 
+In Part 1, you will configure 2 prerequisites: accessing the [SageMaker Studio Lab Development](https://aws.amazon.com/sagemaker/studio-lab/) environment and creating [OpenAI API](https://platform.openai.com/docs/api-reference) keys for interaction with ChatGPT. What makes SageMaker Studio Lab special is that it is completely free and separate from an AWS account. If you are new to machine learning, this free service is a fantastic way to get started! 
 
 In Part 2, you will create a machine learning project that allows writing code directly from your browser, eliminating the need for a local setup. You will also learn how to run the code on CPU or GPU cloud instances. We will create a notebook, install libraries, and start experimenting.
 
@@ -82,7 +82,7 @@ In Part 4, you will experiment with ChatGPT APIs. We will discuss prompt enginee
 
 Let’s get started!
 
-## Part 1 - Setup: SageMaker Studio Lab Project and OpenAI API keys.
+## Part 1 - Setup: SageMaker Studio Lab and OpenAI API keys.
 
 To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/) and click **Request free account**. Fill in the required information in the form and submit your request. You will receive an email to verify your email address. Follow the instructions in the email.
 
@@ -111,7 +111,7 @@ In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.open
 
 
 
-## Part 2 - Obtaining a video transcript.
+## Part 2 - Obtaining a YouTube video transcript.
 
 Once you have obtained access to the Studio Lab, sing in to [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/).
 
@@ -185,7 +185,7 @@ print(transcript_text)
 
 The provided code checks if a URL link is valid and then uses the *YouTubeTranscriptApi.get_transcript(video_id)* method to retrieve the YouTube transcript using the YouTube API.  This method provides accurate and official captions associated with the video.
 
-## Part 3 - Summarizing and translating a video using ML models from Hugging Face.
+## Part 3 - Summarizing and translating a transcript using ML models.
 
 
 Now that we have the full transcript of the YouTube video, we can proceed to utilize open-source models for natural language processing tasks, such as summarization, translation, and more. These models will help us to extract valuable insights from the transcript.
@@ -259,7 +259,7 @@ We were able to get a concise summary of the video's content, excluding any spon
 We are now ready to move on to the final step, Step 4, where we will generate a step-by-step tutorial based on the summarized transcript and create a quiz to test our understanding and gained knowledge. 
 
 
-## Part 4 - Using ChatGPT APIs for summary and quiz.
+## Part 4 - Extracting steps and creating a quiz using ChatGPT APIs.
 
 To begin experimenting with ChatGPT, you will need to retrieve the API keys that you created in Part 1 and replace the value within the quotation marks for the openai.api_key variable in your code.
 
