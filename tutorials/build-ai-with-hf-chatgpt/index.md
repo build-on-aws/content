@@ -14,7 +14,7 @@ date: 2023-07-31 (expected publication date)
 
 ## What you will learn
 
-- How to get started SageMaker Studio Lab
+- How to get setup free ML Dev Environment
 - How to utilize pretrained open-source ML models
 - How to use ChatGPT APIs
 
@@ -42,11 +42,12 @@ line>)                             |
 ---
 ## Intro
 
-When was the last time you had to watch YouTube to learn something? [A 2021 survey](https://www.techsmith.com/blog/video-statistics/) found that most respondents view videos 2-4 times per week and [a 2019 Google study](https://www.thinkwithgoogle.com/marketing-strategies/video/youtube-learning-statistics/) found that 86% of U.S. viewers say they often use YouTube to learn new things.
+When was the last time you had to watch YouTube to learn something? 
+Accordingly to a [recent survey](https://www.techsmith.com/blog/video-statistics/) most respondents view videos 2-4 times per week and [a 2019 Google study](https://www.thinkwithgoogle.com/marketing-strategies/video/youtube-learning-statistics/) and 86% of U.S. viewers say they use YouTube to learn new things.
 
-It comes as no surprise that you can find educational content on pretty much any topic on YouTube. From academic subjects like math and programming to hands-on projects, tutorials, and preparation for professional certifications, it's all there for anyone!
+It comes as no surprise, YouTube has educational content on pretty much any topic. From academic subjects like math and programming to hands-on projects, tutorials, and preparation for professional certifications, it's all there for anyone!
 
-However, it's not perfect. Some videos have too many ad and sponsorship interruptions, some are too slow with lots of talking, while others are too fast, requiring you to pause to make sure you can follow the steps.
+However, it's not perfect. Some videos have too many ads and sponsorship interruptions, some are too slow with non-essential information, while others require to frequently pause to follow the steps.
 
 Imagine if you could get a concise video summary, review it to determine whether it's worth watching, extract step-by-step guidance so you could easily follow along, and at the end, generate a quiz to test your understanding. Wouldn't that be awesome?
 
@@ -69,13 +70,13 @@ This tutorial consists of 4 parts:
 
 ![Solution Architecture Oveview](images/intro-01.gif)
 
-In Part 1, we will configure 2 prerequisites: accessing the [SageMaker Studio Lab Development](https://aws.amazon.com/sagemaker/studio-lab/) environment and creating [OpenAI API](https://platform.openai.com/docs/api-reference) keys for interaction with ChatGPT. What makes SageMaker Studio Lab special is that it is completely free and separate from an AWS account. If you’re new to machine learning, this free service is a fantastic way to get started. 
+In Part 1, you will configure 2 prerequisites: accessing the [SageMaker Studio Lab Development](https://aws.amazon.com/sagemaker/studio-lab/) environment and creating [OpenAI API](https://platform.openai.com/docs/api-reference) keys for interaction with ChatGPT. What makes SageMaker Studio Lab special is that it is completely free and separate from an AWS account. If you are new to machine learning, this free service is a fantastic way to get started. 
 
-In Part 2, you will learn how to get started with a machine learning project that allows you to write code directly from your browser, eliminating the need for a local setup. You will also learn how to run the code on CPU or GPU cloud instances. We will create a notebook, install libraries, and start experimenting.
+In Part 2, you will create a machine learning project that allows writing code directly from your browser, eliminating the need for a local setup. You will also learn how to run the code on CPU or GPU cloud instances. We will create a notebook, install libraries, and start experimenting.
 
-In Part 3, you will learn how to use Open Source models from the [Hugging Face Hub](https://huggingface.co/models) for inference. We will utilize pretrained sequence-to-sequence models to [summarize](https://huggingface.co/tasks/summarization) YouTube transcripts and [translate](https://huggingface.co/learn/nlp-course/chapter7/4?fw=tf) them to a different language.
+In Part 3, you will learn how to use Open-source models from the [Hugging Face Hub](https://huggingface.co/models) for inference. You will utilize pretrained sequence-to-sequence models to [summarize](https://huggingface.co/tasks/summarization) YouTube transcripts and [translate](https://huggingface.co/learn/nlp-course/chapter7/4?fw=tf) them to a different language.
 
-In Part 4, we will experiment with ChatGPT APIs. We will discuss prompt engineering and leverage the ChatGPT APIs to generate a step-by-step guide from a YouTube video. Additionally, we will create a quiz to test your understanding of the material.
+In Part 4, you will experiment with ChatGPT APIs. We will discuss prompt engineering and leverage the ChatGPT APIs to generate a step-by-step guide from a YouTube video. Additionally, you will create a quiz to test your understanding of the material.
 
 > Note: We will be using free resources in this tutorial.  The only potential cost that you may incur is for utilizing ChatGPT APIs if you already consumed all free credits and it will be a few cents. When you create an OpenAI account, you will be given $5 to use within the first 3 months.  This is enough to run hundreds of API requests.
 
@@ -83,9 +84,9 @@ Let’s get started!
 
 ## Part 1 - Setup: SageMaker Studio Lab Project and OpenAI API keys.
 
-To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/) and click **Request free account**. Fill in the required information in the form and submit your request. You will then receive an email to verify your email address. Follow the instructions in the email to complete this step.
+To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/) and click **Request free account**. Fill in the required information in the form and submit your request. You will receive an email to verify your email address. Follow the instructions in the email.
 
-> Please note that your account request needs to be approved before you can register for a Studio Lab account. The review process typically takes up to 5 business days. Once your account request is approved, you will receive an email containing a link to the Studio Lab account registration page. This link will remain active for 7 days after your request is approved, so make sure to submit a new account request within this timeframe if needed.
+> Please note that your account request needs to be approved before you can register for a Studio Lab account. The review process typically takes up to 5 business days. Once your account request is approved, you will receive an email containing a link to the Studio Lab account registration page. This link will remain active for 7 days after your request is approved. 
 
 ![SageMaker Studio Lab Sign up](images/part1-01.gif)
 
@@ -94,13 +95,13 @@ To integrate and use Open AI models into your application, you need to register 
 Navigate to [OpenAI API keys](https://platform.openai.com/account/api-keys) page and click on **Create new secret key**, provide name, copy the key and save it. You won’t be able to access the key again!
 
 
-> Please note that the ChatGPT API currently offers a $5 credit for new users, allowing you to start experimenting with the API at no cost. This credit is available for use during the first 3 months of your account. After the initial 3-month period, the pricing will transition to a pay-as-you-go model. To get detailed information about the rates and pricing structure, I recommend visiting the pricing page on the OpenAI website.
+> Please note that OpenAI currently offers a $5 credit for new users, allowing you to start experimenting with their APIs at no cost. This credit is available for use during the first 3 months of your account. After the initial 3-month period, the pricing will transition to a pay-as-you-go model. To get detailed information about the rates and pricing structure, I recommend visiting the [pricing page]https://openai.com/pricing) on the OpenAI website.
 
 You can set usage limits and monitor your current usage by visiting the [Usage Limits page](https://platform.openai.com/account/billing/limits). 
 
 ![OpenAI API key creation](images/part1-02.jpg)
 
-In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.openai.com/docs/guides/gpt/chat-completions-api) model. As shown in the table below, API calls for this model are priced at a fraction of a cent. With the free credit of $5, you will be able to run hundreds of experiments at no cost.
+In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.openai.com/docs/guides/gpt/chat-completions-api) model. As shown in the table below, API calls for this model are priced at a fraction of a cent. With the free credit of $5, you will be able to run hundreds of experiments at no cost!
 
 
 | Model       | Input               | Output             |
@@ -114,13 +115,13 @@ In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.open
 
 Once you have obtained access to the Studio Lab, sing in to [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/).
 
-Under **My Project**, you can select a compute type and start project runtime based on an EC2 instance. Studio Lab provides the option to choose between a CPU (Central Processing Unit) designed for compute intensive algorithms and a GPU (Graphical Processing Unit) which is recommended for deep learning tasks, particularly transformers and computer vision.
+Under **My Project**, you can select a compute type and start project runtime based on an cloud compute instance. Studio Lab provides the option to choose between a CPU (Central Processing Unit) designed for compute intensive algorithms and a GPU (Graphical Processing Unit) which is recommended for deep learning tasks, particularly transformers and computer vision.
 
-We will use the CPU option because it give us 8 hours per day to experiment compared to the GPU option with a 4-hour daily limit. Click **Start runtime**. The click button **Open project**. You may be required to solve a CAPTCHA puzzle when you start runtime.
+You can start with the CPU option because it give us 8 hours per day to experiment compared to the GPU option with a 4-hour daily limit. You can switch later to a GPU instance and you will notice a much faster execution time. Click **Start runtime**. The click button **Open project**. You may be required to solve a CAPTCHA puzzle when you start runtime.
 
 ![Studio Lab - New Project](images/part2-01.jpg)
 
-A project contains files and folders, including Jupyter notebooks. You have full control over the files in your project. The image below shos the Studio Lab Launcher. Click **on default: Python** under Notebook. A new notebook will be created. 
+A project contains files and folders, including Jupyter notebooks. The image below shows the Studio Lab Launcher. Click **on default: Python** under Notebook. A new notebook will be created. 
 
 Let’s give a notebook a name and save it. From the Studio Lab menu, choose **File**, choose **Save File As**, and then choose folder and give it name. For example, `learn-with-ai.ipynb`
 
@@ -155,7 +156,7 @@ from transformers import pipeline
 ```
 
 
-You completed all required setup. We are ready to work on the second task (as marked on the solution overview), which is to obtain a transcript of a YouTube video. I used the eductional video about [AWS Regions and Availability Zones](https://www.youtube.com/watch?v=b9rs8yzpGYk). You can choose a different video and replace a link in the youtube_url variable. To get a YouTube video url, right-click on the video itself (not the player controls) and then select "Copy video URL" . 
+You completed all required setup! We are ready to work on the second task as marked on the solution overview, which is to obtain a transcript of a YouTube video. I used the eductional video about [AWS Regions and Availability Zones](https://www.youtube.com/watch?v=b9rs8yzpGYk). You can choose a different video and replace a link in the youtube_url variable. To get a YouTube video url, right-click on the video itself (not the player controls) and then select "Copy video URL" . 
 
 > Note: I recommend starting with a video that is under 10 minutes. This will allow you to complete the tutorial more quickly, as executing commands for longer videos will take more time.
 
@@ -187,14 +188,13 @@ The provided code checks if a URL link is valid and then uses the *YouTubeTransc
 ## Part 3 - Summarizing and translating a video using ML models from Hugging Face.
 
 
-Now that we have the full transcript of the YouTube video, we can proceed to utilize open-source models for natural language processing tasks, such as summarization, translation, and more. These models will help us to extract valuable insights from the transcript data.
+Now that we have the full transcript of the YouTube video, we can proceed to utilize open-source models for natural language processing tasks, such as summarization, translation, and more. These models will help us to extract valuable insights from the transcript.
 
-We will be using [Transformers](https://huggingface.co/docs/transformers/index) library from Hugging Face 🤗 . Transformers provides APIs and tools to easily for downloading  pretrained models. By using pretrained models, you can significantly reduce your compute costs, carbon footprint, and save valuable time and resources that would otherwise be required to train a model from scratch. 
-
+We will be using [Transformers](https://huggingface.co/docs/transformers/index) library from Hugging Face 🤗 . Hugging Face is a leading platform that specializes in natural language processing (NLP) and provides state-of-the-art models, tools, and libraries for building and deploying NLP applications. Transformers provides APIs and tools to easily for downloading  pretrained models. By using pretrained models, you can significantly reduce your compute costs, carbon footprint, and save valuable time and resources that would otherwise be required to train a model from scratch. 
 
 Let's assume that English is not your first language, and you would like to translate the YouTube transcript to Spanish. To achieve this, we can utilize a pretrained machine learning model specifically designed for translation. Translation involves converting a sequence of text from one language to another. It is a task that can be formulated as a sequence-to-sequence problem. By leveraging a pretrained sequence-to-sequence translation model, we can effectively translate the YouTube transcript from English to Spanish.
 
-You can try different pretrained translation models by updating the *model_checkpoint* variable. Hugging Face offers a wide range of over [2,500 translation models](https://huggingface.co/models?pipeline_tag=translation&sort=trending) to choose from. These models cover various languages and translation pairs, allowing you to select the one that best suits your needs.
+You can try different pretrained translation models by updating the *model_checkpoint* variable. Hugging Face offers a wide range of over [2,500 translation models](https://huggingface.co/models?pipeline_tag=translation&sort=trending) to choose from. These models cover various languages. 
 
 ```python
 from transformers import pipeline
@@ -254,18 +254,19 @@ final_summary = ' '.join(summaries)
 print(final_summary)
 ```
 
-We were able to get a concise summary of the video's content, excluding any sponsorships, advertisements, or other extraneous information. This enables to quickly grasp the key points and main ideas from the video without being bogged down by unnecessary details. Well done on achieving this accomplishment! 
+We were able to get a concise summary of the video's content, excluding any sponsorships, advertisements, or other extraneous information. This enables us to quickly grasp the key points and main ideas from the video without being slowed down by unnecessary details. Well done on achieving this accomplishment! 
 
 We are now ready to move on to the final step, Step 4, where we will generate a step-by-step tutorial based on the summarized transcript and create a quiz to test our understanding and gained knowledge. 
 
 
 ## Part 4 - Using ChatGPT APIs for summary and quiz.
 
-o begin experimenting with ChatGPT, you will need to retrieve the API keys that you created in Part 1 and replace the value within the quotation marks for the openai.api_key variable in your code.
-
-Additionally, I recommend utilizing the [OpenAI Playground](https://platform.openai.com/playground) to further explore and experiment with the OpenAI API models. The OpenAI Playground is a user-friendly web-based tool that allows you to test prompts and gain familiarity with the API's functionalities. It provides an interactive environment to fine-tune your prompts and observe the model's responses. 
+To begin experimenting with ChatGPT, you will need to retrieve the API keys that you created in Part 1 and replace the value within the quotation marks for the openai.api_key variable in your code.
 
 Let's obtain a video summary using the ChatGPT model and compare it to the summary we obtained in the previous step using open-source models.
+
+>  Note: I recommend utilizing the [OpenAI Playground](https://platform.openai.com/playground) to further explore and experiment with the OpenAI API models. The OpenAI Playground is a user-friendly web-based tool that allows you to test prompts and gain familiarity with the API's functionalities. It provides an interactive environment to fine-tune your prompts and observe the model's responses. 
+
 
 ```python
 def split_text_into_chunks(text, max_chunk_size):
@@ -296,7 +297,7 @@ print(summaries)
 
 Which summary do you think is better? I found a summary created by ChatGPT to be more helpful.
 
-We can proceed by modifying the prompts and instructing ChatGPT to extract the necessary steps from the video transcript. By doing so, we can generate a step-by-step guide that provides clear instructions for us to follow along with ease. This will enable us to have a structured and guided approach while engaging with the video content. 
+We can proceed by modifying the prompts and instructing ChatGPT to extract the necessary steps from the video transcript. By doing so, we can generate a step-by-step guide that provides clear instructions for us to follow along. This will help us to have a structured guided approach while engaging with the video content. 
 
 The *system* parameter represents the instructions or context provided to the model to guide its behavior. It sets the overall behavior, tone, or role of the AI assistant. For example, "You are a technical instructor that provides step-by-step guidance." This helps set the expectation for the AI model and provides guidance on how it should respond.
 
@@ -320,7 +321,7 @@ print("Steps:")
 print(guide)
 ```
 
-To finish our experiment, let’s generate a quiz based on the materials covered in the video. This quiz will help us assess our understanding and retention of the content.
+To finish our experiment, let’s generate a quiz based on the materials covered in the video. The quiz will assess our understanding of the content.
 
 ```python
 response = openai.ChatCompletion.create(
@@ -345,13 +346,15 @@ You should see results similar to the screenshot below:
 
 ## Conclusion
 
-Well done! Yo! You have successfully completed this tutorial and learned how to get started with ML projects using Jupyter notebooks,  integrating Open Source Models from the Hugging Face library, and leveraging ChatGPT APIs to develop your own creative AI/ML solutions.
+Well done! You have successfully completed this tutorial and learned how to get started with ML projects using Jupyter notebooks,  integrating open-source models from the Hugging Face library, and leveraging ChatGPT APIs to develop your own creative AI/ML solutions.
 
-As you continue your AI journey, I suggest to explore Hugging face library which hosts over 250,000 models. You can apply them for different use cases. For example, you can experiment with [text-to-image](https://huggingface.co/docs/diffusers/using-diffusers/conditional_image_generation) generationto create visuals for each quiz question  or synthesize an audio file from a transcript summary  by using [text-to-speech](https://huggingface.co/tasks/text-to-speech) models. The only limit now is your imagination!
+As you continue your AI journey, I suggest to explore Hugging face library which hosts over 250,000 models. You can apply them for different use cases. For example, you can experiment with [text-to-image](https://huggingface.co/docs/diffusers/using-diffusers/conditional_image_generation) generationto create visuals for each quiz question  or synthesize an audio file from a transcript summary  by using [text-to-speech](https://huggingface.co/tasks/text-to-speech) models. 
+
+The only limit now is your imagination!
 
 ## About the Author
 
-Viktoria is a Senior Developer Advocate and passionate about helping developers to build and innovate using new technologies. She is a content creator and frequently shares content on [LinkedIn](https://www.linkedin.com/in/semaan/). Viktoria has been named one of the Top Cloud Influencers and one of the [Top 10 LinkedIn Female Content Creator WorldWide](https://app.favikon.com/creators-tops/women-content-creators/all-niches/linkedin/).
+Viktoria is a Senior Developer Advocate and passionate about helping developers to build and innovate using new technologies. She is a content creator and frequently shares content on [LinkedIn](https://www.linkedin.com/in/semaan/). Viktoria has been named one of the Top Cloud Influencers and one of the [Top 10 LinkedIn Female Content Creator WorldWide](https://app.favikon.com/creators-tops/women-content-creators/all-niches/linkedin/). 
 
 Thank you for reading this tutorial, and I hope that it equipped you with practical skills to embark on your AI/ML journey!
 
