@@ -325,6 +325,13 @@ Here is how my UI looks when everything is hooked up and the file is opened from
 5. Dlete the main-stack.yaml from AWS Cloudformation console which is the parent level stack for the entire nested stack and that will delete all the remaining deployed resources. 
 
 
-🎥 Here is a video containing a hands-on implementation about this section.
+🎥 Here are the 3 videos containing a hands-on implementation about this tutorial<br/>
+https://youtu.be/96IV4qBO0co
+
+https://youtu.be/9JzEybNli7Q
+
+https://youtu.be/7iPQPGwk8mc
+
+
 
 
