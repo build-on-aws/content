@@ -117,7 +117,7 @@ Once you have obtained access to the Studio Lab, sing in to [Amazon SageMaker St
 
 Under **My Project**, you can select a compute type and start project runtime based on an cloud compute instance. Studio Lab provides the option to choose between a CPU (Central Processing Unit) designed for compute intensive algorithms and a GPU (Graphical Processing Unit) which is recommended for deep learning tasks, particularly transformers and computer vision.
 
-You can start with the CPU option because it give us 8 hours per day to experiment compared to the GPU option with a 4-hour daily limit. You can switch later to a GPU instance and you will notice a much faster execution time. Click **Start runtime**. The click button **Open project**. You may be required to solve a CAPTCHA puzzle when you start runtime.
+Select **GPU** instance, it will significantly reduce execution time. Click **Start runtime**. The click button **Open project**. You may be required to solve a CAPTCHA puzzle when you start runtime. If at any moment you need to take a break, click **Stop runtime** as GPU usage limited to 4 hours per day. Your work will be saved.
 
 ![Studio Lab - New Project](images/part2-01.jpg)
 
@@ -139,6 +139,7 @@ First, we will use pip to install all the packages required to complete this tut
 !pip install youtube_transcript_api
 !pip install torchaudio
 !pip install sentencepiece
+!pip install sacremoses
 ```
 
 Next, let's import all the necessary dependencies. Copy and run the following code:
@@ -156,9 +157,11 @@ from transformers import pipeline
 ```
 
 
-You completed all required setup! We are ready to work on the second task as marked on the solution overview, which is to obtain a transcript of a YouTube video. I used the eductional video about [AWS Regions and Availability Zones](https://www.youtube.com/watch?v=b9rs8yzpGYk). You can choose a different video and replace a link in the youtube_url variable. To get a YouTube video url, right-click on the video itself (not the player controls) and then select "Copy video URL" . 
+You completed all required setup! We are ready to work on the second task as marked on the solution overview, which is to obtain a transcript of a YouTube video. I used the eductional video about [AWS Regions and Availability Zones](https://www.youtube.com/watch?v=b9rs8yzpGYk). You can choose a different video and replace a link in the youtube_url variable. To get a YouTube video url, copy URL up to "&" sign as on the screenshot below.
 
-> Note: I recommend starting with a video that is under 10 minutes. This will allow you to complete the tutorial more quickly, as executing commands for longer videos will take more time.
+![YouTube video URL](images/part2-03.png)
+
+> Note: I recommend starting with a video that is under 30 minutes. This will allow you to complete the tutorial more quickly, as executing commands for longer videos will take more time.
 
 Copy and run the following code:
 
@@ -196,6 +199,9 @@ Let's assume that English is not your first language, and you would like to tran
 
 You can try different pretrained translation models by updating the *model_checkpoint* variable. Hugging Face offers a wide range of over [2,500 translation models](https://huggingface.co/models?pipeline_tag=translation&sort=trending) to choose from. These models cover various languages. 
 
+
+Copy and run the code below. It may take up to a few minutes to complete it depending on the length of a transript.
+
 ```python
 from transformers import pipeline
 
@@ -220,14 +226,14 @@ print(translated_text)
 
 Next, we will proceed with summarizing the video using a pretrained model for text [summarization](https://huggingface.co/docs/transformers/tasks/summarization#inference). In this case, I will be using the original transcript in English. However, if you choose to continue with a translated transcript, you can replace the *transcript_text* variable with the *translated_text* variable that contains the translated text. By applying the summarization model to the transcript, we can generate a concise summary of the video's content.
 
-If you are using GPU instance, then change *device=-1* to *device=0* in the code below.
+Copy and run the code below. Wait until you see a summary.
 
 ```python
 from transformers import pipeline, AutoTokenizer
 
 # Instantiate the tokenizer and the summarization pipeline
 tokenizer = AutoTokenizer.from_pretrained('stevhliu/my_awesome_billsum_model')
-summarizer = pipeline("summarization", model='stevhliu/my_awesome_billsum_model', tokenizer=tokenizer, device=-1)
+summarizer = pipeline("summarization", model='stevhliu/my_awesome_billsum_model', tokenizer=tokenizer)
 
 # Define chunk size in number of words
 chunk_size = 200 # you may need to adjust this value depending on the average length of your words
@@ -256,7 +262,7 @@ print(final_summary)
 
 We were able to get a concise summary of the video's content, excluding any sponsorships, advertisements, or other extraneous information. This enables us to quickly grasp the key points and main ideas from the video without being slowed down by unnecessary details. Well done on achieving this accomplishment! 
 
-We are now ready to move on to the final step, Step 4, where we will generate a step-by-step tutorial based on the summarized transcript and create a quiz to test our understanding and gained knowledge. 
+We are now ready to move on to the final step, Step 4, where we will re-generate summary to compare results from OpenAI vs an open-source model as well as create a step-by-step tutorial based on the summarized transcript and a quiz to test our understanding and gained knowledge. 
 
 
 ## Part 4 - Extracting steps and creating a quiz using ChatGPT APIs.
@@ -295,7 +301,7 @@ print("Summary:")
 print(summaries)
 ```
 
-Which summary do you think is better? I found a summary created by ChatGPT to be more helpful.
+Which summary do you think is better? I found a summary created by ChatGPT to be much more insightful.
 
 We can proceed by modifying the prompts and instructing ChatGPT to extract the necessary steps from the video transcript. By doing so, we can generate a step-by-step guide that provides clear instructions for us to follow along. This will help us to have a structured guided approach while engaging with the video content. 
 
@@ -340,7 +346,7 @@ print("Quiz Questions:")
 print(quiz_questions)
 ```
 
-You should see results similar to the screenshot below:
+You will see a quiz with 10 question generated to test your knowledge. This can be especially helpful if you are preparing for exams. You can modify a prompt to explain the right answers, for example: "Generate 10 quiz questions based on the text with multiple choices and explain why particular answer is the right one."
 
 ![Quiz generated by ChatGPT](images/part4-01.png)
 
