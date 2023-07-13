@@ -37,5 +37,5 @@ https://www.twitch.tv/videos/1870896895
 **🐦 Reach out to the hosts and guests:**
 
 - Jacquie: [https://twitter.com/devopsjacquie](https://twitter.com/devopsjacquie)
-- Todd: [https://twitter.com/darkosubotica](https://twitter.com/recursivecodes/)
-- Seth: [https://twitter.com/ElizabethFue12](https://twitter.com/setheliot/)
+- Todd: [https://twitter.com/recursivecodes](https://twitter.com/recursivecodes/)
+- Seth: [https://twitter.com/setheliot](https://twitter.com/setheliot/)
