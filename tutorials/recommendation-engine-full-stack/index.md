@@ -24,7 +24,7 @@ There's a point in every developer's journey when they realize that building mac
 - How to find relationships between various features in your data set and convert the relevant features into numerical features
 - How to scale the numerical features in your raw data to bring all the features on the same scale for comparison purposes
 - How to build, train and deploy your custom and native machine learning models on sagemaker.
-- How to expose the deployed models as a REST API using AWS Lambda and AWS API Gateway using Open Source Chalice framework (https://github.com/aws/chalice)
+- How to expose the deployed models through a REST API using AWS Lambda and AWS API Gateway using Open Source Chalice framework (https://github.com/aws/chalice)
 - How to integrate the REST API's with a fronting User Interface (In our case this UI will represent our custom streaming platform clone called Myflix but you can use the skills you learn in this tutorial for building your own full stack applications with ML Models)
 
 
@@ -55,8 +55,6 @@ In this tutorial we will be building a recommendation engine for a streaming pla
 -rw-r--r--     1 XXXXX  XXXX    269 Jul  7 21:23 glue-stack.yaml
 -rw-r--r--     1 XXXXX  XXXX   3091 Jul  4 02:24 instance-stack.yaml
 -rw-r--r--     1 XXXXX  XXXX   2550 Jul  7 13:11 main-stack.yaml
--rw-r--r--     1 XXXXX  XXXX   2942 Jul  7 14:09 packaged.yaml
--rw-r--r--     1 XXXXX  XXXX   6438 Jul  5 12:43 sagemaker-stack-working.yaml
 -rw-r--r--     1 XXXXX  XXXX   2141 Jul  5 14:45 sagemaker-stack.yaml
 -rw-r--r--     1 XXXXX  XXXX   6877 Jul  7 00:57 vpc-stack.yaml
 ```
