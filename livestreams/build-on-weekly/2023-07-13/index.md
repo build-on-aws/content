@@ -5,8 +5,14 @@ tags:
   - aws
   - build-on-live
   - twitch
+  - resilience
 authorGithubAlias: gogococo
 authorName: Jacquie Grindrod
+additionalAuthors: 
+  - authorGithubAlias: setheliot
+    authorName: Seth Eliot
+  - authorGithubAlias: recursivecodes
+    authorName: Todd Sharp
 date: 2023-07-13
 spaces:
   - livestreams
@@ -18,7 +24,7 @@ Hello friends and welcome to this week's Build On Weekly episode show notes! Jac
 
 ![Resilient (or not so Resilient) Architecture Diagram](images/Architecture-initial.png)
 
-Together, we explore the architecture and what it means to build it with resilience as we learn about reslience policies and resolve the faults we discovered. During this stream we work with a multitude of services including Loadbalancers, RDS databases, CodePipeline and more!
+Together, we explore the architecture and what it means to build it with resilience as we learn about reslience policies and resolve the faults we discovered. During this stream we work with a multitude of services including load balancers, RDS databases, CodePipeline and more!
 
 Follow the workshop yourself at home: [Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup).
 
@@ -31,7 +37,7 @@ https://www.twitch.tv/videos/1870896895
 - [Today's Workshop: Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup)
 - [AWS re:Inforce 2023 - Engineer application resilience with compliance in mind (GRC304)](https://bit.ly/arh-reinforce2023)
 - [Resilience Wave content](https://community.aws/tags/resilience)
-- [Blog: Building Resilient Well-Architected Workloads Using AWS Resilience Hub](https://catalog.us-east-1.prod.workshops.aws/event/dashboard/en-US/workshop/prepare-and-protect)
+- [Blog: Building Resilient Well-Architected Workloads Using AWS Resilience Hub](https://aws.amazon.com/blogs/architecture/building-resilient-well-architected-workloads-using-aws-resilience-hub/)
 - [Blog: Continually assessing application resilience with AWS Resilience Hub and AWS CodePipelin](https://aws.amazon.com/blogs/architecture/continually-assessing-application-resilience-with-aws-resilience-hub-and-aws-codepipeline/)
 
 **🐦 Reach out to the hosts and guests:**
