@@ -417,6 +417,7 @@ After you are done with the demo, make sure to delete all the services to avoid 
 
 ## Conclusion
 
-To recap, you deployed a pipeline to ingest data into OpenSearch Serverless using Kafka and then queried it in different ways. Along the way, you also learned about the architectural considerations and compute options to keep in mind for production workloads as well as using Go based Kafka applications with MSK IAM authentication.
+To recap, you deployed a pipeline to ingest data into OpenSearch Serverless using Kafka and then queried it in different ways. Along the way, you also learned about the architectural considerations and compute options to keep in mind for production workloads as well as using Go based Kafka applications with MSK IAM authentication. I would also suggest reading the article [Building a CRUD Application in Go for Amazon OpenSearch](https://stackoverflow.com/collectives/aws/articles/76223192/building-a-crud-application-in-go-for-amazon-opensearch), particularly if you're looking for a tutorial centered on carrying out OpenSearch operations via the Go SDK.
+
 
 This was pretty lengthy (I think!). Thank you reading it till the end! If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
