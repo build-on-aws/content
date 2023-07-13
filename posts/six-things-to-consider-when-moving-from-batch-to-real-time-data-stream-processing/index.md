@@ -4,11 +4,8 @@ description: Learn how we evolved from batch into using real-time streaming anal
 tags:
   - analytics
   - big-data
-  - real-time
-  - traditional-analytics
   - batch-processing
   - commit-log
-  - stream-store
   - stream-ingestion
 authorGithubAlias: franklinaws
 authorName: Franklin Aguinaldo
