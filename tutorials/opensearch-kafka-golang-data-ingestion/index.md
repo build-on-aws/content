@@ -5,9 +5,7 @@ tags:
   - opensearch
   - kafka
   - golang
-  - aws
   - analytics
-  - search-engine
   - tutorials
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
