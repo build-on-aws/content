@@ -308,7 +308,7 @@ curl -X POST https://yyyyyyy.execute-api.us-east-2.amazonaws.com/api/ -H 'Conten
 ## Integrate the API's with our fancy UI.
 1. Download the html file locally on your machine from the Cloud9 Console and go to the cloned GitHub Repo Folder  , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI. The image below will show how to doanload the UI file and the changes for REST API endpoints that need to be made in that file. :- 
 
-![Modified UI Code](images/SetupUI.png) 
+![Modified UI Code](images/SetupUI.jpg) 
 
 Here is how my UI looks when everything is hooked up and the file is opened from the browser: Enter teh criteria like start Year, runtime Minutes, Rating, Number of Votes and the Genres:-<br/>
 
