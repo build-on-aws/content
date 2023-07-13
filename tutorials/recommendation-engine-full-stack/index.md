@@ -111,7 +111,7 @@ aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V3.ip
 ![Augmented Data Set for quick Lookup with my predicted Cluster Number](images/augmented_dateset.png)  
 12. Finally I execute a few more cells, to store this augmented information in a Glue Database. The augmented information is stored in parquet file format in the S3 bucket in the `clusteredfinaldata` folder.
 13. At this point although the KMeans model is deployed as a sagemaker endpoint, our Custom Scaling Model is still only available locally in our Sagemaker studio environment as a serialized model.joblib. Our next step will be to deploy our custom scaling model inside Sagemaker's Native SKLearn Container. This is one of the ways of implementing Bring Your Own Model (BYOM) on Sagemaker if you want to utilize Sagemaker's Native Containers. Here is a diagrammatic view of the process to deploy a custom scaling model on Sagemaker's SKLearn Container by creating creating a compressed tar.gz file consisting of the model.joblib and an inference.py file and providing these artifacts to create a sagemaker model endpoint and endpoint configuration. :-  
-![Augmented Data Set for quick Lookup with my predicted Cluster Number](images/byom.png) 
+![Augmented Data Set for quick Lookup with my predicted Cluster Number](images/byom.jpg) 
 14. There are various ways to automate these steps, but we will be using a sagemaker migration toolkit from [our GitHub Repository](https://github.com/build-on-aws/recommendation-engine-full-stack) to make this process easy. So lets move on to the next steps.
 
 ## Deploying the custom scaling model as a Sagemaker Endpoint
@@ -313,8 +313,8 @@ curl -X POST https://yyyyyyy.execute-api.us-east-2.amazonaws.com/api/ -H 'Conten
 Here is how my UI looks when everything is hooked up and the file is opened from the browser: Enter teh criteria like start Year, runtime Minutes, Rating, Number of Votes and the Genres:-<br/>
 
 ![plot](images/myflix1.png)<br/>
-![plot](images/myflix2.png)<br/>
-![plot](images/myflix3.png)<br/>
+![plot](images/myflix2.jpg)<br/>
+![plot](images/myflix3.jpg)<br/>
 
 ## Clean up
 1. Go to the Cloud9 console and go to the root of the chalice project `sagemaker-apigateway-lambda-chalice` and execute `chalice delete`. This will delete the lambda and API gateway endpoint for the REST API #1.
