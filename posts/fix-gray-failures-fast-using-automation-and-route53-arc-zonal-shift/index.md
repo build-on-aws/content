@@ -8,8 +8,11 @@ tags:
   - gray-failure
 authorGithubAlias: CryptikCode
 authorName: Fred Akinyemi
-date: 2023-05-23
+date: 2023-07-14
 ---
+
+|ToC|
+|---|
 
 A gray failure in an application is a false positive state where one or more components of an application are unhealthy but do not breach health monitoring of the application. This can be a problem because everything seems fine to the application owner, but the application users may be experiencing an application degradation. Here I share a solution that helps you by reducing the mean-time-to-respond to a gray failure and improving your overall end user experience.
 
@@ -48,7 +51,7 @@ It is important to note that Zonal Shift does not validate a gray failure nor ve
 
 The Route 53 ARC Zonal Shift feature can be accessed through the AWS console and through an API endpoint. In an environment where the monitoring capability is not robust enough to detect false positive gray failures and verify available capacity in other zones, it's important to have a human verify before manually shifting traffic. While this prevents the application from self-inflicted failures due to spurious gray failures, it increases the time-to-respond to a gray failure.
 
-### Automated (Event-dDriven) Zonal Shift
+### Automated (Event-Driven) Zonal Shift
 
 The mean-time-to-respond to a zonal gray failure can be reduced by automating the Route 53 ARC Zonal Shift feature. This mechanism uses logic designed to respond to a zonal gray failure event by automatically triggering Route 53 ARC Zonal Shift using the highly available `StartZonalShift` API to stop traffic from going to the impaired AZ. The [AWS SDK and Developer tools](https://aws.amazon.com/developer/tools/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift) provides the ability to integrate and interact with Zonal Shift API endpoint from a programming language of choice.
 
@@ -140,14 +143,14 @@ A zonal gray failure has occurred, and the monitoring mechanism has identified t
     ```
 
 2. Edit the payload.json file to reflect your load balancer's name.
-   
+
     `DO NOT` change the Key.
 
     ```bash
     vi payload.json
     ```
 
-4. Log into the AWS console, navigate to the Load Balancer page, and note the status of the NLB as indicated below. Note that there is no column labelled for Zonal Shift.
+3. Log into the AWS console, navigate to the Load Balancer page, and note the status of the NLB as indicated below. Note that there is no column labelled for Zonal Shift.
 
    ![pre-shift](images/before-zonal-shift.png)
 
@@ -155,17 +158,19 @@ A zonal gray failure has occurred, and the monitoring mechanism has identified t
     aws sqs send-message --message-body file://payload.json
     ```
 
-5. Trigger the Zonal Shift by running the command below.
+4. Trigger the Zonal Shift by running the command below.
 
     ```bash
     aws sqs send-message --message-body file://payload.json
     ```
 
-6. To verify the shift, log back into the Load Balancer page of the AWS Console and verify the status of the NLB. Note that new columns have appear for Zonal Shift as indicated below.
+5. To verify the shift, log back into the Load Balancer page of the AWS Console and verify the status of the NLB. Note that new columns have appear for Zonal Shift as indicated below.
 
    ![post-shift](images/after-zonal-shift.png)
 
 ### Cleaning Up
+
+Now that we are done with infrastructure, we need to remove it so we don't pay for unused resources. The following command will remove the resources we created:
 
 ```bash
 cdk destroy
@@ -179,6 +184,6 @@ This blog post discusses gray failures, how to detect them, and how to reduce th
 
 ### Learn more:
 
--   [How zonal shift works](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.how-it-works.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
--   [Best practices for zonal shifts in Route 53 ARC](https://docs.aws.amazon.com/r53recovery/latest/dg/route53-arc-best-practices.html#zonalshift.route53-arc-best-practices.zonal-shifts?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
--   [Implementing health checks](https://aws.amazon.com/builders-library/implementing-health-checks/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
+- [How zonal shift works](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.how-it-works.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
+- [Best practices for zonal shifts in Route 53 ARC](https://docs.aws.amazon.com/r53recovery/latest/dg/route53-arc-best-practices.html#zonalshift.route53-arc-best-practices.zonal-shifts?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
+- [Implementing health checks](https://aws.amazon.com/builders-library/implementing-health-checks/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
