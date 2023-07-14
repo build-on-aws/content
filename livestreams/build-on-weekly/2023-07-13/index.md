@@ -30,7 +30,7 @@ Follow the workshop yourself at home: [Using AWS Resilience Hub to monitor resil
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1870896895
+https://www.twitch.tv/videos/1871218232
 
 ## Links from today's episode
 
