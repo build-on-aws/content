@@ -1,5 +1,5 @@
 ---
-title:  Train and tune a deep learning model at scale 
+title:  Train and tune a deep learning model at scale with Amazon SageMaker
 description: In this tutorial, you will learn how to use Amazon SageMaker to build, train, and tune a TensorFlow deep learning model.
 tags:
     - amazon-sagemaker
