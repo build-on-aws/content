@@ -2,9 +2,9 @@
 title: "Where do I put my backups in the cloud?"
 description: "Information AWS users need to know about backups, and where they need to store them. Will cover considerations around in-Region, cross-Region, and cross-account backups"
 tags:
-    - backups
+    - backup
     - aws-backup
-    - resiliency
+    - resilience
     - disaster-recovery
     - aws
 authorGithubAlias: jmoran8888
