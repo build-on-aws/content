@@ -40,19 +40,19 @@ Once an organization has determined they do need a backup now the decision becom
 
 ## Single AWS Region
 
-If an organization is trying to mitigate an accidental deletion or corruption of data, then keeping a backup close to the primary location is going to be the main goal so access and restoration can occur quickly. Having the backup within the same AWS Account and AWS Region is recommended (Figure 1-①). All services that support backups and snapshots will allow you to keep a ‘local’ copy of your data.
+If an organization is trying to mitigate an accidental deletion or corruption of data, then keeping a backup close to the primary location is going to be the main goal so access and restoration can occur quickly. Having the backup within the same AWS Account and AWS Region is recommended (Figure 1). All services that support backups and snapshots will allow you to keep a ‘local’ copy of your data.
 
 ![Single Region](images/single-region.png)Figure 1. Create a backup in the primary AWS Region
 
 ## Multiple AWS Regions
 
-If an organization is trying to mitigate for business continuity or disaster recovery then keeping a backup outside of that fault isolation boundary, which may be an AWS region, is recommended (Figure 1-②). Copying data across to another region allows for the recovery of that data in the case where a workload is unable to run in the primary region and a disaster recovery plan may need to be invoked and the workload needs to be run in a recovery region.
+If an organization is trying to mitigate for business continuity or disaster recovery then keeping a backup outside of that fault isolation boundary, which may be an AWS region, is recommended (Figure 2). Copying data across to another region allows for the recovery of that data in the case where a workload is unable to run in the primary region and a disaster recovery plan may need to be invoked and the workload needs to be run in a recovery region.
 
 ![Multiple Region](images/multi-region.png)Figure 2. Keep a copy of backup in a secondary AWS Region
 
 ## Multiple AWS Accounts
 
-If an organization is trying to mitigate a deletion by an outside party with unintended access then copying the backup outside the boundary of the AWS account is recommended (Figure 1-③). This can be another AWS account and more importantly a process should be in place to be able to conduct forensic analysis on your data to verify if or when the data was compromised.
+If an organization is trying to mitigate a deletion by an outside party with unintended access then copying the backup outside the boundary of the AWS account is recommended (Figure 3). This can be another AWS account and more importantly a process should be in place to be able to conduct forensic analysis on your data to verify if or when the data was compromised.
 
 ![Multiple Accounts](images/multi-account.png)Figure 3. Keep a copy of backup in another AWS Account
 
