@@ -158,10 +158,10 @@ The purpose of this article is architecting for ZDLDR, but we can reduce the lik
 Architecting for Zero Data Loss is certainly a possibility utilising Amazon RDS, due to edge case disk corruption only logical synchronous replicas or Amazon Aurora can be considered to cater for this. The cloud enabled enterprise class database giants that are Oracle and SQL Server both support this. But what truly stands out is the cloud native offering from Amazon Aurora which is out of the box ready to support zero data loss disaster recovery from day 0. If a ZDRDL solution can't be used then we can achieve a near ZDLDR solution utilising Multi AZ replication with an additional replica across all 3 AZs.
 
 ## Further Reading and References
-https://aws.amazon.com/rds/ha/
+https://aws.amazon.com/rds/ha/   
 https://aws.amazon.com/rds/features/multi-az/
 https://www.mysql.com/products/enterprise/high_availability.html
-https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html
+https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.htm  
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
