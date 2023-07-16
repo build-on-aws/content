@@ -9,10 +9,10 @@ tags:
 spaces:
   - generative-ai
 authorGithubAlias: hanyun2019
-authorName: Haowen Huang (haowenh@amazon.com)
+authorName: Haowen Huang
 additionalAuthors: 
   - authorGithubAlias: 
-    authorName: Elizabeth Fuentes (eliaws@amazon.com)
+    authorName: Elizabeth Fuentes
 date: 2023-07-16 
 ---
 
