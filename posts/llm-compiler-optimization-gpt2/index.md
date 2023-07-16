@@ -11,7 +11,7 @@ spaces:
 authorGithubAlias: hanyun2019
 authorName: Haowen Huang
 additionalAuthors: 
-  - authorGithubAlias: 
+  - authorGithubAlias: elizabethfuentes12
     authorName: Elizabeth Fuentes
 date: 2023-07-16 
 ---
