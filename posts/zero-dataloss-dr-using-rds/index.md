@@ -40,7 +40,7 @@ Amazon RDS supports 5 different database engines as below:
 
 These Amazon RDS Databases engines generally fall into 2 categories
 - Cloud Enabled
--	Cloud Native
+- Cloud Native
 
 Cloud Enabled Databases run using similar infrastructure and setup as if they were running on premise. In a way they are databases designed for an on premise environment and tailored to run on the cloud and utilise those great services that AWS provides. Amazon RDS which caters for engines Oracle, SQL Server, Postgres, MySQL and MariaDB can be considered Cloud Enabled offerings.
 
@@ -158,16 +158,22 @@ The purpose of this article is architecting for ZDLDR, but we can reduce the lik
 Architecting for Zero Data Loss is certainly a possibility utilising Amazon RDS, due to edge case disk corruption only logical synchronous replicas or Amazon Aurora can be considered to cater for this. The cloud enabled enterprise class database giants that are Oracle and SQL Server both support this. But what truly stands out is the cloud native offering from Amazon Aurora which is out of the box ready to support zero data loss disaster recovery from day 0. If a ZDRDL solution can't be used then we can achieve a near ZDLDR solution utilising Multi AZ replication with an additional replica across all 3 AZs.
 
 ## Further Reading and References
-https://aws.amazon.com/rds/ha/     
-https://aws.amazon.com/rds/features/multi-az/     
-https://www.mysql.com/products/enterprise/high_availability.html     
-https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.htm       
-https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html     
-https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html     
-https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html     
-https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerMultiAZ.html     
-https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-sqlserver-multiaz.html     
-https://aws.amazon.com/what-is/disaster-recovery/     
-https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html     
-https://www.youtube.com/watch?v=0IeLKyBl3CM     
-https://www.youtube.com/watch?v=ZKOo2OFloYs     
+- Documentation
+  - https://aws.amazon.com/rds/ha/     
+  - https://aws.amazon.com/rds/features/multi-az/
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html     
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html     
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html     
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerMultiAZ.html     
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-sqlserver-multiaz.html     
+  - https://aws.amazon.com/what-is/disaster-recovery/     
+  - https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html
+- White Papers
+  - https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.htm       
+- Videos
+  - https://www.youtube.com/watch?v=0IeLKyBl3CM     
+  - https://www.youtube.com/watch?v=ZKOo2OFloYs
+- How To Guides
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Create
+  - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html     
