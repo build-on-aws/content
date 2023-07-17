@@ -16,7 +16,7 @@ date: 2023-07-10
 
 In this post, we shall delve into `k-Nearest Neighbors(k-NN)` algorithm.  One of the simplest yet very powerful algorithm, that can be used to solve very complex problems. We will start with some basic concepts, which always play an integral role irrespective of which algorithm we pick and that will help us set the premise before we dive deep into _k_-NN. We shall then proceed to solve some problems on Amazon SageMaker with the build-in _k_-NN, index based algorithm. 
 
-However, before proceeding further, I would like to express my gratitude to my teacher, [Srikanth Varma](https://www.linkedin.com/in/cskvarma/) (former Lead Machine Learning Scientist, Amazon), he has not only guided me but also countless other individuals worldwide. Thanks to his invaluable support, I have had the incredible opportunity to delve into the captivating fields of Data and Machine Learning.
+However, before proceeding further, I would like to express my gratitude to, [Sachin Mittal](https://www.linkedin.com/in/mittsach/) (former Applied Scientist, Amazon) and [Srikanth Varma](https://www.linkedin.com/in/cskvarma/) (former Lead Machine Learning Scientist, Amazon). They have not only guided me but also countless other individuals worldwide. Thanks to their invaluable support, I have had the incredible opportunity to delve into the captivating fields of Data and Machine Learning.
 
 
 # **Classification and Regression**
