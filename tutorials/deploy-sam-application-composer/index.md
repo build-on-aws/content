@@ -31,6 +31,12 @@ We will learn:
 - How to get started with a blank canvas and build a SAM application
 - How to load an existing SAM application, visualize and optionally extend it
 
+If you want to quickly create the architecture diagram and SAM application using AWS Application Composer, watch the video:
+
+https://youtu.be/NZnr1vSJTs0?t=650
+
+This how-to video will walk you through features, options, and unique strengths of AWS Application Composer, Cloudcraft, and Lucidchart, empowering you to create visually stunning architecture diagrams.
+
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 100 - Beginner                                              |
