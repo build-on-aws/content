@@ -1,6 +1,6 @@
 ---
 title: Building Rust Applications For AWS Graviton
-description: Learn how to migrate a Rust application from x86 based Amazon EC2 Instances to ARM64-based Graviton EC2 Instances
+description: Learn how to migrate a Rust application from x86 based Amazon EC2 Instances to ARM64-based Graviton EC2 Instances in order to achieve both higher application sustainability and lower costs
 tags:
   - tutorials
   - graviton
@@ -17,7 +17,7 @@ authorName: Tyler Jones
 date: 2023-06-15
 ---
 
-Companies today are making sustainability a key goal for their business in order to improve operational efficiency and drive down cost while also lowering carbon emissions. Achieving these sustainability goals means change across all levels of the business, with application and software development being a key focus. With Rust applications, one of the easiest ways to make progress towards a sustainability goal is to adopt AWS Graviton instances.
+Companies today are making sustainability a key goal for their business in order to improve operational efficiency and drive down cost while also lowering carbon emissions. Achieving these sustainability goals means change across all levels of the business, with application and software development being a key focus. With Rust applications, one of the easiest ways to make progress towards a sustainability goal is to adopt [AWS Graviton instances](https://aws.amazon.com/ec2/graviton/). AWS Graviton processors are designed by AWS to deliver the best price performance for your cloud workloads running in Amazon EC2.
 
 In this tutorial, I will walk through the steps to take an existing application running on x86 instances today and migrate to AWS Graviton powered instances in order to achieve a higher level of sustainability for your Rust application. This guide includes creating AWS resources that you will be charged for.
 
@@ -147,7 +147,7 @@ Your full URL is https://aws.amazon.com/ec2/graviton/
 
 ## Performance Testing Results
 
-Understanding the request per second each instance could process under heavy load is often a key metric used to evaluate instance and application performance. In order to compare a `c6g.xlarge` and a `c5.xlarge` instances we need to perform a load test. We discuss various load testing methodologies in the [Graviton Technical Guide on GitHub](https://github.com/aws/aws-graviton-getting-started) and recommend using a framework like [wrk2](https://github.com/kinvolk/wrk2). I decided to go ahead and use `wrk2` to test the `shorten_url` function of our application.
+Performance testing is key when comparing multiple instance types. In order to compare a `c6g.xlarge` and a `c5.xlarge` instances we will be performing a load test to understand how many requests per second each instance type can serve. We discuss various load testing methodologies in the [Graviton Technical Guide on GitHub](https://github.com/aws/aws-graviton-getting-started) and recommend using a framework like [wrk2](https://github.com/kinvolk/wrk2). `wrk2` is a  version of `wrk` that is modified to produce a constant throughput load and report accurate latency details across various percentiles. I decided to go ahead and use `wrk2` to test the `shorten_url` function of our application and compare the total requests per second served as well as the average latency at each percentile during our load test.
 
 ### Load test Setup
 
@@ -187,7 +187,7 @@ While running this command, make sure your IP address is correct.
 |Requests/Second |11,947.12 |11,960.24 |
 |Total Requests Served |21,504,877 |21,528,469 |
 
-Using the same load test our AWS Graviton powered instance achieved similar request latencies across all percentiles, while serving a large number of requests per second and a larger number of total requests. Our AWS Graviton instance did all of this while being cheaper and consuming less energy. AWS Graviton instances achieve the best price/performance for Rust applications.
+Using the same load test our AWS Graviton powered instance achieved similar request latencies across all percentiles, while serving a large number of requests per second and a larger number of total requests. AWS Graviton instances deliver up to 40% better price performance for Rust applications while also increasing your Rust application's sustainability by using up to 60% less energy for the same performance than comparable EC2 instances.
 
 ## Cleanup
 
