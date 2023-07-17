@@ -35,7 +35,7 @@ If you want to quickly create the architecture diagram and SAM application using
 
 https://youtu.be/NZnr1vSJTs0?t=650
 
-This how-to video will walk you through features, options, and unique strengths of AWS Application Composer, Cloudcraft, and Lucidchart, empowering you to create visually stunning architecture diagrams.
+*This how-to video will walk you through features, options, and unique strengths of AWS Application Composer, Cloudcraft, and Lucidchart, empowering you to create visually stunning architecture diagrams.*
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
