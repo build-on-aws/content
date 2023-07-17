@@ -331,7 +331,7 @@ Now that we are ready for training, we start with a convenience function that st
 
 ```python
 import matplotlib.pyplot as plt
-
+import time 
 import sagemaker
 from sagemaker import get_execution_role
 from sagemaker.predictor import csv_serializer, json_deserializer
