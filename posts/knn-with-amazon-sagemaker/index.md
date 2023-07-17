@@ -23,19 +23,20 @@ In this post, we shall delve into `k-Nearest Neighbors(k-NN)` algorithm.  One of
 
 `Classification` are problems wherein the class/target labels have finite set of outcomes. Let's take an example of [Amazon Fine Food](https://www.kaggle.com/snap/amazon-fine-food-reviews) dataset wherein we have numerous  _customer reviews_ and each review has a class label of `positive` or `negative`. Now the problem in our hand is, we need to train a model such that, given a new _review_ text, our model should be able identify/predict whether the review is `positive` or `negative`. 
 
-![img1](images/01.png)
+![class_reg_1](images/01.png)
 
 So, here if we see, the class label has a finite set of possibility (positive or negative). These type of problems are defined as a `classification` problem. 
 
-![img2](images/02.png)
+![class_reg_2](images/02.png)
 
 Whereas in `regression` problems, the class/target label have infinite set of outcome, or in other words it can be any real number. For example, imagine that we have a dataset of students with input features as "Age, Gender and Race" and class/target label as `Height`. And now, we need to train a model such that, once the model is trained, it should be able to predict the `Height` of a student, given her/his _Age, Gender and Race_. 
 
-![img3](images/03_new.png)
+
+![class_reg_3](images/03.png)
 
 Here if we see, `Height` could be any real number(e.g. 170 cm, 172.65 cm, and so on ...), which _cannot_ be defined by a finite set of possibilities. So, we can call these kind of problems as `regression` problem. 
 
-![img4](images/04_new.png)
+![class_reg_4](images/04.png)
 
 # **Mathematical Notation** 
 
@@ -43,19 +44,19 @@ Now, let's spend some time to see how we can mathematically represent a _classif
 
 Let's take the same example of Amazon Fine Review data set, where we have _n_ numbers of user reviews with class labels as `positive` or `negative`, which defines that a particular user review can be either a _positive_ review or a _negative_ review. So, the first thing that we generally do, is we convert each review into a _vector_(you can think of a _vector_ as an array of numbers), and we can always represent a vector as a `column vector` or a `row vector`. Data scientists and machine learning practitioner uses both, but if someone is simply referring a data point as vector, it's safe to assume, they are referring to a `column vector`. Having said that, most of the time we will have the context which will help us to identify that a given vector is a column vector or row vector. 
 
-![img5](images/05_new.png)
+![math_notation_5](images/05.png)
 
 Now, let's convert each of our reviews into a vector(as I am not mentioning that it's a row vector or column vector, you can assume its a column vector). 
 
-![img6](images/06.png)
+![math_notation_6](images/06.png)
 
 Let's focus on the _input feature_ only, so we can ignore the _class label_ for now. Next we would like to have all the reviews and form a _matrix_ wherein each `row` would represent `one review`. And we can do so, only after we convert each review vector into a row vector, and we know we can do so by taking a transpose of the vector. 
 
-![img7](images/07.png)
+![math_notation_7](images/07.png)
 
 So, our matrix would look like this for all the _n_ reviews, where each row in the matrix represents each single review:
 
-![img8](images/08_new.png)
+![math_notation_8](images/08.png)
 
 Here, we represented the class labels as _Y_ and each _Yi_ could be either 1 or 0 (positive or negative review). So, if we look now, we have converted the whole dataset mathematically in the form of `vector` and `matrix`. 
 
@@ -63,7 +64,7 @@ You might wonder, how we can convert each review into an array of number in firs
 
 So, finally we can represent the data set mathematically as:
 
-![img9](images/9_new.png)
+![math_notation_9](images/09.png)
 
 We should read the above equation as, _D_ is a set of pairs of _Xi_ and _Yi_ where _i_ goes from `1 to n`, such that _Xi_ belongs to `Rd`, thats is _Xi_ is a `d` dimensional vector where `d` can be any real values and Yi belongs to `{0, 1}`. 
 
@@ -71,21 +72,21 @@ We should read the above equation as, _D_ is a set of pairs of _Xi_ and _Yi_ whe
 
 Now, we can finally dive into, _k-Nearest Neighbors(k-NN)_. It is also often know as _lazy learning_ algorithm, which can be used for both regression and classification problems. But before we get into the formal definition, lets try to understand k-NN algorithm from geometric prospective, and we will do so by taking a simple  binary classification example. Assume we have a dataset where each data point can belong to `class A` or `class B`.
 
-![img10](images/10.png)
+![knn_intro_10](images/10.png)
 
 The whole purpose of machine learning is to learn a function _f(x)_ from a given dataset so that later on, once the training is over, when we query with a new data point, and the function _f(x)_ should be able to predict which class the data points belongs to. Now, in this example, consider we have a new query point _`Q`_ which we give to the model, and we need to know which class this new query point _`Q`_ belongs to `class A` or `class B` 
 
-![img11](images/11.png)
+![knn_intro_11](images/11.png)
 
 Now if we intuitively think about it, we can see that geometrically, this query point _`Q`_ may belong to `class B` as all the points which are closed neighbors of the query point _`Q`_  belongs to `class B`
 
-![img12](images/12.png)
+![knn_intro_12](images/12.png)
 
 And we can conclude this by the intuition of closeness or proximity. And that's what _k-NN_ algorithm is all about, where _k_ denotes the no. of neighbors, and there are different techniques to find out the best possible value of _k_, which we will look into a bit later. 
 
 Lets take a new query point _`S`_, and this time lets say we pick _`k=4`_, so now we can see below, that out of 4 neighbors of query point _`S`_, three of them belongs to `class B` and one of them belongs to `class A`, So, _k-NN_ would conclude that the query point _`S`_ belongs to `class B`, as the majority of the neighbors belongs to `class B`
 
-![img13](images/13.png)
+![knn_intro_13](images/13.png)
 
 So, what _k-NN_ does at high level for any _classification_ problem is:
 - Finds _k_ nearest neighbors of the _query_ point _`q`_ 
@@ -104,15 +105,15 @@ In the previous section, we learnt that we need to measure the distance of the q
 
 Let's take an example. Assume we have 2 points (A and B), and we have two input features(f1 and f2).     
 
-![img14](images/14_new.png)
+![distance_measure_14](images/14.png)
 
 We can see that the distance between these two points _A_ and _B_ can be calculated using simple [_Pythagoras' Theorem_](https://en.wikipedia.org/wiki/Pythagorean_theorem) which would be the shortest distance between these two points, and we can denote it as _d_. And in machine learning or in geometry(in general) this distance is called `Euclidian Distance`. So, it's basically the shortest distance between two data points or vectors. 
 
-![img15](images/15_new.png)
+![distance_measure_15](images/15.png)
 
 Now, if we consider that our data set contains more than 2 features, lets say _d_ features, then the euclidian distance between 2 data points(x1 and x2), each with _d_ features would be this:
 
-![img16](images/16_new.png)
+![distance_measure_16](images/16.png)
 
 This above distance is also referred as `L2 Norm` of a vector, in simple terms, we generally refer them as:
 - Euclidian Distance, when we consider 2 `points` 
@@ -122,17 +123,17 @@ We will soon see, why its called L2 but important thing to remember is this, if 
 
 There is another measure of distance called Manhattan Distance, which is geometrically represented as follows:
 
-![img17](images/17_new.png)
+![distance_measure_17](images/17.png)
 
 Again if we consider, our data set contains more than 2 features, let's say _d_ features, then for a given pair of points, the manhattan distance would be this:
 
-![img18](images/18_new.png)
+![distance_measure_18](images/18.png)
 
 And this distance is often called as `L1 Norm` of a vector. 
 
 So far we have seen two different types of distance measures, `euclidian(L2 Norm)` and `manhattan(L1 Norm)`. We also have a generalisation of these two `L1` and `L2` Norms, which is called `Lp` Norm, also know as `Minkowski` distance, where _p_ could be any number. 
 
-![img19](images/19.png)
+![distance_measure_19](images/19.png)
 
 So, if we look at this we would realise that:
 - When _p=1_, _Minkowski_ distance becomes _Manhattan_ distance 
@@ -169,7 +170,7 @@ So, we can imagine that k-NN has a large space complexity, if the data set is la
 This is a limitation we have with k-NN, in its simplest form it has a large space and time complexity, when the dataset is large. Having said that, there are many techniques which helps optimising this algorithm like `KD-Tree`, `LSH(Locality Sensitive Hashing)`, etc. Although they are not perfect but these techniques can significantly reduce the space/time complexity of k-NN. 
 
 
-# **How to pick the right k ?**
+# **How to pick the right `k` ?**
 
 So far we have been assuming the value of k as 3, 5, 7, etc. And we learnt that it's always good to have some odd number to avoid any tie, while taking the majority vote. But what should be the right value of `k`, which would give us the best accuracy for our respective problem we are trying to solve using k-NN?
 
@@ -177,17 +178,17 @@ In k-NN, the value of k is a hyperparameter, meaning, we can parse the value of 
 
 - When `k=1`: This means, for a given query point, the `class` label for that query point would be same as the `class` label of its closest neighbour. So, here class label for the query point Q would be `+ve`
 
-![img20](images/20.png)
+![pick_right_k_20](images/20.png)
 
 - When `k=5`: For this following query point the class label would be `+ve` as out of 5 closest neighbour, 4 of them have have the class label of `+ve` 
 
-![img21](images/21.png)
+![pick_right_k_21](images/21.png)
 
 - When `k=n`: This means, let's say we have 1000 data points, and k=1000, no matter where the query point lies, k-NN would always predict the class label which have the majority of the class, e.g. if out of 1000 data points if 400 belongs to `+ve` and 600 belongs to `-ve`, no matter whats the actual class of the query point, the prediction would be always `-ve`. 
 
 Now, we can geometrically plot the _decision surface_, and we would see something like this:
 
-![img22](images/22_new.png)
+![pick_right_k_22](images/22.png)
 
 `Decision Surface` is generally used to visually see on plane where our algorithm is classifying the point as in this example as `+ve` or `-ve` class. As here for _different k_ the points on the plane will be classified into any class depending upon where the point lies on the plane from other points.
 
@@ -199,7 +200,7 @@ Opposite to that, if we have a dumb model, where the model doesn't care much abo
 
 And a relatively smooth decision surface can be considered as a `Well-fit` model, like what we have seen when `k=5`, although it also makes wrong prediction, but in general that's a good and preferable model to have over an overfit model. It kind of takes the middle path between `Overfit` and `Underfit`. 
 
-![img23](images/23.png)
+![pick_right_k_23](images/23.png)
 
 # **Need for Cross Validation**
 
@@ -414,7 +415,7 @@ setting up the endpoint..
 
 Once this is done, we can see the endpoint vis AWS Console as well, under Amazon SageMaker > Endpoints. 
 
-![img24](images/24.png)
+![endpoint_24](images/24.png)
 
 ### **Inference(Prediction)**
 
