@@ -340,7 +340,8 @@ import matplotlib.pyplot as plt
 import time 
 import sagemaker
 from sagemaker import get_execution_role
-from sagemaker.predictor import csv_serializer, json_deserializer
+from sagemaker.serializers import CSVSerializer
+from sagemaker.deserializers import JSONDeserializer
 from sagemaker.amazon.amazon_estimator import get_image_uri
 
 
@@ -395,22 +396,22 @@ Billable seconds: 247
 Now that we have a trained model, we are ready to run inference(prediction). The `knn_estimator` object above contains all the information we need for hosting the model. Below is a simple helper function that gives an estimator, sets up an endpoint that hosts the model. Other than the estimator object, we provide it with a name (string) for the estimator, and an `instance_type`. The `instance_type` is the machine type that will host the model. It is not restricted in any way by the parameter settings of the training job.
 
 ```python
-def predictor_from_estimator(knn_estimator, estimator_name, instance_type, endpoint_name=None): 
-    knn_predictor = knn_estimator.deploy(initial_instance_count=1, instance_type=instance_type,
-                                        endpoint_name=endpoint_name)
-    knn_predictor.content_type = 'text/csv'
-    knn_predictor.serializer = csv_serializer
-    knn_predictor.deserializer = json_deserializer
+def predictor_from_estimator(knn_estimator, estimator_name, instance_type, endpoint_name=None):
+    knn_predictor = knn_estimator.deploy(
+        initial_instance_count=1, instance_type=instance_type, endpoint_name=endpoint_name
+    )
+    knn_predictor.serializer = CSVSerializer()
+    knn_predictor.deserializer = JSONDeserializer()
     return knn_predictor
 ```
 
 Creating the `endpoint`:
 
 ```python
-instance_type = 'ml.m4.xlarge'
-model_name = 'knn_%s'% instance_type
-endpoint_name = 'knn-ml-m4-xlarge-%s'% (str(time.time()).replace('.','-'))
-print('setting up the endpoint..')
+instance_type = "ml.m4.xlarge"
+model_name = "knn_%s" % instance_type
+endpoint_name = "knn-ml-m4-xlarge-%s" % (str(time.time()).replace(".", "-"))
+print("setting up the endpoint..")
 predictor = predictor_from_estimator(knn_estimator, model_name, instance_type, endpoint_name=endpoint_name)
 ```
 
