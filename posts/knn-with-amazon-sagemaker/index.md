@@ -1,6 +1,6 @@
 ---
 title: "Enhancing Decision-Making with k-Nearest Neighbors with Amazon SageMaker"
-description: "In this post, we shall delve into `k-Nearest Neighbors(k-NN)` algorithm,  one of the simplest yet very powerful algorithm, that can be used to solve very complex problems. We will start with some basic concepts, which always play an integral role irrespective of which algorithm we pick and that will help us set the premise before we dive deep into _k_-NN. We shall then proceed to solve some problems on Amazon SageMaker with the build-in _k_-NN, index based algorithm."
+description: "In this post, we shall delve into k-Nearest Neighbors(k-NN) algorithm,  one of the simplest yet very powerful algorithm, that can be used to solve very complex problems. We will start with some basic concepts, which always play an integral role irrespective of which algorithm we pick and that will help us set the premise before we dive deep into k-NN. We shall then proceed to solve some problems on Amazon SageMaker with the build-in k-NN, index based algorithm."
 tags:
   - amazon-sagemaker
   - machine-learning
@@ -11,7 +11,7 @@ spaces:
   - machine-learning
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
-date: 2023-07-10
+date: 2023-07-17
 ---
 
 In this post, we shall delve into `k-Nearest Neighbors(k-NN)` algorithm.  One of the simplest yet very powerful algorithm, that can be used to solve very complex problems. We will start with some basic concepts, which always play an integral role irrespective of which algorithm we pick and that will help us set the premise before we dive deep into _k_-NN. We shall then proceed to solve some problems on Amazon SageMaker with the build-in _k_-NN, index based algorithm. 
