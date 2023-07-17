@@ -1,6 +1,6 @@
 ---
-title: Can I run existing Go applications on AWS Lambda? (Part 2)
-description: Gin is one of the most popular Go web frameworks! Let's walk through how to take a URL shortener application written using Gin, and run it as a serverless Lambda function.
+title: Can I run existing Go applications on AWS Lambda?
+description: Learn how to take a URL shortener application written using Gin and run it as a serverless AWS Lambda function.
 tags:
   - lambda
   - serverless
@@ -12,9 +12,12 @@ authorName: Abhishek Gupta
 date: 2023-07-21
 ---
 
-[The first part of this series](https://community.aws/posts/golang-gin-app-on-aws-lambda) introduced you to the [AWS Lambda Go API Proxy](https://github.com/awslabs/aws-lambda-go-api-proxy), and how it's framework/package specific adapter implementations (for `gorilla/mux`, `echo` and `net/http`) allow you to run existing Go applications as [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) functions fronted by [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). If you haven't already, I encourage you to [take a look at it](https://community.aws/posts/golang-gin-app-on-aws-lambda) in order to get a basic understanding of the AWS Lambda Go API Proxy.
+|ToC|
+|---|
 
-The AWS Lambda Go API Proxy also supports the [Gin](https://github.com/gin-gonic/gin), which is one of the most popular Go web frameworks! This follow-up blog post will demonstrate how take an existing URL shortener service written using the `Gin` framework, and run it as a serverless AWS Lambda function. Instead of using AWS SAM, we will change things up a bit and use the [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy the solution.
+[The first part of this series](https://community.aws/posts/golang-gin-app-on-aws-lambda) introduced you to the [AWS Lambda Go API Proxy](https://github.com/awslabs/aws-lambda-go-api-proxy), and how it's framework/package specific adapter implementations (for `gorilla/mux`, `echo` and `net/http`) allows you to run existing Go applications as [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) functions fronted by [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). If you haven't already, I encourage you to [take a look at it](https://community.aws/posts/golang-gin-app-on-aws-lambda) in order to get a basic understanding of the AWS Lambda Go API Proxy.
+
+The AWS Lambda Go API Proxy also supports [Gin](https://github.com/gin-gonic/gin), is one of the most popular Go web frameworks! This follow-up blog post will demonstrate how take an existing URL shortener service written using the `Gin` framework, and run it as a serverless AWS Lambda function. Instead of using AWS SAM, we will change things up a bit and use the [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy the solution.
 
 > The code is available on [GitHub](https://github.com/build-on-aws/golang-gin-app-on-aws-lambda)
 
@@ -75,7 +78,7 @@ Although we will not be discussing the application code in detail, it's importan
 
 - The `db` package contains code to interact with `DynamoDB`. 
 - The `handler.go` file has the implementation for the `HTTP` methods.
-- The `main.go file` creates the Gin engine with the routes and `ginadapter.GinLambda` object to proxy requests and responses.
+- The `main.go` file creates the Gin engine with the routes and `ginadapter.GinLambda` object to proxy requests and responses.
 
 It's time to deploy the URL shortener application and give it a go!
 
@@ -176,7 +179,7 @@ Once you navigate to the link using a browser, you will be automatically redirec
 curl -i $URL_SHORTENER_APP_URL/app/1ee3ad1b
 ```
 
-You should get a `HTTP` `302` response (`Found`) and the URL re-direction happens due to the `Location` `HTTP` header which has the original URL.
+You should get a `HTTP` `302` response (`Found`) and the URL redirection happens due to the `Location` `HTTP` header which has the original URL.
 
 ```bash
 # some of the headers omitted for brevity
@@ -211,7 +214,7 @@ export URL_SHORTENER_APP_URL=<replace with API Gateway endpoint above>/app
 curl -i -X DELETE $URL_SHORTENER_APP_URL/<short code>
 ```
 
-Just like in case of update, you should get a `HTTP 204` response. But this time, the respective DynamoDB record will be deleted.
+Just like in the case of update, you should get a `HTTP 204` response. But this time, the respective DynamoDB record will be deleted.
 
 We covered the basic operations for the URL shortener application. As an exercise, try out the following scenarios and check the response(s):
 
