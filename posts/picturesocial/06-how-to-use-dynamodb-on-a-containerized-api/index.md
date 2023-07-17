@@ -6,10 +6,14 @@ tags:
   - csharp
   - dynamodb
   - api
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-02-27
 ---
+
+|ToC|
+|---|
 
 This is an 8-part series about Picturesocial:
 
@@ -60,15 +64,15 @@ Now we are going to put all this together and start coding!
 
 ### **Pre-requisites:**
 
-* An [AWS Account](https://aws.amazon.com/free/).
+* An [AWS Account](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=06-how-to-use-dynamodb-on-a-containerized-api).
 * If you are using Linux or macOS, you can continue to the next bullet point. If you are using Microsoft Windows, I suggest you to use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install).
 * Install [Git](https://github.com/git-guides/install-git).
-* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=06-how-to-use-dynamodb-on-a-containerized-api).
 * Install [.NET 6](https://dotnet.microsoft.com/en-us/download).
 
 Or
 
-If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
+If this is your first time working with AWS CLI or you need a refresher on how to set up your credentials, I suggest you follow this [step-by-step guide of how to configure your local AWS environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=06-how-to-use-dynamodb-on-a-containerized-api). In this same guide, you can also follow steps to configure AWS Cloud9,  as that will be very helpful if you don’t want to install everything from scratch.
 
 ### Walkthrough
 
@@ -76,14 +80,14 @@ If this is your first time working with AWS CLI or you need a refresher on how t
 
 ```bash
 aws dynamodb create-table \
---table-name pictures \
---attribute-definitions \
-AttributeName=id,AttributeType=S \
---key-schema \
-AttributeName=id,KeyType=HASH \
---provisioned-throughput \
-ReadCapacityUnits=5,WriteCapacityUnits=5 \
-`--table-class STANDARD`
+    --table-name pictures \
+    --attribute-definitions \
+    AttributeName=id,AttributeType=S \
+    --key-schema \
+    AttributeName=id,KeyType=HASH \
+    --provisioned-throughput \
+    ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    `--table-class STANDARD`
 ```
 
 * When we execute the command, we are going to get a JSON response with the table structure. We just need to type `:q` and press Enter to finish. The command `:q` is what we use to exit the current view of the terminal when we are in text mode. This also apply to console text editors like VIM.
@@ -157,7 +161,7 @@ public class PictureTable
 }
 ```
 
-* We start by adding the definition of DynamoDBTable and the name of the table on top of the PictureTable Class by using `[DynamoDBTable("**pictures**")]`. Also, we define which attribute of the class is the Key of the Schema by using `[DynamoDBHashKey] `on top of the declaration and for the other attributes we just set the name as will appear on the JSON document like this `[DynamoDBProperty("**nameOfTheAttribute**")]`
+* We start by adding the definition of DynamoDBTable and the name of the table on top of the PictureTable Class by using `[DynamoDBTable("**pictures**")]`. Also, we define which attribute of the class is the Key of the Schema by using `[DynamoDBHashKey]` on top of the declaration and for the other attributes we just set the name as will appear on the JSON document like this `[DynamoDBProperty("**nameOfTheAttribute**")]`
 * The second class will be much simpler as it only is the Payload Data Model, where we define the photo, bucket and user name that will be send to create a new element.
 
 ```csharp
@@ -251,7 +255,6 @@ public async Task<PictureTable> Read(string id)
 ```
 
 * And finally the Delete method using HTTP Delete, where we also use the LoadAsync method to get the Data Object and then the DeleteAsync method will take the model object as a parameter to describe the object that needs to be deleted.
-
 
 ```csharp
 [HttpDelete("{id}")]
@@ -373,6 +376,7 @@ http://localhost:5075/swagger/index.html
 * There we can see the auto documented Data Model and Methods and also test them.
 
 ![Structure of a REST API](images/06-rest-api-structure.jpg "Structure of a REST API")
+
 * I will create a new Picture by going to the POST option and creating a payload using the PictureTableRequest Model, in my case I will use the name of a picture and bucket that exists to test it.
 
 ```json
@@ -386,9 +390,11 @@ http://localhost:5075/swagger/index.html
 * The result will be a view similar to the following:
 
 ![API Response Body](images/06-api-response-body.jpg "API Response Body")
+
 * The most important part of the response is the id. We are going to copy that and use it to test the Read method.
 
 ![API Response Body from DynamoDB](images/06-api-response-from-dynamodb.jpg "API Response Body from DynamoDB")
+
 * As we can see, we get exactly the same information that we had using the Create method, with the difference that this  time we are retrieving the object directly from the Database and not evaluating the image through Amazon Rekognition. This also improved significantly the response time from the Read vs the Create.
 
 ```json

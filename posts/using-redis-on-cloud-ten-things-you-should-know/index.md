@@ -8,11 +8,16 @@ tags:
   - best-practices
   - memorydb
   - elasticache
+spaces:
+  - databases
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 externalCanonicalUrl: https://acloudguru.com/blog/engineering/how-to-use-redis-on-cloud
 date: 2023-06-12
 ---
+
+|ToC|
+|---|
 
 It's hard to operate stateful distributed systems at scale and Redis is no exception. Managed databases make life easier by taking on much of the heavy lifting. But you still need a sound architecture and apply best practices both on the server (Redis) and client (application).
 

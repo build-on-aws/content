@@ -6,10 +6,16 @@ tags:
   - python
   - huggingface
   - gen-ai
+  - ai-ml
+spaces:
+  - generative-ai
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
 date: 2023-06-20
 ---
+
+|ToC|
+|---|
 
 Generative AI has ushered in a new era of automation and efficiency, revolutionizing how we tackle a wide array of tasks. This technology empowers us, the builders, to architect intelligent tools capable of streamlining workflows, automating routine tasks, and delivering sophisticated results in real-time.
 
@@ -19,7 +25,7 @@ Here, the role of a Solution Architect becomes pivotal. They are the bridge betw
 
 However, this role brings its own set of challenges. A Solution Architect needs to stay abreast of the latest AWS services, comprehend best practices, write code, and create intricate architectural diagrams. Furthermore, translating complex architectural concepts into digestible advice for stakeholders is no easy task.
 
-What if we could leverage the power of Generative AI to alleviate these burdens? What if we could build a 'virtual Solution Architect' to assist us, augment our abilities, and guide us through these challenges? 
+What if we could leverage the power of Generative AI to alleviate these burdens? What if we could build a 'virtual Solution Architect' to assist us, augment our abilities, and guide us through these challenges?
 
 This blog post is about precisely that journey - constructing an AI-powered AWS Solution Architect Agent dubbed "Agent AWS".
 
@@ -43,13 +49,14 @@ The language model underlying the agent is based on a detailed prompt provided b
 
 ### Structure of the Prompt
 
-The prompt is structured broadly into two parts.
+The prompt is structured broadly into two parts:
+
 1. Role: How the agent should behave, explanation of the concept of tools.
 2. Instructions: Provides examples of tasks and their solutions
 
 ### Role
 
-To start, the agent is assigned a role to play. In this case the agent is portrayed as an expert AWS Certified Solutions Architect equipped with tools to solve customer problems effectively. The role description is followed by the token <<all_tools>>, which is replaced at runtime with the tools specified by the user.
+To start, the agent is assigned a role to play. In this case the agent is portrayed as an expert AWS Certified Solutions Architect equipped with tools to solve customer problems effectively. The role description is followed by the token `<<all_tools>>`, which is replaced at runtime with the tools specified by the user.
 
 Here is the full role prompt:
 
@@ -69,7 +76,7 @@ The Instructions segment begins with a task, which lays out what the agent inten
 
 Following the task, the agent's response details how it will utilize the available tools to address the customer's request. The response encapsulates the function call to the appropriate tool - in this case, the AWS Well-Architected Framework Query Tool. This tool is selected because it provides direct access to the AWS Well-Architected Framework, enabling the extraction of valuable information relevant to the task at hand.
 
-Finally, we demonstrate the Python code that the agent will execute to fulfill the user's query. This code makes use of Python's f-string formatting, a feature that allows for embedding expressions inside string literals, using curly braces {}. The variable 'response' is placed within these braces, meaning its value will be inserted into the string when it's printed.
+Finally, we demonstrate the Python code that the agent will execute to fulfill the user's query. This code makes use of Python's f-string formatting, a feature that allows for embedding expressions inside string literals, using curly braces `{}`. The variable `response` is placed within these braces, meaning its value will be inserted into the string when it's printed.
 
 ```text
 Task: "Help customers understand best practices on building on AWS by using relevant context from the AWS Well-Architected Framework."
@@ -84,7 +91,7 @@ Task: "<<prompt>>"
 I will use the following
 ```
 
-The last example employs the <<prompt>> directive, a placeholder that instructs the model on how to respond to a new, user-supplied prompt, thereby demonstrating the flexibility and adaptability of our Agent.
+The last example employs the `<<prompt>>` directive, a placeholder that instructs the model on how to respond to a new, user-supplied prompt, thereby demonstrating the flexibility and adaptability of our Agent.
 
 You can view the full prompt [here](https://github.com/build-on-aws/building-gen-ai-agent-on-aws/blob/main/agent_setup.py#L20-L63).
 
@@ -92,7 +99,7 @@ You can view the full prompt [here](https://github.com/build-on-aws/building-gen
 
 Now that we have defined our agent, the next step is to create the tools for the agent to use. Tools consist of single function, with a name and a description. The descriptions are used to prompt the agent to complete tasks.
 
-## Creating Custom Tools 
+## Creating Custom Tools
 
 For Agent AWS we will create 3 custom tools to respond to customer requests.
 
@@ -104,7 +111,7 @@ The process of creating tools is a uniform experience. I will go over how I crea
 
 ## Querying the AWS Well-Architected Framework
 
-The first tool we've developed is designed to query the AWS Well-Architected Framework. This tool leverages a vector database to deliver relevant answers to user queries. Understanding the inner workings of vector databases isn't essential to appreciate the rest of this blog post. However, if you're interested in exploring how these databases can be constructed and used in detail, feel free to read my post on [creating an AWS Well Architected chatbot](https://www.buildon.aws/posts/well-arch-chatbot), which dives deep into this topic. 
+The first tool we've developed is designed to query the AWS Well-Architected Framework. This tool leverages a vector database to deliver relevant answers to user queries. Understanding the inner workings of vector databases isn't essential to appreciate the rest of this blog post. However, if you're interested in exploring how these databases can be constructed and used in detail, feel free to read my post on [creating an AWS Well Architected chatbot](/posts/well-arch-chatbot), which dives deep into this topic.
 
 For the purpose of our current journey of building an AWS Solution Architect Agent, we'll focus more on the application of this tool within the agent's workflow.
 

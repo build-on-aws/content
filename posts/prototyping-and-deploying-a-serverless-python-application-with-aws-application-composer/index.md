@@ -13,9 +13,13 @@ authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
 date: 2023-02-27
 ---
-Building a serverless application can be a challenging task for developers. It requires a good understanding of serverless computing, AWS services, and the technical skills to design and deploy the application. However, with [AWS Application Composer](https://aws.amazon.com/application-composer/), the process of building a serverless application becomes much easier.
 
-In this post, I will share how I built a prototype application to easily analyze meetup data. This will be an intermediate level guide, so some knowledge of AWS, Bash, and Python will be required to follow along. You'll also need a [Meetup Pro Subscription](https://help.meetup.com/hc/en-us/articles/5379928688653-FAQs-about-Meetup-Pro) if you want to build your own version of the application. I will walk through the steps to build a workload that displays [Meetup](https://aws.amazon.com/developer/community/usergroups/) information with the following components:
+|ToC|
+|---|
+
+Building a serverless application can be a challenging task for developers. It requires a good understanding of serverless computing, AWS services, and the technical skills to design and deploy the application. However, with [AWS Application Composer](https://aws.amazon.com/application-composer/?sc_channel=el&sc_campaign=devops&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=prototyping-and-deploying-a-serverless-python-application-with-aws-application-composer), the process of building a serverless application becomes much easier.
+
+In this post, I will share how I built a prototype application to easily analyze meetup data. This will be an intermediate level guide, so some knowledge of AWS, Bash, and Python will be required to follow along. You'll also need a [Meetup Pro Subscription](https://help.meetup.com/hc/en-us/articles/5379928688653-FAQs-about-Meetup-Pro) if you want to build your own version of the application. I will walk through the steps to build a workload that displays [Meetup](https://aws.amazon.com/developer/community/usergroups/?sc_channel=el&sc_campaign=devops&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=prototyping-and-deploying-a-serverless-python-application-with-aws-application-composer) information with the following components:
 
 * A scheduled Lambda function that gets Meetup data and stores it in a database
 * An API to get the Meetup data
@@ -151,7 +155,7 @@ In this post, I showed a step-by-step workflow on how to successfully achieve th
 
 By leveraging AWS Application Composer and AWS SAM, developers can focus on creating code instead of writing YAML, and fiddling with IAM polices and other tedious “grunt work.”
 
-This prototype solution can be adapted to gain insights into engaging with Meetup communities. If you’re interested in participating in your local AWS community, check out the AWS User Group page [here](https://aws.amazon.com/developer/community/usergroups/).
+This prototype solution can be adapted to gain insights into engaging with Meetup communities. If you’re interested in participating in your local AWS community, check out the AWS User Group page [here](https://aws.amazon.com/developer/community/usergroups/?sc_channel=el&sc_campaign=devops&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=prototyping-and-deploying-a-serverless-python-application-with-aws-application-composer).
 
 Follow me on Twitter [@banjtheman](https://twitter.com/banjtheman) and [@AWSDevelopers](https://twitter.com/awsdevelopers) for more useful tips and tricks about the cloud in general and about AWS.
 

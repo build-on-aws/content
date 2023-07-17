@@ -15,7 +15,7 @@ date: 2023-03-31
 
 Welcome to episode 2 of Build On Weekly! 🥳 Today is all about Terraform and building stuff with it. Namely, in this episode, we have built a Minecraft server, running on EC2, with some Terraform Magic.
 
-We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
+We will be posting here, on [Community.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
 ![Jacquie and Darko before the show](images/header.webp)
 

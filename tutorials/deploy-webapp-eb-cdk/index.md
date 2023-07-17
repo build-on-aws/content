@@ -498,7 +498,7 @@ const elbEnv = new elasticbeanstalk.CfnEnvironment(this, 'Environment', {
 
 ### Defining an Empty Pipeline
 
-After we define the stack that makes up our application, we can deploy it through a CI/CD pipeline. If you want to learn more about CI/CD, check out the our [DevOps Essentials guide](https://www.buildon.aws/concepts/devops-essentials/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+After we define the stack that makes up our application, we can deploy it through a CI/CD pipeline. If you want to learn more about CI/CD, check out the our [DevOps Essentials guide](/concepts/devops-essentials/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 CDK Pipelines is a high-level construct library that makes it easy to set up a continuous deployment pipeline for our CDK applications, powered by [AWS CodePipeline](http://aws.amazon.com/codepipeline?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
@@ -806,7 +806,7 @@ Finally, CDK Pipelines create an Amazon S3 bucket to store artifacts. This bucke
 
 Congratulations! We have now learned how to deploy a non-containerized application in the cloud. We created a simple Node.js web application, and then we used AWS CDK to create deployment infrastructure(using AWS Elastic Beanstalk resources) and the CI/CD pipeline (using AWS CDK Pipelines).  If you enjoyed this tutorial, found any issues, or have feedback for us, [please send it our way](https://pulse.buildon.aws/survey/DEM0H5VW)!
 
-For more DevOps related content, check out [How Amazon Does DevOps in Real Life](https://www.buildon.aws/posts/how-amazon-does-devops-in-real-life/).
+For more DevOps related content, check out [How Amazon Does DevOps in Real Life](/posts/how-amazon-does-devops-in-real-life/).
 
 ## More Information and Troubleshooting
 

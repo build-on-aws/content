@@ -160,7 +160,7 @@ It's not possible to learn every DevOps concept from a single post or in a singl
 
 ### Resources
 
-You can find other articles on [BuildOn.AWS](https://buildon.aws) about DevOps using the [DevOps](https://www.buildon.aws/tags/devops) tag. There's also a variety of DevOps meetups run around the globe. If community based learning is your thing, you should definitely look for one near you!
+You can find other articles on [Community.AWS](/) about DevOps using the [DevOps](/tags/devops) tag. There's also a variety of DevOps meetups run around the globe. If community based learning is your thing, you should definitely look for one near you!
 
 Conferences:
 

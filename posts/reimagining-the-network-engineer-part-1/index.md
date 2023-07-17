@@ -9,6 +9,9 @@ authorName: "Du'An Lightfoot"
 date: 2023-01-19
 ---
 
+|ToC|
+|---|
+
 The state of network engineering has evolved. If we look back, we can see that this evolution started around 2009. At that time, virtualization began to take over the tech industry. And since then, so much has changed. Because of this, I decided to release a three-part blog series on re:Imagining the Network Engineer.
 
 In this post, Part 1 - Why?, we will focus on the three reasons why network engineering no longer looks like it once looked. In Part 2 - Transforming, we will discuss the skills needed for the re:Imagined Network Engineer. Finally, in Part 3 - Performing and Staying Ahead, we will focus on optimizing your skills to prepare for the future.

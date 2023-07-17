@@ -5,10 +5,14 @@ tags:
   - terraform
   - kubernetes
   - eks
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-12
 ---
+
+|ToC|
+|---|
 
 This is an 8-part series about Picturesocial:
 

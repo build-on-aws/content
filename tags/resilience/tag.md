@@ -1,5 +1,5 @@
 ---
-description: "Learn about resilience best practices in the Reliability pillar of AWS Well-Architected."
+description: "Resilience is the ability of an application to resist or recover from certain types of failure or load spikes, and remain functional."
 
 ---
-The ability of a workload to avoid, or recover from, infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions, such as misconfigurations or transient network issues.
+[Resilience](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/resiliency-and-the-components-of-reliability.html) is the ability of an application to resist or recover from certain types of failure or load spikes, and remain functional from the customer perspective.

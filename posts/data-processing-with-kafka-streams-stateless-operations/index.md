@@ -11,6 +11,9 @@ authorName: Abhishek Gupta
 date: 2022-09-27
 ---
 
+|ToC|
+|---|
+
 [Apache Kafka](https://kafka.apache.org/documentation/) serves as a key component in data architectures. It has a rich ecosystem for building scalable data-intensive services including data pipelines, etc.
 
 - Kafka ([Producer](https://kafka.apache.org/documentation/#producerapi) and [Consumer](https://kafka.apache.org/documentation/#consumerapi)) client APIs allow you to choose from a variety of [programming languages](https://cwiki.apache.org/confluence/display/kafka/clients) to produce and consume data from Kafka topics.
@@ -21,7 +24,7 @@ Common requirements in data processing include filtering data, transforming it f
 
 In this blog post, you will get an overview of these stateless operations along with practical examples and code snippets. I have grouped them into the following categories: `map`, `filter`, `group`, `terminal` along with some miscellaneous features.
 
-### First things first ...
+## First things first ...
 
 To work with Kafka Streams, you need to start by creating an instance of [KafkaStreams](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/KafkaStreams.html) that serves as the entry point of your stream processing application. It needs a [Topology](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/Topology.html) along with a `java.util.Properties` object for additional configuration.
 
@@ -49,7 +52,7 @@ new CountdownLatch(1).await();
 
 Let's dive into the specifics of the Kafka Streams APIs which implement these stateless operations.
 
-### Transform data with `map` operations
+## Transform data with `map` operations
 
 [map](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#map(org.apache.kafka.streams.kstream.KeyValueMapper)) is a commonly used stateless operation which can be used to transform each record in the input `KStream` by applying a *mapper* function.
 
@@ -93,7 +96,7 @@ Each record in the stream gets `flatMap`ped such that each CSV (comma-separated)
 
 There is also [flatMapValues](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#flatMapValues(org.apache.kafka.streams.kstream.ValueMapper)) in case you only want to accept a value from the stream and return a collection of values.
 
-### Include/Exclude data using `filter`
+## Include/Exclude data using `filter`
 
 For example, if values in a topic are words and you want to include the ones which are greater than a specified length. You can use [filter](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#filter(org.apache.kafka.streams.kstream.Predicate)) since it allows you *include* records based on a criteria which can be defined using a [Predicate](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/Predicate.html). The result is a new `KStream` instance with the filtered records:
 
@@ -114,7 +117,7 @@ KStream<String, String> stream = builder.stream("words");
 stream.filterNot((key,value) -> value.startsWith("foo"));
 ```
 
-### Use `group`ing to prepare data for stateful operations
+## Use `group`ing to prepare data for stateful operations
 
 Grouping is often a prerequisite to [stateful aggregations](https://kafka.apache.org/32/documentation/streams/core-concepts#streams_state) in Kafka Streams. To group records by their key, you can use [`groupByKey`](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#groupByKey()) as such:
 
@@ -144,11 +147,11 @@ stream.groupBy(new KeyValueMapper<String, String, String>() {
 stream.groupByKey(Grouped.with(Serdes.Bytes(), Serdes.Long()));
 ```
 
-### Terminal operations
+## Terminal operations
 
 Not all stateless computations return intermediate results such as a `KStream`, `KTable` etc. They are often called *terminal* operations whose methods return `void`. Let's look at a few examples.
 
-#### Save record to a topic
+### Save record to a topic
 
 You may want to write the results of a stateless operation back to Kafka - most likely, in a different topic. You can use the [to](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#to(java.lang.String)) method to store the records of a `KStream` to a topic in Kafka.
 
@@ -182,7 +185,7 @@ In this example, we make use of `RecordContext` (contains record metadata) to ge
 
 > In all the above cases, the sink/target topic should pre-exist in Kafka
 
-#### **Debugging records**
+### **Debugging records**
 
 [print](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#print(org.apache.kafka.streams.kstream.Printed)) is useful for debugging purposes - you can log each record in the `KStream`. It also accepts an instance of [Printed](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/Printed.html) to configure the behavior.
 
@@ -201,15 +204,15 @@ This will print out the records e.g. if you pass in `(foo, bar)` and `(john, doe
 
 > You can also use `Printed.toFile` (instead of `toSysOut`) to target a specific file
 
-#### **Do something for every record**
+### **Do something for every record**
 
 [`foreach`](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#foreach(org.apache.kafka.streams.kstream.ForeachAction)) is yet another terminal operation, but accepts a [ForeachAction](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/ForeachAction.html) so you can specify *what* you want to do with each record in the `KStream`.
 
-### Miscellaneous features
+## Miscellaneous features
 
 Here are some other useful operations offered by the Kafka Streams API:
 
-#### **peek**
+### **peek**
 
 Since `print` is a terminal operation, you no longer have access to the original `KStream`. This where [peek](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#peek(org.apache.kafka.streams.kstream.ForeachAction)) comes in handy because it returns the same `KStream` instance. Just like `foreach`, it accepts a `ForeachAction` which can use to specify what you *want* to do for each record.
 
@@ -224,7 +227,7 @@ stream.mapValues(v -> v.toUpperCase())
       .to(OUTPUT_TOPIC);
 ```
 
-#### **through**
+### **through**
 
 While developing your processing pipelines with Kafka Streams DSL, you will find yourself pushing resulting stream records to an output topic using `to` and then creating a new stream from that (output) topic.
 
@@ -255,7 +258,7 @@ stream.mapValues(v -> v.toUpperCase())
       .to(LENGTHY_WORDS_TOPIC);
 ```
 
-#### **merge**
+### **merge**
 
 Say you have streaming data coming into two different Kafka topics, each of which is represented by a `KStream`. You can [merge](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#merge(org.apache.kafka.streams.kstream.KStream)) the contents of these `KStream`s into a single stream.
 
@@ -270,7 +273,7 @@ stream1.merge(stream2).to("output-topic");
 
 > Caveat: The resulting stream may *not* have all the records in order
 
-#### **`selectKey`**
+### **`selectKey`**
 
 With the help of a `KeyValueMapper`, [`selectKey`](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#selectKey(org.apache.kafka.streams.kstream.KeyValueMapper)) allows you to derive a new key with a different data type.
 
@@ -286,7 +289,7 @@ stream.selectKey(new KeyValueMapper<Integer, String, String>() {
         })
 ```
 
-#### **branch**
+### **branch**
 
 [branch](https://kafka.apache.org/32/javadoc/org/apache/kafka/streams/kstream/KStream.html#branch(org.apache.kafka.streams.kstream.Named,org.apache.kafka.streams.kstream.Predicate...)) seems quite interesting, but something I have not used a lot (to be honest!). You can use it to evaluate every record in a `KStream` against multiple criteria (represented by a `Predicate`) and produce multiple `KStream`s (an array) as output. The key differentiator is that you can use multiple `Predicate`s instead of a single one as is the case with `filter` and `filterNot`.
 

@@ -5,10 +5,14 @@ tags:
   - owasp
   - network-security
   - application-security
+showInHomeFeed: true
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-08-29
 ---
+
+|ToC|
+|---|
 
 This is a 10-part series:
 
