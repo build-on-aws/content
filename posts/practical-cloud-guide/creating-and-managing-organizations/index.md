@@ -6,7 +6,7 @@ tags:
     - organizations
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-06-21
+date: 2023-07-17
 ---
 
 Managing compute resources is one responsibility of an IT Pro. As a cloud engineer you will manage cloud resources such as storage, compute, and applications for your enterprise organization. In this article, you’ll learn about AWS Organization, a service to manage access to resources by creating groups and policies across the enterprise.
