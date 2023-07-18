@@ -74,7 +74,7 @@ But now, let's start the tutorial and learn how to implement the synchronous req
 
 - A few kilobytes of code will be stored in Amazon S3, which provides 5 GB of free storage.
 - We will call API Gateway a couple of times, which provides 1 million free calls per month.
-- We will run a Lambda function for a few time, which also provides 1 million free invocations per month.
+- We will run a Lambda function for a few times, which also provides 1 million free invocations per month.
 
 So if you follow the step-by-step guide, you'll definitely stay within the free trier. However, I've also added a section to the end that helps you remove all the resources created during this tutorial.
 
