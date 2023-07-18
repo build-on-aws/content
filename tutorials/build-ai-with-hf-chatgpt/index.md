@@ -9,7 +9,7 @@ tags:
     - hugging-face
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
-date: 2023-07-31 (expected publication date)
+date: 2023-07-31
 ---
 
 ## What you will learn
