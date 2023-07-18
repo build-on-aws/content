@@ -142,7 +142,7 @@ DESCRIBE TABLES LIKE opensearch_dashboards_sample_data_ecommerce
 
 ![Image: image.png](images/image_12.png)
 
-4. Since the datatype of the column `order_id` is keyword, we need to enclose the search in quotes.
+4. Since the datatype of the column `order_id` is keyword, we need to enclose the search in quotes (updated).
 
 ```sql
 SELECT *
