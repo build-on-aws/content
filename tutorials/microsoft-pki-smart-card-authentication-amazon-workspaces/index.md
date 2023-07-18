@@ -1,6 +1,6 @@
 ---
 title: "Set Up and Configure Microsoft PKI for Smart Card Authentication with Amazon WorkSpaces"
-description: "A comprehensive guide on configuring Microsoft PKI and AWS infrastructure to support smart card authentication for your Amazon WorkSpaces."
+description: "A comprehensive guide to configuring Microsoft PKI and AWS infrastructure to support smart card authentication for your Amazon WorkSpaces."
 tags:
   - aws
   - workspaces
@@ -14,9 +14,9 @@ authorName: Austin Webber
 date: 2023-06-23
 ---
 
-Amazon WorkSpaces provides customers with the ability to use Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. Amazon WorkSpaces supports the use of smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, your users can login to their WorkSpaces using smart cards and they can use their smart cards in within their WorkSpace session to authenticate to websites or other applications. Pre-session smart card authentication requires an [Active Directory Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) connected to [AWS Microsoft Managed AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) or self-managed AD, Online Certificate Status Protocol (OCSP) for certificate revocation checking, Root CA and smart card certificates with certain requirements, a CAC or PIV smart card, a version of the WorkSpaces client that supports smart card authentication, and a WorkSpace assigned to the user that is using a protocol that supports smart card authentication.
+Amazon WorkSpaces provides customers with the ability to use Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. It supports smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, users can log into their WorkSpaces using smart cards and use their smart cards within their WorkSpace session to authenticate to websites or other applications. Pre-session smart card authentication requires an [Active Directory Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) connected to [AWS Microsoft Managed AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) or self-managed AD, Online Certificate Status Protocol (OCSP) for certificate revocation checking, Root CA and smart card certificates with certain requirements, a CAC or PIV smart card, a version of the WorkSpaces client that supports smart card authentication, and a WorkSpace assigned to the user that is using a protocol that supports smart card authentication.
 
-In this post, we will walk through step-by-step how you can setup and configure new or existing Microsoft PKI to support smart card authentication including setting up an OCSP  responder, proper configuration of Active Directory, domain controllers, certificate templates, Group Policy, and Amazon WorkSpaces. You can expect to have a fully functioning WorkSpaces smart card authentication environment for both Linux and Windows WorkSpaces after completing the steps in this post.
+In this post, we will walk through step-by-step how you can set up and configure new or existing Microsoft PKI to support smart card authentication including setting up an OCSP  responder, proper configuration of Active Directory, domain controllers, certificate templates, Group Policy, and Amazon WorkSpaces. You can expect to have a fully functioning WorkSpaces smart card authentication environment for both Linux and Windows WorkSpaces after completing the steps in this post.
 
 The following figure shows the high-level architecture of the Amazon WorkSpaces solution, depicting internet access by a user to access an Amazon WorkSpace using their smart card in the Amazon WorkSpaces client.
 
@@ -48,21 +48,21 @@ The following figure shows the high-level architecture of the Amazon WorkSpaces 
 
 For this walkthrough, you should have the following prerequisites:
 
-* A VPC with at least **2 private subnets (with internet access)** and **1 public subnet (with internet access)** ([Example](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-web-database-servers.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)) that does not overlap with the [WorkSpaces management interface IP ranges](https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-port-requirements.html#management-ip-ranges)
-* Two Active Directory (AD) domain controllers in different private subnets (You can use [AWS Launch Wizard for Active Directory](https://docs.aws.amazon.com/launchwizard/latest/userguide/what-is-launch-wizard-active-directory.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy self-managed AD or AWS Managed Microsoft AD if you do not have AD setup. If using on-premises AD, ensure VPC connectivity to on-premises is already setup)
-* An [AD Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) configured to use those domain controllers (including the credentials to your AD Connector service account)
-* A security group that allows [outbound connectivity](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/config-firewall-for-ad-domains-and-trusts) to the AD domain controllers
-* A [EC2 Keypair](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-key-pairs.html#having-ec2-create-your-key-pair?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-* A [EC2 Windows instance joined to the AD domain](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) (referred to as the MGMT EC2 instance in this post)
-* A CAC or PIV card used for smart card authentication (e.g. [Yubikey 5](https://www.yubico.com/authentication-standards/smart-card/), Taglio PIVKey + Smart Card Reader, or equivalent products supporting CAC/PIV)
-* **(Recommended)** A public domain in Route53 or a public domain in another provider using a top-level domain found in the [IANA Root Zone Database](https://www.iana.org/domains/root/db) to host a DNS record for the OCSP (Online Certificate Status Protocol) responder instance
+* A VPC with at least **2 private subnets (with internet access)** and **1 public subnet (with internet access)** ([Example](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-web-database-servers.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)) that does not overlap with the [WorkSpaces management interface IP ranges](https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-port-requirements.html#management-ip-ranges).
+* Two Active Directory (AD) domain controllers in different private subnets. (You can use [AWS Launch Wizard for Active Directory](https://docs.aws.amazon.com/launchwizard/latest/userguide/what-is-launch-wizard-active-directory.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy self-managed AD or AWS Managed Microsoft AD if you do not have AD setup. If using on-premises AD, ensure VPC connectivity to on-premises is already set up.)
+* An [AD Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) configured to use those domain controllers (including the credentials to your AD Connector service account).
+* A security group that allows [outbound connectivity](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/config-firewall-for-ad-domains-and-trusts) to the AD domain controllers.
+* A [EC2 Keypair](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-key-pairs.html#having-ec2-create-your-key-pair?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+* A [EC2 Windows instance joined to the AD domain](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) (referred to as the MGMT EC2 instance in this post).
+* A CAC or PIV card used for smart card authentication (e.g. [Yubikey 5](https://www.yubico.com/authentication-standards/smart-card/), Taglio PIVKey + Smart Card Reader, or equivalent products supporting CAC/PIV).
+* **(Recommended)** A public domain in Route53 or a public domain in another provider using a top-level domain found in the [IANA Root Zone Database](https://www.iana.org/domains/root/db) to host a DNS record for the OCSP (Online Certificate Status Protocol) responder instance.
 * **(Optional)** A public S3 bucket to store certificate revocation lists (CRLs) and public certificates of the CA(s). You aren’t required to store the certificates and CRLs in an S3 bucket. If you don’t use an S3 bucket, the CRLs will be hosted in a file share and [Internet Information Services (IIS)](https://docs.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-web-server-overview) website on the Enterprise CA.
 
-## Deploy the solution
+## Deploying the Solution
 
 The solution I present here involves the following steps:
 
-1. Deploy [Microsoft PKI Quick Start template](https://aws-quickstart.github.io/quickstart-microsoft-pki/) and setup OCSP responder (required if you do not have PKI already setup in your AD environment)
+1. Deploy [Microsoft PKI Quick Start template](https://aws-quickstart.github.io/quickstart-microsoft-pki/) and set up OCSP responder (required if you do not have PKI already set up in your AD environment)
 2. Create objects in Active Directory with necessary permissions
 3. Configure the Certificate Authority to allow certificates to be issued to smart card users
 4. Request a certificate for your individual smart card user
@@ -71,12 +71,12 @@ The solution I present here involves the following steps:
 7. Configure the AD Connector to use smart card authentication
 8. Test pre-session smart card authentication on Windows WorkSpaces
 9. Test in-session smart card authentication on Windows WorkSpaces
-10. Setup smart card authentication on Linux WorkSpaces **(GovCloud only)**
+10. Set up smart card authentication on Linux WorkSpaces **(GovCloud only)**
 11. Test smart card authentication on Linux WorkSpaces **(GovCloud only)**
 
-### Section 1: Deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and setup an OCSP responder
+### Section 1: Deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and set up an OCSP responder
 
-If you do not already have Microsoft PKI infrastructure setup (e.g. CAs, OCSP responder) in your AD environment, this first section is to deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and create an OCSP responder instance. **If you already have PKI infrastructure setup including an OCSP responder, please skip to Section 2.**
+If you do not already have Microsoft PKI infrastructure set up (e.g. CAs, OCSP responder) in your AD environment, this first section is to deploy an offline root CA and enterprise subordinate CA by using the Microsoft Public Key Infrastructure Quick Start template and create an OCSP responder instance. **If you already have PKI infrastructure set up, including an OCSP responder, please skip to Section 2.**
 
 #### Step 1. Create a Secret in Secrets Manager
 
@@ -126,11 +126,13 @@ To deploy the CAs with the Microsoft Public Key Infrastructure Quick Start
     * Check the box next to each of the following statements.
         * **I acknowledge that AWS CloudFormation might create IAM resources with custom names.**
         * **I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND.**
-    * Choose **Create stack**.  
+    * Choose **Create stack**.
+  
 ![A prompt showing that you need to acknowledge additional capability before deploying the CloudFormation stack](./images/02-additional-capability-before-deploying-cloudformation-stack.png)
+
 It should take 20 to 30 minutes for the resources to deploy.
 
-#### Step 3: Allow the domain controllers to communicate with the Enterprise CA
+#### Step 3: Allow the Domain Controllers to Communicate with the Enterprise CA
 
 In this step, you configure AWS security group rules so that your directory domain controllers can connect to the enterprise subordinate CA to request a certificate. To do this, you must add outbound rules to each domain controller’s AWS security group to allow all outbound traffic to the AWS security group of the enterprise subordinate CA so that the directory domain controllers can connect to the enterprise subordinate CA to request a certificate. If you are using **self-managed AD** and your domain controllers are outside of AWS, you can ensure your domain controllers allow the necessary traffic from on-premises to the enterprise subordinate CA instance.
 
