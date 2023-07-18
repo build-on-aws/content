@@ -27,7 +27,8 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level | Intermediate - 200 |
 | ⏱ Time to complete | 30 minutes |
 | 💰 Cost to complete | Free when cleaning up after the tutorial (instructions below) |
-| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/) |
+| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
+| 💻 Code Repository | The finished example is available on [GitHub](https://github.com/build-on-aws/request-response-with-amazon-api-gateway?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a quick star rating?</a>    |
 | ⏰ Last Updated     | 2023-07-10                             |
 
