@@ -446,12 +446,12 @@ In this section, we will register your AD Connector with WorkSpaces, create a te
     * Repeat the above steps again for each certificate in your certificate chain that you exported.
     * After all of the certificates have been registered, select **Enable** under **Smart Card authentication**, and select **Enable**, which will enable smart card authentication for the entire AD Connector.
 
-### Section 8: Test pre-session smart card authentication on Windows WorkSpaces
+### Section 8: Test Pre-Session Smart Card Authentication on Windows WorkSpaces
 
 Use the WorkSpaces client to test smart card authentication:
 
 * Download the latest [WorkSpaces client](https://clients.amazonworkspaces.com/) and open the client.
-* Enter your registration code for your directory when prompted
+* Enter your registration code for your directory when prompted.
 * Select **Insert your smart card** and select your user’s certificate when prompted.  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to select a certificate for authentication](./images/34-WorkSpaces-Client-with-Certificate-Dialog.png)
 
@@ -465,7 +465,7 @@ Use the WorkSpaces client to test smart card authentication:
 
 * This completes pre-session smart card authentication with Windows WorkSpaces. If you receive any errors, refer to the troubleshooting section towards the end of this article.
 
-### Section 9: Test in-session smart card authentication on Windows WorkSpaces
+### Section 9: Test In-Session Smart Card Authentication on Windows WorkSpaces
 
 Within a WorkSpaces session, test in-session smart card authentication:
 
@@ -478,7 +478,7 @@ Within a WorkSpaces session, test in-session smart card authentication:
 
 **Note:** Additional customizations of the Windows logon experience can be done using Microsoft's provided GPOs and the [WSP GPO template](https://docs.aws.amazon.com/workspaces/latest/adminguide/group_policy.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-### Section 10: Setup smart card authentication on Linux WorkSpaces (GovCloud only)
+### Section 10: Set Up Smart Card Authentication on Linux WorkSpaces (GovCloud Only)
 
 Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WSP protocol in the us-gov-west-1 and us-gov-east-1 regions. To set this up, you will need to [create a custom image](https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq) that contains the certificates in your certificate chain. The following steps assume the Linux user already has a certificate on their smart card. 
 
@@ -487,7 +487,7 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
 2. Connect to the WorkSpace using the client (requires smart card authentication being disabled on your AD Connector for this part).
 3. Configure the WorkSpace to allow users in a specific AD group of your choosing to SSH into the WorkSpaces:
     * Follow the steps to [Grant SSH access to Amazon Linux **WorkSpaces** administrators](https://docs.aws.amazon.com/workspaces/latest/adminguide/manage_linux_workspace.html#linux_ssh?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
-    * Adjust the security group attached to your WorkSpaces to [allow SSH from desired IPs.](https://docs.aws.amazon.com/workspaces/latest/adminguide/connect-to-linux-workspaces-with-ssh.html#enable-ssh-directory-level-access-linux-workspaces?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+    * Adjust the security group attached to your WorkSpaces to [allow SSH from desired IPs](https://docs.aws.amazon.com/workspaces/latest/adminguide/connect-to-linux-workspaces-with-ssh.html#enable-ssh-directory-level-access-linux-workspaces?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 4. From a Windows computer in your AD environment, export ALL of the certificates in your certificate chain in DER format (not including the user certificate). You can do this using **certmgr.msc** from any AD-joined Windows computer in your environment.
 5. Use PowerShell from one of your Windows computers in your AD environment (e.g. MGMT instance) to copy the certificates onto the WorkSpace using SCP:  
 
@@ -515,12 +515,12 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
 9. Create a bundle from the image once the image is finished creating.
 10. Launch a WorkSpace for your test smart card user from your custom bundle.
 
-### Section 11: Test smart card authentication on Linux WorkSpaces (GovCloud only)
+### Section 11: Test Smart Card Authentication on Linux WorkSpaces (GovCloud Only)
 
 Use the WorkSpaces client to test smart card authentication:
 
 * Open the WorkSpaces client.
-* Enter your registration code for your directory, if prompted
+* Enter your registration code for your directory, if prompted.
 * Select **Insert your smart card**, and select your user’s certificate when prompted.  
 ![Image showing the WorkSpaces Client with a Certificate Dialog prompt directing the user to select a certificate for authentication](./images/34-WorkSpaces-Client-with-Certificate-Dialog.png)
 
@@ -535,8 +535,10 @@ Use the WorkSpaces client to test smart card authentication:
 
 ## Troubleshooting
 
-### Certificate validation failed error in the WorkSpaces client 
+### Certificate Validation Failed Error in the WorkSpaces Client 
+
 ![Image showing the WorkSpaces client returning a "Unable to sign in" "Certification validation failed" error](./images/43-WorkSpaces-client-returning-Unable-to-sign-in.png)
+
 Certificate validation failed indicates a failure before or during the mutual TLS authentication phase that occurs with the AD Connector. This can be caused due to various reasons including the following:
 
 * The AD Connector’s service account does not have the correct Kerberos Constrained Delegation Settings. Ensure the service account is delegated access to the LDAP service on each DC that it can authenticate with, refer to [this](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/enable-clientauth.html#step1?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
@@ -547,29 +549,35 @@ Certificate validation failed indicates a failure before or during the mutual TL
 * A proxy or local networking configuration is interfering with the authentication process.
 * A packet capture on the self-managed domain controllers during authentication may be necessary to pinpoint the root cause. If using AWS Managed Microsoft AD (of size large) and need to take a packet capture, you can use [Traffic Mirroring](https://docs.aws.amazon.com/vpc/latest/mirroring/what-is-traffic-mirroring.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-### Unknown Error Occurred in the WorkSpaces client  
+### Unknown Error Occurred in the WorkSpaces Client
+
 ![Image showing the WorkSpaces client returning a "Unknown Error Occurred" error](./images/40-WorkSpaces-client-returning-Unknown-Error-Occurred.png)
+
 This indicates that the mutual TLS authentication with AD Connector was successful, but an issue prevented the client from starting smart card authentication. This can be caused by the following:
 
 * The WSP GPO template to enable smart card redirection is not configured or is set to deny.
 * The user certificate fails to be redirected into the WorkSpace.
 
-### At the Windows WorkSpace logon screen, various errors can be reported during smart card authentication  
+### At the Windows WorkSpace Logon Screen, Various Errors Can Be Reported During Smart Card Authentication
+
 ![Image showing the Windows logon page returning a "Signing in with a smart card is not supported for your account error](./images/41-Windows-logon-page-returning-Signing-smart-card-is-not-supported.png)
+
 The above error indicates a Windows OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
 
 * The domain controller authenticating the user does not have a certificate in the personal store. Review the Event Viewer logs on the WorkSpace.
 * The user’s smart card certificate is not trusted by the WorkSpace. Connect to the WorkSpace using RDP and confirm what certificate is being redirected into the user’s personal store and ensure it is trusted.
 * The user’s certificate is not configured correctly for Windows smart card authentication.
 
-### At the Linux WorkSpace logon screen, various errors can be reported during smart card authentication  
+### At the Linux WorkSpace Logon Screen, Various Errors Can Be Reported During Smart Card Authentication
+
 ![Image showing the Linux logon page returning a Sorry, that did not work Please try again. error when entering a smart card PIN](./images/42-Linux-logon-page-returning-Sorry-that-did-not-work.png)
-    The above error indicates a Linux OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
+
+The above error indicates a Linux OS-level smart card authentication failure. This and other related errors at this logon screen can be caused due to the following reasons:
     
 * The custom image used to create the WorkSpace does not have the correct certificates in the certificate chain added in the image.
 * A separate OS-level authentication issue. SSH into the WorkSpace and review the logs in /var/log for any errors around the timestamp.
 
-## Cleaning up
+## Cleaning Up
 
 1. Disable smart card authentication on the AD Connector:
     * Open [Directory Services console](https://console.aws.amazon.com/directoryservice/?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq), view the details page of your AD Connector, scroll down to Smart card authentication.
@@ -600,4 +608,4 @@ The above error indicates a Windows OS-level smart card authentication failure. 
 
 ## Conclusion
 
-In this post, you learned how to setup and configure a new or your existing Microsoft PKI environment for use with smart card authentication for Amazon WorkSpaces. Now, your users are able to authenticate into their WorkSpaces using their smart cards.
+In this post, you learned how to set up and configure a new or existing Microsoft PKI environment for use with smart card authentication for Amazon WorkSpaces. Now your users are able to authenticate into their WorkSpaces using their smart cards.
