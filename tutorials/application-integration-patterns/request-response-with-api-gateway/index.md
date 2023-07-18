@@ -6,6 +6,8 @@ tags:
   - aws
   - architecture-patterns
   - application-integration
+  - microservices
+  - serverless
   - api-gateway
   - lambda
   - cdk
