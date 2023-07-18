@@ -169,7 +169,7 @@ gpmc.msc
 ![Image showing the configuration that you need to enable in Auto-Enrollment for the Certificates Service Client. Enable "Renew expired certificates..." and "Update Certificates that use certificate templates"](./images/03-auto-enrollment--certificates-service-client.png)
     * After applying the setting, close out of Group Policy Management Editor.
 
-#### Step 5: Confirm the domain controllers contain required certificates
+#### Step 5: Confirm the Domain Controllers Contain Required Certificates
 
 Each domain controller that is going to authenticate smart card users **must have** a domain controller certificate. Ensure the domain controllers have a certificate in their Personal store from the certificate template **LdapOverSSL-QS**. 
 
@@ -188,7 +188,7 @@ Review the certificate store on each domain controller to ensure they receive a 
 certutil -DCInfo
 ```
 
-#### Step 6: Deploy an EC2 Windows instance and configure it as an OCSP responder instance
+#### Step 6: Deploy an EC2 Windows Instance and Configure it as an OCSP Responder Instance
 
 For pre-session authentication into WorkSpaces, Online Certificate Status Protocol (OCSP) is required for certificate revocation checking. An OCSP responder is a component of a public key infrastructure (PKI) that can be installed on Windows Server to meet this requirement. The OCSP responder is required to be publicly accessible on the internet over HTTP. In this blog post, we are only setting up one OCSP responder, which we will refer to as the OCSP instance. If you’d like to make the OCSP responder highly available, you can do so by setting up [multiple OCSP responders in an Array](https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/implementing-an-ocsp-responder-part-v-high-availability/ba-p/396882).
 
@@ -264,7 +264,7 @@ For pre-session authentication into WorkSpaces, Online Certificate Status Protoc
     * The results should look similar to the following:  
 ![Image showing sample output of the tnc command against an OCSP URL](./images/16-sample-output-tnc-command-against-OCSP-URL.png)
 
-### Section 2: Create objects in Active Directory with necessary permissions
+### Section 2: Create Objects in the Active Directory with the Necessary Permissions
 
 In this step, we will configure AD objects in your environment to prepare for smart card authentication and setup Kerberos Constrained Delegation on your AD Connector service account.
 
@@ -294,16 +294,16 @@ In this step, we will configure AD objects in your environment to prepare for sm
    ```
 
 3. Configure the delegation settings on your AD Connector service account to allow [mutual TLS authentication with your AD Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_connector_clientauth.html?sc_channel=el&sc_campaign=devopswave&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces&sc_geo=mult&sc_country=mult&sc_outcome=acq):
-    * Open **dsa.msc**, locate your AD Connector service account, right-click it, select **Properties**
+    * Open **dsa.msc**, locate your AD Connector service account, right-click it, select **Properties**.
     * Choose the **Delegation** tab, Select the **Trust this user for delegation to specified services only** and **Use any authentication protocol** radio buttons:  
 ![Image showing the "Delegation" tab on a sample AD user account in dsa.msc](./images/17-Delegation-sample-AD-user-dsa-msc.png)
     * Choose **Add…**, select **Users or Computers**, and add ALL of the domain controllers that the AD Connector service account will be allowed to complete TLS mutual authentication with. If using AWS Managed Microsoft AD, add all domain controllers.
     * Choose **OK** to display a list of available services used for delegation.
 ![Image showing the Add Services window and selecting each entry that has a Service Type of ldap for the Windows Domain Controllers](./images/18-add-services-window-kerberoscd.png)
     * Choose the **LDAP** service type for each domain controller, click **OK** and click **OK** to finish the configuration.
-    * Please note that the Kerberos Constrained Delegation setting is specific to computer names. When using AWS Managed AD as your domain controllers, the domain controllers may be replaced with new domain controllers causing this setting to become inaccurate, which will cause users to fail to login with smart card authentication in the WorkSpaces client. You may want to consider automating the updating of this value using PowerShell in that scenario. 
+    * Please note that the Kerberos Constrained Delegation setting is specific to computer names. When using AWS Managed AD as your domain controllers, the domain controllers may be replaced with new domain controllers causing this setting to become inaccurate, which will cause users to fail to log in with smart card authentication in the WorkSpaces client. You may want to consider automating the updating of this value using PowerShell in that scenario. 
 
-### Section 3: Configure the Certificate Authority to allow certificates to be issued to smart card users
+### Section 3: Configure the Certificate Authority to Allow Certificates to be Issued to Smart Card Users
 
 1. Create a certificate template to allow self-enrollment smart card logon certificates to your users:
     * Connect to your Enterprise CA with an AD user in the Domain Admins or AWS Delegated Administrators group.
@@ -335,15 +335,15 @@ In this step, we will configure AD objects in your environment to prepare for sm
     * Right-click **Certificate Templates**, hover over **New**, select **Certificate Template to Issue**.
     * Select the certificate template you just created, select **OK**.
 
-### Section 4: Request a certificate for your test smart card user
+### Section 4: Request a Certificate for Your Test Smart Card User
 
-In this section, we will login as the smart card user, confirm the smart card is functioning, request a certificate used for smart card authentication, and load the certificate onto the smart card. Some smart cards may require specific drivers to be installed in order for the smart card to function in Windows.
+In this section, we will log in as the smart card user, confirm the smart card is functioning, request a certificate used for smart card authentication, and load the certificate onto the smart card. Some smart cards may require specific drivers to be installed in order for the smart card to function in Windows.
 
 1. Connect to a EC2 Windows instance or computer that is joined to your domain as your test smart card user. 
 
 **Note:** If connecting to a remote computer, ensure to use an RDP client that can redirect the smart card into the remote session. The Microsoft Remote Desktop Client can be used for this purpose.
 
-2. Confirm the smart card is functioning in Windows,
+2. Confirm the smart card is functioning in Windows:
     * Open PowerShell, run the command `certutil -scinfo`, and enter your PIN when prompted.
     * The smart card should report as available for use and no errors should be reported.  
 ![Image showing a successful sample output of the "certutil -scinfo" command](./images/22-successful-sample-output-certutil-scinfo-command.png)
@@ -360,13 +360,13 @@ In this section, we will login as the smart card user, confirm the smart card is
     * The certificate request should succeed:  
 ![Image showing the successful request of a certificate and successful installation of the certificate onto the smart card](./images/25-successful-request-certificate-successful-installation-certificate-onto-the-smart-card.png)
     **Note:**
-        * If you are not prompted to enter your PIN during this process, please ensure your certificate template is setup correctly and that your smart card is functioning.
+        * If you are not prompted to enter your PIN during this process, please ensure your certificate template is set up correctly and that your smart card is functioning.
         * Smart cards can have multiple digital slots. Please ensure your certificate is loaded into the authentication slot in order for Windows smart card authentication to succeed.
         * If you are using self-managed AD, instead of having users request their certificates manually through **certmgr.msc**, you can grant users Autoenroll permissions on the certificate template and users can be prompted to auto-enroll at logon. 
 
-### Section 5: Verify the smart card is working with its certificate properly and test that the certificate can be verified with OCSP
+### Section 5: Verify the Smart Card is Working Properly with its Certificate and Test that the Certificate Can Be Verified with OCSP
 
-1. Verify the smart card is working with its certificate properly:
+1. Verify the smart card is working properly with its certificate:
     * Open **certmgr.msc** while logged in as your test smart card user on a computer with the smart card inserted.
     * Expand **Personal**, select **Certificates** folder, and confirm if you see a certificate appear that is signed by your CA’s certs.  
 ![Image showing the Personal certificate store of a sample smart card user. It has the certificate we requested, in its certificate store](./images/26-Personal-certificate-store.png)
@@ -375,16 +375,16 @@ In this section, we will login as the smart card user, confirm the smart card is
     * This confirms that the smart card is functioning as expected.
 
 2. Test that the certificate can be verified with OCSP:
-    * In **certmgr.msc**, right-click your test user’s certificate, select **All Tasks**, select **Export…**
+    * In **certmgr.msc**, right-click your test user’s certificate, select **All Tasks**, select **Export…**.
     * Select **Next**, select **Next,** select **Next** select **Browse…**, save the certificate, select **Finish**, and select **OK**.
     * Open PowerShell and change directory (cd) to the directory where the certificate was exported to, and run the following command against the certificate: `certutil -URL exportedcertificate.cer`
     * In the URL Retrieval Tool window that opens, select the **OCSP (from AIA)** radio button.  
 ![Image showing the "URL Retrieval Tool" window that was opened and highlighting the selection of the radio button "OCSP (from AIA)"](./images/27-URL-Retrieval-Tool.png)
-    * Select **Retrieve**, you should see status as **Verified** and the OCSP URL appears.  
+    * Select **Retrieve**, and you should see the status as **Verified** and the OCSP URL appear.  
 ![Image showing a successful retrieval in the "URL Retrieval Tool" with an entry showing the status "Verified"](./images/28-URL-Retrieval-Tool-with-an-entry-showing-the-status-Verified.png)
-    **Note:** If the above fails after 15 seconds or returns unsuccessful, it's likely that you do not have your CA certificates installed in the local computer store that is completing this test or your OCSP responder is not configured correctly.
+    **Note:** If the above fails after 15 seconds or returns unsuccessful, it's likely that you do not have your CA certificates installed in the local computer store that is completing this test, or that your OCSP responder is not configured correctly.
 
-### Section 6: Register AD Connector with WorkSpaces, create a test Windows WSP WorkSpace, import the WSP GPO template, and enable smart card redirection on WorkSpaces
+### Section 6: Register AD Connector with WorkSpaces, Create a Test Windows WSP WorkSpace, Import the WSP GPO Template, and Enable Smart Card Redirection on WorkSpaces
 
 In this section, we will register your AD Connector with WorkSpaces, create a test Windows WSP WorkSpace, import the WSP GPO template, and enable smart card redirection via Group Policy.
 
