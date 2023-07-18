@@ -96,7 +96,7 @@ cd TODO
 
 ## Use AWS CDK to deploy the solution
 
-AWS CDK is a framework that lets you define your cloud infrastructure as code in one of its supported programming and provision it through [AWS CloudFormation](https://aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). In this case, we will be using the [Go bindings for AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+AWS CDK is a framework that lets you define your cloud infrastructure as code in one of its supported programming and provision it through [AWS CloudFormation](https://docs.aws.amazon.com/cloudformation?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). In this case, we will be using the [Go bindings for AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 > You can refer to the code in the [cdk](https://github.com/build-on-aws/golang-gin-app-on-aws-lambda/tree/main/cdk) directory.
 
