@@ -35,7 +35,7 @@ We would love [your feedback](https://www.pulse.aws/survey/FCUOXLAQ) and suggest
 * [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
 * **Chris Williams**, Senior Solution Architect @ AWS
 
-## This Weeks Questions:
+## This Week's Questions:
 
 1. [How is "Target Groups" different from "Auto-Scaling Groups" in AWS?](https://stackoverflow.com/questions/48529074/how-is-target-groups-different-from-auto-scaling-groups-in-aws)
 2. [Create the Launch Configuration with boto3](https://stackoverflow.com/questions/76599396/create-the-launch-configuration-with-boto3)
