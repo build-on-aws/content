@@ -1,5 +1,5 @@
 ---
-title: "Build On Live: Answered Episode 7 Show Notes - Resilient Architecture"
+title: "Build On Live: Answered Episode 7 - Resilient Architecture"
 description: "Join us for Build On Live: Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - build-on-live
@@ -29,11 +29,9 @@ https://www.twitch.tv/videos/1856494950
 
 ## Hosts
 
-[**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
-
-[**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
-
-[**Seth Eliot**](https://twitter.com/setheliot), Principle Developer Advocate @ AWS
+* [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
+* [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
+* [**Seth Eliot**](https://twitter.com/setheliot), Principle Developer Advocate @ AWS
 
 ## This Weeks Questions:
 1. [Cannot ping AWS EC2 instance](https://stackoverflow.com/questions/21981796/cannot-ping-aws-ec2-instance)
@@ -43,14 +41,16 @@ https://www.twitch.tv/videos/1856494950
 ## Show Notes
 
 Why did [Reachability Analyzer](https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html) still claim the [security group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) was the problem, even after Seth added in inbound rule for ICMP?
-- This was definitely a case of [PEBCAK](https://en.wiktionary.org/wiki/PEBCAK). Remember when setting up the path to be analyzed, it asks for a **protocol**? Seth, specified **TCP** (from the choices TCP or UDP). Well, [ICMP](https://aws.amazon.com/what-is/icmp/) (the new rule Seth added), is not TCP, so analyzer correctly determined there was no _TCP_ path to the instance.
+
+* This was definitely a case of [PEBCAK](https://en.wiktionary.org/wiki/PEBCAK). Remember when setting up the path to be analyzed, it asks for a **protocol**? Seth, specified **TCP** (from the choices TCP or UDP). Well, [ICMP](https://aws.amazon.com/what-is/icmp/) (the new rule Seth added), is not TCP, so analyzer correctly determined there was no _TCP_ path to the instance.
 
 Can we just re-run an analysis on an already defined path in Reachability Analyzer?
-* Yes! The big orange button that Seth somehow did not see
 
+* Yes! The big orange button that Seth somehow did not see:
   ![Analyze path button in Reachability Analyzer](images/analyze_path.webp)
 
 ## Do you have ideas for questions we should review on future shows?
+
 Let us know [HERE](https://www.pulse.aws/survey/VZHLE9FS)
 
 ## What is the Collective?
