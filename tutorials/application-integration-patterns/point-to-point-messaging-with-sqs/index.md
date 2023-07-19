@@ -203,9 +203,7 @@ Now that your environment is set up, you can start creating the first resource f
 
 Open the file lib\point-to-point-example-stack.ts. 
 
-You can see that the CDK template has already added a few import statements, including `aws-cdk-lib/aws-sqs` in a comment. This is convenient, as we don't have to add it manually anymore.
-
-Remove the comment symbols `//` in front of the `import` line so that the first three lines of the file look like this:
+Depending on the template version, CDK may already have added a few import statements, including `aws-cdk-lib/aws-sqs` in a comment. If this is the case, remove the comment symbols `//` in front of `import * as sqs from 'aws-cdk-lib/aws-sqs'`, otherwise add it yourself, so that the first three lines of the file look like this:
 
 ```typescript
 import * as cdk from 'aws-cdk-lib';
@@ -240,9 +238,9 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 ```
 
 ```bash
-mkdir lambda-src
-mkdir lambda-src/producer
-touch lambda-src/producer/send_message_to_sqs.js
+$ mkdir lambda-src
+$ mkdir lambda-src/producer
+$ touch lambda-src/producer/send_message_to_sqs.js
 ```
 
 ![](images/screen-confirm-changes.png)
@@ -250,3 +248,27 @@ touch lambda-src/producer/send_message_to_sqs.js
 ```typescript
 import * as iam from 'aws-cdk-lib/aws-iam';
 ```
+
+##  Clean-up
+
+Feel free to continue experimenting with the app. Once you're done, you can remove everything that has been deployed by executing:
+
+```bash
+$ cdk destroy
+```
+
+After a confirmation step, this will delete all resources that have been created as part of the stack. 
+
+The only remaining resource will be the Lambda functions' source code, which has been uploaded to an assets bucket in Amazon S3. 
+
+If you want, you can delete this directly in the [S3 Dashboard](https://s3.console.aws.amazon.com/s3/buckets) of the AWS Management Console:
+
+Look for an S3 bucket called `cdk-XXXXXXXXX-assets-YOUR_ACCOUNT_ID-YOUR_REGION`. This is the bucket that was created when you bootstrapped the account with AWS CDK.
+
+You can delete everything inside the bucket by selecting the radio button next to its name, and clicking on **Empty**:
+
+![Screenshot showing how to empty the asset bucket in S3](images/screen-empty-asset-bucket.png)
+
+This will open a confirmation dialog. Double-check if it's the asset bucket, type _permanently delete_ into the text box and click on **Empty**.
+
+I'd recommend keeping the bucket for further experiments with AWS CDK. Don't worry about costs, empty S3 buckets are completely free of charge.
