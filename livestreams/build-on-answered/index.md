@@ -33,9 +33,9 @@ This show is as interactive as our audience makes it, so join us as we work thro
 [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
 
 ## Schedule
-| Upcoming Episode | Name| Date |
-|--|--|--|
-| **SO01E09** | Boto3, Autoscaling, Chaos, and More with Julie, Chris, and Cobus | July 19 8am PT |
+| Upcoming Episode | Name| Date | Link to Watch | Link to Show Notes |
+|--|--|--|--|--|
+| **SO01E09** | Boto3, Autoscaling, Chaos, and More with Julie, Chris, and Cobus | July 19 8am PT | [Watch here](https://twitch.tv) | [Show Notes](/livestreams/build-on-answered/2023-07-19) |
 
 Watch past episodes!
 Join us for our upcoming episodes on the 1st and 3rd Wednesdays of the month!!
