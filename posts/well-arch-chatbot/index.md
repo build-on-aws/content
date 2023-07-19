@@ -13,7 +13,10 @@ authorName: Banjo Obayomi
 date: 2023-04-10
 ---
 
-The [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/) is a set of best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. However, finding the right answers to questions related to the framework can be time-consuming and challenging. So I decided to build a chatbot to answer questions related to the framework and provide developers with quick and accurate responses - all with links to supporting documents. In this article, I'll share tips and guidance on building a ChatGPT powered AWS Well-Architected chatbot.
+|ToC|
+|---|
+
+The [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=well-arch-chatbot) is a set of best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. However, finding the right answers to questions related to the framework can be time-consuming and challenging. So I decided to build a chatbot to answer questions related to the framework and provide developers with quick and accurate responses - all with links to supporting documents. In this article, I'll share tips and guidance on building a ChatGPT powered AWS Well-Architected chatbot.
 
 ![AWS Well-Architected Chatbot](images/well_arch_chatbot.png)
 
@@ -30,7 +33,7 @@ And check out the GitHub repo with the code [here](https://github.com/banjtheman
 
 ## Data Collection
 
-I started by using `Selenium` and `BeautifulSoup` to methodically scrape content from the entire [Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) page. To ensure comprehensive data extraction, I meticulously examined every section on the main page, as well as followed and scraped all associated links found in the sidebar. As a result, I captured the complete content and compiled it into a CSV file, along with the corresponding titles and URLs for easy reference and citation.
+I started by using `Selenium` and `BeautifulSoup` to methodically scrape content from the entire [Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=well-arch-chatbot) page. To ensure comprehensive data extraction, I meticulously examined every section on the main page, as well as followed and scraped all associated links found in the sidebar. As a result, I captured the complete content and compiled it into a CSV file, along with the corresponding titles and URLs for easy reference and citation.
 
 Here is some of the code used to gather data for each page.
 
@@ -90,7 +93,7 @@ These data cleaning steps helped to refine the raw data and enhance the model's 
 
 ## Creating Text Embeddings
 
-Next, I created text embeddings for each of the pages using 
+Next, I created text embeddings for each of the pages using
 OpenAI's [embeddings API](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings).
 
 Text embeddings measure the relatedness of text strings. Embeddings are commonly used for:
@@ -203,13 +206,10 @@ For more details on how to deploy and create Streamlit apps, checkout the [GitHu
 
 In this post, I walked through the process of building an AWS Well-Architected chatbot using the OpenAI GPT model and Streamlit. We started by collecting data from the AWS Well-Architected Framework using Python, and then used the OpenAI API to generate responses to user input.
 
-You can check out the chatbot [here](https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/). 
+You can check out the chatbot [here](https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/).
 
 If you're interested in building your own ChatGPT powered applications, I hope this post has provided you with some helpful tips and guidance.
 
 ## About the Author
 
 Banjo is a Senior Developer Advocate at AWS, where he helps builders get excited about using AWS. Banjo is passionate about operationalizing data and has started a podcast, a meetup, and open-source projects around utilizing data. When not building the next big thing, Banjo likes to relax by playing video games, especially JRPGs, and exploring events happening around him.
-
-
-

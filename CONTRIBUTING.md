@@ -7,9 +7,9 @@
   * [Other Ways to Contribute](#others-ways-to-contribute)
 * [Ask for Help](#ask-for-help)
 * [How Your Content is Licensed](#how-your-content-is-licensed)
-* [BuildOn.AWS Code of Conduct](#buildonaws-code-of-conduct)
+* [Community.AWS Code of Conduct](#communityaws-code-of-conduct)
 
-[BuildOn.AWS](https://www.buildon.aws) welcomes anyone to contribute content, suggest content ideas, update outdated content, and file issues related to the platform or with content.
+[Community.AWS](/) welcomes anyone to contribute content, suggest content ideas, update outdated content, and file issues related to the platform or with content.
 
 This content is community driven and you are the best person to drive the kind of content you'd like to see published here!
 
@@ -17,9 +17,9 @@ This content is community driven and you are the best person to drive the kind o
 
 ### Contribute Content
 
-:warning: January 27, 2023: BuildOn.AWS content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](/) for updates as we open this up to more community authors in the coming months.
+:warning: January 27, 2023: Community.AWS content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](/) for updates as we open this up to more community authors in the coming months.
 
-If you'd like to write content for BuildOn.AWS, read through the [Author Quick Start](/AUTHOR_QUICK_START.md) and then submit your proposal [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=content+proposal&template=content-proposal-template.md).
+If you'd like to write content for Community.AWS, read through the [Author Quick Start](/AUTHOR_QUICK_START.md) and then submit your proposal [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=content+proposal&template=content-proposal-template.md).
 
 Looking for an idea? Check out our backlog [here](https://github.com/build-on-aws/content/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
 
@@ -43,6 +43,6 @@ If you already have a content proposal or pull request for your content open, yo
 
 Your content contributions will be licensed under the [CC BY-SA 4.0 License](/LICENSE).
 
-## BuildOn.AWS Code of Conduct
+## Community.AWS Code of Conduct
 
 By participating on this platform you agree to abide by the [Code of Conduct](/CODE_OF_CONDUCT.md).

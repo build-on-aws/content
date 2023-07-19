@@ -11,6 +11,9 @@ authorName: Curtis Evans
 date: 2022-11-28
 ---
 
+|ToC|
+|---|
+
 Whether you’re a new user or an experienced Site Reliability Engineer, system logs are a vital source of information available on servers to help keep operations reliable. Logs are available on all system types, and their existence is very prevalent on machines running Linux. From boot sequences and process threads to user activity, practically every operation produces a written record of an event that is logged, allowing operators access to information and visibility across the entire server. But how does one go about locating and viewing these critical logs?
 
 Depending on the packages that are installed, applications running, and connected devices, the total number of log files can grow into the hundreds and contain millions of entries over time. In this article, I’ll provide an overview of several Linux log types along with the utilities operators can use to manage systems more effectively. Note that some files and utilities require root permissions, so users should ensure they have the proper system privileges or access levels.

@@ -8,9 +8,13 @@ authorName: Curtis Evans
 date: 2022-08-15
 ---
 
-> ### *"Data is a precious thing and will last longer than the systems themselves."*  
-> ###### - Tim Berners Lee, Creator of the World Wide Web  
-> 
+|ToC|
+|---|
+
+> *"Data is a precious thing and will last longer than the systems themselves."*  
+> ~ Tim Berners Lee, Creator of the World Wide Web  
+>
+
 Walk into any business or technology meeting today and there’s no doubt that at some point the conversation will center around the topic of data. Data in all of its forms is an essential growth asset for every organization, and companies are increasingly challenged with the task of how to best manage every byte being stored. There are a number of factors driving these challenges, chief among them are:
 
 - how to capture and collect data efficiently,
@@ -52,7 +56,7 @@ Over time, the effectiveness of data is reduced and is no longer needed to suppo
 
 ### Data Expiration  
 
-If the data has reached *"end-of-life"* meaning there is no longer value to the business, it can be permanently destroyed. When expiring data, it is not enough to simply delete the files from disks; controls should be in place for implementing a proper decommissioning process that completely destroys data and the physical devices where it is stored in accordance with industry regulations and standards. For example, here at AWS we [implement techniques for data destruction](https://aws.amazon.com/compliance/data-center/controls/) as detailed in the NIST 800-88 standards for sanitizing media to prevent access from unauthorized users.
+If the data has reached *"end-of-life"* meaning there is no longer value to the business, it can be permanently destroyed. When expiring data, it is not enough to simply delete the files from disks; controls should be in place for implementing a proper decommissioning process that completely destroys data and the physical devices where it is stored in accordance with industry regulations and standards. For example, here at AWS we [implement techniques for data destruction](https://aws.amazon.com/compliance/data-center/controls/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=anatomy-of-data-objects-through-lifecycle-management) as detailed in the NIST 800-88 standards for sanitizing media to prevent access from unauthorized users.
 
 Once an organization understands the lifecycle management stages and develops policies and governance controls for each, the process must then rely on products and services equipped with features to enable the controls effectively. Most services available on the market today offer a management interface to identify/organize the data, administer access privileges, and provide reporting metrics for the stored objects. They also provide support for programming capabilities to develop and implement policies that move objects through the lifecycle seamlessly. The tools can also integrate with different forms of storage media designed to hold data based on characteristics such as access patterns, performance, durability, and cost. Several examples of the types of storage media include solid-state drives (SSDs), magnetic hard drives (HDDs), and linear tape systems (LTO). Each media type can play an important role in the development of a complete lifecycle management system.
 
@@ -98,5 +102,7 @@ We can see that a feature film is likely to spend most of its time in the lifecy
 A student transcript on the other hand is most likely to require a moderate amount of access over its useful life, primarily during a student’s academic tenure. The methods that parents, teachers, or college admissions counselors use to access records require moderate performance for retrieval, allowing for the use of media systems that are moderately priced. Once a student has completed school, it is less likely that the transcript will be accessed and can be archived for long-term purposes. If the student were to contact the high school (or college) years later and request a copy of the transcript, the expectation is that it will take time (several days or perhaps weeks) to retrieve the records. This is because the records will most likely be stored in an archived format which takes longer to retrieve. The retrieval time to obtain the transcript for a student who graduated one or two years ago stands a better chance of having the request processed faster if the lifecycle workflow has not completely transitioned those records to the slowest and cheapest storage class during this time span.
 
 Patient medical records present a rather unusual use case from most other data types. The general trend for most data is that as the information ages over time it is accessed less frequently. For medical records, it is possible that the data is accessed *more frequently* over time because an aging patient is likely to be under the regular care of a doctor or healthcare provider. The steep drop-off in the access pattern for medical records is consistent with a patient’s eventual death, thereby causing the records to be archived and in some cases destroyed after a certain period of time. There is the possibility that some elements of that data will be extracted and used in cases of medical research giving those elements of the records a new start within a separate data lifecycle.
+
+# Conclusion
 
 By using the concepts and foundational knowledge of data lifecycle management discussed in this article, organizations of all sizes can better position themselves to build frameworks that improve the security, durability and reliability of their data management processes that reduces cost. This leads to an increase in the overall effectiveness of their storage management strategy, turning the growing amount of data captured into valuable business information.

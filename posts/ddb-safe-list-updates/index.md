@@ -5,16 +5,21 @@ tags:
   - databases
   - nosql
   - dynamodb
+spaces:
+  - databases
 authorGithubAlias: robzhu
 authorName: Robert Zhu
 date: 2023-06-16
 ---
 
+|ToC|
+|---|
+
 *Full [code](https://gist.github.com/robzhu/3a6017c85758a682c759176f92e00fa7) if you want to follow along.*
 
-[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) is one of the most versatile and popular services on AWS. In seconds, we can deploy a highly available, dynamically scaling key-document store with global replication, transactions, and [more](https://aws.amazon.com/dynamodb/features/)! However, if we modify a list attribute on a document, we need to take extra steps to achieve correctness and concurrency. Below, I'll describe the problem and offer several solutions. 
+[Amazon DynamoDB](https://aws.amazon.com/dynamodb?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-safe-list-updates/) is one of the most versatile and popular services on AWS. In seconds, we can deploy a highly available, dynamically scaling key-document store with global replication, transactions, and [more](https://aws.amazon.com/dynamodb/features/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-safe-list-updates)! However, if we modify a list attribute on a document, we need to take extra steps to achieve correctness and concurrency. Below, I'll describe the problem and offer several solutions.
 
-Suppose we insert the following document, using the [JavaScript AWS-SDK](https://github.com/aws/aws-sdk-js-v3#getting-started) and the [DynamoDB DocumentClient](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html):
+Suppose we insert the following document, using the [JavaScript AWS-SDK](https://github.com/aws/aws-sdk-js-v3#getting-started) and the [DynamoDB DocumentClient](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-safe-list-updates):
 
 ```JavaScript
 DynamoDB.put({ TableName, Item: {
@@ -299,12 +304,12 @@ This technique has two significant drawbacks: 1) a distributed lock service adds
 
 ## What About Transactions?
 
-DynamoDB also supports multi-document [transactions](https://aws.amazon.com/blogs/aws/new-amazon-dynamodb-transactions/), and this sounds like a promising solution. But, as my colleague Danilo puts it:
+DynamoDB also supports multi-document [transactions](https://aws.amazon.com/blogs/aws/new-amazon-dynamodb-transactions/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-safe-list-updates), and this sounds like a promising solution. But, as my colleague Danilo puts it:
 
 > Items are not locked during a transaction. DynamoDB transactions provide serializable isolation. If an item is modified outside of a transaction while the transaction is in progress, the transaction is canceled and an exception is thrown with details about which item or items caused the exception.
 
 For this use case, transactions will essentially act like a slower version of condition expressions.
 
-# That's all, Folks
+## That's all, Folks
 
-Here's a [gist](https://gist.github.com/robzhu/3a6017c85758a682c759176f92e00fa7) of all the code we've written so far. 
+Here's a [gist](https://gist.github.com/robzhu/3a6017c85758a682c759176f92e00fa7) of all the code we've written so far.

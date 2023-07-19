@@ -17,8 +17,9 @@ images:
 
  The Big Dev Theory is a live stream broadcast every week on the AWS [Twitch](https://twitch.tv/aws) channel. Our live streams are designed to help developers learn about the advantages of our partner technologies and AWS, these events provide developers with the opportunity to learn from some of the top minds in the industry and connect with other developers who are working on similar projects. A key part of its mission to help developers build and innovate with confidence.
 
-Each episode, we chat with AWS partners and bring experts with specialized knowledge in various areas of technology to provide informative and engaging live streams that help developers stay up-to-date with the latest trends and tools.
+Join us Tuesday at 8AM PT/11 AM ET for every episode as we engage in insightful conversations with AWS partners and invite experts with deep knowledge across various technology domains. Our live streams are packed with informative and engaging content, designed to keep developers abreast of the latest trends and tools. Don't miss out! Sign up and subscribe today to access this valuable resource, helping you stay ahead in your development journey. Visit this [link](https://subscribethebigdevtheory.splashthat.com/) to sign up and subscribe to The Big Dev Theory now!
 
+https://youtu.be/xdiDUEPXkoc
 
 ## Hosts
 

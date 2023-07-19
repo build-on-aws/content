@@ -5,9 +5,10 @@ tags:
     - security
     - essentials
     - aws
+showInHomeFeed: true
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
-date: 2021-08-10
+date: 2022-08-10
 ---
 
 ## Introduction

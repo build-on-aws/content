@@ -14,17 +14,20 @@ authorName: Seth Eliot
 date: 2023-02-16
 ---
 
-When I arrived at Amazon as a developer in 2005 (before AWS was even a thing) I was handed an actual, physical pager (Figure 1). Why? Because developers at Amazon not only design and implement their services, but they deploy and manage operation of them as well. For that operations piece, developers take turn being "oncall" and available to diagnose and fix any problems. Hence, the pager.
+|ToC|
+|---|
 
-All this is to say, Amazon was doing DevOps before "DevOps" was even a term. [Amazon.com](http://amazon.com/) runs thousands of systems on AWS to power its worldwide marketplaces, video delivery, and other consumer services.  When the opportunity comes to re-architect, Amazon developers do so with DevOps in mind, so as to make it easier during oncall to deliver the best experience to their customers.
+When I arrived at Amazon as a developer in 2005 (before AWS was even a thing) I was handed an actual, physical pager (Figure 1). Why? Because developers at Amazon not only design and implement their services, but they deploy and manage operation of them as well. For that operations piece, developers take turn being "on call" and available to diagnose and fix any problems. Hence, the pager.
+
+All this is to say, Amazon was doing DevOps before "DevOps" was even a term. [Amazon.com](http://amazon.com/) runs thousands of systems on AWS to power its worldwide marketplaces, video delivery, and other consumer services.  When the opportunity comes to re-architect, Amazon developers do so with DevOps in mind, so as to make it easier during on call to deliver the best experience to their customers.
 
 ![Actual pager used at Amazon.com](images/figure01.png "Figure 1. Not mine, but an actual pager used at Amazon.com.")
 
-Here I will share several examples of Amazon.com teams and their applications, and how they architected for [continuous](https://aws.amazon.com/devops/continuous-delivery?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life), automated, independent deployment of the [microservices](https://aws.amazon.com/devops/what-is-devops?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life#microservices) behind those applications, using infrastructure as code. This enables innovation by allowing changes to get to production sooner without disrupting other components. And it makes oncall easier by aligning the business logic with the microservices and the teams that own them, so that any emergent problem gets to the right team sooner.
+Here I will share several examples of Amazon.com teams and their applications, and how they architected for [continuous](https://aws.amazon.com/devops/continuous-delivery?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life), automated, independent deployment of the [microservices](https://aws.amazon.com/devops/what-is-devops?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life#microservices) behind those applications, using infrastructure as code. This enables innovation by allowing changes to get to production sooner without disrupting other components. And it makes on call easier by aligning the business logic with the microservices and the teams that own them, so that any emergent problem gets to the right team sooner.
 
 ## IMDb
 
-The Internet Movie Database, or IMDb, is the world’s most popular source for movie, TV, and celebrity content. For years, their backend was a monolith, with a REST API running on 100s of EC2 instance hosts. This architecture worked, but innovation was slow, and oncall was a chore.
+The Internet Movie Database, or IMDb, is the world’s most popular source for movie, TV, and celebrity content. For years, their backend was a monolith, with a REST API running on 100s of EC2 instance hosts. This architecture worked, but innovation was slow, and on call was a chore.
 
 The backend is responsible for serving show titles, actors’ names, aggregate star ratings, images, release years... the list goes on and on. GraphQL was a good fit here, and using federated GraphQL, the backend could be divided into multiple microservices, each focused on a specific set of business logic — one serving images, another handling ratings, while another knows which actors are in which shows. Federated GraphQL enables each of these services to know only the schema it needs to know, while clients can request data that spans multiple microservices.
 
@@ -32,7 +35,7 @@ Here is how it works. Figure 2 shows a GraphQL query on the left (abbreviated) f
 
 ![IMDb federated GraphQL in action](images/figure02.png "Figure 2. IMDb federated GraphQL in action.")
 
-The gateway and each of the graphlets are separate stacks, independently deployable. As you can see, business logic for each graphlet is well-defined, and the teams that own those graphlets understand it and the technology behind it. Some graphlets were created from older services and fronted with a Lambda that can shape the proper response to the GraphQL query. Others are newer and completely serverless. The old ones can be replaced with the serverless ones without any disruption to the rest of the system. And teams find oncall easier now, because with no more monolith, it is clearer where problems are occurring and which team owns their resolution.
+The gateway and each of the graphlets are separate stacks, independently deployable. As you can see, business logic for each graphlet is well-defined, and the teams that own those graphlets understand it and the technology behind it. Some graphlets were created from older services and fronted with a Lambda that can shape the proper response to the GraphQL query. Others are newer and completely serverless. The old ones can be replaced with the serverless ones without any disruption to the rest of the system. And teams find on call easier now, because with no more monolith, it is clearer where problems are occurring and which team owns their resolution.
 
 ## Amazon Relay - Amazon’s mobile app for Truckers
 
@@ -84,7 +87,7 @@ In each of these three use cases, you have seen how continuous, automated, indep
 
 ## To learn more
 
-* [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](https://www.buildon.aws/concepts/devops-essentials/)
+* [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](/concepts/devops-essentials/)
 * [Reliable scalability: How Amazon.com scales in the cloud - re:Invent 2022](https://bit.ly/reliable2022) [all three examples, plus others]
 * [Building federated GraphQL on AWS Lambda](https://aws.amazon.com/blogs/compute/building-federated-graphql-on-aws-lambda?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life) [IMDb]
 * [The Story Behind Improving Resiliency of Large Scale Systems Through Cellularization](https://www.youtube.com/watch?v=ebLJMA1q3Go) [Amazon Fulfillment Technologies and Robotics]

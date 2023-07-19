@@ -8,6 +8,7 @@ tags:
   - dynamodb
   - rekognition
   - ai-ml
+  - aws
 authorGithubAlias: cpyle0819
 authorName: Corey Pyle
 additionalAuthors:
@@ -21,12 +22,8 @@ showInHomeFeed: true
 date: 2023-06-23
 ---
 
-1. [**Prologue**](#1-prologue) - Meet the team!
-2. [**Using ML**](#2-using-ml) - An app for Dan, which detects labels in images Dan uploads.
-3. [**Dealing with storage**](#3-dealing-with-storage) - How we chose storage mechanisms for large image datasets.
-4. [**Retrieving images**](#4-retrieving-images) - Dan wants to get the images back!
-5. [**Making it interactive**](#5-making-it-interactive) - Creating a secure web client for Dan to use.
-6. [**Epilogue**](#6-epilogue) - A summary of the team’s experience.
+|ToC|
+|---|
 
 ## 1. Prologue
 
@@ -55,7 +52,8 @@ Amazon Rekognition automates image recognition for applications without needing 
 After Rekognition detects the labels, they need to be stored somewhere. But having the labels alone isn’t enough - they need to map from the label back to a list of matching images. After a quick sketch of Dan’s UI (see 5. Making it Interactive), we knew we would also need to keep count of how many images matched each label. With only a single category of data, and no relational integrity constraints, a full SQL database like Postgres felt like overkill. We opted for DynamoDB for this data. The use of the detected labels as keys was a natural fit for DynamoDB’s key model. And with no need for sort or search, there was no need to design a sort key.
 
 The final database decision was what columns to track. Because we’d need to retrieve the individual images, we needed to track the set of images for the label. We knew we needed the count of images for each label. We didn’t know if we needed to track the count separately, because this information could be derived from the size of the set. The question then was whether we would be accessing this information more often (preferring a dedicated column) or updating more often (preferring keeping the data implicit). Reviewing the sketch of the UI, as well as the user stores (3. Dealing with Storage), our understanding of Dan meant that the access was more frequent than updates. We ended up with this table during our prototyping.
-<img src="./images/dynamodb.png" />
+
+![AWS Console showing entries in the DynamoDB table](./images/dynamodb.png)
 
 ## 3. Dealing with storage
 
@@ -93,7 +91,7 @@ To secure our routes, Dan will have to log in. If he has to log in, we have his 
 
 All of this infrastructure is great, but it’s still inaccessible to Dan. He needs some kind of user interface. We knew Dan was going to need to do three things: upload photos, view labels, and download photos. Some kind of user interface was needed. Before deciding on the technical architecture, we made the following napkin (text file) sketch.
 
-```
+```text
 (Upload images) (Import Bucket)
 Tags
 [ ] Mountain (32)
@@ -142,14 +140,11 @@ The code for this example is available in a few places. The main entry point is 
 
 ### End result
 
-_Hosted UI_
-<img src="./images/hostedui.png"/>
+![Hosted UI](./images/hostedui.png "Hosted UI")
 
-_Image upload_
-<img src="./images/upload.png"/>
+![Image upload](./images/upload.png "Image Upload")
 
-_Image labels_
-<img src="./images/labels.png"/>
+![Image labels](./images/labels.png "Image Labels")
 
 ## Appendix A - Implementations
 

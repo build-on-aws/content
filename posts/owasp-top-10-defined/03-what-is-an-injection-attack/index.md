@@ -1,14 +1,19 @@
 ---
 title: What is an Injection Attack?
-description: Injection attacks are another one of the OWASP Top 10 vulnerabilities and this articles explains what that involves and ways to migitate it.
+description: Injection attacks are another one of the OWASP Top 10 vulnerabilities and this articles explains what that involves and ways to mitigate it.
 tags:
   - owasp
   - network-security
   - application-security
+showInHomeFeed: true
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-09-02
 ---
+
+|ToC|
+|---|
+
 This is a 10-part series:
 
 | SeriesToC |

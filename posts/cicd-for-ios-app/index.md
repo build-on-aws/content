@@ -13,6 +13,9 @@ authorName: Sébastien Stormacq
 date: 2023-05-17
 ---
 
+|ToC|
+|---|
+
 When it comes to building, testing, and deploying applications, software development engineers and devops engineers must master the art of automation. Today, most backend or frontend web applications are built automatically and, sometimes, are also deployed to production as changes occur.
 
 The workflows that facilitate this process - fetching code, building it alongside code from other developers, running various tests, and even deploying the changes - are called continuous integration and continuous deployment, or CI/CD for short. CI/CD helps to reduce the time to deliver new code to your customers. It also helps to detect issues faster and to accelerate feedback cycles. The IT industry considers CI/CD as a best practice.
@@ -59,21 +62,21 @@ While many developers are comfortable using macOS and its graphical user interfa
 
 Let's tackle some of these challenges in the following sections. This post is a high-level overview of the steps, but I will write and add detailed tutorials in the coming weeks.
 
-## Your macOS Machine 
+## Your macOS Machine
 
-Using on-premises and self-managed machines for your pipelines is not a good idea. It often involves long procurement processes, which then leave you responsible for the physical installation and security of the machines. What's more, they're not easy to replace [when they fail](https://www.slideshare.net/AmazonWebServices/high-availability-websites-part-one/12-Everything_fails_all_the_time). 
+Using on-premises and self-managed machines for your pipelines is not a good idea. It often involves long procurement processes, which then leave you responsible for the physical installation and security of the machines. What's more, they're not easy to replace [when they fail](https://www.slideshare.net/AmazonWebServices/high-availability-websites-part-one/12-Everything_fails_all_the_time).
 
 Your development team will also ask you to have access to multiple machines running a mix of previous, current, and future versions of macOS and Xcode. This is often required to continue supporting older versions of your app running on older operating system versions and to test new releases as soon as beta versions of operating systems are available. Manually managing these configurations is a no-go over time.
 
 For the same reasons you choose to use managed services in the cloud, consider using macOS machines in the cloud instead of on-premises.
 
-The good news is that you have multiple options to do so. AWS offers [Amazon EC2 Mac](https://aws.amazon.com/ec2/instance-types/mac/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app) instances that combine all the things you know about EC2, applied to Mac Minis. The advantage of using EC2 Mac, when you are already using AWS and EC2, is that your macOS machines fit into your existing billing, provisioning, security, and auditing processes. You know how to automate their lifecycle using [Infrastructure as Code](/tags/infrastructure-as-code?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app). You know how to secure access using [security groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app), [SSH keys](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app), [IAM policies](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app) etc.
+The good news is that you have multiple options to do so. AWS offers [Amazon EC2 Mac](https://aws.amazon.com/ec2/instance-types/mac/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app) instances that combine all the things you know about EC2, applied to Mac Minis. The advantage of using EC2 Mac, when you are already using AWS and EC2, is that your macOS machines fit into your existing billing, provisioning, security, and auditing processes. You know how to automate their lifecycle using [Infrastructure as Code](/tags/infrastructure-as-code). You know how to secure access using [security groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app), [SSH keys](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app), [IAM policies](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app) etc.
 
-But you may also choose other providers, such as [circleci](https://circleci.com/docs/using-macos/), [Github](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources), [Gitlab](https://docs.gitlab.com/ee/ci/runners/saas/macos/environment.html#vm-images), or [Azure DevOps](https://azure.microsoft.com/en-us/products/devops/#features).
+But you may also choose other providers, such as [CircleCI](https://circleci.com/docs/using-macos/), [Github](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources), [Gitlab](https://docs.gitlab.com/ee/ci/runners/saas/macos/environment.html#vm-images), or [Azure DevOps](https://azure.microsoft.com/en-us/products/devops/#features).
 
 ## Your Build Tools
 
-Depending on your cloud provider, you may access a machine installed with just the OS, or already partially configured for development. In most cases, additional libraries and tools are required to meet your specific application requirements, such as the toolchain, dependencies, build tools, testing tools, monitoring and management agents, and so on. 
+Depending on your cloud provider, you may access a machine installed with just the OS, or already partially configured for development. In most cases, additional libraries and tools are required to meet your specific application requirements, such as the toolchain, dependencies, build tools, testing tools, monitoring and management agents, and so on.
 
 When I use EC2 Mac, some of the typical tools used by a cloud developer are pre-installed: [brew](https://brew.sh/), [the AWS command-line](https://formulae.brew.sh/formula/awscli), [the SSM agent](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-ssm-agent-macos.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app).
 
@@ -95,7 +98,7 @@ Installing these might take a significant amount of time (Xcode download and ins
 
 Build agents (or runners) are small applications that run your build and test commands, being based on shell scripts or build tools. Your code repository triggers the build agent when there is a change in your code. The build agent runs on macOS and will execute a sequence of commands that you specify in the build configuration. Most CI/CD systems use YAML files to describe a build pipeline. See the "Your Build Pipeline" section below for an example of the tasks I run.
 
-The build agent must be installed on the build machine. [Circleci](https://circleci.com/docs/runner-installation-mac/), [GitLab](https://docs.gitlab.com/runner/install/osx.html), and [GitHub](https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners) propose a build agent for macOS.
+The build agent must be installed on the build machine. [CircleCI](https://circleci.com/docs/runner-installation-mac/), [GitLab](https://docs.gitlab.com/runner/install/osx.html), and [GitHub](https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners) propose a build agent for macOS.
 
 I found out that the installation instructions from these three providers only address the case where you run your machine with a graphical user interface. The provided documentation doesn't cover the case where you want to run the agent as an operating system daemon, automatically started at boot time.
 
@@ -103,11 +106,11 @@ To understand the difference, I must explain a bit about how to start background
 
 Launch agents have access to the session context of the GUI, including the keychain. Launch daemons are started before a user login and have no access by default to the session context. This means launch daemons have no access to the user keychain, by default. The [keychain](https://support.apple.com/guide/keychain-access/what-is-keychain-access-kyca1083/mac) is a secure database where macOS store secrets. This is where you store the code signing key and certificate.
 
-Here we want to use the machine without GUI session ever. We must therefore install our build agent (runner) as a launch daemon. We also must tell the agent to run as a specific macOS user, from a working directory where it has enough permissions to read and write files. Finally, the `plist` launch script must contain the `<key>SessionCreate</key><true/>` line. It allows a daemon to create a session similar to a GUI session and to have access to the user keychain. 
+Here we want to use the machine without GUI session ever. We must therefore install our build agent (runner) as a launch daemon. We also must tell the agent to run as a specific macOS user, from a working directory where it has enough permissions to read and write files. Finally, the `plist` launch script must contain the `<key>SessionCreate</key><true/>` line. It allows a daemon to create a session similar to a GUI session and to have access to the user keychain.
 
 You will find an example of launch daemons scripts for [circleci](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.circleci/lanch-daemon-com.circleci.runner.plist), [GitHub](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.github/workflows/github-runner.md), and [GitLab](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.gitlab-runner.md) in [my repository](https://github.com/sebsto/amplify-ios-getting-started).
 
-## Your Build Scripts 
+## Your Build Scripts
 
 You write build scripts to build and test your applications. I typically develop [shell scripts](https://github.com/sebsto/amplify-ios-getting-started/tree/main/code/cli-build) for these tasks. Some customers use higher level build tools such as [fastlane](https://fastlane.tools/), [buck](https://fastlane.tools/) (from Facebook), or [bazel](https://bazel.build/) (from Google). The latter two make sense for complex builds, with many dependencies and large pool of developers. Don't embark on the journey to configure these tools for simple projects and small teams.
 
@@ -125,7 +128,7 @@ Typically, my builds are made of six distinct phases that must be accomplished i
 
 **Phase 1**: prepare the machine. I use this phase to prepare the machine before the build. This phase implies downloading the signing key and certificate and storing them into a temporary keychain created just for this build. I also verify if the Apple root signing certificate is correctly installed in the macOS System keychain, gather other secrets such as the Apple ID credentials and [the mobile provisioning profile](https://developer.apple.com/help/account/manage-profiles/create-a-development-provisioning-profile/).
 
-**Phase 2**: a security check. This phase usually triggers another system that checks the security status of the packages my application relies uppon. There are multiple systems available. I typically use [Snyk Open Source](https://snyk.io/product/open-source-security-management/).
+**Phase 2**: a security check. This phase usually triggers another system that checks the security status of the packages my application relies upon. There are multiple systems available. I typically use [Snyk Open Source](https://snyk.io/product/open-source-security-management/).
 
 **Phase 3**: the build itself.  Usually this is a single `xcodebuild` command.
 
@@ -137,9 +140,9 @@ Typically, my builds are made of six distinct phases that must be accomplished i
 
 Some systems (circleci and GitLab) entirely clean your directory between each phase of the build. It is important to configure the pipeline to keep the files or directories you want to preserve between phases.
 
-You will find examples of pipeline definitions for [circleci](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.circleci/config.yml), [GitHub](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.github/workflows/ContinuousIntegration.yml), and [GitLab](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.gitlab-ci.yml) in [my repository](https://github.com/sebsto/amplify-ios-getting-started).
+You will find examples of pipeline definitions for [CircleCI](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.circleci/config.yml), [GitHub](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.github/workflows/ContinuousIntegration.yml), and [GitLab](https://github.com/sebsto/amplify-ios-getting-started/blob/main/.gitlab-ci.yml) in [my repository](https://github.com/sebsto/amplify-ios-getting-started).
 
-## Your Other Challenges 
+## Your Other Challenges
 
 This article shares a high-level overview of the key points to pay attention to when preparing a macOS machine to run your CI/CD pipelines. I will complement this overview with hands-on tutorials covering the different steps I wrote about here. But before letting you experiment on your own, I would like to mention three typical other challenges you will encounter during your first project.
 

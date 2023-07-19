@@ -6,10 +6,13 @@ tags:
   - rest-apis
   - graphql
   - microservices
-authorGithubAlias: guimathed
+authorGithubAlias: codingmatheus
 authorName: Matheus Guimaraes
 date: 2022-08-26
 ---
+
+|ToC|
+|---|
 
 REST architecture has revolutionized the industry and powered much of the innovation of the last decades including microservice architecture which rose to prominence and rapidly became the new de-facto modern Service-Oriented Architecture (SOA) pattern.
 

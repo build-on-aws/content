@@ -11,6 +11,9 @@ authorName: Ricardo Ferreira
 date: 2022-08-22
 ---
 
+|ToC|
+|---|
+
 Every technology has that key concept that people struggle to understand. With databases, the struggle usually happens when you have to decide which join clause to use for fetching data from multiple tables. Which one is faster? What about consistency? How will concurrency look like if I pick this one versus the other? It is often a hard choice. Containers are another great example. Implementing persistence with containers is troublesome because each workload has its own set of requirements, and there is no silver bullet. For example, you may have a workload that requires each container to store 20% of the dataset locally, whereas the other 80% should go straight to a shared filesystem that is mounted on every container instance. But, you should not reuse this design for a microservices workload, for example.
 
 Just like any other technology, [Apache Kafka](https://kafka.apache.org/) also has a key concept that people struggle to understand, which is partitions. Partitions are tricky because they dictate pretty much everything about how Kafka works, and picking the right number is not simple. If you go to places like [Stack Overflow](https://stackoverflow.com/) and [Hacker News](https://news.ycombinator.com/), you will see developers providing objective answers to questions like how to install Kafka on Kubernetes, how to backup Kafka data on Amazon S3, and how to implement a Kafka consumer in Java. But when someone asks how many partitions to set for their Kafka topics, oh boy, this is where you see those long threads full of subjective opinions that more often than not don't provide a concrete answer. And even when they do, it is a total guessing game.

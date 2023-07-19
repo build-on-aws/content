@@ -7,6 +7,11 @@ tags:
   - augmenting-image-data
   - object-detection
   - low-code-no-code
+  - s3
+  - sagemaker
+  - ai-ml
+  - tutorials
+  - cloudformation
 showInHomeFeed: true
 authorGithubAlias: pechung
 authorName: Peter Chung
@@ -32,20 +37,21 @@ For the image preparation steps in Data Wrangler, we'll first handle corrupt or 
 
 Once the transformation steps are complete, we'll export the prepared images to another Amazon S3 bucket. We'll execute the job to process the images. Lastly, we'll clean up the environment so we don't incur charges after we're done.
 
-## Sections
-
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | 100 - Beginner                          |
+| ✅ AWS Level        | 200 - intermediate                         |
 | ⏱ Time to complete  | 120 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.84 |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents) <br> |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ? |
 | ⏰ Last Updated     | 2023-06-15 |
 
+|ToC|
+|---|
+
 ## Prerequisites
 
-Before starting this guide, you'll need an **AWS account**. If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) guide for a quick overview.
+Before starting this guide, you'll need an **AWS account**. If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents) guide for a quick overview.
 
 ## Implementation
 
@@ -288,7 +294,7 @@ To open the CloudFormation console, enter CloudFormation into the AWS console se
 
 ![search cfn](images/search-cfn.png)  
 
-Open the CloudFromation console. In the **CloudFormation** pane, choose **Stacks**. From the status dropdown list, select **Active**. Under Stack name, choose **sm-studio-tutorial** to open the stack details page.
+Open the CloudFormation console. In the **CloudFormation** pane, choose **Stacks**. From the status dropdown list, select **Active**. Under Stack name, choose **sm-studio-tutorial** to open the stack details page.
 
 On **sm-studio-tutorial** stack details page, choose **Delete** to delete the stack along with the resources it created in Step 1.
 
@@ -301,3 +307,5 @@ Congratulations! You have finished the tutorial on preparing image data using Am
 In this tutorial, you used Amazon SageMaker Data Wrangler to prepare image data using both built-in and custom transformations. You saved your steps as a Data Wrangler flow and executed the job to save the output to an Amazon S3 bucket.
 
 SageMaker Data Wrangler is one feature of a broad set of capabilities within Amazon SageMaker. You can explore how to create an end-to-end image preprocessing, model building and tuning, and model deployment pipeline by integrating SageMaker Data Wrangler with [Amazon SageMaker Autopilot](https://aws.amazon.com/sagemaker/autopilot/?sagemaker-data-wrangler-whats-new.sort-by=item.additionalFields.postDateTime&sagemaker-data-wrangler-whats-new.sort-order=desc?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents). Check out this [blog](https://aws.amazon.com/blogs/machine-learning/unified-data-preparation-and-model-training-with-amazon-sagemaker-data-wrangler-and-amazon-sagemaker-autopilot/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents) to see how. You can also learn more about [Amazon SageMaker's](https://aws.amazon.com/sagemaker/?nc=sn&loc=0?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-image-recognition-to-detect-traffic-accidents) broad set of features that meet various use cases for data scientists and business analysts. Happy building!
+
+If you enjoyed this tutorial, found any issues, or have feedback for us, [please send it our way!](https://pulse.buildon.aws/survey/DEM0H5VW).

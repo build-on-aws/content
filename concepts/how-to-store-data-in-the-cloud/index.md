@@ -2,12 +2,16 @@
 title: How to Store Data in the Cloud
 description: An introductory article on the different types of cloud storage and their application
 tags:
-  - cloud storage
+  - cloud-storage
   - foundational
+  - storage
 authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2022-09-26
 ---
+
+|ToC|
+|---|
 
 Whether you're building a website or a cloud application or backing up data, you need storage that is accessible and scalable. There are three main types of cloud storage: block storage, object storage, and file storage. Selecting the right type of storage will depend on what type of data you have and how you plan to access it.  
 
@@ -84,7 +88,7 @@ Block storage is ideal for transactional workloads where low latency for read an
 
 File storage is appropriate for many uses, but particularly for file sharing across resources. Its hierarchical design and resemblance to a traditional filing system make it accessible to people across an organization.
 
-There are many types of databases such as relational databases (RDMS), document databases, key-value pair databases, data warehouses, and data lakes. The following [article](https://blog.buildon.aws/posts/which-data-storage-option-do-i-choose) examines the type of storage appropriate for these databases.
+There are many types of databases such as relational databases (RDMS), document databases, key-value pair databases, data warehouses, and data lakes. The following [article](/posts/which-data-storage-option-do-i-choose) examines the type of storage appropriate for these databases.
 
 ## Frequently Asked Questions
 

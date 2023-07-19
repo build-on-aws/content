@@ -16,7 +16,7 @@ Welcome to episode 6 of Build On Weekly! 🥳
 
 Today [Jacquie](https://twitter.com/devopsjacquie) shows all of us and [Darko](https://twitter.com/darkosubotica) how she configures her local development environment on her Macbook. On top of that she shows off some tips and tricks on how to automate said configuration for easy migrations between systems!
 
-We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
+We will be posting here, on [Community.aws](/livestreams/build-on-weekly), to share **show notes, links, socials, code, and any other things mentioned** during the live stream with you! 🚀
 
 ![Jacquie and Darko Episode 6](images/header.webp)
 

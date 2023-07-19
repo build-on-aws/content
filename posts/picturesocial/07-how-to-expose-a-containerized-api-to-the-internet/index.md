@@ -6,6 +6,9 @@ tags:
   - csharp
   - api-gateway
   - api
+  - kubernetes
+  - vpc-link
+showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-03-01
@@ -33,15 +36,15 @@ In the following walk-through, we are going to learn how to expose our APIs whil
 
 ### **Pre-requisites:**
 
-* [An AWS Account](https://aws.amazon.com/free/)
+* [An AWS Account](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=07-how-to-expose-a-containerized-api-to-the-internet)
 * If you are using Linux or MacOS you can continue to the next bullet point. If you are using Microsoft Windows, I suggest you to use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
 * Install [Git](https://github.com/git-guides/install-git)
-* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+* Install [AWS CLI 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=07-how-to-expose-a-containerized-api-to-the-internet)
 * Install [.NET 6](https://dotnet.microsoft.com/en-us/download)
 
 OR
 
-* If this is your first time working with AWS CLI or you need a refresh on how to set up your credentials, I suggest you follow this step-by-step of how to [configure your local environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/). In this same link you can also follow steps to configure Cloud9, that will be very helpful if you don’t want to install everything from scratch.
+* If this is your first time working with AWS CLI or you need a refresh on how to set up your credentials, I suggest you follow this step-by-step of how to [configure your local environment](https://aws.amazon.com/es/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=07-how-to-expose-a-containerized-api-to-the-internet). In this same link you can also follow steps to configure Cloud9, that will be very helpful if you don’t want to install everything from scratch.
 
 ### Walkthrough
 
@@ -172,6 +175,6 @@ spec:
 
 ![API Request 200](images/07-api-request-200.jpg "API Request 200")
 
-If you get this far you have your backend secured through API Gateway and with very few steps! If you want to learn more you can go to the [API Gateway Developer guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-protect.html) for more information Thanks for reading and don’t miss the next post about how to deal with ambiguity when you need just in time compute power for uncertain demand.
+If you get this far you have your backend secured through API Gateway and with very few steps! If you want to learn more you can go to the [API Gateway Developer guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-protect.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=07-how-to-expose-a-containerized-api-to-the-internet) for more information Thanks for reading and don’t miss the next post about how to deal with ambiguity when you need just in time compute power for uncertain demand.
 
 [Continue to the next post about Just-in-time compute power with Kubernetes](picturesocial/08-how-to-add-just-in-time-capacity-kubernetes)
