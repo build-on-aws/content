@@ -78,9 +78,9 @@ aws cloudformation package --template-file main-stack.yaml --output-template pac
 7. Now we will click on the Sagamker IDE url and open Sagemaker studio where we will analyze our raw movie data , perform visualizations and come up with the right set of features for our movie data set.
 8. Once the Sagemaker Studio opens, 
     - Go to File -> New Terminal
-    - Execute the following on the terminal to download the python notebook from the S3 bucket. Replace the S3 bucket name with the S3 bucket name from the Cloudformation Output.
+    - Execute the following on the terminal to download the python notebook from the S3 bucket. Replace the `myfamousbucket` S3 bucket name in the below command with the S3 bucket name from the Cloudformation Output.
 ```bash
-aws s3 cp s3://<S3 Bucket Name>/python_notebook/AWSWomenInEngineering2023_V3.ipynb .
+aws s3 cp s3://myfamousbucket/python_notebook/AWSWomenInEngineering2023_V3.ipynb .
 ```
 9. Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins. The Jupyter notebook has a table of centents at the beginning of the notebook and every cell has detailed explanation of the steps being executed but I will call out some of the important cells of the notebook over here which will help provide an overview of the setup in the Jupyter Notebook. 
     - We start our data preparation process by downloading our data set from S3 and build a pandas data frame to start analyzing the data in cell#5. This is how the initial data structure in the pandas dataframe looks :-
