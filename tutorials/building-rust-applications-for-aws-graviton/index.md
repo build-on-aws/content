@@ -14,7 +14,7 @@ tags:
 showInHomeFeed: true
 authorGithubAlias: DDxPlague
 authorName: Tyler Jones
-date: 2023-06-15
+date: 2023-07-20
 ---
 
 Companies today are making sustainability a key goal for their business in order to improve operational efficiency and drive down cost while also lowering carbon emissions. Achieving these sustainability goals means change across all levels of the business, with application and software development being a key focus. With Rust applications, one of the easiest ways to make progress towards a sustainability goal is to adopt [AWS Graviton instances](https://aws.amazon.com/ec2/graviton/). AWS Graviton processors are designed by AWS to deliver the best price performance for your cloud workloads running in Amazon EC2.
@@ -34,7 +34,7 @@ In this tutorial, I will walk through the steps to take an existing application 
 | 🧩 Prerequisites    | - [AWS Account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html?sc_channel=el&sc_campaign=costwave&sc_content=building-rust-applications-for-aws-graviton&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br> - [Amazon DynamoDB Table](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/getting-started-step-1.html?sc_channel=el&sc_campaign=costwave&sc_content=building-rust-applications-for-aws-graviton&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/building-rust-applications-for-aws-graviton)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-06-15                             |
+| ⏰ Last Updated     | 2023-07-20                             |
 
 | ToC |
 |-----|
