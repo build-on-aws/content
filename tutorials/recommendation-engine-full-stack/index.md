@@ -71,7 +71,7 @@ aws cloudformation package --template-file main-stack.yaml --output-template pac
 	       KeyName=my-key \
 	--capabilities CAPABILITY_NAMED_IAM --region us-east-1
 ```
-4. Replace the values (myfamousbucket, buildonaws, MyBuildOnAWSVPC, us-east-1, ami-06ca3ca175f37dd66 ,my-key) with your desired default parameter values. ami-06ca3ca175f37dd66 is the AMI for EC2 For Amazon Linux 2023 in us-east-1 region. Choose an AMI for  EC2 For Amazon Linux 2023 for teh region in which you are deploying this stack. The purpose of this EC2 Instance which will be spun up is to populate the S3 bucket with the Jupyter notebook, pre-trained models, and raw data for our tutorial. After the S3 bucket is populated, the EC2 instance is spun down.
+4. Replace the values (myfamousbucket, buildonaws, MyBuildOnAWSVPC, us-east-1, ami-06ca3ca175f37dd66 ,my-key) with your desired default parameter values. ami-06ca3ca175f37dd66 is the AMI for EC2 For Amazon Linux 2023 in us-east-1 region. Choose an AMI for  EC2 For Amazon Linux 2023 for the region in which you are deploying this stack. The purpose of this EC2 Instance which will be spun up is to populate the S3 bucket with the Jupyter notebook, pre-trained models, and raw data for our tutorial. After the S3 bucket is populated, the EC2 instance is spun down.
 5. Next Login to the AWS console in which the tutorial setup will be done and validate that everything has been created properly. Look at all the Infrastructure resources that have been created for our tutorial. Go to the S3 bucket that has been created as part of this (In my case the name of the newly created S3 bucket is `myfamousbucket`).
 6. Take a quick look at the folder structure inside the S3 bucket. Here is how the folder structure should look like :-
 ![Shows the contents of the S3 bucket created by the Cloudformation template](images/s3bucket_data.png)
@@ -214,11 +214,11 @@ chalice new-project sagemaker-apigateway-lambda-chalice
 ```bash
 export AWS_DEFAULT_REGION=us-east-1
 ```
-6. Copy `requirements.txt` and `app.py` files from the `recommendation-engine-full-stack/apis_for_sagemaker_models chalice_custom_scaling_kmeans_api` folder to the root of the chalice project sagemaker-apigateway-lambda-chalice. Let's take a quick look at the `app.py` file. The `app.py` file receives the JSON Request from the movie attributes from the front end and invokes the 2 model endpoints for the custom scaling model and the kmeans clustering model deployed on sagemaker.
+6. Copy `requirements.txt` and `app.py` files from the `recommendation-engine-full-stack/apis_for_sagemaker_models chalice_custom_scaling_kmeans_api` folder to the root of the chalice project `sagemaker-apigateway-lambda-chalice`. Let's take a quick look at the `app.py` file. The `app.py` file receives the JSON Request from the movie attributes from the front end and invokes the 2 model endpoints for the custom scaling model and the kmeans clustering model deployed on sagemaker.
 Here is how my setup looks like. :-  
 ![Deployed endpoints in sagemaker](images/chaliceSetup.png) 
 
-Hence make sure to replace with the correct sagemaker endpoint name  for the custom scaling model and the kmeans model in this section of the code in `app.py` in teh chalice project `sagemaker-apigateway-lambda-chalice` as shown below
+Hence make sure to replace with the correct sagemaker endpoint name  for the custom scaling model and the kmeans model in this section of the code in `app.py` in the chalice project `sagemaker-apigateway-lambda-chalice` as shown below
 ```bash
 .....
 ......
@@ -245,7 +245,7 @@ chalice deploy
 This REST API will return the Cluster Number based on the movie attributes passed to it. We will be substituting this REST API endpoint in the UI Code later on. If you go to the AWS console, you can check the Lambda function and the API Gateway REST endpoints created by Chalice.
 
 
-9. For testing the deployed API do the following from teh Cloud 9 terminal
+9. For testing the deployed API do the following from the Cloud 9 terminal
 ```bash
 curl -X POST https://xxxxxxx.execute-api.us-east-2.amazonaws.com/api/ -H 'Content-Type: application/json' -d @- <<BODY 
 { 
@@ -257,7 +257,7 @@ curl -X POST https://xxxxxxx.execute-api.us-east-2.amazonaws.com/api/ -H 'Conten
 }
 BODY
 ```
-On succesful execution of the above request, you will get a Cluster number. Here is how my Cloud9 terminal looks like after getting back the response. :-  
+On succesful execution of the above request, you will get a Cluster number. Here is how my Cloud 9 terminal looks like after getting back the response. :-  
 ![REST API Response for Cluster Number based on movie attributes](images/clusternumber.png) 
 
 10. Test with Postman (Optional)
@@ -266,7 +266,7 @@ Example of Postman POST payload is
 {"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
 }
 ```
-11. Next we create the 2nd chalice project for the 2nd REST API which takes the Cluster Number as an input and returns back teh list of movies belonging to that Cluster from our Augmented data that we saved in the Glue database. We go to the root of the Cloud 9 environment by doing `cd ~/environment`
+11. Next we create the 2nd chalice project for the 2nd REST API which takes the Cluster Number as an input and returns back the list of movies belonging to that Cluster from our Augmented data that we saved in the Glue database. We go to the root of the Cloud 9 environment by doing `cd ~/environment`
 on the Cloud 9 terminal and then create a new chalice project by executing
 ```bash
   chalice new-project query-athena-boto3
@@ -303,7 +303,7 @@ curl -X POST https://yyyyyyy.execute-api.us-east-2.amazonaws.com/api/ -H 'Conten
 
 ![Modified UI Code](images/SetupUI.jpg) 
 
-Here is how my UI looks when everything is hooked up and the file is opened from the browser: Enter teh criteria like start Year, runtime Minutes, Rating, Number of Votes and the Genres:-<br/>
+Here is how my UI looks when everything is hooked up and the file is opened from the browser: Enter the criteria like start Year, runtime Minutes, Rating, Number of Votes and the Genres:-<br/>
 
 ![plot](images/myflix1.png)<br/>
 ![plot](images/myflix2.jpg)<br/>
@@ -319,6 +319,7 @@ Here is how my UI looks when everything is hooked up and the file is opened from
 
 
 🎥 Here are the 3 videos containing a hands-on implementation about this tutorial<br/>
+
 https://youtu.be/96IV4qBO0co
 
 https://youtu.be/9JzEybNli7Q
