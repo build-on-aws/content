@@ -1,5 +1,5 @@
 ---
-title: "Build On Live: Answered Episode 8 All About Terraform"
+title: "Build On Answered | Episode 8 | All About Terraform"
 description: "Check out the latest episode with Kerim Satirli from Hashicorp as we review some of the top viewed Terraform questions in the AWS Collective on Stack Overflow."
 tags:
     - iam
@@ -32,7 +32,7 @@ In this episode we will be focusing on Terraform. We have selected some of the t
 * [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
 * [**Kerim Satirli**](https://twitter.com/ksatirli), Senior Developer Advocate @ HashiCorp
 
-## This Weeks Questions:
+## This Weeks Questions
 
 1. [How are data sources used in Terraform?](https://stackoverflow.com/questions/47721602/how-are-data-sources-used-in-terraform)
 2. [How to attach multiple IAM policies to IAM roles using Terraform?](https://stackoverflow.com/questions/45486041/how-to-attach-multiple-iam-policies-to-iam-roles-using-terraform)
