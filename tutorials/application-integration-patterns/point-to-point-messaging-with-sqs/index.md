@@ -19,17 +19,26 @@ date: 2023-07-24
 
 ## Prerequisites
 
+If the CLI and CDK are installed, you should see the respective versions of your installations. If it isn't, you'll get an error telling you that the command can't be found.
+
 Before starting this tutorial, you will need the following:
 
-- AWS Account: If you don't have one, you can [sign up for free](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq). The AWS Free Tier gives you plenty of resources to play around with, including AWS Lambda and Amazon SQS, which is what we will be using.
-- The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- AWS Account: If you don't have one, you can [sign up for free](https://aws.amazon.com/getting-started/guides/setup-environment/). The AWS Free Tier gives you plenty of resources to play around with, including AWS Lambda and Amazon SQS, which is what we will be using.
+- The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/)
+
+This tutorial requires at least version 2 of the AWS CLI and AWS CDK. You can tell the version of both by running the following commands in a shell prompt:
+
+```bash
+aws --version
+cdk --version
+```
 
 | Attributes| |
 | ---- | ---- |
 | ✅ AWS Level | Intermediate - 200 |
 | ⏱ Time to complete | 30 minutes |
 | 💰 Cost to complete | Free when cleaning up after the tutorial (instructions below) |
-| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/) |
+| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/) |
 | 💻 Code Repository | The code for this tutorial is available on [GitHub](https://github.com/build-on-aws/point-to-point-messaging-with-amazon-sqs) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a quick star rating?</a>    |
 | ⏰ Last Updated     | 2023-07-24                             |
@@ -53,7 +62,7 @@ In this step-by-step tutorial, we will implement this pattern using two AWS Lamb
 
 In this step-by-step tutorial, we will implement a simple example using two AWS Lambda functions and an Amazon SQS queue.
 
-You will build the example using TypeSript and the AWS Cloud Development Kit (AWS CDK).
+You will build the example using TypeScript and the AWS Cloud Development Kit (AWS CDK).
 
 The example will consist of three components:
 - A *producer* that can send messages to the consumer
@@ -62,9 +71,9 @@ The example will consist of three components:
 
 ![Diagram showing the producer function that sends messages to the message queue, which in turn triggers the consumer function](images/diagram.png)
 
-In addition to implementing this pattern, we will also higlight the power of the AWS Cloud Development Kit (CDK) to define the entire infrastructure as code. If you want to learn more about the AWS CDK, have a look at the [AWS CDK Developer Guide](https://docs.aws.amazon.com/cdk/v2/guide/home.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+In addition to implementing this pattern, we will also highlight the power of the AWS Cloud Development Kit (CDK) to define the entire infrastructure as code. If you want to learn more about the AWS CDK, have a look at the [AWS CDK Developer Guide](https://docs.aws.amazon.com/cdk/v2/guide/home.html).
 
-By the end of this tutorial, you will have gained a solid understanding of the individual components of queue-based point-to-point messaging, successfully implemented asynchronous sommunication between two Lambda functions using SQS, and acquired some hands-on experience building infrastructure as code with CDK.
+By the end of this tutorial, you will have gained a solid understanding of the individual components of queue-based point-to-point messaging, successfully implemented asynchronous communication between two Lambda functions using SQS, and acquired some hands-on experience building infrastructure as code with CDK.
 
 But before we start coding, let's have a quick look at the pros and cons of the asynchronous point-to-point messaging pattern. 
 
@@ -85,59 +94,46 @@ When making architectural decisions, it is important to consider these trade-off
 
 But now, let's start the tutorial and learn how to implement this pattern using AWS Lambda and Amazon SQS.
 
-**A note on resource costs when coding along:** This tutorial uses only a minimal amount of resources, all of which are included in the [Free Tier provided by AWS](https://aws.amazon.com/free?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) for the first 12 months after creation of each account:
+**A note on resource costs when coding along:** This tutorial uses only a minimal amount of resources, all of which are included in the [Free Tier provided by AWS](https://aws.amazon.com/free) for the first 12 months after creation of each account:
 
 - A few kilobytes of code will be stored in Amazon S3, which provides 5 GB of free storage.
 - We will call SQS a couple of times, which provides 1 million free requests per month.
-- We will invocate two functions on AWS Lambda, which also provides 1 million free invocations per month.
+- We will invoce two functions on AWS Lambda, which also provides 1 million free invocations per month.
 
-So if you follow the step-by-step guide, you'll definitely stay within the free trier. I've also added a section to the end that helps you remove all the resources created during this tutorial.
-
-## Prerequisites
-
-We'll assume you already have an [AWS Account](https://aws.amazon.com/free?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq), the [AWS CLI installed and set up](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq), and the [AWS CDK installed](https://aws.amazon.com/getting-started/guides/setup-cdk/module-two/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq).
-
-This tutorial requires at least version 2 of the AWS CLI and AWS CDK. You can tell the version of both by running the following commands in a shell prompt (indicated by the $ prefix):
-
-```bash
-$ aws --version
-aws-cli/2.xx.xx ...
-
-$ cdk --version
-2.xx.xx ...
-```
-
-If the CLI and CDK are installed, you should see the respective versions of your installations. If it isn't, you'll get an error telling you that the command can't be found.
+So if you follow the step-by-step guide, you'll definitely stay within the free tier. I've also added a section to the end that helps you remove all the resources created during this tutorial.
 
 ## Step 1 - Create the CDK App
 
-### Initialize the CDK app
+### 1.1 - Initialize the CDK app
 
-First, you'll have to take care of some initial setup: You'll need to auto-generate some code that establishes a CDK project.
+First, you'll have to take care of the initial setup and let CDK auto-generate some code that establishes the project.
 
-From the command line create an empty directory where you'd like to store your code:
-
-```bash
-$ mkdir point-to-point-example
-$ cd point-to-point-example
-```
-
-Inside this directory, run the following command.:
+From the command line create a directory for the project, cd into the directory, and initialize the project:
 
 ```bash
-$ cdk init app --language typescript
+mkdir point-to-point-example
+cd point-to-point-example
+cdk init app --language typescript
 ```
 
-This will create few directories and some configuration files containing CDK-specific options and application-specific settings.
+This will create the basic file structure for the project and install the required packages.
 
-Now is a good time to open the project in your favorite IDE and have a look at the following two files:
+Now is a good time to open the project in your favorite IDE and have a look at the generated project, and specifically the following two files:
 
-- `lib\point-to-point-example-stack.ts` is where your CDK application’s main stack is defined. This is the file we’ll be spending most of our time in.
-- `bin\point-to-point-example.ts` is the entrypoint of the CDK application. It will load the stack defined in `lib\point-to-point-example-stack.ts`. In this tutorial we won’t need to look at this file anymore.
+```
+point-to-point-example/
+├── bin/
+│   └── point-to-point-example.ts
+├── lib/
+│   └── point-to-point-example-stack.ts
+└── ...
+```
 
-### The main stack
+The file `bin\point-to-point-example.ts` is the entrypoint of the CDK application. In this tutorial we won’t need to look at this file anymore.
 
-Open up `lib\point-to-point-example-stack.ts`. This is where we will define the infratsructure needed for our application:
+The file `lib\point-to-point-example-stack.ts` is where the application’s main stack is defined. This file is where we’ll be spending most of our time. 
+
+As we move forward through this tutorial, we will add the infrastructure for our application to the `PointToPointExampleStack` class in this file. Open it in your editor and have a look:
 
 ```typescript
 import * as cdk from 'aws-cdk-lib';
@@ -154,16 +150,14 @@ export class PointToPointExampleStack extends cdk.Stack {
 }
 ```
 
-As you can see, our app was created with an empty CDK stack (`PointToPointExampleStack`).
+### 1.2 - Bootstrap the Environment
 
-### Bootstrap an environment
+The first time you deploy an AWS CDK app into an environment, i.e. a specific AWS Account and Region, you need to bootstrap the environment with a **CDKToolkit** stack. This stack will deploy an S3 bucket that is used to store templates and assets during the deployment process of the actual application.
 
-The first time you deploy an AWS CDK app into an environment (account/region), you need to bootstrap your AWS accountwith a **CDKToolkit** stack. This stack includes resources that are used by the CDK. For example, the stack includes an S3 bucket that is used to store templates and assets during the deployment process.
-
-You can use the `cdk bootstrap` command to install the bootstrap stack into an environment:
+To bootstrap the environment, make sure you're still in the `point-to-point-example` directory, and execute the following command:
 
 ```bash
-$ cdk bootstrap
+cdk bootstrap
 ```
 
 This will take some time and will be completed once you see the following output on your command line:
@@ -172,40 +166,33 @@ This will take some time and will be completed once you see the following output
 ✅  Environment aws://[account_id]/[region] bootstrapped.
 ```
 
-### Let's deploy
+> Note: If this leads to an error, it is likely that either you haven't [configured the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html), or have already bootstrapped the environment. In the latter case you can simply continue to the next step.
 
-Change into the `point-to-point-example` directory, if you haven't already, and run the following command to deploy the CDK app:
+### 1.3 - Deploy the Initial Stack
 
-```bash
-$ cdk deploy
-```
-
-This will take some time and will be completed once you see something similar to the following output on your command line:
+To deploy the stack, make sure you're still in the `point-to-point-example` directory, and execute the following command:
 
 ```bash
-...
-
-✅  SqsTutorialStack
-
-✨  Deployment time: 11.96s
-
-Stack ARN:
-arn:aws:cloudformation:[region]:[account_id]:stack/SqsTutorialStack/...
-
-✨  Total time: 16.13s
+cdk deploy
 ```
+
+This command will *synthesize* the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/) template, and deploy it in your AWS account.
+
+> If you can't find the stack, make sure to choose the correct region by clicking on the name of the currently displayed Region in the navigation bar, and then choosing the Region to which you want to switch. Make sure it is the one that you used when configuring the AWS CLI.
 
 ![Screenshot of the Point to Point example stack in AWS CloudFormation](images/screen-stack.png)
 
-##  Step 2 - Create the SQS queue
+Now open and explore the stack details. In  the **Resources** tab you can see that it hasn't deployed anything, except for a resource called **CDKMetadata**, which are just some basic configuration details for our stack.
 
-**TODO below**
+##  Step 2 - Create the SQS Queue
 
-Now that your environment is set up, you can start creating the first resource for your app: An Amazon SQS queue.
+Once everything has been set up, you can create your first real resource, which will be an SQS queue.
 
-Open the file lib\point-to-point-example-stack.ts. 
+### 2.1 - Add the Queue to the Stack
 
-Depending on the template version, CDK may already have added a few import statements, including `aws-cdk-lib/aws-sqs` in a comment. If this is the case, remove the comment symbols `//` in front of `import * as sqs from 'aws-cdk-lib/aws-sqs'`, otherwise add it yourself, so that the first three lines of the file look like this:
+To get started, open the file `lib\point-to-point-example-stack.ts`.
+
+Depending on the version of the CDK template, it may already have added a few import statements, including `aws-cdk-lib/aws-sqs` in a comment. If this is the case, remove the comment symbols `//` in front of `import * as sqs from 'aws-cdk-lib/aws-sqs'`, otherwise add it yourself, so that the first three lines of the file look like this:
 
 ```typescript
 import * as cdk from 'aws-cdk-lib';
@@ -213,7 +200,7 @@ import { Construct } from 'constructs';
 import * as sqs from 'aws-cdk-lib/aws-sqs';
 ```
 
-Now remove the comments below the statement `super(scope, id, props)` and replace them with the following code:
+Now remove the comments inside the `PointToPointExampleStack` class, and replace them with the following code snippet and save your changes:
 
 ```typescript
 const queue = new sqs.Queue(this, 'Queue', {
@@ -221,27 +208,31 @@ const queue = new sqs.Queue(this, 'Queue', {
 });
 ```
 
-Save the file and deploy the application using the following command:
+#### 2.2 - Deploy the Queue
+
+To deploy the queue, run the following command in your project directory:
 
 ```bash
-$ cdk deploy
+cdk deploy
 ```
 
-This will create an SQS queue, which is our first real AWS resource, and can take a minute or so to complete.
+You can now monitor the deployment process in the terminal output, and after a minute or two it should be completed.
 
 Once the deployment has finished, navigate to your [list of SQS queues](https://console.aws.amazon.com/sqs/v2/home#/queues) in the AWS Management Console and find the queue named  **SqsTutorialStack-Queue...**:
 
-![Screenshot of the list of SQS queues in the AWS Management Console, including the queue that we have just created](images/screen-queue.png)
+#### 2.3 - Inspect the Deployed Queue
 
+Navigate to the [SQS Dashboard](console.aws.amazon.com/sqs/v2/home) in the AWS Management Console and look at the list of queues. If you can't find your queue, make sure you are in the correct region.
 
----
+![Screenshot of the list of SQS queues, including the queue called MyQueue](images/screen-queue.png)
+
 ## Step 3 - Create the Producer Function and Connect it to the Queue
 
 ### 3.1 - Write the Producer Function Source Code
 
-We'll use JavaScript for the Lambda function and store the source code in an assets folder inside the CDK application. This way, CDK can automatically package, upload, and deploy the function source to AWS.
+We'll use JavaScript for the Lambda function and store the source code in its own folder inside the CDK application. We'll later point from our CDK stack to this folder so that it can automatically package, upload, and deploy the contents to AWS.
 
-Make sure you are in the project directory and create the following sub-directories, as well as the file itself:
+Make sure you are in the project directory and create the following directories and the file itself:
 
 ```bash
 mkdir lambda-src
@@ -263,46 +254,50 @@ point-to-point-example/
 └── ...
 ```
 
-Open `lambda-src/producer/send_message_to_sqs.js` in your editor and add the following piece of code:
+Open the newly created file `lambda-src/producer/send_message_to_sqs.js` in your editor and add the following code:
 
 ```javascript
 const sqs = require("@aws-sdk/client-sqs");
 
+// Create an Amazon SQS service client
 const client = new sqs.SQSClient();
 
 exports.handler = async (event, context) => {
+  // Create a message, including the function's name from
+  // its execution context
+  const myMessage = 'Hello World from ' + context.functionName
 
-  const body = { 
-    message: 'Hello World from ' + context.functionName 
-  };
+  // Get the queue URL from the execution environment
+  const queueUrl = process.env.SQSQueueUrl
 
-const command = new sqs.SendMessageCommand({
-    MessageBody: JSON.stringify(body),
-    QueueUrl: process.env.SQSQueueUrl
+  // Create a SendMessageCommand containing the message
+  // and the queue URL
+  const command = new sqs.SendMessageCommand({
+    MessageBody: JSON.stringify({ message: myMessage }),
+    QueueUrl: queueUrl
   });
-  
+
+  // Send the message and return the result 
   const result = await client.send(command);
   return result;
 }
 ```
 
-The function starts by importing the `@aws-sdk/client-sqs` module, which provides the necessary tools for working with SQS, and using it to create an SQS client.
+This is a simple Lambda function handler that sends a message to our SQS queue and returns the result.
 
-The handler itself creates a `SendMessageCommand` object, including the actual message, and the URL of the queue, which it reads from an environment variable. We'll cover how to set this variable in a later step.
+Note that, since we don't necessarily know which queue to use when building this function, or may want to change it at a later point without having to change the function code, we retrieve the queue's URL from the execution environment. This way, we can dynamically define it during the Lambda function's deployment in the CDK stack.
 
-Lastly, the function sends the message using the SQS client, and returns the result of the call.
-
-### 3.2 - Add the Producer Function to the CDK Stack
+### 3.2 - Add the Producer Function to the Stack
 
 To create the actual Lambda function in AWS, you need to add it to the stack. To do this, open `lib/point-to-point-example-stack.ts`.
 
-First, add another import statement:
+First, add another import statement to the top of the file:
 
 ```typescript
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 ```
 
-Then add the following snippet inside the constructor, underneath `const queue = ...`:
+Next, add the following snippet inside the constructor, underneath the queue:
 
 ```typescript
 const producerFunction = new lambda.Function(this, 'Producer', {
@@ -316,15 +311,17 @@ const producerFunction = new lambda.Function(this, 'Producer', {
 });
 ```
 
-This will create a Lambda function that uses the Node.js runtime, packages and uploads everything inside the `lambda-src/producer` directory we've created above, and configures the function to use the handler function inside `send_message_to_sqs.js`.
+This will create a function, packages and the content of the `lambda-src/producer` directory, and configures the function to use the handler defined in `send_message_to_sqs.js` when it gets invoked.
 
-Additionally, it sets the environment variable `SQSQueueUrl` to the actual URL of the SQS queue, so that it can be accessed using `process.env.SQSQueueUrl` from within the function.
+It also dynamically sets the environment variable `SQSQueueUrl` to the actual URL of the SQS queue, so that it can be accessed using `process.env.SQSQueueUrl` from within the function.
 
 ### 3.3 - Grant Permissions to the Producer Function
 
-Every Lambda function requires a few fundamental IAM permissions, that CDK will deploy by default when creating the function. 
+Every Lambda function requires a few fundamental IAM permissions, that CDK will provide by default using a basic execution role. 
 
-However, it also needs permission to send messages to the queue, which we can add by simply calling the queue's `grantSendMessage` method. Add the following line below your `producerFunction`:
+However, our producer function need the additional permission to send messages to the queue. Luckily, in CDK we don't need to manage IAM policies by hand. We can use the SQS queue's `grantSendMessages` method with our Lambda function. 
+
+To do this, add the following line below your `producerFunction`:
 
 ```typescript
 queue.grantSendMessages(producerFunction);
@@ -335,28 +332,34 @@ queue.grantSendMessages(producerFunction);
 To deploy the function along with its source code, run the following command in the project directory:
 
 ```bash
-$ cdk deploy
+cdk deploy
 ```
 
-This will prepare the deployment of all new or changed resources, including the new IAM permissions required by the function. 
+This will prepare the deployment of any new or modified resources. 
 
-It is important to note that, if any changes to your stack require the creation or modification of IAM permissions, CDK will prompt you to double-check for security reasons.
+If any changes to your stack require the creation or modification of IAM permissions, CDK will prompt you to double-check these changes for security reasons. 
+
+In the screenshot below, you can see that CDK wants to deploy three changes that affect IAM permissions:
+
+- Allow the Lambda Service (`lambda.amazon.aws`) to assume the execution role attached to the Producer function.
+- Directly add the necessary permissions allowing the execution role to access and send messages to the SQS queue.
+- Add a managed policy with basic permissions to the execution role.
 
 ![Screenshot showing the confirmation dialog to deploy AWS IAM changes](images/screen-confirm-changes.png)
 
 Type `y` to confirm, and CDK will deploy the new Lambda function along with its IAM Role.
 
-### 3.5 - Test the Lambda Function
+### 3.5 - Test the Producer Function
 
 Once the function has been deployed, navigate to the Functions list in the [AWS Lambda Dashboard](https://console.aws.amazon.com/lambda).
 
-The function name is the one we defined in the stack: **Producer**. 
+The function name is the one we defined in the stack: **Producer**. If you can't find the function, make sure you are in the correct region.
 
-Click on it to open its details, and scroll down to the **Code source** section.
+Click on the function name to open its details, and scroll down to the **Code source** section.
 
 The folder in the file explorer on the left contains a file called `send_message_to_sqs.js`.
 
-Double-click on on the file name to open its source and you can see that it's an exact copy of the file we created in our assets folder.
+Double-click on on the file name to open its source where you can see that it's an exact copy of the file we created in the `lambda-src/producer` folder in our CDK project.
 
 ![Screenshot of the producer function source code in the AWS Management Console](images/screen-producer-source.png)
 
@@ -364,11 +367,9 @@ Now let's configure a test event.
 
 To do this, click on the **Test** button. If you haven't configured a test event yet, this wil open the test configuration screen. Enter an **Event name**, e.g. "test-event", and click on **Save**.
 
-Once the test event has been configured, click on **Test** again, which will now directly invoke the Lambda function.
+Once the test event has been configured, click on **Test** again, which will then directly invoke the Lambda function.
 
-This also creates an **Execution results** tab, including the test event name, the response, and some additional information.
-
-Have a look at the **Response**, which should contain the JSON object returned by the Lambda function, which is exactly what SQS returned as a response to `client.send()` with our message:
+This creates an **Execution results** tab, including the response:
 
 ```json
 {
@@ -383,37 +384,153 @@ Have a look at the **Response**, which should contain the JSON object returned b
 }
 ```
 
-Let's go and have a look at our SQS queue to see if we can find the message:
+Remember the code snippet in the Lambda function?
 
-Navigate to the [SQS Dashboard](console.aws.amazon.com/sqs/v2/home) in your AWS account and click on **MyQueue** to open the queue details. 
+```javascript
+const result = await client.send(command);
+return result;
+```
 
-Now click on the **Send and receive messages** button, and on the next page scroll down to the **Receive messages** section, and click on **Poll for messages**.
+The JSON object in the execution results above is exactly what SQS returned as a response to  `client.send(command)`, including some interesting information, like `"httpStatusCode": 200`,  which means that the queue has successfully received the message.
 
-This should show all messages that are currently in flight, including the one that your producer function has sent:
+### 3.6 - Manually Retrieve the Message from SQS
+
+Currently, the queue isn't connected to a consumer, so the message won't be picked up. However, we can manually retrieve the message.
+
+Navigate to the [SQS Dashboard](console.aws.amazon.com/sqs/v2/home), click on the queue to open its details page, and click the **Send and receive messages** button.
+
+On the next page scroll down to the **Receive messages** section, and click the button labeled **Poll for messages**, which should show all messages that are currently in flight, including the one that your producer function has sent when we tested it:
 
 ![Screenshot of the message that is currently available in the SQS queue](images/screen-message-in-flight.png)
 
-Now click on the message ID to open the message. It should contain the following body:
+Click on the message ID to open it. It should contain the following body:
 
 ```json
 {"message":"Hello World from Producer"}
 ```
 
-Congratulations! You've successfully deployed and tested the first Lambda function, which sends messages to the SQS queue.
+Congratulations! You've successfully deployed and tested a Lambda function that sends messages to an SQS queue.
 
-In the next step, we will build and deploy the consumer function and configure it to automatically be invoked, whenever a new message arrives in the queue.
+In the next step, we will build the consumer function and configure it so that it is automatically invoked whenever a new message arrives in the queue.
 
 ## Step 4 - Create the Consumer Function and Connect it to the Queue
 
-**TODO**
----
+### 4.1 - Write the Consumer Function Source Code
+
+The consumer function code will be stored in its own folder inside of `lambda-src`, so that CDK can automatically package and upload it into the new Lambda function.
+
+Make sure you are in the project directory (not in _bin/_ or _lib/_) and create the following directory, along with the source file:
+
+```bash
+mkdir lambda-src/consumer
+touch lambda-src/consumer/receive_message_from_sqs.js
+```
+
+Open `lambda-src/consumer/receive_message_from_sqs.js` in your editor and enter the following piece of code:
+
+```javascript
+exports.handler = async (event) => {
+  // Retrieve the message from the event and log it to the console
+  const message = event.Records[0].body;
+  console.log(message);
+}
+```
+
+This is a very simple Lambda function handler that unwraps the SQS message and prints it to the log.
+
+### 4.2 - Add the Consumer Function to the Stack
+
+To create the actual Lambda function in AWS, you need to add it to the stack. To do this, open `lib/point-to-point-example-stack.ts`.
+
+Add the following snippet inside the constructor, underneath `queue.grantSendMessages(producerFunction)`:
+
+```typescript
+    const consumerFunction = new lambda.Function(this, 'Consumer', {
+      functionName: 'Consumer',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      code: lambda.Code.fromAsset('lambda-src/consumer'),
+      handler: 'receive_message_from_sqs.handler'
+    });
+```
+
+This will create the consumer function, packages and the content of the `lambda-src/consumer` directory, and configures the function to use the handler defined in `receive_message_from_sqs.js` when it gets invoked.
+
+### 4.3 - Add the SQS Queue as an Event Source to The Consumer
+
+We want the function to be triggered whenever there is a new message on our queue. To do this, we need to add the queue as the function's *Event Source*, and also grant the function all necessary permissions to consume the messages.
+
+First, add another `import`  statement to the top of the file:
+
+```typescript
+import { SqsEventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
+```
+
+Next, add the following two lines underneath the `consumerFunction` definition:
+
+```typescript
+consumerFunction.addEventSource(new SqsEventSource(queue));
+queue.grantConsumeMessages(consumerFunction);
+```
+
+### 4.4 - Deploy the Consumer Function
+
+To deploy the function along with its source code, run the following command in the project directory:
+
+```bash
+cdk deploy
+```
+
+This will prepare the deployment of any new or modified resources, and -- again -- ask you to double-check the new IAM permissions.
+
+Type `y` to confirm, and CDK will deploy the new Lambda function, along with its execution role, and connect it to the SQS queue.
+
+Once the deployment is done, everything will be ready and connected. Let's see if it works.
+
+## Step 5 - End-to-End Test of the Application
+
+To test the application, we will manually invoke the producer function to send another message to the queue. Then we will check the execution logs of the consumer function to see if it has automatically been triggered and processed the message.
+
+### 5.1 - Invoke the Producer Function
+
+Follow the steps outlined in **3.5 - Test the Producer Function** to invoke the producer function again. Here's a short summary:
+
+- Navigate to the function list in the [AWS Lambda Dashboard](https://console.aws.amazon.com/lambda).
+- Open the **Producer** function by clicking on its name.
+- Scroll down to the **Code source** section.
+- Click on the **Test** button.
+- Make sure the function successfully executes.
+
+### 5.2 - Check the Consumer Function's Log
+
+Go back to the function list in the [AWS Lambda Dashboard](https://console.aws.amazon.com/lambda) and, this time, open the **Consumer** function.
+
+Scroll down, open the tab called **Monitor**, inside this tab, open the **Logs** tab, and have a look at the **Recent Invocations**, where you should find a link to the function's latest **LogStream**.
+
+
+> Please note that it may take some time for the log to be aggregated into the a log stream. If it doesn't show up, just wait a minute or so and then click the refresh button on the right.
+
+![Screenshot of the AWS Lambda page showing where to find the log stream](images/screen-lambda-execution-logs.png)
+
+Once it's there, click on the log stream link. This will show the log entry itself, which may look a bit confusing if you aren't used to the format.
+
+Simply look for the entry right in the middle between the two that start with `START RequestId: ...` and `END  Request Id: ...`.
+
+Click on the arrow to expand the entry where you should find the original message:
+
+![Screenshot showing the log entry that contains the message](images/screen-log-entry.png)
+
+And that's it!
+
+**Congratulations!** You've created everything you need to set up asynchronous point-to-point messaging between two Lambda functions, using SQS.
+
+There's so much more you can do with SQS, like batching messages, ensuring message order, and automatically sending faulty messages to a dead-letter queue (DLQ). If you want to learn more, check out the [Amazon SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html)
 
 ##  Clean-up
 
 Feel free to continue experimenting with the app. Once you're done, you can remove everything that has been deployed by executing:
 
 ```bash
-$ cdk destroy
+cdk destroy
 ```
 
 After a confirmation step, this will delete all resources that have been created as part of the stack. 
@@ -432,20 +549,22 @@ This will open a confirmation dialog. Double-check to make sure it is the asset 
 
 Now you can also delete the bucket. However, I recommend keeping the bucket for further experiments with AWS CDK. Don't worry about costs, empty S3 buckets are free of charge.
 
-## Conclusion
+## Recap
+
+Throughout this tutorial we have built a simple application that implements the asynchronous point-to-point messaging pattern. It consists of two Lambda functions -- a producer and a consumer -- that are loosely coupled via an SQS queue. When the producer places a message on the queue, the consumer automatically picks it up and processes it by unwrapping the message and printing it to the log. 
 
 The asynchronous point-to-point messaging pattern is a widely used communication model in modern web and cloud architectures, and I hope that by following this tutorial, you were able to gain a clear understanding of how you can implement this pattern using Amazon SQS and AWS Lambda.
 
 If you want to learn more, check out these additional resources:
 
-- The [Amazon Simple Queue Service (SQS) Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-- All articles tagged [architectural-patterns](https://community.aws/tags/architectural-patterns?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-- More [tutorials](https://community.aws/tags/tutorials?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) on community.aws
-- More [SQS messaging examples on ServerlessLand](https://serverlessland.com/search?search=sqs?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- The [Amazon Simple Queue Service (SQS) Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html)
+- All articles tagged [architectural-patterns](https://community.aws/tags/architectural-patterns)
+- More [tutorials](https://community.aws/tags/tutorials) on community.aws
+- More [SQS messaging examples on ServerlessLand](https://serverlessland.com/search?search=sqs)
 
 ## The Complete Source Code
 
-Here is the final source code for the CDK stack defined in `point-to-point-example/lib/point-to-point-example-stack.ts`:
+Here is the final source code for the CDK stack defined in `point-to-point-example/lib/point-to-point-example-stack.ts`. 
 
 
 ```typescript
@@ -503,24 +622,25 @@ Here's the source code for the producer function located in `point-to-point-exam
 ```javascript
 const sqs = require("@aws-sdk/client-sqs");
 
-// Create an Amazon SQS service client object.
+// Create an Amazon SQS service client
 const client = new sqs.SQSClient();
 
 exports.handler = async (event, context) => {
+  // Create a message, including the function's name from
+  // its execution context
+  const myMessage = 'Hello World from ' + context.functionName
 
-  // Wrap the message into an object
-  const body = { 
-    message: 'Hello World from ' + context.functionName 
-  };
+  // Get the queue URL from the execution environment
+  const queueUrl = process.env.SQSQueueUrl
 
-  // Create a SendMessageCommand with the wrapped message
-  // and the URL of the target queue
+  // Create a SendMessageCommand containing the message
+  // and the queue URL
   const command = new sqs.SendMessageCommand({
-    MessageBody: JSON.stringify(body),
-    QueueUrl: process.env.SQSQueueUrl
+    MessageBody: JSON.stringify({ message: myMessage }),
+    QueueUrl: queueUrl
   });
-  
-  // Send the message and return the result
+
+  // Send the message and return the result 
   const result = await client.send(command);
   return result;
 }
@@ -531,15 +651,15 @@ And here's the source code for the consumer function located in `point-to-point-
 ```javascript
 exports.handler = async (event) => {
   // Retrieve the message from the event and log it to the console
-  message = event.Records[0].body
+  const message = event.Records[0].body
   console.log(message);
 }
 ```
 
 ### GitHub Repository
 
-This example is also available as a [GitHub repository](https://github.com/build-on-aws/point-to-point-messaging-with-amazon-sqs). To clone it, simply execute:
+The code for this example is also available as a [GitHub repository](https://github.com/build-on-aws/point-to-point-messaging-with-amazon-sqs), including branches for the individual steps outlined in this tutorial. To clone it, simply execute:
 
 ```bash
-$ git clone https://github.com/build-on-aws/point-to-point-messaging-with-amazon-sqs.git
+git clone https://github.com/build-on-aws/point-to-point-messaging-with-amazon-sqs.git
 ```
