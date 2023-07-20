@@ -1,5 +1,5 @@
 ---
-title: "Build On Live: Answered Episode 9 - Boto3, Auto Scaling, and Chaos engineering"
+title: "Build On Answered | Episode 9 | Boto3, Auto Scaling, and Chaos engineering"
 description: "Join us for Build On Live: Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - iam
