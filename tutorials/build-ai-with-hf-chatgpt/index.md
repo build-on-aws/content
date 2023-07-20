@@ -7,6 +7,7 @@ tags:
     - gen-ai
     - chatgpt
     - hugging-face
+    - amazon-sagemaker
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
 date: 2023-07-20
@@ -22,7 +23,7 @@ Imagine if you could get a concise video summary, review it to determine whether
 
 In this tutorial, we will build exactly that!
 
-I will walk you through a step-by-step process on how to configure a free ML development environment using SageMaker Studio Lab, integrate it with open-source ML models from Hugging Face, and use OpenAI's ChatGPT APIs.
+I will walk you through a step-by-step process on how to configure a free ML development environment using Amazon SageMaker Studio Lab, integrate it with open-source ML models from Hugging Face, and use OpenAI's ChatGPT APIs.
 
 You will be able to apply these steps to other use cases by selecting different ML models or adjusting ChatGPT prompts.
 
@@ -31,7 +32,7 @@ You will be able to apply these steps to other use cases by selecting different 
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | Free when using the OpenAI API credit or less than $0.10      |
-| 🧩 Prerequisites    | - [SageMaker Studio Lab Account](https://studiolab.sagemaker.aws/) <br>-  Foundational knowledge of Python    |                           |
+| 🧩 Prerequisites    | - [Amazon SageMaker Studio Lab Account](https://studiolab.sagemaker.aws/) <br>-  Foundational knowledge of Python    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-07-20                             |
 
