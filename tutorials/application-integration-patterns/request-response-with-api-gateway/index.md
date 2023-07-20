@@ -469,3 +469,11 @@ exports.handler = async function (event, context) {
   };
 };
 ```
+
+### GitHub Repository
+
+The code for this example is also available as a [GitHub repository]([https://github.com/build-on-aws/point-to-point-messaging-with-amazon-sqs](https://github.com/build-on-aws/request-response-with-amazon-api-gateway)), including branches for the individual steps outlined in this tutorial. To clone it, simply execute:
+
+```bash
+git clone https://github.com/build-on-aws/request-response-with-amazon-api-gateway.git
+```
