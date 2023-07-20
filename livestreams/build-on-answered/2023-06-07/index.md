@@ -1,5 +1,5 @@
 ---
-title: "Build Answered Episode 06 - Talking Terraform with Rohini"
+title: "Build On Answered | Episode 06 | Talking Terraform with Rohini"
 description: "Join us for Build On Live: Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - build-on-live
