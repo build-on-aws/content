@@ -73,23 +73,21 @@ A blackbox model in our context $b: \mathcal{X} \rightarrow \mathcal{Y}$, $b\in 
 
 To evaluate a model we use an error measure that uses some topological distance mechanism on the output manifold to measure distance of a prediction to an observed value or $\mathcal{E} = \lVert p-o \rVert$, where $p$ is a predicted value and $o$ is an observed value. For instance RMSE (Root Mean Square Error) is a type of distance in a multi-dimensional space.
 
-```math
-$RMSE = \sqrt{{\frac{1}{n}} \sum_{i=1}^n(y_i-x_i)^2 }$.
-```
+$ RMSE = \sqrt{{\frac{1}{n}} \sum_{i=1}^n(y_i-x_i)^2 } $.
 
 ### Learning
 
 Given dataset $\mathcal{D}$, SML learning amounts to solving optimization problem:
 
-```math
+$$
 \large{ h^*=\text{arg} \min\limits_{h \in \mathcal{H}}\mathcal{E}(h(x)) }
-```
+$$
 
 In the case of parameteric models such as a deep learning model where the model parameters are represented as $\theta$ and optimized parameters as $\theta^*$, the optimization problem can be formulated as:
 
-```math
+$$
 \large{ \theta^*=\text{arg} \min\limits_{\theta}\mathcal{E}(h(x; \theta)) }
-```
+$$
 
 For most models solution to the optimization problem is often not unique. The matter is exasperated for complex models, specially in deep learning domain where we are faced with non-convex optimization and $\theta^*$ is only an approximation to an empirically acceptable local minima.
 
