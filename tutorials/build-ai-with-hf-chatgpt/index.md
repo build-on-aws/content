@@ -4,12 +4,12 @@ description: "A step-by-step guide to setting up a free ML Development environme
 tags:
     - tutorials
     - aws
-    - generative-ai
+    - gen-ai
     - chatgpt
     - hugging-face
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
-date: 2023-07-31
+date: 2023-07-20
 ---
 
 When was the last time you watched a YouTube video to learn something new? According to a [recent survey](https://www.techsmith.com/blog/video-statistics/) most respondents view videos 2-to-4 times per week, and [in a 2019 Google study](https://www.thinkwithgoogle.com/marketing-strategies/video/youtube-learning-statistics/), 86% of U.S. viewers said they used YouTube to learn new things.
@@ -31,8 +31,7 @@ You will be able to apply these steps to other use cases by selecting different 
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | Free when using the OpenAI API credit or less than $0.10      |
-| 🧩 Prerequisites    | - [SageMaker Studio Lab Account](https://studiolab.sagemaker.aws/)
-|    | -  Foundational knowledge of Python                           |
+| 🧩 Prerequisites    | - [SageMaker Studio Lab Account](https://studiolab.sagemaker.aws/) <br>-  Foundational knowledge of Python    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-07-20                             |
 
@@ -70,7 +69,7 @@ Let’s get started!
 
 ## Part 1 - Setup: SageMaker Studio Lab and OpenAI API Keys
 
-To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/) and click **Request free account**. Fill in the required information in the form and submit your request. You will receive an email to verify your email address. Follow the instructions in the email.
+To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/) and click `Request free account`. Fill in the required information in the form and submit your request. You will receive an email to verify your email address. Follow the instructions in the email.
 
 > Please note that your account request needs to be approved before you can register for a Studio Lab account. The review process typically takes up to 5 business days. Once your account request is approved, you will receive an email containing a link to the Studio Lab account registration page. This link will remain active for 7 days after your request is approved.
 
@@ -78,7 +77,7 @@ To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.
 
 To integrate and use Open AI models in your application, you need to register an [OpenAI account](https://platform.openai.com/signup/). Once you have completed the registration and sign-up process, you will need to create an API key. This API key is essential as it enables you to send requests to OpenAI from third-party services.
 
-Navigate to the [OpenAI API keys](https://platform.openai.com/account/api-keys) page and click **Create new secret key**. Provide a name, copy the key and save it. You won’t be able to access the key again!
+Navigate to the [OpenAI API keys](https://platform.openai.com/account/api-keys) page and click `Create new secret key`. Provide a name, copy the key and save it. You won’t be able to access the key again!
 
 > Please note that OpenAI currently offers a $5 credit for new users, allowing you to start experimenting with their APIs at no cost. This credit is available for use during the first 3 months of your account. After the initial 3-month period, the pricing will transition to a pay-as-you-go model. To get detailed information about the rates and pricing structure, I recommend visiting the [pricing page](https://openai.com/pricing) on the OpenAI website.
 
@@ -109,7 +108,7 @@ Let’s give the notebook a name and save it. From the Studio Lab menu, choose *
 
 ![Studio Lab - Create Python Notebook](images/part2-02.png)
 
-First, we will use pip to install all the packages required to complete this tutorial. Copy the code provided below and press Shift + Enter or click the Play button at the top to execute it.
+First, we will use pip to install all the packages required to complete this tutorial. Copy the code provided below and press `Shift + Enter` or click the `Play` button at the top to execute it.
 
 ```python
 #installing libraries
@@ -140,7 +139,7 @@ from transformers import pipeline
 
 We've completed all the required setup!
 
-Now we're ready to work on the second task as marked on the solution overview, which is to obtain a transcript of a YouTube video. I used [this educational video about AWS Regions and Availability Zones](https://www.youtube.com/watch?v=b9rs8yzpGYk). You can choose a different video and replace a link in the youtube_url variable. To get a YouTube video url, copy the URL up to "&" sign as shown in the screenshot below.
+Now we're ready to work on the second task as marked on the solution overview, which is to obtain a transcript of a YouTube video. I used [this educational video about AWS Regions and Availability Zones](https://www.youtube.com/watch?v=b9rs8yzpGYk). You can choose a different video and replace the link in the `youtube_url` variable. To get a YouTube video url, copy the URL up to the "&" sign, as shown in the screenshot below.
 
 > Note: I recommend starting with a video that is under 30 minutes. This will allow you to complete the tutorial more quickly, as executing commands for longer videos will take more time.
 
@@ -169,7 +168,7 @@ for segment in transcript:
 print(transcript_text)
 ```
 
-This code checks if a URL link is valid and then uses the *YouTubeTranscriptApi.get_transcript(video_id)* method to retrieve the YouTube transcript using the YouTube API. This method provides accurate and official captions associated with the video.
+This code checks if the URL link is valid and then uses the `YouTubeTranscriptApi.get_transcript(video_id)` method to retrieve the YouTube transcript using the YouTube API. This method provides accurate and official captions associated with the video.
 
 ## Part 3 - Summarizing and Translating a Transcript Using ML Models
 
@@ -179,7 +178,7 @@ We will be using the [Transformers](https://huggingface.co/docs/transformers/ind
 
 Let's assume that English is not your first language, and you would like to translate the YouTube transcript to Spanish. To achieve this, we can utilize a pretrained machine learning model specifically designed for translation. Translation involves converting a sequence of text from one language to another. It is a task that can be formulated as a sequence-to-sequence problem. By leveraging a pretrained sequence-to-sequence translation model, we can effectively translate the YouTube transcript from English to Spanish.
 
-You can try different pretrained translation models by updating the *model_checkpoint* variable. Hugging Face offers a wide range of over [2,500 translation models](https://huggingface.co/models?pipeline_tag=translation&sort=trending) to choose from. These models cover various languages.
+ Hugging Face offers a wide range of over [2,500 translation models](https://huggingface.co/models?pipeline_tag=translation&sort=trending) to choose from. These models cover various languages. You can try different pretrained translation models by updating the `model_checkpoint` variable in the code below.
 
 Copy and run the code below. It may take a few minutes to complete, depending on the length of a transcript.
 
@@ -205,7 +204,7 @@ for segment in segments:
 print(translated_text)
 ```
 
-Next, we will proceed with summarizing the video using a pretrained model for text [summarization](https://huggingface.co/docs/transformers/tasks/summarization#inference). In this case, I will be using the original transcript in English. However, if you choose to continue with a translated transcript, you can replace the *transcript_text* variable with the *translated_text* variable that contains the translated text. By applying the summarization model to the transcript, we can generate a concise summary of the video's content.
+Next, we will proceed with summarizing the video using a pretrained model for text [summarization](https://huggingface.co/docs/transformers/tasks/summarization#inference). In this case, I will be using the original transcript in English. However, if you choose to continue with a translated transcript, you can replace the `transcript_text` variable with the `translated_text` variable that contains the translated text. By applying the summarization model to the transcript, we can generate a concise summary of the video's content.
 
 Copy and run the code below. Wait until you see a summary.
 
@@ -247,7 +246,7 @@ We are now ready to move on to the final step, Step 4, where we will re-generate
 
 ## Part 4 - Extracting Steps and Creating a Quiz Using ChatGPT APIs
 
-To begin experimenting with ChatGPT, you will need to retrieve the API keys that you created in Part 1 and replace the value within the quotation marks for the openai.api_key variable in your code.
+To begin experimenting with ChatGPT, you will need to retrieve the API keys that you created in Part 1 and replace the value within the quotation marks for the `openai.api_key` variable in your code.
 
 Let's obtain a video summary using the ChatGPT model and compare it to the summary we obtained in the previous step using open-source models.
 
@@ -280,13 +279,15 @@ print("Summary:")
 print(summaries)
 ```
 
-Which summary do you think is better? I found a summary created by ChatGPT to be much more insightful.
+Which summary do you think is better?
+
+I found a summary created by ChatGPT to be much more insightful.
 
 We can proceed by modifying the prompts and instructing ChatGPT to extract the necessary steps from the video transcript. By doing so, we can generate a step-by-step guide that provides clear instructions for us to follow along. This will help us to have a structured, guided approach while engaging with the video content.
 
-The *system* parameter represents the instructions or context provided to the model to guide its behavior. It sets the overall behavior, tone, or role of the AI assistant. For example: "You are a technical instructor that provides step-by-step guidance." This helps set the expectation for the AI model and provides guidance on how it should respond.
+The *system* parameter represents the instructions or context provided to the model to guide its behavior. It sets the overall behavior, tone, or role of the AI assistant. For example: "You are a technical instructor that provides step-by-step guidance". This helps set the expectation for the AI model and provides guidance on how it should respond.
 
-The *user* parameter represents the input from the user. It is where you provide your specific requests, questions, or instructions to the AI model. For example, you might use a *user* prompt like, "Generate steps to follow from the transcript text."
+The *user* parameter represents the input from the user. It is where you provide your specific requests, questions, or instructions to the AI model. For example, you might use a *user* prompt like, "Generate steps to follow from the transcript text".
 
 ```python
 response = openai.ChatCompletion.create(
@@ -324,7 +325,7 @@ print("Quiz Questions:")
 print(quiz_questions)
 ```
 
-You will see a quiz with 10 question generated to test your knowledge. This can be especially helpful if you are preparing for exams. You can modify a prompt to explain the right answers - for example: "Generate 10 quiz questions based on the text with multiple choices and explain why a particular answer is the right one."
+You will see a quiz with 10 question generated to test your knowledge. This can be especially helpful if you are preparing for exams. You can modify a prompt to explain the right answers - for example: "Generate 10 quiz questions based on the text with multiple choices and explain why a particular answer is the right one".
 
 ![Quiz generated by ChatGPT](images/part4-01.png)
 
