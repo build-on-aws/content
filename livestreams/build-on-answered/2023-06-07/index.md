@@ -17,7 +17,7 @@ spaces:
   - livestreams
 ---
 
-Join us for Episode 06 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
+Join us for Episode 06 of Build On Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
 https://www.twitch.tv/videos/1850485117
 
