@@ -4,7 +4,7 @@ description: Learn step-by-step how to create an API Gateway endpoint and connec
 tags:
   - tutorials
   - aws
-  - architecture-patterns
+  - architectural-patterns
   - application-integration
   - microservices
   - serverless
