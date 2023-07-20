@@ -32,7 +32,7 @@ You will be able to apply these steps to other use cases by selecting different 
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | Free when using the OpenAI API credit or less than $0.10      |
-| 🧩 Prerequisites    | - [Amazon SageMaker Studio Lab Account](https://studiolab.sagemaker.aws/) <br>-  Foundational knowledge of Python    |                           |
+| 🧩 Prerequisites    | - [Amazon SageMaker Studio Lab Account](https://studiolab.sagemaker.aws/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) <br>-  Foundational knowledge of Python    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-07-20                             |
 
@@ -56,7 +56,7 @@ This tutorial consists of 4 parts:
 
 ![Solution Architecture Overview](images/intro-01.gif)
 
-In Part 1, we will configure 2 prerequisites: accessing the [SageMaker Studio Lab Development](https://aws.amazon.com/sagemaker/studio-lab/) environment and creating [OpenAI API](https://platform.openai.com/docs/api-reference) keys for interaction with ChatGPT. What makes SageMaker Studio Lab special is that it is completely free and separate from an AWS account. If you are new to machine learning, this free service is a fantastic way to get started!
+In Part 1, we will configure 2 prerequisites: accessing the [SageMaker Studio Lab Development](https://aws.amazon.com/sagemaker/studio-lab/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) environment and creating [OpenAI API](https://platform.openai.com/docs/api-reference) keys for interaction with ChatGPT. What makes SageMaker Studio Lab special is that it is completely free and separate from an AWS account. If you are new to machine learning, this free service is a fantastic way to get started!
 
 In Part 2, we will create a machine learning project that allows writing code directly from your browser, eliminating the need for a local setup. You will also learn how to run the code on CPU or GPU cloud instances. We will create a notebook, install libraries, and start experimenting.
 
@@ -70,7 +70,7 @@ Let’s get started!
 
 ## Part 1 - Setup: SageMaker Studio Lab and OpenAI API Keys
 
-To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/) and click `Request free account`. Fill in the required information in the form and submit your request. You will receive an email to verify your email address. Follow the instructions in the email.
+To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) and click `Request free account`. Fill in the required information in the form and submit your request. You will receive an email to verify your email address. Follow the instructions in the email.
 
 > Please note that your account request needs to be approved before you can register for a Studio Lab account. The review process typically takes up to 5 business days. Once your account request is approved, you will receive an email containing a link to the Studio Lab account registration page. This link will remain active for 7 days after your request is approved.
 
@@ -95,7 +95,7 @@ In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.open
 
 ## Part 2 - Obtaining a YouTube Video Transcript
 
-Once you have obtained access to the Studio Lab, sign into [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/).
+Once you have obtained access to the Studio Lab, sign into [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt).
 
 Under **My Project**, you can select a compute type and start project runtime based on a cloud compute instance. Studio Lab provides the option to choose between a CPU (Central Processing Unit) designed for compute intensive algorithms and a GPU (Graphical Processing Unit) which is recommended for deep learning tasks, particularly transformers and computer vision.
 
@@ -286,9 +286,9 @@ I found a summary created by ChatGPT to be much more insightful.
 
 We can proceed by modifying the prompts and instructing ChatGPT to extract the necessary steps from the video transcript. By doing so, we can generate a step-by-step guide that provides clear instructions for us to follow along. This will help us to have a structured, guided approach while engaging with the video content.
 
-The *system* parameter represents the instructions or context provided to the model to guide its behavior. It sets the overall behavior, tone, or role of the AI assistant. For example: "You are a technical instructor that provides step-by-step guidance". This helps set the expectation for the AI model and provides guidance on how it should respond.
+The `system` parameter represents the instructions or context provided to the model to guide its behavior. It sets the overall behavior, tone, or role of the AI assistant. For example: "You are a technical instructor that provides step-by-step guidance". This helps set the expectation for the AI model and provides guidance on how it should respond.
 
-The *user* parameter represents the input from the user. It is where you provide your specific requests, questions, or instructions to the AI model. For example, you might use a *user* prompt like, "Generate steps to follow from the transcript text".
+The `user` parameter represents the input from the user. It is where you provide your specific requests, questions, or instructions to the AI model. For example, you might use a `user` prompt like, "Generate steps to follow from the transcript text".
 
 ```python
 response = openai.ChatCompletion.create(
