@@ -1,5 +1,5 @@
 ---
-title: "Build On Live: Answered Episode 7 - Resilient Architecture"
+title: "Build On Answered | Episode 7 | Resilient Architecture"
 description: "Join us for Build On Live: Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - build-on-live
