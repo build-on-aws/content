@@ -19,6 +19,8 @@ The convergence of artificial intelligence (AI) and the retail industry has intr
 
 To effectively leverage GenAI and Stable Diffusion, retailers must first identify their specific use cases and assess the potential return on investment (ROI). This involves evaluating how these technologies can improve customer engagement, boost sales, or optimize supply chain operations. Allocating the right roles and responsibilities is crucial, requiring the hiring of data scientists, prompt engineers, project managers, and artists. Lastly, retailers must implement risk mitigation strategies to minimize the potential licensing risks associated with using copyrighted or restricted content. By carefully navigating these considerations, retailers can leverage the power of GenAI and Stable Diffusion to stay ahead in the competitive retail landscape.
 
+Amazon SageMaker is an excellent service for users seeking to harness the power of generative AI in the retail industry. With its complete machine learning capabilities and user-friendly interface, SageMaker empowers retailers to leverage generative AI technologies without the need for complex infrastructure provisioning or extensive data science expertise. Let's explore 3 solutions using sagemaker.
+
 ## Stable Diffusion on Amazon SageMaker solution
 
 * SageMaker Jumpstart
@@ -38,49 +40,64 @@ To effectively leverage GenAI and Stable Diffusion, retailers must first identif
   * Host the model on SageMaker Endpoint with auto-scaling capability to adjust the resource base on the request queues size.
   * All-in-one solution can integrate with your own model seamlessly. You just upload the model to S3 bucket then it would deploy the model to SageMaker Endpoint automatically without manual configuration.
 
+ Now that we have looked at three SageMaker solutions for generative AI, let's delve into some compelling use-cases that highlight how retailers can benefit from this transformative technology.
+
 ## Use case
 
 ### Scenario: Lift the limit of location and model for product images
 
 According to the market research, the price of hiring a model for product photography is around $200 per hour and would raise according to how many products you need to shot. Besides the cost of venue, equipments and makeup, it would be a pressure for smaller retailers. Stable Diffusion can help to lift the limit of location and model for product images in seconds.
 
-* Select the model and choose img2img tab on the webUI
-* Type the positive prompt: a Japanese/Indian female, high detailed face, masterpiece, beautiful
-* Type the negative prompt: uglay, lowres, low detailed, muted
-* Select “inpaint upload” to upload the original photo and masked photo.
-* Adjust the Mask Blur to “1” and select mask mode to “inpaint masked“
-* Click “Generate” then you will see the results
+* Select the 'img2img' tab from the menu options.
+* You'll find two fields: "Positive Prompt" and "Negative Prompt". In these fields, you can specify the attributes you want in your final image.
+* To generate a high-quality image, it is crucial to provide detailed prompts that encompass three essential elements.
+  * Object: what kind of object, the object look like, color and etc..
+  * Scene: background, indoor, outdoor, atmosphere and etc..
+  * Style: photo, sketch, painting, equipments and etc.
 
-![Picture2](images/Picture2.png)
-
-You can do the same steps with different masked such as clothes, background and so on, then you can get tones of product photos in seconds.
+Now, let's put the instructions mentioned above into practice and start typing your prompt. 
+1. In the 'Positive Prompt' field, type "living room, wabi style, light, curtain, indoor, warm, photo of interior design, masterpiece, high resolution, high quality"
+2. In the 'Negative Prompt', you can type the attributes you do not want in your image like "low resolution, low quality, watermark, dark, dirty, messy"
+3. Select “inpaint upload” to upload the original photo and masked photo, so you can make the model just inpaint for the masked area.
+4. Click “Generate” then you will see the results
 
 ![Picture3](images/Picture3.png)
 
+You can do the same steps with different masked such as models, clothes, and so on, then you can get tones of product photos in seconds.
+
+![Picture2](images/Picture2.png)
+
 ### Scenario: Efficiently generate the advertising materials to increase sales
 
-As the festivals coming, marketing team always be busy for designing the the advertising for sales and campaigns.  It requires a substantial effort to generate diverse advertising materials. Stable diffusion is a great tool for generating materials in seconds to compose your unique advertisements.
+As a festival season approaches, marketing teams are always busy designing advertising campaigns for sales and special events.  It requires a substantial effort to generate diverse advertising materials. Stable diffusion is a great tool for generating materials in seconds to craft your unique advertisements.
 
-Take an advertisement of windbreaker as example, we will need the materials like a forest scene, a model, a product photo and eye-catching words.
+Consider an advertisement for a windbreaker as an example. We would need materials like a forest scene, a model, a product photo, and compelling text. In addition to the prompt elements mentioned in the previous example, there are several valuable tips to further enhance the quality of prompts.
 
-* Select the model and choose txt2img tab on the webUI
-* Generate the materials with prompts separately.
+* The prompt's proximity to the beginning holds more weight in influencing the image generation process.
+* Parentheses ( ) signify assigning a weight of 1.1 to the enclosed prompt, while square brackets [ ] assign a weight of 0.91.
+* Multiple prompts can be linked using the "+" or "and" operators. For instance, to generate an image of a beach with people wearing sunglasses, simply type "beach+sunglasses" in the prompt.
+* To combine multiple prompts, use the "|" or "or" operator. For example, generating an image of a person with green-dyed hair can be achieved by typing "(green hair: 1.1) | (black hair: 1.4)" in the prompt.
+
+Now, armed with the tips mentioned above, you can leverage them to effortlessly generate materials in seconds and craft your own unique advertisements. 
+
+1. Select the model and choose txt2img tab on the webUI
+2. Generate the materials with prompts separately.
   * a photo of breathtaking forest scene, raining and foggy, lush forest in the mountain, muddy trail, majestic and astonishing forest scene, masterpiece, high resolution, high quality, hdr, fujifilm xt4, 50mm, f/1.6, sharp focus, high detailed
   * a product photo of yellow windbreaker , masterpiece, (full body), (yellow windbreaker:1.3), sport pants, hiking boots, handsome and young man, normal eyes, high detailed face, High Detail, Sharp focus, lightly smile, nature skin, realistic, intricate, depth of field, fujifilm xt4, medium shot, hdr, 8k, highres, modelshoot style
   * A photo of raining splatter on the (yellow windbreaker), (waterproof), masterpiece, high detail, high resolution, 8k, hdr, (micro shot),
   ![Picture4](images/Picture4.png)
-* Then easily assemble the materials to an advertisement
+3. Then easily assemble the materials to an advertisement
   ![Picture6](images/Picture6.gif)
 
 ## Fine-tune the LoRA model with your own images data
 
-In many cases, users require more than just image generation from Stable Diffusion. They often need to utilize the model to generate images that feature specific products or models. For instance, consider a scenario where a retailer collaborates with Key Opinion Leaders (KOLs) to enable them to select endorsements online then employ Stable Diffusion model that can swiftly generate product photography for sales purposes. Therefore, users require a streamlined pipeline that automates the fine-tuning of the model using their own image data. The architecture is following.
+In many cases, users require more than just image generation from Stable Diffusion. They often need to utilize the model to generate images that feature specific products or models. For instance, consider a scenario where a retailer collaborates with Key Opinion Leaders (KOLs) to enable them to select endorsements online then employ Stable Diffusion model that can swiftly generate product photography for sales purposes. Therefore, users require a streamlined pipeline that automates the fine-tuning of the model using their own image data. The architecture is as follows:
 
 ![Architecture3](images/Architecture3.png)
 
 As users upload their own images data to S3 input bucket, S3 would send the event to trigger Lambda to start the SageMaker Notebook Instance for training. The instance will use pre-built lifecycle configuration to run the training scripts then export the model to S3 output bucket. Then S3 would send the event to trigger Lambda to shutdown the instance to avoid unnecessary cost. You can follow the steps below to build the pipeline.
 
-### Step1. Create an SageMaker Notebook Instance for fine-tuning
+### Step1. Create a SageMaker Notebook Instance for fine-tuning
 
 Prepare a notebook instance with GPU for fine-tuning. I choose the `ml.g4dn.xlarge` as example.
 
@@ -102,7 +119,7 @@ Prepare your own images of products or characters, also the captions for each im
 
 Build a training script for LoRA model training with your own images. I will following this [sample code](https://github.com/terrificdm/dreambooth-stablediffusion-sagemaker-notebook/blob/main/sd-lora-db-finetune-character.ipynb) which modified from[kohya-ss/sd-scripts](https://github.com/kohya-ss/sd-scripts) to build the training script.
 
-#### Install depemdencies
+#### Install dependencies
 
 ```bash
 !pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
@@ -367,4 +384,4 @@ Now, you are all set. You can try to upload the **training_data.zip** to start t
 
 In conclusion, SageMaker provides a user-friendly ML platform that enables retailers to quickly start and accelerate their ML projects. With its managed infrastructure and pre-built algorithms, retailers can reduce the overhead of infrastructure management and focus on developing and fine-tuning their ML models. Additionally, SageMaker's autoscaling feature allows for seamless handling of unpredictable demand, ensuring a reliable and scalable AI service for retailers.
 
-Overall, SageMaker empowers retailers with a streamlined ML platform, enabling them to leverage AI capabilities effectively and drive innovation in the retail industry. By leveraging SageMaker's quick start capabilities, reduced infrastructure management overhead, and autoscaling features, retailers can expedite their AI initiatives, deliver exceptional customer experiences, and stay competitive in the evolving retail landscape.
+Overall, SageMaker empowers retailers with a streamlined ML platform, enabling them to leverage AI capabilities effectively and drive innovation in the retail industry. By leveraging SageMaker's quick start capabilities, reducing infrastructure management overhead, and utilizing its autoscaling features, retailers can expedite their AI initiatives. This can help deliver exceptional customer experiences, and enable them to stay competitive in the evolving retail landscape.
