@@ -1,6 +1,6 @@
 ---
 title: Create and Query a NoSQL Table with Amazon DynamoDB
-description:
+description: In this tutorial, you will learn how to create a simple table, add data, scan and query the data, delete data, and delete the table by using the DynamoDB console.
 tags:
     - nosql
     - database
