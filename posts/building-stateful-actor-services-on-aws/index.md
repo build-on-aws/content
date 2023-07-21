@@ -3,7 +3,6 @@ title: "Stateless Isn’t Always the Answer. Building Stateful Actor Services on
 description: Building stateless and stateful services can be challenging. Actor model and actor frameworks offer a great way of implementing reliable and highly scalable stateful services on AWS.
 tags:
   - microservices
-  - actors
   - concurrency
   - eks
   - kubernetes
@@ -11,7 +10,7 @@ tags:
   - csharp
 authorGithubAlias: bbgu1
 authorName: Bo Guan
-date: 2023-05-16
+date: 2023-07-21
 ---
 
 |ToC|
