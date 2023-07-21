@@ -145,11 +145,13 @@ You should get output that looks like the following:
 Your full URL is https://aws.amazon.com/ec2/graviton/
 ```
 
-## Performance Testing Results
+## Load Testing Results
 
-Performance testing is key when comparing multiple instance types. In order to compare a `c6g.xlarge` and a `c5.xlarge` instances we will be performing a load test to understand how many requests per second each instance type can serve. We discuss various load testing methodologies in the [Graviton Technical Guide on GitHub](https://github.com/aws/aws-graviton-getting-started) and recommend using a framework like [wrk2](https://github.com/kinvolk/wrk2). `wrk2` is a  version of `wrk` that is modified to produce a constant throughput load and report accurate latency details across various percentiles. I decided to go ahead and use `wrk2` to test the `shorten_url` function of our application and compare the total requests per second served as well as the average latency at each percentile during our load test.
+Performance testing is key when comparing multiple instance types. In order to compare a `c6g.xlarge` and a `c5.xlarge` instance we will be performing a load test to verify that the application built for Graviton is working as expected. We discuss various load testing methodologies in the [Graviton Technical Guide on GitHub](https://github.com/aws/aws-graviton-getting-started) and recommend using a framework like [wrk2](https://github.com/kinvolk/wrk2). `wrk2` is a  version of `wrk` that is modified to produce a constant throughput load and report accurate latency details across various percentiles. I decided to go ahead and use `wrk2` to test the `shorten_url` function of our application and compare the total requests per second served as well as the average latency at each percentile during our load test. I've kept the load tests simple in this guide to illustrate that testing is important.
 
-### Load test Setup
+Every time you make a software or hardware change you should re-evaluate your existing configuration and assumptions to ensure you are getting the full benefit of your new configuration. While full performance testing and optimization is outside the scope of this blog we have a [comprehensive performance runbook](https://github.com/aws/aws-graviton-getting-started/blob/main/optimizing.md) and [Rust specific page](https://github.com/aws/aws-graviton-getting-started/blob/main/rust.md) in our AWS Graviton Technical Guide and your AWS team is always ready to help with any questions you may have.
+
+### Load test setup
 
 Because our `shorten_url` function uses the POST method and requires some data, we need a lua config file to pass to wrk2. My `post.lua` file has the following content:
 
