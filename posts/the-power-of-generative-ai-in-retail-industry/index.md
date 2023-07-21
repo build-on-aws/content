@@ -19,7 +19,9 @@ The convergence of artificial intelligence (AI) and the retail industry has intr
 
 To effectively leverage GenAI and Stable Diffusion, retailers must first identify their specific use cases and assess the potential return on investment (ROI). This involves evaluating how these technologies can improve customer engagement, boost sales, or optimize supply chain operations. Allocating the right roles and responsibilities is crucial, requiring the hiring of data scientists, prompt engineers, project managers, and artists. Lastly, retailers must implement risk mitigation strategies to minimize the potential licensing risks associated with using copyrighted or restricted content. By carefully navigating these considerations, retailers can leverage the power of GenAI and Stable Diffusion to stay ahead in the competitive retail landscape.
 
-Amazon SageMaker is an excellent service for users seeking to harness the power of generative AI in the retail industry. With its complete machine learning capabilities and user-friendly interface, SageMaker empowers retailers to leverage generative AI technologies without the need for complex infrastructure provisioning or extensive data science expertise. Let's explore 3 solutions using sagemaker.
+Amazon SageMaker is an excellent service for users seeking to harness the power of generative AI in the retail industry. With its complete machine learning capabilities and user-friendly interface, SageMaker empowers retailers to leverage generative AI technologies without the need for complex infrastructure provisioning or extensive data science expertise. 
+
+Let's explore 3 solutions using SageMaker:
 
 ## Stable Diffusion on Amazon SageMaker solution
 
@@ -46,7 +48,7 @@ Amazon SageMaker is an excellent service for users seeking to harness the power 
 
 ### Scenario: Lift the limit of location and model for product images
 
-According to the market research, the price of hiring a model for product photography is around $200 per hour and would raise according to how many products you need to shot. Besides the cost of venue, equipments and makeup, it would be a pressure for smaller retailers. Stable Diffusion can help to lift the limit of location and model for product images in seconds.
+According to the market research, the price of hiring a model for product photography is around $200+ per hour and would rise according to how many products you need to shoot. Besides the cost of venue, equipments and makeup, it can add pressure for smaller retailers. Stable Diffusion can help to lift the limit of location and model for product images in seconds.
 
 * Select the 'img2img' tab from the menu options.
 * You'll find two fields: "Positive Prompt" and "Negative Prompt". In these fields, you can specify the attributes you want in your final image.
