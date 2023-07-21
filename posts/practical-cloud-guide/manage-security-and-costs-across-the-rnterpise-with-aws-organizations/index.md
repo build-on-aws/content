@@ -1,5 +1,5 @@
 ---
-title: "Manage Your Enterpise With AWS Organizations"
+title: "Manage Security and Costs Across the Enterpise With AWS Organizations"
 description: "As an IT Pro, managing your organization's computing resources is a key role. AWS Organizations provides the tools to organize and manage user accounts and cloud resources for security and cost control at the enterprise level."
 tags:
     - aws-iam
