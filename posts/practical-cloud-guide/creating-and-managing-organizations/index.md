@@ -1,6 +1,6 @@
 ---
-title: "Creating and Managing Organizations"
-description: "An introduction to AWS Organizations for managing AWS accounts and their access to services and resources. The article covers basic concepts, best practices, and provides links to tutorials."
+title: "Manage Your Enterpise With AWS Organizations"
+description: "As an IT Pro, managing your organization's computing resources is a key role. AWS Organizations provides the tools to organize and manage user accounts and cloud resources for security and cost control at the enterprise level."
 tags:
     - aws-iam
     - organizations
@@ -36,7 +36,7 @@ Before starting this tutorial, you will need an AWS Account. If you don't yet ha
 
 ## Concepts
 
-AWS Organizations is a service for managing AWS accounts. It provides centrally managed billing, compliance, access control, security, and cloud resources. Organizations are made up of a management account, member accounts,  organizational units, and policies.
+AWS Organizations is a service for managing AWS accounts. It provides centrally managed billing, compliance, access control, security, and cloud resources. AWS Organizations are made up of a management account, member accounts,  organizational units, and policies.
 
 The **Management Account** creates member accounts, organizational units, and policies. Only highly trusted individuals have access to this account that follow the [Principles of Least Privilege](https://docs.aws.amazon.com/wellarchitected/latest/framework/sec_permissions_least_privileges.html). Best practice is to create a new AWS account as the management account and invite your account into the organization. The management account should use an email address to a shared account to prevent loss of access, if a sole owner leaves the organization. In addition to managing users and policies, the management account also controls automation tooling used to deploy the guardrails or other user policies.
 
@@ -63,11 +63,11 @@ You can get hands-on experience to create an organization with this [Tutorial: C
 
 ## Best practices
 
-The above tutorial will walk you through each step of the process, however, there are best practices associated with each step.
+The above tutorial walks you through each step of the process for creating an Organization. If you want to skip ahead or do the tutorial later, here's a summaru of best practices associated with each part of an Organization.
 
 ### Organization
 
-- Organizations offer [four support plans](https://aws.amazon.com/premiumsupport/plans/). If you will be doing formal development and production, choose the Business support plan.
+- AWS Organizations offer [four support plans](https://aws.amazon.com/premiumsupport/plans/). Support plans are tailored to how you will use AWS Organizations. If you are just starting with AWS, choose the Developer plan to learn about the service. Next step up is the Business support plan. Choose this option if you are performing formal development and running production workloads. The Enterprise support plans are for organization running misson critical business and production workloads on AWS.
 
 ![Organization support plans](./images/support_plans.png)
 
@@ -97,20 +97,22 @@ The above tutorial will walk you through each step of the process, however, ther
 
 ### Testing SCPs
 
-- Organizations do not have a direct way to test the effect of SCPs. However, the AWS Identity and Access Management (IAM) Access Advisor can show last accessed services for an Organization. This function is also available through the AWS CLI with the command `aws generate-organizations-access-report` and the AWS API with [GenerateOrganizationsAccessReport](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq). The Access Identity and Access Management Guide has the details on [viewing last accessed information for Organizations](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-view-data-orgs.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+- AWS Organizations do not have a direct way to test the effect of SCPs. However, the AWS Identity and Access Management (IAM) Access Advisor can show last accessed services for an Organization. This function is also available through the AWS CLI with the command `aws generate-organizations-access-report` and the AWS API with [GenerateOrganizationsAccessReport](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq). The Access Identity and Access Management Guide has the details on [viewing last accessed information for AWS Organizations](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-view-data-orgs.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ![Organization access report](./images/organization-access-report.png)
 
 - The alternative way to test SCPs is to use AWS CloudTrail and you can follow steps on [how to create a trail for an organization](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-## What you have accomplished
+## Summary
 
 This is an introduction to AWS Organizations. It is important to note that organizational policies control access to a defined set of services and resources across an organization, and it does not grant you permissions.
 
-For example, an OU inherits access to Amazon S3 (Amazon Simple Storage Service) through a SCP but a member of that OU does not have the permission to create any storage, unless they have an IAM identity policy that explicitly allows them to do so. To summarize, Organizations centrally managed billing, compliance, access control, and security of the cloud resources.
+For example, an OU inherits access to Amazon S3 (Amazon Simple Storage Service) through a SCP but a member of that OU does not have the permission to create any storage, unless they have an IAM identity policy that explicitly allows them to do so. To summarize, AWS Organizations centrally managed billing, compliance, access control, and security of the cloud resources.
 
-Links to Organizations resources are available throughout this post. You are encouraged to complete the above mentioned tutorial and explore provided links for best practices.
+Links to AWS Organizations resources are available throughout this post. You are encouraged to complete the above mentioned tutorial and explore provided links for best practices.
 
 ## What's next
 
-Organizations provide a framework for managing accounts through organization units and service control policies. However, OU members or accounts require fine grained control to specify who or what can access the AWS services and resources in those accounts. In the following article, you will learn about best practice for securing accounts and how to use [AWS Identity and Access Management (IAM)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq) to manage fine grain access across AWS services and resource.
+AWS Organizations provide a framework for managing accounts through organization units and service control policies. With AWS Organizations you can set policies that control access to services at the enterprise level enabling security and cost controls across your companuy.
+
+ However, OU members or accounts require fine grained control to specify who or what can access the AWS services and resources in those accounts. In the following article, you will learn about best practice for securing accounts and how to use [AWS Identity and Access Management (IAM)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq) to manage fine grain access across AWS services and resource.
