@@ -17,22 +17,6 @@ authorName: Dennis Traub
 date: 2023-07-24
 ---
 
-## Prerequisites
-
-If the CLI and CDK are installed, you should see the respective versions of your installations. If it isn't, you'll get an error telling you that the command can't be found.
-
-Before starting this tutorial, you will need the following:
-
-- AWS Account: If you don't have one, you can [sign up for free](https://aws.amazon.com/getting-started/guides/setup-environment/). The AWS Free Tier gives you plenty of resources to play around with, including AWS Lambda and Amazon SQS, which is what we will be using.
-- The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/)
-
-This tutorial requires at least version 2 of the AWS CLI and AWS CDK. You can tell the version of both by running the following commands in a shell prompt:
-
-```bash
-aws --version
-cdk --version
-```
-
 | Attributes| |
 | ---- | ---- |
 | ✅ AWS Level | Intermediate - 200 |
@@ -86,11 +70,11 @@ But before we start coding, let's have a quick look at the pros and cons of the 
 - **Fault tolerance:** Asynchronous messaging provides fault tolerance by decoupling the producers and consumers of messages. If one application or component fails, messages can be stored for future processing once the system is back online, ensuring that no data is lost.
 
 ### Cons
-- Complexity: Implementing the asynchronous point-to-point messaging pattern can be more complex compared to other integration patterns, requiring additional message handling logic.
-- Message dependencies and deduplication: Managing dependencies between messages and ensuring proper message deduplication can be challenging in an asynchronous messaging system. It requires careful design and implementation to handle potential issues such as message order, message duplicates, and message processing dependencies.
-- Increased latency: Asynchronous messaging introduces a delay between sending a message and receiving a response, as the processing of messages may take longer. This delay can impact real-time interactions and might not be suitable for applications requiring immediate feedback.
+- **Complexity:** Implementing the asynchronous point-to-point messaging pattern can be more complex compared to other integration patterns, requiring additional message handling logic.
+- **Message dependencies and possible duplication:** Managing dependencies between messages and ensuring proper message deduplication can be challenging in an asynchronous messaging system. It requires careful design and implementation to handle potential issues such as message order, message duplicates, and message processing dependencies.
+- **Increased latency:** Asynchronous messaging introduces a delay between sending a message and receiving a response, as the processing of messages may take longer. This delay can impact real-time interactions and might not be suitable for applications requiring immediate feedback.
 
-When making architectural decisions, it is important to consider these trade-offs and choose the communication pattern that aligns best with your specific requirements and constraints. Many modern applications rely on multiple integration patterns, including asynchronous point-to-point messaging, as well as synchronous request-response, and event-based communication.
+When making architectural decisions, it is always important to consider these trade-offs and choose the communication pattern that aligns best with your specific requirements and constraints. Many modern applications rely on multiple integration patterns, including asynchronous point-to-point messaging, as well as synchronous request-response, and event-based communication.
 
 But now, let's start the tutorial and learn how to implement this pattern using AWS Lambda and Amazon SQS.
 
@@ -101,6 +85,29 @@ But now, let's start the tutorial and learn how to implement this pattern using 
 - We will invoce two functions on AWS Lambda, which also provides 1 million free invocations per month.
 
 So if you follow the step-by-step guide, you'll definitely stay within the free tier. I've also added a section to the end that helps you remove all the resources created during this tutorial.
+
+## Prerequisites
+
+If the CLI and CDK are installed, you should see the respective versions of your installations. If it isn't, you'll get an error telling you that the command can't be found.
+
+Before starting this tutorial, you will need the following:
+
+- AWS Account: If you don't have one, you can [sign up for free](https://aws.amazon.com/getting-started/guides/setup-environment/). The AWS Free Tier gives you plenty of resources to play around with, including AWS Lambda and Amazon SQS, which is what we will be using.
+- The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/)
+
+This tutorial requires at least version 2 of the AWS CLI and AWS CDK.
+
+You can tell the version of the AWS CLI by executing the following command in a terminal:
+
+```bash
+aws --version
+```
+
+And the version of the AWS CDK by executing the following command:
+
+```bash
+cdk --version
+```
 
 ## Step 1 - Create the CDK App
 
