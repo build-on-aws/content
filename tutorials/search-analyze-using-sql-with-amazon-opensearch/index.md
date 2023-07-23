@@ -12,14 +12,9 @@ authorName: Ambar Kumar
 date: 2023-07-10
 ---
 
-| ToC |
-|-----|
+As an application builder you have many types of data to store to provide not only the core application functionality but also logging of telemetry and traces so that application performance can be monitored. The data required to be captured can often change over time with new types of metrics being available as new versions of your application are implemented. It could become a challenge for the application builder to use a traditional relational database, incorporate frequent schema changes and also allow for efficient retrieval and search of this data, the size of which becomes enormous over time. This is where Amazon OpenSearch can help - it provides your application with scalable data storage which can be both simple relational data or complex JSON documents for a number of use cases including Website search, Enterprise search, Log analytics, Application performance monitoring and Security analytics. 
 
-Amazon OpenSearch is a community-driven, secure and fully open source search and analytics service with a rich roadmap of new and innovative functionality. It provides a REST API to send and query data on a distributed platform. It essentially helps everyone find what they need faster—from employees who need documents from their intranet to customers browsing online for the perfect pair of shoes.
-
-Amazon OpenSearch Service offers a choice of open source engines to deploy and run, including multiple versions of ALv2 Elasticsearch as well as new versions of OpenSearch. Unlike other database technologies, you structure your data in indexes instead of tables. Each json object that you send to you OpenSearch index is called a 'document' (c.f. 'row' in a relational database). The JSON keys for that document are called 'fields' (c.f. columns), and the values are values.
-
-The speed and scalability of OpenSearch and its ability to index many types of content mean that it can be used for a number of use cases including Website search, Enterprise search, Log analytics, Application performance monitoring and Security analytics.
+In this tutorial you'll get hands on with using SQL with Amazon OpenSearch using the familiar SQL query syntax including aggregations, group by, and where clauses to investigate your data. You can read data as JSON documents or CSV tables so you have the flexibility to use the format that works best for you. You will walk through setting up a new Amazon OpenSearch Serverless domain in the AWS console. You'll explore the different types of search queries available. You also learn how to create and search for a document in Amazon OpenSearch Service. When you add data to an index in the form of a JSON document the OpenSearch Service creates an index around the first document that you add. In addition to the familiar SQL query syntax you also have access to the rich set of search capabilities such as fuzzy matching, boosting, phrase matching and more.
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -31,22 +26,34 @@ The speed and scalability of OpenSearch and its ability to index many types of c
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-04-11                                                      |
 
-Amazon OpenSearch offers a number of features to help you customize your search experience such as Full-text querying, Autocomplete, Scroll Search, customizable scoring and ranking, and more. In addition to the Search API, OpenSearch  provides the familiar SQL query syntax including aggregations, group by, and where clauses to investigate your data. You can read data as JSON documents or CSV tables so you have the flexibility to use the format that works best for you.
 
-In this tutorial you'll get hands on with using SQL with Amazon OpenSearch Serverless. You will walk through setting up a new Amazon OpenSearch Serverless domain in the AWS console. You'll explore the different types of search queries available. You also learn how to create and search for a document in Amazon OpenSearch Service. When you add data to an index in the form of a JSON document the OpenSearch Service creates an index around the first document that you add. In addition to the familiar SQL query syntax you also have access to the rich set of search capabilities such as fuzzy matching, boosting, phrase matching, and more.
-Amazon OpenSearch Service is also bundled with a dashboard visualization tool, OpenSearch Dashboards, which helps visualize not only log and trace data, but also machine-learning powered results for anomaly detection and search relevance ranking.
+| ToC |
+|-----|
+## What is Amazon OpenSearch? 
+## Step 1. Create an Amazon OpenSearch Service domain
+## Step 2. Ingest Sample data into your OpenSearch domain
+## Step 3: Running Basic SQL Queries
+## Step 4: Running Complex SQL queries on multiple indexes or tables
+## Step 5: Using SQL Functions
+
+## What is Amazon OpenSearch? 
+
+It is important to understand the capabilities of OpenSearch so that you can fully utilize the benefits based on your application requirements. OpenSearch is a scalable, flexible, and extensible open-source software suite for search, analytics, and observability applications licensed under Apache 2.0. Powered by Apache Lucene and driven by the OpenSearch Project community. With OpenSearch you can capture, store, and analyze your business, operational, and security data from a variety of sources. You can use your preferred data collector and enrich your analytics pipeline with integrated ML tools like anomaly detection. OpenSearch also provides full-text search, automated anomaly detection and vector database capabilities for implementing semantic search and Retrieval Augmented Generation (RAG) for generative AI applications. 
+
+Amazon OpenSearchis also bundled with a dashboard visualization tool, OpenSearch Dashboards, which helps visualize not only log and trace data, but also machine-learning powered results for anomaly detection and search relevance ranking.
+
+Now that you have a good understanding of the benefits of using Amazon OpenSearch, let us setup the service in AWS.
 
 > **Note**: This tutorial uses a domain with open access. For the highest level of security, we recommend that you put your domain inside a virtual private cloud (VPC).
 
 ## Step 1. Create an Amazon OpenSearch Service domain
-
-An OpenSearch Service domain is synonymous with an OpenSearch cluster. Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs.
+To experience the capability of using SQL with OpenSearch, we will setup an OpenSearch service domain which is synonymous with an OpenSearch cluster. Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs. 
 
 ### To create an OpenSearch Service domain using the console
-
+The list of steps below show how you can use the AWS console to create an OpenSearch Service domain so that you can begin loading sample data and trying out SQL queries against that data.
 1. Go to [https://aws.amazon.com](https://aws.amazon.com/) and choose **Sign In to the Console**.
 2. Under **Analytics**, choose **Amazon OpenSearch Service**.
-3. Choose **Create domain**.
+3. Under the "Get Started" choice dialog, select "Managed Clusters" then click on **Create domain**.
 4. Provide a name for the domain. The examples in this tutorial use the name *movies*.
 5. For the domain creation method, choose **Standard create**. (*Note: To quickly configure a production domain with best practices, you can choose **Easy create**. For the development and testing purposes of this tutorial, we'll use **Standard create**.)*
 6. For templates, choose **Dev/test**.
@@ -60,7 +67,7 @@ An OpenSearch Service domain is synonymous with an OpenSearch cluster. Domains a
 14. Ignore the rest of the settings and choose **Create**. New domains typically take 15–30 minutes to initialize, but can take longer depending on the configuration. After your domain initializes, select it to open its configuration pane. Note the domain endpoint under **General information** (for example, `https://search-my-domain.us-east-1.es.amazonaws.com`), which you'll use in the next step.
 
 ## Step 2. Ingest Sample data into your OpenSearch domain
-
+This step covers the ingestion of sample data into OpenSearch so that you can test sample SQL queries on that data. 
 1. Navigate to your OpenSearch service on the AWS console. On the Dashboard section, your domain should be listed under the header “Name”. Click on any of your domains.
   ![Image: image.png](images/image_01.png)
 1. Click on the OpenSearch Dashboard URL link for this domain.
@@ -83,7 +90,7 @@ An OpenSearch Service domain is synonymous with an OpenSearch cluster. Domains a
 
 ### Mapping concepts across SQL and OpenSearch
 
-Before we use SQL to search data in your OpenSearch domain, we should understand and map concepts across SQL and OpenSearch. While SQL and OpenSearch have different terms for the way the data is organized (and different semantics), essentially their purpose is the same. So let’s start from the bottom; these roughly are:
+In this section we map concepts across SQL and OpenSearch so that you can use SQL more effectively to search data in your OpenSearch domain. While SQL and OpenSearch have different terms for the way the data is organized (and different semantics), essentially their purpose is the same. So let’s start from the bottom; these roughly are:
 
 |**SQL**|**OpenSearch**|**Description**|
 |---|---|---|
@@ -95,7 +102,7 @@ Before we use SQL to search data in your OpenSearch domain, we should understand
 |`cluster`|`cluster` (federated)|Traditionally in SQL, *cluster* refers to a single RDMBS instance which contains a number of `catalog`s or `database`s (see above). While RDBMS tend to have only one running instance, on a single machine (*not* distributed), OpenSearch goes the opposite way and by default, is distributed and multi-instance. <br> <br>Further more, an OpenSearch `cluster` can be connected to other `cluster`s in a *federated* fashion thus `cluster` means:<br>`single cluster`: Multiple Elasticsearch instances typically distributed across machines, running within the same namespace.<br>`multiple clusters`:: Multiple clusters, each with its own namespace, connected to each other in a federated setup.<br><br>Cross-cluster search in Amazon OpenSearch Service lets you perform queries and aggregations across multiple connected domains. It often makes more sense to use multiple smaller domains instead of a single large domain, especially when you're running different types of workloads.|
 
 ## Step 3: Running Basic SQL Queries
-
+We are starting with running a basic set of SQL queries to help understand the key concepts.
 1. To list all your indexes in your current domain, run the SQL query below in the Query Workbench:
 
 ```sql
@@ -381,8 +388,8 @@ WHERE total_quantity > 4
 The `deleted_rows` field shows the number of documents deleted.
 
 ## Step 4: Running Complex SQL queries on multiple indexes or tables
-
-Let’s insert some data related to employees and accounts (into separate indexes) to illustrate JSON support in SQL queries. Navigate to DevTools and bulk insert via the following statements. Enter these on the left pane of the console and the results will be shown on the right side of the console.
+Now that we have covered the basics of SQL querying, in this section we run more complex SQL queries to understand how they work. 
+Let’s insert some data related to employees and accounts (into separate indexes). Navigate to DevTools and bulk insert via the following statements. Enter these on the left pane of the console and the results will be shown on the right side of the console.
 
 ![Image: image.png](images/image_15.png)
 
@@ -511,8 +518,9 @@ Result set:
 |Amber|Duke|39225|
 |Nanette|Bates|32838|
 
-## Step 5: Using SQL Functions
 
+## Step 5: Using SQL Functions
+In this step we cover the rich set of SQL Functions which can help the application builder leverage more search and analytics capabilities of OpenSearch. 
 For a list of functions supported, [see the documentation here](https://opensearch.org/docs/latest/search-plugins/sql/functions/).
 
 1. Use the MATCH function in SQL for full-text search (a subset of full-text queries available in OpenSearch is supported). You can search documents that match a `string`, `number`, `date`, or `boolean` value for a given field. The `MATCHQUERY` and `MATCH_QUERY` functions are synonyms for the [`MATCH`](https://opensearch.org/docs/2.8/search-plugins/sql/full-text#match) relevance function.
@@ -783,8 +791,8 @@ Results:
 ```
 
 ### Using JDBC with OpenSearch
-
-The Java Database Connectivity (JDBC) driver lets you integrate OpenSearch with your favorite business intelligence (BI) applications. For information about downloading and using the JAR file, see *[the SQL repository on GitHub](https://github.com/opensearch-project/sql-jdbc)*. Installing this will let you setup a connection to OpenSearch from a SQL client such as DBeaver, and you can then run SQL queries from that client. Similarly Amazon Quicksight has a connector to OpenSearch for data visualization. However the most common way for visualizing data in OpenSearch is via OpenSearch dashboards which is a fork from Kibana.
+We will now cover how to use JDBC with OpenSearch so that builders and OpenSearch users can run SQL queries and integrate OpenSearch with your favorite business intelligence (BI) applications.  
+The OpenSearch Java Database Connectivity (JDBC) driver comes in the form of a JAR file which can be downloaded as per the information provided in this link *[the SQL repository on GitHub](https://github.com/opensearch-project/sql-jdbc)*. Installing this will let you setup a connection to OpenSearch from a SQL client such as DBeaver, and you can then run SQL queries from that client. Similarly Amazon Quicksight has a connector to OpenSearch for data visualization. However the most common way for visualizing data in OpenSearch is via OpenSearch dashboards which is a fork from Kibana.
 
 > **A note about Query DSL:** OpenSearch provides a search language called *query domain-specific language (DSL)* that you can use to search your data. Query DSL is a flexible language with a JSON interface. With query DSL, you need to specify a query in the `query` parameter of the search. One of the simplest searches in OpenSearch uses the `match_all` query, which matches all documents in an index:
 
@@ -810,6 +818,13 @@ Broadly, you can classify queries into two categories—*leaf queries* and *comp
 **Specialized queries**: Specialized queries include all other query types (`distance_feature`, `more_like_this`, `percolate`, `rank_feature`, `script`, `script_score`, `wrapper`, and `pinned_query`).
 
 **Compound queries**: Compound queries serve as wrappers for multiple leaf or compound clauses either to combine their results or to modify their behavior. They include the Boolean, disjunction max, constant score, function score, and boosting query types. To learn more, see [Compound queries](https://opensearch.org/docs/latest/opensearch/query-dsl/compound/index).
+
+## Conclusion
+We covered the capabilities, benefits and typical use-cases for Amazon OpenSearch. To gain understanding of how data can be easily searched in OpenSearch using SQL, we ingested sample data in OpenSearch and then ran a set of simple and complex SQL queries on this data.
+
+SQL support is very important in the real-world of OpenSearch application developers and end users because it provides an easy mechansim for application builders and data analysts to query the data in OpenSearch. By using SQL functions and joins between tables (although joins can be a drag on performance for large tables) developers can reduce development times because more complex searches can be accomplished with lesser amount of code. Also it fulfils a key requirement of allowing a non-programmatic way of accessing and analyzing OpenSearch data via SQL from BI Query and reporting tools.  
+
+## Next Steps 
 
 > Comment: You can further explore OpenSearch,Click the Hamburger Icon to expand the menu by building an application for intensive searching of data and implementing searches using SQL. OpenSearch is highly optimized for search use-cases with it’s real-time distributed search and analytics engine providing full-text search capabilities and horizontal scaling, while still providing sub-second latency for results.
 
