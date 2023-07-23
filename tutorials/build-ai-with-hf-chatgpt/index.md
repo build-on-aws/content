@@ -1,6 +1,6 @@
 ---
-title: "How to build a ChatGPT-Powered AI solution to learn faster with YouTube"
-description: "A step-by-step guide to setting up a free ML environment, leveraging open-source ML models and ChatGPT APIs to extract insights from YouTube videos, and empowering yourself to learn faster and more efficiently like never before!"
+title: "How to build a ChatGPT-Powered AI tool to learn technical things fast"
+description: "A step-by-step guide to setting up a free ML environment, leveraging language models and ChatGPT APIs to extract insights from YouTube videos, and empowering yourself to learn faster and more efficiently like never before!"
 tags:
     - tutorials
     - aws
@@ -34,7 +34,7 @@ You will be able to apply these steps to other use cases by selecting different 
 | 💰 Cost to complete | Free when using the OpenAI API credit or less than $0.10      |
 | 🧩 Prerequisites    | - [Amazon SageMaker Studio Lab Account](https://studiolab.sagemaker.aws/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) <br>-  [Foundational knowledge of Python](https://catalog.us-east-1.prod.workshops.aws/workshops/3d705026-9edc-40e8-b353-bdabb116c89c/)    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-07-20                             |
+| ⏰ Last Updated     | 2023-07-22                             |
 
 | ToC |
 |-----|
