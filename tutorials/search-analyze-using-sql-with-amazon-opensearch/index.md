@@ -26,17 +26,8 @@ In this tutorial you'll get hands on with using SQL with Amazon OpenSearch using
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-04-11                                                      |
 
-
-## Table of Contents
-### What is Amazon OpenSearch? 
-### Step 1. Create an Amazon OpenSearch Service domain
-### Step 2. Ingest Sample data into your OpenSearch domain
-### Step 3: Running Basic SQL Queries
-### Step 4: Running Complex SQL queries on multiple indexes or tables
-### Step 5: Using SQL Functions
-### Conclusion
-### Next Steps
-
+| ToC |
+|-----|
 
 ## What is Amazon OpenSearch? 
 
