@@ -77,7 +77,7 @@ aws cloudformation package --template-file main-stack.yaml --output-template pac
 5. Next Login to the AWS console in which the tutorial setup will be done and validate that everything has been created properly. Look at all the Infrastructure resources that have been created for our tutorial. Go to the S3 bucket that has been created as part of this (In my case the name of the newly created S3 bucket is `myfamousbucket`).
 6. Take a quick look at the folder structure inside the S3 bucket. Here is how the folder structure should look like :-
 ![Shows the contents of the S3 bucket created by the Cloudformation template](images/s3bucket_data.png)
-7. Now we will click on the Sagamker IDE url and open Sagemaker studio where we will analyze our raw movie data , perform visualizations and come up with the right set of features for our movie data set.
+7. Now we will click on the [Sagemker Studio's](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html) Integrated Development Environment URL that is seen in the `Outputs` section of the `buildonaws` Cloudformation stack that we deployed in Step #3 above. The name of the Cloudformation Stack Output Key is `SageMakerDomainJupyterURLOutput`. Clicking on the URL will open Sagemaker studio where we will analyze our raw movie data , perform visualizations and come up with the right set of features for our movie data set.
 8. Once the Sagemaker Studio opens, 
     - Go to File -> New Terminal
     - Execute the following on the terminal to download the python notebook from the S3 bucket. Replace the `myfamousbucket` S3 bucket name in the below command with the S3 bucket name from the Cloudformation Output.
