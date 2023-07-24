@@ -22,8 +22,19 @@ showInHomeFeed: true
 date: 2023-06-23
 ---
 
-|ToC|
-|---|
+| ToC |
+| --- |
+
+## Implementations
+
+Want to jump straight into the code? The following implementations are available:
+
+- [.NET](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/dotnetv3/cross-service/PhotoAssetManager)
+- [C++](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/cpp/example_code/cross-service/photo_asset_manager)
+- [Java (V2)](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/pam_source_files)
+- [JavaScript (V3)](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cross-services/photo-asset-manager)
+- [Kotlin](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/kotlin/usecases/creating_pam)
+- [Rust](https://github.com/awsdocs/aws-doc-sdk-examples/pull/4682)
 
 ## 1. Prologue
 
@@ -136,7 +147,7 @@ We hope you’ve enjoyed this journey with us. As a team of experienced AWS engi
 
 Each of these were important for a reason, based on Dan’s use case. More than anything, this exercise reinforced for us the importance of domain-driven design in building an application. Programs are built for people, and knowing how people will use them anchored our decisions and research in this cross-service example.
 
-The code for this example is available in a few places. The main entry point is our [CDK](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/applications/photo-asset-manager/cdk/README.md). This has all the AWS managed pieces together in one place for review. There are implementations for the Lambda functions in each of the language directories (see appendix A). And there is one implementation of the [React UI](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/resources/clients/react/elros-pam).
+The code for this example is available in a few places. The main entry point is our [CDK](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/applications/photo-asset-manager/cdk/README.md). This has all the AWS managed pieces together in one place for review. There are implementations for the Lambda functions in each of the language directories (see [Implementations](#implementations)). And there is one implementation of the [React UI](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/resources/clients/react/elros-pam).
 
 ### End result
 
@@ -146,11 +157,7 @@ The code for this example is available in a few places. The main entry point is 
 
 ![Image labels](./images/labels.png "Image Labels")
 
-## Appendix A - Implementations
+## Shared application resources
 
-Most of the application resources for this example are shared. The Lambda functions are implemented in different languages to showcase the use of the AWS SDK in those languages.
-
-- [Java (V2)](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/pam_source_files)
-- [Rust](https://github.com/awsdocs/aws-doc-sdk-examples/pull/4682)
 - [Front End](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/resources/clients/react/elros-pam)
 - [CDK](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/applications/photo-asset-manager/cdk/README.md)
