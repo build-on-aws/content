@@ -1,30 +1,26 @@
 ---
-title: Needs title
-description: Needs description
+title: CGNN
+description:Convolutoinal Graph Neural Networks.
 tags:
   - graphml
   - graph-neural-networks
   - gnn
   - dgl
   - graph
-  - graph-theory
-  - MPNN
-  - message-passing-neural-networks
+  - ai-ml
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
 
-In the [previous post](04-graph-convolutional-networks), we came across concept of MPNN. There is only one theoretical step is left before we can get our hands dirty, and that concept is GCN.
+|ToC|
+|---|
 
-- [part 1](/posts/machine-learning-graphs/01-motivation-for-graph-ml) - Motivation for using graphs.
-- [Part 2](/posts/machine-learning-graphs/02-graph-theory) - Graph theory, a theoretical minimum.
-- [Part 3](/posts/machine-learning-graphs/03-message-passing-neural-networks) - MPNN paradigm.
-- [Part 4](/posts/machine-learning-graphs/04-graph-convolutional-networks) - GCN, a brief introduction to the theory.
-- [Part 5](/posts/machine-learning-graphs/05-GNN-example-karate-club) - Karate Club example, GNN's HelloWorld using Deep Graph Library.
-- [Part 6](/posts/machine-learning-graphs/06-knowledge-graph-embedding) - Introduction to Knowledge Embedding in graphs.
-- [Part 7](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE) - Under the hood of DGL-KE, a framework for knowledge embedding using DGL.
-- [Part 8](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) - DGL-KE in practice, Drug repurposing using DGL-KE
+
+In the [previous post](../04-graph-convolutional-networks), we came across concept of MPNN. There is only one theoretical step is left before we can get our hands dirty, and that concept is GCN.
 
 ## GCN Goal
 
@@ -103,17 +99,6 @@ A = nx.adj_matrix(G).todense()
 A
 ```
 
-```text
-    <ipython-input-2-5fd744cefb55>:6: DeprecationWarning: Sampling from a set deprecated
-    since Python 3.9 and will be removed in a subsequent version.
-      G.remove_edges_from(random.sample(G.edges(),k=int(DROP_RATE*G.number_of_edges())))
-    <ipython-input-2-5fd744cefb55>:8: DeprecationWarning: adj_matrix is deprecated and will be removed in version 3.0.
-    Use `adjacency_matrix` instead
-    
-      A = nx.adj_matrix(G).todense()
-    /Users/cyrusmv/minicond/envs/dgl/lib/python3.9/site-packages/networkx/linalg/graphmatrix.py:187: FutureWarning: adjacency_matrix will return a scipy.sparse array instead of a matrix in Networkx 3.0.
-      return adjacency_matrix(G, nodelist, dtype, weight)
-```
 
 ```text
     matrix([[0, 1, 1, 1],
@@ -121,8 +106,6 @@ A
             [1, 1, 0, 0],
             [1, 1, 0, 0]])
 ```
-
-![png](04-gcn_files/04-gcn_10_2.png)
 
 ```python
 #Creating attributes
@@ -256,4 +239,4 @@ D_hat**-1 * A_hat * X * W
 
 ## What is next?
 
-Next we implement a hello world example of interaction graphs or the [karate club](/posts/machine-learning-graphs/05-GNN-example-karate-club) using MPNN and GCN.
+Next we implement a hello world example of interaction graphs or the [karate club](../machine-learning-graphs/05-GNN-example-karate-club) using MPNN and GCN.
