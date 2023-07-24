@@ -1,6 +1,7 @@
 ---
-title: Title
-description: Description
+title: an introduction to LIME
+description: This post provides an intuitive as well as an in-depth introduction to LIME.
+
 tags:
   - ai-explainability
   - ai-fairness
