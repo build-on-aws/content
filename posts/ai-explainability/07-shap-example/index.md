@@ -1,6 +1,6 @@
 ---
-title: Title
-description: Description
+title: SHAP Example
+description: Code example in md format
 tags:
   - ai-explainability
   - ai-fairness
