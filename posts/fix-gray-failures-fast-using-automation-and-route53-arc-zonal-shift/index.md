@@ -6,9 +6,11 @@ tags:
   - arc-zonal-shift
   - observability
   - gray-failure
+waves:
+  - resilience
 authorGithubAlias: CryptikCode
 authorName: Fred Akinyemi
-date: 2023-07-14
+date: 2023-07-24
 ---
 
 |ToC|
