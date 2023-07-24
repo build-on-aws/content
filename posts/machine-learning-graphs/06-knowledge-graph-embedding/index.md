@@ -1,32 +1,29 @@
 ---
-title: Needs title
-description: Needs description
+title: Graph theory
+description: This post provides the reader with a graph theory theoritical minimum in order to understand GNN terminology.
 tags:
   - graphml
   - graph-neural-networks
   - gnn
   - dgl
   - graph
-  - graph-theory
-  - MPNN
-  - message-passing-neural-networks
-  - knowledge-graph
-  - knowledge-graph-embedding
+  - ai-ml
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
 
-KGE is a fundamental application of GNN and a variety of fields ranging from life sciences to personalization engines can benefit from the ability to build knowledge graphs. In the [previous post](/posts/machine-learning-graphs/05-GNN-example-karate-club) we learned a simple implementation using DGL. DGL is used to develop DGL-KE. This post sets up the theoretical requirement for understanding how to use DGL-KE, while the [next post](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE) describes how DGL-KE is implemented and provides the reader with an implementation example. Finally in the [final post](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) we take a look at an important example of DGL-KE in COVID19 drug repurposing research.
+|ToC|
+|---|
 
-- [part 1](/posts/machine-learning-graphs/01-motivation-for-graph-ml) - Motivation for using graphs.
-- [Part 2](/posts/machine-learning-graphs/02-graph-theory) - Graph theory, a theoretical minimum.
-- [Part 3](/posts/machine-learning-graphs/03-message-passing-neural-networks) - MPNN paradigm.
-- [Part 4](/posts/machine-learning-graphs/04-graph-convolutional-networks) - GCN, a brief introduction to the theory.
-- [Part 5](/posts/machine-learning-graphs/05-GNN-example-karate-club) - Karate Club example, GNN's HelloWorld using Deep Graph Library.
-- [Part 6](/posts/machine-learning-graphs/06-knowledge-graph-embedding) - Introduction to Knowledge Embedding in graphs.
-- [Part 7](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE) - Under the hood of DGL-KE, a framework for knowledge embedding using DGL.
-- [Part 8](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) - DGL-KE in practice, Drug repurposing using DGL-KE
+KGE is a fundamental application of GNN and a variety of fields ranging from life sciences to personalization engines can benefit from the ability to build knowledge graphs. In the [previous post](../machine-learning-graphs/05-GNN-example-karate-club) we learned a simple implementation using DGL. DGL is used to develop DGL-KE. This post sets up the theoretical requirement for understanding how to use DGL-KE, while the [next post](../machine-learning-graphs/07-dglke-oss-tool-for-KGE) describes how DGL-KE is implemented and provides the reader with an implementation example. Finally in the [final post](../machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) we take a look at an important example of DGL-KE in COVID19 drug repurposing research.
+
+|SeriesToC|
+|---------|
+
 
 There has been a huge focus, both in academia and industry, on Graph Neural Networks in the past 3 years. A surge of GNN papers, toolkits, and knowledge graph embedding tools is ensued as a result of interest. We, at AWS, have created an open source library for creating, training, and performing several GNN inference tasks, called Deep Graph Library or DGL. DGL is a high performance and highly distributed Graph Neural Network library. On the top of DGL, we have released a knowledge graph embedding tool called DGL-KE, which outperforms similar products thanks to numerous innovations in distributed KGE training for link prediction task. To be able efficiently and effectively apply DGL-KE to KGE tasks, it is however important to understand what the models in the core of DGL-KE do and where they perform best. This blog details out KGE models that are implemented in DGL-KE and is a fundamental to understanding of DGL-KE's functional capabilities.
 
@@ -550,7 +547,7 @@ $$
 
 ## What's Next?
 
-Now that we have investigated the methods that are implemented in DGL-KE, we shall explore how DGL-KE optimized computation of these methods and distributes them on multiple devices in the [next post](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE).
+Now that we have investigated the methods that are implemented in DGL-KE, we shall explore how DGL-KE optimized computation of these methods and distributes them on multiple devices in the [next post](../machine-learning-graphs/07-dglke-oss-tool-for-KGE).
 
 ## References
 
