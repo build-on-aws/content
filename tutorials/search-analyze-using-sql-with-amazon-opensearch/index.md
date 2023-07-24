@@ -27,9 +27,7 @@ In this tutorial you'll get hands on with using SQL with Amazon OpenSearch using
 | ⏰ Last Updated        | 2023-04-11                                                      |
 
 
-| ToC |
 ## Table of Contents
-|-----|
 ### What is Amazon OpenSearch? 
 ### Step 1. Create an Amazon OpenSearch Service domain
 ### Step 2. Ingest Sample data into your OpenSearch domain
@@ -38,6 +36,7 @@ In this tutorial you'll get hands on with using SQL with Amazon OpenSearch using
 ### Step 5: Using SQL Functions
 ### Conclusion
 ### Next Steps
+
 
 ## What is Amazon OpenSearch? 
 
@@ -184,13 +183,13 @@ and customer_gender is not 'MALE'
 and MATCHQUERY(category, 'ACCESSORIES')
 limit 5
 ```
-type |day_of_week_i|total_quantity|taxless_total_price|
------+-------------+--------------+-------------------+
-order|            4|             4|             133.96|
-order|            4|             4|              86.96|
-order|            4|             4|             112.96|
-order|            4|             4|             121.96|
-order|            4|             4|              70.96|
+|type|day_of_week_i|total_quantity|taxless_total_price|
+|---|---|---|---|
+|order|4|4|133.96|
+|order|4|4|86.96|
+|order|4|4|112.96|
+|order|4|4|121.96|
+|order|4|4|70.96|
 
 6. Use the `DISTINCT` clause to get back only unique field values. You can specify one or more field names:
 
@@ -847,7 +846,8 @@ SQL support is very important in the real-world of OpenSearch application develo
 
 ## Next Steps 
 
-> Comment: You can further explore OpenSearch,Click the Hamburger Icon to expand the menu by building an application for intensive searching of data and implementing searches using SQL. OpenSearch is highly optimized for search use-cases with it’s real-time distributed search and analytics engine providing full-text search capabilities and horizontal scaling, while still providing sub-second latency for results.
+> Comment: You can further explore the latest version of OpenSearch by reviewing the documentation on this site [OpenSearch documentation](https://opensearch.org/docs/latest/). To build an application using the OpenSearch SQL API, review this link [OpenSearch SQL API](https://opensearch.org/docs/latest/search-plugins/sql/sql-ppl-api/) and refer to the different SQL functions and operators which you can use depending on your application requirements.
+> 
 
 In [this article](https://stackoverflow.com/collectives/aws/articles/76223192/building-a-crud-application-in-go-for-amazon-opensearch), you can learn how to build an CRUD application for Amazon OpenSearch using the [Go](https://go.dev/) programming language. The project includes everything you need to build your own development environment, such as specific distributions like:
 
