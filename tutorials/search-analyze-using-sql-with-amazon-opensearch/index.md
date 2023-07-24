@@ -42,7 +42,9 @@ Now that you have a good understanding of the benefits of using Amazon OpenSearc
 
 ## Step 1 - Create an Amazon OpenSearch Service domain
 
-### To experience the capability of using SQL with OpenSearch, we will setup an OpenSearch service domain which is synonymous with an OpenSearch cluster. Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs. 
+### To experience the capability of using SQL with OpenSearch, we will setup an OpenSearch service domain which is synonymous with an OpenSearch cluster. 
+
+Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs. 
 
 To create an OpenSearch Service domain using the console
 
