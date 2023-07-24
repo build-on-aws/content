@@ -1,6 +1,6 @@
 ---
-title: Title
-description: Description
+title: SHAP
+description: In thios post I am describing SHAP as an AIX method.
 tags:
   - ai-explainability
   - ai-fairness
@@ -22,7 +22,7 @@ additionalAuthors:
 |SeriesToC|
 |---------|
 
-Previously we learned [LIME](/posts/ai-explainability/02-lime.md) as a feature attribution local explainability model and observed how finding a solution to its optimization equation can result in local linear explanations. We then looked at [Shapely values](05-shapley-values.md) and understood given a certain conditions we can find a unique solution to individual contributions to pay-off function of a coalition. Here we combine the two and use Shapley values to find a unique solution for feature attribution for explainability.
+Previously we learned [LIME](../ai-explainability/02-lime.md) as a feature attribution local explainability model and observed how finding a solution to its optimization equation can result in local linear explanations. We then looked at [Shapely values](../05-shapley-values.md) and understood given a certain conditions we can find a unique solution to individual contributions to pay-off function of a coalition. Here we combine the two and use Shapley values to find a unique solution for feature attribution for explainability.
 
 ## Additive feature attribution methods
 
@@ -118,7 +118,7 @@ $\mathcal{L}$ corresponds to the weighted average of the conditional expectation
 
 ## What's next?
 
-I think the reader agrees with me that we need to stop with the theory and get into some coding examples. in the [next part](/posts/ai-explainability/06-shap-tutorial) we shall explore how Shapley values are used in AI explainability.
+I think the reader agrees with me that we need to stop with the theory and get into some coding examples. in the [next part](../ai-explainability/06-shap-tutorial) we shall explore how Shapley values are used in AI explainability.
 
 ## References
 
