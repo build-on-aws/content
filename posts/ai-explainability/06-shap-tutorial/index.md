@@ -1,6 +1,6 @@
 ---
-title: Title
-description: Description
+title: SHAP Tutorial
+description: In this post I provide a code walk through for kernel SHAP, which is combinatino of LIME and SHAP
 tags:
   - ai-explainability
   - ai-fairness
@@ -22,7 +22,7 @@ additionalAuthors:
 |SeriesToC|
 |---------|
 
-in the [theoretical post](/posts/ai-explainability/05-shape) about SHAP, we explored the SHAP paper. We now take a look at a tutorial of SHAP. Here we focus on a practical tutorial in which we use VGG16 to predict objects in an image before attempting to explain it using Kernel SHAP. THe full code can be found [here](/posts/ai-explainability/07-shap-example). for the notebook refer to: https://github.com/cyrusmvahid/AIX-BuildOn/blob/main/08-shap-example.ipynb
+in the [theoretical post](../ai-explainability/05-shape) about SHAP, we explored the SHAP paper. We now take a look at a tutorial of SHAP. Here we focus on a practical tutorial in which we use VGG16 to predict objects in an image before attempting to explain it using Kernel SHAP. for the notebook refer to: https://github.com/cyrusmvahid/AIX-BuildOn/blob/main/08-shap-example.ipynb
 
 ### Loading an Image
 
