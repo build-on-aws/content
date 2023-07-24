@@ -1,31 +1,31 @@
+
 ---
 title: Motivation for using graphs
-description: Needs description
+description: This post provides an intuitive understanding of why we need graphs and how they differ from sequential models. In a way we could see graphs as a general form that superceede sequential models.
 tags:
   - graphml
   - graph-neural-networks
   - gnn
   - dgl
   - graph
+  - ai-ml
 authorGithubAlias: cyrusmvahid
-authorName: Cyrus Vahid 
-additionalAuthors:
+authorName: Cyrus Vahid
+date: 2022-07-08
+additionalAuthors: 
   - authorGithubAlias: kirannsa
     authorName: Sai Kiran Jukanti
-  - authorGithubAlias: shamika
-    authorName: Shamika Ariyawansa  
-date: 2023-06-20
 ---
+
+|ToC|
+|---|
+
 Graph neural networks (GNN) have gained prominence in the past few years. It is predominantly due to their ability to capture sparse and non-Euclidean data, while breakthroughs in parallel computation of large scale graphs has made it possible to take advantage of this versatile data-structure. This blog series is an introductory series for those who are new to graphs and graph neural networks, and moves onto knowledge embedding through graph completion. The final part in this series provides an example of application of knowledge embedding in drug repurposing solutions, published by AWS science team in order to create a proposal for potential effective drugs on COVID. Future publications will branch off into applications of GNNs in different fields, starting with personalization. The current series entries are:
 
-- [part 1](/posts/machine-learning-graphs/01-motivation-for-graph-ml) - Motivation for using graphs.
-- [Part 2](/posts/machine-learning-graphs/02-graph-theory) - Graph theory, a theoretical minimum.
-- [Part 3](/posts/machine-learning-graphs/03-message-passing-neural-networks) - MPNN paradigm.
-- [Part 4](/posts/machine-learning-graphs/04-graph-convolutional-networks) - GCN, a brief introduction to the theory.
-- [Part 5](/posts/machine-learning-graphs/05-GNN-example-karate-club) - Karate Club example, GNN's HelloWorld using Deep Graph Library.
-- [Part 6](/posts/machine-learning-graphs/06-knowledge-graph-embedding) - Introduction to Knowledge Embedding in graphs.
-- [Part 7](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE) - Under the hood of DGL-KE, a framework for knowledge embedding using DGL.
-- [Part 8](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) - DGL-KE in practice, Drug repurposing using DGL-KE
+
+|SeriesToC|
+|---------|
+
 
 ## Motivation for Graph Neural Networks
 
@@ -79,14 +79,14 @@ $$
 \large
 h^{(t+1)} = f(h^{(t)}, x^{(t+1)}; \theta)\qquad(3)
 $$
-![recurrent neural network](images/rnnconcept.png)
-Figure 3: Recurrent Neural Networks
+![recurrent neural network](images/rnnconcept.png "Figure 3: Recurrent Neural Networks")
+
 
 
 And unrolling remains the same conceptually.
 
-![Recurrent Neural Networks](images/unrolling.png)
-Figure 4: Unrolling of an RNN
+![Recurrent Neural Networks](images/unrolling.png "Figure 4: Unrolling of an RNN
+")
 
 ### RNN characteristics 
 
@@ -134,8 +134,7 @@ There are also assumptions that are not included in the body of knowledge. Does 
 
 Let us try to model the world that describes Tom, Marry, Joe, and their preferences and relationships.
 
-![The world of Mary](images/tomnmarry.png)
-Figure 6: World of Mary. This knowledge graph will reappear in our examples in the future posting. It is a simple and limited example that provides an insight how complex the real-world knowledge based can be and how the standard deep learning is incapable of capturing all the information efficiently.
+![The world of Mary](images/tomnmarry.png "Figure 6: World of Mary. This knowledge graph will reappear in our examples in the future posting. It is a simple and limited example that provides an insight how complex the real-world knowledge based can be and how the standard deep learning is incapable of capturing all the information efficiently.")
 
 Sadly major branches of deep learning do not have a good answer to this problem as deep learning models accept structures and mostly fixed size input data. The more structured the data, the more the models excel.
 
@@ -171,4 +170,4 @@ In the following sections we will explore GNN and its variants; but before proce
 
 ## What's Next?
 
-In the following sections we will explore GNN and its variants; but before proceeding with GNN, let us review some of the fundamentals of graph theory and the glossary that is required in order to sail smoothly though GNN literature. Next we explore [A theoretical minimum of graph theory to understand graph concepts](02-graph-theory).
+In the following sections we will explore GNN and its variants; but before proceeding with GNN, let us review some of the fundamentals of graph theory and the glossary that is required in order to sail smoothly though GNN literature. Next we explore [A theoretical minimum of graph theory to understand graph concepts](../02-graph-theory).
