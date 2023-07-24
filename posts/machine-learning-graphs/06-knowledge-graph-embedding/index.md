@@ -1,6 +1,6 @@
 ---
-title: Graph theory
-description: This post provides the reader with a graph theory theoritical minimum in order to understand GNN terminology.
+title: KGE
+description: This post provides the reader with an in depth understanding of knowledge graph embedding and theoritical details of what is supported by DGL-KE.
 tags:
   - graphml
   - graph-neural-networks
