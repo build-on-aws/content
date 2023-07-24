@@ -1,37 +1,30 @@
 ---
-title: Needs title
-description: Needs description
+title: Motivation for using graphs
+description: This post provides an intuitive understanding of why we need graphs and how they differ from sequential models. In a way we could see graphs as a general form that superceede sequential models.
 tags:
   - graphml
   - graph-neural-networks
   - gnn
   - dgl
   - graph
-  - graph-theory
+  - ai-ml
 authorGithubAlias: cyrusmvahid
-authorName: Cyrus Vahid 
-additionalAuthors:
+authorName: Cyrus Vahid
+date: 2022-07-08
+additionalAuthors: 
   - authorGithubAlias: kirannsa
     authorName: Sai Kiran Jukanti
-date: 2022-07-08
 ---
-In the [previous post](/posts/machine-learning-graphs/01-motivation-for-graph-ml), we learn why we need to pay attention to GNNs. Before we can actually learn about GNNs, we need to learn some of the basics of graph theory to be able to understand parameters of the GNN methods as well as technical aspects of the papers. If you are familiar with graph theory, please skip to [next part](/posts/machine-learning-graphs/03-message-passing-neural-networks).
+
+|ToC|
+|---|
+
+In the [previous post](../machine-learning-graphs/01-motivation-for-graph-ml), we learn why we need to pay attention to GNNs. Before we can actually learn about GNNs, we need to learn some of the basics of graph theory to be able to understand parameters of the GNN methods as well as technical aspects of the papers. If you are familiar with graph theory, please skip to [next part](../machine-learning-graphs/03-message-passing-neural-networks).
 
 This is the first of a 5-part series to gently introduce the reader to Graph Neural Networks. Part 1 intends to provide the basic terminology of graph theory as well as an brief introduction of networkX, a popular graph computation library, to the readers that are new to graphs. The next 4 parts describe
 
-1. Intuition behind GNN
-1. Message Passing Neural Network or MPNN framework, which is the foundation of out Deep Graph Library DGL, our implementation of GNN
-1. A basic understanding of DGL, and finally
-1. A tutorial as how to use DGL for most common use cases.
-
-- [part 1](/posts/machine-learning-graphs/01-motivation-for-graph-ml) - Motivation for using graphs.
-- [Part 2](/posts/machine-learning-graphs/02-graph-theory) - Graph theory, a theoretical minimum.
-- [Part 3](/posts/machine-learning-graphs/03-message-passing-neural-networks) - MPNN paradigm.
-- [Part 4](/posts/machine-learning-graphs/04-graph-convolutional-networks) - GCN, a brief introduction to the theory.
-- [Part 5](/posts/machine-learning-graphs/05-GNN-example-karate-club) - Karate Club example, GNN's HelloWorld using Deep Graph Library.
-- [Part 6](/posts/machine-learning-graphs/06-knowledge-graph-embedding) - Introduction to Knowledge Embedding in graphs.
-- [Part 7](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE) - Under the hood of DGL-KE, a framework for knowledge embedding using DGL.
-- [Part 8](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) - DGL-KE in practice, Drug repurposing using DGL-KE
+|SeriesToC|
+|---------|
 
 ## The basics
 
@@ -82,9 +75,9 @@ nx.draw_networkx(G[3], node_color='black', font_color='w', font_weight='bold') #
 plt.show()
 ```
 
-![Examples of Graphs](images/img0101.png)
+![Examples of Graphs](images/img0101.png "Figure 1: Some simple examples of graphs. Counterclockwise from top left are: a complete graph where every node is connected to every node, a path graph, where the nodes form a sequential path, a 2-D graph, and a cycle, where the last node of a path graph is connected to its first node.")
 
-Figure 1: Some simple examples of graphs. Counterclockwise from top left are: a complete graph where every node is connected to every node, a path graph, where the nodes form a sequential path, a 2-D graph, and a cycle, where the last node of a path graph is connected to its first node.
+
 
 ## Formal definitions
 
@@ -181,8 +174,8 @@ axs[1].set_axis_off()
 plt.show()
 ```
 
-![isomorphic graphs](images/img0104.png)
-Figure 4: Isomorphic graphs. As you can see in the image, the vertices from the image on the left have been rotated to create the graph on the right side. Barring the labels, the two graphs are indetical.
+![isomorphic graphs](images/img0104.png "Figure 4: Isomorphic graphs. As you can see in the image, the vertices from the image on the left have been rotated to create the graph on the right side. Barring the labels, the two graphs are indetical.")
+
 
 To check if the two graphs isomorphic, we can use the `networkx.algorithms.is_isomorphic()` library.
 
@@ -234,9 +227,8 @@ F = nx.compose(G1, G2)
 nx.draw_kamada_kawai(F, with_labels=True, font_color='w', font_weight='bold', node_color='black')
 ```
 
-![neighbourhood](images/img0105.png)
+![neighbourhood](images/img0105.png "Figure 5: The open neighborhood for node 4 is {0,1,2,3,6} and the closed neighborhood is {0,1,2,4,6,4}. The adjacency matrices and neighborhood are a very core concept to Graph Neural Networks and network embeddings as they can provides are with different variations of local and global structural similarity between to graphs.")
 
-Figure 5: The open neighborhood for node 4 is {0,1,2,3,6} and the closed neighborhood is {0,1,2,4,6,4}. The adjacency matrices and neighborhood are a very core concept to Graph Neural Networks and network embeddings as they can provides are with different variations of local and global structural similarity between to graphs.
 
 We can list neighbors of a specific node
 
@@ -351,9 +343,9 @@ plt.matshow(a, cmap=plt.cm.gray_r)
 Exoplanets are hat are outside of our solar system. Up until recently we  had not observed any planet outside of the solar systems, simply because planets do not emit enough light to be observable by telescopes. according to Newton's Law of Universal Gravitation, Objects with mass feel an attractive force that is proportional to their masses and inversely proportional to the square of the distance, or $$F=G\frac{Mm}{r^2}.$$
 
 So, if a star affects orbit of a planet that revolves around the star, the planet also does affect orbit of its star slightly. Add to that that there are potentially several planets in a solar system, , then planetary gravity does influences orbits of planets and starts in solar system. Those little wobbles, resulted by smaller mass of planets, was used to discover the first exoplanets. This is in short a multi-body system. In a simplified model of a solar system, the orbits of the planets and the stars are dependent mass of the objects and distance to the star. HEre we are ignoring the effects that the planets have on one another and assume that there is only one start in the system. This can be modeled using a graph data structure. For instance, our solar system data can be summarized as:
-![Planet distances](images/img0110.png)
+![Planet distances](images/img0110.png "Figure 10: A table with planetary distances. This is an example of weighted adjacency matrix. Instead of a binary value to signify adjacency, we have distance as a weight.")
 
-Figure 10: A table with planetary distances. This is an example of weighted adjacency matrix. Instead of a binary value to signify adjacency, we have distance as a weight.
+
 
 ## Example
 
@@ -527,4 +519,4 @@ plt.show()
 
 ## What is next?
 
-Next we look into [MPNN or Message Passing Neural Networks](/posts/machine-learning-graphs/03-message-passing-neural-networks) paradigm.
+Next we look into [MPNN or Message Passing Neural Networks](../machine-learning-graphs/03-message-passing-neural-networks) paradigm.
