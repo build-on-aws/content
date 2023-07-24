@@ -9,7 +9,7 @@ tags:
   - aws
 authorGithubAlias: ambar265
 authorName: Ambar Kumar
-date: 2023-07-10
+date: 2023-07-24
 ---
 
 As an application builder you have many types of data to store to provide not only the core application functionality but also logging of telemetry and traces so that application performance can be monitored. The data required to be captured can often change over time with new types of metrics being available as new versions of your application are implemented. It could become a challenge for the application builder to use a traditional relational database, incorporate frequent schema changes and also allow for efficient retrieval and search of this data, the size of which becomes enormous over time. This is where Amazon OpenSearch can help - it provides your application with scalable data storage which can be both simple relational data or complex JSON documents for a number of use cases including Website search, Enterprise search, Log analytics, Application performance monitoring and Security analytics. 
@@ -39,10 +39,10 @@ Now that you have a good understanding of the benefits of using Amazon OpenSearc
 
 > **Note**: This tutorial uses a domain with open access. For the highest level of security, we recommend that you put your domain inside a virtual private cloud (VPC).
 
-## Step 1. Create an Amazon OpenSearch Service domain
+## Step 1 Create an Amazon OpenSearch Service domain
 To experience the capability of using SQL with OpenSearch, we will setup an OpenSearch service domain which is synonymous with an OpenSearch cluster. Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs. 
 
-### To create an OpenSearch Service domain using the console
+To create an OpenSearch Service domain using the console
 The list of steps below show how you can use the AWS console to create an OpenSearch Service domain so that you can begin loading sample data and trying out SQL queries against that data.
 1. Go to [https://aws.amazon.com](https://aws.amazon.com/) and choose **Sign In to the Console**.
 2. Under **Analytics**, choose **Amazon OpenSearch Service**.
@@ -59,7 +59,7 @@ The list of steps below show how you can use the AWS console to create an OpenSe
 13. For **Access policy**, choose **Only use fine-grained access control**. In this tutorial, fine-grained access control handles authentication, not the domain access policy.
 14. Ignore the rest of the settings and choose **Create**. New domains typically take 15–30 minutes to initialize, but can take longer depending on the configuration. After your domain initializes, select it to open its configuration pane. Note the domain endpoint under **General information** (for example, `https://search-my-domain.us-east-1.es.amazonaws.com`), which you'll use in the next step.
 
-## Step 2. Ingest Sample data into your OpenSearch domain
+## Step 2 Ingest Sample data into your OpenSearch domain
 This step covers the ingestion of sample data into OpenSearch so that you can test sample SQL queries on that data. 
 1. Navigate to your OpenSearch service on the AWS console. On the Dashboard section, your domain should be listed under the header “Name”. Click on any of your domains.
   ![Image: image.png](images/image_01.png)
@@ -81,7 +81,7 @@ This step covers the ingestion of sample data into OpenSearch so that you can te
 
 ![Image: image.png](images/image_07.png)
 
-### Mapping concepts across SQL and OpenSearch
+Mapping concepts across SQL and OpenSearch
 
 In this section we map concepts across SQL and OpenSearch so that you can use SQL more effectively to search data in your OpenSearch domain. While SQL and OpenSearch have different terms for the way the data is organized (and different semantics), essentially their purpose is the same. So let’s start from the bottom; these roughly are:
 
@@ -94,7 +94,7 @@ In this section we map concepts across SQL and OpenSearch so that you can use SQ
 |`catalog` or `database`|`cluster` instance or domain|In SQL, `catalog` or `database` are used interchangeably and represent a set of schemas that is, a number of tables. In OpenSearch the set of indices available are grouped in a `cluster`` or domain`. The semantics also differ a bit; a `database` is essentially yet another namespace (which can have some implications on the way data is stored) while an OpenSearch `cluster` is a runtime instance, or rather a set of at least one OpenSearch instance (typically running distributed). In practice this means that while in SQL one can potentially have multiple catalogs inside an instance, in OpenSearch one is restricted to only *one*.|
 |`cluster`|`cluster` (federated)|Traditionally in SQL, *cluster* refers to a single RDMBS instance which contains a number of `catalog`s or `database`s (see above). While RDBMS tend to have only one running instance, on a single machine (*not* distributed), OpenSearch goes the opposite way and by default, is distributed and multi-instance. <br> <br>Further more, an OpenSearch `cluster` can be connected to other `cluster`s in a *federated* fashion thus `cluster` means:<br>`single cluster`: Multiple Elasticsearch instances typically distributed across machines, running within the same namespace.<br>`multiple clusters`:: Multiple clusters, each with its own namespace, connected to each other in a federated setup.<br><br>Cross-cluster search in Amazon OpenSearch Service lets you perform queries and aggregations across multiple connected domains. It often makes more sense to use multiple smaller domains instead of a single large domain, especially when you're running different types of workloads.|
 
-## Step 3: Running Basic SQL Queries
+## Step 3 Running Basic SQL Queries
 We are starting with running a basic set of SQL queries to help understand the key concepts.
 1. To list all your indexes in your current domain, run the SQL query below in the Query Workbench:
 
