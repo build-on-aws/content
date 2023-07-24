@@ -1,6 +1,6 @@
 ---
 title: Title
-description: Description
+description: Introduction ot the concept of explainability
 tags:
   - ai-explainability
   - ai-fairness
@@ -114,11 +114,9 @@ Table 1 provided a comprehensive classification of explainability approaches.
 
 Model explanator takes a model $\mathcal{x}[input] \implies \mathcal{Y}[predictions]$ and a specific labeled dataset as an input and creates and explanation belonging to the set $\mathcal{E}[explanations]$. More formally:
 
-```text
 $$
 \large{ e: \rightarrow (\mathcal{X} \rightarrow \mathcal{Y}) \times (\mathcal{X}\times \mathcal{Y}) \rightarrow \mathcal{E} }
 $$
-```
 
 As mentioned in the previous sections, there are two approaches to explanation: global and local. In the case of global explanations, explanator $e$ take a model $b$ and a dataset $\mathcal{D'}$ or $e(b, \mathcal{D'})$. Local implementation, takes a model $b$ and an instance from the dataset $(x,y) \in \mathcal{D'}$ as input. This is consistent with the intuitive definition that global explanators explain a model's inferences over a specific dataset and local explantors provide interpretation for a specific instance of data belonging to a dataset.
 
@@ -142,9 +140,9 @@ Figure 2 shows a simplified version of a simple approximation (blue graph) that 
 
 More formally, finding a surrogate model results in solving the problem that is formulated below. In simpler terms, explainability though surrogate models is the process of fitting an explainable model $w$ to make predictions where the average distance between the the outcome of the surrogate model and predictions of the black-box model is bounded:
 
-```math
+$$
 \large{ w^* = \text{arg} \min\limits_{x \in \mathcal{\chi}} \frac{1}{|\mathcal{X}|} \sum_{x \in \mathcal{X}}S(w(x), b(x)) }
-```
+$$
 
 $S$ is called the ***fidelity score*** and is a measure of how well the white-box surrogate model $w$ approximates the black-box model $b$. The smaller the value for $S$ is, the better the approximate is.
 
