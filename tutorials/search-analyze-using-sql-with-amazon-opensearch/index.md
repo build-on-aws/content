@@ -28,13 +28,16 @@ In this tutorial you'll get hands on with using SQL with Amazon OpenSearch using
 
 
 | ToC |
+## Table of Contents
 |-----|
-## What is Amazon OpenSearch? 
-## Step 1. Create an Amazon OpenSearch Service domain
-## Step 2. Ingest Sample data into your OpenSearch domain
-## Step 3: Running Basic SQL Queries
-## Step 4: Running Complex SQL queries on multiple indexes or tables
-## Step 5: Using SQL Functions
+### What is Amazon OpenSearch? 
+### Step 1. Create an Amazon OpenSearch Service domain
+### Step 2. Ingest Sample data into your OpenSearch domain
+### Step 3: Running Basic SQL Queries
+### Step 4: Running Complex SQL queries on multiple indexes or tables
+### Step 5: Using SQL Functions
+### Conclusion
+### Next Steps
 
 ## What is Amazon OpenSearch? 
 
@@ -170,6 +173,24 @@ FROM index_name
 [ORDER BY expression [IS [NOT] NULL] [ASC | DESC] [, ...]]
 [LIMIT [offset, ] size]
 ```
+We want to run a SQL query with a complex filter to get a limited set of results from the ecommerce sample table. Here is an example of the SQL which uses parenthesis to bind components of where clauses, i.e., If the query has multiple and or conditions, then it's necessary to use parentheses to ensure the correct order of operations. In short for complex queries, it is necessary to use a round Bracket and for a simple query, you can avoid a round bracket. This example shows how a combination of >, OR, BETWEEN, AND, =, NOT and a SQL Function can be used in a single statement.  
+
+```sql
+SELECT type, day_of_week_i, total_quantity, taxless_total_price 
+FROM opensearch_dashboards_sample_data_ecommerce
+where (total_quantity > 3 or taxless_total_price between 200 and 300) 
+and day_of_week = 'Friday' 
+and customer_gender is not 'MALE' 
+and MATCHQUERY(category, 'ACCESSORIES')
+limit 5
+```
+type |day_of_week_i|total_quantity|taxless_total_price|
+-----+-------------+--------------+-------------------+
+order|            4|             4|             133.96|
+order|            4|             4|              86.96|
+order|            4|             4|             112.96|
+order|            4|             4|             121.96|
+order|            4|             4|              70.96|
 
 6. Use the `DISTINCT` clause to get back only unique field values. You can specify one or more field names:
 
@@ -822,7 +843,7 @@ Broadly, you can classify queries into two categories—*leaf queries* and *comp
 ## Conclusion
 We covered the capabilities, benefits and typical use-cases for Amazon OpenSearch. To gain understanding of how data can be easily searched in OpenSearch using SQL, we ingested sample data in OpenSearch and then ran a set of simple and complex SQL queries on this data.
 
-SQL support is very important in the real-world of OpenSearch application developers and end users because it provides an easy mechansim for application builders and data analysts to query the data in OpenSearch. By using SQL functions and joins between tables (although joins can be a drag on performance for large tables) developers can reduce development times because more complex searches can be accomplished with lesser amount of code. Also it fulfils a key requirement of allowing a non-programmatic way of accessing and analyzing OpenSearch data via SQL from BI Query and reporting tools.  
+SQL support is very important in the real-world of OpenSearch application developers and end users because it provides an easy mechansim for application builders and data analysts to query the data in OpenSearch. By using a combination of SQL operators, SQL functions and joins between tables (A Note of Caution: Table Joins are expensive operations from the performance perspective especially for large tables) developers can reduce development times because more complex searches can be accomplished with lesser amount of code. Also it fulfils a key requirement of allowing a non-programmatic way (instead of REST API) of accessing and analyzing OpenSearch data via SQL from BI Query and reporting tools.  
 
 ## Next Steps 
 
