@@ -1,31 +1,29 @@
 ---
-title: Needs title
-description: Needs description
+title: Graph theory
+description: This post provides the reader with a graph theory theoritical minimum in order to understand GNN terminology.
 tags:
   - graphml
   - graph-neural-networks
   - gnn
   - dgl
   - graph
-  - graph-theory
-  - MPNN
-  - message-passing-neural-networks
-  - karate-club
+  - ai-ml
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
-Finally the theoretical foundation is laid through [part 3](03-message-passing-neural-networks) and [part 4](04-graph-convolutional-networks) of this blog series and we are ready to get through a hello world sort of tutorial using Deep Graph Library.
+
+|ToC|
+|---|
+
+Finally the theoretical foundation is laid through [part 3](../03-message-passing-neural-networks) and [part 4](../04-graph-convolutional-networks) of this blog series and we are ready to get through a hello world sort of tutorial using Deep Graph Library.
 In this notebook, we shall implement a simple example of the Karate club, which is basically the MNIST of GNN.
 
-- [part 1](/posts/machine-learning-graphs/01-motivation-for-graph-ml) - Motivation for using graphs.
-- [Part 2](/posts/machine-learning-graphs/02-graph-theory) - Graph theory, a theoretical minimum.
-- [Part 3](/posts/machine-learning-graphs/03-message-passing-neural-networks) - MPNN paradigm.
-- [Part 4](/posts/machine-learning-graphs/04-graph-convolutional-networks) - GCN, a brief introduction to the theory.
-- [Part 5](/posts/machine-learning-graphs/05-GNN-example-karate-club) - Karate Club example, GNN's HelloWorld using Deep Graph Library.
-- [Part 6](/posts/machine-learning-graphs/06-knowledge-graph-embedding) - Introduction to Knowledge Embedding in graphs.
-- [Part 7](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE) - Under the hood of DGL-KE, a framework for knowledge embedding using DGL.
-- [Part 8](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) - DGL-KE in practice, Drug repurposing using DGL-KE
+|SeriesToC|
+|---------|
 
 ```python
 import networkx as nx
@@ -131,9 +129,9 @@ G.ndata['features'][0]
 
 For detailed information, please refer to the [graph convolutional network](lnk) in the series. Essentially, at each layer, each node carries a feature vector. In our case, we have seen how a feature tensor is being created using using embedding `embedding = nn.Embedding(34,5)` and then assigned to the nodes. `DGL_G.ndata['features'] = embedding.weight`. You can observe that the size of the embedding tensort on `axis[0]` is 34 and matches the number of nodes.The GCN, then aggregates these features, using its neighborhood, before updating the next layer with its value.  This is in keeping with the MPNN paradigm. For more details on MPNN, please refer to the [MPNN entry](link) from this series. Figure 1 visualizes the process.
 
-![mpnn mailbox](images/mailbox.png)
+![mpnn mailbox](images/mailbox.png "Figure1: MPNN paradigm. Next layer value for the hidden state of nove $v_1$ is the sum of current hidden values of its neighbors, passed through a function that can potentially be a neural network. the old value of the node itself is not included in the computation. Additionally we should note that there is no need that we include only the immediate neighbors. We can design a definition for what a neighbor it. We can consider to goo deeper or any other means that could help up have an effective embedding of the graph.")
 
-Figure1: MPNN paradigm. Next layer value for the hidden state of nove $v_1$ is the sum of current hidden values of its neighbors, passed through a function that can potentially be a neural network. the old value of the node itself is not included in the computation. Additionally we should note that there is no need that we include only the immediate neighbors. We can design a definition for what a neighbor it. We can consider to goo deeper or any other means that could help up have an effective embedding of the graph.
+
 
 ```python
 from dgl.nn.pytorch import GraphConv
@@ -262,56 +260,12 @@ for epoch in range(50):
     Epoch 1 | Loss: 0.6903
     Epoch 2 | Loss: 0.6654
     Epoch 3 | Loss: 0.6424
-    Epoch 4 | Loss: 0.6217
-    Epoch 5 | Loss: 0.6044
-    Epoch 6 | Loss: 0.5873
-    Epoch 7 | Loss: 0.5698
-    Epoch 8 | Loss: 0.5521
-    Epoch 9 | Loss: 0.5341
-    Epoch 10 | Loss: 0.5157
-    Epoch 11 | Loss: 0.4968
-    Epoch 12 | Loss: 0.4777
-    Epoch 13 | Loss: 0.4585
-    Epoch 14 | Loss: 0.4392
-    Epoch 15 | Loss: 0.4200
-    Epoch 16 | Loss: 0.4009
-    Epoch 17 | Loss: 0.3821
-    Epoch 18 | Loss: 0.3635
-    Epoch 19 | Loss: 0.3453
-    Epoch 20 | Loss: 0.3274
-    Epoch 21 | Loss: 0.3099
-    Epoch 22 | Loss: 0.2928
-    Epoch 23 | Loss: 0.2760
-    Epoch 24 | Loss: 0.2596
-    Epoch 25 | Loss: 0.2438
-    Epoch 26 | Loss: 0.2287
-    Epoch 27 | Loss: 0.2143
-    Epoch 28 | Loss: 0.2006
-    Epoch 29 | Loss: 0.1875
-    Epoch 30 | Loss: 0.1752
-    Epoch 31 | Loss: 0.1636
-    Epoch 32 | Loss: 0.1527
-    Epoch 33 | Loss: 0.1425
-    Epoch 34 | Loss: 0.1330
-    Epoch 35 | Loss: 0.1240
-    Epoch 36 | Loss: 0.1156
-    Epoch 37 | Loss: 0.1079
-    Epoch 38 | Loss: 0.1007
-    Epoch 39 | Loss: 0.0938
-    Epoch 40 | Loss: 0.0874
-    Epoch 41 | Loss: 0.0815
-    Epoch 42 | Loss: 0.0760
-    Epoch 43 | Loss: 0.0709
-    Epoch 44 | Loss: 0.0662
-    Epoch 45 | Loss: 0.0619
+...
     Epoch 46 | Loss: 0.0579
     Epoch 47 | Loss: 0.0542
     Epoch 48 | Loss: 0.0507
     Epoch 49 | Loss: 0.0474
 
-
-    /Users/cyrusmv/minicond/envs/dgl/lib/python3.9/site-packages/torch/amp/autocast_mode.py:198: UserWarning: User provided device_type of 'cuda', but CUDA is not available. Disabling
-      warnings.warn('User provided device_type of \'cuda\', but CUDA is not available. Disabling')
 ```
 
 

@@ -22,6 +22,9 @@ additionalAuthors:
 
 In the [previous post](../04-graph-convolutional-networks), we came across concept of MPNN. There is only one theoretical step is left before we can get our hands dirty, and that concept is GCN.
 
+|SeriesToC|
+|---------|
+
 ## GCN Goal
 
 - Learn a function of signals/features on a graph $\mathcal{G}=(\mathcal{V}, \mathcal{E})$ and classify vertices according to some node label. The function  takes as input:

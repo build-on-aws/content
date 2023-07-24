@@ -519,4 +519,4 @@ plt.show()
 
 ## What is next?
 
-Next we look into [MPNN or Message Passing Neural Networks](../machine-learning-graphs/03-message-passing-neural-networks) paradigm.
+Next we look into [Knowledge Graph Embedding](../06-knowledge-graph-embedding) paradigm.
