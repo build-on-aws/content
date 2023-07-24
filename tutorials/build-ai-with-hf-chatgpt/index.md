@@ -7,6 +7,7 @@ tags:
     - chatgpt
     - hugging-face
     - amazon-sagemaker
+showInHomeFeed: true
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
 date: 2023-07-24
