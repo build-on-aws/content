@@ -1,5 +1,5 @@
 ---
-title: "Build Your Own Recommendation Engine for a Streaming Platform Clone on AWS: A Full Stack Tutorial"
+title: "Build Your Own Recommendation Engine for a Movies Streaming Platform Clone on AWS: A Full Stack Tutorial"
 description: "Hands-on tutorial showing how to build a full stack recomemndation engine integrated for a Streaming Platform Clone"
 tags:
   - machinelearning
