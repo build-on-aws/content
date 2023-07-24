@@ -60,7 +60,8 @@ The list of steps below show how you can use the AWS console to create an OpenSe
 14. Ignore the rest of the settings and choose **Create**. New domains typically take 15–30 minutes to initialize, but can take longer depending on the configuration. After your domain initializes, select it to open its configuration pane. Note the domain endpoint under **General information** (for example, `https://search-my-domain.us-east-1.es.amazonaws.com`), which you'll use in the next step.
 
 ## Step 2 Ingest Sample data into your OpenSearch domain
-This step covers the ingestion of sample data into OpenSearch so that you can test sample SQL queries on that data. 
+
+### This step covers the ingestion of sample data into OpenSearch so that you can test sample SQL queries on that data. 
 1. Navigate to your OpenSearch service on the AWS console. On the Dashboard section, your domain should be listed under the header “Name”. Click on any of your domains.
   ![Image: image.png](images/image_01.png)
 1. Click on the OpenSearch Dashboard URL link for this domain.
@@ -95,7 +96,8 @@ In this section we map concepts across SQL and OpenSearch so that you can use SQ
 |`cluster`|`cluster` (federated)|Traditionally in SQL, *cluster* refers to a single RDMBS instance which contains a number of `catalog`s or `database`s (see above). While RDBMS tend to have only one running instance, on a single machine (*not* distributed), OpenSearch goes the opposite way and by default, is distributed and multi-instance. <br> <br>Further more, an OpenSearch `cluster` can be connected to other `cluster`s in a *federated* fashion thus `cluster` means:<br>`single cluster`: Multiple Elasticsearch instances typically distributed across machines, running within the same namespace.<br>`multiple clusters`:: Multiple clusters, each with its own namespace, connected to each other in a federated setup.<br><br>Cross-cluster search in Amazon OpenSearch Service lets you perform queries and aggregations across multiple connected domains. It often makes more sense to use multiple smaller domains instead of a single large domain, especially when you're running different types of workloads.|
 
 ## Step 3 Running Basic SQL Queries
-We are starting with running a basic set of SQL queries to help understand the key concepts.
+
+### We are starting with running a basic set of SQL queries to help understand the key concepts.
 1. To list all your indexes in your current domain, run the SQL query below in the Query Workbench:
 
 ```sql
