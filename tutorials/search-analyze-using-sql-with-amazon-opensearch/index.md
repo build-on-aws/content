@@ -21,10 +21,10 @@ In this tutorial you'll get hands on with using SQL with Amazon OpenSearch using
 | ✅ AWS experience      | 200 - Intermediate                                                        |
 | ⏱ Time to complete    | 60 minutes                                                      |
 | 💰 Cost to complete    | [Free tier](https://aws.amazon.com/free/) eligible                                               |
-| 🧩 Prerequisites       | - [AWS account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
+| 🧩 Prerequisites       | - [AWS account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/sample-python-web-app)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-04-11                                                      |
+| ⏰ Last Updated        | 2023-07-24                                                      |
 
 | ToC |
 |-----|
@@ -39,7 +39,7 @@ Now that you have a good understanding of the benefits of using Amazon OpenSearc
 
 > **Note**: This tutorial uses a domain with open access. For the highest level of security, we recommend that you put your domain inside a virtual private cloud (VPC).
 
-## Step 1 Create an Amazon OpenSearch Service domain
+## Step 1 - Create an Amazon OpenSearch Service domain
 To experience the capability of using SQL with OpenSearch, we will setup an OpenSearch service domain which is synonymous with an OpenSearch cluster. Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs. 
 
 To create an OpenSearch Service domain using the console
@@ -59,7 +59,7 @@ The list of steps below show how you can use the AWS console to create an OpenSe
 13. For **Access policy**, choose **Only use fine-grained access control**. In this tutorial, fine-grained access control handles authentication, not the domain access policy.
 14. Ignore the rest of the settings and choose **Create**. New domains typically take 15–30 minutes to initialize, but can take longer depending on the configuration. After your domain initializes, select it to open its configuration pane. Note the domain endpoint under **General information** (for example, `https://search-my-domain.us-east-1.es.amazonaws.com`), which you'll use in the next step.
 
-## Step 2 Ingest Sample data into your OpenSearch domain
+## Step 2 - Ingest Sample data into your OpenSearch domain
 
 ### This step covers the ingestion of sample data into OpenSearch so that you can test sample SQL queries on that data. 
 1. Navigate to your OpenSearch service on the AWS console. On the Dashboard section, your domain should be listed under the header “Name”. Click on any of your domains.
@@ -95,7 +95,7 @@ In this section we map concepts across SQL and OpenSearch so that you can use SQ
 |`catalog` or `database`|`cluster` instance or domain|In SQL, `catalog` or `database` are used interchangeably and represent a set of schemas that is, a number of tables. In OpenSearch the set of indices available are grouped in a `cluster`` or domain`. The semantics also differ a bit; a `database` is essentially yet another namespace (which can have some implications on the way data is stored) while an OpenSearch `cluster` is a runtime instance, or rather a set of at least one OpenSearch instance (typically running distributed). In practice this means that while in SQL one can potentially have multiple catalogs inside an instance, in OpenSearch one is restricted to only *one*.|
 |`cluster`|`cluster` (federated)|Traditionally in SQL, *cluster* refers to a single RDMBS instance which contains a number of `catalog`s or `database`s (see above). While RDBMS tend to have only one running instance, on a single machine (*not* distributed), OpenSearch goes the opposite way and by default, is distributed and multi-instance. <br> <br>Further more, an OpenSearch `cluster` can be connected to other `cluster`s in a *federated* fashion thus `cluster` means:<br>`single cluster`: Multiple Elasticsearch instances typically distributed across machines, running within the same namespace.<br>`multiple clusters`:: Multiple clusters, each with its own namespace, connected to each other in a federated setup.<br><br>Cross-cluster search in Amazon OpenSearch Service lets you perform queries and aggregations across multiple connected domains. It often makes more sense to use multiple smaller domains instead of a single large domain, especially when you're running different types of workloads.|
 
-## Step 3 Running Basic SQL Queries
+## Step 3 - Running Basic SQL Queries
 
 ### We are starting with running a basic set of SQL queries to help understand the key concepts.
 1. To list all your indexes in your current domain, run the SQL query below in the Query Workbench:
@@ -400,7 +400,7 @@ WHERE total_quantity > 4
 
 The `deleted_rows` field shows the number of documents deleted.
 
-## Step 4: Running Complex SQL queries on multiple indexes or tables
+## Step 4 - Running Complex SQL queries on multiple indexes or tables
 Now that we have covered the basics of SQL querying, in this section we run more complex SQL queries to understand how they work. 
 Let’s insert some data related to employees and accounts (into separate indexes). Navigate to DevTools and bulk insert via the following statements. Enter these on the left pane of the console and the results will be shown on the right side of the console.
 
@@ -532,7 +532,7 @@ Result set:
 |Nanette|Bates|32838|
 
 
-## Step 5: Using SQL Functions
+## Step 5 - Using SQL Functions
 In this step we cover the rich set of SQL Functions which can help the application builder leverage more search and analytics capabilities of OpenSearch. 
 For a list of functions supported, [see the documentation here](https://opensearch.org/docs/latest/search-plugins/sql/functions/).
 
