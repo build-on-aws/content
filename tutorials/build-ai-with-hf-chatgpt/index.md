@@ -10,7 +10,7 @@ tags:
     - amazon-sagemaker
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
-date: 2023-07-20
+date: 2023-07-24
 ---
 
 When was the last time you watched a YouTube video to learn something new? According to a [recent survey](https://www.techsmith.com/blog/video-statistics/) most respondents view videos 2-to-4 times per week, and [in a 2019 Google study](https://www.thinkwithgoogle.com/marketing-strategies/video/youtube-learning-statistics/), 86% of U.S. viewers said they used YouTube to learn new things.
