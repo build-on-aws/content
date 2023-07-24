@@ -126,9 +126,12 @@ We can see below which database engines support SYNC and SEMISYNC replication so
   
 ![RDS Engines that support Sync](images/pic10_table_sync_support.jpg "Figure 10. RDS Engines that support Sync")
   
-Its worth stating the Database Edition can impact what choices are available, for RDS Oracle Logical replicas are only available using Enterprise Edition. For other Amazon engines including SQL Server logical replicas are available under both standard and enterprise editions. 
+Its worth stating the Database Edition can impact what choices are available, for RDS Oracle Logical replicas are only available using Enterprise Edition. For other Amazon engines including SQL Server logical replicas are available under both standard and enterprise editions.
 
 We should also note that logical and physical DR databases are not mutually exclusive. We could have both a logical replica(s) and a multi AZ physical copy for the same source database and in fact this may provide a more complete DR setup.
+
+## RDS Custom for Oracle and SQLServer
+Amazon RDS provides a lower level offering called RDS Custom for database engines Oracle and SQLServer. With this offering we gain access to the underlying compute servers o/s. Being able to access the compute also allows us to make customisations to the RDS Engine and its configuration not possible under normal RDS. With regard to disaster recovery the ability to configure Synchronous Logical replication for Oracle is relavent for us as a ZDLDR Solition. RDS Custom also gives  SQLServer the ability for Physical Synchronous Multi AZ configuration which is not possible under standard RDS, but this won't protect against disk corruptions.
 
 ## Disaster Blast Radius
 Not all failures require disaster recovery on Amazon RDS. For an RDS Database the implicit services that support the database are:
