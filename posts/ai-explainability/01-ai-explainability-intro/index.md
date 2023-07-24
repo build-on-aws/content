@@ -18,8 +18,6 @@ additionalAuthors:
 |ToC|
 |---|
 
-This is for titles under images
-![alt-text](url "asedfadsfdasfasdf")
 
 In this series of blogs we learn about what AI Explainability is, we will have a deeper look into local post-hoc explainability using fundamental perturbation methods such as SHAP and LIME. In the future posts, we explore other methods such as back-propagation methods, including gradient-based methods and those based in DeepLift.
 The current publication has 5 parts, which as follows:

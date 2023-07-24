@@ -1,6 +1,6 @@
 ---
 title: "AI Explainibility Series"
-description: "Some description"
+description: "This series takes an incremental step in introducing perturbasion based, ad-hoc, and blackbox methods of explainability. building towards providing code base for implementatin of AIX using LIME and kernel SHAP."
 navigationBars: bottom
 posts:
   - 01-ai-explainability-intro
@@ -10,3 +10,5 @@ posts:
   - 05-shap
   - 06-shap-tutorial
 --- 
+
+his series takes an incremental step in introducing perturbasion based, ad-hoc, and blackbox methods of explainability. building towards providing code base for implementatin of AIX using LIME and kernel SHAP.
