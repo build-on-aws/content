@@ -1,40 +1,41 @@
 ---
-title: Needs title
-description: Needs description
+title: DGL-KE tool
+description: This post provides the reader with an in depth understanding of of how DGL-KE uses innovations to provide the fastest in class KGE tool.
 tags:
   - graphml
   - graph-neural-networks
   - gnn
   - dgl
   - graph
-  - graph-theory
-  - MPNN
-  - message-passing-neural-networks
+  - ai-ml
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
 
-In a [previous post](06-kbe.md), I describes the KGE models that are implemented as a part of DGL-KE. This blog provides  details about optimizations that are implemented by DGL-KE that makes it very efficient for multi-device and distributed training as well as providing an example that can be run on a laptop. 
+|ToC|
+|---|
 
-- [part 1](/posts/machine-learning-graphs/01-motivation-for-graph-ml) - Motivation for using graphs.
-- [Part 2](/posts/machine-learning-graphs/02-graph-theory) - Graph theory, a theoretical minimum.
-- [Part 3](/posts/machine-learning-graphs/03-message-passing-neural-networks) - MPNN paradigm.
-- [Part 4](/posts/machine-learning-graphs/04-graph-convolutional-networks) - GCN, a brief introduction to the theory.
-- [Part 5](/posts/machine-learning-graphs/05-GNN-example-karate-club) - Karate Club example, GNN's HelloWorld using Deep Graph Library.
-- [Part 6](/posts/machine-learning-graphs/06-knowledge-graph-embedding) - Introduction to Knowledge Embedding in graphs.
-- [Part 7](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE) - Under the hood of DGL-KE, a framework for knowledge embedding using DGL.
-- [Part 8](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) - DGL-KE in practice, Drug repurposing using DGL-KE
+In a [previous post](../06-kbe.md), I describes the KGE models that are implemented as a part of DGL-KE. This blog provides  details about optimizations that are implemented by DGL-KE that makes it very efficient for multi-device and distributed training as well as providing an example that can be run on a laptop. 
+
+
 
 ## What is DGL-KE
 
 DGL-KE is a high performance, easy-to-use, and scalable package for learning large-scale knowledge graph embeddings. DGL-KE contains a python package atop DGL in order to be able to take advantage of distributed graph operations implemented by DGL. DGL in turn takes advantage of popular deep learning libraries such as MXNet and Pytorch for performing tensor operations.
 
-![dgl-ke](06-knowledge-graph-embedding)
+![dgl-ke](images/03-dgl-ke.png)
 
-As illustrated in the picture above, DGL-KE implements some of the most popular knowledge embedding models such as TransE, TransR, RotateE, DistMulti, RESCAL, and ComplEx. More details about the models cab be found [here](/posts/machine-learning-graphs/06-knowledge-graph-embedding).
+As illustrated in the picture above, DGL-KE implements some of the most popular knowledge embedding models such as TransE, TransR, RotateE, DistMulti, RESCAL, and ComplEx. More details about the models cab be found [here](../machine-learning-graphs/06-knowledge-graph-embedding).
 
 The models are implemented in python and rely on pytorch in order to run. The runtime includes DGL Graph for graph operations, DGL Sampler to perform sampling and triplets sampling, and a key-value pair in memory data store,DGL KVStore, specifically designed for DGL-KE to hold embedding in distributed training. The KV store has graph partitioning capabilities it uses to distribute graphs across multiple machines.
+
+
+|SeriesToC|
+|---------|
 
 ## Challenges Facing Knowledge Graph Embedding
 
@@ -179,4 +180,4 @@ First we set the backend of dgl to be pytorch. You could have chosen MXNet or Te
 
 ## What's next?
 
-[Next post](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) details out a drug repurposing reasearch conducted by AWS science as an example of KGE.
+[Next post](../machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) details out a drug repurposing reasearch conducted by AWS science as an example of KGE.
