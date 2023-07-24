@@ -294,7 +294,7 @@ GROUP BY manufacturer;
 |Tigress Enterprises Curvy|3.53235|
 |Tigress Enterprises MAMA|3.85656|
 
-### Using `WHERE` and `HAVING` clauses in SQL
+Using `WHERE` and `HAVING` clauses in SQL
 
 1. Both ``WHERE`` and ``HAVING`` are used to filter results. The ``WHERE`` filter is applied before the ``GROUP BY`` phase, so you cannot use aggregate functions in a ``WHERE`` clause. However, you can use the ``WHERE`` clause to limit the rows to which the aggregate is then applied. Below is a list of operators you can use with the WHERE clause to specify a condition to filter the results.
 
