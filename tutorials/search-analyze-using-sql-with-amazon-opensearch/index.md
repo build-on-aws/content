@@ -41,11 +41,12 @@ Now that you have a good understanding of the benefits of using Amazon OpenSearc
 > **Note**: This tutorial uses a domain with open access. For the highest level of security, we recommend that you put your domain inside a virtual private cloud (VPC).
 
 ## Step 1 - Create an Amazon OpenSearch Service domain
-To experience the capability of using SQL with OpenSearch, we will setup an OpenSearch service domain which is synonymous with an OpenSearch cluster. Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs. 
+
+### To experience the capability of using SQL with OpenSearch, we will setup an OpenSearch service domain which is synonymous with an OpenSearch cluster. Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs. 
 
 To create an OpenSearch Service domain using the console
 
-### The list of steps below show how you can use the AWS console to create an OpenSearch Service domain so that you can begin loading sample data and trying out SQL queries against that data.
+The list of steps below show how you can use the AWS console to create an OpenSearch Service domain so that you can begin loading sample data and trying out SQL queries against that data.
 1. Go to [https://aws.amazon.com](https://aws.amazon.com/) and choose **Sign In to the Console**.
 2. Under **Analytics**, choose **Amazon OpenSearch Service**.
 3. Under the "Get Started" choice dialog, select "Managed Clusters" then click on **Create domain**.
@@ -809,7 +810,7 @@ Results:
 }
 ```
 
-### Using JDBC with OpenSearch
+Using JDBC with OpenSearch
 We will now cover how to use JDBC with OpenSearch so that builders and OpenSearch users can run SQL queries and integrate OpenSearch with your favorite business intelligence (BI) applications.  
 The OpenSearch Java Database Connectivity (JDBC) driver comes in the form of a JAR file which can be downloaded as per the information provided in this link *[the SQL repository on GitHub](https://github.com/opensearch-project/sql-jdbc)*. Installing this will let you setup a connection to OpenSearch from a SQL client such as DBeaver, and you can then run SQL queries from that client. Similarly Amazon Quicksight has a connector to OpenSearch for data visualization. However the most common way for visualizing data in OpenSearch is via OpenSearch dashboards which is a fork from Kibana.
 
@@ -829,18 +830,18 @@ A query can consist of many query clauses. You can combine query clauses to prod
 Broadly, you can classify queries into two categories—*leaf queries* and *compound queries*:
 
 **Leaf queries**: Leaf queries search for a specified value in a certain field or fields. You can use leaf queries on their own. They include the following query types:
-**Full-text queries**: Use full-text queries to search text documents. For an analyzed text field search, full-text queries split the query string into terms with the same analyzer that was used when the field was indexed. For an exact value search, full-text queries look for the specified value without applying text analysis. To learn more, see [Full-text queries](https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/index).
-**Term-level queries**: Use term-level queries to search documents for an exact specified term, such as an ID or value range. Term-level queries do not analyze search terms or sort results by relevance score. To learn more, see [Term-level queries](https://opensearch.org/docs/latest/opensearch/query-dsl/term/).
-**Geographic and xy queries**: Use geographic queries to search documents that include geographic data. Use xy queries to search documents that include points and shapes in a two-dimensional coordinate system. To learn more, see [Geographic and xy queries](https://opensearch.org/docs/latest/opensearch/query-dsl/geo-and-xy/index).
-**Joining queries**: Use joining queries to search nested fields or return parent and child documents that match a specific query. Types of joining queries include `nested`, `has_child`, `has_parent`, and `parent_id` queries.
-**Span queries**: Use span queries to perform precise positional searches. Span queries are low-level, specific queries that provide control over the order and proximity of specified query terms. They are primarily used to search legal documents. To learn more, see [Span queries](https://opensearch.org/docs/latest/opensearch/query-dsl/span-query/).
-**Specialized queries**: Specialized queries include all other query types (`distance_feature`, `more_like_this`, `percolate`, `rank_feature`, `script`, `script_score`, `wrapper`, and `pinned_query`).
 
-**Compound queries**: Compound queries serve as wrappers for multiple leaf or compound clauses either to combine their results or to modify their behavior. They include the Boolean, disjunction max, constant score, function score, and boosting query types. To learn more, see [Compound queries](https://opensearch.org/docs/latest/opensearch/query-dsl/compound/index).
+- **Full-text queries**: Use full-text queries to search text documents. For an analyzed text field search, full-text queries split the query string into terms with the same analyzer that was used when the field was indexed. For an exact value search, full-text queries look for the specified value without applying text analysis. To learn more, see [Full-text queries](https://opensearch.org/docs/latest/opensearch/query-dsl/full-text/index).
+- **Term-level queries**: Use term-level queries to search documents for an exact specified term, such as an ID or value range. Term-level queries do not analyze search terms or sort results by relevance score. To learn more, see [Term-level queries](https://opensearch.org/docs/latest/opensearch/query-dsl/term/).
+- **Geographic and xy queries**: Use geographic queries to search documents that include geographic data. Use xy queries to search documents that include points and shapes in a two-dimensional coordinate system. To learn more, see [Geographic and xy queries](https://opensearch.org/docs/latest/opensearch/query-dsl/geo-and-xy/index).
+- **Joining queries**: Use joining queries to search nested fields or return parent and child documents that match a specific query. Types of joining queries include `nested`, `has_child`, `has_parent`, and `parent_id` queries.
+- **Span queries**: Use span queries to perform precise positional searches. Span queries are low-level, specific queries that provide control over the order and proximity of specified query terms. They are primarily used to search legal documents. To learn more, see [Span queries](https://opensearch.org/docs/latest/opensearch/query-dsl/span-query/).
+- **Specialized queries**: Specialized queries include all other query types (`distance_feature`, `more_like_this`, `percolate`, `rank_feature`, `script`, `script_score`, `wrapper`, and `pinned_query`).
+- **Compound queries**: Compound queries serve as wrappers for multiple leaf or compound clauses either to combine their results or to modify their behavior. They include the Boolean, disjunction max, constant score, function score, and boosting query types. To learn more, see [Compound queries](https://opensearch.org/docs/latest/opensearch/query-dsl/compound/index).
 
 ## Conclusion
 
-### We covered the capabilities, benefits and typical use-cases for Amazon OpenSearch. To gain understanding of how data can be easily searched in OpenSearch using SQL, we ingested sample data in OpenSearch and then ran a set of simple and complex SQL queries on this data.
+We covered the capabilities, benefits and typical use-cases for Amazon OpenSearch. To gain understanding of how data can be easily searched in OpenSearch using SQL, we ingested sample data in OpenSearch and then ran a set of simple and complex SQL queries on this data.
 
 SQL support is very important in the real-world of OpenSearch application developers and end users because it provides an easy mechansim for application builders and data analysts to query the data in OpenSearch. By using a combination of SQL operators, SQL functions and joins between tables (A Note of Caution: Table Joins are expensive operations from the performance perspective especially for large tables) developers can reduce development times because more complex searches can be accomplished with lesser amount of code. Also it fulfils a key requirement of allowing a non-programmatic way (instead of REST API) of accessing and analyzing OpenSearch data via SQL from BI Query and reporting tools.  
 
