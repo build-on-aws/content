@@ -1,6 +1,6 @@
 ---
-title: Title
-description: Description
+title: LIME Tutorial
+description: This post provides a walk through to apply LIME for image explainability based on the original LIME paper (referenced in the post). Full code is provided in a related repo: https://github.com/cyrusmvahid/AIX-BuildOn/blob/main/04-lime-example.ipynb 
 tags:
   - ai-explainability
   - ai-fairness
@@ -24,7 +24,7 @@ additionalAuthors:
 
 ## Context
 
-In [part 2](/posts/ai-explainability/02-lime) we went through the theoretical explanation of the LIME paper. In this part we implement an object detection example. You can find the full code [here](/posts/ai-explainability/03-lime-tutorial) or try the notebook directly in [github](https://github.com/cyrusmvahid/AIX-BuildOn/blob/main/04-lime-example.ipynb).
+In [part 2](../ai-explainability/02-lime) we went through the theoretical explanation of the LIME paper. In this part we implement an object detection example. You can find the full code [here](..//ai-explainability/03-lime-tutorial) or try the notebook directly in [github](https://github.com/cyrusmvahid/AIX-BuildOn/blob/main/04-lime-example.ipynb).
 
  Example: Object detection explanation
 In this example we try using LIME's image explainer on 3 pictures, one of lions and two of cheetahs using two different deep learning models, inceptionV3 and resnet152. We then look at the regions that are picked for detecting the what animal appears in the picture and see if the explanation makes sense to humans. We start with the following high resolution images. We then transforms the images and run them through our models to attain a probabilistic prediction.
@@ -75,8 +75,10 @@ for image in img:
 
 ## transformed images
 
-![transformed images](images/processed.png)
-Figure 2: As it can be observed, the processed images are already not useful to the humans. Next we 1) make predictions using two different algorithms, 2) produce explanations, and 3) analyze the explanations.
+![transformed images](images/processed.png )
+
+"Figure 2: As it can be observed, the processed images are already not useful to the humans. Next we 1) make predictions using two different algorithms, 2) produce explanations, and 3) analyze the explanations."
+
 
 ## Choosing models we want to explain
 
@@ -214,7 +216,7 @@ This is only the code sample for model1-e.g. inception-v3. You will find in the 
 
 ## What is next?
 
-in [part 4](/posts/ai-explainability/04-shapley-values), we explore they Shapley values in the context of game theory. If you are familiar with the concepts, you can skip to [part 5](/posts/ai-explainability/05-shap) and look at application of Shapley values in implementing Kernel SHAP method.
+in [part 4](../ai-explainability/04-shapley-values), we explore they Shapley values in the context of game theory. If you are familiar with the concepts, you can skip to [part 5](../ai-explainability/05-shap) and look at application of Shapley values in implementing Kernel SHAP method.
 
 ## References
 
