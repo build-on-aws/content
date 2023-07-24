@@ -10,6 +10,8 @@ authorName: Eric Liou
 additionalAuthors: 
   - authorGithubAlias: raywang1021
     authorName: Ray Wang
+  - authorGithubAlias: JosieCheng17
+    authorName: Josie Cheng
 date: 2023-06-27
 ---
 
