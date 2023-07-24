@@ -29,7 +29,9 @@ There's a point in every developer's journey when they realize that building mac
 | ⏱ Time to complete    | 60 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=obsvbltjv&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
-| 
+|  💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/recommendation-engine-full-stack)  |
+|
+
 
 | ToC |
 |-----|
@@ -71,7 +73,7 @@ aws cloudformation package --template-file main-stack.yaml --output-template pac
 	       KeyName=my-key \
 	--capabilities CAPABILITY_NAMED_IAM --region us-east-1
 ```
-4. Replace the values (myfamousbucket, buildonaws, MyBuildOnAWSVPC, us-east-1, ami-06ca3ca175f37dd66 ,my-key) with your desired default parameter values. ami-06ca3ca175f37dd66 is the AMI for EC2 For Amazon Linux 2023 in us-east-1 region. Choose an AMI for  EC2 For Amazon Linux 2023 for the region in which you are deploying this stack. The purpose of this EC2 Instance which will be spun up is to populate the S3 bucket with the Jupyter notebook, pre-trained models, and raw data for our tutorial. After the S3 bucket is populated, the EC2 instance is spun down.
+4. Replace the values (myfamousbucket, buildonaws, MyBuildOnAWSVPC, us-east-1, ami-06ca3ca175f37dd66 ,my-key) with your desired default parameter values. ami-06ca3ca175f37dd66 is the AMI for EC2 For Amazon Linux 2023 in us-east-1 region. Choose a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (AMI)  for  [EC2](https://aws.amazon.com/ec2/getting-started/) For Amazon Linux 2023 for the region in which you are deploying this stack. The purpose of this EC2 Instance which will be spun up is to populate the S3 bucket with the Jupyter notebook, pre-trained models, and raw data for our tutorial. After the S3 bucket is populated, the EC2 instance is spun down.
 5. Next Login to the AWS console in which the tutorial setup will be done and validate that everything has been created properly. Look at all the Infrastructure resources that have been created for our tutorial. Go to the S3 bucket that has been created as part of this (In my case the name of the newly created S3 bucket is `myfamousbucket`).
 6. Take a quick look at the folder structure inside the S3 bucket. Here is how the folder structure should look like :-
 ![Shows the contents of the S3 bucket created by the Cloudformation template](images/s3bucket_data.png)
@@ -108,6 +110,7 @@ aws s3 cp s3://myfamousbucket/python_notebook/AWSWomenInEngineering2023_V3.ipynb
 17. There are various ways to automate these steps, but we will be using a sagemaker migration toolkit from [our GitHub Repository](https://github.com/build-on-aws/recommendation-engine-full-stack) to make this process easy. So lets move on to the next steps.
 
 ## Deploying the custom scaling model as a Sagemaker Endpoint
+As we saw in the steps above, we have our Custom Scaling Model that is still available in the Sagemaker Studio environment locally and we wish to deploy the Custom Scaling Model inside Sagemaker's Native SKLearn Container. One of the ways of implementing Bring Your Own Model (BYOM) on Sagemaker is to utilize Sagemaker's Native Containers. So we will make use of the Sagemaker Migration toolkit and deploy our custom Scaling Model as a Sagemaker endpoint.
 1. Log onto the AWS console of the AWS Account in which you have deployed the Cloudformation templates to build the resources for this tutorial. Make sure you are in the AWS Region in which you have deployed your stack. Copy the ARN of the Sagemaker IAM Role named as `SageMakerUserProfileRoleOutput` from the Cloudformation Outputs Tab. We will use it for setting up the sagemaker migration toolkit, since it has the permissions necessary for creating and deploying the Sagemaker Models, Endpoint configurations and Endpoints.In my case my IAM role is in this format - `arn:aws:iam::XXXXXXXXX:role/SageMakerUserProfileRole-BuildOnAWS`
 
 2. Now, lets open AWS Cloud9 via the AWS Console to deploy the Custom scaling model model.joblib. Cloud9 is a browser based Integrated Development environment on AWS which makes Code devlopment super easy. Once you are logged into the AWS Cloud9 Environment, open a new terminal (Go to Window-> New Terminal) and execute the following command to clone the repository using the main branch.
@@ -260,7 +263,7 @@ BODY
 On succesful execution of the above request, you will get a Cluster number. Here is how my Cloud 9 terminal looks like after getting back the response. :-  
 ![REST API Response for Cluster Number based on movie attributes](images/clusternumber.png) 
 
-10. Test with Postman (Optional)
+10. This is an Optional Step. If you already Postman installed on your machine, you can test with Postman as follows:-
 Example of Postman POST payload is 
 ```bash
 {"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
