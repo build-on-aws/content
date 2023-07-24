@@ -7,6 +7,7 @@ tags:
   - tutorials
   - serverless
   - aws
+showInHomeFeed: true
 authorGithubAlias: ambar265
 authorName: Ambar Kumar
 date: 2023-07-24
@@ -43,7 +44,8 @@ Now that you have a good understanding of the benefits of using Amazon OpenSearc
 To experience the capability of using SQL with OpenSearch, we will setup an OpenSearch service domain which is synonymous with an OpenSearch cluster. Domains are clusters with the settings, instance types, instance counts, and storage resources that you specify. You can create an OpenSearch Service domain by using the console, the AWS CLI, or the AWS SDKs. 
 
 To create an OpenSearch Service domain using the console
-The list of steps below show how you can use the AWS console to create an OpenSearch Service domain so that you can begin loading sample data and trying out SQL queries against that data.
+
+### The list of steps below show how you can use the AWS console to create an OpenSearch Service domain so that you can begin loading sample data and trying out SQL queries against that data.
 1. Go to [https://aws.amazon.com](https://aws.amazon.com/) and choose **Sign In to the Console**.
 2. Under **Analytics**, choose **Amazon OpenSearch Service**.
 3. Under the "Get Started" choice dialog, select "Managed Clusters" then click on **Create domain**.
@@ -401,7 +403,9 @@ WHERE total_quantity > 4
 The `deleted_rows` field shows the number of documents deleted.
 
 ## Step 4 - Running Complex SQL queries on multiple indexes or tables
-Now that we have covered the basics of SQL querying, in this section we run more complex SQL queries to understand how they work. 
+
+### Now that we have covered the basics of SQL querying, in this section we run more complex SQL queries to understand how they work. 
+
 Let’s insert some data related to employees and accounts (into separate indexes). Navigate to DevTools and bulk insert via the following statements. Enter these on the left pane of the console and the results will be shown on the right side of the console.
 
 ![Image: image.png](images/image_15.png)
@@ -533,7 +537,9 @@ Result set:
 
 
 ## Step 5 - Using SQL Functions
-In this step we cover the rich set of SQL Functions which can help the application builder leverage more search and analytics capabilities of OpenSearch. 
+
+### In this step we cover the rich set of SQL Functions which can help the application builder leverage more search and analytics capabilities of OpenSearch. 
+
 For a list of functions supported, [see the documentation here](https://opensearch.org/docs/latest/search-plugins/sql/functions/).
 
 1. Use the MATCH function in SQL for full-text search (a subset of full-text queries available in OpenSearch is supported). You can search documents that match a `string`, `number`, `date`, or `boolean` value for a given field. The `MATCHQUERY` and `MATCH_QUERY` functions are synonyms for the [`MATCH`](https://opensearch.org/docs/2.8/search-plugins/sql/full-text#match) relevance function.
@@ -833,7 +839,8 @@ Broadly, you can classify queries into two categories—*leaf queries* and *comp
 **Compound queries**: Compound queries serve as wrappers for multiple leaf or compound clauses either to combine their results or to modify their behavior. They include the Boolean, disjunction max, constant score, function score, and boosting query types. To learn more, see [Compound queries](https://opensearch.org/docs/latest/opensearch/query-dsl/compound/index).
 
 ## Conclusion
-We covered the capabilities, benefits and typical use-cases for Amazon OpenSearch. To gain understanding of how data can be easily searched in OpenSearch using SQL, we ingested sample data in OpenSearch and then ran a set of simple and complex SQL queries on this data.
+
+### We covered the capabilities, benefits and typical use-cases for Amazon OpenSearch. To gain understanding of how data can be easily searched in OpenSearch using SQL, we ingested sample data in OpenSearch and then ran a set of simple and complex SQL queries on this data.
 
 SQL support is very important in the real-world of OpenSearch application developers and end users because it provides an easy mechansim for application builders and data analysts to query the data in OpenSearch. By using a combination of SQL operators, SQL functions and joins between tables (A Note of Caution: Table Joins are expensive operations from the performance perspective especially for large tables) developers can reduce development times because more complex searches can be accomplished with lesser amount of code. Also it fulfils a key requirement of allowing a non-programmatic way (instead of REST API) of accessing and analyzing OpenSearch data via SQL from BI Query and reporting tools.  
 
