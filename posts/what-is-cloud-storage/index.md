@@ -10,7 +10,7 @@ tags:
   - file-storage
 authorGithubAlias: damonk10
 authorName: David Priest
-date: 2023-05-25
+date: 2023-07-24
 ---
 
 In the modern world, we all need storage, whether it’s the garage hiding your dusty exercise equipment, or your kitchen cupboards helping you find that one spice you really need, or that space under your stairs for stashing recently-orphaned child wizards. Well, cloud storage has just as many options as the real world — and you use them a lot more often than you might realize.
@@ -73,4 +73,4 @@ Storage and computing used to always be linked. You bought a laptop or desktop c
 
 Cloud storage is the unsung hero of the modern era: humanity is creating some 100 billion terabytes of data each year at this point, and that number is rapidly rising. But numbers that big are hard to visualize. So think about it like this: if every byte of data we created last year was a millimeter, our data would reach the sun... and back... over 300 million times. Okay, that still doesn’t help. Basically, the amount of data here is unimaginably big.
 
-And this digital reality depends on an infrastructure most of us take for granted. If you want to learn more about the cloud, including cloud storage, check out [my video on the topic](https://www.youtube.com/watch?v=zHur4SaTZ6M), and read about more exciting implementations, like how the [Code Examples team created a serverless application](https://community.aws/posts/cloud-journeys/01-serverless-image-recognition-app) that detects labels for images and lets the user download those images by label.
+And this digital reality depends on an infrastructure most of us take for granted. If you want to learn more about the cloud, including cloud storage, check out [my video on the topic](https://www.youtube.com/watch?v=zHur4SaTZ6M), and read about more exciting implementations, like how the [Code Examples team created a serverless application](/posts/cloud-journeys/01-serverless-image-recognition-app) that detects labels for images and lets the user download those images by label.
