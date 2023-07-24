@@ -1,6 +1,6 @@
 ---
-title: Motivation for using graphs
-description: This post provides an intuitive understanding of why we need graphs and how they differ from sequential models. In a way we could see graphs as a general form that superceede sequential models.
+title: Graph theory
+description: This post provides the reader with a graph theory theoritical minimum in order to understand GNN terminology.
 tags:
   - graphml
   - graph-neural-networks

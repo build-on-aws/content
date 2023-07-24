@@ -1,32 +1,31 @@
 ---
-title: Needs title
-description: Needs description
+title: MPNN
+description: Message passing neural networks is an effective way of building very detailed graph embedding methods. In this post we take a look at the foundations.
 tags:
   - graphml
   - graph-neural-networks
   - gnn
   - dgl
   - graph
-  - graph-theory
-  - MPNN
-  - message-passing-neural-networks
+  - ai-ml
 authorGithubAlias: cyrusmvahid
 authorName: Cyrus Vahid
 date: 2022-07-08
+additionalAuthors: 
+  - authorGithubAlias: kirannsa
+    authorName: Sai Kiran Jukanti
 ---
+
+|ToC|
+|---|
 
 Having fortified our knowledge of graphs in the [previous post](/posts/machine-learning-graphs/02-graph-theory), we are now ready to take a deeper look at the MPNN paradigm.
 
+|SeriesToC|
+|---------|
+
 Let us reconsider RNNs again. We calculate state of a node, $h$, and then pass it on to the next node. We are not restricted to "positive" direction of time. We can go backward. We can also stack up the layers and thus moving upwards, or downwards. Skip connections further muddle the idea of sequential time. If we take step back and consider doing a propagation step in a graph and compute a path in a graph, we have created a sequence and all things RNN can be applied to that path.
 
-- [part 1](/posts/machine-learning-graphs/01-motivation-for-graph-ml) - Motivation for using graphs.
-- [Part 2](/posts/machine-learning-graphs/02-graph-theory) - Graph theory, a theoretical minimum.
-- [Part 3](/posts/machine-learning-graphs/03-message-passing-neural-networks) - MPNN paradigm.
-- [Part 4](/posts/machine-learning-graphs/04-graph-convolutional-networks) - GCN, a brief introduction to the theory.
-- [Part 5](/posts/machine-learning-graphs/05-GNN-example-karate-club) - Karate Club example, GNN's HelloWorld using Deep Graph Library.
-- [Part 6](/posts/machine-learning-graphs/06-knowledge-graph-embedding) - Introduction to Knowledge Embedding in graphs.
-- [Part 7](/posts/machine-learning-graphs/07-dglke-oss-tool-for-KGE) - Under the hood of DGL-KE, a framework for knowledge embedding using DGL.
-- [Part 8](/posts/machine-learning-graphs/08-covid-drug-repurposing-with-DGLKE) - DGL-KE in practice, Drug repurposing using DGL-KE
 
 ## An Example
 
@@ -97,9 +96,9 @@ The readout phase, not dissimilarly to encoder in the encoder-decoder architectu
 
 Let us try an example. In the world of Marry graph above, if we want to to encode Mary, we can set hyperparameter $T$ to 2 and use message processing to propagate and update Mary's state. The figure below captures the subgraph that is used for MPNN.
 
-![contextualized graph of world of Mary](images/img0304.png)
+![contextualized graph of world of Mary](images/img0304. "Figure 4: This is a graph that provided with certain hyperparameters captures Mary's relationship with the rest of the graph. The edges and the nodes are a subset of the knowledgebase. We can now find an embedding mechanism to encode Mary in this context.")
 
-Figure 4: This is a graph that provided with certain hyperparameters captures Mary's relationship with the rest of the graph. The edges and the nodes are a subset of the knowledgebase. We can now find an embedding mechanism to encode Mary in this context.
+
 
 We can extract all the features and edges within the premise of T==2
 
@@ -154,7 +153,7 @@ we, thus, need MPNN to be invariant to graph isomorphism, meaning relabeling of 
 
 ## What's Next?
 
-Graph convolutional networls or GCNs have come to dominate the field. They, therefore, deserve a short introduction. Something the [next post](/posts/machine-learning-graphs/004-graph-convolutional-networks) will take care of.
+Graph convolutional networls or GCNs have come to dominate the field. They, therefore, deserve a short introduction. Something the [next post](../machine-learning-graphs/004-graph-convolutional-networks) will take care of.
 
 ## Variations of MPNN.
 
