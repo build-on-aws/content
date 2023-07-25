@@ -1,6 +1,6 @@
 ---
 title: LIME Tutorial
-description: This post provides a walk through to apply LIME for image explainability based on the original LIME paper (referenced in the post). Full code is provided in a related repo: https://github.com/cyrusmvahid/AIX-BuildOn/blob/main/04-lime-example.ipynb 
+description: This post provides a walk through to apply LIME for image explainability based on the original LIME paper (referenced in the post).
 tags:
   - ai-explainability
   - ai-fairness
