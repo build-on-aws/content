@@ -23,7 +23,7 @@ additionalAuthors:
 
 
 
-In the [previous](../ai-explainability/02-lime) segment of this publication, we learned about LIME as a feature attribution method, with the drawback that finding the right hyperparameters for kernel width and model complexity could be rather arbitrary. We are going to use Shapely values to find a unique solution to solving LIME's optimization equation. Before that, we need to understand the theory behind Shapley values and how there are calculated. If you are familiar with the concept, you can skip to the next [post](../ai-explainability/05-shap).
+In the [previous](/posts/ai-explainability/02-lime) segment of this publication, we learned about LIME as a feature attribution method, with the drawback that finding the right hyperparameters for kernel width and model complexity could be rather arbitrary. We are going to use Shapely values to find a unique solution to solving LIME's optimization equation. Before that, we need to understand the theory behind Shapley values and how there are calculated. If you are familiar with the concept, you can skip to the next [post](/posts/ai-explainability/05-shap).
 In order to understand SHAP method for explainability, we need to first understand Shapley values. This post gives a quick introductory overview as a theoretical minima into Shapley values in the context of game theory.
 
 ## Cooperative n-person games
@@ -168,7 +168,7 @@ $$\large{ \lambda (N=\{A,B\}, v) = \{110, 50}\}$$
 
 ## What is next?
 
-in the next [part](../ai-explainability/05-shap) we apply Shapley theorem to find a unique solution to LIME's equation.
+in the next [part](/posts/ai-explainability/05-shap) we apply Shapley theorem to find a unique solution to LIME's equation.
 
 ## References
 
