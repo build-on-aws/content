@@ -8,6 +8,8 @@ tags:
 showInHomeFeed: true
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: gogococo 
 authorName: Jacquie Grindrod
 date: 2023-01-12

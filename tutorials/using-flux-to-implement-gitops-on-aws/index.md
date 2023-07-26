@@ -12,6 +12,10 @@ tags:
   - cdk
   - codebuild
   - codepipeline
+spaces:
+  - devops
+waves:
+  - devops
 showInHomeFeed: true
 authorGithubAlias: betty714
 authorName: Betty Zheng

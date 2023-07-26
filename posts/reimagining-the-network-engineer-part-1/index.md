@@ -4,6 +4,10 @@ description: "Today's networks are complex and the demand for network engineers 
 tags:
   - networking
   - devops
+spaces:
+  - devops
+waves:
+  - devops
 authorGithubAlias: labeveryday
 authorName: "Du'An Lightfoot"
 date: 2023-01-19

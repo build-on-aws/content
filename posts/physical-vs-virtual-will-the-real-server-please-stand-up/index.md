@@ -8,6 +8,8 @@ tags:
   - virtualization
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: cie247
 authorName: Curtis Evans
 date: 2022-11-28
