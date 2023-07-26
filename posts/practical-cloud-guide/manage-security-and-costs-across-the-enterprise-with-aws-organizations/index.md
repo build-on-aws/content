@@ -6,7 +6,7 @@ tags:
     - organizations
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-07-17
+date: 2023-07-26
 ---
 
 Managing compute resources is one responsibility of an IT Pro. As a cloud engineer you will manage cloud resources such as storage, compute, and applications for your enterprise organization. In this article, you’ll learn about AWS Organization, a service to manage access to resources by creating groups and policies across the enterprise.
@@ -29,7 +29,7 @@ Before starting this tutorial, you will need an AWS Account. If you don't yet ha
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-06-21                             |
+| ⏰ Last Updated     | 2023-07-26                             |
 
 | ToC |
 |-----|
