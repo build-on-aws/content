@@ -6,9 +6,9 @@ tags:
 - awsiot
 - iotrulesengine
 - validation
-  authorGithubAlias: alinadima
-  authorName: Alina Dima
-  date: 2023-07-26
+authorGithubAlias: alinadima
+authorName: Alina Dima
+date: 2023-07-26
 ---
 
 |ToC|
