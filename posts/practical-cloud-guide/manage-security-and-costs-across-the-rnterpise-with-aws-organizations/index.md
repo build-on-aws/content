@@ -84,7 +84,7 @@ The above tutorial walks you through each step of the process for creating an or
 
 ![Example organization structure](./images/organization.png)
 
-- You can find a list of [best practices for OUs in this article](https://aws.amazon.com/blogs/mt/best-practices-for-organizational-units-with-aws-organizations/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+- You can find a list of [best practices for OUs in this article](https://aws.amazon.com/blogs/mt/best-practices-for-organizational-units-with-aws-organizations/?sc_channel=el&sc_campaign=appswave&sc_content=manage-security-and-costs-across-the-rnterprise-with-aws-organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Service Control Policies
 
