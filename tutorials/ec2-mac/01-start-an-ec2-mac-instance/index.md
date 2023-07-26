@@ -8,8 +8,11 @@ tags:
     - tutorials
     - devops
     - aws
+
 spaces:
-  - mac
+  - devops
+waves:
+  - devops
 showInHomeFeed: true
 authorGithubAlias: sebsto
 authorName: Sébastien Stormacq

@@ -7,6 +7,8 @@ tags:
   - automation
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-03-24

@@ -9,6 +9,8 @@ tags:
   - deployment
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-02-16
