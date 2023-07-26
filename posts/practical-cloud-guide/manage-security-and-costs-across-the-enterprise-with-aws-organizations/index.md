@@ -97,11 +97,11 @@ The above tutorial walks you through each step of the process for creating an Or
 
 ### Testing SCPs
 
-- AWS Organizations do not have a direct way to test the effect of SCPs. However, the AWS Identity and Access Management (IAM) Access Advisor can show last accessed services for an Organization. This function is also available through the AWS CLI with the command `aws generate-organizations-access-report` and the AWS API with [GenerateOrganizationsAccessReport](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq). The Access Identity and Access Management Guide has the details on [viewing last accessed information for AWS Organizations](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor-view-data-orgs.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+- AWS Organizations do not have a direct way to test the effect of SCPs. However, the AWS Identity and Access Management (IAM) Access Advisor can show last accessed services for an Organization. This function is also available through the AWS CLI with the command `aws generate-organizations-access-report` and the AWS API with [GenerateOrganizationsAccessReport](https://docs.aws.amazon.com/iam/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq). The Access Identity and Access Management Guide has the details on [viewing last accessed information for AWS Organizations](https://docs.aws.amazon.com/IAM/latest/UserGuide/when-to-use-iam.html).
 
 ![Organization access report](./images/organization-access-report.png)
 
-- The alternative way to test SCPs is to use AWS CloudTrail and you can follow steps on [how to create a trail for an organization](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+- The alternative way to test SCPs is to use AWS CloudTrail and you can follow steps on [how to create a trail for an organization](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html).
 
 ## Summary
 
@@ -115,4 +115,4 @@ Links to AWS Organizations resources are available throughout this post. You are
 
 AWS Organizations provide a framework for managing accounts through organization units and service control policies. With AWS Organizations you can set policies that control access to services at the enterprise level enabling security and cost controls across your companuy.
 
- However, OU members or accounts require fine grained control to specify who or what can access the AWS services and resources in those accounts. In the following article, you will learn about best practice for securing accounts and how to use [AWS Identity and Access Management (IAM)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html/?sc_channel=el&sc_campaign=post&sc_content=creating_and_managing_organizations&sc_geo=mult&sc_country=mult&sc_outcome=acq) to manage fine grain access across AWS services and resource.
+ However, OU members or accounts require fine grained control to specify who or what can access the AWS services and resources in those accounts. In the following article, you will learn about best practice for securing accounts and how to use [AWS Identity and Access Management (IAM)](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) to manage fine grain access across AWS services and resource.
