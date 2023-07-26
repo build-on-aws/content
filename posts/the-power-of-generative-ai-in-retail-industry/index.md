@@ -12,7 +12,7 @@ additionalAuthors:
     authorName: Ray Wang
   - authorGithubAlias: JosieCheng17
     authorName: Josie Cheng
-date: 2023-06-27
+date: 2023-07-26
 ---
 
 In the ever-evolving landscape of the retail industry, the emergence of generative AI techniques, such as Stable Diffusion, has become a game-changer. By harnessing the power of advanced machine learning algorithms to generate diverse and dynamic contents, Stable Diffusion provides a transformative solution to age-old pain points faced by retailers. From revolutionizing virtual try-on experiences to crafting personalized advertisements, the impact of Stable Diffusion is far-reaching, transforming the retail sector in unprecedented ways.
