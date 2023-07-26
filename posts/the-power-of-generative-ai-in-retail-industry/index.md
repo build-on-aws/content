@@ -1,9 +1,9 @@
 ---
 title: "The Power of Generative AI in Retail Industry"
-description: "The Power of Generative AI in Retail Industry"
+description: "New technology is reshaping fashion retail. Here's how."
 tags:
   - ai-ml
-  - gen-ai
+  - generative-ai
   - stable-diffusion
 authorGithubAlias: eric80116
 authorName: Eric Liou
@@ -15,8 +15,6 @@ additionalAuthors:
 date: 2023-06-27
 ---
 
-## Introduction: Stable Diffusion in pan-retail industry
-
 In the ever-evolving landscape of the retail industry, the emergence of generative AI techniques, such as Stable Diffusion, has become a game-changer. By harnessing the power of advanced machine learning algorithms to generate diverse and dynamic contents, Stable Diffusion provides a transformative solution to age-old pain points faced by retailers. From revolutionizing virtual try-on experiences to crafting personalized advertisements, the impact of Stable Diffusion is far-reaching, transforming the retail sector in unprecedented ways.
 
 To effectively leverage Stable Diffusion, retailers must first identify their specific use cases and assess the potential return on investment (ROI). This involves evaluating how these technologies can improve customer engagement and boost sales. Allocating the right roles and responsibilities is crucial, requiring the hiring of data scientists, prompt engineers, project managers, and artists. Lastly, retailers must implement risk mitigation strategies to minimize the potential licensing risks associated with using copyrighted or restricted content. By carefully navigating these considerations, retailers can leverage the power of Stable Diffusion to stay ahead in the competitive retail landscape.
@@ -25,7 +23,7 @@ Amazon SageMaker is an excellent service for users seeking to harness the power 
 
 Let's explore 3 solutions using SageMaker:
 
-## Stable Diffusion on Amazon SageMaker solution
+## Stable Diffusion on Amazon SageMaker Solution
 
 * SageMaker Jumpstart
   * One-click to deploy pre-trained stable diffusion model to SageMaker Endpoint without provision.
@@ -71,7 +69,7 @@ You can do the same steps with different masked such as models, clothes, and so 
 
 ![Picture2](images/Picture2.png)
 
-### Scenario: Efficiently generate the advertising materials to increase sales
+### Scenario: Efficiently Generate the Advertising Materials to Increase Sales
 
 As a festival season approaches, marketing teams are always busy designing advertising campaigns for sales and special events.  It requires a substantial effort to generate diverse advertising materials. Stable diffusion is a great tool for generating materials in seconds to craft your unique advertisements.
 
@@ -93,7 +91,7 @@ Now, armed with the tips mentioned above, you can leverage them to effortlessly 
 3. Then easily assemble the materials to an advertisement
   ![Picture6](images/Picture6.gif)
 
-## Fine-tune the LoRA model with your own images data
+## Fine-Tune the LoRA Model with Your Own Images Data
 
 In many cases, users require more than just image generation from Stable Diffusion. They often need to utilize the model to generate images that feature specific products or models. For instance, consider a scenario where a retailer collaborates with Key Opinion Leaders (KOLs) to enable them to select endorsements online then employ Stable Diffusion model that can swiftly generate product photography for sales purposes. Therefore, users require a streamlined pipeline that automates the fine-tuning of the model using their own image data. The architecture is as follows:
 
@@ -101,21 +99,21 @@ In many cases, users require more than just image generation from Stable Diffusi
 
 As users upload their own images data to S3 input bucket, S3 would send the event to trigger Lambda to start the SageMaker Notebook Instance for training. The instance will use pre-built lifecycle configuration to run the training scripts then export the model to S3 output bucket. Then S3 would send the event to trigger Lambda to shutdown the instance to avoid unnecessary cost. You can follow the steps below to build the pipeline.
 
-### Step1. Create a SageMaker Notebook Instance for fine-tuning
+### Step 1. Create a SageMaker Notebook Instance for Fine-Tuning
 
 Prepare a notebook instance with GPU for fine-tuning. I choose the `ml.g4dn.xlarge` as example.
 
 ![Image1](images/Image1.png)
 
-### Step2. Prepare S3 bucket
+### Step 2. Prepare S3 Bucket
 
-Prepare three s3 bucket for fine-tuning
+Prepare three S3 bucket for fine-tuning
 
 * one for training data
 * one for generated image output
 * one for model output
 
-### Step3. Prepare training data
+### Step 3. Prepare Training Data
 
 Prepare your own images of products or characters, also the captions for each image. For example, I would like to create the endorsement photo with someone, so I prepare 6 photos(512*704) and 6 txt files with the same name. Write the prompt in each txt file. Then zip the folder to **training_data.zip** for later use.
 
@@ -123,7 +121,7 @@ Prepare your own images of products or characters, also the captions for each im
 
 Build a training script for LoRA model training with your own images. I will following this [sample code](https://github.com/terrificdm/dreambooth-stablediffusion-sagemaker-notebook/blob/main/sd-lora-db-finetune-character.ipynb) which modified from[kohya-ss/sd-scripts](https://github.com/kohya-ss/sd-scripts) to build the training script.
 
-#### Install dependencies
+#### Install Dependencies
 
 ```bash
 !pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
@@ -145,7 +143,7 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 ```
 
-#### Initialize training environment
+#### Initialize Training Environment
 
 ```python
 from accelerate.utils import write_basic_config
@@ -187,7 +185,7 @@ IMAGES_OUTPTS = "./images/outputs"
 !rm -rf training_data.zip
 ```
 
-#### Train model
+#### Train Model
 
 ```bash
 !accelerate launch train_network.py \
@@ -217,7 +215,7 @@ IMAGES_OUTPTS = "./images/outputs"
    --xformers --use_8bit_adam
 ```
 
-#### [Option] Inference the model to generate a image for verification
+#### [Option] Inference the Model to Generate an Image for Verification
 
 ```python
 import torch
@@ -301,7 +299,7 @@ print(f"\nSeeds for generating images: {seeds}\n")
 !aws s3 cp ./output/lora_wta.safetensors s3://<your s3 bucket for model output>/
 ```
 
-### Step 5. Create a notebook lifecycle configuration
+### Step 5. Create a Notebook Lifecycle Configuration
 
 Since we need to automatically run the training script as the instance startup, we need to build a lifecycle configuration for notebook instance.
 
@@ -323,7 +321,7 @@ nohup jupyter nbconvert --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.k
 
 * Click “Create configuration”
 
-### Step6. Configure the Lambda and S3 bucket event trigger
+### Step6. Configure the Lambda and S3 Bucket Event Trigger
 
 Create two Lambda:
 
