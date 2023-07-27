@@ -10,7 +10,7 @@ spaces:
   - generative-ai
 images:
   banner: images/llm-thumb-1.jpg
-  thumbnail: images/llm-thumb-2.jpeg
-  hero: images/llm-thumb-1.jpeg
-  background: images/llm-thumb-1.jpeg
+  thumbnail: images/llm-thumb-2.jpg
+  hero: images/llm-thumb-1.jpg
+  background: images/llm-thumb-1.jpg
 ---
