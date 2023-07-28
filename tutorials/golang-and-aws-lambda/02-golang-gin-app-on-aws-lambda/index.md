@@ -7,6 +7,7 @@ tags:
   - golang
   - aws
   - aws-cdk
+showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-07-21
@@ -15,9 +16,9 @@ date: 2023-07-21
 |ToC|
 |---|
 
-[The first part of this series](https://community.aws/posts/golang-gin-app-on-aws-lambda) introduced you to the [AWS Lambda Go API Proxy](https://github.com/awslabs/aws-lambda-go-api-proxy), and how it's framework/package specific adapter implementations (for `gorilla/mux`, `echo` and `net/http`) allows you to run existing Go applications as [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) functions fronted by [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). If you haven't already, I encourage you to [take a look at it](https://community.aws/posts/golang-gin-app-on-aws-lambda) in order to get a basic understanding of the AWS Lambda Go API Proxy.
+[The first part of this series](/tutorials/golang-and-aws-lambda/01-golang-apis-on-aws-lambda) introduced you to the [AWS Lambda Go API Proxy](https://github.com/awslabs/aws-lambda-go-api-proxy), and how it's framework/package specific adapter implementations (for `gorilla/mux`, `echo` and `net/http`) allows you to run existing Go applications as [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=02-golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) functions fronted by [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html?sc_channel=el&sc_campaign=datamlwave&sc_content=02-golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). If you haven't already, I encourage you to [take a look at it](/tutorials/golang-and-aws-lambda/01-golang-apis-on-aws-lambda) in order to get a basic understanding of the AWS Lambda Go API Proxy.
 
-The AWS Lambda Go API Proxy also supports [Gin](https://github.com/gin-gonic/gin), is one of the most popular Go web frameworks! This follow-up blog post will demonstrate how take an existing URL shortener service written using the `Gin` framework, and run it as a serverless AWS Lambda function. Instead of using AWS SAM, we will change things up a bit and use the [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy the solution.
+The AWS Lambda Go API Proxy also supports [Gin](https://github.com/gin-gonic/gin), is one of the most popular Go web frameworks! This follow-up blog post will demonstrate how take an existing URL shortener service written using the `Gin` framework, and run it as a serverless AWS Lambda function. Instead of using AWS SAM, we will change things up a bit and use the [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html?sc_channel=el&sc_campaign=datamlwave&sc_content=02-golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy the solution.
 
 > The code is available on [GitHub](https://github.com/build-on-aws/golang-gin-app-on-aws-lambda)
 
@@ -52,21 +53,21 @@ func main() {
 }
 ```
 
-- In the `init` function: 
+- In the `init` function:
   - We use `gin.Default()` to create a `gin.Engine` object with the `Logger` and `Recovery` middleware already attached.
   - We create routes by associating a `gin.HandlerFunc` with each `HTTP` method and path using the `POST`, `GET`, `DELETE` and `PUT` methods of the `gin.Engine` object.
- - `ginadapter.New` function takes this `*gin.Engine` object and returns a `ginadapter.GinLambda`. 
-- In the `Handler` implementation: 
+  - `ginadapter.New` function takes this `*gin.Engine` object and returns a `ginadapter.GinLambda`.
+- In the `Handler` implementation:
   - The `Proxy` (or `ProxyWithContext`) method of the `ginadapter.GinLambda` object receives the `events.APIGatewayProxyRequest`, converts it into a `http.Request` object, and sends it to the `gin.Engine` for routing.
-  -  It returns a proxy response object (`events.APIGatewayProxyResponse`) generated from the data written to the response writer (`http.ResponseWriter`).
+  - It returns a proxy response object (`events.APIGatewayProxyResponse`) generated from the data written to the response writer (`http.ResponseWriter`).
 
 ## Application overview
 
-The sample application presented in this blog is a trimmed down version of `bit.ly` or other solutions you may have used. It uses [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) for persistence and exposes `HTTP` endpoints to access the application (basic CRUD operations).
+The sample application presented in this blog is a trimmed down version of `bit.ly` or other solutions you may have used. It uses [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=datamlwave&sc_content=02-golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) for persistence and exposes `HTTP` endpoints to access the application (basic CRUD operations).
 
 Although we will not be discussing the application code in detail, it's important to understand the basic structure. Here is the package structure for the URL shortener application (in the [function](https://github.com/build-on-aws/golang-gin-app-on-aws-lambda/tree/main/function) directory):
 
-```
+```text
 .
 ├── db
 │   └── db.go
@@ -76,7 +77,7 @@ Although we will not be discussing the application code in detail, it's importan
 ├── main.go
 ```
 
-- The `db` package contains code to interact with `DynamoDB`. 
+- The `db` package contains code to interact with `DynamoDB`.
 - The `handler.go` file has the implementation for the `HTTP` methods.
 - The `main.go` file creates the Gin engine with the routes and `ginadapter.GinLambda` object to proxy requests and responses.
 
@@ -84,7 +85,7 @@ It's time to deploy the URL shortener application and give it a go!
 
 ## Prerequisites
 
-Before you proceed, make sure you have the [Go programming language](https://go.dev/dl/) (**v1.18** or higher) and [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) installed.
+Before you proceed, make sure you have the [Go programming language](https://go.dev/dl/) (**v1.18** or higher) and [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install?sc_channel=el&sc_campaign=datamlwave&sc_content=02-golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq) installed.
 
 Clone the GitHub repository and change to the right directory:
 
@@ -96,7 +97,7 @@ cd TODO
 
 ## Use AWS CDK to deploy the solution
 
-AWS CDK is a framework that lets you define your cloud infrastructure as code in one of its supported programming and provision it through [AWS CloudFormation](https://docs.aws.amazon.com/cloudformation?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). In this case, we will be using the [Go bindings for AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+AWS CDK is a framework that lets you define your cloud infrastructure as code in one of its supported programming and provision it through [AWS CloudFormation](https://docs.aws.amazon.com/cloudformation?sc_channel=el&sc_campaign=datamlwave&sc_content=02-golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq). In this case, we will be using the [Go bindings for AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html?sc_channel=el&sc_campaign=datamlwave&sc_content=02-golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 > You can refer to the code in the [cdk](https://github.com/build-on-aws/golang-gin-app-on-aws-lambda/tree/main/cdk) directory.
 
@@ -129,7 +130,7 @@ You can keep track of the progress in the terminal or navigate to AWS console: `
 
 Once all the resources are created, you can try out the application. You should have:
 
-- An [API Gateway REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html?sc_channel=el&sc_campaign=datamlwave&sc_content=golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+- An [API Gateway REST API](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-rest-api.html?sc_channel=el&sc_campaign=datamlwave&sc_content=02-golang-gin-app-on-aws-lambda&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 - A Lambda function.
 - A DynamoDB table to store application data.
 - And a few other components (like `IAM` roles etc.).
@@ -235,3 +236,6 @@ cdk destroy
 In this blog post you took a URL shortener application built using the Gin framework and deployed it as a Lambda function. Although this was a simple example, the same approach can be used to deploy more complex applications. As long as you have reasonable separation of concerns and your application is modular, most of the work will involve refactoring parts of the logic (`main.go` in this case) to wire up the Gin router (`gin.Engine`) to a Lambda function handler (entry point) by using [the adapter implementation for Gin](https://github.com/awslabs/aws-lambda-go-api-proxy/tree/master/gin).
 
 Happy Building!
+
+|SeriesToc|
+|---------|
