@@ -1,11 +1,12 @@
 ---
 title: "A Tool to Validate AWS IoT Rules SQL Statements"
-description: In this post, we explore how to validate AWS IoT Core Rules Engine Rules SQL Statements, by introducing a validation tool .
+description: In this post, we explore how to validate AWS IoT Core Rules Engine Rules SQL Statements, by introducing a validation tool.
 tags:
-- iot
-- awsiot
-- iotrulesengine
-- validation
+  - iot
+  - iot-rules-engine
+  - validation
+  - sql
+  - aws
 authorGithubAlias: alinadima
 authorName: Alina Dima
 date: 2023-07-26
@@ -51,7 +52,7 @@ Additionally, the tool also includes a sample library with validation scenarios,
 
 To better understand the format of the input, have a look at the current JSON schema:
 
-```
+```json
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "type": "object",
@@ -104,7 +105,6 @@ To better understand the format of the input, have a look at the current JSON sc
 }
 ```
 
-
 ## Getting started
 
 ### Pre-Requisites
@@ -120,25 +120,20 @@ The project repository is structured as per screenshot below:
 
 * A `util` folder containing the configuration, environment and resource set-up  and clean-up utilities. The utilities are called from the validation test automatically as needed.
 * A `validation` folder containing:
-    * `validation-data`: this is a sample library of working examples of SQL statements which validate successfully. You can extend this folder with more validation scenario files as needed.
-    * `input-json-schema`: providing type and description information for mandatory and optional input fields.
-    * `validate-iot-rules`: which is the framework for set up and execution of the provided and new validation scenarios.
+  * `validation-data`: this is a sample library of working examples of SQL statements which validate successfully. You can extend this folder with more validation scenario files as needed.
+  * `input-json-schema`: providing type and description information for mandatory and optional input fields.
+  * `validate-iot-rules`: which is the framework for set up and execution of the provided and new validation scenarios.
 
 ![Repo structure](images/repo.png "Repository structure")
 
 ### To get started
 
-1. Clone the GitHub repository: https://github.com/aws-iot-builder-tools/validation-tool-for-aws-iot-rules
-
+1. Clone the GitHub repository: [https://github.com/aws-iot-builder-tools/validation-tool-for-aws-iot-rules](https://github.com/aws-iot-builder-tools/validation-tool-for-aws-iot-rules).
 2. Make sure you add your AWS account id in the configuration file: `util/config.js`.
-
 3. Run:`npm install`
-
-4. By default, the default validation scenario is executed: `casting-sensor-payload.json`.  To run the default scenario, run:  `npm run test`
-
-5. To change the default scenario, got to `config.js`, and re-set the `defaultInputFile` to a file of your choice from the provided files in the `validation/validation-data` directory. You can choose the validation scenario you want to execute, by running: `npm test -- -inputFile=<existing or newly created file name>`
-
-6. You can also choose to execute all the provides scenarios, by running: `npm test -- -inputFile=ALL`
+4. By default, the default validation scenario is executed: `casting-sensor-payload.json`.  To run the default scenario, run:  `npm run test`.
+5. To change the default scenario, got to `config.js`, and re-set the `defaultInputFile` to a file of your choice from the provided files in the `validation/validation-data` directory. You can choose the validation scenario you want to execute, by running: `npm test -- -inputFile=<existing or newly created file name>`.
+6. You can also choose to execute all the provides scenarios, by running: `npm test -- -inputFile=ALL`.
 
 **Note that:**
 
@@ -153,7 +148,7 @@ If there is a test failure, you see the comparison between expected and actual o
 
 ## Adding a new validation scenario
 
-Adding a new validation scenario based on your use-case is straight-forward. You need to add a new JSON file in the `verification-tool-for-aws-iot-rules/validation/validation-data `folder.
+Adding a new validation scenario based on your use-case is straight-forward. You need to add a new JSON file in the `verification-tool-for-aws-iot-rules/validation/validation-data` folder.
 
 The following requirements hold when adding your own new validation scenario:
 
@@ -167,11 +162,11 @@ This blog shows an approach which allows developers to experiment with and valid
 
 This tool is currently in its first iteration. Below is a list of improvements could be considered for future iterations:
 
-- In the current version, the tool is designed to run locally. Ideally it would be integrated in a CI/CD pipeline.
-- Add support for MQTT 5 and protobuf.
-- Add ability to mock Rules SQL functions which call other AWS and Amazon services, like Amazon DynamoDB or AWS Lambda.
-- In the current version, the tool assumes that the rule executes (i.e. that the payload satisfies the WHERE clause). To validate scenarios where input payloads do not satisfy the WHERE clause, a new test case needs to be created, with modified expectations.
-- Improve overall execution time and resilience.
+* In the current version, the tool is designed to run locally. Ideally it would be integrated in a CI/CD pipeline.
+* Add support for MQTT 5 and protobuf.
+* Add ability to mock Rules SQL functions which call other AWS and Amazon services, like Amazon DynamoDB or AWS Lambda.
+* In the current version, the tool assumes that the rule executes (i.e. that the payload satisfies the WHERE clause). To validate scenarios where input payloads do not satisfy the WHERE clause, a new test case needs to be created, with modified expectations.
+* Improve overall execution time and resilience.
 
 For more information about AWS IoT Core and Rules Engine, have a look at the [AWS IoT Developer Guide](https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html).
 
@@ -179,8 +174,4 @@ If you have validation scenarios you would like to share, or additions to this t
 
 To get notified about more IoT content, you can additionally subscribe to the [IoT Builders YouTube channel](https://www.youtube.com/@iotbuilders).
 
-
-
-
-
-
+https://www.youtube.com/watch?v=VfswJyz07ds
