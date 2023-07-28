@@ -1,6 +1,6 @@
 ---
 title: "Build Your Own Recommendation Engine for a Movies Streaming Platform Clone on AWS: A Full Stack Tutorial"
-description: "Hands-on tutorial showing how to build a full stack recomemndation engine integrated for a Streaming Platform Clone"
+description: "A full stack hands-on tutorial leveraging  custom machine learning models, SageMaker, Lambda, API Gateway and a handful of other tools to find the perfect movie to stream this weekend! "
 tags:
   - machinelearning
   - data-visualization
@@ -32,13 +32,13 @@ There's a point in every developer's journey when they realize that building mac
 - How to get started with using jupyter notebooks and python code to sanitize your raw data and perform data visualizations.
 - How to find relationships between various features in your data set and convert the relevant features into numerical features.
 - How to scale the numerical features in your raw data to bring all the features on the same scale for comparison purposes.
-- How to build, train, and deploy your custom and native machine learning models on sagemaker.
+- How to build, train, and deploy your custom and native machine learning models on Sagemaker.
 - How to expose the deployed models through a REST API using AWS Lambda and AWS API Gateway using the [Open Source Chalice framework](https://github.com/aws/chalice).
 - How to integrate the REST APIs with a fronting User Interface (in our case this UI will represent our custom streaming platform clone called MyFlix, but you can use the skills you learn in this tutorial to build your own full stack applications with ML Models).
 
 ## What We're Going to Build
 
-In this tutorial we will be building a recommendation engine for a streaming platform clone called MyFlix. Initially, we will go through the process of analyzing, cleaning, and selecting features from our raw movie data, setting the foundation for a robust recommendation engine for our streaming platform clone. Next we'll build a custom scaling model to ensure accurate comparisons of our wrangled movie data features. Then we'll utilize these scaled values to train and construct our k means clustering algorithm for movie recommendations. Additionally, we will learn how to deploy our models on SageMaker to achieve maximum efficiency. Finally we will build fronting APIs for  our ML models for real-time predictions. We will learn how to use the open-source Chalice framework (https://github.com/aws/chalice) as a one click build and deploy tool for building our APIs. Chalice will even expose the API as a lambda and create the API gateway endpoint out of the box with exceptional ease! By the end of this tutorial, we'll have learnt how to bridge the gap between our ML models and front end. The skills learnt through this tutorial can be used in to integrate your own full stack applications with APIs and ML Models.
+In this tutorial we will be building a recommendation engine for a streaming platform clone called MyFlix. Initially, we will go through the process of analyzing, cleaning, and selecting features from our raw movie data, setting the foundation for a robust recommendation engine for our streaming platform clone. Next we'll build a custom scaling model to ensure accurate comparisons of our wrangled movie data features. Then we'll utilize these scaled values to train and construct our k means clustering algorithm for movie recommendations. Additionally, we will learn how to deploy our models on SageMaker to achieve maximum efficiency. Finally we will build fronting APIs for  our ML models for real-time predictions. We will learn how to use the open-source Chalice framework (https://github.com/aws/chalice) as a one click build and deploy tool for building our APIs. Chalice will even expose the API as a lambda and create the API Gateway endpoint out of the box with exceptional ease! By the end of this tutorial, we'll have learnt how to bridge the gap between our ML models and front end. The skills learnt through this tutorial can be used in to integrate your own full stack applications with APIs and ML Models.
 
 ### What We're Going to Build: Visualized
 
@@ -105,7 +105,7 @@ aws s3 cp s3://myfamousbucket/python_notebook/AWSWomenInEngineering2023_V3.ipynb
 14. After that, in Cells #43 and #44, we augment our raw movie dataset with the correct cluster number. This is how the augmented data set now looks with the cluster number. This augmented data set will be used by the REST APIs that we will be building in the next steps to retrieve the set of movies given a particular cluster number:  
 ![Augmented Data Set for quick Lookup with my predicted Cluster Number](images/augmented_dateset.png)  
 15. Finally I execute a few more cells, to store this augmented information in a Glue Database. The augmented information is stored in parquet file format in the S3 bucket in the `clusteredfinaldata` folder. This step is done in Cell #51.
-16. At this point, although the KMeans model is deployed as a SageMaker endpoint, our Custom Scaling Model is still only available locally in our Sagemaker studio environment as a serialized model.joblib. Our next step will be to deploy our custom scaling model inside Sagemaker's Native SKLearn Container. This is one of the ways of implementing Bring Your Own Model (BYOM) on Sagemaker if you want to utilize Sagemaker's Native Containers. Here is a diagrammatic view of the process to deploy a custom scaling model on Sagemaker's SKLearn Container by creating creating a compressed tar.gz file consisting of the model.joblib and an inference.py file and providing these artifacts to create a sagemaker model endpoint and endpoint configuration:  
+16. At this point, although the KMeans model is deployed as a SageMaker endpoint, our Custom Scaling Model is still only available locally in our Sagemaker studio environment as a serialized model.joblib. Our next step will be to deploy our custom scaling model inside Sagemaker's Native SKLearn Container. This is one of the ways of implementing Bring Your Own Model (BYOM) on Sagemaker if you want to utilize Sagemaker's Native Containers. Here is a diagrammatic view of the process to deploy a custom scaling model on Sagemaker's SKLearn Container by creating creating a compressed tar.gz file consisting of the model.joblib and an inference.py file and providing these artifacts to create a Sagemaker model endpoint and endpoint configuration:  
 ![Augmented Data Set for quick Lookup with my predicted Cluster Number](images/byom.jpg) 
 17. There are various ways to automate these steps, but we will be using a SageMaker migration toolkit from [our GitHub Repository](https://github.com/build-on-aws/recommendation-engine-full-stack) to make this process easy. So let's move on to the next steps.
 
@@ -132,14 +132,14 @@ pip install wheel
 python setup.py bdist_wheel
 pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl
 ```
-5. Next, execute the below command to install the sagemaker migration toolkit. Follow the steps and enter the SageMaker IAM role that you copied above.
+5. Next, execute the below command to install the Sagemaker migration toolkit. Follow the steps and enter the SageMaker IAM role that you copied above.
 ```bash
 sagemaker_migration-configure --module-name sagemaker_migration.configure
 ```
 6. Next go to the sklearn/testing folder and download the model.joblib from the S3 bucket by executing the command as follows:
 ```bash
 cd testing/sklearn/
-aws s3 cp s3://<S3 bucket from cloudformation output where all data is stored>/model.joblib ./
+aws s3 cp s3://<S3 bucket from Cloudformation output where all data is stored>/model.joblib ./
 ```
 7. Let's analyze the `inference.py` script inside the `testing/sklearn` folder. This `inference.py` file has the `model_fn` for loading and deserializing the model.joblib. The `input_fn` is the method that we have already modified to receive the content as `application/json` and transform it into a pandas dataframe before sending the data to the `predict_fn`, which loads the dataframe into the custom scaling model. Once the data is normalized, it is returned back in the correct format as a json string via the `output_fn`. Here are the highlighted functions in `inference.py` file in the `testing/sklearn` folder.
 
@@ -155,7 +155,7 @@ python test.py
 Here is how the output will look on the Cloud9 Console once the custom scaling endpoint is deployed:  
 ![Deployment completed for model on sagemaker](images/customscalingdeployment.png) 
 
-10. (Optional steps for testing the custom endpoint after deployment) Copy the sagemaker endpoint from above in the command below and execute to replace the SAGEMAKER-ENDPOINT in localtest.sh file.
+10. (Optional steps for testing the custom endpoint after deployment) Copy the Sagemaker endpoint from above in the command below and execute to replace the SAGEMAKER-ENDPOINT in localtest.sh file.
 ```bash 
 sed -i s@SAGEMAKER-ENDPOINT@sm-endpoint-sklearn-xxxx-xx-xx-xx-xx-xx@g localtest.sh
 ```
@@ -184,23 +184,23 @@ Then your responses should look as follows in the `prediction_response.json` fil
 
 12. This concludes the deployment of the custom scaling model. Now if you go to the AWS console, you can see that the 2 real time inferencing endpoints for the custom scaling model and the K Means clustering algoritm is now deployed in SageMaker console as follows:
 
-![Deployed endpoints in sagemaker](images/sagemaker-deployedendpoints.png) 
+![Deployed endpoints in Sagemaker](images/sagemaker-deployedendpoints.png) 
 
-## Deploying the REST APIs Fronting the SageMaker Model Dndpoints 
+## Deploying the REST APIs Fronting the SageMaker Model Endpoints 
 
-1. Let's now create the APIs using [Chalice framework](https://github.com/aws/chalice), which makes the creation of Lambda and API gateway very easy. Use the same Cloud9 environment to set up Chalice and build the REST APIs that will invoke the Sagemaker Model endpoints. The first REST API that we'll be building is the Cluster REST API, which will invoke the Custom Scaling SageMaker Endpoint and the Kmeans Clustering Endpoint and return the cluster number to be used for returning the list of movies. For the purpose of next steps, log into the same Cloud9 IDE that you have used so far and go to the root of the Cloud9 environment by executing the following command on the Cloud9 terminal as follows: 
+1. Let's now create the APIs using [Chalice framework](https://github.com/aws/chalice), which makes the creation of Lambda and API Gateway very easy. Use the same Cloud9 environment to set up Chalice and build the REST APIs that will invoke the Sagemaker Model endpoints. The first REST API that we'll be building is the Cluster REST API, which will invoke the Custom Scaling SageMaker Endpoint and the Kmeans Clustering Endpoint and return the cluster number to be used for returning the list of movies. For the purpose of next steps, log into the same Cloud9 IDE that you have used so far and go to the root of the Cloud9 environment by executing the following command on the Cloud9 terminal as follows: 
 ```bash
 cd ~/environment
 ```
 2. To see hidden files in Cloud9 IDE, click on the gear icon and click on Show environment root and show hidden files. This will enable you to see the .chalice folder once you install the chalice framework via the commands in the next step. This is how the Cloud9 console should look:  
-![Deployed endpoints in sagemaker](images/cloud9gear.png) 
+![To see hidden files in Cloud9](images/cloud9gear.png) 
 
 3. Now install Chalice as follows:
 ```bash
 pip install chalice
 chalice new-project sagemaker-apigateway-lambda-chalice
 ```
-4. Create a role `Cloud9_LambdaExecutionRole` with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder. Finally this is how your config.json should be updated to look. Replace with the correct value for the iam_role_arn in the snippet below: 
+4. Create a role `Cloud9_LambdaExecutionRole` with the right access policies. This role is added as the Lambda execution role in config.json inside the .chalice folder. Finally this is how your config.json should be updated to look. Replace with the correct value for the iam_role_arn in the snippet below: 
 ```bash
 {
     "version": "2.0",
@@ -315,8 +315,8 @@ Here is how my UI looks when everything is hooked up and the file is opened from
 ![plot](images/myflix3.jpg)<br/>
 
 ## Clean Up
-1. Go to the Cloud9 console and go to the root of the chalice project `sagemaker-apigateway-lambda-chalice` and execute `chalice delete`. This will delete the lambda and API gateway endpoint for the REST API #1.
-2. Go to the Cloud9 console and go to the root of the chalice project `query-athena-boto3` and execute `chalice delete`. This will delete the lambda and API gateway endpoint for the REST API #2.
+1. Go to the Cloud9 console and go to the root of the chalice project `sagemaker-apigateway-lambda-chalice` and execute `chalice delete`. This will delete the Lambda and API Gateway endpoint for the REST API #1.
+2. Go to the Cloud9 console and go to the root of the chalice project `query-athena-boto3` and execute `chalice delete`. This will delete the Lambda and API Gateway endpoint for the REST API #2.
 3. From the AWS console, go to SageMaker Service -> Inference -> Endpoints and Delete the 2 Sagemaker Model Endpoints.
 4. Delete the AWS Cloud9 Environment.
 5. Delete the contents of the S3 bucket that was created by the Cloudformation template. This will allow the deletion of the S3 bucket when you delete the CloudFormation stack.
@@ -324,8 +324,17 @@ Here is how my UI looks when everything is hooked up and the file is opened from
 
 🎥 Here are the 3 videos containing a hands-on implementation about this tutorial<br/>
 
+Video #1 goes over the basic steps of data prepping, data analysis and visualization as part of feature engineering to come up with the list of features that will help us in training and building our Machine Learning Models.<br/>
 https://youtu.be/96IV4qBO0co
 
+Video #2 goes over training, building and deployment of our custom scaling model and our K means clustering model on Sagemaker.<br/>
 https://youtu.be/9JzEybNli7Q
 
+Video #3 brings the entire story together by showing how to create our REST API's for the Machine Learning Models with the help of Lambda and API Gateway. Finally in this video we will integrate our API's with our fancy UI.<br/>
 https://youtu.be/7iPQPGwk8mc
+
+As you continue on your learning journey, I encourage you to delve deeper into the tools we used today, such as Lambda, API Gateway, Chalice, and Sagemaker. These powerful tools can significantly enhance your data science and machine learning projects. Here are some next steps to help you master these technologies:<br/>
+1. [Lambda](https://aws.amazon.com/lambda/): Consider exploring AWS Lambda to master serverless computing and event-driven programming for building scalable applications.
+2. [API Gateway](https://aws.amazon.com/api-gateway/): Take the next step in learning by delving into API Gateway, understanding RESTful API design, and securing, deploying, and monitoring APIs at scale.
+3. [Chalice](https://github.com/aws/chalice): Chalice simplifies serverless application development on AWS. Dive into its documentation and explore more use cases.
+4. [SageMaker](https://aws.amazon.com/sagemaker/): As you progress with SageMaker, familiarize yourself with additional algorithms it offers. Explore hyperparameter tuning techniques to optimize model performance. Also, investigate how SageMaker can be integrated with other AWS services like AWS Glue for data preparation.
