@@ -10,7 +10,7 @@ tags:
 showInHomeFeed: true
 authorGithubAlias: pkamra
 authorName: Piyali Kamra
-date: 2023-06-26
+date: 2023-06-28
 ---
 
 There's a point in every developer's journey when they realize that building machine learning models in isolation isn't enough. They need to integrate those models into their full-stack applications to create real-world value. But when it comes to certain projects, such as recommendation engines, the process can be daunting. Let's imagine we're building a streaming platform - we'll call it “MyFLix” - that provides personalized content recommendations to its users. To see a machine learning model integrated into this full-stack application, we're going to build a recommendation engine and integrate it into MyFlix. Let's dive in!
