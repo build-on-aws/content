@@ -117,7 +117,7 @@ Prepare three S3 bucket for fine-tuning
 
 Prepare your own images of products or characters, also the captions for each image. For example, I would like to create the endorsement photo with someone, so I prepare 6 photos(512*704) and 6 txt files with the same name. Write the prompt in each txt file. Then zip the folder to **training_data.zip** for later use.
 
-### Step4. Build the training script
+### Step 4. Build the training script
 
 Build a training script for LoRA model training with your own images. I will following this [sample code](https://github.com/terrificdm/dreambooth-stablediffusion-sagemaker-notebook/blob/main/sd-lora-db-finetune-character.ipynb) which modified from[kohya-ss/sd-scripts](https://github.com/kohya-ss/sd-scripts) to build the training script.
 
@@ -321,7 +321,7 @@ nohup jupyter nbconvert --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.k
 
 * Click “Create configuration”
 
-### Step6. Configure the Lambda and S3 Bucket Event Trigger
+### Step 6. Configure the Lambda and S3 Bucket Event Trigger
 
 Create two Lambda:
 
