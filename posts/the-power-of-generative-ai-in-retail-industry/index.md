@@ -34,7 +34,7 @@ Let's explore 3 solutions using SageMaker:
 
   * Requiring only a few steps to quickly deploy a web application environment for AI-generated image generation in your AWS account with CloudFormation for one-click deployment.
   * Amazon SageMaker Notebook Instance-hosted Jupyter notebook instance take care of underlying IT development environments (such as storage, networking, etc.) and infrastructure maintenance.
-  * The solution is built on the Stable Diffusion version 1.5, provides a great user experience with open-source project usage and supports extensions based on your needs such as ControlNet.
+  * The solution is built on the Stable Diffusion version 1.5, provides a great user experience with source available project usage and supports extensions based on your needs such as ControlNet.
   * Users can fine-tune the model with their own image data and quickly deployed for inference using automated pipeline tools.
 * All-in-one
   ![Architecture2](images/Architecture2.png)
