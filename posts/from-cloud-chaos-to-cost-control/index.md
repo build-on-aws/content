@@ -77,6 +77,7 @@ You can follow the below steps to enable the automatic Cost Anomaly Detection:
 2. **Configure alert subscription** - In this step you can define the alerting frequency and alert recipients. Here's the [official guide](https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html#create-ad-alerts) to create your cost monitors and alert subscription.
 3. **Edit your alerting perferences** - You can adjust your cost monitors and alert subscriptions in AWS Billing and Cost Management to match your needs. This includes subscription name, threshold, frequency, recipients, etc. refer to [this document](https://docs.aws.amazon.com/cost-management/latest/userguide/edit-alert-pref.html) for further details.
 4. **Analyse the detected cost anomaly** - In this step you've got notified with detected cost anomaly. You can go to the overview page of Cost Anomaly Detection to view details of these anomaly items. 
+
 ![cost anomaly detection](cost_anomaly_10a.png)
 
 By default, the anomalies are sorted based on their Start date. However, users have the option to click on any column name, such as "Total cost impact," "Impact percentage," "Accounts," etc., to sort the anomalies based on a different property. This functionality allows users to prioritize and focus on anomalies with the highest total cost impact or the greatest percentage impact, tailoring their analysis to suit their specific needs.
