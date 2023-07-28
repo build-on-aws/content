@@ -6,8 +6,8 @@ tags:
     - tutorials
     - aws
     - sagemaker
-    -autopilot
-    -automation
+    - autopilot
+    - automation
 showInHomeFeed: true
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
