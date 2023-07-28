@@ -10,7 +10,7 @@ tags:
 authorGithubAlias: alinadima
 authorName: Alina Dima
 externalCanonicalUrl: https://dev.to/iotbuilders/a-tool-to-validate-aws-iot-rules-sql-statements-jg
-date: 2023-07-26
+date: 2023-07-28
 ---
 
 |ToC|
