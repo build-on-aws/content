@@ -17,6 +17,8 @@ date: 2023-07-26
 
 Rules Engine is a feature in AWS IoT Core that allows engineers to filter, decode, and process IoT device data and route this data to 15+ AWS and third-party services. AWS IoT Core Rules Engine currently has support for over 70 distinct SQL functions which can be used in either SELECT or WHERE clauses, 14 distinct operators which can be used in either SELECT or WHERE clauses, all JSON data types, specifying Literal objects in the SELECT and WHERE clauses, case statements, JSON extensions, substitution templates and nested object queries and more.
 
+https://www.youtube.com/watch?v=VfswJyz07ds
+
 In this post, we explore how to validate AWS IoT Core Rules Engine Rules SQL Statements, by introducing a validation tool which:
 
 * Encapsulates the heavy lifting of creating, configuring and cleaning up the AWS resources needed to create, run and validate IoT Rule SQL payload transformations.
@@ -112,7 +114,7 @@ To better understand the format of the input, have a look at the current JSON sc
 To be able to run the existing or new validation scenarios, you need to:
 
 * Install [npm](https://docs.npmjs.com/getting-started). This project was tested with Node v18.16.0.
-* Have an AWS Account and provide Node.js with [credentials](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/setting-credentials-node.html).
+* Have an AWS Account and provide Node.js with [credentials](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/setting-credentials-node.html?sc_channel=el&sc_campaign=datamlwave&sc_content=validation-tool-for-aws-iot-rules&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Repository Structure
 
@@ -168,10 +170,8 @@ This tool is currently in its first iteration. Below is a list of improvements c
 * In the current version, the tool assumes that the rule executes (i.e. that the payload satisfies the WHERE clause). To validate scenarios where input payloads do not satisfy the WHERE clause, a new test case needs to be created, with modified expectations.
 * Improve overall execution time and resilience.
 
-For more information about AWS IoT Core and Rules Engine, have a look at the [AWS IoT Developer Guide](https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html).
+For more information about AWS IoT Core and Rules Engine, have a look at the [AWS IoT Developer Guide](https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html?sc_channel=el&sc_campaign=datamlwave&sc_content=validation-tool-for-aws-iot-rules&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 If you have validation scenarios you would like to share, or additions to this tool, feel free reach out to me on [LinkedIn](https://www.linkedin.com/in/alina-dima/) or [Twitter](https://twitter.com/fay_ette), or provide feedback on GitHub.
 
 To get notified about more IoT content, you can additionally subscribe to the [IoT Builders YouTube channel](https://www.youtube.com/@iotbuilders).
-
-https://www.youtube.com/watch?v=VfswJyz07ds
