@@ -10,6 +10,8 @@ tags:
   - serverless-application-model
 spaces:
   - devops
+waves:
+  - devops
 showInHomeFeed: true
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar

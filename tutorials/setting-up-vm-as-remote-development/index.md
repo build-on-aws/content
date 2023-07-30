@@ -7,8 +7,11 @@ tags:
   - neovim
   - tutorials
   - cdk
+  - devops
   - aws
 spaces:
+  - devops
+waves:
   - devops
 showInHomeFeed: true
 movedFrom: /posts/setting-up-vm-as-remote-development
