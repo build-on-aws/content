@@ -1,6 +1,6 @@
 ---
-title: "Using Amazon SageMaker to Optimize Compilation and Training for Open Source GPT-2 Model"  
-description: "This post is about to illustrate a hands-on demonstration to optimize the compilation and training of the GPT-2 model on the Stanford Sentiment Treebank v2 (SST2) dataset using the features of the Amazon SageMaker Training Compiler."
+title: "How to Speed Up Open Source LLMs Training and Cut Down Billing Time with Amazon SageMaker"  
+description: "This post is about to illustrate a hands-on demonstration to optimize the compilation and training of the open source GPT-2 model on the Stanford Sentiment Treebank v2 (SST2) dataset using the features of the Amazon SageMaker Training Compiler."
 tags:  
   - llm
   - gen-ai
@@ -9,14 +9,12 @@ tags:
 spaces:
   - generative-ai
 authorGithubAlias: hanyun2019
-authorName: Haowen Huang
+authorName: Haowen Huang 
 additionalAuthors: 
   - authorGithubAlias: elizabethfuentes12
-    authorName: Elizabeth Fuentes
-date: 2023-07-16 
+    authorName: Elizabeth Fuentes Leone
+date: 2023-07-29 
 ---
-
-This post is about to illustrate a hands-on demonstration to optimize the compilation and training of the GPT-2 model on the **Stanford Sentiment Treebank v2 (SST2) dataset** using the features of the **Amazon SageMaker Training Compiler**.
  
 LLMs models are essentially composed of complex multi-layer neural networks with over billions of parameters, and may require thousands of GPU hours or more to complete training. Therefore, optimizing such models on the training infrastructure requires extensive knowledge of deep learning and systems engineering. While open-source implementations of some compilers can optimize the training process, they may lack the flexibility to integrate with certain hardware, such as GPU instances. The Amazon SageMaker Training Compiler can transform deep learning models from their high-level language expressions into hardware-optimized instructions, thereby speeding up training and helping reduce overall billing time.
  
@@ -31,7 +29,7 @@ The SageMaker training compiler is integrated into the AWS deep learning contain
 
 ![Amazon SageMaker Training Compiler](images/training-compiler-1.png)
 
-For more information, see the Amazon SageMaker Training Compiler section in the [Developer Guide](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html).
+For more information, see the Amazon SageMaker Training Compiler section in the [Developer Guide](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2).
 
 
 ## 2.	Prerequisites and Dataset
@@ -44,7 +42,7 @@ First of all, we need to set up the environment through some pre-requisites, suc
 
 1) You can run this code on Amazon SageMaker Studio, Amazon SageMaker notebook instance (the way we're using it now), or on your local computer where the AWS CLI is set up. If you use Amazon SageMaker Studio or Amazon SageMaker notebook instance, make sure to select one of the PyTorch-based kernels, namely `PyTorch 3` or `conda_pytorch_p38` respectively.
 
-2) This notebook uses **2 x ml.g4dn.12xlarge** instances with multiple GPUs. If you don't have enough quotas, please refer to the ["Supported Regions and Quotas"](https://docs.aws.amazon.com/sagemaker/latest/dg/regions-quotas.html#service-limit-increase-request-procedure) to request an increase in service quotas for Amazon SageMaker resources.
+2) This notebook uses **2 x ml.g4dn.12xlarge** instances with multiple GPUs. If you don't have enough quotas, please refer to the ["Supported Regions and Quotas"](https://docs.aws.amazon.com/sagemaker/latest/dg/regions-quotas.html#service-limit-increase-request-procedure?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2) to request an increase in service quotas for Amazon SageMaker resources.
 
 
 ## 3.	Environment Settings
@@ -163,7 +161,7 @@ Also, notice that this example code sets the way PyTorch data parallelization is
 distribution={"pytorchddp": {"enabled": True}}
 ```
 
-Setting up the PyTorch data parallel mechanism on Amazon SageMaker is easy. You can learn more on the [“Running PyTorch Lightning and Native PyTorch DDP on Amazon SageMaker Training”](https://aws.amazon.com/cn/blogs/machine-learning/run-pytorch-lightning-and-native-pytorch-ddp-on-amazon-sagemaker-training-featuring-amazon-search/) blog.
+Setting up the PyTorch data parallel mechanism on Amazon SageMaker is easy. You can learn more on the [“Running PyTorch Lightning and Native PyTorch DDP on Amazon SageMaker Training”](https://aws.amazon.com/cn/blogs/machine-learning/run-pytorch-lightning-and-native-pytorch-ddp-on-amazon-sagemaker-training-featuring-amazon-search/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2) blog.
 
 Also, this example uses the HuggingFace training script `run_clm.py`, which you can find in the scripts folder.
 
@@ -268,9 +266,9 @@ Training cost (billable seconds): without Training Compiler vs. with Training Co
 
 ## 9.	References
 
-1/ [Amazon SageMaker Training Compiler reference document](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html)
+1/ [Amazon SageMaker Training Compiler reference document](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
 
-2/ [SageMaker Training Compiler Best Practices and Considerations](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler-tips-pitfalls.html)
+2/ [SageMaker Training Compiler Best Practices and Considerations](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler-tips-pitfalls.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
 
 3/ [PyTorch on XLA Devices](https://pytorch.org/xla/release/2.0/index.html#)
 
@@ -278,21 +276,24 @@ Training cost (billable seconds): without Training Compiler vs. with Training Co
 
 5/ [Train large language model using Hugging Face and AWS Trainium](https://repost.aws/articles/ARHyFz-RpBR1OiGekJzkg2aw/train-large-language-model-using-hugging-face-and-aws-trainium)
 
-6/ [Code for this demonstration](https://github.com/hanyun2019/aigc/blob/main/gpt-2.ipynb)
+6/ [Code for this demonstration](https://github.com/build-on-aws/compilation-optimization-of-sagemaker)
 
 
-## Conclusions
+## Conclusion
 
 As can be seen from the comparison of experimental data from multiple dimensions, the **Amazon SageMaker Training Compiler** can increase training throughput, which means the total training time will be reduced. Also, the reduction in total training time reduces the number of seconds Amazon SageMaker charges, thereby helping developers and customers save on the costs required for machine learning training.
 
+If you want to learn more about training open source LLMs, check out [SageMaker Training Compiler Best Practices and Considerations](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler-tips-pitfalls.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2). Or, for more information about Amazon SageMaker Training Compiler, read [Amazon SageMaker Training Compiler reference document](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2).
+
+Also, recently we've seen that some advanced open source LLMs are still hot topics of discussion, such as the Falcon-40B model, the Llama-v2-70B model, etc. We'll continue to share how to deploy and fine-tune these open source LLMs with Amazon SageMaker in our upcoming blogs. Please stay tuned.  
+
+
 ## About the Author
 
-###Haowen Huang 
+### Haowen Huang 
 
-Haowen is a Senior Developer Advocate at AWS based in Hong Kong. 
+Haowen is a Senior Developer Advocate at AWS based in Hong Kong. He has over 20 years of experience in the cloud computing, internet and telecom industries. He focuses on the promotion and application of AI, machine learning and data science.  
 
-Haowen has over 20 years’ experience in cloud computing, Internet and telecom industries, including 12 years of entrepreneurship in the Internet industry. He focuses on the promotion and application of AI and machine learning. Besides AI/ML, Haowen is passionate about helping developers leverage big data in the context of AI and Machine Learning. Previously, Haowen worked as a technical evangelist and solutions architect at Microsoft, Sun Microsystems and China Telecom.
+### Elizabeth Fuentes Leone 
 
-
-
-
+Elizabeth is a Developer Advocate at AWS based in Santiago. Shas has extensive experience in data analytics and machine learning. She loves helping developers learn while building.
