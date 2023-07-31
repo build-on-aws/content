@@ -2,12 +2,17 @@
 title: Train a Deep Learning Model with AWS Deep Learning Containers on Amazon EC2
 description: A tutorial on learning how to use AWS Deep Learning Containers (DL Containers) with pre-installed images. Use deep learning frameworks like TensorFlow to train models, and efficiently deploy custom machine learning environments.
 tags:
-    - tutorials
+    - deep-learning
     - containers
     - tensorflow
-    - deep-learning
-    - aws
     - ec2
+    - aws
+    - tutorials
+spaces:
+  - machine-learning
+waves:
+  - dataml
+showInHomeFeed: true
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-07-07
@@ -18,12 +23,11 @@ AWS Deep Learning Containers (DL Containers) are Docker images pre-installed wit
 Using AWS DL Containers, developers and data scientists can quickly add machine learning to their containerized applications. This can be deployed on the following:
 
 - Amazon Elastic Container Service for Kubernetes (Amazon EKS)
-- Self-managed Kubernetes 
+- Self-managed Kubernetes
 - Amazon Elastic Container Service (Amazon ECS)
 - Amazon EC2
 
 In this tutorial, you will train an MNIST CNN model with TensorFlow on an Amazon EC2 instance using AWS Deep Learning Containers.
-
 
 ## Table of Contents
 
@@ -34,11 +38,10 @@ In this tutorial, you will train an MNIST CNN model with TensorFlow on an Amazon
 | 💰 Cost to complete | Free when using the AWS Free Tier or less than $1 USD       |
 | 🧩 Prerequisites    | [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq)                         |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | YYYY-MM-DD                             |
+| ⏰ Last Updated     | 2023-07-07                             |
 
 | ToC |
 |-----|
-
 
 ## Adding permissions to access Amazon ECR
 
@@ -46,26 +49,17 @@ To get started, you need to add permissions to access the Amazon Elastic Contain
 
 You will grant an existing IAM (Identity and access management) user with permissions to access Amazon ECR using [AmazonECS_FullAccess Policy](https://console.aws.amazon.com/iam/home?region=us-east-1#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonECS_FullAccess). If you do not have an existing IAM user, refer to the [IAM Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) for more information.
 
-
 ### Selecting users and adding permissions to the IAM console
 
 First, open the [AWS Management Console](https://console.aws.amazon.com/console/home) and refer to this tutorial for step-by-step instruction. When the screen loads, enter your user name and password to get started. Type *IAM* into the search bar and select `IAM` to open the service console:
 
-![Search IAM](images/1.01.png)
+|||
+|-|-|
+| Next,  select `Users` from the navigation pane on the left: | ![Search IAM](images/1.01.png) |
+| Now you can add permissions to a newly created IAM user, or to an existing IAM user. Select `Add permissions` on the `Permissions` tab as in the following: | ![IAM users page](images/1.02.png) |
+| After selecting users and adding permissions, you can insert a couple of policies in the next step. | ![Add permissions](images/1.03.png) |
 
-Next,  select `Users` from the navigation pane on the left:
-
-
-![IAM users page](images/1.02.png)
-
-Now you can add permissions to a newly created IAM user, or to an existing IAM user. Select `Add permissions` on the `Permissions` tab as in the following:
-
-![Add permissions](images/1.03.png)
-
-After selecting users and adding permissions, you can insert a couple of policies in the next step. 
-
-
-### Adding the ECS Full Access and inline Policy 
+### Adding the ECS Full Access and inline Policy
 
 To add the ECS Full Access policy, select `Attach policies directly` and search for *ECS_FullAccess*. Then select the `AmazonECS_FullAccess` policy and press `Next`:
 
@@ -107,32 +101,15 @@ You’ll use AWS Deep Learning Containers on an AWS Deep Learning [Base Amazon M
 
 First, return to the AWS Management Console home screen and type *EC2* in the search bar and select `EC2` to open the service console:
 
-![Search EC2](images/1.08.png)
+|||
+|-|-|
+|Go back to the Amazon EC2 console and press the `Launch Instance` button: | ![Search EC2](images/1.08.png)|
+|Next, you’ll have to select the name and tag for your EC2 instance. Provide a name for the instance and choose the `Browse more AMIs` option within the `Quick Start` section: | ![Launch EC2 instance](images/1.09.png)|
+|Choose the `AWS Marketplace AMIs` tab at the top, then search for *amazon linux 2023*.  Select `Amazon Linux 2023 AMI`: | ![Browse more AMIs](images/1.10.png)|
+|Press `Continue`: | ![Select Amazon Linux 2023 AMI](images/1.11.png)|
+|Now you can choose an Amazon EC2 instance type. Amazon Elastic Compute Cloud (EC2) is the Amazon Web Service you use to create and run virtual machines in the cloud. AWS calls these virtual machines 'instances'. <br><br> Here we use a `c5.large` instance, but you can choose additional instance types, including GPU-based instances such as G4, G5, P3, and P4. | ![Continue selection for Amazon Linux 2023 AMI](images/1.12.png)|
 
-Go back to the Amazon EC2 console and press the `Launch Instance` button:
-
-![Launch EC2 instance](images/1.09.png)
-
-Next, you’ll have to select the name and tag for your EC2 instance. Provide a name for the instance and choose the `Browse more AMIs` option within the `Quick Start` section:
-
-![Browse more AMIs](images/1.10.png)
-
-Choose the `AWS Marketplace AMIs` tab at the top, then search for *amazon linux 2023*.  Select `Amazon Linux 2023 AMI`:
-
-![Select Amazon Linux 2023 AMI](images/1.11.png)
-
-Press `Continue`:
-
-![Continue selection for Amazon Linux 2023 AMI](images/1.12.png)
-
-Now you can choose an Amazon EC2 instance type. Amazon Elastic Compute Cloud (EC2) is the Amazon Web Service you use to create and run virtual machines in the cloud. AWS calls these virtual machines 'instances'.
-
-Here we use a `c5.large` instance, but you can choose additional instance types, including GPU-based instances such as G4, G5, P3, and P4.
-
-![Select instance type](images/1.13.png)
-
-Once you’ve launched your AWS Deep Learning Base AMI instance, next you will create a private key file to secure your instance with SSH.
-
+Once you’ve launched your AWS Deep Learning Base AMI instance, next you will create a private key file to secure your instance with SSH. | ![Select instance type](images/1.13.png)
 
 ### Creating a new private key file
 
@@ -163,7 +140,6 @@ Next is connecting to your newly launched instance using SSH. The following inst
 If you want to find and copy your instance’s public DNS, you can locate it by toggling to the `Details` tab and copy your Amazon EC2 instance’s `Public IPV4 DNS`:
 
 ![Details of instance created](images/1.18.png)
-
 
 ### Installing Docker
 
