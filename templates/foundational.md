@@ -10,6 +10,7 @@ tags:
 authorGithubAlias: githubAliasWithoutQuotes
 authorName: Name Surname (no quotes around)
 date: YYYY-MM-DD (expected publication date)
+showInHomeFeed: false
 ---
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
@@ -27,6 +28,7 @@ All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes
 - `authorGithubAlias` - your GitHub username
 - `authorName` - how you want your name to display for the author credit of this post
 - `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
+- `showInHomeFeed` - Set this to `true` if you want the post to be on the home and RSS feeds. 
 
 An introduction to the topic, limited to 100 words.
 
