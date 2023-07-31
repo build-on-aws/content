@@ -10,7 +10,7 @@ tags:
 showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: 2023-07-21
+date: 2023-07-30
 ---
 
 |ToC|
@@ -90,9 +90,9 @@ Before you proceed, make sure you have the [Go programming language](https://go.
 Clone the GitHub repository and change to the right directory:
 
 ```bash
-git clone TODO
+git clone https://github.com/build-on-aws/golang-gin-app-on-aws-lambda
 
-cd TODO
+cd golang-gin-app-on-aws-lambda
 ```
 
 ## Use AWS CDK to deploy the solution
