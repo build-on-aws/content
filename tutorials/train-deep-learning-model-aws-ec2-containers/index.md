@@ -84,9 +84,7 @@ Now you can select the `JSON` tab and paste in the following policy:
 } 
 ```
 
-Once you’ve inserted the policy, press `Next`:
-
-![Copy policy](images/1.06.png)
+![Copy policy](images/1.06.png "Step 1: Once you’ve inserted the policy, press `Next`.")
 
 Enter the policy name as *ECR* and select `Create policy`:
 
@@ -94,22 +92,38 @@ Enter the policy name as *ECR* and select `Create policy`:
 
 With your policies added, you have finished adding permissions to access Amazon ECR. Next you’ll start up your AWS deep learning image.
 
-
 ## Launching an AWS Deep Learning Base AMI instance
 
 You’ll use AWS Deep Learning Containers on an AWS Deep Learning [Base Amazon Machine Images (AMIs)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html), which are pre-configured with essential dependencies. You can run Deep Learning Containers on any AMI with these packages.
 
 First, return to the AWS Management Console home screen and type *EC2* in the search bar and select `EC2` to open the service console:
 
-|||
-|-|-|
-|Go back to the Amazon EC2 console and press the `Launch Instance` button: | ![Search EC2](images/1.08.png)|
-|Next, you’ll have to select the name and tag for your EC2 instance. Provide a name for the instance and choose the `Browse more AMIs` option within the `Quick Start` section: | ![Launch EC2 instance](images/1.09.png)|
-|Choose the `AWS Marketplace AMIs` tab at the top, then search for *amazon linux 2023*.  Select `Amazon Linux 2023 AMI`: | ![Browse more AMIs](images/1.10.png)|
-|Press `Continue`: | ![Select Amazon Linux 2023 AMI](images/1.11.png)|
-|Now you can choose an Amazon EC2 instance type. Amazon Elastic Compute Cloud (EC2) is the Amazon Web Service you use to create and run virtual machines in the cloud. AWS calls these virtual machines 'instances'. <br><br> Here we use a `c5.large` instance, but you can choose additional instance types, including GPU-based instances such as G4, G5, P3, and P4. | ![Continue selection for Amazon Linux 2023 AMI](images/1.12.png)|
+![Search EC2](images/1.08.png)
 
-Once you’ve launched your AWS Deep Learning Base AMI instance, next you will create a private key file to secure your instance with SSH. | ![Select instance type](images/1.13.png)
+Go back to the Amazon EC2 console and press the `Launch Instance` button:
+
+![Launch EC2 instance](images/1.09.png)
+
+Next, you’ll have to select the name and tag for your EC2 instance. Provide a name for the instance and choose the `Browse more AMIs` option within the `Quick Start` section:
+
+![Browse more AMIs](images/1.10.png)
+
+Choose the `AWS Marketplace AMIs` tab at the top, then search for *amazon linux 2023*.  Select `Amazon Linux 2023 AMI`:
+
+![Select Amazon Linux 2023 AMI](images/1.11.png)
+
+Press `Continue`:
+
+![Continue selection for Amazon Linux 2023 AMI](images/1.12.png)
+
+Now you can choose an Amazon EC2 instance type. Amazon Elastic Compute Cloud (EC2) is the Amazon Web Service you use to create and run virtual machines in the cloud. AWS calls these virtual machines 'instances'.
+
+Here we use a `c5.large` instance, but you can choose additional instance types, including GPU-based instances such as G4, G5, P3, and P4.
+
+![Select instance type](images/1.13.png)
+
+Once you’ve launched your AWS Deep Learning Base AMI instance, next you will create a private key file to secure your instance with SSH.
+
 
 ### Creating a new private key file
 
@@ -140,6 +154,7 @@ Next is connecting to your newly launched instance using SSH. The following inst
 If you want to find and copy your instance’s public DNS, you can locate it by toggling to the `Details` tab and copy your Amazon EC2 instance’s `Public IPV4 DNS`:
 
 ![Details of instance created](images/1.18.png)
+
 
 ### Installing Docker
 
