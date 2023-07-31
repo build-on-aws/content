@@ -307,3 +307,6 @@ This blog post introduced you to the AWS Lambda Go API Proxy, and how it's frame
 The AWS Lambda Go API Proxy also supports the [Gin](https://github.com/gin-gonic/gin), which one of the most popular Go web frameworks! The second part of this blog, will demonstrate how to run existing `Gin` framework based Go applications as AWS Lambda functions with the help of a simple (yet practical) URL shortener service.
 
 Stay tuned!
+
+|SeriesToc|
+|---------|
