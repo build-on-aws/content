@@ -2,17 +2,23 @@
 title: "Build your own knowledge base with multilingual Q&A powered by generative AI"
 description: "build a multilingual knowledge base using multiple sources, and deliver summarized results."
 tags:
-    - AIML
-    - artificial intelligence
-    - machine learning
+    - ai-ml
+    - kendra
+    - sagemaker
+    - aws
+    - tutorials
+showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes
-date: 2023-06-26
+date: 2023-07-31
 ---
 
-Organizations often accumulate a wide range of documents, including project documentation, manuals, tenders, Salesforce data, code repositories, and more. When searching through this vast amount of information, it can be a tedious process of locating the specific document and then conducting the search within it. Once you find the desired document, it may be lengthy, and you might prefer a summary of its content. 
+|ToC|
+|---|
 
-Web applications are available to summarize, however you should watch out! using them could mean sharing your organization's sensitive information: 🚨DANGER🚨.
+Organizations often accumulate a wide range of documents, including project documentation, manuals, tenders, Salesforce data, code repositories, and more. When searching through this vast amount of information, it can be a tedious process of locating the specific document and then conducting the search within it. Once you find the desired document, it may be lengthy, and you might prefer a summary of its content.
+
+Web applications are available to summarize, however you should watch out! Using them could mean sharing your organization's sensitive information: 🚨DANGER🚨.
 
 Join me in this blog as I guide you through the process of building a comprehensive knowledge base using multiple sources. With this knowledge base you can seek answers to your queries and receive concise summaries along with links for further study. To ensure accessibility, we will facilitate this process through a convenient question-and-answer format available in multiple languages.
 
@@ -23,40 +29,37 @@ We will build it in two parts:
 
 ## Build a multilingual Q&A intelligent knowledge base 🤖🌎
 
- 1. ### Build the smart database with [Amazon Kendra](https://aws.amazon.com/pm/kendra), using the sample data.🤖
+### 1. Build the smart database with [Amazon Kendra](https://aws.amazon.com/pm/kendra), using the sample data.🤖
 
-Kendra is an intelligent search service powered by machine learning, where you can add, update, or delete automatically synchronize [multiples data source](https://docs.aws.amazon.com/kendra/latest/dg/hiw-data-source.html), and also index web pages by providing the URLs to crawling. 
+Kendra is an intelligent search service powered by machine learning, where you can add, update, or delete automatically synchronize [multiples data source](https://docs.aws.amazon.com/kendra/latest/dg/hiw-data-source.html), and also index web pages by providing the URLs to crawling.
 
 First you need to create a Kendra Index, to hold the contents of your documents and structured them in a way to make the documents searchable, follow the steps to create a [Kendra](https://console.aws.amazon.com/kendra/) Index in the console [here](https://docs.aws.amazon.com/kendra/latest/dg/gs-console.html)
 
-![create a kendra index](images/fig_1.png)
-<h4 align="center">Fig 1. Create an Amazon Kendra Index. </h4> 
+![create a kendra index](images/fig_1.png "Fig 1. Create an Amazon Kendra Index.")
 
-Once the Index is **Active**, add a data source to an Index (Fig. 2), select **Add data source** and then select **Add dataset**, add a name and select English(en) in Language. 
+Once the Index is **Active**, add a data source to an Index (Fig. 2), select **Add data source** and then select **Add dataset**, add a name and select English(en) in Language.
 
-![add a data source to an Index](images/fig_2.png)
-<h4 align="center">Fig 2. add a data source to an Index. </h4> 
+![add a data source to an Index](images/fig_2.png "Fig 2. add a data source to an Index.")
 
 At the end of the data synchronization, you will have the knowledge base ready for queries.
 
-[Here](https://docs.aws.amazon.com/kendra/latest/dg/getting-started.html) you can see more ways to upload sources to Kendra. 
+[Here](https://docs.aws.amazon.com/kendra/latest/dg/getting-started.html) you can see more ways to upload sources to Kendra.
 
-2. ### Queries to an index in Amazon Kendra - [Documentation](https://docs.aws.amazon.com/kendra/latest/dg/searching.html)
+### 2.Queries to an index in Amazon Kendra - [Documentation](https://docs.aws.amazon.com/kendra/latest/dg/searching.html)
 
-To search an Amazon Kendra index, you use the [Query](https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html) API and it returns information about the indexed documents of Data sources. 
+To search an Amazon Kendra index, you use the [Query](https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html) API and it returns information about the indexed documents of Data sources.
 
-Amazon Kendra utilizes various factors to determine the most relevant documents based on the search terms entered. These factors include the text/body of the document, document title, searchable custom text fields, and other relevant fields. 
+Amazon Kendra utilizes various factors to determine the most relevant documents based on the search terms entered. These factors include the text/body of the document, document title, searchable custom text fields, and other relevant fields.
 
 Additionally, filters can be applied to the search to narrow down the results, such as filtering documents based on a specific custom field like "department" (e.g., returning only documents from the "legal" department). For more information, see [Custom fields or attributes](https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html).
 
 You can query the Kendra API in several ways:
 
- **With the console**
+#### With the console
 
- Go to the navigation panel on the left, choose the **Search indexed content** option, then enter a query in the text box and then press **enter** (Fig. 3).
+Go to the navigation panel on the left, choose the **Search indexed content** option, then enter a query in the text box and then press **enter** (Fig. 3).
 
-![Search in a Kendra Index](images/fig_2_1.png)
-<h4 align="center">Fig 3.  Search in a Kendra Index. </h4> 
+![Search in a Kendra Index](images/fig_2_1.png "Fig 3.  Search in a Kendra Index.")
 
 **With AWS SDK for [Python(Boto3)](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra.html)** use this code:
 
@@ -72,12 +75,11 @@ def QueryKendra(index_id,query):
     return response
 ```
 
-**Others** 
+#### Others
 
-With [AWS SDK for Java](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/kendra/KendraClient.html) and [Postman](https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html). 
+With [AWS SDK for Java](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/kendra/KendraClient.html) and [Postman](https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html).
 
-
-2. ### Add multilingual features
+### 3. Add multilingual features
 
 In this segment, you will use two AI/ML services that you can use with an API call:
 
@@ -86,8 +88,9 @@ In this segment, you will use two AI/ML services that you can use with an API ca
 - [Amazon Translate](https://aws.amazon.com/translate/) to translate the question to the language of the Kendra knowledge base (English in this case) and translate the answer back to the language of the original question, using [TranslateText](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language) from [Boto3 Translate client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html):
 
 The TranslateText API needs the following parameters:
+
 - **Text (string)**: The text to translate.
-- **SourceLanguageCode (string):** One of the [supported language codes](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html) for the source text, if you specify **auto** , Amazon Translate will call Amazon Comprehend to determine the source language. 
+- **SourceLanguageCode (string):** One of the [supported language codes](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html) for the source text, if you specify **auto** , Amazon Translate will call Amazon Comprehend to determine the source language.
 - **TargetLanguageCode (string):** One of the supported language codes for the target text.
 
 This will be the function that you will use to perform the translation:
@@ -108,8 +111,7 @@ source_language_code = response['SourceLanguageCode'] #you need it to answer in 
     return translated_text, source_language_code
 ```
 
-If you want to know more about these services as API calls you can visit this blog: [All the things that Comprehend, Rekognition, Textract, Polly, Transcribe, and Others Do](https://www.buildon.aws/posts/all-the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do)
-
+If you want to know more about these services as API calls you can visit this blog: [All the things that Comprehend, Rekognition, Textract, Polly, Transcribe, and Others Do](/posts/all-the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do)
 
 The code of the multilingual Q&A intelligent knowledge base is:
 
@@ -148,18 +150,15 @@ for query_result in response["ResultItems"]:
         print("------------------\n\n")  
 ```
 
-Amazon Kendra deliveres two results Answer and Documents, and the answer it could be big (Fig. 4), but wouldn't a summarized result be better?. Which leads us to the next step.
+Amazon Kendra delivers two results: Answer and Documents, and the answer could be big (Fig. 4), but wouldn't a summarized result be better?. Which leads us to the next step.
 
-![Amazon Kendra answer result in spanish](images/fig_3_1.png)
-<h4 align="center">Fig 4.  Amazon Kendra answer result in spanish. </h4> 
-
+![Amazon Kendra answer result in spanish](images/fig_3_1.png "Fig 4.  Amazon Kendra answer result in spanish.")
 
 ## Summarize answers from an intelligent multilingual question and answer database. 🤖🌎🚀
 
+### 1. Create ENDPOINT to invoke model of summarization using Sagemaker Jumpstart🚀.
 
-1. ### Create ENDPOINT to invoke model of summarization using Sagemaker Jumpstart🚀.
-
-In this part you are going to use a [Amazon SageMaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/sm-domain.html) as [Machine Learning Environments](https://docs.aws.amazon.com/sagemaker/latest/dg/machine-learning-environments.html), where AWS provides all the necessary infrastructure to train and deploy the model, which once ready you can discard on that environment you will use [SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) which provides pretained, open-source models for a wide range of problem types (as our problem to summarize) to help you get started with machine learning, and the best is you can also access a models using the [SageMaker Python SDK](https://sagemaker.readthedocs.io/en/stable/overview.html#use-sagemaker-jumpstart-algorithms-with-pretrained-models).
+In this part you are going to use a [Amazon SageMaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/sm-domain.html) as [Machine Learning Environments](https://docs.aws.amazon.com/sagemaker/latest/dg/machine-learning-environments.html), where AWS provides all the necessary infrastructure to train and deploy the model, which once ready you can discard on that environment you will use [SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) which provides pre-trained, open-source models for a wide range of problem types (as our problem to summarize) to help you get started with machine learning, and the best is you can also access a models using the [SageMaker Python SDK](https://sagemaker.readthedocs.io/en/stable/overview.html#use-sagemaker-jumpstart-algorithms-with-pretrained-models).
 
 Now that I've introduced you to [SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html), let's start working with it:
 |||
@@ -171,7 +170,7 @@ Now that I've introduced you to [SageMaker JumpStart](https://docs.aws.amazon.co
 |5. Create a [Sagemaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html) using [Quick setup](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html), this takes a few minutes⏳... or **Select domain and user profile** if you already have one created. |![Create a Sagemaker Domain](images/fig_7.png)![Select domain and user profile](images/fig_8.png)|
 |6. Follow the steps in jupyter notebook, explore it, and wait for me in step **5**|![Select domain and user profile](images/fig_9.jpg)|
 
-In the jupyter notebook you can use FLAN-T5 model for many NLP tasks, without fine-tuning the model, such as: 
+In the jupyter notebook you can use FLAN-T5 model for many NLP tasks, without fine-tuning the model, such as:
 
 - Text summarization
 - Common sense reasoning / natural language inference
@@ -180,11 +179,11 @@ In the jupyter notebook you can use FLAN-T5 model for many NLP tasks, without fi
 - Translation
 - Pronoun resolution
 
-Go to part 3 in jupyter notebook to deployed a [sagemaker endopoint](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-recommender.html), this is the call to do [real-time inference](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html) to ML model as an API call, using Boto3 and AWS credentials. 
+Go to part 3 in jupyter notebook to deploy a [sagemaker endpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-recommender.html), this is the call to do [real-time inference](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html) to ML model as an API call, using Boto3 and AWS credentials.
 
 You can get the Sagemaker Endpoint in two ways:
 
-- [SageMaker Python SDK](https://sagemaker.readthedocs.io/en/stable/overview.html#use-prebuilt-models-with-sagemaker-jumpstart): 
+- [SageMaker Python SDK](https://sagemaker.readthedocs.io/en/stable/overview.html#use-prebuilt-models-with-sagemaker-jumpstart):
 
 ```code
 model_predictor.endpoint_name
@@ -194,12 +193,11 @@ model_predictor.endpoint_name
 
 Find **Inference** on the left-hand navigation panel and choose **Endpoints**.
 
-🚨**Note:** You have to be careful, because while the endpoint is active, the EC2 instance is also active, so you are billing, check [pricing here](https://aws.amazon.com/es/sagemaker/pricing/).
+> 🚨**Note:** You have to be careful, because while the endpoint is active, the EC2 instance is also active, so you are billing, check [pricing here](https://aws.amazon.com/es/sagemaker/pricing/).
 
+### 2. 👩🏻‍🔬 Add summarization features
 
-2. ### 👩🏻‍🔬 Add summarization features
-
-In **[step 5](https://github.com/aws/amazon-sagemaker-examples/blob/main/introduction_to_amazon_algorithms/jumpstart-foundation-models/text2text-generation-flan-t5-ul2.ipynb)** on Jupyter notebook you can see the advanced parameters to control the generated text while performing inference definition that this model supports. 
+In **[step 5](https://github.com/aws/amazon-sagemaker-examples/blob/main/introduction_to_amazon_algorithms/jumpstart-foundation-models/text2text-generation-flan-t5-ul2.ipynb)** on Jupyter notebook you can see the advanced parameters to control the generated text while performing inference definition that this model supports.
 
 Let's define the parameters as follows:
 
@@ -258,6 +256,7 @@ def summarization(text):
 
     return
 ```
+
 With the following function print the summarized result of Amazon Kendra:
 
 ```python
@@ -282,9 +281,9 @@ show_result_answer(response)
 
 In Fig 5 you can see 3 results of the summarized text, this is because you set num_return_sequences parameter to 3:
 
-![Sumarized results](images/fig_12.png)<h4 align="center">Fig 5.  Amazon Kendra answer result in spanish. </h4> 
+![Summarized results](images/fig_12.png "Fig 5.  Amazon Kendra answer result in spanish.")
 
-## Conslusion
+## Conclusion
 
 Thank you for joining me on this journey, where you Gather all the code and build your own knowledge base with multilingual Q&A powered by generative AI. This database allows you to make inquiries in any language, receiving summarized responses in the desired language, all prioritizing data privacy.
 
@@ -294,6 +293,6 @@ Some links for you to continue learning:
 
 - [Welcome to Kendra Essentials+](https://catalog.us-east-1.prod.workshops.aws/workshops/df64824d-abbe-4b0d-8b31-8752bceabade/en-US)
 
-- [Integrate Amazon Kendra and Amazon Lex using a search intent ](https://aws.amazon.com/es/blogs/machine-learning/integrate-amazon-kendra-and-amazon-lex-using-a-search-intent/)
+- [Integrate Amazon Kendra and Amazon Lex using a search intent](https://aws.amazon.com/es/blogs/machine-learning/integrate-amazon-kendra-and-amazon-lex-using-a-search-intent/)
 
 - [Amazon SageMaker Examples - Introduction to Amazon Algorithms](https://github.com/aws/amazon-sagemaker-examples/tree/main/introduction_to_amazon_algorithms)
