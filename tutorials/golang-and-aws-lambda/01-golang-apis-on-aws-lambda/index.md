@@ -1,5 +1,5 @@
 ---
-title: How do I run my Go applications in a Serverless way?
+title: How do I run existing Go applications on AWS Lambda - Part 1
 description: Learn how to run Go REST APIs as Lambda functions using the AWS Lambda Go API Proxy.
 tags:
   - lambda

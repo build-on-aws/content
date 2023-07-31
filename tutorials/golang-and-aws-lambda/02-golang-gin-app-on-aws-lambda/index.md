@@ -1,5 +1,5 @@
 ---
-title: Can I run existing Go applications on AWS Lambda?
+title: How do I run existing Go applications on AWS Lambda - Part 2
 description: Learn how to take a URL shortener application written using Gin and run it as a serverless AWS Lambda function.
 tags:
   - lambda
