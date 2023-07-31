@@ -6,6 +6,7 @@ tags:
   - gen-ai
   - sagemaker
   - aws
+  - hugging-face
 spaces:
   - generative-ai
 authorGithubAlias: hanyun2019
@@ -43,6 +44,7 @@ First of all, we need to set up the environment through some pre-requisites, suc
 2) This notebook uses **2 x ml.g4dn.12xlarge** instances with multiple GPUs. If you don't have enough quotas, please refer to the ["Supported Regions and Quotas"](https://docs.aws.amazon.com/sagemaker/latest/dg/regions-quotas.html#service-limit-increase-request-procedure?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2) to request an increase in service quotas for Amazon SageMaker resources.
 
 ## 3.	Environment Settings
+
 First of all, you'll need to install the SageMaker Python SDK. This experiment requires installing the SageMaker Python SDK v2.108.0, as shown in the following code:
 
 ```
@@ -56,6 +58,7 @@ print(f"sagemaker: {sagemaker.__version__}")
 print(f"boto3: {boto3.__version__}")
 print(f"botocore: {botocore.__version__}")
 ```
+
 Secondly, you need to set up the operating environment for Amazon SageMaker:
 
 ```
@@ -80,18 +83,19 @@ print(f"sagemaker session region: {sess.boto_region_name}")
 
 ## 4.	Loading the Dataset
 
-If you are concerned about when the dataset is loaded, you can find the value sst2 of `dataset_config_name` in the notebook code; if you compare it to the `entry_point` file of the HuggingFace estimator (`run_clm.py` is defined in this example), the code in it is written like this:
+If you are concerned about when the dataset is loaded, you can find the value sst2 of `dataset_config_name` in the notebook code; if you compare it to the `entry_point` file of the Hugging Face estimator (`run_clm.py` is defined in this example), the code in it is written like this:
 
-![Laoding the dataset through entry-point file defined](images/load-dataset-1.png)
+![Loading the dataset through entry-point file defined](images/load-dataset-1.png)
 
 The explanation in the code comments is very clear. They are listed below for your reference:
+
 “Get the datasets: you can either provide your own CSV/JSON/TXT training and evaluation files (see below) or just provide the name of one of the public datasets available on the hub at https://huggingface.co/datasets/ (the dataset will be downloaded automatically from the datasets Hub) …”
 
 ## 5.	Training Jobs Setting
 
-To create an Amazon SageMaker training job, we use an **estimator**. We'll be using the HuggingFace estimator in the Amazon SageMaker Training Compiler. With an estimator, you can use entry_point to define the training script that Amazon SageMaker should execute, the instance type (instance_type) participating in the training, the hyperparameters to be delivered, etc.
+To create an Amazon SageMaker training job, we use an **estimator**. We'll be using the Hugging Face estimator in the Amazon SageMaker Training Compiler. With an estimator, you can use entry_point to define the training script that Amazon SageMaker should execute, the instance type (instance_type) participating in the training, the hyperparameters to be delivered, etc.
 
-When the Amazon SageMaker training job starts, it's responsible for launching and managing all required machine learning instances, selecting the corresponding HuggingFace DLC(Deep learning container), uploading the training script, downloading the data from the S3 bucket (sagemaker_session_bucket) where the specified data set is located to the **/opt/ml/input/data** container.
+When the Amazon SageMaker training job starts, it's responsible for launching and managing all required machine learning instances, selecting the corresponding Hugging Face DLC(Deep learning container), uploading the training script, downloading the data from the S3 bucket (sagemaker_session_bucket) where the specified data set is located to the **/opt/ml/input/data** container.
 
 First, we'll define some basic parameters common to all estimators (for experimental use, it's recommended to turn off the Amazon SageMaker Debugger performance analysis and debugging tools to avoid additional overhead):
 
@@ -160,7 +164,7 @@ distribution={"pytorchddp": {"enabled": True}}
 
 Setting up the PyTorch data parallel mechanism on Amazon SageMaker is easy. You can learn more on the [“Running PyTorch Lightning and Native PyTorch DDP on Amazon SageMaker Training”](https://aws.amazon.com/cn/blogs/machine-learning/run-pytorch-lightning-and-native-pytorch-ddp-on-amazon-sagemaker-training-featuring-amazon-search/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2) blog.
 
-Also, this example uses the HuggingFace training script `run_clm.py`, which you can find in the scripts folder.
+Also, this example uses the Hugging Face training script `run_clm.py`, which you can find in the scripts folder.
 
 ```
 from sagemaker.pytorch import PyTorch
@@ -239,7 +243,7 @@ optimized_estimator.fit(wait=False)
 optimized_estimator.latest_training_job.name
 ```
 
-## 8.	Comparative analysis of experimental results
+## 8.	Comparative Analysis of Experimental Results
 
 Let's compare the various training metrics with and without the Amazon SageMaker Training Compiler. These include: training data throughput comparison, training loss convergence comparison, training time comparison, training cost comparison, etc.
 
