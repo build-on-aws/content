@@ -156,18 +156,63 @@ Amazon Kendra delivers two results: Answer and Documents, and the answer could b
 
 ## Summarize answers from an intelligent multilingual question and answer database. 🤖🌎🚀
 
-### 1. Create ENDPOINT to invoke model of summarization using Sagemaker Jumpstart🚀.
+### 1. Create ENDPOINT to invoke model of summarization using Sagemaker Jumpstart 🚀
 
 In this part you are going to use a [Amazon SageMaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/sm-domain.html) as [Machine Learning Environments](https://docs.aws.amazon.com/sagemaker/latest/dg/machine-learning-environments.html), where AWS provides all the necessary infrastructure to train and deploy the model, which once ready you can discard on that environment you will use [SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) which provides pre-trained, open-source models for a wide range of problem types (as our problem to summarize) to help you get started with machine learning, and the best is you can also access a models using the [SageMaker Python SDK](https://sagemaker.readthedocs.io/en/stable/overview.html#use-sagemaker-jumpstart-algorithms-with-pretrained-models).
 
 Now that I've introduced you to [SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html), let's start working with it:
-|||
-|--|--|
-|1. Open the [Amazon Sagemaker console](https://console.aws.amazon.com/sagemaker/)|![Amazon Sagemaker console](images/fig_3.png)|
-|2. Find JumpStart on the left-hand navigation panel and choose Foundation models.|![JumpStart Foundation models](images/fig_4.png)|
-|3. Search for a [**Flan UL2**](https://huggingface.co/google/flan-ul2) model, and then clicl on **View model**.|![Flan UL2 search](images/fig_5.png)|
-|4. Open notebook in [Studio](https://aws.amazon.com/sagemaker/studio/)|![Flan UL2 search](images/fig_6.png)|
-|5. Create a [Sagemaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html) using [Quick setup](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html), this takes a few minutes⏳... or **Select domain and user profile** if you already have one created. |![Create a Sagemaker Domain](images/fig_7.png)![Select domain and user profile](images/fig_8.png)|
+
+_||
+
+1. Open the [Amazon Sagemaker console](https://console.aws.amazon.com/sagemaker/)
+
+_||
+
+![Amazon Sagemaker console](images/fig_3.png)
+
+_==
+
+_||
+
+2. Find JumpStart on the left-hand navigation panel and choose Foundation models.
+
+_||
+
+![JumpStart Foundation models](images/fig_4.png)
+
+_==
+
+_||
+
+3. Search for a [**Flan UL2**](https://huggingface.co/google/flan-ul2) model, and then click on **View model**.
+
+_||
+
+![Flan UL2 search](images/fig_5.png)
+
+_==
+
+_||
+
+4. Open notebook in [Studio](https://aws.amazon.com/sagemaker/studio/)
+
+_||
+
+![Flan UL2 search](images/fig_6.png)
+
+_==
+
+_||
+
+5. Create a [Sagemaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html) using [Quick setup](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html), this takes a few minutes⏳... or **Select domain and user profile** if you already have one created. 
+
+_||
+
+![Create a Sagemaker Domain](images/fig_7.png)![Select domain and user profile](images/fig_8.png)
+
+_==
+
+
 |6. Follow the steps in jupyter notebook, explore it, and wait for me in step **5**|![Select domain and user profile](images/fig_9.jpg)|
 
 In the jupyter notebook you can use FLAN-T5 model for many NLP tasks, without fine-tuning the model, such as:
