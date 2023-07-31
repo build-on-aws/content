@@ -18,7 +18,7 @@ date: 2023-07-31
 
 Organizations often accumulate a wide range of documents, including project documentation, manuals, tenders, Salesforce data, code repositories, and more. When searching through this vast amount of information, it can be a tedious process of locating the specific document and then conducting the search within it. Once you find the desired document, it may be lengthy, and you might prefer a summary of its content.
 
-Web applications are available to summarize, however you should watch out! Using them could mean sharing your organization's sensitive information: 🚨DANGER🚨.
+> 🚨DANGER🚨 Web applications are available to summarize, however you should watch out! Using them could mean sharing your organization's sensitive information!
 
 Join me in this blog as I guide you through the process of building a comprehensive knowledge base using multiple sources. With this knowledge base you can seek answers to your queries and receive concise summaries along with links for further study. To ensure accessibility, we will facilitate this process through a convenient question-and-answer format available in multiple languages.
 
@@ -165,6 +165,7 @@ Now that I've introduced you to [SageMaker JumpStart](https://docs.aws.amazon.co
 _||
 
 1. Open the [Amazon Sagemaker console](https://console.aws.amazon.com/sagemaker/)
+
 _||
 
 ![Amazon Sagemaker console](images/fig_3.png)
