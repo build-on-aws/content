@@ -14,7 +14,7 @@ authorName: Haowen Huang
 additionalAuthors: 
   - authorGithubAlias: elizabethfuentes12
     authorName: Elizabeth Fuentes Leone
-date: 2023-07-29 
+date: 2023-07-31 
 ---
  
 Large language models, or LLMs, are essentially composed of complex multi-layer neural networks with over billions of parameters, and may require thousands of GPU hours or more to  train. Therefore, optimizing such models on the training infrastructure requires extensive knowledge of deep learning and systems engineering. While open-source implementations of some compilers can optimize the training process, they often lack the flexibility to integrate with certain hardware, such as GPU instances. The Amazon SageMaker Training Compiler can transform deep learning models from their high-level language expressions into hardware-optimized instructions, thereby speeding up training and helping reduce overall billing time.
