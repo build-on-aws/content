@@ -163,39 +163,62 @@ In this part you are going to use a [Amazon SageMaker Domain](https://docs.aws.a
 Now that I've introduced you to [SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html), let's start working with it:
 
 _||
+
 1. Open the [Amazon Sagemaker console](https://console.aws.amazon.com/sagemaker/)
 _||
+
 ![Amazon Sagemaker console](images/fig_3.png)
+
 _==
 
 _||
+
 2. Find JumpStart on the left-hand navigation panel and choose Foundation models.
+
 _||
+
 ![JumpStart Foundation models](images/fig_4.png)
+
 _==
 
 _||
+
 3. Search for a [**Flan UL2**](https://huggingface.co/google/flan-ul2) model, and then click on **View model**.
+
 _||
+
 ![Flan UL2 search](images/fig_5.png)
+
 _==
 
 _||
+
 4. Open notebook in [Studio](https://aws.amazon.com/sagemaker/studio/)
+
 _||
+
 ![Flan UL2 search](images/fig_6.png)
+
 _==
 
 _||
-5. Create a [Sagemaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html) using [Quick setup](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html), this takes a few minutes⏳... or **Select domain and user profile** if you already have one created. 
+
+5. Create a [Sagemaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html) using [Quick setup](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html), this takes a few minutes⏳... or **Select domain and user profile** if you already have one created.
+
 _||
+
 ![Create a Sagemaker Domain](images/fig_7.png)![Select domain and user profile](images/fig_8.png)
+
 _==
 
 _||
+
 6. Follow the steps in jupyter notebook, explore it, and wait for me in step **5**
+
 _||
+
 ![Select domain and user profile](images/fig_9.jpg)
+
 _==
 
 In the jupyter notebook you can use FLAN-T5 model for many NLP tasks, without fine-tuning the model, such as:
