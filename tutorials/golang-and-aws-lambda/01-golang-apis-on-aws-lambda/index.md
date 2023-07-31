@@ -308,5 +308,5 @@ The AWS Lambda Go API Proxy also supports the [Gin](https://github.com/gin-gonic
 
 Stay tuned!
 
-|SeriesToc|
+|SeriesToC|
 |---------|
