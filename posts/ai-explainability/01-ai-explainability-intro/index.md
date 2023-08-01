@@ -1,6 +1,6 @@
 ---
-title: Title
-description: Introduction ot the concept of explainability
+title: An introduction to concepts of explainability.
+description: Introduction ot the concepts of explainability such as blackbox models, perturbation, posthoc, local vs global, and surrogate models. 
 tags:
   - ai-explainability
   - ai-fairness
