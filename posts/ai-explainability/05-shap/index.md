@@ -1,6 +1,6 @@
 ---
-title: SHAP
-description: In thios post I am describing SHAP as an AIX method.
+title: An introduction to SHAP, an AIX method based on Shapley values,
+description: In this post I am describing SHAP as an AIX method. I will explain how Shapely values are adopted to attribute impact to features in a tabular dataset.
 tags:
   - ai-explainability
   - ai-fairness
