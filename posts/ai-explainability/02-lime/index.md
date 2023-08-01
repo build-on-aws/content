@@ -1,5 +1,5 @@
 ---
-title: an introduction to LIME
+title: an introduction to LIME (Local Interpretable Model-agnostic Explanations)
 description: This post provides an intuitive as well as an in-depth introduction to LIME.
 
 tags:
