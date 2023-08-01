@@ -1,5 +1,5 @@
 ---
-title: MPNN
+title: MPNN (Message Passing Neurla Networks)
 description: Message passing neural networks is an effective way of building very detailed graph embedding methods. In this post we take a look at the foundations.
 tags:
   - graphml

@@ -1,5 +1,5 @@
 ---
-title: CGNN
+title: CGNN (Convolutional Graph Neural Networks)
 description:Convolutoinal Graph Neural Networks.
 tags:
   - graphml

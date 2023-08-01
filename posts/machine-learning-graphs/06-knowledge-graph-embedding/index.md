@@ -1,5 +1,5 @@
 ---
-title: KGE
+title: KGE (Knowledge Graph Embedding)
 description: This post provides the reader with an in depth understanding of knowledge graph embedding and theoritical details of what is supported by DGL-KE.
 tags:
   - graphml

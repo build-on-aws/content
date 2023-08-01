@@ -1,5 +1,5 @@
 ---
-title: DGL-KE tool
+title: DGL-KE, an open source tool built on top of DGL for creating KGE.
 description: This post provides the reader with an in depth understanding of of how DGL-KE uses innovations to provide the fastest in class KGE tool.
 tags:
   - graphml

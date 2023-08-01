@@ -1,5 +1,5 @@
 ---
-title: Graph theory
+title: Graph theory, a theoratical minimum
 description: This post provides the reader with a graph theory theoritical minimum in order to understand GNN terminology.
 tags:
   - graphml

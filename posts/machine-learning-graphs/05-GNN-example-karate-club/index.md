@@ -1,6 +1,6 @@
 ---
-title: Graph theory
-description: This post provides the reader with a graph theory theoritical minimum in order to understand GNN terminology.
+title: Karate Club, The hello world of graph neural networks.
+description: This post creates a simple GCNN to solve the simple problem of Karate Club and to demonstrate how to use DGL.
 tags:
   - graphml
   - graph-neural-networks

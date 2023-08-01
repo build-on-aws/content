@@ -1,6 +1,6 @@
 ---
-title: Needs title
-description: Needs description
+title: Using DGL-KE to create candidates for drug repurposing to treat COVID19.
+description: In this paper, and the associated code base, Amazon Science has used publically available data to discover drug candidates that could be repurposed to treat COVID19. It is essential to note that a candidate is not necessarily effective. It is just creating a shortlist to shorten the due dilligence part of medical researchers.
 tags:
   - graphml
   - graph-neural-networks
