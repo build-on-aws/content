@@ -24,7 +24,7 @@ additionalAuthors:
 
 ```python
 import keras
-from keras.applications.vgg16 import VGG16, preprocess_input, decode_predictions
+from keras.applications.vgg16 import VGG16, preprocess_input, decode_predictions 
 from keras.preprocessing import image
 from skimage.segmentation import slic
 import matplotlib.pylab as plt
@@ -36,6 +36,9 @@ import requests
 ```
 
 
+```
+The following code segment, downloads an image from Amazon S3 and transforms it to a 224x224 image before preprocessing image for object detection. We use vgg16 midel.
+```
 ```python
 from PIL import Image
 from torchvision import transforms
@@ -66,6 +69,9 @@ img_orig = img_orig * 255
     
 
 
+```
+defining a function that depends on a binary mask representing if an image region is hidden
+```
 
 ```python
 # define a function that depends on a binary mask representing if an image region is hidden
@@ -87,10 +93,10 @@ def mask_image(zs, segmentation, image, background=None):
 model = VGG16()
 ```
 
-    2022-07-11 13:43:28.505164: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-    To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 
-
+```
+Making predictions
+```
 
 ```python
 def f(z):
@@ -99,6 +105,9 @@ def f(z):
 ```
 
 
+```
+Creating a kernel shap model explainer using shap open source library.
+```
 ```python
 # use Kernel SHAP to explain the network's predictions
 explainer = shap.KernelExplainer(f, np.zeros((1,50)))
@@ -109,6 +118,9 @@ explainer = shap.KernelExplainer(f, np.zeros((1,50)))
 
 
 
+```
+Calculating shapley values for input features.
+```
 ```python
 shap_values = explainer.shap_values(np.ones((1,50)), nsamples=1000) # runs VGG16 1000 times
 ```
@@ -154,7 +166,10 @@ def fill_segmentation(values, segmentation):
         out[segmentation == i] = values[i]
     return out
 
-# plot our explanations
+```
+plot our explanations
+```
+
 fig, axes = plt.subplots(nrows=1, ncols=4, figsize=(12,4))
 inds = top_preds[0]
 axes[0].imshow(pil_img)
