@@ -1,6 +1,6 @@
 ---
-title: shapley values
-description: In this post I introduce the shapley values, which is the game theory foundation for SHAP methods for AIX. I provide an intuitive example and then describe the equasions and how each segment of the equasion participates in the intuitive mechanics of SHAP.
+title: A gentrle introduction to shapley values in game theory.
+description: In this post I introduce the shapley values, which is the game theory foundation for SHAP methods for AIX. I provide an intuitive example and then describe the equasions and how each segment of the equasion participates in the intuitive mechanics of SHAP. Shapley values provide us a unique solution to impact attribution to features.
 tags:
   - ai-explainability
   - ai-fairness
