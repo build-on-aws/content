@@ -83,7 +83,7 @@ But now, let's start the tutorial and learn how to implement this pattern using 
 
 - A few kilobytes of code will be stored in Amazon S3, which provides 5 GB of free storage.
 - We will call SQS a couple of times, which provides 1 million free requests per month.
-- We will invoce two functions on AWS Lambda, which also provides 1 million free invocations per month.
+- We will invoke two functions on AWS Lambda, which also provides 1 million free invocations per month.
 
 So if you follow the step-by-step guide, you'll definitely stay within the free tier. I've also added a section to the end that helps you remove all the resources created during this tutorial.
 
