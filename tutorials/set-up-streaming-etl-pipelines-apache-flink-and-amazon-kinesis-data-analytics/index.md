@@ -13,7 +13,7 @@ tags:
     - aws
     - athena
 showInHomeFeed: true
-authorGithubAlias:cobusbernard
+authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-08-01
 ---
