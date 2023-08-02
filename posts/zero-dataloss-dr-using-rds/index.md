@@ -68,7 +68,7 @@ Database engines journal change using their own internal tracking sequence. This
 
 
 
-Cloud Enabled Databases capture all changes in logs also known as transaction or redo logs depending on the database engine. These logs are generally write ahead logs (WAL) so all data manipulation is first persisted to these logs then the underlying database files using a process known as Check pointing. This provides a mechanism for a database to roll forward all SCN or LSN changes in the WAL(s) and recover its underlying files to be consistent after an ungraceful outage or server crash. Though any inflight transactions would be rolled back as they were not committed, this is a generally accepted model amongst Cloud Enabled database vendors and applications which results in Zero Data Loss.
+Cloud Enabled Databases capture all changes in logs also known as transaction, binary or redo logs depending on the database engine. These logs are generally write ahead logs (WAL) so all data manipulation is first persisted to these logs then the underlying database files using a process known as Check pointing. This provides a mechanism for a database to roll forward all SCN or LSN changes in the WAL(s) and recover its underlying files to be consistent after an ungraceful outage or server crash. Though any inflight transactions would be rolled back as they were not committed, this is a generally accepted model amongst Cloud Enabled database vendors and applications which results in Zero Data Loss.
   
 ![RDS crash recovery](images/pic5_recovery_rds.jpg "Figure 5. RDS crash recovery")
   
