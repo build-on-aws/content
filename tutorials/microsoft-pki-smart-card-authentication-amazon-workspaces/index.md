@@ -12,6 +12,7 @@ tags:
 authorGithubAlias: austinwebber
 authorName: Austin Webber
 date: 2023-07-19
+showInHomeFeed: true
 ---
 
 By default, Amazon WorkSpaces provides the ability for users to authenticate into their WorkSpaces using their AD username and password. To enhance security during authentication, WorkSpaces provides customers with the ability to enable the usage of Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. This functionality supports smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, users can log into their WorkSpaces using smart cards and use their smart cards within their WorkSpace session to authenticate to websites or other applications. By integrating this, you can eliminate the need for the end user to use their username and password when using their WorkSpace and all AD-related authentication can be handled via the user's smart card certificate.
@@ -39,7 +40,7 @@ The following figure shows the high-level architecture of the Amazon WorkSpaces 
 | 💰 Cost to complete | $150 USD/month (dependent on instance types)      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces)<br>- A VPC with at least 2 private subnets (with internet access) and 1 public subnet (with internet access)<br>- Two Active Directory (AD) domain controllers in different private subnets<br>- An [AD Connector](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_ad_connector.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces)<br>- A [EC2 security group](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/working-with-security-groups.html#creating-security-group?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces)<br>- A [EC2 Keypair](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/create-key-pairs.html#having-ec2-create-your-key-pair?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces)<br>- A [EC2 Windows instance joined to the AD domain](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces)<br>- A Windows computer with the [WorkSpaces Client](https://clients.amazonworkspaces.com/) installed<br>- A CAC or PIV card<br>- **(Recommended)** A public domain in Route53 or a public domain in another provider using a top-level domain found in the [IANA Root Zone Database](https://www.iana.org/domains/root/db)<br>- **(Optional)** A public S3 bucket|
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-06-23                             |
+| ⏰ Last Updated     | 2023-07-31                            |
 
 |ToC|
 |---|
@@ -508,7 +509,7 @@ Smart card authentication is supported on Amazon Linux 2 WorkSpaces using the WS
    ```powershell
    sudo su
    cd /usr/lib/skylight/
-   ./enable_smartcard --ca-cert **/tmp/root.pem /tmp/int.pem**
+   ./enable_smartcard --ca-cert /tmp/root.pem /tmp/int.pem
    ```
 
 8. Disconnect from the WorkSpace and [create a custom image](https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html#create_custom_image_bundle?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=microsoft-pki-smart-card-authentication-amazon-workspaces) from the WorkSpace.
