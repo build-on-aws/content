@@ -123,7 +123,7 @@ aws lightsail get-blueprints | grep sql
 There are several different versions of SQL Server Express available. Use the latest SQL Server version, `windows_server_2022_sql_2022_express`. Create a VPS with with this blueprint. In addition, the `--user-data` parameter creates a directory to store the back SQL Server backup file. The `--bundle-id` sets the size of the server.
 
 ```bash
-aws lightsail create-instances —instance-names pcgSQLServer \
+aws lightsail create-instances --instance-names pcgSQLServer \
 --availability-zone us-west-2a \
 --blueprint-id windows_server_2022_sql_2022_express \
 --user-data "mkdir c:\backup" \
@@ -147,6 +147,30 @@ aws lightsail create-disk \
 --size-in-gb 32
 ```
 
+If successful, Lightsail returns a status message.
+
+```json
+{
+    "operations": [
+        {
+            "id": "14d4be4a-955f-45d0-81f7-7a5440195c54",
+            "resourceName": "sqlserver-data-and-logs",
+            "resourceType": "Disk",
+            "createdAt": "2023-08-02T01:52:51.867000+00:00",
+            "location": {
+                "availabilityZone": "us-west-2a",
+                "regionName": "us-west-2"
+            },
+            "isTerminal": false,
+            "operationType": "CreateDisk",
+            "status": "Started",
+            "statusChangedAt": "2023-08-02T01:52:52.128000+00:00"
+        }
+    ]
+}
+```
+
+
 Step 2: Attach block storage to the database server
 
 Attach the block storage to the database server. The server will recognize it as a drive.
@@ -158,15 +182,46 @@ aws lightsail attach-disk \
 --instance-name pcgSQLServer
 ```
 
-Although the storage is attached to the server, it is an unformatted disk.
+When the disk is attached, it returns a JSON message to confirm the operation.
+
+```json
+{
+    "operations": [
+        ... ,
+        {
+            "id": "e92ee8ac-45cf-4bae-a16b-ac55fea264c7",
+            "resourceName": "pcgSQLServer",
+            "resourceType": "Instance",
+            "createdAt": "2023-08-02T01:54:18.196000+00:00",
+            "location": {
+                "availabilityZone": "us-west-2a",
+                "regionName": "us-west-2"
+            },
+            "isTerminal": false,
+            "operationDetails": "sqlserver-data-and-logs",
+            "operationType": "AttachDisk",
+            "status": "Started",
+            "statusChangedAt": "2023-08-02T01:54:18.196000+00:00"
+        }
+    ]
+}
+```
+
+Although the storage is attached to the server, it is an unformatted disk. You will format it with Windows Server.
 
 ## Module 4: Configure the SQL Server VPS
 
-The VPS is a Windows Server, use the RDP window in the Lightsail console.
+The VPS is a Windows Server, use the RDP window in the Lightsail console. Choose the terminal icon in the pcgSQLServer panel.
+
+> Note: The RDP button may take 5 to 7 minutes before it becomes active and you can connect to the server.
 
 ![Use RDP window to log into the SQL Server Database server ](./images/rdp-1.png)
 
-In the RDP window, format the attached disk. Open a Powershell window and use the `Get-Disk` commandlet to find the unformatted disk which is attached but offline.
+We need format the disk to store data and log files. Here are the steps to make the disk usable by Windows Server.
+
+Step 1: Find the disk number of the unformatted but attached disk.
+
+In the RDP window, open a Powershell window and use the `Get-Disk` commandlet to find the unformatted disk which is attached but offline.
 
 ```powershell
 get-disk | Where-Object {$_.OperationalStatus -eq 'Offline' } 
@@ -181,8 +236,9 @@ Once you know the Disk Number, initialize and partition the disk with the `New-P
 ```powershell
 Initialize-Disk -Number 1
 New-Partition –DiskNumber 1 -AssignDriveLetter –UseMaximumSize
+Format-Volume -DriveLetter D -FileSystem NTFS -NewFileSystemLabel Data
 ```
-Step 2:  Download the Wide World Importers sample databas
+Step 2:  Download the Wide World Importers sample database
 
 Microsoft distributes an [example SQL Server backup file](https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0). Use this file to restore a backup. When you instantiated the SQL Server VPS a backup directory was created. Download the Wide World Importers backup file to that directory.
 
@@ -222,7 +278,7 @@ GO
 Run the script using sqlcmd.
 
 ```powershell
-sqlcmd -i C:\restore_database.sql
+sqlcmd -i C:\backup\restore_database.sql
 ```
 
 If the restore is successful you will see a many status messages ending with this message.
@@ -232,19 +288,48 @@ If the restore is successful you will see a many status messages ending with thi
 RESTORE DATABASE successfully processed 58496 pages in 4.218 seconds (108.343 MB/sec).
 ```
 
-You can use [SQL Server Management Studio](https://learn.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms?view=sql-server-ver16) to verify the restore was succesful and run a SQL query, for example:
+You can use [SQL Server Management Studio](https://learn.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms?view=sql-server-ver16) to verify the restore was succesful and run a SQL query. 
+
+Open SQL Server Management Studio from the Windows Start button.
+
+![Open SQL Server Mamangement Studio](./images/sqlserver-studio-1.png)
+
+When SQL Server Management Studio is open, choose **File > Connect Object Explorer**.
+
+![Open Object Explorer from the menu](./images/sqlserver-studio-2.png)
+
+The **Connect to Server** window will open. Select the server name by choosing **Browse for more**, then the server name under **Database Engine**.
+
+![Connect to the database by choosing the server](./images/sqlserver-studio-3.png)
+
+We will use **Windows Authentication** which requires choosing the **Options>>** button and selecting **Trust Server Certificate**. Then choose **Connect**.
+
+![Set option to use Windows Authentication](./images/sqlserver-studio-4.png)
+
+With the database connected to SQL Server Management Studio, you can query the Wide World Importers database by choosing **New Query**.
+
+![Start a new database query](./images/sqlserver-studio-5.png)
+
+In the query window, type in the SQL query. This query lists all the rows in the `Website.Customers` view.
 
 ```sql
 SELECT * FROM Website.Customers;
 ```
 
-![SQL Server Management Studio](./images/ssms-1.png)
+To run the query, choose **Execute** in the menu.
+
+![Execute the SQL query from the menu](./images/sqlserver-studio-6.png)
+
+The **Results** pane displays the rows from the view.
+
+
+![SQL Server Management Studio](./images/sqlserver-studio-7.png)
 
 Congrats! You’ve migrated a SQL Server database to the cloud.
 
 ## Module 5: Clean up
 
-Delete the VPS and the attached disk to prevent further charges. 
+Delete the VPS, the attached disk, and the Cloud9 environment to prevent further charges. 
 
 Step 1: Delete the VPS
 
@@ -265,6 +350,12 @@ In the Lightsail console, choose **Storage**, select the three dots in sqlserver
 Choose **Yes, delete**.
 
 ![Delete disk](./images/delete-disk-2.png)
+
+Step 3: Delete the Cloud9 environment
+
+In the Cloud9 console, choose `pcg-database` and select **Delete**.
+
+![Delete Cloud9 environment](./images/cloud9-environment-delete.png)
 
 ## What did you accomplish?
 
