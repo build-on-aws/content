@@ -58,8 +58,16 @@ As depicted below Amazon Aurora RDS writes to a clustered storage volume that sp
 ## Amazon RDS database Transaction Logging
 Database engines journal change using their own internal tracking sequence. This internal Change or Sequence number can also be used as the target to restore databases or derive the clock time to restore a database if needed. In RDS Oracle this is known as the System Change Number (SCN) and other RDS Engines it's referred to as Log Sequence Number (LSN). For a ZDLDR solution the SCN or LSN for a database would match prior to the disaster and after as well as the data.
   
-![RDS change tracking LSN and SCN](images/pic4_table_lsn_scn_log.jpg "Figure 4. RDS change tracking LSN and SCN")
-  
+| Database Engine            | Internal Change Tracking   | Database Change log  |
+|----------------------------|----------------------------|----------------------|
+| Amazon RDS for MySQL       | Log Sequence Number (LSN)  | Binary Log           |
+| Amazon RDS for PostgresSQL | Log Sequence Number (LSN)  | Transaction Log      |
+| Amazon RDS for MariaDB     | Log Sequence Number (LSN)  | Binary Log           |
+| Amazon RDS for Oracle      | System Change Number (SCN) | Redo Log             |
+| Amazon RDS for SQL Server  | Log Sequence Number (LSN)  | Transaction Log      |
+
+
+
 Cloud Enabled Databases capture all changes in logs also known as transaction or redo logs depending on the database engine. These logs are generally write ahead logs (WAL) so all data manipulation is first persisted to these logs then the underlying database files using a process known as Check pointing. This provides a mechanism for a database to roll forward all SCN or LSN changes in the WAL(s) and recover its underlying files to be consistent after an ungraceful outage or server crash. Though any inflight transactions would be rolled back as they were not committed, this is a generally accepted model amongst Cloud Enabled database vendors and applications which results in Zero Data Loss.
   
 ![RDS crash recovery](images/pic5_recovery_rds.jpg "Figure 5. RDS crash recovery")
@@ -77,7 +85,13 @@ High Availability is resilience to failure of individual services such as comput
 
 Backups in Amazon RDS are based on EC2 Storage level Snapshots and for Cloud Enabled offerings this is coupled with transaction log backups every 5 minutes all automated when enabled and implicitly written to S3 Object bucket Storage. The initial Snapshot of a database will perform a full storage backup with subsequent Snapshots being forever incremental copying only changed disk blocks for speed and efficiency.
   
-![RDS Backup cadence](images/pic7_table_backups.jpg "Figure 7. RDS Backup cadence")
+| Backup                              | Cadence                 |
+|-------------------------------------|-------------------------|
+| Full Physical                       | One off Initial Backup  |
+| Incremental Physical                | Daily Backup Window     |
+| Cloud Enabled Transactional Logical | Every 5 Minutes         |
+| Cloud Native Transactional Logical  | Continuous              |
+
   
 The Hybrid Cloud Native Amazon Aurora backups are continuous and based on its intelligent storage clustered setup and how data changes are recorded, due to this we should be able to restore an Aurora database with no data loss as there is no transaction log backup needed, the transactions are part of the data persisted to disk across all 3 AZs mentioned earlier. 
 
@@ -89,7 +103,12 @@ To restore a RDS Hybrid Cloud Native database would need a restore of the full b
   
 Disaster Recovery in Amazon RDS is based on Multi AZ or Multi Region database copies where we have a physically separate database copy located in a different physical location. This Database copy could be replicated using SAN or Database technologies with the latter protecting against disk corruptions. The replication used between database copies to keep them identical or near identical as possible could use asynchronous, synchronous, semi-synchronous or synchronous clustered replication depending on the replication technology used and DR setup.
 
-![sync, async, semi-sync](images/pic8b_asyc_sync_semi_sync.jpg "Figure 8b. Rsync, async, semi-sync")
+| Replication Method    | Description                                                                                                                   |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Asynchronous          | Send changes to a second site but do not wait for them to be applied                                                          |
+| Synchronous           | Send changes to a second site but  wait for them to be applied                                                                |
+| Semi-Synchronous      | Send changes to two sites but  wait for them to be received by atleast one of the site                                        |
+| Synchronous-Clustered | Send changes too clustered disk across 3 AZ's, atleast 4 copies of the changes must persist on disk with eventually 6 copies  |
   
 ## Logical Replication vs Physical Replication
  'How' we replicate RDS Databases for DR as described above is generally considered to be either 
@@ -102,6 +121,7 @@ Disaster Recovery in Amazon RDS is based on Multi AZ or Multi Region database co
 
 These 4 types of replication are depicted below:
   
+
 ![Replication Async vs Sync](images/pic9_replication_sync_vs_async.jpg "Figure 9. Replication Async vs Sync")
   
 'What' we replicate could be either:
@@ -123,8 +143,20 @@ Logical replication can be
  
 ## Database support for Logical Synchronous Replication
 We can see below which database engines support SYNC and SEMISYNC replication so therefore potentially an RPO 0 depending on the replication type.
-  
-![RDS Engines that support Sync](images/pic10_table_sync_support.jpg "Figure 10. RDS Engines that support Sync")
+
+
+| Database Engine              | Storage Sub System | Multi AZ SAN Physical Replication Support (SYNC) | Multi AZ DB Replica Logical Replication Support (SYNC) | Multi AZ DB Replica Logical Replication Support (SEMI-SYNC)  |
+|------------------------------|--------------------|--------------------------------------------------|--------------------------------------------------------|--------------------------------------------------------------|
+| Amazon Aurora MySQL          | Multi AZ Clustered | Implicit                                         | Yes                                                    | No                                                           |
+| Amazon Aurora Postgres       | Multi AZ Clustered | Implicit                                         | Yes                                                    | No                                                           |
+| Amazon RDS for MySQL         | Single AZ Striped  | Yes                                              | No                                                     | Yes                                                          |
+| Amazon RDS for PostgresSQL   | Single AZ Striped  | Yes                                              | No                                                     | Yes                                                          |
+| Amazon RDS for MariaDB       | Single AZ Striped  | Yes                                              | No                                                     | No                                                           |
+| Amazon RDS for Oracle        | Single AZ Striped  | Yes                                              | No                                                     | No                                                           |
+| Amazon RDS for SQL Server    | Single AZ Striped  | Yes                                              | No                                                     | No                                                           |
+| Amazon RDS Custom Oracle     | Single AZ Striped  | No                                               | Yes                                                    | Yes                                                          |
+| Amazon RDS Custom SQL Server | Single AZ Striped  | Yes                                              | Yes                                                    | No                                                           |
+
   
 Its worth stating the Database Edition can impact what choices are available, for RDS Oracle Logical replicas are only available using Enterprise Edition. For other Amazon engines including SQL Server logical replicas are available under both standard and enterprise editions.
 
@@ -136,8 +168,15 @@ Amazon RDS provides a lower level offering called RDS Custom for database engine
 ## Disaster Blast Radius
 Not all failures require disaster recovery on Amazon RDS. For an RDS Database the implicit services that support the database are:
   
-![RDS Services Table](images/pic11_table_rds_services.jpg "Figure 11. RDS Services Table")
-  
+  | Service    | Description                            |
+|------------|----------------------------------------|
+| Amazon RDS | Database s/w running                   |
+| EC2        | Compute that the database s/w runs on  |
+| EBS        | Storage that holds the data and s/w    |
+| KMS        | keys to support database encryption    |
+| S3         | storage to support  Database backups   |
+
+
 Let's refer to this as Level 1, a failure at Level 1 should not require disaster recovery in general, but may invoke it for a faster recovery if using a multi AZ is setup. There should be zero data loss as each of these services is generally self-healing or highly redundant. 
 
 EBS where our database s/w and data is stored is redundant and highly available, but there is an edge case where it could be susceptible to disk corruption. With modern disk drives, implicit integrity checks by database s/w, o/s and actual drives themselves this should be considered very rare, but still a possibility. The ability to deal with disk corruption will form a crucial role in achieving a ZDLDR solution.
@@ -162,8 +201,22 @@ For Oracle Using Amazon RDS Custom there is support for logical synchronous repl
 We can only achieve ZDLDR at level 1 single AZ or level 2 multi AZ events as these are the only events that are either self-healing or support synchronous replication. Multi Region replication will usually be asynchronous due to large distances we must replicate across.
 
 Putting all of this together we can derive which RDS configuration will support ZDLDR as detailed in the table below.
-  
-![Summary Zero Dataloss Table](images/pic13_table_zdldr_solutions.jpg "Figure 13. Summary Zero Dataloss Table")
+
+| Engine                          | Zero Dataloss Disaster Recovery                                                                                                 |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Amazon RDS MySQL                | Possible to achieve ZDLDR using Sem-Synchronous Replication of a Logical DR t o 2 sites                                         |
+| Amazon RDS MariaDB              | Not Possible as Logical Synchronous Replication is not Supported Physical replication could be susceptible  to Disk Corruption  |
+| Amazon RDS PostgreSQL           | Possible to achieve ZDLDR using Sem-Synchronous Replication of a Logical DR t o 2 sites                                         |
+| Amazon RDS Oracle EE            | Not Possible as Logical Synchronous Replication is not Supported Physical replication could be susceptible  to Disk Corruption  |
+| Amazon RDS Oracle Custom EE     | Possible to achieve ZDLDR using Synchronous Replication of a Logical DR site                                                    |
+| Amazon RDS Oracle SE2           | Not Possible as Logical Synchronous Replication is not Supported Physical replication could be susceptible  to Disk Corruption  |
+| Amazon RDS SQL Server SE        | Possible to achieve ZDLDR using Synchronous Replication of a Logical DR site                                                    |
+| Amazon RDS SQL Server EE        | Possible to achieve ZDLDR using Synchronous Replication of a Logical DR site                                                    |
+| Amazon RDS SQL Server SE Custom | Possible to achieve ZDLDR using Synchronous Replication of a Logical DR site                                                    |
+| Amazon RDS SQL Server EE Custom | Possible to achieve ZDLDR using Synchronous Replication of a Logical DR site                                                    |
+| Amazon Aurora PostgreSQL        | ZDLDR is supported out of the box due to decoupled clustered storage                                                            |
+| Amazon Aurora MySQL             | ZDLDR is supported out of the box due to decoupled clustered storage                                                            |
+
   
 ## Architecting for Near Zero Data Loss
 The purpose of this article is architecting for ZDLDR, but we can reduce the likelihood of data loss for those Engines that do not support a logical synchronous or semi-synchronous replica or run on Amazon Aurora. Using a Multi AZ with one standby replica. This would create a defence against disaster with the Multi AZ SAN copy being used in the majority of DR scenarios. The replica would exist to support edge case disk corruption with the acceptance it will run ASYNC so could lag behind, but even so it would provide extra recoverability options and also potentially provide the opportunity to off load reporting if used as a Read Replica. Databases using this setup would have the protection of 3 AZ's providing further protection against disaster. This is similar to semi-synchronous replication supported by RDS MySQL and RDS Postgres but you have then benefit of both types of DR SAN and DB replication supporting your HA.
