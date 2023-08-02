@@ -43,7 +43,7 @@ We are going to see two techniques that enable data scientists to directly use t
 After experimenting and choosing the right algorithm for the usecase, data scientists want to train the model on a dataset then deploy it at scale so it can be used by the end application.
 We are going to demonstrate the capabilities offered by Amazon SageMaker with a simple usecase on [Iris dataset](https://archive.ics.uci.edu/dataset/53/iris).
 
-### <ins> Data preparation for model training <ins>
+### Data preparation for model training
 
 The following script imports the Iris dataset :
 ```python
@@ -94,7 +94,7 @@ prefix = "DEMO-sklearn-iris"
 training_input_path = sagemaker_session.upload_data("train.csv", key_prefix=prefix + "/training")
 ```
 
-### <ins> Bring your own script <ins>
+### Bring your own script
 
 Data scientists can leverage the use of containers provided by Amazon SageMaker as they natively hold the packages needed to run the training script.
 In this case, they can use [SageMaker Python SDK](https://sagemaker.readthedocs.io/en/stable/overview.html) to define the estimator relative to the container to use.
@@ -194,7 +194,7 @@ And that's it, you have your first Random Forest model trained. Now it's on the 
 This solution provides simplicity, you just need to provide data and your existing training script and SageMaker takes care of the infrastructure part. 
 Next, we'll see what SageMaker has to offer if we need more control on the underlying infrastructure training the model.
 
-### <ins> Bring your own container <ins>
+### Bring your own container
 
 Data scientists can bring their own specific dockerfile or own needed packages to run the training script on.
 In this case, there are 2 ways to configure the training job:
@@ -202,7 +202,7 @@ In this case, there are 2 ways to configure the training job:
 * Use SageMaker Estimator with specific [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html) image deployed for the purpose.
 * Use SageMaker provided remote decorator.
 
-#### <ins> Amazon Sagemaker Estimator <ins>
+#### Amazon Sagemaker Estimator
 
 Amazon SageMaker provides the capability to have your own Docker Image to run the training job, instead of reusing SageMaker Provided ones.
 For this, data scientists need to leverage Amazon ECR by pushing the docker image to a private ECR repository.
@@ -242,7 +242,7 @@ sk_estimator.fit({"train": training_input_path})
 We now have our model trained with our own container provided and ready to run in the SageMaker ecosystem. 
 In particular, this allows us to use specific dependencies that aren't provided by SageMaker's pre-built containers. We'll see in the next section that there's a more straightforward way of meeting the need for specific dependencies in the training job run in SageMaker.
 
-### <ins> Amazon Sagemaker remote execution <ins>
+### Amazon Sagemaker remote execution
 
 Amazon SageMaker provides a straightforward way to execute local scripts and train machine learning models with minor code changes as a large single-node Amazon SageMaker training job or as multiple parallel jobs. 
 
