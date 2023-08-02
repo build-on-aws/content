@@ -2,11 +2,9 @@
 title: "Bring your own machine learning code to AWS"
 description: "Run your training code on AWS with minimum effort using different methods:
   - Bring your own Script
-  - Bring your own Container"
+  - Bring your own Container
 tags:
     - sagemaker
-spaces:
-  - 
 authorGithubAlias: kazdaghli, mehdimld
 authorName: Sarra Kazdaghli, Mehdi Mouloudj
 date: 2023-08-02
