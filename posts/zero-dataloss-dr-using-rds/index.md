@@ -107,14 +107,14 @@ Disaster Recovery in Amazon RDS is based on Multi AZ or Multi Region database co
 |-----------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Asynchronous          | Send changes to a second site but do not wait for them to be applied                                                          |
 | Synchronous           | Send changes to a second site but  wait for them to be applied                                                                |
-| Semi-Synchronous      | Send changes to two sites but  wait for them to be received by atleast one of the site                                        |
-| Synchronous-Clustered | Send changes too clustered disk across 3 AZ's, atleast 4 copies of the changes must persist on disk with eventually 6 copies  |
+| Semi-Synchronous      | Send changes to two sites but  wait for them to be received by at least one of the site                                        |
+| Synchronous-Clustered | Send changes too clustered disk across 3 AZ's, at least 4 copies of the changes must persist on disk with eventually 6 copies  |
   
 ## Logical Replication vs Physical Replication
  'How' we replicate RDS Databases for DR as described above is generally considered to be either 
  - Synchronous (SYNC) where we wait for data to be committed on both the primary RDS database in its AZ and standby RDS database in a different AZ before continuing
  - Asynchronous(ASYNC) where we  send the data from the primary RDS database in its AZ to the standby RDS database in a different AZ but do not wait for data to be committed.
- - Semi-Synchronous(SEMI-SYNC) which requires 2 replica's to support the primary database, the commit is only considered persisted when 1 of the 2 replica's has confirmed the changes have been recieved. Note we say recieved not applied so in theory a double outage of both the primary and replica in receipt of change may still have a chance of data loss.
+ - Semi-Synchronous (SEMI-SYNC) which requires 2 replica's to support the primary database, the commit is only considered persisted when 1 of the 2 replica's has confirmed the changes have been received. Note we say received not applied so in theory a double outage of both the primary and replica in receipt of change may still have a chance of data loss.
 
   Amazon Aurora also provides a 4th method
   - Synchronous Clustered (SYNC-CLUST) where the decoupled storage performs replication with no direct waiting by the compute tier.
@@ -163,7 +163,7 @@ Its worth stating the Database Edition can impact what choices are available, fo
 We should also note that logical and physical DR databases are not mutually exclusive. We could have both a logical replica(s) and a multi AZ physical copy for the same source database and in fact this may provide a more complete DR setup.
 
 ## RDS Custom for Oracle and SQLServer
-Amazon RDS provides a lower level offering called RDS Custom for database engines Oracle and SQLServer. With this offering we gain access to the underlying compute servers o/s. Being able to access the compute also allows us to make customisations to the RDS Engine and its configuration not possible under normal RDS. With regard to disaster recovery the ability to configure Synchronous Logical replication for Oracle is relavent for us as a ZDLDR Solition. RDS Custom also gives  SQLServer the ability for Physical Synchronous Multi AZ configuration which is not possible under standard RDS, but this won't protect against disk corruptions.
+Amazon RDS provides a lower level offering called RDS Custom for database engines Oracle and SQLServer. With this offering we gain access to the underlying compute servers o/s. Being able to access the compute also allows us to make customisations to the RDS Engine and its configuration not possible under normal RDS. With regard to disaster recovery the ability to configure Synchronous Logical replication for Oracle is relevant for us as a ZDLDR Solution. RDS Custom also gives  SQLServer the ability for Physical Synchronous Multi AZ configuration which is not possible under standard RDS, but this won't protect against disk corruptions.
 
 ## Disaster Blast Radius
 Not all failures require disaster recovery on Amazon RDS. For an RDS Database the implicit services that support the database are:
@@ -183,7 +183,7 @@ EBS where our database s/w and data is stored is redundant and highly available,
 
 In general a Level 1 failure should not result in potential data loss unless there is a disk corruption, but even disk corruption to some degree can be minimised depending on how Multi AZ copies are created.
 
-The next level of failure would be an entire Availability Zone failure, let's call this a failure at Level 2. A Level 2 failure would need a disaster recovery site to continue the operation of the database service. If using a Multi AZ database setup then there should be no data loss for synchronously, semi-synchronously or synchronously-clustered replicated databases. For asynchronously replicated database there could be some lag and potential data loss. For semi-synchrounsly replicated databases there should be zero dataloss if no futher impacting issue on the site that has confirmed receipt of the changes. If there is no multi AZ RDS database then it's also possible to use backups to reinstate the database service but these could be upto 5 minutes behind the lost site.
+The next level of failure would be an entire Availability Zone failure, let's call this a failure at Level 2. A Level 2 failure would need a disaster recovery site to continue the operation of the database service. If using a Multi AZ database setup then there should be no data loss for synchronously, semi-synchronously or synchronously-clustered replicated databases. For asynchronously replicated database there could be some lag and potential data loss. For semi-synchronously replicated databases there should be zero dataloss if no further impacting issue on the site that has confirmed receipt of the changes. If there is no multi AZ RDS database then it's also possible to use backups to reinstate the database service but these could be upto 5 minutes behind the lost site.
 
 The next level of failure would be loss of an entire Region(s), let's call this a failure at Level 3. A Level 3 failure always has the potential for data loss, as database replication across regions will be asynchronous due to the distances data must travel to be replicated.  Multi region backups will lag even further behind the live Region as well. We could possibly assume an RPO of minutes for cross region DR, though this is dependent as mentioned on speed, distance and database load activity.
 
@@ -204,9 +204,9 @@ Putting all of this together we can derive which RDS configuration will support 
 
 | Engine                          | Zero Dataloss Disaster Recovery                                                                                                 |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| Amazon RDS MySQL                | Possible to achieve ZDLDR using Sem-Synchronous Replication of a Logical DR t o 2 sites                                         |
+| Amazon RDS MySQL                | Possible to achieve ZDLDR using Semi-Synchronous Replication of a Logical DR t o 2 sites                                         |
 | Amazon RDS MariaDB              | Not Possible as Logical Synchronous Replication is not Supported Physical replication could be susceptible  to Disk Corruption  |
-| Amazon RDS PostgreSQL           | Possible to achieve ZDLDR using Sem-Synchronous Replication of a Logical DR t o 2 sites                                         |
+| Amazon RDS PostgreSQL           | Possible to achieve ZDLDR using Semi-Synchronous Replication of a Logical DR t o 2 sites                                         |
 | Amazon RDS Oracle EE            | Not Possible as Logical Synchronous Replication is not Supported Physical replication could be susceptible  to Disk Corruption  |
 | Amazon RDS Oracle Custom EE     | Possible to achieve ZDLDR using Synchronous Replication of a Logical DR site                                                    |
 | Amazon RDS Oracle SE2           | Not Possible as Logical Synchronous Replication is not Supported Physical replication could be susceptible  to Disk Corruption  |
