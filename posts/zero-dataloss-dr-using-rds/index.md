@@ -44,14 +44,14 @@ These Amazon RDS Databases engines generally fall into 2 categories
 
 Cloud Enabled Databases run using similar infrastructure and setup as if they were running on premise. In a way they are databases designed for an on premise environment and tailored to run on the cloud and utilise those great services that AWS provides. Amazon RDS which caters for engines Oracle, SQL Server, Postgres, MySQL and MariaDB can be considered Cloud Enabled offerings.
 
-As depicted below these databases write to a standard non clustered EBS volume(s). Disaster Recovery can be provided by replication of the Physical SAN or the logical Database to a second Availability Zone.
+As depicted below these databases write to a standard non clustered EBS volume(s). Disaster Recovery can be provided by replication of the Physical SAN or the logical Database to a second Availability Zone. Note we can also perform logical replication within the same Availability Zone as well.
   
 ![RDS Multi AZ EBS](images/pic2_az_ebs.jpg "Figure 2. RDS Multi AZ EBS")
   
 
 Cloud Native Databases are designed from the ground up to utilise cloud features that are generally only available on the cloud. Amazon Aurora Postgres and Amazon Aurora MySQL (both of which are still part of the RDS family) can be considered a hybrid cloud native database offering. Aurora decouples the compute from the storage layer. The storage layer has extra efficiencies, safe guards and utilises multiple AZs to enhance high availability. 
 
-As depicted below Amazon Aurora RDS writes to a clustered storage volume that spans across all 3 Availability Zones. The data is striped such that an Aurora database can be stood up for Disaster Recovery at any time in any Availability Zone within the same Region with no further replication or overhead. 
+As depicted below Amazon Aurora RDS writes to a clustered storage volume that spans across all 3 Availability Zones where 6 copies of the data will be present. The data is striped such that an Aurora database can be stood up for Disaster Recovery at any time in any Availability Zone within the same Region with no further replication or overhead. 
   
 ![RDS Multi AZ Clustered](images/pic2_az_clustered.jpg "Figure 3. RDS Multi AZ Clustered")
   
@@ -81,7 +81,7 @@ One of the strengths of Amazon RDS is a simple and configurable Backup Solution,
 
 The industry standard term for the amount of data loss a system can tolerate is known as the Recovery Point Objective (RPO). This is measured as a unit of time it could be seconds, hours or even days. An RPO of 0 would mean that a database could not tolerate any data loss.
 
-High Availability is resilience to failure of individual services such as compute and storage. AWS by nature is highly available, if an EC2 fails due to an h/w issue this can be respawned on new h/w. EBS disks are resilient and striped. So we can expect Amazon RDS to be highly available as it's built using this same reliable, fault tolerant infrastructure. As we have discussed earlier if there is an issue that crashes the database, the database should still restart with zero data loss. If an RDS Database is setup to run as Multi AZ, RDS will automatically failover to a Disaster Recovery Site if one exists as well under many conditions.
+High Availability is resilience to failure of individual services such as compute and storage. AWS by nature is highly available, if an EC2 fails due to an h/w issue this can be respawned on new h/w. EBS disks are resilient and striped. So we can expect Amazon RDS to be highly available as it's built using this same reliable, fault tolerant infrastructure. As we have discussed earlier if there is an issue that crashes the database, the database should still restart with zero data loss. If an RDS Database is setup to run as Multi AZ, RDS will automatically failover to a Disaster Recovery Site if one exists as well under many conditions. Using Multi AZ will provide an RPO of 0 due to synchronous replication.
 
 Backups in Amazon RDS are based on EC2 Storage level Snapshots and for Cloud Enabled offerings this is coupled with transaction log backups every 5 minutes all automated when enabled and implicitly written to S3 Object bucket Storage. The initial Snapshot of a database will perform a full storage backup with subsequent Snapshots being forever incremental copying only changed disk blocks for speed and efficiency.
   
@@ -95,7 +95,7 @@ Backups in Amazon RDS are based on EC2 Storage level Snapshots and for Cloud Ena
   
 The Hybrid Cloud Native Amazon Aurora backups are continuous and based on its intelligent storage clustered setup and how data changes are recorded, due to this we should be able to restore an Aurora database with no data loss as there is no transaction log backup needed, the transactions are part of the data persisted to disk across all 3 AZs mentioned earlier. 
 
-To restore a RDS Cloud Enabled database would need a restore of the full backup + incremental backup(s) + for Cloud Enabled database the roll forward of the transaction logs. Potentially the RPO using Amazon Cloud Enabled RDS backups would be 5 minutes at most (the cadence of transaction log backups). 
+To restore a RDS Cloud Enabled database would need a restore of the full backup + incremental backup(s) + for Cloud Enabled database the roll forward of the transaction logs. Potentially the RPO using Amazon Cloud Enabled RDS backups would be 5 minutes at most (the cadence of transaction log backups). This would only be applicable if not using Multi AZ to reinstate the database.
 
 To restore a RDS Hybrid Cloud Native database would need a restore of the full backup + incremental backup(s), there are no transaction logs to restore, we should expect an RPO of 0 i.e. no data loss.
   
@@ -219,7 +219,7 @@ Putting all of this together we can derive which RDS configuration will support 
 
   
 ## Architecting for Near Zero Data Loss
-The purpose of this article is architecting for ZDLDR, but we can reduce the likelihood of data loss for those Engines that do not support a logical synchronous or semi-synchronous replica or run on Amazon Aurora. Using a Multi AZ with one standby replica. This would create a defence against disaster with the Multi AZ SAN copy being used in the majority of DR scenarios. The replica would exist to support edge case disk corruption with the acceptance it will run ASYNC so could lag behind, but even so it would provide extra recoverability options and also potentially provide the opportunity to off load reporting if used as a Read Replica. Databases using this setup would have the protection of 3 AZ's providing further protection against disaster. This is similar to semi-synchronous replication supported by RDS MySQL and RDS Postgres but you have then benefit of both types of DR SAN and DB replication supporting your HA.
+The purpose of this article is architecting for ZDLDR, but we can reduce the likelihood of data loss for those Engines that do not support a logical synchronous or semi-synchronous replica or run on Amazon Aurora. Using a Multi AZ with one standby replica. This would create a defence against disaster with the Multi AZ SAN copy being used in the majority of DR scenarios. The replica would exist to support edge case disk corruption with the acceptance it will run ASYNC so could lag behind, but even so it would provide extra recoverability options and also potentially provide the opportunity to off load reporting if used as a Read Replica. Databases using this setup would have the protection of 3 AZ's providing further protection against disaster. This is similar to semi-synchronous replication supported by RDS MySQL and RDS Postgres but you have then benefit of both types of DR SAN and DB replication supporting your HA. Though the SAN replicated site won't protect against disk corruption it could be used to reinstate data that is not corrupt into the DB replicated database using Database native export tools.
   
 ![3 way AZ RDS Replication](images/pic14_3_way_az.jpg "Figure 14. 3 way AZ RDS Replication")
   
