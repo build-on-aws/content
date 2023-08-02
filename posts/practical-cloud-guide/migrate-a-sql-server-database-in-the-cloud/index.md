@@ -33,12 +33,10 @@ Before starting this tutorial, you will need the following:
 <!-- Update with the appropriate values -->
 | Info                |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | 100 - Beginner                          |
+| ✅ AWS Level        | 200 - Intermediate                          |
 | ⏱ Time to complete  | 45 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
-|  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/).<br>
-- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials <br>
-- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system. |
+|  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/).<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials <br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system. |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-06-20                             |
@@ -211,7 +209,7 @@ Although the storage is attached to the server, it is an unformatted disk. You w
 
 ## Module 4: Configure the SQL Server VPS
 
-The VPS is a Windows Server, use the RDP window in the Lightsail console. Choose the terminal icon in the pcgSQLServer panel.
+The VPS is a Windows Server, use the RDP button in the Lightsail console. Choose the terminal icon in the pcgSQLServer panel.
 
 > Note: The RDP button may take 5 to 7 minutes before it becomes active and you can connect to the server.
 
