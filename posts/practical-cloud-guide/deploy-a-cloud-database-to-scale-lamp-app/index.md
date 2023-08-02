@@ -12,9 +12,9 @@ authorName: Sophia Parafina
 date: 2023-06-20
 ---
 
-In previous tutorials you deployed a single application on a VPC. Applications like these are called monolithic applications because all the components are tightly coupled in a single server. Cloud architectures are frequently loosely coupled with application components connected via the network. This tutorial is an update of of a Lightsail workshop.
+In previous tutorials you deployed a single application on a VPC. Applications like these are called monolithic applications because all the components are tightly coupled in a single server. Cloud architectures are frequently loosely coupled with application components connected via the network. This tutorial is an update of a [Lightsail workshop](https://www.lightsailworkshop.com/).
 
-Unlike the tutorial, and in keeping with conventions of the Practical Cloud Guide. You will complete an updated version of the workshop with the AWS CLI instead of the AWS Lightsail console. You will deploy a monolithic LAMP application and an external relational database, the replace the monolithic app’s database with the external database. In addition, you will scale the application by adding additional servers to a load balancer that distributes requests to the servers.
+Unlike the tutorial, and in keeping with conventions of the Practical Cloud Guide. You will complete an updated version of the workshop with the AWS CLI instead of the AWS Lightsail console. You will deploy a monolithic [LAMP (Linux, Apache, MySQL, PHP)](https://aws.amazon.com/what-is/lamp-stack/) application and an external relational database, the replace the monolithic app’s database with the external database. In addition, you will scale the application by adding additional servers to a load balancer that distributes requests to the servers.
 
 ## What you will learn
 
@@ -25,7 +25,9 @@ Unlike the tutorial, and in keeping with conventions of the Practical Cloud Guid
 ## Prerequisites
 
 - An AWS Account (if you don't yet have one, you can create one and set up your environment here).
-- A Cloud9 environment.
+- A Cloud9 environment for an [individual](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup-express.html).  
+    - AWS CLI V2 [installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+    - AWS Lightsail CLI plugin for Linux [installed](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software#install-lightsailctl-on-linux)
 
 
 
@@ -53,7 +55,9 @@ In a monolithic application all the components are in a single VPS. In this exam
 
 ![Monolithic application architecture](./images/lamp-architecture-1.jpg)
 
-You will configure the server via the `—user-data` parameter. Previous tutorials used simple commands. This tutorial uses a script that does the following:
+You will configure the server via the `—user-data` parameter. This parameter lets you configure the server at launch with commands or a shell script. A script can install software, change file permissions, and set configuration parameters that a server requires for deploying an application.  
+
+This tutorial uses a script that does the following:
 
 - The Bitnami image has a default web page installed which needs to be removed. The script starts by changing into the root directory of the web server (/opt/bitnami/apache2/htdocs) and deleting the existing files
 - Next the script clones the application code to render the web front-end from the lab’s Github repo
@@ -82,7 +86,7 @@ echo "creating tasks database"
 cat /home/bitnami/htdocs/data/init.sql | /opt/bitnami/mysql/bin/mysql -u root -p$(cat /home/bitnami/bitnami_application_password)
 ```
 
-Using the Lightsail CLI, create a VPS with a blueprint for a [LAMP](https://aws.amazon.com/what-is/lamp-stack/) stack. To find blueprints with the CLI, use get-blueprints and filter the results using the linux utility [grep](https://www.gnu.org/software/grep/manual/grep.html).
+AWS Lightsail provides Virtual Private Servers (VPS) with preconfigured software calle `blueprints`. The application is deployed on a [LAMP](https://aws.amazon.com/what-is/lamp-stack/) stack and we can use the the Lightsail CLI to find a LAMP stack blueprint. Use the [`get-blueprints`](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lightsail/get-blueprints.html) command and filter the results using the Linux utility [grep](https://www.gnu.org/software/grep/manual/grep.html).
 
 ```bash
 aws lightsail get-blueprints | grep lamp
@@ -90,7 +94,7 @@ aws lightsail get-blueprints | grep lamp
 "blueprintId": "lamp_8_bitnami",
 ```
 
-Specify the size of the VPS with the `—bundle-id` parameter. Like a blueprint, use the CLI to find a blueprint. Since you will scale the application by adding additional server, use a small VPS. We're using a small VPS bundle that you will clone to scale the application horizontally.
+We need to specify the size of the VPS, and Like a blueprint, we can use the CLI to find an appropriately sized VPS. The specifcations (such as the number of CPUs, memory size, and disk size) for a VPS are called bundles. We will scale application by adding additional servers or [horizontal scaling](https://wa.aws.amazon.com/wellarchitected/2020-07-02T19-33-23/wat.concept.horizontal-scaling.en.html). We can use a small VPS bundle that can be copied, or [`cloned`](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-create-instance-from-snapshot), to scale the application horizontally.
 
 ```bash
 aws lightsail get-bundles
@@ -123,13 +127,30 @@ aws lightsail create-instances \
 --bundle-id small_2_0
 ```
 
-It will take several minutes to instantiate the VPS. When the server is ready verify the connection between the PHP application and the locally-running MySQL database. To find the public IP of your lightsail intance check the card for your instance on the Lightsail console home page or use the Lightsail CLI command `get-instance-access-details`.
+It will take several minutes to instantiate the VPS. You can check the status of an instance with the `get-instance-state` command.
+
+```bash
+aws lightsail get-instance-state --instance-name PHP-fe-1
+```
+
+The CLI returns the state of the VPS in a JSON document.
+
+```json
+{
+    "state": {
+        "code": 16,
+        "name": "running"
+    }
+}
+```
+
+When the server is ready verify the connection between the PHP application and the locally-running MySQL database. To find the public IP of your lightsail intance check the card for your instance on the Lightsail console home page or use the Lightsail CLI command `get-instance-access-details`.
 
 > TIP: To find specific values in a JSON file [install jq](https://stedolan.github.io/jq/), a utility for parsing JSON.
 `sudo yum install jq -y`
 
 ```bash
-aws lightsail get-instance-access-details —instance-name PHP-fe-1 | jq .accessDetails.ipAddress
+aws lightsail get-instance-access-details -—instance-name PHP-fe-1 | jq .accessDetails.ipAddress
 ```
 Verify the connection between the PHP application and the locally-running MySQL database by opening a browser to `http://<ipAddress>`.
 
