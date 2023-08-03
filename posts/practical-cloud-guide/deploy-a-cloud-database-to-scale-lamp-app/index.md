@@ -57,17 +57,17 @@ cd /opt/bitnami/apache2/htdocs
 rm -rf *
 
 echo "cloning github repo"
-git clone -b loft https://github.com/build-on-aws/sample-php-app .
+git clone https://github.com/build-on-aws/sample-php-app .
 
 echo "setting ownership on settings file"
-chown bitnami:daemon connectvalues.php
-chmod 666 connectvalues.php
+sudo chown bitnami:daemon connectvalues.php
+sudo chmod 666 connectvalues.php
 
 echo "adding db password to settings file"
 sed -i.bak "s/<password>/$(cat /home/bitnami/bitnami_application_password)/;" /opt/bitnami/apache2/htdocs/connectvalues.php
 
 echo "creating tasks database"
-cat /home/bitnami/htdocs/data/init.sql | /opt/bitnami/mysql/bin/mysql -u root -p$(cat /home/bitnami/bitnami_application_password)
+cat /opt/bitnami/apache2/htdocs/data/init.sql | /opt/bitnami/mariadb/bin/mysql -u root -p$(cat /home/bitnami/bitnami_application_password)
 ```
 
 To ease deployments, AWS Lightsail VPS are preconfigured with commonly used software calle `blueprints`. Our application is deployed on a [LAMP](https://aws.amazon.com/what-is/lamp-stack/) stack and we can use the the Lightsail CLI to find a LAMP stack blueprint. Use the [`get-blueprints`](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lightsail/get-blueprints.html) command and filter the results using the Linux utility [grep](https://www.gnu.org/software/grep/manual/grep.html).
