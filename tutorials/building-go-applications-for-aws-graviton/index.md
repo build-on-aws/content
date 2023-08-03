@@ -124,10 +124,10 @@ To test the application we will use cURL to make a few example requests and veri
 
 ### Shortening a URL
 
-The following command will shorten a URL. My c5.xlarge instance has an IP address of 10.3.76.37, so I’m using that in my command. Make sure to replace the IP address with the address of your EC2 Instance:
+The following command will shorten a URL. My c5.xlarge instance has an IP address of 10.3.71.184, so I’m using that in my command. Make sure to replace the IP address with the address of your EC2 Instance:
 
 ```shell
-curl -X POST -d "https://aws.amazon.com/ec2/graviton/"http://10.3.69.250:8080/shortenURL -H 'Content-Type: application/json'
+curl -X POST http://10.3.71.184:8080/shortenURL -H 'Content-Type: application/json' -d '{"OriginalURL":"https://aws.amazon.com/ec2/graviton/"}'
 ```
 
 You should get output that looks like the following:
@@ -135,7 +135,7 @@ You should get output that looks like the following:
 ```shell
 {
     "shortURL": "7fcLy5Cqwd",
-    "originalURL": "http://amazon.com"
+    "originalURL": "https://aws.amazon.com/ec2/graviton/"
 }
 ```
 
@@ -154,7 +154,7 @@ ccurl -X GET http://10.3.69.250:8080/getFullURL/7fcLy5Cqwd
 You should get output that looks like the following:
 
 ```shell
-"http://amazon.com"
+"https://aws.amazon.com/ec2/graviton/
 ```
 
 ## Load Testing Results
