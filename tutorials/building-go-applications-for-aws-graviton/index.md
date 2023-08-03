@@ -113,6 +113,7 @@ You now have a working binary named `goLinkShortener` built natively on the arm6
 On both your c5.xlarge and c6g.xlarge instances run the following commands to start the application.
 
 ```sh
+#Set GIN_MODE=release to minimize the amount of debug logging that would otherwise occur
 export GIN_MODE=release
 ./golang-link-shortener
 ```
