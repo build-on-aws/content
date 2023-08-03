@@ -20,7 +20,7 @@ spaces:
 
 "Did you ever want to build your own recommendation engine powered by machine learning? A way to properly create recommendations for your customers? Well you came to the right show 🥳 In this PART 1 episode, Piyali and Darko look at the first steps it takes to do this.
 
-Today we manage to discuss the reasoning *why* would you need a recommendation engine. We ingest and clean up some data. We get to learn about **pandas** (no, not those 🐼), and converting your data into numeric values so it can be trained. Make sure to follow us for future PART 2 and PART 3 of this adventure, where we will actually train the Machine Learning Model, and deploy it as an API Endpoint, and yes have a front end for it as well. Make sure to show up **every Thursday at 9AM Pacific** as we **Build** (more() **On** AWS 😅
+Today we manage to discuss the reasoning *why* would you need a recommendation engine. We ingest and clean up some data. We get to learn about **pandas** (no, not those 🐼), and converting your data into numeric values so it can be trained. Make sure to follow us for future PART 2 and PART 3 of this adventure, where we will actually train the Machine Learning Model, and deploy it as an API Endpoint, and yes have a front end for it as well. Make sure to show up **every Thursday at 9AM Pacific** as we **Build** (more) **On** AWS 😅
 
 Oh yeah, and if you wish to follow along at home, Piyali was amazing and she wrote a whole blog post on this same topic. You can check it out [here](https://community.aws/tutorials/recommendation-engine-full-stack).
 
