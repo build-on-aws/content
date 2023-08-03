@@ -1,47 +1,44 @@
 ---
-title: "Building Resilient Architecture! | S02 E22 | Build On Weekly"
-description: "Jacquie and Todd are joined by resident resilience expert Seth Eliot to take on a workshop where we use AWS Resilience Hub to find out if our architecture as resilient as we think it is!"
+title: "Build Your Own Recommendation Engine on AWS - PART 1 | S02 E23 | Build On Weekly"
+description: "Did you ever want to build your own recommendation engine powered by machine learning? A way to properly create recommendations for your customers? In PART 1, Piyali and Darko look at the first steps it takes to do this."
 tags:
+  - machine-learning
+  - ai
+  - pandas
+  - data
   - aws
   - build-on-live
   - twitch
-  - resilience
-authorGithubAlias: gogococo
-authorName: Jacquie Grindrod
-additionalAuthors: 
-  - authorGithubAlias: setheliot
-    authorName: Seth Eliot
-  - authorGithubAlias: recursivecodes
-    authorName: Todd Sharp
-date: 2023-07-13
+authorGithubAlias: darko-mesaros
+authorName: Darko Mesaros
+date: 2023-08-23
 spaces:
   - livestreams
 ---
 
-![Hello World from Jacquie, Todd and Seth!](images/bows2e22-wave.jpeg)
+![Recommendation flow](images/recommendation_flow.webp "What are we going to do in this series")
 
-Hello friends and welcome to this week's Build On Weekly episode show notes! Jacquie and guest co-host Todd Sharp are joined by resident resilience expert Seth Eliot to take on a workshop where we use AWS Resilience Hub to find out if our architecture as resilient as we think it is! At first glance, our architecture appears to look pretty good but trouble surfaces when we dig a little deeper. 
+"Did you ever want to build your own recommendation engine powered by machine learning? A way to properly create recommendations for your customers? Well you came to the right show 🥳 In this PART 1 episode, Piyali and Darko look at the first steps it takes to do this.
 
-![Resilient (or not so Resilient) Architecture Diagram](images/Architecture-initial.png)
+Today we manage to discuss the reasonings *why* would you need a recommendation engine. We ingest and clean up some data. We get to learn about **pandas** (no, not those 🐼), and converting your data into numeric values so it can be trained. Make sure to follow us for future PART 2 and PART 3 of this adventure, where we will actually train the Machine Learning Model, and deploy it as an API Endpoint, and yes have a front end for it as well. Make sure to show up **every Thursday at 9AM Pacific** as we **Build** (more() **On** AWS 😅
 
-Together, we explore the architecture and what it means to build it with resilience as we learn about reslience policies and resolve the faults we discovered. During this stream we work with a multitude of services including load balancers, RDS databases, CodePipeline and more!
-
-Follow the workshop yourself at home: [Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup).
+Oh yeah, and if you wish to follow along at home, Piyali was amazing and she wrote a whole blog post on this same topic. You can check it out [here](https://community.aws/tutorials/recommendation-engine-full-stack).
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1871218232
+https://www.twitch.tv/videos/1889439197
 
 ## Links from today's episode
 
+- [Piyali's blog post](https://community.aws/tutorials/recommendation-engine-full-stack)
+- [Code for this project](https://github.com/build-on-aws/recommendation-engine-full-stack)
+- [Pandas 🐼](https://pypi.org/project/pandas/)
+- [What is Feature Engineering](https://towardsdatascience.com/what-is-feature-engineering-importance-tools-and-techniques-for-machine-learning-2080b0269f10)
+- [Parquet Data format](https://parquet.apache.org/)
+
 - [Today's Workshop: Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup)
-- [AWS re:Inforce 2023 - Engineer application resilience with compliance in mind (GRC304)](https://bit.ly/arh-reinforce2023)
-- [Resilience Wave content](https://community.aws/tags/resilience)
-- [Blog: Building Resilient Well-Architected Workloads Using AWS Resilience Hub](https://aws.amazon.com/blogs/architecture/building-resilient-well-architected-workloads-using-aws-resilience-hub/)
-- [Blog: Continually assessing application resilience with AWS Resilience Hub and AWS CodePipelin](https://aws.amazon.com/blogs/architecture/continually-assessing-application-resilience-with-aws-resilience-hub-and-aws-codepipeline/)
 
-**🐦 Reach out to the hosts and guests:**
+**Reach out to the hosts and guests:**
 
-- Jacquie: [https://twitter.com/devopsjacquie](https://twitter.com/devopsjacquie)
-- Todd: [https://twitter.com/recursivecodes](https://twitter.com/recursivecodes/)
-- Seth: [https://twitter.com/setheliot](https://twitter.com/setheliot/)
+- Piyal: [https://www.linkedin.com/in/piyali-kamra/](https://www.linkedin.com/in/piyali-kamra/)
+- Darko: [https://www.linkedin.com/in/darko-mesaros/](https://www.linkedin.com/in/darko-mesaros/)
