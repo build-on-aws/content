@@ -65,7 +65,7 @@ The link shortener application will leverage DynamoDB as its data store. Our Dyn
 
 Notice we have a Partition Key of **shortUrl (String)** and a Capacity mode of **On-demand**.
 
-## Compiling for X86
+## Compiling for x86
 
 On your `c5.xlarge` instance, navigate to the `building-go-applications-for-aws-graviton` directory and run the following command to build the application:
 
@@ -73,7 +73,7 @@ On your `c5.xlarge` instance, navigate to the `building-go-applications-for-aws-
 go build -o goLinkShortener
 ```
 
-When the build is finished, you may not see any output, but a binary named `goLinkShortener` should be in your working directory.
+When the build is finished you may not see any output but a binary named `goLinkShortener` should be in your working directory.
 
 ## Compiling for AWS Graviton (ARM64)
 
@@ -228,22 +228,55 @@ Intel instances are now breaching our latency target, but Graviton instances sti
 
 ```shell
 # AWS Graviton2 Instance
-./wrk -c300 -t70 -d 30m -L -R 58000 -s ./post.lua http://10.3.71.184:8080/shortenUrl
+./wrk -c60 -t30 -d 30m -L -R 800 -s ./post.lua http://10.3.71.184:8080/shortenURL
 ```
 
-<!-- Update with results of the final load tests -->
-|Latency Percentiles |C5.xlarge |C6g.xlarge |
-|--- |--- |--- |
-|50 |12.83ms |13.44ms |
-|75 |19.24ms |19.73ms |
-|90 |23.31ms |23.49ms |
-|99 |25.76ms |25.76ms |
-|99.9 |26.00ms |26.00ms |
-|99.99 |26.02ms |26.02ms |
-|99.999 |26.02ms |26.02ms |
-|100 |26.04ms |26.02ms |
-|Requests/Second |11,947.12 |11,960.24 |
-|Total Requests Served |21,504,877 |21,528,469 |
+|Latency Percentiles | C6g.xlarge |
+|---  |--- |
+|50  |17.10ms |
+|75  |24.43ms |
+|90  |28.03ms |
+|99  |37.12ms |
+|99.9  |58.49ms |
+|99.99  |92.10ms |
+|99.999  |217.85ms |
+|100  |480.00ms |
+
+```shell
+# AWS Graviton2 Instance
+./wrk -c60 -t30 -d 30m -L -R 900 -s ./post.lua http://10.3.71.184:8080/shortenURL
+```
+
+|Latency Percentiles | C6g.xlarge |
+|---  |--- |
+|50  |13.42ms |
+|75  |22.45ms |
+|90  |26.38ms |
+|99  |34.72ms |
+|99.9  |56.83ms |
+|99.99  |105.60ms |
+|99.999  |184.83ms |
+|100  |462.59ms |
+
+We're getting pretty closed to the breaking point here. This next test is likely to breach all of our latency thresholds, but lets give it a shot to be sure.
+
+```shell
+# AWS Graviton2 Instance
+./wrk -c60 -t30 -d 30m -L -R 1000 -s ./post.lua http://10.3.71.184:8080/shortenURL
+```
+
+|Latency Percentiles | C6g.xlarge |
+|---  |--- |
+|50  |12.28ms |
+|75  |20.78ms |
+|90  |25.28ms |
+|99  |57.82ms |
+|99.9  |1.18s |
+|99.99  |2.19s |
+|99.999  |2.4s |
+|100  |2.49s |
+
+1,000 requests per second is definitely too many requests to handle while maintaining acceptable latency thresholds. Our Graviton instance is capable of powering 900 requests per second before breaching latency thresholds. Our Intel based x86 instance can only handle approximately 700 before breaching our latench thresholds. This means our application can serve approximately 28% more requests per instance than our Intel counterpart. With further testing in a production scenario we can capitalize on this by running fewer instances to serve the same amount of traffic leading to even greater cost and sustainability gains. For Go applications Graviton is proving to be the most cost effective and sustainable instance selection AWS offers today.
 
 ## Cleanup
 
