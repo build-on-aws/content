@@ -107,7 +107,7 @@ Disaster Recovery in Amazon RDS is based on Multi AZ or Multi Region database co
 |-----------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Asynchronous          | Send changes to a second site but do not wait for them to be applied                                                          |
 | Synchronous           | Send changes to a second site but  wait for them to be applied                                                                |
-| Semi-Synchronous      | Send changes to two sites but  wait for them to be received by at least one of the site                                        |
+| Semi-Synchronous      | Send changes to two sites but  wait for them to be received by at least one of the sites                                        |
 | Synchronous-Clustered | Send changes too clustered disk across 3 AZ's, at least 4 copies of the changes must persist on disk with eventually 6 copies  |
   
 ## Logical Replication vs Physical Replication
