@@ -258,7 +258,7 @@ Intel instances are now breaching our latency target, but Graviton instances sti
 |99.999  |184.83ms |
 |100  |462.59ms |
 
-We're getting pretty closed to the breaking point here. This next test is likely to breach all of our latency thresholds, but lets give it a shot to be sure.
+We're getting pretty close to the breaking point here. This next test is likely to breach all of our latency thresholds, but lets give it a shot to be sure.
 
 ```shell
 # AWS Graviton2 Instance
