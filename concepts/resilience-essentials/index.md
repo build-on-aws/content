@@ -189,12 +189,16 @@ The cloud makes it easier to implement resilience best practices. The cloud prov
 
 ### Resilience in the cloud on AWS
 
+#### Fault isolation boundaries
+
 To avoid *shared fate* failures, we implement fault isolation, which prevents faults from spreading. In the AWS cloud, you can make use of availability zones (AZs) and Regions as isolation boundaries. Each AWS Region is a location around the world where AWS runs multiple data centers, serving AWS services. There are over 30 of Regions. Each Region is divided into three or more AZs. AZs are physically separate from each other, and are housed in different data center buildings. They are far enough apart from each other so they should not share fate (including disasters like fires or floods). But they are close enough to each other, and connected using high-bandwidth, low-latency networking, that an application can be deployed across them.
 
 These resources discuss Regions, AZs, and other fault isolation boundaries on AWS, and when to use them:
 
 * [AWS Fault Isolation Boundaries](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/abstract-and-introduction.html) (whitepaper)
 * [Deploy the workload to multiple locations](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_fault_isolation_multiaz_region_system.html)
+
+#### Multi-AZ, single-Region
 
 Once you [understand your application criticality](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_planning_for_recovery_objective_defined_recovery.html), which includes considering reputational, financial or regulatory risk, you can choose a resilience strategy.
 
@@ -213,16 +217,20 @@ For applications with high resilience needs, you can implement [Advanced Multi-A
 
 * [Advanced Multi-AZ Resilience Patterns](https://docs.aws.amazon.com/whitepapers/latest/advanced-multi-az-resilience-patterns/advanced-multi-az-resilience-patterns.html)
 
+#### Multi-Region
+
 However, for applications with the highest resilience needs, a multi-Region architecture can make sense. The reliability pillar best practice,[Select the appropriate locations for your multi-location deployment](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_fault_isolation_select_location.html), discusses when an application might require multi-Region.
 
 * [Blog series on creating a Multi-Region Application with AWS Services](https://aws.amazon.com/blogs/architecture/tag/creating-a-multi-region-application-with-aws-services-series/)
 * [AWS Multi-Region Fundamentals](https://docs.aws.amazon.com/whitepapers/latest/aws-multi-region-fundamentals/aws-multi-region-fundamentals.html)
 
-The cloud also makes it easier to accommodate excessive load. In AWS you can configure capacity such as launching more EC2 instances or[raising the concurrency quota and AWS Lambda.](https://repost.aws/knowledge-center/lambda-concurrency-limit-increase) The most resilient workloads ensure capacity is already available ahead of high traffic needs, which you can do with with [scheduled auto scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html)or [predictive auto scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html). However, in the case of unanticipated load, you can also setup [dynamic auto scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html), which scales up in response to traffic metrics you configure. The links I provided are all for Amazon EC2, however many AWS services can auto scale, such as Lambda, DynamoDB, Aurora, ECS, and EKS. And once again, since resilience is a shared responsibility, how you write your software to build in resilience patterns is important here. For the highest resilience, implementing a [throttling mechanism](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html) in your software, will keep your application available while the reactive auto scaling spins up more capacity.
+#### Mitigations for excessive load
+
+The cloud also makes it easier to accommodate excessive load. In AWS you can configure capacity such as launching more EC2 instances or [raising the concurrency quota and AWS Lambda.](https://repost.aws/knowledge-center/lambda-concurrency-limit-increase) The most resilient workloads ensure capacity is already available ahead of high traffic needs, which you can do with with [scheduled auto scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html)or [predictive auto scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html). However, in the case of unanticipated load, you can also setup [dynamic auto scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html), which scales up in response to traffic metrics you configure. The links I provided are all for Amazon EC2, however many AWS services can auto scale, such as Lambda, DynamoDB, Aurora, ECS, and EKS. And once again, since resilience is a shared responsibility, how you write your software to build in resilience patterns is important here. For the highest resilience, implementing a [throttling mechanism](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html) in your software, will keep your application available while the reactive auto scaling spins up more capacity.
 
 ## Conclusion
 
-Your customers expect an always-on experience with your application. To deliver this you must build with resilience in mind. With resilience best practices and concepts, you application will be able to resist or recover from faults or load spikes, and remain available. Using the [mental model for resilience](https://quip-amazon.com/DowkAfZv2F8a/Resilience-Essentials#temp:C:KPf6251be812c8f4a14869af89d0) presented here, you can implement strategies for High Availability (HA), and Disaster Recovery (DR), while continuously learning in response to resilience challenges.
+Your customers expect an always-on experience with your application. To deliver this you must build with resilience in mind. With resilience best practices and concepts, you cloud-based application will be able to resist or recover from faults or load spikes, and remain available. Using the [mental model for resilience](https://quip-amazon.com/DowkAfZv2F8a/Resilience-Essentials#temp:C:KPf6251be812c8f4a14869af89d0) presented here, you can implement strategies for High Availability (HA), and Disaster Recovery (DR), while continuously learning in response to resilience challenges in the cloud.
 
 ### Learn more
 
