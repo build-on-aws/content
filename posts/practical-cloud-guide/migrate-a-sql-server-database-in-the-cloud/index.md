@@ -1,5 +1,5 @@
 ---
-title: "Migrate a SQL Server Database in the Cloud"
+title: "Migrate a SQL Server Database to the Cloud"
 description: "Migrating a SQL Server database to the cloud is similar to migrating a database to a new server. The cloud can simplify the process through the use of managed services such as AWS Lightsail."
 tags:
     - tutorials
@@ -11,23 +11,9 @@ authorName: "Sophia Parafina"
 date: 2023-06-20
 ---
 
-As an IT administrator, it’s not unusual to restore a database from a backup. Migrating an on-premise database to the cloud follows  a similar process. However, instead of using  and automate using scripts. In this tutorial, we introduce the AWS CLI too. Instead using a console application to instantiate and configure the database server, you will use the command line. 
+For an IT administrator, restoring a database from a backup isn't unusual. Migrating an on-premise database to the cloud follows a similar process. However, instead of using and automate using scripts. In this tutorial, we introduce the AWS CLI too. Instead using a console application to instantiate and configure the database server, you will use the command line. 
 
 There are advantages to using the command line. First, the command line offers a larger set of options for creating services. Second, commands can be chained together so that one command returns an output that can be used by another. Third, commands can be combined into a script that can be reused.
-
-## What you will learn
-
-- Create an browser based environment for working with cloud resources
-- Create storage and attach it to a database server
-- Deploy and configure SQL Server with a Lightsail blueprint
-- Restore a MS SQL database on a Windows Server VPS
-
-## Prerequisites
-
-Before starting this tutorial, you will need the following:
-
- - An AWS Account (if you don't yet have one, you can create one and [set up your environment here](https://aws.amazon.com/getting-started/guides/setup-environment/)).
- 
 
 ## Sections
 <!-- Update with the appropriate values -->
@@ -44,27 +30,32 @@ Before starting this tutorial, you will need the following:
 | ToC |
 |-----|
 
----
+## What You Will Learn
 
-## Module 1:  Setting up a working environment
+- How to create a browser-based environment for working with cloud resources
+- How to create storage and attach it to a database server
+- How to deploy and configure SQL Server with a Lightsail blueprint
+- How to restore a MS SQL database on a Windows Server VPS
 
-Whether it’s on-premise or in the cloud, deployments and configuration is frequently done on a local computer. However, a case can be made for using an online environment. Browser based terminals or integrated development environments (IDEs) offer a consistent environment customized to a specific tasks. They can be configured with custom tool chains that reduce dependency conflicts. In addition, they can be accessed from any browser and maintain state and history from the last time they were used. AWS offers [Cloudshell](https://aws.amazon.com/cloudshell/), a browser based terminal, and [Cloud9](https://aws.amazon.com/cloud9/), an in-browser IDE.
+## Module 1: Setting Up a Working Environment
 
-For this tutorial, you will be using the AWS CLI and writing scripts. Cloud9 is ideal because you can write and store commands and scripts in the IDE and execute them in the included terminal. To start with Cloud9, use the AWS console Search bar to find the Cloud9 service
+Whether it’s on-premise or in the cloud, deployments and configuration are frequently done on a local computer. However, a case can be made for using an online environment. Browser-based terminals or integrated development environments (IDEs) offer a consistent environment customized to a specific tasks. They can be configured with custom tool chains that reduce dependency conflicts. In addition, they can be accessed from any browser and maintain state and history from the last time they were used. AWS offers [Cloudshell](https://aws.amazon.com/cloudshell/), a browser-based terminal, and [Cloud9](https://aws.amazon.com/cloud9/), an in-browser IDE.
 
-**Step 1**: Create a Cloud9 environment
+For this tutorial, you will be using the AWS CLI and writing scripts. Cloud9 is ideal because you can write and store commands and scripts in the IDE and execute them in the included terminal. To start with Cloud9, use the AWS console Search bar to find the Cloud9 service.
+
+**Step 1**: Create a Cloud9 environment.
 
 ![Open Cloud9 service in the AWS console](./images/cloud9-1.png)
 
-Choose **Create Environment**
+Choose **Create Environment**.
 
 ![Create a Cloud9 environment](./images/cloud9-2.png)
 
-In the **Create Environment** page name the environment in the **Details** panel. You can also add a **Description**.
+In the **Details** panel of the **Create Environment** page, name the environment. You can also add a **Description**.
 
 ![Name the Cloud9 environment](./images/cloud9-3.png)
 
-Accept the default values for **New EC2 Instance** and **Networking** panels. Choose **Create**. When the environment is created choose **Open** to start the environment.
+Accept the default values for **New EC2 Instance** and **Networking** panels. Choose **Create**. When the environment is created, choose **Open** to start the environment.
 
 ![Open the environment](./images/cloud9-5.png)
 
@@ -72,7 +63,7 @@ Your Cloud9 environment is ready.
 
 ![Cloud9 environment is ready](./images/cloud9-6.png)
 
-Step 2: Configure the environment with tools
+**Step 2**: Configure the environment with tools.
 
 This tutorial uses the AWS CLI and the Lightsail plugin. The current version of Cloud9 includes the 1.x version of the CLI, but the Lightsail plugin requires the 2.x version of the AWS CLI. You will have to upgrade to CLI 2.x version and install the Lightsail plugin. 
 
@@ -100,13 +91,13 @@ aws-cli/2.11.20 Python/3.11.3 Linux/4.14.314-237.533.amzn2.x86_64 exe/x86_64.amz
 
 Your Cloud9 environment is ready.
 
-> Tip: Cloud9 is a full featured IDE and you can save command snippets and scripts. You can save snippets and scripts in a code repository like [Github](https://github.com/) or [Gitlab](https://about.gitlab.com/). Cloud9 includes [Git Panel](https://docs.aws.amazon.com/cloud9/latest/user-guide/using-gitpanel.html) for managing repositories. An advantage of using a code repository is that it is available anywhere and you can use it to manage snippets and scripts for reuse.
+> Tip: Cloud9 is a full-featured IDE and you can save command snippets and scripts in a code repository like [Github](https://github.com/) or [Gitlab](https://about.gitlab.com/). Cloud9 includes [Git Panel](https://docs.aws.amazon.com/cloud9/latest/user-guide/using-gitpanel.html) for managing repositories. An advantage of using a code repository is that it is available anywhere and you can use it to manage snippets and scripts for reuse.
 
-## Module 2: Create a SQL Server instance from a Lightsail blueprint
+## Module 2: Create a SQL Server Instance from a Lightsail Blueprint
 
 AWS Lightsail includes templates for instantiating VPS with a popular software package. You will instantiate a Windows Server with SQL Server installed with Lightsail. 
 
-In the Cloud9 terminal, use the AWS Lightsail CLI to create a VPS with SQL Server using a blueprint. You can find blueprints with the `aws lightsail get-blueprints` command. The `get-blueprints` command lists all the blueprints available, you can find a specific blueprint by piping the output of the command to the unix [grep](https://www.gnu.org/software/grep/manual/grep.html) utility.
+In the Cloud9 terminal, use the AWS Lightsail CLI to create a VPS with SQL Server using a blueprint. You can find blueprints with the `aws lightsail get-blueprints` command. The `get-blueprints` command lists all the blueprints available; you can find a specific blueprint by piping the output of the command to the unix [grep](https://www.gnu.org/software/grep/manual/grep.html) utility.
 
 ```bash
 aws lightsail get-blueprints | grep sql
