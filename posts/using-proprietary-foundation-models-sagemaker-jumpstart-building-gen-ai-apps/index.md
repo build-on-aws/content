@@ -11,7 +11,7 @@ spaces:
   - generative-ai
 authorGithubAlias: channy
 authorName: Channy Yun
-date: 2023-08-05
+date: 2023-08-04
 ---
 
 [Foundation models](https://en.wikipedia.org/wiki/Foundation_models) are large-scale machine learning (ML) models that contain billions of parameters and are pre-trained on the vast data sets of text and image, such as the entirety of Wikipedia and publicly available literature across multiple spoken languages as well as computer programming languages. So you can perform a wide range of tasks such as article summarization and text, image, or video generation. Because foundation models are pre-trained, they can help lower training and infrastructure costs and enable customization for your use case.
