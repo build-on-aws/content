@@ -5,7 +5,7 @@ tags:
   - agents
   - python
   - huggingface
-  - gen-ai
+  - generative-ai
   - ai-ml
 spaces:
   - generative-ai
