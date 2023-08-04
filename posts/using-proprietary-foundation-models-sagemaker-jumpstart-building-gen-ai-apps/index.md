@@ -21,13 +21,13 @@ date: 2023-08-05
 ## Proprietary Foundation Models with Amazon SageMaker JumpStart
 Since November 2022, SageMaker JumpStart has previewed pre-trained proprietary models, such as [AI21 Jurassic-1 language model](https://aws.amazon.com/blogs/machine-learning/ai21-jurassic-1-foundation-model-is-now-available-on-amazon-sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps), [Cohere language model](https://aws.amazon.com/blogs/machine-learning/cohere-brings-language-ai-to-amazon-sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps), and [LightOn Lyra-fr model](https://aws.amazon.com/blogs/machine-learning/lighton-lyra-fr-model-is-now-available-on-amazon-sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps), as well as publicly available models such as [AlexaTM 20B language model](https://aws.amazon.com/blogs/machine-learning/alexatm-20b-is-now-available-in-amazon-sagemaker-jumpstart/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps), [Bloom language models](https://aws.amazon.com/blogs/machine-learning/run-text-generation-with-gpt-and-bloom-models-on-amazon-sagemaker-jumpstart/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps), [Finetuned Language Models](https://aws.amazon.com/blogs/machine-learning/zero-shot-prompting-for-the-flan-t5-foundation-model-in-amazon-sagemaker-jumpstart/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps) (FLAN) model, and [Stability AI image creation model](https://aws.amazon.com/blogs/machine-learning/stability-ai-builds-foundation-models-on-amazon-sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps).
 
-![A screenshot of SageMaker JumpStart](images/2023-generative-ai-sagemaker-1.jpg)
+![A screenshot of SageMaker JumpStart](images/2023-generative-ai-sagemaker-1.jpg "List of models available in SageMaker JumpStart)
 
 You can optimize them for accuracy, performance, and cost for different use cases based on your specific needs to build generative artificial intelligence (AI) applications.
 
-For example, the Stable Diffusion model is used by hundreds of business applications such as [DreamStudio](https://beta.dreamstudio.ai/) reaching millions of end users to create novel designs for their content. If you want to generate your own new artwork, you can simply create an image on the underneath by feeding the sentence “_Four men riding bicycles in the Swiss Alps, a Renaissance painting, a majestic, breathtaking natural landscape._” to the Stable Diffusion model.
+For example, the Stable Diffusion model is used by hundreds of business applications such as [DreamStudio](https://beta.dreamstudio.ai/) reaching millions of end users to create novel designs for their content. If you want to generate your own new artwork, you can simply create an image like the one below by feeding the sentence “_Four men riding bicycles in the Swiss Alps, a Renaissance painting, a majestic, breathtaking natural landscape._” to the Stable Diffusion model.
 
-![An example of Stable Diffusion model](images/ML-12633-image001.jpg)
+![An example of Stable Diffusion model](images/ML-12633-image001.jpg "Example image generated with Stable Diffusion using the prompt: Four men riding bicycles in the Swiss Alps, a Renaissance painting, a majestic, breathtaking natural landscape.")
 
 Also, we [announced Amazon CodeWhisperer](https://aws.amazon.com/blogs/aws/amazon-codewhisperer-free-for-individual-use-is-now-generally-available/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps), Amazon’s generative AI service to help improve developer productivity by generating code recommendations based on their prior code and comments. We now see many customers that want to harness foundation models to their business use cases.
 
@@ -36,7 +36,7 @@ In this blog post, you can learn how to use pre-trained proprietary models in Sa
 ## Getting Started Proprietary Models with SageMaker JumpStart
 You can try out popular pre-trained foundation models without the need to deploy. To get started on the latest models that are in preview or to try out models in a playground, you need to request access. You’ll receive an email once it’s ready. If you have a preview access, choose **Foundation models** under **JumpStart** in the [Amazon SageMaker console](https://console.aws.amazon.com/sagemaker/home?#/foundation-models).
 
-![A screenshot of ageMaker JumpStart page](images/2023-jumpstart-proprietary.jpg)
+![A screenshot of SageMaker JumpStart page](images/2023-jumpstart-proprietary.jpg "Foundational models in SageMaker JumpStart")
 
 Here are popular proprietary model providers such as [AI21 Labs](https://www.ai21.com/), [Cohere](https://cohere.com/), and [LightOn](https://www.lighton.ai/). You can test these models without writing a single line of code and easily evaluate models on your specific tasks.
 
@@ -44,19 +44,19 @@ For example, [Cohere Generate Model – Command](https://aws.amazon.com/marketpl
 
 If you want to try out this mode, choose **View model** and see the model description popup.
 
-![An image of Cohere Generative Model](images/2023-jumpstart-cohere-command-model.jpg)
+![An image of Cohere Generative Model](images/2023-jumpstart-cohere-command-model.jpg "Cohere Generative Model details")
 
 When you choose **Playground**, you can try a product demo of the capabilities of this model. If you have tried out the notebook for full model capability, choose **Subscribe** and click **Open notebook in Studio** to open up the notebook to deploy the model to a customer-dedicated endpoint.
 
 Now let’s test this Cohere model and prompt it to generate given examples. Choose **Playground** and “Blog post outline” write a blog outline for a blog titled “How Transformers made Large Language models possible” in the **Example** dropdown menu.
 
-![A preview of the playground to generate blog post outline](images/2023-jumpstart-cohere-command-model-playglound.jpg)
+![A preview of the playground to generate blog post outline](images/2023-jumpstart-cohere-command-model-playglound.jpg "AWS Console interface to send prompts to a model in the playground")
 
 It includes more examples such as blog post title, body paragraph, cold outreach email, product description, and professional post generator.
 
 Another popular proprietary model, [AI21 Labs’s Jurassic-2 Grande](https://aws.amazon.com/marketplace/pp/prodview-5ytkctg7ux5om?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps) has fun use-cases such as, generating simple programming code, classifying news articles by topics, labeling peoples’ names, and suggesting tweets copy for social media marketing.
 
-![A preview of the playground to convert programming code](images/2023-jumpstart-ai21-2.jpg)
+![A preview of the playground to convert programming code](images/2023-jumpstart-ai21-2.jpg "Example to convert from Python to Javascript using generative AI")
 
 Use of this feature is for demonstration and preview purposes only. These demo may not accurately represent the performance of the model, and you should deploy to an instance via the SageMaker Studio notebook for full capacity.
 
@@ -65,7 +65,7 @@ You can deploy foundation models with only one click in the [Amazon SageMaker St
 
 You can use more proprietary foundation models for your purpose – zero-shot classification models such as AI21 Jurassic-2 language models (Jumbo instruct, Grande Instruct), Cohere Command, LightOn Mini, and task specific models such as AI21 Summarize and Paraphrasing.
 
-![A preview of SageMaker JumpStart on Studio](images/sagemaker-jumpstart-propritary-models.jpg)
+![A preview of SageMaker JumpStart on Studio](images/sagemaker-jumpstart-propritary-models.jpg "Preview of SageMaker JumpStart in SageMaker Studio")
 
 To get started, choose **Open notebook in Studio** in the model page or select your model in SageMaker JumpStart panel to open up the notebook in SageMaker Studio.
 
@@ -73,11 +73,11 @@ Now, let’s look now to deploy [Cohere’s Generate Model – Command](https://
 
 Following the step-by-step guide in the notebook, you should subscribe to deploy Cohere’s language model package from [AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-n44fbeuycwldi?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=using-proprietary-foundation-models-sagemaker-jumpstart-building-gen-ai-apps) and use your own data to customize models to your specific needs.
 
-![Deploying Cohere model in AWS Marketplace](images/2023-jumpstart-cohere-command-studio.jpg)
+![Deploying Cohere model in AWS Marketplace](images/2023-jumpstart-cohere-command-studio.jpg "Readme for Cohere model on how to use it")
 
 On the AWS Marketplace listing, click on the **Continue to subscribe** button, review and click on **Accept Offer** if you and your organization agrees with end-user license agreement, pricing, and support terms.
 
-![Susbcribing Cohere model in AWS Marketplace](images/2023-jumpstart-cohere-command-model-marketplace.jpg)
+![Susbcribing Cohere model in AWS Marketplace](images/2023-jumpstart-cohere-command-model-marketplace.jpg "Marketplace view of Cohere model where you can subscribe to use it")
 
 The model offers both the software pricing and free trial pricing model. In case of Cohere Command model, you can choose **Free trial** option.
 
