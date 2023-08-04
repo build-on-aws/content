@@ -19,11 +19,20 @@ date: YYYY-MM-DD (expected publication date) TODO
 | ToC |
 |-----|
 
-Publish and subscribe is a mechanism for passing information. It’s used in social media, and it’s also used internally in software applications. A producer publishes a message, and the subscribers receive the message. In software, publish and subscribe notifications make message passing flexible and robust. The producers of messages are decoupled from the consumers of messages.
 
-The AWS Code Examples team provides workflow implementations of publish and subscribe using Amazon Simple Notification Service (Amazon SNS) and Amazon Simple Queue Service (Amazon SQS). These workflows
-are coded in multiple languages. So, for example, if you are implementing publish and subscribe with SNS and SQS using Java, there is sample code that provides code you can copy and paste. And you can run the sample code as a command
-line application. The workflow allows you to select options and observe their behavior. You can play with filter subscriptions, or you can see what is required to implement a FIFO queue.
+This article describes the SNS workflow sample code that is part of the [AWS SDK code examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples). 
+This workflow sample code demonstrates publish and subscribe 
+using Amazon Simple Notification Service (Amazon SNS) and Amazon Simple Queue Service (Amazon SQS). This sample code is implemented in multiple programming languages. 
+For example, if you would like to code publish and subscribe using Java, 
+there is Java SNS workflow sample code to get you started. The SNS workflow sample code runs as a command-line application. This 
+application allows you to select options and observe their behavior. You can play with filter subscriptions, or you can see what is required to implement a FIFO queue.
+
+
+[SNS Workflow in the code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html)
+
+## Publish and Subscribe
+
+Publish and subscribe is a mechanism for passing information. It’s used in social media, and it’s also used internally in software applications. A producer publishes a message, and the subscribers receive the message. In software, publish and subscribe notifications make message passing flexible and robust. The producers of messages are decoupled from the consumers of messages.
 
 You can publish and subscribe using Amazon SNS alone. But combining Amazon SNS with Amazon SQS gives you more flexibility in how the messages are consumed.
 
@@ -31,10 +40,9 @@ Amazon SNS is a push service. It pushes to endpoints such as email addresses, mo
 
 With Amazon SQS, messages are received from a queue by polling. With polling, the subscriber receives messages by calling a receive message API. Any code can poll the queue. Also, the messages stay in the queue until you delete them. This gives you more flexibility in how the messages are processed.
 
+## SNS Workflow Command-line application 
 
-## SQS Publish and Subscribe Workflow Implementation
-
-The actual interface may vary slightly between languages. 
+Note: The actual interface may vary slightly between programming languages. 
 
 ### Create an SNS topic
 
@@ -93,6 +101,7 @@ If you add a filter, you can select one or more “tone” attributes to filter 
 The application now prompts you to add the second queue. Repeat the previous steps for the second queue.
 
 The following diagram shows the topic and queue options.
+
 ![Diagram of the options](images/fifo_topics_diagram.png)
 
 After you create the topic and subscribe both queues, the application lets you publish messages to the topic.
