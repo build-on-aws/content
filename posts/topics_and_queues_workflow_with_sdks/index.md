@@ -1,6 +1,6 @@
 ---
 title: "Coding Publish and Subscribe Using SNS, SQS, and the AWS SDKs"
-description: "Confused about the trying to code publish and subscribe using SNS and SQS? AWS Console tutorials help, but they are not the same as sample code. Here we acquaint you with the SNS and SQS workflow code example, part of the code examples repository."
+description: "Confused about the trying to code publish and subscribe using SNS and SQS? AWS Console tutorials help, but they are not the same as sample code. Here we acquaint you with the topics and queues workflow code example, part of the code examples repository."
 tags:
     - sns
     - sqs
@@ -20,15 +20,15 @@ date: YYYY-MM-DD (expected publication date) TODO
 |-----|
 
 
-This article describes the SNS workflow sample code that is part of the [AWS SDK code examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples). 
+This article describes the topics and queues workflow sample code that is part of the [AWS SDK code examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples). 
 This workflow sample code demonstrates publish and subscribe 
 using Amazon Simple Notification Service (Amazon SNS) and Amazon Simple Queue Service (Amazon SQS). This sample code is implemented in multiple programming languages. 
 For example, if you would like to code publish and subscribe using Java, 
-there is Java SNS workflow sample code to get you started. The SNS workflow sample code runs as a command-line application. This 
+there is Java topics and queues workflow sample code to get you started. The topics and queues workflow sample code runs as a command-line application. This 
 application allows you to select options and observe their behavior. You can play with filter subscriptions, or you can see what is required to implement a FIFO queue.
 
 
-[SNS Workflow in the code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html)
+[Topics and Queues Workflow in the code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html)
 
 ## Publish and Subscribe
 
@@ -155,3 +155,11 @@ You can post as many messages as you want.
 
 When you are done posting messages, the application polls the queues and displays their messages.
 
+## Conclusion
+
+At the time of this writing, topics and queues workflows exist for the following languages.
+* Java
+* C++
+* Kotlin
+
+Implementations for other languages will soon be added. The existing implementations can be found on the [code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html) website. The code can be downloaded from [AWS SDK Code Examples](https://github.com/awsdocs/aws-doc-sdk-examples)  github repository.
