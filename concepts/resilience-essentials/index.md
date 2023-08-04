@@ -105,13 +105,17 @@ High availability is about resilience against the smaller, more frequent faults 
  
 Availability is one of the primary ways we can quantitatively measure resiliency. We define availability, A, as the percentage of time that a workload is available for use. It’s a ratio of its expected “uptime” (being available) to the total time being measured (the expected “uptime” plus the expected “downtime”).
  
-![uptime / (uptime + downtime)](images/equation1.png)
+<!-- ![uptime / (uptime + downtime)](images/equation1.png) -->
+
+$$ A = \frac{uptime}{uptime + downtime} $$
  
 The result of this calculation is often called "the nines" of availability, where for example a value of 99.99% is called "four nines of availability".
  
-Mean time to repair (or recovery) (MTTR) and mean time between failure (MTBF) are other measures and can be related to Availability (A) via this equation.
+Mean time to repair (or recovery) (_MTTR_) and mean time between failure (_MTBF_) are other measures and can be related to Availability (_A_) via this equation.
 
-![A = MTBF / (MTBF + MTTR)](images/equation2.png)
+<!-- ![A = MTBF / (MTBF + MTTR)](images/equation2.png) -->
+
+$$ A = \frac{MTBF}{MTBF + MTTR} $$
 
 To learn more about measuring availability see the whitepaper [Availability and Beyond: Understanding and Improving the Resilience of Distributed Systems on AWS](https://docs.aws.amazon.com/whitepapers/latest/availability-and-beyond-improving-resilience/availability-and-beyond-improving-resilience.html)
  
