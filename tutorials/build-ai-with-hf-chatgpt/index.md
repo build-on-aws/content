@@ -3,7 +3,7 @@ title: "How to build a ChatGPT-Powered AI tool to learn technical things fast"
 description: "A step-by-step guide to setting up a free ML environment, leveraging language models and ChatGPT APIs to extract insights from YouTube videos, and empowering yourself to learn faster and more efficiently like never before!"
 tags:
     - tutorials
-    - gen-ai
+    - generative-ai
     - chatgpt
     - hugging-face
     - amazon-sagemaker
