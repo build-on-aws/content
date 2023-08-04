@@ -16,7 +16,6 @@ For an IT administrator, restoring a database from a backup isn't unusual. Migra
 There are advantages to using the command line. First, the command line offers a larger set of options for creating services. Second, commands can be chained together so that one command returns an output that can be used by another. Third, commands can be combined into a script that can be reused.
 
 ## Sections
-<!-- Update with the appropriate values -->
 | Info                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | 200 - Intermediate                          |
@@ -43,7 +42,7 @@ Whether it’s on-premise or in the cloud, deployments and configuration are fre
 
 For this tutorial, you will be using the AWS CLI and writing scripts. Cloud9 is ideal because you can write and store commands and scripts in the IDE and execute them in the included terminal. To start with Cloud9, use the AWS console Search bar to find the Cloud9 service.
 
-**Step 1**: Create a Cloud9 environment.
+### Step 1: Create a Cloud9 Environment
 
 ![Open Cloud9 service in the AWS console](./images/cloud9-1.png)
 
@@ -63,7 +62,7 @@ Your Cloud9 environment is ready.
 
 ![Cloud9 environment is ready](./images/cloud9-6.png)
 
-**Step 2**: Configure the environment with tools.
+### Step 2: Configure the Environment with Tools
 
 This tutorial uses the AWS CLI and the Lightsail plugin. The current version of Cloud9 includes the 1.x version of the CLI, but the Lightsail plugin requires the 2.x version of the AWS CLI. You will have to upgrade to CLI 2.x version and install the Lightsail plugin. 
 
@@ -121,11 +120,11 @@ aws lightsail create-instances --instance-names pcgSQLServer \
 
 Note that this SQL Server instance is not a managed Relational Database Service (RDS). You are responsible for any system or security updates and backing up data files.
 
-## Module 3: Create storage for data and log files
+## Module 3: Create Storage for Data and Log Files
 
 Databases typically store data files and logs in separate drives attached to the server. With Lightsail, you can create both object storage and block storage. Block storage is similar to a physical drive and can be formatted with a file system and attached to a server. In this section, you will create block storage. In a following section, you will attach it to a VPS and format it with the NTFS file system.
 
-Step 1: Create block storage
+### Step 1: Create Block Storage
 
 In the Cloud9 terminal, use the AWS CLI to instantiate storage with the `aws lightsail create-disk` command. Name the disk and set the availability zone.
 
@@ -159,8 +158,7 @@ If successful, Lightsail returns a status message.
 }
 ```
 
-
-Step 2: Attach block storage to the database server
+### Step 2: Attach Block Storage to the Database Server
 
 Attach the block storage to the database server. The server will recognize it as a drive.
 
@@ -196,21 +194,21 @@ When the disk is attached, it returns a JSON message to confirm the operation.
 }
 ```
 
-Although the storage is attached to the server, it is an unformatted disk. You will format it with Windows Server.
+Although the storage is attached to the server, it is an unformatted disk. You will format it with a Windows Server.
 
 ## Module 4: Configure the SQL Server VPS
 
-The VPS is a Windows Server, use the RDP button in the Lightsail console. Choose the terminal icon in the pcgSQLServer panel.
+The VPS is a Windows Server. Use the RDP button in the Lightsail console. Choose the terminal icon in the pcgSQLServer panel.
 
-> Note: The RDP button may take 5 to 7 minutes before it becomes active and you can connect to the server.
+> Note: The RDP button may take 5-to-7 minutes before it becomes active and you can connect to the server.
 
 ![Use RDP window to log into the SQL Server Database server ](./images/rdp-1.png)
 
-We need format the disk to store data and log files. Here are the steps to make the disk usable by Windows Server.
+We need to format the disk to store data and log files. Here are the steps to make the disk usable by a Windows Server.
 
-Step 1: Find the disk number of the unformatted but attached disk.
+### Step 1: Find the Disk Number of the Unformatted-But-Attached Disk.
 
-In the RDP window, open a Powershell window and use the `Get-Disk` commandlet to find the unformatted disk which is attached but offline.
+In the RDP window, open a Powershell window and use the `Get-Disk` commandlet to find the unformatted disk, which is attached but offline.
 
 ```powershell
 get-disk | Where-Object {$_.OperationalStatus -eq 'Offline' } 
@@ -227,9 +225,9 @@ Initialize-Disk -Number 1
 New-Partition –DiskNumber 1 -AssignDriveLetter –UseMaximumSize
 Format-Volume -DriveLetter D -FileSystem NTFS -NewFileSystemLabel Data
 ```
-Step 2:  Download the Wide World Importers sample database
+### Step 2: Download the Wide World Importers Sample Database
 
-Microsoft distributes an [example SQL Server backup file](https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0). Use this file to restore a backup. When you instantiated the SQL Server VPS a backup directory was created. Download the Wide World Importers backup file to that directory.
+Microsoft distributes an [example SQL Server backup file](https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0). Use this file to restore a backup. When you instantiated the SQL Server VPS, a backup directory was created. Download the Wide World Importers backup file to that directory.
 
 ```powershell
 $source = "https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Full.bak"
@@ -237,7 +235,7 @@ $dest = "C:\backup\WideWorldImporters-Full.bak"
 Invoke-WebRequest -Uri $source -OutFile $dest
 ```
 
-Step 3: Create directories for data files and logs
+### Step 3: Create Directories for Data Files and Logs
 
 The data files and logs for the Wide World Importers database are stored in a separate drive. Create the directories in the attached drive.
 
@@ -247,7 +245,7 @@ mkdir D:\SQL_LOGS
 mkdir D:\SQL_LOGS\SQL2022
 ```
 
-## Module 5: Restore the database from the backup file
+## Module 5: Restore the Database from the Backup File
 
 To restore the database from Powershell, use [Transact-SQL (T-SQL)](https://learn.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver16), a Microsoft version of SQL. The cmdsql utility lets you use T-SQL commands against SQL Server. Save the following script to a file in the C:\backup directory and name it `restore_database.sql`, use notepad or an editor of your choice.
 
@@ -264,13 +262,14 @@ NOUNLOAD,
 STATS = 5
 GO
 ```
+
 Run the script using sqlcmd.
 
 ```powershell
 sqlcmd -i C:\backup\restore_database.sql
 ```
 
-If the restore is successful you will see a many status messages ending with this message.
+If the restore is successful, you will see many status messages ending with this message:
 
 ```powershell
 100 percent processed.
@@ -311,7 +310,6 @@ To run the query, choose **Execute** in the menu.
 
 The **Results** pane displays the rows from the view.
 
-
 ![SQL Server Management Studio](./images/sqlserver-studio-7.png)
 
 Congrats! You’ve migrated a SQL Server database to the cloud.
@@ -320,9 +318,9 @@ Congrats! You’ve migrated a SQL Server database to the cloud.
 
 Delete the VPS, the attached disk, and the Cloud9 environment to prevent further charges. 
 
-Step 1: Delete the VPS
+### Step 1: Delete the VPS
 
-In the Lightsail console choose **Instances**, then select the three dots in pcgSQLServer. Choose **Delete**.
+In the Lightsail console, choose **Instances**, then select the three dots in pcgSQLServer. Choose **Delete**.
 
 ![Select Delete](./images/delete-vps-1.png)
 
@@ -330,7 +328,7 @@ Choose **Yes, delete**.
 
 ![Delete SQL Server VPS](./images/delete-vps-2.png)
 
-Step 2: Delete the disk
+### Step 2: Delete the Disk
 
 In the Lightsail console, choose **Storage**, select the three dots in sqlserver-data-and-logs. Choose **Delete**.
 
@@ -340,19 +338,19 @@ Choose **Yes, delete**.
 
 ![Delete disk](./images/delete-disk-2.png)
 
-Step 3: Delete the Cloud9 environment
+### Step 3: Delete the Cloud9 Environment
 
 In the Cloud9 console, choose `pcg-database` and select **Delete**.
 
 ![Delete Cloud9 environment](./images/cloud9-environment-delete.png)
 
-## What did you accomplish?
+## What Did You Accomplish?
 
-You deployed a SQL Server in the cloud and restored a database. However, the true takeaway is that you did this in a terminal using the AWS CLI and Lightsail plugin. You accomplished the task without using the console. As an additional challenge try to complete this tutorial using by writing a script to deploy SQL Server and configure storage and a Powershell script to restore the database. Learning how to use the AWS CLI is the first step to building reproducible and testable infrastructure. The Practical Cloud Guide will use this approach to building and maintaining infrastructure. 
+You deployed a SQL Server in the cloud and restored a database. However, the true takeaway is that you did this in a terminal using the AWS CLI and Lightsail plugin. You accomplished the task without using the console. As an additional challenge, try to complete this tutorial by writing a script to deploy the SQL Server and configure storage and a Powershell script to restore the database. Learning how to use the AWS CLI is the first step to building reproducible and testable infrastructure. The Practical Cloud Guide will use this approach to building and maintaining infrastructure. 
 
 If you want to do a deep dive into SQL Server in the cloud, checkout the [Amazon RDS for SQL Server Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/897acbd7-8f2e-46ed-8dcd-c97872d5b3ce/en-US) to get hands-on with SQL Server at AWS.
 
-## What's next?
+## What's Next?
 
-Instantiating SQL Server from a Lightsail blueprint is not complicated. However, you are responsible for maintaining that instance which includes updates and backups. An important distinction between the cloud and on-premise data centers is the option to have a fully managed solution. In a managed solution, the cloud provider is responsible for maintaining the resource. In the following tutorial, you will deploy a relational database to scale a web application.
+Instantiating SQL Server from a Lightsail blueprint is not complicated. However, you are responsible for maintaining that instance, which includes updates and backups. An important distinction between the cloud and on-premise data centers is the option to have a fully managed solution. In a managed solution, the cloud provider is responsible for maintaining the resource. In the following tutorial, you will deploy a relational database to scale a web application.
 
