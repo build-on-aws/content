@@ -11,9 +11,7 @@ authorName: "Sophia Parafina"
 date: 2023-06-20
 ---
 
-For an IT administrator, restoring a database from a backup isn't unusual. Migrating an on-premise database to the cloud follows a similar process. However, instead of using and automate using scripts. In this tutorial, we introduce the AWS CLI too. Instead using a console application to instantiate and configure the database server, you will use the command line. 
-
-There are advantages to using the command line. First, the command line offers a larger set of options for creating services. Second, commands can be chained together so that one command returns an output that can be used by another. Third, commands can be combined into a script that can be reused.
+For an IT administrator, restoring a database from a backup isn't unusual. Migrating an on-premise database to the cloud follows a similar process. However, instead of using and automate using scripts. In this tutorial, we'll walk through how to migrate a SQL Server database to the cloud, using the command line to instantiate and configure the database server, rather than a console application.
 
 ## Sections
 | Info                |                                   |
@@ -38,9 +36,11 @@ There are advantages to using the command line. First, the command line offers a
 
 ## Module 1: Setting Up a Working Environment
 
+In this tutorial, you will use the command line. There are advantages to using the command line. First, the command line offers a larger set of options for creating services. Second, commands can be chained together so that one command returns an output that can be used by another. Third, commands can be combined into a script that can be reused.
+
 Whether it’s on-premise or in the cloud, deployments and configuration are frequently done on a local computer. However, a case can be made for using an online environment. Browser-based terminals or integrated development environments (IDEs) offer a consistent environment customized to a specific tasks. They can be configured with custom tool chains that reduce dependency conflicts. In addition, they can be accessed from any browser and maintain state and history from the last time they were used. AWS offers [Cloudshell](https://aws.amazon.com/cloudshell/), a browser-based terminal, and [Cloud9](https://aws.amazon.com/cloud9/), an in-browser IDE.
 
-For this tutorial, you will be using the AWS CLI and writing scripts. Cloud9 is ideal because you can write and store commands and scripts in the IDE and execute them in the included terminal. To start with Cloud9, use the AWS console Search bar to find the Cloud9 service.
+You will be using the AWS CLI and writing scripts. Cloud9 is ideal because you can write and store commands and scripts in the IDE and execute them in the included terminal. To start with Cloud9, use the AWS console Search bar to find the Cloud9 service.
 
 ### Step 1: Create a Cloud9 Environment
 
@@ -50,7 +50,7 @@ Choose **Create Environment**.
 
 ![Create a Cloud9 environment](./images/cloud9-2.png)
 
-In the **Details** panel of the **Create Environment** page, name the environment. You can also add a **Description**.
+In the **Details** panel of the **Create Environment** page, name the environment. You can also add an optional **Description** to specify how it's used and to differentiate it from other environments.
 
 ![Name the Cloud9 environment](./images/cloud9-3.png)
 
@@ -66,7 +66,7 @@ Your Cloud9 environment is ready.
 
 This tutorial uses the AWS CLI and the Lightsail plugin. The current version of Cloud9 includes the 1.x version of the CLI, but the Lightsail plugin requires the 2.x version of the AWS CLI. You will have to upgrade to CLI 2.x version and install the Lightsail plugin. 
 
-In the Cloud9 terminal, download and [install the version 2.x](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) of the CLI.
+In the Cloud9 terminal, download and [install the version 2.x](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=mult&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=link) of the CLI.
 
 ```bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -74,7 +74,7 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-Next, [install the AWS Lightsail plugin](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software#install-lightsailctl-on-linux).
+Next, [install the AWS Lightsail plugin](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software#install-lightsailctl-on-linux?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=mult&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=link).
 
 ```bash
 sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
