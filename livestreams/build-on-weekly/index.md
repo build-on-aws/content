@@ -40,7 +40,9 @@ Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check u
 <img align="left" width="160" height="43" src="images/twitch_button_small.jpg">
 
 
-### SEASON 02
+## Show notes
+
+### SEASON 02:
 
 | Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
@@ -55,7 +57,7 @@ Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check u
 | S02E14 | Stable Diffusion with Viktoria | 2023-04-20  | [Show Notes](/livestreams/build-on-weekly/2023-04-20) |
 | S02E13 | Hot Dog or Not Hot Dog | 2023-04-13  | [Show Notes](/livestreams/build-on-weekly/2023-04-13) |
 
-### SEASON 01
+### SEASON 01:
 
 | Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
