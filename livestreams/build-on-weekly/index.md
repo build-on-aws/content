@@ -35,9 +35,9 @@ If you have any ideas, suggestions, comments. Feel free to email us at [build-on
 
 ## Schedule 📆
 
-Come learn live with us! We stream every Thursday at 9am PT/Noon ET. Check us out on [https://twitch.tv/aws](https://twitch.tv/aws) 👇
+Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check us out on [twitch.tv/aws](https://twitch.tv/aws) 👇
 
-[![AWS Twitch Button](images/twitch_button.png)](https://twitch.tv/aws)
+<img align="left" width="160" height="43" src="images/twitch_button_small.jpg">
 
 
 ### SEASON 02
