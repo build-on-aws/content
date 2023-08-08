@@ -42,7 +42,7 @@ Also, the messages stay in the queue until you delete them. This gives you more 
 
 The following diagram shows the SNS topic and SQS queue options demonstrated in the command-line application.
 
-![Flow diagram of the topics and queues options](images/fifo_topics_diagram.png)
+![Flow diagram of the topics and queues options](images/fifo_topics_diagram.jpg)
 
 Below is a description of the application interface.
 
