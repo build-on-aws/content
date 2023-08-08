@@ -175,9 +175,9 @@ wrk.body = "https://aws.amazon.com/ec2/graviton/"
 
 ### Running the load test
 
-Load tests are great for verifying your application performs correctly under load. For our example application lets pretend that the application should serve 99.9% of requests in under 70ms. I will then run a load test against each instance to see how many requests per second each instance can handle before this latency threshold is breached. I'll be running my load tests from a c5.18xlarge instance in the same availability zone as our test instances.
+Load tests are great for verifying your application performs correctly under load. For our example application lets pretend that the application should serve 99.9% of requests in under 70ms. I will then run a load test against each instance to see how many requests per second each instance can handle before this latency threshold is breached. I'll be running my load tests from a c5.18xlarge instance in the same availability zone as our test instances. I'm using a c5.18xlarge instance because I know it will be able to load test our instances thoroughly because it is a much larger instance size than any of example instances.
 
-To start with I ran a 30 minutes load test against each instance using the following commands. While running each command, make sure your IP address is correct.
+To start with I ran a 30 minutes load test against each instance using the following commands. While running each command, make sure your IP address is correct. The `-c` parameter controls how many connections are made during the load test. The `-d` test specifies how long the test should run. The `-L` parameter enables reporting of latency statistics across various percentiles. The `-r` parameter specifies how many requests per second the load test should run with. The `-s` parameter allows us to specify our Lua script we defined above.
 
 ```shell
 # AWS C5 Instance
@@ -202,7 +202,7 @@ To start with I ran a 30 minutes load test against each instance using the follo
 
 ### Driving More Load
 
-So far our initial results look great. Our C5 instance is staying just under our threshold and our Graviton instances look like there is enough overhead to take additional traffic without breaching our latency target. Lets push each instance a bit harder and see what happens to our latency target under more load.
+So far our initial results look great. Our C5 instance is staying just under our threshold and our Graviton instances look like there is enough overhead to take additional traffic without breaching our latency target. Lets push each instance a bit harder and see what happens to our latency target under more load. Lets bump it up to 700 requests per second by adjusting the `-R` parameter to 700.
 
 ```shell
 # AWS C5 Instance
@@ -225,7 +225,7 @@ So far our initial results look great. Our C5 instance is staying just under our
 
 ### Pushing Graviton To The Limit
 
-Our C5 instances are now breaching our latency target, but Graviton instances still are under threshold. How much more can we push it until they tip over? Lets find out.
+Our C5 instances are now breaching our latency target, but Graviton instances still are under threshold. How much more can we push it until they tip over? Lets find out. Increase the load test to 800 requests per second by adjusting the `-R` parameter to 800.
 
 ```shell
 # AWS Graviton2 Instance
@@ -243,6 +243,8 @@ Our C5 instances are now breaching our latency target, but Graviton instances st
 |99.999  |217.85ms |
 |100  |480.00ms |
 
+Lets see what 900 requests per second looks like by adjusting the `-R` parameter to 900.
+
 ```shell
 # AWS Graviton2 Instance
 ./wrk -c60 -t30 -d 30m -L -R 900 -s ./post.lua http://10.3.71.184:8080/shortenURL
@@ -259,7 +261,7 @@ Our C5 instances are now breaching our latency target, but Graviton instances st
 |99.999  |184.83ms |
 |100  |462.59ms |
 
-We're getting pretty close to the breaking point here. This next test is likely to breach all of our latency thresholds, but lets give it a shot to be sure.
+We're getting pretty close to the breaking point here. This next test is likely to breach all of our latency thresholds, but lets give it a shot to be sure. Lets bump it up to 1000 requests per second by adjusting the `-R` parameter to 1000.
 
 ```shell
 # AWS Graviton2 Instance
