@@ -165,7 +165,7 @@ Every time you make a software or hardware change you should re-evaluate your ex
 
 ### Load test setup
 
-Because our `shortenURL` function uses the POST method and requires some data, we need a lua config file to pass to wrk2. My `post.lua` file has the following content:
+Because our `shortenURL` function uses the POST method and requires some data, we need a Lua config file to pass to wrk2. My `post.lua` file has the following content:
 
 ```yaml
 wrk.method = "POST"
