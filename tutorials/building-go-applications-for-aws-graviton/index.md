@@ -180,7 +180,7 @@ Load tests are great for verifying your application performs correctly under loa
 To start with I ran a 30 minutes load test against each instance using the following commands. While running each command, make sure your IP address is correct.
 
 ```shell
-# AWS C5 (Intel) Instance
+# AWS C5 Instance
 ./wrk -c60 -t30 -d 30m -L -R 600 -s ./post.lua http://10.3.69.250:8080/shortenURL
 
 # AWS Graviton2 Instance
@@ -202,10 +202,10 @@ To start with I ran a 30 minutes load test against each instance using the follo
 
 ### Driving More Load
 
-So far our initial results look great. Intel is staying just under our threshold and our Graviton instances look like there is enough overhead to take additional traffic without breaching our latency target. Lets push each instance a bit harder and see what happens to our latency target under more load.
+So far our initial results look great. Our C5 instance is staying just under our threshold and our Graviton instances look like there is enough overhead to take additional traffic without breaching our latency target. Lets push each instance a bit harder and see what happens to our latency target under more load.
 
 ```shell
-# AWS C5 (Intel) Instance
+# AWS C5 Instance
 ./wrk -c60 -t30 -d 30m -L -R 700 -s ./post.lua http://10.3.69.250:8080/shortenURL
 
 # AWS Graviton2 Instance
@@ -225,7 +225,7 @@ So far our initial results look great. Intel is staying just under our threshold
 
 ### Pushing Graviton To The Limit
 
-Intel instances are now breaching our latency target, but Graviton instances still are under threshold. How much more can we push it until they tip over? Lets find out.
+Our C5 instances are now breaching our latency target, but Graviton instances still are under threshold. How much more can we push it until they tip over? Lets find out.
 
 ```shell
 # AWS Graviton2 Instance
@@ -277,7 +277,7 @@ We're getting pretty close to the breaking point here. This next test is likely 
 |99.999  |2.4s |
 |100  |2.49s |
 
-1,000 requests per second is definitely too many requests to handle while maintaining acceptable latency thresholds. Our Graviton instance is capable of powering 900 requests per second before breaching latency thresholds. Our Intel based x86 instance can only handle approximately 700 before breaching our latench thresholds. This means our application can serve approximately 28% more requests per instance than our Intel counterpart. With further testing in a production scenario we can capitalize on this by running fewer instances to serve the same amount of traffic leading to even greater cost and sustainability gains. For Go applications Graviton is proving to be the most cost effective and sustainable instance selection AWS offers today.
+1,000 requests per second is definitely too many requests to handle while maintaining acceptable latency thresholds. Our Graviton instance is capable of powering 900 requests per second before breaching latency thresholds. Our x86-based C5 instance can only handle approximately 700 before breaching our latench thresholds. This means our application can serve approximately 28% more requests per instance on a C6g instance than on a C5 instance. With further testing in a production scenario we can capitalize on this by running fewer instances to serve the same amount of traffic leading to even greater cost and sustainability gains. For Go applications Graviton is proving to be the most cost effective and sustainable instance selection AWS offers today.
 
 ## Cleanup
 
