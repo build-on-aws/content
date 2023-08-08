@@ -1,5 +1,5 @@
 ---
-title: "Egress Controls for Cloud Workloads"
+title: "Egress Controls for Cloud Workloads - Part 1"
 description: "In this tutorial, you will learn how to configure Egress Controls with AWS Network Firewall and Amazon Route 53 Resolver DNS Firewall"
 tags:
   - infrastructure-as-code
@@ -14,9 +14,11 @@ authorName: Brandon Carroll
 date: 2023-08-01
 ---
 
-Have you ever considered the connection between securing your infrastructure and optimizing costs?  Most often, when we think about security our minds go to adversaries and risk, controls and inspection, compliance and auditing.  But the truth is, creating a solid security posture contributes to cost control in a cloud environment.
+Have you ever considered the connection between how securing your infrastructure and cost effective design go hand in hand?  Most often, when we think about security our minds go to adversaries and risk, controls and inspection, compliance and auditing.  However, paying attention to your security posture and understanding what happens with network traffic, both desired and undesired, contributes to cost effective design in a cloud environment.
 
-In this tutorial we will focus on controlling egress traffic with the [Amazon Route53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/).  Our first goal of this capability is to provide a secure environment, ensuring that only desired egress traffic is allowed to leave our cloud environment.  Our secondary goal, and really a side-outcome of the capabilities we will enable, is that we will minimnize our cloud costs for egress traffic.  
+In this tutorial we will focus on controlling egress traffic with the [Amazon Route53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/).  Our first goal of this capability is to provide a secure environment, ensuring that only desired egress traffic is allowed.  Our secondary goal, and really a side-outcome of the capabilities we will enable, is that we will minimnize our cloud costs for egress traffic.  
+
+> For the purpose of this tutorial, egress traffic refers to traffic from our protected subnet within our Virtual Private Cloud (VPC), leaving the VPC, and being routed toward the internet.
 
 In this tutorial we will work with the Amazon Route53 DNS Resolver Firewall, Amazon EC2 Instances, and Amazon Virtual Private Clouds. 
 
@@ -35,13 +37,17 @@ DNS Firewall provides filtering for outbound DNS queries that pass through the R
 
 AWS Network Firewall provides filtering for all network traffic that is routed through firewall endpoints, but does not have visibility into queries made to the Route 53 Resolver.
 
-In this tutorial we will focus on filtering DNS traffic that AWS Network Firewall does not have visibility into.
-
-## Traffic Flow
-
-For this tutorial, we use a simplified (single availability zone) version of the distributed deployment architecture as shown in the below image. Traffic from protected workloads going to the Internet is routed via the default route (0.0.0.0/0) to a Network Firewall endpoint which in turn has a default route pointing to a NAT Gateway endpoint.
+In this tutorial we will focus on filtering the intial DNS request that AWS Network Firewall would not normally have visibility into.  To understand why this is important let's examine our sample architecture seen in the following image.
 
 ![Simplified distributed deployment](images/tutorial-topolgy.png)
+
+The above image is a simplified, single availabilty zone, distributed deployment architecture.  
+
+### Understanding Traffic Flow
+
+Traffic from protected workloads going to the Internet is routed via the default route (0.0.0.0/0) to a Network Firewall endpoint which in turn has a default route pointing to a NAT Gateway endpoint. You can see this highlighted in number 1.
+
+
 
 The Public subnet where the NAT Gateway is located has a default route pointing to the Interet Gateway for the VPC, and it also has a specific route for return traffic to protected workloads pointing to the Network Firewall endpoint. This ensures the traffic is symmetric for full inspection.
 
