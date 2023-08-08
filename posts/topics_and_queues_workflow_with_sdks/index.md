@@ -1,6 +1,6 @@
 ---
 title: "Coding Publish and Subscribe Using SNS, SQS, and the AWS SDKs"
-description: "Confused while coding publish and subscribe using SNS and SQS? AWS Console tutorials help, but sample code in your language would be nice. Here we acquaint you with the topics and queues workflow code examples, part of the AWS SDK code examples repository."
+description: "Confused while coding publish and subscribe using SNS and SQS? AWS Console tutorials help, but they lack the specifics of sample code. Here we acquaint you with the topics and queues workflow code examples, part of the AWS SDK code examples repository."
 tags:
     - sns
     - sqs
@@ -26,8 +26,6 @@ For example, if you would like to code publish and subscribe using Java,
 there is Java topics and queues workflow sample code to get you started. The topics and queues workflow sample code runs as a command-line application. This 
 application allows you to select options and observe their behavior. You can play with filter subscriptions, or you can see what is required to implement a FIFO queue.
 
-[Topics and Queues Workflow in the code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html)
-
 ## Publish and Subscribe
 
 Publish and subscribe is a mechanism for passing information. It’s used in social media, and it’s also used internally in software applications. A producer publishes a message, and the subscribers receive the message. 
@@ -41,6 +39,12 @@ With Amazon SQS, messages are received from a queue by polling. With polling, th
 Also, the messages stay in the queue until you delete them. This gives you more flexibility in how the messages are processed.
 
 ## SNS Workflow Command-line application 
+
+The following diagram shows the SNS topic and SQS queue options demonstrated in the command-line application.
+
+![Flow diagram of the topics and queues options](images/fifo_topics_diagram.png)
+
+Below is a description of the application interface.
 
 Note: The actual interface may vary slightly between programming languages. 
 
@@ -100,9 +104,6 @@ If you add a filter, you can select one or more “tone” attributes to filter 
 
 The application now prompts you to add the second queue. Repeat the previous steps for the second queue.
 
-The following diagram shows the topic and queue options.
-
-![Flow diagram of the topics and queues options](images/fifo_topics_diagram.png)
 
 After you create the topic and subscribe both queues, the application lets you publish messages to the topic.
 
