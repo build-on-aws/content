@@ -24,12 +24,18 @@ Unlike the tutorial, and in keeping with conventions of the Practical Cloud Guid
 
 ## Prerequisites
 
-- An AWS Account (if you don't yet have one, you can create one and set up your environment here).
-- A Cloud9 environment for an [individual](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup-express.html).  
-    - AWS CLI V2 [installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-    - AWS Lightsail CLI plugin for Linux [installed](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software#install-lightsailctl-on-linux)
+| Info                |                                   |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | 200 - Intermediate                          |
+| ⏱ Time to complete  | 45 minutes                             |
+| 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
+|  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/).<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials<br>-A Cloud9 environment for an [individual](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup-express.html).<br>- AWS CLI V2 [installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).<br>- AWS Lightsail CLI plugin for Linux [installed](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software#install-lightsailctl-on-linux) <br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system. |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/sample-php-app)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | 2023-08-09                             |
 
-
+| ToC |
+|-----|
 
 ## Module 1: Deploy a Monolithic App
 
@@ -37,13 +43,13 @@ In a monolithic application all the components are in a single VPS. In this exam
 
 ![Monolithic application architecture](./images/lamp-architecture-1.jpg)
 
-we will deploy the application on a AWS Lightsail Virtual Private Server (VPS) using the Lightsail command line client (CLI). The CLI provides a way to configure the server at launch with commands or a shell script. A script can install software, change file permissions, and set configuration parameters that a server requires for deploying an application.  
+We will deploy the application on a AWS Lightsail Virtual Private Server (VPS) using the Lightsail command line client (CLI). The CLI provides a way to configure the server at launch with commands or a shell script. A script can install software, change file permissions, and set configuration parameters that a server requires for deploying an application.  
 
 This tutorial uses a script that does the following:
 
 - The Bitnami image has a default web page installed which needs to be removed. The script starts by changing into the root directory of the web server (/opt/bitnami/apache2/htdocs) and deleting the existing files
 - Next the script clones the application code to render the web front-end from the lab’s Github repo
-*- To ensure that the PHP application can write to the settings file (connectvalues.php), the script changes the ownership (chown) on the file to match the account under which the Apache web server runs, as well as ensuring that account can write to the file (via chmod)
+- To ensure that the PHP application can write to the settings file (connectvalues.php), the script changes the ownership (chown) on the file to match the account under which the Apache web server runs, as well as ensuring that account can write to the file (via chmod)
 - Each Bitnami-based instance generates a unique password for the locally installed MySQL database, this next command in the script opens the settings file and updates it with this password (which can be found at /home/bitnami/bitnami_application_password)
 - Finally the script issues a set of SQL commands to MySQL (via the MySQL command line tool) that will initialize the local database
 
@@ -143,11 +149,11 @@ Verify the connection between the PHP application and the locally-running MySQL 
 
 ## Module 2: Create a High Availability Relational Database
 
-In this section we’ll deploy a Lightsail database, a managed database service that reduces the complexity of deploying and managing database software. Lightsail manages the underlying infrastructure and database engine while you create and deploy databases and tables running inside the service.
+In this section, we’ll deploy a Lightsail database, a managed database service that reduces the complexity of deploying and managing database software. Lightsail manages the underlying infrastructure and database engine while you create and deploy databases and tables running inside the service.
 
-With the Lightsail CLI, create a MySQL 5.7 database (`—relational-database-blueprint-id mysql_5_7`). The point of this lab is to deploy a fault-tolerant and scalable implementation of the web application which requires a High Availability database plan, e.g.,  `—relational-database-bundle-id micro_ha_2_0`. Name the database todo-db (`—relational-database-name todo-db`). 
+With the Lightsail CLI, create a MySQL 5.7 database (`--relational-database-blueprint-id mysql_5_7`). The point of this lab is to deploy a fault-tolerant and scalable implementation of the web application which requires a High Availability database plan, e.g.,  `--relational-database-bundle-id micro_ha_2_0`. Name the database todo-db (`--relational-database-name todo-db`). 
 
-By default Lightsail will create a strong password for you. However, for this tutorial, keep the password simple (—master-user-password taskstasks) and assign a user name (—master-username dbmasteruser)
+By default Lightsail will create a strong password for you. However, for this tutorial, keep the password simple (`--master-user-password` taskstasks) and assign a user name (`--master-username` dbmasteruser)
 
 ```bash
 aws lightsail create-relational-database \
@@ -161,11 +167,11 @@ aws lightsail create-relational-database \
 
 ## Module 3: Replace the Database
 
-In this section we will replace the local MySQL instance running in the VPS with a high availability Amazon Relational Database Service database. The application architecture will look like this:
+The next step is to replace the local MySQL instance running in the VPS with a high availability Amazon Relational Database Service (RDS) database. The application architecture will look like this:
 
 ![Re-architecting the monolithic application](./images/lamp-architecture-2.jpg)
 
-Update the application configuration to point to the highly-available Lightsail database. First we will need the address of the high availability database. Use the `get-relational-databases` command to get the a JSON doc describing the instance and filter it with jq.
+Update the application configuration to point to the highly-available Lightsail database. First, we will need the address of the high availability database. Use the `get-relational-databases` command to get the a JSON doc describing the instance and filter it with jq.
 
 ```bash
 aws lightsail get-relational-databases | jq .relationalDatabases[].masterEndpoint.address
@@ -178,13 +184,13 @@ Paste the endpoint value of your Lightsail database under **DB Hostname**. Enter
 
 ![Change database connection setting](./images/save_settings.jpg)
 
-Test the new database by clicking **List Tasks** in the top menu, there shouldn’t be any tasks to display. Also note at the bottom of the screen it should list your Lightsail database endpoint as value for Database host
+Test the new database by clicking **List Tasks** in the top menu, there shouldn’t be any tasks to display. Also note at the bottom of the screen it should list your Lightsail database endpoint as the value for Database host
 
 If your web app is still showing the previously deployed database (denoted by `localhost` as the database host), you may need to use either a new browser window or an incognito window.
 
 ## Module 4: Clone the Application
 
-Snapshots are point-in-time copies of instances. Lightsail simplifies creating snapshots of wer instances that can be used to backup and restore instances, scale instance sizes up or down, and/or to deploy a new instance. Create a snapshot of the VPS with the `create-instance-snapshot` command.
+Snapshots are point-in-time copies of instances. Lightsail simplifies creating snapshots of instances that can be used to backup and restore instances, scale instance sizes up or down, and/or to deploy a new instance. Create a snapshot of the VPS with the `create-instance-snapshot` command.
 
 ```bash
 aws lightsail create-instance-snapshot \
@@ -198,7 +204,7 @@ The status will change to `Snapshotting`, we will need to wait for the process t
 aws lightsail get-instance-snapshot --instance-snapshot-name PHP-fe-ls-db | jq .instanceSnapshot.state
 ```
 
-When the snapshot is complete, create two new instances with the `create-instances-from-snapshot`. Note that you can use a list of instance names to create multiple instances.
+When the snapshot is complete, create two new instances with `create-instances-from-snapshot`. Note that you can use a list of instance names to create multiple instances.
 
 ```bash
 aws lightsail create-instances-from-snapshot \
@@ -208,7 +214,7 @@ aws lightsail create-instances-from-snapshot \
 --bundle-id small_2_0
 ```
 
-Get the public IP of each of the two newly created front end instances with these commands.
+Get the public IP of the two newly created front end instances with these commands.
 
 ```bash
 aws lightsail get-instance --instance-name PHP-fe-2 | jq .instance.publicIpAddress
@@ -242,7 +248,7 @@ aws lightsail attach-instances-to-load-balancer \
 --instance-names {"PHP-fe-1","PHP-fe-2","PHP-fe-3"}
 ```
 
-The Lightsail load balancer performs a health check on each instance by sending a request to the root of the web application on each instance. It the web application returns an HTTP Status 200, the instance passes the health check. It can take some time for each instance to pass the health check, and you can verify the status of the instances with the `get-load-balancer` command.
+The Lightsail load balancer performs a health check on each instance by sending a request to the root of the web application on each instance. If the web application returns an HTTP Status 200, the instance passes the health check. It can take some time for each instance to pass the health check, and you can verify the status of the instances with the `get-load-balancer` command.
 
 ```bash
 aws lightsail get-load-balancer --load-balancer-name todo-lb | jq .loadBalancer.instanceHealthSummary
@@ -258,7 +264,7 @@ You can find the address of the load balancer with `get-load-balancer` and filte
 aws lightsail get-load-balancer —-load-balancer-name todo-lb | jq .loadBalancer.dnsName
 ```
 
-Open a browser to http://<dnsName> to verify that application is working. Refresh the browser window and you will see the Front-end host ip change.
+Open a browser to http://< dnsName > to verify that application is working. Refresh the browser window and you will see the Front-end host ip change.
 
 ![](./images/scaled-app.png)
 
