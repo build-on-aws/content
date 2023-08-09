@@ -1,6 +1,6 @@
 ---
 title: "Build On Weekly"
-description:
+description: "A weekly live stream about The Cloud, Open Source, Community and everything in between"
 tags:
   - aws
   - build-on-live
@@ -18,7 +18,7 @@ images:
   background: ./images/BOW_Logo.png
 ---
 
-![Image of Jacquie and Darko enjoying the live stream together](images/bow-header.png)
+![Image of Jacquie and Darko enjoying the live stream together](images/bow-header.webp)
 
 👋 Hello friends and welcome to Build On Weekly, a [Twitch show](https://www.twitch.tv/aws) where we build something together every week while answering questions from our favourite people - you! We'll build anything that helps you solve problems: whether it's Open Source or AWS, from operators, developers, data or security specialists to anyone in between. Join us every Thursday at 9am PT to learn live with us through hands on keyboard coding and stay for the lively conversations with expert guests.
 
@@ -33,10 +33,19 @@ Everyone is friends, so join in the conversation both on or off the air with you
 
 Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
 
-| Episode | Name | Date | Link to Show Notes |
+### SEASON 02
+
+| Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
+| S02E20 | Managing Development Environments| 2023-06-01  | [Show Notes](/livestreams/build-on-weekly/2023-06-01) |
+| S02E15 | Generative AI Applications | 2023-04-27  | [Show Notes](/livestreams/build-on-weekly/2023-04-27) |
 | S02E14 | Stable Diffusion with Viktoria | 2023-04-20  | [Show Notes](/livestreams/build-on-weekly/2023-04-20) |
 | S02E13 | Hot Dog or Not Hot Dog | 2023-04-13  | [Show Notes](/livestreams/build-on-weekly/2023-04-13) |
+
+### SEASON 01
+
+| Episode | Name | Date | Link to Show Notes
+|--|--|--|--|
 | S01E06 | Local Development | 2022-08-18  | [Show Notes](/livestreams/build-on-weekly/2022-08-18) |
 | S01E05 | Containers, Containers Everywhere | 2022-08-11  | [Show Notes](/livestreams/build-on-weekly/2022-08-11) |
 | S01E04 | Static S3 Website | 2022-08-04  | [Show Notes](/livestreams/build-on-weekly/2022-08-04) |
@@ -44,4 +53,4 @@ Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
 | S01E02 | Breaking blocks with Terraform | 2022-07-21  | [Show Notes](/livestreams/build-on-weekly/2022-07-21) |
 | S01E01 | Open With Open Source | 2022-07-14  | [Show Notes](/livestreams/build-on-weekly/2022-07-14) |
 
-![Build On Weekly Logo](images/BOW_Logo.png)
+![Build On Weekly Logo](images/BOW_Logo.webp)

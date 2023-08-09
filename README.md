@@ -1,14 +1,15 @@
-[BuildOn.AWS](https://blog.buildon.aws) is a community content platform where hands-on builders can find content to learn about a technology, solve a problem or to contribute content to share their knowledge to help others. Content is written by builders, for builders.
+# Welcome!
+
+[BuildOn.AWS](https://blog.buildon.aws) is a community content platform where hands-on builders can find content to learn about a technology, solve a problem, or to contribute content to share their knowledge to help others. Content is written by builders, for builders.
 
 ## How to write for BuildOn.AWS
 
-:warning: January 27, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months.
+:warning: June 12, 2023: BuildOn.AWS community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](/) for updates as we open this up to more community authors in the coming months.
 
-Interested in writing for [BuildOn.AWS](https://blog.buildon.aws)?
+Interested in writing for [BuildOn.AWS](https://buildon.aws)?
 
 - Read the [Quick Start](/AUTHOR_QUICK_START.md) to learn how to propose a topic and get it published
 - Review the [Content Review Checklist](/CONTENT_REVIEW_CHECKLIST.md) before submitting your pull request
-- Check out the [Content Guidelines](/CONTENT_GUIDELINES.md) to learn about what kind of content we're looking for and what content will get published
 - Have a question? Read the [FAQ](/FAQ.md) or [submit an issue](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=bug&template=issue-template.md) with your question.
 
 ## Other Ways to Contribute

@@ -1,6 +1,6 @@
 ---
 title: "S01E01 - Open With Open Source"
-description:
+description: "BuildOn on Weekly stream from 2022-07-14"
 tags:
   - aws
   - build-on-live
@@ -17,7 +17,7 @@ spaces:
 
 Welcome to the first episode of Build on Weekly! 🥳 Here we introduce ourselves, say hi to chat, and tell you what this show is all about. We will be posting here, on [BuildOn.aws](/livestreams/build-on-weekly), to **share show notes, links, socials, code, and any other things mentioned during the live stream** with you! 🚀
 
-![Jacquie and Darko on stream](images/header.png)
+![Jacquie and Darko on stream](images/header.webp)
 
 If you miss an episode, don't worry! We will upload recordings of all our episodes to this youtube [playlist](https://youtube.com/playlist?list=PLDqi6CuDzubwBQdL4N1tVUwWeNEtOG9vL)! Make sure to smash that like and subscribe button! 🥹
 

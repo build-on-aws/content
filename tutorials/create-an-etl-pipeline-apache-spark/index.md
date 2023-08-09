@@ -1,7 +1,6 @@
 ---
 title: "Create an ETL Pipeline with Amazon EMR and Apache Spark"
 description: Learn how to build an ETL pipeline for batch processing with Amazon EMR and Apache Spark.
-
 tags:
     - data-engineering
     - data-analytics
@@ -25,7 +24,7 @@ We are going to use [PySpark](https://spark.apache.org/docs/latest/api/python/) 
 
 | Attributes          |                                   |
 | ------------------- | -------------------------------------- |
-| ✅ AWS Level        | 100 - Beginner                               |
+| ✅ AWS Level        | 200 - Intermediate                               |
 | ⏱ Time to complete  | 30 mins - 45 mins                      |
 | 💰 Cost to complete | USD 0.30                               |
 | 🧩 Prerequisites       | - An [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (if you don't yet have one, create one and [set up your environment](https://aws.amazon.com/getting-started/guides/setup-environment/)) <br> - An IAM user that has the access to create AWS resources. <br> - Basic understanding of Python |

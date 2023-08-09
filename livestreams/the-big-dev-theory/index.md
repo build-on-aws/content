@@ -10,10 +10,9 @@ authorGithubAlias: bigevilbeard
 authorName: Stuart Clark
 date: 2023-05-10
 images:
-  banner: ./the-big-dev-theory.png
-  thumbnail: ./the-big-dev-theory.png
-  hero: ./the-big-dev-theory.png
-  background: ./the-big-dev-theory.png
+  banner: ./images/the-big-dev-theory.png
+  thumbnail: ./images/the-big-dev-theory.png
+  background: ./images/the-big-dev-theory.png
 ---
 
  The Big Dev Theory is a live stream broadcast every week on the AWS [Twitch](https://twitch.tv/aws) channel. Our live streams are designed to help developers learn about the advantages of our partner technologies and AWS, these events provide developers with the opportunity to learn from some of the top minds in the industry and connect with other developers who are working on similar projects. A key part of its mission to help developers build and innovate with confidence.

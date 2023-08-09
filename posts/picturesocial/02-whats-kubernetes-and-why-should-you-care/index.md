@@ -12,13 +12,8 @@ date: 2022-10-12
 
 This is an 8-part series about Picturesocial:
 
-1. [How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/)
-2. What’s Kubernetes and why should you care? (this post)
-3. [How to deploy a Kubernetes cluster using Terraform](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/)
-4. [How to deploy an app to Kubernetes](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/)
-5. [How to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/)
-6. [How to use DynamoDB on a containerized API](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/)
-7. [How to use DynamoDB on a containerized API](/posts/picturesocial/07-how-to-expose-a-containerized-api-to-the-internet/)
+| SeriesToC |
+|-----------|
 
 ## Introduction
 
