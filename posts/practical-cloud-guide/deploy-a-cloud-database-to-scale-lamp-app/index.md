@@ -12,28 +12,26 @@ authorName: Sophia Parafina
 date: 2023-06-20
 ---
 
-In previous tutorials you [deployed a single application on a VPC](https://community.aws/tutorials/practical-cloud-guide/deploy-a-java-application-on-linux). Applications like these are called monolithic applications because all the components are tightly coupled in a single server. Cloud architectures are frequently loosely coupled with application components connected via the network. This tutorial is an update of a [Lightsail workshop](https://www.lightsailworkshop.com/).
+In previous tutorials you [deployed a single application on a VPC](https://community.aws/tutorials/practical-cloud-guide/deploy-a-java-application-on-linux). Applications like these are called monolithic applications, because all the components are tightly coupled in a single server. Cloud architectures are frequently loosely coupled with application components connected via the network. This tutorial is an update of a [Lightsail workshop](https://www.lightsailworkshop.com/).
 
-Unlike the tutorial, and in keeping with conventions of the Practical Cloud Guide. You will complete an updated version of the workshop with the AWS CLI instead of the AWS Lightsail console. You will deploy a monolithic [LAMP (Linux, Apache, MySQL, PHP)](https://aws.amazon.com/what-is/lamp-stack/) application and an external relational database, the replace the monolithic app’s database with the external database. In addition, you will scale the application by adding additional servers to a load balancer that distributes requests to the servers.
+Unlike the tutorial, and in keeping with conventions of the Practical Cloud Guide, we'll complete an updated version of the workshop with the AWS CLI instead of the AWS Lightsail console. We will deploy a monolithic [LAMP (Linux, Apache, MySQL, PHP)](https://aws.amazon.com/what-is/lamp-stack/) application and an external relational database, then replace the monolithic app’s database with the external database. In addition, we will scale the application by adding additional servers to a load balancer that distributes requests to the servers.
 
-## What you will learn
+## What You Will Learn
 
 - How to deploy a LAMP stack application as a monolith in a single Lightsail instance.
-- Re-architect the application by separating the application from the database.
-- Scaling and load balancing the LAMP stack.
+- How to re-architect the application by separating it from the database.
+- How to scale and load balance the LAMP stack.
 
 ## Prerequisites
 
 - An AWS Account (if you don't yet have one, you can create one and set up your environment here).
 - A Cloud9 environment for an [individual](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup-express.html).  
     - AWS CLI V2 [installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-    - AWS Lightsail CLI plugin for Linux [installed](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software#install-lightsailctl-on-linux)
-
-
+    - AWS Lightsail CLI plugin for Linux [installed](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software#install-lightsailctl-on-linux).
 
 ## Module 1: Deploy a Monolithic App
 
-In a monolithic application all the components are in a single VPS. In this example, the components include a MySQL database. a PHP application framework, and the application all hosted in a single Lightsail instance.
+In a monolithic application, all the components are in a single VPS. In this example, the components include a MySQL database, a PHP application framework, and the application all hosted in a single Lightsail instance.
 
 ![Monolithic application architecture](./images/lamp-architecture-1.jpg)
 
@@ -139,7 +137,6 @@ aws lightsail get-instance-access-details --instance-name PHP-fe-1 | jq .accessD
 Verify the connection between the PHP application and the locally-running MySQL database by opening a browser to `http://<ipAddress>`.
 
 ![Verify application is deployed](./images/add-task.jpg)
-
 
 ## Module 2: Create a high availability relational database
 
