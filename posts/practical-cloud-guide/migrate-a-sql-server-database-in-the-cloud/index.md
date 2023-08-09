@@ -3,9 +3,9 @@ title: "Migrate a SQL Server Database to the Cloud"
 description: "Migrating a SQL Server database to the cloud is similar to migrating a database to a new server. The cloud can simplify the process through the use of managed services such as AWS Lightsail."
 tags:
     - tutorials
-    - MS SQL Server
-    - Migration
-    - AWS Lightsail
+    - ms-sql-server
+    - migration
+    - aws-lightsail
 authorGithubAlias: spara
 authorName: "Sophia Parafina"
 date: 2023-08-09
