@@ -45,21 +45,34 @@ The above image is a simplified, single availabilty zone, distributed deployment
 
 ### Understanding Traffic Flow
 
-Traffic from protected workloads going to the Internet is routed via the default route (0.0.0.0/0) to a Network Firewall endpoint which in turn has a default route pointing to a NAT Gateway endpoint. You can see this highlighted in number 1.
+Traffic from protected workloads going to the Internet is routed via the default route (0.0.0.0/0) to a Network Firewall endpoint which in turn has a default route pointing to a NAT Gateway endpoint. You can see this highlighted in number 1 and 2.
 
-
-
-The Public subnet where the NAT Gateway is located has a default route pointing to the Interet Gateway for the VPC, and it also has a specific route for return traffic to protected workloads pointing to the Network Firewall endpoint. This ensures the traffic is symmetric for full inspection.
-
-NAT Gateway deployed in a dedicated public subnet allows instances in private subnet to communicated with resources on the Internet.
+The Public subnet where the NAT Gateway is located has a default route pointing to the Interet Gateway for the VPC, and it also has a specific route for return traffic to protected workloads pointing to the Network Firewall endpoint. This ensures the traffic is symmetric for full inspection. You can see this highlighted in number 3 and 4. With a NAT Gateway deployed in a dedicated public subnet, instances in private subnets can communicated with resources on the Internet.
 
 This is the typical egress traffic flow when  AWS Network Firewall is deployed. However, what's not depicted in the above image is the traffic flow for DNS Queries within the VPC.  
 
-In the image below, we see what this traffic flow looks like with DNS resolution.  
+In the image below, we can see what the traffic flow with DNS resolution looks like.  
 
 ![Traffic flow for DNS query](images/tutorial-setup-3.png)
 
-Route 53 Resolver DNS queries are evaluated by DNS Firewall, and this traffic flows from our endpoints to the DNS Resolver located at the .2 address of each VPC subnet.
+The Amazon Route 53 Resolver operates on the .2 address of each VPC subnet.  Therefore, when DNS queries are sent, they are not evaluated by DNS Firewall because the query does not leave the private subnet and traverse the firewall subnet.
+
+### Cost Efficient Architecture
+
+Considering a firewall architecture such as the one used in this tutorial, there are a few areas that lend themselves to a cost efficient architecture.
+
+1. DNS traffic doesn't cross VPCs
+
+DNS traffic does not cross VPCs and it doesnt need to traverse the internet.  By keeping the DNS local we wont incur additional cost for egress data.
+
+2. DNS control makes sure that malicious connections are not made out of the VPC, thus reducing the compute and data costs.
+
+A common technique for bad actors is to establish command and control connections from internal resources.  The compute resource can then be used to initiate DDoS attacks, mine crypto, and perform other nefarious acts.  By blocking dns requests to TLDs that are know to be malicious you essentially block this command and control channel from happening.  This keeps compute costs and data costs down.
+
+1. MOdify the current architecture to use a centralized inspection VPC.
+
+While this is not specific to this tutorial, you can make a minor adjustment to the firewall configuration, and use a centralized inspection VPC rather than a distributed VPC. This will minimize the cost involved with having a firewall endpoint distributed across VPCs.
+
 
 
 ## Tutorial Setup
@@ -99,9 +112,11 @@ Once you are connected to the command-line session on the EC2 instance, we will 
 
 As you can see from the test, the egress controls in this environment are wide open, so we have our work cut out for us!
 
+> **Note:** The testing script used in this tutorial is used for other tutorials and not all of the tests performed are addressed in this tutorial.
+
 In the subsequent portions of this tutorial, we will configure the Amazon Route 53 Resolver DNS firewall to filter our DNS queries and Internet-bound traffic until these tests return a `BLOCKED` status. 
 
-Let's begin to configure the Amazon Route 53 Resolver DNS Firewall.
+Let's configure the Amazon Route 53 Resolver DNS Firewall.
 
 ## Configure the Amazon Route 53 Resolver DNS Firewall
 
@@ -130,6 +145,19 @@ In this step, we create a domain list that will specify the domain-matching patt
 * The `*` acts as a wildcard to match all the subdomains within each of these TLDs
 * We can always write exceptions later to our broad TLD-matching rules by creating an `ALLOW` rule to match any needed exceptions and giving it a higher priority than our `BLOCK` rule.
 * We'll use this list to BLOCK ten commonly abused top-level domains in our VPC
+
+```
+*.ru
+*.cn
+*.xyz
+*.cyou
+*.pw
+*.ws
+*.gq
+*.surf
+*.cf
+*.ml
+```
 
 ![Verify both allow and block domain lists](/images/Updated-Screenshots/lab1-2.png)
 
