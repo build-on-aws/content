@@ -11,6 +11,8 @@ tags:
   - cdk
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: afronski
 authorName: Wojciech Gawroński
 date: 2023-01-10

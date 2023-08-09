@@ -9,6 +9,8 @@ tags:
   - tutorials
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-04-10

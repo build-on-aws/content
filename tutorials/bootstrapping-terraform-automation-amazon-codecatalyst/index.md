@@ -12,6 +12,8 @@ tags:
     - devops
 spaces:
   - devops
+waves:
+  - devops
 showInHomeFeed: true
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard

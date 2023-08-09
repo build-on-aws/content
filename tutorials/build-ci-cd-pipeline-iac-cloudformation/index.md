@@ -11,6 +11,8 @@ tags:
   - codecatalyst
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-03-22 
