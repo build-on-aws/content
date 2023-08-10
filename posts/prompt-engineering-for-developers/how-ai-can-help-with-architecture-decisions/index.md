@@ -33,9 +33,8 @@ Chances are you'll hear one of the most infamous lines in software engineering: 
 
 Now let's see if LLMs can do any better. Let's simply ask:
 
-```text
+**Prompt:**
 What's better, serverless or containers?
-```
 
 >Note: For this post I'm using [Anthropic Claude](https://www.anthropic.com/index/claude-2), but you can apply this to any other LLM, including [OpenAI's GPT](https://openai.com/gpt-4), [Google Bard](https://bard.google.com/), [Amazon Titan](https://aws.amazon.com/bedrock/titan), and many more.
 
@@ -45,7 +44,7 @@ We can see that, while the AI already tries to be helpful, listing some generic 
 
 Sure, it's true, but it's also obvious. And frustrating. 
 
-In software development there's rarely a universal right or wrong. We often tend to speak of "best practices", but these always come with a context. For example, the "best practice" of data normalization makes a lot of sense in a relational database, but can create some serious headache when you try to apply it to some NoSQL databases.
+In software development there's rarely a universal right or wrong. We often tend to speak of "best practices", but they always come with a context. For example, the "best practice" of data normalization makes a lot of sense in a relational database, but can create some serious headache when you try to apply it to a NoSQL database.
 
 The role of an architect—and this doesn't necessarily mean a person with "Architect" in their title, it can be one of the many roles you take on as a developer—is to figure out *what* exactly something depends on.
 
@@ -95,7 +94,9 @@ We can instruct the AI to do exactly this, by defining its role and telling it v
 
 Let's start the conversation with the following prompt: 
 
-```text
+---
+
+**Prompt:**
 You are an experienced software architect. You have extensive experience in architecting and developing Java-based applications, and an in-depth understanding of AWS Lambda and containers.
 
 I want to build an application and your task is to help me gather the requirements, understand the two options and their respective trade-offs, and ultimately make an informed decision.
@@ -103,7 +104,8 @@ I want to build an application and your task is to help me gather the requiremen
 You don't provide theoretical or generic information. Your responses will consider our specific use-case. You don't jump to conclusion but ask clarifying questions.
 
 Please answer with "OK" and nothing else.
-```
+
+---
 
 ![Screenshot of the conversation with the LLM, defining its role](images/priming_role.png)
 
@@ -113,13 +115,16 @@ As instructed, the model responds with "OK" and is ready for the next step.
 
 Now, we give the model relevant background information to help it understand the specific problem we want to solve. We still don't want the model to return anything, so we'll repeat the instruction to only respond with "OK".
 
-```text
+---
+
+**Prompt:**
 We're a small business planning to build an application for managing customer data. The application's core functions are recording and updating customer details, searching for customer data, and keeping track of interactions with customers. The application will be developed using Java, and provide a RESTful API to handle HTTP requests from web and mobile apps that interact with it.
 
 The question is: Should we use AWS Lambda functions or containers as the foundation for this application?
 
 Please answer with "OK" and nothing else.
-```
+
+---
 
 ![Screenshot of the continued conversation with Claude V2, setting the context](images/priming_context.png)
 
@@ -129,13 +134,16 @@ With this groundwork, the LLM has all the context it needs to continue to the ac
 
 Before we can make any architectural decision, it is crucial to understand the requirements and constraints of our system. AI language models can be extremely useful in refining these requirements. Interacting with them reveals key details, pushing our understanding further.
 
-### Prompt the LLM to ask clarifying questions
+### Prompt the LLM to Ask Clarifying Questions
 
 Let's continue the conversation with our next prompt:
 
-```text
+---
+
+**Prompt:**
 First, we need to gather the specific requirements. You will help me doing so by asking clarifying questions. Don't summarize or conclude anything. Ask the questions in a numbered list.
-```
+
+---
 
 ![](images/clarify_requirements.png)
 
@@ -147,9 +155,12 @@ We may not have answers to all of the questions yet. However, we can start by an
 
 After one or two more iterations, the questions usually indicate a thorough understanding of the context, so we can go to the next step and ask the model to create a list of the collected requirements using the following prompt:
 
-```text
+---
+
+**Prompt:**
 We're done with the questions. Please create a list of requirements. Keep it brief.
-```
+
+---
 
 ![Screenshot of the continued conversation with Claude V2, listing the requirements](images/requirements_list.png)
 
@@ -159,9 +170,12 @@ Now, we have a clear and very specific understanding of the requirements. These 
 
 To make a well-informed decision, it's vital to compare the available options in the context of our requirements. Let's continue the conversation with the following prompt:
 
-```text
+---
+
+**Prompt:**
 Based on these requirements, list the pros and cons of using serverless functions or containers. Keep it brief and specific.
-```
+
+---
 
 ![Screenshot of the continued conversation with Claude V2, listing the pros and cons of Serverless vs. Containers for our specific requirements](images/pros_and_cons.png)
 
@@ -175,9 +189,12 @@ By now, it shouldn't be a big surprise that the LLM can be a valuable tool to un
 
 Let's go ahead and ask for other options, using the following prompt:
 
-```text
+---
+
+**Prompt:**
 Are there any other deployment models that you would consider for this specific app?
-```
+
+---
 
 ![Screenshot of the continued conversation with Claude V2, outlining other deployment models](images/other_options.png)
 
@@ -191,9 +208,12 @@ Now, that we have defined the LLM's role, defined the context, gathered all the 
 
 Let's ask for its recommendation, based on the entire conversation, using the following prompt:
 
-```text
+---
+
+**Prompt:**
 Choosing between serverless, self-managed containers, and App Runner, which would you recommend, given our specific requirements?
-```
+
+---
 
 ![Screenshot of the continued conversation with Claude V2, with the recommendation based on the requirements and the evaluated options](images/recommendation.png)
 
@@ -201,7 +221,7 @@ This looks pretty good, but still, a balanced approach is key. While the AI offe
 
 By combining AI insights with human expertise, we can make a well-informed decision that balances both. This collaborative approach optimizes the decision-making process, ensuring a successful architecture for your software engineering project.
 
-### The architecture decision record
+### The Architecture Decision Record
 
 Whenever you make an architectural decision, I recommend documenting the process. While the *what* and *how* often remains visible over the lifetime of an application, the *why we chose this option*, including *why we didn't choose the alternative*, may get lost over time. 
 
@@ -209,9 +229,12 @@ An **Architecture Decision Record** is a document that captures all the necessar
 
 Let's ask for it, using the following prompt:
 
-```text
+---
+
+**Prompt:**
 Ok, we'll use AWS App Runner. Create a brief [or detailed, or formal] architecture decision record.
-```
+
+---
 
 ![Screenshot of the continued conversation with Claude V2, with an architecture decision record](images/decision_record.png)
 
