@@ -1,6 +1,6 @@
 ---
 title: "Levelling up your releases: a deep dive into blue/green deployments"
-description: Deploying to production is a critical step in the software deployment lifecycle. Given the risks, engineering teams should be careful, intentional and decisive on the release process. One approach to reduce risk is blue/green deployments. Blue/green deployments reduce risk and maintain availability during deployments of new features. 
+description: Deploying to production is a critical step in the software deployment lifecycle. One approach to reduce risk is blue/green deployments.
 tags:
   - aws
   - resilience
