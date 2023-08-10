@@ -33,7 +33,11 @@ If you have any questions, comments, or ideas, **reach out** to us. Feel free to
 
 ## Schedule
 
-Come learn live with us! We stream every Monday at 9am Pacific/Noon ET.
+Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Check us out on [twitch.tv/aws](https://twitch.tv/aws) 👇
+
+<a href="https://twitch.tv/aws"><img src="images/twitch_button_small.jpg" style="margin-left: 0" alt=""/></a>
+
+---
 
 ### SEASON 01
 

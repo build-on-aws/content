@@ -39,6 +39,7 @@ Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check u
 
 <a href="https://twitch.tv/aws"><img src="images/twitch_button_small.jpg" style="margin-left: 0" alt=""/></a>
 
+---
 
 ## Show notes
 
