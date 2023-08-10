@@ -1,6 +1,6 @@
 ---
 title: "Architecting for Zero Data Loss Disaster Recovery using Amazon RDS Solutions"
-description: In this article we will show the reader how Amazon RDS database offerings can assist with achieving Zero Data loss in the advent of a major disaster on the live database service.
+description: "Exploring how Amazon RDS database offerings can assist with achieving Zero Data loss in the event of a major disaster on the live database service."
 tags:
     - resilience
     - rds
@@ -16,47 +16,50 @@ date: 2023-07-15
 |---|
 
 ## Introduction
+
 This article will look at how Amazon RDS databases support recovery from failure or disaster. We will cover the internal database mechanisms that facilitate database recovery from a service failure as well as the offerings that facilitate complete database disaster recovery. Finally we will bring all of this information together to form an idea of what is possible utilising Amazon RDS to architect for a zero data loss solution.
 
-## What does Zero Data Loss Disaster Recovery (ZDLDR) actually mean and why would it be needed?
-Disaster recovery is the act of recovering an impaired service after a failure event that effects the primary availability zone(s), data centre(s) or region(s). That event could range from natural disasters, power cuts, and network outages to political activism stopping or impacting the data centres where servers and services are physically run from.
+## What Does Zero Data Loss Disaster Recovery (ZDLDR) Actually Mean and When Is It Needed?
 
-Recovery from failure and testing of recovery procedures also forms part of the [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html) falling under the 'Reliability' Pillar. This is a core component of any AWS architected design so should be well understood.
+Disaster recovery is the act of recovering an impaired service after a failure event that affects the primary availability zone(s), data centre(s), or region(s). Such an event could range from natural disasters, power cuts, and network outages to political activism stopping or impacting the data centres where servers and services are physically run.
 
- > Your resiliency strategy should also include Disaster Recovery (DR) objectives based on strategies to recover your workload in case of a disaster event.
+Recovery from failure and testing of recovery procedures also forms part of the [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html) falling under the 'Reliability' Pillar. This is a core component of any AWS architected design, so it should be well understood.
 
- Amazon RDS disaster recovery data loss scope is at the database level and measureable in time or database system change. By database system change we are referring to the internal mechanism databases use to track change which will also be discussed later in this blog. We recover the database and everything contained within to the same consistent point in time or database system change number.
+> Your resiliency strategy should also include Disaster Recovery (DR) objectives based on strategies to recover your workload in case of a disaster event.
 
- Recovery from a disaster, with zero data loss or ZDLDR means that once the database is back in service it will carry on from the point of failure and hold all transactional history up until the point of failure. For instance if we lost an availability zone at 9:00am UTC, For a ZDLDR solution we would want a solution that could reinstate that database service as if it were 09:00am UTC again anything less could imply loss of new or changed data.
+Amazon RDS disaster recovery data loss scope is at the database level and measureable in time or database system change. By database system change we are referring to the internal mechanism databases use to track change which will also be discussed later in this blog. We recover the database and everything contained within to the same consistent point in time or database system change number.
 
- A database with missing or out of date data may cause an application to cease to function as it should, report incorrect or missing data and could require complex manual intervention to rectify. The issue could further be impacted if the system continued to operate with the missing or incorrect data which then causes additional logical cascading data corruptions. 
+Recovery from a disaster with zero data loss, or ZDLDR, means that once the database is back in service, it will carry on from the point of failure and hold all transactional history up until the point of failure. For instance if we lost an availability zone at 9:00am UTC, for a ZDLDR solution we would want a solution that could reinstate that database service as if it were 09:00am UTC again. Anything less could imply loss of new or changed data.
 
- ## Cloud Enabled vs Cloud Native Databases
-One of the key reasons to use a relational database service such as Amazon RDS is to ensure data is highly available and recoverable at all times. This is all provided by a managed service that facilitates the simple setup, configuration and administration of this.
+A database with missing or out of date data may cause an application to cease to function as it should, or report incorrect or missing data. It could require complex manual intervention to rectify. The issue could further be impacted if the system continued to operate with the missing or incorrect data, which then causes additional logical cascading data corruptions. 
 
-Amazon RDS supports 5 different database engines as below:
+## Cloud Enabled vs Cloud Native Databases
+
+One of the key reasons to use a relational database service such as Amazon RDS is to ensure data is highly available and recoverable at all times. This is all provided by a managed service that facilitates the simple setup, configuration, and administration.
+
+Amazon RDS supports 5 different database engines, as shown below:
 
 ![Cloud Native vs Cloud Enabled](images/pic1_enabled_vs_native.jpg "Figure 1. Cloud Native vs Cloud Enabled")
 
-These Amazon RDS Databases engines generally fall into 2 categories
+These Amazon RDS Databases' engines generally fall into 2 categories
 - Cloud Enabled
 - Cloud Native
 
-Cloud enabled databases run using similar infrastructure and setup as if they were running on premise. In a way they are databases designed for an on premise environment and tailored to run on the cloud and utilise those great services that AWS provides. Amazon RDS which caters for engines Oracle, SQL Server, Postgres, MySQL and MariaDB can be considered cloud enabled offerings.
+Cloud enabled databases run using similar infrastructure and setup as if they were running on premise. In a way they are databases designed for an on-premise environment and tailored to run on the cloud and utilise those great services that AWS provides. Amazon RDS which caters for engines Oracle, SQL Server, Postgres, MySQL, and MariaDB can be considered cloud enabled offerings.
 
-As depicted below these databases write to a standard non clustered EBS volume(s). Disaster recovery can be provided by replication of the physical SAN or the logical database to a second availability zone. Note we can also perform logical replication within the same availability zone as well.
+As depicted below, these databases write to a standard non-clustered EBS volume(s). Disaster recovery can be provided by replication of the physical SAN or the logical database to a second availability zone. Note we can also perform logical replication within the same availability zone as well.
   
 ![RDS Multi AZ EBS](images/pic2_az_ebs.jpg "Figure 2. RDS Multi AZ EBS")
-  
 
-Cloud native databases are designed from the ground up to utilise cloud features that are generally only available on the cloud. Amazon Aurora Postgres and Amazon Aurora MySQL (both of which are still part of the RDS family) can be considered a hybrid cloud native database offering. Aurora decouples the compute from the storage layer. The storage layer has extra efficiencies, safe guards and utilises multiple AZs to enhance high availability. 
+Cloud native databases are designed from the ground up to utilise cloud features that are generally only available on the cloud. Amazon Aurora Postgres and Amazon Aurora MySQL (both of which are still part of the RDS family) can be considered a hybrid cloud native database offering. Aurora decouples the compute from the storage layer. The storage layer has extra efficiencies and safe guards, and it utilises multiple AZs to enhance high availability. 
 
-As depicted below Amazon Aurora RDS writes to a clustered proprietary storage volume that spans across all 3 availability zones where 6 copies of the data will be present. The data is striped such that an Aurora database can be stood up for disaster recovery at any time in any availability zone within the same Region with no further replication or overhead. 
+As depicted below, Amazon Aurora RDS writes to a clustered proprietary storage volume that spans across all 3 availability zones where 6 copies of the data will be present. The data is striped such that an Aurora database can be stood up for disaster recovery at any time in any availability zone within the same Region with no further replication or overhead. 
   
 ![RDS Multi AZ Clustered](images/pic2_az_clustered.jpg "Figure 3. RDS Multi AZ Clustered")
   
 ## Amazon RDS database Transaction Logging
-Database engines journal change using their own internal tracking sequence. This internal change or sequence number can also be used as the target to restore databases or derive the clock time to restore a database if needed. In RDS Oracle this is known as the System Change Number (SCN) and other RDS Engines it's referred to as Log Sequence Number (LSN). For a ZDLDR solution the SCN or LSN for a database would match prior to the disaster and after as well as the data.
+
+Database engines journal change using their own internal tracking sequence. This internal change or sequence number can also be used as the target to restore databases or derive the clock time to restore a database if needed. In RDS Oracle this is known as the System Change Number (SCN), and in other RDS Engines it's referred to as Log Sequence Number (LSN). For a ZDLDR solution, the SCN or LSN for a database would match prior to the disaster and after as well as the data.
   
 | Database Engine            | Internal Change Tracking   | Database Change log  |
 |----------------------------|----------------------------|----------------------|
@@ -66,13 +69,11 @@ Database engines journal change using their own internal tracking sequence. This
 | Amazon RDS for Oracle      | System Change Number (SCN) | Redo Log             |
 | Amazon RDS for SQL Server  | Log Sequence Number (LSN)  | Transaction Log      |
 
-
-
-Cloud enabled databases capture all changes in logs also known as transaction, binary or redo logs depending on the database engine. These logs are generally [write ahead logs  (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) so all data manipulation is first persisted to these logs then the underlying database files using a process known as check pointing. This provides a mechanism for a database to roll forward all SCN or LSN changes in the WAL(s) and recover its underlying files to be consistent after an ungraceful outage or server crash. Though any inflight transactions would be rolled back as they were not committed, this is a generally accepted model amongst cloud enabled database vendors and applications which results in zero data Loss. This is depicted below in Figure 4.
+Cloud enabled databases capture all changes in logs also known as transaction, binary or redo logs depending on the database engine. These logs are generally [write ahead logs (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) so all data manipulation is first persisted to these logs then the underlying database files using a process known as check pointing. This provides a mechanism for a database to roll forward all SCN or LSN changes in the WAL(s) and recover its underlying files to be consistent after an ungraceful outage or server crash. Though any inflight transactions would be rolled back as they were not committed, this is a generally accepted model amongst cloud enabled database vendors and applications, which results in zero data Loss. This is depicted below in Figure 4.
   
 ![RDS crash recovery](images/pic5_recovery_rds.jpg "Figure 4. RDS crash recovery")
   
-RDS Cloud Native databases namely Amazon Aurora uses a clustered log structured distributed storage system. This means once a change has occurred in the database, the log records are sent to the storage tier and added to an in memory queue. The database is then freed from any other overhead regarding management of these records. It falls to the Storage tier to take responsibility for persisting those records to disk and data page updates to reflect the change. As there is no transaction log or WAL as such on the database tier, the crash recovery phase is minimal when recovering from an ungraceful shutdown or crash. The data on disk is always upto date or log records to recreate current images exist on disk to be applied in parallel and asynchronously this results in Zero Data Loss. This is depicted below in Figure 5. It should also be noted Auroras database working memory area called a page cache is also decoupled from the database so it can independently survive a database crash and be reused once the database is back.
+RDS Cloud Native databases, namely Amazon Aurora, use a clustered log structured distributed storage system. This means once a change has occurred in the database, the log records are sent to the storage tier and added to an in-memory queue. The database is then freed from any other overhead regarding management of these records. It falls to the Storage tier to take responsibility for persisting those records to disk and data page updates to reflect the change. As there is no transaction log or WAL as such on the database tier, the crash recovery phase is minimal when recovering from an ungraceful shutdown or crash. The data on disk is always up-to-date or log records to recreate current images exist on disk to be applied in parallel and asynchronously this results in Zero Data Loss. This is depicted below in Figure 5. It should also be noted Auroras database working memory area, called a page cache, is also decoupled from the database so it can independently survive a database crash and be reused once the database is back.
   
 ![Aurora crash recovery](images/pic6_recovery_aurora.jpg "Figure 5. Aurora crash recovery")
   
