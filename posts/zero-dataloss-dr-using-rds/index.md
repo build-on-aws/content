@@ -145,7 +145,7 @@ Logical replication can be:
  
 ## Database Support for Logical Synchronous Replication
 
-We can see below which database engines support SYNC and SEMISYNC replication so therefore potentially an RPO 0 depending on the replication type. Note if using Oracle RDS Custom we could setup a similar setup to emulate SEMI-SYNC if needed.
+We can see below which database engines support SYNC and SEMISYNC replication so therefore potentially an RPO 0 depending on the replication type. Note if using Oracle RDS Custom we could create a similar setup to emulate SEMI-SYNC if needed.
 
 | Database Engine              | Storage Sub System | Multi AZ SAN Physical Replication Support (SYNC) | Multi AZ DB Replica Logical Replication Support (SYNC) | Multi AZ DB Replica Logical Replication Support (SEMI-SYNC)  |
 |------------------------------|--------------------|--------------------------------------------------|--------------------------------------------------------|--------------------------------------------------------------|
@@ -159,13 +159,13 @@ We can see below which database engines support SYNC and SEMISYNC replication so
 | Amazon RDS Custom Oracle     | Single AZ Striped  | No                                               | Yes                                                    | Yes                                                          |
 | Amazon RDS Custom SQL Server | Single AZ Striped  | Yes                                              | Yes                                                    | No                                                           |
 
-It's worth stating the database edition can impact what choices are available, for RDS Oracle logical replicas are only available using enterprise edition. For other Amazon engines including SQL Server logical replicas are available under both standard and enterprise editions.
+It's worth stating the database edition can impact what choices are available, as RDS Oracle logical replicas are only available using enterprise edition. Other Amazon engines including SQL Server logical replicas are available under both standard and enterprise editions.
 
-We should also note that logical and physical DR databases are not mutually exclusive. We could have both a logical replica(s) and a Multi AZ physical copy for the same source database and in fact this may provide a more complete DR setup.
+We should also note that logical and physical DR databases are not mutually exclusive. We could have both a logical replica(s) and a Multi AZ physical copy for the same source database, and in fact this may provide a more complete DR setup.
 
 ## RDS Custom for Oracle and SQLServer
 
-Amazon RDS provides a lower level offering called RDS Custom for database engines Oracle and SQLServer. With this offering we gain access to the underlying compute servers o/s. Being able to access the compute also allows us to make customisations to the RDS Engine and its configuration not possible under normal RDS. With regard to disaster recovery the ability to configure synchronous logical replication for Oracle is relevant for us as a ZDLDR Solution. RDS Custom also gives SQLServer the ability for physical synchronous Multi AZ configurations which is not possible under standard RDS, but this won't protect against disk corruptions.
+Amazon RDS provides a lower level offering called RDS Custom for database engines Oracle and SQLServer. With this offering, we gain access to the underlying compute servers o/s. Being able to access the compute also allows us to make customisations to the RDS Engine and its configuration not possible under normal RDS. With regard to disaster recovery the ability to configure synchronous logical replication for Oracle is relevant for us as a ZDLDR Solution. RDS Custom also gives SQLServer the ability for physical synchronous Multi AZ configurations which is not possible under standard RDS, but this won't protect against disk corruptions.
 
 ## Disaster Blast Radius
 
@@ -179,31 +179,31 @@ Not all failures require disaster recovery on Amazon RDS. For an RDS database th
 | KMS        | keys to support database encryption    |
 | S3         | storage to support  Database backups   |
 
-Let's refer to this as Level 1, a failure at Level 1 should not require disaster recovery in general, but may invoke it for a faster recovery if using a Multi AZ is setup. There should be zero data loss as each of these services is generally self-healing or highly redundant. 
+Let's refer to this as Level 1. A failure at Level 1 should not require disaster recovery in general, but may invoke it for a faster recovery if using a Multi AZ setup. There should be zero data loss as each of these services is generally self-healing or highly redundant. 
 
-EBS volumes where our database s/w and data is stored is redundant and highly available, but there is an edge case where it could be susceptible to disk corruption. With modern disk drives, implicit integrity checks by the database software, operating systems and actual drives themselves this should be considered very rare, but still a possibility. The ability to deal with disk corruption will form a crucial role in achieving a ZDLDR solution.
+EBS volumes where our database s/w and data is stored is redundant and highly available, but there is an edge case where it could be susceptible to disk corruption. With modern disk drives, implicit integrity checks by the database software, operating systems, and actual drives themselves, this should be considered very rare, but still a possibility. The ability to deal with disk corruption will form a crucial role in achieving a ZDLDR solution.
 
 In general a Level 1 failure should not result in potential data loss unless there is a disk corruption, but even disk corruption to some degree can be minimised depending on how Multi AZ copies or replicas are created.
 
-The next level of failure would be an entire availability zone failure, let's call this a failure at Level 2. A Level 2 failure would need a disaster recovery site to continue the operation of the database service. If using a Multi AZ database setup then there should be no data loss for synchronously, semi-synchronously or synchronously-clustered replicated databases. For asynchronously replicated database there could be some lag and potential data loss. For semi-synchronously replicated databases there should be zero dataloss if no further impacting issue on the site that has confirmed receipt of the changes. If there is no multi AZ RDS database then it's also possible to use backups to reinstate the database service but these could be upto 5 minutes behind the lost site.
+The next level of failure would be an entire availability zone failure. Let's call this a failure at Level 2. A Level 2 failure would need a disaster recovery site to continue the operation of the database service. If using a Multi AZ database setup, then there should be no data loss for synchronously, semi-synchronously or synchronously-clustered replicated databases. For asynchronously replicated database there could be some lag and potential data loss. For semi-synchronously replicated databases there should be zero dataloss if no further impacting issue on the site that has confirmed receipt of the changes. If there is no multi AZ RDS database, then it's also possible to use backups to reinstate the database service, but these could be up to 5 minutes behind the lost site.
 
-The next level of failure would be loss of an entire region(s), let's call this a failure at Level 3. A Level 3 failure always has the potential for data loss, as database replication across regions will most likely be asynchronous due to the distances data must travel to be replicated. Multi region backups will lag even further behind the live Region as well. We could possibly assume an RPO of minutes for cross region DR, though this is dependent on speed, distance and database load activity.
+The next level of failure would be loss of an entire region(s). Let's call this a failure at Level 3. A Level 3 failure always has the potential for data loss, as database replication across regions will most likely be asynchronous due to the distances data must travel to be replicated. Multi region backups will lag even further behind the live Region as well. We could possibly assume an RPO of minutes for cross region DR, though this is dependent on speed, distance, and database load activity.
 
-The last level of failure would be an entire AWS outage of all regions let's call this a Level 4 failure. This should be extremely rare but can be mitigated by a hybrid or multi cloud DR strategy. There would also be a higher likelihood of data loss due to such replication being asynchronous. Also for Amazon RDS this would only be supported using a RDS Custom Engine as it would require low level customisations for such DR that only the Custom offering of RDS supports. Though regular RDS could take manual backups and push these to a target environment as well but the RPO could be very high for that.
+The last level of failure would be an entire AWS outage of all regions. Let's call this a Level 4 failure. This should be extremely rare but can be mitigated by a hybrid or multi cloud DR strategy. There would also be a higher likelihood of data loss due to such replication being asynchronous. Also for Amazon RDS this would only be supported using a RDS Custom Engine as it would require low level customisations for such DR that only the Custom offering of RDS supports. Regular RDS could take manual backups and push these to a target environment as well, but the RPO could be very high for that.
   
 ![Disaster Blast Radius](images/pic12_disaster_blast_radius.jpg "Figure 8. Disaster Blast Radius")
   
-It should be evident that a true ZDLDR solution is only possible at a Level 1 and Level 2 events as the other Levels utilise asynchronous replication. 
+It should be evident that a true ZDLDR solution is only possible at a Level 1 and Level 2 events, as the other levels utilise asynchronous replication. 
 
 ## Architecting for Zero Data Loss Conclusions
 
-Now we know how Amazon RDS databases work and what options are available we can define the possible solutions for architecting a ZDLDR solution. For Amazon RDS databases the DR copy must be a logical synchronous or semi-synchronous replica to cater for edge case disk corruption issues. For Amazon Aurora databases ZDLDR is there out of the box due to its unique cloud native storage layer.
+Now we know how Amazon RDS databases work and what options are available we can define the possible solutions for architecting a ZDLDR solution. For Amazon RDS databases, the DR copy must be a logical synchronous or semi-synchronous replica to cater for edge case disk corruption issues. For Amazon Aurora databases ZDLDR is there out of the box due to its unique cloud native storage layer.
 
-For Oracle Using Amazon RDS Custom there is support for logical synchronous replication and therefore ZDLDR can be achieved.
+For Oracle Using Amazon RDS Custom, there is support for logical synchronous replication and therefore ZDLDR can be achieved.
 
-We can only achieve ZDLDR at level 1 single AZ or level 2 multi AZ events as these are the only events that are either self-healing or support synchronous replication. Multi Region replication will usually be asynchronous due to large distances we must replicate across.
+We can only achieve ZDLDR at level 1 single AZ or level 2. Multi AZ events as these are the only events that are either self-healing or that support synchronous replication. Multi Region replication will usually be asynchronous due to large distances we must replicate across.
 
-Putting all of this together we can derive which RDS configuration will support ZDLDR as detailed in the table below.
+Putting all of this together, we can derive which RDS configuration will support ZDLDR as detailed in the table below.
 
 | Engine                          | Zero Dataloss Disaster Recovery                                                                                                 |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
@@ -222,13 +222,13 @@ Putting all of this together we can derive which RDS configuration will support 
 
 ## Architecting for Near Zero Data Loss
 
-The purpose of this article is architecting for ZDLDR, but we can reduce the likelihood of data loss for those Engines that do not support a logical synchronous or semi-synchronous replica or run on Amazon Aurora. Using a Multi AZ with one standby replica. This would create a defence against disaster with the Multi AZ SAN copy being used in the majority of DR scenarios. The replica would exist to support edge case disk corruption with the acceptance it will run ASYNC so could lag behind, but even so it would provide extra recoverability options and also potentially provide the opportunity to off load reporting if used as a read replica. Databases using this setup would have the protection of 3 AZ's providing further protection against disaster. This is similar to semi-synchronous replication supported by RDS MySQL and RDS Postgres but you have then benefit of both types of DR SAN and DB replication supporting your HA. Though the SAN replicated site won't protect against disk corruption it could be used to reinstate data that is not corrupt into the DB replicated database using database native export tools.
+The purpose of this article is architecting for ZDLDR, but we can reduce the likelihood of data loss for those engines that do not support a logical synchronous or semi-synchronous replica or run on Amazon Aurora. Using a Multi AZ with one standby replica would create a defence against disaster with the Multi AZ SAN copy being used in the majority of DR scenarios. The replica would exist to support edge case disk corruption with the acceptance it will run ASYNC, so could lag behind. Even so, it would provide extra recoverability options and also potentially provide the opportunity to offload reporting if used as a read replica. Databases using this setup would have the protection of 3 AZs, providing further protection against disaster. This is similar to semi-synchronous replication supported by RDS MySQL and RDS Postgres, but you have the benefit of both types of DR SAN and DB replication supporting your HA. Though the SAN replicated site won't protect against disk corruption, it could be used to reinstate data that is not corrupt into the DB replicated database using database native export tools.
   
 ![3 way AZ RDS Replication](images/pic14_3_way_az.jpg "Figure 9. 3 way AZ RDS Replication")
   
 ## Summary
 
-Architecting for Zero Data Loss is certainly a possibility utilising Amazon RDS, due to edge case disk corruption only logical synchronous replicas, semi-synchronous replicas or Amazon Aurora can be considered to cater for this. The cloud enabled enterprise class database giants that are Oracle and SQL Server both support this using one extra DR Site. RDS MySQL and RDS Postgres also support ZDLDR under most circumstances but requires 2 replica DR Sites. But what truly stands out is the hybrid cloud native offering from Amazon Aurora which is out of the box ready to support zero data loss disaster recovery from day 0 across 3 sites. If a ZDLDR solution can't be used then we can achieve a near ZDLDR solution utilising Multi AZ replication with an additional replica across all 3 AZs.
+Architecting for Zero Data Loss is certainly a possibility utilising Amazon RDS, due to edge case disk corruption only logical synchronous replicas, semi-synchronous replicas, or Amazon Aurora can be considered to cater for this. The cloud enabled enterprise class database giants that are Oracle and SQL Server both support this using one extra DR Site. RDS MySQL and RDS Postgres also support ZDLDR under most circumstances, but they require 2 replica DR Sites. But what truly stands out is the hybrid cloud native offering from Amazon Aurora, which is out of the box ready to support zero data loss disaster recovery from day 0 across 3 sites. If a ZDLDR solution can't be used, then we can achieve a near ZDLDR solution utilising Multi AZ replication with an additional replica across all 3 AZs.
 
 ## Further Reading and References
 
