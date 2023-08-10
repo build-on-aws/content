@@ -41,6 +41,7 @@ Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
 
 | Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
+| S02E25 | Hosting a REACT app on AWS, Star Wars quotes generator - PART 4 | 2023-08-10  | [Show Notes](/livestreams/build-on-weekly/2023-08-10) |
 | S02E24 | Build Your Own Recommendation Engine on AWS - PART 1 | 2023-08-03  | [Show Notes](/livestreams/build-on-weekly/2023-08-03) |
 | S02E23 | Adding some REACT to our Star Wars quotes API | 2023-07-27  | [Show Notes](/livestreams/build-on-weekly/2023-07-27) |
 | S02E22 | Building Resilient Architecture | 2023-07-13  | [Show Notes](/livestreams/build-on-weekly/2023-07-13) |
