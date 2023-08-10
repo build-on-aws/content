@@ -27,21 +27,25 @@ So let's dive in!
 
 ## "It depends."
 
-Imagine you ask the following question to a senior developer, architect, or consultant: 
-
-"What is better, serverless or containers?"
+Imagine you ask the following question to a senior developer, architect, or consultant: "What is better, serverless or containers?"
 
 Chances are you'll hear one of the most infamous lines in software engineering: "It depends." 
 
-Now let's see if LLMs are going to replace their job:
+Now let's see if LLMs can do any better. Let's simply ask:
+
+```text
+What's better, serverless or containers?
+```
 
 >Note: For this post I'm using [Anthropic Claude](https://www.anthropic.com/index/claude-2), but you can apply this to any other LLM, including [OpenAI's GPT](https://openai.com/gpt-4), [Google Bard](https://bard.google.com/), [Amazon Titan](https://aws.amazon.com/bedrock/titan), and many more.
 
 ![Outtake of a conversation with the LLM, where it responds to the question "What's better, serverless or containers?" with a very generic response, including the phrase "[it] depends"](images/generic.png)
 
-Looking at the response, we can see that, while the AI already tries to be helpful, listing some generic pros and cons of the options, it ultimately gave me the same response: "The best option depends [...]". And I must admit that I have said this *way* too often myself (sorry). Sure, it's true, but it's also obvious. And frustrating. 
+We can see that, while the AI already tries to be helpful, listing some generic pros and cons, it ultimately gave me the same response: "The best option depends [...]". 
 
-In software development there's rarely a universal right or wrong, better or worse. We often tend to speak of "best practices", but these always come with a context. For example, the "best practice" of data normalization makes a lot of sense in a relational database, but can create some serious headache when you try to apply it to some NoSQL databases.
+Sure, it's true, but it's also obvious. And frustrating. 
+
+In software development there's rarely a universal right or wrong. We often tend to speak of "best practices", but these always come with a context. For example, the "best practice" of data normalization makes a lot of sense in a relational database, but can create some serious headache when you try to apply it to some NoSQL databases.
 
 The role of an architect—and this doesn't necessarily mean a person with "Architect" in their title, it can be one of the many roles you take on as a developer—is to figure out *what* exactly something depends on.
 
