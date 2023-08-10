@@ -247,10 +247,13 @@ AWS provides the following Managed Domain Lists, in the Regions where they are a
 
 * **AWSManagedDomainsAmazonGuardDutyThreatList** – Domains associated with DNS security threats, such as malware, command and control, or cryptocurrency related activity, sourced from Amazon GuardDuty.
 
-AWS Managed Domain Lists cannot be downloaded or browsed. To protect intellectual property, you can't view or edit the individual domain specifications within the AWS Managed Domain Lists. A real benefit of this restriction is that it also helps  prevent malicious users from designing threats that specifically circumvent published lists.
+AWS Managed Domain Lists cannot be downloaded or browsed. To protect intellectual property, you can't view or edit the individual domain specifications within the AWS Managed Domain Lists. While this may seem a bit restrictive, the real benefit of is that it also helps prevent malicious users from designing threats that specifically circumvent published lists. The reality of it all is that you don't want these lists to be published.
 
+So, in this section we are going to remove some of the manual work on our part, and not write a custom list.  Instead, we will use the managed domain lists, that are created and maintained by AWS, to filter egress DNS queries. 
 
-In this section we will use the managed domain lists to filter egress DNS queries. If we check the result of the `testergress` command in the EC2 session, we observe that currently DNS resolution of domains within the Botnet, Malware, and Amazon GuardDuty threat lists are allowed. The `testegress` script uses control/test domains managed by AWS which can be used for verifying the response of a rule configured to match on a mananged list.
+Let's return to our test script and see the result of the `testergress` command again.  By running the script in the EC2 session again, we observe that DNS resolution of domains within the Botnet, Malware, and Amazon GuardDuty threat lists are currently allowed. 
+
+> **Note:** The `testegress` script uses control/test domains managed by AWS which can be used for verifying the response of a rule configured to match on a mananged list.
 
  In the next steps, we will create a new rule group with rules that block the managed domain lists. 
 
