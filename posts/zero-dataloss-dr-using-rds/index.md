@@ -197,7 +197,7 @@ It should be evident that a true ZDLDR solution is only possible at a Level 1 an
 
 ## Architecting for Zero Data Loss Conclusions
 
-Now we know how Amazon RDS databases work and what options are available we can define the possible solutions for architecting a ZDLDR solution. For Amazon RDS databases, the DR copy must be a logical synchronous or semi-synchronous replica to cater for edge case disk corruption issues. For Amazon Aurora databases ZDLDR is there out of the box due to its unique cloud native storage layer.
+Now we know how Amazon RDS databases work and what options are available we can define the possible solutions for architecting a ZDLDR solution. For Amazon RDS databases, the DR copy must be a logical synchronous or semi-synchronous replica to cater for edge case disk corruption issues. For Amazon Aurora databases, ZDLDR is available out of the box due to their unique cloud native storage layer.
 
 For Oracle Using Amazon RDS Custom, there is support for logical synchronous replication and therefore ZDLDR can be achieved.
 
