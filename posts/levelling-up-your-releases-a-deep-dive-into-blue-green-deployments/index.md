@@ -51,9 +51,12 @@ The good news is that AWS provides a number of fully managed blue/green deployme
 If you are getting started with a container-based application, [AWS App Runner](https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html) automates deployment and will deploy a new version using blue/green under the hood. 
 
 If you are using Amazon ECS (container) or AWS Lambda (serverless) for your application, deployments can be managed using [AWS CodeDeploy](https://aws.amazon.com/codedeploy/). The integration allows you to automate blue/green deployment for both [ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html) and [Lambda](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/automating-updates-to-serverless-apps.html). This includes:
-    * Configuration on how traffic is shifted. For example, you can shift traffic to the new version all at once or test using a percentage of production traffic, also known as *canary releases*. 
-    * Integration to your CI/CD pipeline such as [Github Actions](https://github.com/aws-samples/aws-codedeploy-github-actions-deployment) or [Amazon CodePipeline.](https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodeDeploy.html) 
-    * Test automation using [lifecycle event hooks](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs). For example, you can consider incorporating some smoke tests into the `BeforeAllowTraffic` hook. 
+
+* Configuration on how traffic is shifted. For example, you can shift traffic to the new version all at once or test using a percentage of production traffic, also known as *canary releases*. 
+    
+* Integration to your CI/CD pipeline such as [Github Actions](https://github.com/aws-samples/aws-codedeploy-github-actions-deployment) or [Amazon CodePipeline.](https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodeDeploy.html) 
+    
+* Test automation using [lifecycle event hooks](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs). For example, you can consider incorporating some smoke tests into the `BeforeAllowTraffic` hook. 
 
 ![Blue/green deployment using Amazon CodeDeploy](images/blue-green-codedeploy.png)
 
