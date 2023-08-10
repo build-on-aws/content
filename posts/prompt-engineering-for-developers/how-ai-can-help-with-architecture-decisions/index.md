@@ -90,7 +90,7 @@ Before diving into the interaction with the LLM, we need to lay the groundwork. 
 
 An experienced software architect wouldn't directly jump to a conclusion based on general assumptions. They would first try to understand the specific requirements by asking questions.
 
-We can instruct the AI to do exactly this, by defining its role and telling it very specifically what we want it to do. We don't want the LLM to come up with anything just yet, so we tell it to just respond with "OK".
+We can instruct the AI to do the same, by defining its role and telling it very specifically what we want it to do. We don't want the LLM to come up with anything just yet, so we tell it to just respond with "OK".
 
 Let's start the conversation with the following prompt: 
 
@@ -151,7 +151,7 @@ Here, the AI asks some interesting questions, some of which me might not have th
 
 ### Iterate and Refine
 
-We may not have answers to all of the questions yet. However, we can start by answering them as best as we can. Once that's done, we can ask it to dive even deeper by asking more questions, by simply repeating the following phrase at the end of the prompt: "Please continue asking clarifying questions. Don't summarize or conclude anything. Ask the questions in a numbered list.
+We may not have answers to all of the questions yet. However, we can start by answering them as best as we can. Once that's done, we can prompt the model to dive even deeper by asking more questions, by simply repeating the following phrase at the end of the prompt: "Please continue asking clarifying questions. Don't summarize or conclude anything. Ask the questions in a numbered list.
 
 After one or two more iterations, the questions usually indicate a thorough understanding of the context, so we can go to the next step and ask the model to create a list of the collected requirements using the following prompt:
 
@@ -200,7 +200,7 @@ Are there any other deployment models that you would consider for this specific 
 
 I've spared you the details in the screenshot, but the model diligently listed some options, like [AWS Outposts](https://aws.amazon.com/outposts) for on-premises deployment, that clearly weren't a good fit for our application.
 
-However, it also recommended [AWS App Runner](https://aws.amazon.com/apprunner), a fully managed container service that allows us to deploy containers without all the operational overhead in a self-managed environment. This could, in fact, be a viable alternative. It's something we haven't even considered!
+However, it also recommended [AWS App Runner](https://aws.amazon.com/apprunner), a fully managed container service that allows us to deploy containers without all the operational overhead that we'd have to deal with in a self-managed environment. This could, in fact, be a viable alternative. It's something we haven't even considered!
 
 ## Making a Decision
 
@@ -223,11 +223,11 @@ By combining AI insights with human expertise, we can make a well-informed decis
 
 ### The Architecture Decision Record
 
-Whenever you make an architectural decision, I recommend documenting the process. While the *what* and *how* often remains visible over the lifetime of an application, the *why we chose this option*, including *why we didn't choose the alternative*, may get lost over time. 
+Whenever you make an architectural decision, I recommend documenting the process. While the *what* and *how* often remains visible over the lifetime of an application, *why we chose this option* and *why we didn't choose the alternative* may get lost over time. 
 
-An **Architecture Decision Record** is a document that captures all the necessary information, including the context, the options, the decision, and the justification, so that the team can refer back to it at any point in time, potentially saving a lot of guesswork and going through the entire process again.
+An **Architecture Decision Record** is a document that captures all the necessary information, including the context, the options, the decision, and the reasoning that led us to this decision. Any future developer can refer back to this document, potentially saving a lot of guesswork.
 
-Let's ask for it, using the following prompt:
+Let's ask for this document, using the following prompt:
 
 ---
 
@@ -238,7 +238,7 @@ Ok, we'll use AWS App Runner. Create a brief [or detailed, or formal] architectu
 
 ![Screenshot of the continued conversation with Claude V2, with an architecture decision record](images/decision_record.png)
 
-To keep a complete track record, I recommend attaching the entire conversation to this document's appendix.
+To keep a complete track record, I recommend attaching a copy of the entire conversation with the LLM to this document's appendix.
 
 ## Conclusion and Next Steps
 
