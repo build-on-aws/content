@@ -37,7 +37,7 @@ If you have any ideas, suggestions, comments. Feel free to email us at [build-on
 
 Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check us out on [twitch.tv/aws](https://twitch.tv/aws) 👇
 
-_|| [![AWS Twitch Button](images/twitch_button_small.jpg)](https://twitch.tv/aws)
+<img src="images/twitch_button_small.jpg" style="margin-left: 0" alt=""/>
 
 
 ## Show notes
