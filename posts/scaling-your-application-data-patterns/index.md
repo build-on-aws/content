@@ -87,7 +87,7 @@ While the Command Query Responsibility Segregation (CQRS) pattern provides a com
 
 * **Cost Impacts**: Operating distinct AWS services for command and query operations might elevate costs. It's essential to evaluate the financial trade-offs against the performance and scalability benefits.
 
-## Using the Event Sourcing pattern to transition from monolith to microservices 
+## Transitioning from monolith to microservices using the Event Sourcing pattern
 
 Event Sourcing pattern is also commonly applied alongside CQRS. With Event Sourcing, the application’s state are all stored as a sequence of events. These events are typically sent to a messaging service in order for services to consume the events. This has significant benefits as these events can be consumed by multiple microservices in parallel, and allowing them to be built and deployed independently.  
 
