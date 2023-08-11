@@ -39,7 +39,7 @@ In a typical relational database, all read and write requests go to the primary 
 
 Using RDS read replicas represents a practical and relatively simple approach to implementing some aspects of the CQRS pattern. In the context of the online store, it offers an attractive option for enhancing performance and scalability without a complete overhaul of the existing system. While not as comprehensive or flexible as a full CQRS implementation, read replicas can be a valuable step in evolving an application's architecture to better meet growing demands.
 
-Note: if you are leveraging Aurora as your primary database, it has a [local write forwarding](https://aws.amazon.com/blogs/database/local-write-forwarding-with-amazon-aurora/)feature. This means that your implementation can be further simplified, as your writes can be directed at your read replicas without impacting the read performance.
+Note: if you are leveraging Aurora as your primary database, it has a [local write forwarding](https://aws.amazon.com/blogs/database/local-write-forwarding-with-amazon-aurora/) feature. This means that your implementation can be further simplified, as your writes can be directed at your read replicas without impacting the read performance.
 
 ### Moving beyond a single database service
 
