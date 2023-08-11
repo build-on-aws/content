@@ -18,7 +18,7 @@ images:
   background: ./images/BOGAI_LogoCondensed.webp
 ---
 
-![Image of Emily explaining something very complicated to a confused Darko](images/bogai-header.webp)
+![Headshots of the hosts, Emily and Darko](images/emily-darko-header.webp)
 
 You may have heard about Generative AI and you want to see it in action. You want to know if there is substance behind the hype. Maybe you want to see if there is anything real behind the claims, and you wanna see how far it can go. Well then - WELCOME 👋 Welcome to the Build on Generative AI show. Your favorite weekly [Twitch](https://twitch.tv/aws) show, about all things Generative AI. Every week we look at new technical and scientific patterns on AWS, inviting guest speakers to demo their work and show us how they built something new to improve the state of Generative AI.
 
@@ -49,7 +49,7 @@ Come learn live with us! We stream every Monday at 9am Pacific/Noon ET.
 | S01E08 | Hyper Parameter Tuning | 2023-03-20 | Joao | [Link to Recording](https://www.twitch.tv/videos/1874381282) |
 | S01E09 | Generative AI as a Service | 2023-03-27 | Joao Moura | [Link to Recording](https://www.twitch.tv/videos/1779030313) |
 | S01E10 | Foundation Models on SagemMaker | 2023-04-03 | Arun Shankar | [Link to Recording](https://www.twitch.tv/videos/1783794727) |
-| S01E11 | Retrieval Augmented Generation | 2023-04-10 | Emily Webber | [Link to Recording](https://www..tv/videos/1874397501) |
+| S01E11 | Retrieval Augmented Generation | 2023-04-10 | Emily Webber | [Link to Recording](https://www.twitch.tv/videos/1874397501) |
 | S01E12 | Stable Diffusion on Trainium | 2023-04-17 | KC Tung | [Link to Recording](https://www.twitch.tv/videos/1887068591) |
 | S01E13 | Open Source LLM Evaluation with HELM | 2023-04-24 | Gili Nachum | [Link to Recording](https://www.twitch.tv/videos/1802472662) |
 | S01E14 | AI Code Generation with Amazong CodeWhisperer | 2023-05-01  | David Ernst | [Link to Recording](https://www.twitch.tv/videos/1838758252) |
