@@ -51,10 +51,9 @@ Conversely, [Amazon Aurora](https://aws.amazon.com/rds/aurora/) can be employed 
 
 You can find a sample implementation of this architecture [here on Serverless Land](https://serverlessland.com/repos/cqrs-pattern-sam).
 
-
 ### Variations on CQRS 
 
-#### DynamoDB and Redshift
+#### Using Amazon Redshift
 
 Building on our exploration of CQRS with DynamoDB and Aurora, let's delve into a slightly different implementation. This variant combines the write capabilities of DynamoDB with the powerful querying strength of Amazon Redshift. It serves as an effective strategy, especially when analytical processing and large-scale querying come into play.
 
@@ -65,7 +64,7 @@ While Aurora is proficient, Amazon Redshift provides a distinct edge for analyti
 
 This variant of the CQRS pattern, leveraging DynamoDB for writes and Redshift for queries, can be the secret sauce for applications that lean heavily on data analytics. While the initial setup demands thoughtful planning, the rewards in scalability, performance, and analytical depth make it a worthy consideration.
 
-#### Amazon S3 and Athena
+#### Using Amazon S3 and Athena
 
 There is another avenue that's particularly enticing for those dealing with vast amounts of unstructured or semi-structured data and heavy analytical needs: leveraging Amazon S3 and Athena.
 
