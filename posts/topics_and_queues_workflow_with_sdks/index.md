@@ -51,10 +51,11 @@ git clone https://github.com/awsdocs/aws-doc-sdk-examples.git
 ```
 
 The easiest way to find the topics and queues workflow for a particular language is to use the [code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html) website page.
-The link to the code for each language is shown in the "Note" on the panel for that language. The workflow code is in its own folder which contains a README with instructions for building and running the code.
+The link to the GitHub code for each language is shown in the "Note" on the panel for that language. You can use the link to find the folder
+in your downloaded code. The folder contains a README with instructions for building and running the code.
 
 The code is structured to allow you to choose different options, which follow different paths in the code. 
-This allows you to play with different options and see what is required to implement a particular option. 
+This allows you to play with different scenarios and see what is required to implement a particular option. 
 
 To give you an idea of what is contained in the application, I have included an example of the command-line interface.
 
@@ -89,7 +90,7 @@ If you chose a FIFO topic, the application automatically adds a “.fifo” suff
 #### Create two SQS queues
 
 For this example, 2 queues are created to allow you to compare messages in the 2 queues. 
-You can see that only the appropriate messages are sent to a filtered queue. All messages will be delivered to the non-filtered queue.
+You can see that only the appropriate messages are sent to a filtered queue. All messages will be delivered to a non-filtered queue.
 For non-FIFO queues, the results will be the same for both queues.
 
 ```
