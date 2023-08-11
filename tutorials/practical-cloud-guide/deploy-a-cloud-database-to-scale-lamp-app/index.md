@@ -9,7 +9,7 @@ tags:
     - scaling
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-06-20
+date: 2023-08-11
 ---
 
 In previous tutorials we [deployed a single application on a VPC](https://community.aws/tutorials/practical-cloud-guide/deploy-a-java-application-on-linux?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_detail=lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body). Applications like these are called monolithic applications because all the components are tightly coupled in a single server. Cloud architectures are frequently loosely coupled with application components connected via the network. This tutorial is an update of a [Lightsail workshop](https://www.lightsailworkshop.com/).
@@ -32,7 +32,7 @@ Unlike the tutorial, and in keeping with conventions of the Practical Cloud Guid
 |  🧩 Prerequisites | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/).<br>- AWS credentials: Follow the instructions in [Access Your Security Credentials](https://aws.amazon.com/blogs/security/how-to-find-update-access-keys-password-mfa-aws-management-console/#:~:text=Access%20your%20security%20credentials) to get your AWS credentials<br>-A Cloud9 environment for an [individual](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup-express.html).<br>- AWS CLI V2 [installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).<br>- AWS Lightsail CLI plugin for Linux [installed](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software#install-lightsailctl-on-linux) <br>- A git client: Follow the instructions to [Install Git](https://github.com/git-guides/install-git) for your operating system. |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/sample-php-app)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-08-09                             |
+| ⏰ Last Updated     | 2023-08-11                             |
 
 | ToC |
 |-----|
