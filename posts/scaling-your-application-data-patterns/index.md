@@ -95,7 +95,7 @@ The event sourcing pattern works effectively with the CQRS pattern. Write operat
 
 ### Understanding events using Domain Driven Design (DDD)
 
-The first step in the transition is to understand events. One method is [Event Storming](https://serverlessland.com/event-driven-architecture/visuals/event-storming),  a workshop-based process which involves domain experts and engineers together. As part of a broader disciplined called [Domain Driven Design (DDD)](https://serverlessland.com/event-driven-architecture/visuals/eda-and-ddd), it can provide teams with guidance to many questions when transitioning to an event-driven microservices architecture. This includes how to organise teams and domains, [handling messages between services](https://serverlessland.com/event-driven-architecture/visuals/messages-between-bounded-context) and [developing a shared language](https://serverlessland.com/event-driven-architecture/visuals/ubiquitous-language).
+The first step in the transition is to understand events. One method is [Event Storming](https://serverlessland.com/event-driven-architecture/visuals/event-storming), a workshop-based process which involves domain experts and engineers together. As part of a broader disciplined called [Domain Driven Design (DDD)](https://serverlessland.com/event-driven-architecture/visuals/eda-and-ddd), it can provide teams with guidance to many questions when transitioning to an event-driven microservices architecture. This includes how to organise teams and domains, [handling messages between services](https://serverlessland.com/event-driven-architecture/visuals/messages-between-bounded-context) and [developing a shared language](https://serverlessland.com/event-driven-architecture/visuals/ubiquitous-language).
 
 ### Designing an architecture to handle events
 
@@ -120,11 +120,9 @@ The existing monolithic application can be updated to publish events to the *eve
 
 Once the events are published, multiple services can subsequently consume the events in parallel. They can then replay events from an event store to compute the latest state of the application for their own data stores. Importantly, each service can be built, deployed and scaled independently. 
 
-## Monolith to microservices on AWS
+### Driving innovation and business outcomes
 
-Many AWS customers have successfully used these patterns to grow and drive innovation. Most startups start with a monolith, which suits their needs at the early-stage. 
-
-To scale, engineering teams transition to an event-driven microservices architecture on AWS. One customer example is the Immutable engineering team who authored a [technical blog post](https://engineering.immutable.com/sneak-peek-at-immutables-event-liberation-pipeline-part-1-c646dd6f8b98) outlining their implementation and successful experience with Amazon EventBridge. 
+Many AWS customers have successfully used these patterns to grow and drive innovation. That being said, most startups start with a monolith, which suits their needs at the early-stage due to ease of getting started. However, if you start having multiple teams building and deploying to the same application, velocity can slow down and the risks of incidents may increase due to coupling. As such, engineering teams often transition to an event-driven microservices architecture as they scale. One customer example is the Immutable engineering team who authored a [technical blog post](https://engineering.immutable.com/sneak-peek-at-immutables-event-liberation-pipeline-part-1-c646dd6f8b98) outlining their implementation and successful experience with Amazon EventBridge. 
 
 ## Conclusion
 
