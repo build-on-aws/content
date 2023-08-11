@@ -35,7 +35,7 @@ You can publish and subscribe using Amazon SNS alone. But combining Amazon SNS w
 It pushes to endpoints such as email addresses, mobile application endpoints, or SQS queues. (For a full list of endpoints, see [SNS event destinations](https://docs.aws.amazon.com/sns/latest/dg/sns-event-destinations.html)). 
 With Amazon SQS, messages are received from a queue by polling. With polling, the subscriber receives messages by calling a receive message API. Any code can poll the queue. 
 Also, the messages stay in the queue until you delete them. This gives you more flexibility in how the messages are processed. For example, a consumer may not be able to process a message the first time it is polled. 
-The message is left in the queue for later processing. The point is there are more options for solving a use case. Polling may allow a cleaner solution than push notifications would require.
+The message is left in the queue for later processing. The point is there are more options for solving a use case. Polling may allow a cleaner solution than push notifications.
 
 ## Topics and Queues Workflow Command-line application 
 
