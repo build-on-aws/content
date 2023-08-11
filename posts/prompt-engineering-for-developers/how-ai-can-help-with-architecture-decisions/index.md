@@ -11,7 +11,7 @@ spaces:
     - generative-ai
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
-date: 2023-09-04
+date: 2023-08-11
 showInHomeFeed: true
 ---
 
