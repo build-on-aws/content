@@ -110,7 +110,7 @@ For a holistic solution, consider [Amazon EventBridge](https://aws.amazon.com/ev
 Critically, it provides a replay and archive capability to aid in testing and troubleshooting of issues. Previously, this required creating a complex mechanism for logging and parsing the *event store*, and sending the relevant events back to the *event broker*. Since access to the applications that were producing the events may be difficult, this can provide significant operational challenges.
 ![Amazon EventBridge Reference Architecture](images/eventbridge.png)
 
-To learn more, see [event-driven architectures with Amazon EventBridge the AWS Well-Architected Framework: Serverless Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/event-driven-architectures.html).
+To learn more, see [event-driven architectures with Amazon EventBridge from the AWS Well-Architected Framework: Serverless Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/event-driven-architectures.html).
 
 ### Producing events 
 
