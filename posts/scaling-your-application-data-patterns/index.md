@@ -99,7 +99,7 @@ The first step in the transition is to understand events. One method is [Event S
 
 ### Designing an architecture to handle events
 
-In an event-driven architecture, application components are decoupled between event *producers* and *consumers*. These are intermediated by an *event broker*. Here, a publish-subscribe messaging service such as [Amazon SNS](https://aws.amazon.com/sns/) for fan out, and [Amazon SQS](https://aws.amazon.com/sqs/) to reliably and durably communicate the events to microservices. 
+In an event-driven architecture, application components are decoupled between event *producers* and *consumers*. These are intermediated by an *event broker*. Here, a publish-subscribe messaging service can be used, such as [Amazon SNS](https://aws.amazon.com/sns/) for fan out, and [Amazon SQS](https://aws.amazon.com/sqs/) to reliably and durably communicate the events to microservices. 
 
 In most cases, an *event store* such as Amazon S3 or Amazon DynamoDB is also required. This component stores all historical events which enable replay to the current state.
 
