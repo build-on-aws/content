@@ -4,6 +4,8 @@ description: "Most applications work with data. In this post, you will learn abo
 tags:
     - resilience
     - cqrs
+    - ddd
+    - eventbridge
     - devops
 authorGithubAlias: wirjo
 authorName: Daniel Wirjo
@@ -15,8 +17,6 @@ date: 2023-08-11
 
 |ToC|
 |---|
-
-# Scaling your application: Data patterns to enable reliability and flexibility
 
 ## Introduction
 
@@ -109,8 +109,9 @@ For a holistic solution, consider [Amazon EventBridge](https://aws.amazon.com/ev
 
 Critically, it provides a replay and archive capability to aid in testing and troubleshooting of issues. Previously, this required creating a complex mechanism for logging and parsing the *event store*, and sending the relevant events back to the *event broker*. Since access to the applications that were producing the events may be difficult, this can provide significant operational challenges. 
 
-![EventBridge Reference Architecture](images/eventbridge.jpg)
-[EventBridge Reference Architecture](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/event-driven-architectures.html) from AWS Well-Architected Framework: Serverless Application Lens
+![EventBridge Reference Architecture](images/eventbridge.png)
+
+*Pictured: [EventBridge Reference Architecture from Well Architected: Serverless Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/event-driven-architectures.html)*
 
 ### Producing events 
 
