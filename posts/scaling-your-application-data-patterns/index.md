@@ -60,8 +60,8 @@ Building on our exploration of CQRS with DynamoDB and Aurora, let's delve into a
 
 While Aurora is proficient, Amazon Redshift provides a distinct edge for analytical processing:
 
-* Parallel Querying: It's tailored to dissect complex queries, ensuring comprehensive analytics isn’t bogged down by large datasets.
-* Columnar Storage: This mechanism is particularly efficient for analytical query patterns. Read [this article](https://docs.aws.amazon.com/redshift/latest/dg/c_columnar_storage_disk_mem_mgmnt.html) to understand the advantages of columnar storage for analytical workloads.
+* **Parallel Querying**: It's tailored to dissect complex queries, ensuring comprehensive analytics isn’t bogged down by large datasets.
+* **Columnar Storage:** This mechanism is particularly efficient for analytical query patterns. Read [this article](https://docs.aws.amazon.com/redshift/latest/dg/c_columnar_storage_disk_mem_mgmnt.html) to understand the advantages of columnar storage for analytical workloads.
 
 This variant of the CQRS pattern, leveraging DynamoDB for writes and Redshift for queries, can be the secret sauce for applications that lean heavily on data analytics. While the initial setup demands thoughtful planning, the rewards in scalability, performance, and analytical depth make it a worthy consideration.
 
