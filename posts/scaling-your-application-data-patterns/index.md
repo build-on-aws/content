@@ -107,11 +107,10 @@ In most cases, an *event store* such as Amazon S3 or Amazon DynamoDB is also req
 
 For a holistic solution, consider [Amazon EventBridge](https://aws.amazon.com/eventbridge/). It provides capabilities designed for operating event-driven architectures. It supports filtering and routing to direct events to the right destination without spinning up infrastructure. It provides a schema registry so that engineering teams can easily search and access event structures on a self-service basis. 
 
-Critically, it provides a replay and archive capability to aid in testing and troubleshooting of issues. Previously, this required creating a complex mechanism for logging and parsing the *event store*, and sending the relevant events back to the *event broker*. Since access to the applications that were producing the events may be difficult, this can provide significant operational challenges. 
+Critically, it provides a replay and archive capability to aid in testing and troubleshooting of issues. Previously, this required creating a complex mechanism for logging and parsing the *event store*, and sending the relevant events back to the *event broker*. Since access to the applications that were producing the events may be difficult, this can provide significant operational challenges.
+![Amazon EventBridge Reference Architecture](images/eventbridge.png)
 
-![EventBridge Reference Architecture](images/eventbridge.png)
-
-*Pictured: [EventBridge Reference Architecture from Well Architected: Serverless Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/event-driven-architectures.html)*
+To learn more, see [event-driven architectures with Amazon EventBridge the AWS Well-Architected Framework: Serverless Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/event-driven-architectures.html).
 
 ### Producing events 
 
