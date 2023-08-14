@@ -1,5 +1,5 @@
 ---
-title: Building Private Inter-region Cross-account Commnunication Within AWS
+title: Building Private Inter-region Cross-account Communication Within AWS
 description: Introducing a solution to ebstablish secure private network connectivity between AWS accounts regradless of region (no matter whehter it's same or different regions). The solution enables seamless communication between applications located in different regions and accounts while ensuring low-latency connectivity by keeping the traffic confined within the AWS network.
 tags:
   - networking
