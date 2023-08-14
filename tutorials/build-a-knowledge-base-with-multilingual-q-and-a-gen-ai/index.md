@@ -1,6 +1,6 @@
 ---
 title: "Build your own knowledge base with multilingual Q&A powered by generative AI"
-description: "Use Amazon kendra, Amazon Translate, Amazon Comprehend and Amazon SageMaker JumpStart to build a multilingual knowledge base that can summarize search results"
+description: "Use Amazon kendr, Amazon Translate, Amazon Comprehend and Amazon SageMaker JumpStart to build a multilingual knowledge base that can summarize search results"
 
 tags:
     - ai-ml
