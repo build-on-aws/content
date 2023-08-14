@@ -29,7 +29,6 @@ We are tasked with building a comprehensive observability platform that spans ac
 While conceptually straightforward, the complexity arises from the diverse environments in which these data plane agents operate. They may be situated within the same region as the control plane but housed in distinct AWS accounts. Alternatively, they might share the same account but operate in different regions, or they could span both different regions and different accounts.
 
 Given the stringent latency requirements of our platform, we must ensure that the data flow remains within the AWS network. This requirement is aimed at minimizing latency and reducing error rates, which is very important to the observability experience that our platform aims to provide.
-
 ![observability-overview](./images/01-overview.png "Observability Platform Overview")
 
 ## Solution
@@ -42,13 +41,11 @@ The communication between agents (data plane) and the observability cluster (con
 
 - If a security breach were to occur within observability cluster's network, the one-way communication design limits the extent of the breach. Bad actors cannot use their connection to initiate access into agent's network, reducing the risk of sideways movement by potential attackers
 - With one-way communication, the agents have the control to selectively send data to the observability cluster. This controlled data flow ensures that sensitive information remains within the agent network unless explicitly sent to the cluster. This is particularly important for preserving the confidentiality of data
-
 ![one-way-communication](./images/02-one-way-communication.png "One-way Communication")
 
 In this scenario, the role of the cluster is similar to that of a service provider, as it is responsible for aggregating and storing data from the agents. Conversely, the agents act as service consumers, utilizing the services provided by the cluster. To establish a private and secure connection in such a setup, the optimal choice is to utilize VPC Endpoint backed by PrivateLink. VPC Endpoints work seamlessly, whether the VPCs are in the same account or different accounts, as we expected. 
 
 The following diagram illustrates the setup:
-
 ![cross-account-communication](./images/03-cross-account.png "Cross-account Communication")
 
 ### Inter-region communication
@@ -62,17 +59,15 @@ To establish inter-region communication, we will leverage both VPC Endpoints and
 It's important to note that each VPC Endpoint Service is backed by a proxy (a fleet of instances for high availability). This proxy is responsible for forwarding traffic to the observability cluster in the main region. Since these VPCs are peered, traffic is routed between regions as if they are in the same network. We will take a deeper dive into the configuration and setup of the proxy in an upcoming section of this post.
 
 The following diagram illustrates the setup:
-
 ![inter-region-vpc-peering](./images/04-inter-region-vpc-peering.png "Inter-region with VPC Peering")
 
 Since a full mesh network for the control plane is unnecessary, we don't need to establish peering connections for every VPC pair. For example, there's no requirement to peer the VPCs in `us-east-1` and `ap-southeast-1`. If you do require this full mesh capability, you may prefer the second option, which utilizes the Transit Gateway.
 
-### Transit Gateway
+#### Transit Gateway
 
 In the Transit Gateway approach, we'll deploy a Transit Gateway in each region, with VPCs in that region attached to their respective Transit Gateway. These Transit Gateways from different regions will be peered together. With appropriate routing configurations, resources and workloads in VPCs connected to Transit Gateways can communicate with each other as if they're within the same network, similar to the VPC Peering approach.
 
 The following diagram illustrates the setup:
-
 ![inter-region-tgw](./images/05-inter-region-tgw.png "Inter-region with Transit Gateway")
 
 ### Proxy
@@ -90,7 +85,7 @@ Let's discuss the observability cluster, which exposes three distinct endpoints 
     server_name         metrics.observability.internal;
 
     location / {
-      proxy_pass http:/metrics-alb-123.eu-west-1.elb.amazonaws.com;
+      proxy_pass http://metrics-alb-123.eu-west-1.elb.amazonaws.com;
     }
   }
   ```
@@ -102,7 +97,7 @@ Let's discuss the observability cluster, which exposes three distinct endpoints 
     server_name         logs.observability.internal;
 
     location / {
-      proxy_pass http:/logs-alb-456.eu-west-1.elb.amazonaws.com;
+      proxy_pass http://logs-alb-456.eu-west-1.elb.amazonaws.com;
     }
   }
   ```
@@ -114,7 +109,7 @@ Let's discuss the observability cluster, which exposes three distinct endpoints 
     server_name         traces.observability.internal;
 
     location / {
-      proxy_pass http:/traces-alb-789.eu-west-1.elb.amazonaws.com;
+      proxy_pass http://traces-alb-789.eu-west-1.elb.amazonaws.com;
     }
   }
   ```
