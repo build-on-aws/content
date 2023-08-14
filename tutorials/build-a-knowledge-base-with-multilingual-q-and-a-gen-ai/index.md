@@ -12,7 +12,7 @@ spaces:
     - dataml
 showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
-authorName: Elizabeth Fuentes
+authorName: Elizabeth Fuentes 
 date: 2023-08-14
 ---
 
