@@ -1,6 +1,7 @@
 ---
 title: "Build your own knowledge base with multilingual Q&A powered by generative AI"
-description: "build a multilingual knowledge base using multiple sources, and deliver summarized results."
+description: "Use Amazon kendra, Amazon Translate, Amazon Comprehend and Amazon SageMaker JumpStart to build a multilingual knowledge base that can summarize search results"
+
 tags:
     - ai-ml
     - kendra
@@ -12,7 +13,7 @@ spaces:
 showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes
-date: 2023-08-09
+date: 2023-08-14
 ---
 
 |ToC|
@@ -37,7 +38,7 @@ Join me in this blog as I guide you through the process of building a comprehens
 
 - How to set up an intelligent search service powered by machine learning with [Amazon Kendra](https://aws.amazon.com/pm/kendra).
 - How to utilize pretrained open-source Generative AI Large Language Models (LLMs).
-- How to use Artificial Intelligence service to detect the dominant language in texts and to .
+- How to use Artificial Intelligence service to detect the dominant language in texts.
 - How to use Artificial Intelligence service to translate text.
 
 ## Solution Overview
@@ -65,8 +66,8 @@ In Fig 1 you can see what the solution consists of:
 
 We will build it in five parts:
 
-- Part 1 - Build the smart database with [Amazon Kendra](https://aws.amazon.com/pm/kendra), using the sample data.🤖
-- Part 2 - Queries to an index in [Amazon Kendra](https://aws.amazon.com/pm/kendra). 
+- Part 1 - Build the smart database with [Amazon Kendra](https://aws.amazon.com/kendra/), using the sample data.🤖
+- Part 2 - Queries to an index in [Amazon Kendra](https://aws.amazon.com/kendra/). 
 - Part 3 - Add multilingual features 🤖🌎: detect the language of the text and translate it.
 - Part 4 - Create ENDPOINT to invoke Generative AI Large Language Model (LLM) 🚀.
 - Part 5 - Summarize answer using the LLM.
@@ -93,7 +94,7 @@ At the end of the data synchronization, you will have the knowledge base ready f
 
 > 🚨**Note:** You can get started for free with the Amazon Kendra Developer Edition, that provides free usage of up to 750 hours for the first 30 days, check [pricing here](https://aws.amazon.com/kendra/pricing/).
 
-## Part 2 - Queries to an index in Amazon Kendra. 
+## Part 2 - Searching an Amanzon Kendra Index
 
 To search an Amazon Kendra index, you use the [Retrieve](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra/client/retrieve.html) API and it returns information about the indexed documents of Data sources. You can alternatively use the [Query API](https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html). However, the Query API only returns excerpt passages of up to 100 token words, with the Retrieve API, you can retrieve longer passages of up to 200 token words.
 
@@ -101,15 +102,15 @@ Amazon Kendra utilizes various factors to determine the most relevant documents 
 
 Additionally, filters can be applied to the search to narrow down the results, such as filtering documents based on a specific custom field like "department" (e.g., returning only documents from the "legal" department). For more information, see [Custom fields or attributes](https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-You can query the Kendra API in several ways:
+You can make search the Amazon Kendra Index in several ways: 
 
-### With the console
+### Search with the Console
 
 Go to the navigation panel on the left, choose the **Search indexed content** option, then enter a query in the text box and then press **enter** (Fig. 4).
 
 ![Search in a Kendra Index](images/fig_04.png "Fig 4.  Search in a Kendra Index.")<h4 align="center">Fig 4.  Search in a Kendra Index.</h4> 
 
-**With AWS SDK for [Python(Boto3)](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)** use this code:
+**Search with AWS SDK for [Python(Boto3)](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)** use this code:
 
 ``` python
 import boto3
@@ -123,7 +124,7 @@ def QueryKendra(index_id,query):
     return response
 ```
 
-### Others
+### Search in Other Ways
 
 With [AWS SDK for Java](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/kendra/KendraClient.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Postman](https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
