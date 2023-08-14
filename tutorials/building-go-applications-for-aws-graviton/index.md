@@ -14,7 +14,7 @@ tags:
 showInHomeFeed: true
 authorGithubAlias: DDxPlague
 authorName: Tyler Jones
-date: 2023-08-02
+date: 2023-08-14
 ---
 
 Companies today are making sustainability a key goal for their business in order to improve operational efficiency and drive down cost while also lowering carbon emissions. Achieving these sustainability goals means change across all levels of the business, with application and software development being a key focus. With Go applications, one of the easiest ways to make progress towards a sustainability goal is to adopt [AWS Graviton instances](https://aws.amazon.com/ec2/graviton/). AWS Graviton processors are designed by AWS to deliver the best price performance for your cloud workloads running in Amazon EC2.
@@ -148,7 +148,7 @@ In order to retrieve the original URL, we will need to make another request to t
 Replace the shortened URL identifier with the identifier you got from the previous command, and make sure your IP address is correct.
 
 ```shell
-ccurl -X GET http://10.3.69.250:8080/getFullURL/7fcLy5Cqwd
+curl -X GET http://10.3.69.250:8080/getFullURL/7fcLy5Cqwd
 ```
 
 You should get output that looks like the following:
