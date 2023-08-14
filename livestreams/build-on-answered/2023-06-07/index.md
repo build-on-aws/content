@@ -1,21 +1,23 @@
 ---
-title: "Build On Live: Answered Episode 06 Show Notes"
-description: "Join us for Build On Live: Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
+title: "Build On Answered | Episode 06 | Talking Terraform with Rohini"
+description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - build-on-live
     - stack-overflow
     - aws-stack-overflow-collective
     - aws
     - twitch
-authorGithubAlias: juliegund
-authorName: Julie Gunderson
+authorGithubAlias: cobusbernard
+authorName: Cobus Bernard
+additionalAuthors: 
+  - authorGithubAlias: gaonkarr
+    authorName: Rohini Gaonkar
 date: 2023-06-07
 spaces:
   - livestreams
-    
 ---
 
-Join us for Episode 06 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
+Join us for Episode 06 of Build On Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
 https://www.twitch.tv/videos/1850485117
 
@@ -23,9 +25,8 @@ In this [episode](https://www.twitch.tv/videos/1850485117), Cobus and Rohini tak
 
 ## Hosts
 
-[**Rohini Gaonkar**](https://twitter.com/rohini_gaonkar), Senior Developer Advocate @ AWS
-
-[**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
+* [**Rohini Gaonkar**](https://twitter.com/rohini_gaonkar), Senior Developer Advocate @ AWS
+* [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
 
 ## What is the Collective?
 

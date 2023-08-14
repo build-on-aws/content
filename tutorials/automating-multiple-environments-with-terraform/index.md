@@ -13,6 +13,8 @@ tags:
 showInHomeFeed: true
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-03-27

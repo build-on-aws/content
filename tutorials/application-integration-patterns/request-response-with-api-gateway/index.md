@@ -4,12 +4,15 @@ description: Learn step-by-step how to create an API Gateway endpoint and connec
 tags:
   - tutorials
   - aws
-  - architecture-patterns
+  - architectural-patterns
   - application-integration
+  - microservices
+  - serverless
   - api-gateway
   - lambda
   - cdk
   - typescript
+showInHomeFeed: true
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-07-10
@@ -27,7 +30,8 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level | Intermediate - 200 |
 | ⏱ Time to complete | 30 minutes |
 | 💰 Cost to complete | Free when cleaning up after the tutorial (instructions below) |
-| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/) |
+| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
+| 💻 Code Repository | The finished example is available on [GitHub](https://github.com/build-on-aws/request-response-with-amazon-api-gateway) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a quick star rating?</a>    |
 | ⏰ Last Updated     | 2023-07-10                             |
 
@@ -74,7 +78,7 @@ But now, let's start the tutorial and learn how to implement the synchronous req
 
 - A few kilobytes of code will be stored in Amazon S3, which provides 5 GB of free storage.
 - We will call API Gateway a couple of times, which provides 1 million free calls per month.
-- We will run a Lambda function for a few time, which also provides 1 million free invocations per month.
+- We will run a Lambda function for a few times, which also provides 1 million free invocations per month.
 
 So if you follow the step-by-step guide, you'll definitely stay within the free trier. However, I've also added a section to the end that helps you remove all the resources created during this tutorial.
 
@@ -466,4 +470,12 @@ exports.handler = async function (event, context) {
     body: JSON.stringify('Hello from Lambda')
   };
 };
+```
+
+### GitHub Repository
+
+The code for this example is also available as a [GitHub repository]([https://github.com/build-on-aws/point-to-point-messaging-with-amazon-sqs](https://github.com/build-on-aws/request-response-with-amazon-api-gateway)), including branches for the individual steps outlined in this tutorial. To clone it, simply execute:
+
+```bash
+git clone https://github.com/build-on-aws/request-response-with-amazon-api-gateway.git
 ```

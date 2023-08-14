@@ -26,7 +26,7 @@ Chaos engineering is not about creating chaos, but is about making the chaos tha
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1828171717
+https://www.twitch.tv/videos/1856402118
 
 ## Links from today's episode
 
