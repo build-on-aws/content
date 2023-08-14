@@ -12,7 +12,7 @@ date: 2023-08-09
 postsFeed: true
 ---
 
-For an IT administrator, restoring a database from a backup isn't unusual. Migrating an on-premise database to the cloud follows a similar process. However, instead of using and automate using scripts. In this tutorial, we'll walk through how to migrate a SQL Server database to the cloud, using the command line to instantiate and configure the database server, rather than a console application.
+For an IT administrator, restoring a database from a backup isn't unusual. Migrating an on-premise database to the cloud follows a similar process. However, instead of using the AWS console, we will automate the process using scripts. In this tutorial, we'll walk through how to migrate a SQL Server database to the cloud, using the command line to instantiate and configure the database server, rather than a console application.
 
 ## Sections
 | Info                |                                   |
