@@ -1,6 +1,7 @@
 ---
-title: "Build Your Own Knowledge Base with Multilingual Q&A Powered by Generative AI"
-description: "build a multilingual knowledge base using multiple sources, and deliver summarized results."
+title: "Build your own knowledge base with multilingual Q&A powered by generative AI"
+description: "Use Amazon kendra, Amazon Translate, Amazon Comprehend and Amazon SageMaker JumpStart to build a multilingual knowledge base that can summarize search results"
+
 tags:
     - ai-ml
     - kendra
@@ -11,18 +12,18 @@ spaces:
     - dataml
 showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
-authorName: Elizabeth Fuentes
-date: 2023-08-09
+authorName: Elizabeth Fuentes 
+date: 2023-08-14
 ---
 
 |ToC|
 |---|
 
-Organizations often accumulate a wide range of documents, including project documentation, manuals, tenders, Salesforce data, code repositories, and more. Locating specific documents and then conducting searches within them amid this vast amount of information can be a tedious. What's more, once you find the desired document, it may be lengthy, and you might prefer a summary of its content.
+Organizations often accumulate a wide range of documents, including project documentation, manuals, tenders, Salesforce data, code repositories, and more. When searching through this vast amount of information, it can be a tedious process of locating the specific document and then conducting the search within it. Once you find the desired document, it may be lengthy, and you might prefer a summary of its content.
 
-Web applications that summarize information might seem like a simple solution, but using them could mean sharing your organization's sensitive information!
+> 🚨DANGER🚨 Web applications are available to summarize, however you should watch out! Using them could mean sharing your organization's sensitive information!
 
-Luckily, there are better solutions. In this tutorial, we will build a comprehensive knowledge base using multiple sources. With this knowledge base you can seek answers to your queries and receive concise summaries along with links for further study. To ensure accessibility, we will facilitate this process through a convenient question-and-answer format available in multiple languages.
+Join me in this blog as I guide you through the process of building a comprehensive knowledge base using multiple sources. With this knowledge base you can seek answers to your queries and receive concise summaries along with links for further study. To ensure accessibility, we will facilitate this process through a convenient question-and-answer format available in multiple languages.
 
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
@@ -33,11 +34,11 @@ Luckily, there are better solutions. In this tutorial, we will build a comprehen
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-08-10                             |
 
-## What You Will Learn
+## What you will learn
 
 - How to set up an intelligent search service powered by machine learning with [Amazon Kendra](https://aws.amazon.com/pm/kendra).
 - How to utilize pretrained open-source Generative AI Large Language Models (LLMs).
-- How to use Artificial Intelligence service to detect the dominant language in texts and to .
+- How to use Artificial Intelligence service to detect the dominant language in texts.
 - How to use Artificial Intelligence service to translate text.
 
 ## Solution Overview
@@ -65,8 +66,8 @@ In Fig 1 you can see what the solution consists of:
 
 We will build it in five parts:
 
-- Part 1 - Build the smart database with [Amazon Kendra](https://aws.amazon.com/pm/kendra), using the sample data.🤖
-- Part 2 - Queries to an index in [Amazon Kendra](https://aws.amazon.com/pm/kendra). 
+- Part 1 - Build the smart database with [Amazon Kendra](https://aws.amazon.com/kendra/), using the sample data.🤖
+- Part 2 - Queries to an index in [Amazon Kendra](https://aws.amazon.com/kendra/). 
 - Part 3 - Add multilingual features 🤖🌎: detect the language of the text and translate it.
 - Part 4 - Create ENDPOINT to invoke Generative AI Large Language Model (LLM) 🚀.
 - Part 5 - Summarize answer using the LLM.
@@ -74,11 +75,11 @@ We will build it in five parts:
 
 Let’s get started!
 
-## Part 1 - Build the Smart Database with [Amazon Kendra](https://aws.amazon.com/pm/kendra)🤖
+## Part 1 - Build the smart database with [Amazon Kendra](https://aws.amazon.com/pm/kendra), using the sample data.🤖
 
 Kendra is an intelligent search service powered by machine learning, where you can add, update, or delete automatically synchronize [multiples data source](https://docs.aws.amazon.com/kendra/latest/dg/hiw-data-source.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq), and also index web pages by providing the URLs to crawling.
 
-First you need to create a Kendra Index, to hold the contents of your documents and structure them in a way to make the documents searchable. Follow the steps to create a [Kendra](https://console.aws.amazon.com/kendra/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) Index in the console [here](https://docs.aws.amazon.com/kendra/latest/dg/gs-console.html).
+First you need to create a Kendra Index, to hold the contents of your documents and structured them in a way to make the documents searchable, follow the steps to create a [Kendra](https://console.aws.amazon.com/kendra/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) Index in the console [here](https://docs.aws.amazon.com/kendra/latest/dg/gs-console.html)
 
 ![create a kendra index](images/fig_02.png "Fig 2. Create an Amazon Kendra Index.")<h4 align="center">Fig 2. Create an Amazon Kendra Index.</h4> 
 
@@ -93,7 +94,7 @@ At the end of the data synchronization, you will have the knowledge base ready f
 
 > 🚨**Note:** You can get started for free with the Amazon Kendra Developer Edition, that provides free usage of up to 750 hours for the first 30 days, check [pricing here](https://aws.amazon.com/kendra/pricing/).
 
-## Part 2 - Queries to an Index in Amazon Kendra
+## Part 2 - Searching an Amanzon Kendra Index
 
 To search an Amazon Kendra index, you use the [Retrieve](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra/client/retrieve.html) API and it returns information about the indexed documents of Data sources. You can alternatively use the [Query API](https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html). However, the Query API only returns excerpt passages of up to 100 token words, with the Retrieve API, you can retrieve longer passages of up to 200 token words.
 
@@ -101,15 +102,15 @@ Amazon Kendra utilizes various factors to determine the most relevant documents 
 
 Additionally, filters can be applied to the search to narrow down the results, such as filtering documents based on a specific custom field like "department" (e.g., returning only documents from the "legal" department). For more information, see [Custom fields or attributes](https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-You can query the Kendra API in several ways:
+You can make search the Amazon Kendra Index in several ways: 
 
-### With the Console
+### Search with the Console
 
 Go to the navigation panel on the left, choose the **Search indexed content** option, then enter a query in the text box and then press **enter** (Fig. 4).
 
 ![Search in a Kendra Index](images/fig_04.png "Fig 4.  Search in a Kendra Index.")<h4 align="center">Fig 4.  Search in a Kendra Index.</h4> 
 
-**With AWS SDK for [Python(Boto3)](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)** use this code:
+**Search with AWS SDK for [Python(Boto3)](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)** use this code:
 
 ``` python
 import boto3
@@ -123,11 +124,12 @@ def QueryKendra(index_id,query):
     return response
 ```
 
-### Others
+### Search in Other Ways
 
 With [AWS SDK for Java](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/kendra/KendraClient.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Postman](https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-## Part 3 - Add Multilingual Features 🤖🌎: Detect the Language of the Text and Translate It
+
+## Part 3 - Add multilingual features 🤖🌎: detect the language of the text and translate it.
 
 In this segment, you will use two AI/ML services that you can use with an API call:
 
@@ -174,7 +176,9 @@ def get_target_language_code(data_source_id,index_id):
     return response_data_source['LanguageCode']
 ```
 
+
 **🥳 The code of the multilingual Q&A intelligent knowledge base is:**
+
 
 ```python
 text = "¿que es Amazon S3?"
@@ -203,7 +207,7 @@ Amazon Kendra delivers a list of answers, which could be big (Fig. 5), but would
 
 ![Amazon Kendra answer result in spanish](images/fig_05.png "Fig 5.  Amazon Kendra answer result in spanish.")<h4 align="center">Fig 5.  Amazon Kendra answer result in spanish.</h4>
 
-## Part 4 - Create ENDPOINT to Invoke Generative AI Large Language Models (LLMs) 🚀
+## Part 4 - Create ENDPOINT to invoke Generative AI Large Language Models (LLMs) 🚀.
 
 In this part you are going to use a [Amazon SageMaker JumpStart](https://aws.amazon.com/sagemaker/jumpstart/), which provides pre-trained, open-source models for a wide range of problem types (as our problem to summarize) to help you get started with machine learning, and the best is you can also access a models using the [SageMaker Python SDK](https://sagemaker.readthedocs.io/en/stable/overview.html#use-sagemaker-jumpstart-algorithms-with-pretrained-models).
 
@@ -227,7 +231,9 @@ To summarize, you will use [Flan UL2](https://huggingface.co/google/flan-ul2) fu
 |5. Create a [Sagemaker Domain](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) using [Quick setup](https://docs.aws.amazon.com/sagemaker/latest/dg/onboard-quick-start.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq), this takes a few minutes⏳... or **Select domain and user profile** if you already have one created.|![Create a Sagemaker Domain](images/fig_7.png)![Select domain and user profile](images/domain_and_user_profile.png)|
 |6. Follow the steps in jupyter notebook, explore it, and wait for me in step **5**|![Jupyter notebook](images/jupyter_notebook.jpg)|
 
+
 In the jupyter notebook you can explore the functionalities of the FLAN-T5 model.
+
 
 Go to part 3 in jupyter notebook to deploy a [sagemaker endpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-recommender.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq), this is the call to do [real-time inference](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) to ML model as an API call, using Boto3 and AWS credentials.
 
@@ -245,7 +251,7 @@ Find **Inference** on the left-hand navigation panel and choose **Endpoints**.
 
 > 🚨**Note:** You have to be careful, because while the endpoint is active, you will be billing. Check [pricing here](https://aws.amazon.com/es/sagemaker/pricing/).
 
-## Part 5 - Summarize Answers Using the LLM
+## Part 5 - Summarize answer using the LLM.
 
 In **[step 5](https://github.com/aws/amazon-sagemaker-examples/blob/main/introduction_to_amazon_algorithms/jumpstart-foundation-models/text2text-generation-flan-t5-ul2.ipynb)** on Jupyter notebook you can see the advanced parameters to control the generated text while performing inference definition that this model supports.
 
@@ -317,7 +323,6 @@ def summarization(text,query):
 
     return
 ```
-
 Play with the `text_inputs` and discover the best one according to your needs.
 
 Bring all the code together and **Build your own knowledge base with multilingual Q&A powered by Generative AI** 🥳
@@ -345,7 +350,7 @@ In Fig 6 you can see 3 results of the summarized text, this is because you set n
 
 ![Summarized results](images/fig_06.png "Fig 6.  Amazon Kendra answer summarized results in spanish.")<h4 align="center">Fig 6.  Amazon Kendra answer summarized results in spanish.</h4> 
 
-## Part 6 - 🚨 Delete Resources 🚨
+## Part 6 - 🚨 Delete resources 🚨.
 
 If your intention was to create to learn and you are not going to continue using the services, you must eliminate them so as not to overspend. 
 
@@ -363,6 +368,8 @@ In the notebook in Sagemaker Studio where you deploy an Endpoint execute the fol
 model_predictor.delete_model()
 model_predictor.delete_endpoint()
 ```
+
+
 
 ## Conclusion
 
