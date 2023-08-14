@@ -12,7 +12,7 @@ authorName: Daniel Wirjo
 additionalAuthors: 
   - authorGithubAlias: chunbenn
     authorName: Benny Chun
-date: 2023-08-11
+date: 2023-08-14
 ---
 
 |ToC|
@@ -26,7 +26,7 @@ Most applications work with data. In this post, you will learn about the CQRS an
 
 Imagine you're part of a team developing an online store. Initially, a single relational database handles all CRUD (Create, Read, Update, Delete) operations, covering products, orders, customers, and more. As the store grows, challenges arise. Read operations slow down during peak times, and write operations become complex due to an increasing number of business rules.
 
-To address these issues, the team considers adopting the [Command Query Responsibility Segregation (CQRS)](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html) pattern. CQRS separates the handling of write and read operations, adding scalability and performance:
+To address these issues, the team considers adopting the [Command Query Responsibility Segregation (CQRS)](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) pattern. CQRS separates the handling of write and read operations, adding scalability and performance:
 
 * **Command Model:** Manages write operations like creating or updating records, encapsulating the logic to change the system's state.
 * **Query Model:** Manages read operations, optimized for retrieving information and possibly having different data representations for specific views.
@@ -39,13 +39,13 @@ In a typical relational database, all read and write requests go to the primary 
 
 Using RDS read replicas represents a practical and relatively simple approach to implementing some aspects of the CQRS pattern. In the context of the online store, it offers an attractive option for enhancing performance and scalability without a complete overhaul of the existing system. While not as comprehensive or flexible as a full CQRS implementation, read replicas can be a valuable step in evolving an application's architecture to better meet growing demands.
 
-Note: if you are leveraging Aurora as your primary database, it has a [local write forwarding](https://aws.amazon.com/blogs/database/local-write-forwarding-with-amazon-aurora/) feature. This means that your implementation can be further simplified, as your writes can be directed at your read replicas without impacting the read performance.
+Note: if you are leveraging Aurora as your primary database, it has a [local write forwarding](https://aws.amazon.com/blogs/database/local-write-forwarding-with-amazon-aurora/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) feature. This means that your implementation can be further simplified, as your writes can be directed at your read replicas without impacting the read performance.
 
 ### Moving beyond a single database service
 
-[Amazon DynamoDB](https://aws.amazon.com/dynamodb/), a NoSQL database known for its fast write capabilities, can be utilised as the *Command Model* in the CQRS pattern. By channeling all write operations through DynamoDB, developers can take advantage of its low-latency write performance. This includes actions like adding new products, processing orders, and any other operations that change the system's state.
+[Amazon DynamoDB](https://aws.amazon.com/dynamodb/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns), a NoSQL database known for its fast write capabilities, can be utilised as the *Command Model* in the CQRS pattern. By channeling all write operations through DynamoDB, developers can take advantage of its low-latency write performance. This includes actions like adding new products, processing orders, and any other operations that change the system's state.
 
-Conversely, [Amazon Aurora](https://aws.amazon.com/rds/aurora/) can be employed as the *Query Model* to handle read operations. As a relational database engine optimized for read-heavy workloads, Aurora offers a scalable solution for listing products, checking order statuses, and other read tasks.
+Conversely, [Amazon Aurora](https://aws.amazon.com/rds/aurora/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) can be employed as the *Query Model* to handle read operations. As a relational database engine optimized for read-heavy workloads, Aurora offers a scalable solution for listing products, checking order statuses, and other read tasks.
 
 ![CQRS Pattern](images/cqrs.png)
 
@@ -60,7 +60,7 @@ Building on our exploration of CQRS with DynamoDB and Aurora, let's delve into a
 While Aurora is proficient, Amazon Redshift provides a distinct edge for analytical processing:
 
 * **Parallel Querying**: It's tailored to dissect complex queries, ensuring comprehensive analytics isn’t bogged down by large datasets.
-* **Columnar Storage:** This mechanism is particularly efficient for analytical query patterns. Read [this article](https://docs.aws.amazon.com/redshift/latest/dg/c_columnar_storage_disk_mem_mgmnt.html) to understand the advantages of columnar storage for analytical workloads.
+* **Columnar Storage:** This mechanism is particularly efficient for analytical query patterns. Read [this article](https://docs.aws.amazon.com/redshift/latest/dg/c_columnar_storage_disk_mem_mgmnt.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) to understand the advantages of columnar storage for analytical workloads.
 
 This variant of the CQRS pattern, leveraging DynamoDB for writes and Redshift for queries, can be the secret sauce for applications that lean heavily on data analytics. While the initial setup demands thoughtful planning, the rewards in scalability, performance, and analytical depth make it a worthy consideration.
 
@@ -98,22 +98,22 @@ The first step in the transition is to understand events. One method is [Event S
 
 ### Designing an architecture to handle events
 
-In an event-driven architecture, application components are decoupled between event *producers* and *consumers*. These are intermediated by an *event broker*. Here, a publish-subscribe messaging service can be used, such as [Amazon SNS](https://aws.amazon.com/sns/) for fan out, and [Amazon SQS](https://aws.amazon.com/sqs/) to reliably and durably communicate the events to microservices. 
+In an event-driven architecture, application components are decoupled between event *producers* and *consumers*. These are intermediated by an *event broker*. Here, a publish-subscribe messaging service can be used, such as [Amazon SNS](https://aws.amazon.com/sns/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) for fan out, and [Amazon SQS](https://aws.amazon.com/sqs/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) to reliably and durably communicate the events to microservices. 
 
 In most cases, an *event store* such as Amazon S3 or Amazon DynamoDB is also required. This component stores all historical events which enable replay to the current state.
 
 ### Handling event-driven operations using Amazon EventBridge
 
-For a holistic solution, consider [Amazon EventBridge](https://aws.amazon.com/eventbridge/). It provides capabilities designed for operating event-driven architectures. It supports filtering and routing to direct events to the right destination without spinning up infrastructure. It provides a schema registry so that engineering teams can easily search and access event structures on a self-service basis. 
+For a holistic solution, consider [Amazon EventBridge](https://aws.amazon.com/eventbridge/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns). It provides capabilities designed for operating event-driven architectures. It supports filtering and routing to direct events to the right destination without spinning up infrastructure. It provides a schema registry so that engineering teams can easily search and access event structures on a self-service basis. 
 
 Critically, it provides a replay and archive capability to aid in testing and troubleshooting of issues. Previously, this required creating a complex mechanism for logging and parsing the event store, and sending the relevant events back to the event broker. Since access to the applications that were producing the events may be difficult, this can provide significant operational challenges.
 ![Amazon EventBridge Reference Architecture](images/eventbridge.png)
 
-To learn more, see [event-driven architectures with Amazon EventBridge from the AWS Well-Architected Framework: Serverless Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/event-driven-architectures.html).
+To learn more, see [event-driven architectures with Amazon EventBridge from the AWS Well-Architected Framework: Serverless Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/event-driven-architectures.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns).
 
 ### Producing events 
 
-The existing monolithic application can be updated to publish events to the *event broker*. Another pattern is to capture *Change Data Capture (CDC)* events from transactions that are already happening on your existing database. Here, the implementation varies depending on the database. For example, with Amazon RDS, you can use [AWS Database Migration Service (DMS) and Amazon Kinesis](https://aws.amazon.com/blogs/big-data/stream-change-data-to-amazon-kinesis-data-streams-with-aws-dms/) to stream change data. For Amazon DynamoDB, streams are supported natively with [DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html).
+The existing monolithic application can be updated to publish events to the *event broker*. Another pattern is to capture *Change Data Capture (CDC)* events from transactions that are already happening on your existing database. Here, the implementation varies depending on the database. For example, with Amazon RDS, you can use [AWS Database Migration Service (DMS) and Amazon Kinesis](https://aws.amazon.com/blogs/big-data/stream-change-data-to-amazon-kinesis-data-streams-with-aws-dms/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) to stream change data. For Amazon DynamoDB, streams are supported natively with [DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns).
 
 ### Consuming events
 
@@ -127,4 +127,4 @@ Many AWS customers have successfully used these patterns to grow and drive innov
 
 In conclusion, the CQRS and Event Sourcing patterns are an antidote to common scalability challenges with your application. At its foundation, it is about optimising the way you handle your data reads and writes. At AWS, we often say “the right tool for the right job”. To implement these patterns, we provide a range of database and event-driven services. These provide the ingredients for a reliable, scalable and flexible infrastructure for your use cases and evolving needs. 
 
-To learn more, see prescriptive guidance on the [CQRS](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html) and [event sourcing](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/service-per-team.html) patterns. Feel free to share any thoughts on any other implementations of Event Sourcing and CQRS with your AWS account team.
+To learn more, see prescriptive guidance on the [CQRS](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/cqrs-pattern.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) and [event sourcing](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/service-per-team.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=scaling-data-patterns) patterns. Feel free to share any thoughts on any other implementations of Event Sourcing and CQRS with your AWS account team.
