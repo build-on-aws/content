@@ -74,11 +74,11 @@ We will build it in five parts:
 
 Let’s get started!
 
-## Part 1 - Build the smart database with [Amazon Kendra](https://aws.amazon.com/pm/kendra), using the sample data.🤖
+## Part 1 - Build the Smart Database with [Amazon Kendra](https://aws.amazon.com/pm/kendra)🤖
 
 Kendra is an intelligent search service powered by machine learning, where you can add, update, or delete automatically synchronize [multiples data source](https://docs.aws.amazon.com/kendra/latest/dg/hiw-data-source.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq), and also index web pages by providing the URLs to crawling.
 
-First you need to create a Kendra Index, to hold the contents of your documents and structured them in a way to make the documents searchable, follow the steps to create a [Kendra](https://console.aws.amazon.com/kendra/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) Index in the console [here](https://docs.aws.amazon.com/kendra/latest/dg/gs-console.html)
+First you need to create a Kendra Index, to hold the contents of your documents and structure them in a way to make the documents searchable. Follow the steps to create a [Kendra](https://console.aws.amazon.com/kendra/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) Index in the console [here](https://docs.aws.amazon.com/kendra/latest/dg/gs-console.html).
 
 ![create a kendra index](images/fig_02.png "Fig 2. Create an Amazon Kendra Index.")<h4 align="center">Fig 2. Create an Amazon Kendra Index.</h4> 
 
@@ -93,7 +93,7 @@ At the end of the data synchronization, you will have the knowledge base ready f
 
 > 🚨**Note:** You can get started for free with the Amazon Kendra Developer Edition, that provides free usage of up to 750 hours for the first 30 days, check [pricing here](https://aws.amazon.com/kendra/pricing/).
 
-## Part 2 - Queries to an Index in Amazon Kendra. 
+## Part 2 - Queries to an Index in Amazon Kendra
 
 To search an Amazon Kendra index, you use the [Retrieve](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra/client/retrieve.html) API and it returns information about the indexed documents of Data sources. You can alternatively use the [Query API](https://docs.aws.amazon.com/kendra/latest/APIReference/API_Query.html). However, the Query API only returns excerpt passages of up to 100 token words, with the Retrieve API, you can retrieve longer passages of up to 200 token words.
 
