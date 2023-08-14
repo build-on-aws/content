@@ -75,7 +75,7 @@ We will build it in five parts:
 
 Let’s get started!
 
-## Part 1 - Build the smart database with [Amazon Kendra](https://aws.amazon.com/pm/kendra), using the sample data.🤖
+## Part 1 - Build the smart database with [Amazon Kendra](https://aws.amazon.com/kendra), using the sample data.🤖
 
 Kendra is an intelligent search service powered by machine learning, where you can add, update, or delete automatically synchronize [multiples data source](https://docs.aws.amazon.com/kendra/latest/dg/hiw-data-source.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq), and also index web pages by providing the URLs to crawling.
 
