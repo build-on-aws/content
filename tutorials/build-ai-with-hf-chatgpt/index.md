@@ -8,7 +8,7 @@ tags:
     - hugging-face
     - amazon-sagemaker
 spaces:
-  - generative-ai
+    - generative-ai
 images:
   thumbnail: images/overview-01.gif
   banner: images/overview-01.gif
