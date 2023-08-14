@@ -1,6 +1,6 @@
 ---
 title: Building Private Inter-region Cross-account Communication Within AWS
-description: Introducing a solution to ebstablish secure private network connectivity between AWS accounts regradless of region (no matter whehter it's same or different regions). The solution enables seamless communication between applications located in different regions and accounts while ensuring low-latency connectivity by keeping the traffic confined within the AWS network.
+description: Introducing a solution to establish secure private network connectivity between AWS accounts regardless of region (no matter whether it's same or different regions). The solution enables seamless communication between applications located in different regions and accounts while ensuring low-latency connectivity by keeping the traffic confined within the AWS network.
 tags:
   - networking
 authorGithubAlias: nthienan
@@ -22,7 +22,7 @@ Let's consider a focused use case to delve deeper into the challenges and potent
 
 We are tasked with building a comprehensive observability platform that spans across a complex ecosystem, encompassing multiple AWS accounts, regions, and VPCs. This platform consists of two main components:
 
-1. **The control plane** serves as a centralized cluster for storing and serving data to our primary users, developers. The responsibility for managing this cluster rests with our observability team, placing it within the AWS account owned by the team, named `obserability`.
+1. **The control plane** serves as a centralized cluster for storing and serving data to our primary users, developers. The responsibility for managing this cluster rests with our observability team, placing it within the AWS account owned by the team, named `observability`.
 
 2. **The data plane** is a collection of agents that play a critical role in data collection, including metrics, logs, and traces. These agents are designed to transmit this vital data to the control plane, where it's aggregated, stored, and made available for users.
 
@@ -35,7 +35,7 @@ Given the stringent latency requirements of our platform, we must ensure that th
 
 Let's break it down into pieces and address one by one.
 
-### Cross-account commnunication
+### Cross-account communication
 
 The communication between agents (data plane) and the observability cluster (control plane) is designed as one-way, specifically to facilitate agents in pushing data to the cluster. The architectural design intentionally avoids observability cluster initiate or establish any connections directly to services within the agent network. Instead, the only permitted communication direction is from the agents to the observability cluster, allowing outbound traffic from the agent networks. Making two-way or bi-directional communication unnecessary. This one-way communication setup ensures the security for application. Here are why:
 
@@ -43,7 +43,7 @@ The communication between agents (data plane) and the observability cluster (con
 - With one-way communication, the agents have the control to selectively send data to the observability cluster. This controlled data flow ensures that sensitive information remains within the agent network unless explicitly sent to the cluster. This is particularly important for preserving the confidentiality of data
 ![one-way-communication](./images/02-one-way-communication.png "One-way Communication")
 
-In this scenario, the role of the cluster is similar to that of a service provider, as it is responsible for aggregating and storing data from the agents. Conversely, the agents act as service consumers, utilizing the services provided by the cluster. To establish a private and secure connection in such a setup, the optimal choice is to utilize VPC Endpoint backed by PrivateLink. VPC Endpoints work seamlessly, whether the VPCs are in the same account or different accounts, as we expected. 
+In this scenario, the role of the cluster is similar to that of a service provider, as it is responsible for aggregating and storing data from the agents. Conversely, the agents act as service consumers, utilizing the services provided by the cluster. To establish a private and secure connection in such a setup, the optimal choice is to utilize VPC Endpoint backed by PrivateLink. VPC Endpoints work seamlessly, whether the VPCs are in the same account or different accounts, as we expected.
 
 The following diagram illustrates the setup:
 ![cross-account-communication](./images/03-cross-account.png "Cross-account Communication")
@@ -79,6 +79,7 @@ The key point is to ensure the proxy is highly available. To achieve this, we wi
 Let's discuss the observability cluster, which exposes three distinct endpoints for ingesting three types of observation data: metrics, logs, and traces. We will utilize host-based routing for this setup. Here are the sample proxy configurations:
 
 - Metrics endpoint:
+
   ```
   server {
     listen              80;
@@ -91,6 +92,7 @@ Let's discuss the observability cluster, which exposes three distinct endpoints 
   ```
 
 - Logs endpoint:
+
   ```
   server {
     listen              80;
@@ -103,6 +105,7 @@ Let's discuss the observability cluster, which exposes three distinct endpoints 
   ```
 
 - Traces endpoint:
+
   ```
   server {
     listen              80;
