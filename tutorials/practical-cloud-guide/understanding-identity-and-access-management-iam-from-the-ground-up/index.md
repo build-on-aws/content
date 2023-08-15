@@ -34,7 +34,7 @@ Before starting this tutorial, you will need the following:
 | ToC |
 |-----|
 
-In a [previous article](https://community.aws/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations), we introduced AWS Organizations, a service to centrally manage billing, services, and resources. The partner to Organizations is Identity and Access Management, a service for verifying and authorizing members of an Organization. The difference between Organizations and IAM is that Organizations can globally set limits to services and resources and IAM can authenticate an account and set fine grained permissions. 
+In a [previous article](https://community.aws/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline), we introduced AWS Organizations, a service to centrally manage billing, services, and resources. The partner to Organizations is Identity and Access Management, a service for verifying and authorizing members of an Organization. The difference between Organizations and IAM is that Organizations can globally set limits to services and resources and IAM can authenticate an account and set fine grained permissions. 
 
 This article is an introduction to AWS Identity and Access Management. Managing access and permissions to AWS services and resources is a complex topic because policies can be created at different organizational levels, overlap, and intersect in ways . We’ll start this discussion with best practices for managing administrative accounts and then cover the Identity and Access Management service.
 
@@ -47,9 +47,9 @@ If you’re the administrator or one of several administrators for your organiza
 3. Use federated identities when possible. Manage user accounts with a central identity provider such as Active Directory, Okta, or AWS IAM Identity center. If your organization doesn’t have a identity provider solution, you can create user accounts directly with IAM but it is not a recommended because each user are assigned long-term credentials that do not expire.
 4. Require multi-factor authentication (MFA). These devices respond  to an authentication call to complete sign-in. Use MFA with long-term credentials such as root access or IAM user accounts.
 5. Implement a strong password policy that is resistant to brute force or social engineering attacks.
-6. Log events using [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html) to audit usage.
+6. Log events using [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline) to audit usage.
 
-These are the main points for securing AWS accounts. Be sure to check out [AWS Startup Security Baseline](https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-startup-security-baseline/welcome.html) for detailed instructions.
+These are the main points for securing AWS accounts. Be sure to check out [AWS Startup Security Baseline](https://docs.aws.amazon.com/prescriptive-guidance/latest/aws-startup-security-baseline/welcome.html?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline) for detailed instructions.
 
 ## Identities
 
@@ -61,7 +61,7 @@ Roles are identities with specific permissions, but they are not associated with
 
 ![Relationship between AWS identities and policies](./images/identities.jpg)
 
-The diagram above shows the relationship between groups, users, and roles. Policies can be attached to identities. Users can belong to a group and inherit the group policies. Users are considered permanent identities because they have long term credentials in the form of passwords and access keys. In addition, users can assume roles with policies that let them access resources specified by the policy. Roles are temporary and assumed by users to perform specific tasks. This brief overview describes the basic relationships between identities; the User Guide provides an in depth discussion of [IAM Identities (users, user groups, and roles)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html). 
+The diagram above shows the relationship between groups, users, and roles. Policies can be attached to identities. Users can belong to a group and inherit the group policies. Users are considered permanent identities because they have long term credentials in the form of passwords and access keys. In addition, users can assume roles with policies that let them access resources specified by the policy. Roles are temporary and assumed by users to perform specific tasks. This brief overview describes the basic relationships between identities; the User Guide provides an in depth discussion of [IAM Identities (users, user groups, and roles)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline). 
 
 ## IAM Policy Concepts
 
@@ -183,7 +183,7 @@ Next, we’ll create a group and add our users to the group.
 ```bash
 aws iam create-group —group-name pcg-experts
 aws iam add-user-to-group --user-name yeemin --group-name pcg-experts
-aws iam add-user-to-group--user-name alicia --group-name pcg-experts
+aws iam add-user-to-group --user-name alicia --group-name pcg-experts
 ```
 
 Our IAM users were created under the master account, and to sign in to the the console we use an URL with the master account id. If you don’t know the account id, you can find it with this command.
@@ -337,7 +337,7 @@ Go back to the browser with the S3 console open while logged in as Yeemin. You�
 
 Although, anyone in the group can list the contents of the bucket, they can’t list the objects in the folders. In the next section, we’ll define a policy for a user that lets them list, get, and put objects in a folder.
 
-**Step 5**:  Alicia is a developer and needs access to the Development folder as part of her job. For this, we’ll create an [inline policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#inline-policies). An inline policy is created for a single IAM identity which can be a user, a group, or a role. There is a strict one-to-one relationship between an identity and an inline policy.
+**Step 5**:  Alicia is a developer and needs access to the Development folder as part of her job. For this, we’ll create an [inline policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#inline-policies?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline). An inline policy is created for a single IAM identity which can be a user, a group, or a role. There is a strict one-to-one relationship between an identity and an inline policy.
 
 Alicia needs to list objects in the bucket and the Development folder. In addition, she must be able to get and put objects (files) in the folder. However, she doesn't need access other folders that are not part of her job. In the policy below, the first statement lets Alicia list the bucket with the Development folder using the S3 prefix “Development/*” as a condition. Listing any other folder is not allowed.1 The second statement enables listing, putting, and getting objects in the Development folder.
 
@@ -410,7 +410,7 @@ Deleting the users also takes several steps. First, we must remove them from the
 
 ```bash
 aws iam remove-user-from-group --group-name pcg-experts --user-name yeemin
-aws iam remove-user-from-group --group-name pcg-experts —user-name alicia
+aws iam remove-user-from-group --group-name pcg-experts --user-name alicia
 aws iam delete-login-profile --user-name yeemin
 aws iam delete-login-profile --user-name alicia
 aws iam delete-user --user-name yeemin
@@ -437,6 +437,6 @@ The second policy is an inline policy which is a one-to-one relationship between
 
 ## What's Next
 
-We’ve covered a lot of topics ranging from best practices to securing your AWS account, to identity concepts and how they relate to each other, and we’ve done a deep dive in to the structure of policies. To put the IAM service in context, we completed an exercise for managing group and user access to a resource. However, we did not examine how to use roles and temporary credentials to provide access to resources from one account to another. In an upcoming article we’ll demonstrate how to user [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html).
+We’ve covered a lot of topics ranging from best practices to securing your AWS account, to identity concepts and how they relate to each other, and we’ve done a deep dive in to the structure of policies. To put the IAM service in context, we completed an exercise for managing group and user access to a resource. However, we did not examine how to use roles and temporary credentials to provide access to resources from one account to another. In an upcoming article we’ll demonstrate how to user [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline).
 
-Until the next installment of the Practical Cloud Guide, checkout this short [video introduction to AWS Identity and Access Management](https://explore.skillbuilder.aws/learn/course/120/introduction-to-aws-identity-and-access-management-iam) by signing up for [AWS Skill Builder](https://skillbuilder.aws/) for training and certification videos and tutorials; many are available at no cost.
+Until the next installment of the Practical Cloud Guide, checkout this short [video introduction to AWS Identity and Access Management](https://explore.skillbuilder.aws/learn/course/120/introduction-to-aws-identity-and-access-management-iam?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline) by signing up for [AWS Skill Builder](https://skillbuilder.aws/?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline) for training and certification videos and tutorials; many are available at no cost.
