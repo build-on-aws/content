@@ -64,9 +64,7 @@ You can follow the AWS Well-Architected lab "[COST ANOMALY DETECTION](https://we
 
 ## Other Cost Control Automation Solutions
 
-{{% notice note %}}
-The following two solutions were designed for your **Non-Production** environments, where you can achieve cost control in automation ways. If you want to adopt the same mechanism in production environments, please make sure you understand all potential impacts to your business applications due to automatic stop for your resources, and also test it through within your Non-Production environment to validate your assumption before adopting in Production.
-{{% /notice %}}
+![notice](images/notice.png)
 
 ### Stop Low Utilization EC2 Instances by Using AWS Trusted Advisor Metrics
 
