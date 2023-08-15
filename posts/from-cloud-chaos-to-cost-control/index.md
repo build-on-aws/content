@@ -61,9 +61,25 @@ By default, the anomalies are sorted based on their Start date. However, users h
 
 You can follow the AWS Well-Architected lab "[COST ANOMALY DETECTION](https://wellarchitectedlabs.com/cost/200_labs/200_6_cost_anomaly_detection/)" to walk through the detail steps of configuring the AWS Cost Anomaly Detection, with guidance of analysing those automatically identified items before you take cost optimization actions.
 
+<<<<<<< HEAD
 
 ## Other Cost Control Automation Solutions
 
+=======
+### Potential automation use case with Cost Anomaly Detection
+
+As Cost Anomaly Detection enables you to have visibility when cost anomalies occur, you may consider to build event-driven automation depending on your use cases in **Non-Production** environments, so to take relevant actions upon those cost anomalies detected. For example, you may invoke a lambda function through SNS to remove permissions for new resource provisions based on the impacted service information collected by Cost Anomaly Detection, hence you can avoid further cost anomalies, and gain time for your operation team to investigate the issues. You may refer to [Using AWS Lambda with Amazon SNS](https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html) for more details on the lambda function invocation through SNS.
+
+
+## Other Cost Control Automation Solutions
+
+> [!WARNING]  
+> The following two solutions were designed for your **Non-Production** environments, where you can achieve cost control without impacting your production workloads. 
+>
+>If you want to adopt the same mechanism in production environments, please make sure you understand all potential impacts to your business applications due to automatic stop for your resources, and also test it through within your non-production environment to validate your assumptions before adopting in production.
+
+
+>>>>>>> jerchen
 ### Stop Low Utilization EC2 Instances by Using AWS Trusted Advisor Metrics
 
 AWS Trusted Advisor provides recommendations to help you follow AWS best practices, which can optimize your infrastructure including cost reduction. With [AWS Business Support](https://aws.amazon.com/premiumsupport/plans/business/) and [AWS Enterprise Support](https://aws.amazon.com/premiumsupport/plans/enterprise/), AWS customers can access all Trusted Advisor checks to conduct cost optimization, while being able to call [AWS support APIs](https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html) to programmatically interact with Trusted Advisor. 

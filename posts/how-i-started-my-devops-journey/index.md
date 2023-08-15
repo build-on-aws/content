@@ -9,6 +9,8 @@ tags:
   - basics
 spaces:
   - devops
+waves:
+  - devops
 movedFrom: /posts/good-places-to-start-your-devops-journey
 authorGithubAlias: andrasome
 authorName: Andra Somesan
