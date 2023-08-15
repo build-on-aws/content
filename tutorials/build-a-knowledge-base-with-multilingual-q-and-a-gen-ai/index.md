@@ -1,15 +1,16 @@
 ---
 title: "Build your own knowledge base with multilingual Q&A powered by generative AI"
-description: "Use Amazon kendra, Amazon Translate, Amazon Comprehend and Amazon SageMaker JumpStart to build a multilingual knowledge base that can summarize search results"
+description: "Use Amazon Kendra, Amazon Translate, Amazon Comprehend and Amazon SageMaker JumpStart to build a multilingual knowledge base that can summarize search results."
 
 tags:
     - ai-ml
+    - generative-ai
     - kendra
     - sagemaker
     - aws
     - tutorials
 spaces:
-    - dataml
+    - generative-ai
 showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes 
@@ -43,7 +44,7 @@ Join me in this blog as I guide you through the process of building a comprehens
 
 ## Solution Overview
 
-We are going to build the solution in [Amazon SageMaker Studio Notebooks](https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks.html), where we can interact with AWS services from the same account without the need for additional credentials or security configurations, using the [SageMaker Identity and Access Management Execution Role](https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_service-with-iam.html). 
+We are going to build the solution in [Amazon SageMaker Studio](https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks.html), where we can interact with AWS services from the same account without the need for additional credentials or security configurations, using the [SageMaker Identity and Access Management Execution Role](https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_service-with-iam.html). 
 
 ![Architecture](images/fig_01.png)
 <h4 align="center">Fig 1. Create an Amazon Kendra Index. </h4> 
@@ -133,7 +134,7 @@ With [AWS SDK for Java](https://sdk.amazonaws.com/java/api/latest/software/amazo
 
 In this segment, you will use two AI/ML services that you can use with an API call:
 
-- [Amazon Comprehend](https://aws.amazon.com/comprehend/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) to detect determines the dominant language in which the question is asked, using [DetectDominantLanguage](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) from [Boto3 Comprehend client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq):
+- [Amazon Comprehend](https://aws.amazon.com/comprehend/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) to detect the dominant language in which the question is asked, using [DetectDominantLanguage](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) from [Boto3 Comprehend client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq):
 
 - [Amazon Translate](https://aws.amazon.com/translate/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) to translate the question to the language of the Kendra knowledge base (English in this case) and translate the answer back to the language of the original question, using [TranslateText](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) from [Boto3 Translate client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq):
 
@@ -270,7 +271,7 @@ parameters = {
 }
 ```
 
-Were: 
+Where: 
 - **num_return_sequences:** corresponds to the number of answers per query that the LLM will deliver.
 - **max_length:** the maximum number of tokens that the model will generate.
 - **top_k:** limit random sampling to choose k value of sample with the highest probabilities. 
