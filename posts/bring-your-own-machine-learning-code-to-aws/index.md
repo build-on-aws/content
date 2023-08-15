@@ -27,7 +27,7 @@ Amazon SageMaker offers a large spectrum of Machine Learning features to run an 
 
 <img src="images/ml_lifecycle.png" alt="A diagram of the machine learning lifecycle" width="600"/>
 
-During the model development stage, between data collection and model evaluation, data scientists can choose different approachs to build a model in the AWS Cloud leveraging Amazon SageMaker. 
+During the model development stage, between data collection and model evaluation, data scientists can choose different approaches to build a model in the AWS Cloud leveraging Amazon SageMaker. 
 
 The first approach is to use [built-in algorithms and pretrained models](https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html) offered by Amazon SageMaker to solve common machine learning use cases for tabular, textual and image datasets. It helps data scientists get started and accelerate models building, evaluation and deployment.
 
