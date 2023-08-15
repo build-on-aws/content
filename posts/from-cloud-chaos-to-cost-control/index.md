@@ -63,7 +63,7 @@ You can follow the AWS Well-Architected lab "[COST ANOMALY DETECTION](https://we
 
 ### Potential automation use case with Cost Anomaly Detection
 
-As Cost Anomaly Detection enables you to have visibility when cost anomalies occur, you may consider to build event-driven automation depending on your use cases in Non-production environments, to take relevant actions upon those cost anomalies detected. For example, you may invoke a lambda function through SNS to remove permissions for new resource provisions based on the impacted service information collected by Cost Anomaly Detection, hence you can avoid further cost anomalies, and gain time for your operation team to investigate the issues. You may refer to [Using AWS Lambda with Amazon SNS](https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html) for more details on the lambda function invocation through SNS.
+As Cost Anomaly Detection enables you to have visibility when cost anomalies occur, you may consider to build event-driven automation depending on your use cases in **Non-Production** environments, so to take relevant actions upon those cost anomalies detected. For example, you may invoke a lambda function through SNS to remove permissions for new resource provisions based on the impacted service information collected by Cost Anomaly Detection, hence you can avoid further cost anomalies, and gain time for your operation team to investigate the issues. You may refer to [Using AWS Lambda with Amazon SNS](https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html) for more details on the lambda function invocation through SNS.
 
 
 ## Other Cost Control Automation Solutions
