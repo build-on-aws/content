@@ -3,14 +3,21 @@ title: "How to build a ChatGPT-Powered AI tool to learn technical things fast"
 description: "A step-by-step guide to setting up a free ML environment, leveraging language models and ChatGPT APIs to extract insights from YouTube videos, and empowering yourself to learn faster and more efficiently like never before!"
 tags:
     - tutorials
-    - gen-ai
+    - generative-ai
     - chatgpt
     - hugging-face
     - amazon-sagemaker
+spaces:
+    - generative-ai
+images:
+  thumbnail: images/overview-01.gif
+  banner: images/overview-01.gif
+  hero: images/overview-01.gif
+  background: images/overview-01.gif
 showInHomeFeed: true
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
-date: 2023-07-24
+date: 2023-08-11
 ---
 
 When was the last time you watched a YouTube video to learn something new? According to a [recent survey](https://www.techsmith.com/blog/video-statistics/) most respondents view videos 2-to-4 times per week, and [in a 2019 Google study](https://www.thinkwithgoogle.com/marketing-strategies/video/youtube-learning-statistics/), 86% of U.S. viewers said they used YouTube to learn new things.
@@ -116,12 +123,13 @@ First, we will use pip to install all the packages required to complete this tut
 
 !pip install python-dotenv
 !pip install openai
-!pip install openai-whisper openai yt-dlp
 !pip install youtube_dl
 !pip install youtube_transcript_api
 !pip install torchaudio
 !pip install sentencepiece
 !pip install sacremoses
+!pip install transformers
+
 ```
 
 Next, let's import all the necessary dependencies. Copy and run the following code:
