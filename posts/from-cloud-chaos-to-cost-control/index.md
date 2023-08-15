@@ -68,8 +68,7 @@ As Cost Anomaly Detection enables you to have visibility when cost anomalies occ
 
 ## Other Cost Control Automation Solutions
 
-> [!WARNING]  
-> The following two solutions were designed for your **Non-Production** environments, where you can achieve cost control without impacting your production workloads. 
+> :warning: The following two solutions were designed for your **Non-Production** environments, where you can achieve cost control without impacting your production workloads. 
 >
 >If you want to adopt the same mechanism in production environments, please make sure you understand all potential impacts to your business applications due to automatic stop for your resources, and also test it through within your non-production environment to validate your assumptions before adopting in production.
 
