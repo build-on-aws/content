@@ -37,7 +37,7 @@ This show is as interactive as our audience makes it, so join us as we work thro
 | Upcoming Episode | Name| Date | Link to Watch |
 |--|--|--|--|
 | **SO01E12** | All about Kubernetes with Jérôme Petazzoni | September 6, 8am PT | [Watch here](https://twitch.tv) |
-| **SO01E13** | All about Surprises | September 20, 8am PT | [Watch here](https://twitch.tv) |
+| **SO02E1** | All about Surprises | September 20, 8am PT | [Watch here](https://twitch.tv) |
 
 Watch past episodes!
 Join us for our upcoming episodes on the 1st and 3rd Wednesdays of the month!!
