@@ -36,8 +36,7 @@ To follow along with this example, clone the repository and choose your preferre
 
 ## Amazon SageMaker Pipelines
 A [SageMaker pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html) is a series of
-interconnected steps that can be used to automate machine learning workflows. You can create and run pipelines from SageMaker Studio by using Python, but you can also use AWS SDKs in other
-languages. Pipelines use interconnected steps and shared parameters to support repeatable workflows that can be customized for your specific use case.
+interconnected steps that can be used to automate machine learning workflows. Pipelines use interconnected steps and shared parameters to support repeatable workflows that can be customized for your specific use case.
 
 ### Explore a runnable scenario
 This example scenario demonstrates using AWS Lambda and Amazon Simple Queue Service (Amazon SQS) as part of an Amazon SageMaker pipeline. The pipeline itself executes a geospatial job to reverse geocode a sample set of coordinates into human-readable addresses. Input and output files are located in an Amazon Simple Storage Service (Amazon S3) bucket.
