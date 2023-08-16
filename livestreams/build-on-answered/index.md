@@ -44,7 +44,7 @@ Join us for our upcoming episodes on the 1st and 3rd Wednesdays of the month!!
 
 | Episode | Name| Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|--|
-| **SO01E11** | All about Amazon Redshift | August 16, 8am PT | [Watch here](https://twitch.tv) |
+| **SO01E11** | All about Amazon Redshift | August 16, 8am PT | [Watch here](https://twitch.tv) | [Show Notes](/livestreams/build-on-answered/2023-08-16)
 | **SO01E10** | In-studio with Cobus and Julie | August 2, 8am PT | [Watch here](https://twitch.tv) 
 | **SO01E09** | Boto3, Autoscaling, Chaos, and More with Julie, Chris, and Cobus | July 19, 2023 | [Watch here](https://www.twitch.tv/videos/1876114874) | [Show Notes](/livestreams/build-on-answered/2023-07-19) |
 | **S01E08**| More Terraform with Kerim | July 5, 2023 | [Watch here](https://www.twitch.tv/videos/1864025107 ) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
