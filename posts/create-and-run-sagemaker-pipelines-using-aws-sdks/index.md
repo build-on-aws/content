@@ -19,22 +19,22 @@ date: 2023-08-10
 | ToC |
 | --- |
 
-A new example scenario demonstrating how to work with [Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/index.html) pipelines and geospatial jobs is available now as part of the [AWS SDK Code Example Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html). 
+Are you using Amazon SageMaker for machine learning operations? If you are, did you also know you can automate your ML operations using an Amazon SageMaker Model Building Pipeline, and deploy and run those pipelines using AWS SDKs?
 
-The code in this example uses AWS SDKs to set up and run a scenario that creates, manages, and executes a [SageMaker pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html). A SageMaker pipeline is a series of interconnected steps that can be used to automate machine learning workflows. You can create and run pipelines from SageMaker Studio using Python, but you can also use an AWS Software Development Kit (SDK). Using the SDK, you can create and run SageMaker pipelines and also monitor pipeline operations.
+A new example scenario demonstrating how to work with [Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/index.html) pipelines and geospatial jobs is available now as part of the [AWS SDK Code Example Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html).
 
 ### What is the code example library?
 The code example library is a collection of code examples that shows you how to use [AWS software development kits (SDKs)](https://aws.amazon.com/what-is/sdk/) with your development language of choice to work with AWS services and tools. You can download all of the examples, including this Amazon SageMaker scenario, from the [GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples).
 
-To follow along with this example, clone the repository and choose your preferred language SDK location from the list below. Each language link will take you to a README file which includes setup instructions and prerequisites for that specific version.
+The code in this example uses AWS SDKs to set up and run a scenario that creates, manages, and executes a [SageMaker pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html). A SageMaker pipeline is a series of interconnected steps that can be used to automate machine learning workflows. You can create and run pipelines from SageMaker Studio using Python, but you can also use an AWS Software Development Kit (SDK). Using the SDK, you can create and run SageMaker pipelines and also monitor pipeline operations.
+
+To follow along with this example, clone the repository and choose your preferred language SDK from the list below. Each language link will take you to a README file which includes setup instructions and prerequisites for that specific version.
 
 - [.NET](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/dotnetv3/SageMaker/Scenarios)
 - [Java (V2)](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/workflow_sagemaker_pipes)
 - [Kotlin](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/kotlin/usecases/workflow_sagemaker_pipes)
 
 ## Amazon SageMaker Pipelines
-Are you using Amazon SageMaker for machine learning operations? If you are, did you also know you can automate your ML operations using an Amazon SageMaker Model Building Pipeline, and deploy and run those pipelines using AWS SDKs?
-
 A [SageMaker pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html) is a series of
 interconnected steps that can be used to automate machine learning workflows. You can create and run pipelines from SageMaker Studio by using Python, but you can also use AWS SDKs in other
 languages. Pipelines use interconnected steps and shared parameters to support repeatable workflows that can be customized for your specific use case.
