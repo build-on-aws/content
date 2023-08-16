@@ -9,9 +9,6 @@ tags:
   - AWS Cost Anomaly Detection
 authorGithubAlias: JerryChenZeyun
 authorName: Jerry Chen
-additionalAuthors: 
-  - authorGithubAlias: mergenf
-    authorName: Ben Mergen
 date: 2023-08-16
 ---
 
