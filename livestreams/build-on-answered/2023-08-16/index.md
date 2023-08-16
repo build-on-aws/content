@@ -10,8 +10,6 @@ tags:
 authorGithubAlias: julie_gund
 authorName: Julie Gunderson
 additionalAuthors: 
-  - authorGithubAlias: juliegund
-    authorName: Julie Gunderson
   - authorGithubAlias: chrisw-devops
     authorName: Chris Williams
 date: 2023-08-16
@@ -23,11 +21,7 @@ spaces:
 
 Join us for the Redshift episode of Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air! This week we have Anusha Challa from the Redshift team answering questions
 
-
-
 https://www.twitch.tv/videos/1900421697
-
-We would love [your feedback](https://www.pulse.aws/survey/B1J8HOF5) and suggestions of which questions to look at in next episodes!
 
 ## Hosts
 
@@ -41,7 +35,7 @@ We would love [your feedback](https://www.pulse.aws/survey/B1J8HOF5) and suggest
 2. [Show tables, describe tables equivalent in redshift?](https://stackoverflow.com/questions/18733385/show-tables-describe-tables-equivalent-in-redshift)
 3. [Amazon redshift: bulk insert vs COPYing from s3](https://stackoverflow.com/questions/25454477/amazon-redshift-bulk-insert-vs-copying-from-s3)
 
-## Do you have ideas for questions we should review on future shows?
+## Do you have feedback and/or ideas for questions we should review on future shows?
 
 Let us know [HERE](https://www.pulse.aws/survey/B1J8HOF5)
 
