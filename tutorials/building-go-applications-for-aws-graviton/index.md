@@ -6,6 +6,7 @@ tags:
   - graviton
   - go
   - sustainability
+  - cost-optimization
   - deploy
   - migrate
   - arm64
