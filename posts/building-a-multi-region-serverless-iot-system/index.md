@@ -1,5 +1,5 @@
 ---
-title: "Building a multi-region serverless IoT system"
+title: "Building a Multi-region Serverless IoT system"
 description: "Building a multi-region serverless IoT system can be a huge challenge. IoT resources, Things, and Certificates must be replicated across regions to allow IoT devices seamless multi-region connectivity"
 tags:
     - iot
@@ -10,14 +10,14 @@ tags:
     - serverless
 authorGithubAlias: JimmyDqv
 authorName: Jimmy Dahlqvist
-date: 2023-08-15
+date: 2023-08-16
 ---
 
-In this post we will take a look at how to build a multi-region serverless IoT system. We will dig deep into concepts how to replicate certificates across regions, and how to setup a DNS record for device connection. All in an event-driven and serverless way.
+In this post we will take a look at how to build a multi-region serverless IoT system. We will dig deep into concepts like how to replicate certificates across regions, and how to setup a DNS record for device connection. All in an event-driven and serverless way.
 
-## Why creating a multi-region setup ?
+## Why create a multi-region setup ?
 
-There are many reasons why we create multi-region systems on AWS. It can be compliance requirements, resiliency, or latency requirements. In an IoT system, we often have small devices with limit bandwidth which makes latency requirements even more important. With a large system with a global footprint a multi-region solution help us solve that challenge. However, building a multi-region IoT system comes with challenges of its own.
+There are many reasons why we create multi-region systems on AWS. It can be compliance requirements, resiliency, or latency requirements. In an IoT system, we often have small devices with limited bandwidth which makes latency requirements even more important. With a large system with a global footprint a multi-region solution help us solve that challenge. However, building a multi-region IoT system comes with challenges of its own.
 
 In an multi-region IoT system we don't want our IoT devices to be aware of what or how many AWS Regions we are running in. This should be totally transparent to the device, it should only connect to iot.example.com. For this to work we must register our IoT Things, Policies, and certificates in all regions. We must therefor be able to replicate all of this information across all Regions, despite what Region the device connect to.
 
@@ -33,7 +33,7 @@ We will use an [configurable endpoint](https://docs.aws.amazon.com/iot/latest/de
 
 Data from the IoT devices will be stored in a Global DynamoDB table, to allow access from both regions. Through out this blog post we will be using us-west-2 (Oregon) and eu-west-1 (Ireland) region when we build and create resources.
 
-Let’s start off with creating the DynamoDB tables we need.
+Let’s start off by creating the DynamoDB tables we need.
 
 ## Creating device registry and data table
 
