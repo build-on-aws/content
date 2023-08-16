@@ -36,8 +36,6 @@ This show is as interactive as our audience makes it, so join us as we work thro
 
 | Upcoming Episode | Name| Date | Link to Watch |
 |--|--|--|--|
-| **SO01E10** | In-studio with Cobus and Julie | August 2, 8am PT | [Watch here](https://twitch.tv) |
-| **SO01E11** | All about Amazon Redshift | August 16, 8am PT | [Watch here](https://twitch.tv) |
 | **SO01E12** | All about Kubernetes with Jérôme Petazzoni | September 6, 8am PT | [Watch here](https://twitch.tv) |
 | **SO01E13** | All about Surprises | September 20, 8am PT | [Watch here](https://twitch.tv) |
 
@@ -46,6 +44,8 @@ Join us for our upcoming episodes on the 1st and 3rd Wednesdays of the month!!
 
 | Episode | Name| Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|--|
+| **SO01E11** | All about Amazon Redshift | August 16, 8am PT | [Watch here](https://twitch.tv) |
+| **SO01E10** | In-studio with Cobus and Julie | August 2, 8am PT | [Watch here](https://twitch.tv) 
 | **SO01E09** | Boto3, Autoscaling, Chaos, and More with Julie, Chris, and Cobus | July 19, 2023 | [Watch here](https://www.twitch.tv/videos/1876114874) | [Show Notes](/livestreams/build-on-answered/2023-07-19) |
 | **S01E08**| More Terraform with Kerim | July 5, 2023 | [Watch here](https://www.twitch.tv/videos/1864025107 ) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
 | **S01E07** | Resiliency with Seth | June 21, 2023 | [Watch here](https://www.twitch.tv/videos/1856494950 ) | [Show Notes](/livestreams/build-on-answered/2023-06-21)|
