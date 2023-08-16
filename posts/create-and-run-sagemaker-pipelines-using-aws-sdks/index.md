@@ -19,11 +19,9 @@ date: 2023-08-10
 | ToC |
 | --- |
 
-## Overview
-
 A new example scenario demonstrating how to work with [Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/index.html) pipelines and geospatial jobs is available now as part of the [AWS SDK Code Example Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html). 
 
-The example code uses AWS SDKs to set up and run a scenario that creates, manages, and executes a [SageMaker pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html). A SageMaker pipeline is a series of interconnected steps that can be used to automate machine learning workflows. You can create and run pipelines from SageMaker Studio using Python, but you can also use an AWS Software Development Kit (SDK). Using the SDK, you can create and run SageMaker pipelines and also monitor pipeline operations.
+The code in this example uses AWS SDKs to set up and run a scenario that creates, manages, and executes a [SageMaker pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html). A SageMaker pipeline is a series of interconnected steps that can be used to automate machine learning workflows. You can create and run pipelines from SageMaker Studio using Python, but you can also use an AWS Software Development Kit (SDK). Using the SDK, you can create and run SageMaker pipelines and also monitor pipeline operations.
 
 ### What is the code example library?
 The code example library is a collection of code examples that shows you how to use [AWS software development kits (SDKs)](https://aws.amazon.com/what-is/sdk/) with your development language of choice to work with AWS services and tools. You can download all of the examples, including this Amazon SageMaker scenario, from the [GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples).
@@ -56,17 +54,105 @@ When you run the example console application, you can execute the following step
 - Display some output from the output file.
 - Clean up the pipeline resources.
 
-All of these steps are executed by the language code from the repository. For example, in the .NET solution the scenario is available within the SageMakerExamples.sln solution. You can run the example as-is, or experiment by making changes to the pipeline, Lambda function, or input and output processing options.
+All of these steps are executed by the language code from the repository. For example, in the .NET solution the scenario is available within the SageMakerExamples.sln solution. You can run the example as-is or experiment by making changes to the pipeline, Lambda function, or input and output processing options.
 
 ![Code image](/images/SagemakerCode.PNG)
 
-The console example can be executed directly from your IDE, and includes interactive options to support running multiple times without having to create new resources.
+The console example can be executed directly from your IDE, and includes interactive options to support running multiple times without having to create new resources. For .NET, run the example by selecting `Start Debugging` in the toolbar or by using the command `dotnet run`. The example will guide you through the setup and execution of the pipeline.
 
-![Setup image](/images/SagemakerOutput.PNG)
+```
+--------------------------------------------------------------------------------
+Welcome to the Amazon SageMaker pipeline example scenario.
 
-After the pipeline has completed an execution, sample output is also displayed to demonstrate the end-to-end capabilities.
+This example workflow will guide you through setting up and running an
+Amazon SageMaker pipeline. The pipeline uses an AWS Lambda function and an
+Amazon SQS Queue. It runs a vector enrichment reverse geocode job to
+reverse geocode addresses in an input file and store the results in an export file.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+First, we will set up the roles, functions, and queue needed by the SageMaker pipeline.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Checking for role named SageMakerExampleLambdaRole.
+--------------------------------------------------------------------------------
+Checking for role named SageMakerExampleRole.
+--------------------------------------------------------------------------------
+Setting up the Lambda function for the pipeline.
+The Lambda function SageMakerExampleFunction already exists, do you want to update it?
+n
+Lambda ready with ARN arn:aws:lambda:us-west-2:1234567890:function:SageMakerExampleFunction.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Setting up queue sagemaker-sdk-example-queue.
+--------------------------------------------------------------------------------
+Setting up bucket sagemaker-sdk-test-bucket.
+Bucket sagemaker-sdk-test-bucket ready.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Now we can create and run our pipeline.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Setting up the pipeline.
+Pipeline set up with ARN arn:aws:sagemaker:us-west-2:1234567890:pipeline/sagemaker-sdk-example-pipeline.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Starting pipeline execution.
+Run started with ARN arn:aws:sagemaker:us-west-2:1234567890:pipeline/sagemaker-sdk-example-pipeline/execution/1234567890.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Waiting for pipeline to finish.
+```
 
-![Output image](/images/SagemakerOutput2.PNG)
+After the pipeline has completed an execution, sample output is also displayed. Then interactive options guide you through cleaning up the resources.
+
+```
+        ...
+        Status is Executing.
+        Status is Succeeded.
+        Pipeline finished with status Succeeded.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Getting output results sagemaker-sdk-test-bucket-rlhagerm2.
+        Output file: outputfiles/abcdefgabcdef/results_0.csv
+        Output file contents:
+
+        -149.8935557,"61.21759217
+        ",601,USA,"601 W 5th Ave, Anchorage, AK, 99501, USA",Anchorage,,99501 6301,Alaska,Valid Data
+        -149.9054948,"61.19533942
+        ",2794,USA,"2780-2798 Spenard Rd, Anchorage, AK, 99503, USA",Anchorage,North Star,99503,Alaska,Valid Data
+        -149.7522,"61.2297
+        ",,USA,"Enlisted Hero Dr, Jber, AK, 99506, USA",Jber,,99506,Alaska,Valid Data
+        -149.8643361,"61.19525062
+        ",991,USA,"959-1069 E Northern Lights Blvd, Anchorage, AK, 99508, USA",Anchorage,Rogers Park,99508,Alaska,Valid Data
+        -149.8379726,"61.13751355
+        ",2372,USA,"2276-2398 Abbott Rd, Anchorage, AK, 99507, USA",Anchorage,,99507,Alaska,Valid Data
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+The pipeline has completed. To view the pipeline and runs in SageMaker Studio, follow these instructions:
+https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-studio.html
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Finally, let's clean up our resources.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Clean up resources.
+        Delete pipeline sagemaker-sdk-example-pipeline? (y/n)
+n
+        Delete queue https://sqs.us-west-2.amazonaws.com/1234567890/sagemaker-sdk-example-queue? (y/n)
+n
+        Delete Amazon S3 bucket sagemaker-sdk-test-bucket? (y/n)
+n
+        Delete Lambda SageMakerExampleFunction? (y/n)
+n
+        Delete Role SageMakerExampleLambdaRole? (y/n)
+n
+        Delete Role SageMakerExampleRole? (y/n)
+n
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+SageMaker pipeline scenario is complete.
+--------------------------------------------------------------------------------
+```
 
 ### What features are included in the example?
 The following sections describe some primary features of this code example. This, and related information, can also be found within each language README within the GitHub repository.
