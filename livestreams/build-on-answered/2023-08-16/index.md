@@ -19,7 +19,7 @@ spaces:
   - livestreams
 ---
 
-![Streaming session with Julie, Chris, and and Anusha, with a shared browser tab showing a Stack Overflow question](images/redshift_stackoverflow.gif)
+![Streaming session with Julie, Chris, and and Anusha, with a shared browser tab showing a Stack Overflow question](images/redshift_stackoverflow_sm.gif)
 
 Join us for Episode 11 of Build On Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
