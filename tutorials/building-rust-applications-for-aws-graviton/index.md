@@ -6,6 +6,7 @@ tags:
   - graviton
   - rust
   - sustainability
+  - cost-optimization
   - deploy
   - migrate
   - arm64
