@@ -7,7 +7,7 @@ tags:
     - aws-stack-overflow-collective
     - aws
     - twitch
-authorGithubAlias: julie_gund
+authorGithubAlias: juliegund
 authorName: Julie Gunderson
 additionalAuthors: 
   - authorGithubAlias: chrisw-devops
