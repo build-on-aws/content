@@ -19,19 +19,20 @@ In this post we will take a look at how to build a multi-region serverless IoT s
 
 There are many reasons why we create multi-region systems on AWS. It can be compliance requirements, resiliency, or latency requirements. In an IoT system, we often have small devices with limited bandwidth which makes latency requirements even more important. With a large system with a global footprint a multi-region solution help us solve that challenge. However, building a multi-region IoT system comes with challenges of its own.
 
-In an multi-region IoT system we don't want our IoT devices to be aware of what or how many AWS Regions we are running in. This should be totally transparent to the device, it should only connect to iot.example.com. For this to work we must register our IoT Things, Policies, and certificates in all regions. We must therefor be able to replicate all of this information across all Regions, despite what Region the device connect to.
 
-We will look at the steps needed to perform this replication in a efficient way. What services to use, and what the setup looks like.
+In an multi-region IoT system we don't want our IoT devices to be aware of what or how many AWS Regions we are running in. This should be totally transparent to the device, it should only connect to iot.example.com. For this to work, we must register our IoT Things, Policies, and certificates in all regions. Therefore, we will be able to replicate all of this information across all Regions, despite what Region the device connect to.
+
+We will look at the steps needed to perform this replication in an efficient way. What services to use, and what the setup looks like.
 
 ## Architectural overview
 
-What we are building in this post is an architecture that will span two AWS Regions, devices connect to the closest region using Route53. AWS StepFunctions state-machine will act on incoming events from IoT Core and carry out the needed work. So now let's get started and let's get building.
+What we are building in this post is an architecture that will span two AWS Regions, with devices connecting to the closest region using Route53. AWS StepFunctions state-machine will act on incoming events from IoT Core and carry out the needed work. Now let's get started and let's get building.
 
 ![Image showing the architecture overview.](images/architecture-overview.png)
 
-We will use an [configurable endpoint](https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-configurable.html) with an custom domain, iot.example.com. This will be configured in two regions and we'll use a latency based record to let devices connect to the Region closest to them. When a device connect for the very first time, the device certificate will be registered in IoT Core, using Just In Time Registration. If a device certificate is successfully registered and activated it will be stored in an Device registry, which is a Global DynamoDB table. By utilizing DynamoDB Streams the replication, of the device certificate, can be done in an event-driven way, utilizing EventBridge Pipes and a custom event-bus. Devices will use certificates issued by a self-signed Root CA. When we authenticate our devices towards AWS IoT Core we will be using Mutual TLS.
+We will use an [configurable endpoint](https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-configurable.html) with a custom domain: iot.example.com. This will be configured in two regions and we'll use a latency-based record to let devices connect to the Region closest to them. When devices connect for the very first time, the device certificate will be registered in IoT Core, using Just In Time Registration. If a device certificate is successfully registered and activated, it will be stored in an device registry, which is a Global DynamoDB table. By utilizing DynamoDB Streams, the replication of the device certificate can be done in an event-driven way, by utilizing EventBridge Pipes and a custom event-bus. Devices will use certificates issued by a self-signed Root CA. When we authenticate our devices towards AWS IoT Core, we will be using Mutual TLS.
 
-Data from the IoT devices will be stored in a Global DynamoDB table, to allow access from both regions. Through out this blog post we will be using us-west-2 (Oregon) and eu-west-1 (Ireland) region when we build and create resources.
+Data from the IoT devices will be stored in a Global DynamoDB table to allow access from both regions. Throughout this blog post we will be using us-west-2 (Oregon) and eu-west-1 (Ireland) region when we build and create resources.
 
 Let’s start off by creating the DynamoDB tables we need.
 
