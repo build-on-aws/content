@@ -6,7 +6,7 @@ tags:
     - ai-ml
 authorGithubAlias: kazdaghli, mehdimld
 authorName: Sarra Kazdaghli, Mehdi Mouloudj
-date: 2023-08-02
+date: 2023-08-17
 ---
 
 In machine learning, data scientists are working to develop the best fit prediction model through experimentation and algorithms development. They invest in research and have their own local development environment to quickly iterate. But that way of developing machine learning models quickly reaches limits.
