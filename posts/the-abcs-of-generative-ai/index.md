@@ -44,6 +44,8 @@ Here’s a full list of the ABCs of Generative AI so you can skip ahead:
 * [Y is for You Can Build on AWS](#y-is-for-you-can-build-on-aws)
 * [Z is for Zero-Shot Learning](#z-is-for-zero-shot-learning)
 
+![A is for Attention](/images/a.png)
+
 ## A is for Attention
 
 Attention in AI is like shining a spotlight so the model knows what's important and what to pay attention to. In the 2017 paper [Attention Is All You Need](https://arxiv.org/abs/1706.03762), the authors presented a really novel idea that [transformers](#t-is-for-transformers) (which we'll cover later in the alphabet) can effectively process sequential data with attention mechanisms alone, instead of needing traditional recurrent or convolutional [neural networks](#n-is-for-neural-network). This mechanism enables the model to weigh the importance of different pieces of information, and has become a vital component in state-of-the-art [Large Language Models](#l-is-for-large-language-models) for tasks like translation, summarization, and text generation. 
@@ -185,3 +187,5 @@ I take pride in the fact this is the only letter I couldn’t think of an “act
 Zero-Shot Learning is a technique in Machine Learning where a model is trained to make predictions or classifications on data it hasn’t seen during it’s training phase. The concept uses [vectors](#v-is-for-vector-databases) to map inputs, like text or videos, to a semantic space where meanings are clustered. From here, the model can classify or predict based on proximity to known concepts in that space by looking at the distances between vectors. Zero-Shot Learning is useful for areas like Natural Language Processing (NLP), and it provides flexibility and broadens the applications of pre-trained models like [transformers](#t-is-for-transformers) and [foundation models](#f-is-for-foundation-models). 
 
 Learn more about how to perform prompt engineering in zero-shot learning environments in the [Amazon SageMaker Docs](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-customize-prompt-engineering.html), and learn how to use Zero-Shot learning to [Build a news-based real-time alert system with Twitter, Amazon SageMaker, and Hugging Face on the AWS Machine Learning Blog](https://aws.amazon.com/blogs/machine-learning/build-a-news-based-real-time-alert-system-with-twitter-amazon-sagemaker-and-hugging-face/).
+
+The ABCs of Generative AI has only scratched the surface with a single term for each letter, but the list of technical terms in AI/ML is vast and ever expanding. There are so many terms and concepts that didn't make it into this initial list, but I'd love to hear them! Dive into the conversation and share the terms you believe deserve a spot using the hashtag #ABCsGenAI on your favorite social media platform.
