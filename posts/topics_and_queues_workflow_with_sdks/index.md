@@ -6,7 +6,6 @@ tags:
     - sqs
     - sdk
     - aws
- 
 authorGithubAlias: meyertst-aws
 authorName: Steven Meyer
 date: 2023-08-07
@@ -23,7 +22,7 @@ This article describes the topics and queues workflow sample code which is part 
 
 You can publish and subscribe using Amazon SNS alone. But combining Amazon SNS with Amazon SQS gives you greater flexibility in how the messages are consumed.
 
-Amazon SNS is a push service. It pushes to endpoints such as email addresses, mobile application endpoints, or SQS queues. (For a full list of endpoints, see [SNS event destinations](https://docs.aws.amazon.com/sns/latest/dg/sns-event-destinations.html)). 
+Amazon SNS is a push service. It pushes to endpoints such as email addresses, mobile application endpoints, or SQS queues. (For a full list of endpoints, see [SNS event destinations](https://docs.aws.amazon.com/sns/latest/dg/sns-event-destinations.html?sc_channel=el&sc_campaign=posts&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=topics-and-queues-workflow-with-sdks)). 
 
 With Amazon SQS, messages are received from a queue by polling. With polling, the subscriber receives messages by calling a receive message API. Any code can poll the queue. Also, the messages stay in the queue until you delete them. This gives you more flexibility in how the messages are processed. For example, a consumer may not be able to process a message the first time it is polled. In that case, the message is left in the queue for later processing. The point here is that there are more options for solving a use case. Polling may allow a cleaner solution than push notifications.
 
@@ -39,7 +38,7 @@ As already mentioned, code for these applications is contained in the [AWS SDK C
 git clone https://github.com/awsdocs/aws-doc-sdk-examples.git
 ```
 
-The easiest way to find the topics and queues workflow for a particular language is to use the [code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html) website page. The link to the GitHub code for each language is shown in the "Note" on the panel for that language. You can use the link to find the folder in your downloaded code. The folder contains a README with instructions for building and running the code.
+The easiest way to find the topics and queues workflow for a particular language is to use the [code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html?sc_channel=el&sc_campaign=posts&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=topics-and-queues-workflow-with-sdks) website page. The link to the GitHub code for each language is shown in the "Note" on the panel for that language. You can use the link to find the folder in your downloaded code. The folder contains a README with instructions for building and running the code.
 
 The code is structured to allow you to choose different options, which follow different paths in the code. This allows you to play with different scenarios and see what is required to implement a particular option. 
 
@@ -55,13 +54,13 @@ Note: The actual interface may vary slightly between programming languages.
 Would you like to work with FIFO topics? (y/n) 
 ```
 
-You configure FIFO (First-In-First-Out) topics when you create them. Choosing a FIFO topic enables other options, too. To learn more, see [FIFO topics example use case](https://docs.aws.amazon.com/sns/latest/dg/fifo-example-use-case.html).
+You configure FIFO (First-In-First-Out) topics when you create them. Choosing a FIFO topic enables other options, too. To learn more, see [FIFO topics example use case](https://docs.aws.amazon.com/sns/latest/dg/fifo-example-use-case.html?sc_channel=el&sc_campaign=posts&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=topics-and-queues-workflow-with-sdks).
 
 ```
 Use content-based deduplication instead of a deduplication ID? (y/n)
 ```
 
-Deduplication is only available for FIFO topics. Deduplication prevents the subscriber from responding repeatedly to the same message. If a published message is determined to be a duplicate within the five-minute deduplication interval, the message is accepted but not delivered. For more information, see [Message deduplication for FIFO topics](https://docs.aws.amazon.com/sns/latest/dg/fifo-message-dedup.html).
+Deduplication is only available for FIFO topics. Deduplication prevents the subscriber from responding repeatedly to the same message. If a published message is determined to be a duplicate within the five-minute deduplication interval, the message is accepted but not delivered. For more information, see [Message deduplication for FIFO topics](https://docs.aws.amazon.com/sns/latest/dg/fifo-message-dedup.html?sc_channel=el&sc_campaign=posts&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=topics-and-queues-workflow-with-sdks).
 
 Content-based deduplication uses a hash of the content as a deduplication ID. If content-based deduplication is not enabled, you must include a deduplication ID with each message.
 
@@ -113,7 +112,7 @@ All configurations include a message text.
 Enter a message group ID for this message.
 ```
 
-For more information about group IDs, see [Message grouping for FIFO topics](https://docs.aws.amazon.com/sns/latest/dg/fifo-message-grouping.html).
+For more information about group IDs, see [Message grouping for FIFO topics](https://docs.aws.amazon.com/sns/latest/dg/fifo-message-grouping.html?sc_channel=el&sc_campaign=posts&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=topics-and-queues-workflow-with-sdks).
 
 ```
 Enter a deduplication ID for this message.
@@ -153,4 +152,4 @@ At the time of this writing, topics and queues workflows exist for the following
 * Kotlin
 * JavaScript
 
-Implementations for other languages will soon be added. The existing implementations can be found on the [code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html) website. The code can be downloaded from the [AWS SDK Code Examples](https://github.com/awsdocs/aws-doc-sdk-examples) GitHub repository.
+Implementations for other languages will soon be added. The existing implementations can be found on the [code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html?sc_channel=el&sc_campaign=posts&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=topics-and-queues-workflow-with-sdks) website. The code can be downloaded from the [AWS SDK Code Examples](https://github.com/awsdocs/aws-doc-sdk-examples) GitHub repository.
