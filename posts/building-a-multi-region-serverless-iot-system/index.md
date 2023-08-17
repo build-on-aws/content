@@ -38,9 +38,9 @@ Let’s start off by creating the DynamoDB tables we need.
 
 ## Creating device registry and data table
 
-We will create two global DynamoDB tables, these will only be deployed to a single Region but configured with a replica in a second Region. We need a way to keep track of the devices that have already been registered, despite which Region it was initially registered in. For this we will create a Device Inventory table. For testing purposes we will also create a global DynamoDB table where we can store data coming from the devices.
+We will create two global DynamoDB tables that will only be deployed to a single Region but configured with a replica in a second Region. We need a way to keep track of the devices that have already been registered, despite which Region it was initially registered in. For this, we will create a Device Inventory table. For testing purposes, we will also create a global DynamoDB table where we can store data coming from the devices.
 
-These resources we deploy using AWS CloudFormation / [Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/)
+We will deploy these resources using AWS CloudFormation / [Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/)
 
 ```yaml
 AWSTemplateFormatVersion: "2010-09-09"
@@ -117,9 +117,9 @@ Outputs:
 
 ## Creating Certificates
 
-We are going to use a self signed Root CA when issuing server and device certificates. In a production environment you should use Root CA signed by a 3rd party trusted source. Our certificate chain will include a Root CA and an Intermediate CA. It will be the Intermediate CA that will issue both the server and client certificates. Read this to learn more about [SSL/TLS certificates](https://aws.amazon.com/what-is/ssl-certificate/). Read this to learn more about the [process](https://www.golinuxcloud.com/openssl-create-certificate-chain-linux/) we will be using to create the certificates. We will be using [OpenSSL](https://www.openssl.org/) when creating certificates.
+We are going to use a self-signed Root CA when issuing server and device certificates. In a production environment, you should use Root CA signed by a third party trusted source. Our certificate chain will include a Root CA and an Intermediate CA. The Intermediate CA will issue both the server and client certificates. [Read this to learn more about SSL/TLS certificates](https://aws.amazon.com/what-is/ssl-certificate/). [Read this to learn more about the process](https://www.golinuxcloud.com/openssl-create-certificate-chain-linux/) that we will be using to create the certificates. We will be using [OpenSSL](https://www.openssl.org/) when creating certificates.
 
-First of all we start by creating the folder structure needed, and the files needed to track our certificate creation.
+We will start by creating the folder structure needed and the files needed to track our certificate creation.
 
 ```bash
 mkdir -p ./myCA/rootCA/{certs,crl,newcerts,private,csr}
@@ -140,7 +140,7 @@ touch ./myCA/rootCA/index.txt
 touch ./myCA/intermediateCA/index.txt
 ```
 
-Next we create the private key, and certificate for the Root CA.
+Next, we create the private key and certificate for the Root CA.
 
 ```bash
 # Root CA:
@@ -148,7 +148,7 @@ openssl genrsa -out ./myCA/rootCA/private/ca.key 4096
 openssl req -config ./myCA/ca_root.cnf -key ./myCA/rootCA/private/ca.key -new -x509 -days 7300 -sha256 -extensions v3_ca -out ./myCA/rootCA/certs/ca.crt -subj "/C=SE/ST=Scania/L=Malmo/O=MyOrg/OU=/CN=Root CA"
 ```
 
-With the Root CA created we can use this to create and sign the Intermediate CA and create a certificate bundle with the Root and Intermediate CA.
+With the Root CA created, we can use this to create and sign the Intermediate CA and create a certificate bundle with the Root and Intermediate CA.
 
 ```bash
 # Intermediate CA:
@@ -169,7 +169,7 @@ openssl req -config ./myCA/ca_intermediate.cnf -key ./myCA/server/private/iot.ex
 openssl ca -config ./myCA/ca_intermediate.cnf -extensions server_cert -days 375 -notext -md sha256 -in ./myCA/server/csr/iot.example.com.csr -out ./myCA/server/certs/iot.example.com.crt
 ```
 
-Finally we create a set of different client certificates, here we can create a simple bash script that help us create the certificate, and copy it to clients folder so we can easily access them. For the client certificates we like the common name to match the Thing name we'll use in IoT Core later.
+Finally, we create a set of different client certificates. Here we can create a simple bash script that helps us create the certificate, and copy it to clients folder so we can easily access them. For the client certificates we like the common name to match the Thing name we'll use in IoT Core later.
 
 ```bash
 #!/bin/bash
@@ -197,7 +197,7 @@ With all the certificates created, we can continue with everything and setup the
 
 ## Creating configurable endpoint
 
-The first thing we need to do is import the server certificate to AWS Certificate Manager (ACM). We need three things, the server certificate, the server private key, and the certificate chain we also created earlier.
+The first thing we need to do is import the server certificate to AWS Certificate Manager (ACM). We need three things: the server certificate, the server private key, and the certificate chain we also created earlier.
 
 ![Image showing the import of server certificate to ACM.](images/import-server-cert-acm.png)
 
@@ -214,13 +214,13 @@ Note!
 The server certificate must be imported in both regions for the setup to work properly.
 ```
 
-The next step in the process is process is to create the domain configuration and a latency based Route53 record. To prove that we are the rightful owners of the domain name we also need to create a validation certificate in ACM. To create all of this we can turn to AWS CloudFormation and SAM. It's assumed that a Hosted Zone for the domain exists in Route53.
+The next step in the process is process is to create the domain configuration and a latency based Route53 record. To prove that we are the rightful owners of the domain name, we also need to create a validation certificate in ACM. To create all of this, we can turn to AWS CloudFormation and SAM. It's assumed that a Hosted Zone for the domain exists in Route53.
 
-We need the IoT Core Endpoint, so we can point the Route53 record to it. There is only one Iot Core endpoint per account and Region. The endpoint can be found under the Setting in the IoT Core console.
+We need the IoT Core Endpoint, so we can point the Route53 record to it. There is only one Iot Core endpoint per account and Region. The endpoint can be found under the Settings menu in the IoT Core console.
 
 ![Image showing the IoT Core Endpoint setting.](images/iot-core-endpoint.png)
 
-It's also possible to get the endpoint using the `CLI`, we need to get the Data ATS endpoint.
+It's also possible to get the endpoint using the `CLI`. We need to get the Data ATS endpoint.
 
 ```bash
 aws iot describe-endpoint --endpoint-type iot:Data-ATS
@@ -298,22 +298,22 @@ Resources:
 
 ```
 
-To validate the IoT domain configuration we can navigate to IoT Core console and check the configuration under settings. Validate that the domain configuration looks like the images below.
+To validate the IoT domain configuration, we can navigate to IoT Core console and check the configuration under settings. The domain configuration should look like the images below.
 
 ![Image showing the IoT Core domain configuration.](images/iot-core-validate-domain-config.png)
 
 ![Image showing the IoT Core domain configuration details.](images/iot-core-validate-domain-config-details.png)
 
-With the endpoint configured we can move to the next step, activating just in time registration.
+With the endpoint configured, we can move to the next step, activating just in time registration.
 
 ## Activate Just In Time Registration
 
-The first time a device connects to IoT Core with a certificated signed by our Intermediate CA, the certificate from the device will be registered in IoT Core. This way we can manufacture our devices, bundle them with certificates but not have them registered in IoT Core. The device will receive an immediate disconnect and then need to reconnect. There need to be some form of wait logic in the device, to allow for the cloud to activate the device in IoT Core, before reconnecting. We can add our own validation in this activation step, making sure the device is who it claim to be.
+The first time a device connects to IoT Core with a certificate signed by our Intermediate CA, the certificate from the device will be registered in IoT Core. This way we can manufacture our devices, bundle them with certificates but not have them registered in IoT Core. The device will receive an immediate disconnect and then need to reconnect. There needs to be some form of wait logic in the device to allow for the cloud to activate the device in IoT Core before reconnecting. We can add our own validation in this activation step, making sure the device is who it claims to be.
 
-We need to run these steps in both regions, the reason for that is that our devices will connect using the configured DNS `iot.example.com` and will connect to the closest Region.
+We need to run these steps in both regions, because our devices will connect using the configured DNS `iot.example.com` and will connect to the closest Region.
 
 1. Register our CA certificate in IoT core and turn on auto-registration.
-2. Create a IoT Core Rule that will invoke an AWS StepFunction to carry out our activation logic.
+2. Create an IoT Core Rule that will invoke an AWS StepFunction to carry out our activation logic.
 3. Replicate our device to the second Region. This step will use an event-driven architecture and react when our device is registered in the primary Region.
 
 To register the CA certificate, we use the `CLI` to do so. We'll register the certificate in `SNI_ONLY` mode. This way the same CA can be registered in several accounts and regions.
@@ -326,15 +326,13 @@ aws iot register-ca-certificate --allow-auto-registration  --ca-certificate file
 aws iot register-ca-certificate --allow-auto-registration  --ca-certificate file://myCA/intermediateCA/certs/ca_intermediate.crt --certificate-mode SNI_ONLY --set-as-active --region us-west-2
 ```
 
-It is also possible to do the registration using the console. Navigate to the IoT Console and select security. When using the console the `SNI_ONLY` mode is called `Multi-account`, this is the same as `SNI_ONLY`, the graphical interface just calls it something different. Upload the `ca_intermediate.crt` file, that we created in the steps when creating certificates.
+It is also possible to do the registration using the console. Navigate to the IoT Console, and select Security. When using the console the `SNI_ONLY` mode is called `Multi-account`, this is the same as `SNI_ONLY`, the graphical interface just calls it something different. Upload the `ca_intermediate.crt` file, that we created in the steps when creating certificates.
 
 ![Image showing the IoT Core domain configuration.](images/register-ca-cert-iot-core.png)
 
 As usual, we can also do this using the `CLI`
 
-
-
-To be able to invoke an AWS StepFunction when a certificate is registered we must enable [IoT Core Events](https://docs.aws.amazon.com/iot/latest/developerguide/iot-events.html). These events will be posted onto a reserved AWS topic, `$aws/events/xyz` that we then can create a rule for. The events for registered certificates can ONLY be enabled using the `CLI` this option is not available in the console. To enable the events we need we run the commands.
+To be able to invoke an AWS StepFunction when a certificate is registered, we must enable [IoT Core Events](https://docs.aws.amazon.com/iot/latest/developerguide/iot-events.html). These events will be posted onto a reserved AWS topic, `$aws/events/xyz` that we then can create a rule for. The events for registered certificates can ONLY be enabled using the `CLI` as this option is not available in the console. To enable the events, we need to run the commands.
 
 ```bash
 ## Enable in eu-west-1
@@ -348,7 +346,7 @@ aws iot update-event-configurations --event-configurations '{"THING":{"Enabled":
 aws iot describe-event-configurations --region us-west-2
 ```
 
-Once again, we turn to our CloudFormation / SAM template and add some additional resources. To start with we'll create the IoT Policy that we attach to our devices, the IoT Core Rule, and the StepFunction that implements our logic.
+Once again, we turn to our CloudFormation / SAM template and add some additional resources. To start we'll, create the IoT Policy that we attach to our devices, the IoT Core Rule, and the StepFunction that implements our logic.
 
 ```yaml
 
@@ -449,7 +447,7 @@ Once again, we turn to our CloudFormation / SAM template and add some additional
 
 ## Deep dive JITR logic
 
-The JITR logic include several steps that need to be coordinated and orchestrated. StepFunctions is an excellent service for this, and we can use the built in error handling to rollback certain steps if we have an failure. We need to fetch information about the registered certificate and read out information from it. We'll check so this is a new device and that it doesn't already exists in our registry of devices. We then create an IoT Thing, attach the registered certificate to that Thing, attach our standard IoT Policy, that we created in pervious part, and then we activate the certificate to allow the device to actually connect to IoT Core. Finally we register the device in our global device registry DynamoDB table.
+The JITR logic includes several steps that need to be coordinated and orchestrated. StepFunctions is an excellent service for this, and we can use the built in error handling to rollback certain steps if we have a failure. We need to fetch information about the registered certificate and read out information from it. We'll check that this is a new device and that it doesn't already exists in our registry of devices. We then create an IoT Thing, attach the registered certificate to that Thing, attach our standard IoT Policy, that we created in pervious part, and then we activate the certificate to allow the device to actually connect to IoT Core. Finally we register the device in our global device registry DynamoDB table.
 
 ![Image showing the JITR logic.](images/jitr-stepfunctions-logic.png)
 
@@ -638,7 +636,7 @@ States:
         Type: Fail
 ```
 
-All but one of the tasks can be completed using the powerful [service and SDK integration](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html) that exists in StepFunctions. For the task to read out information from the actual certificate we need to use an AWS Lambda Functions. We need to get the name of the thing, and this should match the common name in the certificate.
+All but one of the tasks can be completed using the powerful [service and SDK integration](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html) that exists in StepFunctions. For the task to read out information from the actual certificate, we need to use an AWS Lambda Function. We need to get the name of the thing, and this should match the common name in the certificate.
 
 ```python
 # Read the CommonName from the certificate PEM
@@ -953,14 +951,14 @@ States:
         Type: Succeed
 ```
 
-With the replication done we are ready to start testing the solution using our two regions.
+With the replication done, we are ready to start testing the solution using our two regions.
 
 ## Testing
 
-What we will do during testing is setup an IoT Rule that will invoke a StepFunction state-machine, this will store the incoming data in our global data DynamoDB table.
-To imitate devices we will use EC2 instances, running in the different regions, add use [Eclipse Mosquitto](https://mosquitto.org/) and [mosquitto_pub](https://mosquitto.org/man/mosquitto_pub-1.html).
+What we will do during testing is set up an IoT Rule that will invoke a StepFunction state-machine, which will store the incoming data in our global data DynamoDB table.
+To imitate devices, we will use EC2 instances, running in the different regions, add use [Eclipse Mosquitto](https://mosquitto.org/) and [mosquitto_pub](https://mosquitto.org/man/mosquitto_pub-1.html).
 
-First of all let's create the resources we need, we addon to our CloudFormation template.
+First of all, let's create the resources we need, we addon to our CloudFormation template.
 
 ```yaml
   ##########################################################################
@@ -1076,9 +1074,9 @@ States:
         End: true
 ```
 
-Make sure to upload the Root CA certificate, the intermediate CA certificate, the device certificates and private keys, that you have created, to the `CertificateStoreBucket` bucket in both Regions. Since we use our self signed CA certificate to sign the server certificate we must present this during the connection attempt.
+Make sure to upload the Root CA certificate, the intermediate CA certificate, the device certificates and private keys, that you have created, to the `CertificateStoreBucket` bucket in both Regions. Since we use our self-signed CA certificate to sign the server certificate we must present this during the connection attempt.
 
-From the EC2 console let's create an Ubuntu 22.04 instance.
+From the EC2 console, let's create an Ubuntu 22.04 instance.
 
 ![Image showing the first part of creating an EC2 instance.](images/create-ubuntu-ec2-instance.png)
 
@@ -1095,7 +1093,7 @@ It's not recommended to allow SSH from anywhere on a long running instance!!
 
 ![Image showing the EC2 instance network settings.](images/create-ec2-instance-network-setting.png)
 
-Under advanced settings select the Instance Profile, in the Region, that we created using the CloudFormation template.
+Under advanced settings, select the Instance Profile, in the Region, that we created using the CloudFormation template.
 
 ![Image showing the EC2 instance advanced settings.](images/create-ec2-instance-advanced-setting.png)
 
@@ -1123,7 +1121,7 @@ sudo snap connect mosquitto:home snapd:home
 
 ```
 
-With this installed with can use to connect and try to publish an message. The first time we try to connect the device will receive an immidieate disconnect, this since the device certificate is not registered and active.
+With this installed with can use `mosquitto_pub` to connect and publish a message. The first time we try to connect the device will receive an immediate disconnect, this since the device certificate is not registered and active.
 
 ```bash
 mosquitto_pub -h iot.example.com --cafile ./ca.crt --cert ./test_001.crt --key ./test_001.key -p 8883 -q 1 -d -t i/test_001/m -i test_001 -m "{\"message\": \"Hello From Test-001\"}"
@@ -1133,11 +1131,11 @@ Client test_001 sending CONNECT
 Error: The connection was lost.
 ```
 
-Navigating to StepFunctions console in our current (primary) test Region should show at least one invocation of the JITR state-machine with a success.
+Navigating to StepFunctions console in our current (primary) test Region, should show at least one invocation of the JITR state-machine with a success.
 
 ![Image showing the invocation of the JITR state-machine.](images/jitr-statemachine-success.png)
 
-In our other (replication) Region we should see an successful invocation of the replication state-machine.
+In our other (replication) Region we should see a successful invocation of the replication state-machine.
 
 ![Image showing the invocation of the JITR state-machine.](images/replicate-statemachine-success.png)
 
@@ -1154,10 +1152,10 @@ Client test_001 received PUBACK (Mid: 1, RC:0)
 Client test_001 sending DISCONNECT
 ```
 
-Repeat the above using an EC2 instances in both Regions. You can imitate the same device from both regions. After sending some data we can navigate to the DynamoDB table, containing our IoT data. Verify what Region the data was written to the table from, this is from our test state-machine writing ingress data to the table.
+Repeat the above using an EC2 instances in both Region. You can imitate the same device from both regions. After sending some data we can navigate to the DynamoDB table, containing our IoT data. Verify what Region the data was written to the table from this is from our test state-machine writing ingress data to the table.
 
 ![Image showing the invocation of the JITR state-machine.](images/dynamodb-iot-data.png)
 
 ## Conclusion
 
-Creating a multi-region IoT system can be challenge, with replication of Things and certificates. As shown in this post this can be automated in a event-driven and serverless way, allowing our IoT devices to connect and send data to several Regions using FQDN custom endpoint.
+Creating a multi-region IoT system can be a challenge, with replication of Things and certificates. As shown in this post it can be automated in an event-driven and serverless way that allows our IoT devices to connect and send data to several Regions using FQDN custom endpoint.
