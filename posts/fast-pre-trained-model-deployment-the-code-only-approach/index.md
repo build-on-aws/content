@@ -9,7 +9,7 @@ spaces:
   - generative-ai
 authorGithubAlias: mikegc-aws
 authorName: Mike Chambers
-date: 2023-08-09
+date: 2023-08-18
 ---
 
 For many of us, our ML journeys are stood on the shoulders of giants.  We work with well researched and well understood algorithms such as XGBoost, ResNet and many more.  We deploy pre-trained models like BERT, ResNet50 and others.  And we fine-tune pre-trained generative AI and foundation models like Falcon and Stable Diffusion.  
