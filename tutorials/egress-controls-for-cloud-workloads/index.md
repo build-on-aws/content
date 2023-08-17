@@ -37,7 +37,7 @@ Before starting this tutorial, you will need the following:
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | < $5 USD when cleanup is performed upon completion     |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](<ticket in to get repo>)                             |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-08-09                             |
 
@@ -98,7 +98,7 @@ While this is not specific to this tutorial, you can make a minor adjustment to 
 
 ## Environment setup
 
-This tutorial starts with a baseline configuration that's built with a CloudFormation template that you can find in the sample code repo.  
+This tutorial starts with a baseline configuration that's built with a CloudFormation template that you can find in the sample code repo.  You will need to deploy this template in your own AWS environment before following along with the tutorial.
 
 Once you have the CloudFormation Template deployed, we will check the baseline posture of the environment.  We are checking to see that certain traffic is allowed out of the environment.  Once verified we will configure the Amazon Route 53 resolve DNS firewall to block this undesired egress traffic and we will also enable logging.
 
