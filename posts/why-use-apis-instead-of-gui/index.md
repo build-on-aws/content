@@ -8,7 +8,7 @@ tags:
 authorGithubAlias: loopDelicious
 authorName: Joyce Lin
 githubUserLabel: NONE
-date: 2023-08-25
+date: 2023-08-18
 ---
 
 Most AWS users rely on the graphic user interface (GUI) of the [AWS Management Console](https://aws.amazon.com/console/) for manual operations, like provisioning new resources or deploying applications. AWS also has developer resources to enable programmatic access to cloud services for more flexibility, automation, and extensibility.
