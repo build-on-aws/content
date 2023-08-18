@@ -18,7 +18,7 @@ spaces:
   - livestreams
 ---
 
-![Screenshot of the stream with Darko and Cobus looking at each other](images/cobus_darko.webp "When a Rust developer talks to themself")
+![Screenshot of the stream with Darko and Cobus looking at each other](images/cobus_darkos.webp "When a Rust developer talks to themself")
 
 You may have heard that Rust is one of the most Admired and Desired languages out [there](https://survey.stackoverflow.co/2023/#technology-admired-and-desired). So lets talk about it. No, lets build it and run in in the cloud. In today's episode of Build On Weekly, Cobus and Darko compile a Link shortener application written in rust and deploy it to the Cloud. Not just anywhere, but rather on an [ARM based EC2 instance](https://go.aws/3KLVZN3) on AWS - Graviton.
 
