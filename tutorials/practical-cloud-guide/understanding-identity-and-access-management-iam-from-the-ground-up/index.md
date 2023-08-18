@@ -3,8 +3,8 @@ title: "Understanding AWS Identity and Access Management (IAM) From the Ground U
 description: "Managing users and access to resources is part of a cloud administrator's job. This tutorial introduces basic concepts and a tutorial to demonstrate how to use the AWS Identity and Access Management service to manage user access to cloud resources."
 tags:
     - tutorials
-    - aws
-    - iam
+    - aws-iam
+    - identity-access-management
     - it-pros
     - security
 authorGithubAlias: spara
@@ -28,7 +28,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 45 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline)<br>- [AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-08-14                             |
 
@@ -43,10 +43,10 @@ This article is an introduction to AWS Identity and Access Management(IAM). Mana
 
 If you’re the administrator or one of several administrators for your organization’s AWS account, you should implement the following actions for account root users:
 
-1. Share the responsibility. AWS uses emails to set up the primary and alternate contacts on an email distribution list. This adds flexibility to add and remove admins. Additionally, set alternate contacts for operations, security notifications, and billing.
+1. Share the responsibility. Create an AWS administrator email distribution list with primary and alternate contacts. A group notification removes a single point of failure and adds flexibility to add and remove admins. Additionally, create email lists for operations, security notifications, and billing.
 2. The root user of an AWS account has full access to all the services. Protect this account by restricting the use of the root user by creating IAM identities.
-3. Use federated identities when possible. Manage user accounts with a central identity provider such as Active Directory, Okta, or AWS IAM Identity center. If your organization doesn’t have an identity provider solution, you can create user accounts directly with IAM but it is not  recommended because each user is assigned long-term credentials that do not expire.
-4. Enforce multi-factor authentication (MFA). These devices respond  to an authentication call to complete sign-in. Use MFA with long-term credentials such as root access or IAM user accounts.
+3. Use federated identities when possible. Manage user accounts with a central identity provider such as Active Directory, Okta, or AWS IAM Identity center. If your organization doesn’t have a identity provider solution, you can create user accounts directly with IAM but it is not a recommended because each user are assigned long-term credentials that do not expire.
+4. Require multi-factor authentication (MFA). These devices respond  to an authentication call to complete sign-in. Use MFA with long-term credentials such as root access or IAM user accounts.
 5. Implement a strong password policy that is resistant to brute force or social engineering attacks.
 6. Log events using [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline) to audit usage.
 
@@ -58,7 +58,7 @@ Identities provide access to the AWS account and to associated services and reso
 
 Users can belong to a **group** , which is a logical set of users. For example, you can set up a billing group for your accounting department so they can monitor cost and usage. Groups simplify managing permissions for a set of users.
 
-**Roles** are identities with specific permissions, but they are not associated with a user. Roles are temporary and can be assumed by a user to perform a task. A common use for roles is cross-account access where another user is given access to resources in your account. For example, you are the database administrator but an engineer on the operations team needs to restore a database from a back up. They can assume a database administrator role with access to backups in an AWS S3 bucket and restore the database with the back up.
+Roles are identities with specific permissions, but they are not associated with a user. Roles are temporary and can be assumed by a user to perform a task. A common use for roles is cross-account access where another user is given access to resources in your account. For example, you are the database administrator but an engineer on the operations team needs to restore a database from a back up. They can assume a database administrator role with access to backups in an S3 bucket and restore the database with the backup.
 
 ![Relationship between AWS identities and policies](./images/identities.jpg)
 
@@ -70,8 +70,11 @@ IAM Policies are documents that specify who, what, and under what conditions res
 
 - **Sid** - A statement ID is an optional identifier for the policy statement. Sids are descriptive names of a statement written in camel case.
 - **Principal** - a principal can be a person or a role that can request an operation on an AWS resource.
-- **Authentication** - AWS supports three kinds of authentication that allow principals to work with cloud resources. IAM users can authenticate by providing their account ID, a user name, and passwords. Federated users use an identity provider such as Amazon, Facebook, Google, or Microsoft Active Directory to log into AWS. You can login as the root user (not recommended) but you should use [multi-factor authentication (MFA)](https://aws.amazon.com/iam/features/mfa/) and temporary credentials to keep your account secure.
-- **Request** -  when you use the AWS CLI, AWS Management Console, or AWS API, the output is a request. A request contains actions to be performed against resources. They also include who made the request (the principal), environment data such as an IP address, and resource data such as a tag.
+- **Authentication** - AWS supports three kinds of authentication that allow principals to work with cloud resources. 
+    1. IAM users can authenticate by providing their account ID, a user name, and passwords. In addition, using MFA when signing in is best practice. 
+    2. Federated users use an identity provider such as Amazon, Facebook, Google, or Microsoft Active Directory to log into AWS. 
+    3. You can login as the root user (not recommended) but you should use multi-factor authentication and temporary credentials to keep your account secure.
+- **Request** -  when you use the AWS CLI, AWS Management Console, or AWS API an AWS API call is sent to a service. The API call or request contains actions to be performed against resources. The request context includes: who made the request (the principal), environment data such as an IP address, and resource data such as a tag.
 - **Resources** - a resource is an object within a service, for example a bucket is a resource in S3.
 - **Actions** - actions are what you can do with a resource and the type of action is defined by a resource. For example, S3 has a ```CreateBucket``` operation.
 
@@ -172,7 +175,7 @@ aws iam create-user --user-name yeemin
 aws iam create-user --user-name alicia
 ```
 
-and provide them with access to the AWS Console. We’ll set a password and not require resetting the password when signing in for the first time. Remember that IAM users have permanent credentials.
+and provide them with access to the AWS Console. For this tutorial, we’ll set a password and not require resetting the password when signing in for the first time. However, it is best practice to require resetting the password when signing in for the first time. Remember that IAM users have permanent credentials.
 
 ```bash
 aws iam create-login-profile --user-name yeemin --password pcgUser#1 --no-password-reset-required
@@ -430,7 +433,7 @@ Next we’ll delete the group:
 aws iam delete-group --group-name pcg-experts
 ```
 
-Finally, delete the S3 bucket. Because we did not enable versioning, we can delete the bucket and its contents with the `—force` parameter.
+Finally, delete the S3 bucket. Because we did not enable versioning, we can delete the bucket and its contents with the `—force` parameter. Note that we used the higher level `s3 rb` command to delete the bucket for convenience, `s3api` does not support the `--force` parameter and would require deleting the objects in the bucket.  
 
 ```bash
 aws s3 rb s3://your-unique-bucket-name —force
