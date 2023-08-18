@@ -1,18 +1,14 @@
 ---
 title: "How to tackle timeout on Amazon API Gateway using AWS Step Functions and AWS Serverless Application Models (SAM)"
-description: "How do I solved time out errors on my AWS api gateway with serverless"
+description: "How I solved time out errors on my AWS api gateway with serverless"
 tags:
   - serverless
   - timeouts
   - Api Gateway
   - step functions
-spaces:
-  - serverless
-waves:
-  - serverless
 authorGithubAlias: hsaenzG
 authorName: Hazel Sáenz
-date: 2023-08-16
+date: 2023-08-18
 ---
 
 A few months ago I was struggling with an API. No matter what I do, it always replies with timeout errors. 
