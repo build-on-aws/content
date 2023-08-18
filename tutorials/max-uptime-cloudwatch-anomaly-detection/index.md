@@ -9,7 +9,7 @@ tags:
     - tag-2
 authorGithubAlias: jtwardos
 authorName: John Twardos (no quotes around)
-date: 2023-09-DD (expected publication date)
+date: 2023-09-12 (expected publication date)
 showInHomeFeed: true
 ---
 
