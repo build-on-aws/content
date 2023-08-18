@@ -8,6 +8,7 @@ tags:
   - step functions
 authorGithubAlias: hsaenzG
 authorName: Hazel Sáenz
+githubUserLabel: community-builder
 date: 2023-08-18
 ---
 
