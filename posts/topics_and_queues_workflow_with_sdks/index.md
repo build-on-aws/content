@@ -8,7 +8,7 @@ tags:
     - aws
 authorGithubAlias: meyertst-aws
 authorName: Steven Meyer
-date: 2023-08-07
+date: 2023-08-21
 ---
 
 | ToC |
@@ -147,9 +147,11 @@ When you are done posting messages, the application polls the queues and display
 ## Conclusion
 
 At the time of this writing, topics and queues workflows exist for the following languages.
-* Java
-* C++
-* Kotlin
-* JavaScript
+* [Java](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/topics_and_queues)
+* [JavaScript](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cross-services/wkflw-topics-queues)
+* [.NET](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/dotnetv3/cross-service/TopicsAndQueues)
+* [C++](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/cpp/example_code/cross-service/topics_and_queues)
+* [Kotlin](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/kotlin/usecases/topics_and_queues)
+
 
 Implementations for other languages will soon be added. The existing implementations can be found on the [code example library](https://docs.aws.amazon.com/code-library/latest/ug/sns_example_sqs_Scenario_TopicsAndQueues_section.html?sc_channel=el&sc_campaign=posts&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=topics-and-queues-workflow-with-sdks) website. The code can be downloaded from the [AWS SDK Code Examples](https://github.com/awsdocs/aws-doc-sdk-examples) GitHub repository.
