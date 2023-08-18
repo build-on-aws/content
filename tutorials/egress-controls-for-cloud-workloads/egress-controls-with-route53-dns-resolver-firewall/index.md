@@ -64,7 +64,7 @@ AWS Network Firewall provides filtering for all network traffic that is routed t
 
 In this tutorial we will focus on filtering the intial DNS request that AWS Network Firewall would not normally have visibility into.  To understand why this is important let's examine our sample architecture seen in the following image.
 
-![Simplified distributed deployment](/egress-controls-with-route53-dns-resolver-firewall/images/tutorial-topolgy.png "Simplified distributed deployment used in this tutorial")
+![Simplified distributed deployment](images/tutorial-topolgy.png "Simplified distributed deployment used in this tutorial")
 
 The above image is a simplified, single availabilty zone, distributed deployment architecture.  
 
@@ -78,7 +78,7 @@ This is the typical egress traffic flow when  AWS Network Firewall is deployed. 
 
 In the image below, we can see what the traffic flow with DNS resolution looks like.  
 
-![Traffic flow for DNS query](/egress-controls-with-route53-dns-resolver-firewall/images/tutorial-setup-3.png "Traffic flow for DNS query")
+![Traffic flow for DNS query](images/tutorial-setup-3.png "Traffic flow for DNS query")
 
 The Amazon Route 53 Resolver operates on the .2 address of each VPC subnet.  Therefore, when DNS queries are sent, they are not evaluated by DNS Firewall because the query does not leave the private subnet and traverse the firewall subnet.
 
@@ -114,17 +114,17 @@ Let's begin by connecting to our test EC2 server instance and running a script t
 
 1. Begin by navigating to CloudFormation in the AWS Console. 
 
-![Navigate to Cloudformation](/egress-controls-with-route53-dns-resolver-firewall/images/Navigate-to-cfn.png "Navigate to Cloudformation")
+![Navigate to Cloudformation](images/Navigate-to-cfn.png "Navigate to Cloudformation")
 
 1. Click on the stack that has been created. 
 
-![Navigate to stack](/egress-controls-with-route53-dns-resolver-firewall/images/select-stack.png "Navigate to stack")
+![Navigate to stack](images/select-stack.png "Navigate to stack")
 
 1. Click on `Outputs` and check the resources that are created. 
 2. Find the TestHostSession in the key column.  The URL link for TestHostSession opens an interactive shell on an EC2 instance (**TestInstance1** in the earlier diagram) within an AWS Network Firewall protected subnet which you will be using to send test traffic in this tutorial. 
 3. Click on the link to connect to it.  You may find it useful to open this in a separate tab so you can return here to use this and the other links as shortcuts.  There are also links to the AWS Network Firewall, Route 53 Resolver DNS Firewall, and Cloudwatch Logs services.
 
-![CloudFormation Output](/egress-controls-with-route53-dns-resolver-firewall/images/output.png "CloudFormation Output")
+![CloudFormation Output](images/output.png "CloudFormation Output")
 
 #### Manual scanning of the environment
 
@@ -132,7 +132,7 @@ Once you are connected to the command-line session on the EC2 instance, we will 
 
 1. Enter the `testgress` command and note the response output.
 
-![Manual scanning](/egress-controls-with-route53-dns-resolver-firewall/images/Evaluate-1.png "Manual scanning")
+![Manual scanning](images/Evaluate-1.png "Manual scanning")
 
 As you can see from the test, the egress controls in this environment are wide open, so we have our work cut out for us!
 
@@ -162,7 +162,7 @@ In this step, we create a domain list that will specify the domain-matching patt
 
 * Click on **Add domain list** shown in the image below.
 
-![Create a domain list to block the traffic](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-1.png "Create a domain list to block the traffic")
+![Create a domain list to block the traffic](images/lab1-1.png "Create a domain list to block the traffic")
 
 * Give the domain list a name of your choosing.
 * Enter TLD-matching patterns from the image below(one-per-line) following the format shown (e.g.:code[*.ru]{showCopyAction=true}).
@@ -183,11 +183,11 @@ In this step, we create a domain list that will specify the domain-matching patt
 *.ml
 ```
 
-![Verify both allow and block domain lists](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-2.png "Verify both allow and block domain lists")
+![Verify both allow and block domain lists](images/lab1-2.png "Verify both allow and block domain lists")
 
 * After entering the domains, click on **Add domain list**. 
 
-![Create Domain List](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-3.png "Create a domain list")
+![Create Domain List](images/lab1-3.png "Create a domain list")
 
 
 #### Step 2 - Create Rule groups
@@ -200,49 +200,49 @@ DNS Firewall rule groups are a set of rules that will allow, deny, or alert on D
 
 * Give a name to rule group and click next. 
 
-![Name rule group](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-4.png "Name the rule group")
+![Name rule group](images/lab1-4.png "Name the rule group")
 
 * Click on Add rule to add the domain list you just created. 
 
-![Add domain list](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-5.png "Add a domain list")
+![Add domain list](images/lab1-5.png "Add a domain list")
 
 * Enter a name for the rule and select the previously created domain list from the drop down and select **BLOCK** for the action on matches. 
 
-![Select domain list](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-6.png "Select the domain list")
+![Select domain list](images/lab1-6.png "Select the domain list")
 
 * Select **OVERRIDE** in the response for Block action and enter :code[dns-firewall-block]{showCopyAction=true} as the custom response and `CNAME` as record type.
 * Having an override value in our response action makes it easier to say with certainity that a particular query was blocked by DNS Firewall as **NXDOMAIN** or **NODATA** responses could also indicate the absence of a queried record, rather than a BLOCK response from DNS Firewall.  The CNAME value can also be used to redirect a blocked request to a web page with details on why the domain resolution was blocked.
 * Leave TTL as `0` and click on **Add rule** (DO NOT CLICK `Next` as it will skip adding the created rule).
 
-![Adding rule](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-7.png "Adding rules")
+![Adding rule](images/lab1-7.png "Adding rules")
 
 * You can set the priority for the rules in this page which controls the order in which rules are evaluated.  The first rule that matches a domain query will determine the action taken.  If we were createing `ALLOW` rule exceptions a `BLOCK` rule, we would use this screen to increase the priority for the `ALLOW` rule.
 * Leave the default value and click **Next**. 
 
-![Check the priority](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-9.png "Check the priority")
+![Check the priority](images/lab1-9.png "Check the priority")
 
 * Adding tags are optional. Leave blank and and click **Next**
 * On the final **Review and create** screen click on **Create rule group**. 
 
-![Leave tags as default](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-10.png)
+![Leave tags as default](images/lab1-10.png)
 
 *  You can now see the rule group created in the console. Note it is currently **Not Associated** to a VPC. 
 
-![Verify the rule group created](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-14.png "Verify the rule group created")
+![Verify the rule group created](images/lab1-14.png "Verify the rule group created")
 
 #### Step 3 - Associate DNS Firewall Rule group to Egress VPC
 
 * In this step, we will associate a VPC with the newly created Rule group. Click on Rule group and then on Associate VPC as shown below. 
 
-![Associate rule group with a VPC](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-11.png "Associate rule group with a VPC")
+![Associate rule group with a VPC](images/lab1-11.png "Associate rule group with a VPC")
 
 * You will see multiple VPCs from the drop down. Select EgressVPC. After selecting the VPC, click on `Associate` to associate the VPC with Rule group. 
 
-![Select the VPC](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-12.png "Select the VPC")
+![Select the VPC](images/lab1-12.png "Select the VPC")
 
 * You can see the VPC associated with the rule group once done. 
 
-![Verify the VPC association](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-15.png "Verify the VPC association")
+![Verify the VPC association](images/lab1-15.png "Verify the VPC association")
 
 #### Step 4 - Verify domain name query resolution
 
@@ -252,7 +252,7 @@ You have deployed and created a DNS Firewall Rule group, configured a rule to BL
 * If some TLDs are still being resolved double-check the values entered in our custom domain list. It should contain all these these domain matching patterns (one per line)
 * `*.ru *.cn *.xyz *.cyou *.pw *.ws *.gq *.surf *.cf *.ml`
 
-![Verify testegress](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-13.png "Verify using the testegress script")
+![Verify testegress](images/lab1-13.png "Verify using the testegress script")
 
 At this point we have successfully created DNS Firewall Domain lists and rule groups and have associated them with a VPC. We are now blocking traffic from commonly abused top level domains. In the next section we will work with managed Domain Lists.  
 
@@ -286,36 +286,36 @@ Let's return to our test script and see the result of the `testergress` command 
 
 *  Similar to the previous section, navigate to rule groups and click on `add rule group`. Enter a name to the Rule group and click on `Next`. 
 
-![Create a rule group](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-17.png "Create a rule group")
+![Create a rule group](images/lab1-17.png "Create a rule group")
 
 * Click on `Add rule`. 
 
-![add a rule](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-18.png "Add a rule")
+![add a rule](images/lab1-18.png "Add a rule")
 
 * We will add the botnet managed domain list in this step. Enter a name for the rule, select `Add AWS managed domain list` and select `AWSManagedDomainsBotnetCommandandControl ` from the domain list dropdown. 
 
-![Create a rule group](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-19.png "Create a rule group")
+![Create a rule group](images/lab1-19.png "Create a rule group")
 
 * Select `Block` as Action, `OVERIDE` as response, and give :code[dns-firewall-block]{showCopyAction=true} as the record value. Select `CNAME` as Record type, leave `0` as TTL and click on `Add rule`. (In some test sandbox environments we saw an error that failed rule creation when selecting the CNAME ovverride.  You can also select `NODATA` or `NXDOMAIN` option for the block instead if you get this.)
 
-![Add a managed rule group](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-20.png "Add a managed rule group")
+![Add a managed rule group](images/lab1-20.png "Add a managed rule group")
 
 * Similarly, add two more rules for `AWSManagedDomainsAmazonGuardDutyThreatList`, `AWSManagedDomainsMalwareDomainList`. You can see three rule groups as shown below. Click `Next`.
 
-![Add a managed rule group](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-27.png "Add another managed rule group")
+![Add a managed rule group](images/lab1-27.png "Add another managed rule group")
 
 * Click Next at screens for **Set rule priority** and **Add tags** to keep default values
 * At **Review and create** screen click on `Create rule group`. 
 
-![Create rule group](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-29.png "Create a rule group")
+![Create rule group](images/lab1-29.png "Create a rule group")
 
 * The newly created rule group is not associated with a VPC. Click on `Associate the VPC`.
 
-![Create rule group](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-30.png "Create a rule group")
+![Create rule group](images/lab1-30.png "Create a rule group")
 
 * Select `EgressVPC` and Click on `Associate`. 
 
-![Create rule group](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-31.png "Create a rule group")
+![Create rule group](images/lab1-31.png "Create a rule group")
 
 We have now created a new rule group and associated managed domain lists to block malicious FQDNs tracked by these lists.
 
@@ -325,7 +325,7 @@ We have now created a new rule group and associated managed domain lists to bloc
 * In most cases it will be easiest to manage the priority of rules by combinining into a single rule group.
 * Navigate to the EC2 Test host instance and execute `testegress` to test the results of our new configuration.
 
-![Test Egress Results](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-32.png "Test Egress Results")
+![Test Egress Results](images/lab1-32.png "Test Egress Results")
 
 * If any of the domain checks is still showing `ALLOWED` double-check the rules in your new rule group.
 * One reason it may still show `ALLOWED` is if any domains being queried are still cached locally on our test instance which might happen if not enough time has lasped from our last run of `testegress` (in the last exercise).
@@ -372,25 +372,25 @@ This is a best practices for security across your AWS environment including VPCs
 
 * Navigate to the EC2 session and execute the command `nslookup google.cn`. Since dns queries resolving this domain name are blocked you can see that the server cannot find the domain. 
 
-![nslookup test](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-33.png "Perform an nslookup test")
+![nslookup test](images/lab1-33.png "Perform an nslookup test")
 
 * Navigate to `CloudWatch` on AWS Console. Click on `Log groups` and then click on the log group created for query logging in this workshop. 
 
-![Cloudwatch results](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-34.png "View the Cloudwatch results")
+![Cloudwatch results](images/lab1-34.png "View the Cloudwatch results")
 
 * Click on the latest log group. 
 
-![Cloudwatch results](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-35.png "View the Cloudwatch results")
+![Cloudwatch results](images/lab1-35.png "View the Cloudwatch results")
 
 * Search `google.cn` in the search bar aand observe the results. 
 
-![Cloudwatch results](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-36.png "View the Cloudwatch results")
+![Cloudwatch results](images/lab1-36.png "View the Cloudwatch results")
 
 * We can see that the traffic is blocked. We can also see the custom response `dns-firewall-block` that we gave while creating the DNS Rule group. 
   
   > **Note:** If you used a different block response of NXDOMAIN or NODATA you will see this instead.
 
-![Cloudwatch results](/egress-controls-with-route53-dns-resolver-firewall/images/lab1-37.png "View the Cloudwatch results")
+![Cloudwatch results](images/lab1-37.png "View the Cloudwatch results")
 
 In this portion of the tutorial, we have evaluated DNS Firewall rules using Query Logging with CloudWatch Logs. 
 
@@ -400,31 +400,31 @@ In this portion of the tutorial, we have evaluated DNS Firewall rules using Quer
 
 * Navigate to CloudFormation on Console, select the CloudFormation template and click on `Delete`. 
 
-![Cloudformation delete](/egress-controls-with-route53-dns-resolver-firewall/images/cleanup-1.png)
+![Cloudformation delete](images/cleanup-1.png)
 
 * You can see a message that it's a permanant deletion. Click on `Delete` on the prompt. 
 
-![Cloudformation permenant delete](/egress-controls-with-route53-dns-resolver-firewall/images/cleanup-2.png)
+![Cloudformation permenant delete](images/cleanup-2.png)
 
 * It may take few minutes to delete the resources and the status will be updated to `DELETE_COMPLETE`. 
 
-![Cloudformation delete complete](/egress-controls-with-route53-dns-resolver-firewall/images/cleanup-3.png)
+![Cloudformation delete complete](images/cleanup-3.png)
 
 #### Delete the DNS Firewall rule
 
 * Navigate to `VPC -> DNS Firewall -> Rule groups`. Select the Rule groups and click on Delete. 
 
-![DNS Firewall Rule delete](/egress-controls-with-route53-dns-resolver-firewall/images/cleanup-5.png)
+![DNS Firewall Rule delete](images/cleanup-5.png)
 
 * Disassociate the VPC and delete the Rule group. 
 
-![DNS Firewall Rule group delete](/egress-controls-with-route53-dns-resolver-firewall/images/cleanup-6.png)
+![DNS Firewall Rule group delete](images/cleanup-6.png)
 
 #### Delete the CloudWatch logs
 
 * Navigate to CloudWatch, click on Log groups, select the log groups and click on `Delete`. 
 
-![CloudWatch log groups delete](/egress-controls-with-route53-dns-resolver-firewall/images/cleanup-7.png)
+![CloudWatch log groups delete](images/cleanup-7.png)
 
 
 ## Conclusion
