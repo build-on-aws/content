@@ -272,7 +272,27 @@ void sendNoteToAWS(String note) {
   }
 }  
 ```
-Before running the code we need to install a library that we developed in Java to make the AWS IoT Core communication easier. 
-[Download the library here](https://github.com/vsenger/java-fourier/blob/main/MQTTClient/target/MQTTClient-1.0-SNAPSHOT.jar) and then drag-and-drop inside your Processing.org sketch.
+Before running the code we need to install some Java libraries that we developed and also dependencies to make the AWS IoT Core communication. 
+[Download the zip here](https://github.com/vsenger/java-fourier/blob/main/ForwardFFT_BO/code/libs.zip):
 
+1. Unzip the file libs.zip in a temporary folder
+2. Drag-and-drop each jar file inside your processing.org sketch
+3. You can also save your sketch and add the jars inside "code" folder
 
+We are good to detect notes and send it to AWS IoT Core, let's have some fun! Click "Run" button and you will see the frequency graph.
+
+Open AWS IoT Core Console and Click MQTT Test Client -> Subscribe to a topic -> playground/sensors -> Subscribe:
+
+![AWS IoT Core Screenshot](./images/iot08.png)
+
+Open your Processing.org sketch and try to make some notes using your voice:
+
+![AWS IoT Core Screenshot](./images/iot09.png)
+
+Then you can check the AWS Console:
+
+![AWS IoT Core Screenshot](./images/iot10.png)
+
+[Check here the live-demo video!](https://youtu.be/0oavSqRD4wc)
+
+Now you can imagine infinite possibilities: our team already did home automation integration to turn on and off lamps using Ukulele, we make it rain inside Minecraft based on notes and also change Roblox game behavior. Now it's up to you to build on your own stuff using this magic algo: Fast Fourier Transform. Have fun! 
