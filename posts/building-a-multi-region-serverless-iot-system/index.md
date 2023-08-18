@@ -10,7 +10,8 @@ tags:
     - serverless
 authorGithubAlias: JimmyDqv
 authorName: Jimmy Dahlqvist
-date: 2023-08-16
+githubUserLabel: community-builder
+date: 2023-08-18
 ---
 
 In this post we will take a look at how to build a multi-region serverless IoT system. We will dig deep into concepts like how to replicate certificates across regions, and how to setup a DNS record for device connection. All in an event-driven and serverless way.
