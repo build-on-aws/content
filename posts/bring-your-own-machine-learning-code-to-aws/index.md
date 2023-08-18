@@ -4,8 +4,11 @@ description: "Run your training code on AWS with minimum effort by bringing your
 tags:
     - sagemaker
     - ai-ml
-authorGithubAlias: kazdaghli, mehdimld
-authorName: Sarra Kazdaghli, Mehdi Mouloudj
+authorGithubAlias: kazdaghli
+authorName: Sarra Kazdaghli
+additionalAuthors:
+  - authorGithubAlias: mehdimld
+    authorName: Mehdi Mouloudj
 date: 2023-08-17
 ---
 
