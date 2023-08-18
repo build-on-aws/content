@@ -1,53 +1,29 @@
 ---
-title: "Title highlighting the core problem being solved"
-description: "Two or three sentences describing the problem, the solution, and tools or services used along the way"
+title: "How to maximize application uptime using CloudWatch Anomaly Detection"
+description: "Use CloudWatch anomaly detection machine learning to ensure application uptime"
 tags:
     - tutorials
     - aws
     - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
     - tag-1
     - tag-2
-authorGithubAlias: githubAliasWithoutQuotes
-authorName: Name Surname (no quotes around)
-date: YYYY-MM-DD (expected publication date)
-showInHomeFeed: false
+authorGithubAlias: jtwardos
+authorName: John Twardos (no quotes around)
+date: 2023-09-DD (expected publication date)
+showInHomeFeed: true
 ---
 
-<!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
-<!-- NB: READ THE COMMENT ABOVE, AND DELETE THIS AND OTHER COMMENTS!!! -->
+Have you ever tried to access your favorite application, and instead you were greeted by an error? As you refresh multiple times, you are left with a feeling of disappointment and decide to move on to something else. That split second of application downtime can result in a lost customer, a missed sale, and ultimately lost revenue. What if there is a way to monitor your application to prevent downtime, and do it in a way that requires minimal setup and ongoing maintenance? 
 
-**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
-
-## Frontmatter Instructions (remove this _Frontmatter Instructions_ section before authoring)
-
-All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/).
-
-- `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser" - Please put this inside double-quotes
-- `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters - Please put this inside double-quotes
-- `tags` - help readers discover posts on the same topics. Use `kebab-case`.
-- `authorGithubAlias` - your GitHub username
-- `authorName` - how you want your name to display for the author credit of this post
-- `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
-- `showInHomeFeed` - Set this to `true` if you want the post to be part on home and RSS feeds. 
-
-Introduction paragraph to the topic. Describe a real world example to illustrate the problem the reader is facing. Explain why it's a problem. Offer the solution you'll be laying out in this post.
-
-<!-- Recommended to use future tense. e.g. "In this tutorial, I WILL be showing you how to do XYZ."  -->
+In this post I will show you how to enable and configure CloudWatch anomaly detection so you can spend more time developing your application and less time on maintenance.
 
 ## What you will learn
 
-- Bullet list
-- with what you will
-- learn in this tutorial
+- How to enable CloudWatch anomaly detection
+- How to create alarms and actions in CloudWatch
 
 ## Prerequisites
 
-Before starting this tutorial, you will need the following:
-
- - All the standard prerequisites should be in the attribute table below, only use this section if you have detailed setup instructions.
-
-<!-- Update with the appropriate values -->
-<!-- Please ensure tutorials are flagged as level 200 (intermediate) or higher -->
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Intermediate - 200                         |
