@@ -19,11 +19,11 @@ date: 2023-08-17
 
 Have you ever considered the connection between how securing your infrastructure and a cost effective infrastructure go hand in hand?  Most often, when we think about security our minds go to adversaries and risk, controls and inspection, compliance and auditing.  However, paying attention to your security posture and understanding what happens with network traffic, both desired and undesired, contributes to cost effective design in a cloud environment.
 
-In this tutorial, we will focus on controlling egress traffic with the [Amazon Route53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/).  Our first goal of this capability is to provide a secure environment, ensuring that only desired egress traffic is allowed.  Our secondary goal, and really a side-outcome of the capabilities we will enable, is that we will minimize our cloud costs for egress traffic.  
+In this tutorial, we will focus on controlling egress traffic with the [Amazon Route53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/?sc_channel=el&sc_campaign=costwave&sc_content=egress-controls-1&sc_geo=mult&sc_country=mult&sc_outcome=acq).  Our first goal of this capability is to provide a secure environment, ensuring that only desired egress traffic is allowed.  Our secondary goal, and really a side-outcome of the capabilities we will enable, is that we will minimize our cloud costs for egress traffic.  
 
 > For the purpose of this tutorial, egress traffic refers to traffic from our protected subnet within our Virtual Private Cloud (VPC), leaving the VPC, and being routed toward the internet.
 
-In this tutorial we will work with the Amazon Route53 DNS Resolver Firewall, Amazon EC2 Instances, and Amazon Virtual Private Clouds.
+In this tutorial, we will work with the Amazon Route53 DNS Resolver Firewall, Amazon EC2 Instances, and Amazon Virtual Private Clouds.
 
 ## What you will learn
 
@@ -40,7 +40,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | < $5 USD when cleanup is performed upon completion     |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=costwave&sc_content=egress-controls-1&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-08-09                             |
@@ -105,7 +105,7 @@ While this is not specific to this tutorial, you can make a minor adjustment to 
 
 ## Environment setup
 
-This tutorial starts with a baseline configuration that's built with a CloudFormation template that you can find in the sample code repo.  You will need to deploy this template in your own AWS environment before following along with the tutorial.
+This tutorial starts with a baseline configuration that's built with an AWS CloudFormation template that you can find in the sample code repo.  You will need to deploy this template in your own AWS environment before following along with the tutorial.
 
 Once you have the CloudFormation Template deployed, we will check the baseline posture of the environment.  We are checking to see that certain traffic is allowed out of the environment.  Once verified we will configure the Amazon Route 53 resolve DNS firewall to block this undesired egress traffic and we will also enable logging.
 
@@ -294,7 +294,7 @@ Let's return to our test script and see the result of the `testergress` command 
 
 ![Create a rule group](images/lab1-19.png "Create a rule group")
 
-- Select `Block` as Action, `OVERIDE` as response, and give :code[dns-firewall-block]{showCopyAction=true} as the record value. Select `CNAME` as Record type, leave `0` as TTL and click on `Add rule`. (In some test sandbox environments we saw an error that failed rule creation when selecting the CNAME override.  You can also select `NODATA` or `NXDOMAIN` option for the block instead if you get this.)
+- Select `Block` as Action, `OVERRIDE` as response, and give :code[dns-firewall-block]{showCopyAction=true} as the record value. Select `CNAME` as Record type, leave `0` as TTL and click on `Add rule`. (In some test sandbox environments we saw an error that failed rule creation when selecting the CNAME override.  You can also select `NODATA` or `NXDOMAIN` option for the block instead if you get this.)
 
 ![Add a managed rule group](images/lab1-20.png "Add a managed rule group")
 
