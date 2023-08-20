@@ -15,7 +15,7 @@ date: 2023-08-20
 |ToC|
 |---|
 
-![](./images/cover.png)
+![](./images/cover.jpg)
 
 ## Overview
 
