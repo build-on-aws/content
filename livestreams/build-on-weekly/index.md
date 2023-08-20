@@ -35,12 +35,20 @@ If you have any ideas, suggestions, comments. Feel free to email us at [build-on
 
 ## Schedule 📆
 
-Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
+Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check us out on [twitch.tv/aws](https://twitch.tv/aws) 👇
 
-### SEASON 02
+<a href="https://twitch.tv/aws"><img src="images/twitch_button_small.jpg" style="margin-left: 0" alt=""/></a>
+
+---
+
+## Show notes
+
+### SEASON 02:
 
 | Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
+| S02E26 | Migrating Rust 🦀 applications to ARM | 2023-08-17  | [Show Notes](/livestreams/build-on-weekly/2023-08-17) |
+| S02E25 | Hosting a REACT app on AWS, Star Wars quotes generator - PART 4 | 2023-08-10  | [Show Notes](/livestreams/build-on-weekly/2023-08-10) |
 | S02E24 | Build Your Own Recommendation Engine on AWS - PART 1 | 2023-08-03  | [Show Notes](/livestreams/build-on-weekly/2023-08-03) |
 | S02E23 | Adding some REACT to our Star Wars quotes API | 2023-07-27  | [Show Notes](/livestreams/build-on-weekly/2023-07-27) |
 | S02E22 | Building Resilient Architecture | 2023-07-13  | [Show Notes](/livestreams/build-on-weekly/2023-07-13) |
@@ -52,7 +60,7 @@ Come learn live with us! We stream every Thursday at 9am PT/Noon ET.
 | S02E14 | Stable Diffusion with Viktoria | 2023-04-20  | [Show Notes](/livestreams/build-on-weekly/2023-04-20) |
 | S02E13 | Hot Dog or Not Hot Dog | 2023-04-13  | [Show Notes](/livestreams/build-on-weekly/2023-04-13) |
 
-### SEASON 01
+### SEASON 01:
 
 | Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
