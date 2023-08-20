@@ -14,9 +14,7 @@ date: 2023-08-20
 
 |ToC|
 |---|
-
 ![](./images/cover.jpg)
-
 ## Overview
 
 ### What is a schema registry?
