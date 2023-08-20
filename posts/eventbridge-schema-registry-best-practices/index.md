@@ -21,14 +21,10 @@ date: 2023-08-20
 
 ### What is a schema registry?
 In a request-response architecture, you may be familiar with the concept of Application Programming Interfaces (APIs). APIs form a contract of communication between services. In an event-driven architecture, this contract is facilitated by the schema registry. The schema registry is a central collection of schemas, including its version history. Schemas describe the structure of events including fields, values and formats. To illustrate, we will use an e-commerce store use case. For example, an `OrderCreated` event may include the `status` of the order as a *string*, a list of `product-ids` as an *array*.
-
 ![](./images/image%201.png)
-
 ### Why is it important?
 At its core, event-driven architectures consist of producer services generating events, and consumer services reacting to those events. Producers and consumers are decoupled by a service such as [Amazon EventBridge](https://aws.amazon.com/eventbridge/), a serverless event bus. By decoupling, developers can move fast: they can build, deploy and scale applications independently. Developers can subscribe to events they are interested in, emit events for extensibility, and avoid writing integration code. 
-
 ![](./images/eb-schema-registry.png)
-
 However, with evolving business requirements, producers and consumers can be out of sync leading to reliability challenges. For example, the `OrderCreated` event can introduce a new field such as the `total` cost of the order. In a growing business and increasingly complex application, it can be challenging for teams to understand what events are available and what they mean. The schema registry plays an important role in reliability, allowing producers and consumers enforce a contract. And, event discovery, helping teams understand events and the applications they can build on top of them.
 
 ## Best-practices
@@ -74,9 +70,7 @@ For example, consider the following `metadata`:
 
 ### Implement a tool for consistency and abstraction when publishing and consuming events
 For producers, implement a consistent way to enforce the standard `metadata` outlined above. To achieve this, develop a custom utility such as `PublishEvent()` to initialize events. Distribute across teams using a package manager such as [AWS CodeArtifact](https://aws.amazon.com/codeartifact/). The utility can additionally provide abstraction for implementation details, enforce security on sensitive data and perform validation. Producers are isolated from details such as the EventBridge [PutEvents\(\)](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) API with AWS SDK, and only need to concern themselves with the event they are publishing.  
-
 ![](./images/custom-utility.png)
-
 For consumers, consider conforming [payloads](https://www.boyney.io/blog/2022-02-11-event-payload-patterns) to a standard such as [CloudEvents](https://cloudevents.io/). To achieve this, use EventBridge [input transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-transform-target-input.html) to transform data prior to consumption. See [CloudEvents input transformer](https://serverlessland.com/patterns/eventbridge-cloudevents-transformer-cdk-typescript) for an example. 
 
 ### Use code bindings and developer tools for agility
@@ -89,9 +83,7 @@ EventBridge [schemas](https://docs.aws.amazon.com/eventbridge/latest/userguide/e
 
 ### Handle schema evolution with versioning and schema discovery
 Businesses are rarely static and events change (*schema evolution*). With [schema discovery enabled](https://catalog.us-east-1.prod.workshops.aws/workshops/63320e83-6abc-493d-83d8-f822584fb3cb/en-US/eventbridge/schema-registry/enable-schema-discovery), teams do not have to maintain their own schemas. This increases developer productivity and reduces the risk of errors. Schemas for all AWS sources are automatically updated under *AWS event schema registry*. While SaaS partner and custom schemas are automatically generated to the *[Discovered schema registry](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-schema-registry.html)*. 
-
 ![](./images/schema-discovery.png)
-
 With schema versions, producers and consumers can determine how to handle compatibility at their own choice. For example, a new version can be backwards compatible and consumers can process as is. However, for major and breaking changes, producers and consumers can wait until the application is updated before enforcing the new version. 
 
 ### Start small with sparse event payloads
@@ -141,9 +133,7 @@ The benefit of sparse events is reduced coupling of the producer and consumer. H
 
 ### Avoid using directed commands as events 
 With familiarity for request-response architectures, it can be natural to mistake directed commands for events. For example, `Send Email` may look like an event. However, in an event-driven architecture, it is typically processed by the consumer such as an `EmailNotificationService`, which subscribes to an observed business domain event such as `OrderCreated`.  
-
 ![](./images/observed-events.jpg)
-
 ### Be aware of complexity on calculating the current state 
 [Notification or delta events](https://serverlessland.com/event-driven-architecture/visuals/event-types) only communicate details relevant to state changes. To compute the current state, each consumer needs to process past events in the correct order. Typically, the [Event Sourcing and Command Query Responsibility Segregation \(CQRS\) patterns](https://community.aws/posts/scaling-your-application-data-patterns) are used. Events that are lost, duplicates or processed in the incorrect order can lead to an incorrect state. This can have significant adverse impact, especially if there are flow-on downstream systems. 
 To assist, EventBridge provides an [archive](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-archive.html) to replay events. See [example Amazon EventBridge implementation](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/service-per-team.html#amazon-eventbridge).
@@ -153,11 +143,8 @@ Fact events communicate the full state (*event-carried state transfer*). Dependi
 
 ### Be aware of complexity on calculating relationships and joins 
 When transitioning to an event-driven architecture, it is common to generate events from an existing relational database, where data is normalised. For example, events can be generated from the  `Order` and `Product` tables using [Change Data Capture \(CDC\) streams](https://aws.amazon.com/blogs/big-data/stream-change-data-to-amazon-kinesis-data-streams-with-aws-dms/). However, consumers such as `EmailNotificationService` may require details about *both* events: the order and relevant products ordered. Unfortunately, unlike a relational database, consumers may not be optimised for relational data and complex joins. Performing these calculations can introduce performance bottlenecks and increase costs. 
-
 ![](./images/image%202.png)
-
 To resolve the challenge, consider adopting the [transactional outbox pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html). Here, you create a dedicated outbox table in your database, as a buffer prior to publishing events. The outbox can contain denormalised data that is isolated and purpose-built for consumers. A database transaction is used to ensure that both the producer’s internal state (in the `Order` and `Product` tables) and the consumer’s state (as facilitated by the outbox table) are consistent. To avoid performance bottlenecks, avoid data that is too large or frequently updated, and only include data that is commonly used by consumers.  
-
 ![](./images/image%203.png)
 
 For events generated by non-relational databases such as [Amazon DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html), data may already be denormalised. However, you can also [implement the same pattern with EventBridge Pipes](https://aws.amazon.com/blogs/compute/implementing-the-transactional-outbox-pattern-with-amazon-eventbridge-pipes/) in order to avoid inconsistencies associated with dual writes to the database and the event bus. 
