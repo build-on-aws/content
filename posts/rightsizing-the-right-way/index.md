@@ -7,7 +7,7 @@ tags:
   - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
 authorGithubAlias: githubAliasWithoutQuotes
 authorName: Name Surname (no quotes around)
-date: YYYY-MM-DD (expected publication date)
+date: 2023-08-21
 showInHomeFeed: true
 ---
 
