@@ -4,7 +4,6 @@ description: Reasons why and when to use APIs instead of the management console
 tags:
   - http
   - api
-  - tutorial
 authorGithubAlias: loopDelicious
 authorName: Joyce Lin
 githubUserLabel: NONE
