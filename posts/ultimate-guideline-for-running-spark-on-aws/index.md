@@ -1,5 +1,5 @@
 ---
-title: "The ultimate guideline for running Spark on AWS in maintainable, reliable and cost-effective way"
+title: "The ultimate guideline for running Apache Spark on AWS in maintainable, reliable and cost-effective way"
 description: "Embark on a comprehensive exploration of how to effectively run Apache Spark applications on AWS. This guide unravels the myriad of AWS services that integrate with Spark, offering insights into data engineering, analytics, and machine learning possibilities. From understanding the power of AWS Glue for beginners to delving deep into specialized services like SageMaker and Redshift, this post aims to provide clarity for developers seeking optimal performance, scalability, and cost-effectiveness in their Apache Spark workloads."
 tags:
   - data-engineering
