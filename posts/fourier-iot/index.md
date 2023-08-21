@@ -1,12 +1,12 @@
 ---  
-title: "Using Java, Amazon Corretto, Ukulele and Fast Fourier Transform to detect musical notes and command IoT devices"  
-description: This step-by-step tutorial will show you how to use Fast Fourier Transform to detect musical notes and command IoT devices.  
-tags:  
-- cloud
-- iot
-- java
-authorGithubAlias: vsenger  
-authorName: Vinicius Senger  
+title: "Using Java, Amazon Corretto, Ukulele and Fast Fourier Transform to detect musical notes and command IoT devices"
+description: "This step-by-step tutorial will show you how to use Fast Fourier Transform to detect musical notes and command IoT devices."
+tags:
+  - cloud
+  - iot
+  - java
+authorGithubAlias: vsenger
+authorName: Vinicius Senger
 date: 2023-08-21
 ---
 
