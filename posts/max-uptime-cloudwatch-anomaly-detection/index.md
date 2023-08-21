@@ -5,7 +5,6 @@ tags:
     - aws
     - cloudwatch
 authorGithubAlias: jtwardos
-githubUserLabel: community-builder
 authorName: John Twardos
 date: 2023-08-21
 ---
