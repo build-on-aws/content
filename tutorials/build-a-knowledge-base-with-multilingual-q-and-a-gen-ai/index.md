@@ -13,7 +13,7 @@ spaces:
 showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes 
-date: 2023-08-14
+date: 2023-08-21
 ---
 
 |ToC|
@@ -32,7 +32,7 @@ Luckily, there are better solutions. In this tutorial, we will build a comprehen
 | 💰 Cost to complete | 1.56 USD  X 1 hour.      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br>-  [Foundational knowledge of Python](https://catalog.us-east-1.prod.workshops.aws/workshops/3d705026-9edc-40e8-b353-bdabb116c89c/)    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-08-10                             |
+| ⏰ Last Updated     | 2023-08-21                             |
 
 ## What You Will Learn
 
