@@ -8,6 +8,10 @@ tags:
   - gitlab
   - ci-cd
   - pipeline
+spaces:
+  - devops
+waves:
+  - devops
 authorGithubAlias: sebsto
 authorName: Sébastien Stormacq
 date: 2023-05-17

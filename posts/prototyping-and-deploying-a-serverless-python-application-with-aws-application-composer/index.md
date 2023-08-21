@@ -7,7 +7,10 @@ tags:
   - application-composer
   - serverless-application-model
   - streamlit
+  - devops
 spaces:
+  - devops
+waves:
   - devops
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi

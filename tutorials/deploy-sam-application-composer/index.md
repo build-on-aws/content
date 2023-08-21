@@ -10,6 +10,8 @@ tags:
   - serverless-application-model
 spaces:
   - devops
+waves:
+  - devops
 showInHomeFeed: true
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
@@ -30,6 +32,12 @@ We will learn:
 
 - How to get started with a blank canvas and build a SAM application
 - How to load an existing SAM application, visualize and optionally extend it
+
+If you want to quickly use AWS Application Composer to create an architecture diagram and a SAM application, check out this video:
+
+https://youtu.be/NZnr1vSJTs0?t=650
+
+*This how-to video will walk you through features, options, and unique strengths of AWS Application Composer, Cloudcraft, and Lucidchart, empowering you to create visually stunning architecture diagrams.*
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|

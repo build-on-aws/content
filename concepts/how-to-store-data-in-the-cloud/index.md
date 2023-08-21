@@ -2,8 +2,9 @@
 title: How to Store Data in the Cloud
 description: An introductory article on the different types of cloud storage and their application
 tags:
-  - cloud storage
+  - cloud-storage
   - foundational
+  - storage
 authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2022-09-26

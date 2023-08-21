@@ -2,12 +2,11 @@
 title: "Protect Your Data in Amazon RDS Against Disaster or Accidental Deletion"
 description: "In this guide we will show how to protect data stored in Amazon Relational Database Service (Amazon RDS) from major disaster events."
 tags:
-    - rds
-    - data-protection
-    - data-backup
-    - disaster-recovery
-    - explainers
     - resilience
+    - rds
+    - backup
+    - replication
+    - disaster-recovery
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-07-03

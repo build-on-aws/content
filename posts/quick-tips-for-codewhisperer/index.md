@@ -4,9 +4,11 @@ description: "Learn how short, focused developer comments and intuitive variable
 tags:
     - codewhisperer
     - python
-    - gen-ai
+    - generative-ai
     - ai-ml
     - aws
+spaces:
+  - generative-ai
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2023-07-07
@@ -14,6 +16,8 @@ date: 2023-07-07
 
 CodeWhisperer is a powerful AI coding companion that helps developers build applications faster and more securely. I’ve done quite a few demos of CodeWhisperer since it’s launch, and the number one question developers ask me is if there’s anything they can do to improve the results when coding alongside CodeWhisperer, and the answer is yes!
 If you want to improve the results when using CodeWhisperer, here are some tips to set yourself up for success:
+
+https://www.youtube.com/watch?v=xVd7PLzjA6A
 
 ## Keep Comments Short and Focused
 

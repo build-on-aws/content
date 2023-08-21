@@ -10,6 +10,10 @@ tags:
     - analytics
     - devops
     - tutorials
+spaces:
+  - devops
+waves:
+  - devops
 authorGithubAlias: dacort
 authorName: Damon Cortesi
 date: 2023-04-18

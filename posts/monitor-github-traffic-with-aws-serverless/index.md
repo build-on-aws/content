@@ -10,6 +10,10 @@ tags:
   - github
   - eventbridge
   - devops
+spaces:
+  - devops
+waves:
+  - devops
 authorGithubAlias: TheFuz
 authorName: Mahanth Jayadeva
 date: 2023-04-25
