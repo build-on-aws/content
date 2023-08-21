@@ -7,7 +7,7 @@ tags:
 - java
 authorGithubAlias: vsenger  
 authorName: Vinicius Senger  
-date: 2023-04-10  
+date: 2023-08-21
 ---
 
 Fourier Transform algorithms are -everywhere- in many applications: image recognition, instrument tuners, signal processing in complex medical devices, inside machine learning algorithms, cryptography, and more.
