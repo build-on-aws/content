@@ -6,6 +6,7 @@ tags:
     - cloudwatch
 authorGithubAlias: jtwardos
 authorName: John Twardos
+githubUserLabel: community
 date: 2023-08-21
 ---
 
