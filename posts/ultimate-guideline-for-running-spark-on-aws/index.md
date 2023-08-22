@@ -6,7 +6,6 @@ tags:
   - machine-learning
   - spark
   - data-processing
-  - cost-optimization
 spaces:
   - data-engineering
 authorGithubAlias: debnsuma
