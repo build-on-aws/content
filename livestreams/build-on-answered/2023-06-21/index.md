@@ -8,6 +8,8 @@ tags:
     - aws
     - twitch
     - resilience
+waves:
+  - resilience
 authorGithubAlias: juliegund
 authorName: Julie Gunderson
 additionalAuthors: 
