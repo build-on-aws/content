@@ -15,7 +15,6 @@ Do you want to quickly gain insights from thousands of Jira Tickets?  What if yo
 This post shares an overview of getting started with AWS Comprehend using multiple technologies including the Jira API, data cleaning, S3, and AWS Athena to test the robustness of entity and key phrase recognition within AWS Comprehend.  Spoiler alert, this effort was not quick; it highlights the challenges of entity recognition when you leverage AWS Comprehend out of the box and don't train your own model.  Using the Jira API is painless, data cleaning is not for the faint of heart.  Natural Language Processing (NLP) is a much harder problem than people let on.  In short, as of this writing, I did not get the result I was looking for from AWS Comprehend.  There was no "easy button" to quickly identify insights from Jira tickets.  I will continue to investigate and in the meantime, I hope this helicopter view of AWS Comprehend helps you get started with your own projects.  
 
 ## What is AWS Comprehend?
-
 ![Files](images/Get Started.jpg)
 
 AWS Comprehend is a text analysis service based on a natural language processing (NLP) algorithm.  It uses pre-trained deep-learning algorithms to parse through text and then provides an analysis of that text based on your interest in entities (keywords), key phrases, sentiment, personally identifiable information (PII), language identification, and syntax.  For more details check out [AWS Comprehend](https://docs.aws.amazon.com/comprehend/index.html)
@@ -26,10 +25,16 @@ To get started with AWS Comprehend, you need data.  My project focused on insigh
 To get started with a Jira API query, you need your favorite web browser, and you need to understand your organization's namespace for how Jira is installed.  For example, http://hostname/rest/api/2/issue/MKY-1 this pulls issue: MKY-1.  For this project, I did not require authentication mechanisms.  Work with your Atlassian product owner for more information if you need that option.  This project leverages the Jira API 2 based on how licensing works at my organization.
 
 I focused on pulling all issues from within a ticketing queue that lives inside a Jira project.  My query had to be structured properly to get into the correct project and queue:
+
+```
 https://YOUR_HOSTNAME/jira/rest/api/2/search?jql=project=YOUR_PROJECTNAME AND component in(YOUR_SUBPROJECT,YOUR_SUBPROJECT, ...,)
+```
 
 The next portion of the query specifies the data you wish to pull.  When I first started, I pulled all the data.  After dropping the raw Jira data into the AWS Comprehend "Analyze" option I noted Comprehend does an excellent job of identifying every single keyword including many I didn't want.  Comprehend found all the HTML tags, Urls, and extra information I would not be analyzing.  I refined my query to target just the data I needed which meant requesting specific fields like **Key**, **Summary**, and **Description**.  There are many ways to structure your query to get the data you want.  You can pull tickets in a certain date range: created=YOUR_DATERANGE or all tickets up to a certain amount: maxresults=YOUR_MAX, and you can also query for specific fields.  Here is my final query:
+
+```
 https://YOUR_HOSTNAME/jira/rest/api/2/search?jql=project=YOUR_PROJECT AND component in (YOUR_SUBPROJECT, YOUR_SUBPROJECT) AND created=2021-09-30 ORDER BY Created&maxResults=1650&fields=key, summary, description
+```
 
 Here is an example of the Jira API output Json
 
@@ -46,11 +51,11 @@ Check out what clean data looks like:
 ## Using AWS Comprehend
 There are two ways to access Comprehend using the AWS Console.  The first is testing a small amount of data using Real Time Analysis, and the second is creating an analysis job that runs on large amounts of data.  
 
-##Real Time Analysis##
+**Real Time Analysis**
 
 ![Files](images/analysis02.jpg)
 
-##Analysis Job##
+**Analysis Job**
 
 ![Files](images/analysisJobsExample.jpg)
 
