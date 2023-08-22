@@ -4,12 +4,18 @@ description: "Explore how engineers play a crucial role in optimizing AWS cloud 
 tags:
     - cost-optimization
     - aws
+spaces:
+    - cost-optimization
+waves:
+    - cost
 authorGithubAlias: jblume2
 authorName: Jeff Blume
 date: 2023-08-31
 showInHomeFeed: true
 
 ---
+| ToC |
+|-----|
 
 ## I think you said the wrong team
 
