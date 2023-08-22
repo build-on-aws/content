@@ -15,7 +15,7 @@ Do you want to quickly gain insights from thousands of Jira Tickets?  What if yo
 This post shares an overview of getting started with AWS Comprehend using multiple technologies including the Jira API, data cleaning, S3, and AWS Athena to test the robustness of entity and key phrase recognition within AWS Comprehend.  Spoiler alert, this effort was not quick; it highlights the challenges of entity recognition when you leverage AWS Comprehend out of the box and don't train your own model.  Using the Jira API is painless, data cleaning is not for the faint of heart.  Natural Language Processing (NLP) is a much harder problem than people let on.  In short, as of this writing, I did not get the result I was looking for from AWS Comprehend.  There was no "easy button" to quickly identify insights from Jira tickets.  I will continue to investigate and in the meantime, I hope this helicopter view of AWS Comprehend helps you get started with your own projects.  
 
 ## What is AWS Comprehend?
-![Files](images/Get Started.jpg)
+![Files](images/GetStarted.jpg)
 
 AWS Comprehend is a text analysis service based on a natural language processing (NLP) algorithm.  It uses pre-trained deep-learning algorithms to parse through text and then provides an analysis of that text based on your interest in entities (keywords), key phrases, sentiment, personally identifiable information (PII), language identification, and syntax.  For more details check out [AWS Comprehend](https://docs.aws.amazon.com/comprehend/index.html)
 
@@ -65,12 +65,15 @@ The analysis jobs take data stored in S3 and evaluate it through a pre-trained e
 
 
 
+
+
 Review Output in Excel to see the raw data or AWS Athena
 
 In order to run counts of keywords and gain the insights I was after to better construct FAQ documentation I would need confirmation that entity recognition had identified the keywords I expected.  I was surprised, that the name recognition is spot on, but for something like Azure it is identified as a "title" while AWS, Google, and Microsoft are correctly identified as "organization".  This highlights the issue between a machine and a human.  Humans would refer to cloud service providers as AWS, Azure and Google, so this is where I could have missed all Azure keywords assuming they would be categorized as an organization.  So technically, the machine is right, and my interpretation is wrong, but that's what I want to search for, and I would want Azure to be classified in the same way as AWS and Google.
 
-##Costs##
-Based on review of Cloud Cost Explorer, my AWS Comprehend jobs and S3 storage have had minimal if any charges.  Most likely because the account has been open for less than a year, and it's benefiting from the free tier.
+##Costs
+
+Based on review of Cloud Cost Explorer, my AWS Comprehend jobs and S3 storage have had minimal if any charges.  Most likely because the account has been open for less than a year, and it's benefiting from the free tier usage.
 
 
 
