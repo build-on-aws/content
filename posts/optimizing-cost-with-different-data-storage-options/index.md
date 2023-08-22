@@ -50,9 +50,9 @@ Block storage is a storage architecture that stores data in fixed-sized blocks, 
 
 Here is a quick brief about them:
 
-1. **Amazon EBS:** It is a good choice for workloads that require long-term persistence of data, such as databases, enterprise applications, and transactional workloads. EBS offers a range of volume types, including General Purpose SSD, Provisioned IOPS SSD, and HDDs, to meet different performance needs.
+1. **Amazon EBS:** It is a suitable option for workloads that require long-term persistence of data, including databases like MySQL, PostgreSQL, or Microsoft SQL Server, mission-critical enterprise applications such as ERP systems or CRM software, and for safeguarding transaction logs and financial records that demand data integrity and rapid access. EBS offers a range of volume types, including General Purpose SSD, Provisioned IOPS SSD, and HDDs, to meet different performance needs. 
 
-2. **Instance Store:** It is ideal for temporary storage requirements, such as caching and scratch space for compute workloads. It provides very high performance and low latency compared to EBS, but it does not provide persistent storage that is the data stored on it will be lost when the instance is stopped or terminated
+2. **Instance Store:** It is perfect for short-term storage needs like caching, temporary data from processing tasks, scientific simulations, and computational workloads. It offers exceptional performance and low latency compared to EBS but lacks data persistence; information is lost when the instance stops or terminates. Therefore, it's fitting for scenarios where data loss isn't critical or data recreation is feasible
 
 It's important to carefully choose between EBS and Instance Store based on the specific workload requirements and performance needs.
 
