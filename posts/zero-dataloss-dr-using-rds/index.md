@@ -2,11 +2,13 @@
 title: "Architecting for Zero Data Loss Disaster Recovery using Amazon RDS Solutions"
 description: "Exploring how Amazon RDS database offerings can assist with achieving Zero Data loss in the event of a major disaster on the live database service."
 tags:
-    - resilience
-    - rds
-    - backup
-    - replication
-    - disaster-recovery
+  - resilience
+  - rds
+  - backup
+  - replication
+  - disaster-recovery
+waves:
+  - resilience
 authorGithubAlias: psammy-github
 authorName: Paul Sammy
 githubUserLabel: community
