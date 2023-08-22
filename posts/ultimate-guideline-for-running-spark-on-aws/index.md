@@ -1,6 +1,6 @@
 ---
-title: "The ultimate guideline for running Apache Spark on AWS in maintainable, reliable and cost-effective way"
-description: "Embark on a comprehensive exploration of how to effectively run Apache Spark applications on AWS. This guide unravels the myriad of AWS services that integrate with Spark, offering insights into data engineering, analytics, and machine learning possibilities. From understanding the power of AWS Glue for beginners to delving deep into specialized services like SageMaker and Redshift, this post aims to provide clarity for developers seeking optimal performance, scalability, and cost-effectiveness in their Apache Spark workloads."
+title: "The Ultimate Guideline for Running Apache Spark on AWS at scale with maintainability and reliability"
+description: "From understanding the power of AWS Glue for beginners to delving deep into specialized services like SageMaker and Redshift, this post aims to provide clarity for developers seeking optimal performance, scalability, and cost-effectiveness in their Apache Spark workloads."
 tags:
   - data-engineering
   - machine-learning
@@ -24,11 +24,16 @@ In this guide, we will explore various decision-making questions to help develop
 
 ## Why AWS for Apache Spark ? 
 
-AWS provides the perfect environment for running Apache Spark, as it allows organizations to harness the power of Spark's distributed computing capabilities without the need for upfront infrastructure investments or complex management overhead. Below are some of the key features and benefits of running Apache Spark on Amazon Web Services:
+AWS provides the environment for running Apache Spark, as it allows organizations to harness the power of Spark's distributed computing capabilities without the need for upfront infrastructure investments or complex management overhead. Below are some of the key features and benefits of running Apache Spark on Amazon Web Services:
 
 ### <span style="color:orange">Elasticity and Scalability</span>
 
-AWS offers auto-scaling capabilities, allowing Spark clusters to dynamically adjust their capacity based on workload demands. You can easily scale up or down the number of compute resources to handle varying data processing requirements. This elasticity ensures efficient resource utilization and cost optimization, as you only pay for the resources you actually use.
+AWS's auto-scaling capabilities allow Spark clusters to effortlessly adapt to varying workload demands, ensuring optimal resource utilization. This dynamic adjustment not only leads to efficient operations but also significant cost savings, as you're billed only for the resources you use. 
+
+On the other hand, the traditional route of infrastructure management holds its own merits. For some Spark applications, there's a need for custom hardware setups, like high-performance GPUs for intensive machine learning tasks or high memory configurations for vast in-memory computations. Further, manual management offers the luxury of data locality optimization, where datasets can be positioned strategically near compute resources, reducing transfer times. This hands-on approach also gives the flexibility to fine-tune network configurations, optimize JVM settings, and ensure robust security measures. Additionally, there's the freedom to select specialized storage solutions tailored to the application's needs.
+
+In essence, while AWS presents a seamless, scalable, and cost-effective solution, the traditional infrastructure management approach can provide customized optimizations for specific scenarios. The decision between them should align with the project's unique requirements and objectives.
+
 
 ### <span style="color:orange">Traditional and Serverless Spark Clusters</span>
 
@@ -110,6 +115,7 @@ If the answer is yes, 🌟 **consider Amazon EMR**. Amazon EMR stands out as:
 - 🌐 Offers **EMR Serverless**: A serverless runtime environment optimized for analytics applications, compatible with frameworks like **Spark** and **Hive**.
 
 #### [🔗 Spark with Amazon EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark.html)
+#### [🔗 Create an ETL Pipeline with Amazon EMR and Apache Spark](https://community.aws/tutorials/create-an-etl-pipeline-apache-spark)
 #### [🔗 Run Apache Spark workloads 3.5 times faster with Amazon EMR 6.9](https://aws.amazon.com/blogs/big-data/run-apache-spark-workloads-3-5-times-faster-with-amazon-emr-6-9/)
 
 ---
@@ -131,6 +137,7 @@ SageMaker Studio, provided by AWS, is a fully integrated development environment
 #### [🔗 Gettings started with SageMaker with Apache Spark](https://docs.aws.amazon.com/sagemaker/latest/dg/apache-spark.html)
 #### [🔗 Gettings started with SageMaker Studio with AWS Glue](https://www.youtube.com/watch?v=VL1ttYyeJDE&t=3s&ab_channel=AmazonWebServices)
 #### [🔗 Gettings started with SageMaker Studio with Amazon EMR](https://aws.amazon.com/blogs/machine-learning/part-1-create-and-manage-amazon-emr-clusters-from-sagemaker-studio-to-run-interactive-spark-and-ml-workloads/)
+#### [🔗 Deploy Serverless Spark Jobs to AWS Using GitHub Actions](https://community.aws/tutorials/deploy-serverless-spark-jobs-to-aws-using-github-actions)
 
 ---
 
