@@ -3,9 +3,9 @@ title: "Comprehending Jira Tickets"
 description: Exploring AWS Comprehend to gain insights from Jira tickets
 tags:
   - aws-comprehend
+  - S3
   - jira
   - data
-  - Athena
 authorGithubAlias: ahoughro
 authorName: Amelia Hough-Ross
 date: 2023-07-12
@@ -36,9 +36,9 @@ The next portion of the query specifies the data you wish to pull.  When I first
 https://YOUR_HOSTNAME/jira/rest/api/2/search?jql=project=YOUR_PROJECT AND component in (YOUR_SUBPROJECT, YOUR_SUBPROJECT) AND created=2021-09-30 ORDER BY Created&maxResults=1650&fields=key, summary, description
 ```
 
-Here is an example of the Jira API output Json
+Here is an example of the Jira API Json output
 
-![Files](images/JsonExampleCleaned.jpg)
+![Files](images/JsonExampleCleaned.j)
 
 
 ## Data Cleaning, Oh My!
