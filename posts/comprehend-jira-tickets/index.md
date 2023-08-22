@@ -36,7 +36,11 @@ Here is an example of the Jira API output Json
 The JSON data returned from the Jira API only contains data from fields you specify, be advised that if your installation of Jira permits email communication within the ticket, you will see HTML information that distracts from keywords you want to focus on.  Removing as much unnecessary text as possible makes all the difference when using AWS Comprehend.  Comprehend does a great job of identifying every single word, which can be overwhelming if you have extraneous data.  The cleanest data will provide a more clear understanding of the keywords you are evaluating to understand if Comprehend is right for you.  To do this, find a great data scientist!  One who is familiar with the pandas python library and the use of regular expressions.  My forever friend wrote a script that reads Json output from Jira and writes it into a pandas data frame, followed by 12 lines of code to handle unnecessary stylesheet tags, Urls, images, email signature lines, headings, formatted tables, and sequences of whitespace.  By requesting free-text fields in Jira, you never know what you're going to get and AWS Comprehend can be easily filled with unnecessary keywords that distract from the insights you wish to achieve.
 
 ## Using AWS Comprehend
-There are two ways using the AWS Console to interact with AWS Comprehend.  The first is testing a subset of data in using the console to test your text as mentioned above, and the second is to create a job that can run through the bulk of your data.  Using 
+There are two ways to access Comprehend using the AWS Console.  The first is testing a small amount of data using Real Time Analysis, and the second is creating an analysis job that runs on bulk data.  
+##Real Time Analysis##
+![Files](images/analysis02.jpg)
+
+##Analysis Job##
 
 
 create analysis jobs that take data from S3 and run it through a pre-trained entity or key-phrase identification model.  I ran my data through both of these with underwhelming results.
