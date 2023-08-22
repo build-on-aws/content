@@ -1,6 +1,6 @@
 ---
 title: "Why Engineers Hold the Keys to Smart Cloud Spending"
-description: "Explore how engineers play a crucial role in optimizing AWS cloud spending"
+description: "Explore how engineers play a crucial role in optimizing AWS cloud spending, common optimization levers and tools that engineers can pull to save significant spend."
 tags:
     - cost-optimization
     - aws
@@ -19,9 +19,9 @@ showInHomeFeed: true
 
 ## I think you said the wrong team
 
-(Movie narrator voice) In a world powered by digital innovation, where cloud spend is out of control, one team of unsung heroes hold the keys to successful AWS cost optimization: Finance.
+*(Movie narrator voice)* In a world powered by digital innovation, where cloud spend is out of control, one team of unsung heroes hold the keys to successful AWS cost optimization: Finance.
 
-(Record Scratch) Wait no, that’s not right. It’s actually YOU – the engineers!
+*(Record Scratch)* Wait no, that’s not right. It’s actually YOU – the engineers!
 
 This blog will delve into the pivotal role that engineers play in driving intelligent AWS spending. I will offer some in-depth exploration of optimization plays for developers, as well as outline actionable strategies that engineers can seamlessly integrate into their development workflow.
 
@@ -39,7 +39,7 @@ Empowering engineers with an intimate understanding of AWS's complex cost struct
 
 ## You sold me, how can I optimize my AWS costs and usage?
 
-I had a feeling… it’s an easy sell. Both AWS are customers are aligned – run as efficiently as possible to gain as much value as you can from AWS. 
+I had a feeling… it’s an easy sell. Both AWS are customers are aligned – run as efficiently as possible to gain as much value as you can from AWS.
 
 There are MANY ways you can optimize, just do a quick google search and you will see there are optimization recommendations EVERYWHERE.
 
@@ -70,12 +70,15 @@ Absolutely! You can incorporate cost optimization into your daily work using a r
 ![cost explorer](images/cost-explorer.png)
 
 2.	**AWS Budgets**: Engineers can set custom [budgets](https://aws.amazon.com/aws-cost-management/aws-budgets/) and receive alerts when costs exceed predefined thresholds, fostering proactive cost management. In some cases, you can even automate an [action](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-controls.html) to be taken once a threshold is crossed (I.E. turn off an EC2 instance).
+
 3.	**[AWS Cost Anomaly Detection](https://aws.amazon.com/aws-cost-management/aws-cost-anomaly-detection/)**: This tool employs machine learning to detect and notify engineers about unusual spending patterns, enabling swift corrective action. This is similar to budgets, but different in terms of when you get alerted. See the below screenshot:
 
 ![budgets vs cost Anomaly](images/budgets.png)
 
 4.	**AWS Compute Optimizer**: Focused on compute resources, [Compute Optimizer](https://aws.amazon.com/compute-optimizer/) offers recommendations to improve resource utilization, aiding engineers in optimizing instance types and sizes. You can even now integrate your Application Performance Management data to get a more holistic picture of what’s running in your environment.
+
 5.	**[AWS Cost and Usage Report](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html)** – the most detailed billing artifact you can get. Once enabled, this is stored in an S3 bucket, and you can query and visualize the data in any way you choose. One common way is to utilize the [Cloud Intelligence Dashboards](https://wellarchitectedlabs.com/cost/200_labs/200_cloud_intelligence/) – check them out! You will need to set those up yourself, but it’s a simple deployment.
+
 6. ANOTHER BONUS ROUND: YOU GET A BONUS! AND YOU GET A BONUS! Don’t forget about [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/)! You can collect and track metrics, monitor log files, set alarms, and automatically react to changes in AWS resources. It’s in the name, you watch your cloud.
 
 ## Has anyone already done this?
@@ -84,6 +87,6 @@ I’m glad you asked! There are quite a few case studies out there on optimizati
 
 ## Conclusion
 
-(Movie Narrator voice again) In a world where… ok forget the movie narrator thing. Engineers truly are the unsung heroes of cost optimization! Beyond just crafting lines of code, they are the champions of efficient spending, holding the keys to unlocking the full potential of AWS while staying cost conscious throughout the entire development workflow. Remember, optimization is a marathon, not a sprint, so stay vigilant along your [Cloud Financial Management](https://aws.amazon.com/aws-cost-management/) journey!
+*(Movie Narrator voice again)* In a world where… ok forget the movie narrator thing. Engineers truly are the unsung heroes of cost optimization! Beyond just crafting lines of code, they are the champions of efficient spending, holding the keys to unlocking the full potential of AWS while staying cost conscious throughout the entire development workflow. Remember, optimization is a marathon, not a sprint, so stay vigilant along your [Cloud Financial Management](https://aws.amazon.com/aws-cost-management/) journey!
 
 Ok, you can go back to coding now. So long, and thanks for all the fish.
