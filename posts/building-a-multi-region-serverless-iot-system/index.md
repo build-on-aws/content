@@ -8,6 +8,7 @@ tags:
     - eventbridge
     - stepfunctions
     - serverless
+    - resilience
 authorGithubAlias: JimmyDqv
 authorName: Jimmy Dahlqvist
 githubUserLabel: community-builder
