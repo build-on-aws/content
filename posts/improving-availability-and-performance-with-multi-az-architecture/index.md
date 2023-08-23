@@ -6,6 +6,8 @@ tags:
   - resilience
   - networking
   - aws
+waves:
+  - resilience
 authorGithubAlias: hechkh
 authorName: Hechmi Khelifi
 date: 2023-07-06
