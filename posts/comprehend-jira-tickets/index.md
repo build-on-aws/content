@@ -38,7 +38,7 @@ https://YOUR_HOSTNAME/jira/rest/api/2/search?jql=project=YOUR_PROJECT AND compon
 
 Here is an example of the Jira API Json output
 
-![Files](images/JsonExampleCleaned.j)
+![Files](images/JsonExampleCleaned.jpg)
 
 
 ## Data Cleaning, Oh My!
