@@ -7,7 +7,7 @@ tags:
   - spark
   - data-processing
 spaces:
-  - data-engineering
+  - cost-optimization
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2023-08-15
