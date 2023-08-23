@@ -1,11 +1,11 @@
 ---
-title: Course - AWS Billing and Cost Management
-description:  In this fundamental course on *AWS Skill Builder*, you will learn about the AWS Billing and Cost Management service, and the functionality it offers. You will learn about some of the features available to help you analyze your cloud spending, as well as some of the features available to help you manage cloud spending. You will also have access to additional resources to dive deeper into the features covered in the course.
+title: Course - AWS Free Tier - Introduction to Offerings
+description:  With AWS Free Tier, customers can explore and try out Amazon Web Services (AWS) services free of charge up to specified limits for applicable services. By the end of this Fundamental course on AWS Skill Builder, you will be able to differentiate between the AWS Free Tier offerings and know how to locate offers. You will also be able to identify offer details and usage limits.
 authorGithubAlias: AWS Team
 authorName: AWS Team
-date: 2023-06-05
+date: 2023-06-10
 showInHomeFeed: false
-externalUrl: https://explore.skillbuilder.aws/learn/course/external/view/elearning/129/aws-billing-and-cost-management
+externalUrl: https://explore.skillbuilder.aws/learn/course/external/view/elearning/15012/aws-free-tier-introduction-to-offerings 
 spaces:
   - cost-optimization
 ---

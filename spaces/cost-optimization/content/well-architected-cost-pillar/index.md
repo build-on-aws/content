@@ -7,6 +7,6 @@ date: 2023-05-09
 showInHomeFeed: false
 externalUrl: https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html
 images:
-  banner: ./images/aws-logo.png
-  hero: ./images/aws-logo.png
+  banner: ./images/temp-wa-2.png
+  hero: ./images/temp-wa-2.png
 ---

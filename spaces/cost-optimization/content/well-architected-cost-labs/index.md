@@ -7,6 +7,6 @@ date: 2023-07-06
 showInHomeFeed: false
 externalUrl: https://www.wellarchitectedlabs.com/cost/
 images:
-  banner: ./images/aws-logo.png
-  hero: ./images/aws-logo.png
+  banner: ./images/wa-labs.png
+  hero: ./images/wa-labs.png
 ---
