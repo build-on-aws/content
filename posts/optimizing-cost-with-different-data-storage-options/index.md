@@ -63,7 +63,7 @@ Table below quickly summarizes the discussion so far:
 | Storage Type | Use Case                 | Advantages                                 | Disadvantages                               |
 |--------------|--------------------------|--------------------------------------------|---------------------------------------------|
 | Object       | Big data storage, backups, regulatory requirements | Unlimited scalability, cost-effective, metadata rich | Not suitable for structured data, slower performance compared to block storage |
-| File  | Shared file storage accessed by multiple instances simultaneousl, NAS | Petabyte scale scalability, shared access, parallel access  | Limited scalability compared to object storage |
+| File  | Shared file storage accessed by multiple instances simultaneously, NAS | Petabyte scale scalability, shared access, parallel access  | Limited scalability compared to object storage |
 | Block      | Databases, mission-critical enterprise applications, short-term storage needs | High performance, low latency | Less cost-effective, not suitable for sharing data |
 
 
