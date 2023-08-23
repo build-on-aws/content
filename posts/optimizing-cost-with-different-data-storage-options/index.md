@@ -21,6 +21,8 @@ Choosing the right storage volume can be a daunting task. With multiple options 
 
 There are three main cloud storage types: [object storage](https://aws.amazon.com/what-is/object-storage/), [file storage](https://aws.amazon.com/what-is/cloud-file-storage/), and [block storage](https://aws.amazon.com/what-is/block-storage/). Each of these further have various sub types.
 
+![Storage Services](images/StorageServices.png "Storage Services") 
+
 ### Object Store
 
 Object store is a storage architecture for unstructured data that stores data as objects with metadata and unique identifiers for easy access. It's ideal for large amounts of data, such as media files, documents, logs, and backups. Object stores are highly scalable, provide high availability and durability, and are cost-effective. [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html)(S3) is an Object Store service from AWS that can store and manage petabytes of data with 11 9's of durability. Amazon S3 offers a range of storage classes that you can choose from based on the data access, resiliency, and cost requirements of your workloads.
@@ -56,6 +58,15 @@ Here is a quick brief about them:
 
 It's important to carefully choose between EBS and Instance Store based on the specific workload requirements and performance needs.
 
+Table below quickly summarizes the discussion so far:
+
+| Storage Type | Use Case                 | Advantages                                 | Disadvantages                               |
+|--------------|--------------------------|--------------------------------------------|---------------------------------------------|
+| Object       | Big data storage, backups, regulatory requirements | Unlimited scalability, cost-effective, metadata rich | Not suitable for structured data, slower performance compared to block storage |
+| File  | Shared file storage accessed by multiple instances simultaneousl, NAS | Petabyte scale scalability, shared access, parallel access  | Limited scalability compared to object storage |
+| Block      | Databases, mission-critical enterprise applications, short-term storage needs | High performance, low latency | Less cost-effective, not suitable for sharing data |
+
+
 ### Choosing the right AWS Storage Solution
 
 Having a grasp of the fundamental building blocks of AWS storage, you might understand, choosing the right storage on AWS depends on several factors, including your specific requirements, workload characteristics, and budget.
@@ -81,6 +92,7 @@ Here is a step-by-step guide to help you choose the right storage on AWS:
 
 10. Remember that storage requirements can evolve, and it's always a good idea to periodically reassess your storage needs to ensure you're utilizing the most appropriate storage solution on AWS.
 
+
 ### Summary
 
-Choosing the right storage on AWS requires understanding your requirements, evaluating available options like Amazon S3, S3 Storage Classes, EBS Types, Instance Store, EFS, FSx flavours and considering performance, durability, and cost implications, ensuring security and compliance, planning for scalability, reviewing customer feedback, and conducting small-scale experiments. Hope this blog gave you some idea on how to choose best storage for your workloads. To dive further, you can always visit [Choosing an AWS storage service](https://aws.amazon.com/getting-started/decision-guides/storage-on-aws-how-to-choose/).
+Choosing the right storage on AWS requires understanding your requirements, evaluating available options like Amazon S3, S3 Storage Classes, EBS Types, Instance Store, EFS, FSx flavours and considering performance, durability, and cost implications, ensuring security and compliance, planning for scalability, reviewing customer feedback, and conducting small-scale experiments. Hope this blog gave you some idea on how to choose best storage for your workloads. The table below summarizes key charecteristics. To dive further, you can always visit [Choosing an AWS storage service](https://aws.amazon.com/getting-started/decision-guides/storage-on-aws-how-to-choose/).
