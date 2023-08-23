@@ -11,7 +11,10 @@ tags:
   - migrate
   - arm64
   - ec2
-  - aws
+spaces:
+  - cost-optimization
+waves:
+  - cost
 showInHomeFeed: true
 authorGithubAlias: DDxPlague
 authorName: Tyler Jones
