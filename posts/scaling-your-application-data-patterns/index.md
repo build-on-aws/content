@@ -7,8 +7,6 @@ tags:
     - ddd
     - eventbridge
     - devops
-spaces:
-  - resilience
 waves:
   - resilience
 authorGithubAlias: wirjo
