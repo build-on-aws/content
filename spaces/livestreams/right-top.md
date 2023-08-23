@@ -1,6 +1,13 @@
 ---
 hasBorder: true
 ---
+#### Upcoming Build On Live Events 📆
+
+![Build On Live Cost Optimization banner](./images/bolco_banner.webp)
+
+Build On Live | Cost Optimization is coming coming **September 28th** LIVE on Twitch 🥳
+
+Make sure to click the 'Remind me' [here](https://bit.ly/3qPXTVT) to get notified when we go live!
 
 #### Hungry for some On Demand Videos? 🤔
 
@@ -8,12 +15,11 @@ Interested in checking out how [Amazon CodeWhisperer](https://aws.amazon.com/cod
 
 ![Thumbnail Of the CodeWhisperer playlist](./images/tiffany-codewhisperer.jpg)
 
-#### Upcoming Build On Live Events 📆
+#### Stream with us
 
-Build On Live | Cost Optimization is coming coming this September! 🥳
+Have you built something interesting recently that you’d like to show the world about? Have you solved some niche, yet critical, aspect of the entire workflow for foundation models on AWS? Did you write a cool program to generate millions of images or anything in-between?
 
-Stay tuned, more information is coming soon ⏰
+Join us as a guest speaker on our weekly Twitch show, [Build on Generative AI](https://community.aws/livestreams/build-on-generative-ai). Every Monday at 9am PST / 12pm EST / 5pm BST we cover new angles about foundation models on AWS. Last season, available here, covered 20+ topics across the entire lifecycle.
 
-#### Special Streams 🎉
+Submit your ideas [**HERE**](https://www.pulse.aws/application/TJIL4871s)
 
-The Build On Weekly crew (Jacquie and Darko) are running a special live stream from the [AWS Summit in New York](https://aws.amazon.com/events/summits/new-york/?sc_channel=el&sc_campaign=livestreams&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=livestream-spaces) on the **26th of July 2023, at 9AM PST (Noon EST)**. Join them live on [Twitch](https://twitch.tv/aws), as they welcome guests from in and around the AWS Community! 🙌
