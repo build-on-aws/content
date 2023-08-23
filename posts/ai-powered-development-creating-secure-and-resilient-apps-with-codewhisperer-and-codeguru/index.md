@@ -6,7 +6,7 @@ tags:
   - data-science
   - devops
   - security
-  - resiliency
+  - resilience
   - codewhisperer
   - codeguru
   - sagemaker
