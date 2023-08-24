@@ -1,7 +1,7 @@
 ---
 hasBorder: true
 ---
-### AWS Cost Compass
+### AWS Cost Optimization Resources
 
 #### I'm new to the cloud. What should I be aware of?
 
