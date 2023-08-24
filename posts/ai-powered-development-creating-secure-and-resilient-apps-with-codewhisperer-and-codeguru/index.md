@@ -1,6 +1,6 @@
 ---
 title: "AI-Powered Development: Creating Secure and Resilient Apps with CodeWhisperer and CodeGuru"
-description: "Learn about the new advances in AI developer tools and how they can help increase your applications' security, availability, and resiliency."
+description: "Learn about advances in AI developer tools and how they can help increase your applications' security, availability, and resiliency."
 tags:
   - ai-ml
   - data-science
@@ -18,16 +18,16 @@ date: 2023-08-22
 |ToC|
 |---|
 
-Nowadays, users expect the applications that they use to have 100% uptime and be available 24/7. However, it can be a complex endeavor for developers building to also keep in mind best practices for designing highly available systems. Fortunately, advances in AI have allowed for new and exciting developer tools such as Amazon CodeWhisperer and Amazon CodeGuru Security to assist developers in creating resilient applications. 
+Nowadays, users expect the applications that they use to have 100% uptime and be available 24/7. However, it can be a complex endeavor for developers building these applications to understand and apply all the best practices for designing highly available systems. Fortunately, advances in AI now enable developers to use AI-powered tools to analyze source code, detect anomalies, suggest fixes, and monitor system health to boost reliability. Here I will share with you how this combination of AI and software development is enabling a new generation of highly available applications established around proven and optimal methodologies in security and resilience.
 
-In this blog post, we'll explore how these AI-powered tools analyze source code, detect anomalies, suggest fixes, and monitor system health to boost reliability. By leveraging AI to understand codebases and system behavior better than ever before, developers can create robust applications that provide uninterrupted service even when things go wrong. The combination of AI and software development is enabling a new generation of highly available applications established around proven and optimal methodologies in security.
+In this post, I will share how you can use developer tools such as Amazon CodeWhisperer and Amazon CodeGuru Security to assist you in creating resilient applications. These tools help developers with real-time code suggestions that adhere to foundations from the Security and Reliability Well-Architected Framework, have high precision vulnerability detectors, security specific scans, as well as versatile dashboards to give an overall view of security findings. There are also many more security benefits attached to these tools that I'll go through below, in addition to how to utilize them effectively.
 
 
 ## CodeWhisperer
 
 [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/) is an AI coding companion that generates whole line and full function code suggestions in your IDE to help boost productivity as well as to provide code suggestions that adhere to best practices. Among these best practices include secure and resilient application code designs. Trained on billions of lines of Amazon and publicly available code, CodeWhisperer can generate code suggestions ranging from snippets to full functions in real time based on your comments and existing code directly in your integrated developer environment (IDE). With CodeWhisperer, you can select from many different programming languages including Python, Java, and JavaScript, and your favorite IDEs, including VS Code, IntelliJ IDEA, AWS Cloud9, AWS Lambda console, JupyterLab and Amazon SageMaker Studio.
 
-In order to help developers build more secure applications, CodeWhisperer is able to assist in enhancing the security of code that’s being written. You can scan your code to detect hard-to-find vulnerabilities, and get code suggestions to remediate them immediately. The suggestions that are given are based on security standards best practices, such as those outlined in the Open Worldwide Application Security Project (OWASP), or those that don't meet crypto library best practices and other similar security best practices. These suggestions can help boost developer productivity and boost the codebase's security and resilience at the same time.
+In order to help developers build more secure applications, CodeWhisperer is able to assist in enhancing the security of code that’s being written. You can scan your code to detect hard-to-find vulnerabilities, and get code suggestions to remediate them immediately. The suggestions that are given are based on pillars of the AWS Well-Architected Framework like Security and Reliability, in addition to those outlined in the Open Worldwide Application Security Project (OWASP). These suggestions can help boost developer productivity and boost the codebase's security and resilience at the same time.
 
 ### User actions
 
@@ -51,7 +51,7 @@ We’ve already seen Amazon CodeGuru Security in action with Amazon CodeWhispere
 
 ### High precision vulnerability detection
 
-A big pain point when assessing security vulnerabilities is false positives. By performing deep semantic analysis, and leveraging AWS security best practices as well as training on millions of code vulnerability assessments within Amazon, CodeGuru Security detects vulnerabilities with a high precision. This allows CodeGuru to significantly reduce the number of false positives and frees up engineering teams to focus on building applications.
+A big pain point when assessing security vulnerabilities is false positives. By performing deep semantic analysis, and leveraging techniques from the Security Pillar of the AWS  Well-Architected Framework, as well as training on millions of code vulnerability assessments within Amazon, CodeGuru Security detects vulnerabilities with a high precision. This allows CodeGuru to significantly reduce the number of false positives and frees up engineering teams to focus on building applications.
 
 There are several types of detectors CodeGuru Security uses to analyze your code. These detectors look for code vulnerabilities like injection flaws, leaking data, weak cryptography, or missing encryption. All of these vulnerabilities, if left as is, could lead to outages, data loss, or breaches. These detectors are crucial to maintaining your application’s resilience, so long as you, the developer, are implementing the recommended fixes. As we update our security policies and add new detectors, code scans automatically incorporate the new policies. Detected vulnerabilities are returned as findings, which include details about the security risk and how to address it.
 
