@@ -5,9 +5,12 @@ tags:
   - cost-optimization
   - cost-control-automation
   - trusted-advisor
-  - aws
   - service-catalog
   - cost-anomaly-detection
+spaces:
+  - cost-optimization
+waves:
+  - cost
 authorGithubAlias: JerryChenZeyun
 authorName: Jerry Chen
 additionalAuthors: 
