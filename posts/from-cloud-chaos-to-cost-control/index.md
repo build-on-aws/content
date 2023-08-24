@@ -16,7 +16,7 @@ authorName: Jerry Chen
 additionalAuthors: 
   - authorGithubAlias: mergenf
     authorName: Ben Mergen
-date: 2023-08-16
+date: 2023-08-24
 ---
 
 Have you ever been in cloud chaos situations, where you've found the resource cost has gone beyond your monthly budget unexpectedly? This can be caused by spikes due to unexpectedly large volume of user requests, resources created more than actual needs, unattended long running instances, etc. Meanwhile, have you desired to operate your cloud resources in a way that allows you to focus more on your core business, and less on manual resource management to comply with your budget?
