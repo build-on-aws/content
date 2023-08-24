@@ -2,12 +2,12 @@
 title: "Balancing Performance and Cost: How to Choose the Right AWS Storage Solution for Your Applications"
 description: "Choosing right storage is an essential part for businesses to keep their systems performant and cost efficient, but it can be a complex and challenging process. Here's how to do it"
 tags:
+    - cost-optimization
     - storage
+    - fundamentals
     - object
     - block
     - file
-    - cost-optimization
-    - fundamentals
 spaces:
   - cost-optimization
 waves:
