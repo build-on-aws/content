@@ -8,6 +8,8 @@ tags:
   - resilience
   - chaos-engineering
   - fault-injection-simulator
+waves:
+  - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 additionalAuthors: 

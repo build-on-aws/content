@@ -17,6 +17,14 @@ additionalAuthors:
 date: 2023-04-26
 ---
 
+## Season 02
+
+| Episode | Name | Date | Link to Show Notes
+|--|--|--|--|
+| S02E01 | Extracting text and Entity Detecion in documents | 2023-08-16  | [Show Notes](/livestreams/winging-it/2023-08-16) |
+
+## Pilot season
+
 | Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
 | S01E01 | Sorting Documents with ML | 2023-04-26  | [Show Notes](/livestreams/winging-it/2023-04-26) |
