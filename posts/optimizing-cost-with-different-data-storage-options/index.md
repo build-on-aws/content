@@ -21,7 +21,7 @@ Choosing the right storage volume can be a daunting task. With multiple options 
 
 There are three main cloud storage types: [object storage](https://aws.amazon.com/what-is/object-storage/), [file storage](https://aws.amazon.com/what-is/cloud-file-storage/), and [block storage](https://aws.amazon.com/what-is/block-storage/). Each of these further have various sub types.
 
-![Storage Services](images/StorageServices.png "Storage Services") 
+![Storage Services](images/StorageServices.jpg "Storage Services") 
 
 ### Object Store
 
