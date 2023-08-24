@@ -19,11 +19,11 @@ date: 2023-08-26
 
 Have you ever considered the connection between how securing your infrastructure and a cost effective infrastructure go hand in hand?  Most often, when we think about security our minds go to adversaries and risk, controls and inspection, compliance and auditing.  However, paying attention to your security posture and understanding what happens with network traffic, both desired and undesired, contributes to cost effective design in a cloud environment.
 
-In this tutorial we will focus on controlling egress traffic with the [Amazon Route 53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/).  Our first goal of this capability is to provide a secure environment, ensuring that only desired egress traffic is allowed.  Our secondary goal, and really a side-outcome of the capabilities we will enable, is that we will minimize our cloud costs for egress traffic.  
+In this tutorial, we will focus on controlling egress traffic with the [Amazon Route 53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/).  Our first goal of this capability is to provide a secure environment, ensuring that only desired egress traffic is allowed.  Our secondary goal, and really a side-outcome of the capabilities we will enable, is that we will minimize our cloud costs for egress traffic.  
 
 > For the purpose of this tutorial, egress traffic refers to traffic from our protected subnet within our Virtual Private Cloud (VPC), leaving the VPC, and being routed toward the internet.
 
-In this tutorial we will work with the Amazon Route 53 DNS Resolver Firewall, Amazon EC2 Instances, and Amazon Virtual Private Clouds.
+In this tutorial, we will work with the Amazon Route 53 DNS Resolver Firewall, Amazon EC2 Instances, and Amazon Virtual Private Clouds.
 
 ## What you will learn
 
@@ -43,7 +43,7 @@ Before starting this tutorial, you will need the following:
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-08-09                             |
+| ⏰ Last Updated     | 2023-08-26                             |
 
 | ToC |
 |-----|
@@ -56,7 +56,13 @@ This is a 3-part series:
 
 With Amazon Route 53 Resolver DNS Firewall , you define domain name filtering rules in rule groups that you associate with your VPCs. You can specify lists of domain names to allow or block, and you can customize the responses for the DNS queries that you block.
 
-A primary use of Route 53 Resolver DNS Firewall is to block communication with known malicious domains and/or only allow communication with trusted domains. This is one of the features we will be configuring in this tutorial.  Not only can DNS Firewall prevent the resolution of untrusted domains (and the IP addresses needed to communicate with them) but it can also help prevent DNS exfiltration of your data. DNS exfiltration can happen when there is unauthorized access that compromises resources in your VPC. DNS queries can then be used to send data or tunnel other network protocols out of the VPC to malicious DNS servers. With DNS Firewall, you can monitor and control the domains that your application workloads can query. You can deny access to the domains that AWS knows to be malicious and allow other queries to pass through. Alternately, you can build a DNS Allow-List model where you implement a default deny to all domains except for the ones that you explicitly trust.
+A primary use of Route 53 Resolver DNS Firewall is to block communication with known malicious domains and/or only allow communication with trusted domains. This is one of the features we will be configuring in this tutorial.
+
+Not only can DNS Firewall prevent the resolution of untrusted domains (and the IP addresses needed to communicate with them) but it can also help prevent DNS exfiltration of your data. DNS exfiltration can happen when there is unauthorized access that compromises resources in your VPC. DNS queries can then be used to send data or tunnel other network protocols out of the VPC to malicious DNS servers. 
+
+With DNS Firewall, you can monitor and control the domains that your application workloads can query. You can deny access to the domains that AWS knows to be malicious and allow other queries to pass through.
+
+Alternately, you can build a DNS Allow-List model where you implement a default deny to all domains except for the ones that you explicitly trust.
 
 ## How DNS Firewall works with AWS Network Firewall
 
@@ -66,13 +72,13 @@ DNS Firewall provides filtering for outbound DNS queries that pass through the R
 
 AWS Network Firewall provides filtering for all network traffic that is routed through firewall endpoints, but does not have visibility into queries made to the Route 53 Resolver.
 
-In this tutorial we will focus on filtering the initial DNS request that AWS Network Firewall would not normally have visibility into.  To understand why this is important let's examine our sample architecture seen in the following image.
+In this tutorial, we will focus on filtering the initial DNS request that AWS Network Firewall would not normally have visibility into.  To understand why this is important let's examine our sample architecture seen in the following image.
 
 ![Simplified distributed deployment](/images/tutorial-topolgy.png "Simplified distributed deployment used in this tutorial")
 
 The above image is a simplified, single availability zone, distributed deployment architecture.  
 
-### Understanding traffic flow
+### Understanding the traffic flow
 
 Traffic from protected workloads going to the Internet is routed via the default route (0.0.0.0/0) to a Network Firewall endpoint which in turn has a default route pointing to a NAT Gateway endpoint. You can see this highlighted in number 1 and 2.
 
@@ -88,23 +94,23 @@ The Amazon Route 53 Resolver operates on the .2 address of each VPC subnet.  The
 
 ### Cost efficient architecture
 
-Considering a firewall architecture such as the one used in this tutorial, there are a few areas that lend themselves to a cost efficient architecture.
+Considering a firewall architecture such as the one used in this tutorial, there are a few areas that lend themselves to a cost efficient architecture:
 
 1. DNS traffic doesn't cross VPCs
 
-DNS traffic does not cross VPCs and it doesn't need to traverse the internet.  By keeping the DNS local we wont incur additional cost for egress data.
+    DNS traffic does not cross VPCs and it doesn't need to traverse the Internet. By keeping the DNS local we won't incur additional cost for the egress data.
 
 2. DNS control makes sure that malicious connections are not made out of the VPC, thus reducing the compute and data costs.
 
-A common technique for bad actors is to establish command and control connections from internal resources.  The compute resource can then be used to initiate DDoS attacks, mine crypto, and perform other nefarious acts.  By blocking dns requests to TLDs that are know to be malicious you essentially block this command and control channel from happening.  This keeps compute costs and data costs down.
+    A common technique for bad actors is to establish command and control connections from internal resources. The compute resource can then be used to initiate DDoS attacks, mine crypto, and perform other nefarious acts. By blocking DNS requests to Top-Level Domains(TLDs) that are known to be malicious, you essentially block this command and control channel from happening. This keeps compute costs and data costs down.
 
-1. Modify the current architecture to use a centralized inspection VPC.
+3. Modify the current architecture to use a centralized inspection VPC.
 
-While this is not specific to this tutorial, you can make a minor adjustment to the firewall configuration, and use a centralized inspection VPC rather than a distributed VPC. This will minimize the cost involved with having a firewall endpoint distributed across VPCs.
+    While this is not specific to this tutorial, you can make a minor adjustments to the firewall configuration, and use a centralized inspection VPC rather than a distributed VPC. This will minimize the cost involved with having a firewall endpoint distributed across VPCs.
 
 ## Environment setup
 
-This tutorial starts with a baseline configuration that's built with a CloudFormation template that you can find in the sample code repo.  You will need to deploy this template in your own AWS environment before following along with the tutorial.
+This tutorial starts with a baseline configuration that's built with an AWS CloudFormation template that you can find in the [sample code repo](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads). You will need to deploy the template `Egress-Controls-Tutorial.yaml` in your own AWS environment before following along with the tutorial.
 
 Once you have the CloudFormation Template deployed, we will check the baseline posture of the environment.  We are checking to see that certain traffic is allowed out of the environment.  Once verified we will configure the Amazon Route 53 resolve DNS firewall to block this undesired egress traffic and we will also enable logging.
 
@@ -128,13 +134,13 @@ Let's begin by connecting to our test EC2 server instance and running a script t
 ![Navigate to stack](/images/2023-08-23_14-53-13.png "Navigate to stack")
 
 4. Click on `Outputs` and check the resources that are created.
-5. Find the TestHostSession in the key column.  The URL link for TestHostSession opens an interactive shell on an EC2 instance (**TestInstance1** in the earlier diagram) within an AWS Network Firewall protected subnet which you will be using to send test traffic in this tutorial.
-6. Click on the link to connect to it.  You may find it useful to open this in a separate tab so you can return here to use this and the other links as shortcuts.  There are also links to the AWS Network Firewall, Route 53 Resolver DNS Firewall, and CloudWatch Logs services.
+5. Find the `TestHostSession` in the key column.  The URL link for `TestHostSession` opens an interactive shell on an Amazon EC2 instance (**TestInstance1** in the earlier diagram) within an AWS Network Firewall protected subnet which you will be using to send test traffic in this tutorial.
+6. Click on the link to connect to it. You may find it useful to open this in a separate tab, so you can return here to use this and the other links as shortcuts. There are also links to the AWS Network Firewall, Route 53 Resolver DNS Firewall, and CloudWatch Logs services.
 
 ![CloudFormation Output](/images/2023-08-23_14-54-25.png "CloudFormation Output")
 
-7. Change into the ssm-user home folder using the `cd ~/` command.
-8. Clone the git repo into the ssm-user home directory using the `git clone` command.
+7. In the interactive shell, change into the `ssm-user` home folder using the `cd ~/` command.
+8. Clone the [git repo](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads/tree/main) into the ssm-user home directory using the `git clone https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads.git` command.
 9. cd into the `testing-egress-controls-for-cloud-workloads` directory.
 10. Run the test-egress script using the command `sh test-egress.sh` command.  This should show that nothing is currently being blocked.
 
