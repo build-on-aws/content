@@ -11,7 +11,6 @@ authorName: Khubyar Behramsha
 date: 2023-09-20
 showInHomeFeed: true
 ---
-**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
 
 ## Introduction
 
