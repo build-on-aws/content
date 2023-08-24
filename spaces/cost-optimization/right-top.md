@@ -5,11 +5,9 @@ hasBorder: true
 
 #### I'm new to the cloud. What should I be aware of?
 
-AWS operates primarily on a pay-as-you-go model, billing you for what you utilize. Different services accrue costs based on factors like computing power, storage, or data transfers. Additionally, AWS offers a Free Tier, which allows limited usage of many services without any charge, but it's essential to understand the limits to avoid unexpected bills. Before diving deep, check out these blogs to [AWS Cloud Account fundamentals]() and [Anatomy of a bill]() quickly familiarize yourself with the basics.
+AWS operates primarily on a pay-as-you-go model, billing you for what you utilize. Different services accrue costs based on factors like computing power, storage, or data transfers. Additionally, AWS offers a Free Tier, which allows limited usage of many services without any charge, but it's essential to understand the limits to avoid unexpected bills.
 
 #### How can I explore AWS without a credit card?
-
-* For beginners, our blogs on [How to Set Up Your First Website on the Cloud for Free]() and [Tidying your bedroom: : finding and cleaning up resources you no longer]() need can be invaluable.
 
 * [AWS Educate](https://aws.amazon.com/education/awseducate/) is open to any individual, regardless of where they are in their education, technical experience, or career journey. AWS Educate provides simple, barrier-free access to secure, authentic, self-graded labs in the AWS Console with just an email address and NO credit card.
 
@@ -17,7 +15,7 @@ AWS operates primarily on a pay-as-you-go model, billing you for what you utiliz
 
 #### I want to optimize my production application. How should I proceed?
 
-Cost optimization isn't just a finance team's task – engineers wield substantial influence over AWS expenditure. Explore how in our blog, [Why Engineers Hold the Keys to Smart Cloud Spending](https://community.aws/posts/why-engineers-hold-the-keys). Delve deeper with the [AWS Well-Architected Framework's Cost Pillar](https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html), ensuring you're acquainted with optimization nuances across service categories, from [compute]() and [storage]() to [networking]() and [databases]().
+Cost optimization isn't just a finance team's task – engineers wield substantial influence over AWS expenditure. Explore how in our blog, [Why Engineers Hold the Keys to Smart Cloud Spending](https://community.aws/posts/why-engineers-hold-the-keys). Delve deeper with the [AWS Well-Architected Framework's Cost Pillar](https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html), ensuring you're acquainted with optimization nuances across service categories, from compute and storage to networking and databases.
 
 #### I need more help. Where can I turn?
 
