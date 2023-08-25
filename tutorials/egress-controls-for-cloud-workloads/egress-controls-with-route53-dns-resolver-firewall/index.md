@@ -134,12 +134,14 @@ Let's begin by connecting to our test EC2 server instance and running a script t
 ![Navigate to stack](/images/2023-08-23_14-53-13.png "Navigate to stack")
 
 4. Click on `Outputs` and check the resources that are created.
+
 5. Find the `TestHostSession` in the key column.  The URL link for `TestHostSession` opens an interactive shell on an Amazon EC2 instance (**TestInstance1** in the earlier diagram) within an AWS Network Firewall protected subnet which you will be using to send test traffic in this tutorial.
 6. Click on the link to connect to it. You may find it useful to open this in a separate tab, so you can return here to use this and the other links as shortcuts. There are also links to the AWS Network Firewall, Route 53 Resolver DNS Firewall, and CloudWatch Logs services.
 
 ![CloudFormation Output](/images/2023-08-23_14-54-25.png "CloudFormation Output")
 
 7. In the interactive shell, change into the `ssm-user` home folder using the `cd ~/` command.
+
 8. Clone the [git repo](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads/tree/main) into the ssm-user home directory using the `git clone https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads.git` command.
 9. cd into the `testing-egress-controls-for-cloud-workloads` directory.
 10. Run the test-egress script using the command `sh test-egress.sh` command.  This should show that nothing is currently being blocked.
@@ -164,7 +166,7 @@ In this step, we create a domain list that will specify the domain-matching patt
 
 #### Create a domain list of commonly abused top-level domains (TLDs)
 
-- Navigate to **VPC** → **DNS firewall** (remember there is a shortcut link labeled **R53DNSFWConsole** in the `Outputs` of the CloudFormation template) and click on **Domain lists**.
+- Navigate to **VPC** → **DNS firewall** (remember there is a shortcut link labeled **R53DNSFWConsole** in the `Outputs` of the CloudFormation stack) and click on **Domain lists**.
 
 - Here you can see any custom lists created as well as AWS managed domain lists.
 
@@ -201,7 +203,7 @@ In this step, we create a domain list that will specify the domain-matching patt
 
 DNS Firewall rule groups are a set of rules that will allow, deny, or alert on DNS request that match the associated domain lists. In this step we are going to create a rule group and add the domain list just created.
 
-- Navigate to **VPC** → **DNS firewall** → **Rule groups** and click on **Create rule group**.
+- In the AWS Management Console, navigate to **VPC** → **DNS firewall** → **Rule groups** and click on **Create rule group**.
 
 ![Create rule group](images/Rule-Group-Creation-1.JPG "Create a rule group")
 
@@ -261,7 +263,9 @@ You have deployed and created a DNS Firewall Rule group, configured a rule to BL
 
 ![Verify egress-check.sh](/images/2023-08-23_15-21-22.png "Verify using the egress-check.sh script")
 
-At this point we have successfully created DNS Firewall Domain lists and rule groups and have associated them with a VPC. We are now blocking traffic from commonly abused top level domains. In the next section we will work with managed Domain Lists.  
+At this point we have successfully created DNS Firewall Domain lists and rule groups and have associated them with a VPC. We are now blocking traffic from commonly abused top level domains.
+
+In the next section we will work with managed Domain Lists.  
 
 ## DNS Firewall managed Domain lists
 
@@ -289,7 +293,7 @@ Let's return to our test script and see the result of the `testergress` command 
 
 #### Create a rule group
 
-- Similar to the previous section, navigate to rule groups and click on `add rule group`. Enter a name to the Rule group and click on `Next`.
+- Similar to the previous section, in the AWS  Console, navigate to Rule Groups and click on `add rule group`. Enter a name to the Rule group and click on `Next`.
 
 ![Create a rule group](/images/lab1-17.png "Create a rule group")
 
@@ -377,7 +381,7 @@ This is a best practices for security across your AWS environment including VPCs
 
 ![nslookup test](/images/lab1-33.png "Perform an nslookup test")
 
-- Navigate to `CloudWatch` on AWS Console. Click on `Log groups` and then click on the log group created for query logging in this tutorial.
+- Navigate to CloudWatch dashboard on the AWS Console. Click on Logs, then `Log groups` and then click on the log group created for query logging in this tutorial.
 
 ![CloudWatch results](/images/lab1-34.png "View the CloudWatch results")
 
@@ -401,11 +405,11 @@ In this portion of the tutorial, we have evaluated DNS Firewall rules using Quer
 
 #### Delete the DNS Firewall rules
 
-- First, Disassociate the VPC from each of the rules.
+- First, go to `VPC -> DNS Firewall -> Rule Groups` to disassociate the VPC from each of the rules.
   
 ![DNS Firewall Rule VPC disassociation](/images/2023-08-23_15-43-05.png)
 
-- Next, delete the Rule groups from each of the two rules you created.
+- Next, delete the rules from each of the two rule groups you created.
 
 ![DNS Firewall Rule group delete](/images/2023-08-23_15-44-52.png)
 
@@ -419,9 +423,9 @@ In this portion of the tutorial, we have evaluated DNS Firewall rules using Quer
 
 #### Delete the CloudFormation template
 
-- Navigate to CloudFormation on Console, select the CloudFormation template and click on `Delete`.
+- Navigate to the CloudFormation Console, select the CloudFormation stack we created in beginning of this tutorial and click on `Delete`.
 
-![CloudFormation delete](/images/2023-08-23_15-40-31.png)
+![CloudFormation stack delete](/images/2023-08-23_15-40-31.png)
 
 - You can see a message that it's a permanent deletion. Click on `Delete` on the prompt.
 
@@ -439,7 +443,15 @@ In this portion of the tutorial, we have evaluated DNS Firewall rules using Quer
 
 ## Conclusion
 
-And that's it!  In this tutorial we learned how to use Route 53 DNS Firewall to secure our VPC egress traffic. As we've progressed through this tutorial we saw how to configure a custom list of TLDs that we do not want our cloud resources communicating with.  By blocking resolution to these TLDs we not only protected our account, but we also controlled egress traffic cost. We also controlled egress traffic using managed lists.  Remember, the benefit to the managed lists is that we don't have to come up with them ourselves.  Rather, we have expert guidance from AWS that curates and manages these lists for us. Lastly, we enabled logging and now have visibility into the DNS queried traffic that we blocked.
+And that's it!
+
+In this tutorial, we learned how to use Route 53 DNS Firewall to secure our VPC egress traffic. 
+
+As we progressed through this tutorial we saw how to configure a custom list of TLDs that we do not want our cloud resources communicating with.  By blocking resolution to these TLDs we not only protected our account, but we also controlled egress traffic cost.
+
+We also controlled egress traffic using managed lists.  Remember, the benefit to the managed lists is that we don't have to come up with them ourselves.  Rather, we have expert guidance from AWS that curates and manages these lists for us.
+
+Lastly, we enabled logging and now have visibility into the DNS queried traffic that we blocked.
 
 What we have seen here is just one aspect of controlling egress traffic.  Implementing this simple approach to filtering DNS traffic can improve our security posture and minimizing costs incurred with undesired egress traffic.
 
