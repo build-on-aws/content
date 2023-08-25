@@ -1,6 +1,6 @@
 ---
-title: "Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life"
-description: "Insights into the DevOps strategies used at Amazon.com, illustrated with actual architectures from systems like IMDb, warehouse management, and transportation."
+title: "Chaos Engineering in under 2 minutes"
+description: "In this 2 minutes video, learn about chaos engineering"
 tags:
   - chaos-engineering
   - resilience
@@ -9,7 +9,7 @@ waves:
   - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
-date: 2023-08-25
+date: 2023-08-28
 ---
 
 ## What is Chaos Engineering?
@@ -20,6 +20,7 @@ https://www.youtube.com/watch?v=S-cKd6rMMaE
 
 ## To learn more
 
+* [Principles of Chaos](https://principlesofchaos.org/)
 * [Chaos Engineering in the cloud](https://aws.amazon.com/blogs/architecture/chaos-engineering-in-the-cloud?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=chaos-engineering-2-minutes)
 * [Verify the resilience of your workloads using Chaos Engineering](https://aws.amazon.com/blogs/architecture/verify-the-resilience-of-your-workloads-using-chaos-engineering?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=chaos-engineering-2-minutes)
 * [Reliable scalability: How Amazon.com scales in the cloud - re:Invent 2022](https://bit.ly/reliable2022) - Learn how Amazon search implemented Chaos Engineering
