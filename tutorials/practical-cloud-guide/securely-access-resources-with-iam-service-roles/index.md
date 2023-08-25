@@ -32,7 +32,7 @@ Before starting this tutorial, you will need the following:
 | ⏱ Time to complete  | 145 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)|
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](<tbd>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-09-03                            |
 
@@ -52,7 +52,7 @@ In Cloudformation, resources built with a template  are treated as a logical gro
 
 ![Choose Create stack](./images/cloudformation-2.png)
 
-Download the Cloudformation template [create-tutorial-environment.yaml](). Choose **Upload a template file**, select the **Choose file** button to upload the file, then click **Next**.
+Download the Cloudformation template [create-tutorial-environment.yaml](<tbd>). Choose **Upload a template file**, select the **Choose file** button to upload the file, then click **Next**.
 
 ![Upload a Cloudformation template](./images/cloudformation-3.png)
 
@@ -263,6 +263,16 @@ Making roles
 ```
 
 The EC2 instance can securely access file from an S3 bucket by using a service role.
+
+# Clean Up
+
+In the Cloudformation console, select and delete the stack.
+
+![Delete the stack](./images/clean-up-1.png)
+
+In the IAM console, select Roles on the side menu, select the role we created, and choose **Delete**.
+
+![Select the role and delete](./images/clean-up-2.png)
 
 ## What We Did
 
