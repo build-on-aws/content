@@ -8,6 +8,8 @@ tags:
   - aws
 waves:
   - resilience
+spaces:
+  - cost-optimization
 authorGithubAlias: hechkh
 authorName: Hechmi Khelifi
 date: 2023-07-06
