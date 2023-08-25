@@ -206,7 +206,7 @@ Data scientists can bring their own specific dockerfile or own needed packages t
 
 Amazon SageMaker provides the capability to have your own Docker Image to run the training job, instead of reusing SageMaker Provided ones. For this, data scientists need to leverage Amazon ECR by pushing the docker image to a private ECR repository.
 
-In our example, we prepare a dockerfile at the same level of hierarchy as the train.py script as provided in code/. We build the image locally using this dockerfile and then push it to ECR using code/build_and_push.sh script (code/build_and_push_studio.sh if using Amazon Sagemaker Studio).
+In our example, we prepare a dockerfile at the same level of hierarchy as the train.py script as provided in [Github repo](https://github.com/build-on-aws/bring-own-machine-learning-model-to-aws). We build the image locally using this dockerfile and then push it to ECR using build_and_push.sh script (build_and_push_studio.sh if using Amazon Sagemaker Studio).
 
 Finally, we setup an Amazon SageMaker estimator with as parameter the ECR image URI and launch the model training:
 

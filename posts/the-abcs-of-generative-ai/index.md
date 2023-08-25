@@ -6,6 +6,9 @@ tags:
     - ai-ml
 spaces:
     - generative-ai
+images:
+  banner: images/ABCsGenAIheader.gif
+  hero: images/ABCsGenAIheader.gif
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2023-08-17
