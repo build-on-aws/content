@@ -19,17 +19,19 @@ date: 2023-08-20
 
 ## Overview
 
+The schema registry is a critical component of event-driven architectures, which are are increasingly adopted to create scalable systems, enhance flexibility and decouple components for developer agility. In this post, you will learn about the schema registry, the important role it plays in an event-driven world, and best practices to guide your implementation.
+
 ### What Is a Schema Registry?
 
 In a request-response architecture, you may be familiar with the concept of Application Programming Interfaces (APIs). APIs form a contract of communication between services. In an event-driven architecture, this contract is facilitated by the schema registry. The schema registry is a central collection of schemas, including its version history. Schemas describe the structure of events including fields, values, and formats. To illustrate, we will use an e-commerce store use case. For example, an `OrderCreated` event may include the `status` of the order as a *string*, a list of `product-ids` as an *array*.
 
-![](./images/image%201.png)
+![A diagram of the EventBridge Schema Registry enforcing a contract between producers and consumers](./images/image%201.png)
 
 ### Why Is It Important?
 
 At its core, event-driven architectures consist of producer services generating events, and consumer services reacting to those events. Producers and consumers are decoupled by a service such as [Amazon EventBridge](https://aws.amazon.com/eventbridge/), a serverless event bus. By decoupling, developers can move fast: they can build, deploy and scale applications independently. Developers can subscribe to events they are interested in, emit events for extensibility, and avoid writing integration code. 
 
-![](./images/eb-schema-registry.png)
+![An illustrative architecture of producers and consumers interacting with the EventBridge Schema Registry and code bindings](./images/eb-schema-registry.png)
 
 However, with evolving business requirements, producers and consumers can be out of sync leading to reliability challenges. For example, the `OrderCreated` event can introduce a new field such as the `total` cost of the order. In a growing business and increasingly complex application, it can be challenging for teams to understand what events are available and what they mean. The schema registry plays an important role in reliability, allowing producers and consumers enforce a contract. And, event discovery, helping teams understand events and the applications they can build on top of them.
 
@@ -82,7 +84,7 @@ For example, consider the following `metadata`:
 
 For producers, implement a consistent way to enforce the standard `metadata` outlined above. To achieve this, develop a custom utility such as `PublishEvent()` to initialize events. Distribute across teams using a package manager such as [AWS CodeArtifact](https://aws.amazon.com/codeartifact/). The utility can additionally provide abstraction for implementation details, enforce security on sensitive data and perform validation. Producers are isolated from details such as the EventBridge [PutEvents\(\)](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) API with AWS SDK, and only need to concern themselves with the event they are publishing.  
 
-![](./images/custom-utility.png)
+![A diagram illustrating use of the custom utility distributed by AWS CodeArtifact being used to publish events](./images/custom-utility.png)
 
 For consumers, consider conforming [payloads](https://www.boyney.io/blog/2022-02-11-event-payload-patterns) to a standard such as [CloudEvents](https://cloudevents.io/). To achieve this, use EventBridge [input transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-transform-target-input.html) to transform data prior to consumption. See [CloudEvents input transformer](https://serverlessland.com/patterns/eventbridge-cloudevents-transformer-cdk-typescript) for an example. 
 
@@ -99,7 +101,7 @@ EventBridge [schemas](https://docs.aws.amazon.com/eventbridge/latest/userguide/e
 ### Handle Schema Evolution With Versioning and Schema Discovery
 
 Businesses are rarely static and events change (*schema evolution*). With [schema discovery enabled](https://catalog.us-east-1.prod.workshops.aws/workshops/63320e83-6abc-493d-83d8-f822584fb3cb/en-US/eventbridge/schema-registry/enable-schema-discovery), teams do not have to maintain their own schemas. This increases developer productivity and reduces the risk of errors. Schemas for all AWS sources are automatically updated under *AWS event schema registry*. While SaaS partner and custom schemas are automatically generated to the *[Discovered schema registry](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-schema-registry.html)*. 
-![](./images/schema-discovery.png)
+![A diagram of the EventBridge Schema Registry with schema versions and the interaction with a producer and consumer](./images/schema-discovery.png)
 With schema versions, producers and consumers can determine how to handle compatibility at their own choice. For example, a new version can be backwards compatible and consumers can process as is. However, for major and breaking changes, producers and consumers can wait until the application is updated before enforcing the new version. 
 
 ### Start Small With Sparse Event Payloads
@@ -146,13 +148,13 @@ The benefit of sparse events is reduced coupling of the producer and consumer. H
 }
 ```
 
-## Common Challenges and Pitfalls
+## How to Avoid Common Challenges and Pitfalls
 
-### Avoid using directed commands as events 
+### Avoid Using Directed Commands as Events 
 
 With familiarity for request-response architectures, it can be natural to mistake directed commands for events. For example, `Send Email` may look like an event. However, in an event-driven architecture, it is typically processed by the consumer such as an `EmailNotificationService`, which subscribes to an observed business domain event such as `OrderCreated`.  
 
-![](./images/observed-events.jpg)
+![Illustration of observed events versus directed comments](./images/observed-events.jpg)
 
 ### Be Aware of Complexity on Calculating the Current State 
 
