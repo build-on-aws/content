@@ -125,26 +125,27 @@ Let's begin by connecting to our test EC2 server instance and running a script t
 ![Navigate to CloudFormation](/images/Navigate-to-cfn.png "Navigate to CloudFormation")
 
 2. Click on the "Create stack" option and add the stack from the tutorial repo called **Egress-Controls-Tutorial.yaml**.  
-3.Name the stack and select an availability zone as seen below. Click next and finish the creation pages.
+
+3. Name the stack and select an availability zone as seen below. Click next and finish the creation pages.
 
 ![Name the stack](/images/2023-08-23_14-21-08.png "Name the stack")
 
-3. Once the stack is in a create complete state, navigate into the stack by clicking on the stack name.
+4. Once the stack is in a create complete state, navigate into the stack by clicking on the stack name.
 
 ![Navigate to stack](/images/2023-08-23_14-53-13.png "Navigate to stack")
 
-4. Click on `Outputs` and check the resources that are created.
+5. Click on `Outputs` and check the resources that are created.
 
-5. Find the `TestHostSession` in the key column.  The URL link for `TestHostSession` opens an interactive shell on an Amazon EC2 instance (**TestInstance1** in the earlier diagram) within an AWS Network Firewall protected subnet which you will be using to send test traffic in this tutorial.
-6. Click on the link to connect to it. You may find it useful to open this in a separate tab, so you can return here to use this and the other links as shortcuts. There are also links to the AWS Network Firewall, Route 53 Resolver DNS Firewall, and CloudWatch Logs services.
+6. Find the `TestHostSession` in the key column.  The URL link for `TestHostSession` opens an interactive shell on an Amazon EC2 instance (**TestInstance1** in the earlier diagram) within an AWS Network Firewall protected subnet which you will be using to send test traffic in this tutorial.
+7. Click on the link to connect to it. You may find it useful to open this in a separate tab, so you can return here to use this and the other links as shortcuts. There are also links to the AWS Network Firewall, Route 53 Resolver DNS Firewall, and CloudWatch Logs services.
 
 ![CloudFormation Output](/images/2023-08-23_14-54-25.png "CloudFormation Output")
 
-7. In the interactive shell, change into the `ssm-user` home folder using the `cd ~/` command.
+8. In the interactive shell, change into the `ssm-user` home folder using the `cd ~/` command.
 
-8. Clone the [git repo](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads/tree/main) into the ssm-user home directory using the `git clone https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads.git` command.
-9. cd into the `testing-egress-controls-for-cloud-workloads` directory.
-10. Run the test-egress script using the command `sh test-egress.sh` command.  This should show that nothing is currently being blocked.
+9. Clone the [git repo](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads/tree/main) into the ssm-user home directory using the `git clone https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads.git` command.
+10. cd into the `testing-egress-controls-for-cloud-workloads` directory.
+11. Run the test-egress script using the command `sh test-egress.sh` command.  This should show that nothing is currently being blocked.
 
 ![Run the script to get the baseline](/images/2023-08-23_14-59-49.png "Running the test script")
 
