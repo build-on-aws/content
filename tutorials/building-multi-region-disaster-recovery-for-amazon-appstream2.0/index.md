@@ -143,12 +143,12 @@ The high level steps is as follows:
 (Replace **fsxPrimary.asx.local** with the DNS name of your storage server) 
 
 ```powershell
-New-Item -Path '\\fsxPrimary.asx.local\D\$\\ -Name Profiles -ItemType Directory
+New-Item -Path '\\fsxPrimary.asx.local\D$' -Name Profiles -ItemType Directory
 
 ```
 
 ```powershell
-New-Item -Path '\\fsxDR.asx.local\D\$\\ -Name Profiles -ItemType Directory
+New-Item -Path '\\fsxDR.asx.local\D$' -Name Profiles -ItemType Directory
 
 ```
 
