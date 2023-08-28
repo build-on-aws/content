@@ -1,11 +1,12 @@
 ---
-title: "Building a multi-region disaster recovery environment for Amazon AppStream 2.0"
-description: "A step by step guide on how to build multi region disaster recovery environment for Amazon AppStream 2.0 using FSLogix CloudCache a user profile containerization and replication software."
+title: "Building a Multi-Region Disaster Recovery Environment for Amazon AppStream 2.0"
+description: "A step by step guide on how to build a multi-Region disaster recovery environment for Amazon AppStream 2.0 using FSLogix CloudCache user profile containerization and replication software."
 tags:
   - aws
-  - disaster recovery
-  - appstream 2.0
-  - end user computing
+  - disaster-recovery
+  - appstream
+  - end-user-computing
+  - resilience
 
 spaces:
   - end user computing
@@ -13,36 +14,34 @@ authorGithubAlias: Peter-John-M
 authorName: Peter-John Morgenrood
 date: 2023-08-16
 ---
-
-In this blog, I will show you how you can build a multi-region disaster recovery environment for [Amazon AppStream 2.0](https://aws.amazon.com/appstream2/). Having a disaster recovery (DR) region configured is essential for business continuity during an outage. Without a disaster recovery plan, customers would have to rebuild their environment in a new
+## Introduction
+In this blog, I will show you how you can build a multi-region disaster recovery environment for [Amazon AppStream 2.0](https://aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). Having a disaster recovery (DR) region configured is essential for business continuity during an outage. Without a disaster recovery plan, customers would have to rebuild their environment in a new
 region during the outage and in some cases, lose data or access to user profile settings.
 Rebuilding can be difficult and time consuming, which can impact revenue. There is potential for human error when rebuilding a new environment under production downtime pressure. Planning and maintaining
 a disaster recovery mechanism to avoid compromising business performance is essential for businesses of all sizes.
 
 AWS has published [Disaster Recovery considerations with Amazon
 AppStream
-2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/disaster-recovery-considerations-with-amazon-appstream-2-0/)
+2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/disaster-recovery-considerations-with-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 and [Optimize User Experience with latency-based routing for Amazon
 AppStream
-2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/optimize-user-experience-with-latency-based-routing-for-amazon-appstream-2-0/)
+2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/optimize-user-experience-with-latency-based-routing-for-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 that address DR for customer environments that are using [Home Folder
-Synchronization](https://docs.aws.amazon.com/appstream2/latest/developerguide/home-folders.html)<u>,</u>
+Synchronization](https://docs.aws.amazon.com/appstream2/latest/developerguide/home-folders.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)<u>,</u>
 or have enabled [Application Settings
-Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html)
+Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 
 While these are excellent solutions, there are customers that require the user profile sizes to be larger than the 1GB limit of Amazon AppStream 2.0 App Settings Persistence feature and be able to dynamically expand profile size on demand with limited impact to log-on times.
 
-To meet these requirements, customers can use a high speed network storage service like [Amazon FSx for Windows File Server](https://aws.amazon.com/fsx/windows/) located in the same subnet as the Amazon AppStream 2.0 fleet to store their user profile data.
+To meet these requirements, customers can use a high speed network storage service like [Amazon FSx for Windows File Server](https://aws.amazon.com/fsx/windows?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) located in the same subnet as the Amazon AppStream 2.0 fleet to store their user profile data.
  
-This allows for ease of management and provides DR when paired with FSLogix, [Cloud Cache](https://learn.microsoft.com/en-us/fslogix/cloud-cache-resiliency-availability-cncpt), a technology that provides incremental replication of user profile
-containers and office containers. This enables any virtual desktop service to store user profile data on Server Message Block (SMB) shares located in different regions, without the need to deploy complex replication infrastructure. FSLogix Cloud Cache takes care of VHD replication automatically.
+This allows for ease of management and provides DR when paired with FSLogix, [Cloud Cache](https://learn.microsoft.com/en-us/fslogix/cloud-cache-resiliency-availability-cncpt), a technology that provides incremental replication of user profile and office containers. This enables any virtual desktop service to store user profile data on Server Message Block (SMB) shares located in different regions, without the need to deploy complex replication infrastructure. FSLogix Cloud Cache takes care of VHD(x) replication automatically.
 
-By distributing the inputs and outputs per second (IOPS) to the local disk cache of each operating system, FSLogix Cloud Cache reduces the IOPS consumption
-and infrastructure required to host a central storage solution.
+By distributing the inputs and outputs per second (IOPS) to the local disk cache of each operating system, FSLogix Cloud Cache reduces the IOPS consumption and infrastructure required to host a central storage solution.
 
 Cloud Cache automatically replicates the local cache and user profile data between the two SMB locations, when one location goes down, another takes over seamlessly.
 
-Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-ontap/), can be used as a user profile storage location if its domain joined, given FSLogix Cloud Cache is built for domain joined user profiles. 
+Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-ontap?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), can also be used as a user profile storage location if its domain joined, given FSLogix Cloud Cache is built for domain joined user profiles. 
 The blog posts I referenced earlier provides a few solutions for non-domain joined environments.
 
 Storing user profiles on an SMB share provides:
@@ -50,7 +49,7 @@ Storing user profiles on an SMB share provides:
 1. Administrators the ability to create or integrate Amazon AppStream 2.0 users with existing organizational home folder and filing structures. 
 1. Replication of user profile begins when the user logs on to their virtual desktop and Cloud Cache copies the incremental changes to DR location automatically.
 1. AppStream 2.0 users can share folders between different AppStream fleets, which was challenging when using S3 for home folders. 
-1. Terabytes of user profile and other data stored on premise can be accessed securely and remotely using AppStream 2.0 and [Amazon FSx File Gateway](https://aws.amazon.com/storagegateway/file/fsx/), which provide seamless read and write activity when files are shared between their on-premises locations and the cloud. Users will have a similar experience inside a virtual desktop as they do on-premise using a physical laptop\device
+1. Terabytes of user profile and other data stored on premise can be accessed securely and remotely using AppStream 2.0 and [Amazon FSx File Gateway](https://aws.amazon.com/storagegateway/file/fsx?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), which provide seamless read and write activity when files are shared between their on-premises locations and the cloud. Users will have a similar experience inside a virtual desktop as they do on-premise using a physical laptop\device
 1. Fine grained access control of data from a central source such as Active Directory (AD) that integrates with existing onboarding workflows and security folder monitoring tools.
 
 In this blog, I will guide you through how to build a multi-region disaster recovery environment for Amazon AppStream 2.0 using Amazon FSx for Windows as a storage location.
@@ -60,25 +59,25 @@ In this blog, I will guide you through how to build a multi-region disaster reco
 Before you get started, you must have the following resources deployed
 in your account:
 
-1.  Read through **[Disaster Recovery considerations with Amazon
+1.  Read through [Disaster Recovery considerations with Amazon
     AppStream
-    2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/disaster-recovery-considerations-with-amazon-appstream-2-0/)**
+    2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/disaster-recovery-considerations-with-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     to understand new region scaling limits per account and image
     considerations
 
 1.  An existing domain joined Amazon AppStream 2.0 fleet in a stopped
     state and a stack that does **not** have [Application Settings
-    Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html)
+    Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     enabled
 
 4.  Active Directory Services in both Primary (Frankfurt) and Disaster   Recovery (DR) region (London). In this blog, I am using AWS Managed AD with [multi-region
-    replication](https://aws.amazon.com/blogs/aws/multi-region-replication-now-enabled-for-aws-managed-microsoft-active-directory/)
+    replication](https://aws.amazon.com/blogs/aws/multi-region-replication-now-enabled-for-aws-managed-microsoft-active-directory?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     enabled. You can also use a self-managed Active Directory installed on an EC2 instance or your on premise Active Directory with network connectivity between the locations.
 
 5.  An existing Windows File Server or [Amazon FSx For Windows File
-    System](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html)
+    System](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     used for profile storage, check [this blog
-    post](https://aws.amazon.com/blogs/desktop-and-application-streaming/use-amazon-fsx-and-fslogix-to-optimize-application-settings-persistence-on-amazon-appstream-2-0/)
+    post](https://aws.amazon.com/blogs/desktop-and-application-streaming/use-amazon-fsx-and-fslogix-to-optimize-application-settings-persistence-on-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     for setup instructions
 
 6.  The VPC subnets for Amazon AppStream 2.0 in primary and disaster
@@ -87,7 +86,7 @@ in your account:
 
 7.  Both VPCs connected via Transit Gateway or VPC Peering  
     ([VPC peering is preferable in most
-    settings](https://docs.aws.amazon.com/whitepapers/latest/best-practices-for-deploying-amazon-appstream-2/availability-zones.html))
+    settings](https://docs.aws.amazon.com/whitepapers/latest/best-practices-for-deploying-amazon-appstream-2/availability-zones.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream))
 
 8.  A SAML IdP such, deployed in two or more regions like
     [Okta](https://www.okta.com/sites/default/files/2020-10/Okta%27s-Architecture-eBook.pdf)
@@ -130,9 +129,9 @@ The high level steps is as follows:
 
 9.  Test if Disaster Recovery is working as expected
 
-# Deploy the solution
+## Deploy the solution
 
-## Step 1: Setup file and folder permissions
+### Step 1: Setup file and folder permissions
 
 1.  The first step is to create a folder on both your primary and DR file servers to store
     your user profile containers, in this blog I will be using FSx for
@@ -154,7 +153,7 @@ New-Item -Path '\\fsxDR.asx.local\D\$\\ -Name Profiles -ItemType Directory
 ```
 
  
-More details about creating a file share on FSx for windows can be found [here](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html).
+More details about creating a file share on FSx for windows can be found [here](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
 
 Once the profiles folder has been created, setup the NTFS permissions
 on the folder as follows:
@@ -179,7 +178,7 @@ on the folder as follows:
 - You can change **Users** for a domain group containing the target user
   accounts. This could be the same group, added to the local groups on
   the ImageBuilder that [enable inclusion (or exclusion) of Profile
-  Containers](https://aws.amazon.com/blogs/desktop-and-application-streaming/use-amazon-fsx-and-fslogix-to-optimize-application-settings-persistence-on-amazon-appstream-2-0/)
+  Containers](https://aws.amazon.com/blogs/desktop-and-application-streaming/use-amazon-fsx-and-fslogix-to-optimize-application-settings-persistence-on-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 
 - **Administrators** can be changed to the AWS Delegated Administrators
   group if using AWS Managed AD and do not have access to domain admins.
@@ -189,20 +188,17 @@ on the folder as follows:
 
 Figure 2: Advanced permissions of profiles folder
 
-> Once the folder NTFS permissions have been setup on your primary
-> region manually, you can clone the ACLs to the FSx file server in your
-> DR region using PowerShell:
+ Once the folder NTFS permissions have been setup on your primary region manually, you can clone the ACLs to the FSx file server in your DR region using PowerShell:
 
 ```powershell
-Get-ACl -Path '\\fsxPrimary.asx.local\D\$\Profiles' | Set-ACL
-\\fsxdr.asx.local\D\$\Profiles'
+Get-ACl -Path '\\FSxPrimary.asx.local\D$\Profiles' | Set-ACL '\\FSxDR.asx.local\D$\Profiles'
 ```
 
-## Step 2: Setup share permissions
+### Step 2: Setup share permissions
 
  Turn the “Profiles” folder on the Primary and DR file server into a
  network share using the Microsoft snap-in **fsmgmt.msc**, please
- follow [these steps](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html) for detailed instructions.
+ follow [these steps](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for detailed instructions.
 
 > <img src="images/image3.png" style="width:5.37433in;height:3.2257in"
 > alt="Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder" />
@@ -225,7 +221,7 @@ Figure 4: Share permissions of profiles folder
 **To prepare Amazon AppStream 2.0 image with the FSlogix agent
 software**
 
-1.  Open Amazon [AppStream 2.0 console](https://console.aws.amazon.com/appstream2) choose  **Images** and launch or connect to an existing image builder.
+1.  Open Amazon [AppStream 2.0 console](https://console.aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) choose  **Images** and launch or connect to an existing image builder.
 
 2.  When the image builder is ready, log in as the Administrator.
 
@@ -248,7 +244,7 @@ Include List'
 
 6.  Select the **FSLogix Profile Include List** group. **Remove** “Everyone” and modify the list of Members so that your Security Group for  AppStream 2.0/FSLogix users is included. Choose **Apply** and   **OK**.
 
-## Step 4: Setup the Group Policy to configure FSLogix
+### Step 4: Setup the Group Policy to configure FSLogix
 
 [Configure Registry Settings with Group
     Policy](https://learn.microsoft.com/en-us/fslogix/use-group-policy-templates-ht)
@@ -257,7 +253,7 @@ Include List'
         for detailed steps
 
 2.  Once imported, create a GPO to be linked to the Amazon AppStream
-        2.0 computer objects OU found under [Directory Config](https://docs.aws.amazon.com/appstream2/latest/developerguide/active-directory-directory-setup.html#active-directory-setup-config).  
+        2.0 computer objects OU found under [Directory Config](https://docs.aws.amazon.com/appstream2/latest/developerguide/active-directory-directory-setup.html#active-directory-setup-config?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).  
         Edit the GPO and enter the settings:
 
 3.  Go to Computer configuration \> Policies \> Administrative
@@ -299,31 +295,31 @@ Include List'
     More details on logging can be found [here](https://learn.microsoft.com/en-us/fslogix/reference-configuration-settings?tabs=profiles#flipflopprofiledirectoryname)
     
 
-## Step 5: Create an Amazon AppStream 2.0 Image
+### Step 5: Create an Amazon AppStream 2.0 Image
 
 1.  Finish [creating your AppStream 2.0 image using the Image
-    Assistant](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html).
+    Assistant](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
 
 2.  Once the image is ready, deploy your AppStream 2.0 image to a domain  joined fleet in the primary region. Verify that the native  “application settings persistence” AppStream 2.0 feature has been disabled on the associated stack.
 
 3.  Start the fleet, if your fleet was already running, stop and start the fleet in order to get the new GPO applied at start-up.
 
-## Step 6: Copy the image to the DR region
+### Step 6: Copy the image to the DR region
 
-1.  To copy an image to another AWS Region, launch the [AppStream 2.0 console](https://console.aws.amazon.com/appstream2) and select the region that contains your existing image. In the navigation pane,
+1.  To copy an image to another AWS Region, launch the [AppStream 2.0 console](https://console.aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) and select the region that contains your existing image. In the navigation pane,
     choose **Images**, select your existing image that has FSLogix
     installed, choose **Actions**, select **Copy**, and then pick your
     target AWS Region. You can also use the CopyImage API to
     programmatically copy images. Visit [Tag and Copy an
-    Image](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html#tutorial-image-builder-tag-copy) for more information.
+    Image](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html#tutorial-image-builder-tag-copy?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more information.
 
-## Step 7: Recreate the Amazon AppStream 2.0 configuration in the DR region
+### Step 7: Recreate the Amazon AppStream 2.0 configuration in the DR region
 
 1.  Recreate Amazon AppStream 2.0 stack in DR region with the exact **same stack name** case sensitive. This will allow for easy switch  between regions using one IAM role and policy.
 
 1.  Create the fleet in the DR region with the same fleet name, case sensitive and using the image that was prepped with FSLogix in Step 3 and copied to DR region.
 
-## Step 8: Setup your SAML IdP
+### Step 8: Setup your SAML IdP
 
 1.  In this example, I am using Okta as my SAML Identity provider(IdP), Log in into your IdP admin console.
     From the left panel, select **Applications** \> **Applications**.
@@ -341,7 +337,7 @@ Include List'
 
     *Figure 6: Okta Integration for AWS Account Federation General Settings*
 
-1. To avoid duplication, follow steps found in blog post [Improve the Availability of  Existing Okta IAM Federation Setup Using Multi-Region SAML Endpoints](https://aws.amazon.com/blogs/apn/improve-the-availability-of-existing-okta-iam-federation-setup-using-multi-region-saml-endpoints/).
+1. To avoid duplication, follow steps found in blog post [Improve the Availability of  Existing Okta IAM Federation Setup Using Multi-Region SAML Endpoints](https://aws.amazon.com/blogs/apn/improve-the-availability-of-existing-okta-iam-federation-setup-using-multi-region-saml-endpoints?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
       
     Repeat **steps 1-16** for Primary and again for DR region.
     This will create two Okta AWS Federated applications, one for
@@ -361,10 +357,10 @@ Include List'
 
 **London:**  
 https://**appstream2.eu-west-2.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**  
-Check [documentation](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html) for more details on the relay state URL.
+Check [documentation](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more details on the relay state URL.
 
 
-4. Create an IAM role for SAML 2.0 Federation following [Step 2](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html#external-identity-providers-grantperms)
+4. Create an IAM role for SAML 2.0 Federation following [Step 2](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html#external-identity-providers-grantperms?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 
     Next, modify the **role**, edit the **trust relationship policy** and replace the singular “Principal”: { “Federated”: “arn:aws:iam…” } with a multi-valued SAML Identity provider, one for Primary and another for
     the DR region. 
@@ -429,7 +425,7 @@ alt="Okta Dashboard with two AWS Account SAML federation applications. AppStream
 *Figure 9: Okta Dashboard with two AWS Account SAML federation applications
 AppStream Primary and AppStream DR*
 
-## Step 9: Test if DR is working as expected
+### Step 9: Test if DR is working as expected
 
 1.  Login to your IdP dashboard, and connect to the Amazon AppStream 2.0
     fleet in your primary region using the okta application tile.
@@ -484,7 +480,7 @@ alt="Windows file explorer app with two windows, one connected to the primary fi
 11. After testing, you can stop the fleet in your DR region to save on
     running costs.
 
-## Clean-up:
+### Clean-up:
 
 In this blog, we deployed resources in an AWS account and made
 configuration changes in Active Directory. If you want to clean up these
@@ -508,7 +504,7 @@ steps:
 
 6.  Delete the Okta Applications created for this blog
 
-# Conclusion
+## Conclusion
 
 In this blog, I showed you how you can use FSlogix Cloud Cache and Amazon FSx for Windows File Server to build a multi-region disaster recovery environment for Amazon AppStream 2.0. This helps reduce data loss
 and improves an organization's ability to respond to and recover from an
