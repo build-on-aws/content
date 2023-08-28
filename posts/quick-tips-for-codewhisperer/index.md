@@ -4,9 +4,11 @@ description: "Learn how short, focused developer comments and intuitive variable
 tags:
     - codewhisperer
     - python
-    - gen-ai
+    - generative-ai
     - ai-ml
     - aws
+spaces:
+  - generative-ai
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2023-07-07

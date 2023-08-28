@@ -6,6 +6,10 @@ Reviewers and authors should both use this checklist to ensure content meets all
 
 Community contributions are currently in an invite-only phase, and we plan to open up to the broader community in the near future.
 
+## Republishing of existing content
+
+If you are submitting or reviewing a content piece that has been approved for republishing, please skip step 1 and only ensure that the requirements in step 2 are adhered to. These requests need to be submitted via the [Content Republish Template](https://github.com/build-on-aws/content/issues/new?assignees=cobusbernard&labels=content+republish&projects=&template=content-republish-template.md&title=content+republish%3A+TODO), and once accepted, a new pull request should be opened.
+
 ## Step 1: Read the whole article and review it for
 
 - [ ] **Clarity**: Prioritize clarity and simplicity over a distinctive voice.
