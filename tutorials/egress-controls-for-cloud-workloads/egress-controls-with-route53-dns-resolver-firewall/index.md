@@ -145,7 +145,7 @@ Let's begin by connecting to our test EC2 server instance and running a script t
 
 9. Clone the [git repo](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads/tree/main) into the ssm-user home directory using the `git clone https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads.git` command.
 10. cd into the `testing-egress-controls-for-cloud-workloads` directory.
-11. Run the test-egress script using the command `sh test-egress.sh` command.  This should show that nothing is currently being blocked.
+11. Run the test script using the command `sh egress-check.sh` command.  This should show that nothing is currently being blocked.
 
 ![Run the script to get the baseline](/images/2023-08-23_14-59-49.png "Running the test script")
 
@@ -220,9 +220,9 @@ DNS Firewall rule groups are a set of rules that will allow, deny, or alert on D
 
 ![Select domain list](/images/lab1-6.png "Select the domain list")
 
-- Select **OVERRIDE** in the response for Block action and enter :code[dns-firewall-block]{showCopyAction=true} as the custom response and `CNAME` as record type.
+- Select **OVERRIDE** in the response for Block action and enter `dns-firewall-block` as the custom response and `CNAME` as record type.
 - Having an override value in our response action makes it easier to say with certainty that a particular query was blocked by DNS Firewall as **NXDOMAIN** or **NODATA** responses could also indicate the absence of a queried record, rather than a BLOCK response from DNS Firewall.  The CNAME value can also be used to redirect a blocked request to a web page with details on why the domain resolution was blocked.
-- Leave TTL as `0` and click on **Add rule** (DO NOT CLICK `Next` as it will skip adding the created rule).
+- Leave TTL as `0` and click on **Add rule** (DO NOT CLICK `Next` as it will skip adding the created rule). After you have added the rule you may click `Next.`
 
 ![Adding rule](/images/lab1-7.png "Adding rules")
 
@@ -306,7 +306,7 @@ Let's return to our test script and see the result of the `testergress` command 
 
 ![Create a rule group](/images/lab1-19.png "Create a rule group")
 
-- Select `Block` as Action, `OVERRIDE` as response, and give :code[dns-firewall-block]{showCopyAction=true} as the record value. Select `CNAME` as Record type, leave `0` as TTL and click on `Add rule`. (In some test sandbox environments we saw an error that failed rule creation when selecting the CNAME override.  You can also select `NODATA` or `NXDOMAIN` option for the block instead if you get this.)
+- Select `Block` as Action, `OVERRIDE` as response, and give `dns-firewall-block` as the record value. Select `CNAME` as Record type, leave `0` as TTL and click on `Add rule`. (In some test sandbox environments we saw an error that failed rule creation when selecting the CNAME override.  You can also select `NODATA` or `NXDOMAIN` option for the block instead if you get this.)
 
 ![Add a managed rule group](/images/lab1-20.png "Add a managed rule group")
 
@@ -361,7 +361,7 @@ This is a best practices for security across your AWS environment including VPCs
 
 ![Click on Configure Query Logging](images/Query-Logging-2.JPG "Click on Configure Query Logging")
 
-- Enter a name for this configuration. You can save these logs to CloudWatch logs, S3 buckets, or a Kinesis Data Firehose delivery stream. Select CloudWatch Logs, log group, and send the logs to a new log group by creating a new log group.
+- Enter a name `[egress-query-logging]` for this configuration. You can save these logs to CloudWatch logs, S3 buckets, or a Kinesis Data Firehose delivery stream. Select CloudWatch Logs, log group, and send the logs to a new log group by creating a new log group[/aws/route53/egress-wf-query-logging].
 
 ![Name the configuration](images/Query-Logging-3.JPG "Name the configuration")
 
@@ -396,7 +396,6 @@ This is a best practices for security across your AWS environment including VPCs
 
 - We can see that the traffic is blocked. We can also see the custom response `dns-firewall-block` that we gave while creating the DNS Rule group.
   
-  > **Note:** If you used a different block response of NXDOMAIN or NODATA you will see this instead.
 
 ![CloudWatch results](/images/lab1-37.png "View the CloudWatch results")
 
@@ -408,39 +407,54 @@ In this portion of the tutorial, we have evaluated DNS Firewall rules using Quer
 
 - First, go to `VPC -> DNS Firewall -> Rule Groups` to disassociate the VPC from each of the rules.
   
-![DNS Firewall Rule VPC disassociation](/images/2023-08-23_15-43-05.png)
+![DNS Firewall Rule VPC disassociation](/images/2023-08-23_15-43-05.png "dissasociate the VPC")
 
 - Next, delete the rules from each of the two rule groups you created.
 
-![DNS Firewall Rule group delete](/images/2023-08-23_15-44-52.png)
+![DNS Firewall Rule group delete](/images/2023-08-23_15-44-52.png "Delete the Rule Group")
 
 - Navigate to `VPC -> DNS Firewall -> Rule groups`. Select the Rule groups and click on Delete.
 
-![DNS Firewall Rule delete](/images/2023-08-23_15-44-29.png)
+![DNS Firewall Rule delete](/images/2023-08-23_15-44-29.png "Delete the rule")
 
 - Finally to `VPC -> DNS Firewall -> Domain Lists`. Select the Domain List and click on Delete.
 
-![DNS Firewall Domain List delete](/images/2023-08-23_15-46-00.png)
+![DNS Firewall Domain List delete](/images/2023-08-23_15-46-00.png "Delete the Domain List")
 
 #### Delete the CloudFormation template
 
 - Navigate to the CloudFormation Console, select the CloudFormation stack we created in beginning of this tutorial and click on `Delete`.
 
-![CloudFormation stack delete](/images/2023-08-23_15-40-31.png)
+![CloudFormation stack delete](/images/2023-08-23_15-40-31.png "Delete the CloudFormation Stack")
 
 - You can see a message that it's a permanent deletion. Click on `Delete` on the prompt.
 
-![CloudFormation permanent delete](/images/cleanup-2.png)
+![CloudFormation permanent delete](/images/cleanup-2.png "Permanantly delete")
 
 - It may take few minutes to delete the resources and the status will be updated to `DELETE_COMPLETE`.
 
-![CloudFormation delete complete](/images/2023-08-23_15-55-45.png)
+![CloudFormation delete complete](/images/2023-08-23_15-55-45.png "Delete Complete")
 
 #### Delete the CloudWatch logs
 
-- Navigate to CloudWatch, click on Log groups, select the log groups and click on `Delete`.
+- Navigate to CloudWatch, click on Log groups, select the log group you created during this tutorial and click on `Delete`.
 
-![CloudWatch log groups delete](/images/cleanup-7.png)
+![CloudWatch log groups delete](/images/2023-08-28_14-18-03.png "Delete Log groups")
+
+* Next navigate to **Route 53 > Resolver > Query Logging**, select the `egress-query-logging` and click `Delete.`
+
+![Delete query logging](/images/2023-08-28_14-18-47.png "Delete Query Logging")
+
+* Click Stop logging queries
+
+![Delete query logging](/images/2023-08-28_14-18-57.png "Delete Query Logging")
+
+* Type delete and click `Delete.`
+
+
+![Delete logging](/images/2023-08-28_14-19-14.png "Delete Logging")
+
+
 
 ## Conclusion
 
