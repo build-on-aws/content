@@ -1,5 +1,6 @@
 ---
 title: "Run Kubernetes Clusters for Less with Amazon EC2 Spot and Karpenter"
+description: "Learn how to run Kubernetes clusters for up to 90% off with Amazon Elastic Kubernetes Service and Amazon EC2 Spot Instances and Karpenter in less than 45 minutes."
 tags:
   - infrastructure-as-code
   - terraform
