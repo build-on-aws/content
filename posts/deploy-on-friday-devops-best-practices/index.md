@@ -6,6 +6,8 @@ tags:
   - best-practices
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: mfpalladino
 authorName: Marcelo Palladino
 date: 2023-04-05

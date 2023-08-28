@@ -14,7 +14,9 @@ tags:
     - tutorials
 showInHomeFeed: true
 spaces:
-    - devops
+  - devops
+waves:
+  - devops
 authorGithubAlias: ricsue-aws
 authorName: Ricardo Sueiras
 date: 2023-04-14

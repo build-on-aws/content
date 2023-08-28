@@ -6,6 +6,7 @@ posts:
     - were-moving-to-the-cloud-a-practical-guide-to-cloud-migration
     - deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail
     - deploy-a-java-application-on-linux
+    - manage-security-and-costs-across-the-enterprise-with-aws-organizations
 --- 
 
 | SeriesToC |

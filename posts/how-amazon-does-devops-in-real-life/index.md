@@ -9,6 +9,9 @@ tags:
   - deployment
 spaces:
   - devops
+waves:
+  - devops
+  - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-02-16

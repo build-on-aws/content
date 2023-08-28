@@ -13,6 +13,8 @@ tags:
   - fargate
 spaces:
   - devops
+waves:
+  - devops
 authorGithubAlias: kirankumar15
 authorName: Kirankumar Chandrashekar
 date: 2023-04-26
