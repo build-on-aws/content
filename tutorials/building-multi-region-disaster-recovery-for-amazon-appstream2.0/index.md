@@ -237,9 +237,7 @@ software**
 
 
 ```powershell
-Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where
-{$_.objectclass -like 'User'} | Remove-LocalGroupMember 'FSLogix ODFC
-Include List'
+Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass -like 'User'} | Remove-LocalGroupMember 'FSLogix ODFC Include List'
 ```
 
 6.  Select the **FSLogix Profile Include List** group. **Remove** “Everyone” and modify the list of Members so that your Security Group for  AppStream 2.0/FSLogix users is included. Choose **Apply** and   **OK**.
