@@ -6,6 +6,10 @@ tags:
     - cost-optimization
     - sustainability
     - resource-explorer
+spaces:
+  - cost-optimization
+waves:
+  - cost
 authorGithubAlias: srhowell
 authorName: Stephen Howell
 date: 2023-09-01 
@@ -25,7 +29,7 @@ Nowadays, I develop on the cloud, which gives me access to far greater computing
 But with great power comes great responsibility, because I might forget to delete the resources I'm creating as:  
 
 1. they are quick and easy to provision, use, and forget about or  
-2. they are supplementary resources that AWS automatically creates for me, such as a S3 bucket for SageMaker Studio.
+2. they are supplementary resources that AWS automatically creates for me, such as an Amazon Simple Storage Service (S3) bucket for Amazon SageMaker Studio.
 
 ## Clean as You Go
 
@@ -40,21 +44,21 @@ Following a 'Clean as You Go' approach is better, and avoids a messy bedroom and
 
 ## How to Identify Unused Resources?
 
-Recently I was using [**AWS Amplify**](https://docs.amplify.aws/) to make a workshop for students learning serverless app development. Every time I tested an iteration of the workshop, I created an IAM user with only the minimum permissions needed to use Amplify. Amplify makes it easy to provision resources like storage, functions, NoSQL database tables and authentication. I diligently deleted the IAM user when each time I was finished, but that only removes the user, not the resources Amplify created.
+Recently I was using [**AWS Amplify**](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) to make a workshop for students learning serverless app development. Every time I tested an iteration of the workshop, I created an IAM user with only the minimum permissions needed to use Amplify. Amplify makes it easy to provision resources like storage, functions, NoSQL database tables and authentication. I diligently deleted the IAM user when each time I was finished, but that only removes the user, not the resources Amplify created.
 
-Soon after this, I created an [Amazon SageMaker Studio](https://docs.aws.amazon.com/sagemaker/) domain for a student demo. I had finished the demo, and no longer needed the Amazon SageMaker Studio domain. I thought I had switched off the service, but I hadn't deleted it yet.
+Soon after this, I created an [Amazon SageMaker Studio](https://docs.aws.amazon.com/sagemaker/latest/dg/sm-domain.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) domain for a student demo. I had finished the demo, and no longer needed the Amazon SageMaker Studio domain. I thought I had switched off the service, but I hadn't deleted it yet.
 
-Then I logged into my **AWS Console** to be greeted with an unexpected estimated cost:
+Then I logged into my **AWS Management Console** to be greeted with an unexpected estimated cost:
 
 ![A screenshot of AWS Console cost and usage pane showing a 15 dollar bill](images/cost-and-usage.png "Unexpected costs from resources that were no longer needed")
 
 I didn't think I had anything running in my account, but I soon discovered that the resources that Amplify had provisioned for me were still active in the account, waiting to be used, and costing me money each month. SageMaker Studio was patiently waiting for me to come back and do some more data science, and the cost was adding up. I no longer needed any of these resources, but I was presented with a challenge - how do I find **all** the S3 buckets, DynamoDB tables etc. that Amplify and SageMaker had created? To make it more complicated, I had written the Amplify workshop in the **eu-west-1** region, and tested it in different regions including **us-east-1** and **us-east-2** regions. How would I find *all* my resources in *all* my regions without an extensive hunt?  
 
-The easiest way I have found is to use **[AWS Resource Explorer](https://docs.aws.amazon.com/resource-explorer/latest/userguide/welcome.html)**.  
+The easiest way I have found is to use **[AWS Resource Explorer](https://docs.aws.amazon.com/resource-explorer/latest/userguide/welcome.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq)**.  
 
 ### AWS Resource Explorer
 
-AWS Resource Explorer makes it easy to search for resources in your AWS account. It supports a range of resource types such as Amazon S3 buckets or Amazon DynamoDB tables. Most conveniently, Resource Explorer works across multiple AWS Regions available to your account to make it easy to see an overview of what exists and where it is located. 
+AWS Resource Explorer makes it easy to search for resources in your AWS account. It supports a range of resource types such as Amazon S3 buckets or Amazon DynamoDB tables. Most conveniently, Resource Explorer works across multiple AWS Regions available to your account to make it easy to see an overview of what exists and where it is located.
 
 AWS Resource Explorer does not charge for usage, but you do have to set it up and let it index all the resources before you can use it.  
 
@@ -65,7 +69,7 @@ The following tutorial steps will show you how to:
 1. Find specific resource types in your account
 1. Creating custom views
 
-*Note: AWS Resource Explorer does not support every single type of resource that exists. Some resource types may not be supported yet or may be added in the future. It does support many of the common resource types, and you can check the whole list of [supported types](https://docs.aws.amazon.com/resource-explorer/latest/userguide/supported-resource-types.html).*  
+*Note: AWS Resource Explorer does not support every single type of resource that exists. Some resource types may not be supported yet or may be added in the future. It does support many of the common resource types, and you can check the whole list of [supported types](https://docs.aws.amazon.com/resource-explorer/latest/userguide/supported-resource-types.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq).*  
 
 #### Step 1: Set up AWS Resource Explorer
 
@@ -83,13 +87,14 @@ This is a one time step that only needs to be completed the first time you want 
 ![A button with Go to Resource Explorer](images/turn-on-resource-explorer.png "Go to Resource Explorer to set up your indexes")
 
 4. Select **Quick set-up** which indexes all the regions available to the account. This is ideal for most users, especially students and new users who may not realize exactly what regions their resources are located in.  
+
 5. Select **Aggregator index region**, I chose the closest region to me, *Europe (Ireland) eu-west-1*, but you can choose any region that your account has access to. Resource Explorer indexes every region and stores the aggregate (combined) results in this region.
 
 ![An option to choose Quick or Advanced set-up](images/quick-set-up.png "Select Quick or Advanced set-up")
 
 6. Select **Turn on Resource Explorer** and prepare to wait a while as the indexes are set up and all the resources in each region are identified.
 
-Remember, this step takes a while to run. The [docs](https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-setting-up.html?icmpid=docs_re_console_getting-started-setting-up) state:  
+Remember, this step takes a while to run. The [docs](https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-setting-up.html?icmpid=docs_re_console_getting-started-setting-up&sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) state:  
 
 > "Tagged resources local to the index appear in search results within a few minutes. Untagged resources typically take less than two hours to appear, but can take longer when there is heavy demand. It can also can take up to an hour to complete the initial replication to a new aggregator index from all of the existing local indexes.".  
 
@@ -104,7 +109,7 @@ Once AWS Resource Explorer has finished creating *indexes* for each region and c
 1. The default view opens, and this may show a banner at the top stating *You can start searching immediately while we begin indexing the resources in your account. You might see incomplete results until indexing is complete, especially for cross-region searches.*.
    * I recommend waiting for this indexing to be complete, because otherwise you may miss resources that have not been indexed yet.
 
-In my case, I had **724** resources! 
+In my case, I had **724** resources!
 
 Now, some of these are perfectly fine and should not be interfered with or deleted, as they are a normal part of my account and my day to day use of AWS.  
 
@@ -141,7 +146,7 @@ It's possible that you will need an additional view for certain resource types. 
 1. Add a name (e.g., filtered-resources)
 1. Select *Include only resources that match a specified filter*
 
-1. Add the filter query, in this example, *resourcetype:lambda:function region:eu-west-1* will return only **Lambda functions** in the region **Europe (Ireland) eu-west-1**. You can check all the [query syntax](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html?icmpid=docs_arex_hp_ss_create_resourcetype_wizard) for more complex queries.
+1. Add the filter query, in this example, *resourcetype:lambda:function region:eu-west-1* will return only **Lambda functions** in the region **Europe (Ireland) eu-west-1**. You can check all the [query syntax](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html?icmpid=docs_arex_hp_ss_create_resourcetype_wizard&sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) for more complex queries.
 1. Select **Create View** or **Save changes**, depending on whether you're creating a new view or editing an existing one.
 
 ![A create view widget](images/filtered-view.png "A create view widget")
