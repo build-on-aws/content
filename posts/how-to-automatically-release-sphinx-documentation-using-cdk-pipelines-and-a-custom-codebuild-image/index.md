@@ -9,7 +9,7 @@ tags:
   - codebuild
 authorGithubAlias: jumic
 authorName: Julian Michel
-date: 2023-06-29
+date: 2023-08-29
 ---
 
 [Sphinx](https://www.sphinx-doc.org/) is a great tool for writing documentation. Source files are stored in a Git repository and can be exported to HTML, PDF and other formats. As with software projects, a pipeline makes it easy to publish a Sphinx documentation project.
@@ -21,7 +21,7 @@ This article describes how to publish Sphinx projects using CDK pipelines. A cus
 ## Why Sphinx?
 Every software project should have good documentation. But how do you create it? Sphinx is a tool for creating professional software documentation. It supports multiple output formats, table of contents, automatic indexing, source code handling and much more. It is also very powerful because of its extension and theme support.
 
-![Sphinx documentation](images/sphinx-documentation.png)
+![Screenshot of a sphinx documentation project](images/sphinx-documentation.png)
 
 ## How das Sphinx work?
 Sphinx is based on the reStructuredText format, a markup language similar to Markdown format. Authors can include source code, images, references, etc. Sphinx is a command line tool. A new project can be setup using command `sphinx-quickstart`. After the first pages are created, command `make html` exports to documentation as HTML.
@@ -148,7 +148,7 @@ For the first deployment, the CDK stack `SphinxDocumentationPipelineStack` must 
 
 When the pipeline execution is finished, the S3 Bucket shows the HTML and PDF versions of the documentation. It is also accessible via the CloudFront URL.
 
-![Sphinx S3 Content](images/sphinx-s3-content.png)
+![Exported content of Sphinx documentation project in S3 bucket](images/sphinx-s3-content.png)
 
 
 ## Conclusion
