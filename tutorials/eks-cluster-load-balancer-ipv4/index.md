@@ -230,8 +230,9 @@ ingress-2048   alb     *       k8s-game2048-ingress2-eb379a0f83-378466616.us-eas
 ```
 
 2. Open a web browser and enter the ‘ADDRESS’ from the previous step to access the web application. For example, `k8s-game2048-ingress2-eb379a0f83-378466616.us-east-2.elb.amazonaws.com`. You should see the following 2048 game:
+  ![Screenshot of the 2048 game screen](images/2048_game.png)
 
-[Image: image.png] If you encounter any issues with the response, you may need to manually configure your public subnets for automatic subnet discovery. To learn more, see [How can I tag the Amazon VPC subnets in my Amazon EKS cluster for automatic subnet discovery by load balancers or ingress controllers?](https://repost.aws/knowledge-center/eks-vpc-subnet-discovery?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+If you encounter any issues with the response, you may need to manually configure your public subnets for automatic subnet discovery. To learn more, see [How can I tag the Amazon VPC subnets in my Amazon EKS cluster for automatic subnet discovery by load balancers or ingress controllers?](https://repost.aws/knowledge-center/eks-vpc-subnet-discovery?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## Step 6: Create an Ingress Group
 
