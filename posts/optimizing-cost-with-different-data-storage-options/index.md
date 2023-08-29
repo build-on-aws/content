@@ -29,7 +29,7 @@ I will help you navigate through the complexities of choosing the right storage 
 
 There are three main cloud storage types: [object storage](https://aws.amazon.com/what-is/object-storage/?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq), [file storage](https://aws.amazon.com/what-is/cloud-file-storage/?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [block storage](https://aws.amazon.com/what-is/block-storage/?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq). Each of these have various sub types, but without getting too bogged down, let's go over the basics.
 
-### Object Store
+## Object Store
 
 Object store is a storage architecture for unstructured data that stores data as objects with metadata and unique identifiers for easy access. It's ideal for large amounts of data, such as media files, documents, logs, and backups. Object stores are highly scalable, provide high availability and durability, and are cost-effective. [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq)(S3) is an Object Store service from AWS that can store and manage petabytes of data with 11 9's of durability. Amazon S3 offers a range of storage classes that you can choose from based on the data access, resiliency, and cost requirements of your workloads.
 
