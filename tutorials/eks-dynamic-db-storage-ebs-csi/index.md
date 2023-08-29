@@ -14,8 +14,11 @@ waves:
   - modern-apps
 spaces:
   - kubernetes
-authorGithubAlias: tucktuck9
-authorName: Leah Tucker
+authorGithubAlias: madhusnagaraj
+authorName: Madhu Nagaraj
+additionalAuthors: 
+  - authorGithubAlias: tucktuck9
+    authorName: Leah Tucker
 date: 2023-08-29
 ---
 
