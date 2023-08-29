@@ -196,7 +196,7 @@ Get-ACl -Path '\\FSxPrimary.asx.local\D$\Profiles' | Set-ACL '\\FSxDR.asx.local\
  follow [these steps](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for detailed instructions.
 
 
-![Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder](images/image3.png "Figure 3: Profiles folder")
+![Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder](images/image3.png "Profiles folder")
 *Figure 3: Profiles folder on D:\ of FSx for Windows being selected as network share*
 
 
