@@ -19,6 +19,8 @@ authorGithubAlias: chrismld
 authorName: Christian Melendez
 date: 2023-09-10
 ---
+| ToC |
+|-----|
 
 One of the main cost factors for Kubernetes clusters relies on the compute layer for the data plane. Running Kubernetes clusters on Amazon EC2 Spot instances are a great way to start reducing your compute costs significantly. When using Spot instances, you can get up to a 90% price discount compared to On-Demand prices. Spot is a great match for workloads that are stateless, fault-tolerant, and flexible applications such as big data, containerized workloads, CI/CD, web servers, high-performance computing (HPC), and test & development workloads. Containers often match with these characteristics, they’re Spot-friendly. For non Spot-friendly workloads like stateful applications within your cluster, you can continue using On-Demand instances.
 
@@ -42,8 +44,7 @@ In this tutorial, I’ll guide you on the steps you need to follow to configure 
 | 💾 Code                | [Download the code](https://github.com/build-on-aws/run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter) |
 | ⏰ Last Updated        | 2023-09-10                                                     |
 
-| ToC |
-|-----|
+
 
 ## Pre-Requisites
 
@@ -53,7 +54,7 @@ In this tutorial, I’ll guide you on the steps you need to follow to configure 
 * Install the [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * Install Helm ([the package manager for Kubernetes](https://helm.sh/docs/intro/install/))
 
-## Step 1: Create a Cloud 9 environment
+## Step 1: Create a Cloud9 environment
 
 > 💡 Tip: You can skip this step if you already have a Cloud9 environment or if you’re planning to run all steps on your own computer. Just make sure you have the proper permissions listed in the pre-requisites section of this tutorial.
 
@@ -190,7 +191,7 @@ Let me highlight a few important settings from the default `Provisioner` you jus
 
 You can learn more about which other configuration properties are available for a `Provisioner` [here](https://karpenter.sh/docs/concepts/provisioners/).
 
-### Why is a good practice to configure a diverse set of instance types?
+### Why it is a good practice to configure a diverse set of instance types?
 
 As you noticed, with the above `Provisioner` we’re basically letting Karpenter to choose from a diverse set of instance types to launch the best instance type possible. If it’s an On-Demand instance, Karpenter uses the `lowest-price` allocation strategy to launch the cheapest instance type that has available capacity. When you use multiple instance types, you can avoid the [InsufficientInstanceCapacity error](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
@@ -312,7 +313,7 @@ ip-10-0-34-248.eu-west-1.compute.internal    Ready    <none>   2m3s   v1.27.3-ek
 ip-10-0-76-166.eu-west-1.compute.internal    Ready    <none>   2m4s   v1.27.3-eks-a5565ad   spot            m5.xlarge       eu-west-1b
 ```
 
-## Step 6: (Optional) Simulate a Spot interruption
+## Step 6: (Optional) Simulate Spot interruption
 
 You can simulate a Spot interruption to test the resiliency of your applications. As I said before, Spot is spare capacity for steep discounts in exchange for returning them when EC2 needs the capacity back. Spot interruptions have a 2 minute notice before EC2 reclaims the instance. Karpenter can watch these interruptions (the cluster you created with Terraform is already configured this way), and when this happens, the `Provisioner` starts a new node as soon as it sees the Spot interruption warning. Karpenter’s average node startup time means that, generally, there is sufficient time for the new node to become ready and to move the pods to the new node before the node is reclaimed.
 
@@ -406,7 +407,7 @@ ip-10-0-102-206.eu-west-1.compute.internal Ready <none> 46s v1.27.3-eks-a5565ad 
 
 You can review the Karpenter logs as well, you’ll see a similar behavior as before with the Spot-friendly workload.
 
-## Step 8: Cleanup
+## Step 8: Clean up
 
 If you’re done playing with this tutorial, remove the two deployments you created:
 
@@ -415,7 +416,7 @@ kubectl delete deployment stateless
 kubectl delete deployment stateful
 ```
 
-Wait around 30 seconds until the nodes Karpenter launched are gone (due to consolidation), then remove all resources:
+Wait around 30 seconds until the nodes that Karpenter launched are gone (due to consolidation), then remove all resources:
 
 ```bash
 terraform destroy --auto-approve
