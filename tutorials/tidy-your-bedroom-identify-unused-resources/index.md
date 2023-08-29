@@ -56,7 +56,7 @@ I didn't think I had anything running in my account, but I soon discovered that 
 
 The easiest way I have found is to use **[AWS Resource Explorer](https://docs.aws.amazon.com/resource-explorer/latest/userguide/welcome.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq)**.  
 
-### AWS Resource Explorer
+## AWS Resource Explorer
 
 AWS Resource Explorer makes it easy to search for resources in your AWS account. It supports a range of resource types such as Amazon S3 buckets or Amazon DynamoDB tables. Most conveniently, Resource Explorer works across multiple AWS Regions available to your account to make it easy to see an overview of what exists and where it is located.
 
