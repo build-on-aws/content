@@ -6,6 +6,7 @@ tags:
     - eks
     - kubernetes
     - tutorials
+    - eksctl
     - aws
 showInHomeFeed: true
 waves:
