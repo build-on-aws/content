@@ -28,9 +28,8 @@ Building on the Amazon EKS cluster from **part 1** of our series, this tutorial 
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
-| ✅ AWS experience      | 300 - Advanced                                              |
-| ⏱ Time to complete     | 60 minutes                                                      |
-| 💰 Cost to complete    | Free tier eligible                                               |
+| ✅ AWS experience      | 200 - Intermediate                                              |
+| ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-dynamic-db-storage-ebs-csi&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-08-29                                                      |
