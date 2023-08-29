@@ -7,9 +7,12 @@ tags:
     - sustainability
 authorGithubAlias: srhowell
 authorName: Stephen Howell
-date: 2023-10-01 
+date: 2023-09-01 
 showInHomeFeed: true
 ---
+
+| ToC |
+|-----|
 
 Have you ever created AWS resources for a quick project and then forgot about them? I definitely have! When I'm learning a new service, or building a quick prototype, it's easy to spin up resources to try them out. However, when it comes to paying the bill, I only want to pay for what I need and use. This tutorial will show you how to identify unneeded resources with AWS Resource Explorer.
 
@@ -94,8 +97,8 @@ Once AWS Resource Explorer has finished creating *indexes* for each region and c
 
 1. From AWS Console, search for AWS Resource Explorer using the search bar or the shortcut *Alt + S*
 1. Select AWS Resource Explorer
-1. The default view opens, and this may show a banner at the top stating *You can start searching immediately while we begin indexing the resources in your account. You might see incomplete results until indexing is complete, especially for cross-region searches.*. 
-    1. I recommend waiting for this indexing to be complete, because otherwise you may miss resources that have not been indexed yet.
+1. The default view opens, and this may show a banner at the top stating *You can start searching immediately while we begin indexing the resources in your account. You might see incomplete results until indexing is complete, especially for cross-region searches.*.
+    I recommend waiting for this indexing to be complete, because otherwise you may miss resources that have not been indexed yet.
 
 In my case, I had **724** resources! Now, some of these are perfectly fine and should not be interfered with or deleted, as they are a normal part of my account and my day to day use of AWS.  
 I want to narrow down the scope to resource types I *know* should be removed. To do this, I need to have some understanding of the different resource types that exist in AWS.  
@@ -108,7 +111,7 @@ However, I know that I should have no **DynamoDB tables**, **S3 buckets**, or **
 With that understanding, I decide to start with DynamoDB resources. You may not be able to follow these steps exactly if you do not have any DynamoDB tables in your account, but you can use any other resource type *that you are sure is unneeded* and follow the same steps.  
 
 1. Open the list **All types** and select **DynamoDB:table**
-1. A filtered view will show only DynamoDB tables in all regions. 
+1. A filtered view will show only DynamoDB tables in all regions.
 1. If you have too many to manage in different regions, you can filter by region too
 
 ![Filtered view showing only DynamoDB tables](images/dynamodb-filter.png "Filtered view showing DynamoDB tables")  
@@ -137,7 +140,8 @@ It's possible that you will need an additional view for certain resource types. 
 
 ### Conclusion
 
-In closing, it's easy for AWS resources to proliferate as we prototype, experiment, and learn new services. Like tidying a messy bedroom, identifying and removing unused resources takes some time and effort upfront but pays off in the long run with a clean account and reduced costs.  
+It's easy for AWS resources to proliferate as we prototype, experiment, and learn new services. Like tidying a messy bedroom, identifying and removing unused resources takes some time and effort upfront but pays off in the long run with a clean account and reduced costs.  
+
 AWS Resource Explorer is a valuable service to help understand what resources you have and where they are. This will help drill down to orphaned and unused resources, and let you identify what needs to be cleaned up.
 Keeping your AWS resources in order is an important part of cloud cost optimization and fiscal responsibility. Regularly scan for resources you no longer need, delete what you won't use again, and make resource hygiene part of your workflow. Small efforts compound over time into significant savings and prevent billing surprises. Keep your cloud nice and tidy!
 
