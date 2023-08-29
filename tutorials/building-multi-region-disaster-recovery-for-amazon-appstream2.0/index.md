@@ -144,12 +144,10 @@ The high level steps is as follows:
 
 ```powershell
 New-Item -Path '\\fsxPrimary.asx.local\D$' -Name Profiles -ItemType Directory
-
 ```
 
 ```powershell
 New-Item -Path '\\fsxDR.asx.local\D$' -Name Profiles -ItemType Directory
-
 ```
 
  
@@ -216,7 +214,7 @@ network share*
 
 Figure 4: Share permissions of profiles folder
 
-## Step 3: Install and configure FSLogix
+### Step 3: Install and configure FSLogix
 
 **To prepare Amazon AppStream 2.0 image with the FSlogix agent
 software**
