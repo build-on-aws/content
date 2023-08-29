@@ -23,13 +23,13 @@ Every software project should have good documentation. But how do you create it?
 
 ![Screenshot of a sphinx documentation project](images/sphinx-documentation.png)
 
-## How das Sphinx work?
+## How does Sphinx work?
 Sphinx is based on the reStructuredText format, a markup language similar to Markdown format. Authors can include source code, images, references, etc. Sphinx is a command line tool. A new project can be setup using command `sphinx-quickstart`. After the first pages are created, command `make html` exports to documentation as HTML.
 
 Instead of running `make html` locally on the developer's machine, a pipeline is very useful to publish the documentation. The release of new versions is fully automated and the documentation is kept up to date.
 
 ## From requirements to AWS architecture
-The `sphinxdoc/sphinx-latexpdf` Docker image provides the Sphinx runtime itselfs, as well as all the dependencies needed to export the documentatin to PDF. The custom theme `sphinx_rtd_theme` should be used. As it is not included in the Docker image, a custom Docker image is required to include the theme. To create the custom docker image, you need to create a Dockerfile that references the original image and contains the theme. It must be published to a Docker registry. AWS ECR is used to manage these Docker images.
+The `sphinxdoc/sphinx-latexpdf` Docker image provides the Sphinx runtime itself, as well as all the dependencies needed to export the documentation to PDF. The custom theme `sphinx_rtd_theme` should be used. As it is not included in the Docker image, a custom Docker image is required to include the theme. To create the custom docker image, you need to create a Dockerfile that references the original image and contains the theme. It must be published to a Docker registry. AWS ECR is used to manage these Docker images.
 
 Documentation should be published automatically, similar to the way software is released. It makes sense to use the same tools. AWS CodePipeline can be used to orchestrate the CI/CD process. It runs on every commit. AWS CodeBuild can be configured to use a previously created custom Docker image. At the end, the pipelines publish the documentation to the deployment target.
 
@@ -105,7 +105,7 @@ Property `input` is not specific to the Sphinx project. It contains the connecti
 
 Specific build commands need to be used. First, the commands `make html` and `make latexpdf` export the documentation to HTML and PDF. Next, the CDK project will is synthesized into the underlying CloudFormation templates.
 
-Normaly, the self-mutation step in CDK pipelines does not require Docker support. Since this project creates a new Docker image during self-mutation, the property `dockerEnabledForSelfMutation` must be enabled.
+Normally, the self-mutation step in CDK pipelines does not require Docker support. Since this project creates a new Docker image during self-mutation, the property `dockerEnabledForSelfMutation` must be enabled.
 
 ```ts
 const pipeline = new pipelines.CodePipeline(this, "Pipeline", {
