@@ -23,9 +23,8 @@ This tutorial shows you how to create a managed node groups-based Amazon EKS clu
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
-| ✅ AWS experience      | 300 - Advanced                                              |
-| ⏱ Time to complete     | 60 minutes                                                      |
-| 💰 Cost to complete    | Free tier eligible                                               |
+| ✅ AWS experience      | 200 - Intermediate                                              |
+| ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-08-29                                                      |
@@ -179,7 +178,7 @@ Upon completion, you should see the following response output:
 When the previous command completes, verify that all of your nodes have reached the `Ready` state with the following command:
 
 ```bash
-`kubectl get nodes`
+kubectl get nodes
 ```
 
 The expected output should look like this:
