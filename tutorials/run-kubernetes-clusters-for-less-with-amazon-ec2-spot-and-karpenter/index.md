@@ -180,7 +180,7 @@ Let me highlight a few important settings from the default `Provisioner` you jus
 
 You can learn more about which other configuration properties are available for a `Provisioner` [here](https://karpenter.sh/docs/concepts/provisioners/).
 
-**Why is a good practice to configure a diverse set of instance types?**
+### Why is a good practice to configure a diverse set of instance types?
 As you noticed, with the above `Provisioner` we’re basically letting Karpenter to choose from a diverse set of instance types to launch the best instance type possible. If it’s an On-Demand instance, Karpenter uses the `lowest-price` allocation strategy to launch the cheapest instance type that has available capacity. When you use multiple instance types, you can avoid the [InsufficientInstanceCapacity error](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity). 
 
 If it’s a Spot instance, Karpenter uses the `price-capacity-optimized` (PCO) allocation strategy. PCO looks at both price and capacity availability to launch from the [Spot instance pools](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html#spot-features) that are the least likely to be interrupted and have the lowest possible price. For Spot Instances, applying diversification is key. Spot Instances are spare capacity that can be reclaimed by EC2 when it is required. Karpenter allows you to diversify extensively to replace reclaimed Spot instances automatically with instances from other pools where capacity is available.
