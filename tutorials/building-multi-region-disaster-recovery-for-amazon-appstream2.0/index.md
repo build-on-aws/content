@@ -8,8 +8,6 @@ tags:
   - end-user-computing
   - resilience
 
-spaces:
-  - end user computing
 authorGithubAlias: Peter-John-M
 authorName: Peter-John Morgenrood
 date: 2023-08-16
