@@ -25,22 +25,22 @@ and [Optimize User Experience with latency-based routing for Amazon
 AppStream
 2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/optimize-user-experience-with-latency-based-routing-for-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 that address DR for customer environments that are using [Home Folder
-Synchronization](https://docs.aws.amazon.com/appstream2/latest/developerguide/home-folders.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)<u>,</u>
-or have enabled [Application Settings
-Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
+Synchronization](https://docs.aws.amazon.com/appstream2/latest/developerguide/home-folders.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 
-While these are excellent solutions, there are customers that require the user profile sizes to be larger than the 1GB limit of Amazon AppStream 2.0 App Settings Persistence feature and be able to dynamically expand profile size on demand with limited impact to log-on times.
+While these are excellent solutions, they mainly cater to customers using
+[Application Settings Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), a feature which stores user application settings data in Amazon S3. This is limited to a user profile sizes of under 1GB to avoid impacting log-on times of the users, and would not be suitable for applications such as Office 365 that stores a few gigabytes of data inside the user profile folder.
 
-To meet these requirements, customers can use a high speed network storage service like [Amazon FSx for Windows File Server](https://aws.amazon.com/fsx/windows?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) located in the same subnet as the Amazon AppStream 2.0 fleet to store their user profile data.
- 
-This allows for ease of management and provides DR when paired with FSLogix, [Cloud Cache](https://learn.microsoft.com/en-us/fslogix/cloud-cache-resiliency-availability-cncpt), a technology that provides incremental replication of user profile and office containers. This enables any virtual desktop service to store user profile data on Server Message Block (SMB) shares located in different regions, without the need to deploy complex replication infrastructure. FSLogix Cloud Cache takes care of VHD(x) replication automatically.
+Some customers require user profile sizes to be larger than 1GB, dynamically expandable and at the same time have limited impact to performance and log-on times.
+To meet these requirements, customers can use a combination of any high speed network storage service to serve the user profile data and FSLogix, [Cloud Cache](https://learn.microsoft.com/en-us/fslogix/cloud-cache-resiliency-availability-cncpt), a technology that provides incremental replication of user profile and office containers. This enables any virtual desktop service or on premise device, to store user profile data on Server Message Block (SMB) shares located in different regions, without the need to deploy complex replication infrastructure. FSLogix Cloud Cache takes care of VHD(x) replication automatically, reduces management overhead and provides Disaster Recovery.
+
+One example of a high speed network storage service that is scalable in compute, storage and is easy to get started with is [Amazon FSx for Windows File Server](https://aws.amazon.com/fsx/windows?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). When launched in the same subnets as the Amazon AppStream 2.0 fleet, it reduces the latency and serves user profile data efficiently.
+Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-ontap?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), can also be used as a user profile storage location.
 
 By distributing the inputs and outputs per second (IOPS) to the local disk cache of each operating system, FSLogix Cloud Cache reduces the IOPS consumption and infrastructure required to host a central storage solution.
 
 Cloud Cache automatically replicates the local cache and user profile data between the two SMB locations, when one location goes down, another takes over seamlessly.
 
-Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-ontap?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), can also be used as a user profile storage location if its domain joined, given FSLogix Cloud Cache is built for domain joined user profiles. 
-The blog posts I referenced earlier provides a few solutions for non-domain joined environments.
+
 
 Storing user profiles on an SMB share provides:
 
