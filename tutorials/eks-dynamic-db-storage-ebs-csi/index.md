@@ -6,8 +6,9 @@ tags:
     - eks
     - kubernetes
     - tutorials
-    - aws
+    - eksctl
     - ebs
+    - aws
 showInHomeFeed: true
 waves:
   - modern-apps
