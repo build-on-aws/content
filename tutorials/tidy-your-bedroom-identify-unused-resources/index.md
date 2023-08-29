@@ -77,12 +77,12 @@ This is a one time step that only needs to be completed the first time you want 
 
 *Note: While this only has to be executed once, this step can take some time to complete, especially is your account has lots of resources in many different regions. You should wait until this step is complete before proceeding to step 2.*
 
-1. From AWS Console, search for AWS Resource Explorer using the search bar or the shortcut *Alt + S*
-1. Select AWS Resource Explorer
+1. From AWS Console, search for `AWS Resource Explorer` using the search bar or the shortcut *Alt + S*
+1. Select AWS Resource Explorer:
 
 ![Search bar showing AWS Resource Explorer](images/console-search-bar.png "Search for AWS Resource Explorer")
 
-3. On the right, select *Go to Resource Explorer* button
+3. On the Resource Explorer dashboard, select `Go to Resource Explorer` button:
 
 ![A button with Go to Resource Explorer](images/turn-on-resource-explorer.png "Go to Resource Explorer to set up your indexes")
 
@@ -104,9 +104,8 @@ With that in mind, plan to set up AWS Resource Explorer at least a few hours bef
 
 Once AWS Resource Explorer has finished creating *indexes* for each region and creating a *view*, you open the view to find your existing resources.  
 
-1. From AWS Console, search for AWS Resource Explorer using the search bar or the shortcut *Alt + S*
-1. Select AWS Resource Explorer
-1. The default view opens, and this may show a banner at the top stating *You can start searching immediately while we begin indexing the resources in your account. You might see incomplete results until indexing is complete, especially for cross-region searches.*.
+1. From AWS Console for AWS Resource Explorer, use the left navigation pane to go to `Resource search`.
+1. The default view will open, and this may show a banner at the top stating `You can start searching immediately while we begin indexing the resources in your account. You might see incomplete results until indexing is complete, especially for cross-Region searches.`
    * I recommend waiting for this indexing to be complete, because otherwise you may miss resources that have not been indexed yet.
 
 In my case, I had **724** resources!
@@ -123,15 +122,15 @@ However, I know that I should have no **DynamoDB tables**, **S3 buckets**, or **
 
 With that understanding, I decide to start with DynamoDB resources. You may not be able to follow these steps exactly if you do not have any DynamoDB tables in your account, but you can use any other resource type *that you are sure is unneeded* and follow the same steps.  
 
-1. Open the list **All types** and select **DynamoDB:table**
+1. Open the list `All types` and select `DynamoDB:table`
 1. A filtered view will show only DynamoDB tables in all regions.
 1. If you have too many to manage in different regions, you can filter by region too
 
 ![Filtered view showing only DynamoDB tables](images/dynamodb-filter.png "Filtered view showing DynamoDB tables")  
 
-4. Now select each resource, and decide if it is needed. If it's no longer needed, navigate to that resource's AWS console page, and delete it from there. Ensure that only resources that are **not** needed are deleted. Backup the resource first if unsure.
+4. Now select each resource, and decide if it is needed. If it's no longer needed, click on the Identifier link or View in dynamodb console link and it will take you to that resource's AWS console page. You can then delete the resource. Ensure that only resources that are **not** needed are deleted. Backup the resource first, if unsure.
 
-5. Once completed for DynamoDB tables, repeat the steps for *S3:buckets* and *lambda:functions*.  
+5. Once completed for DynamoDB tables, repeat the steps for `S3:buckets` and `lambda:functions`.  
 
 *Note: If you have a great number of resources to be deleted, manually deleting them this way might take a **long** time, as each deletion will be challenged to ensure you are certain. If you are an advanced user, an AWS CLI query will list all the resources of a certain type in a certain region and you can pipe that output to a CLI delete function. This is beyond the scope of this post, but an option if you are comfortable with the CLI. If you are a student, I recommend understanding the AWS Console first, and then learning how to use the AWS CLI.*
 
@@ -139,15 +138,14 @@ With that understanding, I decide to start with DynamoDB resources. You may not 
 
 It's possible that you will need an additional view for certain resource types. For instance, a lecturer who provisioned a separate Lambda function in a single region for each of their students might want a view showing only these resources.
 
-1. From AWS Console, search for AWS Resource Explorer using the search bar or the shortcut *Alt + S*
-1. Select AWS Resource Explorer
-1. Select Views from the left hand side bar
-1. Select **Create View**
-1. Add a name (e.g., filtered-resources)
-1. Select *Include only resources that match a specified filter*
+1. From AWS Console for AWS Resource Explorer, use the left navigation pane to go to `View`.
+1. Select `Create View`
+1. Add any name (e.g., `filtered-resources`)
+1. Select the region. In my case, it is **Europe (Ireland) eu-west-1**.
+1. Select `Include only resources that match a specified filter`
 
-1. Add the filter query, in this example, *resourcetype:lambda:function region:eu-west-1* will return only **Lambda functions** in the region **Europe (Ireland) eu-west-1**. You can check all the [query syntax](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html?icmpid=docs_arex_hp_ss_create_resourcetype_wizard&sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) for more complex queries.
-1. Select **Create View** or **Save changes**, depending on whether you're creating a new view or editing an existing one.
+1. Add the filter query, in this example, `resourcetype:lambda:function region:eu-west-1` will return only **Lambda functions** in the region **Europe (Ireland) eu-west-1**. You can check all the [query syntax](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html?icmpid=docs_arex_hp_ss_create_resourcetype_wizard&sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) for more complex queries.
+1. Select `Create View`.
 
 ![A create view widget](images/filtered-view.png "A create view widget")
 
