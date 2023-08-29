@@ -48,7 +48,7 @@ Storing user profiles on an SMB share provides:
 
 In this blog, I will guide you through how to build a multi-region disaster recovery environment for Amazon AppStream 2.0 using Amazon FSx for Windows as a storage location.
 
-### Prerequisites
+## Prerequisites
 
 Before you get started, you must have the following resources deployed
 in your account:
@@ -92,7 +92,7 @@ in your account:
 support multi-region at this time and can only be deployed in one
 region, per AWS Organization.*
 
-# Solution overview
+## Solution overview
 
 
 ![Figure 1 shows the components and traffic flow for the solution.](images/image1.png "Solution architecture")
