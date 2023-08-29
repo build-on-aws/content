@@ -5,6 +5,7 @@ tags:
     - eks-cluster-setup
     - eks
     - kubernetes
+    - eksctl
     - tutorials
     - aws
 showInHomeFeed: true
