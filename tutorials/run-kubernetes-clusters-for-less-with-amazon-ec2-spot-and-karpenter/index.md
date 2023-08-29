@@ -11,8 +11,11 @@ tags:
   - spot  
   - tutorials
   - compute
+  - devops
 spaces:
   - cost-optimization
+  - kubernetes
+  - devops
 waves:
   - cost
 authorGithubAlias: chrismld
