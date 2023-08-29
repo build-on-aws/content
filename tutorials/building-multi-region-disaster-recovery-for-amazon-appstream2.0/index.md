@@ -98,9 +98,9 @@ region, per AWS Organization.*
 
 # Solution overview
 
-Figure 1 shows the components and traffic flow for the solution.
 
-<img src="images/image1.png" style="width:6.5in;height:3.69136in" />
+![Figure 1 shows the components and traffic flow for the solution.](images/image1.png "Solution architecture")
+
 
 Figure 1: Solution architecture
 
@@ -179,8 +179,9 @@ on the folder as follows:
 - **Administrators** can be changed to the AWS Delegated Administrators
   group if using AWS Managed AD and do not have access to domain admins.
 
-> <img src="images/image2.png" style="width:6.26316in;height:4.02534in"
-> alt="Image showing the NTFS permissions •Users – Create Folder/Append Data (Apply to: This Folder Only) •Users – List Folder/Read Data (Apply to: This Folder Only) • Users – Read Attributes (Apply to: This Folder Only) • Users – Traverse Folder/Execute File (Apply to: This Folder Only) " />
+
+![Image showing the NTFS permissions •Users – Create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only)](images/image2.png")
+
 
 Figure 2: Advanced permissions of profiles folder
 
