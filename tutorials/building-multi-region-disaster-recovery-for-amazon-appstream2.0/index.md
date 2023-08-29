@@ -30,16 +30,12 @@ Synchronization](https://docs.aws.amazon.com/appstream2/latest/developerguide/ho
 While these are excellent solutions, they mainly cater to customers using
 [Application Settings Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), a feature which stores user application settings data in Amazon S3. This is limited to a user profile sizes of under 1GB as anything larger will impact log-on times of the users. 1GB profile size would not be suitable for applications such as Microsoft Office 365 that stores a few gigabytes of data inside the user profile folder.
 
-Some customers require user profile sizes to be larger than 1GB, dynamically expandable and at the same time have limited impact to performance and log-on times.
-To meet these requirements, customers can use a combination of any high speed network storage service to serve the user profile data and FSLogix, [Cloud Cache](https://learn.microsoft.com/en-us/fslogix/cloud-cache-resiliency-availability-cncpt), a technology that provides incremental replication of user profile and office containers. This enables any virtual desktop service or on premise device, to store user profile data on Server Message Block (SMB) shares located in different regions, without the need to deploy complex replication infrastructure. FSLogix Cloud Cache takes care of VHD(x) replication automatically, reduces management overhead and provides Disaster Recovery.
+Some customers require user profile sizes to be larger than 1GB, dynamically expandable, and at the same time have limited impact to performance and log-on times.
+To meet these requirements, customers can use a high speed network storage service paired with FSLogix, [Cloud Cache](https://learn.microsoft.com/en-us/fslogix/cloud-cache-resiliency-availability-cncpt), a technology that provides incremental replication of user profile and office containers. Cloud Cache automatically replicates the local cache and user profile data between the two SMB locations, when one location goes down, another takes over seamlessly. This enables any virtual desktop service or on premise device to store user profile data on Server Message Block (SMB) shares, located in different regions, without the need to deploy complex replication infrastructure. FSLogix Cloud Cache takes care of VHD(x) replication automatically, reduces management overhead and facilitates Disaster Recovery.
+By distributing the inputs and outputs per second (IOPS) to the local disk cache of each operating system, FSLogix Cloud Cache reduces the IOPS consumption and infrastructure required to host a central storage solution.
 
 One example of a high speed network storage service that is scalable in compute, storage and is easy to get started with is [Amazon FSx for Windows File Server](https://aws.amazon.com/fsx/windows?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). When launched in the same subnets as the Amazon AppStream 2.0 fleet, it reduces the latency and serves user profile data efficiently.
 Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-ontap?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), can also be used as a user profile storage location.
-
-By distributing the inputs and outputs per second (IOPS) to the local disk cache of each operating system, FSLogix Cloud Cache reduces the IOPS consumption and infrastructure required to host a central storage solution.
-
-Cloud Cache automatically replicates the local cache and user profile data between the two SMB locations, when one location goes down, another takes over seamlessly.
-
 
 
 Storing user profiles on an SMB share provides:
