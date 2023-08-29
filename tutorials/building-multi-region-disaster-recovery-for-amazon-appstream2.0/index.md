@@ -180,7 +180,7 @@ on the folder as follows:
   group if using AWS Managed AD and do not have access to domain admins.
 
 
-![Image showing the NTFS permissions •Users – Create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only](images/image2.png "Solution architecture")
+![Image showing the NTFS permissions •Users – Create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only](images/image2.png "Advanced permissions of profiles folder")
 Figure 2: Advanced permissions of profiles folder
 
  Once the folder NTFS permissions have been setup on your primary region manually, you can clone the ACLs to the FSx file server in your DR region using PowerShell:
