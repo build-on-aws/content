@@ -68,7 +68,7 @@ CodeGuru Security utilizes a machine learning based vulnerability tracking featu
 
 CodeGuru Security detects security vulnerabilities across all your code scans and generates findings metrics that are presented in a high-level dashboard. The dashboard displays data about your security findings like the average time to close findings, what types of vulnerabilities are present in your scans, and the severity distribution of your findings. With the vulnerability tracking feature, the Metrics dashboard is able to maintain an up-to-date representation of the security posture of your resources.
 
-![CodeGuru Security Dashboard](images/codeguru-dashboard.png "Part of the Dashboard page of CodeGuru in the AWS Console. Other sections on the dashboard page but not included in this screenshot include the Scans with most findings section, the Scans with most critical findings section, Vulnerability tracking, Open versus closed findings, and Average time to close sections.")
+![CodeGuru Security Dashboard](images/codeguru-dashboard.png "Part of the Dashboard page of CodeGuru in the AWS Console. Other sections on the dashboard page not included in this screenshot include the Scans with most findings section, the Scans with most critical findings section, Vulnerability tracking, Open versus closed findings, and Average time to close sections.")
 
 You can use this data to track the progress of your application security, identify vulnerabilities during software development, and track the lifecycle of vulnerabilities. You can also communicate the status of application security, and collaborate with other teams to address security issues.
 
@@ -95,9 +95,13 @@ For pipeline integrations, you can incorporate AWS CodePipeline GitHub, GitLab, 
 
 ### Findings
 
-Finally, you can view your findings of these scans in the AWS console. Findings will be grouped by severity by default. There’s also the ability for you to customize what findings are listed on the Findings page using the dropdown menus next to the search bar. If you’re interested in using the AWS CLI or the AWS SDK to view a list of findings, you can call the GetFindings or BatchGetFindings. For more information, see the [Amazon CodeGuru Security API Reference](https://docs.aws.amazon.com/codeguru/latest/security-api/Welcome.html).
+Finally, you can view your findings of these scans in the AWS console. Findings will be grouped by severity by default. There’s also the ability for you to customize what findings are listed on the Findings page using the dropdown menus next to the search bar.
 
-![CodeGuru Security Findings](images/codeguru-findings.png "This is the findings page in the AWS console for CodeGuru. The **Overview** panel indicates whether you have open critical findings, and warns if you have some or many open critical findings across all scans. The **Closed findings** panel lists how many findings you have remediated across all scans. The **Findings summary** panel indicates how many findings of each severity level are open across all scans. The findings table lists the type of vulnerability, the name of the scan that generated the finding, the severity of the finding, the age of the finding, the time the finding was detected, and the status of the finding.")
+There are four main views on the Findings page. First, is the **Overview** panel which indicates whether you have open critical findings, and warns if you have some or many open critical findings across all scans. The **Closed findings** panel lists how many findings you have remediated across all scans. The **Findings summary** panel indicates how many findings of each severity level are open across all scans. Finally, The **Findings table** lists the type of vulnerability, the name of the scan that generated the finding, the severity of the finding, the age of the finding, the time the finding was detected, and the status of the finding.
+
+ If you’re interested in using the AWS CLI or the AWS SDK to view a list of findings, you can call the GetFindings or BatchGetFindings. For more information, see the [Amazon CodeGuru Security API Reference](https://docs.aws.amazon.com/codeguru/latest/security-api/Welcome.html).
+
+![CodeGuru Security Findings](images/codeguru-findings.png "This is the findings page in the AWS console for CodeGuru. Included is the Overview panel, the Closed findings panel, the Finding summary panel, and the Findings table.")
 
 ## Conclusion
 
