@@ -276,7 +276,7 @@ This will update the existing Ingress object with the new annotation, creating a
 ingress.networking.k8s.io/ingress-2048 configured
 ```
 
-1. To retrieve the details of the new Ingress resource, run the following command:
+3. To retrieve the details of the new Ingress resource, run the following command:
 
 ```bash
 kubectl get ingress -n game-2048
@@ -289,7 +289,7 @@ NAME           CLASS   HOSTS   ADDRESS                                          
 ingress-2048   alb     *       k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com   80      4d1h
 ```
 
-3. Open a web browser and enter the "game-2048" ‘ADDRESS’ to access the web application. For example, `k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com`. 
+4. Open a web browser and enter the "game-2048" ‘ADDRESS’ to access the web application. For example, `k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com`. 
 
 You should see the 2048 game. To view your Application Load Balancer (ALB) instance, open the [Load balancers](https://us-east-2.console.aws.amazon.com/ec2/home?#LoadBalancers:) page on the Amazon EC2 console.
 
@@ -299,7 +299,7 @@ After finishing with this tutorial, for better resource management, you may want
 
 ```bash
 # Delete the Namespace, Deployment, Service, and Ingress
-`kubectl ``delete`` ``namespace`` game-2048`
+kubectl delete namespace game-2048
 
 # Delete the AWS Load Balancer Controller
 helm uninstall aws-load-balancer-controller -n kube-system
