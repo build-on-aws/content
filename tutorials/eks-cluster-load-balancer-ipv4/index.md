@@ -1,6 +1,6 @@
 ---
-title: "Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv4 Cluster"
-description: "How to route external traffic to your Kubernetes services and manage Ingress resources using the AWS Load Balancer Controller (LBC) on an IPv4-based cluster."
+title: "Exposing and Grouping Applications Using the AWS Load Balancer Controller on an Amazon EKS IPv4 Cluster"
+description: "How to route external traffic to your Kubernetes services and manage Ingress resources using the AWS Load Balancer Controller on an IPv4-based cluster."
 tags:
     - eks-cluster-setup
     - eks
@@ -20,7 +20,7 @@ date: 2023-08-29
 
 In the intricate field of networking, managing access to applications within a Kubernetes cluster presents a multifaceted challenge. The AWS Load Balancer Controller (LBC) is essential, facilitating the direction of traffic to your applications through IPv4, the protocol predominantly utilized for internet traffic. This guide focuses on IPv4 within a Kubernetes cluster, employing AWS LBC to supervise external traffic. It emphasizes Ingress Group, a function that consolidates multiple Ingress resources into one Application Load Balancer (ALB), augmenting both effectiveness and ALB utilization. Whether working with nimble microservices or sturdy systems, this manual provides sequential instructions for seamless traffic navigation. With AWS LBC, the complexities of traffic control are significantly reduced, enabling you to focus on your application, as AWS LBC manages the routing. As traffic evolves, AWS LBC adjusts, ensuring continuous access to your application.
 
-Building on the Amazon EKS cluster from **part 1** of our series, this tutorial dives into setting up the AWS Load Balancer Controller (LBC). Included in the cluster configuration for the previous tutorial is the IAM Role for Service Account (IRSA) for the AWS LBC and the OpenID Connect (OIDC) endpoint. For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/eks-cluster-high-traffic). Alternatively, to setup an existing cluster with the components required for this tutorial, use the instructions in [Create an IAM OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Create an IAM Role for Service Account (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) in EKS official documentation.
+Building on the Amazon EKS cluster from **part 1** of our series, this tutorial dives into setting up the AWS Load Balancer Controller (LBC). Included in the cluster configuration for the previous tutorial is the IAM Role for Service Account (IRSA) for the AWS LBC and the OpenID Connect (OIDC) endpoint. For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/eks-cluster-high-traffic). Alternatively, to set up an existing cluster with the components required for this tutorial, use the instructions in [Create an IAM OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Create an IAM Role for Service Account (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) in EKS official documentation.
 
 In this tutorial, you will set up the AWS Load Balancer Controller (LBC) on your IPv4-enabled Amazon EKS cluster, deploy a sample application to it, and create an Ingress Group to group applications together under a single Application Load Balancer (ALB) instance. 
 
@@ -45,13 +45,13 @@ Before you begin this tutorial, you need to:
 
 ## Overview
 
-This tutorial is the second part of a series on managing high traffic microservices platforms using Amazon EKS, and it's dedicated to exposing applications and creating an Ingress Group with the [AWS Load Balancer Controller (LBC)](https://kubernetes-sigs.github.io/aws-load-balancer-controller/). This tutorial shows not only how to expose an application outside the cluster, but it also introduces the concept of Ingress Group. It covers the following components:
+This tutorial is the second part of a series on managing high traffic microservices platforms using Amazon EKS, and it's dedicated to exposing applications and creating an Ingress Group with the [AWS Load Balancer Controller (LBC)](https://kubernetes-sigs.github.io/aws-load-balancer-controller/). This tutorial shows not only how to expose an application outside the cluster, but it also introduces the concept of Ingress Groups. It covers the following components:
 
 * **Authentication**: Utilize the pre-configured IAM Role for Service Account (IRSA) for the [AWS Load Balancer Controller (LBC)](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) with the [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq), ensuring secure communication between Kubernetes pods and AWS services.
 * **AWS LBC Setup**: Deploy the AWS Load Balancer Controller (LBC) on the Amazon EKS cluster, focusing on Custom Resource Definitions (CRDs) and the installation of the Load Balancer Controller itself.
 * **Sample Application Deployment**: Build and expose the “2048 Game Sample Application” on port 80, defining routing rules and annotations for an internet-facing Application Load Balancer (ALB). Utilize custom annotations for the ALB, specifically the ['scheme' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/ingress_class/#specscheme) and ['target-type' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/#target-type), to instruct the AWS LBC to handle incoming HTTP traffic for IPv4-based clusters. For an Ingress Group, use the ['group.name' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/ingress_class/#specgroup) to combine multiple Ingress resources under one ALB instance. To learn more, see [Ingress annotations](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/) in the AWS LBC documentation.
 
->Note that if you're still within your initial 12-month AWS Free Tier period, it's important to note that the Application Load Balancer (ALB) falls outside the AWS free tier, hence usage could result in additional charges.
+>Note that even if you're still within your initial 12-month AWS Free Tier period, the Application Load Balancer (ALB) falls outside the AWS free tier, hence usage could result in additional charges.
 
 ## Step 1: Configure Cluster Environment Variables
 
@@ -63,31 +63,31 @@ Before interacting with your Amazon EKS cluster using Helm or other command-line
 kubectl config current-context
 ```
 
-1. Define the `CLUSTER_NAME` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
+2. Define the `CLUSTER_NAME` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
 
 ```bash
 export CLUSTER_NAME=$(aws eks describe-cluster --region us-east-2 --name managednodes-quickstart --query "cluster.name" --output text)
 ```
 
-1. Define the `CLUSTER_REGION` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
+3. Define the `CLUSTER_REGION` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
 
 ```bash
 export CLUSTER_REGION=$(aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.arn" --output text | cut -d: -f4)
 ```
 
-1. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
+4. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
 
 ```bash
 export CLUSTER_VPC=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --query "cluster.resourcesVpcConfig.vpcId" --output text)
 ```
 
-1. Define the `ACCOUNT_ID` environment variable for the account associated with your EKS cluster.
+5. Define the `ACCOUNT_ID` environment variable for the account associated with your EKS cluster.
 
 ```bash
 export ACCOUNT_ID=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --query "cluster.arn" --output text | cut -d':' -f5)
 ```
 
-## Step 2: Verify or Create the IAM role and Service Account
+## Step 2: Verify or Create the IAM Role and Service Account
 
 Make sure the "aws-load-balancer-controller" service account is correctly set up in the "kube-system" namespace in your cluster.
 
@@ -112,7 +112,7 @@ metadata:
   uid: 2491b69e-449e-44ea-affd-1d1c2d7437cf
 ```
 
-Optionally, if you do **not** already have an IAM role set-up, or you receive an error, the following command will create the IAM Role along with the service account names “aws-load-balancer-controller”. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
+Optionally, if you do **not** already have an IAM role set up, or you receive an error, the following command will create the IAM Role along with the service account names “aws-load-balancer-controller”. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
 
 First, download the IAM policy:
 
@@ -150,13 +150,13 @@ In this section, you will install the AWS Load Balancer Controller (LBC) on your
 `helm repo add eks https://aws.github.io/eks-charts`
 ```
 
-1. Update the repositories to ensure Helm is aware of the latest versions of the charts:
+2. Update the repositories to ensure Helm is aware of the latest versions of the charts:
 
 ```bash
 helm repo update eks
 ```
 
-1. Run the following [Helm](https://helm.sh/docs/intro/install/) command to simultaneously install the Custom Resource Definitions (CRDs) and the main controller for the AWS Load Balancer Controller (LBC). To skip the CRD installation, pass the `--skip-crds` flag, which might be useful if the CRDs are already installed, if specific version compatibility is required, or in environments with strict access control and customization needs.
+3. Run the following [Helm](https://helm.sh/docs/intro/install/) command to simultaneously install the Custom Resource Definitions (CRDs) and the main controller for the AWS Load Balancer Controller (LBC). To skip the CRD installation, pass the `--skip-crds` flag, which might be useful if the CRDs are already installed, if specific version compatibility is required, or in environments with strict access control and customization needs.
 
 ```bash
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \ 
@@ -197,13 +197,13 @@ The expected output should look like this:
 namespace/game-2048 created
 ```
 
-1. Deploy the 2048 game sample application.
+2. Deploy the 2048 game sample application.
 
 ```bash
 kubectl apply -n game-2048 -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.6.0/docs/examples/2048/2048_full.yaml
 ```
 
- The expected output should look like this:
+The expected output should look like this:
 
 ```bash
 namespace/game-2048 configured
@@ -229,9 +229,9 @@ NAME           CLASS   HOSTS   ADDRESS                                          
 ingress-2048   alb     *       k8s-game2048-ingress2-eb379a0f83-378466616.us-east-2.elb.amazonaws.com   80      31s
 ```
 
-1. Open a web browser and enter the ‘ADDRESS’ from the previous step to access the web application. For example, `k8s-game2048-ingress2-eb379a0f83-378466616.us-east-2.elb.amazonaws.com`. You should see the following 2048 game:
+2. Open a web browser and enter the ‘ADDRESS’ from the previous step to access the web application. For example, `k8s-game2048-ingress2-eb379a0f83-378466616.us-east-2.elb.amazonaws.com`. You should see the following 2048 game:
 
-[Image: image.png]If you encounter any issues with the response, you may need to manually configure your public subnets for automatic subnet discovery. To learn more, see [How can I tag the Amazon VPC subnets in my Amazon EKS cluster for automatic subnet discovery by load balancers or ingress controllers?](https://repost.aws/knowledge-center/eks-vpc-subnet-discovery?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+[Image: image.png] If you encounter any issues with the response, you may need to manually configure your public subnets for automatic subnet discovery. To learn more, see [How can I tag the Amazon VPC subnets in my Amazon EKS cluster for automatic subnet discovery by load balancers or ingress controllers?](https://repost.aws/knowledge-center/eks-vpc-subnet-discovery?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## Step 6: Create an Ingress Group
 
@@ -263,7 +263,7 @@ spec:
                 number: 80
 ```
 
-1. Deploy the Kubernetes resources in `updated-ingress-2048.yaml`:
+2. Deploy the Kubernetes resources in `updated-ingress-2048.yaml`:
 
 ```bash
 kubectl apply -f updated-ingress-2048.yaml
@@ -288,11 +288,11 @@ NAME           CLASS   HOSTS   ADDRESS                                          
 ingress-2048   alb     *       k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com   80      4d1h
 ```
 
-1. Open a web browser and enter the "game-2048" ‘ADDRESS’ to access the web application. For example, `k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com`. 
+3. Open a web browser and enter the "game-2048" ‘ADDRESS’ to access the web application. For example, `k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com`. 
 
 You should see the 2048 game. To view your Application Load Balancer (ALB) instance, open the [Load balancers](https://us-east-2.console.aws.amazon.com/ec2/home?#LoadBalancers:) page on the Amazon EC2 console.
 
-## Clean up
+## Clean Up
 
 After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created. 
 
