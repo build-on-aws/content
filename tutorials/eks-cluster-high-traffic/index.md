@@ -1,12 +1,11 @@
 ---
 title: "Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices"
-description: "Deploy a preconfigured Amazon EKS cluster optimized for high-demand microservice applications using an eksctl \"quickstart\" template"
+description: "Deploy a preconfigured Amazon EKS cluster optimized for high-demand microservice applications using an eksctl \"quickstart\" template."
 tags:
     - eks-cluster-setup
     - eks
     - kubernetes
     - tutorials
-    - eksctl
     - aws
 showInHomeFeed: true
 waves:
@@ -46,7 +45,7 @@ This tutorial is the first part of a series on managing high traffic microservic
 
 * **Autoscaling**: Managed node groups use an "m5.large" [instance type](https://docs.aws.amazon.com/eks/latest/userguide/choosing-instance-type.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq), providing a balance of resources. With a minimum size of "2" and a maximum size of "5", node groups can dynamically scale. The volume size is set to "100", ensuring ample capacity, and required subnet tags allow the [Kubernetes Cluster Autoscaler (CA)](https://github.com/kubernetes/autoscaler) to dynamically scale your cluster. 
 * **Authentication**: Necessary IAM Roles for Service Accounts (IRSAs) mappings to enable communication between Kubernetes pods and AWS services. This includes the [AWS Load Balancer Controller (LBC)](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) used to expose applications, [Amazon EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver) for persistent data storage, [Kubernetes External DNS](https://github.com/kubernetes-sigs/external-dns) to automatically manage DNS records, and [Cert Manager](https://cert-manager.io/) to streamline management of SSL/TLS certificates. Additionally, an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) enables seamless and secure communication.
-* **Add-ons**: Latest versions of the following [add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq), including "vpc-cni" enable the Amazon VPC Container Network Interface, "coredns" facilitates DNS resolution, "kube-proxy" maintains network rules on each Amazon EC2 node, and the [EBS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) is installed.
+* **Add-ons**: Latest versions of the following [add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq), including "vpc-cni" to enable the Amazon VPC Container Network Interface, "coredns" to facilitate DNS resolution, "kube-proxy" to maintain network rules on each Amazon EC2 node, and the [EBS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 * **Public/Private Networking**: Managed node groups utilize private networking and a NAT gateway to bolster security by limiting direct internet access. The AWS Load Balancer Controller (LBC) manages and securely distributes all incoming web traffic to private subnets.
 * **Monitoring**: An [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) IAM policy is attached to the IAM Role for Service Account (IRSA), aiding optional components like [CloudWatch Container Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) to collect and summarize metrics and logs.
 
@@ -56,7 +55,7 @@ This tutorial is the first part of a series on managing high traffic microservic
 
 In this section, you will configure the Amazon EKS cluster to meet the specific demands of high-traffic microservice applications. By creating this `cluster-config.yaml` file, you'll define the settings for IAM roles, scalable resources, private networking, and monitoring. These configurations are essential for ensuring that the cluster is robust, scalable, and secure, with optimized performance for dynamic scalability and data persistence.
 
-### To create the cluster config
+### To Create the Cluster Config
 
 1. Create a `cluster-config.yaml` file and paste the following contents into it. Replace the `region` with your preferred region. 
 
@@ -160,7 +159,7 @@ cloudWatch:
    logRetentionInDays: 60
 ```
 
-## **Step 2: Create the Cluster**
+## Step 2: Create the Cluster
 
 Now, we're ready to create our Amazon EKS cluster. This process takes several minutes to complete. If you'd like to monitor the status, see the [AWS CloudFormation](https://console.aws.amazon.com/cloudformation?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) console.
 
@@ -228,9 +227,9 @@ kube-system         external-dns                         0         43m
 
 ## (Optional) Deploy a Sample Application
 
-Now, we’re all set to launch a sample application and enable its accessibility on the internet through an Application Load Balancer. For step-by-step guidance, check out the tutorial at [Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an EKS IPv4 Cluster](/tutorials/eks-cluster-load-balancer-ipv4). This tutorial will guide you through the required Ingress annotations for the AWS Application Load Balancer Controller (LBC), an essential mechanism for controlling external access to services within an EKS cluster. You’ll also explore Ingress Groupings, a sophisticated feature that amalgamates multiple Ingress resources into one Application Load Balancer (ALB), enhancing both efficiency and ALB management.
+Now, we’re all set to launch a sample application and enable its accessibility on the internet through an Application Load Balancer (ALB). For step-by-step guidance, check out the tutorial at [Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an EKS IPv4 Cluster](/tutorials/eks-cluster-load-balancer-ipv4). This tutorial will guide you through the required Ingress annotations for the AWS LBC, an essential mechanism for controlling external access to services within an EKS cluster. You’ll also explore Ingress Groupings, a sophisticated feature that amalgamates multiple Ingress resources into one ALB, enhancing both efficiency and ALB management.
 
-## **Clean Up**
+## Clean Up
 
 To avoid incurring future charges, you should delete the resources created during this tutorial. You can delete the EKS cluster with the following command:
 
