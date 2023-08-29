@@ -423,8 +423,7 @@ AppStream Primary and AppStream DR*
     ```
     and confirm that the user profile folder and vhdx file appears under the specified SMB    locations, set in step 3. Take note of the initial profile size
 
-<img src="images/image10.png" style="width:7.77657in;height:6.26411in"
-alt="Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB " />
+![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "EC2 Windows File Explorer Connected to FSx Primary and DR")
 *Figure 10: EC2 Windows File Explorer Connected to FSx Primary and DR*
 
 3.  Add some files to your Documents folder
