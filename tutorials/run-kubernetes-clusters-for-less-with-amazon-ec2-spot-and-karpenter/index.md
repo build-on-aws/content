@@ -108,7 +108,7 @@ karpenter-5f97c944df-xr9jf 1/1   Running 0        15m
 
 The EKS cluster already has a static managed node group configured in advance for the `kube-system` and `karpenter` namespaces, and it’s going to be only one you’ll need. For the rest of pods, Karpenter will launch nodes through a `Provisioner` CRD. The Provisioner sets constraints on the nodes that can be created by Karpenter and the pods that can run on those nodes. A single Karpenter provisioner is capable of handling many different pod shapes, and for this tutorial you’ll only create the `default` provisioner. 
 
-> 💡 Tip: Karpenter simplifies the data plane capacity management using an approach referred as **group-less auto scaling**. This is because Karpenter is no longer using node groups, which matches with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html), to launch nodes. Over time, clusters using this paradigm, that run different type of applications requiring different capacity types, end up with a complex configuration and operational model where node groups must be defined and provided in advance, as you did already to host the Karpenter controller and `kube-system` pods.
+> 💡 Tip: Karpenter simplifies the data plane capacity management using an approach referred as **group-less auto scaling**. This is because Karpenter is no longer using node groups, which matches with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html), to launch nodes. Over time, clusters using this paradigm, that run different types of applications requiring different capacity types, end up with a complex configuration and operational model where node groups must be defined and provided in advance, as you did already to host the Karpenter controller and `kube-system` pods.
 
 You need to create two environment variables we’ll use next, the values you need can be obtained from the Terraform output variables. Make sure you’re in the same folder where the Terraform `main.tf` file lives and run the following command:
 
@@ -140,7 +140,7 @@ spec:
       values: ["2"]
     - key: "karpenter.k8s.aws/instance-memory"
       operator: Gt
-      values: ["4096"] # 4 * 1024
+      values: ["4095"] # 4 * 1024 - 1
   limits:
     resources:
       cpu: 1000
@@ -172,7 +172,7 @@ EOF
 
 Let me highlight a few important settings from the default `Provisioner` you just created:
 
-* `requirements`: here’s where you define the type of nodes Karpenter can launch. The idea here is to be as flexible as possible to let Karpenter choose the right instance type based on the pod requirements. For this `Provisioner`, you’re saying Karpenter can launch either Spot or On-Demand instances, families including `c`, `m` and `r`, with a minimum of 4 vCPUs and 8 GiB of Memory. With this configuration, you’re choosing around 150 instance types from the 650+ available today in AWS. Read below to understand why this is important.
+* `requirements`: here’s where you define the type of nodes Karpenter can launch. The idea here is to be as flexible as possible to let Karpenter choose the right instance type based on the pod requirements. For this `Provisioner`, you’re saying Karpenter can launch either Spot or On-Demand instances, families including `c`, `m` and `r`, with a minimum of 4 vCPUs and 8 GiB of Memory. With this configuration, you’re choosing around 150 instance types from the 700+ available today in AWS. Read below to understand why this is important.
 * `limits`: this is how you constrain the maximum amount of resources that the `Provisioner` will manage. Karpenter can launch instances with different specs, so instead of limiting a max number of instances (as you’d typically do in an Auto Scaling group), you define a maximum of vCPUs or Memory to limit the number of nodes to launch. Karpenter provides a [metric to monitor the percentage usage](https://karpenter.sh/docs/concepts/metrics/#karpenter_provisioner_usage_pct) of this `Provisioner` based on the limits you configure.
 * `consolidation`: Karpenter does a great job launching only the nodes you need, but as pods can come an go, at some point in time the cluster capacity can end up in a fragmented state. To avoid fragmentation and optimize the compute nodes in your cluster, you can enable [consolidation](https://karpenter.sh/docs/concepts/deprovisioning/#consolidation). When enabled, Karpenter works to actively reduce cluster cost by identifying when nodes can be removed, as their workloads will run on other nodes in the cluster, and when nodes can be replaced with cheaper variants due to a change in the workloads.
 * `ttlSecondsUntilExpired`: here’s where you define when a node will be deleted. This is useful to force new nodes with up to date AMI’s. In this example we have set the value to 7 days.
@@ -187,7 +187,7 @@ If it’s a Spot instance, Karpenter uses the `price-capacity-optimized` (PCO) a
 
 ## Step 4: Deploy a Spot-friendly workload
 
-You’re now going to see Karpenter in action. Your default `Provisioner` can launch both On-Demand and Spot instances, but Karpenter considers the constraints you configure within a pod to launch the right node(s). Let’s create a Deployment with a [Node affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity) to prefer Spot instances. To do so, run the following command:
+You’re now going to see Karpenter in action. Your default `Provisioner` can launch both On-Demand and Spot instances, but Karpenter considers the constraints you configure within a pod to launch the right node(s). Let’s create a Deployment with a [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) to run the pods on Spot instances. To do so, run the following command:
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -207,15 +207,7 @@ spec:
     spec:
       nodeSelector:
         intent: apps
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            preference:
-              matchExpressions:
-              - key: "karpenter.sh/capacity-type"
-                operator: "In"
-                values: ["spot"]
+        karpenter.sh/capacity-type: spot
       containers:
       - name: app
         image: public.ecr.aws/eks-distro/kubernetes/pause:3.7
@@ -267,7 +259,7 @@ By reading the logs, you can see that Karpenter:
 
 ## Step 5: Spread Pods within multiple AZs
 
-Karpenter launched only one node for all pending pods. However, putting all eggs in the same basket is not recommended as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll have an impact). To avoid these, and make the workload more highly-available, let’s spread the pods within multiple AZs. To do so, let’s configure a [Topology Spread Constraint](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`. To do so, add the following snippet within the `Deployment` spec block (after the `affinity` block) you deployed in the previous step:
+Karpenter launched only one node for all pending pods. However, putting all eggs in the same basket is not recommended as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll have an impact). To avoid these, and make the workload more highly-available, let’s spread the pods within multiple AZs. To do so, let’s configure a [Topology Spread Constraint](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`. To do so, add the following snippet within the `Deployment` spec block (after the `nodeSelector` block) you deployed in the previous step:
 
 ```bash
       topologySpreadConstraints:
@@ -328,7 +320,7 @@ alias kl='kubectl logs deployment/karpenter —since 5m -n karpenter -f';
 kl
 ```
 
-In the third terminal, ru the following command, and choose one of the Spot instances listed:
+In the third terminal, run the following command, and choose one of the Spot instances listed:
 
 ```bash
 $ ec2-spot-interrupter —interactive
@@ -341,7 +333,7 @@ Which Spot instances would you like to interrupt?
 Press q to quit.
 ```
 
-Press `Enter` two times, and the Spot interruption warning will be sent. Review what happens by looking at the Karpenter logs, as soon as the Spot interruption warning lands, Karpenter inmediately cordons and darains the node, but also launches a replacement instance:
+Press `Enter` two times, and the Spot interruption warning will be sent. Review what happens by looking at the Karpenter logs, as soon as the Spot interruption warning lands, Karpenter immediately cordons and darains the node, but also launches a replacement instance:
 
 ```bash
 2023-08-25T11:27:12.266Z    DEBUG    controller.interruption    removing offering from offerings    {"commit": "34d50bf-dirty", "queue": "karpenter-spot-and-karpenter", "messageKind": "SpotInterruptionKind", "machine": "default-dc58z", "action": "CordonAndDrain", "node": "ip-10-0-99-126.eu-west-1.compute.internal", "reason": "SpotInterruptionKind", "instance-type": "m5.2xlarge", "zone": "eu-west-1c", "capacity-type": "spot", "ttl": "3m0s"}
@@ -360,7 +352,7 @@ Press `Enter` two times, and the Spot interruption warning will be sent. Review 
 
 ## Step 7: (Optional) Deploy a stateful workload
 
-The purpose of this step is to show you that you can still launch On-Demand instances in a cluster that’s also running Spot instances for those non Spot-friendly workloads. You can continue using the default Karpenter `Provisioner` you created before. You just need to make sure you’re configuring the workload properly. One way of doing it is to use a similar approach for the Spot-friendly workload by using a required Node affinity.
+The purpose of this step is to show you that you can still launch On-Demand instances in a cluster that’s also running Spot instances for those non Spot-friendly workloads. You can continue using the default Karpenter `Provisioner` you created before. You just need to make sure you’re configuring the workload properly. One way of doing it is to use a similar approach for the Spot-friendly workload by using a `nodeSelector`.
 
 Deploy the following application to simulate a stateful workload:
 
@@ -382,14 +374,7 @@ spec:
     spec:
       nodeSelector:
         intent: apps
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-                - key: "karpenter.sh/capacity-type"
-                  operator: "In"
-                  values: ["on-demand"]
+        karpenter.sh/capacity-type: on-demand
       containers:
       - name: app
         image: public.ecr.aws/eks-distro/kubernetes/pause:3.7
