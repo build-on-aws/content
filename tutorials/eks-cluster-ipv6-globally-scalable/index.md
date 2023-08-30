@@ -1,6 +1,6 @@
 ---
 title: "Building an IPv6-based EKS Cluster for Globally Scalable Applications"
-description: "Deploy a preconfigured Amazon EKS cluster optimized for extra large, global applications using an eksctl \"quickstart\" template."
+description: "Deploy a preconfigured Amazon EKS cluster optimized for extra-large, global applications using an eksctl \"quickstart\" template."
 tags:
     - eks-cluster-setup
     - eks
@@ -46,8 +46,8 @@ Before you begin this tutorial, you need to:
 
 This tutorial is the first part of a series on deploying an IPv6-enabled Amazon EKS cluster, tailored for extra large, modern applications requiring a vast range of IP addresses. Utilizing the eksctl cluster template provided, you'll construct a robust, scalable, and secure Amazon EKS cluster with managed node groups, optimized for IPv6 workloads. This tutorial will guide you in choosing Amazon EC2 Nitro Amazon Linux 2 instance types as worker nodes. The configuration deploys an Amazon IPv6 Virtual Private Cloud (VPC), and requires version “1.10.1” or later of the [Amazon VPC CNI Add-On](https://aws.github.io/aws-eks-best-practices/networking/vpc-cni/). It configures the following components:
 
-* **Public/Private Networking**: The cluster is configured to use the IPv6 IP family, offering a broad range of globally routable IP addresses. By default, Amazon EKS sets up a public endpoint for the managed Kubernetes API server, enabling access via tools like [_kubectl_](https://kubernetes.io/docs/tasks/tools/). For those looking to enhance security, you have the option to configure the cluster API endpoint to be private. This restricts all communication between nodes and the API server to within the Virtual Private Cloud (VPC), eliminating direct exposure to the public internet. With the support for IPv6, this setup provides a flexible networking environment that can be tailored to various access control needs: public access, private access within a VPC, or a combination of both.
-* **Add-ons**: Latest versions of the following [add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq), including "vpc-cni" enable the Amazon VPC Container Network Interface, "coredns" facilitates DNS resolution, "kube-proxy" maintains network rules on each Amazon EC2 node.
+* **Public/Private Networking**: The cluster is configured to use the IPv6 IP family, offering a broad range of globally routable IP addresses. By default, Amazon EKS sets up a public endpoint for the managed Kubernetes API server, enabling access via tools like [kubectl](https://kubernetes.io/docs/tasks/tools/). For those looking to enhance security, you have the option to configure the cluster API endpoint to be private. This restricts all communication between nodes and the API server to within the Virtual Private Cloud (VPC), eliminating direct exposure to the public internet. With the support for IPv6, this setup provides a flexible networking environment that can be tailored to various access control needs: public access, private access within a VPC, or a combination of both.
+* **Add-ons**: Latest versions of the following [add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq): "vpc-cni" enable the Amazon VPC Container Network Interface, "coredns" facilitates DNS resolution, and "kube-proxy" maintains network rules on each Amazon EC2 node.
 * **Authentication**: An [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq) for authentication within the Amazon EKS cluster to enable communication between Kubernetes pods and AWS services.
 * **Node Lifecycle Management**: Managed node groups simplify the handling of Amazon EC2 instances, registering them as Kubernetes nodes. This configuration employs "m6i.xlarge" and "m6a.xlarge" Amazon Linux 2 (AL2) [instance types](https://docs.aws.amazon.com/eks/latest/userguide/choosing-instance-type.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq), optimized for [Amazon Linux 2 (AL2)](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq). The configuration balances resources, specifying a volume size of "100" and type "gp3". Node groups are tailored with a minimum size of "1" and a maximum size of "3," facilitating manual scaling. Volume encryption enhances security, while custom labels (e.g., “os-distribution: amazon-linux-2”) enhance manageability, allowing the identification and categorization of nodes, and ensuring their alignment with the intended AL2 distribution.
 
@@ -55,7 +55,7 @@ This tutorial is the first part of a series on deploying an IPv6-enabled Amazon 
 
 In this section, you will configure the Amazon EKS cluster to support IPv6 networking, addressing the growing need for globally routable IP addresses. By creating this `cluster-config.yaml` file, you'll define the settings for IPv6 networking, public and private access, managed node groups, essential add-ons, and security features like volume encryption. These configurations are essential for ensuring that the cluster is robust, flexible, and secure, with optimized performance for a long-term solution to the IP exhaustion problem and efficient resource management.
 
-**To create the cluster config**
+**To create the cluster config:**
 
 1. Create a `cluster-config.yaml` file and paste the following contents into it. Replace the sample `region`. 
 
@@ -101,11 +101,11 @@ managedNodeGroups:
       os-distribution: amazon-linux-2
 ```
 
-## **Step 2: Create the Cluster**
+## Step 2: Create the Cluster
 
-Now, we're ready to create our Amazon EKS cluster. This process takes several minutes to complete. If you'd like to monitor the status, see the [AWS CloudFormation](https://console.aws.amazon.com/cloudformation?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq) console.
+Now we're ready to create our Amazon EKS cluster. This process takes several minutes to complete. If you'd like to monitor the status, see the [AWS CloudFormation](https://console.aws.amazon.com/cloudformation?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq) console.
 
-1. Create the EKS cluster using the `cluster-config.yaml`.
+Create the EKS cluster using the `cluster-config.yaml`.
 
 ```bash
 eksctl create cluster -f cluster-config.yaml
@@ -170,7 +170,7 @@ kube-dns   ClusterIP   fdde:a64b:91a6::a   <none>        53/UDP,53/TCP   51m   k
 
 In an EKS cluster using IPv6, pods and services will be assigned IPv6 addresses. This ensures connectivity for legacy IPv4 endpoints to connect with services running on IPv6 clusters, and for pods to connect with legacy IPv4 endpoints outside the cluster. All pod-to-pod communication within an EKS cluster always operates via IPv6. To test connectivity to applications running on our IPv6 EKS cluster, we'll deploy a Linux bastion host in the VPC named `eksctl-ipv6-quickstart-cluster/VPC`, which was created when the EKS cluster was initially set up.
 
-### To create a Linux EC2 bastion host
+### Create a Linux EC2 Bastion Host
 
 1. Open the [Amazon EC2 console](https://console.aws.amazon.com/ec2/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 2. Under “Launch instance”, click the **Launch instance** button.
@@ -187,7 +187,7 @@ In an EKS cluster using IPv6, pods and services will be assigned IPv6 addresses.
 5. Click **Launch instance**, and select **Proceed without key pair**, **Proceed without key pair**, then **Launch instance**.
    ![EC2 dialog asking how to configure the keypair to access the instance with "Proceed without keypair" selected](images/ec2_proceed_without_keypair.png)
 
-### To connect to the Linux EC2 bastion host
+### Connect to the Linux EC2 Bastion Host
 
 1. After your instance has launched, select your instance (e.g., `i-0a001fe6790332b87`).
    ![EC2 Dashboard in the AWS console with a green banner showing that the instance was launched successfully](images/ec2_instance_successful_launch.png)
@@ -208,7 +208,7 @@ You should see the following connection terminal:
 
 Now, we’re all set to launch a sample application and enable its accessibility on the internet through an Application Load Balancer. For step-by-step guidance, check out the tutorial at [Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an EKS IPv6 Cluster](/tutorials/eks-cluster-load-balancer-ipv6). This tutorial will guide you through the required Ingress annotations for the AWS Application Load Balancer Controller (LBC), an essential mechanism for controlling external access to services within an EKS cluster. You’ll also explore Ingress Groupings, a sophisticated feature that amalgamates multiple Ingress resources into one Application Load Balancer (ALB), enhancing both efficiency and ALB management.
 
-## **Clean Up**
+## Clean Up
 
 To avoid incurring future charges, you should delete the resources created during this tutorial. You can delete the EKS cluster with the following command:
 
@@ -224,6 +224,6 @@ Upon completion, you should see the following response output:
 
 ## Conclusion
 
-Upon completion of this tutorial, you will have successfully established an Amazon EKS Cluster with IPv6 networking and deployed a network configuration. The IPv6 in EKS clusters enables the efficient and streamlined deployment of applications, allowing for more pods per node without exhausting IP addresses. IPv6 on EKS can also simplify the routing configuration of your EKS cluster. However, it's worth carefully considering specific [key factors](https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq) when designing your EKS cluster with IPv6 support. To deploy a scalable network, you need to set up configurations like preconfigured [addons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq). These final installations will provide you with a robust, fully functional environment, ready for deploying Kubernetes workloads to your IPv6-enabled EKS clusters.
+Upon completion of this tutorial, you will have successfully established an Amazon EKS Cluster with IPv6 networking and deployed a network configuration. The IPv6 in EKS clusters enables the efficient and streamlined deployment of applications, allowing for more pods per node without exhausting IP addresses. IPv6 on EKS can also simplify the routing configuration of your EKS cluster. However, it's worth carefully considering specific [key factors](https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq) when designing your EKS cluster with IPv6 support. To deploy a scalable network, you need to set up configurations like preconfigured [add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq). These final installations will provide you with a robust, fully functional environment, ready for deploying Kubernetes workloads to your IPv6-enabled EKS clusters.
 
 
