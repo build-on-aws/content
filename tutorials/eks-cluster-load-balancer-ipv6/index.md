@@ -1,5 +1,5 @@
 ---
-title: "Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster"
+title: "Exposing and Grouping Applications Using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster"
 description: "How to route external traffic to your Kubernetes services and manage Ingress resources using the AWS Load Balancer Controller (LBC) on an IPv6-based cluster."
 tags:
     - eks-cluster-setup
@@ -18,7 +18,7 @@ authorName: Leah Tucker
 date: 2023-08-29
 ---
 
-In the multifaceted realm of networking, managing access to applications within a Kubernetes cluster is a sophisticated endeavor. The AWS Load Balancer Controller (LBC) is vital, streamlining the routing of traffic to your applications via IPv6, the protocol increasingly adopted for internet communication. This tutorial hones in on IPv6 within a Kubernetes cluster, utilizing AWS LBC to manage ingress, i.e., external traffic. It introduces Ingress Classes, an essential mechanism for controlling external access to services within an IPv6-enabled Kubernetes cluster, and Ingress Group, a feature that groups multiple Ingress resources into one Application Load Balancer (ALB), enhancing both efficiency and ALB management. Whether dealing with agile microservices or robust systems, this tutorial offers step-by-step directions for smooth traffic flow. With AWS LBC, the intricacies of traffic management are greatly simplified, allowing you to concentrate on your application, while AWS LBC takes care of the routing. As traffic shifts, AWS LBC adapts, assuring uninterrupted access to your application over IPv6.
+In the multifaceted realm of networking, managing access to applications within a Kubernetes cluster is a sophisticated endeavor. The AWS Load Balancer Controller (LBC) is vital, streamlining the routing of traffic to your applications via IPv6, the protocol increasingly adopted for internet communication. This tutorial hones in on IPv6 within a Kubernetes cluster, utilizing AWS LBC to manage ingress (i.e. external traffic). It introduces Ingress Classes, an essential mechanism for controlling external access to services within an IPv6-enabled Kubernetes cluster, and Ingress Group, a feature that groups multiple Ingress resources into one Application Load Balancer (ALB), enhancing both efficiency and ALB management. Whether dealing with agile microservices or robust systems, this tutorial offers step-by-step directions for smooth traffic flow. With AWS LBC, the intricacies of traffic management are greatly simplified, allowing you to concentrate on your application, while AWS LBC takes care of the routing. As traffic shifts, AWS LBC adapts, assuring uninterrupted access to your application over IPv6.
 
 Building on the Amazon EKS cluster from [**part 1**](/tutorials/eks-cluster-ipv6-globally-scalable) of our series, we deployed a Linux Bastion host within our VPC. This host serves as a bridge, linking external IPv4 networks to IPv6-enabled applications within the cluster. It's an essential tool for testing and validating the connectivity of applications running on the IPv6 EKS cluster, ensuring they're accessible and performing as expected. Also included in the cluster configuration for the previous tutorial is an OpenID Connect (OIDC) endpoint. For part one of this series, see [Building an IPv6-based EKS Cluster for Globally Scalable Applications](/tutorials/eks-cluster-ipv6-globally-scalable).
 
@@ -63,25 +63,25 @@ Before interacting with your Amazon EKS cluster using Helm or other command-line
 kubectl config current-context
 ```
 
-1. Define the `CLUSTER_NAME` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
+2. Define the `CLUSTER_NAME` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
 
 ```bash
 export CLUSTER_NAME=$(aws eks describe-cluster --region us-east-2 --name ipv6-quickstart --query "cluster.name" --output text)
 ```
 
-1. Define the `CLUSTER_REGION` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
+3. Define the `CLUSTER_REGION` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
 
 ```bash
 export CLUSTER_REGION=$(aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.arn" --output text | cut -d: -f4)
 ```
 
-1. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
+4. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
 
 ```bash
 export CLUSTER_VPC=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --query "cluster.resourcesVpcConfig.vpcId" --output text)
 ```
 
-1. Define the `ACCOUNT_ID` environment variable for the account associated with your EKS cluster.
+5. Define the `ACCOUNT_ID` environment variable for the account associated with your EKS cluster.
 
 ```bash
 export ACCOUNT_ID=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --query "cluster.arn" --output text | cut -d':' -f5)
@@ -97,7 +97,7 @@ The IPv6 cluster from part one of our series doesn’t currently have an IAM Rol
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
 ```
 
-1. Create the IAM role policy:
+2. Create the IAM role policy:
 
 ```bash
 aws iam create-policy \
@@ -105,7 +105,7 @@ aws iam create-policy \
     --policy-document file://iam_policy.json
 ```
 
-1. Create the AWS LBC IAM Role for Service Account (IRSA). 
+3. Create the AWS LBC IAM Role for Service Account (IRSA). 
 
 ```bash
 eksctl create iamserviceaccount \ 
@@ -127,13 +127,13 @@ In this section, you will install the AWS Load Balancer Controller (LBC) on your
 `helm repo add eks https://aws.github.io/eks-charts`
 ```
 
-1. Update the repositories to ensure Helm is aware of the latest versions of the charts:
+2. Update the repositories to ensure Helm is aware of the latest versions of the charts:
 
 ```bash
 helm repo update eks
 ```
 
-1. Run the following [Helm](https://helm.sh/docs/intro/install/) command to simultaneously install the Custom Resource Definitions (CRDs) and the main controller for the AWS Load Balancer Controller (AWS LBC). To skip the CRD installation, pass the `--skip-crds` flag, which might be useful if the CRDs are already installed, if specific version compatibility is required, or in environments with strict access control and customization needs.
+3. Run the following [Helm](https://helm.sh/docs/intro/install/) command to simultaneously install the Custom Resource Definitions (CRDs) and the main controller for the AWS Load Balancer Controller (AWS LBC). To skip the CRD installation, pass the `--skip-crds` flag, which might be useful if the CRDs are already installed, if specific version compatibility is required, or in environments with strict access control and customization needs.
 
 ```bash
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller \ 
@@ -203,7 +203,7 @@ The expected output should look like this:
 namespace/game-2048 created
 ```
 
-1. Deploy the 2048 Game Sample Application.
+2. Deploy the 2048 Game Sample Application.
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.6.0/docs/examples/2048/2048_full_dualstack.yaml
@@ -235,13 +235,13 @@ NAMESPACE   NAME           CLASS   HOSTS   ADDRESS                              
 game-2048   ingress-2048   alb     *       k8s-game2048-ingress2-4406ad7f91-1137451950.us-east-2.elb.amazonaws.com   80      45s
 ```
 
-1. Run the following command to retrieve information about all the pods in the game-2048 namespace, including additional details such as the node each pod is running on.
+2. Run the following command to retrieve information about all the pods in the game-2048 namespace, including additional details such as the node each pod is running on.
 
 ```bash
 kubectl get po -n game-2048 -o wide
 ```
 
-1. Copy any one of the following IP addresses in `IP` with a `STATUS` of “Running” for the next step. The expected output should look like this:
+3. Copy any one of the following IP addresses in `IP` with a `STATUS` of “Running” for the next step. The expected output should look like this:
 
 ```bash
 NAME                               READY   STATUS    RESTARTS   AGE     IP                            NODE                                           NOMINATED NODE   READINESS GATES
@@ -252,7 +252,7 @@ deployment-2048-7ccfd8fdd6-mr88r   1/1     Running   0          8m23s   2600:1f1
 deployment-2048-7ccfd8fdd6-nxs86   1/1     Running   0          8m23s   2600:1f16:1cc8:4002:f92b::4   ip-192-168-92-106.us-east-2.compute.internal   <none>           <none>
 ```
 
-1. Open your Linux EC2 bastion host instance from the [Amazon EC2 console](https://console.aws.amazon.com/ec2/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv6&sc_geo=mult&sc_country=mult&sc_outcome=acq), then run the following curl command to access the IPv6 IP address of the game application. Replace the sample value with your `IP` from the previous step.
+4. Open your Linux EC2 bastion host instance from the [Amazon EC2 console](https://console.aws.amazon.com/ec2/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv6&sc_geo=mult&sc_country=mult&sc_outcome=acq), then run the following curl command to access the IPv6 IP address of the game application. Replace the sample value with your `IP` from the previous step.
 
 ```bash
 curl -g -6 http://\[2600:1f16:1cc8:4001:9b29::5\]
@@ -319,7 +319,7 @@ spec:
 <EoF>                
 ```
 
-1. Deploy the Kubernetes resources in `updated-ingress-2048.yaml`:
+2. Deploy the Kubernetes resources in `updated-ingress-2048.yaml`:
 
 ```bash
 kubectl apply -f updated-ingress-2048.yaml
@@ -331,7 +331,7 @@ This will update the existing Ingress object with the new annotation, creating a
 ingress.networking.k8s.io/ingress-2048 configured
 ```
 
-1. In your Linux EC2 bastion host terminal window, use curl to access the IPv6 IP address of the application using the following command. 
+3. In your Linux EC2 bastion host terminal window, use curl to access the IPv6 IP address of the application using the following command. 
 
 ```bash
 curl -g -6 http://\[2600:1f16:1cc8:4001:9b29::5\]
@@ -339,7 +339,7 @@ curl -g -6 http://\[2600:1f16:1cc8:4001:9b29::5\]
 
 You should see the HTML output for the app. To view your Application Load Balancer (ALB) instance, open the [Load balancers](https://us-east-2.console.aws.amazon.com/ec2/home?#LoadBalancers:?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv6&sc_geo=mult&sc_country=mult&sc_outcome=acq) page on the Amazon EC2 console.
 
-## Clean up
+## Clean Up
 
 After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created. 
 
