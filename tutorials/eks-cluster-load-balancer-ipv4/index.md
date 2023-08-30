@@ -15,7 +15,7 @@ spaces:
   - kubernetes
 authorGithubAlias: tucktuck9
 authorName: Leah Tucker
-date: 2023-08-29
+date: 2023-08-30
 ---
 
 In the intricate field of networking, managing access to applications within a Kubernetes cluster presents a multifaceted challenge. The AWS Load Balancer Controller (LBC) is essential, facilitating the direction of traffic to your applications through IPv4, the protocol predominantly utilized for internet traffic. This guide focuses on IPv4 within a Kubernetes cluster, employing AWS LBC to supervise external traffic. It emphasizes Ingress Group, a function that consolidates multiple Ingress resources into one Application Load Balancer (ALB), augmenting both effectiveness and ALB utilization. Whether working with nimble microservices or sturdy systems, this manual provides sequential instructions for seamless traffic navigation. With AWS LBC, the complexities of traffic control are significantly reduced, enabling you to focus on your application, as AWS LBC manages the routing. As traffic evolves, AWS LBC adjusts, ensuring continuous access to your application.
@@ -30,7 +30,7 @@ In this tutorial, you will set up the AWS Load Balancer Controller (LBC) on your
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-08-29                                                      |
+| ⏰ Last Updated        | 2023-08-30                                                      |
 
 | ToC |
 |-----|
