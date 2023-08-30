@@ -1,5 +1,5 @@
 ---
-title: "Learning AWS IAM By Writing Your First Policies for Groups and Users"
+title: "Learn AWS IAM By Writing Your First Policies for Groups and Users"
 description: "Managing users and access to resources is part of a cloud administrator's job. This tutorial introduces basic concepts and a tutorial to demonstrate how to use the AWS Identity and Access Management service to manage user access to cloud resources."
 tags:
     - tutorials
@@ -12,7 +12,7 @@ authorName: Sophia Parafina
 date: 2023-08-24
 showInHomeFeed: false
 ---
-In a [previous article](https://community.aws/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline), we introduced AWS Organizations, a service to centrally manage billing, services, and resources. The partner to Organizations is AWS Identity and Access Management (IAM), a service for verifying and authorizing members of an Organization. The difference between Organizations and IAM is that Organizations can globally set limits to services and resources and IAM can authenticate an account and set fine grained permissions. In this tutorial, we introduce the Identity and Access Management service. We will create users and groups and demonstrate how to use policies to assign permissions to resources.
+In a [previous article](https://community.aws/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline), we introduced AWS Organizations, a service to centrally manage billing, services, and resources. The partner to Organizations is AWS Identity and Access Management (IAM), a service for verifying and authorizing members of an Organization. The difference between Organizations and IAM is that Organizations can globally set limits to services and resources and IAM can authenticate an account and set fine grained permissions. In this tutorial, we'll introduce the Identity and Access Management service, create users and groups, and demonstrate how to use policies to assign permissions to resources.
 
 ## What you will learn
 
@@ -36,16 +36,16 @@ Before starting this tutorial, you will need the following:
 | ToC |
 |-----|
 
-This article is an introduction to AWS Identity and Access Management(IAM). Managing access and permissions to AWS services and resources is a complex topic because policies can be created at different organizational levels, they can overlap, and intersect in ways. We’ll start this discussion with best practices for managing administrative accounts and then cover the Identity and Access Management service. Before launching into the tutorial, we will introduce IAM key concepts to establish a baseline of terminology and the relationships between them.
+This article is an introduction to AWS Identity and Access Management (IAM). Managing access and permissions to AWS services and resources is a complex topic, because policies can be created at different organizational levels, they can overlap, and intersect. We’ll start this discussion with best practices for managing administrative accounts and then cover the Identity and Access Management service. Before launching into the tutorial, we will introduce IAM key concepts to establish a baseline of terminology and the relationships between them.
 
-## Best Practice for Securing Accounts
+## Best Practices for Securing Accounts
 
 If you’re the administrator or one of several administrators for your organization’s AWS account, you are responsible for managing resources and who has access to them. A top priority for any administrator is ensure accounts are secure by implementing best practices for your organization. You should implement the following actions for account users to minimize data breaches and misuse of resources by bad actors. 
 
 1. Share the responsibility. Create an AWS administrator email distribution list with primary and alternate contacts. A group notification removes a single point of failure and adds flexibility to add and remove admins. Additionally, create email lists for operations, security notifications, and billing.
 2. The root user of an AWS account has full access to all the services. Protect this account by restricting the use of the root user by creating IAM identities.
-3. Use federated identities when possible. Manage user accounts with a central identity provider such as Active Directory, Okta, or AWS IAM Identity center. If your organization doesn’t have a identity provider solution, you can create user accounts directly with IAM but it is not a recommended because each user are assigned long-term credentials that do not expire.
-4. Require multi-factor authentication (MFA). These devices respond  to an authentication call to complete sign-in. Use MFA with long-term credentials such as root access or IAM user accounts.
+3. Use federated identities when possible. Manage user accounts with a central identity provider such as Active Directory, Okta, or AWS IAM Identity center. If your organization doesn’t have a identity provider solution, you can create user accounts directly with IAM but it is not recommended because each user is assigned long-term credentials that do not expire.
+4. Require multi-factor authentication (MFA). These devices respond to an authentication call to complete sign-in. Use MFA with long-term credentials such as root access or IAM user accounts.
 5. Implement a strong password policy that is resistant to brute force or social engineering attacks.
 6. Log events using [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline) to audit usage.
 
@@ -53,11 +53,11 @@ These are the some of the important best practices for securing AWS accounts. Be
 
 ## Identities
 
-Identities provide access to the AWS account and to associated services and resources.  We’ve already talked about the AWS account user has access to all resources. An IAM user, or simply a **user**, is a person or an application that has specific permissions to access resources. Users have long term credentials, such as passwords and access keys, that grant them permanent access to specified resources.
+Identities provide access to the AWS account and to associated services and resources. We’ve already talked about the AWS account user has access to all resources. An IAM user, or simply a **user**, is a person or an application that has specific permissions to access resources. Users have long term credentials, such as passwords and access keys, that grant them permanent access to specified resources.
 
-Users can belong to a **group** , which is a logical set of users. For example, you can set up a billing group for your accounting department so they can monitor cost and usage. Groups simplify managing permissions for a set of users.
+Users can belong to a **group**, which is a logical set of users. For example, you can set up a billing group for your accounting department so they can monitor cost and usage. Groups simplify managing permissions for a set of users.
 
-Roles are identities with specific permissions, but they are not associated with a user. Roles are temporary and can be assumed by a user to perform a task. A common use for roles is cross-account access where another user is given access to resources in your account. For example, you are the database administrator but an engineer on the operations team needs to restore a database from a back up. They can assume a database administrator role with access to backups in an S3 bucket and restore the database with the backup.
+Roles are identities with specific permissions, but they are not associated with a user. Roles are temporary and can be assumed by a user to perform a task. A common use for roles is cross-account access where another user is given access to resources in your account - for instance, if you are the database administrator but an engineer on the operations team needs to restore a database from a backup. In such a case, the engineer can assume a database administrator role with access to backups in an S3 bucket and restore the database with the backup.
 
 ![Relationship between AWS identities and policies](./images/identities.jpg)
 
@@ -65,17 +65,17 @@ The diagram above shows the relationship between groups, users, and roles. **Pol
 
 ## IAM Policy Concepts
 
-IAM Policies are documents that specify who, what, and under what conditions resources can be accessed. As with any configuration document, there are specific terms to describe the parts and actions:
+IAM Policies are documents that specify which, by whom, and under what conditions resources can be accessed. As with any configuration document, there are specific terms to describe the parts and actions:
 
-- **Sid** - A statement ID is an optional identifier for the policy statement. Sids are descriptive names of a statement written in camel case.
-- **Principal** - a principal can be a person or a role that can request an operation on an AWS resource.
+- **Sid** - A Sid (or statement ID) is an optional identifier for the policy statement. Sids are descriptive names of a statement written in camel case.
+- **Principal** - A principal can be a person or a role that can request an operation on an AWS resource.
 - **Authentication** - AWS supports three kinds of authentication that allow principals to work with cloud resources. 
     1. IAM users can authenticate by providing their account ID, a user name, and passwords. In addition, using MFA when signing in is best practice. 
     2. Federated users use an identity provider such as Amazon, Facebook, Google, or Microsoft Active Directory to log into AWS. 
-    3. You can login as the root user (not recommended) but you should use multi-factor authentication and temporary credentials to keep your account secure.
-- **Request** -  when you use the AWS CLI, AWS Management Console, or AWS API an AWS API call is sent to a service. The API call or request contains actions to be performed against resources. The request context includes: who made the request (the principal), environment data such as an IP address, and resource data such as a tag.
-- **Resources** - a resource is an object within a service, for example a bucket is a resource in S3.
-- **Actions** - actions are what you can do with a resource and the type of action is defined by a resource. For example, S3 has a ```CreateBucket``` operation.
+    3. You can log in as the root user (not recommended) but you should use multi-factor authentication and temporary credentials to keep your account secure.
+- **Request** - When you use the AWS CLI, AWS Management Console, or AWS API an AWS API call is sent to a service. The API call or request contains actions to be performed against resources. The request context includes: who made the request (the principal), environment data such as an IP address, and resource data such as a tag.
+- **Resources** - A resource is an object within a service, for example a bucket is a resource in S3.
+- **Actions** - Actions are what you can do with a resource and the type of action is defined by a resource. For example, S3 has a ```CreateBucket``` operation.
 
 ## Anatomy of a Policy
 
@@ -100,8 +100,8 @@ An IAM policy is an document attached to a resource that defines what a principa
 
 A policy can contain one or more statements. A statement contains:
 
-- **Effect** - An effect is either and **Allow** or **Deny**. All requests are denied by default, which is overridden by an explicit allow. Conversely, and explicit deny overrides any allows.
-- **Action** - An action is specific to a service. The effect allows or denies and action.
+- **Effect** - An effect is either an **Allow** or **Deny**. All requests are denied by default, which is overridden by an explicit allow. Conversely, an explicit deny overrides any allows.
+- **Action** - An action is specific to a service. The effect allows or denies an action.
 - **Resource** - A resource is an object in a service. Sending a request specifies an action applied to a resource.
 - **Condition** - A condition is optional. It can trigger an effect based on a value. AWS defines several general conditions and services have defined conditions.
 
@@ -161,7 +161,7 @@ Let’s examine a policy restricting an S3 bucket to specific user.
 
 This policy contains several statements, but note that they are applied to a specific user (JohnDoe). The first statement allows the Principal to list the buckets in the root and home bucket of the S3 resource. The second statement allows the Principal to list the objects in their home directory, if the path is `home/JohnDoe/*`.
 
-The policy follows the principle of least privilege, i.e., the minimum permission required to complete a task. The first statement allows only listing of buckets for the Principal. The second statement allows only listing the objects in the Principal’s bucket. Finally, the last statement allows the Principal to request any action in their home directory.
+The policy follows the principle of least privilege (i.e. the minimum permission required to complete a task). The first statement allows only listing of buckets for the Principal. The second statement allows only listing the objects in the Principal’s bucket. Finally, the last statement allows the Principal to request any action in their home directory.
 
 ## Hands On
 
@@ -174,7 +174,7 @@ aws iam create-user --user-name yeemin
 aws iam create-user --user-name alicia
 ```
 
-and provide them with access to the AWS Console. For this tutorial, we’ll set a password and not require resetting the password when signing in for the first time. However, it is best practice to require resetting the password when signing in for the first time. Remember that IAM users have permanent credentials.
+Let's provide them with access to the AWS Console. For this tutorial, we’ll set a password and not require resetting the password when signing in for the first time. However, it is best practice to require resetting the password when signing in for the first time. Remember that IAM users have permanent credentials.
 
 ```bash
 aws iam create-login-profile --user-name yeemin --password pcgUser#1 --no-password-reset-required
@@ -189,7 +189,7 @@ aws iam add-user-to-group --user-name yeemin --group-name pcg-experts
 aws iam add-user-to-group --user-name alicia --group-name pcg-experts
 ```
 
-Our IAM users were created under the master account, and to sign in to the the console we use a URL with the master account id. If you don’t know the account id, you can find it with this command:
+Our IAM users were created under the master account, and to sign in to the the console we use a URL with the master account id. If you don’t know the account ID, you can find it with this command:
 
 ```bash
 aws sts get-caller-identity
@@ -201,9 +201,9 @@ aws sts get-caller-identity
 }
 ```
 
-The account ID is 123456789101 and your users can login at an address which takes the form of `https://<account id>.signin.aws.amazon.com/console`, e.g., `https://123456789101.signin.aws.amazon.com/console`.
+The account ID is 123456789101, and your users can log in at an address which takes the form of `https://<account id>.signin.aws.amazon.com/console`, e.g., `https://123456789101.signin.aws.amazon.com/console`.
 
-If you login as either user, you will see that you can't access any resources.
+If you log in as either user, you will see that you can't access any resources.
 
 **Step 2**: We’ll need a resource to manage. We’ll create an S3 bucket with several folders containing files. Note that S3 buckets require that you choose unique name, so replace `my-unique-bucket-name` in the command:
 
@@ -221,7 +221,7 @@ touch ./Private/privDoc1.pdf ./Private/privDoc2.pdf
 touch s3-info.txt
 ```
 
-Next, we’ll use the AWS CLI to copy the directories and files to S3 with the `put-object` command, remember to replace `my-unique-bucket-name` with your bucket name:
+Next, we’ll use the AWS CLI to copy the directories and files to S3 with the `put-object` command. Remember to replace `my-unique-bucket-name` with your bucket name:
 
 ```bash
 aws s3api put-object --bucket my-unique-bucket-name --key Development/project1.xls
@@ -234,7 +234,7 @@ aws s3api put-object --bucket my-unique-bucket-name --key Private/privDoc1.txt
 aws s3api put-object --bucket my-unique-bucket-name --key s3-dg.pdf
 ```
 
-**Step 3**: Now that we have 2 users, a group, and an S3 bucket set up, we can create our first policy. Our first policy allows listing all the buckets at the root of the account:
+**Step 3**: Now that we have two users, a group, and an S3 bucket set up, we can create our first policy. Our first policy allows listing all the buckets at the root of the account:
 
 ```json
 {
@@ -277,7 +277,7 @@ Next, attach the policy to the group:
 aws iam attach-group-policy --policy-arn arn:aws:iam::123456789101:policy/GroupPolicy  --group-name pcg-experts 
 ```
 
-Let’s test the policy by logging in Yeemin. In a browser, put your sign-in URL in the address bar, .e.g., `https://<account-id>.signin.aws.amazon.com/console`
+Let’s test the policy by logging in Yeemin. In a browser, put your sign-in URL in the address bar (e.g., `https://<account-id>.signin.aws.amazon.com/console`).
 
 ![Sign into the AWS console](./images/console-1.png)
 
@@ -342,7 +342,7 @@ Go back to the browser with the S3 console open while logged in as `Yeemin`. You
 
 ![Listing of user S3 bucket](./images/s3-2.png)
 
-Although, anyone in the group can list the contents of the bucket, they cannot list the objects in the folders. In the next section, we’ll define a policy for a user that lets them list, get, and put objects in a folder.
+Although anyone in the group can list the contents of the bucket, they cannot list the objects in the folders. In the next section, we’ll define a policy for a user that lets them list, get, and put objects in a folder.
 
 **Step 5**:  Alicia is a developer and needs access to the Development folder as part of her job. For this, we’ll create an [inline policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#inline-policies?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline). An inline policy is created for a single IAM identity which can be a user, a group, or a role. There is a strict one-to-one relationship between an identity and an inline policy.
 
@@ -440,11 +440,11 @@ aws s3 rb s3://your-unique-bucket-name —force
 
 ## Let's Review
 
-We created two types of policies. The first policy was a **Customer Managed policy** applied to a group and by extension, all the members of the group. We used S3 as an example resource but it can be applied to any AWS resource such as EC2, the AWS compute service. This policy is a one-to-many policy, meaning that the policy is applied to multiple IAM identities. Any of our users can list the buckets at the root account and the contents in the root of the S3 bucket we created.
+We created two types of policies. The first policy was a **Customer Managed policy** applied to a group and by extension, all the members of the group. We used S3 as an example resource, but it can be applied to any AWS resource such as EC2, the AWS compute service. This policy is a one-to-many policy, meaning that the policy is applied to multiple IAM identities. Any of our users can list the buckets at the root account and the contents in the root of the S3 bucket we created.
 
 The second policy is an **inline policy** which is a one-to-one relationship between a policy and an IAM identity. In our example, we attached a policy to a IAM user (Alicia) so she could access a folder. Note that an IAM identity can be a single user, a group, or a role. If we had several developers we could create a developers group, add the users to the group, and attach the policy to the group with the `attach-group-policy` command. This would allow access to the Developers folder to everyone in that group.
 
-## What's Next
+## What's Next?
 
 We’ve covered a lot of topics ranging from best practices to securing your AWS account, to identity concepts and how they relate to each other, and we’ve done a deep dive in to the structure of policies. To put the IAM service in context, we completed an exercise for managing group and user access to a resource. However, we did not examine how to use roles and temporary credentials to provide access to resources from one account to another. In an upcoming article we’ll demonstrate how to use [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline).
 
