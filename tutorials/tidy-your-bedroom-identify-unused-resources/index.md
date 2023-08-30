@@ -152,7 +152,7 @@ It's possible that you will need an additional view for certain resource types. 
 
 ![A create view widget](images/filtered-view.png "A create view widget")
 
-1. It will take some time to create each view, but once it is ready, you can see the results of the view and query by:
+8. It will take some time to create each view, but once it is ready, you can see the results of the view and query by:
 
   * selecting `Resource search` from the left navigation pane and changing the `View` dropdown to your view's name or
   * selecting `Views`  from the left navigation pane, select the view of choice and then select `Explore resources`.
