@@ -1,5 +1,5 @@
 ---
-title: "Levelling up your releases: a deep dive into blue/green deployments"
+title: "Levelling up Your Releases: Reduce Risk with  Blue/Green Deployments"
 description: Deploying to production is a critical step in the software deployment lifecycle. One approach to reduce risk is blue/green deployments.
 tags:
   - aws
@@ -18,7 +18,7 @@ date: 2023-08-11
 
 ## Introduction to Blue/Green Deployments
 
-Deploying to production is a critical step in the software deployment lifecycle. Given the risks, engineering teams should be careful, intentional and decisive on the release process. One approach to reduce risk is blue/green deployments. Blue/green deployments reduce risk and maintain availability during deployments of new features. This by deploying the new functionality to a separate new environment, and then cutting over all production traffic to the new environment. This ensures a clean cut over with near zero downtime, and allows for rollback. 
+Deploying to production is a critical step in the software deployment lifecycle. Given the risks, engineering teams should be careful, intentional, and decisive on the release process. Blue/green deployments help to reduce risk and maintain availability during deployments of new features by deploying the new functionality to a separate new environment, and then cutting over all production traffic to the new environment. This ensures a clean cut over with near zero downtime and allows for rollback. 
 
 Here we will cover what you need to know for blue/green deployments, show how AWS services support these, and share a real-world example.
 
@@ -34,7 +34,7 @@ With this approach, you benefit from the ability to:
 
 Ultimately, the approach simplifies operations and overall deployment risks is reduced through automation.
 
-## Key considerations for blue/green deployments
+## Key Considerations for Blue/Green Deployments
 
 The first consideration for implementing blue/green deployments is aligning your organisation on its benefits. Driving changes require planning, prioritisation and investment, and may impact a broad stakeholder group including product and business teams. It is important that benefits for each set of stakeholders are articulated. For example, for the engineering team, this may lead to greater satisfaction through greater confidence around deployments. For the product team, it may mean improved cycle time and a new approach on how to engage with new releases.  
 
@@ -42,7 +42,7 @@ The second consideration is to scope your environment boundary and testing proce
 
 Lastly, if the new release contains database or schema changes, a simplest approach is to decouple this from the application and ensure that there is backwards compatibility between both the existing (blue) and new (green) versions. In other words, we recommend that the application is *stateless*. For more information, see [Best Practices for Managing Data Synchronization and Schema Changes](https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/best-practices-for-managing-data-synchronization-and-schema-changes.html).
 
-## Practical steps to get started
+## Practical Steps to Get Started
 
 ### Managed blue/green deployments
 
@@ -74,7 +74,7 @@ While we recommend starting with fully managed capabilities outlined, you can al
 
 While there are many ways to implement, the goal should be to automate the process, and ultimately reduce errors and costs. Overall, you should choose the appropriate implementation based on your architecture, the nature of your application, and goals for your organisation.
 
-## A real-world experience
+## A Feal-World Experience
 
 As a Solutions Architect, I advise CTOs, technical leaders and engineering teams on applying best-practices to get the most out of AWS. I worked with scaling startup who dread their release process and was fearful of deployments. They experienced a number of incidents whereby intended production releases were not successful. The team was scarred by the painful experiences. 
 
