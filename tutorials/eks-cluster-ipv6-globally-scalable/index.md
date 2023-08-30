@@ -174,7 +174,7 @@ In an EKS cluster using IPv6, pods and services will be assigned IPv6 addresses.
 
 1. Open the [Amazon EC2 console](https://console.aws.amazon.com/ec2/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 2. Under “Launch instance”, click the **Launch instance** button.
-   ![EC2 Dashboard in the AWS console ](images/ec2_launch_instance.png)
+   ![EC2 Dashboard in the AWS console ](images/ec2_launch_instance_small.png)
 3. Enter the following information to customize the instance:
     1. Type `ipv6-bastion` in **Name.**
     2. Select `tc2.micro` for **Instance type.**
@@ -196,7 +196,7 @@ In an EKS cluster using IPv6, pods and services will be assigned IPv6 addresses.
 3. On the **Connect to instance** page:
     1. Keep the default selections for the network settings, including “Connect using EC2 Instance Connect” and “User name.”
     2. Click **Connect**.
-      ![EC2 instance dialog to connect to the instance](images/ec2_connect_dialog.png)
+      ![EC2 instance dialog to connect to the instance](images/ec2_connect_dialog_small.png)
 
 You should see the following connection terminal:
 
