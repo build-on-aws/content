@@ -59,7 +59,7 @@ Users can belong to a **group**, which is a logical set of users. For example, y
 
 Roles are identities with specific permissions, but they are not associated with a user. Roles are temporary and can be assumed by a user to perform a task. A common use for roles is cross-account access where another user is given access to resources in your account - for instance, if you are the database administrator but an engineer on the operations team needs to restore a database from a backup. In such a case, the engineer can assume a database administrator role with access to backups in an S3 bucket and restore the database with the backup.
 
-![Relationship between AWS identities and policies](./images/identities_smaller.jpg)
+![Relationship between AWS identities and policies](./images/identities.jpg)
 
 The diagram above shows the relationship between groups, users, and roles. **Policies** can be attached to identities. Users can belong to a group and inherit the group policies. Users are considered permanent identities because they have long term credentials in the form of passwords and access keys. In addition, users can assume roles with policies that let them access resources specified by the policy. Roles are temporary and assumed by users to perform specific tasks. This brief overview describes the basic relationships between identities; the User Guide provides an in depth discussion of [IAM Identities (users, user groups, and roles)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html?sc_channel=el&sc_campaign=tutorial&sc_content=learning-aws-iam-by-writing-your-first-policies-for-groups-and-users&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
