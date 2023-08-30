@@ -9,7 +9,7 @@ tags:
     - security
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-08-24
+date: 2023-08-30
 showInHomeFeed: false
 ---
 In a [previous article](https://community.aws/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline), we introduced AWS Organizations, a service to centrally manage billing, services, and resources. The partner to Organizations is AWS Identity and Access Management (IAM), a service for verifying and authorizing members of an Organization. The difference between Organizations and IAM is that Organizations can globally set limits to services and resources and IAM can authenticate an account and set fine grained permissions. In this tutorial, we'll introduce the Identity and Access Management service, create users and groups, and demonstrate how to use policies to assign permissions to resources.
@@ -31,7 +31,7 @@ Before starting this tutorial, you will need the following:
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=inline)<br>- [AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-08-14                             |
+| ⏰ Last Updated     | 2023-08-30                             |
 
 | ToC |
 |-----|
