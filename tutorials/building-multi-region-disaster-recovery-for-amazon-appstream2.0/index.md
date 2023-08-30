@@ -34,6 +34,12 @@ By distributing the inputs and outputs per second (IOPS) to the local disk cache
 One example of a high speed network storage service that is scalable in compute, storage and is easy to get started with is [Amazon FSx for Windows File Server](https://aws.amazon.com/fsx/windows?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). When launched in the same subnets as the Amazon AppStream 2.0 fleet, it reduces the latency and serves user profile data efficiently.
 Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-ontap?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), can also be used as a user profile storage location.
 
+Before launching your FSx for Windows or storage service of choice, please keep in mind that right sizing the performance and storage capacity is essential to a successful deployment. These decisions impact the user experience and budget. 
+
+According to Microsoft the [IOPS an FSLogix profile needs](https://learn.microsoft.com/en-us/azure/virtual-desktop/faq#what-s-the-largest-profile-size-fslogix-can-handle-) at a steady state, it is **10 IOPS per user** and Sign-in\out consumes **50 IOPS per user**. The IO load of a single VDI desktop has a high read IO load (up to several 100s of IOPS) when the Operating System boots. The user logs in and a 60% read at about 50 IOPS is seen. Then the user starts working with about 5-10 IOPS at 85% writes for the rest of the day.
+
+In a scenario where you have 500 users, in a steady state, a storage service that provides a constant 5000 IOPS is required. If all 500 users log on at the same time, your storage solution would need to be able to provide 25000 IOPS. Some storage services have a burst capability that handle this short spike of IOPS.
+
 
 Storing user profiles on an SMB share provides:
 
@@ -43,7 +49,6 @@ Storing user profiles on an SMB share provides:
 1. Terabytes of user profile and other data stored on premise can be accessed securely and remotely using AppStream 2.0 and [Amazon FSx File Gateway](https://aws.amazon.com/storagegateway/file/fsx?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), which provide seamless read and write activity when files are shared between their on-premises locations and the cloud. Users will have a similar experience inside a virtual desktop as they do on-premise using a physical laptop\device
 1. Fine grained access control of data from a central source such as Active Directory (AD) that integrates with existing onboarding workflows and security folder monitoring tools.
 1. Reduces administration by removing the need to maintain a full list of inclusions and exclusions for profile roaming
-
 
 
 In this blog, I will guide you through how to build a multi-region disaster recovery environment for Amazon AppStream 2.0 using Amazon FSx for Windows as a storage location.
@@ -64,25 +69,25 @@ in your account:
     Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     enabled
 
-4.  Active Directory Services in both Primary (Frankfurt) and Disaster   Recovery (DR) region (London). In this blog, I am using AWS Managed AD with [multi-region
+1.  Active Directory Services in both Primary (Frankfurt) and Disaster   Recovery (DR) region (London). In this blog, I am using AWS Managed AD with [multi-region
     replication](https://aws.amazon.com/blogs/aws/multi-region-replication-now-enabled-for-aws-managed-microsoft-active-directory?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     enabled. You can also use a self-managed Active Directory installed on an EC2 instance or your on premise Active Directory with network connectivity between the locations.
 
-5.  An existing Windows File Server or [Amazon FSx For Windows File
+1.  An existing Windows File Server or [Amazon FSx For Windows File
     System](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     used for profile storage, check [this blog
     post](https://aws.amazon.com/blogs/desktop-and-application-streaming/use-amazon-fsx-and-fslogix-to-optimize-application-settings-persistence-on-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     for setup instructions
 
-6.  The VPC subnets for Amazon AppStream 2.0 in primary and disaster
+1.  The VPC subnets for Amazon AppStream 2.0 in primary and disaster
     recovery region, must be able to connect on port 445, to both
     primary and disaster recovery FSx for Windows File Systems.
 
-7.  Both VPCs connected via Transit Gateway or VPC Peering  
+1.  Both VPCs connected via Transit Gateway or VPC Peering  
     ([VPC peering is preferable in most
     settings](https://docs.aws.amazon.com/whitepapers/latest/best-practices-for-deploying-amazon-appstream-2/availability-zones.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream))
 
-8.  A SAML IdP such, deployed in two or more regions like
+1.  A SAML IdP such, deployed in two or more regions like
     [Okta](https://www.okta.com/sites/default/files/2020-10/Okta%27s-Architecture-eBook.pdf)
     which is able to endure a region failure.
 
@@ -229,13 +234,12 @@ software**
 3.  [Download FSLogix from Microsoft](https://docs.microsoft.com/en-us/fslogix/install-ht) on the image builder and run it. Navigate through the wizard to
     complete installation.
 
-4.  Once installation is complete, execute **lusrmgr.msc** from a    **Run** prompt to open the Local Users and Groups manager.
+4.  Once installation is complete, execute **lusrmgr.msc** from a  **Run** prompt to open the Local Users and Groups manager.
 
 5.  In this blog, I will **not** be using Office 365 Containers, As a result, we’re going to remove all members from the group called **FSLogix ODFC Include List**.  
     Choose **Groups** and then **FSLogix ODFC Include List**. **Remove**
     “Everyone” from Members and then choose **Apply** and **OK**.  
     Step 5 can also be achieved using this PowerShell one liner:
-
 
 ```powershell
 Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass -like 'User'} | Remove-LocalGroupMember 'FSLogix ODFC Include List'
@@ -243,59 +247,67 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
 
 6.  FSLogix Profile Include List group is the include list for dynamic profiles. Select the **FSLogix Profile Include List** group. **Remove** “Everyone” and modify the list of Members so that your Security Group for  AppStream 2.0/FSLogix users is included. Choose **Apply** and   **OK**.
 
-
-
 ### Step 4: Setup the Group Policy to configure FSLogix
 
-[Configure Registry Settings with Group
-    Policy](https://learn.microsoft.com/en-us/fslogix/use-group-policy-templates-ht)
+1.  Copy  **fslogix.admx** in to your Active Directory's Sysvol directory 
+ 
+    Typically located at:
 
-1.  Import the FSLogix templates in to your Active Directory's Sysvol directory. Follow the [guide](https://learn.microsoft.com/en-us/fslogix/use-group-policy-templates-ht)
-        for detailed steps
+    ```
+    \\%USERDOMAIN%\SYSVOL\%USERDOMAIN%\Policies\PolicyDefinitions
+    ```
 
-2.  Once imported, create a GPO to be linked to the Amazon AppStream
-        2.0 computer objects OU found under [Directory Config](https://docs.aws.amazon.com/appstream2/latest/developerguide/active-directory-directory-setup.html#active-directory-setup-config?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).  
+1.  Next Copy **fslogix.adml** to 
+
+    ```
+    \\%USERDOMAIN%\SYSVOL\%USERDOMAIN%\Policies\PolicyDefinitions\en-US
+    ```
+
+    Follow this [guide](https://learn.microsoft.com/en-us/fslogix/how-to-use-group-policy-templates) for if you need more information on the step 4.1
+
+
+1.  Create a GPO to be linked to the Amazon AppStream 2.0 computer objects   
         Edit the GPO and enter the settings:
 
-3.  Go to Computer configuration \> Policies \> Administrative
-        Templates \> FSLogix \> Profile containers
+1.  Go to Computer configuration \> Policies \> Administrative Templates \> FSLogix \> Profile containers 
+        set  **Enabled**  to Enabled
 
-4.  **Enabled** Set to Enabled
-
-5.  **Delete Local Profile when FSLogix Profile should apply**
+1.  **Delete Local Profile when FSLogix Profile should apply**
         *Enabled* (Please use caution with this setting. When the FSLogix
         Profiles system determines that a user should have a FSLogix
         profile but a local profile exists, the local profile will be
         **removed** and the user is logged on with the FSLogix profile.)
 
-6.  Go to Profile Containers \> Cloud Cache and set **Clear local cache on logoff** \> Disabled
+1. Go to Profile Containers \> Cloud Cache and set **Clear local cache on logoff** \> Disabled
 
-8.  **IsDynamic:** If enabled, the profile container uses the minimum space on disk regardless of what is specified in SizeInMBs. As your user profile container grows in size, the amount of data on disk will grow up to the size specified in SizeInMBs.
- **Note:** When the data is deleted inside the user environment, the VHD(x) file size on disk remains the same. 
-Free space will not be reclaimed and your VHD file will not auto shrink.
-The some solutions are to schedule commands or a [script](https://github.com/FSLogix/Invoke-FslShrinkDisk) in order to periodically remove empty blocks from a dynamically-expanding virtual hard disk file. Please see Microsoft article [My storage is running out of space because of FSLogix!](https://techcommunity.microsoft.com/t5/fslogix-blog/my-storage-is-running-out-of-space-because-of-fslogix/ba-p/1333170)
-I recommend against using a lower maximum size as this approach will restrict the size of the profile. If the container fills, applications will not handle the lack of available space gracefully. This can cause a crash or data loss. There are many other options. You can find the full list of Profile Container configuration settings in [Profile Container registry configuration reference](https://docs.microsoft.com/en-us/fslogix/profile-container-configuration-reference).
+1. Go to Computer configuration \> Policies \> Administrative Templates \> FSLogix \> [VHD Compact Disk](https://learn.microsoft.com/en-us/fslogix/reference-configuration-settings?tabs=profiles#vhdcompactdisk) 
+    This setting can also be listed as **Disk Compaction** in older versions of FSlogix, see this link for version history [2210](https://learn.microsoft.com/en-us/fslogix/overview-release-notes#fslogix-2210-29836152326) 
 
-9.  Please disable the [VHDLocations](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::0ceb51ebe4453fc710be22f8eb646d91) if you are using it and only enable [CCDLocations](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::4aa3e56009bb2b4246504d7bddaac159) for Cloud Cache.
+1.  **IsDynamic:** If enabled, the profile container uses the minimum space on disk regardless of what is specified in SizeInMBs. As your user profile container grows in size, the amount of data on disk will grow up to the size specified in SizeInMBs.
+ **Note:** When the data is deleted inside the user environment, the VHD(x) file size on disk will automatically shrink if a feature called [VHD Disk Compaction](https://learn.microsoft.com/en-us/fslogix/concepts-vhd-disk-compaction) is enabled and configured. 
+In older versions of FSlogix, free space would not be reclaimed and users would need to run commands or a script in order to periodically remove empty blocks from a dynamically-expanding virtual hard disk file.
 
-10. **Cloud Cache locations** (no spaces, one line and in this
+1.  Please disable the [VHDLocations](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::0ceb51ebe4453fc710be22f8eb646d91) if you are using it and only enable [CCDLocations](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::4aa3e56009bb2b4246504d7bddaac159) for Cloud Cache.
+
+1. **Cloud Cache locations** (no spaces, one line and in this
     order, replace **fsxPrimary.asx.local** and **fsxDR.asx.local** with your storage server DNS names accordingly.)
     
     ```
     type=smb,connectionString=\\fsxPrimary.asx.local\Profiles;type=smb,connectionString=\\fsxDR.asx.local\Profiles
     ```
 
-11. **Swap directory name** -\> Go to Computer configuration \>
+1. **Swap directory name** -\> Go to Computer configuration \>
     Policies \> Administrative Templates \> FSLogix \> Profile
     containers \> Container and Directory Naming \> [Swap directory name components](https://learn.microsoft.com/en-us/fslogix/reference-configuration-settings?tabs=profiles#flipflopprofiledirectoryname)
     \> Check the box  
     (When checked causes new containing directories to be named with  the user name first followed by the SID.)
 
-12. **Log Settings (Optional):** Go to Computer configuration \>
+1. **Log Settings (Optional):** Go to Computer configuration \>
     Policies \> Administrative Templates \> FSLogix \>[Enable
     Logging](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::095343fa0c8b70c9a94ece25c0982bc6)
     More details on logging can be found [here](https://learn.microsoft.com/en-us/fslogix/reference-configuration-settings?tabs=profiles#flipflopprofiledirectoryname)
-    
+  
+  You can find the full list of Profile Container configuration settings in [Profile Container registry configuration reference](https://docs.microsoft.com/en-us/fslogix/profile-container-configuration-reference).  
 
 ### Step 5: Create an Amazon AppStream 2.0 Image
 
@@ -494,9 +506,10 @@ steps:
 
 ## Conclusion
 
-In this blog, I showed you how you can use FSlogix Cloud Cache and Amazon FSx for Windows File Server to build a multi-region disaster recovery environment for Amazon AppStream 2.0. This helps reduce data loss
-and improves an organization's ability to respond to and recover from an
-event that negatively affects business operations.
+In this blog, I showed you how you can use FSlogix Cloud Cache and Amazon FSx for Windows File Server to build a multi-region disaster recovery environment for Amazon AppStream 2.0. This helps reduce data loss and improves an organization's ability to respond to and recover from an event that negatively affects business operations.
 
+I encourage you to explore these concepts further and think holistically about how common settings like Outlook [Cached Exchange Mode](https://support.microsoft.com/en-us/office/turn-on-cached-exchange-mode-7885af08-9a60-4ec3-850a-e221c1ed0c1c), can be configured to reduce your cloud storage costs by limiting the past email to a few months instead of 1 year. 
+
+This tutorial sets the foundations that enables you to use your existing FSLogix configuration to explore and deploy advanced controls like [Application Masking](https://aws.amazon.com/blogs/desktop-and-application-streaming/simplify-appstream-2-0-image-management-with-application-masking?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), to limit apps based on Active Directory group membership. This is great for users sharing a single Amazon AppStream fleet. 
 
 If you enjoyed this tutorial, found an issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
