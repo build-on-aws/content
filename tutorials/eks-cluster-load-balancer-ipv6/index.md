@@ -124,7 +124,7 @@ In this section, you will install the AWS Load Balancer Controller (LBC) on your
 1. Use [Helm](https://helm.sh/docs/intro/install/) to add the EKS chart repository to Helm.
 
 ```bash
-`helm repo add eks https://aws.github.io/eks-charts`
+helm repo add eks https://aws.github.io/eks-charts
 ```
 
 2. Update the repositories to ensure Helm is aware of the latest versions of the charts:
@@ -345,7 +345,7 @@ After finishing with this tutorial, for better resource management, you may want
 
 ```bash
 # Delete the Namespace, Deployment, Service, and Ingress
-kubectl delete namespace game-2048`
+kubectl delete namespace game-2048
 
 # Delete the AWS Load Balancer Controller
 helm uninstall aws-load-balancer-controller -n kube-system
