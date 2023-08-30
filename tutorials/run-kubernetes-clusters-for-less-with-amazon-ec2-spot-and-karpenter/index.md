@@ -53,7 +53,7 @@ In this tutorial, I’ll guide you on the steps you need to follow to configure 
 
 ## Pre-Requisites
 
-* Access to an AWS account with required IAM permissions. The IAM security principal that you're using must have permissions to create an EKS cluster, and an AWS Cloud9 environment if you're planning to use it to run all commands listed in this tutorial.
+* You need access to an AWS account with IAM permissions to create an EKS cluster, and an AWS Cloud9 environment if you're running the commands listed in this tutorial.
 * Install and configure the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * Install the [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 * Install the [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
@@ -63,14 +63,14 @@ In this tutorial, I’ll guide you on the steps you need to follow to configure 
 
 > 💡 Tip: You can skip this step if you already have a Cloud9 environment or if you’re planning to run all steps on your own computer. Just make sure you have the proper permissions listed in the pre-requisites section of this tutorial.
 
-To get started quickly I’ve prepared an AWS CloudFormation template to create a Cloud9 environment with all the tools you’re going to need to follow this tutorial like kubectl and Terraform CLI. Let’s create the Cloud9 environment running the following command:
+I’ve prepared an AWS CloudFormation template to create a Cloud9 environment. It has all the tools to follow this tutorial like kubectl and Terraform CLI. Now, let’s create the Cloud9 environment running the following command:
 
 ```bash
 wget https://raw.githubusercontent.com/build-on-aws/run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter/main/cloud9-cnf.yaml
 aws cloudformation deploy --stack-name EKSKarpenterCloud9 --template-file cloud9-cnf.yaml --capabilities "CAPABILITY_IAM"
 ```
 
-You need to wait around five to ten minutes after CloudFormation finishes, then open the [Cloud9 console](https://console.aws.amazon.com/cloud9control/home?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) and open the environment. From now own, you’ll be running all commands in this tutorial in the [Cloud9 terminal](https://docs.aws.amazon.com/cloud9/latest/user-guide/tour-ide.html#tour-ide-terminal?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+Wait 5-10 minutes after CloudFormation finishes, then open the [Cloud9 console](https://console.aws.amazon.com/cloud9control/home?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) and open the environment. From now on, you’ll be running all commands in this tutorial in the [Cloud9 terminal](https://docs.aws.amazon.com/cloud9/latest/user-guide/tour-ide.html#tour-ide-terminal?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 Cloud9 normally manages IAM credentials dynamically. This isn’t currently compatible with the EKS IAM authentication, so you need to disable it and rely on the IAM role instead. To do so, run the following commands in the Cloud9 terminal:
 
@@ -79,7 +79,7 @@ aws cloud9 update-environment --environment-id ${C9_PID} --managed-credentials-a
 rm -vf ${HOME}/.aws/credentials
 ```
 
-To confirm that you have all the CLI tools needed for this tutorial, run the following commands:
+To confirm that you have all the CLI tools needed for this tutorial, input these commands:
 
 ```bash
 aws --version
