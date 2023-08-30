@@ -345,7 +345,7 @@ After finishing with this tutorial, for better resource management, you may want
 
 ```bash
 # Delete the Namespace, Deployment, Service, and Ingress
-`kubectl ``delete`` ``namespace game-2048`
+kubectl delete namespace game-2048`
 
 # Delete the AWS Load Balancer Controller
 helm uninstall aws-load-balancer-controller -n kube-system
