@@ -60,7 +60,7 @@ From data preparation and ETL to real-time streaming and interactive querying, A
 
 ## Which Service to Pick and When? 
 
-Considering these questions and the provided solutions will guide you in making well-informed choices about which services will best meet your needs. To determin the optimal AWS service for deploying Apache Spark, keeping in mind your unique needs, use case, and prerequisites.
+Considering these questions and the provided solutions will guide you in making well-informed choices about which services will best meet your needs. To determine the optimal AWS service for deploying Apache Spark, keeping in mind your unique needs, use case, and prerequisites.
 
 ### Are You Completely New to Spark?
 
@@ -80,7 +80,7 @@ By choosing AWS Glue, you can kickstart your Spark journey on AWS with **ease an
 
 ### 📘 Do You Need to Prepare and Transform Data for Analysis?
 
-If the answer is yes, 🌟 **consider using AWS Glue**. AWS Glue is a fully managed ETL service that integrates with Apache Spark, offering automated schema discovery, data cataloging, and data transformation capabilities.
+If the answer is yes, 🌟 **consider using AWS Glue**. AWS Glue is a fully managed ETL service that integrates with Apache Spark, offering automated schema discovery, data cataloging, and data transformation capabilities. AWS Glue:
 
  - 🚀 Integrates with **Apache Spark**.
  - 🧠 Offers automated **schema discovery**.
@@ -94,6 +94,7 @@ If the answer is yes, 🌟 **consider using AWS Glue**. AWS Glue is a fully mana
 ### 📘 Do You Need to Deploy and Manage Spark Clusters Easily?
 
 If the answer is yes, 🌟 **consider Amazon EMR**. Amazon EMR:
+
 - 🚀 Is a **fully managed big data processing service**.
 - 💡 Simplifies the **deployment and management** of Spark clusters.
 - 🌐 Offers **EMR Serverless**: A serverless runtime environment optimized for analytics applications, compatible with frameworks like **Spark** and **Hive**.
@@ -110,7 +111,7 @@ If your answer is yes, 🌟 **consider using Amazon SageMaker**.
 
 🤖 **Amazon SageMaker** is a fully managed machine learning service that integrates seamlessly with **Spark**. With SageMaker, you can leverage Spark's distributed data processing capabilities for data preparation and preprocessing. This sets the stage for efficiently training machine learning models. Furthermore, Spark can handle distributed processing of inference on new data.
 
-**BONUS: Enhanced Workflow with SageMaker Studio** 🎉:
+**BONUS: Enhanced Workflow with SageMaker Studio** 🎉
 
 SageMaker Studio, provided by AWS, is a fully integrated development environment (IDE) that enhances the ML workflow. It provides a unified interface for data exploration, model development, and collaboration among team members. When combined with **Glue** and **EMR**, SageMaker Studio becomes even more powerful:
 
