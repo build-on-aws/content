@@ -147,7 +147,7 @@ In this section, you will install the AWS Load Balancer Controller (LBC) on your
 1. Use [Helm](https://helm.sh/docs/intro/install/) to add the EKS chart repository to Helm.
 
 ```bash
-`helm repo add eks https://aws.github.io/eks-charts`
+helm repo add eks https://aws.github.io/eks-charts
 ```
 
 2. Update the repositories to ensure Helm is aware of the latest versions of the charts:
