@@ -9,6 +9,7 @@ tags:
   - codebuild
 authorGithubAlias: jumic
 authorName: Julian Michel
+githubUserLabel: community
 date: 2023-08-29
 ---
 
@@ -39,7 +40,7 @@ To build this solution, using infrastructure as code makes sense. AWS CDK suppor
 
 This diagram shows the overall architecture:
 
-![Sphinx documentation architecture](images/sphinx-documentation-architecture.svg)
+![Sphinx documentation architecture](images/sphinx-documentation-architecture.webp)
 
 ## Building the dockerfile
 Sphinx is written in Python. Therefore, extensions and themes are installed using Python requirements files. For this particular project, the requirements file `requirements.txt` only contains the custom theme that will be used.
