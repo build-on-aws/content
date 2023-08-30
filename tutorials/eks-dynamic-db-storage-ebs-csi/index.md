@@ -18,12 +18,12 @@ authorName: Madhu Nagaraj
 additionalAuthors: 
   - authorGithubAlias: tucktuck9
     authorName: Leah Tucker
-date: 2023-08-29
+date: 2023-08-30
 ---
 
 In today's cloud computing landscape, enterprises and SaaS platforms face challenges in managing complex databases and real-time data processing. These scenarios require storage solutions that are both robust and scalable. AWS offers Container Storage Interface (CSI) drivers for its various storage services, including Amazon Elastic Block Store (EBS). These drivers enable you to choose the right type of storage for your specific workload requirements. The EBS CSI driver, in particular, provides a Kubernetes-native way to provision and manage block storage on AWS. This allows you to dynamically provision storage, recover quickly from failures, and ensure data consistency, all within the context of Amazon EKS. Whether you're dealing with self-managed databases like PostgreSQL, MySQL, or MongoDB, the EBS CSI driver simplifies the deployment and scaling of these storage solutions.
 
-Building on the Amazon EKS cluster from **part 1** of our series, this tutorial dives into setting up the EBS CSI Driver Add-On. Included in the cluster configuration for the previous tutorial is the installation and association of the EBS CSI Driver Add-On and the OpenID Connect (OIDC) endpoint. For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/eks-cluster-high-traffic). Alternatively, to setup an existing cluster with the components required for this tutorial, use the instructions in [Create an IAM OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-dynamic-db-storage-ebs-csi&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Create an IAM Role for Service Account (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/csi-iam-role.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-dynamic-db-storage-ebs-csi&sc_geo=mult&sc_country=mult&sc_outcome=acq) in EKS official documentation.
+Building on the Amazon EKS cluster from **part 1** of our series, this tutorial dives into setting up the EBS CSI Driver Add-On. Included in the cluster configuration for the previous tutorial is the installation and association of the EBS CSI Driver Add-On and the OpenID Connect (OIDC) endpoint. For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/eks-cluster-high-traffic). Alternatively, to set up an existing cluster with the components required for this tutorial, use the instructions in [Create an IAM OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-dynamic-db-storage-ebs-csi&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Create an IAM Role for Service Account (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/csi-iam-role.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-dynamic-db-storage-ebs-csi&sc_geo=mult&sc_country=mult&sc_outcome=acq) in EKS official documentation.
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -65,31 +65,31 @@ Before interacting with your Amazon EKS cluster using Helm or other command-line
 kubectl config current-context
 ```
 
-1. Define the `CLUSTER_NAME` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
+2. Define the `CLUSTER_NAME` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
 
 ```bash
 export CLUSTER_NAME=$(aws eks describe-cluster --region us-east-2 --name managednodes-quickstart --query "cluster.name" --output text)
 ```
 
-1. Define the `CLUSTER_REGION` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
+3. Define the `CLUSTER_REGION` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
 
 ```bash
 export CLUSTER_REGION=$(aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.arn" --output text | cut -d: -f4)
 ```
 
-1. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
+4. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
 
 ```bash
 export CLUSTER_VPC=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --query "cluster.resourcesVpcConfig.vpcId" --output text)
 ```
 
-1. Define the `ACCOUNT_ID` environment variable for the account associated with your EKS cluster.
+5. Define the `ACCOUNT_ID` environment variable for the account associated with your EKS cluster.
 
 ```bash
 export ACCOUNT_ID=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --query "cluster.arn" --output text | cut -d':' -f5)
 ```
 
-## Step 2: Verify or Create the IAM role and Service Account
+## Step 2: Verify or Create the IAM Role and Service Account
 
 The `ebs-csi-controller-sa` service account is crucial for managing EBS volumes in Kubernetes. Make sure it's correctly set up in the `kube-system` namespace on your cluster.
 
@@ -163,7 +163,7 @@ The expected output should look like this:
 2023-08-19 10:13:14 [ℹ]  creating addon
 ```
 
-## Step 4: Create a Kubernetes secret
+## Step 4: Create a Kubernetes Secret
 
 In this section, you will create a Kubernetes secret to securely store the MySQL credentials. By using a secret, you can keep sensitive information such as passwords and user names out of your application code and configuration files. This enhances the security of your application by allowing you to manage access to this information separately from the rest of your application. The secret will be referenced in the StatefulSet to provide the necessary environment variables to the MySQL container.
 
@@ -176,13 +176,13 @@ MYSQL_PASSWORD=my-secret-user-pw
 MYSQL_DATABASE=sample
 ```
 
-1. In the same directory as the `.env` file you just created, run the following command to create a Kubernetes secret with sensitive credentials.
+2. In the same directory as the `.env` file you just created, run the following command to create a Kubernetes secret with sensitive credentials.
 
 ```bash
 kubectl create secret generic mysql-secrets --from-env-file=.env
 ```
 
-## Step 5: Deploy a MySQL database
+## Step 5: Deploy a MySQL Database
 
 This file contains the necessary Kubernetes manifests to set up the Amazon EBS CSI Driver on an Amazon EKS cluster. It defines a StorageClass named `ebs-sc` that sets up storage provisioning on AWS EBS, with a binding mode that waits for the first consumer; and a Pod named `mysql-ebs` that runs a Linux OS container. It also specifies the EBS CSI Driver as the provisioner (i.e., `ebs.csi.aws.com`). Together, these components provide a complete example of defining, claiming, and utilizing persistent storage within a Kubernetes cluster.
 
@@ -242,7 +242,7 @@ spec:
             storage: 30Gi
 ```
 
-1. Deploy the Kubernetes resources in `mysql-ebs.yaml`:
+2. Deploy the Kubernetes resources in `mysql-ebs.yaml`:
 
 ```bash
 kubectl apply -f mysql-ebs.yaml
@@ -273,7 +273,7 @@ tmpfs 3.8G 0 3.8G 0% /proc/acpi
 tmpfs 3.8G 0 3.8G 0% /sys/firmware
 ```
 
-## Clean up
+## Clean Up
 
 After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created. You can delete the service account and other resources with the following commands:
 
