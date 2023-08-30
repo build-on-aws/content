@@ -13,7 +13,7 @@ authorName: Peter-John Morgenrood
 date: 2023-08-16
 ---
 ## Introduction
-In this blog, I will show you how you can build a multi-region disaster recovery environment for [Amazon AppStream 2.0](https://aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). Having a disaster recovery (DR) region configured is essential for business continuity during an outage. Without a disaster recovery plan, customers would have to rebuild their environment in a new
+In this blog, I will show you how you can build a multi-region disaster recovery environment for [Amazon AppStream 2.0](https://aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). These concepts can also apply to other virtual desktop environments such as [AWS WorkSpaces](https://aws.amazon.com/workspaces?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) or [Citrix virtual desktops](https://www.citrix.com/solutions/vdi-and-daas/what-is-a-virtual-desktop.html) to name a few. Having a disaster recovery (DR) region configured is essential for business continuity during an outage. Without a disaster recovery plan, customers would have to rebuild their environment in a new
 region during the outage and in some cases, lose data or access to user profile settings.
 Rebuilding can be difficult and time consuming, which can impact revenue. There is potential for human error when rebuilding a new environment under production downtime pressure. Planning and maintaining
 a disaster recovery mechanism to avoid compromising business performance is essential for businesses of all sizes.
@@ -27,10 +27,10 @@ AppStream
 that address DR for customer environments that are using [Home Folder
 Synchronization](https://docs.aws.amazon.com/appstream2/latest/developerguide/home-folders.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 
-While these are excellent solutions, they mainly cater to customers using
-[Application Settings Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), a feature which stores user application settings data in Amazon S3. This is limited to a user profile sizes of under 1GB as anything larger will impact log-on times of the users. 1GB profile size would not be suitable for applications such as Microsoft Office 365 that stores a few gigabytes of data inside the user profile folder.
+While these are excellent solutions, they cater to customers using
+[Application Settings Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), a feature which stores user profile and application settings data in Amazon S3. This limits a users profile size to under 1GB. Anything larger will impact the log-on experience, and would not be suitable for applications such as Microsoft Office 365 that can grow in size fast.
 
-Some customers require user profile sizes to be larger than 1GB, dynamically expandable, and at the same time have limited impact to performance and log-on times.
+Some customers require user profile sizes to be larger than 20GB, dynamically expandable, and at the same time have limited impact to performance and log-on times.
 To meet these requirements, customers can use a high speed network storage service paired with FSLogix, [Cloud Cache](https://learn.microsoft.com/en-us/fslogix/cloud-cache-resiliency-availability-cncpt), a technology that provides incremental replication of user profile and office containers. Cloud Cache automatically replicates the local cache and user profile data between the two SMB locations, when one location goes down, another takes over seamlessly. This enables any virtual desktop service or on premise device to store user profile data on Server Message Block (SMB) shares, located in different regions, without the need to deploy complex replication infrastructure. FSLogix Cloud Cache takes care of VHD(x) replication automatically, reduces management overhead and facilitates Disaster Recovery.
 By distributing the inputs and outputs per second (IOPS) to the local disk cache of each operating system, FSLogix Cloud Cache reduces the IOPS consumption and infrastructure required to host a central storage solution.
 
@@ -45,6 +45,9 @@ Storing user profiles on an SMB share provides:
 1. AppStream 2.0 users can share folders between different AppStream fleets, which was challenging when using S3 for home folders. 
 1. Terabytes of user profile and other data stored on premise can be accessed securely and remotely using AppStream 2.0 and [Amazon FSx File Gateway](https://aws.amazon.com/storagegateway/file/fsx?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), which provide seamless read and write activity when files are shared between their on-premises locations and the cloud. Users will have a similar experience inside a virtual desktop as they do on-premise using a physical laptop\device
 1. Fine grained access control of data from a central source such as Active Directory (AD) that integrates with existing onboarding workflows and security folder monitoring tools.
+1. Reduces administration by removing the need to maintain a full list of inclusions and exclusions for profile roaming
+
+
 
 In this blog, I will guide you through how to build a multi-region disaster recovery environment for Amazon AppStream 2.0 using Amazon FSx for Windows as a storage location.
 
@@ -210,9 +213,9 @@ $FSxRemotePowerShellEndpoint = "amznfsxkamxenex.mytestdomain.local"
 $Credential = Get-Credential
 # The folder name created in step 1.
 $RootShareName = "Profiles"
-# Convert Profiles Folder Into SMB Share On Primary
+# Convert Profiles Folder Into SMB Share
 Invoke-Command -ConfigurationName FSxRemoteAdmin -ComputerName $FSxRemotePowerShellEndpoint -Credential $Credential -scriptblock {New-FSxSmbShare -Name $Using:RootShareName -Path "D:\$Using:RootShareName" -Description "FSLogix Profiles Share" -Credential $Using:Credential}
-# Grant Everyone Full Control On Primary (this only applies to the share and access will still be limited to the NTFS permissions set in step 1.1 )
+# Grant Everyone Full Control (this only applies to the share and access will still be limited to the NTFS permissions set in step 1.1 )
 Invoke-Command -ConfigurationName FSxRemoteAdmin -ComputerName $FSxRemotePowerShellEndpoint -Credential $Credential -scriptblock {Grant-FSxSmbShareAccess -Name $Using:RootShareName -AccountName Everyone -AccessRight Full} 
 ```
 
@@ -241,7 +244,9 @@ software**
 Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass -like 'User'} | Remove-LocalGroupMember 'FSLogix ODFC Include List'
 ```
 
-6.  Select the **FSLogix Profile Include List** group. **Remove** “Everyone” and modify the list of Members so that your Security Group for  AppStream 2.0/FSLogix users is included. Choose **Apply** and   **OK**.
+6.  FSLogix Profile Include List group is the include list for dynamic profiles. Select the **FSLogix Profile Include List** group. **Remove** “Everyone” and modify the list of Members so that your Security Group for  AppStream 2.0/FSLogix users is included. Choose **Apply** and   **OK**.
+
+
 
 ### Step 4: Setup the Group Policy to configure FSLogix
 
@@ -268,12 +273,13 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
 
 6.  Go to Profile Containers \> Cloud Cache and set **Clear local cache on logoff** \> Disabled
 
-8.  **IsDynamic:** If enabled, the profile container uses the minimum space on disk regardless of what is specified in SizeInMBs. As your user profile container grows in size, the amount of data on disk will grow up to the size specified in SizeInMBs. There are many other options. You can find the full list of Profile Container configuration settings in [Profile Container registry configuration reference](https://docs.microsoft.com/en-us/fslogix/profile-container-configuration-reference).
+8.  **IsDynamic:** If enabled, the profile container uses the minimum space on disk regardless of what is specified in SizeInMBs. As your user profile container grows in size, the amount of data on disk will grow up to the size specified in SizeInMBs.
+ **Note:** When the data is deleted inside the user environment, the VHD(x) file size on disk remains the same. 
+Free space will not be reclaimed and your VHD file will not auto shrink.
+The some solutions are to schedule commands or a [script](https://github.com/FSLogix/Invoke-FslShrinkDisk) in order to periodically remove empty blocks from a dynamically-expanding virtual hard disk file. Please see Microsoft article [My storage is running out of space because of FSLogix!](https://techcommunity.microsoft.com/t5/fslogix-blog/my-storage-is-running-out-of-space-because-of-fslogix/ba-p/1333170)
+I recommend against using a lower maximum size as this approach will restrict the size of the profile. If the container fills, applications will not handle the lack of available space gracefully. This can cause a crash or data loss. There are many other options. You can find the full list of Profile Container configuration settings in [Profile Container registry configuration reference](https://docs.microsoft.com/en-us/fslogix/profile-container-configuration-reference).
 
-9.  Please disable the [VHDLocations](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::0ceb51ebe4453fc710be22f8eb646d91)
-    if you are using it and only enable
-    [CCDLocations](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::4aa3e56009bb2b4246504d7bddaac159)
-    for Cloud Cache.
+9.  Please disable the [VHDLocations](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::0ceb51ebe4453fc710be22f8eb646d91) if you are using it and only enable [CCDLocations](https://admx.help/?Category=FSLogixApps&Policy=FSLogix.Policies::4aa3e56009bb2b4246504d7bddaac159) for Cloud Cache.
 
 10. **Cloud Cache locations** (no spaces, one line and in this
     order, replace **fsxPrimary.asx.local** and **fsxDR.asx.local** with your storage server DNS names accordingly.)
