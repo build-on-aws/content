@@ -7,6 +7,7 @@ posts:
     - deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail
     - deploy-a-java-application-on-linux
     - manage-security-and-costs-across-the-enterprise-with-aws-organizations
+    - learning-aws-iam-by-writing-your-first-policies-for-groups-and-users
 --- 
 
 | SeriesToC |
