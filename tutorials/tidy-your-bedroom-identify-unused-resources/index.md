@@ -40,6 +40,7 @@ No one likes having to tidy their bedroom when they're tired and just want to sl
 * your account will end up like a messy bedroom with stuff lying about everywhere (or in lots of different AWS regions),
 * some of these resources will cost you money every month, even if you are not actively using them. You created them, but didn't remove them, and now you will have to cover the cost. It may not be very much, but it adds up, and wouldn't you rather spend money on things you actually need, than no longer needed resources?  
 
+![A photo of messy clothing strewn about on shelves](images/AdobeStock_65680526.jpeg "Messy bedrooms / messy cloud resources")
 Following a 'Clean as You Go' approach is better, and avoids a messy bedroom and AWS account. In case you didn't do that, I'm going to explain how unneeded resources can quickly add up, and how to identify them in this tutorial.
 
 ## How to Identify Unused Resources?
@@ -54,6 +55,8 @@ Then I logged into my **AWS Management Console** to be greeted with an unexpecte
 
 I didn't think I had anything running in my account, but I soon discovered that the resources that Amplify had provisioned for me were still active in the account, waiting to be used, and costing me money each month. SageMaker Studio was patiently waiting for me to come back and do some more data science, and the cost was adding up. I no longer needed any of these resources, but I was presented with a challenge - how do I find **all** the S3 buckets, DynamoDB tables etc. that Amplify and SageMaker had created? To make it more complicated, I had written the Amplify workshop in the **eu-west-1** region, and tested it in different regions including **us-east-1** and **us-east-2** regions. How would I find *all* my resources in *all* my regions without an extensive hunt?  
 
+![A photo of person buried under a pile of clothing with their hands in the air surrendering](images/AdobeStock_65681069.jpeg "Don't surrender to the mess!")
+
 The easiest way I have found is to use **[AWS Resource Explorer](https://docs.aws.amazon.com/resource-explorer/latest/userguide/welcome.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq)**.  
 
 ## AWS Resource Explorer
@@ -67,7 +70,7 @@ The following tutorial steps will show you how to:
 1. Set up AWS Resource Explorer
 1. Find all resources in your account
 1. Find specific resource types in your account
-1. Creating custom views
+1. Create a custom view
 
 *Note: AWS Resource Explorer does not support every single type of resource that exists. Some resource types may not be supported yet or may be added in the future. It does support many of the common resource types, and you can check the whole list of [supported types](https://docs.aws.amazon.com/resource-explorer/latest/userguide/supported-resource-types.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq).*  
 
@@ -134,7 +137,7 @@ With that understanding, I decide to start with DynamoDB resources. You may not 
 
 *Note: If you have a great number of resources to be deleted, manually deleting them this way might take a **long** time, as each deletion will be challenged to ensure you are certain. If you are an advanced user, an AWS CLI query will list all the resources of a certain type in a certain region and you can pipe that output to a CLI delete function. This is beyond the scope of this post, but an option if you are comfortable with the CLI. If you are a student, I recommend understanding the AWS Console first, and then learning how to use the AWS CLI.*
 
-#### Step 4: Creating custom views
+#### Step 4: Create a custom view
 
 It's possible that you will need an additional view for certain resource types. For instance, a lecturer who provisioned a separate Lambda function in a single region for each of their students might want a view showing only these resources.
 
@@ -146,7 +149,9 @@ It's possible that you will need an additional view for certain resource types. 
 
 1. Add the filter query, in this example, `resourcetype:lambda:function region:eu-west-1` will return only **Lambda functions** in the region **Europe (Ireland) eu-west-1**. You can check all the [query syntax](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html?icmpid=docs_arex_hp_ss_create_resourcetype_wizard&sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) for more complex queries.
 1. Select `Create View`.
-
+1. It will take some time to create each view, but once it is ready, you can see the results of the view and query by:
+  1. selecting `Resource search` from the left navigation pane and changing the `View` dropdown to your view's name or 
+  1. selecting `Views`  from the left navigation pane, select the view of choice and then select `Explore resources`.
 ![A create view widget](images/filtered-view.png "A create view widget")
 
 *Note: just like the default view, it can take several minutes to a few hours create the view, depending on the number of regions and number of resources you have. Expect it to take some time even on relatively small accounts.*
@@ -157,8 +162,12 @@ It's easy for AWS resources to proliferate as we prototype, experiment, and lear
 
 AWS Resource Explorer is a valuable service to help understand what resources you have and where they are. This will help drill down to orphaned and unused resources, and let you identify what needs to be cleaned up.
 
-Keeping your AWS resources in order is an important part of cloud cost optimization and fiscal responsibility. Regularly scan for resources you no longer need, delete what you won't use again, and make resource hygiene part of your workflow. Small efforts compound over time into significant savings and prevent billing surprises. Keep your cloud nice and tidy!
+![Tidy clothing neatly folded and stored](images/AdobeStock_65680523.jpeg "Everything nice and tidy")
+
+Keeping your AWS resources in order is an important part of cloud cost optimization and fiscal responsibility. Regularly scan for resources you no longer need, delete what you won't use again, and make resource hygiene part of your workflow. Small efforts compound over time into significant savings and prevent billing surprises. Keep your cloud nice and tidy!  
+
+*If you are a student interested in learning more about the AWS Community, please check out our [Student Hub](https://s12d.com/students).*
 
 ## About the Author
 
-Stephen is an Academic Developer Advocate at AWS, supporting students and faculty on their cloud skills journey. When not teaching, learning, or tidying his bedroom, Stephen likes to read, write, and play science fiction stories with his family.
+Stephen is an Academic Developer Advocate at AWS, supporting students and faculty on their cloud skills journey. When not teaching, learning, or tidying his bedroom, Stephen likes to [read | write | play] science fiction [books | stories | games] with his family.  
