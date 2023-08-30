@@ -149,10 +149,13 @@ It's possible that you will need an additional view for certain resource types. 
 
 1. Add the filter query, in this example, `resourcetype:lambda:function region:eu-west-1` will return only **Lambda functions** in the region **Europe (Ireland) eu-west-1**. You can check all the [query syntax](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html?icmpid=docs_arex_hp_ss_create_resourcetype_wizard&sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) for more complex queries.
 1. Select `Create View`.
-1. It will take some time to create each view, but once it is ready, you can see the results of the view and query by:
-  1. selecting `Resource search` from the left navigation pane and changing the `View` dropdown to your view's name or 
-  1. selecting `Views`  from the left navigation pane, select the view of choice and then select `Explore resources`.
+
 ![A create view widget](images/filtered-view.png "A create view widget")
+
+1. It will take some time to create each view, but once it is ready, you can see the results of the view and query by:
+
+  * selecting `Resource search` from the left navigation pane and changing the `View` dropdown to your view's name or
+  * selecting `Views`  from the left navigation pane, select the view of choice and then select `Explore resources`.
 
 *Note: just like the default view, it can take several minutes to a few hours create the view, depending on the number of regions and number of resources you have. Expect it to take some time even on relatively small accounts.*
 
