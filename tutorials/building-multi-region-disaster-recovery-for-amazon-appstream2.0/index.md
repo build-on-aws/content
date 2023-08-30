@@ -95,9 +95,8 @@ region, per AWS Organization.*
 ## Solution overview
 
 
-![Figure 1 shows the components and traffic flow for the solution.](images/image1.png "Solution architecture")
+![Figure 1 shows the components and traffic flow for the solution.](images/image1.png "Figure 1. Solution architecture")
 
-*Figure 1: Solution architecture*
 
 The high level steps is as follows:
 
@@ -175,9 +174,9 @@ on the folder as follows:
   group if using AWS Managed AD and do not have access to domain admins.
 
 
-![Image showing the NTFS permissions •Users – Create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only](images/image2.png "Advanced permissions of profiles folder")
+![Image showing the NTFS permissions •Users – Create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only](images/image2.png "Figure 2. Advanced permissions of profiles folder")
 
-*Figure 2: Advanced permissions of profiles folder*
+* Advanced permissions of profiles folder*
 
  Once the folder NTFS permissions have been setup on your primary region manually, you can clone the ACLs to the FSx file server in your DR region using PowerShell:
 
@@ -192,9 +191,7 @@ Get-ACl -Path '\\FSxPrimary.asx.local\D$\Profiles' | Set-ACL '\\FSxDR.asx.local\
  follow [these steps](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for detailed instructions.
 
 
-![Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder](images/image3.png "Profiles folder")
-
-*Figure 3: Profiles folder on D:\ of FSx for Windows being selected as network share*
+![Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder](images/image3.png "Figure 3. Profiles folder on D:\ of FSx for Windows being selected as network share")
 
 
 The permissions on the share can be set to EVERYONE or Authenticated
@@ -202,9 +199,8 @@ Users – Full Control (Apply onto: **This Folder, Subfolders and
 Files**) as this only applies to the share and access will be limited
 to the NTFS permissions set in step 1.1.
 
-![Image showing the SMB Share permissions of the profile folder. Permissions being Everyone full control](images/image4.png "Profile Folder Permissions")
+![Image showing the SMB Share permissions of the profile folder. Permissions being Everyone full control](images/image4.png "Figure 4. Share permissions of profiles folder")
 
-*Figure 4: Share permissions of profiles folder*
 
 ### Step 3: Install and configure FSLogix
 
@@ -315,15 +311,13 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
     Federation.” Select the AWS Account Federation app and choose **Add
     Integration**.
 
-![Image of the Okta console, browse app integration catalog. The text AWS Federation in the search bar brings up the AWS Account Federation app for SAML authentication.](images/image5.png "Okta Applications Catalog AWS Account Federation SAML application") 
+![Image of the Okta console, browse app integration catalog. The text AWS Federation in the search bar brings up the AWS Account Federation app for SAML authentication.](images/image5.png "Figure 5. Okta Applications Catalog AWS Account Federation SAML application") 
 
-*Figure 5: Okta Applications Catalog AWS Account Federation SAML application*
 
 1.  Change the **Application label** to something descriptive to
     represent your primary region and choose **next**  
-![Add AWS Account Federation, under general settings then application label value is AppStream Primary](images/image6.png "Okta Integration for AWS Account Federation General Settings")
+![Add AWS Account Federation, under general settings then application label value is AppStream Primary](images/image6.png "Figure 6. Okta Integration for AWS Account Federation General Settings")
 
-*Figure 6: Okta Integration for AWS Account Federation General Settings*
 
 1. To avoid duplication, follow steps found in blog post [Improve the Availability of  Existing Okta IAM Federation Setup Using Multi-Region SAML Endpoints](https://aws.amazon.com/blogs/apn/improve-the-availability-of-existing-okta-iam-federation-setup-using-multi-region-saml-endpoints?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
       
@@ -340,9 +334,8 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
 https://**appstream2.eu-central-1.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**
 
 
-![Okta Integration for AWS Account Federation Sign On Tab selected and highlighting eu-central-1 in the Default Relay State text box. The text box has the text https://appstream2.eu-central-1.aws.amazon.com/saml?stack=MyAS2StackName&amp;accountId=123456](images/image7.png "Okta Integration for AWS Account Federation Sign On Tab")
+![Okta Integration for AWS Account Federation Sign On Tab selected and highlighting eu-central-1 in the Default Relay State text box. The text box has the text https://appstream2.eu-central-1.aws.amazon.com/saml?stack=MyAS2StackName&amp;accountId=123456](images/image7.png "Figure 7. Okta Integration for AWS Account Federation Sign On Tab")
 
-*Figure 7: Okta Integration for AWS Account Federation Sign On Tab*
 
 **London:**  
 https://**appstream2.eu-west-2.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**  
@@ -397,18 +390,15 @@ Log in into your Okta admin console. From the left panel, select
 Select the Application, In this blog it is called AppStream Primary, 
 Select **Assignments**, Edit (pencil icon), Select the correct Role, in my account it is called “oktarole”, edit the users domain (@as2.local) in the UserName field to match the Amazon AppStream 2.0 fleet domain, if needed and **Save.** Repeat for DR region.
 
-![Okta Integration for AWS Account Federation Assignments Tab. User Name text box with the username admin@as2.local and an arrow indicating that this field can provide an optional domain change. Used when your okta is linked to a domain that is different to the AppStream fleet domain.](images/image8.png "Okta Integration for AWS Account Federation Assignments Tab")
+![Okta Integration for AWS Account Federation Assignments Tab. User Name text box with the username admin@as2.local and an arrow indicating that this field can provide an optional domain change. Used when your okta is linked to a domain that is different to the AppStream fleet domain.](images/image8.png "Figure 8. Okta Integration for AWS Account Federation Assignments Tab")
 
-*Figure 8: Okta Integration for AWS Account Federation Assignments Tab*
 
 After completing the Okta application configuration, IAM Role and SAML
 identity provider setup, your Okta dashboard should have two
 applications:  
   
-![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Okta Dashboard")
+![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
 
-*Figure 9: Okta Dashboard with two AWS Account SAML federation applications
-AppStream Primary and AppStream DR*
 
 ### Step 9: Test if DR is working as expected
 
@@ -422,22 +412,20 @@ AppStream Primary and AppStream DR*
     ```
     and confirm that the user profile folder and vhdx file appears under the specified SMB    locations, set in step 3. Take note of the initial profile size
 
-![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "EC2 Windows File Explorer Connected to FSx Primary and DR")
+![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "Figure 10. EC2 Windows File Explorer Connected to FSx Primary and DR")
 
-*Figure 10: EC2 Windows File Explorer Connected to FSx Primary and DR*
 
 3.  Add some files to your Documents folder
 
-![EC2 Windows File Explorer Window, Adding test data called TPS Report Documents to the user profile, Documents folder in order to simulate profile size increase.](images/image11.png "EC2 Windows File Explorer Adding Documents to user profile")
+![EC2 Windows File Explorer Window, Adding test data called TPS Report Documents to the user profile, Documents folder in order to simulate profile size increase.](images/image11.png "Figure 11. EC2 Windows File Explorer Adding Documents to user profile")
 
-*Figure 11: EC2 Windows File Explorer Adding Documents to user profile*
+
 
 4.  Verify profiles sizes have increased in both Primary and DR SMB
     locations
 
-![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a new size of 397,312 KB](images/image12.png "EC2 Windows File Explorer Connected to FSx Primary and DR" )
+![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a new size of 397,312 KB](images/image12.png "Figure 12. EC2 Windows File Explorer Connected to FSx Primary and DR" )
 
-*Figure 12: EC2 Windows File Explorer Connected to FSx Primary and DR*
 
 5.  End the Amazon AppStream 2.0 streaming session
 
