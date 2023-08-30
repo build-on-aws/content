@@ -15,7 +15,7 @@ spaces:
   - kubernetes
 authorGithubAlias: tucktuck9
 authorName: Leah Tucker
-date: 2023-08-29
+date: 2023-08-30
 ---
 
 In the multifaceted realm of networking, managing access to applications within a Kubernetes cluster is a sophisticated endeavor. The AWS Load Balancer Controller (LBC) is vital, streamlining the routing of traffic to your applications via IPv6, the protocol increasingly adopted for internet communication. This tutorial hones in on IPv6 within a Kubernetes cluster, utilizing AWS LBC to manage ingress (i.e. external traffic). It introduces Ingress Classes, an essential mechanism for controlling external access to services within an IPv6-enabled Kubernetes cluster, and Ingress Group, a feature that groups multiple Ingress resources into one Application Load Balancer (ALB), enhancing both efficiency and ALB management. Whether dealing with agile microservices or robust systems, this tutorial offers step-by-step directions for smooth traffic flow. With AWS LBC, the intricacies of traffic management are greatly simplified, allowing you to concentrate on your application, while AWS LBC takes care of the routing. As traffic shifts, AWS LBC adapts, assuring uninterrupted access to your application over IPv6.
@@ -30,7 +30,7 @@ In this tutorial, you will set up the AWS Load Balancer Controller (LBC) on your
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv6&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-08-29                                                      |
+| ⏰ Last Updated        | 2023-08-30                                                      |
 
 | ToC |
 |-----|
