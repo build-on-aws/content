@@ -195,11 +195,26 @@ Get-ACl -Path '\\FSxPrimary.asx.local\D$\Profiles' | Set-ACL '\\FSxDR.asx.local\
 
 
 The permissions on the share can be set to EVERYONE or Authenticated
-Users – Full Control (Apply onto: **This Folder, Subfolders and
+Users – Full Control (Apply onto: **This Folder, Sub-folders and
 Files**) as this only applies to the share and access will be limited
 to the NTFS permissions set in step 1.1.
 
 ![Image showing the SMB Share permissions of the profile folder. Permissions being Everyone full control](images/image4.png "Figure 4. Share permissions of profiles folder")
+
+You can also set these permissions using PowerShell by running the following commands:
+
+```powershell
+# Edit $FSxRemotePowerShellEndpoint to match your FSx Primary and run again for FSx DR
+$FSxRemotePowerShellEndpoint = "amznfsxkamxenex.mytestdomain.local"
+# Create credential object
+$Credential = Get-Credential
+# The folder name created in step 1.
+$RootShareName = "Profiles"
+# Convert Profiles Folder Into SMB Share On Primary
+Invoke-Command -ConfigurationName FSxRemoteAdmin -ComputerName $FSxRemotePowerShellEndpoint -Credential $Credential -scriptblock {New-FSxSmbShare -Name $Using:RootShareName -Path "D:\$Using:RootShareName" -Description "FSLogix Profiles Share" -Credential $Using:Credential}
+# Grant Everyone Full Control On Primary (this only applies to the share and access will still be limited to the NTFS permissions set in step 1.1 )
+Invoke-Command -ConfigurationName FSxRemoteAdmin -ComputerName $FSxRemotePowerShellEndpoint -Credential $Credential -scriptblock {Grant-FSxSmbShareAccess -Name $Using:RootShareName -AccountName Everyone -AccessRight Full} 
+```
 
 
 ### Step 3: Install and configure FSLogix
