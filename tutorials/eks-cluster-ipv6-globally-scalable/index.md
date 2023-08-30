@@ -15,7 +15,7 @@ spaces:
   - kubernetes
 authorGithubAlias: ratnopamc
 authorName: Ratnopam Chakrabarti
-date: 2023-08-29
+date: 2023-08-30
 ---
 
 With the explosive growth of the internet and the exponential increase in the number of internet-enabled applications, the need for routable IP addresses has been steadily increasing. With depleting IP addresses in the IPv4 address space, the industry has been transitioning into using IPv6. A number of businesses running containerized applications on Amazon EKS have experienced the IP exhaustion problem, caused by the limited size of the IPv4 address space. Temporary solutions like custom networking on IPv4 or using private NAT gateways involve complex routing configurations. With EKS IPv6 support, businesses can now create EKS clusters where pods are assigned a globally routable IPv6 address, easily scaling applications without consuming limited private IPv4 address space. With 128 bits of address space, IPv6 provides 340 undecillion IP addresses, offering a truly long-term solution to the IP exhaustion problem without needing complex routing mechanisms, while improving network performance. The globally routable IPv6 address can be used to directly communicate with any IPv6 endpoint in Amazon VPC, on-premises network, or the public internet, enabled through the Amazon VPC CNI plugin, which integrates with the EC2 networking stack for high performance and reliability.
@@ -26,7 +26,7 @@ With the explosive growth of the internet and the exponential increase in the nu
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-08-29                                                      |
+| ⏰ Last Updated        | 2023-08-30                                                      |
 
 | ToC |
 |-----|
