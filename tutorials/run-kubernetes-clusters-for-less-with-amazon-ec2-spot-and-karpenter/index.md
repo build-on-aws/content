@@ -271,7 +271,7 @@ By reading the logs, you can see that Karpenter:
 
 ## Step 5: Spread Pods Within Multiple AZs
 
-Karpenter launched only one node for all pending pods. However, putting all eggs in the same basket is not recommended as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll have an impact). To avoid these, and make the workload more highly-available, let’s spread the pods within multiple AZs. To do so, let’s configure a [Topology Spread Constraint](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`. To do so, add the following snippet within the `Deployment` spec block (after the `nodeSelector` block) you deployed in the previous step:
+Karpenter launched only one node for all pending pods. However, putting all eggs in the same basket is not recommended as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll have an impact). To avoid this, and make the workload more highly-available, let’s spread the pods within multiple AZs. To do so, let’s configure a [Topology Spread Constraint](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`. To do so, add the following snippet within the `Deployment` spec block (after the `nodeSelector` block) you deployed in the previous step:
 
 ```bash
       topologySpreadConstraints:
