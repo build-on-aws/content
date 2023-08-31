@@ -56,7 +56,7 @@ One of the main advantages of using Karpenter is the simplicity of configuring S
 
 
 
-## Pre-Requisites
+## Prerequisites
 
 * You need access to an AWS account with IAM permissions to create an EKS cluster, and an AWS Cloud9 environment if you're running the commands listed in this tutorial.
 * Install and configure the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq)
@@ -64,7 +64,7 @@ One of the main advantages of using Karpenter is the simplicity of configuring S
 * Install the [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * Install Helm ([the package manager for Kubernetes](https://helm.sh/docs/intro/install/))
 
-## Step 1: Create a Cloud9 environment
+## Step 1: Create a Cloud9 Environment
 
 > 💡 Tip: You can skip this step if you already have a Cloud9 environment or if you’re planning to run all steps on your own computer. Just make sure you have the proper permissions listed in the pre-requisites section of this tutorial.
 
@@ -108,7 +108,7 @@ terraform init
 terraform apply --auto-approve
 ```
 
-Once complete (after waiting for around 15 minutes), run the following command to update the `kube.config` file to interact with the cluster through `kubectl`:
+Once complete (after waiting about 15 minutes), run the following command to update the `kube.config` file to interact with the cluster through `kubectl`:
 
 ```bash
 aws eks --region eu-west-1 update-kubeconfig --name spot-and-karpenter
@@ -193,23 +193,23 @@ EOF
 
 Let me highlight a few important settings from the default `Provisioner` you just created:
 
-* `requirements`: here’s where you define the type of nodes Karpenter can launch. The idea here is to be as flexible as possible to let Karpenter choose the right instance type based on the pod requirements. For this `Provisioner`, you’re saying Karpenter can launch either Spot or On-Demand instances, families including `c`, `m` and `r`, with a minimum of 4 vCPUs and 8 GiB of Memory. With this configuration, you’re choosing around 150 instance types from the 700+ available today in AWS. Read next section to understand why this is important.
-* `limits`: this is how you constrain the maximum amount of resources that the `Provisioner` will manage. Karpenter can launch instances with different specs, so instead of limiting a max number of instances (as you’d typically do in an Auto Scaling group), you define a maximum of vCPUs or Memory to limit the number of nodes to launch. Karpenter provides a [metric to monitor the percentage usage](https://karpenter.sh/docs/concepts/metrics/#karpenter_provisioner_usage_pct) of this `Provisioner` based on the limits you configure.
+* `requirements`: Here’s where you define the type of nodes Karpenter can launch. Be as flexible as possible and let Karpenter choose the right instance type based on the pod requirements. For this `Provisioner`, you’re saying Karpenter can launch either Spot or On-Demand Instances, families including `c`, `m` and `r`, with a minimum of 4 vCPUs and 8 GiB of memory. With this configuration, you’re choosing around 150 instance types from the 700+ available today in AWS. Read the next section to understand why this is important.
+* `limits`: This is how you constrain the maximum amount of resources that the `Provisioner` will manage. Karpenter can launch instances with different specs, so instead of limiting a max number of instances (as you’d typically do in an Auto Scaling group), you define a maximum of vCPUs or memory to limit the number of nodes to launch. Karpenter provides a [metric to monitor the percentage usage](https://karpenter.sh/docs/concepts/metrics/#karpenter_provisioner_usage_pct) of this `Provisioner` based on the limits you configure.
 * `consolidation`: Karpenter does a great job at launching only the nodes you need, but as pods can come an go, at some point in time the cluster capacity can end up in a fragmented state. To avoid fragmentation and optimize the compute nodes in your cluster, you can enable [consolidation](https://karpenter.sh/docs/concepts/deprovisioning/#consolidation). When enabled, Karpenter works to actively reduce cluster cost by identifying when nodes can be removed, as their workloads will run on other nodes in the cluster, and when nodes can be replaced with cheaper variants due to a change in the workloads.
-* `ttlSecondsUntilExpired`: here’s where you define when a node will be deleted. This is useful to force new nodes with up to date AMI’s. In this example we have set the value to 7 days.
-* `providerRef`: here’s where you reference the template to launch a node. An `AWSNodeTemplate` is where you define which subnets, security groups, and IAM role the nodes will use. You can set node tags or even configure a [user-data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq). To learn more about which other configurations are available, go [here](https://karpenter.sh/docs/concepts/node-templates/).
+* `ttlSecondsUntilExpired`: Here’s where you define when a node will be deleted. This is useful to force new nodes with up-to-date AMI’s. In this example we have set the value to 7 days.
+* `providerRef`: This is where you reference the template to launch a node. An `AWSNodeTemplate` is where you define which subnets, security groups, and IAM role the nodes will use. You can set node tags or even configure a [user-data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq). To learn more about which other configurations are available, go [here](https://karpenter.sh/docs/concepts/node-templates/).
 
 You can learn more about which other configuration properties are available for a `Provisioner` [here](https://karpenter.sh/docs/concepts/provisioners/).
 
 ### Why it is a good practice to configure a diverse set of instance types?
 
-As you noticed, with the above `Provisioner` we’re basically letting Karpenter to choose from a diverse set of instance types to launch the best instance type possible. If it’s an On-Demand instance, Karpenter uses the `lowest-price` allocation strategy to launch the cheapest instance type that has available capacity. When you use multiple instance types, you can avoid the [InsufficientInstanceCapacity error](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+As you noticed, with the above `Provisioner` we’re basically letting Karpenter choose from a diverse set of instance types to launch the best instance type possible. If it’s an On-Demand Instance, Karpenter uses the `lowest-price` allocation strategy to launch the cheapest instance type that has available capacity. When you use multiple instance types, you can avoid the [InsufficientInstanceCapacity error](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-If it’s a Spot instance, Karpenter uses the `price-capacity-optimized` (PCO) allocation strategy. PCO looks at both price and capacity availability to launch from the [Spot instance pools](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html#spot-features?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) that are the least likely to be interrupted and have the lowest possible price. For Spot Instances, applying diversification is key. Spot Instances are spare capacity that can be reclaimed by EC2 when it is required. Karpenter allows you to diversify extensively to replace reclaimed Spot instances automatically with instances from other pools where capacity is available.
+If it’s a Spot Instance, Karpenter uses the `price-capacity-optimized` (PCO) allocation strategy. PCO looks at both price and capacity availability to launch from the [Spot Instance pools](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html#spot-features?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) that are the least likely to be interrupted and have the lowest possible price. For Spot Instances, applying diversification is key. Spot Instances are spare capacity that can be reclaimed by EC2 when it is required. Karpenter allows you to diversify extensively to replace reclaimed Spot Instances automatically with instances from other pools where capacity is available.
 
-## Step 4: Deploy a Spot-friendly workload
+## Step 4: Deploy a Spot-friendly Workload
 
-You’re now going to see Karpenter in action. Your default `Provisioner` can launch both On-Demand and Spot instances, but Karpenter considers the constraints you configure within a pod to launch the right node(s). Let’s create a Deployment with a [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) to run the pods on Spot instances. To do so, run the following command:
+You’re now going to see Karpenter in action. Your default `Provisioner` can launch both On-Demand and Spot Instances, but Karpenter considers the constraints you configure within a pod to launch the right node(s). Let’s create a Deployment with a [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) to run the pods on Spot instances. To do so, run the following command:
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -275,11 +275,11 @@ $ kl
 
 By reading the logs, you can see that Karpenter:
 
-* Noticed there were 10 pending pods, and decided that can fit all nodes in only one node
-* Is considering the kubelet and kube-proxy `Daemonsets` (2 additional pods), and it’s aggregating all resources need for 12 pods now. Moreover, Karpenter noticed that 100 instance types match these requirements.
-* Launched an `m5.2xlarge` Spot instance in `eu-west-1b` as this was the pool with more spare capacity with lowest price.
+* Noticed there were 10 pending pods, and decided that can fit all nodes in only one node.
+* Is considering the kubelet and kube-proxy `Daemonsets` (2 additional pods), and it’s aggregating all resources need for 12 pods. Moreover, Karpenter noticed that 100 instance types match these requirements.
+* Launched an `m5.2xlarge` Spot Instance in `eu-west-1b` as this was the pool with more spare capacity with lowest price.
 
-## Step 5: Spread Pods within multiple AZs
+## Step 5: Spread Pods Within Multiple AZs
 
 Karpenter launched only one node for all pending pods. However, putting all eggs in the same basket is not recommended as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll have an impact). To avoid these, and make the workload more highly-available, let’s spread the pods within multiple AZs. To do so, let’s configure a [Topology Spread Constraint](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`. To do so, add the following snippet within the `Deployment` spec block (after the `nodeSelector` block) you deployed in the previous step:
 
@@ -308,7 +308,7 @@ Create the stateless `Deployment` again. If you downloaded the manifest from Git
 kubectl apply -f workload.yaml
 ```
 
-Then, you can review the Karpenter logs and notice how different the actions are. After waiting for around a minute, you should see the pods running within three nodes in different AZs:
+Then, you can review the Karpenter logs and notice how different the actions are.  Wait one minute and you should see the pods running within three nodes in different AZs:
 
 ```bash
 kubectl get nodes -L karpenter.sh/capacity-type,beta.kubernetes.io/instance-type,topology.kubernetes.io/zone -l karpenter.sh/capacity-type=spot
@@ -323,7 +323,7 @@ ip-10-0-34-248.eu-west-1.compute.internal    Ready    <none>   2m3s   v1.27.3-ek
 ip-10-0-76-166.eu-west-1.compute.internal    Ready    <none>   2m4s   v1.27.3-eks-a5565ad   spot            m5.xlarge       eu-west-1b
 ```
 
-## Step 6: (Optional) Simulate Spot interruption
+## Step 6: (Optional) Simulate Spot Interruption
 
 You can simulate a Spot interruption to test the resiliency of your applications. As I said before, Spot is spare capacity for steep discounts in exchange for returning them when EC2 needs the capacity back. Spot interruptions have a 2 minute notice before EC2 reclaims the instance. Karpenter can watch these interruptions (the cluster you created with Terraform is already configured this way), and when this happens, the `Provisioner` starts a new node as soon as it sees the Spot interruption warning. Karpenter’s average node startup time means that, generally, there is sufficient time for the new node to become ready and to move the pods to the new node before the node is reclaimed.
 
@@ -342,11 +342,11 @@ alias kl='kubectl logs deployment/karpenter —since 5m -n karpenter -f';
 kl
 ```
 
-In the third terminal, run the following command, and choose one of the Spot instances listed:
+In the third terminal, run the following command, and choose one of the Spot Instances listed:
 
 ```bash
 $ ec2-spot-interrupter —interactive
-Which Spot instances would you like to interrupt?
+Which Spot Instances would you like to interrupt?
 
 > [x] i-06391b132dcc25a0b (karpenter.sh/provisioner-name/default)
   [ ] i-01876750d829475b6 (karpenter.sh/provisioner-name/default)
@@ -372,9 +372,9 @@ Press `Enter` two times, and the Spot interruption warning will be sent. Review 
 
 > 💡 Tip: You’ll end up seeing only two Spot nodes running, and if you review the Karpenter logs, you’ll see that it was because of the consolidation process.
 
-## Step 7: (Optional) Deploy a stateful workload
+## Step 7: (Optional) Deploy a Stateful Workload
 
-The purpose of this step is to show you that you can still launch On-Demand instances in a cluster that’s also running Spot instances for those non Spot-friendly workloads. You can continue using the default Karpenter `Provisioner` you created before. You just need to make sure you’re configuring the workload properly. One way of doing it is to use a similar approach for the Spot-friendly workload by using a `nodeSelector`.
+You can still launch On-Demand Instances in a cluster that’s also running Spot Instances for those non Spot-friendly workloads. Continue using the default Karpenter `Provisioner` you created before. But make sure you’re configuring the workload properly. One way of doing it is to use a similar approach for the Spot-friendly workload by using a `nodeSelector`.
 
 Deploy the following application to simulate a stateful workload:
 
@@ -407,7 +407,7 @@ spec:
 EOF
 ```
 
-Same as before, wait around one minute, and you should see all pods running and one On-Demand node running:
+Same as before, wait one minute, and you should see all pods running and one On-Demand node running:
 
 ```bash
 $ kubectl get nodes -L karpenter.sh/capacity-type,[beta.kubernetes.io/instance-type,topology.kubernetes.io/zone](http://beta.kubernetes.io/instance-type,topology.kubernetes.io/zone) -l karpenter.sh/capacity-type=on-demand
@@ -417,16 +417,16 @@ ip-10-0-102-206.eu-west-1.compute.internal Ready <none> 46s v1.27.3-eks-a5565ad 
 
 You can review the Karpenter logs as well, you’ll see a similar behavior as before with the Spot-friendly workload.
 
-## Step 8: Clean up
+## Step 8: Clean Up
 
-If you’re done playing with this tutorial, remove the two deployments you created:
+When you’re done with this tutorial, remove the two deployments you created:
 
 ```bash
 kubectl delete deployment stateless
 kubectl delete deployment stateful
 ```
 
-Wait around 30 seconds until the nodes that Karpenter launched are gone (due to consolidation), then remove all resources:
+Wait 30 seconds until the nodes that Karpenter launched are gone (due to consolidation), then remove all resources:
 
 ```bash
 terraform destroy --auto-approve
@@ -434,4 +434,6 @@ terraform destroy --auto-approve
 
 ## Conclusion
 
-Using Spot instances for your Kubernetes data plane nodes is going to help you start reducing compute costs right away. As long as your workloads are fault-tolerant, stateless, and can use a variety of instance types, you can use Spot. Karpenter allows you to simplify the process of configuring your EKS cluster with a high instance type diversification, and provisions only the capacity you need.
+Using Spot Instances for your Kubernetes data plane nodes helps you reduce computing costs. As long as your workloads are fault-tolerant, stateless, and can use a variety of instance types, you can use Spot. Karpenter allows you to simplify the process of configuring your EKS cluster with a high-instance type diversification, and provisions only the capacity you need.
+
+CONSIDER ADDING LINKS TO OTHER BLOGS RELATED TO THE TOPIC, EX: "Learn more about XYZ here ((ADD LINK)).
