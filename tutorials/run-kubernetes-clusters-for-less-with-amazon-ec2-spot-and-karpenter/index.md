@@ -265,7 +265,7 @@ $ kl
 
 By reading the logs, you can see that Karpenter:
 
-* Noticed there were 10 pending pods, and decided that can fit all nodes in only one node.
+* Noticed there were 10 pending pods, and decided that can fit all pods in only one node.
 * Is considering the kubelet and kube-proxy `Daemonsets` (2 additional pods), and it’s aggregating all resources need for 12 pods. Moreover, Karpenter noticed that 100 instance types match these requirements.
 * Launched an `m5.2xlarge` Spot Instance in `eu-west-1b` as this was the pool with more spare capacity with lowest price.
 
