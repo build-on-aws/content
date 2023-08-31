@@ -2,21 +2,11 @@
 title: "Run Kubernetes Clusters for Less with Amazon EC2 Spot and Karpenter"
 description: "Learn how to run Kubernetes clusters for up to 90% off with Amazon Elastic Kubernetes Service (EKS), Amazon EC2 Spot Instances and Karpenter in less than 45 minutes."
 tags:
-  - cost-optimization
-```Delete as we can only keep 5 and this is a general term
   - kubernetes
   - karpenter
-  - infrastructure-as-code
-```Delete as we can only keep 5 and this is a general term
   - terraform
   - eks  
   - spot  
-  - tutorials
-```Delete as we can only keep 5 and this is a general keyword
-  - compute
-```Delete as we can only keep 5 and this is a general keyword
-  - devops
-```Delete as we can only keep 5 and this is a general keyword
 spaces:
   - cost-optimization
   - kubernetes
