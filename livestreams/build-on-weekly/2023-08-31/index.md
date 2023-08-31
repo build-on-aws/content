@@ -13,7 +13,7 @@ authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 additionalAuthors: 
   - authorGithubAlias: gaonkarr
-    authorName: Rohini Goankar
+    authorName: Rohini Gaonkar
 date: 2023-08-31
 spaces:
   - livestreams
@@ -28,6 +28,7 @@ How do you get that WordPress website up and running in the cloud? Do you use an
 First we take a simple approach and set up WordPress on an [AWS EC2](https://go.aws/3YX93ou) instance. This gives a flexibility to approach this problem from many directions, as we have the entire virtual server to ourselves. Today we have decided to host our WordPress website using [Docker](https://docs.docker.com/engine/install/ubuntu/), specifically [Docker Compose](https://docs.docker.com/compose/). As that allows us to host multiple different WordPress websites (maybe even different versions) on the same server.
 
 Here is the `docker-compose.yml` file we used for today's deployment:
+
 ```yaml
 services:
   db:
@@ -63,6 +64,7 @@ volumes:
   db_data:
   wp_data:
 ```
+
 But make sure to check out the full guide Darko has followed [here](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/).
 
 ### Using Amazon Lightsail
@@ -85,6 +87,6 @@ https://www.twitch.tv/videos/1913458536
 
 **Reach out to the hosts and guests:**
 
-- Rohini: [https://www.linkedin.com/in/rohinigaonkar/](https://www.linkedin.com/in/rohinigaonkar/) 
-- Sophia: [https://www.linkedin.com/in/sophiaparafina/](https://www.linkedin.com/in/sophiaparafina/) 
+- Rohini: [https://www.linkedin.com/in/rohinigaonkar/](https://www.linkedin.com/in/rohinigaonkar/)
+- Sophia: [https://www.linkedin.com/in/sophiaparafina/](https://www.linkedin.com/in/sophiaparafina/)
 - Darko: [https://twitter.com/darkosubotica](https://twitter.com/darkosubotica)
