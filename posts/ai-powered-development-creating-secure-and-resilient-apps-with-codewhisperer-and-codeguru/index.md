@@ -3,10 +3,10 @@ title: "AI-Powered Development: Creating Secure and Resilient Apps with CodeWhis
 description: "Learn about advances in AI developer tools and how they can help increase your applications' security, availability, and resiliency."
 tags:
   - ai-ml
+  - gen-ai
   - data-science
   - devops
   - security
-  - resilience
   - codewhisperer
   - codeguru
   - sagemaker
@@ -20,7 +20,7 @@ date: 2023-08-22
 
 Nowadays, users expect the applications that they use to have 100% uptime and be available 24/7. However, it can be a complex endeavor for developers building these applications to understand and apply all the best practices for designing highly available systems. Fortunately, advances in AI now enable developers to use AI-powered tools to analyze source code, detect anomalies, suggest fixes, and monitor system health to boost reliability. Here I will share with you how this combination of AI and software development is enabling a new generation of highly available applications established around proven and optimal methodologies in security and resilience.
 
-In this post, I will share how you can use developer tools such as Amazon CodeWhisperer and Amazon CodeGuru Security to assist you in creating resilient applications. These tools help developers with real-time code suggestions that adhere to foundations from the Security and Reliability Well-Architected Framework, have high precision vulnerability detectors, security specific scans, as well as versatile dashboards to give an overall view of security findings. There are also many more security benefits attached to these tools that I'll go through below, in addition to how to utilize them effectively.
+In this post, I will share how you can use developer tools such as Amazon CodeWhisperer and Amazon CodeGuru Security to assist you in creating resilient applications. These tools help developers with real-time code suggestions that adhere to foundations from the [Security](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html) and [Reliability](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html) Well-Architected Framework, have high precision vulnerability detectors, security specific scans, as well as versatile dashboards to give an overall view of security findings. There are also many more security benefits attached to these tools that I'll go through below, in addition to how to utilize them effectively.
 
 
 ## CodeWhisperer
