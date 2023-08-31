@@ -3,7 +3,7 @@ title: "Wordpress in the Cloud on the cheap | S02 E27 | Build On Weekly"
 description: "How do you get that WordPress website up and running on the cloud?"
 tags:
   - wordpress
-  - ligthsail
+  - lightsail
   - ec2
   - docker
   - aws
@@ -78,9 +78,10 @@ https://www.twitch.tv/videos/1913458536
 ## Links from today's episode
 
 - [Cost Optimization space](https://community.aws/cost-optimization)
-- [Amazon Ligthsail](https://go.aws/44sVChe)
+- [Amazon Lightsail](https://go.aws/44sVChe)
 - [Running WordPress on Lightsail](https://go.aws/3PuISCJ)
 - [Sophia's guides on moving to the cloud 🌤️](https://bit.ly/45MCOex)
+- [WordPress Best practices doc](https://go.aws/3OZlZph)
 
 **Reach out to the hosts and guests:**
 
