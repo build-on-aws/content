@@ -38,6 +38,13 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 <a href="https://twitch.tv/aws"><img src="images/twitch_button_small.jpg" style="margin-left: 0" alt=""/></a>
 
 ---
+### SEASON 02
+
+| Episode | Name | Date | Guest | Link to Show Notes
+|--|--|--|--|--|
+| S02E01 | Let's look at Llama2, Falcon and more! New season start | 2023-08-14  | Emily Webber | [Show notes](https://www.community.aws/livestreams/build-on-generative-ai/2023-08-14) |
+| S02E02 | Defining best for long context Language Models | 2023-08-21  | David Bounds | [Show notes](https://www.community.aws/livestreams/build-on-generative-ai/2023-08-21) |
+
 
 ### SEASON 01
 
