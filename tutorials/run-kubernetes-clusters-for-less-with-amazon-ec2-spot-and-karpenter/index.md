@@ -87,7 +87,7 @@ helm version
 
 > 💡 Tip: The Terraform template used in this tutorial is using an On-Demand managed node group to host the Karpenter controller. However, if you have an existing cluster, you can use an existing node group with On-Demand instances to deploy the Karpenter controller. To do so, you need to follow the [Karpenter getting started guide](https://karpenter.sh/docs/getting-started/).
 
-In this step you will create an Amazon EKS cluster using the [EKS Blueprints for Terraform project](https://github.com/aws-ia/terraform-aws-eks-blueprints). The Terraform template you’ll use is going to create a VPC, an EKS control plane, a Kubernetes service account along with the IAM role and associate them using IAM Roles for Service Accounts (IRSA) to let Karpenter launch instances, add the Karpenter node role to the `aws-auth` configmap to allow nodes to connect, and an On-Demand managed node group for the `kube-system` and `karpenter` namespaces.
+In this step you'll create an Amazon EKS cluster using the [EKS Blueprints for Terraform project](https://github.com/aws-ia/terraform-aws-eks-blueprints). The Terraform template you’ll use in this tutorial is going to create a VPC, an EKS control plane, and a Kubernetes service account along with the IAM role and associate them using IAM Roles for Service Accounts (IRSA) to let Karpenter launch instances. Additionally, the template configures the Karpenter node role to the `aws-auth` configmap to allow nodes to connect, and creates an On-Demand managed node group for the `kube-system` and `karpenter` namespaces.
 
 To create the cluster, run the following commands:
 
@@ -119,7 +119,7 @@ karpenter-5f97c944df-xr9jf 1/1   Running 0        15m
 
 The EKS cluster already has a static managed node group configured in advance for the `kube-system` and `karpenter` namespaces, and it’s going to be only one you’ll need. For the rest of pods, Karpenter will launch nodes through a `Provisioner` CRD. The Provisioner sets constraints on the nodes that can be created by Karpenter and the pods that can run on those nodes. A single Karpenter provisioner is capable of handling many different pod shapes, and for this tutorial you’ll only create the `default` provisioner.
 
-> 💡 Tip: Karpenter simplifies the data plane capacity management using an approach referred as **group-less auto scaling**. This is because Karpenter is no longer using node groups, which matches with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), to launch nodes. Over time, clusters using this paradigm, that run different types of applications requiring different capacity types, end up with a complex configuration and operational model where node groups must be defined and provided in advance, as you did already to host the Karpenter controller and `kube-system` pods.
+> 💡 Tip: Karpenter simplifies the data plane capacity management using an approach called **group-less auto scaling**. This is because Karpenter is no longer using node groups, which matches with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), to launch nodes. Over time, clusters using the paradigm of running different types of applications (that require different capacity types), end up with a complex configuration and operational model where node groups must be defined and provided in advance.
 
 You need to create two environment variables we’ll use next, the values you need can be obtained from the Terraform output variables. Make sure you’re in the same folder where the Terraform `main.tf` file lives and run the following command:
 
@@ -230,7 +230,7 @@ spec:
 EOF
 ```
 
-As there are no nodes that match the pod’s requirements, all pods are going to be in a Pending status, making Karpenter to react and launch the nodes, similar to this output:
+As there are no nodes that match the pod’s requirements, all pods will be `Pending`, making Karpenter to react and launch the nodes, similar to this output:
 
 ```bash
 $ kubectl get pods
@@ -315,7 +315,7 @@ ip-10-0-76-166.eu-west-1.compute.internal    Ready    <none>   2m4s   v1.27.3-ek
 
 ## Step 6: (Optional) Simulate Spot Interruption
 
-You can simulate a Spot interruption to test the resiliency of your applications. As I said before, Spot is spare capacity for steep discounts in exchange for returning them when EC2 needs the capacity back. Spot interruptions have a 2 minute notice before EC2 reclaims the instance. Karpenter can watch these interruptions (the cluster you created with Terraform is already configured this way), and when this happens, the `Provisioner` starts a new node as soon as it sees the Spot interruption warning. Karpenter’s average node startup time means that, generally, there is sufficient time for the new node to become ready and to move the pods to the new node before the node is reclaimed.
+You can simulate a Spot interruption to test the resiliency of your applications. As I said before, Spot is spare capacity for steep discounts in exchange for returning them when EC2 needs the capacity back. Spot interruptions have a 2 minute notice before EC2 reclaims the instance. Karpenter can watch these interruptions (the cluster you created with Terraform is already configured this way). When this happens, the `Provisioner` starts a new node as soon as it sees the Spot interruption warning. Karpenter’s average node startup time means that, generally, there is sufficient time for the new node to become ready and to move the pods to the new node before the node is reclaimed.
 
 You can simulate a [Spot interruption using Fault Injection Simulator (FIS)](https://docs.aws.amazon.com/fis/latest/userguide/fis-tutorial-spot-interruptions.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq). To do this, you can either do it through the [console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/initiate-a-spot-instance-interruption.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), or using the [Amazon EC2 Spot Interrupter](https://github.com/aws/amazon-ec2-spot-interrupter) CLI. In this tutorial, I’ll use `ec2-spot-interrupter`, so make sure you install it before you continue.
 
@@ -426,4 +426,4 @@ terraform destroy --auto-approve
 
 Using Spot Instances for your Kubernetes data plane nodes helps you reduce computing costs. As long as your workloads are fault-tolerant, stateless, and can use a variety of instance types, you can use Spot. Karpenter allows you to simplify the process of configuring your EKS cluster with a high-instance type diversification, and provisions only the capacity you need.
 
-CONSIDER ADDING LINKS TO OTHER BLOGS RELATED TO THE TOPIC, EX: "Learn more about XYZ here ((ADD LINK)).
+You learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html), or dive deeper into the Karpenter cocepts [here](https://karpenter.sh/docs/concepts/).
