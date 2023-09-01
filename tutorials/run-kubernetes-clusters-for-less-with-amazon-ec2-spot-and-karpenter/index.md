@@ -191,7 +191,7 @@ Let me highlight a few important settings from the default `Provisioner` you jus
 
 You can also learn more about which other configuration properties are available for a `Provisioner` [here](https://karpenter.sh/docs/concepts/provisioners/).
 
-### Why it is a good practice to configure a diverse set of instance types?
+### Why Is It a Good Practice To Configure a Diverse Set of Instance Types?
 
 As you noticed, with the above `Provisioner` we’re basically letting Karpenter choose from a diverse set of instance types to launch the best instance type possible. If it’s an On-Demand Instance, Karpenter uses the `lowest-price` allocation strategy to launch the cheapest instance type that has available capacity. When you use multiple instance types, you can avoid the [InsufficientInstanceCapacity error](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
