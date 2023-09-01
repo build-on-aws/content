@@ -11,7 +11,7 @@ waves:
   - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
-date: 2023-08-31
+date: 2023-09-01
 ---
 
 |ToC|
