@@ -93,4 +93,4 @@ Here is a step-by-step guide to help you choose the right storage on AWS:
 
 ## Conclusion
 
-Choosing the right AWS storage class and tools can be confusing, but with enough information you can confidently select the best solutions for your applications. For more information about AWS storage service, check out [Choosing an AWS storage service] (https://aws.amazon.com/getting-started/decision-guides/storage-on-aws-how-to-choose/?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+Choosing the right AWS storage class and tools can be confusing, but with enough information you can confidently select the best solutions for your applications. For more information about AWS storage service, check out [Choosing an AWS storage service](https://aws.amazon.com/getting-started/decision-guides/storage-on-aws-how-to-choose/?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
