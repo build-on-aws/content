@@ -10,7 +10,7 @@ tags:
 spaces: 
   - generative-ai
 waves:
-
+  - generative-ai
   - dataml
 authorGithubAlias: channy
 authorName: Channy Yun
