@@ -26,7 +26,7 @@ Spot is a great match for workloads that are stateless, fault-tolerant, and flex
 
 To optimize data place capacity further, you can adjust the number of nodes when pods are unscheduable due to available capacity, or remove nodes when they’re no longer needed. For automatic nodes adjustment, use either [Cluster Autoscaler (CA)](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) or [Karpenter](https://karpenter.sh/). Both tools have support for Spot, and in this tutorial I’ll focus on Karpenter.
 
-In this tutorial, I’ll guide you on the steps you need to follow to configure an EKS cluster with Spot instances and Karpenter. Additionally, I’ll show you how to configure a workload to see Karpenter in action by provisioning the required capacity using Spot instances.
+I’ll guide you on the steps you need to follow to configure an EKS cluster with Spot instances and Karpenter. Additionally, I’ll show you how to configure a workload to see Karpenter in action by provisioning the required capacity using Spot instances.
 
 ## Why go with Karpenter?
 
@@ -121,7 +121,7 @@ The EKS cluster already has a static managed node group configured in advance fo
 
 > 💡 Tip: Karpenter simplifies the data plane capacity management using an approach called **group-less auto scaling**. This is because Karpenter is no longer using node groups, which matches with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), to launch nodes. Over time, clusters using the paradigm of running different types of applications (that require different capacity types), end up with a complex configuration and operational model where node groups must be defined and provided in advance.
 
-You need to create two environment variables we’ll use next, the values you need can be obtained from the Terraform output variables. Make sure you’re in the same folder where the Terraform `main.tf` file lives and run the following command:
+You need to create two environment variables that we’ll use next, the values you need can be obtained from the Terraform output variables. Make sure you’re in the same folder where the Terraform `main.tf` file lives and run the following command:
 
 ```bash
 export CLUSTER_NAME=$(terraform output -raw cluster_name)
@@ -189,7 +189,7 @@ Let me highlight a few important settings from the default `Provisioner` you jus
 * `ttlSecondsUntilExpired`: Here’s where you define when a node will be deleted. This is useful to force new nodes with up-to-date AMI’s. In this example we have set the value to 7 days.
 * `providerRef`: This is where you reference the template to launch a node. An `AWSNodeTemplate` is where you define which subnets, security groups, and IAM role the nodes will use. You can set node tags or even configure a [user-data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq). To learn more about which other configurations are available, go [here](https://karpenter.sh/docs/concepts/node-templates/).
 
-You can learn more about which other configuration properties are available for a `Provisioner` [here](https://karpenter.sh/docs/concepts/provisioners/).
+You can also learn more about which other configuration properties are available for a `Provisioner` [here](https://karpenter.sh/docs/concepts/provisioners/).
 
 ### Why it is a good practice to configure a diverse set of instance types?
 
@@ -271,7 +271,7 @@ By reading the logs, you can see that Karpenter:
 
 ## Step 5: Spread Pods Within Multiple AZs
 
-Karpenter launched only one node for all pending pods. However, putting all eggs in the same basket is not recommended as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll have an impact). To avoid this, and make the workload more highly-available, let’s spread the pods within multiple AZs. To do so, let’s configure a [Topology Spread Constraint](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`. To do so, add the following snippet within the `Deployment` spec block (after the `nodeSelector` block) you deployed in the previous step:
+Karpenter launched only one node for all pending pods. However, putting all eggs in the same basket is not recommended as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll have an impact). To avoid this, and make the workload more highly available, let’s spread the pods within multiple AZs. Let’s configure a [Topology Spread Constraint](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`. To do so, add the following snippet within the `Deployment` spec block (after the `nodeSelector` block) you deployed in the previous step:
 
 ```bash
       topologySpreadConstraints:
@@ -426,4 +426,4 @@ terraform destroy --auto-approve
 
 Using Spot Instances for your Kubernetes data plane nodes helps you reduce computing costs. As long as your workloads are fault-tolerant, stateless, and can use a variety of instance types, you can use Spot. Karpenter allows you to simplify the process of configuring your EKS cluster with a high-instance type diversification, and provisions only the capacity you need.
 
-You learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html), or dive deeper into the Karpenter cocepts [here](https://karpenter.sh/docs/concepts/).
+You can learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html), or dive deeper into the Karpenter cocepts [here](https://karpenter.sh/docs/concepts/).
