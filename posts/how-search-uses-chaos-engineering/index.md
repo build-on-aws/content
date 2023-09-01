@@ -41,7 +41,7 @@ As I said, DevOps is big, so here I will only focus on the primary DevOps concep
 
 If you have shopped on Amazon.com or any of the Amazon sites worldwide you have probably used Search to find what you were looking for. Searching for a topic like Chaos Engineering returns over 1,000 results (Figure 1), and Amazon Search then lets you refine that search by many different parameters like language, book format, or release date.
 
-![Amazon search results page showing results for the query: chaos engineering](images/figure1.png "Figure 1. Amazon Search returns over 1,000 results for \"chaos engineering\"")
+![Amazon search results page showing results for the query: chaos engineering](images/figure1.webp "Figure 1. Amazon Search returns over 1,000 results for \"chaos engineering\"")
 
 Over 1,000 results is a lot, and Search is responsible for quickly serving results from a catalog of many millions of products to over 300 million active customers. On Prime day 2022, Amazon Search served 84,000 requests per second. That is massive scale. The principles I will share with you here work to enable resilience at that scale, but they also work at whatever scale your systems run too.
 
@@ -115,10 +115,24 @@ Amazon Search, like many Amazon services, makes use of emergency levers as part 
 
 This particular emergency lever disables all non-critical services, conserving resources when the system is under duress, so that critical services remain available. You can see this in Figure 5. On the left is the normal Search experience. On the right is after the emergency lever has been pulled. Critical functionality such as title, image, and price is shown, but nothing else. Search would rather show the experience on the right, than to fail to return any results at all. This is a resilience best practice called [graceful degradation](https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_mitigate_interaction_failure_graceful_degradation.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering).
 
-![Side by side screenshots of search results, illustrating an emergency lever that disables non-critical services in Search, and presents a gracefully degraded experience to customers](images/figure5.png "Figure 5. An emergency lever that disables non-critical services in Search, and presents a gracefully degraded experience to customers")
+![Side by side screenshots of search results, illustrating an emergency lever that disables non-critical services in Search, and presents a gracefully degraded experience to customers](images/figure5.webp "Figure 5. An emergency lever that disables non-critical services in Search, and presents a gracefully degraded experience to customers")
 
 For the chaos experiment, the events include a combination of adding synthetic load to the system and then pulling the emergency lever. This way Search can build confidence that in the case of a real high load event, the lever will enable Search to remain available.
 
 ## Conclusion
 
 Chaos Engineering is a great way to better understand the resilience of your services. And AWS FIS is a great service for creating and running chaos experiments on AWS. Two-pizza teams in Search could have each independently began using FIS and running experiments. But by adopting a DevOps culture that focused on **enabling teams to do more**, the Search Resilience team was able to make the process even easier for Search two-pizza teams, and add many valuable features that make chaos engineering more effective across all of Search.
+
+## You May Also Be Interested In
+
+#### [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](https://community.aws/posts/how-amazon-does-devops-in-real-life?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)
+* Read about three more examples of Amazon teams using DevOps to drive resilience
+
+#### [Improving Business Resiliency with Chaos Engineering • GOTO 2021](https://www.youtube.com/watch?v=6NIh-GsO1Kg)
+* Learn how Amazon Prime Video followed their journey to enable teams to use DevOps practices and Chaos Engineering.
+
+#### [re:Invent ARC206 - Reliable scalability: How Amazon.com scales in the cloud](https://bit.ly/reliable2022)
+* With real-world examples of massive-scale production workloads from IMDb, Amazon Search, Amazon Selection and Catalog Systems, Amazon Warehouse Operations, and Amazon Transportation, this presentation shows how Amazon builds and runs cloud workloads at scale and how they reliably process millions of transactions per day
+
+#### [Chaos Engineering in the cloud](https://aws.amazon.com/blogs/architecture/chaos-engineering-in-the-cloud?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)
+* This blog introduces you to Chaos Engineering for cloud-based applications
