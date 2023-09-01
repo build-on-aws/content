@@ -7,6 +7,8 @@ tags:
   - golang
   - aws
   - aws-cdk
+waves:
+  - dataml
 showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta

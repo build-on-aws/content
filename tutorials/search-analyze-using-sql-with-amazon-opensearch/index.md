@@ -7,6 +7,8 @@ tags:
   - tutorials
   - serverless
   - aws
+waves:
+  - dataml
 showInHomeFeed: true
 authorGithubAlias: ambar265
 authorName: Ambar Kumar

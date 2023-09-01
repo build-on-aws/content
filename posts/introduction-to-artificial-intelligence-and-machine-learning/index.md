@@ -5,6 +5,8 @@ tags:
   - ai-ml
   - python
   - basics
+waves:
+  - dataml
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes Leone
 date: 2023-06-26
