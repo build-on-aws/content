@@ -10,6 +10,9 @@ tags:
     - tutorials
 spaces:
     - generative-ai
+waves:
+    - dataml
+    - generative-ai
 showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes 

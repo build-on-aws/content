@@ -11,9 +11,9 @@ tags:
   - codeguru
   - sagemaker
 spaces:
-  - gen-ai
+  - generative-ai
 waves:
-  - gen-ai
+  - generative-ai
   - resilience
 authorGithubAlias: samfarber
 authorName: Sam Farber

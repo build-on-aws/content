@@ -12,6 +12,7 @@ waves:
   - modern-apps
 spaces:
   - kubernetes
+  - modern-apps
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
 date: 2023-08-29

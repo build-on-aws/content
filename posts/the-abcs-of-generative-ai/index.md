@@ -6,6 +6,9 @@ tags:
     - ai-ml
 spaces:
     - generative-ai
+waves:
+  - dataml
+  - generative-ai
 images:
   banner: images/ABCsGenAIheader.gif
   hero: images/ABCsGenAIheader.gif
