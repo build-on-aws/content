@@ -1,6 +1,6 @@
 ---
 title: "Scaling Distributed Systems with Event Sourcing, CQRS, and AWS Serverless"
-description: "An introduction to event sourcing, CQRS, and the benefits of using AWS serverless services for these architecture patterns."
+description: "An introduction to event sourcing, CQRS, and the benefits of using AWS serverless services to implement these architecture patterns."
 tags:
   - serverless
   - architectural-patterns
