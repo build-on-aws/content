@@ -8,90 +8,56 @@ tags:
   - resilience
   - sdk
   - python
+  - aws
 authorGithubAlias: Laren-AWS
 authorName: Laren Crawford
-date: 2023-08-30
+date: 2023-09-01
 ---
 
 | ToC |
 | --- |
 
-Are you a developer who wants to build and manage a resilient service? Have you worked through tutorials like 
-[Health Checks and Dependencies](https://wellarchitectedlabs.com/reliability/300_labs/300_health_checks_and_dependencies/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilient-service)
-and want to accomplish the same thing using code to build and manage your infrastructure? This article and code
-example show you how to use AWS SDKs to set up a resilient architecture that includes AWS services like 
-Amazon EC2 Auto Scaling and Elastic Load Balancing (ELB). You’ll learn how to write code to monitor your service, 
-manage health checks, and make real-time repairs to make your service more resilient. And you’ll do it all 
-without ever opening the AWS Management Console.
+Are you a developer who wants to build and manage a resilient service? Have you worked through tutorials like [Health Checks and Dependencies](https://wellarchitectedlabs.com/reliability/300_labs/300_health_checks_and_dependencies/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks) and want to accomplish the same thing using code to build and manage your infrastructure? This article and code example show you how to use AWS SDKs to set up a resilient architecture that includes AWS services like Amazon EC2 Auto Scaling and Elastic Load Balancing (ELB). You’ll learn how to write code to monitor your service, manage health checks, and make real-time repairs to make your service more resilient. And you’ll do it all without ever opening the AWS Management Console.
 
-This example is available now in the [AWS SDK Code Example Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilient-service).
+This example is available now in the [AWS SDK Code Example Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks).
 
 ### Just want to see the code?
 
-The code for this example is part of a collection of code examples that show you how to use 
-[AWS software development kits (SDKs)](https://aws.amazon.com/what-is/sdk/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=sagemaker-pipelines) 
-with your development language of choice to work with AWS services and tools. You can download all of the examples, 
-including this one, from the [AWS Code Examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples).
+The code for this example is part of a collection of code examples that show you how to use [AWS software development kits (SDKs)](https://aws.amazon.com/what-is/sdk/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=sagemaker-pipelines) with your development language of choice to work with AWS services and tools. You can download all of the examples, including this one, from the [AWS Code Examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples).
 
-To see the code and follow along with this example, clone the repository and choose your preferred language 
-from the list below. Each language link takes you to a README that includes setup instructions 
-and prerequisites for that specific version.
+To see the code and follow along with this example, clone the repository and choose your preferred language from the list below. Each language link takes you to a README that includes setup instructions and prerequisites for that specific version.
 
-- [Python](https://github.com/Laren-AWS/aws-doc-sdk-examples/tree/resilient-architecture-python/workflows/resilient_service/README.md)
+* [Python](https://github.com/Laren-AWS/aws-doc-sdk-examples/tree/resilient-architecture-python/workflows/resilient_service/README.md)
 
 ## What are we building?  
 
-A web service that returns recommendations of books, movies, and songs. This example takes a phased approach
-so you can see how the web service evolves as the system becomes more sophisticated in how it responds to
-various kinds of failures. All resources and components are deployed and managed with AWS SDK code, giving you
-insight on how to create your own system that can be built in a repeatable manner.
+A web service that returns recommendations of books, movies, and songs. This example takes a phased approach so you can see how the web service evolves as the system becomes more sophisticated in how it responds to various kinds of failures. All resources and components are deployed and managed with AWS SDK code, giving you insight on how to create your own system that can be built in a repeatable manner.
 
-The example is an interactive scenario that you run at a command prompt. It starts by deploying all the 
-resources you need, then moves to a demo phase where failures are simulated and resilient solutions are
-implemented. By the end of the demo phase, the service has become more resilient and presents a more
-consistent and positive user experience even when failures occur. Finally, all resources are deleted.
+The example is an interactive scenario that you run at a command prompt. It starts by deploying all the resources you need, then moves to a demo phase where failures are simulated and resilient solutions are implemented. By the end of the demo phase, the service has become more resilient and presents a more consistent and positive user experience even when failures occur. Finally, all resources are deleted.
 
-Building a resilient web service involves a number of interconnected parts. The main components use by this
-this demo are:
+Building a resilient web service involves a number of interconnected parts. The main components use by this this demo are:
 
-* [Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html) 
-  is used to create 
-  [Amazon Elastic Compute Cloud (Amazon EC2)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html) 
-  instances based on a launch template. The Auto Scaling group ensures that the number of instances is kept 
-  in a specified range.
-* [Elastic Load Balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) 
-  handles HTTP requests, monitors the health of instances in the Auto Scaling group, and 
-  distributes requests to healthy instances. 
-* A Python web server runs on each instance to handle HTTP requests. It responds with recommendations and 
-  health checks and takes different actions depending on a set of
-  [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html) 
-  parameters that simulate failures and demonstrate improved resiliency. 
-* An [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) 
-  table simulates a recommendation service that the web server depends on to get recommendations.
+* [Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks) is used to create [Amazon Elastic Compute Cloud (Amazon EC2)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks) instances based on a launch template. The Auto Scaling group ensures that the number of instances is kept in a specified range.
+* [Elastic Load Balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks) handles HTTP requests, monitors the health of instances in the Auto Scaling group, and distributes requests to healthy instances.
+* A Python web server runs on each instance to handle HTTP requests. It responds with recommendations and health checks and takes different actions depending on a set of [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks) parameters that simulate failures and demonstrate improved resiliency.
+* An [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks) table simulates a recommendation service that the web server depends on to get recommendations.
 
 ## Explore the interactive scenario
 
 The interactive scenario has three main phases: deploy resources, demonstrate resiliency, and destroy resources.
 
-**Note:** This example uses your default VPC and its default security group, which must allow inbound HTTP traffic on
-port 80 from your computer's IP address. If you prefer, you can create a custom VPC and modify the example
-code to use your custom VPC instead. Find out more in the 
-[Amazon Virtual Private Cloud User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html). 
+**Note:** This example uses your default VPC and its default security group, which must allow inbound HTTP traffic on port 80 from your computer's IP address. If you prefer, you can create a custom VPC and modify the example code to use your custom VPC instead. Find out more in the [Amazon Virtual Private Cloud User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks). 
 
 ### Deploy resources
 
 The first part of the example sets up basic web servers by deploying the first set of resources:
 
 * The DynamoDB table that is used as a recommendation service. The table is populated with a few initial values.
-* An AWS Identity and Access Management (IAM) policy, role, and instance profile that grants permission to
-  each Amazon EC2 instance so that it can access the DynamoDB recommendations table and Systems Manager parameters.
-* An Amazon EC2 launch template that specifies how instances are started. The launch template includes a startup
-  Bash script that installs Python packages and starts a Python web server.
-* An Auto Scaling group that is configured to ensure that you have three running instances in three
-  Availability Zones.
+* An AWS Identity and Access Management (IAM) policy, role, and instance profile that grants permission to each Amazon EC2 instance so that it can access the DynamoDB recommendations table and Systems Manager parameters.
+* An Amazon EC2 launch template that specifies how instances are started. The launch template includes a startup Bash script that installs Python packages and starts a Python web server.
+* An Auto Scaling group that is configured to ensure that you have three running instances in three Availability Zones.
 
-After this deployment phase, you have three instances, each acting as a web server. Each instance listens 
-for HTTP requests on port 80 and responds with recommendations from the DynamoDB table.
+After this deployment phase, you have three instances, each acting as a web server. Each instance listens for HTTP requests on port 80 and responds with recommendations from the DynamoDB table.
 
 ```bash
 Creating and populating a DynamoDB table named 'doc-example-recommendation-service'.
@@ -124,15 +90,10 @@ HTTP requests. You can see these instances in the console or continue with the d
 
 The next phase of the example sets up a load-balanced endpoint by deploying the following resources:
 
-* An ELB target group that is attached to the Auto Scaling group. The target group forwards HTTP requests to
-  instances in the Auto Scaling group on port 80, and is configured to verify the health of instances. To speed up
-  this demo, the health check is configured with shortened times and lower thresholds. In production, you might want
-  to decrease the sensitivity of your health checks to avoid unwanted failures.
-* An Application Load Balancer that provides a single endpoint for your users, and a listener that the
-  load balancer uses to distribute requests to the underlying instances.
+* An ELB target group that is attached to the Auto Scaling group. The target group forwards HTTP requests to instances in the Auto Scaling group on port 80, and is configured to verify the health of instances. To speed up this demo, the health check is configured with shortened times and lower thresholds. In production, you might want to decrease the sensitivity of your health checks to avoid unwanted failures.
+* An Application Load Balancer that provides a single endpoint for your users, and a listener that the load balancer uses to distribute requests to the underlying instances.
 
-After this part of the deployment, you have a single endpoint that receives HTTP requests and distributes
-them to the underlying web servers to get recommendations and health checks.
+After this part of the deployment, you have a single endpoint that receives HTTP requests and distributes them to the underlying web servers to get recommendations and health checks.
 
 ```bash
 Creating an Elastic Load Balancing target group and load balancer. The target group
@@ -155,14 +116,9 @@ Your load balancer is ready. You can access it by browsing to:
 
 ### Demonstrate resiliency
 
-This part of the examples toggles different parts of the system by setting Systems Manager parameters that are
-used by the Python web server to take different actions depending on the paramter values.
-This creates situations where the web service fails, and shows how using a resilient architecture can keep 
-the web service running in spite of these failures and improve your customers' experience.
+This part of the examples toggles different parts of the system by setting Systems Manager parameters that are used by the Python web server to take different actions depending on the parameter values. This creates situations where the web service fails, and shows how using a resilient architecture can keep  the web service running in spite of these failures and improve your customers' experience.
 
-After each update, the demo gives you a chance to send GET requests to the endpoint or to check the health
-of the instances. Each GET request responds with a recommendation from the DynamoDB table and also includes
-the instance ID and its Availability Zone so that you can see how the load balancer distributes requests.
+After each update, the demo gives you a chance to send GET requests to the endpoint or to check the health of the instances. Each GET request responds with a recommendation from the DynamoDB table and also includes the instance ID and its Availability Zone so that you can see how the load balancer distributes requests.
 
 The selection screen looks like this:
 
@@ -181,7 +137,7 @@ Which action would you like to take?
 
 #### Initial state
 
-At the beginning, the recommendation service successfully responds and all instances are healthy. 
+At the beginning, the recommendation service successfully responds and all instances are healthy.
 
 ```bash
 ----------------------------------------------------------------------------------------
@@ -214,8 +170,7 @@ Checking the health of load balancer targets:
 
 #### Broken dependency
 
-The next phase simulates a broken dependency by setting the table name parameter to a non-existent table name.
-When the web server tries to get a recommendation, it fails because the table doesn't exist.
+The next phase simulates a broken dependency by setting the table name parameter to a non-existent table name. When the web server tries to get a recommendation, it fails because the table doesn't exist.
 
 ```bash
 ----------------------------------------------------------------------------------------
@@ -229,15 +184,11 @@ Response:
 ----------------------------------------------------------------------------------------
 ```
 
-However, all instances report as healthy because they use shallow health checks, which means that they
-simply report success under all conditions.
+However, all instances report as healthy because they use shallow health checks, which means that they simply report success under all conditions.
 
 #### Static response
 
-The next phase sets a parameter that instructs the web server to return a static response when it cannot
-get a recommendation from the recommendation service. This technique lets you decouple your web server
-response from the failing dependency and return a successful response to your users instead of reporting a 
-failure. The static response is to always suggest the *404 Not Found* coloring book.
+The next phase sets a parameter that instructs the web server to return a static response when it cannot get a recommendation from the recommendation service. This technique lets you decouple your web server response from the failing dependency and return a successful response to your users instead of reporting a failure. The static response is to always suggest the *404 Not Found* coloring book.
 
 ```bash
 Request:
@@ -258,9 +209,7 @@ Response:
 
 #### Bad credentials
 
-The next phase replaces the credentials on a single instance with credentials that don't allow access to the
-recommendation service. Now, repeated requests sometimes get a good response and sometimes get the static
-response, depending on which instance is selected by the load balancer.
+The next phase replaces the credentials on a single instance with credentials that don't allow access to the recommendation service. Now, repeated requests sometimes get a good response and sometimes get the static response, depending on which instance is selected by the load balancer.
 
 For example, the instance on us-west-2a gives real recommendations:
 
@@ -304,10 +253,7 @@ Response:
 
 #### Deep health checks
 
-The next phase sets a parameter that instructs the web server to use a deep health check.
-This means that the web server returns an error code when it can't connect to the recommendations service.
-Remember, it takes a minute or two for the load balancer to detect an unhealthy instance because of the
-threshold configuration, so if you check health right away, the instance might report as healthy.
+The next phase sets a parameter that instructs the web server to use a deep health check. This means that the web server returns an error code when it can't connect to the recommendations service. Remember, it takes a minute or two for the load balancer to detect an unhealthy instance because of the threshold configuration, so if you check health right away, the instance might report as healthy.
 
 The instance with bad credentials reports as unhealthy:
 
@@ -325,14 +271,11 @@ Checking the health of load balancer targets:
 ----------------------------------------------------------------------------------------
 ```
 
-The load balancer takes unhealthy instances out of its rotation, so now all requests to the endpoint
-result in good recommendations.
+The load balancer takes unhealthy instances out of its rotation, so now all requests to the endpoint result in good recommendations.
 
 #### Replace the failing instance
 
-This next phase terminates the unhealthy instance and lets Auto Scaling automatically start a new 
-instance. While the old instance is shutting down and the new instance is starting, GET requests to the endpoint
-continue to return recommendations because the load balancer dispatches requests only to the healthy instances.
+This next phase terminates the unhealthy instance and lets Auto Scaling automatically start a new instance. While the old instance is shutting down and the new instance is starting, GET requests to the endpoint continue to return recommendations because the load balancer dispatches requests only to the healthy instances.
 
 While the instances are transitioning, you will see various results from the health check, for example:
 
@@ -356,8 +299,7 @@ After the new instance starts, it reports as healthy and is again included in th
 
 #### Fail open
 
-This last phase of the example again sets the table name parameter to a non-existent table to simulate a
-failure of the recommendation service. This causes all instances to report as unhealthy.
+This last phase of the example again sets the table name parameter to a non-existent table to simulate a failure of the recommendation service. This causes all instances to report as unhealthy.
 
 ```bash
 ----------------------------------------------------------------------------------------
@@ -376,9 +318,7 @@ Checking the health of load balancer targets:
 ----------------------------------------------------------------------------------------
 ```
 
-When all instances in a target group are unhealthy, the load balancer continues to forward requests to them, 
-allowing for a fail open behavior. In this case, because the web server returns a static response, users get a 
-static response instead of a failure code.
+When all instances in a target group are unhealthy, the load balancer continues to forward requests to them, allowing for a fail open behavior. In this case, because the web server returns a static response, users get a static response instead of a failure code.
 
 ```bash
 ----------------------------------------------------------------------------------------
@@ -400,9 +340,7 @@ Response:
 
 #### Destroy resources
 
-After you're done exploring the resiliency features of the example, you can keep or destroy all the resources
-that it created. Typically, it's a good practice to destroy the resources, to avoid unwanted charges on your 
-account.
+After you're done exploring the resiliency features of the example, you can keep or destroy all the resources that it created. Typically, it's a good practice to destroy the resources, to avoid unwanted charges on your account.
 
 If you answer 'yes', the example deletes all resources and terminates all instances:
 
@@ -442,23 +380,16 @@ INFO: Table doc-example-recommendation-service deleted.
 
 ## Resiliency and you
 
-Congratulations, you've made it to the end! By following this example, you've learned how to use AWS SDKs
-to deploy all the resources to build a resilient web service.
+Congratulations, you've made it to the end! By following this example, you've learned how to use AWS SDKs to deploy all the resources to build a resilient web service.
 
-* You used a load balancer to let your users target a single endpoint that automatically distributed traffic
-  to web servers running in your target group.
-* You used an Auto Scaling group so you could remove unhealthy instances and automatically keep the number of
-  instances within a specified range.
-* You decoupled your web server from its dependencies and returned a successful static response even when the 
-  underlying service failed.
-* You implemented deep health checks to report unhealthy instances to the load balancer so that it dispatched
-  requests only to instances that responded successfully.
-* You used a load balancer to let the system fail open when something unexpected went wrong. Your users got a
-  successful static response, buying you time to investigate the root cause and get the system running again.
+* You used a load balancer to let your users target a single endpoint that automatically distributed traffic to web servers running in your target group.
+* You used an Auto Scaling group so you could remove unhealthy instances and automatically keep the number of instances within a specified range.
+* You decoupled your web server from its dependencies and returned a successful static response even when the underlying service failed.
+* You implemented deep health checks to report unhealthy instances to the load balancer so that it dispatched requests only to instances that responded successfully.
+* You used a load balancer to let the system fail open when something unexpected went wrong. Your users got a successful static response, buying you time to investigate the root cause and get the system running again.
 
-You can find more details about this example, and the complete code, in the 
-[AWS Code Examples GitHub repository](https://github.com/Laren-AWS/aws-doc-sdk-examples/tree/resilient-architecture-python/workflows/resilient_service#readme).
+You can find more details about this example, and the complete code, in the [AWS Code Examples GitHub repository](https://github.com/Laren-AWS/aws-doc-sdk-examples/tree/resilient-architecture-python/workflows/resilient_service#readme).
 
-You can explore more AWS code examples in the [Code Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilient-service).
+You can explore more AWS code examples in the [Code Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks).
 
 Now go build your own!
