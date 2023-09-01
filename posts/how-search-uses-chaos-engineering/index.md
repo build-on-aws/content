@@ -5,6 +5,7 @@ tags:
   - amazon
   - devops
   - resilience
+  - chaos-engineering
   - fault-injection-simulator
 waves:
   - resilience
