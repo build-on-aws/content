@@ -9,7 +9,7 @@ waves:
   - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
-date: 2023-08-28
+date: 2023-09-01
 ---
 
 ## Read about Chaos Engineering or watch a short video. The choice is yours!
