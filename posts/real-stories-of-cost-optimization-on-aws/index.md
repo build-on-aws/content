@@ -1,12 +1,12 @@
 ---
 title: "Real Stories of Cost Optimization on AWS"
-description: In this post we will unveil real-life customer sagas where businesses harnessed the power of AWS to supercharge their savings  
+description: In this post, we will unveil real-life customer sagas where businesses harnessed the power of AWS to supercharge their savings  
 tags:
-  - aws
   - cloud-financial-management
   - cloud-operations
   - cost-optimization
   - sustainability
+  - aws
 spaces:
   - cost-optimization
 waves:
