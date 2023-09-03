@@ -3,11 +3,14 @@ title: "How to Speed Up Open Source LLMs Training and Cut Down Billing Time with
 description: "Optimizing the compilation and training of the open source GPT-2 model on the Stanford Sentiment Treebank v2 (SST2) dataset, using the features of the Amazon SageMaker Training Compiler."
 tags:  
   - ai-ml
-  - gen-ai
+  - generative-ai
   - sagemaker
   - aws
   - hugging-face
 spaces:
+  - generative-ai
+waves:
+  - dataml
   - generative-ai
 authorGithubAlias: hanyun2019
 authorName: Haowen Huang 

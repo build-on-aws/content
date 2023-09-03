@@ -12,6 +12,8 @@ tags:
   - lambda
   - cdk
   - typescript
+waves:
+  - modern-apps
 showInHomeFeed: true
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub

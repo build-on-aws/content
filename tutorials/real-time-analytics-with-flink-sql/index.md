@@ -8,6 +8,8 @@ tags:
   - kinesis-data-analytics
   - sql
   - tutorials
+waves:
+  - dataml
 showInHomeFeed: true
 movedFrom: /posts/real-time-analytics-with-flink-sql
 authorGithubAlias: Olimbia23

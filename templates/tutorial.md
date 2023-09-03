@@ -10,6 +10,7 @@ tags:
 authorGithubAlias: githubAliasWithoutQuotes
 authorName: Name Surname (no quotes around)
 date: YYYY-MM-DD (expected publication date)
+showInHomeFeed: false
 ---
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
@@ -27,6 +28,7 @@ All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes
 - `authorGithubAlias` - your GitHub username
 - `authorName` - how you want your name to display for the author credit of this post
 - `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
+- `showInHomeFeed` - Set this to `true` if you want the post to be part on home and RSS feeds.
 
 Introduction paragraph to the topic. Describe a real world example to illustrate the problem the reader is facing. Explain why it's a problem. Offer the solution you'll be laying out in this post.
 
@@ -51,7 +53,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 15 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | YYYY-MM-DD                             |
@@ -83,12 +85,12 @@ this is javascript code
 ```
 
 If you want to share a code sample file with reader, then you have two options:
+
 - paste the contents with code blocks like mentioned above
-- provide link to the file. Use the raw file content option on GitHub (without the token parameter, if repo is private while drafting). It should look like:   
+- provide link to the file. Use the raw file content option on GitHub (without the token parameter, if repo is private while drafting). It should look like:
     `https://raw.githubusercontent.com/ORGANIZATION/REPO-NAME/main/FOLDER/FILENAME.EXTENSION`
     Example:
      _You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts)._
-
 
 ## Clean up
 
@@ -98,7 +100,7 @@ Provide steps to clean up everything provisioned in this tutorial.
 
 <!-- Recommended to use past tense. e.g. "And that's it! We just built and deployed that thing together!"  -->
 
-Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation. 
+Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation.
 
 Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
 

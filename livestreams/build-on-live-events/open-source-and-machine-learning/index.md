@@ -1,6 +1,6 @@
 ---
 title: "Build On Live | Open Source & Machine Learning"
-description: "Build On Live event focused on the wornderful world of Open Source and Machine learning."
+description: "Build On Live event focused on the wonderful world of Open Source and Machine learning."
 tags:
   - machine-learning
   - generative-ai
@@ -26,7 +26,7 @@ Join the second Build On Live Event of 2023:  Build On Live | Open Source & ML! 
 
 Everyone is friends, so join in the conversation both on or off the air with your hosts!
 
-- Mike Chanbers, Specialist Developer Advocate: From the far flung lands of Brisbane, Australia. Reach out to him on [Twitter](https://twitter.com/mikegchambers) or [LinkedIn](https://www.linkedin.com/in/mikegchambers/).
+- Mike Chambers, Specialist Developer Advocate: From the far flung lands of Brisbane, Australia. Reach out to him on [Twitter](https://twitter.com/mikegchambers) or [LinkedIn](https://www.linkedin.com/in/mikegchambers/).
 - Jacquie Grindrod, Senior Developer Advocate: Coming in from Vancouver, BC. Talk with her on [Twitter](https://twitter.com/devopsjacquie) or [LinkedIn](https://www.linkedin.com/in/jacquelyne-grindrod/).
 - Darko Mesaroš (Дарко Месарош), Senior Developer Advocate: Driving all the way up from Seattle, WA. Talk with him on [Twitter](https://twitter.com/darkosubotica) or [LinkedIn](https://www.linkedin.com/in/darko-mesaros/).
 
