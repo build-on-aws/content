@@ -54,33 +54,33 @@ You will first manually trace what just happened from your code, all the way thr
 This script creates the Vue application and loads the Vue components that make up the application.  You can see that each component is loaded from a separate file in the **frontend/src/components** directory.  You will focus on the shopping cart (CartDrawer) and product listing (Product) components.
 
 
-```
+```javascript
+import CartButton from "@/components/CartButton.vue";
+import CartDrawer from "@/components/CartDrawer.vue";
+import LoadingOverlay from "@/components/LoadingOverlay.vue";
+import Product from "@/components/Product.vue";
+import CartQuantityEditor from "@/components/CartQuantityEditor.vue"
 
-import ***CartButton* **from "@/components/CartButton.vue";
-import ***CartDrawer* **from "@/components/CartDrawer.vue";
-import ***LoadingOverlay* **from "@/components/LoadingOverlay.vue";
-import ***Product* **from "@/components/Product.vue";
-import ***CartQuantityEditor* **from "@/components/CartQuantityEditor.vue"
+Vue.config.productionTip = false
 
-***Vue***.config.productionTip = false
+Amplify.configure(config)
+Vue.use(VueRouter)
+Vue.use(Vuelidate)
+Vue.use(VueMask);
 
-Amplify.*configure*(***config***)
-***Vue***.use(***VueRouter***)
-***Vue***.use(Vuelidate)
-***Vue***.use(VueMask);
+Vue.component('cart-button', CartButton)
+Vue.component('cart-drawer', CartDrawer)
 
-***Vue***.component('cart-button', ***CartButton***)
-***Vue***.component('cart-drawer', ***CartDrawer***)
-***Vue***.component('loading-overlay', ***LoadingOverlay***)
-***Vue***.component('product', ***Product***)
-***Vue***.component('cart-quantity-editor', ***CartQuantityEditor***)
+Vue.component('loading-overlay', LoadingOverlay)
+Vue.component('product', Product)
+Vue.component('cart-quantity-editor', CartQuantityEditor)
 
 
-new ***Vue***({
-  render: h => h(***App***),
-  ***router***,
-  ***vuetify***,
-  ***store***,
+new Vue({
+  render: h => h(App),
+  router,
+  vuetify,
+  store,
   components: {
     ...components
   }
@@ -91,15 +91,15 @@ new ***Vue***({
 
 #### **App.vue**
 
-This file provides the layout for the application.  You can see that the main product content for the application is being loaded from the router and rendered in **<router-view />**.  You can also see that the cart drawer (<cart-drawer />) **** remains constant, even if the path and route for the application changes.  When the page is first loaded, the shopping cart for the user is retrieved:
+This file provides the layout for the application.  You can see that the main product content for the application is being loaded from the router and rendered in `<router-view />`.  You can also see that the cart drawer (`<cart-drawer />`) remains constant, even if the path and route for the application changes.  When the page is first loaded, the shopping cart for the user is retrieved:
 
-```
-...
+*App.vue code snippet*
+```vue
         <v-content>
       <v-container fluid>
         <loading-overlay />
         <v-fade-transition mode="out-in">
-          **<****router****-****view****></****router****-****view****>**
+          <router-view></router-view>
         </v-fade-transition>
       </v-container>
       <v-navigation-drawer
@@ -111,10 +111,10 @@ This file provides the layout for the application.  You can see that the main pr
         column
         d-flex
       >
-**        ****<****cart****-****drawer ****/>**
+        <cart-drawer />
       </v-navigation-drawer>
     </v-content>
-...
+
 <script>
 import { mapGetters, mapState } from "vuex";
 
@@ -126,8 +126,8 @@ export default {
     };
   },
   mounted() {
-**    this.$store.dispatch("fetchCart");
-**  },
+    this.$store.dispatch("fetchCart");
+  },
   computed: {
     ...mapGetters(["cartSize", "currentUser"]),
     ...mapState(["cartLoading"])
@@ -144,42 +144,72 @@ export default {
 </script>
 ```
 
-The fetchCart() call is defined as an action in **frontend/src/store/actions.js:**
+```javascript
+<script>
+import { mapGetters, mapState } from "vuex";
 
-
+export default {
+  name: "app",
+  data() {
+    return {
+      drawer: null
+    };
+  },
+  mounted() {
+    this.$store.dispatch("fetchCart");
+  },
+  computed: {
+    ...mapGetters(["cartSize", "currentUser"]),
+    ...mapState(["cartLoading"])
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
+    toggleDrawer() {
+      this.drawer = !this.drawer;
+    }
+  }
+};
+</script>
 ```
+
+The `fetchCart()` call is defined as an action in **frontend/src/store/actions.js:**
+
+
+```javascript
 const fetchCart = ({
     commit
 }) => {
     commit("setLoading", {value: true})
-**    getCart()
-**        .then((response) => {
+    getCart()
+        .then((response) => {
             commit("setUpCart", response.products)
             commit("setLoading", {value: false})
         })
 }
 ```
 
-this makes a call to getCart() in **frontend/src/backend/api.js**:
+this makes a call to `getCart()` in **frontend/src/backend/api.js**:
 
 
-```
+```javascript
 export async function getCart() {
     return getHeaders(true).then(
-        headers => **API****.get("CartAPI", "/cart", {
+        headers => API.get("CartAPI", "/cart", {
             headers: headers,
             withCredentials: true
-        }))**
+        }))
 }
 ```
 
 
-The getCart() function initiates the call to retrieve the cart contents from the **aws-serverless-shopping-cart-shop-ListCartFunction<hash>** AWS Lambda function through API Gateway using the [Amplify JavaScript SDK](https://docs.amplify.aws/lib/restapi/fetch/q/platform/js/).
+The `getCart()` function initiates the call to retrieve the cart contents from the **aws-serverless-shopping-cart-shop-ListCartFunction<hash>** AWS Lambda function through API Gateway using the [Amplify JavaScript SDK](https://docs.amplify.aws/lib/restapi/fetch/q/platform/js/).
 
 
 #### **router.js**
 
-This file defines what views should be loaded based on the URL path.  You can see that the base URL is loading the Home view which displays the product list.  The router determines what will be loaded into the layout defined in your App.js **<router-view></router-view>** position.
+This file defines what views should be loaded based on the URL path.  You can see that the base URL is loading the Home view which displays the product list.  The router determines what will be loaded into the layout defined in your App.js `<router-view></router-view>` position.
 
 
 #### **Home.vue**
@@ -187,20 +217,20 @@ This file defines what views should be loaded based on the URL path.  You can se
 This file initiates the call to retrieve Products from the AWS lambda function named **aws-serverless-shopping-cart-shop-ListCartFunction<hash>** via API Gateway and the Amplify JavaScript SDK.
 
 
-```
+```vue
 <template>
     <v-container grid-list-md fluid class="mt-0" pt-0>
       <v-layout row wrap>
-**        <v-flex v-for="product in products" :key="product.productId" xs12 lg4 sm6>
+        <v-flex v-for="product in products" :key="product.productId" xs12 lg4 sm6>
             <product :product="product" :key="product.productId" />
-**        </v-flex>
+        </v-flex>
       </v-layout>
     </v-container>
 </template>
 
 <script>
 export default {
-**  computed: {
+  computed: {
     products() {
       return this.$store.state.products;
     }
@@ -208,7 +238,7 @@ export default {
   created() {
     this.$store.dispatch("fetchProducts");
   }
-**};
+};
 </script>
 ```
 
@@ -219,7 +249,7 @@ The **fetchProducts()** call is defined as an action in **frontend/src/store/act
 
 #### **actions.js**
 
-```
+```javascript
 const fetchProducts = ({
     commit
 }) => {
@@ -234,7 +264,7 @@ This makes a call to getProducts() in **frontend/src/backend/api.js**:
 
 #### **api.js**
 
-```
+```javascript
 export async function getProducts() {
     return getHeaders().then(
         headers => API.get("ProductAPI", "/product", {
@@ -248,16 +278,16 @@ export async function getProducts() {
 
 ### Onwards, into AWS!
 
-At this point, your mental call stack may have already experienced an overflow,.  Don’t worry!  All you really need to remember is that the **getProducts()** and **getCart()** calls from our frontend code are what initiate our call to retrieve our products and cart contents from our sample applications AWS Lambda functions using API Gateway with the [Amplify JavaScript SDK](https://docs.amplify.aws/lib/q/platform/js/).
+At this point, your mental call stack may have already experienced an overflow.  Don’t worry!  All you really need to remember is that the `getProducts()` and `getCart()` calls from our frontend code are what initiate our call to retrieve our products and cart contents from our sample applications AWS Lambda functions using API Gateway with the [Amplify JavaScript SDK](https://docs.amplify.aws/lib/q/platform/js/).
 
 If you are using Google Chrome, you can open the Developer Tools console and go to the Network tab after the sample application loads.  Click on the **Fetch/XHR** option to filter out all the network requests to only those fetching data.  
 
 ![Google Chrome Dev Tools Network View](images/google-chrome-dev-tools-network-view.png)
 
-Here we can see the API Gateway endpoints were called using API.get() from the Amplify SDK.   These endpoints are defined in the **frontend/src/aws-exports.j**s file:
+Here we can see the API Gateway endpoints were called using `API.get()` from the Amplify SDK.   These endpoints are defined in the **frontend/src/aws-exports.js** file:
 
 
-```
+```javascript
 const awsmobile = {
   Auth: {
     region: process.env.VUE_APP_AWS_REGION,
@@ -266,13 +296,13 @@ const awsmobile = {
   },
   API: {
     endpoints: [{
-**        name: "CartAPI",
+        name: "CartAPI",
         endpoint: process.env.VUE_APP_CART_API_URL
-**      },
+      },
       {
-**        name: "ProductAPI",
+        name: "ProductAPI",
         endpoint: process.env.VUE_APP_PRODUCTS_API_URL,
-**      }
+      }
     ]
   }
 };
@@ -299,16 +329,16 @@ Click on the function name to return to the main menu for this function and then
 
 You’ve made it!  You are now at the backend code that lists the contents in the shopping cart.  You can now see the code that lists the shopping cart contents in **list_cart.py:**
 
-```
+```python
 @logger.inject_lambda_context(log_event=True)
-**@tracer.capture_lambda_handler
-**def lambda_handler(event, context):
+@tracer.capture_lambda_handler
+def lambda_handler(event, context):
 """
 List items in shopping cart.
 """
 ```
 
-Your lambda function handler is instrumented to provide X-Ray traces for calls to this AWS Lambda function with the **@tracer.capture_lambda_handler** annotation.
+Your lambda function handler is instrumented to provide X-Ray traces for calls to this AWS Lambda function with the `@tracer.capture_lambda_handler` annotation.
 
 
 ### AWS X-Ray - Your application’s tracing companion
@@ -356,15 +386,15 @@ The sample application uses Amazon Cognito for user registration and authenticat
 
 ![Serverless Shopping Cart Login Screen](images/serverless-shopping-cart-login-screen.png)
 
-After you have registered, sign in with your newly created user.  The sample application persists user shopping carts for registered users using their cognito user id.  If a user isn’t signed in, an anonymous shopping cart is also supported using cookies.  In step 2, you saw that your shopping cart contents were retrieved using the getCart() function in **frontend/src/backend/api.js**:
+After you have registered, sign in with your newly created user.  The sample application persists user shopping carts for registered users using their cognito user id.  If a user isn’t signed in, an anonymous shopping cart is also supported using cookies.  In step 2, you saw that your shopping cart contents were retrieved using the `getCart()` function in **frontend/src/backend/api.js**:
 
-```
+```javascript
 export async function getCart() {
     return getHeaders(true).then(
-        headers => **API****.get("CartAPI", "/cart", {
+        headers => API.get("CartAPI", "/cart", {
             headers: headers,
             withCredentials: true
-        }))**
+        }))
 } 
 ```
 
@@ -400,16 +430,16 @@ You will now annotate the AWS Lambda Function to include the username as an anno
 
 Update your **backend/shopping-cart-service/list_cart.py** file to the following:
 
-```
+```python
 import json
 import os
 
 import boto3
-**from aws_xray_sdk.core import xray_recorder
-**from aws_lambda_powertools import Logger, Tracer
+from aws_xray_sdk.core import xray_recorder
+from aws_lambda_powertools import Logger, Tracer
 from boto3.dynamodb.conditions import Key
 
-from shared import get_cart_id, get_headers, get_user_sub, **get_username**, handle_decimal_type
+from shared import get_cart_id, get_headers, get_user_sub, get_username, handle_decimal_type
 
 logger = Logger()
 tracer = Tracer()
@@ -424,26 +454,26 @@ def lambda_handler(event, context):
     """
     List items in shopping cart.
     """
- **subsegment = xray_recorder.begin_subsegment('annotations')
-**
+ subsegment = xray_recorder.begin_subsegment('annotations')
+
     cart_id, generated = get_cart_id(event["headers"])
 
-**    if generated:
+    if generated:
         subsegment.put_annotation('generated_cart', True)
     else:
         subsegment.put_annotation('generated_cart', False)
-**
+
     # Because this method can be called anonymously, we need to check there's a logged in user
     jwt_token = event["headers"].get("Authorization")
     if jwt_token:
         user_sub = get_user_sub(jwt_token)
-**        username = get_username(jwt_token)
+        username = get_username(jwt_token)
         subsegment.put_annotation('username', username)
-**        key_string = f"user#{user_sub}"
+        key_string = f"user#{user_sub}"
         logger.structure_logs(append=True, cart_id=f"user#{user_sub}")
     else:
-**        subsegment.put_annotation('username', 'anonymous')
-**        key_string = f"cart#{cart_id}"
+        subsegment.put_annotation('username', 'anonymous')
+        key_string = f"cart#{cart_id}"
         logger.structure_logs(append=True, cart_id=f"cart#{cart_id}")
 
     # No need to query database if the cart_id was generated rather than passed into the function
@@ -465,8 +495,8 @@ def lambda_handler(event, context):
         product.update(
             (k, v.replace("product#", "")) for k, v in product.items() if k == "sk"
         )
-**    xray_recorder.end_subsegment()
-**
+    xray_recorder.end_subsegment()
+
     return {
         "statusCode": 200,
         "headers": get_headers(cart_id),
@@ -483,7 +513,7 @@ In this file, you implement the following changes:
 
 Next, update the **backend/layers/shared.py** file to the following:
 
-```
+```python
 import calendar
 import datetime
 import os
@@ -545,7 +575,7 @@ def get_user_sub(jwt_token):
 
     return verified_claims.get("sub")
 
-**@tracer.capture_method
+@tracer.capture_method
 def get_username(jwt_token):
     """
     Validate JWT claims & retrieve user identifier
@@ -558,7 +588,7 @@ def get_username(jwt_token):
         verified_claims = {}
 
     return verified_claims.get("cognito:username")
-**
+
 @tracer.capture_method
 def get_cart_id(event_headers):
     """
@@ -694,7 +724,7 @@ Although you only implemented the annotation on your **aws-serverless-shopping-c
 
 Let’s get back to the original story.  You have a registered user who can’t view their shopping cart when they login.  It turns out, that user is you!  Your shopping cart is working you say?  Well, it’s time to break it!  It turns out that selling half eaten cake may not be the best choice for an online store.  You need to remove it.  Open **backend/product-mock-service/product_list.json** and remove the following JSON object:
 
-```
+```json
 {
     "category": "sweet",
     "createdDate": "2017-11-24T04:01:33 -01:00",
@@ -724,7 +754,7 @@ Let’s get back to the original story.  You have a registered user who can’t 
 
 While you’re there, you might as well remove the leftover cheese:.  That’s too bad, since it was such a good seller!:
 
-```
+```json
 
 {
     "category": "dairy",
@@ -757,7 +787,7 @@ These updates will remove the products from the product list on the website.  Ho
 
 Change:
 
-```
+```python
     for product in product_list:
         product.update(
             (k, v.replace("product#", "")) for k, v in product.items() if k == "sk"
@@ -766,7 +796,7 @@ Change:
 
 to:
 
-```
+```python
     for product in product_list:
         product["sk"] = product["sk"].replace("product#", "")
         if product["sk"] == "8c843a54-27d7-477c-81b3-c21db12ed1c9":
@@ -783,7 +813,7 @@ Load up the frontend interface in your web browser:  [http://localhost:8080](htt
 
 ![aws-serverless-shopping-cart homepage](images/serverless-shopping-cart-homepage.png)
 
-This time you should just get a spin, spin, spin.  Somethings wrong.  Let’s start to investigate!  Proceed to the Service map in X-Ray.  The service map should indicate that there is an issue with one of our Lambda functions:
+This time you should just get a spin, spin, spin.  Something's wrong.  Let’s start to investigate!  Proceed to the Service map in X-Ray.  The service map should indicate that there is an issue with one of our Lambda functions:
 
 ![AWS X-Ray aws-serverless-shopping-cart displaying error](images/x-ray-serverless-shopping-cart-service-map-displaying-error.png)
 
@@ -824,7 +854,7 @@ Next, you will fix the error and also improve exception handling so that your X-
 
 from:
 
-```
+```python
     for product in product_list:
         product["sk"] = product["sk"].replace("product#", "")
         if product["sk"] == "8c843a54-27d7-477c-81b3-c21db12ed1c9":
@@ -834,21 +864,21 @@ from:
 
 to:
 
-```
-**    for index, product in enumerate(product_list):
-**        product["sk"] = product["sk"].replace("product#", "")
+```python
+    for index, product in enumerate(product_list):
+        product["sk"] = product["sk"].replace("product#", "")
         if product["sk"] == "8c843a54-27d7-477c-81b3-c21db12ed1c9":
-**            del product_list[index]
-**    xray_recorder.end_subsegment()
+            del product_list[index]
+    xray_recorder.end_subsegment()
 ```
 
 
-The exception was caused by incorrectly using the remove() python list function on the individual product dictionary.  Next, you will improve the exception handling for the function by wrapping the execution in a try / except block:
+The exception was caused by incorrectly using the `remove()` python list function on the individual product dictionary.  Next, you will improve the exception handling for the function by wrapping the execution in a try / except block:
 
 from:
 
 
-```
+```python
 import json
 import os
 
@@ -927,9 +957,9 @@ def lambda_handler(event, context):
 to:
 
 
-```
-**    try:
-**        subsegment = xray_recorder.begin_subsegment('annotations')
+```python
+    try:
+        subsegment = xray_recorder.begin_subsegment('annotations')
 
         cart_id, generated = get_cart_id(event["headers"])
 
@@ -966,7 +996,7 @@ to:
             )
             product_list = response.get("Items", [])
 
- **for index, product in enumerate(product_list):
+ for index, product in enumerate(product_list):
             product["sk"] = product["sk"].replace("product#", "")
             if product["sk"] == "8c843a54-27d7-477c-81b3-c21db12ed1c9":
                 del product_list[index]
@@ -983,7 +1013,7 @@ to:
     except Exception as e:
         logger.error("An unhandled error occurred during execution: {}".format(e))
         xray_recorder.end_subsegment()
-        raise**
+        raise
 ```
 
 
@@ -999,9 +1029,9 @@ This time, your experience should be better!  Check your shopping cart by clicki
 
 ![aws-serverless-shopping-cart list cart view](images/serverless-shopping-cart-list-cart-view.png)
 
-You will notice that you no longer have the half eaten cake in your shopping cart (although the leftover cheese is still there!).  You’ll also notice that you are no longer selling half eaten cake or left over cheese (although you are selling half eaten lettuce and leftover ham!).  The important thing is that you have restored the application to a healthy state for any users who had half eaten cake in their shopping cart.  Let’s consider this for a moment.  The exception and error was only impacting users who had half eaten cake in their shopping cart:
+You will notice that you no longer have the half-eaten cake in your shopping cart (although the leftover cheese is still there!).  You’ll also notice that you are no longer selling half-eaten cake or left over cheese (although you are selling half-eaten lettuce and leftover ham!).  The important thing is that you have restored the application to a healthy state for any users who had half-eaten cake in their shopping cart.  Let’s consider this for a moment.  The exception and error was only impacting users who had half-eaten cake in their shopping cart:
 
-```
+```python
     for product in product_list:
         product["sk"] = product["sk"].replace("product#", "")
         if product["sk"] == "8c843a54-27d7-477c-81b3-c21db12ed1c9":
@@ -1009,13 +1039,13 @@ You will notice that you no longer have the half eaten cake in your shopping car
     xray_recorder.end_subsegment()
 ```
 
-You can reasonably conclude that not too many people were considering half eaten cake and had it in their shopping cart.  Errors effecting a small or unique segment of the user population can be much harder to pinpoint.  AWS X-Ray can help you by providing you with tools to query on annotations that classify user requests (e.g. query by username).
+You can reasonably conclude that not too many people were considering half-eaten cake and had it in their shopping cart.  Errors effecting a small or unique segment of the user population can be much harder to pinpoint.  AWS X-Ray can help you by providing you with tools to query on annotations that classify user requests (e.g. query by username).
 
 Refresh your browser a few times to generate some requests.   Now proceed back to the service map option under the X-Ray menu in the CloudWatch console.  This time your service map should look healthy:
 
 ![AWS X-Ray service map with healthy nodes](images/x-ray-service-map-healthy-view.png)
 
-You can also use the **Filter by X-Ray group** and select **Anonymous** and **RegisteredUsers** to see the user requests by user population.  Since you added exception handling to close your annotations subsegment, your user grouping should also display exceptions and errors that occur during function execution.
+You can also use the **Filter by X-Ray group** and select **Anonymous** and **RegisteredUsers** to see the user requests by user population.  Since you added exception handling to close your annotations' subsegment, your user grouping should also display exceptions and errors that occur during function execution.
 
 Our story began with a cloud support engineer receiving a call from a customer saying the website wasn’t working for them.  This means that you didn’t detect the issue until someone took the effort to call in and point out the problem.  Ideally, you should be alerted when an issue begins to occur.  There are many ways to do this by integrating with CloudWatch.  You can use [CloudWatch Synthetics Canaries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html) and alarm on the [SuccessPercent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_metrics.html) published by a canary.  You can also configure alarms on the individual services themselves in your architecture.  For example, you can alarm on the [Errors or Throttles](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html#monitoring-metrics-types) metric for your AWS Lambda functions.  For this tutorial, you are going to focus on how you can alarm on X-Ray detected faults, errors, or response times.
 
@@ -1031,7 +1061,7 @@ Annotation.username CONTAINS "" AND Annotation.username != "anonymous" and respo
 
 Call this group **SlowRegisteredUsers** and save the group.  Now, slow down the **aws-serverless-shopping-cart-shop-ListCartFunction-<hash>** AWS Lambda function by updating the **backend/shopping-cart-service/list_cart.py** file:
 
-```
+```python
 
 import json
 import os
@@ -1042,8 +1072,8 @@ from aws_lambda_powertools import Logger, Tracer
 from boto3.dynamodb.conditions import Key
 
 from shared import get_cart_id, get_headers, get_user_sub, get_username, handle_decimal_type
-**from time import sleep
-**
+from time import sleep
+
 logger = Logger()
 tracer = Tracer()
 
@@ -1058,15 +1088,15 @@ def lambda_handler(event, context):
     List items in shopping cart.
     """
     try:
- **sleep(*3*****)
-** 
+ sleep(3)
+ 
 ```
 
 After you make the changes, deploy them with the command:  **make backend**
 
 Now, start the frontend web server on your local machine if it isn’t started already:  **make frontend-serve**.
 
-Next, proceed to the web interface at http://localhost:8080.  Make sure you are logged in and refresh the page a few times.  The page should take a bit longer to load because of your 3 second sleep.
+Next, proceed to the web interface at http://localhost:8080.  Make sure you are logged in and refresh the page a few times.  The page should take a bit longer to load because of your 3-second sleep.
 
 Next, proceed to the AWS X-Ray Service map in the CloudWatch console and select the SlowRegisteredUsers X-Ray group:
 
@@ -1103,7 +1133,7 @@ Enter a name for the alarm (e.g. SlowRegisteredUsersAlarm) and click **Next**.  
 
 Now, check your email at the address you indicated to confirm your subscription for notifications.
 
-At this point, any time your registered users experience a response time of greater than 3s in a one minute period, you will receive an email notification.
+At this point, any time your registered users experience a response time of greater than 3s in a one-minute period, you will receive an email notification.
 
 Let’s test this out to see if it is working.  Return to the frontend web interface at [http://localhost:8080](http://localhost:8080/) and reload the page a few times.  Within a minute or so, you should receive an email notification for your alarm:
 
