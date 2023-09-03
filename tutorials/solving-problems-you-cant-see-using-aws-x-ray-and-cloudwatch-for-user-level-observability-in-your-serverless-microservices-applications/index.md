@@ -9,7 +9,7 @@ tags:
 - observability
 authorGithubAlias: knizami
 authorName: Khurram Nizami
-date: 2022-08-14
+date: 2023-09-02
 ---
 
 
@@ -22,6 +22,29 @@ You’re a cloud engineer for a website that is built using AWS serverless techn
 If you’re using Amazon X-Ray and CloudWatch, there are plenty of things that you can do to understand what is happening from this user’s or other users’ perspective.
 
 In this tutorial, I’ll walk through how you can use X-Ray and CloudWatch to help you improve end user observability.  You will use the [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart) sample application as our starting point and enhance its X-Ray usage and implementation to include an X-Ray group for registered and anonymous users along with related CloudWatch Metrics and CloudWatch Alarms.  Along the way, you will learn how to use the AWS X-Ray SDK and X-Ray constructs such as segments, subsegments, and annotations. Throughout the tutorial, I’ll point out some potential gotcha’s and how to work around them.
+
+## What you will learn
+
+- How to configure and implement AWS X-Ray in a serverless application that uses Amazon Cognito, Amazon API Gateway, and AWS Lambda
+- How to use AWS X-Ray groups to identify and diagnose applications based on user segmentation.
+- How to use AWS X-Ray CloudWatch metrics to alarm on AWS X-Ray groups.
+
+## Prerequisites
+
+Before starting this tutorial, you will need the following:
+
+| Attributes                |                                                                                                                         |
+| ------------------- |-------------------------------------------------------------------------------------------------------------------------|
+| ✅ AWS Level        | Advanced - 300                                                                                                          |
+| ⏱ Time to complete  | 45 minutes                                                                                                              |
+| 💰 Cost to complete | Free when using the AWS Free Tier                                                                         |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [Git client](https://git-scm.com/downloads/guis) |
+| 💻 Code Sample         | [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?       |
+| ⏰ Last Updated     | 2023-09-02                                                                                                              |
+
+| ToC |
+|-----|
 
 
 ## Step 1:  Deploy the aws-serverless-shopping-cart sample application
@@ -140,6 +163,7 @@ export default {
 };
 </script>
 ```
+
 
 ```javascript
 <script>
@@ -1136,6 +1160,21 @@ Let’s test this out to see if it is working.  Return to the frontend web inter
 
 ![AWS X-Ray CloudWatch Alarm Notification](images/aws-x-ray-cloudwatch-group-count-alarm-notification-email.png)
 
-Congratulations!  You can now alarm and troubleshoot key user groups using AWS X-Ray!
+
+## Cleanup
+
+Now that you're finished, you can clean up everything you created in this tutorial:
+
+1.  Follow the [cleanup instructions for the aws-serverless-shopping-cart application](https://github.com/aws-samples/aws-serverless-shopping-cart#clean-up).
+2.  Delete the **Anonymous**, **RegisteredUsers**, and **SlowRegisteredUsers** AWS X-Ray groups you created in Step 4.
+3.  Delete the **SlowRegisteredUsersNotification** SNS topic you created in Step 5.
+4.  Delete the **SlowRegisteredUsersAlarm** CloudWatch Alarm you created in Step 5.
+
+
+## Conclusion
+
+Congratulations!  You can now alarm and troubleshoot your key user groups using AWS X-Ray!
 
 In this tutorial, you learned how to use AWS X-Ray to trace a serverless application architecture.  You learned how to segment and identify your users in AWS Lambda using annotations.  You also learned how you can use AWS X-Ray groups to segment and identify user requests.  AWS X-Ray can help you pinpoint and troubleshoot issues with your application.  It provides a valuable connected graph of your user requests so you can optimize your user experiences and improve application quality.  Want to learn more?  Check out the [Scorekeep sample application instrumented with the AWS X-Ray Java SDK](https://docs.aws.amazon.com/xray/latest/devguide/xray-scorekeep.html) to see how X-ray works with Java applications in the AWS X-Ray documentation!
+
+If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
