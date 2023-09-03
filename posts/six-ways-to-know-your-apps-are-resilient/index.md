@@ -8,6 +8,8 @@ tags:
   - automation
   - continuous-resilience
   - aws-resilience-hub
+waves:
+  - resilience
 authorGithubAlias: TheFuz
 authorName: Mahanth Jayadeva
 date: 2023-03-16

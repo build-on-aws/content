@@ -5,9 +5,12 @@ tags:
   - agents
   - python
   - huggingface
-  - gen-ai
+  - generative-ai
   - ai-ml
 spaces:
+  - generative-ai
+waves:
+  - dataml
   - generative-ai
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi

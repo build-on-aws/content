@@ -4,10 +4,12 @@ description: "This post is about Transformer Architecture, its relevance to GenA
 tags:  
   - transformer-architecture
   - llm
-  - gen-ai
+  - generative-ai
   - prompt-engineering
   - fine-tuning
 spaces:
+  - generative-ai
+waves:
   - generative-ai
 authorGithubAlias: pcolmer99
 authorName: Paul Colmer

@@ -6,6 +6,8 @@ tags:
   - build-on-live
   - twitch
   - resilience
+waves:
+  - resilience
 authorGithubAlias: gogococo
 authorName: Jacquie Grindrod
 additionalAuthors: 
