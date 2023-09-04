@@ -18,7 +18,6 @@ date: 2023-10-10
 showInHomeFeed: true
 ---
 
-## Introduction
 In this article you are going learn why a modern and 100% automated Continuous Integration and Continuous Deployment (CI/CD) pipeline empowers you and your team to ship software faster and in a better quality than ever before. 
 
 In today's faster moving world, sotware development teams need to speed up feature delivery, generate business value faster and experiment with different options. It is tremendously important to have a reliable way to ship your features or defects. 
