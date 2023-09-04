@@ -1,10 +1,9 @@
 ---
 title: "Start your projects with a CI/CD pipeline to deliver value right from the start of your project"
-description: "The post will be explaining what CI/CD is and means. It will go into details around how software developers produce "business values" by writing code and about how a CI/CD pipeline that is 100% automated ensures to be able to delivery value quickly.
+description: "The post will be explaining what CI/CD is and means. It will go into details around how software developers produce \"business values\" by writing code and about how a CI/CD pipeline that is 100% automated ensures to be able to delivery value quickly.
 I will also discuss the impact of being able to quickly push production changes and briefly introduce the concept of feature flagging.
 In the latter part of the post I want to use the CodeCatalyst blue prints as an example/showcase on how this could look like.
-Depending on when we release this, we can also reference the open source project "projen-pipelines" as a place to watch for future updates."
-seoDescription: Learn how a good CI/CD pipeline is important to accelerate your deployment processes and how starting with the pipeline is key to success 
+Depending on when we release this, we can also reference the open source project \"projen-pipelines\" as a place to watch for future updates."
 tags:
     - ci-cd
     - cicd
@@ -12,11 +11,11 @@ tags:
     - automation
     - pipeline
     - ci-cd-pipeline
-    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
 authorGithubAlias: lock128
 authorName: Johannes "Lockhead" Koch
 date: 2023-10-1
 showInHomeFeed: true
+seoDescription: Learn how a good CI/CD pipeline is important to accelerate your deployment processes and how starting with the pipeline is key to success
 ---
 
 In this article you are going learn why a modern and 100% automated Continuous Integration and Continuous Deployment (CI/CD) pipeline empowers you and your team to ship software faster and in a better quality than ever before. 
