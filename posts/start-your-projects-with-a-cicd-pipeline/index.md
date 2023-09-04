@@ -55,10 +55,16 @@ Ideally the complete process - from commit to the source control system up to th
 
 ## The power of automation and continuous deployment and why you need to think about feature flags
 
+If you have been in tech for more than a decade (like me), or even for more than five years, you might remember where you started your journey of "deployment". I personally remember very well - I had two flavours: working on a text-editor locally, then using FTP or SFTP to upload my PHP file or - if I needed to very even quicker - using vi or another text-editor directly on the production server. Rollouts and tests where manual - and any actions where not reproducable at all.
+
 ### An automated CI/CD pipeline to produce reliable output
-
+Today, the world has changed - an automated CI/CD pipeline is key to speed up the deliverables of your software development teams. Automating testing, verification, security scans and deployment - without any manual step after merging a Pull Request, ensures that the output of your deployment is reliable and that you can _trust_ the output. You know, what you get - and every single step in that deployment process reduces the level of reliability and trust that you can have.
 ### If you automate deployment 100%, protect yourself
+If you decide to go "all in" an automate the way up to the production environment, you should however protect yourself from surprises that can be problematic for your reputation. And this is where the concept of "feature flagging" can help you:
 
+New features or new lines of code are hidden behing a "flag" that can be activated or deactivated very fast (within minutes or seconds). 
+
+For more details on this, [here](https://aws.amazon.com/blogs/mt/how-cyberark-implements-feature-flags-with-aws-appconfig/) is a good blog post by AWS Serverless Hero [Ran Isenberg](https://www.ranthebuilder.cloud/post/manage-your-aws-lambda-feature-flags-like-a-boss) that also regularly frieds about the concept of feature flags.
 ## Why you should start with your CI/CD pipeline
 So what are the main reasons for you to start your project with building the CI/CD pipeline?
 Organizations and users today seek speed and frequency of updates and the agility of software development. They expect regular updates and changes - in a way higher quality than ever before.
