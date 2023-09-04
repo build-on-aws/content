@@ -13,7 +13,7 @@ tags:
     - ci-cd-pipeline
 authorGithubAlias: lock128
 authorName: Johannes "Lockhead" Koch
-date: 2023-10-1
+date: 2023-10-01
 showInHomeFeed: true
 seoDescription: Learn how a good CI/CD pipeline is important to accelerate your deployment processes and how starting with the pipeline is key to success
 ---
