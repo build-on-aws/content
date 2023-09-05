@@ -6,12 +6,11 @@ tags:
   - pilot-light
 waves: 
   - resilience
-authorGithubAlias: 
-  - sjeversaws
-  - aws-wylatowska
-authorName: 
-  - Steven Evers
-  - Samantha Wylatowska
+authorGithubAlias: sjeversaws
+authorName: Steven Evers
+additionalAuthors:
+  - authorGithubAlias: aws-wylatowska
+    authorName: Samantha Wylatowska
 date: 2023-09-05
 showInHomeFeed: true
 ---
