@@ -8,7 +8,7 @@ waves:
   - resilience
 authorGithubAlias: 
   - sjeversaws
-  - samwyla
+  - aws-wylatowska
 authorName: 
   - Steven Evers
   - Samantha Wylatowska
