@@ -16,7 +16,7 @@ authorName: Venkat Pullela
 date: 2023-09-01
 ---
 
-![Cost Optimization](images/cost-optimization.jpeg)
+![Cost Optimization](images/cost-optimization_small.jpeg)
 
 ## Who am I ?
 
