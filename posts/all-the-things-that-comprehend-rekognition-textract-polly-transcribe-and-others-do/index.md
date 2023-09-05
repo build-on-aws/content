@@ -8,6 +8,8 @@ tags:
     - textract
     - polly
     - transcribe
+waves:
+  - dataml
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes
 date: 2023-06-21

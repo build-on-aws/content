@@ -6,6 +6,8 @@ tags:
   - resilience
   - serverless
   - observability
+waves:
+  - resilience
 authorGithubAlias: saurabh-et-al
 authorName: Saurabh Kumar
 date: 2023-07-07

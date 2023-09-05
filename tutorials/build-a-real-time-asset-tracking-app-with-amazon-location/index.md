@@ -10,6 +10,8 @@ tags:
     - amplify
     - cognito
     - lambda
+waves:
+  - modern-apps
 authorGithubAlias: zachelliottwx
 showInHomeFeed: true
 authorName: Zach Elliott
