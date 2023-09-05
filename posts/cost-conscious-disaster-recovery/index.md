@@ -12,12 +12,13 @@ additionalAuthors:
   - authorGithubAlias: aws-wylatowska
     authorName: Samantha Wylatowska
 date: 2023-09-05
-showInHomeFeed: true
 ---
+|ToC|
+|---|
 
 ## Introduction
 
-As engineers and architects, one of our goals is to create resilient systems that will withstand failures. However, it is crucial to acknowledge that system failures are not a matter of "if" but "when." In order to effectively plan for these system failures, organizations rely on disaster recovery (DR) plans to ensure business continuity is possible, and done in a methodical way. These plans outline the steps to restore system operations within predefined parameters, such as the [Recovery Time Objective (RTO) and Recovery Point Objective (RPO)](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-of-on-premises-applications-to-aws/recovery-objectives.html). In this article, we will explore the concept of disaster recovery within the context of a common three-tier architecture and delve into the cost-conscious Pilot Light DR strategy. 
+As engineers and architects, one of our goals is to create resilient systems that will withstand failures. However, it is crucial to acknowledge that system failures are not a matter of "if" but "when." In order to effectively plan for these system failures, organizations rely on disaster recovery (DR) plans to ensure business continuity is possible, and done in a methodical way. These plans outline the steps to restore system operations within predefined parameters, such as the [Recovery Time Objective (RTO) and Recovery Point Objective (RPO)](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-of-on-premises-applications-to-aws/recovery-objectives.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=cost-conscious-disaster-recovery&sc_geo=mult&sc_country=mult&sc_outcome=acq). In this article, we will explore the concept of disaster recovery within the context of a common three-tier architecture and delve into the cost-conscious Pilot Light DR strategy. 
 
 A disaster recovery plan plays a vital role in restoring business continuity when a system fails. It encompasses actions required to minimize downtime and data loss resulting from disasters, including application failures, power outages, and natural calamities. By effectively planning for such contingencies, organizations can mitigate the impact of disruptions and swiftly resume operations.
 
@@ -26,7 +27,7 @@ One widely adopted architectural pattern is the three-tier architecture, compris
 
 ## Choosing the DR Strategy
 
-Architectural patterns are not one-size-fits-all, and the same holds true for disaster recovery strategies. Amazon Web Services (AWS) recommends various [options](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html) for creating a DR strategy. The various strategies are worth considering, but the one we’re going to look at today is Pilot Light. For our scenario we want to avoid the increased cost and complexity of Multi-site active/active, the cost of maintaining a full Warm standby, but still have an improved RTO and RPO vs Backup & Restore. 
+Architectural patterns are not one-size-fits-all, and the same holds true for disaster recovery strategies. Amazon Web Services (AWS) recommends various [options](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=cost-conscious-disaster-recovery&sc_geo=mult&sc_country=mult&sc_outcome=acq) for creating a DR strategy. The various strategies are worth considering, but the one we’re going to look at today is Pilot Light. For our scenario we want to avoid the increased cost and complexity of Multi-site active/active, the cost of maintaining a full Warm standby, but still have an improved RTO and RPO vs Backup & Restore. 
 
 Let's look at the proposed architecture.
 
@@ -42,9 +43,9 @@ In the secondary region, we replicate the same architecture, but set the ECS Ser
 
 We configure cross-region replication for:
 
-* The [RDS PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.XRgn) database.
-* The [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create-manage-multi-region-secrets.html) database credentials.
-* The [Amazon Elastic Container Registry](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-settings-configure.html) repository that contains our API image.
+* The [RDS PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.XRgn?sc_channel=el&sc_campaign=resiliencewave&sc_content=cost-conscious-disaster-recovery&sc_geo=mult&sc_country=mult&sc_outcome=acq) database.
+* The [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create-manage-multi-region-secrets.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=cost-conscious-disaster-recovery&sc_geo=mult&sc_country=mult&sc_outcome=acq) database credentials.
+* The [Amazon Elastic Container Registry](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-settings-configure.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=cost-conscious-disaster-recovery&sc_geo=mult&sc_country=mult&sc_outcome=acq) repository that contains our API image.
 
 ## Security Considerations
 
@@ -67,13 +68,13 @@ In order to respond to the disaster in a timely manner, we need detective contro
 
 As a result, if either the database or the API become inaccessible, the unhealthy signal propagates through the entire stack.
 
-In order for us to be informed when our service becomes unhealthy, we’ve [configured the Route 53 health check to include an alarm that sends us an e-mail](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-health-checks.html) via an Amazon Simple Notification Service (SNS) topic. 
+In order for us to be informed when our service becomes unhealthy, we’ve [configured the Route 53 health check to include an alarm that sends us an e-mail](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-health-checks.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=cost-conscious-disaster-recovery&sc_geo=mult&sc_country=mult&sc_outcome=acq) via an Amazon Simple Notification Service (SNS) topic. 
 
 When we receive an e-mail, we will perform our recovery steps in the secondary region.
 
 ## Recovery
 
-With our health checks configured throughout the stack and monitoring for changes, let’s outline the steps we must take to respond to the incident. To simplify the actions we need to perform in a recovery situation, we'll follow the Route 53 Application Recovery Controller [documentation](https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html) to do the following: 
+With our health checks configured throughout the stack and monitoring for changes, let’s outline the steps we must take to respond to the incident. To simplify the actions we need to perform in a recovery situation, we'll follow the Route 53 Application Recovery Controller [documentation](https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=cost-conscious-disaster-recovery&sc_geo=mult&sc_country=mult&sc_outcome=acq) to do the following: 
 
 * Create a cluster.
 * Create a control panel.
@@ -160,9 +161,8 @@ There are aspects of this scenario to be mindful of when looking at our results.
 
 We were expecting and waiting for the notification mail to arrive and immediately knew exactly what to do in order to fail over our service. This means that our response to the disaster was an ideal one. When a service impacting event happens to your organization, stress levels might be high, and more than one of your products may be impacted. 
 
-Not all failures are made equal. We removed incoming connectivity to the database and API. There were no major hardware or infrastructure failures, as those are difficult to simulate. This means that our RPO is also ideal. Regardless, any RPO will be a function of your [replica lag](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-metrics.html), which is measured in seconds, so be sure to monitor it.
+Not all failures are made equal. We removed incoming connectivity to the database and API. There were no major hardware or infrastructure failures, as those are difficult to simulate. This means that our RPO is also ideal. Regardless, any RPO will be a function of your [replica lag](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-metrics.html?sc_channel=el&sc_campaign=resiliencewave&sc_content=cost-conscious-disaster-recovery&sc_geo=mult&sc_country=mult&sc_outcome=acq), which is measured in seconds, so be sure to monitor it.
 
 ## Conclusion
 
 Selecting an appropriate disaster recovery strategy is crucial for ensuring business continuity for an organization’s application. A Pilot Light strategy offers a cost-conscious approach to disaster recovery versus strategies like active-passive or active-active, that maintain full infrastructure at all times. The simulated disasters we walked through in this article provide real insights into expectations for outcomes when disasters occur, given a common three-tier architecture. By tailoring the disaster recovery plan to the unique requirements of the application, organizations can enhance their ability to bounce back from catastrophic events and restore business continuity according to their RTO and RPO.
-
