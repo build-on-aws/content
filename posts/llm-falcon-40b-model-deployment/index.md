@@ -18,41 +18,37 @@ additionalAuthors:
 date: 2023-08-28 
 ---
  
-In this guide, we'll delve into deploying Falcon-40B, an open-source Large Language Model with 40 billion parameters, on Amazon SageMaker.
+In this guide, we'll delve into deploying Falcon-40B, an open-source Large Language Model with 40 billion parameters, with Amazon SageMaker.
 
-We'll describe two distinct deployment avenues:
+We'll describe three deployment options:
 
-- SageMaker JumpStart: A direct and user-friendly deployment route.
-- SageMaker Notebook: A hands-on approach, allowing for detailed configuration and granular control.
+- SageMaker JumpStart - with sensible defaults.
+- SageMaker JumpStart - using the SageMaker SDK.
+- SageMaker Studio Notebook - a hands-on approach, allowing for detailed configuration and granular control.
 
-But before we proceed, let's acquaint ourselves with the foundational aspects of the Falcon-40B LLM.
+But before we proceed, let's acquaint ourselves with the foundational aspects of Falcon-40B from the [model card published on Hugging Face](https://huggingface.co/tiiuae/falcon-40b).
 
 ## 1. Falcon-40B Open Source LLM Overview
 
-Falcon-40B is a 40B parameter causal decoder-only model built by the Technology Innovation Institute (TII) of the United Arab Emirates. It was trained on 1,000B tokens of [RefinedWeb](https://huggingface.co/datasets/tiiuae/falcon-refinedweb) dataset enhanced with curated corpora. It is one of a very small number of genuine open-source LLMs, and is made available under the Apache 2.0 license.
+Falcon-40B is one of a family of models that range in size from 7 billion parameters, to 40 billon parameters.  The 40B denotes the 40 billon parameters version.  These models are causal decoder-only model built by the Technology Innovation Institute (TII) of the United Arab Emirates and are some of a very small number of genuinely open-source LLMs, made available under the Apache 2.0 license.  At one point Falcon-40B topped the (ever shifting) [Hugging Face LLM Benchmark](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) leader board.
 
-### 1.1 Features
+Behind the scenes, Falcon-40B uses a variety of techniques to improve training efficiency, such as 3D parallelism and ZeRO optimization. The model also uses an advanced architecture, including flash attention and multi-query attention. These techniques enable the model to better 'understand' long-distance dependencies in texts.
 
-The Falcon-40B LLM has many powerful features including:
+### 1.1 Training data
 
-- **Large size**: Falcon-40B has 40 billion parameters, which allows it to learn more complex relationships between words and concepts.
-- **Efficient training**: Falcon-40B uses a variety of techniques to improve training efficiency, such as 3D parallelism and ZeRO optimization.
-- **Advanced architecture**: Falcon-40B LLM uses an advanced architecture, including flash attention and multi-query attention. These techniques enable the model to better 'understand' long-distance dependencies in texts.
-- **Open Source**: Flacon 40B LLM is truly open-source, allowing researchers and developers to experiment and improve it.
-
-### 1.2 Training data
-
-Falcon-40B has been trained using 1000 billion tokens from RefinedWeb, a filtered and deduplicated high-quality web dataset. It's worth mentioning that the Falcon team considered the data quality of this dataset to be very good, so they also wrote a [paper](https://arxiv.org/pdf/2306.01116.pdf) for this high-quality dataset, as shown below.
+Falcon-40B has been trained using 1000 billion tokens from [RefinedWeb](https://huggingface.co/datasets/tiiuae/falcon-refinedweb), a filtered and deduplicated high-quality web dataset. It's worth mentioning that the Falcon team considered the data quality of this dataset to be very good, so they also wrote a [paper](https://arxiv.org/pdf/2306.01116.pdf) for this high-quality dataset, as shown below.
 
 ![The RefinedWeb Dataset for Falcon LLM](images/refinedWeb-dataset.png)
 
-### 1.3 Training parameters
+Falcon-40B is trained mostly on English, German, Spanish, French, with limited capabilities also in in Italian, Portuguese, Polish, Dutch, Romanian, Czech, Swedish. The Falcon team say that it will not generalize well to other languages, and you should be aware that it could carry the stereotypes and biases commonly encountered online.
 
-Falcon-40B was trained using Amazon SageMaker, using 384 A100 40GB GPUs on the p4d instances. During training, the model used a 3D parallel strategy, with model states partitioned across all the GPUs (ZeRo). Model training began in December 2022 and took two months. The main [training parameters](https://huggingface.co/tiiuae/falcon-40b) are as follows:
+### 1.2 Training parameters
+
+Falcon-40B was trained using Amazon SageMaker, using 384 A100 40GB GPUs on the [p4d instances](https://aws.amazon.com/ec2/instance-types/p4/). During training, the model used a 3D parallel strategy, with model states partitioned across all the GPUs (ZeRo). Model training began in December 2022 and took two months. The main training parameters are as follows:
 
 ![The main training parameters of Falcon-40B](images/falcon-training-parameters.png)
 
-### 1.4 Model architecture
+### 1.3 Model architecture
 
 Falcon-40B is a causal decoder-only model, trained on a causal language modeling task (i.e., predict the next token). The architecture is broadly adapted from the GPT-3 paper ([Brown et al., 2020](https://arxiv.org/abs/2005.14165)), with the following differences:
 
@@ -60,68 +56,65 @@ Falcon-40B is a causal decoder-only model, trained on a causal language modeling
 - **Multi-query attention** ([Shazeer et al., 2019](https://arxiv.org/abs/1911.02150)) and **Flash Attention** ([Dao et al., 2022](https://arxiv.org/abs/2205.14135));
 - **Decoder-block**: parallel attention/MLP with two-layer norms.
 
-TODO: Consider taking this out and repositioning.
-### 1.5 Bias, Risks, and Limitations
+## 2. Deploying Falcon-40B
 
-Falcon-40B is trained mostly on English, German, Spanish, French, with limited capabilities also in in Italian, Portuguese, Polish, Dutch, Romanian, Czech, Swedish. It will not generalize appropriately to other languages. Furthermore, as it is trained on a large-scale corpora representative of the web, it will carry the stereotypes and biases commonly encountered online.
+> **!! Cost Warning !!** - While Falcon-40B may not be the biggest LLM out there, it is still a production scale LLM.  Running a model such as this in your account requires large compute instances to be run, such as the `ml.g5.12xlarge` (or larger). Before deploying any resources in your account always be sure to [check the pricing first](https://aws.amazon.com/pricing), and plan how you will decommission the resources when they are no longer needed.  Note that ALL the methods described in this post deploy large compute instances.
 
-## 2. Use Amazon SageMaker JumpStart to deploy Falcon-40B
+> **AWS Service Quotas** - Your AWS account has region-specific quotas for each AWS service. These quotas help protect the account from unexpected costs caused by unintended usage. You can request [increases for quotas](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html), and may have to, for the large instances used in this post.
 
-This section demonstrates how to deploy Falcon-40B using Amazon SageMaker JumpStart via the SageMaker Python SDK.
+The next few sections describe how to deploy Falcon-40B.  A prerequisite for ALL of these methods is to have Amazon SageMaker Studio up and running in your account. If you're an individual setting up this environment for experimentation, or a small project, this is easy to do and you can follow the instructions [here](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html).  If you are part of a larger team, the setup is still straight forward, but will require a little planning to integrate with your existing workflows.  
 
-- Setup development environment
-- Select the Falcon-40B model you want to deploy ("huggingface-llm-falcon-40b-instruct-bf16")
-- Deploy Falcon-40B LLM to Amazon SageMaker endpoint using the JumpStartModel function
-- Run inference and chat with the model
-- Clean up the environment (delete the model and endpoint)
+Once you're up and running with Amazon SageMaker Studio, deploying Falcon-40B with sensible defaults is incredibly easy.  
 
-Please refer to the screenshot below for details.
+## 2. Deploying Falcon-40B quickly, with sensible defaults
 
-1) Go to **Amazon SageMaker**.
+1. Navigate to JumpStart - First from the home page of SageMaker Studio, or from the left hand menu, select 'JumpStart':
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-1.png)
 
-![Go to Amazon SageMaker](images/jumpstart-1.png)
+2. Search for 'Falcon' - Now using the search box, search for `Falcon`:
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-2.png)
 
-2) Click on **Studio** and then **Open Studio**.
+3. Choose the a version - There are a few versions of Falcon available in JumpStart, with different sizes and some that are instruction fine tuned.  Instruction fine-tuning is where the model has been further refined from it's base training to follow instructions or to chat. Developers deploying and using a model may well want to choose this version, where as ML engineers looking to further refine the model (fine-tune) will probably want to start from the non-instruction tuned model.  As well as that, JumpStart has a 7 billion parameter version as well as the 40 billion parameter version.  To deploy and use the Falcon-40B right now, select 'Falcon 40B Instruct BF16'.
 
-![Click on Studio and then Open Studio](images/jumpstart-2.png)
+4. You can review the deployment configuration options (see next), and or just click the deploy button - That's it.  You're done! _(Deployment may take between 15 and 20 minutes.)_
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-3.png)
 
-3) Or click on **Launch** -> **Studio**. You may need to wait for a few moments and then hit a refresh button to see the **Launch** button.
+5. But wait, what sensible defaults were used? If you navigate to the `Deployment Configuration` you will see the options. The main default to be aware of, is the instance size used to deploy the model.  As you can see here, you can change this, but the minimum size is `mlg5.12xlarge`, which is quite a large instance.
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-4.png)
 
-![Or click on Launch -> **Studio](images/jumpstart-3.png)
+6. You will see how to use the deployed SageMaker model endpoint later in this post.  In the meantime, to review what has been deployed, and when the time comes to shut down the endpoint when, use the left side menu to navigate to `SageMaker JumpStart` > `Launched JumpStart assets` then select the `Endpoints` tab.  From there select the endpoint that was deployed, scroll down and select `Delete`.
 
-4) Wait a few moments…
+## 3. Deploying Falcon-40B, using the SageMaker SDK
 
-![Starting the SageMaker Studio](images/jumpstart-4.png)
+Clicking buttons in SageMaker Studio is a great way to become familiar with some of the options available, but deploying models with code gives you more flexibility, and repeatability.
 
-5) Welcome to SageMaker Studio! Click on **SageMaker JumpStart** -> **Models, notebooks, solutions**, then choose **Text Models -> Falcon-40B Instruct BF16**.
+This section demonstrates how to quickly deploy Falcon-40B using Amazon SageMaker JumpStart via the SageMaker Python SDK.
 
-![Choose Falcon-40B Instruct BF16 Model](images/jumpstart-5.png)
+1. As per the instructions above, navigate to the Falcon-40B model card in SageMaker JumpStart.
 
-6) Click on **Run in notebook** -> **Open notebook**.
+2. This time, rather than clicking `Deploy`, scroll down and select `Open notebook` from the 'Run in notebook' section.  This will open a Jupyter notebook up in SageMaker Studio with all the code ready to be used, reused or modified.
 
-![Run In Notebook](images/jumpstart-6.png)
+    - If you are prompted to 'Set up notebook environment' then selecting the default options will be fine. This instance being run here is to run the SDK code, the model itself will launch in a different container.
+    ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-6.png)
+    - You may need to wait for the notebook to start the kernel.
+    ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-7.png)
 
-7) After “**Starting notebook kernel...**” has been completed, you can execute the example code for deploying the Falcon-40B open-source model.
+3. When the notebook is up and running, you will see that the code is split into 3 main parts with `Deploy Falcon model for inference` being the section we want to use the SDK for deploying Falcon-40B as a SageMaker endpoint.
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-8.png)
 
-![Starting Notebook Kernel](images/jumpstart-7.png)
+## 3. Generating text with Falcon-40B deployed to via SageMaker JumpStart
 
-The full code for this section can be found in the Amazon SageMaker examples GitHub repository. The link is [here](https://github.com/aws/amazon-sagemaker-examples/blob/main/introduction_to_amazon_algorithms/jumpstart-foundation-models/text-generation-falcon.ipynb).
+ToDo...
 
-## 3. Use Amazon SageMaker Notebook to deploy Falcon-40B LLM
+## 3. Deploy Falcon-40B from Hugging Face into a SageMaker Endpoint
 
-This section will show an example of how to deploy an open-source LLM, such as the Falcon-40B, to Amazon SageMaker for inference using the Hugging Face LLM inference container. The example includes the following steps:
+This section will detail how to deploy Falcon-40B to a SageMaker endpoint, and can be customized to deploy many other LLMs from Hugging Face in a similar way. To follow along with these instructions you will need a Python environment where you can install libraries etc.  Amazon SageMaker Studio would be great for this, but you can use any number of alternatives such as Visual Studio Code.  The following code assumes that you are developing a SageMaker Studio notebook (`File` > `New` > `Notebook`)
 
-- Setup development environment
-- Retrieve the Hugging Face LLM DLC
-- Deploying Falcon-40B to Amazon SageMaker endpoint
-- Run inference and chat with the model
-- Clean up the environment (delete the model and endpoint)
-
-The content of this section is partly based on Philipp Schmid's [blog](https://www.philschmid.de/sagemaker-falcon-llm). Some sections have been expanded to inspire readers and developers to think and learn more deeply. For example, content such as **model quantization**, etc.
+> The content of this section is partly based on Philipp Schmid's [blog](https://www.philschmid.de/sagemaker-falcon-llm). Philipp is a Technical Lead at Hugging Face, and an [AWS Machine Learning Hero](https://aws.amazon.com/developer/community/heroes/philipp-schmid/).
 
 ### 3.1 Setup development environment
 
-We'll use the Amazon SageMaker python SDK to deploy the Falcon-40B to the endpoint for model inference. We first need to make sure that the Amazon SageMaker python SDK is properly installed. This is shown in the following code:
+We'll use the Amazon SageMaker Python SDK to deploy the Falcon-40B to the endpoint for model inference. We first need to make sure that the Amazon SageMaker Python SDK is properly installed. This is shown in the following code:
 
 ```python
 # install supported sagemaker SDK
@@ -155,9 +148,9 @@ For more detailed IAM role configuration instructions for the permissions requir
 
 ### 3.2 Retrieve the Hugging Face LLM DLC
 
-The Hugging Face LLM DLC is a new dedicated inference container that makes it easy to deploy LLM in a secure hosting environment. The DLC is powered by Text-Generative Inference ([TGI](https://github.com/huggingface/text-generation-inference)), an open source, purpose-built solution for deploying and servicing large language models (LLM). TGI uses tensor parallelism and dynamic batching to enable high-performance text generation for the most popular open source LLM. With the Hugging Face LLM Inference DLC launched on Amazon SageMaker, developers can get an LLM experience that supports high concurrency and low latency.
+The Hugging Face LLM DLC is a dedicated inference container that makes it easy to deploy LLMs in a secure hosting environment. The DLC is powered by Text-Generative Inference ([TGI](https://github.com/huggingface/text-generation-inference)), an open source, purpose-built solution for deploying and servicing large language models (LLM). TGI uses tensor parallelism and dynamic batching to enable high-performance text generation for the most popular open source LLM. With the Hugging Face LLM Inference DLC launched on Amazon SageMaker, developers can get an LLM experience that supports high concurrency and low latency.
 
-Deploying model with the Hugging Face LLM DLC, first of all, we need to retrieve the container `uri` and provide it to the `HuggingFaceModel` model class, and point to that image using `image_uri`.
+To deploy the model with the Hugging Face LLM DLC, first of all, we need to retrieve the container `uri` and provide it to the `HuggingFaceModel` model class, and point to that image using `image_uri`.
 
 To retrieve the Hugging Face LLM DLC in Amazon SageMaker, we can use the `get_huggingface_llm_image_uri` method provided by the Amazon SageMaker SDK. This method allows us to retrieve the URI of the required Hugging Face LLM DLC based on the specified `backend`, `session`, `region`, and `version`. The example code is as follows:
 
@@ -180,8 +173,6 @@ For information on all the Hugging Face LLM DLC available, you can refer to the 
 ### 3.3 Deploy Falcon-40B to Amazon SageMaker Endpoint
 
 To deploy the Falcon-40B LLM to Amazon SageMaker endpoint, first of all, we need to create a `HuggingFaceModel` model class and define related endpoint configurations, including the `hf_model_id`, `instance_type`, etc. For this demo, we'll be using the `g5.12xlarge` instance type with 4 NVIDIA A10G GPUs and 96GB of GPU memory.
-
-Also, Amazon SageMaker quotas may vary from account to account. If you exceed your quota, you can increase your quota through the following service quota console, link is [here](https://console.aws.amazon.com/servicequotas/home/services/sagemaker/quotas).
 
 The example code for deploying the model to the endpoint is as follows.
 
@@ -211,19 +202,21 @@ llm_model = HuggingFaceModel(
 )
 ```
 
+ToDo: Let's review this section.  QLoRA is for training, bitsandbytes is for inference. No?
+
 Some readers may find a line of code commented out in the example code above:
 
 ```python
 # 'HF_MODEL_QUANTIZE': "bitsandbytes", # comment in to quantize
 ```
 
-This relates to the knowledge category of **model quantification**. Typically, the full precision representations of these very large models don’t fit into memory on a single or even several GPUs. To support an interactive notebook environment to fine-tune and run inference on models of this size, we use a new technique known as [Quantized LLMs with Low-Rank Adapters](https://arxiv.org/abs/2305.14314) (**QLoRA**). The QLoRA paper explores different data types, `4-bit Float` and `4-bit NormalFloat`. QLoRA is an efficient fine-tuning approach that reduces memory usage of LLMs while maintaining solid performance.
+This relates to **model quantification**. Full precision representations of these very large models often don’t fit into memory on a single or even several GPUs. To support an interactive notebook environment to fine-tune and run inference on models of this size, we use a technique known as [Quantized LLMs with Low-Rank Adapters](https://arxiv.org/abs/2305.14314) (**QLoRA**). The QLoRA paper explores different data types, `4-bit Float` and `4-bit NormalFloat`. QLoRA is an efficient fine-tuning approach that reduces memory usage of LLMs while maintaining solid performance.
 
 If you are interested in in-depth research on using the `bitsandbytes` library to do **4-bit quantization** based on QLoRA technology, you can check out this [blog post](https://huggingface.co/blog/4bit-transformers-bitsandbytes).
 
 After creating the `HuggingFaceModel`, we can deploy it to the Amazon SageMaker endpoint using the `deploy` method. We'll deploy the model with the `ml.g5.12xlarge` instance type. [Text Generative Inference (TGI)](https://github.com/huggingface/text-generation-inference) will automatically distribute and shard the model across all GPUs, as shown in the following code.
 
-TGI is a Rust, Python, and gRPC server for text-generated inference, used in HuggingFace's production environment. It provides support for Hugging Chat, the inference API, and inference endpoint. As shown in the image below.
+TGI is a Rust, Python, and gRPC server for text-generated inference, used in Hugging Face's production environment. It provides support for Hugging Chat, the inference API, and inference endpoint. As shown in the image below.
 
 ![Text Generative Inference](images/tgi-1.png)
 
@@ -247,7 +240,7 @@ After submitting and running the above code, Amazon SageMaker will now create th
 
 Once the endpoint is deployed, we can use the `predict` method from the `predictor` to begin model inference.
 
-We can use different parameters to control the generation, which can be defined in the payload's `parameters` attribute. The HuggingFace LLM Inference Container supports various generation parameters, including `top_p`, `temperature`, `stop`, `max_new_token`, etc.
+We can use different parameters to control the generation, which can be defined in the payload's `parameters` attribute. The Hugging Face LLM Inference Container supports various generation parameters, including `top_p`, `temperature`, `stop`, `max_new_token`, etc.
 
 You can find the full list of supported parameters [here](https://huggingface.co/blog/sagemaker-huggingface-llm#4-run-inference-and-chat-with-our-model). As of today, TGI supports the following parameters:
 
@@ -393,7 +386,7 @@ As seen from the comparison of the amount of core code described above, if you a
 
 If you already know about Amazon SageMaker and want more granular control (such as deployment instance types, image version, TGI parameters, etc.) during LLM deployment, you can choose Amazon SageMaker Notebook, which has more complete control over how configuration parameters are deployed.
 
-In the next post, we'll explore using Amazon SageMaker Notebook to quickly and efficiently fine-tuning LLMs in an interactive environment. We will use the **QLoRA** and **bitsandbtyes 4-bits quantization library** to fine-tuning the Falcon-40B model using HuggingFace PEFT on Amazon SageMaker. This topic is currently a cutting-edge topic in the field of LLMs, so stay tuned.
+In the next post, we'll explore using Amazon SageMaker Notebook to quickly and efficiently fine-tuning LLMs in an interactive environment. We will use the **QLoRA** and **bitsandbtyes 4-bits quantization library** to fine-tuning the Falcon-40B model using Hugging Face PEFT on Amazon SageMaker. This topic is currently a cutting-edge topic in the field of LLMs, so stay tuned.
 
 ## About the Author
 
