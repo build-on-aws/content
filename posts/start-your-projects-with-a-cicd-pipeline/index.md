@@ -9,6 +9,7 @@ tags:
     - devops
 authorGithubAlias: lock128
 authorName: Johannes "Lockhead" Koch
+githubUserLabel: AWS-Hero
 date: 2023-09-05
 seoDescription: Learn how a good CI/CD pipeline is important to accelerate your deployment processes and how starting with the pipeline is key to success
 ---
