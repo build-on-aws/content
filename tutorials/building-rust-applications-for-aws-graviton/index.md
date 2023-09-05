@@ -45,14 +45,28 @@ In this tutorial, I will walk through the steps to take an existing application 
 
 ## Setup
 
+### IAM and DynamoDB Setup
+
+This tutorial will leverage a DynamoDB table for its datastore. In order to authenticate with DynamoDB IAM credentials must be used. In this tutorial we will be using IAM roles attached to EC2 instances to obtain valid credentials for DynamoDB. To keep the setup simple, I've provided Terraform, CloudFormation, and AWS CLI scripts for you to use. They can all be found in the [infrastructure directory of the git repo](https://github.com/build-on-aws/building-rust-applications-for-aws-graviton/tree/main/infrastructure) we will be using for this tutorial. Pick your favorite tool and deploy the corresponding script. The scripts will create the following resources:
+
+- An IAM Role with the name `rust-link-shortener-ec2-role`
+- An IAM Policy that will allow DynamoDB actions
+- A DynamoDB table with the name `url_shortener`
+
 ### EC2 Setup
 
 To demonstrate how to move a Rust application to AWS Graviton-based Instances, I have built a simple link shortener application in Rust. I’m not a front end developer, so I will be relying on cURL to interact with my application’s APIs. The application is written with the most current release version of Rust at the time of writing, and Rocket 0.5.0-rc3. The application generates a unique 8 character string for each URL that it shortens, and stores the original URL and the 8 character string in a Amazon DynamoDB table. The code is not meant to be used in production and is provided as a sample only.
 
-For this demo, [launch two EC2 instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance?sc_channel=el&sc_campaign=costwave&sc_content=building-rust-applications-for-aws-graviton&sc_geo=mult&sc_country=mult&sc_outcome=acq) running Ubuntu 22.04. The first instance will be of `c5.xlarge` instance-type, and the second will be of `c6g.xlarge` instance-type. Once they are running, [connect to each instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html?sc_channel=el&sc_campaign=costwave&sc_content=building-rust-applications-for-aws-graviton&sc_geo=mult&sc_country=mult&sc_outcome=acq) and install Rust using the following command:
+For this demo, [launch two EC2 instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance?sc_channel=el&sc_campaign=costwave&sc_content=building-rust-applications-for-aws-graviton&sc_geo=mult&sc_country=mult&sc_outcome=acq) running Ubuntu 22.04. Be sure to select the `rust-link-shortener-ec2-role` IAM role during setup. Without this role yoru instance will not be able to access DynamoDB. The first instance will be of `c5.xlarge` instance-type, and the second will be of `c6g.xlarge` instance-type. Once they are running, [connect to each instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html?sc_channel=el&sc_campaign=costwave&sc_content=building-rust-applications-for-aws-graviton&sc_geo=mult&sc_country=mult&sc_outcome=acq) and install Rust using the following command:
 
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Install the `build-essential` package to obtain the necessary compilers and linkers for any of the modules we will be installing later.
+
+```shell
+sudo apt install build-essential
 ```
 
 ### Code Checkout
@@ -64,14 +78,6 @@ git clone https://github.com/build-on-aws/building-rust-applications-for-aws-gra
 ```
 
 Check out the code on both - your x86 instance and your AWS Graviton Instance. You should now have a `rust-link-shortener` directory containing all of the appropriate code.
-
-### DynamoDB Setup
-
-The link shortener application will leverage DynamoDB as its data store. Our DynamoDB table will run in On-Demand mode. Let's create a table called `url_shortener` with a Partition Key of `short_url` for our application to use.
-
-![DynamoDB Setup](images/dynamo-setup.jpg)
-
-Notice we have a Partition Key of **short_url(String)** and a Capacity mode of **On-demand**.
 
 ## Compiling for X86
 
