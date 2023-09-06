@@ -14,11 +14,20 @@ authorName: Seth Eliot
 date: 2023-09-08
 ---
 
+_Resilience_ is a big topic. I cannot possibly cover all of it here. But I can get you started on your journey to building resilient application in the cloud by sharing these four concepts:
+
+1. [What is resilience](#1-what-is-resilience)
+1. [How to prevent _faults_ from becoming _failures_](#2-how-to-prevent-faults-from-becoming-failures)
+1. [How to think about resilience](#3-how-to-think-about-resilience)
+1. [How does the cloud help you build resilient applications](#4-how-does-the-cloud-help-you-build-resilient-applications)
+
+There is a wealth of information out there on resilience, but it can be sometimes hard to find. Therefore, while I will share with you the essentials of what you need to know about each concept, I also will give you the links to the resources you need to go deeper on each topic.
+
 ## 1. What is resilience
 
 *Resilience is the ability of an application to resist or recover from certain types of faults or load spikes, and remain functional from the customer perspective.*
  
-Anyone who has built or operated an application in production (whether in an on-prem data center or in the cloud) knows [it's a mess out there](https://twitter.com/setheliot/status/1620828116116738048). In any complex system, for example a distributed software application, there are faults, unanticipated inputs and user behaviors, and various instabilities. With the reality that this is the environment in which our applications must operate, it is best practices for resilience that will enable our applications to weather the storm. By recovering quickly, or avoiding impact altogether, our applications can continue to reliably serve the needs of our users.
+Anyone who has built or operated an application in production (whether in an on-prem data center or in the cloud) knows [it's a mess out there](https://twitter.com/setheliot/status/1620828116116738048). In any complex system, for example a distributed software application, there are faults, unanticipated inputs and user behaviors, and various instabilities. With the reality that this is the environment in which your applications must operate, it is best practices for resilience that will enable your applications to weather the storm. By recovering quickly, or avoiding impact altogether, your applications can continue to reliably serve the needs of your users.
 
 ## 2. How to prevent _faults_ from becoming _failures_
 
@@ -246,9 +255,21 @@ The AWS Well-Architected framework documents the best practices or creating and 
 * [Reliability Pillar - AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
 * [Operational Excellence Pillar - AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/welcome.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
 
-Other resources that will help you with your resilience journey are:
+AWS services focused on resilience:
+* [AWS Resilience Hub](https://docs.aws.amazon.com/resilience-hub/latest/userguide/what-is.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) is an AWS service that provides a central place for assessing and operating your application resiliently
+* [AWS Fault Injection Simulator](https://docs.aws.amazon.com/fis/latest/userguide/what-is.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) is a managed service that enables you to perform chaos engineering experiments on your AWS workloads. 
+* [AWS Elastic Disaster Recovery](https://docs.aws.amazon.com/drs/latest/userguide/what-is-drs.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) enables reliable recovery of on-premises and cloud-based applications.
+
+Other resources that will help you with your resilience journey:
 * [Resilience analysis framework](https://docs.aws.amazon.com/prescriptive-guidance/latest/resilience-analysis-framework/introduction.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) is a framework to continuously improve the resilience of your workloads to a broader range of potential failure modes in a consistent and repeatable way.
 * [Shared Responsibility Model for Resiliency](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/shared-responsibility-model-for-resiliency.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) shows you how resilience is a shared responsibility between AWS and you, the customer. It is important that you understand how disaster recovery and availability, as part of resiliency, operate under this shared model.
 * [Availability and Beyond: Understanding and Improving the Resilience of Distributed Systems on AWS](https://docs.aws.amazon.com/whitepapers/latest/availability-and-beyond-improving-resilience/availability-and-beyond-improving-resilience.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) outlines a common understanding for availability as a measure of resilience, establishes rules for building highly available workloads, and offers guidance on how to improve workload availability.
-* [AWS Resilience Hub](https://aws.amazon.com/resilience-hub?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) is an AWS service that provides a central place for assessing and operating your application resiliently
-* [AWS Solutions Library: Solutions for Resilience](https://aws.amazon.com/solutions/resilience?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) contains curated solutions of common use cases for resilience.
+
+More content on resilience in the cloud:
+* [Resilience articles, tutorials, and live streams](https://community.aws/tags/resilience?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
+* [Blog posts on resilient architecture](https://aws.amazon.com/blogs/architecture/tag/resilience/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
+* [Well-Architected Labs](https://wellarchitectedlabs.com/reliability?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
+* [AWS Solutions Library: Solutions for Resilience](https://aws.amazon.com/solutions/resilience?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
+
+
+
