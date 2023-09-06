@@ -12,8 +12,8 @@ waves:
   - dataml
   - generative-ai
 images:
-  banner: 
-  hero: 
+  banner: images/vector-db-header.gif
+  hero: images/vector-db-header.gif
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2023-09-06
