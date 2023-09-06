@@ -6,6 +6,8 @@ tags:
   - pilot-light
 waves: 
   - resilience
+spaces:
+  - cost-optimization
 authorGithubAlias: sjeversaws
 authorName: Steven Evers
 additionalAuthors:
