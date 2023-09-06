@@ -46,7 +46,7 @@ In this blog you are going to create a translator chatbot app, with [Amazon Lex]
 ![Diagram translator chatbot app"](images/fig_1.png)
 <div align="center">Fig 1. Diagram translator chatbot app. </div> 
 
-### You will build it in five parts:
+### You will build it in seven parts:
 
 - Part 1 - Create the function that detects the language and translates it into the desired language 🌎.
 - Part 2 - Create the function to converts text into lifelike speech 🦜.
