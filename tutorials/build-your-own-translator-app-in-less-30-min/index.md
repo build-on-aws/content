@@ -37,7 +37,7 @@ While translation apps exist, building your own and getting hands-on experience 
 
 ## Solution Overview
 
-In this blog you are going to create a translator chatbot app, with [Amazon Lex](https://aws.amazon.com/lex/) that will handle the frontend interaction with the user, and the backend will be in charge of an [AWS Lambda Function](https://aws.amazon.com/lambda/) with the [AWS SDK for Python library Boto3](https://aws.amazon.com/sdk-for-python/) code of the follow AWS services:
+In this blog you are going to create a translator chatbot app, with [Amazon Lex](https://aws.amazon.com/lex/) that will handle the frontend interaction with the user, and the backend will be in charge of an [AWS Lambda Function](https://aws.amazon.com/lambda/) with the [AWS SDK for Python library Boto3](https://aws.amazon.com/sdk-for-python/) code using the following AWS services:
 
 -	[Amazon Comprehend](https://aws.amazon.com/comprehend/) in charge of detecting the language entered.
 -	[Amazon Translate](https://aws.amazon.com/translate/) it will translate into the desired language.
