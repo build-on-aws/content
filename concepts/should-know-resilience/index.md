@@ -34,7 +34,7 @@ Faults can result in failures. But through application of resilience best practi
 Mistakes in code or configuration can be introduced whenever code or configuration is deployed. When teams do not address their tech debt, the risk of such faults rises.
  
 #### **Infrastructure**
-Servers, storage devices, and networks are all susceptible to failure. At small scale (e.g., individual hard drives), this happens all the time, but in the cloud such small scale failures are often abstracted away, so that your application never even "sees" any fault. Larger scale issues such as entire racks or widespread data center issues (like fires or power outages) can also occur. Even at larger scale, your applications can be designed to be resilient to these events (See [Resilience in the cloud](#resilience-in-the-cloud) below). Huge scale events that impact all data centers in a geographic location are also possible, like a meteor strike that flattens multiple data centers. However events like this, of that scale, are highly unlikely.
+Servers, storage devices, and networks are all susceptible to failure. At small scale (e.g., individual hard drives), this happens all the time, but in the cloud such small scale failures are often abstracted away, so that your application never even "sees" any fault. Larger scale issues such as entire racks or widespread data center issues (like fires or power outages) can also occur. Even at larger scale, your applications can be designed to be resilient to these events (See [Resilience in the cloud](#4-how-does-the-cloud-help-you-build-resilient-applications) below). Huge scale events that impact all data centers in a geographic location are also possible, like a meteor strike that flattens multiple data centers. However events like this, of that scale, are highly unlikely.
  
 #### **Data and state**
 Corruption or accidental deletion of data can occur accidentally or maliciously. Errors in code or deployment can also cause data to be corrupted or deleted.
@@ -176,7 +176,7 @@ This includes chaos engineering, which uses the scientific method. You pose a hy
 * [Chaos Engineering in the cloud](https://aws.amazon.com/blogs/architecture/chaos-engineering-in-the-cloud?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
 * [Verify the resilience of your workloads using Chaos Engineering](https://aws.amazon.com/blogs/architecture/verify-the-resilience-of-your-workloads-using-chaos-engineering?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
 
-![Chaos Engineering/continuous resilience continuous cycle, using the scientific method](images/figure3.png "Figure 3. Chaos Engineering/continuous resilience continuous cycle, using the scientific method")
+![Chaos engineering experimentation is a continuous cycle of learning](images/figure3.png "Figure 3. Chaos engineering experimentation is a continuous cycle of learning")
 
 ### How this model helps you
 
@@ -237,7 +237,7 @@ The cloud also makes it easier to accommodate excessive load. In AWS you can con
 
 ## Conclusion
 
-Your customers expect an always-on experience with your application. To deliver this you must build with resilience in mind. With resilience best practices and concepts, you cloud-based application will be able to resist or recover from faults or load spikes, and remain available. Using the [mental model for resilience](#a-mental-model-for-resilience) presented here, you can implement strategies for High Availability (HA), and Disaster Recovery (DR), while continuously learning in response to resilience challenges in the cloud.
+Your customers expect an always-on experience with your application. To deliver this you must build with resilience in mind. With resilience best practices and concepts, you cloud-based application will be able to resist or recover from faults or load spikes, and remain available. Using the [mental model for resilience](#3-how-to-think-about-resilience) presented here, you can implement strategies for High Availability (HA), and Disaster Recovery (DR), while continuously learning in response to resilience challenges in the cloud.
 
 ### Learn more
 
