@@ -126,14 +126,14 @@ Chaos Engineering is a great way to better understand the resilience of your ser
 
 ## You May Also Be Interested In
 
-#### [Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](https://community.aws/posts/how-amazon-does-devops-in-real-life?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)
+**[Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](https://community.aws/posts/how-amazon-does-devops-in-real-life?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)**
 * Read about three more examples of Amazon teams using DevOps to drive resilience
 
-#### [Improving Business Resiliency with Chaos Engineering • GOTO 2021](https://www.youtube.com/watch?v=6NIh-GsO1Kg)
+**[Improving Business Resiliency with Chaos Engineering • GOTO 2021](https://www.youtube.com/watch?v=6NIh-GsO1Kg)**
 * Learn how Amazon Prime Video followed their journey to enable teams to use DevOps practices and Chaos Engineering.
 
-#### [re:Invent ARC206 - Reliable scalability: How Amazon.com scales in the cloud](https://bit.ly/reliable2022)
+**[re:Invent ARC206 - Reliable scalability: How Amazon.com scales in the cloud](https://bit.ly/reliable2022)**
 * With real-world examples of massive-scale production workloads from IMDb, Amazon Search, Amazon Selection and Catalog Systems, Amazon Warehouse Operations, and Amazon Transportation, this presentation shows how Amazon builds and runs cloud workloads at scale and how they reliably process millions of transactions per day
 
-#### [Chaos Engineering in the cloud](https://aws.amazon.com/blogs/architecture/chaos-engineering-in-the-cloud?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)
+**[Chaos Engineering in the cloud](https://aws.amazon.com/blogs/architecture/chaos-engineering-in-the-cloud?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)**
 * This blog introduces you to Chaos Engineering for cloud-based applications
