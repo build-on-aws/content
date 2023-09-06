@@ -19,7 +19,7 @@ date: 2023-09-01
 
 Are you a developer who wants to build and manage a resilient service? Have you worked through tutorials like [Health Checks and Dependencies](https://wellarchitectedlabs.com/reliability/300_labs/300_health_checks_and_dependencies/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks) and want to accomplish the same thing using code to build and manage your infrastructure? This article and code example show you how to use AWS SDKs to set up a resilient architecture that includes AWS services like Amazon EC2 Auto Scaling and Elastic Load Balancing (ELB). You’ll learn how to write code to monitor your service, manage health checks, and make real-time repairs to make your service more resilient. And you’ll do it all without ever opening the AWS Management Console.
 
-This example is available now in the [AWS SDK Code Example Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks).
+This example is available now in the [AWS SDK Code Example Library](https://docs.aws.amazon.com/code-library/latest/ug/elastic-load-balancing-v2_example_cross_ResilientService_section.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks).
 
 ### Just want to see the code?
 
@@ -27,7 +27,7 @@ The code for this example is part of a collection of code examples that show you
 
 To see the code and follow along with this example, clone the repository and choose your preferred language from the list below. Each language link takes you to a README that includes setup instructions and prerequisites for that specific version.
 
-* [Python](https://github.com/Laren-AWS/aws-doc-sdk-examples/tree/resilient-architecture-python/workflows/resilient_service/README.md)
+* [Python](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/cross_service/resilient_service#readme)
 
 ## What are we building?  
 
@@ -255,6 +255,8 @@ Response:
 
 The next phase sets a parameter that instructs the web server to use a deep health check. This means that the web server returns an error code when it can't connect to the recommendations service. Remember, it takes a minute or two for the load balancer to detect an unhealthy instance because of the threshold configuration, so if you check health right away, the instance might report as healthy.
 
+Note that the deep health check is only for ELB routing and not for Auto Scaling instance health. This kind of deep health check is not recommended for Auto Scaling instance health, because it risks accidental termination of all instances in the Auto Scaling group when a dependent service fails. For a detailed explanation of health checks and their tradeoffs, including use of the heartbeat table pattern to automatically detect and replace failing instances, see [Choosing the right health check with Elastic Load Balancing and EC2 Auto Scaling](https://aws.amazon.com/blogs/networking-and-content-delivery/choosing-the-right-health-check-with-elastic-load-balancing-and-ec2-auto-scaling/).  
+
 The instance with bad credentials reports as unhealthy:
 
 ```bash
@@ -275,7 +277,7 @@ The load balancer takes unhealthy instances out of its rotation, so now all requ
 
 #### Replace the failing instance
 
-This next phase terminates the unhealthy instance and lets Auto Scaling automatically start a new instance. While the old instance is shutting down and the new instance is starting, GET requests to the endpoint continue to return recommendations because the load balancer dispatches requests only to the healthy instances.
+This next phase uses an SDK action to terminate the unhealthy instance, at which point Auto Scaling automatically start a new instance. While the old instance is shutting down and the new instance is starting, GET requests to the endpoint continue to return recommendations because the load balancer dispatches requests only to the healthy instances.
 
 While the instances are transitioning, you will see various results from the health check, for example:
 
@@ -388,7 +390,7 @@ Congratulations, you've made it to the end! By following this example, you've le
 * You implemented deep health checks to report unhealthy instances to the load balancer so that it dispatched requests only to instances that responded successfully.
 * You used a load balancer to let the system fail open when something unexpected went wrong. Your users got a successful static response, buying you time to investigate the root cause and get the system running again.
 
-You can find more details about this example, and the complete code, in the [AWS Code Examples GitHub repository](https://github.com/Laren-AWS/aws-doc-sdk-examples/tree/resilient-architecture-python/workflows/resilient_service#readme).
+You can find more details about this example, and the complete code, in the [AWS Code Examples GitHub repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/cross_service/resilient_service#readme).
 
 You can explore more AWS code examples in the [Code Library](https://docs.aws.amazon.com/code-library/latest/ug/what-is-code-library.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks).
 
