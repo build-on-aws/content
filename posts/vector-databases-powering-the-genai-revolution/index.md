@@ -6,6 +6,14 @@ tags:
     - ai-ml
     - vector-databases
     - databases
+spaces:
+    - generative-ai
+waves:
+  - dataml
+  - generative-ai
+images:
+  banner: 
+  hero: 
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2023-09-06
