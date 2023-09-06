@@ -34,20 +34,17 @@ https://youtu.be/xdiDUEPXkoc
 Join us for our upcoming episodes!
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
-|Season 3 | **Episode 4** | 2023/08/22 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | LoginID | TBD |
-|Season 3 | **Episode 5** | 2023/08/29 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | LoginID | TBD |
-|Season 3 | **Episode 6** | 2023/09/05 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | LoginID | TBD |
 |Season 3 | **Episode 7** | 2023/09/12 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JIT | TBD |
 |Season 3 | **Episode 8** | 2023/09/19 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JIT | TBD |
 |Season 3 | **Episode 9** | 2023/09/26 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JIT | TBD |
-|||||||
-|Season 4 | **Episode 1** | 2023/10/03 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Aiven | TBD |
-|Season 4 | **Episode 2** | 2023/10/10 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Aiven | TBD |
-|Season 4 | **Episode 3** | 2023/10/17 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Aiven | TBD |
+|-|--|--|--|--|-|
+|Season 4 | **Episode 1** | 2023/10/03 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | TBC | TBD |
+|Season 4 | **Episode 2** | 2023/10/10 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | TBC | TBD |
+|Season 4 | **Episode 3** | 2023/10/17 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | TBC | TBD |
 |Season 4 | **Episode 4** | 2023/10/24 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
 |Season 4 | **Episode 5** | 2023/10/31 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
 |Season 4 | **Episode 6** | 2023/11/07 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
-|||||||
+|-|--|--|--|--|-|
 |Season 5 | **Episode 4** | 2023/11/14 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Mendix | TBD |
 |Season 5 | **Episode 5** | 2023/11/21 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Mendix | TBD |
 |Season 5 | **Episode 4** | 2023/12/05 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Auth0 | TBD |
@@ -57,6 +54,9 @@ Join us for our upcoming episodes!
 Past episodes
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
+|Season 3 | **Episode 6** | 2023/09/05 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1918449852) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-09-05) |
+|Season 3 | **Episode 5** | 2023/08/29 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1911734242) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-08-29) |
+|Season 3 | **Episode 4** | 2023/08/22 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1906303935) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-08-22) |
 |Season 3 | **Episode 3** | 2023/08/15 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1900160060) | MongoDB | [Show notes](/livestreams/the-big-dev-theory/2023-08-15) |
 |Season 3 | **Episode 2** | 2023/08/08 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1896908029) | MongoDB | [Show notes](/livestreams/the-big-dev-theory/2023-08-08) |
 |Season 3 | **Episode 1** | 2023/08/01 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1887392666) | MongoDB | [Show notes](/livestreams/the-big-dev-theory/2023-08-01) |
