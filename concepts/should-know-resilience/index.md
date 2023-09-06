@@ -57,7 +57,7 @@ Your application depends on other systems such as AWS services and third-party d
 When a fault occurs, it can cause the application to become unavailable. The [Resilience Analysis Framework](https://docs.aws.amazon.com/prescriptive-guidance/latest/resilience-analysis-framework/introduction.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) has identified five common categories of failures abbreviated as SEEMS, named for the first letter of each failure mode listed as follows:
  
 #### **Shared fate**
-When a fault in one component or location cascades to other components or locations. 
+This is when a fault in one component or location cascades to other components or locations. 
  
 For example, a request to a server triggers a bug that causes the server to fail. That failed request is retried by the client, impacting another server in the fleet, and continuing until all servers have failed
 
@@ -66,7 +66,7 @@ Apply these best practices to protect your application from this failure mode:
 
  
 #### **Excessive load**
-Without sufficient capacity when high demand exhausts resources, the user will experience slow and failed responses. 
+Without sufficient capacity to handle high demand, users will face slow and failed responses as resources are exhausted.
  
 For example if AWS Lambda concurrency is limited to 100 in-flight requests, and if requests take 1 second each to process, then when traffic exceeds 100 requests per second, they will be throttled, which can manifest as unavailability to the end user of your application. [Concurrency limit can be calculated](https://repost.aws/knowledge-center/lambda-concurrency-limit-increase?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience) like this:
 
@@ -77,7 +77,7 @@ Apply these best practices to protect your application from this failure mode:
 
  
 #### **Excessive latency**
-This is when system processing or network traffic latency for your application exceeds the expected time. 
+This is when system processing or network traffic latency for your application takes longer than allowed by the business requirements. 
  
 For example, failures in a dependency might require multiple retries  by your application when calling that dependency, which can cause perceived slowdowns to the application end user.
 
@@ -87,7 +87,7 @@ Apply these best practices to protect your application from this failure mode:
 
  
 #### **Misconfiguration and bugs**
-A direct consequence of code and configuration faults, bugs can result in application slow down, loss of availability, or incorrect execution.
+As a direct result of code and configuration faults, bugs can cause application slowdowns, loss of availability, or even incorrect execution.
  
 For example, configuring a client with no timeout can leave it hanging indefinitely if there is a transient error calling the database. This can manifest as a lockup to the end user. 
  
@@ -102,7 +102,7 @@ Apply these best practices to protect your application from this failure mode:
 
  
 #### **Single points of failure (SPOF)**
-When a failure in a single component disrupts the application due to lack of redundancy of the component. 
+This is when a failure in a single component disrupts the application due to lack of redundancy of that component. 
  
 For example, if requests require a call to the relational database to succeed, and that database fails, then all requests fail unless there is a standby database that the application can fail over to.
 
