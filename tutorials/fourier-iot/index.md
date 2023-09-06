@@ -28,7 +28,7 @@ Fourier analysis is a branch of mathematics that deals with the study of functio
 
 Think of it like taking apart a puzzle. Just as you might sort out the different colored pieces of a puzzle to put it together, the FFT sorts out the different frequencies that make up a signal. By doing so, it can help identify patterns, trends, and other important characteristics of the signal.
 
-![Draw of Fourier](./images/fourier3.jpg)
+![Draw of Fourier](./images/fourier3.png)
 
 The FFT is particularly useful in fields like audio and signal processing, where it's often used to filter out unwanted noise, compress data, and perform other important tasks. While it may seem like a complex mathematical concept, the FFT is actually a widely used and very practical tool for understanding and manipulating signals in a variety of fields.
 
