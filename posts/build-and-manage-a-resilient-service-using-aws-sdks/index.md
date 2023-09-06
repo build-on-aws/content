@@ -11,7 +11,7 @@ tags:
   - aws
 authorGithubAlias: Laren-AWS
 authorName: Laren Crawford
-date: 2023-09-01
+date: 2023-09-06
 ---
 
 | ToC |
@@ -255,7 +255,7 @@ Response:
 
 The next phase sets a parameter that instructs the web server to use a deep health check. This means that the web server returns an error code when it can't connect to the recommendations service. Remember, it takes a minute or two for the load balancer to detect an unhealthy instance because of the threshold configuration, so if you check health right away, the instance might report as healthy.
 
-Note that the deep health check is only for ELB routing and not for Auto Scaling instance health. This kind of deep health check is not recommended for Auto Scaling instance health, because it risks accidental termination of all instances in the Auto Scaling group when a dependent service fails. For a detailed explanation of health checks and their tradeoffs, including use of the heartbeat table pattern to automatically detect and replace failing instances, see [Choosing the right health check with Elastic Load Balancing and EC2 Auto Scaling](https://aws.amazon.com/blogs/networking-and-content-delivery/choosing-the-right-health-check-with-elastic-load-balancing-and-ec2-auto-scaling/).  
+Note that the deep health check is only for ELB routing and not for Auto Scaling instance health. This kind of deep health check is not recommended for Auto Scaling instance health, because it risks accidental termination of all instances in the Auto Scaling group when a dependent service fails. For a detailed explanation of health checks and their tradeoffs, including use of the heartbeat table pattern to automatically detect and replace failing instances, see [Choosing the right health check with Elastic Load Balancing and EC2 Auto Scaling](https://aws.amazon.com/blogs/networking-and-content-delivery/choosing-the-right-health-check-with-elastic-load-balancing-and-ec2-auto-scaling/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-and-manage-a-resilient-service-using-aws-sdks).  
 
 The instance with bad credentials reports as unhealthy:
 
