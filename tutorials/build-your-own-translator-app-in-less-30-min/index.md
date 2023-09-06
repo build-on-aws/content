@@ -23,7 +23,7 @@ While translation apps exist, building your own and getting hands-on experience 
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
-| 💰 Cost to complete | [AWS Free Tear](https://aws.amazon.com/free/)      |
+| 💰 Cost to complete | [AWS Free Tier](https://aws.amazon.com/free/)      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br>-  [Foundational knowledge of Python](https://catalog.us-east-1.prod.workshops.aws/workshops/3d705026-9edc-40e8-b353-bdabb116c89c/)    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-08-22                             |
