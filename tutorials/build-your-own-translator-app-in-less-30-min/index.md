@@ -32,7 +32,7 @@ While translation apps exist, building your own and getting hands-on experience 
 
 - How to use Artificial Intelligence service to detect the dominant language in texts.
 - How to use Artificial Intelligence service to translate text.
-- How to use Artificial Intelligence service to converts text into lifelike speech. 
+- How to use Artificial Intelligence service to convert text into lifelike speech. 
 - How to create a Artificial Intelligence conversational interfaces bot to handle translation requests.
 
 ## Solution Overview
