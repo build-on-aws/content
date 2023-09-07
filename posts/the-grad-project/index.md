@@ -26,7 +26,7 @@ Have you ever been curious about what students in prestigious universities are w
 
 The first sequence of videos airing on Sept 19th will feature Ben Lewis, a Master’s student at the [Massachusetts Institute of Technology (MIT)](https://web.mit.edu/) and Jessy Han, a PhD student also from MIT, who will demonstrate their work at the [IDSS](https://idss.mit.edu/) (MIT’s Institute for Data, Systems and Society). Ben and Jessy’s work focuses on social justice and how data can be mined to unearth patterns that point to systemic racism. Knowledge gained from observing and analyzing this data then can be used to address these problems through proactive action.
 
-<iframe width="492" height="875" src="https://www.youtube.com/embed/vHfCu0due0g" title="Ben Jessie OD Promo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://www.youtube.com/embed/vHfCu0due0g
 
 Register for Ben and Jessy's session [here](https://www.linkedin.com/events/howmitstudentsarecombatingracis7100201173629972481/theater/)
 
