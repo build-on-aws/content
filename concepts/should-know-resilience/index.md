@@ -27,7 +27,7 @@ There is a wealth of information out there on resilience, but it can be sometime
 
 *Resilience is the ability of an application to resist or recover from certain types of faults or load spikes, and to remain functional from the customer perspective.*
  
-Anyone who has built or operated an application in production (whether in an on-prem data center or in the cloud) knows [it's a mess out there](https://twitter.com/setheliot/status/1620828116116738048). In any complex system, for example a distributed software application, there are faults, unanticipated inputs and user behaviors, and various instabilities. With the reality that this is the environment in which your applications must operate, it is best practices of resilience that will enable your applications to weather the storm. By recovering quickly, or avoiding impact altogether, your applications can continue to reliably serve the needs of your users.
+Anyone who has built or operated an application in production (whether in an on-prem data center or in the cloud) knows [it's a mess out there](https://twitter.com/setheliot/status/1620828116116738048). In any complex system, for example a distributed software application, there are faults, unanticipated inputs and user behaviors, and various instabilities. With the reality that this is the environment in which your applications must operate, it is best the practices of resilience that will enable your applications to weather the storm. By recovering quickly, or avoiding impact altogether, your applications can continue to reliably serve the needs of your users.
 
 ## 2. How to Prevent _Faults_ From Becoming _Failures_
 
@@ -175,7 +175,7 @@ Key here is observability, which is comprised of metrics, logs, system events, a
 
 Response to failures should be based on the criticality of the application. Many responses can be automated to decrease downtime and improve consistency of recovery.
 
-* [R](https://docs.aws.amazon.com/systems-manager/latest/userguide/running-automations-event-bridge.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)[un automations based on events](https://docs.aws.amazon.com/systems-manager/latest/userguide/running-automations-event-bridge.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
+* [Run automations based on events](https://docs.aws.amazon.com/systems-manager/latest/userguide/running-automations-event-bridge.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
 * [Automating disaster recovery of Amazon RDS and Amazon EC2 instances](https://aws.amazon.com/blogs/storage/automating-disaster-recovery-of-amazon-rds-and-amazon-ec2-instances?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=should-know-resilience)
 
 
