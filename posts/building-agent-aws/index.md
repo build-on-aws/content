@@ -9,6 +9,9 @@ tags:
   - ai-ml
 spaces:
   - generative-ai
+waves:
+  - dataml
+  - generative-ai
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
 date: 2023-06-20

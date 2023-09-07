@@ -9,6 +9,8 @@ tags:
     - database-migration
 spaces:
   - databases
+waves:
+  - dataml
 authorGithubAlias: mpranshu
 authorName: Pranshu Mishra
 date: 2023-05-25

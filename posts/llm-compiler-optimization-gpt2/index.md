@@ -9,6 +9,9 @@ tags:
   - hugging-face
 spaces:
   - generative-ai
+waves:
+  - dataml
+  - generative-ai
 authorGithubAlias: hanyun2019
 authorName: Haowen Huang 
 additionalAuthors: 

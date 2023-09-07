@@ -8,6 +8,8 @@ tags:
   - cdk
   - lambda
   - tutorials
+waves:
+  - dataml
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 showInHomeFeed: true
