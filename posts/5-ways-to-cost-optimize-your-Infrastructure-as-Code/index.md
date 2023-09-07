@@ -1,7 +1,15 @@
-# 5 ways to cost optimize your Infrastructure as Code
-
- 
-By Steph Gooch
+---
+title: "5 ways to cost optimize your Infrastructure as Code"
+description: Providing developers snippets of code they can add to their existing cloudformation templates to prevent cost waste
+tags:
+  - cost-optimization
+  - finops
+  - cloud-financial-management
+  - cdn
+authorGithubAlias: awssteph
+authorName: Steph Gooch
+date: 2023-09-07
+---
  
 Builders! Have you been asked to increase efficiency in your AWS accounts? Today, we’ll share five code snippets you can add to your Infrastructure as Code(IaC) to prevent cost waste. For for each code snippet, we will tell you why you need the code, what the change will do, and the code you can copy for AWS CloudFormation template. 
 
