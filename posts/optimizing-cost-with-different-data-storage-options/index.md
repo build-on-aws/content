@@ -1,5 +1,5 @@
 ---
-title: "title: "Balance Performance and Cost: Select the Right AWS Storage Solution for Your Applications"
+title: "Balance Performance and Cost: Select the Right AWS Storage Solution for Your Applications"
 description: "Storage class and tools are complex and challenging. Here's how to choose the right one."
 tags:
     - cost-optimization
@@ -13,15 +13,15 @@ waves:
   - cost
 authorGithubAlias: mpranshu
 authorName: Pranshu Mishra
-date: 2023-08-25 
+date: 2023-09-07
 ---
 
 | ToC |
 |-----|
 
-Choosing the right storage class and tools for your use case can be daunting. The wrong choice can lead to performance issues, reduced scalability, and higher costs. In this blog, we break down the basic classes of storage and explore the specific tools that AWS offers for successful implementation.
+Choosing the right storage class and tools for your use case can be daunting. The wrong choice can lead to performance issues, reduced scalability, and higher costs. Even the same application can have different storage needs depending on its specific use case, which means understanding the nuances of each storage option is crucial to ensuring optimal performance and cost-efficiency.
 
-We explore factors such as performance, durability, scalability, access controls, data retrieval, and cost optimization. Even the same application can have different storage needs depending on its specific use case, which means understanding the nuances of each storage option is crucial to ensuring optimal performance and cost-efficiency.
+In this blog, we break down the basic classes of storage and explore the specific tools that AWS offers for successful implementation. We explore factors such as performance, durability, scalability, access controls, data retrieval, and cost optimization. Let's dive in!
 
 ![A diagram showing a box at the top labeled "Storage Services" with three arrows pointing to boxes labeled "Block Storage," "File Storage," and "Object Storage," with lists of AWS services beneath each box](images/StorageServices.jpg "Storage Services")
 
@@ -29,9 +29,9 @@ We explore factors such as performance, durability, scalability, access controls
 
 There are three main cloud storage types: [object storage](https://aws.amazon.com/what-is/object-storage/?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq), [file storage](https://aws.amazon.com/what-is/cloud-file-storage/?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [block storage](https://aws.amazon.com/what-is/block-storage/?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq). Each of these have various sub types, but without getting too bogged down, let's go over the basics.
 
-## Object Store
+## Object Storage
 
-Object store is a storage architecture for unstructured data that stores data as objects with metadata and unique identifiers for easy access. It's ideal for large amounts of data, such as media files, documents, logs, and backups. Object stores are highly scalable, provide high availability and durability, and are cost-effective. [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq)(S3) is an Object Store service from AWS that can store and manage petabytes of data with 11 9's of durability. Amazon S3 offers a range of [storage classes](https://aws.amazon.com/s3/storage-classes/) that you can choose from based on the data access, resiliency, and cost requirements of your workloads, such as:
+Object store is a storage architecture for unstructured data that stores data as objects with metadata and unique identifiers for easy access. It's ideal for large amounts of data, such as media files, documents, logs, and backups. Object stores are highly scalable, provide high availability and durability, and are cost-effective. [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html?sc_channel=el&sc_campaign=costwave&sc_content=storage-cost-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq)(S3) is an Object Storage service from AWS that can store and manage petabytes of data with 11 9's of durability. Amazon S3 offers a range of [storage classes](https://aws.amazon.com/s3/storage-classes/) that you can choose from based on the data access, resiliency, and cost requirements of your workloads, such as:
 
 1. **Frequently accessed data:** The Standard storage class is designed for frequently accessed data that requires low latency and high throughput performance. This storage class is ideal for use cases such as web and mobile applications, content distribution, and big data analytics.
 
@@ -59,7 +59,7 @@ Block storage is a storage architecture that stores data in fixed-sized blocks, 
 
 It's important to carefully choose between EBS and Instance Store based on the specific workload requirements and performance needs.
 
-Table below quickly summarizes the discussion so far:
+The table below quickly summarizes the discussion so far:
 
 | Storage Type   | Use Case                 | Advantages                                 | Disadvantages                               |
 |--------------|--------------------------|--------------------------------------------|---------------------------------------------|
@@ -81,7 +81,7 @@ Here is a step-by-step guide to help you choose the right storage on AWS:
 
 5. **Consider cost implications:** Review storage pricing based on data volume, storage type, data transfer, and additional features. Examine pricing models for different services and calculate anticipated costs. Consider both upfront and ongoing operational costs to make an informed decision. As an example Amazon S3 Glacier Deep Archive provides the cheapest storage on AWS, but pricing may increase exponentially if data is accessed frequently. This storage is best suited for long term archival where data is rarely accessed. Also, with S3 and EFS you are charged only for amount of data stored where as with EBS you are charged for amount of storage provisioned.
 
-6. **Security and compliance considerations:** Ensure the chosen storage service meets specific security and compliance requirements. AWS offers security features like encryption at rest and in transit, access controls, and compliance certifications. Evaluate these features to align with security and compliance needs. Example, With S3 Object Lock, you can store objects using a write-once-read-many (WORM) model. Object Lock can help prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely.
+6. **Consider security and compliance:** Ensure the chosen storage service meets specific security and compliance requirements. AWS offers security features like encryption at rest and in transit, access controls, and compliance certifications. Evaluate these features to align with security and compliance needs. Example, With S3 Object Lock, you can store objects using a write-once-read-many (WORM) model. Object Lock can help prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely.
 
 7. **Consider future storage needs and growth projections:** Determine if your storage requirements will increase over time. Ensure the chosen storage service can scale without disruptions. AWS's elasticity and scalability features can accommodate evolving storage needs. Both EFS and S3 are petabyte scale storage with high elasticity. Whereas, EBS provides storage up to few TBs.
 
