@@ -132,4 +132,4 @@ This code should be deployed for file systems that contain files that are not ac
 
 ## Conclusion
 
-In this blog post, we looked at five code snippets that you can add to your Infrastructure as Code(IaC) to prevent cost waste. If you are interested in how you can set up a CI/CD pipeline to deploy changed to your Cloudformation stacks, have a look at [this tutorial](/tutorials/build-ci-cd-pipeline-iac-cloudformation).
+In this blog post, we looked at five code snippets that you can add to your Infrastructure as Code(IaC) to prevent cost waste. If you are interested in how you can set up a CI/CD pipeline to deploy changes to your Cloudformation stacks, have a look at [this tutorial](/tutorials/build-ci-cd-pipeline-iac-cloudformation).
