@@ -34,7 +34,7 @@ Register for Ben and Jessy's session [here](https://www.linkedin.com/events/howm
 
 The second sequence, airing on Sept 26, will feature Zinuo (Vincent) Xu, a recently-graduated Master’s student from [Carnegie Mellon’s Heinz College](https://www.heinz.cmu.edu/). Vince was also one of our pioneering [Cloud Club Captains](https://s12d.com/cloud-clubs), helping organize the world’s first Student Symposium at CMU while building a strong Cloud Club in his intitution. Vince will discuss and demo his work creating a Large Language Model to build a way for a financial institution to query a database using natural language that is converted by the model to SQL.
 
-<iframe width="492" height="875" src="https://www.youtube.com/embed/kMVxu-3BkK4" title="Vince LI Promo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://www.youtube.com/embed/kMVxu-3BkK4
 
 Register for Vince's session [here](https://www.linkedin.com/events/exploringtext-to-sql-howcarnegi7100202154535071744/theater/)
 
