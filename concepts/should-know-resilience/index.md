@@ -9,6 +9,7 @@ tags:
     - chaos-engineering
 waves:
   - resilience
+showInHomeFeed: true
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-09-07
