@@ -27,7 +27,7 @@ There is a wealth of information out there on resilience, but it can be sometime
 
 *Resilience is the ability of an application to resist or recover from certain types of faults or load spikes, and to remain functional from the customer perspective.*
  
-Anyone who has built or operated an application in production (whether in an on-prem data center or in the cloud) knows [it's a mess out there](https://twitter.com/setheliot/status/1620828116116738048). In any complex system, for example a distributed software application, there are faults, unanticipated inputs and user behaviors, and various instabilities. With the reality that this is the environment in which your applications must operate, it is best the practices of resilience that will enable your applications to weather the storm. By recovering quickly, or avoiding impact altogether, your applications can continue to reliably serve the needs of your users.
+Anyone who has built or operated an application in production (whether in an on-prem data center or in the cloud) knows [it's a mess out there](https://twitter.com/setheliot/status/1620828116116738048). In any complex system, for example a distributed software application, there are faults, unanticipated inputs and user behaviors, and various instabilities. With the reality that this is the environment in which your applications must operate, it is the best practices of resilience that will enable your applications to weather the storm. By recovering quickly, or avoiding impact altogether, your applications can continue to reliably serve the needs of your users.
 
 ## 2. How to Prevent _Faults_ From Becoming _Failures_
 
