@@ -7,10 +7,10 @@ tags:
   - cloud-financial-management
   - infrastructure-as-code
   - cloudformation
-waves
- - cost
-spaces
- - cost-optimization
+spaces:
+  - cost-optimization
+waves:
+  - cost
 authorGithubAlias: awssteph
 authorName: Steph Gooch
 date: 2023-09-07
