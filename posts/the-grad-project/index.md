@@ -12,11 +12,11 @@ authorName: Jen Looper
 additionalAuthors: 
   - authorGithubAlias: cie247
     authorName: Curtis Evans
-date: 2023-09-11
+date: 2023-09-12
 ---
 # Announcing The Grad Project: Showcasing Innovative Student Research
 
-The Grad Project is a new video and hands-on coding initiative hosted on LinkedIn Live. It showcases the research carried out by innovative graduate students using AWS technologies, enabling them to share their knowledge with the community. The project consists of short videos accompanied by a longer hands-on tutorial with a live Q&A, each featuring a graduate student discussing their research or project and demonstrating how they used AWS technologies to achieve their goals. We were lucky enough to be able to join these students in Seattle to record their experiences.
+Have you ever been curious about what students in prestigious universities are working on these days? The Grad Project is a new video and hands-on coding initiative hosted on LinkedIn Live. It showcases the research carried out by innovative graduate students using AWS technologies, enabling them to share their knowledge with the community. The project consists of short videos accompanied by a longer hands-on tutorial with a live Q&A. Each video features graduate students discussing their research and demonstrating how they used AWS technologies to achieve their goals. We were lucky enough to be able to join these students in Seattle to record their experiences.
 
 ![Taping The Grad Project](./images/tgp-1.jpg)
 
@@ -26,15 +26,13 @@ The Grad Project is a new video and hands-on coding initiative hosted on LinkedI
 
 The first sequence of videos airing on Sept 19th will feature Ben Lewis, a Master’s student at the [Massachusetts Institute of Technology (MIT)](https://web.mit.edu/) and Jessy Han, a PhD student also from MIT, who will demonstrate their work at the [IDSS](https://idss.mit.edu/) (MIT’s Institute for Data, Systems and Society). Ben and Jessy’s work focuses on social justice and how data can be mined to unearth patterns that point to systemic racism. Knowledge gained from observing and analyzing this data then can be used to address these problems through proactive action.
 
-Register for their session [here](https://www.linkedin.com/events/exploringtext-to-sql-howcarnegi7100202154535071744/theater/)
+<iframe width="492" height="875" src="https://www.youtube.com/embed/vHfCu0due0g" title="Ben Jessie OD Promo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
->embed video of Ben/Jessy
-
-Register for their session [here](https://www.linkedin.com/events/howmitstudentsarecombatingracis7100201173629972481/theater/)
+Register for Ben and Jessy's session [here](https://www.linkedin.com/events/howmitstudentsarecombatingracis7100201173629972481/theater/)
 
 ## Skill up with CMU
 
-The second sequence, airing on Sept 26, will feature Zinuo (Vincent) Xu, a recently-graduated Master’s student from [Carnegie Mellon’s Heinz College](https://www.heinz.cmu.edu/). Vince was also one of our pioneering Cloud Club Captains, helping organize the world’s first Student Symposium at CMU while building a strong Cloud Club in his intitution. Vince will discuss and demo his work creating a Large Language Model to build a way for a financial institution to query a database using natural language that is converted by the model to SQL.
+The second sequence, airing on Sept 26, will feature Zinuo (Vincent) Xu, a recently-graduated Master’s student from [Carnegie Mellon’s Heinz College](https://www.heinz.cmu.edu/). Vince was also one of our pioneering [Cloud Club Captains](https://s12d.com/cloud-clubs), helping organize the world’s first Student Symposium at CMU while building a strong Cloud Club in his intitution. Vince will discuss and demo his work creating a Large Language Model to build a way for a financial institution to query a database using natural language that is converted by the model to SQL.
 
 <iframe width="492" height="875" src="https://www.youtube.com/embed/kMVxu-3BkK4" title="Vince LI Promo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -52,7 +50,8 @@ The Grad Project is part of our ongoing effort to support education and research
 ## Get ready for The Grad Project by:
 
 1. Logging into [SageMaker Studio Lab](https://studiolab.sagemaker.aws/) to create a free account
-2. Fork the Grad Project student-built [GitHub repos](https://github.com/build-on-aws/the-grad-project)
+2. Fork the Grad Project's student-built [GitHub repos](https://github.com/build-on-aws/the-grad-project)
+3. Preregister for the [MIT](https://www.linkedin.com/events/howmitstudentsarecombatingracis7100201173629972481/theater/) session and the [CMU](https://www.linkedin.com/events/exploringtext-to-sql-howcarnegi7100202154535071744/theater/) session.
 3. Tune in on LinkedIn Live on Sept 19th and 26th to learn live with Ben, Jessy, Vince, and Developer Advocate Curtis who will be ready to answer your questions.
-4. Miss the broadcast? You can find it on YouTube after the event.
+4. Miss the broadcast? You can find it on [YouTube](https://www.youtube.com/@AWSOnlineTechTalks) after the event.
 
