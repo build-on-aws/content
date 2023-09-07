@@ -41,7 +41,7 @@ So let's explore how the FFT can be put to work. The architecture of our solutio
 1. The first component is your laptop with microphone running Processing.org with a notes detection script.
 2. Once it detects a note, it will send the note name to the "control/sound" IoT topic.
 3. From AWS IoT Core we can forward the message to other topics. For example, if the note is a G, we could turn on the smart bulb in a lamp by sending a MQTT message.
-4. We can also trigger other services like AWS DynamoDB for storing the message data without one line of coding, or we could call an AWS Lambda function: sound oriented functions!
+4. We can also trigger other services like AWS DynamoDB for storing the message data without one line of coding  or we could call an AWS Lambda function (yes, we could literally build sound-triggered functions!).
 
 The main steps to build our application are:
 1. Install Processing.org, a Java-based programming language and development environment that is used to create visualizations, games, and other interactive media. It has a library for FFT processing called Minim.
@@ -133,7 +133,7 @@ Now we have a representation of our notes Thing in the AWS Cloud and also the se
 
 Now that we have installed Processing.org, Minim library, and already have our Thing created in AWS IoT Core, let's start to explore the Sketch we did for detecting and converting notes to IoT / MQTT Messages!
 
-Open Processing.org and copy and paste this code (don't worry - we'll explain the details later): 
+Open Processing.org and copy and paste this code that is explained in comments: 
 
 ```java
 import ddf.minim.analysis.*;
@@ -148,6 +148,7 @@ import com.amazonaws.services.iot.client.AWSIotQos;
 import com.amazonaws.services.iot.client.AWSIotTopic;
 import play.aws.*;
 
+//Declaring "global" objects used by our app
 String data;
 Client c;
 
@@ -156,7 +157,7 @@ AudioPlayer jingle;
 FFT fft;
 String windowName;
 AudioInput in;
-
+//Processing execute setup() function just once.. That's the right place for initializing objects
 void setup()
 {  
   size(512, 200);
@@ -168,8 +169,10 @@ void setup()
   fft = new FFT(in.bufferSize(), in.sampleRate());
   textFont(createFont("Arial", 12));
   windowName = "None";
+  //async initialize AWS IoT Core MQTT connection
   thread("MQTT");  
 }
+
 //this function will initialize the AWS IoT Core communication
 //you need to provide:
   //1. AWS IoT Code End point
@@ -184,6 +187,7 @@ void MQTT() {
     );
 }
 
+//Processing will execute draw() function in a loop forever; here is where we perform draws and calculations
 void draw()
 {
   background(0);
@@ -197,7 +201,7 @@ void draw()
     line(i, height, i, height - fft.getBand(i)*4);
   }
   fill(255);
-  
+  //Analyse frequency "intensity" and send message to AWS IoT Core...
   if(fft.getFreq(82.4)>=9) sendNoteToAWS("E");
   if(fft.getFreq(110.0)>=9) sendNoteToAWS("A");
   if(fft.getFreq(146.8)>=9) sendNoteToAWS("D");
@@ -211,6 +215,7 @@ void draw()
   text("The window being used is: " + windowName, 5, 20);
 }
 
+//You can press w to turn on FFT haming to reduce amount of noise in the spectrum
 void keyReleased()
 {
   if ( key == 'w' ) 
@@ -227,7 +232,7 @@ void keyReleased()
     windowName = "None";
   }
 }
-
+//Processing will call it before exiting the app..
 void stop()
 {
   minim.stop();
@@ -296,8 +301,16 @@ Then you can check the AWS Console:
 
 ![AWS IoT Core Screenshot](./images/iot10.png)
 
-[Check out the live-demo video here!](https://youtu.be/0oavSqRD4wc)
+Check out the live-demo video here:
+https://youtu.be/0oavSqRD4wc
 
 ## Conclusion
 
 Now you can imagine infinite possibilities: our team already did home automation integration to turn on and off lamps using Ukulele; we made it rain inside Minecraft based on notes, and we also changed Roblox game behavior. Now it's up to you to build on your own stuff using this magical algo: Fast Fourier Transform. Have fun! 
+
+More information about Fast Fourier Transform:
+https://en.wikipedia.org/wiki/Fast_Fourier_transform
+
+This is a youtube video I really enjoy that explains FFT with a visual approach:
+https://www.youtube.com/watch?v=spUNpyF58BY
+
