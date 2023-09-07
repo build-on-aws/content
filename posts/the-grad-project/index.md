@@ -14,7 +14,7 @@ additionalAuthors:
     authorName: Curtis Evans
 date: 2023-09-12
 ---
-# Announcing The Grad Project: Showcasing Innovative Student Research
+## Announcing The Grad Project: Showcasing Innovative Student Research
 
 Have you ever been curious about what students in prestigious universities are working on these days? The Grad Project is a new video and hands-on coding initiative hosted on LinkedIn Live. It showcases the research carried out by innovative graduate students using AWS technologies, enabling them to share their knowledge with the community. The project consists of short videos accompanied by a longer hands-on tutorial with a live Q&A. Each video features graduate students discussing their research and demonstrating how they used AWS technologies to achieve their goals. We were lucky enough to be able to join these students in Seattle to record their experiences.
 
