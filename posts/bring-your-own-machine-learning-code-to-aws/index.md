@@ -4,6 +4,8 @@ description: "Run your training code on AWS with minimum effort by bringing your
 tags:
     - sagemaker
     - ai-ml
+waves:
+  - dataml
 authorGithubAlias: kazdaghli
 authorName: Sarra Kazdaghli
 additionalAuthors:

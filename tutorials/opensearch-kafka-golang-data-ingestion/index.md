@@ -7,6 +7,8 @@ tags:
   - golang
   - analytics
   - tutorials
+waves:
+  - dataml
 showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
