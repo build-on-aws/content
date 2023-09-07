@@ -1,6 +1,6 @@
 ---
-title: "Using Java, Amazon Corretto, Ukulele and Fast Fourier Transform to detect musical notes and command IoT devices"
-description: "This step-by-step tutorial will show you how to use Fast Fourier Transform to detect musical notes and command IoT devices."
+title: "Use Fast Fourier Transform to Detect Musical Notes and Make them Command IoT Devices"
+description: "This step-by-step tutorial will show you how to use Java, Amazon Corretto, Ukulele and Fast Fourier Transform to make your IoT devices dance to the music."
 tags:
   - cloud
   - iot
@@ -10,19 +10,19 @@ authorName: Vinicius Senger
 date: 2023-08-21
 ---
 
-Fourier Transform algorithms are -everywhere- in many applications: image recognition, instrument tuners, signal processing in complex medical devices, inside machine learning algorithms, cryptography, and more.
+Fourier Transform algorithms show up all over the place: in image recognition, instrument tuners, signal processing in complex medical devices, machine learning algorithms, cryptography, and more. But how exactly do they work - and why are they so useful in so many contexts?
 
 ![A blackboard with Fourier's formula](./images/fourier1.jpg)
 
-To learn about Fourier Transform in a practical and funny way, we will build an application that uses a Fast Fourier Transform (FFT) algorithm to detect musical notes using laptop mic and send as IoT messages to the cloud that can command devices, games or anything you imagine!
+To learn about Fourier Transform in a practical and fun way, we will build an application that uses a Fast Fourier Transform (FFT) algorithm to detect musical notes using a laptop mic and send them as IoT messages to the cloud that can command devices, games, or anything else you can imagine!
 
-Let's learn little more about this famous mathematician and his formula, and then go build!
+Let's learn little more about this famous mathematician and his formula and then go build!
 
 ## Fourier and Fourier Transform
 
 ![Draw of Fourier](./images/fourier2.jpg)
 
-Joseph Fourier has born in 1768 and was a French mathematician who lived in the 19th century. He was a brilliant mathematician and physicist, and he is known for his work in the field of mathematics, especially in the field of Fourier analysis. 
+Joseph Fourier has born in 1768 and grew up to be a brilliant French mathematician and physicist. He's best known for his work in the field of mathematics, especially in the field of Fourier analysis. 
 
 Fourier analysis is a branch of mathematics that deals with the study of functions and their properties in the frequency domain. The Fast Fourier Transform (FFT) is a mathematical technique used to analyze and transform signals from one domain to another. In simpler terms, it's a way to take a signal, which is essentially a set of numbers representing something like sound, light, or even stock market data, and break it down into its individual frequencies.
 
@@ -32,18 +32,20 @@ Think of it like taking apart a puzzle. Just as you might sort out the different
 
 The FFT is particularly useful in fields like audio and signal processing, where it's often used to filter out unwanted noise, compress data, and perform other important tasks. While it may seem like a complex mathematical concept, the FFT is actually a widely used and very practical tool for understanding and manipulating signals in a variety of fields.
 
-## Let's build on!  
-The architecture of our solution is simple and for now we are using just AWS IoT Core service to manage messages that we will be able to react later:
+## Let's Build!
+
+So let's explore how the FFT can be put to work. The architecture of our solution is simple, and for now we are using the AWS IoT Core service to manage messages that we will be able to react to later:
+
 ![implemented archicture](./images/architecture1.png)
 
-1. The first component is your laptop with microphone running Processing.org with notes detection script
-2. Once it detects a note, it will send the note name to "control/sound" IoT topic
-3. From the AWS IoT Core we can forward the message to other topics, for example I could say that if the note is a G, turn on a lamp in some IoT device by sending a MQTT message
-4. We can also trigger other services like AWS DynamoDB for storing the message data without one line of coding or we could call an AWS Lambda function: sound oriented functions! :)
+1. The first component is your laptop with microphone running Processing.org with a notes detection script.
+2. Once it detects a note, it will send the note name to the "control/sound" IoT topic.
+3. From AWS IoT Core we can forward the message to other topics. For example, if the note is a G, we could turn on the smart bulb in a lamp by sending a MQTT message.
+4. We can also trigger other services like AWS DynamoDB for storing the message data without one line of coding, or we could call an AWS Lambda function: sound oriented functions!
 
-The main steps to build our application is:
-1. Install Processing.org: a Java based programming language and development environment that is used to create visualizations, games, and other interactive media. It has a library for FFT processing called Minim.
-2. Create IoT security credentials and a thing on AWS IoT Core.
+The main steps to build our application are:
+1. Install Processing.org, a Java-based programming language and development environment that is used to create visualizations, games, and other interactive media. It has a library for FFT processing called Minim.
+2. Create IoT security credentials and a Thing on AWS IoT Core.
 3. Create a Processing.org sketch that uses FFT to detect musical notes and send as IoT messages to the cloud.
 4. React to messages: the sky is the limit! I will show how I did a cool integration with lamps and Roblox gaming!
 
@@ -57,7 +59,7 @@ The following image was generated by a few lines of code:
 
 ![Draw of Fourier](./images/processing1.jpg)
 
-We are not explaining this code here, we just want that just a few lines of code can generate a beautiful image like this. 
+We won't break down this code here; I just want to show how a few lines of code can generate a beautiful image like this. 
 
 ```java
 float[][] distances;
@@ -90,50 +92,49 @@ void draw() {
 }
 ```
 
-### Installing processing.org
+### Installing Processing.org
 
 1. Download Processing.org from [here](https://processing.org/download/).
 2. Install it and open it.
 3. Go to Sketch > Import Library > Manage Libraries > Add Library... and search for Minim. Install it.
-image
    ![Processing Screen shot](./images/processing2.png)
    ![Processing Screen shot](./images/processing3.png)
 
-4. Now you can navigate into cool samples that comes with this library, click in File -> Examples and navigate to Contributed Libraries -> Minim
+4. Now you can navigate into cool samples that comes with this library, click on File > Examples and navigate to Contributed Libraries > Minim
    ![Processing Screen shot](./images/processing4.png)
 
 5. This is the SoundSpectrum example:
    ![Processing Screen shot](./images/processing5.png)
 
-### Configuring AWS IoT Core
+## AWS IoT Core
 
-Before we move to our Sketch to detect notes we will create a -Thing- in AWS IoT Core service
-that will manage the IoT / MQTT messages with security. AWS IoT Core is a message broker that can coordinate delivery of messages between devices with a publish / subscriber architecture: one device can publish a message to hundreds or thousands of subscriber devices!
+Before we move to our Sketch to detect notes, we will create a **Thing** (yes, that's a technical term) in the AWS IoT Core service. This will manage the IoT / MQTT messages with security. AWS IoT Core is a message broker that can coordinate delivery of messages between devices with a publish / subscriber architecture: one device can publish a message to hundreds or thousands of subscriber devices.
 
-1. Open you AWS Console and go to AWS IoT Core
-2. Click "All Devices" -> "Things" and "Create Things"
+1. Open your AWS Console and go to AWS IoT Core.
+2. Click "All Devices" > "Things" > "Create Things".
 ![AWS IoT Core Screenshot](./images/iot01.png)
-3. Choose "Create single thing"
+3. Choose "Create single thing".
 ![AWS IoT Core Screenshot](./images/iot02.png)
-4. Name it as fft_notes and configure with default options
+4. Name it fft_notes and configure it with default options.
 ![AWS IoT Core Screenshot](./images/iot03.png)
-5. Choose "Auto-generate a new certificate"
+5. Choose "Auto-generate a new certificate".
 ![AWS IoT Core Screenshot](./images/iot04.png)
-6. Skip the Attach policies
+6. Skip the Attach policies.
 ![AWS IoT Core Screenshot](./images/iot05.png)
-7. Download the device certificate, keys and root CA
+7. Download the device certificate, keys, and root CA.
 ![AWS IoT Core Screenshot](./images/iot06.png)
-8. Now click in the AWS IoT -> Settings in the main AWS IoT Core Console
-9. Copy the endpoint address to some place. We will need this information to configure our Processing.org connection to AWS IoT Core
+8. Now click on the AWS IoT > Settings in the main AWS IoT Core Console.
+9. Copy the endpoint address to some place. We will need this information to configure our Processing.org connection to AWS IoT Core.
 ![AWS IoT Core Screenshot](./images/iot07.png)
 
-Now we have a representation of our notes thing in the AWS Cloud and also the security keys to communicate using TLS 1.2.
+Now we have a representation of our notes Thing in the AWS Cloud and also the security keys to communicate using TLS 1.2.
 
-### Detecting Notes Sketch
+## Detecting Notes Sketch
 
-Now that we have installed Processing.org, Minim library and already have our thing created in AWS IoT Core, let's start to explore the Sketch we did for detecting and converting notes to IoT / MQTT Messages!
+Now that we have installed Processing.org, Minim library, and already have our Thing created in AWS IoT Core, let's start to explore the Sketch we did for detecting and converting notes to IoT / MQTT Messages!
 
-Open Processing.org and copy and paste this code that we will explain the details later: 
+Open Processing.org and copy and paste this code (don't worry - we'll explain the details later): 
+
 ```java
 import ddf.minim.analysis.*;
 import ddf.minim.*;
@@ -272,16 +273,18 @@ void sendNoteToAWS(String note) {
   }
 }  
 ```
-Before running the code we need to install some Java libraries that we developed and also dependencies to make the AWS IoT Core communication. 
-[Download the zip here](https://github.com/vsenger/java-fourier/blob/main/ForwardFFT_BO/code/libs.zip):
 
-1. Unzip the file libs.zip in a temporary folder
-2. Drag-and-drop each jar file inside your processing.org sketch
-3. You can also save your sketch and add the jars inside "code" folder
+Before running the code, we need to install some Java libraries that we developed and also dependencies to make the AWS IoT Core communication. 
 
-We are good to detect notes and send it to AWS IoT Core, let's have some fun! Click "Run" button and you will see the frequency graph.
+[Download the zip here](https://github.com/vsenger/java-fourier/blob/main/ForwardFFT_BO/code/libs.zip).
 
-Open AWS IoT Core Console and Click MQTT Test Client -> Subscribe to a topic -> playground/sensors -> Subscribe:
+1. Unzip the file libs.zip in a temporary folder.
+2. Drag-and-drop each jar file inside your processing.org sketch.
+3. You can also save your sketch and add the jars inside "code" folder.
+
+We are good to detect notes and send them to AWS IoT Core, so let's have some fun! Click the "Run" button and you will see the frequency graph.
+
+Open the AWS IoT Core Console and Click MQTT Test Client > Subscribe to a topic > playground/sensors > Subscribe:
 
 ![AWS IoT Core Screenshot](./images/iot08.png)
 
@@ -293,6 +296,8 @@ Then you can check the AWS Console:
 
 ![AWS IoT Core Screenshot](./images/iot10.png)
 
-[Check here the live-demo video!](https://youtu.be/0oavSqRD4wc)
+[Check out the live-demo video here!](https://youtu.be/0oavSqRD4wc)
 
-Now you can imagine infinite possibilities: our team already did home automation integration to turn on and off lamps using Ukulele, we make it rain inside Minecraft based on notes and also change Roblox game behavior. Now it's up to you to build on your own stuff using this magic algo: Fast Fourier Transform. Have fun! 
+## Conclusion
+
+Now you can imagine infinite possibilities: our team already did home automation integration to turn on and off lamps using Ukulele; we made it rain inside Minecraft based on notes, and we also changed Roblox game behavior. Now it's up to you to build on your own stuff using this magical algo: Fast Fourier Transform. Have fun! 
