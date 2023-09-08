@@ -1,6 +1,6 @@
 ---
 title: "Build On Answered | All About Redshift | S01 EP11"
-description: "Join us for Episode 11 of Build On Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!"
+description: "Join us for Episode 11 of Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - redshift
     - stack-overflow

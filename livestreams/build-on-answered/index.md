@@ -34,7 +34,7 @@ This show is as interactive as our audience makes it, so join us as we work thro
 
 ## Schedule
 
-Join us for our upcoming episodes on the 1st and 3rd Wednesday of the month!!
+Join us for our upcoming episodes every Wednesday at 11am PT from 11 October 2023 onwards!!
 
 | Upcoming Episode | Name| Date | Link to Watch |
 |--|--|--|--|
@@ -56,5 +56,3 @@ Watch past episodes!
 | **S1E03** | All About Machine Learning | April 19, 2023 | [Watch here](https://www.twitch.tv/videos/1785690757) | [Show Notes](/livestreams/build-on-answered/2023-04-19)|
 | **S1E02** | All About Amazon SageMaker | April 5, 2023 | [Watch here](https://www.twitch.tv/aws) | [Show Notes](/livestreams/build-on-answered/2023-04-05)|
 | **S1E01** | All About EC2 and S3 | March 8, 2023 | [Watch here](https://www.twitch.tv/videos/1752019282) | [Show Notes](/livestreams/build-on-answered/2023-03-08)|
-
-

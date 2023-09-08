@@ -33,22 +33,22 @@ In this episode, we focused on the top questions in the AWS Collective on Stack 
 
 1. [Is it possible to 'FAIL'/'Abort' a pipeline based on CodeGuru analysis (review/profiler)?](https://stackoverflow.com/questions/75658232/is-it-possible-to-fail-abort-a-pipeline-based-on-codeguru-analysis-review-p)
     * Additional resources for this question:
-      * [Amazon CodeGuru Security](https://aws.amazon.com/codeguru/)
-      * [AWS Step Functions](https://aws.amazon.com/step-functions/)
-      * [CodeGuruReviewer](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codeguru-reviewer.html)
-      * [CodePipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html)
+      * [Amazon CodeGuru Security](https://aws.amazon.com/codeguru/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+      * [AWS Step Functions](https://aws.amazon.com/step-functions/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+      * [CodeGuruReviewer](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codeguru-reviewer.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+      * [CodePipeline](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/codepipeline.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. [AWS SageMaker - How to load trained sklearn model to serve for inference?](https://stackoverflow.com/questions/65168915/aws-sagemaker-how-to-load-trained-sklearn-model-to-serve-for-inference)
     * Additional resources for this question:
-      * [Bring Your Own Containers](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-byoc-containers.html)
-      * [Amazon SageMaker Studio](Amazon SageMaker Studio)
-3. [AWS(boto3) Rekognition: how to process all images in bucket and return in each JSON file?](https://stackoverflow.com/questions/75583273/awsboto3-rekognition-how-to-process-all-images-in-bucket-and-return-in-each-j)
+      * [Bring Your Own Containers](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-byoc-containers.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+      * [Amazon SageMaker Studio](https://aws.amazon.com/sagemaker/studio/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+3. [AWS(boto3) Rekognition: how to process all images in bucket and return in each JSON file?](https://stackoverflow.com/questions/75583273/awsboto3-rekognition-how-to-process-all-images-in-bucket-and-return-in-each-j?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
     * Additional resources for this question:
-      * [Amazon Rekognition](https://aws.amazon.com/rekognition/)
-      * [Step Functions Distributed Map – A Serverless Solution for Large-Scale Parallel Data Processing](https://aws.amazon.com/blogs/aws/step-functions-distributed-map-a-serverless-solution-for-large-scale-parallel-data-processing/)
+      * [Amazon Rekognition](https://aws.amazon.com/rekognition/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+      * [Step Functions Distributed Map – A Serverless Solution for Large-Scale Parallel Data Processing](https://aws.amazon.com/blogs/aws/step-functions-distributed-map-a-serverless-solution-for-large-scale-parallel-data-processing/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 4. [Amazon Textract vs Amazon Rekognition DetectText](https://stackoverflow.com/questions/56008341/amazon-textract-vs-amazon-rekognition-detecttext)
     * Additional resources for this question:
-      * [Amazon Textract](https://aws.amazon.com/textract/)
-      * [AWS CLI Command Reference: detect-text](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rekognition/detect-text.html)
+      * [Amazon Textract](https://aws.amazon.com/textract/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+      * [AWS CLI Command Reference: detect-text](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rekognition/detect-text.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## Do you have feedback and/or ideas for questions we should review on future shows?
 

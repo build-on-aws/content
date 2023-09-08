@@ -18,7 +18,7 @@ additionalAuthors:
     authorName: Julie Gunderson
   - authorGithubAlias: chrisw-devops
     authorName: Chris Williams
-date: 2023-07-19
+date: 2023-07-17
 spaces:
   - livestreams
 ---
@@ -45,14 +45,14 @@ We would love [your feedback](https://www.pulse.aws/survey/FCUOXLAQ) and suggest
 
 ## Links shared
 
-* [AWS Load Balancer Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-* [Introduction to Blue-Green Deployments](https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-* [Tutorial to show how Amazon EC2 Autoscaling can be implemented](https://aws.amazon.com/tutorials/ec2-auto-scaling-spot-instances/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-* [Health Checks for your Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-* [Learn more about Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-* [What is AWS Resilience Hub?](https://docs.aws.amazon.com/resilience-hub/latest/userguide/what-is.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-* [What is AWS Fault Injection Simulator](https://docs.aws.amazon.com/fis/latest/userguide/what-is.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-* [Tutorials for AWS Fault Injection Simulator](https://docs.aws.amazon.com/fis/latest/userguide/fis-tutorials.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [AWS Load Balancer Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-17&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [Introduction to Blue-Green Deployments](https://docs.aws.amazon.com/whitepapers/latest/blue-green-deployments/introduction.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-17&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [Tutorial to show how Amazon EC2 Autoscaling can be implemented](https://aws.amazon.com/tutorials/ec2-auto-scaling-spot-instances/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-17&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [Health Checks for your Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-17&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [Learn more about Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-17&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [What is AWS Resilience Hub?](https://docs.aws.amazon.com/resilience-hub/latest/userguide/what-is.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-17&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [What is AWS Fault Injection Simulator](https://docs.aws.amazon.com/fis/latest/userguide/what-is.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-17&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [Tutorials for AWS Fault Injection Simulator](https://docs.aws.amazon.com/fis/latest/userguide/fis-tutorials.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-07-17&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * Netflix [Simian Army](https://github.com/Netflix/SimianArmy) for causing chaos to test your system
 
 ## Do you have ideas for questions we should review on future shows?

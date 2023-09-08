@@ -29,17 +29,17 @@ In this episode, we focused on the top questions in the AWS Collective on Stack 
 
 1. [What data is stored in Ephemeral Storage of Amazon EC2 instance?](https://stackoverflow.com/questions/11566223/what-data-is-stored-in-ephemeral-storage-of-amazon-ec2-instance)
     * Additional resources for this question:
-      * [Documentation for Amazon EC2: Instance Ttore](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html)
-      * [Documentation for Amazon EC2: Add instance store volumes to your EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/add-instance-store-volumes.html)
+      * [Documentation for Amazon EC2: Instance Ttore](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+      * [Documentation for Amazon EC2: Add instance store volumes to your EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/add-instance-store-volumes.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 2. [MySQL/Amazon RDS error: "you do not have SUPER privileges..."](https://stackoverflow.com/questions/11601692/mysql-amazon-rds-error-you-do-not-have-super-privileges)
     * Additional resources for this question:
-      * [Documentation for Amazon RDS: Overview of parameter groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/parameter-groups-overview.html)
+      * [Documentation for Amazon RDS: Overview of parameter groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/parameter-groups-overview.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 3. [How to use auto increment for primary key id in dynamodb](https://stackoverflow.com/questions/37072341/how-to-use-auto-increment-for-primary-key-id-in-dynamodb)
     * Additional resources for this question:
-      * [Documentation for Amazon DynamoDB: BatchWriteItem](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.AtomicCounters)
+      * [Documentation for Amazon DynamoDB: BatchWriteItem](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.AtomicCounters?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 4. [Alter column data type in Amazon Redshift](https://stackoverflow.com/questions/17101918/alter-column-data-type-in-amazon-redshift)
     * Additional resources for this question:
-      * [Amazon Redshift Query Editor v2.0](https://aws.amazon.com/redshift/query-editor-v2/)
+      * [Amazon Redshift Query Editor v2.0](https://aws.amazon.com/redshift/query-editor-v2/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## Do you have feedback and/or ideas for questions we should review on future shows?
 
