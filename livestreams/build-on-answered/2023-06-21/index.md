@@ -1,5 +1,5 @@
 ---
-title: "Build On Answered | Episode 7 | Resilient Architecture"
+title: "Build On Answered | All About Resilient Architecture | S01 EP07"
 description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - build-on-live
@@ -22,6 +22,7 @@ spaces:
   - livestreams
     
 ---
+![Streaming session with Rohini and Cobus with a shared browser tab showing a Stack Overflow question](images/ep07_images.png)
 
 Join us for Episode 7 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 

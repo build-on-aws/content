@@ -1,5 +1,5 @@
 ---
-title: "Build On Answered | Episode 9 | Boto3, Auto Scaling, and Chaos engineering"
+title: "Build On Answered | All About Boto3, Auto Scaling, and Chaos engineering | S01 EP09"
 description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - iam
@@ -25,7 +25,7 @@ spaces:
 
 ![Streaming session with Julie, Chris, and Cobus, with a shared browser tab showing a Stack Overflow question](images/boa-ep09.png)
 
-Join us for Episode 9 of Build On Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
+Join us for Episode 9: All About Boto3, Auto Scaling, and Chaos Engineering of Build On Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
 https://www.twitch.tv/videos/1876114874
 
@@ -35,7 +35,7 @@ We would love [your feedback](https://www.pulse.aws/survey/FCUOXLAQ) and suggest
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 * [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
-* **Chris Williams**, Senior Solution Architect @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Senior Solution Architect @ AWS
 
 ## This Week's Questions
 

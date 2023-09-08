@@ -1,5 +1,5 @@
 ---
-title: "Build On Answered | Episode 8 | All About Terraform"
+title: "Build On Answered | All About Terraform | S01 EP08"
 description: "Check out the latest episode with Kerim Satirli from Hashicorp as we review some of the top viewed Terraform questions in the AWS Collective on Stack Overflow."
 tags:
     - iam
@@ -22,7 +22,7 @@ spaces:
 
 Join us for Episode 8 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
-https://www.twitch.tv/videos/1863985265
+https://www.twitch.tv/videos/1864025107
 
 In this episode we will be focusing on Terraform. We have selected some of the top viewed questions in the AWS Collective and built code and demos around the best answers to those questions!
 

@@ -1,33 +1,53 @@
 ---
-title: "Build On Live: Answered Episode 2 Show Notes"
-description: "Join us for Build On Live: Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
+title: "Build On Answered | All About DataOps | S01 EP04"
+description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
-    - build-on-live
+    - dataops
     - stack-overflow
     - aws-stack-overflow-collective
     - aws
     - twitch
-authorGithubAlias: cobusbernard
-authorName: Cobus Bernard
-date: 2022-05-03
+authorGithubAlias: juliegund
+authorName: Julie Gunderson
+date: 2023-05-03
 spaces:
   - livestreams
-    
 ---
 
-Join us for Episode 2 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
-Each episode, we reproduce the problems found in the top questions and build code to test out different solutions and understand the full context of each solution.
+Recap of episode 4: All About DataOps Part 1, of Build On Answered the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
+
+In this episode, we focused on the top questions in the AWS Collective on Stack Overflow related to DataOps. We built code to test out different solutions and showed viewers how to build the solution. Check out the questions we talked about and additional resources below. 
 
 ## Hosts
 
-[**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
+* [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
+* [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/
+), Senior Solution Architect @ AWS
 
-[**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
+## This Week's Questions
 
-## What is the Collective?
+1. [What data is stored in Ephemeral Storage of Amazon EC2 instance?](https://stackoverflow.com/questions/11566223/what-data-is-stored-in-ephemeral-storage-of-amazon-ec2-instance)
+    * Additional resources for this question:
+      * [Documentation for Amazon EC2: Instance Ttore](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html)
+      * [Documentation for Amazon EC2: Add instance store volumes to your EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/add-instance-store-volumes.html)
+2. [MySQL/Amazon RDS error: "you do not have SUPER privileges..."](https://stackoverflow.com/questions/11601692/mysql-amazon-rds-error-you-do-not-have-super-privileges)
+    * Additional resources for this question:
+      * [Documentation for Amazon RDS: Overview of parameter groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/parameter-groups-overview.html)
+3. [How to use auto increment for primary key id in dynamodb](https://stackoverflow.com/questions/37072341/how-to-use-auto-increment-for-primary-key-id-in-dynamodb)
+    * Additional resources for this question:
+      * [Documentation for Amazon DynamoDB: BatchWriteItem](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.AtomicCounters)
+4. [Alter column data type in Amazon Redshift](https://stackoverflow.com/questions/17101918/alter-column-data-type-in-amazon-redshift)
+    * Additional resources for this question:
+      * [Amazon Redshift Query Editor v2.0](https://aws.amazon.com/redshift/query-editor-v2/)
 
-Users who join the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) will find curated, centralized community resources to help them more easily discover the most up-to-date answers including those recommended or written by AWS subject matter experts, technical articles such as how-to guides, and Bulletins for upcoming events and releases. 
+## Do you have feedback and/or ideas for questions we should review on future shows?
+
+Let us know [HERE](https://www.pulse.aws/survey/B1J8HOF5)
+
+## What is the AWS Collective?
+
+Users who join the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) will find curated, centralized community resources to help them more easily discover the most up-to-date answers including those recommended or written by AWS subject matter experts, technical articles such as how-to guides, and Bulletins for upcoming events and releases.
 
 Members can keep tabs on where they rank on the leaderboard and be promoted to Recognized Member status based on their contributions. By bringing knowledge and users together, the AWS Collective will help the community continue to learn, share, and grow.
-
