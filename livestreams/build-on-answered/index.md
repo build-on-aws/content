@@ -30,7 +30,7 @@ This show is as interactive as our audience makes it, so join us as we work thro
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 * [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
-* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Senior Solution Architect @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 
 ## Schedule
 
@@ -38,15 +38,15 @@ Join us for our upcoming episodes on the 1st and 3rd Wednesday of the month!!
 
 | Upcoming Episode | Name| Date | Link to Watch |
 |--|--|--|--|
-| **S2 Ep01** | All about Surprises | October 11, 11am PT | [Watch here](https://twitch.tv/aws) |
+| **S2E01** | All about Surprises | October 11, 11am PT | [Watch here](https://twitch.tv/aws) |
 
 Watch past episodes!
 
 | Episode | Name| Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|--|
-| **S1E12** | All about Kubernetes with Jérôme Petazzoni | September 6, 8am PT | [Watch here](https://www.twitch.tv/videos/1919526636) |[Show Notes](/livestreams/build-on-answered/2023-09-06)
-| **S1E11** | All about Amazon Redshift | August 16, 8am PT | [Watch here](https://www.twitch.tv/videos/1900421697) | [Show Notes](/livestreams/build-on-answered/2023-08-16)
-| **S1E10** | In-studio with Cobus and Julie | August 2, 8am PT | [Watch here](https://www.twitch.tv/videos/1888395222) | [Show Notes](/livestreams/build-on-answered/2023-08-02)|
+| **S1E12** | All about Kubernetes with Jérôme Petazzoni | September 6, 2023 | [Watch here](https://www.twitch.tv/videos/1919526636) |[Show Notes](/livestreams/build-on-answered/2023-09-06)
+| **S1E11** | All about Amazon Redshift | August 16, 2023 | [Watch here](https://www.twitch.tv/videos/1900421697) | [Show Notes](/livestreams/build-on-answered/2023-08-16)
+| **S1E10** | In-studio with Cobus and Julie | August 2, 2023 | [Watch here](https://www.twitch.tv/videos/1888395222) | [Show Notes](/livestreams/build-on-answered/2023-08-02)|
 | **S1E09** | All About Boto3, Autoscaling, Chaos, and More | July 19, 2023 | [Watch here](https://www.twitch.tv/videos/1876114874) | [Show Notes](/livestreams/build-on-answered/2023-07-19) |
 | **S1E08** | All About Terraform with Kerim | July 5, 2023 | [Watch here](https://www.twitch.tv/videos/1864025107) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
 | **S1E07** | All About Resiliency with Seth | June 21, 2023 | [Watch here](https://www.twitch.tv/videos/1856494950) | [Show Notes](/livestreams/build-on-answered/2023-06-21)|

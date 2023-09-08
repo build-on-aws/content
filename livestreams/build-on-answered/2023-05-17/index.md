@@ -24,7 +24,7 @@ In this episode, we focused on the top questions in the AWS Collective on Stack 
 
 ## Hosts
 
-* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Senior Solution Architect @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 * [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
 
 ## This Week's Questions

@@ -23,7 +23,7 @@ In this episode, we focused on the top questions in the AWS Collective on Stack 
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 * [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
-* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Senior Solutions Architect @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solutions Architect @ AWS
 
 ## This Week's Questions
 

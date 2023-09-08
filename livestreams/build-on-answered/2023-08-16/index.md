@@ -27,7 +27,7 @@ https://www.twitch.tv/videos/1900421697
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 * [**Anusha Challa**](https://www.linkedin.com/in/anusha-challa-31600916/), Data Warehousing Solution Architect @ AWS
-* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Senior Solution Architect @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 
 ## This Week's Questions
 

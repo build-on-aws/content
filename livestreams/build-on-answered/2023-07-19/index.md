@@ -35,7 +35,7 @@ We would love [your feedback](https://www.pulse.aws/survey/FCUOXLAQ) and suggest
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 * [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
-* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Senior Solution Architect @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 
 ## This Week's Questions
 
