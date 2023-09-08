@@ -10,6 +10,9 @@ tags:
     - aws
 authorGithubAlias: juliegund
 authorName: Julie Gunderson
+additionalAuthors: 
+  - authorGithubAlias: cobusbernard
+    authorName: Cobus Bernard
 date: 2023-09-06
 spaces:
   - livestreams

@@ -9,6 +9,9 @@ tags:
     - twitch
 authorGithubAlias: juliegund
 authorName: Julie Gunderson
+additionalAuthors: 
+  - authorGithubAlias: cobusbernard
+    authorName: Cobus Bernard
 date: 2023-08-02
 spaces:
   - livestreams
