@@ -63,7 +63,7 @@ Adopting a multi-region architecture can bring additional costs, complexities ac
 
 ### Deep dive into regulatory and compliance requirements
 
-As at time of writing, compliance to [GDPR](https://aws.amazon.com/compliance/gdpr-center/) does *not* necessarily mandate data residency.  Many regulations are principles-based and does *not* mandate specific requirements. If data residency is *not* strictly required, then implementing general security controls may be of higher priority. Here, consider working towards compliance to a recognised international security standards (such as ISO27001, SOC II, and NIST800-53) which provide guidance on security for your overall organization. Tools such as AWS Config, AWS Artifact and AWS Audit Manager can assist with your compliance journey.
+As at time of writing, compliance to [GDPR](https://aws.amazon.com/compliance/gdpr-center/) does *not* necessarily mandate data residency.  Many regulations are principles-based and does *not* mandate specific requirements. If data residency is *not* strictly required, then implementing general security controls may be of higher priority. Here, consider working towards compliance to a recognised international security standards (such as ISO27001, SOC II, and NIST800-53) which provide guidance on security for your overall organization. AWS-native tools such as [AWS Config](https://aws.amazon.com/config/), [AWS Artifact](https://aws.amazon.com/artifact/) and [AWS Audit Manager](https://aws.amazon.com/audit-manager/), or partner solutions such as [Drata](https://aws.amazon.com/marketplace/seller-profile?id=f717f717-faab-4726-bb7f-b09cbac8508c) can assist with your compliance journey.
 
 ### Consider a simpler architecture
 
