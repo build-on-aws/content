@@ -14,7 +14,6 @@ spaces:
   - generative-ai
 waves:
   - generative-ai
-  - resilience
 authorGithubAlias: samfarber
 authorName: Sam Farber
 date: 2023-08-31
