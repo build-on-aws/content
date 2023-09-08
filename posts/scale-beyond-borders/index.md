@@ -19,8 +19,6 @@ date: 2023-09-08
 |ToC|
 |---|
 
-# Scale across borders: build a multi-region architecture while maintaining data residency
-
 ![](./images/cover.jpg)
 
 ## Overview
