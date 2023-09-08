@@ -4,7 +4,8 @@ description: "Measuring the RTO & RPO a Pilot-Light disaster recovery strategy f
 tags:
   - disaster-recovery
   - pilot-light
-waves: 
+  - resilience
+waves:
   - resilience
 spaces:
   - cost-optimization
