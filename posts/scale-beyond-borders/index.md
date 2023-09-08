@@ -47,7 +47,7 @@ Let’s walk through the components of the high-level architecture:
 
 6. [AWS Lambda](https://aws.amazon.com/lambda/) (or alternative compute services such as [Amazon ECS with Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html)) provides the backend for the API.  
 
-7. Storage and databases (such as [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/)and Amazon [Relational Database Service (RDS)](https://aws.amazon.com/rds/), and [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)) is used to store sensitive data. These are isolated to each region.  
+7. Storage and databases (such as [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/) and Amazon [Relational Database Service (RDS)](https://aws.amazon.com/rds/), and [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)) is used to store sensitive data. These are isolated to each region.  
 
 8. Optionally, the regional API endpoint can be accessed directly for the user to access their desired region, bypassing the default. For additional security, consider [Amazon CloudFront](https://aws.amazon.com/cloudfront/) and [AWS WAF](https://aws.amazon.com/waf/).
 
