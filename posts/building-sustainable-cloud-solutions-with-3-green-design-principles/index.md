@@ -10,8 +10,10 @@ authorGithubAlias: dairiley
 authorName: Daisy Riley
 date: 2023-09-08
 ---
+
 |ToC|
 |---|
+
 As of 2020, the world’s IT infrastructure makes up about 2.5% of all emissions, with data centers contributing to 0.25% of all emissions ([*How Bad Are Bananas? The Carbon Footprint of Everything* *- Mike Bernes Lee*](https://www.amazon.co.uk/How-Bad-are-Bananas-Everything/dp/1846688914)). While this may not seem like a huge percentage given all we use technology for, this is the equivalent of boiling an electric kettle 35,000,000,000,000 times or building 1,400,000 new electric cars. IT is also innovating a pace beyond comprehension, with an increasing amount of computationally heavy workloads such as cryptocurrency and machine learning being introduced. If left unchecked, the billions of tonnes of emissions from IT will exponentially increase.
 Fortunately, there is already a solution. Software Engineers who understand how the world’s IT infrastructure works, can apply their knowledge of it to reduce the use of compute, storage and networking across an application with the goal of reducing emissions. This post dives into 3 green design principles that software engineers can implement to reduce the emissions of cloud workloads.
 
