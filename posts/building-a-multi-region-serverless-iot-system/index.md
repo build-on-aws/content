@@ -9,6 +9,8 @@ tags:
     - stepfunctions
     - serverless
     - resilience
+waves:
+  - resilience
 authorGithubAlias: JimmyDqv
 authorName: Jimmy Dahlqvist
 githubUserLabel: community-builder
@@ -22,7 +24,7 @@ In this post we will take a look at how to build a multi-region serverless IoT s
 There are many reasons why we create multi-region systems on AWS. It can be compliance requirements, resiliency, or latency requirements. In an IoT system, we often have small devices with limited bandwidth which makes latency requirements even more important. With a large system with a global footprint a multi-region solution help us solve that challenge. However, building a multi-region IoT system comes with challenges of its own.
 
 
-In an multi-region IoT system we don't want our IoT devices to be aware of what or how many AWS Regions we are running in. This should be totally transparent to the device, it should only connect to iot.example.com. For this to work, we must register our IoT Things, Policies, and certificates in all regions. Therefore, we will be able to replicate all of this information across all Regions, despite what Region the device connect to.
+In a multi-region IoT system we don't want our IoT devices to be aware of what or how many AWS Regions we are running in. This should be totally transparent to the device, it should only connect to iot.example.com. For this to work, we must register our IoT Things, Policies, and certificates in all regions. Therefore, we will be able to replicate all of this information across all Regions, despite what Region the device connect to.
 
 We will look at the steps needed to perform this replication in an efficient way. What services to use, and what the setup looks like.
 
