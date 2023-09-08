@@ -13,7 +13,7 @@ waves:
   - cost
 authorGithubAlias: awssteph
 authorName: Steph Gooch
-date: 2023-09-07
+date: 2023-09-08
 ---
 
 | ToC |
@@ -75,7 +75,7 @@ When storing objects in Amazon S3, there are two overlooked types of objects tha
 
 Adding the code above to every bucket you deploy will ensure you don’t waste money on storage you are not using. Use [Amazon S3 Lens](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-optimize-storage.html#:~:text=performance%20and%20cost.-,Locate,-incomplete%20multipart%20uploads?sc_channel=el&sc_campaign=costwave&sc_content=5-ways-to-cost-optimize-your-Infrastructure-as-Code&sc_geo=mult&sc_country=mult&sc_outcome=acq) enables you to identify these objects so you can add the code snippet and start saving.
 
-## Graviton for Managed Services
+## AWS Graviton for Managed Services
 
 AWS Graviton processors are designed by AWS to deliver the best price performance for your cloud workloads. The processors are [available with these managed services](https://github.com/aws/aws-graviton-getting-started/blob/main/managed_services.md) and is a great way to get started with AWS Graviton, where you won’t need to recompile your code.  This change offers a range of price/performance improvements. Below is for AWS Lambda, add two lines to your code and it saves 10%.
 
@@ -102,11 +102,11 @@ The below snippet shows the change in volume type to move your volume to gp3.
 
 ```yaml
  BlockDeviceMappings: 
-      - DeviceName: "/dev/sdm"
-        Ebs: 
-          VolumeType: "gp3"
-          DeleteOnTermination: "true" 
-          VolumeSize: "10"
+  - DeviceName: "/dev/sdm"
+    Ebs: 
+      VolumeType: "gp3"
+      DeleteOnTermination: "true" 
+      VolumeSize: "10"
 ```
 
 Even if you make this change after a volume has been deployed, you will have no down time.
