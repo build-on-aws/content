@@ -14,7 +14,7 @@ spaces:
   - livestreams
     
 ---
-![Streaming session with Chris and Cobus with a shared browser tab showing a Stack Overflow question](images/ep05_image_2.png)
+![Streaming session with Chris and Cobus with a shared browser tab showing a Stack Overflow question](images/ep05_image.png)
 
 Join us for  Episode 5: All About DataOps Part 2, of Build On Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
