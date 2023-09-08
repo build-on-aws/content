@@ -31,7 +31,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 145 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)|
+| 🧩 Prerequisites    | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_content=migrate-a-sql-server-database-in-the-cloud&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial for a quick overview. For a quick overview for creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/?sc_channel=el&sc_campaign=tutorial&sc_content=migrate-a-sql-server-database-in-the-cloud&sc_geo=mult&sc_country=mult&sc_outcome=acq).|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<tbd>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-09-03                            |
@@ -40,6 +40,7 @@ Before starting this tutorial, you will need the following:
 |-----|
 
 ---
+
 ## Setting Up Our Working Environment
 
 We will create the tutorial environment with AWS Cloudformation, which is a service that creates and configures AWS resources. Cloudformation uses a template that describes all the resources that we want to setup. Our tutorial environment includes a Virtual Private Cloud (VPC), and EC2 Linux server instance, and an S3 bucket. Setting up these resources with either the AWS console or CLI can take time and effort. We will use Cloudformation to create our tutorial environment rapidly and efficient so we can get to the tutorial for managing access to AWS resources.
@@ -48,7 +49,7 @@ Let’s start with opening the Cloudformation console.
 
 ![Open the Cloudformation page with the search bar](./images/cloudformation-1.png)
 
-In Cloudformation, resources built with a template  are treated as a logical grouping of services called stacks. Choose **Create stack**.
+In Cloudformation, resources built with a template are treated as a logical grouping of services called stacks. Choose **Create stack**.
 
 ![Choose Create stack](./images/cloudformation-2.png)
 
@@ -56,13 +57,13 @@ Download the Cloudformation template [create-tutorial-environment.yaml](<tbd>). 
 
 ![Upload a Cloudformation template](./images/cloudformation-3.png)
 
-In this section, we will name the stack and the S3 bucket which requires a unique name. Choose **Next** to advance to the next screen. 
+In this section, we will name the stack and the S3 bucket which requires a unique name. Choose **Next** to advance to the next screen.
 
-> Tip: Creating a consistent naming scheme can help find and keep track of resources. For example, preface the name with pcg- for “practical cloud guide” and follow it with the name of the service to make it easier to find resources by project.
+> Tip: Creating a consistent naming scheme can help find and keep track of resources. For example, preface the name with `pcg-`` for "practical cloud guide" and follow it with the name of the service to make it easier to find resources by project.
 
 ![Name the stack and S3 bucket](./images/cloudformation-4.png)
 
-In the **Configure stack options** screen, we will accept the default values and choose **Next**. You can optionally add tags to the stack to organize your resources which helps when searching for them. Tags have a key and a value that you choose. In the example below, the tag is `project` and the value is `pcg`. 
+In the **Configure stack options** screen, we will accept the default values and choose **Next**. You can optionally add tags to the stack to organize your resources which helps when searching for them. Tags have a key and a value that you choose. In the example below, the tag is `project` and the value is `pcg`.
 
 ![Accept default values and advance to the next screen](./images/cloudformation-5.png)
 
@@ -102,7 +103,7 @@ Let’s get started by opening the IAM console by searching for the service in t
 
 ![Open the IAM console by using the search bar](./images/iam-1.png)
 
-On the left of the IAM console, choose Roles under Access Managment.
+On the left of the IAM console, choose Roles under Access Management.
 
 ![Choose Roles to create a role](./images/iam-2.png)
 
@@ -118,7 +119,7 @@ A role is a type of AWS Identity and identities have policies for accessing reso
 
 ![Create a policy for the role](./images/iam-5.png)
 
-On the following page (**Specify permisions**) we can create the policy by choosing **JSON** as an option. Copy and paste the policy document below into the editor window. Remember the bucket name from the Cloudformation output? Replace the resource ARN with the bucket name then choose **Next**.
+On the following page (**Specify permissions**) we can create the policy by choosing **JSON** as an option. Copy and paste the policy document below into the editor window. Remember the bucket name from the Cloudformation output? Replace the bucket name in the ARNs with the bucket name, then choose **Next**.
 
 ```json
 {
@@ -158,7 +159,7 @@ When complete, the policy is ready and it will be listed on the IAM Policies pag
 
 Test the service role by connecting to EC2 instance in the stack we created earlier. Like the S3 bucket, we can find the instance id from the Cloudformation output. Navigate to the EC2 Console and select the instance, choose **Connect**.
 
-![Chooose the EC2 instance by the instance ID and Connect](./images/ec2-1.png)
+![Choose the EC2 instance by the instance ID and Connect](./images/ec2-1.png)
 
 We’ll use **EC2 Instance Connect** to open a terminal in a browser window. Choose **Connect** to open the terminal.
 
@@ -208,6 +209,7 @@ Let test the role by going back to the terminal and list the contents of the buc
 [ec2-user@ip-172-31-46-36 ~]$ aws s3 ls s3://pcg-s3-service-role-tutorial
 [ec2-user@ip-172-31-46-36 ~]$ 
 ```
+
 No errors! But we haven’t put anything in bucket yet. Let’s try that next by creating a file and copying it to the bucket.
 
 ```bash
@@ -228,7 +230,7 @@ On the Policy details page go to the **Permissions defined in this policy** sect
 
 ![Open the policy editor](./images/role-3.png)
 
-In the policy editor, add `“s3:Put”` to the list of actions. This policy change allows the EC2 instance to copy files to the S3 bucket. Choose **Next** to review the changes.
+In the policy editor, add `"s3:Put"` to the list of actions. This policy change allows the EC2 instance to copy files to the S3 bucket. Choose **Next** to review the changes.
 
 ![Add the put action to the policy](./images/role-5.png)
 
@@ -264,7 +266,7 @@ Making roles
 
 The EC2 instance can securely access file from an S3 bucket by using a service role.
 
-# Clean Up
+## Clean Up
 
 In the Cloudformation console, select and delete the stack.
 
@@ -280,11 +282,6 @@ At the start of this tutorial we set up out environment, however this is not the
 
 ## What’s Next
 
-Our next article will cover storage and the different forms of cloud storage. We will examine the primary use cases for different types of storage and how to set them up. In the mean time, you can read about the different types of cloud storage and when to [use them]
-(https://community.aws/concepts/how-to-store-data-in-the-cloud?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=body).
+Our next article will cover storage and the different forms of cloud storage. We will examine the primary use cases for different types of storage and how to set them up. In the mean time, you can read about the different types of cloud storage and when to [use them](/concepts/how-to-store-data-in-the-cloud).
 
-
-
-
-Also end with this line to ask for feedback:
 If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
