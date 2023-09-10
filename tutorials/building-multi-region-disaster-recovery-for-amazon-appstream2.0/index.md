@@ -181,7 +181,7 @@ on the folder as follows:
   group if using AWS Managed AD and do not have access to domain admins.
 
 
-![Image showing the NTFS permissions •Users – Create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only](images/image2.png "Figure 2. Advanced permissions of profiles folder")
+    ![Image showing the NTFS permissions •Users – Create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only](images/image2.png "Figure 2. Advanced permissions of profiles folder")
 
 * Advanced permissions of profiles folder*
 
@@ -193,20 +193,20 @@ Get-ACl -Path '\\FSxPrimary.asx.local\D$\Profiles' | Set-ACL '\\FSxDR.asx.local\
 
 ### Step 2: Setup share permissions
 
- Turn the “Profiles” folder on the Primary and DR file server into a
+1. Turn the “Profiles” folder on the Primary and DR file server into a
  network share using the Microsoft snap-in **fsmgmt.msc**, please
  follow [these steps](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for detailed instructions.
 
 
-![Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder](images/image3.png "Figure 3. Profiles folder on D:\ of FSx for Windows being selected as network share")
+   ![Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder](images/image3.png "Figure 3. Profiles folder on D:\ of FSx for Windows being selected as network share")
 
 
-The permissions on the share can be set to EVERYONE or Authenticated
-Users – Full Control (Apply onto: **This Folder, Sub-folders and
-Files**) as this only applies to the share and access will be limited
-to the NTFS permissions set in step 1.1.
+    The permissions on the share can be set to EVERYONE or Authenticated
+    Users – Full Control (Apply onto: **This Folder, Sub-folders and
+    Files**) as this only applies to the share and access will be limited
+    to the NTFS permissions set in step 1.1.
 
-![Image showing the SMB Share permissions of the profile folder. Permissions being Everyone full control](images/image4.png "Figure 4. Share permissions of profiles folder")
+   ![Image showing the SMB Share permissions of the profile folder. Permissions being Everyone full control](images/image4.png "Figure 4. Share permissions of profiles folder")
 
 You can also set these permissions using PowerShell by running the following commands:
 
