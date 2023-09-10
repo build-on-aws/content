@@ -7,6 +7,8 @@ tags:
   - data-science
   - devops
   - sagemaker
+waves:
+  - dataml
 authorGithubAlias: sarunaaa003
 authorName: Arun Kumar. S
 date: 2023-05-22
