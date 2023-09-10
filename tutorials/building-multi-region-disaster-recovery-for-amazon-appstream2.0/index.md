@@ -477,7 +477,7 @@ applications:
 
 10. Enable Inbound TCP port 445 for Primary file server SMB location and
     verify that all the newly added files from DR fleet have synced back
-    to your primary region
+    to your primary region.
 
 11. After testing, you can stop the fleet in your DR region to save on
     running costs.
