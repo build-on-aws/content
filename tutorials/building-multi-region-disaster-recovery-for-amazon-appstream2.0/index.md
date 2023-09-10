@@ -1,6 +1,8 @@
 ---
 title: "Building a Multi-Region Disaster Recovery Environment for Amazon AppStream 2.0"
-description: "A step by step guide on how to build a multi-Region disaster recovery environment for Amazon AppStream 2.0 using FSLogix CloudCache user profile containerization and replication software."
+Trimmed to accomodate less characters for easier "hook":
+A guide on FSLogix CloudCache and replication software for resilience. 
+
 tags:
   - aws
   - disaster-recovery
