@@ -1,7 +1,5 @@
 ---
-title: "Building a Multi-Region Disaster Recovery Environment for Amazon AppStream 2.0"
-Trimmed to accomodate less characters for easier "hook":
-A guide on FSLogix CloudCache and replication software for resilience. 
+title: "A guide on FSLogix CloudCache and replication software for resilience."
 
 tags:
   - aws
@@ -17,7 +15,7 @@ date: 2023-08-16
 ## Introduction
 In this blog, I will show you how you can build a multi-region disaster recovery environment for [Amazon AppStream 2.0](https://aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). These concepts can also apply to other virtual desktop environments such as [AWS WorkSpaces](https://aws.amazon.com/workspaces?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) or [Citrix virtual desktops](https://www.citrix.com/solutions/vdi-and-daas/what-is-a-virtual-desktop.html) to name a few. 
 
-Having a disaster recovery (DR) region configured is essential for business continuity during an outage. Without a one, customers would have to rebuild their environment in a new region during the outage. This can be difficult and time consuming, which can impact revenue and in some cases, lose data or access to user profile settings. There is also potential for human error when doing this under production downtime pressure. Planning and maintaining a disaster recovery mechanism to avoid compromising business performance is essential for businesses of all sizes.
+Having a disaster recovery (DR) region configured is essential for business continuity during an outage. Without one, customers would have to rebuild their environment in a new region during the outage. This can be difficult and time consuming, which can impact revenue and in some cases, lose data or access to user profile settings. There is also potential for human error when doing this under production downtime pressure. Planning and maintaining a disaster recovery mechanism to avoid compromising business performance is essential for businesses of all sizes.
 
 AWS has published [Disaster Recovery considerations with Amazon
 AppStream
@@ -484,7 +482,7 @@ applications:
 11. After testing, you can stop the fleet in your DR region to save on
     running costs.
 
-### Clean-up:
+### Clean-Up:
 
 In this blog, we deployed resources in an AWS account and made
 configuration changes in Active Directory. If you want to clean up these
@@ -515,5 +513,7 @@ In this blog, I showed you how you can use FSlogix Cloud Cache and Amazon FSx fo
 I encourage you to explore these concepts further and think holistically about how common settings like Outlook [Cached Exchange Mode](https://support.microsoft.com/en-us/office/turn-on-cached-exchange-mode-7885af08-9a60-4ec3-850a-e221c1ed0c1c), can be configured to reduce your cloud storage costs by limiting the past email to a few months instead of 1 year. 
 
 This tutorial sets the foundations that enables you to use your existing FSLogix configuration to explore and deploy advanced controls like [Application Masking](https://aws.amazon.com/blogs/desktop-and-application-streaming/simplify-appstream-2-0-image-management-with-application-masking?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), to limit apps based on Active Directory group membership. This is great for users sharing a single Amazon AppStream fleet. 
+
+To learn more about FSLogix and CloudCache, please see [FSLogix: An In-Depth Look](https://bluexp.netapp.com/blog/azure-anf-blg-fslogix-an-in-depth-look)
 
 If you enjoyed this tutorial, found an issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
