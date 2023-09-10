@@ -486,7 +486,7 @@ applications:
 
 In this blog, we deployed resources in an AWS account and made
 configuration changes in Active Directory. If you want to clean up these
-resources and reverse changes you made, you can complete the following
+resources and reverse changes you made, complete the following
 steps:
 
 1.  Unlink and delete the FSLogix GPO you created in the section **Setup
