@@ -343,12 +343,13 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
     Federation.” Select the AWS Account Federation app and choose **Add
     Integration**.
 
-![Image of the Okta console, browse app integration catalog. The text AWS Federation in the search bar brings up the AWS Account Federation app for SAML authentication.](images/image5.png "Figure 5. Okta Applications Catalog AWS Account Federation SAML application") 
+     ![Image of the Okta console, browse app integration catalog. The text AWS Federation in the search bar brings up the AWS Account Federation app for SAML authentication.](images/image5.png "Figure 5. Okta Applications Catalog AWS Account Federation SAML application") 
 
 
-1.  Change the **Application label** to something descriptive to
-    represent your primary region and choose **next**  
-![Add AWS Account Federation, under general settings then application label value is AppStream Primary](images/image6.png "Figure 6. Okta Integration for AWS Account Federation General Settings")
+1.    
+    Change the **Application label** to something descriptive to represent your primary region and choose **next**  
+
+   ![Add AWS Account Federation, under general settings then application label value is AppStream Primary](images/image6.png "Figure 6. Okta Integration for AWS Account Federation General Settings")
 
 
 1. To avoid duplication, follow steps found in blog post [Improve the Availability of  Existing Okta IAM Federation Setup Using Multi-Region SAML Endpoints](https://aws.amazon.com/blogs/apn/improve-the-availability-of-existing-okta-iam-federation-setup-using-multi-region-saml-endpoints?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
@@ -361,20 +362,20 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
     The **Default Relay State** in Okta needs to match the Amazon
     AppStream 2.0 format, for example, my Okta application for Primary
     Region(Frankfurt) relay state URL is:
+    
+    >https://**appstream2.eu-central-1.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**
 
 
-https://**appstream2.eu-central-1.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**
+    ![Okta Integration for AWS Account Federation Sign On Tab selected and highlighting eu-central-1 in the Default Relay State text box. The text box has the text https://appstream2.eu-central-1.aws.amazon.com/saml?stack=MyAS2StackName&amp;accountId=123456](images/image7.png "Figure 7. Okta Integration for AWS Account Federation Sign On Tab")
 
 
-![Okta Integration for AWS Account Federation Sign On Tab selected and highlighting eu-central-1 in the Default Relay State text box. The text box has the text https://appstream2.eu-central-1.aws.amazon.com/saml?stack=MyAS2StackName&amp;accountId=123456](images/image7.png "Figure 7. Okta Integration for AWS Account Federation Sign On Tab")
+    >**London:**  
+        https://**appstream2.eu-west-2.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**  
+    
+    Check [documentation](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more details on the relay state URL.
 
 
-**London:**  
-https://**appstream2.eu-west-2.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**  
-Check [documentation](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more details on the relay state URL.
-
-
-4. Create an IAM role for SAML 2.0 Federation following [Step 2](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html#external-identity-providers-grantperms?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
+1. Create an IAM role for SAML 2.0 Federation following [Step 2](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html#external-identity-providers-grantperms?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
 
     Next, modify the **role**, edit the **trust relationship policy** and replace the singular “Principal”: { “Federated”: “arn:aws:iam…” } with a multi-valued SAML Identity provider, one for Primary and another for
     the DR region. 
@@ -411,25 +412,23 @@ Check [documentation](https://docs.aws.amazon.com/appstream2/latest/developergui
 
 ```
 
-My IAM SAML Identity provider for the primary region is named okta and DR is called **oktaLondon**. 
+  My IAM SAML Identity provider for the primary region is named okta and DR is called **oktaLondon**. 
 
-Replace **okta**, **oktaLondon**, **eu-west-2**, **0123456789**
-and **eu-central-1** with values that match your environment.
+5.  Replace **okta**, **oktaLondon**, **eu-west-2**, **0123456789** and **eu-central-1** with values that match your environment.
 
-Edit your Okta user assignments to use the Okta role created in step 8.4. 
+6. Edit your Okta user assignments to use the Okta role created in step 8.4. 
 Log in into your Okta admin console. From the left panel, select
 **Application** \> **Application**. 
 Select the Application, In this blog it is called AppStream Primary, 
 Select **Assignments**, Edit (pencil icon), Select the correct Role, in my account it is called “oktarole”, edit the users domain (@as2.local) in the UserName field to match the Amazon AppStream 2.0 fleet domain, if needed and **Save.** Repeat for DR region.
 
-![Okta Integration for AWS Account Federation Assignments Tab. User Name text box with the username admin@as2.local and an arrow indicating that this field can provide an optional domain change. Used when your okta is linked to a domain that is different to the AppStream fleet domain.](images/image8.png "Figure 8. Okta Integration for AWS Account Federation Assignments Tab")
-
+  ![Okta Integration for AWS Account Federation Assignments Tab. User Name text box with the username admin@as2.local and an arrow indicating that this field can provide an optional domain change. Used when your okta is linked to a domain that is different to the AppStream fleet domain.](images/image8.png "Figure 8. Okta Integration for AWS Account Federation Assignments Tab")
 
 After completing the Okta application configuration, IAM Role and SAML
 identity provider setup, your Okta dashboard should have two
 applications:  
   
-![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
+  ![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
 
 
 ### Step 9: Test if DR is working as expected
@@ -437,49 +436,49 @@ applications:
 1.  Login to your IdP dashboard, and connect to the Amazon AppStream 2.0
     fleet in your primary region using the okta application tile.
 
-2.  Once connected to the fleet, use file explorer to connect to your
+1.  Once connected to the fleet, use file explorer to connect to your
     SMB locations 
     ```
     \\FSxPrimaryDNSName\Profiles
     ```
     and confirm that the user profile folder and vhdx file appears under the specified SMB    locations, set in step 3. Take note of the initial profile size
 
-![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "Figure 10. EC2 Windows File Explorer Connected to FSx Primary and DR")
+    ![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "Figure 10. EC2 Windows File Explorer Connected to FSx Primary and DR")
 
 
-3.  Add some files to your Documents folder
+1.  Add some files to your Documents folder
 
-![EC2 Windows File Explorer Window, Adding test data called TPS Report Documents to the user profile, Documents folder in order to simulate profile size increase.](images/image11.png "Figure 11. EC2 Windows File Explorer Adding Documents to user profile")
+    ![EC2 Windows File Explorer Window, Adding test data called TPS Report Documents to the user profile, Documents folder in order to simulate profile size increase.](images/image11.png "Figure 11. EC2 Windows File Explorer Adding Documents to user profile")
 
 
 
-4.  Verify profiles sizes have increased in both Primary and DR SMB
+1.  Verify profiles sizes have increased in both Primary and DR SMB
     locations
 
-![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a new size of 397,312 KB](images/image12.png "Figure 12. EC2 Windows File Explorer Connected to FSx Primary and DR" )
+    ![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a new size of 397,312 KB](images/image12.png "Figure 12. EC2 Windows File Explorer Connected to FSx Primary and DR" )
 
 
-5.  End the Amazon AppStream 2.0 streaming session
+1.  End the Amazon AppStream 2.0 streaming session
 
-6.  Simulate a region failure by blocking all inbound TCP port 445 to
+1.  Simulate a region failure by blocking all inbound TCP port 445 to
     Primary SMB location.
 
-7.  Connect to your Okta DR application, in my example it the Okta
+1.  Connect to your Okta DR application, in my example it the Okta
     application would be called “AppStream 2.0 DR”
 
-8.  If you have logged in and your documents are all there, it means at
+1.  If you have logged in and your documents are all there, it means at
     this point you have successfully failed over and working in the DR
     region
 
-9.  Add some more test files to your Documents folder on the DR fleet
+1.  Add some more test files to your Documents folder on the DR fleet
     which will automatically get synced back once the Primary file
     server port 445 is reachable from the DR fleet.
 
-10. Enable Inbound TCP port 445 for Primary file server SMB location and
+1. Enable Inbound TCP port 445 for Primary file server SMB location and
     verify that all the newly added files from DR fleet have synced back
     to your primary region.
 
-11. After testing, you can stop the fleet in your DR region to save on
+1. After testing, you can stop the fleet in your DR region to save on
     running costs.
 
 ### Clean-Up:
@@ -494,17 +493,17 @@ steps:
     the FSLogix Administrative templates you deployed to your central
     store.
 
-2.  Remove users from your AppStream 2.0/FSLogix Active Directory group.
+1.  Remove users from your AppStream 2.0/FSLogix Active Directory group.
 
-3.  Delete your Amazon FSx for Windows File Server file systems in both
+1.  Delete your Amazon FSx for Windows File Server file systems in both
     regions.
 
-4.  Delete or stop any AppStream 2.0 fleets, images, stacks, and image
+1.  Delete or stop any AppStream 2.0 fleets, images, stacks, and image
     builders you have created specifically for this blog.
 
-5.  Delete the IAM Roles and SAML Identity providers
+1.  Delete the IAM Roles and SAML Identity providers
 
-6.  Delete the Okta Applications created for this blog
+1.  Delete the Okta Applications created for this blog
 
 ## Conclusion
 
