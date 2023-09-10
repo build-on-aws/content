@@ -417,18 +417,17 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
 5.  Replace **okta**, **oktaLondon**, **eu-west-2**, **0123456789** and **eu-central-1** with values that match your environment.
 
 6. Edit your Okta user assignments to use the Okta role created in step 8.4. 
-Log in into your Okta admin console. From the left panel, select
-**Application** \> **Application**. 
-Select the Application, In this blog it is called AppStream Primary, 
-Select **Assignments**, Edit (pencil icon), Select the correct Role, in my account it is called “oktarole”, edit the users domain (@as2.local) in the UserName field to match the Amazon AppStream 2.0 fleet domain, if needed and **Save.** Repeat for DR region.
+    Log in into your Okta admin console. From the left panel, select
+    **Application** \> **Application**. 
+    Select the Application, In this blog it is called AppStream Primary, 
+    Select **Assignments**, Edit (pencil icon), Select the correct Role, in my account it is called “oktarole”, edit the users domain (@as2.local) in the UserName field to match the Amazon AppStream 2.0 fleet domain, if needed and **Save.** Repeat for DR region.
 
-  ![Okta Integration for AWS Account Federation Assignments Tab. User Name text box with the username admin@as2.local and an arrow indicating that this field can provide an optional domain change. Used when your okta is linked to a domain that is different to the AppStream fleet domain.](images/image8.png "Figure 8. Okta Integration for AWS Account Federation Assignments Tab")
+    ![Okta Integration for AWS Account Federation Assignments Tab. User Name text box with the username admin@as2.local and an arrow indicating that this field can provide an optional domain change. Used when your okta is linked to a domain that is different to the AppStream fleet domain.](images/image8.png "Figure 8. Okta Integration for AWS Account Federation Assignments Tab")
 
-After completing the Okta application configuration, IAM Role and SAML
-identity provider setup, your Okta dashboard should have two
-applications:  
+    After completing the Okta application configuration, IAM Role and SAML
+    identity provider setup, your Okta dashboard should have two applications:  
   
-  ![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
+    ![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
 
 
 ### Step 9: Test if DR is working as expected
