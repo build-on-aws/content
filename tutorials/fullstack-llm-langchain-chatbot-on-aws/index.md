@@ -64,6 +64,7 @@ Here are screenshots depicting the configuration of my AWS OpenSearch cluster.
 ![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch3.png)
 ![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch4.jpg)
 ![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch5.png)
+
 ## Step 5 - Create document ingestion pipeline that will create embeddings for your unstructured document and store them into AWS OpenSearch.
 Now that we have setup the OpenSearch cluster as well as deployed the hugging face embeddings model and the t5 LLM endpoint, we will create a ingestion and processing batch pipeline that will read a pdf document when dropped into an S3 bucket, chunk the text from the document, convert the text chunks into embeddings and store the embeddings (i.e vector representations) into AWS OpenSearch so that we can perform similarity search later on. Dropping the file in the S3 bucket would trigger an event based workflow as depicted in the figure below. A fargate task will convert the text to embeddings and insert into AWS OpenSearch.
 
@@ -97,6 +98,8 @@ After the Cloudformation is executed, drop the pdf representing the car manual i
 ![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.png)
 ![Save embeddings in OpenSearch 3](images/opensearch-embeddings-3.jpg)
 
+## Step 6 - Build and deploy an API for providing real time "context" to the LLM and retrieve back meaningful responses.
+
 Now that we have our text embeddings in the Vector Database powered by AWS OpenSearch, let us move to the next step where we will utilize the T5 Flan XXL Model to respond to inquiries about our car manual. We will use our saved embeddings in the vector database to <b>provide context</b> to the LLM and use the LLM's capabilities to interpret text to answer questions that we ask the LLM about our car manual. To implement our use case, we will rely heavily on Open source LangChain. LangChain is a Python framework that makes it easy to orchestrate and combine the various components that we need to create our real-time <b>context aware question-answer system powered by our LLM</b>. LangChain makes it easy for us to inject our car manual content into our prompt template, and send the final prompt to our LLM model.
 
 The saved Embeddings in the Vector Database (AWS OpenSearch) capture the relationships between words and their meanings so that we can perform calculations with them. The difference between the Hugging Face embedding model and the T5 Flan LLM is that Embedding Model creates vector representations of our text chunks in such a way that it capture the meanings and relationships , while the T5 Flan LLM is a Language Model trained to generate contextually relevant text based on the context injected into our prompts and our queries. The idea is that Embeddings that are numerically similar are also semantically similar.
@@ -107,15 +110,63 @@ In the image below, you can see where these components come into play.
 
 <b>Diagrammatic overview of realtime Question and Answer support from T5-flan-XXL LLM.</b>
 
-![Realtime In Context Learning Workflowls](images/realtime-in-context-learning-workflow.jpg)
-## Step 6 - Build and deploy an API for providing real time "context" to the LLM and retrieve back meaningful responses.
-## Step 7 - Build and deploy a Website with an embedded Chatbot that is integrated to our API.
-## Step 7 - Checkout our Car Savvy AI Assistant.
+![Realtime In Context Learning Workflows](images/realtime-in-context-learning-workflow.jpg)
 
+Now that we have seen the overall flow of how we will use LangChain and our T5 Flan LLM, let's briefly look at our code that we will expose as an API to which we will provide a question as input and it will return back a context aware response. The code for this is in the same GitHub repository and in the folder `RAG-langchain-questionanswer-t5-llm` . The API code depicted in the figure above is in `app.py` file.
+
+<b>Here are some code snippets from `app.py` and some explanation in the below diagrams.</b>
+![Realtime In Context Learning ](images/rag-llm-1.png)
+![Realtime In Context Learning ](images/rag-llm-2.png)
+![Realtime In Context Learning ](images/rag-llm-3.png)
+![Realtime In Context Learning ](images/rag-llm-4.png)
+
+Build a Docker container from the Dockerfile provided in the same folder and push the image to ECR repository. Here is how my image looks like in ECR.
+
+![Realtime In Context Learning Workflows](images/ecr-qa-container.png)
+
+Create the Cloudformation stack to build the ECS Cluster with a Fargate task by importing the Cloudformation tempalte from `Infrastructure/genai-chatbot-llm-rag-langchain.yaml` file. Override the following parameters as shown in the screen shot below and this will build out the ECS cluster with the Fargate task exposing the API .
+
+![Cloudformation template for API ](images/cloudformation-qa-api.png)
+
+Once my stack is built the Cloudformation Outputs tab shows the DNS Name of the fronting ALB for the ECS Fargate API which invokes the LLM Model for the question sent to it. Here is how my Output looks like:- 
+
+![Cloudformation template Output](images/cloudformation-qa-api-output.png)
+
+You can test the API endpoint via curl command  by replacing the as follows:-
+```bash 
+curl -X POST -H "Content-Type: application/json" -d '{"question":"How can I clean my windshield?"}' http://quest-Publi-abc-xxxx.us-east-1.elb.amazonaws.com/qa
+```
+You will see a response as shown below 
+```bash 
+{"response":"To clean sensors and camera lenses, use a cloth moistened with a small amount of glass detergent."}
+```
+
+## Step 7 - Build and deploy a Website with an embedded Chatbot that is integrated to our API.
+
+Next we move on to the last step for our full stack pipeline, which is integrating the API with our open source embedded chatbot using opensource botkit in a HTML website. For this website and the embedded chatbot, our source code is a node based application consisting of an index.html integrated with open source botkit.js as the chatbot. To make things easy I have created a Dockerfile and provided it alongside the code in the folder `homegrown_website_and_bot`. Once again, build the Docker container and push the image to AWS ECR repository.
+
+After the image for the front end is pushed to the ECR repository, build the Cloudformation stack by importing the `fargate-website-chatbot.yaml` file in the `Infrastructure` folder. Override the values of vpc,subnets and `QUESTURL` while creating the stack.
+
+
+![Cloudformation parameters  Setup](images/cloudformation-fargate-website-chatbot.png)
+
+## Step 8 - See the whole thing working. Checkout our Car Savvy AI Assistant
+
+Get the DNS name of the ALB for the front end from the Cloudformation outputs tab
+![Cloudformation template Output](images/dns-name-website.png)
+
+Hit this end point url in the browser and this is how the website looks .
+
+![Website display ](images/website-1.png)
+![Website display ](images/website-2.png)
 ## What's Next ?
 
 I want to try this setup using some other LLM's like Cohere and other Vector DB's like Redis. Hopefully, the above shows you how you can build your own production ready full stack pipelines for Generative AI Models and integrate the pipeline with your front end and embedded NLP chatbots. Let me know other things that you want to read about using Open source , analytics, machine learning and AWS technologies!
 
 ## Clean Up Steps
+
+Delete the pdf file from the s3 bucket.
+Delete the 3 Cloudformation stacks.
+Delete the 2 deployed endpoints in Sagemaker.
 
 
