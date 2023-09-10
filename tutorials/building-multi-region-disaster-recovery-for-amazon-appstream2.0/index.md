@@ -38,7 +38,7 @@ Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-on
 
 Before launching your FSx for Windows or storage service of choice, please keep in mind that right sizing the performance and storage capacity is essential to a successful deployment. These decisions impact the user experience and budget. 
 
-According to Microsoft the [IOPS an FSLogix profile needs](https://learn.microsoft.com/en-us/azure/virtual-desktop/faq#what-s-the-largest-profile-size-fslogix-can-handle-) at a steady state, it is **10 IOPS per user** and Sign-in\out consumes **50 IOPS per user**. The IO load of a single VDI desktop has a high read IO load (up to several 100s of IOPS) when the Operating System boots. The user logs in and a 60% read at about 50 IOPS is seen. Then the user starts working with about 5-10 IOPS at 85% writes for the rest of the day.
+According to Microsoft the [IOPS an FSLogix profile needs](https://learn.microsoft.com/en-us/azure/virtual-desktop/faq#what-s-the-largest-profile-size-fslogix-can-handle-) at a steady state, it is **10 IOPS per user** and sign-in\out consumes **50 IOPS per user**. The IO load of a single VDI desktop has a high read IO load (up to several 100s of IOPS) when the Operating System boots. The user logs in and a 60% read at about 50 IOPS is seen. Then the user starts working with about 5-10 IOPS at 85% writes for the rest of the day.
 
 In a scenario where you have 500 users, in a steady state, a storage service that provides a constant 5000 IOPS is required. If all 500 users log on at the same time, your storage solution would need to be able to provide 25000 IOPS. Some storage services have a burst capability that handle this short spike of IOPS.
 
