@@ -64,7 +64,7 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 | S01E11 | Retrieval Augmented Generation | 2023-04-10 | Emily Webber | [Link to Recording](https://www.twitch.tv/videos/1874397501) |
 | S01E12 | Stable Diffusion on Trainium | 2023-04-17 | KC Tung | [Link to Recording](https://www.twitch.tv/videos/1887068591) |
 | S01E13 | Open Source LLM Evaluation with HELM | 2023-04-24 | Gili Nachum | [Link to Recording](https://www.twitch.tv/videos/1802472662) |
-| S01E14 | AI Code Generation with Amazong CodeWhisperer | 2023-05-01  | David Ernst | [Link to Recording](https://www.twitch.tv/videos/1838758252) |
+| S01E14 | AI Code Generation with Amazon CodeWhisperer | 2023-05-01  | David Ernst | [Link to Recording](https://www.twitch.tv/videos/1838758252) |
 | S01E15 | TensorBoard and SageMaker | 2023-05-08| Arun Lokanatha | [Link to Recording](https://www.twitch.tv/videos/1887068690) |
 | S01E16 | Generative AI with AI21 Labs | 2023-05-15  | Yuval Belfer | [Link to Recording](https://www.twitch.tv/videos/1820667936) |
 | S01E17 | Reinforcement learning with Human Feedback | 2023-05-22 | EK | [Link to Recording](https://www.twitch.tv/videos/1874397560) |
