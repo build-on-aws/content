@@ -31,7 +31,7 @@ https://www.twitch.tv/videos/1900520389
 
 - [LLama2 Paper](https://arxiv.org/pdf/2307.09288.pdf)
 - [SageMaker Jumpstart](https://bit.ly/4437dmY)
-- [LLama2 on SageMaker Jumpstart](https://aws.amazon.com/blogs/machine-learning/llama-2-foundation-models-from-meta-are-now-available-in-amazon-sagemaker-jumpstart/)
+- [LLama2 on SageMaker Jumpstart](https://aws.amazon.com/blogs/machine-learning/llama-2-foundation-models-from-meta-are-now-available-in-amazon-sagemaker-jumpstart/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 **Reach out to the hosts and guests:**
 

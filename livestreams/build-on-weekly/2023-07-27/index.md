@@ -73,7 +73,7 @@ https://www.twitch.tv/videos/1889416352
 
 - [Github repo with code](https://github.com/darko-mesaros/starwars-quote-api)
 - [REACT code in codesandbox](https://codesandbox.io/s/optimistic-sutherland-hno5c8?file=/src/App.js:0-439)
-- [API Gateway CORS with CDK](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigateway-readme.html#cross-origin-resource-sharing-cors)
+- [API Gateway CORS with CDK](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigateway-readme.html#cross-origin-resource-sharing-cors?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [REACT StrictMode](https://react.dev/reference/react/StrictMode)  
 
 **🐦 Reach out to the hosts and guests:**

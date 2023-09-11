@@ -42,9 +42,9 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 
 | Episode | Name | Date | Guest | Link to Show Notes
 |--|--|--|--|--|
-| S02E01 | Let's look at Llama2, Falcon and more! New season start | 2023-08-14  | Emily Webber | [Show notes](https://www.community.aws/livestreams/build-on-generative-ai/2023-08-14) |
-| S02E02 | Defining best for long context Language Models | 2023-08-21  | David Bounds | [Show notes](https://www.community.aws/livestreams/build-on-generative-ai/2023-08-21) |
-| S02E03 | Streaming support on SageMaker endpoints | 2023-09-11  | Raghu Ramesha | [Show notes](https://www.community.aws/livestreams/build-on-generative-ai/2023-09-11) |
+| S02E01 | Let's look at Llama2, Falcon and more! New season start | 2023-08-14  | Emily Webber | [Show notes](/livestreams/build-on-generative-ai/2023-08-14) |
+| S02E02 | Defining best for long context Language Models | 2023-08-21  | David Bounds | [Show notes](/livestreams/build-on-generative-ai/2023-08-21) |
+| S02E03 | Streaming support on SageMaker endpoints | 2023-09-11  | Raghu Ramesha | [Show notes](/livestreams/build-on-generative-ai/2023-09-11) |
 
 
 ### SEASON 01
