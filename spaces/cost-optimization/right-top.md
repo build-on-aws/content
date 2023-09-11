@@ -15,7 +15,7 @@ AWS operates primarily on a pay-as-you-go model, billing you for what you utiliz
 
 #### I want to optimize my production application. How should I proceed?
 
-Cost optimization isn't just a finance team's task – engineers wield substantial influence over AWS expenditure. Explore how in our blog, [Why Engineers Hold the Keys to Smart Cloud Spending](https://community.aws/posts/why-engineers-hold-the-keys). Delve deeper with the [AWS Well-Architected Framework's Cost Pillar](https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html), ensuring you're acquainted with optimization nuances across service categories, from compute and storage to networking and databases.
+Cost optimization isn't just a finance team's task – engineers wield substantial influence over AWS expenditure. Explore how in our blog, [Why Engineers Hold the Keys to Smart Cloud Spending](/posts/why-engineers-hold-the-keys). Delve deeper with the [AWS Well-Architected Framework's Cost Pillar](https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/welcome.html), ensuring you're acquainted with optimization nuances across service categories, from compute and storage to networking and databases.
 
 #### I need more help. Where can I turn?
 

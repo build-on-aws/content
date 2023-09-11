@@ -22,7 +22,7 @@ This snippet shows a [CodeCatalyst](https://codecatalyst.aws/?sc_channel=el&sc_c
 
 **Used in:**
 
-* [Bootstrapping your Terraform automation with Amazon CodeCatalyst](../../tutorials/bootstrapping-terraform-automation-amazon-codecatalyst)
+* [Bootstrapping your Terraform automation with Amazon CodeCatalyst](/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst)
 
 ## Snippet
 

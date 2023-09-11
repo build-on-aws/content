@@ -22,7 +22,7 @@ This snippet shows a [CodeCatalyst](https://codecatalyst.aws/?sc_channel=el&sc_c
 
 **Used in:**
 
-* [Deploy a Container Web App on Amazon ECS Using Amazon CodeCatalyst](../../tutorials/deploy-webapp-ecs-codecatalyst)
+* [Deploy a Container Web App on Amazon ECS Using Amazon CodeCatalyst](/tutorials/deploy-webapp-ecs-codecatalyst)
 
 ## Snippet
 

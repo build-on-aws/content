@@ -126,7 +126,7 @@ Tracing is often used in distributed systems to allow seeing the flow of a user 
 
 Observability is a practice that focuses on understanding your system's current state through the various kinds of data it generates. It's the next logical step after implementing **Logging**, **Monitoring**, and **Tracing** - the three pillars of observability are metrics, traces and logs. Plenty of the companies who are listed for logging and monitoring also have observability offerings. The most prominent one not already mentioned in this guide is [Honeycomb](https://www.honeycomb.io).
 
-If you'd like to try out some of the concepts introduced in this section, check out our [hands-on tutorial showing how to implement OpenTelemetry in a Java application.](/posts/instrumenting-java-apps-using-opentelemetry/)
+If you'd like to try out some of the concepts introduced in this section, check out our [hands-on tutorial showing how to implement OpenTelemetry in a Java application.](/posts/instrumenting-java-apps-using-opentelemetry)
 
 ## Where should I start?
 

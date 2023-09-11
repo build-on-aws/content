@@ -12,7 +12,7 @@ authorName: Sophia Parafina
 date: 2023-08-30
 showInHomeFeed: true
 ---
-In a [previous article](https://community.aws/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations?sc_channel=el&sc_campaign=tutorial&sc_content=learning-aws-iam-by-writing-your-first-policies-for-groups-and-users&sc_geo=mult&sc_country=mult&sc_outcome=acq), we introduced AWS Organizations, a service to centrally manage billing, services, and resources. The partner to Organizations is AWS Identity and Access Management (IAM), a service for verifying and authorizing members of an Organization. The difference between Organizations and IAM is that Organizations can globally set limits to services and resources and IAM can authenticate an account and set fine grained permissions. In this tutorial, we'll introduce the Identity and Access Management service, create users and groups, and demonstrate how to use policies to assign permissions to resources.
+In a [previous article](/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations), we introduced AWS Organizations, a service to centrally manage billing, services, and resources. The partner to Organizations is AWS Identity and Access Management (IAM), a service for verifying and authorizing members of an Organization. The difference between Organizations and IAM is that Organizations can globally set limits to services and resources and IAM can authenticate an account and set fine grained permissions. In this tutorial, we'll introduce the Identity and Access Management service, create users and groups, and demonstrate how to use policies to assign permissions to resources.
 
 ## What you will learn
 
