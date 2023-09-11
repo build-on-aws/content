@@ -1,5 +1,5 @@
 ---
-title: "Building a Multi-Region Disaster Recovery Environment for Amazon AppStream 2.0"
+title: "Building a multi-region disaster recovery environment for Amazon AppStream 2.0"
 
 description: "A guide on FSLogix CloudCache and replication software for resilience."
 
@@ -104,7 +104,7 @@ region, per AWS Organization.*
 ## Solution Overview
 
 
-![Figure 1 shows the components and traffic flow for the solution.](images/image1.png "Figure 1. Solution architecture")
+![Figure 1 shows the components and traffic flow for the solution. There are three boxes: VPC Primary Region, VPC Disaster Recovery Region and overlapping both is VPC Peering. A SAML token has broken lines attached VPC Primary Region and VPC Disaster Recovery Region boxes.](images/image1.png "Figure 1. Solution architecture")
 
 
 The high level steps are as follows:
@@ -183,7 +183,7 @@ on the folder as follows:
   group if using AWS Managed AD and do not have access to domain admins.
 
 
-    ![Image showing the NTFS permissions •Users – Create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only](images/image2.png "Figure 2. Advanced permissions of profiles folder")
+    ![Image showing the NTFS permissions. Steps: create Folder or Append Data (Apply to: This Folder Only) Users – List Folder/Read Data (Apply to: This Folder Only) Users – Read Attributes (Apply to: This Folder Only) Users – Traverse Folder/Execute File (Apply to: This Folder Only).](images/image2.png "Figure 2. Advanced permissions of profiles folder")
 
 * Advanced permissions of profiles folder*
 
@@ -193,14 +193,14 @@ on the folder as follows:
 Get-ACl -Path '\\FSxPrimary.asx.local\D$\Profiles' | Set-ACL '\\FSxDR.asx.local\D$\Profiles'
 ```
 
-### Step 2: 	Setup Share Permissions
+### Step 2:    Setup Share Permissions
 
 1. Turn the “Profiles” folder on the Primary and DR file server into a
  network share using the Microsoft snap-in **fsmgmt.msc**, please
  follow [these steps](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for detailed instructions.
 
 
-   ![Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder](images/image3.png "Figure 3. Profiles folder on D:\ of FSx for Windows being selected as network share")
+   ![Image showing the use of fsmgmt.msc to create a new share on the D drive for the profiles folder.](images/image3.png "Figure 3. Profiles folder on D:\ of FSx for Windows being selected as network share")
 
 
     The permissions on the share can be set to EVERYONE or Authenticated
