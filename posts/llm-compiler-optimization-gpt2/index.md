@@ -267,17 +267,17 @@ Training cost (billable seconds): without Training Compiler vs. with Training Co
 
 ## 9. References
 
-1/ [Amazon SageMaker Training Compiler reference document](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
+1. [Amazon SageMaker Training Compiler reference document](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
 
-2/ [SageMaker Training Compiler Best Practices and Considerations](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler-tips-pitfalls.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
+2. [SageMaker Training Compiler Best Practices and Considerations](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler-tips-pitfalls.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
 
-3/ [PyTorch on XLA Devices](https://pytorch.org/xla/release/2.0/index.html#)
+3. [PyTorch on XLA Devices](https://pytorch.org/xla/release/2.0/index.html#)
 
-4/ [Understanding LazyTensor System Performance with PyTorch/XLA on Cloud TPU](https://pytorch.org/blog/understanding-lazytensor-system-performance-with-pytorch-xla-on-cloud-tpu/)
+4. [Understanding LazyTensor System Performance with PyTorch/XLA on Cloud TPU](https://pytorch.org/blog/understanding-lazytensor-system-performance-with-pytorch-xla-on-cloud-tpu/)
 
-5/ [Train large language model using Hugging Face and AWS Trainium](https://repost.aws/articles/ARHyFz-RpBR1OiGekJzkg2aw/train-large-language-model-using-hugging-face-and-aws-trainium?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
+5. [Train large language model using Hugging Face and AWS Trainium](https://repost.aws/articles/ARHyFz-RpBR1OiGekJzkg2aw/train-large-language-model-using-hugging-face-and-aws-trainium?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
 
-6/ [Code for this demonstration](https://github.com/build-on-aws/compilation-optimization-of-sagemaker)
+6. [Code for this demonstration](https://github.com/build-on-aws/compilation-optimization-of-sagemaker)
 
 ## Conclusion
 
