@@ -107,7 +107,7 @@ region, per AWS Organization.*
 ![Figure 1 shows the components and traffic flow for the solution.](images/image1.png "Figure 1. Solution architecture")
 
 
-The high level steps is as follows:
+The high level steps are as follows:
 
 1.  Setup file share and folder permissions to store user profile data
 
