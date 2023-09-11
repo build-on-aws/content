@@ -16,6 +16,7 @@ date: 2023-09-02
 ## Introduction
 
 Imagine this:
+``` NOTE: Awesome start! I moved it to next paragraph as it's a lingering clause. 
 
 Imagine this: you’re a cloud engineer for a website built using AWS serverless technologies such as AWS Lambda.  You receive a call from a customer insisting they’re unable to open their shopping cart on your website.  You open the same website and login with your ID and try the same operation and it works fine.  What do you do?
 
