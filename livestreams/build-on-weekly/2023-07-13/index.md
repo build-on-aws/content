@@ -28,7 +28,7 @@ Hello friends and welcome to this week's Build On Weekly episode show notes! Jac
 
 Together, we explore the architecture and what it means to build it with resilience as we learn about reslience policies and resolve the faults we discovered. During this stream we work with a multitude of services including load balancers, RDS databases, CodePipeline and more!
 
-Follow the workshop yourself at home: [Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup).
+Follow the workshop yourself at home: [Using AWS Resilience Hub to monitor resilient architectures!](?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq
 
 Check out the recording here:
 
@@ -36,11 +36,11 @@ https://www.twitch.tv/videos/1871218232
 
 ## Links from today's episode
 
-- [Today's Workshop: Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup)
+- [Today's Workshop: Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [AWS re:Inforce 2023 - Engineer application resilience with compliance in mind (GRC304)](https://bit.ly/arh-reinforce2023)
-- [Resilience Wave content](https://community.aws/tags/resilience)
-- [Blog: Building Resilient Well-Architected Workloads Using AWS Resilience Hub](https://aws.amazon.com/blogs/architecture/building-resilient-well-architected-workloads-using-aws-resilience-hub/)
-- [Blog: Continually assessing application resilience with AWS Resilience Hub and AWS CodePipelin](https://aws.amazon.com/blogs/architecture/continually-assessing-application-resilience-with-aws-resilience-hub-and-aws-codepipeline/)
+- [Resilience Wave content](/tags/resilience)
+- [Blog: Building Resilient Well-Architected Workloads Using AWS Resilience Hub](https://aws.amazon.com/blogs/architecture/building-resilient-well-architected-workloads-using-aws-resilience-hub/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- [Blog: Continually assessing application resilience with AWS Resilience Hub and AWS CodePipelin](https://aws.amazon.com/blogs/architecture/continually-assessing-application-resilience-with-aws-resilience-hub-and-aws-codepipeline/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 **🐦 Reach out to the hosts and guests:**
 

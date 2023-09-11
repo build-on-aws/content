@@ -24,7 +24,7 @@ Large language models, or LLMs, are essentially composed of complex multi-layer 
  
 In this hands-on demonstration, we'll experience together how to set up an environment in Amazon SageMaker, including permission settings, configuration settings, etc. Next, we'll experience how to train a GPT-2 model on an SST2 dataset using the Amazon SageMaker Training Compiler. The Amazon SageMaker Training Compiler is integrated into Amazon's deep learning containers (DLC), which use these containers to compile and optimize training jobs on GPU instances with minimal code changes.
 
-## 1.	Amazon SageMaker Training Compiler Overview
+## 1. Amazon SageMaker Training Compiler Overview
 
 The Amazon SageMaker Training Compiler is an optimization feature of SageMaker that can help reduce training time on GPU instances, and the compiler accelerates the training process by using GPU instances more efficiently. Amazon SageMaker Training Compiler is offered free of charge in SageMaker and helps reduce overall billing time by speeding up training.
 
@@ -34,23 +34,22 @@ The SageMaker training compiler is integrated into the AWS deep learning contain
 
 For more information, see the Amazon SageMaker Training Compiler section in the [Developer Guide](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2).
 
-## 2.	Prerequisites and Dataset
+## 2. Prerequisites and Dataset
 
-In this experiment, you'll train a GPT-2 model on the SST2 dataset with Amazon SageMaker Training Compiler using Hugging Face's transformers and dataset library. Note that this notebook will download the SST2 data set from the website (https://huggingface.co/datasets/sst2), where you can view the dataset information and terms. 
+In this experiment, you'll train a GPT-2 model on the SST2 dataset with Amazon SageMaker Training Compiler using Hugging Face's transformers and dataset library. Note that this notebook will download the SST2 data set from the [website](https://huggingface.co/datasets/sst2), where you can view the dataset information and terms. 
 
 First of all, we need to set up the environment through some pre-requisites, such as permissions, configuration, etc.
 
 **Special Instructions:** 
 
-1) You can run this code on Amazon SageMaker Studio, Amazon SageMaker notebook instance (the way we're using it now), or on your local computer where the AWS CLI is set up. If you use Amazon SageMaker Studio or Amazon SageMaker notebook instance, make sure to select one of the PyTorch-based kernels, namely `PyTorch 3` or `conda_pytorch_p38` respectively.
+1. You can run this code on Amazon SageMaker Studio, Amazon SageMaker notebook instance (the way we're using it now), or on your local computer where the AWS CLI is set up. If you use Amazon SageMaker Studio or Amazon SageMaker notebook instance, make sure to select one of the PyTorch-based kernels, namely `PyTorch 3` or `conda_pytorch_p38` respectively.
+2. This notebook uses **2 x `ml.g4dn.12xlarge`** instances with multiple GPUs. If you don't have enough quotas, please refer to the ["Supported Regions and Quotas"](https://docs.aws.amazon.com/sagemaker/latest/dg/regions-quotas.html#service-limit-increase-request-procedure?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2) to request an increase in service quotas for Amazon SageMaker resources.
 
-2) This notebook uses **2 x ml.g4dn.12xlarge** instances with multiple GPUs. If you don't have enough quotas, please refer to the ["Supported Regions and Quotas"](https://docs.aws.amazon.com/sagemaker/latest/dg/regions-quotas.html#service-limit-increase-request-procedure?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2) to request an increase in service quotas for Amazon SageMaker resources.
-
-## 3.	Environment Settings
+## 3. Environment Settings
 
 First of all, you'll need to install the SageMaker Python SDK. This experiment requires installing the SageMaker Python SDK v2.108.0, as shown in the following code:
 
-```
+```python
 !pip install "sagemaker>=2.108.0" botocore boto3 awscli pandas numpy –upgrade
 import botocore
 import boto3
@@ -64,7 +63,7 @@ print(f"botocore: {botocore.__version__}")
 
 Secondly, you need to set up the operating environment for Amazon SageMaker:
 
-```
+```python
 import sagemaker
 
 sess = sagemaker.Session()
@@ -84,7 +83,7 @@ print(f"sagemaker bucket: {sess.default_bucket()}")
 print(f"sagemaker session region: {sess.boto_region_name}")
 ```
 
-## 4.	Loading the Dataset
+## 4. Loading the Dataset
 
 If you are concerned about when the dataset is loaded, you can find the value sst2 of `dataset_config_name` in the notebook code; if you compare it to the `entry_point` file of the Hugging Face estimator (`run_clm.py` is defined in this example), the code in it is written like this:
 
@@ -92,9 +91,9 @@ If you are concerned about when the dataset is loaded, you can find the value ss
 
 The explanation in the code comments is very clear. They are listed below for your reference:
 
-“Get the datasets: you can either provide your own CSV/JSON/TXT training and evaluation files (see below) or just provide the name of one of the public datasets available on the hub at https://huggingface.co/datasets/ (the dataset will be downloaded automatically from the datasets Hub) …”
+“Get the datasets: you can either provide your own CSV/JSON/TXT training and evaluation files (see below) or just provide the name of one of the public datasets available on the hub at [https://huggingface.co/datasets/](https://huggingface.co/datasets/) (the dataset will be downloaded automatically from the datasets Hub) …”
 
-## 5.	Training Jobs Setting
+## 5. Training Jobs Setting
 
 To create an Amazon SageMaker training job, we use an **estimator**. We'll be using the Hugging Face estimator in the Amazon SageMaker Training Compiler. With an estimator, you can use entry_point to define the training script that Amazon SageMaker should execute, the instance type (instance_type) participating in the training, the hyperparameters to be delivered, etc.
 
@@ -102,7 +101,7 @@ When the Amazon SageMaker training job starts, it's responsible for launching an
 
 First, we'll define some basic parameters common to all estimators (for experimental use, it's recommended to turn off the Amazon SageMaker Debugger performance analysis and debugging tools to avoid additional overhead):
 
-```
+```python
 estimator_args = dict(
     source_dir="scripts",
     entry_point="run_clm.py",
@@ -134,7 +133,7 @@ num_gpus_per_instance = 4
 
 Next, define some parameters to pass to the training script.
 
-```
+```python
 hyperparameters = {
     "model_type": "gpt2",
     "tokenizer_name": "gpt2",
@@ -155,13 +154,13 @@ hyperparameters = {
 }
 ```
 
-## 6.	Model Training Using Native PyTorch Code
+## 6. Model Training Using Native PyTorch Code
 
 The following `per_device_train_batch_size` defines the maximum number of batches that can fit into the **ml.g4dn.12xlarge** instance memory. If you change the model version, instance type, sequence length, or other parameters that affect memory consumption, you'll need to find the corresponding maximum batch size.
 
 Also, notice that this example code sets the way PyTorch data parallelization is set:
 
-```
+```python
 distribution={"pytorchddp": {"enabled": True}}
 ```
 
@@ -169,7 +168,7 @@ Setting up the PyTorch data parallel mechanism on Amazon SageMaker is easy. You 
 
 Also, this example uses the Hugging Face training script `run_clm.py`, which you can find in the scripts folder.
 
-```
+```python
 from sagemaker.pytorch import PyTorch
 
 # The original learning rate was set for a batch of 32. Here we scale learning rate linearly with an adjusted batch size
@@ -199,7 +198,7 @@ native_estimator.fit(wait=False)
 native_estimator.latest_training_job.name
 ```
 
-## 7.	Model Training Using Compile-optimized PyTorch Code
+## 7. Model Training Using Compile-optimized PyTorch Code
 
 The **Amazon SageMaker Training Compiler** can perform some optimization to reduce training time on GPU instances. The compiler optimizes DL models to accelerate training by using SageMaker machine learning (ML) GPU instances more efficiently. Amazon SageMaker Training Compiler allows you to use SageMaker at no additional cost, which helps reduce overall billing time by speeding up training.
 
@@ -211,11 +210,11 @@ The following code shows how to use the distribution mechanism **pytorchxla**, a
 
 source: [XLA Architecture](https://www.tensorflow.org/xla/architecture)
 
-**PyTorch/XLA** is a Python package built on top of the [XLA deep learning compiler](https://www.tensorflow.org/xla), a domain-specific compiler for linear algebra that can accelerate TensorFlow and PyTorch models. The PyTorch/XLA package is used for connecting the PyTorch framework with CPUs, GPUs, TPUs and [AWS Trainium](https://repost.aws/articles/ARHyFz-RpBR1OiGekJzkg2aw/train-large-language-model-using-hugging-face-and-aws-trainium).
+**PyTorch/XLA** is a Python package built on top of the [XLA deep learning compiler](https://www.tensorflow.org/xla), a domain-specific compiler for linear algebra that can accelerate TensorFlow and PyTorch models. The PyTorch/XLA package is used for connecting the PyTorch framework with CPUs, GPUs, TPUs and [AWS Trainium](https://repost.aws/articles/ARHyFz-RpBR1OiGekJzkg2aw/train-large-language-model-using-hugging-face-and-aws-trainium?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2).
 
 Compiling with the Amazon SageMaker Training Compiler changes the model's memory usage. Most commonly, this is expressed as a decrease in memory utilization, followed by an increase in the maximum batch size that can accommodate the GPU. Note that to change the batch size, the learning rate must be adjusted appropriately. The following code shows how to linearly adjust the learning rate as the batch size increases.
 
-```
+```python
 from sagemaker.huggingface import HuggingFace, TrainingCompilerConfig
 
 new_per_device_train_batch_size = 20
@@ -246,7 +245,7 @@ optimized_estimator.fit(wait=False)
 optimized_estimator.latest_training_job.name
 ```
 
-## 8.	Comparative Analysis of Experimental Results
+## 8. Comparative Analysis of Experimental Results
 
 Let's compare the various training metrics with and without the Amazon SageMaker Training Compiler. These include: training data throughput comparison, training loss convergence comparison, training time comparison, training cost comparison, etc.
 
@@ -266,7 +265,7 @@ Training time: without Training Compiler vs. with Training Compiler
 
 Training cost (billable seconds): without Training Compiler vs. with Training Compiler
 
-## 9.	References
+## 9. References
 
 1/ [Amazon SageMaker Training Compiler reference document](https://docs.aws.amazon.com/sagemaker/latest/dg/training-compiler.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
 
@@ -276,7 +275,7 @@ Training cost (billable seconds): without Training Compiler vs. with Training Co
 
 4/ [Understanding LazyTensor System Performance with PyTorch/XLA on Cloud TPU](https://pytorch.org/blog/understanding-lazytensor-system-performance-with-pytorch-xla-on-cloud-tpu/)
 
-5/ [Train large language model using Hugging Face and AWS Trainium](https://repost.aws/articles/ARHyFz-RpBR1OiGekJzkg2aw/train-large-language-model-using-hugging-face-and-aws-trainium)
+5/ [Train large language model using Hugging Face and AWS Trainium](https://repost.aws/articles/ARHyFz-RpBR1OiGekJzkg2aw/train-large-language-model-using-hugging-face-and-aws-trainium?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=llm-compiler-optimization-gpt2)
 
 6/ [Code for this demonstration](https://github.com/build-on-aws/compilation-optimization-of-sagemaker)
 
@@ -290,10 +289,10 @@ Also, recently we've seen that some advanced open source LLMs are still hot topi
 
 ## About the Author
 
-### Haowen Huang 
+### Haowen Huang
 
 Haowen is a Senior Developer Advocate at AWS based in Hong Kong. He has over 20 years of experience in the cloud computing, internet, and telecom industries. He focuses on the promotion and application of AI, machine learning and data science.  
 
-### Elizabeth Fuentes Leone 
+### Elizabeth Fuentes Leone
 
 Elizabeth is a Developer Advocate at AWS based in Santiago. She has extensive experience in data analytics and machine learning. She loves helping developers learn while building.

@@ -156,7 +156,7 @@ From now on, every time you use an [AI/ML Service](https://aws.amazon.com/machin
 - [AWS Well-Architected machine learning lens](https://docs.aws.amazon.com/wellarchitected/latest/machine-learning-lens/machine-learning-lens.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
 
 - [Architect and build the full machine learning lifecycle with AWS: An end-to-end Amazon SageMaker demo](https://aws.amazon.com/blogs/machine-learning/architect-and-build-the-full-machine-learning-lifecycle-with-amazon-sagemaker/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
-- [SkillBuilder Machine Learning plan](https://explore.skillbuilder.aws/learn/lp/28/machine-learning-learning-plan)
+- [SkillBuilder Machine Learning plan](https://explore.skillbuilder.aws/learn/lp/28/machine-learning-learning-plan?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
 
 - [What is ai?](https://aws.amazon.com/machine-learning/what-is-ai/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=introduction-to-artificial-intelligence-and-machine-learning)
 

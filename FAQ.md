@@ -45,11 +45,11 @@ This section covers the basics of the `index.md` file used to create a content p
 
 ### Markdown Syntax
 
-Content is written used [Markdown](https://spec.commonmark.org/0.30/), and has been extended with a number of additional features, have a look at the [media embedding](#media-embedding) and [layout](#layout-extensions).
+Content is written used [Markdown](https://spec.commonmark.org/0.30), and has been extended with a number of additional features, have a look at the [media embedding](#media-embedding) and [layout](#layout-extensions).
 
 ### Where do I find the general Markdown syntax guide?
 
-👉 [https://www.markdownguide.org/basic-syntax/](https://www.markdownguide.org/basic-syntax/)
+👉 [https://www.markdownguide.org/basic-syntax/](https://www.markdownguide.org/basic-syntax)
 
 ### I have a series of posts. How do I link them together?
 

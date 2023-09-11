@@ -38,9 +38,9 @@ https://www.twitch.tv/videos/1846587978
 
 - [Analytics Reference Architecture github page](https://github.com/aws-samples/aws-analytics-reference-architecture)
 - [L3 Construct over at the Constructs hub](https://constructs.dev/packages/aws-analytics-reference-architecture)
-- [ARA Blog post](https://aws.amazon.com/blogs/opensource/adding-cdk-constructs-to-the-aws-analytics-reference-architecture/)
-- [Data Mesh Blog post](https://aws.amazon.com/blogs/big-data/use-an-event-driven-architecture-to-build-a-data-mesh-on-aws/)
-- [Data Mesh workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/23e6326b-58ee-4ab0-9bc7-3c8d730eb851/en-US)
+- [ARA Blog post](https://aws.amazon.com/blogs/opensource/adding-cdk-constructs-to-the-aws-analytics-reference-architecture/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- [Data Mesh Blog post](https://aws.amazon.com/blogs/big-data/use-an-event-driven-architecture-to-build-a-data-mesh-on-aws/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- [Data Mesh workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/23e6326b-58ee-4ab0-9bc7-3c8d730eb851/en-US?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 **🐦 Reach out to the hosts and guests:**
 
