@@ -78,9 +78,9 @@ The code for document processing, building the embeddings and inserting into the
 
 The screenshots below explain the code in `startup_script.py` file to create text embeddings using the Embedding Model deployed on AWS Sagemaker and to insert the embeddings into the AWS Opensearch Vector Database for similiarity search later on.
 
-![code snippets from startup_script.py](images/startup-script1.png)
-![code snippets from startup_script.py](images/startup-script2.png)
-![code snippets from startup_script.py](images/startup-script3.png)
+![code snippets from startup_script.py](images/startup-script1.jpg)
+![code snippets from startup_script.py](images/startup-script2.jpg)
+
 
 Now that we understand the code in `startup_script.py` file, build the `Dockerfile` from the same `create-embeddings-save-in-vectordb` folder and push the Image to AWS ECR. Once I push the image to AWS ECR this is how my ECR repository looks like :- 
 
@@ -89,7 +89,7 @@ Now that we understand the code in `startup_script.py` file, build the `Dockerfi
 
 Run the cloudformation template that will create the event based workflow from the GitHub Repository folder `Infrastructure/fargate-embeddings-vectordb-save.yaml`. Overide the parameters based on your AWS environment. Here is how my Cloudformation parameters looks like.
 
-![Cloudformation Template for Ingestion Pipeline](images/cloudformation-template-ingestion-pipeline.png)
+![Cloudformation Template for Ingestion Pipeline](images/cloudformation-template-ingestion-pipeline.jpg)
 
 Creating this Cloudformation stack will create the S3 bucket, as well as create the plumbing for the S3 notification that will invoke a Lambda function which will in turn invoke the Fargate task which will execute the Docker container that executes startup-script.py file which will create the embeddings in AWS OpenSearch and create a new index by the name `carmanual`
 
