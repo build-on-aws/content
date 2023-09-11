@@ -38,7 +38,7 @@ Register for Vince's session [here](https://www.linkedin.com/events/exploringtex
 
 ## Learn with Us
 
-To accompany their hands-on videos, the students have provided annotated notebooks that can be run on [SageMaker Studio Lab](https://studiolab.sagemaker.aws/) by viewers. Tune in to the broadcast with the notebooks ready to run , and follow along as the students, accompanied by Curtis Evans, Principal Academic Advocate, explain their research.  Be sure to login to [SageMaker Studio Lab](https://studiolab.sagemaker.aws/) for free access to notebooks that can be run in the Cloud, enabling you to follow along with the steps and experiment with the technology themselves. Find the notebooks themselves on [The Grad Project’s GitHub repo](https://github.com/build-on-aws/the-grad-project). Fork the notebooks and be ready to run them in the Cloud!
+To accompany their hands-on videos, the students have provided annotated notebooks that can be run on [SageMaker Studio Lab](https://studiolab.sagemaker.aws/) by viewers. Tune in to the broadcast with the notebooks ready to run , and follow along as the students, accompanied by Curtis Evans, Principal Academic Advocate, explain their research.  Be sure to login to [SageMaker Studio Lab](https://studiolab.sagemaker.aws/) for free access to notebooks that can be run in the Cloud, enabling you to follow along with the steps and experiment with the technology themselves. Find the notebooks on [The Grad Project’s GitHub repo](https://github.com/build-on-aws/the-grad-project). Fork these notebooks to your GitHub account and be ready to run them in the Cloud!
 
 ![Jessy, Ben, and Vince](./images/tgp-2.jpg)
 >Jessy, Ben and Vince enjoy a light moment while recording in Seattle’s Skill Center
@@ -52,4 +52,8 @@ The Grad Project is part of our ongoing effort to support education and research
 3. Preregister for the [MIT](https://www.linkedin.com/events/howmitstudentsarecombatingracis7100201173629972481/theater/) session and the [CMU](https://www.linkedin.com/events/exploringtext-to-sql-howcarnegi7100202154535071744/theater/) session.
 3. Tune in on LinkedIn Live on Sept 19th and 26th to learn live with Ben, Jessy, Vince, and Developer Advocate Curtis who will be ready to answer your questions.
 4. Miss the broadcast? You can find it on [YouTube](https://www.youtube.com/@AWSOnlineTechTalks) after the event.
+
+## About the Authors
+
+Curtis Evans, who conducted the interviews with The Grad Project students, is a Principal Academic Advocate on the Academic Advocacy Team managed by Jen Looper, the Head of Academic Advocacy at AWS. The AA Team works to build and curate a quality journey for postsecondary-aged students worldwide by crafting great content, cool events, and a valuable community experience on campuses globally called [Cloud Clubs](https://s12d.com/cloud-clubs). Learn more about Academic Advocacy's initiatives [on our website](https://s12d.com/students).
 
