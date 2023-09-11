@@ -21,7 +21,7 @@ Before we start, if you are intersted in **Cost Optimization**, make sure to che
 
 ![Architecture diagram of how this works](images/header.webp "Architecture diagram of how this thing works")
 
-In today's episode Darko is joined by Raghu, as they explore the wonderfull world of Amazon SageMaker hosting endpoints. This time, looking into the [brand new feature - Streaming](https://aws.amazon.com/blogs/machine-learning/elevating-the-generative-ai-experience-introducing-streaming-support-in-amazon-sagemaker-hosting/). No, not that kind of streaming, rather it's the kind where we get to stream the respones out of a LLM. This means that instead of waiting for the LLM to generate the response and then get the whole response back to the user, we are streaming the response as it is being made. Definitely making the experience working with a LLM hosted by SageMaker that much better.
+In today's episode Darko is joined by Raghu, as they explore the wonderfull world of Amazon SageMaker hosting endpoints. This time, looking into the [brand new feature - Streaming](https://aws.amazon.com/blogs/machine-learning/elevating-the-generative-ai-experience-introducing-streaming-support-in-amazon-sagemaker-hosting/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq). No, not that kind of streaming, rather it's the kind where we get to stream the respones out of a LLM. This means that instead of waiting for the LLM to generate the response and then get the whole response back to the user, we are streaming the response as it is being made. Definitely making the experience working with a LLM hosted by SageMaker that much better.
 
 To enable this, just make sure your `serving.properties` file contains something like this:
 ```text
@@ -42,12 +42,13 @@ Check out the recording here:
 https://www.twitch.tv/videos/1922979917
 
 
+?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq
 
 ## Links from today's episode
 
-- [Blog post about the streaming feature](https://aws.amazon.com/blogs/machine-learning/elevating-the-generative-ai-experience-introducing-streaming-support-in-amazon-sagemaker-hosting/)
+- [Blog post about the streaming feature](https://aws.amazon.com/blogs/machine-learning/elevating-the-generative-ai-experience-introducing-streaming-support-in-amazon-sagemaker-hosting/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [The code we used today](https://github.com/aws-samples/sagemaker-hosting/tree/main/GenAI-Hosting/Large-Language-Model-Hosting/LLM-Streaming)
-- [Deep Learning Containers](https://docs.aws.amazon.com/sagemaker/latest/dg/large-model-inference-dlc.html)
+- [Deep Learning Containers](https://docs.aws.amazon.com/sagemaker/latest/dg/large-model-inference-dlc.html?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [Falcon 7b on Hugging face](https://huggingface.co/tiiuae/falcon-7b)
 
 
