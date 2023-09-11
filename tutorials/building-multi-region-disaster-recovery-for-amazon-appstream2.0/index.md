@@ -313,7 +313,7 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
   
   You can find the full list of Profile Container configuration settings in [Profile Container registry configuration reference](https://docs.microsoft.com/en-us/fslogix/profile-container-configuration-reference).  
 
-### Step 5: Create an Amazon AppStream 2.0 Image
+### Step 5:    Create an Amazon AppStream 2.0 Image
 
 1.  Finish [creating your AppStream 2.0 image using the Image
     Assistant](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
@@ -322,7 +322,7 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
 
 3.  Start the fleet, if your fleet was already running, stop and start the fleet in order to get the new GPO applied at start-up.
 
-### Step 6:Copy the Image to the DR Region
+### Step 6:    Copy the Image to the DR Region
 
 1.  To copy an image to another AWS Region, launch the [AppStream 2.0 console](https://console.aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) and select the region that contains your existing image. In the navigation pane,
     choose **Images**, select your existing image that has FSLogix
@@ -337,7 +337,7 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
 
 1.  Create the fleet in the DR region with the same fleet name, case sensitive and using the image that was prepped with FSLogix in Step 3 and copied to DR region.
 
-### Step 8: Setup Your SAML IdP
+### Step 8:    Setup Your SAML IdP
 
 1.  In this example, I am using Okta as my SAML Identity provider(IdP). Log in to your IdP admin console.
     From the left panel, select **Applications** \> **Applications**.
@@ -432,7 +432,7 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
     ![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
 
 
-### Step 9: Test if DR Is Working As Expected
+### Step 9:   Test if DR Is Working As Expected
 
 1.  Login to your IdP dashboard, and connect to the Amazon AppStream 2.0
     fleet in your primary region using the okta application tile.
