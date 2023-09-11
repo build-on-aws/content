@@ -55,7 +55,7 @@ Storing user profiles on an SMB share provides:
 1. Reduces administration by removing the need to maintain a full list of inclusions and exclusions for profile roaming
 
 
-In this blog, I will guide you through how to build a multi-region disaster recovery environment for Amazon AppStream 2.0 using Amazon FSx for Windows as a storage location.
+In this blog, I'll guide you through building a multi-region disaster recovery environment for Amazon AppStream 2.0 using Amazon FSx for Windows as a storage location.
 
 ## Prerequisites
 
@@ -71,9 +71,9 @@ in your account:
 1.  An existing domain joined Amazon AppStream 2.0 fleet in a stopped
     state and a stack that does **not** have [Application Settings
     Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
-    enabled
+    enabled.
 
-1.  Active Directory Services in both Primary (Frankfurt) and Disaster   Recovery (DR) region (London). In this blog, I am using AWS Managed AD with [multi-region
+1.  Active Directory Services in both Primary (Frankfurt) and Disaster Recovery (DR) region (London). In this blog, I am using AWS Managed AD with [multi-region
     replication](https://aws.amazon.com/blogs/aws/multi-region-replication-now-enabled-for-aws-managed-microsoft-active-directory?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     enabled. You can also use a self-managed Active Directory installed on an EC2 instance or your on premise Active Directory with network connectivity between the locations.
 
@@ -81,7 +81,7 @@ in your account:
     System](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
     used for profile storage, check [this blog
     post](https://aws.amazon.com/blogs/desktop-and-application-streaming/use-amazon-fsx-and-fslogix-to-optimize-application-settings-persistence-on-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
-    for setup instructions
+    for setup instructions.
 
 1.  The VPC subnets for Amazon AppStream 2.0 in primary and disaster
     recovery region, must be able to connect on port 445, to both
@@ -101,7 +101,7 @@ in your account:
 support multi-region at this time and can only be deployed in one
 region, per AWS Organization.*
 
-## Solution overview
+## Solution Overview
 
 
 ![Figure 1 shows the components and traffic flow for the solution.](images/image1.png "Figure 1. Solution architecture")
@@ -130,9 +130,9 @@ The high level steps are as follows:
 
 9.  Test if Disaster Recovery is working as expected
 
-## Deploy the solution
+## Deploy the Solution
 
-### Step 1: Setup file and folder permissions
+### Step 1: Setup File and Folder Permissions
 
 1.  The first step is to create a folder on both your primary and DR file servers to store
     your user profile containers, in this blog I will be using FSx for
@@ -193,7 +193,7 @@ on the folder as follows:
 Get-ACl -Path '\\FSxPrimary.asx.local\D$\Profiles' | Set-ACL '\\FSxDR.asx.local\D$\Profiles'
 ```
 
-### Step 2: Setup share permissions
+### Step 2: 	Setup Share Permissions
 
 1. Turn the “Profiles” folder on the Primary and DR file server into a
  network share using the Microsoft snap-in **fsmgmt.msc**, please
@@ -226,7 +226,7 @@ Invoke-Command -ConfigurationName FSxRemoteAdmin -ComputerName $FSxRemotePowerSh
 ```
 
 
-### Step 3: Install and configure FSLogix
+### Step 3: 	Install and Configure FSLogix
 
 **To prepare Amazon AppStream 2.0 image with the FSlogix agent
 software**
@@ -249,9 +249,9 @@ software**
 Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass -like 'User'} | Remove-LocalGroupMember 'FSLogix ODFC Include List'
 ```
 
-6.  FSLogix Profile Include List group is the include list for dynamic profiles. Select the **FSLogix Profile Include List** group. **Remove** “Everyone” and modify the list of Members so that your Security Group for  AppStream 2.0/FSLogix users is included. Choose **Apply** and   **OK**.
+6.  FSLogix Profile Include List group is the include list for dynamic profiles. Select the **FSLogix Profile Include List** group. **Remove** “Everyone” and modify the list of Members so that your Security Group for  AppStream 2.0/FSLogix users is included. Choose **Apply** and **OK**.
 
-### Step 4: Setup the Group Policy to configure FSLogix
+### Step 4: Setup the Group Policy to Configure FSLogix
 
 1.  Copy  **fslogix.admx** in to your Active Directory's Sysvol directory 
  
@@ -322,7 +322,7 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
 
 3.  Start the fleet, if your fleet was already running, stop and start the fleet in order to get the new GPO applied at start-up.
 
-### Step 6: Copy the image to the DR region
+### Step 6:Copy the Image to the DR Region
 
 1.  To copy an image to another AWS Region, launch the [AppStream 2.0 console](https://console.aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) and select the region that contains your existing image. In the navigation pane,
     choose **Images**, select your existing image that has FSLogix
@@ -331,15 +331,15 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
     programmatically copy images. Visit [Tag and Copy an
     Image](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html#tutorial-image-builder-tag-copy?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more information.
 
-### Step 7: Recreate the Amazon AppStream 2.0 configuration in the DR region
+### Step 7: 	Recreate the Amazon AppStream 2.0 Configuration in the DR Region
 
 1.  Recreate Amazon AppStream 2.0 stack in DR region with the exact **same stack name** case sensitive. This will allow for easy switch  between regions using one IAM role and policy.
 
 1.  Create the fleet in the DR region with the same fleet name, case sensitive and using the image that was prepped with FSLogix in Step 3 and copied to DR region.
 
-### Step 8: Setup your SAML IdP
+### Step 8: Setup Your SAML IdP
 
-1.  In this example, I am using Okta as my SAML Identity provider(IdP), Log in into your IdP admin console.
+1.  In this example, I am using Okta as my SAML Identity provider(IdP). Log in to your IdP admin console.
     From the left panel, select **Applications** \> **Applications**.
     Select **Browse App Catalog** and search for “AWS Account
     Federation.” Select the AWS Account Federation app and choose **Add
@@ -432,7 +432,7 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
     ![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
 
 
-### Step 9: Test if DR is working as expected
+### Step 9: Test if DR Is Working As Expected
 
 1.  Login to your IdP dashboard, and connect to the Amazon AppStream 2.0
     fleet in your primary region using the okta application tile.
@@ -442,7 +442,7 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
     ```
     \\FSxPrimaryDNSName\Profiles
     ```
-    and confirm that the user profile folder and vhdx file appears under the specified SMB    locations, set in step 3. Take note of the initial profile size
+    and confirm that the user profile folder and vhdx file appears under the specified SMB locations, set in step 3. Take note of the initial profile size.
 
     ![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "Figure 10. EC2 Windows File Explorer Connected to FSx Primary and DR")
 
@@ -465,11 +465,11 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
     Primary SMB location.
 
 1.  Connect to your Okta DR application, in my example it the Okta
-    application would be called “AppStream 2.0 DR”
+    application would be called “AppStream 2.0 DR”.
 
 1.  If you have logged in and your documents are all there, it means at
     this point you have successfully failed over and working in the DR
-    region
+    region.
 
 1.  Add some more test files to your Documents folder on the DR fleet
     which will automatically get synced back once the Primary file
