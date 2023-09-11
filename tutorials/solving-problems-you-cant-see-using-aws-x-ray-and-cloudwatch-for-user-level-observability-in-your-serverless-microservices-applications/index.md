@@ -17,7 +17,7 @@ date: 2023-09-02
 
 Imagine this:
 
-You’re a cloud engineer for a website that is built using AWS serverless technologies such as AWS Lambda.  You receive a call from a customer that insists they’re unable to open their shopping cart on your website.  You open the same website and login with your id and try the same operation and it works fine.  What do you do next?
+Imagine this: you’re a cloud engineer for a website built using AWS serverless technologies such as AWS Lambda.  You receive a call from a customer insisting they’re unable to open their shopping cart on your website.  You open the same website and login with your ID and try the same operation and it works fine.  What do you do?
 
 If you’re using AWS X-Ray and Amazon CloudWatch, there are plenty of things that you can do to understand what is happening from this user’s or other users’ perspective.
 
