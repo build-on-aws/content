@@ -22,7 +22,7 @@ Imagine this: you’re a cloud engineer for a website built using AWS serverless
 
 If you’re using AWS X-Ray and Amazon CloudWatch, there are plenty of things that you can do to understand what is happening from this user’s or other users’ perspective.
 
-In this tutorial, I’ll walk through how you can use AWS X-Ray and Amazon CloudWatch to help you improve end user observability.  You will use the [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart) sample application as the starting point and enhance its AWS X-Ray usage and implementation to include an AWS X-Ray group for registered and anonymous users along with related CloudWatch Metrics and CloudWatch Alarms.  Along the way, you will learn how to use the AWS X-Ray SDK and AWS X-Ray constructs such as segments, subsegments, and annotations. Throughout the tutorial, I’ll point out some potential gotcha’s and how to work around them.
+In this tutorial, I’ll walk you through ways AWS X-Ray and Amazon CloudWatch help you improve end-user observability.  You'll use the [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart) sample application as the starting point and enhance its AWS X-Ray usage and implementation to include an AWS X-Ray group for registered and anonymous users, along with related CloudWatch Metrics and CloudWatch Alarms.  You'll also learn how to use the AWS X-Ray SDK and AWS X-Ray constructs such as segments, subsegments, and annotations. Throughout the tutorial, I’ll point out some potential gotchas and how to work around them.
 
 ## What you will learn
 
