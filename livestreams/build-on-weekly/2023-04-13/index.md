@@ -36,7 +36,7 @@ https://www.twitch.tv/videos/1792674049
 
 - [Tutorial we used](https://github.com/christianversloot/machine-learning-articles/blob/main/tutorial-building-a-hot-dog-not-hot-dog-classifier-with-tensorflow-and-keras.md)
 - [Hot Dog Image data set from Kaggle](https://www.kaggle.com/datasets/dansbecker/hot-dog-not-hot-dog)
-- [Sagemaker Studio Lab](https://studiolab.sagemaker.aws/)
+- [Sagemaker Studio Lab](https://studiolab.sagemaker.aws/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [Original Code](https://gist.github.com/gogococo/726d9a04571255c471149f9864e57e83)
 - [ChatGPT Improved Code](https://gist.github.com/gogococo/d97d91883e0439742df7d3af38ca06f2)
 - [Stream Recording](https://www.twitch.tv/videos/1792674049)

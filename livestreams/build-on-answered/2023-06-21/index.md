@@ -1,5 +1,5 @@
 ---
-title: "Build On Answered | Episode 7 | Resilient Architecture"
+title: "Build On Answered | All About Resilient Architecture | S01 EP07"
 description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - build-on-live
@@ -22,6 +22,7 @@ spaces:
   - livestreams
     
 ---
+![Streaming session with Rohini and Cobus with a shared browser tab showing a Stack Overflow question](images/ep07_images.png)
 
 Join us for Episode 7 of Build On Live: Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!
 
@@ -36,15 +37,16 @@ https://www.twitch.tv/videos/1856494950
 * [**Seth Eliot**](https://twitter.com/setheliot), Principle Developer Advocate @ AWS
 
 ## This Weeks Questions:
+
 1. [Cannot ping AWS EC2 instance](https://stackoverflow.com/questions/21981796/cannot-ping-aws-ec2-instance)
 2. [Does AWS S3 cross-region replication use same URL for multiple regions?](https://stackoverflow.com/questions/29284951/does-aws-s3-cross-region-replication-use-same-url-for-multiple-regions)
 3. [What is the difference between Amazon ECS and Amazon EC2?](https://stackoverflow.com/questions/40575584/what-is-the-difference-between-amazon-ecs-and-amazon-ec2)
 
 ## Show Notes
 
-Why did [Reachability Analyzer](https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html) still claim the [security group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) was the problem, even after Seth added in inbound rule for ICMP?
+Why did [Reachability Analyzer](https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq) still claim the [security group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq) was the problem, even after Seth added in inbound rule for ICMP?
 
-* This was definitely a case of [PEBCAK](https://en.wiktionary.org/wiki/PEBCAK). Remember when setting up the path to be analyzed, it asks for a **protocol**? Seth, specified **TCP** (from the choices TCP or UDP). Well, [ICMP](https://aws.amazon.com/what-is/icmp/) (the new rule Seth added), is not TCP, so analyzer correctly determined there was no _TCP_ path to the instance.
+* This was definitely a case of [PEBCAK](https://en.wiktionary.org/wiki/PEBCAK). Remember when setting up the path to be analyzed, it asks for a **protocol**? Seth, specified **TCP** (from the choices TCP or UDP). Well, [ICMP](https://aws.amazon.com/what-is/icmp/?sc_channel=el&sc_campaign=livestreams&sc_content=boa-2023-04-19&sc_geo=mult&sc_country=mult&sc_outcome=acq) (the new rule Seth added), is not TCP, so analyzer correctly determined there was no _TCP_ path to the instance.
 
 Can we just re-run an analysis on an already defined path in Reachability Analyzer?
 

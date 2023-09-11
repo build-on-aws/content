@@ -104,7 +104,7 @@ This just scratches the surface of what can be achieved by leveraging AIML appli
 
 No doubt, there's a real or hypothetical problem you'd like to address using one of these services. Even if you don't have one in mind, I've provided these links for you to continue experimenting and learning:
 
-- Amazon Translate [Code Samples](https://github.com/aws-samples/document-translation).. [more code samples](https://docs.aws.amazon.com/translate/latest/dg/examples.html)
+- Amazon Translate [Code Samples](https://github.com/aws-samples/document-translation).. [more code samples](https://docs.aws.amazon.com/translate/latest/dg/examples.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do)
 - Amazon Transcribe and Amazon Comprehend [Code Samples](https://github.com/aws-samples/amazon-transcribe-comprehend-podcast)
-- Amazon Polly [Code Samples](https://docs.aws.amazon.com/polly/latest/dg/sample-code-overall.html)
+- Amazon Polly [Code Samples](https://docs.aws.amazon.com/polly/latest/dg/sample-code-overall.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do)
 - Amazon Rekognition [Code Samples](https://github.com/aws-samples/amazon-rekognition-code-samples)

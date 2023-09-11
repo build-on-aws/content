@@ -88,7 +88,7 @@ Configuration management (CM) allows us to maintain systems in a desired state b
 
 ### Secrets management
 
-Secrets management allows us to securely organize and maintain information for our applications by storing, managing, and distributing sensitive information such as passwords, API keys, and cryptographic keys. It is an important aspect of security and compliance, as it helps to ensure that sensitive information is stored and transmitted in a secure manner, and that it is only accessed through code and authorized procedures. Some examples of Secrets Management tools are [HashiCorp Vault](https://www.vaultproject.io/), [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html), and [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html).
+Secrets management allows us to securely organize and maintain information for our applications by storing, managing, and distributing sensitive information such as passwords, API keys, and cryptographic keys. It is an important aspect of security and compliance, as it helps to ensure that sensitive information is stored and transmitted in a secure manner, and that it is only accessed through code and authorized procedures. Some examples of Secrets Management tools are [HashiCorp Vault](https://www.vaultproject.io/), [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html?sc_channel=el&sc_campaign=devopswave&sc_content=billing-and-cost-optimization-essentials&sc_geo=mult&sc_country=mult&sc_outcome=acq), and [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html?sc_channel=el&sc_campaign=devopswave&sc_content=billing-and-cost-optimization-essentials&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Containers
 
@@ -126,7 +126,7 @@ Tracing is often used in distributed systems to allow seeing the flow of a user 
 
 Observability is a practice that focuses on understanding your system's current state through the various kinds of data it generates. It's the next logical step after implementing **Logging**, **Monitoring**, and **Tracing** - the three pillars of observability are metrics, traces and logs. Plenty of the companies who are listed for logging and monitoring also have observability offerings. The most prominent one not already mentioned in this guide is [Honeycomb](https://www.honeycomb.io).
 
-If you'd like to try out some of the concepts introduced in this section, check out our [hands-on tutorial showing how to implement OpenTelemetry in a Java application.](/posts/instrumenting-java-apps-using-opentelemetry/)
+If you'd like to try out some of the concepts introduced in this section, check out our [hands-on tutorial showing how to implement OpenTelemetry in a Java application.](/posts/instrumenting-java-apps-using-opentelemetry)
 
 ## Where should I start?
 

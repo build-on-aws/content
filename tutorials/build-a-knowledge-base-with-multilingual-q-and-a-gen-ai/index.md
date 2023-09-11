@@ -165,7 +165,7 @@ def TranslateText(text,SourceLanguageCode,TargetLanguage):
 
 If you want to know more about these services as API calls, you can visit this blog: [All the things that Comprehend, Rekognition, Textract, Polly, Transcribe, and Others Do](/posts/all-the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-> 🚨**Note:** Amazon Translate and Amazon Comprehend have Free Tier for up 12 months. Check [pricing here](https://aws.amazon.com/translate/pricing/) and [here](https://aws.amazon.com/comprehend/pricing/).
+> 🚨**Note:** Amazon Translate and Amazon Comprehend have Free Tier for up 12 months. Check [pricing here](https://aws.amazon.com/translate/pricing/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [here](https://aws.amazon.com/comprehend/pricing/?sc_channel=el&sc_campaign=datamlwave&sc_content=build-a-knowledge-base-with-multilingual-q-and-a-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 To know the language code for documents in the data source in Amazon Kendra, you use [Describe Data Source API](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kendra/client/describe_data_source.html#describe-data-source): 
 

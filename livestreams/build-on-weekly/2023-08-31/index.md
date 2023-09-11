@@ -79,7 +79,7 @@ https://www.twitch.tv/videos/1913458536
 
 ## Links from today's episode
 
-- [Cost Optimization space](https://community.aws/cost-optimization)
+- [Cost Optimization space](/cost-optimization)
 - [Amazon Lightsail](https://go.aws/44sVChe)
 - [Running WordPress on Lightsail](https://go.aws/3PuISCJ)
 - [Sophia's guides on moving to the cloud 🌤️](https://bit.ly/45MCOex)

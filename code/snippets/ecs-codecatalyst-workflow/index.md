@@ -18,11 +18,11 @@ date: 2023-05-05
 | 💻 Examples of      | [ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_ecs_cc&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> [CodeCatalyst Workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_ecs_cc&sc_geo=mult&sc_country=mult&sc_outcome=acq) |
 | ⏰ Last Updated        | 2023-05-05                                                     |
 
-This snippet shows a [CodeCatalyst](https://codecatalyst.aws/?sc_channel=el&sc_campaign=devopswave&sc_content=snp_cfn_cc&sc_geo=mult&sc_country=mult&sc_outcome=acq) [workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_ecs_cc&sc_geo=mult&sc_country=mult&sc_outcome=acq) that will build and publish a container images, and then deploy it to an ECS cluster.
+This snippet shows a [CodeCatalyst](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=snp_cfn_cc&sc_geo=mult&sc_country=mult&sc_outcome=acq) [workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_ecs_cc&sc_geo=mult&sc_country=mult&sc_outcome=acq) that will build and publish a container images, and then deploy it to an ECS cluster.
 
 **Used in:**
 
-* [Deploy a Container Web App on Amazon ECS Using Amazon CodeCatalyst](../../tutorials/deploy-webapp-ecs-codecatalyst)
+* [Deploy a Container Web App on Amazon ECS Using Amazon CodeCatalyst](/tutorials/deploy-webapp-ecs-codecatalyst)
 
 ## Snippet
 

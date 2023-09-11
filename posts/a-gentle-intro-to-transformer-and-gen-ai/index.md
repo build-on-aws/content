@@ -41,25 +41,23 @@ We’ve redrawn this diagram to represent 3 main branches:
 
 ![LLM Models](images/LLM-models.png)
 
-The Bert, Flan T5, Alexa, Cohere, Bloom are all available via Amazon SageMaker here:
-https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html
+The Bert, Flan T5, Alexa, Cohere, Bloom are all available via Amazon SageMaker [here](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html?sc_channel=el&sc_campaign=datamlwave&sc_content=a-gentle-intro-to-transformer-and-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
-The Claude and Jurassic 2 are available via Amazon Bedrock here:
-https://aws.amazon.com/bedrock/
+The Claude and Jurassic 2 are available via Amazon Bedrock [here](https://aws.amazon.com/bedrock/?sc_channel=el&sc_campaign=datamlwave&sc_content=a-gentle-intro-to-transformer-and-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
-Transformer models are neural networks. A neural network is a mathematical model inspired by the structure and function of the human brain, consisting of layers of neurons.  Each neuron is able to receive input data, performs a mathematical compution on the data and passes and output.  Below is an example of a simple feed-forward neural network, which is 1 component of the GPT model:
+Transformer models are neural networks. A neural network is a mathematical model inspired by the structure and function of the human brain, consisting of layers of neurons.  Each neuron is able to receive input data, performs a mathematical computation on the data and passes and output.  Below is an example of a simple feed-forward neural network, which is 1 component of the GPT model:
 
 ![Feed-Forward Neural Network](images/Feed-Forward%20Neural%20Network.png)
 
 The high-level architecture of a transformer is to use an encoder and decoder.  The encoder takes the input data and is able to extract meaning and context from the data and pass onto the decoder.  It does this by converting the input sequence into numbers called embeddings.  These embeddings are processed using a technique known as self-attention, sent through a feed forward neural network, through a normalisation layer and into the decoder.  The decoder consists of a similar architecture to the encoder and is used to produce the generative output.
 
-The concept of self-attention is important. If we are inputing a sentence, self-attention captures the importance of each word and the relationships between the words.  Humans do this by understanding what verbs are, what nouns are, how adjectives related to nons and how words relate to every other word in the input sentence.  The model is following a similar process, but encoded in a mathematics.
+The concept of self-attention is important. If we are inputting a sentence, self-attention captures the importance of each word and the relationships between the words.  Humans do this by understanding what verbs are, what nouns are, how adjectives related to nouns and how words relate to every other word in the input sentence.  The model is following a similar process, but encoded in a mathematics.
 
-Another way of explaining the transformer architecture is to use an analogy.  Let’s image you’re planning a surprise party for your wife’s 40th birthday party.  You need to co-orindate with multiple people to make it a success.  Each person has a field of expertise and each is able to contribute a variety of skills to accomplish some of the tasks.
+Another way of explaining the transformer architecture is to use an analogy.  Let’s image you’re planning a surprise party for your wife’s 40th birthday party.  You need to co-ordinate with multiple people to make it a success.  Each person has a field of expertise and each is able to contribute a variety of skills to accomplish some of the tasks.
 
 The transformer architecture is like a communication system that allows everyone to collaborate effectively:
 
-1. **Input Sequence:** This consists of conveying the party requirements such as theme, venue, activites, etc.
+1. **Input Sequence:** This consists of conveying the party requirements such as theme, venue, activities, etc.
 2. **Encoder:** Each person represents a single encoder, and specilises in an aspect of the party planning: decorations, food, music, games, etc.  All the people, and therefore the stack of encoders, represent a party committee.
 3. **Self-Attention:** Each person pays attention to everyone else’s ideas.  They consider the relevance, importance of each party idea and how the ideas all relate to each other.  This happens as part of a brainstorming and collaboration session.
 4. **Decoder:** The party committee then take all of the information and ideas, weigh the importance of each idea and determine how to assemble into a party plan.
@@ -73,15 +71,14 @@ A few hyperparameters that relate to our architecture include:
 * The number of parallel self-attention mechanisms we could use which would better capture diverse patterns in the data, but would require more computational power.
 * The size of the feed-forward neural network.
 
-If you want to get started with transformer models, please have a look at this blog post  [Getting Started with Generative AI on AWS](https://aws.amazon.com/blogs/machine-learning/get-started-with-generative-ai-on-aws-using-amazon-sagemaker-jumpstart/)
-
-
+If you want to get started with transformer models, please have a look at this blog post  [Getting Started with Generative AI on AWS](https://aws.amazon.com/blogs/machine-learning/get-started-with-generative-ai-on-aws-using-amazon-sagemaker-jumpstart/?sc_channel=el&sc_campaign=datamlwave&sc_content=a-gentle-intro-to-transformer-and-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## How to choose the right level of customization
 
 Now you know how transformer architecture works. And transformer architecture is the fundamental building blocks of Large Language Models (LLMs). LLM is a pre-trained large transformer model, which understands and generates outputs in a human-like way.
 
 You may want to work with the LLMs so to build up your specific Generative AI applications. But there are challenges:
+
 1. LLM models are powerful but also general-purposed. They may not fit good enough to your specific use case.
 2. You may or may not have direct access to the LLM model.
 3. Your organization may have massive amount of domain/industrial data, and you are not sure how to better use this knowledge with GenAI capabilities.
@@ -185,10 +182,9 @@ Retrieval Augmented Generation (RAG) is one of the options. It can bring value b
 
 Here are some reference use cases of RAG that we suggest you to have a look:
 
-[Question answering using Retrieval Augmented Generation with foundation models in Amazon SageMaker JumpStart](https://aws.amazon.com/blogs/machine-learning/question-answering-using-retrieval-augmented-generation-with-foundation-models-in-amazon-sagemaker-jumpstart/)
+[Question answering using Retrieval Augmented Generation with foundation models in Amazon SageMaker JumpStart](https://aws.amazon.com/blogs/machine-learning/question-answering-using-retrieval-augmented-generation-with-foundation-models-in-amazon-sagemaker-jumpstart/?sc_channel=el&sc_campaign=datamlwave&sc_content=a-gentle-intro-to-transformer-and-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq))
 
-[Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/)
-
+[Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/?sc_channel=el&sc_campaign=datamlwave&sc_content=a-gentle-intro-to-transformer-and-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq))
 
 #### Summary - Prompt Engineering
 The list of Prompt Engineering techniques and best practices is getting longer and longer by the day. Knowing which approach fits you best is a continuous experimenting adventure.
@@ -229,14 +225,14 @@ Fine Tuning II is updating parameters of all layers. Compared with Fine Tuning I
 
 This is a good reference to understand [Fine Tuning I and II](https://github.com/rasbt/LLM-finetuning-scripts/blob/main/conventional/distilbert-movie-review/2_finetune-last-layers.ipynb).
 
-An example solution: [Domain-adaptation Fine-tuning (II) with Amazon SageMaker JumpStart](https://aws.amazon.com/blogs/machine-learning/domain-adaptation-fine-tuning-of-foundation-models-in-amazon-sagemaker-jumpstart-on-financial-data/)
+An example solution: [Domain-adaptation Fine-tuning (II) with Amazon SageMaker JumpStart](https://aws.amazon.com/blogs/machine-learning/domain-adaptation-fine-tuning-of-foundation-models-in-amazon-sagemaker-jumpstart-on-financial-data/?sc_channel=el&sc_campaign=datamlwave&sc_content=a-gentle-intro-to-transformer-and-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq))
 
 #### 2. Instruction Fine Tuning
 
 **Instruction Fine Tuning** involves fine tuning the model with instructions (***a collection of tasks descriptions***).
 This approach can improve zero-shot performance of LLM on unseen tasks.
 
-An example solution: [Instruction fine-tuning for FLAN T5 XL with Amazon SageMaker JumpStart](https://aws.amazon.com/blogs/machine-learning/instruction-fine-tuning-for-flan-t5-xl-with-amazon-sagemaker-jumpstart/#:~:text=Instruction%20fine%2Dtuning%20uses%20a,the%20weights%20of%20the%20model)
+An example solution: [Instruction fine-tuning for FLAN T5 XL with Amazon SageMaker JumpStart](https://aws.amazon.com/blogs/machine-learning/instruction-fine-tuning-for-flan-t5-xl-with-amazon-sagemaker-jumpstart/#:~:text=Instruction%20fine%2Dtuning%20uses%20a,the%20weights%20of%20the%20model?sc_channel=el&sc_campaign=datamlwave&sc_content=a-gentle-intro-to-transformer-and-gen-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq))
 
 #### 3. Parameter-Efficient Fine Tuning (PEFT)
 
@@ -251,7 +247,7 @@ In this way, it significantly reduces the resource consumption during training. 
 This approach freezes the pre-trained model parameters, and limits trainable parameters of each individual layer of the model (***Transformer architecture***). In doing so, it greatly reduces the number of trainable parameters, hence, decreasing the training time.
 
 So the benefits of PEFT:
-- Less resource comsumption: less compute resource for training, less storage for hosting model
+- Less resource consumption: less compute resource for training, less storage for hosting model
 - Faster training
 - Better performance (not overfitting)
 
