@@ -9,6 +9,8 @@ tags:
   - sdk
   - python
   - aws
+waves:
+  - resilience
 authorGithubAlias: Laren-AWS
 authorName: Laren Crawford
 date: 2023-09-06
