@@ -15,9 +15,6 @@ date: 2023-09-02
 
 ## Introduction
 
-Imagine this:
-``` NOTE: Awesome start! I moved it to next paragraph as it's a lingering clause. 
-
 Imagine this: you’re a cloud engineer for a website built using AWS serverless technologies such as AWS Lambda.  You receive a call from a customer insisting they’re unable to open their shopping cart on your website.  You open the same website and login with your ID and try the same operation and it works fine.  What do you do?
 
 If you’re using AWS X-Ray and Amazon CloudWatch, there are plenty of things that you can do to understand what is happening from this user’s or other users’ perspective.
@@ -39,8 +36,8 @@ Before starting this tutorial, you will need the following:
 | Attributes                |                                                                                                                         |
 | ------------------- |-------------------------------------------------------------------------------------------------------------------------|
 | ✅ AWS Level        | Advanced - 300                                                                                                          |
-| ⏱ Time to complete  | 45 minutes                                                                                                              |
-| 💰 Cost to complete | Free when using the AWS Free Tier                                                                         |
+| ⏱ Time to complete  | 90 minutes                                                                                                              |
+| 💰 Cost to complete | Free when using the AWS Free Tier                                                                                       |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [Git client](https://git-scm.com/downloads/guis) |
 | 💻 Code Sample         | [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?       |
