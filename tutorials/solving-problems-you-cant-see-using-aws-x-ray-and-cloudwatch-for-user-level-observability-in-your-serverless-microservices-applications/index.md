@@ -669,8 +669,6 @@ Next, click **Run query** to execute the query you just built:
 
 ![AWS X-Ray Run Query](images/x-ray-run-query.png)
 
-Copy the query that was built for you and save it somewhere you can retrieve later (such as Notepad on Windows or Notes on Mac).  You will use this query when you create an AWS X-Ray group in the next step.
-
 Scroll down to the **Traces** section and select the first one.
 
 ![AWS X-Ray traces list](images/x-ray-traces-list.png)
