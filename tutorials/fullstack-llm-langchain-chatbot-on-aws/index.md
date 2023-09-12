@@ -37,7 +37,7 @@ The very first step to provide In-Context learning is to ingest the pdf document
 
 ## Diagrammatic overview of how to convert PDF Document into Embeddings and store in the Vector Database.
 
-![Shows all the steps involved converting PDF documents into embeddings and storing in the Vector Database](images/embeddings-save-vectordb.png)
+![Shows all the steps involved converting PDF documents into embeddings and storing in the Vector Database](images/embeddings-save-vectordb.jpg)
 
 ## Step 1 - Deploy Hugging Face Embeddings Model with Sagemaker Jumpstart
 Within your Sagemaker Studio environment, use Sagemaker Jumpstart and select the GPT-J 6B Embedding FP16 embedding model and click on Deploy to deploy it onto the Sagemaker environment.
@@ -58,9 +58,9 @@ Here are screenshots depicting the configuration of my AWS OpenSearch cluster.
 
 ![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch1.png)
 ![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch2.png)
-![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch3.png)
+![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch3.jpg)
 ![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch4.jpg)
-![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch5.png)
+![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch5.jpg)
 
 ## Step 5 - Create document ingestion pipeline that will create embeddings for your unstructured document and store them into AWS OpenSearch.
 Now that we have setup the AWS OpenSearch cluster as well as deployed the hugging face embeddings model and the T5 LLM endpoint, we will create a ingestion and processing batch pipeline that will read a pdf document when dropped into an S3 bucket, chunk the text from the document, convert the text chunks into embeddings and store the embeddings (i.e vector representations) into AWS OpenSearch so that we can perform similarity search later on. Dropping the file in the S3 bucket would trigger an event based workflow as depicted in the figure below. A fargate task will convert the text to embeddings and insert into AWS OpenSearch.
@@ -93,7 +93,7 @@ By creating this CloudFormation stack, you'll set up an S3 bucket, establish S3 
 
 After the Cloudformation is executed, drop the pdf representing the car manual into the S3 bucket. I have provided the sample test data named `car_manual.pdf` in the data folder. After the event based ingestion pipeline completes execution, this is how the AWS OpenSearch cluster looks like for the index `carmanual`.
 
-![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.png)
+![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.jpg)
 ![Save embeddings in OpenSearch 3](images/opensearch-embeddings-3.jpg)
 
 ## Step 6 - Build and deploy an API for providing real time "context" to the LLM and retrieve back meaningful responses.
@@ -113,10 +113,10 @@ In the image below, you can see where these components come into play.
 Now that we have seen the overall flow of how we will use LangChain and our T5 Flan LLM, let's briefly look at our code that we will expose as an API to which we will provide a question as input and it will return back a context aware response. The code for this is in the same GitHub repository and in the folder `RAG-langchain-questionanswer-t5-llm` . The API code depicted in the figure above is in `app.py` file.
 
 <b>Here are some code snippets from `app.py` and some explanation in the below diagrams.</b>
-![Realtime In Context Learning ](images/rag-llm-1.png)
-![Realtime In Context Learning ](images/rag-llm-2.png)
+![Realtime In Context Learning ](images/rag-llm-1.jpg)
+![Realtime In Context Learning ](images/rag-llm-2.jpg)
 ![Realtime In Context Learning ](images/rag-llm-3.jpg)
-![Realtime In Context Learning ](images/rag-llm-4.png)
+![Realtime In Context Learning ](images/rag-llm-4.jpg)
 
 Build a Docker container from the Dockerfile provided in the same folder and push the image to ECR repository. Here is how my image looks like in ECR.
 
