@@ -36,7 +36,7 @@ Before starting this tutorial, you will need the following:
 | Attributes                |                                                                                                                         |
 | ------------------- |-------------------------------------------------------------------------------------------------------------------------|
 | ✅ AWS Level        | Advanced - 300                                                                                                          |
-| ⏱ Time to complete  | 90 minutes                                                                                                              |
+| ⏱ Time to complete  | 120 minutes                                                                                                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier                                                                                       |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [Git client](https://git-scm.com/downloads/guis) |
 | 💻 Code Sample         | [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart)                             |
