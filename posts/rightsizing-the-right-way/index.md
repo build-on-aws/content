@@ -49,7 +49,7 @@ There are multiple AWS resources can be rightsized but usually compute resources
 - EFS -> storage classes
 - EMR -> number and type of nodes
 
-## How to start Rightsizing
+## How to start effective rightsizing activities
 
 A well-defined process exists to rightsize resources in all environments, and is performed on a regular basis, thereby ensuring efficient use of cloud resources. The process includes the use of tools (i.e., native AWS services such as AWS Cost Explorer Rightsizing Recommendations, AWS Compute Optimizer, AWS Trusted Advisor, as well as AWS Partner tools, open-source tools, or DIY tools) to identify resources which are unused, idle or overprovisioned, target resource types that are better fits, return-on-investment calculations to help prioritize resource modifications, clear lines of ownership during the process, functional and performance tests prior to modifying resources, and a standard operating procedure to modify identified resources. Rightsizing decisions and outcomes are reported as part of this cadence, and an effort is made to automate as much of the process to increase the return-on-investment associated with rightsizing.
 
@@ -75,13 +75,15 @@ To start effective rightsizing activity, you need to understand your business re
 
 ## Rightsizing tools
 
-There are multiple tools you can use to rightsize your resources on AWS Cloud. For Compute resources, [AWS Cost Explorer](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html) and [AWS Compute Optimizer](https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html) tools can provide recommendations that can help you identify opportunities to modify your instances and save money. Both AWS Compute Optimizer and Cost Explorer Rightsizing recommendations use the same engine to provide rightsizing recommendations. Amazon EC2 Resource Optimization (Rightsizing recommendatons) focuses on cost reduction providing recommendations only for over-provisioned resources.
+There are multiple tools you can use to rightsize your resources on AWS Cloud. For Compute resources, [AWS Cost Explorer](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html) and [AWS Compute Optimizer](https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html) tools can provide recommendations that can help you identify opportunities to modify your instances and save money. Both AWS Compute Optimizer and Cost Explorer Rightsizing recommendations use the same engine to provide rightsizing recommendations.
+
+[AWS Cost Explorer](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html) **Rightsizing recommendatons** focuses on cost reduction providing recommendations only for over-provisioned resources.
 
 ![AWS Cost Explorer RightSizing](./images/AWS-CE-RightSizing.jpg)
 
 ![AWS Cost Explorer RightSizing2](./images/AWS-CE-RightSizing2.jpg)
 
-AWS Compute Optimizer aggregates over and under provisioned resources on their recommendations. In addition to EC2 Rightsizing it also covers Auto-Scaling Groups, Lambda functions, and EBS volumes.
+[AWS Compute Optimizer](https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html) aggregates over and under provisioned resources on their recommendations. In addition to EC2 Rightsizing it also covers Auto-Scaling Groups, Lambda functions, and EBS volumes.
 
 ![AWS Compute Optimizer](./images/AWS-Compute-Optimizer.jpg)
 
@@ -99,7 +101,25 @@ Once you identify the right sizing opportunities, you can sort your recommendati
 
 If you prefer to develop your own Right-Sizing tool for your AWS resources, especially for Compute resources. To optimize cost and performance in your cloud infrastructure, start by analyzing instances that have been running for at least half of your desired time frame while prioritizing those with lower Reserved Instance coverage. Exclude resources that are currently switched off to streamline your search process and avoid conversions to older-generation instances whenever possible. Implement a savings threshold to determine when right sizing is worth considering, ensuring that the cost reduction justifies the effort. Additionally, before switching to a new instance, verify that your new instance can meet 80% of your resource utilizations for vCPU, Memory, IOPS and networks traffics to ensure a seamless transition and maintain optimal operational efficiency.
 
-As an example, assuming one of these tools provides you rightsizing opportunity for one of your EC2 instance, general rule for EC2 instances is that if your maximum CPU and memory usage is less than 40% over a four-week period, you can safely cut the machine in half. For example, if you are using a m7g.8xlarge EC2, you can move to a m7g.4xlarge, which will allow you to **_reduce your cost by 50%_** for this instance.
+As an example, assuming one of these tools provides you rightsizing opportunity for one of your EC2 instance, general rule for EC2 instances is that if your maximum CPU and memory usage is less than 40% over a four-week period, you can safely cut the machine in half. For example, if you are using a c7gn.xlarge EC2, you can move to a c7gn.large, which will allow you to **_reduce your cost by 50%_** for this instance.
+
+![AWS Instance Types](./images/aws-instance-type-name.jpg)
+_Instance type naming convention_
+
+## How to find rightsizing opportunity for ec2 instance with Compute Optimizer
+
+1. Navigate to the AWS Compute Optimizer page. You can review saving opportunity and the summary of the findings in the dashboard.
+   ![AWS Compute Optimizer 1](./images/Compute-Optimizer-1.jpg)
+
+2. Check **Recommendations per AWS resource types** on the left menu and review each one of them. We will check **EC2 instances** recommendations.
+   ![AWS Compute Optimizer 2](./images/Compute-Optimizer-2.jpg)
+
+3. Click one of the Instance ID identified as an opportunity to rightsize or recommendation instance state whether stopped or optimization is recommended.
+   ![AWS Compute Optimizer 3](./images/Compute-Optimizer-3.jpg)
+
+4. Check **current instance type with recommended options** and how much estimated monthly saving for On-Demand instances
+   ![AWS Compute Optimizer 4](./images/Compute-Optimizer-4.jpg)
+5. Make sure you review the steps provided in the **effective rightsizing activity** section above
 
 ## Summary
 
