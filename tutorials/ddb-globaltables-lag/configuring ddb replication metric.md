@@ -53,4 +53,4 @@ Next, in the Conditions portion of the dialogue, we will define what will trigge
 The next screen will provide you with various options on how to notify users when the alarm is triggered. Specific details on how to configure all of the various notification options can be found [here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-globaltables-lag).
 
 ## Summary
-That's it! You've created a dashboard widget and an alarm for your DynamoDB GlobalTable! Monitoring the replication latency will help to ensure that you are getting the lowest RPO possible in the event that you have to failover to your secondary region.
+That's it! You've created a dashboard widget and an alarm for your DynamoDB global table! Monitoring the replication latency will help to ensure that you are getting the lowest RPO possible in the event that you have to failover to your secondary region.
