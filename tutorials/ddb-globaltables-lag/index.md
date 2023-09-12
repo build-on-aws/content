@@ -10,7 +10,7 @@ waves:
   - resilience
 authorGithubAlias: crichey
 authorName: Clark Richey
-date: 2023-08-22
+date: 2023-09-12
 ---
 
 Anytime we are asynchronously replicating data, we need to be concerned with the lag in that replication time. The longer the replication lag, the greater the potential amount of data that could be lost, resulting in a higher potential recovery point objective (RPO). This tutorial explains how to configure [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-globaltables-lag) to monitor that replication lag for [Amazon DynamoDB global tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-globaltables-lag).
