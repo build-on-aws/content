@@ -63,7 +63,7 @@ Here are screenshots depicting the configuration of my AWS OpenSearch cluster.
 ![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch5.jpg)
 
 ## Step 5 - Create document ingestion pipeline that will create embeddings for your unstructured document and store them into AWS OpenSearch.
-Now that we have setup the AWS OpenSearch cluster as well as deployed the hugging face embeddings model and the T5 LLM endpoint, we will create a ingestion and processing batch pipeline that will read a pdf document when dropped into an S3 bucket, chunk the text from the document, convert the text chunks into embeddings and store the embeddings (i.e vector representations) into AWS OpenSearch so that we can perform similarity search later on. Dropping the file in the S3 bucket would trigger an event based workflow as depicted in the figure below. A fargate task will convert the text to embeddings and insert into AWS OpenSearch.
+Now that we have setup the AWS OpenSearch cluster as well as deployed the hugging face embeddings model and the T5 LLM endpoint, we will create a ingestion and processing batch pipeline that will read a pdf document when dropped into an AWS Simple Storage Service (S3) bucket, chunk the text from the document, convert the text chunks into embeddings and store the embeddings (i.e vector representations) into AWS OpenSearch so that we can perform similarity search later on. Dropping the file in the S3 bucket would trigger an event based workflow as depicted in the figure below. A fargate task will convert the text to embeddings and insert into AWS OpenSearch.
 
 <b>Here is a Diagrammatic Overview of a production like document ingestion pipeline to store embeddings of text chunks into the OpenSearch vector database</b>
 
@@ -91,7 +91,8 @@ Run the cloudformation template that will create the event based workflow from t
 
 By creating this CloudFormation stack, you'll set up an S3 bucket, establish S3 notifications that trigger a Lambda function, which in turn initiates a Fargate task. The Fargate task runs a Docker container with the `startup-script.py` file, which is responsible for generating embeddings in AWS OpenSearch and for creating a new `carmanual` index.
 
-After the Cloudformation is executed, drop the pdf representing the car manual into the S3 bucket. I have provided the sample test data named `car_manual.pdf` in the data folder. After the event based ingestion pipeline completes execution, this is how the AWS OpenSearch cluster looks like for the index `carmanual`.
+After the Cloudformation is executed, drop the pdf representing the car manual into the S3 bucket. I downloaded a car manual available [here](https://ownersman.com/manuals/2023-BMW-X3-owners-manual) as my data source and dropped that into my S3 bucket. You can choose any online PDF version of a car manual  or an appliance manual for building this entire tutorial. 
+After the event based ingestion pipeline completes execution, this is how the AWS OpenSearch cluster looks like for the index `carmanual`.
 
 ![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.jpg)
 ![Save embeddings in OpenSearch 3](images/opensearch-embeddings-3.jpg)
