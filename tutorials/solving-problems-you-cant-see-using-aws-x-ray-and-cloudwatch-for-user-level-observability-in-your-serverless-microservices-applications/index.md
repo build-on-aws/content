@@ -1,6 +1,6 @@
 ---
-title: Solving Problems You Can't See - Using AWS X-Ray and CloudWatch for user-level observability in your serverless microservices applications
-description: Observe users in serverless microservices applications built on AWS.
+title: Solving Problems You Can't See - How AWS X-Ray and CloudWatch Provide User-Level Observability in Serverless Microservices Applications
+description: Avoid blind spots by tracking users on apps built on AWS
 tags:
 - aws-x-ray
 - cloudwatch
