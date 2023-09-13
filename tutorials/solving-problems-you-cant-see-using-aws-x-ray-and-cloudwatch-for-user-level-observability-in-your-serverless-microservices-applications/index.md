@@ -885,7 +885,7 @@ Next, you will fix the error and also improve exception handling so that your X-
     xray_recorder.end_subsegment()
 ```
 
-The exception was caused by incorrectly using the `remove()` python list function on the individual product dictionary.  Next, you will fix this error and also improve the exception handling for the function by wrapping the execution in a try / except block:
+The exception was caused by incorrectly using the `remove()` Python list function on the individual product dictionary.  Next, you will fix this error and also improve the exception handling for the function by wrapping the execution in a try / except block:
 
 Replace the **backend/shopping-cart-service/list_cart.py** file contents with:
 
