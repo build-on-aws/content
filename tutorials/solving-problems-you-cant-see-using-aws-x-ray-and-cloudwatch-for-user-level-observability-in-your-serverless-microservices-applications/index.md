@@ -869,7 +869,7 @@ fields @log, @timestamp, @message
 | sort @timestamp, @message desc
 ```
 
-You can see that the query is looking for either the API Gateway request id, AWS Lambda Function request id, or the AWS X-Ray trace id in the message.   When you log messages with the **aws_lambda_powertools** logger and you have also instrumented your function to use AWS X-Ray, it will automatically enrich the log messages with the AWS X-Ray trace id.  However, the exception that was thrown was not logged using the logger and therefore didn’t include the X-Ray trace id.  You can confirm this by proceeding to the logs for the **aws-serverless-shopping-cart-shop-ListCartFunction-\<hash>** AWS Lambda function and viewing the exception message in the logs:  
+You can see that the query is looking for either the API Gateway request id, AWS Lambda Function request id, or the AWS X-Ray trace ID in the message.   When you log messages with the **aws_lambda_powertools** logger and you have also instrumented your function to use AWS X-Ray, it will automatically enrich the log messages with the AWS X-Ray trace ID.  However, the exception that was thrown was not logged using the logger and therefore didn’t include the X-Ray trace id.  You can confirm this by proceeding to the logs for the **aws-serverless-shopping-cart-shop-ListCartFunction-\<hash>** AWS Lambda function and viewing the exception message in the logs:  
 
 ![AWS Lambda exception log correlation](images/aws-lambda-exception-log-correlation.png)
 
