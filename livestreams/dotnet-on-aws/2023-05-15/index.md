@@ -15,7 +15,7 @@ spaces:
   - livestreams
 ---
 
-[![Hero Image](images/hero.png)](https://art19.com/shows/net-on-aws/episodes/e4487ec8-dced-40b2-83a3-5be16399f853)
+[![Hero Image](images/hero.jpeg)](https://art19.com/shows/net-on-aws/episodes/e4487ec8-dced-40b2-83a3-5be16399f853)
 
 ## Listen to the Podcast
 
