@@ -19,7 +19,7 @@ spaces:
 
 ## Listen to the Podcast
 
-<div class="art19-web-player awp-medium awp-theme-dark-custom" data-episode-id="e4487ec8-dced-40b2-83a3-5be16399f853" data-primary-color="#f69917"></div>
+[![Podcast player](images/podcast.png)](https://art19.com/shows/net-on-aws/episodes/e4487ec8-dced-40b2-83a3-5be16399f853)
 
 ## Watch the Live Stream
 
