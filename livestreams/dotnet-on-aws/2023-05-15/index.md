@@ -17,6 +17,10 @@ spaces:
 
 [![Hero Image](images/hero.jpeg)](https://art19.com/shows/net-on-aws/episodes/e4487ec8-dced-40b2-83a3-5be16399f853)
 
+The .NET on AWS Show interviews people in the .NET community to learn more about their journey into .NET and to highlight the cool projects they are working on!
+
+Hosted by Brandon Minnick + Francois Bouteruche
+
 ## Listen to the Podcast
 
 [![Podcast player](images/podcast.png)](https://art19.com/shows/net-on-aws/episodes/e4487ec8-dced-40b2-83a3-5be16399f853)
