@@ -972,7 +972,7 @@ def lambda_handler(event, context):
 ```
 
 
-By adding exception handling, you can gracefully close the subsegment you created for annotations.  You can also log the error message using the **aws_lambda_powertools** logger which includes the X-Ray trace id resulting in the message being displayed in the X-Ray console.
+By adding exception handling, you can gracefully close the subsegment you created for annotations.  You can also log the error message using the **aws_lambda_powertools** logger which includes the X-Ray trace ID resulting in the message being displayed in the X-Ray console.
 
 After you make the changes, deploy them by running the command:  **make backend**.  You may need to exit the frontend web server using Control-C.
 
