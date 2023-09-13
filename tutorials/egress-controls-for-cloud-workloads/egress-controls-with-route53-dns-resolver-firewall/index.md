@@ -17,7 +17,7 @@ authorName: Brandon Carroll
 date: 2023-08-26
 ---
 
-Have you ever considered the connection between how securing your infrastructure and a cost effective infrastructure go hand in hand?  Most often, when we think about security our minds go to adversaries and risk, controls and inspection, compliance and auditing.  However, paying attention to your security posture and understanding what happens with network traffic, both desired and undesired, contributes to cost effective design in a cloud environment.
+Have you ever considered the connection between how securing your infrastructure and a cost-effective infrastructure go hand in hand?  Most often, when we think about security our minds go to adversaries and risk, controls and inspection, compliance and auditing.  However, paying attention to your security posture and understanding what happens with network traffic, both desired and undesired, contributes to cost effective design in a cloud environment.
 
 In this tutorial, we will focus on controlling egress traffic with the [Amazon Route 53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/).  Our first goal of this capability is to provide a secure environment, ensuring that only desired egress traffic is allowed.  Our secondary goal, and really a side-outcome of the capabilities we will enable, is that we will minimize our cloud costs for egress traffic.  
 
