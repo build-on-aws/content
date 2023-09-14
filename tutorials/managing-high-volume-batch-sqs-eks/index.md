@@ -2,13 +2,12 @@
 title: "Managing High-Volume Batch Processing Using Amazon SQS and EKS"
 description: "How to run robust, scalable, and data-heavy batch processing tasks in your Amazon EKS cluster using Amazon SQS for decoupled job orchestration and Amazon EFS for persistent, scalable storage."
 tags:
-    - tutorials
-    - aws
     - eks-cluster-setup
     - eks
     - kubernetes
     - eksctl
-    - batch
+    - tutorials
+
 authorGithubAlias: tucktuck9
 authorName: Leah Tucker
 date: 2023-09-28
@@ -585,11 +584,7 @@ Starting batch task...
 Batch task completed.
 ```
 
-## Conclusion
-
-With the completion of this tutorial, you've successfully orchestrated batch processing tasks in your Amazon EKS cluster using Amazon SQS and EFS. You've not only integrated SQS as a robust job queue but also leveraged the EFS CSI Driver for persistent storage across multiple nodes. This tutorial has walked you through the setup of your Amazon EKS cluster, the deployment of a Python-based batch processing application, and its containerization and storage in Amazon ECR. You've also learned how to create multi-architecture images and deploy them as Kubernetes Jobs. Furthermore, you've extended the capabilities of your Kubernetes Jobs by integrating them with Amazon SQS and providing persistent storage through Amazon EFS. To continue your journey, setup the [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) for dynamic scaling, or explore [EFS Lifecycle Management](https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html) to automate moving files between performance classes or enabling [EFS Intelligent-Tiering](https://docs.aws.amazon.com/efs/latest/ug/intelligent-tiering.html) to optimize costs.
-
-## Clean up
+## Clean Up
 
 After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created.
 
@@ -602,3 +597,8 @@ aws ecr delete-repository --repository-name YOUR_ECR_REPO_NAME --force
 ```
 
 If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">please send it our way!</a>
+## Conclusion
+You've successfully orchestrated batch processing tasks in your Amazon EKS cluster using Amazon SQS and EFS! You've not only integrated SQS as a robust job queue but also leveraged the EFS CSI Driver for persistent storage across multiple nodes. This tutorial has walked you through the setup of your Amazon EKS cluster, the deployment of a Python-based batch processing application, and its containerization and storage in Amazon ECR. You've also learned how to create multi-architecture images and deploy them as Kubernetes Jobs. Furthermore, you've extended the capabilities of your Kubernetes Jobs by integrating them with Amazon SQS and providing persistent storage through Amazon EFS. 
+
+To continue your journey, setup the [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) for dynamic scaling, or explore [EFS Lifecycle Management](https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html) to automate moving files between performance classes or enabling [EFS Intelligent-Tiering](https://docs.aws.amazon.com/efs/latest/ug/intelligent-tiering.html) to optimize costs.
+
