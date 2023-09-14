@@ -120,7 +120,7 @@ aws-efs-csi-driver      v1.5.8-eksbuild.1       ACTIVE  0
 
 If the EFS CSI Driver Add-On is **not** installed on your cluster, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13).
 
-## Step 3: Run the Sample Batch Application
+## Step 4: Run the Sample Batch Application
 
 In this section, we'll delve into the sample batch application that's part of this tutorial. This Python-based batch processing app serves as a practical example to demonstrate how you can read, process, and write data in batches. It reads data from an `input.csv` file, performs data manipulation using randomization for demonstration, and writes the processed data back to an `output.csv` file. This serves as a hands-on introduction before we deploy this application to Amazon ECR and EKS.
 
@@ -213,7 +213,7 @@ ID,Value,ProcessedValue
 10,600.8,630.4063443182313
 ```
 
-## Step 4: Preparing and Deploying the Batch Container
+## Step 5: Preparing and Deploying the Batch Container
 
 In this section, we’ll build a container from the ground up and store it in a private ECR repository. This section guides you through the process of packaging your batch processing application in a container and uploading it to Amazon's Elastic Container Registry (ECR). Upon completing this section, you'll have a Docker container image securely stored in a private ECR repository, primed for deployment on EKS.
 
@@ -258,7 +258,7 @@ docker tag batch-processing-image:latest ${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}
 docker push ${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}.amazonaws.com/batch-processing-repo:latest
 ```
 
-## Step 5: Create the Multi-Architecture Image
+## Step 6: Create the Multi-Architecture Image
 
 To ensure that your batch application can be deployed across various hardware architectures, like within your Kubernetes cluster, it's vital to create a multi-architecture container image. This step leverages Docker's [buildx](https://docs.docker.com/engine/reference/commandline/buildx/) tool to accomplish this. By the end of this section, you will have successfully built and pushed a multi-architecture container image to Amazon ECR, making it accessible for deployment on your Amazon EKS cluster.
 
@@ -282,7 +282,7 @@ docker buildx build --platform linux/amd64,linux/arm64 -t ${ACCOUNT_ID}.dkr.ecr.
 aws ecr list-images --repository-name batch-processing-repo --region ${CLUSTER_REGION}
 ```
 
-## **Step 6: Deploy the Kubernetes Job**
+## Step 7: Deploy the Kubernetes Job
 
 In this section, we'll transition to deploying your containerized batch processing application as a Kubernetes Job on your Amazon EKS cluster. Your batch tasks, encapsulated in a container and stored in a private ECR repository, will now be executed in a managed, scalable environment within EKS. 
 
@@ -334,7 +334,7 @@ NAME                      COMPLETIONS   DURATION   AGE
 my-batch-processing-job   1/1           8s         11s
 ```
 
-## **Step 7: Enable Permissions for Batch Processing Jobs on SQS**
+## Step 8: Enable Permissions for Batch Processing Jobs on SQS
 
 In this section, you'll dive into the orchestration of batch processing jobs in a Kubernetes cluster, leveraging Amazon SQS as a job queue. Additionally, you'll learn how to extend the permissions of an existing Kubernetes service account. In our case, we'll annotate the Amazon ECR service account to include Amazon SQS access, thereby creating a more versatile and secure environment for your batch jobs. 
 
@@ -365,7 +365,7 @@ eksctl create iamserviceaccount \
   --approve
 ```
 
-## **Step 8: Create a Kubernetes secret**
+## Step 9: Create a Kubernetes secret
 
 In this section, we’ll create a Kubernetes secret to ensure our pods have access to our private Amazon ECR repository. This is a critical step because it ensures that your Kubernetes cluster can pull the necessary container images from your private ECR repository. Now, you might be wondering whether this ECR secret will survive pod restarts, especially considering that ECR tokens are only valid for 12 hours. Kubernetes will automatically refresh the secret when it nears expiration, ensuring uninterrupted access to your private ECR repository.
 
@@ -391,7 +391,7 @@ The expected output should look like this:
 secret/regcred created
 ```
 
-## **Step 9: Deploy the Kubernetes Job with Queue Integration**
+## Step 10: Deploy the Kubernetes Job with Queue Integration
 
 In this section, you'll orchestrate a Kubernetes Job that is tightly integrated with an Amazon SQS queue. This integration is crucial for handling batch processing tasks in a more distributed and scalable manner. By leveraging SQS, you can decouple the components of a cloud application to improve scalability and reliability. You'll start by creating a Kubernetes Job manifest that includes environment variables for the SQS queue URL. This ensures that your batch processing application can interact with the SQS queue to consume messages and possibly trigger more complex workflows. 
 
@@ -445,7 +445,7 @@ my-batch-processing-job           1/1           8s         16m
 
 **Congratulations!** You've successfully deployed a batch processing job to your EKS cluster with an integrated Amazon SQS job queue. This setup allows you to manage and scale your batch jobs more effectively, leveraging the full power of Amazon EKS and AWS services.
 
-## Step 10: Create the PersistentVolume and PersistentVolumeClaim for EFS
+## Step 11: Create the PersistentVolume and PersistentVolumeClaim for EFS
 
 In this section, you'll create a PersistentVolume (PV) and PersistentVolumeClaim (PVC) that will use the EFS storage class. This will provide a persistent storage layer for your Kubernetes Jobs. This builds upon the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13), where you set up environment variables for your EFS URL.
 
@@ -500,7 +500,7 @@ persistentvolume/efs-pv created
 persistentvolumeclaim/efs-claim created
 ```
 
-## Step 11: Implement Persistent Storage with Amazon EFS
+## Step 12: Implement Persistent Storage with Amazon EFS
 
 In this section, you'll enhance your Kubernetes Jobs to use Amazon EFS for persistent storage. Building on the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13), where you set up an EFS-based 'StorageClass,' you'll add a Persistent Volume Claim (PVC) to your existing Job manifests. Due to the immutable nature of Jobs, you'll also adopt a versioning strategy. Instead of updating existing Jobs, you'll create new ones with different names but similar specs, allowing for historical tracking and version management through labels and annotations.
 
