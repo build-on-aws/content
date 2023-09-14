@@ -17,7 +17,7 @@ Navigating the complexities of batch processing in a Kubernetes cluster often in
 
 Building on the Amazon EKS cluster from part 1 of our series, this tutorial dives into the deployment of batch jobs and job queues. Included in the cluster configuration for the previous tutorial is the installation of the [EFS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks), [IAM Role for Service Account (IRSA) for the EFS CSI Driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html#efs-create-iam-resources), and an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run Compute-Intensive Batch Processes](#). In addition, to complete the last half of this tutorial enabling data persistence, you’ll need the EFS CSI Driver Add-On setup on your cluster. For instructions,  see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](#). 
 
-In this tutorial, you'll integrate Amazon SQS with your Amazon EKS cluster, build a batch processing application, containerize the application and deploy to Amazon ECR, then use an Amazon SQS job queue to run your batch tasks. In the second half of the tutorial, we'll shift gears to the EFS CSI Driver, which allows us to keep our data intact across multiple nodes while running batch workloads.
+You'll integrate Amazon SQS with your Amazon EKS cluster, build a batch processing application, containerize the application and deploy to Amazon ECR, then use an Amazon SQS job queue to run your batch tasks. 
 
 ## Prerequisites
 Before you begin this tutorial, you need to:
@@ -68,7 +68,7 @@ export CLUSTER_REGION=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region
 export ACCOUNT_ID=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --profile isengard --query "cluster.arn" --output text | cut -d':' -f5)
 ```
 
-## **Step 2: Verify or Create the IAM Role for Service Accounts**
+## Step 2: Verify or Create the IAM Role for Service Accounts
 
 In this section, we will verify that the required IAM roles for service accounts are properly set up in your Amazon EKS cluster. These roles are crucial for enabling smooth interaction between AWS services and Kubernetes, so you can make use of AWS capabilities within your pods. Since batch workloads are typically stored in private container registries, we will create a service account specifically for Amazon ECR.
 
@@ -102,7 +102,7 @@ eksctl create iamserviceaccount \
 
 The EFS CSI Driver does not have an AWS managed policy, so there are a few additional steps to create the service account. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13).
 
-## Step 3: Verify the EFS CSI Driver Add-On is Installed
+## Step 3: Verify the EFS CSI Driver Add-On Is Installed
 
 In this section, we'll verify that the EFS CSI Driver managed add-on is properly installed and active on your Amazon EKS cluster. The EFS CSI Driver is crucial for enabling Amazon EFS to work seamlessly with Kubernetes, allowing you to mount EFS file systems as persistent volumes for your batch workloads.
 
