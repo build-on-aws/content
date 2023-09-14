@@ -17,7 +17,7 @@ Navigating the complexities of batch processing in a Kubernetes cluster often in
 
 Building on the Amazon EKS cluster from part 1 of our series, this tutorial dives into the deployment of batch jobs and job queues. Included in the cluster configuration for the previous tutorial is the installation of the [EFS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks), [IAM Role for Service Account (IRSA) for the EFS CSI Driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html#efs-create-iam-resources), and an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run Compute-Intensive Batch Processes](#). In addition, to complete the last half of this tutorial enabling data persistence, you’ll need the EFS CSI Driver Add-On setup on your cluster. For instructions,  see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](#). 
 
-You'll integrate Amazon SQS with your Amazon EKS cluster, build a batch processing application, containerize the application and deploy to Amazon ECR, then use an Amazon SQS job queue to run your batch tasks. 
+You'll also integrate Amazon SQS with your Amazon EKS cluster, build a batch processing application, containerize the application and deploy to Amazon ECR, then use an Amazon SQS job queue to run your batch tasks. In the second half, we'll shift gears to the EFS CSI Driver, which allows us to keep our data intact across multiple nodes while running batch workloads.
 
 ## Prerequisites
 Before you begin this tutorial, you need to:
