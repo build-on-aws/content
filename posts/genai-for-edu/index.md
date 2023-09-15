@@ -18,7 +18,7 @@ date: 2023-09-01
 
 ![Banner](./images/banner.jpg)
 
-Newly accessible and user-friendly generative artificial intelligence (AI) tools are [transforming the education sector](https://www.chronicle.com/article/how-will-artificial-intelligence-change-higher-ed). There has been a considerable amount of debate about if and how AI can and should be used in the classroom. For students, how can AI fit into their educational journey? For educators, how can students be guided about it's legitimate, fair and transparent use? And for administrators, can these tools help them streamline manual processes?
+Newly accessible and user-friendly generative artificial intelligence (AI) tools are [transforming the education sector](https://www.chronicle.com/article/how-will-artificial-intelligence-change-higher-ed). There has been a considerable amount of debate about if and how AI can and should be used in the classroom. For students, how can AI fit into their educational journey? For educators, how can students be guided about its legitimate, fair and transparent use? And for administrators, can these tools help them streamline manual processes?
 In this blog post, let's take a tour of the current state of generative AI in the classroom, discuss the particular challenges that educational institutions face in a moment of rapid technological change, and discover some ways that these tools may be appropriately used within an educational context.
 
 ## A 'Calculator' Moment
