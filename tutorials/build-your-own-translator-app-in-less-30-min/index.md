@@ -329,7 +329,7 @@ def get_slot(slotname, intent, **kwargs):
         return None
 ```
     
-To maintain the dialogue between the Lambda Function and Lex it is necessary know the contexts that a user is using in a session ([`activeContexts`](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ActiveContext.html)) inside of the state of the user's session ([`sessionState`](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_SessionState.html)) value, and to get it you use:
+To maintain the dialogue between the Lambda Function and Lex it is necessary to know the context that a user is using in a session ([`activeContexts`](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ActiveContext.html)) inside of the state of the user's session ([`sessionState`](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_SessionState.html)) value. To get it, use:
 
 ```python
 def get_active_contexts(event):
