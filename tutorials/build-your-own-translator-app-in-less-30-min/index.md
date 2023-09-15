@@ -447,7 +447,7 @@ def elicit_intent(active_contexts, session_attributes, intent, messages):
 
 With the backend and frontend functions built, it's time to integrate them!
 
-## Part 5 - Integrate the Backend with the Frontend.
+## Part 5 - Integrate the Backend With the Frontend
 
 With all the code built up in the previous parts, you are going to assemble the Lambda Handler as follows.
 
