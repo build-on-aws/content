@@ -635,7 +635,7 @@ The takeaway is if you can imagine it, you can build it with AWS. This project e
 
 To read more about [Amazon Polly Sample Code] visit (https://docs.aws.amazon.com/polly/latest/dg/sample-code-overall.html).
 
-- [All the things that Amazon Comprehend, Rekognition, Textract, Polly, Transcribe, and Others Do](https://community.aws/posts/all-the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do)
+- You can also learn more about [All the things that Amazon Comprehend, Rekognition, Textract, Polly, Transcribe, and Others Do](https://community.aws/posts/all-the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do).
 
 - Check out there examples of Amazon Translate [Code Samples](https://github.com/aws-samples/document-translation).. [more code samples](https://docs.aws.amazon.com/translate/latest/dg/examples.html).
 
