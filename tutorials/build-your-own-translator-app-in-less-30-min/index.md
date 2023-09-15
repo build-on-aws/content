@@ -206,7 +206,7 @@ Up to this point, you have learned how to develop the backend of an application 
 
 ## Part 3 - 🤖 Configure the Chatbot Interface With [Amazon Lex](https://aws.amazon.com/lex/) 
 
-[Amazon Lex](https://aws.amazon.com/lex/) is an AWS service that allows developers to build conversational interfaces for applications using voice and text, provides the deep functionality and flexibility of natural language understanding (NLU) and automatic speech recognition (ASR),  simplifies building natural conversation experiences for applications without needing specialized AI/ML skills and can be integrated with mobile, web, [contact center](https://docs.aws.amazon.com/lexv2/latest/dg/contact-center.html), [messaging platform](https://docs.aws.amazon.com/lexv2/latest/dg/deploying-messaging-platform.html) and other AWS services like [AWS Lambda functios](https://docs.aws.amazon.com/lexv2/latest/dg/lambda.html).
+[Amazon Lex](https://aws.amazon.com/lex/) is an AWS service that allows developers to build conversational interfaces for applications using voice and text. It provides the deep functionality and flexibility of natural language understanding (NLU) and automatic speech recognition (ASR) and simplifies building natural conversation experiences for applications without needing specialized AI/ML skills. It can also be integrated with mobile, web, [contact center](https://docs.aws.amazon.com/lexv2/latest/dg/contact-center.html), [messaging platform](https://docs.aws.amazon.com/lexv2/latest/dg/deploying-messaging-platform.html) and other AWS services like [AWS Lambda functios](https://docs.aws.amazon.com/lexv2/latest/dg/lambda.html).
 
 [Lex](https://docs.aws.amazon.com/lexv2/latest/dg/how-it-works.html), has the following components:
 
