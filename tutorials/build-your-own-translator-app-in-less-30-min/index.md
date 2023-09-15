@@ -67,7 +67,7 @@ In this tutorial you are going to create a translator chatbot app, with [Amazon 
 - Part 6 - Let's get it to work!
 - Part 7 - Deploy your translator app. 
 
-You may doubt that this can all be done in under 30 minutes. But if you keep reading, you'll discover the truth - that it really can be achieved in less than half an hour.
+You may doubt this build's speed. But, keep reading, you'll discover it can be done in under 30 minutes.
 
 **Let’s get started!**
 
