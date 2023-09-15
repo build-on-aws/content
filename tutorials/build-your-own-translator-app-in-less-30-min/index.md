@@ -104,7 +104,7 @@ def TranslateText (text,language):
 
 ## Part 2 - Create the Function to Converts Text Into Lifelike Speech 🦜
 
-To create the Text to Speech function you are going to use [Amazon Polly](https://aws.amazon.com/polly/), an AI service that uses advanced deep learning technologies to synthesize natural sounding human speech, allows developers to convert text into lifelike speech that can be integrated into their applications.
+To create the Text to Speech function you are going to use [Amazon Polly](https://aws.amazon.com/polly/), an AI service that uses advanced deep learning technologies to synthesize natural sounding human speech. It allows developers to convert text into lifelike speech that can be integrated into their applications.
 
 In this part you will use the [Boto3 Polly client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/polly.html) to call the APIs [StartSpeechSynthesisTask](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/polly/client/start_speech_synthesis_task.html), and [GetSpeechSynthesisTask](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/polly/client/get_speech_synthesis_task.html) to retrieves information of SpeechSynthesisTask based on its TaskID, delivering status and a link to the [Amazon S3 Bucket](https://aws.amazon.com/s3/)containing the output of the task. 
 
