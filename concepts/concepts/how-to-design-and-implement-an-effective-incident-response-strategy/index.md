@@ -11,7 +11,7 @@ tags:
     - containment and recovery
 authorGithubAlias: joshinik
 authorName: Nikhil Joshi
-date: 2023-09-30 (expected publication date)
+date: 2023-09-30
 showInHomeFeed: false
 ---
 
