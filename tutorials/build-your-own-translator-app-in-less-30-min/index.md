@@ -633,7 +633,7 @@ The takeaway is if you can imagine it, you can build it with AWS. This project e
 
 ### 🚀 Continue Learning
 
-- [Amazon Polly Smaple Code](https://docs.aws.amazon.com/polly/latest/dg/sample-code-overall.html)
+To read more about [Amazon Polly Sample Code] visit (https://docs.aws.amazon.com/polly/latest/dg/sample-code-overall.html).
 
 - [All the things that Amazon Comprehend, Rekognition, Textract, Polly, Transcribe, and Others Do](https://community.aws/posts/all-the-things-that-comprehend-rekognition-textract-polly-transcribe-and-others-do)
 
