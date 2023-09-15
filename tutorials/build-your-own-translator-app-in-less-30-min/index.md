@@ -1,6 +1,6 @@
 ---
 title: "Build A Translator App in 30 Min or Less"
-description: "Use Amazon Translate, Amazon Comprehend, Amazon Lambda Function and Amazon Lex to Build an translator app in 30 min or less"
+description: Integrate AWS AI through AWS Lambda functions to quickly build your app. 
 tags:
     - ai-ml
     - aws
