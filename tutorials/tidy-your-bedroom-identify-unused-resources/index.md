@@ -6,6 +6,7 @@ tags:
     - cost-optimization
     - sustainability
     - resource-explorer
+    - students
 spaces:
   - cost-optimization
 waves:
