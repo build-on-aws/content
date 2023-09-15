@@ -102,7 +102,7 @@ def TranslateText (text,language):
     return text_ready
 ```
 
-## Part 2 - Create the function to converts text into lifelike speech 🦜.
+## Part 2 - Create the Function to Converts Text Into Lifelike Speech 🦜
 
 To create the Text to Speech function you are going to use [Amazon Polly](https://aws.amazon.com/polly/), an AI service that uses advanced deep learning technologies to synthesize natural sounding human speech, allows developers to convert text into lifelike speech that can be integrated into their applications.
 
