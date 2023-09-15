@@ -631,7 +631,7 @@ Overall, this project exemplified how AWS cloud technology lets us rapidly turn 
 
 The takeaway is if you can imagine it, you can build it with AWS. This project expanded you skills while creating something meaningful. 
 
-### 🚀 Continue learning:
+### 🚀 Continue Learning
 
 - [Amazon Polly Smaple Code](https://docs.aws.amazon.com/polly/latest/dg/sample-code-overall.html)
 
