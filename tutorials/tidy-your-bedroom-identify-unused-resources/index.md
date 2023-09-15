@@ -78,7 +78,7 @@ The following tutorial steps will show you how to:
 
 This is a one time step that only needs to be completed the first time you want to use AWS Resource Explorer.  
 
-*Note: While this only has to be executed once, this step can take some time to complete, especially is your account has lots of resources in many different regions. You should wait until this step is complete before proceeding to step 2.*
+*Note:  This step can take some time to complete, especially if your account has lots of resources in many different regions. You should wait until this step is complete before proceeding to step 2.*
 
 1. From AWS Console, search for `AWS Resource Explorer` using the search bar or the shortcut *Alt + S*
 1. Select AWS Resource Explorer:
