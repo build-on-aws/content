@@ -9,7 +9,7 @@ tags:
 
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes Leone
-date: 2023-08-22
+date: 2023-09-15
 ---
 
 Half an hour might not seem like enough time for an important project, but it's enough time to build and test a language application on AWS. There are hundreds of translator apps to help us engage with various cultures, people, and the 7,000+ languages spoken globally. However, building your own app gives you hands-on experience. Creating something yourself piece-by-piece is where the real learning happens: the key is gain new skills and developing your abilities through practice.
