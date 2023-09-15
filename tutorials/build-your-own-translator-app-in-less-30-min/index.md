@@ -65,7 +65,7 @@ In this tutorial you are going to create a translator chatbot app, with [Amazon 
 - Part 4 - Build the interface between the backend and the frontend.
 - Part 5 - Integrate the backend with the frontend.
 - Part 6 - Let's get it to work!
-- Part 7 - Deploy Your translator app. 
+- Part 7 - Deploy your translator app. 
 
 You may doubt that this can all be done in under 30 minutes. But if you keep reading, you'll discover the truth - that it really can be achieved in less than half an hour.
 
