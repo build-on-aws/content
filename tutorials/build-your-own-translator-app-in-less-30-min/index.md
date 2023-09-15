@@ -338,7 +338,7 @@ def get_active_contexts(event):
     except:
         return []
 ```
-And you almost need the session-specific context information [`sessionAttributes`](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_SessionState.html#:~:text=Required%3A%20No-,sessionAttributes,-Map%20of%20key):
+You need the session-specific context information [`sessionAttributes`](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_SessionState.html#:~:text=Required%3A%20No-,sessionAttributes,-Map%20of%20key):
 
 ```python
 def get_session_attributes(event):
