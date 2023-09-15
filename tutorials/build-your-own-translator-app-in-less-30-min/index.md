@@ -78,7 +78,7 @@ In this part you are going to use two fully managed AI service,  [Amazon Transla
 You can also use Amazon Translate to determine the source language of the text, making an internal call to Amazon Comprehend to determine the source language, I'll explain how. 
 
 
-### Parameters requires for TranslateText API:
+### Parameters Requires for TranslateText API
 
 - **Text (string)**: The text to translate.
 - **SourceLanguageCode (string):** One of the [supported language codes](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html) for the source text, if you specify **auto**, Amazon Translate will call Amazon Comprehend to determine the source language ✅.
