@@ -557,7 +557,10 @@ For this Lambda Function have permissions to invoke AWS services and resources, 
 🥳 Ok, you have all the code ready, now let's get it to work!
 
 
-## Part 6 - Let's get it to work!
+## Part 6 - Let’s Get It to Work!
+
+Now, we have the code ready. Are you ready to see it work? 🥳
+
 ### Attaching a Lambda function to a bot alias
 To trigger the Lambda Function when a user interacts with Amazon Lex like a Dialog code hook, Lambda Function its attaching to a bot alias [following these steps](https://docs.aws.amazon.com/lexv2/latest/dg/lambda-attach.html):
 
