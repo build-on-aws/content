@@ -4,6 +4,7 @@ description: "Discover the transformative power of AI in education alongside its
 tags:  
   - generative-ai
   - ai-ml
+  - codewhisperer
 images:
   banner: images/banner.jpg
   hero: images/banner.jpg
@@ -11,10 +12,10 @@ spaces:
   - generative-ai
 authorGithubAlias: jlooper
 authorName: Jen Looper
-date: 2023-09-01
+date: 2023-09-15
 ---
 
-# Generative AI for Education: A Curriculum and Instruction Perspective
+## Generative AI for Education: A Curriculum and Instruction Perspective
 
 ![Banner](./images/banner.jpg)
 
@@ -39,7 +40,7 @@ At the same time, concerns around privacy and sharing sensitive student data sho
 
 ![Image of ChatTutor, an AI chatbot used in a class at MIT](./images/chat-tutor.jpg)
 
-> Professor Dirk Englund at MIT worked with students Hank P Stennes and Hunter Kemeny to build ChatTutor, a chatbot embedded in the course website that can answer questions about courseware—from basic info about the syllabus to technical readings on quantum engineering. Try it live here: https://dkeathley.github.io/S23-6.2410-lab/intro.html and consider contributing to the project by reaching out to englund@mit.edu and hkement@mit.edu.
+> Professor Dirk Englund at MIT worked with students Hank P Stennes and Hunter Kemeny to build ChatTutor, a chatbot embedded in the course website that can answer questions about courseware—from basic info about the syllabus to technical readings on quantum engineering. Try it live [here](https://dkeathley.github.io/S23-6.2410-lab/intro.html) and consider contributing to the project by reaching out to englund@mit.edu and hkement@mit.edu.
 
 For students, generative AI can be an enormous help in polishing essays, correcting errors, explaining fuzzy concepts, and generating outlines. But as the temptation to generate entire solutions to problems in record time proves hard to resist, these AI tools can also hinder student learning progress. Students may be tempted to constantly consult a chatbot rather than think through difficult problem over time, becoming conditioned to adopt quick results rather than producing sustained thought exercises. As a student author from Columbia University [stated](https://www.chronicle.com/article/im-a-student-you-have-no-idea-how-much-were-using-chatgpt), "It's very easy to use AI to do the lion's share of the thinking while still submitting work that looks like your own." While this student noted that one of the core tenets of the classroom is to produce writing that reflects your own thinking, complete with proper citations, they suggest that the world has moved on. According to this student, "writing is no longer much of an example in thinking." ([source](https://www.chronicle.com/article/im-a-student-you-have-no-idea-how-much-were-using-chatgpt))
 
@@ -59,8 +60,8 @@ Using these tenets, digital humanities classrooms can place technology at the ce
 
 ## Next Steps for AI in Education
 
-Classrooms with a culture of centering student inquiry, freeing them to collaborate and embrace new technical innovations, can lead the way into the next era of AI-informed or even AI-infused instruction. If educators can infuse classrooms with student-centered, innovative curricula, students may be less reliant on AI to provide canned content. Instead, they can learn to use AI as it is intended to be used: as a teaching assistant and a way to reimagine and enhance worlds built by human-centered experimentation and innovation. Stay informed on the many ways that Amazon is innovating in the generative AI space by visiting [https://aws.amazon.com/generative-ai/](https://aws.amazon.com/generative-ai/?sc_channel=el&sc_campaign=genaiwave&sc_content=genai-for-edu&sc_geo=mult&sc_country=mult&sc_outcome=acq) and learn more about this interesting moment by visiting [https://community.aws/generative-ai](https://community.aws/generative-ai/?sc_channel=el&sc_campaign=genaiwave&sc_content=genai-for-edu&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+Classrooms with a culture of centering student inquiry, freeing them to collaborate and embrace new technical innovations, can lead the way into the next era of AI-informed or even AI-infused instruction. If educators can infuse classrooms with student-centered, innovative curricula, students may be less reliant on AI to provide canned content. Instead, they can learn to use AI as it is intended to be used: as a teaching assistant and a way to reimagine and enhance worlds built by human-centered experimentation and innovation. Stay informed on the many ways that Amazon is innovating in the generative AI space by visiting [https://aws.amazon.com/generative-ai/](https://aws.amazon.com/generative-ai/?sc_channel=el&sc_campaign=genaiwave&sc_content=genai-for-edu&sc_geo=mult&sc_country=mult&sc_outcome=acq) and learn more about this interesting moment by visiting [https://community.aws/generative-ai](/generative-ai).
 
 ## About the Author
 
-Jen Looper is the Head of Academic Advocacy at AWS and manages a team in Developer Relations that curates the higher-ed student journey at AWS through great content, cool events, and a valuable community experience on campuses globally called [Cloud Clubs](https://s12d.com/cloud-clubs). Learn more about Academic Advocacy's initiatives [on our website](https://s12d.com/students). With a weakness for DH paired with a PhD in French literature, she is particularly atuned to the challenges faced by the humanities in this era of Generative AI while, as a lecturer in computer science, she is also interested in its potential.
+Jen Looper is the Head of Academic Advocacy at AWS and manages a team in Developer Relations that curates the higher-ed student journey at AWS through great content, cool events, and a valuable community experience on campuses globally called [Cloud Clubs](https://s12d.com/cloud-clubs). Learn more about Academic Advocacy's initiatives [on our website](https://s12d.com/students). With a weakness for DH paired with a PhD in French literature, she is particularly attuned to the challenges faced by the humanities in this era of Generative AI while, as a lecturer in computer science, she is also interested in its potential.
