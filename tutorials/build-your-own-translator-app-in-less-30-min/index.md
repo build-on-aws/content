@@ -214,7 +214,7 @@ Up to this point, you have learned how to develop the backend of an application 
  |--|--|--|
  |**Language**| You can select any [Languages and supported by Amazon Lex V2.](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)|English (US)|
  |**Intent**|An intent represents an action that the user wants to perform|TranslateIntent|
- |**Slot types**| Allow a Lex bot to dynamically collect data from users during a conversational flow in order to complete actions and provide customized responses, there are [built-in slot types](https://docs.aws.amazon.com/lex/latest/dg/howitworks-builtins-slots.html) and [Custom Slot Types](Chttps://docs.aws.amazon.com/lex/latest/dg/howitworks-custom-slots.html), in this tutorial you are going to create custom slots. |<ul><li>`text_to_translate:` the text you want to translate. </li><li>	`language:` the language into which you want to translate the text.</li></ul>|
+ |**Slot types**| Allow a Lex bot to dynamically collect data from users during a conversational flow in order to complete actions and provide customized responses. There are [built-in slot types](https://docs.aws.amazon.com/lex/latest/dg/howitworks-builtins-slots.html) and [Custom Slot Types](Chttps://docs.aws.amazon.com/lex/latest/dg/howitworks-custom-slots.html). In this tutorial you're going to create custom slots. |<ul><li>`text_to_translate:` the text you want to translate. </li><li>	`language:` the language into which you want to translate the text.</li></ul>|
  |**Utterances**|Indicate the user's intent, activate the chat. It should be in the language of the chatbot |<ul><li>I want to translate </li><li>I want to do a translation </li><li>I want to translate to {language}</li></ul>|
 
 ### Create an Amazon Lex Bot
