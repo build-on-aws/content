@@ -515,7 +515,7 @@ For this Lambda Function have permissions to invoke AWS services and resources, 
 ![Slots created](images/fig_9.png)
 <div align="center">Fig 9. Role name. </div> 
 
-3. In Identity and Access Management (IAM) console, go to **Add Permision** --> **Create inline policy**
+3. In the Identity and Access Management (IAM) console, go to **Add Permision** --> **Create inline policy**
 4. Select JSON, in the Policy editor. Copy this JSON: 
 
 ```json
