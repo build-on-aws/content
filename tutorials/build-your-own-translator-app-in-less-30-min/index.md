@@ -510,7 +510,7 @@ def lambda_handler(event, context):
 For this Lambda Function have permissions to invoke AWS services and resources, it is necessary to create an execution role that has the necessary permissions, to do this, follow the following steps: 
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console, and choose the name of a function.
-2. Choose **Configuration**, and then choose **Permissions**, then Click on the **Role name** (Fig. 9).
+2. Choose **Configuration**, and then choose **Permissions**, then click on the **Role name** (Fig. 9).
 
 ![Slots created](images/fig_9.png)
 <div align="center">Fig 9. Role name. </div> 
