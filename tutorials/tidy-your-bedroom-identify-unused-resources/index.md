@@ -72,7 +72,7 @@ The following tutorial steps will show you how to:
 1. Find specific resource types in your account
 1. Create a custom view
 
-*Note: AWS Resource Explorer does not support every single type of resource that exists. Some resource types may not be supported yet or may be added in the future. It does support many of the common resource types, and you can check the whole list of [supported types](https://docs.aws.amazon.com/resource-explorer/latest/userguide/supported-resource-types.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq).*  
+*Note: AWS Resource Explorer does not support every single type of resource that exists. Some may not be supported yet or may be added in the future. It does support many of the common resource types, and you can check the whole list of [supported types](https://docs.aws.amazon.com/resource-explorer/latest/userguide/supported-resource-types.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq).*  
 
 #### Step 1: Set Up AWS Resource Explorer
 
