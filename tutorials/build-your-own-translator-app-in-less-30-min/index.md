@@ -204,7 +204,7 @@ def create_presigned_url(bucket_name, object_name, expiration=3600):
 ``` 
 Up to this point, you have learned how to develop the backend of an application that can take in text input, translate it into a chosen output language, and produce audio with correct pronunciation. Moving forward, our focus will shift to constructing the user interface so users can engage with the translation and text-to-speech features.
 
-## Part 3 - 🤖 Configure the chatbot interface with [Amazon Lex](https://aws.amazon.com/lex/) 
+## Part 3 - 🤖 Configure the Chatbot Interface With [Amazon Lex](https://aws.amazon.com/lex/) 
 
 [Amazon Lex](https://aws.amazon.com/lex/) is an AWS service that allows developers to build conversational interfaces for applications using voice and text, provides the deep functionality and flexibility of natural language understanding (NLU) and automatic speech recognition (ASR),  simplifies building natural conversation experiences for applications without needing specialized AI/ML skills and can be integrated with mobile, web, [contact center](https://docs.aws.amazon.com/lexv2/latest/dg/contact-center.html), [messaging platform](https://docs.aws.amazon.com/lexv2/latest/dg/deploying-messaging-platform.html) and other AWS services like [AWS Lambda functios](https://docs.aws.amazon.com/lexv2/latest/dg/lambda.html).
 
