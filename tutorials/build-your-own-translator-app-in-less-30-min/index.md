@@ -247,7 +247,7 @@ The language already selected in the previous step, so change the name of Intent
 Configure the Translate attempt to fulfill a user's request to make a translation with the following values:
 
 - **Sample utterances:** Type the values of Utterances
-- **Slots:** Select Add slot and complete the following information:
+- **Slots:** Select Add Slot and complete the following information:
 
 |Parameter|`language`|`text_to_translate`|
 |--|--|--|
