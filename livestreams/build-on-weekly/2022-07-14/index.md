@@ -29,11 +29,11 @@ Let's look at some news, blog posts, and interesting tidbits from the previous w
 
 **Links from the discussion:**
 
-- Get a free MFA Token if you are an US AWS User: [https://aws.amazon.com/blogs/security/eligible-customers-can-now-order-a-free-mfa-security-key/](https://aws.amazon.com/blogs/security/eligible-customers-can-now-order-a-free-mfa-security-key/)
-- CloudWatch logs integration with Visual Studio Code: [https://aws.amazon.com/about-aws/whats-new/2022/06/aws-toolkit-visual-studio-amazon-cloudwatch-logs-integration/](https://aws.amazon.com/about-aws/whats-new/2022/06/aws-toolkit-visual-studio-amazon-cloudwatch-logs-integration/)
+- Get a free MFA Token if you are an US AWS User: [https://aws.amazon.com/blogs/security/eligible-customers-can-now-order-a-free-mfa-security-key/](https://aws.amazon.com/blogs/security/eligible-customers-can-now-order-a-free-mfa-security-key/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- CloudWatch logs integration with Visual Studio Code: [https://aws.amazon.com/about-aws/whats-new/2022/06/aws-toolkit-visual-studio-amazon-cloudwatch-logs-integration/](https://aws.amazon.com/about-aws/whats-new/2022/06/aws-toolkit-visual-studio-amazon-cloudwatch-logs-integration/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - Launch a static Website on AWS, with Pulumi, with 10 lines of YAML: [https://www.pulumi.com/blog/deploy-aws-static-website-with-yaml/](https://www.pulumi.com/blog/deploy-aws-static-website-with-yaml/)
 - Great blog post by Matt Asay on the actual implementations of Test Driven Development: [https://www.techrepublic.com/article/test-driven-development-talked/](https://www.techrepublic.com/article/test-driven-development-talked/)
-- Check out Cloud Quests, a gamified way to a Cloud Practitioner: [https://explore.skillbuilder.aws/learn/course/external/view/elearning/11458/aws-cloud-quest-cloud-practitioner](https://explore.skillbuilder.aws/learn/course/external/view/elearning/11458/aws-cloud-quest-cloud-practitioner)
+- Check out Cloud Quests, a gamified way to a Cloud Practitioner: [https://explore.skillbuilder.aws/learn/course/external/view/elearning/11458/aws-cloud-quest-cloud-practitioner](https://explore.skillbuilder.aws/learn/course/external/view/elearning/11458/aws-cloud-quest-cloud-practitioner?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## Open Source Corner
 

@@ -10,6 +10,8 @@ tags:
   - redshift
 spaces:
   - databases
+waves:
+  - dataml
 authorGithubAlias: agaankus
 authorName: Ankush Agarwal
 date: 2023-06-16

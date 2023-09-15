@@ -82,6 +82,5 @@ On the next page, I have set the CloudWatch alarm to send a notification to an A
 In this tutorial, I explained how to use the machine learning features of CloudWatch anomaly detection to monitor key metrics helpful in detecting issues before applications fail. I also showed you how to proactively take action with an alert and triggering a remediation action. This is determined by the Anomaly Detection model, which has learned expected behavior from historical CPU Utilization data.
 
 By using CloudWatch Anomaly Detection to monitor application uptime, we are able proactively identify and address issues before they escalate, leading to improved customer experience. You no longer have to set and adjust alarm thresholds, leaving you more time to run your business!
-Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
 
 For a detailed look on how to fine tune your Cloudwatch anomaly learning models, visit the [CloudWatch anomaly detection user guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html).

@@ -7,6 +7,8 @@ tags:
   - artificial-intelligence
 spaces:
   - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: mikegc-aws
 authorName: Mike Chambers
 date: 2023-08-18

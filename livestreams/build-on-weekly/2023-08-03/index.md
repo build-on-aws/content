@@ -22,7 +22,7 @@ spaces:
 
 Today we manage to discuss the reasoning *why* would you need a recommendation engine. We ingest and clean up some data. We get to learn about **pandas** (no, not those 🐼), and converting your data into numeric values so it can be trained. Make sure to follow us for future PART 2 and PART 3 of this adventure, where we will actually train the Machine Learning Model, and deploy it as an API Endpoint, and yes have a front end for it as well. Make sure to show up **every Thursday at 9AM Pacific** as we **Build** (more) **On** AWS 😅
 
-Oh yeah, and if you wish to follow along at home, Piyali was amazing and she wrote a whole blog post on this same topic. You can check it out [here](https://community.aws/tutorials/recommendation-engine-full-stack).
+Oh yeah, and if you wish to follow along at home, Piyali was amazing and she wrote a whole blog post on this same topic. You can check it out [here](/tutorials/recommendation-engine-full-stack).
 
 Check out the recording here:
 
@@ -30,13 +30,13 @@ https://www.twitch.tv/videos/1889439197
 
 ## Links from today's episode
 
-- [Piyali's blog post](https://community.aws/tutorials/recommendation-engine-full-stack)
+- [Piyali's blog post](/tutorials/recommendation-engine-full-stack)
 - [Code for this project](https://github.com/build-on-aws/recommendation-engine-full-stack)
 - [Pandas 🐼](https://pypi.org/project/pandas/)
 - [What is Feature Engineering](https://towardsdatascience.com/what-is-feature-engineering-importance-tools-and-techniques-for-machine-learning-2080b0269f10)
 - [Parquet Data format](https://parquet.apache.org/)
 
-- [Today's Workshop: Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup)
+- [Today's Workshop: Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 **Reach out to the hosts and guests:**
 
