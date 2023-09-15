@@ -184,7 +184,7 @@ def get_speech_synthesis(task_id):
 </tr>
 </table>
 
-> 🚨**Note:** This application will not wait for the SpeechSynthesisTask, since the duration will depend on the length of the text, so GetSpeechSynthesisTask only delivers the status of the task id.
+> 🚨**Note:** This application will not wait for the SpeechSynthesisTask, since the duration depends on the length of the text. GetSpeechSynthesisTask only delivers the status of the task id.
 
 
 ### Generate Presigned Url to access the audio file from anywhere
