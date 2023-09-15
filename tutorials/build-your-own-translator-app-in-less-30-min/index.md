@@ -591,7 +591,7 @@ Draft is the working copy of your bot. You can only update the Draft version and
 
 You need to create immutable versions in order to bring your bot into production. A version is a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production. 
 
-An alias is a pointer to a specific version of a bot. With an alias, you can easily update the version that your client applications are using without having to change any code. So aliases allow you to seamlessly direct traffic to different versions as needed.
+An alias is a pointer to a specific version of a bot. With an alias, you can easily update the version that your client applications are using without having to change any code. Aliases allow you to seamlessly direct traffic to different versions as needed.
 
 Now that I explain what a version is, you'll learn how to create versions of your bot and how to point the alias to it. 
 
