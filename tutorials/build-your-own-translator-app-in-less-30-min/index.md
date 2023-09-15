@@ -609,7 +609,7 @@ Now that I've explained what a version is, you'll learn how to create versions o
 ![Associate with a version, choose the new version.](images/fig_14.png)
 <div align="center">Fig 14. Associate with a version, choose the new version. </div>
 
-### Integrate your bot with an application
+### Integrate Your Bot With an Application
 
 You already have everything you need to integrate your bot with messaging platforms, mobile apps, and websites, build your application by following some of these instructions:
 
