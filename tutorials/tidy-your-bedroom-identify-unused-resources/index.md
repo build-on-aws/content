@@ -119,7 +119,7 @@ I want to narrow down the scope to resource types I *know* should be removed. To
 
 **Note:** I can't just delete **everything**, as that would be reckless; some of the resources are important and should not be touched!  
 
-#### Step 3: Find specific resource types in your account
+#### Step 3: Find Specific Resource Types in Your Account
 
 However, I know that I should have no **DynamoDB tables**, **S3 buckets**, or **Lambda functions** right now. These were all created by Amplify and SageMaker (on my behalf).  
 
