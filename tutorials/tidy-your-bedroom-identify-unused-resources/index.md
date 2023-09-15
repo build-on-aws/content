@@ -53,7 +53,9 @@ Then I logged into my **AWS Management Console** to be greeted with an unexpecte
 
 ![A screenshot of AWS Console cost and usage pane showing a 15 dollar bill](images/cost-and-usage.png "Unexpected costs from resources that were no longer needed")
 
-I didn't think I had anything running in my account, but I soon discovered that the resources that Amplify had provisioned for me were still active in the account, waiting to be used, and costing me money each month. SageMaker Studio was patiently waiting for me to come back and do some more data science, and the cost was adding up. I no longer needed any of these resources, but I was presented with a challenge - how do I find **all** the S3 buckets, DynamoDB tables etc. that Amplify and SageMaker had created? To make it more complicated, I had written the Amplify workshop in the **eu-west-1** region, and tested it in different regions including **us-east-1** and **us-east-2** regions. How would I find *all* my resources in *all* my regions without an extensive hunt?  
+I didn't think I had anything running in my account. But I soon discovered that the resources Amplify had provisioned for me were still active, waiting to be used, and costing me money each month. SageMaker Studio was patiently waiting for me to come back and do some more data science, and the cost was adding up. I no longer needed any of these resources, but I was presented with a challenge: how do I find **all** the S3 buckets, DynamoDB tables etc. that Amplify and SageMaker had created? 
+
+To make it more complicated, I had written the Amplify workshop in the **eu-west-1** region, and tested it in different regions including **us-east-1** and **us-east-2** regions. How would I find *all* my resources in *all* my regions without an extensive hunt?  
 
 ![A photo of person buried under a pile of clothing with their hands in the air surrendering](images/AdobeStock_65681069.jpeg "Don't surrender to the mess!")
 
