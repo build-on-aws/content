@@ -627,7 +627,7 @@ The process demonstrated how easy it is to integrate AWS AI through AWS Lambda f
 
 Experimenting hands-on is the best way to gain skills. Though translation apps already exist, creating your own solution drives learning. Building things yourself matters more than whether it's already been done.
 
-Overall, this project exemplified how AWS cloud technology lets us rapidly turn ideas into reality. With knowledge and the right tools, we can create apps that make a difference in the world. Coding skills combined with AWS services are a powerful toolkit for building the future.
+Overall, this project exemplified how AWS lets us rapidly turn ideas into reality. With knowledge and the right tools, we can create apps that make a difference in the world. Coding skills combined with AWS services are a powerful toolkit for building the future.
 
 The takeaway is if you can imagine it, you can build it with AWS. This project expanded you skills while creating something meaningful. 
 
