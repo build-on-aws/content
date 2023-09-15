@@ -290,7 +290,7 @@ The interaction from backend to frontend will be handled through specific states
 
 To integrate the backend and frontend, the Lambda Function needs to interpret the format of the Lex output events, which get passed to the Lambda function as input events. The [Interpreting the input event format developer guide](https://docs.aws.amazon.com/lexv2/latest/dg/lambda-input-format.html) provides more details. In this tutorial, you will learn how to extract the necessary information from the input events to get the translation application running.
 
-To begin with, the Lambda Function must extract the values in [interpretations](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_Interpretation.html), possible matches to the user's utterance: 
+To begin, the Lambda Function must extract the values in [interpretations](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_Interpretation.html) and with possible matches to the user's utterance: 
 
 ```python
 def get_intent(intent_request):
