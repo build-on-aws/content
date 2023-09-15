@@ -1,6 +1,6 @@
 ---
 title: "Build A Translator App in 30 Min or Less"
-description: Integrate AWS AI through AWS Lambda functions to quickly build your app. 
+description: Use Amazon Translate, Amazon Comprehend, Amazon Lambda, Amazon Polly, and Amazon Lex to bring a translation application to life and test it in 30 minutes or less. 
 tags:
     - ai-ml
     - aws
@@ -8,26 +8,13 @@ tags:
     - chatbot
 
 authorGithubAlias: elizabethfuentes12
-authorName: Elizabeth Fuentes
+authorName: Elizabeth Fuentes Leone
 date: 2023-08-22
 ---
 
-Consider rewriting opening paragraph to hone in on what blog it about. First paragraph infers it's about the Internet and languages bridging communication. But this wonderful blog is more precise. It's about two things: 
+Half an hour might not seem like enough time for an important project, but it's enough time to build and test a language application on AWS. There are hundreds of translator apps to help us engage with various cultures, people, and the 7,000+ languages spoken globally. However, building your own app gives you hands-on experience. Creating something yourself piece-by-piece is where the real learning happens: the key is gain new skills and developing your abilities through practice.
 
-1. the challenge of building something from scratch
-2. using AWS to build a language translation app. 
-
-I wrote a sample rewrite for the intro:
-
-Half an hour may not seem like enough time for a major project but with AWS you can build and test a language app. There are hundreds of translator apps to help us engage with various cultures, people, and the 7,000+ languages spoken globally. But, building your own app gives you hands-on experience. It's the best way to learn and gain new skills. Creating something yourself is what matters: the key is developing your abilities through practice.
-
-In this blog, you'll build a translation app. In just a few steps, you can make one capable of identifying the input language, translating into multiple languages, and generating audio files with correct pronunciation. I'll guide you step-by-step on how to combine AWS tools to bring your app to life and test it. 
-
-
-
-Imagine creating your own translation app in just a few steps - one capable of identifying the input language, translating into multiple languages, and generating audio files with correct pronunciation. This is now possible with AWS. 
-
-While translation apps exist, building your own and getting hands-on experience is the best way to learn and gain new skills. Creating something yourself is what matters: the key is developing your abilities through practice.
+In this blog, you'll build a translation app. In just a few steps, you can make one capable of identifying the input language, translating into multiple languages, and generating audio files with correct pronunciation. I'll guide you step-by-step on how to combine AWS services to bring your app to life and test it.
 
 
 | Attributes                |                                   |
@@ -37,7 +24,7 @@ While translation apps exist, building your own and getting hands-on experience 
 | 💰 Cost to complete | [AWS Free Tier](https://aws.amazon.com/free/)      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br>-  [Foundational knowledge of Python](https://catalog.us-east-1.prod.workshops.aws/workshops/3d705026-9edc-40e8-b353-bdabb116c89c/)    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-08-22                             |
+| ⏰ Last Updated     | 2023-09-15                             |
 
 ## What You Will Learn
 
@@ -59,13 +46,13 @@ In this tutorial you are going to create a translator chatbot app, with [Amazon 
 
 ### Build It in Seven Parts
 
-- Part 1 - Create the function that detects the language and translates it into the desired language 🌎.
-- Part 2 - Create the function to converts text into lifelike speech 🦜.
-- Part 3 - Configure the chatbot interface with [Amazon Lex](https://aws.amazon.com/lex/). 🤖
-- Part 4 - Build the interface between the backend and the frontend.
-- Part 5 - Integrate the backend with the frontend.
-- Part 6 - Let's get it to work!
-- Part 7 - Deploy your translator app. 
+- **Part 1** - Create the Function That Detects the Language and Translates It Into the Desired Languag 🌎.
+- **Part 2** - Create the Function to Converts Text Into Lifelike Speech 🦜.
+- **Part 3** - Configure the Chatbot Interface With [Amazon Lex](https://aws.amazon.com/lex/)🤖. 
+- **Part 4** - Build the Interface Between the Backend and the Frontend.
+- **Part 5** - Integrate the Backend With the Frontend.
+- **Part 6** - Let’s Get It to Work!
+- **Part 7** - Deploy Your Translator App. 
 
 You may doubt this build's speed. But, keep reading, you'll discover it can be done in under 30 minutes.
 
@@ -73,7 +60,7 @@ You may doubt this build's speed. But, keep reading, you'll discover it can be d
 
 ## Part 1 - Create the Function That Detects the Language and Translates It Into the Desired Language 🌎
 
-In this part you are going to use two fully managed AI service,  [Amazon Translate](https://aws.amazon.com/translate/) to translate across [common languages](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html) unstructured text (UTF-8) documents or to build applications that work in multiple languagues using [TranslateText](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language) from [Boto3 Translate client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html), and [Amazon Comprehend](https://aws.amazon.com/comprehend/) to detect the dominant language of the text you want to translate using the API [DetectDominantLanguage](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language?) from [Boto3 Comprehend client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html). 
+In this part you are going to use two fully managed AI service,  [Amazon Translate](https://aws.amazon.com/translate/) to translate across [common languages](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html) unstructured text (UTF-8) documents or to build applications that work in multiple languagues using [TranslateText](https://boto3.amazonaws.com/v1/documentation/api/1.9.42/reference/services/translate.html#Translate.Client.translate_text) from [Boto3 Translate client](https://boto3.amazonaws.com/v1/documentation/api/1.9.42/reference/services/translate.html), and [Amazon Comprehend](https://aws.amazon.com/comprehend/) to detect the dominant language of the text you want to translate using the API [DetectDominantLanguage](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language?) from [Boto3 Comprehend client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html). 
 
 You can also use Amazon Translate to determine the source language of the text, making an internal call to Amazon Comprehend to determine the source language, I'll explain how. 
 
@@ -117,7 +104,7 @@ In this part you'll use the [Boto3 Polly client](https://boto3.amazonaws.com/v1/
 
 |StartSpeechSynthesisTask Parameters | GetSpeechSynthesisTask Parameter|
 | ------------------- | -------------------------------------- |
-| <ul><li>**OutputFormat(string)**: The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. <li>**OutputS3BucketName (string)**: [Amazon S3](https://aws.amazon.com/s3/) bucket name to which the output file will be saved. <li>**Text (string)**: The input text to synthesize. <li>**Engine (string)**: Specifies the engine ( standard or neural) for Amazon Polly to use when processing input text for speech synthesis. <li>**VoiceId (string)**: [Voice ID](https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) to use for the synthesis.</li></ul>|  <ul><li>**TaskId (string)**: The Amazon Polly generated identifier for a speech synthesis task.</li></ul>|
+| <ul><li>**OutputFormat(string)**: the value at which the result will be returned and it can be: *json*,*mp3*, *ogg_vorbis* or *pcm*. <li>**OutputS3BucketName (string)**: It's the [Amazon S3](https://aws.amazon.com/s3/) bucket name to which the output file will be saved. <li>**Text (string)**: The input text to synthesize. <li>**Engine (string)**: It specifies the engine (standard or neural) for Amazon Polly to use when processing input text for speech synthesis. <li>**VoiceId (string)**: [Voice ID](https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) is used for the synthesis.</li></ul>|  <ul><li>**TaskId (string)**: This is the Amazon Polly generated identifier for a speech synthesis task.</li></ul>|
 |||
 
 Amazon Polly supports [multiple languages](https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) and voices that allow synthesized speech to sound very natural and humanlike. To generate the best audio we must choose the right voice for each language. Use the following dictionaries in Python:
@@ -133,12 +120,7 @@ def get_target_voice(language):
 
 ### Functions to Calls the Amazon Lex APIs
 
-<table>
-<tr>
-<th> StartSpeechSynthesisTask  </th> <th> GetSpeechSynthesisTask </th>
-</tr>
-<tr>
-<td>
+- StartSpeechSynthesisTask:
 
 ```python
 import boto3
@@ -155,8 +137,7 @@ def start_taskID(target_voice,bucket_name,text):
     object_name = response['SynthesisTask']['OutputUri'].split("/")[-1] 
     return task_id, object_name
 ```
-</td>
-<td>
+- GetSpeechSynthesisTask:
 
 ```python
 import time
@@ -180,9 +161,6 @@ def get_speech_synthesis(task_id):
     time.sleep(2)
     return status
 ```
-</td>
-</tr>
-</table>
 
 > 🚨**Note:** This application will not wait for the SpeechSynthesisTask, since the duration depends on the length of the text. GetSpeechSynthesisTask only delivers the status of the task id.
 
@@ -266,8 +244,7 @@ To finish creating the chatbot, press **Save intent** and then **Build** in the 
 
 >👩🏻‍💻**Note:** When you build a Lex bot, you are re-training the bot with updated configurations and logic, allowing it to learn from the new parameters.
 
-### Test and inspect the bot you have created so far follow the instructions in [this link](https://docs.aws.amazon.com/lexv2/latest/dg/test-bot.html).
-
+### 🥳🚀 Congratulations on creating your bot! Follow the instructions in [this link](https://docs.aws.amazon.com/lexv2/latest/dg/test-bot.html) to test it. 
 
 ## Part 4 - Build the Interface Between the Backend and the Frontend
 
@@ -507,7 +484,7 @@ def lambda_handler(event, context):
 
 ### Lambda Function Permissions
 
-For this Lambda Function have permissions to invoke AWS services and resources, it is necessary to create an execution role that has the necessary permissions, to do this, follow the following steps: 
+To allow the Lambda function to invoke AWS services and resources, an execution role with the required permissions must be created. Follow these steps to create it:
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console, and choose the name of a function.
 2. Choose **Configuration**, and then choose **Permissions**, then click on the **Role name** (Fig. 9).
@@ -554,15 +531,12 @@ For this Lambda Function have permissions to invoke AWS services and resources, 
 
 5. Select **Next**, write the *Policy name* and then **Create policy**.
 
-🥳 Ok, you have all the code ready, now let's get it to work!
-
 
 ## Part 6 - Let’s Get It to Work!
 
-Now, we have the code ready. Are you ready to see it work? 🥳
-
 ### Attaching a Lambda Function to a Bot Alias
-To trigger the Lambda Function when a user interacts with Amazon Lex like a Dialog code hook, Lambda Function its attaching to a bot alias [following these steps](https://docs.aws.amazon.com/lexv2/latest/dg/lambda-attach.html):
+
+To trigger a Lambda function when a user interacts with Amazon Lex, you attach the function to a bot alias by [following these steps](https://docs.aws.amazon.com/lexv2/latest/dg/lambda-attach.html):
 
 1. Open the [Amazon Lex console](https://console.aws.amazon.com/lex) choose the name of the bot that created in **Part 2**. 
 2. In the left panel choose **Aliases**, choose the name of the alias (Fig. 10).
@@ -626,10 +600,6 @@ Building this multilingual app using AWS was, hopefully, an eye-opening experien
 The process demonstrated how easy it is to integrate AWS AI through AWS Lambda functions. With some coding knowledge, anyone can build sophisticated applications like language translation and speech synthesis.
 
 Experimenting hands-on is the best way to gain skills. Though translation apps already exist, creating your own solution drives learning. Building things yourself matters more than whether it's already been done.
-
-Overall, this project exemplified how AWS lets us rapidly turn ideas into reality. With knowledge and the right tools, we can create apps that make a difference in the world. Coding skills combined with AWS services are a powerful toolkit for building the future.
-
-The takeaway is if you can imagine it, you can build it with AWS. This project expanded you skills while creating something meaningful. 
 
 ### 🚀 Continue Learning
 
