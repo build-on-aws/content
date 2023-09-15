@@ -595,7 +595,7 @@ An alias is a pointer to a specific version of a bot. With an alias, you can eas
 
 Now that I've explained what a version is, you'll learn how to create versions of your bot and how to point the alias to it. 
 
-### Create a version steps
+### Create Version Steps
 
  1. Go to your **Bot**, then in the left panel select **Bot version** and select **Create version** (Fig. 13).  
 
