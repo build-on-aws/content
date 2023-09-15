@@ -113,7 +113,7 @@ In this part you'll use the [Boto3 Polly client](https://boto3.amazonaws.com/v1/
 
 
 
-### Parameters requires for Amazon Lex APIs:
+### Parameters for Amazon Lex APIs
 
 |StartSpeechSynthesisTask Parameters | GetSpeechSynthesisTask Parameter|
 | ------------------- | -------------------------------------- |
