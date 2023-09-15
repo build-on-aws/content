@@ -187,7 +187,7 @@ def get_speech_synthesis(task_id):
 > 🚨**Note:** This application will not wait for the SpeechSynthesisTask, since the duration depends on the length of the text. GetSpeechSynthesisTask only delivers the status of the task id.
 
 
-### Generate Presigned Url to access the audio file from anywhere
+### Generate Presigned URL to Access the Audio File From Anywhere
 
 By default, the files in an S3 bucket are private, only the object owner has permission to access them. However, the object owner may share objects with others by [creating a presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html), for the application you do it using the API [GeneratePresignedUrl](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/generate_presigned_url.html) from [Boto3 S3 client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html): 
 
