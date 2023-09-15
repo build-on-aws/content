@@ -587,7 +587,7 @@ To finish the integration, click **Build** to create and configure the bot using
 
 You now have a functional translator conversational interfaces bot with text-to-speech that you built and tested quickly using Amazon Lex. However, it is only accessible through the console and you have worked with a draft version. 
 
-Draft is the working copy of your bot. You can update only the Draft version and until you publish your first version, Draft is the only version of the bot that you have. 
+Draft is the working copy of your bot. You can only update the Draft version and until you publish your first version, Draft is the only version of the bot you have. 
 
 You need to create immutable versions in order to bring your bot into production. A version is a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production. 
 
