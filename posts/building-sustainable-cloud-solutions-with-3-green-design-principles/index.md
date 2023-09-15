@@ -6,6 +6,8 @@ tags:
   - aws
 waves:
   - cost
+spaces:
+  - cost-optimization
 authorGithubAlias: dairiley
 authorName: Daisy Riley
 date: 2023-09-08

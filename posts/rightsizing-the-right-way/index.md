@@ -7,6 +7,8 @@ tags:
   - compute
 waves:
   - cost
+spaces:
+  - cost-optimization
 authorGithubAlias: mergenf
 authorName: Ben Mergen
 date: 2023-09-12
