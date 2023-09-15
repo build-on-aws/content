@@ -258,7 +258,7 @@ Configure the Translate attempt to fulfill a user's request to make a translatio
 
 >🚨**Important:** The order matters, make sure that `language` type is the first slot to be required. 
 
-This bot will invoke a Lambda function as a [dialog code hook](https://docs.aws.amazon.com/lexv2/latest/dg/paths-code-hook.html), to validate user input and to fulfill the intent, for that select Use a Lambda function for initialization and validation (Fig. 7).
+This bot will invoke a Lambda function as a [dialog code hook](https://docs.aws.amazon.com/lexv2/latest/dg/paths-code-hook.html), to validate user input and to fulfill the intent. For that, select Use a Lambda function for initialization and validation (Fig. 7).
 
 ![Slot language](images/fig_7.png) <div align="center">Fig 7. Use a Lambda function for initialization and validation. </div> 
 
