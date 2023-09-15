@@ -269,7 +269,7 @@ To finish creating the chatbot, press **Save intent** and then **Build** in the 
 ### Test and inspect the bot you have created so far follow the instructions in [this link](https://docs.aws.amazon.com/lexv2/latest/dg/test-bot.html).
 
 
-## Part 4 - Build the interface between the backend and the frontend. 
+## Part 4 - Build the Interface Between the Backend and the Frontend
 
 The interaction from backend to frontend will be handled through specific states called [Dialog Action](https://docs.aws.amazon.com/lex/latest/dg/API_runtime_DialogAction.html). It refers to the next action that the bot must perform in its interaction with the user. Possible values are:
 
