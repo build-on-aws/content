@@ -25,7 +25,7 @@ In this blog, you'll build a translation app. In just a few steps, you can make 
 
 
 
-Imagine creating your own translation app in just a few steps - one capable of identifying the input language, translating into multiple languages, and generating audio files with correct pronunciation. This is now possible by combining AWS services. 
+Imagine creating your own translation app in just a few steps - one capable of identifying the input language, translating into multiple languages, and generating audio files with correct pronunciation. This is now possible with AWS. 
 
 While translation apps exist, building your own and getting hands-on experience is the best way to learn and gain new skills. Creating something yourself matters more than whether it already exists - the key is developing abilities through practice.
 
