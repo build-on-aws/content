@@ -623,7 +623,7 @@ You already have everything you need to integrate your bot with messaging platfo
 
 Building this multilingual app using AWS was, hopefully, an eye-opening experience for you. By leveraging Amazon Comprehend, Amazon Translate, Amazon Polly, and Amazon Lex, you were able to create a powerful translation tool with text-to-speech capabilities in a short amount of time. 
 
-The process demonstrated how easy it is to integrate AWS AI services through AWS Lambda functions. With some coding knowledge, anyone can build sophisticated applications like language translation and speech synthesis.
+The process demonstrated how easy it is to integrate AWS AI through AWS Lambda functions. With some coding knowledge, anyone can build sophisticated applications like language translation and speech synthesis.
 
 Experimenting hands-on is the best way to gain skills. Though translation apps already exist, creating your own solution drives learning. Building things yourself matters more than whether it's already been done.
 
