@@ -445,7 +445,7 @@ def elicit_intent(active_contexts, session_attributes, intent, messages):
 </table>
 
 
-With the backend and frontend functions builded, it's time to integrate them!
+With the backend and frontend functions built, it's time to integrate them!
 
 ## Part 5 - Integrate the Backend with the Frontend.
 
