@@ -284,7 +284,7 @@ The interaction from backend to frontend will be handled through specific states
 ![Slots created](images/fig_8.png)
 <div align="center">Fig 8. Conversation flow. </div> 
 
-1. The user starts the Intent, triggering the Lambda Function which is always listening. The Lambda does not receive the expected `language` value, so it **Delegate** Lex to continue handling the conversation by eliciting the `language` slot.
+1. The user starts the Intent, triggering the Lambda Function which is always listening. Lambda does not receive the expected `language` value, so it will **Delegate** Lex to continue handling the conversation by eliciting the `language` slot.
 2. The user provides the language and Lex interprets the value as a language code. The Lambda Function sees the `language` value and asks Lex to **ElicitSlot** `text_to_translate`.
 3. The user provides the text to translate. Since the text is variable and unpredictable, Lex cannot interpret it as the `text_to_translate` value. So the Lambda Function interprets the text insted Lex and starts the translation and text-to-speech process. Finally, it replies to Lex with an **ElicitIntent** containing the translated text and a pre-signed link.
 
