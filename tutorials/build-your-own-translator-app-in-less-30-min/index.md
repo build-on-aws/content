@@ -12,7 +12,18 @@ authorName: Elizabeth Fuentes
 date: 2023-08-22
 ---
 
-The Internet has connected people worldwide, but language remains a barrier to universal understanding. With over 7,000 languages spoken globally, communication is limited for many. Creating content and apps in multiple languages allows greater reach, and managing multiple languages enables communication with more people. 
+Consider rewriting opening paragraph to hone in on what blog it about. First paragraph infers it's about the Internet and languages bridging communication. But this wonderful blog is more precise. It's about two things: 
+
+1. the challenge of building something from scratch
+2. using AWS to build a language translation app. 
+
+I wrote a sample rewrite for the intro:
+
+Half an hour may not seem like enough time for a major project but with AWS you can build and test a language app. There are hundreds of translator apps to help us engage with various cultures, people, and the 7,000+ languages spoken globally. But, building your own app gives you hands-on experience. It's the best way to learn and gain new skills. Creating something yourself is what matters: the key is developing your abilities through practice.
+
+In this blog, you'll build a translation app. In just a few steps, you can make one capable of identifying the input language, translating into multiple languages, and generating audio files with correct pronunciation. I'll guide you step-by-step on how to combine AWS tools to bring your app to life and test it. 
+
+
 
 Imagine creating your own translation app in just a few steps - one capable of identifying the input language, translating into multiple languages, and generating audio files with correct pronunciation. This is now possible by combining AWS services. 
 
