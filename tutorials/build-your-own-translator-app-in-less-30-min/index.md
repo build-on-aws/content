@@ -71,7 +71,7 @@ You may doubt this build's speed. But, keep reading, you'll discover it can be d
 
 **Let’s get started!**
 
-## Part 1 -  Create the function that detects the language and translates it into the desired language 🌎.
+## Part 1 - Create the Function That Detects the Language and Translates It Into the Desired Language 🌎
 
 In this part you are going to use two fully managed AI service,  [Amazon Translate](https://aws.amazon.com/translate/) to translate across [common languages](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html) unstructured text (UTF-8) documents or to build applications that work in multiple languagues using [TranslateText](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language) from [Boto3 Translate client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html), and [Amazon Comprehend](https://aws.amazon.com/comprehend/) to detect the dominant language of the text you want to translate using the API [DetectDominantLanguage](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend/client/detect_dominant_language.html#detect-dominant-language?) from [Boto3 Comprehend client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/comprehend.html). 
 
