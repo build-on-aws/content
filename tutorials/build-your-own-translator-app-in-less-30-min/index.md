@@ -131,7 +131,7 @@ def get_target_voice(language):
     return target_voice
 ```
 
-### Functions to calls the Amazon Lex APIs are: 
+### Functions to Calls the Amazon Lex APIs
 
 <table>
 <tr>
