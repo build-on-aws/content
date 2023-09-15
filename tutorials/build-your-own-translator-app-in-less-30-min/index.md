@@ -451,7 +451,7 @@ With the backend and frontend functions built, it's time to integrate them!
 
 With all the code built up in the previous parts, you are going to assemble the Lambda Handler as follows.
 
-### Lambda Handler code:
+### Lambda Handler Code
 
 ```python
 def lambda_handler(event, context):
