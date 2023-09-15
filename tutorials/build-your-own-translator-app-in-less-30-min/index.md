@@ -583,7 +583,7 @@ To finish the integration, click **Build** to create and configure the bot using
 <div align="center">Fig 12. Testing the bot. </div>
 
 
-## Part 7 - Deploy Your translator app.
+## Part 7 - Deploy Your Translator App
 
 You now have a functional translator conversational interfaces bot with text-to-speech that you built and tested quickly using Amazon Lex. However, it is only accessible through the console and you have worked with a draft version. 
 
