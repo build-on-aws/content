@@ -1,5 +1,5 @@
 ---
-title: "Tidy your Bedroom - Identify Unused Resources"
+title: "Tidy Your Bedroom – Identify Unused Resources"
 description: "How to find unneeded cloud resources easily with AWS Resource Explorer"
 tags:
     - tutorials
