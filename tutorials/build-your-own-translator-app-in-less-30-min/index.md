@@ -120,7 +120,7 @@ In this part you'll use the [Boto3 Polly client](https://boto3.amazonaws.com/v1/
 | <ul><li>**OutputFormat(string)**: The format in which the returned output will be encoded. For audio stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json. <li>**OutputS3BucketName (string)**: [Amazon S3](https://aws.amazon.com/s3/) bucket name to which the output file will be saved. <li>**Text (string)**: The input text to synthesize. <li>**Engine (string)**: Specifies the engine ( standard or neural) for Amazon Polly to use when processing input text for speech synthesis. <li>**VoiceId (string)**: [Voice ID](https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) to use for the synthesis.</li></ul>|  <ul><li>**TaskId (string)**: The Amazon Polly generated identifier for a speech synthesis task.</li></ul>|
 |||
 
-Amazon Polly supports [multiple languages](https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) and voices that allow synthesized speech sounds very natural and humanlike, to generate the best audio we must choose the right voice for each language, for that use the following dictionaries in Python:
+Amazon Polly supports [multiple languages](https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) and voices that allow synthesized speech to sound very natural and humanlike. To generate the best audio we must choose the right voice for each language. Use the following dictionaries in Python:
 
 ```python
 #Match the language code from Amazon Translate with the right voice from Amazon Polly.
