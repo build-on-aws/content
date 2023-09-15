@@ -593,7 +593,7 @@ You need to create immutable versions in order to bring your bot into production
 
 An alias is a pointer to a specific version of a bot. With an alias, you can easily update the version that your client applications are using without having to change any code. Aliases allow you to seamlessly direct traffic to different versions as needed.
 
-Now that I explain what a version is, you'll learn how to create versions of your bot and how to point the alias to it. 
+Now that I've explained what a version is, you'll learn how to create versions of your bot and how to point the alias to it. 
 
 ### Create a version steps
 
