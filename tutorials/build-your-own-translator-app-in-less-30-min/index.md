@@ -279,7 +279,7 @@ The interaction from backend to frontend will be handled through specific states
 - **ElicitIntent** - The next action is to determine the intent that the user wants to fulfill.
 - **ElicitSlot** - The next action is to elicit a slot value from the user.
 
-### The conversation flow has three main states (Fig. 8):
+### The Conversation Flow’s Three Main States
 
 ![Slots created](images/fig_8.png)
 <div align="center">Fig 8. Conversation flow. </div> 
