@@ -61,7 +61,7 @@ The easiest way I have found is to use **[AWS Resource Explorer](https://docs.aw
 
 ## AWS Resource Explorer
 
-AWS Resource Explorer makes it easy to search for resources in your AWS account. It supports a range of resource types such as Amazon S3 buckets or Amazon DynamoDB tables. Most conveniently, Resource Explorer works across multiple AWS Regions available to your account to make it easy to see an overview of what exists and where it is located.
+AWS Resource Explorer makes it easy to search for resources in your AWS account. It supports a range of resource types such as Amazon S3 buckets or Amazon DynamoDB tables. Most conveniently, Resource Explorer works across multiple AWS Regions available to your account, making it easy to see an overview of what exists and where it is located.
 
 AWS Resource Explorer does not charge for usage, but you do have to set it up and let it index all the resources before you can use it.  
 
