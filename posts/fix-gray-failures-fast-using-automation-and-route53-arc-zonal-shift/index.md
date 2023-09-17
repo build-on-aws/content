@@ -190,4 +190,5 @@ This blog post discusses gray failures, how to detect them, and how to reduce th
 
 - [How zonal shift works](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.how-it-works.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
 - [Best practices for zonal shifts in Route 53 ARC](https://docs.aws.amazon.com/r53recovery/latest/dg/route53-arc-best-practices.html#zonalshift.route53-arc-best-practices.zonal-shifts?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
+- [Detecting gray failures with outlier detection in Amazon CloudWatch Contributor Insights](https://aws.amazon.com/blogs/mt/detecting-gray-failures-with-outlier-detection-in-amazon-cloudwatch-contributor-insights?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
 - [Implementing health checks](https://aws.amazon.com/builders-library/implementing-health-checks?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=arc-zonal-shift)
