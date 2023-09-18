@@ -72,7 +72,7 @@ kubectl config current-context
 1. Define the `CLUSTER_ACCOUNT` environment variable to store your AWS account ID. 
 
 ```
-`export CLUSTER_ACCOUNT=$(aws sts get-caller-identity --query Account --o text)`
+export CLUSTER_ACCOUNT=$(aws sts get-caller-identity --query Account --o text)
 ```
 
 1. Define the `CLUSTER_NAME` environment variable for your EKS cluster.
@@ -84,7 +84,7 @@ export CLUSTER_NAME=`"managednodes-quickstart"`
 1. Define the `CLUSTER_REGION` environment variable for your EKS cluster. 
 
 ```
-export CLUSTER_REGION=`"us-east-2"`
+export CLUSTER_REGION="us-east-2"
 ```
 
 1. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
@@ -454,3 +454,22 @@ helm delete externaldns-release -n kube-system
 aws route53 delete-hosted-zone --id ${HOSTED_ZONE_ID}
 ```
 
+
+# Content Pull Request Checklist
+
+Please check to make sure your content submission meets the following requirements by adding an `x` between the brackets:
+
+- [x] The title of this pull request reflects the title of my content.
+- [x] I have reviewed the [Content Review Checklist](/content/blob/main/CONTENT_REVIEW_CHECKLIST.md).
+- [x] This pull request contains one piece of content (post or page).
+
+**Important: if you are submitting a PR to update existing content, please ensure you [sync'ed your fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) first before you created your branch.**
+
+Is this pull request linked to a Content Proposal or Idea Suggestion Issue? If so, please link to it below using the number or full link.
+
+```text
+Content for https://app.asana.com/0/1205163862976163/1205286908483261
+```
+
+**By submitting this pull request, I confirm I own this content, have permission to use each image included in this content, and that it will be released under the [CC BY-SA 4.0 SA License](/LICENSE).**
+-
