@@ -29,7 +29,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 | ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- AWS [CloudFormation basic understanding](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-howdoesitwork.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
+| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- AWS [CloudFormation basic understanding](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-howdoesitwork.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/ci-cd-iac-aws-cloudformation)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-03-22                                                      |
@@ -41,7 +41,7 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon CodeCata
 
 ### **AWS account**
 
-Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+Before we begin, ensure you have an AWS Account. You can create a new account by signing up [here](https://aws.amazon.com/resources/create-account?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### **CodeCatalyst account**
 
@@ -313,7 +313,7 @@ If you open the Website link, you can access the sample application deployed by 
 
 ![CodeCatalyst Workflow website sample application](images/website_cfn_sample_appln.png)
  
-> It might happen that the run fails due to errors. Read through the logs to understand any issue and remediate it. If you get internal error, at this point it is good to check the stack deployment in the CloudFormation dashboard of AWS Management Console. If the CloudFormation stack has rolled back, then delete the stack manually, fix the issues, and run the workflow again. You can find help in [Documentation for Troubleshooting](https://docs.aws.amazon.com/codecatalyst/latest/userguide/troubleshooting.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Premium Support center](https://support.console.aws.amazon.com/support/home#/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) or [AWS re:Post](https://repost.aws/tags/TAT_2FdxcETxyhEvwsLjVZaA/amazon-code-catalyst?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq). 
+> It might happen that the run fails due to errors. Read through the logs to understand any issue and remediate it. If you get internal error, at this point it is good to check the stack deployment in the CloudFormation dashboard of AWS Management Console. If the CloudFormation stack has rolled back, then delete the stack manually, fix the issues, and run the workflow again. You can find help in [Documentation for Troubleshooting](https://docs.aws.amazon.com/codecatalyst/latest/userguide/troubleshooting.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Premium Support center](https://support.console.aws.amazon.com/support/home#?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) or [AWS re:Post](https://repost.aws/tags/TAT_2FdxcETxyhEvwsLjVZaA/amazon-code-catalyst?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### Make code changes with Pull Request Workflow
 
@@ -558,12 +558,12 @@ To https://git.us-west-2.codecatalyst.aws/v1/CloudFormation-CodeCatalyst/ThreeTi
 branch 'test-pr-workflow' set up to track 'origin/test-pr-workflow'.
 
 ```
- 
+
 In the CodeCatalyst Console, navigate to `Code` -> `Repository`. You can see the 2 branches: `main` and `test-pr-workflow`.
 
 ![CodeCatalyst two branches main default and test-pr-workflow](images/cc_branches.png)
 
- 
+
 ### Create Pull Request and Merge Code
 
 Now that we have all changes in the branch named `test-pr-workflow`, you can ask others to review the changes by creating a pull request.
@@ -717,7 +717,7 @@ We have now reached the end of this tutorial: we learned how to create workflows
 
 To delete the project we created in CodeCatalyst. In the left-hand navigation, go to `Project settings`, click on `Delete project`, and follow the instructions to delete the project.
 
-Lastly, to delete the CodeCatalyst space, go to [CodeCatalyst dashboard](https://codecatalyst.aws/spaces/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), then `Space settings` tab and click on `Delete space`.
+Lastly, to delete the CodeCatalyst space, go to [CodeCatalyst dashboard](https://codecatalyst.aws/spaces?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcfnaws&sc_geo=mult&sc_country=mult&sc_outcome=acq), then `Space settings` tab and click on `Delete space`.
 
 ## Conclusion
 

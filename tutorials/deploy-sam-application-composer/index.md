@@ -20,11 +20,11 @@ date: 2023-06-09
 
 In today's digital age, building and deploying applications to the cloud has become essential for businesses to stay competitive. Serverless computing has gained immense popularity among developers as it offers a cost-effective and scalable solution to deploy applications without managing the underlying infrastructure.
 
-The [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a popular open-source framework for building serverless applications with just few lines of code in a YAML template. During deployment, SAM will transform this template and expand the syntax into AWS CloudFormation magic.
+The [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a popular open-source framework for building serverless applications with just few lines of code in a YAML template. During deployment, SAM will transform this template and expand the syntax into AWS CloudFormation magic.
 
 But if we're really honest, nobody wakes up excited to maintain YAML code for their serverless application, even with SAM -- and visualizing applications' architecture is not easy.
 
-[AWS Application Composer](https://aws.amazon.com/application-composer/?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) offers one solution. It's a visual development tool that offers a drag-and-drop interface that offers developers quick and easy creation of new applications or modification of existing ones.
+[AWS Application Composer](https://aws.amazon.com/application-composer?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) offers one solution. It's a visual development tool that offers a drag-and-drop interface that offers developers quick and easy creation of new applications or modification of existing ones.
 
 In this blog post, we will explore the benefits of using AWS SAM in combination with Application Composer for new and existing applications. We will also provide examples of how to use these tools to streamline our application development process and make it easier to manage our applications in the cloud. Let's dive in!
 
@@ -44,8 +44,8 @@ https://youtu.be/NZnr1vSJTs0?t=650
 | ✅ AWS experience      | 100 - Beginner                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [Any Supported Local IDE from list](https://aws.amazon.com/developer/tools/)<br>- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br>- [Node and NPM installed](https://docs.npmjs.com/cli/v9/configuring-npm/install)|
-| 💻 Code Sample         | Code sample used in tutorial on [Serverless Land](https://serverlessland.com/repos/?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq)                            |
+| 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [Any Supported Local IDE from list](https://aws.amazon.com/developer/tools/)<br>- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br>- [Node and NPM installed](https://docs.npmjs.com/cli/v9/configuring-npm/install)|
+| 💻 Code Sample         | Code sample used in tutorial on [Serverless Land](https://serverlessland.com/repos?sc_channel=el&sc_campaign=devopswave&sc_content=samapplncomposer&sc_geo=mult&sc_country=mult&sc_outcome=acq)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank"> Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-06-09                                                     |
 

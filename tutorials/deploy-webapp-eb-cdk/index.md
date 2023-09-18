@@ -21,7 +21,7 @@ We actually can achieve this - by using **AWS Elastic Beanstalk**, an easy-to-us
 
 In addition to that, we can also build the AWS Elastic Beanstalk resources using code!
  
-The **[AWS Cloud Development Kit (AWS CDK)](https://docs.aws.amazon.com/cdk/api/v2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)** is an open-source software development framework to define cloud infrastructure in familiar programming languages and provision it through AWS CloudFormation. It consists of three major components: a **core framework** for modeling reusable infrastructure components, a **CLI** to interact with it, and a **[Construct Library](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)**, that has abstracted high-level components of AWS resources.
+The **[AWS Cloud Development Kit (AWS CDK)](https://docs.aws.amazon.com/cdk/api/v2?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)** is an open-source software development framework to define cloud infrastructure in familiar programming languages and provision it through AWS CloudFormation. It consists of three major components: a **core framework** for modeling reusable infrastructure components, a **CLI** to interact with it, and a **[Construct Library](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)**, that has abstracted high-level components of AWS resources.
 
 **CDK Pipelines** is a high-level construct library that makes it easy to set up a continuous deployment pipeline for CDK applications, powered by AWS CodePipeline.
 
@@ -38,7 +38,7 @@ In this guide, we will learn how to:
 | ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 40 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment/)<br>- [AWS CDK v2.7.0 installed](https://aws.amazon.com/getting-started/guides/setup-cdk)<br>- [GitHub account](https://github.com/)|
+| 🧩 Prerequisites       | - [AWS Account and the CLI installed](https://aws.amazon.com/getting-started/guides/setup-environment?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [AWS CDK v2.7.0 installed](https://aws.amazon.com/getting-started/guides/setup-cdk?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [GitHub account](https://github.com)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)                            |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-04-10                                                     |
@@ -50,9 +50,9 @@ In this guide, we will learn how to:
 
 Before proceeding, ensure we have following prerequisites set up and ready to use:
 
-* **An AWS account and CLI installed**: If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) guide for a quick overview and CLI installation steps.
-* **CDK installed**: Visit our [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) guide to learn more.
-* A **GitHub account**: Visit [GitHub.com](https://github.com/) and follow the prompts to create your account.
+* **An AWS account and CLI installed**: If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) guide for a quick overview and CLI installation steps.
+* **CDK installed**: Visit our [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) guide to learn more.
+* A **GitHub account**: Visit [GitHub.com](https://github.com) and follow the prompts to create your account.
 
 ## Build a Web Application
 
@@ -81,7 +81,7 @@ If npm is not installed, install it in your local terminal following the instruc
 
 ### Create Express app
 
-We are going to use [Express](https://expressjs.com/) as our web application framework. To use it, we need to install Express as a dependency in our Node.js project.
+We are going to use [Express](https://expressjs.com) as our web application framework. To use it, we need to install Express as a dependency in our Node.js project.
 
 ```bash
 npm install express
@@ -192,7 +192,7 @@ Now that we have our sample application, let's create a CDK application that wil
 
 ### Create GitHub Repository and personal access token
 
-Create a repository on [GitHub](https://github.com/) to store these application files. Your repository can be public or private.
+Create a repository on [GitHub](https://github.com) to store these application files. Your repository can be public or private.
 
 If you need help, you can read the [GitHub documentation on how to create a repo](https://docs.github.com/en/get-started/quickstart/create-a-repo?tool=webui).
 
@@ -321,7 +321,7 @@ A resource stack is a set of cloud infrastructure resources—all AWS resources 
 
 ### Upload the App to S3 Automatically
 
-For deploying the web app, we need to package it and upload it to [Amazon S3](https://aws.amazon.com/s3/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) so that Elastic Beanstalk can deploy the application in the environment.
+For deploying the web app, we need to package it and upload it to [Amazon S3](https://aws.amazon.com/s3?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkebaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) so that Elastic Beanstalk can deploy the application in the environment.
 
 To do that, we will be using a CDK constructor called S3 Assets. The S3 Assets module will zip up files in the provided directory, and upload the zip to S3.
 
