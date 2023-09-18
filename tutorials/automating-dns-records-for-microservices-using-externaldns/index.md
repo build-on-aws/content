@@ -25,7 +25,6 @@ Building on the Amazon EKS cluster from **part 1** of our series, this tutorial 
 
 In this tutorial, you will configure the [External DNS](https://github.com/kubernetes-sigs/external-dns) add-on on your Amazon EKS cluster. This will involve creating a private hosted zone, installation of the [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) add-on that utilizes the IAM Role for Service Account (IRSA) for the management of AWS Route53 DNS records. Additionally, we will illustrate the validation of user-friendly URLs to access these Kubernetes services. This methodology enhances fault tolerance and guarantees robust accessibility to these Kubernetes services.
 
-
 ![](./images/arch.png)
 
 | Attributes             |                                                                 |
@@ -69,25 +68,25 @@ Before interacting with your Amazon EKS cluster using Helm or other command-line
 kubectl config current-context
 ```
 
-1. Define the `CLUSTER_ACCOUNT` environment variable to store your AWS account ID. 
+2. Define the `CLUSTER_ACCOUNT` environment variable to store your AWS account ID. 
 
 ```
 export CLUSTER_ACCOUNT=$(aws sts get-caller-identity --query Account --o text)
 ```
 
-1. Define the `CLUSTER_NAME` environment variable for your EKS cluster.
+3. Define the `CLUSTER_NAME` environment variable for your EKS cluster.
 
 ```
-export CLUSTER_NAME=`"managednodes-quickstart"`
+export CLUSTER_NAME="managednodes-quickstart"
 ```
 
-1. Define the `CLUSTER_REGION` environment variable for your EKS cluster. 
+4. Define the `CLUSTER_REGION` environment variable for your EKS cluster. 
 
 ```
 export CLUSTER_REGION="us-east-2"
 ```
 
-1. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
+5. Define the `CLUSTER_VPC` environment variable for your EKS cluster. 
 
 ```
 export CLUSTER_VPC=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --query "cluster.resourcesVpcConfig.vpcId" --output text)
@@ -103,7 +102,7 @@ In this section, we will create a private Route53 hosted zone called "my-externa
 export AWS_ROUTE53_DOMAIN="my-externaldns-demo.com"
 ```
 
-1. Create a new hosted zone in AWS Route 53. 
+2. Create a new hosted zone in AWS Route 53. 
 
 ```
 aws route53 create-hosted-zone --name "${AWS_ROUTE53_DOMAIN}." --vpc VPCRegion=${CLUSTER_REGION},VPCId=${CLUSTER_VPC} --caller-reference "my-externaldns-demo-$(date +%s)"
@@ -135,13 +134,13 @@ The expected output should look like this:
 }
 ```
 
-1. Retrieve the ID of the hosted zone you created in AWS Route 53. 
+3. Retrieve the ID of the hosted zone you created in AWS Route 53. 
 
 ```
 export HOSTED_ZONE_ID=$(aws route53 list-hosted-zones-by-name --dns-name "${AWS_ROUTE53_DOMAIN}." --query 'HostedZones[0].Id' --o text | awk -F "/" {'print $NF'})
 ```
 
-1. Verify that the Route53 hosted zone was created successfully. 
+4. Verify that the Route53 hosted zone was created successfully. 
 
 ```
 aws route53 list-resource-record-sets --hosted-zone-id  ${HOSTED_ZONE_ID}  --query "ResourceRecordSets[?Name == '${AWS_ROUTE53_DOMAIN}.']"
@@ -240,13 +239,13 @@ cat << EOF > external-dns-policy.json
 EOF
 ```
 
-1. Create the policy to grant the necessary permissions for ExternalDNS to interact with Route 53.
+2. Create the policy to grant the necessary permissions for ExternalDNS to interact with Route 53.
 
 ```
 aws iam create-policy --policy-name "ExternalDNSUpdatesPolicy" --policy-document file://external-dns-policy.json
 ```
 
-1. Use the policy to create an IAM role for the service account. This service account will be used by external dns pods to manage records in the route53 hosted zone. 
+3. Use the policy to create an IAM role for the service account. This service account will be used by external dns pods to manage records in the route53 hosted zone. 
 
 ```
 eksctl create iamserviceaccount --name external-dns --namespace kube-system --cluster ${CLUSTER_NAME} --attach-policy-arn arn:aws:iam::${AWS_CURRENT_ACCOUNT}:policy/ExternalDNSUpdatesPolicy --approve --override-existing-serviceaccounts --region ${CLUSTER_REGION}
@@ -262,7 +261,7 @@ In this section, you will deploy the ExternalDNS add-on within your EKS cluster.
 aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${CLUSTER_REGION}
 ```
 
-1. Run the following Helm command to install the ExternalDNS add-on on your EKS cluster. This command will configure the ExternalDNS add-on to manage DNS records for your specified domain.
+2. Run the following Helm command to install the ExternalDNS add-on on your EKS cluster. This command will configure the ExternalDNS add-on to manage DNS records for your specified domain.
 
 ```
 helm upgrade --wait --timeout 900s --install externaldns-release \
@@ -310,7 +309,7 @@ Now that we have set up the external DNS, we can allow users outside the cluster
 export SUB_DOMAIN="game-2048"
 ```
 
-1. Create the Namespace, Deployment and [Service](https://kubernetes.io/docs/concepts/services-networking/service/) with an ExternalDNS annotation. To learn more about these components, refer to the following resources, [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [Services, Load Balancing, and Networking](https://kubernetes.io/docs/concepts/services-networking/) & [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) . 
+2. Create the Namespace, Deployment and [Service](https://kubernetes.io/docs/concepts/services-networking/service/) with an ExternalDNS annotation. To learn more about these components, refer to the following resources, [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [Services, Load Balancing, and Networking](https://kubernetes.io/docs/concepts/services-networking/) & [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) . 
 
 ```
 cat << EOF > game-2048.yaml
@@ -360,10 +359,10 @@ spec:
 EOF
 ```
 
-1. Create the Kubernetes resources by applying the configuration file to the Kubernetes API server.
+3. Create the Kubernetes resources by applying the configuration file to the Kubernetes API server.
 
 ```
-`kubectl apply ``-``f game-2048``.``yaml`
+kubectl apply -f game-2048.yaml`
 ```
 
 You should see the following response output:
@@ -374,7 +373,7 @@ deployment.apps/deployment-2048 created
 service/service-2048 created
 ```
 
-1. You can verify the logs using the following command. Please note that it may take a few seconds to update the entries.  
+4. You can verify the logs using the following command. Please note that it may take a few seconds to update the entries.  
 
 ```
 kubectl logs --namespace=kube-system -l "app.kubernetes.io/name=external-dns,app.kubernetes.io/instance=externaldns-release"
@@ -390,7 +389,7 @@ time="2023-08-31T20:37:38Z" level=info msg="Desired change: CREATE game-2048.my-
 time="2023-08-31T20:37:38Z" level=info msg="3 record(s) in zone game-2048.my-externaldns-demo.com. [Id: /hostedzone/Z0116663IIIIIIVJ3D] were successfully updated"
 ```
 
-1. You can verify the newly created DNS records, which point to the `game-2048` service within the private hosted zone, by running the following command.
+5. You can verify the newly created DNS records, which point to the `game-2048` service within the private hosted zone, by running the following command.
 
 ```
 aws route53 list-resource-record-sets --hosted-zone-id  ${HOSTED_ZONE_ID}  --query "ResourceRecordSets[?Name == '${SUB_DOMAIN}.${AWS_ROUTE53_DOMAIN}.']"
@@ -422,13 +421,13 @@ The expected output should look like this:
 ]
 ```
 
-4 . Since the hosted domain is private, you can access the service `game-2048` using the user-friendly URL `game-2048.my-externaldns-demo.com` from within the pods. We will be creating test pod and running a curl command to verify the setup.
+6. Since the hosted domain is private, you can access the service `game-2048` using the user-friendly URL `game-2048.my-externaldns-demo.com` from within the pods. We will be creating test pod and running a curl command to verify the setup.
 
 ```
 kubectl run nginx-test-conn --image=nginx -n game-2048  && sleep 5 && kubectl exec -it nginx-test-conn -n game-2048 -- sh -c "curl http://${SUB_DOMAIN}.${AWS_ROUTE53_DOMAIN}" > test.html
 ```
 
-1. Double click the `test.html` file that was created by the previous command. You should see the following contents.
+7. Double click the `test.html` file that was created by the previous command. You should see the following contents.
 
 
 ![](./images/out.png)
@@ -453,23 +452,3 @@ helm delete externaldns-release -n kube-system
 # Remove Route53 Domain
 aws route53 delete-hosted-zone --id ${HOSTED_ZONE_ID}
 ```
-
-
-# Content Pull Request Checklist
-
-Please check to make sure your content submission meets the following requirements by adding an `x` between the brackets:
-
-- [x] The title of this pull request reflects the title of my content.
-- [x] I have reviewed the [Content Review Checklist](/content/blob/main/CONTENT_REVIEW_CHECKLIST.md).
-- [x] This pull request contains one piece of content (post or page).
-
-**Important: if you are submitting a PR to update existing content, please ensure you [sync'ed your fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) first before you created your branch.**
-
-Is this pull request linked to a Content Proposal or Idea Suggestion Issue? If so, please link to it below using the number or full link.
-
-```text
-Content for https://app.asana.com/0/1205163862976163/1205286908483261
-```
-
-**By submitting this pull request, I confirm I own this content, have permission to use each image included in this content, and that it will be released under the [CC BY-SA 4.0 SA License](/LICENSE).**
--
