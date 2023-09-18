@@ -31,7 +31,7 @@ Today on deployed weekly we take another peek at Lambda functions and .NET. What
 - Optimal strategy for running .NET code on Lambda functions by **Steve Bjorg:** [https://dev.to/lambdasharp/optimal-strategies-for-net-on-aws-lambda-45kg](https://dev.to/lambdasharp/optimal-strategies-for-net-on-aws-lambda-45kg)
 - **Sematic**, an open-source development toolkit for AI/ML: [https://github.com/sematic-ai/sematic](https://github.com/sematic-ai/sematic)
 - Do more stuff from the console with **xray-cli!**: [https://github.com/mhlabs/xray-cli](https://github.com/mhlabs/xray-cli)
-- Yesterday - the 10th of August - was **AWS Storage Day!** 🥳 [https://aws.amazon.com/blogs/aws/welcome-to-aws-storage-day-2022/](https://aws.amazon.com/blogs/aws/welcome-to-aws-storage-day-2022/)
+- Yesterday - the 10th of August - was **AWS Storage Day!** 🥳 [https://aws.amazon.com/blogs/aws/welcome-to-aws-storage-day-2022/](https://aws.amazon.com/blogs/aws/welcome-to-aws-storage-day-2022/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - Lex Friedman podcast with **John Carmack**: [https://www.youtube.com/watch?v=I845O57ZSy4](https://www.youtube.com/watch?v=I845O57ZSy4)
 
 ## Weekly Builds
@@ -60,7 +60,7 @@ Later in the episode, check out how Darko struggles to add an external "server" 
 
 - Nathan Peck’s blog post: [https://nathanpeck.com/ingress-to-ecs-anywhere-from-anywhere-using-inlets/](https://nathanpeck.com/ingress-to-ecs-anywhere-from-anywhere-using-inlets/)
 - Darko’s cluster (if it is still running): [https://macluster.rup12.net/](https://macluster.rup12.net/)
-- ECS Anywhere: [https://aws.amazon.com/ecs/anywhere/](https://aws.amazon.com/ecs/anywhere/)
+- ECS Anywhere: [https://aws.amazon.com/ecs/anywhere/](https://aws.amazon.com/ecs/anywhere/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 **🐦 Reach out to the hosts and guests:**
 

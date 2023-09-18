@@ -70,7 +70,7 @@ Now, to replicate this solution, you need:
 
 **Step 1:** Inside the AWS Cloud9 environment, clone the repository with the following command:
 
-```
+```bash
 $ git clone https://github.com/hsaenzG/APITimeoutsFix.git
 ```
 
@@ -80,7 +80,7 @@ After this, I have the necessary code in my environment:
 
 **Step 2:** In this exercise, I created an AWS SAM template to deploy all the necessary infrastructure. This doesn't mean you can't create everything manually from the console, but for the sake of the exercise, I'll deploy my infrastructure with the following commands:
 
-```
+```bash
 cd APITimeoutsFix
 $ sam build
 ```
@@ -91,7 +91,7 @@ $ sam build
 
 Now I will deploy the infrastructure using the following command:
 
-```
+```bash
 $ sam deploy
 ```
 
@@ -99,46 +99,43 @@ $ sam deploy
 
 This command will deploy the following in my AWS account:
 
-1\. API Gateway with a Lambda integration. This is an example of how I found the original code, and if you execute this endpoint, you'll see that it returns a timeout error.
+1. API Gateway with a Lambda integration. This is an example of how I found the original code, and if you execute this endpoint, you'll see that it returns a timeout error.
 
 ![API Lambda](images/uz4mhuqzhscs8y4wy8gj.png)
 
-2\. API Gateway with an integration to a Step Function. This endpoint is responsible for executing the step machine, which runs multiple Lambdas in parallel to achieve the same result as the first API, but without performance errors.
+2. API Gateway with an integration to a Step Function. This endpoint is responsible for executing the step machine, which runs multiple Lambdas in parallel to achieve the same result as the first API, but without performance errors.
 
 ![API Step Function](images/trf0vwnr8lg7877na0pz.png)
 
-3\. A state machine with the necessary flow configuration to obtain all the required information from the Harry Potter saga.
+3. A state machine with the necessary flow configuration to obtain all the required information from the Harry Potter saga.
 
 ![State Machine](images/e3sgizn3phj383el2qog.png)
 ![State Machine workflow](images/v1pserwls9iff098n0a7.png)
 
-4\. Five Lambda Functions with the following characteristics:
+4. Five Lambda Functions with the following characteristics:
 
-   - LambdaIntegration/app.mjs → This function contains the original logic.
+   - `LambdaIntegration/app.mjs` → This function contains the original logic.
 
-   - stepFunctionIntegration/hechizos.mjs → This function contains the logic to call the endpoint that returns only the list of spells from the Harry Potter saga.
+   - `stepFunctionIntegration/hechizos.mjs` → This function contains the logic to call the endpoint that returns only the list of spells from the Harry Potter saga.
 
-   - stepFunctionIntegration/libros.mjs → This function contains the logic to call the endpoint that returns only the list of books from the Harry Potter saga.
+   - `stepFunctionIntegration/libros.mjs` → This function contains the logic to call the endpoint that returns only the list of books from the Harry Potter saga.
 
-   - stepFunctionIntegration/personajes.mjs → This function contains the logic to call the endpoint that returns only the list of characters from the Harry Potter saga.
+   - `stepFunctionIntegration/personajes.mjs` → This function contains the logic to call the endpoint that returns only the list of characters from the Harry Potter saga.
 
-   - stepFunctionIntegration/info.mjs → This function contains the logic to call the endpoint that returns the complete list of spells, books, characters, and general information from the Harry Potter saga.
+   - `stepFunctionIntegration/info.mjs` → This function contains the logic to call the endpoint that returns the complete list of spells, books, characters, and general information from the Harry Potter saga.
 
 **Important considerations you can observe in these examples**
 
-1\. The integration of API Gateway with Step Functions is executed synchronously. This means that the API waits for the state machine to finish its execution before returning a response. If I didn't configure it this way, the endpoint response won't contain the desired result because the step machine will run independently of the API Gateway endpoint.
+1. The integration of API Gateway with Step Functions is executed synchronously. This means that the API waits for the state machine to finish its execution before returning a response. If I didn't configure it this way, the endpoint response won't contain the desired result because the step machine will run independently of the API Gateway endpoint.
+   ![API Integration](images/fbar48yg8vecdus7mxcp.png)
 
-![API Integration](images/fbar48yg8vecdus7mxcp.png)
-
-2\. For this use case, I used the Express workflow type for my state machine because it's ideal for mobile application backends. In my case, it's used as part of a web application backend, so it worked perfectly. However, you can also apply it to other use cases such as:
-
+2. For this use case, I used the Express workflow type for my state machine because it's ideal for mobile application backends. In my case, it's used as part of a web application backend, so it worked perfectly. However, you can also apply it to other use cases such as:
    - High-volume event processing workloads like IoT data.
-
    - Streaming, transforming, and processing data.
 
-3\. It's important to note that this type of state machine has a maximum execution time of 5 minutes.
+3. It's important to note that this type of state machine has a maximum execution time of 5 minutes.
 
-4\. The Step Functions service is included in the AWS free tier for the Standard workflow type. However, the execution billing for an Express workflow is not and the cost of it is based on the number of executions, execution duration, and memory consumed during execution. For more information on Step Functions costs, you can visit: [Step Functions Pricing](https://aws.amazon.com/step-functions/pricing/)
+4. The Step Functions service is included in the AWS free tier for the Standard workflow type. However, the execution billing for an Express workflow is not and the cost of it is based on the number of executions, execution duration, and memory consumed during execution. For more information on Step Functions costs, you can visit: [Step Functions Pricing](https://aws.amazon.com/step-functions/pricing/)
 
 ### Testing
 
@@ -147,7 +144,8 @@ This command will deploy the following in my AWS account:
 **Step 1:** I'll test the original endpoint using Postman (Postman is an application used to test, document, and send requests to APIs), but you can use the terminal or any application that helps you test your APIs, like Insomnia or Paw.
 
 Execute the endpoint of the API: APITimeoutsFix. You can get the API URL from: API Gateway → APITimeOutsFix → Stages → Prod.
-```
+
+```bash
 Request URL: https://<your API URL>/Prod/LambdaIntegration/
 Request Method: POST
 Body: {}
@@ -161,8 +159,9 @@ This is due to internal timeout issues in the execution and is exactly the resul
 
 **Step 2:** Now I'll execute the solution. I'll use Postman, but you can use the terminal or any application that helps you test your APIs.
 
-I'll execute the endpoint of the API: WizaringStepFunctionsApi. You can get the API URL from: API Gateway → WizaringStepFunctionsApi → Stages → v2.
-```
+I'll execute the endpoint of the API: `WizaringStepFunctionsApi`. You can get the API URL from: API Gateway → WizaringStepFunctionsApi → Stages → v2.
+
+```bash
 Request URL: https://<your API URL>/v2/WizaringWorldParalell
 Request Method: POST
 Body: {}
@@ -190,7 +189,7 @@ This is a feature I personally appreciate a lot. It's really helpful during deve
 
 Well, now I'll clean up the AWS account to avoid incurring charges. I'll go back to Cloud9 and execute the following command:
 
-```
+```bash
 $ sam delete
 ```
 
@@ -203,14 +202,4 @@ This is just one of many ways to solve timeout problems in your serverless appli
 Thank you for reaching the end of the article. Please comment below on what you thought and if you encountered any issues replicating the demo. If you want to learn more about Step Functions and API Gateway, visit the following links:
 
 - [Step Functions API Gateway Tutorial](https://docs.aws.amazon.com/step-functions/latest/dg/tutorial-api-gateway.html)
-
 - [Step Functions Workshops](https://catalog.workshops.aws/stepfunctions/en-US)
-
-
-
-
-
-
-
-
-

@@ -28,10 +28,10 @@ Today on Deployed Weekly we kick off with a warm welcome to the 500 new Communit
 
 **Links from the discussion:**
 
-- [AWS Community Builders Program](https://aws.amazon.com/developer/community/community-builders/)
+- [AWS Community Builders Program](https://aws.amazon.com/developer/community/community-builders/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [Cloud Glance](https://cloudglance.dev/)
 - [Amazon Codewhisperer Workshop](https://github.com/aws-samples/amazon-codewhisperer-workshop)
-- [AWS Cloudfront HTTP/3 QUIC Support](https://aws.amazon.com/about-aws/whats-new/2022/08/amazon-cloudfront-supports-http-3-quic/)
+- [AWS Cloudfront HTTP/3 QUIC Support](https://aws.amazon.com/about-aws/whats-new/2022/08/amazon-cloudfront-supports-http-3-quic/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [Come and work with Jacquie and Darko in DevRel](https://www.linkedin.com/pulse/open-roles-join-aws-devrel-felipe-lemaitre/
 )
 

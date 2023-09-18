@@ -30,10 +30,10 @@ Today, on **Deployed Weekly**, we will cover a **Threat Modeling workshop**, dis
 **Links from the discussion:**
 
 - Community Blog Post, by [Geoffrey Wiseman](https://dev.to/geoffreywiseman) - On **tracking down NAT Costs**: [https://dev.to/aws-builders/nat-gateway-charges-from-ecs-service-restart-3p1c](https://dev.to/aws-builders/nat-gateway-charges-from-ecs-service-restart-3p1c)
-- **IAM Roles anywhere:** [https://aws.amazon.com/about-aws/whats-new/2022/07/aws-identity-access-management-iam-roles-anywhere-workloads-outside-aws/](https://aws.amazon.com/about-aws/whats-new/2022/07/aws-identity-access-management-iam-roles-anywhere-workloads-outside-aws/)
-- **Threat modeling workshop:** [https://catalog.workshops.aws/threatmodel/en-US](https://catalog.workshops.aws/threatmodel/en-US)
-- **Amazon Neptune Global Database:** [https://aws.amazon.com/about-aws/whats-new/2022/07/amazon-neptune-global-database/](https://aws.amazon.com/about-aws/whats-new/2022/07/amazon-neptune-global-database/)
-- **AWS Lambda Powertools for TypeScript is now GA:**[https://aws.amazon.com/blogs/compute/simplifying-serverless-best-practices-with-aws-lambda-powertools-for-typescript/](https://aws.amazon.com/blogs/compute/simplifying-serverless-best-practices-with-aws-lambda-powertools-for-typescript/)
+- **IAM Roles anywhere:** [https://aws.amazon.com/about-aws/whats-new/2022/07/aws-identity-access-management-iam-roles-anywhere-workloads-outside-aws/](https://aws.amazon.com/about-aws/whats-new/2022/07/aws-identity-access-management-iam-roles-anywhere-workloads-outside-aws/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- **Threat modeling workshop:** [https://catalog.workshops.aws/threatmodel/en-US](https://catalog.workshops.aws/threatmodel/en-US?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- **Amazon Neptune Global Database:** [https://aws.amazon.com/about-aws/whats-new/2022/07/amazon-neptune-global-database/](https://aws.amazon.com/about-aws/whats-new/2022/07/amazon-neptune-global-database/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- **AWS Lambda Powertools for TypeScript is now GA:**[https://aws.amazon.com/blogs/compute/simplifying-serverless-best-practices-with-aws-lambda-powertools-for-typescript/](https://aws.amazon.com/blogs/compute/simplifying-serverless-best-practices-with-aws-lambda-powertools-for-typescript/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 ## Weekly Builds - AWS CLI & CDK Up and Running
 
@@ -79,9 +79,9 @@ Here are the steps needed to install the [AWS CLI](https://docs.aws.amazon.com/c
 
 ## Links from the discussion
 
-- AWS CLI: [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-- AWS CDK: [https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)
-- AWS S3 Presign objects: [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/presign.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/presign.html)
+- AWS CLI: [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- AWS CDK: [https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- AWS S3 Presign objects: [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/presign.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/presign.html?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 **🐦 Reach out to the hosts and guests:**
 

@@ -4,6 +4,8 @@ description: "Run your training code on AWS with minimum effort by bringing your
 tags:
     - sagemaker
     - ai-ml
+waves:
+  - dataml
 authorGithubAlias: kazdaghli
 authorName: Sarra Kazdaghli
 additionalAuthors:
@@ -363,9 +365,9 @@ The following graph provides some recommendation on the method to use:
 
 ## Useful Resources
 
-* [Bring your own script AWS blog](https://aws.amazon.com/blogs/machine-learning/bring-your-own-model-with-amazon-sagemaker-script-mode/)
+* [Bring your own script AWS blog](https://aws.amazon.com/blogs/machine-learning/bring-your-own-model-with-amazon-sagemaker-script-mode/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bring-your-own-machine-learning-code-to-aws)
 * [Bring your own container examples](https://sagemaker-examples.readthedocs.io/en/latest/training/bring_your_own_container.html)
-* [Run your local machine learning code AWS blog](https://aws.amazon.com/blogs/machine-learning/run-your-local-machine-learning-code-as-amazon-sagemaker-training-jobs-with-minimal-code-changes/)
+* [Run your local machine learning code AWS blog](https://aws.amazon.com/blogs/machine-learning/run-your-local-machine-learning-code-as-amazon-sagemaker-training-jobs-with-minimal-code-changes/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bring-your-own-machine-learning-code-to-aws)
 
 ## About the Authors
 

@@ -30,9 +30,9 @@ To understand the basic flow of application deployment into Kubernetes, we have 
 I divided the diagram above into the five steps explained below to clarify the activities involved:
 
 1. First, we have to build our container image, setting an image name and a tag. Once the image is created, we can test the container locally before going further.
-2. Once that the container works properly, we have to push the image into a container registry. In our case, we are going to use Amazon ECR. All the required steps to get here are in our [first post](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/).
-3. When the container image is stored on the container registry, we have to create a Kubernetes manifest so we can send instructions to the cluster to create a pod, a replica set, and a service. We also tell the cluster where to retrieve the container image and how to update the application version. If you want to remember how, this a good time to review the [second post](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/).
-4. Now, we are ready to create our Kubernetes cluster in order to get the credentials. This is done once per project. We learn how to create and connect to a Kubernetes cluster in our [third post](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/).
+2. Once that the container works properly, we have to push the image into a container registry. In our case, we are going to use Amazon ECR. All the required steps to get here are in our [first post](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min).
+3. When the container image is stored on the container registry, we have to create a Kubernetes manifest so we can send instructions to the cluster to create a pod, a replica set, and a service. We also tell the cluster where to retrieve the container image and how to update the application version. If you want to remember how, this a good time to review the [second post](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care).
+4. Now, we are ready to create our Kubernetes cluster in order to get the credentials. This is done once per project. We learn how to create and connect to a Kubernetes cluster in our [third post](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform).
 5. And last but not least, we use Kubectl to deploy our application to Kubernetes using the Manifest. We are going to learn about this final step in the walk-through below.
 
 ## Deploy the Application
@@ -296,4 +296,4 @@ kubectl get hpa -n tests
 
 I hope you enjoy this post as much as I enjoyed writing it! And I also hope that it gave you some clarification from the previous posts. If everything went well, you learned how to deploy an application to Kubernetes, create services, access the commands to create namespaces and work through namespaces, check for object descriptions, review the logs of your application, scale your application, and create rules for autoscaling.
 
-In the [next post](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/) we are going to develop one of the core parts of Picturesocial, the API for image recognition and auto tagging using Amazon Rekognition!
+In the [next post](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning) we are going to develop one of the core parts of Picturesocial, the API for image recognition and auto tagging using Amazon Rekognition!

@@ -38,6 +38,14 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 <a href="https://twitch.tv/aws"><img src="images/twitch_button_small.jpg" style="margin-left: 0" alt=""/></a>
 
 ---
+### SEASON 02
+
+| Episode | Name | Date | Guest | Link to Show Notes
+|--|--|--|--|--|
+| S02E01 | Let's look at Llama2, Falcon and more! New season start | 2023-08-14  | Emily Webber | [Show notes](/livestreams/build-on-generative-ai/2023-08-14) |
+| S02E02 | Defining best for long context Language Models | 2023-08-21  | David Bounds | [Show notes](/livestreams/build-on-generative-ai/2023-08-21) |
+| S02E03 | Streaming support on SageMaker endpoints | 2023-09-11  | Raghu Ramesha | [Show notes](/livestreams/build-on-generative-ai/2023-09-11) |
+
 
 ### SEASON 01
 
@@ -52,11 +60,11 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 | S01E07 | Call center analytics | 2023-03-13 | Babu Srinivasan & Chris Lott  | [Link to Recording](https://www.twitch.tv/videos/1764149016) |
 | S01E08 | Hyper Parameter Tuning | 2023-03-20 | Joao | [Link to Recording](https://www.twitch.tv/videos/1874381282) |
 | S01E09 | Generative AI as a Service | 2023-03-27 | Joao Moura | [Link to Recording](https://www.twitch.tv/videos/1779030313) |
-| S01E10 | Foundation Models on SagemMaker | 2023-04-03 | Arun Shankar | [Link to Recording](https://www.twitch.tv/videos/1783794727) |
+| S01E10 | Foundation Models on SageMaker | 2023-04-03 | Arun Shankar | [Link to Recording](https://www.twitch.tv/videos/1783794727) |
 | S01E11 | Retrieval Augmented Generation | 2023-04-10 | Emily Webber | [Link to Recording](https://www.twitch.tv/videos/1874397501) |
 | S01E12 | Stable Diffusion on Trainium | 2023-04-17 | KC Tung | [Link to Recording](https://www.twitch.tv/videos/1887068591) |
 | S01E13 | Open Source LLM Evaluation with HELM | 2023-04-24 | Gili Nachum | [Link to Recording](https://www.twitch.tv/videos/1802472662) |
-| S01E14 | AI Code Generation with Amazong CodeWhisperer | 2023-05-01  | David Ernst | [Link to Recording](https://www.twitch.tv/videos/1838758252) |
+| S01E14 | AI Code Generation with Amazon CodeWhisperer | 2023-05-01  | David Ernst | [Link to Recording](https://www.twitch.tv/videos/1838758252) |
 | S01E15 | TensorBoard and SageMaker | 2023-05-08| Arun Lokanatha | [Link to Recording](https://www.twitch.tv/videos/1887068690) |
 | S01E16 | Generative AI with AI21 Labs | 2023-05-15  | Yuval Belfer | [Link to Recording](https://www.twitch.tv/videos/1820667936) |
 | S01E17 | Reinforcement learning with Human Feedback | 2023-05-22 | EK | [Link to Recording](https://www.twitch.tv/videos/1874397560) |
