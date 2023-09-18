@@ -161,7 +161,7 @@ Hit this end point url in the browser and this is how the website looks .
 ![Website display ](images/website-2.png)
 ## What's Next ?
 
-I want to try this setup using some other LLM's like Cohere and other Vector DB's like Redis. Hopefully, the above shows you how you can build your own production ready full stack pipelines for Generative AI Models and integrate the pipeline with your front end and embedded NLP chatbots. Let me know other things that you want to read about using Open source , analytics, machine learning and AWS technologies!
+I want to try this setup using some other LLM's like Cohere and other Vector DB's like Redis. Hopefully, the above shows you how you can build your own production ready full stack pipelines for Large Language Models(LLM's) and integrate the pipeline with your front end and embedded NLP chatbots. Let me know other things that you want to read about using Open source , analytics, machine learning and AWS technologies!
 
 As you continue on your learning journey, I encourage you to delve deeper into Embeddings, Vector Databases, LangChain, several other LLM Models that are available on Sagemaker Jumpstart as well as AWS tools that we used in this tutorail like AWS OpenSearch, AWS Sagemaker, Docker Containers, Fargate. Here are some next steps to help you master these technologies:
 
