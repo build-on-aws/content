@@ -124,7 +124,7 @@ Build a Docker container from the Dockerfile provided in the same folder and pus
 
 ![Realtime In Context Learning Workflows](images/ecr-qa-container.png)
 
-Create the Cloudformation stack to build the ECS Cluster with a Fargate task by importing the Cloudformation tempalte from `Infrastructure/genai-chatbot-llm-rag-langchain.yaml` file. Override the following parameters as shown in the screen shot below and this will build out the ECS cluster with the Fargate task exposing the API .
+Create the Cloudformation stack to build the ECS Cluster with a Fargate task by importing the Cloudformation template from `Infrastructure/genai-chatbot-llm-rag-langchain.yaml` file. Override the following parameters as shown in the screen shot below and this will build out the ECS cluster with the Fargate task exposing the API .
 
 ![Cloudformation template for API ](images/cloudformation-qa-api.png)
 
