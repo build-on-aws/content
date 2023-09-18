@@ -1,6 +1,6 @@
 ---
-title: "Automatically Manage DNS Records for Your Microservices in EKS with ExternalDNS"
-description: "How to collect, aggregate, and analyze metrics from your containerized applications using Amazon CloudWatch Container Insights."
+title: "Automatically Manage DNS Records for Your Microservices in Amazon EKS with ExternalDNS"
+description: "How to automate management of DNS records for your Microservices running in Amazon EKS using External DNS add-on"
 tags:
     - external-dns
     - eks
