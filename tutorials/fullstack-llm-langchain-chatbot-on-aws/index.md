@@ -28,7 +28,8 @@ In today’s data-driven landscape, extracting meaningful insights from unstruct
 |-----|
 
 ## What We're Going to Build
-In this example today, I want to mimic the problem that is faced by many enterprises. Most of today's data is not structured but is rather unstructured in the form of audio and video transcripts, pdf and word documents, manuals, scanned notes, social media dumps, etc. We will use flan-t5-xxl model as the Large Language Model. This model can produce summaries, Q&A responses from unstructured texts.
+In this example today, I want to mimic the problem that is faced by many enterprises. Most of today's data is not structured but is rather unstructured in the form of audio and video transcripts, pdf and word documents, manuals, scanned notes, social media dumps, etc. We will use flan-t5-xxl model as the Large Language Model. This model can produce summaries, Q&A responses from unstructured texts. Here is an overall architecture showing the various bulidng blocks.
+![Shows high level architecture](images/overallarchitecture.png)
 
 ## Let's start with some basics
 We will use a technique called as "In-Context" learning to inject domain or use case specific "Context" into our LLM. In my case, I have an unstructured pdf manual of BMW that I want to add as "Context" for my LLM and I want my LLM to answer questions about this manual. As simple as that!. I aim to go a step further by developing a real-time API that receives questions, forwards them to my backend, and is accessible from my open-source chatbot embedded on my website, allowing us to build the entire user experience and gain insights into various concepts throughout the process.
