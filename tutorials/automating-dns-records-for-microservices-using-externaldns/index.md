@@ -54,8 +54,8 @@ This tutorial is the second part of a series on managing high traffic microservi
 *  **External DNS Add-on Setup:** Deploy the[ExternalDNS](https://github.com/kubernetes-sigs/external-dns) add-on on your Amazon EKS cluster and configure it to synchronize Kubernetes service DNS records with your Route53 domain.
 * **Sample Application Deployment:** As a practical example, we'll walk you through the steps to build and expose the "2048 Game Sample Application" on port 80. To facilitate this, we'll utilize custom annotations for [ExternalDNS](https://github.com/kubernetes-sigs/external-dns), particularly the 'hostname' annotation, which instructs the [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) controller on how to access the Kubernetes service via the specified HTTP path. For more annotations, see [Setting up ExternalDNS for Services on AWS](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/#annotations).
 
->*Note that even if you're still within your initial 12-month AWS Free Tier period, the Route 53 hosted zone falls outside the AWS free tier, hence usage could result in additional charges.*
->*The External DNS add-on is self-managed, and customers are responsible for overseeing its lifecycle and maintenance.*
+> *Note that even if you're still within your initial 12-month AWS Free Tier period, the Route 53 hosted zone falls outside the AWS free tier, hence usage could result in additional charges.*  
+*The External DNS add-on is self-managed, and customers are responsible for overseeing its lifecycle and maintenance.*
 
 ## Step 1: Configure Cluster Environment Variables
 
@@ -183,7 +183,7 @@ The expected output should look like this:
 
 ## Step 3: Verify or Create the IAM Role for Service account 
 
-Make sure the “external-dns” service account is correctly set up in the “kube-system” namespace in your cluster.
+Make sure the "external-dns" service account is correctly set up in the "kube-system" namespace in your cluster.
 
 ```
 kubectl get sa external-dns -n kube-system -o yaml  
@@ -206,7 +206,7 @@ metadata:
   uid: 68923daf-7865-4ffe-dfgd-01d98a00a01a
 ```
 
-**Optionally**, if you do not already have an IAM role set up, or you receive an error, the following command will create the IAM Role along with the service account names “external-dns”. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
+**Optionally**, if you do not already have an IAM role set up, or you receive an error, the following command will create the IAM Role along with the service account names "external-dns". Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
 
 1. Configure IAM permissions to allow ExternalDNS pods to manage Route 53 records in your AWS account.
 
@@ -252,7 +252,7 @@ eksctl create iamserviceaccount --name external-dns --namespace kube-system --cl
 
 ## Step 4: Install the External DNS Add-On
 
-In this section, you will deploy the ExternalDNS add-on within your EKS cluster. The ExternalDNS utility utilizes DNS Resource Records to manage AWS Route 53 entries. These DNS Resource Records define custom configurations such as DNS entries and hosted zones, allowing the Kubernetes cluster in the "kube-system" namespace to administer them. This allows the ExternalDNS add-on to manage dns records for `my-externaldns-demo.com` hosted zone. To learn more, see [ExternalDNS parameters](https://artifacthub.io/packages/helm/bitnami/external-dns#external-dns-parameters).
+In this section, you will deploy the ExternalDNS add-on within your EKS cluster, specifically in the "kube-system" namespace. You will further configure the add-on to synchronize DNS records for the  `my-externaldns-demo.com` hosted zone. This configuration enables the ExternalDNS add-on to automate the management of DNS records for services running in your Kubernetes cluster, ensuring that these services can be accessed using domain names.To learn more, see [ExternalDNS parameters](https://artifacthub.io/packages/helm/bitnami/external-dns#external-dns-parameters).
 
 1. Update the kubeconfig file to set the context to the current EKS cluster.
 
