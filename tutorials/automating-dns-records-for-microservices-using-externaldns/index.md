@@ -270,7 +270,7 @@ helm upgrade --wait --timeout 900s --install externaldns-release \
   --set domainFilters\[0\]="${AWS_ROUTE53_DOMAIN}" \
   --set serviceAccount.name=external-dns \
   --set serviceAccount.create=false \
-  --set `policy`=sync \
+  --set policy=sync \
   oci://registry-1.docker.io/bitnamicharts/external-dns --namespace kube-system
 ```
 
@@ -300,7 +300,7 @@ To verify that external-dns has started, run:
 
 ## Step 5: Verify the functionality of ExternalDNS
 
-Now that we have set up the external DNS, we can allow users outside the cluster to access containerized applications using human-readable URLs. In this section, we will deploy the popular '2048 game' as a sample application within the cluster. The manifest we provide includes custom annotations for the external DNS, specifically for the hostname. These annotations work together with the external DNS controller to access the Kubernetes service through an HTTP path. For more annotations, refer to the [External DNS](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/#annotations) documentation.
+Now that we have set up the external DNS, we can allow users outside the cluster to access containerized applications using human-readable URLs. In this section, we will deploy the popular "2048 game" as a sample application within the cluster. The manifest we provide includes custom annotations for the external DNS, specifically for the hostname. These annotations work together with the external DNS controller to access the Kubernetes service through an HTTP path. For more annotations, refer to the [External DNS](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/#annotations) documentation.
 
 1. Define the `SUB_DOMAIN` environment variable. 
 
