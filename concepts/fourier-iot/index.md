@@ -9,6 +9,7 @@ tags:
   - aws
 authorGithubAlias: vsenger
 authorName: Vinicius Senger
+movedFrom: /posts/fourier-iot
 date: 2023-09-19
 ---
 |ToC|
