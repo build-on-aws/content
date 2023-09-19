@@ -106,7 +106,7 @@ Remember, this step takes a while to run. The [docs](https://docs.aws.amazon.com
 
 With that in mind, plan to set up AWS Resource Explorer at least a few hours before using it.  
 
-#### Step 2: Find all resources in your account
+#### Step 2: Find All Resources in Your Account
 
 Once AWS Resource Explorer has finished creating *indexes* for each region and creating a *view*, you open the view to find your existing resources.  
 
