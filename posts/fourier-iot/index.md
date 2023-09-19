@@ -5,7 +5,7 @@ tags:
   - cloud
   - iot
   - java
-  - amazon-xorretto
+  - amazon-corretto
   - aws
 authorGithubAlias: vsenger
 authorName: Vinicius Senger
@@ -117,20 +117,20 @@ Before we move to our Sketch to detect notes, we will create a **Thing** (yes, t
 
 1. Open your AWS Console and go to AWS IoT Core.
 2. Click "All Devices" > "Things" > "Create Things".
-    ![AWS IoT Core Screenshot](./images/iot01.png)
+![AWS IoT Core Screenshot](./images/iot01.png)
 3. Choose "Create single thing".
-    ![AWS IoT Core Screenshot](./images/iot02.png)
+![AWS IoT Core Screenshot](./images/iot02.png)
 4. Name it fft_notes and configure it with default options.
-    ![AWS IoT Core Screenshot](./images/iot03.png)
+![AWS IoT Core Screenshot](./images/iot03.png)
 5. Choose "Auto-generate a new certificate".
-    ![AWS IoT Core Screenshot](./images/iot04.png)
+![AWS IoT Core Screenshot](./images/iot04.png)
 6. Skip the Attach policies.
-    ![AWS IoT Core Screenshot](./images/iot05.png)
+![AWS IoT Core Screenshot](./images/iot05.png)
 7. Download the device certificate, keys, and root CA.
-    ![AWS IoT Core Screenshot](./images/iot06.png)
+![AWS IoT Core Screenshot](./images/iot06.png)
 8. Now click on the AWS IoT > Settings in the main AWS IoT Core Console.
 9. Copy the endpoint address to some place. We will need this information to configure our Processing.org connection to AWS IoT Core.
-    ![AWS IoT Core Screenshot](./images/iot07.png)
+![AWS IoT Core Screenshot](./images/iot07.png)
 
 Now we have a representation of our notes Thing in the AWS Cloud and also the security keys to communicate using TLS 1.2.
 
