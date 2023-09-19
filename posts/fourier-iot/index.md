@@ -1,13 +1,13 @@
 ---
 title: "Use Fast Fourier Transform to Detect Musical Notes and Make them Command IoT Devices"
-description: "This step-by-step tutorial will show you how to use Java, Amazon Corretto, Ukulele and Fast Fourier Transform to make your IoT devices dance to the music."
+description: "This step-by-step guide will show you how to use Java, Amazon Corretto, Ukulele and Fast Fourier Transform to make your IoT devices dance to the music."
 tags:
   - cloud
   - iot
   - java
 authorGithubAlias: vsenger
 authorName: Vinicius Senger
-date: 2023-08-21
+date: 2023-09-19
 ---
 
 Fourier Transform algorithms show up all over the place: in image recognition, instrument tuners, signal processing in complex medical devices, machine learning algorithms, cryptography, and more. But how exactly do they work - and why are they so useful in so many contexts?
