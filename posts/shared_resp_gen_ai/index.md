@@ -34,7 +34,7 @@ The transformative power of Generative AI is evident across various domains, fro
 * **Productivity:** One [study](https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged) found that consultants using AI finished 12.2% more tasks on average, completed tasks 25.1% more quickly, and produced 40% higher quality results than those without.
 * **Art & Design:** AI-powered tools, such as Stable Diffusion, can create intriguing and [unique visual arts](https://www.reddit.com/r/StableDiffusion/comments/16ew9fz/spiral_town_different_approach_to_qr_monster/), pushing the boundaries of creativity.
 * **Research & Innovation:** [Drug discovery](https://blogs.nvidia.com/blog/2023/06/27/insilico-medicine-uses-generative-ai-to-accelerate-drug-discovery/) and material science have seen AI models propose new compounds or solutions that might have taken humans years to conceptualize.
-![Reddit user Ugleh Spiral Town art](images/spiral.png)
+![Reddit user Ugleh Spiral Town art](images/spiral.jpg)
 
 ### The Bad: Pitfalls of Generative AI
 
@@ -51,7 +51,7 @@ As we've seen, Generative AI holds both incredible promise and potential pitfall
 Long before the ethical challenges of Generative AI came into the spotlight, the cloud computing industry grappled with its own set of complexities. As organizations migrated their operations to the cloud, questions about security, accountability, and responsibility became paramount. Who was responsible if data was breached? Who ensured the underlying infrastructure was secure? The answers were not always clear-cut.
 
 Enter the AWS Shared Responsibility Model, a framework that brought clarity by distinctly delineating the responsibilities between the cloud provider and the customer.
-![AWS Shared Responsibility Model](images/aws_shared_resp.png)
+![AWS Shared Responsibility Model](images/aws_shared_resp.jpg)
 
 This clear division was a game-changer. It not only provided clarity but also empowered organizations. They could now harness the power of the cloud with a clear understanding of their role in ensuring security.
 
