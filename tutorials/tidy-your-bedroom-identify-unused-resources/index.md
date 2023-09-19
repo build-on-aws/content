@@ -70,9 +70,9 @@ AWS Resource Explorer does not charge for usage, but you do have to set it up an
 The following tutorial steps will show you how to:
 
 1. Set up AWS Resource Explorer
-1. Find all resources in your account
-1. Find specific resource types in your account
-1. Create a custom view
+2. Find all resources in your account
+3. Find specific resource types in your account
+4. Create a custom view
 
 *Note: AWS Resource Explorer does not support every single type of resource that exists. Some may not be supported yet or may be added in the future. It does support many of the common resource types, and you can check the whole list of [supported types](https://docs.aws.amazon.com/resource-explorer/latest/userguide/supported-resource-types.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq).*  
 
@@ -144,13 +144,13 @@ With that understanding, I decide to start with DynamoDB resources. You may not 
 It's possible that you will need an additional view for certain resource types. For instance, a lecturer who provisioned a separate Lambda function in a single region for each of their students might want a view showing only these resources.
 
 1. From AWS Console for AWS Resource Explorer, use the left navigation pane to go to `View`.
-1. Select `Create View`
-1. Add any name (e.g., `filtered-resources`)
-1. Select the region. In my case, it is **Europe (Ireland) eu-west-1**.
-1. Select `Include only resources that match a specified filter`
+2. Select `Create View`
+3. Add any name (e.g., `filtered-resources`)
+4. Select the region. In my case, it is **Europe (Ireland) eu-west-1**.
+5. Select `Include only resources that match a specified filter`
 
-1. Add the filter query, in this example, `resourcetype:lambda:function region:eu-west-1` will return only **Lambda functions** in the region **Europe (Ireland) eu-west-1**. You can check all the [query syntax](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html?icmpid=docs_arex_hp_ss_create_resourcetype_wizard&sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) for more complex queries.
-1. Select `Create View`.
+6. Add the filter query, in this example, `resourcetype:lambda:function region:eu-west-1` will return only **Lambda functions** in the region **Europe (Ireland) eu-west-1**. You can check all the [query syntax](https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html?icmpid=docs_arex_hp_ss_create_resourcetype_wizard&sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) for more complex queries.
+7. Select `Create View`.
 
 ![A create view widget](images/filtered-view.png "A create view widget")
 
