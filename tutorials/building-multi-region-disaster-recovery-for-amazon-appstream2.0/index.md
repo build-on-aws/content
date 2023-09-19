@@ -1,5 +1,5 @@
 ---
-title: "Building a multi-region disaster recovery environment for Amazon AppStream 2.0"
+title: "Building a Multi-Region Disaster Recovery Environment for Amazon AppStream 2.0"
 
 description: "A guide on FSLogix CloudCache and replication software for resilience."
 
