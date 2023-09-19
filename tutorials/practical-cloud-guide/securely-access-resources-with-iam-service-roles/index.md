@@ -338,8 +338,4 @@ Our next article will cover storage and the different forms of cloud storage. We
 (https://community.aws/concepts/how-to-store-data-in-the-cloud?sc_channel=el&sc_campaign=tutorial&sc_content=itpros&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=other&sc_medium=body).
 
 
-
-
-Also end with this line to ask for feedback:
->>>>>>> aaed6a3 (initial)
 If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
