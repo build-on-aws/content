@@ -419,7 +419,7 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
 5.  Replace **okta**, **oktaLondon**, **eu-west-2**, **0123456789** and **eu-central-1** with values that match your environment.
 
 6. Edit your Okta user assignments to use the Okta role created in step 8.4. 
-    Log in into your Okta admin console. From the left panel, select
+    Log into your Okta admin console. From the left panel, select
     **Application** \> **Application**. 
     Select the Application, In this blog it is called AppStream Primary, 
     Select **Assignments**, Edit (pencil icon), Select the correct Role, in my account it is called “oktarole”, edit the users domain (@as2.local) in the UserName field to match the Amazon AppStream 2.0 fleet domain, if needed and **Save.** Repeat for DR region.
@@ -459,12 +459,12 @@ In older versions of FSlogix, free space would not be reclaimed and users would 
     ![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a new size of 397,312 KB](images/image12.png "Figure 12. EC2 Windows File Explorer Connected to FSx Primary and DR" )
 
 
-1.  End the Amazon AppStream 2.0 streaming session
+1.  End the Amazon AppStream 2.0 streaming session.
 
 1.  Simulate a region failure by blocking all inbound TCP port 445 to
     Primary SMB location.
 
-1.  Connect to your Okta DR application, in my example it the Okta
+1.  Connect to your Okta DR application, in my example the Okta
     application would be called “AppStream 2.0 DR”.
 
 1.  If you have logged in and your documents are all there, it means at
