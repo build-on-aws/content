@@ -1,6 +1,6 @@
 ---
-title: "Tidy Your Bedroom – Identify Unused Resources"
-description: "How to find unneeded cloud resources easily with AWS Resource Explorer"
+title: "Tidy Your Bedroom: Identify Unused Resources"
+description: "How to find unneeded cloud resources easily with AWS Resource Explorer."
 tags:
     - tutorials
     - cost-optimization
@@ -20,16 +20,15 @@ showInHomeFeed: true
 | ToC |
 |-----|
 
-Have you ever created AWS resources for a quick project and then forgot about them? I definitely have! When I'm learning a new service, or building a quick prototype, it's easy to spin up resources to try them out. However, when it comes to paying the bill, I only want to pay for what I need and use. This tutorial will show you how to identify unneeded resources with AWS Resource Explorer.
+Have you ever created AWS resources for a quick project and then forgotten about them? I definitely have! When I'm learning a new service or building a quick prototype, it's easy to spin up resources to try them out. However, when it comes to paying the bill, I only want to pay for what I need and use. This tutorial will show you how to identify unneeded resources with AWS Resource Explorer.
 
 ## Modern Cloud Development
 
-I usually work with students and academics, but this topic applies to experienced developers too. When I was learning to code, long, long ago, the cloud didn't exist, so every resource I needed was created on my local device. This was limiting in some ways as my personal desktop might not be as powerful as the server that my code would eventually run on. This meant my local database server might have a slower disk and I might only have a quarter of the RAM of the server. However, I could quickly stop locally running services and delete them from my limited hard disk space. If I forgot to do that, I'd quickly remember that I had a local server running when I tried to use my computer for anything else!
+I usually work with students and academics, but this topic applies to experienced developers too. When I was learning to code, long, long ago, the cloud didn't exist, so every resource I needed was created on my local device. This was limiting in some ways as my personal desktop might not be as powerful as the server that my code would eventually run on. This meant my local database server might have a slower disk, and I might only have a quarter of the RAM of the server. However, I could quickly stop locally running services and delete them from my limited hard disk space. If I forgot to do that, I'd quickly remember that I had a local server running when I tried to use my computer for anything else!
 
-Nowadays, I develop on the cloud, which gives me access to far greater computing power than I could ever have on my local device.  
-But with great power comes great responsibility, because I might forget to delete the resources I'm creating as:  
+Nowadays, I develop on the cloud, which gives me access to far greater computing power than I could ever have on my local device. But with great power comes great responsibility, because I might forget to delete the resources I'm creating as:  
 
-1. they are quick and easy to provision, use, and forget about or  
+1. they are quick and easy to provision, use, and forget about, or  
 2. they are supplementary resources that AWS automatically creates for me, such as an Amazon Simple Storage Service (S3) bucket for Amazon SageMaker Studio.
 
 ## Clean as You Go
@@ -44,7 +43,7 @@ No one likes having to tidy their bedroom when they're tired and just want to sl
 ![A photo of messy clothing strewn about on shelves](images/AdobeStock_65680526.jpeg "Messy bedrooms / messy cloud resources")
 Following a 'Clean as You Go' approach is better, and avoids a messy bedroom and AWS account. In case you didn't do that, I'm going to explain how unneeded resources can quickly add up, and how to identify them in this tutorial.
 
-## How to Identify Unused Resources?
+## How to Identify Unused Resources
 
 Recently I was using [**AWS Amplify**](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq) to make a workshop for students learning serverless app development. Every time I tested an iteration of the workshop, I created an IAM user with only the minimum permissions needed to use Amplify. Amplify makes it easy to provision resources like storage, functions, NoSQL database tables and authentication. I diligently deleted the IAM user when each time I was finished, but that only removes the user, not the resources Amplify created.
 
@@ -77,14 +76,14 @@ The following tutorial steps will show you how to:
 
 *Note: AWS Resource Explorer does not support every single type of resource that exists. Some may not be supported yet or may be added in the future. It does support many of the common resource types, and you can check the whole list of [supported types](https://docs.aws.amazon.com/resource-explorer/latest/userguide/supported-resource-types.html?sc_channel=el&sc_campaign=costwave&sc_content=tidy-your-bedroom&sc_geo=mult&sc_country=mult&sc_outcome=acq).*  
 
-#### Step 1: Set Up AWS Resource Explorer
+### Step 1: Set Up AWS Resource Explorer
 
 This is a one time step that only needs to be completed the first time you want to use AWS Resource Explorer.  
 
 *Note:  This step can take some time to complete, especially if your account has lots of resources in many different regions. You should wait until this step is complete before proceeding to step 2.*
 
-1. From AWS Console, search for `AWS Resource Explorer` using the search bar or the shortcut *Alt + S*
-1. Select AWS Resource Explorer:
+1. From AWS Console, search for `AWS Resource Explorer` using the search bar or the shortcut *Alt + S*.
+2. Select AWS Resource Explorer:
 
 ![Search bar showing AWS Resource Explorer](images/console-search-bar.png "Search for AWS Resource Explorer")
 
@@ -106,12 +105,12 @@ Remember, this step takes a while to run. The [docs](https://docs.aws.amazon.com
 
 With that in mind, plan to set up AWS Resource Explorer at least a few hours before using it.  
 
-#### Step 2: Find All Resources in Your Account
+### Step 2: Find All Resources in Your Account
 
 Once AWS Resource Explorer has finished creating *indexes* for each region and creating a *view*, you open the view to find your existing resources.  
 
 1. From AWS Console for AWS Resource Explorer, use the left navigation pane to go to `Resource search`.
-1. The default view will open, and this may show a banner at the top stating `You can start searching immediately while we begin indexing the resources in your account. You might see incomplete results until indexing is complete, especially for cross-Region searches.`
+2. The default view will open, and this may show a banner at the top stating `You can start searching immediately while we begin indexing the resources in your account. You might see incomplete results until indexing is complete, especially for cross-Region searches.`
    * I recommend waiting for this indexing to be complete, because otherwise you may miss resources that have not been indexed yet.
 
 In my case, I had **724** resources!
@@ -122,15 +121,15 @@ I want to narrow down the scope to resource types I *know* should be removed. To
 
 **Note:** I can't just delete **everything**, as that would be reckless; some of the resources are important and should not be touched!  
 
-#### Step 3: Find Specific Resource Types in Your Account
+### Step 3: Find Specific Resource Types in Your Account
 
 However, I know that I should have no **DynamoDB tables**, **S3 buckets**, or **Lambda functions** right now. These were all created by Amplify and SageMaker (on my behalf).  
 
 With that understanding, I decide to start with DynamoDB resources. You may not be able to follow these steps exactly if you do not have any DynamoDB tables in your account, but you can use any other resource type *that you are sure is unneeded* and follow the same steps.  
 
-1. Open the list `All types` and select `DynamoDB:table`
-1. A filtered view will show only DynamoDB tables in all regions.
-1. If you have too many to manage in different regions, you can filter by region too
+1. Open the list `All types` and select `DynamoDB:table`.
+2. A filtered view will show only DynamoDB tables in all regions.
+3. If you have too many to manage in different regions, you can filter by region too.
 
 ![Filtered view showing only DynamoDB tables](images/dynamodb-filter.png "Filtered view showing DynamoDB tables")  
 
@@ -140,7 +139,7 @@ With that understanding, I decide to start with DynamoDB resources. You may not 
 
 *Note: If you have a great number of resources to be deleted, manually deleting them this way might take a **long** time, as each deletion will be challenged to ensure you are certain. If you are an advanced user, an AWS CLI query will list all the resources of a certain type in a certain region and you can pipe that output to a CLI delete function. This is beyond the scope of this post, but an option if you are comfortable with the CLI. If you are a student, I recommend understanding the AWS Console first, and then learning how to use the AWS CLI.*
 
-#### Step 4: Create a Custom View
+### Step 4: Create a Custom View
 
 It's possible that you will need an additional view for certain resource types. For instance, a lecturer who provisioned a separate Lambda function in a single region for each of their students might want a view showing only these resources.
 
