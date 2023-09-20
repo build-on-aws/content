@@ -20,11 +20,13 @@ showInHomeFeed: true
 
 ## Introduction
 
-Congratulations, if you have decided to embark on your cloud journey with Amazon Web Services (AWS). Its been more than a decade since I have been working with AWS products and services - as a customer and as an employee. Throughout this time, I've had the privilege of observing the curiosity of builders like yourself, frequently posing remarkably similar questions about how to set the foundation right.
+🎉 Congratulations, if you have decided to embark on your cloud journey with Amazon Web Services (AWS). 
+
+Its been more than a decade since I have been working with AWS products and services - as a customer and as an employee. Throughout this time, I've had the privilege of observing the curiosity of builders like yourself, frequently posing remarkably similar questions about how to set the foundation right.
 
 Setting up an AWS cloud account is a significant step, but navigating the vastness of its capabilities requires more than just sign-up knowledge. Over the years, certain patterns of best practices have emerged, strategies that make the difference between a smoothly operating AWS environment and one that is riddled with challenges. Ensuring a solid foundation in your AWS cloud account is paramount to optimize costs, enhance security, and ensure smooth operations.
 
-Today, I'll share five of those best practices for AWS cloud account fundamentals, to guide you in setting up and maintaining your AWS environment in the most effective way possible.. By the end of this read, you'll have insights drawn from years of experience, ensuring that your cloud journey is set on the right path from the very beginning.
+Today, I'll share five of those best practices for AWS cloud account fundamentals, to guide you in setting up and maintaining your AWS environment in the most effective way possible. By the end of this read, you'll have insights drawn from years of experience, ensuring that your cloud journey is set on the right path from the very beginning.
 
 ## 1. Understanding AWS Accounts
 
@@ -34,7 +36,7 @@ An [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) is h
 
 Before you begin creating the account consider following scenarios:
 
-### Is this a personal or business account?
+### 1.1 Is this a personal or business account?
 
 - If this is your **personal account**, ensure you are creating this account with right intentions. The reason I say this is, many students or beginners create AWS account with a credit card (if they can get any), and then regret when resources are left unused and they receive a bill they cannot afford. If you are just starting to learn and want to play with AWS, then **check out [AWS Educate Account](https://aws.amazon.com/education/awseducate/)**. It requires **no credit card** and provides labs that you can play and get AWS experience with. Once you have some experience, you can then create an AWS account with a credit card and continue exploring.
 
@@ -44,7 +46,7 @@ Before you begin creating the account consider following scenarios:
 
 If you wish to report a suspicious email claiming to be from Amazon that you believe is a forgery, you may submit a report. You may also forward phishing emails and other suspected forgeries directly to stop-spoofing@amazon.com. To seek [more information on suspicious emails](https://aws.amazon.com/contact-us/)
 
-### Do you need single or multiple AWS Accounts?
+### 1.2 Do you need single or multiple AWS Accounts?
 
 There are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts for security control and data access, or different teams and business units. Some customers have benefitted from keeping their production and non-production workloads in different accounts. This also gives them visibility on their development vs production spend. These are listed in detail in the AWS Documentation for [Do I need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html). Use AWS Organizations, which is a free AWS service to manage multiple accounts in your organizations.
 
@@ -104,7 +106,7 @@ You can also use the [AWS Pricing Calculator](https://calculator.aws/) to cost e
 
 ![Pricing Calculator](images/pricing-calculator.png)
 
-### How can you ensure that you do not exceed the Free tier limits?
+### 3.1 How can you ensure that you do not exceed the Free tier limits?
 
 1. As soon as you create the account, the first step is to **turn on AWS Free Tier usage alerts**. It is important to note, the AWS Free Tier usage alerts automatically notifies you over email when you **exceed 85 percent** of your Free Tier limit for each service:
 
@@ -134,7 +136,7 @@ Shared Security model? limits in place, UPDATE
 
 After you set your billing alerts, create AWS Identity and Access Management (IAM) User(s). Even if this is your personal account and you are the only one using this, DO NOT use AWS root (i.e. email id and password based) login. Create an IAM User with Administrative access for yourself and use that to login to the AWS Console.
 
-### Why securing root access is of utmost importance
+### 4.1 Why securing root access is of utmost importance
 
 The root user credentials can perform all actions on your account, including actions that ONLY the root user can perform like change account details or close the account. If you, by any means, unknowingly, leak the credentials, your account and personal details will be at risk. You can find detailed list of [tasks that require root user credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-tasks.html)
 
@@ -149,7 +151,7 @@ To secure the root user credentials:
 - You use an access key (an access key ID and secret access key) to make programmatic requests to AWS. Do NOT create an AWS account root user access key.
 
 
-### IAM User Best Practices
+### 4.2 IAM User Best Practices
 
 As mentioned earlier, create an IAM User with administrative permissions. This might feel like an additional burden, on your journey to begin using cloud, however, like with any other activity on the internet, SECURITY should be your highest priority. If you do not follow these best practices, you are making yourself vulnerable and it can ultimately affect your pocket.
 
@@ -168,9 +170,7 @@ To secure the IAM user credentials:
 - Regularly review, delete old, un-used IAM Users/Roles. You can find this information in the [AWS IAM Console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-2#/users).
 ![Alt text](images/aws-console-iam-user-age.png) 
 
-If you need more help, UPDATE
 
-(support, stackoverflow, re:post)
 
 ## 5. Clean up as you go, delete everything
 
@@ -182,11 +182,20 @@ Myth Burst 1: If you stop an EC2 instance, then you will stop paying for it. Whi
 
 Myth Burst 2: If you close the account, you are good
 
-### How do you identify resources left behind in your account?
+### 5.1 How do you identify resources left behind in your account?
 
 You can use AWS Resource Explorer to identify resources in your AWS account. Check out detailed blog post on how to clean up resources in the blog [Tidying up your bedroom](/tutorials/tidy-your-bedroom-identify-unused-resources).
 
 ![AWS Resource Explorer](images/aws-resource-explorer.png)
+
+## Bonus Tip - Need Help?
+
+If you need more help, UPDATE
+
+(support, stackoverflow, re:post)
+
+If you wish to report a suspicious email claiming to be from Amazon that you believe is a forgery, you may submit a report. You may also forward phishing emails and other suspected forgeries directly to stop-spoofing@amazon.com. To seek [more information on suspicious emails](https://aws.amazon.com/contact-us/)
+
 
 ## Conclusion
 
