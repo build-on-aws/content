@@ -693,7 +693,7 @@ Annotation.username = "anonymous"
 This query will only return traces where the username annotation is set to anonymous.  Also **Enable Insights** option and **Enable notifications.**
 
 
-## Step 5:  View and diagnose issues by registered and anonymous users in the AWS X-Ray console
+## Step 5:  View and Diagnose Issues by Registered and Anonymous Users in the AWS X-Ray Console
 
 Now that you have created your groups, proceed to the Service map in the CloudWatch console to see them in action!  It’s probably been some time since you used the frontend user interface so select **3h** or another suitable timeframe until you see your service map show some data:
 
