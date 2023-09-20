@@ -1,5 +1,5 @@
 ---
-title: Solving Problems You Can't See - How AWS X-Ray and CloudWatch Provide User-Level Observability in Serverless Microservices Applications
+title: Solving Problems You Can't See: How AWS X-Ray and CloudWatch Provide User-Level Observability in Serverless Microservices Applications
 description: Avoid blind spots by tracking users on apps built on AWS
 tags:
 - aws-x-ray
@@ -9,25 +9,22 @@ tags:
 - observability
 authorGithubAlias: knizami
 authorName: Khurram Nizami
-date: 2023-09-02
+date: 2023-09-20
 ---
 
+Imagine you’re a cloud engineer for a website built using AWS serverless technologies such as AWS Lambda. You receive a call from a customer insisting they’re unable to open their shopping cart on your website. You open the same website and log in with your ID and try the same operation and it works fine. What do you do?
 
-## Introduction
+If you’re using AWS X-Ray and Amazon CloudWatch, there are plenty of things that you can do to understand what is happening from this user’s or other users’ perspectives.
 
-Imagine this: you’re a cloud engineer for a website built using AWS serverless technologies such as AWS Lambda.  You receive a call from a customer insisting they’re unable to open their shopping cart on your website.  You open the same website and login with your ID and try the same operation and it works fine.  What do you do?
-
-If you’re using AWS X-Ray and Amazon CloudWatch, there are plenty of things that you can do to understand what is happening from this user’s or other users’ perspective.
-
-In this tutorial, I’ll walk you through ways AWS X-Ray and Amazon CloudWatch help you improve end-user observability.  You'll use the [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart) sample application as the starting point and enhance its AWS X-Ray usage and implementation to include an AWS X-Ray group for registered and anonymous users, along with related CloudWatch Metrics and CloudWatch Alarms.  You'll also learn how to use the AWS X-Ray SDK and AWS X-Ray constructs such as segments, subsegments, and annotations. Throughout the tutorial, I’ll point out some potential gotchas and how to work around them.
+In this tutorial, I’ll walk you through ways AWS X-Ray and Amazon CloudWatch help you improve end-user observability. You'll use the [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart) sample application as the starting point and enhance its AWS X-Ray usage and implementation to include an AWS X-Ray group for registered and anonymous users, along with related CloudWatch Metrics and CloudWatch Alarms. You'll also learn how to use the AWS X-Ray SDK and AWS X-Ray constructs such as segments, subsegments, and annotations. Throughout the tutorial, I’ll point out some potential gotchas and how to work around them.
 
 ## What You Will Learn
 
 - How to configure and implement AWS X-Ray in a serverless application that uses Amazon Cognito, Amazon API Gateway, and AWS Lambda
 - How to follow and observe your user requests as they flow through Amazon Cognito, Amazon API Gateway, and AWS Lambda
-- How to use the AWS X-Ray SDK for python to instrument your python applications with AWS X-Ray.
-- How to use AWS X-Ray groups to identify and diagnose applications based on user segmentation.
-- How to use AWS X-Ray CloudWatch metrics to alarm on AWS X-Ray groups.
+- How to use the AWS X-Ray SDK for python to instrument your python applications with AWS X-Ray
+- How to use AWS X-Ray groups to identify and diagnose applications based on user segmentation
+- How to use AWS X-Ray CloudWatch metrics to alarm on AWS X-Ray groups
 
 ## Prerequisites
 
@@ -46,31 +43,27 @@ Before starting this tutorial, you will need the following:
 | ToC |
 |-----|
 
+## Step 1:  Deploy the aws-serverless-shopping-cart Sample Application
 
-## Step 1:  Deploy the aws-serverless-shopping-cart sample application
+The [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart) application allows us to quickly deploy a serverless application that uses multiple AWS Lambda functions configured with AWS X-Ray distributed tracing turned on. This application also integrates with Amazon Cognito, which we will leverage to identify and demonstrate user based tracing.
 
-The [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart) application allows us to quickly deploy a serverless application that uses multiple AWS Lambda functions configured with AWS X-Ray distributed tracing turned on.  This application also integrates with Amazon Cognito which we will leverage to identify and demonstrate user based tracing.
+Clone the github repository and deploy the sample application using the [first deployment option](https://github.com/aws-samples/aws-serverless-shopping-cart#option-1---deploy-backend-and-run-frontend-locally). This will provide you with more control when we make changes, and allow you to develop and test the frontend interface more easily. Make sure you set the environment variable **AWS_DEFAULT_REGION** when you initiate the deployment, otherwise you may receive an error.
 
-Clone the github repository and deploy the sample application using the [first deployment option](https://github.com/aws-samples/aws-serverless-shopping-cart#option-1---deploy-backend-and-run-frontend-locally).  This will provide you with more control when we make changes, and allow you to develop and test the frontend interface more easily.  Make sure that you set the environment variable **AWS_DEFAULT_REGION** when you initiate the deployment, otherwise you may receive an error.
+## Step 2:  Explore the Tracing Capabilities Already Implemented in the Sample Application
 
+The sample application is already instrumented with AWS X-Ray to provide request tracing for the application. You will be enhancing this capability. Open the **backend/shopping-cart-service/list_cart.py** file in your cloned GitHub repository. This is the python code that gets executed when a user lists items in their shopping cart. You will notice that the code is already using [aws lambda powertools](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/). This development toolkit makes it easy for you to instrument your applications with AWS X-Ray. The sample application includes annotations provided by the [Tracer](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/core/tracer/) utility class from the **aws_lambda_powertools** python package. The annotation `@tracer.capture_lambda_handler` is all that is needed to create an [AWS X-Ray annotation](https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-annotations) named **ColdStart** as well as an annotation identifying your service in X-Ray traces. It will also capture exceptions generated by your lambda function as AWS X-Ray metadata.
 
-## Step 2:  Explore the tracing capabilities already implemented in the sample application
-
-The sample application is already instrumented with AWS X-Ray to provide request tracing for the application.  You will be enhancing this capability.  Open the **backend/shopping-cart-service/list_cart.py** file in your cloned GitHub repository.  This is the python code that gets executed when a user lists items in their shopping cart.  You will notice that the code is already using [aws lambda powertools](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/).  This development toolkit makes it easy for you to instrument your applications with AWS X-Ray.  The sample application includes annotations provided by the [Tracer](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/core/tracer/) utility class from the **aws_lambda_powertools** python package.  The annotation `@tracer.capture_lambda_handler` is all that is needed to create an [AWS X-Ray annotation](https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-annotations) named **ColdStart** as well as an annotation identifying your service in X-Ray traces.  It will also capture exceptions generated by your lambda function as AWS X-Ray metadata.
-
-Now, make sure your frontend is started and [running locally](https://github.com/aws-samples/aws-serverless-shopping-cart#run-the-frontend-locally) using the [first deployment option](https://github.com/aws-samples/aws-serverless-shopping-cart#option-1---deploy-backend-and-run-frontend-locally).  Load the frontend user interface by visiting [http://localhost:8080](http://localhost:8080/).  Add a few products to your shopping cart.  This will generate some requests to your backend AWS lambda functions named **aws-serverless-shopping-cart-shop-ListCartFunction-\<hash>** and **aws-serverless-shopping-cart-GetProductsFunction-\<hash>**.
+Now make sure your frontend is started and [running locally](https://github.com/aws-samples/aws-serverless-shopping-cart#run-the-frontend-locally) using the [first deployment option](https://github.com/aws-samples/aws-serverless-shopping-cart#option-1---deploy-backend-and-run-frontend-locally). Load the frontend user interface by visiting [http://localhost:8080](http://localhost:8080/). Add a few products to your shopping cart. This will generate some requests to your backend AWS lambda functions named **aws-serverless-shopping-cart-shop-ListCartFunction-\<hash>** and **aws-serverless-shopping-cart-GetProductsFunction-\<hash>**.
 
 ![aws-serverless-shopping-cart user interface](images/aws-serverless-shopping-cart-ui.png)
 
+### Brief Tour of the Frontend Code
 
-### Brief tour of the frontend code
-
-You will first manually trace the user requests you just made when you accessed the application locally from your code, all the way through to the AWS services that were used to retrieve the product data displayed in your browser.  The sample application is written using the [Vue.js](https://vuejs.org/) frontend framework.  This tutorial skips the details of the overall application functionality and provides some basic high level information for you to orient yourself with the frontend application code so you can focus on the AWS X-Ray integration points.
-
+You will first manually trace the user requests you just made when you accessed the application locally from your code, all the way through to the AWS services that were used to retrieve the product data displayed in your browser. The sample application is written using the [Vue.js](https://vuejs.org/) frontend framework. This tutorial skips the details of the overall application functionality and provides some basic high level information for you to orient yourself with the frontend application code so you can focus on the AWS X-Ray integration points.
 
 #### **frontend/src/main.js**
 
-This script creates the Vue application and loads the Vue components that make up the application.  You can see that each component is loaded from a separate file in the **frontend/src/components** directory.  You will focus on the shopping cart (**CartDrawer**) and product listing (**Product**) components.
+This script creates the Vue application and loads the Vue components that make up the application. You can see that each component is loaded from a separate file in the **frontend/src/components** directory. You will focus on the shopping cart (**CartDrawer**) and product listing (**Product**) components.
 
 
 ```javascript
@@ -106,11 +99,9 @@ new Vue({
 }).$mount('#app')
 ```
 
-
-
 #### **frontend/src/App.vue**
 
-This file provides the layout for the application.  You can see that the main product content for the application is being loaded from the router in `<router-view />`.  You can also see that the cart drawer (`<cart-drawer />`) remains constant, even if the path and route for the application changes.
+This file provides the layout for the application. You can see that the main product content for the application is being loaded from the router in `<router-view />`. You can also see that the cart drawer (`<cart-drawer />`) remains constant, even if the path and route for the application changes.
 
 *App.vue code snippet*
 ```vue
@@ -167,7 +158,6 @@ export default {
 </script>
 ```
 
-
 The `fetchCart()` call is defined as an action in **frontend/src/store/actions.js:**
 
 ```javascript
@@ -183,7 +173,7 @@ const fetchCart = ({
 }
 ```
 
-this makes a call to `getCart()` in **frontend/src/backend/api.js**:
+This makes a call to `getCart()` in **frontend/src/backend/api.js**:
 
 
 ```javascript
@@ -196,13 +186,11 @@ export async function getCart() {
 }
 ```
 
-
 The `getCart()` function initiates the call to retrieve the cart contents from the **aws-serverless-shopping-cart-shop-ListCartFunction<hash>** AWS Lambda function through API Gateway using the [Amplify JavaScript SDK](https://docs.amplify.aws/lib/restapi/fetch/q/platform/js/).
-
 
 #### **frontend/src/router.js**
 
-This file defines what views should be loaded based on the URL path.  You can see that the base URL is loading the Home view which displays the product list.  The router determines what will be loaded into the layout defined in your App.js `<router-view></router-view>` position.
+This file defines what views should be loaded based on the URL path. You can see that the base URL is loading the Home view which displays the product list. The router determines what will be loaded into the layout defined in your App.js `<router-view></router-view>` position.
 
 ```javascript
 const routes = [{
@@ -227,7 +215,6 @@ const routes = [{
 #### **frontend/src/views/Home.vue**
 
 This file initiates the call to retrieve Products from the AWS lambda function named **aws-serverless-shopping-cart-shop-ListCartFunction-\<hash>** via API Gateway and the Amplify JavaScript SDK.
-
 
 ```vue
 <template>
@@ -254,10 +241,9 @@ export default {
 </script>
 ```
 
-You can see that when the component is created, it initiates a call to **fetchProducts** and stores the results in the products object.  It then iterates through the returned products and lays them out using Vue components.
+You can see that when the component is created, it initiates a call to **fetchProducts** and stores the results in the products object. It then iterates through the returned products and lays them out using Vue components.
 
 The **fetchProducts()** call is defined as an action in **frontend/src/store/actions.js:**
-
 
 #### **frontend/src/store/actions.js**
 
@@ -273,7 +259,6 @@ const fetchProducts = ({
 
 This makes a call to getProducts() in **frontend/src/backend/api.js**:
 
-
 #### **frontend/src/backend/api.js**
 
 ```javascript
@@ -286,18 +271,15 @@ export async function getProducts() {
 }
 ```
 
+### Onwards, Into AWS!
 
+At this point, you may have already experienced an overflow in your mental call stack. Don’t worry! All you really need to remember is that the `getProducts()` and `getCart()` calls from our frontend code are what initiate our call to retrieve our products and cart contents from our sample applications AWS Lambda functions using API Gateway with the [Amplify JavaScript SDK](https://docs.amplify.aws/lib/q/platform/js/).
 
-### Onwards, into AWS!
-
-At this point, you may have already experienced an overflow in your mental call stack.  Don’t worry!  All you really need to remember is that the `getProducts()` and `getCart()` calls from our frontend code are what initiate our call to retrieve our products and cart contents from our sample applications AWS Lambda functions using API Gateway with the [Amplify JavaScript SDK](https://docs.amplify.aws/lib/q/platform/js/).
-
-If you are using Google Chrome, you can open the Developer Tools console (View -> Developer Tools) and go to the **Network** tab after the sample application loads.  Click on the **Fetch/XHR** option to filter out all the network requests to only those fetching data.  
+If you are using Google Chrome, you can open the Developer Tools console (View -> Developer Tools) and go to the **Network** tab after the sample application loads. Click on the **Fetch/XHR** option to filter out all the network requests to only those fetching data.  
 
 ![Google Chrome Dev Tools Network View](images/google-chrome-dev-tools-network-view.png)
 
-Here we can see the API Gateway endpoints that were called using `API.get()` from the Amplify SDK.   These endpoints are defined in the **frontend/src/aws-exports.js** file:
-
+Here we can see the API Gateway endpoints that were called using `API.get()` from the Amplify SDK. These endpoints are defined in the **frontend/src/aws-exports.js** file:
 
 ```javascript
 const awsmobile = {
@@ -320,27 +302,27 @@ const awsmobile = {
 };
 ```
 
-When you deployed the aws-serverless-shopping-cart application, the deployment script updated the **frontend/.env.local** environment variables referenced in this file with the endpoints for your deployment.  The use of environment variables allows your endpoints to change between environments while your code stays the same.
+When you deployed the aws-serverless-shopping-cart application, the deployment script updated the **frontend/.env.local** environment variables referenced in this file with the endpoints for your deployment. The use of environment variables allows your endpoints to change between environments while your code stays the same.
 
-### From your browser to API Gateway
+### From Your Browser to API Gateway
 
-Now that you are leaving the confines of your local computer into the AWS cloud, you will journey through your request for product and cart data on the backend.  Proceed to the AWS console where you deployed the AWS Lambda function and open the API Gateway management console.  You should see two APIs listed corresponding to the **product** and **cart** APIs used by your frontend:
+Now that you are leaving the confines of your local computer for the AWS cloud, you will journey through your request for product and cart data on the backend. Proceed to the AWS console where you deployed the AWS Lambda function and open the API Gateway management console. You should see two APIs listed corresponding to the **product** and **cart** APIs used by your frontend:
 
 ![AWS API Gateway API Menu](images/aws-api-gateway-api-menu.png)
 
-Open the **aws-serverless-shopping-cart-shoppingcart-service** API and select the **GET** method.  This method retrieves your shopping cart contents from the AWS lambda function named **aws-serverless-shopping-cart-shop-ListCartFunction<hash>:**
+Open the **aws-serverless-shopping-cart-shoppingcart-service** API and select the **GET** method. This method retrieves your shopping cart contents from the AWS lambda function named **aws-serverless-shopping-cart-shop-ListCartFunction<hash>:**
 
 ![AWS API Gateway Serverless Shopping Cart API](images/aws-api-gateway-serverless-shopping-cart-api.png)
 
-API Gateway makes it easy to integrate with AWS Lambda functions using the [LAMBDA_PROXY](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html) integration type.  Next, click on the **aws-serverless-shopping-cart-shop-ListCartFunction<hash>** link vertically displayed to open the function.
+API Gateway makes it easy to integrate with AWS Lambda functions using the [LAMBDA_PROXY](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html) integration type. Next, click on the **aws-serverless-shopping-cart-shop-ListCartFunction<hash>** link vertically displayed to open the function.
 
-This lambda function is using [AWS Lambda function aliases](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).  Aliases enable you to shift traffic between versions of your Lambda function.  The sample application is simply pointing the **live** alias to the latest version of the lambda function.
+This lambda function is using [AWS Lambda function aliases](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html). Aliases enable you to shift traffic between versions of your Lambda function. The sample application is simply pointing the **live** alias to the latest version of the lambda function.
 
 Click on the function name to return to the main menu for this function and then make your way to the **Code** tab:
 
 ![AWS Lambda Serverless Shopping Cart List Cart Function](images/aws-lambda-serverless-shopping-cart-list-cart-function.png)
 
-You’ve made it!  You are now at the backend code that lists the contents in the shopping cart.  You can now see the code that lists the shopping cart contents in **list_cart.py**.  
+You’ve made it! You are now at the backend code that lists the contents in the shopping cart. You can now see the code that lists the shopping cart contents in **list_cart.py**.  
 
 Focus on the code related to AWS X-Ray:
 
@@ -355,52 +337,51 @@ List items in shopping cart.
 
 Your lambda function handler is instrumented to create AWS X-Ray traces for calls to this AWS Lambda function with the `@tracer.capture_lambda_handler` annotation.
 
-
-### AWS X-Ray - Your application’s tracing companion
+### AWS X-Ray - Your Application’s Tracing Companion
 
 Now that you’ve taken the journey of manually tracing the application call to list shopping cart contents, you’ll see how AWS X-Ray visualizes this journey.
 
-Proceed to the AWS X-Ray console.  The AWS X-Ray console is now a part of the CloudWatch console.  Select **Service map** under the X-Ray traces menu to see a visual representation of our X-ray traces:  
+Proceed to the AWS X-Ray console. The AWS X-Ray console is now a part of the CloudWatch console. Select **Service map** under the X-Ray traces menu to see a visual representation of our X-ray traces:  
 
 ![CloudWatch X-Ray Menu](images/cloudwatch-x-ray-menu.png)
 
-If you don’t see any data, select the **1h** timeframe or longer depending on how long ago you opened and used the front end service for the application in Step 1.  Your visualization should look something like this:
+If you don’t see any data, select the **1h** timeframe or longer depending on how long ago you opened and used the front end service for the application in Step 1. Your visualization should look something like this:
 
 ![X-Ray Service Map](images/x-ray-service-map.png)
 
-If your account has more services instrumented with AWS X-Ray, your service map may be larger.  For this sample application, you can see that there are three different client calls to three different AWS services depending on the interactions you performed.  These calls were initiated by you when you used the frontend interface.
+If your account has more services instrumented with AWS X-Ray, your service map may be larger. For this sample application, you can see that there are three different client calls to three different AWS services depending on the interactions you performed. These calls were initiated by you when you used the frontend interface.
 
-For this tutorial, you are going to focus on the shopping cart.  Select the node corresponding to the AWS Lambda function execution for **aws-serverless-shopping-cart-shop-ListCartFunction-\<hash>**.   Every AWS Lambda function call in X-Ray is represented by two nodes.  The first node represents the call made to AWS Lambda to execute the function (context / entry node) and the second node represents the function execution itself.
+For this tutorial, you are going to focus on the shopping cart. Select the node corresponding to the AWS Lambda function execution for **aws-serverless-shopping-cart-shop-ListCartFunction-\<hash>**. Every AWS Lambda function call in X-Ray is represented by two nodes. The first node represents the call made to AWS Lambda to execute the function (context / entry node) and the second node represents the function execution itself.
 
-The node view enables you to quickly focus on the metrics for an X-Ray instrumented service in the context of other AWS services that it interacts with.  This can help you identify and troubleshoot performance bottlenecks or issues in a particular user experience (such as listing shopping cart items).
+The node view enables you to quickly focus on the metrics for an X-Ray instrumented service in the context of other AWS services that it interacts with. This can help you identify and troubleshoot performance bottlenecks or issues in a particular user experience (such as listing shopping cart items).
 
 ![X-Ray Service Map Node View](images/x-ray-service-map-node-view.png)
 
-Click **View Traces** to view the traces that X-Ray has captured that include this AWS Lambda Function execution.  Now scroll down and click on one the traces captured by AWS X-Ray that includes this function call.  You may have more than one depending on how many times you used the front end user interface and initiated calls:
+Click **View Traces** to view the traces that X-Ray has captured that include this AWS Lambda Function execution. Now scroll down and click on one the traces captured by AWS X-Ray that includes this function call. You may have more than one depending on how many times you used the front end user interface and initiated calls:
 
 ![X-Ray Traces View](images/x-ray-traces-view.png)
 
-The trace provides the end-to-end X-Ray instrumented view of your request.  The nodes represent each service that participated in the request:
+The trace provides the end-to-end X-Ray instrumented view of your request. The nodes represent each service that participated in the request:
 
 ![X-Ray Traces Map](images/x-ray-traces-map.png)
 
-Click on the Lambda Function node to view its trace details and then click on the **## lambda_handler** subsegment in the Segments timeline.  Function calls are prefixed with “##”.  Click the **Annotations** tab.  The [aws lambda powertools](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/) integration with X-Ray automatically identifies and annotates AWS Lambda function calls that required a cold start (ColdStart: true / false).  You can see the impact of the cold start in the **Initialization** time before your lambda handler was executed (~1s):
+Click on the Lambda Function node to view its trace details and then click on the **## lambda_handler** subsegment in the Segments timeline. Function calls are prefixed with “##”. Click the **Annotations** tab. The [aws lambda powertools](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/) integration with X-Ray automatically identifies and annotates AWS Lambda function calls that required a cold start (ColdStart: true / false). You can see the impact of the cold start in the **Initialization** time before your lambda handler was executed (~1s):
 
 ![X-Ray Segments and Annotations View](images/x-ray-segments-annotations-view.png)
 
-X-Ray annotations are searchable.  As a result, you can search and retrieve all traces that experienced a cold start.  Click on the **Metadata** tab.  Here you can see that the response from the lambda function is also captured by X-Ray.  The response metadata was automatically setup by [aws lambda powertools](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/).  Metadata isn’t searchable from AWS X-Ray but can provide valuable information such as troubleshooting expected vs. actual responses.
+X-Ray annotations are searchable. As a result, you can search and retrieve all traces that experienced a cold start. Click on the **Metadata** tab. Here you can see that the response from the lambda function is also captured by X-Ray. The response metadata was automatically setup by [aws lambda powertools](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/). Metadata isn’t searchable from AWS X-Ray but can provide valuable information such as troubleshooting expected vs actual responses.
 
-In the next step, you will instrument your sample application so that user ids are captured as annotations.  You will then be able to troubleshoot requests per user by filtering on the user id annotation.
+In the next step, you will instrument your sample application so that user ids are captured as annotations. You will then be able to troubleshoot requests per user by filtering on the user ID annotation.
 
-## Step 3:  Update the application to capture the cognito user id in AWS X-Ray
+## Step 3:  Update the Application to Capture the Cognito User ID in AWS X-Ray
 
-At this point, you have seen some of the benefits of AWS X-Ray in the context of your sample application and the default setup for [aws lambda powertools](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/).  Next, you will update the AWS X-Ray implementation to also capture the user id.
+At this point, you have seen some of the benefits of AWS X-Ray in the context of your sample application and the default setup for [AWS Lambda powertools](https://awslabs.github.io/aws-lambda-powertools-python/2.15.0/). Next, you will update the AWS X-Ray implementation to also capture the user ID.
 
-The sample application uses Amazon Cognito for user registration and authentication.  Before you update the application, create a new user.  Navigate to [http://localhost:8080](http://localhost:8080/) to open the local front end server.  Next, click the **Sign In** button and select the **Create account** link.
+The sample application uses Amazon Cognito for user registration and authentication. Before you update the application, create a new user. Navigate to [http://localhost:8080](http://localhost:8080/) to open the local front end server. Next, click the **Sign In** button and select the **Create account** link.
 
 ![Serverless Shopping Cart Login Screen](images/serverless-shopping-cart-login-screen.png)
 
-After you have registered, sign in with your newly created user.  The sample application persists user shopping carts for registered users using their cognito user id.  If a user isn’t signed in, an anonymous shopping cart is also supported using cookies.  In step 2, you saw that your shopping cart contents were retrieved using the `getCart()` function in **frontend/src/backend/api.js**:
+After you have registered, sign in with your newly created user. The sample application persists user shopping carts for registered users using their cognito user ID. If a user isn’t signed in, an anonymous shopping cart is also supported using cookies. In step 2, you saw that your shopping cart contents were retrieved using the `getCart()` function in **frontend/src/backend/api.js**:
 
 ```javascript
 export async function getCart() {
@@ -1114,13 +1095,9 @@ Next, proceed to the AWS X-Ray Service map in the CloudWatch console and select 
 
 You can now see all your traces that took longer than 3 seconds.  You could do some further investigation by looking at these traces by username to see which specific users are impacted.  AWS X-Ray has an [extensive filter expression library](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html) for you to quickly identify traces that are experiencing faults, errors, and slow response times.
 
-
 AWS X-Ray publishes the [Approximate number of traces for each X-Ray group](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-groups.html#xray-console-group-cloudwatch) every minute as an Amazon CloudWatch metric named **ApproximateTraceCount** in the **X-Ray/Group Metrics** namespace.  
 
 Proceed to the CloudWatch Metrics console and navigate to the X-Ray/Group Metrics namespace to see the metrics for your **Anonymous,** **RegisteredUsers,** and **SlowRegisteredUsers** AWS X-Ray groups you created earlier.  Check the boxes for these groups and select an appropriate timeframe to display data:
-
-
-
 
 ![AWS X-Ray CloudWatch trace count metrics](images/aws-x-ray-cloudwatch-group-count-metrics.png)
 
