@@ -23,7 +23,7 @@ If you are looking to implement Chaos Engineering to improve resilience, looking
 
 ## DevOps
 
-DevOps is a big topic and I cannot cover it all here. I do like the definition that my colleague Jacquie Grindrod wrote in her explanation of [What is DevOps?](https://community.aws/concepts/what-is-devops?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)
+DevOps is a big topic and I cannot cover it all here. I do like the definition that my colleague Jacquie Grindrod wrote in her explanation of [What is DevOps?](/concepts/what-is-devops?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)
 
 
 >DevOps is an approach to solving problems collaboratively. It values teamwork and communication, fast feedback and iteration, and removing friction or waste through automation.
@@ -35,8 +35,8 @@ As I said, DevOps is big, so here I will only focus on the primary DevOps concep
 
 * **Empowering teams**: DevOps fosters a culture where teams are empowered to try new ideas and learn from both successes and failures. 
 * **Ownership and responsibility**: In DevOps, teams own the services they build and are responsible for ensuring the right outcomes. Empowerment is a pre-requisite to this, as the team needs to be able to understand how their services are used and be able to implement changes they see fit.
-* **Breaking down walls:** The impulse behind "DevOps" is to [break down the traditional barriers that often exist between development and operations teams](https://community.aws/posts/devops-wrong-answers-only#walls). By promoting collaboration and shared goals, DevOps aims to eliminate silos and create a more streamlined and efficient workflow.
-* **Enabling teams to do more**: This is where automation and tools can play a major role. But also organizational structure and responsibilities are crucial here. A team that takes a hand-off from the development team and operates the service *for* them is not ideal (see “breaking down walls” above). But a specialized team that works *with* development and reduces the [undifferentiated heavy lifting](https://community.aws/posts/devops-wrong-answers-only#undifferentiated-heavy-lifting) of operating the service is better. *Undifferentiated heavy lifting* is all the hard work (“heavy lifting”) that is necessary to accomplish a task (say, deploy and operate a service) but does vary appreciably from service to service (“undifferentiated”). If every service team has to do this work themselves, then it is wasteful. Having one team to create tools and processes that do much of this heavy lifting removes the burden from the service teams is liberating!
+* **Breaking down walls:** The impulse behind "DevOps" is to [break down the traditional barriers that often exist between development and operations teams](/posts/devops-wrong-answers-only#walls). By promoting collaboration and shared goals, DevOps aims to eliminate silos and create a more streamlined and efficient workflow.
+* **Enabling teams to do more**: This is where automation and tools can play a major role. But also organizational structure and responsibilities are crucial here. A team that takes a hand-off from the development team and operates the service *for* them is not ideal (see “breaking down walls” above). But a specialized team that works *with* development and reduces the [undifferentiated heavy lifting](/posts/devops-wrong-answers-only#undifferentiated-heavy-lifting) of operating the service is better. *Undifferentiated heavy lifting* is all the hard work (“heavy lifting”) that is necessary to accomplish a task (say, deploy and operate a service) but does vary appreciably from service to service (“undifferentiated”). If every service team has to do this work themselves, then it is wasteful. Having one team to create tools and processes that do much of this heavy lifting removes the burden from the service teams is liberating!
 
 ## Amazon Search
 
@@ -55,7 +55,7 @@ Amazon Search consists of over 40 backend services, owned by different teams of 
 
 Some folks are put off by the term “chaos”, but it is important to know that Chaos Engineering is *not* about creating chaos. Instead, it is about protecting your applications from the chaos that is already in production by exposing them to chaos in a controlled manner. You apply the scientific method, creating a hypothesis. The hypothesis is based on how you have designed your application to stay resilient to specific events such as faults or load scenarios. Then you run an experiment by simulating those events, and observing how your application performs, testing the hypothesis. This will show you were your application is doing well against those events, or where you can improve it.
 
-Watch [Chaos Engineering in under 2 minutes](https://community.aws/posts/chaos-engineering-2-minutes?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering) to learn more, and there is also a list of resources to learn more there.
+Watch [Chaos Engineering in under 2 minutes](/posts/chaos-engineering-2-minutes) to learn more, and there is also a list of resources to learn more there.
 
 **Empowering teams** includes giving them the autonomy to create and run chaos experiments on their services.
 
@@ -126,7 +126,7 @@ Chaos Engineering is a great way to better understand the resilience of your ser
 
 ## You May Also Be Interested In
 
-**[Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](https://community.aws/posts/how-amazon-does-devops-in-real-life?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering)**
+**[Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](/posts/how-amazon-does-devops-in-real-life)**
 * Read about three more examples of Amazon teams using DevOps to drive resilience
 
 **[Improving Business Resiliency with Chaos Engineering • GOTO 2021](https://www.youtube.com/watch?v=6NIh-GsO1Kg)**

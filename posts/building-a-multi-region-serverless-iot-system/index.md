@@ -34,7 +34,7 @@ What we are building in this post is an architecture that will span two AWS Regi
 
 ![Image showing the architecture overview.](images/architecture-overview.png)
 
-We will use an [configurable endpoint](https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-configurable.html) with a custom domain: iot.example.com. This will be configured in two regions and we'll use a latency-based record to let devices connect to the Region closest to them. When devices connect for the very first time, the device certificate will be registered in IoT Core, using Just In Time Registration. If a device certificate is successfully registered and activated, it will be stored in an device registry, which is a Global DynamoDB table. By utilizing DynamoDB Streams, the replication of the device certificate can be done in an event-driven way, by utilizing EventBridge Pipes and a custom event-bus. Devices will use certificates issued by a self-signed Root CA. When we authenticate our devices towards AWS IoT Core, we will be using Mutual TLS.
+We will use an [configurable endpoint](https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-configurable.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-a-multi-region-serverless-iot-system) with a custom domain: iot.example.com. This will be configured in two regions and we'll use a latency-based record to let devices connect to the Region closest to them. When devices connect for the very first time, the device certificate will be registered in IoT Core, using Just In Time Registration. If a device certificate is successfully registered and activated, it will be stored in an device registry, which is a Global DynamoDB table. By utilizing DynamoDB Streams, the replication of the device certificate can be done in an event-driven way, by utilizing EventBridge Pipes and a custom event-bus. Devices will use certificates issued by a self-signed Root CA. When we authenticate our devices towards AWS IoT Core, we will be using Mutual TLS.
 
 Data from the IoT devices will be stored in a Global DynamoDB table to allow access from both regions. Throughout this blog post we will be using us-west-2 (Oregon) and eu-west-1 (Ireland) region when we build and create resources.
 
@@ -44,7 +44,7 @@ Let’s start off by creating the DynamoDB tables we need.
 
 We will create two global DynamoDB tables that will only be deployed to a single Region but configured with a replica in a second Region. We need a way to keep track of the devices that have already been registered, despite which Region it was initially registered in. For this, we will create a Device Inventory table. For testing purposes, we will also create a global DynamoDB table where we can store data coming from the devices.
 
-We will deploy these resources using AWS CloudFormation / [Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/)
+We will deploy these resources using AWS CloudFormation / [Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-a-multi-region-serverless-iot-system)
 
 ```yaml
 AWSTemplateFormatVersion: "2010-09-09"
@@ -121,7 +121,7 @@ Outputs:
 
 ## Creating Certificates
 
-We are going to use a self-signed Root CA when issuing server and device certificates. In a production environment, you should use Root CA signed by a third party trusted source. Our certificate chain will include a Root CA and an Intermediate CA. The Intermediate CA will issue both the server and client certificates. [Read this to learn more about SSL/TLS certificates](https://aws.amazon.com/what-is/ssl-certificate/). [Read this to learn more about the process](https://www.golinuxcloud.com/openssl-create-certificate-chain-linux/) that we will be using to create the certificates. We will be using [OpenSSL](https://www.openssl.org/) when creating certificates.
+We are going to use a self-signed Root CA when issuing server and device certificates. In a production environment, you should use Root CA signed by a third party trusted source. Our certificate chain will include a Root CA and an Intermediate CA. The Intermediate CA will issue both the server and client certificates. [Read this to learn more about SSL/TLS certificates](https://aws.amazon.com/what-is/ssl-certificate/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-a-multi-region-serverless-iot-system). [Read this to learn more about the process](https://www.golinuxcloud.com/openssl-create-certificate-chain-linux/) that we will be using to create the certificates. We will be using [OpenSSL](https://www.openssl.org/) when creating certificates.
 
 We will start by creating the folder structure needed and the files needed to track our certificate creation.
 
@@ -205,7 +205,7 @@ The first thing we need to do is import the server certificate to AWS Certificat
 
 ![Image showing the import of server certificate to ACM.](images/import-server-cert-acm.png)
 
-The import can also be done using the [AWS CLI](https://aws.amazon.com/cli/).
+The import can also be done using the [AWS CLI](https://aws.amazon.com/cli/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-a-multi-region-serverless-iot-system).
 
 ```bash
 aws acm import-certificate --certificate fileb://myCA/server/certs/iot.example.com.crt \
@@ -336,7 +336,7 @@ It is also possible to do the registration using the console. Navigate to the Io
 
 As usual, we can also do this using the `CLI`
 
-To be able to invoke an AWS StepFunction when a certificate is registered, we must enable [IoT Core Events](https://docs.aws.amazon.com/iot/latest/developerguide/iot-events.html). These events will be posted onto a reserved AWS topic, `$aws/events/xyz` that we then can create a rule for. The events for registered certificates can ONLY be enabled using the `CLI` as this option is not available in the console. To enable the events, we need to run the commands.
+To be able to invoke an AWS StepFunction when a certificate is registered, we must enable [IoT Core Events](https://docs.aws.amazon.com/iot/latest/developerguide/iot-events.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-a-multi-region-serverless-iot-system). These events will be posted onto a reserved AWS topic, `$aws/events/xyz` that we then can create a rule for. The events for registered certificates can ONLY be enabled using the `CLI` as this option is not available in the console. To enable the events, we need to run the commands.
 
 ```bash
 ## Enable in eu-west-1
@@ -640,7 +640,7 @@ States:
         Type: Fail
 ```
 
-All but one of the tasks can be completed using the powerful [service and SDK integration](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html) that exists in StepFunctions. For the task to read out information from the actual certificate, we need to use an AWS Lambda Function. We need to get the name of the thing, and this should match the common name in the certificate.
+All but one of the tasks can be completed using the powerful [service and SDK integration](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-a-multi-region-serverless-iot-system) that exists in StepFunctions. For the task to read out information from the actual certificate, we need to use an AWS Lambda Function. We need to get the name of the thing, and this should match the common name in the certificate.
 
 ```python
 # Read the CommonName from the certificate PEM

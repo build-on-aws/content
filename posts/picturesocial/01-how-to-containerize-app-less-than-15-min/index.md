@@ -194,6 +194,6 @@ docker push [aws account id].dkr.ecr.[aws region].amazonaws.com/helloworld:lates
 
 If you read this far, that means you made it. Congratulations! You containerized your very first application.
 
-The next [post](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/) will be focused on learning about container orchestrators, specifically Kubernetes. I will answer the question: What is Kubernetes and why should I care?
+The next [post](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care) will be focused on learning about container orchestrators, specifically Kubernetes. I will answer the question: What is Kubernetes and why should I care?
 
 I hope you enjoyed this reading!
