@@ -1,5 +1,5 @@
 ---
-title: "Build a Full stack Q&A Chatbot with Langchain, and LLM Models on Sagemaker"
+title: "Building a Full-Stack Large Language Model Powered Q&A Chatbot: Extracting Insights from Unstructured Documents"
 description: A full stack hands-on tutorial leveraging various AWS and Opensource technologies to build your own car savvy AI Assistant.
 tags:
   - llm
