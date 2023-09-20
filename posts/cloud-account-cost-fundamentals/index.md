@@ -66,6 +66,8 @@ UPDATE
 
 It is important to remember that each AWS Region is completely independent.
 
+### 2.1 How do I choose AWS Region?
+
 Choosing which AWS Region to use depends on multiple factors:
 
 - **Latency:** If this is an application/website service end customers, identify where are majority of your customers located and choose the AWS Region closest to your customers. This helps reduce Internet latency.
@@ -85,6 +87,10 @@ add more info on internet latencies, and this tool, cli? https://github.com/ekal
 gdpr, data privacy laws, 
 
 - **AWS Services:** [List of AWS Services Available by Region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)
+
+### 2.2 How do I select AWS Services?
+
+There are so many services, how do I begin?
 
 ## 3. Free Tier and Budget alerts
 
@@ -195,6 +201,8 @@ If you need more help, UPDATE
 (support, stackoverflow, re:post)
 
 If you wish to report a suspicious email claiming to be from Amazon that you believe is a forgery, you may submit a report. You may also forward phishing emails and other suspected forgeries directly to stop-spoofing@amazon.com. To seek [more information on suspicious emails](https://aws.amazon.com/contact-us/)
+
+Startups?
 
 
 ## Conclusion
