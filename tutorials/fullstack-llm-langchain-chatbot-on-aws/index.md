@@ -160,9 +160,10 @@ By creating the above CloudFormation stack, we set up an S3 bucket and establish
 Once the CloudFormation stack is executed, drop a PDF representing a car manual into the S3 bucket. I downloaded a car manual available [here](https://ownersman.com/manuals/2023-BMW-X3-owners-manual). After the event-based ingestion pipeline completes execution, the Amazon OpenSearch cluster should contain the `carmanual` index with embeddings as shown below.
 
 
-`carmanual` index in Amazon OpenSearch Cluster          |  Contents of the `carmanual` index
+`carmanual` index in Amazon OpenSearch Cluster          |  Contents of the `carmanual` index                                                                                                         
 :------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:
-![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.jpg) |  ![Save embeddings in OpenSearch 3](images/opensearch-embeddings-3.jpg)
+![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.jpg) |  ![Save embeddings in OpenSearch 3](images/opensearch-embeddings-3.jpg)                                                     
+|
 
 
 ## Step 6 - Deploy Real-Time Q&A API with LLM Contextual Support
