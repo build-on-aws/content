@@ -1,6 +1,6 @@
 ---
-title: "Unlock the power of Unstructured Data: From Embeddings to In Context Learning – Build a Full stack Q&A Chatbot with Langchain, and LLM Models on Sagemaker"
-description: A full stack hands-on tutorial leveraging various AWS and Opensource technologies like AWS Sagemaker, T5 Flan LLM Model, Langchain , AWS OpenSearch to build your own car savvy AI Assistant.
+title: "Build a Full stack Q&A Chatbot with Langchain, and LLM Models on Sagemaker"
+description: A full stack hands-on tutorial leveraging various AWS and Opensource technologies to build your own car savvy AI Assistant.
 tags:
   - llm
   - genai
@@ -13,7 +13,7 @@ authorName: Piyali Kamra
 date: 2023-09-15
 ---
 
-In today’s data-driven landscape, extracting meaningful insights from unstructured documents remains a challenge, inhibiting decision-making and innovation. Imagine being able to converse with your unstructured data, extracting valuable information with ease. In this tutorial, we will explore using AWS tools to create a vector databases, learn about Hugging Face embeddings, and seamlessly integrate Open Source Langchain’s capabilities to engage with Large Language Models (LLMs) to build a website with an embedded NLP chatbot that interacts with our unstructured data. In this article we will go over the basics of Generative AI and then use those basics to extract meaningful insights from an unstructured document with the help of an Open source Large Language Model (https://huggingface.co/google/flan-t5-xxl). By the end of this tutorial, you’ll have a comprehensive understanding of how to derive meaningful insights from unstructured documents, and use the skills to explore and innovate with similar full stack AI-driven solutions.
+In today’s data-driven landscape, extracting meaningful insights from unstructured documents remains a challenge, inhibiting decision-making and innovation. Imagine being able to converse with your unstructured data, extracting valuable information with ease. In this tutorial, we will explore using AWS OpenSearch as a vector database, learn about Hugging Face embeddings, and seamlessly integrate [Langchain](https://python.langchain.com/docs/get_started/introduction/) framework with Large Language Models (LLMs) to build a website with an embedded NLP chatbot. In this article we will go over the basics of LLM's to extract meaningful insights from an unstructured document with the help of an Open Source [Large Language Model](https://huggingface.co/google/flan-t5-xxl). By the end of this tutorial, you’ll have a comprehensive understanding of how to derive meaningful insights from unstructured documents, and use the skills to explore and innovate with similar full stack AI-driven solutions.
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -27,138 +27,274 @@ In today’s data-driven landscape, extracting meaningful insights from unstruct
 | ToC |
 |-----|
 
-## What We're Going to Build
-In this example today, I want to mimic the problem that is faced by many enterprises. Most of today's data is not structured but is rather unstructured in the form of audio and video transcripts, pdf and word documents, manuals, scanned notes, social media dumps, etc. We will use flan-t5-xxl model as the Large Language Model. This model can produce summaries, Q&A responses from unstructured texts. Here is an overall architecture showing the various bulidng blocks.
+## What are we going to build
+In this example, we want to mimic the problem that is faced by many enterprises. Most of the data today is not structured but is rather unstructured in the form of audio and video transcripts, pdf and word documents, manuals, scanned notes, social media dumps, etc. We will use flan-t5-xxl model as the Large Language Model (LLM). This model can produce summaries, Q&A responses from unstructured texts. Here is the architecture showing the various building blocks.
+
 ![Shows high level architecture](images/overallarchitecture.png)
 
-## Let's start with some basics
-We will use a technique called as "In-Context" learning to inject domain or use case specific "Context" into our LLM. In my case, I have an unstructured pdf manual of BMW that I want to add as "Context" for my LLM and I want my LLM to answer questions about this manual. As simple as that!. I aim to go a step further by developing a real-time API that receives questions, forwards them to my backend, and is accessible from my open-source chatbot embedded on my website, allowing us to build the entire user experience and gain insights into various concepts throughout the process.
+## Let's start with the basics
+We will use a technique called as "In-Context" learning to inject domain or use case specific "Context" into our LLM. In this case, we have an unstructured pdf manual of a car that we want to add as "Context" for the LLM and we want the LLM to answer questions about this manual. As simple as that! We aim to go a step further by developing a real-time API that receives questions, forwards them to our backend, and is accessible from an open-source chatbot embedded in the website. This tutorial enables us to build the entire user experience and gain insights into various concepts and tools throughout the process.
 
-The very first step to provide In-Context learning is to ingest the pdf document, break down the pdf document into text chunks and store these text chunks as vectors in a vector database. The vector representations of the text chunks are called embeddings. By converting text into embeddings and storing it in a vector database, we can identify the most identical pieces of information. Vector databases help us perform a "similarity search" against the text embeddings that are stored in it. We will use an Open Source embeddings model and will take help of the Sagemaker Jumpstart to deploy the Embeddings Model. Additionally, we will use AWS OpenSearch as a Vector Database.
+1. The very first step to provide In-Context learning is to ingest the pdf document and convert it into text chunks, generate vector representations of these text chunks called "embeddings" and finally store these embeddings in a vector database.
 
-## Diagrammatic overview of how to convert PDF Document into Embeddings and store in the Vector Database.
+2. Vector databases enable us to perform a "similarity search" against the text embeddings that are stored in it.
 
-![Shows all the steps involved converting PDF documents into embeddings and storing in the Vector Database](images/embeddings-save-vectordb.jpg)
+3. [Amazon SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides one click executable solution templates for setting up the infrastructure for pretrained, open-source models. We will be using Amazon SageMaker JumpStart to deploy the Embedding Model and the Large Language Model(LLM).<br/>
+[Amazon OpenSearch](https://aws.amazon.com/opensearch-service/) is a search and analytics engine that can search for nearest neighbors of points in a vector space, making it suitable as a Vector Database.
 
-## Step 1 - Deploy Hugging Face Embeddings Model with Sagemaker Jumpstart
-Within your Sagemaker Studio environment, use Sagemaker Jumpstart and select the GPT-J 6B Embedding FP16 embedding model and click on Deploy to deploy it onto the Sagemaker environment.
+
+### <u>Diagram: Converting from PDF to Embeddings in Vector Database</u>
+
+![Shows all the steps involved in converting PDF documents into embeddings and storing in the Vector Database](images/embeddings-save-vectordb.jpg)
+
+Now, let's dive into the first step of our journey. In Step 1, we will deploy the GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart. This model will play a crucial role in converting our PDF manual into embeddings for our Vector Database. 
+
+## Step 1 - Deploy GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart
+To get started, follow the steps outlined in [Amazon SagemMaker Documentation - Open and use JumpStart section](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) to launch Amazon SageMaker JumpStart node from the Home Menu of the Amazon SageMaker Studio. Choose <b>Models, notebooks, solutions</b> option and select the GPT-J 6B Embedding FP16 embedding model as shown in the image below. Then, simply click on `Deploy` and Amazon SageMaker JumpStart will take care of the infrastructure setup for deploying this pretrained model into the SageMaker environment.
 
 ![Select the hugging face embeddings model from within Sagemaker Jumpstart](images/huggingface-embeddings.jpg)
-## Step 2 - Deploy the Flan T5 XXL LLM Model with AWS Jumpstart
-Next within your Sagemaker Studio environment, use Sagemaker Jumpstart and select the Flan-T5 XXL FP16 Large Language Model(LLM) and click on Deploy to deploy it onto the Sagemaker environment.
+## Step 2 - Deploy the Flan T5 XXL LLM Model with Amazon SageMaker JumpStart
+Next from within Amazon SageMaker JumpStart select the Flan-T5 XXL FP16 Large Language Model(LLM) and click on `Deploy` to automatically create the infrastructure and deploy the model endpoint into the Amazon SageMaker environment.
 ![Select the t5-flan-xxl large language model from within Sagemaker Jumpstart](images/t5-flan-xxl.jpg)
 
 ![Select the t5-flan-xxl large language model from within Sagemaker Jumpstart](images/t5-flan-xxl-2.jpg)
 
-## Step 3 - Find the embedding endpoint name and the flan-t5-xxl LLM in the sagemaker console and make note of their endpoint names, since we will use them in our code.
+## Step 3 - Check the status of the deployed model endpoints
+We check the status of the deployed model endpoints from Step 1 and Step 2 in the Amazon SageMaker console and make note of their endpoint names, since we will use them in our code. Here is how my console looks like after the model endpoints are deployed.
 ![Name of Deployed endpoints in Sagemaker](images/deployed-endpoints.jpg)
-## Step 4 - Create the AWS OpenSearch Cluster
-I've set up the OpenSearch cluster to be publicly accessible, enabling easy access. I've configured a master username and password for security and applied a permission policy to control domain access. One feature of OpenSearch is its support for k-Nearest Neighbors (k-NN). This functionality is incredibly valuable for similarity-based searches, allowing us to use OpenSearch effectively as a vector database. To explore further and learn about which versions of Elasticsearch/Open search support the k-NN plugin, you can refer to the following link: [K-NN Plugin Documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html). 
 
-Here are screenshots depicting the configuration of my AWS OpenSearch cluster.
+## Step 4 - Create the Amazon OpenSearch Cluster
+Amazon OpenSearch is a search and analytics service that supports k-Nearest Neighbors (k-NN) algorithm. This functionality is incredibly valuable for similarity-based searches, allowing us to use OpenSearch effectively as a vector database. To explore further and learn about which versions of Elasticsearch/OpenSearch support the k-NN plugin, please refer the following link: [K-NN Plugin Documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html). 
 
-![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch1.png)
-![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch2.png)
-![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch3.jpg)
-![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch4.jpg)
-![Setup of Opensearch Cluster Screenshots - Screen shot 1](images/opensearch5.jpg)
+We will use the AWS CLI to deploy the CloudFormation template file from the GitHub location `Infrastructure/opensearch-vectordb.yaml`. Execute the `aws cloudformation create-stack` command as follows to create the Amazon OpenSearch Cluster. Before executing the command we have to replace <username> and <password> with our own values.
 
-## Step 5 - Create document ingestion pipeline that will create embeddings for your unstructured document and store them into AWS OpenSearch.
-Now that we have setup the AWS OpenSearch cluster as well as deployed the hugging face embeddings model and the T5 LLM endpoint, we will create a ingestion and processing batch pipeline that will read a pdf document when dropped into an AWS Simple Storage Service (S3) bucket, chunk the text from the document, convert the text chunks into embeddings and store the embeddings (i.e vector representations) into AWS OpenSearch so that we can perform similarity search later on. Dropping the file in the S3 bucket would trigger an event based workflow as depicted in the figure below. A fargate task will convert the text to embeddings and insert into AWS OpenSearch.
+```bash
+aws cloudformation create-stack --stack-name opensearch-vectordb \
+  --template-body file://opensearch-vectordb.yaml \
+  --parameters ParameterKey=ClusterName,ParameterValue=opensearch-vectordb \
+               ParameterKey=MasterUserName,ParameterValue=<username> \
+               ParameterKey=MasterUserPassword,ParameterValue=<password> 
+```
 
-<b>Here is a Diagrammatic Overview of a production like document ingestion pipeline to store embeddings of text chunks into the OpenSearch vector database</b>
+## Step 5 - Building the Document Ingestion and Embedding Workflow 
 
+In this step, we will create an ingestion and processing pipeline designed to read a PDF document when it is placed in an Amazon Simple Storage Service (S3) bucket. This pipeline will perform the following tasks:
+1. Chunk the text from the PDF document.
+2. Convert the text chunks into embeddings (vector representations).
+3. Store the embeddings in Amazon OpenSearch.
+
+Dropping a PDF file into the S3 bucket will trigger an event-based workflow that involves a Fargate task. This task will be responsible for converting the text to embeddings and inserting them into Amazon OpenSearch.
+
+### <u>Diagrammatic Overview</u>
+Below is a diagram illustrating the document ingestion pipeline for storing embeddings of text chunks into the Amazon OpenSearch vector database:
 ![Overview of the document ingestion pipeline](images/document-processing-pipeline.png)
 
-The code for document processing, building the embeddings and inserting into the AWS OpenSearch cluster is in `create-embeddings-save-in-vectordb`. Let's build the Dockerfile inside the `create-embeddings-save-in-vectordb` folder and push to AWS Elastic Container Registry (ECR). 
-
-![Folder structure of document processing pipeline code](images/folder-structure-documentprocessing.png)
-
-The screenshots below explain the code in `startup_script.py` file to create text embeddings using the Embedding Model deployed on AWS Sagemaker and to insert the embeddings into the AWS Opensearch Vector Database for similiarity search later on.
-
-![code snippets from startup_script.py](images/startup-script1.jpg)
-![code snippets from startup_script.py](images/startup-script2.jpg)
-![code snippets from startup_script.py](images/startup-script3.jpg)
+### <u>Startup Script and File Structure</u>
+The core logic resides in the `create-embeddings-save-in-vectordb\startup_script.py` file. This Python script, `startup_script.py`, performs several tasks related to document processing, text embedding, and insertion into an Amazon OpenSearch cluster. The script downloads the PDF document from the Amazon S3 bucket, the loaded document is then split into smaller text chunks. For each chunk, the text content is sent to the GPT-J 6B FP16 Embedding model endpoint deployed on Amazon Sagemaker (retrieved from the TEXT_EMBEDDING_MODEL_ENDPOINT_NAME environment variable) to generate text embeddings. The generated embeddings, along with other information are then inserted into the Amazon OpenSearch index. The script retrieves configuration parameters and credentials from environment variables, making it adaptable for different environments.  This script is intended to be run within a Docker container for consistent execution.
 
 
-Now that we understand the code in `startup_script.py` file, build the `Dockerfile` from the same `create-embeddings-save-in-vectordb` folder and push the Image to AWS ECR. Once I push the image to AWS ECR this is how my ECR repository looks like :- 
+### <u>Building and Pushing Docker Image</u>
+After understanding the code in `startup_script.py`, we proceed to build the Dockerfile from the `create-embeddings-save-in-vectordb` folder and push the image to [Amazon Elastic Container Registry (Amazon ECR)](https://aws.amazon.com/ecr/). Amazon Elastic Container Registry (Amazon ECR) is a fully managed container registry offering high-performance hosting, so we can reliably deploy application images and artifacts anywhere. We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html). Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
+
+1. Retrieve an authentication token and authenticate your Docker client to your registry in the AWS CLI. 
+```bash 
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com 
+```
+2. Build your Docker image using the following command.
+```bash 
+docker build -t save-embedding-vectordb .
+```
+3. After the build completes, tag your image so you can push the image to this repository:
+```bash 
+docker tag save-embedding-vectordb:latest <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/save-embedding-vectordb:latest
+```
+4. Run the following command to push this image to your newly created AWS repository:
+```bash
+docker push <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/save-embedding-vectordb:latest
+```
+Once the image is uploaded to Amazon ECR repository, it should resemble the image below:
 
 ![ECR Image for Saving the embeddings into Vector DB](images/save-embeddings-vectordb-ecr.png)
 
 
-Run the cloudformation template that will create the event based workflow from the GitHub Repository folder `Infrastructure/fargate-embeddings-vectordb-save.yaml`. Overide the parameters based on your AWS environment. Here is how my Cloudformation parameters looks like.
+### <u>Creating the CloudFormation Stack for Event-Driven PDF Embeddings</u>
+We can create the CloudFormation stack for the event-based workflow with the provided parameters using the AWS Command Line Interface (AWS CLI). The Cloudformation template is located in the GitHub repository at `Infrastructure/fargate-embeddings-vectordb-save.yaml`. We will need to override the parameters to match the AWS environment.
+Here are the key parameters to update in the `aws cloudformation create-stack` command:
 
-![Cloudformation Template for Ingestion Pipeline](images/cloudformation-template-ingestion-pipeline.jpg)
+* BucketName: This parameter represents the Amazon S3 bucket where we will drop the PDF documents.
+* VpcId and SubnetId: These parameters specify where the Fargate task will run.
+* ImageName: This is the name of the Docker Image in your Amazon Elastic Container Registry (ECR) for save-embedding-vectordb.
+* TextEmbeddingModelEndpointName: Use this parameter to provide the name of the Embedding Model deployed on Amazon SageMaker in Step 1.
+* VectorDatabaseEndpoint: Specify the AWS OpenSearch domain endpoint url.
+* VectorDatabaseUsername and VectorDatabasePassword: These parameters are for the credentials needed to access the OpenSearch Cluster created in Step 4.
+* VectorDatabaseIndex: Set the name of the index in Amazon OpenSearch where the PDF Document embeddings will be stored.
 
-By creating this CloudFormation stack, you'll set up an S3 bucket, establish S3 notifications that trigger a Lambda function, which in turn initiates a Fargate task. The Fargate task runs a Docker container with the `startup-script.py` file, which is responsible for generating embeddings in AWS OpenSearch and for creating a new `carmanual` index.
+To execute the CloudFormation stack creation, we use the following AWS CLI command after updating the parameter values:
 
-After the Cloudformation is executed, drop the pdf representing the car manual into the S3 bucket. I downloaded a car manual available [here](https://ownersman.com/manuals/2023-BMW-X3-owners-manual) as my data source and dropped that into my S3 bucket. You can choose any online PDF version of a car manual  or an appliance manual for building this entire tutorial. 
-After the event based ingestion pipeline completes execution, this is how the AWS OpenSearch cluster looks like for the index `carmanual`.
+```bash
+aws cloudformation create-stack \
+  --stack-name ecs-embeddings-vectordb \
+  --template-body file://fargate-embeddings-vectordb-save.yaml \
+  --parameters \
+    ParameterKey=BucketName,ParameterValue=car-manuals-12345 \
+    ParameterKey=VpcId,ParameterValue=vpc-123456 \
+    ParameterKey=SubnetId,ParameterValue=subnet-123456,subnet-123456 \
+    ParameterKey=Imagename,ParameterValue=123456.dkr.ecr.us-east-1.amazonaws.com/save-embedding-vectordb:latest \
+    ParameterKey=TextEmbeddingModelEndpointName,ParameterValue=jumpstart-dft-hf-textembedding-gpt-j-6b-fp16 \
+    ParameterKey=VectorDatabaseEndpoint,ParameterValue=https://search-cfnopensearch2-xxxxxxxx.us-east-1.es.amazonaws.com  \
+    ParameterKey=VectorDatabaseUsername,ParameterValue=master \
+    ParameterKey=VectorDatabasePassword,ParameterValue=vectordbpassword \
+    ParameterKey=VectorDatabaseIndex,ParameterValue=carmanual
+```
+
+By creating the above CloudFormation stack, we set up an S3 bucket and establish S3 notifications that trigger a Lambda function. This Lambda function, in turn, initiates a Fargate task. The Fargate task runs a Docker container with the `startup-script.py` file, responsible for generating embeddings in Amazon OpenSearch under a new OpenSearch index named `carmanual`.
+
+### <u>Test with a Sample PDF</u>
+Once the CloudFormation stack is executed, drop a PDF representing a car manual into the S3 bucket. I downloaded a car manual available [here](https://ownersman.com/manuals/2023-BMW-X3-owners-manual). After the event-based ingestion pipeline completes execution, the Amazon OpenSearch cluster should contain the `carmanual` index with embeddings as shown below.
 
 ![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.jpg)
 ![Save embeddings in OpenSearch 3](images/opensearch-embeddings-3.jpg)
 
-## Step 6 - Build and deploy an API for providing real time "context" to the LLM and retrieve back meaningful responses.
+## Step 6 - Deploy Real-Time Q&A API with LLM Contextual Support
 
-Now that we have our text embeddings in the Vector Database powered by AWS OpenSearch, let us move to the next step where we will utilize the T5 Flan XXL Large Language Model (LLM) to respond to inquiries about our car manual. We will use our saved embeddings in the vector database to <b>provide context</b> to the LLM and use the LLM's capabilities to interpret text to answer questions that we ask the LLM about our car manual. To implement our use case, we will rely heavily on Open Source LangChain. LangChain is a Python framework that makes it easy to orchestrate and combine the various components that we need to create our real-time <b>context aware question-answer system powered by our LLM</b>. LangChain makes it easy for us to inject our car manual content into our prompt template, and send the final prompt to our LLM model.
+Now that we have our text embeddings in the Vector Database powered by Amazon OpenSearch, let's dive into the next step. Here, we'll utilize the capabilities of the T5 Flan XXL Large Language Model (LLM) to provide real-time responses regarding our car manual. 
 
-The saved Embeddings in the Vector Database (AWS OpenSearch) capture the relationships between words and their meanings so that we can perform calculations with them. The difference between the Embedding model and the T5 Flan LLM is that Embedding Model creates vector representations of our text chunks in such a way that it capture the meanings and relationships , while the T5 Flan LLM is a Language Model trained to generate contextually relevant responses based on the context injected into our prompts and our queries. The idea is that Embeddings that are numerically similar are also semantically similar.
+We'll leverage the saved embeddings in the vector database to provide context to the LLM. This context enables the LLM to understand and respond to questions related to our car manual effectively. To achieve this, we'll utilize a framework called [LangChain](https://python.langchain.com/docs/get_started/introduction/), which simplifies the orchestration of various components required for our real-time context-aware question-answer system powered by the LLM.
 
-We aim to compare the users' questions with the text chunks by generating embeddings for the question and then comparing it with the other embeddings that are saved in the Vector Database. When we represent the text chunks and the user's question as vectors, <b>we can perform mathematical calculations to do context aware similarity search</b> . To gauge how similar two data points are, we must measure how close they are in a multi-dimensional space, a task accomplished through distance metrics.
+The embeddings stored in the Vector Database capture word meanings and relationships, allowing us to perform calculations based on semantic similarities. While embeddings create vector representations of text chunks to capture meanings and relationships, the T5 Flan LLM specializes in generating contextually relevant responses based on context injected into prompts and queries. The goal is to compare user questions with text chunks by generating embeddings for the questions and then measuring their similarity to other embeddings stored in the Vector Database.
 
-In the image below, you can see where these components come into play.
+By representing text chunks and user questions as vectors, we can perform mathematical calculations to conduct context-aware similarity searches. To gauge similarity between two data points, we utilize distance metrics in a multi-dimensional space.
 
-<b>Diagrammatic overview of realtime Question and Answer support from T5-flan-XXL LLM.</b>
+The diagram below illustrates the real-time question and answer workflow powered by LangChain and our T5 Flan LLM.
+
+### <u>Diagrammatic Overview of Realtime Question and Answer support from T5-flan-XXL LLM</u>
 
 ![Realtime In Context Learning Workflows](images/realtime-in-context-learning-workflow.jpg)
 
-Now that we have seen the overall flow of how we will use LangChain and our T5 Flan LLM, let's briefly look at our code that we will expose as an API to which we will provide a question as input and it will return back a context aware response. The code for this is in the same GitHub repository and in the folder `RAG-langchain-questionanswer-t5-llm` . The API code depicted in the figure above is in `app.py` file.
+### <u>Building the API</u>
+Now that we've explored our LangChain and T5 Flan LLM workflow, let's delve into our API code, which takes in user questions and delivers context-aware responses. This real-time question-answer API resides in the `RAG-langchain-questionanswer-t5-llm` folder of our GitHub repository, with the core logic located in the `app.py` file. This Flask-based application defines a `/qa` route for question-answering.
 
-<b>Here are some code snippets from `app.py` and some explanation in the below diagrams.</b>
-![Realtime In Context Learning ](images/rag-llm-1.jpg)
-![Realtime In Context Learning ](images/rag-llm-2.jpg)
-![Realtime In Context Learning ](images/rag-llm-3.jpg)
-![Realtime In Context Learning ](images/rag-llm-4.jpg)
+When a user submits a question to the API, it utilizes the `TEXT_EMBEDDING_MODEL_ENDPOINT_NAME` environment variable, pointing to the Amazon SageMaker endpoint, to transform the question into numerical vector representations known as `embeddings`. These embeddings capture the semantic meaning of the text.
 
-Build a Docker container from the Dockerfile provided in the same folder and push the image to ECR repository. Here is how my image looks like in ECR.
+The API further utilizes Amazon OpenSearch to execute context-aware similarity searches, enabling it to fetch relevant text chunks from the OpenSearch index `carmanual` based on the embeddings derived from user queries. Following this step, the API calls the T5 Flan LLM endpoint, indicated by the environment variable `T5FLAN_XXL_ENDPOINT_NAME`, also deployed on Amazon SageMaker. The endpoint utilizes the retrieved text chunks from Amazon OpenSearch as `context` to generate responses. These text chunks, obtained from Amazon OpenSearch, serve as valuable context for the T5 Flan LLM endpoint, allowing it to produce meaningful responses to user queries. The API Code uses LangChain to orchestrate all these interactions. 
+
+### <u>Building and Pushing Docker Image</u>
+After understanding the code in `app.py`, we proceed to build the Dockerfile from the `RAG-langchain-questionanswer-t5-llm` folder and push the image to Amazon ECR. 
+We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html). Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
+1. Retrieve an authentication token and authenticate your Docker client to your registry in the AWS CLI. 
+```bash 
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com 
+```
+2. Build your Docker image using the following command.
+```bash 
+docker build -t qa-container .
+```
+3. After the build completes, tag your image so you can push the image to this repository:
+```bash 
+docker tag qa-container:latest <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/qa-container:latest
+```
+4. Run the following command to push this image to your newly created AWS repository:
+```bash
+docker push <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/qa-container:latest
+```
+Once the image is uploaded to Amazon ECR repository, it should resemble the image below:
 
 ![Realtime In Context Learning Workflows](images/ecr-qa-container.png)
 
-Create the Cloudformation stack to build the ECS Cluster with a Fargate task by importing the Cloudformation template from `Infrastructure/genai-chatbot-llm-rag-langchain.yaml` file. Override the following parameters as shown in the screen shot below and this will build out the ECS cluster with the Fargate task exposing the API .
+### <u>Build the CloudFormation Stack for hosting the API Endpoint</u>
+We use the AWS Command Line Interface (CLI) to create the CloudFormation stack for the [Amazon ECS Cluster](https://aws.amazon.com/ecs/) with a Fargate task for exposing the API. The Cloudformation template is located in the GitHub repository at `Infrastructure/fargate-api-rag-llm-langchain.yaml`. We will need to override the parameters to match the AWS environment. Here are the key parameters to update in the `aws cloudformation create-stack` command:
 
-![Cloudformation template for API ](images/cloudformation-qa-api.png)
+* DemoVPC: This parameter specifies the Virtual Private Cloud (VPC) where your service will run. 
+* PublicSubnetIds: This parameter requires a list of public subnet IDs where your load balancer and tasks will be placed. 
+* Imagename: Provide the name of the Docker Image in your Amazon Elastic Container Registry (ECR) for qa-container. 
+* TextEmbeddingModelEndpointName: Specify the endpoint name of the Embeddings model deployed on Amazon SageMaker in Step 1. 
+* T5FlanXXLEndpointName: Set the endpoint name of the T5-FLAN endpoint deployed on Amazon SageMaker in Step 2. 
+* VectorDatabaseEndpoint: Specify the AWS OpenSearch domain endpoint url.
+* VectorDatabaseUsername and VectorDatabasePassword: These parameters are for the credentials needed to access the OpenSearch Cluster created in Step 4.
+* VectorDatabaseIndex: Set the name of the index in Amazon OpenSearch where your service data will be stored. The name of the index that we have used in this example is carmanual.
 
-Once my stack is built the Cloudformation Outputs tab shows the endpoint for the API which invokes the LLM Model for the question sent to it. Here is how my Output looks like:- 
+To execute the CloudFormation stack creation, we use the following AWS CLI command after updating the parameter values:
+```bash
+aws cloudformation create-stack \
+  --stack-name ecs-questionanswer-llm \
+  --template-body file://fargate-api-rag-llm-langchain.yaml \
+  --parameters \
+    ParameterKey=DemoVPC,ParameterValue=vpc-123456 \
+    ParameterKey=PublicSubnetIds,ParameterValue=subnet-123456,subnet-789012  \
+    ParameterKey=Imagename,ParameterValue=123456.dkr.ecr.us-east-1.amazonaws.com/qa-container:latest \
+    ParameterKey=TextEmbeddingModelEndpointName,ParameterValue=jumpstart-dft-hf-textembedding-gpt-j-6b-fp16 \
+    ParameterKey=T5FlanXXLEndpointName,ParameterValue=jumpstart-example-huggingface-text2text-2023-08-06-16-40-45-080 \
+    ParameterKey=VectorDatabaseEndpoint,ParameterValue=https://search-cfnopensearch2-xxxxxxxx.us-east-1.es.amazonaws.com  \
+    ParameterKey=VectorDatabaseUsername,ParameterValue=master \
+    ParameterKey=VectorDatabasePassword,ParameterValue=vectordbpassword \
+    ParameterKey=VectorDatabaseIndex,ParameterValue=carmanual
+```
+After successfully executing the CloudFormation stack mentioned above, navigate to the AWS Console and access the 'CloudFormation Outputs' tab for the 'ecs-questionanswer-llm' stack. In this tab, we will find essential information, including the API endpoint. Below is an example of what the output will resemble: 
 
 ![Cloudformation template Output](images/cloudformation-qa-api-output.png)
 
-You can test the API endpoint via curl command  by replacing the as follows:-
+### <u>Testing the API</u>
+We can test the API endpoint via curl command as follows:-
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"question":"How can I clean my windshield?"}' http://quest-Publi-abc-xxxx.us-east-1.elb.amazonaws.com/qa
 ```
-You will see a response as shown below 
+We will see a response as shown below 
 ```bash 
 {"response":"To clean sensors and camera lenses, use a cloth moistened with a small amount of glass detergent."}
 ```
 
-## Step 7 - Build and deploy a Website with an embedded Chatbot that is integrated to our API.
+## Step 7 - Create and Deploy the Website with the Integrated Chatbot.
 
-Next we move on to the last step for our full stack pipeline, which is integrating the API with our Open Source embedded chatbot using Open Source botkit in a HTML website. For this website and the embedded chatbot, our source code is a node based application consisting of an index.html integrated with Open Source botkit.js as the chatbot. To make things easy I have created a Dockerfile and provided it alongside the code in the folder `homegrown_website_and_bot`. Once again, build the Docker container and push the image to AWS ECR repository.
+Next we move on to the last step for our full stack pipeline, which is integrating the API with our embedded chatbot in a HTML website. For this website and the embedded chatbot, our source code is a Nodejs application consisting of an index.html integrated with Open Source botkit.js as the chatbot. To make things easy I have created a Dockerfile and provided it alongside the code in the folder `homegrown_website_and_bot`.We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html) for the front end website. Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
 
-After the image for the front end is pushed to the ECR repository, build the Cloudformation stack by importing the `fargate-website-chatbot.yaml` file in the `Infrastructure` folder. Override the values of vpc,subnets and `QUESTURL` while creating the stack.
+1. Retrieve an authentication token and authenticate your Docker client to your registry in the AWS CLI. 
+```bash 
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com 
+```
+2. Build your Docker image using the following command.
+```bash 
+docker build -t web-chat-frontend .
+```
+3. After the build completes, tag your image so you can push the image to this repository:
+```bash 
+docker tag web-chat-frontend:latest <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/web-chat-frontend:latest
+```
+4. Run the following command to push this image to your newly created AWS repository:
+```bash
+docker push <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/web-chat-frontend:latest
+```
+
+After the image for the front end is pushed to the ECR repository, we build the Cloudformation stack for the front end by executing the `Infrastructure\fargate-website-chatbot.yaml` file. We will need to override the parameters to match the AWS environment. Here are the key parameters to update in the `aws cloudformation create-stack` command:
+
+* DemoVPC: This parameter specifies the Virtual Private Cloud (VPC) where your website will be deployed. 
+* PublicSubnetIds: This parameter requires a list of public subnet IDs where your load balancer and tasks for the website will be placed. 
+* Imagename: Provide the name of the Docker Image in your Amazon Elastic Container Registry (ECR) for the website. 
+* QUESTURL: Specify the endpoint url of the API deployed in Step 6. It is of the format http://<DNS Name of API ALB>/qa 
 
 
-![Cloudformation parameters  Setup](images/cloudformation-fargate-website-chatbot.png)
+To execute the CloudFormation stack creation, we use the following AWS CLI command after updating the parameter values:
 
-## Step 8 - See the whole thing working. Checkout our Car Savvy AI Assistant
+```bash
+aws cloudformation create-stack \
+  --stack-name ecs-website-chatbot \
+  --template-body file://fargate-website-chatbot.yaml \
+  --parameters \
+    ParameterKey=DemoVPC,ParameterValue=vpc-12345 \
+    ParameterKey=PublicSubnetIds,ParameterValue=subnet-1,subnet-2  \
+    ParameterKey=Imagename,ParameterValue=123456.dkr.ecr.us-east-1.amazonaws.com/web-chat-frontend:latest \
+    ParameterKey=QUESTURL,ParameterValue=http://your-api-alb-dns-name/qa
+```
 
-Get the DNS name of the ALB for the front end from the Cloudformation outputs tab
+## Step 8 - Checkout the Car Savvy AI Assistant
+
+After successfully building the CloudFormation stack mentioned above, navigate to the AWS Console and access the 'CloudFormation Outputs' tab for the 'ecs-website-chatbot' stack. In this tab we will find the DNS name of the Application Load Balancer (ALB) associated with the front end. Below is an example of what the output will resemble:
 ![Cloudformation template Output](images/dns-name-website.png)
 
-Hit this end point url in the browser and this is how the website looks .
+Invoke the end point url in the browser to see how the website looks. Ask natural language questions to the embedded chatbot. Some questions we could ask are -  "How should I clean the windshield?" , "Where can I find the VIN?", "How should I report safety defects?"  
 
 ![Website display ](images/website-1.png)
 ![Website display ](images/website-2.png)
+
 ## What's Next ?
 
 I want to try this setup using some other LLM's like Cohere and other Vector DB's like Redis. Hopefully, the above shows you how you can build your own production ready full stack pipelines for Large Language Models(LLM's) and integrate the pipeline with your front end and embedded NLP chatbots. Let me know other things that you want to read about using Open source , analytics, machine learning and AWS technologies!
@@ -172,10 +308,34 @@ As you continue on your learning journey, I encourage you to delve deeper into E
 4. [Embeddings](https://huggingface.co/blog/getting-started-with-embeddings/?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): An embedding is a numerical representation of a piece of information, for example, text, documents, images, audio, etc.
 5. [Sagemaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html/?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): SageMaker JumpStart provides pretrained, open-source models for a wide range of problem types to help you get started with machine learning. 
 
-## Clean Up Steps
+## Clean Up
 
-1. Delete the pdf file from the s3 bucket that was created by the Cloudfromation stack `Infrastructure/fargate-embeddings-vectordb-save.yaml`.
-2. Delete the 3 Cloudformation stacks.
-3. Delete the 2 deployed endpoints in AWS Sagemaker.
+1. Log in to the AWS Console.
+2. Navigate to the 'Amazon S3' service.
+3. In the Amazon S3 dashboard, locate and click on the S3 bucket where you uploaded the PDF file in Step 5. Select the PDF file by clicking the checkbox next to its name. With the PDF file selected, click on the 'Actions' button. From the dropdown menu, choose 'Delete'. A confirmation dialog will appear. Review the details and click 'Delete' to confirm the deletion of the PDF file.
+4. To delete the four CloudFormation stacks from the AWS Console's CloudFormation service, please follow these steps:
+*  Navigate to the 'CloudFormation' service.
+* In the CloudFormation dashboard, locate the stacks named 'ecs-website-chatbot', 'ecs-questionanswer-llm', 'ecs-embeddings-vectordb' and 'opensearch-vectordb'
+* Select each stack individually by clicking on the stack name.
+* In the stack details view, click on the 'Actions' button.
+* From the dropdown menu, choose 'Delete stack.'
+* A confirmation dialog will appear. Review the details and click 'Delete' to confirm the deletion of each stack.
+* The deletion process may take some time, depending on the resources associated with each stack.
+* Once the stacks have been successfully deleted, you will receive a confirmation message.
+5. Navigate to the Amazon SageMaker service in the AWS Console.
+6. Locate the endpoints you deployed in Steps 1 and 2.
+7. Select the endpoints by checking the checkboxes next to their names.
+8. In the "Actions" dropdown menu at the top, choose "Delete."
 
+## Conclusion
+In this tutorial, we built a full-stack Q&A chatbot using AWS technologies and open source tools. We leveraged Amazon OpenSearch as a vector database, integrated GPT-J 6B FP16 embeddings model, and used Langchain with a Large Language Model (LLM). This chatbot extracts insights from unstructured documents. Here's a quick summary of the steps:
+
+* Deployed GPT-J 6B FP16 Embedding Model.
+* Deployed the Flan T5 XXL LLM Model.
+* Created an Amazon OpenSearch cluster.
+* Built a document ingestion and embedding workflow.
+* Deployed a real-time Q&A API with LLM support.
+* Created and deployed a website with an integrated chatbot.
+
+This tutorial equips you to build similar AI-driven solutions and innovate further. 
 
