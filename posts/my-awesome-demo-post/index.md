@@ -7,7 +7,7 @@ tags:
     - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
-date: 2023-09-19 (expected publication date)
+date: 2023-09-19
 showInHomeFeed: true
 ---
 
