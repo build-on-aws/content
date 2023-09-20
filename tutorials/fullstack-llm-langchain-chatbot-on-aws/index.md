@@ -50,7 +50,7 @@ We will use a technique called as "In-Context" learning to inject domain or use 
 Now, let's dive into the first step of our journey. In Step 1, we will deploy the GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart. This model will play a crucial role in converting our PDF manual into embeddings for our Vector Database. 
 
 ## Step 1 - Deploy GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart
-To get started, follow the steps outlined in [Amazon SagemMaker Documentation - Open and use JumpStart section](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) to launch Amazon SageMaker JumpStart node from the Home Menu of the Amazon SageMaker Studio. Choose <b>Models, notebooks, solutions</b> option and select the GPT-J 6B Embedding FP16 embedding model as shown in the image below. Then, simply click on `Deploy` and Amazon SageMaker JumpStart will take care of the infrastructure setup for deploying this pretrained model into the SageMaker environment.
+To get started, follow the steps outlined in [Amazon SageMaker Documentation - Open and use JumpStart section](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) to launch Amazon SageMaker JumpStart node from the Home Menu of the Amazon SageMaker Studio. Choose <b>Models, notebooks, solutions</b> option and select the GPT-J 6B Embedding FP16 embedding model as shown in the image below. Then, simply click on `Deploy` and Amazon SageMaker JumpStart will take care of the infrastructure setup for deploying this pretrained model into the SageMaker environment.
 
 ![Select the hugging face embeddings model from within Sagemaker Jumpstart](images/huggingface-embeddings.jpg)
 ## Step 2 - Deploy the Flan T5 XXL LLM Model with Amazon SageMaker JumpStart
@@ -94,9 +94,9 @@ The core logic resides in the `create-embeddings-save-in-vectordb\startup_script
 
 
 ### <u>Building and Pushing Docker Image</u>
-After understanding the code in `startup_script.py`, we proceed to build the Dockerfile from the `create-embeddings-save-in-vectordb` folder and push the image to [Amazon Elastic Container Registry (Amazon ECR)](https://aws.amazon.com/ecr/). Amazon Elastic Container Registry (Amazon ECR) is a fully managed container registry offering high-performance hosting, so we can reliably deploy application images and artifacts anywhere. We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html). Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
+After understanding the code in `startup_script.py`, we proceed to build the Dockerfile from the `create-embeddings-save-in-vectordb` folder and push the image to [Amazon Elastic Container Registry (Amazon ECR)](https://aws.amazon.com/ecr/). Amazon Elastic Container Registry (Amazon ECR) is a fully managed container registry offering high-performance hosting, so we can reliably deploy application images and artifacts anywhere. We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to Amazon ECR. Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
 
-1. Retrieve an authentication token and authenticate your Docker client to your registry in the AWS CLI. 
+1. Retrieve an authentication token and authenticate the Docker client to the registry in the AWS CLI. 
 ```bash 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com 
 ```
@@ -104,15 +104,15 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
 ```bash 
 docker build -t save-embedding-vectordb .
 ```
-3. After the build completes, tag your image so you can push the image to this repository:
+3. After the build completes, tag the image so we can push the image to this repository:
 ```bash 
 docker tag save-embedding-vectordb:latest <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/save-embedding-vectordb:latest
 ```
-4. Run the following command to push this image to your newly created AWS repository:
+4. Run the following command to push this image to the newly created Amazon ECR repository:
 ```bash
 docker push <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/save-embedding-vectordb:latest
 ```
-Once the image is uploaded to Amazon ECR repository, it should resemble the image below:
+Once the Docker image is uploaded to Amazon ECR repository, it should resemble the image below:
 
 ![ECR Image for Saving the embeddings into Vector DB](images/save-embeddings-vectordb-ecr.png)
 
@@ -181,23 +181,23 @@ The API further utilizes Amazon OpenSearch to execute context-aware similarity s
 ### <u>Building and Pushing Docker Image</u>
 After understanding the code in `app.py`, we proceed to build the Dockerfile from the `RAG-langchain-questionanswer-t5-llm` folder and push the image to Amazon ECR. 
 We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html). Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
-1. Retrieve an authentication token and authenticate your Docker client to your registry in the AWS CLI. 
+1. Retrieve an authentication token and authenticate the Docker client to the registry in the AWS CLI. 
 ```bash 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com 
 ```
-2. Build your Docker image using the following command.
+2. Build the Docker image using the following command.
 ```bash 
 docker build -t qa-container .
 ```
-3. After the build completes, tag your image so you can push the image to this repository:
+3. After the build completes, tag the image so we can push the image to this repository:
 ```bash 
 docker tag qa-container:latest <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/qa-container:latest
 ```
-4. Run the following command to push this image to your newly created AWS repository:
+4. Run the following command to push this image to the newly created Amazon ECR repository:
 ```bash
 docker push <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/qa-container:latest
 ```
-Once the image is uploaded to Amazon ECR repository, it should resemble the image below:
+Once the Docker image is uploaded to Amazon ECR repository, it should resemble the image below:
 
 ![Realtime In Context Learning Workflows](images/ecr-qa-container.png)
 
@@ -247,24 +247,24 @@ We will see a response as shown below
 
 Next we move on to the last step for our full stack pipeline, which is integrating the API with our embedded chatbot in a HTML website. For this website and the embedded chatbot, our source code is a Nodejs application consisting of an index.html integrated with Open Source botkit.js as the chatbot. To make things easy I have created a Dockerfile and provided it alongside the code in the folder `homegrown_website_and_bot`.We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html) for the front end website. Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
 
-1. Retrieve an authentication token and authenticate your Docker client to your registry in the AWS CLI. 
+1. Retrieve an authentication token and authenticate the Docker client to the registry in the AWS CLI. 
 ```bash 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com 
 ```
-2. Build your Docker image using the following command.
+2. Build the Docker image using the following command.
 ```bash 
 docker build -t web-chat-frontend .
 ```
-3. After the build completes, tag your image so you can push the image to this repository:
+3. After the build completes, tag the image so we can push the image to this repository:
 ```bash 
 docker tag web-chat-frontend:latest <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/web-chat-frontend:latest
 ```
-4. Run the following command to push this image to your newly created AWS repository:
+4. Run the following command to push this image to the newly created Amazon ECR repository:
 ```bash
 docker push <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/web-chat-frontend:latest
 ```
 
-After the image for the front end is pushed to the ECR repository, we build the Cloudformation stack for the front end by executing the `Infrastructure\fargate-website-chatbot.yaml` file. We will need to override the parameters to match the AWS environment. Here are the key parameters to update in the `aws cloudformation create-stack` command:
+After the Docker image for the website is pushed to the ECR repository, we build the Cloudformation stack for the front end by executing the `Infrastructure\fargate-website-chatbot.yaml` file. We will need to override the parameters to match the AWS environment. Here are the key parameters to update in the `aws cloudformation create-stack` command:
 
 * DemoVPC: This parameter specifies the Virtual Private Cloud (VPC) where your website will be deployed. 
 * PublicSubnetIds: This parameter requires a list of public subnet IDs where your load balancer and tasks for the website will be placed. 
