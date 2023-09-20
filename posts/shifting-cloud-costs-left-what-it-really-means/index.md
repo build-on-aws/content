@@ -19,7 +19,7 @@ First, lets go back to 2011. I was working in London for a major consulting comp
 
 I tell this story because I’ve been deeply embedded in cloud costs and the different methods and attempts companies have made to reduce cloud costs, which ones work and which ones don’t. 
 
-I want to make three points in this blog. These points are what you, as engineers can take to your management team to push for engineering led FinOps practice. I will also show you what tool you should use as the first step to shift cloud costs left (it's open source too!).
+I want to make three points in this blog. These points are what you, as engineers, can take to your management team to push for a engineering led FinOps practice. I will also show you what tool is available as the first step to shift cloud costs left (it's open source too!).
 
 
 ### 1. Understanding Cloud Usage is Key
@@ -39,20 +39,27 @@ The **Usage** component is the more important part of this formula. If an instan
 
 This is why the [FinOps practice](https://www.infracost.io/finops/) should be engineering-led. The core work that needs to be done under the FinOps umbrella requires engineering effort. Engineering is required for cost optimization, tagging of resources, and right-sizing decisions. Engineering is required to do the cost-benefit analysis for each action.
 
+Now that you know the overall formula, try to identify where the biggest usage components of your infrastructure are. These will be your first target for optimization. 
 
 ### 2. Understand Cloud Costs Before Making Changes
 
-Many companies discuss the concept of shifting cloud costs left, but what they actually do is not shifting left. Setting up alerting when a cost spike or anomaly happens is great, but that's not shifting left. When you receive a production alert and quickly address the issue, that's not shifting left, the same concept applies to costs.
+Many companies discuss the concept of shifting cloud costs left, but what they actually do is not shifting left. 
 
-Hey Chat GPT, define “shifting left”: “Shifting left in computing means moving processes or tasks earlier in the development cycle to catch and address issues earlier, rather than waiting until later stages or after deployment”. That's a pretty good [definition](https://about.gitlab.com/topics/ci-cd/shift-left-devops/#how-to-shift-left-with-continuous-integration).
+Shifting left is defined as moving processes or tasks earlier in the development cycle to catch and address issues earlier, rather than waiting until later stages or after deployment.
+
+Setting up alerting when a cost spike or anomaly happens is great, but that's not shifting left.
 
 When we talk about shifting FinOps left, it means knowing how much the cloud costs <u>before</u> we spend the money. It means checking for the right tags and values <u>before</u> we merge the pull request. It means checking for best practice policies directly in <u>our workflow</u>.
+
+Keep this information in mind - at the end of this article, I'm going to show you a tool that you can deploy to automate these tasks.
 
 ### 3. Cloud Costs Are Complex
 
 We have code to write, features to ship, bugs to fix, and so on. Testing was shifted left; security was shifted left; if we keep shifting things left, we won't be coding anymore! ... I hear you say, and I agree. We can't just "shift it left" without putting in tools to help. We need the right information at the right time appended directly in our workflow.
 
-In the great words of Gwen Stefani, “this sh*t is bananas”: [cloud costs are complex](https://www.infracost.io/blog/why-are-cloud-costs-so-complex/). Here at [Infracost](https://www.infracost.io), we have a database of all resource prices from AWS, Microsoft Azure, and GCP, and it comes to 4 million prices! How do we expect anyone to know which price points are being used? We need to automate this to understand the cost impact of the changes before we spend the money. Non-engineering people are always surprised when I tell them that the cloud doesn't't have a checkout screen!
+In the great words of Gwen Stefani, “this sh*t is bananas”: [cloud costs are complex](https://www.infracost.io/blog/why-are-cloud-costs-so-complex/). Here at [Infracost](https://www.infracost.io), we have a multi-cloud database of all resource prices from the major cloud providers, and it comes to 4 million prices! How do we expect anyone to know which price points are being used? We need to automate this to understand the cost impact of the changes before we spend the money. Non-engineering people are always surprised when I tell them that the cloud doesn't have a checkout screen!
+
+That's the core reason why Infracost exists. We give you that checkout screen experience by simplifying these complex cloud costs and giving you an easy and automated way to know how much it will cost as you make changes to your infrastructure.
 
 ### FinOps Should Be Engineering-Led
 
