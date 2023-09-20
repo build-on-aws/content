@@ -83,7 +83,7 @@ aws cloudformation create-stack --stack-name opensearch-vectordb \
                ParameterKey=MasterUserPassword,ParameterValue=<password> 
 ```
 
-## Step 5 - Building the Document Ingestion and Embedding Workflow 
+## Step 5 - Build the Document Ingestion and Embedding Workflow 
 
 In this step, we will create an ingestion and processing pipeline designed to read a PDF document when it is placed in an Amazon Simple Storage Service (S3) bucket. This pipeline will perform the following tasks:
 1. Chunk the text from the PDF document.
@@ -100,7 +100,7 @@ Below is a diagram illustrating the document ingestion pipeline for storing embe
 The core logic resides in the `create-embeddings-save-in-vectordb\startup_script.py` file. This Python script, `startup_script.py`, performs several tasks related to document processing, text embedding, and insertion into an Amazon OpenSearch cluster. The script downloads the PDF document from the Amazon S3 bucket, the loaded document is then split into smaller text chunks. For each chunk, the text content is sent to the GPT-J 6B FP16 Embedding model endpoint deployed on Amazon SageMaker (retrieved from the TEXT_EMBEDDING_MODEL_ENDPOINT_NAME environment variable) to generate text embeddings. The generated embeddings, along with other information are then inserted into the Amazon OpenSearch index. The script retrieves configuration parameters and credentials from environment variables, making it adaptable for different environments.  This script is intended to be run within a Docker container for consistent execution.
 
 
-### <u>Building and Pushing Docker Image</u>
+### <u>Build and Publish the Docker Image</u>
 After understanding the code in `startup_script.py`, we proceed to build the Dockerfile from the `create-embeddings-save-in-vectordb` folder and push the image to [Amazon Elastic Container Registry (Amazon ECR)](https://aws.amazon.com/ecr/). Amazon Elastic Container Registry (Amazon ECR) is a fully managed container registry offering high-performance hosting, so we can reliably deploy application images and artifacts anywhere. We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to Amazon ECR. Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
 
 1. Retrieve an authentication token and authenticate the Docker client to the registry in the AWS CLI. 
@@ -124,7 +124,7 @@ Once the Docker image is uploaded to Amazon ECR repository, it should resemble t
 ![ECR Image for Saving the embeddings into Vector DB](images/save-embeddings-vectordb-ecr.png)
 
 
-### <u>Building Infrastructure for Event-Driven PDF Embeddings Workflow</u>
+### <u>Build Infrastructure for Event-Driven PDF Embeddings Workflow</u>
 We can utilize the AWS Command Line Interface (AWS CLI) to create the CloudFormation stack for the event-based workflow with the provided parameters. The Cloudformation template is located in the GitHub repository at `Infrastructure/fargate-embeddings-vectordb-save.yaml`. We will need to override the parameters to match the AWS environment.
 Here are the key parameters to update in the `aws cloudformation create-stack` command:
 
@@ -178,14 +178,14 @@ The diagram below illustrates the real-time question and answer workflow powered
 
 ![Realtime In Context Learning Workflows](images/realtime-in-context-learning-workflow.jpg)
 
-### <u>Building the API</u>
+### <u>Build the API</u>
 Now that we've explored our LangChain and T5 Flan LLM workflow, let's delve into our API code, which takes in user questions and delivers context-aware responses. This real-time question-answer API resides in the `RAG-langchain-questionanswer-t5-llm` folder of our GitHub repository, with the core logic located in the `app.py` file. This Flask-based application defines a `/qa` route for question-answering.
 
 When a user submits a question to the API, it utilizes the `TEXT_EMBEDDING_MODEL_ENDPOINT_NAME` environment variable, pointing to the Amazon SageMaker endpoint, to transform the question into numerical vector representations known as `embeddings`. These embeddings capture the semantic meaning of the text.
 
 The API further utilizes Amazon OpenSearch to execute context-aware similarity searches, enabling it to fetch relevant text chunks from the OpenSearch index `carmanual` based on the embeddings derived from user queries. Following this step, the API calls the T5 Flan LLM endpoint, indicated by the environment variable `T5FLAN_XXL_ENDPOINT_NAME`, also deployed on Amazon SageMaker. The endpoint utilizes the retrieved text chunks from Amazon OpenSearch as `context` to generate responses. These text chunks, obtained from Amazon OpenSearch, serve as valuable context for the T5 Flan LLM endpoint, allowing it to produce meaningful responses to user queries. The API Code uses LangChain to orchestrate all these interactions. 
 
-### <u>Building and Pushing Docker Image</u>
+### <u>Build and Publish the Docker Image</u>
 After understanding the code in `app.py`, we proceed to build the Dockerfile from the `RAG-langchain-questionanswer-t5-llm` folder and push the image to Amazon ECR. 
 We will use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html) and [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) to build and push the Docker Image to [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html). Replace <AWS Account Number> with the correct AWS Account Number in all the commands below. <br/>
 1. Retrieve an authentication token and authenticate the Docker client to the registry in the AWS CLI. 
@@ -240,7 +240,7 @@ After successfully executing the CloudFormation stack mentioned above, navigate 
 
 ![Cloudformation template Output](images/cloudformation-qa-api-output.png)
 
-### <u>Testing the API</u>
+### <u>Test the API</u>
 We can test the API endpoint via curl command as follows:-
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"question":"How can I clean my windshield?"}' http://quest-Publi-abc-xxxx.us-east-1.elb.amazonaws.com/qa
