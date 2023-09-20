@@ -7,6 +7,8 @@ tags:
   - golang
   - aws
   - aws-sam
+waves:
+  - modern-apps
 showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta

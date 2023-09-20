@@ -20,7 +20,7 @@ authorName: Cobus Bernard
 date: 2023-01-31
 ---
 
-Terraform is awesome to manage all your infrastructure, but when you have more than one developer trying to make changes to the infrastructure, things can get messy very quickly if there isn't a mechanism ([CI/CD pipeline](/concepts/devops-essentials/#continuous-integration-and-continuous-delivery)) in place to manage it. Without one, making changes to any infrastructure requires coordination and communication, and the challenge quickly scales the more people that are involved with making these changes. Imagine having to run around shouting *"Hey Bob! Hey Jane! You done yet with that DB change? I need to add a new container build job!"*. As Jeff Bezos said:
+Terraform is awesome to manage all your infrastructure, but when you have more than one developer trying to make changes to the infrastructure, things can get messy very quickly if there isn't a mechanism ([CI/CD pipeline](/concepts/devops-essentials#continuous-integration-and-continuous-delivery)) in place to manage it. Without one, making changes to any infrastructure requires coordination and communication, and the challenge quickly scales the more people that are involved with making these changes. Imagine having to run around shouting *"Hey Bob! Hey Jane! You done yet with that DB change? I need to add a new container build job!"*. As Jeff Bezos said:
 
 > ***"Good intentions never work, you need good mechanisms to make anything happen."***
 
@@ -46,8 +46,8 @@ This tutorial will show you how to set up a CI/CD pipeline using Amazon [CodeCat
 
 Automating your infrastructure is a great idea, but you need infrastructure to automate your infrastructure. There are three approaches to doing this:
 
-1. Clicking in the console to set everything up, aka ["ClickOps"](https://www.buildon.aws/concepts/devops-essentials/#clickops)
-1. Using a CLI to create the resources for you with scripts, ["Procedural"](https://www.buildon.aws/concepts/devops-essentials/#procedural)
+1. Clicking in the console to set everything up, aka ["ClickOps"](/concepts/devops-essentials#clickops)
+1. Using a CLI to create the resources for you with scripts, ["Procedural"](/concepts/devops-essentials#procedural)
 1. Using Terraform without storing the state file to bootstrap, then add in the state file configurations to store it
 
 We will be using the 3rd option, have a look at the [Stack Overflow](https://stackoverflow.com/questions/47913041/initial-setup-of-terraform-backend-using-terraform/) discussion around approaches for more details on the trade-offs.

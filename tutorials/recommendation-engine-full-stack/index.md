@@ -322,20 +322,23 @@ Here is how my UI looks when everything is hooked up and the file is opened from
 5. Delete the contents of the S3 bucket that was created by the CloudFormation template. This will allow the deletion of the S3 bucket when you delete the CloudFormation stack.
 5. Delete the main-stack.yaml from AWS CloudFormation console which is the parent level stack for the entire nested stack and that will delete all the remaining deployed resources. 
 
-🎥 Here are the 3 videos containing a hands-on implementation about this tutorial<br/>
+🎥 Here are the 3 videos containing a hands-on implementation about this tutorial
 
-Video #1 goes over the basic steps of data prepping, data analysis and visualization as part of feature engineering to come up with the list of features that will help us in training and building our Machine Learning Models.<br/>
+Video #1 goes over the basic steps of data prepping, data analysis and visualization as part of feature engineering to come up with the list of features that will help us in training and building our Machine Learning Models.
+
 https://youtu.be/96IV4qBO0co
 
-Video #2 goes over training, building and deployment of our custom scaling model and our K means clustering model on SageMaker.<br/>
+Video #2 goes over training, building and deployment of our custom scaling model and our K means clustering model on SageMaker.
+
 https://youtu.be/9JzEybNli7Q
 
-Video #3 brings the entire story together by showing how to create our REST API's for the Machine Learning Models with the help of Lambda and API Gateway. Finally in this video we will integrate our API's with our fancy UI.<br/>
+Video #3 brings the entire story together by showing how to create our REST API's for the Machine Learning Models with the help of Lambda and API Gateway. Finally in this video we will integrate our API's with our fancy UI.
+
 https://youtu.be/7iPQPGwk8mc
 
 As you continue on your learning journey, I encourage you to delve deeper into the tools we used today, such as Lambda, API Gateway, Chalice, and SageMaker. These powerful tools can significantly enhance your data science and machine learning projects. Here are some next steps to help you master these technologies:
 
-1. [Lambda](https://aws.amazon.com/lambda/): Consider exploring AWS Lambda to master serverless computing and event-driven programming for building scalable applications.
-2. [API Gateway](https://aws.amazon.com/api-gateway/): Take the next step in learning by delving into API Gateway, understanding RESTful API design, and securing, deploying, and monitoring APIs at scale.
+1. [Lambda](https://aws.amazon.com/lambda/?sc_channel=el&sc_campaign=tutorial&sc_content=recommendation-engine-full-stack&sc_geo=mult&sc_country=mult&sc_outcome=acq): Consider exploring AWS Lambda to master serverless computing and event-driven programming for building scalable applications.
+2. [API Gateway](https://aws.amazon.com/api-gateway/?sc_channel=el&sc_campaign=tutorial&sc_content=recommendation-engine-full-stack&sc_geo=mult&sc_country=mult&sc_outcome=acq): Take the next step in learning by delving into API Gateway, understanding RESTful API design, and securing, deploying, and monitoring APIs at scale.
 3. [Chalice](https://github.com/aws/chalice): Chalice simplifies serverless application development on AWS. Dive into its documentation and explore more use cases.
-4. [SageMaker](https://aws.amazon.com/sagemaker/): As you progress with SageMaker, familiarize yourself with additional algorithms it offers. Explore hyperparameter tuning techniques to optimize model performance. Also, investigate how SageMaker can be integrated with other AWS services like AWS Glue for data preparation.
+4. [SageMaker](https://aws.amazon.com/sagemaker/?sc_channel=el&sc_campaign=tutorial&sc_content=recommendation-engine-full-stack&sc_geo=mult&sc_country=mult&sc_outcome=acq): As you progress with SageMaker, familiarize yourself with additional algorithms it offers. Explore hyperparameter tuning techniques to optimize model performance. Also, investigate how SageMaker can be integrated with other AWS services like AWS Glue for data preparation.

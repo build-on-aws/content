@@ -21,7 +21,7 @@ This is an 8-part series about Picturesocial:
 
 ## Introduction
 
-In the last post, [Picturesocial - How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/), we discussed containers and the steps needed to containerize an application. Creating a container without thinking where to deploy it is like having your home inside a cargo container floating in the middle of the ocean. As wonderful and terrifying as that sounds, you will definitely need power, water, gas, garbage collection, food, and may be some human interaction if you want to lead a healthy and productive life. In this post, we are going to learn about Kubernetes, one of the most important pieces in the Picturesocial architecture.
+In the last post, [Picturesocial - How to containerize an app in less than 15 minutes](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min), we discussed containers and the steps needed to containerize an application. Creating a container without thinking where to deploy it is like having your home inside a cargo container floating in the middle of the ocean. As wonderful and terrifying as that sounds, you will definitely need power, water, gas, garbage collection, food, and may be some human interaction if you want to lead a healthy and productive life. In this post, we are going to learn about Kubernetes, one of the most important pieces in the Picturesocial architecture.
 
 Picturesocial will have several APIs and we want to have independence in how the services are maintained, deployed, and developed. We decided to use a containerized architecture. This is not as complex as it sounds, it just means that you are using containers and a container orchestrator. A container orchestrator is the component in charge of handling all the containers, replicas, networking, storage, and infrastructure needed. When we talk about container orchestrators, the most popular one today is Kubernetes, thanks to its active community, support, and ecosystem.
 
@@ -208,4 +208,4 @@ I use the following criteria when I have to choose. This is not an exact science
 
 I know this is a lot of information for one blog post and I also know that it may feel overwhelming, but the purpose of this post is to understand how it works and to get familiar with the terms. As we advance further in the creation of Picturesocial we are going to see how these concepts are applied with a hands-on experience.
 
-In the [next post](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform/), we are going to learn how to actually create an EKS cluster using Terraform!
+In the [next post](/posts/picturesocial/03-how-to-deploy-kubernetes-cluster-using-terraform), we are going to learn how to actually create an EKS cluster using Terraform!

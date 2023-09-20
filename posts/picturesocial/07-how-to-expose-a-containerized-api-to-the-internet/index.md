@@ -21,7 +21,7 @@ This is a 8-part series about Picturesocial:
 
 Not everything is about creating and deploying. One of the most important parts of the journey is to make sure that our APIs are available to be consumed by the clients, wherever they are. The way you expose an API could represent the success or failure of the whole project, and this is why we need to explore some of the best practices and tips. In this post we will be learning about API Gateway and how we can make sure that our backends are consumed appropriately in a secure way.
 
-But first, we need to understand where are we right now. We already [created and containerized](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/), [deployed](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/), and secured the API and the infrastructure components needed for our APIs. But our services are presented as Internet Load Balancers, and that means that anybody with the URL can call our services without any control. So far we haven’t implemented throttling policies, API-key validation, authentication, or any other security mechanism to protect our endpoints.
+But first, we need to understand where are we right now. We already [created and containerized](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min), [deployed](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes), and secured the API and the infrastructure components needed for our APIs. But our services are presented as Internet Load Balancers, and that means that anybody with the URL can call our services without any control. So far we haven’t implemented throttling policies, API-key validation, authentication, or any other security mechanism to protect our endpoints.
 
 A natural choice would be to present everything from a Layer 7 Load Balancer, but managing all the API design and considerations for presenting and covering all the points presented earlier would be a challenge. That’s where Amazon API Gateway comes to the rescue!
 
@@ -52,7 +52,7 @@ OR
 
 ![API Gateway Flow](images/07-api-gateway-flow.jpg "API Gateway Flow")
 
-* Before starting to create the new APIs we need to make sure that Kubernetes Services are completely private and can only be called inside a VPC. This is where the Kubernetes Private Load Balancers help us to simplify and protect our endpoints. This was explored in an earlier post about [What’s Kubernetes and Why should I care](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care/).
+* Before starting to create the new APIs we need to make sure that Kubernetes Services are completely private and can only be called inside a VPC. This is where the Kubernetes Private Load Balancers help us to simplify and protect our endpoints. This was explored in an earlier post about [What’s Kubernetes and Why should I care](/posts/picturesocial/02-whats-kubernetes-and-why-should-you-care).
 * Let’s take a look the original service manifest. Here we are creating a public LoadBalancer for the app pictures that are exposed through the port 80.
 
 ```yaml
@@ -106,7 +106,7 @@ spec:
 
 ![Bash with kubectl service command](images/07-bash-kubectl-service.jpg "Bash with kubectl service command")
 
-* The easiest way to create an API through API Gateway is by importing a Swagger file with the operation definition. This is pretty simple to accomplish by running the API that we made in the [previous post](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api/) and running it locally going to `http://localhost:5075/swagger/index.html`
+* The easiest way to create an API through API Gateway is by importing a Swagger file with the operation definition. This is pretty simple to accomplish by running the API that we made in the [previous post](/posts/picturesocial/06-how-to-use-dynamodb-on-a-containerized-api) and running it locally going to `http://localhost:5075/swagger/index.html`
 
 ![OAS3 with CRUD](images/07-oas3-crud.jpg "Bash with kubectl service command")
 

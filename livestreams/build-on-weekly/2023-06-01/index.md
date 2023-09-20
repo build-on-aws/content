@@ -53,7 +53,7 @@ https://www.twitch.tv/videos/1835498649
 ## Links from today's episode
 
 - [DevBox](https://www.jetpack.io/devbox/)
-- [Amazon Cloud9](https://aws.amazon.com/cloud9/)
+- [Amazon Cloud9](https://aws.amazon.com/cloud9/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [Nix Installer](https://github.com/DeterminateSystems/nix-installer)
 - [Direnv](https://direnv.net/)
 - [Code used by Brian in a nice gist](https://gist.github.com/bketelsen/e1646d2a4551217b4f0531fb9f0f3c9a)

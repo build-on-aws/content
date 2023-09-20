@@ -9,6 +9,8 @@ tags:
     - event-bus
     - foundational
     - aws
+waves:
+  - modern-apps
 showInHomeFeed: true
 authorGithubAlias: danilop
 authorName: Danilo Poccia
