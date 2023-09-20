@@ -50,18 +50,25 @@ We will use a technique called as "In-Context" learning to inject domain or use 
 Now, let's dive into the first step of our journey. In Step 1, we will deploy the GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart. This model will play a crucial role in converting our PDF manual into embeddings for our Vector Database. 
 
 ## Step 1 - Deploy GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart
-To get started, follow the steps outlined in [Amazon SageMaker Documentation - Open and use JumpStart section](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) to launch Amazon SageMaker JumpStart node from the Home Menu of the Amazon SageMaker Studio. Choose <b>Models, notebooks, solutions</b> option and select the GPT-J 6B Embedding FP16 embedding model as shown in the image below. Then, simply click on `Deploy` and Amazon SageMaker JumpStart will take care of the infrastructure setup for deploying this pretrained model into the SageMaker environment.
+To get started, follow the steps outlined in [Amazon SageMaker Documentation - Open and use JumpStart section](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) to launch Amazon SageMaker JumpStart node from the Home Menu of the Amazon SageMaker Studio. Choose <b>Models, notebooks, solutions</b> option and select the GPT-J 6B Embedding FP16 embedding model as shown in the image below. Then, simply click on 'Deploy' and Amazon SageMaker JumpStart will take care of the infrastructure setup for deploying this pretrained model into the SageMaker environment.
 
-![Select the hugging face embeddings model from within Sagemaker Jumpstart](images/huggingface-embeddings.jpg)
+
+Select the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart             |  Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart
+:------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:
+![Select the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/embedding1.jpg)  |  ![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/embedding2.jpg)
+
 ## Step 2 - Deploy the Flan T5 XXL LLM Model with Amazon SageMaker JumpStart
-Next from within Amazon SageMaker JumpStart select the Flan-T5 XXL FP16 Large Language Model(LLM) and click on `Deploy` to automatically create the infrastructure and deploy the model endpoint into the Amazon SageMaker environment.
-![Select the t5-flan-xxl large language model from within Sagemaker Jumpstart](images/t5-flan-xxl.jpg)
+Next, within Amazon SageMaker JumpStart, choose the Flan-T5 XXL FP16 Large Language Model (LLM), and then click on 'Deploy' to initiate the automatic setup of infrastructure and deploy the model endpoint into the Amazon SageMaker environment.
 
-![Select the t5-flan-xxl large language model from within Sagemaker Jumpstart](images/t5-flan-xxl-2.jpg)
+
+Select the T5 Flan XXL Large Language Model from within Amazon SageMaker JumpStart          |  Deploy the T5 Flan XXL Large Language Model from within Amazon SageMaker JumpStart
+:------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:
+![Select the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/t5-flan-xxl-1.jpg)  |  ![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/t5-flan-xxl-2.jpg)
+
 
 ## Step 3 - Check the status of the deployed model endpoints
 We check the status of the deployed model endpoints from Step 1 and Step 2 in the Amazon SageMaker console and make note of their endpoint names, since we will use them in our code. Here is how my console looks like after the model endpoints are deployed.
-![Name of Deployed endpoints in SageMaker](images/deployed-endpoints.jpg)
+![Name of Deployed endpoints in Amazon SageMaker](images/deployed-endpoints.jpg)
 
 ## Step 4 - Create the Amazon OpenSearch Cluster
 Amazon OpenSearch is a search and analytics service that supports k-Nearest Neighbors (k-NN) algorithm. This functionality is incredibly valuable for similarity-based searches, allowing us to use OpenSearch effectively as a vector database. To explore further and learn about which versions of Elasticsearch/OpenSearch support the k-NN plugin, please refer the following link: [K-NN Plugin Documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html). 
@@ -293,7 +300,7 @@ After successfully building the CloudFormation stack mentioned above, navigate t
 Invoke the end point url in the browser to see how the website looks. Ask natural language questions to the embedded chatbot. Some questions we could ask are -  "How should I clean the windshield?" , "Where can I find the VIN?", "How should I report safety defects?"  
 
 ![Website display ](images/website-1.png)
-![Website display ](images/website-2.png)
+
 
 ## What's Next ?
 
@@ -306,7 +313,7 @@ As you continue on your learning journey, I encourage you to delve deeper into E
 2. [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): Familiarize yourself with K-NN algorithm and other distance algorithms
 3. [Langchain](https://python.langchain.com/docs/get_started/introduction/?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): LangChain is a framework designed to simplify the creation of applications using large language models (LLMs).
 4. [Embeddings](https://huggingface.co/blog/getting-started-with-embeddings/?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): An embedding is a numerical representation of a piece of information, for example, text, documents, images, audio, etc.
-5. [Amazon SageMaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html/?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): SageMaker JumpStart provides pretrained, open-source models for a wide range of problem types to help you get started with machine learning. 
+5. [Amazon SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html/?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): SageMaker JumpStart provides pretrained, open-source models for a wide range of problem types to help you get started with machine learning. 
 
 ## Clean Up
 
