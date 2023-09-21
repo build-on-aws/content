@@ -20,7 +20,7 @@ In our modern, tech-savvy world, Generative AI models are no longer the stuff of
 
 Recall the initial days of cloud computing. The potential was enormous, but so were the concerns about security and responsibility. The landscape feels similar with Generative AI today. Navigating ethical usage is challenging. And when things go awry, where does the accountability lie? This territory remains ambiguous, with stakeholders often questioning their ethical responsibilities.
 
-But, as history often does, it provides us with solutions. The [AWS Shared Responsibility Model](https://aws.amazon.com/compliance/shared-responsibility-model/), which once brought clarity to the world of cloud computing, can be our guiding light. Drawing inspiration, we present a structured model for Generative AI, aiming to define the roles and responsibilities from the core model providers to the end-users. 
+But as usual, history provides us with solutions. The [AWS Shared Responsibility Model](https://aws.amazon.com/compliance/shared-responsibility-model/), which once brought clarity to the world of cloud computing, can be our guiding light. Drawing inspiration from it, I suggest a structured model for Generative AI, aiming to define the roles and responsibilities from the core model providers to the end-users. 
 ![Generative AI Shared Responsibility Model](images/shared_resp_genai.png)
 
 ## The Power and Peril of Generative AI
