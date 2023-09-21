@@ -15,6 +15,7 @@ spaces:
   - kubernetes
 authorGithubAlias: tucktuck9
 authorName: Leah Tucker
+movedFrom: /tutorials/eks-cluster-load-balancer-ipv4
 date: 2023-08-30
 ---
 
@@ -22,7 +23,7 @@ In the intricate field of networking, managing access to applications within a K
 
 Building on the Amazon EKS cluster from [**part 1**](/tutorials/eks-cluster-high-traffic) of our series, this tutorial dives into setting up the AWS Load Balancer Controller (LBC). Included in the cluster configuration for the previous tutorial is the IAM Role for Service Account (IRSA) for the AWS LBC and the OpenID Connect (OIDC) endpoint. For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/eks-cluster-high-traffic). Alternatively, to set up an existing cluster with the components required for this tutorial, use the instructions in [Create an IAM OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Create an IAM Role for Service Account (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) in EKS official documentation.
 
-In this tutorial, you will set up the AWS Load Balancer Controller (LBC) on your IPv4-enabled Amazon EKS cluster, deploy a sample application to it, and create an Ingress Group to group applications together under a single Application Load Balancer (ALB) instance. 
+In this tutorial, you will set up the AWS Load Balancer Controller (LBC) on your IPv4-enabled Amazon EKS cluster, deploy a sample application to it, and create an Ingress Group to group applications together under a single Application Load Balancer (ALB) instance.
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -128,7 +129,7 @@ aws iam create-policy \
     --policy-document file://iam_policy.json
 ```
 
-Lastly, create the service account. 
+Lastly, create the service account.
 
 ```bash
 eksctl create iamserviceaccount \ 
@@ -236,7 +237,7 @@ If you encounter any issues with the response, you may need to manually configur
 
 ## Step 6: Create an Ingress Group
 
-In this section, we will update the existing Ingress object by introducing an Ingress Group. This is achieved by adding the ['group.name' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/ingress_class/#specgroup) within the Ingress object's metadata. When this group name is consistently applied across different Ingress resources, the AWS Load Balancer Controller (LBC) identifies them as constituents of the same group, thereby managing them in unison. The advantage of this approach is that it allows for the consolidation of multiple Ingress resources under a single Application Load Balancer (ALB) instance. This not only streamlines the management of these resources but also optimizes the utilization of the ALB. By grouping them together through this annotation, you create a cohesive and efficient structure that simplifies the orchestration of your load balancing needs. 
+In this section, we will update the existing Ingress object by introducing an Ingress Group. This is achieved by adding the ['group.name' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/ingress_class/#specgroup) within the Ingress object's metadata. When this group name is consistently applied across different Ingress resources, the AWS Load Balancer Controller (LBC) identifies them as constituents of the same group, thereby managing them in unison. The advantage of this approach is that it allows for the consolidation of multiple Ingress resources under a single Application Load Balancer (ALB) instance. This not only streamlines the management of these resources but also optimizes the utilization of the ALB. By grouping them together through this annotation, you create a cohesive and efficient structure that simplifies the orchestration of your load balancing needs.
 
 1. Create a Kubernetes manifest called `updated-ingress-2048.yaml` and paste the following contents into it.
 
@@ -289,13 +290,13 @@ NAME           CLASS   HOSTS   ADDRESS                                          
 ingress-2048   alb     *       k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com   80      4d1h
 ```
 
-4. Open a web browser and enter the "game-2048" ‘ADDRESS’ to access the web application. For example, `k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com`. 
+4. Open a web browser and enter the "game-2048" ‘ADDRESS’ to access the web application. For example, `k8s-mygroup-d7adaa7af2-1349935440.us-east-2.elb.amazonaws.com`.
 
 You should see the 2048 game. To view your Application Load Balancer (ALB) instance, open the [Load balancers](https://us-east-2.console.aws.amazon.com/ec2/home?#LoadBalancers:) page on the Amazon EC2 console.
 
 ## Clean Up
 
-After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created. 
+After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created.
 
 ```bash
 # Delete the Namespace, Deployment, Service, and Ingress

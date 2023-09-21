@@ -15,6 +15,7 @@ spaces:
   - kubernetes
 authorGithubAlias: tucktuck9
 authorName: Leah Tucker
+movedFrom: /tutorials/eks-cluster-load-balancer-ipv6
 date: 2023-08-30
 ---
 
@@ -162,7 +163,7 @@ AWS Load Balancer controller installed!
 
 In this section, you will upgrade the AWS Load Balancer Controller (LBC) to use the Ingress class, a critical component for managing external access to services within an IPv6-enabled Kubernetes cluster. The Ingress class allows you to define how inbound connections are handled and routed, providing a unified way to manage the traffic entering the cluster.
 
-1. Run the following command to upgrade the AWS LBC to use the Ingress class. 
+1. Run the following command to upgrade the AWS LBC to use the Ingress class.
 
 ```bash
 helm upgrade aws-load-balancer-controller eks/aws-load-balancer-controller \ 
@@ -189,7 +190,7 @@ AWS Load Balancer controller installed!
 
 ## Step 5: Deploy the 2048 game sample application
 
-Now that the load balancer has been set up, it's time to enable external access for containerized applications in the cluster. This section will walk you through the steps to deploy the popular 2048 game as a sample application within the cluster. The provided manifest includes custom annotations for the Application Load Balancer (ALB), specifically the ['scheme' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/ingress_class/#specscheme), ['target-type' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/#target-type), and ['ip-address-type' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/#ip-address-type). These annotations integrate with and instruct the AWS Load Balancer Controller (LBC) to handle incoming HTTP traffic as "internet-facing" and route it to the appropriate service in the 'game-2048' namespace using the target type "ip". Furthermore, it specifies the 'ip-address-type' as 'dualstack', which allows the ALB to be provisioned with an IPv6-enabled subnet, making it accessible over IPv6 clusters. This dualstack configuration ensures that the application is accessible over both IPv4 and IPv6, enhancing connectivity and compatibility with various client devices and networks. For more annotations, see [Annotations](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/) in the AWS LBC documentation.
+Now that the load balancer has been set up, it's time to enable external access for containerized applications in the cluster. This section will walk you through the steps to deploy the popular 2048 game as a sample application within the cluster. The provided manifest includes custom annotations for the Application Load Balancer (ALB), specifically the ['scheme' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/ingress_class/#specscheme), ['target-type' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/#target-type), and ['ip-address-type' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/#ip-address-type). These annotations integrate with and instruct the AWS Load Balancer Controller (LBC) to handle incoming HTTP traffic as "internet-facing" and route it to the appropriate service in the 'game-2048' namespace using the target type "ip". Furthermore, it specifies the `ip-address-type` as `dualstack`, which allows the ALB to be provisioned with an IPv6-enabled subnet, making it accessible over IPv6 clusters. This dualstack configuration ensures that the application is accessible over both IPv4 and IPv6, enhancing connectivity and compatibility with various client devices and networks. For more annotations, see [Annotations](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/annotations/) in the AWS LBC documentation.
 
 1. Create a Kubernetes namespace called `game-2048` with the `--save-config` flag.
 
@@ -288,9 +289,9 @@ If you encounter any issues with the response, you may need to manually configur
 
 ## Step 8: Create an Ingress Group
 
-In this section, we will update the existing Ingress object by introducing an Ingress Group. This is achieved by adding the ['group.name' annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/ingress_class/#specgroup) within the Ingress object's metadata. When this group name is consistently applied across different Ingress resources, the AWS Load Balancer Controller (LBC) identifies them as constituents of the same group, thereby managing them in unison. The advantage of this approach is that it allows for the consolidation of multiple Ingress resources under a single Application Load Balancer (ALB) instance. This not only streamlines the management of these resources but also optimizes the utilization of the ALB. By grouping them together through this annotation, you create a cohesive and efficient structure that simplifies the orchestration of your load balancing needs. 
+In this section, we will update the existing Ingress object by introducing an Ingress Group. This is achieved by adding the [`group.name` annotation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.6/guide/ingress/ingress_class/#specgroup) within the Ingress object's metadata. When this group name is consistently applied across different Ingress resources, the AWS Load Balancer Controller (LBC) identifies them as constituents of the same group, thereby managing them in unison. The advantage of this approach is that it allows for the consolidation of multiple Ingress resources under a single Application Load Balancer (ALB) instance. This not only streamlines the management of these resources but also optimizes the utilization of the ALB. By grouping them together through this annotation, you create a cohesive and efficient structure that simplifies the orchestration of your load balancing needs.
 
-1. Copy the entire sample below and run it in the terminal window of your Linux EC2 bastion host. 
+1. Copy the entire sample below and run it in the terminal window of your Linux EC2 bastion host.
 
 ```bash
 cat <<EoF>updated-ingress-2048.yaml
@@ -331,7 +332,7 @@ This will update the existing Ingress object with the new annotation, creating a
 ingress.networking.k8s.io/ingress-2048 configured
 ```
 
-3. In your Linux EC2 bastion host terminal window, use curl to access the IPv6 IP address of the application using the following command. 
+3. In your Linux EC2 bastion host terminal window, use curl to access the IPv6 IP address of the application using the following command.
 
 ```bash
 curl -g -6 http://\[2600:1f16:1cc8:4001:9b29::5\]
@@ -341,7 +342,7 @@ You should see the HTML output for the app. To view your Application Load Balanc
 
 ## Clean Up
 
-After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created. 
+After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created.
 
 ```bash
 # Delete the Namespace, Deployment, Service, and Ingress

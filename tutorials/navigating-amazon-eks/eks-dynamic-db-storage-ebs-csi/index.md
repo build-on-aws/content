@@ -8,6 +8,7 @@ tags:
     - tutorials
     - eksctl
     - ebs
+    - aws
 showInHomeFeed: true
 waves:
   - modern-apps
@@ -18,6 +19,7 @@ authorName: Madhu Nagaraj
 additionalAuthors: 
   - authorGithubAlias: tucktuck9
     authorName: Leah Tucker
+movedFrom: /tutorials/eks-dynamic-db-storage-ebs-csi
 date: 2023-08-30
 ---
 
@@ -146,7 +148,7 @@ NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
 ebs-csi-controller   2/2     2            2           101m
 ```
 
-Optionally, if you do **not** already have the EBS CSI Driver Add-On installed, or you receive an error, install the add-on by running the following command. 
+Optionally, if you do **not** already have the EBS CSI Driver Add-On installed, or you receive an error, install the add-on by running the following command.
 
 ```bash
 eksctl create addon \ 

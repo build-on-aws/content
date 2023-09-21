@@ -15,6 +15,7 @@ spaces:
   - modern-apps
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
+movedFrom: /tutorials/eks-cluster-high-traffic
 date: 2023-08-29
 ---
 
@@ -44,7 +45,7 @@ Before you begin this tutorial, you need to:
 
 This tutorial is the first part of a series on managing high traffic microservices platforms using Amazon EKS, and it's dedicated to preconfiguring a cluster with the components it needs to run microservice applications with data-intensive workloads. Using the eksctl cluster template that follows, you'll build a robust, scalable, and secure Amazon EKS cluster with [managed node groups](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq). This template not only enables application workloads but also fortifies the cluster with an additional layer of security, fully aligned with best practices for production environments. It configures the following components:
 
-* **Autoscaling**: Managed node groups use an "m5.large" [instance type](https://docs.aws.amazon.com/eks/latest/userguide/choosing-instance-type.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq), providing a balance of resources. With a minimum size of "2" and a maximum size of "5", node groups can dynamically scale. The volume size is set to "100", ensuring ample capacity, and required subnet tags allow the [Kubernetes Cluster Autoscaler (CA)](https://github.com/kubernetes/autoscaler) to dynamically scale your cluster. 
+* **Autoscaling**: Managed node groups use an `m5.large` [instance type](https://docs.aws.amazon.com/eks/latest/userguide/choosing-instance-type.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq), providing a balance of resources. With a minimum size of "2" and a maximum size of "5", node groups can dynamically scale. The volume size is set to "100", ensuring ample capacity, and required subnet tags allow the [Kubernetes Cluster Autoscaler (CA)](https://github.com/kubernetes/autoscaler) to dynamically scale your cluster.
 * **Authentication**: Necessary IAM Roles for Service Accounts (IRSAs) mappings to enable communication between Kubernetes pods and AWS services. This includes the [AWS Load Balancer Controller (LBC)](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) used to expose applications, [Amazon EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver) for persistent data storage, [Kubernetes External DNS](https://github.com/kubernetes-sigs/external-dns) to automatically manage DNS records, and [Cert Manager](https://cert-manager.io/) to streamline management of SSL/TLS certificates. Additionally, an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) enables seamless and secure communication.
 * **Add-ons**: Latest versions of the following [add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq), including "vpc-cni" to enable the Amazon VPC Container Network Interface, "coredns" to facilitate DNS resolution, "kube-proxy" to maintain network rules on each Amazon EC2 node, and the [EBS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 * **Public/Private Networking**: Managed node groups utilize private networking and a NAT gateway to bolster security by limiting direct internet access. The AWS Load Balancer Controller (LBC) manages and securely distributes all incoming web traffic to private subnets.
@@ -58,7 +59,7 @@ In this section, you will configure the Amazon EKS cluster to meet the specific 
 
 ### To Create the Cluster Config
 
-1. Create a `cluster-config.yaml` file and paste the following contents into it. Replace the `region` with your preferred region. 
+1. Create a `cluster-config.yaml` file and paste the following contents into it. Replace the `region` with your preferred region.
 
 ```yaml
 apiVersion: eksctl.io/v1alpha5
@@ -172,7 +173,7 @@ eksctl create cluster -f cluster-config.yaml
 
 Upon completion, you should see the following response output:
 
-```text
+```bash
 2023-08-26 08:59:54 [✔]  EKS cluster "managednodes-quickstart" in "us-east-2" region is ready
 ```
 
@@ -184,7 +185,7 @@ kubectl get nodes
 
 The expected output should look like this:
 
-```text
+```bash
 NAME                                            STATUS   ROLES    AGE   VERSION
 ip-192-168-119-7.us-east-2.compute.internal     Ready    <none>   27m   v1.27.4-eks-8ccc7ba
 ip-192-168-141-57.us-east-2.compute.internal    Ready    <none>   19m   v1.27.4-eks-8ccc7ba
@@ -201,7 +202,7 @@ kubectl get deployment ebs-csi-controller -n kube-system
 
 The expected output should look like this:
 
-```text
+```bash
 NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
 ebs-csi-controller   2/2     2            2           15m
 ```
@@ -214,7 +215,7 @@ Verify all the service accounts created in the cluster with the following comman
 
 The expected output should look like this:
 
-```text
+```bash
 amazon-cloudwatch   cloudwatch-agent                     0         43m
 cert-manager        cert-manager                         0         43m
 cert-manager        default                              0         43m
