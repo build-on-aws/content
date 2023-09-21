@@ -63,7 +63,7 @@ Next, within Amazon SageMaker JumpStart, choose the Flan-T5 XXL FP16 Large Langu
 
 ## Step 3 - Check the status of the deployed model endpoints
 We check the status of the deployed model endpoints from Step 1 and Step 2 in the Amazon SageMaker console and make note of their endpoint names, since we will use them in our code. Here is how my console looks like after the model endpoints are deployed.
-![Name of Deployed endpoints in Amazon SageMaker](images/deployed-endpoints.jpg)
+![Name of Deployed endpoints in Amazon SageMaker](images/deployed-endpoints.png)
 
 ## Step 4 - Create the Amazon OpenSearch Cluster
 Amazon OpenSearch is a search and analytics service that supports k-Nearest Neighbors (k-NN) algorithm. This functionality is incredibly valuable for similarity-based searches, allowing us to use OpenSearch effectively as a vector database. To explore further and learn about which versions of Elasticsearch/OpenSearch support the k-NN plugin, please refer the following link: [K-NN Plugin Documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html). 
