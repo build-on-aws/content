@@ -1,8 +1,11 @@
 ---
 title: "Taylor Swift, deploying on Friday, and the ABCs"
-description: "Replace with your description"
+description: "Most people don't understand the impact of a system failure until they experience it themselves: you can't just Shake It Off. Here's how to prepare for failures."
 tags:
     - resilience
+    - backup
+    - chaos-engineering
+    - disaster-recovery
 authorGithubAlias: jennapederson
 authorName: Jenna Pederson
 date: 2023-09-22
