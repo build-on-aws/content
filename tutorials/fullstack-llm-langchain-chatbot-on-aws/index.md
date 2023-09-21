@@ -45,25 +45,20 @@ We will use a technique called as "In-Context" learning to inject domain or use 
 
 ### <u>Diagram: Converting from PDF to Embeddings in Vector Database</u>
 
-![Shows all the steps involved in converting PDF documents into embeddings and storing in the Vector Database](images/embeddings-save-vectordb.jpg)
+![Shows all the steps involved in converting PDF documents into embeddings and storing in the Vector Database](images/embeddings-save-vectordb.png)
 
 Now, let's dive into the first step of our journey. In Step 1, we will deploy the GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart. This model will play a crucial role in converting our PDF manual into embeddings for our Vector Database. 
 
 ## Step 1 - Deploy GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart
 To get started, follow the steps outlined in [Amazon SageMaker Documentation - Open and use JumpStart section](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) to launch Amazon SageMaker JumpStart node from the Home Menu of the Amazon SageMaker Studio. Choose <b>Models, notebooks, solutions</b> option and select the GPT-J 6B Embedding FP16 embedding model as shown in the image below. Then, simply click on 'Deploy' and Amazon SageMaker JumpStart will take care of the infrastructure setup for deploying this pretrained model into the SageMaker environment.
 
-
-Select the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart             |  Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart
-:------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:
-![Select the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/embedding1.jpg)  |  ![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/embedding2.jpg)
+![Select the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/embedding1.jpg)  
+![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/embedding2.jpg)
 
 ## Step 2 - Deploy the Flan T5 XXL LLM Model with Amazon SageMaker JumpStart
 Next, within Amazon SageMaker JumpStart, choose the Flan-T5 XXL FP16 Large Language Model (LLM), and then click on 'Deploy' to initiate the automatic setup of infrastructure and deploy the model endpoint into the Amazon SageMaker environment.
 
-
-Select the T5 Flan XXL Large Language Model from within Amazon SageMaker JumpStart          |  Deploy the T5 Flan XXL Large Language Model from within Amazon SageMaker JumpStart
-:------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:
-![Select the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/t5-flan-xxl-1.jpg)  |  ![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/t5-flan-xxl-2.jpg)
+![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/t5-flan-xxl-2.jpg)
 
 
 ## Step 3 - Check the status of the deployed model endpoints
@@ -159,11 +154,8 @@ By creating the above CloudFormation stack, we set up an S3 bucket and establish
 ### <u>Test with a Sample PDF</u>
 Once the CloudFormation stack is executed, drop a PDF representing a car manual into the S3 bucket. I downloaded a car manual available [here](https://ownersman.com/manuals/2023-BMW-X3-owners-manual). After the event-based ingestion pipeline completes execution, the Amazon OpenSearch cluster should contain the `carmanual` index with embeddings as shown below.
 
-
-`carmanual` index in Amazon OpenSearch Cluster          |  Contents of the `carmanual` index                                                                                                         
-:------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:
-![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.jpg) |  ![Save embeddings in OpenSearch 3](images/opensearch-embeddings-3.jpg)                                                     
-|
+![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.jpg)
+![Save embeddings in OpenSearch 3](images/opensearch-embeddings-3.jpg)                                                     
 
 
 ## Step 6 - Deploy Real-Time Q&A API with LLM Contextual Support
@@ -180,7 +172,7 @@ The diagram below illustrates the real-time question and answer workflow powered
 
 ### <u>Diagrammatic Overview of Realtime Q & A support from T5-flan-XXL LLM</u>
 
-![Realtime In Context Learning Workflows](images/realtime-in-context-learning-workflow.jpg)
+![Realtime In Context Learning Workflows](images/realtime-in-context-learning-workflow.png)
 
 ### <u>Build the API</u>
 Now that we've explored our LangChain and T5 Flan LLM workflow, let's delve into our API code, which takes in user questions and delivers context-aware responses. This real-time question-answer API resides in the `RAG-langchain-questionanswer-t5-llm` folder of our GitHub repository, with the core logic located in the `app.py` file. This Flask-based application defines a `/qa` route for question-answering.
