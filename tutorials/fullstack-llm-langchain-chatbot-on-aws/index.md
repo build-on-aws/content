@@ -56,7 +56,7 @@ To get started, follow the steps outlined in [Amazon SageMaker Documentation - O
 ![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/embedding2.jpg)
 
 ## Step 2 - Deploy the Flan T5 XXL LLM Model with Amazon SageMaker JumpStart
-Next, within Amazon SageMaker JumpStart, choose the Flan-T5 XXL FP16 Large Language Model (LLM), and then click on 'Deploy' to initiate the automatic setup of infrastructure and deploy the model endpoint into the Amazon SageMaker environment.
+Next, within Amazon SageMaker JumpStart, choose the Flan-T5 XXL Large Language Model (LLM), and then click on 'Deploy' to initiate the automatic setup of infrastructure and deploy the model endpoint into the Amazon SageMaker environment.
 
 ![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/t5-flan-xxl-2.jpg)
 
