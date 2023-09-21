@@ -41,8 +41,8 @@ Here, you'll create a new Amazon EKS cluster pre-configured to run specific Kube
 
 The following tutorials are included in this stage:
 
-* [Building an IPv6-based EKS Cluster for Globally Scalable Applications](https://community.aws/tutorials/eks-cluster-ipv6-globally-scalable)
-* [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](https://community.aws/tutorials/eks-cluster-high-traffic)
+* [Building an IPv6-based EKS Cluster for Globally Scalable Applications](/tutorials/eks-cluster-ipv6-globally-scalable)
+* [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/eks-cluster-high-traffic)
 
 ### Stage 2: Setup and Application Deployment
 
@@ -50,9 +50,9 @@ These tutorials delve into the Amazon EKS ecosystem, exploring add-ons and AWS s
 
 The following tutorials are included in this stage:
 
-* [Dynamic Database Storage with the Amazon EBS CSI Driver for Amazon EKS](https://community.aws/tutorials/eks-dynamic-db-storage-ebs-csi)
-* [Exposing and Grouping Applications Using the AWS Load Balancer Controller on an Amazon EKS IPv4 Cluster](https://community.aws/tutorials/eks-cluster-load-balancer-ipv4)
-* [Exposing and Grouping Applications Using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster](https://community.aws/tutorials/eks-cluster-load-balancer-ipv6)
+* [Dynamic Database Storage with the Amazon EBS CSI Driver for Amazon EKS](/tutorials/eks-dynamic-db-storage-ebs-csi)
+* [Exposing and Grouping Applications Using the AWS Load Balancer Controller on an Amazon EKS IPv4 Cluster](/tutorials/eks-cluster-load-balancer-ipv4)
+* [Exposing and Grouping Applications Using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster](/tutorials/eks-cluster-load-balancer-ipv6)
 
 ### Stage 3: Operational Readiness
 
