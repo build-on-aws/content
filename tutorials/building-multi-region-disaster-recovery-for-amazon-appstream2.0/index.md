@@ -15,7 +15,7 @@ authorName: Peter-John Morgenrood
 date: 2023-08-16
 ---
 ## Introduction
-In this blog, I will show you how you can build a multi-region disaster recovery environment for [Amazon AppStream 2.0](https://aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). These concepts can also apply to other virtual desktop environments such as [AWS WorkSpaces](https://aws.amazon.com/workspaces?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) or [Citrix virtual desktops](https://www.citrix.com/solutions/vdi-and-daas/what-is-a-virtual-desktop.html) to name a few. 
+In this blog, I will show you how you can build a multi-region disaster recovery environment for [Amazon AppStream 2.0](https://aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). These concepts can also apply to other virtual desktop environments such as [AWS WorkSpaces](https://aws.amazon.com/workspaces?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) or [Citrix virtual desktops](https://www.citrix.com/solutions/vdi-and-daas/what-is-a-virtual-desktop.html) to name a few.
 
 Having a disaster recovery (DR) region configured is essential for business continuity during an outage. Without one, customers would have to rebuild their environment in a new region during the outage. This can be difficult and time consuming, which can impact revenue and in some cases, lose data or access to user profile settings. There is also potential for human error when doing this under production downtime pressure. Planning and maintaining a disaster recovery mechanism to avoid compromising business performance is essential for businesses of all sizes.
 
@@ -57,7 +57,7 @@ Storing user profiles on an SMB share provides:
 
 In this blog, I'll guide you through building a multi-region disaster recovery environment for Amazon AppStream 2.0 using Amazon FSx for Windows as a storage location.
 
-## Prerequisites 
+## Prerequisites
 Before you get started, you must have the following resources deployed
 in your account:
 
@@ -100,7 +100,7 @@ in your account:
 support multi-region at this time and can only be deployed in one
 region, per AWS Organization.*
 
-## Solution Overview 
+## Solution Overview
 ![Figure 1 shows the components and traffic flow for the solution. There are three boxes: VPC Primary Region, VPC Disaster Recovery Region and overlapping both is VPC Peering. A SAML token has broken lines attached VPC Primary Region and VPC Disaster Recovery Region boxes.](images/image1.png "Figure 1. Solution architecture")
 
 
@@ -147,10 +147,9 @@ New-Item -Path '\\fsxPrimary.asx.local\D$' -Name Profiles -ItemType Directory
 New-Item -Path '\\fsxDR.asx.local\D$' -Name Profiles -ItemType Directory
 ```
 
- 
 More details about creating a file share on FSx for windows can be found [here](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-file-shares.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
 
-Once the profiles folder has been created, setup the NTFS permissions
+2. Once the profiles folder has been created, setup the NTFS permissions
 on the folder as follows:
 
 - CREATOR OWNER – Full Control (Apply onto: **Subfolders and Files
