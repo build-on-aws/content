@@ -22,12 +22,12 @@ In this blog, I will show you how you can build a multi-region disaster recovery
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Intermediate - 200                         |
-| ⏱ Time to complete  | 30 minutes                             |
-| 💰 Cost to complete | < $5 USD when cleanup is performed upon completion     |
+| ⏱ Time to complete  | 180 minutes                             |
+| 💰 Cost to complete | < $20 USD [estimate](https://calculator.aws/#/estimate?id=8f4bd4ddacddc40f5f99ece115e74c2f726175dd) when cleanup is performed upon completion     |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads)                             |
+| 💻 Code Sample         | N\A                          |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-08-26                             |
+| ⏰ Last Updated     | 2023-09-21                             |
 
 | ToC |
 |-----|
