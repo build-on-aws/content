@@ -1,5 +1,5 @@
 ---
-title: "Building an IPv6-based EKS Cluster for Globally Scalable Applications"
+title: "Building an IPv6-based Amazon EKS Cluster for Globally Scalable Applications"
 description: "Deploy a preconfigured Amazon EKS cluster optimized for extra-large, global applications using an eksctl \"quickstart\" template."
 tags:
     - eks-cluster-setup
@@ -15,6 +15,7 @@ spaces:
   - kubernetes
 authorGithubAlias: ratnopamc
 authorName: Ratnopam Chakrabarti
+movedFrom: /tutorials/eks-cluster-ipv6-globally-scalable
 date: 2023-08-30
 ---
 
@@ -49,7 +50,7 @@ This tutorial is the first part of a series on deploying an IPv6-enabled Amazon 
 * **Public/Private Networking**: The cluster is configured to use the IPv6 IP family, offering a broad range of globally routable IP addresses. By default, Amazon EKS sets up a public endpoint for the managed Kubernetes API server, enabling access via tools like [kubectl](https://kubernetes.io/docs/tasks/tools/). For those looking to enhance security, you have the option to configure the cluster API endpoint to be private. This restricts all communication between nodes and the API server to within the Virtual Private Cloud (VPC), eliminating direct exposure to the public internet. With the support for IPv6, this setup provides a flexible networking environment that can be tailored to various access control needs: public access, private access within a VPC, or a combination of both.
 * **Add-ons**: Latest versions of the following [add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq): "vpc-cni" enable the Amazon VPC Container Network Interface, "coredns" facilitates DNS resolution, and "kube-proxy" maintains network rules on each Amazon EC2 node.
 * **Authentication**: An [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq) for authentication within the Amazon EKS cluster to enable communication between Kubernetes pods and AWS services.
-* **Node Lifecycle Management**: Managed node groups simplify the handling of Amazon EC2 instances, registering them as Kubernetes nodes. This configuration employs "m6i.xlarge" and "m6a.xlarge" Amazon Linux 2 (AL2) [instance types](https://docs.aws.amazon.com/eks/latest/userguide/choosing-instance-type.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq), optimized for [Amazon Linux 2 (AL2)](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq). The configuration balances resources, specifying a volume size of "100" and type "gp3". Node groups are tailored with a minimum size of "1" and a maximum size of "3," facilitating manual scaling. Volume encryption enhances security, while custom labels (e.g., “os-distribution: amazon-linux-2”) enhance manageability, allowing the identification and categorization of nodes, and ensuring their alignment with the intended AL2 distribution.
+* **Node Lifecycle Management**: Managed node groups simplify the handling of Amazon EC2 instances, registering them as Kubernetes nodes. This configuration employs `m6i.xlarge` and `m6a.xlarge` Amazon Linux 2 (AL2) [instance types](https://docs.aws.amazon.com/eks/latest/userguide/choosing-instance-type.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq), optimized for [Amazon Linux 2 (AL2)](https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq). The configuration balances resources, specifying a volume size of "100" and type "gp3". Node groups are tailored with a minimum size of "1" and a maximum size of "3," facilitating manual scaling. Volume encryption enhances security, while custom labels (e.g., “os-distribution: amazon-linux-2”) enhance manageability, allowing the identification and categorization of nodes, and ensuring their alignment with the intended AL2 distribution.
 
 ## Step 1: Configure the Cluster
 
@@ -59,7 +60,7 @@ In this section, you will configure the Amazon EKS cluster to support IPv6 netwo
 
 1. Create a `cluster-config.yaml` file and paste the following contents into it. Replace the sample `region`. 
 
-```
+```yaml
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
@@ -177,7 +178,7 @@ In an EKS cluster using IPv6, pods and services will be assigned IPv6 addresses.
    ![EC2 Dashboard in the AWS console ](images/ec2_launch_instance.png)
 3. Enter the following information to customize the instance:
     1. Type `ipv6-bastion` in **Name.**
-    2. Select `tc2.micro` for **Instance type.**
+    2. Select `t2.micro` (or `t3.micro` for newer regions if not available) for **Instance type.**
     3. Keep the default selections for the other configuration settings for your instance, including the Amazon Linux AMI.
 4. Under **Network**, enter the following:
     1. Select **Edit**, and choose `eksctl-ipv6-quickstart-cluster/VPC` for **VPC**.
@@ -225,5 +226,3 @@ Upon completion, you should see the following response output:
 ## Conclusion
 
 Upon completion of this tutorial, you will have successfully established an Amazon EKS Cluster with IPv6 networking and deployed a network configuration. The IPv6 in EKS clusters enables the efficient and streamlined deployment of applications, allowing for more pods per node without exhausting IP addresses. IPv6 on EKS can also simplify the routing configuration of your EKS cluster. However, it's worth carefully considering specific [key factors](https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq) when designing your EKS cluster with IPv6 support. To deploy a scalable network, you need to set up configurations like preconfigured [add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-ipv6-globally-scalable&sc_geo=mult&sc_country=mult&sc_outcome=acq). These final installations will provide you with a robust, fully functional environment, ready for deploying Kubernetes workloads to your IPv6-enabled EKS clusters.
-
-
