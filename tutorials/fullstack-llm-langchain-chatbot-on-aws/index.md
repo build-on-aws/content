@@ -20,7 +20,7 @@ In today’s data-driven landscape, extracting meaningful insights from unstruct
 | ✅ AWS experience      | 200 - Intermediate                                                        |
 | ⏱ Time to complete    | 60 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
-| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=tutorial&sc_content=recommendation-engine-full-stack&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
+| 🧩 Prerequisites       | 1. You should have an active AWS account. If you don't have one, you can sign up on the [AWS website](https://aws.amazon.com/)<br/>2. Make sure you have the AWS Command Line Interface (CLI) installed on your local machine, and it should be properly configured with the necessary credentials and default region. You can configure it using the aws configure command.<br>3. Download and install Docker Engine. Follow the installation instructions for your specific operating system. |
 |  💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/fullstack-llm-langchain-chatbot-on-aws)  |
 |
 
@@ -312,23 +312,34 @@ As you continue on your learning journey, I encourage you to delve deeper into E
 5. [Amazon SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html/?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): SageMaker JumpStart provides pretrained, open-source models for a wide range of problem types to help you get started with machine learning. 
 
 ## Clean Up
+1. Log in to the AWS CLI.Make sure you have the AWS CLI properly configured with the required permissions to perform these actions.
+2. Delete the PDF file from the Amazon S3 bucket by executing the following command. Replace your-bucket-name with the actual name of your Amazon S3 bucket and adjust the path to your PDF file as needed.
+```bash 
+aws s3 rm s3://your-bucket-name/path/to/your-pdf-file.pdf
+```
+3. Delete the CloudFormation stacks. Replace the stack names with the actual names of your CloudFormation stacks.
+```bash
+# Delete 'ecs-website-chatbot' stack
+aws cloudformation delete-stack --stack-name ecs-website-chatbot
 
-1. Log in to the AWS Console.
-2. Navigate to the 'Amazon S3' service.
-3. In the Amazon S3 dashboard, locate and click on the S3 bucket where you uploaded the PDF file in Step 5. Select the PDF file by clicking the checkbox next to its name. With the PDF file selected, click on the 'Actions' button. From the dropdown menu, choose 'Delete'. A confirmation dialog will appear. Review the details and click 'Delete' to confirm the deletion of the PDF file.
-4. To delete the four CloudFormation stacks from the AWS Console's CloudFormation service, please follow these steps:
-*  Navigate to the 'CloudFormation' service.
-* In the CloudFormation dashboard, locate the stacks named 'ecs-website-chatbot', 'ecs-questionanswer-llm', 'ecs-embeddings-vectordb' and 'opensearch-vectordb'
-* Select each stack individually by clicking on the stack name.
-* In the stack details view, click on the 'Actions' button.
-* From the dropdown menu, choose 'Delete stack.'
-* A confirmation dialog will appear. Review the details and click 'Delete' to confirm the deletion of each stack.
-* The deletion process may take some time, depending on the resources associated with each stack.
-* Once the stacks have been successfully deleted, you will receive a confirmation message.
-5. Navigate to the Amazon SageMaker service in the AWS Console.
-6. Locate the endpoints you deployed in Steps 1 and 2.
-7. Select the endpoints by checking the checkboxes next to their names.
-8. In the "Actions" dropdown menu at the top, choose "Delete."
+# Delete 'ecs-questionanswer-llm' stack
+aws cloudformation delete-stack --stack-name ecs-questionanswer-llm
+
+# Delete 'ecs-embeddings-vectordb' stack
+aws cloudformation delete-stack --stack-name ecs-embeddings-vectordb
+
+# Delete 'opensearch-vectordb' stack
+aws cloudformation delete-stack --stack-name opensearch-vectordb
+```
+4. Delete SageMaker endpoints. Replace endpoint-name-1 and endpoint-name-2 with the names of your SageMaker endpoints.
+```bash
+# Delete SageMaker endpoint 1
+aws sagemaker delete-endpoint --endpoint-name endpoint-name-1
+
+# Delete SageMaker endpoint 2
+aws sagemaker delete-endpoint --endpoint-name endpoint-name-2
+```
+
 
 ## Conclusion
 In this tutorial, we built a full-stack Q&A chatbot using AWS technologies and open source tools. We leveraged Amazon OpenSearch as a vector database, integrated GPT-J 6B FP16 embeddings model, and used Langchain with a Large Language Model (LLM). This chatbot extracts insights from unstructured documents. Here's a quick summary of the steps:
