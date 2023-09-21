@@ -57,8 +57,7 @@ Storing user profiles on an SMB share provides:
 
 In this blog, I'll guide you through building a multi-region disaster recovery environment for Amazon AppStream 2.0 using Amazon FSx for Windows as a storage location.
 
-## Prerequisites
-
+## Prerequisites 
 Before you get started, you must have the following resources deployed
 in your account:
 
@@ -101,9 +100,7 @@ in your account:
 support multi-region at this time and can only be deployed in one
 region, per AWS Organization.*
 
-## Solution Overview
-
-
+## Solution Overview 
 ![Figure 1 shows the components and traffic flow for the solution. There are three boxes: VPC Primary Region, VPC Disaster Recovery Region and overlapping both is VPC Peering. A SAML token has broken lines attached VPC Primary Region and VPC Disaster Recovery Region boxes.](images/image1.png "Figure 1. Solution architecture")
 
 
@@ -131,12 +128,11 @@ The high level steps are as follows:
 9.  Test if Disaster Recovery is working as expected
 
 ## Deploy the Solution
-
 ### Step 1: Setup File and Folder Permissions
 
 1.  The first step is to create a folder on both your primary and DR file servers to store
     your user profile containers, in this blog I will be using FSx for
-    Windows to store my user profile containers.  
+    Windows to store my user profile containers.
     Create a folder on the D drive (D\$) of your Primary and DR FSx file
     servers manually or using this PowerShell command from a domain
     joined machine.
@@ -507,7 +503,6 @@ steps:
 1.  Delete the Okta Applications created for this blog
 
 ## Conclusion
-
 In this blog, I showed you how you can use FSlogix Cloud Cache and Amazon FSx for Windows File Server to build a multi-region disaster recovery environment for Amazon AppStream 2.0. This helps reduce data loss and improves an organization's ability to respond to and recover from an event that negatively affects business operations.
 
 I encourage you to explore these concepts further and think holistically about how common settings like Outlook [Cached Exchange Mode](https://support.microsoft.com/en-us/office/turn-on-cached-exchange-mode-7885af08-9a60-4ec3-850a-e221c1ed0c1c), can be configured to reduce your cloud storage costs by limiting the past email to a few months instead of 1 year. 
