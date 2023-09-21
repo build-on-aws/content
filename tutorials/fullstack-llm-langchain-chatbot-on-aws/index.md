@@ -88,7 +88,7 @@ In this step, we will create an ingestion and processing pipeline designed to re
 Dropping a PDF file into the S3 bucket will trigger an event-based workflow that involves a Fargate task. This task will be responsible for converting the text to embeddings and inserting them into Amazon OpenSearch.
 
 ### <u>Diagrammatic Overview</u>
-Below is a diagram illustrating the document ingestion pipeline for storing embeddings of text chunks into the Amazon OpenSearch vector database:
+Below is a diagram illustrating the document ingestion pipeline for storing embeddings of text chunks into the Amazon OpenSearch vector database:<br/>
 ![Overview of the document ingestion pipeline](images/document-processing-pipeline.png)
 
 ### <u>Startup Script and File Structure</u>
