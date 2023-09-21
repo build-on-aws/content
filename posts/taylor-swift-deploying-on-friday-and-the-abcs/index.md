@@ -40,6 +40,8 @@ AWS Community Builder, Brian H. Hough shows you how to **build your own machine 
 
 ## While you’re waiting for your app to recover
 
+![Olivier Leplus and Matheus Guimaraes riding a cartoon-like AWS bus with other characters waving from the windows. Text listing the nine cities and dates with a URL to learn more.](images/aws-on-tour.png)
+
 **Join AWS Developer Advocates Olivier Leplus and Matheus Guimaraes** on tour as they cross Europe like some 80s rock band that hasn't discovered airplanes! Find your city's [tour date](https://awsontour.splashthat.com/) for free, all-day events with food, networking, and AWS fun.
 
 **Continue your Generative AI learning journey** with AWS Developer Advocate Mike Chambers as he shows you [how a prompt is processed by Large Language Models (LLMs)](https://youtu.be/ibr5wmtinG0).
