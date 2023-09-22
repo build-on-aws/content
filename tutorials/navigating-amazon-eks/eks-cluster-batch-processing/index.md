@@ -1,6 +1,6 @@
 ---
 title: "Building an Amazon EKS Cluster Preconfigured to Run Asynchronous Batch Tasks"
-  description: "Deploy a preconfigured Amazon EKS cluster tailored for asynchronous background tasks, enhanced with scalable data storage solutions using an eksctl 'quickstart' template."
+description: "Deploy a preconfigured Amazon EKS cluster tailored for asynchronous background tasks, enhanced with scalable data storage solutions using an eksctl 'quickstart' template."
 tags:
     - eks-cluster-setup
     - eks
