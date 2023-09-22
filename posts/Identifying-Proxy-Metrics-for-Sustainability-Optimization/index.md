@@ -4,7 +4,7 @@ Sustainability optimization is a continuous journey. [AWS Well-Architected Susta
 
 In this blog, we will review how [proxy metrics](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/evaluate-specific-improvements.html#proxy-metrics) can be used to measure sustainability optimization for a sample workload’s provisioned resources (Refer to this [blog](https://aws.amazon.com/blogs/aws-cloud-financial-management/measure-and-track-cloud-efficiency-with-sustainability-proxy-metrics-part-i-what-are-proxy-metrics/) to learn more about proxy metrics). To track resources efficiency over period of time, consider including business metric (along with proxy metric) to normalize provisioned resources along with business outcome ([refer to this User Guide](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/evaluate-specific-improvements.html)), and define a [Sustainability KPI](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/evaluate-specific-improvements.html#key-performance-indicators).
 
-[Image: figure1.png]
+[Image: image1.png]
 ## Extract metrics
 
 AWS Service and tools can help you extract relevant proxy metrics for optimization across various domains like compute, storage, network etc. [AWS Trusted Advisor](https://aws.amazon.com/premiumsupport/technology/trusted-advisor/) (TA) provides actionable proxy metrics (and optimization recommendations) by analyzing usage and configuration of resources in your AWS account by using [checks](https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html). AWS [Cost and Usage Reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) (CUR) contain line items for each unique combination of AWS products, usage type, and operation that you use in your AWS account. You can use [Amazon Athena to aggregate usage data available in AWS CUR](https://docs.aws.amazon.com/cur/latest/userguide/cur-query-athena.html) to identify proxy metrics for optimization. [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) collects and track metrics, which are variables you can measure for your resources and applications.
@@ -20,7 +20,7 @@ We will use AnyCompany Renewable’s workload to identify proxy metrics for sust
 * processed data results stored in a database, and emailed to corporate analysis/specialists next day morning
 * results are also stored in object storage from where data scientists in corporate office download, and build complex data models using high performance desktops
 
-[Image: image.png]*Figure-1: AnyCompany Renewable's Workload Architecture*
+[Image: image2.png]*Figure-1: AnyCompany Renewable's Workload Architecture*
 
 
 ## Identify proxy metrics of sample workload
