@@ -1,3 +1,15 @@
+---
+title: "Identifying Proxy Metrics for Sustainability Optimization"
+description: "This blog will contain examples extracting, baselining and tracking proxy metrics using a sample architecture"
+tags:
+    - sustainability-optimization
+    - proxy-metrics
+    - proxy-metrics-example
+authorGithubAlias: KarnikPooja
+authorName: Pooja Karnik, Raman Pujani
+date: 2023-09-22
+---
+
 #  Identifying Proxy Metrics for Sustainability Optimization
 
 Sustainability optimization is a continuous journey. [AWS Well-Architected Sustainability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/sustainability-pillar.html) provides [design principles](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/design-principles-for-sustainability-in-the-cloud.html) and [best practices](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/best-practices-for-sustainability-in-the-cloud.html) to meet sustainability targets for your AWS workloads. The goal of sustainability optimization is to use all the resources you provision, and complete the same work with the minimum resources possible. During their sustainability optimization journey, customers often face a challenge to determine appropriate measures for tracking improvement changes.
