@@ -5,6 +5,9 @@ tags:
   - resilience
   - chaos-engineering
   - ci-cd
+  - devops
+spaces:
+  - devops
 authorGithubAlias: gunnargrosch
 authorName: Gunnar Grosch
 date: 2023-09-22
