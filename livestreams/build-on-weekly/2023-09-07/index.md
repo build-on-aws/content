@@ -24,7 +24,7 @@ spaces:
 
 ![Screenshot of the stream where Rohini, Darko and Piyali are looking at Sagemaker](images/streamshot.webp)
 
-You may recall [last time]() Piyali was on Build On Weekly, we talked about why and how do you build recommendation engines. On top of that we cleaned up a lot of data, this time it's time to build this ML model and host it somewhere. In this epsiode we do just that - deploy this Machine Learning model to an endpoint and start serving recommendations back to a front end. Well, we do not have the front end yet - but do join us in the future for PART 3, where we build that front end and make it available to you! 👏
+You may recall [last time](/livestreams/build-on-weekly/2022-08-03) Piyali was on Build On Weekly, we talked about why and how do you build recommendation engines. On top of that we cleaned up a lot of data, this time it's time to build this ML model and host it somewhere. In this epsiode we do just that - deploy this Machine Learning model to an endpoint and start serving recommendations back to a front end. Well, we do not have the front end yet - but do join us in the future for PART 3, where we build that front end and make it available to you! 👏
 
 Oh yeah, and if you wish to follow along at home, Piyali was amazing and she wrote a whole blog post on this same topic. You can check it out [here](/tutorials/recommendation-engine-full-stack).
 
