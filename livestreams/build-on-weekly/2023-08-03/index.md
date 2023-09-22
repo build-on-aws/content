@@ -36,8 +36,6 @@ https://www.twitch.tv/videos/1889439197
 - [What is Feature Engineering](https://towardsdatascience.com/what-is-feature-engineering-importance-tools-and-techniques-for-machine-learning-2080b0269f10)
 - [Parquet Data format](https://parquet.apache.org/)
 
-- [Today's Workshop: Using AWS Resilience Hub to monitor resilient architectures!](https://catalog.workshops.aws/aws-resilience-hub-lab/en-US/prepare-and-protect/account-setup?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-
 **Reach out to the hosts and guests:**
 
 - Piyali: [https://www.linkedin.com/in/piyali-kamra/](https://www.linkedin.com/in/piyali-kamra/)
