@@ -30,6 +30,7 @@ We ended up not being able to fix it on stream, BUT, Darko did spend some time a
 Alright, the issue we had is that we were not able to pass the SSM Automation document the correct parameters and execute the automation. After some time spent searching online and looking at other options in the [SSM Automation documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html?sc_channel=el&sc_campaign=livestreams&sc_content=build_on_weekly&sc_geo=mult&sc_country=mult&sc_outcome=acq), we've realized that the solution is to use a different action type.
 
 Instead of using `aws:executeAwsApi`, the better option was just to use `aws:createTags`, as that is what we actually wanted! 🥳 This simple change has made it possible to create a new automation document that has the following contents:
+
 ```yaml
 description: |-
   This automation document tags Unused Elastic IPs so we can track them.  
