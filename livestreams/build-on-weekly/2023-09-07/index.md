@@ -3,7 +3,6 @@ title: "Build Your Own Recommendation Engine on AWS - PART 2 | S02 E28 | Build O
 description: "Did you ever want to build your own recommendation engine powered by machine learning? A way to properly create recommendations for your customers? In PART 2, Piyali, Rohini and Darko deploy the other side of this project, actually hosting the model on Amazon Sagemaker." 
 tags:
   - python
-  - machine-learning
   - ai-ml
   - pandas
   - data
