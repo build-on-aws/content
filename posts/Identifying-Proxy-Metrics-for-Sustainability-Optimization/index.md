@@ -1,6 +1,6 @@
 ---
 title: "Identifying Proxy Metrics for Sustainability Optimization"
-description: "This blog will contain examples extracting, baselining and tracking proxy metrics using a sample architecture"
+description: "This blog will contain examples of extracting, baselining and tracking proxy metrics using a sample architecture"
 tags:
     - sustainability-optimization
     - proxy-metrics
