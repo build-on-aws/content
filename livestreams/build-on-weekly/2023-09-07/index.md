@@ -4,7 +4,7 @@ description: "Did you ever want to build your own recommendation engine powered 
 tags:
   - python
   - machine-learning
-  - ai
+  - ai-ml
   - pandas
   - data
   - k-means-clustering
