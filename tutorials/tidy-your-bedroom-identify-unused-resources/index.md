@@ -14,7 +14,6 @@ waves:
 authorGithubAlias: srhowell
 authorName: Stephen Howell
 date: 2023-09-19
-showInHomeFeed: true
 ---
 
 | ToC |

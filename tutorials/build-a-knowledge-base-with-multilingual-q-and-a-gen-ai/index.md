@@ -13,7 +13,6 @@ spaces:
 waves:
     - dataml
     - generative-ai
-showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes 
 date: 2023-08-21

@@ -8,7 +8,6 @@ tags:
     - tutorials
     - eksctl
     - aws
-showInHomeFeed: true
 waves:
   - modern-apps
 spaces:

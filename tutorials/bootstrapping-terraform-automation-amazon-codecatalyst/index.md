@@ -14,7 +14,6 @@ spaces:
   - devops
 waves:
   - devops
-showInHomeFeed: true
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-01-31

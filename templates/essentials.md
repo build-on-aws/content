@@ -8,19 +8,18 @@ tags:
     - tag-1
     - tag-2
 authorGithubAlias: githubAliasWithoutQuotes
-authorName: Name Surname (no quotes around)
-date: YYYY-MM-DD (expected publication date)
-showInHomeFeed: false
+authorName: Name Surname
+date: YYYY-MM-DD
 ---
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 <!-- NB: READ THE COMMENT ABOVE, AND DELETE THIS AND OTHER COMMENTS!!! -->
 
-**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
+**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONT MATTER ABOVE**
 
-## Frontmatter Instructions (remove this _Frontmatter Instructions_ section before authoring)
+## Front matter Instructions (remove this _Front matter Instructions_ section before authoring)
 
-All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/).
+All front matter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/).
 
 - `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser" - Please put this inside double-quotes
 - `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters - Please put this inside double-quotes
@@ -28,8 +27,6 @@ All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes
 - `authorGithubAlias` - your GitHub username
 - `authorName` - how you want your name to display for the author credit of this post
 - `date` - date this post is published in `YYYY-MM-DD` format. This does not effect when your post goes live and is purely for display purposes.
-- `showInHomeFeed` - Set this to `true` if you want the post to be on the home and RSS feeds. 
-
 
 Introduction (1-2 paragraphs) to the topic. Describe how this topic practically impacts builders in real-world terms, describing how it fits into a development workflow. Briefly reference some of the key components of this broad topic -- components you'll break down in more detail in the post itself. Remember to keep the post to 8-12 subtopics (sections).
 

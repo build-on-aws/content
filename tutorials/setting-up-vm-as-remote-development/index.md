@@ -13,7 +13,6 @@ spaces:
   - devops
 waves:
   - devops
-showInHomeFeed: true
 movedFrom: /posts/setting-up-vm-as-remote-development
 authorGithubAlias: donnieprakoso
 authorName: Donnie Prakoso
