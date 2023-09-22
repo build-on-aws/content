@@ -8,7 +8,6 @@ tags:
   - api
   - kubernetes
   - vpc-link
-showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-03-01

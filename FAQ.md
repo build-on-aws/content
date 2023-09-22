@@ -524,7 +524,7 @@ In this example, the post will be part of the feed of spaces "abc" and "xyz".
 
 ### How do I add posts to the home page feed?
 
-By default, all posts inside the `/posts/` folder are shown in the home feed. If you want to include in the feed a post that is outside this folder, add the following to the post front matter header:
+By default, all posts inside the `/posts/`, `/tutorials/`, and `/concepts` folders are shown in the home feed. If you want to include in the feed a post that is outside these folders, add the following to the post front matter header:
 
 ```yml
 showInHomeFeed: true

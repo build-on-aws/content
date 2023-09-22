@@ -14,7 +14,6 @@ tags:
   - cloudformation
 waves:
   - dataml
-showInHomeFeed: true
 authorGithubAlias: pechung
 authorName: Peter Chung
 additionalAuthors: 

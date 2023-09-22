@@ -12,7 +12,6 @@ spaces:
   - devops
 waves:
   - devops
-showInHomeFeed: true
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-06-09

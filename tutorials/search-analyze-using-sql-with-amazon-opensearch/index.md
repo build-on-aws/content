@@ -9,7 +9,6 @@ tags:
   - aws
 waves:
   - dataml
-showInHomeFeed: true
 authorGithubAlias: ambar265
 authorName: Ambar Kumar
 date: 2023-07-24

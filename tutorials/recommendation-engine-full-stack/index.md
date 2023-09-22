@@ -7,7 +7,6 @@ tags:
   - sagemaker
   - apigateway
   - tutorials
-showInHomeFeed: true
 authorGithubAlias: pkamra
 authorName: Piyali Kamra
 date: 2023-07-31

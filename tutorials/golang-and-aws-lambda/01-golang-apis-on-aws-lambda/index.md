@@ -9,7 +9,6 @@ tags:
   - aws-sam
 waves:
   - modern-apps
-showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-07-20

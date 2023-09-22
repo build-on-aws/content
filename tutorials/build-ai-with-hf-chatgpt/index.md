@@ -17,7 +17,6 @@ images:
   banner: images/overview-01.gif
   hero: images/overview-01.gif
   background: images/overview-01.gif
-showInHomeFeed: true
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
 date: 2023-08-11
