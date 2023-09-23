@@ -6,7 +6,7 @@ tags:
     - reinvent
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
-date: 2023-09-22
+date: 2023-09-25
 images:
     thumbnail: ./images/pirate.jpeg
 ---
@@ -17,7 +17,7 @@ Friday. 13:44, been a busy week, and I'm trying to finish off my last admin task
 
 Luckily I will have the same 2h flight this year, and when I went searching for guides to read, I saw multiple pages of results, so I won't even try to write a new one. Instead, I'm going to have some fun and try to make them more interesting. Since generative AI and large language models (LLMs) are all the rage right now, I wanted to test out how they perform with changing the style and tone of content. I've dabbled a bit with this as part of trying to build out a style guide before, and using the LLMs to validate if content adheres to it, but that was serious work with no room for making jokes. So here we are.
 
-I found this [AWS Blog post](https://aws.amazon.com/blogs/industries/ready-set-reinvent-how-to-prepare-for-aws-reinvent-2022/) from last year, and at the bottom, it has a nice list of bullet points to make the most out of re:Invent. I decided to use this list as the input data to modify the style using my prompts, and then proceeded to test out the styles & formats with a few different models/platforms. Just to avoid any confusion, the responses below contain the generated text after providing the prompt and those bullet points.
+I found this [AWS Blog post](https://aws.amazon.com/blogs/industries/ready-set-reinvent-how-to-prepare-for-aws-reinvent-2022/?sc_channel=el&sc_campaign=genaiwave&sc_content=friday-fun-style-changing-reinvent-guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) from last year, and at the bottom, it has a nice list of bullet points to make the most out of re:Invent. I decided to use this list as the input data to modify the style using my prompts, and then proceeded to test out the styles & formats with a few different models/platforms. Just to avoid any confusion, the responses below contain the generated text after providing the prompt and those bullet points.
 
 ## Attempt 1: Change the style
 
