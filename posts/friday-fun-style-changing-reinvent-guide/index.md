@@ -13,9 +13,9 @@ images:
 |ToC|
 |---|
 
-Friday. 13:44, been a busy week, and I'm trying to finish off my last admin tasks. Instead, I decide to have a bit of fun. The yearly [AWS re:Invent](https://reinvent.awsevents.com/) is just around the corner, and we're currently in what is affectionately called "pre:Invent season". Due to this, I started looking at some guides people have written in the past with tips & tricks to help others get the most out of the event. Just incase I've missed some, I scanned a few again - it can never be early too plan. Every year there are even more great guides, with new suggestions, and since I've only been to re:Invent twice so far, with vastly different experiences. Once was as a customer in 2018, and last year, as an employee. The main difference  was a 2h flight with zero timezone changes, versus my previous ~23h flights, and a 9h time difference. For context, I moved from Cape Town, South Africa to Seattle at the end of 2021 - that was a fun one, note to self: 1/ don't try to fly on Christmas day (chaos + this thing called "a blizzard"), and 2/ don't try to relocate during a pandemic.
+Friday. 13:44. Been a busy week, and I'm trying to finish off my last admin tasks. Instead, I decide to have a bit of fun. [re:Invent](https://reinvent.awsevents.com/) is just around the corner, and we're currently in what is affectionately called "pre:Invent season". Due to this, I started reading some guides people have written in the past with tips & tricks to help others get the most out of the event. Just incase I've missed some, I scanned a few again. Every year there are even more great guides, with new suggestions. I've only been to re:Invent twice so far, with vastly different experiences. First time was as a customer in 2018, and last year, as an employee. The main difference for me was a 2h flight with zero timezone changes, versus my previous ~23h flights, and a 9h time difference. For context, I moved from Cape Town, South Africa to Seattle at the end of 2021.
 
-Luckily I will have the same 2h flight this year, and when I went searching for guides to read, I saw multiple pages of results, so I won't even try to write a new one. Instead, I'm going to have some fun and try to make them more interesting. Since generative AI and large language models (LLMs) are all the rage right now, I wanted to test out how they perform with changing the style and tone of content. I've dabbled a bit with this as part of trying to build out a style guide before, and using the LLMs to validate if content adheres to it, but that was serious work with no room for making jokes. So here we are.
+Luckily, I will have the same 2h flight this year, and when I went searching for guides to read, I saw multiple pages of results, so I won't even try to write a new one. Instead, I'm going to have some fun and try to make them more interesting. Since generative AI and large language models (LLMs) are all the rage right now, I wanted to test out how they perform with changing the style and tone of content. I've dabbled a bit with this as part of trying to build out a style guide before, and using the LLMs to validate if content adheres to it, but that was serious work with no room for making jokes. So here we are.
 
 I found this [AWS Blog post](https://aws.amazon.com/blogs/industries/ready-set-reinvent-how-to-prepare-for-aws-reinvent-2022/?sc_channel=el&sc_campaign=genaiwave&sc_content=friday-fun-style-changing-reinvent-guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) from last year, and at the bottom, it has a nice list of bullet points to make the most out of re:Invent. I decided to use this list as the input data to modify the style using my prompts, and then proceeded to test out the styles & formats with a few different models/platforms. Just to avoid any confusion, the responses below contain the generated text after providing the prompt and those bullet points.
 
@@ -199,8 +199,38 @@ I was introduced to "Nerd Core" with a video of Seth Vargo doing a rap about tec
 *Connect, learn, play, it's more than just code,*
 *In the heart of Vegas, we on success mode.*
 
+## Attempt 3: Extend the content
+
+Now that we've dropped the mic, let's look at something more real-world. Using generative AI to augment content is where I find the most value - to see if I missed any important points that I should include. I don't want it to write for me, just help me improve my writing. With this in mind, I asked the following:
+
+*Are there any additional tips you would give while attending re:Invent based on the previous input points?*
+
+**Response:**
+
+***1. Stay Hydrated and Eat Well.***<br>
+*Las Vegas can be quite dry, so carry a refillable water bottle. Plus, with so many sessions and activities, it's easy to skip meals. Make sure to fuel up with a good breakfast, and grab a healthy snack when you can.*
+
+***Network and Connect.***<br>
+*Beyond sessions, re:Invent offers ample opportunities for networking. Bring plenty of business cards, and don't be shy about introducing yourself. The connections you make could lead to future collaborations or job opportunities.*
+
+***Utilize Quiet Zones.***<br>
+*With all the hustle and bustle, you might need a moment to relax and recharge. Look out for designated quiet zones to take a breather or review your notes.*
+
+***Take Advantage of Hands-on Labs.***<br>
+*These are self-paced technical training sessions that allow you to get hands-on practice with AWS services and solutions. If you're keen to experiment, don't miss these.*
+
+***Backup Power is a Savior.***<br>
+*With heavy app usage, note-taking, and social media updates, your devices can run out of juice quickly. Carry a portable charger or power bank to stay connected.*
+
+***Engage on Social Media.***<br>
+*Using the event hashtag (e.g., #reInvent) can keep you updated on any last-minute changes, popular sessions, or impromptu meetups. Plus, it's a great way to share your insights and learn from others.*
+
+***Remember Your Well-being.***<br>
+*Between sessions, it's essential to stretch your legs, get some fresh air, and perhaps even meditate for a few minutes. This will help keep your energy levels up and your mind alert.*
+
+***Consider Post-Event Workshops.***<br>
+*Some workshops or extended sessions might happen a day after the primary event. Look into these for deep dives into specific topics.*
+
 ## Conclusion
 
-While these attempts were purely for my entertainment, I have found LLMs useful to help with crafting response emails, especially ones where I need to tone things down a bit, or to more clearly communicate finer points across. Now I'm off to update to MacOS 13.6 before logging off for the week, who's afraid of updates on a Friday?
-
-And remember folks: be polite to your helpful assistants by saying "please" and "thank you", even though they tell you they don't have feelings if you ask them!
+While these attempts were purely for my entertainment, I have found LLMs also useful to help with crafting response emails, especially ones where I need to tone things down a bit, or to more clearly communicate the finer points of a nuanced, complex idea. Now I'm off to update to MacOS 13.6 before logging off for the week, and remember folks: be polite to your helpful assistants by saying "please" and "thank you", even though they tell you they don't have feelings if you ask them!
