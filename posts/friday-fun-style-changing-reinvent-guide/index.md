@@ -4,6 +4,7 @@ description: "Prithee, kind attendees of the grand assembly of AWS re:Invent, he
 tags:
     - gen-ai
     - reinvent
+    - prompt-engineering
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-09-25
