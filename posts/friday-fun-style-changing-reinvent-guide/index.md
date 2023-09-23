@@ -35,14 +35,29 @@ For the first set of experiments, I focussed on changing the style, and boy, did
 
 *Prepare to embark upon an odyssey, as grand as that of yore, whilst navigating the exalted corridors of AWS re:Invent. Let me impart unto thee words of counsel, steeped in ancient lore, to ensure that thy journey resembles not the tragic missteps of bygone eras.*
 
-***1. Customize thy pilgrimage with the mobile app.*** *Just as mariners of old relied upon their astrolabes and charts, let the AWS Events mobile app be thy guiding star. Navigate the seas of sessions, chart thy course, heed timely missives, and acquaint thyself with the vast terrains of the re:Invent realm.*
-***2. Adorn thy feet with steadfast footwear.*** *The perils of the Bataan Death March await those ill-equipped. The vastness of re:Invent, akin to the treks of olden pilgrimages, requires footwear both sturdy and comfortable. Tread wisely, lest thou find thyself lamenting like Caesar after his tragic crossing of the Rubicon.*
-***3. Compute thy passage from one domain to another.*** *Remember the vastness of Xerxes' Persian Empire, and how it took messengers days to traverse. The re:Invent domain, spanning six grand halls, demands careful consideration of the time between one's engagements, be it on foot or aboard the modern-day carriages.
-***4. Miss not the grand sessions – chart thy schedule aforetime.*** *Ere you find yourself in a predicament akin to Hannibal at the gates of Rome without adequate preparation, plan thy ventures. Seats in these gatherings are as coveted as places at King Arthur's Round Table. Arrive with promptness, for, like the fleeting grains of an hourglass, they are claimed swiftly.*
-***5. A novice to the world of the Cloud? Seek ye foundational knowledge.*** *Much like young squires in the days of knighthood, approach with humility. Drown not in the depths of advanced discourse, but begin with the rudiments, much as one would learn the art of the blade before challenging a seasoned knight.*
-***6. Seek further enlightenment at the Grand Expo.*** *In a manner reminiscent of Marco Polo's tales of the Orient, the Expo at The Venetian offers treasures manifold. Engage with the sagely AWS denizens, delve into the Marketplace's wonders, and behold the tapestries of success woven by partners in the AWS Partner Network Booth.
-***7. Revel with us at the grand fest of re:Play.*** *After days of intense enlightenment, reminiscent of the weary Crusaders longing for respite, partake in the grand celebration that is re:Play. Lose thyself in harmonious melodies, or should thy heart desire, engage in games as fierce and thrilling as the ancient gladiatorial combats.*
-***8. But above all, revel in merriment and joy!*** *Much as the courts of yore bubbled with jubilation during grand feasts, let thy spirit be light and cheerful. Connect, engage, and celebrate the rare confluence of minds and mirth. Embrace the splendour of Las Vegas, and let the essence of re:Invent infuse your soul with glee.*
+***1. Customize thy pilgrimage with the mobile app.***<br>
+*Just as mariners of old relied upon their astrolabes and charts, let the AWS Events mobile app be thy guiding star. Navigate the seas of sessions, chart thy course, heed timely missives, and acquaint thyself with the vast terrains of the re:Invent realm.*
+
+***2. Adorn thy feet with steadfast footwear.***<br>
+*The perils of the Bataan Death March await those ill-equipped. The vastness of re:Invent, akin to the treks of olden pilgrimages, requires footwear both sturdy and comfortable. Tread wisely, lest thou find thyself lamenting like Caesar after his tragic crossing of the Rubicon.*
+
+***3. Compute thy passage from one domain to another.***<br>
+*Remember the vastness of Xerxes' Persian Empire, and how it took messengers days to traverse. The re:Invent domain, spanning six grand halls, demands careful consideration of the time between one's engagements, be it on foot or aboard the modern-day carriages.*
+
+***4. Miss not the grand sessions – chart thy schedule aforetime.***<br>
+*Ere you find yourself in a predicament akin to Hannibal at the gates of Rome without adequate preparation, plan thy ventures. Seats in these gatherings are as coveted as places at King Arthur's Round Table. Arrive with promptness, for, like the fleeting grains of an hourglass, they are claimed swiftly.*
+
+***5. A novice to the world of the Cloud? Seek ye foundational knowledge.***<br>
+*Much like young squires in the days of knighthood, approach with humility. Drown not in the depths of advanced discourse, but begin with the rudiments, much as one would learn the art of the blade before challenging a seasoned knight.*
+
+***6. Seek further enlightenment at the Grand Expo.***<br>
+*In a manner reminiscent of Marco Polo's tales of the Orient, the Expo at The Venetian offers treasures manifold. Engage with the sagely AWS denizens, delve into the Marketplace's wonders, and behold the tapestries of success woven by partners in the AWS Partner Network Booth.*
+
+***7. Revel with us at the grand fest of re:Play.***<br>
+*After days of intense enlightenment, reminiscent of the weary Crusaders longing for respite, partake in the grand celebration that is re:Play. Lose thyself in harmonious melodies, or should thy heart desire, engage in games as fierce and thrilling as the ancient gladiatorial combats.*
+
+***8. But above all, revel in merriment and joy!***<br>
+*Much as the courts of yore bubbled with jubilation during grand feasts, let thy spirit be light and cheerful. Connect, engage, and celebrate the rare confluence of minds and mirth. Embrace the splendour of Las Vegas, and let the essence of re:Invent infuse your soul with glee.*
 
 *With these words, I bid thee embark on this grand journey, armed with wisdom and ready to seize the boundless opportunities that lie ahead at AWS re:Invent.*
 
@@ -59,14 +74,29 @@ Ok, I did not expect it to be this good / bad, but that was quite good in my opi
 
 *Ahoy there, matey! Set sail on this swashbucklin' journey through the vast seas of AWS re:Invent, and take heed of these tips from this old sea dog, lest ye find yerself lost at sea or worse, marooned!*
 
-***1. Customize yer voyage with the mobile app.*** *Avast! If yer trusty compass be the key to the open seas, then the AWS Events mobile app be the very chart ye need to navigate the treacherous waters of re:Invent. Plunder sessions, mark yer treasure spots, and keep an eye out for parley updates, all whilst getting the lay o' the land!*
-***2. Strap on yer trusty sea boots.*** *Argh! Ye wouldn't set foot on a ship's deck with wobbly legs, now would ya? The vast decks of re:Invent be no different. Make sure ye have shoes fit for a pirate king, so ye can swagger from bow to stern without a hitch!*
-***3. Reckon the tides when sailin' from one port to the next.*** *Yarr! Remember, mate, the re:Invent ship spans across six harbors! Whether ye be hoofin' it or hitchin' a ride on a scallywag's shuttle, best know how long ye be sailin' before ye weigh anchor.*
-***4. Don't be missin' any tales of adventure – chart yer course ahead o' time.*** *Don't be caught off guard like Blackbeard at Ocracoke Inlet! Plan yer escapades. Seats be as rare as a mermaid's tear, so be there afore the other buccaneers to secure a spot to hear the yarns.*
-***5. Green to the Cloudy seas or AWS? Start with the tales of old.*** *If ye be a greenhorn to the vast Cloudy Ocean or AWS, fret not! Instead of diving headfirst into the Kraken’s lair, start with the legends of old and familiar tales, then build up to the epics.*
-***6. Dock at the Expo for treasures galore!*** *Hoist the Jolly Roger and head to the Expo at The Venetian! Dive into the AWS Lagoon, plunder knowledge from the wise sea witches and wizards, then seek out the mystical artifacts at the AWS Marketplace. And don't forget to swap tales with fellow sea dogs at the AWS Partner Network Booth.*
-***7. Party like a pirate at re:Play!*** *If ye still have some rum left in yer belly after sailin' the high seas of knowledge, join the grand shindig that be re:Play. Dance a jig to the fiddlers, or if ye fancy a challenge, try yer hand at a game of cannonball dodge or archery on the poop deck.*
-***8. But mark me words, have a rollickin' good time!*** *Whether ye be spinning yarns with an old shipmate or challengin' a new rival to a duel, re:Invent be a chance like no other! So hoist yer flag, raise a toast, and make the most of yer time at this grand fleet gathering.*
+***1. Customize yer voyage with the mobile app.***<br>
+*Avast! If yer trusty compass be the key to the open seas, then the AWS Events mobile app be the very chart ye need to navigate the treacherous waters of re:Invent. Plunder sessions, mark yer treasure spots, and keep an eye out for parley updates, all whilst getting the lay o' the land!*
+
+***2. Strap on yer trusty sea boots.***<br>
+*Argh! Ye wouldn't set foot on a ship's deck with wobbly legs, now would ya? The vast decks of re:Invent be no different. Make sure ye have shoes fit for a pirate king, so ye can swagger from bow to stern without a hitch!*
+
+***3. Reckon the tides when sailin' from one port to the next.***<br>
+*Yarr! Remember, mate, the re:Invent ship spans across six harbors! Whether ye be hoofin' it or hitchin' a ride on a scallywag's shuttle, best know how long ye be sailin' before ye weigh anchor.*
+
+***4. Don't be missin' any tales of adventure – chart yer course ahead o' time.***<br>
+*Don't be caught off guard like Blackbeard at Ocracoke Inlet! Plan yer escapades. Seats be as rare as a mermaid's tear, so be there afore the other buccaneers to secure a spot to hear the yarns.*
+
+***5. Green to the Cloudy seas or AWS? Start with the tales of old.***<br>
+*If ye be a greenhorn to the vast Cloudy Ocean or AWS, fret not! Instead of diving headfirst into the Kraken’s lair, start with the legends of old and familiar tales, then build up to the epics.*
+
+***6. Dock at the Expo for treasures galore!***<br>
+*Hoist the Jolly Roger and head to the Expo at The Venetian! Dive into the AWS Lagoon, plunder knowledge from the wise sea witches and wizards, then seek out the mystical artifacts at the AWS Marketplace. And don't forget to swap tales with fellow sea dogs at the AWS Partner Network Booth.*
+
+***7. Party like a pirate at re:Play!***<br>
+*If ye still have some rum left in yer belly after sailin' the high seas of knowledge, join the grand shindig that be re:Play. Dance a jig to the fiddlers, or if ye fancy a challenge, try yer hand at a game of cannonball dodge or archery on the poop deck.*
+
+***8. But mark me words, have a rollickin' good time!***<br>
+*Whether ye be spinning yarns with an old shipmate or challengin' a new rival to a duel, re:Invent be a chance like no other! So hoist yer flag, raise a toast, and make the most of yer time at this grand fleet gathering.*
 
 Apologies to all the spell checkers out there, this one will trigger a bunch!
 
