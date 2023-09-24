@@ -1,6 +1,6 @@
 ---
 title: "How to build scalable multi domain IP allow-listing using AWS ALB and AWS WAF"
-description: "This post provide a scalable solution for implementing per domain IP allow-lists in a multi domain ALB deployment. The solution utilizes IP sets, rule groups, rule conditions and matching logic in AWS WAF. The AWS WAF is then used to secure access to the AWS ALB frontending the multi domain deployment."
+description: "This post provide a per domain IP allow-listing solution to be used in ALB based multi-domain deployments. The solution is designed to be modular, scalable and easy to maintain. The post will demonstrate how we can use IP sets as a modular construct for per-domain IP allow-listing, Web ACL rules to perform the allow-listing logic, rule  groups to bundle all our domain specific rules and AWS WAF to put those rules into effect."
 tags:
   - alb
   - waf
@@ -100,4 +100,4 @@ Although we have used a URI path matching statement in this example, the same lo
 
 ## Conclusion
 
-In conclusion, per-domain IP allow listing in an ALB multi-domain deployment can be achieved in a modular, scalable and easy to maintain architecture. The solution demonstrated in this post highlights how we can use IP sets as a modular construct for our per-domain allow-list, Web ACL rules to perform the per-domain IP allow-listing logic, rule  groups to bundle all our domain specific rules and AWS WAF to put those rules into effect. The approach can be adapted to other use cases based on your requirements. The high flexibility extended is facilitated by the rule matching logic and the variety of rule statements options.
+In conclusion, per domain IP allow-listing in an ALB multi-domain deployment can be achieved in a modular, scalable and easy to maintain architecture. The solution demonstrated in this post highlights how we can use IP sets as a modular construct for our per-domain allow-list, Web ACL rules to perform the per-domain IP allow-listing logic, rule  groups to bundle all our domain specific rules and AWS WAF to put those rules into effect. The approach can be adapted to other use cases based on your requirements. The high flexibility extended is facilitated by the rule matching logic and the variety of rule statements options.
