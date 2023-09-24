@@ -107,7 +107,8 @@ A dashboard of metrics makes it easy for team members to visualize, track, and r
 Refer to this [AWS Workshop](https://catalog.workshops.aws/well-architected-sustainability/en-US/5-process-and-culture/cur-reports-as-efficiency-reports) for step-by-step information to setup Sustainability Proxy Metrics Dashboard using AWS Services. 
 
 Alternatively, you can start with a simple worksheet based tracker to measure, track, and report optimizations. Following is a sample tracking worksheet for reference:
-[Image: image.png]
+
+![Figure-3](images/image3.png) 
 ## Resources
 
 * [Optimizing your AWS Infrastructure for Sustainability, Part I: Compute](https://aws.amazon.com/blogs/architecture/optimizing-your-aws-infrastructure-for-sustainability-part-i-compute/)
