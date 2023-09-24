@@ -50,13 +50,13 @@ Now that we understand the logic, let's summarize the configuration steps in the
 
 ## Let's build it
 
-Now let's take the configuration steps above and actually build a sample domain based IP allow-list. 
+Now let's take the configuration steps above and actually build a sample domain based IP allow-list.
 
 - We start with creating an IP Set for our first client Bank-1 that is using their custom domain bank-1.saas-provider.com. Let's call this IP Set Bank-1-IPSet
 
 ![Creating an IP Set: Name, Description, Region, CIDRs](images/Screenshot-create-IPSet.png)
 
-- Create a Rule Group, let's call it IP-allow-Lists 
+- Create a Rule Group, let's call it IP-allow-Lists
 
 ![Creating rule group: Name, Description, CloudWatch metric name, Region](images/Screenshot-Describe-Rule-Group.png)
 
@@ -88,12 +88,11 @@ Now let's take the configuration steps above and actually build a sample domain 
 
 ![Associate the Web ACL with the frontend ALB](images/Screenshot-Associate-WebAcl-With-ALB.png)
 
-- Add the IP-Allow-Lists rule group to the Web ACL. The rule group will contain per domain rules for all the custome client domains/subdomains. 
+- Add the IP-Allow-Lists rule group to the Web ACL. The rule group will contain per domain rules for all the custome client domains/subdomains.
 
 ![Add the "IP-Allow-Lists" rule group to the Web ACL](images/Screenshot-Add-The-Allow-List-RuleGroup-ToTheAcl.png)
 
 And their you have it, you have created your first per-domain source IP allow-listing!
-
 
 ## Refactoring the Solution
 
