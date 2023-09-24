@@ -88,7 +88,7 @@ Now let's take the configuration steps above and actually build a sample domain 
 
 ![Associate the Web ACL with the frontend ALB](images/Screenshot-Associate-WebAcl-With-ALB.png)
 
-- Add the IP-Allow-Lists rule group to the Web ACL. The rule group will contain per domain rules for all the custome client domains/subdomains.
+- Add the IP-Allow-Lists rule group to the Web ACL. The rule group will contain per domain rules for all the customer client domains/subdomains.
 
 ![Add the "IP-Allow-Lists" rule group to the Web ACL](images/Screenshot-Add-The-Allow-List-RuleGroup-ToTheAcl.png)
 
