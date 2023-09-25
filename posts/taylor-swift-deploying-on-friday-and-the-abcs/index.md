@@ -12,7 +12,7 @@ date: 2023-09-22
 showInHomeFeed: true
 ---
 
-![Taylor Swift holding a glitter-covered microphone, wearing sequins, and sweating from singing.](images/taylor-swift-with-mic.jpg)
+![Taylor Swift holding a glitter-covered microphone, wearing sequins, and sweating from singing.](images/taylor-swift-with-mic.webp)
 
 > "Everything fails all of the time." — Werner Vogels, AWS CTO
 
@@ -40,7 +40,7 @@ AWS Community Builder, Brian H. Hough shows you how to **build your own machine 
 
 ## While you’re waiting for your app to recover
 
-![Olivier Leplus and Matheus Guimaraes riding a cartoon-like AWS bus with other characters waving from the windows. Text listing the nine cities and dates with a URL to learn more.](images/aws-on-tour.png)
+![Olivier Leplus and Matheus Guimaraes riding a cartoon-like AWS bus with other characters waving from the windows. Text listing the nine cities and dates with a URL to learn more.](images/aws-on-tour.webp)
 
 **Join AWS Developer Advocates Olivier Leplus and Matheus Guimaraes** on tour as they cross Europe like some 80s rock band that hasn't discovered airplanes! Find your city's [tour date](https://awsontour.splashthat.com/) for free, all-day events with food, networking, and AWS fun.
 
