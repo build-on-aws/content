@@ -1,6 +1,7 @@
 ---
 title: "Transitioning to sustainable data management"
-description: "Replace with your description"
+description: "A 3-part series taking a deeper look into building a sustainable data
+management practice."
 tags:
   - sustainability
   - data-management
