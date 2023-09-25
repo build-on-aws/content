@@ -597,6 +597,7 @@ aws ecr delete-repository --repository-name YOUR_ECR_REPO_NAME --force
 ```
 
 If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">please send it our way!</a>
+
 ## Conclusion
 You've successfully orchestrated batch processing tasks in your Amazon EKS cluster using Amazon SQS and EFS! You've not only integrated SQS as a robust job queue but also leveraged the EFS CSI Driver for persistent storage across multiple nodes. This tutorial has walked you through the setup of your Amazon EKS cluster, the deployment of a Python-based batch processing application, and its containerization and storage in Amazon ECR. You've also learned how to create multi-architecture images and deploy them as Kubernetes Jobs. Furthermore, you've extended the capabilities of your Kubernetes Jobs by integrating them with Amazon SQS and providing persistent storage through Amazon EFS. 
 
