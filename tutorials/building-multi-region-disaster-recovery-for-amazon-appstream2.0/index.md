@@ -12,7 +12,7 @@ tags:
 
 authorGithubAlias: Peter-John-M
 authorName: Peter-John Morgenrood
-date: 2023-08-16
+date: 2023-09-25
 ---
 
 Having a disaster recovery (DR) region configured is essential for business continuity during an outage. Without one, customers would have to rebuild their environment in a new region during the outage. This can be difficult and time consuming, which can impact revenue and in some cases, lose data or access to user profile settings. There is also potential for human error when doing this under production downtime pressure. Planning and maintaining a disaster recovery mechanism to avoid compromising business performance is essential for businesses of all sizes.
@@ -27,24 +27,24 @@ In this blog, I will show you how you can build a multi-region disaster recovery
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | N\A                          |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-09-21                             |
+| ⏰ Last Updated     | 2023-09-25                             |
 
 | ToC |
 |-----|
 
 ## A Little Context
 
-AWS has published [Disaster Recovery considerations with Amazon AppStream 2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/disaster-recovery-considerations-with-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) and [Optimize User Experience with latency-based routing for Amazon AppStream 2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/optimize-user-experience-with-latency-based-routing-for-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) that address DR for customer environments that are using [Home Folder Synchronization](https://docs.aws.amazon.com/appstream2/latest/developerguide/home-folders.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
+AWS has published blog posts on [Disaster Recovery considerations with Amazon AppStream 2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/disaster-recovery-considerations-with-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) and [Optimizing User Experience with latency-based routing for Amazon AppStream 2.0](https://aws.amazon.com/blogs/desktop-and-application-streaming/optimize-user-experience-with-latency-based-routing-for-amazon-appstream-2-0?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) that address DR for customer environments that are using [Home Folder Synchronization](https://docs.aws.amazon.com/appstream2/latest/developerguide/home-folders.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
 
-While these are excellent solutions, they cater to customers using [Application Settings Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), a feature which stores user profile and application settings data in Amazon S3. This limits a user's profile size to under 1GB. Anything larger will impact the logon experience, and would not be suitable for applications such as Microsoft Office 365 that can grow in size fast.
+While these are excellent solutions, they cater to customers using [Application Settings Persistence](https://docs.aws.amazon.com/appstream2/latest/developerguide/app-settings-persistence.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), a feature which stores user profile and application settings data in Amazon S3. This limits a user's profile size to under 1GB. Anything larger will impact the logon experience, and would not be suitable for applications that can grow quickly in size, such as Microsoft Office 365.
 
 Some customers require user profile sizes to be larger than 20GB, dynamically expandable, and at the same time have limited impact to performance and log-on times. To meet these requirements, customers can use a high-speed network storage service paired with FSLogix, [Cloud Cache](https://learn.microsoft.com/en-us/fslogix/cloud-cache-resiliency-availability-cncpt), a technology that provides incremental replication of user profile and office containers. Cloud Cache automatically replicates the local cache and user profile data between the two SMB locations, when one location goes down, another takes over seamlessly. This enables any virtual desktop service or on premise device to store user profile data on Server Message Block (SMB) shares, located in different regions, without the need to deploy complex replication infrastructure. FSLogix Cloud Cache takes care of VHD(x) replication automatically, reduces management overhead and facilitates Disaster Recovery.
 
 By distributing the inputs and outputs per second (IOPS) to the local disk cache of each operating system, FSLogix Cloud Cache reduces the IOPS consumption and infrastructure required to host a central storage solution.
 
-One example of a high-speed network storage service that is scalable in compute, storage and is easy to get started with is [Amazon FSx for Windows File Server](https://aws.amazon.com/fsx/windows?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). When launched in the same subnets as the Amazon AppStream 2.0 fleet, it reduces the latency and serves user profile data efficiently.
+One example of a high-speed network storage service that is scalable in compute and storage, and is easy to get started with, is [Amazon FSx for Windows File Server](https://aws.amazon.com/fsx/windows?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream). When launched in the same subnets as the Amazon AppStream 2.0 fleet, it reduces the latency and serves user profile data efficiently.
 
-Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-ontap?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream), can also be used as a user profile storage location.
+Services like [Amazon FSx for NetApp ONTAP](https://aws.amazon.com/fsx/netapp-ontap?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) can also be used as a user profile storage location.
 
 Before launching your FSx for Windows or storage service of choice, please keep in mind that right sizing the performance and storage capacity is essential to a successful deployment. These decisions impact the user experience and budget. 
 
@@ -90,28 +90,26 @@ Before you get started, you must have the following resources deployed in your a
 
 The high level steps are as follows:
 
-1.  Set up file share and folder permissions to store user profile data
+1.  Set up file share and folder permissions to store user profile data.
 
-2.  Set up share permissions to allow data write and replication over
-    network
+2.  Set up share permissions to allow data write and replication over network.
 
-3.  Install and configure FSLogix on the Amazon AppStream 2.0
-    ImageBuilder
+3.  Install and configure FSLogix on the Amazon AppStream 2.0 ImageBuilder.
 
-4.  Set up the Group Policy to configure FSLogix
+4.  Set up the Group Policy to configure FSLogix.
 
-5.  Create an Amazon AppStream 2.0 image
+5.  Create an Amazon AppStream 2.0 image.
 
-6.  Copy the Amazon AppStream 2.0 image to the DR region
+6.  Copy the Amazon AppStream 2.0 image to the DR region.
 
-7.  Recreate the Amazon AppStream 2.0 Stack configuration in the DR
-    region
+7.  Recreate the Amazon AppStream 2.0 Stack configuration in the DR region.
 
-8.  Set up your SAML IdP
+8.  Set up your SAML IdP.
 
-9.  Test if Disaster Recovery is working as expected
+9.  Test if Disaster Recovery is working as expected.
 
 ## Deploy the Solution
+
 ### Step 1: Set Up File and Folder Permissions
 
 1.  The first step is to create a folder on both your primary and DR file servers to store your user profile containers, in this blog I will be using FSx for Windows to store my user profile containers. Create a folder on the D drive (D\$) of your Primary and DR FSx file servers manually or using this PowerShell command from a domain joined machine.
@@ -192,8 +190,7 @@ Invoke-Command -ConfigurationName FSxRemoteAdmin -ComputerName $FSxRemotePowerSh
 
 2.  When the image builder is ready, log in as the Administrator.
 
-3.  [Download FSLogix from Microsoft](https://docs.microsoft.com/en-us/fslogix/install-ht) on the image builder and run it. Navigate through the wizard to
-    complete installation.
+3.  [Download FSLogix from Microsoft](https://docs.microsoft.com/en-us/fslogix/install-ht) on the image builder and run it. Navigate through the wizard to complete installation.
 
 4.  Once installation is complete, execute **lusrmgr.msc** from a  **Run** prompt to open the Local Users and Groups manager.
 
@@ -221,7 +218,7 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
     \\%USERDOMAIN%\SYSVOL\%USERDOMAIN%\Policies\PolicyDefinitions\en-US
     ```
 
-    Follow this [guide](https://learn.microsoft.com/en-us/fslogix/how-to-use-group-policy-templates) for if you need more information on the step 4.1
+    Follow this [guide](https://learn.microsoft.com/en-us/fslogix/how-to-use-group-policy-templates) if you need more information on step 4.1
 
 
 1.  Create a GPO to be linked to the Amazon AppStream 2.0 computer objects. Edit the GPO and enter the settings:
@@ -253,7 +250,7 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
   
   You can find the full list of Profile Container configuration settings in [Profile Container registry configuration reference](https://docs.microsoft.com/en-us/fslogix/profile-container-configuration-reference).  
 
-### Step 5:    Create an Amazon AppStream 2.0 Image
+### Step 5: Create an Amazon AppStream 2.0 Image
 
 1.  Finish [creating your AppStream 2.0 image using the Image
     Assistant](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
@@ -262,16 +259,11 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
 
 3.  Start the fleet, if your fleet was already running, stop and start the fleet in order to get the new GPO applied at start-up.
 
-### Step 6:    Copy the Image to the DR Region
+### Step 6: Copy the Image to the DR Region
 
-1.  To copy an image to another AWS Region, launch the [AppStream 2.0 console](https://console.aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) and select the region that contains your existing image. In the navigation pane,
-    choose **Images**, select your existing image that has FSLogix
-    installed, choose **Actions**, select **Copy**, and then pick your
-    target AWS Region. You can also use the CopyImage API to
-    programmatically copy images. Visit [Tag and Copy an
-    Image](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html#tutorial-image-builder-tag-copy?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more information.
+1.  To copy an image to another AWS Region, launch the [AppStream 2.0 console](https://console.aws.amazon.com/appstream2?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) and select the region that contains your existing image. In the navigation pane, choose **Images**, select your existing image that has FSLogix installed, choose **Actions**, select **Copy**, and then pick your target AWS Region. You can also use the CopyImage API to programmatically copy images. Visit [Tag and Copy an Image](https://docs.aws.amazon.com/appstream2/latest/developerguide/tutorial-image-builder.html#tutorial-image-builder-tag-copy?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more information.
 
-### Step 7: 	Recreate the Amazon AppStream 2.0 Configuration in the DR Region
+### Step 7:	Recreate the Amazon AppStream 2.0 Configuration in the DR Region
 
 1.  Recreate Amazon AppStream 2.0 stack in DR region with the exact **same stack name** case sensitive. This will allow for easy switch  between regions using one IAM role and policy.
 
@@ -279,50 +271,37 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
 
 ### Step 8:    Setup Your SAML IdP
 
-1.  In this example, I am using Okta as my SAML Identity provider(IdP). Log in to your IdP admin console.
-    From the left panel, select **Applications** \> **Applications**.
-    Select **Browse App Catalog** and search for “AWS Account
-    Federation.” Select the AWS Account Federation app and choose **Add
-    Integration**.
+1. In this example, I am using Okta as my SAML Identity provider(IdP). Log in to your IdP admin console. From the left panel, select **Applications** \> **Applications**. Select **Browse App Catalog** and search for “AWS Account Federation.” Select the AWS Account Federation app and choose **Add Integration**.
 
      ![Image of the Okta console, browse app integration catalog. The text AWS Federation in the search bar brings up the AWS Account Federation app for SAML authentication.](images/image5.png "Figure 5. Okta Applications Catalog AWS Account Federation SAML application") 
 
 
-1.    
-    Change the **Application label** to something descriptive to represent your primary region and choose **next**  
+1. Change the **Application label** to something descriptive to represent your primary region and choose **next**  
 
    ![Add AWS Account Federation, under general settings then application label value is AppStream Primary](images/image6.png "Figure 6. Okta Integration for AWS Account Federation General Settings")
 
 
 1. To avoid duplication, follow steps found in blog post [Improve the Availability of  Existing Okta IAM Federation Setup Using Multi-Region SAML Endpoints](https://aws.amazon.com/blogs/apn/improve-the-availability-of-existing-okta-iam-federation-setup-using-multi-region-saml-endpoints?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
       
-    Repeat **steps 1-16** for Primary and again for DR region.
-    This will create two Okta AWS Federated applications, one for
-    Primary and the other for the DR region.  
-    The difference with Amazon AppStream 2.0, is that we will need to change step 3 (Relay State)
-    and 6 (IAM Trust Policy).  
-    The **Default Relay State** in Okta needs to match the Amazon
-    AppStream 2.0 format, for example, my Okta application for Primary
-    Region(Frankfurt) relay state URL is:
+Repeat **steps 1-16** for Primary and again for DR region. This will create two Okta AWS Federated applications, one for Primary and the other for the DR region. The difference with Amazon AppStream 2.0, is that we will need to change step 3 (Relay State) and 6 (IAM Trust Policy). The **Default Relay State** in Okta needs to match the Amazon AppStream 2.0 format, for example, my Okta application for Primary Region(Frankfurt) relay state URL is:
     
     >https://**appstream2.eu-central-1.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**
 
 
-    ![Okta Integration for AWS Account Federation Sign On Tab selected and highlighting eu-central-1 in the Default Relay State text box. The text box has the text https://appstream2.eu-central-1.aws.amazon.com/saml?stack=MyAS2StackName&amp;accountId=123456](images/image7.png "Figure 7. Okta Integration for AWS Account Federation Sign On Tab")
+![Okta Integration for AWS Account Federation Sign On Tab selected and highlighting eu-central-1 in the Default Relay State text box. The text box has the text https://appstream2.eu-central-1.aws.amazon.com/saml?stack=MyAS2StackName&amp;accountId=123456](images/image7.png "Figure 7. Okta Integration for AWS Account Federation Sign On Tab")
 
 
     >**London:**  
         https://**appstream2.eu-west-2.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**  
     
-    Check [documentation](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more details on the relay state URL.
+Check [documentation](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more details on the relay state URL.
 
 
-1. Create an IAM role for SAML 2.0 Federation following [Step 2](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html#external-identity-providers-grantperms?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream)
+1. Create an IAM role for SAML 2.0 Federation following [Step 2](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html#external-identity-providers-grantperms?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
 
-    Next, modify the **role**, edit the **trust relationship policy** and replace the singular “Principal”: { “Federated”: “arn:aws:iam…” } with a multi-valued SAML Identity provider, one for Primary and another for
-    the DR region. 
+Next, modify the **role**, edit the **trust relationship policy** and replace the singular “Principal”: { “Federated”: “arn:aws:iam…” } with a multi-valued SAML Identity provider, one for Primary and another for the DR region. 
 
-    In your new IAM role's details, choose the **Trust relationships** tab, and then choose **Edit trust relationship**. The Trust Relationship policy should include both SAML providers and endpoints as per the Trusted Entities Policy for IAM role example:
+In your new IAM role's details, choose the **Trust relationships** tab, and then choose **Edit trust relationship**. The Trust Relationship policy should include both SAML providers and endpoints as per the Trusted Entities Policy for IAM role example:
 
 **Trusted Entities Policy for IAM role example:**
 
@@ -354,99 +333,74 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
 
 ```
 
-  My IAM SAML Identity provider for the primary region is named okta and DR is called **oktaLondon**. 
+My IAM SAML Identity provider for the primary region is named okta and DR is called **oktaLondon**. 
 
-5.  Replace **okta**, **oktaLondon**, **eu-west-2**, **0123456789** and **eu-central-1** with values that match your environment.
+1.  Replace **okta**, **oktaLondon**, **eu-west-2**, **0123456789** and **eu-central-1** with values that match your environment.
 
-6. Edit your Okta user assignments to use the Okta role created in step 8.4. 
-    Log into your Okta admin console. From the left panel, select
-    **Application** \> **Application**. 
-    Select the Application, In this blog it is called AppStream Primary, 
-    Select **Assignments**, Edit (pencil icon), Select the correct Role, in my account it is called “oktarole”, edit the users domain (@as2.local) in the UserName field to match the Amazon AppStream 2.0 fleet domain, if needed and **Save.** Repeat for DR region.
+1. Edit your Okta user assignments to use the Okta role created in step 8.4. Log into your Okta admin console. From the left panel, select **Application** \> **Application**. Select the Application, In this blog it is called AppStream Primary, Select **Assignments**, Edit (pencil icon), Select the correct Role, in my account it is called “oktarole”, edit the users domain (@as2.local) in the UserName field to match the Amazon AppStream 2.0 fleet domain, if needed and **Save.** Repeat for DR region.
 
-    ![Okta Integration for AWS Account Federation Assignments Tab. User Name text box with the username admin@as2.local and an arrow indicating that this field can provide an optional domain change. Used when your okta is linked to a domain that is different to the AppStream fleet domain.](images/image8.png "Figure 8. Okta Integration for AWS Account Federation Assignments Tab")
+![Okta Integration for AWS Account Federation Assignments Tab. User Name text box with the username admin@as2.local and an arrow indicating that this field can provide an optional domain change. Used when your okta is linked to a domain that is different to the AppStream fleet domain.](images/image8.png "Figure 8. Okta Integration for AWS Account Federation Assignments Tab")
 
-    After completing the Okta application configuration, IAM Role and SAML
-    identity provider setup, your Okta dashboard should have two applications:  
+After completing the Okta application configuration, IAM Role and SAML identity provider setup, your Okta dashboard should have two applications:  
   
-    ![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
+![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
 
 
-### Step 9:   Test if DR Is Working As Expected
+### Step 9: Test if DR Is Working As Expected
 
 1.  Login to your IdP dashboard, and connect to the Amazon AppStream 2.0
     fleet in your primary region using the okta application tile.
 
-1.  Once connected to the fleet, use file explorer to connect to your
+2.  Once connected to the fleet, use file explorer to connect to your
     SMB locations 
     ```
     \\FSxPrimaryDNSName\Profiles
     ```
-    and confirm that the user profile folder and vhdx file appears under the specified SMB locations, set in step 3. Take note of the initial profile size.
 
-    ![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "Figure 10. EC2 Windows File Explorer Connected to FSx Primary and DR")
+Confirm that the user profile folder and vhdx file appears under the specified SMB locations, set in step 3. Take note of the initial profile size.
 
+![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "Figure 10. EC2 Windows File Explorer Connected to FSx Primary and DR")
 
-1.  Add some files to your Documents folder
+3.  Add some files to your Documents folder.
 
-    ![EC2 Windows File Explorer Window, Adding test data called TPS Report Documents to the user profile, Documents folder in order to simulate profile size increase.](images/image11.png "Figure 11. EC2 Windows File Explorer Adding Documents to user profile")
+![EC2 Windows File Explorer Window, Adding test data called TPS Report Documents to the user profile, Documents folder in order to simulate profile size increase.](images/image11.png "Figure 11. EC2 Windows File Explorer Adding Documents to user profile")
 
+4.  Verify profiles sizes have increased in both Primary and DR SMB locations.
 
+![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a new size of 397,312 KB](images/image12.png "Figure 12. EC2 Windows File Explorer Connected to FSx Primary and DR" )
 
-1.  Verify profiles sizes have increased in both Primary and DR SMB
-    locations
+5.  End the Amazon AppStream 2.0 streaming session.
 
-    ![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a new size of 397,312 KB](images/image12.png "Figure 12. EC2 Windows File Explorer Connected to FSx Primary and DR" )
+6.  Simulate a region failure by blocking all inbound TCP port 445 to Primary SMB location.
 
+7.  Connect to your Okta DR application, in my example the Okta application would be called “AppStream 2.0 DR”.
 
-1.  End the Amazon AppStream 2.0 streaming session.
+8.  If you have logged in and your documents are all there, it means at this point you have successfully failed over and working in the DR region.
 
-1.  Simulate a region failure by blocking all inbound TCP port 445 to
-    Primary SMB location.
+9.  Add some more test files to your Documents folder on the DR fleet which will automatically get synced back once the Primary file server port 445 is reachable from the DR fleet.
 
-1.  Connect to your Okta DR application, in my example the Okta
-    application would be called “AppStream 2.0 DR”.
+10. Enable Inbound TCP port 445 for Primary file server SMB location and verify that all the newly added files from DR fleet have synced back to your primary region.
 
-1.  If you have logged in and your documents are all there, it means at
-    this point you have successfully failed over and working in the DR
-    region.
+11. After testing, you can stop the fleet in your DR region to save on running costs.
 
-1.  Add some more test files to your Documents folder on the DR fleet
-    which will automatically get synced back once the Primary file
-    server port 445 is reachable from the DR fleet.
+### Clean Up:
 
-1. Enable Inbound TCP port 445 for Primary file server SMB location and
-    verify that all the newly added files from DR fleet have synced back
-    to your primary region.
+In this blog, we deployed resources in an AWS account and made configuration changes in Active Directory. If you want to clean up these resources and reverse changes you made, complete the following steps:
 
-1. After testing, you can stop the fleet in your DR region to save on
-    running costs.
-
-### Clean-Up:
-
-In this blog, we deployed resources in an AWS account and made
-configuration changes in Active Directory. If you want to clean up these
-resources and reverse changes you made, complete the following
-steps:
-
-1.  Unlink and delete the FSLogix GPO you created in the section **Setup
-    Group Policy to** **Configure FSLogix**. If you want, you can remove
-    the FSLogix Administrative templates you deployed to your central
-    store.
+1.  Unlink and delete the FSLogix GPO you created in the section **Setup Group Policy to** **Configure FSLogix**. If you want, you can remove the FSLogix Administrative templates you deployed to your central store.
 
 1.  Remove users from your AppStream 2.0/FSLogix Active Directory group.
 
-1.  Delete your Amazon FSx for Windows File Server file systems in both
-    regions.
+1.  Delete your Amazon FSx for Windows File Server file systems in both regions.
 
-1.  Delete or stop any AppStream 2.0 fleets, images, stacks, and image
-    builders you have created specifically for this blog.
+1.  Delete or stop any AppStream 2.0 fleets, images, stacks, and image builders you have created specifically for this blog.
 
 1.  Delete the IAM Roles and SAML Identity providers
 
 1.  Delete the Okta Applications created for this blog
 
 ## Conclusion
+
 In this blog, I showed you how you can use FSlogix Cloud Cache and Amazon FSx for Windows File Server to build a multi-region disaster recovery environment for Amazon AppStream 2.0. This helps reduce data loss and improves an organization's ability to respond to and recover from an event that negatively affects business operations.
 
 I encourage you to explore these concepts further and think holistically about how common settings like Outlook [Cached Exchange Mode](https://support.microsoft.com/en-us/office/turn-on-cached-exchange-mode-7885af08-9a60-4ec3-850a-e221c1ed0c1c), can be configured to reduce your cloud storage costs by limiting the past email to a few months instead of 1 year. 
