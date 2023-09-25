@@ -43,14 +43,14 @@ In data management, the impact is not only driven by compute provisioning factor
 from practices you adopt in the data lifecycle. Here are three common observations we have
 made in traditional data management practices that lead to inefficiencies and wastage:
 
-### Data silos lead to redundant processes causing resource wastage
+### 1. Data silos lead to redundant processes causing resource wastage
 
 When data is trapped in isolated departments or teams in an organization, employees end up
 redoing the same tasks, unaware of each other's progress. It is like reinventing the wheel, every
 single time. Data is copied over multiple times to different destinations resulting in duplication
 in storage. This doesn't just waste time and effort, but also compute and storage resources.
 
-### Using the same tool for all jobs introduces rigidity and diminishes efficiency
+### 2. Using the same tool for all jobs introduces rigidity and diminishes efficiency
 
 We have learnt the one-size-fits-all approach for choosing tool for data management use-cases
 (or any use-case for that matter) leads to inefficiencies. Different use-cases demand specialized
@@ -58,7 +58,7 @@ solutions for optimal outcomes. For example, when you run analytical queries on 
 Redshift result in better performance, provide workload isolation and improves user
 experience.
 
-### Lack of data governance increases manual work compromising on efficiency
+### 3. Lack of data governance increases manual work compromising on efficiency
 
 The lack of data governance directly contributes to resource wastage. Without proper oversight
 and standardization, data becomes unorganized and duplicated, often leading to data quality
