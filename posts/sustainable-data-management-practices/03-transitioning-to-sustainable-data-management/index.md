@@ -39,7 +39,7 @@ focus on things that deliver maximum impact.
 Let’s look at six steps to create a process that enables your organization to continuously deliver
 changes improving sustainability results.
 
-### Define your sustainability goals
+### 1. Define your sustainability goals
 
 First, you need to define your sustainability goals. Organizational sustainability goals
 encompass decarbonization, waste reduction, water stewardship, and renewable energy
@@ -50,7 +50,7 @@ right size compute resources for data processing jobs to use the fewest vCPUs po
 here, you could assess a realistic goal for your business and follow a [SMART](https://business.adobe.com/blog/basics/smart-goals) format for the
 goals.
 
-### Establish metrics for tracking Sustainability KPIs
+### 2. Establish metrics for tracking Sustainability KPIs
 
 By setting clear metrics across the organization, you can monitor improvements. This not only
 keeps everyone accountable but also provides a clear roadmap for areas that need attention,
@@ -74,7 +74,7 @@ solution.
 
 ![Solution Architecture](images/lab-solution-architecture.png)
 
-### Build processes for continuously identifying targets for improvement
+### 3. Build processes for continuously identifying targets for improvement
 
 Build processes that regularly pinpoint areas ripe for enhancement. By doing so, you can ensure
 that your data management processes remain lean and efficient. With the proxy metrics
@@ -106,7 +106,7 @@ domains and evaluate which changes would deliver maximum impact. If you optimizi
 data services for sustainability, refer to this two-part blog - [Optimize your modern data
 architecture for sustainability](https://aws.amazon.com/blogs/architecture/optimize-your-modern-data-architecture-for-sustainability-part-1-data-ingestion-and-data-lake/) for some tips.
 
-### Setup a prioritization framework for implementing changes that impact sustainability KPIs
+### 4. Setup a prioritization framework for implementing changes that impact sustainability KPIs
 
 By setting up a framework that prioritizes changes based on their impact on sustainability KPIs,
 you ensure that the most significant improvements are tackled first. This approach guarantees
@@ -123,7 +123,7 @@ result by effort. The item with maximum score gets the most priority.
 
 ![table with sample data](images/table.png)
 
-### Implement DataOps for fostering effective collaboration
+### 5. Implement DataOps for fostering effective collaboration
 
 Optimizing your data management processes for sustainability is an on-going process. This
 requires you to have a collaborative data management practice that aims to improve the
@@ -141,7 +141,7 @@ you can revert to more efficient versions. By automating data workflows and enha
 quality, resources are utilized optimally. This approach not only minimizes environmental
 impact but also drives business agility and efficiency.
 
-### Measure results, learn, and replicate success
+### 6. Measure results, learn, and replicate success
 
 The journey of a sustainability improvement project doesn't end with achieving the desired
 goal. The real challenge often lies in measuring the success and ensuring it is a repeatable
