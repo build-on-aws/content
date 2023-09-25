@@ -22,7 +22,7 @@ But why is Generative AI crucial when we talk about cloud security on platforms 
 
 As we delve deeper into the potential of Generative AI for enhancing cloud security, it's essential to recognize that we stand at the cusp of a new era. An era where security is not just reactive but is anticipatory and adaptive, thanks to the capabilities of Generative AI.
 
-In the sections that follow, we will explore how Generative AI can bolster your cloud security posture on AWS, provide a hands-on example of querying this AI for Security Group rule reviews, and conclude with insights into the future of Generative AI in cloud security.
+In the sections that follow, we will explore how Generative AI can bolster your cloud security posture on AWS, provide a hands-on example of querying Amazon Bedrock for Security Group rule reviews using Python, and conclude with thoughts into the future of Generative AI in cloud security.
 
 ---
 
@@ -56,7 +56,9 @@ How can AWS services benefit from integration with Generative AI?  Here are a fe
 
 The true power of Generative AI lies in its ability to shift the security paradigm from a reactive to a proactive stance. Instead of waiting for threats to manifest, organizations can use Generative AI to anticipate and prepare for them. This forward-thinking approach paves the way for a future where cloud security is not just about defense but about foresight and innovation.
 
-### A Practical Example: Leveraging Generative AI to Review AWS Security Group Rules
+---
+
+## A Practical Example: Leveraging Generative AI to Review AWS Security Group Rules
 
 In this section, we'll examine a practical example of how Generative AI can be used to review and optimize firewall rules. Specifically, we'll focus on AWS Security Groups, which act as virtual firewalls to control inbound and outbound traffic to AWS resources.
 
@@ -84,13 +86,13 @@ Let's begin  by getting the flow log data that we will use to train our model.
 
 1. Lets get a list of our flow logs using the `aws ec2 describe-flow-logs --region us-west-2 --output json` command. From here take note of the **Log Group Name**.
 
-![Getting Log Group Name](01-log-group-name.png))
+![Getting Log Group Name](images/01-log-group-name.png)
 
 Note that the Log Group Name is `gen-ai-example`.
 
 2. Next, let's get the log stream name using the `aws logs describe-log-streams --log-group-name "gen-ai-example" --region us-west-2` command.
 
-![Getting the Log Stream Name](02-log-stream-name.png)
+![Getting the Log Stream Name](images/02-log-stream-name.png)
 
 Here we note that the Log Stream Name is `eni-026f791613cca9e4a-accept`.
 
@@ -100,7 +102,7 @@ This creates a file named `log_data.json` in your current directory.
 
 4. Next let's list our security groups and get their IDs.  We do this with the command `aws ec2 describe-security-groups --query 'SecurityGroups[*].[GroupName,GroupId]' --output table --region us-west-2`. 
 
-![Alt text](03-security-groups-name-and-id.png)
+![Alt text](images/03-security-groups-name-and-id.png)
 
 The security group we want to work with is called **secure-server-sg**.
 
@@ -223,36 +225,43 @@ Here are my security groups rules:
 print ("Sending the prompt to the model...")
 
 ```
-After sending the prompt I was returned the following response, as seen in the image below.
+After sending the prompt we are returned the following response, as seen in the image below.
 
-![Getting a response from bedrock](04-bedrock-response.png)
+![Getting a response from bedrock](images/04-bedrock-response.png)
 
 As can be seen in the response, the LLM was able to take the VPC Flow Log data and Security Group data I provided to the LLM along with specific information in my prompt (CIDR range and inbound vs. outbound directionality) and provide a breakdown of what the rules would do when seeing the provided traffic as well as a list of recommendations.  
 
+As seen above, the LLM has learned what inbound vs. outbound is in the context of my environment.  Its also determined based on the data I provided what would be allowed and what would be denied.  This is not without error.  The model did not take into consideration that outbound traffic from a Security Group is allowed by default and therefore return traffic would match a state table entry and be allowed.  It made the assumption that all the traffic it saw in the flow log was not stateful.  This is something that could be added to the prompt in the future, however the real purpose of this example is to give you an idea of what security could look like when working hand-in-hand with generative-ai tools, and how you might interact with an LLM using code rather than a Web UI.
 
-## References
+## Conclusion
 
-Certainly! Here are some relevant sources that discuss the use of generative AI in cloud security:
+At the start of this article, we talked about how Generative AI can do many things to help fortify our cloud security posture. It can help us guess future problems, give advice on security settings, and more. But, like all powerful tools, we need to use it wisely.
+
+Generative AI has the potential to change the game for cloud security. Our practical example of using the LLM to review our security groups is just a simple example amongst a world of possibilities? 
+
+What's next for Generative AI in cloud security? Maybe it can help us find weak spots before they become big problems. Or maybe it can alert us right away if something suspicious happens. While there are currently products and services to do these things, what can Generative AI add to the insight?  There's a lot to think about and explore.
+
+So, as we finish up, let's remember this is just the beginning. There's a lot more to learn and do with Generative AI and cloud security and hopefully this helped you become more acquainted with it. If you haven't done so already, start thinking about Generative AI.  It's likely to become a regular part of our work in the near future.  Until then, keep exploring, keep learning, and happy labbing.
+
+### References
+
+Here are some relevant resources that discuss the use of generative AI in cloud security to get you started.
 
 1. [How Generative AI is a Game Changer for Cloud Security](https://www.techrepublic.com/article/generative-ai-cloud/)
    - This article from TechRepublic discusses how generative AI is revolutionizing the way organizations address cloud security by providing realistic synthetic data for testing.
 
-2. [Security with generative AI | Google Cloud](https://cloud.google.com/security/ai)
-   - Google Cloud's official documentation highlights how AI assistive features can summarize complex threats, assess risk, and enable natural language search to usher in a new era of effectiveness in security.
-
-3. [How Google Cloud plans to supercharge security with generative AI](https://cloud.google.com/blog/products/identity-security)
-   - This article from Google Cloud's official blog discusses advances in generative AI that can help reduce the number of tools organizations need to secure their vast attack surface areas.
-
-4. [What Can Generative AI do for Hybrid Cloud Security? - Trend Micro](https://www.trendmicro.com/es_mx/devops/generative-ai-hybrid-cloud-security)
-   - Trend Micro's article elaborates on how generative AI can lay a secure cloud foundation and empower Security Operations Center (SOC) teams to respond effectively to threats.
-
-5. [Adding generative AI systems may change your cloud architecture](https://www.infoworld.com/Cloud-Computing)
+2. [Adding generative AI systems may change your cloud architecture](https://www.infoworld.com/Cloud-Computing)
    - InfoWorld's piece discusses the implications of adding generative AI to cloud architectures, especially concerning data availability, security, and model selection.
 
-6. [Google Cloud Next focuses on generative AI for security - TechTarget](https://www.techtarget.com/searchsecurity/opinion/Google-Cloud-Next-generative-AI-security)
-   - TechTarget's article provides insights into Google's announcements regarding new generative AI features and capabilities to improve cybersecurity.
-
-7. [Generative AI: Proposed Shared Responsibility Model | CSA](https://cloudsecurityalliance.org/blog/2023/07/28/generative-ai-shared-responsibility-model)
+3. [Generative AI: Proposed Shared Responsibility Model | CSA](https://cloudsecurityalliance.org/blog/2023/07/28/generative-ai-shared-responsibility-model)
    - The Cloud Security Alliance discusses the shared responsibility model in the context of generative AI applications built on the cloud.
 
-These sources provide a comprehensive overview of the current state and potential of generative AI in the realm of cloud security.
+4. [The Intersection of IAM and Generative AI in the Cloud | CSA](https://cloudsecurityalliance.org/blog/2023/09/15/exploring-the-intersection-of-iam-and-generative-ai-in-the-cloud/)
+   - Written by Ken Huang, this article delves into the challenges emerging around identity and access management (IAM) within cloud environments due to the rise of generative AI. It explores how IAM enables and secures GenAI deployments in the cloud and the new security considerations that arise when combining these technologies.
+
+5. [What Can Generative AI do for Hybrid Cloud Security?](https://www.trendmicro.com/en_us/devops/23/h/generative-ai-hybrid-cloud-security.html)
+   - This article discusses the challenges of securing cloud resources and how generative AI can be a powerful tool in addressing these challenges. It touches upon the potential of generative AI in producing template-based infrastructure-as-code for secure cloud environments and the importance of scanning for misconfigurations.
+
+
+
+
