@@ -1,11 +1,13 @@
 ---
 title: "Sustainability at the core of data strategy"
 description: "A 3-part series taking a deeper look into building a sustainable data
-management practice."
+management practice. This post talks about designing a data strategy that implements technology and deploys workloads with sustainability as a core principle."
 tags:
   - sustainability
   - data-management
   - cost-optimization
+  - data-strategy
+  - data-architecture
 authorGithubAlias: bhaums
 authorName: Sandipan Bhaumik
 date: 2023-09-27
@@ -20,7 +22,7 @@ This is a 3-part series:
 
 ## Introduction
 
-Data management practices have evolved significantly with technological advancements. However, with the current emphasis on environmental consciousness and energy efficiency, it' is essential to design data strategy through a sustainability lens. Organizations create data strategies considering the three pillars of people, process, and technology – sustainability touches all three pillars.
+Data management practices have evolved significantly with technological advancements. However, with the current emphasis on environmental consciousness and energy efficiency, it is essential to design data strategy through a sustainability lens. Organizations create data strategies considering the three pillars of people, process, and technology – sustainability touches all three pillars.
 
 In this post, we will focus on the technology pillar with an aim to guide you on how to weave sustainability into your data management strategies, ensuring efficient resource utilization and reduced wastage while staying agile and scalable.
 
@@ -64,11 +66,11 @@ As a data team you need to combine tools, resources, and processes for ingesting
 
 ### 3. Negotiate impact-friendly SLA
 
-Consider negotiating Service Level Agreements with data consumers where occasional, scheduled downtime are acceptable during off-peak hours. For disaster recovery, agree on a Recovery Time Objective (RTO) and Recovery Point Objective (RPO) that is optimal an works for the business. Adopt [colder recovery strategies](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html) where possible to reduce parallel running of redundant resources on the secondary domain. It will cut down costs, allow you to be more energy-efficient, and still meet your business needs. For data dissemination, optimize processes to meet SLA, not over-achieve them. If the real-time processing systems that need continuous operation of the underlying infrastructure.
+Consider negotiating Service Level Agreements with data consumers where occasional, scheduled downtime are acceptable during off-peak hours. For disaster recovery, agree on a Recovery Time Objective (RTO) and Recovery Point Objective (RPO) that is optimal an works for the business. Adopt [colder recovery strategies](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html) where possible to reduce parallel running of redundant resources on the secondary domain. It will cut down costs, allow you to be more energy-efficient, and still meet your business needs. For data dissemination, optimize processes to meet SLA, not over-achieve them.
 
 ### 4. Reduce data transfer over the network
 
-With customers, suppliers and partners across the globe, data transfer can be a significant load, especially if you are sending extensive datasets for minor updates. By sending only the changes or updates across the network, you would conserve bandwidth, reduce costs, and minimize the energy footprint of data transfers. Explore techniques where access to data is federated, and data is not moved over the network. For example, if you are using S3 cross-region replication to move data stored in S3 between two AWS regions, check whether sharing the data using [AWS Lake Formation](https://aws.amazon.com/blogs/big-data/integral-ad-science-secures-self-service-data-lake-using-aws-lake-formation/) managed catalog could replace the replication process. AWS services like Amazon Athena and Amazon Redshift also provide [federated query](https://docs.aws.amazon.com/athena/latest/ug/connect-to-a-data-source.html) connectors to many external data sources to and read data without importing them locally.
+With customers, suppliers and partners across the globe, data transfer can be a significant load, especially if you are sending extensive datasets for minor updates. By sending only the changes or updates across the network, you would conserve bandwidth, reduce costs, and minimize the energy footprint of data transfers. Explore techniques where access to data is federated, and data is not moved over the network. For example, if you are using S3 cross-region replication to move data stored in S3 between two AWS regions, check whether sharing the data using [AWS Lake Formation](https://aws.amazon.com/blogs/big-data/integral-ad-science-secures-self-service-data-lake-using-aws-lake-formation/) managed catalog could replace the replication process. AWS services like Amazon Athena and Amazon Redshift also provide [federated query](https://docs.aws.amazon.com/athena/latest/ug/connect-to-a-data-source.html) connectors to many external data sources for reading data without importing them locally.
 
 ### 5.Establish robust data governance practices
 
@@ -77,3 +79,5 @@ Data governance involves standardizing data formats, ensuring data quality, mana
 ## Conclusion
 
 Embedding sustainability into data management is more than just an eco-friendly initiative; it is a strategic approach that can offer cost savings, improve efficiency, and nurture responsible growth. By focusing on resource optimization, using purpose-built tools, negotiating eco- friendly SLAs, minimizing data transfers over the network, and establishing robust governance, organizations can ensure they are on the right path to sustainable data practices. Adopting such measures not only reduces our carbon footprint but also sets a precedent for the future of data management.
+
+In the next section we will learn how you can adopt sustainable data management practices in your day-to-day operations.

@@ -1,11 +1,13 @@
 ---
 title: "Transitioning to sustainable data management"
 description: "A 3-part series taking a deeper look into building a sustainable data
-management practice."
+management practice. This post lays out six steps you can implement to operate the practice in an ongoing basis."
 tags:
   - sustainability
   - data-management
   - cost-optimization
+  - data-strategy
+  - data-architecture
 authorGithubAlias: bhaums
 authorName: Sandipan Bhaumik
 date: 2023-09-27
@@ -34,7 +36,7 @@ Let’s look at six steps to create a process that enables your organization to 
 
 First, you need to define your sustainability goals. Organizational sustainability goals encompass decarbonization, waste reduction, water stewardship, and renewable energy adoption. For your data workloads, you focus on energy efficiency leading to decarbonization.
 
-You can create specific goals like *remove 100% idle resources in data workloads by `<date>`, right size compute resources for data processing jobs to use the fewest vCPUs possible by `<date>` or reduce storage space by 20% in the data lake by `<data>`*.
+You can create specific goals like *"remove 100% idle resources in data workloads"*, *"right size compute resources for data processing jobs to use the fewest vCPUs possible"*, or *"reduce storage space by 20% in the data lake"*.
 
 I am making up numbers here, you could assess a realistic goal for your business and follow a [SMART](https://business.adobe.com/blog/basics/smart-goals) format for the goals.
 
@@ -71,7 +73,7 @@ There are six key domains to consider in the review:
 
 - **Development & Deployment Process:** find opportunities to reduce your sustainability impact by making changes to your development, test, and deployment practices. Check for sustainability improvements during testing and prior to production deployment. Continuously streamline your development processes and environments, introduce automation thought CI/CD.
 
-When you review your workloads and identify areas of improvement, classify them into these domains and evaluate which changes would deliver maximum impact. If you optimizing AWS data services for sustainability, refer to this two-part blog - [Optimize your modern data architecture for sustainability](https://aws.amazon.com/blogs/architecture/optimize-your-modern-data-architecture-for-sustainability-part-1-data-ingestion-and-data-lake/) for some tips.
+When you review your workloads and identify areas of improvement, classify them into these domains and evaluate which changes would deliver maximum impact. If you are optimizing AWS data services for sustainability, refer to this two-part blog - [Optimize your modern data architecture for sustainability](https://aws.amazon.com/blogs/architecture/optimize-your-modern-data-architecture-for-sustainability-part-1-data-ingestion-and-data-lake/) for some tips.
 
 ### 4. Setup a prioritization framework for implementing changes that impact sustainability KPIs
 

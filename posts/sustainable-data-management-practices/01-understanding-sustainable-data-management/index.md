@@ -1,11 +1,13 @@
 ---
 title: "Understanding sustainable data management"
 description: "A 3-part series taking a deeper look into building a sustainable data
-management practice."
+management practice. This post highlights the inefficiencies caused by traditional ways of data management leading to environmental harm and explains the mental models behind adopting the practices."
 tags:
   - sustainability
   - data-management
   - cost-optimization
+  - data-strategy
+  - data-architecture
 authorGithubAlias: bhaums
 authorName: Sandipan Bhaumik
 date: 2023-09-27
@@ -40,7 +42,7 @@ We have learnt the one-size-fits-all approach for choosing tool for data managem
 
 ### 3. Lack of data governance increases manual work compromising on efficiency
 
-The lack of data governance directly contributes to resource wastage. Without proper oversight and standardization, data becomes unorganized and duplicated, often leading to data quality issues and inaccurate metrics. Teams spend extra time locating the right datasets, moving data over the network, and correcting data inaccuracies. This demands more storage and processing power that can be avoided with resilient data governance practices.
+The lack of data governance directly contributes to resource wastage. Without proper oversight and standardization, data becomes unorganized and duplicated, often leading to data quality issues and inaccurate metrics. Teams spend extra time locating the right datasets, moving data over the network, and correcting data inaccuracies. This demands more storage and processing power that can be avoided with robust data governance practices.
 
 ## Understanding sustainable data management
 
