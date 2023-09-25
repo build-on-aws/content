@@ -25,6 +25,7 @@ management and governance are pivotal to their success while ensuring they opera
 efficiently, are cost-efficient, and minimize environmental impact. As sustainability becomes
 a focal point in both business and technology (["Tech + Sustainability = Leadership" blog by
 Accenture](https://www.accenture.com/us-en/blogs/technology-innovation/tech-sustainability-leadership)), it is essential to design data management strategies with the environment in mind.
+
 If you are keen to learn about sustainable data management, this blog series is for you. In this
 first part we will discuss how traditional data management practices impact the environment,
 and form an understanding of sustainable data management practices on AWS. Let’s dive in.

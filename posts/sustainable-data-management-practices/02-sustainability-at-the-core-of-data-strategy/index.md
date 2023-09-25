@@ -24,8 +24,9 @@ Data management practices have evolved significantly with technological advancem
 However, with the current emphasis on environmental consciousness and energy efficiency, it'
 is essential to design data strategy through a sustainability lens. Organizations create data
 strategies considering the three pillars of people, process, and technology – sustainability
-touches all three pillars. In this post, we will focus on the technology pillar with an aim to guide
-you on how to weave sustainability into your data management strategies, ensuring efficient
+touches all three pillars.
+
+In this post, we will focus on the technology pillar with an aim to guide you on how to weave sustainability into your data management strategies, ensuring efficient
 resource utilization and reduced wastage while staying agile and scalable.
 
 ## Designing a data strategy with sustainability at the core
