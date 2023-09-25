@@ -53,3 +53,9 @@ AWS Community Builder, Brian H. Hough shows you how to **build your own machine 
 **Explore the ABCs of Generative AI** with AWS Developer Advocate Brooke Jamieson on [the Community.aws blog](https://community.aws/posts/the-abcs-of-generative-ai) or watch [this short](https://youtube.com/shorts/E_nH2oWlniQ?feature=share) taken on the floor of the AWS Summit in New York City.
 
 **Improve your resource utilization and save money** during the [Build On Live Cost Optimization](https://www.youtube.com/watch?v=OTSNv49s2vk) livestream with AWS Developer Advocate Darko Mesaros and AWS Solutions Architect Steph Gooch on September 28.
+
+## Want to help?
+
+Want more content like this? Have feedback on this post? Help us help you by taking a moment to complete [this brief survey](https://pulse.aws/survey/DEM0H5VW).
+
+
