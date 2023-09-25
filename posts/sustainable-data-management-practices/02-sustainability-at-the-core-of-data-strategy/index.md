@@ -1,6 +1,7 @@
 ---
 title: "Sustainability at the core of data strategy"
-description: "Replace with your description"
+description: "A 3-part series taking a deeper look into building a sustainable data
+management practice."
 tags:
   - sustainability
   - data-management
@@ -44,7 +45,7 @@ ingestion to data consumption.
 ![five key principles for building sustainable practices for data
 management](images/five-key-principles-for-building-sustainable-data-management.png)
 
-### Improve resource utilization and reduce wastage
+### 1. Improve resource utilization and reduce wastage
 
 As I mentioned previously, in traditional data management practices, businesses usually set up
 large servers, provisioned for peak traffic. But outside of those peaks, those servers are
@@ -76,7 +77,7 @@ store objects so they can be consumed efficiently by downstream processes. You c
 also implement processes to automate general clean-up mechanisms to remove
 duplicate or unused data.
 
-### Use the service fit for the use-case
+### 2. Use the service fit for the use-case
 
 As a data team you need to combine tools, resources, and processes for ingesting, storing,
 querying data, building machine learning models, and ultimately helping end users develop
@@ -88,7 +89,7 @@ operations would provide optimal performance efficiency. Using the right storage
 data means the services operate in their natural state and are more efficient. Would you ever
 use a sledgehammer to hang a picture?
 
-### Negotiate impact-friendly SLA
+### 3. Negotiate impact-friendly SLA
 
 Consider negotiating Service Level Agreements with data consumers where occasional,
 scheduled downtime are acceptable during off-peak hours. For disaster recovery, agree on a
@@ -98,7 +99,7 @@ running of redundant resources on the secondary domain. It will cut down costs, 
 be more energy-efficient, and still meet your business needs.
 For data dissemination, optimize processes to meet SLA, not over-achieve them. If the real-time processing systems that need continuous operation of the underlying infrastructure.
 
-### Reduce data transfer over the network
+### 4. Reduce data transfer over the network
 
 With customers, suppliers and partners across the globe, data transfer can be a significant load,
 especially if you are sending extensive datasets for minor updates. By sending only the changes
@@ -110,7 +111,7 @@ to move data stored in S3 between two AWS regions, check whether sharing the dat
 Amazon Athena and Amazon Redshift also provide [federated query](https://docs.aws.amazon.com/athena/latest/ug/connect-to-a-data-source.html) connectors to many external data sources to
 and read data without importing them locally.
 
-### Establish robust data governance practices
+### 5.Establish robust data governance practices
 
 Data governance involves standardizing data formats, ensuring data quality, managing security
 policies, and maintaining metadata, all of which streamline data integration, transformation,
