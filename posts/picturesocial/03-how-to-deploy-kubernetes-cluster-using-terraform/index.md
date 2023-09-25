@@ -8,7 +8,6 @@ tags:
   - terraform
   - ecr
   - infrastructure-as-code
-showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-13

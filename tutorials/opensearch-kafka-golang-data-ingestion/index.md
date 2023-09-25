@@ -9,7 +9,6 @@ tags:
   - tutorials
 waves:
   - dataml
-showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-07-13

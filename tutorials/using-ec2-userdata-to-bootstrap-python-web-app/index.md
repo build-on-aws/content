@@ -12,7 +12,6 @@ tags:
     - python
 waves:
   - devops
-showInHomeFeed: true
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 additionalAuthors: 

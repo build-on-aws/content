@@ -5,7 +5,6 @@ tags:
   - containers
   - ecr
   - docker
-showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2022-10-11

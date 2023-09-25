@@ -15,7 +15,6 @@ spaces:
   - cost-optimization
 waves:
   - cost
-showInHomeFeed: true
 authorGithubAlias: DDxPlague
 authorName: Tyler Jones
 date: 2023-07-20

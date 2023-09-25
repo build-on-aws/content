@@ -9,7 +9,6 @@ tags:
     - tutorials
 spaces:
   - cost-optimization
-showInHomeFeed: true
 authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2023-07-26
