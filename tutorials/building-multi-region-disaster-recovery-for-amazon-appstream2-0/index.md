@@ -114,13 +114,11 @@ The high level steps are as follows:
 
 1.  The first step is to create a folder on both your primary and DR file servers to store your user profile containers, in this blog I will be using FSx for Windows to store my user profile containers. Create a folder on the D drive (D\$) of your Primary and DR FSx file servers manually or using this PowerShell command from a domain joined machine.
 
-(Replace **fsxPrimary.asx.local** with the DNS name of your storage server) 
+(Replace **fsxPrimary.asx.local** with the DNS name of your storage server)
 
 ```powershell
 New-Item -Path '\\fsxPrimary.asx.local\D$' -Name Profiles -ItemType Directory
-```
 
-```powershell
 New-Item -Path '\\fsxDR.asx.local\D$' -Name Profiles -ItemType Directory
 ```
 
@@ -208,13 +206,13 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
  
     Typically located at:
 
-    ```
+    ```powershell
     \\%USERDOMAIN%\SYSVOL\%USERDOMAIN%\Policies\PolicyDefinitions
     ```
 
 1.  Next Copy **fslogix.adml** to 
 
-    ```
+    ```powershell
     \\%USERDOMAIN%\SYSVOL\%USERDOMAIN%\Policies\PolicyDefinitions\en-US
     ```
 
@@ -282,18 +280,20 @@ Get-LocalGroupMember -Group 'FSLogix ODFC Include List' | Where {$_.objectclass 
 
 
 1. To avoid duplication, follow steps found in blog post [Improve the Availability of  Existing Okta IAM Federation Setup Using Multi-Region SAML Endpoints](https://aws.amazon.com/blogs/apn/improve-the-availability-of-existing-okta-iam-federation-setup-using-multi-region-saml-endpoints?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream).
-      
+
 Repeat **steps 1-16** for Primary and again for DR region. This will create two Okta AWS Federated applications, one for Primary and the other for the DR region. The difference with Amazon AppStream 2.0, is that we will need to change step 3 (Relay State) and 6 (IAM Trust Policy). The **Default Relay State** in Okta needs to match the Amazon AppStream 2.0 format, for example, my Okta application for Primary Region(Frankfurt) relay state URL is:
     
-    >https://**appstream2.eu-central-1.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**
-
+```text
+https://**appstream2.eu-central-1.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**
+```
 
 ![Okta Integration for AWS Account Federation Sign On Tab selected and highlighting eu-central-1 in the Default Relay State text box. The text box has the text https://appstream2.eu-central-1.aws.amazon.com/saml?stack=MyAS2StackName&amp;accountId=123456](images/image7.png "Figure 7. Okta Integration for AWS Account Federation Sign On Tab")
 
-
-    >**London:**  
+```text
+    **London:**  
         https://**appstream2.eu-west-2.aws.amazon.com/saml**?stack=**MyAS2StackName**&accountId=**123456**  
-    
+```
+
 Check [documentation](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers-setting-up-saml.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=mr-dr-for-appstream) for more details on the relay state URL.
 
 
@@ -345,19 +345,18 @@ After completing the Okta application configuration, IAM Role and SAML identity 
   
 ![Okta Dashboard with two AWS Account SAML federation applications. AppStream Primary and AppStream DR.](images/image9.png "Figure 9. Okta Dashboard with two AWS Account SAML federation applications AppStream Primary and AppStream DR")
 
-
 ### Step 9: Test if DR Is Working As Expected
 
 1.  Login to your IdP dashboard, and connect to the Amazon AppStream 2.0
     fleet in your primary region using the okta application tile.
 
 2.  Once connected to the fleet, use file explorer to connect to your
-    SMB locations 
-    ```
+    SMB locations
+    ```powershell
     \\FSxPrimaryDNSName\Profiles
     ```
 
-Confirm that the user profile folder and vhdx file appears under the specified SMB locations, set in step 3. Take note of the initial profile size.
+Confirm that the user profile folder and `vhdx` file appears under the specified SMB locations, set in step 3. Take note of the initial profile size.
 
 ![Windows file explorer app with two windows, one connected to the primary file server and the other connected to the DR file server. Primary and DR file server windows both have a file called profile_as2test2.vhdx with a size of 167,936 KB Primary and DR have a file called Profile_as2test2.VHDX.lock 3KB in size but Primary Profile_as2test2.VHDX.meta is 1KB While DR Profile_as2test2.VHDX.meta is 0KB ](images/image10.png "Figure 10. EC2 Windows File Explorer Connected to FSx Primary and DR")
 
