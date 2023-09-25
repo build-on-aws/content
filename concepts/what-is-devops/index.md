@@ -5,7 +5,6 @@ tags:
   - devops
   - foundational
   - aws
-showInHomeFeed: true
 spaces:
   - devops
 waves:

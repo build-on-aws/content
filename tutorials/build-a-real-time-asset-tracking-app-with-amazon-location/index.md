@@ -13,7 +13,6 @@ tags:
 waves:
   - modern-apps
 authorGithubAlias: zachelliottwx
-showInHomeFeed: true
 authorName: Zach Elliott
 date: 2023-07-31
 ---

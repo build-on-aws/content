@@ -14,7 +14,6 @@ tags:
   - typescript
 waves:
   - modern-apps
-showInHomeFeed: true
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-07-10

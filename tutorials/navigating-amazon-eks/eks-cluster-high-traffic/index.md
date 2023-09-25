@@ -7,7 +7,6 @@ tags:
     - kubernetes
     - tutorials
     - aws
-showInHomeFeed: true
 waves:
   - modern-apps
 spaces:
