@@ -1,6 +1,6 @@
 ---
 title: "Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS"
-description: "How to run asynchronous background tasks in your Amazon EKS cluster using Amazon SQS for task orchestration and Amazon EFS for scalable, high-availability storage."
+description: "Run background tasks in a job queue and leverage scalable, multi-availability zone storage."
 tags:
     - eks-cluster-setup
     - eks
@@ -365,7 +365,7 @@ eksctl create iamserviceaccount \
   --approve
 ```
 
-## Step 9: Create a Kubernetes secret
+## Step 9: Create a Kubernetes Secret
 
 In this section, we’ll create a Kubernetes secret to ensure our pods have access to our private Amazon ECR repository. This is a critical step because it ensures that your Kubernetes cluster can pull the necessary container images from your private ECR repository. Now, you might be wondering whether this ECR secret will survive pod restarts, especially considering that ECR tokens are only valid for 12 hours. Kubernetes will automatically refresh the secret when it nears expiration, ensuring uninterrupted access to your private ECR repository.
 
@@ -391,7 +391,7 @@ The expected output should look like this:
 secret/regcred created
 ```
 
-## Step 10: Deploy the Kubernetes Job with Queue Integration
+## Step 10: Deploy the Kubernetes Job With Queue Integration
 
 In this section, you'll orchestrate a Kubernetes Job that is tightly integrated with an Amazon SQS queue. This integration is crucial for handling batch processing tasks in a more distributed and scalable manner. By leveraging SQS, you can decouple the components of a cloud application to improve scalability and reliability. You'll start by creating a Kubernetes Job manifest that includes environment variables for the SQS queue URL. This ensures that your batch processing application can interact with the SQS queue to consume messages and possibly trigger more complex workflows. 
 
@@ -500,7 +500,7 @@ persistentvolume/efs-pv created
 persistentvolumeclaim/efs-claim created
 ```
 
-## Step 12: Implement Persistent Storage with Amazon EFS
+## Step 12: Implement Persistent Storage With Amazon EFS
 
 In this section, you'll enhance your Kubernetes Jobs to use Amazon EFS for persistent storage. Building on the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13), where you set up an EFS-based 'StorageClass,' you'll add a Persistent Volume Claim (PVC) to your existing Job manifests. Due to the immutable nature of Jobs, you'll also adopt a versioning strategy. Instead of updating existing Jobs, you'll create new ones with different names but similar specs, allowing for historical tracking and version management through labels and annotations.
 
