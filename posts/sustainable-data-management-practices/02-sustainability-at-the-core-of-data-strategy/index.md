@@ -40,8 +40,7 @@ The diagram below illustrates the five key principles for building sustainable p
 management. It is important to apply these strategies on end-to-end data lifecycle from data
 ingestion to data consumption.
 
-![five key principles for building sustainable practices for data
-management](images/five-key-principles-for-building-sustainable-data-management.png)
+![five key principles for building sustainable practices for data management](./images/five-key-principles-for-building-sustainable-data-management.webp)
 
 ### 1. Improve resource utilization and reduce wastage
 
