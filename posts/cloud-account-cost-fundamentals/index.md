@@ -50,43 +50,41 @@ There are many reasons why businesses would prefer multiple AWS accounts. You ma
 
 If you do not wish to create separate accounts, you should at the very least, ensure that you have created separate Amazon Virtual Private Cloud (VPC) for your different environments. This will help you isolate your workloads in the same account. **Do NOT use default VPC or default security group inside a VPC for Production workloads.**  I have had a customer where a developer took down entire e-commerce website (loss of revenue) because they changed a security group rule in a default security group, thinking they are doing it for production. So, no sharing, isolate and add layers to your security.
 
-## 2. Choosing AWS Regions and Services
+## 2. Choosing AWS Regions
 
-If you are just starting with AWS, there are 2 important concepts you need to understand - Regions, and Availability Zones. AWS services and resources are hosted in multiple locations world-wide. Each AWS Region is a separate geographic area and each Region has multiple, isolated locations known as Availability Zones.
+If you are just starting with AWS, there are 2 important concepts you need to understand - Regions, and Availability Zones. AWS services and resources are hosted in multiple locations world-wide. Each AWS Region is a separate geographic area and each Region has multiple, isolated locations known as Availability Zones. This is to ensure you have a highly-available, fault tolerant environment.
 
 ![image]() 
 
 UPDATE
 
-This is to ensure you have a highly-available, fault tolerant environment. It is important to remember that each AWS Region is completely independent.
-
-There are many more resources in the global infrastructure like AWS Local Zones, Edge Locations etc, which we will not be covering in this post.
-
-### 2.1 How do you choose AWS Region?
-
 Choosing which AWS Region to use depends on multiple factors:
 
 - **Latency:**
-  If this is an application/website to service end customers and latency is of utmost important then identify where are majority of your customers located and choose the AWS Region closest to your customers. This helps reduce Internet latency. While geographical distances matter the most, it does not always guarantee that the closest in distance means faster network latency. Sometimes it also depends on how Internet Service Providers have laid out their network. To find out the closest AWS Region for lower internet latency, you can use third-party tools like [cloudping.info](https://www.cloudping.info/) and open source CLI tool like [awsping](https://github.com/ekalinin/awsping). They send a ping from your local browser to AWS resources in different regions.
+  If this is an application/website to service end customers and latency is of utmost important then identify where are majority of your customers located and choose the AWS Region closest to your customers. This helps reduce Internet latency. While geographical distances matter the most, it does not always guarantee that the closest in distance means faster network latency. Sometimes it also depends on how Internet Service Providers have laid out their network. To find out the closest AWS Region for lower internet latency, you can use third-party sites like [cloudping.info](https://www.cloudping.info/) and open source CLI tool like [awsping](https://github.com/ekalinin/awsping). They send a ping from your local browser to AWS resources in different regions.
 
   For example, in the screenshot below you can see that from my home in Toronto, ca-central-1 i.e. Canada (Central) has the lowest latency of 11ms.
 
   ![CloudPing info latency](images/cloudping-info-latency.png)
 
-- **Cost:**
+  There are many more resources in the global infrastructure like AWS Local Zones, Edge Locations etc, that can help reduce latency, however, we will not be covering in this post.
 
-  Not all components of your application require high latency, example development
-  aws services, anecdotally us east 
-  Newer EC2 instance type generations will be more cost-effective.
+- **Cost:**
+  It is important to remember that each AWS Region is completely independent, and so is their pricing. Each service has pricing listed based on the Regions. Whenever you provision a resource, example, Amazon EC2 instance you will be charged for that instance type based on its region.  
+  
+  Not all components of your application require high latency, example a development environment would not require high latency and can be hosted in a different region with lower costs. You can use the [AWS Pricing Calculator](https://calculator.aws/) to cost estimate your needs. Anecdotally, the US-EAST-1 is the most cost-effective region and can be used to lower your cost.
+  
+  In addition to that, if your workload is stateless, fault-tolerant, or flexible such as containerized workloads, CI/CD, web servers, and test & development workloads, then you can use [Spot instances](https://aws.amazon.com/ec2/spot/getting-started/) to further reduce your cost. To compare the current Spot prices against standard On-Demand rates, visit the [Spot Instance Advisor](https://aws.amazon.com/ec2/spot/instance-advisor/).
+
+  Note that there is a charge for data transfer between Regions. So if you are planning to host in multiple regions and have to transfer data between regions, you will have to pay additional charges. More information on Data transfer charges in this blog - [Overview of Data Transfer Costs for Common Architectures](https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/)
 
 - **Compliances:**
-gdpr, data privacy laws, 
+  If your workloads contains data that is required to be bound by local regulations, then you should choose a Region that complies with the regulation. This factor overrides all other factors for region selection. so, do check out if your application has to follow a certain country's data privacy laws like GDPR.
 
-- **AWS Services:** [List of AWS Services Available by Region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)
+- **AWS Services:**
+  Newer AWS services and features are gradually deployed to all Regions. Some AWS regions are usually the first to offer newer services, features and software releases. If it is important for you to always be upgrading or experimenting with new launches, then select these regions. You can find detailed [list of AWS Services Available by Region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)
 
-### 2.2 How do I select AWS Services?
-
-There are so many services, how do I begin?
+You can alternatively enable or disable regions in your account. This is helpful to lock down regions you do not regularly use. You can find considerations of this activity and follow steps mentioned in the [AWS Documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-considerations).
 
 ## 3. Free Tier and Budget alerts
 
