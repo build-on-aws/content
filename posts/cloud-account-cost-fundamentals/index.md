@@ -20,17 +20,17 @@ showInHomeFeed: true
 
 ## Introduction
 
-🎉 Congratulations, if you have decided to embark on your cloud journey with Amazon Web Services (AWS). 
+If you have decided to embark on your cloud journey with Amazon Web Services (AWS), Congratulations 🎉
 
 Its been more than a decade since I have been working with AWS products and services - as a customer and as an employee. Throughout this time, I've had the privilege of observing the curiosity of builders like yourself, frequently posing remarkably similar questions about how to set the foundation right.
 
-Setting up an AWS cloud account is a significant step, but navigating the vastness of its capabilities requires more than just sign-up knowledge. Over the years, certain patterns of best practices have emerged, strategies that make the difference between a smoothly operating AWS environment and one that is riddled with challenges. Ensuring a solid foundation in your AWS cloud account is paramount to optimize costs, enhance security, and ensure smooth operations.
+Setting up an AWS cloud account is a significant step in your cloud journey, but navigating the vastness of its capabilities requires more than just sign-up knowledge. Over the years, certain patterns of best practices have emerged, strategies that make the difference between a smoothly operating AWS environment and one that is riddled with challenges. Ensuring a solid foundation in your AWS cloud account is paramount to optimize costs, enhance security, and ensure smooth operations.
 
-Today, I'll share five of those best practices for AWS cloud account fundamentals, to guide you in setting up and maintaining your AWS environment in the most effective way possible. By the end of this read, you'll have insights drawn from years of experience, ensuring that your cloud journey is set on the right path from the very beginning.
+Today, I'll share five of those best practices for AWS cloud account fundamentals, to guide you in setting up and maintaining your AWS environment in the most effective way possible. While my focus is cost here, these practices will also help you secure your account for malicious activities. By the end of this read, you'll have insights drawn from years of experience, ensuring that your cloud journey is set on the right path from the very beginning.
 
 ## 1. Understanding AWS Accounts
 
-An [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) is how you access the AWS Services. The AWS account can be created quickly by using a credit card.
+An [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email) is how you access the AWS Services. The AWS account can be created quickly by using a credit card. All the best practices listed here are to help you NOT overspend and put in guardrails.
 
 ![AWS Account Sign up](images/aws-account-signup.png)
 
@@ -38,44 +38,40 @@ Before you begin creating the account consider following scenarios:
 
 ### 1.1 Is this a personal or business account?
 
-- If this is your **personal account**, ensure you are creating this account with right intentions. The reason I say this is, many students or beginners create AWS account with a credit card (if they can get any), and then regret when resources are left unused and they receive a bill they cannot afford. If you are just starting to learn and want to play with AWS, then **check out [AWS Educate Account](https://aws.amazon.com/education/awseducate/)**. It requires **no credit card** and provides labs that you can play and get AWS experience with. Once you have some experience, you can then create an AWS account with a credit card and continue exploring.
+- If this is your **personal account**, ensure you are creating this account with right intentions. The reason I say this is, many students or beginners create AWS account with a credit card (if they can get any), and then regret when resources are left unused and they receive a bill they cannot afford. If you are just starting to learn and want to play with AWS, then check out **[AWS Educate Account](https://aws.amazon.com/education/awseducate/)**. It requires **no credit card** and provides labs where you can practice and get experience with AWS services. Once you have experience, you can then create an AWS account with a credit card and continue exploring.
 
-- If this is your **business account**, then make sure you use company e-mail address that is an alias in your company domain. I have seen customers using one individual's company email address, and regret when this person is on holiday, changed roles or has left the company. **Create an email alias** in your company domain (e.g. `aws-admins@example.com`), add multiple administrators to it and then use this alias to create the AWS account. This will ensure you retain access to the AWS account, even if any of the employees move to different role or leave the company. Also, AWS emails will be sent to the distribution list and do not have single point of failure on one individual. Same with the phone number, **use a corporate phone number** instead of a personal one.
+- If this is your **business account**, then make sure you use company e-mail address that is an alias in your company domain. I have seen customers using one individual's company email address, and regret when this person is on holiday, has changed roles or left the company. **Create an email alias** in your company domain (e.g. `aws-admins@example.com`), add multiple administrators to it and then use this alias to create the AWS account. This will ensure you retain access to the AWS account, even if any of the employees move to different role or leave the company. Also, AWS emails will be sent to the distribution list and do not have single point of failure on one individual. Same with the phone number, **use a corporate phone number** instead of a personal one.
 
 > Never ignore emails from AWS
 
-If you wish to report a suspicious email claiming to be from Amazon that you believe is a forgery, you may submit a report. You may also forward phishing emails and other suspected forgeries directly to stop-spoofing@amazon.com. To seek [more information on suspicious emails](https://aws.amazon.com/contact-us/)
-
 ### 1.2 Do you need single or multiple AWS Accounts?
 
-There are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts for security control and data access, or different teams and business units. Some customers have benefitted from keeping their production and non-production workloads in different accounts. This also gives them visibility on their development vs production spend. These are listed in detail in the AWS Documentation for [Do I need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html). Use AWS Organizations, which is a free AWS service to manage multiple accounts in your organizations.
+There are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts. You mean want control over security, and data access. Or you have different teams and business units and want to chargeback to them for cloud spent. Or you want to keep your production and non-production workloads in different accounts. This can give you visibility on your development vs production spend. These reasons for multiple accounts are listed in detail in the AWS Documentation - [Do I need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html). Ensure that you use AWS Organizations, which is a free AWS service, to manage multiple accounts in your organizations.
 
-If you do not wish to create separate accounts, you should at the very least, ensure that you have created separate Amazon Virtual Private Cloud (VPC) for your different environments.
-
-Story time: I had a customer, who had development 
-UPDATE
-
+If you do not wish to create separate accounts, you should at the very least, ensure that you have created separate Amazon Virtual Private Cloud (VPC) for your different environments. This will help you isolate your workloads in the same account. **Do NOT use default VPC or default security group inside a VPC for Production workloads.**  I have had a customer where a developer took down entire e-commerce website (loss of revenue) because they changed a security group rule in a default security group, thinking they are doing it for production. So, no sharing, isolate and add layers to your security.
 
 ## 2. Choosing AWS Regions and Services
 
-If you are starting with AWS, there 2 important concepts you need to understand - Regions, and Availability Zones. Amazon cloud computing resources are hosted in multiple locations world-wide. Each AWS Region is a separate geographic area. Each AWS Region has multiple, isolated locations known as Availability Zones.
+If you are just starting with AWS, there are 2 important concepts you need to understand - Regions, and Availability Zones. AWS services and resources are hosted in multiple locations world-wide. Each AWS Region is a separate geographic area and each Region has multiple, isolated locations known as Availability Zones.
 
 ![image]() 
 
 UPDATE
 
-It is important to remember that each AWS Region is completely independent.
+This is to ensure you have a highly-available, fault tolerant environment. It is important to remember that each AWS Region is completely independent.
 
-### 2.1 How do I choose AWS Region?
+There are many more resources in the global infrastructure like AWS Local Zones, Edge Locations etc, which we will not be covering in this post.
+
+### 2.1 How do you choose AWS Region?
 
 Choosing which AWS Region to use depends on multiple factors:
 
-- **Latency:** If this is an application/website service end customers, identify where are majority of your customers located and choose the AWS Region closest to your customers. This helps reduce Internet latency.
+- **Latency:**
+  If this is an application/website to service end customers and latency is of utmost important then identify where are majority of your customers located and choose the AWS Region closest to your customers. This helps reduce Internet latency. While geographical distances matter the most, it does not always guarantee that the closest in distance means faster network latency. Sometimes it also depends on how Internet Service Providers have laid out their network. To find out the closest AWS Region for lower internet latency, you can use third-party tools like [cloudping.info](https://www.cloudping.info/) and open source CLI tool like [awsping](https://github.com/ekalinin/awsping). They send a ping from your local browser to AWS resources in different regions.
 
-https://www.cloudping.info/
-https://clients.amazonworkspaces.com/Health.html
+  For example, in the screenshot below you can see that from my home in Toronto, ca-central-1 i.e. Canada (Central) has the lowest latency of 11ms.
 
-add more info on internet latencies, and this tool, cli? https://github.com/ekalinin/awsping
+  ![CloudPing info latency](images/cloudping-info-latency.png)
 
 - **Cost:**
 
