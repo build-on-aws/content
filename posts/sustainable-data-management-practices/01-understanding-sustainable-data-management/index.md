@@ -10,12 +10,12 @@ tags:
   - data-architecture
 authorGithubAlias: bhaums
 authorName: Sandipan Bhaumik
-date: 2023-09-27
+date: 2023-09-26
 ---
 |ToC|
 |---|
 
-This is a 3-part series:
+This is part 1 of a 3-part series:
 
 | SeriesToC |
 |-----------|
