@@ -84,23 +84,32 @@ Choosing which AWS Region to use depends on multiple factors:
 - **AWS Services:**
   Newer AWS services and features are gradually deployed to all Regions. Some AWS regions are usually the first to offer newer services, features and software releases. If it is important for you to always be upgrading or experimenting with new launches, then select these regions. You can find detailed [list of AWS Services Available by Region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)
 
-You can alternatively enable or disable regions in your account. This is helpful to lock down regions you do not regularly use. You can find considerations of this activity and follow steps mentioned in the [AWS Documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-considerations).
+You can **alternatively enable or disable regions** in your account. This is helpful to lock down regions you do not regularly use. You can find considerations of this activity and follow steps mentioned in the [AWS Documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-considerations).
 
 ## 3. Free Tier and Budget alerts
 
-A common misconception among builders is that AWS Free Tier means everything is free for first 12months. Well if you thought so too, then let me break the ice for you, NO.
+A common misconception among builders is that AWS Free Tier means everything is free. Well if you thought so too, then let me break the ice for you, NO.
 
 > Free Tier: Not everything is free.
 
-When you create a new AWS account, AWS provides **some resources** in **some AWS services** free for the first 12 months only.
+There are 3 types of offers in AWS Free Tier today:
 
-Within those 12 months, if in a month you exceed the free tier limit, your credit card will be charged as per the on-demand prices.
+- Free Trials:
 
-For example, 750 hours of Linux and Windows t2.micro instances (t3.micro for the regions in which t2.micro is unavailable), each month for one year. If you exceed 750 hours, you wil be charge an On-Demand hourly rate of $0.0116 (in US East N. Virginia Region). While Displayed pricing is an hourly rate but depending on which instances you choose, you pay by the hour or second (minimum of 60 seconds) for each instance type.
+These are short term free trials that start from the date you provision a particular service. For example, you get Amazon GuardDuty, an intelligent threat detection and continuous monitoring service, free for 30 days since its activation.
+
+- Always free:
+These offers do not expire, they are available to all customers. For example, you get 1 Million free requests per month with AWS Lambda. If you exceed beyond this, you will be charged regular rates per the Region.
+
+- 12 months free
+
+When you create a new AWS account, AWS provides **some resources** in **some AWS services** free for the **first 12 months only**. Within those 12 months, if in a month you exceed the free tier limit, your credit card will be charged as per the on-demand prices.
+
+For example, 750 hours of Linux and Windows t2.micro instances (t3.micro for the regions in which t2.micro is unavailable), each month for one year. If you exceed 750 hours, you will be charge an On-Demand hourly rate of $0.0116 (in the US East N. Virginia Region). While the displayed pricing is an hourly rate but depending on which instances you choose, you pay by the hour or second (minimum of 60 seconds) for each instance type. For more information, you can read pricing pages for each AWS service, for example, refer [Amazon EC2 On-Demand Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
 
 > If you are a beginner, I recommended to use EC2 Micro instances only.
 
-For more information, you can read pricing pages for each AWS service. For example, refer [Amazon EC2 On-Demand Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
+Check out [AWS Free Tier](https://aws.amazon.com/free/) to learn more about these offers.
 
 You can also use the [AWS Pricing Calculator](https://calculator.aws/) to cost estimate your needs.
 
@@ -116,19 +125,19 @@ You can also use the [AWS Pricing Calculator](https://calculator.aws/) to cost e
 
     - For `Alert preferences`, choose `Edit`.
 
-    - Select `Receive AWS Free Tier alerts` to opt in to Free Tier usage alerts. By default, it will deliver alerts to the root user email address, you can optionally add one more additional recipient. Once done, choose `Update`.
+    - Select `Receive AWS Free Tier alerts` to opt in to Free Tier usage alerts. By default, it will deliver alerts to the root user email address (the one you used in 1.1 above), you can optionally add one more additional recipient. Once done, choose `Update`.
 
     ![billing alert preferences update](images/billing-alert-preferences-update.png)
 
 2. For additional tracking, you can create a new budget in the [AWS Console for AWS Budgets](https://us-east-1.console.aws.amazon.com/billing/home?region=us-east-1#/budgets) to track your usage to **100 percent** of the Free Tier limit by setting a `zero spend budget` using the simplified template as shown in the image below:
+  ![Budget in console](images/create-budget-aws-console.png)
 
-    ![Budget in console](images/create-budget-aws-console.png)
-
-3. Optionally, you can also filter your budget to track individual services. Set a monthly usage budget with a fixed usage amount and forecasted notifications to help ensure that you are staying within the service limits for a specific service. You can also be sure you are staying under a specific AWS Free Tier offering.
+3. Optionally, you can also create a new budget to track individual services usage. Set a monthly usage budget with a fixed usage amount and forecasted notifications to help ensure that you are staying within the service limits for a specific service. You can also be sure you are staying under a specific AWS Free Tier offering.
 
 4. **Review your AWS Free Tier usage** by using the Free Tier page in the Billing console.
+  ![Review your AWS Free Tier usage](images/aws-free-tier-billing-console.png)
 
-    ![Review your AWS Free Tier usage](images/aws-free-tier-billing-console.png)
+If you need detailed steps on setting up AWS Budgets, do check out this [tutorial on Control Your AWS Costs](https://aws.amazon.com/getting-started/hands-on/control-your-costs-free-tier-budgets/).
 
 ## 4. Security is important
 
