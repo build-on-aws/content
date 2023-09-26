@@ -301,7 +301,7 @@ To verify that external-dns has started, run:
 
 ## Step 5: Verify the Functionality of ExternalDNS
 
-Now that we have set up the external DNS, we can allow users outside the cluster to access containerized applications using human-readable URLs. In this section, we will deploy the popular "2048 game" as a sample application within the cluster. The manifest we provide includes custom annotations for the external DNS, specifically for the hostname. These annotations work together with the external DNS controller to access the Kubernetes service through an HTTP path. For more annotations, refer to the [ExternalDNS](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/#annotations) documentation.
+Now that we have set up the ExternalDNS, we can allow users outside the cluster to access containerized applications using human-readable URLs. In this section, we will deploy the popular "2048 game" as a sample application within the cluster. The manifest we provide includes custom annotations for the ExternalDNS, specifically for the hostname. These annotations work together with the ExternalDNS controller to access the Kubernetes service through an HTTP path. For more annotations, refer to the [ExternalDNS](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/#annotations) documentation.
 
 1. Define the `SUB_DOMAIN` environment variable. 
 
