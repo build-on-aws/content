@@ -48,7 +48,7 @@ In this tutorial, you will configure the [ExternalDNS](https://github.com/kubern
 
 ## Overview
 
-This tutorial is the second part of a series on managing high traffic microservices platforms using Amazon EKS, and it's dedicated to the setup and configuration of [External DNS](https://github.com/kubernetes-sigs/external-dns) add-on. It also outlines the process of creating a private hosted zone and introduces the implementation of authentication and authorization using IAM Roles for Service Accounts (IRSA) to manage the AWS Route53 DNS records.
+This tutorial is the second part of a series on managing high traffic microservices platforms using Amazon EKS, and it's dedicated to the setup and configuration of [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) add-on. It also outlines the process of creating a private hosted zone and introduces the implementation of authentication and authorization using IAM Roles for Service Accounts (IRSA) to manage the AWS Route53 DNS records.
 
 * **Authentication:** Utilize the IAM Role for Service Account (IRSA) for the [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) add-on with the [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) to ensure secure communication between Kubernetes pods and AWS services.
 * **Route53 Hosted Zone Creation:** Create a private hosted zone that will hold the DNS records of the Kubernetes service. This hosted zone will serve as a container for all the DNS records related to your Kubernetes service.
