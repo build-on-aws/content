@@ -18,8 +18,6 @@ date: 2023-09-27
 
 ## Introduction
 
-If you have decided to embark on your cloud journey with Amazon Web Services (AWS), Congratulations 🎉
-
 Setting up an AWS cloud account is a significant step in your cloud journey, but navigating the vastness of its capabilities requires more than just sign-up knowledge.
 
 Its been more than a decade since I have been working with AWS products and services - as a customer and as an employee. Throughout this time, I've had the privilege of observing the curiosity of builders like yourself, frequently posing similar questions about how to set the foundation right.
@@ -48,9 +46,15 @@ Choosing the right email address is important. AWS sends important information a
 
 ### 1.2 Do you need single or multiple AWS Accounts?
 
-There are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts. You may want control over security, and data access. Or you have different teams and business units and want to charge back to them for cloud spend. Or you want to keep your production and non-production workloads in different accounts. This can give you visibility on your development vs production spend. These reasons for multiple accounts are detailed in the AWS documentation - [do you need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq). Ensure that you use AWS Organizations, which is a free AWS service, to manage multiple accounts in your organizations.
+There are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts. You may want control over security, and data access. Or you have different teams and business units and want to charge back to them for cloud spend. Or you want to keep your production and non-production workloads in different accounts. This can give you visibility on your development vs production spend. Your multi-account strategy will help you set a good foundation on how you control cost.
 
-If you do not wish to create separate accounts, you should at the very least, ensure that you have created separate Amazon Virtual Private Cloud (VPC) for your different environments. This will help you isolate your workloads in the same account. **Do NOT use the default VPC or the default security group inside a VPC for Production workloads.**  I have had a customer where a developer took down an entire e-commerce website (loss of revenue) because they changed a security group rule in a default security group, thinking they are doing it for dev/test environment. So, **no sharing, isolate and add layers to your security.**
+These reasons for multiple accounts are detailed in the AWS documentation - [do you need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq). Ensure that you use AWS Organizations, which is a free AWS service, to manage multiple accounts in your organizations.
+
+If you do not wish to create separate accounts, you should at the very least, ensure that you have a tagging strategy and some form of separation with VPCs and/or Regions:
+
+- Tagging strategy can help you gain visibility and management of cost and usage. It is detailed out in the AWS documentation - [Tags for cost allocation and financial management](https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tags-for-cost-allocation-and-financial-management.html).
+
+- You can create separate Amazon Virtual Private Cloud (VPC) for your different environments. This will help you isolate your workloads in the same account. **Do NOT use the default VPC or the default security group inside a VPC for Production workloads.**  I have had a customer where a developer took down an entire e-commerce website (loss of revenue) because they changed a security group rule in a default security group, thinking they are doing it for dev/test environment. So, **no sharing, isolate and add layers to your security.**
 
 ## 2. Choosing AWS Regions
 
@@ -61,7 +65,7 @@ If you are just starting with AWS, there are 2 important concepts you need to un
 Choosing which AWS Region to use depends on multiple factors:
 
 - **Latency:**
-  If this is an application/website to service end customers and latency is of utmost important then identify where are majority of your customers located and choose the AWS Region closest to your customers. This helps reduce Internet latency. While geographical distances matter the most, it does not always guarantee that the closest in distance means faster network latency. Sometimes it also depends on how Internet Service Providers have laid out their network. To find out the closest AWS Region for lower internet latency, you can use third-party sites like [cloudping.info](https://www.cloudping.info/) and open source CLI tool like [awsping](https://github.com/ekalinin/awsping). They send a ping from your local browser to AWS resources in different regions.
+  If this is an application/website to service end customers and latency is of utmost important then identify where are majority of your customers located and choose the AWS Region closest to your customers. This helps reduce Internet latency. While geographical distances matter the most, it does not always guarantee that the closest in distance means faster network latency. Sometimes it also depends on how Internet Service Providers (ISP) have laid out their network. To find out the closest AWS Region for lower internet latency, you can use third-party sites like [cloudping.info](https://www.cloudping.info/) and open source CLI tool like [awsping](https://github.com/ekalinin/awsping). They send a ping from your local browser to AWS resources in different regions.
 
   For example, in the screenshot below you can see that from my home in Toronto, ca-central-1 i.e. Canada (Central) has the lowest latency of 11ms.
 
@@ -72,7 +76,9 @@ Choosing which AWS Region to use depends on multiple factors:
 - **Cost:**
   It is important to remember that each AWS Region is completely independent, and so is their pricing. Each service has pricing listed based on the Regions. Whenever you provision a resource, example, Amazon EC2 instance you will be charged for that instance type based on its region.  
   
-  Not all components of your application require high latency, example a development environment would not require high latency and can be hosted in a different region with lower costs. You can use the [AWS Pricing Calculator](https://calculator.aws?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to cost estimate your needs. Anecdotally, the US-EAST-1 is the most cost-effective region and can be used to lower your cost.
+  Not all components of your application require high latency, example a development environment would not require high latency and can be hosted in a different cost-effective region while the production environment is hosted in low-latency region.
+  
+  Anecdotally, the US-EAST-1 is the most cost-effective region and can be used to lower your cost. However, I suggest using the [AWS Pricing Calculator](https://calculator.aws?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to cost estimate your needs.
   
   In addition to that, if your workload is stateless, fault-tolerant, or flexible such as containerized workloads, CI/CD, web servers, and test & development workloads, then you can use [Spot instances](https://aws.amazon.com/ec2/spot/getting-started?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to further reduce your cost. To compare the current Spot prices against standard On-Demand rates, visit the [Spot Instance Advisor](https://aws.amazon.com/ec2/spot/instance-advisor?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
@@ -184,7 +190,7 @@ Listing down some of the best practices to secure the IAM user credentials:
 
 - Enable MFA for the IAM Users. If this is a business account, you can also enforce IAM Users to enable MFA to login to AWS Console. More information on [configuring MFA device enforcement](https://docs.aws.amazon.com/singlesignon/latest/userguide/how-to-configure-mfa-device-enforcement.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
-- Regularly review, delete old, un-used IAM Users/Roles. As you can see in the image below, [AWS IAM Console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-2#/users) provides details on last activity, password age, active key age, access key last used, and more.
+- Regularly review, delete old, un-used IAM Users/Roles. As you can see in the image below, [AWS IAM Console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-2#/users&sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) provides details on last activity, password age, active key age, access key last used, and more.
 ![AWS IAM Console Users Details](images/aws-console-iam-user-age.png)
 
 ## 5. Clean up as you go, delete everything
