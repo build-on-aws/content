@@ -1,6 +1,6 @@
 ---
-title: "AWS Cloud Account Fundamentals: Five Best Practices for Managing Cloud Spend"
-description: "AWS Account fundamentals and best practices in one blog"
+title: "AWS Cloud Account Fundamentals: Five Essential Best Practices for Managing Cloud Cost"
+description: "Explore AWS Account setup fundamentals and best practices in one comprehensive blog! Discover key strategies for cost management, and  security, and lay a solid foundation for your cloud journey from the get-go!"
 tags:
     - foundational
     - aws
@@ -201,7 +201,7 @@ Remember it is pay as you go model, any resource left running in the cloud will 
 
 > Always provision small and add more if required. This is especially true for storage, as you can always increase your storage but can never reduce the provisioned storage size.
 
-- **Myth Burst 2: If you close the account, you don't need to remove resources.** As mention in the AWS documentation for [Closing an account](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) - during the post-closure period the billing for On-Demand charges stops. However, you're billed for any usage that has accrued up until the time you closed your account. In addition, if you purchased any subscriptions with ongoing payment obligations, you might continue to be charged for them after your account is closed. So always terminate everything, delete resources, take backups before you close the account.
+- **Myth Burst 2: If you close the account, you don't need to remove resources.** As mentioned in the AWS documentation for [Closing an account](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) - during the post-closure period the billing for On-Demand charges stops. However, you're billed for any usage that has accrued up until the time you closed your account. In addition, if you purchased any subscriptions with ongoing payment obligations, you might continue to be charged for them after your account is closed. So always terminate everything, delete resources, take backups before you close the account.
 
 ### 5.1 How do you identify resources left behind in your account?
 
