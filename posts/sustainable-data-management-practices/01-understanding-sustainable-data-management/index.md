@@ -1,7 +1,6 @@
 ---
 title: "Understanding sustainable data management"
-description: "A 3-part series taking a deeper look into building a sustainable data
-management practice. This post highlights the inefficiencies caused by traditional ways of data management leading to environmental harm and explains the mental models behind adopting the practices."
+description: "A 3-part series taking a deeper look into building a sustainable data management practice. This post highlights the inefficiencies caused by traditional ways of data management leading to environmental harm and explains the mental models behind adopting the practices."
 tags:
   - sustainability
   - data-management

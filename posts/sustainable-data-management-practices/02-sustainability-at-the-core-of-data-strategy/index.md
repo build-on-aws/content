@@ -1,7 +1,6 @@
 ---
 title: "Sustainability at the core of data strategy"
-description: "A 3-part series taking a deeper look into building a sustainable data
-management practice. This post talks about designing a data strategy that implements technology and deploys workloads with sustainability as a core principle."
+description: "A 3-part series taking a deeper look into building a sustainable data management practice. This post talks about designing a data strategy that implements technology and deploys workloads with sustainability as a core principle."
 tags:
   - sustainability
   - data-management
