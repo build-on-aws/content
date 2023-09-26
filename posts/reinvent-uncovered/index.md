@@ -18,17 +18,17 @@ externalCanonicalUrl: https://cremich.cloud/aws-reinvent-uncovered
 
 | TABLE OF CONTENTS                                                                                                        |
 |--------------------------------------------------------------------------------------------------------------------------|
-| 🗓️ [Planning is everything](#🗓️-planning-is-everything)                                                                   |
-| 👟 [The Importance of Comfort](#👟-the-importance-of-comfort)                                                             |
-| 🏨 [Hop-on/Hop-off is good for sightseeing not for re:Invent](#🏨-hop-onhop-off-is-good-for-sightseeing-not-for-reinvent) |
-| ⏰ [Keep Your Schedule Flexible](#⏰-keep-your-schedule-flexible)                                                         |
-| 🎤 [Decipher Session Types](#🎤-decipher-session-types)                                                                   |
-| 📊 [Pick The Right Session Levels](#📊-pick-the-right-session-levels)                                                     |
-| ⚖️ [The Art of Balancing Time](#⚖️-the-art-of-balancing-time)                                                              |
-| 🥤 [Nutrition and Hydration](#🥤-nutrition-and-hydration)                                                                 |
-| 🎪 [Explore the Expo](#🎪-explore-the-expo)                                                                               |
-| 🎁 [The Allure of re:Invent Swag](#🎁-the-allure-of-reinvent-swag)                                                        |
-| 🚀 [Final words](#🚀-final-words)                                                                                         |
+| 🗓️ [Planning is everything](#-planning-is-everything)                                                                   |
+| 👟 [The Importance of Comfort](#-the-importance-of-comfort)                                                             |
+| 🏨 [Hop-on/Hop-off is good for sightseeing not for re:Invent](#-hop-onhop-off-is-good-for-sightseeing-not-for-reinvent) |
+| ⏰ [Keep Your Schedule Flexible](#-keep-your-schedule-flexible)                                                         |
+| 🎤 [Decipher Session Types](#-decipher-session-types)                                                                   |
+| 📊 [Pick The Right Session Levels](#-pick-the-right-session-levels)                                                     |
+| ⚖️ [The Art of Balancing Time](#-the-art-of-balancing-time)                                                              |
+| 🥤 [Nutrition and Hydration](#-nutrition-and-hydration)                                                                 |
+| 🎪 [Explore the Expo](#-explore-the-expo)                                                                               |
+| 🎁 [The Allure of re:Invent Swag](#-the-allure-of-reinvent-swag)                                                        |
+| 🚀 [Final words](#-final-words)                                                                                         |
 
 Ah, AWS re:Invent! It's not just another tech conference; it's **THE** tech conference. A sprawling, bustling hub of innovation, learning, and networking, re:Invent is where the AWS world converges every year. If this is your maiden voyage into the vast sea of re:Invent, you might be feeling a mix of excitement and, let's admit it, a tad bit of overwhelm. But fear not! Just as every seasoned traveler once took their first step, every re:Invent pro was once in your shoes (hopefully, comfortable ones, but we'll get to that).
 
