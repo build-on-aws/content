@@ -64,7 +64,7 @@ That's the core reason why Infracost exists. We give you that checkout screen ex
 
 ### FinOps Should Be Engineering-Led
 
-Here is the first step to take: [Infracost is free and open source](https://www.infracost.io/), install it into your GitHub or GitLab now.
+If you wanted to get started managing your costs, you can install [Infracost](https://www.infracost.io/) into your GitHub or GitLab accounts (it is open-source, and has a free version).
 
 As soon as you've installed it, every time someone makes Infrastructure as Code change, Infracost will leave a comment like *"this change is going to increase costs by 10% next month"* along with a detailed breakdown of the costs.
 
