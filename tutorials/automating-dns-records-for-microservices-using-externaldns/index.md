@@ -433,12 +433,6 @@ kubectl run nginx-test-conn --image=nginx -n game-2048  && sleep 5 && kubectl ex
 
 Please note for public domains, you can access the URL directly from browser.
 
-## Conclusion
-
-With the completion of this tutorial, you’ve effectively deployed the ExternalDNS add-on on your Amazon EKS cluster, enabling automatic DNS management for your Kubernetes services. By integrating with DNS providers like AWS Route 53, you have set the stage for effortless domain name resolution, fully in line with industry standards. This tutorial has walked you through the initial setup of the ExternalDNS add-on, the configuration of environment variables like `HOSTED_ZONE_ID` and `AWS_ROUTE53_DOMAIN`, and the steps for domain registration. You've also delved into the specifics of URL navigation for external clients. 
-
-To continue your journey with a real domain, you'll need to [Register a Domain Name with Amazon Route 53](https://aws.amazon.com/getting-started/hands-on/get-a-domain/). After you've registered a domain name with Amazon Route 53, set the `HOSTED_ZONE_ID` & `AWS_ROUTE53_DOMAIN` variable with your registered domain, then revisit the steps in this guide. By doing so, you'll be able to access the service directly from a browser by navigating to `<SUB_DOMAIN>.<AWS_ROUTE53_DOMAIN>`. This final setup ensures a comprehensive, fully operational environment, poised for both internal and external service accessibility.
-
 ## Clean Up
 
 After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created. 
@@ -453,5 +447,11 @@ helm delete externaldns-release -n kube-system
 # Remove Route53 Domain
 aws route53 delete-hosted-zone --id ${HOSTED_ZONE_ID}
 ```
+
+## Conclusion
+
+With the completion of this tutorial, you’ve effectively deployed the ExternalDNS add-on on your Amazon EKS cluster, enabling automatic DNS management for your Kubernetes services. By integrating with DNS providers like AWS Route 53, you have set the stage for effortless domain name resolution, fully in line with industry standards. This tutorial has walked you through the initial setup of the ExternalDNS add-on, the configuration of environment variables like `HOSTED_ZONE_ID` and `AWS_ROUTE53_DOMAIN`, and the steps for domain registration. You've also delved into the specifics of URL navigation for external clients. 
+
+To continue your journey with a real domain, you'll need to [Register a Domain Name with Amazon Route 53](https://aws.amazon.com/getting-started/hands-on/get-a-domain/). After you've registered a domain name with Amazon Route 53, set the `HOSTED_ZONE_ID` & `AWS_ROUTE53_DOMAIN` variable with your registered domain, then revisit the steps in this guide. By doing so, you'll be able to access the service directly from a browser by navigating to `<SUB_DOMAIN>.<AWS_ROUTE53_DOMAIN>`. This final setup ensures a comprehensive, fully operational environment, poised for both internal and external service accessibility.
 
 To learn more about ExternalDNS watch this [video](https://www.youtube.com/watch?v=3sUsZq1TA2g) or read kubernetes [documentation](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/).
