@@ -108,9 +108,7 @@ While the displayed pricing is an hourly rate but depending on which instances y
 
 Check out [AWS Free Tier](https://aws.amazon.com/free/) to learn more about these offers.
 
-You can also use the [AWS Pricing Calculator](https://calculator.aws/) to cost estimate your needs.
 
-![Pricing Calculator](images/pricing-calculator.png)
 
 ### 3.1 How can you ensure that you do not exceed the Free tier limits?
 
@@ -136,58 +134,68 @@ You can also use the [AWS Pricing Calculator](https://calculator.aws/) to cost e
 
 If you need detailed steps on setting up AWS Budgets, do check out this [tutorial on Control Your AWS Costs](https://aws.amazon.com/getting-started/hands-on/control-your-costs-free-tier-budgets/).
 
+### 3.2 How can you do cost estimate?
+
+You can use the [AWS Pricing Calculator](https://calculator.aws/) to cost estimate your needs.
+
+![Pricing Calculator](images/pricing-calculator.png)
+
+There are third-party tools like [Cloudcraft](https://www.cloudcraft.co/) that can help you generate estimates based on your architecture diagram. I have covered this in my YouTube video.
+
+https://youtu.be/NZnr1vSJTs0?feature=shared
+UPDATE
+
 ## 4. Security is important
 
 Shared Security model? limits in place, UPDATE
 ![Shared Responsibility Model for Security](images/Shared_Responsibility_Model_V2.jpg)
 
-After you set your billing alerts, create AWS Identity and Access Management (IAM) User(s). Even if this is your personal account and you are the only one using this, DO NOT use AWS root (i.e. email id and password based) login. Create an IAM User with Administrative access for yourself and use that to login to the AWS Console.
+After you set your billing alerts, create AWS Identity and Access Management (IAM) User(s). Even if this is your personal account and you are the only one using this account, DO NOT use the AWS root login (i.e. email id and password you used to create the account). Create an **IAM User** with **Administrative access for yourself** and use that to login to the AWS Console.
 
-### 4.1 Why securing root access is of utmost importance
+These might feel like an additional step on your journey to begin using cloud, and you might want to skip it and dive straight into hands-on. However, like with any other activity on the internet, SECURITY should be your highest priority. If you do not follow these best practices, you are making yourself vulnerable and it can ultimately affect your pocket.
 
-The root user credentials can perform all actions on your account, including actions that ONLY the root user can perform like change account details or close the account. If you, by any means, unknowingly, leak the credentials, your account and personal details will be at risk. You can find detailed list of [tasks that require root user credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-tasks.html)
+### 4.1 Why and how to secure root access
+
+The root user credentials can perform all actions on your account, including actions that ONLY the root user can perform like change account details or close the account. If, by any means, unknowingly, the credentials are leaked, your account and personal details will be at risk. You can find the detailed list of [tasks that require root user credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-tasks.html).
 
 To secure the root user credentials:
 
-- Enable AWS multi-factor authentication (MFA) on your AWS account root user. Because the root user can perform sensitive operations in your account, adding this additional layer of authentication helps you to better secure your account. There are many different types of MFA - hardware, software. I have personally used a third-party app like [Authy](https://authy.com/).
+- Enable AWS multi-factor authentication (MFA) on your AWS account root user. Because the root user can perform sensitive operations in your account, adding this additional layer of authentication helps you to better secure your account. There are many different types of MFA - hardware or software. I have personally used a third-party app like [Authy](https://authy.com/).
 
 - Never share your AWS account root user password or access keys with anyone.
 
 - Use a strong password
 
-- You use an access key (an access key ID and secret access key) to make programmatic requests to AWS. Do NOT create an AWS account root user access key.
-
+- Do NOT create an AWS account root user access key. The access key (an access key ID and secret access key) is used to make programmatic requests to AWS.
 
 ### 4.2 IAM User Best Practices
 
-As mentioned earlier, create an IAM User with administrative permissions. This might feel like an additional burden, on your journey to begin using cloud, however, like with any other activity on the internet, SECURITY should be your highest priority. If you do not follow these best practices, you are making yourself vulnerable and it can ultimately affect your pocket.
+As mentioned earlier, **create an IAM User with administrative permissions**. Detailed steps on [how to set up AWS account access for an administrative user using IAM Identity Center](https://docs.aws.amazon.com/SetUp/latest/UserGuide/setup-configadminuser.html)
 
-Detailed steps on [how to set up AWS account access for an administrative user using IAM Identity Center](https://docs.aws.amazon.com/SetUp/latest/UserGuide/setup-configadminuser.html)
-
-To secure the IAM user credentials:
+Listing down some of the best practices to secure the IAM user credentials:
 
 - DO NOT share IAM Users. Create IAM User for each user in your business.
 
-- Only provide limited access using IAM Users. Not everyone needs Administrative access. You can create IAM Groups like Administrators, Developers, etc. Provide these group with limited permissions required by each role and then add users to these groups.
+- Use a strong password policy with complex requirements like longer length, higher strength, prevent reuse and mandatory rotation periods with password expiration.
+
+- Only provide limited access using IAM Users. Not everyone needs Administrative access. You can create IAM Groups like Administrators, Developers, etc. Provide these group with limited permissions that are required by each role and then add individual users to these groups.
 
 - Same applies for the Access Keys and Secret Access keys required for programmatic access. You can use IAM Roles for programmatic access. If you do create these keys for IAM Users, ensure you DO NOT share these between users.
 
 - Enable MFA for the IAM Users. If this is a business account, you can also enforce IAM Users to enable MFA to login to AWS Console. More information on [configuring MFA device enforcement](https://docs.aws.amazon.com/singlesignon/latest/userguide/how-to-configure-mfa-device-enforcement.html)
 
 - Regularly review, delete old, un-used IAM Users/Roles. You can find this information in the [AWS IAM Console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-2#/users).
-![Alt text](images/aws-console-iam-user-age.png) 
-
-
+![Alt text](images/aws-console-iam-user-age.png)
 
 ## 5. Clean up as you go, delete everything
 
-Regular maintenance and hygiene is very important - in our house and in our account too! Remember it is pay as you go model, any resource left running in the cloud will be charged for.
+Remember it is pay as you go model, any resource left running in the cloud will be charged for. So, regular maintenance and hygiene is very important - in our house and in our account too!
 
-Myth Burst 1: If you stop an EC2 instance, then you will stop paying for it. While it is technically true, you need to understand there are 3 types of cost associate with an EC2 instance - compute, storage and network. When an EC2 instance is stopped, you stop getting charged for the compute and network cost. However, the instance might still have an attached EBS volume (i.e. storage) which is provisioned. You will continue being charged for it. Keep volumes small. If you do not need this EC2 instance, then Terminate the instance.
+- **Myth Burst 1: If you stop an EC2 instance, then you will stop paying for it.** While it is technically true, you need to understand there are 3 types of cost associate with an EC2 instance - compute, storage and network. When an EC2 instance is stopped, you stop getting charged for the compute and network cost. However, the instance might still have an attached EBS volume (i.e. storage) which is provisioned. You will continue being charged for it. Keep volumes small. If you do not need this EC2 instance, then Terminate the instance.
 
 > Keep storage small UPDATE
 
-Myth Burst 2: If you close the account, you are good
+**Myth Burst 2: If you close the account, you are good**
 
 ### 5.1 How do you identify resources left behind in your account?
 
