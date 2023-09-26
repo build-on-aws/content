@@ -245,7 +245,7 @@ EOF
 aws iam create-policy --policy-name "ExternalDNSUpdatesPolicy" --policy-document file://external-dns-policy.json
 ```
 
-3. Use the policy to create an IAM role for the service account. This service account will be used by external DNS pods to manage records in the route53 hosted zone. 
+3. Use the policy to create an IAM role for the service account. This service account will be used by external DNS pods to manage records in the Route53 hosted zone. 
 
 ```
 eksctl create iamserviceaccount --name external-dns --namespace kube-system --cluster ${CLUSTER_NAME} --attach-policy-arn arn:aws:iam::${AWS_CURRENT_ACCOUNT}:policy/ExternalDNSUpdatesPolicy --approve --override-existing-serviceaccounts --region ${CLUSTER_REGION}
