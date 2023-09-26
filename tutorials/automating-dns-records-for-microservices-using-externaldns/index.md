@@ -454,4 +454,4 @@ With the completion of this tutorial, you’ve effectively deployed the External
 
 To continue your journey with a real domain, you'll need to [Register a Domain Name with Amazon Route 53](https://aws.amazon.com/getting-started/hands-on/get-a-domain/). After you've registered a domain name with Amazon Route 53, set the `HOSTED_ZONE_ID` & `AWS_ROUTE53_DOMAIN` variable with your registered domain, then revisit the steps in this guide. By doing so, you'll be able to access the service directly from a browser by navigating to `<SUB_DOMAIN>.<AWS_ROUTE53_DOMAIN>`. This final setup ensures a comprehensive, fully operational environment, poised for both internal and external service accessibility.
 
-To learn more about ExternalDNS watch this [video](https://www.youtube.com/watch?v=3sUsZq1TA2g) or read kubernetes [documentation](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/).
+To learn more about ExternalDNS watch this [video](https://www.youtube.com/watch?v=3sUsZq1TA2g) or read Kubernetes [documentation](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/).
