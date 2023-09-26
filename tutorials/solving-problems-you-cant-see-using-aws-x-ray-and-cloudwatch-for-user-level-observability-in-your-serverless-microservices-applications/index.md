@@ -404,7 +404,7 @@ If you want to see this in action, click the **Test** button and copy the Author
 
 ![API Gateway Cognito Authorizer Test Option](images/api-gateway-cognito-authorizer-test.png)
 
-Importantly, you can see that you can identify the users cognito username (`cognito:username`) and cognito user id (`sub`) from the token.
+Importantly, you can see that you can identify the users' Cognito username (`cognito:username`) and Cognito user ID (`sub`) from the token.
 
 The authorizer is being used in the POST /checkout method. This means that checkout is accessible only to registered users:  
 
@@ -503,7 +503,7 @@ In this file, you implement the following changes:
 * On line 5, you imported the **xray_recorder** function from the Python AWS X-Ray SDK.
 * On line 9, you imported the new **get_username** function in shared.py that you will add in the next step.
 * On line 24, you create a new subsegment called **annotations** using the X-Ray SDK for Python as soon as your Lambda function handler begins execution.
-* On lines 28-32, you create an annotation called **generated_cart** to indicate whether or not the cart id was retrieved from the cookie **cartId** set by the front end user interface.
+* On lines 28-32, you create an annotation called **generated_cart** to indicate whether or not the cart ID was retrieved from the cookie **cartId** set by the front end user interface.
 * On lines 37-38 and 42, you retrieve the username and create an annotation called **username** which is set to the Cognito username if an authorized login is detected or set to the value '**anonymous**'.
 * On line 65, you closed the **annotations** subsegment you created on line 24.
 
