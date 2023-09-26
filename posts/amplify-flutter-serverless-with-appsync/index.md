@@ -367,7 +367,7 @@ This then concludes the implementation.
 
 A "final" `amplifyconfiguration.dart` for this project will look similar to this one:
 
-```dart
+```javascript
 class EnvironmentConfig {
   static const WEB_URL = String.fromEnvironment('WEB_URL');
   static const API_URL = String.fromEnvironment('API_URL');
