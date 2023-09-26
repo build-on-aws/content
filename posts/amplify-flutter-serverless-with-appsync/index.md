@@ -7,11 +7,14 @@ tags:
     - appsync
     - serverless
     - flutter
+    - cdk
+    - devops
+    - ci-cd
 authorGithubAlias: lock128
 authorName: Johannes "Lockhead" Koch
 githubUserLabel: AWS-Hero
-date: 2023-09-15
-seoDescription: Build a Flutter Web application with an AppSync backend, powerd by AWS Amplify
+date: 2023-09-26
+seoDescription: Build a Flutter Web application with an AppSync backend, powered by AWS Amplify
 ---
 
 In this article you are going learn how to build a simple Flutter Web application that uses the Amplify SDK to talk to a serverless, AWS backend. The sample project uses Cognito for Authentication and AppSync for the API. On AppSync, you will make use of the "Merged APIs" feature which will enable you to quickly scale out this project if your project becomes "the next big hype" on the net. The deployment happens through CodeCatalyst workflows using AWS CDK.
@@ -20,30 +23,42 @@ In this article you are going learn how to build a simple Flutter Web applicatio
 |-----|
 
 ## High-Level architecture
+
 ![The high level architecture of the project](images/high_level_architecture.png "The high level architecture of the project")
 In the sample project we will use a few AWS services:
 Our web-page (build in Flutter) will be hosted on Amazon S3 behind Cloudfront. Cognito will be used for Authentication. AppSync will be our API endpoint and we'll connect to DynamoDB as a database. A few API endpoints will have Lambda functions.
+
 ## Used technologies in this project
+
 Technology wise this project uses Flutter for our Front-End code, TypeScript for code on the backend. Also our infrastructure as Code (IaC) is written in TypeScript and uses [AWS CDK](https://aws.amazon.com/cdk/).
+
 ### What is Flutter? Why Flutter?
-[Flutter](https://flutter.dev) is a trending cross-platform development toolkit and altough it is mainly sponsored by Google there is a vibrant open source community. Flutter allows you to develop a user interface once and then package it for different platforms like Android, iOS, the Web or even Linux and Windows. The source code you write is being translated into natively readable code for the target platform which makes Flutter faster then other cross platform development tools.
+
+[Flutter](https://flutter.dev) is a trending cross-platform development toolkit and although it is mainly sponsored by Google there is a vibrant open source community. Flutter allows you to develop a user interface once and then package it for different platforms like Android, iOS, the Web or even Linux and Windows. The source code you write is being translated into natively readable code for the target platform which makes Flutter faster then other cross platform development tools.
 In the project you will use the [Flutter Amplify](https://docs.amplify.aws/lib/q/platform/flutter/) SDK to connect the Flutter application to the serverless backend.
 
 ### Using AWS AppSync - what are Merged APIs?
+
 [AppSync Merged APIs](https://docs.aws.amazon.com/appsync/latest/devguide/merged-api.html) have been announced in 2023 and empower development teams to split up responsibilities between different teams as APIs for specific endpoints can be development independently from each other. This is a functionality meant for teams that do not interact on a regular basis and own different parts of a joined API. It simplifies the collaboration of teams and ensures that an API that is supported by different downstream can be updated independently. AppSync takes the responsibility of merging the different backend APIs together and only one API endpoint can be exposed to users of the overall API.
 
 ### Writing infrastructure as code using AWS CDK
-The [AWS CDK](https://aws.amazon.com/cdk/) is a Infrastructure as Code (IaC) tool that allows you to write and define your infrastructure in different programming languages - Typescript/Javascript, Python, Java, C# and Go. The tool then translates the infrastructure into [AWS Cloudformation](https://aws.amazon.com/cloudformation/) templates and uses CloudFormation APIs to deploy and provision the infrastructure. This allows developers to write infrastructure code in the same languange as they use for the backend services.
+
+The [AWS CDK](https://aws.amazon.com/cdk/) is a Infrastructure as Code (IaC) tool that allows you to write and define your infrastructure in different programming languages - Typescript/Javascript, Python, Java, C# and Go. The tool then translates the infrastructure into [AWS Cloudformation](https://aws.amazon.com/cloudformation/) templates and uses CloudFormation APIs to deploy and provision the infrastructure. This allows developers to write infrastructure code in the same language as they use for the backend services.
+
 ## Setting up the serverless backend
+
 As mentioned before - in this project you are going to build a fully serverless backend which is connected to Flutter using the AWS Amplify SDK.  The backend consists of a persistence layer and and authentication tool - and an API endpoint.
 
 ### Persistance layer & authentication
+
 The persistance layer of this example project is based on [DynamoDB](https://aws.amazon.com/dynamodb/) and [S3](https://aws.amazon.com/s3/). S3 can be used to store and save files, DynamoDB is used as a database backend to store information about users and other data. S3 is used behind CloudFront to store our Flutter Web components - but this is something you will see later.
 
 You will use [Amazon Cognito](https://aws.amazon.com/pm/cognito/) to register and identify users.
 
 #### The CDK code for DynamoDB and Cognito
+
 In DynamoDB, you use the "[single table design](https://aws.amazon.com/blogs/compute/creating-a-single-table-design-with-amazon-dynamodb/)" modelling to store all of your different entities in a single DynamoDB table. This table can be created using CDK in with this code:
+
 ```typescript
 createTable(namespace: string): Table {
     const table = new Table(this, `BackendTable-${namespace}`, {
@@ -76,10 +91,12 @@ createTable(namespace: string): Table {
     return table;
   }
 ```
+
 You will later use the `pk` (primary key), the `sk` (sort key) to access your data. The `pk` needs to be unique across all of your data.
 The model additional access patterns, you can use the secondary index `gsi1pk` and `gsi1sk`. 
 
 Setting up the Cognito backend can also be done using CDK:
+
 ```typescript
 createUserPool(namespace: string): cognito.UserPool {
     const postConfirmationLambda = new NodejsFunction(this, `${namespace}-post-confirmation-lambda`, {
@@ -195,10 +212,14 @@ export { handler };
 With these two code snippets, you have a main part of the application already finished, but you did not yet create an API that can be used to access the contents in the DynamoDB from the frontend. This is what you will do next.
 
 ### APIs - the AppSync setup and Schema
+
 This diagram is a visualization of a project that I have been involved recently - the [AWS Community Builders Speakers Directory](https://speakers.awscommunitybuilders.org):
+
 ![Merged APIs architecture](images/merged_apis_architecture.png "Merged APIs architecture")
+
 This diagram shows the idea and concept behind the Merged APIs feature that we introduced at the beginning of the post: one central API is exposed to the users (the front-end), and behind that there are multiple different apis that use - if required - different technologies, languages, etc.
 This feature is very powerful for bigger organizations that have very segregated teams. Since *v2.94.0* this is also supported by the AWS CDK with an L2 construct:
+
 ```typescript
 import * as cdk from 'aws-cdk-lib';
 
@@ -265,7 +286,9 @@ const mergedApi = new appsync.GraphqlApi(this, 'MergedAPI', {
     });
   }
 ```
+
 In this the `passThrough.js` function is a [Javascript Appsync resolver](https://docs.aws.amazon.com/appsync/latest/devguide/pipeline-resolvers-js.html) that only passes through the request:
+
 ```javascript
 import { type Context } from '@aws-appsync/utils';
 // The before step.
@@ -281,9 +304,10 @@ export function request(...args: string[]): any {
 export function response(ctx: Context): any {
   return ctx.prev.result;
 }
-
 ```
+
 The `getInformation` function accessed the DynamoDB table:
+
 ```javascript
 import { type Speaker } from '../API';
 // import slug from 'slug';
@@ -322,19 +346,27 @@ export function response(ctx: Context): Information {
   return response as Information;
 }
 ```
+
 This code snippet completes the backend code that you need to build up your application. As a next step, we will now connect the Flutter application to this backend using the Amplify SDK.
+
 ## Setting up your Flutter project using Amplify SDK
+
 ![UI architecture](images/ui_architecture.png "UI architecture")
+
 You will start off creating a "sample" Flutter application using `flutter create frontend`. This will create an example application that has no connectivity to the backend.
+
 ### Connecting to Cognito
+
 Please follow the [https://docs.amplify.aws/lib/auth/getting-started/q/platform/flutter/#next-steps](documentation) of the Amplify Flutter SDK to enable the connection to Cognito. Please refer to the "Existing resources" tab as you will use the already set up backend endpoints.
 I would advice you to also use the [Authenticator UI Library](https://ui.docs.amplify.aws/flutter/components/authenticator) which simplifies the integration and avoids to implement the authentication/authorization flow.
 
 ### Accessing the AppSync API
-Once you have completed the connection to Cognito, you can also add [the integration to the GraphQL backend](https://docs.amplify.aws/lib/graphqlapi/existing-resources/q/platform/flutter/) by updating your `amplifyconfiguration.dart`. 
+
+Once you have completed the connection to Cognito, you can also add [the integration to the GraphQL backend](https://docs.amplify.aws/lib/graphqlapi/existing-resources/q/platform/flutter/) by updating your `amplifyconfiguration.dart`.
 This then concludes the implementation.
 
 A "final" `amplifyconfiguration.dart` for this project will look similar to this one:
+
 ```dart
 class EnvironmentConfig {
   static const WEB_URL = String.fromEnvironment('WEB_URL');
@@ -410,11 +442,15 @@ const amplifyconfig = """{
 ```
 
 ## Mixing it all together: Our CI/CD pipeline in CodeCatalyst
+
 As we have now build our the project in one single repository, let's ensure that you can also deploy this application.
 
 ![An example, simple CI/CD pipeline](images/cicd_workflow.png "An example, simple CI/CD pipeline")
+
 ### Developer Experience and a minimal Continuous Integration pipeline
+
 To allow developers to deploy the project from their local development machine to the cloud, the approach is to cover a few of the build/integration tests locally (the "Continuous Integration" part). One important aspect here was to also package up the Flutter Web Application locally using asset bundles - this requires you to have both Flutter and Docker installed on your building machine.
+
 ```typescript
 const execOptions: ExecSyncOptions = {
       stdio: ['ignore', process.stderr, 'inherit'],
@@ -454,13 +490,17 @@ const execOptions: ExecSyncOptions = {
       distributionPaths: ['/*'],
       sources: [bundle],
     });
-
   }
 ```
-After you have finished your sandbox testing with local deployments, you will most probably use a Continous Deployment tool to promote your changes to higher environments.
+
+After you have finished your sandbox testing with local deployments, you will most probably use a Continuous Deployment tool to promote your changes to higher environments.
+
 ### Continuous Deployment and promotion using CodeCatalyst workflows
-[Amazon CodeCatalyst](https://codecatalyst.aws/) empowers developers to cover all parts of a product's lifecyle: code, build, test, deploy. 
+
+[Amazon CodeCatalyst](https://codecatalyst.aws/) empowers developers to cover all parts of a product's lifecycle: code, build, test, deploy.
+
 A very [simplistic workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/flows.html) for Amazon CodeCatalyst that deploys the complete application first to a sandbox, then to a test and then to a production account:
+
 ```yaml
 Name: cdk-deployment
 Compute:
@@ -666,23 +706,23 @@ Actions:
       Type: Lambda
     DependsOn:
       - DeployProdCDKApp          
-      
-
 ```
-This workflow is simplistic and it does not include steps that would be part of a "best practice" piipeline like Security Tests or Integation Tests or automated e2e tests before promotions to higher environments. A very good article covering details on how AWS solves this today was published in the AWS Builder's library: [My CI/CD pipeline is my release captain
-](https://aws.amazon.com/builders-library/cicd-pipeline/). The open source project [projen-pipelines](https://github.com/taimos/projen-pipelines) tries to optimize CI/CD pipelines and is a work in progress project to watch.
-## A community driven example project
-This post is based on the "AWS Community Builers Speakers Directory" project which was initially presented in this blog post "[A write up from Matt Morgan - the AWS Community Builders Speakers Directory project](https://dev.to/aws-builders/presenting-aws-speakers-directory-an-ai-hackathon-project-19je)".
 
-This project uses all of the technologies mentioned in the post and can be accessed here: [The AWS Commmunity Builders Speakers Directory](https://speakers.awscommunitybuilders.org/)
+This workflow is simplistic and it does not include steps that would be part of a "best practice" pipeline like Security Tests or Integration Tests or automated e2e tests before promotions to higher environments. A very good article covering details on how AWS solves this today was published in the AWS Builder's library: [My CI/CD pipeline is my release captain](https://aws.amazon.com/builders-library/cicd-pipeline/). The open source project [projen-pipelines](https://github.com/taimos/projen-pipelines) tries to optimize CI/CD pipelines and is a work in progress project to watch.
+
+## A community driven example project
+
+This post is based on the "AWS Community Builders Speakers Directory" project which was initially presented in this blog post "[A write up from Matt Morgan - the AWS Community Builders Speakers Directory project](https://dev.to/aws-builders/presenting-aws-speakers-directory-an-ai-hackathon-project-19je)".
+
+This project uses all of the technologies mentioned in the post and can be accessed here: [The AWS Community Builders Speakers Directory](https://speakers.awscommunitybuilders.org/)
 
 ## What you learned and what you should take away from this article
-In this article you got a basic understanding on building an application that is deployed from a single repository and uses a serverless backend with a Flutter application that uses the Amplify SDK. 
-You are hopefully able to use the code snippets in this article to start your own project using [Amplify Flutter](https://github.com/aws-amplify/amplify-flutter).
+
+In this article you got a basic understanding on building an application that is deployed from a single repository and uses a serverless backend with a Flutter application that uses the Amplify SDK. You are hopefully able to use the code snippets in this article to start your own project using [Amplify Flutter](https://github.com/aws-amplify/amplify-flutter).
 
 ### Other links & guides
 
-- [The AWS Commmunity Builders Speakers Directory](https://speakers.awscommunitybuilders.org/)
+- [The AWS Community Builders Speakers Directory](https://speakers.awscommunitybuilders.org/)
 - [AppSync Merged APIs](https://docs.aws.amazon.com/appsync/latest/devguide/merged-api.html)
 - [Amplify Flutter SDK](https://docs.amplify.aws/start/q/integration/flutter/)
 - [Amazon CodeCatalyst](https://codecatalyst.aws/explorer)
