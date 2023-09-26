@@ -1,7 +1,6 @@
 ---
 title: "Transitioning to sustainable data management"
-description: "A 3-part series taking a deeper look into building a sustainable data
-management practice. This post lays out six steps you can implement to operate the practice in an ongoing basis."
+description: "A 3-part series taking a deeper look into building a sustainable data management practice. This post lays out six steps you can implement to operate the practice in an ongoing basis."
 tags:
   - sustainability
   - data-management
