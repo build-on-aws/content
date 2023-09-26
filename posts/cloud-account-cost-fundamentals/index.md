@@ -40,13 +40,15 @@ Before you begin creating the account consider following scenarios:
 
 - If this is your **personal account**, ensure you are creating this account with right intentions. The reason I say this is, many students or beginners create AWS account with a credit card (if they can get any), and then regret when resources are left unused and they receive a bill they cannot afford. If you are just starting to learn and want to play with AWS, then check out **[AWS Educate Account](https://aws.amazon.com/education/awseducate/)**. It requires **no credit card** and provides labs where you can practice and get experience with AWS services. Once you have experience, you can then create an AWS account with a credit card and continue exploring.
 
-- If this is your **business account**, then make sure you use company e-mail address that is an alias in your company domain. I have seen customers using one individual's company email address, and regret when this person is on holiday, has changed roles or left the company. **Create an email alias** in your company domain (e.g. `aws-admins@example.com`), add multiple administrators to it and then use this alias to create the AWS account. This will ensure you retain access to the AWS account, even if any of the employees move to different role or leave the company. Also, AWS emails will be sent to the distribution list and do not have single point of failure on one individual. Same with the phone number, **use a corporate phone number** instead of a personal one.
+- If this is your **business account**, then make sure you use company e-mail address that is an alias in your company domain. I have seen customers using one individual's company email address, and regret when this person is on holiday, has changed roles or left the company. **Create an email alias** in your company domain (e.g. `aws-admins@example.com`), add multiple administrators to it and then use this alias to create the AWS account. This will ensure you retain access to the AWS account, even if any of the employees move to different role or leave the company. Also, AWS emails will be sent to the distribution list and do not have single point of failure on one individual. Same with the phone number, **use a corporate phone number** instead of a personal one. You can eventually convert payment method to invoicing instead of the credit card.
+
+Choosing the right email address is important. AWS sends important information about your account and billing information to this email address. If you set the additional alerts mentioned in this blog, you can be always aware of your cloud spend.
 
 > Never ignore emails from AWS
 
 ### 1.2 Do you need single or multiple AWS Accounts?
 
-There are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts. You mean want control over security, and data access. Or you have different teams and business units and want to chargeback to them for cloud spent. Or you want to keep your production and non-production workloads in different accounts. This can give you visibility on your development vs production spend. These reasons for multiple accounts are listed in detail in the AWS Documentation - [Do I need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html). Ensure that you use AWS Organizations, which is a free AWS service, to manage multiple accounts in your organizations.
+There are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts. You mean want control over security, and data access. Or you have different teams and business units and want to charge back to them for cloud spend. Or you want to keep your production and non-production workloads in different accounts. This can give you visibility on your development vs production spend. These reasons for multiple accounts are listed in detail in the AWS Documentation - [do you need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html). Ensure that you use AWS Organizations, which is a free AWS service, to manage multiple accounts in your organizations.
 
 If you do not wish to create separate accounts, you should at the very least, ensure that you have created separate Amazon Virtual Private Cloud (VPC) for your different environments. This will help you isolate your workloads in the same account. **Do NOT use default VPC or default security group inside a VPC for Production workloads.**  I have had a customer where a developer took down entire e-commerce website (loss of revenue) because they changed a security group rule in a default security group, thinking they are doing it for production. So, no sharing, isolate and add layers to your security.
 
@@ -142,7 +144,8 @@ You can use the [AWS Pricing Calculator](https://calculator.aws/) to cost estima
 
 There are third-party tools like [Cloudcraft](https://www.cloudcraft.co/) that can help you generate estimates based on your architecture diagram. I have covered this in my YouTube video.
 
-https://youtu.be/NZnr1vSJTs0?feature=shared
+https://youtu.be/NZnr1vSJTs0?t=650
+
 UPDATE
 
 ## 4. Security is important
@@ -150,7 +153,7 @@ UPDATE
 Shared Security model? limits in place, UPDATE
 ![Shared Responsibility Model for Security](images/Shared_Responsibility_Model_V2.jpg)
 
-After you set your billing alerts, create AWS Identity and Access Management (IAM) User(s). Even if this is your personal account and you are the only one using this account, DO NOT use the AWS root login (i.e. email id and password you used to create the account). Create an **IAM User** with **Administrative access for yourself** and use that to login to the AWS Console.
+After you set your billing alerts, create an AWS Identity and Access Management (IAM) User. Even if this is your personal account and you are the only one using this account, DO NOT use the AWS root login (i.e. email id and password you used to create the account). Create an **IAM User** with **Administrative access for yourself** and use that to login to the AWS Console.
 
 These might feel like an additional step on your journey to begin using cloud, and you might want to skip it and dive straight into hands-on. However, like with any other activity on the internet, SECURITY should be your highest priority. If you do not follow these best practices, you are making yourself vulnerable and it can ultimately affect your pocket.
 
@@ -168,7 +171,7 @@ To secure the root user credentials:
 
 - Do NOT create an AWS account root user access key. The access key (an access key ID and secret access key) is used to make programmatic requests to AWS.
 
-### 4.2 IAM User Best Practices
+### 4.2 IAM User best practices
 
 As mentioned earlier, **create an IAM User with administrative permissions**. Detailed steps on [how to set up AWS account access for an administrative user using IAM Identity Center](https://docs.aws.amazon.com/SetUp/latest/UserGuide/setup-configadminuser.html)
 
@@ -184,8 +187,8 @@ Listing down some of the best practices to secure the IAM user credentials:
 
 - Enable MFA for the IAM Users. If this is a business account, you can also enforce IAM Users to enable MFA to login to AWS Console. More information on [configuring MFA device enforcement](https://docs.aws.amazon.com/singlesignon/latest/userguide/how-to-configure-mfa-device-enforcement.html)
 
-- Regularly review, delete old, un-used IAM Users/Roles. You can find this information in the [AWS IAM Console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-2#/users).
-![Alt text](images/aws-console-iam-user-age.png)
+- Regularly review, delete old, un-used IAM Users/Roles. As you can see in the image below, [AWS IAM Console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-2#/users) provides details on last activity, password age, active key age, access key last used, and more.
+![AWS IAM Console Users Details](images/aws-console-iam-user-age.png)
 
 ## 5. Clean up as you go, delete everything
 
@@ -195,7 +198,7 @@ Remember it is pay as you go model, any resource left running in the cloud will 
 
 > Keep storage small UPDATE
 
-**Myth Burst 2: If you close the account, you are good**
+- **Myth Burst 2: If you close the account, you are good**
 
 ### 5.1 How do you identify resources left behind in your account?
 
