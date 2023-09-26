@@ -11,7 +11,7 @@ authorName: Sophia Parafina
 date: 2023-09-25
 ---
 
-Deploying a Wordpress instance on AWS Lightsail is a fast and simple way to get a Wordpress site. However, our work is not done. AWS implements a shared responsibility model. If you’ve been part of a community garden, you’ll be familiar with the shared responsibility model. The owner of the garden provides the soil, plant beds, water for plants, and fencing to protect the garden. As a member you chose the plants, how they are planted, treat for harmful insects and diseases, and sufficiently water and fertilize the plants. Extending the analogy to the cloud, like the garden owner, AWS provides the infrastructure for applications and services to secure the infrastructure. As cloud builders, like a gardener, we’re responsible for maintaining our applications and protecting from external attacks.
+Deploying a Wordpress on AWS Lightsail is a fast and simple way to build a Wordpress site. However, our work is not done and we can harden the instance from malicious code and other attacks. AWS implements a shared responsibility model. Simply put, AWS maintains and secures the infrastructue, and as builders, we maintain and secure our applications and the operating systems.  If you’ve been part of a community garden, you’ll be familiar with the shared responsibility model. The owner of the garden provides the soil, plant beds, water for plants, and fencing to protect the garden. As a member you chose the plants, how they are planted, treat for harmful insects and diseases, and sufficiently water and fertilize the plants. Extending the analogy to the cloud, like the garden owner, AWS provides the infrastructure for applications and services to secure the infrastructure. As cloud builders, like a gardener, we’re responsible for maintaining our applications and protecting from external attacks.
 
 ![The AWS Shared Responsibility Model](./images/shared-responsibility.png)
 
@@ -19,12 +19,11 @@ In this article, we’ll tackle securing the Lightsail instance running Wordpres
 
 ## Secure Your AWS Account
 
-When you first create an AWS account, you begin with a single sign-in identity that gives you access to all AWS services and resources in your account. This identity is called the AWS account root user. You access it by signing in with the email address and password used to create the account. AWS strongly recommends against using the root user for your everyday tasks, even administrative tasks. Instead, adhere to the best practice of only using the root user to create your first identity access management (IAM) user (see below). Then, securely lock away the root user credentials, using them only to perform a few account and service management tasks.
+When you first create an AWS account, you begin with a single sign-in identity that gives you access to all AWS services and resources in your account. This identity is called the AWS account root user. You access it by signing in with the email address and password used to create the account. AWS strongly recommends against using the root user for your everyday tasks, even administrative tasks. Instead, adhere to the best practice of only using the root user to create your first Identity Access Management (IAM) user (see below), and securely lock away the root user credentials.
 
-You can enable an extra layer of protection with AWS multi-factor authentification (MFA), which requires a second authentication factor in addition to user name and password sign-in credentials. You can enable MFA at the AWS account level as well as for root and IAM users that you created in your account.
+You can enable an extra layer of protection with [AWS multi-factor authentification (MFA)](https://aws.amazon.com/iam/features/mfa/), which requires a second authentication factor in addition to user name and password sign-in credentials. You can enable MFA at the AWS account level as well as for root and IAM users that you created in your account.
 
-
-If you haven’t created an IAM user for administering your account follow these instructions. Using your root account is insecure and not recommended. 
+If you haven’t created an IAM user for administering your account follow these instructions.
 
 Start by opening the IAM console, you can find (or any service) by searching for `IAM`.
 
@@ -38,7 +37,7 @@ Choose **Create user**.
 
 ![Choose the Create user button](./images/iam-3.png)
 
-In the following screen, we’ll configure the user details. First, name the user (administrator) and select **Provide user access to AWS Management Console**. This option lets the user to sign into the console and administer resources. For this demonstration, we are creating an account for a person, select **I want to create an IAM usser**. We’ll leave the rest of the options, such as **Console password**, with the default values. Choose **Next**, to move to the next step.
+In the following screen, we’ll configure the user details. First, name the user (e.g., `administrator`) and select **Provide user access to AWS Management Console**. This option lets the user sign into the console and administer resources. For this demonstration, we are creating an account for a person, select **I want to create an IAM user**. We’ll leave the rest of the options, such as **Console password**, with the default values. Choose **Next**, to go to the next step.
 
 ![Fill out the form to create the admin user](./images/iam-4.png)
 
@@ -54,7 +53,7 @@ Choose **Create group**.
 
 ![Choose Create group](./images/iam-7.png)
 
-In the Create user group menu, we’ll name the group `Administrators` and select `administrator` to add to the group.
+In the **Create user group** menu, we’ll name the group `Administrators` and select `administrator` to add to the group.
 
 ![Name the group Administrators and add the administrator IAM account](./images/iam-8.png)
 
@@ -70,7 +69,7 @@ Select the **AdministratorAccess** policy then choose **Create group**.
 
 ![Select the AdministratorAccess policy to create the group](./images/iam-11.png)
 
-Sign out as the root user, and sign in as **administrator**. We can now work with the AWS account without exposing the the account owner’s credentials.
+Sign out as the root user, and sign in as `administrator`. We can now work with the AWS account without exposing the the account owner’s credentials.
 
 ## Securing Access to AWS Lightsail Instances
 
@@ -80,7 +79,7 @@ Adding rules to allow outside traffic can open your instances to security vulner
 
 ![Remove SSH access from a Lightsail instance](./images/firewall.png)
 
-An alternative to removing rules is to restrict connections to a specific IP address. The example below demonstrates restricting SSH access to the IP address 10.10.10.35. 
+A better alternative to removing rules is to restrict connections to a specific IP address. The example below demonstrates restricting SSH access to the IP address 10.10.10.35. 
 
 ![Restrict access to an IP address](./images/firewall-2.png)
 
@@ -88,7 +87,7 @@ Controlling access to the server is the first step towards securing the Lightsai
 
 ## Encrypt Traffic to AWS Lightsail
 
-Modern browsers expect websites to use HTTPS to secure traffic through encryption. Your Wordpress site should use HTTPS by default, especially if it is a e-commerce site or takes payments in some form. AWS Lightsail supports HTTPS if Wordpress is behind a [load balancer](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/understanding-lightsail-load-balancers) or a [distribution](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions) which is a Lightsail Content Distribution Networks (CDN). 
+Modern browsers expect websites to use HTTPS to secure traffic through encryption. Your Wordpress site should use HTTPS by default, especially if it's an e-commerce site or takes payments in some form. AWS Lightsail supports HTTPS if Wordpress is behind a [load balancer](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/understanding-lightsail-load-balancers) or a [distribution](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions) which is a Lightsail Content Distribution Networks (CDN). 
 
 In this example, we’ll attach a load balancer to a Wordpress instance. In the Lightsail console, choose **Networking** in the menu on the left.
 
@@ -112,12 +111,17 @@ After creating the load balancer, we will need it to attach it to our Lightsail 
 
 The next step is to create a [SSL/TLS (Secure Sockets Layer/Transport Layer Security) certificate](https://aws.amazon.com/what-is/ssl-certificate/) which allows the Wordpress server to create an encrypted connection between a browser and the site. This allows users to sign into a site without exposing their credentials and conduct transactions, such as payments, securely. Additionally, TLS certificates can verify ownership of the website, prevent attackers from creating a fake version of the site, and build trust with website visitors.
 
-SSL/TLS certificates enable HTTPS encryption which ensures the traffic between the web server and the client’s browser remain confidential because these entities are the only two that can decrypt the traffic. Certificates are digital identity cards for securing network communications, and establishing the identity of websites and resources on private networks.
+SSL/TLS certificates enable HTTPS encryption which ensures the traffic between the web server and the client’s browser remain confidential because these entities are the only two that can decrypt the traffic. Certificates are digital identity cards for securing network communications, and establishing the identity of websites and resources.
 
 We can create and use a Lightsail certificate with these five steps: 
 
 1. Create your Lightsail resource that can use a Lightsail certificate, such as a load balancer, CDN distribution, or container service.
-2. Create a certificate for your domain using Lightsail. If you are using the Bitnami WordPress blueprint, you can run the bncert-tool by executing the command: sudo /opt/bitnami/bncert-tool. 
+2. Create a certificate for your domain using Lightsail. If you are using the Bitnami WordPress blueprint, you can run the bncert-tool by executing the command: 
+
+```bash
+sudo /opt/bitnami/bncert-tool 
+```
+
 3. Validate the certificate by adding a canonical name (CNAME) record to the DNS of your domain.
 4. Attach the validated certificate to your Lightsail resource.
 5. Modify the DNS of your domain to route traffic to your Lightsail resource.
@@ -128,9 +132,9 @@ After the certificate is attached to the resource, the traffic that is routed to
 
 At the beginning of the article, we introduced the AWS shared responsibility model. In addition to securing your account, controlling access to the server, and encrypting traffic between a client and the Wordpress server, updating the server and applying maintenance patches is part of securing a Lightsail server.
 
-We can perform maintenance manually on a schedule, but if we automate updates, we can ensure that the Lightsail instance will be updated. We can configure unattended upgrades by changing the options in the 50unattended-upgrades file found in` /etc/apt/apt.conf.d/` directory.
+We can perform maintenance manually on a schedule, but if we automate updates, we can ensure that the Lightsail instance will be running the latest patches and security updates. We can configure unattended upgrades by changing the options in the `50unattended-upgrades` file found in `/etc/apt/apt.conf.d/` directory.
 
-Let’s walk through the options for automating upgrades and security patches. By default, the file is configured to only update the security packages. Uncommenting this line updates the operating system. Note that this example is for a Debian Linux based operating system used by the Lightsail Wordpress blueprint.
+Let’s walk through the options for automating upgrades and security patches. By default, the file is configured to only update the security packages. Uncommenting the line below by deleting '//' updates the operating system. Note that this example is for a Debian Linux based operating system used by the Lightsail Wordpress blueprint.
 
 ```shell
 // "origin=Debian,codename=${distro_codename}-updates";
@@ -146,13 +150,13 @@ Optionally, if you want to be notified of which packages were upgraded or if the
 Unattended-Upgrade::Mail "admin@example.com";
 ```
 
-Note that mailx must be installed. To check if mailx is installed type the following command. If it’s installed, the path will be listed, e.g., /usr/bin/mailx.
+Note that mailx must be installed. To check if mailx is installed type the following command.
 
 ```bash
 which mailx
 ```
 
-If it’s not installed and you want to use this feature, you can install mailx.
+If it’s installed, the path will be listed, e.g., `/usr/bin/mailx`. If it’s not installed and you want to use this feature, you can install mailx with apt.
 
 ```bash
 sudo apt install mailutils
@@ -170,24 +174,23 @@ Unattended-Upgrade::MailReport "on-change";
 
 The notification email will be similar to this example:
 
-```text
-Subject: Unattended upgrades on hostname
 
-Unattended upgrades were installed on hostname:
+> Subject: Unattended upgrades on hostname
+> 
+> Unattended upgrades were installed on hostname:
+> 
+> The following packages were automatically installed:
+> 
+> python3-x2gobroker 0.0.4.3-1 python3-x3dh 0.5.8-2 python3-xapian-haystack 2.1.0-6 python3-xapian 1.4.18-1 python3-xapp 2.0.2-2 python3-xarray 0.16.2-2 python3-xattr 0.9.7-1+b1
+> python3-xcbgen 1.14.1-1 python3-xcffib 0.8.1-0.8 python3-xdg 0.27-2 python3-xdmf 3.0+git20190531-7 python3-xdo 0.5-1 python3-xeddsa 0.4.6-2+b1 python3-xgboost 1.2.1-1 python3-xhtml2pdf 0.2.4-1 python3-xkcd 2.4.2-3 python3-xlib 0.29-1 python3-xlrd 1.2.0-2 python3-xlsxwriter 1.1.2-0.2 python3-xlwt 1.3.0-3 python3-xmlschema 1.4.2-1 python3-xmltodict 0.12.0-2 python3-xmmsclient 0.8+dfsg-21 python3-xmodem 0.4.6+dfsg-2 python3-xopen 1.1.0-1 python3-xrayutilities-dbg 1.7.1-1 python3-xrayutilities 1.7.1-1 python3-xrootd 5.0.3-4 python3-xstatic-angular-bootstrap 2.2.0.0-4 python3-xstatic-angular-cookies 1.2.24.1-5 python3-xstatic-angular-fileupload 12.0.4.0+dfsg1-3 python3-xstatic-angular-gettext 2.3.8.0-4 python3-xstatic-angular-lrdragndrop 1.0.2.2-3
+> 
+> The upgrades were installed automatically and no interaction was required.
+> 
+> Please check for any potential issues with the upgraded packages and contact the system administrator if any problems are found.
+> 
+> Unattended Upgrades
 
-The following packages were automatically installed:
-
-python3-x2gobroker 0.0.4.3-1 python3-x3dh 0.5.8-2 python3-xapian-haystack 2.1.0-6 python3-xapian 1.4.18-1 python3-xapp 2.0.2-2 python3-xarray 0.16.2-2 python3-xattr 0.9.7-1+b1
-python3-xcbgen 1.14.1-1 python3-xcffib 0.8.1-0.8 python3-xdg 0.27-2 python3-xdmf 3.0+git20190531-7 python3-xdo 0.5-1 python3-xeddsa 0.4.6-2+b1 python3-xgboost 1.2.1-1 python3-xhtml2pdf 0.2.4-1 python3-xkcd 2.4.2-3 python3-xlib 0.29-1 python3-xlrd 1.2.0-2 python3-xlsxwriter 1.1.2-0.2 python3-xlwt 1.3.0-3 python3-xmlschema 1.4.2-1 python3-xmltodict 0.12.0-2 python3-xmmsclient 0.8+dfsg-21 python3-xmodem 0.4.6+dfsg-2 python3-xopen 1.1.0-1 python3-xrayutilities-dbg 1.7.1-1 python3-xrayutilities 1.7.1-1 python3-xrootd 5.0.3-4 python3-xstatic-angular-bootstrap 2.2.0.0-4 python3-xstatic-angular-cookies 1.2.24.1-5 python3-xstatic-angular-fileupload 12.0.4.0+dfsg1-3 python3-xstatic-angular-gettext 2.3.8.0-4 python3-xstatic-angular-lrdragndrop 1.0.2.2-3
-
-The upgrades were installed automatically and no interaction was required.
-
-Please check for any potential issues with the upgraded packages and contact the system administrator if any problems are found.
-
-Unattended Upgrades
-```
-
-Keeping previous versions of kernels can consume disk space and degrade 
+Keeping previous versions of kernels can consume disk space and degrade performance. You can delete them by setting the option to `true`.
 
 ```shell
 // Remove unused automatically installed kernel-related packages
@@ -195,20 +198,22 @@ Keeping previous versions of kernels can consume disk space and degrade
 Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
 ```
 
-Like unused kernels, unused dependencies consume disk space and could introduce vulnerabilities from outdated packages. They should be removed for best performance.
+Like old kernels, unused dependencies consume disk space and could introduce vulnerabilities from outdated packages. They should be removed for best performance.
 
 ```shell
 // Do automatic removal of newly unused dependencies after the upgrade
 Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
 ```
 
-A reboot is necessary after a kernel upgrade, uncommenting and setting this option to true. We can also set the time for the reboot when there is little or no traffic to the site. In the example below., the reboot is set for 2:00 AM.
+A reboot is necessary after a kernel upgrade, uncommenting and setting this option to true will reboot the system. 
 
 ```shell
 // Automatically reboot WITHOUT CONFIRMATION if
 //  the file /var/run/reboot-required is found after the upgrade
 Unattended-Upgrade::Automatic-Reboot "true";
 ```
+
+We can also set the time for the reboot when there is little or no traffic to the site. In the example below., the reboot is set for 2:00 AM.
 
 ```shell
 // If automatic reboot is enabled and needed, reboot at the specific
@@ -217,7 +222,7 @@ Unattended-Upgrade::Automatic-Reboot "true";
 Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 ```
 
-We can further control when automated occurs by configuring the update frequency by editing the 20auto-upgrades file. This file is in the same directory as the 50unattended-upgrades file, i.e., /etc/apt/apt.conf.d/. The file sets the default values for updating the package lists and upgrades to 1 or true. We can also set the frequecny of package downloads by setting the number of days and when to clean the package cache.
+Additionaly, We can configure the update frequency by editing the `20auto-upgrades` file. This file is in the same directory as the `50unattended-upgrades` file, i.e., `/etc/apt/apt.conf.d/`. The file sets the default values for updating the package lists and upgrades by setting the optio to `1` or true. We can also set the frequecny of package downloads by setting the number of days and when to clean the package cache.
 
 ```shell
 APT::Periodic::Update-Package-Lists "1";
@@ -236,7 +241,7 @@ You can find more information about the UnattendedUpgrades package on the [Debia
 
 ## Remove Application Logs
 
-A high traffic website, or even a popular article or post, can generate many logs. To reduce the number of log files and conserver disk space, we should periodically delete logs. This script, deletelogs.sh removes the oldest three log files for apache. mysql, and php.
+A high traffic website, or even a popular article or post, can generate many logs. To reduce the number of log files and conserve disk space, we should periodically delete logs. This script, `deletelogs.sh` removes the oldest three log files for Apache, MySQL, and PHP.
 
 ```shell
 #!/bin/bash
@@ -246,13 +251,13 @@ sudo rm -f $( find /opt/bitnami/mysql/logs -maxdepth 1 -iname 'mysqld.log-' -typ
 sudo rm -f $( find /opt/bitnami/php/logs -maxdepth 1 -iname 'php-fpm.log-' -type f | sort -r | tail -n +4 )
 ```
 
-We can use crontab to schedule the script. To edit crontab type the following command.
+We can use the `crontab` utility to schedule the script. To edit `crontab` type the following command.
 
 ```bash
 crontab -e
 ```
 
-The crontab format is five fields to set the time and day separated by spaces and followed by the script we want to execute.
+The crontab format has five fields to set the time and day separated by spaces and followed by the script we want to execute.
 
 > * minute (0-59)
 > * hour (0-23)
@@ -276,18 +281,6 @@ We can ensure that our Lightsail Wordpress server is running securely and operat
 * encrypting traffic between browsers and the server by installing a SSL/TLS certificate
 * automating operating system and security updates, and removing unnecessary files
 
-These steps can reduce the blast radius of an attack. To learn more about Lightsail and Wordpress, check out the [Wordpress How-To Guides](These steps can reduce the blast radius of an attack. To learn more about Lightsail and Wordpress, check out the [Wordpress How-To Guides](https://aws.amazon.com/getting-started/hands-on/?getting-started-all.sort-by=item.additionalFields.content-latest-publish-date&getting-started-all.sort-order=desc&awsf.getting-started-category=*all&awsf.getting-started-content-type=*all&getting-started-all.q=wordpress&getting-started-all.q_operator=AND&awsm.page-getting-started-all=1) in the Getting Started Resource Center.
+These steps can reduce the blast radius of an attack. To learn more about Lightsail and Wordpress, check out the [Wordpress How-To Guides](These steps can reduce the blast radius of an attack. To learn more about Lightsail and Wordpress, check out the [Wordpress How-To Guides](https://aws.amazon.com/getting-started/hands-on/?getting-started-all.sort-by=item.additionalFields.content-latest-publish-date&getting-started-all.sort-order=desc&awsf.getting-started-category=*all&awsf.getting-started-content-type=*all&getting-started-all.q=wordpress&getting-started-all.q_operator=AND&awsm.page-getting-started-all=1?sc_channel=el&sc_campaign=post&sc_content=wordpressonlightsail&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body) in the Getting Started Resource Center.
 
-Learn more about Lightsail with these articles:
-
-- [Deploy a Cloud Database to Scale a LAMP App](https://community.aws/tutorials/practical-cloud-guide/deploy-a-cloud-database-to-scale-lamp-app)
-- [Deploy a Java Application on Linux](https://community.aws/tutorials/practical-cloud-guide/deploy-a-java-application-on-linux)
-
-
-
-
-
-
-### Header 3
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Learn more about deploying application with Lightsail with these articles - [Deploy a Cloud Database to Scale a LAMP App](https://community.aws/tutorials/practical-cloud-guide/deploy-a-cloud-database-to-scale-lamp-app?sc_channel=el&sc_campaign=post&sc_content=wordpressonlightsail&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body) and [Deploy a Java Application on Linux](https://community.aws/tutorials/practical-cloud-guide/deploy-a-java-application-on-linux?sc_channel=el&sc_campaign=post&sc_content=wordpressonlightsail&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body).
