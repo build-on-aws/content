@@ -215,7 +215,7 @@ With these two code snippets, you have a main part of the application already fi
 
 This diagram is a visualization of a project that I have been involved recently - the [AWS Community Builders Speakers Directory](https://speakers.awscommunitybuilders.org):
 
-![Merged APIs architecture](images/merged_apis_architecture.png "Merged APIs architecture")
+![Merged APIs architecture](images/merged_apis_architecture.webp "Merged APIs architecture")
 
 This diagram shows the idea and concept behind the Merged APIs feature that we introduced at the beginning of the post: one central API is exposed to the users (the front-end), and behind that there are multiple different apis that use - if required - different technologies, languages, etc.
 This feature is very powerful for bigger organizations that have very segregated teams. Since *v2.94.0* this is also supported by the AWS CDK with an L2 construct:
@@ -351,7 +351,7 @@ This code snippet completes the backend code that you need to build up your appl
 
 ## Setting up your Flutter project using Amplify SDK
 
-![UI architecture](images/ui_architecture.png "UI architecture")
+![UI architecture](images/ui_architecture.webp "UI architecture")
 
 You will start off creating a "sample" Flutter application using `flutter create frontend`. This will create an example application that has no connectivity to the backend.
 
