@@ -453,44 +453,43 @@ To allow developers to deploy the project from their local development machine t
 
 ```typescript
 const execOptions: ExecSyncOptions = {
-      stdio: ['ignore', process.stderr, 'inherit'],
-    };
+  stdio: ['ignore', process.stderr, 'inherit'],
+};
 
-    const bundle = Source.asset('./frontend', {
-      bundling: {
-        command: ['sh', '-c', 'echo "Docker build not supported. Please install flutter."'],
-        image: DockerImage.fromRegistry('alpine'),
-        local: {
-          tryBundle(outputDir: string) {
-            try {
-              execSync('flutter --version', execOptions);
-              /* c8 ignore next 3 */
-            } catch {
-              return false;
-            }
-            execSync('cd frontend && flutter clean', execOptions);
-            execSync("cd frontend && git config --global --add safe.directory '*'", execOptions);
-            execSync('cd frontend && flutter pub get', execOptions);
-            execSync('cd frontend && flutter precache --web', execOptions);
-            // execSync('cd frontend && flutter test --platform chrome --coverage', execOptions);
-            execSync(
-              `cd frontend && flutter build web --no-tree-shake-icons --dart-define=WEB_URL=https://${domainName} --dart-define=API_URL=https://api.${domainName}/graphql --dart-define=CLIENT_ID=${userPool.clientId} --dart-define=POOL_ID=${userPool.poolId}`,
-              execOptions,
-            );
-            copySync('./frontend/build/web', outputDir);
-            return true;
-          },
-        },
+const bundle = Source.asset('./frontend', {
+  bundling: {
+    command: ['sh', '-c', 'echo "Docker build not supported. Please install flutter."'],
+    image: DockerImage.fromRegistry('alpine'),
+    local: {
+      tryBundle(outputDir: string) {
+        try {
+          execSync('flutter --version', execOptions);
+          /* c8 ignore next 3 */
+        } catch {
+          return false;
+        }
+        execSync('cd frontend && flutter clean', execOptions);
+        execSync("cd frontend && git config --global --add safe.directory '*'", execOptions);
+        execSync('cd frontend && flutter pub get', execOptions);
+        execSync('cd frontend && flutter precache --web', execOptions);
+        // execSync('cd frontend && flutter test --platform chrome --coverage', execOptions);
+        execSync(
+          `cd frontend && flutter build web --no-tree-shake-icons --dart-define=WEB_URL=https://${domainName} --dart-define=API_URL=https://api.${domainName}/graphql --dart-define=CLIENT_ID=${userPool.clientId} --dart-define=POOL_ID=${userPool.poolId}`,
+          execOptions,
+        );
+        copySync('./frontend/build/web', outputDir);
+        return true;
       },
-    });
+    },
+  },
+});
 
-    new BucketDeployment(this, 'Deployment', {
-      destinationBucket: bucket,
-      distribution,
-      distributionPaths: ['/*'],
-      sources: [bundle],
-    });
-  }
+new BucketDeployment(this, 'Deployment', {
+  destinationBucket: bucket,
+  distribution,
+  distributionPaths: ['/*'],
+  sources: [bundle],
+});
 ```
 
 After you have finished your sandbox testing with local deployments, you will most probably use a Continuous Deployment tool to promote your changes to higher environments.
