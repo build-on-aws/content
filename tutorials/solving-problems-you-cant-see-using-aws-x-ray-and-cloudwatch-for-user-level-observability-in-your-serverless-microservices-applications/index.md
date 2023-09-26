@@ -9,7 +9,7 @@ tags:
 - observability
 authorGithubAlias: knizami
 authorName: Khurram Nizami
-date: 2023-09-25
+date: 2023-09-26
 ---
 
 Imagine you’re a cloud engineer for a website built using AWS serverless technologies, such as AWS Lambda. You receive a call from a customer insisting they’re unable to open their shopping cart on your website. You open the same website and log in with your ID and try the same operation, and it works fine. What do you do?
@@ -38,7 +38,7 @@ Before starting this tutorial, you will need the following:
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [Git client](https://git-scm.com/downloads/guis) |
 | 💻 Code Sample         | [aws-serverless-shopping-cart](https://github.com/aws-samples/aws-serverless-shopping-cart)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?       |
-| ⏰ Last Updated     | 2023-09-25                                                                                                             |
+| ⏰ Last Updated     | 2023-09-26                                                                                                             |
 
 | ToC |
 |-----|
