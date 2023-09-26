@@ -428,7 +428,6 @@ kubectl run nginx-test-conn --image=nginx -n game-2048  && sleep 5 && kubectl ex
 ```
 
 7. Double click the `test.html` file that was created by the previous command. You should see the following contents.
-
 ![](./images/out.png)
 
 Please note for public domains, you can access the URL directly from browser.
