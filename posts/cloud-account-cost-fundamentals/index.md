@@ -94,20 +94,17 @@ A common misconception among builders is that AWS Free Tier means everything is 
 
 There are 3 types of offers in AWS Free Tier today:
 
-- Free Trials:
+- **Free Trials:** These are short term free trials that start from the date you provision a particular service. For example, you get Amazon GuardDuty, an intelligent threat detection and continuous monitoring service, free for 30 days since its activation.
 
-These are short term free trials that start from the date you provision a particular service. For example, you get Amazon GuardDuty, an intelligent threat detection and continuous monitoring service, free for 30 days since its activation.
+- **Always free:** These offers do not expire, they are available to all customers. For example, you get 1 Million free requests per month with AWS Lambda. If you exceed beyond this, you will be charged regular rates per the Region.
 
-- Always free:
-These offers do not expire, they are available to all customers. For example, you get 1 Million free requests per month with AWS Lambda. If you exceed beyond this, you will be charged regular rates per the Region.
+- **12 months free:** When you create a new AWS account, AWS provides **some resources** in **some AWS services** free for the **first 12 months only**. Within those 12 months, if in a month you exceed the free tier limit, your credit card will be charged as per the on-demand prices.
 
-- 12 months free
-
-When you create a new AWS account, AWS provides **some resources** in **some AWS services** free for the **first 12 months only**. Within those 12 months, if in a month you exceed the free tier limit, your credit card will be charged as per the on-demand prices.
-
-For example, 750 hours of Linux and Windows t2.micro instances (t3.micro for the regions in which t2.micro is unavailable), each month for one year. If you exceed 750 hours, you will be charge an On-Demand hourly rate of $0.0116 (in the US East N. Virginia Region). While the displayed pricing is an hourly rate but depending on which instances you choose, you pay by the hour or second (minimum of 60 seconds) for each instance type. For more information, you can read pricing pages for each AWS service, for example, refer [Amazon EC2 On-Demand Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
+For example, **750 hours of Linux and Windows t2.micro instances** (t3.micro for the regions in which t2.micro is unavailable), **each month for one year**. If you **exceed 750 hours**, you will be charged an **On-Demand hourly rate** of $0.0116 (in the US East N. Virginia Region).
 
 > If you are a beginner, I recommended to use EC2 Micro instances only.
+
+While the displayed pricing is an hourly rate but depending on which instances you choose, you pay by the hour or second (minimum of 60 seconds) for each instance type. For more information, you can read pricing pages for each AWS service, for example, refer [Amazon EC2 On-Demand Pricing](https://aws.amazon.com/ec2/pricing/on-demand/)
 
 Check out [AWS Free Tier](https://aws.amazon.com/free/) to learn more about these offers.
 
@@ -142,6 +139,7 @@ If you need detailed steps on setting up AWS Budgets, do check out this [tutoria
 ## 4. Security is important
 
 Shared Security model? limits in place, UPDATE
+![Shared Responsibility Model for Security](images/Shared_Responsibility_Model_V2.jpg)
 
 After you set your billing alerts, create AWS Identity and Access Management (IAM) User(s). Even if this is your personal account and you are the only one using this, DO NOT use AWS root (i.e. email id and password based) login. Create an IAM User with Administrative access for yourself and use that to login to the AWS Console.
 
