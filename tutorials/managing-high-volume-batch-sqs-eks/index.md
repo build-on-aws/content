@@ -15,7 +15,7 @@ date: 2023-09-28
 
 When it comes to managing background work in a Kubernetes environment, the use case isn't solely confined to massive data crunching or real-time analytics. More often, you'll be focused on nuanced tasks like data syncing, file uploads, or other asynchronous activities that work quietly in the background. Amazon SQS, with its 256 KB message size limitation, is especially adept at queuing metadata or status flags that indicate whether jobs are complete or still pending. When combined with Amazon EFS, which offers secure, multi-AZ storage for larger data objects, SQS is free to specialize in task orchestration. This pairing yields two key advantages: it allows for modular operation by segregating different aspects of your background tasks, and it capitalizes on the scalable, multi-availability zone architecture of EFS to meet your evolving storage needs without service interruptions.
 
-Building on the Amazon EKS cluster from [**part 1**](#) of our series, this tutorial dives into the deployment of batch jobs and job queues. Included in the cluster configuration for the previous tutorial is the installation of the [EFS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks), [IAM Role for Service Account (IRSA) for the EFS CSI Driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html#efs-create-iam-resources), and an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run Compute-Intensive Batch Processes](#). To complete the last half of this tutorial, you’ll need the EFS CSI Driver Add-On setup on your cluster. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](#). 
+Building on the Amazon EKS cluster from [**part 1**](#) of our series, this tutorial dives into the deployment of batch jobs and job queues. Included in the cluster configuration for the previous tutorial is the installation of the [EFS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks), [IAM Role for Service Account (IRSA) for the EFS CSI Driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html#efs-create-iam-resources), and an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run Asynchronous Batch Tasks](https://community.aws/tutorials/navigating-amazon-eks/eks-cluster-batch-processing). To complete the last half of this tutorial, you’ll need the EFS CSI Driver Add-On setup on your cluster. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on). 
 
 You'll also integrate Amazon SQS with your Amazon EKS cluster, build a batch processing application, containerize the application and deploy to Amazon ECR, then use an Amazon SQS job queue to run your batch tasks. In the second half, we'll shift gears to the EFS CSI Driver, which allows us to keep our data intact across multiple nodes while running batch workloads.
 
@@ -100,7 +100,7 @@ eksctl create iamserviceaccount \
  --approve
 ```
 
-The EFS CSI Driver does not have an AWS managed policy, so there are a few additional steps to create the service account. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13).
+The EFS CSI Driver does not have an AWS managed policy, so there are a few additional steps to create the service account. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on).
 
 ## Step 3: Verify the EFS CSI Driver Add-On Is Installed
 
@@ -118,7 +118,7 @@ The expected output should look like this:
 aws-efs-csi-driver      v1.5.8-eksbuild.1       ACTIVE  0
 ```
 
-If the EFS CSI Driver Add-On is **not** installed on your cluster, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13).
+If the EFS CSI Driver Add-On is **not** installed on your cluster, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on).
 
 ## Step 4: Run the Sample Batch Application
 
@@ -447,7 +447,7 @@ my-batch-processing-job           1/1           8s         16m
 
 ## Step 11: Create the PersistentVolume and PersistentVolumeClaim for EFS
 
-In this section, you'll create a PersistentVolume (PV) and PersistentVolumeClaim (PVC) that will use the EFS storage class. This will provide a persistent storage layer for your Kubernetes Jobs. This builds upon the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13), where you set up environment variables for your EFS URL.
+In this section, you'll create a PersistentVolume (PV) and PersistentVolumeClaim (PVC) that will use the EFS storage class. This will provide a persistent storage layer for your Kubernetes Jobs. This builds upon the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on), where you set up environment variables for your EFS URL.
 
 1. Echo and save your EFS URL for the next step:
 
@@ -502,7 +502,7 @@ persistentvolumeclaim/efs-claim created
 
 ## Step 12: Implement Persistent Storage With Amazon EFS
 
-In this section, you'll enhance your Kubernetes Jobs to use Amazon EFS for persistent storage. Building on the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://quip-amazon.com/KQAIAANyMa13), where you set up an EFS-based 'StorageClass,' you'll add a Persistent Volume Claim (PVC) to your existing Job manifests. Due to the immutable nature of Jobs, you'll also adopt a versioning strategy. Instead of updating existing Jobs, you'll create new ones with different names but similar specs, allowing for historical tracking and version management through labels and annotations.
+In this section, you'll enhance your Kubernetes Jobs to use Amazon EFS for persistent storage. Building on the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on), where you set up an EFS-based 'StorageClass,' you'll add a Persistent Volume Claim (PVC) to your existing Job manifests. Due to the immutable nature of Jobs, you'll also adopt a versioning strategy. Instead of updating existing Jobs, you'll create new ones with different names but similar specs, allowing for historical tracking and version management through labels and annotations.
 
 1. Create a Kubernetes Job manifest file named `update-batch-job.yaml` and paste the following contents. Replace the sample value in `image` with your ECR URL.
 
