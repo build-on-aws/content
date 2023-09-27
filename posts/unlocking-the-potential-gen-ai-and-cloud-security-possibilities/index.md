@@ -6,10 +6,13 @@ tags:
   - cybersecurity
   - security
   - it-pros
+  - security
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2023-09-30
 ---
+|ToC|
+|---|
 
 Generative AI, at its core, refers to algorithms that can generate new data instances that resemble a given set of data. In the realm of cloud computing, this technology is being used for many practical applications, from creating realistic training datasets for machine learning models to simulating network traffic for testing and validation purposes. For instance, developers are using Generative AI to create synthetic datasets that help train models where real data is scarce or sensitive. In the domain of cloud infrastructure, it can aid in optimizing resource allocation by predicting and simulating workloads.
 
@@ -17,10 +20,9 @@ But why is Generative AI crucial when we talk about cloud security on platforms 
 
 In the sections that follow, we will explore how Generative AI can bolster your cloud security posture on AWS, provide a hands-on example of querying Amazon Bedrock for Security Group rule reviews using Python, and conclude with thoughts into the future of Generative AI in cloud security.
 
-
 ## Harnessing Generative AI to Fortify AWS Cloud Security
 
-You probably already recognize that we are now living in a time in which businesses are increasingly reliant on cloud platforms. As organizations scale their operations on the cloud, the complexity of managing security postures grows exponentially. Traditional security measures are still essential, however at time, they fall short in addressing the dynamic nature of threats in a cloud environment. This is where Generative AI has the potential to enhance our security, offering an innovative, fresh perspective. 
+You probably already recognize that we are now living in a time in which businesses are increasingly reliant on cloud platforms. As organizations scale their operations on the cloud, the complexity of managing security postures grows exponentially. Traditional security measures are still essential, however at time, they fall short in addressing the dynamic nature of threats in a cloud environment. This is where Generative AI has the potential to enhance our security, offering an innovative, fresh perspective.
 
 ### Understanding Generative AI in the Context of Cloud Security
 
@@ -48,19 +50,19 @@ How might AWS services benefit from integration with Generative AI?  Here are a 
 
 The true power of Generative AI lies in its ability to shift the security paradigm from a reactive to a proactive stance. Instead of waiting for threats to manifest, organizations can use Generative AI to anticipate and prepare for them. This forward-thinking approach paves the way for a future where cloud security is not just about defense but about foresight through innovation.
 
-
 ## A Practical Example: Leveraging Generative AI to Review AWS Security Group Rules
 
 In this section, we'll examine a practical example of how Generative AI can be used to review and optimize firewall rules. Specifically, we'll focus on AWS Security Groups, which act as virtual firewalls to control inbound and outbound traffic to AWS resources.
 
-**Objective**
+### **Objective**
 
 Our goal is to use Generative AI to:
+
 1. Examine VPC Flow Log data.
 2. Compare each entry in the flow log to each entry of the Security Group.
 3. Recommend optimizations to enhance security and allow necessary traffic.
 
-**Setting Up**
+### **Setting Up**
 
 Before we dive into the code, we will need to:
 
@@ -71,9 +73,9 @@ In taking these two data sources and providing it to the LLM we are doing what i
 
 Let's begin  by getting the flow log data that we will use to train our model.
 
-**Fetching Historical Traffic Data**
+### **Fetching Historical Traffic Data**
 
- The historical data set in the context of our example would ideally come from VPC Flow Logs. VPC Flow Logs capture information about the IP traffic going to and from network interfaces in your VPC. This data can provide a wealth of information about traffic patterns, sources of traffic, destinations, ports used, and more. By using VPC Flow Logs as your historical data set, you can gain valuable insights into your network traffic patterns and behaviors, making it an excellent source for training generative AI models for AWS security purposes. If you don't have VPC Flow Logs enabled you will need to do so before moving on, and you will need to allow some time to pass for data to be collected. For more information on how to set up VPC Flow Logs see the user guide article [Publish flow logs to CloudWatch Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-cwl.html). 
+The historical data set in the context of our example would ideally come from VPC Flow Logs. VPC Flow Logs capture information about the IP traffic going to and from network interfaces in your VPC. This data can provide a wealth of information about traffic patterns, sources of traffic, destinations, ports used, and more. By using VPC Flow Logs as your historical data set, you can gain valuable insights into your network traffic patterns and behaviors, making it an excellent source for training generative AI models for AWS security purposes. If you don't have VPC Flow Logs enabled you will need to do so before moving on, and you will need to allow some time to pass for data to be collected. For more information on how to set up VPC Flow Logs see the user guide article [Publish flow logs to CloudWatch Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-cwl.html?sc_channel=el&sc_campaign=genai&sc_content=unlocking-the-potential-gen-ai-and-cloud-security-possibilities&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 1. Let's get a list of our flow logs using the `aws ec2 describe-flow-logs --region us-west-2 --output json` command. From here take note of the **Log Group Name**.
 
@@ -225,7 +227,7 @@ This creates a file named `log_data.json` in your current directory. Below is a 
 }
 ```
 
-4. Next let's list our security groups and get their IDs.  We do this with the command `aws ec2 describe-security-groups --query 'SecurityGroups[*].[GroupName,GroupId]' --output table --region us-west-2`. 
+4. Next let's list our security groups and get their IDs.  We do this with the command `aws ec2 describe-security-groups --query 'SecurityGroups[*].[GroupName,GroupId]' --output table --region us-west-2`.
 
 ![Alt text](images/03-security-groups-name-and-id.png)
 
@@ -322,7 +324,7 @@ This creates a file named `security_groups.json` in your current directory. Belo
 }
 ```
 
-**Importance of understanding Tokens:** A concept that's important to understand when working with LLMs is the use of **Tokens**.  A token can be as short as one character or as long as one word. For example, "a" is one token, and "address" is also one token. In some languages or scripts, a token might represent a syllable or a word component.  When working with an LLM a process called *Tokenization* takes place in which a sequence of text (your prompt in this case) is converted to tokens.  LLMs have a maximum token limit for interactions with it.  This is both for input and output. In our python code below you will see the `max_tokens_to_sample` value set to 4096. If a prompt is too long, it might need to be truncated or otherwise adapted to fit within this limit. This is important because the log data and the security groups will be tokenized, and longer formats can consume more tokens.  Here we are using JSON, but you may prefer to convert to CSV. Either way, you need to be aware of how this will impact your prompt and the corresponding result. 
+**Importance of understanding Tokens:** A concept that's important to understand when working with LLMs is the use of **Tokens**.  A token can be as short as one character or as long as one word. For example, "a" is one token, and "address" is also one token. In some languages or scripts, a token might represent a syllable or a word component.  When working with an LLM a process called *Tokenization* takes place in which a sequence of text (your prompt in this case) is converted to tokens.  LLMs have a maximum token limit for interactions with it.  This is both for input and output. In our python code below you will see the `max_tokens_to_sample` value set to 4096. If a prompt is too long, it might need to be truncated or otherwise adapted to fit within this limit. This is important because the log data and the security groups will be tokenized, and longer formats can consume more tokens.  Here we are using JSON, but you may prefer to convert to CSV. Either way, you need to be aware of how this will impact your prompt and the corresponding result.
 
 Now that we have our data to provide to the model, let's interact with the LLM using Python.
 
@@ -427,6 +429,7 @@ Here are my security groups rules:
 print ("Sending the prompt to the model...")
 
 ```
+
 After sending the prompt we are returned the following response, as seen in the image below.
 
 ![Getting a response from bedrock](images/04-bedrock-response.png)
@@ -443,7 +446,7 @@ Generative AI has the potential to change the game for cloud security. Our pract
 
 What's next for Generative AI in cloud security? Maybe it can help us find weak spots before they become big problems. Or maybe it can alert us right away if something suspicious happens. While there are products and services on the market today that do these things, we should be interested in how Generative AI can add to the functionality and benefit of these services.  
 
-So, as we finish up, let's remember this is just the beginning. There's a lot more to learn and do with Generative AI and cloud security and hopefully this helped you become more acquainted with it. If you haven't done so already, start thinking about Generative AI and cloud security.  It's likely to become a regular part of our work in the near future.  Until then, keep exploring, keep learning, and happy labbing.
+So, as we finish up, let's remember this is just the beginning. There's a lot more to learn and do with Generative AI and cloud security and hopefully this helped you become more acquainted with it. If you haven't done so already, start thinking about Generative AI and cloud security.  It's likely to become a regular part of our work in the near future.  Until then, keep exploring, keep learning, and happy lab-ing.
 
 ### References
 
@@ -464,8 +467,5 @@ Here are some relevant resources that discuss the use of generative AI in cloud 
 5. [What Can Generative AI do for Hybrid Cloud Security?](https://www.trendmicro.com/en_us/devops/23/h/generative-ai-hybrid-cloud-security.html)
    - This article discusses the challenges of securing cloud resources and how generative AI can be a powerful tool in addressing these challenges. It touches upon the potential of generative AI in producing template-based infrastructure-as-code for secure cloud environments and the importance of scanning for misconfigurations.
 
-6. [Prompt engineering for foundation models](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-customize-prompt-engineering.html)
+6. [Prompt engineering for foundation models](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-customize-prompt-engineering.html?sc_channel=el&sc_campaign=genai&sc_content=unlocking-the-potential-gen-ai-and-cloud-security-possibilities&sc_geo=mult&sc_country=mult&sc_outcome=acq)
    - This Amazon SageMaker Documentation explains what prompt engineering is, why it's important, and how a model can be trained with Zero-shot and Few-shot learning.
-
-
-
