@@ -66,7 +66,7 @@ If you do not wish to create separate accounts, you should, at the very least, e
 
 If you are just starting with AWS, there are 2 important concepts you need to understand - **Regions**, and **Availability Zones**. AWS services and resources are hosted in multiple locations world-wide and these separate geographic areas are called as AWS Regions. Each Region has multiple, isolated locations known as Availability Zones. This is to ensure you have a highly-available, fault tolerant environment.
 
-![Regions and Availability zones](images/regions-and-availability-zones.png)
+![Regions and Availability zones](images/regions-and-availability-zones.webp)
 
 Choosing which AWS Region to use depends on multiple factors:
 
