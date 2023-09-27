@@ -7,6 +7,10 @@ tags:
   - cost-optimization
   - data-strategy
   - data-architecture
+waves:
+  - cost
+spaces:
+  - cost-optimization
 authorGithubAlias: bhaums
 authorName: Sandipan Bhaumik
 date: 2023-09-26
