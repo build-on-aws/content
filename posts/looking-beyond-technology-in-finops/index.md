@@ -6,7 +6,7 @@ tags:
     - finops-tool-vs-culture
     - finops-contino
     - finops-ethan-sumner
-    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
+    - cost-optimization
 authorGithubAlias: YoungDevOps
 authorName: Ethan Sumner
 date: 2023-09-23
