@@ -10,6 +10,9 @@ tags:
   - end-user-computing
   - resilience
 
+waves:
+  - resilience
+
 authorGithubAlias: Peter-John-M
 authorName: Peter-John Morgenrood
 date: 2023-09-25
