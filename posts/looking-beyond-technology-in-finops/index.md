@@ -8,7 +8,8 @@ tags:
     - finops-tool-vs-culture
 authorGithubAlias: YoungDevOps
 authorName: Ethan Sumner
-date: 2023-09-23
+githubUserLabel: community
+date: 2023-09-27
 ---
 | ToC |
 |-----|
@@ -17,13 +18,13 @@ date: 2023-09-23
 
 FinOps, or Cloud Financial Management, has grown significantly over the past few years, with more and more organisations prioritising it to reap critical benefits, mainly focusing on saving money. However, they need to include additional benefits of FinOps, including accountability, visibility and a proper understanding of their cloud spend. To meet demand or to focus on quick wins early and fast ROI, organisations have steered towards the technology or tooling side first without adopting the people or process element. Not focusing on culture can cause long-term problems and hinder the long-term success of FinOps.
 
-Before focusing on culture, organisations have instead geared towards training to counteract a lack of FinOps culture. However, the aim is to see the best of both worlds, and there are some excellent examples of combined training, culture and technical effort. At FinOps X this year, we saw a significant focus on training, certification and development of FinOps practitioners and supporting personas. JP Morgan & Co, which won FinOps team of the year and is also considered one of the largest FinOps organisations globally, has over 225 certified practitioners and training programs for the broader organisation, driving culture and adopting technical elements.
+Before focusing on culture, organisations have instead geared towards training to counteract a lack of FinOps culture. However, the aim is to see the best of both worlds, and there are some excellent examples of combined training, culture and technical effort. At [FinOps X](https://x.finops.org/) this year, we saw a significant focus on training, certification and development of FinOps practitioners and supporting personas. JP Morgan & Co, which won FinOps team of the year and is also considered one of the largest FinOps organisations globally, has over 225 certified practitioners and training programs for the broader organisation, driving culture and adopting technical elements.
 
 This blog focuses on the people side, including establishing a FinOps team, adopting a framework, and driving a FinOps-centric culture. Every organisation will have different team sizes, preferences, spending and organisational buy-in. Whilst this blog showcases what you could do, please implement what works best. For more information, please visit the [FinOps Foundation Framework](https://www.finops.org/framework/).
 
 ## The FinOps Team
 
-An established and knowledgeable FinOps team is the cornerstone of a successful FinOps Implementation across an entire organisation and its IT estate. However, lacking organisational buy-in, budget or resources to cross-train individuals can often limit the team's capabilities. As an organisation, you must decide what works best for you regarding team size, skillset and background. There is no one-size-fits-all solution. An established team comprises individuals with diverse skills and experiences, including technical, finance or a business focus via methods of external hiring or upskilling and cross-training within the organisation. Here are some reasons why people matter in FinOps:
+An established and knowledgeable FinOps team is the cornerstone of a successful FinOps Implementation across an entire organisation and its IT estate. However, lacking organisational buy-in, budget or resources to cross-train individuals can often limit the team's capabilities. As an organisation, you must decide what works best for you regarding team size, skillset and background. There is no one-size-fits-all solution. An established team comprises individuals with diverse skills and experiences, including technical, finance, or a business focus via methods of external hiring or upskilling and cross-training within the organisation. Here are some reasons why people matter in FinOps:
 
 * **Skillsets and Experience:** FinOps professionals possess the expertise to understand complex cloud pricing models, identify cost optimisation opportunities, and make informed decisions in addition to much more. Their ability to interpret data and trends is invaluable in reducing costs effectively.
 
@@ -78,13 +79,13 @@ Despite the importance of people, processes, and culture in FinOps, organisation
 
 ## Closing Thoughts
 
-While technology undoubtedly plays a significant role in FinOps, it's essential to remember that the true potential of FinOps lies in its human elements: people, processes, and culture. A well-trained FinOps team, efficient processes, and a culture that values cost-consciousness are the driving forces behind successful cost management in the cloud. 
+While technology undoubtedly plays a significant role in FinOps, it's essential to remember that the true potential of FinOps lies in its human elements: people, processes, and culture. A well-trained FinOps team, efficient processes, and a culture that values cost-consciousness are the driving forces behind successful cost management in the cloud.
 
- By prioritising these aspects, organisations can unlock the full benefits of FinOps and achieve sustainable cost optimisation in the cloud. Ultimately, it's not just about managing costs; it's about fostering a culture of continuous improvement and innovation.
+By prioritising these aspects, organisations can unlock the full benefits of FinOps and achieve sustainable cost optimisation in the cloud. Ultimately, it's not just about managing costs; it's about fostering a culture of continuous improvement and innovation.
 
- So what can you do? I recommend checking out the FinOps foundation, its incredible resources and getting involved in the community. If you are at the start of your journey, I would put together a business case and start adoption across your organisation. But please remember that technology is a tool as you embark on your FinOps journey. Still, the people, processes, and culture surrounding it determine your success in managing cloud costs effectively.
+So what can you do? I recommend checking out the FinOps foundation, its incredible resources and getting involved in the community. If you are at the start of your journey, I would put together a business case and start adoption across your organisation. But please remember that technology is a tool as you embark on your FinOps journey. Still, the people, processes, and culture surrounding it determine your success in managing cloud costs effectively.
 
- List of resources:
+List of resources:
 
  * [FinOps Certification and Training](https://learn.finops.org)
  * [FinOps Framework Overview](https://www.finops.org/framework/)
