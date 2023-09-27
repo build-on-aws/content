@@ -79,7 +79,7 @@ The historical data set in the context of our example would ideally come from VP
 
 1. Let's get a list of our flow logs using the `aws ec2 describe-flow-logs --region us-west-2 --output json` command. From here take note of the **Log Group Name**.
 
-![Getting Log Group Name](images/01-log-group-name.png)
+![Getting Log Group Name](images/01-log-group-name.webp)
 
 Note that the Log Group Name is `gen-ai-example`.
 
@@ -432,7 +432,7 @@ print ("Sending the prompt to the model...")
 
 After sending the prompt we are returned the following response, as seen in the image below.
 
-![Getting a response from bedrock](images/04-bedrock-response.png)
+![Getting a response from bedrock](images/04-bedrock-response.webp)
 
 As can be seen in the response, the LLM was able to take the VPC Flow Log data and Security Group data I provided to the LLM along with specific information in my prompt (CIDR range and inbound vs. outbound directionality) and provide a breakdown of what the rules would do when seeing the provided traffic as well as a list of recommendations.  
 
