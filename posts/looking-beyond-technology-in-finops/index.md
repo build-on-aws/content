@@ -1,13 +1,11 @@
 ---
 title: "Looking Beyond Technology In FinOps - How organisations need to address the People Side"
-description: "Organisations adopting FinOps often focus on purely the technology element wether it's procuring a tool or implementing automation. In the blog, we dive into the people and side of the implementing FinOps and why it's critical to FinOps Success"
+description: "Organisations adopting FinOps often focus on purely the technology element wether it's procuring a tool or implementing automation. In the blog, we dive into the people side of implementing FinOps and why it's critical to FinOps Success"
 tags:
     - cost-optimization
     - finops-culture
     - finops
-    - adopting-finops
     - finops-tool-vs-culture
-    - finops-contino
 authorGithubAlias: YoungDevOps
 authorName: Ethan Sumner
 date: 2023-09-23
@@ -88,11 +86,10 @@ While technology undoubtedly plays a significant role in FinOps, it's essential 
 
  List of resources:
 
- * https://www.finops.org
- * https://learn.finops.org
- * https://www.finops.org/framework/
- * https://www.finops.org/wg/adopting-finops/
- * https://aws.amazon.com/blogs/aws-cloud-financial-management/tag/finops/
- * https://www.youtube.com/watch?v=zGpFFLzTLok
+ * [FinOps Certification and Training](https://learn.finops.org)
+ * [FinOps Framework Overview](https://www.finops.org/framework/)
+ * [Adopting FinOps – Getting Started](https://www.finops.org/wg/adopting-finops/)
+ * [AWS Blogs on FinOps](https://aws.amazon.com/blogs/aws-cloud-financial-management/tag/finops/)
+ * [Video: The Contino Podcast: How FinOps Is Helping Enterprises Make Better Financial Decisions](https://www.youtube.com/watch?v=zGpFFLzTLok)
 
  Alternatively, please send a message on [Linkedin - Ethan S.](https://www.linkedin.com/in/ethansumner404/)
