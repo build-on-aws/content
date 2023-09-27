@@ -55,7 +55,7 @@ This tutorial is the second part of a series on managing high traffic microservi
 *  **ExternalDNS Add-on Setup:** Deploy the[ExternalDNS](https://github.com/kubernetes-sigs/external-dns) add-on on your Amazon EKS cluster and configure it to synchronize Kubernetes service DNS records with your Route53 domain.
 * **Sample Application Deployment:** As a practical example, we'll walk you through the steps to build and expose the "2048 Game Sample Application" on port 80. To facilitate this, we'll utilize custom annotations for [ExternalDNS](https://github.com/kubernetes-sigs/external-dns), particularly the 'hostname' annotation, which instructs the [ExternalDNS](https://github.com/kubernetes-sigs/external-dns) controller on how to access the Kubernetes service via the specified HTTP path. For more annotations, see [Setting up ExternalDNS for Services on AWS](https://kubernetes-sigs.github.io/external-dns/v0.13.5/tutorials/aws/#annotations).
 
-> *Note that even if you're still within your initial 12-month AWS Free Tier period, the Route 53 hosted zone falls outside the AWS free tier. Hence usage could result in additional charges.*  
+> *Note that even if you're still within your initial 12-month AWS Free Tier period, the Route 53 hosted zone falls outside the AWS free tier. Hence, usage could result in additional charges.*  
 *The ExternalDNS add-on is self-managed, and customers are responsible for overseeing its lifecycle and maintenance.*
 
 ## Step 1: Configure Cluster Environment Variables
