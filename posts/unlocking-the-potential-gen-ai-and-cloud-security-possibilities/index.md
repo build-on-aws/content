@@ -9,7 +9,7 @@ tags:
   - security
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
-date: 2023-09-30
+date: 2023-09-27
 ---
 |ToC|
 |---|
@@ -18,7 +18,7 @@ Generative AI, at its core, refers to algorithms that can generate new data inst
 
 But why is Generative AI crucial when we talk about cloud security on platforms like AWS? The answer lies in its ability to anticipate, simulate, and counteract potential threats. By generating potential security scenarios, Generative AI can help organizations anticipate vulnerabilities, test their systems against simulated breaches, and develop more resilient security postures. It's not just about responding to threats, but proactively preparing for them.
 
-In the sections that follow, we will explore how Generative AI can bolster your cloud security posture on AWS, provide a hands-on example of querying Amazon Bedrock for Security Group rule reviews using Python, and conclude with thoughts into the future of Generative AI in cloud security.
+In the sections that follow, we will explore how Generative AI can bolster your cloud security posture on AWS, provide a hands-on example of querying [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html?sc_channel=el&sc_campaign=genai&sc_content=unlocking-the-potential-gen-ai-and-cloud-security-possibilities&sc_geo=mult&sc_country=mult&sc_outcome=acq) for Security Group rule reviews using Python, and conclude with thoughts into the future of Generative AI in cloud security.
 
 ## Harnessing Generative AI to Fortify AWS Cloud Security
 
@@ -40,11 +40,11 @@ How might AWS services benefit from integration with Generative AI?  Here are a 
 
 > Note that these are simply possibilities based on what I have experienced with Generative AI. In no way does this reflect the actual plans or roadmap for these services.  I am not a member of these service teams.
 
-- **AWS WAF (Web Application Firewall)**: Generative AI could simulate web traffic patterns based on your historical log data and compare that to your existing WAF rules, ensuring that malicious requests are blocked while legitimate traffic flows seamlessly.
+- **[AWS WAF (Web Application Firewall)](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html?sc_channel=el&sc_campaign=genai&sc_content=unlocking-the-potential-gen-ai-and-cloud-security-possibilities&sc_geo=mult&sc_country=mult&sc_outcome=acq)**: Generative AI could simulate web traffic patterns based on your historical log data and compare that to your existing WAF rules, ensuring that malicious requests are blocked while legitimate traffic flows seamlessly.
 
-- **Amazon GuardDuty**: By analyzing findings from GuardDuty, Generative AI could predict emerging threat patterns and suggest refinements to other areas of your cloud security posture.
+- **[Amazon GuardDuty](https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html?sc_channel=el&sc_campaign=genai&sc_content=unlocking-the-potential-gen-ai-and-cloud-security-possibilities&sc_geo=mult&sc_country=mult&sc_outcome=acq)**: By analyzing findings from GuardDuty, Generative AI could predict emerging threat patterns and suggest refinements to other areas of your cloud security posture.
 
-- **VPC Flow Logs**: Analyzing flow logs with Generative AI can provide insights into network traffic patterns, highlighting potential security risks and optimizing network access controls. To take this a step further, this could be compared against existing WAF rules, AWS Network Firewall Rules, Security Groups, Network ACLs, and so on, and provide recommendations for optimizing and enhancing our rule sets. You'll see an example of this below.
+- **[VPC Flow Logs](https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html?sc_channel=el&sc_campaign=genai&sc_content=unlocking-the-potential-gen-ai-and-cloud-security-possibilities&sc_geo=mult&sc_country=mult&sc_outcome=acq)**: Analyzing flow logs with Generative AI can provide insights into network traffic patterns, highlighting potential security risks and optimizing network access controls. To take this a step further, this could be compared against existing WAF rules, AWS Network Firewall Rules, Security Groups, Network ACLs, and so on, and provide recommendations for optimizing and enhancing our rule sets. You'll see an example of this below.
 
 ### The Bigger Picture: A Proactive Approach to Security
 
