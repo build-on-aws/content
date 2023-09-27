@@ -11,6 +11,8 @@ authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2023-09-27
 ---
+|ToC|
+|---|
 
 Deploying a Wordpress on AWS Lightsail is a fast and simple way to build a Wordpress site. However, our work is not done and we can harden the instance from malicious code and other attacks. AWS implements a shared responsibility model. Simply put, AWS maintains and secures the infrastructure, and as builders, we maintain and secure our applications and the operating systems.  If you’ve been part of a community garden, you’ll be familiar with the shared responsibility model. The owner of the garden provides the soil, plant beds, water for plants, and fencing to protect the garden. As a member you chose the plants, how they are planted, treat for harmful insects and diseases, and sufficiently water and fertilize the plants. Extending the analogy to the cloud, like the garden owner, AWS provides the infrastructure for applications and services to secure the infrastructure. As cloud builders, like a gardener, we’re responsible for maintaining our applications and protecting from external attacks.
 
