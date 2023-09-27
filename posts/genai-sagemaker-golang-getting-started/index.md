@@ -20,9 +20,9 @@ date: 2023-09-30
 
 This article is an introductory guide for Go developers who want get started building Generative AI applications using [Amazon SageMaker Foundation Models](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models.html). You will learn how to use the [AWS Go SDK (v2)](https://aws.github.io/aws-sdk-go-v2/docs/):
 
-- To create and deploy a Foundation model,
+- To create and deploy a foundation model,
 - Use it for simple tasks such as code generation, and
-- A chat application to hold a conversation with the Foundation Model.
+- A chat application to hold a conversation with the foundation model.
 
 > The code examples are available in this [GitHub repository](TODO link) 
 
@@ -30,17 +30,17 @@ After a brief introduction and code overview, we will dive straight in where I w
 
 ![Amazon SageMaker documentation](https://docs.aws.amazon.com/images/sagemaker/latest/dg/images/inference-workflow-flowchart.png)
 
-## Falcon family of Foundation models
+## Falcon Family of Foundation Models
 
-[Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html) which is a fully managed machine learning service for data scientists and developers to build and train machine learning models, and then directly deploy them into a production-ready hosted environment. 
+[Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html) is a fully managed machine learning service for data scientists and developers to build and train machine learning models, and then directly deploy them into a production-ready hosted environment. 
 
-The machine learning model we will be working with is **Falcon 40B Instruct BF16**. It is available as part of [SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) which provides pre-trained, open-source models for a wide range of requirements. This includes foundation models which are large models that are adaptable to many downstream tasks and often serve as the starting point for developing specialized models. These foundation models can be applied to use cases such as content writing, code generation, question answering, copywriting, summarization, classification, information retrieval, and more.
+The machine learning model we will be working with is **Falcon 40B Instruct BF16**. It is available as part of [Amazon SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) which provides pre-trained, open-source models for a wide range of requirements. This includes foundation models which are large models that are adaptable to many downstream tasks and often serve as the starting point for developing specialized models. These foundation models can be applied to use cases such as content writing, code generation, question answering, copywriting, summarization, classification, information retrieval, and more.
 
-`Falcon-40B-Instruct` is a 40B parameters causal decoder-only model built by [TII](https://www.tii.ae/) based on Falcon-40B and is a ready-to-use chat/instruct model. `Falcon 40B` is an autoregressive decoder-only model trained on 1 trillion tokens with an architecture optimized for inference. It is mostly trained on English data and may not generalize to other languages. It carries the stereotypes and biases commonly encountered online and in the training data. Hence, it is recommended to develop guardrails and to take appropriate precautions for any production use. As it is an instruct model, it may not be ideal for fine-tuning.
+`Falcon-40B-Instruct` is a 40 billion parameter causal decoder-only model built by [TII](https://www.tii.ae/) based on Falcon-40B and is a ready-to-use chat/instruct model. `Falcon 40B` is an autoregressive decoder-only model trained on 1 trillion tokens with an architecture optimized for inference. It is mostly trained on English data and may not generalize to other languages. It carries the stereotypes and biases commonly encountered online and in the training data. Hence, it is recommended to develop guardrails and to take appropriate precautions for any production use. As it is an instruct model, it may not be ideal for fine-tuning.
 
-> Although we are not covering this in the article, it's worth noting that SageMaker supports multiple machine learning environments, including [SageMaker Studio](https://docs.aws.amazon.com/sagemaker/latest/dg/studio.html) to deploy and manage our machine learning model. SageMaker Studio also helps you perform other machine learning tasks such as executing code in Jupyter notebooks, data preparation, fine-tuning models etc.
+> Although we are not covering this in the article, it's worth noting that Amazon SageMaker supports multiple machine learning environments, including [Amazon SageMaker Studio](https://docs.aws.amazon.com/sagemaker/latest/dg/studio.html) to deploy and manage our machine learning model. Amazon SageMaker Studio also helps you perform other machine learning tasks such as executing code in Jupyter notebooks, data preparation, fine-tuning models and much more.
 
-## Using SageMaker with Go
+## Using SageMaker With Go
 
 [Amazon SageMaker Python SDK](https://sagemaker.readthedocs.io/) is a widely used high-level Python library to start model training jobs and deploy the SageMaker models (note that this is not the same as the [AWS SDK for Python](https://aws.amazon.com/sdk-for-python/) (`Boto3`)). 
 
@@ -48,9 +48,9 @@ Go developers can use the [AWS Go SDK (v2)](https://aws.github.io/aws-sdk-go-v2/
 
 In the next section, let's take a look at how you can actually do this. To avoid repetition, I will provide a high-level walkthrough of the code with links to the respective implementation/code in the GitHub repo for this article.
 
-## Using AWS Go SDK for SageMaker - code walkthrough
+## Using AWS Go SDK for Amazon SageMaker - Code Walkthrough
 
-### Model and endpoint deployment
+### Model and Endpoint Deployment
 
 > Refer to the code here TODO link
 
@@ -88,7 +88,7 @@ Ok, you have sufficient background now! Let's see it in action.
 
 2. [Follow these instruction](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html#sagemaker-roles-create-execution-role) to create a SageMaker execution IAM role with the IAM managed policy, `AmazonSageMakerFullAccess`, attached.
 
-## Deploy the SageMaker endpoint
+## Deploy the Amazon SageMaker Endpoint
 
 Clone the GitHub repository and change to the required directory.
 
@@ -121,7 +121,7 @@ You can verify it by navigating to the SageMaker console under **Inference > End
 
 > It should be in the **Creating** status - move to the next step when the status transitions to **InService**.
 
-## Let's take the Foundation model for a spin!
+## Let’s Take the Foundation Model for a Spin!
 
 Change to the right directory:
 
@@ -207,7 +207,7 @@ Here is a snapshot of how my conversation went - yours might be different! As al
 
 ![Chat application](images/chat.jpg)
 
-## Clean up
+## Clean Up
 
 Don't forget to delete the SageMaker components that you created.
 
@@ -215,7 +215,7 @@ Don't forget to delete the SageMaker components that you created.
 - To delete the endpoint configuration, navigate to the SageMaker console under **Inference > Endpoint configuration**, select the endpoint configuration and choose **Delete** from the **Actions** menu.
 - To delete the model, navigate to the SageMaker console under **Inference > Models**, select the model and choose **Delete** from the **Actions** menu.
 
-## Closing thoughts
+## Closing Thoughts
 
 I hope this proves useful for Go developers as a starting point into how to use Foundation models on SageMaker to power GenAI Go applications.
 
