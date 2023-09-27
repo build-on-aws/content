@@ -23,7 +23,7 @@ date: 2023-09-30
 
 Monitoring containerized applications requires precision and efficiency. Amazon CloudWatch Container Insights is an essential tool that enables this monitoring, handling the complexities of collecting and summarizing metrics from your applications. These metrics are especially critical to the smooth operation of containerized microservices running on Kubernetes, like with Amazon EKS. Critical metrics you need to collect and monitor include utilization for resources such as CPU, memory, disk, and network. Container Insights also provides diagnostic information, such as container restart failures, to help you isolate issues and resolve them quickly. This tutorial focuses on the integration of CloudWatch Container Insights within an Amazon EKS cluster, deploying container applications, and monitoring the performance of the application with Container Insights. Picture a complex system that needs to manage multiple metrics, or a microservices architecture that requires meticulous performance tracking. With Amazon CloudWatch Container Insights, the complexities of managing container metrics are drastically reduced. This fully integrated monitoring solution allows you the time to focus on enhancing your application's core functionalities. As the performance metrics of your containers change, Container Insights offers real-time data, enabling you to maintain consistent application performance through informed decisions.
 
-Building on the Amazon EKS cluster from part 1 of our series, this tutorial dives into setting up Amazon CloudWatch Container Insights. Included in the cluster configuration for the previous tutorial is the [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) IAM policy attached to the IAM Role for Service Account (IRSA) and the [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](https://community.aws/tutorials/eks-cluster-high-traffic). Alternatively, to setup an existing cluster with the components required for this tutorial, use the instructions in [Verify prerequisites](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html) in EKS official documentation.
+Building on the Amazon EKS cluster from part 1 of our series, this tutorial dives into setting up Amazon CloudWatch Container Insights. Included in the cluster configuration for the previous tutorial is the [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) IAM policy attached to the IAM Role for Service Account (IRSA) and the [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](https://community.aws/tutorials/eks-cluster-high-traffic). Alternatively, to set up an existing cluster with the components required for this tutorial, use the instructions in [the _verify prerequisites_ section](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html) of EKS official documentation.
 
 In this tutorial, you will configure your Amazon EKS cluster, deploy containerized applications, and monitor the application's performance using Container Insights. Container Insights can handle lightweight applications like microservices as well as more complex systems like databases or user authentication systems, providing seamless monitoring.
 
@@ -47,15 +47,13 @@ Before you begin this tutorial, you need to:
 * Install the latest version of [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl). To check your version, run: `kubectl version --short`.
 * Install the latest version of [eksctl](https://eksctl.io/introduction/#installation). To check your version, run: `eksctl info`.
 
-## Overview
 
-The tutorial focuses on configuring Container Insights on Amazon EKS, deploying a container application in the cluster, and monitoring the application's performance using Container Insights.
 
 ## Step 1: Set up Container Insights on Amazon EKS
 
 For CloudWatch Container Insights to collect, aggregate, and summarize metrics and logs from your containerized applications and microservices on Amazon Elastic Kubernetes Service (Amazon EKS), some setup steps need to be performed. Container Insights supports both Amazon EKS EC2 and [Fargate](https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html). There are a few ways you can set up Container Insights on an Amazon EKS cluster: using the CloudWatch agent, a “quick start” setup, or through a manual setup approach. Below, you will find the steps required for the “quick start” method.
 
-### Quick Start Set Up
+### Quick Start Setup
 
 First, set and configure the following environment variables, ensuring consistency for `ClusterName` and `RegionName`. In the following example, `my-cluster` is the name of your Amazon EKS cluster, and `us-east-2` is the region where the logs are published. You should replace these values with your own values. It's advisable to specify the same region where your cluster is located to minimize AWS outbound data transfer costs. Additionally, `FluentBitHttpPort` is given a value of '2020' because this port is commonly used for monitoring purposes and allows for integration with existing tools, and `FluentBitReadFromHead` is given a value of 'Off' to ensure that the logs are read from the end, not the beginning, which can be essential for managing large log files and optimizing performance.
 
@@ -292,19 +290,18 @@ PodName: quickstart-nginx-deployment-7cd757dc7b-fv592 NodeName: ip-192-168-177-1
 PodName: quickstart-nginx-deployment-7cd757dc7b-9fss6 NodeName: ip-192-168-119-7.us-east-2.compute.internal podIP: 192.168.112.25
 ```
 
-
 ## Step 3: Use [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) Query to search and analyze container logs
 
-You can use [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) Query to interactively search and analyze the container logs of the application in Amazon CloudWatch Logs. Fluent Bit send logs from your containers in the cluster to CloudWatch Logs. In the Step 1 above, we’ve set up Fluent Bit as a DaemonSet to send logs to CloudWatch Logs. Fluent Bit creates the log group below if it don't already exist:
+You can use [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) Query to interactively search and analyze the container logs of the application in Amazon CloudWatch Logs. Fluent Bit sends logs from your containers in the cluster to CloudWatch Logs. In Step 1 above, we’ve set up Fluent Bit as a DaemonSet to send logs to CloudWatch Logs. Fluent Bit creates the log group below if it doesn't already exist:
 
 `/aws/containerinsights/Cluster_Name/application` which contains all log files in `/var/log/containers` on each worker node in the cluster.
 
-### To run a CloudWatch Logs Insights sample query:
+### To Run a CloudWatch Logs Insights Sample Query:
 
 * Open the CloudWatch console.
 * In the navigation pane, choose **Logs**, and then choose **Log groups**.
 * Click the log group `/aws/containerinsights/CLUSTER_NAME/application`. Where CLUSTER_NAME is the actual name of your EKS cluster.
-* Under the log details (top-right), click **View in Logs Insights** 
+* Under the log details (top-right), click **View in Logs Insights**.
 * Delete the default query in the CloudWatch Log Insight Query Editor. Then, enter the following command and select Run query:
 
 ```bash
@@ -313,12 +310,12 @@ fields @timestamp, kubernetes.pod_name as PodName, kubernetes.host as WorkerNode
 | sort @timestamp desc
 | limit 200
 ```
+
 * Use the time interval selector to select a time period that you want to query. For example:
 
 ![](./images/Container_Insight_Query.png)
 
-
-## Step 4: Monitor performance of the application with Container Insights
+## Step 4: Monitor Performance of the Application with Container Insights
 
 Monitoring the performance of your containerized application is essential for maintaining optimal functionality, identifying potential issues, and understanding the behavior of the system. In this step, you'll leverage AWS CloudWatch's Container Insights to gain detailed visibility into your container's performance.
 
@@ -334,12 +331,11 @@ In this section, you will learn how to access the Container Insights Dashboard M
 
 ![](./images/Container_Insights.png)
 
-### View additional[ Amazon EKS and Kubernetes Container Insights metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-metrics-EKS.html)
+### View Additional [Amazon EKS and Kubernetes Container Insights Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-metrics-EKS.html)
 
-In this section, you will explore how to access a broader set of metrics specific to Amazon EKS and Kubernetes within AWS CloudWatch. These additional metrics like pod_cpu_utilization_over_pod_limit, provide deeper insights into the performance and behavior of your containerized applications and the underlying infrastructure. Whether you are looking to analyze CPU utilization, Memory usage, or Network metrics, this process allows you to customize your view and focus on the aspects most relevant to your needs.
+In this section, you will explore how to access a broader set of metrics specific to Amazon EKS and Kubernetes within AWS CloudWatch. These additional metrics, like pod_cpu_utilization_over_pod_limit, provide deeper insights into the performance and behavior of your containerized applications and the underlying infrastructure. Whether you are looking to analyze CPU utilization, Memory usage, or Network metrics, this process allows you to customize your view and focus on the aspects most relevant to your needs.
 
-
-#### Let’s explore an application exceeding its resource limit
+#### Let’s Explore an Application Exceeding Its Resource Limit
 
 1. Create a Kubernetes manifest called `geo-api.yaml` with the content below to deploy a simple backend application called **geo-api** with the following command:
 
@@ -439,10 +435,10 @@ The output shows that the Container was killed because it is out of memory (OOM)
     name: geo-api
 ```
 
-5. Let’s view the Container Insights metrics of this pod
+5. Let’s view the Container Insights metrics of this pod:
     1. Open the CloudWatch console at https://console.aws.amazon.com/cloudwatch/.
     2. In the navigation pane, choose **Metrics**, and then choose **All metrics**.
-    3. Select the **ContainerInsights** metric namespace. Select the **ClusterName**, **Namespace**, and **PodName**, in the search bar, copy and paste **PodName="geo-api**" 
+    3. Select the **ContainerInsights** metric namespace. Select the **ClusterName**, **Namespace**, and **PodName**, in the search bar, copy and paste **PodName="geo-api**.
     4. You can view the percentage of CPU units being used by the pod relative to the pod limit and the percentage of memory that is being used by pods relative to the pod limit by selecting the metrics below:
         * `pod_cpu_utilization_over_pod_limit`
         * `pod_memory_utilization_over_pod_limit`
@@ -451,10 +447,9 @@ The output shows that the Container was killed because it is out of memory (OOM)
 
 The graph shows that the container in the pod has completely utilized its CPU and memory limit and you will need to specify enough resources to prevent the container in the pod from being terminated.
 
-
 ## Clean Up
 
-To avoid incurring future charges, you should delete the resources created during this tutorial. You can delete the container application and the also delete the CloudWatch agent and Fluent bit for Container Insights with the following command. 
+To avoid incurring future charges, you should delete the resources created during this tutorial. You can delete the container application and also delete the CloudWatch agent and Fluent bit for Container Insights with the following command:
 
 ```bash
 # Delete workloads
