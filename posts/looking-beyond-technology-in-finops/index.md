@@ -15,7 +15,7 @@ date: 2023-09-23
 | ToC |
 |-----|
 
-## Looking Beyond The Technology in FinOps - How organisations need to address the People Side
+## Introduction
 
 FinOps, or Cloud Financial Management, has grown significantly over the past few years, with more and more organisations prioritising it to reap critical benefits, mainly focusing on saving money. However, they need to include additional benefits of FinOps, including accountability, visibility and a proper understanding of their cloud spend. To meet demand or to focus on quick wins early and fast ROI, organisations have steered towards the technology or tooling side first without adopting the people or process element. Not focusing on culture can cause long-term problems and hinder the long-term success of FinOps.
 
