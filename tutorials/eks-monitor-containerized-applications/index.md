@@ -21,7 +21,7 @@ additionalAuthors:
 date: 2023-09-30
 ---
 
-Monitoring containerized applications requires precision and efficiency. Amazon CloudWatch Container Insights is an essential tool that enables this monitoring, handling the complexities of collecting and summarizing metrics from your applications. These metrics are especially critical to the smooth operation of containerized microservices running on Kubernetes, like with Amazon EKS. Critical metrics you need to collect and monitor include utilization for resources such as CPU, memory, disk, and network. Container Insights also provides diagnostic information, such as container restart failures, to help you isolate issues and resolve them quickly. This tutorial focuses on the integration of CloudWatch Container Insights within an Amazon EKS cluster, deploying container applications, and monitoring the performance of the application with Container Insights. Picture a complex system that needs to manage multiple metrics, or a microservices architecture that requires meticulous performance tracking. With Amazon CloudWatch Container Insights, the complexities of managing container metrics are drastically reduced. This fully integrated monitoring solution allows you the time to focus on enhancing your application's core functionalities. As the performance metrics of your containers change, Container Insights offers real-time data, enabling you to maintain consistent application performance through informed decisions.
+Monitoring containerized applications requires precision and efficiency. One way to handle the complexities of collecting and summarizing metrics from your applications is to use Amazon CloudWatch Container Insights. As the performance metrics of your containers change, Container Insights offers real-time data, enabling you to maintain consistent application performance through informed decisions.
 
 Building on the Amazon EKS cluster from part 1 of our series, this tutorial dives into setting up Amazon CloudWatch Container Insights. Included in the cluster configuration for the previous tutorial is the [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) IAM policy attached to the IAM Role for Service Account (IRSA) and the [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](https://community.aws/tutorials/eks-cluster-high-traffic). Alternatively, to set up an existing cluster with the components required for this tutorial, use the instructions in [the _verify prerequisites_ section](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html) of EKS official documentation.
 
@@ -313,7 +313,7 @@ fields @timestamp, kubernetes.pod_name as PodName, kubernetes.host as WorkerNode
 
 * Use the time interval selector to select a time period that you want to query. For example:
 
-![](./images/Container_Insight_Query.png)
+![Logs Insights Query](./images/Container_Insight_Query.png)
 
 ## Step 4: Monitor Performance of the Application with Container Insights
 
@@ -329,7 +329,7 @@ In this section, you will learn how to access the Container Insights Dashboard M
 4. In the “EKS Clusters” dropdown field, select the name of your cluster.
 5. Use the additional dropdown menus to filter resources, such as “EKS Clusters” and “EKS Pods.” For example:
 
-![](./images/Container_Insights.png)
+![Container Insights Dashboard Metrics](./images/Container_Insights.png)
 
 ### View Additional [Amazon EKS and Kubernetes Container Insights Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-metrics-EKS.html)
 
@@ -438,12 +438,12 @@ The output shows that the Container was killed because it is out of memory (OOM)
 5. Let’s view the Container Insights metrics of this pod:
     1. Open the CloudWatch console at https://console.aws.amazon.com/cloudwatch/.
     2. In the navigation pane, choose **Metrics**, and then choose **All metrics**.
-    3. Select the **ContainerInsights** metric namespace. Select the **ClusterName**, **Namespace**, and **PodName**, in the search bar, copy and paste **PodName="geo-api**.
+    3. Select the **ContainerInsights** metric namespace. Select the **ClusterName**, **Namespace**, and **PodName**, in the search bar, copy and paste **PodName="geo-api"**.
     4. You can view the percentage of CPU units being used by the pod relative to the pod limit and the percentage of memory that is being used by pods relative to the pod limit by selecting the metrics below:
         * `pod_cpu_utilization_over_pod_limit`
         * `pod_memory_utilization_over_pod_limit`
 
-![](./images/resource_monitoring.png)
+![Container Insights metrics](./images/resource_monitoring.png)
 
 The graph shows that the container in the pod has completely utilized its CPU and memory limit and you will need to specify enough resources to prevent the container in the pod from being terminated.
 
@@ -463,4 +463,6 @@ kubectl delete -f cwagent-fluent-bit-quickstart.yaml
 
 ## Conclusion
 
-By following this tutorial, you've successfully set up CloudWatch agent and Fluent Bit for Container Insights to monitor  sample containerized workloads in an Amazon EKS cluster. With these instructions, you'll have a robust monitoring and logging solution to help you monitor the performance of application deployments in the cluster.
+By following this tutorial, you've successfully set up CloudWatch agent and Fluent Bit for Container Insights to monitor  sample containerized workloads in an Amazon EKS cluster. With these instructions, you'll have a robust monitoring and logging solution to help you monitor the performance of application deployments in the cluster. If you want to explore more tutorials, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials).
+
+
