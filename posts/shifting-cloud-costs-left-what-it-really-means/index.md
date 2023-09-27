@@ -5,6 +5,10 @@ tags:
   - finops
   - cost-optimization
   - cost-control-automation
+waves:
+  - cost
+spaces:
+  - cost-optimization
 authorGithubAlias: hassankhosseini
 authorName: Hassan Khajeh-Hosseini
 githubUserLabel: community

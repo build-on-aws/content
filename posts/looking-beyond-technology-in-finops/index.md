@@ -6,6 +6,10 @@ tags:
     - finops-culture
     - finops
     - finops-tool-vs-culture
+waves:
+  - cost
+spaces:
+  - cost-optimization
 authorGithubAlias: YoungDevOps
 authorName: Ethan Sumner
 githubUserLabel: community

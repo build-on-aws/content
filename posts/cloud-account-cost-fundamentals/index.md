@@ -8,6 +8,10 @@ tags:
     - best-practices
     - foundational
     - aws
+waves:
+  - cost
+spaces:
+  - cost-optimization
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-09-27
