@@ -2,12 +2,12 @@
 title: "AWS Cloud Account Fundamentals: Five Essential Best Practices for Managing Cloud Cost"
 description: "Explore AWS Account setup fundamentals and best practices in one comprehensive blog! Discover key strategies for cost management, and  security, and lay a solid foundation for your cloud journey from the get-go!"
 tags:
-    - foundational
-    - aws
     - cost-optimization
     - cloud
     - basics
     - best-practices
+    - foundational
+    - aws
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-09-27
@@ -44,6 +44,8 @@ Before you begin creating the account consider following scenarios:
 
 Choosing the right email address is important. AWS sends important information about your account and bills to this email address. If you set the additional alerts mentioned in this blog, you can be always aware of your cloud spend.
 
+> If you are thinking of setting up multiple AWS accounts using [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq), you can use what is known as "plus addressing" or "subaddressing". This is where you add in a `+` and another string to your email, e.g. `my-email+dev-account@example.com`. This has the benefit of allowing multiple "unique" email addresses for setting up AWS account, and centralizing your mails from AWS to a single mail box. Any mail with the `+something` will deliver to the same mail box as the one without it. For a quick overview on setting up and managing multiple AWS accounts with Organizations, have a look at this post on hot to [Manage Security and Costs Across the Enterprise With AWS Organizations](/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations).
+
 ### 1.2 Do you need single or multiple AWS Accounts?
 
 Typically, a single account suffice the individual needs.
@@ -52,13 +54,13 @@ However, there are many reasons why businesses would prefer multiple AWS account
 
 [AWS Service Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) (formerly known as limits) are applied separately for each AWS Account, so you can always ensure your Production environment has the required quotas to scale. [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq), which is a free AWS service, can help you manage multiple accounts in your organizations. While you can get separate account level bills, you can still get all your [bills consolidated](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to single payer, and combine usage across all accounts to share the volume pricing discounts, Savings plans and Reserved Instance discounts. Your multi-account strategy will help you set a good foundation on how you control cost.
 
-These reasons for multiple accounts are detailed in the AWS documentation - [do you need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Why should I set up a multi-account AWS environment?](https://aws.amazon.com/organizations/getting-started/best-practices/).
+These reasons for multiple accounts are detailed in the AWS documentation - [do you need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Why should I set up a multi-account AWS environment?](https://aws.amazon.com/organizations/getting-started/best-practices/?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-If you do not wish to create separate accounts, you should at the very least, ensure that you have a tagging strategy and some form of separation with VPCs and/or Regions:
+If you do not wish to create separate accounts, you should, at the very least, ensure that you have a tagging strategy and some form of separation with VPCs and/or Regions:
 
 - Tagging strategy can help you gain visibility and management of cost and usage. It is detailed out in the AWS documentation - [Tags for cost allocation and financial management](https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tags-for-cost-allocation-and-financial-management.html).
 
-- You can create separate Amazon Virtual Private Cloud (VPC) for your different environments. This will help you isolate your workloads in the same account. **Do NOT use the default VPC or the default security group inside a VPC for Production workloads.**  I have had a customer where a developer took down an entire e-commerce website (loss of revenue) because they changed a security group rule in a default security group, thinking they are doing it for the dev/test environment. So, **no sharing, isolate and add layers to your security.**
+- You can create separate Amazon Virtual Private Cloud (VPC) for your different environments. This will help you isolate your workloads in the same account. **Do NOT use the default VPC or the default security group inside a VPC for Production workloads.**  I have had a customer where a developer took down an entire e-commerce website (loss of revenue) because they changed a security group rule in a default security group, thinking they are doing it for the dev/test environment. So, **no sharing, isolate, and add layers to your security.**
 
 ## 2. Choosing AWS Regions
 
@@ -75,14 +77,14 @@ Choosing which AWS Region to use depends on multiple factors:
 
   ![CloudPing info latency](images/cloudping-info-latency.png)
 
-  There are many more resources in the [AWS Global Infrastructure](https://aws.amazon.com/about-aws/global-infrastructure?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) like AWS Local Zones, Edge Locations etc, that can help reduce latency which we will not be covering in this post.
+  There are many more resources in the [AWS Global Infrastructure](https://aws.amazon.com/about-aws/global-infrastructure?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) like [AWS Local Zones](https://docs.aws.amazon.com/local-zones/latest/ug/getting-started.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq), [Edge Locations](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) etc, that can help reduce latency which we will not be covering in this post.
 
 - **Cost:**
-  It is important to remember that each AWS Region is completely independent, and so is their pricing. Each service has pricing listed based on the Regions. Whenever you provision a resource, for example, Amazon EC2 instance you will be charged for that instance type based on its region.  
+  It is important to remember that each AWS Region is completely independent, and so is their pricing. Each service has pricing listed based on the Regions. Whenever you provision a resource, for example, [Amazon EC2 instance](https://aws.amazon.com/ec2/pricing/on-demand/?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) you will be charged for that instance type based on its region.  
   
   Not all components of your application require high latency, for example, a development environment may not require high latency and can be hosted in a different cost-effective region while the production environment is hosted in low-latency region.
   
-  Anecdotally, the US-EAST-1 is the most cost-effective region and can be used to lower your cost. I suggest using the [AWS Pricing Calculator](https://calculator.aws?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to cost estimate your needs.
+  Anecdotally, the `US-EAST-1` is the most cost-effective region and can be used to lower your cost. I suggest using the [AWS Pricing Calculator](https://calculator.aws?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to cost estimate your needs.
   
   In addition to that, if your workload is stateless, fault-tolerant, or flexible such as containerized workloads, CI/CD, web servers, test & development workloads, then you can use [Spot instances](https://aws.amazon.com/ec2/spot/getting-started?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to further reduce your cost. To compare the current Spot prices against standard On-Demand rates per Region, visit the [Spot Instance Advisor](https://aws.amazon.com/ec2/spot/instance-advisor?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
@@ -132,7 +134,6 @@ Check out [AWS Free Tier](https://aws.amazon.com/free?sc_channel=el&sc_campaign=
 
     ![billing alert preferences update](images/billing-alert-preferences-update.png)
 
-
 2. For additional tracking, you can create a new budget in the [AWS Console for AWS Budgets](https://us-east-1.console.aws.amazon.com/billing/home?region=us-east-1#/budgets&sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to track your usage to **100 percent** of the Free Tier limit by setting a `zero spend budget` using the simplified template as shown in the image below:
   ![Budget in console](images/create-budget-aws-console.png)
 
@@ -150,6 +151,8 @@ You can use the [AWS Pricing Calculator](https://calculator.aws?sc_channel=el&sc
 ![Pricing Calculator](images/pricing-calculator.png)
 
 There are third-party tools like [Cloudcraft](https://www.cloudcraft.co/) that can help you generate estimates based on your architecture diagram. I have covered this in [my YouTube video](https://youtu.be/NZnr1vSJTs0?t=650).
+
+https://youtu.be/NZnr1vSJTs0?t=650
 
 ## 4. Security is important
 
