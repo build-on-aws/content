@@ -2,26 +2,27 @@
 title: "Securing Wordpress on Lightsail: Lock Down Your Server"
 description: "This how-to demonstrates how to secure a Lightsail instance running Wordpress. It covers managing the AWS account, steps to secure a Lightsail instance, and how to automate updates and maintenance."
 tags:
-    - Lightsail
-    - Wordpress
+    - lightsail
+    - dordpress
     - security
     - maintenance
+    - aws
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-09-25
+date: 2023-09-27
 ---
 
-Deploying a Wordpress on AWS Lightsail is a fast and simple way to build a Wordpress site. However, our work is not done and we can harden the instance from malicious code and other attacks. AWS implements a shared responsibility model. Simply put, AWS maintains and secures the infrastructue, and as builders, we maintain and secure our applications and the operating systems.  If you’ve been part of a community garden, you’ll be familiar with the shared responsibility model. The owner of the garden provides the soil, plant beds, water for plants, and fencing to protect the garden. As a member you chose the plants, how they are planted, treat for harmful insects and diseases, and sufficiently water and fertilize the plants. Extending the analogy to the cloud, like the garden owner, AWS provides the infrastructure for applications and services to secure the infrastructure. As cloud builders, like a gardener, we’re responsible for maintaining our applications and protecting from external attacks.
+Deploying a Wordpress on AWS Lightsail is a fast and simple way to build a Wordpress site. However, our work is not done and we can harden the instance from malicious code and other attacks. AWS implements a shared responsibility model. Simply put, AWS maintains and secures the infrastructure, and as builders, we maintain and secure our applications and the operating systems.  If you’ve been part of a community garden, you’ll be familiar with the shared responsibility model. The owner of the garden provides the soil, plant beds, water for plants, and fencing to protect the garden. As a member you chose the plants, how they are planted, treat for harmful insects and diseases, and sufficiently water and fertilize the plants. Extending the analogy to the cloud, like the garden owner, AWS provides the infrastructure for applications and services to secure the infrastructure. As cloud builders, like a gardener, we’re responsible for maintaining our applications and protecting from external attacks.
 
 ![The AWS Shared Responsibility Model](./images/shared-responsibility.png)
 
-In this article, we’ll tackle securing the Lightsail instance running Wordpress by securing your account, the Lightsail instance, and automating maintenance to keep your instances up to date. 
+In this article, we’ll tackle securing the Lightsail instance running Wordpress by securing your account, the Lightsail instance, and automating maintenance to keep your instances up to date.
 
 ## Secure Your AWS Account
 
 When you first create an AWS account, you begin with a single sign-in identity that gives you access to all AWS services and resources in your account. This identity is called the AWS account root user. You access it by signing in with the email address and password used to create the account. AWS strongly recommends against using the root user for your everyday tasks, even administrative tasks. Instead, adhere to the best practice of only using the root user to create your first Identity Access Management (IAM) user (see below), and securely lock away the root user credentials.
 
-You can enable an extra layer of protection with [AWS multi-factor authentification (MFA)](https://aws.amazon.com/iam/features/mfa/), which requires a second authentication factor in addition to user name and password sign-in credentials. You can enable MFA at the AWS account level as well as for root and IAM users that you created in your account.
+You can enable an extra layer of protection with [AWS multi-factor authentication (MFA)](https://aws.amazon.com/iam/features/mfa/?sc_channel=el&sc_campaign=post&sc_content=securing-wordpress-on-lightsail-lock-down-your-server&sc_geo=mult&sc_country=mult&sc_outcome=acq), which requires a second authentication factor in addition to user name and password sign-in credentials. You can enable MFA at the AWS account level as well as for root and IAM users that you created in your account.
 
 If you haven’t created an IAM user for administering your account follow these instructions.
 
@@ -59,9 +60,9 @@ In the **Create user group** menu, we’ll name the group `Administrators` and s
 
 Next, we’ll attach the policy that allows members of the Administrators group to manage the AWS account. We can find the policy by filtering through the list of policies. First we’ll select **Type**.
 
-![Add an AWS mmanaged policy to the administrator IAM account](./images/iam-9.png)
+![Add an AWS managed policy to the administrator IAM account](./images/iam-9.png)
 
-Then we’lll select **Type: AWS managed - job function**.
+Then we’ll select **Type: AWS managed - job function**.
 
 ![Select AWS Managed - job function policy](./images/iam-10.png)
 
@@ -79,7 +80,7 @@ Adding rules to allow outside traffic can open your instances to security vulner
 
 ![Remove SSH access from a Lightsail instance](./images/firewall.png)
 
-A better alternative to removing rules is to restrict connections to a specific IP address. The example below demonstrates restricting SSH access to the IP address 10.10.10.35. 
+A better alternative to removing rules is to restrict connections to a specific IP address. The example below demonstrates restricting SSH access to the IP address `10.10.10.35`.
 
 ![Restrict access to an IP address](./images/firewall-2.png)
 
@@ -87,7 +88,7 @@ Controlling access to the server is the first step towards securing the Lightsai
 
 ## Encrypt Traffic to AWS Lightsail
 
-Modern browsers expect websites to use HTTPS to secure traffic through encryption. Your Wordpress site should use HTTPS by default, especially if it's an e-commerce site or takes payments in some form. AWS Lightsail supports HTTPS if Wordpress is behind a [load balancer](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/understanding-lightsail-load-balancers) or a [distribution](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions) which is a Lightsail Content Distribution Networks (CDN). 
+Modern browsers expect websites to use HTTPS to secure traffic through encryption. Your Wordpress site should use HTTPS by default, especially if it's an e-commerce site or takes payments in some form. AWS Lightsail supports HTTPS if Wordpress is behind a [load balancer](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/understanding-lightsail-load-balancers?sc_channel=el&sc_campaign=post&sc_content=securing-wordpress-on-lightsail-lock-down-your-server&sc_geo=mult&sc_country=mult&sc_outcome=acq) or a [distribution](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions?sc_channel=el&sc_campaign=post&sc_content=securing-wordpress-on-lightsail-lock-down-your-server&sc_geo=mult&sc_country=mult&sc_outcome=acq) which is a Lightsail Content Distribution Networks (CDN).
 
 In this example, we’ll attach a load balancer to a Wordpress instance. In the Lightsail console, choose **Networking** in the menu on the left.
 
@@ -107,26 +108,26 @@ We’ll name the load balancer and we can optionally add key-only tags and key-v
 
 After creating the load balancer, we will need it to attach it to our Lightsail Wordpress instance. In the **Target instances** section, select the Wordpress instance from the drop down menu item. Choose **Attach** to connect the load balancer to the Wordpress instance.
 
-![Attach the load balancer to the Lightsai instance](./images/load-balancer-5.png)
+![Attach the load balancer to the Lightsail instance](./images/load-balancer-5.png)
 
-The next step is to create a [SSL/TLS (Secure Sockets Layer/Transport Layer Security) certificate](https://aws.amazon.com/what-is/ssl-certificate/) which allows the Wordpress server to create an encrypted connection between a browser and the site. This allows users to sign into a site without exposing their credentials and conduct transactions, such as payments, securely. Additionally, TLS certificates can verify ownership of the website, prevent attackers from creating a fake version of the site, and build trust with website visitors.
+The next step is to create a [SSL/TLS (Secure Sockets Layer/Transport Layer Security) certificate](https://aws.amazon.com/what-is/ssl-certificate/?sc_channel=el&sc_campaign=post&sc_content=securing-wordpress-on-lightsail-lock-down-your-server&sc_geo=mult&sc_country=mult&sc_outcome=acq) which allows the Wordpress server to create an encrypted connection between a browser and the site. This allows users to sign into a site without exposing their credentials and conduct transactions, such as payments, securely. Additionally, TLS certificates can verify ownership of the website, prevent attackers from creating a fake version of the site, and build trust with website visitors.
 
 SSL/TLS certificates enable HTTPS encryption which ensures the traffic between the web server and the client’s browser remain confidential because these entities are the only two that can decrypt the traffic. Certificates are digital identity cards for securing network communications, and establishing the identity of websites and resources.
 
-We can create and use a Lightsail certificate with these five steps: 
+We can create and use a Lightsail certificate with these five steps:
 
 1. Create your Lightsail resource that can use a Lightsail certificate, such as a load balancer, CDN distribution, or container service.
-2. Create a certificate for your domain using Lightsail. If you are using the Bitnami WordPress blueprint, you can run the bncert-tool by executing the command: 
+2. Create a certificate for your domain using Lightsail. If you are using the Bitnami WordPress blueprint, you can run the `bncert-tool` by executing the command:
 
-```bash
-sudo /opt/bitnami/bncert-tool 
-```
+    ```bash
+    sudo /opt/bitnami/bncert-tool 
+    ```
 
 3. Validate the certificate by adding a canonical name (CNAME) record to the DNS of your domain.
 4. Attach the validated certificate to your Lightsail resource.
 5. Modify the DNS of your domain to route traffic to your Lightsail resource.
 
-After the certificate is attached to the resource, the traffic that is routed to that resource through the domain is encrypted using HTTPS. To create a certificate for our Wordpress instance, follow the [detailed tutorial for creating a Let’s Encrypt certificate](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-using-lets-encrypt-certificates-with-wordpress#install-certbot-on-your-instance-wordpress) for the server.
+After the certificate is attached to the resource, the traffic that is routed to that resource through the domain is encrypted using HTTPS. To create a certificate for our Wordpress instance, follow the [detailed tutorial for creating a Let’s Encrypt certificate](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-using-lets-encrypt-certificates-with-wordpress#install-certbot-on-your-instance-wordpress?sc_channel=el&sc_campaign=post&sc_content=securing-wordpress-on-lightsail-lock-down-your-server&sc_geo=mult&sc_country=mult&sc_outcome=acq) for the server.
 
 ## Automate Lightsail Server Maintenance
 
@@ -150,7 +151,7 @@ Optionally, if you want to be notified of which packages were upgraded or if the
 Unattended-Upgrade::Mail "admin@example.com";
 ```
 
-Note that mailx must be installed. To check if mailx is installed type the following command.
+Note that `mailx` must be installed. To check if `mailx` is installed type the following command.
 
 ```bash
 which mailx
@@ -174,21 +175,22 @@ Unattended-Upgrade::MailReport "on-change";
 
 The notification email will be similar to this example:
 
+```text
+Subject: Unattended upgrades on hostname
+ 
+Unattended upgrades were installed on hostname:
+ 
+The following packages were automatically installed:
 
-> Subject: Unattended upgrades on hostname
-> 
-> Unattended upgrades were installed on hostname:
-> 
-> The following packages were automatically installed:
-> 
-> python3-x2gobroker 0.0.4.3-1 python3-x3dh 0.5.8-2 python3-xapian-haystack 2.1.0-6 python3-xapian 1.4.18-1 python3-xapp 2.0.2-2 python3-xarray 0.16.2-2 python3-xattr 0.9.7-1+b1
-> python3-xcbgen 1.14.1-1 python3-xcffib 0.8.1-0.8 python3-xdg 0.27-2 python3-xdmf 3.0+git20190531-7 python3-xdo 0.5-1 python3-xeddsa 0.4.6-2+b1 python3-xgboost 1.2.1-1 python3-xhtml2pdf 0.2.4-1 python3-xkcd 2.4.2-3 python3-xlib 0.29-1 python3-xlrd 1.2.0-2 python3-xlsxwriter 1.1.2-0.2 python3-xlwt 1.3.0-3 python3-xmlschema 1.4.2-1 python3-xmltodict 0.12.0-2 python3-xmmsclient 0.8+dfsg-21 python3-xmodem 0.4.6+dfsg-2 python3-xopen 1.1.0-1 python3-xrayutilities-dbg 1.7.1-1 python3-xrayutilities 1.7.1-1 python3-xrootd 5.0.3-4 python3-xstatic-angular-bootstrap 2.2.0.0-4 python3-xstatic-angular-cookies 1.2.24.1-5 python3-xstatic-angular-fileupload 12.0.4.0+dfsg1-3 python3-xstatic-angular-gettext 2.3.8.0-4 python3-xstatic-angular-lrdragndrop 1.0.2.2-3
-> 
-> The upgrades were installed automatically and no interaction was required.
-> 
-> Please check for any potential issues with the upgraded packages and contact the system administrator if any problems are found.
-> 
-> Unattended Upgrades
+python3-x2gobroker 0.0.4.3-1 python3-x3dh 0.5.8-2 python3-xapian-haystack 2.1.0-6 python3-xapian 1.4.18-1 python3-xapp 2.0.2-2 python3-xarray 0.16.2-2 python3-xattr 0.9.7-1+b1
+python3-xcbgen 1.14.1-1 python3-xcffib 0.8.1-0.8 python3-xdg 0.27-2 python3-xdmf 3.0+git20190531-7 python3-xdo 0.5-1 python3-xeddsa 0.4.6-2+b1 python3-xgboost 1.2.1-1 python3-xhtml2pdf 0.2.4-1 python3-xkcd 2.4.2-3 python3-xlib 0.29-1 python3-xlrd 1.2.0-2 python3-xlsxwriter 1.1.2-0.2 python3-xlwt 1.3.0-3 python3-xmlschema 1.4.2-1 python3-xmltodict 0.12.0-2 python3-xmmsclient 0.8+dfsg-21 python3-xmodem 0.4.6+dfsg-2 python3-xopen 1.1.0-1 python3-xrayutilities-dbg 1.7.1-1 python3-xrayutilities 1.7.1-1 python3-xrootd 5.0.3-4 python3-xstatic-angular-bootstrap 2.2.0.0-4 python3-xstatic-angular-cookies 1.2.24.1-5 python3-xstatic-angular-fileupload 12.0.4.0+dfsg1-3 python3-xstatic-angular-gettext 2.3.8.0-4 python3-xstatic-angular-lrdragndrop 1.0.2.2-3
+
+The upgrades were installed automatically and no interaction was required.
+
+Please check for any potential issues with the upgraded packages and contact the system administrator if any problems are found.
+
+Unattended Upgrades
+```
 
 Keeping previous versions of kernels can consume disk space and degrade performance. You can delete them by setting the option to `true`.
 
@@ -222,7 +224,7 @@ We can also set the time for the reboot when there is little or no traffic to th
 Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 ```
 
-Additionaly, We can configure the update frequency by editing the `20auto-upgrades` file. This file is in the same directory as the `50unattended-upgrades` file, i.e., `/etc/apt/apt.conf.d/`. The file sets the default values for updating the package lists and upgrades by setting the optio to `1` or true. We can also set the frequecny of package downloads by setting the number of days and when to clean the package cache.
+Additionally, We can configure the update frequency by editing the `20auto-upgrades` file. This file is in the same directory as the `50unattended-upgrades` file, i.e., `/etc/apt/apt.conf.d/`. The file sets the default values for updating the package lists and upgrades by setting the option to `1` or true. We can also set the frequency of package downloads by setting the number of days and when to clean the package cache.
 
 ```shell
 APT::Periodic::Update-Package-Lists "1";
@@ -281,6 +283,6 @@ We can ensure that our Lightsail Wordpress server is running securely and operat
 * encrypting traffic between browsers and the server by installing a SSL/TLS certificate
 * automating operating system and security updates, and removing unnecessary files
 
-These steps can reduce the blast radius of an attack. To learn more about Lightsail and Wordpress, check out the [Wordpress How-To Guides](These steps can reduce the blast radius of an attack. To learn more about Lightsail and Wordpress, check out the [Wordpress How-To Guides](https://aws.amazon.com/getting-started/hands-on/?getting-started-all.sort-by=item.additionalFields.content-latest-publish-date&getting-started-all.sort-order=desc&awsf.getting-started-category=*all&awsf.getting-started-content-type=*all&getting-started-all.q=wordpress&getting-started-all.q_operator=AND&awsm.page-getting-started-all=1?sc_channel=el&sc_campaign=post&sc_content=wordpressonlightsail&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body) in the Getting Started Resource Center.
+These steps can reduce the blast radius of an attack. To learn more about Lightsail and Wordpress, check out the [Wordpress How-To Guides](https://aws.amazon.com/getting-started/hands-on/?getting-started-all.sort-by=item.additionalFields.content-latest-publish-date&getting-started-all.sort-order=desc&awsf.getting-started-category=*all&awsf.getting-started-content-type=*all&getting-started-all.q=wordpress&getting-started-all.q_operator=AND&awsm.page-getting-started-all=1&sc_channel=el&sc_campaign=post&sc_content=securing-wordpress-on-lightsail-lock-down-your-server&sc_geo=mult&sc_country=mult&sc_outcome=acq) in the Getting Started Resource Center.
 
-Learn more about deploying application with Lightsail with these articles - [Deploy a Cloud Database to Scale a LAMP App](https://community.aws/tutorials/practical-cloud-guide/deploy-a-cloud-database-to-scale-lamp-app?sc_channel=el&sc_campaign=post&sc_content=wordpressonlightsail&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body) and [Deploy a Java Application on Linux](https://community.aws/tutorials/practical-cloud-guide/deploy-a-java-application-on-linux?sc_channel=el&sc_campaign=post&sc_content=wordpressonlightsail&sc_geo=mult&sc_country=global&sc_outcome=acq&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body).
+Learn more about deploying application with Lightsail with these articles - [Deploy a Cloud Database to Scale a LAMP App](https://community.aws/tutorials/practical-cloud-guide/deploy-a-cloud-database-to-scale-lamp-app?sc_channel=el&sc_campaign=post&sc_content=securing-wordpress-on-lightsail-lock-down-your-server&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Deploy a Java Application on Linux](https://community.aws/tutorials/practical-cloud-guide/deploy-a-java-application-on-linux?sc_channel=el&sc_campaign=post&sc_content=securing-wordpress-on-lightsail-lock-down-your-server&sc_geo=mult&sc_country=mult&sc_outcome=acq).
