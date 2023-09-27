@@ -24,11 +24,11 @@ Its been more than a decade since I have been working with AWS products and serv
 
 Over the years, certain patterns of best practices have emerged, strategies that make the difference between a smoothly operating AWS environment and one that is riddled with challenges. Ensuring a solid foundation in your AWS cloud account is paramount to optimize costs, enhance security, and ensure smooth operations.
 
-Today, I'll share five of those best practices for AWS cloud account fundamentals, to guide you in setting up and maintaining your AWS environment in the most effective way possible. While my focus is cost here, these practices will also help you secure your account for malicious activities. By the end of this read, you'll have insights drawn from years of experience, ensuring that your cloud journey is set on the right path from the very beginning.
+Today, I'll share five of those best practices for AWS cloud account fundamentals, to guide you in setting up and maintaining your AWS environment in the most effective way possible. While my focus is cost here, these practices will also help you secure your account from malicious activities. By the end of this blog, you'll have insights drawn from years of experience, ensuring that your cloud journey is set on the right path from the very beginning.
 
 ## 1. Understanding AWS Accounts
 
-An [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) is how you access the AWS Services. The AWS account can be created quickly by using a credit card. All the best practices listed here are to help you NOT overspend and put in guardrails.
+An [AWS Account](https://portal.aws.amazon.com/billing/signup#/start/email?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) is how you access the AWS Services. The AWS account can be created quickly by using a credit card. All the best practices listed here are to help you NOT overspend and put in the guardrails.
 
 ![AWS Account Sign up](images/aws-account-signup.png)
 
@@ -46,9 +46,13 @@ Choosing the right email address is important. AWS sends important information a
 
 ### 1.2 Do you need single or multiple AWS Accounts?
 
-There are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts. You may want control over security, and data access. Or you have different teams and business units and want to charge back to them for cloud spend. Or you want to keep your production and non-production workloads in different accounts. This can give you visibility on your development vs production spend. Your multi-account strategy will help you set a good foundation on how you control cost.
+Typically, a single account suffice the individual needs.
 
-These reasons for multiple accounts are detailed in the AWS documentation - [do you need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq). Ensure that you use AWS Organizations, which is a free AWS service, to manage multiple accounts in your organizations.
+However, there are many reasons why businesses would prefer multiple AWS accounts. You may want isolation between accounts. You may want control over security, and data access. Or you have different teams and business units and want to charge back to them for cloud spend. Or you want to keep your production and non-production workloads in different accounts. This can give you visibility on your development vs production spend. And with this strategy I have also found customers opting for [AWS Support charges](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidatedbilling-support.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) only for Production accounts.
+
+[AWS Service Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) (formerly known as limits) are applied separately for each AWS Account, so you can always ensure your Production environment has the required quotas to scale. [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq), which is a free AWS service, can help you manage multiple accounts in your organizations. While you can get separate account level bills, you can still get all your [bills consolidated](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to single payer, and combine usage across all accounts to share the volume pricing discounts, Savings plans and Reserved Instance discounts. Your multi-account strategy will help you set a good foundation on how you control cost.
+
+These reasons for multiple accounts are detailed in the AWS documentation - [do you need multiple AWS accounts](https://docs.aws.amazon.com/accounts/latest/reference/welcome-multiple-accounts.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Why should I set up a multi-account AWS environment?](https://aws.amazon.com/organizations/getting-started/best-practices/).
 
 If you do not wish to create separate accounts, you should at the very least, ensure that you have a tagging strategy and some form of separation with VPCs and/or Regions:
 
@@ -67,22 +71,22 @@ Choosing which AWS Region to use depends on multiple factors:
 - **Latency:**
   If this is an application/website to service end customers and latency is of utmost important then identify where are majority of your customers located and choose the AWS Region closest to your customers. This helps reduce Internet latency. While geographical distances matter the most, it does not always guarantee that the closest in distance means faster network latency. Sometimes it also depends on how Internet Service Providers (ISP) have laid out their network. To find out the closest AWS Region for lower internet latency, you can use third-party sites like [cloudping.info](https://www.cloudping.info/) and open source CLI tool like [awsping](https://github.com/ekalinin/awsping). They send a ping from your local browser to AWS resources in different regions.
 
-  For example, in the screenshot below you can see that from my home in Toronto, ca-central-1 i.e. Canada (Central) has the lowest latency of 11ms.
+  For example, in the screenshot below you can see that from my home in Toronto, ca-central-1 i.e. Canada (Central) has the lowest latency of ~11ms.
 
   ![CloudPing info latency](images/cloudping-info-latency.png)
 
-  There are many more resources in the global infrastructure like AWS Local Zones, Edge Locations etc, that can help reduce latency, however, we will not be covering in this post.
+  There are many more resources in the [AWS Global Infrastructure](https://aws.amazon.com/about-aws/global-infrastructure?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) like AWS Local Zones, Edge Locations etc, that can help reduce latency, however, we will not be covering them in this post.
 
 - **Cost:**
   It is important to remember that each AWS Region is completely independent, and so is their pricing. Each service has pricing listed based on the Regions. Whenever you provision a resource, example, Amazon EC2 instance you will be charged for that instance type based on its region.  
   
-  Not all components of your application require high latency, example a development environment would not require high latency and can be hosted in a different cost-effective region while the production environment is hosted in low-latency region.
+  Not all components of your application require high latency, for example, a development environment may not require high latency and can be hosted in a different cost-effective region while the production environment is hosted in low-latency region.
   
   Anecdotally, the US-EAST-1 is the most cost-effective region and can be used to lower your cost. However, I suggest using the [AWS Pricing Calculator](https://calculator.aws?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to cost estimate your needs.
   
-  In addition to that, if your workload is stateless, fault-tolerant, or flexible such as containerized workloads, CI/CD, web servers, and test & development workloads, then you can use [Spot instances](https://aws.amazon.com/ec2/spot/getting-started?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to further reduce your cost. To compare the current Spot prices against standard On-Demand rates, visit the [Spot Instance Advisor](https://aws.amazon.com/ec2/spot/instance-advisor?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+  In addition to that, if your workload is stateless, fault-tolerant, or flexible such as containerized workloads, CI/CD, web servers, test & development workloads, then you can use [Spot instances](https://aws.amazon.com/ec2/spot/getting-started?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to further reduce your cost. To compare the current Spot prices against standard On-Demand rates, visit the [Spot Instance Advisor](https://aws.amazon.com/ec2/spot/instance-advisor?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-  Note that there is a charge for data transfer between Regions. So if you are planning to host in multiple regions and have to transfer data between regions, you will have to pay additional charges. More information on Data transfer charges in this blog - [Overview of Data Transfer Costs for Common Architectures](https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/)
+  Note that there is a charge for data transfer between Regions. So, if you are planning to host in multiple regions and have to transfer data between regions, you will have to pay additional charges. More information on Data transfer charges in this blog - [Overview of Data Transfer Costs for Common Architectures](https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/)
 
 - **Compliances:**
   If your workloads contains data that is required to be bound by local regulations, then you should choose a Region that complies with the regulation. This factor overrides all other factors for region selection. So, do check out if your application has to follow a certain country's data privacy laws like GDPR.
@@ -90,7 +94,7 @@ Choosing which AWS Region to use depends on multiple factors:
 - **AWS Services:**
   Newer AWS services and features are gradually deployed to all Regions. Some AWS regions are usually the first to offer newer services, features and software releases. If it is important for you to always be upgrading or experimenting with new launches, then select these regions. You can find detailed [list of AWS Services Available by Region](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
-You can **alternatively enable or disable regions** in your account. This is helpful to lock down regions you do not regularly use. You can find considerations of this activity and follow steps mentioned in the [AWS Documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-considerations?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+You can **alternatively enable or disable regions** in your account. This is helpful to lock down regions you do not regularly use. You can find considerations of this activity and follow the steps mentioned in the [AWS Documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-considerations?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ## 3. Free Tier and Budget alerts
 
@@ -102,11 +106,11 @@ There are 3 types of offers in AWS Free Tier today:
 
 - **Free Trials:** These are short term free trials that start from the date you provision a particular service. For example, you get Amazon GuardDuty, an intelligent threat detection and continuous monitoring service, free for 30 days since its activation.
 
-- **Always free:** These offers do not expire, they are available to all customers. For example, you get 1 Million free requests per month with AWS Lambda. If you exceed beyond this, you will be charged regular rates per the Region.
+- **Always free:** These offers do not expire and they are available to all customers. For example, you get 1 Million free requests per month with AWS Lambda. If you exceed beyond this, you will be charged regular rates per the Region.
 
 - **12 months free:** When you create a new AWS account, AWS provides **some resources** in **some AWS services** free for the **first 12 months only**. Within those 12 months, if in a month you exceed the free tier limit, your credit card will be charged as per the on-demand prices.
 
-For example, **750 hours of Linux and Windows t2.micro instances** (t3.micro for the regions in which t2.micro is unavailable), **each month for one year**. If you **exceed 750 hours**, you will be charged an **On-Demand hourly rate** of $0.0116 (in the US East N. Virginia Region).
+  For example, **750 hours of Linux and Windows t2.micro instances** (t3.micro for the regions in which t2.micro is unavailable), **each month for one year**. If you **exceed 750 hours**, you will be charged an **On-Demand hourly rate** of $0.0116 (in the US East N. Virginia Region).
 
 While the displayed pricing is an hourly rate but depending on which instances you choose, you pay by the hour or second (minimum of 60 seconds) for each instance type. For more information, you can read pricing pages for each AWS service, for example, refer [Amazon EC2 On-Demand Pricing](https://aws.amazon.com/ec2/pricing/on-demand/?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
@@ -128,6 +132,7 @@ Check out [AWS Free Tier](https://aws.amazon.com/free?sc_channel=el&sc_campaign=
 
     ![billing alert preferences update](images/billing-alert-preferences-update.png)
 
+
 2. For additional tracking, you can create a new budget in the [AWS Console for AWS Budgets](https://us-east-1.console.aws.amazon.com/billing/home?region=us-east-1#/budgets&sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) to track your usage to **100 percent** of the Free Tier limit by setting a `zero spend budget` using the simplified template as shown in the image below:
   ![Budget in console](images/create-budget-aws-console.png)
 
@@ -144,21 +149,19 @@ You can use the [AWS Pricing Calculator](https://calculator.aws?sc_channel=el&sc
 
 ![Pricing Calculator](images/pricing-calculator.png)
 
-There are third-party tools like [Cloudcraft](https://www.cloudcraft.co/) that can help you generate estimates based on your architecture diagram. I have covered this in my YouTube video.
-
-https://youtu.be/NZnr1vSJTs0?t=650
+There are third-party tools like [Cloudcraft](https://www.cloudcraft.co/) that can help you generate estimates based on your architecture diagram. I have covered this in [my YouTube video](https://youtu.be/NZnr1vSJTs0?t=650).
 
 ## 4. Security is important
 
-Security and Compliance is a shared responsibility between AWS and the customer. Understanding this [shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) is important. AWS is responsible for protecting the infrastructure (hardware, software, networking, physical facilities) that runs all AWS services. The customer is responsible for configuring security on the AWS services the customer selects.
+Security and Compliance is a shared responsibility between AWS and the customer. Understanding this [shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq) is important. AWS is responsible for protecting the infrastructure (hardware, software, networking, physical facilities) that runs all AWS services. The customer is responsible for configuring security on the AWS services the customer selects. AWS provides tools that we can use to apply security controls according to our individual requirements. Whenever you are performing any activities, ask yourself how can you make it secure.
 
 ![Shared Responsibility Model for Security](images/Shared_Responsibility_Model_V2.jpg)
 
-AWS provides tools that we can use to apply security controls according to our individual requirements. Whenever you are performing any activities, ask yourself how can you make it secure.
+After you set your billing alerts, create an AWS Identity and Access Management (IAM) User.
 
-After you set your billing alerts, create an AWS Identity and Access Management (IAM) User. Even if this is your personal account and you are the only one using this account, DO NOT use the AWS root login (i.e. email id and password you used to create the account). Create an **IAM User** with **Administrative access for yourself** and use that to login to the AWS Console.
+> Even if this is your personal account and you are the only one using this account, DO NOT use the AWS root login (i.e. email id and password you used to create the account). **Create an IAM User** with **Administrative access for yourself** and use that to login to the AWS Console.
 
-These might feel like an additional step on your journey to begin using cloud, and you might want to skip it and dive straight into hands-on. However, like with any other activity on the internet, SECURITY should be your highest priority. If you do not follow these minimal best practices, you are making yourself vulnerable and it can ultimately affect your pocket.
+This might feel like an additional step on your journey to begin using cloud, and you might want to skip it and dive straight into hands-on. However, like with any other activity on the internet, SECURITY should be your highest priority. If you do not follow these minimal best practices, you are making yourself vulnerable and it can ultimately affect your pocket.
 
 ### 4.1 Why and how to secure root access
 
@@ -174,7 +177,7 @@ To secure the root user credentials:
 
 - Do NOT create an AWS account root user access key. The access key (an access key ID and secret access key) is used to make programmatic requests to AWS.
 
-### 4.2 IAM User best practices
+### 4.2 IAM User and best practices
 
 As mentioned earlier, **create an IAM User with administrative permissions**. Detailed steps on [how to set up AWS account access for an administrative user using IAM Identity Center](https://docs.aws.amazon.com/SetUp/latest/UserGuide/setup-configadminuser.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
@@ -186,7 +189,7 @@ Listing down some of the best practices to secure the IAM user credentials:
 
 - Only provide limited access using IAM Users. Not everyone needs Administrative access. You can create IAM Groups like Administrators, Developers, etc. Provide these group with limited permissions that are required by each role and then add individual users to these groups.
 
-- Same applies for the Access Keys and Secret Access keys required for programmatic access. You can use IAM Roles for programmatic access. If you do create these keys for IAM Users, ensure you DO NOT share these between users.
+- Same applies for the Access Keys and Secret Access keys required for programmatic access. You can use IAM Roles for programmatic access. If you do create these keys for IAM Users, ensure you DO NOT share these between users or expose them on the Internet.
 
 - Enable MFA for the IAM Users. If this is a business account, you can also enforce IAM Users to enable MFA to login to AWS Console. More information on [configuring MFA device enforcement](https://docs.aws.amazon.com/singlesignon/latest/userguide/how-to-configure-mfa-device-enforcement.html?sc_channel=el&sc_campaign=costwave&sc_content=cloud-account-fundamentals&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
