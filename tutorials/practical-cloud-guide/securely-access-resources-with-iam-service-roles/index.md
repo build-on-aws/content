@@ -276,7 +276,9 @@ In the IAM console, select Roles on the side menu, select the role we created, a
 
 ## What We Did
 
-At the start of this tutorial we set up out environment, however this is not the focus of the tutorial. Cloudformation is a powerful tool  but we will cover it in following articles. The focus of this tutorial how to securely access resources with roles and temporary credentials. We created a role for a service and applied a policy that allowed it to access another resource. In this case, we attached a role to an EC2 instance that let it access an S3 bucket. We also saw that we can edit a role and add an action in this simple example.We could also add other statements, such as providing access to a relational database. The takeaway is to use roles to enable actions without exposing user credentials by placing them in service such as EC2.
+The focus of this tutorial is how to securely access resources with roles and temporary credentials. We created a role for a service and applied a policy that allowed it to access another resource. In this case, we attached a role to an EC2 instance that let it access an S3 bucket. We also saw that we can edit a role and add an action in this simple example. We could also add other statements, such as providing access to a relational database. The takeaway is to use roles to enable actions without exposing user credentials by placing them in service such as EC2.
+
+At the start of this tutorial we set up our environment, however this is not the focus of the tutorial. Cloudformation is a powerful tool but we will cover it in the following articles. 
 
 ## What’s Next
 
