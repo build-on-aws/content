@@ -1,12 +1,11 @@
 ---
 title: "Egress Controls with Amazon Route 53 DNS Resolver Firewall"
-description: Learn how to secure your infrastructure and make it cost-effective. 
+description: "Learn how to secure your infrastructure and make it cost-effective." 
 tags:
   - tutorials
   - cost-optimization
   - security
   - aws-network-firewall
-  - route53-dns-resolver-firewall
   - aws
 spaces:
   - cost-optimization
