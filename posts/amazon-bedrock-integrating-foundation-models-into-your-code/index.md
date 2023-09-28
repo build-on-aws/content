@@ -30,6 +30,6 @@ In [this video](https://www.youtube.com/watch?v=ab1mbj0acDo), AWS Senior Develop
 
 To follow along you will need the [latest Boto3 library](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq), an AWS account, and IAM permissions to call the Amazon Bedrock service.
 
-We have lots more posts and videos coming your way that will cover all aspects of Amazon Bedrock. So make sure to bookmark this Space https://community.aws/generative-ai and subscribe to our [YouTube channel](https://www.youtube.com/@awsdevelopers).
+We have lots more posts and videos coming your way that will cover all aspects of Amazon Bedrock. So make sure to bookmark this [Space](/generative-ai) and subscribe to our [YouTube channel](https://www.youtube.com/@awsdevelopers).
 
 Happy building!
