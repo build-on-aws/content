@@ -19,7 +19,7 @@ authorName: Mike Chambers
 date: 2023-09-28
 ---
 
-I'm very excited to announce that [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq) is now generally available! The official news blog post can be found [here](https://aws.amazon.com/blogs/aws/amazon-bedrock-is-now-generally-available-build-and-scale-generative-ai-applications-with-foundation-models/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq), which contains details and some additional exciting service announcements.
+I'm very excited to announce that [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq) is now generally available! The official news blog post can be found [here](https://aws.amazon.com/blogs/aws/amazon-bedrock-is-now-generally-available-build-and-scale-generative-ai-applications-with-foundation-models/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq), which contains details and some additional exciting service announcements.
 
 Amazon Bedrock is a fully managed service that makes foundation models (FMs) from Amazon and leading AI startups available through an API, so you can choose from various FMs to find the model that's best suited for your use case.
 
