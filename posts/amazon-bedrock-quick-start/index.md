@@ -194,7 +194,7 @@ Before diving into the code, it's crucial to grasp the key elements that will ma
 * **Vector Databases:** These specialized databases manage vector embeddings. They simplify data management, offer real-time updates, and come with built-in security features, making them a preferred choice for developers.
 * **LangChain:** A framework that supercharges applications with language model capabilities. LangChain makes your applications data-aware and interactive, offering modular components and off-the-shelf chains for various tasks.
 
-For a real-world example of seeing these tools in action, check out blog post on how I built [AWS Solution Architect Agent with Generative AI.](https://community.aws/posts/building-agent-aws)
+For a real-world example of seeing these tools in action, check out blog post on how I built [AWS Solution Architect Agent with Generative AI.](/posts/building-agent-aws)
 
 ### QuickStart: Your Own RAG Demo
 
