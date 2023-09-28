@@ -1,6 +1,6 @@
 ---
 title: "Securely Access Resources with IAM Service Roles"
-description: "Resources are accessed based on user policies. However, if a resource needs to access another resource, the secure method is to attach a role that provides temporary credentials for providing access. This tutorial demonstrates how create a service role to securely access resources."
+description: "Use temporary credentials to provide access to inaccessible resources."
 tags:
     - service-roles
     - it-pros
