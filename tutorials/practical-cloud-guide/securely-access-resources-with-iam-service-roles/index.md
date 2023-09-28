@@ -201,7 +201,7 @@ In the **Modify IAM Role** screen, select the role we created previously, the ch
 
 ![Select the IAM role to access S2](./images/ec2-6.png)
 
-Let test the role by going back to the terminal and list the contents of the bucket again.
+Let's test the role by going back to the terminal and list the contents of the bucket again.
 
 ```bash
 [ec2-user@ip-172-31-46-36 ~]$ aws s3 ls s3://pcg-s3-service-role-tutorial
