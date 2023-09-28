@@ -4,7 +4,6 @@ description: "Configure persistent shared storage for container workloads on Ama
 tags:
     - eks-cluster-setup
     - eks
-    - kubernetes
     - tutorials
     - aws
     - storage
