@@ -1,6 +1,6 @@
 ---
 title: "Egress Controls with Amazon Route 53 DNS Resolver Firewall"
-description: "In the first of a series of tutorials, you will learn how to configure Egress Controls with the Amazon Route 53 Resolver DNS Firewall"
+description: Learn how to secure your infrastructure and make it cost-effective. 
 tags:
   - tutorials
   - cost-optimization
