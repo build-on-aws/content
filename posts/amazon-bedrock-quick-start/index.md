@@ -18,7 +18,7 @@ date: 2023-09-28
 |ToC|
 |---|
 
-Amazon Bedrock has just launched, and it's already revolutionizing the generative AI landscape. Amazon Bedrock offers a seamless, serverless API that lets you choose from a variety of foundation models to fit your specific needs. Gone are the days of wrestling with complex setups and infrastructure, Amazon Bedrock simplifies it. In this guide, we'll explore four distinct use cases, from image generation to text summarization, demonstrating the versatility of this new service.
+Amazon Bedrock has just launched, and it's revolutionizing the generative AI landscape. Amazon Bedrock offers a seamless, serverless API that lets you choose from a variety of foundation models to fit your specific needs. Gone are the days of wrestling with complex setups and infrastructure, Amazon Bedrock simplifies it. In this guide, we'll explore four distinct use cases, from image generation to text summarization, demonstrating the versatility of this new service.
 
 ## Prerequisites
 
