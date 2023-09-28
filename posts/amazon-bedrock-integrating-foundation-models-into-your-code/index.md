@@ -4,7 +4,10 @@ description: "Discover Amazon Bedrock and learn how to integrate generative AI m
 tags:
     - bedrock
     - ai-ml
+    - generative-ai
 spaces: 
+  - generative-ai
+waves: 
   - generative-ai
 images:
   banner: images/bedrock-launch-thumbnail.jpeg
@@ -24,12 +27,12 @@ Amazon Bedrock is a fully managed service that makes foundation models (FMs) fro
 
 Discover Amazon Bedrock and learn how to integrate generative AI models from leading AI startups and Amazon into your applications:
 
-https://www.youtube.com/watch?v=ab1mbj0acDo
+In the video below, I step through how to use Boto3, the Python SDK for AWS, to make text generations with models such as Anthropic Claude and A121 Labs Jurassic.
 
-In [this video](https://www.youtube.com/watch?v=ab1mbj0acDo), AWS Senior Developer Advocate, and generative AI specialist [Mike Chambers](https://linkedin.com/in/mikegchambers) steps through how to use Boto3, the Python SDK for AWS, to make text generations with models such as Anthropic Claude and A121 Labs Jurassic.
+https://www.youtube.com/watch?v=ab1mbj0acDo
 
 To follow along you will need the [latest Boto3 library](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq), an AWS account, and IAM permissions to call the Amazon Bedrock service.
 
-We have lots more posts and videos coming your way that will cover all aspects of Amazon Bedrock. So make sure to bookmark this [Space](/generative-ai) and subscribe to our [YouTube channel](https://www.youtube.com/@awsdevelopers).
+There are more posts and videos coming your way that will cover all aspects of Amazon Bedrock. So make sure to bookmark this [Space](/generative-ai), subscribe to the [AWS Developers YouTube channel](https://www.youtube.com/@awsdevelopers), and [follow me on LinkedIn](https://linkedin.com/in/mikegchambers) if you want to geek out with me on generative AI or Amazon Bedrock.
 
 Happy building!
