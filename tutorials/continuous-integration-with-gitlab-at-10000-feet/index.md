@@ -11,7 +11,6 @@ spaces:
   - devops
 waves:
   - devops
-showInHomeFeed: true
 movedFrom: /posts/continuous-integration-with-gitlab-at-10000-feet
 authorGithubAlias: spara
 authorName: Sophia Parafina

@@ -15,7 +15,6 @@ tags:
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-08-14
-showInHomeFeed: true
 ---
 
 | Attributes| |

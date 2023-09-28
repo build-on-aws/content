@@ -9,7 +9,6 @@ tags:
   - aws-cdk
 waves:
   - dataml
-showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-07-30
@@ -189,7 +188,7 @@ You should get a `HTTP` `302` response (`Found`) and the URL redirection happens
 HTTP/2 302 
 content-type: application/json
 content-length: 0
-location: https://abhirockzz.github.io/
+location: https://abhirockzz.github.io
 ....
 ```
 

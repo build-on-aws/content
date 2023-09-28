@@ -5,7 +5,6 @@ tags:
   - devops
   - foundational
   - aws
-showInHomeFeed: true
 spaces:
   - devops
 waves:
@@ -85,7 +84,7 @@ It addressed some of the problems of the Waterfall methodology, implemented some
 
 At its core, DevOps is an approach to solving problems collaboratively. It values teamwork and communication, fast feedback and iteration, and removing friction or waste through automation. It became popular because it encouraged teams to break their work down into smaller chunks, and approach product delivery collaboratively, with a holistic view of the product, enabling better team transparency, and quicker, more reliable deployments. Kanban was only one of many ways this could practically look.
 
-DevOps consists of a combination of practices including Culture, Process, and Tooling. While it’s important to note that implementing DevOps practices is more than simply adding a pipeline or using containers, these, and others strategies, are common technical areas that we work in to help accomplish our goals. If you’d like to learn more about those technical areas, you can find that information in [DevOps Essentials](/concepts/devops-essentials/).
+DevOps consists of a combination of practices including Culture, Process, and Tooling. While it’s important to note that implementing DevOps practices is more than simply adding a pipeline or using containers, these, and others strategies, are common technical areas that we work in to help accomplish our goals. If you’d like to learn more about those technical areas, you can find that information in [DevOps Essentials](/concepts/devops-essentials).
 
 Check out this talk from DevOpsDays Cape Town 2016 [What Is DevOps?](https://www.youtube.com/watch?v=kCRD4pNuh80) by [Dan Maher](https://speaking.dark.ca/).
 

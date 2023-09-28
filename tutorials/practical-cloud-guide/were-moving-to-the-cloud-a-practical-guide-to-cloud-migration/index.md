@@ -4,7 +4,6 @@ description: "Introduction to the Practical Cloud Guide, a series of articles an
 tags:
   - it-pros
   - migration
-showInHomeFeed: true
 authorGithubAlias: "spara" 
 authorName: "Sophia Parafina"
 date: 2023-06-21
@@ -58,4 +57,4 @@ The Practical Guide to Cloud Migration addresses these topics:
 
 ## What’s Next
 
-To start your journey, we’ll start with deploying web applications in Windows Server 2022 and Linux. These tutorials demonstrate how to create a cloud instance of a server. In addition, you will configure server networking and software and deploy applications using a script to automate the process.  Start your journey with the first tutorial (coming soon) on [Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail/).
+To start your journey, we’ll start with deploying web applications in Windows Server 2022 and Linux. These tutorials demonstrate how to create a cloud instance of a server. In addition, you will configure server networking and software and deploy applications using a script to automate the process.  Start your journey with the first tutorial (coming soon) on [Deploy an ASP.NET Core Application on Windows Server with AWS Lightsail](/tutorials/practical-cloud-guide/deploy-an-asp-net-core-application-on-windows-server-with-aws-lightsail).

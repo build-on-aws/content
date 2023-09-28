@@ -35,7 +35,7 @@ If you are submitting or reviewing a content piece that has been approved for re
 
 - [ ] **Titles**: Titles should be succinct, prioritizing action words (what is the reader *doing*) and keywords. Titles should also convey WHY the reader would want to read the article. Titles should use [Title Case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/title-case) (all major words capitalized).
 - [ ] **Description:** Ensure the description further explains what the content piece is about. Do not repeat the title in the description.
-- [ ] **Introduction:** The first paragraph below the frontmatter is the introduction, and should not have any H heading prior to it.
+- [ ] **Introduction:** The first paragraph below the front matter is the introduction, and should not have any H heading prior to it.
 - [ ] **Syntax**: All content should follow [Markdown syntax](https://www.markdownguide.org/basic-syntax/).
 - [ ] **Correct directory:** Ensure that the content piece is in the correct directory and uses the correct template:
   - [ ] `/posts` for technical experiences & opinion pieces, also known as “blog style”
@@ -58,12 +58,12 @@ If you are submitting or reviewing a content piece that has been approved for re
 - [ ] **Code samples**: Code samples should be presented succinctly in a [Markdown code block](https://www.markdownguide.org/basic-syntax/#code-blocks-1) (with correct language for syntax highlighting). If there is a separate code repo, you can link to it. No source code files may be added added to the content repo under any circumstances.
 - [ ] **Code output:** Do not add screenshots of terminal output, use a code block.
 - [ ] **Keywords**: In the URL, page title, description, SEO description, first sentence, and headings, the most important keywords should be present and appropriately used. In the SEO description, include a call to action.
-- [ ] **SEO Description**: Should provide a unique description of the content in less than 155 characters and include SEO keywords and a call to action. This is stored in the `seoDescription` field in the frontmatter.
+- [ ] **SEO Description**: Should provide a unique description of the content in less than 155 characters and include SEO keywords and a call to action. This is stored in the `seoDescription` field in the front matter.
   - [ ] Examples:
     - [ ] Are you a seasoned React developer? Just getting started with React? Learn more about the new library features in React 18 and how to upgrade your app.
     - [ ] Learn how to create a simple CI/CD pipeline with GitHub Actions to deploy a Flask app running in a container to infrastructure in the cloud.
 - [ ] **Tags:** Tags in a post are limited to 5 that will displayed in the feed, so ensure the most important 5 are first in the list, using the `kebab-case` convention (all lowercase, with `-` between words).
-- [ ] **Publication date:** Update the `date` field in the frontmatter to be the current or future date that the post will be published. Content with future dates will be published at the *next build* after that date.
+- [ ] **Publication date:** Update the `date` field in the front matter to be the current or future date that the post will be published. Content with future dates will be published at the *next build* after that date.
 - [ ] **Links:** Do not add links as raw text, e.g. `start from here https://example.com`. Instead, add them as links via Markdown `[start from here](https://example.com)`.
 - [ ] **Links - relative:** To link to other content in the repo, use a relative link, not one prefixed with the full URL, e.g. `/posts/the-other-post` and not `https://community.aws/posts/the-other-post`.
 

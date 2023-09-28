@@ -139,7 +139,7 @@ output "instance_ip_addr" {
 - Terraform: [Terraform documentation](https://www.terraform.io/downloads)
 - Github repo we based our build on: [GitHub repo](https://github.com/HarryNash/terraform-minecraft)
 - Minecraft server download URL: [Where you can find the server URL](https://www.minecraft.net/en-us/download/server)
-- AWS SSM - Session manager: [Docs page](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html)
+- AWS SSM - Session manager: [Docs page](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - GNU Screen: [Website](https://www.gnu.org/software/screen/)
 
 **🐦 Reach out to the hosts and guests:**

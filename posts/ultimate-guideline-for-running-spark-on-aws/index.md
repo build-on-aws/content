@@ -100,7 +100,7 @@ If the answer is yes, 🌟 **consider Amazon EMR**. Amazon EMR:
 - 🌐 Offers **EMR Serverless**: A serverless runtime environment optimized for analytics applications, compatible with frameworks like **Spark** and **Hive**.
 
 #### [🔗 Spark with Amazon EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark.html)
-#### [🔗 Create an ETL Pipeline with Amazon EMR and Apache Spark](https://community.aws/tutorials/create-an-etl-pipeline-apache-spark)
+#### [🔗 Create an ETL Pipeline with Amazon EMR and Apache Spark](/tutorials/create-an-etl-pipeline-apache-spark)
 #### [🔗 Run Apache Spark workloads 3.5 times faster with Amazon EMR 6.9](https://aws.amazon.com/blogs/big-data/run-apache-spark-workloads-3-5-times-faster-with-amazon-emr-6-9/)
 
 ---
@@ -122,7 +122,7 @@ SageMaker Studio, provided by AWS, is a fully integrated development environment
 #### [🔗 Gettings started with SageMaker with Apache Spark](https://docs.aws.amazon.com/sagemaker/latest/dg/apache-spark.html)
 #### [🔗 Gettings started with SageMaker Studio with AWS Glue](https://www.youtube.com/watch?v=VL1ttYyeJDE&t=3s&ab_channel=AmazonWebServices)
 #### [🔗 Gettings started with SageMaker Studio with Amazon EMR](https://aws.amazon.com/blogs/machine-learning/part-1-create-and-manage-amazon-emr-clusters-from-sagemaker-studio-to-run-interactive-spark-and-ml-workloads/)
-#### [🔗 Deploy Serverless Spark Jobs to AWS Using GitHub Actions](https://community.aws/tutorials/deploy-serverless-spark-jobs-to-aws-using-github-actions)
+#### [🔗 Deploy Serverless Spark Jobs to AWS Using GitHub Actions](/tutorials/deploy-serverless-spark-jobs-to-aws-using-github-actions)
 
 ---
 
