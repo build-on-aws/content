@@ -412,7 +412,7 @@ print ("The security group file has been read into the prompt")
 # Next let's create our prompt:
 
 prompt = f"""
-Act as a VPC Flow log analyzer. 
+Human: Act as a VPC Flow log analyzer. 
 My CIDR range is 10.0.0.0/16.
 Any source traffic from my CIDR range is considered outbound traffic and is allowed by default.
 Any source traffic from a different CIDR range is considered inbound traffic and is denied by default.
@@ -424,9 +424,16 @@ Here are the VPC flow logs:
 
 Here are my security groups rules:
 {security_groups_rules}
+
+Assistant: Act as a VPC Flow log analyzer.
 """
+# Here we call the function `call_claude` with the prompt.
+response = call_claude(prompt)
 
 print ("Sending the prompt to the model...")
+
+# Print the response to the terminal.
+print(response)
 
 ```
 
