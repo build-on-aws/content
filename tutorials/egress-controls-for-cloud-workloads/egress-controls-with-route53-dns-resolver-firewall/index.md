@@ -381,7 +381,7 @@ This is a best practices for security across your AWS environment including VPCs
 
 ### Step 2 - Verify DNS query logs in CloudWatch
 
-- Navigate to the EC2 session and execute the command `nslookup google.cn`. Since dns queries resolving this domain name are blocked you can see that the server cannot find the domain.
+- Navigate to the EC2 session and execute the command `nslookup google.cn`. Since DNS queries resolving this domain name are blocked you can see that the server cannot find the domain.
 
 ![nslookup test](/images/lab1-33.png "Perform an nslookup test")
 
