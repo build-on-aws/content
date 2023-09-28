@@ -48,7 +48,7 @@ Before starting this tutorial, you will need the following:
 | ToC |
 |-----|
 
-This is the first of a 3-part series:
+This is the first of a three-part series:
 
 | SeriesToC |
 |-----------|
