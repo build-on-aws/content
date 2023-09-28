@@ -297,7 +297,7 @@ Let's return to our test script and see the result of the `testergress` command 
 
 ### Create a Rule Group
 
-- Similar to the previous section, in the AWS  Console, navigate to Rule Groups and click on `add rule group`. Enter a name to the Rule group and click on `Next`.
+- Similar to the previous section, in the AWS Console, navigate to Rule Groups and click on `add rule group`. Enter a name to the Rule group and click on `Next`.
 
 ![Create a rule group](/images/lab1-17.png "Create a rule group")
 
