@@ -271,7 +271,7 @@ Question: {query}
 Answer:"""
 
 bedrock = boto3.client(
-    service_name="bedrock",
+    service_name="bedrock-runtime",
     region_name="us-east-1",
     endpoint_url="https://bedrock.us-east-1.amazonaws.com",
 )
