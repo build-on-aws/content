@@ -208,7 +208,7 @@ Let's test the role by going back to the terminal and list the contents of the b
 [ec2-user@ip-172-31-46-36 ~]$ 
 ```
 
-No errors! But we haven’t put anything in bucket yet. Let’s try that next by creating a file and copying it to the bucket.
+No errors! But we haven’t put anything in the bucket yet. Let’s try that next by creating a file and copying it to the bucket.
 
 ```bash
 [ec2-user@ip-172-31-46-36 ~]$ echo "Making roles" > file.txt
