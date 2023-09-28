@@ -4,4 +4,4 @@ description: "A 3-part series looking at how control egress traffic with the Ama
 navigationBars: both
 posts:
   - egress-controls-with-route53-dns-resolver-firewall
---- 
+---
