@@ -1,6 +1,6 @@
 ---
 title: "Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI"
-description: "How to configure persistent shared storage for container workloads on Amazon EKS using the Amazon Elastic File System (EFS) CSI Driver Add-On."
+description: "Configure persistent shared storage for container workloads on Amazon EKS with the Amazon EFS CSI"
 tags:
     - eks-cluster-setup
     - eks
@@ -19,9 +19,9 @@ authorName: Ashish Kamble
 date: 2023-09-30
 ---
 
-Managing storage solutions for containerized applications requires careful planning and execution. Kubernetes workloads such as content management systems and video transcoding may benefit from using Amazon Elastic File System (EFS). EFS is designed to provide serverless, fully elastic file storage that lets you share file data without provisioning or managing storage capacity and performance. EFS is ideal for applications that need shared storage across multiple nodes or even across different availability zones. In contrast, Amazon Elastic Block Store (EBS) requires configuring volumes that are limited by size and region. The Amazon Elastic File System (EFS) CSI Driver Add-On exposes EFS file systems to your workloads, handling the complexities of this versatile and scalable storage solution.
+Managing storage solutions for containerized applications requires careful planning and execution. Kubernetes workloads such as content management systems and video transcoding may benefit from using Amazon Elastic File System (EFS). EFS is designed to provide serverless, fully elastic file storage that lets you share file data without provisioning or managing storage capacity and performance. EFS is ideal for applications that need shared storage across multiple nodes or even across different availability zones. In contrast, Amazon Elastic Block Store (EBS) requires configuring volumes that are limited by size and region. The Amazon Elastic File System (EFS) CSI Driver add-on exposes EFS File Systems to your workloads, handling the complexities of this versatile and scalable storage solution.
 
-In this tutorial, you will set up the Amazon EFS CSI Driver on your Amazon EKS cluster and configure persistent shared storage for container workloads. More specifically, you will install the EFS CSI Driver as an Amazon EKS Add-on. Amazon EKS add-ons automate installation and management of a curated set of add-ons for EKS clusters. You'll configure the EFS CSI Driver to handle both lightweight applications, akin to microservices, and more substantial systems, comparable to databases or user authentication systems, achieving seamless storage management. 
+In this tutorial, you will set up the Amazon EFS CSI Driver on your Amazon EKS cluster and configure persistent shared storage for container workloads. More specifically, you will install the EFS CSI Driver as an Amazon EKS add-on. Amazon EKS add-ons automate installation and management of a curated set of add-ons for EKS clusters. You'll configure the EFS CSI Driver to handle both lightweight applications, akin to microservices, and more substantial systems, comparable to databases or user authentication systems, achieving seamless storage management. 
 
 
 | Attributes             |                                                                 |
@@ -48,9 +48,9 @@ This tutorial is the second installment in a series on optimizing stateful appli
 
 * **Authentication**: Leverage the pre-configured IAM Role for the Amazon EFS CSI Driver, integrated with the OpenID Connect (OIDC) endpoint, to ensure secure communication between Kubernetes pods and AWS services.
 * **EFS CSI Driver Setup**: Deploy the Amazon EFS CSI Driver within the Amazon EKS cluster, focusing on Custom Resource Definitions (CRDs) and the installation of the driver itself.
-* **Sample Application Deployment**: Build and deploy a stateful application that writes the current date to a shared EFS volume. Define routing rules and annotations for a Persistent Volume Claim (PVC) based on the CentOS image. Utilize custom annotations for the PVC, specifically the 'accessMode' and 'storageClassName', to instruct the EFS CSI Driver on how to handle storage requests. For Dynamic Provisioning, use the 'storageClassName' annotation to automate the creation of Persistent Volumes (PVs)
-* **EFS Access Points and Security**: Explore how the Amazon EFS CSI Driver leverages Amazon EFS access points as application-specific entryways. Understand the role of port 2049 for NFS traffic and how to configure security groups to allow or restrict access based on CIDR ranges. These access points enforce both user identity and root directory, offering flexibility to further refine access based on specific subnets. By fine-tuning the security group to permit traffic on this port, you empower the instances or pods within your designated CIDR range to interact with the shared file system. This granular control not only ensures the accessibility of the EFS by relevant cluster resources but also allows for further access restrictions based on specific subnets.
-* **Mount Targets**: Delve into the creation of mount targets for the EFS Filesystem, which serve as crucial connection points within the VPC for EC2 instances. It's essential to note that EFS only allows one mount target to be created in each Availability Zone, regardless of the subnets within that zone. If you are using an EKS cluster with nodes in private subnets, we recommend creating the Mount targets for those specific subnets.
+* **Sample Application Deployment**: Build and deploy a stateful application that writes the current date to a shared EFS volume. Define routing rules and annotations for a Persistent Volume Claim (PVC) based on the CentOS image. Utilize custom annotations for the PVC, specifically the 'accessMode' and 'storageClassName', to instruct the EFS CSI Driver on how to handle storage requests. For Dynamic Provisioning, use the 'storageClassName' annotation to automate the creation of Persistent Volumes (PVs).
+* **EFS Access Points and Security**: Explore how the Amazon EFS CSI Driver leverages Amazon EFS access points as application-specific entryways. Understand the role of port 2049 for NFS traffic and how to configure security groups to allow or restrict access based on CIDR ranges. These access points enforce both user identity and root directory, offering flexibility to further refine access based on specific subnets. By fine-tuning the security group to permit traffic on this port, you empower the instances or pods within your designated CIDR range to interact with the shared file system. This granular control not only ensures the accessibility of the EFS File System by relevant cluster resources but also allows for further access restrictions based on specific subnets.
+* **Mount Targets**: Delve into the creation of mount targets for the EFS File System, which serve as crucial connection points within the VPC for EC2 instances. It's essential to note that EFS File System only allows one mount target to be created in each Availability Zone, regardless of the subnets within that zone. If you are using an EKS cluster with nodes in private subnets, we recommend creating the Mount targets for those specific subnets.
 
 >Note If you are still in your initial 12-month period, you can get started with EFS for free by receiving 5 GB of EFS storage in the EFS Standard storage class.
 
@@ -84,7 +84,7 @@ export CLUSTER_VPC=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${
 
 ## Step 2: Verify or Create the IAM Role for Service Account
 
-In this section, we'll verify that the necessary IAM roles for service accounts are configured in your Amazon EKS cluster. These IAM roles are essential for enabling AWS services to interact seamlessly with Kubernetes, allowing you to leverage AWS capabilities within your pods.
+Now we will verify that the necessary IAM roles for service accounts are configured in your Amazon EKS cluster. These IAM roles are essential for enabling AWS services to interact seamlessly with Kubernetes, allowing you to leverage AWS capabilities within your pods.
 
 Make sure the required service accounts for this tutorial are correctly set up in your cluster.
 
@@ -142,9 +142,9 @@ Update the IAM role:
 aws iam update-assume-role-policy --role-name $ROLE_NAME --policy-document "$TRUST_POLICY" --region $CLUSTER_REGION
 ```
 
-## Step 3: Verify or Install the EFS CSI Driver Add-On
+## Step 3: Verify or Install the EFS CSI Driver add-on
 
-In this section, we'll verify that the EFS CSI Driver managed add-on is properly installed and active on your Amazon EKS cluster. The EFS CSI Driver is crucial for enabling Amazon EFS to work seamlessly with Kubernetes, allowing you to mount EFS file systems as persistent volumes for your batch workloads.
+Here, we will verify that the EFS CSI Driver managed add-on is properly installed and active on your Amazon EKS cluster. The EFS CSI Driver is crucial for enabling Amazon EFS to work seamlessly with Kubernetes, allowing you to mount EFS File Systems as persistent volumes for your batch workloads.
 
 Check whether the EFS CSI driver add-on is installed on your cluster:
 
@@ -158,7 +158,7 @@ The expected output should look like this:
 aws-efs-csi-driver      v1.5.8-eksbuild.1       ACTIVE  0
 ```
 
-**Optionally**, if the EFS CSI Driver Add-On is **not** installed on your cluster, or you receive an error, the following commands show you the steps to install it. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
+**Optionally**, if the EFS CSI Driver add-on is **not** installed on your cluster, or you receive an error, the following commands show you the steps to install it. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
 
 List the add-ons available in eksctl. Replace the sample value for ```kubernetes-version```.
 
@@ -282,7 +282,7 @@ The expected output should look like this:
 }
 ```
 
-Now, we’ll create an Amazon EFS file system for our Amazon EKS cluster.
+Now, we’ll create an Amazon EFS File System for our Amazon EKS cluster.
 
 ```bash
 export FILE_SYSTEM_ID=$(aws efs create-file-system \
@@ -292,9 +292,9 @@ export FILE_SYSTEM_ID=$(aws efs create-file-system \
 --output text)
 ```
 
-## Step 5: Configure Mount Targets for the EFS Filesystem
+## Step 5: Configure Mount Targets for the EFS File System
 
-EFS only allows one mount target to be created in each Availability Zone, so you’ll need to place the mount target on the appropriate subnet. If your worker nodes are on a private subnet, you should create the mount target on that subnet. In this section, you will create mount targets for the EFS filesystem. The mount target is an IP address on a VPC subnet that accepts NFS traffic. The Kubernetes nodes will open NFS connections with the IP address of the mount target.
+EFS only allows one mount target to be created in each Availability Zone, so you’ll need to place the mount target on the appropriate subnet. If your worker nodes are on a private subnet, you should create the mount target on that subnet. We will now create mount targets for the EFS File System, The mount target is an IP address on a VPC subnet that accepts NFS traffic. The Kubernetes nodes will open NFS connections with the IP address of the mount target.
 
 1. Determine the IP address of your cluster nodes:
 
@@ -344,11 +344,11 @@ aws efs create-mount-target \
     --region $CLUSTER_REGION
 ```
 
->Note: EFS only allows 1 mount target to be created in one Availability Zone, irrespective of the subnets in the Availability Zone. If you are using an EKS cluster with Worker Nodes in Private Subnets, it would be recommended to create the Mount targets for the same subnets.
+>Note: EFS only allows 1 mount target to be created in one Availability Zone, irrespective of the subnets in the Availability Zone. If you are using an EKS cluster with Worker Nodes in Private Subnets, it would be recommended to create the mount targets for the same subnets.
 
 ## Step 6: Setup a Storage Class for the Sample Application
 
-In Kubernetes, there are two ways to provision storage for container applications: Static Provisioning and Dynamic Provisioning. In Static Provisioning, a cluster administrator manually creates Persistent Volumes (PVs) that specify the available storage for the cluster's users. These PVs are part of the Kubernetes API and can be easily used. On the other hand, Dynamic Provisioning automates the creation of PVs. Kubernetes uses Storage Classes to generate PVs automatically when a Pod requests storage through PersistentVolumeClaims. This method simplifies the provisioning process and adjusts to the specific needs of the application. To learn more, refer [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) in Kubernetes documentation. In this section, we will use the “Dynamic Provisioning Method” method.
+In Kubernetes, there are two ways to provision storage for container applications: Static Provisioning and Dynamic Provisioning. In Static Provisioning, a cluster administrator manually creates Persistent Volumes (PVs) that specify the available storage for the cluster's users. These PVs are part of the Kubernetes API and can be easily used. On the other hand, Dynamic Provisioning automates the creation of PVs. Kubernetes uses Storage Classes to generate PVs automatically when a pod requests storage through PersistentVolumeClaims. This method simplifies the provisioning process and adjusts to the specific needs of the application. To learn more, refer [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) in Kubernetes documentation. For our lab, we will use the “Dynamic Provisioning Method” method.
 
 
 1. First, download the Storage Class manifest:
@@ -389,7 +389,7 @@ storageclass.storage.k8s.io/efs-sc created
 
 ## Step 7: Deploy a Sample Application
 
-In this section, we will deploy a sample application that writes the current date to a shared location on the EFS Shared Volume. The deployment process begins by downloading a manifest file containing the specifications for a Persistent Volume Claim (PVC) and a Pod based on the CentOS image.
+Let's deploy a sample application that writes the current date to a shared location on the EFS Shared Volume. The deployment process begins by downloading a manifest file containing the specifications for a Persistent Volume Claim (PVC) and a pod based on the CentOS image.
 
 1. First, download the PersistentVolumeClaim manifest:
 
@@ -397,7 +397,7 @@ In this section, we will deploy a sample application that writes the current dat
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-efs-csi-driver/master/examples/kubernetes/dynamic_provisioning/specs/pod.yaml
 ```
 
->Note: This manifest includes our Sample Pod that utilizes the CentOs Image. It incorporates specific parameters to record the Current Date and store it in the /data/out directory on the EFS Shared Volume. Furthermore, the Manifest includes a PVC (Persistent Volume Claim) object that requests 5Gi Storage from the Storage Class we established in the preceding step.
+>Note: This manifest includes our Sample pod that utilizes the CentOs Image. It incorporates specific parameters to record the Current Date and store it in the /data/out directory on the EFS Shared Volume. Furthermore, the Manifest includes a PVC (Persistent Volume Claim) object that requests 5Gi Storage from the Storage Class we established in the preceding step.
 
 2. Now, we will deploy our sample application that will write "Current Date" to a shared location:
 
@@ -418,7 +418,7 @@ NAME          READY   STATUS    RESTARTS   AGE   IP               NODE          
 efs-app       1/1     Running   0          10m   192.168.78.156   ip-192-168-73-191.region-code.compute.internal   <none>           <none>
 ```
 
->Note: It will take a couple minutes for the Pod to transition to the "Running" state. If the Pod remains in a "ContainerCreating" state, make sure that you have included a mount target for the subnet where your node is located (as shown in step two). Without this step, the Pod will remain stuck in the "ContainerCreating" state.
+>Note: It will take a couple minutes for the pod to transition to the "Running" state. If the pod remains in a "ContainerCreating" state, make sure that you have included a mount target for the subnet where your node is located (as shown in step two). Without this step, the pod will remain stuck in the "ContainerCreating" state.
 
 4. Verify that the data is being written to the /data/out location within the shared EFS volume. Use the following command to verify:
 
@@ -437,14 +437,14 @@ Fri Aug 4 09:13:55 UTC 2023
 [...]
 ```
 
->Optionally, terminate the node hosting your Pod and await Pod rescheduling. Alternatively, you may delete the Pod and redeploy it. Repeat the previous step once more, ensuring the output contains the prior output.
+>Optionally, terminate the node hosting your pod and await pod rescheduling. Alternatively, you may delete the pod and redeploy it. Repeat the previous step once more, ensuring the output contains the prior output.
 
 ## Clean Up
 
 To avoid incurring future charges, you should delete the resources created during this tutorial.
 
 ```text
-# Delete the Pod
+# Delete the pod
 kubectl delete -f pod.yaml
 
 # Delete the Storage Class
@@ -459,4 +459,4 @@ aws iam delete-role --role-name AmazonEKS_EFS_CSI_DriverRole
 
 ## Conclusion
 
-With the completion of this tutorial, you have successfully configured Amazon EFS for persistent storage for your EKS-based container workloads. The sample Pod, leveraging the CentOS image, has been configured to capture the current date and store it in the ```/data/out``` directory on the EFS shared volume. To align with best practices, we recommend running your container workloads on private subnets, exposing only ingress controllers in the public subnets. Furthermore, make sure that EFS mount targets are established in all availability zones where your EKS cluster resides; otherwise, you may encounter a 'Failed to resolve' error. To continue your journey, you're now ready to store your stateful workloads like batch processes or machine learning training data to your EFS volume. 
+With the completion of this tutorial, you have successfully configured Amazon EFS for persistent storage for your EKS-based container workloads. The sample pod, leveraging the CentOS image, has been configured to capture the current date and store it in the ```/data/out``` directory on the EFS shared volume. To align with best practices, we recommend running your container workloads on private subnets, exposing only ingress controllers in the public subnets. Furthermore, make sure that EFS mount targets are established in all availability zones where your EKS cluster resides; otherwise, you may encounter a 'Failed to Resolve' error. To continue your journey, you're now ready to store your stateful workloads like batch processes or machine learning training data to your EFS volume. 
