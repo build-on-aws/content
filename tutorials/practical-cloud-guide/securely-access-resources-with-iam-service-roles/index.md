@@ -280,7 +280,7 @@ The focus of this tutorial is how to securely access resources with roles and te
 
 At the start of this tutorial we set up our environment, however this is not the focus of the tutorial. Cloudformation is a powerful tool but we will cover it in the following articles. 
 
-## What’s Next
+## What’s Next?
 
 Our next article will cover storage and the different forms of cloud storage. We will examine the primary use cases for different types of storage and how to set them up. In the mean time, you can read about the different types of cloud storage and when to [use them](/concepts/how-to-store-data-in-the-cloud).
 
