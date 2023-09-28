@@ -180,7 +180,7 @@ In this step, we create a domain list that will specify the domain-matching patt
 
 - Give the domain list a name of your choosing.
 - Enter TLD-matching patterns from the image below(one-per-line) following the format shown (e.g.`[*.ru]`).
-- The `*` acts as a wildcard to match all the subdomains within each of these TLDs
+- The `*` acts as a wildcard to match all the subdomains within each of these TLDs.
 - We can always write exceptions later to our broad TLD-matching rules by creating an `ALLOW` rule to match any needed exceptions and giving it a higher priority than our `BLOCK` rule.
 - We'll use this list to BLOCK ten commonly abused top-level domains in our VPC.
 
