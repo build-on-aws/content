@@ -262,7 +262,7 @@ DNS Firewall rule groups are a set of rules that will allow, deny, or alert on D
 You have deployed and created a DNS Firewall Rule group, configured a rule to BLOCK matches from a custom domain list, and associated this config with the tutorial Egress VPC.
 
 - Navigate to the EC2 session and execute the test script. You can see that `Resolution of domains in Abused Top Level Domains` is changed from Allowed to Blocked.
-- If some TLDs are still being resolved double-check the values entered in our custom domain list. It should contain all these these domain matching patterns (one per line)
+- If some TLDs are still being resolved double-check the values entered in our custom domain list. It should contain all these domain matching patterns (one per line)
 - `*.ru *.cn *.xyz *.cyou *.pw *.ws *.gq *.surf *.cf *.ml`
 
 ![Verify egress-check.sh](/images/2023-08-23_15-21-22.png "Verify using the egress-check.sh script")
