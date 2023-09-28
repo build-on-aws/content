@@ -226,7 +226,7 @@ The expected output should look like this:
 [ℹ] addon "aws-efs-csi-driver" active
 ```
 
-## Step 4: Create an EFS File system
+## Step 4: Create an EFS File System
 
 In this section, you will create an EFS File System and create a security group. The security group permits ingress from the CIDR for your cluster’s VPC to the EFS service. The security group is further restricted to port 2049, the standard port for NFS.
 
