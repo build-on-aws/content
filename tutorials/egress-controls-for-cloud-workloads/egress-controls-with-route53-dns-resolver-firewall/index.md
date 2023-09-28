@@ -2,10 +2,10 @@
 title: "Egress Controls with Amazon Route 53 DNS Resolver Firewall"
 description: "Learn how to secure your infrastructure and make it cost-effective." 
 tags:
-  - tutorials
   - cost-optimization
   - security
   - aws-network-firewall
+  - tutorials
   - aws
 spaces:
   - cost-optimization
@@ -18,7 +18,7 @@ date: 2023-09-28
 
 Have you ever considered the connection between an infrastructure's security and cost effectiveness go hand in hand? Most often, when we think about security, our minds go to adversaries and risk, controls and inspection, compliance and auditing. However, paying attention to your security posture and understanding what happens with network traffic, both desired and undesired, contributes to cost effective design in a cloud environment, too.
 
-In this tutorial, we will focus on controlling egress traffic with the [Amazon Route 53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/). Our first goal is to provide a secure environment, ensuring that only desired egress traffic is allowed. Our second goal, and really a side outcome of the capabilities we'll enable, is that we'll minimize our cloud costs for egress traffic.  
+In this tutorial, we will focus on controlling egress traffic with the [Amazon Route 53 DNS Resolver Firewall](https://aws.amazon.com/about-aws/whats-new/2021/03/introducing-amazon-route-53-resolver-dns-firewall/?sc_channel=el&sc_campaign=costwave&sc_content=egress-controls-with-route53-dns-resolver-firewall&sc_geo=mult&sc_country=mult&sc_outcome=acq). Our first goal is to provide a secure environment, ensuring that only desired egress traffic is allowed. Our second goal, and really a side outcome of the capabilities we'll enable, is that we'll minimize our cloud costs for egress traffic.  
 
 > For the purpose of this tutorial, egress traffic refers to traffic from our protected subnet within our Virtual Private Cloud (VPC), leaving the VPC, and being routed toward the internet.
 
@@ -39,7 +39,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | < $5 USD when cleanup is performed upon completion     |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=costwave&sc_content=egress-controls-with-route53-dns-resolver-firewall&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/testing-egress-controls-for-cloud-workloads)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-09-28                             |
@@ -305,7 +305,7 @@ In the next steps, we create a new rule group with rules that block the managed 
 
 ![add a rule](/images/lab1-18.png "Add a rule")
 
-- We will add the botnet managed domain list in this step. Enter a name for the rule, select `Add AWS managed domain list` and select `AWSManagedDomainsBotnetCommandandControl ` from the domain list dropdown.
+- We will add the botnet managed domain list in this step. Enter a name for the rule, select `Add AWS managed domain list` and select `AWSManagedDomainsBotnetCommandandControl` from the domain list dropdown.
 
 ![Create a rule group](/images/lab1-19.png "Create a rule group")
 
@@ -462,6 +462,6 @@ And that's it!
 
 In this tutorial, we learned how to use Route 53 DNS Firewall to secure our VPC egress traffic. We configured a custom list of TLDs that we don't want our cloud resources communicating with. By blocking resolution to these TLDs we not only protected our account, but we also controlled egress traffic cost. We also controlled egress traffic using managed lists. Remember, the benefit to the managed lists is that we don't have to come up with them ourselves. Rather, we have expert guidance from AWS that curates and manages these lists for us. Lastly, we enabled logging and now have visibility into the DNS queried traffic that we blocked.
 
-What we have seen here is just one aspect of controlling egress traffic. Implementing this simple approach to filtering DNS traffic can improve our security posture and minimizing costs incurred with undesired egress traffic. If you're interested in other aspects of managing your security posture and controlling costs have a look at the tutorial: [Manage Security and Costs Across the Enterprise With AWS Organizations](https://community.aws/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations).
+What we have seen here is just one aspect of controlling egress traffic. Implementing this simple approach to filtering DNS traffic can improve our security posture and minimizing costs incurred with undesired egress traffic. If you're interested in other aspects of managing your security posture and controlling costs have a look at the tutorial: [Manage Security and Costs Across the Enterprise With AWS Organizations](/tutorials/practical-cloud-guide/manage-security-and-costs-across-the-enterprise-with-aws-organizations).
 
 If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
