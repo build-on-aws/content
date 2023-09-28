@@ -65,7 +65,7 @@ In the **Configure stack options** screen, we will accept the default values and
 
 ![Accept default values and advance to the next screen](./images/cloudformation-5.png)
 
-The final create stack screen reviews the options you have chosen such as the stack and bucket name.
+The final "create stack" screen reviews the options you have chosen such as the stack and bucket name.
 
 ![Review the stack details before creating the stack](./images/cloudformation-6.png)
 
