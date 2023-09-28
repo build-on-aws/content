@@ -13,26 +13,33 @@ waves:
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
 date: 2023-09-28
-
 ---
 
 |ToC|
 |---|
 
-Amazon Bedrock is here, and it's making waves in the generative AI space. If you're a developer, this is something you'll want to get your hands on. Generative AI is no longer a futuristic concept; it's a technology we engage with daily. From chatbots to text summarization, these applications are becoming staples in our software diet. Setting up generative AI models can be complicated and time-consuming. Between choosing the right architecture and handling the infrastructure, it can feel like you're navigating a maze.
-Enter Amazon Bedrock. It's the one-stop-shop for all your generative AI needs, complete with an easy-to-use severless API. In this guide, we'll walk through four use cases to show you just how versatile this service is.
+Amazon Bedrock has just launched, and it's already revolutionizing the generative AI landscape. Bedrock offers a seamless, serverless API that lets you choose from a variety of foundation models to fit your specific needs. Gone are the days of wrestling with complex setups and infrastructure, Bedrock simplifies it all. In this guide, we'll explore four distinct use cases, from image generation to text summarization, demonstrating the sheer versatility of this new service.
 
 ## Prerequisites
 Ready to dive in? Here’s how to set up your [Amazon Bedrock](https://aws.amazon.com/bedrock/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bedrock_quick_start) environment in no time.
 
-#### Step 1: Check your Python version
+
+#### Step 1: Subscribe to Models in the Bedrock Console
+
+In the Bedrock console, select Model access in the left navigation pane and enable the models you would like to access. Once model access is enabled, you can then use the API. 
+
+**Note:** For Claude models you have to enter some extra details, but you will get access instantly 
+
+![Bedrock Access](images/bedrock_access.png)
+
+#### Step 2: Check your Python version
 Make sure you're running Python 3.9 or higher. If you're not, update it. Trust me, it'll make your life easier.
 
 ```bash
 python --version
 ```
 
-#### Step 2: Install the essentials
+#### Step 3: Install the essentials
 Run the following command to grab the libraries you’ll need for this guide.
 
 ```bash
@@ -41,10 +48,12 @@ pip install -U boto3 langchain streamlit pillow faiss-cpu
 
 Alright, you're all set to start building your next generative AI masterpiece with Amazon Bedrock.
 
+The full code for the repo is located [here](https://github.com/build-on-aws/amazon-bedrock-quick-start)
+
 ## Creating stunning images with Stable Diffusion
 You're a developer with an app idea that needs to transform text into detailed images. Maybe it's a game feature, or perhaps it's a unique meme generator. You realize that crafting such an application can be complex, requiring expertise in both natural language processing and computer vision.
 
-Amazon Bedrock brings the power of [Stable Diffusion](https://aws.amazon.com/what-is/stable-diffusion/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bedrock_quick_start) for image generation, and [Streamlit](https://streamlit.io/) adds the flair of interactive web apps. This perfestreamlitct combination lets you cut through the complexities and jump straight into building your application.
+Amazon Bedrock brings the power of [Stable Diffusion](https://aws.amazon.com/what-is/stable-diffusion/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bedrock_quick_start) for image generation, and [Streamlit](https://streamlit.io/) adds the flair of interactive web apps. This combination lets you cut through the complexities and jump straight into building your application.
 
 Before we jump into the coding part, let's understand the two core components we'll be using.
 
@@ -54,17 +63,16 @@ Before we jump into the coding part, let's understand the two core components we
 
 Now that we're familiar with our tools, let's get to the fun part—building the application.
 
-For those who prefer to cut to the chase, the complete code for our image generation example can be found [here](TODO). Keep reading to see how I put it all together.
+For those who prefer to cut to the chase, the complete code for our image generation example can be found [here](https://github.com/build-on-aws/amazon-bedrock-quick-start/blob/main/sd_sample_st.py). Keep reading to see how I put it all together.
 
 ### Step 1: Initialize Bedrock
 Kick things off by initializing Amazon Bedrock in your Python script.
 
 ```python
 # Define bedrock
-bedrock = boto3.client(
-    service_name="bedrock",
-    region_name="us-east-1",
-    endpoint_url="https://bedrock.us-east-1.amazonaws.com",
+bedrock_runtime = boto3.client(
+    service_name='bedrock-runtime',
+    region_name='us-east-1',
 )
 ```
 
@@ -101,7 +109,7 @@ def generate_image(text, style):
     accept = "application/json"
     contentType = "application/json"
 
-    response = bedrock.invoke_model(
+    response = bedrock_runtime.invoke_model(
         body=body, modelId=modelId, accept=accept, contentType=contentType
     )
     response_body = json.loads(response.get("body").read())
@@ -150,7 +158,7 @@ if st.button("Generate Image"):
     st.image(image)
 ```
 
-And there you have it—a simple yet powerful application that turns text into detailed images, all thanks to Stable Diffusion and Streamlit running on Amazon Bedrock. You're now armed with the knowledge to build your own generative AI applications. So, what are you waiting for? Start building!
+And there you have it—a simple yet powerful application that turns text into detailed images, all thanks to Stable Diffusion and Streamlit.
 
 ![Stable Diffusion Demo](images/sd_cat.jpg)
 
@@ -164,10 +172,10 @@ You've seen how Amazon Bedrock excels in image generation. But what about text? 
 * **Code Generation:** Automate the creation of functions, modules, or even whole applications.
 * **Q&A:** Design intelligent systems capable of answering queries based on specific data sets or documents.
 
-Eager to see these tasks in action? Check out these [hands-on examples](TODO) to get a real feel for what foundation models can do for you.
+Eager to see these tasks in action? Check out these [hands-on examples](https://github.com/build-on-aws/amazon-bedrock-quick-start/blob/main/text_examples.py) to get a real feel for what foundation models can do for you.
 
-## Retrieval Augmented Generation (RAG) with Amazon Titan
-Ready to up the ante? Let's explore how the Amazon Titan Model, can be used for [Retrieval Augmented Generation (RAG)](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-customize-rag.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bedrock_quick_start). This advanced technique augments your text prompts by pulling in data from a vector database, adding an extra layer of depth and accuracy to your Q&A systems.
+## Retrieval Augmented Generation (RAG)
+Ready to up the ante? Let's explore how Bedrock can be used for [Retrieval Augmented Generation (RAG)](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-customize-rag.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bedrock_quick_start). This advanced technique augments your text prompts by pulling in data from a vector database, adding an extra layer of depth and accuracy.
 
 ### The Essentials: Embeddings, Vector Databases, and LangChain
 Before diving into the code, it's crucial to grasp the key elements that will make our text generation application tick.
@@ -176,23 +184,25 @@ Before diving into the code, it's crucial to grasp the key elements that will ma
 * **Vector Databases:** These specialized databases manage vector embeddings. They simplify data management, offer real-time updates, and come with built-in security features, making them a preferred choice for developers.
 * **LangChain:** A framework that supercharges applications with language model capabilities. LangChain makes your applications data-aware and interactive, offering modular components and off-the-shelf chains for various tasks.
 
-### QuickStart: Your Own RAG Demo
-Feeling pumped? Let's walk through building a text generation app that uses RAG, Amazon Titan, FAISS for vector database management, and [LangChain](https://www.langchain.com/) for streamlining the use of embeddings.
+For a real-world example of seeing these tools in action, check out blog post on how I built [AWS Solution Architect Agent with Generative AI.](https://community.aws/posts/building-agent-aws)
 
-If you're ready to jump into the deep end, the full code for this RAG demo is available [here](TODO). Below, I'll guide you through the building blocks of this project.
+### QuickStart: Your Own RAG Demo
+Feeling pumped? Let's walk through building a text generation app that uses RAG, and FAISS for vector database management, and [LangChain](https://www.langchain.com/) for streamlining the use of embeddings.
+
+If you're ready to jump into the deep end, the full code for this RAG demo is available [here](https://github.com/build-on-aws/amazon-bedrock-quick-start/blob/main/rag_example.py). Below, I'll guide you through the building blocks of this project.
 
 ### Step 1: Embed Text with Titan
-To work with Amazon Titan, you'll need to embed your text first. Here's how you can do it:
+To work with vector databases, you'll need to embed your text first. Here's how you can do it:
 
 ```python
 def get_embedding(body, modelId, accept, contentType):
-    response = bedrock.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
+    response = bedrock_runtime.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
     response_body = json.loads(response.get('body').read())
     embedding = response_body.get('embedding')
     return embedding
 
 body = json.dumps({"inputText": "explain black holes to 8th graders"})
-modelId = 'amazon.titan-embed-g1-text-02'
+modelId = 'amazon.titan-embed-text-v1'
 accept = 'application/json'
 contentType = 'application/json'
 
@@ -201,8 +211,7 @@ print(embedding)
 ```
 
 ### Step 2: The Power of LangChain
-
-Utilize LangChain to effortlessly manage embeddings and interact with language models. Here's an example"
+You can use LangChain to effortlessly manage embeddings and interact with language models. Here's an example:
 
 ```python
 from langchain.embeddings import BedrockEmbeddings
@@ -253,22 +262,21 @@ bedrock = boto3.client(
 
 def call_bedrock(prompt):
     prompt_config = {
-        "inputText": prompt,
-        "textGenerationConfig": {
-            "maxTokenCount": 4096,
-            "stopSequences": [],
-            "temperature": 0.5,
-            "topP": 0.2,
-        },
+        "prompt": prompt,
+        "max_tokens_to_sample": 4096,
+        "temperature": 0.5,
+        "top_k": 250,
+        "top_p": 0.5,
+        "stop_sequences": [],
     }
 
     body = json.dumps(prompt_config)
 
-    modelId = "amazon.titan-tg1-large"
+    modelId = "anthropic.claude-v2"
     accept = "application/json"
     contentType = "application/json"
 
-    response = bedrock.invoke_model(
+    response = bedrock_runtime.invoke_model(
         body=body, modelId=modelId, accept=accept, contentType=contentType
     )
     response_body = json.loads(response.get("body").read())
@@ -277,12 +285,14 @@ def call_bedrock(prompt):
     return results
 ```
 
-And there you have it! You've built a text generation application that not only creates text but also enriches it with context, thanks to RAG and Amazon Titan Model. Now that you know how to work with images and text, what's your next big idea?
+And there you have it! You've built a text generation application that not only creates text but also enriches it with context, thanks to RAG.
 
 ## Create a Chatbot with Amazon Bedrock and Streamlit
-You've seen how Amazon Bedrock can generate images and text. But can it chat? You bet! In this module, we'll roll up our sleeves and build a chatbot that not only talks but also remembers previous conversations, thanks to Amazon Bedrock, LangChain, and Streamlit. To make our chatbot even more reliable and steerable, we're also bringing [Anthropic's Claude](https://aws.amazon.com/bedrock/claude/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bedrock_quick_start) into the mix. Claude is a next-gen AI assistant that excels in tasks like summarization, search, and Q&A, and it offers customizable personality and tone options.
+You've seen how Amazon Bedrock can generate images and text. But can it chat? You bet! In this module, we'll roll up our sleeves and build a chatbot that not only talks but also remembers previous conversations, thanks to Amazon Bedrock, LangChain, and Streamlit. 
 
-For those eager to dive right in, you can find the complete code for this chatbot project [here](TODO). In the following section, I'll walk you through how I built it, step by step.
+To make our chatbot even more reliable and steerable, we're also bringing [Anthropic's Claude](https://aws.amazon.com/bedrock/claude/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bedrock_quick_start) into the mix. Claude is abloe to perform a wide range of tasks, from sophisticated dialogue and creative content generation to complex reasoning and detailed instruction.
+
+For those eager to dive right in, you can find the complete code for this chatbot project [here](https://github.com/build-on-aws/amazon-bedrock-quick-start/blob/main/chat_bedrock_st.py). In the following section, I'll walk you through how I built it, step by step.
 
 ### Initialize Amazon Bedrock with LangChain
 First things first, let's set up Amazon Bedrock in our project. We'll use Streamlit's `@st.cache_resource` decorator to cache the LangChain Language Model (LLM) instance. This saves us from recreating it every time we run the app.
@@ -290,7 +300,7 @@ First things first, let's set up Amazon Bedrock in our project. We'll use Stream
 ```python
 @st.cache_resource
 def load_llm():
-    llm = Bedrock(model_id="anthropic.claude-v1")
+    llm = Bedrock(model_id="anthropic.claude-v2")
     llm.model_kwargs = {"temperature": 0.7, "max_tokens_to_sample": 2048}
 
     model = ConversationChain(
@@ -321,7 +331,6 @@ for message in st.session_state.messages:
 ```
 
 ### React to User Input
-
 Now let's capture the user's input, display it, and add it to the chat history.
 
 ```python
@@ -362,9 +371,7 @@ And there you have it—a chatbot built with Amazon Bedrock, LangChain, and Stre
 
 ![Chat Example](images/chat_example.jpg)
 
-Now that you've conquered image and text generation, as well as chatbot development, what's your next big project going to be?
-
-## Wrapping It Up: Your Toolkit for Generative AI with Amazon Bedrock
+## Your Generative AI Toolkit
 You've just taken a deep dive into the versatile world of Amazon Bedrock. From generating stunning images with Stable Diffusion to enriching text using Amazon Titan and RAG, we've covered a lot of ground. And let's not forget the chatbot that converses like a pro, thanks to Claude.
 
 ### What's Next?
@@ -372,7 +379,7 @@ You're probably buzzing with ideas by now, and that's exactly where you should b
 
 * **Experiment:** Take the example codes, tweak them, break them, and make them your own.
 * **Explore:** Dive deeper into the features and capabilities of Amazon Bedrock, LangChain, and more.
-* **Engage:** Share your projects, and learn from others.
+* **Engage:** Share your projects, and learn from others. Reach out to @awsdevelopers on [X](https://twitter.com/awsdevelopers), [Instagram](https://www.instagram.com/awsdevelopers/) and [LinkedIn](https://www.linkedin.com/showcase/aws-developers/)
 
 ### Ready, Set, Build!
 Don't just sit there, the world of generative AI is waiting for you. Whether you're looking to augment your existing projects or start a new one, Amazon Bedrock offers the tools to make it happen. So go ahead, get your hands dirty and start building your next application with Amazon Bedrock today!
