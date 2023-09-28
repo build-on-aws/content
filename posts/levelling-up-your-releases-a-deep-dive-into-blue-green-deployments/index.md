@@ -15,6 +15,9 @@ spaces:
   - devops
 waves:
   - resilience
+images:
+  banner: images/cover.jpg
+  hero: images/cover.jpg
 authorGithubAlias: wirjo
 authorName: Daniel Wirjo
 date: 2023-08-30
@@ -22,8 +25,6 @@ date: 2023-08-30
 
 |ToC|
 |---|
-
-![](./images/cover.jpg)
 
 ## Introduction to Blue/Green Deployments
 
