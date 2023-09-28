@@ -418,7 +418,7 @@ NAME          READY   STATUS    RESTARTS   AGE   IP               NODE          
 efs-app       1/1     Running   0          10m   192.168.78.156   ip-192-168-73-191.region-code.compute.internal   <none>           <none>
 ```
 
->Note: It will take a couple minutes for the pod to transition to the "Running" state. If the pod remains in a "ContainerCreating" state, make sure that you have included a mount target for the subnet where your node is located (as shown in step two). Without this step, the pod will remain stuck in the "ContainerCreating" state.
+>Note: It will take a couple minutes for the Pod to transition to the "Running" state. If the Pod remains in a "ContainerCreating" state, make sure that you have included a mount target for the subnet where your node is located (as shown in step two). Without this step, the Pod will remain stuck in the "ContainerCreating" state.
 
 4. Verify that the data is being written to the /data/out location within the shared EFS volume. Use the following command to verify:
 
@@ -439,10 +439,6 @@ Fri Aug 4 09:13:55 UTC 2023
 
 >Optionally, terminate the node hosting your Pod and await Pod rescheduling. Alternatively, you may delete the Pod and redeploy it. Repeat the previous step once more, ensuring the output contains the prior output.
 
-## Conclusion
-
-With the completion of this tutorial, you have successfully configured Amazon EFS for persistent storage for your EKS-based container workloads. The sample Pod, leveraging the CentOS image, has been configured to capture the current date and store it in the ```/data/out``` directory on the EFS shared volume. To align with best practices, we recommend running your container workloads on private subnets, exposing only ingress controllers in the public subnets. Furthermore, make sure that EFS mount targets are established in all availability zones where your EKS cluster resides; otherwise, you may encounter a 'Failed to resolve' error. To continue your journey, you're now ready to store your stateful workloads like batch processes or machine learning training data to your EFS volume. 
-
 ## Clean Up
 
 To avoid incurring future charges, you should delete the resources created during this tutorial.
@@ -454,10 +450,13 @@ kubectl delete -f pod.yaml
 # Delete the Storage Class
 kubectl delete -f storageclass.yaml
 
-# Delete the EFS CSI Add-On
+# Delete the EFS CSI add-on
 eksctl delete addon --cluster $CLUSTER_NAME --name $ADD_ON
 
 # Delete the IAM Role
 aws iam delete-role --role-name AmazonEKS_EFS_CSI_DriverRole
 ```
 
+## Conclusion
+
+With the completion of this tutorial, you have successfully configured Amazon EFS for persistent storage for your EKS-based container workloads. The sample Pod, leveraging the CentOS image, has been configured to capture the current date and store it in the ```/data/out``` directory on the EFS shared volume. To align with best practices, we recommend running your container workloads on private subnets, exposing only ingress controllers in the public subnets. Furthermore, make sure that EFS mount targets are established in all availability zones where your EKS cluster resides; otherwise, you may encounter a 'Failed to resolve' error. To continue your journey, you're now ready to store your stateful workloads like batch processes or machine learning training data to your EFS volume. 
