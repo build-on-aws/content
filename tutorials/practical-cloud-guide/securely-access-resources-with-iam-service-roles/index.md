@@ -15,7 +15,7 @@ showInHomeFeed: true
 
 When we access a resource as a user, our credentials such as passwords and access keys are used to confirm that we can use a resource. However, there are instances where we will need to access resources belonging to another user or where a resource has to access another resource. This is accomplished with roles which use temporary credentials to provide access. In this tutorial, we will configure an EC2 instance with a service role to securely access an S3 bucket.
 
-## What you will learn
+## What You Will Learn
 
 - Create a working environment with Cloudformation
 - How to create a role and attach a policy
