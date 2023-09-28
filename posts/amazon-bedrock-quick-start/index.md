@@ -1,6 +1,6 @@
 ---
 title: Quickly build Generative AI applications with Amazon Bedrock
-description: Learn how to build using foundation models
+description: Learn how to build using foundation models quickly with Streamlit, Pyhon, Claude, Stable Diffusion, and Amazon Bedrock. 
 tags:
   - generative-ai
   - bedrock
@@ -18,7 +18,7 @@ date: 2023-09-28
 |ToC|
 |---|
 
-Amazon Bedrock has just launched, and it's already revolutionizing the generative AI landscape. Amazon Bedrock offers a seamless, serverless API that lets you choose from a variety of foundation models to fit your specific needs. Gone are the days of wrestling with complex setups and infrastructure, Amazon Bedrock simplifies it all. In this guide, we'll explore four distinct use cases, from image generation to text summarization, demonstrating the sheer versatility of this new service.
+Amazon Bedrock has just launched, and it's already revolutionizing the generative AI landscape. Amazon Bedrock offers a seamless, serverless API that lets you choose from a variety of foundation models to fit your specific needs. Gone are the days of wrestling with complex setups and infrastructure, Amazon Bedrock simplifies it. In this guide, we'll explore four distinct use cases, from image generation to text summarization, demonstrating the versatility of this new service.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ Ready to dive in? Here’s how to set up your [Amazon Bedrock](https://aws.amazo
 
 ### Step 1: Subscribe to Models in the Amazon Bedrock Console
 
-In the Amazon Bedrock console, select Model access in the left navigation pane and enable the models you would like to access. Once model access is enabled, you can then use the API.
+In the Amazon Bedrock console, select Model access in the left navigation pane and enable the models you would like to access. Once the model access is enabled, you can then use the API.
 
 **Note:** For Claude models you have to enter some extra details, but you will get access instantly.
 
@@ -42,15 +42,17 @@ python --version
 
 ### Step 3: Install the essentials
 
-Run the following command to grab the libraries you’ll need for this guide.
+First, clone the sample code repo, and run the following command to grab the libraries you’ll need for this guide.
 
 ```bash
+git clone https://github.com/build-on-aws/amazon-bedrock-quick-start
+cd amazon-bedrock-quick-start
 pip install -U boto3 langchain streamlit pillow faiss-cpu
 ```
 
 Alright, you're all set to start building your next generative AI masterpiece with Amazon Bedrock.
 
-The full code for the repo is located [here](https://github.com/build-on-aws/amazon-bedrock-quick-start)
+The full code for the repo is located [on GitHub](https://github.com/build-on-aws/amazon-bedrock-quick-start)
 
 ## Creating stunning images with Stable Diffusion
 
@@ -242,7 +244,7 @@ sentences = [
     "I work in New York City.",
     # Color
     "What color do you like the most?",
-    "What is your favourite color?",
+    "What is your favorite color?",
 ]
 
 embeddings = BedrockEmbeddings()
