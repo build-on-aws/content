@@ -9,6 +9,8 @@ tags:
   - fine-tuning
 spaces:
   - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: pcolmer99
 authorName: Paul Colmer
 additionalAuthors: 

@@ -11,6 +11,9 @@ tags:
   - quicksight
 spaces:
   - generative-ai
+waves:
+  - dataml
+  - generative-ai
 images:
   thumbnail: images/overview-01.png
   banner: images/overview-01.png

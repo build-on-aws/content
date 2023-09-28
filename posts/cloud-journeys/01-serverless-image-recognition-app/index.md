@@ -9,6 +9,8 @@ tags:
   - rekognition
   - ai-ml
   - aws
+waves:
+  - modern-apps
 authorGithubAlias: cpyle0819
 authorName: Corey Pyle
 additionalAuthors:

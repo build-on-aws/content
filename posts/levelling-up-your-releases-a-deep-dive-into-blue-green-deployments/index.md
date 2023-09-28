@@ -23,11 +23,8 @@ date: 2023-08-30
 |ToC|
 |---|
 
-<<<<<<< Updated upstream
-=======
 ![](./images/cover.jpg)
 
->>>>>>> Stashed changes
 ## Introduction to Blue/Green Deployments
 
 Deploying to production is a critical step in the software deployment lifecycle. Given the risks, engineering teams should be careful, intentional, and decisive on the release process. Blue/green deployments reduce risk and maintain availability when deploying new features. It does this by deploying the new feature to a separate new environment, and then cutting over production traffic to the new environment. This enables a clean cut over with near zero downtime and allows for rollback. 
