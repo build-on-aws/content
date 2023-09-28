@@ -285,7 +285,7 @@ AWS provides the following Managed Domain Lists, in the Regions where they are a
 
 - **AWSManagedDomainsAmazonGuardDutyThreatList** – Domains associated with DNS security threats, such as malware, command and control, or cryptocurrency related activity, sourced from Amazon GuardDuty.
 
-AWS Managed Domain Lists cannot be downloaded or browsed. To protect intellectual property, you can't view or edit the individual domain specifications within the AWS Managed Domain Lists. While this may seem a bit restrictive, the real benefit of is that it also helps prevent malicious users from designing threats that specifically circumvent published lists. The reality of it all is that you don't want these lists to be published.
+AWS Managed Domain Lists cannot be downloaded or browsed. To protect intellectual property, you can't view or edit the individual domain specifications within the AWS Managed Domain Lists. While this may seem a bit restrictive, the real benefit is that it also helps prevent malicious users from designing threats that specifically circumvent published lists. The reality of it all is that you don't want these lists to be published.
 
 So, in this section we are going to remove some of the manual work on our part, and not write a custom list.  Instead, we will use the managed domain lists, that are created and maintained by AWS, to filter egress DNS queries.
 
