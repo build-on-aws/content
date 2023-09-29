@@ -293,7 +293,7 @@ export FILE_SYSTEM_ID=$(aws efs create-file-system \
 
 ## Step 5: Configure Mount Targets for the EFS File System
 
-EFS only allows one mount target to be created in each Availability Zone, so you’ll need to place the mount target on the appropriate subnet. If your worker nodes are on a private subnet, you should create the mount target on that subnet. We will now create mount targets for the EFS File System, The mount target is an IP address on a VPC subnet that accepts NFS traffic. The Kubernetes nodes will open NFS connections with the IP address of the mount target.
+EFS only allows one mount target to be created in each Availability Zone, so you’ll need to place the mount target on the appropriate subnet. If your worker nodes are on a private subnet, you should create the mount target on that subnet. We will now create mount targets for the EFS File System, the mount target is an IP address on a VPC subnet that accepts NFS traffic. The Kubernetes nodes will open NFS connections with the IP address of the mount target.
 
 1. Determine the IP address of your cluster nodes:
 
