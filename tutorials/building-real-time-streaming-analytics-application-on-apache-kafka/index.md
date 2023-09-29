@@ -10,7 +10,6 @@ tags:
   - tutorials
 waves:
   - dataml
-showInHomeFeed: true
 movedFrom: /posts/building-real-time-streaming-analytics-application-on-apache-kafka
 authorGithubAlias: Madabaru
 authorName: Felix John

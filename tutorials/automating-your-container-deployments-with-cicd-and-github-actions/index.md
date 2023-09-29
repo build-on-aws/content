@@ -13,7 +13,6 @@ spaces:
   - devops
 waves:
   - devops
-showInHomeFeed: true
 movedFrom: /posts/automating-your-container-deployments-with-cicd-and-github-actions
 authorGithubAlias: jennapederson
 authorName: Jenna Pederson

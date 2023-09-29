@@ -10,7 +10,6 @@ tags:
     - infrastructure-as-code
     - aws
     - github-actions
-showInHomeFeed: true
 spaces:
   - devops
 waves:

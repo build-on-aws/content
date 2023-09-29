@@ -19,13 +19,13 @@ images:
 
 Join us Tuesday at 8AM PT/11 AM ET for every episode as we engage in insightful conversations with AWS partners and invite experts with deep knowledge across various technology domains. Our live streams are packed with informative and engaging content, designed to keep developers abreast of the latest trends and tools. Don't miss out! Sign up and subscribe today to access this valuable resource, helping you stay ahead in your development journey. Visit this [link](https://subscribethebigdevtheory.splashthat.com/) to sign up and subscribe to The Big Dev Theory now!
 
-https://youtu.be/xdiDUEPXkoc
+https://youtu.be/b0FeFtvkHiw
 
 ## Hosts
 
 [**Stuart Clark**](https://twitter.com/bigevilbeard), Senior Developer Advocate @ AWS
 
-[**Du'An Lightfoot**](https://twitter.com/labeveryday), Senior Developer Advocate @ AWS
+[**Adrian SanMiguel**](https://twitter.com/ar_sanmiguel), Principal Solutions Architect, Strategic Partner Engagements @ AWS
 
 
 ## Schedule
@@ -34,13 +34,9 @@ https://youtu.be/xdiDUEPXkoc
 Join us for our upcoming episodes!
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
-|Season 3 | **Episode 7** | 2023/09/12 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JIT | TBD |
-|Season 3 | **Episode 8** | 2023/09/19 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JIT | TBD |
-|Season 3 | **Episode 9** | 2023/09/26 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | JIT | TBD |
-|-|--|--|--|--|-|
-|Season 4 | **Episode 1** | 2023/10/03 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | TBC | TBD |
-|Season 4 | **Episode 2** | 2023/10/10 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | TBC | TBD |
-|Season 4 | **Episode 3** | 2023/10/17 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | TBC | TBD |
+|Season 4 | **Episode 1** | 2023/10/03 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Grafana Labs | TBD |
+|Season 4 | **Episode 2** | 2023/10/10 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Grafana Labs | TBD |
+|Season 4 | **Episode 3** | 2023/10/17 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Grafana Labs | TBD |
 |Season 4 | **Episode 4** | 2023/10/24 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
 |Season 4 | **Episode 5** | 2023/10/31 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
 |Season 4 | **Episode 6** | 2023/11/07 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
@@ -54,6 +50,9 @@ Join us for our upcoming episodes!
 Past episodes
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
+|Season 3 | **Episode 9** | 2023/09/26 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1935703774) | JIT | [Show notes](/livestreams/the-big-dev-theory/2023-09-26) |
+|Season 3 | **Episode 8** | 2023/09/19 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1930313107) | JIT | [Show notes](/livestreams/the-big-dev-theory/2023-09-19) |
+|Season 3 | **Episode 7** | 2023/09/12 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1923687049) | JIT | [Show notes](/livestreams/the-big-dev-theory/2023-09-12) |
 |Season 3 | **Episode 6** | 2023/09/05 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1918449852) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-09-05) |
 |Season 3 | **Episode 5** | 2023/08/29 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1911734242) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-08-29) |
 |Season 3 | **Episode 4** | 2023/08/22 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1906303935) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-08-22) |

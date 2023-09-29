@@ -9,7 +9,6 @@ tags:
   - aws-cdk
 waves:
   - dataml
-showInHomeFeed: true
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-07-30

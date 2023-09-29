@@ -11,7 +11,6 @@ tags:
     - aws
 waves:
   - modern-apps
-showInHomeFeed: true
 authorGithubAlias: danilop
 authorName: Danilo Poccia
 date: 2023-06-27
