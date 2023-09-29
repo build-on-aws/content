@@ -14,7 +14,7 @@ As developers, we're often asked complex technical questions that don't have sim
 
 This is similar to using generative AI tools like AI coding companions. However, rather than asking clarifying questions like a human, AI will attempt to provide an answer based on your initial inputs. The quality of the answer depends heavily on how well you frame the question and provide relevant context.
 
-I got my fair amount of frustrations when I started to use these tools, as it would not read my mind as I was expecting (can you believe it?)! As I kept using thr assistant, I became better at leveraging it, and I can tell this help me bring back the joy to code again (disclaimer: in my current job, I don't get to code every day...).
+I got my fair amount of frustrations when I started to use these tools, as it would not read my mind as I was expecting (can you believe it?)! As I kept using the assistant, I became better at leveraging it, and I can tell this help me bring back the joy to code again (disclaimer: in my current job, I don't get to code every day...).
 
 In this article, I'll share tips and good practices from my own experience for getting the most out of AI coding assistants. I will use Amazon CodeWhisperer, my preferred AI assistant, and with examples in Java, we'll cover:
 
@@ -37,6 +37,11 @@ Unless you have lived under a rock for the past year, you must have heard about 
 I am using CodeWhisperer as my AI coding companion, and it helps to boost my productivity as I code. It generates real-time code suggestions as I type, keeping me in the flow instead of searching the web or asking colleagues for help. CodeWhisperer meets you inside your favorite IDE like VSCode or IntelliJ's, by installing the AWS Toolkit. It's optimized for AWS APIs, so you can build cloud apps faster. I also like the fact that CodeWhisperer scans your code for security vulnerabilities, giving you pointers in your code on where to fix issues before they create problems. Finally, I find very useful that CodeWhisperer can flag or filter code suggestions that resemble open-source training data. It means that CodeWhisperer will give you the associated open-source project’s repository URL and license so that you can more easily review them and add attribution.
 
 You can use CodeWhisperer for free, by [signing up with just an email address](https://aws.amazon.com/codewhisperer/resources/#Getting_started).
+
+>Have a look at some useful introductory videos from my colleagues on this [playlist](https://www.youtube.com/watch?v=sFh3_cMUrMk&list=PLDqi6CuDzubxzL-yIqgQb9UbbceYdKhpK)
+
+https://www.youtube.com/watch?v=sFh3_cMUrMk
+
 
 When I started to use those tools, I found them almost magical. But soon, I was not really getting what I wanted, and grew frustrated. It is important to keep a few things in mind when working your new companion.
 
@@ -182,7 +187,7 @@ For code where security, regulatory compliance, or safety is paramount, AI syste
 
 ## Conclusion
 
-Let's be honest - AI coding companion technology has room to mature. It's not a perfect autonomous coder yet. But combining my skills with CodeWhisperer has been a game changer for my productivity.
+Let's be honest - like any new technology, AI coding assistants have room to mature. They are not perfect autonomous coders yet. But combining my skills with CodeWhisperer has been a game changer for my productivity.
 
 When I properly frame prompts and provide examples, CodeWhisperer can generate solid code for common tasks incredibly fast. It handles the repetitive coding so I can focus my mental energy on the truly complex logic. But I've still got to lead. CodeWhisperer won't intuit broader goals or read my mind. I provide context through comments, tests, and variable names. Prompting well takes practice and iteration.
 
