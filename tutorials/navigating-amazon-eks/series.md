@@ -8,6 +8,8 @@ posts:
     - eks-cluster-ipv6-globally-scalable
     - eks-dynamic-db-storage-ebs-csi
     - eks-cluster-high-traffic
+    - eks-with-efs-add-on
+    - managing-high-volume-batch-sqs-eks
 --- 
 |ToC|
 |---|
@@ -50,9 +52,11 @@ These tutorials focus on the installation and configuration of essential drivers
 
 The following tutorials are included in this stage:
 
+* [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](/tutorials/eks-with-efs-add-on/)
 * [Dynamic Database Storage with the Amazon EBS CSI Driver for Amazon EKS](/tutorials/eks-dynamic-db-storage-ebs-csi)
 * [Exposing and Grouping Applications Using the AWS Load Balancer Controller on an Amazon EKS IPv4 Cluster](/tutorials/eks-cluster-load-balancer-ipv4)
 * [Exposing and Grouping Applications Using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster](/tutorials/eks-cluster-load-balancer-ipv6)
+* [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS](/tutorials/managing-high-volume-batch-sqs-eks)
 
 ### Stage 3: Optimize and Integrate with AWS Services
 
