@@ -206,7 +206,7 @@ You should see the following connection terminal:
 
 ## (Optional) Step 5: Deploy a Sample Application
 
-Now, we’re all set to launch a sample application and enable its accessibility on the internet through an Application Load Balancer. For step-by-step guidance, check out the tutorial at [Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an EKS IPv6 Cluster](/tutorials/eks-cluster-load-balancer-ipv6). This tutorial will guide you through the required Ingress annotations for the AWS Application Load Balancer Controller (LBC), an essential mechanism for controlling external access to services within an EKS cluster. You’ll also explore Ingress Groupings, a sophisticated feature that amalgamates multiple Ingress resources into one Application Load Balancer (ALB), enhancing both efficiency and ALB management.
+Now, we’re all set to launch a sample application and enable its accessibility on the internet through an Application Load Balancer. For step-by-step guidance, check out the tutorial at [Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an EKS IPv6 Cluster](/tutorials/navigating-amazon-eks/eks-cluster-load-balancer-ipv6). This tutorial will guide you through the required Ingress annotations for the AWS Application Load Balancer Controller (LBC), an essential mechanism for controlling external access to services within an EKS cluster. You’ll also explore Ingress Groupings, a sophisticated feature that amalgamates multiple Ingress resources into one Application Load Balancer (ALB), enhancing both efficiency and ALB management.
 
 ## Clean Up
 

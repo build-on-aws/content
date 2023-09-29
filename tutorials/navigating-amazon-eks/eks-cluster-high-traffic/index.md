@@ -228,7 +228,7 @@ kube-system         external-dns                         0         43m
 
 ## (Optional) Deploy a Sample Application
 
-Now, we’re all set to launch a sample application and enable its accessibility on the internet through an Application Load Balancer (ALB). For step-by-step guidance, check out the tutorial at [Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an EKS IPv4 Cluster](/tutorials/eks-cluster-load-balancer-ipv4). This tutorial will guide you through the required Ingress annotations for the AWS LBC, an essential mechanism for controlling external access to services within an EKS cluster. You’ll also explore Ingress Groupings, a sophisticated feature that amalgamates multiple Ingress resources into one ALB, enhancing both efficiency and ALB management.
+Now, we’re all set to launch a sample application and enable its accessibility on the internet through an Application Load Balancer (ALB). For step-by-step guidance, check out the tutorial at [Exposing and Grouping Applications using the AWS Load Balancer Controller (LBC) on an EKS IPv4 Cluster](/tutorials/navigating-amazon-eks/eks-cluster-load-balancer-ipv4). This tutorial will guide you through the required Ingress annotations for the AWS LBC, an essential mechanism for controlling external access to services within an EKS cluster. You’ll also explore Ingress Groupings, a sophisticated feature that amalgamates multiple Ingress resources into one ALB, enhancing both efficiency and ALB management.
 
 ## Clean Up
 
