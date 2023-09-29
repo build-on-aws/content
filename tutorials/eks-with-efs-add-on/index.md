@@ -141,7 +141,7 @@ Update the IAM role:
 aws iam update-assume-role-policy --role-name $ROLE_NAME --policy-document "$TRUST_POLICY" --region $CLUSTER_REGION
 ```
 
-## Step 3: Verify or Install the EFS CSI Driver add-on
+## Step 3: Verify or Install the EFS CSI Driver Add-on
 
 Here, we will verify that the EFS CSI Driver managed add-on is properly installed and active on your Amazon EKS cluster. The EFS CSI Driver is crucial for enabling Amazon EFS to work seamlessly with Kubernetes, allowing you to mount EFS File Systems as persistent volumes for your batch workloads.
 
