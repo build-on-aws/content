@@ -24,8 +24,8 @@ This series aims to bridge the gap between Amazon EKS and the world of open-sour
 
 * **Boost Capabilities**: Explore a wide array of EKS-managed and self-managed add-ons to augment your Kubernetes workloads, including the use of the EFS CSI Driver for stateful batch operations.
 * **Fortify Security**: Master the intricacies of safeguarding your cloud environment through AWS services, utilizing IAM Roles for Service Accounts (IRSAs) and OpenID Connect (OIDC) for secure access points.
-* **Scale Dynamically**: Evaluate and select the most suitable auto-scaling mechanisms tailored to your unique Kubernetes workloads, such as Karpenter for compute-heavy batch and machine learning tasks.
-* **Optimize Compute Resources**: Determine the Amazon EC2 instance types that best match your Kubernetes projects, whether focused on batch processing or microservices.
+* **Optimize Costs**: Evaluate and select the most suitable auto-scaling mechanisms tailored to your unique Kubernetes workloads, such as Karpenter for compute-heavy batch and machine learning tasks.
+* **Tailor Compute Resources**: Determine the Amazon EC2 instance types that best match your Kubernetes projects, whether focused on batch processing or microservices.
 * **Configure Data Storage**: Gain insights on setting up persistent data storage and creating volume snapshots with AWS-backed Container Storage Interfaces (CSIs).
 * **Monitor Operations**: Utilize monitoring solutions like Amazon CloudWatch Container Insights for an exhaustive view of your containerized applications' performance.
 * **Implement Networking**: Opt for either public or private IPv4/IPv6 network configurations within a VPC, enabled by Infrastructure as Code (IaC) frameworks.
@@ -37,16 +37,16 @@ Navigating the cloud ecosystem with Amazon EKS is like assembling a complex puzz
 
 ### Stage 1: Create Pre-configured Clusters
 
-In this stage, you'll build a new Amazon EKS cluster pre-configured to run specific Kubernetes workloads using an Infrastructure as Code (IaC) template. From the get-go, you'll configure essential components like VPCs, drivers, controllers, and IAM Service Accounts (IRSAs). These tutorials establish the foundation for cloud-based application and resource deployment in subsequent stages.
+These tutorials guide you through the process of building Amazon EKS clusters pre-configured for specific Kubernetes workloads. You'll start by setting up essential components like VPCs, drivers, controllers, and IAM Service Accounts (IRSAs), laying the groundwork for future cloud-based applications and resource deployments.
 
 The following tutorials are included in this stage:
 
 * [Building an IPv6-based EKS Cluster for Globally Scalable Applications](/tutorials/eks-cluster-ipv6-globally-scalable)
 * [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/eks-cluster-high-traffic)
 
-### Stage 2: Set-Up and Deploy Kubernetes Workloads
+### Stage 2: Enhance and Extend Cluster Capabilities
 
-These tutorials delve into the Amazon EKS ecosystem, exploring add-ons and AWS service integrations. You'll discover how to enhance your EKS clusters with AWS-specific features, leveraging the full AWS toolkit for a robust cloud experience.
+These tutorials focus on the installation and configuration of essential drivers, controllers, and other foundational components for your EKS cluster. They serve as prerequisites for deploying Kubernetes workloads and for extending your cluster with additional AWS services and features.
 
 The following tutorials are included in this stage:
 
@@ -54,9 +54,9 @@ The following tutorials are included in this stage:
 * [Exposing and Grouping Applications Using the AWS Load Balancer Controller on an Amazon EKS IPv4 Cluster](/tutorials/eks-cluster-load-balancer-ipv4)
 * [Exposing and Grouping Applications Using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster](/tutorials/eks-cluster-load-balancer-ipv6)
 
-### Stage 3: Achieve Operational Readiness
+### Stage 3: Optimize and Integrate with AWS Services
 
-These tutorials dive into the operational core of your EKS clusters, focusing on the components you put in place for clusters in production. You'll master the facets of cloud sustainability from using Prometheus, Amazon CloudWatch for seamless monitoring to DNS record automation with ExternalDNS, capitalizing on AWS services for a resilient operational foundation.
+These tutorials guide you through optimizing the operational aspects of your EKS clusters and seamlessly integrating them with additional AWS services. You'll build upon foundational elements to master cloud sustainability using tools and services like Prometheus, Amazon CloudWatch, or AWS Batch.
 
 Tutorials coming soon!
 
