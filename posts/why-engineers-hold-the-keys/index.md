@@ -11,7 +11,6 @@ waves:
 authorGithubAlias: jblume2
 authorName: Jeff Blume
 date: 2023-08-22
-showInHomeFeed: true
 
 ---
 | ToC |

@@ -14,7 +14,6 @@ waves:
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-08-11
-showInHomeFeed: true
 ---
 
 ## Introduction

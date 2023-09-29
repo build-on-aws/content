@@ -12,7 +12,6 @@ spaces:
 authorGithubAlias: mergenf
 authorName: Ben Mergen
 date: 2023-09-12
-showInHomeFeed: true
 ---
 
 ## Introduction

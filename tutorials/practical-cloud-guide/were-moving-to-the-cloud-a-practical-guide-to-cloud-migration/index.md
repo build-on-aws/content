@@ -4,7 +4,6 @@ description: "Introduction to the Practical Cloud Guide, a series of articles an
 tags:
   - it-pros
   - migration
-showInHomeFeed: true
 authorGithubAlias: "spara" 
 authorName: "Sophia Parafina"
 date: 2023-06-21

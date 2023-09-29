@@ -6,7 +6,6 @@ tags:
     - ms-sql-server
     - migration
     - aws-lightsail
-showInHomeFeed: true
 movedFrom: /posts/practical-cloud-guide/migrate-a-sql-server-database-in-the-cloud
 authorGithubAlias: spara
 authorName: "Sophia Parafina"

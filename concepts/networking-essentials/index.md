@@ -7,7 +7,6 @@ tags:
   - essentials
   - aws
   - vpc
-showInHomeFeed: true
 authorGithubAlias: labeveryday
 authorName: "Du'An Lightfoot"
 date: 2022-10-21

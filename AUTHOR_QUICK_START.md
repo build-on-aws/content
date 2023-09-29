@@ -6,17 +6,13 @@ Interested in contributing content? Get started quickly:
 * [Writing Style](#writing-style)
 * [Publishing Process](#publishing-process)
   * [0. Pre-Requisites](#0-prerequisites)
-  * [1. Submit a Content Proposal](#1-submit-a-content-proposal)
-  * [2. Proposal Review](#2-proposal-review)
-  * [3. Write Your First Draft](#3-write-your-first-draft)
-  * [4. Submit Pull Request for Review and Publishing](#4-submit-pull-request-for-review-and-publishing)
-  * [5. Address Review Feedback](#5-address-review-feedback)
+  * [1. Write Your First Draft](#1-write-your-first-draft)
+  * [2. Submit Pull Request for Review and Publishing](#2-submit-pull-request-for-review-and-publishing)
+  * [3. Address Review Feedback](#3-address-review-feedback)
 * [The Legal Details](#the-legal-details)
 * [Frequently Asked Questions](#frequently-asked-questions)
 
 ## What We're Looking For
-
-:warning: January 27, 2023: Community content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](/) for updates as we open this up to more community authors in the coming months.
 
 ### Who Writes on Community.aws
 
@@ -80,20 +76,7 @@ You'll need to meet the following prerequisites to publish your content:
 * Have a [GitHub SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) or [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) setup for your GitHub account
 * Have a Markdown editor or compatible IDE for writing and previewing your markdown content (e.g. VSCode, IA Writer, Obsidian, IntelliJ, etc.). We recommend installing a plugin / extension for your IDE to help with Markdown & Yaml syntax, as well as a spell checker.
 
-### 1. Submit a Content Proposal
-
-Before writing your content, submit a content proposals as a GitHub Issue in [content](/) repository [here](https://github.com/build-on-aws/content/issues/new?assignees=cherbk&labels=content+proposal&template=content-proposal-template.md).
-
-### 2. Proposal Review
-
-During the proposal review phase, we will look for the following in your proposal:
-
-* ensure content topic aligns with the target audience (fellow builders)
-* content topic is educational and useful
-
-When your proposal has been reviewed, a reviewer will label your issue with `accepted`, `change requested`, or `rejected`. Once `accepted`, you can continue to step 3 to Write Your First Draft.
-
-### 3. Write Your First Draft
+### 1. Write Your First Draft
 
 After your content proposal has been `accepted`, you are ready to start writing. The contribution model used is similar to opensource projects:
 
@@ -125,7 +108,7 @@ date: 2021-08-26
 
 While writing your draft, review the [Content Review Checklist](/CONTENT_REVIEW_CHECKLIST.md) to make sure your content addresses these items. Taking care of these items before submitting your content will speed up the time to review. Please also take a look at the [FAQ](/FAQ.md) as we have extended standard Markdown with a number of useful extensions for embedded media, table of content, displaying code, and more.
 
-### 4. Submit Pull Request for Review and Publishing
+### 2. Submit Pull Request for Review and Publishing
 
 Once you've written your content, add your content to the branch in your forked copy of `content` in your own account and submit a pull request from that branch. You can do this using the GitHub UI or clone the repo locally. The instructions below are to clone the repo locally.
 
@@ -170,7 +153,7 @@ For a post titled `What Happens When You Type a URL Into Your Browser` which is 
 * Main post file: `/posts/what-happens-when-you-type-a-url-into-your-browser/index.md`
 * Images: `/posts/what-happens-when-you-type-a-url-into-your-browser/images/dig-command-output.png`
 
-### 5. Address Review Feedback
+### 3. Address Review Feedback
 
  A reviewer will provide feedback or requested/suggested changes in the pull request, label it `changes requested`, and assign it back to you. This review is based on the following:
 

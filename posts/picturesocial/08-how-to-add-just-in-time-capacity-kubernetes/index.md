@@ -8,7 +8,6 @@ tags:
   - karpenter
   - cloudformation
   - terraform
-showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-03-27

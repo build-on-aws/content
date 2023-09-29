@@ -5,7 +5,6 @@ tags:
   - devops
   - essentials
   - aws
-showInHomeFeed: true
 spaces:
   - devops
 waves:
