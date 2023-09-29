@@ -4,6 +4,7 @@ description: "Configure persistent shared storage for container workloads on Ama
 tags:
     - eks-cluster-setup
     - eks
+    - kubernetes
     - tutorials
     - aws
     - storage
@@ -12,7 +13,6 @@ waves:
   - modern-apps
 spaces:
   - kubernetes
-  - modern-apps
 authorGithubAlias: ashishkamble4
 authorName: Ashish Kamble
 date: 2023-09-29

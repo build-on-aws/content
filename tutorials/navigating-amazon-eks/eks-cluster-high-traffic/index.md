@@ -5,13 +5,13 @@ tags:
     - eks-cluster-setup
     - eks
     - kubernetes
+    - eksctl
     - tutorials
     - aws
 waves:
   - modern-apps
 spaces:
   - kubernetes
-  - modern-apps
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
 movedFrom: /tutorials/eks-cluster-high-traffic

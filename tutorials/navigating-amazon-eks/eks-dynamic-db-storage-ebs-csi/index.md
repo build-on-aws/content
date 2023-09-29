@@ -9,7 +9,6 @@ tags:
     - eksctl
     - ebs
     - aws
-showInHomeFeed: true
 waves:
   - modern-apps
 spaces:

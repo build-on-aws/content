@@ -9,6 +9,10 @@ tags:
     - tutorials
     - aws
 movedFrom: /tutorials/managing-high-volume-batch-sqs-eks
+waves:
+  - modern-apps
+spaces:
+  - kubernetes
 authorGithubAlias: tucktuck9
 authorName: Leah Tucker
 date: 2023-09-29
