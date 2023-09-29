@@ -55,7 +55,7 @@ In the preceding sample architecture, we can calculate average `CPUUtilization` 
 
 * Select Quick S3 setup and let CloudWatch create required resources (Kinesis Firehose stream, S3 bucket, IAM role etc.) to emit the metrics in JSON format
 
-![Figure-4](images/image4.png) *Figure-3: Quick S3 setup will automatically create the resources for you and export metrics into S3 in JSON format*
+![Figure-4](images/image4.png) <br>*Figure-3: Quick S3 setup will automatically create the resources for you and export metrics into S3 in JSON format*
 
 * By default, metric stream includes `minimum, maximum, sample count, and sum` [statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-statistics.html)
 * Once you are finished creating the metric stream, CloudWatch will then automatically start directing the EC2 instances metrics to Amazon Kinesis Firehouse delivery stream, with delivery to a data lake in S3
