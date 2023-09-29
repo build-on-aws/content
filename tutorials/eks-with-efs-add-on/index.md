@@ -345,7 +345,7 @@ aws efs create-mount-target \
 
 >Note: EFS only allows 1 mount target to be created in one Availability Zone, irrespective of the subnets in the Availability Zone. If you are using an EKS cluster with Worker Nodes in Private Subnets, it would be recommended to create the mount targets for the same subnets.
 
-## Step 6: Setup a Storage Class for the Sample Application
+## Step 6: Set Up a Storage Class for the Sample Application
 
 In Kubernetes, there are two ways to provision storage for container applications: Static Provisioning and Dynamic Provisioning. In Static Provisioning, a cluster administrator manually creates Persistent Volumes (PVs) that specify the available storage for the cluster's users. These PVs are part of the Kubernetes API and can be easily used. On the other hand, Dynamic Provisioning automates the creation of PVs. Kubernetes uses Storage Classes to generate PVs automatically when a pod requests storage through PersistentVolumeClaims. This method simplifies the provisioning process and adjusts to the specific needs of the application. To learn more, refer [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) in Kubernetes documentation. For our lab, we will use the “Dynamic Provisioning Method” method.
 
