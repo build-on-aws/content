@@ -51,7 +51,7 @@ The Grad Project is part of our ongoing effort to support education and research
 2. Fork the Grad Project's student-built [GitHub repos](https://github.com/build-on-aws/the-grad-project)
 3. Preregister for the [MIT](https://www.linkedin.com/events/howmitstudentsarecombatingracis7100201173629972481/theater/) session and the [CMU](https://www.linkedin.com/events/exploringtext-to-sql-howcarnegi7100202154535071744/theater/) session.
 3. Tune in on LinkedIn Live on Sept 19th and 26th to learn live with Ben, Jessy, Vince, and Developer Advocate Curtis who will be ready to answer your questions.
-4. Miss the broadcast? You can find it on [YouTube](https://www.youtube.com/@AWSOnlineTechTalks) after the event.
+4. Miss the broadcast? You can find it on this [YouTube](https://www.youtube.com/playlist?list=PL5bUlblGfe0L4Gg3_W90NPLO0drg9OuHU) playlist after the event.
 
 ## About the Authors
 
