@@ -1,5 +1,5 @@
 ---
-title: "How Good Are AI Coding Companions? "It Depends!"
+title: "How Good Are AI Coding Companions? 'It Depends!'"
 description: Practical guide for using an AI Coding assistant and improve your productivity.
 tags:
   - java
