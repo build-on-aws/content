@@ -9,6 +9,8 @@ authorGithubAlias: aws-veliswaboya
 authorName: Veliswa Boya
 date: 2023-09-29
 ---
+|ToC|
+|---|
 
 ![A Bridge](images/bridge.jpeg)
 
