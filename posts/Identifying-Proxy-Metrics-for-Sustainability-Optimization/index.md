@@ -1,12 +1,16 @@
 ---
 title: "Identifying Proxy Metrics for Sustainability Optimization"
-description: "This blog will contain examples of extracting, baselining and tracking proxy metrics using a sample architecture"
+description: "Learn how to extract, baseline and track proxy metrics using a sample architecture for sustainability optimization"
 tags:
     - sustainability-optimization
     - proxy-metrics
     - proxy-metrics-example
+    - sustainability
 authorGithubAlias: KarnikPooja
-authorName: Pooja Karnik, Raman Pujani
+authorName: Pooja Karnik
+additionalAuthors: 
+  - authorGithubAlias:
+    authorName: Raman Pujani
 date: 2023-09-22
 ---
 ## Identifying Proxy Metrics for Sustainability Optimization
