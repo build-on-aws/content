@@ -114,11 +114,11 @@ If you identified any issues during stress testing, fix and repeat the test unti
 
 Here are just some of the metrics you should measure throughout your stress testing process, I’m aligning metrics to two of the types of stress tests I detailed earlier, for illustration:
 
-* **Distributed client-server stress testing**
+### **Distributed client-server stress testing**
 
 With this stress test, you are testing for communication between the server and the client(s). Typical metrics to look out for include rounds failure which let you know how many times a round failed, connections failure which is the number of failed connections refused by the client, typically due to a weak signal, and hits failure which is the number of failed attempts. Adjustments to your code will help with fixing these types of failures.
 
-* **Application stress testing**
+### **Application stress testing**
 
 With application stress testing, you are testing for performance issues which include unexpected delays (bottlenecks). Typical metrics to look out for include how much time is taken to have the first byte of data returned to you, hit time which is the average amount of time taken to retrieve a page or image, and page time which is how much time is taken to retrieve all of the data on a page.
 
