@@ -1,6 +1,6 @@
 ---
 title: "Building an Amazon EKS Cluster Preconfigured to Run Asynchronous Batch Tasks"
-description: "Deploy a preconfigured Amazon EKS cluster tailored for asynchronous background tasks, enhanced with scalable data storage solutions using an eksctl 'quickstart' template."
+description: "Use scalable data storage solutions with eksctl 'quickstart' template."
 tags:
     - eks-cluster-setup
     - eks
@@ -51,7 +51,7 @@ This tutorial is the first installment in a series focused on optimizing Amazon 
 * **Private Networking**: Managed node groups utilize private networking and a NAT gateway to bolster security by limiting direct internet access.
 * **Monitoring**: An [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) IAM policy is attached to the IAM Role for Service Account (IRSA), aiding optional components like [CloudWatch Container Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) to collect and summarize metrics and logs.
 
-## Step 1: Configure the cluster
+## Step 1: Configure the Cluster
 
 In this section, you will configure the Amazon EKS cluster to meet the specific demands of high-traffic microservice applications. By creating this `cluster-config.yaml` file, you'll define the settings for IAM roles, scalable resources, private networking, and monitoring. These configurations are essential for ensuring that the cluster is robust, scalable, and secure, with optimized performance for dynamic scalability and data persistence.
 
@@ -108,17 +108,17 @@ cloudWatch:
    logRetentionInDays: 30
 ```
 
-## **Step 2: Create the cluster**
+## **Step 2: Create the Cluster**
 
 Now, we're ready to create our Amazon EKS cluster. This process takes several minutes to complete. If you'd like to monitor the status, see the [AWS CloudFormation](https://console.aws.amazon.com/cloudformation) console.
 
-1. Create the EKS cluster by running the following command.
+1. Create the EKS cluster by running the following command:
 
 ```
 eksctl create cluster -f cluster-config.yaml
 ```
 
-**Note**: if you receive an “Error: checking AWS STS access” in the response, be sure to check that you’re using the right[user identity](https://quip-amazon.com/aeTGA01eqKm2/Developer-Foundations-Quickstart-EKS-docs#temp:C:VfJ11091e508f5441ddb9a94e800) for the current shell session. Depending on how you configured the AWS CLI, you may also need to specify a named profile (for example, `--profile clusteradmin`).
+**Note**: if you receive an “Error: checking AWS STS access” in the response, be sure to check that you’re using the right user identity for the current shell session. Depending on how you configured the AWS CLI, you may also need to specify a named profile (for example, `--profile clusteradmin`).
 
 Upon completion, you should see the following response output:
 
@@ -185,4 +185,4 @@ eksctl delete cluster -f ./cluster-config.yaml
 
 ## Conclusion
 
-Upon the successful completion of this tutorial, you've effectively set up an Amazon EKS cluster tailored for batch processing tasks. By choosing compute-optimized EC2 instances and implementing key IAM policies, you've engineered a cluster that's both agile and robust. This tutorial has guided you through the creation and deployment of your Amazon EKS cluster, and the verification of node and pod health. To extend your cluster's capabilities, consider integrating services like Amazon SQS for job queuing or Amazon EFS for persistent storage. These additional configurations will furnish you with a versatile, fully operational environment, ready for deploying both stateless and data-intensive batch jobs.
+Upon the successful completion of this tutorial, you've effectively set up an Amazon EKS cluster tailored for batch processing tasks. By choosing compute-optimized EC2 instances and implementing key IAM policies, you've engineered a cluster that's both agile and robust. This tutorial has guided you through the creation and deployment of your Amazon EKS cluster, and the verification of node and pod health. To extend your cluster's capabilities, consider setting up the [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md) to dynamically adjust the number of worker nodes based on resource requirements, ensuring optimal resource utilization and cost-efficiency, or [Amazon EFS](https://community.aws/tutorials/eks-with-efs-add-on) for shared, persistent storage across multiple nodes or even across different availability zones. These additional configurations will furnish you with a versatile, fully operational environment, ready for deploying both stateless and data-intensive batch jobs.
