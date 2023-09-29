@@ -349,7 +349,6 @@ aws efs create-mount-target \
 
 In Kubernetes, there are two ways to provision storage for container applications: Static Provisioning and Dynamic Provisioning. In Static Provisioning, a cluster administrator manually creates Persistent Volumes (PVs) that specify the available storage for the cluster's users. These PVs are part of the Kubernetes API and can be easily used. On the other hand, Dynamic Provisioning automates the creation of PVs. Kubernetes uses Storage Classes to generate PVs automatically when a pod requests storage through PersistentVolumeClaims. This method simplifies the provisioning process and adjusts to the specific needs of the application. To learn more, refer [PersistentVolumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) in Kubernetes documentation. For our lab, we will use the “Dynamic Provisioning Method” method.
 
-
 1. First, download the Storage Class manifest:
 
 ```bash
