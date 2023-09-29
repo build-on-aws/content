@@ -43,8 +43,8 @@ These tutorials guide you through the process of building Amazon EKS clusters pr
 
 The following tutorials are included in this stage:
 
-* [Building an IPv6-based EKS Cluster for Globally Scalable Applications](/tutorials/eks-cluster-ipv6-globally-scalable)
-* [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/eks-cluster-high-traffic)
+* [Building an IPv6-based EKS Cluster for Globally Scalable Applications](/tutorials/navigating-amazon-eks/eks-cluster-ipv6-globally-scalable)
+* [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic)
 
 ### Stage 2: Enhance and Extend Cluster Capabilities
 
@@ -52,11 +52,11 @@ These tutorials focus on the installation and configuration of essential drivers
 
 The following tutorials are included in this stage:
 
-* [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](/tutorials/eks-with-efs-add-on/)
-* [Dynamic Database Storage with the Amazon EBS CSI Driver for Amazon EKS](/tutorials/eks-dynamic-db-storage-ebs-csi)
-* [Exposing and Grouping Applications Using the AWS Load Balancer Controller on an Amazon EKS IPv4 Cluster](/tutorials/eks-cluster-load-balancer-ipv4)
-* [Exposing and Grouping Applications Using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster](/tutorials/eks-cluster-load-balancer-ipv6)
-* [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS](/tutorials/managing-high-volume-batch-sqs-eks)
+* [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](/tutorials/navigating-amazon-eks/eks-with-efs-add-on/)
+* [Dynamic Database Storage with the Amazon EBS CSI Driver for Amazon EKS](/tutorials/navigating-amazon-eks/eks-dynamic-db-storage-ebs-csi)
+* [Exposing and Grouping Applications Using the AWS Load Balancer Controller on an Amazon EKS IPv4 Cluster](/tutorials/navigating-amazon-eks/eks-cluster-load-balancer-ipv4)
+* [Exposing and Grouping Applications Using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster](/tutorials/navigating-amazon-eks/eks-cluster-load-balancer-ipv6)
+* [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS](/tutorials/navigating-amazon-eks/managing-high-volume-batch-sqs-eks)
 
 ### Stage 3: Optimize and Integrate with AWS Services
 
