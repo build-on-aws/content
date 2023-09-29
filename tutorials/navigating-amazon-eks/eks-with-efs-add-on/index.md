@@ -4,15 +4,15 @@ description: "Configure persistent shared storage for container workloads on Ama
 tags:
     - eks-cluster-setup
     - eks
+    - kubernetes
     - tutorials
     - aws
     - storage
-showInHomeFeed: true
+movedFrom: /tutorials/eks-with-efs-add-on
 waves:
   - modern-apps
 spaces:
   - kubernetes
-  - modern-apps
 authorGithubAlias: ashishkamble4
 authorName: Ashish Kamble
 date: 2023-09-29
@@ -20,7 +20,7 @@ date: 2023-09-29
 
 Managing storage solutions for containerized applications requires careful planning and execution. Kubernetes workloads such as content management systems and video transcoding may benefit from using Amazon Elastic File System (EFS). EFS is designed to provide serverless, fully elastic file storage that lets you share file data without provisioning or managing storage capacity and performance. EFS is ideal for applications that need shared storage across multiple nodes or even across different availability zones. In contrast, Amazon Elastic Block Store (EBS) requires configuring volumes that are limited by size and region. The Amazon Elastic File System (EFS) CSI Driver add-on exposes EFS File Systems to your workloads, handling the complexities of this versatile and scalable storage solution.
 
-In this tutorial, you will set up the Amazon EFS CSI Driver on your Amazon EKS cluster and configure persistent shared storage for container workloads. More specifically, you will install the EFS CSI Driver as an Amazon EKS add-on. Amazon EKS add-ons automate installation and management of a curated set of add-ons for EKS clusters. You'll configure the EFS CSI Driver to handle both lightweight applications, akin to microservices, and more substantial systems, comparable to databases or user authentication systems, achieving seamless storage management. 
+In this tutorial, you will set up the Amazon EFS CSI Driver on your Amazon EKS cluster and configure persistent shared storage for container workloads. More specifically, you will install the EFS CSI Driver as an Amazon EKS add-on. Amazon EKS add-ons automate installation and management of a curated set of add-ons for EKS clusters. You'll configure the EFS CSI Driver to handle both lightweight applications, akin to microservices, and more substantial systems, comparable to databases or user authentication systems, achieving seamless storage management.
 
 
 | Attributes             |                                                                 |
@@ -93,11 +93,11 @@ kubectl get sa -A | egrep "efs-csi-controller"
 
 The expected output should look like this:
 
-```text
+```bash
 kube-system       efs-csi-controller-sa                0         30m
 ```
 
-**Optionally**, if you do **not** already have the ```“efs-csi-controller-sa”``` service account set up, or you receive an error, the following commands will create the service account. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
+**Optionally**, if you do **not** already have the ```“efs-csi-controller-sa”``` service account set up, or you receive an error, the following commands will create the service account. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-with-efs-add-on&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
 
 Define the ROLE_NAME environment variable:
 
@@ -108,20 +108,20 @@ export ROLE_NAME=AmazonEKS_EFS_CSI_DriverRole
 Run the following command to create the IAM role, Kubernetes service account, and attach the AWS managed policy to the role:
 
 ```bash
-eksctl create iamserviceaccount \
---name efs-csi-controller-sa \
---namespace kube-system \
---cluster $CLUSTER_NAME \
---region $CLUSTER_REGION \
---role-name $ROLE_NAME \
---role-only \
---attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy \
+eksctl create iamserviceaccount \ 
+--name efs-csi-controller-sa \ 
+--namespace kube-system \ 
+--cluster $CLUSTER_NAME \ 
+--region $CLUSTER_REGION \ 
+--role-name $ROLE_NAME \ 
+--role-only \ 
+--attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy \ 
 --approve
 ```
 
 It takes a few minutes for the operation to complete. The expected output should look like this:
 
-```text
+```bash
 2023-08-16 15:27:19 [ℹ]  4 existing iamserviceaccount(s) (cert-manager/cert-manager,default/external-dns,kube-system/aws-load-balancer-controller,kube-system/efs-csi-controller-sa) will be excluded
 2023-08-16 15:27:19 [ℹ]  1 iamserviceaccount (kube-system/efs-csi-controller-sa) was excluded (based on the include/exclude rules)
 2023-08-16 15:27:19 [!]  serviceaccounts in Kubernetes will not be created or modified, since the option --role-only is used
@@ -153,11 +153,11 @@ eksctl get addon --cluster ${CLUSTER_NAME} --region ${CLUSTER_REGION} | grep efs
 
 The expected output should look like this:
 
-```text
+```bash
 aws-efs-csi-driver      v1.5.8-eksbuild.1       ACTIVE  0
 ```
 
-**Optionally**, if the EFS CSI Driver add-on is **not** installed on your cluster, or you receive an error, the following commands show you the steps to install it. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
+**Optionally**, if the EFS CSI Driver add-on is **not** installed on your cluster, or you receive an error, the following commands show you the steps to install it. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-with-efs-add-on&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
 
 List the add-ons available in eksctl. Replace the sample value for ```kubernetes-version```.
 
@@ -167,7 +167,7 @@ eksctl utils describe-addon-versions --kubernetes-version 1.27 | grep AddonName
 
 The expected output should look like this:
 
-```text
+```bash
 "AddonName": "coredns",
 "AddonName": "aws-guardduty-agent",
 "AddonName": "aws-ebs-csi-driver",
@@ -192,7 +192,7 @@ eksctl utils describe-addon-versions --kubernetes-version 1.27 --name $ADD_ON | 
 
 The expected output should look like this:
 
-```text
+```bash
 "AddonVersions": [
 "AddonVersion": "v1.5.8-eksbuild.1",
 ```
@@ -205,7 +205,7 @@ aws iam get-role --role-name AmazonEKS_EFS_CSI_DriverRole | grep Arn
 
 The expected output should look like this:
 
-```text
+```bash
 "Arn": "arn:aws:iam::xxxxxxxxxxxx:role/AmazonEKS_EFS_CSI_DriverRole",
 ```
 
@@ -218,7 +218,7 @@ eksctl create addon --cluster $CLUSTER_NAME --name $ADD_ON --version latest \
 
 The expected output should look like this:
 
-```text
+```bash
 [ℹ] Kubernetes version "1.27" in use by cluster "CLUSTER_NAME"
 [ℹ] using provided ServiceAccountRoleARN "arn:aws:iam::xxxxxxxxxxxx:role/AmazonEKS_EFS_CSI_DriverRole"
 [ℹ] creating addon
@@ -232,38 +232,38 @@ In this section, you will create an EFS File System and create a security group.
 1. Retrieve the CIDR range for your cluster's VPC and store it in an environment variable:
 
 ```bash
-export CIDR_RANGE=$(aws ec2 describe-vpcs \
-    --vpc-ids $CLUSTER_VPC \
-    --query "Vpcs[].CidrBlock" \
-    --output text \
+export CIDR_RANGE=$(aws ec2 describe-vpcs \ 
+    --vpc-ids $CLUSTER_VPC \ 
+    --query "Vpcs[].CidrBlock" \ 
+    --output text \ 
     --region $CLUSTER_REGION)
 ```
 
 2. Create a security group with an inbound rule that allows inbound NFS traffic for your Amazon EFS mount points:
 
 ```bash
-export SECURITY_GROUP_ID=$(aws ec2 create-security-group \
-    --group-name MyEfsSecurityGroup \
-    --description "My EFS security group" \
-    --vpc-id $CLUSTER_VPC \
-    --region $CLUSTER_REGION \
+export SECURITY_GROUP_ID=$(aws ec2 create-security-group \ 
+    --group-name MyEfsSecurityGroup \ 
+    --description "My EFS security group" \ 
+    --vpc-id $CLUSTER_VPC \ 
+    --region $CLUSTER_REGION \ 
     --output text)
 ```
 
 3. Create an inbound rule that allows inbound NFS traffic from the CIDR for your cluster's VPC.
 
 ```bash
-aws ec2 authorize-security-group-ingress \
-    --group-id $SECURITY_GROUP_ID \
-    --protocol tcp \
-    --port 2049 \
-    --cidr $CIDR_RANGE \
+aws ec2 authorize-security-group-ingress \ 
+    --group-id $SECURITY_GROUP_ID \ 
+    --protocol tcp \ 
+    --port 2049 \ 
+    --cidr $CIDR_RANGE \ 
     --region $CLUSTER_REGION
 ```
 
 The expected output should look like this:
 
-```text
+```json
 {
     "Return": true,
     "SecurityGroupRules": [
@@ -284,10 +284,10 @@ The expected output should look like this:
 Now, we’ll create an Amazon EFS File System for our Amazon EKS cluster.
 
 ```bash
-export FILE_SYSTEM_ID=$(aws efs create-file-system \
---region $CLUSTER_REGION \
---performance-mode generalPurpose \
---query 'FileSystemId' \
+export FILE_SYSTEM_ID=$(aws efs create-file-system \ 
+--region $CLUSTER_REGION \ 
+--performance-mode generalPurpose \ 
+--query 'FileSystemId' \ 
 --output text)
 ```
 
@@ -303,7 +303,7 @@ kubectl get nodes
 
 The expected output should look like this:
 
-```text
+```bash
 NAME                                         STATUS   ROLES    AGE   VERSION
 ip-192-168-56-0.region-code.compute.internal   Ready    <none>   19m   v1.XX.X-eks-49a6c0
 ```
@@ -311,16 +311,16 @@ ip-192-168-56-0.region-code.compute.internal   Ready    <none>   19m   v1.XX.X-e
 2. Determine the IDs of the subnets in your VPC and which Availability Zone the subnet is in.
 
 ```bash
-aws ec2 describe-subnets \
-    --filters "Name=vpc-id,Values=$CLUSTER_VPC" \
-    --region $CLUSTER_REGION \
-    --query 'Subnets[*].{SubnetId: SubnetId,AvailabilityZone: AvailabilityZone,CidrBlock: CidrBlock}' \
+aws ec2 describe-subnets \ 
+    --filters "Name=vpc-id,Values=$CLUSTER_VPC" \ 
+    --region $CLUSTER_REGION \ 
+    --query 'Subnets[*].{SubnetId: SubnetId,AvailabilityZone: AvailabilityZone,CidrBlock: CidrBlock}' \ 
     --output table
 ```
 
 The expected output should look like this:
 
-```text
+```bash
 |                           DescribeSubnets                          |
 +------------------+--------------------+----------------------------+
 | AvailabilityZone |     CidrBlock      |         SubnetId           |
@@ -336,10 +336,10 @@ The expected output should look like this:
 3. **Add Mount Targets** for the Subnets Hosting Your Nodes: Run the following command to create the mount target, specifying each subnet. For example, if the cluster has a node with an IP address of 192.168.56.0, and this address falls within the CidrBlock of the subnet ID subnet-EXAMPLEe2ba886490, create a mount target for this specific subnet. Repeat this process for each subnet in every Availability Zone where you have a node, using the appropriate subnet ID.
 
 ```bash
-aws efs create-mount-target \
-    --file-system-id $FILE_SYSTEM_ID \
-    --subnet-id subnet-EXAMPLEe2ba886490 \
-    --security-groups $SECURITY_GROUP_ID \
+aws efs create-mount-target \ 
+    --file-system-id $FILE_SYSTEM_ID \ 
+    --subnet-id subnet-EXAMPLEe2ba886490 \ 
+    --security-groups $SECURITY_GROUP_ID \ 
     --region $CLUSTER_REGION
 ```
 
@@ -361,7 +361,7 @@ curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-efs-csi-driver/mas
 echo $FILE_SYSTEM_ID
 ```
 
-3. Update the FileSystem identifier in the storageclass.yaml manifest:
+3. Update the FileSystem identifier in the `storageclass.yaml` manifest:
 
 ```bash
 sed -i 's/fs-92107410/$FILE_SYSTEM_ID/g' storageclass.yaml
@@ -373,7 +373,7 @@ sed -i 's/fs-92107410/$FILE_SYSTEM_ID/g' storageclass.yaml
 sed -i '' 's/fs-92107410/'"$FILE_SYSTEM_ID"'/g' storageclass.yaml
 ```
 
-5. Deploy the Storage Class: 
+5. Deploy the Storage Class:
 
 ```bash 
 kubectl apply -f storageclass.yaml
@@ -381,7 +381,7 @@ kubectl apply -f storageclass.yaml
 
 The expected output should look like this:
 
-```text
+```bash
 storageclass.storage.k8s.io/efs-sc created
 ```
 
@@ -411,12 +411,12 @@ kubectl get pods -o wide
 
 The expected output should look like this:
 
-```text
+```bash
 NAME          READY   STATUS    RESTARTS   AGE   IP               NODE                                             NOMINATED NODE   READINESS GATES
 efs-app       1/1     Running   0          10m   192.168.78.156   ip-192-168-73-191.region-code.compute.internal   <none>           <none>
 ```
 
->Note: It will take a couple minutes for the pod to transition to the "Running" state. If the pod remains in a "ContainerCreating" state, make sure that you have included a mount target for the subnet where your node is located (as shown in step two). Without this step, the pod will remain stuck in the "ContainerCreating" state.
+>Note: It will take a couple minutes for the pod to transition to the `Running` state. If the pod remains in a `ContainerCreating` state, make sure that you have included a mount target for the subnet where your node is located (as shown in step two). Without this step, the pod will remain stuck in the `ContainerCreating` state.
 
 4. Verify that the data is being written to the /data/out location within the shared EFS volume. Use the following command to verify:
 
@@ -426,7 +426,7 @@ kubectl exec efs-app -- bash -c "cat data/out"
 
 The expected output should look like this:
 
-```text
+```bash
 [...]
 Fri Aug 4 09:13:40 UTC 2023
 Fri Aug 4 09:13:45 UTC 2023
@@ -441,7 +441,7 @@ Fri Aug 4 09:13:55 UTC 2023
 
 To avoid incurring future charges, you should delete the resources created during this tutorial.
 
-```text
+```bash
 # Delete the pod
 kubectl delete -f pod.yaml
 
@@ -457,4 +457,4 @@ aws iam delete-role --role-name AmazonEKS_EFS_CSI_DriverRole
 
 ## Conclusion
 
-With the completion of this tutorial, you have successfully configured Amazon EFS for persistent storage for your EKS-based container workloads. The sample pod, leveraging the CentOS image, has been configured to capture the current date and store it in the ```/data/out``` directory on the EFS shared volume. To align with best practices, we recommend running your container workloads on private subnets, exposing only ingress controllers in the public subnets. Furthermore, make sure that EFS mount targets are established in all availability zones where your EKS cluster resides; otherwise, you may encounter a 'Failed to Resolve' error. To Troubleshoot EFS File System Mounting Issues, Please refer [here](https://docs.aws.amazon.com/efs/latest/ug/troubleshooting-efs-mounting.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) for detailed troubleshooting instructions. To continue your journey, you're now ready to store your stateful workloads like [batch processes](https://community.aws/tutorials/managing-high-volume-batch-sqs-eks) or machine learning training data to your EFS volume. 
+With the completion of this tutorial, you have successfully configured Amazon EFS for persistent storage for your EKS-based container workloads. The sample pod, leveraging the CentOS image, has been configured to capture the current date and store it in the `/data/out` directory on the EFS shared volume. To align with best practices, we recommend running your container workloads on private subnets, exposing only ingress controllers in the public subnets. Furthermore, make sure that EFS mount targets are established in all availability zones where your EKS cluster resides; otherwise, you may encounter a 'Failed to Resolve' error. To Troubleshoot EFS File System Mounting Issues, Please refer [here](https://docs.aws.amazon.com/efs/latest/ug/troubleshooting-efs-mounting.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-with-efs-add-on&sc_geo=mult&sc_country=mult&sc_outcome=acq) for detailed troubleshooting instructions. To continue your journey, you're now ready to store your stateful workloads like [batch processes](/tutorials/navigating-amazon-eks/managing-high-volume-batch-sqs-eks) or machine learning training data to your EFS volume.

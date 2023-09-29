@@ -7,7 +7,12 @@ tags:
     - kubernetes
     - eksctl
     - tutorials
-
+    - aws
+movedFrom: /tutorials/managing-high-volume-batch-sqs-eks
+waves:
+  - modern-apps
+spaces:
+  - kubernetes
 authorGithubAlias: tucktuck9
 authorName: Leah Tucker
 date: 2023-09-29
@@ -15,11 +20,12 @@ date: 2023-09-29
 
 When it comes to managing background work in a Kubernetes environment, the use case isn't solely confined to massive data crunching or real-time analytics. More often, you'll be focused on nuanced tasks like data syncing, file uploads, or other asynchronous activities that work quietly in the background. Amazon SQS, with its 256 KB message size limitation, is especially adept at queuing metadata or status flags that indicate whether jobs are complete or still pending. When combined with Amazon EFS, which offers secure, multi-AZ storage for larger data objects, SQS is free to specialize in task orchestration. This pairing yields two key advantages: it allows for modular operation by segregating different aspects of your background tasks, and it capitalizes on the scalable, multi-availability zone architecture of EFS to meet your evolving storage needs without service interruptions.
 
-Building on the Amazon EKS cluster from [**part 1**](#) of our series, this tutorial dives into the deployment of batch jobs and job queues. Included in the cluster configuration for the previous tutorial is the installation of the [EFS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks), [IAM Role for Service Account (IRSA) for the EFS CSI Driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html#efs-create-iam-resources?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks), and an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run Asynchronous Batch Tasks](https://community.aws/tutorials/navigating-amazon-eks/eks-cluster-batch-processing). To complete the last half of this tutorial, you’ll need the EFS CSI Driver Add-On setup on your cluster. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on). 
+Building on the Amazon EKS cluster from [**part 1**](/tutorials/navigating-amazon-eks/eks-cluster-batch-processing) of our series, this tutorial dives into the deployment of batch jobs and job queues. Included in the cluster configuration for the previous tutorial is the installation of the [EFS CSI Driver Add-On](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html#workloads-add-ons-available-eks?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks), [IAM Role for Service Account (IRSA) for the EFS CSI Driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html#efs-create-iam-resources?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks), and an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run Asynchronous Batch Tasks](/tutorials/navigating-amazon-eks/eks-cluster-batch-processing). To complete the last half of this tutorial, you’ll need the EFS CSI Driver Add-On setup on your cluster. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](/tutorials/navigating-amazon-eks/eks-with-efs-add-on).
 
 You'll also integrate Amazon SQS with your Amazon EKS cluster, build a batch processing application, containerize the application and deploy to Amazon ECR, then use an Amazon SQS job queue to run your batch tasks. In the second half, we'll shift gears to the EFS CSI Driver, which allows us to keep our data intact across multiple nodes while running batch workloads.
 
 ## Prerequisites
+
 Before you begin this tutorial, you need to:
 
 * Install the latest version of [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl). To check your version, run: `kubectl version --short`.
@@ -31,7 +37,7 @@ Before you begin this tutorial, you need to:
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks)|                           |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks)|                           |
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-09-29                             |
 
@@ -39,32 +45,33 @@ Before you begin this tutorial, you need to:
 |-----|
 
 ---
+
 ## Step 1: Configure Cluster Environment Variables
 
 Before interacting with your Amazon EKS cluster using Helm or other command-line tools, it's essential to define specific environment variables that encapsulate your cluster's details. These variables will be used in subsequent commands, ensuring that they target the correct cluster and resources.
 
 1. First, confirm that you are operating within the correct cluster context. This ensures that any subsequent commands are sent to the intended Kubernetes cluster. You can verify the current context by executing the following command:
 
-```
+```bash
 kubectl config current-context
 ```
 
 2. Define the `CLUSTER_NAME` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
 
-```
+```bash
 export CLUSTER_NAME=$(aws eks describe-cluster --region us-east-1 --name batch-quickstart --query "cluster.name" --output text)
 ```
 
 3. Define the `CLUSTER_REGION` environment variable for your EKS cluster. Replace the sample value for cluster `region`.
 
-```
-export CLUSTER_REGION=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region us-east-1 --profile isengard --query "cluster.arn" --output text | cut -d: -f4)
+```bash
+export CLUSTER_REGION=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region us-east-1 --query "cluster.arn" --output text | cut -d: -f4)
 ```
 
 4. Define the `ACCOUNT_ID` environment variable for the account associated with your EKS cluster.
 
-```
-export ACCOUNT_ID=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --profile isengard --query "cluster.arn" --output text | cut -d':' -f5)
+```bash
+export ACCOUNT_ID=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --query "cluster.arn" --output text | cut -d':' -f5)
 ```
 
 ## Step 2: Verify or Create the IAM Role for Service Accounts
@@ -73,33 +80,32 @@ In this section, we will verify that the required IAM roles for service accounts
 
 Make sure the required service accounts for this tutorial are correctly set up in your cluster:
 
-```
+```bash
 kubectl get sa -A | egrep "efs-csi-controller|ecr"
 ```
 
 The expected output should look like this:
 
-```
+```bash
 default           ecr-sa                               0         31m
 kube-system       efs-csi-controller-sa                0         30m
 ```
 
-Optionally, if you do **not** already have these service accounts set up, or if you receive an error, the following commands will create the service accounts. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks) associated with your cluster before you run these commands.
+Optionally, if you do **not** already have these service accounts set up, or if you receive an error, the following commands will create the service accounts. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks) associated with your cluster before you run these commands.
 
 1. To create a Kubernetes service account for Amazon ECR:
 
-```
-eksctl create iamserviceaccount \
- --profile isengard \
- --region ${CLUSTER_REGION} \
- --name ecr-sa \
- --namespace default \
- --cluster batch-quickstart \
+```bash
+eksctl create iamserviceaccount \ 
+ --region ${CLUSTER_REGION} \ 
+ --name ecr-sa \ 
+ --namespace default \ 
+ --cluster batch-quickstart \ 
  --attach-policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly \
  --approve
 ```
 
-The EFS CSI Driver does not have an AWS managed policy, so there are a few additional steps to create the service account. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on).
+The EFS CSI Driver does not have an AWS managed policy, so there are a few additional steps to create the service account. For instructions, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](/tutorials/navigating-amazon-eks/eks-with-efs-add-on).
 
 ## Step 3: Verify the EFS CSI Driver Add-On Is Installed
 
@@ -107,17 +113,17 @@ In this section, we'll verify that the EFS CSI Driver managed add-on is properly
 
 1. Check that the EFS CSI driver is installed:
 
-```
+```bash
 eksctl get addon --cluster ${CLUSTER_NAME} --region ${CLUSTER_REGION} | grep efs
 ```
 
 The expected output should look like this:
 
-```
+```bash
 aws-efs-csi-driver      v1.5.8-eksbuild.1       ACTIVE  0
 ```
 
-If the EFS CSI Driver Add-On is **not** installed on your cluster, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on).
+If the EFS CSI Driver Add-On is **not** installed on your cluster, see [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](/tutorials/navigating-amazon-eks/eks-with-efs-add-on).
 
 ## Step 4: Run the Sample Batch Application
 
@@ -125,7 +131,7 @@ In this section, we'll delve into the sample batch application that's part of th
 
 1. Create a Python script named `batch_processing.py` and paste the following contents:
 
-```
+```python
 import csv
 import time
 import random
@@ -169,7 +175,7 @@ if __name__ == "__main__":
 
 2. In the same directory as your Python script, create a file named `input.csv` and paste the following contents:
 
-```
+```bash
 ID,Value
 1,100.5
 2,200.3
@@ -185,20 +191,20 @@ ID,Value
 
 3. Run the Python script:
 
-```
+```bash
 `python3 batch_processing.py`
 ```
 
 The expected output should look like this:
 
-```
+```bash
 `Starting batch task...`
 `Batch task completed.`
 ```
 
 Additionally, an `output.csv` file will be generated, containing the processed data with an additional column for the processed values:
 
-```
+```bash
 ID,Value,ProcessedValue
 1,100.5,101.40789448456849
 2,200.3,202.2013222517103
@@ -218,7 +224,7 @@ In this section, we’ll build a container from the ground up and store it in a 
 
 1. In the same directory as the other files you created, create a `Dockerfile` and paste the following contents:
 
-```
+```dockerfile
 FROM python:3.8-slim
 
 COPY batch_processing.py /
@@ -229,31 +235,31 @@ CMD ["python", "/batch_processing.py"]
 
 2. Build the Docker image:
 
-```
+```bash
 docker build -t batch-processing-image .
 ```
 
 3. Create a new private Amazon ECR repository:
 
-```
+```bash
 aws ecr create-repository --repository-name batch-processing-repo --region ${CLUSTER_REGION}
 ```
 
 4. Authenticate the Docker CLI to your Amazon ECR registry:
 
-```
+```bash
 aws ecr get-login-password --region ${CLUSTER_REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}.amazonaws.com
 ```
 
 5. Tag your container image for the ECR repository:
 
-```
+```bash
 docker tag batch-processing-image:latest ${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}.amazonaws.com/batch-processing-repo:latest
 ```
 
 6. Push the tagged image to the ECR repository:
 
-```
+```bash
 docker push ${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}.amazonaws.com/batch-processing-repo:latest
 ```
 
@@ -263,7 +269,7 @@ To ensure that your batch application can be deployed across various hardware ar
 
 1. Create and start new builder instances for the batch service:
 
-```
+```bash
 docker buildx create --name batchBuilder
 docker buildx use batchBuilder
 docker buildx inspect --bootstrap
@@ -271,13 +277,13 @@ docker buildx inspect --bootstrap
 
 2. Build and push the images for your batch service to Amazon ECR:
 
-```
+```bash
 docker buildx build --platform linux/amd64,linux/arm64 -t ${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}.amazonaws.com/batch-processing-repo:latest . --push
 ```
 
 3. Verify that the multi-architecture image is in the ECR repository:
 
-```
+```bash
 aws ecr list-images --repository-name batch-processing-repo --region ${CLUSTER_REGION}
 ```
 
@@ -287,13 +293,13 @@ In this section, we'll transition to deploying your containerized batch processi
 
 1. Get the details of your ECR URL:
 
-```
+```bash
 echo ${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}.amazonaws.com/batch-processing-repo:latest
 ```
 
 2. Create a Kubernetes Job manifest file named `batch-job.yaml` and paste the following contents. Replace the sample value in `image` with your ECR URL.
 
-```
+```yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -304,63 +310,63 @@ spec:
       serviceAccountName: ecr-sa   
       containers:
       - name: batch-processor
-        image: 985866617021.dkr.ecr.us-west-1.amazonaws.com/batch-processing-repo:latest
+        image: 123456789012.dkr.ecr.us-west-1.amazonaws.com/batch-processing-repo:latest
       restartPolicy: Never
 ```
 
 3. Apply the Job manifest to your EKS cluster:
 
-```
+```bash
 kubectl apply -f batch-job.yaml
 ```
 
 The expected output should look like this:
 
-```
+```bash
 job.batch/batch-processing-job created
 ```
 
 4. Monitor the Job execution:
 
-```
+```bash
 kubectl get jobs
 ```
 
 The response output should show that the jobs have completed:
 
-```
+```bash
 NAME                      COMPLETIONS   DURATION   AGE
 my-batch-processing-job   1/1           8s         11s
 ```
 
 ## Step 8: Enable Permissions for Batch Processing Jobs on SQS
 
-In this section, we'll dive into the orchestration of batch processing jobs in a Kubernetes cluster, leveraging Amazon SQS as a job queue. Additionally, you'll learn how to extend the permissions of an existing Kubernetes service account. In our case, we'll annotate the Amazon ECR service account to include Amazon SQS access, thereby creating a more versatile and secure environment for your batch jobs. 
+In this section, we'll dive into the orchestration of batch processing jobs in a Kubernetes cluster, leveraging Amazon SQS as a job queue. Additionally, you'll learn how to extend the permissions of an existing Kubernetes service account. In our case, we'll annotate the Amazon ECR service account to include Amazon SQS access, thereby creating a more versatile and secure environment for your batch jobs.
 
 1. Create an Amazon SQS queue that will serve as our job queue:
 
-```
+```bash
 aws sqs create-queue --queue-name eks-batch-job-queue
 ```
 
 You should see the following response output. Save the URL of the queue for subsequent steps.
 
-```
+```json
 {
- "QueueUrl": "https://sqs.us-west-1.amazonaws.com/985866617021/eks-batch-job-queue"
+ "QueueUrl": "https://sqs.us-west-1.amazonaws.com/123456789012/eks-batch-job-queue"
 }
 ```
 
 2. Annotate the existing Amazon ECR service account with Amazon SQS permissions.
 
-```
-eksctl create iamserviceaccount \
-  --region ${CLUSTER_REGION} \
-  --cluster batch-quickstart \
-  --namespace default \
-  --name ecr-sa \
-  --attach-policy-arn arn:aws:iam::aws:policy/AmazonSQSFullAccess \
-  --override-existing-serviceaccounts \
+```bash
+eksctl create iamserviceaccount \ 
+  --region ${CLUSTER_REGION} \ 
+  --cluster batch-quickstart \ 
+  --namespace default \ 
+  --name ecr-sa \ 
+  --attach-policy-arn arn:aws:iam::aws:policy/AmazonSQSFullAccess \ 
+  --override-existing-serviceaccounts \ 
   --approve
 ```
 
@@ -370,33 +376,33 @@ Now we’ll create a Kubernetes secret to ensure our pods have access to our pri
 
 1. Generate an Amazon ECR authorization token:
 
-```
+```bash
 ECR_TOKEN=$(aws ecr get-login-password --region ${CLUSTER_REGION})
 ```
 
 2. Create the Kubernetes Secret called “regcred” in the "default" namespace:
 
-```
-kubectl create secret docker-registry regcred \
---docker-server=${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}.amazonaws.com \
---docker-username=AWS \
---docker-password="${ECR_TOKEN}" \
+```bash
+kubectl create secret docker-registry regcred \ 
+--docker-server=${ACCOUNT_ID}.dkr.ecr.${CLUSTER_REGION}.amazonaws.com \ 
+--docker-username=AWS \ 
+--docker-password="${ECR_TOKEN}" \ 
 -n default
 ```
 
 The expected output should look like this:
 
-```
+```bash
 secret/regcred created
 ```
 
 ## Step 10: Deploy the Kubernetes Job With Queue Integration
 
-In this section, we'll orchestrate a Kubernetes Job that is tightly integrated with an Amazon SQS queue. This integration is crucial for handling batch processing tasks in a more distributed and scalable manner. By leveraging SQS, you can decouple the components of a cloud application to improve scalability and reliability. We'll start by creating a Kubernetes Job manifest that includes environment variables for the SQS queue URL. This ensures that your batch processing application can interact with the SQS queue to consume messages and possibly trigger more complex workflows. 
+In this section, we'll orchestrate a Kubernetes Job that is tightly integrated with an Amazon SQS queue. This integration is crucial for handling batch processing tasks in a more distributed and scalable manner. By leveraging SQS, you can decouple the components of a cloud application to improve scalability and reliability. We'll start by creating a Kubernetes Job manifest that includes environment variables for the SQS queue URL. This ensures that your batch processing application can interact with the SQS queue to consume messages and possibly trigger more complex workflows.
 
 1. Create a Kubernetes Job manifest file named `batch-job-queue.yaml` and paste the following contents. Replace the sample values for `image` with your ECR URL and `value` with your SQS queue URL.
 
-```
+```yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -406,10 +412,10 @@ spec:
    spec:
      containers:
      - name: batch-processor
-       image: 985866617021.dkr.ecr.us-west-1.amazonaws.com/batch-processing-repo:latest
+       image: 123456789012.dkr.ecr.us-west-1.amazonaws.com/batch-processing-repo:latest
        env:
        - name: SQS_QUEUE_URL
-         value: "https://sqs.us-west-1.amazonaws.com/985866617021/eks-batch-job-queue"
+         value: "https://sqs.us-west-1.amazonaws.com/123456789012/eks-batch-job-queue"
      restartPolicy: Never
      serviceAccountName: ecr-sa
      imagePullSecrets:
@@ -418,25 +424,25 @@ spec:
 
 2. Apply the Job manifest to your EKS cluster:
 
-```
+```bash
 kubectl apply -f batch-job-queue.yaml
 ```
 
 The expected output should look like this:
 
-```
+```bash
 job.batch/batch-processing-job-with-queue created
 ```
 
 3. Monitor the Job execution:
 
-```
+```bash
 kubectl get jobs
 ```
 
 When the Job is completed, you'll see the completion status in the output:
 
-```
+```bash
 NAME                              COMPLETIONS   DURATION   AGE
 batch-processing-job-with-queue   1/1           8s         13s
 my-batch-processing-job           1/1           8s         16m
@@ -446,17 +452,17 @@ my-batch-processing-job           1/1           8s         16m
 
 ## Step 11: Create the PersistentVolume and PersistentVolumeClaim for EFS
 
-In this section, you'll create a PersistentVolume (PV) and PersistentVolumeClaim (PVC) that will use the EFS storage class. This will provide a persistent storage layer for your Kubernetes Jobs. This builds upon the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on), where you set up environment variables for your EFS URL.
+In this section, you'll create a PersistentVolume (PV) and PersistentVolumeClaim (PVC) that will use the EFS storage class. This will provide a persistent storage layer for your Kubernetes Jobs. This builds upon the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](/tutorials/navigating-amazon-eks/eks-with-efs-add-on), where you set up environment variables for your EFS URL.
 
 1. Echo and save your EFS URL for the next step:
 
-```
+```bash
 echo $FILE_SYSTEM_ID.efs.$CLUSTER_REGION.amazonaws.com
 ```
 
 2. Create a YAML file named `batch-pv-pvc.yaml` and paste the following contents. Replace the sample value for `server` with your EFS URL.
 
-```
+```yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -488,24 +494,24 @@ spec:
 
 3. Apply the PV and PVC to your Kubernetes cluster:
 
-```
+```bash
 kubectl apply -f batch-pv-pvc.yaml
 ```
 
 The expected output should look like this:
 
-```
+```bash
 persistentvolume/efs-pv created
 persistentvolumeclaim/efs-claim created
 ```
 
 ## Step 12: Implement Persistent Storage With Amazon EFS
 
-In this section, we'll enhance your Kubernetes Jobs to use Amazon EFS for persistent storage. Building on the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](https://community.aws/tutorials/eks-with-efs-add-on), where you set up an EFS-based 'StorageClass,' you'll add a Persistent Volume Claim (PVC) to your existing Job manifests. Due to the immutable nature of Jobs, you'll also adopt a versioning strategy. Instead of updating existing Jobs, you'll create new ones with different names but similar specs, allowing for historical tracking and version management through labels and annotations.
+In this section, we'll enhance your Kubernetes Jobs to use Amazon EFS for persistent storage. Building on the previous tutorial at [Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI](/tutorials/navigating-amazon-eks/eks-with-efs-add-on), where you set up an EFS-based 'StorageClass,' you'll add a Persistent Volume Claim (PVC) to your existing Job manifests. Due to the immutable nature of Jobs, you'll also adopt a versioning strategy. Instead of updating existing Jobs, you'll create new ones with different names but similar specs, allowing for historical tracking and version management through labels and annotations.
 
 1. Create a Kubernetes Job manifest file named `update-batch-job.yaml` and paste the following contents. Replace the sample value in `image` with your ECR URL.
 
-```
+```yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -517,7 +523,7 @@ spec:
       serviceAccountName: ecr-sa
       containers:
       - name: batch-processor
-        image: 985866617021.dkr.ecr.us-west-1.amazonaws.com/batch-processing-repo:latest
+        image: 123456789012.dkr.ecr.us-west-1.amazonaws.com/batch-processing-repo:latest
         volumeMounts:
         - name: efs-volume
           mountPath: /efs
@@ -530,13 +536,13 @@ spec:
 
 2. Apply the Job manifest to your EKS cluster:
 
-```
+```bash
 kubectl apply -f update-batch-job.yaml
 ```
 
 3. Create a Kubernetes Job Queue manifest file named `update-batch-job-queue.yaml` and paste the following contents. Replace the sample values for `image` with your ECR URL and `value` with your SQS queue URL.
 
-```
+```yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -547,10 +553,10 @@ spec:
     spec:
       containers:
       - name: batch-processor
-        image: 985866617021.dkr.ecr.us-west-1.amazonaws.com/batch-processing-repo:latest
+        image: 123456789012.dkr.ecr.us-west-1.amazonaws.com/batch-processing-repo:latest
         env:
         - name: SQS_QUEUE_URL
-          value: "https://sqs.us-west-1.amazonaws.com/985866617021/eks-batch-job-queue"
+          value: "https://sqs.us-west-1.amazonaws.com/123456789012/eks-batch-job-queue"
         volumeMounts:
         - name: efs-volume
           mountPath: /efs
@@ -566,19 +572,19 @@ spec:
 
 4. Apply the Job Queue manifest to your EKS cluster:
 
-```
+```bash
 kubectl apply -f update-batch-job-queue.yaml
 ```
 
 You can watch the logs of the job to see it processing the batch task:
 
-```
+```bash
 kubectl logs -f new-batch-job-k267b
 ```
 
 The expected output should look like this:
 
-```
+```bash
 Starting batch task...
 Batch task completed.
 ```
@@ -587,7 +593,7 @@ Batch task completed.
 
 After finishing with this tutorial, for better resource management, you may want to delete the specific resources you created.
 
-```
+```bash
 # Delete the SQS Queue
 aws sqs delete-queue --queue-url YOUR_SQS_QUEUE_URL
 
@@ -599,7 +605,6 @@ If you enjoyed this tutorial, found any issues, or have feedback for us, <a href
 
 ## Conclusion
 
-You've successfully orchestrated batch processing tasks in your Amazon EKS cluster using Amazon SQS and EFS! You've not only integrated SQS as a robust job queue but also leveraged the EFS CSI Driver for persistent storage across multiple nodes. This tutorial has walked you through the setup of your Amazon EKS cluster, the deployment of a Python-based batch processing application, and its containerization and storage in Amazon ECR. You've also learned how to create multi-architecture images and deploy them as Kubernetes Jobs. Furthermore, you've extended the capabilities of your Kubernetes Jobs by integrating them with Amazon SQS and providing persistent storage through Amazon EFS. 
+You've successfully orchestrated batch processing tasks in your Amazon EKS cluster using Amazon SQS and EFS! You've not only integrated SQS as a robust job queue but also leveraged the EFS CSI Driver for persistent storage across multiple nodes. This tutorial has walked you through the setup of your Amazon EKS cluster, the deployment of a Python-based batch processing application, and its containerization and storage in Amazon ECR. You've also learned how to create multi-architecture images and deploy them as Kubernetes Jobs. Furthermore, you've extended the capabilities of your Kubernetes Jobs by integrating them with Amazon SQS and providing persistent storage through Amazon EFS.
 
-To continue your journey, setup the [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) for dynamic scaling, or explore [EFS Lifecycle Management](https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks) to automate moving files between performance classes or enabling [EFS Intelligent-Tiering](https://docs.aws.amazon.com/efs/latest/ug/intelligent-tiering.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks) to optimize costs.
-
+To continue your journey, setup the [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) for dynamic scaling, or explore [EFS Lifecycle Management](https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks) to automate moving files between performance classes or enabling [EFS Intelligent-Tiering](https://docs.aws.amazon.com/efs/latest/ug/intelligent-tiering.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks) to optimize costs.
