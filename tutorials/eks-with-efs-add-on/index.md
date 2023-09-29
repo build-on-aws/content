@@ -374,7 +374,7 @@ sed -i 's/fs-92107410/$FILE_SYSTEM_ID/g' storageclass.yaml
 sed -i '' 's/fs-92107410/'"$FILE_SYSTEM_ID"'/g' storageclass.yaml
 ```
 
-5. Deploy the StorageClass: 
+5. Deploy the Storage Class: 
 
 ```bash 
 kubectl apply -f storageclass.yaml
