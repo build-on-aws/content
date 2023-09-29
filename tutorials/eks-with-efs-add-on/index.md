@@ -1,6 +1,6 @@
 ---
 title: "Designing Scalable and Versatile Storage Solutions on Amazon EKS with the Amazon EFS CSI"
-description: "Configure persistent shared storage for container workloads on Amazon EKS with the Amazon EFS CSI"
+description: "Configure persistent shared storage for container workloads on Amazon EKS with the Amazon EFS CSI."
 tags:
     - eks-cluster-setup
     - eks
@@ -15,7 +15,7 @@ spaces:
   - modern-apps
 authorGithubAlias: ashishkamble4
 authorName: Ashish Kamble
-date: 2023-09-30
+date: 2023-09-29
 ---
 
 Managing storage solutions for containerized applications requires careful planning and execution. Kubernetes workloads such as content management systems and video transcoding may benefit from using Amazon Elastic File System (EFS). EFS is designed to provide serverless, fully elastic file storage that lets you share file data without provisioning or managing storage capacity and performance. EFS is ideal for applications that need shared storage across multiple nodes or even across different availability zones. In contrast, Amazon Elastic Block Store (EBS) requires configuring volumes that are limited by size and region. The Amazon Elastic File System (EFS) CSI Driver add-on exposes EFS File Systems to your workloads, handling the complexities of this versatile and scalable storage solution.
@@ -29,7 +29,7 @@ In this tutorial, you will set up the Amazon EFS CSI Driver on your Amazon EKS c
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-09-30                                                      |
+| ⏰ Last Updated        | 2023-09-29                                                      |
 
 | ToC |
 |-----|
@@ -457,4 +457,4 @@ aws iam delete-role --role-name AmazonEKS_EFS_CSI_DriverRole
 
 ## Conclusion
 
-With the completion of this tutorial, you have successfully configured Amazon EFS for persistent storage for your EKS-based container workloads. The sample pod, leveraging the CentOS image, has been configured to capture the current date and store it in the ```/data/out``` directory on the EFS shared volume. To align with best practices, we recommend running your container workloads on private subnets, exposing only ingress controllers in the public subnets. Furthermore, make sure that EFS mount targets are established in all availability zones where your EKS cluster resides; otherwise, you may encounter a 'Failed to Resolve' error. To Troubleshoot EFS File System Mounting Issues, Please refer [here](https://docs.aws.amazon.com/efs/latest/ug/troubleshooting-efs-mounting.html) for detailed troubleshooting instructions. To continue your journey, you're now ready to store your stateful workloads like [batch processes](https://community.aws/preview/pr-732/tutorials/managing-high-volume-batch-sqs-eks) or machine learning training data to your EFS volume. 
+With the completion of this tutorial, you have successfully configured Amazon EFS for persistent storage for your EKS-based container workloads. The sample pod, leveraging the CentOS image, has been configured to capture the current date and store it in the ```/data/out``` directory on the EFS shared volume. To align with best practices, we recommend running your container workloads on private subnets, exposing only ingress controllers in the public subnets. Furthermore, make sure that EFS mount targets are established in all availability zones where your EKS cluster resides; otherwise, you may encounter a 'Failed to Resolve' error. To Troubleshoot EFS File System Mounting Issues, Please refer [here](https://docs.aws.amazon.com/efs/latest/ug/troubleshooting-efs-mounting.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-load-balancer-ipv4&sc_geo=mult&sc_country=mult&sc_outcome=acq) for detailed troubleshooting instructions. To continue your journey, you're now ready to store your stateful workloads like [batch processes](https://community.aws/preview/pr-732/tutorials/managing-high-volume-batch-sqs-eks) or machine learning training data to your EFS volume. 
