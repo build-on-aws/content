@@ -2,9 +2,9 @@
 title: "How Good Are AI Coding Companions? 'It Depends!'"
 description: Practical guide for using an AI Coding assistant and improve your productivity.
 tags:
-  - java
+  - generative-ai
   - codewhisperer
-  - genAI
+  - java
 authorGithubAlias: rjourdan
 authorName: Romain Jourdan
 date: 2023-09-29
@@ -16,7 +16,7 @@ This is similar to using generative AI tools like AI coding companions. However,
 
 I got my fair amount of frustrations when I started to use these tools, as it would not read my mind as I was expecting (can you believe it?)! As I kept using the assistant, I became better at leveraging it, and I can tell this help me bring back the joy to code again (disclaimer: in my current job, I don't get to code every day...).
 
-In this article, I'll share tips and good practices from my own experience for getting the most out of AI coding assistants. I will use Amazon CodeWhisperer, my preferred AI assistant, and with examples in Java, we'll cover:
+In this article, I'll share tips and good practices from my own experience for getting the most out of AI coding assistants. I will use [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/?trk=83c710fd-0a7a-416b-9bb8-baa535b64ee0&sc_channel=el), my preferred AI assistant, and with examples in Java, we'll cover:
 
 - a brief overview of AI coding companions, and CodeWhisperer
 - set your expectations correctly
@@ -28,20 +28,19 @@ The goal is to provide a practical guide so you can maximize productivity gains 
 
 ## Introducing AI Companions
 
-AI coding companions like [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/?trk=83c710fd-0a7a-416b-9bb8-baa535b64ee0&sc_channel=el) are a new category of developer tools that utilize advancements in Generative AI (GenAI) to provide intelligent code completion and generation.
+AI coding companions like CodeWhisperer are a new category of developer tools that utilize advancements in Generative AI (GenAI) to provide intelligent code completion and generation.
 
 Unless you have lived under a rock for the past year, you must have heard about GenAI, and language models that can produce novel text, code, images and other content based on patterns learned from (very!) large datasets. Models like [Claude v2](https://www.anthropic.com/product), [LLaMA 2](https://ai.meta.com/llama/), [Stable Diffusion](https://stability.ai/stablediffusion), [GPT-4](https://openai.com/gpt-4) and [PaLM](https://developers.generativeai.google/) have demonstrated impressive fluency in natural language and programming languages.
 
->Note: If you are interested in learning more about LLMs and GenAI, check out the [GenAI space on community.aws](https://community.aws/generative-ai)
+>Note: If you are interested in learning more about LLMs and GenAI, check out the [GenAI space on community.aws](/generative-ai)
 
 I am using CodeWhisperer as my AI coding companion, and it helps to boost my productivity as I code. It generates real-time code suggestions as I type, keeping me in the flow instead of searching the web or asking colleagues for help. CodeWhisperer meets you inside your favorite IDE like VSCode or IntelliJ's, by installing the AWS Toolkit. It's optimized for AWS APIs, so you can build cloud apps faster. I also like the fact that CodeWhisperer scans your code for security vulnerabilities, giving you pointers in your code on where to fix issues before they create problems. Finally, I find very useful that CodeWhisperer can flag or filter code suggestions that resemble open-source training data. It means that CodeWhisperer will give you the associated open-source project’s repository URL and license so that you can more easily review them and add attribution.
 
-You can use CodeWhisperer for free, by [signing up with just an email address](https://aws.amazon.com/codewhisperer/resources/#Getting_started).
+You can use CodeWhisperer for free, by [signing up with just an email address](https://aws.amazon.com/codewhisperer/resources/#Getting_started?trk=83c710fd-0a7a-416b-9bb8-baa535b64ee0&sc_channel=el).
 
 >Have a look at some useful introductory videos from my colleagues on this [playlist](https://www.youtube.com/watch?v=sFh3_cMUrMk&list=PLDqi6CuDzubxzL-yIqgQb9UbbceYdKhpK)
 
 https://www.youtube.com/watch?v=sFh3_cMUrMk
-
 
 When I started to use those tools, I found them almost magical. But soon, I was not really getting what I wanted, and grew frustrated. It is important to keep a few things in mind when working your new companion.
 
@@ -73,7 +72,7 @@ For AI coding assistants, the prompt consists of several parameters:
   
 - Comments: Clear, concise comments orient the AI towards intended functionality without being overly prescriptive.
 
-- Use intuitive names for code elements like variables and functions, as explained by my colleague Brooke in a [previous article](https://community.aws/posts/quick-tips-for-codewhisperer)
+- Use intuitive names for code elements like variables and functions, as explained by my colleague Brooke in a [previous article](/posts/quick-tips-for-codewhisperer)
   
 - Test cases: Tests demonstrate required behavior and provide concrete examples for the AI to train on. That's why test-driven development (TDD) is highly effective when working with AI assistants. Writing tests first creates a "specification" for the code. The AI uses these tests as prompts for generating function bodies and other code. You then can quickly validate that the generated code is delivering what you expected. I recommend you to have a look at this video about TDD.
 
@@ -91,7 +90,7 @@ With thoughtful prompt engineering, AI coding assistants can rapidly produce hig
 
 Now that you have a better understanding of prompt engineering with an AI Coding assistant, I am going to share some of my learnings working with CodeWhisperer.
 
-### Autosuggestions
+### Auto-suggestions
 
 You can disable auto-suggestions on CodeWhisperer. We had a debate in the team. Some developers really like to have auto-suggestions on all the time. They are used to get code suggestions, quickly check, and accept or decline. I prefer to be in control of my flow. When auto-completion appeared on Eclipse in early 2000's, and I moved away from Emacs/vi, I became a fanatic of control+SPACE to accelerated my writing. I like to call CodeWhisperer whenever I need it. Sometimes I just need the autocompletion in my IDE, because I know exactly what I want to write. Once you pause auto-suggestions from the AWS Toolkit menu in your IDE, you can manually trigger CodeWhisperer by pressing Option+C (MacOS) or Alt+C (Windows).
 
