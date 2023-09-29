@@ -157,10 +157,6 @@ The choice is yours. But it's good to know you can easily adjust CodeWhisperer t
 
 ![keep your code private](images/code_private.gif)
 
-If you want to explore further, I highly encourage you have a look at the videos on the below playlist. They are examples of using CodeWhisperer for creating end-to-end Java code.
-
-https://www.youtube.com/playlist?list=PL5bUlblGfe0IOZEW8KBAzc1bCW8UcarAD
-
 ## When AI companions fall short and you're better off coding yourself
 
 While AI coding assistants like CodeWhisperer can boost productivity in many cases, they do have limitations. As developers, we need to recognize situations where it's better to rely on our own skills and experience.
@@ -194,3 +190,7 @@ When I properly frame prompts and provide examples, CodeWhisperer can generate s
 There are times I'm absolutely better off coding myself - new libraries, optimization, security issues. These need human judgement and experience that CodeWhisperer lacks currently. However, for general backend code, APIs, and integrations, CodeWhisperer accelerates my workflow tremendously. Together we deliver robust code much faster than I could solo. That productivity boost is invaluable.
 
 While not yet perfect, CodeWhisperer has made my coding life markedly easier. I can't imagine working without an AI helper suggesting code alongside me. It's like having a programming expert in my IDE recommending code in real-time. I provide the creativity and judgement, CodeWhisperer brings speed and knowledge. Our combined strengths help us code faster and smarter. AI assistance is a game changer for software development.
+
+If you want to explore further, I highly encourage you have a look at the videos on the below playlist. They are examples of using CodeWhisperer for creating end-to-end Java code.
+
+https://www.youtube.com/playlist?list=PL5bUlblGfe0IOZEW8KBAzc1bCW8UcarAD
