@@ -1,5 +1,5 @@
 ---
-title: "How Good Are AI Coding Companions? "It Depends!"
+title: "How Good Are AI Coding Companions? 'It Depends!'"
 description: Practical guide for using an AI Coding assistant and improve your productivity.
 tags:
   - java
@@ -38,8 +38,6 @@ I am using CodeWhisperer as my AI coding companion, and it helps to boost my pro
 
 You can use CodeWhisperer for free, by [signing up with just an email address](https://aws.amazon.com/codewhisperer/resources/#Getting_started).
 
->Have a look at some useful introductory videos from my colleagues on this [playlist](https://www.youtube.com/watch?v=sFh3_cMUrMk&list=PLDqi6CuDzubxzL-yIqgQb9UbbceYdKhpK)
-
 When I started to use those tools, I found them almost magical. But soon, I was not really getting what I wanted, and grew frustrated. It is important to keep a few things in mind when working your new companion.
 
 ## Set Your Expectations Correctly
@@ -72,7 +70,9 @@ For AI coding assistants, the prompt consists of several parameters:
 
 - Use intuitive names for code elements like variables and functions, as explained by my colleague Brooke in a [previous article](https://community.aws/posts/quick-tips-for-codewhisperer)
   
-- Test cases: Tests demonstrate required behavior and provide concrete examples for the AI to train on. That's why test-driven development (TDD) is highly effective when working with AI assistants. Writing tests first creates a "specification" for the code. The AI uses these tests as prompts for generating function bodies and other code. You then can quickly validate that the generated code is delivering what you expected. I recommend you to have a look at [this video about TDD](https://youtu.be/BcieaXtPHjM?si=TW5_Ol2PFeY9whDk).
+- Test cases: Tests demonstrate required behavior and provide concrete examples for the AI to train on. That's why test-driven development (TDD) is highly effective when working with AI assistants. Writing tests first creates a "specification" for the code. The AI uses these tests as prompts for generating function bodies and other code. You then can quickly validate that the generated code is delivering what you expected. I recommend you to have a look at this video about TDD.
+
+https://www.youtube.com/watch?v=BcieaXtPHjM
 
 For best results, develop a high-level prompt that describes what you want to achieve in human language. Avoid too many implementation details - let the AI figure those out. However, if you want to use a specific algorithm to improve performance for example, instruct your companion to do it. Then provide tests exemplifying desired behavior. As you write methods, get more granular with prompts about how each component should function. In the following example, I need help to write method to compute the Fibonacci number, then I ask to use an algorithm that has a better performance.
 
@@ -151,6 +151,10 @@ In your IDE settings, simply locate the CodeWhisperer configuration and disable 
 The choice is yours. But it's good to know you can easily adjust CodeWhisperer to align with your code privacy preferences. Just toggle that one setting and your code remains completely private while you continue enjoying personalized AI-powered suggestions.
 
 ![keep your code private](images/code_private.gif)
+
+If you want to explore further, I highly encourage you have a look at the videos on the below playlist. They are examples of using CodeWhisperer for creating end-to-end Java code.
+
+https://www.youtube.com/playlist?list=PL5bUlblGfe0IOZEW8KBAzc1bCW8UcarAD
 
 ## When AI companions fall short and you're better off coding yourself
 
