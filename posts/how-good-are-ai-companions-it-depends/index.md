@@ -10,7 +10,7 @@ authorName: Romain Jourdan
 date: 2023-09-29
 ---
 
-As developers, we're often asked complex technical questions that don't have simple and definitive answers. The best response we can muster is usually "Well, it depends...". This ambiguity stems from the many potential variables, context, and use cases that factor into most coding challenges and architecture decisions. When you are on the receiving end of that answer, it may feel frustrating (infuriating even) sometimes, but human will usually try to help further, and ask qualifying questions to better understand the problem at hand.
+As developers, we're often asked complex technical questions that don't have simple and definitive answers. The best response we can muster is usually "Well, it depends...". This ambiguity stems from the many potential variables, context, and use cases that factor into most coding challenges and architecture decisions. When you are on the receiving end of that answer, it may feel frustrating (infuriating even) sometimes, but humans will usually try to help further, and ask qualifying questions to better understand the problem at hand.
 
 This is similar to using generative AI tools like AI coding companions. However, rather than asking clarifying questions like a human, AI will attempt to provide an answer based on your initial inputs. The quality of the answer depends heavily on how well you frame the question and provide relevant context.
 
