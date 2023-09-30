@@ -6,6 +6,8 @@ tags:
   - chaos-engineering
   - ci-cd
   - devops
+waves:
+  - resilience
 spaces:
   - devops
 authorGithubAlias: gunnargrosch
