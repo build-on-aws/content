@@ -66,7 +66,7 @@ We check the status of the deployed model endpoints from Step 1 and Step 2 in th
 ![Name of Deployed endpoints in Amazon SageMaker](images/deployed-endpoints.png)
 
 ## Step 4 - Create the Amazon OpenSearch Cluster
-Amazon OpenSearch is a search and analytics service that supports k-Nearest Neighbors (k-NN) algorithm. This functionality is incredibly valuable for similarity-based searches, allowing us to use OpenSearch effectively as a vector database. To explore further and learn about which versions of Elasticsearch/OpenSearch support the k-NN plugin, please refer the following link: [K-NN Plugin Documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html). 
+Amazon OpenSearch is a search and analytics service that supports k-Nearest Neighbors (kNN) algorithm. This functionality is incredibly valuable for similarity-based searches, allowing us to use OpenSearch effectively as a vector database. To explore further and learn about which versions of Elasticsearch/OpenSearch support the kNN plugin, please refer the following link: [k-NN Plugin Documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html). 
 
 We will use the AWS CLI to deploy the CloudFormation template file from the GitHub location `Infrastructure/opensearch-vectordb.yaml`. Execute the `aws cloudformation create-stack` command as follows to create the Amazon OpenSearch Cluster. Before executing the command we have to replace <username> and <password> with our own values.
 
