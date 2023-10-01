@@ -151,7 +151,7 @@ aws cloudformation create-stack \
 
 By creating the above CloudFormation stack, we set up an S3 bucket and establish S3 notifications that trigger a Lambda function. This Lambda function, in turn, initiates a Fargate task. The Fargate task runs a Docker container with the `startup-script.py` file, responsible for generating embeddings in Amazon OpenSearch under a new OpenSearch index named `carmanual`.
 
-### <u>Test with a Sample PDF</u>
+### <u>Test With a Sample PDF</u>
 Once the CloudFormation stack is executed, drop a PDF representing a car manual into the S3 bucket. I downloaded a car manual available [here](https://ownersman.com/manuals/2023-BMW-X3-owners-manual). After the event-based ingestion pipeline completes execution, the Amazon OpenSearch cluster should contain the `carmanual` index with embeddings as shown below.
 
 ![Save embeddings in OpenSearch 1](images/opensearch-embeddings-1.jpg)
