@@ -45,7 +45,7 @@ We will use a technique called in-context learning to inject domain or use case-
 
 ### <u>Diagram: Converting From PDF to Embeddings in Vector Database</u>
 
-![Shows all the steps involved in converting PDF documents into embeddings and storing in the Vector Database](images/embeddings-save-vectordb.png)
+![Shows all the steps involved in converting PDF documents into embeddings and storing in the vector database](images/embeddings-save-vectordb.png)
 
 Now, let's dive into the first step of our journey. In Step 1, we will deploy the GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart. This model will play a crucial role in converting our PDF manual into embeddings for our Vector Database. 
 
