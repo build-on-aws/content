@@ -342,7 +342,7 @@ aws sagemaker delete-endpoint --endpoint-name endpoint-name-2
 
 
 ## Conclusion
-In this tutorial, we built a full-stack Q&A chatbot using AWS technologies and open source tools. We leveraged Amazon OpenSearch as a vector database, integrated GPT-J 6B FP16 embeddings model, and used Langchain with a Large Language Model (LLM). This chatbot extracts insights from unstructured documents. Here's a quick summary of the steps:
+In this tutorial, we built a full-stack Q&A chatbot using AWS technologies and open source tools. We leveraged Amazon OpenSearch as a vector database, integrated GPT-J 6B FP16 embeddings model, and used Langchain with a LLM. This chatbot extracts insights from unstructured documents. Here's a quick summary of the steps:
 
 * Deployed GPT-J 6B FP16 Embedding Model.
 * Deployed the Flan T5 XXL LLM Model.
