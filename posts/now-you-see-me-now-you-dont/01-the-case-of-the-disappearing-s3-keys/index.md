@@ -13,7 +13,8 @@ waves:
   - storage
 authorGithubAlias: simonhanmer
 authorName: Simon Hanmer
-date: 2023-09-23
+githubUserLabel: community-builder
+date: 2023-10-05
 ---
 One of the great things about my role as a consultant at [GlobalLogic]([https://](https://www.globallogic.com/uk/) is that sometimes I'll be asked to help out on what at first glance can be a simple problem, but as I investigate, I get a chance to uncover some unusual or forgotten features.
 
@@ -25,7 +26,8 @@ In this case, we were logging access for all S3 buckets to a central accounting 
 Given that this was in a live environment, we were generating a lot of logs, and Athena was struggling. Our aim was to move the incoming logs into a structure where the objects had a prefix like `PartitionedLogs/Year=yy/Month=mm/Day=dd/bucket`, replacing the placeholders with appropriate values. Athena could then use this to partition the data, so we could have more efficient queries for a specific day or a specific bucket.
 
 To achieve this, we were using an event-driven pattern as per the diagram below:
-![Event-driven architecture to process logs](images/architecture.gif "Log partitioning architecture")
+![Event-driven architecture to process logs](images/architecture.png
+ "Log partitioning architecture")
 
 As an object was written to the S3 log bucket, this would generate an event that matched a rule configured in EventBridge. This posted a message to an SQS queue with details of the object, and then a lambda read those messages in batches. The lambda would loop over the messages in the batch and move the associated object to the prefix for partitioning. To prevent a feedback loop where moving the objects to the new prefix would trigger a new event, the rule in EventBridge was configured to ignore all new events for objects with a prefix starting with `PartitionedLogs`.
 
