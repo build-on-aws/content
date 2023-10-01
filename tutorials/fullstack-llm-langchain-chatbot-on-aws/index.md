@@ -1,5 +1,5 @@
 ---
-title: "Building a Full-Stack Large Language Model Powered Q&A Chatbot: Extracting Insights from Unstructured Documents"
+title: "Build a Full Stack Large Language Model Powered Chatbot: Extract Insights from Unstructured Documents"
 description: A full stack hands-on tutorial leveraging various AWS and Opensource technologies to build your own car savvy AI Assistant.
 tags:
   - llm
