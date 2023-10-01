@@ -172,7 +172,7 @@ The diagram below illustrates the real-time question and answer workflow powered
 
 ### <u>Diagrammatic Overview of Realtime Q & A Support From T5-Flan-XXL LLM</u>
 
-![Realtime In Context Learning Workflows](images/realtime-in-context-learning-workflow.png)
+![Realtime In-Context Learning Workflows](images/realtime-in-context-learning-workflow.png)
 
 ### <u>Build the API</u>
 Now that we've explored our LangChain and T5 Flan LLM workflow, let's delve into our API code, which takes in user questions and delivers context-aware responses. This real-time question-answer API resides in the `RAG-langchain-questionanswer-t5-llm` folder of our GitHub repository, with the core logic located in the `app.py` file. This Flask-based application defines a `/qa` route for question-answering.
