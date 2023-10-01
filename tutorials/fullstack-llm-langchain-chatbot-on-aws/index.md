@@ -61,7 +61,7 @@ Next, within Amazon SageMaker JumpStart, choose the Flan-T5 XXL LLM, and then cl
 ![Deploy the GPT-J 6B FP16 Embedding model from within Amazon SageMaker JumpStart](images/t5-flan-xxl-2.jpg)
 
 
-## Step 3 - Check the status of the deployed model endpoints
+## Step 3 - Check the Status of the Deployed Model Endpoints
 We check the status of the deployed model endpoints from Step 1 and Step 2 in the Amazon SageMaker console and make note of their endpoint names, since we will use them in our code. Here is how my console looks like after the model endpoints are deployed.
 ![Name of Deployed endpoints in Amazon SageMaker](images/deployed-endpoints.png)
 
