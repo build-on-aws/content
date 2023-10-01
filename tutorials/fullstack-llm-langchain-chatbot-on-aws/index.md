@@ -1,6 +1,6 @@
 ---
 title: "Build a Full Stack Large Language Model Powered Chatbot: Extract Insights from Unstructured Documents"
-description: A full stack hands-on tutorial leveraging various AWS and Opensource technologies to build your own car savvy AI Assistant.
+Use AWS and Opensource tools to build your own car-savvy AI assistant.
 tags:
   - llm
   - genai
