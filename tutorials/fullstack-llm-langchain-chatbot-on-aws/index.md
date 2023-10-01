@@ -47,7 +47,7 @@ We will use a technique called in-context learning to inject domain or use case-
 
 ![Shows all the steps involved in converting PDF documents into embeddings and storing in the vector database](images/embeddings-save-vectordb.png)
 
-Now, let's dive into the first step of our journey. In Step 1, we will deploy the GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart. This model will play a crucial role in converting our PDF manual into embeddings for our Vector Database. 
+Now, let's dive into the first step of our journey. In Step 1, we will deploy the GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart. This model will play a crucial role in converting our PDF manual into embeddings for our vector database. 
 
 ## Step 1 - Deploy GPT-J 6B FP16 Embedding model with Amazon SageMaker JumpStart
 To get started, follow the steps outlined in [Amazon SageMaker Documentation - Open and use JumpStart section](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) to launch Amazon SageMaker JumpStart node from the Home Menu of the Amazon SageMaker Studio. Choose <b>Models, notebooks, solutions</b> option and select the GPT-J 6B Embedding FP16 embedding model as shown in the image below. Then, simply click on 'Deploy' and Amazon SageMaker JumpStart will take care of the infrastructure setup for deploying this pretrained model into the SageMaker environment.
