@@ -160,7 +160,7 @@ Once the CloudFormation stack is executed, drop a PDF representing a car manual 
 
 ## Step 6 - Deploy Real-Time Q&A API With Llm Contextual Support
 
-Now that we have our text embeddings in the Vector Database powered by Amazon OpenSearch, let's dive into the next step. Here, we'll utilize the capabilities of the T5 Flan XXL Large Language Model (LLM) to provide real-time responses regarding our car manual. 
+Now that we have our text embeddings in the Vector Database powered by Amazon OpenSearch, let's dive into the next step. Here, we'll utilize the capabilities of the T5 Flan XXL LLM to provide real-time responses regarding our car manual. 
 
 We'll leverage the saved embeddings in the vector database to provide context to the LLM. This context enables the LLM to understand and respond to questions related to our car manual effectively. To achieve this, we'll utilize a framework called [LangChain](https://python.langchain.com/docs/get_started/introduction/), which simplifies the orchestration of various components required for our real-time context-aware question-answer system powered by the LLM.
 
