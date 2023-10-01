@@ -170,7 +170,7 @@ By representing text chunks and user questions as vectors, we can perform mathem
 
 The diagram below illustrates the real-time question and answer workflow powered by LangChain and our T5 Flan LLM.
 
-### <u>Diagrammatic Overview of Realtime Q & A support from T5-flan-XXL LLM</u>
+### <u>Diagrammatic Overview of Realtime Q & A Support From T5-Flan-XXL LLM</u>
 
 ![Realtime In Context Learning Workflows](images/realtime-in-context-learning-workflow.png)
 
