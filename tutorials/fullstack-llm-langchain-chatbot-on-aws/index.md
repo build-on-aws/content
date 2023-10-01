@@ -202,7 +202,7 @@ docker push <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com/qa-container:la
 ```
 Once the Docker image is uploaded to Amazon ECR repository, it should resemble the image below:
 
-![Realtime In Context Learning Workflows](images/ecr-qa-container.png)
+![Realtime In-Context Learning Workflows](images/ecr-qa-container.png)
 
 ### <u>Build the CloudFormation Stack for hosting the API Endpoint</u>
 We use the AWS Command Line Interface (CLI) to create the CloudFormation stack for the [Amazon ECS Cluster](https://aws.amazon.com/ecs/) which hosts a Fargate task to expose the API. The Cloudformation template is located in the GitHub repository at `Infrastructure/fargate-api-rag-llm-langchain.yaml`. We will need to override the parameters to match the AWS environment. Here are the key parameters to update in the `aws cloudformation create-stack` command:
