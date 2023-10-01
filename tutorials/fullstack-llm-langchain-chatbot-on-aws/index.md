@@ -43,7 +43,7 @@ We will use a technique called in-context learning to inject domain or use case-
 [Amazon OpenSearch](https://aws.amazon.com/opensearch-service/) is a search and analytics engine that can search for nearest neighbors of points in a vector space, making it suitable as a Vector Database.
 
 
-### <u>Diagram: Converting from PDF to Embeddings in Vector Database</u>
+### <u>Diagram: Converting From PDF to Embeddings in Vector Database</u>
 
 ![Shows all the steps involved in converting PDF documents into embeddings and storing in the Vector Database](images/embeddings-save-vectordb.png)
 
