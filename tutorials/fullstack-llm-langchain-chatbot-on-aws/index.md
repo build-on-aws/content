@@ -302,7 +302,7 @@ Invoke the end point URL in the browser to see how the website looks. Ask natura
 
 Hopefully, the above shows you how you can build your own production ready full stack pipelines for LLMs and integrate the pipeline with your front end and embedded NLP chatbots. Let me know other things you want to read about using open source , analytics, machine learning and AWS technologies!
 
-As you continue on your learning journey, I encourage you to delve deeper into Embeddings, Vector Databases, LangChain, several other LLM Models that are available on Amazon SageMaker JumpStart as well as AWS tools that we used in this tutorail like Amazon OpenSearch, Docker Containers, Fargate. Here are some next steps to help you master these technologies:
+As you continue on your learning journey, I encourage you to delve deeper into Embeddings, Vector Databases, LangChain, several other LLMs. They're available on Amazon SageMaker JumpStart as well as AWS tools that we used in this tutorial like Amazon OpenSearch, Docker Containers, Fargate. Here are some next steps to help you master these technologies:
 
 
 1. [Amazon SageMaker](https://aws.amazon.com/sagemaker/?sc_channel=el&sc_campaign=tutorial&sc_content=fullstack-llm-langchain-chatbot-on-aws&sc_geo=mult&sc_country=mult&sc_outcome=acq): As you progress with SageMaker, familiarize yourself with additional algorithms it offers.
