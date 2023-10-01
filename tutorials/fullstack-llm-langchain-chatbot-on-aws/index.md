@@ -33,7 +33,7 @@ In this example, we want to mimic the problem that is faced by many enterprises.
 ![Shows high level architecture](images/overallarchitecture.png)
 
 ## Let’s Start With the Basics
-We will use a technique called as "In-Context" learning to inject domain or use case specific "Context" into our LLM. In this case, we have an unstructured pdf manual of a car that we want to add as "Context" for the LLM and we want the LLM to answer questions about this manual. As simple as that! We aim to go a step further by developing a real-time API that receives questions, forwards them to our backend, and is accessible from an open-source chatbot embedded in the website. This tutorial enables us to build the entire user experience and gain insights into various concepts and tools throughout the process.
+We will use a technique called in-context learning to inject domain or use case-specific "Context" into our LLM. In this case, we have an unstructured PDF manual of a car that we want to add as "Context" for the LLM and we want the LLM to answer questions about this manual. It's as simple as that! We aim to go a step further by developing a real-time API that receives questions, forwards them to our backend, and is accessible from an open-source chatbot embedded in the website. This tutorial enables us to build the entire user experience and gain insights into various concepts and tools throughout the process.
 
 1. The very first step to provide In-Context learning is to ingest the pdf document and convert it into text chunks, generate vector representations of these text chunks called "embeddings" and finally store these embeddings in a vector database.
 
