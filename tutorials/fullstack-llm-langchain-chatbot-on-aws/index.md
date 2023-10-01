@@ -272,7 +272,7 @@ After the Docker image for the website is pushed to the ECR repository, we build
 * DemoVPC: This parameter specifies the Virtual Private Cloud (VPC) where your website will be deployed. 
 * PublicSubnetIds: This parameter requires a list of public subnet IDs where your load balancer and tasks for the website will be placed. 
 * Imagename: Provide the name of the Docker Image in your Amazon Elastic Container Registry (ECR) for the website. 
-* QUESTURL: Specify the endpoint url of the API deployed in Step 6. It is of the format http://<DNS Name of API ALB>/qa 
+* QUESTURL: Specify the endpoint URL of the API deployed in Step 6. It is of the format http://<DNS Name of API ALB>/qa 
 
 
 To execute the CloudFormation stack creation, we use the following AWS CLI command after updating the parameter values:
