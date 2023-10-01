@@ -293,7 +293,7 @@ aws cloudformation create-stack \
 After successfully building the CloudFormation stack mentioned above, navigate to the AWS Console and access the 'CloudFormation Outputs' tab for the 'ecs-website-chatbot' stack. In this tab we will find the DNS name of the Application Load Balancer (ALB) associated with the front end. Below is an example of what the output will resemble:
 ![Cloudformation template Output](images/dns-name-website.png)
 
-Invoke the end point url in the browser to see how the website looks. Ask natural language questions to the embedded chatbot. Some questions we could ask are -  "How should I clean the windshield?" , "Where can I find the VIN?", "How should I report safety defects?"  
+Invoke the end point URL in the browser to see how the website looks. Ask natural language questions to the embedded chatbot. Some questions we could ask are -  "How should I clean the windshield?" , "Where can I find the VIN?", "How should I report safety defects?"  
 
 ![Website display ](images/website-1.png)
 
