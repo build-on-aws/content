@@ -28,7 +28,7 @@ In today’s data-driven landscape, extracting meaningful insights from unstruct
 |-----|
 
 ## What are we going to build
-In this example, we want to mimic the problem that is faced by many enterprises. Most of the data today is not structured but is rather unstructured in the form of audio and video transcripts, pdf and word documents, manuals, scanned notes, social media dumps, etc. We will use flan-t5-xxl model as the Large Language Model (LLM). This model can produce summaries, Q&A responses from unstructured texts. Here is the architecture showing the various building blocks.
+In this example, we want to mimic the problem that is faced by many enterprises. Most of the data today is not structured but is rather unstructured in the form of audio and video transcripts, PDF and Word documents, manuals, scanned notes, social media dumps, etc. We will use the Flan-T5 XXL model as the LLM. This model can produce summaries and Q&A responses from unstructured texts. The following image is the architecture showing the various building blocks. 
 
 ![Shows high level architecture](images/overallarchitecture.png)
 
