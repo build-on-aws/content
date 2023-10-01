@@ -39,7 +39,7 @@ We will use a technique called in-context learning to inject domain or use case-
 
 2. Vector databases enable us to perform a "similarity search" against the text embeddings that are stored in it.
 
-3. [Amazon SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides one click executable solution templates for setting up the infrastructure for pretrained, open-source models. We will be using Amazon SageMaker JumpStart to deploy the Embedding Model and the Large Language Model(LLM).<br/>
+3. [Amazon SageMaker JumpStart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides one click executable solution templates for setting up the infrastructure for pretrained, open-source models. We will be using Amazon SageMaker JumpStart to deploy the Embedding Model and the Large Language Model.<br/>
 [Amazon OpenSearch](https://aws.amazon.com/opensearch-service/) is a search and analytics engine that can search for nearest neighbors of points in a vector space, making it suitable as a Vector Database.
 
 
