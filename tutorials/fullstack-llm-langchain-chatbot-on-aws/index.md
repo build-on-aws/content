@@ -254,7 +254,7 @@ Next we move on to the last step for our full stack pipeline, which is integrati
 ```bash 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <AWS Account Number>.dkr.ecr.us-east-1.amazonaws.com 
 ```
-2. Build the Docker image using the following command.
+2. Build the Docker image using the following command:
 ```bash 
 docker build -t web-chat-frontend .
 ```
