@@ -1,18 +1,18 @@
 ---
-title: "From Python to Java: How I Used CodeWhisperer to Switch Languages"
+title: "From Python to Java: How I Used Amazon CodeWhisperer to Switch Languages"
 description: "Want to easily port code between programming languages? This post shares how CodeWhisperer can make switching between Python and Java a breeze."
 tags:
-    - Generative AI
-    - CodeWhisperer    
-    - Rekognition
+    - generative-ai
+    - codewhisperer    
+    - rekognition
     - java
     - students
 authorGithubAlias: srhowell
 authorName: Stephen Howell
-date: 2023-09-28
-showInHomeFeed: true
+date: 2023-10-02
 ---
-
+|ToC|
+|---|
 My Academic Developer Advocate role includes teaching students how to build solutions on AWS, and discussing strategies with lecturers on how to teach cloud and AI skills. A topic which is increasingly common with my audience is *Generative AI in the Classroom*. There is a range of attitudes to *Gen AI* from academics I meet, ranging from apathy to hostility to cautious optimism. I'm erring on the side of optimism that Gen AI will be a useful teaching tool for lecturers. This post condenses a few of the recent techniques I've explored for enhancing my own teaching practice.  
 
 > I want to recognize that I've heard concerns about using Generative AI in teaching and learning. I've heard fears that students will not learn to code or do their own assignments because they will just 'ask the AI to do it for them'. I've also heard from lecturers who are excited to adopt GenAI as a teaching tool. For this post, I'm focusing on a small use case that I think may be familiar to many lecturers, trainers, and those who volunteer to teach coding: How to move from one language and stack to another. I'm not making any pronouncements on whether you *should* teach with Gen AI, but I'd like to offer one way you *could* teach with it.
@@ -25,11 +25,11 @@ A good Developer Advocate can bring a builder on a learning journey from the sta
 
 If my talk must involve coding, I don't like to dictate the language. Instead I ask "What coding language/stack would you prefer me to use?". This is a relatively safe question because an overwhelming number of Computer Science courses have switched to Python over the last decade, and it is by far the most requested language from CS faculty. But for the other courses, it is a mixture. Some courses teach the languages that the lecturers are most familiar with. Some courses teach languages and stacks that the local industry needs. Some are in the process of changing, so the second and third years know one stack, but the first years have all switched to a different stack going forward.
 
-![A stylized Python in digital art design](images/AdobeStock_607140721s.jpeg "Python is an industry (and academic) favorite")
+![A stylized Python in digital art design](images/AdobeStock_607140721s.webp "Python is an industry (and academic) favorite")
 
 ## Teaching Computer Vision Labelling ML with Python
 
-One of my favorite talks involves using [Amazon Rekognition](https://docs.aws.amazon.com/rekognition/) to label images taken from an IoT camera on our farm. We have lovely hens and we certainly don't appreciate hawks trying to catch them. A motion sensitive camera can take a photo and send it for analysis on the cloud. I don't want to train a model to differentiate between the *Rhode Island Red* hens and an eagle, so I can use Amazon Rekognition to quickly check each image. To simplify the code for my short demo, the images are sourced from the current folder, not a camera, or cloud storage. The Python code is short and simple: it sends every PNG in the current folder to Amazon Rekognition and labels come back in JSON. The labels are printed out and color coded with red for a bird of prey, green for poultry, and white for neither. It's a nice demo of pre-trained ML models and calling an API. The Rekognition API can detect [3082 different labels](https://docs.aws.amazon.com/rekognition/latest/dg/samples/AmazonRekognitionLabels_v3.0.zip) so it works for many different use cases, not just hens and hawks!  
+One of my favorite talks involves using [Amazon Rekognition](https://docs.aws.amazon.com/rekognition/?sc_channel=el&sc_campaign=genaiwave&sc_content=codewhisperer-for-lecturers&sc_geo=mult&sc_country=mult&sc_outcome=acq) to label images taken from an IoT camera on our farm. We have lovely hens and we certainly don't appreciate hawks trying to catch them. A motion sensitive camera can take a photo and send it for analysis on the cloud. I don't want to train a model to differentiate between the *Rhode Island Red* hens and an eagle, so I can use Amazon Rekognition to quickly check each image. To simplify the code for my short demo, the images are sourced from the current folder, not a camera, or cloud storage. The Python code is short and simple: it sends every PNG in the current folder to Amazon Rekognition and labels come back in JSON. The labels are printed out and color coded with red for a bird of prey, green for poultry, and white for neither. It's a nice demo of pre-trained ML models and calling an API. The Rekognition API can detect [3082 different labels](https://docs.aws.amazon.com/rekognition/latest/dg/samples/AmazonRekognitionLabels_v3.0.zip) so it works for many different use cases, not just hens and hawks!  
 
 Here is the Python code for reference:
 
@@ -83,13 +83,13 @@ if __name__ == '__main__':
     main()
 ```
 
-![Can ML tell a hawk apart from a hen?](images/AdobeStock_520205725_AdobeStock_167836824.jpeg "A Hawk and a Hen")
+![Can ML tell a hawk apart from a hen?](images/AdobeStock_520205725_AdobeStock_167836824.webp "A Hawk and a Hen")
 
 Recently, I was invited to give this ML talk to a student audience at a university I had not previously visited. The students were from 3 different degree courses but all had done a common semester (or *term*) of introductory coding. When I asked the lecturer who had invited me as to what language they would prefer, they responded that their students had only studied Java.  
 
 Now, this was a mild surprise, but rather than insist they watch the demo in Python, there was an opportunity. Many years ago, I was a Java lecturer myself. For over a decade I taught introductory coding with Java, so surely I could easily rewrite the code in Java? Technically, I probably could; it might take some mental effort to get the Java gears in my brain turning again, but it would come back to me. And if it didn't, I'd have the stalwarts of every coder to help me, the example docs and StackOverflow! However, it would be a poor demo indeed if I were to say to students, "watch me try to remember how to code in Java". Instead I could turn to my new generative AI coding tool, **Amazon CodeWhisperer**, for help.
 
-If you haven't tried [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/), it is an AI coding companion. It is a generative AI tool focused on suggesting code inside your IDE. There are *Individual* (free) and *Professional* (paid) [tiers](https://aws.amazon.com/codewhisperer/pricing/). In this post, I'm using the free tier in Visual Studio Code via my [AWS Builder ID](https://docs.aws.amazon.com/signin/latest/userguide/sign-in-aws_builder_id.html?icmpid=docs_builder_id_console).
+If you haven't tried [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/?trk=83c710fd-0a7a-416b-9bb8-baa535b64ee0&sc_channel=el), it is an AI coding companion. It is a generative AI tool focused on suggesting code inside your IDE. There are *Individual* (free) and *Professional* (paid) [tiers](https://aws.amazon.com/codewhisperer/pricing/?trk=83c710fd-0a7a-416b-9bb8-baa535b64ee0&sc_channel=el). In this post, I'm using the free tier in Visual Studio Code via my [AWS Builder ID](https://docs.aws.amazon.com/signin/latest/userguide/sign-in-aws_builder_id.html?sc_channel=el&sc_campaign=genaiwave&sc_content=codewhisperer-for-lecturers&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ## CodeWhisperer to the Rescue
 
@@ -188,27 +188,27 @@ public class App {
 }
 ```
 
-### Prompt Based LLM Tools
+## Prompt Based LLM Tools
 
 Of course, if you've tried prompt based Gen AI tools, you might suggest feeding them all the code at once with the prompt "Convert this Python code into Java" or similar. This might work well in a professional development environment, but I don't recommend it to students who are starting out learning to code. It defeats the educational purposes of an academic lecture which needs to teach the students, line by line, how the syntax works. Using CodeWhisperer in a comment by comment fashion establishes the task being solved with each set of new lines generated. The lecturer can discuss the suggestion before accepting or rejecting it. This active learning approach using live-coding and explaining *why* a line of code works (or not) is the best way I've found to teach foundational coding.
 
-### Conclusion  
+## Conclusion  
 
 Though I still needed my (rusty) Java knowledge to finalize the code, CodeWhisperer boosted my efficiency enormously. Tools like CodeWhisperer help me focus on the most meaningful part of being an educator - teaching students and spreading knowledge, not bashing my head against an IDE with syntax errors I can't decipher!  
 
-### About the Author
+## About the Author
 
 Stephen is an Academic Developer Advocate at AWS, supporting students and faculty on their cloud skills journey. When not teaching, learning, or protecting his chickens, Stephen likes to read, write, and play science fiction stories with his family. The Academic Advocacy Team supports students worldwide to join the AWS Community. If you are a student who loves learning cloud technologies and would like support other students on their journey, consider becoming a Cloud Captain and launching a Cloud Club. If you are an academic who would like to discuss teaching and learning cloud and AI skills, please get in touch with Stephen.  
 
-### Addendum: Steps to Port Python to Java  
+## Addendum: Steps to Port Python to Java  
 
 Here are the 'hands-on' steps I followed, they will be similar depending on the languages you are porting from/to.  
 
-#### Step 1: Environment Set-up
+### Step 1: Environment Set-up
 
 First, I needed to get everything set-up for my Java demo. While this isn't a tutorial, I'm sharing the outline steps in case you haven't used Java on your system recently or Java with Visual Studio Code.  
 
-1. My system didn't have a JDK installed, but that was quickly rectified by installing [Amazon Coretto](https://aws.amazon.com/corretto/).
+1. My system didn't have a JDK installed, but that was quickly rectified by installing [Amazon Coretto](https://aws.amazon.com/corretto/?sc_channel=el&sc_campaign=genaiwave&sc_content=codewhisperer-for-lecturers&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 1. I installed the [Coding Pack for Java](https://code.visualstudio.com/docs/languages/java) which bundles Visual Studio code and recommended extensions.  
 1. I installed [Maven](https://maven.apache.org/), my preferred Java project management and dependency tool.
 1. I launched Visual Studio Code and signed into AWS Toolbox and enabled CodeWhisperer.
@@ -217,11 +217,11 @@ First, I needed to get everything set-up for my Java demo. While this isn't a tu
 
 CodeWhisperer wasn't used for the latter steps, I followed the steps from the [Using the SDK](https://github.com/aws/aws-sdk-java-v2#using-the-sdk).  
 
-#### Step 2: Porting Python code to Java with CodeWhisperer
+### Step 2: Porting Python code to Java with CodeWhisperer
 
 I found the main technique for porting code was moving each comment over from the Python code, evaluate/edit the CodeWhisperer suggestions, and repeat. The following steps show the code as CodeWhisperer added to it. Each step is a new comment prompting CodeWhisperer to suggest new code.  
 
-##### Step 2.1 Imports
+#### Step 2.1 Imports
 
 The comment `# Import Amazon Rekognition for Python libraries` was slightly edited to `// Import Amazon Rekognition for Java libraries`.  
 I changed the symbols indicating this line is a comment, and changed `Python` to `Java`.  
@@ -239,7 +239,7 @@ import com.amazonaws.services.rekognition.model.Label;
 
 I guessed that I might not need *all* of these, but it was probably a good starting point. A cool feature of CodeWhisperer is that when it suggests code that requires an import, it also adds the import.  
 
-##### Step 2.2 Arrays of Poultry and Birds of Prey
+#### Step 2.2 Arrays of Poultry and Birds of Prey
 
 The next comment was `// String ArraysLists defining birds of prey ('Hawk', 'Buzzard', 'Eagle', 'Vulture', 'Bald Eagle') and poultry birds ('Chicken', 'Fowl', 'Ducks', 'Goose', 'Poultry', 'Hen')`. I slightly modified the original comment to change Arrays to ArrayLists. This is because I prefer to use typed ArrayLists if the students have already learned simple arrays. The resulting code suggestions were exactly what I wanted, though I couldn't remember the unwieldy `Arrays.asList` syntax until CodeWhisperer suggested it.  
 
@@ -248,7 +248,7 @@ The next comment was `// String ArraysLists defining birds of prey ('Hawk', 'Buz
     public static ArrayList<String> poultryBirds = new ArrayList<String>(Arrays.asList("Chicken", "Fowl", "Ducks", "Goose", "Poultry", "Hen"));
 ```  
 
-##### Step 2.3 Instantiate the Amazon Rekognition Client and Loop through Every File in the Current Folder
+#### Step 2.3 Instantiate the Amazon Rekognition Client and Loop through Every File in the Current Folder
 
 The comment `// Create Amazon Rekognition client` produced the expected `AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();`.  
 The next step could be done in a few different ways. I need to check every file in the current folder and if it's a PNG file, read the bytes (for sending to Rekognition). Java has added some nice syntax and core libraries to make this easier than the last time I coded in it, so I was curious to see what CodeWhisperer would suggest. It also added the necessary imports too. I'm omitting the final two parentheses that CodeWhisperer suggested as I need to add some more code in.
@@ -263,7 +263,7 @@ for (String photo : new File(".").list()) {
             }
 ```
 
-##### Step 2.4 Detecting Labels in Each Photo
+#### Step 2.4 Detecting Labels in Each Photo
 
 The comment `// Call Amazon Rekognition to detect labels in the image, max labels of 5, minimum confidence of 95%` produced:  
 
@@ -281,7 +281,7 @@ try {
     }
 ```
 
-##### Step 2.5 Print the Color-coded Labels
+#### Step 2.5 Print the Color-coded Labels
 
 The final bit of code was to print out each label on a line but coded red, green, or white depending on the result. I manually added an ANSI color code to print out the labels in different colors, but once I added one, CodeWhisperer could add the rest for me. In this section, I was prescriptive with comments outlining my requirements, and CodeWhisperer might occasionally suggest a way of doing it that I didn't like (possibly too complicated for beginners or too verbose) so I could left/right arrow to see other suggestions. I had to add comments for each `else` clause I wanted, but that reinforces the iterative way of building up the code suggestion by suggestion.  
 
