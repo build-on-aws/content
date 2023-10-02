@@ -39,7 +39,7 @@ We'd rolled out our infrastructure and code through Terraform, and at first glan
 
 First, we tried manually submitting a message describing our S3 object to our SQS queue, and our code worked, copying the file that had stayed in place previously to the expected location. This ruled out issues with permissions or KMS keys, which had been our initial thought. We also checked that our lambda wasn't exhausting the allocated memory or timeout, again with no problems noted.
 
-Next, we wanted to get a feel for the scale of our problem, so we added some debug to our lambda code; this was written in Python, and we were using the [logging library](https://docs.python.org/3/library/logging.html), so we added a couple of debug lines and also added a 'try ... except` clause to capture any errors. With these in place, a simplified version of our code would look like:
+Next, we wanted to get a feel for the scale of our problem, so we added some debug to our lambda code; this was written in Python, and we were using the [logging library](https://docs.python.org/3/library/logging.html), so we added a couple of debug lines and also added a `try ... except` clause to capture any errors. With these in place, a simplified version of our code would look like:
 
 ```python
 for object in event['Messages']:
