@@ -88,7 +88,7 @@ Eventual consistency is used elsewhere in AWS, such as in RDS read replicas, Dyn
 This explained why, in a very small number of cases, we might see an event being triggered in S3 to indicate that an object had been uploaded, and if we were very quick in processing that event, we might try to read from a location where that data hadn't replicated yet - a reason why we might see our dreaded `NoSuchKey` message.
 
 ## But didn't AWS announce that S3 is now strongly consistent?
-As I write the above section, I can imagine people quickly searching because they remember an [announcement](https://aws.amazon.com/blogs/aws/amazon-s3-update-strong-read-after-write-consistency/) that AWS was now strongly consistent. Indeed, that announcement was made in December 2020. The announcement starts with
+As I write the above section, I can imagine people quickly searching because they remember an [announcement](https://aws.amazon.com/blogs/aws/amazon-s3-update-strong-read-after-write-consistency/) that S3 was now strongly consistent. Indeed, that announcement was made in December 2020. The announcement starts with
 
 > When we launched S3 back in 2006, I discussed its virtually unlimited capacity (“…easily store any number of blocks…”), the fact that it was designed to provide 99.99% availability, and that it offered durable storage, with data transparently stored in multiple locations. Since that launch, our customers have used S3 in an amazing diverse set of ways: backup and restore, data archiving, enterprise applications, web sites, big data, and (at last count) over 10,000 data lakes.
 >
