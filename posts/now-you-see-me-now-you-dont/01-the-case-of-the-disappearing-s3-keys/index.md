@@ -45,7 +45,7 @@ Next, we wanted to get a feel for the scale of our problem, so we added some deb
 for object in event['Messages']:
   ...
 
-  log.debug('Notified of key %s), objectName)
+  log.debug('Notified of key %s', objectName)
 
   try:
     s3_client.copy_object(
