@@ -101,7 +101,7 @@ I've been exploring CodeWhisperer's capabilities for a while, but I hadn't tried
 CodeWhisperer supports Java (and other programming languages), but I personally hadn't had to use Java in a few years. I'll outline my approach and the developer experience, but I encourage you to experiment with CodeWhisperer yourself.  
 While my use case is aimed at a lecturer in the class room, many professional developers have to 'context switch' daily. It's not uncommon for a 'full stack' developer to be working on multiple languages at once. They are expected to seamlessly move between technologies; and in a small company, they might be the only developer, so they can't specialize on one stack or aspect of the system. An AI coding companion helps with that constant context switching.
 
-If you would like to read a detailed, step-by-step walkthrough for how I completed this, I've places it at the end of this post as an [addendum](/posts/codewhisperer-for-lecturers/depth).
+If you would like to read a detailed, step-by-step walkthrough for how I completed this, I've places it at the end of this post as an addendum at the bottom of this post.
 
 ## How CodeWhisperer Supports Language Porting
 
@@ -202,28 +202,24 @@ Stephen is an Academic Developer Advocate at AWS, supporting students and facult
 
 ### Addendum: Steps to Port Python to Java  
 
-Here are the 'hands-on steps I followed, they will be similar depending on the languages you are porting from/to.  
+Here are the 'hands-on' steps I followed, they will be similar depending on the languages you are porting from/to.  
 
 #### Step 1: Environment Set-up
 
 First, I needed to get everything set-up for my Java demo. While this isn't a tutorial, I'm sharing the outline steps in case you haven't used Java on your system recently or Java with Visual Studio Code.  
 
 1. My system didn't have a JDK installed, but that was quickly rectified by installing [Amazon Coretto](https://aws.amazon.com/corretto/).
-1. I installed the [Coding Pack for Java](https://code.visualstudio.com/docs/languages/java) which bundles Visual Studio code and recommended extensions. 
+1. I installed the [Coding Pack for Java](https://code.visualstudio.com/docs/languages/java) which bundles Visual Studio code and recommended extensions.  
 1. I installed [Maven](https://maven.apache.org/), my preferred Java project management and dependency tool.
 1. I launched Visual Studio Code and signed into AWS Toolbox and enabled CodeWhisperer.
-1. I needed to access the [AWS SDK for Java v2](https://github.com/aws/aws-sdk-java-v2) and the recommended way to use it is via a Maven *Bill of Materials* import.   
+1. I needed to access the [AWS SDK for Java v2](https://github.com/aws/aws-sdk-java-v2) and the recommended way to use it is via a Maven *Bill of Materials* import.  
 1. I created a new Java project with Maven and edited my POM.xml.  
-1. CodeWhisperer wasn't used for this part, I followed the steps from the [Using the SDK](https://github.com/aws/aws-sdk-java-v2#using-the-sdk).  
+
+CodeWhisperer wasn't used for the latter steps, I followed the steps from the [Using the SDK](https://github.com/aws/aws-sdk-java-v2#using-the-sdk).  
 
 #### Step 2: Porting Python code to Java with CodeWhisperer
 
-I found two main techniques for porting the code worked well:
-
-1. Move each comment over from the Python code, evaluate/edit the CodeWhisperer suggested code, and repeat
-1. Copy snippets of Python code and ask for it to be translated directly into Java
-
-The first method worked the best in my case. The following steps show the code as CodeWhisperer added to it. Each step is a new comment prompting CodeWhisperer to suggest new code.  
+I found the main technique for porting code was moving each comment over from the Python code, evaluate/edit the CodeWhisperer suggestions, and repeat. The following steps show the code as CodeWhisperer added to it. Each step is a new comment prompting CodeWhisperer to suggest new code.  
 
 ##### Step 2.1 Imports
 
@@ -287,7 +283,7 @@ try {
 
 ##### Step 2.5 Print the Color-coded Labels
 
-The final bit of code was to print out each label on a line but coded red, green, or white depending on the result. I manually added an ANSI color code to print out the labels in different colors, but once I added one, CodeWhisperer could add the rest for me. In this section, I was prescriptive with comments outlining my requirements, and CodeWhisperer might occasionally suggest a way of doing it that I didn't like (possibly too complicated for beginners or too verbose) so I could left/right arrow to see other suggestions. I had to add comments for each `else` clause I wanted, but that reinforces the iterative way of building up the code suggestion by suggestion.   
+The final bit of code was to print out each label on a line but coded red, green, or white depending on the result. I manually added an ANSI color code to print out the labels in different colors, but once I added one, CodeWhisperer could add the rest for me. In this section, I was prescriptive with comments outlining my requirements, and CodeWhisperer might occasionally suggest a way of doing it that I didn't like (possibly too complicated for beginners or too verbose) so I could left/right arrow to see other suggestions. I had to add comments for each `else` clause I wanted, but that reinforces the iterative way of building up the code suggestion by suggestion.  
 
 ```java
 // Print out each label on a single line  (Color codes are hexadecimal ansi escape codes: red == \x1b[31m )
