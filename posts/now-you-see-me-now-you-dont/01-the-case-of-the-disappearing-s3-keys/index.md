@@ -17,7 +17,7 @@ authorName: Simon Hanmer
 githubUserLabel: community-builder
 date: 2023-10-05
 ---
-One of the great things about my role as a consultant at [GlobalLogic]([https://](https://www.globallogic.com/uk/) is that sometimes I'll be asked to help out on what at first glance can be a simple problem, but as I investigate, I get a chance to uncover some unusual or forgotten features.
+One of the great things about my role as a consultant at [GlobalLogic](https://www.globallogic.com/uk/) is that sometimes I'll be asked to help out on what at first glance can be a simple problem, but as I investigate, I get a chance to uncover some unusual or forgotten features.
 
 Recently, I was working on a project and was asked if I could help solve an issue that had been puzzling a developer. They had deployed a system where some objects uploaded to an S3 bucket seemed to disappear and then reappear; it was time to start digging.
 
