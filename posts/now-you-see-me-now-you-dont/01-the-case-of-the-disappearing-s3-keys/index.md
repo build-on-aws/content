@@ -37,7 +37,7 @@ We'd used SQS rather than triggering the lambda directly because there is a limi
 ## Our problem and how we investigated.
 We'd rolled out our infrastructure and code through Terraform, and at first glance, everything was running great. We could see the objects being created in the log bucket, and after a short period, they were moved to the new prefix. However, after a couple of days, we noticed that some objects were still sitting in their original locations. And so, started our puzzle ...
 
-First, we tried manually submitting a message describing our S3 object to our SQS queue, and our code worked, copying the file that had stayed in place previously to the expected location. This ruled out issues with permissions or KMS keys, which had been our thought. We also checked that our lambda wasn't exhausting the allocated memory or timeout, again with no problems noted.
+First, we tried manually submitting a message describing our S3 object to our SQS queue, and our code worked, copying the file that had stayed in place previously to the expected location. This ruled out issues with permissions or KMS keys, which had been our initial thought. We also checked that our lambda wasn't exhausting the allocated memory or timeout, again with no problems noted.
 
 Next, we wanted to get a feel for the scale of our problem, so we added some debug to our lambda code; this was written in Python, and we were using the [logging library](https://docs.python.org/3/library/logging.html), so we added a couple of debug lines and also added a 'try ... except` clause to capture any errors. With these in place, a simplified version of our code would look like:
 
