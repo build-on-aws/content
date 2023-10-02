@@ -101,13 +101,17 @@ I've been exploring CodeWhisperer's capabilities for a while, but I hadn't tried
 CodeWhisperer supports Java (and other programming languages), but I personally hadn't had to use Java in a few years. I'll outline my approach and the developer experience, but I encourage you to experiment with CodeWhisperer yourself.  
 While my use case is aimed at a lecturer in the class room, many professional developers have to 'context switch' daily. It's not uncommon for a 'full stack' developer to be working on multiple languages at once. They are expected to seamlessly move between technologies; and in a small company, they might be the only developer, so they can't specialize on one stack or aspect of the system. An AI coding companion helps with that constant context switching.
 
-If you would like to read a longer, more detailed, step-by-step walkthrough for how I completed this, I've written it up on a separate [page](/posts/codewhisperer-for-lecturers/depth).
+If you would like to read a detailed, step-by-step walkthrough for how I completed this, I've places it at the end of this post as an [addendum](/posts/codewhisperer-for-lecturers/depth).
 
 ## How CodeWhisperer Supports Language Porting
 
 As I hadn't coded in Java on my device in several years, I needed to first set up the environment (install JDKs and Visual Studio Code extensions for Java), and create an AWS SDK Java app with Maven. As I am an 'old school' dev, I tested my setup by writing a simple Hello World program, and CodeWhisperer suggested the complete code after just typing the 'Hello World' comment. The code appears as a suggestion, similar to an auto-complete suggestion in text editors, and I can accept by pressing the `Tab` key. If no code is suggested, I can request it by pressing `ALT + c`. Finally, if the suggestion isn't exactly what I want, I can press left and right arrow keys to cycle through alternative suggestions in case one of those suits me better.  
 
-I found the best suggestions were generated when I moved over comments from the Python code to the new Java class one-by-one, and let CodeWhisperer suggest Java implementations of that comment. Sometimes a slight editing of the comment was required, but only in a few cases. I used comments to generate the code for imports, array lists, instantiating the Rekognition client, processing image files, calling Rekognition's DetectLabels method, and printing color-coded labels. The experience of having a AI coding partner making suggestions takes a little getting used to, but I found it incredibly useful for reminding me of the 'Java-way' of doing certain things, and also the how it improved my efficiency immensely. Instead of writing a comment, switching to the docs or StackOverflow on how to do something in the Java world, CodeWhisperer was suggesting code that either looked right because it was reminding me of code I used to know, or looked strange because it was using new Java APIs or syntax that didn't exist the last time I used Java. I could then learn this new way of doing something in Java much quicker because it was presented in a way that directly integrated with the code I already had. Overall, CodeWhisperer accelerated developing the Java version by proposing code based on my comments and intent, and the previous code it had suggested .  
+I found the best suggestions were generated when I moved over comments from the Python code to the new Java class one-by-one, and let CodeWhisperer suggest Java implementations of that comment. Sometimes a slight editing of the comment was required, but only in a few cases. I used comments to generate the code for imports, array lists, instantiating the Rekognition client, processing image files, calling Rekognition's DetectLabels method, and printing color-coded labels.  
+
+The experience of having a AI coding partner making suggestions takes a little getting used to, but I found it incredibly useful for reminding me of the 'Java-way' of doing certain things, and also the how it improved my efficiency immensely. Instead of writing a comment, switching to the docs or StackOverflow on how to do something in the Java world, CodeWhisperer was suggesting code that either looked right because it was reminding me of code I used to know, or looked strange because it was using new Java APIs or syntax that didn't exist the last time I used Java. I could then learn this new way of doing something in Java much quicker because it was presented in a way that directly integrated with the code I already had.  
+
+Overall, CodeWhisperer accelerated developing the Java version by proposing code based on my comments and intent, and the previous code it had suggested.  
 
 The final code the CodeWhisperer suggested to me:
 
@@ -195,3 +199,115 @@ Though I still needed my (rusty) Java knowledge to finalize the code, CodeWhispe
 ### About the Author
 
 Stephen is an Academic Developer Advocate at AWS, supporting students and faculty on their cloud skills journey. When not teaching, learning, or protecting his chickens, Stephen likes to read, write, and play science fiction stories with his family. The Academic Advocacy Team supports students worldwide to join the AWS Community. If you are a student who loves learning cloud technologies and would like support other students on their journey, consider becoming a Cloud Captain and launching a Cloud Club. If you are an academic who would like to discuss teaching and learning cloud and AI skills, please get in touch with Stephen.  
+
+### Addendum: Steps to Port Python to Java  
+
+Here are the 'hands-on steps I followed, they will be similar depending on the languages you are porting from/to.  
+
+#### Step 1: Environment Set-up
+
+First, I needed to get everything set-up for my Java demo. While this isn't a tutorial, I'm sharing the outline steps in case you haven't used Java on your system recently or Java with Visual Studio Code.  
+
+1. My system didn't have a JDK installed, but that was quickly rectified by installing [Amazon Coretto](https://aws.amazon.com/corretto/).
+1. I installed the [Coding Pack for Java](https://code.visualstudio.com/docs/languages/java) which bundles Visual Studio code and recommended extensions. 
+1. I installed [Maven](https://maven.apache.org/), my preferred Java project management and dependency tool.
+1. I launched Visual Studio Code and signed into AWS Toolbox and enabled CodeWhisperer.
+1. I needed to access the [AWS SDK for Java v2](https://github.com/aws/aws-sdk-java-v2) and the recommended way to use it is via a Maven *Bill of Materials* import.   
+1. I created a new Java project with Maven and edited my POM.xml.  
+1. CodeWhisperer wasn't used for this part, I followed the steps from the [Using the SDK](https://github.com/aws/aws-sdk-java-v2#using-the-sdk).  
+
+#### Step 2: Porting Python code to Java with CodeWhisperer
+
+I found two main techniques for porting the code worked well:
+
+1. Move each comment over from the Python code, evaluate/edit the CodeWhisperer suggested code, and repeat
+1. Copy snippets of Python code and ask for it to be translated directly into Java
+
+The first method worked the best in my case. The following steps show the code as CodeWhisperer added to it. Each step is a new comment prompting CodeWhisperer to suggest new code.  
+
+##### Step 2.1 Imports
+
+The comment `# Import Amazon Rekognition for Python libraries` was slightly edited to `// Import Amazon Rekognition for Java libraries`.  
+I changed the symbols indicating this line is a comment, and changed `Python` to `Java`.  
+The resulting code suggestion *looked* reasonable, though I wouldn't be sure until I tried to use the libraries suggested:  
+
+```java
+import com.amazonaws.services.rekognition.AmazonRekognition;
+import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
+import com.amazonaws.services.rekognition.model.AmazonRekognitionException;
+import com.amazonaws.services.rekognition.model.DetectLabelsRequest;
+import com.amazonaws.services.rekognition.model.DetectLabelsResult;
+import com.amazonaws.services.rekognition.model.Image;
+import com.amazonaws.services.rekognition.model.Label;
+```
+
+I guessed that I might not need *all* of these, but it was probably a good starting point. A cool feature of CodeWhisperer is that when it suggests code that requires an import, it also adds the import.  
+
+##### Step 2.2 Arrays of Poultry and Birds of Prey
+
+The next comment was `// String ArraysLists defining birds of prey ('Hawk', 'Buzzard', 'Eagle', 'Vulture', 'Bald Eagle') and poultry birds ('Chicken', 'Fowl', 'Ducks', 'Goose', 'Poultry', 'Hen')`. I slightly modified the original comment to change Arrays to ArrayLists. This is because I prefer to use typed ArrayLists if the students have already learned simple arrays. The resulting code suggestions were exactly what I wanted, though I couldn't remember the unwieldy `Arrays.asList` syntax until CodeWhisperer suggested it.  
+
+```java
+    public static ArrayList<String> birdsOfPrey = new ArrayList<String>(Arrays.asList("Hawk", "Buzzard", "Eagle", "Vulture", "Bald Eagle"));
+    public static ArrayList<String> poultryBirds = new ArrayList<String>(Arrays.asList("Chicken", "Fowl", "Ducks", "Goose", "Poultry", "Hen"));
+```  
+
+##### Step 2.3 Instantiate the Amazon Rekognition Client and Loop through Every File in the Current Folder
+
+The comment `// Create Amazon Rekognition client` produced the expected `AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();`.  
+The next step could be done in a few different ways. I need to check every file in the current folder and if it's a PNG file, read the bytes (for sending to Rekognition). Java has added some nice syntax and core libraries to make this easier than the last time I coded in it, so I was curious to see what CodeWhisperer would suggest. It also added the necessary imports too. I'm omitting the final two parentheses that CodeWhisperer suggested as I need to add some more code in.
+
+```java
+// For every file in the current folder, if it's a PNG file, read the file into a byte array
+for (String photo : new File(".").list()) {
+        if(photo.endsWith(".png")) {                
+            ByteBuffer imageBytes;
+            try (InputStream inputStream = new FileInputStream(new File(photo))) {
+                imageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
+            }
+```
+
+##### Step 2.4 Detecting Labels in Each Photo
+
+The comment `// Call Amazon Rekognition to detect labels in the image, max labels of 5, minimum confidence of 95%` produced:  
+
+```java
+DetectLabelsRequest request = new DetectLabelsRequest()
+        .withImage(new Image().withBytes(imageBytes))
+        .withMaxLabels(5)
+        .withMinConfidence(90F);
+try {
+        DetectLabelsResult result = rekognitionClient.detectLabels(request);
+        List <Label> labels = result.getLabels();
+    
+    } catch (AmazonRekognitionException e) {
+        e.printStackTrace();
+    }
+```
+
+##### Step 2.5 Print the Color-coded Labels
+
+The final bit of code was to print out each label on a line but coded red, green, or white depending on the result. I manually added an ANSI color code to print out the labels in different colors, but once I added one, CodeWhisperer could add the rest for me. In this section, I was prescriptive with comments outlining my requirements, and CodeWhisperer might occasionally suggest a way of doing it that I didn't like (possibly too complicated for beginners or too verbose) so I could left/right arrow to see other suggestions. I had to add comments for each `else` clause I wanted, but that reinforces the iterative way of building up the code suggestion by suggestion.   
+
+```java
+// Print out each label on a single line  (Color codes are hexadecimal ansi escape codes: red == \x1b[31m )
+// Print out the file name followed by ':' in blue
+System.out.print("\n\033[0;36m" + photo + ": ");                    
+
+for (Label label: labels) {                        
+    // Set colorCode to ANSI color White
+    String colorCode = "\033[0;37m"; // White
+    // If the label is in the birds of prey arraylist, set the color to red
+    if(birdsOfPrey.contains(label.getName())) {                            
+        colorCode = "\033[0;31m"; // Red
+    }
+    else if(fowl.contains(label.getName())) {
+        // If the label is in the poultry arraylist, set the color to green
+        colorCode = "\033[0;32m"; // Green
+    }           
+    // Print out the label with the color code set above followed by confidence in brackets, rounded to 1 decimal place             
+    System.out.print("\t" + colorCode +  label.getName() + " (" + 
+        String.format("%.1f", label.getConfidence()) + ")");
+        
+}                                                                
+```
