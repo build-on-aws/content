@@ -22,7 +22,7 @@ date: 2023-02-16
 
 When I arrived at Amazon as a developer in 2005 (before AWS was even a thing) I was handed an actual, physical pager (Figure 1). Why? Because developers at Amazon not only design and implement their services, but they deploy and manage operation of them as well. For that operations piece, developers take turn being "on call" and available to diagnose and fix any problems. Hence, the pager.
 
-All this is to say, Amazon was doing DevOps before "DevOps" was even a term. [Amazon.com](http://amazon.com/) runs thousands of systems on AWS to power its worldwide marketplaces, video delivery, and other consumer services.  When the opportunity comes to re-architect, Amazon developers do so with DevOps in mind, so as to make it easier during on call to deliver the best experience to their customers.
+All this is to say, Amazon was doing DevOps before "DevOps" was even a term. Amazon.com runs thousands of systems on AWS to power its worldwide marketplaces, video delivery, and other consumer services.  When the opportunity comes to re-architect, Amazon developers do so with DevOps in mind, so as to make it easier during on call to deliver the best experience to their customers.
 
 ![Actual pager used at Amazon.com](images/figure01.png "Figure 1. Not mine, but an actual pager used at Amazon.com.")
 
@@ -34,7 +34,7 @@ The Internet Movie Database, or IMDb, is the world’s most popular source for m
 
 The backend is responsible for serving show titles, actors’ names, aggregate star ratings, images, release years... the list goes on and on. GraphQL was a good fit here, and using federated GraphQL, the backend could be divided into multiple microservices, each focused on a specific set of business logic — one serving images, another handling ratings, while another knows which actors are in which shows. Federated GraphQL enables each of these services to know only the schema it needs to know, while clients can request data that spans multiple microservices.
 
-Here is how it works. Figure 2 shows a GraphQL query on the left (abbreviated) for the "Known for" webpage widget on the Jackie Chan page here: [https://www.imdb.com/name/nm0000329/](https://www.imdb.com/name/nm0000329/). Actors have IDs that start with `nm` (for example Jackie is `nm0000329`). And shows — including movies or TV series — have `tt` IDs. The query is sent to a gateway which knows the entire schema, and routes each of the pieces to the appropriate microservice (known as graphlets), each fronted by an [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life). Lambda is serverless which means you can just run your code, no servers needed.  The top microservice in figure 2 knows which movies to show, the next one down knows the metadata about the movies (title, year, etc.), and so on.
+Here is how it works. Figure 2 shows a GraphQL query on the left (abbreviated) for the "Known for" webpage widget on the Jackie Chan page here: [https://www.imdb.com/name/nm0000329](https://www.imdb.com/name/nm0000329). Actors have IDs that start with `nm` (for example Jackie is `nm0000329`). And shows — including movies or TV series — have `tt` IDs. The query is sent to a gateway which knows the entire schema, and routes each of the pieces to the appropriate microservice (known as graphlets), each fronted by an [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life). Lambda is serverless which means you can just run your code, no servers needed.  The top microservice in figure 2 knows which movies to show, the next one down knows the metadata about the movies (title, year, etc.), and so on.
 
 ![IMDb federated GraphQL in action](images/figure02.png "Figure 2. IMDb federated GraphQL in action.")
 
@@ -46,7 +46,7 @@ Let’s take a look at another part of Amazon’s business, and maybe the one fo
 
 ![Amazon 18-wheeler truck, also known as a "big-rig"](images/figure03.png "Figure 3. An Amazon 18-wheeler truck, also known as a \"big-rig\".")
 
-Amazon has over the years developed sophisticated models to put items in the right place, but these are just data in a computer. To actually move stuff, the truckers need to know where to go, when to go there, what to pick up, and where to take it. There’s an app for that. The [Amazon Relay app](https://relay.amazon.com/) (figure 4) is the way these sophisticated models are turned into action.
+Amazon has over the years developed sophisticated models to put items in the right place, but these are just data in a computer. To actually move stuff, the truckers need to know where to go, when to go there, what to pick up, and where to take it. There’s an app for that. The [Amazon Relay app](https://relay.amazon.com) (figure 4) is the way these sophisticated models are turned into action.
 
 ![Amazon Relay app tells truckers everything they need to know](images/figure04.png "Figure 4. The Amazon Relay app tells truckers everything they need to know")
 
@@ -90,7 +90,7 @@ In each of these three use cases, you have seen how continuous, automated, indep
 
 ## To learn more
 
-* [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](/concepts/devops-essentials/)
+* [DevOps Essentials: An essential guide for learning about DevOps and its core concepts](/concepts/devops-essentials)
 * [Reliable scalability: How Amazon.com scales in the cloud - re:Invent 2022](https://bit.ly/reliable2022) [all three examples, plus others]
 * [Building federated GraphQL on AWS Lambda](https://aws.amazon.com/blogs/compute/building-federated-graphql-on-aws-lambda?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-amazon-does-devops-in-real-life) [IMDb]
 * [The Story Behind Improving Resiliency of Large Scale Systems Through Cellularization](https://www.youtube.com/watch?v=ebLJMA1q3Go) [Amazon Fulfillment Technologies and Robotics]

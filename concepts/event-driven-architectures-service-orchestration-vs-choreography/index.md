@@ -9,7 +9,8 @@ tags:
     - event-driven
     - foundational
     - aws
-showInHomeFeed: true
+waves:
+  - modern-apps
 authorGithubAlias: danilop
 authorName: Danilo Poccia
 date: 2023-06-27

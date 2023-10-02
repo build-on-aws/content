@@ -9,10 +9,11 @@ tags:
     - software-architecture
 spaces:
     - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-08-11
-showInHomeFeed: true
 ---
 
 ## Introduction

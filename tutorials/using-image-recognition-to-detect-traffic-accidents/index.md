@@ -12,7 +12,8 @@ tags:
   - ai-ml
   - tutorials
   - cloudformation
-showInHomeFeed: true
+waves:
+  - dataml
 authorGithubAlias: pechung
 authorName: Peter Chung
 additionalAuthors: 

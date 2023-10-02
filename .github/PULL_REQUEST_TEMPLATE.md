@@ -3,7 +3,7 @@
 Please check to make sure your content submission meets the following requirements by adding an `x` between the brackets:
 
 - [ ] The title of this pull request reflects the title of my content.
-- [ ] I have reviewed the [Content Review Checklist](/content/blob/main/CONTENT_REVIEW_CHECKLIST.md).
+- [ ] I have reviewed the [Content Review Checklist](https://github.com/build-on-aws/content/blob/main/CONTENT_REVIEW_CHECKLIST.md).
 - [ ] This pull request contains one piece of content (post or page).
 
 **Important: if you are submitting a PR to update existing content, please ensure you [sync'ed your fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) first before you created your branch.**

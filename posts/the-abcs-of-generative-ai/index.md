@@ -6,6 +6,9 @@ tags:
     - ai-ml
 spaces:
     - generative-ai
+waves:
+  - dataml
+  - generative-ai
 images:
   banner: images/ABCsGenAIheader.gif
   hero: images/ABCsGenAIheader.gif
@@ -13,8 +16,6 @@ authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2023-08-17
 ---
-
-![The ABCs of Generative AI header image](/images/ABCsGenAIheader.gif)
 
 Working in AI and Machine Learning means you’re learning all the time (both on your own, and through models!), so study skills that help you to retain and synthesize new concepts are super important. One of my top strategies for this is making glossaries to organize the definitions I write based on information from different sources, and they really come in handy when it comes to making videos about technical concepts for [Twitter](https://twitter.com/brooke_jamieson), [LinkedIn](https://www.linkedin.com/in/brookejamieson/), or [TikTok](https://www.tiktok.com/@brookebytes). This post started as one of my personal glossaries, which then morphed into a re:Invent talk proposal, but Generative AI is moving so quickly that I couldn’t wait until November to share this! 
 
