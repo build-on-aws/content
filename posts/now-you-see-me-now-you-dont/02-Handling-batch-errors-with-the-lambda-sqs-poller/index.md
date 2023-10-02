@@ -19,7 +19,7 @@ In my [previous post](../01-the-case-of-the-disappearing-s3-keys/), I described 
 
 ![Event-driven architecture to process logs](images/architecture.png "Log partitioning architecture")
 
-It turned out that their problem was caused by eventual consistency; in about 0.02% of all objects being processed, the code to process the objects was executing before consistency ensured the object was available, so when we ran the S3 `copy_object` operation, and the object didn't seem to exist.
+It turned out that their problem was caused by eventual consistency; in about 0.02% of all objects being processed, the code to process the objects was executing before consistency ensured the object was available, so when we ran the S3 `copy_object` operation, the object didn't seem to exist.
 
 ## Please join the queue in an orderly manner
 
