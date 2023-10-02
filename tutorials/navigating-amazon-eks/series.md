@@ -10,6 +10,8 @@ posts:
     - eks-cluster-high-traffic
     - eks-with-efs-add-on
     - managing-high-volume-batch-sqs-eks
+    - eks-cluster-batch-processing
+    - eks-monitor-containerized-applications
 --- 
 |ToC|
 |---|
