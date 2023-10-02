@@ -18,12 +18,12 @@ authorName: Olawale Olaleye
 additionalAuthors: 
   - authorGithubAlias: ahmadt312
     authorName: Ahmad Tariq
-date: 2023-09-30
+date: 2023-10-02
 ---
 
 Monitoring containerized applications requires precision and efficiency. One way to handle the complexities of collecting and summarizing metrics from your applications is to use Amazon CloudWatch Container Insights. As the performance metrics of your containers change, Container Insights offers real-time data, enabling you to maintain consistent application performance through informed decisions.
 
-Building on the Amazon EKS cluster from part 1 of our series, this tutorial dives into setting up Amazon CloudWatch Container Insights. Included in the cluster configuration for the previous tutorial is the [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) IAM policy attached to the IAM Role for Service Account (IRSA) and the [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](https://community.aws/tutorials/eks-cluster-high-traffic). Alternatively, to set up an existing cluster with the components required for this tutorial, use the instructions in [the _verify prerequisites_ section](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html) of EKS official documentation.
+Building on the Amazon EKS cluster from part 1 of our series, this tutorial dives into setting up Amazon CloudWatch Container Insights. Included in the cluster configuration for the previous tutorial is the [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq) IAM policy attached to the IAM Role for Service Account (IRSA) and the [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](https://community.aws/tutorials/eks-cluster-high-traffic). Alternatively, to set up an existing cluster with the components required for this tutorial, use the instructions in [the _verify prerequisites_ section](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq) of EKS official documentation.
 
 In this tutorial, you will configure your Amazon EKS cluster, deploy containerized applications, and monitor the application's performance using Container Insights. Container Insights can handle lightweight applications like microservices as well as more complex systems like databases or user authentication systems, providing seamless monitoring.
 
@@ -33,9 +33,9 @@ In this tutorial, you will configure your Amazon EKS cluster, deploy containeriz
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
-| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
+| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-09-30                                                      |
+| ⏰ Last Updated        | 2023-10-02                                                      |
 
 | ToC |
 |-----|
@@ -47,11 +47,9 @@ Before you begin this tutorial, you need to:
 * Install the latest version of [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl). To check your version, run: `kubectl version --short`.
 * Install the latest version of [eksctl](https://eksctl.io/introduction/#installation). To check your version, run: `eksctl info`.
 
-
-
 ## Step 1: Set up Container Insights on Amazon EKS
 
-For CloudWatch Container Insights to collect, aggregate, and summarize metrics and logs from your containerized applications and microservices on Amazon Elastic Kubernetes Service (Amazon EKS), some setup steps need to be performed. Container Insights supports both Amazon EKS EC2 and [Fargate](https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html). There are a few ways you can set up Container Insights on an Amazon EKS cluster: using the CloudWatch agent, a “quick start” setup, or through a manual setup approach. Below, you will find the steps required for the “quick start” method.
+For CloudWatch Container Insights to collect, aggregate, and summarize metrics and logs from your containerized applications and microservices on Amazon Elastic Kubernetes Service (Amazon EKS), some setup steps need to be performed. Container Insights supports both Amazon EKS EC2 and [Fargate](https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq). There are a few ways you can set up Container Insights on an Amazon EKS cluster: using the CloudWatch agent, a “quick start” setup, or through a manual setup approach. Below, you will find the steps required for the “quick start” method.
 
 ### Quick Start Setup
 
@@ -290,9 +288,9 @@ PodName: quickstart-nginx-deployment-7cd757dc7b-fv592 NodeName: ip-192-168-177-1
 PodName: quickstart-nginx-deployment-7cd757dc7b-9fss6 NodeName: ip-192-168-119-7.us-east-2.compute.internal podIP: 192.168.112.25
 ```
 
-## Step 3: Use [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) Query to search and analyze container logs
+## Step 3: Use [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq) Query to search and analyze container logs
 
-You can use [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html) Query to interactively search and analyze the container logs of the application in Amazon CloudWatch Logs. Fluent Bit sends logs from your containers in the cluster to CloudWatch Logs. In Step 1 above, we’ve set up Fluent Bit as a DaemonSet to send logs to CloudWatch Logs. Fluent Bit creates the log group below if it doesn't already exist:
+You can use [CloudWatch Logs Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq) Query to interactively search and analyze the container logs of the application in Amazon CloudWatch Logs. Fluent Bit sends logs from your containers in the cluster to CloudWatch Logs. In Step 1 above, we’ve set up Fluent Bit as a DaemonSet to send logs to CloudWatch Logs. Fluent Bit creates the log group below if it doesn't already exist:
 
 `/aws/containerinsights/Cluster_Name/application` which contains all log files in `/var/log/containers` on each worker node in the cluster.
 
@@ -464,5 +462,3 @@ kubectl delete -f cwagent-fluent-bit-quickstart.yaml
 ## Conclusion
 
 By following this tutorial, you've successfully set up CloudWatch agent and Fluent Bit for Container Insights to monitor  sample containerized workloads in an Amazon EKS cluster. With these instructions, you'll have a robust monitoring and logging solution to help you monitor the performance of application deployments in the cluster. If you want to explore more tutorials, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials).
-
-
