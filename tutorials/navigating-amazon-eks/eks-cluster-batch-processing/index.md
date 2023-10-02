@@ -15,7 +15,7 @@ spaces:
   - modern-apps
 authorGithubAlias: ahmadt312
 authorName: Ahmad Tariq
-date: 2023-09-30
+date: 2023-10-02
 ---
 
 In the diverse ecosystem of cloud-native applications, there are times when real-time interactivity or immediate responses aren't your prime directive. Instead, the crux lies in executing asynchronous background tasks with precision and efficiency. Whether you're transferring large files, harmonizing disparate datasets, or orchestrating complex job schedules, you need an environment built to handle workload fluctuations and optimized for resource utilization. With Amazon EKS, the EFS CSI Driver for scalable storage, and the Cluster Autoscaler for automated scaling policies, you can effortlessly establish an EKS cluster that is not only optimized for asynchronous operations but also adapts intelligently to workload demands.
@@ -29,7 +29,7 @@ This tutorial shows you how to create a managed node groups-based Amazon EKS clu
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-09-30                                                     |
+| ⏰ Last Updated        | 2023-10-02                                                     |
 
 | ToC |
 |-----|
@@ -55,7 +55,7 @@ This tutorial is the first installment in a series focused on optimizing Amazon 
 
 In this section, you will configure the Amazon EKS cluster to meet the specific demands of high-traffic microservice applications. By creating this `cluster-config.yaml` file, you'll define the settings for IAM roles, scalable resources, private networking, and monitoring. These configurations are essential for ensuring that the cluster is robust, scalable, and secure, with optimized performance for dynamic scalability and data persistence.
 
-**To create the cluster config**
+**To create the cluster config:**
 
 1. Create a `cluster-config.yaml` file and paste the following contents into it. Replace the `region`. 
 
@@ -110,7 +110,7 @@ cloudWatch:
 
 ## **Step 2: Create the Cluster**
 
-Now, we're ready to create our Amazon EKS cluster. This process takes several minutes to complete. If you'd like to monitor the status, see the [AWS CloudFormation](https://console.aws.amazon.com/cloudformation) console.
+Now we're ready to create our Amazon EKS cluster. This process takes several minutes to complete. If you'd like to monitor the status, see the [AWS CloudFormation](https://console.aws.amazon.com/cloudformation) console.
 
 1. Create the EKS cluster by running the following command:
 
@@ -173,7 +173,7 @@ kube-system         efs-csi-controller-sa                0         43m
 
 ## (Optional) Deploy a Sample Application
 
-Now, you're ready to orchestrate batch processing workloads in your Kubernetes cluster, leveraging Amazon SQS as a job queue and Amazon EFS for data persistence. For a comprehensive walkthrough, refer to [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS](https://quip-amazon.com/C9K0ADJ2FT1x). This tutorial guides you through the process of setting up Amazon SQS for job queue management and integrating Amazon EFS for persistent storage. Lastly, you can optionally configure the EFS CSI Driver Add-On to handle complex batch jobs that require a shared file system across multiple nodes.
+Now, you're ready to orchestrate batch processing workloads in your Kubernetes cluster, leveraging Amazon SQS as a job queue and Amazon EFS for data persistence. For a comprehensive walkthrough, refer to [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS]([https://quip-amazon.com/C9K0ADJ2FT1x](https://community.aws/tutorials/navigating-amazon-eks/managing-high-volume-batch-sqs-eks)). This tutorial guides you through the process of setting up Amazon SQS for job queue management and integrating Amazon EFS for persistent storage. Lastly, you can optionally configure the EFS CSI Driver Add-On to handle complex batch jobs that require a shared file system across multiple nodes.
 
 ## **Clean Up**
 
