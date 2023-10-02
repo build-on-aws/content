@@ -1,6 +1,7 @@
 ---
 title: "Handling partial batch failures with the SQS Lambda Poller"
-description: A description of how the lambda sqs poller handles partial batch failures, rather than needing the entire batch to be re-processed.
+description: A description of how the lambda sqs poller handles both full and partial failures.
+seoDescription: A description of how the lambda sqs poller handles both full and partial failures.
 tags:
   - sqs
   - lambda

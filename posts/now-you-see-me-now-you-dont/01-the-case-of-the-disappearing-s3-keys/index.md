@@ -1,6 +1,7 @@
 ---
 title: "Now You See Me, Now You Don't - the Mystery of the Vanishing S3 Objects"
-description: An investigation into why S3 objects were disappearing in an event-driven workflow. We use this to demonstrate the concept of eventual consistency.
+description: An investigation into why S3 objects were disappearing in an event-driven workflow, how we identified the issues and the cause of the problem.
+seoDescription: An investigation into why S3 objects were disappearing in an event-driven workflow. We use this to demonstrate the concept of eventual consistency.
 tags:
   - storage
   - s3
