@@ -13,6 +13,7 @@ date: 2023-10-02
 ---
 |ToC|
 |---|
+
 My Academic Developer Advocate role includes teaching students how to build solutions on AWS, and discussing strategies with lecturers on how to teach cloud and AI skills. A topic which is increasingly common with my audience is *Generative AI in the Classroom*. There is a range of attitudes to *Gen AI* from academics I meet, ranging from apathy to hostility to cautious optimism. I'm erring on the side of optimism that Gen AI will be a useful teaching tool for lecturers. This post condenses a few of the recent techniques I've explored for enhancing my own teaching practice.  
 
 > I want to recognize that I've heard concerns about using Generative AI in teaching and learning. I've heard fears that students will not learn to code or do their own assignments because they will just 'ask the AI to do it for them'. I've also heard from lecturers who are excited to adopt GenAI as a teaching tool. For this post, I'm focusing on a small use case that I think may be familiar to many lecturers, trainers, and those who volunteer to teach coding: How to move from one language and stack to another. I'm not making any pronouncements on whether you *should* teach with Gen AI, but I'd like to offer one way you *could* teach with it.
