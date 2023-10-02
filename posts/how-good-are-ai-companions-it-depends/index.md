@@ -90,6 +90,12 @@ With thoughtful prompt engineering, AI coding assistants can rapidly produce hig
 
 Now that you have a better understanding of prompt engineering with an AI Coding assistant, I am going to share some of my learnings working with an AI coding assistant.
 
+### Check the Learn page
+
+Prompt engineering is a new discipline that is moving fast, and we are all learning everyday how to better harness the technology. Links to tutorials, and examples of code are available from within the AWS toolkit. You will find the Learn page under the CodeWhisperer menu.
+
+![Learn Tips and Tricks](images/learn.gif)
+
 ### Auto-suggestions
 
 You can disable auto-suggestions. We had a debate in the team. Some developers really like to have auto-suggestions on all the time. They are used to get code suggestions, quickly check, and accept or decline. I prefer to be in control of my flow. When auto-completion appeared on Eclipse in early 2000's, and I moved away from Emacs/vi, I became a fanatic of control+SPACE to accelerated my writing. I like to call CodeWhisperer whenever I need it. Sometimes I just need the IDE's native autocompletion, because I know exactly what I want to write, and I can quickly check the methods I want to use for a Class. Once you pause auto-suggestions from the AWS Toolkit menu in your IDE, you can manually trigger CodeWhisperer by pressing Option+C (MacOS) or Alt+C (Windows).
