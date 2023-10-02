@@ -44,6 +44,7 @@ These tutorials guide you through the process of building Amazon EKS clusters pr
 The following tutorials are included in this stage:
 
 * [Building an IPv6-based EKS Cluster for Globally Scalable Applications](/tutorials/navigating-amazon-eks/eks-cluster-ipv6-globally-scalable)
+* [Building an Amazon EKS Cluster Preconfigured to Run Asynchronous Batch Tasks](/tutorials/navigating-amazon-eks/eks-cluster-batch-processing)
 * [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic)
 
 ### Stage 2: Enhance and Extend Cluster Capabilities
@@ -62,7 +63,9 @@ The following tutorials are included in this stage:
 
 These tutorials guide you through optimizing the operational aspects of your EKS clusters and seamlessly integrating them with additional AWS services. You'll build upon foundational elements to master cloud sustainability using tools and services like Prometheus, Amazon CloudWatch, or AWS Batch.
 
-Tutorials coming soon!
+The following tutorials are included in this stage:
+
+* [Easily Monitor Containerized Applications with Amazon CloudWatch Container Insights](/tutorials/navigating-amazon-eks/eks-monitor-containerized-applications)
 
 ## List of all Tutorials
 
