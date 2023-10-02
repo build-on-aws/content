@@ -63,6 +63,8 @@ The following tutorials are included in this stage:
 
 These tutorials guide you through optimizing the operational aspects of your EKS clusters and seamlessly integrating them with additional AWS services. You'll build upon foundational elements to master cloud sustainability using tools and services like Prometheus, Amazon CloudWatch, or AWS Batch.
 
+The following tutorials are included in this stage:
+
 * [Easily Monitor Containerized Applications with Amazon CloudWatch Container Insights](/tutorials/navigating-amazon-eks/eks-monitor-containerized-applications)
 
 ## List of all Tutorials
