@@ -1,6 +1,6 @@
 ---
 title: "Run Kubernetes Clusters for Less with Amazon EC2 Spot and Karpenter"
-description: "Learn how to run Kubernetes clusters for up to 90% off with Amazon Elastic Kubernetes Service (EKS), Amazon EC2 Spot Instances and Karpenter in less than 45 minutes."
+description: "Learn how to run Kubernetes clusters for up to 90% off with Amazon Elastic Kubernetes Service (EKS), Amazon EC2 Spot Instances, and Karpenter - all in less than 60 minutes."
 tags:
   - kubernetes
   - karpenter
@@ -15,20 +15,20 @@ waves:
   - cost
 authorGithubAlias: chrismld
 authorName: Christian Melendez
-date: 2023-09-10
+date: 2023-10-05
 ---
 | ToC |
 |-----|
 
-One of the main cost factors for Kubernetes clusters relies on the compute layer for the data plane. Running Kubernetes clusters on Amazon EC2 Spot instances are a great way to reduce your compute costs significantly. When using Spot instances, you can get up to a 90% price discount compared to On-Demand Instances. 
+One of the main cost factors for Kubernetes clusters relies on the compute layer for the data plane. Running Kubernetes clusters on Amazon EC2 Spot Instances is a great way to reduce your compute costs significantly. When using Spot Instances, you can get up to a 90% price discount compared to On-Demand Instances. 
 
 Spot is a great match for workloads that are stateless, fault-tolerant, and flexible applications such as big data, containerized workloads, CI/CD, web servers, high-performance computing (HPC), and test & development workloads. Containers often match with these characteristics as they’re Spot-friendly. For non Spot-friendly workloads, like stateful applications within your cluster, you can continue using On-Demand Instances.
 
 To optimize data place capacity further, you can adjust the number of nodes when pods are unscheduable due to available capacity, or remove nodes when they’re no longer needed. For automatic nodes adjustment, use either [Cluster Autoscaler (CA)](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) or [Karpenter](https://karpenter.sh/). Both tools have support for Spot, and in this tutorial I’ll focus on Karpenter.
 
-I’ll guide you on the steps you need to follow to configure an EKS cluster with Spot instances and Karpenter. Additionally, I’ll show you how to configure a workload to see Karpenter in action by provisioning the required capacity using Spot instances.
+I’ll guide you on the steps you need to follow to configure an EKS cluster with Spot instances and Karpenter. Additionally, I’ll show you how to configure a workload to see Karpenter in action by provisioning the required capacity using Spot Instances.
 
-## Why go with Karpenter?
+## Why Go With Karpenter?
 
 Karpenter is an open-source node provisioning project built for Kubernetes. As new pods continue coming to your cluster, either because you increased the number of replicas manually or through an Horizontal Pod Autoscaling [(HPA)](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) policy or through a Kubernetes Event-driven Autoscaling [(KEDA)](https://aws.amazon.com/blogs/mt/proactive-autoscaling-kubernetes-workloads-keda-metrics-ingested-into-aws-amp/?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) event, at some point your data plane nodes will be at full capacity, causing you to have pending (unschedulable) pods. The Karpenter controller reacts to this problem, and aggregates the capacity of these pending pods by evaluating scheduling constraints (resource requests, nodeselectors, affinities, tolerations, and topology spread constraints). Then, Karpenter provisions the right nodes that meet the requirements of these pending pods.
 
@@ -95,7 +95,7 @@ terraform version
 helm version
 ```
 
-## Step 2: Create an EKS Cluster with Karpenter using EKS Blueprints for Terraform
+## Step 2: Create an EKS Cluster with Karpenter Using EKS Blueprints for Terraform
 
 > 💡 Tip: The Terraform template used in this tutorial is using an On-Demand managed node group to host the Karpenter controller. However, if you have an existing cluster, you can use an existing node group with On-Demand instances to deploy the Karpenter controller. To do so, you need to follow the [Karpenter getting started guide](https://karpenter.sh/docs/getting-started/).
 
@@ -128,13 +128,13 @@ karpenter-5f97c944df-bm85s 1/1   Running 0        15m
 karpenter-5f97c944df-xr9jf 1/1   Running 0        15m
 ```
 
-## Step 3: Set up a Karpenter Provisioner
+## Step 3: Set Up a Karpenter Provisioner
 
 The EKS cluster already has a static managed node group configured in advance for the `kube-system` and `karpenter` namespaces, and it’s going to be only one you’ll need. For the rest of pods, Karpenter will launch nodes through a `Provisioner` CRD. The Provisioner sets constraints on the nodes that can be created by Karpenter and the pods that can run on those nodes. A single Karpenter provisioner is capable of handling many different pod shapes, and for this tutorial you’ll only create the `default` provisioner.
 
-> 💡 Tip: Karpenter simplifies the data plane capacity management using an approach called **group-less auto scaling**. This is because Karpenter is no longer using node groups, which matches with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), to launch nodes. Over time, clusters using the paradigm of running different types of applications (that require different capacity types), end up with a complex configuration and operational model where node groups must be defined and provided in advance.
+> 💡 Tip: Karpenter simplifies the data plane capacity management using an approach called **group-less auto scaling**. This is because Karpenter is no longer using node groups, which match with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), to launch nodes. Over time, clusters using the paradigm of running different types of applications (that require different capacity types), end up with a complex configuration and operational model where node groups must be defined and provided in advance.
 
-You need to create two environment variables that we’ll use next, the values you need can be obtained from the Terraform output variables. Make sure you’re in the same folder where the Terraform `main.tf` file lives and run the following command:
+You need to create two environment variables that we’ll use next. The values you need can be obtained from the Terraform output variables. Make sure you’re in the same folder where the Terraform `main.tf` file lives and run the following command:
 
 ```bash
 export CLUSTER_NAME=$(terraform output -raw cluster_name)
@@ -246,7 +246,7 @@ EOF
 kubectl apply -f workload.yaml
 ```
 
-As there are no nodes that match the pod’s requirements, all pods will be `Pending`, making Karpenter to react and launch the nodes, similar to this output:
+As there are no nodes that match the pod’s requirements, all pods will be `Pending`, making Karpenter react and launch the nodes, similar to this output:
 
 ```bash
 $ kubectl get pods
@@ -282,12 +282,12 @@ $ kl
 By reading the logs, you can see that Karpenter:
 
 * Noticed there were 10 pending pods, and decided that can fit all pods in only one node.
-* Is considering the kubelet and kube-proxy `Daemonsets` (2 additional pods), and it’s aggregating all resources need for 12 pods. Moreover, Karpenter noticed that 100 instance types match these requirements.
+* Is considering the kubelet and kube-proxy `Daemonsets` (2 additional pods), and is aggregating all resources need for 12 pods. Moreover, Karpenter noticed that 100 instance types match these requirements.
 * Launched an `m5.2xlarge` Spot Instance in `eu-west-1b` as this was the pool with more spare capacity with lowest price.
 
 ## Step 5: Spread Pods Within Multiple AZs
 
-Karpenter launched only one node for all pending pods. However, putting all eggs in the same basket is not recommended as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll have an impact). To avoid this, and make the workload more highly available, let’s spread the pods within multiple AZs. Let’s configure a [Topology Spread Constraint (TSP)](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`. 
+Karpenter launched only one node for all pending pods. However, putting all your eggs in the same basket is not recommended, as if you lose that node, you’ll need to wait for Karpenter to provision a replacement node (which can be fast, but still, you’ll see an impact). To avoid this, and to make the workload more highly available, let’s spread the pods within multiple AZs. Let’s configure a [Topology Spread Constraint (TSP)](https://karpenter.sh/docs/concepts/scheduling/#topology-spread) within the `Deployment`.
 
 Before you continue, remove the stateless `Deployment`:
 
@@ -295,7 +295,7 @@ Before you continue, remove the stateless `Deployment`:
 kubectl delete deployment stateless
 ```
 
-> 💡 **Note**: To see pods being spread within AZs withh similar instance sizes, wait until pods and existing EC2 instances launched by Karpenter are removed.
+> 💡 **NOTE**: To see pods being spread within AZs withh similar instance sizes, wait until pods and existing EC2 instances launched by Karpenter are removed.
 
 To configure a TSP, add the following snippet between the `nodeSelector` and the `containers` block from the `workload.yaml` file you downloaded before:
 
@@ -318,7 +318,7 @@ Create the stateless `Deployment` again. If you downloaded the manifest from Git
 kubectl apply -f workload.yaml
 ```
 
-Then, you can review the Karpenter logs and notice how different the actions are.  Wait one minute and you should see the pods running within three nodes in different AZs:
+Then, you can review the Karpenter logs and notice how different the actions are. Wait one minute and you should see the pods running within three nodes in different AZs:
 
 ```bash
 kubectl get nodes -L karpenter.sh/capacity-type,beta.kubernetes.io/instance-type,topology.kubernetes.io/zone -l karpenter.sh/capacity-type=spot
@@ -456,4 +456,4 @@ aws cloudformation delete-stack --stack-name fis-spot-and-karpenter
 
 Using Spot Instances for your Kubernetes data plane nodes helps you reduce computing costs. As long as your workloads are fault-tolerant, stateless, and can use a variety of instance types, you can use Spot. Karpenter allows you to simplify the process of configuring your EKS cluster with a high-instance type diversification, and provisions only the capacity you need.
 
-You can learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html), or dive deeper into the Karpenter cocepts [here](https://karpenter.sh/docs/concepts/).
+You can learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html), or dive deeper into the Karpenter concepts [here](https://karpenter.sh/docs/concepts/).
