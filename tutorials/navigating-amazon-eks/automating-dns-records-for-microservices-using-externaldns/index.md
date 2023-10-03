@@ -7,7 +7,7 @@ tags:
     - kubernetes
     - tutorials
     - aws
-showInHomeFeed: true
+movedFrom: /tutorials/automating-dns-records-for-microservices-using-externaldns
 waves:
   - modern-apps
 spaces:
