@@ -1,6 +1,6 @@
 ---
 title: "Chaos Engineering in under 2 minutes"
-description: "In this 2 minutes video and blog post, learn about how to run an experiment using chaos engineering"
+description: "In this 2 minute video and blog post, learn about how to run an experiment using chaos engineering"
 tags:
   - chaos-engineering
   - resilience
