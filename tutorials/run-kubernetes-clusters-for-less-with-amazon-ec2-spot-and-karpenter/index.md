@@ -95,6 +95,8 @@ terraform version
 helm version
 ```
 
+> 💡 **NOTE**: If one of the above CLI tools is not installed yet, wait around 3 more minutes while the Cloud9 setup finishes.
+
 ## Step 2: Create an EKS Cluster with Karpenter Using EKS Blueprints for Terraform
 
 > 💡 Tip: The Terraform template used in this tutorial is using an On-Demand managed node group to host the Karpenter controller. However, if you have an existing cluster, you can use an existing node group with On-Demand instances to deploy the Karpenter controller. To do so, you need to follow the [Karpenter getting started guide](https://karpenter.sh/docs/getting-started/).
@@ -108,6 +110,8 @@ wget https://raw.githubusercontent.com/build-on-aws/run-kubernetes-clusters-for-
 helm registry logout public.ecr.aws
 export TF_VAR_region=$AWS_REGION
 terraform init
+terraform apply -target="module.vpc" -auto-approve
+terraform apply -target="module.eks" -auto-approve
 terraform apply --auto-approve
 ```
 
@@ -448,6 +452,8 @@ kubectl delete deployment stateful
 Wait 30 seconds until the nodes that Karpenter launched are gone (due to consolidation), then remove all resources:
 
 ```bash
+terraform destroy -target="module.eks_blueprints_addons" --auto-approve
+terraform destroy -target="module.eks" --auto-approve
 terraform destroy --auto-approve
 aws cloudformation delete-stack --stack-name fis-spot-and-karpenter
 ```
