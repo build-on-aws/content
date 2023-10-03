@@ -12,6 +12,7 @@ posts:
     - managing-high-volume-batch-sqs-eks
     - eks-cluster-batch-processing
     - eks-monitor-containerized-applications
+    - automating-dns-records-for-microservices-using-externaldns
 --- 
 |ToC|
 |---|
@@ -59,7 +60,6 @@ The following tutorials are included in this stage:
 * [Dynamic Database Storage with the Amazon EBS CSI Driver for Amazon EKS](/tutorials/navigating-amazon-eks/eks-dynamic-db-storage-ebs-csi)
 * [Exposing and Grouping Applications Using the AWS Load Balancer Controller on an Amazon EKS IPv4 Cluster](/tutorials/navigating-amazon-eks/eks-cluster-load-balancer-ipv4)
 * [Exposing and Grouping Applications Using the AWS Load Balancer Controller (LBC) on an Amazon EKS IPv6 Cluster](/tutorials/navigating-amazon-eks/eks-cluster-load-balancer-ipv6)
-* [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS](/tutorials/navigating-amazon-eks/managing-high-volume-batch-sqs-eks)
 
 ### Stage 3: Optimize and Integrate with AWS Services
 
@@ -67,7 +67,9 @@ These tutorials guide you through optimizing the operational aspects of your EKS
 
 The following tutorials are included in this stage:
 
+* [Automatically Manage DNS Records for Your Microservices in Amazon EKS with ExternalDNS](/tutorials/navigating-amazon-eks/automating-dns-records-for-microservices-using-externaldns/)
 * [Easily Monitor Containerized Applications with Amazon CloudWatch Container Insights](/tutorials/navigating-amazon-eks/eks-monitor-containerized-applications)
+* [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS](/tutorials/navigating-amazon-eks/managing-high-volume-batch-sqs-eks)
 
 ## List of all Tutorials
 
