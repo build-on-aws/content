@@ -15,7 +15,7 @@ waves:
   - cost
 authorGithubAlias: chrismld
 authorName: Christian Melendez
-date: 2023-10-05
+date: 2023-09-07
 ---
 | ToC |
 |-----|
@@ -44,8 +44,6 @@ One of the main advantages of using Karpenter is the simplicity of configuring S
 | 💾 Code                | [Download the code](https://github.com/build-on-aws/run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter) |
 | ⏰ Last Updated        | 2023-10-05                                                     |
 
-
-
 ## Prerequisites
 
 * You need access to an AWS account with IAM permissions to create an EKS cluster, and an AWS Cloud9 environment if you're running the commands listed in this tutorial.
@@ -58,15 +56,15 @@ One of the main advantages of using Karpenter is the simplicity of configuring S
 
 > 💡 Tip: You can skip this step if you already have a Cloud9 environment or if you’re planning to run all steps on your own computer. Just make sure you have the proper permissions listed in the pre-requisites section of this tutorial.
 
-> 💡 Tip: You can control in which region to launch the Cloud9 environment by [setting up](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) the `AWS_REGION` environment variable.
+> 💡 Tip: You can control in which region to launch the Cloud9 environment by [setting up](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) the `AWS_REGION` environment variable.
 
-I’ve prepared an AWS CloudFormation template to create a Cloud9 environment. It has all the tools to follow this tutorial like kubectl and Terraform CLI. You can either create the CloudFormation stack through the [AWS Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html), or do it through the command line. I'm going to give you all the commands you need to run to create the stack using the CLI.
+I’ve prepared an AWS CloudFormation template to create a Cloud9 environment. It has all the tools to follow this tutorial like kubectl and Terraform CLI. You can either create the CloudFormation stack through the [AWS Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), or do it through the command line. I'm going to give you all the commands you need to run to create the stack using the CLI.
 
 > 💡 **IMPORTANT**: You need to use the same IAM user/role both in the AWS Console and the AWS CLI setup. Othewrise, when you try to open the Cloud9 environment you won't have permissions to do it.
 
 Before you create the Cloudformation stack, **you need to get a public subnet ID to launch the Cloud9 instance with Internet access**. Once you get it, set the following environment variable:
 
-```
+```bash
 export C9PUBLICSUBNET='<<YOUR PUBLIC SUBNET ID GOES HERE>>'
 ```
 
