@@ -14,11 +14,11 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
 ![Welcome to re:Invent badging area](images/reinvent-badging-area.jpg)
 
-## Plan your Sessions
+## Tip 1 : Plan your Sessions
 
 ### Prioritize and Reserve Early
 
- Prioritize sessions tha align with your objectives - learn new services, dive deeper into current stack, or find new solutions for your current challenges. Whatever the objective, figure our what sessions, workshops, bootcamps, etc would be important for you.
+ Prioritize sessions that align with your objectives - learn new services, dive deeper into current stack, or find new solutions for your current challenges. Whatever the objective, figure out what sessions, workshops, bootcamps, etc would be important for you.
 
  Popular sessions fill up quickly, so reserve your spot to ensure you don't miss out. The session catalog is now available. You can access the catalog [here](https://reinvent.awsevents.com/session-catalog/).
 
@@ -34,7 +34,7 @@ For more updates do check out [re:Invent Community page](https://reinvent.awseve
 
 ![AWS Community Developer Lounge](images/dev-lounge.jpg)
 
-## Network, Network, Network
+## Tip 2 : Network, Network, Network
 
 One of the biggest benefits of attending re:Invent in person is the networking opportunities. Engage in chats, Q&A sessions, and make use of the lounges and common areas to strike up conversations.
 
@@ -50,11 +50,11 @@ There are lots of parties at re:Invent, which basically covers dinners. 🙂 The
 
 Most of the parties are listed on this third-party website [conferenceparties.com](https://conferenceparties.com/reinvent2023/). So keep this link handy and get ready to party Vegas style! 🥳
 
-There are activities like the 5K run, Rec Centre, Pickleball tournament and more where you can have fun and connect with fellow attendees. You can find this [year's fun activities](https://reinvent.awsevents.com/community/#competition).
+There are activities like the 5K run, Rec Centre, Pickleball tournament and more where you can have fun and connect with fellow attendees. You can find [this year's fun activities](https://reinvent.awsevents.com/community/#competition).
 
 ### Collect contacts
 
-It is important to maintain the connections you have built throughout the event. Do ensure you collect business cards (if folks still give out those) or quickly [use a LinkedIn QR Code to Connect with Members](https://www.linkedin.com/help/linkedin/answer/a525286/using-a-linkedin-qr-code-to-connect-with-members): 
+It is important to maintain the connections you have built throughout the event. Do ensure you collect business cards (if folks still give out those) or quickly [use a LinkedIn QR Code to Connect](https://www.linkedin.com/help/linkedin/answer/a525286/using-a-linkedin-qr-code-to-connect-with-members):
 
 - **Step 1** : Open LinkedIn app, and click on the Search bar on the top:
 
@@ -67,11 +67,11 @@ It is important to maintain the connections you have built throughout the event.
 - **Step 3** : Thats it! Now you can let other scan this using LinkedIn, Camera app or any app that lets you scan QR Code. You can also save it in your photos gallery and scan and connect! :
 ![LinkedIn generated QR code](images/linkedin-image-3.PNG)
 
-## Self Care is important
+## Tip 3 : Self Care is important
 
 ### Eat, Hydrate and Rest
 
-It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks. 
+It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks.
 
 Breakfast, lunch and snacks are provided at the expo hall in The Venetian. If you ever miss out on any, or are just hungry and want to grab a bite, Vegas has lots of food options. You can find almost everything busy, so be prepared to stand in queues.
 
