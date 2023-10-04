@@ -10,7 +10,7 @@ date: 2023-10-05
 ---
 
 
-AWS re:Invent registrations have opened for 2023 and we cannot wait for the event at Las Vegas!  As we gear up for this year's event, it is easy to feel both excited and a little overwhelmed. Whether you are a first-time attendee or a re:Invent veteran, optimizing your experience requires more than just showing up. I've distilled my top 3 tips to ensure you get the most out of AWS re:Invent. Let's dive in!
+AWS re:Invent registrations have opened for 2023 and we cannot wait for the event at Las Vegas!  As we gear up for this year's event, it is easy to feel both excited and a little overwhelmed. Whether you are a first-time attendee or a re:Invent veteran, optimizing your experience requires more than just showing up. I've listed my 3 tips to ensure you get the most out of AWS re:Invent. Let's dive in!
 
 ![Welcome to re:Invent badging area](images/reinvent-badging-area.jpg)
 
