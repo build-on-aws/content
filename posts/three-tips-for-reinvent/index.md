@@ -18,7 +18,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
 ## Tip 1 : Plan your Sessions
 
-### Prioritize and reserve early
+### ✅ Prioritize and reserve early
 
  Prioritize sessions that align with your objectives - learn new services, dive deeper into current stack, or find new solutions for your current challenges. Whatever the objective, figure out what sessions, workshops, bootcamps, etc would be important for you.
 
@@ -28,7 +28,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
  > There won’t be certification exams at re:Invent.  However, registered attendees can access a 50% discount code toward an AWS official Certification exam. More info [here](https://reinvent.awsevents.com/community/aws-certified/).
 
-### Community events
+### 👩‍💻 Community events
 
 Community Developer Lounge is where I spent most of my time as AWS Developer Advocate. Here, you can talk to experts, meet the community in-person, sign up for your local community and more. There are also sessions by community members called as Dev Chats - session IDs start with COM***. AWS Heroes are also presenting in 12 breakout sessions.
 
@@ -39,7 +39,7 @@ For more updates do check out [re:Invent Community page](https://reinvent.awseve
 
 One of the biggest benefits of attending re:Invent in person is the networking opportunities. Engage in chats, Q&A sessions, and make use of the lounges and common areas to strike up conversations.
 
-### Set up meetings
+### 🧑‍💻 Set up meetings
 
 If you are an AWS Customer and have AWS Account Teams, make sure you reach out and set up meetings with relevant AWS Experts. If you do not have AWS account team yet, then you can [Contact AWS](https://aws.amazon.com/contact-us/).
 
@@ -47,13 +47,13 @@ You can also set up meetings with other customers, and community members. Most o
 
 This year re:Invent’s has a new networking program called  [PeerTalk](https://reinvent.awsevents.com/learn/peertalk/). It is designed to help facilitate meaningful connections among the re:Invent community. The platform will launch in mid-fall and it will be accessible through the AWS Events mobile app and the desktop version.
 
-### Did someone say swags?
+### 🧦 Did someone say swags?
 
 The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with experiences - meet experts, AWS Partners, AWS Village, AWS DeepRacer League Arena, Builders' Fair, Lightning Theatres and more. Also, it is where you can take part in challenges and collect swags!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
 
 AWS Hero Nicolas Triantafillou writes a re:Invent Swag guide and reviews post every year. Do [check out the one he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
 
-### Attend social events
+### 🪩 Attend social events
 
 There are lots of parties at re:Invent, which basically covers dinners. 🙂 These parties can be organized by AWS like [replay](https://reinvent.awsevents.com/community/replay/), AWS Partners, parties. The [AWS Community](https://aws.amazon.com/developer/community/?cards.sort-by=item.additionalFields.publishedDate&cards.sort-order=desc) (Heroes, Community Builders and UserGroup Leaders) have exclusive, invite-only receptions/meetups. Ensure you are not missing out on the important ones.
 
@@ -61,7 +61,7 @@ Most of the parties are listed on this third-party website [conferenceparties.co
 
 There are activities like the 5K run, Rec Centre, Pickleball tournament and more where you can have fun and connect with fellow attendees. You can find [this year's fun activities](https://reinvent.awsevents.com/community/#competition).
 
-### Collect contacts
+### 📇 Collect contacts
 
 It is important to maintain the connections you have built throughout the event. Do ensure you collect business cards (if folks still give out those) or quickly [use a LinkedIn QR Code to Connect](https://www.linkedin.com/help/linkedin/answer/a525286/using-a-linkedin-qr-code-to-connect-with-members):
 
@@ -76,7 +76,7 @@ It is important to maintain the connections you have built throughout the event.
 
 ## Tip 3 : Self Care is important
 
-### Eat, Hydrate and Rest
+### 🍔 Eat, Hydrate and Rest
 
 It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks. You can use refillable bottles using refill stations throughout the campus.
 
@@ -88,7 +88,7 @@ If you ever miss out on any, or are just hungry and want to grab a bite/coffee, 
 
 **Bonus tip** - hotels typically sell water bottles at a hefty price. Find a CVS, Walgreens, or other convenience stores near your hotel and buy in bulk.
 
-### Wear comfortable shoes
+### 👟 Wear comfortable shoes 
 
 Do not take this lightly - there is lot of walking!!!
 
@@ -100,13 +100,13 @@ To help you get around, re:Invent ambassadors and wayfinding stations are also a
 
 ![venues and hotels in Las Vegas](images/re-invent-hotel-map.jpg "Image from AWS re:Invent website")
 
-### Enjoy Las Vegas
+### 🎰Enjoy Las Vegas
 
-Yes, Las Vegas will be the sin city and you might find unwanted attention too. So be safe, stay in well lit areas and maybe find a re:Invent buddy!
+Yes, Las Vegas will be the sin city and you might get some unwanted attention too. So be safe, stay in well lit areas and maybe find a re:Invent buddy!
 
 Also, make sure you enjoy what city and the state.
 
-In the city, there are lot of attractions like  newly opened [The Sphere](https://www.thespherevegas.com/), [Stratosphere](https://thestrat.com/attractions) (now known as The Strat Hotel & Casino & Tower), fountains, shows, and concerts. Tickets fill up fast, so make sure you book them in advance.
+In the city, there are lot of attractions like  the newly opened [The Sphere](https://www.thespherevegas.com/), [Stratosphere](https://thestrat.com/attractions) (now known as The Strat Hotel & Casino & Tower), fountains, shows, and concerts. Tickets fill up fast, so make sure you book them in advance.
 
 ![Las Vegas shows](images/vegas-show.jpg)
 
