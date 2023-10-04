@@ -24,7 +24,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
  If you need more help in finding appropriate sessions then do check out [Attendee guides](https://reinvent.awsevents.com/learn/attendee-guides/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by AWS Heroes, AWS Partners, and AWS industry teams. I definitely urge you to read [Tips for your first AWS re:Invent](https://reinvent.awsevents.com/learn/attendee-guides/reliability-engineering/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by [Sathyajith Bhat](https://aws.amazon.com/developer/community/heroes/sathyajith-bhat/?did=dh_card&trk=dh_card), AWS Container Hero.
 
- > There won’t be certification exams at re:Invent.  However, registered attendees can access a 50% discount code toward an AWS official Certification exam. More info [here](https://reinvent.awsevents.com/community/aws-certified/?trk=9798ed69-1e88-43ce-9331-412979cf6c70).
+ > There won’t be certification exams at re:Invent.  However, registered attendees can access a 50% discount code toward an AWS official Certification exam. More info [here](https://reinvent.awsevents.com/community/aws-certified/).
 
 ### Community Events
 
@@ -32,7 +32,7 @@ Community Developer Lounge is where I spent most of my time as AWS Developer Adv
 
 For more updates do check out [re:Invent Community page](https://reinvent.awsevents.com/community/#networking)
 
-![AWS Community Developer Lounge](images/dev-lounge.png)
+![AWS Community Developer Lounge](images/dev-lounge.jpg)
 
 ## Network, Network, Network
 
@@ -46,7 +46,7 @@ You can also set up meetings with other customers, and community members. re:Inv
 
 ### Attend Social Events
 
-There are lots of parties at re:Invent, which basically covers dinners. 🙂 These parties can be organized by AWS like [replay](https://reinvent.awsevents.com/community/replay/?trk=9798ed69-1e88-43ce-9331-412979cf6c70), AWS Partners, or exclusive customer/community parties. Ensure you are not missing out on the important ones.
+There are lots of parties at re:Invent, which basically covers dinners. 🙂 These parties can be organized by AWS like [replay](https://reinvent.awsevents.com/community/replay/), AWS Partners, or exclusive customer/community parties. Ensure you are not missing out on the important ones.
 
 Most of the parties are listed on this third-party website [conferenceparties.com](https://conferenceparties.com/reinvent2023/). So keep this link handy and get ready to party Vegas style! 🥳
 
@@ -85,7 +85,7 @@ If you plan to not walk and always take shuttle/cab do not underestimate Las Veg
 
 Content will be delivered across six venues on the Las Vegas strip: The Venetian, Wynn, Encore, Caesars Forum, MGM Grand, and Mandalay Bay. Your hotel may or may not be one of these. They might look close on the map, but getting from one hotel to another takes longer than you think. The closer you are to [The Venetian](https://maps.app.goo.gl/SgufMSUXc8MG9fAJ9), the better!
 
-To help you get around, re:Invent ambassadors and wayfinding stations are also available across the re:Invent campus. You can find more detailed info on [venues, hotels, and getting around](https://reinvent.awsevents.com/campus/?trk=9798ed69-1e88-43ce-9331-412979cf6c70).
+To help you get around, re:Invent ambassadors and wayfinding stations are also available across the re:Invent campus. You can find more detailed info on [venues, hotels, and getting around](https://reinvent.awsevents.com/campus/).
 
 ### Enjoy Las Vegas
 
@@ -99,7 +99,7 @@ In the city, there are lot of attractions like  newly opened [The Sphere](https:
 
 Over the years I have been to Vegas a lot and did enjoy the attractions outside of Las Vegas - Hoover dam, Valley of flowers, Death Valley, Grand Canyon, and more.
 
-![Grand Canyon](images/grand-canyon.JPG)
+![Grand Canyon](images/grand-canyon.jpeg)
 
 **Bonus tip** - if you are traveling Internationally, then ensure you come early to Vegas and carry an extra empty luggage - for shopping and swags. This way you can make use of the Thanksgiving sales at the North/South Premium Outlets - much better deals than in the city for sure. And it can also help with the jetlag. Doing re:Invent with jetlag is not easy.
 
