@@ -16,7 +16,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
 ![Welcome to re:Invent badging area](images/reinvent-badging-area.jpg)
 
-## Tip 1 : Plan your Sessions
+## Tip 1 : Plan your activities
 
 ### ✅ Prioritize and reserve early
 
@@ -76,7 +76,7 @@ It is important to maintain the connections you have built throughout the event.
 
 ## Tip 3 : Self Care is important
 
-### 🍔 Eat, Hydrate and Rest
+### 🍔 Eat, hydrate and rest
 
 It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks. You can use refillable bottles using refill stations throughout the campus.
 
