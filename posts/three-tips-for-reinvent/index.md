@@ -20,7 +20,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
 ### ✅ Prioritize and reserve early
 
- Prioritize sessions that align with your objectives - learn new services, dive deeper into current stack, or find new solutions for your current challenges. Whatever the objective, figure out what sessions, workshops, bootcamps, etc would be important for you.
+ Prioritize sessions that align with your objectives - learn new services, dive deeper into current stack, or find new solutions for your current challenges. Based on your objectives, figure out what sessions, workshops, [bootcamps](https://reinvent.awsevents.com/learn/bootcamps/), etc would be important for you. AWS does publish breakout sessions to [YouTube](https://www.youtube.com/@AWSEventsChannel), so if you miss any do not worry.
 
  Popular sessions fill up quickly, so reserve your spot to ensure you don't miss out. The session catalog is now available. You can access [the session catalog](https://reinvent.awsevents.com/session-catalog/) and filter.
 
@@ -47,15 +47,19 @@ You can also set up meetings with other customers, and community members. Most o
 
 This year re:Invent’s has a new networking program called  [PeerTalk](https://reinvent.awsevents.com/learn/peertalk/). It is designed to help facilitate meaningful connections among the re:Invent community. The platform will launch in mid-fall and it will be accessible through the AWS Events mobile app and the desktop version.
 
+Check out re:Invent website if you need [bookable meeting and reception space](https://reinvent.awsevents.com/bookable-meeting-space/).
+
 ### 🧦 Did someone say swags?
 
-The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with experiences - meet experts, AWS Partners, AWS Village, AWS DeepRacer League Arena, Builders' Fair, Lightning Theatres and more. Also, it is where you can take part in challenges and collect swags!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
+The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with experiences - meet experts, AWS Partners, AWS Village, [AWS DeepRacer League](https://aws.amazon.com/deepracer/league/) Arena, Builders' Fair, [AWS Builder Labs](https://reinvent.awsevents.com/learn/aws-builder-labs/), Lightning Theatres and more.
+
+You can take part in challenges and collect SWAGS!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
 
 AWS Hero [Nick Triantafillou](https://aws.amazon.com/developer/community/heroes/nick-triantafillou/) writes a re:Invent Swag guide and reviews post every year. Do [check out the one he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
 
 ### 🪩 Attend social events
 
-There are lots of parties at re:Invent, which basically covers dinners. 🙂 These parties can be organized by AWS like [replay](https://reinvent.awsevents.com/community/replay/), AWS Partners, parties. The [AWS Community](https://aws.amazon.com/developer/community/?cards.sort-by=item.additionalFields.publishedDate&cards.sort-order=desc) (Heroes, Community Builders and UserGroup Leaders) have exclusive, invite-only receptions/meetups. Ensure you are not missing out on the important ones.
+There are lots of parties at re:Invent, which basically covers dinners. These parties can be organized by AWS like [replay](https://reinvent.awsevents.com/community/replay/), AWS Partners, parties. The [AWS Community](https://aws.amazon.com/developer/community/?cards.sort-by=item.additionalFields.publishedDate&cards.sort-order=desc) (Heroes, Community Builders and UserGroup Leaders) have exclusive, invite-only receptions/meetups. Ensure you are not missing out on the important ones.
 
 Most of the parties are listed on this third-party website [conferenceparties.com](https://conferenceparties.com/reinvent2023/). So keep this link handy and get ready to party Vegas style! 🥳
 
@@ -74,13 +78,17 @@ It is important to maintain the connections you have built throughout the event.
 - **Step 3** : Thats it! Now you can let other scan this using LinkedIn, Camera app or any app that lets you scan QR Code. You can also save it in your photos gallery and scan and connect :
 ![LinkedIn generated QR code](images/linkedin-image-3.PNG)
 
+You can scan my QR code and check for yourself! 🙂
+
 ## Tip 3 : Self Care is important
 
 ### 🍔 Eat, hydrate and rest
 
 It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks. You can use refillable bottles using refill stations throughout the campus.
 
-Breakfast, lunch and snacks are provided at the expo hall in The Venetian.
+Breakfast, lunch and snacks are provided at the expo hall in The Venetian. Just find this big AWS sign in the image below and get down the escalator.
+
+![AWS reinvent sign](images/aws-reinvent-sign.jpg)
 
 > Halal and kosher meals will be available while supplies last. Please contact awsreinvent-support@amazon.com to pre-order your meal.
 
@@ -88,7 +96,7 @@ If you ever miss out on any, or are just hungry and want to grab a bite/coffee, 
 
 **Bonus tip** - hotels typically sell water bottles at a hefty price. Find a CVS, Walgreens, or other convenience stores near your hotel and buy in bulk.
 
-### 👟 Wear comfortable shoes 
+### 👟 Wear comfortable shoes
 
 Do not take this lightly - there is lot of walking!!!
 
@@ -102,15 +110,15 @@ To help you get around, re:Invent ambassadors and wayfinding stations are also a
 
 ### 🎰Enjoy Las Vegas
 
-Yes, Las Vegas will be the sin city and you might get some unwanted attention too. So be safe, stay in well lit areas and maybe find a re:Invent buddy!
+Yes, Las Vegas is the sin city and you might get some unwanted attention too. So be safe, stay in well lit areas and maybe find a re:Invent buddy!
 
 Also, make sure you enjoy what city and the state.
 
-In the city, there are lot of attractions like  the newly opened [The Sphere](https://www.thespherevegas.com/), [Stratosphere](https://thestrat.com/attractions) (now known as The Strat Hotel & Casino & Tower), fountains, shows, and concerts. Tickets fill up fast, so make sure you book them in advance.
+In the city, there are lot of attractions like  the newly opened [The Sphere](https://www.thespherevegas.com/), [Stratosphere](https://thestrat.com/attractions) (now known as The Strat Hotel & Casino & Tower), [SlotZilla](https://vegasexperience.com/slotzilla-zip-line/) or [Fly LINQ](https://www.caesars.com/linq/things-to-do/attractions/fly-linq) zip lines, fountains, shows, and concerts. Tickets fill up fast, so make sure you book them in advance.
 
 ![Las Vegas shows](images/vegas-show.jpg)
 
-Over the years I have been to Vegas a lot and did enjoy the attractions outside of Las Vegas - Hoover dam, Valley of flowers, Death Valley, Grand Canyon, and more.
+Over the years I have been to Vegas a lot and did enjoy the attractions outside of Las Vegas - Hoover dam, Valley of flowers, Death Valley, Grand Canyon, and much more.
 
 ![Grand Canyon](images/grand-canyon.jpeg)
 
