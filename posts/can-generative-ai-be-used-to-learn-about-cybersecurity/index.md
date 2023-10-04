@@ -36,19 +36,19 @@ In this example we'll use [Amazon Bedrock](https://aws.amazon.com/bedrock/) to i
 
 Let's begin by asking for some help understanding AWS Network Firewall:
 
-![Asking LLM about ANFW](images/2023-10-04_12-07-05.gif "Prompting an LLM about AWS Network Firewall")
+![Asking LLM about ANFW](images/2023-10-04_16-16-17.jpg "Prompting an LLM about AWS Network Firewall")
 
 As you can see, we got a response that explains what AWS Network Firewall can do.  Let's assume that we don't know what "common exploits" are.  Let's ask the LLM to explain.
 
-![Asking about common exploits](images/2023-10-04_12-17-21.gif "Prompting an LLM about common exploits")
+![Asking about common exploits](images/2023-10-04_16-20-05.jpg "Prompting an LLM about common exploits")
 
 Let's dig a little deeper and learn what unauthorized access is.
 
-![Asking what unauthorized access is](images/2023-10-04_12-29-21.gif "Prompting an LLM to learn about unathorized access")
+![Asking what unauthorized access is](images/2023-10-04_16-17-56.jpg "Prompting an LLM to learn about unathorized access")
 
 Now that we are learning about unauthorized access, let's see if we can get a real-world example of what this might look like.
 
-![An example of unauthorized access](images/2023-10-04_12-33-57.gif "Prompting an LLM for a real-world example")
+![An example of unauthorized access](images/2023-10-04_16-21-08.jpg "Prompting an LLM for a real-world example")
 
 As you can see, our LLM is providing us with some helpful information.  From this example we've learned how AWS Network Firewall can help protect against threats.  We've learned a little about unauthorized access, and it gave us an example of how this might happen and how the firewall can protect against it.  And while this is a very simple example, it illustrates how Generative AI can be used to learn about various topics that relate to cybersecurity.
 
