@@ -16,7 +16,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
 ## Tip 1 : Plan your Sessions
 
-### Prioritize and Reserve Early
+### Prioritize and reserve early
 
  Prioritize sessions that align with your objectives - learn new services, dive deeper into current stack, or find new solutions for your current challenges. Whatever the objective, figure out what sessions, workshops, bootcamps, etc would be important for you.
 
@@ -26,7 +26,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
  > There won’t be certification exams at re:Invent.  However, registered attendees can access a 50% discount code toward an AWS official Certification exam. More info [here](https://reinvent.awsevents.com/community/aws-certified/).
 
-### Community Events
+### Community events
 
 Community Developer Lounge is where I spent most of my time as AWS Developer Advocate. Here, you can talk to experts, meet the community in-person, sign up for your local community and more. There are also sessions by community members called as Dev Chats - session IDs start with COM***. AWS Heroes are also presenting in 12 breakout sessions.
 
@@ -43,15 +43,17 @@ If you are an AWS Customer and have AWS Account Teams, make sure you reach out a
 
 You can also set up meetings with other customers, and community members. Most of us do post on social media like Twitter or LinkedIn that we will be at the event and you can come say hi! AWS re:Invent is spread across a very wide area, plan early so people can make it to the venues on time.
 
+This year re:Invent’s has a new networking program called  [PeerTalk](https://reinvent.awsevents.com/learn/peertalk/). It is designed to help facilitate meaningful connections among the re:Invent community. The platform will launch in mid-fall and it will be accessible through the AWS Events mobile app and the desktop version.
+
 ### Did someone say swags?
 
 The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with experiences - meet experts, AWS Partners, AWS Village, AWS DeepRacer League Arena, Builders' Fair, Lightning Theatres and more. Also, it is where you can take part in challenges and collect swags!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
 
 AWS Hero Nicolas Triantafillou writes a re:Invent Swag guide and reviews post every year. Do [check out the one he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
 
-### Attend Social Events
+### Attend social events
 
-There are lots of parties at re:Invent, which basically covers dinners. 🙂 These parties can be organized by AWS like [replay](https://reinvent.awsevents.com/community/replay/), AWS Partners, or exclusive customer/community parties. Ensure you are not missing out on the important ones.
+There are lots of parties at re:Invent, which basically covers dinners. 🙂 These parties can be organized by AWS like [replay](https://reinvent.awsevents.com/community/replay/), AWS Partners, parties. The [AWS Community](https://aws.amazon.com/developer/community/?cards.sort-by=item.additionalFields.publishedDate&cards.sort-order=desc) (Heroes, Community Builders and UserGroup Leaders) have exclusive, invite-only receptions/meetups. Ensure you are not missing out on the important ones.
 
 Most of the parties are listed on this third-party website [conferenceparties.com](https://conferenceparties.com/reinvent2023/). So keep this link handy and get ready to party Vegas style! 🥳
 
@@ -67,18 +69,22 @@ It is important to maintain the connections you have built throughout the event.
 - **Step 2** : Click on the little QR code icon that pops up, see the highlighted red box around it in the image below:
     ![LinkedIn QR code generator](images/linkedin-image-2.PNG)
 
-- **Step 3** : Thats it! Now you can let other scan this using LinkedIn, Camera app or any app that lets you scan QR Code. You can also save it in your photos gallery and scan and connect! :
+- **Step 3** : Thats it! Now you can let other scan this using LinkedIn, Camera app or any app that lets you scan QR Code. You can also save it in your photos gallery and scan and connect :
 ![LinkedIn generated QR code](images/linkedin-image-3.PNG)
 
 ## Tip 3 : Self Care is important
 
 ### Eat, Hydrate and Rest
 
-It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks.
+It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks. You can use refillable bottles using refill stations throughout the campus.
 
-Breakfast, lunch and snacks are provided at the expo hall in The Venetian. If you ever miss out on any, or are just hungry and want to grab a bite, Vegas has lots of food options. You can find almost everything busy, so be prepared to stand in queues.
+Breakfast, lunch and snacks are provided at the expo hall in The Venetian. 
 
-**Bonus tip** - hotels typically sell water bottles at a hefty price. Find a CVS, Walgreens, or other convenience stores and buy in bulk.
+> Halal and kosher meals will be available while supplies last. Please contact awsreinvent-support@amazon.com to pre-order your meal.
+
+If you ever miss out on any, or are just hungry and want to grab a bite/coffee, Vegas has lots of food options. But almost every shop is busy, so be prepared to stand in queues.
+
+**Bonus tip** - hotels typically sell water bottles at a hefty price. Find a CVS, Walgreens, or other convenience stores near your hotel and buy in bulk.
 
 ### Wear comfortable shoes
 
