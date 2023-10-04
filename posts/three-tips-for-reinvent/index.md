@@ -30,7 +30,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
 ### 👩‍💻 Community events
 
-Community Developer Lounge is where I spent most of my time as AWS Developer Advocate. Here, you can talk to experts, meet the community in-person, sign up for your local community and more. There are also sessions by community members called as Dev Chats - session IDs start with COM***. AWS Heroes are also presenting in 12 breakout sessions.
+Community Developer Lounge is where I spent most of my time as an AWS Developer Advocate. Here, you can talk to experts, meet the community in-person, sign up for your local community and more. There are also sessions by community members called as Dev Chats - session IDs start with `COM***`. AWS Heroes are also presenting in 12 breakout sessions.
 
 For more updates do check out [re:Invent Community page](https://reinvent.awsevents.com/community/#networking)
 ![AWS Community Developer Lounge](images/dev-lounge.jpg)
@@ -43,11 +43,9 @@ One of the biggest benefits of attending re:Invent in person is the networking o
 
 If you are an AWS Customer and have AWS Account Teams, make sure you reach out and set up meetings with relevant AWS Experts. If you do not have AWS account team yet, then you can [Contact AWS](https://aws.amazon.com/contact-us/).
 
-You can also set up meetings with other customers, and community members. Most of us do post on social media like Twitter or LinkedIn that we will be at the event and you can come say hi! AWS re:Invent is spread across a very wide area, plan early so people can make it to the venues on time.
+You can also set up meetings with other customers, and community members. Most of us do post on social media like Twitter or LinkedIn that we will be at the event and you can come say hi! AWS re:Invent is spread across a very wide area, plan early so people can make it to the venues on time. Check out re:Invent website if you need [bookable meeting and reception space](https://reinvent.awsevents.com/bookable-meeting-space/).
 
 This year re:Invent’s has a new networking program called  [PeerTalk](https://reinvent.awsevents.com/learn/peertalk/). It is designed to help facilitate meaningful connections among the re:Invent community. The platform will launch in mid-fall and it will be accessible through the AWS Events mobile app and the desktop version.
-
-Check out re:Invent website if you need [bookable meeting and reception space](https://reinvent.awsevents.com/bookable-meeting-space/).
 
 ### 🧦 Did someone say swags?
 
@@ -55,13 +53,13 @@ The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with 
 
 You can take part in challenges and collect SWAGS!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
 
-AWS Hero [Nick Triantafillou](https://aws.amazon.com/developer/community/heroes/nick-triantafillou/) writes a re:Invent Swag guide and reviews post every year. Do [check out the one he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
+AWS Hero [Nick Triantafillou](https://aws.amazon.com/developer/community/heroes/nick-triantafillou/) writes a re:Invent Swag guide and an honest reviews post every year. Do [check out the blog he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
 
 ### 🪩 Attend social events
 
-There are lots of parties at re:Invent, which basically covers dinners. These parties can be organized by AWS like [replay](https://reinvent.awsevents.com/community/replay/), AWS Partners, parties. The [AWS Community](https://aws.amazon.com/developer/community/?cards.sort-by=item.additionalFields.publishedDate&cards.sort-order=desc) (Heroes, Community Builders and UserGroup Leaders) have exclusive, invite-only receptions/meetups. Ensure you are not missing out on the important ones.
+There are lots of parties at re:Invent, which basically covers the dinners. These parties can be  [AWS re:Play](https://reinvent.awsevents.com/community/replay/), and parties by AWS Partners or Sponsors. Most of the parties are listed on this third-party website [conferenceparties.com](https://conferenceparties.com/reinvent2023/). So keep this link handy and get ready to party Vegas style! 🥳
 
-Most of the parties are listed on this third-party website [conferenceparties.com](https://conferenceparties.com/reinvent2023/). So keep this link handy and get ready to party Vegas style! 🥳
+Ensure you are not missing out on the important ones.
 
 There are activities like the 5K run, Rec Centre, Pickleball tournament and more where you can have fun and connect with fellow attendees. You can find [this year's fun activities](https://reinvent.awsevents.com/community/#competition).
 
@@ -84,7 +82,7 @@ You can scan my QR code and check for yourself! 🙂
 
 ### 🍔 Eat, hydrate and rest
 
-It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks. You can use refillable bottles using refill stations throughout the campus.
+It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks. You can fill refillable bottles using the refill stations provided throughout the campus.
 
 Breakfast, lunch and snacks are provided at the expo hall in The Venetian. Just find this big AWS sign in the image below and get down the escalator.
 
