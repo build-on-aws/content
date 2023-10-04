@@ -51,7 +51,7 @@ This year re:Invent’s has a new networking program called  [PeerTalk](https://
 
 The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with experiences - meet experts, AWS Partners, AWS Village, AWS DeepRacer League Arena, Builders' Fair, Lightning Theatres and more. Also, it is where you can take part in challenges and collect swags!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
 
-AWS Hero Nicolas Triantafillou writes a re:Invent Swag guide and reviews post every year. Do [check out the one he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
+AWS Hero [Nick Triantafillou](https://aws.amazon.com/developer/community/heroes/nick-triantafillou/) writes a re:Invent Swag guide and reviews post every year. Do [check out the one he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
 
 ### 🪩 Attend social events
 
