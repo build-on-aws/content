@@ -16,6 +16,7 @@ date: 2023-10-03
 
 |ToC|
 |---|
+
 2023 has been the year of AI, more specifically generative AI. The releases of platforms like [ChatGPT](https://chat.openai.com/), [Google's Bard](https://bard.google.com/), and [Amazon Bedrock](https://aws.amazon.com/bedrock/) have caused every industry to rethink how they operate. Businesses are scaling down teams while increasing efficiency and speed of product delivery, specifically in areas that are text-driven like data processing, content creation, and software development. Organizations are now able to ask a chatbot how can we do more with less? And immediately they get an answer.
 
 ![image](./images/bedrock.gif "Image from Bedrock Chat Playgound")
