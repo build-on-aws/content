@@ -20,7 +20,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
  Prioritize sessions that align with your objectives - learn new services, dive deeper into current stack, or find new solutions for your current challenges. Whatever the objective, figure out what sessions, workshops, bootcamps, etc would be important for you.
 
- Popular sessions fill up quickly, so reserve your spot to ensure you don't miss out. The session catalog is now available. You can access the catalog [here](https://reinvent.awsevents.com/session-catalog/).
+ Popular sessions fill up quickly, so reserve your spot to ensure you don't miss out. The session catalog is now available. You can access [the session catalog](https://reinvent.awsevents.com/session-catalog/) and filter.
 
  If you need more help in finding appropriate sessions then do check out [Attendee guides](https://reinvent.awsevents.com/learn/attendee-guides/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by AWS Heroes, AWS Partners, and AWS industry teams. I definitely urge you to read [Tips for your first AWS re:Invent](https://reinvent.awsevents.com/learn/attendee-guides/reliability-engineering/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by [Sathyajith Bhat](https://aws.amazon.com/developer/community/heroes/sathyajith-bhat/?did=dh_card&trk=dh_card), AWS Container Hero.
 
@@ -31,7 +31,6 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 Community Developer Lounge is where I spent most of my time as AWS Developer Advocate. Here, you can talk to experts, meet the community in-person, sign up for your local community and more. There are also sessions by community members called as Dev Chats - session IDs start with COM***. AWS Heroes are also presenting in 12 breakout sessions.
 
 For more updates do check out [re:Invent Community page](https://reinvent.awsevents.com/community/#networking)
-
 ![AWS Community Developer Lounge](images/dev-lounge.jpg)
 
 ## Tip 2 : Network, Network, Network
@@ -42,7 +41,13 @@ One of the biggest benefits of attending re:Invent in person is the networking o
 
 If you are an AWS Customer and have AWS Account Teams, make sure you reach out and set up meetings with relevant AWS Experts. If you do not have AWS account team yet, then you can [Contact AWS](https://aws.amazon.com/contact-us/).
 
-You can also set up meetings with other customers, and community members. re:Invent is spread across a very wide area, plan early so people can make it to the venues on time.
+You can also set up meetings with other customers, and community members. Most of us do post on social media like Twitter or LinkedIn that we will be at the event and you can come say hi! AWS re:Invent is spread across a very wide area, plan early so people can make it to the venues on time.
+
+### Did someone say swags?
+
+The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with experiences - meet experts, AWS Partners, AWS Village, AWS DeepRacer League Arena, Builders' Fair, Lightning Theatres and more. Also, it is where you can take part in challenges and collect swags!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
+
+AWS Hero Nicolas Triantafillou writes a re:Invent Swag guide and reviews post every year. Do [check out the one he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
 
 ### Attend Social Events
 
@@ -57,11 +62,9 @@ There are activities like the 5K run, Rec Centre, Pickleball tournament and more
 It is important to maintain the connections you have built throughout the event. Do ensure you collect business cards (if folks still give out those) or quickly [use a LinkedIn QR Code to Connect](https://www.linkedin.com/help/linkedin/answer/a525286/using-a-linkedin-qr-code-to-connect-with-members):
 
 - **Step 1** : Open LinkedIn app, and click on the Search bar on the top:
-
     ![LinkedIn Search bar](images/linkedin-image-1.PNG)
 
 - **Step 2** : Click on the little QR code icon that pops up, see the highlighted red box around it in the image below:
-
     ![LinkedIn QR code generator](images/linkedin-image-2.PNG)
 
 - **Step 3** : Thats it! Now you can let other scan this using LinkedIn, Camera app or any app that lets you scan QR Code. You can also save it in your photos gallery and scan and connect! :
@@ -87,13 +90,15 @@ Content will be delivered across six venues on the Las Vegas strip: The Venetian
 
 To help you get around, re:Invent ambassadors and wayfinding stations are also available across the re:Invent campus. You can find more detailed info on [venues, hotels, and getting around](https://reinvent.awsevents.com/campus/).
 
+![venues and hotels in Las Vegas](images/re-invent-hotel-map.jpg "Image from AWS re:Invent website")
+
 ### Enjoy Las Vegas
 
 Yes, Las Vegas will be the sin city and you might find unwanted attention too. So be safe, stay in well lit areas and maybe find a re:Invent buddy!
 
 Also, make sure you enjoy what city and the state.
 
-In the city, there are lot of attractions like  newly opened [The Sphere](https://www.thespherevegas.com/), Stratosphere (now known as The Strat Hotel & Casino & Tower), fountains, shows, and concerts. Tickets fill up fast, so make sure you book them in advance.
+In the city, there are lot of attractions like  newly opened [The Sphere](https://www.thespherevegas.com/), [Stratosphere](https://thestrat.com/attractions) (now known as The Strat Hotel & Casino & Tower), fountains, shows, and concerts. Tickets fill up fast, so make sure you book them in advance.
 
 ![Las Vegas shows](images/vegas-show.jpg)
 
