@@ -9,6 +9,8 @@ authorName: Rohini Gaonkar
 date: 2023-10-05
 ---
 
+| ToC |
+|-----|
 
 AWS re:Invent registrations have opened for 2023 and we cannot wait for the event at Las Vegas!  As we gear up for this year's event, it is easy to feel both excited and a little overwhelmed. Whether you are a first-time attendee or a re:Invent veteran, optimizing your experience requires more than just showing up. I've listed my 3 tips to ensure you get the most out of AWS re:Invent. Let's dive in!
 
@@ -78,7 +80,7 @@ It is important to maintain the connections you have built throughout the event.
 
 It can be overwhelming with back-to-back sessions, networking, and the sheer size of the event. Make sure to hydrate, and take breaks. You can use refillable bottles using refill stations throughout the campus.
 
-Breakfast, lunch and snacks are provided at the expo hall in The Venetian. 
+Breakfast, lunch and snacks are provided at the expo hall in The Venetian.
 
 > Halal and kosher meals will be available while supplies last. Please contact awsreinvent-support@amazon.com to pre-order your meal.
 
