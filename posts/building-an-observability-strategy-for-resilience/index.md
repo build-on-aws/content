@@ -6,6 +6,8 @@ tags:
     - observability
     - resilience
     - devops
+waves:
+  - resilience
 authorGithubAlias: khubyar
 authorName: Khubyar Behramsha
 date: 2023-09-20
