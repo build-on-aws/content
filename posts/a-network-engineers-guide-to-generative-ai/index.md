@@ -183,16 +183,29 @@ For example, let's say you are using an the Anthropic large language model (LLM)
 ```python
 # Prompt to send to claude
 prompt = """
-You are tasked with updating a Transit Gateway routing table by adding the following IP routes:
+You are tasked with updating a Transit Gateway routing table by adding 200 unique IP routes with distinct CIDR notations. These routes should cover a range of subnet masks to support a complex network setup efficiently and securely.
+
+Here is the list of 200 IP routes (CIDR notations) that need to be integrated into the Transit Gateway routing table:
 
 1. 10.0.0.0/24
 2. 192.168.1.0/25
 3. 172.16.0.0/23
 4. 10.1.0.0/22
 5. 192.168.2.0/26
-... (and so on)
+6. 172.17.0.0/24
+7. 10.2.0.0/21
+8. 192.168.3.0/28
+9. 172.18.0.0/22
+10. 10.3.0.0/20
+... (and 190 more routes)
 
-Follow best practices and security guidelines, then document the newly added routes and their attributes. Use Python and the AWS boto3 library for this task. Include step-by-step instructions and a README for execution details.
+Ensure the provided routes are valid and compatible with the existing network architecture. Add these routes to the Transit Gateway routing table while following best practices and security guidelines. Document the newly added routes, including their CIDR notations and associated attributes.
+
+To accomplish this task, use Python and the AWS boto3 library for interaction with the Transit Gateway routing table. Create unit tests to validate your code and its functionality.
+
+Provide comprehensive step-by-step instructions on executing your Python code effectively to add these routes to the routing table. Additionally, include a README file that outlines the project structure and how to utilize your code.
+
+Note: The list comprises 200 IP routes with varying subnet masks (ranging from /20 to /32). Avoid any overlapping CIDR notations, and prioritize network efficiency and security in your implementation. Summarize the outcomes of your work and briefly explain your approach. If you have any recommendations for improvements, include them in your explanation.
 """
 
 # Call the function with the prompt argument
