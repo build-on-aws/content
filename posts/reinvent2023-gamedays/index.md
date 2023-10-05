@@ -25,7 +25,7 @@ Think of AWS GameDay as the ultimate AWS playground. It's not just another works
 
 * **Teamwork Makes the Dream Work:** You'll team up with other builders to tackle challenges. It’s a collaborative and fun way to learn, so you get the best of both worlds.
 
-![Reinvent GameDay](images/scoreboard.png)
+![Reinvent GameDay](images/scoreboard.jpg)
 
 ## GameDay Sessions to Look Out For
 So, let's dive into the details. Here's a breakdown of this year's GameDay sessions, along with what you need to know to choose the one that's right for you.
@@ -59,7 +59,7 @@ Get ready by diving into AWS cost optimization best practices. Look into service
 ###  GHJ201 | League of Legends Esports Edition
 Dive into the world of esports with League of Legends challenges. This one's for the gaming geeks who are also data enthusiasts. Exclusive SWAG and epic prizes await!
 
-![Riot Swag](images/riot_swag.jpeg)
+![Riot Swag](images/riot_swag.jpg)
 
 #### How to Prepare:
 Familiarize yourself with Amazon SageMaker, AWS Lambda, and AWS App Runner. If you're new to the esports world, maybe spend some time understanding the basics of [League of Legends](https://www.leagueoflegends.com/en-us/) to get the most out of the gaming challenges.
@@ -74,7 +74,7 @@ Familiarize yourself with Amazon SageMaker, AWS Lambda, and AWS App Runner. If y
 ### GHJ202 | Formula 1
 Join Team Unicorn.Rentals.Racing and use real Formula 1 data to improve race performance. If you're a sports fan who loves to code, you won't want to miss this one.
 
-![F1 GameDay](images/f1.png)
+![F1 GameDay](images/f1.jpg)
 
 #### How to Prepare:
 Take a look at AWS services like AWS Glue, Amazon API Gateway, and AWS Amplify. A basic understanding of data analytics and how it applies to sports performance will help you hit the ground running.
