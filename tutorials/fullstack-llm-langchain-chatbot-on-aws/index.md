@@ -10,7 +10,7 @@ tags:
 showInHomeFeed: true
 authorGithubAlias: pkamra
 authorName: Piyali Kamra
-date: 2023-09-15
+date: 2023-10-05
 ---
 
 Imagine being able to converse with your unstructured data, extracting valuable information with ease. In today’s data-driven landscape, extracting meaningful insights from unstructured documents remains a challenge, inhibiting decision-making and innovation.  In this tutorial, we will learn about embeddings, explore using Amazon OpenSearch as a vector database and seamlessly integrate [Langchain](https://python.langchain.com/docs/get_started/introduction/) framework with Large Language Models (LLMs) to build a website with an embedded NLP chatbot. We will go over the basics of LLM's to extract meaningful insights from an unstructured document with the help of an Open Source [Large Language Model](https://huggingface.co/google/flan-t5-xxl). By the end of this tutorial, you’ll have a comprehensive understanding of how to derive meaningful insights from unstructured documents, and use the skills to explore and innovate with similar full stack AI-driven solutions.
