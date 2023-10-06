@@ -5,7 +5,9 @@ description: "Use LangChain with Amazon Bedrock and Amazon DynamoDB and to build
 tags:
     - ai-ml
     - generative-ai
+    - amazon-bedrock
     - aws
+    - langchain
 spaces:
     - generative-ai
 showInHomeFeed: true
@@ -207,7 +209,7 @@ In the following gif you see an example of the ConversationBufferMemory.
 
 ![ConversationBufferMemory](images/gif_03.gif)
 
-Try the differents memories types and check the differences. 
+Try the differents memories types and check the difference. 
 
 ## 5 - Save The Conversation Memory In An Amazon DynamoDB Table.
 
@@ -265,7 +267,7 @@ See you have a new record in the DynamoDB table:
 
 ## Conclusion
 
-Thank you for joining me on this journey where you gained the skills necessary to keep conversation with LLMs with consistent and engage in a natural dialogue using the memories module of [Langchain](https://www.langchain.com/), using the Amazon Bedrock API to invoke LLMs models and storing memory: history of conversations in an Amazon DynamoDB. 
+Thank you for joining me on this journey, in which you gained the skills to maintain a coherent conversation with the LLMs and engage in a natural dialogue using the [Langchain](https://www.langchain.com/) memory module, using the Amazon Bedrock API to invoke LLMs models and storing memory: history of conversations in an Amazon DynamoDB.
 
 Some links for you to continue learning and building:
 
