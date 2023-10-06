@@ -1,5 +1,5 @@
 ---
-title: "Using Generative AI for CyberSecurity Work?"
+title: "Using Generative AI for CyberSecurity Work"
 description: This article discusses how Generative AI can be used for cybersecurity work. In this article we explore how generative AI can be used for risk assemement and vulnerability analysis, learn a bit about the temperature setting for LLMs and discuss code generation with codewhisperer.
 tags:
   - generative-ai
