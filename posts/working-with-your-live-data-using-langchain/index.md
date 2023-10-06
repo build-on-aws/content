@@ -101,7 +101,7 @@ completetion
 
 There are different memory types in [LangChain](https://python.langchain.com/docs/modules/memory/types/), but in this blog we are going to review the following:
 
-#### ConversationBufferMemory
+#### 3.1 ConversationBufferMemory
 
 Using this memory allows you to store all the messages in the conversation.
 
@@ -110,7 +110,7 @@ from langchain.memory import ConversationBufferMemory
 memory = ConversationBufferMemory(return_messages=True)
 ```
 
-#### ConversationBufferWindowMemory
+#### 3.2 ConversationBufferWindowMemory
 
 Limits the dialogue history size to the most recent K interactions. Older interactions are discarded as new ones are added to keep the size fixed at K.
 
@@ -119,7 +119,7 @@ from langchain.memory import ConversationBufferWindowMemory
 memory = ConversationBufferMemory(k=1,return_messages=True)
 ```
 
-#### ConversationSummaryMemory
+#### 3.3 ConversationSummaryMemory
 
 This uses a LLM model to created a summary of the conversation and then injected into a prompt, useful for a large conversations.
 
@@ -128,7 +128,7 @@ from langchain.memory import ConversationSummaryMemory
 memory = ConversationSummaryMemory(llm=llm,return_messages=True)
 ```
 
-#### ConversationSummaryBufferMemory
+#### 3.4 ConversationSummaryBufferMemory
 
 Use both the buffer and the summary, stores the full recent conversations in a buffer and also compiles older conversations into a summary.
 
@@ -137,7 +137,7 @@ from langchain.memory import ConversationSummaryBufferMemory
 memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=10,return_messages=True)
 ```
 
-#### ConversationTokenBufferMemory
+#### 3.5 ConversationTokenBufferMemory
 
 Keeps a buffer of recent interactions in memory, and uses token length rather than number of interactions to determine when to flush interactions.
 
