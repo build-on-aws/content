@@ -24,6 +24,8 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
  Popular sessions fill up quickly, so reserve your spot to ensure you don't miss out. The session catalog is now available. You can access [the session catalog](https://reinvent.awsevents.com/session-catalog/) and filter.
 
+ Check out [AWS re:Invent uncovered - TOP TIPS FOR FIRST-TIME ATTENDEES](/posts/reinvent-uncovered) by AWS Community Builder [Christian Bonzelet](https://www.linkedin.com/in/christian-bonzelet/).
+
  If you need more help in finding appropriate sessions then do check out [Attendee guides](https://reinvent.awsevents.com/learn/attendee-guides/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by AWS Heroes, AWS Partners, and AWS industry teams. I definitely urge you to read [Tips for your first AWS re:Invent](https://reinvent.awsevents.com/learn/attendee-guides/reliability-engineering/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by [Sathyajith Bhat](https://aws.amazon.com/developer/community/heroes/sathyajith-bhat/?did=dh_card&trk=dh_card), AWS Container Hero.
 
  > There won’t be certification exams at re:Invent.  However, registered attendees can access a 50% discount code toward an AWS official Certification exam. More info [here](https://reinvent.awsevents.com/community/aws-certified/).
