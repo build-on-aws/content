@@ -1,6 +1,6 @@
 ---
 title: "A Network Engineers Guide to Generative AI"
-description: "Learn the fundamentals of generative ai and how it applies to network engineering."
+description: "Learn the fundamentals of generative AI and how it applies to network engineering."
 tags:
   - networking
   - generative-ai
@@ -17,19 +17,19 @@ date: 2023-10-03
 |ToC|
 |---|
 
-2023 has been the year of AI, more specifically generative AI. The releases of platforms like [ChatGPT](https://chat.openai.com/), [Google's Bard](https://bard.google.com/), and [Amazon Bedrock](https://aws.amazon.com/bedrock/) have caused every industry to rethink how they operate. Businesses are scaling down teams while increasing efficiency and speed of product delivery, specifically in areas that are text-driven like data processing, content creation, and software development. Organizations are now able to ask a chatbot how can we do more with less? And immediately they get an answer.
+2023 has been the year of AI, more specifically generative AI. The releases of platforms like [ChatGPT](https://chat.openai.com/), [Google's Bard](https://bard.google.com/), and [Amazon Bedrock](https://aws.amazon.com/bedrock/?sc_channel=el&sc_campaign=genaiwave&sc_content=a-network-engineers-guide-to-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) have caused every industry to rethink how they operate. Businesses are scaling down teams while increasing efficiency and speed of product delivery, specifically in areas that are text-driven like data processing, content creation, and software development. Organizations are now able to ask a chatbot how can we do more with less? And immediately they get an answer.
 
-![image](./images/bedrock.gif "Image from Bedrock Chat Playgound")
+![image](./images/bedrock.gif "Image from Amazon Bedrock Chat Playgound")
 
-This is just one example of how generative AI can be leveraged. As you can see, we asked the chatbot a question without providing any context other than stating our business is in network engineering. The AI was able to return a list of use cases along with their descriptions. From there, we could have asked the AI assistant for more information, had it provide additional examples, or even requested a blueprint of how to achieve these use cases. But how does this all work? 
+This is just one example of how generative AI can be leveraged. As you can see, we asked the chatbot a question without providing any context other than stating our business is in network engineering. The AI was able to return a list of use cases along with their descriptions. From there, we could have asked the AI assistant for more information, had it provide additional examples, or even requested a blueprint of how to achieve these use cases. But how does this all work?
 
-## What is Generative AI? 
+## What is Generative AI?
 
 Generative AI is a subset of artificial intelligence that uses large language machine learning models (LLMs) to generate new content and ideas. This includes conversations, stories, images, videos, and audio. Generative AI is capable of this creative output because of the massive datasets used to train the models. Essentially, LLMs contain nearly everything on the internet. Some of the most popular large language models are GPT, BARD, PaLM, Claude, and Amazon's upcoming Titan. Each has unique capabilities and varying parameters - the troves of data used for training. Here's a list of some of the most well-known LLMs:
 
 | Creator | Model | Parameters | Description | Access |
 |:---------|:--------| :---------- | :----------|:---------|
-| Amazon | Amazon Titan | Does not publish the parameter size | Generate natural language text for a broad range of tasks such as summarization, content creation, and question answering. ([docs](https://aws.amazon.com/bedrock/titan)) | Limited |
+| Amazon | Amazon Titan | Does not publish the parameter size | Generate natural language text for a broad range of tasks such as summarization, content creation, and question answering. ([docs](https://aws.amazon.com/bedrock/titan?sc_channel=el&sc_campaign=genaiwave&sc_content=a-network-engineers-guide-to-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)) | Limited |
 | Anthropic | Anthropic Claude v1.(x) | Does not state the parameter size | A model trained using reinforcement learning from human feedback ([docs](https://www.anthropic.com/index/introducing-claude)). | limited |
 | Google | PaLM 2 | 540(B) | Trained to handle tasks like coding, math, classifying, answering questions, translating languages, and creating sentences. ([docs](https://ai.google/discover/palm2/))| Closed(Preview) |
 | Meta | Llama 2 | (70B) | Open source and fine-tuned for chat use cases ([docs](https://ai.meta.com/llama/)) | Open|
@@ -39,11 +39,11 @@ For a more detailed list and a great resource for understanding all of the avail
 
 ### Attention is all you need
 
-Continuing the discussion on large language models, we need to understand how they differ from traditional machine learning models. Here are a few key differences: 
+Continuing the discussion on large language models, we need to understand how they differ from traditional machine learning models. Here are a few key differences:
 
-1. They are trained on massive datasets. 
-2. The data is encoded into numerical representations called embeddings. 
-3. They utilize transformer models which focus on key parts (attention) of the data during encoding and generate new output through decoding. 
+1. They are trained on massive datasets.
+2. The data is encoded into numerical representations called embeddings.
+3. They utilize transformer models which focus on key parts (attention) of the data during encoding and generate new output through decoding.
 
 For example, translating a sentence from English to Spanish. Or using a generative AI coding assistant to automatically generate a Python function adds routes to a routing table based on a single comment describing what the function should do. Traditional machine learning lacked this generative capacity. This is a high-level explanation - for more technical details, I recommend reading Google's 2017 paper [Attention is All You Need](https://arxiv.org/abs/1706.03762)
 
@@ -57,9 +57,10 @@ When you use a generative AI chatbot like ChatGPT, realize that this is an appli
 
 Fine-tuning is straightforward. You start with a foundational LLM like Anthropic's Claude model. Then you feed it internal documentation or other data not known to the model. The LLM trains on this new data, becoming fine-tuned to your needs. Once trained, it will generate higher quality responses for your domain-specific requests.
 
-In-context learning utilizes prompt engineering to enable quick adaptation and learning of new concepts with minimal examples. As you query the LLM, you provide context, examples, and descriptions within the prompt. The model then encodes this prompt and generates a response based on the foundational data plus your provided prompt. With this method, prompts should be clear, concise, and contain specific instructions to guide the model. Depending on the use case you may need to provide additional detailed context and examples in prompts. 
+In-context learning utilizes prompt engineering to enable quick adaptation and learning of new concepts with minimal examples. As you query the LLM, you provide context, examples, and descriptions within the prompt. The model then encodes this prompt and generates a response based on the foundational data plus your provided prompt. With this method, prompts should be clear, concise, and contain specific instructions to guide the model. Depending on the use case you may need to provide additional detailed context and examples in prompts.
 
-Think of it like this:  
+Think of it like this:
+
 - Training a large language model from scratch is time-consuming and costly, often taking days, weeks or even months.
 - Fine-tuning starts with a pre-trained foundational LLM and can be accomplished in just a few hours, depending on the amount of data.
 - Prompting provides instructions to guide an LLM to generate desired responses. It's a technique that takes just seconds or minutes.
@@ -110,7 +111,7 @@ Prompting takes practice and sometimes requires you to iterate over a prompt unt
 
 Previously I mentioned how you have the ability to leverage the API of an LLM. This provides the network developer additional control over how the model responds and how your applications provide a response. For example, when using a model like ChatGPT, you will notice the responses are unpredictable and it has a sort of personality in how it responds to your requests. One reason for this is because of the `temperature` LLM API parameter. By adjusting this setting normally from 0 to 1, you can control the unpredictability of the responses. With 0 being the most predictable and 1 being the least predictable. The default temperature for the [OpenAI GPT model](https://platform.openai.com/docs/api-reference/chat/create) is 1. This is the same for the [Anthropic's Claude model](https://docs.anthropic.com/claude/reference/complete_post).
 
->NOTE: Recently I noticed that the GPT model now allows for the temperature to be adjusted up to 2 rather than 1. Always check the documentation first. 
+>NOTE: Recently I noticed that the GPT model now allows for the temperature to be adjusted up to 2 rather than 1. Always check the documentation first.
 
 Let's use python to create a request and send it to Amazon Bedrock's Anthropic `anthropic.claude-v2`model using the default temperature of 1:
 
@@ -219,14 +220,14 @@ print(response)
 
 The Anthropic Claude model has one of the more generous token limits and can meet the needs for many text based tasks that do not involve extensive amounts of data. However, for generative AI applications involving extensive data - like log analysis, blog summarization, etc. - you'll need strategies to work within different models' token constraints. So how can you solve this?
 
-1. **Chunking your data:** This splits the prompt into chunks until you get the total response. Tools like [Langchain](https://python.langchain.com/docs/get_started/introduction) help with this. 
+1. **Chunking your data:** This splits the prompt into chunks until you get the total response. Tools like [Langchain](https://python.langchain.com/docs/get_started/introduction) help with this.
 2. **Vector databases:**  Rather than sending full text, you create embeddings as inputs to generate responses.
 
 By understanding and leveraging these methods, you can navigate token constraints and develop some really diverse applications.
 
 ### What are Embeddings?
 
-Embeddings are mathematical representation of complex data types (e.g., words, sentences, and objects) in a lower-dimensional vector space. Embeddings are regarded as the 'numeric mask' of the data that is more palatable for machine learning algorithms. This allows the LLM to assign weight values to the words in the database. Based on a request, the model can identify which words to focus on through attention mechanisms. (Remember the Attention reference above) and reference the database to provide you a response. This [blog post](https://aws.amazon.com/blogs/aws/amazon-bedrock-is-now-generally-available-build-and-scale-generative-ai-applications-with-foundation-models/) has great examples of embeddings examples using Amazon Titan. 
+Embeddings are mathematical representation of complex data types (e.g., words, sentences, and objects) in a lower-dimensional vector space. Embeddings are regarded as the 'numeric mask' of the data that is more palatable for machine learning algorithms. This allows the LLM to assign weight values to the words in the database. Based on a request, the model can identify which words to focus on through attention mechanisms. (Remember the Attention reference above) and reference the database to provide you a response. This [blog post](https://aws.amazon.com/blogs/aws/amazon-bedrock-is-now-generally-available-build-and-scale-generative-ai-applications-with-foundation-models/?sc_channel=el&sc_campaign=genaiwave&sc_content=a-network-engineers-guide-to-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) has great examples of embeddings examples using Amazon Titan.
 
 ## The Impact of Generative AI on Network Engineering
 
@@ -260,7 +261,7 @@ This may sound like a pipe dream. However, I believe this is the direction we ar
 
 ## Are there potential risks?
 
-With generative AI and more specifically foundation models, there is a need for [responsible AI](https://www.amazon.science/blog/responsible-ai-in-the-generative-era). These models are trained on vast amounts of data, which raises issues and concerns around biases in responses, accuracy, fairness, intellectual property considerations, misuse of tools, security, and privacy. Often it is challenging to mitigate all these concerns at once, since not all the ways the models can be used and respond have been discovered yet. Thankfully, there are policies and new research being conducted to address these issues. However, as a network engineer leveraging these models, you must consider these concerns. Understand your organization's policies and the policies and limitations of the models. Never enter any data into the model that you do not want made public. And as always, test, test, and test to ensure the system is working as intended.
+With generative AI and more specifically foundation models, there is a need for [responsible AI](https://www.amazon.science/blog/responsible-ai-in-the-generative-era?sc_channel=el&sc_campaign=genaiwave&sc_content=a-network-engineers-guide-to-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq). These models are trained on vast amounts of data, which raises issues and concerns around biases in responses, accuracy, fairness, intellectual property considerations, misuse of tools, security, and privacy. Often it is challenging to mitigate all these concerns at once, since not all the ways the models can be used and respond have been discovered yet. Thankfully, there are policies and new research being conducted to address these issues. However, as a network engineer leveraging these models, you must consider these concerns. Understand your organization's policies and the policies and limitations of the models. Never enter any data into the model that you do not want made public. And as always, test, test, and test to ensure the system is working as intended.
 
 Another point I have to mention is the topic of hallucinations. This is where the model makes up inaccurate responses that are not consistent with the training data. Yes, sometimes models invent facts when they respond. The reason for this has not yet been determined. Sometimes this can be mitigated by following the prompting techniques that I mentioned about. There is a more technical approach by using a concept called [chain of verification](https://arxiv.org/pdf/2309.11495.pdf). This is where you basically create a system of checks and balances by generating a list of verification questions that are triggered when a model replies to a response. This allows for higher accuracy.
 
@@ -276,7 +277,7 @@ https://www.youtube.com/watch?v=IMCtOUaFq10
 
 ## How can you prepare?
 
-First and foremost continue to develop your knowledge and skills in network engineering. The future will need networking experts more than ever. And as you have the time, my recommendation is to get started with writing prompts in a chatbot like Amazon Bedrock's Chat Playground or ChatGPT. Once you get comfortable writing prompts in the GUI, download a generative AI coding assistant like [Amazon Code Whisperer](https://aws.amazon.com/codewhisperer/) to assist you in writing code faster.  Then advance your skills to writing custom API calls using [Amazon Bedrock](https://aws.amazon.com/bedrock/) to create your own custom tools. To aid your learning journey, here is a list of free courses and workshops:
+First and foremost continue to develop your knowledge and skills in network engineering. The future will need networking experts more than ever. And as you have the time, my recommendation is to get started with writing prompts in a chatbot like Amazon Bedrock's Chat Playground or ChatGPT. Once you get comfortable writing prompts in the GUI, download a generative AI coding assistant like [Amazon Code Whisperer](https://aws.amazon.com/codewhisperer/?sc_channel=el&sc_campaign=genaiwave&sc_content=a-network-engineers-guide-to-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) to assist you in writing code faster.  Then advance your skills to writing custom API calls using [Amazon Bedrock](https://aws.amazon.com/bedrock/?sc_channel=el&sc_campaign=genaiwave&sc_content=a-network-engineers-guide-to-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq) to create your own custom tools. To aid your learning journey, here is a list of free courses and workshops:
 
 ### Courses
 
@@ -297,4 +298,4 @@ First and foremost continue to develop your knowledge and skills in network engi
 
 ## Closing
 
-We have covered a lot of ground in this post and we only scratched the surface. Your brain may feel overloaded at this point, and that's understandable. Remember, like with everything else. Generative AI is a journey. My goal was to provide a solid starting point that you can return to as needed. There is still much more to explore. As I continue learning, I look forward to sharing new insights with you. If you have questions or want to connect, feel free to reach out via  [LinkedIn](https://www.linkedin.com/in/duanlightfoot/) or [Twitter](https://twitter.com/labeveryday). I welcome your feedback and would love to hear what you've learned on this topic as well. I challenge you go through the courses and workshops that I listed and once you are comfortable go and build something awesome! 
+We have covered a lot of ground in this post and we only scratched the surface. Your brain may feel overloaded at this point, and that's understandable. Remember, like with everything else. Generative AI is a journey. My goal was to provide a solid starting point that you can return to as needed. There is still much more to explore. As I continue learning, I look forward to sharing new insights with you. If you have questions or want to connect, feel free to reach out via  [LinkedIn](https://www.linkedin.com/in/duanlightfoot/) or [Twitter](https://twitter.com/labeveryday). I welcome your feedback and would love to hear what you've learned on this topic as well. I challenge you go through the courses and workshops that I listed and once you are comfortable go and build something awesome!
