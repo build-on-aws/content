@@ -1,6 +1,6 @@
 ---
 title: "Can Generative AI Be Used To Learn About CyberSecurity?"
-description: This article discusses how Generative AI can be used as a learning tool, augmenting traditional training methods for learning about CyberSecurity.  In this article we discuss how Generative AI might be used and what you should know before relying soley on this new technology.
+description: This article discusses how Generative AI can be used as a learning tool, augmenting traditional training methods for learning about CyberSecurity.  In this article we discuss how Generative AI might be used and what you should know before relying solely on this new technology.
 tags:
   - generative-ai
   - cybersecurity
@@ -14,9 +14,7 @@ date: 2023-10-05
 |ToC|
 |---|
 
- 
 In the rapidly evolving world of cybersecurity, staying updated with the latest knowledge and techniques is paramount. There's so many avenues one can take to learn about cybersecurity, ranging from formal training such as Degree Programs and Certification Courses, to Online Courses and Tutorials, Books, Hands-on Labs and Simulations, and more.  While traditional training methods lay the foundation, Generative AI has the potential to augment this learning, offering personalized insights, real-time simulations, and adaptive content, and if you're not already exploring what's possible, you should be. But as with all emerging technologies, it's essential to tread with caution. In this article, we'll delve into the exciting possibilities of using Generative AI as a learning tool, while also highlighting the considerations to keep in mind before fully embracing this novel approach. Join us as we navigate the future of cybersecurity education.
-
 
 ## Understanding Generative AI
 
@@ -28,11 +26,9 @@ Generative AI offers several ways to enhance interactive learning.  For example,
 
 Another interesting aspect of Generative AI is that it can produce new content on the fly, such as questions, scenarios, or simulations. As a learner, this means you can be constantly challenged and engaged.  When you couple this with the fact that Generative AI models are always learning from new data. This means they can stay updated with the current information, research, or trends. In a nutshell, Generative AI has the potential to revolutionize the interactive learning landscape by making it more personalized, dynamic, and engaging.
 
-
 ## A Working Example of Learning with LLMs
 
-In this example we'll use [Amazon Bedrock](https://aws.amazon.com/bedrock/) to interact with the Claude V2 LLM from Anthropic.  Let see how it handles teaching us about AWS Network Firewall and some attacks that it can protect against.  Here we will have a mix of AWS-specific questions as well as more general cybersecurity concepts we want to learn about. All of this is being done in the AWS Console using the chat playground.
-
+In this example we'll use [Amazon Bedrock](https://aws.amazon.com/bedrock/?sc_channel=el&sc_campaign=genaiwave&sc_content=can-generative-ai-be-used-to-learn-about-cybersecurity&sc_geo=mult&sc_country=mult&sc_outcome=acq) to interact with the Claude V2 LLM from Anthropic.  Let see how it handles teaching us about AWS Network Firewall and some attacks that it can protect against.  Here we will have a mix of AWS-specific questions as well as more general cybersecurity concepts we want to learn about. All of this is being done in the AWS Console using the chat playground.
 
 Let's begin by asking for some help understanding AWS Network Firewall:
 
@@ -44,7 +40,7 @@ As you can see, we got a response that explains what AWS Network Firewall can do
 
 Let's dig a little deeper and learn what unauthorized access is.
 
-![Asking what unauthorized access is](images/2023-10-04_16-17-56.jpg "Prompting an LLM to learn about unathorized access")
+![Asking what unauthorized access is](images/2023-10-04_16-17-56.webp "Prompting an LLM to learn about unauthorized access")
 
 Now that we are learning about unauthorized access, let's see if we can get a real-world example of what this might look like.
 
@@ -57,6 +53,5 @@ As you can see, our LLM is providing us with some helpful information.  From thi
 Because the world of cybersecurity is rapidly evolving, relying solely on Generative AI tools can be a double-edged sword. In my interview with Mike Chambers, he highlighted the potential of these tools in aiding learning, but he also emphasized the need for discernment. Generative AI models, despite their vast knowledge, are **trained** on data up to a certain point in time. This means they might not always possess the latest information, especially in fields like cybersecurity where new threats and solutions emerge frequently. As such, while these models can be a valuable supplementary resource, it's crucial to cross-reference their insights with up-to-date, authoritative sources.
 
 ## Learn More
-If you're interested in learning more about Generative AI and Large Language Models, have a look at the [Generative AI space](https://community.aws/generative-ai) on Community.AWS as well as the [BuildOn YouTube Channel](https://www.youtube.com/@BuildOnAWS).  Here you'll find several articles and videos to introduce you to the workings of Generative AI as well as examples of how to use Amazon Bedrock in your organization.  For a more formal setting, have a look at the [comprehensive course on large language models](https://www.coursera.org/learn/generative-ai-with-llms) where Mike Chambers, Antje Barth and other experts dive deep into this new and exciting technology.  As you continue to use Generative AI as a learning tool you'll quickly realize that the capabilities far exceed that of a tool for learning.  We will cover other areas of how Generative AI can be useful for cybersecurity professionals in another post. Until then, keep exploring, keep learning, and happy labbing.
 
-
+If you're interested in learning more about Generative AI and Large Language Models, have a look at the [Generative AI space](/generative-ai) on Community.AWS as well as the [BuildOn YouTube Channel](https://www.youtube.com/@BuildOnAWS).  Here you'll find several articles and videos to introduce you to the workings of Generative AI as well as examples of how to use Amazon Bedrock in your organization.  For a more formal setting, have a look at the [comprehensive course on large language models](https://www.coursera.org/learn/generative-ai-with-llms) where Mike Chambers, Antje Barth and other experts dive deep into this new and exciting technology.  As you continue to use Generative AI as a learning tool you'll quickly realize that the capabilities far exceed that of a tool for learning.  We will cover other areas of how Generative AI can be useful for cybersecurity professionals in another post. Until then, keep exploring, keep learning, and happy labbing.
