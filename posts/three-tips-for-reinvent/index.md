@@ -4,6 +4,8 @@ description: "Have you registered for AWS re:Invent? Dive into these essential t
 tags:
     - aws
     - reinvent
+spaces:
+    - reinvent
 authorGithubAlias: gaonkarr
 authorName: Rohini Gaonkar
 date: 2023-10-05
@@ -26,7 +28,7 @@ AWS re:Invent registrations have opened for 2023 and we cannot wait for the even
 
  Check out [AWS re:Invent uncovered - TOP TIPS FOR FIRST-TIME ATTENDEES](/posts/reinvent-uncovered) by AWS Community Builder [Christian Bonzelet](https://www.linkedin.com/in/christian-bonzelet/).
 
- If you need more help in finding appropriate sessions then do check out [Attendee guides](https://reinvent.awsevents.com/learn/attendee-guides/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by AWS Heroes, AWS Partners, and AWS industry teams. I definitely urge you to read [Tips for your first AWS re:Invent](https://reinvent.awsevents.com/learn/attendee-guides/reliability-engineering/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by [Sathyajith Bhat](https://aws.amazon.com/developer/community/heroes/sathyajith-bhat/?did=dh_card&trk=dh_card), AWS Container Hero.
+ If you need more help in finding appropriate sessions then do check out [Attendee guides](https://reinvent.awsevents.com/learn/attendee-guides/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by AWS Heroes, AWS Partners, and AWS industry teams. I definitely urge you to read [Tips for your first AWS re:Invent](https://reinvent.awsevents.com/learn/attendee-guides/reliability-engineering/?trk=9798ed69-1e88-43ce-9331-412979cf6c70) by [Sathyajith Bhat](https://aws.amazon.com/developer/community/heroes/sathyajith-bhat/?sc_channel=el&sc_campaign=post&sc_content=three-tips-for-reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq), AWS Container Hero.
 
  > There won’t be certification exams at re:Invent.  However, registered attendees can access a 50% discount code toward an AWS official Certification exam. More info [here](https://reinvent.awsevents.com/community/aws-certified/).
 
@@ -43,7 +45,7 @@ One of the biggest benefits of attending re:Invent in person is the networking o
 
 ### 🧑‍💻 Set up meetings
 
-If you are an AWS Customer and have AWS Account Teams, make sure you reach out and set up meetings with relevant AWS Experts. If you do not have AWS account team yet, then you can [Contact AWS](https://aws.amazon.com/contact-us/).
+If you are an AWS Customer and have AWS Account Teams, make sure you reach out and set up meetings with relevant AWS Experts. If you do not have AWS account team yet, then you can [Contact AWS](https://aws.amazon.com/contact-us/?sc_channel=el&sc_campaign=post&sc_content=three-tips-for-reinvent&sc_geo=mult&sc_country=mult&sc_outcome=ac).
 
 You can also set up meetings with other customers, and community members. Most of us do post on social media like Twitter or LinkedIn that we will be at the event and you can come say hi! AWS re:Invent is spread across a very wide area, plan early so people can make it to the venues on time. Check out re:Invent website if you need [bookable meeting and reception space](https://reinvent.awsevents.com/bookable-meeting-space/).
 
@@ -51,11 +53,11 @@ This year re:Invent’s has a new networking program called  [PeerTalk](https://
 
 ### 🧦 Did someone say swags?
 
-The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with experiences - meet experts, AWS Partners, AWS Village, [AWS DeepRacer League](https://aws.amazon.com/deepracer/league/) Arena, Builders' Fair, [AWS Builder Labs](https://reinvent.awsevents.com/learn/aws-builder-labs/), Lightning Theatres and more.
+The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with experiences - meet experts, AWS Partners, AWS Village, [AWS DeepRacer League](https://aws.amazon.com/deepracer/league/?sc_channel=el&sc_campaign=post&sc_content=three-tips-for-reinvent&sc_geo=mult&sc_country=mult&sc_outcome=ac) Arena, Builders' Fair, [AWS Builder Labs](https://reinvent.awsevents.com/learn/aws-builder-labs/), Lightning Theatres and more.
 
 You can take part in challenges and collect SWAGS!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
 
-AWS Hero [Nick Triantafillou](https://aws.amazon.com/developer/community/heroes/nick-triantafillou/) writes a re:Invent Swag guide and an honest reviews post every year. Do [check out the blog he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
+AWS Hero [Nick Triantafillou](https://aws.amazon.com/developer/community/heroes/nick-triantafillou/?sc_channel=el&sc_campaign=post&sc_content=three-tips-for-reinvent&sc_geo=mult&sc_country=mult&sc_outcome=ac) writes a re:Invent Swag guide and an honest reviews post every year. Do [check out the blog he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
 
 ### 🪩 Attend social events
 
