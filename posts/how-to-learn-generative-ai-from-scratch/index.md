@@ -29,6 +29,8 @@ Enter this article! Consider it your stepping stone in the world of generative A
 
 After talking with developers all over the world, I’m confident that the biggest barrier to learning about generative AI isn’t a lack of resources or learning material, it’s battling with the learning curve.
 
+**[The Dunning-Kruger Effect](https://commons.wikimedia.org/wiki/File:Dunning%E2%80%93Kruger_Effect_01.svg)**
+
 ![Chart of the Dunning-Kruger Effect](images/dunning-kruger.webp "Source: Wikipedia (https://commons.wikimedia.org/wiki/File:Dunning%E2%80%93Kruger_Effect_01.svg), now with sparkles")
 
 Picture this: you start out, everything’s clicking, and you feel like a big-brain AI genius. But then out of nowhere, there’s a massive reality check, like the Dunning-Kruger effect. You hit this point where you think, “Woah there’s so much I don’t know.” It’s like hitting a dip on a rollercoaster, and it’s super easy to lose confidence and motivation here.
