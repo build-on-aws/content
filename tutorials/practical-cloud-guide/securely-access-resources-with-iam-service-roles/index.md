@@ -9,7 +9,7 @@ tags:
     - iam
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-09-03
+date: 2023-10-06
 showInHomeFeed: true
 ---
 
@@ -31,10 +31,10 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 145 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
-| 🧩 Prerequisites    | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_content=migrate-a-sql-server-database-in-the-cloud&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial for a quick overview. For creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/?sc_channel=el&sc_campaign=tutorial&sc_content=migrate-a-sql-server-database-in-the-cloud&sc_geo=mult&sc_country=mult&sc_outcome=acq).|
+| 🧩 Prerequisites    | - An AWS account: If you don't have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_content=securely-access-resources-with-iam-service-roles&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial for a quick overview. For creating account follow [Create Your AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/module-one/?sc_channel=el&sc_campaign=tutorial&sc_content=securely-access-resources-with-iam-service-roles&sc_geo=mult&sc_country=mult&sc_outcome=acq).|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/practical-cloud-guide-code/tree/main/run-to-build/securely-access-resources-with-service-roles)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-09-03                            |
+| ⏰ Last Updated     | 2023-10-06                            |
 
 | ToC |
 |-----|
@@ -245,7 +245,7 @@ Time to test the updated role by uploading a file.
 upload: ./file.txt to s3://pcg-s3-service-role-tutorial/file.txt 
 ```
 
-No errors, but lets list it to make sure it is in the bucket.
+No errors, but let's list it to make sure it is in the bucket.
 
 ```bash
 [ec2-user@ip-172-31-46-36 ~]$ aws s3 ls s3://pcg-s3-service-role-tutorial
