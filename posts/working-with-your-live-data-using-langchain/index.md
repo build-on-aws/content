@@ -1,6 +1,6 @@
 ---
 title: "Working With Your Live Data Using Langchain"
-description: "Use Amazon Kendra, Amazon Translate, Amazon Comprehend and Amazon SageMaker JumpStart to build a multilingual knowledge base that can summarize search results."
+description: "Use LangChain with Amazon Bedrock and Amazon DynamoDB and to build aplications to keep conversation with LLMs with consistent and engage in a natural dialogue"
 
 tags:
     - ai-ml
