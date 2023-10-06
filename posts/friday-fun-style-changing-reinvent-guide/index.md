@@ -6,9 +6,11 @@ tags:
     - reinvent
     - prompt-engineering
     - bedrock
+spaces:
+    - reinvent
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
-date: 2023-10-05\6
+date: 2023-10-06
 images:
     thumbnail: ./images/pirate.jpeg
 ---
