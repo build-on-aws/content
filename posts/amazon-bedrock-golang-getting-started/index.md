@@ -21,7 +21,7 @@ date: 2023-10-15
 
 This article is an introductory guide for Go developers who want to get started building Generative AI applications using [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq) which is a fully managed service that makes base models from Amazon and third-party model providers accessible through an API.
 
-We will be using the [AWS Go SDK](https://aws.github.io/aws-sdk-go-v2/docs/) for Amazon Bedrock and will cover the following topics as we go along: 
+We will be using the [AWS Go SDK](https://aws.github.io/aws-sdk-go-v2/docs/) for Amazon Bedrock and cover the following topics as we go along: 
 
 - Introduction to the Bedrock Go APIs and learn how to use it for tasks such as content generation.
 - Understand how to build a simple chat application and handle streaming output from Bedrock Foundation Models.
@@ -30,6 +30,8 @@ We will be using the [AWS Go SDK](https://aws.github.io/aws-sdk-go-v2/docs/) for
 > The code examples are available in this [GitHub repository](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples) 
 
 ## Before you begin
+
+You will need to [install a recent version of Go](https://go.dev/dl/), if you don't have it already.
 
 Make sure you have [configured and set up Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/setting-up.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq), including [requesting for access](https://docs.aws.amazon.com/bedrock/latest/userguide/setting-up.html#manage-model-access?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq) to the Foundation Model(s). 
 
@@ -95,12 +97,14 @@ To start off, let's take a look at a [simple example](https://github.com/build-o
 
 We create a [bedrock.Client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client) instance and use it to get the supported Foundation Models in Bedrock using [ListFoundationModels](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client.ListFoundationModels) API.
 
-Clone the GitHub repository and change to the correct directory:
+Clone the GitHub repository, change to the correct directory:
 
 ```shell
 git clone https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples
 
 cd amazon-bedrock-go-sdk-examples
+
+go mod tidy
 ```
 
 To run this example:
@@ -177,7 +181,7 @@ Then, we include the payload in the [InvokeModel](https://pkg.go.dev/github.com/
 
 Note that this "workflow" (preparing payload with prompt, marshalling payload, model invocation and un-marshalling) will be common across our examples (and most likely in your applications) going forward with slight changes as per the model/use-case.
 
-You can also try an information extraction scenario using this :
+You can also try an information extraction scenario using this prompt:
 
 ```text
 <directory>
@@ -199,7 +203,7 @@ go run claude-information-extraction/main.go
 
 ## Chat - A canonical GenAI example
 
-We can't have GenAI article without a chat application, right? 😉
+We can't have a GenAI article without a chat application, right? 😉
 
 Continuing with the Claude model, let's look at a [coversational example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/claude-chat/main.go). While you can exchange one-off messages, this example shows how to exchange multiple messages (chat) and also retain the conversation history. 
 
@@ -404,7 +408,9 @@ go run titan-text-embedding/main.go "dog"
 go run titan-text-embedding/main.go "trex"
 ```
 
-The truth is, it's hard to figure out anything by looking at a slice of `float64`s 🤷🏽 Yes, this is probably the least exciting output you will see! It is more relevant when combined with other components such as a Vector Database (for *storing* these embeddings) and use cases like semantic search (to *make use* of these embeddings). These topics will be covered in future blog posts - for now, just bear with the fact that "it works".
+This is probably the least exciting output you will see! The truth is, it's hard to figure out anything by looking at a slice of `float64`s 🤷🏽 
+
+It is more relevant when combined with other components such as a Vector Database (for *storing* these embeddings) and use cases like semantic search (to *make use* of these embeddings). These topics will be covered in future blog posts - for now, just bear with the fact that "it works".
 
 ## Closing thoughts
 
