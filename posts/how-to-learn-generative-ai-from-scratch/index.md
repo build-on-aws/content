@@ -29,7 +29,7 @@ Enter this article! Consider it your stepping stone in the world of generative A
 
 After talking with developers all over the world, I’m confident that the biggest barrier to learning about generative AI isn’t a lack of resources or learning material, it’s battling with the learning curve.
 
-![Chart of the Dunning-Kruger Effect](images/dunning-kruger.webp "Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Dunning%E2%80%93Kruger_Effect_01.svg)")
+![Chart of the Dunning-Kruger Effect](images/dunning-kruger.webp "Source: Wikipedia (https://commons.wikimedia.org/wiki/File:Dunning%E2%80%93Kruger_Effect_01.svg), now with sparkles")
 
 Picture this: you start out, everything’s clicking, and you feel like a big-brain AI genius. But then out of nowhere, there’s a massive reality check, like the Dunning-Kruger effect. You hit this point where you think, “Woah there’s so much I don’t know.” It’s like hitting a dip on a rollercoaster, and it’s super easy to lose confidence and motivation here.
 
@@ -51,7 +51,7 @@ For example, my re:Invent session, “Use generative AI to name your pet after y
 
 This is the blueprint I use, but you can make it your own!
 
-![Brooke Jamieson's Book Report Template](images/book-report.png)
+![Brooke Jamieson's Book Report Template](images/book-report.webp)
 
 Some fields are obvious, like the “Project Name” but other fields are useful even though they seem strange. A big example of this is the “Source” field — this helps me to understand where the data and model I’m working with have come from, but it’s also really helpful for your own records as it helps you to remember where you found examples so you can find them again later. The “Elevator Pitch” field is the most important field to spend time on if you're planning on using your projects as a portfolio to land a job in generative AI in the future, so make sure you don't gloss over this element.
 
