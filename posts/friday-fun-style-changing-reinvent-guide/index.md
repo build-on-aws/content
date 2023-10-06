@@ -2,24 +2,74 @@
 title: "Fun on a Friday with Prompt Engineering and thinking about re:Invent 2023"
 description: "Prithee, kind attendees of the grand assembly of AWS re:Invent, heed this counsel for a prosperous sojourn. Don attire that grants thee comfort for thy feet, as the day is long and filled with much ambulation."
 tags:
-    - gen-ai
+    - generative-ai
     - reinvent
     - prompt-engineering
     - bedrock
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
-date: 2023-09-29
+date: 2023-10-05
 images:
     thumbnail: ./images/pirate.jpeg
 ---
 |ToC|
 |---|
 
-Friday. 13:44. Been a busy week, and I'm trying to finish off my last admin tasks. Instead, I decide to have a bit of fun. [re:Invent](https://reinvent.awsevents.com/) is just around the corner, and we're currently in what is affectionately called "pre:Invent season". Due to this, I started reading some guides people have written in the past with tips & tricks to help others get the most out of the event. I've only been to re:Invent twice so far, with vastly different experiences. First time as a customer in 2018, and last year, as an employee. The main difference for me was a 2h flight with zero timezone changes, versus my previous ~23h flights, and a 9h time difference. For context, I moved from Cape Town, South Africa to Seattle at the end of 2021.
+Friday. 13:44. Been a busy week, and I'm trying to finish off my last admin tasks. Instead, I decide to have a bit of fun. [re:Invent](https://reinvent.awsevents.com/) is just around the corner, and we're currently in what is affectionately called "pre:Invent season". Due to this, I started reading some guides people have written in the past with tips & tricks to help others get the most out of the event. I've only been to re:Invent twice so far, with vastly different experiences. First time as a customer in 2018, and last year, as an employee. The main difference for me was a 2h flight with zero timezone changes, versus my previous ~23h flights, and a 9h time difference - also way less swag (downside of being an employee).
 
 Luckily, I will have the same 2h flight this year, and when I went searching for guides to read, I saw multiple pages of results, so I won't even try to write a new one. Instead, I'm going to have some fun and try to make them more interesting. Since generative AI and large language models (LLMs) are all the rage right now, I wanted to test out how they perform with changing the style and tone of content. I've dabbled a bit with this as part of trying to build out a style guide before, and using the LLMs to validate if content adheres to it, but that was serious work with no room for making jokes. So here we are.
 
-I found this [AWS Blog post](https://aws.amazon.com/blogs/industries/ready-set-reinvent-how-to-prepare-for-aws-reinvent-2022/?sc_channel=el&sc_campaign=genaiwave&sc_content=friday-fun-style-changing-reinvent-guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) from last year, and at the bottom, it has a nice list of bullet points to make the most out of re:Invent. I decided to use this list as the input data to modify the style using my prompts, and then proceeded to test out the styles & formats with a few different models using [Amazon Bedrock]. Just to avoid any confusion, the responses below contain the generated text after providing the prompts and those bullet points.
+I found this [AWS Blog post](https://aws.amazon.com/blogs/industries/ready-set-reinvent-how-to-prepare-for-aws-reinvent-2022/?sc_channel=el&sc_campaign=genaiwave&sc_content=friday-fun-style-changing-reinvent-guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) from last year, and at the bottom, it has a nice list of bullet points to make the most out of re:Invent. I decided to use this list as the input data to modify the style using my prompts, and then proceeded to test out the styles & formats with a few different models using [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html?sc_channel=el&sc_campaign=genaiwave&sc_content=friday-fun-style-changing-reinvent-guide&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+
+## Using Amazon Bedrock
+
+The first step was to agree to the various end-user license agreements (EULA) via the [AWS Console](https://us-east-1.console.aws.amazon.com/bedrock/home?region=us-east-1#/modelaccess?sc_channel=el&sc_campaign=genaiwave&sc_content=friday-fun-style-changing-reinvent-guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) to allow access to them via the API. To accept then, click on the `Edit` button, select the ones you want to accept, then click `Save` - I selected all of them to be able to test the different ones. I then used the AWS CLI to call the different models, and this is where I needed to do some command-line work. I wanted to be able to reuse the input text, so I added the bullet points to a file called `input_text.txt`, and used `input_prompt.txt` for my prompts. The example from the [documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run-inference.html?sc_channel=el&sc_campaign=genaiwave&sc_content=friday-fun-style-changing-reinvent-guide&sc_geo=mult&sc_country=mult&sc_outcome=acq) shows the following:
+
+```bash
+aws bedrock-runtime invoke-model \ 
+    --model-id anthropic.claude-v2 \ 
+    --body "{\"prompt\": \"\n\nHuman:story of two dogs\n\nAssistant:\"}" invoke-model-output.txt
+```
+
+So the question is: how can I pipe in my prompt and my input text without manually doing some json formatting. Luckily I picked up some jq-fu from past experiences, so off we go with the updated version:
+
+```bash
+aws bedrock-runtime invoke-model \
+    --model-id anthropic.claude-v2 \
+    --body "{\"prompt\": \"\n\nHuman:$(jq -Rs . < input_prompt.txt)\n$(jq -Rs . < input_text.txt)\nAssistant:\"}" model_response_output.txt
+```
+
+And I'm greeted with `string argument should contain only ASCII characters` due to the `jq` encoded strings starting and ending a quote (`"`). For this I needed to do a search and found the following `sed` command which did the trick:
+
+```bash
+sed -e 's/^"//' -e 's/"$//'
+```
+
+Initial testing seemed to indicate this does what I expect:
+
+```bash
+# command
+jq -Rs . < input_prompt.txt | sed -e 's/^"//' -e 's/"$//'
+
+# output
+Using the following text, can you please change the style to be 16th century English, and make it more dramatic by comparing mistakes you could make with historical events prior to the 17th century?\n
+
+```
+
+So putting it all together, this now turned into, and I thought I was done:
+
+```bash
+aws bedrock-runtime invoke-model \
+    --model-id anthropic.claude-v2 \
+    --body "{\"prompt\": \"\n\nHuman:$(jq -Rs . < input_prompt.txt | sed -e 's/^"//' -e 's/"$//')\n$(jq -Rs . < input_prompt.txt | sed -e 's/^"//' -e 's/"$//')\nAssistant:\"}" model_response_output.txt
+```
+
+Except I still received the same error as before: `string argument should contain only ASCII characters`. Turns out that by using `sed`, I'm 
+
+
+> 💡If you receive an error with `aws: error: argument command: Invalid choice, valid choices are:`, you need to update your AWS CLI to the latest version, Amazon Bedrock was made generally available on 28 September 2023.
+
+Just to avoid any confusion, the responses below contain the generated text after providing the prompts and those bullet points.
 
 ## Attempt 1: Change the style
 
