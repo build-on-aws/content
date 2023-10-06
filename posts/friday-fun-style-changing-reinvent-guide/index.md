@@ -132,6 +132,7 @@ Ok, I did not expect it to be this good / bad, but that was quite good in my opi
 ![Pirate with a knife in their mouth typing on a laptop](./images/pirate.jpeg "How the pirate-speak LLM works behind the scenes to provide you with these tips.")
 
 **Prompt:**
+
 *Using the following text, can you please change the style to be in over-the-top pirate speak and more dramatic? Keep the same format with the list of sections, but change the style of all the text, and the headers.*
 
 **Response:**
