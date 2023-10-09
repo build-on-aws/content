@@ -20,8 +20,9 @@ date: 2023-10-09
 |ToC|
 |---|
 
-Software developers are embracing generative AI. With foundation models (FMs) now accessible on [Amazon Bedrock](https://aws.amazon.com/bedrock/), small teams can build and scale generative AI applications without deep machine learning (ML) expertise and resources. This post covers three high-level reference architectures for common scenarios, considerations and best-practices learned from our experience working with early adopters.
+## Introduction to Generative AI
 
+Software developers are embracing generative AI. With foundation models (FMs) now accessible on [Amazon Bedrock](https://aws.amazon.com/bedrock/), small teams can build and scale generative AI applications without deep machine learning (ML) expertise and resources. This post covers three high-level reference architectures for common scenarios, considerations and best-practices learned from our experience working with early adopters.
 ## Why Generative AI?
 
 Typically, traditional ML models only perform a single task. They require a build, train and deploy lifecycle (MLOps) which can be challenging for smaller teams. On the other hand, FMs are trained on large datasets. They use broad knowledge to solve multiple tasks, such as text generation, classification, analysis and summarisation. They enable emerging architectures previously not possible. They are significantly easier to build, scale and maintain. 
@@ -45,7 +46,10 @@ Context:
 {AWS Reference Architectures}
 
 Instruction: 
-You are an expert AWS Solutions Architect. Provide me with expert insights on {question} considering scalability, security, and cost optimization. Summarize insights and recommendations based only on the context. If the context does not provide the answer, say "I don't know".
+You are an expert AWS Solutions Architect. 
+Provide me with expert insights on {question}. 
+Summarize insights and recommendations based only on the context. 
+If the context does not provide the answer, say "I don't know".
 ```
 
 Here, you provide *context* by finding and inserting the relevant data to the question (retrieval). And, you provide *instruction* to conduct a task based on the context such as summarization (generation). Commonly, instructions can also: 
@@ -55,13 +59,13 @@ Here, you provide *context* by finding and inserting the relevant data to the qu
 Note curly brackets `{placeholders}` are template placeholders and you replace them with actual data.   
 
 ### AWS Reference Architecture for RAG Application 
+
 A RAG application consists of key components:
 * **RAG Pipeline** to process data from your knowledge sources
 * **RAG Runtime** to process user prompts 
 
 ### RAG Pipeline
 ![AWS reference architecture for a retrieval-augmented generation (RAG) pipeline](./images/image.png)
-
 First, you convert data from your knowledge source (such as Amazon S3 or Amazon DynamoDB) to an appropriate vector format for later retrieval. You adopt an open-source FM orchestration tool, such as [LangChain](https://js.langchain.com/docs/get_started/introduction) (alternatively, [LlamaIndex](https://docs.llamaindex.ai/)and [Haystack](https://docs.haystack.deepset.ai/)). These tools contain pre-built libraries for [integrating with Bedrock](https://python.langchain.com/docs/integrations/platforms/aws) and [various data sources](https://js.langchain.com/docs/modules/data_connection/).  
 
 Consider the following steps:
@@ -79,9 +83,7 @@ Consider the following steps:
 As the vector store may handle sensitive data, consider security capabilities such as encryption and access control. You can also redact or mask of personal information prior to storage. For SaaS applications, consider [multi-tenancy](https://aws.amazon.com/blogs/apn/storing-multi-tenant-saas-data-with-amazon-opensearch-service/). In addition, there are many alternative vector database options, such as [Pinecone](https://aws.amazon.com/marketplace/seller-profile?id=03ee3233-4417-4279-81ac-8e3bbd6282e8), [Weaviate](https://aws.amazon.com/marketplace/seller-profile?id=seller-jxgfug62rvpxs) and [pgvector](https://aws.amazon.com/blogs/database/leverage-pgvector-and-amazon-aurora-postgresql-for-natural-language-processing-chatbots-and-sentiment-analysis/). For prototyping, in-memory stores, such as  [Faiss](https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/faiss) and [Chroma](https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/chroma), provide a convenient developer experience.
 
 ### RAG Runtime
-
 ![AWS reference architecture for retrieval-augmented generation (RAG)](./images/image%202.png)
-
 At runtime, your application will need to process the user’s input prompt and augment it with retrieved context. Consider the following steps:
 
 **Retrieve:** You retrieve relevant data from the vector database. In addition to vector storage, vector databases provide indexing and retrieval capabilities. A starting approach is *semantic search*. Here, you convert the input prompt into embeddings. Then, you find similar embeddings in the vector database using a k-nearest neighbors (kNN) algorithm. By using vectors, you can understand the meaning behind prompts and deliver contextually relevant results.
@@ -95,17 +97,13 @@ At runtime, your application will need to process the user’s input prompt and 
 *Prompt design:* For effective prompts, be specific with instructions. This includes the desired output format (such as text within specific template or length, or a structured format such as JSON, XML, YAML and markdown). Consider best-practices from the model provider. For example, see [prompt design for Anthropic Claude](https://docs.anthropic.com/claude/docs/introduction-to-prompt-design). For prototyping, you design a number of test cases. You set [temperature](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-claude) to `0` to mitigate randomness in the output for evaluation. 
 
 ## Generative AI Chat Applications
-
 ![AWS reference architecture for generative AI chat application](./images/image%203.png)
-
 With RAG as foundation, you build a conversational chat feature to provide a fast, intuitive and natural experience for your users. While this sounds simple, it can be deceivingly challenging to build. Consider additional elements required:  
 
 **Memory:** You may need to remember previous interactions to understand follow-up questions. By default, models are stateless. However, you can incorporate [memory](https://js.langchain.com/docs/modules/memory/) with low-latency store such as [DynamoDB](https://js.langchain.com/docs/modules/memory/integrations/dynamodb).  There are advanced types of memory. For example, [conversation summary ](https://js.langchain.com/docs/modules/memory/how_to/summary)  for handling long-chat interactions. 
 
 **Latency:** As users increasingly expect fast experiences, consider response streaming. Response streaming is supported in both [Bedrock](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html) and [Lambda](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-response-streaming/).  With streaming, you return a response to the user as soon as a chunk is generated by the FM. For less complex tasks, you use a smaller FM such as [Claude Instant](https://aws.amazon.com/bedrock/claude/). Smaller models handle a narrower set of tasks, but can perform faster than larger models. 
-
 ![AWS reference architecture for scalable generative AI application](./images/image%204.png)
-
 **Throughput (requests):** Your application may require high throughput. Consider [service quotas](https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html). To manage requests per minute (RPM), you use an [Amazon Simple Queue Service \(SQS\)](https://aws.amazon.com/sqs/) queue to asynchronously process requests. 
 
 **Throughput (tokens):** With generative AI services, you also need to manage tokens processed per minute (TPM). Tokens consumed depends on the length of prompts, usage frequency which can vary widely depending on the use case. 10,000 tokens is approximately equivalent to 750 words. One approach is to limit input prompts to a maximum number of words. When you achieve scale, consider [provisioned throughput](https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html).   
@@ -114,7 +112,6 @@ With RAG as foundation, you build a conversational chat feature to provide a fas
 
 ## Generative AI Advanced Workflow Applications
 ![AWS reference architecture for an advanced generative AI workflow application](./images/image%205.png)
-
 As you build AI applications, you may start with simple model interactions. However, your user journey may have multiple steps that benefit from AI. You may require advanced, multi-step and parallel processes integrating with various systems. 
 
 As an example, content creation tools can invoke the same prompt in parallel. Leveraging the randomness of generative models, they generate multiple outputs for users to select. These outputs can be further improved through additional prompts and operations.
