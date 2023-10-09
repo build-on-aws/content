@@ -106,7 +106,7 @@ Consider the following steps:
 
 *Vector databases*: In addition to OpenSearch, you can use [pgvector](https://aws.amazon.com/blogs/database/building-ai-powered-search-in-postgresql-using-amazon-sagemaker-and-pgvector/). For prototyping, you can use in-memory stores, such as [Faiss](https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/faiss) and [Chroma](https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/chroma), which provide a convenient developer experience to get started. For third-party vector databases, AWS Marketplace provides access to leading providers including [Pinecone](https://aws.amazon.com/marketplace/seller-profile?id=03ee3233-4417-4279-81ac-8e3bbd6282e8), [Weaviate](https://aws.amazon.com/marketplace/seller-profile?id=seller-jxgfug62rvpxs) and [MongoDB Atlas Vector Search](https://www.mongodb.com/products/platform/atlas-vector-search). 
 
-#### RAG Runtime
+### RAG Runtime
 At runtime, your application will need to process the user’s original input prompt and augment it with the retrieved context. 
 ![AWS reference architecture for retrieval-augmented generation (RAG)](./images/image%202.png)
 
