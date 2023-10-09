@@ -2,7 +2,7 @@
 title: "Get Ready to Level Up Your AWS Skills at re:Invent 2023 GameDays"
 description: "Guide to GameDays at AWS re:Invent 2023"
 tags:
-  - reinvent23
+  - reinvent-2023
   - reinvent
   - gamedays
 spaces:

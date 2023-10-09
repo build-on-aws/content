@@ -2,10 +2,11 @@
 title: "Fun on a Friday with Prompt Engineering and thinking about re:Invent 2023"
 description: "Prithee, kind attendees of the grand assembly of AWS re:Invent, heed this counsel for a prosperous sojourn. Don attire that grants thee comfort for thy feet, as the day is long and filled with much ambulation."
 tags:
-    - generative-ai
+    - bedrock
     - reinvent
     - prompt-engineering
-    - bedrock
+    - generative-ai
+    - reinvent-2023
 spaces:
     - reinvent
 authorGithubAlias: cobusbernard
