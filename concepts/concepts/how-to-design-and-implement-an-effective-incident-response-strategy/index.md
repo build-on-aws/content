@@ -1,6 +1,6 @@
 ---
 title: "How to design and implement an effective incident response strategy"
-description: "An efficient response strategy is crucial to ensuring that businesses can quickly and effectively respond to incidents and minimize the impact on their operations. In this blog, will go through the key steps in designing and implementing an incident management strategy covering the 4 steps of incident response as defined by NIST, namely 1/preparation, 2/detection and analysis, 3/containment & recovery, and 4/correction of errors & continuous improvement. Lastly, we will discuss the importance of management buy in and explore the role of automation in helping organizations improve their response capabilities."
+description: "In this blog, will go through the key steps in designing and implementing an incident management strategy covering the 4 steps of incident response as defined by NIST, namely 1/preparation, 2/detection and analysis, 3/containment & recovery, and 4/correction of errors & continuous improvement."
 tags:
     - foundational
     - aws
