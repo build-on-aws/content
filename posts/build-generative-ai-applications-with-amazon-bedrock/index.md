@@ -58,13 +58,13 @@ Here, you provide *context* by finding and inserting the relevant data to the qu
 
 Note curly brackets `{placeholders}` are template placeholders and you replace them with actual data.   
 
-### AWS Reference Architecture for RAG Application 
+### AWS Reference Architecture for a RAG Application 
 
 A RAG application consists of key components:
 * **RAG Pipeline** to process data from your knowledge sources
 * **RAG Runtime** to process user prompts 
 
-### RAG Pipeline
+#### RAG Pipeline
 ![AWS reference architecture for a retrieval-augmented generation (RAG) pipeline](./images/image.png)
 First, you convert data from your knowledge source (such as Amazon S3 or Amazon DynamoDB) to an appropriate vector format for later retrieval. You adopt an open-source FM orchestration tool, such as [LangChain](https://js.langchain.com/docs/get_started/introduction) (alternatively, [LlamaIndex](https://docs.llamaindex.ai/) and [Haystack](https://docs.haystack.deepset.ai/)). These tools contain pre-built libraries for [integrating with Bedrock](https://python.langchain.com/docs/integrations/platforms/aws) and [various data sources](https://js.langchain.com/docs/modules/data_connection/).  
 
@@ -82,7 +82,7 @@ Consider the following steps:
 
 As the vector store may handle sensitive data, consider security capabilities such as encryption and access control. You can also redact or mask of personal information prior to storage. For SaaS applications, consider [multi-tenancy](https://aws.amazon.com/blogs/apn/storing-multi-tenant-saas-data-with-amazon-opensearch-service/). In addition, there are many alternative vector database options, such as [Pinecone](https://aws.amazon.com/marketplace/seller-profile?id=03ee3233-4417-4279-81ac-8e3bbd6282e8), [Weaviate](https://aws.amazon.com/marketplace/seller-profile?id=seller-jxgfug62rvpxs) and [pgvector](https://aws.amazon.com/blogs/database/leverage-pgvector-and-amazon-aurora-postgresql-for-natural-language-processing-chatbots-and-sentiment-analysis/). For prototyping, in-memory stores, such as  [Faiss](https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/faiss) and [Chroma](https://js.langchain.com/docs/modules/data_connection/vectorstores/integrations/chroma), provide a convenient developer experience.
 
-### RAG Runtime
+#### RAG Runtime
 ![AWS reference architecture for retrieval-augmented generation (RAG)](./images/image%202.png)
 At runtime, your application will need to process the user’s input prompt and augment it with retrieved context. Consider the following steps:
 
