@@ -31,6 +31,8 @@ Service-level agreements (SLAs) are contracts between a service provider (intern
 
 All three of these terms are important for building incident response plans because they provide a framework for measuring and managing the performance of a service. Once this understanding has been built, the next step is to define the classification criteria for incidents by severity or priority based on their impact to the business. This classification forms the basis of the escalation process and the mode of response. The escalation plan should include the contact details of relevant teams, modes of communication, expected time to acknowledge or respond, and the chain of command for unresponsive teams. 
 
+For prescriptive guidance on this topic, refer to the link [here](https://aws-observability.github.io/observability-best-practices/guides/operational/business/key-performance-indicators/). 
+
 At this stage, it is important to ensure that the incident classification is shared and agreed upon by the cross functional teams involved in the response. For example, for high severity incidents involving a public facing impact, businesses can sometimes involve the marketing, social media, and legal teams before sharing details of the service impairment externally. However, if these teams do not work 24x7 or have a defined on-call register it can lead to delays in external communications, leading to negative impact on the end customer experience. An effective incident response pre-empts this by defining these escalation paths in advance and having it documented and accessible to teams leading the incident response. 
 
 Important Key Performance Indicators (KPIs) for evaluating the effectiveness of the preparation step include 1/Mean time to acknowledge (MTTA), 2/Mean time to escalate (MTTE), and 3/Incident distribution by severity over a period of time. 
@@ -46,12 +48,15 @@ An important aspect of detection and analysis is understanding gray failures. Gr
 
 Important Key Performance Indicators (KPIs) for evaluating the effectiveness of the detection and analysis step include 1/Mean time to detect (MTTD) and 2/percentage of overall incidents detected through customer cases. 
 
+For details on how to implement Observability for your AWS workloads please visit the AWS Well Architected - Observability doc [here](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/implement-observability.html). 
 
 ## Containment and recovery
 
 Containment and recovery focuses on the ability of the operations teams to use the tools and dashboards available to detect and then isolate failures from spreading across the system. Effective incident response plans ensure that teams who can drive mitigation and resolution get involved in the shortest amount of time from the start of the disruption. In order for engineering teams to focus on mitigation and resolution, the incident response plan can include dedicated incident managers who handle the communication and escalation process with the larger cross functional teams. Incident Managers can also gain approvals in case mitigation or resolution involves hot fixes or deployment rollbacks. 
 
 Containment and recovery can be further enhanced through pre-emptive steps like architectural patterns that focus on static stability or using fractional deployment strategies to reduce the blast radius of disruptive changes. While these can some times be beyond the scope of incident response teams, they have a positive impact on mitigation and resolution times. 
+
+For more details on static stability, control planes, and data planes, refer to the Amazon Builders’ Library article [Static stability using Availability Zones](http://aws.amazon.com/builders-library/static-stability-using-availability-zones). 
 
 Important Key Performance Indicators (KPIs) for evaluating containment and recovery strategies include 1/mean time to mitigate, 2/mean time to resolve, and 3/availability measured as uptime, durability, or percentage of successful transactions. 
 
@@ -61,6 +66,8 @@ Important Key Performance Indicators (KPIs) for evaluating containment and recov
 Correction of errors (CoEs) or Root Cause Analysis refers to the process of objective deep dives into customer impacting events after mitigation or resolution. CoEs are effective when they are performed with a learning mindset, are blameless, and focus on architecture, tooling and process improvements and not on the operators themselves. CoEs lead to improvements to testing procedures, design, architecture, or deployment strategies. 
 
 Continuous improvement of incident management practices can involve weekly operational reviews, experienced operator reviews of procedures, communications plans and incident severity definitions, and planned chaos engineering experiments in lower or production environments. 
+
+For details on how to build an effective CoE process, please refer to the blog [here](https://aws.amazon.com/blogs/mt/why-you-should-develop-a-correction-of-error-coe/). 
 
 Important Key Performance Indicators (KPIs) for evaluating the effectiveness of CoEs and continuous improvement processes include 1/Mean time between failures (MTBF), 2/reduction in operator errors, and 3/number & percentage of improvement tasks completed per plan. 
 
@@ -72,6 +79,9 @@ Management buy-in is the backbone of high performing incident response teams and
 
 Automation is a key component of effective incident management. It can be used to automate incident reporting, tracking, and resolution. Automation can be used in communication & collaboration through alerts and notifications triggered in response to incidents. This can help to reduce the time and effort required to manually generate and distribute incident reports. Incident tracking can also be automated to automatically update incident statuses. It can also be used for assigning resources to incidents, initiating automated workflows, and triggering notifications to stakeholders. 
 
+For a deep dive on automating incident responses refer to AWS Prescriptive Guidance [here](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/automate-incident-response-and-forensics.html). 
+
 ## Conclusion
 
 By taking a proactive approach to incident management, businesses can minimize the impact of security incidents and ensure that they are prepared to handle any situation that may arise. Businesses that are successful learn from each incident to drive positive changes and build a culture of ownership. As Amazon’s CTO Werner Vogels says “Everything fails all the time”; organizations that practice their failure response are better equipped than the ones that are surprised by it. 
+
