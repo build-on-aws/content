@@ -36,7 +36,7 @@ In this post, you will delve into three high-level reference architectures, cove
 
 Typically, traditional ML models can only perform a single task. They require a build, train and deploy lifecycle (MLOps) which can be challenging for smaller teams. On the other hand, FMs are trained on large datasets. They use broad knowledge to solve multiple tasks, such as text generation, classification, analysis and summarisation — all through natural language prompts. They enable emerging architectures previously not possible. And, they are significantly easier to build, scale and maintain. 
 
-## Retrieval Augmented Generation (RAG) Application
+## Retrieval Augmented Generation (RAG)
 
 You can incorporate generative AI into your applications leveraging your own data. This is driven by a foundational architecture, *retrieval-augmented generation (RAG)*. It solves inherent knowledge limitations of FMs by integrating with data that are not part of the model’s training. All achieved without complexities associated with re-training and MLOps.
 
@@ -122,7 +122,7 @@ Consider the following steps:
 
 *Prompt design:* For effective prompts, be specific with instructions. This includes the desired output format (such as text within specific template or length, or a structured format such as JSON, XML, YAML and markdown). Consider best-practices from the model provider. For example, see [prompt design](https://docs.anthropic.com/claude/docs/introduction-to-prompt-design). For prototyping, you design a number of test cases. You set [temperature](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-claude) to `0` to mitigate randomness in the output for evaluation. 
 
-## Generative AI Chat Applications
+## Generative AI Chat
 With RAG as foundation, you build a conversational chat feature to provide a fast, intuitive and natural experience for your users. While this may sound simple, it can be deceivingly challenging to build. 
 
 ![AWS reference architecture for generative AI chat application](./images/image%203.png)
@@ -139,7 +139,7 @@ Consider additional elements:
 
 **Monitoring:** You monitor token consumption by instrumenting [custom metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html).  You add any additional context that can help you understand and manage performance, such as the model name and the tenant context. In addition, consider the [quota monitoring](https://aws.amazon.com/solutions/implementations/quota-monitor/) solution.
 
-## Generative AI Advanced Workflow Applications
+## Generative AI Advanced Workflow
 
 As you build AI applications, you may start with simple model interactions. However, your user journey may have multiple steps that benefit from AI. You may require advanced, multi-step and parallel processes integrating with various systems. For example, a content creation tool can invoke variation of prompts in parallel. Leveraging the creativity of generative models, they generate multiple outputs for users to select. These outputs can be further improved through additional prompts and operations.
 
