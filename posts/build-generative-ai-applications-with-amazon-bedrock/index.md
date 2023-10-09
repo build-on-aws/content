@@ -12,6 +12,7 @@ waves:
 images:
   banner: images/cover.jpg
   hero: images/cover.jpg
+authorGithubAlias: wirjo
 authorName: Daniel Wirjo
 date: 2023-10-09
 ---
