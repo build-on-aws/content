@@ -4,6 +4,7 @@ description: "Have you registered for AWS re:Invent? Dive into these essential t
 tags:
     - aws
     - reinvent
+    - reinvent-2023
 spaces:
     - reinvent
 authorGithubAlias: gaonkarr

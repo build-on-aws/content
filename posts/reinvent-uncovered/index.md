@@ -7,6 +7,7 @@ tags:
   - guide
   - conference
   - reinvent
+  - reinvent-2023
 space:
   - reinvent
 authorGithubAlias: cremich
