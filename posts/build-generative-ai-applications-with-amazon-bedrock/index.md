@@ -1,8 +1,27 @@
-# Patterns for building generative AI applications on Amazon Bedrock
+---
+title: "Patterns for Building Generative AI Applications on Amazon Bedrock"
+description: Software developers are embracing generative AI. This post covers high-level reference architectures for common scenarios, considerations and best-practices learned from our experience working with early adopters.
+tags:
+  - generative-ai
+  - bedrock
+  - langchain
+spaces:
+  - generative-ai
+waves:
+  - generative-ai
+images:
+  banner: images/cover.jpg
+  hero: images/cover.jpg
+authorName: Daniel Wirjo
+date: 2023-10-09
+---
 
-Software developers are embracing generative AI. With foundation models (FMs) now accessible on [Amazon Bedrock](https://aws.amazon.com/bedrock/), small teams can build and scale generative AI applications without deep machine learning (ML) expertise and resources. This post covers three high-level reference architectures for common scenarios, considerations and best-practices learned from our experience working with early adopters.   
+|ToC|
+|---|
 
-## Why generative AI?
+Software developers are embracing generative AI. With foundation models (FMs) now accessible on [Amazon Bedrock](https://aws.amazon.com/bedrock/), small teams can build and scale generative AI applications without deep machine learning (ML) expertise and resources. This post covers three high-level reference architectures for common scenarios, considerations and best-practices learned from our experience working with early adopters.
+
+## Why Generative AI?
 
 Typically, traditional ML models only perform a single task. They require a build, train and deploy lifecycle (MLOps) which can be challenging for smaller teams. On the other hand, FMs are trained on large datasets. They use broad knowledge to solve multiple tasks, such as text generation, classification, analysis and summarisation. They enable emerging architectures previously not possible. They are significantly easier to build, scale and maintain. 
 
