@@ -8,7 +8,7 @@ tags:
   - conference
   - reinvent
   - reinvent-2023
-space:
+spaces:
   - reinvent
 authorGithubAlias: cremich
 authorName: Christian Bonzelet
