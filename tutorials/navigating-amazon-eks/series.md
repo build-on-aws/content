@@ -12,6 +12,7 @@ posts:
     - managing-high-volume-batch-sqs-eks
     - eks-cluster-batch-processing
     - eks-monitor-containerized-applications
+    - eks-integrate-secrets-manager
 --- 
 |ToC|
 |---|
@@ -68,6 +69,7 @@ These tutorials guide you through optimizing the operational aspects of your EKS
 The following tutorials are included in this stage:
 
 * [Easily Monitor Containerized Applications with Amazon CloudWatch Container Insights](/tutorials/navigating-amazon-eks/eks-monitor-containerized-applications)
+* [Easily Consume AWS Secrets Manager Secrets from your Amazon EKS Workloads](/tutorials/navigating-amazon-eks/eks-integrate-secrets-manager)
 
 ## List of all Tutorials
 
