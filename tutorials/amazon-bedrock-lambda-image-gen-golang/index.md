@@ -9,8 +9,7 @@ tags:
   - serverless
   - aws-lambda
 images:
-  banner: images/website.png
-  hero: images/website.png
+  banner: images/website.jpg
 spaces:
   - generative-ai
 authorGithubAlias: abhirockzz
