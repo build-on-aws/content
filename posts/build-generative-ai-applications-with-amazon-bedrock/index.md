@@ -33,7 +33,7 @@ In this post, you will delve into three high-level reference architectures, cove
 ## Why Generative AI?
 
 Typically, traditional ML models can only perform a single task. They require a build, train and deploy lifecycle (MLOps) which can be challenging for smaller teams. On the other hand, FMs are trained on large datasets. They use broad knowledge to solve multiple tasks, such as text generation, classification, analysis and summarisation — all through natural language prompts. They enable emerging architectures previously not possible. And, they are significantly easier to build, scale and maintain. 
-![Illustration of Bedrock](./images/bedrock-illustration.jpg "Generative AI can also generate images. Pictured: 🛏️🪨 Our attempt of visually illustrating 'bedrock' with generative AI.")
+![Illustration of Bedrock](./images/bedrock-illustration.jpg "Pictured: 🛏️🪨 Our attempt of visually illustrating 'bedrock' with generative AI.")
 
 ## Retrieval Augmented Generation (RAG)
 
