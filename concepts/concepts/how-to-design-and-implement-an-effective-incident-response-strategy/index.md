@@ -14,7 +14,8 @@ authorGithubAlias: joshinik
 authorName: Nikhil Joshi
 date: 2023-09-30
 showInHomeFeed: true
-waves:resilience
+waves:
+    - resilience
 ---
 
 # How to design and implement an effective incident response strategy
