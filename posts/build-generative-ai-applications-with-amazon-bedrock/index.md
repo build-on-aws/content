@@ -24,25 +24,22 @@ date: 2023-10-11
 |ToC|
 |---|
 
-## Introduction to Generative AI
+## Introduction
 
-Recently, we have seen a real interest among teams and developers on generative AI. While some are still figuring out what it means for their business and industries, others are all in: embracing the new possibilities. At AWS, we are excited to help you along the journey - from exploration of use cases, to implementation and deployment to production. We have been genuinely captivated by the continuing evolution of generative AI: from technical advancements, to discovering new use cases, and emerging approaches to developing software. 
-
-With [Amazon Bedrock](https://aws.amazon.com/bedrock/), you can now access leading generative AI foundation models (FMs) through easy-to-use APIs. With Bedrock, even small teams can build and scale generative AI applications. Whether you're enhancing existing customer experiences or innovating with new products and services, we're excited to see what you build. 
+As software builders, we've been genuinely captivated by the continuing evolution of generative AI: from discovering new use cases, to emerging architectures for software. Now, with [Amazon Bedrock](https://aws.amazon.com/bedrock/), you can access leading generative AI foundation models (FMs) through APIs. Bedrock makes it simple for even small teams to build and scale generative AI applications. 
 
 In this post, you will delve into three high-level reference architectures, covering the key building blocks of generative AI applications. Drawn from our collaboration with early adopters, you will learn about practical considerations and emerging best-practices to guide your implementation.
 
 ## Why Generative AI?
 
 Typically, traditional ML models can only perform a single task. They require a build, train and deploy lifecycle (MLOps) which can be challenging for smaller teams. On the other hand, FMs are trained on large datasets. They use broad knowledge to solve multiple tasks, such as text generation, classification, analysis and summarisation — all through natural language prompts. They enable emerging architectures previously not possible. And, they are significantly easier to build, scale and maintain. 
+![Illustration of Bedrock](./images/bedrock-illustration.jpeg "Generative AI can also generate images. Pictured: 🛏️🪨 Our attempt of visually illustrating 'bedrock' with generative AI.")
 
 ## Retrieval Augmented Generation (RAG)
 
 You can incorporate generative AI into your applications leveraging your own data. This is driven by a foundational architecture, *retrieval-augmented generation (RAG)*. It solves inherent knowledge limitations of FMs by integrating with data that are not part of the model’s training. All achieved without complexities associated with re-training and MLOps.
 
 To illustrate, imagine a skilled researcher (retrieval) that fetches the most relevant books from a vast library, and a creative expert professional (generation) that suggests ideas and answers with the knowledge in the books.
-
-![Illustration of retrieval-augmented generation analogy](./images/rag-illustration.jpg "Illustration of RAG concept generated with Leonardo Ai")
 
 ### Example RAG Prompt
 
@@ -85,9 +82,7 @@ To orchestrate, you adopt an open-source tool, such as [LangChain](https://js.la
 ### RAG Pipeline
 
 First, you convert data from knowledge sources (such as [Amazon S3](https://aws.amazon.com/s3/) or [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)) to an appropriate vector format for later retrieval. 
-
 ![AWS reference architecture for a retrieval-augmented generation (RAG) pipeline](./images/image.png)
-
 Consider the following steps:
 
 **Prepare:** You collect, clean and transform data for later processing. For example, you transform raw data into a structured format such as JSON, identify metadata that are useful for filtering and access control, and remove any erroneous or unnecessary data. 
@@ -109,7 +104,6 @@ Consider the following steps:
 ### RAG Runtime
 At runtime, your application will need to process the user’s original input prompt and augment it with the retrieved context. 
 ![AWS reference architecture for retrieval-augmented generation (RAG)](./images/image%202.png)
-
 Consider the following steps:
 
 **Retrieve:** You retrieve relevant data from the vector database. In addition to vector storage, vector databases provide indexing and retrieval capabilities. A starting approach is *semantic search*. Here, you convert the input prompt into embeddings. Then, you find similar embeddings in the vector database using a nearest neighbors search. By using vectors, you understand the meaning behind prompts and deliver contextually relevant results. (Under the hood, a popular algorithm for vector search is Hierarchical Navigable Small World (HNSW), see [aws-samples/gofast-hnsw](https://github.com/aws-samples/gofast-hnsw)) 
@@ -122,11 +116,9 @@ Consider the following steps:
 
 *Prompt design:* For effective prompts, be specific with instructions. This includes the desired output format (such as text within specific template or length, or a structured format such as JSON, XML, YAML and markdown). Consider best-practices from the model provider. For example, see [prompt design](https://docs.anthropic.com/claude/docs/introduction-to-prompt-design). For prototyping, you design a number of test cases. You set [temperature](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-claude) to `0` to mitigate randomness in the output for evaluation. 
 
-## Generative AI Chat
+## Generative AI Chat Application
 With RAG as foundation, you build a conversational chat feature to provide a fast, intuitive and natural experience for your users. While this may sound simple, it can be deceivingly challenging to build. 
-
 ![AWS reference architecture for generative AI chat application](./images/image%203.png)
-
 Consider additional elements:  
 
 **Memory:** You may need to remember previous interactions to understand follow-up questions. By default, models are stateless. However, you can incorporate [memory](https://js.langchain.com/docs/modules/memory/) with low-latency store such as [DynamoDB](https://js.langchain.com/docs/modules/memory/integrations/dynamodb).  There are advanced types of memory. For example, [conversation summary ](https://js.langchain.com/docs/modules/memory/how_to/summary)  for handling long-chat interactions. 
@@ -139,12 +131,10 @@ Consider additional elements:
 
 **Monitoring:** You monitor token consumption by instrumenting [custom metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html).  You add any additional context that can help you understand and manage performance, such as the model name and the tenant context. In addition, consider the [quota monitoring](https://aws.amazon.com/solutions/implementations/quota-monitor/) solution.
 
-## Generative AI Advanced Workflow
+## Generative AI Advanced Workflow Application
 
 As you build AI applications, you may start with simple model interactions. However, your user journey may have multiple steps that benefit from AI. You may require advanced, multi-step and parallel processes integrating with various systems. For example, a content creation tool can invoke variation of prompts in parallel. Leveraging the creativity of generative models, they generate multiple outputs for users to select. These outputs can be further improved through additional prompts and operations.
-
 ![AWS reference architecture for an advanced generative AI workflow application](./images/image%205.png)
-
 Consider additional elements:
 
 **Orchestration:** In the infrastructure layer, you can orchestrate a workflow with event-driven services such as [Amazon EventBridge](https://aws.amazon.com/eventbridge/) and [AWS Step Functions](https://aws.amazon.com/step-functions/). In the application layer, tools such as LangChain support [chains](https://js.langchain.com/docs/modules/chains/) and [agents](https://js.langchain.com/docs/modules/agents/). 
