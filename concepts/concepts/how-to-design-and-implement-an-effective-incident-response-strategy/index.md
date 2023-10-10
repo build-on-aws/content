@@ -7,12 +7,13 @@ tags:
     - incident-response
     - correction-of-errors
     - preparation
-    - detection and analysis
+    - resilience
     - containment and recovery
+    - observability
 authorGithubAlias: joshinik
 authorName: Nikhil Joshi
 date: 2023-09-30
-showInHomeFeed: false
+showInHomeFeed: true
 ---
 
 # How to design and implement an effective incident response strategy
