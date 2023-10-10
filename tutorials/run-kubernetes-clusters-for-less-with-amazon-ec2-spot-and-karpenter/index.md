@@ -58,7 +58,7 @@ One of the main advantages of using Karpenter is the simplicity of configuring S
 
 > 💡 Tip: You can control in which region to launch the Cloud9 environment by [setting up](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) the `AWS_REGION` environment variable.
 
-I’ve prepared an AWS CloudFormation template to create a Cloud9 environment. It has all the tools to follow this tutorial like kubectl and Terraform CLI. You can either create the CloudFormation stack through the [AWS Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), or do it through the command line. I'm going to give you all the commands you need to run to create the stack using the CLI.
+I’ve prepared an AWS CloudFormation template to create a Cloud9 environment. It has all the tools to follow this tutorial like kubectl and Terraform CLI. You can either create the CloudFormation stack through the [AWS Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), or do it through the command line. You can download the CloudFormation template [here](https://raw.githubusercontent.com/build-on-aws/run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter/main/cloud9-cnf.yaml?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq). I'm going to give you all the commands you need to run to create the stack using the CLI.
 
 > 💡 **IMPORTANT**: You need to use the same IAM user/role both in the AWS Console and the AWS CLI setup. Othewrise, when you try to open the Cloud9 environment you won't have permissions to do it.
 
@@ -136,7 +136,21 @@ The EKS cluster already has a static managed node group configured in advance fo
 
 > 💡 Tip: Karpenter simplifies the data plane capacity management using an approach called **group-less auto scaling**. This is because Karpenter is no longer using node groups, which match with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), to launch nodes. Over time, clusters using the paradigm of running different types of applications (that require different capacity types), end up with a complex configuration and operational model where node groups must be defined and provided in advance.
 
-You need to create two environment variables that we’ll use next. The values you need can be obtained from the Terraform output variables. Make sure you’re in the same folder where the Terraform `main.tf` file lives and run the following command:
+Before you continue, you need to enable your AWS account to launch Spot instances if you haven't launch any yet. To do so, create the [service-linked role for Spot](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#service-linked-roles-spot-instance-requests?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) by running the following command:
+
+```bash
+aws iam create-service-linked-role --aws-service-name spot.amazonaws.com || true
+```
+
+If the role has already been successfully created, you will see:
+
+```bash
+An error occurred (InvalidInput) when calling the CreateServiceLinkedRole operation: Service role name AWSServiceRoleForEC2Spot has been taken in this account, please try a different suffix.
+```
+
+You don't need to worry about this error, you simply had to run the above command to make sure you have the service-linked role to launch Spot instances.
+
+Now, you need to create two environment variables that we’ll use next. The values you need can be obtained from the Terraform output variables. Make sure you’re in the same folder where the Terraform `main.tf` file lives and run the following command:
 
 ```bash
 export CLUSTER_NAME=$(terraform output -raw cluster_name)
@@ -370,7 +384,7 @@ In the third terminal, run the following command to send a Spot interruption:
 
 ```bash
 FIS_EXP_TEMP_ID=$(aws cloudformation describe-stacks --stack-name fis-spot-and-karpenter --query "Stacks[0].Outputs[?OutputKey=='FISExperimentID'].OutputValue" --output text)
-FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id $FIS_EXP_TEMP_ID --no-cli-pager --query "experiment.id" --output text)
+aws fis start-experiment --experiment-template-id $FIS_EXP_TEMP_ID --no-cli-pager
 ```
 
 Review what happens by looking at the Karpenter logs, as soon as the Spot interruption warning lands, Karpenter immediately cordons and drains the node, but also launches a replacement instance:
@@ -450,6 +464,7 @@ kubectl delete deployment stateful
 Wait 30 seconds until the nodes that Karpenter launched are gone (due to consolidation), then remove all resources:
 
 ```bash
+export TF_VAR_region=$AWS_REGION
 terraform destroy -target="module.eks_blueprints_addons" --auto-approve
 terraform destroy -target="module.eks" --auto-approve
 terraform destroy --auto-approve
