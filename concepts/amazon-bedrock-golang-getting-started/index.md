@@ -222,7 +222,7 @@ go run claude-chat/main.go --verbose
 
 Here is an output of a conversation I had. Notice how the last response is generated based on previous responses - thanks to the chat history retention:
 
-![](images/chat.png)
+![Chat application](images/chat.png)
 
 ## Using the Streaming API
 
