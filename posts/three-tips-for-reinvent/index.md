@@ -58,7 +58,7 @@ The [re:Invent Expo](https://reinvent.awsevents.com/learn/expo/) is filled with 
 
 You can take part in challenges and collect SWAGS!  Keep lots of empty space in your luggage for this one! If you collected but don't like any, make sure you drop it in the Swag donation box!
 
-AWS Hero [Nick Triantafillou](https://aws.amazon.com/developer/community/heroes/nick-triantafillou/?sc_channel=el&sc_campaign=post&sc_content=three-tips-for-reinvent&sc_geo=mult&sc_country=mult&sc_outcome=ac) writes a re:Invent Swag guide and an honest reviews post every year. Do [check out the blog he wrote for 2022](https://medium.com/@ntriantafillou/aws-re-invent-2022-swag-review-b9f908028e9c).
+AWS Hero [Nick Triantafillou](https://aws.amazon.com/developer/community/heroes/nick-triantafillou/?sc_channel=el&sc_campaign=post&sc_content=three-tips-for-reinvent&sc_geo=mult&sc_country=mult&sc_outcome=ac) writes a re:Invent Swag guide and an honest reviews post every year. Do [check out the blog he wrote for 2022](https://dev.to/aws-builders/reinvent-swag-guide-3j3p).
 
 ### 🪩 Attend social events
 
