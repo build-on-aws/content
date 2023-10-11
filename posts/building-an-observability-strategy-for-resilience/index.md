@@ -6,8 +6,8 @@ tags:
     - observability
     - resilience
     - devops
-    - disaster recovery
-    - high availability
+    - disaster-recovery
+    - high-availability
 waves:
   - resilience
 authorGithubAlias: khubyar
