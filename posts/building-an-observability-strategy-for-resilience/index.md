@@ -6,11 +6,13 @@ tags:
     - observability
     - resilience
     - devops
+    - disaster recovery
+    - high availability
 waves:
   - resilience
 authorGithubAlias: khubyar
 authorName: Khubyar Behramsha
-date: 2023-09-20
+date: 2023-10-16
 showInHomeFeed: true
 ---
 
@@ -26,9 +28,11 @@ Let's start by aligning on definitions for terms we'll use throughout this blog:
 
 ## Establishing resilience objectives, SLIs and establishing a baseline
 
-Before planning any journey, its important to know where you are starting from and where you want to go. Things are no different here. To start building an observability strategy, it's important to know what we are working toward, and that is where having well-defined resilience objectives comes in. Resilience objectives can be broken down into two distinct categories, [high availability (HA) and disaster recovery (DR)](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/high-availability-is-not-disaster-recovery.html). HA targets, typically referred to as service level objectives, or SLOs, are set as a percentage value and provide users with information on what to expect from the service. For example, the [availability design goal for the Amazon CloudWatch Metrics service](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/appendix-a-designed-for-availability-for-select-aws-services.html) is 99.990%, meaning the service team builds this service so that users of CloudWatch Metrics can access and use the service sucessfully 99.990% of the time.
+Before planning any journey, its important to know where you are starting from and where you want to go. Things are no different here. To start building an observability strategy, it's important to know what we are working toward, and that is where having well-defined resilience objectives comes in. Resilience objectives can be broken down into two distinct categories, [high availability (HA) and disaster recovery (DR)](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/high-availability-is-not-disaster-recovery.html). HA targets, typically referred to as service level objectives, or SLOs, are set as a percentage value and provide users with information on what to expect from the service. For example, the [availability design goal for the Amazon CloudWatch Metrics service](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/appendix-a-designed-for-availability-for-select-aws-services.html) is 99.99%, meaning the service team builds this service so that users of CloudWatch Metrics can access and use the service sucessfully 99.99% of the time.
 
-![Calculating availability](images/calculate-availability2.png)
+<!-- ![Calculating availability](images/calculate-availability2.png) -->
+
+$$ Availability = \frac{\text{Successfully Processed Units of Work}}{\text{Total Valid Units of Work Received}} $$
 
 [DR objectives](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/business-continuity-plan-bcp.html#recovery-objectives-rto-and-rpo) are commonly measured in terms of recovery point objective (RPO) and recovery time objective (RTO), or simply, "how much data can you lose?" and "how long can your service be disrupted?". Establishing these requires collaboration between technology and business teams and a discussion on the tradeoffs between complexity, cost, and resources required to meet the objectives. Defining these goals should happen on a case by case basis, however, workloads can be tiered by criticality so that general resilience and observability guidelines can be applied to similar workloads. These tiers provide a scaling mechanism for your observability strategy. Though defining objectives upfront can be time consuming and challenging, once they are in place, all teams will have common target to work toward. 
 
