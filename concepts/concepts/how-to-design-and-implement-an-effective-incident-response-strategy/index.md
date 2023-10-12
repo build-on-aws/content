@@ -53,7 +53,7 @@ Important Key Performance Indicators (KPIs) for evaluating the effectiveness of 
 
 For details on how to implement Observability for your AWS workloads please visit the AWS Well Architected - Observability doc [here](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/implement-observability.html). 
 
-## 3. Containment and recovery
+## 3. Containment and Recovery
 
 Containment and recovery focuses on the ability of the operations teams to use the tools and dashboards available to detect and then isolate failures from spreading across the system. Effective incident response plans ensure that teams who can drive mitigation and resolution get involved in the shortest amount of time from the start of the disruption. In order for engineering teams to focus on mitigation and resolution, the incident response plan can include dedicated incident managers who handle the communication and escalation process with the larger cross functional teams. Incident Managers can also gain approvals in case mitigation or resolution involves hot fixes or deployment rollbacks. 
 
