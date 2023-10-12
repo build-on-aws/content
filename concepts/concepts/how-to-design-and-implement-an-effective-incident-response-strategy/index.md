@@ -61,7 +61,7 @@ Containment and recovery can be further enhanced through pre-emptive steps like 
 
 For more details on static stability, control planes, and data planes, refer to the Amazon Builders’ Library article [Static stability using Availability Zones](http://aws.amazon.com/builders-library/static-stability-using-availability-zones). 
 
-Important Key Performance Indicators (KPIs) for evaluating containment and recovery strategies include 1/mean time to mitigate, 2/mean time to resolve, and 3/availability measured as uptime, durability, or percentage of successful transactions. 
+Important Key Performance Indicators (KPIs) for evaluating containment and recovery strategies include: 1/mean time to mitigate, 2/mean time to resolve, and 3/availability measured as uptime, durability, or percentage of successful transactions. 
 
 
 ## 4. Correction of errors & continuous improvement
