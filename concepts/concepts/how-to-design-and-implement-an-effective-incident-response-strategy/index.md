@@ -74,7 +74,7 @@ For details on how to build an effective CoE process, please refer to the blog [
 
 Important Key Performance Indicators (KPIs) for evaluating the effectiveness of CoEs and continuous improvement processes include: 1/Mean time between failures (MTBF), 2/reduction in operator errors, and 3/number & percentage of improvement tasks completed per plan. 
 
-## Management buy in and chain of command
+## Management Buy In and Chain of Command
 
 Management buy-in is the backbone of high performing incident response teams and is required for each of the 4 steps outlined above to be effective. During the preparation step, senior leadership involvement can ensure cross functional alignment, approve escalation plans, and resolve conflicts in support structures. Senior leaders can a culture of ownership and autonomy which can reduce mitigation times by involving the responsible teams early in the incident life cycle. It plays an important role in ensuring CoE meetings stay blameless and the action items are prioritized and resolved by the responsible teams. 
 
