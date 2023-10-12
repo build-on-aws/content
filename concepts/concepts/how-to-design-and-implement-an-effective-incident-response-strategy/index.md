@@ -49,7 +49,7 @@ A key goal of observability is detecting errors or failures before they manifest
 
 An important aspect of detection and analysis is understanding gray failures. [Gray failures](https://docs.aws.amazon.com/whitepapers/latest/advanced-multi-az-resilience-patterns/gray-failures.html) are a type of failure that are not immediately detected or flagged as an error in an IT system. Gray failures can cause intermittent issues that can be difficult to diagnose and troubleshoot, leading to delayed resolution and potential impact on business operations. These failures can also go unnoticed for long periods, leading to unexpected downtime and data loss. Detecting gray failures requires building [differential observability](https://docs.aws.amazon.com/whitepapers/latest/advanced-multi-az-resilience-patterns/gray-failures.html) which enhance on the underlying systems observability to also equip the consumers of your systems to both quickly detect and mitigate the impact of a gray failure.
 
-Important Key Performance Indicators (KPIs) for evaluating the effectiveness of the detection and analysis step include 1/Mean time to detect (MTTD) and 2/percentage of overall incidents detected through customer cases. 
+Important Key Performance Indicators (KPIs) for evaluating the effectiveness of the detection and analysis step include: 1/Mean time to detect (MTTD) and 2/percentage of overall incidents detected through customer cases. 
 
 For details on how to implement Observability for your AWS workloads please visit the AWS Well Architected - Observability doc [here](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/implement-observability.html). 
 
