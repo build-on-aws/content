@@ -136,7 +136,15 @@ Click **Generate Image** to start the process. After a few seconds, you should s
 
 **Modify the model parameters**
 
-The Stability Diffusion model allows us to [fine-tune the generation parameters](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-diffusion/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq). Click **Show Configuration** to edit these.
+The Stability Diffusion model allows us to [refine the generation parameters](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-diffusion?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) as per our requirements. 
+
+The Stability.ai Diffusion models support the following controls:
+
+- *Prompt strength* (`cfg_scale`) controls the image's fidelity to the prompt, with lower values increasing randomness.
+- *Generation step* (`steps`) determines the accuracy of the result, with more steps producing more precise images.
+- *Seed* (`seed`) sets the initial noise level, allowing for reproducible results when using the same seed and settings.
+
+Click **Show Configuration** to edit these.
 
 ![Website configuration](images/config.png)
 
@@ -236,7 +244,9 @@ Finally, we configure Lambda function integration with API Gateway, add the HTTP
 
 > You can refer to the [Lambda Function code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/function/main.go)
 
-In the function handler, we extract the prompt from the HTTP request body, and the configuration from the query parameters. Then it's used to call the model using [bedrockruntime.InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) function. The output is returned as an [events.APIGatewayV2HTTPResponse](https://pkg.go.dev/github.com/aws/aws-lambda-go/events#APIGatewayV2HTTPResponse) object along with CORS headers. 
+In the function handler, we extract the prompt from the HTTP request body, and the configuration from the query parameters. Then it's used to call the model using [bedrockruntime.InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) function. 
+
+The output body returned from Amazon Bedrock Stability Diffusion model is a JSON payload which is converted into a [stabilityai.Response](https://github.com/abhirockzz/amazon-bedrock-go-inference-params/blob/master/stabilityai/stabilityai_diffusion.go#L16) `struct` (part of an external utility library). It contains the actual image as a `base64` string. This is returned as an [events.APIGatewayV2HTTPResponse](https://pkg.go.dev/github.com/aws/aws-lambda-go/events#APIGatewayV2HTTPResponse) object along with `CORS` headers.
 
 ```go
 func handler(ctx context.Context, req events.APIGatewayV2HTTPRequest) (events.APIGatewayV2HTTPResponse, error) {
