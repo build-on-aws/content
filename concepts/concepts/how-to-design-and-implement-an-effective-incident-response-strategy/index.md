@@ -78,7 +78,7 @@ Important Key Performance Indicators (KPIs) for evaluating the effectiveness of 
 
 Management buy-in is the backbone of high performing incident response teams and is required for each of the 4 steps outlined above to be effective. During the preparation step, senior leadership involvement can ensure cross functional alignment, approve escalation plans, and resolve conflicts in support structures. Senior leaders can a culture of ownership and autonomy which can reduce mitigation times by involving the responsible teams early in the incident life cycle. It plays an important role in ensuring CoE meetings stay blameless and the action items are prioritized and resolved by the responsible teams. 
 
-## Role of automation in incident management 
+## Role of Automation in Incident Management
 
 Automation is a key component of effective incident management. It can be used to automate incident reporting, tracking, and resolution. Automation can be used in communication & collaboration through alerts and notifications triggered in response to incidents. This can help to reduce the time and effort required to manually generate and distribute incident reports. Incident tracking can also be automated to automatically update incident statuses. It can also be used for assigning resources to incidents, initiating automated workflows, and triggering notifications to stakeholders. 
 
