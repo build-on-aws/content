@@ -160,7 +160,7 @@ You were able to set up and try the complete solution. Before we wrap up, let's 
 
 Since we will only focus on the important bits, a lot of the code (print statements, error handling etc.) has been omitted for brevity.
 
-**CDK**
+### CDK
 
 > You can refer to the [CDK code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/cdk/cdk.go)
 
@@ -232,7 +232,7 @@ Finally, we configure Lambda function integration with API Gateway, add the HTTP
 ```
 
 
-**Lambda function**
+### Lambda function
 
 > You can refer to the [Lambda Function code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/function/main.go)
 
