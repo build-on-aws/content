@@ -151,7 +151,7 @@ Here is the [code](https://github.com/build-on-aws/amazon-bedrock-go-sdk-example
     //...
 	brc := bedrockruntime.NewFromConfig(cfg)
 
-	payload := claude.Request{
+	payload := {
 		Prompt:            fmt.Sprintf(claudePromptFormat, prompt),
 		MaxTokensToSample: 2048,
 		Temperature:       0.5,
@@ -167,7 +167,7 @@ Here is the [code](https://github.com/build-on-aws/amazon-bedrock-go-sdk-example
 		ContentType: aws.String("application/json"),
 	})
 
-	var resp claude.Response
+	var resp Response
 
 	err = json.Unmarshal(output.Body, &resp)
     //.....
@@ -175,9 +175,7 @@ Here is the [code](https://github.com/build-on-aws/amazon-bedrock-go-sdk-example
 
 We get the [bedrockruntime.Client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client) instance, and create the payload containing the request we need to send Amazon Bedrock (this includes the prompt as well). The payload is `JSON` formatted and it's details are well documented here - [Inference parameters for foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-> For convenience, I created [this helper library](https://github.com/abhirockzz/amazon-bedrock-go-inference-params) that contains Go `struct`s to represent the inference parameters for different models.
-
-Then, we include the payload in the [InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) call. Note the `ModelId` in the call that you can get from the list of [Base model IDs](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids-arns.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq). The `JSON` response is then converted to a `claude.Response` struct.
+Then, we include the payload in the [InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) call. Note the `ModelId` in the call that you can get from the list of [Base model IDs](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids-arns.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq). The `JSON` response is then converted to a `Response` struct.
 
 Note that this "workflow" (preparing payload with prompt, marshalling payload, model invocation and un-marshalling) will be common across our examples (and most likely in your applications) going forward with slight changes as per the model/use-case.
 
@@ -254,7 +252,7 @@ Here is the first part - business as usual. We create a payload with the prompt 
     //...
 	brc := bedrockruntime.NewFromConfig(cfg)
 
-	payload := claude.Request{
+	payload := Request{
 		Prompt:            fmt.Sprintf(claudePromptFormat, prompt),
 		MaxTokensToSample: 2048,
 		Temperature:       0.5,
@@ -286,21 +284,21 @@ The function passed into it is of the type `type StreamingOutputHandler func(ctx
     //...
 ```
 
-Take a look at what the `processStreamingOutput` function does (some parts of the code omitted for brevity). `InvokeModelWithResponseStreamOutput` provides us access to a channel of events (of type [types.ResponseStream](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types#ResponseStream)) which contains the event payload. This is nothing but a `JSON` formatted string with the partially generated response by the LLM - we convert it into a `claude.Response` struct. 
+Take a look at what the `processStreamingOutput` function does (some parts of the code omitted for brevity). `InvokeModelWithResponseStreamOutput` provides us access to a channel of events (of type [types.ResponseStream](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types#ResponseStream)) which contains the event payload. This is nothing but a `JSON` formatted string with the partially generated response by the LLM - we convert it into a `Response` struct. 
 
 We invoke the `handler` function (it prints the partial response to the console) and make sure we keep building the complete response as well by adding the partial bits - the complete response is finally returned from the function.
 
 ```go
-func processStreamingOutput(output *bedrockruntime.InvokeModelWithResponseStreamOutput, handler StreamingOutputHandler) (claude.Response, error) {
+func processStreamingOutput(output *bedrockruntime.InvokeModelWithResponseStreamOutput, handler StreamingOutputHandler) (Response, error) {
 
 	var combinedResult string
-	resp := claude.Response{}
+	resp := Response{}
 
 	for event := range output.GetStream().Events() {
 		switch v := event.(type) {
 		case *types.ResponseStreamMemberChunk:
 
-			var resp claude.Response
+			var resp Response
 			err := json.NewDecoder(bytes.NewReader(v.Value.Bytes)).Decode(&resp)
 			if err != nil {
 				return resp, err
@@ -353,7 +351,7 @@ go run stablediffusion-image-gen/main.go "rocket ship launching from forest with
 
 Here is a quick walkthrough of the code (minus error handling etc.). 
 
-The output payload from the `InvokeModel` call result is converted to a [stabilityai.Response](https://github.com/abhirockzz/amazon-bedrock-go-inference-params/blob/master/stabilityai/stabilityai_diffusion.go) struct which is further deconstructed to extract the `base64` image (encoded as `[]byte`) and decoded using [encoding/base64](https://pkg.go.dev/encoding/base64) and write the final `[]byte` into an output file (format `output-<timestamp>.jpg`).
+The output payload from the `InvokeModel` call result is converted to a `Response` struct which is further deconstructed to extract the `base64` image (encoded as `[]byte`) and decoded using [encoding/base64](https://pkg.go.dev/encoding/base64) and write the final `[]byte` into an output file (format `output-<timestamp>.jpg`).
 
 
 ```go
@@ -362,8 +360,8 @@ The output payload from the `InvokeModel` call result is converted to a [stabili
 
     prompt := os.Args[1]
 
-	payload := stabilityai.Request{
-		TextPrompts: []stabilityai.TextPrompt{{Text: prompt}},
+	payload := Request{
+		TextPrompts: []TextPrompt{{Text: prompt}},
 		CfgScale:    10,
 		Seed:        0,
 		Steps:       50,
@@ -377,7 +375,7 @@ The output payload from the `InvokeModel` call result is converted to a [stabili
 		ContentType: aws.String("application/json"),
 	})
 
-	var resp stabilityai.Response
+	var resp Response
 
 	err = json.Unmarshal(output.Body, &resp)
 
@@ -388,8 +386,6 @@ The output payload from the `InvokeModel` call result is converted to a [stabili
 	err = os.WriteFile(outputFile, decoded, 0644)
     //...
 ```
-
-> Note that [`DecodeImage` is a utility function](https://github.com/abhirockzz/amazon-bedrock-go-inference-params/blob/master/stabilityai/stabilityai_diffusion.go#L26)
 
 Notice the model parameters (`CfgScale`, `Seed` and `Steps`) - their values depend on your use case. For e.g. `CfgScale` determines how much the final image portrays the prompt - use a lower number to increase randomness in the generation. Refer to the Amazon Bedrock [Inference Parameters](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-diffusion?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq) documentation for details.
 
