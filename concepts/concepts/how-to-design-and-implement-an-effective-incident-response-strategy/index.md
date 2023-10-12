@@ -72,7 +72,7 @@ Continuous improvement of incident management practices can involve weekly opera
 
 For details on how to build an effective CoE process, please refer to the blog [here](https://aws.amazon.com/blogs/mt/why-you-should-develop-a-correction-of-error-coe/). 
 
-Important Key Performance Indicators (KPIs) for evaluating the effectiveness of CoEs and continuous improvement processes include 1/Mean time between failures (MTBF), 2/reduction in operator errors, and 3/number & percentage of improvement tasks completed per plan. 
+Important Key Performance Indicators (KPIs) for evaluating the effectiveness of CoEs and continuous improvement processes include: 1/Mean time between failures (MTBF), 2/reduction in operator errors, and 3/number & percentage of improvement tasks completed per plan. 
 
 ## Management buy in and chain of command
 
