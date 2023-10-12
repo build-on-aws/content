@@ -41,7 +41,7 @@ At this stage, it is important to ensure that the incident classification is sha
 Important Key Performance Indicators (KPIs) for evaluating the effectiveness of the preparation step include: 1/Mean time to acknowledge (MTTA), 2/Mean time to escalate (MTTE), and 3/Incident distribution by severity over a period of time. 
 
 
-## 2. Detection and analysis
+## 2. Detection and Analysis
 
 Detection and analysis, sometimes known as observability, is the ability to determine the current state of a system by collecting information from multiple sources. There are three primary types of observability: monitoring, diagnostics, and tracing. Monitoring involves collecting basic information about the system, such as CPU and memory usage. Diagnostics collect more detailed information about the system, such as log files and error messages. Tracing follows the path of a request through a distributed system, which can help identify performance issues and bottlenecks. Observability tools such as dashboards, alerts, and log management systems can help organizations gain insight into their systems and identify issues before they become problems. These systems add a layer of intelligence by correlating errors, logs, traces, CPU, and memory usage to identify potential issues and file incidents according to criteria defined during preparation. 
 
