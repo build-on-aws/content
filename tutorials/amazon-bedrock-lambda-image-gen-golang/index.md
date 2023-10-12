@@ -134,7 +134,7 @@ Click **Generate Image** to start the process. After a few seconds, you should s
 ![Website](images/website.jpg)
 
 
-**Modify the model parameters**
+### Modify the model parameters
 
 The Stability Diffusion model allows us to [refine the generation parameters](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-diffusion?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) as per our requirements. 
 
@@ -244,9 +244,9 @@ Finally, we configure Lambda function integration with API Gateway, add the HTTP
 
 > You can refer to the [Lambda Function code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/function/main.go)
 
-In the function handler, we extract the prompt from the HTTP request body, and the configuration from the query parameters. Then it's used to call the model using [bedrockruntime.InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) function. 
+In the function handler, we extract the prompt from the HTTP request body, and the configuration from the query parameters. Then it's used to call the model using [bedrockruntime.InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) function. Note the JSON payload sent to Amazon Bedrock is represented by an instance of the `Request` struct. 
 
-The output body returned from Amazon Bedrock Stability Diffusion model is a JSON payload which is converted into a [stabilityai.Response](https://github.com/abhirockzz/amazon-bedrock-go-inference-params/blob/master/stabilityai/stabilityai_diffusion.go#L16) `struct` (part of an external utility library). It contains the actual image as a `base64` string. This is returned as an [events.APIGatewayV2HTTPResponse](https://pkg.go.dev/github.com/aws/aws-lambda-go/events#APIGatewayV2HTTPResponse) object along with `CORS` headers.
+The output body returned from Amazon Bedrock Stability Diffusion model is a JSON payload which is converted into a `Response` struct which contains the generated image as a `base64` string. This is returned as an [events.APIGatewayV2HTTPResponse](https://pkg.go.dev/github.com/aws/aws-lambda-go/events#APIGatewayV2HTTPResponse) object along with `CORS` headers.
 
 ```go
 func handler(ctx context.Context, req events.APIGatewayV2HTTPRequest) (events.APIGatewayV2HTTPResponse, error) {
@@ -257,8 +257,8 @@ func handler(ctx context.Context, req events.APIGatewayV2HTTPRequest) (events.AP
 	seed, _ := strconv.Atoi(req.QueryStringParameters["seed"])
 	steps, _ := strconv.Atoi(req.QueryStringParameters["steps"])
 
-	payload := stabilityai.Request{
-		TextPrompts: []stabilityai.TextPrompt{{Text: prompt}},
+	payload := Request{
+		TextPrompts: []TextPrompt{{Text: prompt}},
 		CfgScale:    cfgScaleF,
 		Steps: steps,
 	}
@@ -275,7 +275,7 @@ func handler(ctx context.Context, req events.APIGatewayV2HTTPRequest) (events.AP
 		ContentType: aws.String("application/json"),
 	})
 
-	var resp stabilityai.Response
+	var resp Response
 
 	err = json.Unmarshal(output.Body, &resp)
 
@@ -290,6 +290,29 @@ func handler(ctx context.Context, req events.APIGatewayV2HTTPRequest) (events.AP
 			"Access-Control-Allow-Methods": "POST,OPTIONS",
 		},
 	}, nil
+}
+
+//request/response model
+
+type Request struct {
+	TextPrompts []TextPrompt `json:"text_prompts"`
+	CfgScale    float64      `json:"cfg_scale"`
+	Steps       int          `json:"steps"`
+	Seed        int          `json:"seed"`
+}
+
+type TextPrompt struct {
+	Text string `json:"text"`
+}
+
+type Response struct {
+	Result    string     `json:"result"`
+	Artifacts []Artifact `json:"artifacts"`
+}
+
+type Artifact struct {
+	Base64       string `json:"base64"`
+	FinishReason string `json:"finishReason"`
 }
 ```
 
