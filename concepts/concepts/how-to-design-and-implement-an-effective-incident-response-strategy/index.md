@@ -38,7 +38,7 @@ For prescriptive guidance on this topic, refer to the link [here](https://aws-ob
 
 At this stage, it is important to ensure that the incident classification is shared and agreed upon by the cross-functional teams involved in the response. For example, for high severity incidents involving a public-facing impact, businesses can sometimes involve the marketing, social media, and legal teams before sharing details of the service impairment externally. However, if these teams do not work 24/7 or have a defined on call register it can lead to delays in external communications, leading to negative impact on the end customer experience. An effective incident response preempts this by defining these escalation paths in advance and having it documented and accessible to teams leading the incident response. 
 
-Important Key Performance Indicators (KPIs) for evaluating the effectiveness of the preparation step include 1/Mean time to acknowledge (MTTA), 2/Mean time to escalate (MTTE), and 3/Incident distribution by severity over a period of time. 
+Important Key Performance Indicators (KPIs) for evaluating the effectiveness of the preparation step include: 1/Mean time to acknowledge (MTTA), 2/Mean time to escalate (MTTE), and 3/Incident distribution by severity over a period of time. 
 
 
 ## 2. Detection and analysis
