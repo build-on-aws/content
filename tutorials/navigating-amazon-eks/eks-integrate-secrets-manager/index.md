@@ -1,13 +1,12 @@
 ---
-title: "Easily Consume AWS Secrets Manager Secrets from your Amazon EKS Workloads"
-description: "How to integrate AWS Secrets Manager with your EKS workloads to safely store and consume application secrets with minimal code modifications."
+title: "Easily Consume AWS Secrets Manager Secrets From Your Amazon EKS Workloads"
+description: "Leverage secret stores without complex code modifications."
 tags:
     - eks-cluster-setup
     - eks
     - kubernetes
     - tutorials
     - aws
-    - security
 movedFrom: /tutorials/navigating-amazon-eks/eks-integrate-secrets-manager
 waves:
   - modern-apps
@@ -20,7 +19,7 @@ date: 2023-10-29
 
 Secrets management is a challenging but critical aspect of running secure and dynamic containerized applications at scale. To support this need to securely distribute secrets to running applications, Kubernetes provides native functionality to manage secrets in the form of [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/). However, many customers choose to centralize the management of secrets outside of their Kubernetes clusters by using external secret stores such as [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) to improve the security, management, and auditability of their secret usage.
 
-Consuming secrets from external secret stores often requires modifications to your application code to support API-based calls to the external store to retrieve a secret at application run time. However, when running applications on [Amazon EKS](https://aws.amazon.com/eks/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq), you have a more streamlined alternative that minimizes code changes. Specifically, you can leverage the [AWS Secrets and Configuration Provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) (ASCP) and the [Kubernetes Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/). Acting as a bridge between AWS Secrets Manager and your Kubernetes environment, ASCP mounts your application secrets directly into your pods as files within a mounted storage volume. This approach simplifies management and enhances the portability of your workloads, without requiring significant application-level code modifications to access secrets.
+Consuming secrets from external secret stores often requires modifications to your application code so it supports secret store specific API calls, allowing retrieval of secrets at application run time. This can increase the complexity of your application code base and potentially reduce the portability of containerized applications as they move between environments or even leverage different secret stores. However, when running applications on [Amazon EKS](https://aws.amazon.com/eks/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq), you have a more streamlined alternative that minimizes code changes. Specifically, you can leverage the [AWS Secrets and Configuration Provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) (ASCP) and the [Kubernetes Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/). Acting as a bridge between AWS Secrets Manager and your Kubernetes environment, ASCP mounts your application secrets directly into your pods as files within a mounted storage volume. This approach simplifies management and enhances the portability of your workloads, without requiring significant application-level code modifications to access secrets.
 
 Building on the Amazon EKS cluster from [**part 1**](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic) of our series, this tutorial dives into setting up the AWS Secrets and Configuration Provider(ASCP) for the Kubernetes Secrets Store CSI Driver. Included in the cluster configuration for the previous tutorial is the OpenID Connect (OIDC) endpoint to be used by the ASCP IAM Role for Service Account (IRSA). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic). Alternatively, to setup an existing cluster with the components required for this tutorial, use the instructions in [Create an IAM OpenID  Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) in EKS official documentation.
 
@@ -50,7 +49,7 @@ In this tutorial, you will learn how to set up the [AWS Secrets and Configuratio
 This tutorial is part of a series on managing high traffic microservices platforms using Amazon EKS, and it's dedicated to managing application secrets with [AWS Secrets and Configuration Provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) (ASCP) for the [Kubernetes Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/). This tutorial shows not only how to consume an external secret from your EKS workloads, but also how to create a secret in AWS Secrets Manager. It covers the following components:
 
 * **Secret Creation** — Creation of an application secret in [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) to be consumed by the sample pod.
-* **Authentication** — Necessary IAM Role for Service Account (IRSA) mappings to enable communication between Kubernetes pods and AWS services. This includes the Pod service account that will be used to access the [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) secret via the [AWS Secrets and Configuration Provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) (ASCP).
+* **Authentication** — Necessary IAM Role for Service Account (IRSA) mappings to enable communication between Kubernetes pods and AWS. This includes the Pod service account that will be used to access the [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) secret via the [AWS Secrets and Configuration Provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) (ASCP).
 * **ASCP Setup** — Deployment of the [AWS Secrets and Configuration Provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) (ASCP) and the [Kubernetes Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/). 
 * **Sample Application Deployment** — Deploy a sample pod to mount the secret from [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) and execute a command in the pod to validate the secret is accessible.
 
@@ -93,7 +92,7 @@ Creating a secret in AWS Secrets Manager is the first step in securely managing 
 SECRET_ARN=$(aws secretsmanager create-secret --name eksSecret --secret-string '{"username":"eksdemo", "password":"eksRocks!"}' --region "$CLUSTER_REGION" --query ARN) 
 ```
 
-The above command will store the Secret’s ARN in a variable for later use. To validate you successfully created the secret, run the following command to output the variable.
+The above command will store the Secret’s ARN in a variable for later use. To validate you successfully created the secret, run the following command to output the variable:
 
 ```bash
 echo $SECRET_ARN
@@ -120,7 +119,7 @@ POLICY_ARN=$(aws --region "$CLUSTER_REGION" --query Policy.Arn --output text iam
 }')
 ```
 
-The above command will store the policy’s ARN in a variable for later use. To validate you successfully created the policy, run the following command to output the variable.
+The above command will store the policy’s ARN in a variable for later use. To validate you successfully created the policy, run the following command to output the variable:
 
 ```bash
 echo $POLICY_ARN
@@ -132,7 +131,7 @@ The expected output should look like this:
 `arn:aws:iam::0123456789:policy/eksdemo-secretsmanager-policy`
 ```
 
-## Step 4: Create IAM Role and associate with Kubernetes Service Account
+## Step 4: Create IAM Role and Associate With Kubernetes Service Account
 
 In this section, you'll use [IAM Roles for service accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) to map your Kubernetes service accounts to AWS IAM roles, thereby enabling fine-grained permission management for your applications running on EKS. Using [eksctl](https://eksctl.io/), you'll create and associate an AWS IAM Role with a specific Kubernetes service account within your EKS cluster. With the Secret Store CSI driver, you will apply IAM permissions at the application pod level, not the CSI driver pods. This ensures that only the specific application pods that are leveraging the IRSA associated Kubernetes service account will have permission to access the secret stored in AWS Secrets Manager. We will associate the IAM policy we created in the previous step to the newly created IAM role. Note that you must have an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) associated with your cluster before you run these commands.
 
@@ -173,7 +172,7 @@ metadata:
 
 In this section, you’ll install the [AWS Secrets and Configuration Provider (ASCP)](https://github.com/aws/secrets-store-csi-driver-provider-aws) and [Secrets Store CSI Driver](https://github.com/aws/secrets-store-csi-driver-provider-aws) using [Helm](https://helm.sh/docs/intro/install/), which sets up a secure bridge between AWS Secrets Manager and your Kubernetes cluster. This enables your cluster to access secrets stored in AWS Secrets Manager without requiring complex application-code changes. The ASCP and Secrets Store CSI Driver will each be installed as DaemonSets to ensure a copy of the driver and provider are running on each node in the cluster. 
 
-The following command will add the Secrets Store CSI Driver Helm chart repository to your local Helm index to allow for installation. 
+The following command will add the Secrets Store CSI Driver Helm chart repository to your local Helm index to allow for installation: 
 
 ```bash
 helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
@@ -185,7 +184,7 @@ The expected output should look like this:
 "secrets-store-csi-driver" has been added to your repositories
 ```
 
-The following command will add the AWS Secrets and Configuration Provider(ASCP) Helm chart repository to your local Helm index to allow for installation.
+The following command will add the AWS Secrets and Configuration Provider(ASCP) Helm chart repository to your local Helm index to allow for installation:
 
 ```bash
 helm repo add aws-secrets-manager https://aws.github.io/secrets-store-csi-driver-provider-aws
@@ -197,7 +196,7 @@ The expected output should look like this:
 "aws-secrets-manager" has been added to your repositories
 ```
 
-To install the Secrets Store CSI Driver, run the following Helm command. 
+To install the Secrets Store CSI Driver, run the following Helm command: 
 
 ```bash
 helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver
@@ -223,13 +222,13 @@ Now you can follow these steps https://secrets-store-csi-driver.sigs.k8s.io/gett
 to create a SecretProviderClass resource, and a deployment using the SecretProviderClass.
 ```
 
-As mentioned in the above output, to verify the Secrets Store CSI Driver has started run the following command.
+As mentioned in the above output, to verify the Secrets Store CSI Driver has started run the following command:
 
 ```bash
 kubectl --namespace=kube-system get pods -l "app=secrets-store-csi-driver"
 ```
 
-You should see the following output. Make sure all the pod’s  `STATUS` are `Running`.
+You should see the following output. Make sure all the pod’s  `STATUS` are `Running`:
 
 ```bash
 NAME READY STATUS RESTARTS AGE
@@ -238,7 +237,7 @@ csi-secrets-store-secrets-store-csi-driver-jhbnf 3/3 Running 0 2m31s
 csi-secrets-store-secrets-store-csi-driver-qsdm6 3/3 Running 0 2m31s
 ```
 
-To install the AWS Secrets and Configuration Provider(ASCP), run the following Helm command.
+To install the AWS Secrets and Configuration Provider(ASCP), run the following Helm command:
 
 ```bash
 helm install -n kube-system secrets-provider-aws aws-secrets-manager/secrets-store-csi-driver-provider-aws
@@ -255,13 +254,13 @@ REVISION: 1
 TEST SUITE: None
 ```
 
-You can also run the following Helm command to verify the installation has completed successfully. 
+You can also run the following Helm command to verify the installation has completed successfully: 
 
 ```bash
 `helm list -n kube-system` 
 ```
 
-You will see an output like below.
+You will see an output like below:
 
 ```bash
 NAME NAMESPACE REVISION UPDATED STATUS CHART APP VERSION
@@ -295,7 +294,7 @@ Apply the YAML manifest.
 `kubectl apply -f eksdemo-spc.yaml`
 ```
 
-To verify the SecretProviderClass was created successfully, run the following command.
+To verify the SecretProviderClass was created successfully, run the following command:
 
 ```bash
 kubectl describe secretproviderclass eks-demo-aws-secrets
@@ -365,13 +364,13 @@ Apply the YAML manifest.
 `kubectl apply ``-``f eksdemo-app.yaml`
 ```
 
-To verify the pod was created successfully, run the following command.
+To verify the pod was created successfully, run the following command:
 
 ```bash
 kubectl get pod busybox
 ```
 
-You should see the following output. Make sure the pod  `STATUS` is `Running`.
+You should see the following output. Make sure the pod  `STATUS` is `Running`:
 
 ```bash
 NAME READY STATUS RESTARTS AGE
@@ -386,7 +385,7 @@ Finally, we’ll use kubectl to execute into the pod we just deployed and see if
 kubectl exec -it $(kubectl get pods | awk '/busybox/{print $1}' | head -1) -- cat /mnt/secrets-store/eksSecret; echo
 ```
 
-This command should output the secret we created earlier.
+This command should output the secret we created earlier:
 
 ```bash
 `{"username":"eksdemo", "password":"eksRocks!"}`
@@ -419,4 +418,4 @@ aws iam delete-policy --policy-arn $POLICY_ARN
 
 ## Conclusion
 
-Upon completion of this tutorial, you will have successfully set up an integration between AWS Secrets Manager and your Amazon EKS cluster. This integration allows you to centralize the management of your application secrets, while easily consuming these secrets from your workloads running on EKS, without complex code modifications. Security and governance of your secrets as well as portability of your applications is improved with minimal overhead. This example can easily be replicated for the various types of secrets your workloads may require such as database credentials, API keys, and more. 
+Upon completion of this tutorial, you will have successfully set up an integration between AWS Secrets Manager and your Amazon EKS cluster. This integration allows you to centralize the management of your application secrets, while easily consuming these secrets from your workloads running on EKS, without complex code modifications. Security and governance of your secrets as well as portability of your applications is improved with minimal overhead. This example can easily be replicated for the various types of secrets your workloads may require such as database credentials, API keys, and more. To learn more about setting up and managing Amazon EKS for your workloads, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq).
