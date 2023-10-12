@@ -1,14 +1,11 @@
 ---
 title: "How To Design and Implement an Effective Incident Response Strategy for Businesses"
-description: "In this blog, we will go through the key steps in designing and implementing an incident management strategy covering the 4 steps of incident response as defined by NIST, namely 1/preparation, 2/detection and analysis, 3/containment & recovery, and 4/correction of errors & continuous improvement."
+description: "Respond quickly to incidents and reduce operational impact"
 tags:
     - foundational
     - aws
-    - incident-response
     - correction-of-errors
-    - preparation
     - resilience
-    - containment and recovery
     - observability
 authorGithubAlias: joshinik
 authorName: Nikhil Joshi
@@ -18,11 +15,10 @@ waves:
     - resilience
 ---
 
-# How to design and implement an effective incident response strategy
-
 ## Introduction
 
-An efficient response strategy is crucial to ensuring that businesses can quickly and effectively respond to incidents and minimize the impact on their operations. In this blog, we'll go through the key steps in designing and implementing an incident management strategy covering the four steps of incident response as defined by NIST, namely: 1/preparation, 2/detection and analysis, 3/containment & recovery, and 4/correction of errors & continuous improvement. Lastly, we will discuss the importance of management buy in and explore the role of automation in helping organizations improve their response capabilities.
+An efficient response strategy is crucial to ensuring that businesses can quickly and effectively respond to incidents and reduce the loss in revenue, data, customer trust, or compliance . In this blog, we'll go through the key steps in designing and implementing an incident management strategy covering the four steps of incident response as defined by NIST, namely: 1/preparation, 2/detection and analysis, 3/containment & recovery, and 4/correction of errors & continuous improvement. Lastly, we will discuss the importance of management buy in and explore the role of automation in helping organizations improve their response capabilities.
+
 
 ## 1. Preparation
 
@@ -41,6 +37,7 @@ At this stage, it is important to ensure that the incident classification is sha
 Important Key Performance Indicators (KPIs) for evaluating the effectiveness of the preparation step include: 1/Mean time to acknowledge (MTTA), 2/Mean time to escalate (MTTE), and 3/Incident distribution by severity over a period of time. 
 
 
+
 ## 2. Detection and Analysis
 
 Detection and analysis, sometimes known as observability, is the ability to determine the current state of a system by collecting information from multiple sources. There are three primary types of observability: monitoring, diagnostics, and tracing. Monitoring involves collecting basic information about the system, such as CPU and memory usage. Diagnostics collect more detailed information about the system, such as log files and error messages. Tracing follows the path of a request through a distributed system, which can help identify performance issues and bottlenecks. Observability tools such as dashboards, alerts, and log management systems can help organizations gain insight into their systems and identify issues before they become problems. These systems add a layer of intelligence by correlating errors, logs, traces, CPU, and memory usage to identify potential issues and file incidents according to criteria defined during preparation. 
@@ -53,6 +50,7 @@ Important Key Performance Indicators (KPIs) for evaluating the effectiveness of 
 
 For details on how to implement Observability for your AWS workloads please visit the AWS Well Architected - Observability doc [here](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/implement-observability.html). 
 
+
 ## 3. Containment and Recovery
 
 Containment and recovery focuses on the ability of the operations teams to use the tools and dashboards available to detect and then isolate failures from spreading across the system. Effective incident response plans ensure that teams who can drive mitigation and resolution get involved in the shortest amount of time from the start of the disruption. In order for engineering teams to focus on mitigation and resolution, the incident response plan can include dedicated incident managers who handle the communication and escalation process with the larger cross functional teams. Incident Managers can also gain approvals in case mitigation or resolution involves hot fixes or deployment rollbacks. 
@@ -62,6 +60,7 @@ Containment and recovery can be further enhanced through pre-emptive steps like 
 For more details on static stability, control planes, and data planes, refer to the Amazon Builders’ Library article [Static stability using Availability Zones](http://aws.amazon.com/builders-library/static-stability-using-availability-zones). 
 
 Important Key Performance Indicators (KPIs) for evaluating containment and recovery strategies include: 1/mean time to mitigate, 2/mean time to resolve, and 3/availability measured as uptime, durability, or percentage of successful transactions. 
+
 
 
 ## 4. Correction of Errors & Continuous Improvement
@@ -74,9 +73,11 @@ For details on how to build an effective CoE process, please refer to the blog [
 
 Important Key Performance Indicators (KPIs) for evaluating the effectiveness of CoEs and continuous improvement processes include: 1/Mean time between failures (MTBF), 2/reduction in operator errors, and 3/number & percentage of improvement tasks completed per plan. 
 
+
 ## Management Buy In and Chain of Command
 
-Management buy-in is the backbone of high performing incident response teams and is required for each of the 4 steps outlined above to be effective. During the preparation step, senior leadership involvement can ensure cross functional alignment, approve escalation plans, and resolve conflicts in support structures. Senior leaders can a culture of ownership and autonomy which can reduce mitigation times by involving the responsible teams early in the incident life cycle. It plays an important role in ensuring CoE meetings stay blameless and the action items are prioritized and resolved by the responsible teams. 
+Management buy-in is the backbone of high-performing incident response teams and is required for each of the four steps outlined above to be effective. During the preparation step, senior leadership involvement can ensure cross-functional alignment, approve escalation plans, and resolve conflicts in support structures. Senior leaders can foster a culture of ownership and autonomy which can reduce mitigation times by involving the responsible teams early in the incident life cycle. It plays an important role in ensuring CoE meetings stay blameless and the action items are prioritized and resolved by the responsible teams. 
+
 
 ## Role of Automation in Incident Management
 
@@ -84,6 +85,7 @@ Automation is a key component of effective incident management. It can be used t
 
 For a deep dive on automating incident responses refer to AWS Prescriptive Guidance [here](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/automate-incident-response-and-forensics.html). 
 
+
 ## Conclusion
 
-By taking a proactive approach to incident management, businesses can minimize the impact of security incidents and ensure that they are prepared to handle any situation that may arise. Businesses that are successful learn from each incident to drive positive changes and build a culture of ownership. As Amazon’s CTO Werner Vogels says “Everything fails all the time”; organizations that practice their failure response are better equipped than the ones that are surprised by it. 
+By taking a proactive approach to incident management, businesses can minimize the impact of security incidents and ensure that they are prepared to handle any situation that may arise. Businesses that are successful learn from each incident to drive positive changes and build a culture of ownership. As Amazon’s CTO Werner Vogels says “Everything fails all the time”; organizations that practice their failure response are better equipped than the ones that are surprised by it. Learn more about topics covered in this blog by visiting the following links: 1/[Observability Best Practices](https://aws-observability.github.io/observability-best-practices/), [2/Control Planes and Data Planes](https://docs.aws.amazon.com/whitepapers/latest/advanced-multi-az-resilience-patterns/control-planes-and-data-planes.html), and [3/Key Performance Indicators](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_operations_health_measure_ops_goals_kpis.html). 
