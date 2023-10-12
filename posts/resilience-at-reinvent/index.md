@@ -67,7 +67,7 @@ OK, you’ve attended all the other sessions and built in the design strategies 
 
 ## Hear from AWS operational leaders
 
-12. **[ARC327](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC327&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) | 5 things you should know about resilience at scale** —  What happens when you get a senior principal engineer, distinguished engineer, and VP with combined experience of over 30 years operating AWS to give a talk on how to build mitigations for when things go wrong? Well, if you want to find out, then make sure to attend this can’t-miss breakout session. They will take you "beyond the 9s" -- talking about how, particularly at our scale, 9s are important, but time-to-recovery and blast-radius containment are even more important.
+12. **[ARC327](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC327&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) | 5 things you should know about resilience at scale** —  What happens when you get a senior principal engineer, distinguished engineer, and VP with combined experience of over 30 years operating AWS to give a talk on how to build mitigations for when things go wrong? Well, if you want to find out, then make sure to attend this can’t-miss breakout session. They will take you "beyond the 9s" -- talking about how, particularly at AWS's scale, 9s are important, but time-to-recovery and blast-radius containment are even more important.
 
 ## Bonus: Learning by example
 
