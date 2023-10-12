@@ -22,7 +22,7 @@ waves:
 
 ## Introduction
 
-An efficient response strategy is crucial to ensuring that businesses can quickly and effectively respond to incidents and minimize the impact on their operations. In this blog, will go through the key steps in designing and implementing an incident management strategy covering the 4 steps of incident response as defined by NIST, namely 1/preparation, 2/detection and analysis, 3/containment & recovery, and 4/correction of errors & continuous improvement. Lastly, we will discuss the importance of management buy in and explore the role of automation in helping organizations improve their response capabilities.
+An efficient response strategy is crucial to ensuring that businesses can quickly and effectively respond to incidents and minimize the impact on their operations. In this blog, we'll go through the key steps in designing and implementing an incident management strategy covering the four steps of incident response as defined by NIST, namely: 1/preparation, 2/detection and analysis, 3/containment & recovery, and 4/correction of errors & continuous improvement. Lastly, we will discuss the importance of management buy in and explore the role of automation in helping organizations improve their response capabilities.
 
 ## 1. Preparation
 
