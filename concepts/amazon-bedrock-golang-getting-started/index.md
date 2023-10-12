@@ -1,6 +1,6 @@
 ---
 title: "Generative AI apps with Amazon Bedrock - A getting started guide for Go developers"  
-description: "An introductory guide to using the AWS Go SDK and Bedrock Foundation Models (FMs) for tasks such as content generation, building chat application, handling streaming data and more"
+description: "An introductory guide to using the AWS Go SDK and Amazon Bedrock Foundation Models (FMs) for tasks such as content generation, building chat application, handling streaming data and more"
 tags:  
   - generative-ai
   - ai-ml
@@ -23,8 +23,8 @@ This article is an introductory guide for Go developers who want to get started 
 
 We will be using the [AWS Go SDK](https://aws.github.io/aws-sdk-go-v2/docs/) for Amazon Bedrock and cover the following topics as we go along: 
 
-- Introduction to the Bedrock Go APIs and learn how to use it for tasks such as content generation.
-- Understand how to build a simple chat application and handle streaming output from Bedrock Foundation Models.
+- Introduction to the Amazon Bedrock Go APIs and learn how to use it for tasks such as content generation.
+- Understand how to build a simple chat application and handle streaming output from Amazon Bedrock Foundation Models.
 - Code walkthrough of the examples
 
 > The code examples are available in this [GitHub repository](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples) 
@@ -63,16 +63,16 @@ cfg, err := config.LoadDefaultConfig(context.Background(), config.WithRegion(reg
 
 When you initialize an `aws.Config` instance using `config.LoadDefaultConfig`, the AWS Go SDK uses its *default* credential chain to find AWS credentials. You can [read up on the details here](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials), but in my case, I already have a `credentials` file in `<USER_HOME>/.aws` which is detected and picked up by the SDK.
 
-## Bedrock client types
+## Amazon Bedrock client types
 
-The Bedrock Go SDK supports two client types:
+The Amazon Bedrock Go SDK supports two client types:
 
 1. The first one, [bedrock.Client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client), can be used for control plane like operations such as getting information about base foundation models, (or [custom models](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client.ListCustomModels)), [creating a fine-tuning job](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client.CreateModelCustomizationJob) to customize a base model, etc.
-2. The [runtime client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client) in the [bedrockruntime](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime) package is used to run inference on the Foundation models (this is the interesting part!)
+2. The [bedrockruntime.Client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client) in the [bedrockruntime](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime) package is used to run inference on the Foundation models (this is the interesting part!)
 
-## Listing Bedrock Foundation Models
+## Listing Amazon Bedrock Foundation Models
 
-To start off, let's take a look at a [simple example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/bedrock-basic/main.go) of the control plane client to list foundation models in Bedrock (error handling, logging omitted):
+To start off, let's take a look at a [simple example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/bedrock-basic/main.go) of the control plane client to list foundation models in Amazon Bedrock (error handling, logging omitted):
 
 ```go
 	region := os.Getenv("AWS_REGION")
@@ -95,7 +95,7 @@ To start off, let's take a look at a [simple example](https://github.com/build-o
 	}
 ```
 
-We create a [bedrock.Client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client) instance and use it to get the supported Foundation Models in Bedrock using [ListFoundationModels](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client.ListFoundationModels) API.
+We create a [bedrock.Client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client) instance and use it to get the supported Foundation Models in Amazon Bedrock using [ListFoundationModels](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrock#Client.ListFoundationModels) API.
 
 Clone the GitHub repository, change to the correct directory:
 
@@ -173,7 +173,7 @@ Here is the [code](https://github.com/build-on-aws/amazon-bedrock-go-sdk-example
     //.....
 ```
 
-We get the [bedrockruntime.Client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client) instance, and create the payload containing the request we need to send Bedrock (this includes the prompt as well). The payload is `JSON` formatted and it's details are well documented here - [Inference parameters for foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+We get the [bedrockruntime.Client](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client) instance, and create the payload containing the request we need to send Amazon Bedrock (this includes the prompt as well). The payload is `JSON` formatted and it's details are well documented here - [Inference parameters for foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 > For convenience, I created [this helper library](https://github.com/abhirockzz/amazon-bedrock-go-inference-params) that contains Go `struct`s to represent the inference parameters for different models.
 
@@ -244,7 +244,7 @@ Run the [application](https://github.com/build-on-aws/amazon-bedrock-go-sdk-exam
 go run streaming-claude-basic/main.go
 ```
 
-> You should see the output being written to the console as the parts are being generated by Bedrock.
+> You should see the output being written to the console as the parts are being generated by Amazon Bedrock.
 
 Let's take a look at the code. 
 
@@ -336,7 +336,7 @@ go run claude-chat-streaming/main.go
 
 ## Image generation
 
-Another bread and butter use case of Generative AI! [This example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/stablediffusion-image-gen/main.go) uses the Stable Diffusion XL model in Bedrock to generate an image given a prompt and other parameters.
+Another bread and butter use case of Generative AI! [This example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/stablediffusion-image-gen/main.go) uses the Stable Diffusion XL model in Amazon Bedrock to generate an image given a prompt and other parameters.
 
 To try it out:
 
@@ -395,7 +395,7 @@ Notice the model parameters (`CfgScale`, `Seed` and `Steps`) - their values depe
 
 ## Create Embeddings from text
 
-Text embeddings represent meaningful vector representations of unstructured text such as documents, paragraphs, and sentences. Bedrock currently supports the `Titan Embeddings G1 - Text` model for text embeddings. It supports text retrieval, semantic similarity, and clustering. The maximum input text is `8K` tokens and the maximum output vector length is `1536`.
+Text embeddings represent meaningful vector representations of unstructured text such as documents, paragraphs, and sentences. Amazon Bedrock currently supports the `Titan Embeddings G1 - Text` model for text embeddings. It supports text retrieval, semantic similarity, and clustering. The maximum input text is `8K` tokens and the maximum output vector length is `1536`.
 
 To run the [example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/titan-text-embedding/main.go):
 
