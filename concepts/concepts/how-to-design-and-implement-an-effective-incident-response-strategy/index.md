@@ -64,7 +64,7 @@ For more details on static stability, control planes, and data planes, refer to 
 Important Key Performance Indicators (KPIs) for evaluating containment and recovery strategies include: 1/mean time to mitigate, 2/mean time to resolve, and 3/availability measured as uptime, durability, or percentage of successful transactions. 
 
 
-## 4. Correction of errors & continuous improvement
+## 4. Correction of Errors & Continuous Improvement
 
 Correction of errors (CoEs) or Root Cause Analysis refers to the process of objective deep dives into customer impacting events after mitigation or resolution. CoEs are effective when they are performed with a learning mindset, are blameless, and focus on architecture, tooling and process improvements and not on the operators themselves. CoEs lead to improvements to testing procedures, design, architecture, or deployment strategies. 
 
