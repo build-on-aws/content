@@ -5,26 +5,28 @@ tags:
     - resilience
     - reinvent
     - reinvent-2023
-    - guide
-    - aws
     - chaos-engineering
     - disaster-recovery
+    - aws
 waves:
     - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 additionalAuthors: 
   - authorName: Lisi Lewis
-date: 2023-10-11
+date: 2023-10-12
 ---
 
-Running your application can be a challenge. Unexpected usage patterns, component failures, network issues, and flaky dependencies are part of the [chaos of production](https://community.aws/posts/chaos-engineering-2-minutes?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent). Fortunately, running your application on AWS cloud gives you many tools and techniques to design resilience into your application, and it is [resilience that enables your application to resist or recover from all these challenges](https://community.aws/concepts/should-know-resilience?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent).
+|ToC|
+|---|
+
+Running your application can be a challenge. Unexpected usage patterns, component failures, network issues, and flaky dependencies are part of the [chaos of production](/posts/chaos-engineering-2-minutes). Fortunately, running your application on AWS cloud gives you many tools and techniques to design resilience into your application, and it is [resilience that enables your application to resist or recover from all these challenges](/concepts/should-know-resilience).
 
 If you’re attending re:Invent 2023, there’s plenty to learn about designing resilient applications. Here we’ll share our picks of what you should check out.
 
 ## The resilience kiosk: Get help from AWS resilience experts
 
-One of our favorite parts of re:Invent is meeting with AWS customers and helping them them with their resilience challenges. An easy way to meet with a resilience expert (maybe one of us, if you time it right) is to visit the **resilience kiosk l**ocated in the AWS Village, as part of the [2023 re:Invent Expo](https://reinvent.awsevents.com/learn/expo?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) in The Venetian. It opens at 4PM on Monday, the first day of re:Invent, and closes at 3PM on Thursday. This may be free advice, but it is super valuable, as you can ask questions and even whiteboard with an expert to solve specific resilience challenges of your application. There is also a chaos engineering demo, and the friendly folks there will be happy to show you how to use the newly released resilience lifecycle framework — and what is that?  Well, read on!
+One of our favorite parts of re:Invent is meeting with AWS customers and helping them them with their resilience challenges. An easy way to meet with a resilience expert (maybe one of us, if you time it right) is to visit the **resilience kiosk** located in the AWS Village, as part of the [2023 re:Invent Expo](https://reinvent.awsevents.com/learn/expo?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) in The Venetian. It opens at 4PM on Monday, the first day of re:Invent, and closes at 3PM on Thursday. This may be free advice, but it is super valuable, as you can ask questions and even whiteboard with an expert to solve specific resilience challenges of your application. There is also a chaos engineering demo, and the friendly folks there will be happy to show you how to use the newly released resilience lifecycle framework — and what is that?  Well, read on!
 
 ![Seth and Lisi posing in front of the resilience kiosk](images/figure1.webp "Seth and Lisi stand by ready to help with your resilience challenges at the resilience kiosk")
 
@@ -48,9 +50,9 @@ In our years of talking with AWS customers about resilience, almost half of thos
 
 ## Keeping your application highly available
 
-We like to help customers understand resilience as defense-in-depth, with resilience strategies at multiple layers. There are several layers *before* DR you should be thinking about to protect your application from the [smaller, more common faults](https://community.aws/concepts/should-know-resilience?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent#2-how-to-prevent-faults-from-becoming-failures) that can impact your application availability. 
+We like to help customers understand resilience as defense-in-depth, with resilience strategies at multiple layers. There are several layers *before* DR you should be thinking about to protect your application from the [smaller, more common faults](/concepts/should-know-resilience#2-how-to-prevent-faults-from-becoming-failures) that can impact your application availability. 
 
-5. **[ARC301](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC301&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) | Advanced Multi-AZ resilience patterns: Mitigating gray failures** — Sure, you already know to [use multiple Availability Zones (AZs)](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_fault_isolation_multiaz_region_system.html?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) as fault isolation boundaries to achieve high availability. But in this hands-on workshop you’ll learn how to take your multi-AZ strategy to the next level. Sometimes failures are intermittent, or not easily detectable by metrics and alarms that look broadly at you application — we call these [gray failures](https://community.aws/posts/what-happened-to-my-car?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent). In this workshop, you’ll implement [differential observability](https://docs.aws.amazon.com/whitepapers/latest/advanced-multi-az-resilience-patterns/gray-failures.html?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) to detect gray failures, and then [implement resilience strategies](https://docs.aws.amazon.com/whitepapers/latest/advanced-multi-az-resilience-patterns/availability-zone-evacuation-patterns.html?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) to protect against these failures. This is not your grandparents’ multi-AZ strategy.
+5. **[ARC301](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC301&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) | Advanced Multi-AZ resilience patterns: Mitigating gray failures** — Sure, you already know to [use multiple Availability Zones (AZs)](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_fault_isolation_multiaz_region_system.html?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) as fault isolation boundaries to achieve high availability. But in this hands-on workshop you’ll learn how to take your multi-AZ strategy to the next level. Sometimes failures are intermittent, or not easily detectable by metrics and alarms that look broadly at you application — we call these [gray failures](/posts/what-happened-to-my-car). In this workshop, you’ll implement [differential observability](https://docs.aws.amazon.com/whitepapers/latest/advanced-multi-az-resilience-patterns/gray-failures.html?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) to detect gray failures, and then [implement resilience strategies](https://docs.aws.amazon.com/whitepapers/latest/advanced-multi-az-resilience-patterns/availability-zone-evacuation-patterns.html?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) to protect against these failures. This is not your grandparents’ multi-AZ strategy.
 6. **[ARC309](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC309&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) | Build applications that recover from an Availability Zone impairment** — This session and **ARC301** are a great pair together. In this breakout, you’ll learn about [Amazon Route 53 Application Recovery Controller zonal shift](https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent). OK, that service is a mouthful, but what it does is super-powerful — it gives you control over which AZs are in or out for your application (which ones are receiving traffic). Using the monitoring techniques covered in this session, you’ll be able to detect when an AZ needs to be taken out-of-service, learn how to take it out, and keep healthy AZs online to serve your customer traffic.
 7. **[ARC306](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC306&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=resilience-at-reinvent) | Reducing your area of impact and surviving difficult days** — In this breakout session, you’ll learn about cell-based architectures and sharding. These are two ways you can structure your AWS resources (like compute, storage, and network) to improve resilience. These advanced techniques give you control over the fault isolation boundaries in your architecture, constraining faults to a small number of resources while the rest continue to serve requests from your customers.
 
@@ -106,7 +108,3 @@ Depending on which AWS services you’re using in your architectures, you may wa
 ## In conclusion
 
 Stop by the resilience kiosk, gets hands-on with a workshop, and then ask questions at a chalk talk! You really can’t go wrong with any of the sessions at re:Invent, but we hope this guide helps you to make the best use of your time in your journey to build resilient applications on AWS.
-
-
-
-
