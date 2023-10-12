@@ -10,6 +10,10 @@ tags:
   - aws
   - build-on-live
   - twitch
+spaces:
+  - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 date: 2023-08-14

@@ -7,6 +7,10 @@ tags:
   - sagemaker-jumpstart
   - langchain
   - tutorials
+spaces:
+  - generative-ai
+waves:
+  - generative-ai
 showInHomeFeed: true
 authorGithubAlias: pkamra
 authorName: Piyali Kamra
