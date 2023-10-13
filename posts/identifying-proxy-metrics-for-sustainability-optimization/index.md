@@ -28,6 +28,8 @@ To track resource efficiency over a period of time, consider including business 
 
 ![Figure-1 Sustainability proxy metric equation](images/image1.png) *Figure-1: Sustainability proxy metric equation*
 
+![Figure-1 Sustainability proxy metric equation](images/image1.jpg "Figure-1: Sustainability proxy metric equation")
+
 ## How to extract proxy metrics
 
 AWS Service and tools can help you extract relevant proxy metrics for optimization across various domains like compute, storage, network etc.
