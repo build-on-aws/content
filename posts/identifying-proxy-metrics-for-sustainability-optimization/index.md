@@ -8,6 +8,8 @@ tags:
     - sustainability
 waves:
   - cost
+spaces:
+  - cost-optimization
 authorGithubAlias: KarnikPooja
 authorName: Pooja Karnik
 additionalAuthors: 
