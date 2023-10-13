@@ -7,6 +7,7 @@ tags:
   - bedrock
 spaces:
   - networking
+  - generative-ai
 waves:
   - generative-ai
 authorGithubAlias: labeveryday

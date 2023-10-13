@@ -7,6 +7,9 @@ tags:
     - reinvent
 spaces:
     - reinvent
+    - generative-ai
+waves:
+    - generative-ai
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2023-10-06

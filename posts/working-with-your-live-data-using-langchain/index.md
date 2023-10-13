@@ -8,7 +8,9 @@ tags:
     - aws
     - langchain
 spaces:
-    - generative-ai
+  - generative-ai
+waves:
+  - generative-ai
 showInHomeFeed: true
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes 
