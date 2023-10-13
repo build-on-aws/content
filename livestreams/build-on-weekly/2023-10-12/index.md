@@ -74,7 +74,7 @@ But if you are looking to learn a bit about:
 
 Make sure to check out the full stream recording here:
 
-https://www.twitch.tv/videos/1931622267
+https://www.twitch.tv/videos/1949626001
 
 ## Links from today's episode
 
