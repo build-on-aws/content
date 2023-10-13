@@ -51,6 +51,8 @@ We will use AnyCompany’s workload to identify proxy metrics for sustainability
 
 ![Figure-2: AnyCompany's AWS hosted workload architecture](images/image2.png "Figure-2: AnyCompany's AWS hosted workload architecture")
 
+![Figure-2: AnyCompany's AWS hosted workload architecture](images/image2.jpg "Figure-2: AnyCompany's AWS hosted workload architecture")
+
 ## Identify proxy metrics of sample workload
 
 For the preceding architecture, let’s identify 3 areas of optimization using AWS service and tools, and by [normalizing](https://aws.amazon.com/blogs/aws-cloud-financial-management/measure-and-track-cloud-efficiency-with-sustainability-proxy-metrics-part-i-what-are-proxy-metrics/?sc_channel=el&sc_campaign=costwave&sc_content=identifying-proxy-metrics-for-sustainability-optimization&sc_geo=mult&sc_country=mult&sc_outcome=acq) respective proxy metrics. Please note that while there are multiple areas of optimization in this architecture, we will discuss the following three.
@@ -69,7 +71,7 @@ In the preceding sample architecture, we can calculate average `CPUUtilization` 
 
 ![Figure-4: Quick S3 setup will automatically create the resources for you and export metrics into S3 in JSON format](images/image4.png "Figure-4: Quick S3 setup will automatically create the resources for you and export metrics into S3 in JSON format")
 
-* By default, metric stream includes `minimum, maximum, sample count, and sum` [statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-statistics.html?sc_channel=el&sc_campaign=costwave&sc_content=identifying-proxy-metrics-for-sustainability-optimization&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* By default, metric stream includes `minimum`, `maximum`, `sample count`, and `sum` [statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-statistics.html?sc_channel=el&sc_campaign=costwave&sc_content=identifying-proxy-metrics-for-sustainability-optimization&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * Once you are finished creating the metric stream, CloudWatch will then automatically start directing the EC2 instances metrics to Amazon Kinesis Firehouse delivery stream, with delivery to a data lake in S3
 * You can then use Amazon Athena to query metric data stored in S3. Refer to this user guide for [creating table using AWS Glue](https://docs.aws.amazon.com/athena/latest/ug/data-sources-glue.html?sc_channel=el&sc_campaign=costwave&sc_content=identifying-proxy-metrics-for-sustainability-optimization&sc_geo=mult&sc_country=mult&sc_outcome=acq) for metrics data stored in S3, and access it in [Athena for querying](https://docs.aws.amazon.com/athena/latest/ug/querying-JSON.html?sc_channel=el&sc_campaign=costwave&sc_content=identifying-proxy-metrics-for-sustainability-optimization&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * Once you have setup Athena to query the S3 database, you can run SQL queries to filter out and aggregate four EC2 instances metric data to calculate average `CPUUtilization` by dividing `sum` with `sample count` statistics
