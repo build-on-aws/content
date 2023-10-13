@@ -26,15 +26,13 @@ The [AWS Customer Carbon Footprint Tool](https://aws.amazon.com/aws-cost-managem
 
 To track resource efficiency over a period of time, consider including business metric (along with proxy metric) to normalize provisioned resources along with business outcome ([refer to this User Guide](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/evaluate-specific-improvements.html)), and define a Sustainability KPI. Your [business metrics](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/evaluate-specific-improvements.html) should reflect the value provided by your workload. Identifying and measuring business metrics requires engagement from various stakeholders across organization to identify and align with respective resource consumption (proxy metric). [Sustainability KPI](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/evaluate-specific-improvements.html#key-performance-indicators)can be determined by dividing the proxy metrics for provisioned resource by the business outcomes achieved to find out the provisioned resources per unit of work.
 
-![Figure-1 Sustainability proxy metric equation](images/image1.png) *Figure-1: Sustainability proxy metric equation*
-
-![Figure-1 Sustainability proxy metric equation](images/image1.jpg "Figure-1: Sustainability proxy metric equation")
+![Figure-1 Sustainability proxy metric equation](images/image1.png "Figure-1: Sustainability proxy metric equation")
 
 ## How to extract proxy metrics
 
 AWS Service and tools can help you extract relevant proxy metrics for optimization across various domains like compute, storage, network etc.
 
-*  [AWS Trusted Advisor](https://aws.amazon.com/premiumsupport/technology/trusted-advisor/) (TA) provides actionable proxy metrics (and optimization recommendations) by analyzing usage and configuration of resources in your AWS account by using [checks](https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html). 
+* [AWS Trusted Advisor](https://aws.amazon.com/premiumsupport/technology/trusted-advisor/) (TA) provides actionable proxy metrics (and optimization recommendations) by analyzing usage and configuration of resources in your AWS account by using [checks](https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html).
 * AWS [Cost and Usage Reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) (CUR) contain line items for each unique combination of AWS products, usage type, and operation that you use in your AWS account. You can use [Amazon Athena to aggregate usage data available in AWS CUR](https://docs.aws.amazon.com/cur/latest/userguide/cur-query-athena.html) to identify proxy metrics for optimization.
 * [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) collects and track metrics, which are variables you can measure for your resources and applications.
 
@@ -48,7 +46,7 @@ We will use AnyCompany’s workload to identify proxy metrics for sustainability
 * results are also stored in object storage from where data scientists in corporate office download, and build complex data models using high performance desktops
 * historical data (stored in database) is accessed when needed
 
-![Figure-2 AnyCompany's AWS hosted workload architecture](images/image2.png) *Figure-2: AnyCompany's AWS hosted workload architecture*
+![Figure-2: AnyCompany's AWS hosted workload architecture](images/image2.png "Figure-2: AnyCompany's AWS hosted workload architecture")
 
 ## Identify proxy metrics of sample workload
 
@@ -62,11 +60,11 @@ In the preceding sample architecture, we can calculate average `CPUUtilization` 
 
 * In CloudWatch console, create a new stream with AWS/EC2 namespace and select `CPUUtilization` metric
 
-![Figure-3 Select namespace and metric when creating CloudWatch metric stream](images/image3.png) <br> *Figure-3: Select namespace and metric when creating CloudWatch metric stream*
+![Figure-3: Select namespace and metric when creating CloudWatch metric stream](images/image3.png "Figure-3: Select namespace and metric when creating CloudWatch metric stream")
 
 * Select Quick S3 setup and let CloudWatch create required resources (Kinesis Firehose stream, S3 bucket, IAM role etc.) to emit the metrics in JSON format
 
-![Figure-4 Quick S3 setup will automatically create the resources for you and export metrics into S3 in JSON format](images/image4.png) <br> *Figure-4: Quick S3 setup will automatically create the resources for you and export metrics into S3 in JSON format*
+![Figure-4: Quick S3 setup will automatically create the resources for you and export metrics into S3 in JSON format](images/image4.png "Figure-4: Quick S3 setup will automatically create the resources for you and export metrics into S3 in JSON format")
 
 * By default, metric stream includes `minimum, maximum, sample count, and sum` [statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-statistics.html)
 * Once you are finished creating the metric stream, CloudWatch will then automatically start directing the EC2 instances metrics to Amazon Kinesis Firehouse delivery stream, with delivery to a data lake in S3
@@ -113,10 +111,13 @@ A dashboard of metrics makes it easy for team members to visualize, track, and r
 
 Refer to this [AWS Workshop](https://catalog.workshops.aws/well-architected-sustainability/en-US/5-process-and-culture/cur-reports-as-efficiency-reports) for step-by-step information to setup Sustainability Proxy Metrics Dashboard using AWS Services.
 
-![Figure-5 Sample sustainability dashboard output from solution proposed in above workshop](images/image5.png) ![Figure-5 Sample sustainability dashboard output from solution proposed in above workshop](images/image6.png) <br> *Figure-5: Sample sustainability dashboard output from solution proposed in above workshop*
+![Figure-5: Sample sustainability dashboard output from solution proposed in above workshop](images/image5.png)
+
+![Figure-5: Sample sustainability dashboard output from solution proposed in above workshop](images/image6.png "Figure-5: Sample sustainability dashboard output from solution proposed in above workshop")
 
 Alternatively, you can start with a simple worksheet based tracker to measure, track, and report optimizations. Following is a sample tracking worksheet for reference:
-![Figure-6 Worksheet based optimization tracker](images/image7.png) *Figure-6: Worksheet based optimization tracker*
+
+![Figure-6: Worksheet based optimization tracker](images/image7.png "Figure-6: Worksheet based optimization tracker")
 
 ## Resources
 
