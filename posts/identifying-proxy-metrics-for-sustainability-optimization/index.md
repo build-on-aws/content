@@ -49,8 +49,6 @@ We will use AnyCompany’s workload to identify proxy metrics for sustainability
 * results are also stored in object storage from where data scientists in corporate office download, and build complex data models using high performance desktops
 * historical data (stored in database) is accessed when needed
 
-![Figure-2: AnyCompany's AWS hosted workload architecture](images/image2.png "Figure-2: AnyCompany's AWS hosted workload architecture")
-
 ![Figure-2: AnyCompany's AWS hosted workload architecture](images/image2.jpg "Figure-2: AnyCompany's AWS hosted workload architecture")
 
 ## Identify proxy metrics of sample workload
