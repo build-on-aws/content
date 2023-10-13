@@ -10,6 +10,7 @@ authorGithubAlias: KarnikPooja
 authorName: Pooja Karnik
 additionalAuthors: 
   - authorName: Raman Pujani
+  - authorGithubAlias: rpujani
 date: 2023-09-22
 ---
 ## Identifying Proxy Metrics for Sustainability Optimization
