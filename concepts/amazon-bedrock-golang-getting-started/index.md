@@ -21,19 +21,19 @@ date: 2023-10-15
 
 This article is an introductory guide for Go developers who want to get started building Generative AI applications using [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq) which is a fully managed service that makes base models from Amazon and third-party model providers accessible through an API.
 
-We will be using the [AWS Go SDK](https://aws.github.io/aws-sdk-go-v2/docs/) for Amazon Bedrock and cover the following topics as we go along: 
+We will be using the [AWS Go SDK](https://aws.github.io/aws-sdk-go-v2/docs/) for Amazon Bedrock and cover the following topics as we go along:
 
 - Introduction to the Amazon Bedrock Go APIs and learn how to use it for tasks such as content generation.
 - Understand how to build a simple chat application and handle streaming output from Amazon Bedrock Foundation Models.
 - Code walkthrough of the examples
 
-> The code examples are available in this [GitHub repository](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples) 
+> The code examples are available in this [GitHub repository](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples)
 
 ## Before you begin
 
 You will need to [install a recent version of Go](https://go.dev/dl/), if you don't have it already.
 
-Make sure you have [configured and set up Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/setting-up.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq), including [requesting for access](https://docs.aws.amazon.com/bedrock/latest/userguide/setting-up.html#manage-model-access?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq) to the Foundation Model(s). 
+Make sure you have [configured and set up Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/setting-up.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq), including [requesting for access](https://docs.aws.amazon.com/bedrock/latest/userguide/setting-up.html#manage-model-access?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq) to the Foundation Model(s).
 
 As we run the examples, we will be using the AWS Go SDK to invoke Amazon Bedrock API operations from our local machine. For this, you need to:
 
@@ -53,7 +53,7 @@ As we run the examples, we will be using the AWS Go SDK to invoke Amazon Bedrock
 }
 ```
 
-**Note on AWS Go SDK authentication**
+### Note on AWS Go SDK authentication
 
 If you have used the AWS Go SDK before, you will be familiar with this. If not, please note that in the code samples, I have used the following to load the configuration and specify credentials for authentication:
 
@@ -140,12 +140,12 @@ go run claude-content-generation/main.go
 The output might differ slightly in your case, but should be somewhat similar to this:
 
 ```text
-  <rewrite>
+<rewrite>
 Carl Linnaeus was a scientist from Sweden who studied plants and animals. In 1758, he published a book called Systema Naturae where he gave all species two word names. For example, he called dogs Canis familiaris. Canis is the Latin word for dog. Under the name Canis, Linnaeus listed the pet dog, the wolf, and the golden jackal. So he used the first word Canis to group together closely related animals like dogs, wolves and jackals. This way of naming species with two words is called binomial nomenclature and is still used by scientists today.
 </rewrite>
 ```
 
-Here is the [code](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/claude-content-generation/main.go) snippet (minus error handling etc.). 
+Here is the [code](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/claude-content-generation/main.go) snippet (minus error handling etc.).
 
 ```go
     //...
@@ -203,7 +203,7 @@ go run claude-information-extraction/main.go
 
 We can't have a GenAI article without a chat application, right? 😉
 
-Continuing with the Claude model, let's look at a [coversational example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/claude-chat/main.go). While you can exchange one-off messages, this example shows how to exchange multiple messages (chat) and also retain the conversation history. 
+Continuing with the Claude model, let's look at a [coversational example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/claude-chat/main.go). While you can exchange one-off messages, this example shows how to exchange multiple messages (chat) and also retain the conversation history.
 
 > Since it's a simple implementation, the state is maintained in-memory.
 
@@ -224,7 +224,7 @@ Here is an output of a conversation I had. Notice how the last response is gener
 
 ## Using the Streaming API
 
-In the previous chat example, you would have waited for a few seconds to get the entire output. This is because the process is completely synchronous - invoke the model and wait for the *complete* response. 
+In the previous chat example, you would have waited for a few seconds to get the entire output. This is because the process is completely synchronous - invoke the model and wait for the *complete* response.
 
 [InvokeModelWithResponseStream](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModelWithResponseStream) API that allows us to adopt an *asynchronous* approach - also referred to as **Streaming**. This is useful if you want to display the response to the user or process the response as it's being generated - this provides a "responsive" experience to the application.
 
@@ -244,7 +244,7 @@ go run streaming-claude-basic/main.go
 
 > You should see the output being written to the console as the parts are being generated by Amazon Bedrock.
 
-Let's take a look at the code. 
+Let's take a look at the code.
 
 Here is the first part - business as usual. We create a payload with the prompt (and parameters) and call the `InvokeModelWithResponseStream` API, which returns a [bedrockruntime.InvokeModelWithResponseStreamOutput](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#InvokeModelWithResponseStreamOutput) instance.
 
@@ -270,10 +270,9 @@ Here is the first part - business as usual. We create a payload with the prompt 
     //....
 ```
 
-The next part is different compared to the synchronous approach with `InvokeModel` API. Since the `InvokeModelWithResponseStreamOutput` instance does not have the complete response (yet), we cannot (or should not) simply return it to the caller. Instead, we opt to process this output bit by bit with the `processStreamingOutput` function. 
+The next part is different compared to the synchronous approach with `InvokeModel` API. Since the `InvokeModelWithResponseStreamOutput` instance does not have the complete response (yet), we cannot (or should not) simply return it to the caller. Instead, we opt to process this output bit by bit with the `processStreamingOutput` function.
 
 The function passed into it is of the type `type StreamingOutputHandler func(ctx context.Context, part []byte) error` which is a custom type I defined to provide a way for the calling application to specify *how* to handle the output chunks - in this case, we simply print to the console (standard out).
-
 
 ```go
     //...
@@ -284,7 +283,7 @@ The function passed into it is of the type `type StreamingOutputHandler func(ctx
     //...
 ```
 
-Take a look at what the `processStreamingOutput` function does (some parts of the code omitted for brevity). `InvokeModelWithResponseStreamOutput` provides us access to a channel of events (of type [types.ResponseStream](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types#ResponseStream)) which contains the event payload. This is nothing but a `JSON` formatted string with the partially generated response by the LLM - we convert it into a `Response` struct. 
+Take a look at what the `processStreamingOutput` function does (some parts of the code omitted for brevity). `InvokeModelWithResponseStreamOutput` provides us access to a channel of events (of type [types.ResponseStream](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types#ResponseStream)) which contains the event payload. This is nothing but a `JSON` formatted string with the partially generated response by the LLM - we convert it into a `Response` struct.
 
 We invoke the `handler` function (it prints the partial response to the console) and make sure we keep building the complete response as well by adding the partial bits - the complete response is finally returned from the function.
 
@@ -317,7 +316,7 @@ func processStreamingOutput(output *bedrockruntime.InvokeModelWithResponseStream
 
 ## Responsive chat application - thanks to streaming API
 
-Now that you have understood the how and why of handling streaming responses, our simple chat app is the perfect candidate for using this! 
+Now that you have understood the how and why of handling streaming responses, our simple chat app is the perfect candidate for using this!
 
 I will not walk through the code again - I have updated the chat application to use the `InvokeModelWithResponseStream` API and handle the responses as per previous example.
 
@@ -327,8 +326,7 @@ To run the [new version of the app](https://github.com/build-on-aws/amazon-bedro
 go run claude-chat-streaming/main.go
 ```
 
-![](images/streaming-chat.gif)
-
+![GIF showing the app running and accepting user input from the terminal](images/streaming-chat.gif)
 
 > So far we used the Anthropic Claude v2 model. You can also try the [Cohere model example](https://github.com/build-on-aws/amazon-bedrock-go-sdk-examples/blob/master/cohere-text-generation/main.go) for text generation. To run: `go run cohere-text-generation/main.go`
 
@@ -349,10 +347,9 @@ go run stablediffusion-image-gen/main.go "rocket ship launching from forest with
 
 > You should see an output JPG file generated
 
-Here is a quick walkthrough of the code (minus error handling etc.). 
+Here is a quick walkthrough of the code (minus error handling etc.).
 
 The output payload from the `InvokeModel` call result is converted to a `Response` struct which is further deconstructed to extract the `base64` image (encoded as `[]byte`) and decoded using [encoding/base64](https://pkg.go.dev/encoding/base64) and write the final `[]byte` into an output file (format `output-<timestamp>.jpg`).
-
 
 ```go
     //...
@@ -404,12 +401,12 @@ go run titan-text-embedding/main.go "dog"
 go run titan-text-embedding/main.go "trex"
 ```
 
-This is probably the least exciting output you will see! The truth is, it's hard to figure out anything by looking at a slice of `float64`s 🤷🏽 
+This is probably the least exciting output you will see! The truth is, it's hard to figure out anything by looking at a slice of `float64`s 🤷🏽
 
 It is more relevant when combined with other components such as a Vector Database (for *storing* these embeddings) and use cases like semantic search (to *make use* of these embeddings). These topics will be covered in future blog posts - for now, just bear with the fact that "it works".
 
 ## Closing thoughts
 
-I hope this proves useful for Go developers as a starting point on how to use Foundation models on Amazon Bedrock to power GenAI applications. 
+I hope this proves useful for Go developers as a starting point on how to use Foundation models on Amazon Bedrock to power GenAI applications.
 
 Watch out for more articles covering Generative AI topics for Go developers. Until then, Happy Building!
