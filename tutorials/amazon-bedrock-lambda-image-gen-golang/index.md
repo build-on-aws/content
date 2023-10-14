@@ -12,10 +12,15 @@ images:
   banner: images/website.jpg
 spaces:
   - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-10-27
 ---
+
+|ToC|
+|---|
 
 [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a fully managed service that makes base models from Amazon and third-party model providers (such as Anthropic, Cohere, and more) accessible through an API. In this tutorial, you will learn how to use it a part of an image generation solution along with other AWS services.
 
@@ -23,10 +28,19 @@ Once the solution is deployed, users can access a static website hosted on [Amaz
 
 ![Architecture](images/diagram.png)
 
-
-The entire solution is built using the [Go programming language](https://go.dev/) - this includes the Lambda function (using [aws-lambda-go](https://github.com/aws/aws-lambda-go) library) as well as the complete solution deployment using [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq)).
+The entire solution is built using the [Go programming language](https://go.dev/) - this includes the Lambda function (using [aws-lambda-go](https://github.com/aws/aws-lambda-go) library) as well as the complete solution deployment using [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 > The code is available on [GitHub](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang)
+
+
+| Attributes                |                                   |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | 200 - Intermediate                          |
+| ⏱ Time to complete  | 30 minutes                             |
+| 💰 Cost to complete | Free when using the AWS Free Tier      |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | 2023-10-27  
 
 ## Pre-requisites
 
@@ -47,21 +61,9 @@ git clone https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation
 cd amazon-bedrock-lambda-image-generation-golang
 ```
 
-| Attributes                |                                   |
-| ------------------- | -------------------------------------- |
-| ✅ AWS Level        | 200 - Intermediate                          |
-| ⏱ Time to complete  | 30 minutes                             |
-| 💰 Cost to complete | Free when using the AWS Free Tier      |
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang)                             |
-| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-10-27  
-
-|ToC|
-|---|
-
 ## Deploy the solution using AWS CDK
 
-To start the deployment, simply invoke `cdk deploy`. 
+To start the deployment, simply invoke `cdk deploy`.
 
 ```bash
 cd cdk
@@ -72,8 +74,7 @@ cdk deploy
 
 You will see a list of resources that will be created and will need to provide your confirmation to proceed (output shortened for brevity).
 
-
-```
+```bash
 Bundling asset BedrockLambdaImgeGenWebsiteStack/bedrock-imagegen-s3/Code/Stage...
 
 ✨  Synthesis time: 7.84s
@@ -123,7 +124,7 @@ Verify that the file was uploaded:
 aws s3 ls s3://<name of the S3 bucket from CDK output>
 ```
 
-Now you are ready to access the website! 
+Now you are ready to access the website!
 
 ## Verify the solution
 
@@ -132,7 +133,6 @@ Enter the CloudFront domain name in your web browser to navigate to the website.
 Click **Generate Image** to start the process. After a few seconds, you should see the generated image.
 
 ![Website](images/website.jpg)
-
 
 ### Modify the model parameters
 
@@ -239,12 +239,11 @@ Finally, we configure Lambda function integration with API Gateway, add the HTTP
 	awscdk.NewCfnOutput(stack, jsii.String("s3 bucket name"), &awscdk.CfnOutputProps{Value: bucket.BucketName(), Description: jsii.String("s3 bucket name")})
 ```
 
-
 ### Lambda function
 
 > You can refer to the [Lambda Function code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/function/main.go)
 
-In the function handler, we extract the prompt from the HTTP request body, and the configuration from the query parameters. Then it's used to call the model using [bedrockruntime.InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) function. Note the JSON payload sent to Amazon Bedrock is represented by an instance of the `Request` struct. 
+In the function handler, we extract the prompt from the HTTP request body, and the configuration from the query parameters. Then it's used to call the model using [bedrockruntime.InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) function. Note the JSON payload sent to Amazon Bedrock is represented by an instance of the `Request` struct.
 
 The output body returned from Amazon Bedrock Stability Diffusion model is a JSON payload which is converted into a `Response` struct which contains the generated image as a `base64` string. This is returned as an [events.APIGatewayV2HTTPResponse](https://pkg.go.dev/github.com/aws/aws-lambda-go/events#APIGatewayV2HTTPResponse) object along with `CORS` headers.
 
