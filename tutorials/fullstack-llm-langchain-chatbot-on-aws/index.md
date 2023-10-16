@@ -2,7 +2,7 @@
 title: "Build a Full Stack Large Language Model Powered Chatbot: Extract Insights from Unstructured Documents"
 description: "Use AWS and Opensource tools to build your own car-savvy AI assistant."
 tags:
-  - llm
+  - llms
   - generative-ai
   - sagemaker-jumpstart
   - langchain
