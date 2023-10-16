@@ -21,6 +21,7 @@ spaces:
 In today's live stream, Darko is joined by Banjo, as we discuss and implement some Generative AI into the all mighty Star Wars quote generator app. This time, we are actually adding the **generator** into this app. We had fun, we troubleshooted Lambda functions, Generated some fake Star Wars quotes, and fixed CORS. All in a days work! 👏
 
 We have the [code](https://github.com/darko-mesaros/starwars-quote-api) available for you if you wish to deploy it for yourself or follow along. But if you are very curious to see how did a **Lambda Function invoke Amazon Bedrock** here it is:
+
 ```python
 import boto3
 import json
