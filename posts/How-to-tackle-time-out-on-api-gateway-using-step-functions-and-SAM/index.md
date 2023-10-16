@@ -4,7 +4,8 @@ description: "How I solved time out errors on my AWS api gateway with serverless
 tags:
   - serverless
   - timeouts
-  - api-functions
+  - api-gateway
+  - step-functions
   - aws-sam
   - lambda
 authorGithubAlias: hsaenzG
