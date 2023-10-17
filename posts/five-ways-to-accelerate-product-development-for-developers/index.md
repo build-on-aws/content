@@ -39,7 +39,7 @@ No need to worry. AWS hosts the [AWS Solution Library](https://aws.amazon.com/so
 * **Partner Solutions** - Software, SaaS, or managed services from AWS Partners.
 * **Guidance** - Prescriptive architectural diagrams, sample code, and technical content.
 
-![AWS Solutions Library](images/aws-amazon-solutions.png)
+![AWS Solutions Library](images/aws-amazon-solutions.webp)
 
 📣 **Shameless plug**: If you’re attending re:Invent 2023, I’ll be there showing you exactly how to get value out of the AWS Solutions Library. In the [ARC203 “Solve everyday challenges faster with AWS Solutions Library“ workshop](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC203&sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq), we’ll deploy up to four AWS Solutions and show how they can be connected to quickly build a data ingestion engine.
 
