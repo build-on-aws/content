@@ -36,6 +36,14 @@ The beauty of re:Invent is the diversity it offers. Don’t confine yourself. At
 
 On the other hand, stepping out of your comfort zone and attending a session that might seem a stretch can give you a lot of inspiration and shape your future learning paths. Remember - re:Invent is your playground! There’s no entry tests or judgement, only opportunities to grow and learn.
 
+## What if I can't get into a session at re:Invent? Tips and tricks
+
+I know it can be disappointing when you don't manage to get a seat at one of your must-see sessions. But don't worry - there are still plenty of options! Firstly, all breakout sessions are recorded and uploaded to [YouTube](https://www.youtube.com/c/AWSEventsChannel) after re:Invent ends, so you can catch up on anything you missed from home.
+
+There are also repeat sessions for some of the most popular talks. Look out for a "-R" at the end of the session code - this indicates it's a repeat. These take place all week long across the different re:Invent venues. Keep an eye out too for overflow rooms and "spur of the moment" talks organized by the event staff if a room fills up. These overflow sessions will be in the content hubs in each venue.
+
+And finally, look on the [PeerTalk](https://reinvent.awsevents.com/learn/peertalk/) platform to see if any speakers you wanted to see are taking 1-on-1 session bookings. PeerTalk is a great way to network and chat directly with re:Invent experts. So don't stress too much if you miss out on reserving a seat. With repeats, overflows, PeerTalk and recorded sessions, you'll still have plenty of opportunities to learn from the experts at re:Invent!
+
 ## Wrapping up
 
 As you gear up for this exciting event, take a moment to craft an agenda that not only educates but also inspires. I’m looking forward to both familiar faces and fresh ones in Las Vegas. Until we meet, happy planning!
