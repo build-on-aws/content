@@ -7,6 +7,9 @@ tags:
   - product
   - solutions
   - reinvent
+  - reinvent-23
+spaces:
+  - reinvent
 authorGithubAlias: tierfour
 authorName: Todd Fortier
 date: 2023-10-17
