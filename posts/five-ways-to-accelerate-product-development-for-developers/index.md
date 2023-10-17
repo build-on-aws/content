@@ -7,7 +7,7 @@ tags:
   - product
   - solutions
   - reinvent
-  - reinvent-23
+  - reinvent-2023
 spaces:
   - reinvent
 authorGithubAlias: tierfour
