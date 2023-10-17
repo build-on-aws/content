@@ -9,6 +9,9 @@ authorName: Brooke Jamieson
 date: 2023-10-16
 ---
 
+|ToC|
+|---|
+
 ## Decoding AWS re:Invent | A guide for first-timers
 
 With [AWS re:Invent](https://reinvent.awsevents.com/) just around the corner and seat reservations opening up, it’s an exciting time for all of us! But for those attending for the first time, the sheer number of sessions can feel a bit daunting. Fear not: I’m here to help you navigate this! If you’d prefer this blog post in video format, you can find my video post about this on [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7119717373250523136/) or [Twitter/X](https://x.com/brooke_jamieson/status/1713950044800397612).
