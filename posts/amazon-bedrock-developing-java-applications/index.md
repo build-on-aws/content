@@ -10,10 +10,10 @@ spaces:
 waves: 
   - generative-ai
 images:
-  banner: images/bedrock-with-java.png
+  banner: images/bedrock-with-java.webp
   thumbnail: images/Arch_Amazon-Bedrock_64-5x.png
-  hero: images/bedrock-with-java.png
-  background: images/bedrock-with-java.png
+  hero: images/bedrock-with-java.webp
+  background: images/bedrock-with-java.webp
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2023-10-18
