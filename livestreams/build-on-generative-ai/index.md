@@ -47,8 +47,6 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 | S02E04 | Streaming support on SageMaker endpoints | 2023-09-11  | Raghu Ramesha | [Show notes](/livestreams/build-on-generative-ai/2023-09-11) |
 | S02E07 | Amazon BEDROCK and Bias Mitigation for LLMs | 2023-10-02 | Mark Roy | [Show notes](/livestreams/build-on-generative-ai/2023-10-02) |
 
-title: "Amazon BEDROCK and Bias Mitigation for LLMs | S02 E07 | Build On Generative AI"
-
 ### SEASON 01
 
 | Episode | Name | Date | Guest | Link to Video
