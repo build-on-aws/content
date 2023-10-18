@@ -41,7 +41,7 @@ No need to worry. AWS hosts the [AWS Solution Library](https://aws.amazon.com/so
 
 ![AWS Solutions Library](images/aws-amazon-solutions.webp)
 
-📣 **Shameless plug**: If you’re attending re:Invent 2023, I’ll be there showing you exactly how to get value out of the AWS Solutions Library. In the [ARC203 “Solve everyday challenges faster with AWS Solutions Library“ workshop](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC203&sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq), we’ll deploy up to four AWS Solutions and show how they can be connected to quickly build a data ingestion engine.
+📣 **Shameless plug**: If you’re attending re:Invent 2023, I’ll be there showing you exactly how to get value out of the AWS Solutions Library. In the [ARC203 “Solve everyday challenges faster with AWS Solutions Library“ workshop](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC203&sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq), we’ll deploy up to four AWS Solutions and show how they can be connected to quickly build a data ingestion engine. You can also come say hi on the floor at the expo in the Solutions Lounge! 
 
 ## 2. Use better tools
 
@@ -49,7 +49,7 @@ GenAI. Done. Next.
 
 Well... Not quite. GenAI is no doubt the most transformational development in computing since the internet. But it’s still early and yet to replace developers completely. Until it does, there are tools available to speed up product development and release faster. Here are a few to consider:
 
-* [Amazon CodeCatalyst](https://aws.amazon.com/codecatalyst/?sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq) - A fully managed unified development service that enables you to plan, execute and deliver applications faster.
+* [AWS App Runner](https://aws.amazon.com/apprunner/?sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq) - A fully managed application service that lets you build, deploy, and run web applications and API services without prior infrastructure or container experience.
 * [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer?trk=83c710fd-0a7a-416b-9bb8-baa535b64ee0&sc_channel=el) - AI coding companion trained on billions of lines of code.
 * [AWS Amplify Studio](https://aws.amazon.com/amplify/studio/?sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq) - Visual interface to designed to speed up full-stack development with a few clicks.
 * [AWS IoT TwinMaker](https://aws.amazon.com/iot-twinmaker/?sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq) - Easily create digital twins of real world systems to optimize operations.
@@ -76,17 +76,17 @@ Again, kidding. But you can see where I’m going here. It’s tempting to want 
 
 I recently watched the movie *Blackberry* on a long flight to Seattle. There was an excellent scene with a big trailer quote that got me thinking about product development:
 
-> Mike Lazaridis: “I will build a prototype. But I’ll do it perfectly or I don’t do it.“
-> Jim Balsillie: “Mike, are you familiar with the saying, ‘perfect is the enemy of good?’”
-> Mike Lazaridis: “Well, good enough is the enemy of humanity.”
+> Mike Lazaridis: “I will build a prototype. But I’ll do it perfectly or I don’t do it.“  
+> Jim Balsillie: “Mike, are you familiar with the saying, ‘perfect is the enemy of good?’”  
+> Mike Lazaridis: “Well, good enough is the enemy of humanity.”  
 
-![Person typing on a prototype hand-held device with an LCD screen and small keyboard](https://media.giphy.com/media/oa6I4QoVUFhD1rIz4V/giphy.gif)
+![A microcontroller with wires sticking out](images/prototype.png)
 
 Bam! Mic drop. Got em.
 
 Cool quote but I tend to lean towards Jim’s thinking here. My wife and I are three years into a seven year plan to build a farmstead and we have a saying in our house: “Good enough is perfect.” But how do you know what’s good enough? Here’s one answer: observability. On the farm, we are continuously monitoring. Whether it’s goat fencing, chicken feeders or watering schedules, each season we observe what’s working well and what’s not. We tweak what’s not working and scale what is. The same is true for your product. Consider implementing monitoring throughout your stack and look for bottlenecks that refocus your attention. Tweak what’s not working. Scale what is. Here are a few observability resources to get you started:
 
-* [Application Monitoring with Amazon CloudWatch](https://aws.amazon.com/solutions/implementations/application-monitoring-with-cloudwatch/?did=sl_card&trk=sl_card&sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+* [Centralized Logging with OpenSearch](https://aws.amazon.com/solutions/implementations/centralized-logging-with-opensearch//?did=sl_card&trk=sl_card&sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * [Observability solutions on the AWS Solutions Library](https://aws.amazon.com/solutions/cloud-foundations/capabilities/observability/?sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * Blog Post: [Observability using native Amazon CloudWatch and AWS X-Ray for serverless modern applications](https://aws.amazon.com/blogs/mt/observability-using-native-amazon-cloudwatch-and-aws-x-ray-for-serverless-modern-applications/?sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
