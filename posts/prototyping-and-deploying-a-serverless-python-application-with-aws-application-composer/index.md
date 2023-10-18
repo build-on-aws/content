@@ -5,7 +5,7 @@ tags:
   - serverless
   - python
   - application-composer
-  - serverless-application-model
+  - aws-sam
   - streamlit
   - devops
 spaces:

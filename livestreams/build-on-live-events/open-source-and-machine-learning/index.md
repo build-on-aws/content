@@ -2,7 +2,7 @@
 title: "Build On Live | Open Source & Machine Learning"
 description: "Build On Live event focused on the wonderful world of Open Source and Machine learning."
 tags:
-  - machine-learning
+  - ai-ml
   - generative-ai
   - open-surce
   - build-on-live

@@ -18,4 +18,4 @@ or
 Content for https://github.com/build-on-aws/content/issues/5
 ```
 
-**By submitting this pull request, I confirm I own this content, have permission to use each image included in this content, and that it will be released under the [CC BY-SA 4.0 SA License](/LICENSE).**
+**By submitting this pull request, I confirm I own this content, have permission to use each image included in this content, and that it will be released under the [CC BY-SA 4.0 SA License](/LICENSE). Notwithstanding the above, if you provide source code text within your content piece, you are providing such source code under the MIT-0 license.**

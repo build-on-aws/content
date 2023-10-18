@@ -3,7 +3,7 @@ title: "A Gentle Introduction to Transformer Architecture and Relevance to Gener
 description: "This post is about Transformer Architecture, its relevance to GenAI, tips and guidance on customizing your interaction with the large language models."
 tags:  
   - transformer-architecture
-  - llm
+  - llms
   - generative-ai
   - prompt-engineering
   - fine-tuning
