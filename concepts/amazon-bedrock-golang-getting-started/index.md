@@ -405,7 +405,7 @@ This is probably the least exciting output you will see! The truth is, it's hard
 
 It is more relevant when combined with other components such as a Vector Database (for *storing* these embeddings) and use cases like semantic search (to *make use* of these embeddings). These topics will be covered in future blog posts. For now, just bear with the fact that "it works".
 
-## Closing thoughts
+## Closing Thoughts
 
 I hope this proves useful for Go developers as a starting point on how to use Foundation models on Amazon Bedrock to power GenAI applications.
 
