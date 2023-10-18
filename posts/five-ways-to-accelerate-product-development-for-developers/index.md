@@ -12,7 +12,7 @@ spaces:
   - reinvent
 authorGithubAlias: tierfour
 authorName: Todd Fortier
-date: 2023-10-17
+date: 2023-10-18
 ---
 
 |ToC|
@@ -41,7 +41,7 @@ No need to worry. AWS hosts the [AWS Solution Library](https://aws.amazon.com/so
 
 ![AWS Solutions Library](images/aws-amazon-solutions.webp)
 
-📣 **Shameless plug**: If you’re attending re:Invent 2023, I’ll be there showing you exactly how to get value out of the AWS Solutions Library. In the [ARC203 “Solve everyday challenges faster with AWS Solutions Library“ workshop](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC203&sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq), we’ll deploy up to four AWS Solutions and show how they can be connected to quickly build a data ingestion engine. You can also come say hi on the floor at the expo in the Solutions Lounge! 
+📣 **Shameless plug**: If you’re attending re:Invent 2023, I’ll be there showing you exactly how to get value out of the AWS Solutions Library. In the [ARC203 “Solve everyday challenges faster with AWS Solutions Library“ workshop](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC203&sc_channel=el&sc_campaign=reinvent&sc_content=five-ways-to-accelerate-product-development-for-developers&sc_geo=mult&sc_country=mult&sc_outcome=acq), we’ll deploy up to four AWS Solutions and show how they can be connected to quickly build a data ingestion engine. You can also come say hi on the floor at the expo in the Solutions Lounge!
 
 ## 2. Use better tools
 
@@ -80,7 +80,7 @@ I recently watched the movie *Blackberry* on a long flight to Seattle. There was
 > Jim Balsillie: “Mike, are you familiar with the saying, ‘perfect is the enemy of good?’”  
 > Mike Lazaridis: “Well, good enough is the enemy of humanity.”  
 
-![A microcontroller with wires sticking out](images/prototype.png)
+![Small prototype device with open circuit boards and wires](./images/prototype.webp)
 
 Bam! Mic drop. Got em.
 
