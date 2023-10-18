@@ -19,15 +19,15 @@ authorName: Ricardo Ferreira
 date: 2023-10-18
 ---
 
-When a developer picks a programming language to work with, it is usually a decision set on stone. Truth is, most developers fall in love with a given programming language and rarely need to use another one as they become pretty good in the chosen language. However, there are situations when they need to learn other languages as the type of applications they need to build don't provide good support for their preferred languages. A good example of this is building generative AI applications, which in theory are a simple matter of choosing [Python](https://aws.amazon.com/developer/language/python?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq) as the implementation language.
+Whenever a developer picks a programming language to work with, it is often a decision set on stone. Truth is, most developers fall in love with a given programming language and rarely need to use another one as they become pretty good in the chosen language. However, there are situations when they need to learn other languages because the type of applications they need to build don't provide good support for their preferred languages. A good example of this is building generative AI applications, which in theory are a simple matter of choosing [Python](https://aws.amazon.com/developer/language/python?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq) as the implementation language.
 
-I have used the expression "in theory" purposefully because, in the case of generative AI applications, this doesn't need to be true. Especially if you are leveraging [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq) to unlock the power of foundation models (FMs) from Amazon and leading AI startups. With a comprehensive support for different programming languages, Amazon Bedrock allows developers to pick their favorite language to build generative AI applications with ease.
+I used the expression "in theory" purposefully before because with generative AI applications, this doesn't need to be true. Especially if you are using [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq) to unlock the power of foundation models (FMs) from Amazon and leading AI startups. With a comprehensive support for different programming languages, Amazon Bedrock allows developers to pick their favorite language to build generative AI applications with ease.
 
-Well, my favorite programming language is [Java](https://aws.amazon.com/developer/language/java?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq), and I'm excited to share with you that developing generative AI applications using Amazon Bedrock is very easy. In this blog post, I will walk you through in how to get started building Java applications using Amazon Bedrock. All the code from this blog post can be found in [this GitHub repository](https://github.com/build-on-aws/amazon-bedrock-with-builder-and-command-patterns).
+I'm excited to share that with [Java](https://aws.amazon.com/developer/language/java?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq), my favorite programming language, developing generative AI applications using Amazon Bedrock is very easy. In this blog post, I will walk you through in how to get started building Java applications using Amazon Bedrock. All the code from this blog post can be found in [this GitHub repository](https://github.com/build-on-aws/amazon-bedrock-with-builder-and-command-patterns).
 
-## AWS SDK Support for Amazon Bedrock
+## Adding the AWS SDK for Java
 
-The first thing you need to do to start working with Java using Amazon Bedrock is adding the right dependencies to your project. If you are using Maven, add the packages `bedrock` and `bedrockruntime` to your project as shown below.
+The first thing you need to do to start working with Java using Amazon Bedrock is adding the [AWS SDK for Java](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-integrating-foundation-models-into-your-code&sc_geo=mult&sc_country=mult&sc_outcome=acq) to your project. If you are using Maven, add the packages `bedrock` and `bedrockruntime` to your project as shown below.
 
 ```xml
 	<dependencies>
@@ -53,7 +53,7 @@ The first thing you need to do to start working with Java using Amazon Bedrock i
 	</dependencies>
 ```
 
-💡 Note that the usage of the dependency `json` is not mandatory. It was added to help with the examples of the following sections, but you are free to use another JSON parser library of your preference. With that done, let's start developing our first example.
+💡 Note that the usage of the dependency `json` is not mandatory. It was added to help with the examples of the following sections—but you are free to use another JSON parser library of your preference. With that done, let's start developing our first example.
 
 ## Text Generation with Cohere Command
 
@@ -155,7 +155,7 @@ public class CohereTextGeneration {
 
 Mind you the usage of the class [BedrockBodyBuilder](https://github.com/build-on-aws/amazon-bedrock-with-builder-and-command-patterns/blob/main/src/main/java/com/amazon/aws/developers/bedrock/util/BedrockRequestBody.java) to create the request for the body payload. This is not part of the AWS SDK for Java, but a helper class to assist in the payload generation. Ultimately, you are required to provide a string containing the exact payload for each foundation model support by Amazon Bedrock. Because this process can be tedious and error-prone, I created this helper class to make your life simpler. The complete implementation of this helper class can be found in [this GitHub repository](https://github.com/build-on-aws/amazon-bedrock-with-builder-and-command-patterns).
 
-Now for the moment you were waiting for: send the request to Amazon Bedrock, get a response, and process it to find the name of the band from the contract. Below is the complete example containing the invocation to Amazon Bedrock and the processing of the results to print in the console output.
+Now for the moment you were waiting for: sending the request to Amazon Bedrock, get a response, and process it to find the name of the band from the contract.
 
 ```java
 public class CohereTextGeneration {
