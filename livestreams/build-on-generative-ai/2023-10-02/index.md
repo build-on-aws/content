@@ -1,5 +1,5 @@
 ---
-title: "Amazon BEDROCK and Bias Mitigation for LLMs | S02 E07 | Build On Generative AI"
+title: "Amazon Bedrock and Bias Mitigation for LLMs | S02 E07 | Build On Generative AI"
 description: "It's here, its ready, let's have a look at Amazon Bedrock. After a sneak peek at Amazon Bedrock, Emily and Darko discuss Bias Mitigation in LLMs"
 tags:
   - amazon-bedrock
@@ -42,9 +42,9 @@ https://www.twitch.tv/videos/1950916227
 
 ## Links from today's episode
 
-- [Bedrock Workshop](https://github.com/aws-samples/amazon-bedrock-workshop)
+- [Amazon Bedrock Workshop](https://github.com/aws-samples/amazon-bedrock-workshop)
 - [Bias mitigation for LLMs](https://github.com/aws-samples/bias-mitigation-for-llms)
-- [Using bedrock with RAG notebook](https://github.com/aws-samples/amazon-bedrock-workshop/blob/main/03_QuestionAnswering/02_qa_w_rag_claude_pinecone.ipynb)
+- [Using Amazon Bedrock with RAG notebook](https://github.com/aws-samples/amazon-bedrock-workshop/blob/main/03_QuestionAnswering/02_qa_w_rag_claude_pinecone.ipynb)
 
 **Reach out to the hosts and guests:**
 
