@@ -1,6 +1,6 @@
 ---
 title: Quickly build Generative AI applications with Amazon Bedrock
-description: Learn how to build using foundation models quickly with Streamlit, Pyhon, Claude, Stable Diffusion, and Amazon Bedrock. 
+description: Learn how to build using foundation models quickly with Streamlit, Python, Claude, Stable Diffusion, and Amazon Bedrock. 
 tags:
   - generative-ai
   - bedrock

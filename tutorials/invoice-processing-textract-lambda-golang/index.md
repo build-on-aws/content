@@ -2,7 +2,7 @@
 title: 'Build a Serverless Application to Automate Invoice Processing on AWS'
 description: Learn how to use Amazon Textract and AWS Lambda to process invoice images and extract metadata using the Go programming language.
 tags:
-  - go
+  - golang
   - serverless
   - ai-ml
   - cdk

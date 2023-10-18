@@ -9,6 +9,9 @@ tags:
     - reinvent-2023
 spaces:
     - reinvent
+    - generative-ai
+waves:
+    - generative-ai
 authorGithubAlias: cobusbernard
 authorName: Cobus Bernard
 date: 2023-10-06

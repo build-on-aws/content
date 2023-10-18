@@ -2,7 +2,7 @@
 title: "Build On Answered | All About Machine Learning | S01 EP03"
 description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
-    - machine-learning
+    - ai-ml
     - stack-overflow
     - aws-stack-overflow-collective
     - aws

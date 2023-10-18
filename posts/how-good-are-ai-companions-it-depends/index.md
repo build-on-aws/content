@@ -5,6 +5,10 @@ tags:
   - generative-ai
   - codewhisperer
   - java
+spaces:
+  - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: rjourdan
 authorName: Romain Jourdan
 date: 2023-09-29
