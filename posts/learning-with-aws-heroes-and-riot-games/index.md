@@ -19,7 +19,7 @@ date: 2023-10-13
 
 [Valorant](https://playvalorant.com/en-us/) is a highly competitive first person shooter, with over a million players worldwide. It is a fast paced, twitchy game that requires skill, reflexes and lots of practice. The game consists of two teams of agents battling out on a map where one team is attacking and the other one is defending. With multiple different gameplay modes with different rules. While I have not played the game personally (I prefer games that allow me to have a coffee in one hand and keyboard/mouse in the other 😅), I definitely see the appeal and the thrill of winning a Multiplayer match.
 
-In July 2022 AWS and Riot entered into a 5 year partnership. As a Global gaming and entertainment leader, Riot offered unique opportunities for AWS to tell meaningful stories to builders and future IT leaders. This partnership lives at the intersection of data, gaming, sports and entertainment. Together, we are delivering exceptional experiences to players and bringing the drama of the game to life for fans at all levels and locales. Which brings me to this great opportunity! 👇
+After a decade of building out the infrastructure to run one of the world’s largest games, League of Legends, Riot Games began their transition to the AWS cloud over the last few years. The initial move leveraged technologies like [Outposts](https://aws.amazon.com/outposts/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=valorant-world-championshio-learnings) and [Local Zones](https://aws.amazon.com/about-aws/gobal-infrastructure/localzones/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=valorant-world-championshio-learnings) to bring an optimal game experience close to their global player base, and has culminated in Riot fully transitioning their entire game platform infrastructure to a containerized, self-scaling infrastructure that leverages the advantages of the cloud while still providing the best player experience. The Riot / AWS Esports partnership has expanded Riot’s capabilities for the Esports broadcasts, with their next-generation Remote Broadcast Centers, as well as forged new paths for machine learning and real-time analytics innovations like League of Legends Win Probability, which debuted at League’s Mid-Season Invitational in May 2023. Together, Riot and AWS will continue to develop solutions that increase fandom and redefine the Esports viewing experience. Which brings me to this great opportunity! 👇
 
 Late August 2023 the [Valorant World Championship](https://valorantesports.com/news/champions-los-angeles-ticket-sale-information/en-us) event was held in Los Angeles, and it featured 16 teams battling in multiple matches in a massive arena. It was such a spectacle to watch! And for any people out there stating that eSports are not sports, you should come and see one of these events, they are spectacular. 😍 The skills presented by the players, and the scale of the event blew me away.
 
@@ -27,9 +27,9 @@ Now, to enable such scale and also give the players a chance to build up skill. 
 
 All of this is just fascinating, and I had a blast listening to experts from Riot talk about this. A few things I've learned:
 
-**a/:** Latency is a big challenge in the world of eSports;
-**b/:** People can do wonderful things with the data you provide them; and
-**c/:** Replicating data across the globe has its problems - do not store your data globally *unless you really need it*.
+a) Latency is a big challenge in the world of eSports
+b) People can do wonderful things with the data you provide them; and
+c) Replicating data across the globe has its problems - do not store your data globally *unless you really need it*.
 
 If you wish to hear a bit about how does Valorant use the cloud, how they handle data, and what are the challenges of running such a game, here is a 30 minute video where I interview John, Gabriel and Brian from Riot where they share their stories.
 
