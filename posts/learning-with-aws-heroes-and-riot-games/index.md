@@ -27,9 +27,9 @@ Now, to enable such scale and also give the players a chance to build up skill. 
 
 All of this is just fascinating, and I had a blast listening to experts from Riot talk about this. A few things I've learned:
 
-- Latency is a big challenge in the world of eSports
-- People can do wonderful things with the data you provide them; and
-- Replicating data across the globe has its problems - do not store your data globally *unless you really need it*.
+- **Latency** is a big challenge in the world of eSports
+- People can do wonderful things with the **data you provide them**; and
+- Replicating data across the globe has its problems - **do not store your data globally** *unless you really need it*.
 
 If you wish to hear a bit about how does Valorant use the cloud, how they handle data, and what are the challenges of running such a game, here is a 30 minute video where I interview John, Gabriel and Brian from Riot where they share their stories.
 
