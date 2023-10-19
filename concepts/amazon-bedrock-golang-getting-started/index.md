@@ -405,8 +405,11 @@ This is probably the least exciting output you will see! The truth is, it's hard
 
 It is more relevant when combined with other components such as a Vector Database (for *storing* these embeddings) and use cases like semantic search (to *make use* of these embeddings). These topics will be covered in future blog posts. For now, just bear with the fact that "it works".
 
-## Closing Thoughts
+## Closing thoughts
 
-I hope this proves useful for Go developers as a starting point on how to use Foundation models on Amazon Bedrock to power GenAI applications.
+I hope this proves useful for Go developers as a starting point on how to use Foundation models on Amazon Bedrock to power GenAI applications. 
+
+You can also explore how to [fine-tune an Amazon Bedrock model](https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq) by providing your own labeled training data to improve its accuracy and how to monitor it using [Amazon CloudWatch](https://docs.aws.amazon.com/bedrock/latest/userguide/monitoring-cw.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Amazon EventBridge](https://docs.aws.amazon.com/bedrock/latest/userguide/monitoring-eventbridge.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-golang-getting-started&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+
 
 Watch out for more articles covering Generative AI topics for Go developers. Until then, Happy Building!
