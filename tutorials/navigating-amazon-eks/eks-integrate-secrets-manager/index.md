@@ -272,7 +272,7 @@ secrets-provider-aws kube-system [1 2023-08-07 15](tel:12023080715):39:55.851595
 
 In this section, you’re defining the `SecretProviderClass` Kubernetes object, which sets the stage for seamless secrets management within your Kubernetes workloads. This resource acts as a set of instructions for the AWS Secrets and Configuration Provider (ASCP), specifying which secrets to fetch from AWS Secrets Manager and how to mount them into your pods. Note that the SecretProviderClass must be deployed in the same namespace as the workload that references it. To learn more, see [SecretProviderClass documentation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver_SecretProviderClass.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-Create a Kubernetes manifest called `eksdemo-spc.yaml` and paste the following contents into it.
+Create a Kubernetes manifest called `eksdemo-spc.yaml` and paste the following contents into it:
 
 ```yaml
 apiVersion: secrets-store.csi.x-k8s.io/v1
@@ -327,7 +327,7 @@ Events:      <none>
 
 In this section, you'll deploy a sample workload to bridge your application and AWS Secrets Manager. By mounting the secret as a file on the workload's filesystem, you'll complete the end-to-end process of securely managing and accessing secrets within your Kubernetes environment. In the pod template you will specify the Secrets Store CSI as the volume driver and then a path to mount your secret, just like you would a traditional volume mount. In this example we will mount the secret in the `/mnt/secrets-store` location.
 
-Create a Kubernetes manifest called `eksdemo-app.yaml` and paste the following contents into it. 
+Create a Kubernetes manifest called `eksdemo-app.yaml` and paste the following contents into it: 
 
 ```yaml
 apiVersion: v1
@@ -418,4 +418,6 @@ aws iam delete-policy --policy-arn $POLICY_ARN
 
 ## Conclusion
 
-Upon completion of this tutorial, you will have successfully set up an integration between AWS Secrets Manager and your Amazon EKS cluster. This integration allows you to centralize the management of your application secrets, while easily consuming these secrets from your workloads running on EKS, without complex code modifications. Security and governance of your secrets as well as portability of your applications is improved with minimal overhead. This example can easily be replicated for the various types of secrets your workloads may require such as database credentials, API keys, and more. To learn more about setting up and managing Amazon EKS for your workloads, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+Upon completion of this tutorial, you will have successfully set up an integration between AWS Secrets Manager and your Amazon EKS cluster. This integration allows you to centralize the management of your application secrets, while easily consuming these secrets from your workloads running on EKS, without complex code modifications. Security and governance of your secrets as well as portability of your applications is improved with minimal overhead. This example can easily be replicated for the various types of secrets your workloads may require such as database credentials, API keys, and more. 
+
+To learn more about setting up and managing Amazon EKS for your workloads, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq).
