@@ -1,6 +1,6 @@
 ---
 title: "Using Amazon S3 Batch Operations to restore archived objects from an Amazon S3 Glacier storage classes"
-description: "Two or three sentences describing the problem, the solution, and tools or services used along the way"
+description: "Imagine it’s 4 p.m. on a Friday and your legal department just tasked you with providing access to files that have been stored in an S3 Flexible Retrieval archive storage class over the last several years. There’s a tight deadline and there are hundreds of files that need to be restored in order for the legal team to complete their work. In this tutorial, we’ll show you how to quickly restore objects by configuring an S3 Batch Operations restore job, which streamlines the process of retrieving objects from archival storage classes ensuring swift access to vital data while adhering to cost-effective storage practices."
 tags:
     - tutorials
     - aws
@@ -118,12 +118,12 @@ echo “sample file 3” > testfile-3.txt
 * S3 Batch Operations CSV manifests can include an optional version ID as a third column of the CSV. If using a versioned bucket, we recommend that you supply the version ID of each object in your manifest. Batch Operations will perform the operation on the latest version if no version ID is specified.
 * Save the file as “manifest.csv”.
 
-    1. Upload the S3 Batch Operations manifest to the S3 bucket. Leave the options on the default settings, and choose the **Upload** button.
+1. Upload the S3 Batch Operations manifest to the S3 bucket. Leave the options on the default settings, and choose the **Upload** button.
 
 ![Alt text](Images/image(10).png)
 1. **Create and run an S3 Batch Operations job**
 
-    1. On the left navigation pane of the Amazon S3 console home page, choose **Batch Operations**, and then choose **Create Job**.
+    a. On the left navigation pane of the Amazon S3 console home page, choose **Batch Operations**, and then choose **Create Job**.
 
 ![Alt text](Images/image(11).png)
     1. On the **Create job** page, select the **AWS Region** where you want to create your S3 Batch Operations job. You must create the job in the same AWS Region in which the source S3 bucket is located.
@@ -178,16 +178,16 @@ Next, you will have the option to request a [_completion report_](https://docs.a
 ![Alt text](Images/image(23).png)
 1. **Monitor the progress of a S3 Batch Operations job**
 
-    1. Select the job which was just created on the S3 Batch Operations console page.
+1. Select the job which was just created on the S3 Batch Operations console page.
 1. After an S3 Batch Operations job is created and run, it progresses through a series of statuses. You can track the progress of an S3 Batch Operations job by referring to these statuses on the Batch Operations home page.
 2. For example, a job is in the **New** state when it is created, moves to the **Preparing** state when Amazon S3 is processing the manifest and other job parameters, then moves to the **Ready** state when it is ready to run, **Active** when it is in progress, and finally **Completed** when the processing completes. For a full list of job statuses, see [_S3 __Batch Operations job statuses_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-job-status.html).
 
 * Here, you can view information about the job’s progress such as Job **Status, Total succeeded,** and **Total failed**. Once the job has completed executing, it will generate a report and transition to the **Completed** state.
 
 ![Alt text](Images/image(24).png)
-    1. Verify that the restore is successful.
-1. Once the job is successfully completed, go to the [_Amazon S3__ console__ home page_](https://s3.console.aws.amazon.com/s3/home), select the bucket, and choose an object in the Glacier Flexible Retrieval storage class.
-2. The banner shows that the **Restoration status** of the object is **In-progress**. The **download** option is greyed out as the object is not yet accessible to download.
+1. Verify that the restore is successful.
+2. Once the job is successfully completed, go to the [_Amazon S3__ console__ home page_](https://s3.console.aws.amazon.com/s3/home), select the bucket, and choose an object in the Glacier Flexible Retrieval storage class.
+3. The banner shows that the **Restoration status** of the object is **In-progress**. The **download** option is greyed out as the object is not yet accessible to download.
 
 ![Alt text](Images/image(25).png)
 * Standard retrievals initiated [_by using S3 Batch Operations restore operation typically start within minutes and finish within 3-5 hours_](https://aws.amazon.com/blogs/aws/new-improve-amazon-s3-glacier-flexible-restore-time-by-up-to-85-using-standard-retrieval-tier-and-s3-batch-operations/) for objects stored in the S3 Glacier Flexible Retrieval storage class.
@@ -195,7 +195,7 @@ Next, you will have the option to request a [_completion report_](https://docs.a
 
 ![Alt text](Images/image(26).png)
 1. **View S3 Batch Operations completion reports**
-    1. S3 Batch Operations generates a report for jobs that have completed, failed, or cancelled. Select the path you’ve configured to save the completion reports.
+    a. S3 Batch Operations generates a report for jobs that have completed, failed, or cancelled. Select the path you’ve configured to save the completion reports.
 
 ![Alt text](Images/image(27).png)
     1. Download the completion report to analyze the status of each task.
@@ -205,7 +205,7 @@ Next, you will have the option to request a [_completion report_](https://docs.a
 ![Alt text](Images/image(28).png)
 1. **Clean up resources**
 
-    1. Empty the bucket.
+1. Empty the bucket.
 1. If you have logged out of your AWS Management Console session, log back in. Navigate to the **S3** console and select the **Buckets** menu option. First, you will need to delete the test object from your test bucket. Select the name of the bucket you have been working with for this tutorial.
 2. Select the radio button to the left of the source bucket you created for this tutorial, and choose the **Empty** button.
 3. Select **Empty**. Review the warning message. If you desire to continue emptying this bucket, enter the bucket name into the Empty bucket confirmation box, and choose **Empty bucket.**
@@ -227,7 +227,7 @@ Note: Objects that are archived to the S3 Glacier Flexible Retrieval storage cla
 
 Congratulations! You have learned how to use S3 Batch Operations to restore archived objects. You can customize the restore tier and expiration time depending on your access needs. You can also use S3 Batch Operations to perform other types of requests such as replication, Lambda invocation, replacing object ACLs, tagging and enabling object lock.
 
-### Next Steps
+## Next Steps
 
 To learn more about S3 Batch Operations, visit the following resources.
 
