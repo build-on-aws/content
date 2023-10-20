@@ -85,14 +85,14 @@ echo “sample file 3” > testfile-3.txt
 
 ![Alt text](Images/image(2).png)
 
-    1. Next, select the **Objects** tab. Then, from within the **Objects** section, choose **Upload**.
+1. Next, select the **Objects** tab. Then, from within the **Objects** section, choose **Upload**.
 
 ![Alt text](Images/image(3).png)
     1. Then, in the **Upload** section, choose **Add files**. Navigate to your local file system to locate the test file that you created above. Select the appropriate file, and then choose **Open**. Your file will be listed in the **Files and folders** section. 
  ![Alt text](Images/image(4).png)       
 
 
-    1. Since this tutorial is focused on restoring objects from the S3 Glacier Flexible Retrieval storage class, expand the **Properties** tab to select the **Glacier Flexible Retrieval** storage class, then select **Upload**.
+1. Since this tutorial is focused on restoring objects from the S3 Glacier Flexible Retrieval storage class, expand the **Properties** tab to select the **Glacier Flexible Retrieval** storage class, then select **Upload**.
         
 
 ![Alt text](Images/image(5).png)
@@ -102,7 +102,7 @@ echo “sample file 3” > testfile-3.txt
         
 ![Alt text](Images/image(7).png)
 
-    1. You should now see the objects in the S3 Console and their respective storage class.
+1. You should now see the objects in the S3 Console and their respective storage class.
 
 ![Alt text](Images/image(8).png)
 1. **Create a S3 Batch Operations manifest**
