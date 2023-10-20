@@ -7,11 +7,26 @@ tags:
     - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
     - tag-1
     - tag-2
-authorGithubAlias: githubAliasWithoutQuotes
+authorGithubAlias: dsonger73
 authorName: Name Surname
 date: 2023-10-20
 ---
 
+<!-- Update with the appropriate values -->
+<!-- Please ensure tutorials are flagged as level 200 (intermediate) or higher -->
+| Attributes                |                                   |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | Intermediate - 200                         |
+| ⏱ Time to complete  | 15 minutes                             |
+| 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | YYYY-MM-DD                             |
+
+| ToC |
+|-----|
+<!-- Use the above to auto-generate the table of content. Only build out a manual one if there are too many (sub) sections. -->
 
 
 |<br>AWS experience	|<br>Beginner	|
