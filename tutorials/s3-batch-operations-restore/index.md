@@ -1,14 +1,13 @@
 ---
-title: "Using Amazon S3 Batch Operations to restore archived objects from Amazon S3 Glacier storage classes"
+title: "Using Amazon S3 Batch Operations to restore archived objects from an Amazon S3 Glacier storage classes"
 description: "Two or three sentences describing the problem, the solution, and tools or services used along the way"
 tags:
     - tutorials
     - aws
-    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
-    - tag-1
-    - tag-2
+    - s3
+    - s3 batch operations
 authorGithubAlias: dsonger73
-authorName: Name Surname
+authorName: Yeswanth Narra, Arjun Rawal, Daimon Songer
 date: 2023-10-20
 ---
 
@@ -17,7 +16,7 @@ date: 2023-10-20
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Intermediate - 200                         |
-| ⏱ Time to complete  | 15 minutes                             |
+| ⏱ Time to complete  | 40 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
@@ -28,24 +27,6 @@ date: 2023-10-20
 |-----|
 <!-- Use the above to auto-generate the table of content. Only build out a manual one if there are too many (sub) sections. -->
 
-
-|<br>AWS experience	|<br>Beginner	|
-|---	|---	|
-|
-Time to complete	|
-40 minutes	|
-|---	|---	|
-|
-Cost to complete	|
-Less than $1, see the [_Amazon S3 pricing page_](https://aws.amazon.com/s3/pricing/) for more details	|
-|
-Requires	|
-AWS account	|
-|
-Services used	|
-[_Amazon S3_](https://aws.amazon.com/s3/) and [_AWS Identity and Access Management (IAM)_](https://aws.amazon.com/iam/)	|
-|
-Last updated	|8/10/2023	|
 
 **Overview**
 
