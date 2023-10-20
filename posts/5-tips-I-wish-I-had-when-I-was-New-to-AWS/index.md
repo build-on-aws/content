@@ -21,9 +21,9 @@ date: 2023-10-20
 
 # 5 tips I wish I had when I was New to AWS
 
-I remember when I started building on AWS, infinite possibilities, the cloud on my hand to build anything I wanted. I hadn't decided what was going to be my first project yet, but I was eager to start! But wait... start where?
+I remember when I started building on AWS, the joy of infinite possibilities, the cloud at my fingertips to build anything I wanted. I hadn't decided what was going to be my first project yet, but I was eager to start! But wait... start where?
 
-I had been building traditional applications on prem, that was easy or at least something I was used to doing. But I found myself navigating through new services, features, the infinite possibilities were actually a infinite!
+I had been building traditional applications on prem, that was easy or at least something I was used to doing. But I found myself navigating through new services, features, and those infinite possibilities started to feel a little too infinite!
 
 I am sure that if you are new to AWS you may have felt the same way at some point of your AWS journey, so I wanted to share with you a few tricks that I have learned over the few years, that I wish I had when I was new to AWS.
 
