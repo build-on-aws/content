@@ -69,7 +69,7 @@ Before starting this tutorial, you will need:
 
 ![Alt text](Images/image(1).png)
 
-    1. You can leave the remaining options as defaults. Navigate to the bottom of the page and choose **Create bucket**.
+1. You can leave the remaining options as defaults. Navigate to the bottom of the page and choose **Create bucket**.
 
 1. **Archive objects into the Glacier Flexible Retrieval storage class** 
 
