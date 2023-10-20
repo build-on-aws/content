@@ -65,7 +65,7 @@ Before starting this tutorial, you will need:
  
   ![Alt text](Images/secondimage.png)
 
-    1. Enter a descriptive, globally unique name for your source bucket. Select the **AWS Region** you want your bucket created in. In this example, the **EU (Frankfurt) eu-central-1 region** is selected.
+1. Enter a descriptive, globally unique name for your source bucket. Select the **AWS Region** you want your bucket created in. In this example, the **EU (Frankfurt) eu-central-1 region** is selected.
 
 ![Alt text](Images/image(1).png)
 
