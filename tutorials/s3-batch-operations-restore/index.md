@@ -9,7 +9,7 @@ tags:
     - tag-2
 authorGithubAlias: githubAliasWithoutQuotes
 authorName: Name Surname
-date: YYYY-MM-DD
+date: 2023-10-20
 ---
 
 
