@@ -25,10 +25,12 @@ date: 2023-10-20
 
 | ToC |
 |-----|
+
+
 <!-- Use the above to auto-generate the table of content. Only build out a manual one if there are too many (sub) sections. -->
 
 
-**Overview**
+## Overview
 
 [Amazon S3 Batch Operations](https://aws.amazon.com/s3/features/batch-operations/) is a managed solution for performing storage actions like copying and tagging objects at scale, whether for one-time tasks or for recurring, batch workloads. S3 Batch Operations can perform actions across billions of objects and petabytes of data with a single request. To perform work in S3 Batch Operations, you create a job. The job consists of the list of objects, the action to perform, and the set of parameters you specify for that type of operation. You can create and run multiple jobs at a time in S3 Batch Operations or use job priorities as needed to define the precedence of each job and ensures the most critical work happens first. S3 Batch Operations also manages retries, tracks progress, sends completion notifications, generates reports, and delivers events to [_AWS CloudTrail_](https://aws.amazon.com/cloudtrail/) for all changes made and tasks executed. This getting started guide shows you how to use S3 Batch Operations to initiate restore requests for objects stored in Amazon S3 Glacier storage classes.
 
@@ -45,15 +47,15 @@ In this tutorial, you will:
     * **View S3 Batch Operations completion report**
     * **Clean up resources**
 
-**Prerequisites**
+## Prerequisites
 
 Before starting this tutorial, you will need:
 
 * **An AWS account:** If you don't already have an account, follow the [_Setting Up Your Environment_](https://aws.amazon.com/getting-started/guides/setup-environment/) getting started guide for a quick overview.
 
-**Implementation:** 
+## Implementation
 
-**Step 1: Create an Amazon S3 bucket**
+### Step 1: Create an Amazon S3 bucket
 
  a. Log in to the [_AWS Management Console_](https://console.aws.amazon.com/) using your account information. In the search bar, enter **S3**, then select **S3** from the results.
 
@@ -215,17 +217,17 @@ Note: Objects that are archived to the S3 Glacier Flexible Retrieval storage cla
 2. Select the radio button to the left of the bucket you created for this tutorial, and choose the **Delete** button.
 3. Review the warning message. If you desire to continue deletion of this bucket, enter the bucket name into the **Delete bucket** confirmation box, and choose **Delete bucket** **** button.
 
-    1. Delete the IAM role and the IAM policy.
+    a. Delete the IAM role and the IAM policy.
 1. If you have logged out of your AWS Management Console session, log back in. Navigate to the [_IAM console_](https://console.aws.amazon.com/iam/) and select **Roles** from the left menu options.
 2. Delete the role created for this tutorial.
 3. Navigate to **Policies** from the left menu options.
 4. Delete the IAM policy that was created for this tutorial.
 
-**Conclusion**
+## Conclusion
 
 Congratulations! You have learned how to use S3 Batch Operations to restore archived objects. You can customize the restore tier and expiration time depending on your access needs. You can also use S3 Batch Operations to perform other types of requests such as replication, Lambda invocation, replacing object ACLs, tagging and enabling object lock.
 
-**Next Steps**
+### Next Steps
 
 To learn more about S3 Batch Operations, visit the following resources.
 
