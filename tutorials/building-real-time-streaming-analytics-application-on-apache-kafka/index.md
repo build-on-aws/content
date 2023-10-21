@@ -8,7 +8,8 @@ tags:
   - ecs
   - aws
   - tutorials
-showInHomeFeed: true
+waves:
+  - dataml
 movedFrom: /posts/building-real-time-streaming-analytics-application-on-apache-kafka
 authorGithubAlias: Madabaru
 authorName: Felix John

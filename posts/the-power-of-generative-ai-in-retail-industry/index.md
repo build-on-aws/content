@@ -5,6 +5,10 @@ tags:
   - ai-ml
   - generative-ai
   - stable-diffusion
+spaces: 
+  - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: eric80116
 authorName: Eric Liou
 additionalAuthors: 

@@ -30,25 +30,29 @@ This show is as interactive as our audience makes it, so join us as we work thro
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 * [**Cobus Bernard**](https://twitter.com/cobusbernard), Senior Developer Advocate @ AWS
-* **Chris Williams**, Senior Solution Architect @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 
 ## Schedule
 
+Join us for our upcoming episodes every Wednesday at 11am PT from 11 October 2023 onwards!!
+
 | Upcoming Episode | Name| Date | Link to Watch |
 |--|--|--|--|
-| **SO01E10** | In-studio with Cobus and Julie | August 2, 8am PT | [Watch here](https://twitch.tv) |
-| **SO01E11** | All about Amazon Redshift | August 16, 8am PT | [Watch here](https://twitch.tv) |
-| **SO01E12** | All about Kubernetes with Jérôme Petazzoni | September 6, 8am PT | [Watch here](https://twitch.tv) |
-| **SO01E13** | All about Surprises | September 20, 8am PT | [Watch here](https://twitch.tv) |
+| **S2E01** | All about Surprises | October 11, 11am PT | [Watch here](https://twitch.tv/aws) |
 
 Watch past episodes!
-Join us for our upcoming episodes on the 1st and 3rd Wednesdays of the month!!
 
 | Episode | Name| Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|--|
-| **SO01E09** | Boto3, Autoscaling, Chaos, and More with Julie, Chris, and Cobus | July 19, 2023 | [Watch here](https://www.twitch.tv/videos/1876114874) | [Show Notes](/livestreams/build-on-answered/2023-07-19) |
-| **S01E08**| More Terraform with Kerim | July 5, 2023 | [Watch here](https://www.twitch.tv/videos/1864025107 ) | [Show Notes](/livestreams/build-on-answered/2023-07-05)|
-| **S01E07** | Resiliency with Seth | June 21, 2023 | [Watch here](https://www.twitch.tv/videos/1856494950 ) | [Show Notes](/livestreams/build-on-answered/2023-06-21)|
-| **S01E06** | Talking Terraform with Rohini | June 7, 2023 | [Watch here](https://www.twitch.tv/videos/1850485117) | [Show Notes](/livestreams/build-on-answered/2023-06-07)|
-
-
+| **S1E12** | All about Kubernetes with Jérôme Petazzoni | September 6, 2023 | [Watch here](https://www.twitch.tv/videos/1919526636) |[Show Notes](/livestreams/build-on-answered/2023-09-06) |
+| **S1E11** | All about Amazon Redshift | August 16, 2023 | [Watch here](https://www.twitch.tv/videos/1900421697) | [Show Notes](/livestreams/build-on-answered/2023-08-16) |
+| **S1E10** | In-studio with Cobus and Julie | August 2, 2023 | [Watch here](https://www.twitch.tv/videos/1888395222) | [Show Notes](/livestreams/build-on-answered/2023-08-02) |
+| **S1E09** | All About Boto3, Autoscaling, Chaos, and More | July 19, 2023 | [Watch here](https://www.twitch.tv/videos/1876114874) | [Show Notes](/livestreams/build-on-answered/2023-07-19) |
+| **S1E08** | All About Terraform with Kerim | July 5, 2023 | [Watch here](https://www.twitch.tv/videos/1864025107) | [Show Notes](/livestreams/build-on-answered/2023-07-05) |
+| **S1E07** | All About Resiliency with Seth | June 21, 2023 | [Watch here](https://www.twitch.tv/videos/1856494950) | [Show Notes](/livestreams/build-on-answered/2023-06-21) |
+| **S1E06** | All About Terraform with Rohini | June 7, 2023 | [Watch here](https://www.twitch.tv/videos/1850485117) | [Show Notes](/livestreams/build-on-answered/2023-06-07) |
+| **S1E05** | All About DataOps Part 2 | May 17, 2023 | [Watch here](https://www.twitch.tv/videos/1850492587) | [Show Notes](/livestreams/build-on-answered/2023-05-17) |
+| **S1E04** | All About DataOps Part 1 | May 3, 2023 | [Watch here](https://www.twitch.tv/aws) | [Show Notes](/livestreams/build-on-answered/2023-05-03) |
+| **S1E03** | All About Machine Learning | April 19, 2023 | [Watch here](https://www.twitch.tv/videos/1785690757) | [Show Notes](/livestreams/build-on-answered/2023-04-19) |
+| **S1E02** | All About Amazon SageMaker | April 5, 2023 | [Watch here](https://www.twitch.tv/aws) | [Show Notes](/livestreams/build-on-answered/2023-04-05) |
+| **S1E01** | All About EC2 and S3 | March 8, 2023 | [Watch here](https://www.twitch.tv/videos/1752019282) | [Show Notes](/livestreams/build-on-answered/2023-03-08) |

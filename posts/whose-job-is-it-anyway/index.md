@@ -5,7 +5,7 @@ tags:
   - application-resilience
   - shared-responsibility
   - digital-transformation
-  - resiliency
+  - resilience
 spaces:
   - devops
 waves:
@@ -70,7 +70,7 @@ The [AWS Whitepaper on introducing DevOps](https://docs.aws.amazon.com/whitepape
 
     - **Continuous Integration:** A software development practice where developers regularly merge their code changes into a central repository, after which automated builds and tests are run. [GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions) is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. It lets you create workflows that build and test every pull request to your repository, or deploy merged pull requests to production.
     - **Infrastructure as Code:** A practice in which infrastructure is provisioned and managed using code and software development techniques, such as version control, and continuous integration. Consider tools like [Terraform](https://www.terraform.io/) which lets you automate the provision of your infrastructure including databases, servers, and firewall policies among others – across multiple cloud platforms. If you are looking to get started with Terraform, you will find [this set of tutorials](https://learn.hashicorp.com/terraform) to be helpful.
-    - **Monitoring and Logging:** Enables organizations to see how application and infrastructure performance impacts the experience of their product’s end user. [OpenTelemetry](https://opentelemetry.io/) is a collection of tools, APIs, and SDKs. Use it to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) to help you analyze your software’s performance and behavior. This [tutorial](/posts/instrumenting-java-apps-using-opentelemetry/) is helpful if you are looking to get started with OpenTelemetry.
+    - **Monitoring and Logging:** Enables organizations to see how application and infrastructure performance impacts the experience of their product’s end user. [OpenTelemetry](https://opentelemetry.io/) is a collection of tools, APIs, and SDKs. Use it to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) to help you analyze your software’s performance and behavior. This [tutorial](/posts/instrumenting-java-apps-using-opentelemetry) is helpful if you are looking to get started with OpenTelemetry.
     - **Communication and Collaboration:** Practices are established to bring the teams closer and by building workflows and distributing the responsibilities for DevOps.
     - **Security:** Should be a cross cutting concern. Your continuous integration and continuous delivery (CI/CD) pipelines and related services should be safeguarded and proper access control permissions should be set up. The [Open Web Application Security Project (OWASP)](https://owasp.org/about/) is a nonprofit foundation that works to improve the security of software. Their programs include community-led open source software projects, and they have over 250+ local chapters worldwide. The OWASP Foundation has a published list of Top 10 security risks to avoid in order to change the software development culture towards more secure code.
 

@@ -3,14 +3,23 @@ title: "How to build a ChatGPT-Powered AI tool to learn technical things fast"
 description: "A step-by-step guide to setting up a free ML environment, leveraging language models and ChatGPT APIs to extract insights from YouTube videos, and empowering yourself to learn faster and more efficiently like never before!"
 tags:
     - tutorials
-    - gen-ai
+    - generative-ai
     - chatgpt
     - hugging-face
     - amazon-sagemaker
-showInHomeFeed: true
+spaces:
+    - generative-ai
+waves:
+    - dataml
+    - generative-ai
+images:
+  thumbnail: images/overview-01.gif
+  banner: images/overview-01.gif
+  hero: images/overview-01.gif
+  background: images/overview-01.gif
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
-date: 2023-07-24
+date: 2023-08-11
 ---
 
 When was the last time you watched a YouTube video to learn something new? According to a [recent survey](https://www.techsmith.com/blog/video-statistics/) most respondents view videos 2-to-4 times per week, and [in a 2019 Google study](https://www.thinkwithgoogle.com/marketing-strategies/video/youtube-learning-statistics/), 86% of U.S. viewers said they used YouTube to learn new things.
@@ -32,7 +41,7 @@ You will be able to apply these steps to other use cases by selecting different 
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | Free when using the OpenAI API credit or less than $0.10      |
-| 🧩 Prerequisites    | - [Amazon SageMaker Studio Lab Account](https://studiolab.sagemaker.aws/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) <br>-  [Foundational knowledge of Python](https://catalog.us-east-1.prod.workshops.aws/workshops/3d705026-9edc-40e8-b353-bdabb116c89c/)    |                           |
+| 🧩 Prerequisites    | - [Amazon SageMaker Studio Lab Account](https://studiolab.sagemaker.aws?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) <br>-  [Foundational knowledge of Python](https://catalog.us-east-1.prod.workshops.aws/workshops/3d705026-9edc-40e8-b353-bdabb116c89c/)    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-07-22                             |
 
@@ -70,7 +79,7 @@ Let’s get started!
 
 ## Part 1 - Setup: SageMaker Studio Lab and OpenAI API Keys
 
-To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) and click `Request free account`. Fill in the required information in the form and submit your request. You will receive an email to verify your email address. Follow the instructions in the email.
+To get started, go to the [Studio Lab landing page](https://studiolab.sagemaker.aws?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) and click `Request free account`. Fill in the required information in the form and submit your request. You will receive an email to verify your email address. Follow the instructions in the email.
 
 > Please note that your account request needs to be approved before you can register for a Studio Lab account. The review process typically takes up to 5 business days. Once your account request is approved, you will receive an email containing a link to the Studio Lab account registration page. This link will remain active for 7 days after your request is approved.
 
@@ -95,7 +104,7 @@ In this tutorial, we will be utilizing the [GPT-3.5 Turbo](https://platform.open
 
 ## Part 2 - Obtaining a YouTube Video Transcript
 
-Once you have obtained access to the Studio Lab, sign into [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt).
+Once you have obtained access to the Studio Lab, sign into [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt).
 
 Under **My Project**, you can select a compute type and start project runtime based on a cloud compute instance. Studio Lab provides the option to choose between a CPU (Central Processing Unit) designed for compute intensive algorithms and a GPU (Graphical Processing Unit) which is recommended for deep learning tasks, particularly transformers and computer vision.
 
@@ -116,12 +125,13 @@ First, we will use pip to install all the packages required to complete this tut
 
 !pip install python-dotenv
 !pip install openai
-!pip install openai-whisper openai yt-dlp
 !pip install youtube_dl
 !pip install youtube_transcript_api
 !pip install torchaudio
 !pip install sentencepiece
 !pip install sacremoses
+!pip install transformers
+
 ```
 
 Next, let's import all the necessary dependencies. Copy and run the following code:

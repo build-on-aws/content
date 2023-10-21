@@ -4,10 +4,13 @@ description: "Tips and guidance on building a Generative AI Agent."
 tags:
   - agents
   - python
-  - huggingface
-  - gen-ai
+  - hugging-face
+  - generative-ai
   - ai-ml
 spaces:
+  - generative-ai
+waves:
+  - dataml
   - generative-ai
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi

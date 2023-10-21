@@ -77,9 +77,9 @@ Where `posts/owasp-top-10-defined/01-what-is-broken-access-control/index.md` is 
 
 The resulting URL mapping will be:
 
-* https://community.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control/
-* https://community.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/
-* https://community.aws/posts/owasp-top-10-defined/03-what-is-an-injection-attack/
+* https://community.aws/posts/owasp-top-10-defined/01-what-is-broken-access-control
+* https://community.aws/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure
+* https://community.aws/posts/owasp-top-10-defined/03-what-is-an-injection-attack
 
 You can see an example of this in the repo [here](/posts/owasp-top-10-defined).
 
@@ -126,8 +126,8 @@ This is how these controls look like:
 
 You can reference them using absolute paths of their folders:
 
-* `[What is a cryptographic failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure/)`
-* `[A cool tutorial](/tutorials/a-cool-tutorial/)`
+* `[What is a cryptographic failure?](/posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure)`
+* `[A cool tutorial](/tutorials/a-cool-tutorial)`
 
 _**Note:** Please do not hard code the full URL in the post_
 
@@ -516,21 +516,21 @@ A post can be place in one or more spaces. In order to do that, given the space 
 
 ```yml
 spaces:
-  - xxx
-  - yyy
+  - abc
+  - xyz
 ```
 
-In this example, the post will be part of the feed of spaces "xxx" and "yyy".
+In this example, the post will be part of the feed of spaces "abc" and "xyz".
 
 ### How do I add posts to the home page feed?
 
-By default, all posts inside the /posts/ folder are shown in the home feed. If you want to include in the feed a post that is outside this folder, add the following to the post front matter header:
+By default, all posts inside the `/posts/`, `/tutorials/`, and `/concepts` folders are shown in the home feed. If you want to include in the feed a post that is outside these folders, add the following to the post front matter header:
 
 ```yml
 showInHomeFeed: true
 ```
 
-If a post inside the /posts/ folder needs to be excluded from the home feed, then add this:
+If a post inside the `/posts/` folder needs to be excluded from the home feed, then add this:
 
 ```yml
 showInHomeFeed: false
@@ -539,7 +539,7 @@ showInHomeFeed: false
 ### How do I pin a post in the home page?
 
 A pinned post is displayed using a background image with the post title and date on top. It shows at the top of the feed in the home page (or tag/space page).
-In order to do so, edit the file /spaces/home/top.md so that it looks like this:
+In order to do so, edit the file `/spaces/home/top.md` so that it looks like this:
 
 ```markdown
 ---

@@ -4,19 +4,21 @@ description: "How To Build Stock Price Prediction Without Writing a Single Line 
 tags:
   - ai-ml
   - sagemaker
-  - no-code
+  - low-code-no-code
   - forecast
   - tutorials
   - s3
   - quicksight
 spaces:
   - generative-ai
+waves:
+  - dataml
+  - generative-ai
 images:
   thumbnail: images/overview-01.png
   banner: images/overview-01.png
   hero: images/overview-01.png
   background: images/overview-01.png
-showInHomeFeed: true
 movedFrom: /posts/no-code-ai-with-sagemaker-canvas
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan

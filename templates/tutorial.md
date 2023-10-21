@@ -8,18 +8,18 @@ tags:
     - tag-1
     - tag-2
 authorGithubAlias: githubAliasWithoutQuotes
-authorName: Name Surname (no quotes around)
-date: YYYY-MM-DD (expected publication date)
+authorName: Name Surname
+date: YYYY-MM-DD
 ---
 
 <!-- Throughout this template there will be comments like these, please remove them before committing the first version of the content piece. -->
 <!-- NB: READ THE COMMENT ABOVE, AND DELETE THIS AND OTHER COMMENTS!!! -->
 
-**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONTMATTER ABOVE**
+**EVERYTHING BELOW GETS REPLACED WITH YOUR CONTENT ONCE YOU'VE UPDATED THE FRONT MATTER ABOVE**
 
-## Frontmatter Instructions (remove this _Frontmatter Instructions_ section before authoring)
+## Front matter Instructions (remove this _Front matter Instructions_ section before authoring)
 
-All frontmatter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/).
+All front matter must be in [syntactically correct YAML](https://learnxinyminutes.com/docs/yaml/).
 
 - `title` - the title of your post in quotes, less than 100 characters i.e. "What Happens When You Type a URL Into Your Browser" - Please put this inside double-quotes
 - `description` - a description of your post used to surface a short description on the site and for SEO, less than 250 characters - Please put this inside double-quotes
@@ -51,7 +51,7 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 15 minutes                             |
 | 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [CodeCatalyst Account](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=cicdetlsprkaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | YYYY-MM-DD                             |
@@ -82,13 +82,22 @@ For example,
 this is javascript code
 ```
 
+### Step 1 - Example Adding your AWS Credentials
+
+Here is my content about how to add AWS Credentials. And if I want to use sub-steps, I would do this:
+
+1. Now you have the first substep
+2. Now you have the second substep
+
+### Step 2 - Example Doing Something Else
+
 If you want to share a code sample file with reader, then you have two options:
+
 - paste the contents with code blocks like mentioned above
-- provide link to the file. Use the raw file content option on GitHub (without the token parameter, if repo is private while drafting). It should look like:   
+- provide link to the file. Use the raw file content option on GitHub (without the token parameter, if repo is private while drafting). It should look like:
     `https://raw.githubusercontent.com/ORGANIZATION/REPO-NAME/main/FOLDER/FILENAME.EXTENSION`
     Example:
      _You can also copy-paste contents of this file from [here](https://raw.githubusercontent.com/build-on-aws/aws-elastic-beanstalk-cdk-pipelines/main/lib/eb-appln-stack.ts)._
-
 
 ## Clean up
 
@@ -98,7 +107,7 @@ Provide steps to clean up everything provisioned in this tutorial.
 
 <!-- Recommended to use past tense. e.g. "And that's it! We just built and deployed that thing together!"  -->
 
-Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation. 
+Provide a conclusion paragraph that reiterates what has been accomplished in this tutorial (e.g. turning on versioning), and what its value is for the reader (e.g. protecting against loss of work). If it makes sense, tie this back to the problem you described in the introduction, showing how it could be solved in a real-world situation.
 
 Identify natural next steps for curious readers, and suggest two or three useful articles based on those next steps.
 

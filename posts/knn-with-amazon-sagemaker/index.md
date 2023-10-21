@@ -3,13 +3,10 @@ title: "Enhancing Decision-Making with k-Nearest Neighbors with Amazon SageMaker
 description: "In this post, we shall delve into k-Nearest Neighbors(k-NN) algorithm,  one of the simplest yet very powerful algorithm, that can be used to solve very complex problems. We will start with some basic concepts, which always play an integral role irrespective of which algorithm we pick and that will help us set the premise before we dive deep into k-NN. We shall then proceed to solve some problems on Amazon SageMaker with the build-in k-NN, index based algorithm."
 tags:
   - amazon-sagemaker
-  - machine-learning
+  - ai-ml
   - knn
   - algorithm
-  - ai-ml
   - aws
-spaces:
-  - machine-learning
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2023-07-20
@@ -480,8 +477,8 @@ You may like to visit the below mentioned books and source links which were refe
 
 ### Amazon SageMaker
 
-- [Amazon SageMaker Developers Guide](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-dg.pdf)
-- [Amazon SageMaker Notebook Instances](https://docs.aws.amazon.com/sagemaker/latest/dg/nbi.html)
+- [Amazon SageMaker Developers Guide](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-dg.pdf?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=knn-with-amazon-sagemaker)
+- [Amazon SageMaker Notebook Instances](https://docs.aws.amazon.com/sagemaker/latest/dg/nbi.html?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=knn-with-amazon-sagemaker)
 
 ### Books
 

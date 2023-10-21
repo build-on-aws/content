@@ -10,7 +10,6 @@ tags:
   - cloudwatch
   - java
   - tutorials
-showInHomeFeed: true
 movedFrom: /posts/instrumenting-java-apps-using-opentelemetry
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
@@ -33,7 +32,7 @@ In this tutorial, you will learn how to instrument an existing microservice writ
 | ⏱ Time to complete    | 45 minutes                                                      |
 | 💰 Cost to complete    | Free tier eligible                                               |
 | 🧩 Prerequisites       | - [Docker](https://www.docker.com/get-started) 4.11+ (Required)<br>- [Java](https://openjdk.org/install) 17+ (Required)<br>- [Maven](https://maven.apache.org/download.cgi) 3.8.6+ (Required)<br>- [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=obsvbltjv&sc_geo=mult&sc_country=mult&sc_outcome=acq) (Optional) |
-| &#x1F4BE; Code         | [Download here the full guide](https://aws.amazon.com) |
+| &#x1F4BE; Code         | [Code used in this tutorial](https://github.com/build-on-aws/instrumenting-java-apps-using-opentelemetry) |
 
 | ToC |
 |-----|
@@ -179,7 +178,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.28.1/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 java -javaagent:./${AGENT_FILE} -jar target/hello-app-1.0.jar
@@ -206,7 +205,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.28.1/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 export OTEL_TRACES_EXPORTER=logging
@@ -331,7 +330,7 @@ mvn clean package -Dmaven.test.skip=true
 AGENT_FILE=opentelemetry-javaagent-all.jar
 
 if [ ! -f "${AGENT_FILE}" ]; then
-  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.19.2/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
+  curl -L https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/v1.28.1/aws-opentelemetry-agent.jar --output ${AGENT_FILE}
 fi
 
 export OTEL_TRACES_EXPORTER=otlp
@@ -614,6 +613,15 @@ public class HelloAppController {
     private Response buildResponse() {
         return new Response("Hello World");
     }
+
+    private record Response (String message) {
+        private Response {
+            Objects.requireNonNull(message);
+        }
+        private boolean isValid() {
+            return true;
+        }
+    }    
     
 }
 ```
@@ -641,16 +649,23 @@ These properties will be used throughout many parts of the code.
 5. Still in the `pom.xml` file, add the following dependencies:
 
 ```xml
+
+<dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>javax.annotation-api</artifactId>
+    <version>1.3.2</version>
+</dependency>
+
 <dependency>
     <groupId>io.opentelemetry</groupId>
     <artifactId>opentelemetry-api</artifactId>
-    <version>1.20.1</version>
+    <version>1.28.0</version>
 </dependency>
 
 <dependency>
     <groupId>io.opentelemetry.instrumentation</groupId>
     <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-    <version>1.20.1</version>
+    <version>1.28.0</version>
 </dependency>
 
 <dependency>
@@ -679,6 +694,7 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -720,6 +736,15 @@ public class HelloAppController {
     private Response buildResponse() {
         return new Response("Hello World");
     }
+
+    private record Response (String message) {
+        private Response {
+            Objects.requireNonNull(message);
+        }
+        private boolean isValid() {
+            return true;
+        }
+    }    
     
 }
 ```
@@ -846,6 +871,15 @@ public class HelloAppController {
     private Response buildResponse() {
         return new Response("Hello World");
     }
+
+    private record Response (String message) {
+        private Response {
+            Objects.requireNonNull(message);
+        }
+        private boolean isValid() {
+            return true;
+        }
+    }    
     
 }
 ```

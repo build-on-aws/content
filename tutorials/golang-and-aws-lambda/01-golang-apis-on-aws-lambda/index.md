@@ -1,5 +1,5 @@
 ---
-title: How do I run my Go applications in a Serverless way?
+title: How do I run existing Go applications on AWS Lambda - Part 1
 description: Learn how to run Go REST APIs as Lambda functions using the AWS Lambda Go API Proxy.
 tags:
   - lambda
@@ -7,7 +7,8 @@ tags:
   - golang
   - aws
   - aws-sam
-showInHomeFeed: true
+waves:
+  - modern-apps
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 date: 2023-07-20
@@ -307,3 +308,6 @@ This blog post introduced you to the AWS Lambda Go API Proxy, and how it's frame
 The AWS Lambda Go API Proxy also supports the [Gin](https://github.com/gin-gonic/gin), which one of the most popular Go web frameworks! The second part of this blog, will demonstrate how to run existing `Gin` framework based Go applications as AWS Lambda functions with the help of a simple (yet practical) URL shortener service.
 
 Stay tuned!
+
+|SeriesToC|
+|---------|

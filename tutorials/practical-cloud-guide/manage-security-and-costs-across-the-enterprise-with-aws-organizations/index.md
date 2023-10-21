@@ -7,7 +7,8 @@ tags:
     - aws
     - aws-organizations
     - tutorials
-showInHomeFeed: true
+spaces:
+  - cost-optimization
 authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2023-07-26

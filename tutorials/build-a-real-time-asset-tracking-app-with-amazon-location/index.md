@@ -10,9 +10,11 @@ tags:
     - amplify
     - cognito
     - lambda
+waves:
+  - modern-apps
 authorGithubAlias: zachelliottwx
 authorName: Zach Elliott
-date: 2023-05-10
+date: 2023-07-31
 ---
 
 Asset tracking is critical to supply chain operations. Whether it is tracking trucks across the country or last mile deliveries around a neighborhood, knowing where your fleet is located can add business value around loss prevention, sustainability, and [overall cost savings](https://aws.amazon.com/solutions/case-studies/geo-me-case-study/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq). In this tutorial, we will deploy a simple web application that shows an asset's current location, as well as historical location. We'll then use AWS IoT Core to simulate a vehicle, making use of the MQTT protocol, a lightweight messaging protocol designed for IoT use cases. We will cover how to:
