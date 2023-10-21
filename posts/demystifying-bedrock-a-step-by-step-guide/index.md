@@ -12,7 +12,7 @@ spaces:
   - generative-ai
 authorGithubAlias: hanyun2019
 authorName: Haowen Huang 
-date: 2023-10-16
+date: 2023-10-21
 ---
  
 Amazon Bedrock, the easiest way to build and scale generative AI applications with foundation models (FMs), is now generally available. Amazon Bedrock is a fully managed service that offers a choice of high-performing FMs from leading AI companies including AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon, along with a broad set of capabilities that you need to build generative AI applications, simplifying development while maintaining privacy and security.
