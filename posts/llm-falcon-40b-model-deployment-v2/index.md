@@ -15,7 +15,7 @@ authorName: Haowen Huang
 additionalAuthors: 
   - authorGithubAlias: mikegc-aws
     authorName: Mike Chambers
-date: 2023-08-28 
+date: 2023-10-21 
 ---
  
 In this guide, we'll delve into deploying Falcon-40B, an open-source Large Language Model with 40 billion parameters, using Amazon SageMaker.
