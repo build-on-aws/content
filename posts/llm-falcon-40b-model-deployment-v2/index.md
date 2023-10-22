@@ -66,7 +66,7 @@ The next few sections describe how to deploy Falcon-40B.  A prerequisite for ALL
 
 Once you're up and running with Amazon SageMaker Studio, deploying Falcon-40B with sensible defaults is incredibly easy.  
 
-## 2. Deploying Falcon-40B quickly, with sensible defaults
+### 2.1 Deploying Falcon-40B quickly, with sensible defaults
 
 1. Navigate to JumpStart - First from the home page of SageMaker Studio, or from the left hand menu, select 'JumpStart':
 ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-1.png)
@@ -84,7 +84,7 @@ Once you're up and running with Amazon SageMaker Studio, deploying Falcon-40B wi
 
 6. You will see how to use the deployed SageMaker model endpoint later in this post.  In the meantime, to review what has been deployed, and when the time comes to shut down the endpoint when, use the left side menu to navigate to `SageMaker JumpStart` > `Launched JumpStart assets` then select the `Endpoints` tab.  From there select the endpoint that was deployed, scroll down and select `Delete`.
 
-## 3. Deploying Falcon-40B, using the SageMaker SDK
+### 2.2 Deploying Falcon-40B, using the SageMaker SDK
 
 Clicking buttons in SageMaker Studio is a great way to become familiar with some of the options available, but deploying models with code gives you more flexibility, and repeatability.
 
@@ -94,21 +94,18 @@ This section demonstrates how to quickly deploy Falcon-40B using Amazon SageMake
 
 2. This time, rather than clicking `Deploy`, scroll down and select `Open notebook` from the 'Run in notebook' section.  This will open a Jupyter notebook up in SageMaker Studio with all the code ready to be used, reused or modified.
 
-    - If you are prompted to 'Set up notebook environment' then selecting the default options will be fine. This instance being run here is to run the SDK code, the model itself will launch in a different container.
-    
+    - If you are prompted to 'Set up notebook environment' then selecting the default options will be fine. This instance being run here is to run the SDK code, the model itself will launch in a different container.  
     ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-6.png)
     
-    - You may need to wait for the notebook to start the kernel.
-    
+    - You may need to wait for the notebook to start the kernel.    
     ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-7.png)
 
 3. When the notebook is up and running, you will see that the code is split into 3 main parts with `Deploy Falcon model for inference` being the section we want, to use the SDK for deploying Falcon-40B as a SageMaker endpoint.
 
 4. Review the code and configuration in each of the cells, and run the code to deploy the endpoint.
-
 ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-8.png)
 
-## 3. Generating text with Falcon-40B deployed to via SageMaker JumpStart
+### 2.3 Generating text with Falcon-40B deployed to via SageMaker JumpStart
 
 Weather you deployed Flacon-40B through either of the methods above, we will now review how to use the endpoint, in code, to create generations.
 
@@ -117,7 +114,6 @@ Weather you deployed Flacon-40B through either of the methods above, we will now
 2. Scroll through the notebook and find the section `1.3 About the model`.  In there you will see cells to query the endpoint using the `predictor` object. If you have just used this notebook to create the endpoint then the `predictor` object will be set.  If you created the endpoint in another session, or you created the endpoint using the JumpStart deploy button, we will need to create a `predictor` object ourselves.  
 
 3. To create a `predictor` object we need to locate the name of the endpoint we have deployed.  To do this, navigate to `Launched JumpStart assets` in the left hand menu. Select `Model endpoints` from the tab, and note the `Title` of the deployed endpoint.
-
 ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-9.png)
 
 4. Beck in the notebook, to create a `predictor` add a new cell just before the cell that defines the `query_endpoint` function, and add the following code, making sure to use the name of the endpoint that is deployed in your account:
@@ -136,7 +132,7 @@ predictor = Predictor(
 )
 ```
 
-5. You can now use the code in the notebook to make text generations. For reference, this is sample code you can run (copied form the notebook):
+You can now use the code in the notebook to make text generations. For reference, this is sample code you can run (copied from the notebook):
 
 ```python
 def query_endpoint(payload):
@@ -149,6 +145,7 @@ def query_endpoint(payload):
 payload = {"inputs": "Write a program to compute factorial in python:", "parameters":{"max_new_tokens": 200}}
 query_endpoint(payload)
 ```
+
 Output:
 ````text
 Input: Write a program to compute factorial in python:
@@ -165,7 +162,6 @@ print(factorial)
 
 This will output `120`, which is the factorial of 5.
 ````
-
 
 ## 3. Deploy Falcon-40B from Hugging Face into a SageMaker Endpoint
 
