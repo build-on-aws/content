@@ -1,11 +1,11 @@
 ---
-title: "What Happens When You Type a URL Into Your Browser"
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+title: "Protecting Amazon DynamoDB Using AWS Backup"
+description: Atutorial that provides step-by-step guidance for protecting your Amazon DynamoDB tables, using AWS Backup.
 tags:
-  - dns-lookup
-  - tcp-connection
-  - cdn
-authorGithubAlias: jennapederson
-authorName: Jenna Pederson
-date: 2021-08-26
+  - dynamodb
+  - aws-backup
+  - data-protection
+authorGithubAlias: kenhui
+authorName: Kenneth Hui
+date: 2023-10-23
 ---
