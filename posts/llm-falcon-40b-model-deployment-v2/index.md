@@ -15,7 +15,7 @@ authorName: Haowen Huang
 additionalAuthors: 
   - authorGithubAlias: mikegc-aws
     authorName: Mike Chambers
-date: 2023-10-21 
+date: 2023-10-22 
 ---
  
 In this guide, we'll delve into deploying Falcon-40B, an open-source Large Language Model with 40 billion parameters, using Amazon SageMaker.
@@ -95,8 +95,11 @@ This section demonstrates how to quickly deploy Falcon-40B using Amazon SageMake
 2. This time, rather than clicking `Deploy`, scroll down and select `Open notebook` from the 'Run in notebook' section.  This will open a Jupyter notebook up in SageMaker Studio with all the code ready to be used, reused or modified.
 
     - If you are prompted to 'Set up notebook environment' then selecting the default options will be fine. This instance being run here is to run the SDK code, the model itself will launch in a different container.
+    
     ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-6.png)
+    
     - You may need to wait for the notebook to start the kernel.
+    
     ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-7.png)
 
 3. When the notebook is up and running, you will see that the code is split into 3 main parts with `Deploy Falcon model for inference` being the section we want, to use the SDK for deploying Falcon-40B as a SageMaker endpoint.
