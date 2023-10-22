@@ -1,6 +1,6 @@
 ---
 title: "Protecting Amazon DynamoDB Using AWS Backup"
-description: Atutorial that provides step-by-step guidance for protecting your Amazon DynamoDB tables, using AWS Backup.
+description: A tutorial that provides step-by-step guidance for protecting your Amazon DynamoDB tables, using AWS Backup.
 tags:
   - dynamodb
   - aws-backup
