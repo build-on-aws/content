@@ -60,7 +60,7 @@ At the end of the day, who would buy a house without electric wiring, water supp
 If you create a project plan to build your environment along with your workload you can make you have the tools needed in your environment to scale your workload according to your needs, like the key to unlock your house.
 
 ## Tip #4. Start small
-Sometimes we set goals for ourselves that are very large, or far away. A couple years ago... I set a goal for myself to build a IoT farm for my garden beds. I knew everything I wanted to do, but I just focused on the big picture. 
+Sometimes we set goals for ourselves that are very large or far away. A couple of years ago I set a goal for myself to build a IoT farm for my garden beds. I knew everything I wanted to do but I just focused on the big picture. 
 
 It took me 2 years to start... 🤦🏼‍♂️
 
