@@ -73,7 +73,7 @@ Celebrate small wins, with your peers, with your teammates, with your leadership
 ## Tip #5. Understand the cost cloud model
 Unlimited resources is amazing, if you don't use the resources, you don't have to pay for them. AWS provides with the tools to ensure you keep your cost to a minimum when needed, but without the right planning and optimization for resources can get expensive, , but what are they providing that you don't need to do, or worry about anymore.
 
-I like to think about the cost about a profit center rather than a cost center. Wait... don't you pay for the resources? How is it generating profit for my business? Think about all the infrastructure, or services, that you don't need to maintain. Operational hours that can be shifted to build new features for your customers, quicker. Improving their experience.
+I like to think about the cost as a profit center rather than a cost center. Wait... don't you pay for the resources? How is it generating profit for my business? Think about all the infrastructure (or services) that you don't need to maintain. Operational hours can be shifted to build new features for your customers quicker, improving their experience.
 
 ## Summing it all up!
 Getting started on the cloud can come with a little bit of uncertainty. What skills do I need? Do I need to learn a complete new set of skill sets? Will I have to redo something I have already worked on prem? Do I need to rebuild my data center on AWS?
