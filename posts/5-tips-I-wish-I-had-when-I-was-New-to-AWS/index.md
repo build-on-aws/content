@@ -55,7 +55,7 @@ When we are excited about a new project or a new application, sometimes we overl
 
 And yes, the list goes on and on... So as you build your application, plan with your application, do not forget to plan your [cloud foundation](https://aws.amazon.com/architecture/cloud-foundations/), the little things that you need to have into account that you will need along your journey, like Identity, or Network connectivity, or how to isolate workloads from one another.
 
-At the end of the day... who would buy a house without electric wiring, water supply, windows or doors, right? Think about your cloud foundation the same way, it allows you to actually run things smoothly.
+At the end of the day, who would buy a house without electric wiring, water supply, windows or doors, right? Think about your cloud foundation the same way. It allows you to run things smoothly.
 
 If you create a project plan to build your environment along with your workload you can make you have the tools needed in your environment to scale your workload according to your needs, like the key to unlock your house.
 
