@@ -259,23 +259,19 @@ llm_model = HuggingFaceModel(
 )
 ```
 
-ToDo: Let's review this section.  QLoRA is for training, bitsandbytes is for inference. No?
-
-Some readers may find a line of code commented out in the example code above:
+Note the line of code commented out in the example code above.
 
 ```python
 # 'HF_MODEL_QUANTIZE': "bitsandbytes", # comment in to quantize
 ```
 
-This relates to **model quantification**. Full precision representations of these very large models often don’t fit into memory on a single or even several GPUs. To support an interactive notebook environment to fine-tune and run inference on models of this size, we use a technique known as [Quantized LLMs with Low-Rank Adapters](https://arxiv.org/abs/2305.14314) (**QLoRA**). The QLoRA paper explores different data types, `4-bit Float` and `4-bit NormalFloat`. QLoRA is an efficient fine-tuning approach that reduces memory usage of LLMs while maintaining solid performance.
+This relates to **model quantification**. Full precision representations of these very large models often don’t fit into memory on a single or even several GPUs. To support an interactive notebook environment to fine-tune models of this size, we use a technique known as [Quantized LLMs with Low-Rank Adapters](https://arxiv.org/abs/2305.14314) (**QLoRA**). The QLoRA paper explores different data types, `4-bit Float` and `4-bit NormalFloat`. QLoRA is an efficient fine-tuning approach that reduces memory usage of LLMs while maintaining solid performance.
 
 If you are interested in in-depth research on using the `bitsandbytes` library to do **4-bit quantization** based on QLoRA technology, you can check out this [blog post](https://huggingface.co/blog/4bit-transformers-bitsandbytes).
 
 After creating the `HuggingFaceModel`, we can deploy it to the Amazon SageMaker endpoint using the `deploy` method. We'll deploy the model with the `ml.g5.12xlarge` instance type. [Text Generative Inference (TGI)](https://github.com/huggingface/text-generation-inference) will automatically distribute and shard the model across all GPUs, as shown in the following code.
 
-TGI is a Rust, Python, and gRPC server for text-generated inference, used in Hugging Face's production environment. It provides support for Hugging Chat, the inference API, and inference endpoint. As shown in the image below.
-
-![Text Generative Inference](images/tgi-1.png)
+TGI is a Rust, Python, and gRPC server for text-generated inference, used in Hugging Face's production environment. It provides support for Hugging Chat, the inference API, and inference endpoint.
 
 The code for deploying the model to the Amazon SageMaker endpoint is shown below.
 
@@ -297,24 +293,7 @@ After submitting and running the above code, Amazon SageMaker will now create th
 
 Once the endpoint is deployed, we can use the `predict` method from the `predictor` to begin model inference.
 
-We can use different parameters to control the generation, which can be defined in the payload's `parameters` attribute. The Hugging Face LLM Inference Container supports various generation parameters, including `top_p`, `temperature`, `stop`, `max_new_token`, etc.
-
-You can find the full list of supported parameters [here](https://huggingface.co/blog/sagemaker-huggingface-llm#4-run-inference-and-chat-with-our-model). As of today, TGI supports the following parameters:
-
-- `temperature`: Controls randomness in the model. Lower values will make the model more deterministic and higher values will make the model more random. Default value is 1.0.
-- `max_new_tokens`: The maximum number of tokens to generate. Default value is 20, max value is 512.
-- `repetition_penalty`: Controls the likelihood of repetition, defaults to null.
-- `seed`: The seed to use for random generation, default is null.
-- `stop`: A list of tokens to stop the generation. The generation will stop when one of the tokens is generated.
-- `top_k`: The number of highest probability vocabulary tokens to keep for top-k-filtering. Default value is null, which disables top-k-filtering.
-- `top_p`: The cumulative probability of parameter highest probability vocabulary tokens to keep for nucleus sampling, default to null
-- `do_sample`: Whether or not to use sampling; use greedy decoding otherwise. Default value is false.
-- `best_of`: Generate best_of sequences and return the one if the highest token logprobs, default to null.
-- `details`: Whether or not to return details about the generation. Default value is false.
-- `return_full_text`: Whether or not to return the full text or only the generated part. Default value is false.
-- `truncate`: Whether or not to truncate the input to the maximum length of the model. Default value is true.
-- `typical_p`: The typical probability of a token. Default value is null.
-- `watermark`: The watermark to use for the generation. Default value is false.
+We can use different parameters to control the generation, which can be defined in the payload's `parameters` attribute. The Hugging Face LLM Inference Container supports various generation parameters, including `top_p`, `temperature`, `stop`, and `max_new_token`. You can find the full list of supported parameters [here](https://huggingface.co/blog/sagemaker-huggingface-llm#4-run-inference-and-chat-with-our-model). 
 
 Because the **tiiuae/falcon-40b-instruct model** we deployed is a conversational chat model, we can chat with the model using the following prompts:
 
@@ -388,60 +367,13 @@ llm.delete_endpoint()
 
 ## Conclusion
 
-In this post, we have divided it into two chapters and deployed the Falcon-40B open-source large language model in two ways.
+In this post we have reviewed a number of methods for deploying the Flacon-40B open-source large language model on AWS.  
 
-First, we used Amazon SageMaker JumpStart to deploy the model. The main core code is as follows:
+First, we used Amazon SageMaker JumpStart to deploy without any code, using sensible defaults. This method allows you to get up and running extremely quickly without any prior knowledge of AL/ML coding.
 
-```python
-model_id, model_version = "huggingface-llm-falcon-40b-instruct-bf16", "*”
+Next we deployed the model using minimal code, using the Amazon SageMaker SDK. This approach allows us to deploy the model in a repeatable code driven way with a greater amount of customization. 
 
-from sagemaker.jumpstart.model import JumpStartModel
-my_model = JumpStartModel(model_id=model_id)
-predictor = my_model.deploy()
-```
-
-Second, we used the Amazon SageMaker Notebook to deploy the model. The main core code is as follows:
-
-```python
-# Retrieve the new Hugging Face LLM DLC
-from sagemaker.huggingface import get_huggingface_llm_image_uri
-
-# retrieve the llm image uri
-llm_image = get_huggingface_llm_image_uri(
-  "huggingface",
-  version="0.8.2"
-)
-
-# print ecr image uri
-print(f"llm image uri: {llm_image}")
-#  Deploy Falcon-40B Model
-from sagemaker.huggingface import HuggingFaceModel
-
-# instance config
-instance_type = "ml.g5.12xlarge"
-number_of_gpu = 4
-health_check_timeout = 300
-
-# TGI config
-config = {
-      'HF_MODEL_ID': "tiiuae/falcon-40b-instruct", 
-      ……
-}
-
-# create HuggingFaceModel
-llm_model = HuggingFaceModel(
-  role=role,
-  image_uri=llm_image,
-  env=config
-)
-llm = llm_model.deploy(
-      ……
-)
-```
-
-As seen from the comparison of the amount of core code described above, if you are a beginner and want to use it right out of the box, you can choose Amazon SageMaker JumpStart as a quick and simple deployment method.
-
-If you already know about Amazon SageMaker and want more granular control (such as deployment instance types, image version, TGI parameters, etc.) during LLM deployment, you can choose Amazon SageMaker Notebook, which has more complete control over how configuration parameters are deployed.
+Finally we deployed the model into a Amazon SageMaker container, pulling the model from HuggingFace. This method offers a great amount of flexibility (such as deployment instance types, image version, TGI parameters, etc.), and can be used to deploy many different models from the HuggingFace hub.
 
 In the next post, we'll explore using Amazon SageMaker Notebook to quickly and efficiently fine-tuning LLMs in an interactive environment. We will use the **QLoRA** and **bitsandbtyes 4-bits quantization library** to fine-tuning the Falcon-40B model using Hugging Face PEFT on Amazon SageMaker. This topic is currently a cutting-edge topic in the field of LLMs, so stay tuned.
 
@@ -453,4 +385,4 @@ Haowen is a Senior Developer Advocate at AWS based in Hong Kong. He has over 20 
 
 ### Mike Chambers
 
-Mike is a Developer Advocate at AWS based in Meanjin (Brisbane), Australia. He has been in the ICT industry for 20 years. As a trainer Mike has entertained and educate over a quarter of a million students with his unique style, and has traveled the world teaching and evangelizing cloud, serverless and machine learning.
+Mike is a Senior Developer Advocate at AWS based in Meanjin (Brisbane), Australia. He has been in the ICT industry for 20 years. As a trainer Mike has entertained and educate over a quarter of a million students with his unique style, and has traveled the world teaching and evangelizing cloud, serverless and machine learning.
