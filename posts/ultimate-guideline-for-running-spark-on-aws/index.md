@@ -3,7 +3,7 @@ title: "The Ultimate Guide to Running Apache Spark on AWS"
 description: "From understanding the power of AWS Glue for beginners to delving deep into specialized services like SageMaker and Redshift, this post aims to provide clarity for developers seeking optimal performance, scalability, and cost-effectiveness in their Apache Spark workloads."
 tags:
   - data-engineering
-  - machine-learning
+  - ai-ml
   - spark
   - data-processing
 spaces:

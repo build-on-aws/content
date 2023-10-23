@@ -9,6 +9,11 @@ tags:
     - chaos-engineering
 waves:
   - resilience
+images:
+  background: images/hero_resilience.jpg
+  banner: images/hero_resilience.jpg
+  thumbnail: images/thumb_resilience.jpg
+  hero: images/hero_resilience.jpg
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-09-07

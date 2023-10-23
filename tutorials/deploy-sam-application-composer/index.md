@@ -7,7 +7,7 @@ tags:
   - application-composer
   - serverless
   - tutorials
-  - serverless-application-model
+  - aws-sam
 spaces:
   - devops
 waves:
