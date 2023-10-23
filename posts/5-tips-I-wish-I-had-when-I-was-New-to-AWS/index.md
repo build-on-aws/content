@@ -34,7 +34,7 @@ But planning structured learning and mapping the technologies that you are famil
 
 > **A couple examples:** Do I need traditional VMs? Well, that maps to Amazon EC2. Am I building containerized applications? Amazon ECS, Am I going to use Kubernetes? Then Amazon EKS is the answer.
 
-If you are building in a team, it helps to create a table that maps the different technologies to what others are familiar with, and then it will help new people that join your project to select the right technology and AWS service.
+If you are building in a team, it helps to create a table that maps the different technologies to what others are familiar with. Then it will help new people that join your project to select the right technology and AWS service.
 
 How can AWS help with this? Reach out, check our [getting started](https://aws.amazon.com/getting-started/) site, ask in our forums, send an email, come meet us at one of the conferences, and we will be more than happy to help!
 
