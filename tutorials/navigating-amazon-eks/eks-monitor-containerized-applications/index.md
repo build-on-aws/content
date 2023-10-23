@@ -2,9 +2,11 @@
 title: "Easily Monitor Containerized Applications with Amazon CloudWatch Container Insights"
 description: "How to collect, aggregate, and analyze metrics from your containerized applications using Amazon CloudWatch Container Insights."
 tags:
+    - eks-cluster-setup
     - eks-container-insight
     - eks
     - kubernetes
+    - eksctl
     - tutorials
     - aws
 showInHomeFeed: true
