@@ -25,7 +25,7 @@ I remember when I started building on AWS, the joy of infinite possibilities, th
 
 I had been building traditional applications on prem, that was easy or at least something I was used to doing. But I found myself navigating through new services, features, and those infinite possibilities started to feel a little too infinite!
 
-I am sure that if you are new to AWS you may have felt the same way at some point of your AWS journey, so I wanted to share with you a few tricks that I have learned over the few years, that I wish I had when I was new to AWS.
+I am sure that, if you are new to AWS, you may have felt the same way at some point of your AWS journey. So I wanted to share with you a few tricks that I have learned over the few years that I wish I had when I was new to AWS.
 
 ## Tip #1. Learn the fundamentals
 AWS provides a broad set of services that are powerful enablers for anything you want to build, including any type of application. There is a lot to learn. Getting familiar with some of the basic concepts for permission management, networking on the cloud, and different compute options (EC2, Containers, Lambda) will help tremendously before you adventure into the AWS world.
