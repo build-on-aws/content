@@ -64,7 +64,7 @@ Sometimes we set goals for ourselves that are very large, or far away. A couple 
 
 It took me 2 years to start... 🤦🏼‍♂️
 
-So, I pivoted, I set small victories for myself, buy the sensors, buy the new soil, configure it all in my raspberry pi, and send the data to the cloud for processing and build a small application. You should see my tomato plant this year, I have been getting 15 tomatoes a week in average! 🍅🍅🍅
+So, I pivoted. I set small victories for myself such as buy the sensors, buy the new soil, configure it all in my raspberry pi, send the data to the cloud for processing and build a small application. You should see my tomato plant this year. I have been getting 15 tomatoes a week on average! 🍅🍅🍅
 
 ![Tomatoes](images/tomatoes.jpeg)
 
