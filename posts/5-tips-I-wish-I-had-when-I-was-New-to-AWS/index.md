@@ -80,7 +80,7 @@ Getting started on the cloud can come with a little bit of uncertainty. What ski
 
 I hear these questions often when working with new organizations moving to AWS. The answer is sometimes yes and sometimes not when finding the right balance between what stays on prem and what comes to the cloud.
 
-And do not try to build everything from scratch yourself, AWS and AWS Partners build solutions that are ready to use, ready to deploy directly into your environment, that can help you with operating your environment easier or even deploying your applications to AWS. Check some of this solutions in the [AWS Solutions Library](https://aws.amazon.com/solutions/)! There is a lot of good stuff in there!
+Here's a bonus tip. Do not try to build everything from scratch yourself. AWS and AWS Partners build solutions that are ready to use and ready to deploy directly into your environment. Solutions can help you with operating your environment easier or even deploying your applications to AWS. Check some of this solutions in the [AWS Solutions Library](https://aws.amazon.com/solutions/)! There is a lot of good stuff in there!
 
 But, remember, find (or become) a champion in your organization that advocates and helps people understand the benefits AWS brings to your business and then:
 
