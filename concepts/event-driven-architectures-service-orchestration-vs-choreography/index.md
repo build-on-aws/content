@@ -5,7 +5,7 @@ tags:
     - distributed-architecture
     - service-orchestration
     - service-choreography
-    - workflow
+    - workflows
     - event-driven
     - foundational
     - aws

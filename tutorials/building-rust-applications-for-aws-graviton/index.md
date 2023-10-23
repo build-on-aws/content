@@ -8,7 +8,7 @@ tags:
   - sustainability
   - cost-optimization
   - deploy
-  - migrate
+  - migrations
   - arm64
   - ec2
 spaces:

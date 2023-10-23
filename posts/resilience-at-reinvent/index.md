@@ -10,6 +10,9 @@ tags:
     - aws
 waves:
     - resilience
+spaces:
+    - reinvent
+    - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 additionalAuthors: 

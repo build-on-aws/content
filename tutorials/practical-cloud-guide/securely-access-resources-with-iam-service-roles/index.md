@@ -6,7 +6,7 @@ tags:
     - it-pros
     - tutorials
     - aws
-    - iam
+    - aws-iam
 authorGithubAlias: spara
 authorName: Sophia Parafina
 date: 2023-10-06

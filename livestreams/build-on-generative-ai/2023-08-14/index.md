@@ -6,7 +6,7 @@ tags:
   - sagemaker
   - llama2
   - falcon
-  - llm
+  - llms
   - aws
   - build-on-live
   - twitch
