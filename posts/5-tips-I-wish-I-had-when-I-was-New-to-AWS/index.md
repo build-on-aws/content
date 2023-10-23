@@ -78,7 +78,7 @@ I like to think about the cost about a profit center rather than a cost center. 
 ## Summing it all up!
 Getting started on the cloud can come with a little bit of uncertainty. What skills do I need? Do I need to learn a complete new set of skill sets? Will I have to redo something I have already worked on prem? Do I need to rebuild my data center on AWS?
 
-I hear all the questions often when working with new organizations moving to AWS... And the answer sometimes is yes and sometimes is not. Finding the right balance, between what stays on prem, what comes to the cloud.
+I hear these questions often when working with new organizations moving to AWS. The answer is sometimes yes and sometimes not when finding the right balance between what stays on prem and what comes to the cloud.
 
 And do not try to build everything from scratch yourself, AWS and AWS Partners build solutions that are ready to use, ready to deploy directly into your environment, that can help you with operating your environment easier or even deploying your applications to AWS. Check some of this solutions in the [AWS Solutions Library](https://aws.amazon.com/solutions/)! There is a lot of good stuff in there!
 
