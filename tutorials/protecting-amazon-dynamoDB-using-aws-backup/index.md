@@ -10,7 +10,7 @@ authorName: Kenneth Hui
 date: 2023-10-23
 ---
 
-# Protecting Amazon DynamoDB Using AWS Backup Tutorial with No Comments
+# Protecting Amazon DynamoDB Using AWS Backup
 
 ## Overview
 
