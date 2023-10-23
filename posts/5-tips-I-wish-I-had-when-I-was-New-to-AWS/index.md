@@ -41,7 +41,7 @@ How can AWS help with this? Reach out, check our [getting started](https://aws.a
 📣 If you are just starting your journey and want to learn more, come meet me at [re:Invent in Las Vegas this Novemeber](https://reinvent.awsevents.com/)! I will be presenting [COP308](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=COP308) and [ARC324](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC324), and I have a few colleagues presenting what they have learned about building new environments - you can find this sessions in the catalog [New to AWS track](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?filters=84E8C1BB-9D54-4827-8E60-E50800C6C02B)
 
 ## Tip #2. Choose a project!
-When starting to build on AWS there is always new things that need to be done, new things that you want to explore, new things to learn. Sometimes, it is good to stop, take a deep breath and just simplify, focus, and find a fun project you want to work on.
+When starting to build on AWS, there is always new things that need to be done, new things that you want to explore, and new things to learn. Sometimes it is good to stop, take a deep breath and simplify, focus, and just find a fun project you want to work on.
 
 First pick if you are going to either bring to AWS, a.k.a., a migration, or develop brand new and deploy it into AWS. Once you have picked the application, ensure it will be fun, something that can be done relatively quickly, and build a business case around it! Define success, key takeaways, decide on your technology, and have fun! This takes us to our next tip...
 
