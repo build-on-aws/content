@@ -59,7 +59,8 @@ In this tutorial, you will:
 
 * Log in to the [AWS Management Console](https://console.aws.amazon.com/), and navigate to the AWS Backup console. Confirm that you are configuring AWS Backup in the same Region as your DynamoDB table.
 
-[Image: Go to AWS Backup in the AWS Management Console (2) .aaa7e7c67eacfc25788fb60d360311b499ccb07b (1).PNG]
+![put alt text here](images/image01.png)
+
 ### Step 2: Configure an on-demand AWS Backup job of an Amazon DynamoDB table 
 
 **2.1 Configure the services used with AWS Backup**
