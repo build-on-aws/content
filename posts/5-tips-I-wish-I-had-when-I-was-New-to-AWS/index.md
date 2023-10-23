@@ -68,7 +68,7 @@ So, I pivoted, I set small victories for myself, buy the sensors, buy the new so
 
 ![Tomatoes](images/tomatoes.jpeg)
 
-Celebrate small wins, with your peers, with your teammates, with your leadership, it will definitely keep the morale up, and it will also help you to pivot quickly if anything in your project needs to be adjusted!
+Celebrate small wins with your peers, your teammates, and with your leadership. It will definitely keep the morale up and it will also help you to pivot quickly if anything in your project needs to be adjusted!
 
 ## Tip #5. Understand the cost cloud model
 Unlimited resources is amazing. If you don't use the resources, you don't have to pay for them. AWS provides you with the tools to ensure you keep your cost to a minimum. But without the right planning, optimization for resources can get expensive.
