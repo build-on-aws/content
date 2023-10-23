@@ -4,6 +4,7 @@ description: "Configure Amazon Route53 as a DNS provider for external access to 
 tags:
     - external-dns
     - eks-cluster-setup
+    - eks
     - kubernetes
     - tutorials
     - aws
