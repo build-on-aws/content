@@ -69,18 +69,18 @@ Once you're up and running with Amazon SageMaker Studio, deploying Falcon-40B wi
 ### 2.1 Deploying Falcon-40B quickly, with sensible defaults
 
 1. Navigate to JumpStart - First from the home page of SageMaker Studio, or from the left hand menu, select 'JumpStart':
-![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-1.png)
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-1.jpeg)
 
 2. Search for 'Falcon' - Now using the search box, search for `Falcon`:
-![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-2.png)
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-2.jpeg)
 
 3. Choose a version - There are a few versions of Falcon available in JumpStart, with different sizes and some that are instruction fine tuned.  Instruction fine-tuning is where the model has been further refined from it's base training to follow instructions or to chat. Developers deploying and using a model may well want to choose this version, where as ML engineers looking to further refine the model (fine-tune) will probably want to start from the non-instruction tuned model.  As well as that, JumpStart has a 7 and a 180 billion parameter version as well as the 40 billion parameter version we are using.  To deploy and use the Falcon-40B right now, select 'Falcon 40B Instruct BF16'.
 
 4. You can review the deployment configuration options (see next), and or just click the deploy button - That's it.  You're done! _(Deployment may take between 15 and 20 minutes.)_
-![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-3.png)
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-3.jpeg)
 
 5. But wait, what sensible defaults were used? If you navigate to the `Deployment Configuration` you will see the options. The main default to be aware of, is the instance size used to deploy the model.  As you can see here, you can change this, but the minimum size is `mlg5.12xlarge`, which is quite a large instance.
-![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-4.png)
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-4.jpeg)
 
 6. You will see how to use the deployed SageMaker model endpoint later in this post.  In the meantime, to review what has been deployed, and when the time comes to shut down the endpoint when, use the left side menu to navigate to `SageMaker JumpStart` > `Launched JumpStart assets` then select the `Endpoints` tab.  From there select the endpoint that was deployed, scroll down and select `Delete`.
 
@@ -93,17 +93,18 @@ This section demonstrates how to quickly deploy Falcon-40B using Amazon SageMake
 1. As per the instructions above, navigate to the Falcon-40B model card in SageMaker JumpStart.
 
 2. This time, rather than clicking `Deploy`, scroll down and select `Open notebook` from the 'Run in notebook' section.  This will open a Jupyter notebook up in SageMaker Studio with all the code ready to be used, reused or modified.
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-5.jpeg)
 
     - If you are prompted to 'Set up notebook environment' then selecting the default options will be fine. This instance being run here is to run the SDK code, the model itself will launch in a different container.  
-    ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-6.png)
+    ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-6.jpeg)
     
     - You may need to wait for the notebook to start the kernel.    
-    ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-7.png)
+    ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-7.jpeg)
 
 3. When the notebook is up and running, you will see that the code is split into 3 main parts with `Deploy Falcon model for inference` being the section we want, to use the SDK for deploying Falcon-40B as a SageMaker endpoint.
 
 4. Review the code and configuration in each of the cells, and run the code to deploy the endpoint.
-![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-8.png)
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-8.jpeg)
 
 ### 2.3 Generating text with Falcon-40B deployed to via SageMaker JumpStart
 
@@ -114,7 +115,7 @@ Weather you deployed Flacon-40B through either of the methods above, we will now
 2. Scroll through the notebook and find the section `1.3 About the model`.  In there you will see cells to query the endpoint using the `predictor` object. If you have just used this notebook to create the endpoint then the `predictor` object will be set.  If you created the endpoint in another session, or you created the endpoint using the JumpStart deploy button, we will need to create a `predictor` object ourselves.  
 
 3. To create a `predictor` object we need to locate the name of the endpoint we have deployed.  To do this, navigate to `Launched JumpStart assets` in the left hand menu. Select `Model endpoints` from the tab, and note the `Title` of the deployed endpoint.
-![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-9.png)
+![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-9.jpeg)
 
 4. Beck in the notebook, to create a `predictor` add a new cell just before the cell that defines the `query_endpoint` function, and add the following code, making sure to use the name of the endpoint that is deployed in your account:
 
