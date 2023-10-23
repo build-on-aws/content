@@ -23,7 +23,7 @@ date: 2023-10-20
 
 I remember when I started building on AWS. The joy of infinite possibilities. The cloud at my fingertips to build anything I wanted. I hadn't decided what was going to be my first project yet but I was eager to start! But wait... start where?
 
-I had been building traditional applications on prem, that was easy or at least something I was used to doing. But I found myself navigating through new services, features, and those infinite possibilities started to feel a little too infinite!
+I had been building traditional applications on prem. That was easy or at least something I was used to doing. But I found myself navigating through many AWS services and features and those infinite possibilities started to feel a little too infinite!
 
 I am sure that, if you are new to AWS, you may have felt the same way at some point of your AWS journey. So I wanted to share with you a few tricks that I have learned over the few years that I wish I had when I was new to AWS.
 
