@@ -5,7 +5,8 @@ tags:
   - ai-ml
   - ray
   - aws
-  
+  - ai-ml-scaling
+
 spaces:
   - generative-ai
 waves:
@@ -16,10 +17,11 @@ authorName: Naga Gaddamu
 additionalAuthors: 
   - authorGithubAlias: 
     authorName: Ruchi Mishra
-date: 2023-10-23
+date: 2023-10-24
 ---
 
-**<h1>Table of contents:</h1>**
+
+**<h2>Table of contents:</h2>**
 
 - [Introduction to Ray](#item-one)
 - [Ray and AWS a powerful combination](#item-two)
@@ -29,7 +31,7 @@ date: 2023-10-23
 <!-- headings -->
 <a id="item-one"></a>
 
-### <h1>Introdution to Ray</h1>
+### <h2>Introdution to Ray</h2>
 
 Ray is a general purpose Universal library that allows you to do distributed computing and it offers you an ecosystem of native libraries to scale ML workloads. It can run anywhere, you can run it on a laptop or on public Cloud and on kubernetes or on premises.
 In simple words Ray provides you with simple Primitives for you to be able to take your python applications that you have and convert them into distributed manner at scale and take away the undifferentiated heavy lifting.
@@ -39,13 +41,13 @@ In this blog we will learn how to get started with Ray on AWS.
 
 <a id="item-two"></a>
 
-### <h1>Ray and AWS a powerful combination</h1>
+### <h2>Ray and AWS a powerful combination</h2>
 
 AWS is designed to allow application to perform at scale. It does not only support online business as websites but also compute intensive applications consisting of Machine Leaning models. With the growing adoption of ML and GenerativeAI you can use Ray to solve common production challenges for genAI and scale ML. Using Ray you can step away from the heavy lifting of driving the distributed training and focus more on training the models and applications.
 
 <a id="item-three"></a>
 
-### <h1>AWS Environment SetUp to Launch Ray Cluster </h1>
+### <h2>AWS Environment SetUp to Launch Ray Cluster </h2>
 
 1. AWS Account: You will need an AWS account to create and manage cloud resources.
 2. Python 3.x is installed.
@@ -115,7 +117,7 @@ pip install ray
 
 <a id="item-four"></a>
 
-### <h1>Scaling and Distributing Ray workloads on AWS
+### <h2>Scaling and Distributing Ray workloads on AWS</h2>
 
 One of the significant benefits of Ray is its ability to scale out to multiple nodes. To scale your Ray cluster on AWS:
 
