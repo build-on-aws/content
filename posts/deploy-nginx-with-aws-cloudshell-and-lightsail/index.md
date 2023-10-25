@@ -1,42 +1,46 @@
 ---
-title: "Deploy NGINX with AWS Cloudshell and Lightsail In Five Steps"
-description: "Deploy NGINX with AWS Cloudshell in the Lightsail Console."
+title: "Deploy NGINX with AWS CloudShell and Lightsail In Five Steps"
+description: "Deploy NGINX with AWS CloudShell in the Lightsail Console."
 tags:
     - lightsail
     - cloudshell
     - nginx
+    - aws
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-10-16
+date: 2023-10-25
 ---
 
-Have you ever needed to deploy a website, either to support or announce an event? You could use one of the many sites that offer this service, or you could use AWS to deploy your website. Using AWS may seem complicated but there’s a simple way to build websites and deploy other applications using AWS Lightsail. This article show how to deploy a website in five steps with AWS Lightsail and Cloudshell.
+|ToC|
+|---|
 
-## What is AWS Lightsail and Cloudshell?
+Have you ever needed to deploy a website, either to support or announce an event? You could use one of the many sites that offer this service, or you could use AWS to deploy your website. Using AWS may seem complicated but there’s a simple way to build websites and deploy other applications using AWS Lightsail. This article show how to deploy a website in five steps with AWS Lightsail and CloudShell.
 
-[AWS Lightsail](https://aws.amazon.com/lightsail/faq?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body) is a service that provides preconfigured Linux and Windows application stacks through an intuitive management console. The preconfigured instances of Virtual Private Servers (VPS), container services, storage, and databases. Networking, access, and security environments are automatically configured to host application. Lightsail bundles all the resources into monthly fixed price, letting you focus on your code and not the cost.
+## What is AWS Lightsail and CloudShell?
+
+[AWS Lightsail](https://aws.amazon.com/lightsail/faq?sc_channel=el&sc_campaign=post&sc_content=deploy-nginx-with-aws-cloudshell-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a service that provides preconfigured Linux and Windows application stacks through an intuitive management console. The preconfigured instances of Virtual Private Servers (VPS), container services, storage, and databases. Networking, access, and security environments are automatically configured to host application. Lightsail bundles all the resources into monthly fixed price, letting you focus on your code and not the cost.
 
 Let’s start by opening the Lightsail console. From the main AWS console, use the search bar to find and launch Lightsail.
 
 ![Open the Lightsail console using the search function in the AWS Console](./images/lightsail-1.png)
 
-We can use the Lightsail console to create and deploy the website, but there’s a faster option. 
+We can use the Lightsail console to create and deploy the website, but there’s a faster option.
 
-[AWS CloudShell](https://aws.amazon.com/cloudshell/faqs?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body) is a browser-based, pre-authenticated shell that you can launch directly from the Lightsail console. With CloudShell, you can run AWS CLI commands without downloading or installing command line tools. To open a terminal, choose CloudShell on the Console Toolbar, in the lower left of the console.
+[AWS CloudShell](https://aws.amazon.com/cloudshell/faqs?sc_channel=el&sc_campaign=post&sc_content=deploy-nginx-with-aws-cloudshell-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a browser-based, pre-authenticated shell that you can launch directly from the Lightsail console. With CloudShell, you can run AWS CLI commands without downloading or installing command line tools. To open a terminal, choose CloudShell on the Console Toolbar, in the lower left of the console.
 
-![Open Cloudshell at the bottom of the Lightsail console](./images/cloudshell-1.png)
+![Open CloudShell at the bottom of the Lightsail console](./images/cloudshell-1.png)
 
 When the command prompt displays, the shell is ready.
 
-![The Cloudshell terminal](./images/cloudshell-2.png)
+![The CloudShell terminal](./images/cloudshell-2.png)
 
 ## Let's Do This!
 
 Are you ready to build a website? Away we go.
 
-**Step 1: Deploy a NGINX on a Virtual Private Server**
+### Step 1: Deploy a NGINX on a Virtual Private Server
 
-Lightsail virtual private servers, or instances, include many prebuilt application stacks called blueprints. Lets find the blueprint of NGINX, a popular web server. In the Cloudshell terminal, use the `get-blueprints` command to list all the available blueprints. Because Cloudshell includes common Unix/Linux utilities, you can use the unix utility, `grep`, to filter through the list to find the NGINX blueprint.
+Lightsail virtual private servers, or instances, include many prebuilt application stacks called blueprints. Lets find the blueprint of NGINX, a popular web server. In the CloudShell terminal, use the `get-blueprints` command to list all the available blueprints. Because CloudShell includes common Unix/Linux utilities, you can use the unix utility, `grep`, to filter through the list to find the NGINX blueprint.
 
 ```bash
 $ aws lightsail get-blueprints | grep nginx
@@ -58,9 +62,9 @@ When the instance is created, you’ll see a panel for the instance in the Light
 
 ![Lightsail instance panel](./images/lightsail-2.png)
 
-**Step 2: Configure access to your web server instance**
+### Step 2: Configure access to your web server instance
 
-We need to log into the server to deploy and render the web page to a browser. To do this, configure the firewall to open ports for NGINX and the ssh server. Copy the configuration file below and paste it into a text editor. Cloudshell includes all the tools you expect in a Linux terminal including the nano editor.
+We need to log into the server to deploy and render the web page to a browser. To do this, configure the firewall to open ports for NGINX and the ssh server. Copy the configuration file below and paste it into a text editor. CloudShell includes all the tools you expect in a Linux terminal including the nano editor.
 
 ```json
 {
@@ -88,7 +92,7 @@ We need to log into the server to deploy and render the web page to a browser. T
 }
 ```
 
-Save the file as `ports.json`. You can save the file in Cloudshell which provides 1 gb of storage.
+Save the file as `ports.json`. You can save the file in CloudShell which provides 1 gb of storage.
 
 ![Saving the ports.json configuration file](./images/cloudshell-4.png)
 
@@ -98,9 +102,9 @@ We can configure the ports with the Lightsail `put-instance-public-ports` comman
 $ aws lightsail put-instance-public-ports --cli-input-json file://ports.json
 ```
 
-**Step 3: Log into the server and deploy the web page**
+### Step 3: Log into the server and deploy the web page
 
-To login to the web server from the Cloudshell terminal download the credentials, or the [key-pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body). First, make a directory to hold the credentials and then make a request for the key-pair. Set the file permission so that it is readable by only you. 
+To login to the web server from the CloudShell terminal download the credentials, or the [key-pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html?sc_channel=el&sc_campaign=post&sc_content=deploy-nginx-with-aws-cloudshell-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq). First, make a directory to hold the credentials and then make a request for the key-pair. Set the file permission so that it is readable by only you.
 
 ```bash
 $ mkdir ~/.ssh
@@ -114,7 +118,7 @@ $ cat  ~/.ssh/us-west-2-default.cer
 $ chmod 400 ~/.ssh/us-west-2-default.cer
 ```
 
-You’ll need the public IP address of the server to login. You can get it from the Lightsail console or you can use the AWS CLI in Cloudshell.
+You’ll need the public IP address of the server to login. You can get it from the Lightsail console or you can use the AWS CLI in CloudShell.
 
 ```bash
 $ aws lightsail get-instance --instance-name hello-builder | jq '.instance.publicIpAddress'
@@ -126,14 +130,14 @@ Log into the web server using `ssh`, the default user name for the web server is
 ssh -i ~/.ssh/us-west-2-default.cer bitnami@<your-public-ip-address
 ```
 
-Replace the NGINX index.html file with the web page below by changing into bitnami content directory and the deleting the default index.html file.
+Replace the NGINX index.html file with the web page below by changing into `bitnami` content directory and the deleting the default index.html file.
 
 ```bash
 $ cd /opt/bitnami/nginx/html
 $ rm index.html
 ```
 
-Open a new index.html file in a text editor and paste the web page below.
+Open a new `index.html` file in a text editor and paste the web page below.
 
 ```html
 <!DOCTYPE html>
@@ -277,7 +281,7 @@ Save the file as `index.html`.
 
 At this point, you can open a browser to the public IP of the web server to see the site. However, if the instance is rebooted the server will be assigned a new public IP address. Let’s fix that.
 
-**Step 4: Attach a static IP**
+### Step 4: Attach a static IP
 
 If the server is restarted, the IP address will change. You can create a static IP and attach it to the web server.
 
@@ -292,9 +296,9 @@ $ aws lightsail attach-static-ip \
 $ aws lightsail get-static-ip --static-ip-name hello-builder-static-ip | jq '.staticIp.ipAddress'
 ```
 
-**Step 5: Register a domain**
+### Step 5: Register a domain
 
-Your site should have a memorable address. If you don’t have a domain name, you can create one in Lightsail. Note that domain services are only available in the the` us-east-1` region, if you are deploying the server in another region, include the `—region us-east-1` parameter in the command.
+Your site should have a memorable address. If you don’t have a domain name, you can create one in Lightsail. Note that domain services are only available in the the `us-east-1` region, if you are deploying the server in another region, include the `—region us-east-1` parameter in the command.
 
 ```bash
 $ aws lightsail create-domain \    
@@ -315,10 +319,10 @@ $ aws lightsail create-domain-entry \
 
 Wait one minute, because that’s how long it takes for your domain to propagate word-wide. Open a browser to your website and take it all in.
 
-**Step 6: There is no Step 6**
+### Step 6: There is no Step 6
 
 You’re done. Walk away from the computer. Enjoy your day.
 
 ## Summary
 
-Having Cloudshell in the Lightsail console is brilliant. You have a complete Linux environment to deploy Lightsail services beyond virtual private servers. Build a container solution, deploy a high availability database, or create more storage for data. You can do this in the Cloudshell terminal, and with 1 gb of storage, you can save scripts, configuration files, or even applications. Lightsail is the AWS service for people who want to build in the cloud without having to build the cloud.
+Having CloudShell in the Lightsail console is brilliant. You have a complete Linux environment to deploy Lightsail services beyond virtual private servers. Build a container solution, deploy a high availability database, or create more storage for data. You can do this in the CloudShell terminal, and with 1 gb of storage, you can save scripts, configuration files, or even applications. Lightsail is the AWS service for people who want to build in the cloud without having to build the cloud.
