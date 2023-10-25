@@ -96,7 +96,7 @@ Save the file as `ports.json`. You can save the file in CloudShell which provide
 
 ![Saving the ports.json configuration file](./images/cloudshell-4.png)
 
-We can configure the ports with the Lightsail `put-instance-public-ports` command, which uploads the `ports.json` file to the web server Upload the ports.json file and apply it to the VPS.
+We can configure the ports with the Lightsail `put-instance-public-ports` command, which uploads the `ports.json` file to the web server Upload the `ports.json` file and apply it to the VPS.
 
 ```bash
 $ aws lightsail put-instance-public-ports --cli-input-json file://ports.json
