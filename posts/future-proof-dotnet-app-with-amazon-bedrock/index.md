@@ -11,6 +11,9 @@ authorName: François Bouteruche
 date: 2023-10-25
 ---
 
+|ToC|
+|---|
+
 ***TL;DR;*** *Amazon Bedrock enables .NET developers to easily access leading foundation models like Claude, Jurassic, Stable Diffusion and others through a single API using the [AWSSDK.BedrockRuntime Nuget package](https://www.nuget.org/packages/AWSSDK.BedrockRuntime). The post introduces Amazon Bedrock, walks through setting up the .NET SDK, and introduces a sample app to showcase using Amazon Bedrock in a .NET app.*
 
 ## Introduction
