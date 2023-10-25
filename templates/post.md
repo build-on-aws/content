@@ -5,8 +5,8 @@ tags:
     - tag-1
     - tag-2
     - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
-authorGithubAlias: githubAliasWithoutQuotes
-authorName: Name Surname
+authorGithubAlias: fbouteruche
+authorName: François Bouteruche
 date: YYYY-MM-DD
 ---
 
