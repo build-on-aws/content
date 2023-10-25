@@ -1,5 +1,5 @@
 ---
-title: "Microservices with AWS Cloud9 and Lightsail"
+title: "Microservices with AWS Cloud9 and Amazon Lightsail"
 description: "Microservices are the foundation of many modern applications. Cloud9 simplifies creating and deploying microservices in Lightsail containers."
 tags:
     - microservices
@@ -8,10 +8,10 @@ tags:
     - containers
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-10-24
+date: 2023-10-25
 ---
 
-[Microservices](https://aws.amazon.com/microservices/?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body) are the basis of a service oriented architecture pattern that has been in use for over a decade. It’s a proven way for building agile applications that are easy to deploy, upgrade, and scale flexibly. A microservice solves a specific problem with self-contained code which lends to deploying them in [containers](https://aws.amazon.com/containers/?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body). AWS Lightsail is an simple and quick way to build microservices with containers. Lightsail supplies an HTTPS endpoint and automatically sets up a load balanced TLS endpoint with a TLS certificate. In addition., it can replace unresponsive containers automatically and assign a DNS name to the endpoint. When updating the container, Lightsail maintains the old version until the new version is live and healthy. The Lightsail console includes AWS Cloudshell, a complete environment for building containers and deploying them in Lightsail. This article demonstrates how to build a microservice and deploy it using Lightsail’s container service.
+[Microservices](https://aws.amazon.com/microservices/?sc_channel=el&sc_campaign=post&sc_content=microservices-with-aws-cloud9-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq) are the basis of a service oriented architecture pattern that has been in use for over a decade. It’s a proven way for building agile applications that are easy to deploy, upgrade, and scale flexibly. A microservice solves a specific problem with self-contained code which lends to deploying them in [containers](https://aws.amazon.com/containers/?sc_channel=el&sc_campaign=post&sc_content=microservices-with-aws-cloud9-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq). AWS Lightsail is an simple and quick way to build microservices with containers. Lightsail supplies an HTTPS endpoint and automatically sets up a load balanced TLS endpoint with a TLS certificate. In addition., it can replace unresponsive containers automatically and assign a DNS name to the endpoint. When updating the container, Lightsail maintains the old version until the new version is live and healthy. The Lightsail console includes AWS CloudShell, a complete environment for building containers and deploying them in Lightsail. This article demonstrates how to build a microservice and deploy it using Lightsail’s container service.
 
 ## AWS Cloud9
 
@@ -43,16 +43,16 @@ The Cloud9 environment will open with a text editor window on the top, and a ter
 
 ## Setting Up the Environment
 
-To use Lightsail with Cloud9 we will to install two tools. The first is the [lightsailctl](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body) plugin for deploying containers and the second is the [jq](https://jqlang.github.io/jq/manual/) utility for parsing JSON data from the container service.
+To use Lightsail with Cloud9 we will to install two tools. The first is the [`lightsailctl`](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-install-software?sc_channel=el&sc_campaign=post&sc_content=microservices-with-aws-cloud9-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq) plugin for deploying containers and the second is the [jq](https://jqlang.github.io/jq/manual/) utility for parsing JSON data from the container service.
 
-Install lightsailctl plugin.
+Install `lightsailctl` plugin.
 
 ```bash
 $ sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
 $ sudo chmod +x /usr/local/bin/lightsailctl
 ```
 
-Install jq.
+Install `jq`.
 
 ```bash
 $ sudo yum install jq -y
@@ -77,7 +77,7 @@ $ aws lightsail get-container-services --service-name microservice
 
 ## Build and Push the Container
 
-The microservice is a REST service that returns [dad jokes](https://en.wikipedia.org/wiki/Dad_joke). It is a nodejs application built with [Express](https://expressjs.com/). Start by creating a directory for the project.
+The microservice is a REST service that returns [dad jokes](https://en.wikipedia.org/wiki/Dad_joke). It is a NodeJS application built with [Express](https://expressjs.com/). Start by creating a directory for the project.
 
 Open a new file with the the Cloud9 text editor. Copy the express application below into the text editor window and save it as `app.js`.
 
@@ -136,7 +136,7 @@ $ docker build -t dadjoke:dev .
 $ docker images
 ```
 
-Push the container to the Lightsail container service created earlier. The Lightsail container includes a registry for storing images. 
+Push the container to the Lightsail container service created earlier. The Lightsail container includes a registry for storing images.
 
 ```bash
 aws lightsail push-container-image --service-name microservice \
@@ -146,11 +146,11 @@ aws lightsail push-container-image --service-name microservice \
 
 Note the image name. We will use the image name to configure the deployment
 
-> Refer to this image as ":microservice.dadjoke.x" in deployments
+> Refer to this image as `:microservice.dadjoke.x` in deployments
 
 ## Deploy the Microservice
 
-Deploying a container requires a JSON file that defines the configuration parameters. The AWS Location Service requires AWS credentials and is available in the us-east-1 region. We also include the image name that we pushed into the container service and the container's exposed port. The configuration file requires an [access_key and secret access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body). Open a new file in the text editor and copy the JSON file below, add your credentials, and save the file as `container.json`.
+Deploying a container requires a JSON file that defines the configuration parameters. The AWS Location Service requires AWS credentials and is available in the us-east-1 region. We also include the image name that we pushed into the container service and the container's exposed port. The configuration file requires an [access_key and secret access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey?sc_channel=el&sc_campaign=post&sc_content=microservices-with-aws-cloud9-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq). Open a new file in the text editor and copy the JSON file below, add your credentials, and save the file as `container.json`.
 
 ```json
 {
@@ -169,7 +169,7 @@ Deploying a container requires a JSON file that defines the configuration parame
 }
 ```
 
-To make the service accessible, we define an endpoint with a JSON file. Open a file in the text editor, copy the JSON file, and save it as `endpoint.json`. 
+To make the service accessible, we define an endpoint with a JSON file. Open a file in the text editor, copy the JSON file, and save it as `endpoint.json`.
 
 ```json
 {
@@ -215,6 +215,6 @@ With Cloud9, you can immediately build and deploy applications without the overh
 
 Check out these articles to learn more about Lightsail container services.
 
-[Container services in Amazon Lightsail](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-services?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body)
+[Container services in Amazon Lightsail](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-services?sc_channel=el&sc_campaign=post&sc_content=microservices-with-aws-cloud9-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
-[Lightsail Containers: An Easy Way to Run your Containers in the Cloud](https://aws.amazon.com/blogs/aws/lightsail-containers-an-easy-way-to-run-your-containers-in-the-cloud/?sc_channel=el&sc_campaign=wordpressonlightsail&sc_content=lightsailforwordpress&sc_geo=mult&sc_country=global&sc_outcome=pa&sc_publisher=amazon_media&sc_category=lightsail&sc_medium=body)
+[Lightsail Containers: An Easy Way to Run your Containers in the Cloud](https://aws.amazon.com/blogs/aws/lightsail-containers-an-easy-way-to-run-your-containers-in-the-cloud/?sc_channel=el&sc_campaign=post&sc_content=microservices-with-aws-cloud9-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq)
