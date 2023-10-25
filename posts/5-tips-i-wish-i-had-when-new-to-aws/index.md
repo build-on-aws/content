@@ -1,6 +1,6 @@
 ---
 title: "5 Tips I Wish I'd Known When I Was New to AWS"
-description: "Here's what I wish I'd known when I started building on AWS. These tips will help you plan your journey to build on AWS.
+description: "Here's what I wish I'd known when I started building on AWS. These tips will help you plan your journey to build on AWS."
 tags:
   - new-to-aws
   - solutions
