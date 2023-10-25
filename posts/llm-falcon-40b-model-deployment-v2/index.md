@@ -2,7 +2,7 @@
 title: "Deploying Falcon-40B Open-Source LLM on Amazon SageMaker: A Comparative Guide"  
 description: "Dive into the intricacies of deploying the Falcon-40B, an open-source Large Language Model, on Amazon SageMaker. We'll contrast two deployment avenues: SageMaker JumpStart, for those seeking swift and straightforward deployment, and SageMaker Notebook, tailored for enthusiasts who desire a hands-on approach with granular configuration control."
 tags:  
-  - ai-mi
+  - ai-ml
   - llm
   - generative-ai
   - sagemaker
@@ -15,9 +15,12 @@ authorName: Haowen Huang
 additionalAuthors: 
   - authorGithubAlias: mikegc-aws
     authorName: Mike Chambers
-date: 2023-10-22 
+date: 2023-10-25
 ---
- 
+
+|ToC|
+|---|
+
 In this guide, we'll delve into deploying Falcon-40B, an open-source Large Language Model with 40 billion parameters, using Amazon SageMaker.
 
 We'll describe three deployment options:
@@ -44,7 +47,7 @@ Falcon-40B is trained mostly on English, German, Spanish, French, with limited c
 
 ### 1.2 Training parameters
 
-Falcon-40B was trained using Amazon SageMaker, using 384 A100 40GB GPUs on the [p4d instances](https://aws.amazon.com/ec2/instance-types/p4/). During training, the model used a 3D parallel strategy, with model states partitioned across all the GPUs (ZeRo). Model training began in December 2022 and took two months. The main training parameters are as follows:
+Falcon-40B was trained using Amazon SageMaker, using 384 A100 40GB GPUs on the [p4d instances](https://aws.amazon.com/ec2/instance-types/p4/?sc_channel=el&sc_campaign=genaiwave&sc_content=llm-falcon-40b-model-deployment-v2&sc_geo=mult&sc_country=mult&sc_outcome=acq). During training, the model used a 3D parallel strategy, with model states partitioned across all the GPUs (ZeRo). Model training began in December 2022 and took two months. The main training parameters are as follows:
 
 ![The main training parameters of Falcon-40B](images/falcon-training-parameters.png)
 
@@ -58,11 +61,11 @@ Falcon-40B is a causal decoder-only model, trained on a causal language modeling
 
 ## 2. Deploying Falcon-40B
 
-> **!! Cost Warning !!** - While Falcon-40B may not be the biggest LLM out there, it is still a production scale LLM.  Running a model such as this in your account requires large compute instances to be run, such as the `ml.g5.12xlarge` (or larger). Before deploying any resources in your account always be sure to [check the pricing first](https://aws.amazon.com/pricing), and plan how you will decommission the resources when they are no longer needed.  Note that ALL the methods described in this post deploy large compute instances.
+> **!! Cost Warning !!** - While Falcon-40B may not be the biggest LLM out there, it is still a production scale LLM.  Running a model such as this in your account requires large compute instances to be run, such as the `ml.g5.12xlarge` (or larger). Before deploying any resources in your account always be sure to [check the pricing first](https://aws.amazon.com/pricing?sc_channel=el&sc_campaign=genaiwave&sc_content=llm-falcon-40b-model-deployment-v2&sc_geo=mult&sc_country=mult&sc_outcome=acq), and plan how you will decommission the resources when they are no longer needed.  Note that ALL the methods described in this post deploy large compute instances.
 
-> **AWS Service Quotas** - Your AWS account has region-specific quotas for each AWS service. These quotas help protect the account from unexpected costs caused by unintended usage. You can request [increases for quotas](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html), and may have to, for the large instances used in this post.
+> **AWS Service Quotas** - Your AWS account has region-specific quotas for each AWS service. These quotas help protect the account from unexpected costs caused by unintended usage. You can request [increases for quotas](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html?sc_channel=el&sc_campaign=genaiwave&sc_content=llm-falcon-40b-model-deployment-v2&sc_geo=mult&sc_country=mult&sc_outcome=acq), and may have to, for the large instances used in this post.
 
-The next few sections describe how to deploy Falcon-40B.  A prerequisite for ALL of these methods is to have Amazon SageMaker Studio up and running in your account. If you're an individual setting up this environment for experimentation, or a small project, this is easy to do and you can follow the instructions [here](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html).  If you are part of a larger team, the setup is still straight forward, but will require a little planning to integrate with your existing workflows.  
+The next few sections describe how to deploy Falcon-40B.  A prerequisite for ALL of these methods is to have Amazon SageMaker Studio up and running in your account. If you're an individual setting up this environment for experimentation, or a small project, this is easy to do and you can follow the instructions [here](https://docs.aws.amazon.com/sagemaker/latest/dg/gs-studio-onboard.html?sc_channel=el&sc_campaign=genaiwave&sc_content=llm-falcon-40b-model-deployment-v2&sc_geo=mult&sc_country=mult&sc_outcome=acq).  If you are part of a larger team, the setup is still straight forward, but will require a little planning to integrate with your existing workflows.  
 
 Once you're up and running with Amazon SageMaker Studio, deploying Falcon-40B with sensible defaults is incredibly easy.  
 
@@ -97,8 +100,8 @@ This section demonstrates how to quickly deploy Falcon-40B using Amazon SageMake
 
     - If you are prompted to 'Set up notebook environment' then selecting the default options will be fine. This instance being run here is to run the SDK code, the model itself will launch in a different container.  
     ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-6.jpeg)
-    
-    - You may need to wait for the notebook to start the kernel.    
+
+    - You may need to wait for the notebook to start the kernel.
     ![Go to Amazon SageMaker JumpStart](images/sagemaker-studio-jumpstart-7.jpeg)
 
 3. When the notebook is up and running, you will see that the code is split into 3 main parts with `Deploy Falcon model for inference` being the section we want, to use the SDK for deploying Falcon-40B as a SageMaker endpoint.
@@ -110,7 +113,7 @@ This section demonstrates how to quickly deploy Falcon-40B using Amazon SageMake
 
 Weather you deployed Flacon-40B through either of the methods above, we will now review how to use the endpoint, in code, to create generations.
 
-1. If it's not already loaded, follow the steps above to open up the Falcon-40B notebook. 
+1. If it's not already loaded, follow the steps above to open up the Falcon-40B notebook.
 
 2. Scroll through the notebook and find the section `1.3 About the model`.  In there you will see cells to query the endpoint using the `predictor` object. If you have just used this notebook to create the endpoint then the `predictor` object will be set.  If you created the endpoint in another session, or you created the endpoint using the JumpStart deploy button, we will need to create a `predictor` object ourselves.  
 
@@ -148,18 +151,18 @@ query_endpoint(payload)
 ```
 
 Output:
+
 ````text
 Input: Write a program to compute factorial in python:
  Output: 
 You can compute factorial in Python using the built-in function `math.factorial()`. Here's an example:
 
-```
 import math
 
 n = 5
 factorial = math.factorial(n)
 print(factorial)
-```
+
 
 This will output `120`, which is the factorial of 5.
 ````
@@ -168,7 +171,7 @@ This will output `120`, which is the factorial of 5.
 
 This section will detail how to deploy Falcon-40B to a SageMaker endpoint, and can be customized to deploy many other LLMs from Hugging Face in a similar way. To follow along with these instructions you will need a Python environment where you can install libraries etc.  Amazon SageMaker Studio would be great for this, but you can use any number of alternatives such as Visual Studio Code.  The following code assumes that you are developing a SageMaker Studio notebook (`File` > `New` > `Notebook`)
 
-> The content of this section is partly based on Philipp Schmid's [blog](https://www.philschmid.de/sagemaker-falcon-llm). Philipp is a Technical Lead at Hugging Face, and an [AWS Machine Learning Hero](https://aws.amazon.com/developer/community/heroes/philipp-schmid/).
+> The content of this section is partly based on Philipp Schmid's [blog](https://www.philschmid.de/sagemaker-falcon-llm). Philipp is a Technical Lead at Hugging Face, and an [AWS Machine Learning Hero](https://aws.amazon.com/developer/community/heroes/philipp-schmid/?sc_channel=el&sc_campaign=genaiwave&sc_content=llm-falcon-40b-model-deployment-v2&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### 3.1 Setup development environment
 
@@ -202,7 +205,7 @@ print(f"sagemaker role arn: {role}")
 print(f"sagemaker session region: {sess.boto_region_name}")
 ```
 
-For more detailed IAM role configuration instructions for the permissions required by Amazon SageMaker, you can refer to [this document](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html).
+For more detailed IAM role configuration instructions for the permissions required by Amazon SageMaker, you can refer to [this document](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html?sc_channel=el&sc_campaign=genaiwave&sc_content=llm-falcon-40b-model-deployment-v2&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ### 3.2 Retrieve the Hugging Face LLM DLC
 
@@ -294,13 +297,13 @@ After submitting and running the above code, Amazon SageMaker will now create th
 
 Once the endpoint is deployed, we can use the `predict` method from the `predictor` to begin model inference.
 
-We can use different parameters to control the generation, which can be defined in the payload's `parameters` attribute. The Hugging Face LLM Inference Container supports various generation parameters, including `top_p`, `temperature`, `stop`, and `max_new_token`. You can find the full list of supported parameters [here](https://huggingface.co/blog/sagemaker-huggingface-llm#4-run-inference-and-chat-with-our-model). 
+We can use different parameters to control the generation, which can be defined in the payload's `parameters` attribute. The Hugging Face LLM Inference Container supports various generation parameters, including `top_p`, `temperature`, `stop`, and `max_new_token`. You can find the full list of supported parameters [here](https://huggingface.co/blog/sagemaker-huggingface-llm#4-run-inference-and-chat-with-our-model).
 
 Because the **tiiuae/falcon-40b-instruct model** we deployed is a conversational chat model, we can chat with the model using the following prompts:
 
 ```python
 # define payload
-prompt = """You are an helpful Assistant, called Falcon. Knowing everyting about AWS.
+prompt = """You are an helpful Assistant, called Falcon. Knowing everything about AWS.
 
 User: Can you tell me something about Amazon SageMaker?
 Falcon:"""
