@@ -11,6 +11,9 @@ authorName: Sophia Parafina
 date: 2023-10-25
 ---
 
+|ToC|
+|---|
+
 [Microservices](https://aws.amazon.com/microservices/?sc_channel=el&sc_campaign=post&sc_content=microservices-with-aws-cloud9-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq) are the basis of a service oriented architecture pattern that has been in use for over a decade. It’s a proven way for building agile applications that are easy to deploy, upgrade, and scale flexibly. A microservice solves a specific problem with self-contained code which lends to deploying them in [containers](https://aws.amazon.com/containers/?sc_channel=el&sc_campaign=post&sc_content=microservices-with-aws-cloud9-and-lightsail&sc_geo=mult&sc_country=mult&sc_outcome=acq). AWS Lightsail is an simple and quick way to build microservices with containers. Lightsail supplies an HTTPS endpoint and automatically sets up a load balanced TLS endpoint with a TLS certificate. In addition., it can replace unresponsive containers automatically and assign a DNS name to the endpoint. When updating the container, Lightsail maintains the old version until the new version is live and healthy. The Lightsail console includes AWS CloudShell, a complete environment for building containers and deploying them in Lightsail. This article demonstrates how to build a microservice and deploy it using Lightsail’s container service.
 
 ## AWS Cloud9
