@@ -5,8 +5,10 @@ tags:
   - vector-databases
   - eks
   - llm
+  - kubernetes
 authorGithubAlias: JoeStech
 authorName: Joe Stech
+githubUserLabel: community-builder
 date: 2023-10-25
 ---
 
@@ -22,11 +24,11 @@ Whatever the reason, you've decided that Milvus is the vector database for you, 
 
 ## Creating the EKS cluster
 
-You go to the milvus website and you start digging around in the documentation. Awesome, they've got a section called "Administration Guide->Deploy on Clouds->AWS"! They've got ways to deploy on raw EC2 instances or on EKS, and you [decide to go with EKS](https://milvus.io/docs/eks.md) because you don't want to have to manage a bunch of raw instances yourself.
+You go to the Milvus website and you start digging around in the documentation. Awesome, they've got a section called "Administration Guide->Deploy on Clouds->AWS"! They've got ways to deploy on raw EC2 instances or on EKS, and you [decide to go with EKS](https://milvus.io/docs/eks.md) because you don't want to have to manage a bunch of raw instances yourself.
 
 You make sure you've got all the required tools installed, and you get to the first code block in the quickstart: the EKS yaml file.
 
-```
+```yaml
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
@@ -49,28 +51,27 @@ addons:
   version: v1.13.0-eksbuild.1 # optional
 ```
 
-
 You can see that it's pretty good, it will get the job done, but you're a pro. The first thing you notice is that you need to change the EKS version, since 1.23 is no longer within standard support, so you change it to the [latest version](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html). You also don't want to be setting up a cluster that allows anyone on the public internet to be accessing your service endpoint, even if you do have it locked down with proper IAM permissions.
 
 So you add these lines:
 
-```
+```yaml
 vpc:
   publicAccessCIDRs:
     - [your IP, or the IP range of your company VPC]
 ```
 
-Longer term you'll probably want to provision the VPC yourself, but for now you can let eksctl create one that's dedicated to your EKS cluster.
+Longer term you'll probably want to provision the VPC yourself, but for now you can let `eksctl` create one that's dedicated to your EKS cluster.
 
 Now you're ready to run
 
 `eksctl create cluster -f milvus_cluster.yaml`
 
-Once the cluster is provisioned, you'll want to configure kubectl so that you can control your EKS cluster:
+Once the cluster is provisioned, you'll want to configure `kubectl` so that you can control your EKS cluster:
 
 `aws eks --region ${aws-region} update-kubeconfig --name ${cluster-name}`
 
-And if you're working with other trusted devs, you'll want to add them to your EKS masters group with an iamidentitymapping:
+And if you're working with other trusted devs, you'll want to add them to your EKS masters group with an `iamidentitymapping`:
 
 `eksctl create iamidentitymapping --cluster ${cluster-name} --region ${aws-region} --arn ${user-ARN} --username ${username} --group system:masters --no-duplicate-arns`
 
@@ -87,7 +88,8 @@ And if you want to look at the various version available for install, you'll use
 `helm search repo milvus -l`
 
 The milvus documentation will tell you to run
-```
+
+```bash
 helm upgrade --install --set cluster.enabled=true --set externalS3.enabled=true --set externalS3.host='s3.us-west-2.amazonaws.com' --set externalS3.port=80 --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --set minio.enabled=False --set service.type=LoadBalancer milvus milvus/milvus
 ```
 
@@ -97,8 +99,7 @@ Specifically, you're going to want to add a specific version of Milvus that you 
 
 Put it all together and it looks like:
 
-
-```
+```yaml
 cluster:
   enabled: true
   
@@ -142,8 +143,9 @@ extraConfigFiles:
 
 And finally, to actually deploy the cluster, you'll run
 
-
-`helm upgrade --install -f values.yaml --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --version ${milvus-helm-version} milvus milvus/milvus`
+```bash
+helm upgrade --install -f values.yaml --set externalS3.accessKey=${access-key} --set externalS3.secretKey=${secret-key} --set externalS3.bucketName=${bucket-name} --version ${milvus-helm-version} milvus milvus/milvus
+```
 
 You can see that you should still specify the S3 creds from the command line, you don't want those being accidentally checked in to your code repo.
 
