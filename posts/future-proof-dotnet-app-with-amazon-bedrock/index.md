@@ -1,5 +1,5 @@
 ---
-title: "Future-proof Your .NET Apps With Foundation Model Choice And Amazon Bedrock"
+title: "Future-proof Your .NET Apps With Foundation Model Choice and Amazon Bedrock"
 description: "Why .NET developers should consider Amazon Bedrock for their Generative AI empowered apps with getting started code snippets and a full code sample."
 tags:
     - dotnet
