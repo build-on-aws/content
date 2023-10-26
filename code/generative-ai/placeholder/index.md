@@ -16,6 +16,12 @@ additionalAuthors:
     authorName: Banjo Obayomi
   - authorGithubAlias: vsenger
     authorName: Vinicius Senger
+  - authorGithubAlias: debnsuma
+    authorName: Suman Debnath
+  - authorGithubAlias: riferrei
+    authorName: Ricardo Ferreira
+  - authorGithubAlias: abhirockzz
+    authorName: Abhishek Gupta
 date: 2023-10-26
 ---
 
