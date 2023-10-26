@@ -843,7 +843,7 @@ they explicitly write a connection between two microservices. This
 independence in microservices lower risks in development, and help a
 team to build faster.
 
-## What you will accomplish
+### What you will accomplish
 
 In this module, you will break the Node.js application into several
 interconnected services and create an AWS Copilot Environment and
