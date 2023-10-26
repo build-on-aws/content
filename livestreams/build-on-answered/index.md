@@ -9,9 +9,6 @@ tags:
     - twitch
 authorGithubAlias: juliegund
 authorName: Julie Gunderson
-additionalAuthors: 
-  - authorGithubAlias: cobusbernard
-    authorName: Cobus Bernard
 date: 2022-03-10
 images:
   banner: ./images/build-on-answered.png
@@ -43,6 +40,10 @@ Join us for our upcoming episodes every Wednesday at 11am PT from 11 October 202
 Watch past episodes!
 
 | Episode | Name| Date | Link to Watch | Link to Show Notes |
+|--|--|--|--|--|
+| **S2E03** | All about Kubernetes with Jérôme Petazzoni | October 25, 2023 | [Watch here](https://www.twitch.tv/videos/1919526636) |[Show Notes](/livestreams/build-on-answered/2023-10-25) |
+| **S2E02** | All about Kubernetes with Jérôme Petazzoni | October 18, 2023 | [Watch here](https://www.twitch.tv/videos/1919526636) |[Show Notes](/livestreams/build-on-answered/2023-10-18) |
+| **S2E01** | All about Kubernetes with Jérôme Petazzoni | October 11, 2023 | [Watch here](https://www.twitch.tv/videos/1919526636) |[Show Notes](/livestreams/build-on-answered/2023-10-11) |
 |--|--|--|--|--|
 | **S1E12** | All about Kubernetes with Jérôme Petazzoni | September 6, 2023 | [Watch here](https://www.twitch.tv/videos/1919526636) |[Show Notes](/livestreams/build-on-answered/2023-09-06) |
 | **S1E11** | All about Amazon Redshift | August 16, 2023 | [Watch here](https://www.twitch.tv/videos/1900421697) | [Show Notes](/livestreams/build-on-answered/2023-08-16) |
