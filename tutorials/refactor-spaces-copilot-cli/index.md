@@ -69,7 +69,6 @@ Posts.](images/whatyouwilldo.jpg)
 | ------------------- | -------------------------------------- |
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 140 minutes                             |
-| 💰 Cost to complete | Free when using the AWS Free Tier or USD 1.01      |
 | 🧩 Prerequisites    | - An AWS account: If you don\'t already have an account, follow the [Setting Up Your AWS Environment](<<https://aws.amazon.com/getting-started/guides/setup-environment/>) tutorial for a quick overview. <br> - [Install](<<https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html>) and configure the AWS CLI. <br> - [Install](<<https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Copilot.html#copilot-install>) and configure AWS Copilot. <br>  - [Install](https://docs.docker.com/get-docker/) and configure Docker.<br> - A text editor. For this tutorial, we will use VS Code, but you  can use your preferred IDE. |
 | 💻 Code Sample         | - Code sample for application on [GitHub](https://github.com/awslabs/amazon-ecs-nodejs-microservices) <br> - AWS CloudFormation scripts for Refactor Services on [AWS Samples](https://github.com/aws-samples/aws-migration-hub-refactor-spaces-samples/tree/main/rs-tutorial/rs-copilot-tutorial)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
