@@ -14,14 +14,14 @@ spaces:
   - kubernetes
 authorGithubAlias: rstebaws
 authorName: Ryan Stebich
-date: 2023-10-29
+date: 2023-10-30
 ---
 
 Secrets management is a challenging but critical aspect of running secure and dynamic containerized applications at scale. To support this need to securely distribute secrets to running applications, Kubernetes provides native functionality to manage secrets in the form of [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/). However, many customers choose to centralize the management of secrets outside of their Kubernetes clusters by using external secret stores such as [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) to improve the security, management, and auditability of their secret usage.
 
 Consuming secrets from external secret stores often requires modifications to your application code so it supports secret store specific API calls, allowing retrieval of secrets at application run time. This can increase the complexity of your application code base and potentially reduce the portability of containerized applications as they move between environments or even leverage different secret stores. However, when running applications on [Amazon EKS](https://aws.amazon.com/eks/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq), you have a more streamlined alternative that minimizes code changes. Specifically, you can leverage the [AWS Secrets and Configuration Provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) (ASCP) and the [Kubernetes Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/). Acting as a bridge between AWS Secrets Manager and your Kubernetes environment, ASCP mounts your application secrets directly into your pods as files within a mounted storage volume. This approach simplifies management and enhances the portability of your workloads, without requiring significant application-level code modifications to access secrets.
 
-Building on the Amazon EKS cluster from [**part 1**](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic) of our series, this tutorial dives into setting up the AWS Secrets and Configuration Provider(ASCP) for the Kubernetes Secrets Store CSI Driver. Included in the cluster configuration for the previous tutorial is the OpenID Connect (OIDC) endpoint to be used by the ASCP IAM Role for Service Account (IRSA). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic). Alternatively, to setup an existing cluster with the components required for this tutorial, use the instructions in [Create an IAM OpenID  Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) in EKS official documentation.
+Building on the Amazon EKS cluster from [**part 1**](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic) of our series, this tutorial dives into setting up the AWS Secrets and Configuration Provider(ASCP) for the Kubernetes Secrets Store CSI Driver. Included in the cluster configuration for the previous tutorial is the OpenID Connect (OIDC) endpoint to be used by the ASCP IAM Role for Service Account (IRSA). For part one of this series, see [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic). Alternatively, to set up an existing cluster with the components required for this tutorial, use the instructions in [Create an IAM OpenID  Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) in EKS official documentation.
 
 In this tutorial, you will learn how to set up the [AWS Secrets and Configuration Provider](https://github.com/aws/secrets-store-csi-driver-provider-aws) (ASCP) for the [Kubernetes Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/) on your Amazon EKS cluster and AWS Secrets Manager to store you application secrets. You will leverage ASCP to expose secrets to your applications running on EKS improving the security and portability of your workloads.
 
@@ -31,7 +31,7 @@ In this tutorial, you will learn how to set up the [AWS Secrets and Configuratio
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-10-29                                                      |
+| ⏰ Last Updated        | 2023-10-30                                                      |
 
 | ToC |
 |-----|
@@ -42,7 +42,7 @@ In this tutorial, you will learn how to set up the [AWS Secrets and Configuratio
 * Install the latest version of [eksctl](https://eksctl.io/introduction/#installation). To check your version, run: `eksctl info`
 * Install the latest version of [Helm](https://helm.sh/docs/intro/install/). To check your version, run: `helm version`
 * Install the latest version of the [AWS CLI (v2)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq). To check your version, run: `aws --version`
-*  [IAM OIDC provider](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) configured on an existing EKS cluster.
+* Get [IAM OIDC provider](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-integrate-secrets-manager&sc_geo=mult&sc_country=mult&sc_outcome=acq) configured on an existing EKS cluster.
 
 ## Overview
 
