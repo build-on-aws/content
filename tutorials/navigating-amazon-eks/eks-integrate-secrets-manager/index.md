@@ -228,7 +228,7 @@ As mentioned in the above output, to verify the Secrets Store CSI Driver has sta
 kubectl --namespace=kube-system get pods -l "app=secrets-store-csi-driver"
 ```
 
-You should see the following output. Make sure all the pod’s  `STATUS` are `Running`:
+You should see the following output. Make sure all the pod’s `STATUS` are `Running`:
 
 ```bash
 NAME READY STATUS RESTARTS AGE
