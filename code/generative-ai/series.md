@@ -2,6 +2,7 @@
 title: "Generative AI Code Samples for Amazon Bedrock"
 description: "A Curated Collection of code samples for Amazon Bedrock."
 navigationBars: none
+posts:
 ---
 
 ## Amazon Bedrock Code Examples
