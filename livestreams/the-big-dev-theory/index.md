@@ -27,16 +27,11 @@ https://youtu.be/b0FeFtvkHiw
 
 [**Adrian SanMiguel**](https://twitter.com/ar_sanmiguel), Principal Solutions Architect, Strategic Partner Engagements @ AWS
 
-
 ## Schedule
-
 
 Join us for our upcoming episodes!
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
-|Season 4 | **Episode 1** | 2023/10/03 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Grafana Labs | TBD |
-|Season 4 | **Episode 2** | 2023/10/10 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Grafana Labs | TBD |
-|Season 4 | **Episode 3** | 2023/10/17 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Grafana Labs | TBD |
 |Season 4 | **Episode 4** | 2023/10/24 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
 |Season 4 | **Episode 5** | 2023/10/31 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
 |Season 4 | **Episode 6** | 2023/11/07 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Canva | TBD |
@@ -49,6 +44,9 @@ Join us for our upcoming episodes!
 
 Past episodes
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
+|-|--|--|--|--|-|
+|Season 4 | **Episode 3** | 2023/10/17 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1953959698) | Grafana Labs |[Show notes](/livestreams/the-big-dev-theory/2023-10-17) |
+|Season 4 | **Episode 1** | 2023/10/03 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1942293847) | Grafana Labs |[Show notes](/livestreams/the-big-dev-theory/2023-10-03) |
 |-|--|--|--|--|-|
 |Season 3 | **Episode 9** | 2023/09/26 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1935703774) | JIT | [Show notes](/livestreams/the-big-dev-theory/2023-09-26) |
 |Season 3 | **Episode 8** | 2023/09/19 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/videos/1930313107) | JIT | [Show notes](/livestreams/the-big-dev-theory/2023-09-19) |
