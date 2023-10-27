@@ -10,6 +10,8 @@ images:
   hero: images/banner.jpg
 spaces:
   - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: jlooper
 authorName: Jen Looper
 date: 2023-09-15

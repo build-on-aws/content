@@ -7,6 +7,10 @@ tags:
     - rekognition
     - java
     - students
+spaces:
+  - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: srhowell
 authorName: Stephen Howell
 date: 2023-10-02

@@ -82,6 +82,15 @@ For example,
 this is javascript code
 ```
 
+### Step 1 - Example Adding your AWS Credentials
+
+Here is my content about how to add AWS Credentials. And if I want to use sub-steps, I would do this:
+
+1. Now you have the first substep
+2. Now you have the second substep
+
+### Step 2 - Example Doing Something Else
+
 If you want to share a code sample file with reader, then you have two options:
 
 - paste the contents with code blocks like mentioned above

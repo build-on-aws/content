@@ -2,7 +2,7 @@
 title: "Build Your Own Recommendation Engine on AWS - PART 1 | S02 E24 | Build On Weekly"
 description: "Did you ever want to build your own recommendation engine powered by machine learning? A way to properly create recommendations for your customers? In PART 1, Piyali and Darko look at the first steps it takes to do this."
 tags:
-  - machine-learning
+  - ai-ml
   - ai
   - pandas
   - data

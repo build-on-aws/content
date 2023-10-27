@@ -6,7 +6,7 @@ tags:
   - generative-ai
   - sagemaker
   - falcon
-  - llm
+  - llms
   - aws
   - build-on-live
   - twitch
