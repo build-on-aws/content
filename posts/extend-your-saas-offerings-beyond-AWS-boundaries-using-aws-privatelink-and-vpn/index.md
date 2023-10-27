@@ -155,7 +155,7 @@ For our third use case where the end customer is on a third party cloud. This us
 
 ![End customer on 3rd party cloud with site to site VPN- endpoint to endpoint Solution](images/end-customer-on-3rd-party-cloud-S2S-usecase.png)
 
-This would be subject to the same requirements cross validation as the previous use case
+This would be subject to the same requirements cross validation as the previous use case.
 
 
 ## Scaling the Solution
