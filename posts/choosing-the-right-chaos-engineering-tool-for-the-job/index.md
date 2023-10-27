@@ -1,5 +1,15 @@
-## Choosing The Right Chaos Engineering Tool for the Job first draft
-
+---
+title: "Choosing The Right Chaos Engineering Tool for the Job"
+description: Basic guide for choosing chaos engineering tools for your AWS workload
+tags:
+  - chaos-engineering
+  - fault-injection-simulator
+  - fis
+  - fault-injection
+authorGithubAlias: user57231
+authorName: Josh Henry and Charles-David Teboul
+date: 2023-10-27
+---
 ### **Introduction**
 
 In an always-on, competitive marketplace, it is becoming increasingly important that your applications are always available by applying [resiliency as a shared responsibility between AWS and the customer](https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/shared-responsibility-model-for-resiliency.html). Making your applications more resilient so they can withstand failures is a crucial activity for any company, and isn’t a single time event, or even an annual test, it requires continuous improvement. 
