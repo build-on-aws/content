@@ -133,7 +133,7 @@ Another aspect that needs to be considered is DNS resolution. For our setup to w
 
 Move on to the use case with smaller end customers, and a small number of machines each, and often mobile or distributed. In this case we may not require a site-to-site VPN, a Clinet VPN solution would look like the diagram below. Client VPN uses source NAT-ing, and would support end-customer isolation.
 
-![End customer on premises with VPN Client- endpoint to endpoint Solution](images/end-customer-on-premises-VPVc-usecase.png)
+![End customer on premises with VPN Client- endpoint to endpoint Solution](images/end-customer-on-premises-VPC-usecase.png)
  
 
 Validating that we fulfilled all the use case solution requirements should be easy as we already have reused the already validated solution from our first use case as a building block, hence we only need to validate the VPN part. Here is a short recap: 
@@ -174,3 +174,6 @@ And there you have it, you have accommodated all your end customers regardless w
 ## Conclusion
 
 In conclusion; in this blog we have demonstrated how SaaS providers can extend their services to customers securely wherever they are, be it on AWS, on premises, or on other clouds. We have leveraged AWS PrivateLink, AWS VPN, and the concept of a landing VPC to enable a modular and secure architecture that can scale as business grows. We have also demonstrated the need to change tactics depending on where the customer is, as long as we maintain the a foundational elements and maintain modularity. At last, we have demonstrated that besides modularity and scalability, the solution can be flexibly adaptive to future needs.
+
+
+[def]: images/end-customer-on-premises-VPVc-usecase.png
