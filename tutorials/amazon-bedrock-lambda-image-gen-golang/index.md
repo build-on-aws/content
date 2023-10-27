@@ -1,5 +1,5 @@
 ---
-title: "Generative AI for Go developers - Build a Serverless image generation solution using Amazon Bedrock"  
+title: "Generative AI for Go Developers – Build a Serverless Image Generation Solution Using Amazon Bedrock"  
 description: "This tutorial will walk you through how to use AWS CDK to deploy a Serverless Go application implemented using Amazon Bedrock and AWS Lambda, and accessed as a static website on Amazon S3 via a Amazon CloudFront domain."
 tags:  
   - generative-ai
@@ -42,7 +42,7 @@ The entire solution is built using the [Go programming language](https://go.dev/
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-10-27  
 
-## Pre-requisites
+## Prerequisites
 
 Before starting this tutorial, you will need the following:
 
@@ -61,7 +61,7 @@ git clone https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation
 cd amazon-bedrock-lambda-image-generation-golang
 ```
 
-## Deploy the solution using AWS CDK
+## Deploy the Solution Using AWS CDK
 
 To start the deployment, simply invoke `cdk deploy`.
 
@@ -91,7 +91,7 @@ Do you wish to deploy these changes (y/n)? y
 
 This will start creating the AWS resources required for the application.
 
-> If you want to see the AWS CloudFormation template which will be used behind the scenes, run `cdk synth` and check the `cdk.out` folder
+> If you want to see the AWS CloudFormation template which will be used behind the scenes, run `cdk synth` and check the `cdk.out` folder.
 
 You can keep track of the progress in the terminal or navigate to AWS console: `CloudFormation > Stacks > BedrockLambdaImgeGenWebsiteStack`
 
@@ -108,7 +108,7 @@ The deployment can take a bit of time since creating the CloudFront distribution
 
 ![CloudFormation Outputs](images/cfn-info.png)
 
-## Update the HTML page and copy it to S3 bucket
+## Update the HTML Page and Copy It to S3 Bucket
 
 Open the `index.html` file in the GitHub repo, and locate the following text `ENTER_API_GATEWAY_URL`. Replace this with the API Gateway URL that you received as the CDK deployment output above.
 
@@ -126,7 +126,7 @@ aws s3 ls s3://<name of the S3 bucket from CDK output>
 
 Now you are ready to access the website!
 
-## Verify the solution
+## Verify the Solution
 
 Enter the CloudFront domain name in your web browser to navigate to the website. You should see the website with a pre-populated description that can be used as a prompt.
 
@@ -134,7 +134,7 @@ Click **Generate Image** to start the process. After a few seconds, you should s
 
 ![Website](images/website.jpg)
 
-### Modify the model parameters
+### Modify the Model Parameters
 
 The Stability Diffusion model allows us to [refine the generation parameters](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-diffusion?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) as per our requirements. 
 
@@ -150,7 +150,7 @@ Click **Show Configuration** to edit these.
 
 > Max values for `cfg_steps` and `steps` are 30 and 150 respectively.
 
-### Don't forget to clean up
+### Don’t Forget To Clean Up
 
 Once you're done, to delete all the services, simply use:
 
@@ -164,7 +164,7 @@ Are you sure you want to delete: BedrockLambdaImgeGenWebsiteStack (y/n)?
 
 You were able to set up and try the complete solution. Before we wrap up, let's quickly walk through some of important parts of the code to get a better understanding of what's going the behind the scenes.
 
-## Code walk through
+## Code Walk Through
 
 Since we will only focus on the important bits, a lot of the code (print statements, error handling etc.) has been omitted for brevity.
 
@@ -239,7 +239,7 @@ Finally, we configure Lambda function integration with API Gateway, add the HTTP
 	awscdk.NewCfnOutput(stack, jsii.String("s3 bucket name"), &awscdk.CfnOutputProps{Value: bucket.BucketName(), Description: jsii.String("s3 bucket name")})
 ```
 
-### Lambda function
+### Lambda Function
 
 > You can refer to the [Lambda Function code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/function/main.go)
 
