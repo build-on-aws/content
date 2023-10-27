@@ -146,15 +146,15 @@ https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_
 
 ### **External resources:**
 
-Chaos Engineering with AWS Fault Injection Simulator: https://www.youtube.com/watch?v=AThR8dFmPP4
+Chaos Engineering with AWS Fault Injection Simulator: [https://www.youtube.com/watch?v=AThR8dFmPP4](https://www.youtube.com/watch?v=AThR8dFmPP4)
 <br>
-Chaos engineering leveraging AWS Fault Injection Simulator in a multi-account AWS environment: https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/
+Chaos engineering leveraging AWS Fault Injection Simulator in a multi-account AWS environment: [https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/](https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/)
 <br>
-AWS Fault Injection Simulator blogs: https://aws.amazon.com/blogs/devops/tag/aws-fault-injection-simulator/
+AWS Fault Injection Simulator blogs: [https://aws.amazon.com/blogs/devops/tag/aws-fault-injection-simulator/](https://aws.amazon.com/blogs/devops/tag/aws-fault-injection-simulator/)
 <br>
-How Finbourne Assures Resiliency Through Chaos Engineering Events Every 17 min: https://www.youtube.com/watch?v=lkDq9g43djw
+How Finbourne Assures Resiliency Through Chaos Engineering Events Every 17 min: [https://www.youtube.com/watch?v=lkDq9g43djw](https://www.youtube.com/watch?v=lkDq9g43djw)
 <br>
-DPG Media Successfully Launches Video On Demand Service with Gremlin and AWS: https://aws.amazon.com/partners/success/dpg-media-gremlin/?did=ps_card&trk=ps_card
+DPG Media Successfully Launches Video On Demand Service with Gremlin and AWS: [https://aws.amazon.com/partners/success/dpg-media-gremlin/?did=ps_card&trk=ps_card](https://aws.amazon.com/partners/success/dpg-media-gremlin/?did=ps_card&trk=ps_card)
 
 
 
