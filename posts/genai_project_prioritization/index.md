@@ -1,10 +1,15 @@
 ---
 title: "Generative AI Project Prioritization"
-description: Describes a framework for prioritizing GenAI projects based on business value, risk, and level of effort.
+description: Learn about a framework for prioritizing GenAI projects based on business value, risk, and level of effort.
 tags:
   - generative-ai 
+  - ai-ml
+  - mlops
 authorGithubAlias: rddefauw
 authorName: Randy DeFauw
+additionalAuthors: 
+  - authorGithubAlias: sinasojoodi
+    authorName: Sina Sojoodi
 date: 2023-10-30
 ---
 
