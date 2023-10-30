@@ -48,7 +48,7 @@ Let’s say you have a three tier application running on AWS. This uses an [Elas
 ### Tools available
 
 
-There are a number of chaos engineering tools available today, and since AWS is the leader in cloud computing, most will have at least some level of integration so they can be used to run experiments against your AWS workloads.  In the following section we will introduce several options.
+There are a number of chaos engineering tools available today, and most will have at least some level of integration with AWS so they can be used to run experiments against your AWS workloads.  In the following section we will introduce several options.
 
 
 ### **AWS Fault Injection Simulator (FIS)**
