@@ -9,6 +9,7 @@ posts:
     - manage-security-and-costs-across-the-enterprise-with-aws-organizations
     - migrate-a-sql-server-database-in-the-cloud
     - learning-aws-iam-by-writing-your-first-policies-for-groups-and-users
+    - securely-access-resources-with-iam-service-roles
 --- 
 
 | SeriesToC |
