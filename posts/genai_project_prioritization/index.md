@@ -53,7 +53,7 @@ While weighing business value requires input and judgement from many teams, gaug
 * Will your model be exposed directly to external users? If so, you will need extra rigor in security and privacy guardrails. Beyond following the emerging security and privacy best practices (e.g. [OWASP Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)), identify specific threat vectors applicable to your overall solution architecture for your use case. You can apply the probability and impact risk modeling to those threat vectors and prioritize mitigating the associate risk accordingly for the highest ROI on security assurance efforts.  
 * Do you have mature systems already in place for the pieces of the solution surrounding the model? As the diagram below shows, you may need some supporting capabilities in application hosting, data ingest, security, and operations. If you need to buy or hire new expertise, that will increase project cost and time.
 
-![Taxonomy of LLM App Stack on AWS](images/taxonomy-llm-stack.jpg "Taxonomy of LLM App Stack on AWS")
+![Taxonomy of LLM App Stack on AWS](images/taxonomy-llm-stack.png "Taxonomy of LLM App Stack on AWS")
 
 Figure 1: Taxonomy of LLM App Stack on AWS inspired by [A16z’s emerging architectures for LLM Applications](https://a16z.com/emerging-architectures-for-llm-applications/)
 
