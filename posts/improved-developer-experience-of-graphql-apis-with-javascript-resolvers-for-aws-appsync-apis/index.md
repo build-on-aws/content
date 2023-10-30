@@ -9,24 +9,24 @@ tags:
   - api
 authorGithubAlias: zachjonesnoel
 authorName: Jones Zachariah Noel N
-date: 2023-10-09
+date: 2023-10-30
 githubUserLabel: AWS-Hero
 ---
 
 | ToC |
 |-----|
 
-[AWS AppSync](https://aws.amazon.com/appsync/) is a fully-managed serverless GraphQL API which enables serverless developers to build, deploy and also a powerful API layer for integrating seemlessly with other AWS services. Clearly, [GraphQL is destined to be the future of APIs](https://community.aws/posts/four-reasons-why-graphql-is-the-future) and learn about how you can get started with [AppSync](https://blog.theserverlessterminal.com/aws-appsync-101). In this blog, we will look into how [AWS AppSync supporting JavaScript resolvers](https://aws.amazon.com/about-aws/whats-new/2023/08/aws-appsync-javascript-all-resolvers-graphql-apis/) has improved the developer experience.
+[AWS AppSync](https://aws.amazon.com/appsync/) is a fully-managed serverless GraphQL API which enables serverless developers to build, deploy and also a powerful API layer for integrating seamlessly with other AWS services. Clearly, [GraphQL is destined to be the future of APIs](https://community.aws/posts/four-reasons-why-graphql-is-the-future) and learn about how you can get started with [AppSync](https://blog.theserverlessterminal.com/aws-appsync-101). In this blog, we will look into how [AWS AppSync supporting JavaScript resolvers](https://aws.amazon.com/about-aws/whats-new/2023/08/aws-appsync-javascript-all-resolvers-graphql-apis/) has improved the developer experience.
 
 ## AppSync resolvers
-[AppSync resolvers](https://docs.aws.amazon.com/appsync/latest/devguide/resolver-components.html) are the components responsible for integrating with different supported AppSync datasources such as - AWS Lambda functions, Amazon Aurora, Amazon DynamoDB, HTTP endpoints and many others. These resolvers have mapping templates for the GraphQL `type`, `query`, `mutation` and `subscription`. Resolvers can be written in Velocity Template Language (VTL) or JavaScript runtime. 
+[AppSync resolvers](https://docs.aws.amazon.com/appsync/latest/devguide/resolver-components.html) are the components responsible for integrating with different supported AppSync data sources such as - AWS Lambda functions, Amazon Aurora, Amazon DynamoDB, HTTP endpoints and many others. These resolvers have mapping templates for the GraphQL `type`, `query`, `mutation` and `subscription`. Resolvers can be written in Velocity Template Language (VTL) or JavaScript runtime. 
 
-![AppSync components with AppSync resolvers](images/AppSync-resolvers.png)
+![AppSync components with AppSync resolvers](images/AppSync-resolvers.webp)
 
 ### Why are resolvers important?
 Whenever integrating with AWS Services, resolvers (VTL or JavaScript based) would help with data manipulation for constructing the request mapping which the data source requires along with the response mapping where the response is constructed to the needed GraphQL schema. Additionally, resolvers support sharing of data between different resolver functions in a `pipeline resolver` with `context` and `arguments`. In both `unit resolver` and `pipeline resolver`, AppSync supports usage of different utility functions for data transformation of JSONs, Arrays Lists and generation of UUIDs.
 
-![Screenshot of a AppSync Pipeline resolver](images/PipelineResolverScreenshot.png)
+![Screenshot of a AppSync Pipeline resolver](images/PipelineResolverScreenshot.webp)
 The above screenshot from AppSync console shows how a Pipeline resolver can have multiple functions which can integrate with the respective data source and sharing the data amongst the different resolver functions using `context.stash`.
 
 ## VTL resolvers
@@ -42,7 +42,7 @@ type PrivateNote {
 	owner: String
 }
 ```
-A mutation `createPrivateNote` for creating new notes, in a typical VTL resolver which sets the different defualt values and validates for authentication of the user with Amazon Cognito for identifying the owner of the note by using the `util` functions on AppSync -  `$util.defaultIfNull()`, `$$util.dynamodb.toDynamoDBJson()` and `$$util.dynamodb.toMapValues()` to make the DynamoDB operation of `PutItem`.
+A mutation `createPrivateNote` for creating new notes, in a typical VTL resolver which sets the different default values and validates for authentication of the user with Amazon Cognito for identifying the owner of the note by using the `util` functions on AppSync -  `$util.defaultIfNull()`, `$$util.dynamodb.toDynamoDBJson()` and `$$util.dynamodb.toMapValues()` to make the DynamoDB operation of `PutItem`.
 
 ```JSON
 ## [Start] Initialization default values. **
@@ -190,7 +190,7 @@ $util.toJson($result)
 ```
 
 ### Complexity of the resolver
-With the syntaxs and complex resolvers, often the direct data source to a database or HTTP can become hard to handle with the limited utility hanlder functions and in case of `pipeline resolver`, it can be a huge learning curve of how to use different functions, mapping request/response for all the functions and the parent resolver.
+With the syntax and complex resolvers, often the direct data source to a database or HTTP can become hard to handle with the limited utility handler functions and in case of `pipeline resolver`, it can be a huge learning curve of how to use different functions, mapping request/response for all the functions and the parent resolver.
 
 For some use-cases and scenarios, using VTL resolvers may turn out to be overwhelming which results in developers moving towards Lambda function resolvers.
 
@@ -253,26 +253,26 @@ function dynamodbPutRequest(params) {
 }
 
 ```
-This defines the `request()` and `response()` methods for mapping with AppSync's mutation. With the familarity of JavaScript, it's easy to modularize your resolvers with different JavaScript functions as you see in the example above, `dynamodbPutRequest()` is invoked from the `request()` method and whenever this returns, the `response()` method would handle the response mapping with the defined schema.
+This defines the `request()` and `response()` methods for mapping with AppSync's mutation. With the familiarity of JavaScript, it's easy to modularize your resolvers with different JavaScript functions as you see in the example above, `dynamodbPutRequest()` is invoked from the `request()` method and whenever this returns, the `response()` method would handle the response mapping with the defined schema.
 
 In JavaScript resolvers, you can import `@aws-appsync/utils` for all the util helper methods such as `util.transform.toDynamoDBConditionExpression()` and `util.dynamodb.toMapValues()`.
 
 ## A closer look at the developer experience
-Based on the stats and popularity of Node.JS usage for Serverless, developers would be familar with JavaScript runtimes which are used in their existing workloads with Amazon Lambda functions or their Infrastructure as Code (IaC) where NodeJS and TypeScript have been widely adapted. And ensuring that their resolvers could now also be built with JavaScripts, this new enhancement is a celebration for Serverless developers. 
+Based on the stats and popularity of Node.JS usage for Serverless, developers would be familiar with JavaScript runtimes which are used in their existing workloads with Amazon Lambda functions or their Infrastructure as Code (IaC) where NodeJS and TypeScript have been widely adapted. And ensuring that their resolvers could now also be built with JavaScripts, this new enhancement is a celebration for Serverless developers. 
 
 ### Comfort and familiarity with the tech stack
-Everyone loves to build with something that they are familar with. As a developer who has used VTL and now played around with JavaScript resolvers, choosing JavaScript resolvers and building AppSync APIs is a faster and easier choice. Since developers have been used to JavaScript in their backend and also frontend, the learning curve to adapt VTL is reduced massively.
+Everyone loves to build with something that they are familiar with. As a developer who has used VTL and now played around with JavaScript resolvers, choosing JavaScript resolvers and building AppSync APIs is a faster and easier choice. Since developers have been used to JavaScript in their backend and also frontend, the learning curve to adapt VTL is reduced massively.
 
 ### Utilities and functions
-JavaScript resolvers also supports ulitity helper functions with `@aws-appsync/utils` the package. 
+JavaScript resolvers also supports utility helper functions with `@aws-appsync/utils` the package. 
 - `@aws-appsync/eslint-plugin` is the ESLint tool which detects issues in code during the development.
-- Using `util.transform` helper functions for easier tranformations with DynamoDB and other data sources with differnet filters on Maps and Lists.
+- Using `util.transform` helper functions for easier transformations with DynamoDB and other data sources with different filters on Maps and Lists.
 - Built-in modules for different data sources makes it programming language compatible for developers to use functions and operations.
 - Apart from the native JavaScript's flexibility to work with `datetime`, there are `util.time` helper functions available.
 - Working with different type classes - `Array`, `String`, `Object` from JavaScript.
 
 ### Going Type safe with TypeScript
-Since JavaScript is supported, there are work arounds available for TypeScript to resolver more type strict. 
+Since JavaScript is supported, there are workarounds available for TypeScript to resolver more type strict. 
 
 ```TypeScript
 import * as ddb from '@aws-appsync/utils/dynamodb'
