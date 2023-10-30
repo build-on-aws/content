@@ -1,6 +1,6 @@
 ---
-title: "Deploying Falcon-40B Open-Source LLM on Amazon SageMaker: A Comparative Guide"  
-description: "Dive into the intricacies of deploying the Falcon-40B, an open-source Large Language Model, on Amazon SageMaker. We'll contrast two deployment avenues: SageMaker JumpStart, for those seeking swift and straightforward deployment, and SageMaker Notebook, tailored for enthusiasts who desire a hands-on approach with granular configuration control."
+title: "Deploying Falcon-40B Open Source LLM on Amazon SageMaker: A Comparative Guide"  
+description: "Dive into the intricacies of deploying the Falcon-40B, an open source Large Language Model, on Amazon SageMaker. We'll contrast two deployment avenues: SageMaker JumpStart, for those seeking swift and straightforward deployment, and SageMaker Notebook, tailored for enthusiasts who desire a hands-on approach with granular configuration control."
 tags:  
   - ai-ml
   - llm
@@ -21,7 +21,7 @@ date: 2023-10-25
 |ToC|
 |---|
 
-In this guide, we'll delve into deploying Falcon-40B, an open-source Large Language Model with 40 billion parameters, using Amazon SageMaker.
+In this guide, we'll delve into deploying Falcon-40B, an open source Large Language Model with 40 billion parameters, using Amazon SageMaker.
 
 We'll describe three deployment options:
 
@@ -33,7 +33,7 @@ But before we proceed, let's acquaint ourselves with the foundational aspects of
 
 ## 1. Falcon-40B Open Source LLM Overview
 
-Falcon-40B is one of a family of models that range in size from 7 billion, 40 billon, and 180 billion parameters.  The 40B denotes the 40 billon parameters version.  These models are causal decoder-only model built by the Technology Innovation Institute (TII) of the United Arab Emirates and are some of a very small number of genuinely open-source LLMs, made available under the Apache 2.0 license.  At one point Falcon-40B topped the (ever shifting) [Hugging Face LLM Benchmark](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) leader board.
+Falcon-40B is one of a family of models that range in size from 7 billion, 40 billon, and 180 billion parameters.  The 40B denotes the 40 billon parameters version.  These models are causal decoder-only model built by the Technology Innovation Institute (TII) of the United Arab Emirates and are some of a very small number of genuinely open source LLMs, made available under the Apache 2.0 license.  At one point Falcon-40B topped the (ever shifting) [Hugging Face LLM Benchmark](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) leader board.
 
 Behind the scenes, Falcon-40B uses a variety of techniques to improve training efficiency, such as 3D parallelism and ZeRO optimization. The model also uses an advanced architecture, including flash attention and multi-query attention. These techniques enable the model to better 'understand' long-distance dependencies in texts.
 
@@ -360,7 +360,7 @@ If you're new to machine learning, you can start with pre-built algorithms and p
 
 ### 3.5 Delete the Model and Endpoint
 
-We've deployed the Falcon-40B open-source LLM to the Amazon SageMaker endpoint and successfully performed model inference. Once you've completed all the codes, remember to delete resources and clean up the environment, including models and endpoints, to avoid unnecessary costs.
+We've deployed the Falcon-40B open source LLM to the Amazon SageMaker endpoint and successfully performed model inference. Once you've completed all the codes, remember to delete resources and clean up the environment, including models and endpoints, to avoid unnecessary costs.
 
 Example code for deleting resources and cleaning up the environment is as follows:
 
@@ -371,7 +371,7 @@ llm.delete_endpoint()
 
 ## Conclusion
 
-In this post we have reviewed a number of methods for deploying the Flacon-40B open-source large language model on AWS.  
+In this post we have reviewed a number of methods for deploying the Flacon-40B open source large language model on AWS.  
 
 First, we used Amazon SageMaker JumpStart to deploy without any code, using sensible defaults. This method allows you to get up and running extremely quickly without any prior knowledge of AL/ML coding.
 
