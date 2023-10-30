@@ -13,6 +13,8 @@ posts:
     - eks-cluster-batch-processing
     - eks-monitor-containerized-applications
     - automating-dns-records-for-microservices-using-externaldns
+    - eks-integrate-secrets-manager
+
 --- 
 |ToC|
 |---|
@@ -70,6 +72,7 @@ The following tutorials are included in this stage:
 * [Automatically Manage DNS Records for Your Microservices in Amazon EKS with ExternalDNS](/tutorials/navigating-amazon-eks/automating-dns-records-for-microservices-using-externaldns/)
 * [Easily Monitor Containerized Applications with Amazon CloudWatch Container Insights](/tutorials/navigating-amazon-eks/eks-monitor-containerized-applications)
 * [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS](/tutorials/navigating-amazon-eks/managing-high-volume-batch-sqs-eks)
+* [Easily Consume AWS Secrets Manager Secrets from your Amazon EKS Workloads](/tutorials/navigating-amazon-eks/eks-integrate-secrets-manager)
 
 ## List of all Tutorials
 
