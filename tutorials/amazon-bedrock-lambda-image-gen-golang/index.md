@@ -1,5 +1,5 @@
 ---
-title: "Serverless Image Generation application using Generative AI on AWS"  
+title: "Serverless Image Generation Application Using Generative AI on AWS"  
 description: "Use Amazon Bedrock to build an image generation solution in Go and deploy it using AWS CDK."
 tags:  
   - generative-ai
@@ -15,7 +15,7 @@ waves:
   - generative-ai
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: 2023-10-27
+date: 2023-10-31
 ---
 
 |ToC|
@@ -29,7 +29,7 @@ This tutorial will walk you through how to use [AWS CDK](https://docs.aws.amazon
 
 The entire solution is built using [Go](https://go.dev/) - this includes the Lambda function (using [aws-lambda-go](https://github.com/aws/aws-lambda-go) library) as well as the complete solution deployment using [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-> The code is available on [GitHub](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang)
+> The code is available on [GitHub](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang).
 
 
 | Attributes                |                                   |
@@ -163,13 +163,13 @@ Are you sure you want to delete: BedrockLambdaImgeGenWebsiteStack (y/n)?
 
 You were able to set up and try the complete solution. Before we wrap up, let's quickly walk through some of important parts of the code to get a better understanding of what's going the behind the scenes.
 
-## Code Walk Through
+## Code Walkthrough
 
 Since we will only focus on the important bits, a lot of the code (print statements, error handling etc.) has been omitted for brevity.
 
 ### CDK
 
-> You can refer to the [CDK code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/cdk/cdk.go)
+> You can refer to the [CDK code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/cdk/cdk.go).
 
 We start by creating the API Gateway and the S3 bucket.
 
@@ -205,7 +205,6 @@ Then we create the CloudFront Origin Access Identity and grant S3 bucket read pe
 
 Then, we create the image generation Lambda function along with IAM permissions (to the function execution IAM role) to allow it to invoke Bedrock operations.
 
-
 ```go
 	function := awscdklambdagoalpha.NewGoFunction(stack, jsii.String("bedrock-imagegen-s3"),
 		&awscdklambdagoalpha.GoFunctionProps{
@@ -240,7 +239,7 @@ Finally, we configure Lambda function integration with API Gateway, add the HTTP
 
 ### Lambda Function
 
-> You can refer to the [Lambda Function code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/function/main.go)
+> You can refer to the [Lambda Function code here](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang/blob/master/function/main.go).
 
 In the function handler, we extract the prompt from the HTTP request body, and the configuration from the query parameters. Then it's used to call the model using [bedrockruntime.InvokeModel](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModel) function. Note the JSON payload sent to Amazon Bedrock is represented by an instance of the `Request` struct.
 
@@ -316,7 +315,7 @@ type Artifact struct {
 
 ## Conclusion
 
-In this tutorial, you used AWS CDK to deploy a serverless image generation solution that was implemented using Amazon Bedrock and AWS Lambda, and accessed using a static website on S3 via a CloudFront domain.
+In this tutorial, you used AWS CDK to deploy a serverless image generation solution that was implemented using Amazon Bedrock and AWS Lambda and was accessed using a static website on S3 via a CloudFront domain.
 
 To stay updated with Generative AI content, visit [this Space](https://community.aws/generative-ai). If you are interested in an introductory guide to using the AWS Go SDK and Amazon Bedrock Foundation Models (FMs), [check out this blog post](https://community.aws/concepts/amazon-bedrock-golang-getting-started).
 
