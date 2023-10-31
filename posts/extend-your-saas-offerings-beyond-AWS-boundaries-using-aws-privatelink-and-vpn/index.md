@@ -43,11 +43,11 @@ The easy solution to all is to take an internet route. While using direct access
 
 With the understanding of the use cases along sides with the challenges taking an internet route may present, it is time to take a look at alternatives that can be more secure and reliable. The core elements we would want to see in these alternative solutions are: 
 
-**1. More secure:** Besides the encryption that is commonly used at a transport/session layer using TLS/SSL, having a VPN connection or a Private connection adds a layer of security that most customers with critical workloads (e.g. banks) would care to have. 
-**2. Performance predictability:** having deterministic, consistent, and low latency connection is very desirable.
-**3. Tenant isolation:** It is very important for SaaS providers to ensure tenants are isolated and have experiences that are as close to a single tenant behaviour as possible. 
-**4. SaaS isolation and protection layer:** This is where we need to ensure an isolation layer/protection layer is created between the consumer and the SaaS service. i.e. restricting tenants access to just the service provided and not expose the SaaS infrastructure through direct VPN or direct connections
-**5. Modular and scalable:** The better we can do at creating common components/modules that are reusable across the different use cases, the more efficient and easier to build and maintain our solution will become.
+1. **More secure:** Besides the encryption that is commonly used at a transport/session layer using TLS/SSL, having a VPN connection or a Private connection adds a layer of security that most customers with critical workloads (e.g. banks) would care to have. 
+2. **Performance predictability:** having deterministic, consistent, and low latency connection is very desirable.
+3. **Tenant isolation:** It is very important for SaaS providers to ensure tenants are isolated and have experiences that are as close to a single tenant behaviour as possible. 
+4. **SaaS isolation and protection layer:** This is where we need to ensure an isolation layer/protection layer is created between the consumer and the SaaS service. i.e. restricting tenants access to just the service provided and not expose the SaaS infrastructure through direct VPN or direct connections
+5. **Modular and scalable:** The better we can do at creating common components/modules that are reusable across the different use cases, the more efficient and easier to build and maintain our solution will become.
 
 ## Solution Building Blocks
 
