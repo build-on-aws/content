@@ -1,11 +1,10 @@
 ---
-title: "Build On Answered | All About Alexa | S02 EP02"
-description: "Join us for the Season Finale of Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
+title: "Build On Answered | All About Amazon Alexa | S02 EP02"
+description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
-    - kubernetes
+    - alexa
     - stack-overflow
     - aws-stack-overflow-collective
-    - eks
     - twitch
     - aws
 authorGithubAlias: juliegund
@@ -18,17 +17,16 @@ spaces:
   - livestreams
 ---
 
-![Streaming session with Julie, Jerome and Cobus all smiling](images/Kubernetes_show_image.png)
+![Streaming session with Julie, Chris, and Amanda showing a AWS Lambda function to use an Alexa skill](images/stream.webp)
 
-Join us for the Season Finale of Build On Answered with special guest Jérôme Petazzoni!! the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air! This week we are focusing on your Kubernetes and EKS questions!
+Join us for the 2nd episode is Season 2 of Build On Answered where we discuss Stack Overflow questions about Amazon Alexa from Stack Overflow with [Amanda Lange](https://www.linkedin.com/in/amandajlange/) [[X/Twitter](https://twitter.com/lita_gemini)]!
 
-https://www.twitch.tv/videos/1919526636
+https://www.twitch.tv/videos/1964353102
 
 ## Hosts
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
-* [**Cobus Bernard**](https://www.linkedin.com/in/cobusbernard/), Senior Developer Advocate @ AWS
-* [**Jérôme Petazzoni**](https://www.linkedin.com/in/jpetazzo/), Tinkerer Extraordinaire
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 
 ## This Week's Questions
 

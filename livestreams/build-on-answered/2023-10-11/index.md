@@ -1,6 +1,6 @@
 ---
 title: "Build On Answered | All About Amazon Bedrock | S02 EP01"
-description: "Join us for the Season Finale of Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
+description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - bedrock
     - stack-overflow
@@ -20,16 +20,17 @@ spaces:
   - livestreams
 ---
 
-![Streaming session with Julie, Jerome and Cobus all smiling](images/Kubernetes_show_image.png)
+![Streaming session with Julie, Chris, and Cobus all smiling](stream.webp)
 
-Join us for the Season Finale of Build On Answered with special guest Jérôme Petazzoni!! the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air! This week we are focusing on your Kubernetes and EKS questions!
+Join us for the Season 2 premier of Build On Answered where the team focusses on Amazon Bedrock questions on Stack Overflow!
 
-https://www.twitch.tv/videos/1919526636
+https://www.twitch.tv/videos/1954377155
 
 ## Hosts
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 * [**Cobus Bernard**](https://www.linkedin.com/in/cobusbernard/), Senior Developer Advocate @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 
 ## This Week's Questions
 

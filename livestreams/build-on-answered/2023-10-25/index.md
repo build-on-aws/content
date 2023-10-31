@@ -1,11 +1,11 @@
 ---
-title: "Build On Answered | All About Kubernetes | S02 EP03"
-description: "Join us for the Season Finale of Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
+title: "Build On Answered | All About AWS CDK | S02 EP03"
+description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
-    - kubernetes
+    - cdk
     - stack-overflow
     - aws-stack-overflow-collective
-    - eks
+    - infrastructure-as-code
     - twitch
     - aws
 authorGithubAlias: juliegund
@@ -18,11 +18,11 @@ spaces:
   - livestreams
 ---
 
-![Streaming session with Julie, Jerome and Cobus all smiling](images/Kubernetes_show_image.png)
+![Streaming session with Julie, Chris, and Askar all smiling](images/stream.webp)
 
-Join us for the Season Finale of Build On Answered with special guest Jérôme Petazzoni!! the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air! This week we are focusing on your Kubernetes and EKS questions!
+Join us for the Season 2 Episode 3 where we talk about Stack Overflow questions covering AWS CDK with Askar Serikov!
 
-https://www.twitch.tv/videos/1919526636
+https://www.twitch.tv/videos/1960974515
 
 ## Hosts
 
@@ -32,7 +32,10 @@ https://www.twitch.tv/videos/1919526636
 
 ## This Week's Questions
 
-1. [kubernetes on aws: Exposing multiple domain names (ingress vs ELB)](https://stackoverflow.com/questions/48187694/kubernetes-on-aws-exposing-multiple-domain-names-ingress-vs-elb/48188157#48188157)
+1. [What IAM permissions are needed to use CDK Deploy?](https://stackoverflow.com/questions/57118082/what-iam-permissions-are-needed-to-use-cdk-deploy)
+1. [How to import existing VPC in aws cdk?](https://stackoverflow.com/questions/59301265/how-to-import-existing-vpc-in-aws-cdk)
+1. [How can I create a DependsOn relation between EC2 and RDS using aws-cdk](https://stackoverflow.com/questions/61250772/how-can-i-create-a-dependson-relation-between-ec2-and-rds-using-aws-cdk)
+1. [How to get logical ID of resource with CDK?](https://stackoverflow.com/questions/61803090/how-to-get-logical-id-of-resource-with-cdk)
 
 ## Do you have feedback and/or ideas for questions we should review on future shows?
 
