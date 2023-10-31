@@ -27,8 +27,7 @@ https://www.twitch.tv/videos/1960974515
 ## Hosts
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
-* [**Cobus Bernard**](https://www.linkedin.com/in/cobusbernard/), Senior Developer Advocate @ AWS
-* [**Jérôme Petazzoni**](https://www.linkedin.com/in/jpetazzo/), Tinkerer Extraordinaire
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 
 ## This Week's Questions
 
