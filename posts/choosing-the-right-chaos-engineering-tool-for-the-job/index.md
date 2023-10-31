@@ -47,7 +47,7 @@ Let’s say you have a three tier application running on AWS. This uses [Elastic
 
 There are a number of chaos engineering tools available today, and most will have at least some level of integration with AWS so they can be used to run experiments against your AWS workloads. In the following section we will introduce several options.
 
-## Fault Injection Simulator
+### Fault Injection Simulator
 
 [Fault Injection Simulator (FIS)](https://aws.amazon.com/fis/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job) is an AWS native, fully managed fault injection/chaos engineering service. FIS supports best practice chaos engineering parameters to make it easy to get started running experiments, without the need to install any agents. Sample experiments are available to use as a starting point. Fully managed fault injection actions are used to define actions such as stopping an instance, throttling an API, and failing over a database. Fault Injection Simulator supports [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job) so that you can use your existing metrics to monitor Fault Injection Simulator experiments. You do not need to know any special code or scripting language in order to use FIS out of the box.
 
@@ -69,7 +69,7 @@ FIS is integrated with [AWS Identity and Access Management (IAM)](https://aws.am
 FIS provides visibility throughout every stage of an experiment via the AWS console and APIs. You can observe which actions have executed while an experiment is running, and view details of actions, stop conditions which were triggered, how metrics compared to your expected behavior, and more. You can use FIS from within the AWS console, AWS CLI, and [AWS SDKs](https://aws.amazon.com/developer/tools/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job). You can access the FIS service programmatically to integrate experiments into your CI/CD pipelines.
 You can get started with AWS FIS [here](https://docs.aws.amazon.com/fis/latest/userguide/what-is.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
 
-## Chaos Toolkit
+### Chaos Toolkit
 
 [Chaos Toolkit](https://chaostoolkit.org/) is an open source chaos engineering tool which you can use to run experiments against your AWS workloads. The chaostoolkit CLI is implemented in Python 3, so your team will need to have working knowledge of python to install the toolkit and to build and run your experiments.
 Chaos Toolkit can be deployed locally, onto an EC2 instance, or in AWS Batch as a Docker image to run from inside your AWS environment. Extension modules for AWS have been added to Chaos Toolkit and can be found on [Github](https://github.com/chaostoolkit-incubator/chaostoolkit-aws). 
@@ -88,7 +88,7 @@ Chaos Toolkit allows you to run a discovery which can be used to help build your
 Chaos Toolkit is great for more experienced teams who desire to run specific experiments against their AWS workloads, but requires a significant amount of hands-on. 
 You can get started with Chaos Toolkit [here](https://chaostoolkit.org/reference/tutorial/)
 
-## Gremlin
+### Gremlin
 
 Gremlin is a commercial chaos engineering platform which uses agents to run experiments against EC2, ECS and EKS. Gremlin supports a wide range of experiments in three categories:
 
@@ -101,7 +101,7 @@ Gremlin does not have the same native AWS API integration as FIS or the extensio
 Gremlin is a good fit for a team which desires to run experiments against just their compute resources versus native AWS API integration to target managed services. A less experienced team can make use of the ease of use and minimal effort to get started. 
 You can get started with Gremlin [here](https://www.gremlin.com/docs/reliability-management/quick-start-guide/)
 
-## Comparison chart
+### Comparison chart
 
 |	|AWS FIS	|Chaos Toolkit	|Gremlin	|
 |---	|---	|---	|---	|
@@ -128,14 +128,14 @@ Thoughtfully incorporating the right chaos tools into your testing regimen will 
 
 In this article we shared with you what Chaos Engineering is and how it can be applied to your workloads on AWS. We dove into the use cases, features and limitations of various Chaos Engineering tools which are available today, and why you might choose each, depending on your workload and the goal of your chaos experiments. The goal of any tool is to help you achieve greater reliability for your workload, the choice comes down to which one will help you reach that goal easier, cheaper and faster. The experience of your team and the maturity of your AWS workload may also impact which tool you choose, as a more experienced team or a cloud native application may need more capability, or closer integration with AWS managed services. 
 
-## Training
+### Training
 
 After reading this blog you might want to get some hands-on practice with chaos engineering. The best training option depends on your preferred learning style and depth of knowledge desired. we recommend starting with fundamental training like the [Chaos Engineering course](https://www.linkedin.com/learning/devops-foundations-chaos-engineering), [O'Reilly book](https://www.oreilly.com/library/view/chaos-engineering/9781492043850/), or [AWS re:Invent sessions](https://www.oreilly.com/library/view/chaos-engineering/9781492043850/) then progressing to hands-on workshops and conference sessions. Developing chaos engineering skills takes practice.
 
 The AWS Well Architected Labs has a 300 level lab available which will walk you through multiple chaos experiments including EC2 instance failure, AZ failure, and RDS instance failover. The labs include both API script based experiments and Fault Injection Simulator experiments. 
 https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_of_ec2_rds_and_s3/
 
-## External resources
+### External resources
 
 - Chaos Engineering with AWS Fault Injection Simulator: [https://www.youtube.com/watch?v=AThR8dFmPP4](https://www.youtube.com/watch?v=AThR8dFmPP4)
 - Chaos engineering leveraging AWS Fault Injection Simulator in a multi-account AWS environment: [https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/](https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
