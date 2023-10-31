@@ -27,7 +27,7 @@ In this hands-on guide, let's get straight to it. I'll guide you through refinin
 
 The full code of the agent can be viewed [here](https://github.com/build-on-aws/amazon-bedrock-custom-langchain-agent)
 
-![Agent AWS](images/agent_aws_pic.png)
+![Agent AWS](images/agent_aws_pic.jpg)
 
 ## Prerequisites
 
