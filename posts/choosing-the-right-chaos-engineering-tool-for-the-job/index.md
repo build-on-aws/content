@@ -132,8 +132,7 @@ In this article we shared with you what Chaos Engineering is and how it can be a
 
 After reading this blog you might want to get some hands-on practice with chaos engineering. The best training option depends on your preferred learning style and depth of knowledge desired. we recommend starting with fundamental training like the [Chaos Engineering course](https://www.linkedin.com/learning/devops-foundations-chaos-engineering), [O'Reilly book](https://www.oreilly.com/library/view/chaos-engineering/9781492043850/), or [AWS re:Invent sessions](https://www.oreilly.com/library/view/chaos-engineering/9781492043850/) then progressing to hands-on workshops and conference sessions. Developing chaos engineering skills takes practice.
 
-The AWS Well Architected Labs has a 300 level lab available which will walk you through multiple chaos experiments including EC2 instance failure, AZ failure, and RDS instance failover. The labs include both API script based experiments and Fault Injection Simulator experiments. 
-https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_of_ec2_rds_and_s3/
+The AWS Well Architected Labs has a 300 level lab available [here](https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_of_ec2_rds_and_s3/) which will walk you through multiple chaos experiments including EC2 instance failure, AZ failure, and RDS instance failover. The labs include both API script based experiments and Fault Injection Simulator experiments.
 
 ### External resources
 
