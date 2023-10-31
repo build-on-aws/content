@@ -20,7 +20,7 @@ spaces:
   - livestreams
 ---
 
-![Streaming session with Julie, Chris, and Cobus all smiling](stream.webp)
+![Streaming session with Julie, Chris, and Cobus all smiling](images/stream.webp)
 
 Join us for the Season 2 premier of Build On Answered where the team focusses on Amazon Bedrock questions on Stack Overflow!
 
