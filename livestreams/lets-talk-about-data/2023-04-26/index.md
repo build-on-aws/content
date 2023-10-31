@@ -1,5 +1,5 @@
 ---
-title: "Migrating 600 DB's from Oracle to RDS PostgreSQL""
+title: "Migrating 600 DB's from Oracle to RDS PostgreSQL"
 description: "In this show we discuss on how customer CDL migrated 600 Oracle databases to the RDS PostgreSql ,best practises involved, challenges faced etc. In the second half of the show CDL walk us through the actual process  of how they achieved it , services they used for full load and change data capture , the monitoring and alerting during the migration process."
 tags:
   - aws

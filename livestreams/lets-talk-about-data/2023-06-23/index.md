@@ -1,5 +1,5 @@
 ---
-title: "DynamoDB "
+title: "DynamoDB"
 description: "In this show we discuss about what is Dynamodb, the best practises while using Dynamodb and focus on how customers use DynamoDB. In the second part of the show we focus on the Demo , creating tables and discussing about indexes and modelling considerations while working with DynamoDB"
 tags:
   - aws
