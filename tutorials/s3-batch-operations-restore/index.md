@@ -79,8 +79,8 @@ Before starting this tutorial, you will need:
 1. You can leave the remaining options as defaults. Navigate to the bottom of the page and choose **Create bucket**.
 
 1. **Archive objects into the Glacier Flexible Retrieval storage class** 
-### Step 2: Create sample files and manififest file
-2.1 On your workstation, create a text file that contains sample text and save it to your workstation. To create these files, you can leverage the command prompt and the sample command shown below. You can also use any of your existing files for the purpose of this tutorial.
+### Step 2: Create sample files and manifest file
+1. On your workstation, create a text file that contains sample text and save it to your workstation. To create these files, you can leverage the command prompt and the sample command shown below. You can also use any of your existing files for the purpose of this tutorial.
 
 echo “sample file 1” > testfile-1.txt
 
@@ -88,37 +88,37 @@ echo “sample file 2” > testfile-2.txt
 
 echo “sample file 3” > testfile-3.txt
  
-1. From the [_Amazon S3 console_](https://s3.console.aws.amazon.com/s3/home), search for the bucket that you created in Step 1, and select the bucket name.
+2. From the [_Amazon S3 console_](https://s3.console.aws.amazon.com/s3/home), search for the bucket that you created in Step 1, and select the bucket name.
 
 ![Alt text](Images/image(2).png)
 
-1. Next, select the **Objects** tab. Then, from within the **Objects** section, choose **Upload**.
+3. Next, select the **Objects** tab. Then, from within the **Objects** section, choose **Upload**.
 
 ![Alt text](Images/image(3).png)
 
- 1. Then, in the **Upload** section, choose **Add files**. Navigate to your local file system to locate the test file that you created above. Select the appropriate file, and then choose **Open**. Your file will be listed in the **Files and folders** section.
+ 4. Then, in the **Upload** section, choose **Add files**. Navigate to your local file system to locate the test file that you created above. Select the appropriate file, and then choose **Open**. Your file will be listed in the **Files and folders** section.
 
  ![Alt text](Images/image(4).png)       
 
 
-1. Since this tutorial is focused on restoring objects from the S3 Glacier Flexible Retrieval storage class, expand the **Properties** tab to select the **Glacier Flexible Retrieval** storage class, then select **Upload**.
+5. Since this tutorial is focused on restoring objects from the S3 Glacier Flexible Retrieval storage class, expand the **Properties** tab to select the **Glacier Flexible Retrieval** storage class, then select **Upload**.
         
 
 ![Alt text](Images/image(5).png)
 
 ![Alt text](Images/image(6).png)
-1. After the file upload operations have completed, you will be presented with a status message indicating if the upload was successful or not. Upon successful upload of the files, choose **Close**.
+6. After the file upload operations have completed, you will be presented with a status message indicating if the upload was successful or not. Upon successful upload of the files, choose **Close**.
         
 ![Alt text](Images/image(7).png)
 
-1. You should now see the objects in the S3 Console and their respective storage class.
+7. You should now see the objects in the S3 Console and their respective storage class.
 
 ![Alt text](Images/image(8).png)
-1. **Create a S3 Batch Operations manifest**
+**Create a S3 Batch Operations manifest**
 
-    a. A manifest is an Amazon S3 object that contains object keys that you want Amazon S3 to act upon. If you supply a user-generated manifest it must be in the form of an [_Amazon S3 Inventory report_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-inventory.html) or CSV file. When performing S3 Batch Replication, Amazon S3 generates a manifest based on your replication configuration. While Amazon S3 Inventory may be a suitable fit when performing batch operations at scale, it takes up to 48 hours for the first S3 inventory report to be delivered. For the purpose of this tutorial, we will be leveraging a **CSV** manifest.
+* A manifest is an Amazon S3 object that contains object keys that you want Amazon S3 to act upon. If you supply a user-generated manifest it must be in the form of an [_Amazon S3 Inventory report_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-inventory.html) or CSV file. When performing S3 Batch Replication, Amazon S3 generates a manifest based on your replication configuration. While Amazon S3 Inventory may be a suitable fit when performing batch operations at scale, it takes up to 48 hours for the first S3 inventory report to be delivered. For the purpose of this tutorial, we will be leveraging a **CSV** manifest.
 
-* Using Excel or your editor of choice, create a CSV with a list of “Bucket,Key“ pairs for each object you wish to restore.
+1.  Using Excel or your editor of choice, create a CSV with a list of “Bucket,Key“ pairs for each object you wish to restore.
 * In this example the manifest is:
 
 ![Alt text](Images/image(9).png)
