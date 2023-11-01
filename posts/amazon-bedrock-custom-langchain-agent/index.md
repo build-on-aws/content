@@ -27,7 +27,7 @@ In this hands-on guide, let's get straight to it. I'll guide you through refinin
 
 The full code of the agent can be viewed [here](https://github.com/build-on-aws/amazon-bedrock-custom-langchain-agent)
 
-![Agent AWS](images/agent_aws_pic.jpg)
+![Agent AWS](images/agent_aws_pic.webp)
 
 ## Prerequisites
 
@@ -205,11 +205,11 @@ To get a feel of your newly created agent, run `python test_agent.py` from your 
 ### Agent Example Run
 
 In this example, the agent takes on the task of crafting and deploying a Lambda function focused on sentiment analysis.
-![Agent AWS creates lambda function](images/agent_thought_2.png)
+![Agent AWS creates lambda function](images/agent_thought_2.webp)
 
 Since our agent is an AWS Certified Solutions Architect, It knows how to use [Amazon Comprehend](https://aws.amazon.com/comprehend/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) for sentiment analysis. Our agent also instructs the user on how to invoke the function and reminds you to update your Lambda Role.
 
-![Agent AWS tells customer how to invoke Lambda function](images/agent_thought_3.png)
+![Agent AWS tells customer how to invoke Lambda function](images/agent_thought_3.webp)
 
 You've successfully built and tested an intelligent agent with a well-defined prompt and an arsenal of tools. What's the next step? Bringing this agent to life through a chatbot interface, courtesy of Streamlit.
 
