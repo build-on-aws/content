@@ -24,7 +24,7 @@ date: 2023-10-20
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | YYYY-MM-DD                             |
+| ⏰ Last Updated     | 2023-11-01                             |
 
 | ToC |
 |-----|
@@ -62,23 +62,23 @@ Before starting this tutorial, you will need:
 
 ### Step 1: Create an Amazon S3 bucket
 
- a. Log in to the [_AWS Management Console_](https://console.aws.amazon.com/) using your account information. In the search bar, enter **S3**, then select **S3** from the results.
+ 1. Log in to the [_AWS Management Console_](https://console.aws.amazon.com/) using your account information. In the search bar, enter **S3**, then select **S3** from the results.
 
 
 
 ![](Images/firstimage.png)
 
- 1. In the left navigation pane on the S3 console, choose Buckets, and then choose **Create bucket**.
+ 2. In the left navigation pane on the S3 console, choose Buckets, and then choose **Create bucket**.
  
   ![Alt text](Images/secondimage.png)
 
-1. Enter a descriptive, globally unique name for your source bucket. Select the **AWS Region** you want your bucket created in. In this example, the **EU (Frankfurt) eu-central-1 region** is selected.
+3. Enter a descriptive, globally unique name for your source bucket. Select the **AWS Region** you want your bucket created in. In this example, the **EU (Frankfurt) eu-central-1 region** is selected.
 
 ![Alt text](Images/image(1).png)
 
-1. You can leave the remaining options as defaults. Navigate to the bottom of the page and choose **Create bucket**.
+4. You can leave the remaining options as defaults. Navigate to the bottom of the page and choose **Create bucket**.
 
-1. **Archive objects into the Glacier Flexible Retrieval storage class** 
+5. **Archive objects into the Glacier Flexible Retrieval storage class** 
 ### Step 2: Create sample files and manifest file
 1. On your workstation, create a text file that contains sample text and save it to your workstation. To create these files, you can leverage the command prompt and the sample command shown below. You can also use any of your existing files for the purpose of this tutorial.
 
