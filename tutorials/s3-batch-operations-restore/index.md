@@ -140,7 +140,6 @@ echo “sample file 3” > testfile-3.txt
 
 ![Alt text](Images/image(13).png)
 4. Choose **Next** to go to the **Choose operation** page.
-
 5. Select the **Restore** operation. The Restore operation initiates restore requests for the archived Amazon S3 objects that are listed in your manifest.
 
 ![Alt text](Images/image(14).png)
