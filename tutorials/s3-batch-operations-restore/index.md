@@ -180,16 +180,16 @@ Creating an [_Identity and Access Management (IAM) role_](https://aws.amazon.com
 * Optional – You can label and control access to your S3 Batch Operations jobs by adding tags. Tags can be used to identify who is responsible for a Batch Operations job. Add **Job tags** to your S3 Batch Operations job, and then choose **Next** to review your job configuration.
 
 ![Alt text](Images/image(19).png)
-1. On the **Review** page, validate the configuration and, choose **Edit** to make changes if required, then choose **Next** to save your changes and return to the **Review** page. When your job is ready, choose **Create job**.
+On the **Review** page, validate the configuration and, choose **Edit** to make changes if required, then choose **Next** to save your changes and return to the **Review** page. When your job is ready, choose **Create job**.
 
 ![Alt text](Images/image(20).png)
-1. After the S3 Batch Operations job is created, you will be redirected to the **Batch Operations** home page as shown in the following screenshot. Here, you can review the job configuration by selecting the **Job ID** which will take you to the Job details page. When the job is successful, a banner displays at the top of the Batch Operations page.
+After the S3 Batch Operations job is created, you will be redirected to the **Batch Operations** home page as shown in the following screenshot. Here, you can review the job configuration by selecting the **Job ID** which will take you to the Job details page. When the job is successful, a banner displays at the top of the Batch Operations page.
 
 ![Alt text](Images/image(21).png)
-1. Upon creation of the job, Batch Operations processes the manifest. If successful, it will change the job status to **Awaiting your confirmation to run**. You must confirm the details of the job and select **Run job**.
+Upon creation of the job, Batch Operations processes the manifest. If successful, it will change the job status to **Awaiting your confirmation to run**. You must confirm the details of the job and select **Run job**.
 
 ![Alt text](Images/image(22).png)
-1. You should then see a notification of successful confirmation for the job displayed in the banner at the top of the Batch Operations page.
+You should then see a notification of successful confirmation for the job displayed in the banner at the top of the Batch Operations page.
 
 ![Alt text](Images/image(23).png)
 
