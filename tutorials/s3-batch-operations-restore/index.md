@@ -133,67 +133,70 @@ echo “sample file 3” > testfile-3.txt
 1. **Create and run an S3 Batch Operations job.** On the left navigation pane of the Amazon S3 console home page, choose **Batch Operations**, and then choose **Create Job**.
 
 ![Alt text](Images/image(11).png)
-1. On the **Create job** page, select the **AWS Region** where you want to create your S3 Batch Operations job. You must create the job in the same AWS Region in which the source S3 bucket is located.
+2. On the **Create job** page, select the **AWS Region** where you want to create your S3 Batch Operations job. You must create the job in the same AWS Region in which the source S3 bucket is located.
 
 ![Alt text](Images/image(12).png)
-1. Specify the manifest type to be **CSV** and browse to the manifest file uploaded to the bucket in Step 3
+3. Specify the manifest type to be **CSV** and browse to the manifest file uploaded to the bucket in Step 3
 
 ![Alt text](Images/image(13).png)
-1. Choose **Next** to go to the **Choose operation** page.
+4. Choose **Next** to go to the **Choose operation** page.
 
-1. Select the **Restore** operation. The Restore operation initiates restore requests for the archived Amazon S3 objects that are listed in your manifest.
+5. Select the **Restore** operation. The Restore operation initiates restore requests for the archived Amazon S3 objects that are listed in your manifest.
 
 ![Alt text](Images/image(14).png)
-1. Select the restore source as **Glacier Flexible Retrieval or Glacier Deep Archive** and the number of days that the restore copy is available as **1 day**.
+6. Select the restore source as **Glacier Flexible Retrieval or Glacier Deep Archive** and the number of days that the restore copy is available as **1 day**.
 
 * This means that once the restore is completed, Amazon S3 restores a temporary copy of the object only for the specified duration. After that, it deletes the restored object copy.
 * S3 Batch Operations supports STANDARD and BULK retrieval tiers. Select the **Retrieval tier** to be **Standard retrieval**. With S3 Batch Operations, [_restores in the Standard retrieval tier now typically begin to return objects to you within minutes_](https://aws.amazon.com/blogs/aws/new-improve-amazon-s3-glacier-flexible-restore-time-by-up-to-85-using-standard-retrieval-tier-and-s3-batch-operations/), down from 3–5 hours, so you can easily speed up your data restores from archive. For more information about the differences between the retrieval tiers, see [_Archive retrieval options_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/restoring-objects-retrieval-options.html).
 
 ![Alt text](Images/image(15).png)
 Configure additional options:
-1. Enter a **Description** to best define the purpose of the job.
+7. Enter a **Description** to best define the purpose of the job.
 
-2. Select a **Priority** to indicate the relative priority of this job to others running in your account. 
+8. Select a **Priority** to indicate the relative priority of this job to others running in your account. 
 
 **Note:**
 A higher number indicates higher priority. 
 For example, a job with a priority of 2 will be prioritized over a job with priority 1. S3 Batch Operations prioritizes jobs according to priority numbers, but strict ordering isn't guaranteed. Therefore, you shouldn't use job priorities to ensure that any one job starts or finishes before any other job. If you need to ensure strict ordering, wait until one job has finished before starting the next.
 
 ![Alt text](Images/image(16).png)
-    1. Generate a S3 Batch Operations completion report
+9. Generate a S3 Batch Operations completion report
 
-Next, you will have the option to request a [_completion report_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-job-status.html) for your S3 Batch Operations job as shown in the screenshot below. As long as S3 Batch Operations successfully processes at least one object, Amazon S3 generates a completion report after the S3 Batch Operations job completes, fails, or is cancelled. You have the option to include all tasks or only failed tasks in the completion report. The completion report contains additional information for each task, including the object key name and version, status, error codes, and [_descriptions of any errors_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-failure-codes.html). Completion reports provide an easy way to view the status of each object restored using the S3 Batch Operations job and identify failures, if any. In this example, we chose to **Generate completion report** for **All tasks** so that we can review the status of all objects within this job. Alternatively, you can also choose to view the status of objects that failed to restore only by choosing the **Failed tasks only** option. We have provided the destination bucket as the destination for the completion report. For additional examples of completion reports, see [_Examples: S3 Batch Operations completion reports_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-examples-reports.html).
+Next, you will have the option to request a [_completion report_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-job-status.html) for your S3 Batch Operations job as shown in the screenshot below. As long as S3 Batch Operations successfully processes at least one object, Amazon S3 generates a completion report after the S3 Batch Operations job completes, fails, or is cancelled. You have the option to include all tasks or only failed tasks in the completion report. The completion report contains additional information for each task, including the object key name and version, status, error codes, and [_descriptions of any errors_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-failure-codes.html). 
+
+Completion reports provide an easy way to view the status of each object restored using the S3 Batch Operations job and identify failures, if any. In this example, we chose to **Generate completion report** for **All tasks** so that we can review the status of all objects within this job. Alternatively, you can also choose to view the status of objects that failed to restore only by choosing the **Failed tasks only** option. We have provided the destination bucket as the destination for the completion report. For additional examples of completion reports, see [_Examples: S3 Batch Operations completion reports_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-examples-reports.html).
 
 ![Alt text](Images/image(17).png)
-    1. Creating an [_Identity and Access Management (IAM) role_](https://aws.amazon.com/iam/) for S3 Batch Operations
-1. Amazon S3 must have permissions to perform S3 Batch Operations on your behalf. You grant these permissions through an IAM role.
-2. S3 Batch Operations provides a template of the **IAM role policy** and the **IAM trust policy** that should be attached to the IAM role.
-3. To create an IAM policy in the AWS Console, see [_Creating policies using the JSON editor_](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html). On step 5, copy and paste the “IAM Role Policy” template shown in the S3 batch operations page. You must replace the **Target Resource** in the IAM policy with the bucket name. Once the IAM policy is successfully created, create an IAM role and attach the policy to the IAM role.
-4. To create an IAM role in the AWS Management Console, see [_Creating a role for an AWS service_](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html). On step 4, choose the service as S3 in the search bar and select the **S3 Batch Operation** option. On step 5, Select the IAM policy created in the previous section and attach it to the IAM role. Upon successful creation of the IAM role, it should have a trust policy identical to the **IAM trust policy** template and a permissions policy identical to the **IAM role policy** template attached to it.
-5. Coming back to the **S3 Batch Operations** page, use the **refresh** icon and select the newly created IAM role from the drop-down.
+Creating an [_Identity and Access Management (IAM) role_](https://aws.amazon.com/iam/) for S3 Batch Operations
+
+* Amazon S3 must have permissions to perform S3 Batch Operations on your behalf. You grant these permissions through an IAM role.
+* S3 Batch Operations provides a template of the **IAM role policy** and the **IAM trust policy** that should be attached to the IAM role.
+* To create an IAM policy in the AWS Console, see [_Creating policies using the JSON editor_](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html). On step 5, copy and paste the “IAM Role Policy” template shown in the S3 batch operations page. You must replace the **Target Resource** in the IAM policy with the bucket name. Once the IAM policy is successfully created, create an IAM role and attach the policy to the IAM role.
+* To create an IAM role in the AWS Management Console, see [_Creating a role for an AWS service_](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html). On step 4, choose the service as S3 in the search bar and select the **S3 Batch Operation** option. On step 5, Select the IAM policy created in the previous section and attach it to the IAM role. Upon successful creation of the IAM role, it should have a trust policy identical to the **IAM trust policy** template and a permissions policy identical to the **IAM role policy** template attached to it.
+* Coming back to the **S3 Batch Operations** page, use the **refresh** icon and select the newly created IAM role from the drop-down.
 
 ![Alt text](Images/image(18).png)
-    1. Optional – You can label and control access to your S3 Batch Operations jobs by adding tags. Tags can be used to identify who is responsible for a Batch Operations job. Add **Job tags** to your S3 Batch Operations job, and then choose **Next** to review your job configuration.
+* Optional – You can label and control access to your S3 Batch Operations jobs by adding tags. Tags can be used to identify who is responsible for a Batch Operations job. Add **Job tags** to your S3 Batch Operations job, and then choose **Next** to review your job configuration.
 
 ![Alt text](Images/image(19).png)
-    1. On the **Review** page, validate the configuration and, choose **Edit** to make changes if required, then choose **Next** to save your changes and return to the **Review** page. When your job is ready, choose **Create job**.
+1. On the **Review** page, validate the configuration and, choose **Edit** to make changes if required, then choose **Next** to save your changes and return to the **Review** page. When your job is ready, choose **Create job**.
 
 ![Alt text](Images/image(20).png)
-    1. After the S3 Batch Operations job is created, you will be redirected to the **Batch Operations** home page as shown in the following screenshot. Here, you can review the job configuration by selecting the **Job ID** which will take you to the Job details page. When the job is successful, a banner displays at the top of the Batch Operations page.
+1. After the S3 Batch Operations job is created, you will be redirected to the **Batch Operations** home page as shown in the following screenshot. Here, you can review the job configuration by selecting the **Job ID** which will take you to the Job details page. When the job is successful, a banner displays at the top of the Batch Operations page.
 
 ![Alt text](Images/image(21).png)
-    1. Upon creation of the job, Batch Operations processes the manifest. If successful, it will change the job status to **Awaiting your confirmation to run**. You must confirm the details of the job and select **Run job**.
+1. Upon creation of the job, Batch Operations processes the manifest. If successful, it will change the job status to **Awaiting your confirmation to run**. You must confirm the details of the job and select **Run job**.
 
 ![Alt text](Images/image(22).png)
-    1. You should then see a notification of successful confirmation for the job displayed in the banner at the top of the Batch Operations page.
+1. You should then see a notification of successful confirmation for the job displayed in the banner at the top of the Batch Operations page.
 
 ![Alt text](Images/image(23).png)
 
 ### Step 4:  Monitor the progress of a S3 Batch Operations job
 
 1. Select the job which was just created on the S3 Batch Operations console page.
-1. After an S3 Batch Operations job is created and run, it progresses through a series of statuses. You can track the progress of an S3 Batch Operations job by referring to these statuses on the Batch Operations home page.
-2. For example, a job is in the **New** state when it is created, moves to the **Preparing** state when Amazon S3 is processing the manifest and other job parameters, then moves to the **Ready** state when it is ready to run, **Active** when it is in progress, and finally **Completed** when the processing completes. For a full list of job statuses, see [_S3 __Batch Operations job statuses_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-job-status.html).
+2. After an S3 Batch Operations job is created and run, it progresses through a series of statuses. You can track the progress of an S3 Batch Operations job by referring to these statuses on the Batch Operations home page.
+3. For example, a job is in the **New** state when it is created, moves to the **Preparing** state when Amazon S3 is processing the manifest and other job parameters, then moves to the **Ready** state when it is ready to run, **Active** when it is in progress, and finally **Completed** when the processing completes. For a full list of job statuses, see [_S3 __Batch Operations job statuses_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-job-status.html).
 
 * Here, you can view information about the job’s progress such as Job **Status, Total succeeded,** and **Total failed**. Once the job has completed executing, it will generate a report and transition to the **Completed** state.
 
@@ -208,21 +211,21 @@ Next, you will have the option to request a [_completion report_](https://docs.a
 
 ![Alt text](Images/image(26).png)
 
-1. View S3 Batch Operations completion reports. S3 Batch Operations generates a report for jobs that have completed, failed, or cancelled. Select the path you’ve configured to save the completion reports.
+View S3 Batch Operations completion reports. S3 Batch Operations generates a report for jobs that have completed, failed, or cancelled. Select the path you’ve configured to save the completion reports.
 
 ![Alt text](Images/image(27).png)
 1. Download the completion report to analyze the status of each task.
-1. In the following example, all the objects have been successfully restored.
-2. The description of errors for each failed task can be used to diagnose issues that occur during job creation, such as permissions.
+2. In the following example, all the objects have been successfully restored.
+3. The description of errors for each failed task can be used to diagnose issues that occur during job creation, such as permissions.
 
 ![Alt text](Images/image(28).png)
 ##  Clean up resources
 There is a small cost for the objects stored in S3 and to avoid any unecessary charges please proceed with the following steps:
 
 1. Empty the bucket.
-1. If you have logged out of your AWS Management Console session, log back in. Navigate to the **S3** console and select the **Buckets** menu option. First, you will need to delete the test object from your test bucket. Select the name of the bucket you have been working with for this tutorial.
-2. Select the radio button to the left of the source bucket you created for this tutorial, and choose the **Empty** button.
-3. Select **Empty**. Review the warning message. If you desire to continue emptying this bucket, enter the bucket name into the Empty bucket confirmation box, and choose **Empty bucket.**
+2. If you have logged out of your AWS Management Console session, log back in. Navigate to the **S3** console and select the **Buckets** menu option. First, you will need to delete the test object from your test bucket. Select the name of the bucket you have been working with for this tutorial.
+3. Select the radio button to the left of the source bucket you created for this tutorial, and choose the **Empty** button.
+4. Select **Empty**. Review the warning message. If you desire to continue emptying this bucket, enter the bucket name into the Empty bucket confirmation box, and choose **Empty bucket.**
 
 Note: Objects that are archived to the S3 Glacier Flexible Retrieval storage class are charged for a minimum storage duration of 90 days. Objects deleted prior to the minimum storage duration incur a pro-rated charge equal to the storage charge for the remaining days. Objects that are deleted, overwritten, or transitioned to a different storage class before the minimum storage duration will incur the normal storage usage charge plus a pro-rated storage charge for the remainder of the minimum storage duration. For more information, refer to the [_S3 Pricing page_](https://aws.amazon.com/s3/pricing/).
 ![Alt text](Images/image(29).png)
