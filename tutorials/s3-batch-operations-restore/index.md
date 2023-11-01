@@ -150,17 +150,17 @@ echo “sample file 3” > testfile-3.txt
 * S3 Batch Operations supports STANDARD and BULK retrieval tiers. Select the **Retrieval tier** to be **Standard retrieval**. With S3 Batch Operations, [_restores in the Standard retrieval tier now typically begin to return objects to you within minutes_](https://aws.amazon.com/blogs/aws/new-improve-amazon-s3-glacier-flexible-restore-time-by-up-to-85-using-standard-retrieval-tier-and-s3-batch-operations/), down from 3–5 hours, so you can easily speed up your data restores from archive. For more information about the differences between the retrieval tiers, see [_Archive retrieval options_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/restoring-objects-retrieval-options.html).
 
 ![Alt text](Images/image(15).png)
-    1. Configure additional options:
+Configure additional options:
 1. Enter a **Description** to best define the purpose of the job.
 
-* Select a **Priority** to indicate the relative priority of this job to others running in your account. 
+2. Select a **Priority** to indicate the relative priority of this job to others running in your account. 
 
 **Note:**
 A higher number indicates higher priority. 
 For example, a job with a priority of 2 will be prioritized over a job with priority 1. S3 Batch Operations prioritizes jobs according to priority numbers, but strict ordering isn't guaranteed. Therefore, you shouldn't use job priorities to ensure that any one job starts or finishes before any other job. If you need to ensure strict ordering, wait until one job has finished before starting the next.
 
 ![Alt text](Images/image(16).png)
-    1. Generate an S3 Batch Operations completion report
+    1. Generate a S3 Batch Operations completion report
 
 Next, you will have the option to request a [_completion report_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-job-status.html) for your S3 Batch Operations job as shown in the screenshot below. As long as S3 Batch Operations successfully processes at least one object, Amazon S3 generates a completion report after the S3 Batch Operations job completes, fails, or is cancelled. You have the option to include all tasks or only failed tasks in the completion report. The completion report contains additional information for each task, including the object key name and version, status, error codes, and [_descriptions of any errors_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-failure-codes.html). Completion reports provide an easy way to view the status of each object restored using the S3 Batch Operations job and identify failures, if any. In this example, we chose to **Generate completion report** for **All tasks** so that we can review the status of all objects within this job. Alternatively, you can also choose to view the status of objects that failed to restore only by choosing the **Failed tasks only** option. We have provided the destination bucket as the destination for the completion report. For additional examples of completion reports, see [_Examples: S3 Batch Operations completion reports_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-examples-reports.html).
 
