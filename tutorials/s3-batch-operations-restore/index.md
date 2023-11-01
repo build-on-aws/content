@@ -123,9 +123,9 @@ echo “sample file 3” > testfile-3.txt
 
 ![Alt text](Images/image(9).png)
 * S3 Batch Operations CSV manifests can include an optional version ID as a third column of the CSV. If using a versioned bucket, we recommend that you supply the version ID of each object in your manifest. Batch Operations will perform the operation on the latest version if no version ID is specified.
-* Save the file as “manifest.csv”.
+2. Save the file as “manifest.csv”.
 
-1. Upload the S3 Batch Operations manifest to the S3 bucket. Leave the options on the default settings, and choose the **Upload** button.
+3. Upload the S3 Batch Operations manifest to the S3 bucket. Leave the options on the default settings, and choose the **Upload** button.
 
 ### Step 3: Create S3 bactch operations job
 
