@@ -152,6 +152,7 @@ echo “sample file 3” > testfile-3.txt
 
 ![Alt text](Images/image(15).png)
 Configure additional options:
+
 7. Enter a **Description** to best define the purpose of the job.
 
 8. Select a **Priority** to indicate the relative priority of this job to others running in your account. 
