@@ -8,9 +8,9 @@ tags:
   - lets-talk-about-data
 authorGithubAlias: toemull
 authorName: Tony Mullen
+additionalAuthors:
   - authorGithubAlias: pmatkar
     authorName: Prasad Maktar
-    authorName: 
 date: 2023-10-23
 spaces:
   - livestreams
