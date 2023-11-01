@@ -9,16 +9,20 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show8.png)
+![Screenshot from the stream or an image related to the topic](images/show8.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1851873056) we dive deep in Graph databases and Amazon Neptune. We discuss about the usecases where customer benefit from using a graph database. In the second half of the show we have a detailed demo to setup and use graph databases.
+In this episode of Lets Talk About Data we dive deep in Graph databases and Amazon Neptune. We discuss about the usecases where customer benefit from using a graph database. In the second half of the show we have a detailed demo to setup and use graph databases.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1851873056
 
 ## Hosts of the show 🎤
 

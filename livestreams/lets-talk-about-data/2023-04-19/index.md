@@ -9,16 +9,21 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show3.png)
+![Screenshot from the stream or an image related to the topic](images/show3.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1841017419) In this show we discuss about importance of certifications and how certifications can help users in their cloud journey. We also discuss about sample questions that we come across in certification exams and tips/approach to solve them.
+In this episode of Lets Talk About Data we discuss about importance of certifications and how certifications can help users in their cloud journey. We also discuss about sample questions that we come across in certification exams and tips/approach to solve them.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1841017419
+
 
 ## Hosts of the show 🎤
 

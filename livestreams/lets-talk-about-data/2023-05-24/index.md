@@ -9,16 +9,21 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show7.png)
+![Screenshot from the stream or an image related to the topic](images/show7.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1841658946) we discuss about the women in data initiative at AWS and discuss about the cloud journey of our guests. In the second half of the show we focus on reference architecture of manufacturing company and how they leverage various AWS services.
+In this episode of Lets Talk About Data we discuss about the women in data initiative at AWS and discuss about the cloud journey of our guests. In the second half of the show we focus on reference architecture of manufacturing company and how they leverage various AWS services.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1841658946
+
 
 ## Hosts of the show 🎤
 

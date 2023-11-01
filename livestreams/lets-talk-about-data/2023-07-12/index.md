@@ -8,17 +8,21 @@ tags:
   - lets-talk-about-data
 authorGithubAlias: toemull
 authorName: Tony Mullen
-additionalAuthors:
-  - authorGithubAlias: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
     authorName: 
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show12.png)
+![Screenshot from the stream or an image related to the topic](images/show12.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1841017419) we discuss about cost optmisation when using Amazon RDS and Amazon Aurora in detail. In the second half of the show we focus on the demo using services like Amazon Cost & Usage report, Lambda and create dashboard to visualise the cost.
+In this episode of Lets Talk About Data we discuss about cost optmisation when using Amazon RDS and Amazon Aurora in detail. In the second half of the show we focus on the demo using services like Amazon Cost & Usage report, Lambda and create dashboard to visualise the cost.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1841017419
 
 ## Hosts of the show 🎤
 

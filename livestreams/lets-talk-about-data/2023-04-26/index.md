@@ -9,16 +9,21 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show4.png)
+![Screenshot from the stream or an image related to the topic](images/show4.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1841658373) In this show we discuss on how our customer CDL migrated 600 Oracle databases to the RDS PostgreSql ,best practises involved, challenges faced etc. In the second half of the show CDL walk us through the actual process  of how they achieved it , services they used for full load and change data capture , the monitoring and alerting during the migration process.
+In this episode of Lets Talk About Data we discuss on how our customer CDL migrated 600 Oracle databases to the RDS PostgreSql ,best practises involved, challenges faced etc. In the second half of the show CDL walk us through the actual process  of how they achieved it , services they used for full load and change data capture , the monitoring and alerting during the migration process.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1841658373
+
 
 ## Hosts of the show 🎤
 

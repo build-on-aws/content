@@ -9,16 +9,20 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show1.png)
+![Screenshot from the stream or an image related to the topic](images/show1.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1841659475) we discuss about the new GP3 storage class and how customers can benefit moving to it . In the second half of the show we discuss Oracle to PostgreSQL connectivity using the Oracle gateway and also have demo about how to configure the gateway.
+In this episode of Lets Talk About Data we discuss about the new GP3 storage class and how customers can benefit moving to it . In the second half of the show we discuss Oracle to PostgreSQL connectivity using the Oracle gateway and also have demo about how to configure the gateway.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1841659475
 
 ## Hosts of the show 🎤
 

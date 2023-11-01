@@ -9,16 +9,20 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show9.png)
+![Screenshot from the stream or an image related to the topic](images/show9.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1851873056) we discuss about what is Dynamodb, the best practises while using Dynamodb and focus on how customers use DynamoDB. In the second part of the show we focus on the Demo , creating tables and discussing about indexes and modelling considerations while working with DynamoDB.
+In this episode of Lets Talk About Data we discuss about what is Dynamodb, the best practises while using Dynamodb and focus on how customers use DynamoDB. In the second part of the show we focus on the Demo , creating tables and discussing about indexes and modelling considerations while working with DynamoDB.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1851873056
 
 ## Hosts of the show 🎤
 

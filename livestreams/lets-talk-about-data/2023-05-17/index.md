@@ -9,16 +9,20 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show6.png)
+![Screenshot from the stream or an image related to the topic](images/show6.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1841659193) we discuss about the new services like Data Mesh and Amazon Datazone and how customers can create data domain for their specific usecase. The second part of the demo focuses on creating the Data Domain.
+In this episode of Lets Talk About Data we discuss about the new services like Data Mesh and Amazon Datazone and how customers can create data domain for their specific usecase. The second part of the demo focuses on creating the Data Domain.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1841659193
 
 ## Hosts of the show 🎤
 

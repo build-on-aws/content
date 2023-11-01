@@ -9,16 +9,20 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show5.png)
+![Screenshot from the stream or an image related to the topic](images/show5.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1841658652) we discuss about the Bablefish for Aurora PostgreSQL and customer usecases for this option. In the second part of the show we build demo using the various features/functionality available to customers using Bablefish for PostgreSQL
+In this episode of Lets Talk About Data we discuss about the Bablefish for Aurora PostgreSQL and customer usecases for this option. In the second part of the show we build demo using the various features/functionality available to customers using Bablefish for PostgreSQL
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1841658652
 
 ## Hosts of the show 🎤
 

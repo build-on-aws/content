@@ -1,6 +1,6 @@
 ---
 title: "Lets Talk About Data"
-description: A weekly live stream for data professionals looking for the latest news and information on AWS data services across the cloud, we have AWS colleagues, community builders, AWS data Hero's and customers as guests on the show" 
+description: "A weekly live stream for data professionals looking for the latest news and information on AWS data services across the cloud, we have AWS colleagues, community builders, AWS data Hero's and customers as guests on the show" 
 tags:
   - aws
   - data
@@ -19,7 +19,7 @@ images:
   background: ./images/logo.webp
 ---
 
-![Image of Tony, Prasad and Ibrahim  enjoying the live stream together](images/ltad-header.png)
+![Image of Tony, Prasad and Ibrahim  enjoying the live stream together](images/ltad-header.jpg)
 
 The “Lets Talk About Data” twitch show is a weekly update for data professionals looking for the latest news and information on AWS data services across the cloud! The show covers regular service updates, technical deep dives, new service launches, and interviews in the data space. We have AWS colleagues, community builders, AWS data Hero's and customers as guests on the show.  Show Location  https://www.twitch.tv/aws every Wednesday at 4pm CET.
 

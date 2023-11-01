@@ -9,18 +9,20 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show11.png)
+![Screenshot from the stream or an image related to the topic](images/show11.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1953225374) we focus on the AWS Analytics services like Glue , Hudi and how it can be used to build data lake. We focus on the ingestion sources and staging the data in the data lake. We have a detailed demo in the second half of the show focusing on building data lake and using these services.
+In this episode of Lets Talk About Data we focus on the AWS Analytics services like Glue , Hudi and how it can be used to build data lake. We focus on the ingestion sources and staging the data in the data lake. We have a detailed demo in the second half of the show focusing on building data lake and using these services.
 
-## Hosts of the show 🎤
+Check out the recording here:
+
+https://www.twitch.tv/videos/1953225374
 
 [**Roni Vered *](https://www.linkedin.com/in/ronivered/), Senior Database Solutions Architect @ AWS
 

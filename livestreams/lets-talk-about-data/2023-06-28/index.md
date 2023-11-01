@@ -9,16 +9,20 @@ tags:
 authorGithubAlias: toemull
 authorName: Tony Mullen
 additionalAuthors:
-  - authorGithubAlias: 
-    authorName: 
+  - authorGithubAlias: pmatkar
+    authorName: Prasad Maktar
 date: 2023-10-23
 spaces:
   - livestreams
 ---
 
-![Screenshot from the stream or an image related to the topic](images/show10.png)
+![Screenshot from the stream or an image related to the topic](images/show10.jpg)
 
-In this episode of Lets Talk About Data on [Twitch](https://www.twitch.tv/videos/1953157024) we discuss about what is Amazon DocumentDB and how it is different when compared to MongoDB. We also have a detailed demo of how customers can move from their existing MongoDB to Amazon DocumentDB using Database Migration Service.creating the Data Domain.
+In this episode of Lets Talk About Data we discuss about what is Amazon DocumentDB and how it is different when compared to MongoDB. We also have a detailed demo of how customers can move from their existing MongoDB to Amazon DocumentDB using Database Migration Service.creating the Data Domain.
+
+Check out the recording here:
+
+https://www.twitch.tv/videos/1953157024
 
 ## Hosts of the show 🎤
 
