@@ -3,7 +3,7 @@ title: Building Custom LangChain Agents and Tools with Amazon Bedrock
 description: Learn to build custom prompts and tools for LangChain agents.
 tags:
   - generative-ai
-  - bedrock
+  - amazon-bedrock
   - langchain
   - streamlit
   - agents
@@ -13,17 +13,17 @@ waves:
   - generative-ai
 authorGithubAlias: aws-banjo
 authorName: Banjo Obayomi
-date: 2023-10-31
+date: 2023-11-01
 ---
 
 |ToC|
 |---|
 
-You've already dipped your toes into generative AI, exploring large language models (LLMs), and prompt engineering. Now you're ready for the next challenge: building an "agent" that acts like a toolset for your LLMs, much like a calculator aids us humans for solving math problems.
+You've already dipped your toes into generative AI, exploring large language models (LLMs), and prompt engineering. Now you're ready for the next challenge: building an "agent" that acts like a tool set for your LLMs, much like a calculator aids us humans for solving math problems.
 
 While [LangChain](https://www.langchain.com/) is great for building agents, creating custom prompts and tools can get a bit complex.
 
-In this hands-on guide, let's get straight to it. I'll guide you through refining [Agent AWS](https://community.aws/posts/building-agent-aws?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) our AWS Solutions Architect Agent. You'll see how to design custom prompts and tools and plug this agent into a [Streamlit](https://streamlit.io/) chatbot. By the end, you'll have an agent capable of querying AWS documentation and deploying Lambda functions, all backed by [Amazon Bedrock](https://aws.amazon.com/bedrock/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent). Ready to step up your agent game? Let's dive in.
+In this hands-on guide, let's get straight to it. I'll guide you through refining [Agent AWS](https://community.aws/posts/building-agent-aws) our AWS Solutions Architect Agent. You'll see how to design custom prompts and tools and plug this agent into a [Streamlit](https://streamlit.io/) chatbot. By the end, you'll have an agent capable of querying AWS documentation and deploying AWS Lambda functions, all backed by [Amazon Bedrock](https://aws.amazon.com/bedrock/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent). Ready to step up your agent game? Let's dive in.
 
 The full code of the agent can be viewed [here](https://github.com/build-on-aws/amazon-bedrock-custom-langchain-agent)
 
@@ -31,7 +31,7 @@ The full code of the agent can be viewed [here](https://github.com/build-on-aws/
 
 ## Prerequisites
 
-Before we dive into building Agent AWS, we need to set the stage. If you haven’t had a chance to play with Amazon Bedrock, I encourage to go through my [quick start guide](https://community.aws/posts/amazon-bedrock-quick-start?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) before attempting to make this agent.
+Before we dive into building Agent AWS, we need to set the stage. If you haven’t had a chance to play with Amazon Bedrock, I encourage to go through my [quick start guide](https://community.aws/posts/amazon-bedrock-quick-start) before attempting to make this agent.
 
 Once ready, we can begin by cloning the repo and installing the libraries.
 
@@ -41,7 +41,7 @@ cd amazon-bedrock-custom-langchain-agent
 pip install -r requirements.txt
 ```
 
-Our Agent will also need you to have an [IAM Role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) and a [S3 bucket](https://aws.amazon.com/s3/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) it can use:
+Our Agent will also need you to have an AWS [IAM Role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) and an Amazon [S3 bucket](https://aws.amazon.com/s3/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) it can use:
 
 ```bash
 export LAMBDA_ROLE=arn:aws:iam::ACCOUNT_ID:role/YourLambdaExecutionRole  
@@ -56,7 +56,7 @@ Tools aren't just utilities, they're the extensions of our agents. They provide 
 
 ### Querying the AWS Well-Architected Framework
 
-Our first tool dives deep into the AWS Well-Architected Framework using a method known as [Retrieval Augmented Generation (RAG)](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent). Let's break down hawow it works.
+Our first tool dives deep into the AWS Well-Architected Framework using a method known as [Retrieval Augmented Generation (RAG)](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent). Let's break down how it works.
 
 RAG allows us to fetch documents that are relevant to a user's query. Initially, we download the text and use the [Amazon Titan embedding model](https://aws.amazon.com/bedrock/titan/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) to convert this text into vectors. 
 
@@ -82,7 +82,7 @@ You've now created a tool that empowers your agent to sift through AWS documenta
 
 ### Creating and Deploying Lambda Functions
 
-This tool leverages the python AWS SDK library [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agen) to take structured input from your agent and transform it to a deployed Lambda Function. Say a user wants a Lambda function that generates a random number between 1 and 3000. Your agent will pass the necessary code, function name, and description to this tool.
+This tool leverages the python AWS SDK library [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) to take structured input from your agent and transform it to a deployed Lambda function. Say a user wants a Lambda function that generates a random number between 1 and 3000. Your agent will pass the necessary code, function name, and description to this tool.
 
 We use the boto3 library to do the heavy lifting of deploying the function to your AWS account. While some parameters like the IAM role and S3 bucket are hard-coded, the tool is designed to be flexible where it counts.
 
@@ -99,10 +99,10 @@ def create_lambda_function(
     external_python_libraries: List[str],
 ) -> str:
     """
-    Creates a deploys a Lambda Function, based on what the customer requested. Returns the name of the created lambda function
+    Creates and deploys a Lambda Function, based on what the customer requested. Returns the name of the created Lambda function
     """
 
-    print("Creating lambda function")
+    print("Creating Lambda function")
 
     # !!! HARD CODED !!!
     runtime = "python3.9"
@@ -166,7 +166,7 @@ Ready to see how it all comes together? Below is the code that initializes the a
 
 ```python
 def setup_full_agent():
-    # Initialize bedrock and llm
+    # Initialize Amazon Bedrock and LLM
     bedrock_runtime = setup_bedrock()
     llm = initialize_llm(bedrock_runtime)
 
@@ -205,9 +205,9 @@ To get a feel of your newly created agent, run `python test_agent.py` from your 
 ### Agent Example Run
 
 In this example, the agent takes on the task of crafting and deploying a Lambda function focused on sentiment analysis.
-![Agent AWS creates lambda function](images/agent_thought_2.webp)
+![Agent AWS creates Lambda function](images/agent_thought_2.webp)
 
-Since our agent is an AWS Certified Solutions Architect, It knows how to use [Amazon Comprehend](https://aws.amazon.com/comprehend/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) for sentiment analysis. Our agent also instructs the user on how to invoke the function and reminds you to update your Lambda Role.
+Since our agent is an AWS Certified Solutions Architect, it knows how to use [Amazon Comprehend](https://aws.amazon.com/comprehend/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-bedrock-custom-langchain-agent) for sentiment analysis. Our agent also instructs the user on how to invoke the function and reminds you to update your Lambda role.
 
 ![Agent AWS tells customer how to invoke Lambda function](images/agent_thought_3.webp)
 
@@ -268,7 +268,7 @@ We embarked on a quest to build a custom agent, and what a journey it's been! Fr
 
 To summarize, we've:
 
-* Initialized Amazon Bedrock for our foundational models
+* Initialized Amazon Bedrock for our foundation models
 * Developed tools for querying the AWS Well-Architected Framework and deploying Lambda functions
 * Created a LangChain agent with a well-defined prompt and integrated it with our tools
 * Designed a Streamlit chatbot that brings our agent to life
