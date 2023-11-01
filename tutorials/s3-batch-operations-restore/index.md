@@ -163,6 +163,7 @@ For example, a job with a priority of 2 will be prioritized over a job with prio
     1. Generate an S3 Batch Operations completion report
 
 Next, you will have the option to request a [_completion report_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-job-status.html) for your S3 Batch Operations job as shown in the screenshot below. As long as S3 Batch Operations successfully processes at least one object, Amazon S3 generates a completion report after the S3 Batch Operations job completes, fails, or is cancelled. You have the option to include all tasks or only failed tasks in the completion report. The completion report contains additional information for each task, including the object key name and version, status, error codes, and [_descriptions of any errors_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-failure-codes.html). Completion reports provide an easy way to view the status of each object restored using the S3 Batch Operations job and identify failures, if any. In this example, we chose to **Generate completion report** for **All tasks** so that we can review the status of all objects within this job. Alternatively, you can also choose to view the status of objects that failed to restore only by choosing the **Failed tasks only** option. We have provided the destination bucket as the destination for the completion report. For additional examples of completion reports, see [_Examples: S3 Batch Operations completion reports_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-examples-reports.html).
+
 ![Alt text](Images/image(17).png)
     1. Creating an [_Identity and Access Management (IAM) role_](https://aws.amazon.com/iam/) for S3 Batch Operations
 1. Amazon S3 must have permissions to perform S3 Batch Operations on your behalf. You grant these permissions through an IAM role.
@@ -187,7 +188,8 @@ Next, you will have the option to request a [_completion report_](https://docs.a
     1. You should then see a notification of successful confirmation for the job displayed in the banner at the top of the Batch Operations page.
 
 ![Alt text](Images/image(23).png)
-1. **Monitor the progress of a S3 Batch Operations job**
+
+### Step 4:  Monitor the progress of a S3 Batch Operations job
 
 1. Select the job which was just created on the S3 Batch Operations console page.
 1. After an S3 Batch Operations job is created and run, it progresses through a series of statuses. You can track the progress of an S3 Batch Operations job by referring to these statuses on the Batch Operations home page.
@@ -205,11 +207,11 @@ Next, you will have the option to request a [_completion report_](https://docs.a
 * After the time elapses, verify the restore status and you can see that the object has been restored. You should also be able to download the object until the **Restoration Expiry date**.
 
 ![Alt text](Images/image(26).png)
-1. **View S3 Batch Operations completion reports**
-    a. S3 Batch Operations generates a report for jobs that have completed, failed, or cancelled. Select the path you’ve configured to save the completion reports.
+
+1. View S3 Batch Operations completion reports. S3 Batch Operations generates a report for jobs that have completed, failed, or cancelled. Select the path you’ve configured to save the completion reports.
 
 ![Alt text](Images/image(27).png)
-    1. Download the completion report to analyze the status of each task.
+1. Download the completion report to analyze the status of each task.
 1. In the following example, all the objects have been successfully restored.
 2. The description of errors for each failed task can be used to diagnose issues that occur during job creation, such as permissions.
 
