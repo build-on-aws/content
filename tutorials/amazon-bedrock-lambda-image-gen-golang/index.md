@@ -15,17 +15,15 @@ waves:
   - generative-ai
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: 2023-10-31
+date: 2023-11-01
 ---
 
 |ToC|
 |---|
 
-Text to image conversion is a popular use-case. Whether it's crafting personalized content, or tailoring images to user preferences - the ability to generate visual assets based on a description is quite powerful. But this typically involves deploying an end-to-end machine learning solution, which is quite resource intensive. 
+Whether it's crafting personalized content or tailoring images to user preferences, the ability to generate visual assets based on a description is quite powerful. But text-to-image conversion typically involves deploying an end-to-end machine learning solution, which is quite resource intensive. What if this capability was an API call away, thereby making the process simpler and more accessible for developers?
 
-What if this capability was an API call away, thereby making the process simpler and more accessible for developers?
-
-This tutorial will walk you through how to use [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy a Serverless image generation application implemented using [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) which is a fully managed service that makes base models from Amazon and third-party model providers (such as Anthropic, Cohere, and more) accessible through an API. Developers can leverage leading foundation models through a *single* API, while maintaining the flexibility to adopt new models in the future.
+This tutorial will walk you through how to use [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-go.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) to deploy a Serverless image generation application implemented using [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) and [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq), which is a fully managed service that makes base models from Amazon and third-party model providers (such as Anthropic, Cohere, and more) accessible through an API. Developers can leverage leading foundation models through a *single* API, while maintaining the flexibility to adopt new models in the future.
 
 The solution is deployed as a static website hosted on [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) accessible via an [Amazon CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) domain. Users can enter the image description which will be passed on to a Lambda function (via [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq)) which in turn will invoke [Stable Diffusion model on Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html#models-supported/?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-lambda-image-gen-website&sc_geo=mult&sc_country=mult&sc_outcome=acq) to generate the image.
 
@@ -43,7 +41,7 @@ The entire solution is built using [Go](https://go.dev/) - this includes the Lam
 | 💰 Cost to complete | Free when using the AWS Free Tier      |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/amazon-bedrock-lambda-image-generation-golang)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-10-27  
+| ⏰ Last Updated     | 2023-11-01  
 
 ## Prerequisites
 
