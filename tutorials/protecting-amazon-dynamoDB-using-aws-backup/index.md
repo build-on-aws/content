@@ -1,37 +1,37 @@
 ---
 title: "Protecting Amazon DynamoDB Using AWS Backup"
-description: A tutorial that provides step-by-step guidance for protecting your Amazon DynamoDB tables, using AWS Backup.
+description: Learn to recover your lost DynamoDB data with AWS Backup
 tags:
   - dynamodb
+  - database
   - aws-backup
   - data-protection
+  - tutorial
 authorGithubAlias: kenhui
 authorName: Kenneth Hui
 date: 2023-10-23
 ---
 
-# Protecting Amazon DynamoDB Using AWS Backup
-
 ## Overview
 
-You can centralize and automate data protection across multiple AWS services using [AWS Backup](https://aws.amazon.com/backup/), a fully managed AWS service.[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) users who need to meet regulatory compliance or business continuity requirements can use AWS Backup to protect the data in their Amazon DynamoDB tables, following a specific frequency and retention period they define. After you configure your backup policies and assign Amazon DynamoDB resources to the policies, AWS Backup automates the creation of Amazon DynamoDB on-demand backups and securely stores the backups in an encrypted backup vault that you designate in your backup plan. Following a data-loss event, customers can use AWS Backup to recover their DynamoDB tables.
+You can centralize and automate data protection across multiple AWS services using [AWS Backup](https://aws.amazon.com/backup/), a fully managed AWS service.[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) users who need to meet regulatory compliance or business continuity requirements can use AWS Backup to protect the data in their Amazon DynamoDB tables, following a specific frequency and retention period they define. You can use AWS Backup to restore a database table that may have become corrupted through a softwre error or inadvertently deleted by a user. You can also use AWS Backup reporting capabilities to demonstrate compliance by showing proof that you have backed up your databases. After you configure your backup policies and assign Amazon DynamoDB resources to the policies, AWS Backup automates the creation of Amazon DynamoDB on-demand backups and securely stores the backups in an encrypted backup vault that you designate in your backup plan. Following a data-loss event, customers can use AWS Backup to recover their DynamoDB tables.
 
 AWS Backup currently supports DynamoDB on-demand backups but not point-in-time restores for DynamoDB. AWS Backup enhances DynamoDB on-demand backups by enabling you to schedule and to manage the lifecycle of your backups. You can also monitor and audit backups across AWS services, including DynamoDB.
 
 In this tutorial, we provide step-by-step guidance for protecting your DynamoDB tables using AWS Backup.
 
-## AWS experience
+## Recommended AWS experience
 
-Intermediate
+Intermediate - You are expected to have familiarity with the AWS Console and using it to launch services
 
-## Time to complete
+## Estimated time to complete
 
-10 minutes
+This tutorial should take approximately 30 minutes to complete
 
-### Prerequisites
+## Prerequisites
 
 * An [AWS account](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). For more information on using AWS Backup for the first time, view the [AWS Backup documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). For AWS Backup pricing, refer to the [AWS Backup pricing page](https://aws.amazon.com/backup/pricing?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup)
-* An Amazon DynamoDB table to protect. For information on how to create the sample table that is used for this tutorial, visit the documentation on [Getting started with Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup).  For DynamoDB pricing, refer to the [DynamoDB pricing page](https://aws.amazon.com/dynamodb/pricing/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). 
+* An Amazon DynamoDB table to protect. For information on how to create the sample table that is used for this tutorial, visit the documentation on [Getting started with Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup).  For DynamoDB pricing, refer to the [DynamoDB pricing page](https://aws.amazon.com/dynamodb/pricing?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). 
 
 ### Services used
 
@@ -253,6 +253,6 @@ In the following steps, you clean up the resources you created in this tutorial.
 
 *Note: This process can take several minutes to complete.*
 
-## Next steps
+## Conclusion
 
-Congratulations! In this tutorial, you learned how to protect your DynamoDB table using AWS Backup by creating on-demand and scheduled backups, and restoring your backup to a new table.
+Congratulations! In this tutorial, you learned how to protect your DynamoDB table using AWS Backup by creating on-demand and scheduled backups, and restoring your backup to a new table. To learn more about AWS Backup visit the [AWS Storage Blog](https://aws.amazon.com/blogs/storage/category/storage/aws-backup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). 
