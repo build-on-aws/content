@@ -109,12 +109,22 @@ brew install aws/tap/copilot-cli
 
 For other platforms, use [curl](https://curl.se/) or [PowerShell](https://learn.microsoft.com/en-us/powershell/) to download the release.
 
- | **Platform** | **Command to install** |
- | -------------- | ----------------------------------------------------------------------------------- |
- | macOS        | `curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-darwin && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot && copilot --help` |
- | Linux x86 (64-bit)   | `curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot && copilot --help` |  
- | Linux (ARM)  |  `curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux-arm64 && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot` |
- | Windows      |  `Invoke-WebRequest -OutFile  'C:\\Program Files\\copilot.exe' https://github.com/aws/copilot-cli/releases/latest/download/copilot-windows.exe`
+* macOS
+    ```bash
+    curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-darwin && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot && copilot --help
+    ```
+* Linux x86 (64-bit)
+    ```bash
+    curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot && copilot --help
+    ```
+* Linux (ARM)
+    ```bash
+    curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux-arm64 && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot
+    ```
+* Windows
+    ```powershell
+    Invoke-WebRequest -OutFile  'C:\\Program Files\\copilot.exe' https://github.com/aws/copilot-cli/releases/latest/download/copilot-windows.exe
+    ```
 
 #### **Step 2:** Download and open the project
 
@@ -172,7 +182,7 @@ You can use Amazon ECS to schedule the placement of containers across your clust
 
 There is no additional charge for Amazon ECS. You pay for the AWS resources (for example, EC2 instances or EBS volumes) you create to store and run your application.
 
-### What you will accomplish Module One
+### What you will accomplish Module Two
 
 In this module, you instantiate a managed cluster of EC2 compute instances using Amazon ECS. You then deploy your image as a container running on the cluster.
 
@@ -203,7 +213,16 @@ cd ./amazon-ecs-nodejs-microservices/
 copilot app init
 ```
 
-An AWS Copilot Application creates an empty application that consists of roles to administrate StackSets, Amazon ECR repositories, KMS keys, and S3 buckets. It also creates a local directory in your repository to hold configuration files for your application and services.
+An AWS Copilot Application creates an empty application that consists of roles to administrate StackSets, Amazon ECR repositories, KMS keys, and S3 buckets. It also creates a local directory in your repository to hold configuration files for your application and services. The output should looks something like this after it finishes:
+
+```bash
+Application name: monolith
+✔ Proposing infrastructure changes for stack monolith-infrastructure-roles
+- Creating the infrastructure for stack monolith-infrastructure-roles                           [create complete]  [46.2s]
+  - A StackSet admin role assumed by CloudFormation to manage regional stacks                   [create complete]  [18.9s]
+  - An IAM role assumed by the admin role to create ECR repositories, KMS keys, and S3 buckets  [create complete]  [20.5s]
+✔ The directory copilot will hold service manifests for application monolith.
+```
 
 #### **Step 2**: Create the environment
 
@@ -235,7 +254,7 @@ Credential source: [profile default]
     No, I'd like to import existing resources (VPC, subnets).
 ```
 
-AWS Copilot creates a `manifest.yml` that is used to configure the environment.
+It will now start creating the infrastructure needed. AWS Copilot creates a `manifest.yml` that is used to configure the environment. Once the creation is done, you should see similar output to this:
 
 ```bash
 Environment name: monolith
@@ -492,7 +511,18 @@ In this module, you will deploy a Refactor Spaces environment along with a Refac
 
 #### **Step 1**: Download templates
 
-Navigate to [AWS Samples](https://github.com/aws-samples/aws-migration-hub-refactor-spaces-samples/tree/main/rs-tutorial/rs-copilot-tutorial) and select **Clone** or **Download** to download the GitHub repository to your local environment. Copy the `rs.yaml` and `rs-service-op.yaml` files into the repository that you downloaded in Module 1.
+Navigate to [AWS Samples](https://github.com/aws-samples/aws-migration-hub-refactor-spaces-samples/tree/main/rs-tutorial/rs-copilot-tutorial) and select **Clone** or **Download** to download the GitHub repository to your local environment. Copy the `rs.yaml` and `rs-service-op.yaml` files into the repository that you downloaded in Module 1. You can also do this with `curl` / `Invoke-WebRequest` without cloning the whole repository:
+
+* macOS / Linus
+    ```bash
+    curl -O https://raw.githubusercontent.com/aws-samples/aws-migration-hub-refactor-spaces-samples/main/rs-tutorial/rs-copilot-tutorial/rs-service-op.yaml
+    curl -O https://raw.githubusercontent.com/aws-samples/aws-migration-hub-refactor-spaces-samples/main/rs-tutorial/rs-copilot-tutorial/rs.yaml
+    ```
+* Windows
+    ```powershell
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/aws-samples/aws-migration-hub-refactor-spaces-samples/main/rs-tutorial/rs-copilot-tutorial/rs-service-op.yaml -OutFile rs-service-op.yaml
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/aws-samples/aws-migration-hub-refactor-spaces-samples/main/rs-tutorial/rs-copilot-tutorial/rs.yaml -OutFile rs.yaml
+    ```
 
 #### **Step 2**: Deploy Refactor Spaces
 
@@ -504,11 +534,22 @@ In this step, you deploy an AWS CloudFormation template to create a Refactor Spa
 aws cloudformation deploy --template-file rs.yaml --stack-name <<Stack Name>> --parameter-override MonolithUrl=<<MonolithUrl>>
 ```
 
+This will take some time, you should see the following output while it is running (with a different URL):
+
+```bash
+o6rvhiz-1055935381.us-west-2.elb.amazonaws.com/api
+
+Waiting for changeset to be created..
+Waiting for stack create/update to complete
+```
+
+Once done, you will see `Successfully created/updated stack - monolith-tutorial`.
+
 #### **Step 3**: Test your monolith
 
 In the previous step, you created resources for the refactor environment using CloudFormation. Now, run the following command to access the outputs from the deployment.
 
-`NOTE: Save this output to a text file for later use`
+**NOTE:** Save this output to a text file for later use.
 
 Command:
 
@@ -550,7 +591,7 @@ Response:
 ]
 ```
 
-To see the output in JSON format, copy the `rsProxyURL` value, append `/users`, or `/threads`, or `/posts` and paste into a web browser. The following screenshot is from Firefox optimized to see JSON format.
+To see the output in JSON format, copy the `rsProxyURL` value from the output above, append `/users`, or `/threads`, or `/posts` and paste into a web browser. The following screenshot is from Firefox optimized to see JSON format.
 
 ![JSON output when accessing the monolith](images/outputafterrs.png)
 
@@ -625,22 +666,21 @@ Select `Yes, use default`.
 
 ```bash
 Default environment configuration? Yes, use default.
-✔ Wrote the manifest for environment users at copilot/environments/users/manifest.yml
+✔ Wrote the manifest for environment posts at copilot/environments/posts/manifest.yml
 - Update regional resources with stack set "api-infrastructure" [succeeded] [10.7s]
-✔ Proposing infrastructure changes for the api-users environment.
-- Creating the infrastructure for the api-users environment. [create complete] [35.5s]
+✔ Proposing infrastructure changes for the api-posts environment.
+- Creating the infrastructure for the api-posts environment. [create complete] [35.5s]
  - An IAM Role for AWS CloudFormation to manage resources [create complete] [14.3s]
  - An IAM Role to describe resources in your environment  [create complete] [15.2s]
-✔ Provisioned bootstrap resources for environment users in region us-east-1 under application api.
+✔ Provisioned bootstrap resources for environment posts in region us-east-1 under application api.
 Recommended follow-up actions:
- - Update your manifest copilot/environments/users/manifest.yml to change the defaults.
- - Run `copilot env deploy --name users` to deploy your environment.
+ - Update your manifest copilot/environments/posts/manifest.yml to change the defaults.
+ - Run `copilot env deploy --name posts` to deploy your environment.
 ```
 
-Deploy the Environment.
+Deploy the Environment using `copilot env deploy —-name posts`, you will see similar output to this:
 
 ```bash
-$ copilot env deploy —name posts
 ✔ Proposing infrastructure changes for the api-posts environment.
 - Creating the infrastructure for the api-posts environment. [update complete] [74.2s]
  - An ECS cluster to group your services  [create complete] [2.7s]
