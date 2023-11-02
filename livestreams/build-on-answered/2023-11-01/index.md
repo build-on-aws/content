@@ -1,5 +1,5 @@
 ---
-title: "Build On Answered | All About AWS sDK | S02 EP04"
+title: "Build On Answered | All About AWS SDK | S02 EP04"
 description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - sdk
@@ -16,7 +16,7 @@ spaces:
   - livestreams
 ---
 
-![Streaming session with Julie, Chris, and Sam all smiling](images/sdk.jpeg)
+![Streaming session with Julie, Chris, and Sam all smiling](images/SDK.jpeg)
 
 Join us for the Season 2 Episode 4 where we talk about Stack Overflow questions covering AWS SDK with Sam Whyte from Gremlin!
 
