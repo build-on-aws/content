@@ -60,7 +60,8 @@ Before starting this tutorial, you will need:
 
 ## Implementation
 
-### Step 1: Create an Amazon S3 bucket
+### Step 1: Create an Amazon S3 Bucket
+
 
  1. Log in to the [_AWS Management Console_](https://console.aws.amazon.com/) using your account information. In the search bar, enter **S3**, then select **S3** from the results.
 
