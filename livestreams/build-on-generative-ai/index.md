@@ -45,6 +45,7 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 | S02E01 | Let's look at Llama2, Falcon and more! New season start | 2023-08-14  | Emily Webber | [Show notes](/livestreams/build-on-generative-ai/2023-08-14) |
 | S02E02 | Defining best for long context Language Models | 2023-08-21  | David Bounds | [Show notes](/livestreams/build-on-generative-ai/2023-08-21) |
 | S02E04 | Streaming support on SageMaker endpoints | 2023-09-11  | Raghu Ramesha | [Show notes](/livestreams/build-on-generative-ai/2023-09-11) |
+| S02E05 | Mounting S3 Buckets to EC2 Instances | 2023-09-18  | Devabrat & John | [Show notes](/livestreams/build-on-generative-ai/2023-09-18) |
 | S02E07 | Amazon Bedrock and Bias Mitigation for LLMs | 2023-10-02 | Mark Roy | [Show notes](/livestreams/build-on-generative-ai/2023-10-02) |
 
 ### SEASON 01
