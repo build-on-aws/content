@@ -16,7 +16,7 @@ spaces:
   - livestreams
 ---
 
-![Screen recording of running the mountpoint s3 tool](images/mountpoints3.webm "Running it is as simple as this")
+![Screen recording of running the mountpoint s3 tool](images/mountpoints3.gif "Running it is as simple as this")
 
 In today's session Emily and Darko are joined by Devabrat and John, as we all take a closer look at **Mountpoint S3**. A wonderful little file client for mounting S3 buckets as a local "file system". *Remmember* - S3 Buckets are NOT file Systems! 👏 A great use of this tool is being able to use specific EC2 Instances to run Machine Learning training jobs with out the need to copy the data from the S3 bucket to a local disk.
 
