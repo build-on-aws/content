@@ -18,41 +18,26 @@ You can centralize and automate data protection across multiple AWS services usi
 
 AWS Backup currently supports DynamoDB on-demand backups but not point-in-time restores for DynamoDB. AWS Backup enhances DynamoDB on-demand backups by enabling you to schedule and to manage the lifecycle of your backups. You can also monitor and audit backups across AWS services, including DynamoDB.
 
-In this tutorial, we provide step-by-step guidance for protecting your DynamoDB tables using AWS Backup.
-
-## Recommended AWS experience
-
-Intermediate - You are expected to have familiarity with the AWS Console and using it to launch services
-
-## Estimated time to complete
-
-This tutorial should take approximately 30 minutes to complete
+In this tutorial, we provide step-by-step guidance for protecting your DynamoDB tables using AWS Backup. The tutorial should take approximately 30 minutes to complete.
 
 ## Prerequisites
+
+As a prerequisites, you should have familiarity with the AWS Console and using the console to launch AWS services.
 
 * An [AWS account](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). For more information on using AWS Backup for the first time, view the [AWS Backup documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). For AWS Backup pricing, refer to the [AWS Backup pricing page](https://aws.amazon.com/backup/pricing?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup)
 * An Amazon DynamoDB table to protect. For information on how to create the sample table that is used for this tutorial, visit the documentation on [Getting started with Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup).  For DynamoDB pricing, refer to the [DynamoDB pricing page](https://aws.amazon.com/dynamodb/pricing?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). 
 
-### Services used
-
-[AWS Backup](https://aws.amazon.com/backup/)
-Amazon DynamoDB
-
-### Last updated
-
-October 11th 2023
-
-## What you will accomplish
+## What You Will Accomplish
 
 In this tutorial, you will:
 
 * Create an on-demand backup of an Amazon DynamoDB table, for scenarios where you need to create a standalone, unscheduled backup, with AWS Backup.
-* Create a Backup Plan to automate your backups on a schedule.
+* Create a backup plan to automate your backups on a schedule.
 * Define resources to be protected by adding them to an existing backup plan using tags.
 
 ## Implementation
 
-### Step 1: Go to the AWS Backup console 
+### Step 1: Go to the AWS Backup Console 
 
 **1.1 — Sign in**
 
@@ -60,7 +45,7 @@ In this tutorial, you will:
 
 ![put alt text here](images/image01.png)
 
-### Step 2: Configure an on-demand AWS Backup job of an Amazon DynamoDB table 
+### Step 2: Configure an On-Demand AWS Backup Job of an Amazon DynamoDB Table 
 
 **2.1 Configure the services used with AWS Backup**
 
@@ -90,12 +75,12 @@ In this tutorial, you will:
 
 **2.3.1 - Configure on-demand backup job  setting for an Amazon DynamoDB table**
 
-    * On the **Create on-demand backup** page, choose the **Resource type** that you want to back up; Choose **DynamoDB, from the list of supported resources,** to to back up an Amazon DynamoDB table.
+    * On the **Create on-demand backup** page, choose the **Resource type** that you want to back up; Choose **DynamoDB, from the list of supported resources,** to back up an Amazon DynamoDB table.
     * Choose the **Table** **name** of the DynamoDB resource that you want to protect.
     * In the **Backup window** section, select **Create backup now**. This initiates a backup immediately and enables you to see your saved resource sooner on the **Protected resources** page. Choosing **Customize Backup Window** can be used if you would prefer to configure the backup job to start at a later time.
-    * For **Transition to cold storage,** you can define how long your data will remain on primary storage before transitioning to a lower cost storage tier. In this tutorial, enter 7 days.
-    * For **Retention period** select **Days** and enter the number of days you want to retain the backups for. In this tutorial, enter 97 days. Backups can be retained indefinitely in cold storage, with a minimum rentention of 90 days. The total retention period is the sum of  the time that backups are stored in warm and and cold storage. You can learn more about [AWS Backup lifecycle to cold storage](https://docs.aws.amazon.com/aws-backup/latest/devguide/creating-a-backup-plan.html#plan-options-and-configuration?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup) in the AWS Backup documentation.
-    * For **Backup vault**, select one of the existing vaults and continue with step 2.3.3, or follow step 2.3.2 to create a new backup vault (which begins with selecting **Create new Backup vault**). You may see a Default Vault in your account, if you have not removed it previously. You can choose to use the Default vault for this tutorial. In practice, we see customers create new backup vaults so they can group backups storage according to their organizational structure. For example, customers may want to store backups from different business units in different vaults. 
+    * For **Transition to cold storage,** you can define how long your data will remain on primary storage before transitioning to a lower cost storage tier. For this tutorial, enter 7 days.
+    * For **Retention period** select **Days** and enter the number of days you want to retain the backups for. For this tutorial, enter 97 days. Backups can be retained indefinitely in cold storage, with a minimum retention of 90 days. The total retention period is the sum of  the time that backups are stored in warm and and cold storage. You can learn more about [AWS Backup lifecycle to cold storage](https://docs.aws.amazon.com/aws-backup/latest/devguide/creating-a-backup-plan.html#plan-options-and-configuration?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup) in the AWS Backup documentation.
+    * For **Backup vault**, select one of the existing vaults and continue with step 2.3.3, or follow step 2.3.2 to create a new backup vault (which begins with selecting **Create new Backup vault**). You may see a Default Vault in your account, if you have not removed it previously. You can use the Default vault for this tutorial. In practice, we see customers create new backup vaults so they can group backups storage according to their organizational structure. For example, customers may want to store backups from different business units in different vaults. 
 
 ![put alt text here](images/image06.png)
 
@@ -130,11 +115,11 @@ Instead of using the Default vault or another existing vault, you can create a n
 
 ![put alt text here](images/image12.png)
 
-### Step 3: Configure a scheduled AWS Backup job of an Amazon DynamoDB table 
+### Step 3: Configure a Scheduled AWS Backup Job of an Amazon DynamoDB Table 
 
 **3.1 — Configure a backup plan for an Amazon DynamoDB table**
 
-In AWS Backup, a backup plan can be created to schedule and to define how you want to back up supported AWS resources. You can assign resources to backup plans and AWS Backup will automate when those resources are backed up and how their backups are managed, 
+In AWS Backup, a backup plan can be created to schedule and to define how you want to back up supported AWS resources. You can assign resources to backup plans and AWS Backup will automate when those resources are backed up and how their backups are managed. 
 
 * In the [AWS Backup console](https://console.aws.amazon.com/backup), under **My account**, select **Backup plans** in the left navigation pane, and then choose the **Create Backup plan** button.
 
@@ -175,14 +160,14 @@ When you assign a resource to a backup plan, that resource is backed up automati
 
 ![put alt text here](images/image18.png)
 
-* You will be redirected to another window where you can assign resources to you new backup plan. For **Resource assignment name**, enter a name such as *DynamoDB-resources*.
+* You will be redirected to another window where you can assign resources to your new backup plan. For **Resource assignment name**, enter a name such as *DynamoDB-resources*.
 * Choose the **Default role** for the** **** IAM role**, as shown in the screenshot below. If the AWS Backup **Default role** is not present in your account, one will be automatically created for you with the correct permissions.
 
 ![put alt text here](images/image19.png)
 
-* AWS Backup provides two options to for assigning resources to a backup plan. In this tutorial, you will include your DynamoDB table as a specific resource in your new backup plan.
+* AWS Backup provides two options for assigning resources to a backup plan. In this tutorial, you will include your DynamoDB table as a specific resource in your new backup plan.
     * **Include all resource types** - This option will select all resources and it can be further refined with key value pair selection in the step below.
-    * **Include** **specific resource types** - This option will allow you to select the specific resource types, including DynamoDB, you want to back up through this backup rule.
+    * **Include** **specific resource types** - This option will allow you to select the specific resource types, including DynamoDB, you will want to back up with this backup rule.
 * Select **Include specific resource types** and you will be presented with additional options to choose the resource type you want to back up.
 * In the **Select specific resource types** section, use the **Select resource types** drop-down list and select **DynamoDB**.
 * For **Table names**, use the **choose resources** drop-down list and select **Music**.
@@ -194,7 +179,7 @@ When you assign a resource to a backup plan, that resource is backed up automati
 
 ![put alt text here](images/image21.png)
 
-### Step 4: Restore an Amazon DynamoDB table using AWS Backup
+### Step 4: Restore an Amazon DynamoDB Table Using AWS Backup
 
 A backup, or recovery point, represents the content of a resource, such as an Amazon DynamoDB table, at a specified time. *Recovery point* is a term that refers generally to the different backups in AWS services, such as Amazon DynamoDB snapshots. In AWS Backup, recovery points are saved in backup vaults, which you can organize according to your business needs. Each recovery point has a unique ID.
 
@@ -231,7 +216,7 @@ A backup, or recovery point, represents the content of a resource, such as an Am
 
 * Open the restored table and confirm that it is identical to original *Music* table.
 
-### Step 5: Clean up
+### Step 5: Clean-Up
 
 In the following steps, you clean up the resources you created in this tutorial. It is a best practice to delete resources that you are no longer using so that you are not continually charged for them.
 
@@ -239,10 +224,10 @@ In the following steps, you clean up the resources you created in this tutorial.
 
 * 5.1.1 - Open the AWS Backup console. Navigate to the vault where the recovery point is stored.
 * 5.1.2 - Select the recovery point and select **Delete** from the drop-down menu.
-* 5.1.3 - Delete the backup vault if no longer needed
-* 5.1.4 - Navigate to the backup plans page
-* 5.1.5 - Navigate to the details page for any recovery point you no longer need
-* 5.1.6 - Delete the resource assignment for the recovery point and then delete the recovery point
+* 5.1.3 - Delete the backup vault if no longer needed.
+* 5.1.4 - Navigate to the backup plans page.
+* 5.1.5 - Navigate to the details page for any recovery point you no longer need.
+* 5.1.6 - Delete the resource assignment for the recovery point and then delete the recovery point.
 
 **5.2 — Clean up DynamoDB**
 
