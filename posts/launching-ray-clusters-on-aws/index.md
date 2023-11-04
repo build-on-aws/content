@@ -10,7 +10,7 @@ tags:
 spaces:
   - generative-ai
 waves:
-  - dataml
+  - data
   - generative-ai
 authorGithubAlias: naga-gaddamu
 authorName: Naga Gaddamu
@@ -21,33 +21,26 @@ date: 2023-10-24
 ---
 
 
-**<h2>Table of contents:</h2>**
+| ToC |
+|-----|
+|1. [Introduction to Ray](#introduction-to-ray)|
+|2. [Ray and AWS a powerful combination](#ray-and-aws-a-powerful-combination)|
+|3. [AWS Environment SetUp to Launch Ray Cluster](#aws-environment-setup-to-launch-ray-cluster)|
+|4. [Scaling and Distributing Ray workloads on AWS](#scaling-and-distributing-ray-workloads-on-aws)|
 
-- [Introduction to Ray](#item-one)
-- [Ray and AWS a powerful combination](#item-two)
-- [AWS Environment SetUp to Launch Ray Cluster](#item-three)
-- [Scaling and Distributing Ray workloads on AWS](#item-four)
+# Introduction to Ray
 
-<!-- headings -->
-<a id="item-one"></a>
-
-### <h2>Introdution to Ray</h2>
-
-Ray is a general purpose Universal library that allows you to do distributed computing and it offers you an ecosystem of native libraries to scale ML workloads. It can run anywhere, you can run it on a laptop or on public Cloud and on kubernetes or on premises.
+Ray is a general purpose universal library that allows you to do distributed computing and it offers you an ecosystem of native libraries to scale ML workloads. It can run anywhere, you can run it on a laptop or on public Cloud , on Kubernetes or on-premise.
 In simple words Ray provides you with simple Primitives for you to be able to take your python applications that you have and convert them into distributed manner at scale and take away the undifferentiated heavy lifting.
 As a developer you can use Ray to take advantage of the resources available in a distributed environment without having to worry about the underlying infrastructure. Ray removes compute constraints and is fault tolerant.
 
 In this blog we will learn how to get started with Ray on AWS.
 
-<a id="item-two"></a>
-
-### <h2>Ray and AWS a powerful combination</h2>
+# Ray and AWS a powerful combination
 
 AWS is designed to allow application to perform at scale. It does not only support online business as websites but also compute intensive applications consisting of Machine Leaning models. With the growing adoption of ML and GenerativeAI you can use Ray to solve common production challenges for genAI and scale ML. Using Ray you can step away from the heavy lifting of driving the distributed training and focus more on training the models and applications.
 
-<a id="item-three"></a>
-
-### <h2>AWS Environment SetUp to Launch Ray Cluster </h2>
+# AWS Environment SetUp to Launch Ray Cluster
 
 1. AWS Account: You will need an AWS account to create and manage cloud resources.
 2. Python 3.x is installed.
@@ -115,9 +108,7 @@ pip install ray
 
     You'll see the distributed power of Ray in action as it prints out ' Hello, Let’s get started with Ray on AWS!'
 
-<a id="item-four"></a>
-
-### <h2>Scaling and Distributing Ray workloads on AWS</h2>
+# Scaling and Distributing Ray workloads on AWS
 
 One of the significant benefits of Ray is its ability to scale out to multiple nodes. To scale your Ray cluster on AWS:
 
