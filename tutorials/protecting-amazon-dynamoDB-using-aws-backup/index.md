@@ -202,7 +202,8 @@ A backup, or recovery point, represents the content of a resource, such as an Am
 
     * For **Encryption key,** choose the A**mazon DynamoDB-owned key**. You also have the option of choosing a different KMS key for encrypting you restored DynamoDB table.
     * Choose the **Default role** for the** **Restore** role**, as shown in the screenshot below. If the AWS Backup **Default role** is not present in your account, one will be automatically created for you with the correct permissions.
-* Verify all your entries, and choose **Restore backup**.
+    
+    * Verify all your entries, and choose **Restore backup**.
 
 ![put alt text here](images/image25.png)
 
