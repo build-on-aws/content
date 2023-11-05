@@ -5,10 +5,20 @@ tags:
   - sustainability
   - devops
   - best practices
-authorGithubAlias: ranbirsh, ghm
-authorName: Ranbir Singh, Sam Mokhtari
-date: 2023-11-32
+images:
+  banner: images/s-sdlc-phases.jpg
+authorGithubAlias: ranbirsh
+authorName: Ranbir Singh
+additionalAuthors: 
+  - authorGithubAlias: ghm
+    authorName: Sam Mokhtari
+date: 2023-11-05
 ---
+
+| ToC |
+|-----|
+
+
 ## Overview
 
 The ICT (Information and Communication Technology) industry has grown exponentially in recent decades and this growth has some consequences to the environment. This industry uses computers, laptops and other electronic devices like routers, switches, printers etc. which are powered by electricity as the major contributor to greenhouse gas (GHG) emissions. In addition, software development activities may not be directly emitting emissions, but there is  an indirect contribution.  In this blog, we will explore the intersection of sustainability and software development, and look at some of the ways that developers can make a positive impact on the environment.  By taking a thoughtful and intentional approach to sustainability in software development, we can create a more sustainable and equitable world for future generations.
@@ -33,6 +43,9 @@ These are the key tenants and principles that are considered in S-SDLC.
 S-SDLC aims to find ways and define best practices for reducing emission of greenhouse gases resulting from use of energy for powering IT systems and resources. This blog intends to provide information that development teams can consider to ensure that their product/solution is in align with organization’s sustainability goals and also helps them in showcasing their commitment to environmental and social responsibility. S-SDLC helps in making sustainability an continuous focus rather than one-time activity. It also helps in reducing waste and improving utilization of running resources thus making it more cost-efficient to run the workload. <br>
 
 The following sections captures some of the sustainability related best practices corresponding to various phases of SDLC. <br>
+
+
+![S-SDLC Phases](./images/s-sdlc-phases.jpg "Sustainable SDLC Phases")
 
 ### Software Requirements
 **Capture sustainable requirements**: During requirements elicitation phase, the focus is on gathering functional requirements and non-functional requirements.  Non-functional requirements(NFRs) should include sustainability requirements such as increasing efficiency, improving resource utilization, and waste reduction.  Also identify the the environmental regulations and standards that need to be followed during the project. The sustainability requirements must be SMART (Specific, Measurable, Actionable,  Realistic, Time-bound) and we should focus on efficiency without compromising the software quality for the users. Refer to [SUS06-BP01 Adopt methods that can rapidly introduce sustainability improvements](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/sus_sus_dev_a2.html) for more details. <br>
