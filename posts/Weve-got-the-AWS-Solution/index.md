@@ -5,11 +5,10 @@ tags:
  - aws-solutions
  - Solutions
  - reinvent
-authorGithubAlias: 
-authorName: Heather Dorrian
+authorGithubAlias: alejtraws
+authorName: Alex Torres
 additionalAuthors: 
- - authorGithubAlias: alejtraws
-  authorName: Alex Torres
+ - authorName: Heather Dorrian
 date: 2023-11-10
 ---
 
