@@ -49,7 +49,7 @@ AWS is designed to allow application to perform at scale. It does not only suppo
 4. The AWS CLI is installed and credentials are configured to authenticate the IAM user. Check out this how to guide :
 <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html>
 
-# Step 1: Launch an EC2 instance
+### Step 1: Launch an EC2 instance
 
 1. Log in to your AWS Management Console.
 2. Navigate to the EC2 dashboard.
@@ -59,11 +59,11 @@ AWS is designed to allow application to perform at scale. It does not only suppo
 6. Configure instance details, storage, security groups, and add tags if needed.
 7. Review your settings and launch the instance. You'll need an SSH key pair to access the instance securely.
 
-# Step 2: Connect to Your EC2 Instance
+### Step 2: Connect to Your EC2 Instance
 
 Once your EC2 instance is running, connect to it via ‘EC2 instance Connect’
 
-# Step 3: Install Ray
+### Step 3: Install Ray
 
 Now you are logged in the EC2, you can install Ray using pip:
 
@@ -74,7 +74,7 @@ yum install python3-pip
 pip install ray
 ```
 
-## Step 4: Write your first Ray program on EC2
+### Step 4: Write your first Ray program on EC2
 
 1. Make a new directory and create python file raytest
 
