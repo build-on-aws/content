@@ -15,7 +15,7 @@ date: 2023-11-10
 |ToC|
 |---|
 
-Hey there AWS enthusiasts, builders, and tech-savvy folks! Welcome to the ultimate playground of innovation and learning—re:Invent 2023! If you are a builder, or someone looking for purpose built services, ready to deploy software packages, and architecture diagrams you are going to want to check out the AWS Solutions sessions here at re:Invent. 
+Hey there AWS enthusiasts, builders, and tech-savvy folks! Welcome to the ultimate playground of innovation and learning—re:Invent 2023! If you are a builder, or someone looking for purpose built services, ready to deploy software packages, and architecture diagrams you are going to want to check out the AWS Solutions different activities we will have at re:Invent. 
 
 Remember your favorite building block kits as a child? You could customize quickly or scale to whatever model fit your fancy or follow the instructions to get to what you wanted. Well, AWS Solutions is kind of like that. One of the key differences though is our building blocks hurt less when you step on them. AWS Solutions can be utilized as-is, as a starting point that can be customized to your specific requirements, or as a reference to meet your needs. By utilizing pre-defined services, configuration, and architecture that optimizes for cost, availability, scalability and security from the start, projects are accelerated, costs are reduced and common mistakes are eliminated. In short, [AWS Solutions](https://aws.amazon.com/solutions/) helps to simplify cloud adoption, accelerate time to value and helps connect you adopt proven vetted architectures. 
 
