@@ -1,12 +1,15 @@
 ---
 title: "We've got the (AWS) Solution"
-description: ""
+description: "Learn about how to use AWS Solutions to accelerate your cloud development and journey at re:Invent 2023"
 tags:
   - aws-solutions
   - Solutions
   - reinvent
 authorGithubAlias: 
 authorName: Heather Dorrian
+additionalAuthors: 
+  - authorGithubAlias: alejtraws
+    authorName: Alex Torres
 date: 2023-11-10
 ---
 
