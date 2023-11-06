@@ -49,8 +49,8 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 | S02E06 | Llama Recipes | 2023-09-25  | Matthias & Sean | [Show notes](/livestreams/build-on-generative-ai/2023-09-25) |
 | S02E07 | Amazon Bedrock and Bias Mitigation for LLMs | 2023-10-02 | Mark Roy | [Show notes](/livestreams/build-on-generative-ai/2023-10-02) |
 | S02E08 | Translating unstructured Documents to structured data | 2023-10-09 | Arlind Nocaj | [Show notes](/livestreams/build-on-generative-ai/2023-10-09) |
+| S02E09 | Finding alignment in the world of Generative AI | 2023-10-16 | David Bounds | [Show notes](/livestreams/build-on-generative-ai/2023-10-16) |
 | S02E12 | Advanced Text Summarization with Amazon Bedrock | 2023-11-06 | Justin Muller | [Show notes](/livestreams/build-on-generative-ai/2023-11-06) |
-
 ### SEASON 01
 
 | Episode | Name | Date | Guest | Link to Video
