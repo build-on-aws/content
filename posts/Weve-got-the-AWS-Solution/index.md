@@ -2,28 +2,30 @@
 title: "We've got the (AWS) Solution"
 description: "Learn about how to use AWS Solutions to accelerate your cloud development and journey at re:Invent 2023"
 tags:
-  - aws-solutions
-  - Solutions
-  - reinvent
+ - aws-solutions
+ - Solutions
+ - reinvent
 authorGithubAlias: 
 authorName: Heather Dorrian
 additionalAuthors: 
-  - authorGithubAlias: alejtraws
-    authorName: Alex Torres
+ - authorGithubAlias: alejtraws
+  authorName: Alex Torres
 date: 2023-11-10
 ---
 
 |ToC|
 |---|
 
-Hey there AWS enthusiasts, builders, and tech-savvy folks! Welcome to the ultimate playground of innovation and learning—re:Invent 2023! If you are a builder, or someone looking for purpose built services, ready to deploy software packages and architecture diagrams you are going to want to check out the AWS Solutions sessions here at re:Invent. 
+Hey there AWS enthusiasts, builders, and tech-savvy folks! Welcome to the ultimate playground of innovation and learning—re:Invent 2023! If you are a builder, or someone looking for purpose built services, ready to deploy software packages, and architecture diagrams you are going to want to check out the AWS Solutions sessions here at re:Invent. 
 
-Remember your favorite building block kits as a child? You could customize quickly or scale to whatever model fit your fancy or follow the instructions to get to what you wanted. Well, AWS Solutions is kind of like that. One of the key differences though is our building blocks hurt less when you step on them.  AWS Solutions can be utilized as-is, as a starting point that can be customized to your specific requirements, or as a reference to meet your needs. By utilizing pre-defined services, configuration, and architecture that optimizes for cost, availability, scalability and security from the start, projects are accelerated, costs are reduced and common mistakes are eliminated. In short, [AWS Solutions](https://aws.amazon.com/solutions/) helps to simplify cloud adoption, accelerate time to value and helps connect you adopt proven vetted architectures. 
+Remember your favorite building block kits as a child? You could customize quickly or scale to whatever model fit your fancy or follow the instructions to get to what you wanted. Well, AWS Solutions is kind of like that. One of the key differences though is our building blocks hurt less when you step on them. AWS Solutions can be utilized as-is, as a starting point that can be customized to your specific requirements, or as a reference to meet your needs. By utilizing pre-defined services, configuration, and architecture that optimizes for cost, availability, scalability and security from the start, projects are accelerated, costs are reduced and common mistakes are eliminated. In short, [AWS Solutions](https://aws.amazon.com/solutions/) helps to simplify cloud adoption, accelerate time to value and helps connect you adopt proven vetted architectures. 
 
-Best of all, we have over 1,200+ [AWS Solutions](https://aws.amazon.com/solutions/#:~:text=Browse%20All%20Solutions) that range across industries for you to really help scale your specific business or cloud adoption needs. By employing these AWS Solutions, you can dodge the usual project pitfalls, save costs, and fast-track your digital dreams. With over 1,000 sessions including keynotes and innovation talks, you might want some help focusing on what you should prioritize. Let us help!
+Best of all, we have over 1,200+ [AWS Solutions](https://aws.amazon.com/solutions/#:~:text=Browse%20All%20Solutions) across a wide range of industry and technology use cases to really help scale your specific business or cloud adoption needs.
+
+By employing these AWS Solutions, you can dodge the usual project pitfalls, save costs, and fast-track your digital dreams. With over 1,000 sessions including keynotes and innovation talks, you might want some help focusing on what you should prioritize. Let us help!
 
 ## Everyone is talking about Generative AI
-With an extravaganza of sessions, keynotes, and innovation talks, get ready to be dazzled and inspired by AWS Solutions at re:Invent.  Let’s look at a couple, shall we? Generative AI is at the forefront of helping to not only customize your customers experiences but rapidly improve productivity. It seems that everyone is talking about Generative AI and we have plenty of AWS Solutions to discuss here! These following AWS Solutions are not just whispered about in hushed tones; they will be the talk of the town at the AWS Village and Expo Hall. 
+With an extravaganza of sessions, keynotes, and innovation talks, get ready to be dazzled and inspired by AWS Solutions at re:Invent. Let’s look at a couple, shall we? Generative AI is at the forefront of helping to not only customize your customers experiences but rapidly improve productivity. It seems that everyone is talking about Generative AI and we have plenty of AWS Solutions to discuss here! These following AWS Solutions are not just whispered about in hushed tones; they will be the talk of the town at the AWS Village and Expo Hall. 
 
 So, if GenAI is your jam, then make sure to also explore our QnAbot Session. [QnABot on AWS](https://aws.amazon.com/solutions/implementations/qnabot-on-aws/) is a multi-channel, multi-language conversational interface (chatbot) that responds to your customer’s questions, answers, and feedback. It allows you to deploy a fully functional chatbot across multiple channels including chat, voice, SMS, and Amazon Alexa. In the HLC401session, you will learn how to integrate QnAbot with Amazon Connect to build a smart contact center to better serve patients.
 
@@ -33,7 +35,7 @@ Then, there is [GenAI application builder on AWS](https://aws.amazon.com/solutio
 * **[HLC401](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC401)** | Transforming digital health with a generative AI conversational QnABot.
 
 ## Sessions you won’t want to miss! 
-A lot of our AWS Solutions help to customize experiences for your customers. And, if you’re looking to bring your customer experiences to new heights, soar on over to our lightning talk featuring Brian Kirkland CTO of Choice Hotels. In this session, he will explore the Unified Profiles for Travelers and Guest AWS Solution.  This solution offers a single data source for marketing, sales, operations, and customer experience leaders, providing the data they need to create a central view of the customer. 
+A lot of our AWS Solutions help to customize experiences for your customers. And, if you’re looking to bring your customer experiences to new heights, soar on over to our lightning talk featuring Brian Kirkland CTO of Choice Hotels. In this session, he will explore the Unified Profiles for Travelers and Guest AWS Solution. This solution offers a single data source for marketing, sales, operations, and customer experience leaders, providing the data they need to create a central view of the customer. 
 
 * **AWS On Air** | United Profiles for Travelers and Guest
 
