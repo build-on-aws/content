@@ -15,7 +15,7 @@ waves:
 authorGithubAlias: naga-gaddamu
 authorName: Naga Gaddamu
 additionalAuthors: 
-  - authorGithubAlias: 
+  - authorGithubAlias: na
     authorName: Ruchi Mishra
 date: 2023-10-24
 ---
