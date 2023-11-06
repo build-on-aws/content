@@ -111,3 +111,6 @@ Depending on which AWS services you’re using in your architectures, you may wa
 ## In conclusion
 
 Stop by the resilience kiosk, gets hands-on with a workshop, and then ask questions at a chalk talk! You really can’t go wrong with any of the sessions at re:Invent, but we hope this guide helps you to make the best use of your time in your journey to build resilient applications on AWS.
+
+## Also see
+The [reliability engineering attendee guide](https://reinvent.awsevents.com/learn/attendee-guides/reliability-engineering/) by [Sathyajith Bhat](https://aws.amazon.com/developer/community/heroes/sathyajith-bhat)
