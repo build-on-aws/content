@@ -13,7 +13,7 @@ A feature of AWS Lightsail is fixed monthly pricing. You can estimate the cost a
 
 ## Estimating Deployment Costs
 
-To use the Pricing Calculator search and add the services you need for the deployment. For each service, configure the expected usage. For example, if a deployment regularly sends outbound data, estimate the volume of data sent to calculate the cost. Similarly, compute resources, such as scaling EC2 instances horizontally, requires specifying the instance type and the number of instances. Once you have added all the service you need for a deployment, the Pricing Calculator provides a monthly cost and an annual cost for the deployment. The estimate can be exported as CSV file, as JSON, or as a PDF which is convenient for importing into a spreadsheet or for a report. 
+To use the Pricing Calculator, search and add the services you need for the deployment. For each service, configure the expected usage. For example, if a deployment regularly sends outbound data, estimate the volume of data sent to calculate the cost. Similarly, compute resources, such as scaling EC2 instances horizontally, requires specifying the instance type and the number of instances. Once you have added all the service you need for a deployment, the Pricing Calculator provides a monthly cost and an annual cost for the deployment. The estimate can be exported as CSV file, as JSON, or as a PDF which is convenient for importing into a spreadsheet or for a report. 
 
 Learn how to use the Pricing Calculator with this short video. 
 
@@ -23,15 +23,15 @@ https://www.youtube.com/watch?v=n8BQ83lG8lQ&t=95s
 
 The Pricing Calculator produces estimates and the final cost can vary depending upon configration choices and usage. The important things to remember are:
 
-- You can purchase compute based on [On-Demand pricing](https://aws.amazon.com/ec2/pricing/on-demand/), a [1 or 3 year Reserved instance](https://aws.amazon.com/ec2/pricing/reserved-instances/pricing/), or [Savings Plans](https://aws.amazon.com/savingsplans/). Choosing a plan based on usage can save up to 72% of operating costs.
+- You can purchase compute based on [On-Demand pricing](https://aws.amazon.com/ec2/pricing/on-demand/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail), a [1 or 3 year Reserved instance](https://aws.amazon.com/ec2/pricing/reserved-instances/pricing/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail), or [Savings Plans](https://aws.amazon.com/savingsplans/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail). Choosing a plan based on usage can save up to 72% of operating costs.
 -  Costs vary by geographic Regions, the estimated cost in one Region may be more or less in another. In addition, estimates do not include taxes, which may also vary by location.
-- The Pricing Calculator produces estimates that maybe higher than the final cost. Free tier pricing, promotional credits, or other discounts are not used to estimate costs. 
+- The Pricing Calculator produces estimates that maybe higher than the realized cost. Free tier pricing, promotional credits, or other discounts are not used to estimate costs. 
 
-Read about [Pricing Calculator assumptions](https://aws.amazon.com/calculator/calculator-assumptions/) to understand how it arrives at an estimate.
+Read about [Pricing Calculator assumptions](https://aws.amazon.com/calculator/calculator-assumptions/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail) to understand how it arrives at an estimate.
 
 ## Comparing Lightsail to AWS Individual Services
 
-Lightsail provides [three pricing examples](https://aws.amazon.com/lightsail/pricing/). Let’s compare the Lightsail bundled deployments to deployments using individual AWS services. Here are the assumptions used in these estimates:
+Lightsail provides [three pricing examples](https://aws.amazon.com/lightsail/pricing/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail). Let’s compare the Lightsail bundled deployments to deployments using individual AWS services. Here are the assumptions used in these estimates:
 
 - US East is the region used in these estimates
 - Compute resources are based on shared tenancy and use the Savings Plan where applicable
@@ -51,7 +51,7 @@ Lightsail provides [three pricing examples](https://aws.amazon.com/lightsail/pri
 
 **EC2 Deployment**
 
-Website is hosted on Linux t3.micro instances with a weekly peak CPU usage of 60 minutes. Outbound data transfer to the internet is 50 GB per month. The instance uses on the EC2 instance 1-year Savings Plan. The deployment uses a standard S3 5 GB bucket. AWS CloudFront is the CDN.
+Website is hosted on Linux t3.micro instances with a weekly peak CPU usage of 60 minutes. Outbound data transfer to the Internet is 50 GB per month. The instance uses the EC2 instance 1-year Savings Plan. The deployment uses a standard S3 5 GB bucket. AWS CloudFront is the CDN.
 
 **EC2 Charges**
 
@@ -61,7 +61,7 @@ Website is hosted on Linux t3.micro instances with a weekly peak CPU usage of 60
  
 Total charges: $13.67 for a WordPress site with global delivery
 
-The example uses a discounted price for the CDN, which is $2.50 USD / month after the first year. No discounts were applied to the EC2 deployment which could lower the cost.
+The Lightsail example uses a discounted price for the CDN, which is $2.50 USD / month after the first year. No discounts were applied to the EC2 deployment which could lower the cost.
 
 ### Example 2
 
@@ -77,7 +77,7 @@ The example uses a discounted price for the CDN, which is $2.50 USD / month afte
 
 **AWS Fargate Deployment**
 
-[Fargate](https://docs.aws.amazon.com/AmazonECS/latest/userguide/what-is-fargate.html) is a service that runs on [AWS Elastic Container Service (ECS)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) that can run containers without having to manage a cluster. The container is running Linyx on a x86 CPU. There is only a sinlge pod or container that runs on an average duration of one day. A  on-demand MySQL RDS running on a db.t2.micro instance with 40 GB of storage is the database. The deploy includes a single application load balancer.
+[Fargate](https://docs.aws.amazon.com/AmazonECS/latest/userguide/what-is-fargate.html?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail) is a service that runs on [AWS Elastic Container Service (ECS)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail). Like Lightsail, Fargate can run containers without having to manage a cluster. The container is running Linyx on a x86 CPU. There is only a single container that runs on an average duration of one day. The database is an on-demand MySQL RDS running on a db.t2.micro instance with 40 GB of storage. The deployment includes a single application load balancer (ALB).
 
 **Fargate charges:**
 
@@ -103,7 +103,7 @@ Based on the assumptions, the monthly estimated cost for a Fargate deployment is
 
 **EC2 Deployment**
 
-A similar deployment uses [c6g.xlarge EC2 instance](https://aws.amazon.com/ec2/instance-types/c6g/) which is optimized for machine learning task. Included with the instance is 32 GB of block storage and 512 GB of outbound data transfer. Pricing is based on On-Demand utilization for 20 hours/month.
+A similar deployment uses a [c6g.xlarge EC2 instance](https://aws.amazon.com/ec2/instance-types/c6g/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail) which is optimized for compute intensive tasks such as machine learning. Included with the instance is 32 GB of block storage and 512 GB of outbound data transfer. Pricing is based on On-Demand utilization for 20 hours/month.
 
 Total EC2 charges: $49.57 USD / month
 
@@ -111,4 +111,4 @@ Even though most of the options are included with a c6g.xlarge instance, the cos
 
 ## Summary
 
-Depending on the use case, cost of a building a deployment from a combination of AWS services can be roughly the same as with a Lightsail deployment. It’s important to note that website and R Studio examples include pre-installed software and environments. The time and effort to instal software and configure environments is not included in the cost of  compute built from AWS services. With AWS compute and associated services cost are driven by a number of factors, and usage is a major contributor along with the chosen pricing plan. In contrast, Lightsail deployments provide fixed monthly costs that keep operational budgets stable. However, as deployments scale, volume discounts along with the appropriate pricing plan could provide more cost savings. The AWS Pricing Calculator can help decide which path to take.
+Depending on the use case, the cost of a building a deployment from a combination of AWS services can be roughly the same as with a Lightsail deployment. It’s important to note that website and R Studio examples include pre-installed software and environments. The time and effort to instal software and configure environments are not included in the cost of the deployments built from individual AWS services. With AWS compute and associated services, cost is driven by a number of factors. Usage is a major contributor, along with the chosen pricing plan, to the estimated cost. In contrast, Lightsail deployments provide fixed monthly costs that keep operational budgets stable. However, as deployments scale, volume discounts along with the appropriate pricing plan could provide more cost savings. The AWS Pricing Calculator can help decide which path to take.
