@@ -21,12 +21,13 @@ date: 2023-10-24
 ---
 
 
-| ToC |
-|-----|
-|1. [Introduction to Ray](#introduction-to-ray)|
-|2. [Ray and AWS a powerful combination](#ray-and-aws-a-powerful-combination)|
-|3. [AWS Environment SetUp to Launch Ray Cluster](#aws-environment-setup-to-launch-ray-cluster)|
-|4. [Scaling and Distributing Ray workloads on AWS](#scaling-and-distributing-ray-workloads-on-aws)|
+|ToC|
+|---|
+# Table of Contents
+1. [Introduction to Ray](#introduction-to-ray)
+2. [Ray and AWS a powerful combination](#ray-and-aws-a-powerful-combination)
+3. [AWS Environment SetUp to Launch Ray Cluster](#aws-environment-setup-to-launch-ray-cluster)
+4. [Scaling and Distributing Ray workloads on AWS](#scaling-and-distributing-ray-workloads-on-aws)
 
 # Introduction to Ray
 
