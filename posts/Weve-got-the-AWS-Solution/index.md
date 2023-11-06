@@ -1,215 +1,65 @@
 ---
-title: "I Built an AWS Well-Architected Chatbot with ChatGPT. Here's How I Approached It"
-description: "Tips and guidance for building a ChatGPT chatbot."
+title: "We've got the (AWS) Solution"
+description: ""
 tags:
-  - chatgpt
-  - gpt-3
-  - python
-  - well-arch-framework
-  - streamlit
-  - chatbots
-authorGithubAlias: aws-banjo
-authorName: Banjo Obayomi
-date: 2023-04-10
+  - aws-solutions
+  - Solutions
+  - reinvent
+authorGithubAlias: 
+authorName: Heather Dorrian
+date: 2023-11-10
 ---
 
 |ToC|
 |---|
 
-The [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=well-arch-chatbot) is a set of best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. However, finding the right answers to questions related to the framework can be time-consuming and challenging. So I decided to build a chatbot to answer questions related to the framework and provide developers with quick and accurate responses - all with links to supporting documents. In this article, I'll share tips and guidance on building a ChatGPT powered AWS Well-Architected chatbot.
+Hey there AWS enthusiasts, builders, and tech-savvy folks! Welcome to the ultimate playground of innovation and learning—re:Invent 2023! If you are a builder, or someone looking for purpose built services, ready to deploy software packages and architecture diagrams you are going to want to check out the AWS Solutions sessions here at re:Invent. 
 
-![AWS Well-Architected Chatbot](images/well_arch_chatbot.png)
+Remember your favorite building block kits as a child? You could customize quickly or scale to whatever model fit your fancy or follow the instructions to get to what you wanted. Well, AWS Solutions is kind of like that. One of the key differences though is our building blocks hurt less when you step on them.  AWS Solutions can be utilized as-is, as a starting point that can be customized to your specific requirements, or as a reference to meet your needs. By utilizing pre-defined services, configuration, and architecture that optimizes for cost, availability, scalability and security from the start, projects are accelerated, costs are reduced and common mistakes are eliminated. In short, [AWS Solutions](https://aws.amazon.com/solutions/) helps to simplify cloud adoption, accelerate time to value and helps connect you adopt proven vetted architectures. 
 
-To accomplish this, I'll walk you through the following:
+Best of all, we have over 1,200+ [AWS Solutions](https://aws.amazon.com/solutions/#:~:text=Browse%20All%20Solutions) that range across industries for you to really help scale your specific business or cloud adoption needs. By employing these AWS Solutions, you can dodge the usual project pitfalls, save costs, and fast-track your digital dreams. With over 1,000 sessions including keynotes and innovation talks, you might want some help focusing on what you should prioritize. Let us help!
 
-* Data Collection
-* Creating Text Embeddings
-* Prompt Engineering
-* Creating the Chat Interface
+## Everyone is talking about Generative AI
+With an extravaganza of sessions, keynotes, and innovation talks, get ready to be dazzled and inspired by AWS Solutions at re:Invent.  Let’s look at a couple, shall we? Generative AI is at the forefront of helping to not only customize your customers experiences but rapidly improve productivity. It seems that everyone is talking about Generative AI and we have plenty of AWS Solutions to discuss here! These following AWS Solutions are not just whispered about in hushed tones; they will be the talk of the town at the AWS Village and Expo Hall. 
 
-You can try my chatbot [here](https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/).
+So, if GenAI is your jam, then make sure to also explore our QnAbot Session. [QnABot on AWS](https://aws.amazon.com/solutions/implementations/qnabot-on-aws/) is a multi-channel, multi-language conversational interface (chatbot) that responds to your customer’s questions, answers, and feedback. It allows you to deploy a fully functional chatbot across multiple channels including chat, voice, SMS, and Amazon Alexa. In the HLC401session, you will learn how to integrate QnAbot with Amazon Connect to build a smart contact center to better serve patients.
 
-And check out the GitHub repo with the code [here](https://github.com/banjtheman/aws_well_arch_chatbot).
+Then, there is [GenAI application builder on AWS](https://aws.amazon.com/solutions/implementations/generative-ai-application-builder-on-aws/). From startups to enterprises, organizations trust AWS to innovate with generative artificial intelligence (AI). With enterprise-grade security and privacy, access to industry-leading foundation models, and generative AI-powered applications, AWS makes it easy to build and scale generative AI, built for your data, your use cases and your customers. If this interests you make sure to check out the [ARC318](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC318) session. It will be running 3 times, so you will have plenty of chances to catch this popular session! This workshop is built for the solution to be deployed and used by the participants of the hands-on sessions. So, get ready to roll up your sleeves! 
 
-## Data Collection
+* **[ARC318](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC318)** | Speed deployment of generative AI applications using AWS solutions.
+* **[HLC401](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC401)** | Transforming digital health with a generative AI conversational QnABot.
 
-I started by using `Selenium` and `BeautifulSoup` to methodically scrape content from the entire [Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=well-arch-chatbot) page. To ensure comprehensive data extraction, I meticulously examined every section on the main page, as well as followed and scraped all associated links found in the sidebar. As a result, I captured the complete content and compiled it into a CSV file, along with the corresponding titles and URLs for easy reference and citation.
+## Sessions you won’t want to miss! 
+A lot of our AWS Solutions help to customize experiences for your customers. And, if you’re looking to bring your customer experiences to new heights, soar on over to our lightning talk featuring Brian Kirkland CTO of Choice Hotels. In this session, he will explore the Unified Profiles for Travelers and Guest AWS Solution.  This solution offers a single data source for marketing, sales, operations, and customer experience leaders, providing the data they need to create a central view of the customer. 
 
-Here is some of the code used to gather data for each page.
+* **AWS On Air** | United Profiles for Travelers and Guest
 
-```python
-def get_page_info(url):
-    browser.get(url)
-    html = browser.page_source
-    # Have soup parse the website
-    soup = BeautifulSoup(html, "html.parser")
+The next session, helps to highlight the AWS Solutions Library. The “Instance Scheduler on AWS, AWS Streaming Data Solution for Amazon Kinesis Automated Security Response on AWS, Automated Data Analytics (ADA) on AWS workshop” demonstrates how your organization can respond to security events, save money, and derive insights faster and with less effort by deploying up to four AWS Solutions. 
 
-    # Get title
-    title = soup.find("title").string
+* **[ARC203](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC203)** | Solve everyday challenges faster with AWS Solutions Library
 
-    main_article = soup.find(id="main-col-body")  # main text of article
-    # Get text sections
-    text_sections = main_article.findAll("p")
-    text_list = []
+# Are you new here?
+If you’re a newbie in the AWS universe, worry not. We’ve got special Solutions tailored just for you under the [New to AWS](https://aws.amazon.com/solutions/new-to-aws/) section. Looking to bolster your architecture game? Drop by our Architecture kiosk, where the Solutions team is geared up to rock your world with Cloud Foundations magic. We also have kiosk if you are New to AWS or want to know more about AWS Analytics. Here you will learn some of the key AWS solutions for different use cases in these areas and more. Make sure to bring your questions! 
 
-    for list_item in text_sections:
-        text_list.append(list_item.text)
+Depending on which AWS services you’re using in your architectures, you may want to check out one or more of these sessions, each focused on how to use specific AWS Guidance’s in different applications:
 
-    # Get info in tables
-    tables = main_article.findAll("table")
+* **[HLC303](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC303)** | Build complete multimodal analyses for health data 
+* **[HLC305](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC305)** | Building a precision medicine platform using AWS HealthOmics
+* **[LFS401](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=LFS401)**  | Building protein language models for life science generative AI
+* **[ROB303](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ROB303)** | Connecting your robots to the cloud for remote fleet management
+* **[IOT306](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT306)**  | Designing an AWS IoT Greengrass component with generative AI
+* **[CMP329](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=CMP329)** | PyTorch best practices for generative AI & LLM inference architectures
+* **[GAM302](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=GAM302)** | Build scalable cross-platform game backends on AWS 
+* **[CMP318](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=CMP318)** | Build a spatial data lake with Visual Asset Management System
+* **[BLC202](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=BLC202)**  Working with public blockchain data at scale 
+* **[IOT204](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT204)** | Innovate and modernize connected vehicle platforms with AWS IoT
+* **[IOT308](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT308)** | Optimize logistics tracking with AWS IoT and Amazon Location Service
+* **[ARC324](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC324)**  | Demystifying a multi-account strategy
+* **[ADM301](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ADM301)**  | Generative AI use cases for advertising and marketing
 
-    for table in tables:
-        # Add all ths and tds
-        tds = table.findAll("td")
-        ths = table.findAll("th")
+Finally, imagine mingling with the AWS Solutions team at the [Gamer Lounge](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=act155)—yes, you read that's right! Get ready to have a chat with the Solutions experts themselves. And hey, for those craving some resilience insights, we’ve got just the thing for you.
 
-        for th in ths:
-            text_list.append(th.text)
+* **[GBL213-JA](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=GBL213-JA)** | Accelerate your project by using AWS Solutions in **Japanese**!!
 
-        for td in tds:
-            text_list.append(td.text)
-
-    json_obj = {}
-    json_obj["url"] = url
-    json_obj["title"] = title
-    json_obj["sections"] = text_list
-
-    return json_obj
-```
-
-### Data Cleaning
-
-Data cleaning is a vital step in preparing scraped data for analysis, ensuring that the resulting insights are accurate, relevant, and meaningful. In this project, I focused on three primary data cleaning techniques:
-
-**Text Normalization**: To ensure consistency, I performed text normalization by converting all text to lowercase and removing any extra spaces or special characters. This step facilitated better analysis and processing by the model.
-
-**Token Limitation**: Since the model I used has a token limit of 5,000, I divided sections exceeding this limit into smaller chunks. This enabled the model to process the information effectively without losing any essential data.
-
-**Filtering Out Short Texts**: I also filtered out any text with less than 13 tokens, as these often comprised service names, like "Amazon S3," without any contextual information. By removing these short, context-less snippets, I ensured that the data fed into the model was both relevant and meaningful.
-
-These data cleaning steps helped to refine the raw data and enhance the model's overall performance, ultimately leading to more accurate and useful insights.
-
-![Token histogram of passages](images/token_hist.png)
-
-## Creating Text Embeddings
-
-Next, I created text embeddings for each of the pages using
-OpenAI's [embeddings API](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings).
-
-Text embeddings measure the relatedness of text strings. Embeddings are commonly used for:
-
-* Search (where results are ranked by relevance to a query string)
-* Clustering (where text strings are grouped by similarity)
-* Recommendations (where items with related text strings are recommended)
-* Anomaly detection (where outliers with little relatedness are identified)
-* Diversity measurement (where similarity distributions are analyzed)
-* Classification (where text strings are classified by their most similar label)
-
-An embedding is a vector (list) of floating-point numbers. The distance between two vectors measures their relatedness. Small distances suggest high relatedness and large distances suggest low relatedness.
-
-This [OpenAI Notebook](https://github.com/openai/openai-cookbook/blob/main/examples/Question_answering_using_embeddings.ipynb) provides a full end-to-end example of creating text embeddings.
-
-Here is an example of how the text looks as an embedding, a list of 1536 numbers that represent the text.
-
-![Example Text Embeddings](images/token_emb.png)
-
-With text embeddings we can now do a Search of all the text based on an input query. By asking `How do I design VPC architectures with security components?` we get a list of the documents that has text which is relevant to the query.
-
-![Document Serach](images/vector_list.png)
-
-## Prompt Engineering
-
-Prompt engineering is about designing prompts that elicit the most relevant and desired response from a Large Language Model (LLM) such as GPT-3.
-
-Crafting these [prompts is an art](https://platform.openai.com/docs/guides/completion/prompt-design) that many are still figuring out, but a rule of thumb is the more detailed the prompt, the better the desired outcome.
-
-OpenAI recently just released their [ChatGPT API](https://openai.com/blog/introducing-chatgpt-and-whisper-apis), which is 10x cheaper than their previous text generation API.
-
-To use the API, you have to create a prompt that leverages a "system" persona, and then take input from the user.
-
-Here is what I used for the system prompt:
-
-**"You are an AWS Certified Solutions Architect. Your role is to help customers understand best practices on building on AWS. Return your response in markdown, so you can bold and highlight important steps for customers.",**
-
-Then I added one more system prompt to use the context from the text embeddings search:
-
-**"Use the following context from the AWS Well-Architected Framework to answer the user's query.\nContext:\n{context}"**
-
-Afterwards, the user prompt is the query, such as "How can I design resilient workloads?".
-
-Here is a code snippet of using the ChatGPT API endpoint:
-
-```python
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are an AWS Certified Solutions Architect. Your role is to help customers understand best practices on building on AWS. Return your response in markdown, so you can bold and highlight important steps for customers.",
-            },
-            {
-                "role": "system",
-                "content": f"Use the following context from the AWS Well-Architected Framework to answer the user's query.\nContext:\n{context}",
-            },
-            {"role": "user", "content": f"{query}"},
-        ],
-    )
-
-```
-
-## Creating the Chat Interface
-
-I developed the chat interface using my go-to tool for building web applications with Python, [Streamlit](https://streamlit.io/). Streamlit allows builders to easily create interactive web apps that provide instant feedback on user responses.
-
-This code creates a simple interface with a text input for the user to enter their query, and a "Send" button to submit it. When the user clicks the "Send" button, the `get_answer_from_chatgpt()` function is called to get a response from the ChatGPT and the referenced documents.
-
-```python
-def app() -> None:
-    """
-    Purpose:
-        Controls the app flow
-    Args:
-        N/A
-    Returns:
-        N/A
-    """
-
-    # Spin up the sidebar
-    sidebar()
-    # Load questions
-    query = st.text_input("Query:")
-
-    df = load_data_frame("min_aws_wa.csv")
-    document_embeddings = load_embeddings("document_embeddings.pkl")
-
-    if st.button("Submit Query"):
-        with st.spinner("Generating..."):
-            answer, docs = utils.get_answer_from_chatgpt(
-                query,
-                df,
-                document_embeddings,
-            )
-
-            st.markdown(answer)
-
-            st.subheader("Resources")
-            for doc in docs:
-                st.write(doc)
-
-```
-
-The dataframe contains the text data, along with links to the corresponding ground truth information indicating how the chatbot responded. This allows for easy validation and verification of the chatbot's accuracy and can aid in identifying areas for improvement.
-
-For more details on how to deploy and create Streamlit apps, checkout the [GitHub repo](https://github.com/banjtheman/aws_well_arch_chatbot).
-
-## Conclusion
-
-In this post, I walked through the process of building an AWS Well-Architected chatbot using the OpenAI GPT model and Streamlit. We started by collecting data from the AWS Well-Architected Framework using Python, and then used the OpenAI API to generate responses to user input.
-
-You can check out the chatbot [here](https://banjtheman-aws-well-arch-chatbot-aws-well-arch-st-d985uz.streamlit.app/).
-
-If you're interested in building your own ChatGPT powered applications, I hope this post has provided you with some helpful tips and guidance.
-
-## About the Author
-
-Banjo is a Senior Developer Advocate at AWS, where he helps builders get excited about using AWS. Banjo is passionate about operationalizing data and has started a podcast, a meetup, and open-source projects around utilizing data. When not building the next big thing, Banjo likes to relax by playing video games, especially JRPGs, and exploring events happening around him.
+## 🎊🎊 It is re:Invent after all! Of course we have a happy hour!
+Join us!! [Register here](https://solutionsonawshappyhour.splashthat.com/) before it fills up for some refreshing drinks, delicious bites, and the chance to network like a pro. It’s the perfect example of the fun we have in store for you at re:Invent.
