@@ -44,7 +44,7 @@ The next session, helps to highlight the AWS Solutions Library. The “Instance 
 # Are you new here?
 If you’re a newbie in the AWS universe, worry not. We’ve got special Solutions tailored just for you under the [New to AWS](https://aws.amazon.com/solutions/new-to-aws/) section. Looking to bolster your architecture game? Drop by our Architecture kiosk, where the Solutions team is geared up to rock your world with Cloud Foundations magic. We also have kiosk if you are New to AWS or want to know more about AWS Analytics. Here you will learn some of the key AWS solutions for different use cases in these areas and more. Make sure to bring your questions! 
 
-Depending on which AWS services you’re using in your architectures, you may want to check out one or more of these sessions, each focused on how to use specific AWS Guidance’s in different applications:
+So you don't have to, I have gone through the re:Invent catalog myself, and here are all the sessions where we will be covering some of the guidance you can find in the Library! You may want to check out one or more of these sessions, each focused on how to use specific AWS Guidance’s in different applications:
 
 * **[HLC303](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC303)** | Build complete multimodal analyses for health data 
 * **[HLC305](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC305)** | Building a precision medicine platform using AWS HealthOmics
