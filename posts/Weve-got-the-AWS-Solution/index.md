@@ -54,7 +54,7 @@ So you don't have to, I have gone through the re:Invent catalog myself, and here
 * **[CMP329](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=CMP329)** | PyTorch best practices for generative AI & LLM inference architectures
 * **[GAM302](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=GAM302)** | Build scalable cross-platform game backends on AWS 
 * **[CMP318](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=CMP318)** | Build a spatial data lake with Visual Asset Management System
-* **[BLC202](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=BLC202)** |Working with public blockchain data at scale 
+* **[BLC202](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=BLC202)** | Working with public blockchain data at scale 
 * **[IOT204](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT204)** | Innovate and modernize connected vehicle platforms with AWS IoT
 * **[IOT308](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT308)** | Optimize logistics tracking with AWS IoT and Amazon Location Service
 * **[ARC324](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC324)** | Demystifying a multi-account strategy
