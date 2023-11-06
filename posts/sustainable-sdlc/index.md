@@ -1,6 +1,6 @@
 ---
 title: "Sustainable Software Development Life Cycle (S-SDLC)"
-description: Sustainability is no more a nice to have requirement but must have. Everyone needs to be aware of what sustainability is about and how their work impacts sustainability. There is general misconception that IT doesn't impact environment. This blog is aimed at Developer and Operations teams to provide them best practices that they should consider in their projects to ensure that their project is not contributing negatively to environment. 
+description: Sustainability is now a necessity, not just a nice addition. Developers and operations teams should implement best practices that ensure their projects positively impact the environment. 
 tags:
   - sustainability
   - devops
