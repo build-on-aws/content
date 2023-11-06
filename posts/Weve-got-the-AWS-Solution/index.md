@@ -48,17 +48,17 @@ So you don't have to, I have gone through the re:Invent catalog myself, and here
 
 * **[HLC303](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC303)** | Build complete multimodal analyses for health data 
 * **[HLC305](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC305)** | Building a precision medicine platform using AWS HealthOmics
-* **[LFS401](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=LFS401)**  | Building protein language models for life science generative AI
+* **[LFS401](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=LFS401)** | Building protein language models for life science generative AI
 * **[ROB303](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ROB303)** | Connecting your robots to the cloud for remote fleet management
-* **[IOT306](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT306)**  | Designing an AWS IoT Greengrass component with generative AI
+* **[IOT306](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT306)** | Designing an AWS IoT Greengrass component with generative AI
 * **[CMP329](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=CMP329)** | PyTorch best practices for generative AI & LLM inference architectures
 * **[GAM302](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=GAM302)** | Build scalable cross-platform game backends on AWS 
 * **[CMP318](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=CMP318)** | Build a spatial data lake with Visual Asset Management System
-* **[BLC202](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=BLC202)**  Working with public blockchain data at scale 
+* **[BLC202](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=BLC202)** |Working with public blockchain data at scale 
 * **[IOT204](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT204)** | Innovate and modernize connected vehicle platforms with AWS IoT
 * **[IOT308](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT308)** | Optimize logistics tracking with AWS IoT and Amazon Location Service
-* **[ARC324](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC324)**  | Demystifying a multi-account strategy
-* **[ADM301](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ADM301)**  | Generative AI use cases for advertising and marketing
+* **[ARC324](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC324)** | Demystifying a multi-account strategy
+* **[ADM301](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ADM301)** | Generative AI use cases for advertising and marketing
 
 Finally, imagine mingling with the AWS Solutions team at the [Gamer Lounge](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=act155)—yes, you read that's right! Get ready to have a chat with the Solutions experts themselves. And hey, for those craving some resilience insights, we’ve got just the thing for you.
 
