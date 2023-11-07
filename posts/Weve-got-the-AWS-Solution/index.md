@@ -45,7 +45,7 @@ A lot of our AWS Solutions help to customize experiences for your customers. And
 The next session, introduces you to the many benefits of the [AWS Solutions Library](https://aws.amazon.com/solutions/). The “Instance Scheduler on AWS, AWS Streaming Data Solution for Amazon Kinesis Automated Security Response on AWS, Automated Data Analytics (ADA) on AWS workshop” demonstrates how your organization can respond to security events, save money, and derive insights faster and with less effort by deploying up to four AWS Solutions. You'll find similar information on the value of tackling your projects using AWS Solutions in Lightning Talk [GBL213](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=gbl213), which is delivered in Japanese.
 ​
 * **[ARC203](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC203)** | Solve everyday challenges faster with AWS Solutions Library
-* **​[GBL213](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=gbl213)** | Accelerate your project by using AWS Solutions [Japanese]
+* **[GBL213-JA](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=GBL213-JA)** | Accelerate your project by using AWS Solutions in **Japanese**!!
 
 ## Are you new here?
 If you’re a newbie in the AWS universe, worry not. We’ve got special Solutions tailored just for you in the [New to AWS](https://aws.amazon.com/solutions/new-to-aws/) section of the AWS Solutions Library, which you'll also find across re:Invent. Looking to bolster your architecture game? Drop by our Architecture kiosk, where the Solutions team is geared up to rock your world with architectural magic. You'll also find AWS Solutions being shared at the AWS Analytics and Resilience kiosks, and many more. Here you will learn some of the key AWS solutions for different use cases in these areas and more. Make sure to bring your questions! 
@@ -64,12 +64,10 @@ So that you don't have to, we have gone through the re:Invent catalog ourselves,
 * **[IOT204](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT204)** | Innovate and modernize connected vehicle platforms with AWS IoT
 * **[IOT308](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=IOT308)** | Optimize logistics tracking with AWS IoT and Amazon Location Service
 * **[ARC324](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC324)** | Demystifying a multi-account strategy
-* **[ADM301](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ADM301)** | Generative AI use cases for advertising and marketing
-​
-Finally, imagine mingling with the AWS Solutions team at the [Solutions Gamer Lounge](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=act155)—yes, you read that right! Get ready to have a chat with the Solutions experts themselves. 
+* **[ADM301](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ADM301)** | Generative AI use cases for advertising and marketing.
 
 
-* **[GBL213-JA](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=GBL213-JA)** | Accelerate your project by using AWS Solutions in **Japanese**!!
+​Finally, imagine mingling with the AWS Solutions team at the [Solutions Gamer Lounge](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=act155) — yes, you read that right! Get ready to have a chat with the Solutions experts themselves. 
 
 ## 🎊🎊 It is re:Invent after all! Of course we have a happy hour!
 Join us!! [Register here](https://solutionsonawshappyhour.splashthat.com/) before it fills up for some refreshing drinks, delicious bites, and the chance to network like a pro. It’s the perfect example of the fun we have in store for you at re:Invent.​
