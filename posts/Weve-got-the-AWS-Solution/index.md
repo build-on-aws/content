@@ -15,13 +15,14 @@ date: 2023-11-10
 |ToC|
 |---|
 
-​
-
 Hey there AWS enthusiasts, builders, and tech-savvy folks! Welcome to the ultimate playground of innovation and learning — AWS re:Invent 2023! If you are a builder, or someone looking for purpose-built services, ready-to-deploy software packages, and architecture diagrams you are going to want to check out the variety of activities and sessions featuring AWS Solutions at re:Invent. 
+
 ​
 Remember your favorite building block kits as a child? You could customize quickly, scale to whatever model fit your fancy, or follow the instructions to get to what you wanted. Well, AWS Solutions is kind of like that. One of the key differences though is our building blocks hurt less when you step on them. AWS Solutions can be utilized as-is, as a starting point that can be customized to your specific requirements, or as a reference to meet your needs. By utilizing pre-defined services, configurations, and architectures that optimize for cost, availability, scalability and security from the start, projects are accelerated, costs are reduced and common mistakes are eliminated. In short, [AWS Solutions](https://aws.amazon.com/solutions/) help to simplify cloud adoption and accelerate time to value using proven, vetted architectures. 
 ​
+
 Best of all, we have over 1,200+ [AWS Solutions](https://aws.amazon.com/solutions/#:~:text=Browse%20All%20Solutions) across a wide range of industry and technology use cases to really help scale your specific business or cloud adoption needs. By employing AWS Solutions, you can dodge the usual project pitfalls, save costs, and fast-track your digital dreams. 
+
 
 Right now, we're all busy mapping out how we'll get the most out of our time at re:Invent. Well, with thousands of sessions and activities, like Innovation Talks and Lounges to choose from, you might want some help focusing on what you should prioritize. Let us help!
 ​
@@ -32,11 +33,9 @@ So, if GenAI is your jam, then make sure to explore our sessions featuring QnAbo
 ​
 Then, there is [GenAI application builder on AWS](https://aws.amazon.com/solutions/implementations/generative-ai-application-builder-on-aws/). From startups to enterprises, organizations trust AWS to innovate with generative artificial intelligence (AI). With enterprise-grade security and privacy, access to Amazon Bedrock and its industry-leading foundation models, and generative AI-powered applications, AWS makes it easy to build and scale generative AI, built for your data, your use cases, and your customers. The [Generative AI Application Builder on AWS](https://aws.amazon.com/solutions/implementations/generative-ai-application-builder-on-aws/) solution, found in the [AWS Solutions Library](https://aws.amazon.com/solutions/) helps you rapidly develop and deploy production-ready generative AI applications. If this interests you, make sure to check out the [ARC318](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC318) session. It will be running 3 times, so you will have plenty of chances to catch this popular session. This is a hands-on session, so bring your laptop and get ready to roll up your sleeves! 
 ​
-
 * **[HLC401](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=HLC401)** | Transforming digital health with a generative AI conversational QnABot
 * **[ARC318](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ARC318)** | Speed deployment of generative AI applications using AWS solutions
 
-​
 ## More sessions you won’t want to miss! 
 A lot of our AWS Solutions help to customize experiences for your customers. And, if you’re looking to bring your customer experiences to new heights, soar on over to the [TRV203](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=TRV203) Lightning Talk featuring Brian Kirkland, CTO of Choice Hotels. This session will explore the [Unified Profiles for Travelers and Guests on AWS](https://aws.amazon.com/solutions/implementations/unified-profiles-for-travelers-and-guests-on-aws/) solution. This AWS Solution offers a single data source for marketing, sales, operations, and customer experience leaders, providing the data they need to create a central view of the customer. 
 ​
@@ -49,6 +48,7 @@ The next session, introduces you to the many benefits of the [AWS Solutions Libr
 
 ## Are you new here?
 If you’re a newbie in the AWS universe, worry not. We’ve got special Solutions tailored just for you in the [New to AWS](https://aws.amazon.com/solutions/new-to-aws/) section of the AWS Solutions Library, which you'll also find across re:Invent. Looking to bolster your architecture game? Drop by our Architecture kiosk, where the Solutions team is geared up to rock your world with architectural magic. You'll also find AWS Solutions being shared at the AWS Analytics and Resilience kiosks, and many more. Here you will learn some of the key AWS solutions for different use cases in these areas and more. Make sure to bring your questions! 
+
 ​
 So that you don't have to, we have gone through the re:Invent catalog ourselves, and here are all the sessions where we will be covering some of the Guidance, which you can find in the AWS Solutions Library, to help you build on your own. You may want to check out one or more of these sessions, each focused on how to use specific Guidance from AWS in different applications:
 ​
