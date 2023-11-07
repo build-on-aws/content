@@ -21,7 +21,7 @@ https://www.youtube.com/watch?v=n8BQ83lG8lQ&t=95s
 
 ## How Much? It Depends
 
-The Pricing Calculator produces estimates and the final cost can vary depending upon configration choices and usage. The important things to remember are:
+The Pricing Calculator produces estimates and the final cost can vary depending upon configuration choices and usage. The important things to remember are:
 
 - You can purchase compute based on [On-Demand pricing](https://aws.amazon.com/ec2/pricing/on-demand/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail), a [1 or 3 year Reserved instance](https://aws.amazon.com/ec2/pricing/reserved-instances/pricing/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail), or [Savings Plans](https://aws.amazon.com/savingsplans/?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail). Choosing a plan based on usage can save up to 72% of operating costs.
 -  Costs vary by geographic Regions, the estimated cost in one Region may be more or less in another. In addition, estimates do not include taxes, which may also vary by location.
@@ -39,7 +39,7 @@ Lightsail provides [three pricing examples](https://aws.amazon.com/lightsail/pri
 
 ### Example 1:
 
->You have a globally available WordPress website hosted on Amazon Lightsail. This website runs on a $5 / month Linux instance bundle with 1 GB memory, one core processor, a 40 GB SSD disk, and 2 TB transfer. The website uses a CDN distribution to serve content around the world with a year free up to 50 GB, and hosts its static content in a Lightsail object storage bucket with 5 GB storage and 25 GB transfer.
+> You have a globally available WordPress website hosted on Amazon Lightsail. This website runs on a $5 / month Linux instance bundle with 1 GB memory, one core processor, a 40 GB SSD disk, and 2 TB transfer. The website uses a CDN distribution to serve content around the world with a year free up to 50 GB, and hosts its static content in a Lightsail object storage bucket with 5 GB storage and 25 GB transfer.
 > 
 > **Lightsail charges:**
 > 
@@ -77,7 +77,7 @@ The Lightsail example uses a discounted price for the CDN, which is $2.50 USD / 
 
 **AWS Fargate Deployment**
 
-[Fargate](https://docs.aws.amazon.com/AmazonECS/latest/userguide/what-is-fargate.html?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail) is a service that runs on [AWS Elastic Container Service (ECS)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail). Like Lightsail, Fargate can run containers without having to manage a cluster. The container is running Linyx on a x86 CPU. There is only a single container that runs on an average duration of one day. The database is an on-demand MySQL RDS running on a db.t2.micro instance with 40 GB of storage. The deployment includes a single application load balancer (ALB).
+[Fargate](https://docs.aws.amazon.com/AmazonECS/latest/userguide/what-is-fargate.html?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail) is a service that runs on [AWS Elastic Container Service (ECS)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html?sc_channel=el&sc_campaign=post&sc_content=lightsailvsawscomputecomparingcostswithawspricingcalculator&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail). Like Lightsail, Fargate can run containers without having to manage a cluster. The container is running Linux on a x86 CPU. There is only a single container that runs on an average duration of one day. The database is an on-demand MySQL RDS running on a db.t2.micro instance with 40 GB of storage. The deployment includes a single application load balancer (ALB).
 
 **Fargate charges:**
 
@@ -107,7 +107,7 @@ A similar deployment uses a [c6g.xlarge EC2 instance](https://aws.amazon.com/ec2
 
 Total EC2 charges: $49.57 USD / month
 
-Even though most of the options are included with a c6g.xlarge instance, the cost is nearly double of a Lightsail instantance.
+Even though most of the options are included with a c6g.xlarge instance, the cost is nearly double of a Lightsail instance.
 
 ## Summary
 
