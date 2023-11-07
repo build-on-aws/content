@@ -1,6 +1,6 @@
 ---
 title: "We've got the (AWS) Solution"
-description: "Learn about how to use AWS Solutions to accelerate your cloud development journey at re:Invent 2023"
+description: "Learn about how to use AWS Solutions to accelerate your cloud development and journey at re:Invent 2023"
 tags:
  - aws-solutions
  - Solutions
@@ -11,10 +11,12 @@ additionalAuthors:
  - authorName: Heather Dorrian
 date: 2023-11-10
 ---
-​
+
 |ToC|
 |---|
+
 ​
+
 Hey there AWS enthusiasts, builders, and tech-savvy folks! Welcome to the ultimate playground of innovation and learning — AWS re:Invent 2023! If you are a builder, or someone looking for purpose-built services, ready-to-deploy software packages, and architecture diagrams you are going to want to check out the variety of activities and sessions featuring AWS Solutions at re:Invent. 
 ​
 Remember your favorite building block kits as a child? You could customize quickly, scale to whatever model fit your fancy, or follow the instructions to get to what you wanted. Well, AWS Solutions is kind of like that. One of the key differences though is our building blocks hurt less when you step on them. AWS Solutions can be utilized as-is, as a starting point that can be customized to your specific requirements, or as a reference to meet your needs. By utilizing pre-defined services, configurations, and architectures that optimize for cost, availability, scalability and security from the start, projects are accelerated, costs are reduced and common mistakes are eliminated. In short, [AWS Solutions](https://aws.amazon.com/solutions/) help to simplify cloud adoption and accelerate time to value using proven, vetted architectures. 
@@ -38,7 +40,7 @@ Then, there is [GenAI application builder on AWS](https://aws.amazon.com/solutio
 ## More sessions you won’t want to miss! 
 A lot of our AWS Solutions help to customize experiences for your customers. And, if you’re looking to bring your customer experiences to new heights, soar on over to the [TRV203](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=choice hotels) Lightning Talk featuring Brian Kirkland, CTO of Choice Hotels. This session will explore the [Unified Profiles for Travelers and Guests on AWS](https://aws.amazon.com/solutions/implementations/unified-profiles-for-travelers-and-guests-on-aws/) solution. This AWS Solution offers a single data source for marketing, sales, operations, and customer experience leaders, providing the data they need to create a central view of the customer. 
 ​
-* **[TRV203](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=choice hotels)** | How Choice Hotels is unifying guest profiles to drive personalization
+* **[TRV203](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=TRV203)** | How Choice Hotels is unifying guest profiles to drive personalization
 ​
 The next session, introduces you to the many benefits of the [AWS Solutions Library] (https://aws.amazon.com/solutions/). The “Instance Scheduler on AWS, AWS Streaming Data Solution for Amazon Kinesis Automated Security Response on AWS, Automated Data Analytics (ADA) on AWS workshop” demonstrates how your organization can respond to security events, save money, and derive insights faster and with less effort by deploying up to four AWS Solutions. You'll find similar information on the value of tackling your projects using AWS Solutions in Lightning Talk [GBL213](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=gbl213), which is delivered in Japanese.
 ​
