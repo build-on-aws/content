@@ -214,7 +214,7 @@ Before executing the sample code, clone the GitHub repository and change to the 
 
 ```shell
 git clone github.com/build-on-aws/langchaingo-amazon-bedrock-llm
-cd langchaingo-amazon-bedrock-llm
+cd langchaingo-amazon-bedrock-llm/examples
 ```
 
 Refer to **Before You Begin** section in [this blog post](https://community.aws/concepts/amazon-bedrock-golang-getting-started#before-you-begin) to complete the prerequisites for running the examples. This includes installing Go, configuring Amazon Bedrock access and providing necessary IAM permissions.
