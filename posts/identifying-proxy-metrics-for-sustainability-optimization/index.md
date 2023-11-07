@@ -135,7 +135,6 @@ Alternatively, you can start with a simple worksheet based tracker to measure, t
 * [AWS CloudWatch Metrics Insights sample queries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-queryexamples.html?sc_channel=el&sc_campaign=costwave&sc_content=identifying-proxy-metrics-for-sustainability-optimization&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * [Turning Cost & Usage Reports into Efficiency Reports](https://catalog.workshops.aws/well-architected-sustainability/en-US/5-process-and-culture/cur-reports-as-efficiency-reports?sc_channel=el&sc_campaign=costwave&sc_content=identifying-proxy-metrics-for-sustainability-optimization&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 * [Query Amazon S3 data using AWS Athena](https://www.wellarchitectedlabs.com/security/200_labs/200_remote_configuration_installation_and_viewing_cloudwatch_logs/8_query_from_athena/) (for processing AWS CloudWatch metrics stream use case)
-* [Rightsizing - The right way!](/posts/rightsizing-the-right-way)
 * [Sustainable Data Management Practices](/posts/sustainable-data-management-practices/01-understanding-sustainable-data-management)
 
 ## Conclusion

@@ -3,6 +3,7 @@ title: "Automatically Manage DNS Records for Your Microservices in Amazon EKS wi
 description: "Configure Amazon Route53 as a DNS provider for external access to microservices."
 tags:
     - external-dns
+    - eks-cluster-setup
     - eks
     - kubernetes
     - tutorials
