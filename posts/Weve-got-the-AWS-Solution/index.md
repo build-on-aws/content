@@ -65,4 +65,9 @@ So that you don't have to, we have gone through the re:Invent catalog ourselves,
 * **[ADM301](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=ADM301)** | Generative AI use cases for advertising and marketing
 ​
 Finally, imagine mingling with the AWS Solutions team at the [Solutions Gamer Lounge](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=act155)—yes, you read that right! Get ready to have a chat with the Solutions experts themselves. 
-​
+
+
+* **[GBL213-JA](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=GBL213-JA)** | Accelerate your project by using AWS Solutions in **Japanese**!!
+
+## 🎊🎊 It is re:Invent after all! Of course we have a happy hour!
+Join us!! [Register here](https://solutionsonawshappyhour.splashthat.com/) before it fills up for some refreshing drinks, delicious bites, and the chance to network like a pro. It’s the perfect example of the fun we have in store for you at re:Invent.​
