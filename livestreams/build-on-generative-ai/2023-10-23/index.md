@@ -29,4 +29,6 @@ https://www.twitch.tv/videos/1970657824
 
 **Reach out to the hosts and guests:**
 
+- Ayush: [https://www.linkedin.com/in/ayushk92/](https://www.linkedin.com/in/ayushk92/)
+- Francisco: [https://www.linkedin.com/in/framaya/](https://www.linkedin.com/in/framaya/)
 - Darko: [https://www.linkedin.com/in/darko-mesaros/](https://www.linkedin.com/in/darko-mesaros/)

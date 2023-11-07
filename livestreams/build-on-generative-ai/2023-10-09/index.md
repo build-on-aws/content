@@ -31,5 +31,6 @@ https://www.twitch.tv/videos/1970457460
 
 **Reach out to the hosts and guests:**
 
+- Arlind: [https://www.linkedin.com/in/arlind-nocaj/](https://www.linkedin.com/in/arlind-nocaj/)
 - Emily: [https://www.linkedin.com/in/emily-webber-921b4969/](https://www.linkedin.com/in/emily-webber-921b4969/) 
 - Darko: [https://www.linkedin.com/in/darko-mesaros/](https://www.linkedin.com/in/darko-mesaros/)
