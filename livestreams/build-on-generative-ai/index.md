@@ -51,7 +51,9 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 | S02E08 | Translating unstructured Documents to structured data | 2023-10-09 | Arlind Nocaj | [Show notes](/livestreams/build-on-generative-ai/2023-10-09) |
 | S02E09 | Finding alignment in the world of Generative AI | 2023-10-16 | David Bounds | [Show notes](/livestreams/build-on-generative-ai/2023-10-16) |
 | S02E10 | Chatting to your SageMaker Studio | 2023-10-23 | Ayush Khatri | [Show notes](/livestreams/build-on-generative-ai/2023-10-23) |
+| S02E11 | Securing Amazon Bedrock | 2023-10-30 | Ram Vittal | [Show notes](/livestreams/build-on-generative-ai/2023-10-30) |
 | S02E12 | Advanced Text Summarization with Amazon Bedrock | 2023-11-06 | Justin Muller | [Show notes](/livestreams/build-on-generative-ai/2023-11-06) |
+
 ### SEASON 01
 
 | Episode | Name | Date | Guest | Link to Video
