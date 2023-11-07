@@ -12,11 +12,11 @@ spaces:
 waves:
   - data
   - generative-ai
-authorGithubAlias: naga-gaddamu
-authorName: Naga Gaddamu
+authorGithubAlias: rucmish
+authorName: Ruchi Mishra
 additionalAuthors: 
-  - authorGithubAlias: na
-    authorName: Ruchi Mishra
+  - authorGithubAlias: naga-gaddamu
+    authorName: Naga Gaddamu
 date: 2023-10-24
 ---
 
