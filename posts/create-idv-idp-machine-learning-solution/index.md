@@ -2,8 +2,8 @@
 title: "How to create a Precise and Cost-Effective Identity Verification and Intelligent Document Processing Solution for Financial Applications"
 description: "Learn to design an ML powered solution to automate identity verification and document processing using Amazon Rekognition and Amazon Textract"
 tags:
-  - Rekognition
-  - Textract
+  - Amazon Rekognition
+  - Amazon Textract
   - Identity verification
   - Intelligent document processing
   - Machien learning
@@ -26,9 +26,9 @@ Amazon Rekognition offers pre-trained computer vision (CV) capabilities to extra
 Amazon Textract enables customers to take advantage of industry leading machine learning technology to quickly and accurately process data from any scanned document or image. In this solution, we are using [**Analyze Lending**](https://aws.amazon.com/textract/analyze-lending/) feature for classifying and processing of mortgage documents.
 
 The key capabilities of this solution are shown in the following diagram, using a sample process flow for mortgage application processing. Key capabilities of this solution are:
-•	Liveness Detection
-•	Identity Verification
-•	Intelligent Document Processing
+- Liveness Detection
+- Identity Verification
+- Intelligent Document Processing
 
 
 ![Process flow diagram](images/Mortgage-Process%20flow.png "Figure: 1 Process flow diagram")
@@ -119,5 +119,5 @@ Extracted lending fields from the Analyze Lending response can be stored in Amaz
 
 
 ## Conclusion
-In this blog, we dived into an AI solution for Identity Verification and Intelligent Document Processing, powered by Amazon Rekognition and Amazon Textract. This approach offers a highly scalable and cost-effective serverless architecture that leverages the power of identity verification and intelligent document processing with AWS AI to automate the end-to-end mortgage application journey. This automation not only boosts business process efficiency, but also ensures exceptional accuracy, leading to reduced loan processing costs. This solution provides the flexibility to rapidly scale in response to changing demands and to streamline financial operations that improve turnaround times and deliver a seamless experience to your customers. By embracing automation and leveraging advanced technologies, the mortgage industry can unlock new levels of efficiency, cost savings, and scalability, paving the way for future success. To learn more about identity verification and intelligent document processing with AWS AI and ML services, visit https://aws.amazon.com/machine-learning/ml-use-cases.
+In this blog, we dived into an AI solution for Identity Verification and Intelligent Document Processing, powered by Amazon Rekognition and Amazon Textract. This approach offers a highly scalable and cost-effective serverless architecture that leverages the power of identity verification and intelligent document processing with AWS AI to automate the end-to-end mortgage application journey. This automation not only boosts business process efficiency, but also ensures exceptional accuracy, leading to reduced loan processing costs. This solution provides the flexibility to rapidly scale in response to changing demands and to streamline financial operations that improve turnaround times and deliver a seamless experience to your customers. By embracing automation and leveraging advanced technologies, the mortgage industry can unlock new levels of efficiency, cost savings, and scalability, paving the way for future success. To learn more about identity verification and intelligent document processing with AWS AI and ML services, visit [**https://aws.amazon.com/machine-learning/ml-use-cases**](https://aws.amazon.com/machine-learning/ml-use-cases).
 
