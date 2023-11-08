@@ -10,9 +10,9 @@ authorName: Sophia Parafina
 date: 2023-11-07
 ---
 
-I recently taught a prompt engineering workshop at a conference. The venue could not confirm if the WiFi network could meet the requirements of the workshop. Attendees are often frustrated by slow Internet and fail to get the full value of the course. As an instructor, having to find workarounds to infrastructure shortcomings is equally frustrating. I decided to have the attendees run the workshop on their local computers.
+I recently taught a prompt engineering workshop at a conference. The venue could not confirm if the WiFi network could meet the requirements of the workshop. Attendees are often frustrated by slow Internet and fail to get the full value of the course. As an instructor, having to find workarounds to infrastructure shortcomings is equally frustrating. I decided to have the attendees run the workshop on their personal computers.
 
-I looked at several options. such as [llama.cpp](https://github.com/ggerganov/llama.cpp), but choose [Ollama](https://github.com/jmorganca/ollama) for its ease of installation and use, and simple integration. Ollama lets you run popular large language models  (LLMs) on a desktop or laptop computer. Although it is often used to run LLMs on a local computer, it can deployed in the cloud if you don’t have a computer with enough memory, disk space, or a GPU. This article shows you how to run Ollama on Lightsail for Research and get started with generative AI and LLMs.
+I looked at several options. such as [llama.cpp](https://github.com/ggerganov/llama.cpp), but choose [Ollama](https://github.com/jmorganca/ollama) for its ease of installation and use, and simple integration. Ollama lets you run large language models  (LLMs) on a desktop or laptop computer. Although it is often used to run LLMs on a local computer, it can deployed in the cloud if you don’t have a computer with enough memory, disk space, or a GPU. This article shows you how to run Ollama on Lightsail for Research and get started with generative AI and LLMs.
 
 ## Run Ollama Locally
 
@@ -28,7 +28,7 @@ Running Ollama locally is the  common way to deploy it. On a computer with modes
 $ ollama serve
 ```
 
-3. Check to see if it is installed:
+3. Check to see if it is installed.
 
 ```bash
 $ ollama –version
@@ -50,8 +50,8 @@ $ ollama run orca-mini
 
 Windows currently does not have a native client, but you can run ollama from a Docker container.
 
-1. Install Docker using these [instructions](https://docs.docker.com/desktop/install/windows-install/)
-2. Open a Powershell window as Administrator
+1. Install Docker using these [instructions](https://docs.docker.com/desktop/install/windows-install/).
+2. Open a Powershell window as Administrator.
 3. Pull the ollama container image from Docker Hub. Copy and paste this command in the Powershell window.
 
 ```powershell
@@ -84,7 +84,7 @@ Windows currently does not have a native client, but you can run ollama from a D
 
 ## Running Ollama on AWS Lightsail for Research
 
-[Lightsail for Research](https://docs.aws.amazon.com/lightsail-for-research/latest/ug/what-is-lfr.html) provides instances designed for compute intensive tasks such as machine learning. Instances are bundled with RStudio, JupyterLab, SciLab, VSCodium, and Ubuntu for installing your own machine learning stack. To get started with Lightsail for Research, use the search bar in the AWS console home page.
+[Lightsail for Research](https://docs.aws.amazon.com/lightsail-for-research/latest/ug/what-is-lfr.html?sc_channel=el&sc_campaign=post&sc_content=runallmwithollamaonlightsailforresearch&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail) provides instances designed for compute intensive tasks such as machine learning. Instances are bundled with RStudio, JupyterLab, SciLab, VSCodium, and Ubuntu for installing your own machine learning stack. To get started with Lightsail for Research, use the search bar in the AWS console home page.
 
 ![Open the Lightsail for Research page](./images/lfr-1.png)
 
@@ -133,7 +133,7 @@ The Ollama client runs in the terminal and you can enter prompts.
 
 ## Running llama2 in a Jupyter Notebook
 
-Ollama runs as a server whether you are running it locally or on a Lightsail for Research instance. We can use a Jupyter Notebook to connect to llam2 via Ollama and run a prompt program. First, check that you have Python 3.10 installed. If Python 3 is available, install pip-env to create an environment for the project.
+Ollama runs as a server whether you are running it locally or on a Lightsail for Research instance. We can use a Jupyter Notebook to connect to llama2 via Ollama and run a prompt program. First, check that you have Python 3.10 installed. If Python 3 is available, install pip-env to create an environment for the project.
 
 ```bash
 $ which python3
