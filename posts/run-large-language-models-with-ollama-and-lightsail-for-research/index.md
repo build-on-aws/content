@@ -88,11 +88,11 @@ Windows currently does not have a native client, but you can run ollama from a D
 
 ![Open the Lightsail for Research page](./images/lfr-1.png)
 
-Choose the Ubuntu instance.
+Choose the **Ubuntu** instance.
 
 ![Select Ubuntu to create an instance.](./images/lfr-2.png)
 
-LLMs are compute intensive and work with a minimum 16 GB of memory and a GPU. For this example, choose the GPU 2XL plan and name the instance.
+LLMs are compute intensive and work with a minimum 16 GB of memory and a GPU. For this example, choose the **GPU 2XL** plan and name the instance.
 
 ![Select the GPU 2XL plan](./images/lfr-3.png)
 
@@ -110,11 +110,11 @@ With the desktop setup complete, choose **Activities** on the top left of the de
 
 To display the installed applications, choose the icon on the far right.
 
-![Display the installed application by choosing far right icon.](./images/lfr-6.png)
+![Display the installed application by choosing far right icon.](./images/lfr-7.png)
 
 Choose the **Terminal** icon to open a terminal.
 
-![Open a terminal](./images/lfr-7.png)
+![Open a terminal](./images/lfr-8.png)
 
 With a terminal open, install Ollama and download llama2 LLM. 
 
@@ -194,7 +194,7 @@ Llama2 will return a response to the prompt.
 
 Stop and delete the Ubuntu instance when you are finished to avoid additional charges.
 
-![Stop and delete the instance when finished](./images/lfr-8.png)
+![Stop and delete the instance when finished](./images/lfr-9.png)
 
 ## Summary
 
