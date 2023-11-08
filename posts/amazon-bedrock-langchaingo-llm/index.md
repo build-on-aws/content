@@ -1,6 +1,6 @@
 ---
 title: "Building LangChain applications with Amazon Bedrock and Go - An introduction"  
-description: "How to extend the `langchaingo` library to include support for Amazon Bedrock."
+description: "How to extend the LangChain Go package to include support for Amazon Bedrock."
 tags:  
   - generative-ai
   - ai-ml
@@ -19,13 +19,15 @@ date: 2023-11-15
 |ToC|
 |---|
 
-One of our earlier blog posts discussed the initial steps for [diving into Amazon Bedrock by leveraging the AWS Go SDK](https://community.aws/concepts/amazon-bedrock-golang-getting-started). Subsequently, our second blog post expanded upon this foundation, showcasing [a Serverless Go application designed for image generation with Amazon Bedrock and AWS Lambda](https://community.aws/tutorials/amazon-bedrock-lambda-image-gen-golang). In both instances, we directly accessed Amazon Bedrock APIs from the application, avoiding any additional layers of abstraction or frameworks/libraries. This approach is particularly effective for learning and crafting straightforward solutions.
+One of our earlier blog posts discussed the initial steps for [diving into Amazon Bedrock by leveraging the AWS Go SDK](https://community.aws/concepts/amazon-bedrock-golang-getting-started). Subsequently, our second blog post expanded upon this foundation, showcasing [a Serverless Go application designed for image generation with Amazon Bedrock and AWS Lambda](https://community.aws/tutorials/amazon-bedrock-lambda-image-gen-golang). 
+
+[Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-langchaingo&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a fully managed service that makes base models from Amazon and third-party model providers (such as Anthropic, Cohere, and more) accessible through an API. The applications demonstrated in those blog posts accessed Amazon Bedrock APIs directly, thereby avoiding any additional layers of abstraction or frameworks/libraries. This approach is particularly effective for learning and crafting straightforward solutions.
 
 But, developing generative AI applications goes beyond simply using large language models (LLMs) via an API. You need to think about other parts of the solution which include intelligent search (also known as semantic search that often requires specialized data stores), orchestrating sequential workflows (for e.g. invoking another LLM based on the previous LLM response), loading data sources (text, PDF, links etc.) to provide additional context for LLMs, maintaining historical context (for conversational/chatbot/QA solutions) and much more. Implementing these features from scratch can be difficult and time-consuming.
 
 Enter [LangChain](https://www.langchain.com/), a framework that provides off the shelf components to make it easier to build applications with language models. It is supported in multiple programming languages. This obviously includes Python, but also JavaScript, Java and Go.
 
-[langchaingo](https://github.com/tmc/langchaingo) is the LangChain implementation for the Go programming language. This blog post covers how to extend `langchaingo` to use [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-langchaingo&sc_geo=mult&sc_country=mult&sc_outcome=acq), which is a fully managed service that makes base models from Amazon and third-party model providers (such as Anthropic, Cohere, and more) accessible through an API.
+[langchaingo](https://github.com/tmc/langchaingo) is the LangChain implementation for the Go programming language. This blog post covers how to extend `langchaingo` to use foundation model from Amazon Bedrock.
 
 > The code is available [in this GitHub repository](https://github.com/build-on-aws/langchaingo-amazon-bedrock-llm)
 
@@ -42,7 +44,7 @@ This provides ease of use, choice and flexibility while building LangChain power
 
 ## `langchaingo` implementation for Amazon Bedrock
 
-As mentioned before, with Amazon Bedrock, you have access to [multiple models](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#models-supported?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-langchaingo&sc_geo=mult&sc_country=mult&sc_outcome=acq) including Cohere, Anthropic etc. We will cover how to extend Amazon Bedrock to build a plugin for the Anthropic Claude (v2) model, but the guidelines apply to other models as well. 
+As mentioned before, Amazon Bedrock process access to [multiple models](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#models-supported?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-langchaingo&sc_geo=mult&sc_country=mult&sc_outcome=acq) including Cohere, Anthropic etc. We will cover how to extend Amazon Bedrock to build a plugin for the Anthropic Claude (v2) model, but the guidelines apply to other models as well. 
 
 Let's walk through the implementation at a high-level.
 
@@ -178,7 +180,7 @@ generations := []*llms.Generation{
 }
 ```
 
-## Code samples
+## Code samples - Use the Amazon Bedrock plugin in LangChain apps
 
 Once the Amazon Bedrock LLM plugin for `langchaingo` has been implemented, using it is as easy as creating a new instance with `claude.New(<supported AWS region>)` and using the `Call` (or `Generate`) function.
 
@@ -219,7 +221,7 @@ cd langchaingo-amazon-bedrock-llm/examples
 
 Refer to **Before You Begin** section in [this blog post](https://community.aws/concepts/amazon-bedrock-golang-getting-started#before-you-begin) to complete the prerequisites for running the examples. This includes installing Go, configuring Amazon Bedrock access and providing necessary IAM permissions.
 
-**Run basic examples**
+### Run basic examples
 
 This example demonstrates tasks such as code generation, information extraction and question answering. You can refer to the code [here](https://github.com/build-on-aws/langchaingo-amazon-bedrock-llm/blob/main/main.go).
 
@@ -227,7 +229,7 @@ This example demonstrates tasks such as code generation, information extraction 
 go run main.go
 ```
 
-**Run streaming output example**
+### Run streaming output example
 
 In this example, we pass in the [WithStreamingFunc](https://pkg.go.dev/github.com/tmc/langchaingo/llms#WithStreamingFunc) option to the LLM invocation. This will switch to the streaming invocation mode for Amazon Bedrock.
 
@@ -253,9 +255,8 @@ go run streaming/main.go
 
 `LangChain` is a powerful and extensible library that allows us to plugin external components as per requirements. This blog demonstrated how to extend `langchaingo` to make sure it works with the Anthropic Claude model available in Amazon Bedrock. You can use the same approach to implement support for other Amazon Bedrock models such as Amazon Titan.
 
-The examples showed how to use simple LangChain apps to invoke the Amazon Bedrock directly (using the `Call` function). In subsequent blog posts, I will cover how to use them as part of chains for implementing functionality like chatbot or QA assistant.
+The examples showed how to use simple LangChain apps to using the `Call` function. In future blog posts, I will cover how to use them as part of chains for implementing functionality like chatbot or QA assistant.
 
 Visit the [Generative AI Space](https://community.aws/generative-ai) to learn more!
-
 
 Until then, happy building!
