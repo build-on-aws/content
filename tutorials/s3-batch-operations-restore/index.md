@@ -60,15 +60,15 @@ Before starting this tutorial, you will need:
 
 1. Log in to the [_AWS Management Console_](https://console.aws.amazon.com/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=s3-batch-operations-restore) using your account information. In the search bar, enter **S3**, then select **S3** from the results.
 
-![](Images/firstimage.png)
+![AWS mangement console](Images/firstimage.png)
 
 2. In the left navigation pane on the S3 console, choose Buckets, and then choose **Create bucket**.
  
-![Alt text](Images/secondimage.png)
+![S3 bucket console](Images/secondimage.png)
 
 3. Enter a descriptive, globally unique name for your source bucket. Select the **AWS Region** you want your bucket created in. In this example, the **EU (Frankfurt) eu-central-1 region** is selected.
 
-![Alt text](Images/image(1).png)
+![S3 create bucket](Images/image(1).png)
 
 4. You can leave the remaining options as defaults. Navigate to the bottom of the page and choose **Create bucket**.
 
@@ -86,29 +86,29 @@ echo “sample file 3” > testfile-3.txt
  
 2. From the [_Amazon S3 console_](https://s3.console.aws.amazon.com/s3/home?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=s3-batch-operations-restore), search for the bucket that you created in Step 1, and select the bucket name.
 
-![Alt text](Images/image(2).png)
+![S3 bucket list](Images/image(2).png)
 
 3. Next, select the **Objects** tab. Then, from within the **Objects** section, choose **Upload**.
 
-![Alt text](Images/image(3).png)
+![S3 objects list](Images/image(3).png)
 
  4. Then, in the **Upload** section, choose **Add files**. Navigate to your local file system to locate the test file that you created above. Select the appropriate file, and then choose **Open**. Your file will be listed in the **Files and folders** section.
 
- ![Alt text](Images/image(4).png)       
+ ![Uploading files](Images/image(4).png)       
 
 5. Since this tutorial is focused on restoring objects from the S3 Glacier Flexible Retrieval storage class, expand the **Properties** tab to select the **Glacier Flexible Retrieval** storage class, then select **Upload**.
 
-![Alt text](Images/image(5).png)
+![Destination screen](Images/image(5).png)
 
-![Alt text](Images/image(6).png)
+![Storage class type](Images/image(6).png)
 
 6. After the file upload operations have completed, you will be presented with a status message indicating if the upload was successful or not. Upon successful upload of the files, choose **Close**.
         
-![Alt text](Images/image(7).png)
+![Status for upload](Images/image(7).png)
 
 7. You should now see the objects in the S3 Console and their respective storage class.
 
-![Alt text](Images/image(8).png)
+![list of uploaded objects](Images/image(8).png)
 
 **Create a S3 Batch Operations manifest**
 
@@ -118,7 +118,7 @@ echo “sample file 3” > testfile-3.txt
 
 * In this example the manifest is:
 
-![Alt text](Images/image(9).png)
+![sample excel of manifest file](Images/image(9).png)
 
 * S3 Batch Operations CSV manifests can include an optional version ID as a third column of the CSV. If using a versioned bucket, we recommend that you supply the version ID of each object in your manifest. Batch Operations will perform the operation on the latest version if no version ID is specified.
 
@@ -128,32 +128,32 @@ echo “sample file 3” > testfile-3.txt
 
 ### Step 3: Create S3 Batch Operations Job
 
-![Alt text](Images/image(10).png)
+![upload manifest file](Images/image(10).png)
 
 1. **Create and run an S3 Batch Operations job.** On the left navigation pane of the Amazon S3 console home page, choose **Batch Operations**, and then choose **Create Job**.
 
-![Alt text](Images/image(11).png)
+![batch operations console](Images/image(11).png)
 
 2. On the **Create job** page, select the **AWS Region** where you want to create your S3 Batch Operations job. You must create the job in the same AWS Region in which the source S3 bucket is located.
 
-![Alt text](Images/image(12).png)
+![create batch job](Images/image(12).png)
 
 3. Specify the manifest type to be **CSV** and browse to the manifest file uploaded to the bucket in Step 3.
 
-![Alt text](Images/image(13).png)
+![specify csv for manifest type](Images/image(13).png)
 
 4. Choose **Next** to go to the **Choose operation** page.
 
 5. Select the **Restore** operation. The Restore operation initiates restore requests for the archived Amazon S3 objects that are listed in your manifest.
 
-![Alt text](Images/image(14).png)
+![batch operation select](Images/image(14).png)
 
 6. Select the restore source as **Glacier Flexible Retrieval or Glacier Deep Archive** and the number of days that the restore copy is available as **1 day**.
 
 * This means that once the restore is completed, Amazon S3 restores a temporary copy of the object only for the specified duration. After that, it deletes the restored object copy.
 * S3 Batch Operations supports STANDARD and BULK retrieval tiers. Select the **Retrieval tier** to be **Standard retrieval**. With S3 Batch Operations, [_restores in the Standard retrieval tier now typically begin to return objects to you within minutes_](https://aws.amazon.com/blogs/aws/new-improve-amazon-s3-glacier-flexible-restore-time-by-up-to-85-using-standard-retrieval-tier-and-s3-batch-operations/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=s3-batch-operations-restore), down from 3–5 hours, so you can easily speed up your data restores from archive. For more information about the differences between the retrieval tiers, see [_Archive retrieval options_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/restoring-objects-retrieval-options.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=s3-batch-operations-restore).
 
-![Alt text](Images/image(15).png)
+![batch operations options](Images/image(15).png)
 
 Configure additional options:
 
@@ -163,7 +163,7 @@ Configure additional options:
 
 **Note:** A higher number indicates higher priority. For example, a job with a priority of 2 will be prioritized over a job with priority 1. S3 Batch Operations prioritizes jobs according to priority numbers, but strict ordering isn't guaranteed. Therefore, you shouldn't use job priorities to ensure that any one job starts or finishes before any other job. If you need to ensure strict ordering, wait until one job has finished before starting the next.
 
-![Alt text](Images/image(16).png)
+![additional options](Images/image(16).png)
 
 9. Generate a S3 Batch Operations completion report.
 
@@ -171,7 +171,7 @@ Next, you will have the option to request a [_completion report_](https://docs.a
 
 Completion reports provide an easy way to view the status of each object restored using the S3 Batch Operations job and identify failures, if any. In this example, we chose to **Generate completion report** for **All tasks** so that we can review the status of all objects within this job. Alternatively, you can also choose to view the status of objects that failed to restore only by choosing the **Failed tasks only** option. We have provided the destination bucket as the destination for the completion report. For additional examples of completion reports, see [_Examples: S3 Batch Operations completion reports_](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-examples-reports.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=s3-batch-operations-restore).
 
-![Alt text](Images/image(17).png)
+![completion report screen](Images/image(17).png)
 
 Creating an [_Identity and Access Management (IAM) role_](https://aws.amazon.com/iam/) for S3 Batch Operations:
 
@@ -181,27 +181,27 @@ Creating an [_Identity and Access Management (IAM) role_](https://aws.amazon.com
 * To create an IAM role in the AWS Management Console, see [_Creating a role for an AWS service_](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=s3-batch-operations-restore). On step 4, choose the service as S3 in the search bar and select the **S3 Batch Operation** option. On step 5, Select the IAM policy created in the previous section and attach it to the IAM role. Upon successful creation of the IAM role, it should have a trust policy identical to the **IAM trust policy** template and a permissions policy identical to the **IAM role policy** template attached to it.
 * Coming back to the **S3 Batch Operations** page, use the **refresh** icon and select the newly created IAM role from the drop-down.
 
-![Alt text](Images/image(18).png)
+![permissions screen](Images/image(18).png)
 
 * Optional – You can label and control access to your S3 Batch Operations jobs by adding tags. Tags can be used to identify who is responsible for a Batch Operations job. Add **Job tags** to your S3 Batch Operations job, and then choose **Next** to review your job configuration.
 
-![Alt text](Images/image(19).png)
+![batch job tagging](Images/image(19).png)
 
 On the **Review** page, validate the configuration and, choose **Edit** to make changes if required, then choose **Next** to save your changes and return to the **Review** page. When your job is ready, choose **Create job**.
 
-![Alt text](Images/image(20).png)
+![batch job review](Images/image(20).png)
 
 After the S3 Batch Operations job is created, you will be redirected to the **Batch Operations** home page as shown in the following screenshot. Here, you can review the job configuration by selecting the **Job ID** which will take you to the Job details page. When the job is successful, a banner displays at the top of the Batch Operations page.
 
-![Alt text](Images/image(21).png)
+![batch operations job screen](Images/image(21).png)
 
 Upon creation of the job, Batch Operations processes the manifest. If successful, it will change the job status to **Awaiting your confirmation to run**. You must confirm the details of the job and select **Run job**.
 
-![Alt text](Images/image(22).png)
+![batch operations confirmation](Images/image(22).png)
 
 You should then see a notification of successful confirmation for the job displayed in the banner at the top of the Batch Operations page.
 
-![Alt text](Images/image(23).png)
+![monitor batch operations job](Images/image(23).png)
 
 ### Step 4:  Monitor the Progress of a S3 Batch Operations Job
 
@@ -211,28 +211,28 @@ You should then see a notification of successful confirmation for the job displa
 
 * Here, you can view information about the job’s progress such as Job **Status, Total succeeded,** and **Total failed**. Once the job has completed executing, it will generate a report and transition to the **Completed** state.
 
-![Alt text](Images/image(24).png)
+![batch job status verification](Images/image(24).png)
 
 1. Verify that the restore is successful.
 2. Once the job is successfully completed, go to the [_Amazon S3__ console__ home page_](https://s3.console.aws.amazon.com/s3/home), select the bucket, and choose an object in the Glacier Flexible Retrieval storage class.
 3. The banner shows that the **Restoration status** of the object is **In-progress**. The **download** option is greyed out as the object is not yet accessible to download.
 
-![Alt text](Images/image(25).png)
+![vieww updated status of object](Images/image(25).png)
 
 * Standard retrievals initiated [_by using S3 Batch Operations restore operation typically start within minutes and finish within 3-5 hours_](https://aws.amazon.com/blogs/aws/new-improve-amazon-s3-glacier-flexible-restore-time-by-up-to-85-using-standard-retrieval-tier-and-s3-batch-operations/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=s3-batch-operations-restore) for objects stored in the S3 Glacier Flexible Retrieval storage class.
 * After the time elapses, verify the restore status and you can see that the object has been restored. You should also be able to download the object until the **Restoration Expiry date**.
 
-![Alt text](Images/image(26).png)
+![object status](Images/image(26).png)
 
 View S3 Batch Operations completion reports. S3 Batch Operations generates a report for jobs that have completed, failed, or cancelled. Select the path you’ve configured to save the completion reports.
 
-![Alt text](Images/image(27).png)
+![completion report location](Images/image(27).png)
 
 1. Download the completion report to analyze the status of each task.
 2. In the following example, all the objects have been successfully restored.
 3. The description of errors for each failed task can be used to diagnose issues that occur during job creation, such as permissions.
 
-![Alt text](Images/image(28).png)
+![completion report example](Images/image(28).png)
 
 ##  Clean Up Resources
 
@@ -245,18 +245,18 @@ There is a small cost for the objects stored in S3 and to avoid any unecessary c
 
 **Note:** Objects that are archived to the S3 Glacier Flexible Retrieval storage class are charged for a minimum storage duration of 90 days. Objects deleted prior to the minimum storage duration incur a pro-rated charge equal to the storage charge for the remaining days. Objects that are deleted, overwritten, or transitioned to a different storage class before the minimum storage duration will incur the normal storage usage charge plus a pro-rated storage charge for the remainder of the minimum storage duration. For more information, refer to the [_S3 Pricing page_](https://aws.amazon.com/s3/pricing/).
 
-![Alt text](Images/image(29).png)
+![empty bucket screen](Images/image(29).png)
 
 1. Delete the bucket.
-1. Return to the Amazon S3 home page.
-2. Select the radio button to the left of the bucket you created for this tutorial, and choose the **Delete** button.
-3. Review the warning message. If you desire to continue deletion of this bucket, enter the bucket name into the **Delete bucket** confirmation box, and choose **Delete bucket** **** button.
+2. Return to the Amazon S3 home page.
+3. Select the radio button to the left of the bucket you created for this tutorial, and choose the **Delete** button.
+4. Review the warning message. If you desire to continue deletion of this bucket, enter the bucket name into the **Delete bucket** confirmation box, and choose **Delete bucket** **** button.
 
     a. Delete the IAM role and the IAM policy.
-1. If you have logged out of your AWS Management Console session, log back in. Navigate to the [_IAM console_](https://console.aws.amazon.com/iam/) and select **Roles** from the left menu options.
-2. Delete the role created for this tutorial.
-3. Navigate to **Policies** from the left menu options.
-4. Delete the IAM policy that was created for this tutorial.
+5. If you have logged out of your AWS Management Console session, log back in. Navigate to the [_IAM console_](https://console.aws.amazon.com/iam/) and select **Roles** from the left menu options.
+6. Delete the role created for this tutorial.
+7. Navigate to **Policies** from the left menu options.
+8. Delete the IAM policy that was created for this tutorial.
 
 ## Conclusion
 
