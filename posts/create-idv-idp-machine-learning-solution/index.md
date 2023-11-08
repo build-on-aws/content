@@ -1,7 +1,6 @@
-
 ---
 title: "How to create a Precise and Cost-Effective Identity Verification and Intelligent Document Processing Solution for Financial Applications"
-description: Learn to design an ML powered solution to automate identity verification and document processing using Amazon Rekognition and Amazon Textract.
+description: "Learn to design an ML powered solution to automate identity verification and document processing using Amazon Rekognition and Amazon Textract".
 tags:
   - Rekognition
   - Textract
@@ -10,7 +9,7 @@ tags:
   - Machien learning
   - IDV
   - IDP
-authorGithubAlias: kows
+authorGithubAlias: kowsalyajaganathan
 authorName: Kowsalya Jaganathan
 date: 2023-11-08
 ---
