@@ -2,8 +2,6 @@
 title: "Use Amazon S3 Batch Operations to restore archived objects from an Amazon S3 Glacier storage classes"
 description: "Restoring archived S3 objects as a scheduled task"
 tags: 
-    - tutorials
-    - aws
     - storage
     - s3
     - s3-glacier
@@ -11,7 +9,7 @@ tags:
     - s3-batch-operations
 authorGithubAlias: dsonger73
 authorName: Yeswanth Narra, Arjun Rawal, Daimon Songer
-date: 2023-10-20
+date: 2023-11-08
 ---
 
 <!-- Update with the appropriate values -->
@@ -24,7 +22,7 @@ date: 2023-10-20
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>- [CodeCatalyst Account](https://codecatalyst.aws) <br> - If you have more than one requirement, add it here using the `<br>` html tag|
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](<link if you have a code sample associated with the post, otherwise delete this line>)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-11-01                             |
+| ⏰ Last Updated     | 2023-11-08                             |
 
 | ToC |
 |-----|
