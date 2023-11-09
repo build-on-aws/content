@@ -125,7 +125,7 @@ In AWS Backup, a backup plan can be created to schedule and to define how you wa
 
 ![put alt text here](images/image13.png)
 
-* AWS Backup provides three options to create a backup plan: In this tutorial, you will build a new plan.
+* AWS Backup provides three options to create a backup plan: in this tutorial, you will build a new plan.
     * **Start with a template -** You can create a new backup plan based on the configurations in an existing plan. Be aware that backup plans created by AWS Backup are based on backup best practices and common backup policy configurations available in the [AWS Backup Developer Guide](https://docs.aws.amazon.com/aws-backup/latest/devguide/about-backup-plans.html). When you select an existing backup plan to start from, the configurations from that backup plan are automatically populated for your new backup plan. You can then change any of these configurations according to your backup requirements.
     * **Build a new plan -** You can create a new backup plan by specifying each of the backup configuration details, as described in the next section. You can choose from the recommended default configurations.
     * **Define a plan using JSON**: You can modify the JSON expression of an existing backup plan or create a new expression.
