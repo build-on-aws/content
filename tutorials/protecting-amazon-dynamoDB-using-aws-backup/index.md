@@ -6,10 +6,9 @@ tags:
   - database
   - aws-backup
   - data-protection
-  - tutorial
 authorGithubAlias: kenhui
 authorName: Kenneth Hui
-date: 2023-10-23
+date: 2023-11-09
 ---
 
 ## Overview
