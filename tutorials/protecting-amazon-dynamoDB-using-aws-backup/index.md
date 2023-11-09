@@ -111,7 +111,7 @@ Instead of using the Default vault or another existing vault, you can create a n
 
 ![put alt text here](images/image11.png)
 
-    * Choose the **Create on-demand backup** button. This takes you to the **Jobs** page, where you will see a list of AWS Backup jobs. From here, you will be able to monitor the progress of active backup jobs, as well as recovery and copy jobs. After a few minutes, the status of the backup job you created will change from **Created** to **Completed**. We will look at your recovery points in **step 4**, when we restore our newly created backup.
+    * Choose the **Create on-demand backup** button. This takes you to the **Jobs** page, where you will see a list of AWS Backup jobs. From here, you will be able to monitor the progress of active backup jobs, as well as recovery and copy jobs. After a few minutes, the status of the backup job you created will change from **Created** to **Completed**. We will look at your recovery points in **Step 4**, when we restore our newly created backup.
 
 ![put alt text here](images/image12.png)
 
