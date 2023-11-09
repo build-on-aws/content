@@ -19,7 +19,7 @@ spaces:
   - livestreams
 ---
 
-![Streaming session with Julie, Chris, and Sam all smiling](images/SDK.jpeg)
+![Streaming session with Julie, Cobus, and Sam all smiling](images/SDK.jpeg)
 
 Join us for the Season 2 Episode 4 where we talk about Stack Overflow questions covering AWS SDK with Sam Whyte from Gremlin!
 
