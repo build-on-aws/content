@@ -13,13 +13,13 @@ waves:
   - generative-ai
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
-date: 2023-11-15
+date: 2023-11-08
 ---
 
 |ToC|
 |---|
 
-One of our earlier blog posts discussed the initial steps for [diving into Amazon Bedrock by leveraging the AWS Go SDK](https://community.aws/concepts/amazon-bedrock-golang-getting-started). Subsequently, our second blog post expanded upon this foundation, showcasing [a Serverless Go application designed for image generation with Amazon Bedrock and AWS Lambda](https://community.aws/tutorials/amazon-bedrock-lambda-image-gen-golang). 
+One of our earlier blog posts discussed the initial steps for [diving into Amazon Bedrock by leveraging the AWS Go SDK](/concepts/amazon-bedrock-golang-getting-started). Subsequently, our second blog post expanded upon this foundation, showcasing [a Serverless Go application designed for image generation with Amazon Bedrock and AWS Lambda](/tutorials/amazon-bedrock-lambda-image-gen-golang).
 
 [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-langchaingo&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a fully managed service that makes base models from Amazon and third-party model providers (such as Anthropic, Cohere, and more) accessible through an API. The applications demonstrated in those blog posts accessed Amazon Bedrock APIs directly, thereby avoiding any additional layers of abstraction or frameworks/libraries. This approach is particularly effective for learning and crafting straightforward solutions.
 
@@ -44,7 +44,7 @@ This provides ease of use, choice and flexibility while building LangChain power
 
 ## `langchaingo` implementation for Amazon Bedrock
 
-As mentioned before, Amazon Bedrock process access to [multiple models](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#models-supported?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-langchaingo&sc_geo=mult&sc_country=mult&sc_outcome=acq) including Cohere, Anthropic etc. We will cover how to extend Amazon Bedrock to build a plugin for the Anthropic Claude (v2) model, but the guidelines apply to other models as well. 
+As mentioned before, Amazon Bedrock process access to [multiple models](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#models-supported?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-langchaingo&sc_geo=mult&sc_country=mult&sc_outcome=acq) including Cohere, Anthropic etc. We will cover how to extend Amazon Bedrock to build a plugin for the Anthropic Claude (v2) model, but the guidelines apply to other models as well.
 
 Let's walk through the implementation at a high-level.
 
@@ -111,7 +111,7 @@ type Request struct {
 
 This is how the asynchronous invocation path is handled - the first part involves using the [InvokeModelWithResponseStream](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#Client.InvokeModelWithResponseStream) function and then handling [InvokeModelWithResponseStreamOutput](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/bedrockruntime#InvokeModelWithResponseStreamOutput) response in the `ProcessStreamingOutput` function.
 
-> You can refer to the details in **Using the Streaming API** section [in this blog post](https://community.aws/concepts/amazon-bedrock-golang-getting-started#using-the-streaming-api). 
+> You can refer to the details in **Using the Streaming API** section [in this blog post](/concepts/amazon-bedrock-golang-getting-started#using-the-streaming-api).
 
 ```go
 //...
@@ -219,7 +219,7 @@ git clone github.com/build-on-aws/langchaingo-amazon-bedrock-llm
 cd langchaingo-amazon-bedrock-llm/examples
 ```
 
-Refer to **Before You Begin** section in [this blog post](https://community.aws/concepts/amazon-bedrock-golang-getting-started#before-you-begin) to complete the prerequisites for running the examples. This includes installing Go, configuring Amazon Bedrock access and providing necessary IAM permissions.
+Refer to **Before You Begin** section in [this blog post](/concepts/amazon-bedrock-golang-getting-started#before-you-begin) to complete the prerequisites for running the examples. This includes installing Go, configuring Amazon Bedrock access and providing necessary IAM permissions.
 
 ### Run basic examples
 
@@ -234,7 +234,6 @@ go run main.go
 In this example, we pass in the [WithStreamingFunc](https://pkg.go.dev/github.com/tmc/langchaingo/llms#WithStreamingFunc) option to the LLM invocation. This will switch to the streaming invocation mode for Amazon Bedrock.
 
 > You can refer to the code [here](https://github.com/build-on-aws/langchaingo-amazon-bedrock-llm/blob/main/streaming/main.go)
-
 
 ```go
 //...
@@ -257,6 +256,6 @@ go run streaming/main.go
 
 The examples showed how to use simple LangChain apps to using the `Call` function. In future blog posts, I will cover how to use them as part of chains for implementing functionality like chatbot or QA assistant.
 
-Visit the [Generative AI Space](https://community.aws/generative-ai) to learn more!
+Visit the [Generative AI Space](/generative-ai) to learn more!
 
 Until then, happy building!
