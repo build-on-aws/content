@@ -75,7 +75,7 @@ In this tutorial, you will:
 
 **2.3.1 - Configure on-demand backup job  setting for an Amazon DynamoDB table**
 
-    * On the **Create on-demand backup** page, choose the **Resource type** that you want to back up; Choose **DynamoDB, from the list of supported resources,** to back up an Amazon DynamoDB table.
+    * On the **Create on-demand backup** page, choose the **Resource type** that you want to back up; choose **DynamoDB, from the list of supported resources,** to back up an Amazon DynamoDB table.
     * Choose the **Table** **name** of the DynamoDB resource that you want to protect.
     * In the **Backup window** section, select **Create backup now**. This initiates a backup immediately and enables you to see your saved resource sooner on the **Protected resources** page. Choosing **Customize Backup Window** can be used if you would prefer to configure the backup job to start at a later time.
     * For **Transition to cold storage,** you can define how long your data will remain on primary storage before transitioning to a lower cost storage tier. For this tutorial, enter 7 days.
