@@ -218,7 +218,7 @@ A backup, or recovery point, represents the content of a resource, such as an Am
 
 ### Step 5: Clean-Up
 
-In the following steps, you clean up the resources you created in this tutorial. It is a best practice to delete resources that you are no longer using so that you are not continually charged for them.
+In the following steps, you can clean up the resources you created in this tutorial. It is a best practice to delete resources that you are no longer using so that you are not continually charged for them.
 
 **5.1 — Clean up AWS Backup**
 
