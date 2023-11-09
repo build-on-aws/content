@@ -35,12 +35,13 @@ Join us for our upcoming episodes every Wednesday at 11am PT from 11 October 202
 
 | Upcoming Episode | Name| Date | Link to Watch |
 |--|--|--|--|
-| **S2E04** | All about AWS SDK | October 11, 11am PT | [Watch here](https://twitch.tv/aws) |
+| **S2E05** | All about AWS Top Stack Overflow Questions | November 8, 11am PT | [Watch here](https://twitch.tv/aws) |
 
 Watch past episodes!
 
 | Episode | Name| Date | Link to Watch | Link to Show Notes |
 |--|--|--|--|--|
+| **S2E04** | All about AWS SDK with Sam Whyte| November 11, 2023| [Watch here](https://twitch.tv/aws) |[Show Notes](/livestreams/build-on-answered/2023-11-01) |
 | **S2E03** | All about AWS CDK with Askar Serikov | October 25, 2023 | [Watch here](https://www.twitch.tv/videos/1960974515) |[Show Notes](/livestreams/build-on-answered/2023-10-25) |
 | **S2E02** | All about Amazon Alexa with Amanda Lange | October 18, 2023 | [Watch here](https://www.twitch.tv/videos/1964353102) |[Show Notes](/livestreams/build-on-answered/2023-10-18) |
 | **S2E01** | All about Amazon Bedrock | October 11, 2023 | [Watch here](https://www.twitch.tv/videos/1954377155) |[Show Notes](/livestreams/build-on-answered/2023-10-11) |
