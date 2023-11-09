@@ -7,7 +7,7 @@ tags:
     - ollama
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-11-07
+date: 2023-11-08
 ---
 
 I recently taught a prompt engineering workshop at a conference. The venue could not confirm if the WiFi network could meet the requirements of the workshop. Attendees are often frustrated by slow Internet and fail to get the full value of the course. As an instructor, having to find workarounds to infrastructure shortcomings is equally frustrating. I decided to have the attendees run the workshop on their personal computers.
@@ -22,29 +22,24 @@ Running Ollama locally is the  common way to deploy it. On a computer with modes
 
 1. Download and install Ollama: https://ollama.ai/download
 2. Open a terminal and start ollama.
-
-
-```bash
-$ ollama serve
-```
+    ```bash
+    $ ollama serve
+    ```
 
 3. Check to see if it is installed.
-
-```bash
-$ ollama –version
-```
+    ```bash
+    $ ollama –version
+    ```
 
 4. Choose and pull a large language model from the list of available models. For a local install, use `orca-mini` which is a smaller LLM. 
-
-```bash
-$ ollama pull orca-mini
-```
+    ```bash
+    $ ollama pull orca-mini
+    ```
 
 5. Run the model in the terminal.
-
-```bash
-$ ollama run orca-mini
-```
+    ```bash
+    $ ollama run orca-mini
+    ```
 
 ### Windows
 
@@ -53,38 +48,33 @@ Windows currently does not have a native client, but you can run ollama from a D
 1. Install Docker using these [instructions](https://docs.docker.com/desktop/install/windows-install/).
 2. Open a Powershell window as Administrator.
 3. Pull the ollama container image from Docker Hub. Copy and paste this command in the Powershell window.
-
-```powershell
-> docker pull ollama/ollama
-```
+    ```powershell
+    > docker pull ollama/ollama
+    ```
 
 4. Start the ollama container. Copy and paste this command in the Powershell window.
-
-```powershell
-> docker run -d -v ollama:/root/.ollama -p 11434:11434 —name ollama ollama/ollama
-```
+    ```powershell
+    > docker run -d -v ollama:/root/.ollama -p 11434:11434 —name ollama ollama/ollama
+    ```
 
 5. To run a model locally, copy and paste this command in the Powershell window.
-
-```powershell
-> docker exec -it ollama ollama run orca-mini
-```
+    ```powershell
+    > docker exec -it ollama ollama run orca-mini
+    ```
 
 6. Choose and pull a LLM from the list of available models. For a local install, use `orca-mini` which is a smaller LLM.
-
-```powershell
-> ollama pull orca-mini
-```
+    ```powershell
+    > ollama pull orca-mini
+    ```
 
 7. Run a model in the Powershell console.
-
-```powershell
-> ollama run orca-mini
-```
+    ```powershell
+    > ollama run orca-mini
+    ```
 
 ## Running Ollama on AWS Lightsail for Research
 
-[Lightsail for Research](https://docs.aws.amazon.com/lightsail-for-research/latest/ug/what-is-lfr.html?sc_channel=el&sc_campaign=post&sc_content=runallmwithollamaonlightsailforresearch&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_category=lightsail) provides instances designed for compute intensive tasks such as machine learning. Instances are bundled with RStudio, JupyterLab, SciLab, VSCodium, and Ubuntu for installing your own machine learning stack. To get started with Lightsail for Research, use the search bar in the AWS console home page.
+[Lightsail for Research](https://docs.aws.amazon.com/lightsail-for-research/latest/ug/what-is-lfr.html?sc_channel=el&sc_campaign=post&sc_content=run-large-language-models-with-ollama-and-lightsail-for-research&sc_geo=mult&sc_country=mult&sc_outcome=acq) provides instances designed for compute intensive tasks such as machine learning. Instances are bundled with RStudio, JupyterLab, SciLab, VSCodium, and Ubuntu for installing your own machine learning stack. To get started with Lightsail for Research, use the search bar in the AWS console home page.
 
 ![Open the Lightsail for Research page](./images/lfr-1.png)
 
@@ -96,7 +86,7 @@ LLMs are compute intensive and work with a minimum 16 GB of memory and a GPU. Fo
 
 ![Select the GPU 2XL plan](./images/lfr-3.png)
 
-It can take several minutes to launch and initialize the instance. When it is in a **Running** state, choose **Launch Ubuntu** to open the desktop interface in a browser window.   
+It can take several minutes to launch and initialize the instance. When it is in a **Running** state, choose **Launch Ubuntu** to open the desktop interface in a browser window.
 
 ![Launch the Ubuntu instance](./images/lfr-4.png)
 
@@ -116,7 +106,7 @@ Choose the **Terminal** icon to open a terminal.
 
 ![Open a terminal](./images/lfr-8.png)
 
-With a terminal open, install Ollama and download llama2 LLM. 
+With a terminal open, install Ollama and download llama2 LLM.
 
 ```bash
 $ sudo curl https://ollama.ai/install.sh | sh
