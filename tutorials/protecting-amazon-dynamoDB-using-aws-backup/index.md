@@ -1,6 +1,6 @@
 ---
 title: "Protecting Amazon DynamoDB Using AWS Backup"
-description: Learn to recover your lost DynamoDB data with AWS Backup
+description: "Learn to recover your lost DynamoDB data with AWS Backup."
 tags:
   - dynamodb
   - database
@@ -8,12 +8,12 @@ tags:
   - data-protection
 authorGithubAlias: kenhui
 authorName: Kenneth Hui
-date: 2023-11-09
+date: 2023-11-13
 ---
 
 ## Overview
 
-You can centralize and automate data protection across multiple AWS services using [AWS Backup](https://aws.amazon.com/backup/), a fully managed AWS service.[Amazon DynamoDB](https://aws.amazon.com/dynamodb/) users who need to meet regulatory compliance or business continuity requirements can use AWS Backup to protect the data in their Amazon DynamoDB tables, following a specific frequency and retention period they define. You can use AWS Backup to restore a database table that may have become corrupted through a softwre error or inadvertently deleted by a user. You can also use AWS Backup reporting capabilities to demonstrate compliance by showing proof that you have backed up your databases. After you configure your backup policies and assign Amazon DynamoDB resources to the policies, AWS Backup automates the creation of Amazon DynamoDB on-demand backups and securely stores the backups in an encrypted backup vault that you designate in your backup plan. Following a data-loss event, customers can use AWS Backup to recover their DynamoDB tables.
+You can centralize and automate data protection across multiple AWS services using [AWS Backup](https://aws.amazon.com/backup/), a fully managed AWS service. [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) users who need to meet regulatory compliance or business continuity requirements can use AWS Backup to protect the data in their Amazon DynamoDB tables, following a specific frequency and retention period they define. You can use AWS Backup to restore a database table that may have become corrupted through a softwre error or inadvertently deleted by a user. You can also use AWS Backup reporting capabilities to demonstrate compliance by showing proof that you have backed up your databases. After you configure your backup policies and assign Amazon DynamoDB resources to the policies, AWS Backup automates the creation of Amazon DynamoDB on-demand backups and securely stores the backups in an encrypted backup vault that you designate in your backup plan. Following a data-loss event, customers can use AWS Backup to recover their DynamoDB tables.
 
 AWS Backup currently supports DynamoDB on-demand backups but not point-in-time restores for DynamoDB. AWS Backup enhances DynamoDB on-demand backups by enabling you to schedule and to manage the lifecycle of your backups. You can also monitor and audit backups across AWS services, including DynamoDB.
 
