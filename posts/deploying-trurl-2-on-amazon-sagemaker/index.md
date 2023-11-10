@@ -2,12 +2,9 @@
 title: "Hey, computer: talk to me in Polish! Building a Polish-language speaking chatbot with Amazon SageMaker, Hugging Face, TRURL 2, and Streamlit"  
 description: "Is it hard to use Large Language Models (LLMs), if you have to use non-English language? Let's put that to the test - by checking how hard would be to build a Polish-speaking chatbot on top of Amazon SageMaker, Hugging Face, and TRURL 2 - a fine-tuned version of LLaMA 2 that primary supports that language."
 tags:
-  - aws
   - hugging-face
   - ai-ml
-  - generative-ai
   - llm
-  - llama2
   - sagemaker
   - python
 spaces:
