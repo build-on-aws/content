@@ -26,7 +26,7 @@ Storing every new entry and response in the message(Fig. 2) makes it bigger and 
 
 ![Architecture](images/fig_02.png "Fig 2. Conversation with context.")
 
-In this blog post, I will show you how to use techniques to efficiently provide conversation context to models with [LangChain](https://www.langchain.com/) to create a conversational agent that can engage in natural dialogue, maintain the context of the conversation by appending each generated response into the prompt to inform the next response. This allows us to have extended, coherent conversations with the agit checkout gent across multiple turns. By the end, you will have the skill to create your own conversational application powered by the latest advances in generative AI.
+In this blog post, I will show you how to use techniques to efficiently provide conversation context to models with [LangChain](https://www.langchain.com/) to create a conversational agent that can engage in natural dialogue, maintain the context of the conversation by appending each generated response into the prompt to inform the next response. This allows us to have extended, coherent conversations with the agent across multiple turns. By the end, you will have the skill to create your own conversational application powered by the latest advances in generative AI.
 
 ## Let’s get started!
 
