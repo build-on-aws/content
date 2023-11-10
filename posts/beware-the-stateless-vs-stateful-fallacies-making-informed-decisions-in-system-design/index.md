@@ -3,12 +3,9 @@ title: "Beware the Stateless vs. Stateful Fallacies: Making Informed Decisions i
 description: "Confronting modern reality, the journey between stateless and stateful is neither linear nor it is a one-size-fits-all choice. In this article, you will see that usually round statements about stateful architecture, turn out to be fallacies. And after diving deeper, it turns out it that choice between two paradigms is definitely not a good-or-bad decision."
 tags:
   - architecture
-  - architectural-patterns
   - stateful-workloads
   - stateless-workloads
   - infrastructure-as-code
-  - cloudformation
-  - reinvent
   - reinvent-2023
 spaces:
   - reinvent-2023 
