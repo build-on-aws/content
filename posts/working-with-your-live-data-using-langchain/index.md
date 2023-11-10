@@ -178,9 +178,9 @@ Try the different memory types and check the difference.
 
 ## 5 - Save The Conversation Memory In An Amazon DynamoDB Table
 
-Do this using the LangChain integration [module](https://python.langchain.com/docs/integrations/memory/aws_dynamodb?sc_channel=el&sc_campaign=genaiwave&sc_content=working-with-your-live-data-using-langchain&sc_geo=mult&sc_country=mult&sc_outcome=acq) with [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=genaiwave&sc_content=working-with-your-live-data-using-langchain&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+[Kenton Blacutt](https://github.com/KBB99), an AWS Associate Cloud App Developer, collaborated with Langchain, creating the [Amazon Dynamodb based memory class](https://github.com/langchain-ai/langchain/pull/1058) that allows us to store the history of a langchain agent in an [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=genaiwave&sc_content=working-with-your-live-data-using-langchain&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
-Following the instructions in the LangChain documentation:
+The module is in the [Langchain documentation](https://python.langchain.com/docs/integrations/memory/aws_dynamodb?sc_channel=el&sc_campaign=genaiwave&sc_content=working-with-your-live-data-using-langchain&sc_geo=mult&sc_country=mult&sc_outcome=acq), to integrate it follow the steps:
 
 - Create the Amazon DynamoDB:
 
