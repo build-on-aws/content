@@ -21,15 +21,19 @@ This guide will walk through how to quickly set up an EventBridge Pipe that dete
 
 ![Architecture]( images/ebpipes-ddbstreams-diagram.jpg "Architecture Diagram")
 
+### Prerequisites
+
+All you need is an AWS account with full permissions to access DynamoDB, Eventbridge and CloudWatch Logs.
+
 ## Walkthrough
 
 ### Step 1: Creating a DynamoDB Table and enabling streams
 
-First, login to the AWS Management Console and navigate to the DynamoDB service. Click on "Create Table" to begin setting up your new table.
+First, login to the AWS Management Console and navigate to the DynamoDB service. Click on "Create Table" to begin setting up the new table.
 
 For Table name, enter "GameScores". For the Primary key, enter "GameId" for the partition key and "GamerTag" for the sort key. These will be used to uniquely identify each item in the table.
 
-Under Table settings, you can customize read/write capacity as needed for your expected workload. The defaults are fine to start.
+Under Table settings, we can customize read/write capacity as needed for our expected workload. The defaults are fine to start.
 
 The default settings are left for the key attributes GameId and GamerTag.
 
@@ -45,9 +49,9 @@ To enable streams on the table, in the DynamoDB console select the "GameScores" 
 
 ### Step 2: Create a custom event bus in Amazon Eventbridge
 
-First, open the Amazon EventBridge console in your AWS account. In the left navigation pane, click "Event Buses". On this page, click the "Create event bus" button. Custom event buses allow for greater isolation, access control, organization, separation of concerns, event retention control, and insulation from changes compared to using the shared default event bus. This is because the default event bus receives events from all AWS services.
+First, open the Amazon EventBridge console in AWS. In the left navigation pane, click "Event Buses". On this page, click the "Create event bus" button. Custom event buses allow for greater isolation, access control, organization, separation of concerns, event retention control, and insulation from changes compared to using the shared default event bus. This is because the default event bus receives events from all AWS services.
 
-Give your event bus the name "game-bus". The name can contain up to 256 characters and must be unique within your account. You can enable archive events here if desired. Click "Create".
+Give the event bus the name "game-bus". The name can contain up to 256 characters and must be unique within the account. You can enable archive events here if desired. Click "Create".
 
 Now we will create a rule that sends all events from that bus into a CloudWatch log group so that we can see the events published to it. Go to "Rules" on the left hand side and once there, change the event bus from the default one to "game-bus".
 
@@ -57,19 +61,19 @@ Click on "Create Rule" and for a rule name, enter "all-game-events". Optionally 
 
 ![Eventbridge Rule Step 1]( images/createrules1.png "Eventbridge Rule Step 1")
 
-After going to the next step, click on "All Events" as the event source. This may give you a warning but we do want to have visibility into whatever events are sent to the bus. You can leave everything else in this step as is and continue.
+After going to the next step, click on "All Events" as the event source. This may display a warning but we do want to have visibility into whatever events are sent to the bus. We can leave everything else in this step as is and continue.
 
 ![Eventbridge Rule Step 2]( images/createrules1.png "Eventbridge Rule Step 2")
 
-For the target, select "AWS service" and for the target, from the dropdown select "CloudWatch log group". Name the log group "game-events-log". Note that if you use infrastructure as code, you would additionally need to configure an IAM role to allow Eventbridge to access this log group.
+For the target, select "AWS service" and for the target, from the dropdown select "CloudWatch log group". Name the log group "game-events-log". Note that if we use infrastructure as code, we would additionally need to configure an IAM role to allow Eventbridge to access this log group.
 
 ![Eventbridge Rule Step 3]( images/createrules3.png "Eventbridge Rule Step 3")
 
-Now you can skip the tagging part and go straight to creating the rule.
+Now we can skip the tagging part and go straight to creating the rule.
 
 ![Eventbridge Rule Description]( images/ruledescription.png "Eventbridge Rule Description")
 
-Once the rule is created, you can navigate to it in the console under the "Rules" section. Then, if you navigate to the "targets" tab on the lower side of the page, you can click the link that says "game-events-log" to navigate to the created log group in CloudWatch. Here, we can see a log of all the events sent to the event bus. We can click on "Start tailing" on the top right hand side to see the incoming events. It is highly recommended to leave this tab open as we will return later.
+Once the rule is created, we can navigate to it in the console under the "Rules" section. Then, if we navigate to the "targets" tab on the lower side of the page, we can then click the link that says "game-events-log" to navigate to the created log group in CloudWatch. Here, we can see a log of all the events sent to the event bus. We can click on "Start tailing" on the top right hand side to see the incoming events. It is highly recommended to leave this tab open as we will return later.
 
 ### Step 3: Creating the pipe
 
@@ -103,7 +107,7 @@ After creating this item, we can then go to the CloudWatch Logs Live Tail, and s
 
 ### Optional: Filtering and transforming the payload
 
-If we wanted to transform the item before sending it, or filter out which events to send to the event bus so that only particular events are sent to the event bus. Filtering could be used, for example, if the event bus is only meant for a particular game then we don't want to send unnecessary events to the event bus. Keep in mind that Eventbridge rules can also filter out events, so it is up to you to determine whether the event should be filtered before it is sent to the bus (through the pipes integration) or after.
+If we wanted to transform the item before sending it, or filter out which events to send to the event bus so that only particular events are sent to the event bus. Filtering could be used, for example, if the event bus is only meant for a particular game then we don't want to send unnecessary events to the event bus. Keep in mind that Eventbridge rules can also filter out events, so it is up to us to determine whether the event should be filtered before it is sent to the bus (through the pipes integration) or after.
 
 To perform filtering, we may go back to the "game-event-pipe" in the Eventbridge Pipes section of the Eventbridge console. Then, we can click on "Edit" on the top right hand side to edit the pipe. Then clicking on the "Filtering" icon on the pipe should get us the ability to add a filtering statement. Copy the following event pattern into the box that says "Event Pattern" near the bottom of the page.
 
