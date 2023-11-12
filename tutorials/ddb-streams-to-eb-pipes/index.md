@@ -123,7 +123,7 @@ To perform filtering, we may go back to the "game-event-pipe" in the Eventbridge
 
 Now that we configured filtering, let's transform the payload using the "Target Input Transformer". To do this, click on the "Target" Icon on the pipe diagram and scroll down. Close to the bottom there is a dropdown called "Target Input Transformer", which should be expanded. Paste the following transformer in the middle column:
 
-```jsx
+```
 {
     "pipeName" : <aws.pipes.pipe-name>,
     "GamerTag": <$.dynamodb.Keys.GamerTag.S>,
