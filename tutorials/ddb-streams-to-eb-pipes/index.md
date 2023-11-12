@@ -1,6 +1,6 @@
 ---
 title: "Sending Events from DynamoDB using Eventbridge Pipes"
-description: "A no-code integreation between Amazon DynamoDB and Eventbridge"
+description: "A no-code integration between Amazon DynamoDB and Eventbridge"
 tags:
     - event-driven
     - serverless
@@ -151,7 +151,7 @@ We can now play around with the Table to see how the events get recorded. Naviga
     "id": "8b5b7650-5f62-128b-4ca4-18e06ff9e4bb",
     "detail-type": "Event from aws:dynamodb",
     "source": "Pipe game-event-pipe",
-    "account": "ACCOUNT_ID",
+    "account": "AWS_ACCOUNT_ID",
     "time": "2023-11-12T15:01:02Z",
     "region": "eu-west-1",
     "resources": [],
