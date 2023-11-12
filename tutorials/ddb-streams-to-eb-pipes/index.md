@@ -8,7 +8,7 @@ tags:
     - dynamodb
 authorGithubAlias: kaizadwadia
 authorName: Kaizad Wadia and Yifei Ding
-date: 2023-11-12
+date: 2023-11-14
 ---
 
 As application architectures grow in complexity, the number of events and data sources that need to integrate also increases. This often leads developers to write custom integration code which is time-consuming, difficult to maintain, and prone to errors. Amazon EventBridge Pipes aim to simplify these complex event-driven architectures by allowing different services to be connected without writing custom integration code.
@@ -24,6 +24,15 @@ This guide will walk through how to quickly set up an EventBridge Pipe that dete
 ### Prerequisites
 
 All you need is an AWS account with full permissions to access DynamoDB, Eventbridge and CloudWatch Logs.
+
+| Attributes                |                                   |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | Intermediate - 200                         |
+| ⏱ Time to complete  | 45 minutes                             |
+| 💰 Cost to complete | USD $0.01      |
+| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)|
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| ⏰ Last Updated     | 2023-11-14                             |
 
 ## Walkthrough
 
@@ -168,6 +177,14 @@ We can now play around with the Table to see how the events get recorded. Naviga
 ```
 
 We have now learned how to transform and filter the inputs. Notice that there is also the Enrichment feature. This is useful if you want to enrich the data using a Lambda function, a Step Function or another API that can perform more complex transformations or even add data from other sources before it gets returned to the pipe.
+
+## Clean-up
+
+To clean-up your AWS account, remember to delete the following:
+
+* The CloudWatch log group in the CloudWatch Console
+* The Eventbridge pipe, as well as the custom bus and the rule.
+* The DynamoDB Table. This will automatically delete the stream. Make sure to not check the box for "Create an on-demand backup of GameScores before deletion."
 
 ## Conclusion
 
