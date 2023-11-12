@@ -8,8 +8,8 @@ tags:
   - amazon-bedrock
   - langchain
 images:
-  banner: images/arch.gif
-  hero: images/arch.gif
+  banner: images/arch.jpeg
+  hero: images/arch.jpg
 spaces:
   - generative-ai
 waves:
@@ -42,7 +42,7 @@ One of the previous blogs provided an introduction to using [langchaingo](https:
 
 The application is written in Go, but the concepts apply to any other language you might choose. As mentioned before, it uses `langchaingo` as the framework to interact with the [Anthropic Claude (v2) model on Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#models-supported?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-apprunner-chatterdox-webapp&sc_geo=mult&sc_country=mult&sc_outcome=acq). The web app uses the [Go embed package](https://pkg.go.dev/embed) to serve the static file for the frontend part (HTML, JavaScript and CSS) from directly within the binary.
 
-![high level architecture](images/arch.png)
+![high level architecture](images/arch.jpg)
 
 To make sure that the contents of the link are included as context for the LLM, the applications uses the [LoadStuffQA](https://pkg.go.dev/github.com/tmc/langchaingo/chains#LoadStuffQA) chain along with a prompt.
 
@@ -147,7 +147,7 @@ Once a valid link is provided (click *Submit*), the chat area will be enabled.
 
 You can now start asking questions about the page contents (enter a message in the text box and click *Send*).
 
-![chatterdox in action](images/chatterdox3.png)
+![chatterdox in action](images/chatterdox3.jpg)
 
 You can continue the chat conversation by asking additional questions.
 
