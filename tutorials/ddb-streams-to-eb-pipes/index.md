@@ -30,8 +30,8 @@ All you need is an AWS account with full permissions to access DynamoDB, Eventbr
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 45 minutes                             |
 | 💰 Cost to complete | USD $0.01      |
-| 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)|
-| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| 🧩 Prerequisites    | [AWS Account](https://aws.amazon.com/resources/create-account/)|
+| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎    |
 | ⏰ Last Updated     | 2023-11-14                             |
 
 ## Walkthrough
