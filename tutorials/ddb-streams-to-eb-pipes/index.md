@@ -7,7 +7,9 @@ tags:
     - eventbridge
     - dynamodb
 authorGithubAlias: kaizadwadia
-authorName: Kaizad Wadia and Yifei Ding
+authorName: Kaizad Wadia
+additionalAuthors:
+  - authorName: Yifei Ding
 date: 2023-11-14
 ---
 
