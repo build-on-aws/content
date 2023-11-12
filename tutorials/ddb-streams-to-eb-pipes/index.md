@@ -8,7 +8,7 @@ tags:
     - dynamodb
 authorGithubAlias: kaizadwadia
 authorName: Kaizad Wadia and Yifei Ding
-date: 2023-11-11
+date: 2023-11-12
 ---
 
 As application architectures grow in complexity, the number of events and data sources that need to integrate also increases. This often leads developers to write custom integration code which is time-consuming, difficult to maintain, and prone to errors. Amazon EventBridge Pipes aim to simplify these complex event-driven architectures by allowing different services to be connected without writing custom integration code.
