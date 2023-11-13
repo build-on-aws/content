@@ -1,6 +1,6 @@
 ---
-title: "Hey, computer: talk to me in Polish! Building a Polish-language speaking chatbot with Amazon SageMaker, Hugging Face, TRURL 2, and Streamlit"  
-description: "Is it hard to use Large Language Models (LLMs) if you have to use non-English language? Let's put that to the test - by checking how hard it would be to build a Polish-speaking chatbot on top of Amazon SageMaker, Hugging Face, and TRURL 2 - a fine-tuned version of LLaMA 2 that primarily supports that language."
+title: "Hey, Computer: Talk to Me in Polish! Building a Polish-language speaking chatbot with Amazon SageMaker, Hugging Face, TRURL 2, and Streamlit"  
+description: "Can you use LLMs to build a foreign language chatbot? Yes!"
 tags:
   - hugging-face
   - ai-ml
@@ -17,13 +17,13 @@ date: 2023-11-09
 | ToC |
 |-----|
 
-Picture this: you have a brilliant idea for a product needing a conversational user interface, e.g., a chatbot. As a builder, you know that *Large Language Models (LLMs)* can help you to tackle such challenges effectively. There is only one caveat: your idea requires that conversations should happen in **your local language**.
+Picture this: you have a brilliant idea for a product needing a conversational user interface, e.g., a chatbot. As a builder, you know that *Large Language Models (LLMs)* can help you tackle such challenges effectively. There is only one caveat: your idea requires that conversations should happen in **your local language**.
 
-In the technology world, we live in an English-centric landscape. If our products fit that definition or are built to be operated by tech-savvy people, it is straightforward to forget that other languages are needed. At the same time, technology should - and is - helping us to battle such challenges and gaps. There are models available already on the market that provide multilingual capabilities. So, how hard or easy would it be to cover a non-English language requirement? Let's check that in practice.
+In the technology world, we live in an English-centric landscape. If our products fit that definition or are built to be operated by tech-savvy people, it is easy to forget that other languages are needed. At the same time, technology should - and is - helping us to battle such challenges and gaps. There are models available already on the market that provide multilingual capabilities. So, how hard or easy would it be to cover a non-English language requirement? Let's take that into practice.
 
 I may be biased, but an obvious choice for me is... Polish language as I live in Poland. It's a choice in the middle, in terms of popularity - depending on the source - this language is around 25-30th place worldwide with a total population estimated around 44-45 million people. Then, the goal of this article is to explore *how challenging* it will be to build a chatbot that will communicate using my native language.
 
-## Hey, computer: talk to me, *but in Polish!*
+## Hey, Computer: Talk to Me, *but in Polish!*
 
 For most people with experience with *Amazon Web Services* and technology, TRURL 2* is the least familiar term in the title above - so allow me to start here. 
 
@@ -48,7 +48,7 @@ To successfully execute all steps in the given repository, you need to have the 
     - Node.js v21.x or higher.
 - Configured profile in the installed *AWS CLI* with credentials for your *AWS IAM* user account.
 
-## How to use that repository?
+## How to Use The Repository
 
 First, we need to configure the local environment - and here are the steps:
 
@@ -120,8 +120,7 @@ So now it's time to deploy the model as a *SageMaker Endpoint* and explore the p
 
 ![Locate the notebook file and open it](./images/exploration-1-open-notebook.png)
 
-After opening it for the first time, a new dialog window will appear, asking you to configure *kernel* (the environment executing our code inside the notebook). Please configure it according to the screenshot below. If that window did not appear, or you've closed it by accident - you can always find that in the opened tab with a notebook under the 3rd icon on the screenshot above.
-
+After opening it for the first time, a new dialog window will appear, asking you to configure *kernel* (the environment executing our code inside the notebook). Please configure it according to the screenshot below. If that window did not appear, or you've closed it by accident - you can always find it in the opened tab with a notebook under the third icon on the screenshot above.
 ![Configure kernel for your exploration notebook](./images/exploration-2-configure-kernel.png)
 
 Now, you should be able to follow instructions inside the notebook by executing each cell with code one after another (via the toolbar or keyboard shortcut: `CTRL/CMD + ENTER`). Remember that before executing the clean-up section and invoking the cell with `predictor.delete_endpoint()`, you should *stop*, as we will need the running endpoint for the next section. 
@@ -193,7 +192,7 @@ def talk_with_trurl2(endpoint, dict_message):
 
 The returned value is then wrapped as a new conversation entry, with a specific role assigned (`"assistant"`) to visualize that in the conversation flow. For those who do not speak *Polish*, the main part of the prompt sets a friendly conversational tone and asks the chatbot to play a game of 20 questions, where a player specifies the category to guess as an entry point to the conversation.  
 
-## Clean-up, Costs, and Conclusion
+## Conclusion
 
 This one is pretty easy! Assuming that you have followed all the steps inside the notebook in the *SageMaker Studio*, the only thing you need to do to clean up is delete *AWS CloudFormation* stacks via *AWS CDK* (remember to close all the *applications* and *kernels* inside *Amazon SageMaker Studio* to be on the safe side). However, *Amazon SageMaker Studio* leaves a bit more resources hanging around related to the *Amazon Elastic File Storage (EFS)*, so first, you have to delete the stack with *SageMaker Studio*, invoke the clean-up script, and then delete everything else:
 
@@ -211,8 +210,8 @@ $ ./clean-up-after-sagemaker-studio.sh "${EFS_ID}" "${DOMAIN_ID}"
 $ (cd infrastructure && cdk destroy --all)
 ```
 
-Last but not least - I would like to provide a quick summary in terms of *how much does that cost*. The machines we created for and inside *Jupyter Notebook* are the most significant cost factor. Those are: compute for *Amazon SageMaker Endpoint* (1x `ml.g5.2xlarge`) and compute for *kernel* that was used by *Amazon SageMaker Studio Notebook* (1x `ml.t3.medium`). Assuming that we have set up all infrastructure in `eu-west-1`, the total cost of using 8 hours of cloud resources from this code sample will be lower than $15 ([here you can find detailed calculation](https://calculator.aws/#/estimate?id=789a6cd85ffac96e8b4321cca2a9a4d53cdb5210)). Everything else you created with the *infrastructure as code* (via *AWS CDK*) has a much lower cost, especially within the discussed time constraints.   
+Last but not least - I would like to provide a quick summary in terms of *project costs*. The machines we created for and inside *Jupyter Notebook* are the most significant cost factor. Those are: compute for *Amazon SageMaker Endpoint* (1x `ml.g5.2xlarge`) and compute for *kernel* that was used by *Amazon SageMaker Studio Notebook* (1x `ml.t3.medium`). Assuming that we have set up all infrastructure in `eu-west-1`, the total cost of using 8 hours of cloud resources from this code sample will be lower than $15 ([here you can find detailed calculation](https://calculator.aws/#/estimate?id=789a6cd85ffac96e8b4321cca2a9a4d53cdb5210)). Everything else you created with the *infrastructure as code* (via *AWS CDK*) has a much lower cost, especially within the discussed time constraints.   
 
-Outside the successful delivery (as our chatbot speaks Polish), I hope that through the exploration and attached sample code, I have managed to convince you that a requirement of using a non-English *LLM* should not be a showstopper, even for the less popular languages - like *Polish*. Thanks to the seamless integration between *Amazon SageMaker* and *Hugging Face* - which aggregates models provided by *ML* community members and companies worldwide, you could develop an LLM-powered chatbot application that communicates in your native language pretty quickly. 
+Outside the successful delivery of our chatbot speaking Polish, I hope that through the exploration and attached sample code, I have managed to convince you that a requirement of using a non-English *LLM* should not be a showstopper, even for the less popular languages - like *Polish*. Thanks to the seamless integration between *Amazon SageMaker* and *Hugging Face* - which aggregates models provided by *ML* community members and companies worldwide, you could develop an LLM-powered chatbot application that communicates in your native language pretty quickly.
 
 I also encourage you to dive deeper into the [provided code example](https://github.com/build-on-aws/deploying-trurl-2-on-amazon-sagemaker) to learn more about aspects not covered in detail inside this post (e.g., using *AWS CDK* to automate setting up VPC-only configuration of *Amazon SageMaker Studio* or detailed implementation of the *Streamlit* example). Also, if you have more questions, please do not hesitate to [contact me directly](https://awsmaniac.com/contact).
