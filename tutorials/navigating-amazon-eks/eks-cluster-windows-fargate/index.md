@@ -16,13 +16,13 @@ spaces:
   - modern-apps
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
-date: 2023-11-30
+date: 2023-11-16
 ---
 
-Windows Kubernetes containers allow organisations to easily migrate their existing Windows workloads to Amazon EKS.
-To run Windows workloads on Amazon EKS, you’d need Windows nodes and a Linux node in the cluster. The Linux nodes are critical to the functioning of the cluster as they run core cluster components, and thus, for a production-grade cluster, such organization must ensure that the linux nodes are well architected for high availability.
+Windows Containers in Kubernetes allow organisations to easily migrate their existing Windows workloads to Amazon EKS.
+For example, when deploying a typical legacy monolithic .NET framework application, you might to be concerned about the application dependencies with its environment, perform configuration tuning, and data transfer between hosting servers. These amongst other tasks introduces risk to new deployments and delay new software releases. Instead, customers can migrate their existing legacy .NET applications by using Windows containers in Kubernetes to containerize their applications and deploy to Amazon EKS. This approach has helped teams to eliminate manual steps, save time and cost involved in deploying and maintaining Windows application. The application packaging and deployment process can be fully automated giving developers more time to focus on coding rather than operational efforts.
 
-While Amazon EKS clusters must contain one or more Linux or Fargate nodes to run core system Pods that only run on Linux, such as CoreDNS, organizations seeking to reduce operational overhead in managing a Windows EKS cluster can leverage the benefits of Managed Node groups and Fargate.
+Many companies want agility, faster time to market and improved speed of deployment in a reliable manner. Windows Containers in Kubernetes has made it possible for teams building Windows applications to set up a continuous deployment pipeline to Amazon EKS while adopting GitOps approach. GitOps is a way of managing application and infrastructure deployment so that the whole system is described declaratively in a Git repository.  
 
 ![EKS Cluster with Windows and Fargate Nodes](./images/fargate-windows.png)
 
@@ -48,10 +48,16 @@ Before you begin this tutorial, you need to:
 
 ## Overview
 
-Using the eksctl cluster template that follows, you'll build an Amazon Windows EKS cluster that will be a mixture of Windows nodes running on EC2 and Linux node running on Fargate. It configures the following components:
+Using the eksctl cluster template that follows, you'll build an Amazon Windows EKS cluster that will be a mixture of Windows nodes running on EC2 and Linux nodes running on Fargate. It configures the following components:
 
-* **Managed Node groups**: With Amazon EKS managed node groups, you don't need to separately provision or register the Amazon EC2 instances that provide compute capacity to run your Kubernetes applications. As part of this tutorial, we will create a managed node group using `WINDOWS_FULL_2022_x86_64` AMI with the help of `eksctl`. This node group will provide the compute capacity to run Windows workloads in the cluster.
-* **Fargate Profile**: [AWS Fargate](https://aws.amazon.com/fargate/) is a compute engine for EKS that removes the need to configure, manage, and scale EC2 instances. Fargate ensures Availability Zone spread while removing the complexity of managing EC2 infrastructure and works to ensure that pods in a Replica Service are balanced across Availability Zones. In this tutorial, we will use Fargate to provide the compute capacity we need to run the core clusters components in the kube-system namespace.
+* **Managed Node groups**: With Amazon EKS managed node groups, you don't need to separately provision or register the Amazon EC2 instances that provide compute capacity to run your Kubernetes applications. For Kubernetes v1.28, operating system compatibility for Windows nodes (and Pods) includes Windows Server 2019, and Windows Server 2022. Windows Server 2022 is built on the strong foundation of Windows Server 2019 with many innovations on management and security. As part of this tutorial, we will create a Windows managed node group using the Amazon EKS optimized Windows Server 2022 Full AMI,  `WINDOWS_FULL_2022_x86_64` with the help of `eksctl`. This node group will provide the compute capacity to run Windows workloads in the cluster. The Amazon EKS optimized AMI is built on top of Windows Server 2022, and it includes **containerd**, the **kubelet**, and the **AWS IAM Authenticator** to work with Amazon EKS out of the box.
+* **Fargate Profile**: [AWS Fargate](https://docs.aws.amazon.com/eks/latest/userguide/fargate-getting-started.html) is a compute engine for EKS that removes the need to configure, manage, and scale EC2 instances. Fargate ensures Availability Zone spread while removing the complexity of managing EC2 infrastructure and works to ensure that pods in a Replica Service are balanced across Availability Zones. Each Pod running on Fargate gets its own worker node. Fargate automatically scales the worker nodes as Kubernetes scales pods.  In this tutorial, we will use Fargate to provide the compute capacity we need to run the core cluster’s components like CoreDNS in the kube-system namespace. This way, we ease the burden of ensuring the availability and scalability of the CoreDNS pods in the cluster.
+* **Control plane logging**: Enable [Amazon EKS control plane logging](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html), to provide audit and diagnostic logs directly from the Amazon EKS control plane to CloudWatch Logs. In this tutorial, we’ve enabled all the available control log type that corresponds to the available components of the Kubernetes control plane.
+
+
+To run Windows workloads on Amazon EKS, you’d need Windows nodes and a Linux node in the cluster. The Linux nodes are critical to the functioning of the cluster as they run core cluster’s components, and thus, for a production-grade cluster, such organization must ensure that the linux nodes are well architected for high availability.
+
+While Amazon EKS clusters must contain one or more Linux or Fargate nodes to run core system Pods that only run on Linux, such as CoreDNS, organizations seeking to reduce operational overhead in managing a Windows EKS cluster can leverage the benefits of Managed Node groups and Fargate.
 
 ## Step 1: Configure the Cluster
 
@@ -59,7 +65,7 @@ In this section, you will configure the Amazon EKS cluster to meet the specific 
 
 **To create the cluster config**
 
-1. Copy and paste the content below in your terminal to create a `cluster-config.yaml` file. Replace the `region` with your preferred region. 
+1. Copy and paste the content below in your terminal to create a `cluster-config.yaml` file. Replace the `region` with your preferred region.
 
 ```yaml
 cat << EOF > cluster-config.yaml
@@ -85,17 +91,22 @@ managedNodeGroups:
         effect: NoSchedule
 
 fargateProfiles:
-  - name: fp
+  - name: fargate
     selectors:
       - namespace: default
       - namespace: kube-system
 
 cloudWatch:
-    clusterLogging:
-        # enable specific types of cluster control plane logs
-        enableTypes: ["*"]    
+ clusterLogging:
+   enableTypes: ["*"]
+    # Sets the number of days to retain the logs for (see [CloudWatch docs](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html#API_PutRetentionPolicy_RequestSyntax)).
+    # By default, log data is stored in CloudWatch Logs indefinitely.
+   logRetentionInDays: 60   
 EOF
 ```
+
+With the `cluster-config.yaml` file, we’ve created two node pools which includes Linux and Windows. The Linux node pool is provided by the Fargate profile called **fargate**, and the Windows node pool is provided by the managed node group called **windows-managed-ng-2022**. In order to run Windows containers, it must be scheduled on the Windows node pool. Since we are running a mix of Linux and Windows nodes, we’ve configured `NoSchedule` [taints](https://eksctl.io/usage/nodegroup-taints/) on the Windows managed nodes to help ensure Linux pods are not scheduled onto Windows nodes. All Linux pods will be scheduled on Fargate in the default or kube-system namespaces. 
+
 
 ## Step 2: Create the Cluster
 
@@ -110,10 +121,10 @@ eksctl create cluster -f cluster-config.yaml
 Upon completion, you should see the following response output:
 
 ```bash
-2023-10-17 09:38:15 [ℹ]  nodegroup "windows-managed-ng-2022" has 2 node(s)
-2023-10-17 09:38:15 [ℹ]  node "ip-192-168-28-156.us-west-2.compute.internal" is ready
-2023-10-17 09:38:15 [ℹ]  node "ip-192-168-55-87.us-west-2.compute.internal" is ready
-2023-10-17 09:38:17 [✔]  EKS cluster "eks-windows-mng-fg-mix" in "us-west-2" region is ready
+2023-11-13 14:19:14 [ℹ]  nodegroup "windows-managed-ng-2022" has 2 node(s)
+2023-11-13 14:19:14 [ℹ]  node "ip-192-168-14-166.us-west-2.compute.internal" is ready
+2023-11-13 14:19:14 [ℹ]  node "ip-192-168-58-84.us-west-2.compute.internal" is ready
+2023-11-13 14:19:15 [✔]  EKS cluster "eks-windows-mng-fg-mix" in "us-west-2" region is ready
 ```
 
 When the previous command completes, verify that all of your nodes have reached the `Ready` state with the following command:
@@ -122,45 +133,53 @@ When the previous command completes, verify that all of your nodes have reached 
 kubectl get nodes -o=custom-columns=NODE:.metadata.name,OS-Image:.status.nodeInfo.osImage,OS:.status.nodeInfo.operatingSystem
 ```
 
-Sample output:
+The expected output should look like this:
 
 ```bash
 NODE                                                    OS-Image                         OS
-fargate-ip-192-168-102-165.us-west-2.compute.internal   Amazon Linux 2                   linux
-fargate-ip-192-168-103-37.us-west-2.compute.internal    Amazon Linux 2                   linux                
-ip-192-168-28-156.us-west-2.compute.internal            Windows Server 2022 Datacenter   windows
-ip-192-168-55-87.us-west-2.compute.internal             Windows Server 2022 Datacenter   windows
+fargate-ip-192-168-114-130.us-west-2.compute.internal   Amazon Linux 2                   linux
+fargate-ip-192-168-146-30.us-west-2.compute.internal    Amazon Linux 2                   linux
+ip-192-168-14-166.us-west-2.compute.internal            Windows Server 2022 Datacenter   windows
+ip-192-168-58-84.us-west-2.compute.internal             Windows Server 2022 Datacenter   windows
 ```
 
-Let’s verify the core cluster component
+Let’s verify the core cluster’s components:
 
 ```bash
-kubectl get pods -A
+kubectl get pods -n kube-system -o wide
 ```
 
-Expected result:
+The expected output should look like this:
 
 ```bash
-NAMESPACE     NAME                       READY   STATUS    RESTARTS   AGE
-kube-system   coredns-56666498f9-8mw4s   1/1     Running   0          12m
-kube-system   coredns-56666498f9-zr79z   1/1     Running   0          12m
+NAME                       READY   STATUS    RESTARTS   AGE   IP                NODE                                                    NOMINATED NODE   READINESS GATES
+coredns-56666498f9-lx8xj   1/1     Running   0          66m   192.168.114.130   fargate-ip-192-168-114-130.us-west-2.compute.internal   <none>           <none>
+coredns-56666498f9-xqqlz   1/1     Running   0          66m   192.168.146.30    fargate-ip-192-168-146-30.us-west-2.compute.internal    <none>           <none>
 ```
 
+To achieve a highly available CoreDNS application in the cluster in the event of disruptions, Kubernetes offers a feature called Pod disruption budget. An appropriate [Pod disruption budgets](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets) (PDBs) was automatically created for the CoreDNS to control the number of Pods that can be down simultaneously when we created the cluster. 
 
-An appropriate Pod disruption budgets (PDBs) was automatically created for CoreDNS to control the number of Pods that can be down simultaneously.
+Run the command below to verify this is in place:
 
 ```bash
 kubectl get PodDisruptionBudget -A
+```
+
+The expected output should look like this:
+
+```bash
 NAMESPACE     NAME                 MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
 kube-system   coredns              N/A             1                 1                     12m
 ```
 
 ## Step 3: Deploy Sample Windows Application
 
-1. Copy and paste the content below in your terminal to create a `windows-workload.yaml` file 
+The sample Windows application is a basic front facing Windows Web application based on IIS (Internet Information Services) web server. The deployment manifest uses IIS base image.
+
+1. Copy and paste the content below in file called `windows-workload.yaml`
 
 ```yaml
-cat << EOF > windows-workload.yaml
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -222,29 +241,27 @@ spec:
     track: stable
   sessionAffinity: None
   type: LoadBalancer
-EOF
 ```
 
-1. Deploy the sample application with the command below:
+1. We’ve configured [toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-nodes-by-condition) in the Windows workload deployment manifest to help ensure Windows Pods are only deployed to the Windows nodes based on matching taints (os=windows). Deploy the sample application with the command below:
 
 ```bash
 kubectl apply -f windows-workload.yaml
 ```
 
-1. Verify the deployment:
+1. Verify the Windows workload deployment:
 
 ```bash
 kubectl get pods -o wide -n windows
 ```
 
-Expected output:
+The expected output should look like this:
 
 ```bash
-NAME                                           READY   STATUS    RESTARTS   AGE     IP               NODE                                           NOMINATED NODE   READINESS GATES
-windows-server-iis-ltsc2022-6c87658cb7-hg8ft   1/1     Running   0          5m54s   192.168.18.205   ip-192-168-28-156.us-west-2.compute.internal   <none>           <none>
-windows-server-iis-ltsc2022-6c87658cb7-m9psj   1/1     Running   0          5m54s   192.168.33.108   ip-192-168-55-87.us-west-2.compute.internal    <none>           <none>
+NAME                                          READY   STATUS    RESTARTS   AGE    IP               NODE                                           NOMINATED NODE   READINESS GATES
+windows-server-iis-ltsc2022-ddd54677b-hsgxk   1/1     Running   0          116s   192.168.4.69     ip-192-168-14-166.us-west-2.compute.internal   <none>           <none>
+windows-server-iis-ltsc2022-ddd54677b-hvbqg   1/1     Running   0          116s   192.168.34.153   ip-192-168-58-84.us-west-2.compute.internal    <none>           <none>
 ```
-
 
 We had exposed the deployment externally using a LoadBalancer service type. Use the command below to get the service url:
 
@@ -252,18 +269,21 @@ We had exposed the deployment externally using a LoadBalancer service type. Use 
 kubectl get svc -n windows
 ```
 
-Output:
+The expected output should look like this:
 
 ```bash
 NAME                                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE
-windows-server-iis-ltsc2022-service   LoadBalancer   10.100.134.219   a4cebe53a9a35460886878031518849a-712875067.us-west-2.elb.amazonaws.com   80:30267/TCP   13m
+windows-server-iis-ltsc2022-service   LoadBalancer   10.100.134.219   af25ec7b2cb504I4c8a36c5cIb189b07-1100871459.us-west-2.elb.amazonaws.com   80:30267/TCP   13m
 ```
 
 Copy the EXTERNAL-IP URL into your browser of choice and you should be presented with a basic HTML site.
 
 ![A Sample Window Application](./images/web-app.png)
 
-## Step 4: Additionally, create a workload on Fargate
+
+## Step 4: (Optional) Create a workload on Fargate
+
+If you’d like to deploy a sample Linux workload in the same cluster, you’d need to use the Fargate profile by specifying any of the kube-system or default namespaces.
 
 Run the command below to create a sample nginx pod in the default namespace:
 
@@ -277,7 +297,7 @@ It may take about a minute for the pod to be scheduled on a fargate node. Run th
 kubectl get pods -o wide
 ```
 
-Expected result:
+The expected output should look like this:
 
 ```bash
 NAME   READY   STATUS    RESTARTS   AGE   IP               NODE                                                   NOMINATED NODE   READINESS GATES
@@ -288,9 +308,7 @@ test   1/1     Running   0          11m   192.168.103.37   fargate-ip-192-168-10
 
 ## Clean Up
 
-To avoid incurring future charges, you should delete the resources created during this tutorial. 
-
-Delete the sample deployment:
+To avoid incurring future charges, you should delete the resources created during this tutorial. Delete the sample deployment 
 
 ```bash
 kubectl delete -f windows-workload.yaml
@@ -305,10 +323,9 @@ eksctl delete cluster -f cluster-config.yaml
 Upon completion, you should see the following response output:
 
 ```bash
-2023-08-26 17:26:44 [✔]  all cluster resources were deleted
+2023-11-13 15:27:19 [✔]  all cluster resources were deleted
 ```
-
 
 ## Conclusion
 
-In this tutorial, you've successfully set up an Amazon EKS Windows Cluster with a mix of Windows managed nodes and Fargate nodes for a reduced operational efforts in managing a Amazon EKS Windows cluster. This cluster gives you the infrastructure you need to start deploying your Windows application deployments.
+In this tutorial, you've successfully set up an Amazon EKS Windows Cluster mixed with Windows managed nodes and Fargate node to reduce the amount of operational task you have to perform in managing a Amazon EKS Windows cluster. This cluster gives you the infrastructure you need to start deploying your Windows application deployments.
