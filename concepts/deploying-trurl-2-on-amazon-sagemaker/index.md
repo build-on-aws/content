@@ -127,7 +127,7 @@ Now, you should be able to follow instructions inside the notebook by executing 
 
 The exploration aims to deploy an *Amazon SageMaker Endpoint* with a *TRURL 2* model with 7B parameters and play with that in various use cases. You do that to learn how to call *SageMaker API*, understand the nuances of prompt engineering, or tweak model parameters. Everything before you move to developing an actual *chatbot*.  
 
-### Developing a prototype chatbot application with *Streamlit*
+### Developing a Prototype Chatbot Application With *Streamlit*
 
 We want to use the deployed *Amazon SageMaker Endpoint* with the *TRURL 2* model to develop a simple *chatbot* application that will play in a game of *20 questions* with us. You can find an example of an application developed using *Streamlit* that can be invoked locally (assuming you have configured *AWS* credentials properly for the account) or inside *Amazon SageMaker Studio*.
 
