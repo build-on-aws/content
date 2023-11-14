@@ -69,7 +69,7 @@ This tutorial is divided into the following modules. Complete each module before
 
 3. **Deploy the refactor environment** (20 minutes): In this module, you will deploy a Refactor Spaces environment. This will set up the infrastructure to incrementally refactor your application. You will then register the monolith from the previous step as a default route in Refactor Spaces.
 
-4. **Break the monolith** (20 minutes): In this module, you will break the Node.js application into several interconnected services. Then you will push each service 's image to an Amazon Elastic Container Registry (Amazon ECR) repository.
+4. **Break the monolith** (20 minutes): In this module, you will break the Node.js application into several interconnected services. Then you will push each service's image to an Amazon Elastic Container Registry (Amazon ECR) repository.
 
 5. **Deploy microservices** (30 minutes): In this module, you will deploy your Node.js application as a set of interconnected services behind an Application Load Balancer. Then, you will use Refactor Spaces to re-route traffic from the monolith to the microservices.
 
