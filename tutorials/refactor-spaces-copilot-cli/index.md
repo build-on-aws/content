@@ -31,7 +31,7 @@ Within a microservices architecture, each application component runs as its own 
 
 During this tutorial, we show you how to incrementally refactor the monolithic application currently in a Docker container as microservices. Then switch the traffic from the monolithic container to new microservices using Refactor Spaces. After you are done, you can use this tutorial as a reference to build and deploy your own containerized microservices on AWS.
 
-![Image depicting a Monolithic application comprising of 3 services for Users, Threads, and Posts. This monolith is transforming into individual microservices, Users, Threads and Posts.](images/whatyouwilldo.jpg)
+![Image depicting a Monolithic application comprising of three services for Users, Threads, and Posts. This monolith is transforming into individual microservices, Users, Threads and Posts.](images/whatyouwilldo.jpg)
 
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
