@@ -1,15 +1,10 @@
 ---
 title: "Break a Monolithic Application Into Microservices With AWS Migration Hub Refactor Spaces, AWS Copilot"
-description: "In this tutorial I will walk you through the process of decomposing a monolith to microservices using the strangler fig pattern using Refactor Spaces and AWS Copilot. These AWS services will do a lot of undifferentiated heavy lifting while allowing you to focus on what matters, Innovation."
+description: "AWS lets you to decompose monolith and focus on innovation."
 tags:
     - refactor-spaces
-    - migration-hub
     - aws-copilot
-    - migration-hub-refactor-spaces
-    - break-a-monolith
-    - application-modernization
     - refactoring-monolith
-    - modernization
     - tutorials
     - aws
 authorGithubAlias: hemanth8010
@@ -19,17 +14,17 @@ date: 2023-11-01
 
 ## Introduction
 
-In this tutorial, you will deploy a monolithic Node.js application to a Docker container, then break apart the application to microservices. You will use [AWS Migration Hub Refactor Spaces](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/what-is-mhub-refactor-spaces.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) to provision a refactor environment. This will speed up the incremental refactoring to microservices using the [strangler fig pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-aspnet-web-services/fig-pattern.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq). It will do this by shielding application consumers from the infrastructure changes as you refactor the application. In this example, the Node.js application hosts a message board with threads and messages between users.
-
-### Why this Matters
-
-Traditional monolithic architectures are challenging to scale. As an application's code base grows, it can become complex to update and maintain. Introducing new features, languages, frameworks and technologies can become challenging to manage. This in turn, limits innovation, and new ideas. You can use Refactor Spaces to provision a refactor environment to automate the AWS infrastructure needed. There are several approaches to decompose the monolithic application into microservices. You could consider the 'strangler fig' pattern, 'leave and layer' pattern, or refactor using a multi-account strategy. Each of these approaches helps your business to improve the application efficacy by reducing the change risk for the application consumers.
+Traditional monolithic architectures are challenging to scale. As an application's code base grows, it can become complex to update and maintain. Introducing new features, languages, frameworks and technologies can become challenging to manage. This in turn, limits innovation, and new ideas. You can use [AWS Migration Hub Refactor Spaces](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/what-is-mhub-refactor-spaces.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) to provision a refactor environment to automate the AWS infrastructure needed. There are several approaches to decompose the monolithic application into microservices. You could consider the `strangler fig` pattern, `leave and layer` pattern, or refactor using a `multi-account strategy`. Each of these approaches helps your business to improve the application efficacy by reducing the change risk for the application consumers.
 
 Within a microservices architecture, each application component runs as its own service and communicates with other services via a well-defined API. Microservices are built around business capabilities, and each service performs a single function. Programmers are able to use Polyglot or multi-language microservices, which can be written using different frameworks and programming languages. You can then deploy them independently, as a single service, or as a group of services.
 
+In this tutorial I will walk you through the process of decomposing a monolith to microservices leveraging the [strangler fig pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-aspnet-web-services/fig-pattern.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Refactor Spaces and AWS Copilot. These services will do a lot of undifferentiated heavy lifting while allowing you to focus on what matters, Innovation.
+
+  
+
 ### What You Will Accomplish
 
-During this tutorial, we show you how to incrementally refactor the monolithic application currently in a Docker container as microservices. Then switch the traffic from the monolithic container to new microservices using Refactor Spaces. After you are done, you can use this tutorial as a reference to build and deploy your own containerized microservices on AWS.
+You will start by deploying a monolithic Node.js application to a Docker container, then decompose the application to microservices. You will use Refactor Spaces to provision a refactor environment to incrementally refactor to microservices. Refactor Spaces will do this by shielding application consumers from the infrastructure changes as you decompose the application. In this example, the Node.js application hosts a message board with threads and messages between users. After you are done, you can use this tutorial as a reference to build and deploy your own containerized microservices on AWS.
 
 ![Image depicting a Monolithic application comprising of three services for Users, Threads, and Posts. This monolith is transforming into individual microservices, Users, Threads and Posts.](images/whatyouwilldo.jpg)
 
@@ -176,7 +171,7 @@ The flexibility of Docker containers is based on their portability, ease of depl
 
 ### What is Amazon ECS?
 
-Amazon Elastic Container Service (Amazon ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. Amazon ECS will launch, monitor, and scale your application across flexible compute options with automatic integrations to other supporting AWS services that your application needs. Amazon ECS supports Docker containers. With API calls, you can launch and stop Docker-enabled applications, query the complete state of your cluster, and access many familiar features. These include security groups, Elastic Load Balancing, EBS volumes, and AWS Identity and Access Management (IAM) roles.
+Amazon Elastic Container Service (Amazon ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. Amazon ECS will launch, monitor, and scale your application across flexible compute options with automatic integrations to other supporting services that your application needs. Amazon ECS supports Docker containers. With API calls, you can launch and stop Docker-enabled applications, query the complete state of your cluster, and access many familiar features. These include security groups, Elastic Load Balancing, EBS volumes, and AWS Identity and Access Management (IAM) roles.
 
 You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs and availability requirements. You can also integrate your own scheduler or third-party schedulers to meet business or application-specific requirements.
 
@@ -736,7 +731,7 @@ copilot svc init --app api --dockerfile 3-microservices/services/users/Dockerfil
 copilot svc init --app api --dockerfile 3-microservices/services/threads/Dockerfile --name threads --svc-type "Load Balanced Web Service"
 ```
 
-#### **Step 3**: Edit the path in the `manifest.yml` for each microservice
+#### **Step 3**: Edit the Path in the `manifest.yml` for Each Microservice
 
 AWS Copilot sets the path to a Service based on the Service name. However, the route to the microservice in  `server.js` is `api/<<service name>>`. Edit the path in each microservice manifest, and add `api/` to the path.
 
@@ -929,23 +924,13 @@ aws cloudformation delete-stack --stack-name <<stackname>>
 
 ## Conclusion
 
-Congratulations! You have completed the tutorial. You learned how to run a monolithic application in a Docker container. You deployed the same application as microservices, and then switched the traffic to the microservices without incurring downtime.
+Congratulations! You have completed the tutorial. You learned how to run a monolithic application in a Docker container. You deployed the same application as microservices, and then switched the traffic to the microservices without incurring downtime. Refer to links below for additional learning material.
 
-### Learn more
-
-Get an overview of running and managing large-scale applications as microservices using Amazon ECS.
-
-https://youtu.be/El64yANTmIA
+[**Get an overview of running and managing large-scale applications as microservices using Amazon ECS**](https://youtu.be/El64yANTmIA)
 
 [**Deep Dive on an AWS Migration Hub Refactor Spaces Environment**](https://aws.amazon.com/blogs/mt/deep-dive-on-an-aws-migration-hub-refactor-spaces-environment/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
-### Get help
-
-Learn more about using Amazon ECS to build and operate containerized architectures on AWS.
-
-[**See Amazon ECS resources. »**](https://aws.amazon.com/ecs/resources/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq)
-
-### Dive deeper
+Learn more about using Amazon ECS to build and operate containerized architectures on AWS. [**See Amazon ECS resources. »**](https://aws.amazon.com/ecs/resources/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 Integrate Refactor Spaces resources directly into Copilot using Overrides. [**CDK Overrides**](https://aws.github.io/copilot-cli/docs/developing/overrides/cdk/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
