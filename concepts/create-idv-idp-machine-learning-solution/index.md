@@ -4,7 +4,7 @@ description: "Learn to design an ML powered solution to automate identity verifi
 tags:
   - amazon-rekognition
   - Amazon Textract
-  - Identity verification
+  - identity-verification
   - Intelligent document processing
   - Machien learning
   - IDV
