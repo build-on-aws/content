@@ -20,8 +20,6 @@ Within a microservices architecture, each application component runs as its own 
 
 In this tutorial I will walk you through the process of decomposing a monolith to microservices leveraging the [strangler fig pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-aspnet-web-services/fig-pattern.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Refactor Spaces and AWS Copilot. These services will do a lot of undifferentiated heavy lifting while allowing you to focus on what matters, Innovation.
 
-  
-
 ### What You Will Accomplish
 
 You will start by deploying a monolithic Node.js application to a Docker container, then decompose the application to microservices. You will use Refactor Spaces to provision a refactor environment to incrementally refactor to microservices. Refactor Spaces will do this by shielding application consumers from the infrastructure changes as you decompose the application. In this example, the Node.js application hosts a message board with threads and messages between users. After you are done, you can use this tutorial as a reference to build and deploy your own containerized microservices on AWS.
@@ -177,7 +175,7 @@ You can use Amazon ECS to schedule the placement of containers across your clust
 
 There is no additional charge for Amazon ECS. You pay for the AWS resources (for example, EC2 instances or EBS volumes) you create to store and run your application.
 
-### What You Will Accomplish Module Two
+### What You Will Accomplish in Module Two
 
 In this module, you instantiate a managed cluster of EC2 compute instances using Amazon ECS. You then deploy your image as a container running on the cluster.
 
@@ -195,7 +193,7 @@ In this module, you instantiate a managed cluster of EC2 compute instances using
 - [Amazon Elastic Load Balancer](https://aws.amazon.com/elasticloadbalancing/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [Amazon Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
-### Implementation
+### Implementation Module Two
 
 Follow these step-by-step instructions to deploy the Node.js application using AWS Copilot.
 
@@ -478,7 +476,7 @@ Migration Hub Refactor Spaces simplifies application refactoring by:
 
 - Simplifies refactoring to multiple AWS accounts. Refer to the following [architecture reference](https://aws.amazon.com/blogs/aws/new_deployment_pipelines_reference_architecture_and_-reference_implementations/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) for additional details.
 
-### What You Will Accomplish Module Three
+### What You Will Accomplish in Module Three
 
 In this module, you will deploy a Refactor Spaces environment along with a Refactor Spaces application using AWS CloudFormation.
 
@@ -624,7 +622,7 @@ When features are broken into microservices, the amount of infrastructure and nu
 
 In a monolith, when the application has tight coupling, adding a new feature requires full regression and validation of other features in the application. Microservice architectures that follow loose coupling best practices, allow for independent feature changes. Developers can be confident that any code they write will only impact other features when they explicitly write a connection between two microservices. This independence in microservices lower risks in development, and help a team to build faster.
 
-### What You Will Accomplish Module Four
+### What You Will Accomplish in Module Four
 
 In this module, you will break the Node.js application into several interconnected services and create an AWS Copilot Environment and Service for each microservice.
 
@@ -759,7 +757,7 @@ This is the process to deploy the microservices and safely transition the applic
 
 4. **Shut down the Monolith** Shut down the monolith by deleting the Copilot environment. Refactor Spaces routes traffic to the running microservices for the respective endpoints.
 
-### What You Will Accomplish Module Five
+### What You Will Accomplish in Module Five
 
 In this module, you will deploy your Node.js application as a set of interconnected services using AWS Copilot. Then, you will stop the monolith service and shift traffic from the monolith to the microservices.
 
@@ -924,7 +922,9 @@ aws cloudformation delete-stack --stack-name <<stackname>>
 
 ## Conclusion
 
-Congratulations! You have completed the tutorial. You learned how to run a monolithic application in a Docker container. You deployed the same application as microservices, and then switched the traffic to the microservices without incurring downtime. Refer to links below for additional learning material.
+Congratulations! You have completed the tutorial. You learned how to run a monolithic application in a Docker container. You deployed the same application as microservices, and then switched the traffic to the microservices without incurring downtime. Refer to links below for additional learning.
+
+Happy refactoring!
 
 [**Get an overview of running and managing large-scale applications as microservices using Amazon ECS**](https://youtu.be/El64yANTmIA)
 
