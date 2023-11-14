@@ -46,7 +46,7 @@ The overall architecture is explained below and each of the key capabilities (Li
 4. Lambda functions interact with [**Amazon S3**](https://aws.amazon.com/s3/) to store the images (Face images, ID card image) and documents provided by the user as part of the mortgage application process. [**Amazon DynamoDB**](https://aws.amazon.com/dynamodb/) keeps the URL for face images stored in the S3 bucket, identity verification status, the extracted information from the ID card and mortgage documents.
 
 ## Liveness Detection
-In this solution, Liveness Detection is implemented using the [**Amazon Rekognition Face Liveness**](https://aws.amazon.com/rekognition/face-liveness/) feature. This feature helps to verify that a user going through facial verification is physically present in front of the camera. It detects spoof attacks presented to a camera or trying to bypass a camera. This is accomplished through requesting the user to follow a series of prompts to take a short video selfie.
+In this solution, liveness detection is implemented using the [**Amazon Rekognition Face Liveness**](https://aws.amazon.com/rekognition/face-liveness/) feature. This feature helps to verify that a user going through facial verification is physically present in front of the camera. It detects spoof attacks presented to a camera or trying to bypass a camera. This is accomplished through requesting the user to follow a series of prompts to take a short video selfie.
 
 The following picture depicts a sample FaceLivenessDetector screen.
 
