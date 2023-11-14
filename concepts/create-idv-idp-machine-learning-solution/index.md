@@ -78,7 +78,7 @@ You can optionally add a face validation process right after completing Face Liv
 
 
 ## Identity Verification
-User identity verification helps to verify that the face captured from the face liveness check is matching the face image extracted from the Identity document image provided by the user.
+User identity verification helps to verify that the face captured from the Face Liveness check is matching the face image extracted from the Identity document image provided by the user.
 
 The following diagram illustrates the components involved in Identity verification.
 
