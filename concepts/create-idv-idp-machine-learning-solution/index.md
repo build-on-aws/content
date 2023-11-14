@@ -6,7 +6,7 @@ tags:
   - Amazon Textract
   - identity-verification
   - Intelligent document processing
-  - Machien learning
+  - machine-learning
   - IDV
   - IDP
 authorGithubAlias: kowsalyajaganathan
