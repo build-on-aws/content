@@ -27,7 +27,7 @@ Traditional monolithic architectures are challenging to scale. As an application
 
 Within a microservices architecture, each application component runs as its own service and communicates with other services via a well-defined API. Microservices are built around business capabilities, and each service performs a single function. Programmers are able to use Polyglot or multi-language microservices, which can be written using different frameworks and programming languages. You can then deploy them independently, as a single service, or as a group of services.
 
-### What you will accomplish
+### What You Will Accomplish
 
 During this tutorial, we show you how to incrementally refactor the monolithic application currently in a Docker container as microservices. Then switch the traffic from the monolithic container to new microservices using Refactor Spaces. After you are done, you can use this tutorial as a reference to build and deploy your own containerized microservices on AWS.
 
