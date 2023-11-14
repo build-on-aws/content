@@ -96,7 +96,7 @@ Lambda function can be used to implement the logic to decide the success or fail
 
 ### Intelligent Document Processing
 Mortgage processing involves classifying and extracting key data from a range of document types. In this solution, Amazon Textract [**Analyze Lending**](https://aws.amazon.com/textract/analyze-lending/) API is used to automatically extract, classify, and validate information from a variety of mortgage document types with high speed and accuracy while reducing human error.
-Analyze Lending API receives a loan document and then splits it into pages, classifying them according to the type of document. The document pages are then automatically routed to Amazon Textract text processing operations for accurate data extraction and analysis. Refer the  link to see the list of documents that Analyze Lending can support.
+Analyze Lending API receives a loan document and then splits it into pages, classifying them according to the type of document. The document pages are then automatically routed to Amazon Textract text processing operations for accurate data extraction and analysis. Refer to the link to see the list of documents that Analyze Lending can support.
 
 API used in this solution are:
 - Amazon Textract [**StartLendingAnalysis API**](https://docs.aws.amazon.com/en_us/textract/latest/dg/API_StartLendingAnalysis.html)
