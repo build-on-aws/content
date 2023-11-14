@@ -1,6 +1,6 @@
 ---
-title: "Use LangChain to build 'chatterdox', an app to chat with web pages"  
-description: "You will learn how to build this LangChain powered Go web app using Amazon Bedrock and deploy it to AWS App Runner with AWS CDK."
+title: "Use Amazon Bedrock and LangChain to build an application to chat with web pages"  
+description: "Learn how to build this Go web app, deploy it with AWS CDK and start asking questions!"
 tags:  
   - generative-ai
   - ai-ml
@@ -28,7 +28,7 @@ Here is an example:
 
 ![Ask chatgpt](images/chatgpt.png)
 
-This is perfectly acceptable 👍 The real problem is "hallucination" wherein LLMs may generate inaccurate information, while sounding confident 😯 Rather than having an open-ended conversation, it's good to narrow down the scope by providing additional context/information that's required to solve the problem or answer our questions. For example, instead of asking about Amazon Bedrock, one can provide a link to the documentation page (for instance [General guidelines for Amazon Bedrock LLM users](https://docs.aws.amazon.com/bedrock/latest/userguide/general-guidelines-for-bedrock-users.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-apprunner-chatterdox-webapp&sc_geo=mult&sc_country=mult&sc_outcome=acq)) and ask specific queries. The same can be done by Q&A over data in text or PDF documents.
+This is perfectly acceptable 👍 But, the real problem is "hallucination" wherein LLMs may generate inaccurate information, while sounding confident 😯 Rather than having an open-ended conversation, it's good to narrow down the scope by providing additional context/information that's required to solve the problem or answer our questions. For example, instead of asking about Amazon Bedrock, one can provide a link to the documentation page (for instance [General guidelines for Amazon Bedrock LLM users](https://docs.aws.amazon.com/bedrock/latest/userguide/general-guidelines-for-bedrock-users.html?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-apprunner-chatterdox-webapp&sc_geo=mult&sc_country=mult&sc_outcome=acq)) and ask specific queries. The same can be done by Q&A over data in text or PDF documents.
 
 This can be achieved in many ways. The easiest one is to pass on the information to the LLM directly. But there are other popular techniques such as **RAG** (Retrieval Augmented Generation) that involve accessing data from external systems, Typically, this is done by combining Semantic search (with Vector databases). In this blog, we will explore the simple way (and leave the *RAG* technique for a future post). A framework like [LangChain](https://www.langchain.com/) can simplify this for us since it provides abstractions to use the appropriate *prompt* (which can be customized), *load data* from sources (documents, web links) and *inject* it (as context) with the question/prompt. 
 
@@ -36,9 +36,7 @@ This can be achieved in many ways. The easiest one is to pass on the information
 
 > The code is [available on GitHub](https://github.com/build-on-aws/amazon-bedrock-apprunner-chatterdox-webapp)
 
-![chatterdox](images/chatterdox1.png)
-
-## The "chatterdox" application
+## Application overview
 
 The application is written in Go, but the concepts apply to any other language you might choose. As mentioned before, it uses `langchaingo` as the framework to interact with the [Anthropic Claude (v2) model on Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#models-supported?sc_channel=el&sc_campaign=genaiwave&sc_content=amazon-bedrock-apprunner-chatterdox-webapp&sc_geo=mult&sc_country=mult&sc_outcome=acq). The web app uses the [Go embed package](https://pkg.go.dev/embed) to serve the static file for the frontend part (HTML, JavaScript and CSS) from directly within the binary.
 
@@ -132,22 +130,20 @@ This will start creating the AWS resources required for the application. You can
 
 Once all the resources are created, you can try out the application. You should have:
 
-- App Runner service - this is the `chatterdox` application
+- App Runner service - this is the web application
 - App Runner Instance (IAM) role - this allows access to Amazon Bedrock
 
 Once complete, you should get a confirmation along with the values for the App Runner service endpoint.
 
-![App Runner service](images/apprunner-chatterdox.png)
+![App Runner service](images/apprunner.png)
 
-To access the application, enter the App Runner service endpoint URL in your web browser to navigate to the website. Start by entering a link to a page. For e.g. **"What is Amazon Bedrock?"** documentation page - https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+To access the application, enter the App Runner service endpoint URL in your web browser to navigate to the website. Start by entering a link to a page. For example, the **NoSQL design for DynamoDB** documentation page - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html
 
 Once a valid link is provided (click *Submit*), the chat area will be enabled. 
 
-![chatterdox in action](images/chatterdox2.png)
-
 You can now start asking questions about the page contents (enter a message in the text box and click *Send*).
 
-![chatterdox in action](images/chatterdox3.jpg)
+![web app in action](images/chatterdox3.jpg)
 
 You can continue the chat conversation by asking additional questions.
 
@@ -159,6 +155,6 @@ Although this was a relatively simple application, it's evident how LangChain ab
 2. Adding it as a context along with the prompt, and,
 3. Invoking the LLM
 
-Once the core functionality was ready, we were able to expose it as a user-facing web app on App Runner. This approach works quite well for single page content or small documents. If you try to pass in a lot of content with the prompt you will likely run into token limit constraints. One of the ways is to use other chains such as [MapReduceDocuments](https://pkg.go.dev/github.com/tmc/langchaingo/chains#MapReduceDocuments), [MapRerankDocuments](https://pkg.go.dev/github.com/tmc/langchaingo/chains#MapRerankDocuments) etc. Other approach includes using RAG, which might be covered in a different blog.
+Once the core functionality was ready, we were able to expose it as a user-facing web app on App Runner. This approach works quite well for single page content or small documents. If you try to pass in a lot of content with the prompt, you will likely run into token limit constraints. To mitigate this, you can use other chains such as [MapReduceDocuments](https://pkg.go.dev/github.com/tmc/langchaingo/chains#MapReduceDocuments), [MapRerankDocuments](https://pkg.go.dev/github.com/tmc/langchaingo/chains#MapRerankDocuments) etc. Other approach includes using RAG, which might be covered in a different blog.
 
 Until then, Happy Building!
