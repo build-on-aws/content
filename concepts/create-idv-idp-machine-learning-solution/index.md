@@ -85,7 +85,7 @@ The following diagram illustrates the components involved in identity verificati
 
 ![Identity Verification](images/Mortgage-Identity_Verification.png "Figure:5 Identity Verification") 
 
-Once the user completes the Face Liveness check successfully, they can start the identity verification process by uploading the user's ID card in a valid image format. User selfie images captured during Liveness Detection step can be used as a source image for the identity verification. User is required to upload an Identity card in a valid image format and it is used as target image for the identity verification.
+Once the user completes the Face Liveness check successfully, they can start the identity verification process by uploading the user's ID card in a valid image format. User selfie images captured during Liveness Detection step can be used as a source image for the identity verification. The user is required to upload an identity card in a valid image format and it is used as target image for the identity verification.
  
 Amazon Rekognition [**CompareFaces**](https://docs.aws.amazon.com/rekognition/latest/dg/faces-comparefaces.html) API is used to compare the face in the source image with each face in the target image uploaded by the user (ID Card). SimilarityThreshold is one of the request parameters for CompareFaces API, which can be used to specify the minimum level of confidence required for the face match to be successful. Set the similarityThreshold to a high value to get the face matches with high accuracy.
 
