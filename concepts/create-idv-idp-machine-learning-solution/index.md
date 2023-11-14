@@ -91,7 +91,7 @@ Amazon Rekognition [**CompareFaces**](https://docs.aws.amazon.com/rekognition/la
 
 CompareFaces API returns an array of matched faces as [**FaceMatches**](https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CompareFaces.html#API_CompareFaces_ResponseSyntax), which contains the bounding box, the confidence level, and the similarity score for the faces. The confidence level indicates that the bounding box contains a face or not.
 
-Lambda function can used to implement the logic to decide the success or failure of the identity verification process based on the CompareFaces API response. You can implement any additional validation or human review as per your business requirements. The results can be stored in the DynamoDB which can help in any related business requirements.
+Lambda function can be used to implement the logic to decide the success or failure of the identity verification process based on the CompareFaces API response. You can implement any additional validation or human review as per your business requirements. The results can be stored in the DynamoDB which can help in any related business requirements.
 
 
 ### Intelligent Document Processing
