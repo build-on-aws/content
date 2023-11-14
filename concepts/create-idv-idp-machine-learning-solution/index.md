@@ -80,7 +80,7 @@ You can optionally add a face validation process right after completing Face Liv
 ## Identity Verification
 User identity verification helps to verify that the face captured from the Face Liveness check is matching the face image extracted from the Identity document image provided by the user.
 
-The following diagram illustrates the components involved in Identity verification.
+The following diagram illustrates the components involved in identity verification.
 
 
 ![Identity Verification](images/Mortgage-Identity_Verification.png "Figure:5 Identity Verification") 
