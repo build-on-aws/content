@@ -7,14 +7,13 @@ tags:
   - identity-verification
   - intelligent-document-processing
   - machine-learning
-  - idv
-  - idp
 authorGithubAlias: kowsalyajaganathan
 authorName: Kowsalya Jaganathan
 date: 2023-11-08
 ---
 
 Financial organizations are under increasing pressure to quickly and accurately process information, especially for high-risk interactions that are being migrated online. Traditional methods of identity verification and data extraction pose challenges. Those methods are manual, expensive, error-prone, and difficult to scale. This not only leads to tedious processes, but also results in disappointing customer experiences.
+
 In the finance industry, the impact of fraud, errors, and liability caused by manual data processing can be disruptive. Organizations must find a balance between delivering the best customer experience while ensuring compliance and maintaining the integrity of their business. This calls for a solution that verifies users' identities, accurately classifies and extracts data, all while keeping customers’ data, and organizations safe.
 
 This blog post focuses on a specific use case in the finance industry: mortgage application processing, which often involves manual identity and document verification revisions that can be a daunting task for any organization. To enhance customer experience, prevent fraudulent activities, and provide faster and secure services, lenders can leverage Machine Learning (ML) solutions for identity, verification and document processing. ML powered document processing enables efficient and accurate processing of diverse document types, extracting critical business data, and delivering value to both customers and organizations.
@@ -34,7 +33,6 @@ The key capabilities of this solution are shown in the following diagram, using 
 ![Process flow diagram](images/Mortgage-Process%20flow.png "Figure: 1 Process flow diagram")
 
 ### Solution Overview
-
 The following reference architecture shows how you can use Amazon Rekognition and Amazon Textract along with other AWS services, to implement identity verification and intelligent document processing.
 
 ![Mortgage Solution](images/Mortgage-Reference_Architecture.png "Figure: 2 Mortgage Solution overview")
