@@ -1,5 +1,5 @@
 ---
-title: "Break a Monolithic Application into Microservices with AWS Migration Hub Refactor Spaces, AWS Copilot"
+title: "Break a Monolithic Application Into Microservices With AWS Migration Hub Refactor Spaces, AWS Copilot"
 description: "In this tutorial I will walk you through the process of decomposing a monolith to microservices using the strangler fig pattern using Refactor Spaces and AWS Copilot. These AWS services will do a lot of undifferentiated heavy lifting while allowing you to focus on what matters, Innovation."
 tags:
     - refactor-spaces
