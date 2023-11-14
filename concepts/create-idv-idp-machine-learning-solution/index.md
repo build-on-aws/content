@@ -74,7 +74,7 @@ The sequence of steps in Liveness Detection is explained below:
 The Face Liveness confidence score provides the confidence that the person taking the check is live. It is recommended to choose a high confidence score threshold for highly sensitive use cases like mortgage processing. As with any probability-based system, Face Liveness cannot guarantee perfect results. It is recommended to use it with other factors to make a risk-based decision about the personal identity of users. In this solution, we are combining the Face Liveness check along with the identity verification against the user provided identity document. Optionally you can also add a human review using [**Amazon Augumented AI**](https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-getting-started.html) and any further validation if needed, before taking a decision on the mortgage application.
 
 
-You can optionally add face validation process right after completing Face Liveness check, if your business use case requires the specific facial features or expressions like pose, eyes open, mouth open, and eyeglasses worn to determine picture quality. This can be implemented by invoking Amazon Rekognition [**DetectFaces**](https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectFaces.html) API.
+You can optionally add a face validation process right after completing Face Liveness check, if your business use case requires the specific facial features or expressions like pose, eyes open, mouth open, and eyeglasses worn to determine picture quality. This can be implemented by invoking Amazon Rekognition [**DetectFaces**](https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectFaces.html) API.
 
 
 ## Identity Verification
