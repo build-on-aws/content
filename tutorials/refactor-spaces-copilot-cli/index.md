@@ -88,11 +88,11 @@ In this module, you will use the AWS command line to install the tools required 
 
 For this tutorial, you will build the Docker container image for your monolithic Node.js application and push it to Amazon Elastic Container Registry (Amazon ECR).
 
-#### **Step 1:** Install software
+#### **Step 1:** Install Software
 
 In the next few steps, you are going to be using Docker, GitHub, Amazon ECS, and Amazon ECR to deploy code into containers. To complete these steps, you will need the following tools.
 
-1. **An AWS account:** If you don 't have an account with AWS, [sign up here](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq).     All the exercises in this tutorial are designed to be covered under the [AWS Free Tier](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq). **Note:** Some of the services you will be using may require your account to be active for more than 12 hours. If you have a newly created account and encounter difficulty provisioning any services, wait a few hours and try again.
+1. **An AWS account:** If you don't have an account with AWS, [sign up here](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq). All the exercises in this tutorial are designed to be covered under the [AWS Free Tier](https://aws.amazon.com/free/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq). **Note:** Some of the services you will be using may require your account to be active for more than 12 hours. If you have a newly created account and encounter difficulty provisioning any services, wait a few hours and try again.
 
 2. **Docker:** You will use Docker to build the image files that will run as containers. Docker is an open-source project. You can download it for [macOS](https://docs.docker.com/docker-for-mac/install/) or for [Windows](https://docs.docker.com/docker-for-windows/install/). After Docker is installed, verify it is running by entering *Docker --version* in the terminal. The version number should display, for example: *Docker version 19.03.5, build 633a0ea.*
 
@@ -126,7 +126,7 @@ For other platforms, use [curl](https://curl.se/) or [PowerShell](https://learn
     Invoke-WebRequest -OutFile  'C:\\Program Files\\copilot.exe' https://github.com/aws/copilot-cli/releases/latest/download/copilot-windows.exe
     ```
 
-#### **Step 2:** Download and open the project
+#### **Step 2:** Download and Open the Project
 
 **Download the code from GitHub:** Navigate to [AWS Labs](https://github.com/awslabs/amazon-ecs-nodejs-microservices) and select **Clone** or **Download** to download the GitHub repository to your local environment. You can also use [GitHub Desktop](https://desktop.github.com/) or [Git](https://git-scm.com/) to clone the repository.
 
@@ -138,13 +138,13 @@ Containers are lightweight packages of your application 's code, configurations,
 
 ![Image depicts a Container vs a Virtual Machine. How Docker abstracts the underlying Operating System from the App, it's binaries and libraries.](images/docker.jpg)
 
-### Why use containers?
+### Why Use Containers?
 
 Launching a container with a new release of code can be done without significant deployment overhead. Code built in a container on a developer's local machine can be moved to a test instance by moving the container without requiring recompiling. This increases the operational development speed. At build time, this container can be linked to other containers required to run the application stack.
 
-#### Dependency control and improved pipeline
+#### Dependency Control and Improved Pipeline
 
-A Docker container image is a point-in-time capture of an application 's code and dependencies. This helps an engineering organization create standard pipelines for the application lifecycle. For example
+A Docker container image is a point-in-time capture of an application's code and dependencies. This helps an engineering organization create standard pipelines for the application lifecycle. For example:
 
 - Developers build and run the container locally.
 
@@ -156,13 +156,13 @@ A Docker container image is a point-in-time capture of an application 's code an
 
 Building, testing, moving, and running the exact same container through all stages of the integration and deployment pipeline can increase quality and reliability.
 
-#### Density and resource efficiency
+#### Density and Resource Efficiency
 
-Containers facilitate enhanced resource efficiency by having multiple heterogeneous processes run on a single system. Resource efficiency is a natural result of the isolation and allocation techniques used by containers. Containers can be restricted to consume certain amounts of a host 's CPU and memory. Understanding what resources a container needs, and what resources are available from the underlying host server, will help you address right-sizing your instances. This is done by either smaller hosts, by increasing the density of processes running on a single host, or by optimizing resource consumption and availability
+Containers facilitate enhanced resource efficiency by having multiple heterogeneous processes run on a single system. Resource efficiency is a natural result of the isolation and allocation techniques used by containers. Containers can be restricted to consume certain amounts of a host's CPU and memory. Understanding what resources a container needs, and what resources are available from the underlying host server, will help you address right-sizing your instances. This is done by either smaller hosts, by increasing the density of processes running on a single host, or by optimizing resource consumption and availability.
 
 #### Flexibility
 
-The flexibility of Docker containers is based on their portability, ease of deployment, and small size. This is different from the installation and configuration required on a VM. For instance, packaging services inside of containers helps moving them between hosts. This in turn isolates them from failure of adjacent services, and protects them from errant patches or software upgrades to the host system
+The flexibility of Docker containers is based on their portability, ease of deployment, and small size. This is different from the installation and configuration required on a VM. For instance, packaging services inside of containers helps moving them between hosts. This in turn isolates them from failure of adjacent services, and protects them from errant patches or software upgrades to the host system.
 
 ### Application overview
 
@@ -182,7 +182,7 @@ You can use Amazon ECS to schedule the placement of containers across your clust
 
 There is no additional charge for Amazon ECS. You pay for the AWS resources (for example, EC2 instances or EBS volumes) you create to store and run your application.
 
-### What you will accomplish Module Two
+### What You Will Accomplish Module Two
 
 In this module, you instantiate a managed cluster of EC2 compute instances using Amazon ECS. You then deploy your image as a container running on the cluster.
 
@@ -204,7 +204,7 @@ In this module, you instantiate a managed cluster of EC2 compute instances using
 
 Follow these step-by-step instructions to deploy the Node.js application using AWS Copilot.
 
-#### **Step 1:** Create an AWS Copilot application
+#### **Step 1:** Create an AWS Copilot Application
 
 An AWS Copilot Application is a group of services and environments. Think of it as a label for what you are building. In this example, it's an API built as a monolithic Node.js application. In this step, you will create a new empty application. In the terminal or command prompt, enter the following and name the Application api.
 
@@ -224,7 +224,7 @@ Application name: monolith
 ✔ The directory copilot will hold service manifests for application monolith.
 ```
 
-#### **Step 2**: Create the environment
+#### **Step 2**: Create the Environment
 
 Copilot Environments are infrastructure where applications run. AWS Copilot provisions a secure VPC, an Amazon ECS cluster, a Load Balancer, and all the other resources required by the application. To use your AWS credentials, Enter `copilot env init` and choose `profile default`. Name the Environment `monolith`.
 
@@ -274,7 +274,7 @@ Default environment configuration? Yes, use default.
 ✔ Provisioned bootstrap resources for environment api in region us-east-1 under application api.
 ```
 
-#### **Step 3**: Deploy the environment
+#### **Step 3**: Deploy the Environment
 
 The next step is to deploy the environment and provision the services for the application. To deploy, enter `copilot env deploy --name monolith` in the terminal.
 
@@ -295,7 +295,7 @@ $ copilot env deploy --name monolith
   - A Virtual Private Cloud to control networking of your AWS resources       [create complete]  [11.6s]
 ```
 
-#### **Step 4**: Create the monolith AWS Copilot Service
+#### **Step 4**: Create the Monolith AWS Copilot Service
 
 A Copilot [Service](https://aws.github.io/copilot-cli/docs/concepts/services/) runs containers. Internet-facing services can be a **Request-Driven Web Service** that uses [AWS App Runner](https://aws.amazon.com/apprunner/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq). They can run on [Amazon ECS](https://aws.amazon.com/ecs/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) or [Fargate](https://aws.amazon.com/fargate/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq), with a **Load Balanced Web Service** that provisions an [Application or Network Load Balancer](https://aws.amazon.com/elasticloadbalancing/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) with appropriate security groups.
 
@@ -407,7 +407,7 @@ bc590299ddf7: Pushed
 latest: digest: sha256:721adc83096c12f21d61bb73d7ea6d296269cce607178676492aaa1f6cdad6bc size: 1365
 ```
 
-#### **Step 5**: Confirm the deployment
+#### **Step 5**: Confirm the Deployment
 
 When deployment completes, AWS Copilot prints the URL to the service in the output.
 
@@ -463,7 +463,7 @@ You can test the application deployment by entering queries in a browser, such a
 [{"thread":1,"text":"Has anyone checked on the lich recently?","user":4},{"thread":1,"text":"I'll stop by and see how he's doing tomorrow!","user":2}]
 ```
 
-## Module Three: Deploy the refactor environment
+## Module Three: Deploy the Refactor Environment
 
 ### Overview Module Three
 
@@ -473,7 +473,7 @@ A Refactor Spaces environment provides the infrastructure, multi-account network
 
 Migration Hub Refactor Spaces simplifies application refactoring by:
 
-- Reducing the time to set up a refactor environment
+- Reducing the time to set up a refactor environment.
 
 - Reducing the complexity for iteratively extracting capabilities as new microservices and re-routing traffic.
 
@@ -481,9 +481,9 @@ Migration Hub Refactor Spaces simplifies application refactoring by:
 
 - Helping dev teams achieve and accelerate tech and deployment independence by simplifying development, management, and operations while apps are changing.
 
-- simplifies refactoring to multiple AWS accounts. Refer to the following [architecture reference](https://aws.amazon.com/blogs/aws/new_deployment_pipelines_reference_architecture_and_-reference_implementations/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) for additional details.
+- Simplifies refactoring to multiple AWS accounts. Refer to the following [architecture reference](https://aws.amazon.com/blogs/aws/new_deployment_pipelines_reference_architecture_and_-reference_implementations/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) for additional details.
 
-### What you will accomplish Module Three
+### What You Will Accomplish Module Three
 
 In this module, you will deploy a Refactor Spaces environment along with a Refactor Spaces application using AWS CloudFormation.
 
@@ -509,7 +509,7 @@ In this module, you will deploy a Refactor Spaces environment along with a Refac
 
 ### Implementation Module Three
 
-#### **Step 1**: Download templates
+#### **Step 1**: Download Templates
 
 Navigate to [AWS Samples](https://github.com/aws-samples/aws-migration-hub-refactor-spaces-samples/tree/main/rs-tutorial/rs-copilot-tutorial) and select **Clone** or **Download** to download the GitHub repository to your local environment. Copy the `rs.yaml` and `rs-service-op.yaml` files into the repository that you downloaded in Module 1. You can also do this with `curl` / `Invoke-WebRequest` without cloning the whole repository:
 
@@ -545,7 +545,7 @@ Waiting for stack create/update to complete
 
 Once done, you will see `Successfully created/updated stack - monolith-tutorial`.
 
-#### **Step 3**: Test your monolith
+#### **Step 3**: Test Your Monolith
 
 In the previous step, you created resources for the refactor environment using CloudFormation. Now, run the following command to access the outputs from the deployment.
 
@@ -611,25 +611,25 @@ The final application architecture uses Refactor Spaces, Amazon ECS, and the App
 
 4. **Microservices** Amazon ECS deploys each service into a container across an EC2 cluster. Each container only handles a single feature.
 
-### Why microservices?
+### Why Microservices?
 
-#### Isolation of crashes
+#### Isolation of Crashes
 
 Engineering organizations can and do have fatal crashes in production. Because they are isolated by nature, microservices can limit the impact of such crashes. Best practice microservices architecture is decoupled by default. This means that if one microservice crashes, the rest of your application can continue to work as expected.
 
-#### Isolation for security
+#### Isolation for Security
 
 In a monolithic application, the blast radius is limited to the application boundaries. If one feature or function is compromised, it can be assumed the full application is to some extent also vulnerable. For example, if the vulnerability included remote code execution, you can assume that an attacker could have gained horizontal access to other system features. However, when microservice best practices are followed, you will limit the blast radius to the one feature or function the microservice supports. Separating features into microservices using Amazon ECS helps to secure access to AWS resources by giving each service its own AWS Identity and Access Management (IAM) role.
 
-#### Independent scaling
+#### Independent Scaling
 
 When features are broken into microservices, the amount of infrastructure and number of instances for each microservice can be scaled independently. This helps to measure and optimize the total cost of ownership by feature. If one particular feature requires scale changes, other features are not be impacted. Using an ecommerce example, when customers browse your website at a higher rate than they purchase, you can scale the microservices separately. The scale for the catalog browsing or search can be set higher than the scale for the checkout function.
 
-#### Development velocity
+#### Development Velocity
 
 In a monolith, when the application has tight coupling, adding a new feature requires full regression and validation of other features in the application. Microservice architectures that follow loose coupling best practices, allow for independent feature changes. Developers can be confident that any code they write will only impact other features when they explicitly write a connection between two microservices. This independence in microservices lower risks in development, and help a team to build faster.
 
-### What you will accomplish Module Four
+### What You Will Accomplish Module Four
 
 In this module, you will break the Node.js application into several interconnected services and create an AWS Copilot Environment and Service for each microservice.
 
@@ -645,7 +645,7 @@ In this module, you will break the Node.js application into several interconnect
 
 Follow these step-by-step instructions to break apart the monolith to microservices.
 
-#### **Step 1**: Create the environments
+#### **Step 1**: Create the Environments
 
 In the previous module, you created and deployed the `api` Application. You can reuse the application to deploy new environments for the microservices. In this module, the code for the application has been divided into three microservices: posts, threads, and users. Each one will be deployed as a service in a new environment. The `monolith` environment and service was deployed using the CLI menu. In this module, you can deploy services by specifying the [flags](https://aws.github.io/copilot-cli/docs/commands/svc-init/) for the `copilot env init` command. Create the `posts` microservice first.
 
@@ -707,7 +707,7 @@ copilot env init --name threads
 copilot env deploy --name threads
 ```
 
-#### **Step 2**: Create the services
+#### **Step 2**: Create the Services
 
 Create a service for `Posts` using the flags.
 
@@ -764,7 +764,7 @@ This is the process to deploy the microservices and safely transition the applic
 
 4. **Shut down the Monolith** Shut down the monolith by deleting the Copilot environment. Refactor Spaces routes traffic to the running microservices for the respective endpoints.
 
-### What you will accomplish Module Five
+### What You Will Accomplish Module Five
 
 In this module, you will deploy your Node.js application as a set of interconnected services using AWS Copilot. Then, you will stop the monolith service and shift traffic from the monolith to the microservices.
 
@@ -783,7 +783,7 @@ In this module, you will deploy your Node.js application as a set of interconnec
 
 Follow these step-by-step instructions to deploy the microservices.
 
-#### **Step 1**: Deploy the microservices
+#### **Step 1**: Deploy the Microservices
 
 For each microservice, enter `copilot svc deploy --name <microservice> --env <microservice>`. Similar to the `monolith service`, AWS Copilot builds a container for the microservice, pushes to a repository, and deploys on an Amazon ECS cluster running on Fargate.
 
@@ -849,7 +849,7 @@ copilot svc deploy --name threads --env threads
 copilot svc deploy --name users --env users
 ```
 
-#### **Step 2**: Register your microservice with Refactor Spaces
+#### **Step 2**: Register Your Microservice With Refactor Spaces
 
 Register the microservice as a service in the Refactor Spaces application we created in the earlier module. Now you can configure routing for the URI based endpoints. Refactor Spaces sets the URI paths in the proxy and automates the cut-over.
 
@@ -865,7 +865,7 @@ aws cloudformation deploy \
   --output table
 ```
 
-#### **Step 3**: Shut down the monolith
+#### **Step 3**: Shut Down the Monolith
 
 To shut down the monolith service, delete the `monolith` Service. Enter `copilot svc delete --name monolith` in the terminal.
 
@@ -882,7 +882,7 @@ Recommended follow-up action:
  - Run `copilot pipeline deploy` to update the corresponding pipeline if it exists.
 ```
 
-#### **Step 4**: Test your microservices
+#### **Step 4**: Test Your Microservices
 
 Navigate to the [Refactor Spaces console](https://us-east-1.console.aws.amazon.com/migrationhub/refactor-spaces/home) and open the environment rs-tutorial-env and open the rs-tutorial-app. You should see the four services and their corresponding routes.
 
@@ -898,7 +898,7 @@ Copy the ProxyURL and paste in a new browser tab. Append /users or /threads or /
 
 It is a best practice to delete resources when the tutorial is completed to avoid ongoing charges for running services. However, this step is optional. You can also keep the resources and services deployed for a detailed examination of the infrastructure, or as template for future deployments.
 
-### What you will accomplish Module Six
+### What You Will Accomplish in Module Six
 
 In this module, you will terminate the resources you created during this tutorial. You will stop the services running on Amazon ECS. You will delete the Application Load Balancer. You will also delete the AWS CloudFormation stack to terminate the Amazon ECS cluster, including all the underlying EC2 instances.
 
@@ -911,9 +911,9 @@ In this module, you will terminate the resources you created during this tutoria
 - [AWS Copilot](https://aws.amazon.com/containers/copilot/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [AWS CLI](https://aws.amazon.com/cli/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
-#### **Step 1**: Delete the application
+#### **Step 1**: Delete the Application
 
-You can delete all services and infrastructure by entering
+You can delete all services and infrastructure by entering:
 
 ```bash
 copilot app delete --name api
@@ -929,7 +929,7 @@ aws cloudformation delete-stack --stack-name <<stackname>>
 
 ## Conclusion
 
-Congratulations! You have completed the Break a Monolithic Application into Microservices tutorial. You learned how to run a monolithic application in a Docker container. You deployed the same application as microservices, and then switched the traffic to the microservices without incurring downtime.
+Congratulations! You have completed the tutorial. You learned how to run a monolithic application in a Docker container. You deployed the same application as microservices, and then switched the traffic to the microservices without incurring downtime.
 
 ### Learn more
 
