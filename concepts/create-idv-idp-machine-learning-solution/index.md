@@ -8,7 +8,7 @@ tags:
   - Intelligent document processing
   - machine-learning
   - IDV
-  - IDP
+  - idp
 authorGithubAlias: kowsalyajaganathan
 authorName: Kowsalya Jaganathan
 date: 2023-11-08
