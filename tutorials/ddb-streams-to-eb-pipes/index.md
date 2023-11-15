@@ -53,7 +53,7 @@ The default settings are left for the key attributes GameId and GamerTag.
 
 Once all fields are entered, scroll down and click "Create" to finish creating the GameScores table. The table will be ready to store game score data with the specified schema.
 
-You can now start inserting items into the table through the console, SDKs, or other AWS services. Make sure the items contain the configured partition key and sort key. The other attributes like Score, Level, and Timestamp will be optional.
+You can now start inserting items into the table through the console, SDKs, or other AWS services. Make sure the items contain the configured partition key and sort key. The other attributes like Score, Level, and Timestamp will be optional. In the DynamoDB console, this means clicking on the table, then on "Explore table items" in the top right-hand side of the page, then on "Create Item" on the top right hand side the section on the bottom of the page that says "Items returned". This is explained in more detail with an example in [Step 4](#step-4-testing-the-integration).
 
 To enable streams on the table, in the DynamoDB console select the "GameScores" table and go to the "Exports and Streams" tab. Scroll all the way down to "DynamoDB stream details" and click "Turn on". In the view, select "New and old images" for Stream view type and check Stream enabled. Choose the shard count based on expected workload. Scroll down and click "Enable" to activate streams. The stream ARN can now be used by applications to process changes.
 
@@ -79,7 +79,7 @@ After going to the next step, click on "All Events" as the event source. This ma
 
 ![Eventbridge Rule Step 2]( images/createrules1.png "Eventbridge Rule Step 2")
 
-For the target, select "AWS service" and for the target, from the dropdown select "CloudWatch log group". Name the log group "game-events-log". Note that if we use infrastructure as code, we would additionally need to configure an IAM role to allow Eventbridge to access this log group.
+For the target, select "AWS service" and for the target, from the dropdown select "CloudWatch log group". Name the log group "game-events-log".
 
 ![Eventbridge Rule Step 3]( images/createrules3.png "Eventbridge Rule Step 3")
 
