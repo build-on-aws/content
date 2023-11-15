@@ -36,7 +36,7 @@ First let's kick it off with Innovation Talks, these are a series of deep dives 
 
 They say: "You miss the forest for the trees", meaning that we tend to misunderstand the larger picture/problem because of focusing on a small part of it. The same is true in IT. Having better visibility of what is going on in your workloads gives you insights on how to improve the performance of your applications and infrastructure. This is what we like to call **Observability**. It's more than just looking and graphs and logs, it's about understanding the measurable outputs of your application and gaining insights from them so you could further optimize. This is often a misunderstood topic, so here are a few sessions you need to see:
 
-![Observability](images/observability.png)
+![Observability](images/observability.webp "Remmember kids: Detect, Investigate, Remediate")
 
 2. [COP343](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=COP343&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudops-at-reinvent23) - **Building observability to increase resiliency** | Resilience is an important topic (so important, my colleague Seth wrote a whole list like this, which you *need* to check out [here](https://community.aws/posts/resilience-at-reinvent)), and we should all be acquainted with [what it is](https://community.aws/concepts/should-know-resilience). And in this session [David](https://www.linkedin.com/in/david-yanacek/) is talking about how you can use *well-applied observability* to find early sings of problems before they become customer impacting. He will be demonstrating these specific techniques with services like [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudops-at-reinvent23) and [AWS X-Ray](https://aws.amazon.com/xray/&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudops-at-reinvent23). On top of that he will be diving deep into real-world failure modes and how to solve them quickly! 👏
 
@@ -45,6 +45,8 @@ They say: "You miss the forest for the trees", meaning that we tend to misunders
 4. [COP325](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=COP325&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudops-at-reinvent23) - **Building an effective observability strategy** | I've thrown around the word "observability" a few times here. I've said that it's an important part of your cloud operations strategy. But why is that so? 🤔 What are all the things that you should observe? How do you observe what you observe? All these questions (and more) are being answered in this session run by [Ania](https://www.linkedin.com/in/ania-develter/), [Helen](https://www.linkedin.com/in/helenashton/), and [Toshal](https://www.linkedin.com/in/toshal/). Make sure to join them and get all of your observability questions answered, and see them demonstrate all these practices and techniques.
 
 ## Governance and Compliance 🔐
+
+![CFM](images/govern.webp "It's all about finding that balance")
 
 Governance and Compliance sound very scary. 😱 But these two are very important parts of  well functioning cloud operations. Namely you *need* to be able to setup good foundations, with guide rails and rules so the builders who build on top of your environments are able to do so in a scalable, secure and cost efficient way. And no matter the size of you organization, you are after all operating in the real world with real (and complex) compliance landscapes. By setting up certain compliance guardrails, you let your builders with peace in mind. As you are able to rapidly detect, flag, and take action on any issues that may occur. Now, that I've got your attention, lets talk about **3** sessions that can help you with this pesky Governance and Compliance:
 
@@ -56,7 +58,7 @@ Governance and Compliance sound very scary. 😱 But these two are very importan
 
 ## Cloud Financial Management 💰
 
-![CFM](images/cfm.png "The Pillars of Cloud Financial Management")
+![CFM](images/cfm.webp "The Pillars of Cloud Financial Management")
 
 Continuing from session number 7, right into Cloud Financial Management! When moving to The Cloud it is quite important to understand how you will approach financial management, as it differs from the traditional approach. Predicting, controlling and understanding your costs is critical to a successful Cloud IT operations organization. As with Observability, you are giving yourself insights on what opportunities exists to optimize spend. Alright, let's look at a few sessions that will be very useful for all of you who are cost aware (I know I am 🤑):
 
