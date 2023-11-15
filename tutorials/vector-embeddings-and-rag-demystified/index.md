@@ -387,7 +387,6 @@ We will explore using Amazon Aurora or Amazon RDS with `pgvector` as a vector st
 </div>
 
 ```python
-# Import necessary classes from the langchain library
 from langchain.embeddings import BedrockEmbeddings
 from langchain.llms import Bedrock
 from langchain.vectorstores.pgvector import PGVector, DistanceStrategy
@@ -544,7 +543,6 @@ Before proceeding, let's discuss [Retrieval-Augmented Generation (RAG)](https://
 Now, let's utilize Amazon Aurora/RDS with `pgvector` and `LangChain` for storage and retrieval of vector embeddings.
 
 ```python
-# Import necessary classes for the retrieval chain and output handling
 from langchain.llms import Bedrock
 from langchain.chains import RetrievalQA
 from langchain.callbacks import StdOutCallbackHandler
