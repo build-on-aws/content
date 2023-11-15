@@ -10,7 +10,7 @@ authorGithubAlias: kaizadwadia
 authorName: Kaizad Wadia
 additionalAuthors:
   - authorName: Yifei Ding
-  - authorGithubAlias: yifei-ding
+    authorGithubAlias: yifei-ding
 date: 2023-11-16
 ---
 
