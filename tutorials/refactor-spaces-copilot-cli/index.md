@@ -12,6 +12,9 @@ authorName: Hemanth Vemulapalli
 date: 2023-11-01
 ---
 
+| ToC |
+|-----|
+
 ## Introduction
 
 Traditional monolithic architectures are challenging to scale. As an application's code base grows, it can become complex to update and maintain. Introducing new features, languages, frameworks and technologies can become challenging to manage. This in turn, limits innovation, and new ideas. You can use [AWS Migration Hub Refactor Spaces](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/what-is-mhub-refactor-spaces.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) to provision a refactor environment to automate the AWS infrastructure needed. There are several approaches to decompose the monolithic application into microservices. You could consider the `strangler fig` pattern, `leave and layer` pattern, or refactor using a `multi-account strategy`. Each of these approaches helps your business to improve the application efficacy by reducing the change risk for the application consumers.
@@ -34,9 +37,6 @@ You will start by deploying a monolithic Node.js application to a Docker contain
 | 💻 Code Sample         | - Code sample for application on [GitHub](https://github.com/awslabs/amazon-ecs-nodejs-microservices) <br> - AWS CloudFormation scripts for Refactor Services on [AWS Samples](https://github.com/aws-samples/aws-migration-hub-refactor-spaces-samples/tree/main/rs-tutorial/rs-copilot-tutorial)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-10-25                             |
-
-| ToC |
-|-----|
 
 ### Prerequisites
 
