@@ -1,11 +1,10 @@
 ---
-title: "Deploying Amazon EKS Windows managed node groups and Fargate nodes"
-description: "How to ensure high availability of production-grade Windows EKS cluster with Fargate"
+title: "Deploying Amazon EKS Windows Managed Node Groups and Fargate Nodes"
+description: Minimize risks and delays by migrating apps with Windows Containers"
 tags:
     - eks-cluster-setup
     - eks
     - kubernetes
-    - eksctl
     - tutorials
     - aws
 showInHomeFeed: true
@@ -19,8 +18,7 @@ authorName: Olawale Olaleye
 date: 2023-11-16
 ---
 
-Windows Containers in Kubernetes allow organisations to easily migrate their existing Windows workloads to Amazon EKS.
-For example, when deploying a typical legacy monolithic .NET framework application, you might need to be concerned about the application dependencies with its environment, perform configuration tuning, and data transfer between hosting servers. These amongst other tasks introduces risk to new deployments and delay new software releases. Instead, customers can migrate their existing legacy .NET applications by using Windows containers in Kubernetes to containerize their applications and deploy to Amazon EKS. This approach has helped teams to eliminate manual steps, save time and cost involved in deploying and maintaining Windows applications. The application packaging and deployment process can be fully automated giving developers more time to focus on coding rather than operational tasks.
+Windows Containers in Kubernetes allow organisations to easily migrate their existing Windows workloads to Amazon EKS. For example, when deploying a typical legacy monolithic .NET framework application, you might need to be concerned about the application dependencies with its environment, perform configuration tuning, and data transfer between hosting servers. These amongst other tasks introduces risk to new deployments and delay new software releases. Instead, customers can migrate their existing legacy .NET applications by using Windows containers in Kubernetes to containerize their applications and deploy to Amazon EKS. This approach has helped teams to eliminate manual steps, save time and cost involved in deploying and maintaining Windows applications. The application packaging and deployment process can be fully automated giving developers more time to focus on coding rather than operational tasks.
 
 In addition, many companies want agility, faster time to market and improved speed of deployment in a reliable manner. Windows Containers in Kubernetes has made it possible for teams building Windows applications to set up a continuous deployment pipeline to Amazon EKS while adopting GitOps approach. GitOps is a way of managing application and infrastructure deployment so that the whole system is described declaratively in a Git repository.  
 
@@ -50,12 +48,12 @@ Before you begin this tutorial, you need to:
 
 Using the eksctl cluster template that follows, you'll build an Amazon Windows EKS cluster that will be a mixture of Windows nodes running on EC2 and Linux nodes running on Fargate. It configures the following components:
 
-* **Managed Node groups**: With Amazon EKS managed node groups, you don't need to separately provision or register the Amazon EC2 instances that provide compute capacity to run your Kubernetes applications. For Kubernetes v1.28, operating system compatibility for Windows nodes (and Pods) includes Windows Server 2019, and Windows Server 2022. Windows Server 2022 is built on the strong foundation of Windows Server 2019 with many innovations on management and security. As part of this tutorial, we will create a Windows managed node group using the Amazon EKS optimized Windows Server 2022 Full AMI,  `WINDOWS_FULL_2022_x86_64` with the help of `eksctl`. This node group will provide the compute capacity to run Windows workloads in the cluster. The Amazon EKS optimized AMI is built on top of Windows Server 2022, and it includes **containerd**, the **kubelet**, and the **AWS IAM Authenticator** to work with Amazon EKS out of the box.
+* **Managed Node Groups**: With Amazon EKS managed node groups, you don't need to separately provision or register the Amazon EC2 instances that provide compute capacity to run your Kubernetes applications. For Kubernetes v1.28, operating system compatibility for Windows nodes (and Pods) includes Windows Server 2019, and Windows Server 2022. Windows Server 2022 is built on the strong foundation of Windows Server 2019 with many innovations on management and security. As part of this tutorial, we will create a Windows managed node group using the Amazon EKS optimized Windows Server 2022 Full AMI,  `WINDOWS_FULL_2022_x86_64` with the help of `eksctl`. This node group will provide the compute capacity to run Windows workloads in the cluster. The Amazon EKS optimized AMI is built on top of Windows Server 2022, and it includes **containerd**, the **kubelet**, and the **AWS IAM Authenticator** to work with Amazon EKS out of the box.
 * **Fargate Profile**: [AWS Fargate](https://docs.aws.amazon.com/eks/latest/userguide/fargate-getting-started.html) is a compute engine for EKS that removes the need to configure, manage, and scale EC2 instances. Fargate ensures Availability Zone spread while removing the complexity of managing EC2 infrastructure and works to ensure that pods in a Replica Service are balanced across Availability Zones. Each Pod running on Fargate gets its own worker node. Fargate automatically scales the worker nodes as Kubernetes scales pods.  In this tutorial, we will use Fargate to provide the compute capacity we need to run the core cluster’s components like CoreDNS in the kube-system namespace. This way, we ease the burden of ensuring the availability and scalability of the CoreDNS pods in the cluster.
-* **Control plane logging**: You can enable [Amazon EKS control plane logging](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) to provide audit and diagnostic logs directly from the Amazon EKS control plane to CloudWatch Logs. In this tutorial, we’ve enabled all the available control log type that corresponds to the available components of the Kubernetes control plane.
+* **Control Plane Logging**: You can enable [Amazon EKS control plane logging](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) to provide audit and diagnostic logs directly from the Amazon EKS control plane to CloudWatch Logs. In this tutorial, we’ve enabled all the available control log type that corresponds to the available components of the Kubernetes control plane.
 
 
-To run Windows workloads on Amazon EKS, you’d need Windows nodes and a Linux node in the cluster. The Linux nodes are critical to the functioning of the cluster as they run core cluster’s components, and thus, for a production-grade cluster, such organization must ensure that the linux nodes are well architected for high availability.
+To run Windows workloads on Amazon EKS, you’d need Windows nodes and a Linux node in the cluster. The Linux nodes are critical to the functioning of the cluster as they run core cluster’s components, and thus, for a production-grade cluster, such organization must ensure that the Linux nodes are well architected for high availability.
 
 While Amazon EKS clusters must contain one or more Linux or Fargate nodes to run core system Pods that only run on Linux, such as CoreDNS, organizations seeking to reduce operational overhead in managing a Windows EKS cluster can leverage the benefits of Managed Node groups and Fargate.
 
@@ -157,7 +155,7 @@ coredns-56666498f9-lx8xj   1/1     Running   0          66m   192.168.114.130   
 coredns-56666498f9-xqqlz   1/1     Running   0          66m   192.168.146.30    fargate-ip-192-168-146-30.us-west-2.compute.internal    <none>           <none>
 ```
 
-To achieve a highly available CoreDNS application in the cluster in the event of disruptions, Kubernetes offers a feature called Pod disruption budget. An appropriate [Pod disruption budgets](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets) (PDBs) was automatically created for the CoreDNS to control the number of Pods that can be down simultaneously when we created the cluster. 
+To achieve a highly available CoreDNS application in the cluster in the event of disruptions, Kubernetes offers a feature called Pod Disruption Budget. An appropriate [Pod Disruption Budgets](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets) (PDBs) was automatically created for the CoreDNS to control the number of pods that can be down simultaneously when we created the cluster. 
 
 Run the command below to verify this is in place:
 
@@ -281,7 +279,7 @@ Copy the EXTERNAL-IP URL into your browser of choice and you should be presented
 ![A Sample Window Application](./images/web-app.png)
 
 
-## Step 4: (Optional) Create a workload on Fargate
+## Step 4: (Optional) Create a Workload on Fargate
 
 If you’d like to deploy a sample Linux workload in the same cluster, you’d need to use the Fargate profile by specifying any of the kube-system or default namespaces.
 
@@ -328,4 +326,4 @@ Upon completion, you should see the following response output:
 
 ## Conclusion
 
-In this tutorial, you've successfully set up an Amazon EKS Windows Cluster mixed with Windows managed nodes and Fargate node to reduce the amount of operational task you have to perform in managing a Amazon EKS Windows cluster. This cluster gives you the infrastructure you need to start deploying your Windows application deployments.
+In this tutorial, you've successfully set up an Amazon EKS Windows Cluster mixed with Windows managed nodes and Fargate node to reduce the amount of operational task you have to perform in managing a Amazon EKS Windows cluster. This cluster gives you the infrastructure you need to start deploying your Windows application deployments. To explore more tutorials, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials).
