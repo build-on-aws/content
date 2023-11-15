@@ -18,7 +18,7 @@ Traditional monolithic architectures are challenging to scale. As an application
 
 Within a microservices architecture, each application component runs as its own service and communicates with other services via a well-defined API. Microservices are built around business capabilities, and each service performs a single function. Programmers are able to use Polyglot or multi-language microservices, which can be written using different frameworks and programming languages. You can then deploy them independently, as a single service, or as a group of services.
 
-In this tutorial I will walk you through the process of decomposing a monolith to microservices leveraging the [strangler fig pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-aspnet-web-services/fig-pattern.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Refactor Spaces and AWS Copilot. These services will do a lot of undifferentiated heavy lifting while allowing you to focus on what matters, Innovation.
+In this tutorial I will walk you through the process of decomposing a monolith to microservices leveraging the [strangler fig pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-aspnet-web-services/fig-pattern.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Refactor Spaces and AWS Copilot. These AWS offerings will do a lot of undifferentiated heavy lifting while allowing you to focus on what matters, Innovation.
 
 ### What You Will Accomplish
 
@@ -169,7 +169,7 @@ The flexibility of Docker containers is based on their portability, ease of depl
 
 ### What is Amazon ECS?
 
-Amazon Elastic Container Service (Amazon ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. Amazon ECS will launch, monitor, and scale your application across flexible compute options with automatic integrations to other supporting services that your application needs. Amazon ECS supports Docker containers. With API calls, you can launch and stop Docker-enabled applications, query the complete state of your cluster, and access many familiar features. These include security groups, Elastic Load Balancing, EBS volumes, and AWS Identity and Access Management (IAM) roles.
+Amazon Elastic Container Service (Amazon ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. Amazon ECS will launch, monitor, and scale your application across flexible compute options with automatic integrations to other supporting AWS offerings that your application needs. Amazon ECS supports Docker containers. With API calls, you can launch and stop Docker-enabled applications, query the complete state of your cluster, and access many familiar features. These include security groups, Elastic Load Balancing, EBS volumes, and AWS Identity and Access Management (IAM) roles.
 
 You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs and availability requirements. You can also integrate your own scheduler or third-party schedulers to meet business or application-specific requirements.
 
