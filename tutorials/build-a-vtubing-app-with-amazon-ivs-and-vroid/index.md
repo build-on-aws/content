@@ -1,5 +1,5 @@
 ---
-title: "How to build a VTubing app with Amazon IVS and VRoid"
+title: "How to build a VTubing app with Amazon Interactive Video Service and VRoid"
 description: "A step by step guide to set up a 3D virtual avatar that follows your body movements and leverage live streaming from Amazon IVS to broadcast to a large audience."
 tags:
   - tutorials
@@ -15,14 +15,14 @@ images:
   background: images/vtubing-ivs-demo.gif
 authorGithubAlias: tonyv
 authorName: Tony Vu
-date: YYYY-MM-DD
+date: 2023-12-13
 ---
 
 Have you ever wanted to express yourself in a more imaginative way under the guise of a virtual character? Imagine if you could create or summon a virtual avatar of your liking, have it mimic your body movements on camera, and stream to thousands. In this tutorial, you will learn how to do just that by creating your own VTubing app.
 
 Virtual YouTubing, or V-Tubing for short, is the practice among live streamers of using virtual avatars to either present their brand, their personality, or their identity through means outside of a face cam.
 
-With that context set, I will walk you through a step by step process of building a web app to load a 3D character from VRoid Hub, animate it based on your body movements, and live stream to Amazon IVS. [VRoid Hub](https://hub.vroid.com/en) is an online platform created by Pixiv used to host and share 3D character models. You will be using the VRoid Hub API to import a digital character from VRoid Hub and use it as your avatar. The Three VRM SDK from Pixiv will be used for rendering the digital character. To have your avatar animate and mimic your body movements, you will be using the MediaPipe Holistic library and [Kalidokit](https://github.com/yeemachine/kalidokit).
+With that context set, I will walk you through a step by step process of building a web app to load a 3D character from VRoid Hub, animate it based on your body movements, and live stream to Amazon Interactive Video Service (IVS). [VRoid Hub](https://hub.vroid.com/en) is an online platform created by Pixiv used to host and share 3D character models. You will be using the VRoid Hub API to import a digital character from VRoid Hub and use it as your avatar. The Three VRM SDK from Pixiv will be used for rendering the digital character. To have your avatar animate and mimic your body movements, you will be using the MediaPipe Holistic library and [Kalidokit](https://github.com/yeemachine/kalidokit).
 
 > The code for this tutorial is available on [Github](#). You can also try a [live demo](https://dev.d218eir1ybnzul.amplifyapp.com/) of this web app.
 
