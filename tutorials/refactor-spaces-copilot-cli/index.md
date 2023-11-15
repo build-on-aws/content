@@ -21,7 +21,7 @@ Traditional monolithic architectures are challenging to scale. As an application
 
 Within a microservices architecture, each application component runs as its own service and communicates with other services via a well-defined API. Microservices are built around business capabilities, and each service performs a single function. Programmers are able to use Polyglot or multi-language microservices, which can be written using different frameworks and programming languages. You can then deploy them independently, as a single service, or as a group of services.
 
-In this tutorial I will walk you through the process of decomposing a monolith to microservices leveraging the [strangler fig pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-aspnet-web-services/fig-pattern.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Refactor Spaces and AWS Copilot. These AWS offerings will do a lot of undifferentiated heavy lifting while allowing you to focus on what matters, Innovation.
+In this tutorial I will walk you through the process of decomposing a monolith to microservices leveraging the [strangler fig pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-aspnet-web-services/fig-pattern.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) using Refactor Spaces and AWS Copilot. These AWS offerings will do a lot of undifferentiated heavy lifting while allowing you to focus on what matters: innovation.
 
 ### What You Will Accomplish
 
@@ -40,7 +40,7 @@ You will start by deploying a monolithic Node.js application to a Docker contain
 
 ### Prerequisites
 
-- **An AWS account:** If you don 't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial for a quick overview.
+- **An AWS account:** If you don't already have an account, follow the [Setting Up Your AWS Environment](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) tutorial for a quick overview.
 
 - [Install](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=appswave&sc_content=refactor-spaces-copilot-cli&sc_geo=mult&sc_country=mult&sc_outcome=acq) and configure the AWS CLI.
 
@@ -127,7 +127,7 @@ For other platforms, use [curl](https://curl.se/) or [PowerShell](https://learn
 
 ### Overview Module Two
 
-Containers are lightweight packages of your application 's code, configurations, and dependencies. Containers deliver environmental consistency, operational efficiency, developer  productivity, and version control. Containers can help applications deploy quickly, reliably, and consistently, regardless of deployment environment.
+Containers are lightweight packages of your application's code, configurations, and dependencies. Containers deliver environmental consistency, operational efficiency, developer productivity, and version control. Containers can help applications deploy quickly, reliably, and consistently, regardless of deployment environment.
 
 ![Image depicts a Container vs a Virtual Machine. How Docker abstracts the underlying Operating System from the App, it's binaries and libraries.](images/docker.jpg)
 
@@ -157,7 +157,7 @@ Containers facilitate enhanced resource efficiency by having multiple heterogene
 
 The flexibility of Docker containers is based on their portability, ease of deployment, and small size. This is different from the installation and configuration required on a VM. For instance, packaging services inside of containers helps moving them between hosts. This in turn isolates them from failure of adjacent services, and protects them from errant patches or software upgrades to the host system.
 
-### Application overview
+### Application Overview
 
 ![Diagram showing the flow from User/client to the Monolith. The User accesses the monolith via the ELB. The monolith is running on ECS in a Fargate.](images/monolithoverview.jpg)
 
