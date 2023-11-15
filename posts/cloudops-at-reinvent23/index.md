@@ -26,13 +26,13 @@ We've all been in, or have had a close relationship with IT Operations. They are
 
 Ultimately the goal is to be agile, move fast, but at the same time keep track of compliance, security, spend and more! For all that, the portfolio of AWS Cloud Operations solutions is the thing for you. So, you are planning to attend AWS re:Invent 2023, and would love learn more about Cloud Operations but are not sure what sessions and activities you should participate in - look no further. In this post I will share a quick preview of some of the top sessions around **observability**, **centralized operations**, **governance**, **compliance**, and **cloud financial management**. Let's jump right into it
 
-## Innovation Talks
+## Innovation Talks 🔊
 
 First let's kick it off with Innovation Talks, these are a series of deep dives hosted by AWS Thought Leaders, that give you a glimpse into technological advances that can help drive your business forward.
 
 1. [COP227-INT](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=COP227-INT&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudops-at-reinvent23) - **Cloud Operations for today, tomorrow, and beyond** | Presented by [Nandini Ramani](https://www.linkedin.com/in/nandiniramani/), this innovation talk will be covering the latest and greatest AWS capabilities in the field of governance, compliance, resiliency and performance that can be useful in improving your applications in the cloud, on premises, in hybrid and edge environments (and beyond!)
 
-## Observability
+## Observability 👀
 
 They say: "You miss the forest for the trees", meaning that we tend to misunderstand the larger picture/problem because of focusing on a small part of it. The same is true in IT. Having better visibility of what is going on in your workloads gives you insights on how to improve the performance of your applications and infrastructure. This is what we like to call **Observability**. It's more than just looking and graphs and logs, it's about understanding the measurable outputs of your application and gaining insights from them so you could further optimize. This is often a misunderstood topic, so here are a few sessions you need to see:
 
@@ -44,7 +44,7 @@ They say: "You miss the forest for the trees", meaning that we tend to misunders
 
 4. [COP325](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=COP325&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudops-at-reinvent23) - **Building an effective observability strategy** | I've thrown around the word "observability" a few times here. I've said that it's an important part of your cloud operations strategy. But why is that so? 🤔 What are all the things that you should observe? How do you observe what you observe? All these questions (and more) are being answered in this session run by [Ania](https://www.linkedin.com/in/ania-develter/), [Helen](https://www.linkedin.com/in/helenashton/), and [Toshal](https://www.linkedin.com/in/toshal/). Make sure to join them and get all of your observability questions answered, and see them demonstrate all these practices and techniques.
 
-## Governance and Compliance
+## Governance and Compliance 🔐
 
 Governance and Compliance sound very scary. 😱 But these two are very important parts of  well functioning cloud operations. Namely you *need* to be able to setup good foundations, with guide rails and rules so the builders who build on top of your environments are able to do so in a scalable, secure and cost efficient way. And no matter the size of you organization, you are after all operating in the real world with real (and complex) compliance landscapes. By setting up certain compliance guardrails, you let your builders with peace in mind. As you are able to rapidly detect, flag, and take action on any issues that may occur. Now, that I've got your attention, lets talk about **3** sessions that can help you with this pesky Governance and Compliance:
 
@@ -54,7 +54,7 @@ Governance and Compliance sound very scary. 😱 But these two are very importan
 
 7. [COP207](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=COP207&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudops-at-reinvent23) - **Don't let cloud compliance and operations exceed your budget** | Okay, cost optimization time! 👏 With all the tools to successfully run cloud operations available, you need to be aware of the costs that follow. [Cost Optimization](https://community.aws/cost-optimization) is on everyone's mind these days, so it is very important to understand how to use the cloud efficiently. In this session [Nereida](https://www.linkedin.com/in/nereida-woo/) and [Craig](https://www.linkedin.com/in/craigedwardsma/) are here to help us optimize the usage of AWS Config and AWS CloudTrail (these two services love to go together it seems 😅). They will take is through a few scenarios (customer ones in fact) that resulted in, less than optimal, spend. And how, with a few best practices, you could avoid such scenarios! 💰
 
-## Cloud Financial Management
+## Cloud Financial Management 💰
 
 ![CFM](images/cfm.png "The Pillars of Cloud Financial Management")
 
@@ -77,7 +77,7 @@ Finally, the reason we all go to re:Invent - hearing about cool new stuff that w
 13. [COP204](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=COP204&sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cloudops-at-reinvent23) - **What's new with AWS Cost Optimization**
 
 
-## Bonus round
+## Bonus round 🪙
 
 Not everything at re:Invent is a talk or a workshop. In addition to attending sessions, come visit any of our four kiosks in the AWS Village at the Expo in the Venetian: **Cloud Operations, Observability, Cloud Financial Management, and Management Console**. Come get some swag, Meet our experts, do a fun VR experience, or learn about the future of Cloud Operations. Besides all the amazing people from AWS, you wanna come to the booth to get a chance to meet **Lucy** from [Tech With Lucy](https://www.youtube.com/c/techwithlucy), I am very excited to get to meet her! 🙌 I will be spending some time at the booth as well, so please do not be shy and come say hi 👋
 
