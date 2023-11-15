@@ -17,7 +17,7 @@ date: 2023-11-15
 
 Ever wondered how apps suggest songs like those on Amazon Music, or products that perfectly match your taste on Amazon.com? Dive into the world of vector databases, where data isn't just stored in tables and rows but is mapped as geometric points in space.
 
-![Introduction](/images/amazon-shopping.png)
+![Introduction](images/amazon-shopping.png)
 
 
 In the rapidly evolving landscape of data engineering and machine learning, the concept of vector embeddings has emerged as a cornerstone for a myriad of innovative applications. As we navigate through the era of generative AI and large language models (LLMs), the need to understand and leverage these embeddings has become more crucial than ever. This blog post aims to demystify the world of vector embeddings and shed light on how they are transforming the way we handle and interpret vast amounts of data.
@@ -268,17 +268,17 @@ Its a technique that divides the vector space into smaller subspaces and quantiz
 
 1. **Vector Breakdown**: The first step in PQ involves breaking down each high-dimensional vector into smaller `sub-vectors`. By dividing the vector into segments, PQ can manage each piece individually, simplifying the subsequent clustering process.
 
-![PO Image 1](/images/po_1.png)
+![PO Image 1](images/po_1.png)
 
 2. **Cluster Formation via K-means**: Each sub-vector is then processed through a `k-means` clustering algorithm. This is like finding representative landmarks for different neighborhoods within a city, where each landmark stands for a group of nearby locations. We can see multiple clusters formed from the sub-vectors, each with its `centroid`. These `centroids` are the key players in PQ; instead of indexing every individual vector, PQ only stores the centroids, significantly reducing memory requirements.
 
-![PO Image 2](/images/po_2.png)
+![PO Image 2](images/po_2.png)
 
 3. **Centroid Indexing**: In PQ, we don't store the full detail of every vector; instead, we index the centroids of the clusters they belong to, as demonstrated in the first image. By doing this, we achieve data compression. For example, if we use two clusters per partition and have six vectors, we achieve a 3X compression rate. This compression becomes more significant with larger datasets.
 
 4. **Nearest Neighbor Search**: When a query vector comes in, PQ doesn't compare it against all vectors in the database. Instead, it only needs to measure the squared euclidean distance from the centroids of each cluster. It's a quicker process because we're only comparing the query vector to a handful of centroids rather than the entire dataset.
 
-![PO Image 3](/images/po_3.png)
+![PO Image 3](images/po_3.png)
 
 5. **Balance Between Accuracy and Efficiency**: The trade-off here is between the granularity of the clustering (how many clusters are used) and the speed of retrieval. More clusters mean finer granularity and potentially more accurate results but require more time to search through.
 
@@ -290,7 +290,7 @@ In practical terms, PQ allows systems to quickly sift through vast datasets to f
 
 Locality-Sensitive Hashing (LSH) is a technique that clusters (or groups) vectors in a high-dimensional space based on their similarity. This method is advantageous for databases dealing with large, complex datasets, where it is impractical to compute exact nearest neighbors due to computational or time constraints. For example, we could partition the vector space into multiple buckets.
 
-![LSH Bucketing Process](/images/lsh_1.png)
+![LSH Bucketing Process](images/lsh_1.png)
 
 The LSH algorithm operates through several steps to efficiently group similar data points:
 
@@ -300,7 +300,7 @@ The LSH algorithm operates through several steps to efficiently group similar da
 
 3. **Bucket Assignment**: Vectors that share the same binary hash code are assigned to the same bucket. By doing so, LSH groups vectors that are likely to be similar into the same '`bin`', allowing for quicker retrieval based on hash codes.
 
-![LSH Bucketing Process](/images/lsh_2.png)
+![LSH Bucketing Process](images/lsh_2.png)
 
 When searching for nearest neighbors, LSH allows us to consider vectors in the same bucket as the query vector as potential nearest neighbors. To compare how similar two hashed vectors are, the Hamming distance is used. It counts the number of bits that are different between two binary codes. This is analogous to comparing two strings of text to see how many letters are different. This method is faster than comparing the query to every vector in the dataset. 
 
@@ -312,13 +312,13 @@ Hierarchical Navigable Small World (HNSW) is a sophisticated method used to inde
 
 Imagine you're in a large room full of points, each representing different pieces of data. To create an NSW network, we start linking these points, or nodes, based on how similar they are to each other. If we have a new node, we'll connect it to its most similar buddies already in the network. These connections are like bridges between islands, creating a web of pathways.
 
-![HNSW](/images/hnsw_1.png)
+![HNSW](images/hnsw_1.png)
 
 In the above example, we connected each new node to the 2 most similar neighbors, but we could have chosen another number of similar neighbors. When building the graph, we need to decide on a metric for similarity such that the search is optimized for the specific metric used to query items. Initially, when adding nodes, the density is low and the edges will tend to capture nodes that are far apart in similarity. Little by little, the density increases, and the edges start to be shorter and shorter. As a consequence, the graph is composed of long edges that allow us to traverse long distances in the graph and short edges that capture closer neighbors. Because of it, we can quickly traverse the graph from one side to the other and look for nodes at a specific location in the vector space.
 
 For example, let’s have a query vector. We want to find the nearest neighbor,
 
-![HNSW](/images/hnsw_2.png)
+![HNSW](images/hnsw_2.png)
 
 We initiate the search by starting at one node (i.e., node A in that case). Among its neighbors (D, G, C), we look for the closest node to the query (D). We iterate over that process until there are no closer neighbors to the query. Once we cannot move anymore, we found a close neighbor to the query. The search is approximate and the found node may not be the closest as the algorithm may be stuck in a local minima.
 
@@ -326,13 +326,13 @@ We initiate the search by starting at one node (i.e., node A in that case). Amon
 
 The problem with just using NSW is like having only one type of bridge, regardless of the distance. Some bridges will be super long, and it might take ages to cross them. That's where the `hierarchical` part kicks in. We create multiple layers of graphs, each with different bridge lengths. The top layer has the longest bridges, while the bottom layer has the shortest.
 
-![HNSW](/images/hnsw_3.png)
+![HNSW](images/hnsw_3.png)
 
 Each layer is a bit less crowded than the one below it. It's like having express lanes on a highway. You start at the top layer to cover big distances quickly, then switch to lower layers for more precise, shorter searches.
 
 When you search for a specific node, you begin at the top layer. If you find a close neighbor, you drop to the next layer to get even closer, and so on, until you're at the closest point possible. This way, you can find the nearest neighbors without having to check every single node.
 
-![HNSW](/images/hnsw_4.png)
+![HNSW](images/hnsw_4.png)
 
 <div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
     <p>
@@ -373,7 +373,7 @@ In essence, vector databases are like advanced tools for organizing and navigati
 
 AWS offers various services for selecting the right vector database, such as **Amazon Kendra** for low-code solutions, **Amazon OpenSearch** Service for NoSQL enthusiasts, and **Amazon RDS/Aurora** PostgreSQL for SQL users.
 
-![Vector Store on AWS](/images/vector_store_aws.png)
+![Vector Store on AWS](images/vector_store_aws.png)
 
 ## Amazon RDS/Aurora with `pgvector` and `LangChain`
 
@@ -434,15 +434,15 @@ Here we set up a vector store using `pgvector` for PostgreSQL on Amazon Aurora.
 
 We connect to the Aurora database using any SQL client/IDE.
 
-![Vector Store on AWS](/images/sql_lc_show_tables.png)
+![Vector Store on AWS](images/sql_lc_show_tables.png)
 
 We can see the collection we created, `my_collection`.
 
-![Vector Store on AWS](/images/sql_lc_show_tables_2.png)
+![Vector Store on AWS](images/sql_lc_show_tables_2.png)
 
 We expect the embeddings table to be empty since we haven't stored any embeddings yet.
 
-![Vector Store on AWS](/images/sql_lc_show_tables_3.png)
+![Vector Store on AWS](images/sql_lc_show_tables_3.png)
 
 Now, let's create some vectors and store their embeddings in the Aurora database.
 
@@ -463,7 +463,7 @@ LECTION_NAME,
 
 We can verify these newly added vectors in our database.
 
-![Vector Store on AWS](/images/sql_lc_show_tables_4.png)
+![Vector Store on AWS](images/sql_lc_show_tables_4.png)
 
 ## Document Loading using `LangChain`
 
@@ -533,7 +533,7 @@ WHERE langchain_pg_embedding.collection_id = (
 );
 ```
 
-![Vector Store on AWS](/images/sql_lc_show_tables_5.png)
+![Vector Store on AWS](images/sql_lc_show_tables_5.png)
 
 ## Embedding Vector Store and Retrieval 
 
