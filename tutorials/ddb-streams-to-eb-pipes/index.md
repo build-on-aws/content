@@ -1,5 +1,5 @@
 ---
-title: "Sending Events from DynamoDB using Eventbridge Pipes"
+title: "Sending Events From DynamoDB Using EventBridge Pipes"
 description: "A no-code integration between Amazon DynamoDB and Eventbridge"
 tags:
     - event-driven
