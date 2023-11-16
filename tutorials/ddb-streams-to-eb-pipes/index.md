@@ -61,7 +61,7 @@ Keep in mind that enabling streams does not consume any read or write capacity u
 
 ![DynamoDB Streams Enable]( images/enablestreams.png "Enabling Streams")
 
-### Step 2: Create a custom event bus in Amazon Eventbridge
+### Step 2: Create a Custom Event Bus in Amazon EventBridge
 
 First, open the Amazon EventBridge console in AWS. In the left navigation pane, click "Event Buses". On this page, click the "Create event bus" button. Custom event buses allow for greater isolation, access control, organization, separation of concerns, event retention control, and insulation from changes compared to using the shared default event bus. This is because the default event bus receives events from all AWS services.
 
