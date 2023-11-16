@@ -89,7 +89,7 @@ Now we can skip the tagging part and go straight to creating the rule.
 
 Once the rule is created, we can navigate to it in the console under the "Rules" section. Then, if we navigate to the "targets" tab on the lower side of the page, we can then click the link that says "game-events-log" to navigate to the created log group in CloudWatch. Here, we can see a log of all the events sent to the event bus. We can click on "Start tailing" on the top right hand side to see the incoming events. It is highly recommended to leave this tab open as we will return later.
 
-### Step 3: Creating the pipe
+### Step 3: Creating the Pipe
 
 We will now create the Eventbridge Pipe. Eventbridge Pipes are a simple, no-code integration service that connects sources to targets. Pipes also supports more advanced capabilities including transformations as well as enrichments using an API, a Step Function or a Lambda function. We will use Pipes to read data from the DynamoDB stream and write it to the custom event bus we created in the last section.
 
