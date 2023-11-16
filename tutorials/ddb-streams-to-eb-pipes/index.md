@@ -39,7 +39,7 @@ All you need is an AWS account with full permissions to access DynamoDB, Eventbr
 
 ## Walkthrough
 
-### Step 1: Creating a DynamoDB Table and enabling streams
+### Step 1: Creating a DynamoDB Table and Enabling Streams
 
 First, login to the AWS Management Console and navigate to the DynamoDB service. Click on "Create Table" to begin setting up the new table.
 
