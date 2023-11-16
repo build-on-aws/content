@@ -30,7 +30,7 @@ Thus, ChatRPG was created, where players' choices drive the narrative in real-ti
 
 Using [PartyRock](https://partyrock.aws/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-chatrpg-with-partyrock), I transformed a concept into a working application without a single line of code. Let's explore how ChatRPG was built.
 
-You can play with ChatRPG here: https://partyrock.aws/u/banjtheman/CnsW_HHSL/ChatRPG
+You can play with ChatRPG here: [https://partyrock.aws/u/banjtheman/CnsW_HHSL/ChatRPG](https://partyrock.aws/u/banjtheman/CnsW_HHSL/ChatRPG)
 
 ![ChatRPG intro](images/chatrpg_intro.jpg)
 
