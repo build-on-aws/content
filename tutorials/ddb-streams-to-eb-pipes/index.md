@@ -69,7 +69,7 @@ Give the event bus the name "game-bus". The name can contain up to 256 character
 
 Now we will create a rule that sends all events from that bus into a CloudWatch log group so that we can see the events published to it. Go to "Rules" on the left hand side and once there, change the event bus from the default one to "game-bus".
 
-![Eventbridge Rules]( images/rules.png "Eventbridge Rules")
+![EventBridge Rules]( images/rules.png "EventBridge Rules")
 
 Click on "Create Rule" and for a rule name, enter "all-game-events". Optionally enter a description. Make sure the event bus selected is "game-bus".
 
