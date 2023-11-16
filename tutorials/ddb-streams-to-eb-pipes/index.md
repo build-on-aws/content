@@ -1,6 +1,8 @@
 ---
 title: "Sending Events From DynamoDB Using EventBridge Pipes"
-description: "A no-code integration between Amazon DynamoDB and Eventbridge"
+description: "Save time with a manageable no-code integration to replicate events."
+
+
 tags:
     - event-driven
     - serverless
