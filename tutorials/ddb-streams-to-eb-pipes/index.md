@@ -6,7 +6,7 @@ tags:
     - serverless
     - eventbridge
     - dynamodb
-    - data
+    - streams
 authorGithubAlias: kaizadwadia
 authorName: Kaizad Wadia
 additionalAuthors:
