@@ -75,7 +75,7 @@ Click on "Create Rule" and for a rule name, enter "all-game-events". Optionally 
 
 ![Eventbridge Rule Step 1]( images/createrules1.png "Eventbridge Rule Step 1")
 
-After going to the next step, click on "All Events" as the event source. This may display a warning (as displayed in the image below) but we do want to have visibility into whatever events are sent to the bus. The warning is shown because rules are generally used to filter events coming into the Event bus, and our rule is doing no filtering. You may create rules that performs filtering but for this example we will perform filtering prior to adding the event to the event bus. This rule is just to have visibility into the event bus. We can leave everything else in this step as is and continue.
+After going to the next step, click on "All Events" as the event source. This may display a warning (as displayed in the image below) but we do want to have visibility into whatever events are sent to the bus. The warning is shown because rules are generally used to filter events coming into the Event bus, and our rule is doing no filtering. You may create rules that performs filtering but for this example we will perform filtering prior to adding the event to the Event bus. This rule is just to have visibility into the Event bus. We can leave everything else in this step as is and continue.
 
 ![Eventbridge Rule Step 2]( images/createrules1.png "Eventbridge Rule Step 2")
 
