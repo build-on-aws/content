@@ -97,7 +97,7 @@ Now you can go to the newly created *Amazon SageMaker Studio* domain and open th
 
 After the studio successfully starts, in the next step, you should clone the *AWS CodeCommit* repository via the *user interface* of *SageMaker Studio*.
 
-Then we need to install all project dependencies, and it would be great to enable the *Amazon CodeWhisperer* extension in your *SageMaker Studio* domain. If you would like to do that in the future on your own, [here you can find the exact steps](https://docs.aws.amazon.com/codewhisperer/latest/userguide/sagemaker-setup.html). In our case, steps up to the 4th point are automated by the provided *infrastructure as code* solution. You should open the *Launcher tab* to execute the last two steps.
+Then we need to install all project dependencies, and it would be great to enable the *Amazon CodeWhisperer* extension in your *SageMaker Studio* domain. If you would like to do that in the future on your own, [here you can find the exact steps](https://docs.aws.amazon.com/codewhisperer/latest/userguide/sagemaker-setup.html?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-a-polish-language-speaking-chatbot). In our case, steps up to the 4th point are automated by the provided *infrastructure as code* solution. You should open the *Launcher tab* to execute the last two steps.
 
 ![Open launcher](./images/setup-3-open-launcher.png)
 ![Open a system terminal, not the Image terminal](./images/setup-4-open-system-terminal.png)
@@ -160,7 +160,7 @@ Then, open the URL marked with a green color, as in the screenshot below:
 
 Remember that no matter how you choose to run it, to communicate with the chatbot, you must pass the name of *Amazon SageMaker Endpoint* in the text field inside the left-hand sidebar. How can you find that? You can either look it up in the *[Amazon SageMaker Endpoints tab](https://eu-west-1.console.aws.amazon.com/sagemaker/home#/endpoints)* (keep in mind it is neither *URL*, nor *ARN* - **only the name**) or refer to the provided `endpoint_name` value inside *Jupyter* notebook when you invoked `huggingface_model.deploy(...)` operation.
 
-If you are interested in a detailed explanation of how we can run *Streamlit* inside *Amazon SageMaker Studio*, have a look at [this post](https://aws.amazon.com/blogs/machine-learning/build-streamlit-apps-in-amazon-sagemaker-studio) from the official *AWS* blog.
+If you are interested in a detailed explanation of how we can run *Streamlit* inside *Amazon SageMaker Studio*, have a look at [this post](https://aws.amazon.com/blogs/machine-learning/build-streamlit-apps-in-amazon-sagemaker-studio?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-a-polish-language-speaking-chatbot) from the official *AWS* blog.
 
 In terms of application code, you can review the whole implementation inside the attached [GitHub repository](https://github.com/build-on-aws/deploying-trurl-2-on-amazon-sagemaker), available [in a single *Python* file](https://github.com/build-on-aws/deploying-trurl-2-on-amazon-sagemaker/blob/main/trurl-2/chatbot-app.st.py). The main logic of the chatbot interaction is in between [the lines 111-125](https://github.com/build-on-aws/deploying-trurl-2-on-amazon-sagemaker/blob/main/trurl-2/chatbot-app.st.py#L111-L125), where we define how the conversation flow looks like:
 
