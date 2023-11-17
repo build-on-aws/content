@@ -23,7 +23,7 @@ Machine learning models can provide powerful insights, but developing them requi
 
 Amazon SageMaker is a fully managed machine learning service that makes it easy for developers to build, train and deploy scalable machine learning models quickly in the cloud. This is because it removes most of the difficulties associated with turning raw data into finished machine learning models and ready for production. SageMaker also gives developers the opportunity to skip the manual process of setting up servers and clusters to train models. Instead, you can provide training data, choose an algorithm, and let SageMaker handle the rest on a fully managed infrastructure. In addition to that you can deploy your models with a single click to perform predictions in real-time. SageMaker reduces the complexity of developing impactful machine learning models by providing end-to-end capabilities of machine learning workflow. Companies are using SageMaker to solve challenging problems in areas like forecasting, personalized product recommendations, and fraud detection.
 
-## Key Capabilities of Sagemaker
+## Key Capabilities and features of Amazon Sagemaker
 
 ### Building models
 
@@ -45,6 +45,33 @@ SageMaker allows users to easily deploy machine learning models for real-time or
 
 SageMaker provides tools to monitor the health and performance of machine learning models deployed as endpoints. Developers can enable continuous monitoring on a model endpoint which will track key performance metrics like invocation count, latency, and memory usage. This allows detecting when a model endpoint is unhealthy or performing poorly.
 
+### Build machine learning pipelines with drag and drop
+
+Sagemaker Canvas is a GUI interface that allows you to quickly build, train and deploy machine learning models without writing any code. With Sagemaker Canvas you can drag and drop prebuilt components like datasets, algorithms, and training configurations onto canvas to assemble a full machine learning pipeline.
+
+### Sagemaker clarify
+
+Sagemaker clarify lets you detect bias in models and explains predictions by providing metrics to identify biases against certain groups in training data and models. you can get individual predictions, which will show you which input features most influenced a specific prediction, which will help in debugging the behaviour of the model.
+
+### Sagemaker Data Wrangler 
+
+You can use this feature to quickly prepare and clean data for machine learning without writing any code. you can also use it to combine datasets, transform data, handle missing values, and perform other data preparation and feature engineering tasks to get data ready for training machine learning models.
+
+### Sagemaker jumpstart
+
+Amazon SageMaker JumpStart gives you quick access to prebuilt machine learning solutions, sample notebooks, and hosted models that can be customized and deployed with little machine learning expertise required. JumpStart allows you to choose from a catalog of solutions like tabular data processing, computer vision, and natural language processing to get started quickly on building and training ML models. Also JumpStart integrates with other SageMaker capabilities. The notebooks leverage features like Clarify, Data Wrangler, Feature Store, and Model Monitor. You can use sagemake jumpstart to acceleratr your machine learning journey through reusable assets, templates, and models. 
+
+### Create training datasets
+
+You can use Sagemaker Ground Truth to create highly accurate training datasets. Ground Truth helps you with data labeling tasks at sacle. And ground truth provides you with tools to verify, analyze and monitor labeling quality. The integration with S3 also gives you the ability to store your dataset which can later be used to train models with sagemaker training jobs. 
+
+### Machine Learning Governance
+
+You can use sagemaker ML Governance to monitor the entire process of your machine learning models from training to deployment. This give you the ability to deploy responsible models by monitoring the model, detecting biases and more to meet regulatory requirements and increase trust in AI systems.
+
+### Deploying machine learning models at scale
+
+Sgaemaker MLOps gives you the abilities to deploy ML models at scale by providing CI/CD pipelines for model building and deployment, model monitoring, automated drift detection and retraining, integration with Git/GitHub for version control and collaboration, and tools for experiment tracking and model lineage. With these capablities you can operationalize ML models into production, manage large volume of ML expirements, and more to improve efficiency and reduce errors while improving the productivity of teams. 
 
 ## Use Cases
 
@@ -63,4 +90,4 @@ Companies such as [Visualfabriq](https://aws.amazon.com/solutions/case-studies/v
 
 ## Conclusion
 
-Amazon SageMaker removes the barriers to successfully leveraging machine learning. Its capabilities simplify and accelerate the process of developing, training, deploying, and managing ML models in the cloud. Companies use SageMaker to create impactful ML solutions for a wide variety of use cases. By handling much of the complexity, SageMaker makes it easier to build machine learning products, reduce ML operational costs, and deploy models reliably at scale. This fully managed platform represents a major step forward in making machine learning more accessible.
+Through this post, you have learned how amazon SageMaker removes the barriers to successfully leveraging machine learning and i'ts capabilities of simplifying and accelerating the process of developing, training, deploying, and managing ML models in the cloud. You can use SageMaker to create impactful ML solutions for a wide variety of use cases. By handling much of the complexity, SageMaker makes it easier to build machine learning products, reduce ML operational costs, and deploy models reliably at scale. This fully managed platform represents a major step forward in making machine learning more accessible.
