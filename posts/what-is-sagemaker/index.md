@@ -25,20 +25,42 @@ Amazon SageMaker is an aws fully managed machine learning service that makes it 
 
 ## Key Capabilities of Sagemaker
 
-* **Building models:** SageMaker makes model building easier by providing pre-built containers and algorithms. No need to setup environments or configure training scripts. SageMaker supports popular frameworks like TensorFlow, PyTorch, and XGBoost. Bring your own frameworks using custom containers. This flexibility allows rapid testing of different approaches.
-* **Managing machine learning workflows:** SageMaker Studio provides an integrated web environment for end-to-end ML workflows. Easily setup projects, track experiments, organize models and data, visualize results, and collaborate.
-* **Training models:** SageMaker offers a fully-managed machine learning platform to help engineers and data scientists quickly build, train, and deploy high-quality models at any scale. With SageMaker, you don't have to worry about managing the infrastructure needed for distributed, large-scale model training. Simply specify the compute resources you need like GPU type and number of instances, and SageMaker handles the rest.
-* **Deploying models:** SageMaker allows users to easily deploy machine learning models for real-time or batch predictions. Once a model is trained in SageMaker, it can be deployed to create an endpoint. This endpoint is a REST API that receives prediction requests, runs the request through the deployed model, and returns predictions.
-* **Monitoring models:** SageMaker provides tools to monitor the health and performance of machine learning models deployed as endpoints. Developers can enable continuous monitoring on a model endpoint which will track key performance metrics like invocation count, latency, and memory usage. This allows detecting when a model endpoint is unhealthy or performing poorly.
+### Building models
+
+SageMaker makes model building easier by providing pre-built containers and algorithms. No need to setup environments or configure training scripts. SageMaker supports popular frameworks like TensorFlow, PyTorch, and XGBoost. Bring your own frameworks using custom containers. This flexibility allows rapid testing of different approaches.
+
+### Managing machine learning workflows
+
+SageMaker Studio provides an integrated web environment for end-to-end ML workflows. Easily setup projects, track experiments, organize models and data, visualize results, and collaborate.
+
+### Training models
+
+SageMaker offers a fully-managed machine learning platform to help engineers and data scientists quickly build, train, and deploy high-quality models at any scale. With SageMaker, you don't have to worry about managing the infrastructure needed for distributed, large-scale model training. Simply specify the compute resources you need like GPU type and number of instances, and SageMaker handles the rest. By using features such as [GPU instances and training compilers](https://aws.amazon.com/sagemaker/faqs), training time and costs can be significantly reduced.
+
+### Deploying models
+
+SageMaker allows users to easily deploy machine learning models for real-time or batch predictions. Once a model is trained in SageMaker, it can be deployed to create an endpoint. This endpoint is a REST API that receives prediction requests, runs the request through the deployed model, and returns predictions.
+
+### Monitoring models
+
+SageMaker provides tools to monitor the health and performance of machine learning models deployed as endpoints. Developers can enable continuous monitoring on a model endpoint which will track key performance metrics like invocation count, latency, and memory usage. This allows detecting when a model endpoint is unhealthy or performing poorly.
 
 
 ## Use Cases
 
-* **Fraud detection:** Fraud detection is a major challenge that many companies face today. With the rise of online transactions and digital payments, fraudsters are constantly finding new ways to game systems and commit fraud. Companies are leveraging Amazon SageMaker to build highly accurate fraud detection models.
-* **Personalized Recommendations:** Companies are leveraging Amazon SageMaker to build personalized recommendation systems that identify and suggest relevant products or content for each user to drive user engagement and increase sales.
-* **Forecasting:** Companies are leveraging Amazon SageMaker to build forecasting models that predict future sales, demand, and other metrics. SageMaker provides built-in algorithms like DeepAR that are optimized for time-series forecasting. By bringing their historical time-series data into SageMaker notebooks, companies can train forecasting models that learn patterns and seasonality in the data. These models can then be deployed into production to generate forecasts on an ongoing basis.
+### Fraud detection
+
+Fraud is a major challenge that many companies face today, including [Mastercard](https://aws.amazon.com/solutions/case-studies/mastercard-ai-ml-testimonial). With the rise of online transactions and digital payments, fraudsters are constantly finding new ways to game systems and commit fraud. Companies are leveraging Amazon SageMaker to build highly accurate fraud detection models in order to counteract this. These models are trained by using anomaly detection, a principal that determines whether a certain transaction is unusual, relative to the rest. These models usually come with their own set of challenges, such as the imbalanced data problem, which happens because fraudulent transactions occur much less frequently than non-fradulent transactions, thereby resulting in an imbalanced data set. This results in a bias in the model, which makes it less likely to detect fraud since it doesn't know enough about what fraud could look like. To mitigate such challenges, sagemaker also comes with managed (and no code) data preprocessing solutions such as [SageMaker Data Wrangler](https://aws.amazon.com/sagemaker/data-wrangler), that can process the data using techniques that help improve the model predictions.
+
+### Personalized Recommendations
+
+Companies like [Natwest Group](https://aws.amazon.com/solutions/case-studies/natwest-group-case-study) are leveraging Amazon SageMaker to build personalized recommendation systems that identify and suggest relevant products or content for each user to drive user engagement and increase sales. 
+
+### Forecasting
+
+Companies such as [Visualfabriq](https://aws.amazon.com/solutions/case-studies/visualfabriq-case-study) are leveraging Amazon SageMaker to build forecasting models that predict future sales, demand, and other metrics. Forecasting takes past data and uses it to predict trends that may reoccur in the future. SageMaker provides built-in algorithms like DeepAR that are optimized for time-series forecasting. By bringing your historical time-series data into SageMaker notebooks, you can train forecasting models that learn patterns and seasonality in the data. These models can then be deployed into production to generate forecasts on an ongoing basis.
 
 
-### Conclusion
+## Conclusion
 
 Amazon SageMaker removes the barriers to successfully leveraging machine learning. Its capabilities simplify and accelerate the process of developing, training, deploying, and managing ML models in the cloud. Companies use SageMaker to create impactful ML solutions for a wide variety of use cases. By handling much of the complexity, SageMaker makes it easier to build machine learning products, reduce ML operational costs, and deploy models reliably at scale. This fully managed platform represents a major step forward in making machine learning more accessible.
