@@ -53,9 +53,9 @@ Using the eksctl cluster template that follows, you'll build an Amazon Windows E
 * **Control Plane Logging**: You can enable [Amazon EKS control plane logging](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) to provide audit and diagnostic logs directly from the Amazon EKS control plane to CloudWatch Logs. In this tutorial, we’ve enabled all the available control log type that corresponds to the available components of the Kubernetes control plane.
 
 
-To run Windows workloads on Amazon EKS, you’d need Windows nodes and a Linux node in the cluster. The Linux nodes are critical to the functioning of the cluster as they run core cluster’s components, and thus, for a production-grade cluster, such organization must ensure that the Linux nodes are well architected for high availability.
+To run Windows workloads on Amazon EKS, you’d need Windows nodes and a Linux node in the cluster. Windows containers aren't supported for Amazon EKS Pods on Fargate currently, hence Windows containers must run on Amazon EC2. The Linux nodes are critical to the functioning of the cluster as they run core cluster’s components, and thus, for a production-grade cluster, such organization must ensure that the Linux nodes are well architected for high availability.
 
-While Amazon EKS clusters must contain one or more Linux or Fargate nodes to run core system Pods that only run on Linux, such as CoreDNS, organizations seeking to reduce operational overhead in managing a Windows EKS cluster can leverage the benefits of Managed Node groups and Fargate.
+While Amazon EKS clusters must contain one or more Linux or Fargate nodes to run core system Pods that only run on Linux, such as CoreDNS, organizations seeking to reduce operational overhead in managing a Windows EKS cluster can leverage the benefits of Managed Node groups for Windows containers and Fargate for Linux containers.
 
 ## Step 1: Configure the Cluster
 
@@ -103,7 +103,7 @@ cloudWatch:
 EOF
 ```
 
-With the `cluster-config.yaml` file, we’ve created two node pools which includes Linux and Windows. The Linux node pool is provided by the Fargate profile called **fargate**, and the Windows node pool is provided by the managed node group called **windows-managed-ng-2022**. In order to run Windows containers, it must be scheduled on the Windows node pool. Since we are running a mix of Linux and Windows nodes, we’ve configured `NoSchedule` [taints](https://eksctl.io/usage/nodegroup-taints/) on the Windows managed nodes to help ensure Linux pods are not scheduled onto Windows nodes. All Linux pods will be scheduled on Fargate in the default or kube-system namespaces. 
+With the `cluster-config.yaml` file, we’ve created two node pools which includes Linux and Windows. The Linux node pool is provided by the Fargate profile called **fargate**, and the Windows node pool is provided by the managed node group called **windows-managed-ng-2022**. In order to run Windows containers, it must be scheduled on the Windows node pool. Since we are running a mix of Linux and Windows nodes, we’ve configured `NoSchedule` [taints](https://eksctl.io/usage/nodegroup-taints/) on the Windows managed nodes to help ensure Linux pods are not scheduled onto Windows nodes and vice versa. All Linux pods will be scheduled on Fargate in the default or kube-system namespaces.
 
 
 ## Step 2: Create the Cluster
@@ -155,7 +155,7 @@ coredns-56666498f9-lx8xj   1/1     Running   0          66m   192.168.114.130   
 coredns-56666498f9-xqqlz   1/1     Running   0          66m   192.168.146.30    fargate-ip-192-168-146-30.us-west-2.compute.internal    <none>           <none>
 ```
 
-To achieve a highly available CoreDNS application in the cluster in the event of disruptions, Kubernetes offers a feature called Pod Disruption Budget. An appropriate [Pod Disruption Budgets](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets) (PDBs) was automatically created for the CoreDNS to control the number of pods that can be down simultaneously when we created the cluster. 
+To achieve a highly available CoreDNS application in the cluster in the event of disruptions, Kubernetes offers a feature called Pod Disruption Budget. An appropriate [Pod Disruption Budgets](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets) (PDBs) was automatically created for the CoreDNS to control the number of pods that can be down simultaneously when we created the cluster.
 
 Run the command below to verify this is in place:
 
@@ -241,7 +241,7 @@ spec:
   type: LoadBalancer
 ```
 
-1. We’ve configured [toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-nodes-by-condition) in the Windows workload deployment manifest to help ensure Windows Pods are only deployed to the Windows nodes based on matching taints (os=windows). Deploy the sample application with the command below:
+1. For a Windows Pod to be scheduled on Windows node, it would need both the `nodeSelector` and the appropriate matching toleration to select Windows. We’ve configured both [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) and [toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-nodes-by-condition) in the Windows workload deployment manifest to help ensure Windows Pods are only deployed to the Windows nodes based on matching taints (os=windows) and matching label (kubernetes.io/os=windows). Deploy the sample application with the command below:
 
 ```bash
 kubectl apply -f windows-workload.yaml
