@@ -6,15 +6,12 @@ tags:
     - observability
     - cost-optimization
     - compliance
-    - governance
-    - reinvent
     - reinvent-2023
-    - aws
 spaces:
     - reinvent
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
-date: 2023-11-14
+date: 2023-11-17
 ---
 
 |ToC|
