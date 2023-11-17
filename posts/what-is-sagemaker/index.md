@@ -21,13 +21,13 @@ Machine learning models can provide powerful insights, but developing them requi
 
 ## What is Amazon Sagemaker?
 
-Amazon SageMaker is an aws fully managed machine learning service that makes it easy for developers to build, train and deploy scalable machine learning models quickly in the cloud. This is because it removes most of the difficulties associated with turning raw data into finished machine learning models and ready for production. SageMaker also gives developers the opportunity to skip the manual process of setting up servers and clusters to train models. Instead, developers can easily provide training data, choose an algorithm, and let SageMaker handle the rest on a fully managed infrastructure. In addition to that developers can deploy their models with a single click to perform predictions in real-time. SageMaker reduces the complexity of developing impactful machine learning models by providing end-to-end capabilities of machine learning workflow. Companies are using SageMaker to solve challenging problems in areas like predictive maintenance, personalized product recommendations, and fraud detection. As machine learning keeps evolving, SageMaker provides an easier on-ramp for organizations to build machine learning processes and products.
+Amazon SageMaker is a fully managed machine learning service that makes it easy for developers to build, train and deploy scalable machine learning models quickly in the cloud. This is because it removes most of the difficulties associated with turning raw data into finished machine learning models and ready for production. SageMaker also gives developers the opportunity to skip the manual process of setting up servers and clusters to train models. Instead, you can provide training data, choose an algorithm, and let SageMaker handle the rest on a fully managed infrastructure. In addition to that you can deploy your models with a single click to perform predictions in real-time. SageMaker reduces the complexity of developing impactful machine learning models by providing end-to-end capabilities of machine learning workflow. Companies are using SageMaker to solve challenging problems in areas like forecasting, personalized product recommendations, and fraud detection.
 
 ## Key Capabilities of Sagemaker
 
 ### Building models
 
-SageMaker makes model building easier by providing pre-built containers and algorithms. No need to setup environments or configure training scripts. SageMaker supports popular frameworks like TensorFlow, PyTorch, and XGBoost. Bring your own frameworks using custom containers. This flexibility allows rapid testing of different approaches.
+SageMaker makes model building easier by providing pre-built containers and algorithms. No need to setup environments or configure training scripts. SageMaker supports popular frameworks like TensorFlow, PyTorch, and XGBoost. Bring your own frameworks using custom containers. This flexibility allows rapid testing of different approaches. 
 
 ### Managing machine learning workflows
 
