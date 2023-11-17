@@ -13,7 +13,7 @@ date: 2022-09-02
 |ToC|
 |---|
 
-This is a 10-part series:
+This is a 4-part series:
 
 | SeriesToC |
 |-----------|

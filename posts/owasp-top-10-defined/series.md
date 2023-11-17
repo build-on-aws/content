@@ -1,6 +1,6 @@
 ---
-title: "Looking at the OWASP Top 10 vulnerabilities"
-description: "A 10-part series taking a deeper look into the top 10 list of vulnerabilities from OWASP"
+title: "Looking at some of the the OWASP Top 10 vulnerabilities"
+description: "A short series taking a deeper look into the some of the top 10 vulnerabilities from OWASP"
 navigationBars: both
 posts:
   - 01-what-is-broken-access-control

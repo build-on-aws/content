@@ -13,7 +13,7 @@ date: 2023-06-27
 |ToC|
 |---|
 
-This is a 10-part series:
+This is a 4-part series:
 
 | SeriesToC |
 |-----------|
