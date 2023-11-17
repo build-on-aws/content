@@ -27,11 +27,11 @@ Amazon SageMaker is a fully managed machine learning service that makes it easy 
 
 ### Building models
 
-SageMaker makes model building easier by providing pre-built containers and algorithms. No need to setup environments or configure training scripts. SageMaker supports popular frameworks like TensorFlow, PyTorch, and XGBoost. Bring your own frameworks using custom containers. This flexibility allows rapid testing of different approaches. 
+SageMaker makes model building easier by providing pre-built containers and algorithms. you don't need to setup environments or configure training scripts with sagemaker's fully managed infrastracture. Instead you provide an algorithm, training code, and dataset; Then let sagemaker handle the rest. In addition sagemaker supports popular frameworks like TensorFlow, PyTorch, and XGBoost. Or Bring your own frameworks using custom containers. This flexibility allows rapid testing of different approaches. 
 
 ### Managing machine learning workflows
 
-SageMaker Studio provides an integrated web environment for end-to-end ML workflows. Easily setup projects, track experiments, organize models and data, visualize results, and collaborate.
+SageMaker Studio provides an integrated web environment for end-to-end ML workflows. This will let you to easily setup projects, track experiments, organize models and data, visualize results, and collaborate. 
 
 ### Training models
 
