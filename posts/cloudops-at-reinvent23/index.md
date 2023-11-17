@@ -22,6 +22,8 @@ date: 2023-11-14
 
 *Before I start, if you are looking for suggestions related to Resilience sessions at re:Invent, check out Seth's post [HERE](https://community.aws/posts/resilience-at-reinvent)*
 
+https://youtu.be/CykKw2fVbWc
+
 We've all been in, or have had a close relationship with IT Operations. They are the heart of every organization. 💟 Now, when you start operating in the cloud this is the time when you get your IT teams to focus not *just* on operations, but also business outcomes, IT process optimization, and software development acceleration! All things a company in the cloud needs.
 
 Ultimately the goal is to be agile, move fast, but at the same time keep track of compliance, security, spend and more! For all that, the portfolio of AWS Cloud Operations solutions is the thing for you. So, if you are planning to attend AWS re:Invent 2023, and would love learn more about Cloud Operations but are not sure what sessions and activities you should participate in - look no further. In this post I will share a quick preview of some of the top sessions around **observability**, **centralized operations**, **governance**, **compliance**, and **cloud financial management**. Let's jump right into it
