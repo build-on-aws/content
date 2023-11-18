@@ -51,9 +51,11 @@ You can use sagemaker to easily deploy machine learning models for real-time or 
 
 SageMaker provides tools to monitor the health and performance of machine learning models deployed as endpoints. Developers can enable continuous monitoring on a model endpoint which will track key performance metrics like invocation count, latency, and memory usage. This allows detecting when a model endpoint is unhealthy or performing poorly.
 
-### Build machine learning pipelines with drag and drop
+### SageMaker Canvas
 
 Sagemaker Canvas is a GUI interface that allows you to quickly build, train and deploy machine learning models without writing any code. With Sagemaker Canvas you can drag and drop prebuilt components like datasets, algorithms, and training configurations onto canvas to assemble a full machine learning pipeline.
+
+![SageMaker Canvas](images/canvas.png)
 
 ### Sagemaker Clarify
 
