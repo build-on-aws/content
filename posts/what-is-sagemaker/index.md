@@ -15,8 +15,6 @@ additionalAuthors:
 date: 2023-11-24
 ---
 
-![Amazon SageMaker](images/sagemaker.png)
-
 ## Introduction
 
 Machine learning models can provide powerful insights, but developing them requires scarce data science skills. This leaves many businesses unable to tap the potential of ML. Amazon SageMaker makes ML practical by providing a fully managed platform to build, train, and deploy models with ease. In this post, we’ll explore how SageMaker eliminates the heavy lifting of ML, making it possible for any team to generate value from data. You’ll learn what capabilities SageMaker offers to accelerate development and simplify deployment of ML models. With SageMaker, you can finally put machine learning to work for your business.
