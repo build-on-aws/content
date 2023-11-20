@@ -7,7 +7,6 @@ tags:
     - kubernetes
     - tutorials
     - aws
-movedFrom: /tutorials/navigating-amazon-eks/eks-integrate-secrets-manager
 waves:
   - modern-apps
 spaces:
