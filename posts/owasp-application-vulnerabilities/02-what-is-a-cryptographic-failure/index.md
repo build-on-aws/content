@@ -8,6 +8,7 @@ tags:
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-08-31
+movedFrom: posts/owasp-top-10-defined/02-what-is-a-cryptographic-failure
 ---
 
 |ToC|
