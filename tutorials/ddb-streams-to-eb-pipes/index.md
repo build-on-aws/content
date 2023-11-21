@@ -190,7 +190,7 @@ We have now learned how to transform and filter the inputs.
 
 ## Clean-up
 
-To clean-up your AWS account, remember to delete the following:
+To clean up your AWS account, remember to delete the following:
 
 * The CloudWatch log group in the CloudWatch Console
 * The EventBridge Pipe, as well as the custom bus and the rule.
