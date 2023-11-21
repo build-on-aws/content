@@ -8,7 +8,7 @@ tags:
     - lightsail
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-20-11
+date: 2023-11-21
 ---
 
 There are many ways of building AWS infrastructure. They range from using the AWS web console to the AWS CLI, and using infrastructure as code (IaC) with CloudFormation, Terraform, and AWS Cloud Development Kit (CDK). While manually building cloud infrastructure with the AWS console or scripting AWS CLI commands can get you started, IaC offers distinct advantages when building and maintaining the cloud infrastructure and applications. First, it provides a single source for all the resources, and unlike manual or scripted methods, IaC allows for version control and rollback. Finally, IaC is reusable, for example you might need to build a VPC in different regions, you can reuse the same code by merely changing the region. This article introduces the AWS CDK by demonstrating how to deploy a Wordpress Lightsail instance with a static IP. 
