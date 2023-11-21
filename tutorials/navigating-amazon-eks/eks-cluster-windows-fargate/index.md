@@ -9,13 +9,12 @@ tags:
     - aws
 showInHomeFeed: true
 waves:
-  - modern-apps
+  - devops
 spaces:
   - kubernetes
-  - modern-apps
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
-date: 2023-11-16
+date: 2023-11-21
 ---
 
 Windows Containers in Kubernetes allow organisations to easily migrate their existing Windows workloads to Amazon EKS. For example, when deploying a typical legacy monolithic .NET framework application, you might need to be concerned about the application dependencies with its environment, perform configuration tuning, and data transfer between hosting servers. These amongst other tasks introduces risk to new deployments and delay new software releases. Instead, customers can migrate their existing legacy .NET applications by using Windows containers in Kubernetes to containerize their applications and deploy to Amazon EKS. This approach has helped teams to eliminate manual steps, save time and cost involved in deploying and maintaining Windows applications. The application packaging and deployment process can be fully automated giving developers more time to focus on coding rather than operational tasks.
@@ -31,7 +30,7 @@ In addition, many companies want agility, faster time to market and improved spe
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-11-30                                                      |
+| ⏰ Last Updated        | 2023-11-21                                                     |
 
 | ToC |
 |-----|
