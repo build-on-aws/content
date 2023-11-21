@@ -13,11 +13,11 @@ authorName: Suman Debnath
 date: 2023-11-15
 ---
 
-Welcome to the second part of our enlightening journey in the world of vector embeddings. In the [first part](https://github.com/debnsuma/content/blob/vector-store-rag-bedrock/tutorials/vector-embeddings-and-rag-demystified/index.md) of this series, we laid the groundwork by exploring the essentials of vector embeddings, from their fundamental concepts to their storage and indexing methods. We learned about the transformative role these embeddings play in AI and machine learning, and we started to scratch the surface of how tools like Amazon Bedrock and LangChain can be utilized to harness the power of these embeddings.
+Welcome to the second part of our enlightening journey in the world of vector embeddings. In the [first part](TBA) of this series, we laid the groundwork by exploring the essentials of vector embeddings, from their fundamental concepts to their storage and indexing methods. We learned about the transformative role these embeddings play in AI and machine learning, and we started to scratch the surface of how tools like Amazon Bedrock and LangChain can be utilized to harness the power of these embeddings.
 
 As we continue our exploration, Part 2 promises to dive deeper into the practical aspects of vector embeddings. We're shifting our focus to few of the vector storage solutions available on AWS and how they can be effectively used to store and manage your embeddings. 
 
-We'll discuss how services like Amazon Aurora can be optimized for vector storage, providing you with the know-how to make the most of AWS's robust infrastructure. Moreover, we'll see how LangChain, an innovative tool introduced in [Part 1](https://github.com/debnsuma/content/blob/vector-store-rag-bedrock/tutorials/vector-embeddings-and-rag-demystified/index.md), plays a pivotal role in bridging the gap between vector embeddings and LLMs, making the integration process seamless and straightforward.
+We'll discuss how services like Amazon Aurora can be optimized for vector storage, providing you with the know-how to make the most of AWS's robust infrastructure. Moreover, we'll see how LangChain, an innovative tool introduced in [Part 1](TBA), plays a pivotal role in bridging the gap between vector embeddings and LLMs, making the integration process seamless and straightforward.
 
 By the end of this part, you will have a comprehensive understanding of the practical applications of vector embeddings in AWS environments. 
 
