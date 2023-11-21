@@ -188,7 +188,7 @@ We can now play around with the table to see how the events get recorded. Naviga
 
 We have now learned how to transform and filter the inputs.
 
-## Clean-up
+## Clean Up
 
 To clean up your AWS account, remember to delete the following:
 
