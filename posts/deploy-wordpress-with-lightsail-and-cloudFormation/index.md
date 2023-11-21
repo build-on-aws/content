@@ -7,7 +7,7 @@ tags:
     - wordpress
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-11-15
+date: 2023-11-21
 ---
 
 There are many ways to create a WordPress site, either through the Lightsail web console or with the AWS CLI. Another way is to use CloudFormation, an AWS service that sets up resources. CloudFormation works with AWS services, including Lightsail. It uses templates to describe, provision, and configure AWS resources for your application. This article introduces CloudFormation and demonstrates how to create a Lightsail WordPress site with a template.
