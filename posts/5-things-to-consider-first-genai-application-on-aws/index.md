@@ -12,7 +12,7 @@ authorName: Arjun Shakdher
 additionalAuthors:
   - authorGithubAlias: ztanruan
     authorName: Jin Tan Ruan
-date: 2023-11-08
+date: 2023-11-21
 ---
 
 Generative AI refers to a category of artificial intelligence (AI) systems and models that are designed to generate content, such as text, images, music, or other forms of data, that is often creative and original. These AI systems use techniques from machine learning and deep learning to produce new content based on patterns and knowledge learned from existing data.
