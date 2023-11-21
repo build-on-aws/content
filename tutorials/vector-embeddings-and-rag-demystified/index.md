@@ -224,6 +224,8 @@ Text: Sunny skies today.
 Embedding: [1.21875, 0.122558594, ..., -0.021362305]  # An array of length 1536 
 ```
 
+To learn more about **LangChain**, including its use with vectors, I recommend referring to the book ["Generative AI with LangChain" by Ben Auffarth](https://learning.oreilly.com/library/view/generative-ai-with/9781835083468/). This book provided valuable insights while I was learning about **LangChain**, and I have incorporated several of its narratives into this blog post.
+
 ## How can we store embeddings?
 
 Understanding how to represent any data point as a `vector` is crucial, but equally important is knowing how to store these vectors. Before diving into storage methods, let's briefly touch on **Vector Search**, which underscores the need for storing embeddings.
@@ -275,7 +277,7 @@ Alternative algorithms for vector search includes the following, these algorithm
 - **Locality-sensitive hashing**
 - **Hierarchical Navigable Small World (HNSW)**
 
-Let's dive into this one by one, 
+Before we dive into each of these algorithms in details, I'd like to extend my gratitude to [Damien Benveniste](https://www.udemy.com/user/damien-benveniste-2/) for his insightful lecture on [Introduction to LangChain](https://www.udemy.com/course/introduction-to-langchain/). His course is a fantastic resource for anyone looking to deepen their understanding of LangChain, and I highly recommend checking it out. The graphics used in the following sections are sourced from his lecture notes, providing a visual complement to our exploration. His contributions have been invaluable in enhancing the depth and clarity of the content we're about to discuss.
 
 ### Product Quantization (PO)
 Its a technique that divides the vector space into smaller subspaces and quantizes each subspace separately. This reduces the dimensionality of the vectors and allows for efficient storage and search. 
