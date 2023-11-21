@@ -8,12 +8,13 @@ tags:
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-06-27
+movedFrom: posts/owasp-top-10-defined/04-what-is-an-insecure-direct-object-reference
 ---
 
 |ToC|
 |---|
 
-This is a 10-part series:
+This is a 4-part series:
 
 | SeriesToC |
 |-----------|
