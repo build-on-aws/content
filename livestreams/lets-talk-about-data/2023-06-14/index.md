@@ -1,5 +1,5 @@
 ---
-title: "Graph Database and Neptune | S01 E08 Lets Talk About Data Show"
+title: "Graph Database and Neptune | S01 E08 | Lets Talk About Data Show"
 description: "In this show we dive deep in Graph databases and Amazon Neptune. We discuss about the usecases where customer benefit from using a graph database. In the second half of the show we have a detailed demo to setup and use graph databases."
 tags:
   - aws

@@ -1,5 +1,5 @@
 ---
-title: "Migrating to Amazon DocumentDB in near real time | S01 E10 Lets Talk About Data Show"
+title: "Migrating to Amazon DocumentDB in near real time | S01 E10 | Lets Talk About Data Show"
 description: "In this show we discuss about what is Amazon DocumentDB and how it is different when compared to MongoDB. We also have a detailed demo of how customers can move from their existing MongoDB to Amazon DocumentDB using Database Migration Service."
 tags:
   - aws

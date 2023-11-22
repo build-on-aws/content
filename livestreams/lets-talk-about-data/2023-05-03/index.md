@@ -1,5 +1,5 @@
 ---
-title: "Babelfish for Aurora PostgreSQL | S01 E05 Lets Talk About Data Show"
+title: "Babelfish for Aurora PostgreSQL | S01 E05 | Lets Talk About Data Show"
 description: "In this show we discuss about the Bablefish for Aurora PostgreSQL and customer usecases for this option. In the second part of the show we build demo using the various features/functionality available to customers using Bablefish for PostgreSQL."
 tags:
   - aws

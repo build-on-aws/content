@@ -1,5 +1,5 @@
 ---
-title: "Women in data initiative in AWS & Building a data lake using DMS, Glue & Hudi | S01 E07 Lets Talk About Data Show"
+title: "Women in data initiative in AWS & Building a data lake using DMS, Glue & Hudi | S01 E07 | Lets Talk About Data Show"
 description: "In this show we discuss about the women in data initiative at AWS and discuss about the cloud journey of our guests. In the second half of the show we focus on reference architecture of manufacturing company and how they leverage various AWS services."
 tags:
   - aws

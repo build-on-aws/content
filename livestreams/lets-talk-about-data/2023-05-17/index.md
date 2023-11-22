@@ -1,5 +1,5 @@
 ---
-title: "Data Mesh on AWS and Amazon Datazone | S01 E06 Lets Talk About Data Show"
+title: "Data Mesh on AWS and Amazon Datazone | S01 E06 | Lets Talk About Data Show"
 description: "In this show we discuss about the new services like Data Mesh and Amazon Datazone and how customers can create data domain for their specific usecase. The second part of the demo focuses on creating the Data Domain."
 tags:
   - aws

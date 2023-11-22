@@ -1,5 +1,5 @@
 ---
-title: "Data lake with dms, glue & hudi | S01 E11 Lets Talk About Data Show"
+title: "Data lake with dms, glue & hudi | S01 E11 | Lets Talk About Data Show"
 description: "In this show we focus on the AWS Analytics services like Glue , Hudi and how it can be used to build data lake. We focus on the ingestion sources and staging the data in the data lake. We have a detailed demo in the second half of the show focusing on building data lake and using these services."
 tags:
   - aws

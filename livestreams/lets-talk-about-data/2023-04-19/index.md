@@ -1,5 +1,5 @@
 ---
-title: "Certifications | S01 E03 Lets Talk About Data Show"
+title: "Certifications | S01 E03 | Lets Talk About Data Show"
 description: "In this show we discuss about importance of certifications and how certifications can help users in their cloud journey. We also discuss about sample questions that we come across in certification exams and tips/approach to solve them."
 tags:
   - aws

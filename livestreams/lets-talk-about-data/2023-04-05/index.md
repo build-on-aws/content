@@ -1,5 +1,5 @@
 ---
-title: "GP3 storage and Oracle Gateway | S01 E01 Lets Talk About Data Show"
+title: "GP3 storage and Oracle Gateway | S01 E01 | Lets Talk About Data Show"
 description: "In this show we discuss about the new GP3 storage class and how customers can benefit moving to it . In the second half of the show we discuss Oracle to PostgreSQL connectivity using the Oracle gateway and also have demo about how to configure the gateway"
 tags:
   - aws
