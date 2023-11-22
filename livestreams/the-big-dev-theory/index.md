@@ -32,14 +32,15 @@ https://youtu.be/b0FeFtvkHiw
 Join us for our upcoming episodes!
 | Season | Episode | Date | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
-|Season 5 | **Episode 1** | 2023/11/14 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Mendix | Coming Soon |
-|Season 5 | **Episode 2** | 2023/11/21 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Mendix | Coming Soon |
 |Season 5 | **Episode 3** | 2023/12/05 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Auth0 | Coming Soon |
 |Season 5 | **Episode 4** | 2023/12/12 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Auth0 | Coming Soon |
 |Season 5 | **Episode 5** | 2023/12/19 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Auth0 | Coming Soon |
 
 Past episodes
 | Season | Episode | Date Shown | Link to Watch | Guest| Link to Show Notes |
+|-|--|--|--|--|-|
+|Season 5 | **Episode 2** | 2023/11/21 | [Watch here](https://www.twitch.tv/aws/) | Mendix | [Show notes](/livestreams/the-big-dev-theory/2023-11-21) |
+|Season 5 | **Episode 1** | 2023/11/14 | [Watch here](https://www.twitch.tv/aws/) | Mendix | [Show notes](/livestreams/the-big-dev-theory/2023-11-14) |
 |-|--|--|--|--|-|
 |Season 4 | **Episode 5** | 2023/11/07 | [Watch here](https://www.twitch.tv/videos/1971158252)| Rootly | [Show notes](/livestreams/the-big-dev-theory/2023-11-07) |
 |-|--|--|--|--|-|
