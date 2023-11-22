@@ -1,5 +1,5 @@
 ---
-title: "Database Migration Service"
+title: "Database Migration Service | S01 E02 Lets Talk About Data Show"
 description: "In this show we discuss about how Amazon Database Migration Service (DMS) helps customers migrating database workloads to the cloud in near real time approach. The demo covers how to setup DMS and replicate data in in Full Load and Change data capture."
 tags:
   - aws

@@ -13,10 +13,9 @@ additionalAuthors:
     authorName: Prasad Maktar
 date: 2023-10-23
 images:
-  hero: ./images/banner.webp
-  thumbnail: ./images/logo.webp
-  banner: ./images/logo.webp
-  background: ./images/logo.webp
+  thumbnail: ./images/AWS_Lets Talk About Data_Logo_DARK_Transparent.png
+  banner: ./images/AWS_Lets Talk About Data_Logo_DARK_Transparent.png
+  background: ./images/logo.webpAWS_Lets Talk About Data_Logo_DARK_Transparent.png
 ---
 
 ![Image of Tony, Prasad and Ibrahim  enjoying the live stream together](images/ltad-header.jpg)

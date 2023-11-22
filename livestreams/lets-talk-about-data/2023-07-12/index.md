@@ -1,5 +1,5 @@
 ---
-title: "Cost optimization"
+title: "Cost optimization | S01 E12 Lets Talk About Data Show"
 description: "In this show we discuss about cost optmisation when using Amazon RDS and Amazon Aurora in detail. In the second half of the show we focus on the demo using services like Amazon Cost & Usage report, Lambda and create dashboard to visualise the cost."
 tags:
   - aws
