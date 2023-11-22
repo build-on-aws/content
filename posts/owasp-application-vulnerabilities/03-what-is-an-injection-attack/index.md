@@ -8,12 +8,13 @@ tags:
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-09-02
+movedFrom: posts/owasp-top-10-defined/03-what-is-an-injection-attack
 ---
 
 |ToC|
 |---|
 
-This is a 10-part series:
+This is a 4-part series:
 
 | SeriesToC |
 |-----------|

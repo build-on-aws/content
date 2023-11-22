@@ -8,12 +8,13 @@ tags:
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2022-08-29
+movedFrom: posts/owasp-top-10-defined/01-what-is-broken-access-control
 ---
 
 |ToC|
 |---|
 
-This is a 10-part series:
+This is a 4-part series:
 
 | SeriesToC |
 |-----------|
