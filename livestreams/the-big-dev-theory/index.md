@@ -41,9 +41,9 @@ Join us for our upcoming episodes!
 Past episodes
 | Season | Episode | Date Shown | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
-|Season 4 | **Episode 5** | 2023/11/07 | [Watch here](https://www.twitch.tv/videos/1971158252)| Rootly | |[Show notes](/livestreams/the-big-dev-theory/2023-11-07) |
+|Season 4 | **Episode 5** | 2023/11/07 | [Watch here](https://www.twitch.tv/videos/1971158252)| Rootly | [Show notes](/livestreams/the-big-dev-theory/2023-11-07) |
 |-|--|--|--|--|-|
-|Season 4 | **Episode 4** | 2023/10/24 | [Watch here](https://www.twitch.tv/videos/1959817612) | Canva | |[Show notes](/livestreams/the-big-dev-theory/2023-10-23) |
+|Season 4 | **Episode 4** | 2023/10/24 | [Watch here](https://www.twitch.tv/videos/1959817612) | Canva | [Show notes](/livestreams/the-big-dev-theory/2023-10-24) |
 |-|--|--|--|--|-|
 |Season 4 | **Episode 3** | 2023/10/17 | [Watch here](https://www.twitch.tv/videos/1953959698) | Grafana Labs |[Show notes](/livestreams/the-big-dev-theory/2023-10-17) |
 |Season 4 | **Episode 1** | 2023/10/03 | [Watch here](https://www.twitch.tv/videos/1942293847) | Grafana Labs |[Show notes](/livestreams/the-big-dev-theory/2023-10-03) |
