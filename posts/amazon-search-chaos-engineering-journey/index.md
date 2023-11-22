@@ -2,21 +2,22 @@
 title: "Engineering Resilience: Lessons from Amazon Search's Chaos Engineering Journey"
 description: "Discover how Amazon Search enhanced its system resilience through practical resilience engineering, transitioning from traditional load tests to large-scale experiments and achieving key milestones along the way."
 tags:
-  - amazon
-  - devops
   - resilience
   - chaos-engineering
+  - amazon
+  - devops
   - fault-injection-simulator
 waves:
   - resilience
-authorName: Gorik Van Steenberge
+authorGithubAlias: takieddine-sbiai
+authorName: Takieddine Sbiai
 additionalAuthors:
+  - authorName: Gorik Van Steenberge
   - authorGithubAlias: adhorn
     authorName: Adrian Hornsby
-  - authorGithubAlias: takieddine-sbiai
-    authorName: Takieddine Sbiai
-  - authorName: Milosz Kosmider
-date: 2023-11-20
+  - authorGithubAlias: mrmilosz
+    authorName: Milosz Kosmider
+date: 2023-11-22
 ---
 
 |ToC|
@@ -28,7 +29,7 @@ Our [previous blog post](/posts/how-search-uses-chaos-engineering) provided an o
 
 Amazon Search owns the product search pages for Amazon mobile apps and websites worldwide. Serving search pages depends on a complex distributed system consisting of dozens of critical services: from the actual information retrieval search engine to rendering search pages with product images, pricing, delivery, and related information.
 
-![Amazon search results page showing results for the query: chaos engineering](images/figure1.png "Figure 1. Amazon Search returns over 1,000 results for \"chaos engineering\"")
+![Amazon search results page showing results for the query: chaos engineering](images/figure1.jpg "Figure 1. Amazon Search returns over 1,000 results for \"chaos engineering\"")
 
 There are dozens of teams building product search, but today we will talk about our Search Resilience team that improves the resilience of Amazon Search by running chaos experiments in production at scale and driving and promoting resilience initiatives. The Resilience team is part of a larger [Operational Excellence](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/welcome.html?sc_channel=el&sc_campaign=resilience&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-search-chaos-engineering-journey) organization within Search with the vision to make it effortless for service owners to run their services in production, so they can focus on their primary mission of improving the customer experience by providing the most relevant search results as fast as possible.
 
@@ -36,7 +37,7 @@ Many years ago, our team was scaling up Search services to prepare for a sales e
 
 We performed a [Correction of Error (COE)](https://aws.amazon.com/blogs/mt/why-you-should-develop-a-correction-of-error-coe?sc_channel=el&sc_campaign=resilience&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=amazon-search-chaos-engineering-journey), which is Amazon's process for post-incident analysis, to deep dive into the problem and identify corrective actions to prevent any recurrence. We arrived at two key insights: First, the bottleneck in our system had shifted without our awareness. It was no longer centered on the servers managing product indices. Instead, the bottleneck had migrated upstream to the component responsible for aggregating search requests across various indices. Second, we had reached a point where Search had grown so much in response to customer needs, that no individual engineer fully understood all bottlenecks, thresholds, queues, and failover mechanisms.
 
-A corrective action from this COE was to implement end-to-end production load tests of the fully scaled up system before peak, also known as [GameDays](https://www.usenix.org/conference/lisa11/gameday-creating-resiliency-through-destruction). We conducted this tests to specifically assess three aspects: 1) our scaling methodology and validate the expected bottleneck location, 2) our performance benchmarks, and 3) the effectiveness of our resilience mechanisms against the actual reality of the production environment’s scale, configuration, and customer behavior.
+A corrective action from this COE was to implement end-to-end production load tests of the fully scaled up system before peak, also known as [GameDays](https://www.usenix.org/conference/lisa11/gameday-creating-resiliency-through-destruction). We conducted these tests to specifically assess three aspects: 1) our scaling methodology and validate the expected bottleneck location, 2) our performance benchmarks, and 3) the effectiveness of our resilience mechanisms against the actual reality of the production environment’s scale, configuration, and customer behavior.
 
 ## Embracing GameDays at scale in production
 
