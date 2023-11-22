@@ -45,7 +45,14 @@ Come learn live with us! We stream **every Monday at 9am Pacific/Noon ET**. Chec
 | S02E01 | Let's look at Llama2, Falcon and more! New season start | 2023-08-14  | Emily Webber | [Show notes](/livestreams/build-on-generative-ai/2023-08-14) |
 | S02E02 | Defining best for long context Language Models | 2023-08-21  | David Bounds | [Show notes](/livestreams/build-on-generative-ai/2023-08-21) |
 | S02E04 | Streaming support on SageMaker endpoints | 2023-09-11  | Raghu Ramesha | [Show notes](/livestreams/build-on-generative-ai/2023-09-11) |
+| S02E05 | Mounting S3 Buckets to EC2 Instances | 2023-09-18  | Devabrat & John | [Show notes](/livestreams/build-on-generative-ai/2023-09-18) |
+| S02E06 | Llama Recipes | 2023-09-25  | Matthias & Sean | [Show notes](/livestreams/build-on-generative-ai/2023-09-25) |
 | S02E07 | Amazon Bedrock and Bias Mitigation for LLMs | 2023-10-02 | Mark Roy | [Show notes](/livestreams/build-on-generative-ai/2023-10-02) |
+| S02E08 | Translating unstructured Documents to structured data | 2023-10-09 | Arlind Nocaj | [Show notes](/livestreams/build-on-generative-ai/2023-10-09) |
+| S02E09 | Finding alignment in the world of Generative AI | 2023-10-16 | David Bounds | [Show notes](/livestreams/build-on-generative-ai/2023-10-16) |
+| S02E10 | Chatting to your SageMaker Studio | 2023-10-23 | Ayush Khatri | [Show notes](/livestreams/build-on-generative-ai/2023-10-23) |
+| S02E11 | Securing Amazon Bedrock | 2023-10-30 | Ram Vittal | [Show notes](/livestreams/build-on-generative-ai/2023-10-30) |
+| S02E12 | Advanced Text Summarization with Amazon Bedrock | 2023-11-06 | Justin Muller | [Show notes](/livestreams/build-on-generative-ai/2023-11-06) |
 
 ### SEASON 01
 
