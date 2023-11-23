@@ -9,7 +9,6 @@ authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 date: 2023-11-22
 images:
-  hero: ./images/recover_banner.png
   thumbnail: ./images/recover_square.png
   banner: ./images/recover_square.png
   background: ./images/recover_square.png.png
