@@ -38,9 +38,7 @@ _Opportunity to reduce impact through migration of workloads from on-premises to
 *Optimizing your workload for sustainability with Well-architected for sustainability*. Customers are responsible for sustainability in the cloud, optimizing workloads and resource utilization, and minimizing the total resources required to be deployed for your workloads. The sustainability pillar of the AWS Well-Architected Framework helps organizations learn, measure, and improve their workloads using environmental best practices for cloud computing. To learn more about Sustainability pillar of the AWS Well-Architected Framework, please visit [here](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/sustainability-pillar.html)
 
 - ***Sustainability THROUGH the cloud*** - _Leverage AWS technologies and data services to solve sustainability challenges_. 
-Deploying cloud-based solutions and advisory
-support to accelerate customer sustainability
-objectives.  
+Deploying cloud-based solutions and advisory support to accelerate customer sustainability objectives.  
 <br><br>
 
 ### The Paris Agreement
@@ -66,6 +64,13 @@ To learn more, visit [The Climate Pledge website](https://www.theclimatepledge.c
 Climate change refers to long-term shifts in temperatures and weather patterns, mainly caused by human activities such as burning fossil fuels, clearing forests, and cultivating lands for agricultural use contribute to climate change by emitting carbon dioxide (CO₂) and other greenhouse gases (GHGs) that trap heat in the atmosphere. Effects include rising average temperatures and stronger and more frequent storms, drought, and wildfires.
 
 ![Climate change reasons](./images/climate-change-reasons.JPG)
+<br>
+
+The 20<sup>th</sup> century average global temperature is 59.0 degrees F (15.0 degrees C). The below diagram shows the impact on weather with respect to change in temperature: 
+<br>
+![rcp](./images/rcp.jpg)
+<br>
+(Source: [AWS re:Invent 2022 - Modeling climate change impacts and risks at scale (SUS210)](https://youtu.be/3a8-Upchxqw?si=uLq-ekmN2X_UbX_7&t=747))
 <br><br>
 
 ### Renewable Energy
@@ -101,15 +106,26 @@ AWS Data Exchange is a managed service that makes it easy for AWS customers to f
 
 ### Amazon Sustainability Data Initiative (ASDI)
 ASDI seeks to accelerate sustainability research and innovation by minimizing the cost and time required to acquire and analyze large sustainability datasets. ASDI supports innovators and researchers with the data, tools, and technical expertise they need to move sustainability to the next level.
-_Scope: Scientific, Government and Geospatial Data_ . To learn more, visit [ASDI](https://registry.opendata.aws/collab/asdi/). 
+_Scope: Scientific, Government and Geospatial Data_ . To learn more, visit [ASDI](https://registry.opendata.aws/collab/asdi/) and [Github repository](https://github.com/awslabs/amazon-asdi). 
+<br><br>
+![rcp](./images/asdi.jpg)
 <br><br>   
+
+### AWS Registry of Open Data
+
+The [AWS Registry of Open Data](https://registry.opendata.aws/) hosts datasets, often for entities who have a mandated reporting requirement or a need to make data available publicly.  Of note, unless specifically stated in the applicable dataset documentation, datasets available through the Registry of Open Data on AWS are not provided and maintained by AWS. Datasets are provided and maintained by a variety of third parties under a variety of licenses.   
+
+As an example, The AWS Registry of Open Data contains global weather datasets dating back over 200 years enabling agricultural crop breeders in the seed/chemical/fertilizer business to optimize their breeding stock. 
+Checkout the blog [Calculating growing degree days using AWS Registry of Open Data](https://aws.amazon.com/blogs/industries/calculating-growing-degree-days-using-aws-registry-of-open-data/) to learn more about how this is used.
+<br><br> 
 
 ### AWS Customer Carbon Footprint Tool (CCFT)
 
 AWS Customer Carbon Footprint Tool is a dashboard providing an overview of the carbon emissions associated with your usage of AWS products and services. It provides easy-to-understand data visualizations to show
 customers their historical carbon emissions,
 evaluate related trends as their use of AWS
-evolves, estimate emissions avoided by using AWS instead of an on-premises data center, and review forecasted emissions based on their current usage. It helps to understand historical carbon footprint and review changes in emissions over time as Amazon progresses toward powering operations with 100% renewable energy. Historical carbon emissions data is available based on a customer’s AWS use from January 2020 onward. This data includes Scope 1 and Scope 2 emissions. To learn more, visit [here](https://aws.amazon.com/aws-cost-management/aws-customer-carbon-footprint-tool/).
+evolves, estimate emissions avoided by using AWS instead of an on-premises data center, and review forecasted emissions based on their current usage. It helps to understand historical carbon footprint and review changes in emissions over time as Amazon progresses toward powering operations with 100% renewable energy. Historical carbon emissions data is available based on a customer’s AWS use from January 2020 onward. This data includes Scope 1 and Scope 2 emissions. To learn more, visit [here](https://aws.amazon.com/aws-cost-management/aws-customer-carbon-footprint-tool/).  
+![CCFT](./images/ccft-overview.JPG)
 <br><br>
 
 ### Embodied Carbon
@@ -120,6 +136,7 @@ Embodied carbon is the carbon footprint of a material. It considers how many gre
 ### Circular Economy  
 
 As per [European Parliament portal](https://www.europarl.europa.eu/news/en/headlines/economy/20151201STO05603/circular-economy-definition-importance-and-benefits), The circular economy is a model of production and consumption, which involves sharing, leasing, reusing, repairing, refurbishing and recycling existing materials and products as long as possible. In this way, the life cycle of products is extended.
+<br><br>
 
 ### Greenhouse gas (GHG) Protocol  
 
@@ -131,7 +148,8 @@ The GHG Protocol organizes carbon emissions into the following scopes, along wit
 
 - **Scope 1**: refers to direct emissions from the activities of an organization or under its control. For example, fuel combustion by data center backup generators.
 - **Scope 2**: refers to Indirect emissions from the generation of purchased electricity, steam, and heating/cooling consumed by the company.
-- **Scope 3** – refers to indirect GHG emissions resulting from company’s activities, but occur outside the company’s direct control or ownership in the upstream and downstream supply chains (including suppliers and customers) of reporting company. Measuring these emissions requires collecting data from a wide range of external sources, like raw material suppliers, transportation providers, and other third parties.
+- **Scope 3** – refers to indirect GHG emissions resulting from company’s activities, but occur outside the company’s direct control or ownership in the upstream and downstream supply chains (including suppliers and customers) of reporting company. Measuring these emissions requires collecting data from a wide range of external sources, like raw material suppliers, transportation providers, and other third parties. Checkout [Sustainability solutions in AWS Marketplace](https://aws.amazon.com/marketplace/solutions/sustainability) for more details.
+
 
 From an AWS customer perspective, emissions from your workloads running on AWS are accounted for as indirect emissions, and part of your Scope 3 emissions. To learn more about Greenhouse Gas Protocol, visit [here](https://ghgprotocol.org/).
 <br><br>
