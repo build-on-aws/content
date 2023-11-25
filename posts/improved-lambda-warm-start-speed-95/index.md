@@ -110,16 +110,77 @@ We decided to use [Amazon ElastiCache](https://docs.aws.amazon.com/elasticache/?
 
 ![Amazon ElastiCache is now queried before RDS to check if the data is available in the in-memory cache, otherwise the business logic will perform a query to RDS through RDS Proxy](/images/image_12.png)
 
+This approach is called cache aside pattern. With this approach, we not only enhance performance but also maintain data consistency between the cached information and the underlying data store.
 
+Applications utilize caching to optimize frequent access to data stored in a data repository. Nonetheless, it's unrealistic to assume that cached data will consistently align perfectly with the data in the underlying store. Therefore, applications should establish a robust strategy to ensure that cached data remains as up-to-date as feasible, while also being capable of detecting and handling situations where the cached data becomes outdated.
 
+In the following sequence diagram, you can understand the logic mapped inside the Lambda function’s code:
 
+![This sequence diagram represents the business logic implemented in the Lambda function code to implement the cache aside pattern](/images/image_13.png)
 
+Retrieving the data from an in-memory cache helped tremendously the performance of our Lambda function. In fact we moved from hundreds of milliseconds to query the data to a couple of milliseconds in the best case scenario!
 
+![Only 2ms to retrieve the data set from ElastiCache](/images/image_14.png)
 
+The other positive effect of this approach is that the ElastiCache cluster is shared across all the execution environments needed to handle the traffic load. Therefore also with cold starts, we will improve the response time performance, considering the data set is likely to be cached in memory and only in the worse case scenario we might reach over hundreds of milliseconds to serve the response. There are other alternatives to cache responses for an API like using API Gateway cache or a CDN like CloudFront. However ElastiCache provides the flexibility to store only the data needed and you can even increase resilience leveraging the 99.99% of availability offered by this service since the beginning of 2023.
 
+## Memory Size and Architecture
 
+When we implemented the first version of the API, we decided to go slightly above the minimum memory size of a function (256MB), guessing that it would be cheaper. Guesstimates rarely pay off, so for this new version, we decided to use [Lambda Power Tuning](https://github.com/alexcasalboni/aws-lambda-power-tuning) and find the sweet spot between cost and performance. Lambda Power Tuning is an open source tool that tests a Lambda function with different memory size, returning the average response time for every memory size tested (it includes cold and warm starts).
 
+We decided to test the pre-optimized version of our application first, and we immediately spotted that our guesstimate of using 256MB was quite wrong. Increasing the memory size to 512MB would have already improved the previous results. Remember that the amount of memory also determines the amount of virtual CPU available to a function, so adding more memory proportionally increases the amount of CPU, which in turn increases the overall computational power available. If a function is CPU-, network-, or memory-bound, then changing the memory setting can dramatically improve its performance.
 
+![This diagram from Power Tuning shows that the decision to use 256MB memory size was cheap but not very performant](/images/image_15.png)
 
+When we tested the final version of the optimized version, we found 1024MB to be the sweet spot for cost and performance, as suggested by Lambda Power Tuning for this API. Hence, we changed the memory size to 1GB without guesstimating the new memory size. 
 
+![This diagram from Power Tuning shows that the sweet spot cost and performance wise for the optmized version of our API](/images/image_16.png)
 
+Power Tuning is an absolute must for finding the right memory size on every change we made during the refactoring process.
+
+## Move to Graviton
+
+The other change we made, for cost savings more than performance, is that we moved from X86 to Graviton 2 architecture. This is a simple but effective change that can be done when you are not using any libraries that rely on X86 architecture with libraries that require that architecture. Lambda functions powered by Graviton 2 are designed to deliver up to 19% better performance at 20% lower cost — so it seemed like a no-brainer.
+
+## AWS SDK
+
+Finally, in the optimized version of our app, we removed any AWS SDK dependency, because we changed the retrieval of environment variables from Parameter Store using the extension over the SDK.
+
+However, when we had the AWS SDK bundled with the code, we saw an increase of performance compared to leverage in the one available in the runtime. You might wonder why that is.
+
+Well, the reason is pretty simple: colocating the SDK code within your bundle (remember to use tree-shaking to bundle only the code needed and not more) makes the execution immediate. When we load the dependency from the runtime, we are relying on the speed of reading from disk that takes longer than having the code available already in-memory. If you want to learn more, we highly encourage reading [this post](https://aws.amazon.com/blogs/developer/reduce-lambda-cold-start-times-migrate-to-aws-sdk-for-javascript-v3/?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=improved-lambda-warm-start-speed-95) written by the AWS SDK engineers.
+
+## Final results
+
+So after all of these changes, what was the final result? For the ramped test, when we compare the pre-optimized versus the optimized versions, we found the optimizations resulted in a 167ms run versus 6ms respectively. That’s 161ms or 96% reduction of duration per execution!
+
+Let’s evaluate the P95 and P99 of the testing. Looking at the P99 of the pre-optimized application for the ramped test, it is far to the right with around 2.05 seconds of latency.
+
+![the P99 of the pre-optimized application](/images/image_17.png)
+
+In comparison, when running the ramped test against the optimized solution, the P99 is less than 100ms.
+
+![the improved P99 of the optimized application](/images/image_18.png)
+
+These graphs highlight the performance improvement for the optimized solution as well as demonstrating visually the improvement. These improvements lead to fewer cold starts, more responses handled by the same execution environment, and an increase of throughput of our API.
+Finally, we moved from 33 TPS with 18 cold starts of the pre-optimized version to 48 TPS with 9 cold starts using exactly the same load testing strategy with Artillery.
+
+## Summary
+
+In this example, we've taken you through our thought process and the choices we made while optimizing. Lambda functions might not be rocket science, but they give you a bunch of knobs and features to juice up your code and settings for peak performance. Here are some practical takeaways for everyday builders:
+
+* **Load test your Serverless workloads before deploying in production**: prove your assumptions and adjust accordingly based on results.
+* **Dependencies and code optimizations are important**: In workloads using containers we are used to wait minutes for complex web applications to scale out. However, with Lambda function, the scaling model is different. Investing time to understand your dependencies and optimize your code and bundle size can help you achieve better performance and a more sustainable codebase in the long run.
+* **Every programming language has its own ways to be optimized**: in this example we have worked with TypeScript, where we could apply code minification, tree-shaking, dead code elimination, and more. Every programming language has its own mechanisms to be optimized, so look inside your favorite community and find the best resources to improve your code.
+* **Avoid guesstimates, stick with facts**: using tools like Lambda Power Tuning and embedding them in your development lifecycle helps you to reduce the guesses and increase the confidence in your decisions
+* **Cold starts can be mitigated**: optimizing your Lambda functions will reduce the cold starts inside your system. It’s important to highlight that cold starts might a problem in latency-sensitive workloads, but not every workload requires synchronous responses (asynchronicity to the rescue) and if there are less workloads the P95 and P99, results will improve massively.
+
+Every workload comes with its unique challenges, but we're hoping this article sparks some fresh ideas for beefing up your Lambda functions and demystifying the potential of this awesome compute service.
+
+## Where to Go Next
+
+We covered a lot of ground in this post. If you're keen to dive deeper into optimizing your Lambda functions, we would suggest diving into [Serverless land](https://serverlessland.com/blog) as starting point.
+
+And if you want the lowdown on the Lambda service's architecture and how these functions do their thing, you should definitely check out this [fantastic talk](https://www.youtube.com/watch?v=0_jfH6qijVY) by Julian Wood, Principal Serverless Developer Advocate, and Chris Greenwood, the Lambda Principal Engineer, from Re:invent 2022.
+
+Last but not least, you can't go wrong with the official Lambda documentation for solidifying your knowledge on this service. There's even a section dedicated to [functions optimizations](https://docs.aws.amazon.com/lambda/latest/operatorguide/perf-optimize.html?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=improved-lambda-warm-start-speed-95), which is a great place to kick things off.
