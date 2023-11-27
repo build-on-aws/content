@@ -34,7 +34,7 @@ This starts two services: an `opensearch` instance, an `opensearch-dashboards` i
 
 To verify if OpenSearch is up and running, you can go to your browser and point to the following location:
 
-[`http://localhost:9200/_cluster/health`](http://localhost:9200/_cluster/health)
+[http://localhost:9200/_cluster/health](http://localhost:9200/_cluster/health)
 
 You should see a JSON payload with the following content:
 
