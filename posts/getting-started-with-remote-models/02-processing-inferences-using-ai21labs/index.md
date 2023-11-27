@@ -41,7 +41,7 @@ You should see a JSON payload with the following content:
 ```json
 {
   "cluster_name": "opensearch-cluster",
-  "**status**": "green",
+  "status": "green",
   "timed_out": false,
   "number_of_nodes": 1,
   "number_of_data_nodes": 1,
@@ -283,7 +283,7 @@ You should see a JSON payload with the following content:
   "model_id": "xiDN1YsBhjmsqc9X8vet",
   "task_type": "REGISTER_MODEL",
   "function_name": "REMOTE",
-  "**state**": "COMPLETED",
+  "state": "COMPLETED",
   "worker_node": [
     "Wy2Qj6mJRbO5O9BHxbnFtw"
   ],
@@ -310,7 +310,7 @@ You should see a JSON payload with the following content:
   "algorithm": "REMOTE",
   "model_version": "1",
   "description": "Model for Amazon Bedrock (AI21 Labs Jurassic 2)",
-  "**model_state**": "REGISTERED",
+  "model_state": "REGISTERED",
   "created_time": 1700099125881,
   "last_updated_time": 1700099125881,
   "connector_id": "wyB41YsBhjmsqc9X5_fW"
@@ -338,7 +338,7 @@ Will generate an output similar to this:
   "algorithm": "REMOTE",
   "model_version": "1",
   "description": "Model for Amazon Bedrock (AI21 Labs Jurassic 2)",
-  "**model_state**": "DEPLOYED",
+  "model_state": "DEPLOYED",
   "created_time": 1700099125881,
   "last_updated_time": 1700099683770,
   "last_deployed_time": 1700099683769,
