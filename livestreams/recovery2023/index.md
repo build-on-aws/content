@@ -23,4 +23,9 @@ Join us for a comprehensive 3-day live stream designed to re:Cap and re:Cover fr
 
 We will be sipping on a coffee in a comfortable sweater with some relaxing lo-fi music playing the background, as we are joined by Amazonians and Community members to help us build stuff in the cloud. Remmeber, we are ALL re:Covering (pun intended) from the event last week.
 
+Coming to you LIVE on these days:
+- **Tuesday 12th of December - 7AM PST to Noon PST**
+- **Wednesday 13th of December - 7AM PST to Noon PST**
+- **Thusday 14th of December - 8AM PST to Noon PST**
+
 More information, the agenda, speakers, and everything else ... coming real soon! Only on **[https://twitch.tv/aws](https://twitch.tv/aws)**
