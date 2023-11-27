@@ -528,8 +528,8 @@ PUT /_plugins/_ml/connectors/wyB41YsBhjmsqc9X5_fW
     "version": 1,
     "protocol": "aws_sigv4",
     "credential": {
-        "access_key": "AKIA6D4DPHVYDOGWCNUT",
-        "secret_key": "dsvq1EAlYefizhaU+gTCvDLK5tAmwhfCw6+1Zt7r"
+        "access_key": "<YOUR AWS ACCESS KEY>",
+        "secret_key": "<YOUR AWS SECRET KEY>"
     },
     "parameters": {
         "region": "us-east-1",
