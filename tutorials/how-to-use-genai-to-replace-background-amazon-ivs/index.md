@@ -26,7 +26,7 @@ As a live stream creator on Amazon IVS however, are you tired of the same old ba
 
 I will walk you through a step-by-step process on how to create a web app to replace the background of your web camera’s feed, integrate it with Stable Diffusion XL on Amazon Bedrock to generate a background image with a prompt, and create a real-time live stream experience with your new GenAI background image using Amazon IVS.
 
-> The code for this tutorial is available on [Github](#). You can also try a [live demo](https://prod.dqjfa2etwzoua.amplifyapp.com/) of this web app.
+> The code for this tutorial is available on [Github](https://github.com/aws-samples/amazon-ivs-real-time-background-replacement-demo-for-web). You can also try a [live demo](https://prod.dqjfa2etwzoua.amplifyapp.com/) of this web app.
 
 ## What you will learn
 
@@ -41,7 +41,7 @@ I will walk you through a step-by-step process on how to create a web app to rep
 | ⏱ Time to complete  | 60 minutes                                                                                                        |
 | 💰 Cost to complete | Free when using the AWS Free Tier                                                                                 |
 | 🧩 Prerequisites    | - [AWS Account](https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/getting-started-create-account.html)   |
-| 💻 Code Sample      | [GitHub](#)                                                                                                       |
+| 💻 Code Sample      | [GitHub](https://github.com/aws-samples/amazon-ivs-real-time-background-replacement-demo-for-web)                 |
 | 📢 Feedback         | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ? |
 | ⏰ Last Updated     | 2023-12-15                                                                                                        |
 
