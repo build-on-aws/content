@@ -153,7 +153,7 @@ You should see the following output:
 }
 ```
 
-Make sure to adjust the `queue_size` if needed.
+Make sure to adjust the `size` if needed.
 
 ## Profiling your deployed models
 
@@ -206,7 +206,7 @@ You should see an output similar to this:
 }
 ```
 
-Note the hierarchical structure of this output. The analysis is broken down on a per-node basis, followed by a per-mode basis. Then, for each model, there are two groups: `model_inference_stats` and `predict_request_stats`. The former deals with the actual inferences executed by the remote model, whereas the latter deals with the predictions made to the model. Your troubleshooting exercise should consider the computed values of the metrics for each group, given the amount of requests displayed in the field `count`. It should give a nice idea if the remote models are indeed the culprit.
+Note the hierarchical structure of this output. The analysis is broken down on a per-node basis, followed by a per-model basis. Then, for each model, there are two groups: `model_inference_stats` and `predict_request_stats`. The former deals with the actual inferences executed by the remote model, whereas the latter deals with the predictions made to the model. Your troubleshooting exercise should consider the computed values of the metrics for each group, given the amount of requests displayed in the field `count`. It should give a nice idea if the remote models are indeed the culprit.
 
 You may note a possible discrepancy in the value reported by the field `count` and the actual number of requests executed. This may happen because the Profile API monitors the last `100` requests. To change the number of monitoring requests, update the following cluster setting:
 
@@ -534,7 +534,7 @@ You should receive an output similar to this:
 
 Note how the response was returned with an additional field called `profile` containing some interesting data about the execution of individual components of the search request. Analyzing this data allows you to debug slower requests and understand how to improve their performance. The trick here is to cross reference the time taken by the remote models and the time spent in the actual search execution. The time taken by the remote model can be measured with the profile approach from the previous section.
 
-## Not working or simply not available?
+## Not working or not available to you?
 
 There is one troubleshooting technique that must be your first instinct when dealing with problems reported by developers using OpenSearch. Always check the HTTP code returned. As you may know, everything OpenSearch does it provided for developers via REST APIs. For this reason, there will be always an HTTP code for you to check. This is important because depending of the HTTP code returned—you may save hours of troubleshooting just by figuring out that an error may not necessarily be an error.
 
