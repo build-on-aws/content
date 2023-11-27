@@ -79,9 +79,7 @@ PUT /_cluster/settings
 ## Creating a basic connector
 
 With the cluster prepared, next the connector can be created. The following example uses basic authentication to connect to an internal API. Using the Amazon OpenSearch service, the secret is stored in a [Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)secret with the following format. Note that the key name can be any value you like, but this has to match the attribute referenced in the connector:
-
 ![secrets manager](images/secrets_manager.png)
-
 Then an IAM role that OpenSearch can assume with permission to retrieve the secret is specified in the connector blueprint. For more details, see the [Amazon OpenSearch service documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ml-external-connector.html#connector-external-prereq). The API method could be a `GET` or a `POST`. In this case a `POST` is used as a  `POST` body is sent with the request:
 
 ```
@@ -258,12 +256,10 @@ POST /_plugins/_ml/models/-OnayIsBvAWGexYmHu8G/_predict
   "target_response": ["sentence_embedding"]
 }
 ```
-
 ![predict response](images/predict_response.png)
-
 ## Configuring the connector for neural search
 
-This connector can then be used as part of a [neural search query](https://opensearch.org/docs/latest/search-plugins/neural-search/). Similarly to what you have seen in the [part two](https://quip-amazon.com/h2u2AtLIyRoS/Connecting-to-AIML-Integrations-through-the-OpenSearch-Console-user-interface-powering-semantic-search) of this series, the following example converts in the input query text to vectors at search time using the remote model. This search is then fulfilled locally using the k-NN index to find the most similar documents:
+This connector can then be used as part of a [neural search query](https://opensearch.org/docs/latest/search-plugins/neural-search/). The following example converts in the input query text to vectors at search time using the remote model. This search is then fulfilled locally using the k-NN index to find the most similar documents:
 
 ```
 GET /nlp_pqa_2/_search
@@ -281,9 +277,7 @@ GET /nlp_pqa_2/_search
   }
 }
 ```
-
 ![neural search response](images/neural_search_response.png)
-
 Additionally, an ingestion pipeline can be created that allows for the embeddings to be generated as documents are written to OpenSearch. This allows OpenSearch to function as a vector database for generative AI applications, whilst storing the original attributes of the document in place. This is useful for RAG use-cases such as augmented chatbots and intelligent document retrieval.
 
 To do this, an ingestion pipeline is defined when the k-NN index is created. This pipeline maps a source attribute on the indexed document to a vector attribute of a specified size. In this example the “question” string attribute is being mapped to a “question_vector” vector attribute of size 384. The same approach works for other vector sizes, such as the 1536 shape used by [Amazon Bedrock’s Titan Embeddings](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html) model:
@@ -350,17 +344,13 @@ Now, when new documents are added to the index, the ingestion pipeline runs. Thi
 POST /nlp_pqa_2/_doc/3
 {"question":"How many legs does an Elephant have?","answer":"At least 4."}
 ```
-
 ![pipeline result](images/pipeline_result.png)
-
 This can then be used for end-to-end RAG use-cases using the neural search text search functionality:
-
 ![end-to-end rag use case](images/rag_use_case_result.png)
-
 You can also implement neural searches using the integrations feature from Amazon OpenSearch. If you want to learn more about how this works, please visit [this blog post](#blog_post_at_aws_blogs) which provides a great tutorial.
 
 ## Summary
 
 Throughout this series, you learned about the remote models feature from OpenSearch and what you can do with it. The remote models feature provides a powerful way for independent software vendors (ISVs) and model providers to connect their services to OpenSearch, so they can use them with RAG and text-embedding pipelines. This is particularly useful for situations where OpenSearch is acting as the vector database for generative AI applications.
 
-By now, you should feel confident enough to begin developing your applications with OpenSearch and the remote models feature. But, if you have some spare time, I highly recommend reading [part four](../04-troubleshooting-ml-commons-plugin/index.md) of this series. It provides a comprehensive overview of troubleshooting the ML Commons plugin. It's not necessary if you're solely focused on building applications, but it's always helpful to refer back to if things don't go as planned.
+By now, you should feel confident enough to begin developing your applications with OpenSearch and the remote models feature. But, if you have some spare time, I highly recommend reading [part four](../04-troubleshooting-ml-commons-plugin) of this series. It provides a comprehensive overview of troubleshooting the ML Commons plugin. It's not necessary if you're solely focused on building applications, but it's always helpful to refer back to if things don't go as planned.

@@ -18,7 +18,7 @@ date: 2023-11-27
 | ToC |
 | --- |
 
-In the [first part](../01-introduction-opensearch-remote-models/index.md) of this series, you learned the concept of remote models at [OpenSearch](https://opensearch.org/docs/latest/about/) and why they are important. This is a powerful feature that allows you to create AI connectors for ML services like Amazon Sagemaker, Amazon Bedrock, and OpenAI, so your OpenSearch clusters can leverage them while processing data.
+In the [first part](../01-introduction-opensearch-remote-models) of this series, you learned the concept of remote models at [OpenSearch](https://opensearch.org/docs/latest/about/) and why they are important. This is a powerful feature that allows you to create AI connectors for ML services like Amazon Sagemaker, Amazon Bedrock, and OpenAI, so your OpenSearch clusters can leverage them while processing data.
 
 In this tutorial, I will walk you through in how to do this with a hands-on example. You will deploy a remote model connected to [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html), and using the [AI21 Labs Jurassic 2](https://docs.ai21.com/docs/jurassic-2-models) foundation model. You are going to build a connector blueprint that represents your remote model, will configure it, deploy it, and even practice changing the connector to fine tune their responses.
 
@@ -62,7 +62,7 @@ You should see a JSON payload with the following content:
 
 If the `status` field is showing as `green`, this means your opensearch cluster is ready for business. Since we will be using the [ML Commons plugin for OpenSearch](https://opensearch.org/docs/latest/ml-commons-plugin/index/), it is important to ensure this plugin is fully initialized before you start sending tasks. To check if the ML Commons plugin is initialized, go to your browser and point to the following location:
 
-http://localhost:9200/.plugins-ml-config
+[http://localhost:9200/.plugins-ml-config](http://localhost:9200/.plugins-ml-config)
 
 You should see a JSON payload with the following content:
 
@@ -113,13 +113,9 @@ Now that you verified everything is working fine with the OpenSearch cluster and
 This will open the main page of [OpenSearch Dashboards](https://opensearch.org/docs/latest/dashboards/quickstart/). You will use the feature Dev Tools from OpenSearch Dashboards to run a set of REST API calls against OpenSearch. Alternatively, you can use your own client tool to run these commands—but using Dev Tools will certainly make your life easier. Follow these steps to access the Dev Tools feature.
 
 1. Click on the Dev Tools button.
-
 ![opensearch dashboards main page](images/opensearch_dashboards_1.png)
-
 2. With the editor open, try the command `GET _cluster/health` to verify the OpenSearch cluster. To execute the command, leave the line that starts the command selected, and click in the ▶️ execute button.
-
 ![opensearch dashboards main page](images/opensearch_dashboards_2.png)
-
 There will have it. Now you can run commands against your OpenSearch cluster with ease. The Dev Tools feature allows you to export and import commands. So everything you will do in this tutorial can be saved into a file and then reused in another OpenSearch cluster, such as a [domain from Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html).
 
 Use the Dev Tools feature to enable the following persistent settings:
@@ -359,9 +355,7 @@ Will generate an output similar to this:
 Note the value of the field `model_state`. This time it says `DEPLOYED` which means that OpenSearch is now both aware of this remote model and ready to allow inferences to be executed. The output now also includes other relevant details such as which nodes from the OpenSearch cluster are being used for planning the execution, as well as how much planning and worker nodes there are. For the usage of the remote model, this information is totally irrelevant. But it is useful for system administrators who want to know a bit better how OpenSearch is scheduling the work of inference executions across the cluster.
 
 Another way to verify if the mode is properly deployed and ready to be used is using OpenSearch Dashboards. If you go to `OpenSearch Plugins` then `Machine Learning`, you will see a table containing all your deployed models. Look for the model named `ai21.j2-mid-v1`.
-
 ![opensearch dashboards ml plugin](images/dashboards_ml_plugin.png)
-
 ## Testing the remote model with inferences
 
 Now that your remote model is properly deployed, it is time for you to test it. Testing a remote model is the process of running inferences against the model. As a first test, you can ask the model about one of the most asked questions by human beings: what is the meaning of life?
@@ -620,9 +614,7 @@ Very cool, right? Just keep in mind that using pre-and-post processing functions
 ## Automating steps
 
 By now, you have successfully finished this interactive tutorial and had the opportunity to explore the remote model feature. Throughout the tutorial, you may have observed that the majority of the steps involved executing a series of commands against the OpenSearch cluster. However, this repetitive and manual process can be both tedious and prone to errors. Fortunately, there is a solution. OpenSearch offers RESTful APIs for almost every aspect, allowing you to automate the execution of the following steps programmatically.
-
 ![automating steps](images/automating_steps.png)
-
 The tutorial's accompanying GitHub repository includes a [Python code example](https://github.com/build-on-aws/getting-started-with-opensearch-remote-models/blob/main/deploy-remote-model.py) that automates all of these steps for you. To make the code work, you simply need to provide the OpenSearch cluster's endpoint and the AWS credentials that will be utilized to configure the connector. This may be useful when you need to implement new versions of the model whenever updates are made to the connector blueprint specification.
 
 ## Summary
@@ -631,4 +623,4 @@ In this part of the series, you have learned with a hands-on example how to conf
 
 There is one more scenario that I think you should consider. What if you would like to build your own remote model with your dedicated infrastructure? Here, you have learned how to use a known service, such as Amazon Bedrock. But what if you want to integrate your own ML APIs with OpenSearch?
 
-In the [third part](../03-authoring-custom-connectors-opensearch/index.md), you will learn how to use a custom ML API as a remote model. You will learn how to use this remote model in scenarios beyond running inferences, such as integrating the remote model with neural searches. And you will have the chance to practice all of this using an [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html) domain running on AWS.
+In the [third part](../03-authoring-custom-connectors-opensearch), you will learn how to use a custom ML API as a remote model. You will learn how to use this remote model in scenarios beyond running inferences, such as integrating the remote model with neural searches. And you will have the chance to practice all of this using an [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html) domain running on AWS.
