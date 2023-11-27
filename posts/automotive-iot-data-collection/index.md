@@ -120,7 +120,7 @@ Building on the foundation provided by the [CARLA - Open-source simulator for au
 
 #### Running the CARLA client
 
-![Animation of a car driving with different windows with data on Ubuntu](images/carla-ubuntu-2204.gif)
+![Animation of a car driving with different windows with data on Ubuntu](images/carla-ubuntu-2204_2.gif)
 
 With this setup should be able to add a ROS2-CARLA bridge and spawn different sensor object which will allows us to each frame publish this information on specified ROS2 topics, which we than map to specific signals in AWS IoT FleetWise using the method describe bellow.
 
