@@ -9,7 +9,7 @@ tags:
   - bedrock
   - aws
 waves:
-  - modern-apps
+  - generative-ai
 authorGithubAlias: jhart0
 authorName: Josh Hart
 additionalAuthors:
@@ -90,8 +90,8 @@ POST /_plugins/_ml/connectors/_create
   "version": 1,
   "protocol": "http",
   "credential": {
-    "secretArn": "arn:aws:secretsmanager:us-east-1:1234567890:secret:weather_api_key-Iz8AUH",
-    "roleArn": "arn:aws:iam::1234567890:role/opensearch-api-role",
+    "secretArn": "<YOUR_SECRET>",
+    "roleArn": "<YOUR_ROLE>",
   },
   "actions": [
     {

@@ -9,7 +9,12 @@ tags:
   - bedrock
   - aws
 waves:
-  - modern-apps
+  - generative-ai
+images:
+  banner: images/remote_models.png
+  thumbnail: images/amazon_opensearch.png
+  hero: images/remote_models.png
+  background: images/remote_models.png
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2023-11-27

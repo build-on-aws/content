@@ -9,7 +9,7 @@ tags:
   - bedrock
   - aws
 waves:
-  - modern-apps
+  - generative-ai
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2023-11-27
