@@ -10,6 +10,11 @@ tags:
   - aws
 waves:
   - generative-ai
+images:
+  banner: images/tutorial_banner.png
+  thumbnail: images/amazon_opensearch.png
+  hero: images/tutorial_banner.png
+  background: images/tutorial_banner.png
 authorGithubAlias: jhart0
 authorName: Josh Hart
 additionalAuthors:
