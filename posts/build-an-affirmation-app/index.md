@@ -9,8 +9,10 @@ tags:
     - github-actions
     - serverless
     - databases
+    - students
 spaces:
   - databases
+  - student
 authorGithubAlias: jlooper
 authorName: Jen Looper
 date: 2023-05-30
