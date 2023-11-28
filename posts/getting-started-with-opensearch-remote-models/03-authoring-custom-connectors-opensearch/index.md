@@ -17,9 +17,6 @@ images:
   background: images/tutorial_banner.png
 authorGithubAlias: jhart0
 authorName: Josh Hart
-additionalAuthors:
-  - authorGithubAlias: riferrei
-    authorName: Ricardo Ferreira
 date: 2023-11-27
 ---
 

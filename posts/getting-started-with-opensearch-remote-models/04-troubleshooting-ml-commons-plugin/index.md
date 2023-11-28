@@ -11,10 +11,10 @@ tags:
 waves:
   - generative-ai
 images:
-  banner: images/blog_post_banner.png
+  banner: images/tutorial_banner.png
   thumbnail: images/amazon_opensearch.png
-  hero: images/blog_post_banner.png
-  background: images/blog_post_banner.png
+  hero: images/turorial_banner.png
+  background: images/turorial_banner.png
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2023-11-27
