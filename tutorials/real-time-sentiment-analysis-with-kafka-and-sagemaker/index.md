@@ -68,7 +68,7 @@ Once done you should see three topics ready:
 
 ### Input data generation
 
-We recommend you use [JavaScript-based data generator](https://github.com/Aiven-Labs/mastodon-to-kafka) to get a stream of social media data. However, you can also stream any other data that you want to perform analysis on, just make sure to adjust the property names in teh code.
+We recommend you use [JavaScript-based data generator](https://github.com/Aiven-Labs/mastodon-to-kafka) to get a stream of social media data. However, you can also stream any other data that you want to perform analysis on, just make sure to adjust the property names in the code.
 
 ## Step 2 - Set up Sagemaker and a Jupiter Notebook
 
@@ -80,17 +80,17 @@ Select Set up for single user (Quick setup) and wait till a new domain is establ
 
 ![Open SageMaker Studio](images/open_studio.png)
 
-Once you'll land into Amazon SageMaker Studio, 
+Once you'll land into Amazon SageMaker Studio, select JumpStart:
 
 ![Select JumpStart in  Amazon SageMaker Studio](images/JumpStart.png)
 
-Here you can search for one of already existing and trained models. We want a model that is trained to do text classifications. Different models have different advantages and disadvantages, select a model taking into account type of text you want to analyse and the length of text snippet. Social media messages from Mastodon are quite short so we will go for a model "DistilBERT Base Multilingual Cased". You can find it by using the search bar. Select the one for text classification:
+Here you can search for one of already existing and trained models. We want a model that is trained to do text classifications. Different models have different advantages and disadvantages, select a model taking into account type of text you want to analyse and the length of text snippet. Social media messages from Mastodon are quite short, so we'll go for a model "DistilBERT Base Multilingual Cased". You can find it by using the search bar. Select the one for text classification:
 ![select-model.png](images/Fselect-model.png)
 
-Click to deploy the model and wait till it being prepared:
+Click to deploy the model and wait till it has been prepared:
 ![deploy-model.png](images/deploy-model.png)
 
-When the model is deployed open the demo notebook. You'll be prompted to set up notebook environment, you can agree to suggested values.
+When the model is deployed, open the demo notebook. You'll be prompted to set up notebook environment, you can agree to suggested values:
 
 ![open-notebook.png](images/open-notebook.png)
 
@@ -99,7 +99,7 @@ In this demo notebook you can make test requests for text classification. We'll 
 ## Step 3 - Write code
 Now it is time to write the code!  Feel free to clean the existing cells, we'll replace the example code with our own logic.
 
-If you want to skip explanations and just to copy the result , load [the final notebook code](https://raw.githubusercontent.com/Aiven-Labs/sentiment-analysis-kafka-sagemaker/main/sentiment-analysis.ipynb) (don't forget to add the information about your Kafka instance!). Alternatively, follow the more detailed step-by-step instructions:
+If you want to skip explanations and just to copy the result , load [the final notebook code](https://raw.githubusercontent.com/Aiven-Labs/sentiment-analysis-kafka-sagemaker/main/sentiment-analysis.ipynb) (don't forget to add the information about your Kafka instance!). Alternatively, follow the more detailed step-by-step instructions below.
 
 The first step is to install Apache Kafka python library. For this create a new cell and add this instruction:
 
@@ -262,14 +262,13 @@ You can also check the topic with errors that occured during processing:
 
 ## Clean up
 Don't forget to clean up the resources you've used.
-For Sagemaker you need to clean up created Endpoint, Endpoint configuration, running Model and Notebook instances. 
-https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-cleanup.html
+For Sagemaker you need to clean up created Endpoint, Endpoint configuration, running Model and Notebook instances. Check https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-cleanup.html for more details.
 
-For Aiven for Apache Kafka select "Delete service" in the menu:
+In Aiven for Apache Kafka select "Delete service" in the menu:
 ![Delete Apache Kafka service](images/delete-kafka.png)
 
 ## Conclusion
 
-And that's it! We just created a pipeline to process and analyse sentiment behind social media messages in real time. We used python client library to create a producer and a consumer for Apache Kafka topic and one of the available multi-language models for text classifications.
+And that's it! We've just created a pipeline to process and analyse sentiment behind social media messages in real time. We used Apache Kafka python client library to create a producer and a consumer for Apache Kafka topic and one of the available multi-language models for text classifications.
 
 If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
