@@ -82,7 +82,7 @@ PUT /_cluster/settings
 
 With the cluster prepared, next the connector can be created. The following example uses basic authentication to connect to an internal API. Using the Amazon OpenSearch service, the secret is stored in a [Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) secret with the following format. Note that the key name can be any value you like, but this has to match the attribute referenced in the connector:
 ![secrets manager](images/secrets_manager.png)
-Then an IAM role that OpenSearch can assume with permission to retrieve the secret is specified in the connector blueprint. For more details, see the [Amazon OpenSearch service documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ml-external-connector.html#connector-external-prereq). The API method could be a `GET` or a `POST`. In this case a `POST` is used as a  `POST` body is sent with the request:
+Then an IAM role that OpenSearch can assume with permission to retrieve the secret is specified in the connector blueprint. For more details, see the [Amazon OpenSearch service documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ml-external-connector.html#connector-external-prereq). The API method could be a `GET` or a `POST`. In this case a `POST` is used as a `POST` body is sent with the request:
 
 ```
 POST /_plugins/_ml/connectors/_create

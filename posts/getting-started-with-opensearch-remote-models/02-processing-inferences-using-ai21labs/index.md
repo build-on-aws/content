@@ -359,7 +359,7 @@ Will generate an output similar to this:
 
 Note the value of the field `model_state`. This time it says `DEPLOYED` which means that OpenSearch is now both aware of this remote model and ready to allow inferences to be executed. The output now also includes other relevant details such as which nodes from the OpenSearch cluster are being used for planning the execution, as well as how much planning and worker nodes there are. For the usage of the remote model, this information is totally irrelevant. But it is useful for system administrators who want to know a bit better how OpenSearch is scheduling the work of inference executions across the cluster.
 
-Another way to verify if the mode is properly deployed and ready to be used is using OpenSearch Dashboards. If you go to `OpenSearch Plugins` then `Machine Learning`, you will see a table containing all your deployed models. Look for the model named `ai21.j2-mid-v1`.
+Another way to verify if the mode is properly deployed and ready to be used is using OpenSearch Dashboards. If you go to **OpenSearch Plugins** then **Machine Learning**, you will see a table containing all your deployed models. Look for the model named `ai21.j2-mid-v1`.
 ![opensearch dashboards ml plugin](images/dashboards_ml_plugin.png)
 ## Testing the remote model with inferences
 
