@@ -11,7 +11,7 @@ images:
   hero: images/banner.jpg
 spaces:
   - generative-ai
-  - student
+  - students
 waves:
   - generative-ai
 authorGithubAlias: jlooper

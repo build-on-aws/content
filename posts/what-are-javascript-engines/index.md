@@ -5,7 +5,7 @@ tags:
     - javascript
     - students
 spaces: 
-     - student
+     - students
 authorGithubAlias: jlooper
 authorName: Jen Looper
 date: 2022-11-09

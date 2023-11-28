@@ -12,7 +12,7 @@ tags:
     - students
 spaces:
   - databases
-  - student
+  - students
 authorGithubAlias: jlooper
 authorName: Jen Looper
 date: 2023-05-30

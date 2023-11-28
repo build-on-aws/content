@@ -9,7 +9,7 @@ images:
   banner: images/banner.png
   hero: images/banner.png
 spaces: 
-    - student
+    - students
 authorGithubAlias: jlooper
 authorName: Jen Looper
 additionalAuthors: 
