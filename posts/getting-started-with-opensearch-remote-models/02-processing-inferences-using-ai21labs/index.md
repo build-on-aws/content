@@ -23,7 +23,7 @@ date: 2023-11-27
 | ToC |
 | --- |
 
-In the [first part](/posts/getting-started-with-remote-models/01-introduction-opensearch-remote-models) of this series, you learned the concept of remote models at [OpenSearch](https://opensearch.org/docs/latest/about/) and why they are important. This is a powerful feature that allows you to create AI connectors for ML services like Amazon Sagemaker, Amazon Bedrock, and OpenAI, so your OpenSearch clusters can leverage them while processing data.
+In the [first part](/posts/getting-started-with-opensearch-remote-models/01-introduction-opensearch-remote-models) of this series, you learned the concept of remote models at [OpenSearch](https://opensearch.org/docs/latest/about/) and why they are important. This is a powerful feature that allows you to create AI connectors for ML services like Amazon Sagemaker, Amazon Bedrock, and OpenAI, so your OpenSearch clusters can leverage them while processing data.
 
 In this tutorial, I will walk you through in how to do this with a hands-on example. You will deploy a remote model connected to [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html), and using the [AI21 Labs Jurassic 2](https://docs.ai21.com/docs/jurassic-2-models) foundation model. You are going to build a connector blueprint that represents your remote model, will configure it, deploy it, and even practice changing the connector to fine tune their responses.
 
@@ -628,4 +628,4 @@ In this part of the series, you have learned with a hands-on example how to conf
 
 There is one more scenario that I think you should consider. What if you would like to build your own remote model with your dedicated infrastructure? Here, you have learned how to use a known service, such as Amazon Bedrock. But what if you want to integrate your own ML APIs with OpenSearch?
 
-In the [third part](/posts/getting-started-with-remote-models/03-authoring-custom-connectors-opensearch), you will learn how to use a custom ML API as a remote model. You will learn how to use this remote model in scenarios beyond running inferences, such as integrating the remote model with neural searches. And you will have the chance to practice all of this using an [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html) domain running on AWS.
+In the [third part](/posts/getting-started-with-opensearch-remote-models/03-authoring-custom-connectors-opensearch), you will learn how to use a custom ML API as a remote model. You will learn how to use this remote model in scenarios beyond running inferences, such as integrating the remote model with neural searches. And you will have the chance to practice all of this using an [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html) domain running on AWS.

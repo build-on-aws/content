@@ -13,8 +13,8 @@ waves:
 images:
   banner: images/tutorial_banner.png
   thumbnail: images/amazon_opensearch.png
-  hero: images/turorial_banner.png
-  background: images/turorial_banner.png
+  hero: images/tutorial_banner.png
+  background: images/tutorial_banner.png
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2023-11-27
@@ -230,7 +230,7 @@ Searching with OpenSearch presents a greater level of complexity compared to que
 
 During the initial query phase, the query is distributed to each shard in the index. Every shard then performs the search and generates a queue of matching documents. This query phase helps identify the documents that meet the search criteria. However, we still need to retrieve the actual documents themselves, which is done in the fetch phase. In this phase, the coordinating node determines which documents need to be fetched. These documents may originate from one or multiple shards involved in the original search. The coordinating node sends a request to the relevant shard copy, which then loads the document bodies into the `_source` field. Additionally, if requested, it can also include metadata and search snippet highlighting. Once the coordinating node has gathered all the results, it collects them into a unified response to be sent back to the client.
 
-Executing search requests in OpenSearch can be complicated. It is a complex distributed system, and various parts can fail, become slow, and lead to poor performance. This means you need to have something in your pocket to when issues related to performance occur, and if you integrate remote models with search requests, this can surely occur. For instance, in the part [three](https://quip-amazon.com/fWqGAExYGBoX/Part-3-Authoring-Custom-Connectors-for-OpenSearch) of this series, you saw that you can leverage remote models in conjunction with neural requests to create really amazing content experiences out of your data. If you ever find yourself in a situation where you are suspecting that remote models may be slowing down your searches, you can leverage the [Profile API](https://opensearch.org/docs/latest/api-reference/profile/) to troubleshoot your search requests.
+Executing search requests in OpenSearch can be complicated. It is a complex distributed system, and various parts can fail, become slow, and lead to poor performance. This means you need to have something in your pocket to when issues related to performance occur, and if you integrate remote models with search requests, this can surely occur. For instance, in the part [three](/posts/getting-started-with-opensearch-remote-models/03-authoring-custom-connectors-opensearch) of this series, you saw that you can leverage remote models in conjunction with neural requests to create really amazing content experiences out of your data. If you ever find yourself in a situation where you are suspecting that remote models may be slowing down your searches, you can leverage the [Profile API](https://opensearch.org/docs/latest/api-reference/profile/) to troubleshoot your search requests.
 
 Getting started with the Profile API is quite simple: just add the sentence `"profile": true` to your search body request. For example:
 
