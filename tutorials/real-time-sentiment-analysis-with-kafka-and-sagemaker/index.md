@@ -265,11 +265,8 @@ Don't forget to clean up the resources you've used.
 For Sagemaker you need to clean up created Endpoint, Endpoint configuration, running Model and Notebook instances. 
 https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-cleanup.html
 
-![Delete endpoint](images/delete_endpoint.png)
-
-![Delete endpoint](images/delete_endpoint_configuration.png)
-
-For Aiven for Apache Kafka
+For Aiven for Apache Kafka select "Delete service" in the menu:
+![Delete Apache Kafka service](images/delete-kafka.png)
 
 ## Conclusion
 
