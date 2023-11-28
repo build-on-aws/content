@@ -1,21 +1,29 @@
-# Outline blog post about AI and Serverless
+---
+title: "I Built an App to Dub Videos Using AI"
+description: "AI tools can feel overwhelming, but they're basically just new endpoints to call. Here's what I built to help serve my Spanish-speaking audience."
+tags:
+  - generative-ai
+  - aws
+authorGithubAlias: mavi888
+authorName: Marcia Villalba
+date: 2023-11-30
+---
 
-## Title: I Built an App to Dub Videos Using AI
-
-Dek: AI tools can feel overwhelming, but they’re basically just new endpoints to call. Here’s what I built to help serve my Spanish-speaking audience.
-[Image: AdobeStock_627759652.jpeg](licensed from Adobe Stock)
+![a robot speaks on a laptop screen](images/headerimage.jpeg)
 
 Twenty years into working as a software developer, the rise of AI — and the headlines about how it might transform the role of the developer — made me anxious. I didn’t want to transition into a machine learning role; I didn’t want to learn how to tune models or build them, how to clean data. I love to build applications!
 
-Don’t get me wrong: I was happy to use AI-based developer tools to improve my productivity as a developer. These tools enable greater efficiency, just like the higher level programming languages that developers began to prefer to machine level programming languages like Assembler. Using Amazon CodeWhisperer, for example, made me 50% more productive, as now I no longer needed to leave the IDE to find answers to my coding questions.
+Don’t get me wrong: I was happy to use AI-based developer tools to improve my productivity as a developer. These tools enable greater efficiency, just like the higher level programming languages that developers began to prefer to machine level programming languages like Assembler. Using [Amazon CodeWhisperer](https://docs.aws.amazon.com/codewhisperer/?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=dub-videos-using-generative-ai), for example, made me 50% more productive, as now I no longer needed to leave the IDE to find answers to my coding questions.
 
-But as I thought about AI more, I realized the opportunity it presents to developers: in this new world, we will need applications that solve new problems. As developers, we are going to get a lot of requests in the future to build apps that can recognize objects in images, that can understand and process natural language, that can create text, music or images, that can make recommendations based on data, that can answer questions, and many other things.
+But I didn't want my job as a developer to disappear.
+
+As I thought about AI more, though, I realized the opportunity it presents to developers: in this new world, we will need applications that solve new problems. As developers, we are going to get a lot of requests in the future to build apps that can recognize objects in images, that can understand and process natural language, that can create text, music or images, that can make recommendations based on data, that can answer questions, and many other things.
 
 This new technology can feel overwhelming, so as an experiment, I decided to build an application with it — an application that dubs videos from English to Spanish using AI APIs. I learned a lot along the way.
 
 ## A Quick Overview of the AI Service Landscape
 
-Before I started building the application, I wanted to understand the kinds of tools that help build AI applications, and there are a surprising number of options in the AI landscape today. AWS, for example, offers many AI managed services, like Amazon Transcribe, Amazon Translate, Amazon Rekogniton, Amazon Polly — to generate audio from text, Amazon Textract, and Amazon Comprehend. In addition, if you are working in a bigger org with an ML team, you can take advantage of the custom-made solutions built in Amazon SageMaker. For a lot of the problems that require Generative AI, AWS offers Amazon Bedrock. 
+Before I started building the application, I wanted to understand the kinds of tools that help build AI applications, and there are a surprising number of options in the AI landscape today. AWS, for example, offers many AI managed services, like [Amazon Transcribe](https://docs.aws.amazon.com/transcribe/), [Amazon Translate](https://docs.aws.amazon.com/translate/), [Amazon Rekogniton](https://docs.aws.amazon.com/rekognition/), [Amazon Polly]( — to generate audio from text, Amazon Textract, and Amazon Comprehend. In addition, if you are working in a bigger org with an ML team, you can take advantage of the custom-made solutions built in Amazon SageMaker. For a lot of the problems that require Generative AI, AWS offers Amazon Bedrock. 
 
 Amazon Bedrock is a fully managed service that makes Foundational Models (FMs) from leading AI startups and Amazon available via an API, so you can choose from a wide range of FMs to find the model that is best suited for your use case. It is the easiest way to build and scale generative AI applications with FMs. When using Bedrock, you can choose your FM from: Jurassic 2 from AI21 Labs, Claude form Anthropic, Stable Diffusion from Stability AI and Titan and Titan Embeddings from Amazon.
 
