@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting the OpenSearch ML Commons Framework"
-description: "Learn the tips and tricks about how to troubleshoot the OpenSearch ML Commons Framework, which is the engine behind the remote models feature."
+description: "Learn the tips and tricks about how to troubleshoot the OpenSearch ML Commons Framework, which is the engine behind the external models feature."
 tags:
   - opensearch
   - ai-ml
@@ -23,7 +23,7 @@ date: 2023-11-27
 | ToC |
 | --- |
 
-In this series, you have been exploring the remote models feature of OpenSearch. By now, we hope you are aware of its capabilities and are enthusiastic about the incredible possibilities it offers for building. However, it is unrealistic to assume that everything will be perfect. You need to know how to troubleshoot problems that may arise when things don't go as planned.
+In this series, you have been exploring the external models feature of OpenSearch. By now, we hope you are aware of its capabilities and are enthusiastic about the incredible possibilities it offers for building. However, it is unrealistic to assume that everything will be perfect. You need to know how to troubleshoot problems that may arise when things don't go as planned.
 
 Here, you will learn a few things about the [OpenSearch ML Commons Framework](https://github.com/opensearch-project/ml-commons) that will help you feel comfortable enough to troubleshoot issues on your own. We hope you won't have to—but as Thor said in the [Thor Ragnarok](https://www.imdb.com/title/tt3501632/) movie: "A wise king never seeks out war. But he must always be ready for it."
 
@@ -162,7 +162,7 @@ Make sure to adjust the `size` if needed.
 
 ## Profiling your deployed models
 
-In some cases, users may express their dissatisfaction with certain aspects of the application, specifically its rather slow performance. Upon troubleshooting, it has been found that one possible reason for this sluggishness could be the calls made to remote models. A fascinating approach to initiate this investigation is by utilizing the [Profile API](https://opensearch.org/docs/latest/ml-commons-plugin/api/profile/) provided by the ML Commons plugin.
+In some cases, users may express their dissatisfaction with certain aspects of the application, specifically its rather slow performance. Upon troubleshooting, it has been found that one possible reason for this sluggishness could be the calls made to external models. A fascinating approach to initiate this investigation is by utilizing the [Profile API](https://opensearch.org/docs/latest/ml-commons-plugin/api/profile/) provided by the ML Commons plugin.
 
 To use the Profile API to investigate the performance of your models, use the following command:
 
@@ -211,7 +211,7 @@ You should see an output similar to this:
 }
 ```
 
-Note the hierarchical structure of this output. The analysis is broken down on a per-node basis, followed by a per-model basis. Then, for each model, there are two groups: `model_inference_stats` and `predict_request_stats`. The former deals with the actual inferences executed by the remote model, whereas the latter deals with the predictions made to the model. Your troubleshooting exercise should consider the computed values of the metrics for each group, given the amount of requests displayed in the field `count`. It should give a nice idea if the remote models are indeed the culprit.
+Note the hierarchical structure of this output. The analysis is broken down on a per-node basis, followed by a per-model basis. Then, for each model, there are two groups: `model_inference_stats` and `predict_request_stats`. The former deals with the actual inferences executed by the external model, whereas the latter deals with the predictions made to the model. Your troubleshooting exercise should consider the computed values of the metrics for each group, given the amount of requests displayed in the field `count`. It should give a nice idea if the external models are indeed the culprit.
 
 You may note a possible discrepancy in the value reported by the field `count` and the actual number of requests executed. This may happen because the Profile API monitors the last `100` requests. To change the number of monitoring requests, update the following cluster setting:
 
@@ -230,7 +230,7 @@ Searching with OpenSearch presents a greater level of complexity compared to que
 
 During the initial query phase, the query is distributed to each shard in the index. Every shard then performs the search and generates a queue of matching documents. This query phase helps identify the documents that meet the search criteria. However, we still need to retrieve the actual documents themselves, which is done in the fetch phase. In this phase, the coordinating node determines which documents need to be fetched. These documents may originate from one or multiple shards involved in the original search. The coordinating node sends a request to the relevant shard copy, which then loads the document bodies into the `_source` field. Additionally, if requested, it can also include metadata and search snippet highlighting. Once the coordinating node has gathered all the results, it collects them into a unified response to be sent back to the client.
 
-Executing search requests in OpenSearch can be complicated. It is a complex distributed system, and various parts can fail, become slow, and lead to poor performance. This means you need to have something in your pocket to when issues related to performance occur, and if you integrate remote models with search requests, this can surely occur. For instance, in the part [three](/posts/getting-started-with-opensearch-remote-models/03-authoring-custom-connectors-opensearch) of this series, you saw that you can leverage remote models in conjunction with neural requests to create really amazing content experiences out of your data. If you ever find yourself in a situation where you are suspecting that remote models may be slowing down your searches, you can leverage the [Profile API](https://opensearch.org/docs/latest/api-reference/profile/) to troubleshoot your search requests.
+Executing search requests in OpenSearch can be complicated. It is a complex distributed system, and various parts can fail, become slow, and lead to poor performance. This means you need to have something in your pocket to when issues related to performance occur, and if you integrate external models with search requests, this can surely occur. For instance, in the part [three](/posts/getting-started-with-opensearch-external-models/03-authoring-custom-connectors-opensearch) of this series, you saw that you can leverage external models in conjunction with neural requests to create really amazing content experiences out of your data. If you ever find yourself in a situation where you are suspecting that external models may be slowing down your searches, you can leverage the [Profile API](https://opensearch.org/docs/latest/api-reference/profile/) to troubleshoot your search requests.
 
 Getting started with the Profile API is quite simple: just add the sentence `"profile": true` to your search body request. For example:
 
@@ -537,7 +537,7 @@ You should receive an output similar to this:
 }
 ```
 
-Note how the response was returned with an additional field called `profile` containing some interesting data about the execution of individual components of the search request. Analyzing this data allows you to debug slower requests and understand how to improve their performance. The trick here is to cross reference the time taken by the remote models and the time spent in the actual search execution. The time taken by the remote model can be measured with the profile approach from the previous section.
+Note how the response was returned with an additional field called `profile` containing some interesting data about the execution of individual components of the search request. Analyzing this data allows you to debug slower requests and understand how to improve their performance. The trick here is to cross reference the time taken by the external models and the time spent in the actual search execution. The time taken by the external model can be measured with the profile approach from the previous section.
 
 ## Not working or not available to you?
 
@@ -561,7 +561,7 @@ Here, any developer who tries deploying a model belonging to the group model `mo
 
 ## Summary
 
-The remote models feature opens up the window to exciting use cases where data can be magnified by the power of ML models and Generative AI. Tied with the simplicity of OpenSearch, you can enable your teams to create cutting-edge applications with very low effort.
+The external models feature opens up the window to exciting use cases where data can be magnified by the power of ML models and Generative AI. Tied with the simplicity of OpenSearch, you can enable your teams to create cutting-edge applications with very low effort.
 
 I hope you have enjoyed reading this series and please make sure to share this content within your social media circle so others could benefit from the same. If you want to discover more about the amazing world of Generative AI, take a look at [this space](https://community.aws/generative-ai) and don't forget to subscribe to the [AWS Developers YouTube channel](https://www.youtube.com/@awsdevelopers). I'm sure you will be amazed by the new content to come. Finally, [follow me on LinkedIn](https://linkedin.com/in/riferrei) if you want to geek out about technologies in general.
 
