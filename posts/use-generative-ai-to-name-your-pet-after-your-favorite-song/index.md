@@ -22,7 +22,7 @@ date: 2023-11-29
 |ToC|
 |---|
 
-2023. Companies are in a frenzy. They've flooded developers with an unusual request: a way to use generative AI to name pets after their favorite songs. Sounds absurd, right? Now, while developers aren’t losing sleep over pet names, they ARE desperate to harness the power of AI for their unique challenges.  
+It is 2023. Companies are in a frenzy. They've flooded developers with an unusual request: a way to use generative AI to name pets after their favorite songs. Sounds absurd, right? Now, while developers aren’t losing sleep over pet names, they ARE desperate to harness the power of AI for their unique challenges.  
 
 They want a solution, something adaptable, transformative. Together, [Brooke](https://www.linkedin.com/in/brookejamieson/), [Ben](https://www.linkedin.com/in/ben-cashman/), and [Fred](https://www.linkedin.com/in/fgraichen/) (the authors of this post, and co-speakers for the [re:Invent session with the same name](https://hub.reinvent.awsevents.com/attendee-portal/catalog/?search=BOA208)!) have already trained over 7,000 builders in machine learning on our hit [twitch show](https://pages.awscloud.com/GLOBAL-other-LS-Quickstart-on-AWS-Machine-Learning-2023-reg.html).
 
