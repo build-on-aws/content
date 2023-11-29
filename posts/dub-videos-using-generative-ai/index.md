@@ -28,30 +28,37 @@ Before I started building the application, I wanted to understand the kinds of t
 Amazon Bedrock is a fully managed service that makes Foundational Models (FMs) from leading AI startups and Amazon available via an API, so you can choose from a wide range of FMs to find the model that is best suited for your use case. It is the easiest way to build and scale generative AI applications with FMs. When using Bedrock, you can choose your FM from: Jurassic 2 from AI21 Labs, Claude form Anthropic, Stable Diffusion from Stability AI and Titan and Titan Embeddings from Amazon.
 
 And finally in the AI Landscape we can find all the APIs third party companies offer that provides different models and solutions for specific problems. 
-[Image: Screenshot 2023-09-20 at 14.08.23.png]
-After analyzing the AI landscape, my first realization was that you mostly just need to know how to call an endpoint. But calling some of these endpoints isn’t as simple as using a REST API. For the Generative AI ones you need to define a prompt.
 
-That’s another skill that to learn: prompt engineering helps you to write prompts to the generative AI endpoints to request the right data. Generative AI endpoints don’t return the same response twice, and fine tuning the prompt to consistently get the right answer in the right format is a critical skill.
+![a list of AWS AI services, third-party AI services, and AWS services that help customize your models](images/image1.png)
+
+After analyzing the AI landscape, my first realization was that you mostly just need to know how to call an endpoint. But calling some of these endpoints isn’t as simple as using a REST API. For the Generative AI ones, you need to define a prompt.
+
+That’s another skill to learn: prompt engineering helps you to write prompts to the generative AI endpoints to request the right data. Generative AI endpoints don’t return the same response twice, and fine tuning the prompt to consistently get the right answer in the right format is a critical skill.
 
 Another important skill is how to orchestrate and choreograph the endpoint calling. Usually calling one service is not enough to solve a problem; you need to call 2, 3, or more services and transform the data in between to obtain the expected result. So learning patterns that help you to solve this problem is handy. 
 
 With those basic skills in mind, here’s how I got started building my application.
 
-## Automatic video dubbing using AI
+## Automatic Video Dubbing Using AI
 
-In our everyday work as developer advocates, my colleagues and I create a lot of videos. However, I’m the only Spanish speaker on the team and I want to share as much information as I can with my Spanish community as possible. But I don’t have the time to record all my videos in English and Spanish. So I thought, why not use AI to solve this problem?
+In our everyday work as developer advocates, my colleagues and I create a lot of videos. However, I’m the only Spanish speaker on my team and I want to share as much information as I can with my Spanish community as possible. But I don’t have the time to record all my videos both in English and in Spanish. So I thought, why not use AI to solve this problem?
 
 The idea is this: a video in English is uploaded to an Amazon S3 bucket, and then automatically it gets dubbed into Spanish and the title, description, and tags for YouTube all get created in Spanish based on the content of the video. And when everything is ready, I receive an email with all the assets.  
-[Image: Screenshot 2023-09-20 at 14.19.36.png]
+
+![a simple visualization of what I wanted the application to accomplish](images/image2.png)
+
 This sounds like a great idea, but after trying this for a while, I realized that this process needed some validations in the middle in order to ensure really good results. Let’s see how this is built using AWS serverless services.
 
-But first you can take a look at this video that should the solution to the problem.
+But first you can take a look at this video that should be the solution to the problem.
+
 *<cannot upload the video to quip as it is too big → LINK: https://amazon.awsapps.com/workdocs/index.html#/document/dedd369790c883561152cd591eaaf8def6937f324fd8f71f330c0dbfc519fb28>*
 
-### High level architecture
+### High Level Architecture
 
-For solving this problem I created 4 state machines using AWS Step Functions. Each state machine solves a specific problem to solve the problem and allows a human to get in the middle of the process to do the validation of the generated assets. 
-[Image: Screenshot 2023-09-29 at 11.11.58.png]
+For solving this problem I created 4 state machines using AWS Step Functions. Each state machine solves a specific problem to solve the problem and allows a human to get in the middle of the process to do the validation of the generated assets.
+
+![
+
 Each state machine is triggered when there is a new file in an S3 bucket using an Amazon EventBridge rule, and the state machine stores a file in another S3 bucket and sends an email that the process was completed with a link to the object in S3.
 
 This solution is based on the orchestration and choreography patterns. Orchestration is a pattern that helps you to organize tasks that need to execute in a strict order, and you need to have full control on what is going on in the process, you need to know the state for that process all the time. In orchestration solutions there is a main component that is overseeing the process and controlling the state. To implement this pattern in AWS, one simple solution is to us AWS Step Functions. 
@@ -193,47 +200,5 @@ After you have the right settings in the Bedrock playground, you can click the �
 At the end of the day, even the most advanced AI tools are just endpoints. This mindset helped me build an incredibly useful application — not as a ML engineer, but as a software developer!
 
 After this experiment I’m less afraid of the future that AI brings to developers, as these new AI services are just tools to build applications. One interesting thing I noticed is if you provide longer or overly complicated prompts to a generative AI model the results are not great. Therefore when when you use gen AI, you need to make a very clear prompt and that can be used for a specific task. This means that you need to split that long prompt into shorter ones and then chain the results toghether to get best results, this is called prompt chaining. For prompt chaining the orchestration pattern and Step Functions are very useful. 
-
-You can find the code for this application in GitHub and more information regarding building applications with AI in this [link](https://s12d.com/serverlessAI).
-
-
-
-
-
-
-EARLIER VERSIONS:
-
-I have 20 years of experience as a developer, and last year when the generative AI boom started I had a lot of thoughts about how relevant my job will be in the next years. There were so many news and headlines about the role of developers with AI, what we would need to learn, and how our jobs will change. All these news made me very anxious and I started thinking and chatting with colleagues about what would be the future of devs and what skills would keep us relevant for the foreseeable future. 
-
-I was very sure that I didn’t want to change my developer career into a ML role, i didn’t want to learn how to tune models or build them, how to clean data. I love building applications.
-
-During this thinking process I realised that there are 2 main things that we need to have in mind as developers. First is to learn how to use all the new AI based Developer tools and then how to build applications that can take advantage of the AI landscape. 
-
-### AI Developer tools
-
-The first thing we need to learn as developers that want to survive in this AI craziness is the new developer tools. These AI based developer tools, helps us to improve our productivity and make us relevant in the software industry. If we don’t learn these tools we will be less productive than our counterparts that are using them. 
-
-I see this trend as when developers starting adopting higher level programming languages instead of machine level programming languages like Assembler. These more modern developers were more productive as they we taking advantage of all the abstractions that these newer programming languages were offering them. 
-
-One example of AI developer tool that I think is a game changer is, Amazon CodeWhisperer. Amazon CodeWhisperer is a AI coding companion that you add to your IDE. CodeWhisperer generates code suggestions based on what you are typing right now, and those suggestions are following the same coding conventions that your previous code has. In addition, CodeWhisperer scan the code for known vulnerabilities and flag code that resembles open-source data. In my experience CodeWhisperer made me 50% more productive, as now I don’t need to leave the IDE to find answers to my coding questions, like how to use some API or how to build some AWS CDK construct. This is a huge advantage in my productivity as now I can use that spare time to complete other tasks. 
-
-
-### Building apps to solve AI problems
-
-The second problem that developers need to tackle to stay relevant in this new world, is how to build apps that solve AI problems. As developers we are going to get a lot of requests in the future to build apps that can recognize things in images, that can understand and process natural language, that can create text, music or images, that can make recommendations based on data, that can answer questions, or many other things. 
-
-If we think about these kind of applications and what kind of tools we need to build them, today we have a big offerening in the AI landscape. AWS offers many AI managed services, like Amazon Transcribe, Amazon Translate, Amazon Rekogniton, Amazon Polly, to generate audio from text, Amazon Textract, and Amazon Comprehend. In addition if you are working in a bigger org with a ML team you can take advantage of the custom made solutions built in Amazon SageMaker.For a lot of the problems that require Generative AI, AWS offers Amazon Bedrock. 
-
-Amazon Bedrock is a fully managed service that makes Foundational Models (FMs) from leading AI startups and Amazon available via an API, so you can choose from a wide range of FMs to find the model that is best suited for your use case. It is the easiest way to build and scale generative AI applications with FMs. When using Bedrock, you can choose your FM from: Jurassic 2 from AI21 Labs, Claude form Anthropic, Stable Diffusion from Stability AI and Titan and Titan Embeddings from Amazon.
-
-And finally in the AI Landscape we can find all the APIs third party companies offer that provides different models and solutions for specific problems. 
-
-
-
-I hope that after reading this article you got inspired to try some AI managed services and to build your own AI applications, because at the end of the day everything is an endpoint. 
-
-Don’t forget to embrace patterns like orchestration and choreography in your applications. Choreography to react to events that are happening in your application, like a new file was uploaded to S3 or an user completed some task. EventBridge rules are great to use for this particular solution, as they can help you to trigger lots of different things when something ocurrs in the system or an application event is raised.
-
-Use orchestration to coordinate tasks that need to occur in a specific order. Try to avoid making overly complex Lambda functions and embrace Step Functions, for this purpose. Step Functions provides a lot of features that will make your application simpler to debug and to maintain in the long run. Use Lambda functions for operations that are very specific to your application, that you cannot achieve from a state machine, or that require a lot of business logic. 
 
 You can find the code for this application in GitHub and more information regarding building applications with AI in this [link](https://s12d.com/serverlessAI).
