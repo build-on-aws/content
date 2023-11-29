@@ -69,7 +69,6 @@ Just like you have learned in the part 2 of this series, before deploying any co
 PUT /_cluster/settings
 {
     "persistent": {
-        "plugins.ml_commons.only_run_on_ml_node": false,
         "plugins.ml_commons.connector_access_control_enabled": true,
         "plugins.ml_commons.trusted_connector_endpoints_regex": [
             "^https://api.mydomain.com/.*$"
@@ -159,56 +158,6 @@ Success! Here the response is being returned from the remote model based on the 
 }
 ```
 
-## API Contract
-
-Depending on the expected request format, and the response sent by your API, you might not have to make any changes when using it from OpenSearch. From the example above, this is the JSON payload that is received by the WebAPI:
-
-`{ "text_inputs": "hello world" }`
-
-This is constructed by the `pre_process_function` in the connector. In the below example, the escape characters have been removed for brevity. See the connector above for a properly formed example:
-
-```
-"pre_process_function": "
-    StringBuilder builder = new StringBuilder();
-    builder.append("\"");
-    String first = params.text_docs[0];
-    builder.append(first);
-    builder.append("\"");
-    def parameters = "{"input_text": + builder + }";
-    return "{"parameters": + parameters + }";",
-      
-```
-
-In this Painless script, the `text_docs` parameter passed from the neural search query is being extracted and passed to the specified attribute (in this case “`input_text`”). This is then the request body that is defined in the connector. 
-
-The API then processes this input string with whatever business logic is implemented and returns a response with the generated embeddings:
-
-```
-response_data ={ "results" : [-0.058717918, 0.09474472, -0.06244676, ... , -0.0073602716]}
-return jsonify(response_data)
-```
-
-The `post_process_function`  then processes the APIs response. The example below has again formatted here for readability, for a working example see the connector definition above:
-
-```
-"post_process_function": "
-    def name = "sentence_embedding";
-    def dataType = "FLOAT32";
-    if (params.results == null || params.results.length == 0) {
-        return params.message;
-    }
-    def shape = [params.results.length];
-    def json = "{
-            "name": + name + "," +
-            "data_type": + dataType + "," +
-            "shape": + shape + "," +
-            "data": + params.results +
-        "}";
-    return json;",
-```
-
-The key part is` params.results`. Any attributes in the response object can be accessed via the `params` object. This function is used to specify which attributes in the response to map and return to OpenSearch. Pre and post functions can be used as required to transform the request and response to the desired format.
-
 ## Text embeddings with connectors
 
 With the recent popularity of Generative AI, Retrieval Augmented Generation (RAG) has become a common pattern to augment text-generation with contextual data. RAG is a technique used in natural language processing where a large language model (LLM) is combined with an information retrieval system. The LLM is the component responsible for generating text, such as a response in a chatbot. The information retrieval system indexes relevant data that the LLM can reference to make its outputs more useful. For example, an LLM-based chatbot designed to answer customer support questions could retrieve documents or FAQs to inform its responses. Connecting the LLM with OpenSearch provides a way to index and query the relevant data.
@@ -259,6 +208,62 @@ POST /_plugins/_ml/models/-OnayIsBvAWGexYmHu8G/_predict
 }
 ```
 ![predict response](images/predict_response.png)
+## API Contract
+
+Depending on the expected request format, and the response sent by your API, you might not have to make any changes when using it from OpenSearch. From the example above, this is the JSON payload that is received by the WebAPI:
+
+```json
+{ "text_inputs": "hello world" }
+```
+
+In this Painless script, the text_docs parameter passed from the neural search query is being extracted and passed to the specified attribute (in this case “input_text”). This is then the request body that is defined in the connector. 
+
+The API then processes this input string with whatever business logic is implemented and returns a response with the generated embeddings:
+
+```javascript
+response_data ={ "results" : [-0.058717918, 0.09474472, -0.06244676, ... , -0.0073602716]}
+return jsonify(response_data)
+```
+
+The `post_process_function` then processes the APIs response. The example below has again formatted here for readability, for a working example see the connector definition above:
+
+```javascript
+"post_process_function": "
+    def name = "sentence_embedding";
+    def dataType = "FLOAT32";
+    if (params.results == null || params.results.length == 0) {
+        return params.message;
+    }
+    def shape = [params.results.length];
+    def json = "{
+            "name": + name + "," +
+            "data_type": + dataType + "," +
+            "shape": + shape + "," +
+            "data": + params.results +
+        "}";
+    return json;",
+```
+
+The key part is `params.results`. Any attributes in the response object can be accessed via the params object. This function is used to specify which attributes in the response to map and return to OpenSearch. Pre and post functions can be used as required to transform the request and response to the desired format.
+
+The above function is mapping the response to the following schema as expected by OpenSearch:
+
+```bash
+name: STRING (e.g. "sentence_embedding")
+data_type: STRING (e.g. "FLOAT32")
+shape: INT[] (e.g. [384])
+data: FLOAT32[] (e.g. [-0.321, 1.234, etc])
+```
+
+The `data_type` is a string representation of the data type used in the data attribute, for example FLOAT32 or INT32. 
+
+The Shape is an array of INT32 that represents the shape of the data attribute e.g. a 1-dimensional array of 384 items. Note that if the model is being used as part of an ingestion pipeline, this should match the `dimension` attribute defined on the index vector property. 
+
+The data is then an array of objects that matches the format specified in data_type and the dimensions specified in shape. For example an array of FLOAT32. 
+
+The response from the model has to either match this format or be manipulated using a `post_process_function` so that it matches.
+
+
 ## Configuring the connector for neural search
 
 This connector can then be used as part of a [neural search query](https://opensearch.org/docs/latest/search-plugins/neural-search/). The following example converts in the input query text to vectors at search time using the remote model. This search is then fulfilled locally using the k-NN index to find the most similar documents:
