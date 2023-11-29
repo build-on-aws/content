@@ -123,13 +123,12 @@ This will open the main page of [OpenSearch Dashboards](https://opensearch.org/d
 ![opensearch dashboards main page](images/opensearch_dashboards_2.png)
 There will have it. Now you can run commands against your OpenSearch cluster with ease. The Dev Tools feature allows you to export and import commands. So everything you will do in this tutorial can be saved into a file and then reused in another OpenSearch cluster, such as a [domain from Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html).
 
-Use the Dev Tools feature to enable the following persistent settings:
+Use the Dev Tools feature to enable the following persistent setting:
 
 ```json
 PUT /_cluster/settings
 {
     "persistent": {
-        "plugins.ml_commons.only_run_on_ml_node": false,
         "plugins.ml_commons.update_connector.enabled": true
     }
 }
@@ -143,7 +142,6 @@ Executing this command should produce the following output:
   "persistent": {
     "plugins": {
       "ml_commons": {
-        "only_run_on_ml_node": "false",
         "update_connector": {
           "enabled": "true"
         }
@@ -154,9 +152,7 @@ Executing this command should produce the following output:
 }
 ```
 
-Now let's understand each persistent setting.
-
-With the setting `plugins.ml_commons.only_run_on_ml_node`, you are telling OpenSearch to allow the execution of ML related tasks, such as processing inferences, in any node of the cluster. This is important because remote models execute their inferences in models trained outside OpenSearch. This means that the compute power required to run the inferences won't be from the OpenSearch cluster. By default, this setting is configured to `true`, which means this tutorial would only work if you had configured ML-enabled nodes in your cluster.
+Now let's understand what you just did.
 
 Later on in this tutorial, you will see that after deploying the model, a change in the connector blueprint created for AI21 Labs Jurassic 2 will be needed. By default, you are not allowed to change connector blueprints. While this is a good thing for production clusters, during development, ML developers may need to make changes to the connector blueprints, so you need to configure OpenSearch to allow this. For this reason, the `plugins.ml_commons.update_connector.enabled` setting was used.
 
@@ -621,6 +617,8 @@ Very cool, right? Just keep in mind that using pre-and-post processing functions
 By now, you have successfully finished this interactive tutorial and had the opportunity to explore the remote model feature. Throughout the tutorial, you may have observed that the majority of the steps involved executing a series of commands against the OpenSearch cluster. However, this repetitive and manual process can be both tedious and prone to errors. Fortunately, there is a solution. OpenSearch offers RESTful APIs for almost every aspect, allowing you to automate the execution of the following steps programmatically.
 ![automating steps](images/automating_steps.png)
 The tutorial's accompanying GitHub repository includes a [Python code example](https://github.com/build-on-aws/getting-started-with-opensearch-remote-models/blob/main/deploy-remote-model.py) that automates all of these steps for you. To make the code work, you simply need to provide the OpenSearch cluster's endpoint and the AWS credentials that will be utilized to configure the connector. This may be useful when you need to implement new versions of the model whenever updates are made to the connector blueprint specification.
+
+Another way to automate things is via AWS CloudFormation templates with Amazon OpenSearch. With this resource, you can quickly spin up an integration from Amazon OpenSearch and one remote model (such as Amazon SageMaker) using infrastructure-as-code. You can learn more about how this works [here](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cfn-template.html).
 
 ## Summary
 
