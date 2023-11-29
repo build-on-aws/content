@@ -65,7 +65,7 @@ You should see a JSON payload with the following content:
 }
 ```
 
-If the `status` field is showing as `green`, this means your opensearch cluster is ready for business. Since we will be using the [ML Commons plugin for OpenSearch](https://opensearch.org/docs/latest/ml-commons-plugin/index/), it is important to ensure this plugin is fully initialized before you start sending tasks. To check if the ML Commons plugin is initialized, go to your browser and point to the following location:
+If the `status` field is showing as `green`, this means your opensearch cluster is ready for business. Since we will be using the [OpenSearch ML Commons Framework](https://github.com/opensearch-project/ml-commons), it is important to ensure everything is fully initialized before you start sending tasks. To check if the ML Commons Framework is initialized, go to your browser and point to the following location:
 
 [http://localhost:9200/.plugins-ml-config](http://localhost:9200/.plugins-ml-config)
 

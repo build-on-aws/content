@@ -1,6 +1,6 @@
 ---
-title: "Troubleshooting the ML Commons Framework"
-description: "Learn the tips and tricks about how to troubleshoot the ML Commons Framework, which is the engine behind the remote models feature."
+title: "Troubleshooting the OpenSearch ML Commons Framework"
+description: "Learn the tips and tricks about how to troubleshoot the OpenSearch ML Commons Framework, which is the engine behind the remote models feature."
 tags:
   - opensearch
   - ai-ml
@@ -25,7 +25,7 @@ date: 2023-11-27
 
 In this series, you have been exploring the remote models feature of OpenSearch. By now, we hope you are aware of its capabilities and are enthusiastic about the incredible possibilities it offers for building. However, it is unrealistic to assume that everything will be perfect. You need to know how to troubleshoot problems that may arise when things don't go as planned.
 
-Here, you will learn a few things about the [ML Commons Framework](https://github.com/opensearch-project/ml-commons) that will help you feel comfortable enough to troubleshoot issues on your own. We hope you won't have to—but as Thor said in the [Thor Ragnarok](https://www.imdb.com/title/tt3501632/) movie: "A wise king never seeks out war. But he must always be ready for it."
+Here, you will learn a few things about the [OpenSearch ML Commons Framework](https://github.com/opensearch-project/ml-commons) that will help you feel comfortable enough to troubleshoot issues on your own. We hope you won't have to—but as Thor said in the [Thor Ragnarok](https://www.imdb.com/title/tt3501632/) movie: "A wise king never seeks out war. But he must always be ready for it."
 
 ## ML Commons Framework must-know settings
 
