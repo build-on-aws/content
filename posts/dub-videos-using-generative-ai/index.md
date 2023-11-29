@@ -51,37 +51,39 @@ This sounds like a great idea, but after trying this for a while, I realized tha
 
 But first you can take a look at this video that should be the solution to the problem.
 
-*<cannot upload the video to quip as it is too big → LINK: https://amazon.awsapps.com/workdocs/index.html#/document/dedd369790c883561152cd591eaaf8def6937f324fd8f71f330c0dbfc519fb28>*
+https://www.youtube.com/watch?v=fwzeNBHMvxI
 
 ### High Level Architecture
 
 For solving this problem I created 4 state machines using AWS Step Functions. Each state machine solves a specific problem to solve the problem and allows a human to get in the middle of the process to do the validation of the generated assets.
 
-![
+![a diagram of the architecture showing a sequence in which videos are transcribed, translated, and dubbed](images/image3.png)
 
-Each state machine is triggered when there is a new file in an S3 bucket using an Amazon EventBridge rule, and the state machine stores a file in another S3 bucket and sends an email that the process was completed with a link to the object in S3.
+Each state machine is triggered when there is a new file in an [Amazon S3](https://docs.aws.amazon.com/s3/?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=dub-videos-using-generative-ai) bucket using an [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=dub-videos-using-generative-ai) rule, and the state machine stores a file in another S3 bucket and sends an email that the process was completed with a link to the object in S3.
 
-This solution is based on the orchestration and choreography patterns. Orchestration is a pattern that helps you to organize tasks that need to execute in a strict order, and you need to have full control on what is going on in the process, you need to know the state for that process all the time. In orchestration solutions there is a main component that is overseeing the process and controlling the state. To implement this pattern in AWS, one simple solution is to us AWS Step Functions. 
+This solution is based on the orchestration and choreography patterns. Orchestration is a pattern that helps you to organize tasks that need to execute in a strict order, and you need to have full control on what is going on in the process, you need to know the state for that process all the time. In orchestration solutions, there is a main component that is overseeing the process and controlling the state. To implement this pattern in AWS, one simple solution is to use AWS Step Functions. 
 
 AWS Step Functions is a fully managed service that offers managed state machines. A state machine is a set of discrete computational steps, each step with a defined input and output. The state machine has transitions that are defined based on the data or based in logic built in the state machine. 
 
-When using Step Functions you don’t need to write almost any code, as it supports direct integration with over 200 AWS services. And when these state machine run you can get a detail view of each of the inputs and outputs of each state for each execution of the state machine. 
+When using Step Functions you don’t need to write almost any code, as it supports direct integration with over 200 AWS services. And when these state machines run, you can get a detailed view of each of the inputs and outputs of each state for each execution of the state machine. 
 
-Let’s look a bit more in detail each of the state machines and check how they are built.
+Let’s look a bit more in detail at each of the state machines and check how they are built.
 
-### Transcribe state machine
+### Transcribe State Machine
 
-The first state machine to run is the one that is in charge of transcribing the original video. This state machine as the others, gets triggered when there is a new file in an S3 bucket. Then it calls Amazon Transcribe, an AI service that will do the transcription for us. This process is asynchronous so we add a wait loop in the state machine to wait for the transcription to complete. 
+The first state machine to run is the one that is in charge of transcribing the original video. This state machine, as the others, gets triggered when there is a new file in an S3 bucket. Then it calls Amazon Transcribe, an AI service that will do the transcription for us. This process is asynchronous, so we add a wait loop in the state machine to wait for the transcription to complete. 
 
 When the transcription is ready, the file gets stored in the correct format in S3 and an email is sent to the end user, to get the validation. Amazon Transcribe is a great service, but in order to get the best end result possible, having a human validate the transcription is very important. 
 
-[Image: Screenshot 2023-10-05 at 16.42.22.png]A couple of things you can see in this state machine that you will also see in the other state machines. 
+![a breakdown of the state machine](images/image4.png)
 
+A couple of things you can see in this state machine that you will also see in the other state machines. 
 
 1. **The state machine is triggered by an event.** It is very simple to define that using EventBridge rules when you create the state machine. Here you can see an example using AWS SAM.
 
-[Image: Screenshot 2023-10-05 at 16.45.53.png]
-1. **Most of the logic of this state machine is by calling the AWS Services directly**. This is done by using the direct integration that AWS Step Functions provides with over 200 services. In the following example, you can see how you can start a transcription job directly from the state machine, and you can pass all the parameters. This example is written with Amazon State Language (ASL), the language you use to define state machines. 
+![the transcription state machine in action](images/image5.png)
+
+2. **Most of the logic of this state machine is by calling the AWS Services directly**. This is done by using the direct integration that AWS Step Functions provides with over 200 services. In the following example, you can see how you can start a transcription job directly from the state machine, and you can pass all the parameters. This example is written with Amazon State Language (ASL), the language you use to define state machines. 
 
 ```
 TranscribeVideo:
@@ -98,7 +100,7 @@ TranscribeVideo:
       LanguageCode: en-US
 ```
 
-1. **The use of AWS Step Function intrinsic functions:** Intrinsic functions help you to perform basic data processing operations without using a task. You can manipulate arrays, strings, hashes, create unique Ids, base64 decode or encode and many other operations directly from the state machine. When ever you see the `States.XXX`, this means that an intrinsic function is being used. The following example uses intrinsic functions two times nested, when creating the key for the object to store in S3, it first split a string (`States.StringSplit`) and then it gets the element in the third place (`States.ArrayGetItem`)
+3. **The use of AWS Step Function intrinsic functions:** Intrinsic functions help you to perform basic data processing operations without using a task. You can manipulate arrays, strings, hashes, create unique IDs, base64 decode or encode, and many other operations directly from the state machine. Whenever you see the `States.XXX`, this means that an intrinsic function is being used. The following example uses intrinsic functions two times nested, when creating the key for the object to store in S3, it first splits a string (`States.StringSplit`) and then it gets the element in the third place (`States.ArrayGetItem`).
 
 ```
 Store Transcript in S3:
@@ -112,22 +114,31 @@ Store Transcript in S3:
       Body.$: $.transcription.filecontent.results.transcripts[0].transcript
 ```
 
-### Translate state machine
+### Translate State Machine
 
-When the end users uploads a validated transcription file to an S3 bucket then the second state machine starts. This is the translation state machine. This state machine is very similar to the previous one but instead of calling Amazon Transcribe, it calls Amazon Translate. The call here is synchronous that is why the response comes right away to the next step. 
+When the end user uploads a validated transcription file to an S3 bucket, then the second state machine starts. This is the translation state machine. This state machine is very similar to the previous one, but instead of calling Amazon Transcribe, it calls Amazon Translate. The call here is synchronous, which is why the response comes right away to the next step. 
 
-You can see in this state machine that there are some components that are being reutilized, like the SNS topic and the Lambda function that signs the S3 URL.
-[Image: Screenshot 2023-10-05 at 16.55.35.png]When this state machines completes, it uploads a translated file to S3 and sends and email to the user to validate the translation
+You can see in this state machine that there are some components that are being re-utilized, like the SNS topic and the Lambda function that signs the S3 URL.
 
-### Dubbing the video
+![a breakdown of the translation state machine](images/image6.png)
 
-When the user uploads a validated translation, two state machines will get triggered at the same time. One is the state machine that dubs the video and the other one is the one that generate the title, description and tags. The state machine that dubs the videos looks very similar to the previous state machines, the differences are that first it calls asynchronously Amazon Polly to transform the translated text file into audio, and then it calls an AWS Lambda function that will replace the audio track of the original video with the new translated one. 
-[Image: Screenshot 2023-10-06 at 10.37.21.png]This Lambda function uses a library called [ffmpeg](https://ffmpeg.org/) to achieve this. And its one of the few functions that you will find in the project. This function takes care of replacing the original audio of the video with the new translated audio from Polly and store it in S3. 
+When this state machine completes, it uploads a translated file to S3 and sends an email to the user to validate the translation.
 
-### Generating the assets 
+### Dubbing the Video
 
-The last state machine is the one that generates the titles, descriptions, and tags of the video. This state machine looks similar than the previous one, but the Lambda function that it contains calls Amazon Bedrock.
-[Image: Screenshot 2023-10-06 at 11.37.31.png]Amazon Bedrock is the easiest way to build and scale generate AI applications using foundational models. This Lambda function uses the AWS SDK to call Bedrock and to generate the assets needed to upload this video to social media. 
+When the user uploads a validated translation, two state machines will get triggered at the same time. One is the state machine that dubs the video, and the other generates the title, description, and tags. The state machine that dubs the videos looks very similar to the previous state machines; the differences are, first, that it calls asynchronously Amazon Polly to transform the translated text file into audio, and second, that it calls an AWS Lambda function that will replace the audio track of the original video with the new translated one. 
+
+![a breakdown of the dubbing state machine](images/image7.png)
+
+This Lambda function uses a library called [ffmpeg](https://ffmpeg.org/) to achieve this. And it's one of the few functions that you will find in the project. This function takes care of replacing the original audio of the video with the new translated audio from Polly and storing it in S3. 
+
+### Generating the Assets 
+
+The last state machine is the one that generates the titles, descriptions, and tags of the video. This state machine looks similar to the previous one, but the Lambda function that it contains calls Amazon Bedrock.
+
+![a breakdown of the asset generation state machine](images/image8.png)
+
+Using Amazon Bedrock is one of the easiest ways to build and scale generative AI applications using foundational models. This Lambda function uses the AWS SDK to call Bedrock and to generate the assets needed to upload this video to social media. 
 
 Using Bedrock from a Lambda function is very simple. The first step is to give permissions to the function to access Bedrock. You can see how the function is defined using AWS SAM.
 
@@ -191,14 +202,16 @@ def lambda_handler(event, context):
     return result
 ```
 
-The parameters and prompts for this function you can test them in the Bedrock playground that makes it super easy to tune the amount of tokens you need, fine tune the prompt to obtain the correct result, and do any extra configuration you need in the call. 
+You can test the parameters and prompts for this function in the Bedrock playground, which makes it super easy to tune the amount of tokens you need, fine tune the prompt to obtain the correct result, and do any extra configuration you need in the call. 
 
-After you have the right settings in the Bedrock playground, you can click the “View API request” button and you will get all the parameters you will need to configure in your API call when writing your function. 
-[Image: bedrock-demo.mp4]
+After you have the right settings in the Bedrock playground, you can click the “View API request” button and you will get all the parameters you will need to configure in your API call when writing your function.
+
+https://www.youtube.com/watch?v=w2AHOEnhUeE
+
 ## Conclusion
 
 At the end of the day, even the most advanced AI tools are just endpoints. This mindset helped me build an incredibly useful application — not as a ML engineer, but as a software developer!
 
-After this experiment I’m less afraid of the future that AI brings to developers, as these new AI services are just tools to build applications. One interesting thing I noticed is if you provide longer or overly complicated prompts to a generative AI model the results are not great. Therefore when when you use gen AI, you need to make a very clear prompt and that can be used for a specific task. This means that you need to split that long prompt into shorter ones and then chain the results toghether to get best results, this is called prompt chaining. For prompt chaining the orchestration pattern and Step Functions are very useful. 
+After this experiment, I’m less afraid of the future that AI brings to developers, as these new AI services are just tools to build applications. One interesting thing I noticed is if you provide longer or overly complicated prompts to a generative AI model the results are not great. Therefore when you use gen AI, you need to make a very clear prompt and that can be used for a specific task. This means that you need to split that long prompt into shorter ones and then chain the results toghether to get best results - a process called prompt chaining. For prompt chainin,g the orchestration pattern and Step Functions are very useful. 
 
-You can find the code for this application in GitHub and more information regarding building applications with AI in this [link](https://s12d.com/serverlessAI).
+You can find the code for this application in GitHub and more information regarding building applications with AI [here](https://s12d.com/serverlessAI).
