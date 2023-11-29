@@ -9,6 +9,7 @@ tags:
     - students
 spaces:
   - generative-ai
+  - students
 waves:
   - generative-ai
 authorGithubAlias: srhowell

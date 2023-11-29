@@ -4,9 +4,12 @@ description: "The Grad Project has allowed us to meet graduate students and lear
 tags:
     - video
     - ai-ml
+    - students
 images:
   banner: images/banner.png
   hero: images/banner.png
+spaces: 
+    - students
 authorGithubAlias: jlooper
 authorName: Jen Looper
 additionalAuthors: 
