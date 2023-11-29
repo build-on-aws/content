@@ -6,5 +6,5 @@ posts:
   - 01-introduction-opensearch-remote-models
   - 02-processing-inferences-using-ai21labs
   - 03-authoring-custom-connectors-opensearch
-  - 04-troubleshooting-ml-commons-plugin
+  - 04-troubleshooting-ml-commons-framework
 --- 
