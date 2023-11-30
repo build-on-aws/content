@@ -1,6 +1,6 @@
 ---
 title: "Deploying Amazon EKS Windows Managed Node Groups and Fargate Nodes"
-description: Minimize risks and delays by migrating apps with Windows Containers"
+description: Minimize risks and delays by migrating apps with Windows Containers
 tags:
     - eks-cluster-setup
     - eks
