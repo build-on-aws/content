@@ -2,14 +2,21 @@
 title: "I Built an App to Dub Videos Using AI"
 description: "AI tools can feel overwhelming, but they're basically just new endpoints to call. Here's what I built to help serve my Spanish-speaking audience."
 tags:
+  - amazon-bedrock
   - generative-ai
+  - transcribe
+  - step-functions
   - aws
 authorGithubAlias: mavi888
 authorName: Marcia Villalba
 date: 2023-11-30
+spaces:
+  - generative-ai
+waves:
+  - generative-ai
 ---
 
-![a robot speaks on a laptop screen](images/headerimage.jpeg)
+![a robot speaks on a laptop screen](images/headerimage.webp)
 
 Twenty years into working as a software developer, the rise of AI — and the headlines about how it might transform the role of the developer — made me anxious. I didn’t want to transition into a machine learning role; I didn’t want to learn how to tune models or build them, how to clean data. I love to build applications!
 
@@ -29,7 +36,7 @@ Amazon Bedrock is a fully managed service that makes Foundational Models (FMs) f
 
 And finally in the AI Landscape we can find all the APIs third party companies offer that provides different models and solutions for specific problems. 
 
-![a list of AWS AI services, third-party AI services, and AWS services that help customize your models](images/image1.png)
+![a list of AWS AI services, third-party AI services, and AWS services that help customize your models](images/image1.webp)
 
 After analyzing the AI landscape, my first realization was that you mostly just need to know how to call an endpoint. But calling some of these endpoints isn’t as simple as using a REST API. For the Generative AI ones, you need to define a prompt.
 
@@ -45,7 +52,7 @@ In our everyday work as developer advocates, my colleagues and I create a lot of
 
 The idea is this: a video in English is uploaded to an Amazon S3 bucket, and then automatically it gets dubbed into Spanish and the title, description, and tags for YouTube all get created in Spanish based on the content of the video. And when everything is ready, I receive an email with all the assets.  
 
-![a simple visualization of what I wanted the application to accomplish](images/image2.png)
+![a simple visualization of what I wanted the application to accomplish](images/image2.webp)
 
 This sounds like a great idea, but after trying this for a while, I realized that this process needed some validations in the middle in order to ensure really good results. Let’s see how this is built using AWS serverless services.
 
@@ -57,7 +64,7 @@ https://www.youtube.com/watch?v=fwzeNBHMvxI
 
 For solving this problem I created 4 state machines using AWS Step Functions. Each state machine solves a specific problem to solve the problem and allows a human to get in the middle of the process to do the validation of the generated assets.
 
-![a diagram of the architecture showing a sequence in which videos are transcribed, translated, and dubbed](images/image3.png)
+![a diagram of the architecture showing a sequence in which videos are transcribed, translated, and dubbed](images/image3.webp)
 
 Each state machine is triggered when there is a new file in an [Amazon S3](https://docs.aws.amazon.com/s3/?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=dub-videos-using-generative-ai) bucket using an [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/?sc_channel=el&sc_campaign=reinvent&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=dub-videos-using-generative-ai) rule, and the state machine stores a file in another S3 bucket and sends an email that the process was completed with a link to the object in S3.
 
@@ -75,13 +82,13 @@ The first state machine to run is the one that is in charge of transcribing the 
 
 When the transcription is ready, the file gets stored in the correct format in S3 and an email is sent to the end user, to get the validation. Amazon Transcribe is a great service, but in order to get the best end result possible, having a human validate the transcription is very important. 
 
-![a breakdown of the state machine](images/image4.png)
+![a breakdown of the state machine](images/image4.webp)
 
 A couple of things you can see in this state machine that you will also see in the other state machines. 
 
 1. **The state machine is triggered by an event.** It is very simple to define that using EventBridge rules when you create the state machine. Here you can see an example using AWS SAM.
 
-![the transcription state machine in action](images/image5.png)
+![the transcription state machine in action](images/image5.webp)
 
 2. **Most of the logic of this state machine is by calling the AWS Services directly**. This is done by using the direct integration that AWS Step Functions provides with over 200 services. In the following example, you can see how you can start a transcription job directly from the state machine, and you can pass all the parameters. This example is written with Amazon State Language (ASL), the language you use to define state machines. 
 
@@ -102,7 +109,7 @@ TranscribeVideo:
 
 3. **The use of AWS Step Function intrinsic functions:** Intrinsic functions help you to perform basic data processing operations without using a task. You can manipulate arrays, strings, hashes, create unique IDs, base64 decode or encode, and many other operations directly from the state machine. Whenever you see the `States.XXX`, this means that an intrinsic function is being used. The following example uses intrinsic functions two times nested, when creating the key for the object to store in S3, it first splits a string (`States.StringSplit`) and then it gets the element in the third place (`States.ArrayGetItem`).
 
-```
+```json
 Store Transcript in S3:
     Type: Task
     Next: FormatURI
@@ -120,7 +127,7 @@ When the end user uploads a validated transcription file to an S3 bucket, then t
 
 You can see in this state machine that there are some components that are being re-utilized, like the SNS topic and the Lambda function that signs the S3 URL.
 
-![a breakdown of the translation state machine](images/image6.png)
+![a breakdown of the translation state machine](images/image6.webp)
 
 When this state machine completes, it uploads a translated file to S3 and sends an email to the user to validate the translation.
 
@@ -128,7 +135,7 @@ When this state machine completes, it uploads a translated file to S3 and sends 
 
 When the user uploads a validated translation, two state machines will get triggered at the same time. One is the state machine that dubs the video, and the other generates the title, description, and tags. The state machine that dubs the videos looks very similar to the previous state machines; the differences are, first, that it calls asynchronously Amazon Polly to transform the translated text file into audio, and second, that it calls an AWS Lambda function that will replace the audio track of the original video with the new translated one. 
 
-![a breakdown of the dubbing state machine](images/image7.png)
+![a breakdown of the dubbing state machine](images/image7.webp)
 
 This Lambda function uses a library called [ffmpeg](https://ffmpeg.org/) to achieve this. And it's one of the few functions that you will find in the project. This function takes care of replacing the original audio of the video with the new translated audio from Polly and storing it in S3. 
 
@@ -136,13 +143,13 @@ This Lambda function uses a library called [ffmpeg](https://ffmpeg.org/) to achi
 
 The last state machine is the one that generates the titles, descriptions, and tags of the video. This state machine looks similar to the previous one, but the Lambda function that it contains calls Amazon Bedrock.
 
-![a breakdown of the asset generation state machine](images/image8.png)
+![a breakdown of the asset generation state machine](images/image8.webp)
 
 Using Amazon Bedrock is one of the easiest ways to build and scale generative AI applications using foundational models. This Lambda function uses the AWS SDK to call Bedrock and to generate the assets needed to upload this video to social media. 
 
 Using Bedrock from a Lambda function is very simple. The first step is to give permissions to the function to access Bedrock. You can see how the function is defined using AWS SAM.
 
-```
+```json
 GenerateVideoMetadataFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -160,8 +167,7 @@ GenerateVideoMetadataFunction:
 
 Then you can write the function code. This particular function takes as an input the translated transcription of the video, and returns the title, description, and tags based on that information. This function is using the foundational model from AI21 Jurassic Ultra. 
 
-```
-
+```python
 import boto3
 import json
 import os 
