@@ -92,7 +92,7 @@ A couple of things you can see in this state machine that you will also see in t
 
 2. **Most of the logic of this state machine is by calling the AWS Services directly**. This is done by using the direct integration that AWS Step Functions provides with over 200 services. In the following example, you can see how you can start a transcription job directly from the state machine, and you can pass all the parameters. This example is written with Amazon State Language (ASL), the language you use to define state machines. 
 
-```
+```json
 TranscribeVideo:
     Comment: 'Given the input video starts a transcription job'
     Type: Task
