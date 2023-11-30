@@ -1,6 +1,6 @@
 ---
 title: "Introduction to OpenSearch Models"
-description: "Introduction to the OpenSearch models feature, which allows developers to improve the search relevancy of their applications via pre-trained, custom, and external models."
+description: "Introduction to the OpenSearch models feature, which allows developers to improve the search relevancy of their data via pre-trained, custom, and external models."
 tags:
   - opensearch
   - ai-ml
@@ -124,7 +124,7 @@ Because standalone connectors intend to be reused across multiple models, they a
 
 To create a connector, you must provide the configuration of the connector a [connector blueprint](https://opensearch.org/docs/latest/ml-commons-plugin/extensibility/blueprints/). This is a JSON document containing all the metadata required to connect with the external model. Usually, the connector blueprint is created by ML developers who understand how the external model works and know their API contract works. The API contract is everything related to how messages will be exchanged, such as what are the data required to perform the request, as well as what are the data returned when a response is generated.
 
-Think about connector blueprints as templates for connectors. Once the template is created and shared, one or multiple connectors can be created based on it. For instance, take this connector blueprint for an Amazon SageMaker API as an example.
+Think about connector blueprints as templates for connectors. Once the template is created and shared, one or multiple connectors can be created based on it. For instance, take this connector blueprint for an [Amazon SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/gs.html) API as an example.
 
 ```json
 POST /_plugins/_ml/connectors/_create

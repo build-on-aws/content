@@ -25,11 +25,11 @@ date: 2023-11-27
 
 In the [first part](/posts/getting-started-with-opensearch-models/01-introduction-to-opensearch-models) of this series, you learned the concept of models at [OpenSearch](https://opensearch.org/docs/latest/about/). This is a powerful feature that allows you to leverage AI-based models to augment the value of your data, whether using pre-trained, custom, and externally available models.
 
-In this tutorial, I will walk you through in how to do this with a hands-on example. You will deploy a model backed by [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html), and using the [AI21 Labs Jurassic 2](https://docs.ai21.com/docs/jurassic-2-models) as foundation model. You are going to build a connector blueprint to connect with your model, will configure it, deploy it, and even practice changing the connector to fine tune their responses.
+In this tutorial, I will walk you through in how to do this with a hands-on example. You will deploy a model backed by [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html), that exposes [AI21 Labs Jurassic 2](https://docs.ai21.com/docs/jurassic-2-models) as model. You will build a connector blueprint for your model, will deploy it, and even practice changing the connector to update its configuration.
 
 ## Setting up a development cluster
 
-To keep you focused and engaged, this tutorial will assume that you are using a local OpenSearch cluster. Everything you learn here can be used later on with [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html) clusters. To launch a local OpenSearch cluster, use the Docker Compose available in [this GitHub repository](https://github.com/build-on-aws/getting-started-with-opensearch-models).
+To keep you focused and engaged, this tutorial will assume that you are using a local OpenSearch cluster. But, everything you learn here can be used later on with [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html) clusters. To launch a local OpenSearch cluster, use the Docker Compose available in [this GitHub repository](https://github.com/build-on-aws/getting-started-with-opensearch-models).
 
 1. `git clone https://github.com/build-on-aws/getting-started-with-opensearch-models`
 2. `cd getting-started-with-opensearch-models`
@@ -111,19 +111,19 @@ You should see a JSON payload with the following content:
 
 This means that the internal index `.plugins-ml-config` has been created, which indicates the plugin is initialized. This should happen relatively fast; but if for some reason you don't see this result right way, try to reload your browser. If you are still unable to see this content, something may be wrong with your OpenSearch cluster. Check the container logs for more details.
 
-Now that you verified everything is working fine with the OpenSearch cluster and the ML Commons plugin, you can prepare your OpenSearch cluster for the models' feature. There are specific settings that you must enable in your cluster before proceeding. Go to your browser and point to the following location:
+Now that you verified everything is working fine, you can prepare your OpenSearch cluster for the models' feature. There are specific settings that you must enable in your cluster before proceeding. Go to your browser and point to the following location:
 
 [http://localhost:5601](http://localhost:5601/)
 
-This will open the main page of [OpenSearch Dashboards](https://opensearch.org/docs/latest/dashboards/quickstart/). You will use the feature Dev Tools from OpenSearch Dashboards to run a set of REST API calls against OpenSearch. Alternatively, you can use your own client tool to run these commands—but using Dev Tools will certainly make your life easier. Follow these steps to access the Dev Tools feature.
+This will open the main page of [OpenSearch Dashboards](https://opensearch.org/docs/latest/dashboards/quickstart/). You will use the feature Developer Tools from OpenSearch Dashboards to run a set of REST API calls against OpenSearch. Alternatively, you can use your own client tool to run these commands—but using Developer Tools will certainly make your life easier. Follow these steps to access this feature.
 
 1. Click on the Dev Tools button.
 ![opensearch dashboards main page](images/opensearch_dashboards_1.png)
 2. With the editor open, try the command `GET _cluster/health` to verify the OpenSearch cluster. To execute the command, leave the line that starts the command selected, and click in the ▶️ execute button.
 ![opensearch dashboards main page](images/opensearch_dashboards_2.png)
-There will have it. Now you can run commands against your OpenSearch cluster with ease. The Dev Tools feature allows you to export and import commands. So everything you will do in this tutorial can be saved into a file and then reused in another OpenSearch cluster, such as a [domain from Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html).
+There will have it. Now you can run commands against your OpenSearch cluster with ease. The Developer Tools feature allows you to export and import commands. So everything you will do in this tutorial can be saved into a file and then reused in another OpenSearch cluster, such as a [domain from Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gsg.html).
 
-Use the Dev Tools feature to enable the following persistent setting:
+Enable the following persistent setting:
 
 ```json
 PUT /_cluster/settings
@@ -355,8 +355,10 @@ Will generate an output similar to this:
 
 Note the value of the field `model_state`. This time it says `DEPLOYED` which means that OpenSearch is now both aware of this model and ready to allow inferences to be executed. The output now also includes other relevant details such as which nodes from the OpenSearch cluster are being used for planning the execution, as well as how much planning and worker nodes there are. For the usage of the model, this information is totally irrelevant. But it is useful for system administrators who want to know a bit better how OpenSearch is scheduling the work of inference executions across the cluster.
 
-Another way to verify if the mode is properly deployed and ready to be used is using OpenSearch Dashboards. If you go to **OpenSearch Plugins** then **Machine Learning**, you will see a table containing all your deployed models. Look for the model named `ai21.j2-mid-v1`.
+Another way to verify if the mode is properly deployed and ready to be used is using OpenSearch Dashboards. If you go to **OpenSearch Plugins** then **Machine Learning**, you will see a table containing all your deployed models. Look for the model named **ai21.j2-mid-v1**.
+
 ![opensearch dashboards ml plugin](images/dashboards_ml_plugin.png)
+
 ## Testing the model with inferences
 
 Now that your model is properly deployed, it is time for you to test it. Testing a model is the process of running inferences against the model. As a first test, you can ask the model about one of the most asked questions by human beings: what is the meaning of life?
@@ -482,9 +484,11 @@ The meaning of life is a question that has puzzled philosophers, theologians, an
 }
 ```
 
-Don't be alarmed by the verbosity of this output. The first thing you should know about this JSON payload is that the actual response from Amazon Bedrock is contained in the field `inference_results[0].output[0].dataAsMap`. Anything before this is a structure that OpenSearch will include as its default response schema. Secondly, the response sent by AI21 Labs Jurassic 2 for the question `What is the meaning of life?` is in the field `completions[0].data.text`.
+The first thing you should know about this JSON payload is that the response from Amazon Bedrock is contained in the field `inference_results[0].output[0].dataAsMap`. Anything before this is a structure that OpenSearch will include as its default response schema. Secondly, the response sent by the model for the question `What is the meaning of life?` is in the field `completions[0].data.text`.
 
-The complexity of the responses sent by foundation models is something that ML developers—while creating connector blueprints—should be concerned about. As it should be of their interest to create simple and better experiences for their users. To illustrate what could be done for this case, let's see how to update the existing connector blueprint to process the response generated by the model generate and create a simpler and less verbose one.
+With this said, the response provided by the model is rather complicated. It contains fields that developers may not be interested in, namely the tokens from each part of the answer. Moreover, it forces users to navigate over a complex structure to retrieve the actual answer to the question. The complexity of the responses sent by foundation models is something that ML developers—while creating connector blueprints—should be concerned about. As it should be of their interest to create simple and better experiences for their users.
+
+To illustrate what could be done for this case, let's see how to update the existing connector blueprint to process the response generated by the model to generate a simpler and less verbose one.
 
 ## Processing the response from the model
 
@@ -519,7 +523,7 @@ To undeploy the mode, run the following command:
 POST /_plugins/_ml/models/xiDN1YsBhjmsqc9X8vet/_undeploy
 ```
 
-Now you can update the connector blueprint configuration. What you are going to do is provide a way for the connector to process the response sent by the AI21 Labs Jurassic 2 foundation model. This can be achieved with [custom pre-and-post processing functions](https://opensearch.org/docs/latest/ml-commons-plugin/extensibility/blueprints/#custom-pre--and-post-processing-functions). To illustrate how this works, run the following command:
+Now you can update the connector blueprint configuration. What you are going to do is provide a way for the connector to process the response sent by the model. This can be achieved with [custom pre-and-post processing functions](https://opensearch.org/docs/latest/ml-commons-plugin/extensibility/blueprints/#custom-pre--and-post-processing-functions). To illustrate how this works, run the following command:
 
 ```json
 PUT /_plugins/_ml/connectors/wyB41YsBhjmsqc9X5_fW
@@ -610,11 +614,11 @@ The meaning of life is a question that has puzzled philosophers and theologians 
 }
 ```
 
-Very cool, right? Just keep in mind that using pre-and-post processing functions creates a tight coupling between your connector and the API contract used by the model. Whenever that API contract changes because the endpoint schema is updated, you will need to update your connector blueprint accordingly.
+Cool, right? Just keep in mind that using pre-and-post processing functions creates a tight coupling between your connector and the API contract used by the model. Whenever that API contract changes because the endpoint schema is updated, you will need to update your connector blueprint accordingly.
 
 ## Automating steps
 
-At this point, you have successfully finished this tutorial and had the opportunity to explore the models' feature. Throughout the tutorial, you may have observed that the majority of the steps involved executing a series of commands against the OpenSearch cluster. However, this repetitive and manual process can be both tedious and prone to errors. Fortunately, there is a solution. OpenSearch offers RESTful APIs for almost every aspect, allowing you to automate the execution of the following steps programmatically.
+At this point, you have successfully finished this tutorial and had the opportunity to explore the models' feature. Throughout the tutorial, you may have observed that the majority of the steps involved executing a series of commands against the OpenSearch cluster. This repetitive and manual process can be both tedious and prone to errors. Fortunately, you can automate all of this. OpenSearch offers RESTful APIs for virtually everything, allowing you to automate the execution of the complicated processes like deploying models.
 
 ![automating steps](images/automating_steps.png)
 

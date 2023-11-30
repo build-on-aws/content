@@ -23,9 +23,9 @@ date: 2023-11-27
 | ToC |
 | --- |
 
-Machine learning is an integral part of many data workflows. Machine learning models are often scattered across different platforms—some hosted by cloud providers, others running on internal infrastructure, and others provided by third-party vendors. This fragmentation can make it challenging to connect these disparate systems into an end-to-end workflow. For example, you may want to use a proprietary named entity recognition model with a transformer-based question answering system from a different provider. Maybe ingest documents into a search index while calling out to multiple external APIs for enrichment. By using external model connectors, [OpenSearch](https://opensearch.org/) provides a unified interface to integrate these heterogeneous systems, allowing you to build powerful AI-powered applications.
+Machine learning is an integral part of many data workflows. Machine learning models are often scattered across different platforms—some hosted by cloud providers, others running on internal infrastructure, and others provided by third-party vendors. This fragmentation can make it challenging to connect these disparate systems into an end-to-end workflow. For example, you may want to use a proprietary named entity recognition model with a transformer-based question answering system from a different provider. Maybe ingest documents into a search index while calling out to multiple external APIs for enrichment. By using model connectors, [OpenSearch](https://opensearch.org/) provides a unified interface to integrate these heterogeneous systems, allowing you to build powerful AI-powered applications.
 
-In this tutorial, you will deploy a custom ML API written in Python, and use it as a external model with OpenSearch. Keep in mind, though, that you can use the same approach if the ML API is executed elsewhere. As long as OpenSearch can reach the API endpoint, the ML API could be:
+In this tutorial, you will deploy a custom ML API written in Python, and use it as a model with OpenSearch. Keep in mind, though, that you can use the same approach if the ML API is executed elsewhere. As long as OpenSearch can reach the API endpoint, the ML API could be:
 
 * Models from [Hugging Face](https://huggingface.co/)or custom models deployed onto a container or virtual machine
 * Models deployed on [Amazon SageMaker,](https://aws.amazon.com/sagemaker/) including via [JumpStart](https://aws.amazon.com/sagemaker/jumpstart/)
@@ -34,13 +34,13 @@ In this tutorial, you will deploy a custom ML API written in Python, and use it 
 
 ## Playing with the Custom ML API locally
 
-To launch a local instance of the custom ML API, use the Docker Compose available in [this GitHub repository](https://github.com/build-on-aws/getting-started-with-opensearch-external-models).
+To launch a local instance of the custom ML API, use the Docker Compose available in [this GitHub repository](https://github.com/build-on-aws/getting-started-with-opensearch-models).
 
-1. `git clone https://github.com/build-on-aws/getting-started-with-opensearch-external-models`
-2. `cd getting-started-with-opensearch-external-models/custom-ml-api`
+1. `git clone https://github.com/build-on-aws/getting-started-with-opensearch-models`
+2. `cd getting-started-with-opensearch-models/custom-ml-api`
 3. `docker compose up -d`
 
-[The Python application](https://github.com/build-on-aws/getting-started-with-opensearch-external-models/blob/main/custom-ml-api/app.py) exposes the ML API and make it available via the endpoint http://localhost:8888. To test this API before moving forward, you can send the following HTTP request using curl.
+[The Python application](https://github.com/build-on-aws/getting-started-with-opensearch-models/blob/main/custom-ml-api/app.py) exposes the ML API and make it available via the endpoint http://localhost:8888. To test this API before moving forward, you can send the following HTTP request using curl.
 
 ```
 curl -u admin:secret -H 'Content-Type: application/json' http://localhost:8888/weather -d '{"text_inputs": "London"}' 
@@ -57,11 +57,11 @@ You should get an output similar to this:
 }
 ```
 
-This means that the ML API is running correctly. Once you finish playing with the ML API, please deploy this API on AWS. The API is deployed using the [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html), full instructions [are available in the repository](https://github.com/build-on-aws/getting-started-with-opensearch-external-models#deploying-the-sample-ml-api). Be sure to update the configuration as detailed in the repository to make the API available on your custom domain. This tutorial will consider the ML API is available in the following endpoint:  [https://api.mydomain.com](https://api.mydomain.com/).
+This means that the ML API is running correctly. Once you finish playing with the ML API, please deploy this API on AWS. The API is deployed using the [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html), full instructions [are available in the repository](https://github.com/build-on-aws/getting-started-with-opensearch-models#deploying-the-sample-ml-api). Be sure to update the configuration as detailed in the repository to make the API available on your custom domain. This tutorial will consider the ML API is available in the following endpoint:  [https://api.mydomain.com](https://api.mydomain.com/).
 
 ## Configuring OpenSearch
 
-Before moving forward with this tutorial, you will need an Amazon OpenSearch domain. You can create one manually using the instructions from the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html), or you can use [this Terraform code](https://github.com/build-on-aws/getting-started-with-opensearch-external-models/blob/main/amazon-opensearch.tf) that creates one for you automatically. Either way, make sure your Amazon OpenSearch domain is fully operational before continuing.
+Before moving forward with this tutorial, you will need an Amazon OpenSearch domain. You can create one manually using the instructions from the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html), or you can use [this Terraform code](https://github.com/build-on-aws/getting-started-with-opensearch-models/blob/main/amazon-opensearch.tf) that creates one for you automatically. Either way, make sure your Amazon OpenSearch domain is fully operational before continuing.
 
 Just like you have learned in the part 2 of this series, before deploying any connectors you must configure your OpenSearch cluster with some persistent settings. Execute the following command:
 
@@ -109,7 +109,7 @@ POST /_plugins/_ml/connectors/_create
 }
 ```
 
-Next the connector needs to be associated with a [model group](https://opensearch.org/docs/latest/ml-commons-plugin/model-access-control/#model-groups) and a model has to be deployed for external inference. To do this, the connector is registered to a model group. Then the output `model_id` of that task is retrieved using the `task_id`. With that, the model can be deployed:
+Next the connector needs to be associated with a [model group](https://opensearch.org/docs/latest/ml-commons-plugin/model-access-control/#model-groups) and a model has to be deployed to allow the execution of inferences. To do this, the connector is registered to a model group. Then the output `model_id` of that task is retrieved using the `task_id`. With that, the model can be deployed:
 
 ```
 POST /_plugins/_ml/models/_register
@@ -135,7 +135,7 @@ POST /_plugins/_ml/models/vt9nuosBjS86SRECXokQ/_predict
 }
 ```
 
-Success! Here the response is being returned from the external model based on the input text:
+Success! Here the response is being returned from the model based on the input text:
 
 ```
 {
@@ -193,7 +193,7 @@ As a more practical example, if the model or API works with text embeddings, the
 }
 ```
 
-In this connector, a `pre_process_function` and a `post_process_function` is used. These allow the request and response to be transformed when working with a external model, so it is in the shape expected by OpenSearch. 
+In this connector, a `pre_process_function` and a `post_process_function` is used. These allow the request and response to be transformed when working with a model, so it is in the shape expected by OpenSearch.
 
 There are a number of [pre-created functions available for common integrations](https://opensearch.org/docs/latest/ml-commons-plugin/extensibility/blueprints/#built-in-pre--and-post-processing-functions), or you can implement your own using Painless scripting as in the above example. 
 
@@ -266,7 +266,7 @@ The response from the model has to either match this format or be manipulated us
 
 ## Configuring the connector for neural search
 
-This connector can then be used as part of a [neural search query](https://opensearch.org/docs/latest/search-plugins/neural-search/). The following example converts in the input query text to vectors at search time using the external model. This search is then fulfilled locally using the k-NN index to find the most similar documents:
+This connector can then be used as part of a [neural search query](https://opensearch.org/docs/latest/search-plugins/neural-search/). The following example converts in the input query text to vectors at search time using the model. This search is then fulfilled locally using the k-NN index to find the most similar documents:
 
 ```
 GET /nlp_pqa_2/_search
@@ -345,7 +345,7 @@ PUT /nlp_pqa
 }
 ```
 
-Now, when new documents are added to the index, the ingestion pipeline runs. This sends the mapped attributes to the external model for inference and the response is written to the vector attribute in OpenSearch:
+Now, when new documents are added to the index, the ingestion pipeline runs. This sends the mapped attributes to the model for inference and the response is written to the vector attribute in OpenSearch:
 
 ```
 POST /nlp_pqa_2/_doc/3
@@ -358,6 +358,6 @@ You can also implement neural searches using the integrations feature from Amazo
 
 ## Summary
 
-Throughout this series, you learned about the external models feature from OpenSearch and what you can do with it. The external models feature provides a powerful way for independent software vendors (ISVs) and model providers to connect their services to OpenSearch, so they can use them with RAG and text-embedding pipelines. This is particularly useful for situations where OpenSearch is acting as the vector database for generative AI applications.
+Throughout this series, you learned about the models feature from OpenSearch and what you can do with it. The models feature provides a powerful way for independent software vendors (ISVs) and model providers to connect their services to OpenSearch, so they can use them with RAG and text-embedding pipelines. This is particularly useful for situations where OpenSearch is acting as the vector database for generative AI applications.
 
-By now, you should feel confident enough to begin developing your applications with OpenSearch and the external models feature. But, if you have some spare time, I highly recommend reading [part four](/posts/getting-started-with-opensearch-models/04-troubleshooting-ml-commons-framework) of this series. It provides a comprehensive overview of troubleshooting the ML Commons plugin. It's not necessary if you're solely focused on building applications, but it's always helpful to refer back to if things don't go as planned.
+By now, you should feel confident enough to begin developing your applications with OpenSearch and the models feature. But, if you have some spare time, I highly recommend reading [part four](/posts/getting-started-with-opensearch-models/04-troubleshooting-ml-commons-framework) of this series. It provides a comprehensive overview of troubleshooting the ML Commons plugin. It's not necessary if you're solely focused on building applications, but it's always helpful to refer back to if things don't go as planned.

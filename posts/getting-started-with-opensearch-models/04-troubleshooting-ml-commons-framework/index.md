@@ -1,6 +1,6 @@
 ---
-title: "Troubleshooting the OpenSearch ML Commons Framework"
-description: "Learn the tips and tricks about how to troubleshoot the OpenSearch ML Commons Framework, the engine behind the models feature."
+title: "Troubleshooting the ML Commons Framework"
+description: "Learn the tips and tricks about how to troubleshoot the ML Commons Framework, the engine behind the models feature."
 tags:
   - opensearch
   - ai-ml
@@ -101,7 +101,7 @@ You should see the following output:
 }
 ```
 
-As you may have noticed; there is a fair amount of settings being used by the ML Commons plugin. Some of them are self-explanatory and I won't go over in detailing all of them. Instead, below, I summarize the top five settings you may want to know in more details.
+As you may have noticed; there is a fair amount of settings being used by the ML Commons Framework. Some of them are self-explanatory and I won't go over in detailing all of them. Instead, below, I summarize the top five settings you may want to know in more details.
 
 1. **plugins.ml_commons.model_access_control_enabled**: models deployed at OpenSearch can be fully controlled with granular roles that you can tie to them. This setting enables that behavior, as opposed to allow anyone to use modes anytime they want. If perhaps you are working with a cluster with this setting enabled, you may know to review if someone didn't associate a role to the model, which may explain why you are getting access errors every time you try to deploy or running predictions with the model.
 
@@ -162,7 +162,7 @@ Make sure to adjust the `size` if needed.
 
 ## Profiling your deployed models
 
-In some cases, users may express their dissatisfaction with certain aspects of the application, specifically its rather slow performance. Upon troubleshooting, it has been found that one possible reason for this sluggishness could be the calls made to models. A fascinating approach to initiate this investigation is by utilizing the [Profile API](https://opensearch.org/docs/latest/ml-commons-plugin/api/profile/) provided by the ML Commons Framework.
+In some cases, users may express their dissatisfaction with certain aspects of the application, specifically its rather slow performance. Upon initial troubleshooting, it has been found that one possible reason for this sluggishness could be the calls made to models. A nice approach to investigate this further is by utilizing the [Profile API](https://opensearch.org/docs/latest/ml-commons-plugin/api/profile/) provided by the ML Commons Framework.
 
 To use the Profile API to investigate the performance of your models, use the following command:
 
@@ -211,7 +211,7 @@ You should see an output similar to this:
 }
 ```
 
-Note the hierarchical structure of this output. The analysis is broken down on a per-node basis, followed by a per-model basis. Then, for each model, there are two groups: `model_inference_stats` and `predict_request_stats`. The former deals with the actual inferences executed by the model, whereas the latter deals with the predictions made to the model. Your troubleshooting exercise should consider the computed values of the metrics for each group, given the amount of requests displayed in the field `count`. It should give a nice idea if the models are indeed the culprit.
+Note the hierarchical structure of this output. The analysis is broken down on a per-node basis, followed by a per-model basis. Then, for each deployed model, there are two groups: `model_inference_stats` and `predict_request_stats`. The former deals with the actual inferences executed by the model, whereas the latter deals with the predictions made to the model. Your troubleshooting exercise should consider the computed values of the metrics for each group, given the amount of requests displayed in the field `count`. It should give a nice idea if the models are indeed the culprit.
 
 You may note a possible discrepancy in the value reported by the field `count` and the actual number of requests executed. This may happen because the Profile API monitors the last `100` requests. To change the number of monitoring requests, update the following cluster setting:
 
@@ -226,7 +226,7 @@ PUT _cluster/settings
 
 ## Profiling your search requests
 
-Searching with OpenSearch presents a greater level of complexity compared to querying a relational database. The reason behind this lies in OpenSearch's scalable [shared-nothing architecture](https://en.wikipedia.org/wiki/Shared-nothing_architecture), which distributes documents across various shards. Consequently, when initiating a search request in OpenSearch, the execution process becomes more intricate since one remains unaware of which documents will align with the query and their respective storage locations. This is the reason OpenSearch applies the **query-then-fetch** approach. In a nutshell, here is how it works.
+Searching data with OpenSearch presents a greater level of complexity compared to querying a relational database. The reason behind this lies in OpenSearch's scalable [shared-nothing architecture](https://en.wikipedia.org/wiki/Shared-nothing_architecture), which distributes documents across various shards. Consequently, when initiating a search request in OpenSearch, the execution process becomes more intricate since one remains unaware of which documents will align with the query and their respective storage locations. This is the reason OpenSearch applies the **query-then-fetch** approach. In a nutshell, here is how it works.
 
 In the initial query phase, the query is sent to each shard in the index. Each shard performs the search and generates a queue of matching documents. This helps identify the documents that meet the search criteria. However, we still need to retrieve the actual documents themselves in the fetch phase. In this phase, the coordinating node decides which documents to fetch. These documents may come from one or multiple shards involved in the original search. The coordinating node sends a request to the relevant shard copy, which then loads the document bodies into the `_source` field. Once the coordinating node has gathered all the results, it combines them into a unified response to send back to the client.
 
