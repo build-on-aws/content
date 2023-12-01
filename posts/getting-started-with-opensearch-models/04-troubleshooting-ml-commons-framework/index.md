@@ -17,7 +17,7 @@ images:
   background: images/tutorial_banner.png
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
-date: 2023-11-27
+date: 2023-12-01
 ---
 
 | ToC |
@@ -226,7 +226,7 @@ PUT _cluster/settings
 
 ## Profiling your search requests
 
-Searching data with OpenSearch presents a greater level of complexity compared to querying a relational database. The reason behind this lies in OpenSearch's scalable [shared-nothing architecture](https://en.wikipedia.org/wiki/Shared-nothing_architecture), which distributes documents across various shards. Consequently, when initiating a search request in OpenSearch, the execution process becomes more intricate since one remains unaware of which documents will align with the query and their respective storage locations. This is the reason OpenSearch applies the **query-then-fetch** approach. In a nutshell, here is how it works.
+Searching data with OpenSearch presents a greater level of complexity compared to querying a relational database. The reason behind this lies in OpenSearch's [shared-nothing architecture](https://en.wikipedia.org/wiki/Shared-nothing_architecture), which distributes documents across various shards. Consequently, when initiating a search request in OpenSearch, the execution process becomes more intricate since one remains unaware of which documents will align with the query and their respective storage locations. This is the reason OpenSearch applies the **query-then-fetch** approach. In a nutshell, here is how it works.
 
 In the initial query phase, the query is sent to each shard in the index. Each shard performs the search and generates a queue of matching documents. This helps identify the documents that meet the search criteria. However, we still need to retrieve the actual documents themselves in the fetch phase. In this phase, the coordinating node decides which documents to fetch. These documents may come from one or multiple shards involved in the original search. The coordinating node sends a request to the relevant shard copy, which then loads the document bodies into the `_source` field. Once the coordinating node has gathered all the results, it combines them into a unified response to send back to the client.
 

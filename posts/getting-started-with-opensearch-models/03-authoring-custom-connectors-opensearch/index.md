@@ -17,7 +17,7 @@ images:
   background: images/tutorial_banner.png
 authorGithubAlias: jhart0
 authorName: Josh Hart
-date: 2023-11-27
+date: 2023-12-01
 ---
 
 | ToC |
@@ -92,7 +92,7 @@ POST /_plugins/_ml/connectors/_create
   "protocol": "http",
   "credential": {
     "secretArn": "<YOUR_SECRET>",
-    "roleArn": "<YOUR_ROLE>",
+    "roleArn": "<YOUR_ROLE>"
   },
   "actions": [
     {
@@ -173,8 +173,8 @@ As a more practical example, if the model or API works with text embeddings, the
   "version": 1,
   "protocol": "http",
   "credential": {
-    "secretArn": "arn:aws:secretsmanager:us-east-1:1234567890:secret:weather_api_key-Iz8AUH",
-    "roleArn": "arn:aws:iam::1234567890:role/opensearch-api-role",
+    "secretArn": "<YOUR_SECRET>",
+    "roleArn": "<YOUR_ROLE>"
     },
   "actions": [
     {
