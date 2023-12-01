@@ -103,11 +103,11 @@ You should see the following output:
 
 As you may have noticed; there is a fair amount of settings being used by the ML Commons Framework. Some of them are self-explanatory and I won't go over in detailing all of them. Instead, below, I summarize the top five settings you may want to know in more details.
 
-1. **plugins.ml_commons.model_access_control_enabled**: models deployed at OpenSearch can be fully controlled with granular roles that you can tie to them. This setting enables that behavior, as opposed to allow anyone to use modes anytime they want. If perhaps you are working with a cluster with this setting enabled, you may know to review if someone didn't associate a role to the model, which may explain why you are getting access errors every time you try to deploy or running predictions with the model.
+1. **plugins.ml_commons.model_access_control_enabled**: models deployed at OpenSearch can be fully controlled with granular roles that you can tie to them. This setting enables that behavior, as opposed to allow anyone to use models anytime they want. If perhaps you are working with a cluster with this setting enabled; you may want to review if someone didn't associate a role to the model, which may explain why you are getting access errors every time you try to deploy the model.
 
 2. **plugins.ml_commons.native_memory_threshold**: this setting sets an upper bound limit about how much tolerance for the RAM memory (also known as native memory) until it stops allowing tasks to execute. It defaults to `90`, which means that if the RAM memory is over `90%` of utilization, a [circuit breaker](https://github.com/opensearch-project/ml-commons/blob/main/plugin/src/main/java/org/opensearch/ml/breaker/NativeMemoryCircuitBreaker.java) will stop tasks from being executed. For a really busy OpenSearch cluster that also has to serve search requests, this may be something you want to watch out.
 
-3. **plugins.ml_commons.jvm_heap_memory_threshold**: this setting sets an upper bound limit about how much tolerance for the JVM heap memory until it stops allowing tasks to execute. It defaults to `85`, which means that if the JVM heap memory is over `85%` of utilization, a [circuit breaker](https://github.com/opensearch-project/ml-commons/blob/main/plugin/src/main/java/org/opensearch/ml/breaker/MemoryCircuitBreaker.java) will stop tasks from being executed. It is important to note that the JVM heap may reach this threshold frequently during peak times. Once the garbage collection finishes, the heap memory will shrink, but it may fill up back again pretty quickly.
+3. **plugins.ml_commons.jvm_heap_memory_threshold**: this setting sets an upper bound limit about how much tolerance for the JVM heap memory until it stops allowing tasks to execute. It defaults to `85`, which means that if the JVM heap memory is over `85%` of utilization, a [circuit breaker](https://github.com/opensearch-project/ml-commons/blob/main/plugin/src/main/java/org/opensearch/ml/breaker/MemoryCircuitBreaker.java) will stop tasks from being executed. It is important to note that the JVM heap may reach this threshold more frequently during peak times. Once the garbage collection finishes, the heap memory will shrink, but it may fill up back again pretty quickly.
 
 4. **plugins.ml_commons.model_auto_redeploy.enable:** As you may have learned at this point, every time you deploy a model, this is executed by a task in the OpenSearch cluster. At any time, the nodes responsible for executing these tasks can fail, and by default, there is no "do it again" according to this setting. Setting this to `true` tells OpenSearch to attempt a redeploy if a model is found not deployed or partially deployed. This may explain why, even after bouncing your cluster, the model still doesn't work. When this setting is set to `true`, you can optionally use the property `plugins.ml_commons.model_auto_redeploy.lifetime_retry_times` to specify how many redeploy attempts should happen.
 
@@ -158,7 +158,7 @@ You should see the following output:
 }
 ```
 
-Make sure to adjust the `size` if needed.
+Make sure to adjust the `size` as needed.
 
 ## Profiling your deployed models
 
@@ -545,7 +545,7 @@ There is one troubleshooting technique that must be your first instinct when dea
 
 A good example of this may be situations where a request may look like as failed but in reality; the request was sent from a user that has no permissions for that request. For those requests, if you receive an `401` or `403` HTTP codes—this means that the request is as successful until the point where the user credentials were verified and the user permissions were put in check. This is actually good news since you won't have to investigate the said error. You just need to investigate if the resource being used should or should not be given to the user.
 
-For instance, consider the support provided by the ML Commons plugin to [model access control](https://opensearch.org/docs/latest/ml-commons-plugin/model-access-control/). This may explain why every time a user tries to register a model or deploy it is failing. It may be the case of the model is trying to use a model group whose access model is restricted, or one that is intentionally not visible to you. This may happen because an model group can be created with restricted access to certain users, using organizational conventions called `backend_roles` that prohibit certain users to access it. To illustrate this, see the group `model_group_test` below.
+For instance, consider the support provided by the ML Commons Framework to [model access control](https://opensearch.org/docs/latest/ml-commons-plugin/model-access-control/). This may explain why every time a user tries to register a model or deploy it is failing. It may be the case of the model is trying to use a model group whose access model is restricted, or one that is intentionally not visible to you. This may happen because an model group can be created with restricted access to certain users, using organizational conventions called `backend_roles` that prohibit certain users to access it. To illustrate this, see the group `model_group_test` below.
 
 ```json
 POST /_plugins/_ml/model_groups/_register
