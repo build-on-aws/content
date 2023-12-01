@@ -610,13 +610,13 @@ In your browser window, create a participant token in the AWS console, provide i
 
 To test if someone else joining the stage can see your avatar, open the [Amazon IVS Real-Time Streaming Web Sample](https://codepen.io/amazon-ivs/project/editor/DYapzL#) in another browser window, create another participant token, provide it in this browser window and click join stage. You should now see the video feed of yourself with the custom background applied. This is how other audience members joining the stage would see your video feed. You can click the change background button to provide a prompt for a new background image and within seconds you will see your video feed updated with the new background image!
 
-![Screenshot of background replacement demo](images/amazon-bedrock-example-screenshot-background.png)
+![Animated GIF of background replacement demo](images/amazon-ivs-real-time-background-replacement-demo.gif)
 
 ## Conclusion
 
 As we wrap up this tutorial, you should now be equipped with the knowledge to transform your live streams using AI-generated backgrounds, bringing a dynamic and polished look to your audience. AI-generated backgrounds open the door to transporting you and your live stream audience to a new world. Happy streaming, and let your creativity flow with your new, limitless streaming environment!
 
-f you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
+If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
 
 ## About the Author
 
