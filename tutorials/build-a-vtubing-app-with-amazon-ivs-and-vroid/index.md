@@ -28,9 +28,9 @@ With that context set, I will walk you through a step by step process of buildin
 
 ## What you will learn
 
-- How to import virtual characters from VRoid Hub
-- How to animate a virtual character with your own body movements
-- How to live stream your virtual character to Amazon IVS
+- How to render a 3D virtual character
+- How to animate a 3D virtual character with your own body movements
+- How to live stream 3D your virtual character to Amazon IVS
 
 | Attributes          |                                                                                                                   |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------- |
