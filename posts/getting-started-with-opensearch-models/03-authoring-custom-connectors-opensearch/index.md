@@ -27,9 +27,9 @@ Machine learning is an integral part of many data workflows. Machine learning mo
 
 In this tutorial, you will deploy a custom ML API written in Python, and use it as a model with OpenSearch. Keep in mind, though, that you can use the same approach if the ML API is executed elsewhere. As long as OpenSearch can reach the API endpoint, the ML API could be:
 
-* Models from [Hugging Face](https://huggingface.co/)or custom models deployed onto a container or virtual machine
-* Models deployed on [Amazon SageMaker,](https://aws.amazon.com/sagemaker/) including via [JumpStart](https://aws.amazon.com/sagemaker/jumpstart/)
-* Managed AI services such as [Amazon Bedrock](https://aws.amazon.com/bedrock/), [Cohere](https://cohere.com/) or [Anthropic](https://www.anthropic.com/). 
+* Models from [Hugging Face](https://huggingface.co) or custom models deployed onto a container or virtual machine
+* Models deployed on [Amazon SageMaker,](https://aws.amazon.com/sagemaker) including via [JumpStart](https://aws.amazon.com/sagemaker/jumpstart)
+* Managed AI services such as [Amazon Bedrock](https://aws.amazon.com/bedrock), [Cohere](https://cohere.com) or [Anthropic](https://www.anthropic.com). 
 * ...any API that you can connect to from the OpenSearch cluster. 
 
 ## Playing with the Custom ML API locally

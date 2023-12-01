@@ -35,7 +35,7 @@ Let's get started.
 
 For a while now, OpenSearch allows ML developers to train and deploy models into OpenSearch clusters. This support is provided by the [OpenSearch ML Commons Framework](https://github.com/opensearch-project/ml-commons). The idea behind this project is to simplify the process of defining, deploying, and using models using REST APIs, a programming model that is known and accessible to many developers. Instead of learning frameworks specialized in ML, they can use REST and JSON, which provide simpler programming constructs.
 
-Consider [this tutorial](https://opensearch.org/docs/latest/ml-commons-plugin/semantic-search/#tutorial) as an example of a pre-trained model based on [Hugging Face](https://huggingface.co) that can be invoked using the prediction API. In the example below, the identifier cleMb4kBJ1eYAeTMFFg4 represents the model deployed on OpenSearch. This is how a developer can invoke this model:
+Consider [this tutorial](https://opensearch.org/docs/latest/ml-commons-plugin/semantic-search/#tutorial) as an example of a pre-trained model based on [Hugging Face](https://huggingface.co) that can be invoked using the prediction API. In the example below, the identifier `cleMb4kBJ1eYAeTMFFg4` represents the model deployed on OpenSearch. This is how a developer can invoke this model:
 
 ```
 POST /_plugins/_ml/_predict/text_embedding/cleMb4kBJ1eYAeTMFFg4
