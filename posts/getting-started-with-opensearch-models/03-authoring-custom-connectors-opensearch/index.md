@@ -1,6 +1,6 @@
 ---
 title: "Authoring Custom Connectors for OpenSearch"
-description: "Tutorial about how to create your own custom model deployed at AWS to implement text embeddings and neural searches use cases."
+description: "Are you excited with the OpenSearch models' feature but need to use custom models? No problems. In this tutorial, you will learn how to use your own deployed model with OpenSearch."
 tags:
   - opensearch
   - ai-ml

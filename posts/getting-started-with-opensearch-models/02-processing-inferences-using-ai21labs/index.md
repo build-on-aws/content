@@ -1,6 +1,6 @@
 ---
 title: "Processing Inferences using AI21 Labs Jurassic 2"
-description: "Tutorial about how to implement a model that leverages Amazon Bedrock with the foundation model AI21 Labs Jurassic 2."
+description: "Have you ever wondered what it would be like to use AI21 Labs Jurassic 2 model from OpenSearch? Now you can bring the power of Generative AI to your search applications! In this tutorial, we will guide you through the process step by step."
 tags:
   - opensearch
   - ai-ml

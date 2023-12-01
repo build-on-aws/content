@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting the ML Commons Framework"
-description: "Learn the tips and tricks about how to troubleshoot the ML Commons Framework, the engine behind the models feature."
+description: "You have completed the implementation of OpenSearch models, but it seems that something is not functioning correctly. In order to resolve this issue, it is important to learn how to troubleshoot the engine that powers the models' feature."
 tags:
   - opensearch
   - ai-ml
