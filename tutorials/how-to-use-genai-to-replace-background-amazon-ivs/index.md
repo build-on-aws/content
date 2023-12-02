@@ -74,7 +74,7 @@ To use MediaPipe Image Segmenter, let's install the @mediapipe/tasks-vision. We 
 npm i @mediapipe/tasks-vision webpack webpack-cli
 ```
 
-Next, create some starter HTML in an index.html file. We will also take this opportunity to include the [IVS real-time streaming Web Broadcast SDK](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/broadcast-web.html) for live streaming. Replace `<SDK Version>` with the [latest version number(https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/broadcast-web.html)].
+Next, create some starter HTML in an index.html file. We will also take this opportunity to include the [IVS real-time streaming Web Broadcast SDK](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/broadcast-web.html) for live streaming. Replace `<SDK Version>` with the [latest version number](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/broadcast-web.html).
 
 ```html
 <!DOCTYPE html>
