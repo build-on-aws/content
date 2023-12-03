@@ -11,7 +11,7 @@ authorName: Xiaoyu Xing
 date: 2023-12-20
 ---
 
-We probably would all agree that **Data Privacy** is a topic that can't be neglected in the context of data analytics and machine learning. **Generative AI** is rocking the world, but without sufficient security controls, Generative AI tools could be vulnerable to data exfiltration, resulting in unauthorized access or disclosure of sensitive information, potentially leading to privacy violations and possible misuse of both sensitive personal data or intellectual property.
+Most would likely agree that **Data Privacy** is an important issue that cannot be overlooked when it comes to data analytics and machine learning. **Generative AI** is making waves, but without proper security control, Generative AI tools could be susceptible to data theft. This could lead to unauthorized access or disclosure of sensitive information, potentially leading to privacy violations and possible misuse of both sensitive personal data or intellectual property.
 
 [Amazon Bedrock](https://aws.amazon.com/bedrock/security-compliance/), a fully managed service, allows you to build generative AI applications that support data security and compliance standards, including **GDPR** and **HIPAA**.
 
@@ -117,14 +117,14 @@ Lambda function is by default running on the Lambda service VPC with public inte
   - [AWS IAM(Identity & Access Management)](https://aws.amazon.com/iam/?nc=sn&loc=0) console, add AWS managed policy - **AWSLambdaVPCAccessExecutionRole**
  
  This role allows Lambda to do the following actions:
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream",
-                "logs:PutLogEvents",
-                "ec2:CreateNetworkInterface",
-                "ec2:DescribeNetworkInterfaces",
-                "ec2:DeleteNetworkInterface",
-                "ec2:AssignPrivateIpAddresses",
-                "ec2:UnassignPrivateIpAddresses"
+               - "logs:CreateLogGroup",
+               - "logs:CreateLogStream",
+               - "logs:PutLogEvents",
+               - "ec2:CreateNetworkInterface",
+               - "ec2:DescribeNetworkInterfaces",
+               - "ec2:DeleteNetworkInterface",
+               - "ec2:AssignPrivateIpAddresses",
+               - "ec2:UnassignPrivateIpAddresses"
 
 ![Lambda-Role-2](images/lambda-role-2.png)
 
