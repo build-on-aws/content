@@ -17,7 +17,7 @@ Most would likely agree that **Data Privacy** is an important issue that cannot 
 
 With **Amazon Bedrock**, ***(not limited to)***
 * Your **content** (e.g. prompt data, fine-tuning data, vector store data with RAG (***Retrieval Augmented Generation***) etc.) is not shared with 3rd party model providers (including AWS).
-* You can use **AWS PrivateLink** to establish private connectivity between the **Foundation Models (FM)** and on-premises networks or your **AWS VPC (Virtual Private Cloud)**, without exposing your traffic to the **public internet**. (***this blog post's focus***)
+* You can use **AWS PrivateLink** to establish private connectivity between the **Foundation Models (FM)** and on-premises networks or your **AWS VPC (Virtual Private Cloud)**, without exposing your traffic to the **public internet**. (***This blog post's focus***)
 * Your data is always **encrypted in transit** (***TLS1.2***) and **at rest**. You can use your own keys or [AWS KMS (Key Management Service)](https://aws.amazon.com/kms/) keys to encrypt the data.
 * You can encrypt and store **customize (fine-tuned) models** with KMS key that either managed by AWS or yourself.
   You can further configure VPC for fine-tuning jobs with Bedrock, which prevent the **training data** from being accessible over the internet.
@@ -54,7 +54,7 @@ The figure below shows the reference architecture, where the client can access t
 
 ![PrivateLink to Bedrock](images/lambda-bedrock-architecture.png)
 
- One way of building this up with the following steps:
+ One way to build this up, follow the steps below:
 
 ### 1. **Create Lambda functions as part of your GenAI application interacting with Foundation Models via Bedrock**
 
@@ -105,7 +105,7 @@ Setup inbound and outbound rules:
    
 ### 4. **Connect your Lambda functions to your VPC**
 
-Lambda function is by default running on the Lambda service VPC with public internet access. To connect your lambda function to your own VPC, use a [Hyperplane ENI](https://docs.aws.amazon.com/lambda/latest/dg/foundation-networking.html#foundation-nw-connecting). Hyperplane ENIs provide NAT capabilities from the Lambda VPC to your account VPC. When create or update a Lambda function, Lambda allocates one Hyperplane ENI for each subnet in the function's VPC configuration.
+Lambda function is by default running on the Lambda service VPC with public internet access. To connect your lambda function to your own VPC, use a [Hyperplane ENI (Elastic Network Interface)](https://docs.aws.amazon.com/lambda/latest/dg/foundation-networking.html#foundation-nw-connecting). Hyperplane ENIs provide NAT capabilities from the Lambda VPC to your account VPC. When create or update a Lambda function, Lambda allocates one Hyperplane ENI for each subnet in the function's VPC configuration.
 
   ***4.1. Before connecting your Lambda function to your VPC, you need to give extra permission to the lambda function's execution role***
 
@@ -185,6 +185,7 @@ Test can be executed form your client, or from Lambda console:
   ![Test-1](images/test_1.png)
 
 Check the response:
+
   ![Test-2](images/test_2.png)
 
 Detailed logs from Lambda function's corresponding **CloudWatch logs** are like this. This is useful for troubleshooting.
@@ -199,7 +200,7 @@ If your application uses additional AWS services beyond Amazon Lambda that inter
 
 ## Conclusion
 
-**AWS PrivateLink** is a powerful service to privately connect your VPC with **Amazon Bedrock**.
+**AWS PrivateLink** is a powerful service to privately connect your services on VPC with **Amazon Bedrock**.
 With AWS PrivateLink, you can further control who can access your application and what actions they can take via Security Group, and Endpoint Policy.
 
 Building up your GenAI with **Amazon Bedrock**, your prompts and your data is not used in AWS's first class models or 3rd party models; data remains in the region where they were created; all the customization (fine-tuning model) you do with the model is per customer, per tenant, completely isolated, encrypted, and maintained completely separated from the models themselves.
