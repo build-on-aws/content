@@ -19,11 +19,11 @@ With **Amazon Bedrock**, ***(not limited to)***
 * Your **content** (e.g. prompt data, fine-tuning data, vector store data with RAG (***Retrieval Augmented Generation***) etc.) is not shared with 3rd party model providers (including AWS).
 * You can use **AWS PrivateLink** to establish private connectivity between the **Foundation Models (FM)** and on-premises networks or your **AWS VPC (Virtual Private Cloud)**, without exposing your traffic to the **public internet**. (***this blog post's focus***)
 * Your data is always **encrypted in transit** (***TLS1.2***) and **at rest**. You can use your own keys or [AWS KMS (Key Management Service)](https://aws.amazon.com/kms/) keys to encrypt the data.
-* You can encrypt and store customize (fine-tuned) models with KMS key that either managed by AWS or yourself.
-  You can further configure VPC for fine-tuning jobs with Bedrock, which prevent the training data from being accessible over the internet.
-* **Potential misuse** is prevented by [Bedrock abuse detection](https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html). This feature **automatically** ***(no human review or access to user inputs or model outputs)*** identify and mitigate potential violations of AWS's [Acceptable Use Policy (AUP)](https://aws.amazon.com/aup/) and [Responsible AI Policy](https://aws.amazon.com/machine-learning/responsible-ai/policy/), or a 3rd party model provider's AUP.
+* You can encrypt and store **customize (fine-tuned) models** with KMS key that either managed by AWS or yourself.
+  You can further configure VPC for fine-tuning jobs with Bedrock, which prevent the **training data** from being accessible over the internet.
+* **Potential misuse** is prevented by [Bedrock abuse detection](https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html). This feature **automatically** ***(no human review or access to user inputs or model outputs)*** identifies and mitigates potential violations of AWS's [Acceptable Use Policy (AUP)](https://aws.amazon.com/aup/) and [Responsible AI Policy](https://aws.amazon.com/machine-learning/responsible-ai/policy/), or a 3rd party model provider's AUP.
 
-As you can see, Amazon Bedrock provides you comprehensive security and compliance capabilities. Let's dive a bit deeper on using **AWS PrivateLink** to establish private connectivity between your VPC and the FMs or your fine-tuned models.
+As you can see, Amazon Bedrock provides you comprehensive security and compliance capabilities. Let's dive a bit deeper on using **AWS PrivateLink** to establish private connectivity between your **GenAI application** and the FMs or your fine-tuned models on **Amazon Bedrock**.
 
 ## AWS PrivateLink
 
@@ -40,7 +40,7 @@ The figure below shows how AWS PrivateLink works.
 ![How AWS PrivateLink works](images/PrivateLinkHowItWorks.png)
 
 Security benefits of AWS PrivateLink:
-- **Regulatory Compliance** (e.g. **HIPAA**, **PCI**) - preventing sensitive data (e.g.PII) from traversing the internet.
+- **Regulatory Compliance** (e.g. **HIPAA**, **PCI**) - preventing sensitive data (e.g.PII) from traversing through the internet.
 - **Privately access AWS services** - connecting your VPC to AWS services privately. 
   You can configure security groups of services (e.g. ***Lambda***) on your VPC, so to control the access to the corresponding AWS services (e.g. ***Bedrock***) as well.
 
@@ -54,15 +54,15 @@ The figure below shows the reference architecture, where the client can access t
 
 ![PrivateLink to Bedrock](images/lambda-bedrock-architecture.png)
 
- One way of building the above up is like this:
+ One way of building this up is like this:
 
-1. **Create Lambda functions as part of your GenAI application interacting with Foundation Models via Bedrock.**
+### 1. **Create Lambda functions as part of your GenAI application interacting with Foundation Models via Bedrock.**
 
 I use this [example](https://github.com/mavi888/sam-bedrock-lambda) as a simplified GenAI application, where Lambda functions interacting with Amazon Bedrock to generate text.
 
 ![Lambda Function](images/lambda.png)
 
-2. **Create VPC with private subnets**
+### 2. **Create VPC with private subnets**
 
 From VPC console:
 
@@ -90,10 +90,10 @@ An example of use-east-1 like this:
 ![Bedrock-AZ](images/bedrock_az.png)
 
 
-3. **Create Security Group in the VPC**
+### 3. **Create Security Group in the VPC**
    
    [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) controls the traffic that is allowed to reach (***inbound rules***) and leave (***outbound rules***) the resources that it is associated with.
-   In this case, create a security group with inbound rule allowing HTTPS protocol.
+   In this example, create a security group with inbound rule allowing HTTPS protocol.
    Limit the source IP addresses if you only need to allow list of specific IP address to access your application.
 
 ![SG-1](images/sg_1.png)
@@ -103,31 +103,33 @@ Setup inbound and outbound rules:
 ![SG-2](images/sg_2.png)
 
    
-4. **Connect your Lambda functions to your VPC**
+### 4. **Connect your Lambda functions to your VPC**
 
-Lambda function is by default running on the Lambda service VPC with public internet access. To connect your lambda functions to your own VPC, use a [Hyperplane ENI](https://docs.aws.amazon.com/lambda/latest/dg/foundation-networking.html#foundation-nw-connecting). Hyperplane ENIs provide NAT capabilities from the Lambda VPC to your account VPC. When create or update a Lambda function, Lambda allocates one Hyperplane ENI for each subnet in the function's VPC configuration.
+Lambda function is by default running on the Lambda service VPC with public internet access. To connect your lambda function to your own VPC, use a [Hyperplane ENI](https://docs.aws.amazon.com/lambda/latest/dg/foundation-networking.html#foundation-nw-connecting). Hyperplane ENIs provide NAT capabilities from the Lambda VPC to your account VPC. When create or update a Lambda function, Lambda allocates one Hyperplane ENI for each subnet in the function's VPC configuration.
 
-  ***a. Before connecting your Lambda function to your VPC, you need to give extra permission to the lambda function's execution role***
+  ***4.1. Before connecting your Lambda function to your VPC, you need to give extra permission to the lambda function's execution role***
 
   - Get the Lambda function's execution role:
 
 ![Lambda-Role-1](images/lambda-role-1.png)
 
-  - In [AWS IAM(Identity & Access Management)](https://aws.amazon.com/iam/?nc=sn&loc=0) console, add **AWS managed policy - AWSLambdaVPCAccessExecutionRole**
+
+  - [AWS IAM(Identity & Access Management)](https://aws.amazon.com/iam/?nc=sn&loc=0) console, add AWS managed policy - **AWSLambdaVPCAccessExecutionRole**
 
 ![Lambda-Role-2](images/lambda-role-2.png)
 
 
-  ***b. Configure Lambda VPC access***
+  ***4.2. Configure Lambda VPC access***
+  
   Add the private subnets and security group to the Lambda function's VPC configuration.
 
 ![Lambda-VPC](images/lambda-vpc.png)
 
 Now your Lambda function is connected with your VPC. You can repeat the same steps for other Lambda functions.
 
-5. **Create Bedrock VPC endpoint**
+### 5. **Create Bedrock VPC endpoint**
 
-  In order to connect your VPC and Amazon Bedrock service using AWS PrivateLink, you need to create an [**interface VPV endpoint**](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html#create-interface-endpoint-aws).
+  In order to connect your VPC and Amazon Bedrock service using AWS PrivateLink, you need to create an [**interface VPC endpoint**](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html#create-interface-endpoint-aws).
 
   From VPC console, create endpoint:
 
@@ -137,7 +139,7 @@ Now your Lambda function is connected with your VPC. You can repeat the same ste
 
   ![Bedrock-VPC-endpoint-2](images/bedrock-endpoint-2.png)
 
-  Choose private subnets and VPC created in step 2:
+  Choose VPC and private subnets created in step 2:
 
   ![Bedrock-VPC-endpoint-3](images/bedrock-endpoint-3.png)
 
@@ -160,17 +162,19 @@ Now your Lambda function is connected with your VPC. You can repeat the same ste
 }
 ```
 
-Configure endpoint policy here:
+Configure endpoint policy:
 
 ![Bedrock-VPC-endpoint-policy](images/bedrock-endpoint-policy.png)
 
 
-6. **Test your GenAI application with PrivateLink connection to Amazon Bedrock**
+### 6. **Test your GenAI application with PrivateLink connection to Amazon Bedrock**
 
 After all the above steps, it is time to test your GenAI application by invoking lambda functions.
 
 Test can be executed form your client, or from Lambda console:
   ![Test-1](images/test_1.png)
+
+Check the response:
   ![Test-2](images/test_2.png)
 
 Detailed logs from Lambda function's corresponding **CloudWatch logs** are like this. This is useful for troubleshooting.
@@ -179,7 +183,7 @@ Detailed logs from Lambda function's corresponding **CloudWatch logs** are like 
 
 ## Conclusion
 
-AWS PrivateLink is a powerful service to privately connect your VPC with Amazon Bedrock.
+**AWS PrivateLink** is a powerful service to privately connect your VPC with **Amazon Bedrock**.
 With AWS PrivateLink, you can further control who can access your application and what actions they can take via Security Group, and Endpoint Policy.
 
-Building up your GenAI with Amazon Bedrock, your prompts and your data is not used in AWS's first class models or 3rd party models; data remains in the region where they were created; all the customization (fine-tuning model) you do with the model is per customer, per tenant, completely isolated, encrypted, and maintained completely separated from the models themselves.
+Building up your GenAI with **Amazon Bedrock**, your prompts and your data is not used in AWS's first class models or 3rd party models; data remains in the region where they were created; all the customization (fine-tuning model) you do with the model is per customer, per tenant, completely isolated, encrypted, and maintained completely separated from the models themselves.
