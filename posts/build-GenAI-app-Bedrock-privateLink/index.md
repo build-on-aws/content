@@ -54,9 +54,9 @@ The figure below shows the reference architecture, where the client can access t
 
 ![PrivateLink to Bedrock](images/lambda-bedrock-architecture.png)
 
- One way of building this up is like this:
+ One way of building this up with the following steps:
 
-### 1. **Create Lambda functions as part of your GenAI application interacting with Foundation Models via Bedrock.**
+### 1. **Create Lambda functions as part of your GenAI application interacting with Foundation Models via Bedrock**
 
 I use this [example](https://github.com/mavi888/sam-bedrock-lambda) as a simplified GenAI application, where Lambda functions interacting with Amazon Bedrock to generate text.
 
@@ -93,7 +93,7 @@ An example of use-east-1 like this:
 ### 3. **Create Security Group in the VPC**
    
    [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) controls the traffic that is allowed to reach (***inbound rules***) and leave (***outbound rules***) the resources that it is associated with.
-   In this example, create a security group with inbound rule allowing HTTPS protocol.
+   In this example, create a security group with inbound rule allowing **HTTPS** protocol.
    Limit the source IP addresses if you only need to allow list of specific IP address to access your application.
 
 ![SG-1](images/sg_1.png)
@@ -115,6 +115,16 @@ Lambda function is by default running on the Lambda service VPC with public inte
 
 
   - [AWS IAM(Identity & Access Management)](https://aws.amazon.com/iam/?nc=sn&loc=0) console, add AWS managed policy - **AWSLambdaVPCAccessExecutionRole**
+ 
+ This role allows Lambda to do the following actions:
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "ec2:CreateNetworkInterface",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DeleteNetworkInterface",
+                "ec2:AssignPrivateIpAddresses",
+                "ec2:UnassignPrivateIpAddresses"
 
 ![Lambda-Role-2](images/lambda-role-2.png)
 
@@ -179,6 +189,12 @@ Check the response:
 
 Detailed logs from Lambda function's corresponding **CloudWatch logs** are like this. This is useful for troubleshooting.
   ![Test-3](images/test_3.png)
+
+
+### Summary
+This example is focusing on Lambda as GenAI application key component.
+
+If your application uses additional AWS services beyond Amazon Lambda that interact with Amazon Bedrock and support VPC connections, then the same approach described in this blog can also be applied to those services.
 
 
 ## Conclusion
