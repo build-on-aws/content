@@ -117,14 +117,15 @@ Lambda function is by default running on the Lambda service VPC with public inte
   - [AWS IAM(Identity & Access Management)](https://aws.amazon.com/iam/?nc=sn&loc=0) console, add AWS managed policy - **AWSLambdaVPCAccessExecutionRole**
  
  This role allows Lambda to do the following actions:
-- "logs:CreateLogGroup",
-- "logs:CreateLogStream",
-- "logs:PutLogEvents",
-- "ec2:CreateNetworkInterface",
-- "ec2:DescribeNetworkInterfaces",
-- "ec2:DeleteNetworkInterface",
-- "ec2:AssignPrivateIpAddresses",
+- "logs:CreateLogGroup"
+- "logs:CreateLogStream"
+- "logs:PutLogEvents"
+- "ec2:CreateNetworkInterface"
+- "ec2:DescribeNetworkInterfaces"
+- "ec2:DeleteNetworkInterface"
+- "ec2:AssignPrivateIpAddresses"
 - "ec2:UnassignPrivateIpAddresses"
+
 
 ![Lambda-Role-2](images/lambda-role-2.png)
 
