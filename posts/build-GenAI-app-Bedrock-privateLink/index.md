@@ -19,7 +19,7 @@ With **Amazon Bedrock**, ***(not limited to)***
 * Your **content** (e.g. prompt data, fine-tuning data, vector store data with RAG (***Retrieval Augmented Generation***) etc.) is not shared with 3rd party model providers (including AWS).
 * You can use **AWS PrivateLink** to establish private connectivity between the **Foundation Models (FM)** and on-premises networks or your **AWS VPC (Virtual Private Cloud)**, without exposing your traffic to the **public internet**. (***This blog post's focus***)
 * Your data is always **encrypted in transit** (***TLS1.2***) and **at rest**. You can use your own keys or [AWS KMS (Key Management Service)](https://aws.amazon.com/kms/) keys to encrypt the data.
-* You can encrypt and store **customize (fine-tuned) models** with KMS key that either managed by AWS or yourself.
+* You can encrypt and store **customized (fine-tuned) models** with KMS key that either managed by AWS or by yourself.
   You can further configure VPC for fine-tuning jobs with Bedrock, which prevent the **training data** from being accessible over the internet.
 * **Potential misuse** is prevented by [Bedrock abuse detection](https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html). This feature **automatically** ***(no human review or access to user inputs or model outputs)*** identifies and mitigates potential violations of AWS's [Acceptable Use Policy (AUP)](https://aws.amazon.com/aup/) and [Responsible AI Policy](https://aws.amazon.com/machine-learning/responsible-ai/policy/), or a 3rd party model provider's AUP.
 
@@ -50,7 +50,7 @@ In addition to the security benefit, AWS PrivateLink also makes it easier to con
 
 There are many patterns to build up GenAI application with Amazon Bedrock. Let's focus on demonstration of how to establish private link with Bedrock, with ***Amazon Lambda function*** as the key component of a GenAI application.
 
-The figure below shows the reference architecture, where the client can access to the GenAI application via AWS PrivateLink. Client can be on-premise or on AWS VPC, which can be the same or different from where the GenAI application located. Be aware that the GenAI application should be on the **same region** with the connected Amazon Bedrock endpoint. As the time of writing this blog post, Amazon Bedrock is not support in all the AWS Regions, so remember to check the [supported regions](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#bedrock-regions).
+The figure below shows the reference architecture, where the client can access to the GenAI application via AWS PrivateLink. Client can be on-premise or on AWS VPC (which can be the same or different from where the GenAI application located). Be aware that the GenAI application should be on the **same region** with the connected Amazon Bedrock endpoint. As the time of writing this blog post, Amazon Bedrock is not supported in all the AWS Regions, so remember to check the [supported regions](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#bedrock-regions).
 
 ![PrivateLink to Bedrock](images/lambda-bedrock-architecture.png)
 
@@ -183,6 +183,7 @@ Configure endpoint policy:
 After all the above steps, it is time to test your GenAI application by invoking lambda functions.
 
 Test can be executed form your client, or from Lambda console:
+
   ![Test-1](images/test_1.png)
 
 Check the response:
@@ -190,6 +191,7 @@ Check the response:
   ![Test-2](images/test_2.png)
 
 Detailed logs from Lambda function's corresponding **CloudWatch logs** are like this. This is useful for troubleshooting.
+
   ![Test-3](images/test_3.png)
 
 
@@ -201,7 +203,7 @@ If your application uses additional AWS services beyond Amazon Lambda that inter
 
 ## Conclusion
 
-**AWS PrivateLink** is a powerful service to privately connect your services on VPC with **Amazon Bedrock**.
+**AWS PrivateLink** is powerful to privately connect your services on VPC with **Amazon Bedrock**.
 With AWS PrivateLink, you can further control who can access your application and what actions they can take via Security Group, and Endpoint Policy.
 
 Building up your GenAI with **Amazon Bedrock**, your prompts and your data is not used in AWS's first class models or 3rd party models; data remains in the region where they were created; all the customization (fine-tuning model) you do with the model is per customer, per tenant, completely isolated, encrypted, and maintained completely separated from the models themselves.
