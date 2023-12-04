@@ -11,7 +11,7 @@ authorName: Tony Mullen
 additionalAuthors: 
   - authorGithubAlias: pmatkar
     authorName: Prasad Maktar
-date: 2023-10-23
+date: 2023-12-04
 images:
   thumbnail: ./images/AWS_Lets Talk About Data_Logo_DARK_Transparent.png
   banner: ./images/AWS_Lets Talk About Data_Logo_DARK_Transparent.png
