@@ -68,4 +68,7 @@ Come learn live with us! We stream every Wednesday at 4pm CET.
 | **S1E24** | Meet workloads requirements without RAC in AWS | Oct 4, 2023 | [Watch here](https://www.twitch.tv/videos/1952451035) |[Show Notes](/livestreams/lets-talk-about-data/2023-10-04) |
 | **S1E25** | Can zero be a hero in the world of ETL | Oct 11, 2023 | [Watch here](https://www.twitch.tv/videos/1952451659) |[Show Notes](/livestreams/lets-talk-about-data/2023-10-11) |
 | **S1E26** | Postgres Tools and Features in RDS from the perspective of an Oracle DBA | Oct 18, 2023 | [Watch here](https://www.twitch.tv/videos/1954115395) |[Show Notes](/livestreams/lets-talk-about-data/2023-10-18) |
-
+| **S1E27** | Amazon Opensearch integration with Security Lake | Oct 25, 2023 | [Watch here](https://www.twitch.tv/videos/1971030897) |[Show Notes](/livestreams/lets-talk-about-data/2023-10-25) |
+| **S1E28** | Aurora, Redshift & Quicksight | Nov 1, 2023 | [Watch here](https://www.twitch.tv/videos/1971031389) |[Show Notes](/livestreams/lets-talk-about-data/2023-11-01) |
+| **S1E29** | Data monetisation | Nov 15, 2023 | [Watch here](https://www.twitch.tv/videos/1983392065) |[Show Notes](/livestreams/lets-talk-about-data/2023-11-15) |
+| **S1E30** | How to consolidate your RDS Oracle instances using  Multitenant | Nov 22, 2023 | [Watch here](https://www.twitch.tv/videos/1985940707) |[Show Notes](/livestreams/lets-talk-about-data/2023-11-22) |
