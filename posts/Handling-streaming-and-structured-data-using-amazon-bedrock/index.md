@@ -26,15 +26,13 @@ date: 2023-12-05
 
 At [Telescope](https://telescope.co/), we work with financial and brokerage applications to power their rich and intelligent stock discovery experiences using AI. To provide these experiences, we needed a large language model (LLM) that is predictable given the financial industry we operate in, provides fast user experiences and has the ability to understand and process structured financial markets data. 
 
-In this blog post, you will learn about our experience adopting[Claude](https://aws.amazon.com/bedrock/claude/) on [Amazon Bedrock](https://aws.amazon.com/bedrock/), how to design effective prompts when handling structured data, and how to handle streaming inputs and outputs to provide fast user experiences. For those adopting Claude models for their generative AI capabilities, it's crucial to understand that creating tailored prompts, rather than reusing ones from other models, is key to fully harnessing the model's capabilities for optimal results and generate consistent responses. 
+In this blog post, you will learn about our experience adopting [Claude](https://aws.amazon.com/bedrock/claude/) on [Amazon Bedrock](https://aws.amazon.com/bedrock/), how to design effective prompts when handling structured data, and how to handle streaming inputs and outputs to provide fast user experiences. For those adopting Claude models for their generative AI capabilities, it's crucial to understand that creating tailored prompts, rather than reusing ones from other models, is key to fully harnessing the model's capabilities for optimal results and generate consistent responses. 
 
 ## Initial impressions
 
-The moment we gained access to Amazon Bedrock from our [AWS account team](https://aws.amazon.com/startups/learn/meet-your-aws-account-team), we eagerly adopted Claude model. It has been a game-changer, particularly in terms of speed and context window size (as at time of writing, these are 200,000 tokens which equates to about 150,000 words). 
+The moment we gained access to Amazon Bedrock from our [AWS account team](https://aws.amazon.com/startups/learn/meet-your-aws-account-team), we eagerly adopted [Claude](https://aws.amazon.com/bedrock/claude/) model. It has been a game-changer, particularly in terms of speed and context window size (as at time of writing, these are 200,000 tokens which equates to about 150,000 words). 
 
 We evaluated a number of models for our use case of providing investment suggestions. The first criteria was predictable results on complex language tasks. This is especially important given the financial industry we operate in. In addition, we operate with vast amounts of structured financial markets data and we needed a model that can process and understand structured data. Furthermore, our product is used by consumer applications where fast user experience is paramount. Therefore, having streaming capabilities is critical. Given the depth of our requests, some can take over 30 seconds to fully complete. Having results returned in chunks as soon as they have been computed matters significantly for the user experiences that we wanted.
-
-Upon evaluation, we decided to use [Claude](Anthropic) on Amazon Bedrock. 
 
 ## Prompting basics
 
@@ -269,11 +267,11 @@ company.Ticker, company.CEO)
 
 ## Conclusion
 
-Our journey with Claude on [Amazon Bedrock](https://aws.amazon.com/bedrock/) revealed substantial benefits in designing prompts that maximize the effectiveness. In particular, using XML for structured data. As accuracy is critical, this significantly enhances the reliability of parsing structured response data. As essential to provide fast user experiences, we leveraged Bedrock's streaming capabilities. We provided an example of how you can partially parse structured response data and provide this to the user as soon as they are processed.
+Our journey with Claude on [Amazon Bedrock](https://aws.amazon.com/bedrock/) revealed substantial benefits in designing prompts that maximize the effectiveness. In particular, using XML for structured data for greater accuracy. As essential to provide fast user experiences, we leveraged Bedrock's streaming capabilities. We provided an example of how you can partially parse structured response data and provide this to the user as soon as they are processed.
 
 To learn more about Telescope, visit our [website](https://telescope.co/).
 
-To learn more about generative AI on AWS, please see resources:
+To get started with generative AI on AWS, please see resources:
 
 * [Generative AI on AWS Community](https://community.aws/generative-ai)
 * [Patterns for Building Generative AI Applications on Amazon Bedrock](https://community.aws/posts/build-generative-ai-applications-with-amazon-bedrock)
