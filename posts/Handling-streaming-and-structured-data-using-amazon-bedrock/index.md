@@ -14,7 +14,7 @@ authorName: Andrew Bucknall
 additionalAuthors: 
   - authorGithubAlias: niccatsmy
     authorName: Nicola Smyth
-- authorGithubAlias: wirjo
+  - authorGithubAlias: wirjo
     authorName: Daniel Wirjo
 date: 2023-12-05
 ---
