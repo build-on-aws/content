@@ -63,7 +63,7 @@ Now we can save this code by pressing Ctrl + s (Cmd + s on Mac) and commit the c
 
 ![Commit to main](images/commitide.png)
 
-We will come back to modify this code later. For now, let's move on to allowing GitLab to modify resources in our AWS account.
+We will come back to modify this code later, so let's leave this tab open. For now, let's move on to allowing GitLab to modify resources in our AWS account.
 
 ### Configure an Identity Provider in IAM
 
@@ -123,7 +123,7 @@ Replace `{GITLAB_GROUP}` with your username (eg. `kaizadwadia`), `{GITLAB_PROJEC
 }
 ```
 
-Upon clicking "Update Policy" the role should be ready for use by GitLab CI. Note the Role ARN which is available on this page, as it will be used in a [later step](#write-the-instructions-for-the-cicd-pipeline).
+Upon clicking "Update Policy" the role should be ready for use by GitLab CI. Note the Role ARN which is available on this page, as it will be used in a [later step](#write-the-instructions-for-the-cicd-pipeline). To learn more about creating the trust policy, check out the [GitLab documentation page](https://docs.gitlab.com/ee/ci/cloud_services/aws/).
 
 ### Create the AWS Resources Manage Terraform State
 
@@ -228,3 +228,11 @@ By following these steps, you can take the manual work and errors out of deployi
 As you expand your infrastructure, be sure to continue using security best practices like least privilege IAM roles. And leverage GitLab's power with features like the Terraform template library.
 
 Now whenever inspiration strikes, you can implement and deploy new AWS infrastructure automatically in a fraction of the time. You're ready to use GitLab and Terraform to streamline your cloud deployments!
+
+To learn more about deploying to AWS using CI/CD, check out the following resources:
+
+* [Setting Up OpenID Connect with GitLab CI/CD to Provide Secure Access to Environments in AWS Accounts](https://aws.amazon.com/blogs/apn/setting-up-openid-connect-with-gitlab-ci-cd-to-provide-secure-access-to-environments-in-aws-accounts/)
+* [Continuous Integration with GitLab at 10,000 Feet](https://community.aws/tutorials/continuous-integration-with-gitlab-at-10000-feet)
+* [Build Efficient CI/CD Pipelines for Connected Microservices in Under an Hour Using AWS Copilot](https://community.aws/tutorials/ci-cd-pipelines-for-two-connected-services-using-aws-copilot)
+* [Build Your iOS Applications Faster with a CI/CD Pipeline](https://community.aws/posts/cicd-for-ios-app)
+* [Bootstrapping your Terraform automation with Amazon CodeCatalyst](https://community.aws/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst)
