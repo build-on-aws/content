@@ -1,5 +1,9 @@
 # Content Pull Request Checklist
 
+⚠️⚠️⚠️⚠️⚠️
+Before creating this PR, if you are authoring a blog / opinion piece, please do not create a PR as we have released the new Post Editor allowing authoring directly in your browser on community.aws. Please see [this post](https://community.aws/content/2YmrbVIkokIRiRtjDFTUWbAdcBi/ready-set-post-community-articles-are-live-on-community-aws) with all the details on how to get started publishing your content!
+⚠️⚠️⚠️⚠️⚠️
+
 Please check to make sure your content submission meets the following requirements by adding an `x` between the brackets:
 
 - [ ] The title of this pull request reflects the title of my content.

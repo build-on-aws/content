@@ -3,6 +3,9 @@ title: "What Are JavaScript Engines?"
 description: "Ever wonder what kind of technology underlies JavaScript, the language of the web? Learn about the history and evolution of JavaScript's core."
 tags:
     - javascript
+    - students
+spaces: 
+     - students
 authorGithubAlias: jlooper
 authorName: Jen Looper
 date: 2022-11-09

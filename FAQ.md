@@ -1,5 +1,7 @@
 # Frequently Asked Questions
 
+Please note these only apply for AWS employees authoring content using the GitHub process, all contributions from our community should use the Post Editor - [all the details are available here](https://community.aws/content/2YmrbVIkokIRiRtjDFTUWbAdcBi/ready-set-post-community-articles-are-live-on-community-aws).
+
 * [Writing](#writing)
   * [Markdown Syntax](#markdown-syntax)
   * [Where do I find the general Markdown syntax guide?](#where-do-i-find-the-general-markdown-syntax-guide)
