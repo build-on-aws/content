@@ -9,6 +9,7 @@ tags:
     - students
 spaces:
   - cost-optimization
+  - students
 waves:
   - cost
 authorGithubAlias: srhowell
