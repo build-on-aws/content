@@ -41,9 +41,6 @@ Check out the recording here:
 
 https://www.twitch.tv/videos/1922979917
 
-
-?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq
-
 ## Links from today's episode
 
 - [Blog post about the streaming feature](https://aws.amazon.com/blogs/machine-learning/elevating-the-generative-ai-experience-introducing-streaming-support-in-amazon-sagemaker-hosting/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq)

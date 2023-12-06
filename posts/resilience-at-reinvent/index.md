@@ -1,5 +1,5 @@
 ---
-title: "Twelve Resilience Sessions at ReInvent 2023 You Won't Want to Miss"
+title: "Twelve Resilience Sessions at re:Invent 2023 You Won't Want to Miss"
 description: "There is a lot of great stuff to see and do at re:Invent! Here we pare it down to the 12 must-see sessions for those building resilient architectures on AWS."
 tags:
     - resilience
@@ -22,6 +22,8 @@ date: 2023-10-12
 
 |ToC|
 |---|
+
+_Before we start, if you are looking for suggestions related to Cloud Operations sessions at re:Invent, check out Darko's post [HERE](/posts/cloudops-at-reinvent23)._
 
 Running your application can be a challenge. Unexpected usage patterns, component failures, network issues, and flaky dependencies are part of the [chaos of production](/posts/chaos-engineering-2-minutes). Fortunately, running your application on AWS cloud gives you many tools and techniques to design resilience into your application, and it is [resilience that enables your application to resist or recover from all these challenges](/concepts/should-know-resilience).
 

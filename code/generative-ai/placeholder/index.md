@@ -12,17 +12,19 @@ tags:
 authorGithubAlias: fbouteruche
 authorName: François Bouteruche
 additionalAuthors:
-  - authorGithubAlias: aws-banjo
-    authorName: Banjo Obayomi
-  - authorGithubAlias: vsenger
-    authorName: Vinicius Senger
-  - authorGithubAlias: debnsuma
-    authorName: Suman Debnath
-  - authorGithubAlias: riferrei
-    authorName: Ricardo Ferreira
   - authorGithubAlias: abhirockzz
     authorName: Abhishek Gupta
-date: 2023-10-26
+  - authorGithubAlias: aws-banjo
+    authorName: Banjo Obayomi
+  - authorGithubAlias: dennistraub
+    authorName: Dennis Traub
+  - authorGithubAlias: riferrei
+    authorName: Ricardo Ferreira
+  - authorGithubAlias: debnsuma
+    authorName: Suman Debnath
+  - authorGithubAlias: vsenger
+    authorName: Vinicius Senger
+date: 2023-11-23
 ---
 
 Future page for more details on [Amazon Bedrock Code Samples](/code/generative-ai).
