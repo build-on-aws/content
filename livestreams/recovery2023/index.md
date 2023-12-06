@@ -1,10 +1,11 @@
 ---
-title: "re:Covery 2023"
+title: "Build On re:Cap 2023"
 description: "Sit back, relax, grab a warm beverage ☕️, and join us as we take some to recover, recap and build things with the latest and greatest launches from AWS re:Invent 2023"
 tags:
   - aws
   - build-on-live
   - twitch
+  - reinvent
   - reinvent23
 spaces:
   - reinvent
@@ -17,7 +18,7 @@ images:
   background: ./images/recover_square.png.png
 ---
 
-![re:Cover event banner](./images/recover_banner.png)
+![re:Cap event banner](./images/recover_banner.png)
 
 Join us for a comprehensive 3-day live stream designed to re:Cap and re:Cover from last week's AWS re:Invent 2023. The purpose of this live stream event is to demonstrate to you how to use and implement the latest launches and features in a practical manner. Each day will consist of a 4-5 hour long live stream, dedicated to achieving a specific goal by utilizing the new features. 
 
