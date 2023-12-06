@@ -2,11 +2,11 @@
 title: "Streamline AWS Deployments with GitLab CI and Terraform"
 description: "A Step-By-Step Guide for deploying code using CI/CD"
 tags:
-    - DevOps
-    - Terraform
+    - devops
+    - terraform
     - CICD
-    - IaC
-    - Git
+    - infrastructure-as-code
+    - gitlab
 authorGithubAlias: kaizadwadia
 authorName: Kaizad Wadia
 date: 2023-12-20
@@ -125,17 +125,17 @@ Replace `{GITLAB_GROUP}` with your username (eg. `kaizadwadia`), `{GITLAB_PROJEC
 
 Upon clicking "Update Policy" the role should be ready for use by GitLab CI. Note the Role ARN which is available on this page, as it will be used in a [later step](#write-the-instructions-for-the-cicd-pipeline). To learn more about creating the trust policy, check out the [GitLab documentation page](https://docs.gitlab.com/ee/ci/cloud_services/aws/).
 
-### Create the AWS Resources Manage Terraform State
+### Create the AWS Resources to Manage Terraform State
 
 When creating resources with Terraform, files are created to manage the state of the infrastructure created by Terraform. Terraform state is a file that tracks the infrastructure that Terraform has created. It maps real-world resources to what is defined in your Terraform configuration files. The state file allows Terraform to determine what infrastructure needs to be created, updated, or destroyed based on the desired configuration.
 
 State lock is a mechanic that prevents multiple Terraform commands from accessing and trying to modify the state at the same time. When you run a Terraform command, it will acquire a lock on the state so that no other commands can access it. This prevents race conditions where two commands try to update the state simultaneously in an unsafe way. Once the command finishes, it releases the lock so other commands can run.
 
-We will create an S3 Bucket to house the state file, and a DynamoDB Table to host the state locking mechanism. Both will be done in the "eu-west-1" region for this tutorial. To create the S3 Bucket, head over to the S3 page in the AWS Console and click "Create Bucket" on the right side. Give the bucket a globally unique name, such as "terraform-state-bucket-XXXX" (where XXXX is a random sequence of digits).
+We will create an S3 bucket to house the state file, and a DynamoDB Table to host the state locking mechanism. Both will be done in the "eu-west-1" region for this tutorial. To create the S3 bucket, head over to the S3 page in the AWS Console and click "Create bucket" on the right side. Give the bucket a globally unique name, such as "terraform-state-bucket-XXXX" (where XXXX is a random sequence of digits).
 
 ![S3 Bucket](images/s3.png)
 
-Now to create a DynamoDB Table, we can visit the DynamoDB page on the AWS Console, and click on "Create table" on the right side of the page. Make sure it is done in the same region as the S3 Bucket. For the table name, we can give it "terraform-state-lock-table". We can call the Partition Key "LockID", and have it be a string.
+Now to create a DynamoDB Table, we can visit the DynamoDB page on the AWS Console, and click on "Create table" on the right side of the page. Make sure it is done in the same region as the S3 bucket. For the table name, we can give it "terraform-state-lock-table". We can call the Partition Key "LockID", and have it be a string.
 
 ![DynamoDB Table](images/dynamo.png)
 
@@ -200,7 +200,7 @@ provider "aws" {
 }
 ```
 
-Make sure you replace "XXXX" with the actual name of the S3 Bucket you created earlier. Note that the profile "oidc" is the same as the profile created by the pipeline, so that the Terraform script knows the role to assume while provisioning the resources. The same applies with the profile for the provider. Note that these two don't necessarily need to be the same, so you could use one role for accessing the backend and another for deploying the resources. The "key" parameter in the backend denotes the name of the file that is created to manage the Terraform state in the S3 Bucket. The "encrypt" parameter determines whether [SSE-S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html) is used to encrypt the file in the Bucket.
+Make sure you replace "XXXX" with the actual name of the S3 bucket you created earlier. Note that the profile "oidc" is the same as the profile created by the pipeline, so that the Terraform script knows the role to assume while provisioning the resources. The same applies with the profile for the provider. Note that these two don't necessarily need to be the same, so you could use one role for accessing the backend and another for deploying the resources. The "key" parameter in the backend denotes the name of the file that is created to manage the Terraform state in the S3 bucket. The "encrypt" parameter determines whether [SSE-S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html) is used to encrypt the file in the bucket.
 
 Once we have this written, commit this to the repository using the same method we used in the [first step](#build-the-repository). As soon as we do so, our pipeline should start automatically upon committing our code to the main branch. We can see it through GitLab if we go back to our repository's home page and click on "Jobs" under the "Build" dropdown menu on the sidebar.
 
@@ -213,7 +213,7 @@ If everything goes as planned we should see that our Queue has been created in t
 To clean-up your AWS account, remember to delete the following resources:
 
 * The SQS Queue created by Terraform
-* The S3 Bucket called "terraform-state-bucket-XXXX"
+* The S3 bucket called "terraform-state-bucket-XXXX"
 * The DynamoDB Table called "terraform-state-lock-table"
 * The IAM Role, "GitLabRole" and Identity Provider, "gitlab.com".
 
