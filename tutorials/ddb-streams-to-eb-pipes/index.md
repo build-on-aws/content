@@ -1,6 +1,6 @@
 ---
 title: "Sending Events From DynamoDB Using EventBridge Pipes"
-description: "Save time with a managed no-code integration for sending events"
+description: "Save time with a managed no-code integration for sending events."
 tags:
     - event-driven
     - serverless
@@ -12,22 +12,22 @@ authorName: Kaizad Wadia
 additionalAuthors:
   - authorName: Yifei Ding
     authorGithubAlias: yifei-ding
-date: 2023-11-20
+date: 2023-12-06
 ---
 
-As application architectures grow in complexity, the number of events and data sources that need to integrate also increases. This often leads developers to write custom integration code which is time-consuming, difficult to maintain, and prone to errors. Amazon EventBridge Pipes aim to simplify these complex event-driven architectures by allowing different services to be connected without writing custom integration code.
+As application architectures grow in complexity, the number of events and data sources that need to integrate also increases. This often leads developers to write custom integration code, which is time-consuming, difficult to maintain, and prone to errors. Amazon EventBridge Pipes aim to simplify these complex, event-driven architectures by allowing different services to be connected without writing custom integration code.
 
 ## Overview
 
-EventBridge Pipes provide a no-code way to automatically replicate events between EventBridge buses, SQS/SNS topics, and DynamoDB Streams. A [common use case for DynamoDB streams](https://aws.amazon.com/blogs/database/dynamodb-streams-use-cases-and-design-patterns/) is to detect DynamoDB table updates and publish corresponding events. Traditionally this required custom Lambda functions to stream DynamoDB events. With EventBridge Pipes, you can now implement this pattern in minutes without writing any code. However, in cases where the desired target is not in the [list of targets supported by EventBridge Pipes](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html), or more complex operations need to be performed during transformation such as enrichment of the data from other sources, a custom Lambda function is still necessary. That being said, EventBridge Pipes still allows simple code-free integrations for a range of different services including [but not limited to DynamoDB streams](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-source.html).
+EventBridge Pipes provide a no-code way to automatically replicate events between EventBridge buses, SQS/SNS topics, and DynamoDB Streams. A [common use case for DynamoDB streams](https://aws.amazon.com/blogs/database/dynamodb-streams-use-cases-and-design-patterns/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-streams-to-eb-pipes) is to detect DynamoDB table updates and publish corresponding events. Traditionally this required custom Lambda functions to stream DynamoDB events. With EventBridge Pipes, you can now implement this pattern in minutes without writing any code. However, in cases where the desired target is not in the [list of targets supported by EventBridge Pipes](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-streams-to-eb-pipes), or more complex operations need to be performed during transformation such as enrichment of the data from other sources, a custom Lambda function is still necessary. That being said, EventBridge Pipes still allows simple code-free integrations for a range of different services including [but not limited to DynamoDB streams](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-source.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-streams-to-eb-pipes).
 
 This guide will walk through how to quickly set up an EventBridge Pipe that detects DynamoDB table updates and publishes events to an EventBridge bus in the AWS console. By following this simple how-to, you'll see firsthand how EventBridge Pipes can simplify complex event integrations.
 
-![Architecture]( images/ebpipes-ddbstreams-diagram.jpg "Architecture Diagram")
+![Architecture](images/ebpipes-ddbstreams-diagram.jpg "Architecture Diagram")
 
 ### Prerequisites
 
-All you need is an AWS account with full permissions to access DynamoDB, EventBridge and CloudWatch Logs.
+All you need is an AWS account with full permissions to access DynamoDB, EventBridge, and CloudWatch Logs.
 
 | Attributes                |                                   |
 | ------------------- | -------------------------------------- |
@@ -36,13 +36,13 @@ All you need is an AWS account with full permissions to access DynamoDB, EventBr
 | 💰 Cost to complete | USD $0.01      |
 | 🧩 Prerequisites    | [AWS Account](https://aws.amazon.com/resources/create-account/)|
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎    |
-| ⏰ Last Updated     | 2023-11-14                             |
+| ⏰ Last Updated     | 2023-12-06                             |
 
 ## Walkthrough
 
 ### Step 1: Creating a DynamoDB Table and Enabling Streams
 
-First, login to the AWS Management Console and navigate to the DynamoDB service. Click on "Create Table" to begin setting up the new table.
+First, log in to the AWS Management Console and navigate to the DynamoDB service. Click on "Create Table" to begin setting up the new table.
 
 For Table name, enter "GameScores". For the Primary key, enter "GameId" for the partition key and "GamerTag" for the sort key. These will be used to uniquely identify each item in the table.
 
@@ -50,7 +50,7 @@ Under Table settings, we can customize read/write capacity as needed for our exp
 
 The default settings are left for the key attributes GameId and GamerTag.
 
-![DynamoDB Table Creation Image]( images/createtable.png "Create the Table")
+![DynamoDB Table Creation Image](images/createtable.png "Create the Table")
 
 Once all fields are entered, scroll down and click "Create" to finish creating the GameScores table. The table will be ready to store game score data with the specified schema.
 
@@ -60,7 +60,7 @@ To enable streams on the table, in the DynamoDB console select the "GameScores" 
 
 Keep in mind that enabling streams does not consume any read or write capacity units (RCUs or WCUs), and so will not affect the performance of the table. However, the data in the streams is stored in shards, and this storage is something that is charged seperately from the table charges. You also pay for accessing the stream records. If you enable streams on an on-demand capacity mode table, you pay per request for the stream records. If the table uses provisioned capacity, stream requests are free but you pay for shard storage and data transfer. Stream records are kept for 24 hours by default. So shards will accumulate over time as records expire. Make sure to delete the table when no longer needed to stop incurring shard storage charges.
 
-![DynamoDB Streams Enable]( images/enablestreams.png "Enabling Streams")
+![DynamoDB Streams Enable](images/enablestreams.png "Enabling Streams")
 
 ### Step 2: Create a Custom Event Bus in Amazon EventBridge
 
@@ -70,13 +70,13 @@ Give the Event bus the name "game-bus". The name can contain up to 256 character
 
 Now we will create a rule that sends all events from that bus into a CloudWatch log group so that we can see the events published to it. Go to "Rules" on the left hand side and once there, change the Event bus from the default one to "game-bus".
 
-![EventBridge Rules]( images/rules.png "EventBridge Rules")
+![EventBridge Rules](images/rules.png "EventBridge Rules")
 
 Click on "Create Rule" and for a rule name, enter "all-game-events". Optionally enter a description. Make sure the Event bus selected is "game-bus".
 
-![EventBridge Rule Step 1]( images/createrules1.png "EventBridge Rule Step 1")
+![EventBridge Rule Step 1](images/createrules1.png "EventBridge Rule Step 1")
 
-After going to the next step, click on "All Events" as the event source. This may display a warning (as displayed in the image below) but we do want to have visibility into whatever events are sent to the bus. The warning is shown because rules are generally used to filter events coming into the Event bus, and our rule is doing no filtering. You may create rules that performs filtering but for this example we will perform filtering prior to adding the event to the Event bus. This rule is just to have visibility into the Event bus. We can leave everything else in this step as is and continue.
+After going to the next step, click on "All Events" as the event source. This may display a warning (as displayed in the image below), but we do want to have visibility into whatever events are sent to the bus. The warning is shown because rules are generally used to filter events coming into the Event bus, and our rule is doing no filtering. You may create rules that performs filtering but for this example we will perform filtering prior to adding the event to the Event bus. This rule is just to have visibility into the Event bus. We can leave everything else in this step as is and continue.
 
 ![EventBridge Rule Step 2]( images/createrules1.png "EventBridge Rule Step 2")
 
@@ -156,7 +156,7 @@ Now that we configured filtering, let's transform the payload using the "Target 
 }
 ```
 
-An [input transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-input-transformation.html) object looks syntatically similar to a JSON document, except for the fact that the dynamic values inside the "<>" tags are replaced by the values from the event and metadata from the Pipe, such as the Pipe name. Hence, these do not use quotes. Static values can also be inserted with the usual JSON syntax.
+An [input transformer](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-input-transformation.html?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=ddb-streams-to-eb-pipes) object looks syntatically similar to a JSON document, except for the fact that the dynamic values inside the "<>" tags are replaced by the values from the event and metadata from the Pipe, such as the Pipe name. Hence, these do not use quotes. Static values can also be inserted with the usual JSON syntax.
 
 ![Transforming Events]( images/transformer.png "Transforming Events")
 
