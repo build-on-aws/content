@@ -213,7 +213,7 @@ If everything goes as planned we should see that our queue has been created in t
 To clean-up your AWS account, remember to delete the following resources:
 
 * The SQS Queue created by Terraform
-* The S3 bucket called "terraform-state-bucket-XXXX"
+* The S3 bucket we created to store the Terraform state files
 * The DynamoDB Table called "terraform-state-lock-table"
 * The IAM Role, "GitLabRole" and Identity Provider, "gitlab.com"
 
