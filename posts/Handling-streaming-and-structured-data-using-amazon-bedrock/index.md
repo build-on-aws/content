@@ -10,6 +10,7 @@ spaces:
 waves:
   - generative-ai
 authorGithubAlias: cobbweb
+githubUserLabel: community
 authorName: Andrew Bucknall
 additionalAuthors: 
   - authorGithubAlias: niccatsmy
