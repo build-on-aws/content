@@ -32,7 +32,7 @@ The “Lets Talk About Data” twitch show is a weekly update for data professio
 
 ## Contact 📬
 
-If you have any questions, comments, or ideas, **reach out** to us. Feel free to send us an email at: [@amazon.com](mailto:@amazon.com)
+If you have any questions, comments, or ideas, **reach out** to us. Feel free to send us an email at: mailto:lets-talk-about-data-show-hosts@amazon.com
 
 ## Schedule 📆
 
