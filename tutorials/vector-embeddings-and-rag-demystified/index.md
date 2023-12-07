@@ -24,7 +24,7 @@ In the rapidly evolving landscape of data engineering and machine learning, the 
 
 Through this post, we will embark on a journey to understand the nuts and bolts of vector embeddings and how we can store those embeddings in a vector store using Amazon Bedrock, Amazon Aurora and LangChain. From understanding the basic concept of an embedding to exploring advanced vector storage techniques and indexing methods, we will cover all the essential aspects that make vector embeddings an indispensable tool in modern data engineering and machine learning.
 
-This marks the beginning of our two-part blog series. In this first installment, we delve into the fundamentals of vector embeddings. We'll explore what embeddings are, why they're crucial in the realm of AI, and delve into the methods of storing and indexing them. This foundational understanding sets the stage for part two, where we'll navigate the various vector storage solutions available on AWS. Here, we'll discuss how to effectively store your embeddings and utilize them in conjunction with Large Language Models (LLMs) to create robust, AI-powered applications. Additionally, we will introduce and leverage `LangChain`, an [tool](https://python.langchain.com/docs/get_started/introduction) that enhances our journey into the practical application of these concepts, demonstrating how to seamlessly integrate these technologies into real-world AI solutions.
+This marks the beginning of our two-part blog series. In this first installment, we delve into the fundamentals of vector embeddings. We'll explore what embeddings are, why they're crucial in the realm of AI, and delve into the methods of storing and indexing them. This foundational understanding sets the stage for part two, where we'll navigate the various vector storage solutions available on AWS. Here, we'll discuss how to effectively store your embeddings and utilize them in conjunction with LLMs to create robust, AI-powered applications. Additionally, we will introduce and leverage `LangChain`, an [tool](https://python.langchain.com/docs/get_started/introduction) that enhances our journey into the practical application of these concepts, demonstrating how to seamlessly integrate these technologies into real-world AI solutions.
 
 
 ## Embeddings
@@ -37,7 +37,7 @@ Let's start with the basics: what is an **embedding**? An embedding is a numeric
     </p>
 </div>
 
-When it comes to text analysis, several strategies exist for converting words into vectors. Initially, one of the simpler techniques was the **bag-of-words model**. Here, words within a text are represented by their frequency of occurrence. [Scikit-learn](https://scikit-learn.org/stable/), a powerful Python library, encapsulates this method within its `CountVectorizer` tool. For a while, this was the standard—until the introduction of **word2vec**.
+When it comes to text analysis, several strategies exist for converting words into vectors. Initially, one of the simpler techniques was the **bag-of-words model**. Here, words within a text are represented by their frequency of occurrence. [Scikit-learn](https://scikit-learn.org/stable/), a powerful Python Library, encapsulates this method within its `CountVectorizer` tool. For a while, this was the standard—until the introduction of **word2vec**.
 
 **Word2vec** represented a paradigm shift. It diverged from simply tallying words to understanding context by predicting a word's presence from its neighboring words while ignoring the sequence in which they appear. This method operates on a linear modeling approach.
 
@@ -56,7 +56,7 @@ For both `textual` and `visual` data, the trend has shifted towards **transforme
 
 These transformer-based models consider the context and order of elements in the data, whether they are `words in text` or `pixels in images`. Equipped with a large number of parameters, these models excel in identifying complex patterns and relationships through training on comprehensive datasets.
 
-### The versatility of Embeddings in Applications
+### The Versatility of Embeddings in Applications
 
 Embeddings transform data into numerical vectors, making them highly adaptable tools. They enable us to apply mathematical operations to assess similarities or integrate them into various machine learning models. Their uses are diverse, ranging from search and similarity assessments to categorization and topic identification. A practical example is sentiment analysis, where embeddings of product reviews can be evaluated for their closeness to '`positive`' or '`negative`' sentiment indicators. This flexibility makes embeddings a fundamental component in many data-driven applications.
 
@@ -227,7 +227,7 @@ Embedding: [1.21875, 0.122558594, ..., -0.021362305]  # An array of length 1536
 
 To learn more about **LangChain**, including its use with vectors, I recommend referring to the book ["Generative AI with LangChain" by Ben Auffarth](https://learning.oreilly.com/library/view/generative-ai-with/9781835083468/). This book provided valuable insights while I was learning about **LangChain**, and I have incorporated several of its narratives into this blog post.
 
-## How can we Store Embeddings?
+## How Can We Store Embeddings?
 
 Understanding how to represent any data point as a `vector` is crucial, but equally important is knowing how to store these vectors. Before diving into storage methods, let's briefly touch on **Vector Search**, which underscores the need for storing embeddings.
 
@@ -247,7 +247,7 @@ To optimize vector search, we typically consider these aspects:
 - **Vector libraries**: These offer functions for operations like dot product and vector indexing.
 - **Vector databases**: They are specifically designed for storing, managing, and retrieving vast sets of vectors. Examples include Amazon Aurora (with `pgvector`), Amazon OpenSearch, and Amazon Kendra, which utilize indexing for efficient searches.
 
-## Vector indexing
+## Vector Indexing
 
 **Indexing** in the context of vector embeddings is a method of organizing data to optimize its retrieval. It’s akin to indexing in traditional database systems, where it allows quicker access to records. For vector embeddings, indexing aims to structure the vectors so that similar vectors are stored adjacently, enabling fast proximity or similarity searches. Algorithms like K-dimensional trees (k-d trees) are commonly applied, but many others like Ball Trees, Annoy, and FAISS are often implemented, especially for high-dimensional vectors.
 
@@ -389,8 +389,8 @@ In essence, vector databases are like advanced tools for organizing and navigati
 
 In this blog, we embarked on a comprehensive journey, starting with the basics of vector embeddings and exploring their vital role in text and image processing. We delved into various techniques like the bag-of-words, word2vec, and CNNs, gaining insights into how these methods transform raw data into meaningful vector representations. Our exploration extended to the crucial aspects of storing and indexing vector embeddings, and the significant contributions of vector libraries and databases in this realm.
 
-Further, we learned how to create vector embeddings using tools like Amazon Bedrock with Boto3, as well as the open-source library LangChain. This provided us with practical insights into embedding generation and manipulation.
+Further, we learned how to create vector embeddings using tools like Amazon Bedrock with Boto3, as well as the Open Source Library LangChain. This provided us with practical insights into embedding generation and manipulation.
 
-We also examined various techniques for vector indexing and the use of vector libraries as storage solutions for our embeddings. With these foundational concepts in place, we're now ready to dive into Part two of this blog series. Here, we'll focus on leveraging different AWS services for storing vector embeddings. This will include an in-depth look at how these services synergize with Large Language Models (LLMs) to enhance AI and machine learning applications.
+We also examined various techniques for vector indexing and the use of vector libraries as storage solutions for our embeddings. With these foundational concepts in place, we're now ready to dive into part two of this blog series. Here, we'll focus on leveraging different AWS services for storing vector embeddings. This will include an in-depth look at how these services synergize with LLMs to enhance AI and machine learning applications.
 
 For those eager to deepen their understanding and apply these concepts, I recommend visiting this [GitHub page](https://github.com/build-on-aws/llm-rag-vectordb-python). It offers a wealth of resources, including sample applications and tutorials, demonstrating the capabilities of Amazon Bedrock with Python. These resources are designed to guide you through integrating Bedrock with databases, employing RAG techniques, and experimenting with LangChain and Streamlit for practical, hands-on experience.
