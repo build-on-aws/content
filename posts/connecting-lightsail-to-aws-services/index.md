@@ -7,7 +7,7 @@ tags:
     - rds
 authorGithubAlias: spara
 authorName: Sophia Parafina
-date: 2023-12-01
+date: 2023-12-07
 ---
 
 There are situations where you need access to AWS resources that are not in Lightsail, such as files on an EC2 server or the need to connect to an AWS RDS such as PostgreSQL or MariaDB. It is possible to use these resources via VPC (Virtual Private Cloud) peering with a few caveats. This article shows how to configure VPC peering to connect to AWS resources not in Lightsail.
