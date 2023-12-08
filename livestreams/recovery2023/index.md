@@ -31,6 +31,8 @@ Coming to you LIVE 🟣 on these days:
 - **Wednesday 13th of December - 7AM PST to Noon PST**
 - **Thusday 14th of December - 8AM PST to Noon PST**
 
+![Pictures of all the hosts of the show](./images/hosts.webp, 'Make sure to say hello to you favorite hosts: Linda, Todd, Brooke, Erik, Chris, Tony, and Darko')
+
 ## Agenda ⌛
 
 Okay, you may be asking yourself: "What am I going to learn during these three days?". Well here is the plan of what we will be building with each day. (**Please note, this is just an idea what we will be working with, and we will definitely explore far and wide, and welcome you - chat, yes you - to come and suggest things we can use 💜**):
