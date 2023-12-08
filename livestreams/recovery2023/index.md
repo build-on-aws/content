@@ -31,7 +31,7 @@ Coming to you LIVE 🟣 on these days:
 - **Wednesday 13th of December - 7AM PST to Noon PST**
 - **Thusday 14th of December - 8AM PST to Noon PST**
 
-![Pictures of all the hosts of the show](./images/hosts.webp, 'Make sure to say hello to you favorite hosts: Linda, Todd, Brooke, Erik, Chris, Tony, and Darko')
+![Pictures of all the hosts of the show](./images/hosts.webp "Make sure to say hello to you favorite hosts: Linda, Todd, Brooke, Erik, Chris, Tony, and Darko")
 
 ## Agenda ⌛
 
