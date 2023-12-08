@@ -9,6 +9,9 @@ spaces:
   - generative-ai
 waves:
   - generative-ai
+images:
+  banner: images/cover.jpg
+  hero: images/cover.jpg
 authorGithubAlias: cobbweb
 githubUserLabel: community
 authorName: Andrew Bucknall
