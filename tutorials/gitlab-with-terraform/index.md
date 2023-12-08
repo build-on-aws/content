@@ -24,7 +24,7 @@ Finally, we'll test the pipeline by deploying sample infrastructure.
 
 By following this guide, you'll learn infrastructure-as-code best practices for GitLab and Terraform and have an automated deployment pipeline to AWS ready for your infrastructure repos. Let's get started on setting up smooth AWS deployments with GitLab and Terraform.
 
-### Prerequisites
+## Prerequisites
 
 You need an AWS account and a GitLab (free trial) account. Note that the steps in this tutorial will be different if you choose to use a self-managed GitLab account. This difference is mainly applicable to [the second step](#configure-an-identity-provider-in-iam).
 
@@ -73,9 +73,9 @@ To do this, navigate to IAM in the AWS Management Console, and then click on "Id
 
 ![Adding IdP](images/addingidp.png)
 
-Make sure that the option for OpenID Connect is selected on the top, this is because OpenID Connect allows you to configure trust relationships with third party accounts including but not limited to GitLab. Also ensure that the provider URL is GitLab's root URL, `https://gitlab.com` as well as the Audience. The provider URL is the URL from which the OpenID configuration is obtained. You can view it yourself by navigating to [gitlab.com/.well-known/openid-configuration](gitlab.com/.well-known/openid-configuration). Note that if you are using a self-managed instance of GitLab (that is publicly available on the internet) you would need to use the root URL of that instance instead of gitlab.com. In this case, check that your instance supports OpenID connect by navigating to the OpenID configuration URL using your instance's root domain.
+Make sure that the option for OpenID Connect is selected on the top, this is because OpenID Connect allows you to configure trust relationships with third party accounts including but not limited to GitLab. Also ensure that the provider URL is GitLab's root URL, `https://gitlab.com` as well as the Audience. The provider URL is the URL from which the OpenID configuration is obtained. You can view the OpenID configuration for GitLab yourself by navigating to [gitlab.com/.well-known/openid-configuration](gitlab.com/.well-known/openid-configuration). Note that if you are using a self-managed instance of GitLab (that is publicly available on the internet) you would need to use the root URL of that instance instead of gitlab.com. In this case, check that your instance supports OpenID connect by navigating to the OpenID configuration URL using your instance's root domain.
 
-Once you have completely filled out the information, you can click on "Get thumbprint" to retreive the thumbprint from the URL you supplied. [The OIDC thumbprint page in the AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html) describes how this thumbprint is obtained. Click on "Add provider". We have now configured GitLab as an Identity Provider in our AWS Account.
+Once you have completely filled out the information, you can click on "Get thumbprint" to retrieve the thumbprint from the URL you supplied. [The OIDC thumbprint page in the AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html) describes how this thumbprint is obtained. Click on "Add provider". We have now configured GitLab as an Identity Provider in our AWS Account.
 
 ### Create an IAM Role for GitLab CI
 
@@ -129,7 +129,7 @@ Upon clicking "Update Policy" the role should be ready for use by GitLab CI. Not
 
 When creating resources with Terraform, files are created to manage the state of the infrastructure created by Terraform. Terraform state is a file that tracks the infrastructure that Terraform has created. It maps real-world resources to what is defined in your Terraform configuration files. The state file allows Terraform to determine what infrastructure needs to be created, updated, or destroyed based on the desired configuration.
 
-State lock is a mechanic that prevents multiple Terraform commands from accessing and trying to modify the state at the same time. When you run a Terraform command, it will acquire a lock on the state so that no other commands can access it. This prevents race conditions where two commands try to update the state simultaneously in an unsafe way. Once the command finishes, it releases the lock so other commands can run.
+State lock is a mechanism that prevents multiple Terraform commands from accessing and trying to modify the state at the same time. When you run a Terraform command, it will acquire a lock on the state so that no other commands can access it. This prevents race conditions where two commands try to update the state simultaneously in an unsafe way. Once the command finishes, it releases the lock so other commands can run.
 
 We will create an S3 bucket to house the state file, and a DynamoDB Table to host the state locking mechanism. All resources will be created in the "eu-west-1" region for this tutorial. To create the S3 bucket, head over to the S3 page in the AWS Console and click "Create bucket" on the right side. Give the bucket a globally unique name, such as "terraform-state-bucket-XXXX", where XXXX is a random sequence of digits.
 
@@ -223,11 +223,7 @@ And that's it! We've set up an automated AWS deployment pipeline using GitLab an
 
 In this post we covered configuring IAM permissions and roles for GitLab, creating S3 and DynamoDB resources to store remote state, writing a Terraform script to deploy infrastructure, setting up a .gitlab-ci.yml pipeline to execute on commits, and testing our automated deployments.
 
-By following these steps, you can take the manual work and errors out of deploying to AWS. Your infrastructure becomes code that can be treated like any other application code.
-
 As you expand your infrastructure, be sure to continue using security best practices like least privilege IAM roles. And leverage GitLab's power with features like the Terraform template library.
-
-Now whenever inspiration strikes, you can implement and deploy new AWS infrastructure automatically in a fraction of the time. You're ready to use GitLab and Terraform to streamline your cloud deployments!
 
 To learn more about deploying to AWS using CI/CD, check out the following resources:
 
