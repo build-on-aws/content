@@ -1,6 +1,6 @@
 ---
 title: "Build On re:Cap 2023"
-description: "Sit back, relax, grab a warm beverage ☕️, and join us as we take some to recover, recap and build things with the latest and greatest launches from AWS re:Invent 2023"
+description: "Sit back, relax, grab a warm beverage ☕️, and join us as we take some time to recover, recap and build things with the latest and greatest launches from AWS re:Invent 2023"
 tags:
   - aws
   - build-on-live
