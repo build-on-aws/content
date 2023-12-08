@@ -41,6 +41,7 @@ Okay, you may be asking yourself: "What am I going to learn during these three d
 | Using new StepFunction features | Checking out the Zero ETL features | All the new bells and whistles with Amazon Bedrock |
 | Adding some Amazon Bedrock magic to it | Deploy an Application to Graviton4 | What is the new SageMaker studio |
 | Checking out new Amplify stuff | Flashback to DB2 Databases 😍 | To wrap it up - PartyRock 🥳 |
+| | Streaming, not data, but actual video! 📹 | |
 
 ## Calendar Invites 📅
 
