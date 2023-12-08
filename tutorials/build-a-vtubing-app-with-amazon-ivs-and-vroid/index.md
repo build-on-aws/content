@@ -1,13 +1,11 @@
 ---
-title: "How to build a VTubing app with Amazon Interactive Video Service and VRoid"
-description: "A step by step guide to set up a 3D virtual avatar that follows your body movements and leverage live streaming from Amazon IVS to broadcast to a large audience."
+title: "How To Build a VTubing App With Amazon Interactive Video Service and VRoid"
+description: "Live stream a 3D avatar that mimics your body movements."
 tags:
-  - tutorials
-  - aws
   - amazon-ivs
+  - tutorials
+  - twitch
   - vtubing
-  - vroid
-  - pixiv
 images:
   thumbnail: images/vtubing-ivs-demo.gif
   banner: images/vtubing-ivs-demo.gif
@@ -26,7 +24,7 @@ With that context set, I will walk you through a step by step process of buildin
 
 > The code for this tutorial is available on [Github](#). You can also try a [live demo](https://dev.d218eir1ybnzul.amplifyapp.com/) of this web app.
 
-## What you will learn
+## What You Will Learn
 
 - How to render a 3D virtual character
 - How to animate a 3D virtual character with your own body movements
@@ -47,13 +45,13 @@ With that context set, I will walk you through a step by step process of buildin
 
 ## Solution Overview
 
-This tutorial consists of 5 parts:
+This tutorial consists of five parts:
 
-- Part 1 - Download your 3D character
-- Part 2 - Setup HTML to display the camera feed and live stream controls
-- Part 3 - Rendering a virtual character with the three VRM SDK
-- Part 4 - Animating a virtual character with your own body movements
-- Part 5 - Live stream your virtual character to Amazon IVS
+- Part 1 - Download Your 3D Character
+- Part 2 - Setup HTML To Display the Camera Feed and Live Stream Controls
+- Part 3 - Rendering a Virtual Character With the Three VRM SDK
+- Part 4 - Animating a Virtual Character With Your Own Body Movements
+- Part 5 - Live Stream Your Virtual Character to Amazon IVS
 
 For brevity, this tutorial will only focus on the key steps needed to load, animate, and live stream your virtual avatar. The complete code example can be found on [Github](#).
 
@@ -65,7 +63,7 @@ For this tutorial, we have created our own 3D character using [VRoid Studio](htt
 
 ## Part 2 - Setup HTML to display the camera feed and live stream controls
 
-Create the following HTML in an `index.html`. In the `<body>` element, we first add a `<video>` element for displaying the front facing camera feed. This will be useful to see how well our avatar mimics our own movements. Additionally, add buttons to join what is known in Amazon IVS terminology as a stage. A stage is a virtual space where participants exchange audio and/or video. Joining a stage will enable us to live stream our avatar to the stage audience or other participants in the stage. We will also add a modal containing a form to add a participant toke. A participant token can be thought of as a password needed to join a stage. It also identifies to Amazon IVS which stage someone wants to join. Later on in this tutorial, we will explain how to create a stage and a participant token. In the `<head>` tag, we have added some CSS styling files which you can find on the Github repo here.
+Create the following HTML in an `index.html`. In the `<body>` element, we first add a `<video>` element for displaying the front facing camera feed. This will be useful to see how well our avatar mimics our own movements. Additionally, add buttons to join what is known in Amazon IVS terminology as a stage. A stage is a virtual space where participants exchange audio and/or video. Joining a stage will enable us to live stream our avatar to the stage audience or other participants in the stage. We will also add a modal containing a form to add a participant token. A participant token can be thought of as a password needed to join a stage. It also identifies to Amazon IVS which stage someone wants to join. Later on in this tutorial, we will explain how to create a stage and a participant token. In the `<head>` tag, we have added some CSS styling files which you can find on the Github repo here.
 
 ```html
 <!DOCTYPE html>
@@ -130,10 +128,15 @@ renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 ```
 
-Next, create a an instance of `PerspectiveCamera` that defines how much of the avatar is seen on screen in degrees, its aspect ratio, and how much of the avatar is seen on screen if it's panned further away from the camera. We also create an instance of `OrbitControls` that will allow us to rotate the view of our avatar by clicking and dragging.
+Next, create an instance of `PerspectiveCamera` that defines how much of the avatar is seen on screen in degrees, its aspect ratio, and how much of the avatar is seen on screen if it's panned further away from the camera. We also create an instance of `OrbitControls` that will allow us to rotate the view of our avatar by clicking and dragging.
 
 ```javascript
-const orbitCamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
+const orbitCamera = new THREE.PerspectiveCamera(
+  35,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 orbitCamera.position.set(0.0, 1.4, 0.7);
 
 const orbitControls = new THREE.OrbitControls(orbitCamera, renderer.domElement);
@@ -174,7 +177,12 @@ loader.load(
     });
   },
 
-  (progress) => console.log("Loading model...", 100.0 * (progress.loaded / progress.total), "%"),
+  (progress) =>
+    console.log(
+      "Loading model...",
+      100.0 * (progress.loaded / progress.total),
+      "%"
+    ),
 
   (error) => console.error(error)
 );
@@ -182,12 +190,18 @@ loader.load(
 
 ## Part 4 - Animating a virtual character with your own body movements
 
-To start animating your virtual character, add `<script>` elements for the [Kalidokit](https://github.com/yeemachine/kalidokit) library, [MediaPipe Holistic](https://github.com/google/mediapipe/blob/master/docs/solutions/holistic.md) library, and camera utility module from MediaPipe to the `<head>` element in `index.html`. MediaPipe Holistic is a computer vision pipeline used to track a user’s body movements, facial expressions, and hand gestures. This is useful for animating your digital avatar to mimic your own movements. Kalidokit includes the use of blendshapes for facial animation and kinematics solvers for body movements to create more realistic digital avatars. Blendshapes are a technique used in character animation to create a wide range of facial animations. Kinematics solvers are algorithms used to calculate the position and orientation of an avatar’s limbs. When making our avatar animate, aka character rigging, a kinematics solver helps determine how a character’s joints and bones should move to achieve a desired pose or animation. In short, MediaPipe Holistic tracks your physical movements while Kalidokit takes those as inputs to animate your avatar. The camera utility module from MediaPipe will simplify the process of providing our front facing camera input to MediaPipe Holistic. MediaPipe Holistic needs this camera input to do hand, face and body movement tracking.
+To start animating your virtual character, add `<script>` elements for the [Kalidokit](https://github.com/yeemachine/kalidokit) library, [MediaPipe Holistic](https://github.com/google/mediapipe/blob/master/docs/solutions/holistic.md) library, and camera utility module from MediaPipe to the `<head>` element in `index.html`. MediaPipe Holistic is a computer vision pipeline used to track a user’s body movements, facial expressions, and hand gestures. This is useful for animating your digital avatar to mimic your own movements. Kalidokit includes the use of blendshapes for facial animation and kinematics solvers for body movements to create more realistic digital avatars. Blendshapes are a technique used in character animation to create a wide range of facial animations. Kinematics solvers are algorithms used to calculate the position and orientation of an avatar’s limbs. When making our avatar animate, aka character rigging, a kinematics solver helps determine how a character’s joints and bones should move to achieve a desired pose or animation. In short, MediaPipe Holistic tracks your physical movements while Kalidokit takes those as inputs to animate your avatar. The camera utility module from MediaPipe will simplify the process of providing our front-facing camera input to MediaPipe Holistic. MediaPipe Holistic needs this camera input to do hand, face and body movement tracking.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.5.1635989137/holistic.js" crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.5.1635989137/holistic.js"
+  crossorigin="anonymous"
+></script>
 <script src="https://cdn.jsdelivr.net/npm/kalidokit@1.1/dist/kalidokit.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+  crossorigin="anonymous"
+></script>
 ```
 
 Now let's initialize our animation by defining an `animate` function in `app.js`. In this function, we call `requestAnimationFrame`, which is provided by the Kalidokit library. This function is used to smoothly update and render animations of our avatar in sync with the browser's refresh rate. It ensures fluid motion for tracking and applying real-time face, body, and hand movements captured from our camera. After defining, we also make sure to call it as when load `app.js`.
@@ -207,29 +221,51 @@ animate();
 Next, let’s add code for our avatar rigging logic, which is the process of creating a flexible skeleton for our avatar. These are helper functions which we will be calling to help animate the avatar. These functions are responsible for forming different parts of a digital skeleton for our avatar and mapping real-time landmark data provided by the MediaPipe Holistic library. Landmark data consists of coordinates that pinpoint specific body, face and and hand positions by the MediaPipe Holistic library when we face the camera. They allow us to accurately translate our physical movements into avatar animation. The `rigRotation` helper function involves adjusting the angles of the joints or bones in our avatar's digital skeleton to match our own movements. This includes movements like turning the head or bending an elbow. The `rigPosition` helper function deals with moving the entire character or parts of it in the scene to follow our own positional movements. This could be movements like shifting side to side. The `rigFace` helper function adjusts our avatar's facial structure to mirror our own facial movements like blinking and mouth movement for speaking.
 
 ```javascript
-const rigRotation = (name, rotation = { x: 0, y: 0, z: 0 }, dampener = 1, lerpAmount = 0.3) => {
+const rigRotation = (
+  name,
+  rotation = { x: 0, y: 0, z: 0 },
+  dampener = 1,
+  lerpAmount = 0.3
+) => {
   if (!currentVrm) {
     return;
   }
-  const Part = currentVrm.humanoid.getBoneNode(THREE.VRMSchema.HumanoidBoneName[name]);
+  const Part = currentVrm.humanoid.getBoneNode(
+    THREE.VRMSchema.HumanoidBoneName[name]
+  );
   if (!Part) {
     return;
   }
 
-  let euler = new THREE.Euler(rotation.x * dampener, rotation.y * dampener, rotation.z * dampener);
+  let euler = new THREE.Euler(
+    rotation.x * dampener,
+    rotation.y * dampener,
+    rotation.z * dampener
+  );
   let quaternion = new THREE.Quaternion().setFromEuler(euler);
   Part.quaternion.slerp(quaternion, lerpAmount);
 };
 
-const rigPosition = (name, position = { x: 0, y: 0, z: 0 }, dampener = 1, lerpAmount = 0.3) => {
+const rigPosition = (
+  name,
+  position = { x: 0, y: 0, z: 0 },
+  dampener = 1,
+  lerpAmount = 0.3
+) => {
   if (!currentVrm) {
     return;
   }
-  const Part = currentVrm.humanoid.getBoneNode(THREE.VRMSchema.HumanoidBoneName[name]);
+  const Part = currentVrm.humanoid.getBoneNode(
+    THREE.VRMSchema.HumanoidBoneName[name]
+  );
   if (!Part) {
     return;
   }
-  let vector = new THREE.Vector3(position.x * dampener, position.y * dampener, position.z * dampener);
+  let vector = new THREE.Vector3(
+    position.x * dampener,
+    position.y * dampener,
+    position.z * dampener
+  );
   Part.position.lerp(vector, lerpAmount);
 };
 
@@ -243,18 +279,49 @@ const rigFace = (riggedFace) => {
   const Blendshape = currentVrm.blendShapeProxy;
   const PresetName = THREE.VRMSchema.BlendShapePresetName;
 
-  riggedFace.eye.l = lerp(clamp(1 - riggedFace.eye.l, 0, 1), Blendshape.getValue(PresetName.Blink), 0.5);
-  riggedFace.eye.r = lerp(clamp(1 - riggedFace.eye.r, 0, 1), Blendshape.getValue(PresetName.Blink), 0.5);
-  riggedFace.eye = Kalidokit.Face.stabilizeBlink(riggedFace.eye, riggedFace.head.y);
+  riggedFace.eye.l = lerp(
+    clamp(1 - riggedFace.eye.l, 0, 1),
+    Blendshape.getValue(PresetName.Blink),
+    0.5
+  );
+  riggedFace.eye.r = lerp(
+    clamp(1 - riggedFace.eye.r, 0, 1),
+    Blendshape.getValue(PresetName.Blink),
+    0.5
+  );
+  riggedFace.eye = Kalidokit.Face.stabilizeBlink(
+    riggedFace.eye,
+    riggedFace.head.y
+  );
   Blendshape.setValue(PresetName.Blink, riggedFace.eye.l);
 
-  Blendshape.setValue(PresetName.I, lerp(riggedFace.mouth.shape.I, Blendshape.getValue(PresetName.I), 0.5));
-  Blendshape.setValue(PresetName.A, lerp(riggedFace.mouth.shape.A, Blendshape.getValue(PresetName.A), 0.5));
-  Blendshape.setValue(PresetName.E, lerp(riggedFace.mouth.shape.E, Blendshape.getValue(PresetName.E), 0.5));
-  Blendshape.setValue(PresetName.O, lerp(riggedFace.mouth.shape.O, Blendshape.getValue(PresetName.O), 0.5));
-  Blendshape.setValue(PresetName.U, lerp(riggedFace.mouth.shape.U, Blendshape.getValue(PresetName.U), 0.5));
+  Blendshape.setValue(
+    PresetName.I,
+    lerp(riggedFace.mouth.shape.I, Blendshape.getValue(PresetName.I), 0.5)
+  );
+  Blendshape.setValue(
+    PresetName.A,
+    lerp(riggedFace.mouth.shape.A, Blendshape.getValue(PresetName.A), 0.5)
+  );
+  Blendshape.setValue(
+    PresetName.E,
+    lerp(riggedFace.mouth.shape.E, Blendshape.getValue(PresetName.E), 0.5)
+  );
+  Blendshape.setValue(
+    PresetName.O,
+    lerp(riggedFace.mouth.shape.O, Blendshape.getValue(PresetName.O), 0.5)
+  );
+  Blendshape.setValue(
+    PresetName.U,
+    lerp(riggedFace.mouth.shape.U, Blendshape.getValue(PresetName.U), 0.5)
+  );
 
-  let lookTarget = new THREE.Euler(lerp(oldLookTarget.x, riggedFace.pupil.y, 0.4), lerp(oldLookTarget.y, riggedFace.pupil.x, 0.4), 0, "XYZ");
+  let lookTarget = new THREE.Euler(
+    lerp(oldLookTarget.x, riggedFace.pupil.y, 0.4),
+    lerp(oldLookTarget.y, riggedFace.pupil.x, 0.4),
+    0,
+    "XYZ"
+  );
   oldLookTarget.copy(lookTarget);
   currentVrm.lookAt.applyer.lookAt(lookTarget);
 };
@@ -331,13 +398,19 @@ const animateVRM = (vrm, results) => {
     rigRotation("LeftIndexIntermediate", riggedLeftHand.LeftIndexIntermediate);
     rigRotation("LeftIndexDistal", riggedLeftHand.LeftIndexDistal);
     rigRotation("LeftMiddleProximal", riggedLeftHand.LeftMiddleProximal);
-    rigRotation("LeftMiddleIntermediate", riggedLeftHand.LeftMiddleIntermediate);
+    rigRotation(
+      "LeftMiddleIntermediate",
+      riggedLeftHand.LeftMiddleIntermediate
+    );
     rigRotation("LeftMiddleDistal", riggedLeftHand.LeftMiddleDistal);
     rigRotation("LeftThumbProximal", riggedLeftHand.LeftThumbProximal);
     rigRotation("LeftThumbIntermediate", riggedLeftHand.LeftThumbIntermediate);
     rigRotation("LeftThumbDistal", riggedLeftHand.LeftThumbDistal);
     rigRotation("LeftLittleProximal", riggedLeftHand.LeftLittleProximal);
-    rigRotation("LeftLittleIntermediate", riggedLeftHand.LeftLittleIntermediate);
+    rigRotation(
+      "LeftLittleIntermediate",
+      riggedLeftHand.LeftLittleIntermediate
+    );
     rigRotation("LeftLittleDistal", riggedLeftHand.LeftLittleDistal);
   }
   if (rightHandLandmarks) {
@@ -351,22 +424,34 @@ const animateVRM = (vrm, results) => {
     rigRotation("RightRingIntermediate", riggedRightHand.RightRingIntermediate);
     rigRotation("RightRingDistal", riggedRightHand.RightRingDistal);
     rigRotation("RightIndexProximal", riggedRightHand.RightIndexProximal);
-    rigRotation("RightIndexIntermediate", riggedRightHand.RightIndexIntermediate);
+    rigRotation(
+      "RightIndexIntermediate",
+      riggedRightHand.RightIndexIntermediate
+    );
     rigRotation("RightIndexDistal", riggedRightHand.RightIndexDistal);
     rigRotation("RightMiddleProximal", riggedRightHand.RightMiddleProximal);
-    rigRotation("RightMiddleIntermediate", riggedRightHand.RightMiddleIntermediate);
+    rigRotation(
+      "RightMiddleIntermediate",
+      riggedRightHand.RightMiddleIntermediate
+    );
     rigRotation("RightMiddleDistal", riggedRightHand.RightMiddleDistal);
     rigRotation("RightThumbProximal", riggedRightHand.RightThumbProximal);
-    rigRotation("RightThumbIntermediate", riggedRightHand.RightThumbIntermediate);
+    rigRotation(
+      "RightThumbIntermediate",
+      riggedRightHand.RightThumbIntermediate
+    );
     rigRotation("RightThumbDistal", riggedRightHand.RightThumbDistal);
     rigRotation("RightLittleProximal", riggedRightHand.RightLittleProximal);
-    rigRotation("RightLittleIntermediate", riggedRightHand.RightLittleIntermediate);
+    rigRotation(
+      "RightLittleIntermediate",
+      riggedRightHand.RightLittleIntermediate
+    );
     rigRotation("RightLittleDistal", riggedRightHand.RightLittleDistal);
   }
 };
 ```
 
-Finally, let's setup and configure an instance of the MediaPipe Holistic library. First, need to get the camera feed using the MediaPipe camera utilities module and render it to our `<video>` element. We then pass in the `<video>` element from our HTML to MediaPipe Holistic so that it process it and provide landmark data. Once Holistic finishes processing the camera data from the `<video>` element, it invokes a callback function with the resulting landmark data. Those results are then passed to the `animateVRM` function we created earlier to animate our avatar.
+Finally, let's setup and configure an instance of the MediaPipe Holistic library. First, we need to get the camera feed using the MediaPipe camera utilities module and render it to our `<video>` element. We then pass in the `<video>` element from our HTML to MediaPipe Holistic so that it process it and provide landmark data. Once Holistic finishes processing the camera data from the `<video>` element, it invokes a callback function with the resulting landmark data. Those results are then passed to the `animateVRM` function we created earlier to animate our avatar.
 
 ```javascript
 let videoElement = document.querySelector(".input_video");
@@ -420,7 +505,7 @@ const init = async () => {
 };
 ```
 
-Once we have a MediaStream we want to publish to an audience, we need to join a stage. Joining a stage enables us to live stream the video feed to the audience or other participants in the stage. If we don’t want to live stream anymore, we can leave the stage. Let’s add event listeners that listen for click events when an end user clicks the join or leave stage buttons and implement the appropriate logic.
+Once we have a MediaStream we want to publish to an audience and we need to join a stage. Joining a stage enables us to live stream the video feed to the audience or other participants in the stage. If we don’t want to live stream anymore, we can leave the stage. Let’s add event listeners that listen for click events when an end user clicks the join or leave stage buttons and implement the appropriate logic.
 
 ```javascript
 const init = async () => {
@@ -486,7 +571,7 @@ const joinStage = async (avatarStream) => {
 };
 ```
 
-Finally, let’s add some logic to listen for Stage events. These events occur when the state of the stage you’ve joined changes such as when someone joins or leaves it. Using these events, you can dynamically update the HTML code to display a new participant’s video feed when they join or remove it from display when they leave. The setupParticipant and teardownParticipant functions do each of these actions respectively. As a step step we call the join method on the stage object to join the stage.
+Finally, let’s add some logic to listen for Stage events. These events occur when the state of the stage you’ve joined changes such as when someone joins or leaves it. Using these events, you can dynamically update the HTML code to display a new participant’s video feed when they join or remove it from display when they leave. The setupParticipant and teardownParticipant functions do each of these actions respectively. As a next step, we call the join method on the stage object to join the stage.
 
 ```javascript
 // Other available events:
@@ -510,9 +595,12 @@ stage.on(StageEvents.STAGE_PARTICIPANT_JOINED, (participant) => {
   console.log("Participant Joined:", participant);
 });
 
-stage.on(StageEvents.STAGE_PARTICIPANT_STREAMS_ADDED, (participant, streams) => {
-  console.log("Participant Media Added: ", participant, streams);
-});
+stage.on(
+  StageEvents.STAGE_PARTICIPANT_STREAMS_ADDED,
+  (participant, streams) => {
+    console.log("Participant Media Added: ", participant, streams);
+  }
+);
 
 stage.on(StageEvents.STAGE_PARTICIPANT_LEFT, (participant) => {
   console.log("Participant Left: ", participant);
@@ -531,7 +619,7 @@ At this point, we are now broadcasting our live avatar feed that is mimicking ou
 
 ## Conclusion
 
-In this tutorial, you created a VTubing app by leveraging Pixiv’s SDKs to display a virtual avatar character and live stream it using Amazon IVS. VTubing opens the doors to an exciting world of virtual content creation. By following the steps outlined in this tutorial, you have gained the knowledge and tools necessary to bring your unique virtual persona to life.
+In this tutorial, you created a VTubing app by leveraging Pixiv’s SDKs to display a virtual avatar character and live stream it using Amazon IVS. VTubing opens the doors to an exciting world of virtual content creation. By following the steps outlined in this tutorial, you have gained the knowledge and tools necessary to bring your unique virtual persona to life. To learn more about live streaming with Amazon IVS, check out the blog post about [Creating Safer Online Communities using AI](https://community.aws/livestreams/build-on-live-events/open-source-and-machine-learning/creating-safer-online-communities-using-ai).
 
 If you enjoyed this tutorial, found any issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
 
