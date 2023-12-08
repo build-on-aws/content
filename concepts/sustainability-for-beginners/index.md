@@ -48,7 +48,7 @@ It is a legally binding international treaty on climate change adopted in Paris 
 
 ### The Climate Pledge (TCP)
 
-The Climate Pledge is a a commitment to meet the goals of the Paris Agreement 10 years early—and achieve net-zero carbon by 2040.Amazon co-founded The Climate Pledge with _Global Optimism_ in 2019 and became the first company to sign the Pledge. Over 450 organizations from 55 industries and 38 countries across the globe have taken The Climate Pledge. Signatories agree to 3 areas of action:
+The Climate Pledge is a commitment to meet the goals of the Paris Agreement 10 years early—and achieve net-zero carbon by 2040.Amazon co-founded The Climate Pledge with _Global Optimism_ in 2019 and became the first company to sign the Pledge. Over 450 organizations from 55 industries and 38 countries across the globe have taken The Climate Pledge. Signatories agree to 3 areas of action:
 1. **Regular Reporting** : 
 Measure and report on GHG emissions on a regular basis.
 2. **Carbon Elimination** :
@@ -68,14 +68,14 @@ Climate change refers to long-term shifts in temperatures and weather patterns, 
 
 The 20<sup>th</sup> century average global temperature is 59.0 degrees F (15.0 degrees C). The below diagram shows the impact on weather with respect to change in temperature: 
 <br>
-![rcp](./images/rcp.jpg)
+![Representative Concentration Pathways](./images/rcp.jpg)
 <br>
 (Source: [AWS re:Invent 2022 - Modeling climate change impacts and risks at scale (SUS210)](https://youtu.be/3a8-Upchxqw?si=uLq-ekmN2X_UbX_7&t=747))
 <br><br>
 
 ### Renewable Energy
 
-Renewal energy refers to energy derived from natural sources that are replenished at a higher rate than they are consumed. Example of renewal energy sources include sunlight, wind, hydropower.<br>
+Renewable Energy refers to energy derived from natural sources that are replenished at a higher rate than they are consumed. Example of renewal energy sources include sunlight, wind, hydropower.<br>
 As part of Amazon's commitment to reaching net-zero carbon emissions by 2040, Amazon is on a path to powering its operations with 100% renewable energy by 2025. In 2022, 90% of the electricity consumed by Amazon was attributable to renewable energy sources. In 2022, the electricity consumed in [19 AWS Regions](https://sustainability.aboutamazon.com/products-services/the-cloud?energyType=true) was attributable to 100% renewable energy.
 <br><br>
 
@@ -99,7 +99,7 @@ Carbon intensity (measured as gCO2eq/kWh) is a way to measure how clean our elec
 Net-zero emissions refers to achieving state where the amount of greenhouse gases(GHG) emitted by organization is counterbalanced by amount of greenhouse gases absorbed, with the aim of reducing the net emitted GHGs as close to zero as possible. Achieving net-zero emissions is more challenging that being carbon-neutral as you need to go beyon just removing CO2 emissions. To learn more, check information at [World Economic Forum](https://www.weforum.org/agenda/2022/08/carbon-neutral-net-zero-sustainability-climate-change/)
 <br><br>
 
-### AWS Data Exchange (ADX)
+### AWS Data Exchange
 
 AWS Data Exchange is a managed service that makes it easy for AWS customers to find, subscribe to, and use third-party data in the AWS Cloud. It is a data marketplace with 300+ providers offering thousands of data sets through files, tables, and APIs—all from one place.It makes it easy to subscribe to third-party ESG scores, raw company-level data, industry frameworks, alternative data, and financial data. As a subscriber, you can browse AWS Marketplace for data sets and find the right subscription for your business. As a provider, you can leverage the latest AWS technologies to experiment, build, and deliver differentiated offerings to your customers. Numerous subscriptions are free of charge, while others carry a fee. _Scope: Company-level ESG and Financial Data_  . To learn more, visit [AWS Data Exchange](https://aws.amazon.com/data-exchange/why-aws-data-exchange/).  
 <br><br>
@@ -108,12 +108,12 @@ AWS Data Exchange is a managed service that makes it easy for AWS customers to f
 ASDI seeks to accelerate sustainability research and innovation by minimizing the cost and time required to acquire and analyze large sustainability datasets. ASDI supports innovators and researchers with the data, tools, and technical expertise they need to move sustainability to the next level.
 _Scope: Scientific, Government and Geospatial Data_ . To learn more, visit [ASDI](https://registry.opendata.aws/collab/asdi/) and [Github repository](https://github.com/awslabs/amazon-asdi). 
 <br><br>
-![rcp](./images/asdi.jpg)
+![Amazon Sustainability Data Initiative](./images/asdi.jpg)
 <br><br>   
 
-### AWS Registry of Open Data
+### Registry of Open Data on AWS
 
-The [AWS Registry of Open Data](https://registry.opendata.aws/) hosts datasets, often for entities who have a mandated reporting requirement or a need to make data available publicly.  Of note, unless specifically stated in the applicable dataset documentation, datasets available through the Registry of Open Data on AWS are not provided and maintained by AWS. Datasets are provided and maintained by a variety of third parties under a variety of licenses.   
+The [Registry of Open Data on AWS](https://registry.opendata.aws/) hosts datasets, often for entities who have a mandated reporting requirement or a need to make data available publicly.  Of note, unless specifically stated in the applicable dataset documentation, datasets available through the Registry of Open Data on AWS are not provided and maintained by AWS. Datasets are provided and maintained by a variety of third parties under a variety of licenses.   
 
 As an example, The AWS Registry of Open Data contains global weather datasets dating back over 200 years enabling agricultural crop breeders in the seed/chemical/fertilizer business to optimize their breeding stock. 
 Checkout the blog [Calculating growing degree days using AWS Registry of Open Data](https://aws.amazon.com/blogs/industries/calculating-growing-degree-days-using-aws-registry-of-open-data/) to learn more about how this is used.
@@ -141,7 +141,7 @@ As per [European Parliament portal](https://www.europarl.europa.eu/news/en/headl
 ### Greenhouse gas (GHG) Protocol  
 
 The Greenhouse Gas Protocol (GHGP) provides standards for measuring and managing global warming impacts from an organization’s operations and value chain.
-The greenhouse gases covered by the GHGP are the seven gases required by the UNFCCC/Kyoto Protocol (which is often called the “Kyoto Basket”). These gases are carbon dioxide (CO2), methane (CH4), nitrous oxide (N2O), the so-called F-gases (hydrofluorocarbons and perfluorocarbons), sulfur hexafluoride (SF6) nitrogen trifluoride (NF3). Each greenhouse gas is characterized by its global warming potential (GWP), which is determined by the gas’s greenhouse effect and its lifetime in the atmosphere. Since carbon dioxide (CO2) accounts for about 76 percent of total man-made greenhouse gas emissions, the global warming potential of greenhouse gases are measured relative to CO2, and are thus expressed as CO2-equivalent (CO2e).
+The greenhouse gases covered by the GHGP are the seven gases required by the UNFCCC/Kyoto Protocol (which is often called the “Kyoto Basket”). These gases are carbon dioxide (CO2), methane (CH4), nitrous oxide (N2O), the so-called F-gases (hydrofluorocarbons and perfluorocarbons), sulfur hexafluoride (SF6) nitrogen trifluoride (NF3). Each greenhouse gas is characterized by its global warming potential (GWP), which is determined by the greenhouse effect of the gas and its lifetime in the atmosphere. Since carbon dioxide (CO2) accounts for about 76 percent of total man-made greenhouse gas emissions, the global warming potential of greenhouse gases are measured relative to CO2, and are thus expressed as CO2-equivalent (CO2e).
 
 The GHG Protocol organizes carbon emissions into the following scopes, along with relevant emission examples within each scope for a cloud provider such as AWS:
 ![GHG Emission scopes](./images/ghg-emission%20scopes.jpg)
@@ -161,4 +161,4 @@ The SBTi was founded in 2014 with the ambition of encouraging 100 companies to c
 
 ## Conclusion
 
-Sustainability is a complex topic, but foundational to building a livable future. In this blog, I've covered some of the key terms that are central to understanding sustainability. My hope is this blog has provided a helpful starting point for grasping the core ideas and vocabulary around this critical subject. I have referred to multiple websites to gather this information and tried to add references to the information sources which I have referred to.
+Sustainability is a complex topic, but foundational to building a livable future. In this blog, I've covered some of the key terms that are central to understanding sustainability. My hope is this blog has provided a helpful starting point for grasping the core ideas and vocabulary around this critical subject.
