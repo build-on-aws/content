@@ -505,7 +505,7 @@ const init = async () => {
 };
 ```
 
-Once we have a MediaStream we want to publish to an audience and we need to join a stage. Joining a stage enables us to live stream the video feed to the audience or other participants in the stage. If we don’t want to live stream anymore, we can leave the stage. Let’s add event listeners that listen for click events when an end user clicks the join or leave stage buttons and implement the appropriate logic.
+Once we have a MediaStream we want to publish to an audience we need to join a stage. Joining a stage enables us to live stream the video feed to the audience or other participants in the stage. If we don’t want to live stream anymore, we can leave the stage. Let’s add event listeners that listen for click events when an end user clicks the join or leave stage buttons and implement the appropriate logic.
 
 ```javascript
 const init = async () => {
@@ -521,7 +521,7 @@ const init = async () => {
 };
 ```
 
-Next, let’s add the logic for the joinStage function. In this function, we’re going to get the MediaStream from the user’s microphone so that we can publish it to the stage. Publishing is the act of sending audio and/or video to the stage so other participants can see or hear the participant that has joined.
+Next, let’s add the logic for the `joinStage` function. In this function, we’re going to get the MediaStream from the user’s microphone so that we can publish it to the stage. Publishing is the act of sending audio and/or video to the stage so other participants can see or hear the participant that has joined.
 
 Within this function, we also need to use the MediaStream instances from the microphone and the canvas to create instances of a LocalStageStream. Using these [LocalStageStream](https://aws.github.io/amazon-ivs-web-broadcast/docs/sdk-reference/classes/LocalStageStream) instances, we implement the stageStreamsToPublish function on the StageStrategy interface. In the stageStreamsToPublish function we simply return the instances of LocalStageStream in an array so that the audience can hear our audio and see our avatar
 
@@ -615,7 +615,7 @@ try {
 }
 ```
 
-At this point, we are now broadcasting our live avatar feed that is mimicking our body movements to a stage. To test if someone else joining the stage can see your avatar, open the [Amazon IVS Real-Time Streaming Web Sample](https://codepen.io/amazon-ivs/project/editor/DYapzL#) in another browser window, create another participant token, provide it in this browser window and click join stage. You should now see the avatar move as you move on camera. Notice the latency can sub-second and can be as low as 300ms. This is how other audience members joining the stage would see your avatar.
+At this point, we are now broadcasting our live avatar feed that is mimicking our body movements to a stage. To test if someone else joining the stage can see your avatar, open the [Amazon IVS Real-Time Streaming Web Sample](https://codepen.io/amazon-ivs/project/editor/DYapzL#) in another browser window, create another participant token, provide it in this browser window and click join stage. You should now see the avatar move as you move on camera. The latency can be sub-second and can be as low as 300ms. This is how other audience members joining the stage would see your avatar.
 
 ## Conclusion
 
