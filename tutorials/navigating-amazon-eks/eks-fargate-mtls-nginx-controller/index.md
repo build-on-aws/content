@@ -31,7 +31,7 @@ Some limitations to keep in mind:
 * For mTLS support with NGINX Ingress controller behind a Service of `Type=LoadBalancer`, you will need to create a TCP listener using a Network Load Balancer and implement mTLS on the target. 
 * Privileged containers [aren't supported on Fargate](https://docs.aws.amazon.com/eks/latest/userguide/fargate.html).
 
-![mTLS in Amazon EKS Fargate using NGINX ingress Controller](./images/blog-mTLS-nginx-ingress.drawio.png)
+![mTLS in Amazon EKS Fargate using NGINX ingress Controller](./images/blog-mTLS-nginx-ingress.png)
 
 
 | Attributes             |                                                                 |
@@ -70,7 +70,7 @@ This tutorial is part of a series on managing security-sensitive workloads using
 
 ## Step 1: Configure the Cluster
 
-In this section, you will configure the Amazon EKS cluster with only [Fargate Profiles](https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html). For step-by-step guidance, check out the tutorial at [Building an Amazon EKS Cluster Preconfigured for Financial Workload](https://community.aws/tutorials/navigating-amazon-eks/eks-cluster-financial-workload).
+In this section, you will configure the Amazon EKS cluster with only [Fargate Profiles](https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html). For step-by-step guidance, check out the tutorial at [Building an Amazon EKS Cluster Pre-configured for Financial Workload](https://community.aws/tutorials/navigating-amazon-eks/eks-cluster-financial-workload).
 
 ## Step 2: Install and configure the cluster components
 
@@ -111,7 +111,7 @@ Privileged containers aren't supported on Fargate. The default NGINX Ingress con
 curl -O https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/aws/deploy.yaml
 ```
 
-1. Edit the downloaded deploy.yaml file to make the following changes:
+2. Edit the downloaded deploy.yaml file to make the following changes:
 
 Locate the line text below and change the loadbalancer type to `nlb-ip` as shown below:
 
@@ -174,13 +174,13 @@ Set privilege escalation to false:
           allowPrivilegeEscalation: true # to false
 ```
 
-1. Deploy the modified manifest
+3. Deploy the modified manifest
 
 ```bash
 kubectl apply -f deploy.yaml
 ```
 
-1. Wait for about 60seconds for Fargate to schedule to ingress controller pod. Verify the installation with this command:
+4. Wait for about 60seconds for Fargate to schedule to ingress controller pod. Verify the installation with this command:
 
 ```bash
 kubectl get pods -n ingress-nginx
@@ -223,7 +223,7 @@ To setup ExternalDNS in your Kubernetes cluster, see [Setting up ExternalDNS for
 wget https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/examples/external-dns.yaml
 ```
 
-1. Open the downloaded `external-dns.yaml` file and edit the `--domain-filter` flag to include your hosted zone(s). The following example is for a hosted zone `example.com`:
+2. Open the downloaded `external-dns.yaml` file and edit the `--domain-filter` flag to include your hosted zone(s). The following example is for a hosted zone `example.com`:
 
 ```yaml
 args:
@@ -238,13 +238,13 @@ args:
 
 ```
 
-1. Deploy the downloaded `external-dns.yaml` file
+3. Deploy the downloaded `external-dns.yaml` file
 
 ```bash
 kubectl apply -f external-dns.yaml 
 ```
 
-1. Verify it deployed successfully.
+4. Verify it deployed successfully.
 
 ```bash
 kubectl logs -f $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
@@ -275,7 +275,7 @@ export ROOT_CA_ARN=`aws acm-pca create-certificate-authority \
         --query CertificateAuthorityArn --output text`  
 ```
 
-1. Create and install your private CA certificate
+2. Create and install your private CA certificate
 
 ```bash
 ROOT_CA_CSR=`aws acm-pca get-certificate-authority-csr \
@@ -283,7 +283,7 @@ ROOT_CA_CSR=`aws acm-pca get-certificate-authority-csr \
     --query Csr --output text`
 ```
 
-1. Issue the root certificate with the csr file from the previous step. Note that if you are using AWS CLI version 2, you will need to pass the CSR data through encoding prior to invoking the 'issue-certificate' command.
+3. Issue the root certificate with the csr file from the previous step. Note that if you are using AWS CLI version 2, you will need to pass the CSR data through encoding prior to invoking the 'issue-certificate' command.
 
 ```bash
 AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d/ -f2 | cut -d. -f1)
@@ -298,7 +298,7 @@ ROOT_CA_CERT_ARN=`aws acm-pca issue-certificate \
     --query CertificateArn --output text`
 ```
 
-1. Import the signed certificate as the root CA
+4. Import the signed certificate as the root CA
 
 ```bash
 ROOT_CA_CERT=`aws acm-pca get-certificate \
@@ -307,7 +307,7 @@ ROOT_CA_CERT=`aws acm-pca get-certificate \
     --query Certificate --output text`
 ```
 
-1. Import the root CA certificate to install it on the CA. AWS CLI version 2 needs passing the certificate data through encoding. Execute the command below:
+5. Import the root CA certificate to install it on the CA. AWS CLI version 2 needs passing the certificate data through encoding. Execute the command below:
 
 ```bash
 [[ ${AWS_CLI_VERSION} -gt 1 ]] && ROOT_CA_CERT="$(echo ${ROOT_CA_CERT} | base64)"
@@ -317,7 +317,7 @@ aws acm-pca import-certificate-authority-certificate \
     --certificate "${ROOT_CA_CERT}"
 ```
 
-1. Inspect the status of the CA and confirm it is in active state. If it is active state, then it is ready for use
+6. Inspect the status of the CA and confirm it is in active state. If it is active state, then it is ready for use
 
 ```bash
 aws acm-pca describe-certificate-authority \
@@ -325,7 +325,7 @@ aws acm-pca describe-certificate-authority \
       --output json
 ```
 
-1. Get the ARN of the CA:
+7. Get the ARN of the CA:
 
 ```bash
 echo $ROOT_CA_ARN
@@ -366,7 +366,7 @@ cat << EOF > pca-iam-policy.json
 EOF
 ```
 
-1. Create and IAM policy called AWSPCAIssuerIAMPolicy with the command below:
+2. Create and IAM policy called AWSPCAIssuerIAMPolicy with the command below:
 
 ```bash
 aws iam create-policy --policy-name AWSPCAIssuerIAMPolicy --policy-document file://pca-iam-policy.json
@@ -374,7 +374,7 @@ aws iam create-policy --policy-name AWSPCAIssuerIAMPolicy --policy-document file
 
 **Note the IAM policy Arn in the command output. This is required in the next step.**
 
-1. Create a Service Account for the AWS PCA Issuer plugin with the command below:
+3. Create a Service Account for the AWS PCA Issuer plugin with the command below:
 
 ```bash
 export mycluster=fg-security-quickstart
@@ -392,7 +392,7 @@ eksctl create iamserviceaccount \
 
 Replace the IAM_POLICY_ARN with the ARN value retrieved previously.
 
-1. Add the AWS PCA Issuer Helm repository and run the helm install command:
+4. Add the AWS PCA Issuer Helm repository and run the helm install command:
 
 ```bash
 helm repo add awspca https://cert-manager.github.io/aws-privateca-issuer
@@ -402,7 +402,7 @@ helm install aws-pca-issuer awspca/aws-privateca-issuer -n default \
 --set serviceAccount.name=aws-pca-issuer
 ```
 
-1. Verify that AWS PCA issuer is configured correctly by running following command after about 60 seconds:
+5. Verify that AWS PCA issuer is configured correctly by running following command after about 60 seconds:
 
 ```bash
 % kubectl get pods
@@ -410,7 +410,7 @@ NAME                                                   READY   STATUS    RESTART
 aws-pca-issuer-aws-privateca-issuer-6cf57c44bf-t9qgb   1/1     Running   0          53s
 ```
 
-1. Copy and paste the command below in your terminal to create the Cluster Issuer and Certificates files:
+6. Copy and paste the command below in your terminal to create the Cluster Issuer and Certificates files:
 
 ```yaml
 cat << EOF > cluster-issuer.yaml
@@ -424,7 +424,7 @@ spec:
 EOF
 ```
 
-1. Copy and paste the command below in your terminal to create `mtls-cert.yaml` file. The file will create a secret containing CA certificate along with the Server Certificate that can be used for both TLS and Client Auth. It will also create an additional secret that will be used by the client application or you can create just one certificate use the same secret.
+7. Copy and paste the command below in your terminal to create `mtls-cert.yaml` file. The file will create a secret containing CA certificate along with the Server Certificate that can be used for both TLS and Client Auth. It will also create an additional secret that will be used by the client application or you can create just one certificate use the same secret.
 
 ```yaml
 cat << EOF > mtls-cert.yaml
@@ -477,7 +477,7 @@ spec:
 EOF 
 ```
 
-1. Create an issuer in Amazon EKS Cluster and generate TLS certificates for the backend applications
+8. Create an issuer in Amazon EKS Cluster and generate TLS certificates for the backend applications
 
 ```bash
 kubectl apply -f cluster-issuer.yaml 
@@ -529,13 +529,15 @@ spec:
 EOF    
 ```
 
+2. Run the commands below to create the workload:
+
 ```bash
 kubectl create namespace mtls
 
 kubectl create -f mtls.yaml -n mtls
 ```
 
-1. Copy and paste the command below in your terminal to create an Ingress manifest file `ingress.yaml` for the workload:
+3. Copy and paste the command below in your terminal to create an Ingress manifest file `ingress.yaml` for the workload:
 
 ```yaml
 cat << EOF > ingress.yaml
@@ -587,7 +589,7 @@ NAME           CLASS   HOSTS                                  ADDRESS           
 mtls-ingress   nginx   mtls.example.com   k8s-ingressn-ingressn-f661079efc-a1c19cd4348edbec.elb.us-east-2.amazonaws.com   80, 443   96s
 ```
 
-1. Copy and paste the command below in your terminal to create a test client pod that has the necessary client certificate to interact with the application:
+4. Copy and paste the command below in your terminal to create a test client pod that has the necessary client certificate to interact with the application:
 
 ```yaml
 cat << EOF > mtls-cert-client.yaml
@@ -623,21 +625,21 @@ EOF
 kubectl apply -f mtls-cert-client.yaml -n mtls
 ```
 
-1. Let’s verify if we can access the application from the test pod. Exec into the pod: 
+5. Let’s verify if we can access the application from the test pod. Exec into the pod: 
 
 ```bash
 kubectl exec -it mtls-test-pod -n mtls -- sh
 ```
 
-1. Run a curl command to test connectivity to the application
+6. Run a curl command to test connectivity to the application
 
 ```bash
 curl -sk -v https://mtls.example.com
 ```
 
-**You should see a 200 HTTP response for a successful request.**
+You should see a **200** HTTP response for a successful request.
 
-1. Let’s **enable** **mTLS** in the ingress manifest `ingress.yaml` we previously created. Uncomment the annotations below in the `ingress.yaml` as shown below:
+7. Let’s **enable** **mTLS** in the ingress manifest `ingress.yaml` we previously created. Uncomment the annotations below in the `ingress.yaml` as shown below:
 
 ```yaml
 metadata:
@@ -655,19 +657,19 @@ Apply the change by executing the command below:
 kubectl apply -f ingress.yaml -n mtls
 ```
 
-1. Verify that the test pod is able to connect with the application using a mutual certificate key file. Exec into the pod: 
+8. Verify that the test pod is able to connect with the application using a mutual certificate key file. Exec into the pod:
 
 ```bash
 kubectl exec -it mtls-test-pod -n mtls -- sh
 ```
 
-1. Run a curl command to test connectivity to the application
+9. Run a curl command to test connectivity to the application
 
 ```bash
 curl -v -sk "https://mtls.example.com" --cert /etc/secret-volume/tls.crt --key /etc/secret-volume/tls.key 
 ```
 
-**You should see a 200 HTTP response only when the certificate and key is specified in the curl command**
+You should see a **200** HTTP response only when the certificate and key is specified in the curl command.
 
 ## Clean up
 
