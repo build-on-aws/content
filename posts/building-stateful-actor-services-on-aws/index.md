@@ -8,6 +8,8 @@ tags:
   - kubernetes
   - dotnet
   - csharp
+waves:
+  - modern-apps
 authorGithubAlias: bbgu1
 authorName: Bo Guan
 date: 2023-07-21

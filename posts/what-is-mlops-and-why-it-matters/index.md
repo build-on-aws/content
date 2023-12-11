@@ -7,6 +7,8 @@ tags:
   - data-science
   - devops
   - sagemaker
+waves:
+  - dataml
 authorGithubAlias: sarunaaa003
 authorName: Arun Kumar. S
 date: 2023-05-22
@@ -143,6 +145,6 @@ For actionable next steps, I recommend the following resources to further your M
 
 [Develop ML Project with Amazon SageMaker](https://catalog.us-east-1.prod.workshops.aws/workshops/9a6bcca9-93d6-4e09-ada2-64b692267342/en-US?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) - Explore this workshop to learn how to develop end-to-end machine learning projects using Amazon SageMaker, a powerful MLOps platform.
 
-[Amazon SageMaker Workshop](https://sagemaker-workshop.com/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) - Visit this website to access a workshop that provides hands-on exercises, tutorials, and resources for leveraging Amazon SageMaker in your MLOps workflows.
+[Amazon SageMaker Workshop](https://sagemaker-workshop.com?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=what-is-mlops-and-why-it-matters) - Visit this website to access a workshop that provides hands-on exercises, tutorials, and resources for leveraging Amazon SageMaker in your MLOps workflows.
 
 By engaging with these resources, you can gain practical knowledge, develop essential skills, and take significant strides in your MLOps journey. Embrace the opportunities to learn, practice, and collaborate with the MLOps community as you continue to enhance your expertise in this exciting field.

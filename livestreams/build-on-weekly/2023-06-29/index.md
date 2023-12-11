@@ -27,13 +27,13 @@ https://www.twitch.tv/videos/1860069336
 ## Links from today's episode
 
 - [Code for today's AWS Chatbot Translator](https://github.com/elizabethfuentes12/aws-chatbot-translator)
-- [Amazon Lex](https://aws.amazon.com/lex/)
-- [Amazon Translate](https://aws.amazon.com/translate/)
-- [Amazon Lex: Lambda Function Input Event and Response docs](https://docs.aws.amazon.com/lex/latest/dg/lambda-input-response-format.html)
+- [Amazon Lex](https://aws.amazon.com/lex/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- [Amazon Translate](https://aws.amazon.com/translate/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
+- [Amazon Lex: Lambda Function Input Event and Response docs](https://docs.aws.amazon.com/lex/latest/dg/lambda-input-response-format.html?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - [AWS Code Samples: Amazon Rekognition](https://github.com/aws-samples/amazon-rekognition-code-samples)
 - [AWS Code Samples: Amazon Transcribe Comprehend Podcast](https://github.com/aws-samples/amazon-transcribe-comprehend-podcast)
 - [AWS Code Samples: Document Translation](https://github.com/aws-samples/document-translation)
-- [Workshop: Amazon Connect and Amazon Lex Integration](https://catalog.us-east-1.prod.workshops.aws/workshops/638d00f5-2248-488f-b7ca-903e8b966bf8/en-US)
+- [Workshop: Amazon Connect and Amazon Lex Integration](https://catalog.us-east-1.prod.workshops.aws/workshops/638d00f5-2248-488f-b7ca-903e8b966bf8/en-US?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 
 **🐦 Reach out to the hosts and guests:**
 

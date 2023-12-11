@@ -9,6 +9,9 @@ tags:
   - aws
 spaces: 
   - generative-ai
+waves:
+  - generative-ai
+  - dataml
 authorGithubAlias: channy
 authorName: Channy Yun
 date: 2023-08-04

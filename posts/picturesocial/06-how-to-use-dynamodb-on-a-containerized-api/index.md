@@ -6,7 +6,6 @@ tags:
   - csharp
   - dynamodb
   - api
-showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-02-27
@@ -24,7 +23,7 @@ So far you have been learning about containers, Kubernetes, Infrastructure as a 
 
 I choose Amazon DynamoDB because the Picturesocial application needs a modern database that will support high throughput and simplify the overall data management by providing an API for all the Data Management and Operations. Also because I'm using document data structures that will be better working on a non-relational and document DB as DynamoDB. But first I need to figure out the relevant field for the data structure in the APIs that I have done so far.
 
-In a previous post about [how to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning/), I created an API that returned the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An ID to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5), and **4/** User who uploaded the image. Now I'm going to convert those attributes into a Data Model, using JSON, that I will follow for the whole API.
+In a previous post about [how to analyze images with Machine Learning](/posts/picturesocial/05-how-to-analyze-images-with-machine-learning), I created an API that returned the Labels from a photo using Amazon Rekognition. The most relevant attributes for Picturesocial are: **1/** An ID to correlate the image with the Labels, **2/** Image Name, **3/** Label List (top 5), and **4/** User who uploaded the image. Now I'm going to convert those attributes into a Data Model, using JSON, that I will follow for the whole API.
 
 ```json
 `{  

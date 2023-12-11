@@ -4,6 +4,8 @@ description: "Run your training code on AWS with minimum effort by bringing your
 tags:
     - sagemaker
     - ai-ml
+waves:
+  - dataml
 authorGithubAlias: kazdaghli
 authorName: Sarra Kazdaghli
 additionalAuthors:
@@ -206,7 +208,7 @@ Data scientists can bring their own specific dockerfile or own needed packages t
 
 Amazon SageMaker provides the capability to have your own Docker Image to run the training job, instead of reusing SageMaker Provided ones. For this, data scientists need to leverage Amazon ECR by pushing the docker image to a private ECR repository.
 
-In our example, we prepare a dockerfile at the same level of hierarchy as the train.py script as provided in code/. We build the image locally using this dockerfile and then push it to ECR using code/build_and_push.sh script (code/build_and_push_studio.sh if using Amazon Sagemaker Studio).
+In our example, we prepare a dockerfile at the same level of hierarchy as the train.py script as provided in [Github repo](https://github.com/build-on-aws/bring-own-machine-learning-model-to-aws). We build the image locally using this dockerfile and then push it to ECR using build_and_push.sh script (build_and_push_studio.sh if using Amazon Sagemaker Studio).
 
 Finally, we setup an Amazon SageMaker estimator with as parameter the ECR image URI and launch the model training:
 
@@ -363,9 +365,9 @@ The following graph provides some recommendation on the method to use:
 
 ## Useful Resources
 
-* [Bring your own script AWS blog](https://aws.amazon.com/blogs/machine-learning/bring-your-own-model-with-amazon-sagemaker-script-mode/)
+* [Bring your own script AWS blog](https://aws.amazon.com/blogs/machine-learning/bring-your-own-model-with-amazon-sagemaker-script-mode/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bring-your-own-machine-learning-code-to-aws)
 * [Bring your own container examples](https://sagemaker-examples.readthedocs.io/en/latest/training/bring_your_own_container.html)
-* [Run your local machine learning code AWS blog](https://aws.amazon.com/blogs/machine-learning/run-your-local-machine-learning-code-as-amazon-sagemaker-training-jobs-with-minimal-code-changes/)
+* [Run your local machine learning code AWS blog](https://aws.amazon.com/blogs/machine-learning/run-your-local-machine-learning-code-as-amazon-sagemaker-training-jobs-with-minimal-code-changes/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=bring-your-own-machine-learning-code-to-aws)
 
 ## About the Authors
 

@@ -92,7 +92,7 @@ My laundry list of additional tools is usually:
 
 **jq**: [jq](https://stedolan.github.io/jq/) is a command-line parser and filter for JSON documents. I use `jq` a lot in my shell scripts.
 
-**amplify**: This one is specific to AWS. [Amplify](https://docs.amplify.aws/?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app) is a command-line tool and a set of libraries to help application developers to manage and access cloud-based services, such as REST or GraphQL API, object storage, identity management, geo location, etc.
+**amplify**: This one is specific to AWS. [Amplify](https://docs.amplify.aws?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=cicd-for-ios-app) is a command-line tool and a set of libraries to help application developers to manage and access cloud-based services, such as REST or GraphQL API, object storage, identity management, geo location, etc.
 
 I try to stay away from tools written in [Ruby]((https://www.ruby-lang.org/en/)) (such as [cocoapods](https://cocoapods.org) and [fastlane](https://fastlane.tools)) because of the extra complexity to install specific versions of Ruby and to manage the versioning of Ruby's dependencies. But that's a personal preference. Of course, you will customize this list based on your actual project requirements and your own preferences.
 

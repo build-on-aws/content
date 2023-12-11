@@ -5,6 +5,8 @@ tags:
   - ai-ml
   - data-science
   - sagemaker
+waves:
+  - dataml
 authorGithubAlias: sarunaaa003
 authorName: Arun Kumar. S
 date: 2023-06-29

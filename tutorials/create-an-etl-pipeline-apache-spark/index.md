@@ -11,7 +11,6 @@ tags:
     - emr
     - apache-spark
     - s3
-showInHomeFeed: true
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2023-03-30

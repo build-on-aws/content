@@ -5,7 +5,7 @@ authorName: AWS Team
 authorAvatarImageUrl: ../../images/aws-logo.png
 date: 2023-05-09
 showInHomeFeed: false
-externalUrl: https://www.eksworkshop.com/
+externalUrl: https://www.eksworkshop.com
 images:
   banner: ./images/eks-workshop.png
   hero: ./images/eks-workshop.png

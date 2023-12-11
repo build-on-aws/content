@@ -1,6 +1,6 @@
 ---
-title: "Build On Answered | Episode 11 | All About Redshift"
-description: "Join us for Episode 11 of Build On Answered, the [Twitch](https://twitch.tv/aws) show where expert hosts review top viewed questions from the [AWS Stack Overflow Collective](https://stackoverflow.com/collectives/aws) live on air!"
+title: "Build On Answered | All About Redshift | S01 EP11"
+description: "Join us for Episode 11 of Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
     - redshift
     - stack-overflow
@@ -17,7 +17,7 @@ spaces:
   - livestreams
 ---
 
-![Streaming session with Julie, Chris, and and Anusha, with a shared browser tab showing a Stack Overflow question](images/redshift_stackoverflow_sm.gif)
+![Streaming session with Julie, Chris, and Anusha, with a shared browser tab showing a Stack Overflow question](images/redshift_stackoverflow_sm.gif)
 
 Join us for the Redshift episode of Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air! This week we have Anusha Challa from the Redshift team answering questions
 
@@ -27,7 +27,7 @@ https://www.twitch.tv/videos/1900421697
 
 * [**Julie Gunderson**](https://twitter.com/Julie_Gund), Senior Developer Advocate @ AWS
 * [**Anusha Challa**](https://www.linkedin.com/in/anusha-challa-31600916/), Data Warehousing Solution Architect @ AWS
-* **Chris Williams**, Senior Solution Architect @ AWS
+* [**Chris Williams**](https://www.linkedin.com/in/the-devops-guy/), Solution Architect @ AWS
 
 ## This Week's Questions
 

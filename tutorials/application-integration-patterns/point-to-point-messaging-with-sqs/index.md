@@ -15,7 +15,6 @@ tags:
 authorGithubAlias: DennisTraub
 authorName: Dennis Traub
 date: 2023-08-14
-showInHomeFeed: true
 ---
 
 | Attributes| |
@@ -23,7 +22,7 @@ showInHomeFeed: true
 | ✅ AWS Level | Intermediate - 200 |
 | ⏱ Time to complete | 30 minutes |
 | 💰 Cost to complete | Free when cleaning up after the tutorial (instructions below) |
-| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs) |
+| 🧩 Prerequisites | - [AWS Account](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs)<br />- [AWS Cloud Development Kit](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs) |
 | 💻 Code Repository | The code for this tutorial is available on [GitHub](https://github.com/build-on-aws/point-to-point-messaging-with-amazon-sqs) |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a quick star rating?</a>    |
 | ⏰ Last Updated     | 2023-08-14                             |
@@ -56,7 +55,7 @@ The example will consist of three components:
 
 ![Diagram showing the producer function that sends messages to the message queue, which in turn triggers the consumer function](images/diagram.png)
 
-In addition to implementing this pattern, we will also highlight the power of the AWS Cloud Development Kit (CDK) to define the entire infrastructure as code. If you want to learn more about the AWS CDK, have a look at the [AWS CDK Developer Guide](https://docs.aws.amazon.com/cdk/v2/guide/home.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs).
+In addition to implementing this pattern, we will also highlight the power of the AWS Cloud Development Kit (CDK) to define the entire infrastructure as code. If you want to learn more about the AWS CDK, have a look at the [AWS CDK Developer Guide](https://docs.aws.amazon.com/cdk/v2/guide/home.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs).
 
 By the end of this tutorial, you will have gained a solid understanding of the individual components of queue-based point-to-point messaging, successfully implemented asynchronous communication between two Lambda functions using SQS, and acquired some hands-on experience building infrastructure as code with CDK.
 
@@ -79,7 +78,7 @@ When making architectural decisions, it is always important to consider these tr
 
 But now, let's start the tutorial and learn how to implement this pattern using AWS Lambda and Amazon SQS.
 
-**A note on resource costs when coding along:** This tutorial uses only a minimal amount of resources, all of which are included in the [Free Tier provided by AWS](https://aws.amazon.com/free?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs) for the first 12 months after creation of each account:
+**A note on resource costs when coding along:** This tutorial uses only a minimal amount of resources, all of which are included in the [Free Tier provided by AWS](https://aws.amazon.com/free?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs) for the first 12 months after creation of each account:
 
 - A few kilobytes of code will be stored in Amazon S3, which provides 5 GB of free storage.
 - We will call SQS a couple of times, which provides 1 million free requests per month.
@@ -93,8 +92,8 @@ If the CLI and CDK are installed, you should see the respective versions of your
 
 Before starting this tutorial, you will need the following:
 
-- AWS Account: If you don't have one, you can [sign up for free](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs). The AWS Free Tier gives you plenty of resources to play around with, including AWS Lambda and Amazon SQS, which is what we will be using.
-- The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs)
+- AWS Account: If you don't have one, you can [sign up for free](https://aws.amazon.com/getting-started/guides/setup-environment/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs). The AWS Free Tier gives you plenty of resources to play around with, including AWS Lambda and Amazon SQS, which is what we will be using.
+- The AWS Cloud Development Kit (AWS CDK): [How to setup and bootstrap the AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs)
 
 This tutorial requires at least version 2 of the AWS CLI and AWS CDK.
 
@@ -174,7 +173,7 @@ This will take some time and will be completed once you see the following output
 ✅  Environment aws://[account_id]/[region] bootstrapped.
 ```
 
-> Note: If this leads to an error, it is likely that either you haven't [configured the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs), or have already bootstrapped the environment. In the latter case you can simply continue to the next step.
+> Note: If this leads to an error, it is likely that either you haven't [configured the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs), or have already bootstrapped the environment. In the latter case you can simply continue to the next step.
 
 ### 1.3 - Deploy the Initial Stack
 
@@ -184,7 +183,7 @@ To deploy the stack, make sure you're still in the `point-to-point-example` dire
 cdk deploy
 ```
 
-This command will *synthesize* the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs) template, and deploy it in your AWS account.
+This command will *synthesize* the app into an [AWS CloudFormation](https://aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs) template, and deploy it in your AWS account.
 
 > If you can't find the stack, make sure to choose the correct region by clicking on the name of the currently displayed Region in the navigation bar, and then choosing the Region to which you want to switch. Make sure it is the one that you used when configuring the AWS CLI.
 
@@ -531,7 +530,7 @@ And that's it!
 
 **Congratulations!** You've created everything you need to set up asynchronous point-to-point messaging between two Lambda functions, using SQS.
 
-There's so much more you can do with SQS, like batching messages, ensuring message order, and automatically sending faulty messages to a dead-letter queue (DLQ). If you want to learn more, check out the [Amazon SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs)
+There's so much more you can do with SQS, like batching messages, ensuring message order, and automatically sending faulty messages to a dead-letter queue (DLQ). If you want to learn more, check out the [Amazon SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs)
 
 ##  Clean-up
 
@@ -565,7 +564,7 @@ The asynchronous point-to-point messaging pattern is a widely used communication
 
 If you want to learn more, check out these additional resources:
 
-- The [Amazon Simple Queue Service (SQS) Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs)
+- The [Amazon Simple Queue Service (SQS) Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=point-to-point-sqs)
 - All articles tagged [architectural-patterns](https://community.aws/tags/architectural-patterns)
 - More [tutorials](https://community.aws/tags/tutorials) on community.aws
 - More [SQS messaging examples on ServerlessLand](https://serverlessland.com/search?search=sqs)

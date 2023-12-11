@@ -707,4 +707,4 @@ Manually delete the below resources from your CodeCatalyst Space:
 
 Congratulations! You have learned how to deploy a web application to an ECS cluster using CDK and CodeCatalyst. If you enjoyed this tutorial, found any issues, or have feedback for us, [please send it our way](https://pulse.buildon.aws/survey/DEM0H5VW)!
 
-For more DevOps related content, check out [How Amazon Does DevOps in Real Life](/posts/how-amazon-does-devops-in-real-life/), or other [DevOps](/tags/devops) pieces.
+For more DevOps related content, check out [How Amazon Does DevOps in Real Life](/posts/how-amazon-does-devops-in-real-life), or other [DevOps](/tags/devops) pieces.

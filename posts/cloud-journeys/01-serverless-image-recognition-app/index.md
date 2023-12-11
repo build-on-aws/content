@@ -9,6 +9,8 @@ tags:
   - rekognition
   - ai-ml
   - aws
+waves:
+  - modern-apps
 authorGithubAlias: cpyle0819
 authorName: Corey Pyle
 additionalAuthors:
@@ -18,7 +20,6 @@ additionalAuthors:
     authorName: David Souther
   - authorGithubAlias: scmacdon
     authorName: Scott Macdonald
-showInHomeFeed: true
 date: 2023-06-23
 ---
 

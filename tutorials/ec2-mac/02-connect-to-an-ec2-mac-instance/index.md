@@ -12,7 +12,6 @@ spaces:
   - devops
 waves:
   - devops
-showInHomeFeed: true
 authorGithubAlias: sebsto
 authorName: Sébastien Stormacq
 date: 2023-06-28

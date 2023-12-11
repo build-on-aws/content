@@ -13,7 +13,6 @@ spaces:
   - devops
 waves:
   - devops
-showInHomeFeed: true
 movedFrom: /posts/automating-your-container-deployments-with-cicd-and-github-actions
 authorGithubAlias: jennapederson
 authorName: Jenna Pederson
@@ -676,6 +675,6 @@ $ cdk destroy
 
 In this post, you learned how to use the CDK to provision infrastructure to deploy your Flask app to an ECS cluster. Then you learned to create a simple CI/CD pipeline with GitHub Actions, setting up a workflow to test and deploy your app to that infrastructure.
 
-Next, you might consider exploring other ways to [use containers in the cloud](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min/) or creating more complex CI/CD pipelines to automate more of your infrastructure and application.
+Next, you might consider exploring other ways to [use containers in the cloud](/posts/picturesocial/01-how-to-containerize-app-less-than-15-min) or creating more complex CI/CD pipelines to automate more of your infrastructure and application.
 
 If you'd like to try this out as a workshop, you can learn more about [automating CI/CD on AWS with GitHub Actions](https://www.eventbox.dev/published/lesson/automating-cicd-on-aws-with-github-actions/index.html) that also touches on how to integrate this GitHub workflow with Amazon CodePipeline.

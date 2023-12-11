@@ -7,6 +7,8 @@ tags:
   - validation
   - sql
   - aws
+waves:
+  - dataml
 authorGithubAlias: alinadima
 authorName: Alina Dima
 externalCanonicalUrl: https://dev.to/iotbuilders/a-tool-to-validate-aws-iot-rules-sql-statements-jg

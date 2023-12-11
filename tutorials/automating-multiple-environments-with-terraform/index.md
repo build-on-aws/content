@@ -10,7 +10,6 @@ tags:
     - infrastructure-as-code
     - aws
     - github-actions
-showInHomeFeed: true
 spaces:
   - devops
 waves:
@@ -43,7 +42,7 @@ This tutorial will guide you in splitting your infrastructure across multiple ac
 
 ## Setting up a CI/CD pipeline for the Main account
 
-As a first step, we need to set up a CI/CD pipeline for all the shared infrastructure in our `main` account. We will be using the approach from the [Terraform bootstrapping tutorial](/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst/). Please note, we won't be covering any of the details mentioned in that tutorial. We are just following the steps, if you would like to understand more, we recommend working through that tutorial first. You can continue with this tutorial after finishing the bootstrapping one, just don't follow the cleanup steps - just skip to the [next section](#setting-up-the-new-aws-environment-accounts). Here is a condensed version of all the steps.
+As a first step, we need to set up a CI/CD pipeline for all the shared infrastructure in our `main` account. We will be using the approach from the [Terraform bootstrapping tutorial](/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst). Please note, we won't be covering any of the details mentioned in that tutorial. We are just following the steps, if you would like to understand more, we recommend working through that tutorial first. You can continue with this tutorial after finishing the bootstrapping one, just don't follow the cleanup steps - just skip to the [next section](#setting-up-the-new-aws-environment-accounts). Here is a condensed version of all the steps.
 
 To set up our pipeline, make sure you are logged into your AWS and CodeCatalyst accounts to set up our project, environment, repository, and CI/CD pipelines. In CodeCatalyst:
 
@@ -212,7 +211,7 @@ resource "aws_organizations_account" "prod" {
 
 > 💡 Tip: If you are applying this strategy to existing AWS accounts and using the [import](https://developer.hashicorp.com/terraform/cli/import) function of Terraform, take note of the instructions on how to avoid recreating the account when importing in the [resource page](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account#import). You will also need to import the AWS Organization if you already one set up in your account by running `terraform import aws_organizations_organization.org 111122223333`, and replacing the number with your AWS account ID.
 
-Let's look at these changes and then apply them by running `terraform init` first, and then `terraform plan` in your CodeCatalyst environment's terminal.  (**Please note: If you are following on from the [previous tutorial](/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst/), you can still run these steps, it will not cause any issues**):
+Let's look at these changes and then apply them by running `terraform init` first, and then `terraform plan` in your CodeCatalyst environment's terminal.  (**Please note: If you are following on from the [previous tutorial](/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst), you can still run these steps, it will not cause any issues**):
 
 ```bash
 terraform init

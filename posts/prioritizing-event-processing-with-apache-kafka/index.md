@@ -10,6 +10,8 @@ tags:
   - aurora
 spaces:
   - data
+waves:
+  - dataml
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
 date: 2023-06-09

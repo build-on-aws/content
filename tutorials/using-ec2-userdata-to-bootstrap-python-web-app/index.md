@@ -10,7 +10,8 @@ tags:
     - codedeploy
     - codebuild
     - python
-showInHomeFeed: true
+waves:
+  - devops
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 additionalAuthors: 

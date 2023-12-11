@@ -7,6 +7,8 @@ tags:
   - keda
   - data
   - aws
+waves:
+  - dataml
 authorGithubAlias: abhirockzz
 authorName: Abhishek Gupta
 externalCanonicalUrl: https://www.pluralsight.com/blog/cloud/auto-scaling-kinesis-data-kubernetes

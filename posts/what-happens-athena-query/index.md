@@ -8,6 +8,8 @@ tags:
   - glue
   - glue-data-catalog
   - presto
+waves:
+  - dataml
 authorGithubAlias: dacort
 authorName: Damon Cortesi
 date: 2023-07-03

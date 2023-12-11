@@ -12,7 +12,6 @@ tags:
     - cdk
     - devops
     - tutorials
-showInHomeFeed: true
 spaces:
   - devops
 waves:

@@ -13,7 +13,7 @@ If you are an Amazonian, please find the Community.AWS wiki for more information
 
 # Community Contributors
 
-January 27, 2023 - Community.AWS content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content/) for updates as we open this up to more community authors in the coming months.
+January 27, 2023 - Community.AWS content contributions are invite-only right now as we gather feedback and refine the publication processes and documentation. Star or watch [this repository](https://github.com/build-on-aws/content) for updates as we open this up to more community authors in the coming months.
 
 ## Interested in writing content for Community.AWS? Yay! We're so happy you're here.
 

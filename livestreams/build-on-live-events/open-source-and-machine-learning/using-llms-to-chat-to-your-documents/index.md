@@ -6,7 +6,7 @@ tags:
   - open-source
   - build-on-live
   - twitch
-  - llm
+  - llms
   - langchain
   - falcon-llm
   - streamlit

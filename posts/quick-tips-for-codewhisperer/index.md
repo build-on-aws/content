@@ -9,6 +9,9 @@ tags:
     - aws
 spaces:
   - generative-ai
+waves:
+  - dataml
+  - generative-ai
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
 date: 2023-07-07

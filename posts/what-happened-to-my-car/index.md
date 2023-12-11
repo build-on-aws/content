@@ -6,6 +6,8 @@ tags:
     - application-resilience
     - resilience
     - aws-well-architected
+waves:
+  - resilience
 authorGithubAlias: crichey
 authorName: Clark Richey
 date: 2023-07-12

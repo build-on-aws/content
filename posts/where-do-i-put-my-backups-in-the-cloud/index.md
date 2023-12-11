@@ -7,6 +7,8 @@ tags:
     - resilience
     - disaster-recovery
     - aws
+waves:
+  - resilience
 authorGithubAlias: jmoran8888
 authorName: Jennifer Moran
 date: 2023-07-14

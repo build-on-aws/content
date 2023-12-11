@@ -27,7 +27,7 @@ Today, on **Deployed Weekly**, we will cover **AWS Power Tools**, again, for all
 - **AWS PowerTools for dotnet is in alpha**: [https://github.com/awslabs/aws-lambda-powertools-dotnet](https://github.com/awslabs/aws-lambda-powertools-dotnet)
 - **CDK for TF is now GA**: [https://www.hashicorp.com/blog/cdk-for-terraform-now-generally-available](https://www.hashicorp.com/blog/cdk-for-terraform-now-generally-available)
 - **AWS Site to Site VPN Over Private IP, via Direct connect. All in Terraform**:
-[](https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-aws-site-to-site-vpn-private-ip-vpns/)[https://github.com/aws-samples/aws-site-to-site-vpn-private-ip-vpn](https://github.com/aws-samples/aws-site-to-site-vpn-private-ip-vpn)
+[](https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-aws-site-to-site-vpn-private-ip-vpns/)[https://github.com/aws-samples/aws-site-to-site-vpn-private-ip-vpn](https://github.com/aws-samples/aws-site-to-site-vpn-private-ip-vpn?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq)
 - **Pulumi’s Introduction to Infrastructure as Code with Python** - **Workshop**: [https://www.pulumi.com/resources/introduction-to-infrastructure-as-code-with-python/](https://www.pulumi.com/resources/introduction-to-infrastructure-as-code-with-python/?utm_source=twitter&utm_medium=social&utm_campaign=workshops)
 - **Game Day World championship**: [https://pages.awscloud.com/GLOBAL-gamedev-OE-AWS-GameDay-WorldChampionship-2022-reg-event.html](https://pages.awscloud.com/GLOBAL-gamedev-OE-AWS-GameDay-WorldChampionship-2022-reg-event.html)
 

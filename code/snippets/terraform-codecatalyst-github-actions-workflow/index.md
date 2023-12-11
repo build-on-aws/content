@@ -19,11 +19,11 @@ date: 2023-05-05
 | 💻 Examples of      | [Hashicorp HCL](https://github.com/hashicorp/hcl) <br> [CodeCatalyst Workflow](https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflow-reference.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_gh&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> [GitHub Actions](https://docs.aws.amazon.com/codecatalyst/latest/userguide/github-action-ref.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_gh&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | ⏰ Last Updated        | 2023-05-05                                                  |
 
-This snippet shows a [CodeCatalyst](https://codecatalyst.aws/?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_gh&sc_geo=mult&sc_country=mult&sc_outcome=acq) [workflow using GitHub Actions](https://docs.aws.amazon.com/codecatalyst/latest/userguide/github-action-ref.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_gh&sc_geo=mult&sc_country=mult&sc_outcome=acq) that will run [Terraform](https://terraform.io) to apply infrastructure changes. It uses `validate` and `plan` to test if the Terraform code is valid. It is intended to be used on the `main` branch, and run after merging a PR that has been validated - see [this example of the PR branch workflow](../terraform-codecatalyst-github-actions-workflow-PR-branch/). Alternative version using [standard CodeCatalyst workflow](../terraform-codecatalyst-workflow/).
+This snippet shows a [CodeCatalyst](https://codecatalyst.aws?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_gh&sc_geo=mult&sc_country=mult&sc_outcome=acq) [workflow using GitHub Actions](https://docs.aws.amazon.com/codecatalyst/latest/userguide/github-action-ref.html?sc_channel=el&sc_campaign=devopswave&sc_content=snp_tf_cc_gh&sc_geo=mult&sc_country=mult&sc_outcome=acq) that will run [Terraform](https://terraform.io) to apply infrastructure changes. It uses `validate` and `plan` to test if the Terraform code is valid. It is intended to be used on the `main` branch, and run after merging a PR that has been validated - see [this example of the PR branch workflow](../terraform-codecatalyst-github-actions-workflow-PR-branch/). Alternative version using [standard CodeCatalyst workflow](../terraform-codecatalyst-workflow/).
 
 **Used in:**
 
-* [Bootstrapping your Terraform automation with Amazon CodeCatalyst](../../tutorials/bootstrapping-terraform-automation-amazon-codecatalyst)
+* [Bootstrapping your Terraform automation with Amazon CodeCatalyst](/tutorials/bootstrapping-terraform-automation-amazon-codecatalyst)
 
 ## Snippet
 

@@ -7,6 +7,8 @@ tags:
     - backup
     - replication
     - disaster-recovery
+waves:
+  - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-07-03

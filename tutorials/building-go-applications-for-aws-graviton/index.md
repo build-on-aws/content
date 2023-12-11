@@ -4,15 +4,17 @@ description: Learn how to migrate a Go application from x86 based Amazon EC2 Ins
 tags:
   - tutorials
   - graviton
-  - go
+  - golang
   - sustainability
   - cost-optimization
   - deploy
-  - migrate
+  - migrations
   - arm64
   - ec2
-  - aws
-showInHomeFeed: true
+spaces:
+  - cost-optimization
+waves:
+  - cost
 authorGithubAlias: DDxPlague
 authorName: Tyler Jones
 date: 2023-08-14

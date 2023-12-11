@@ -12,7 +12,6 @@ tags:
 authorGithubAlias: austinwebber
 authorName: Austin Webber
 date: 2023-07-19
-showInHomeFeed: true
 ---
 
 By default, Amazon WorkSpaces provides the ability for users to authenticate into their WorkSpaces using their AD username and password. To enhance security during authentication, WorkSpaces provides customers with the ability to enable the usage of Common Access Card (CAC) and Personal Identity Verification (PIV) smart cards for authentication into WorkSpaces. This functionality supports smart cards for both pre-session authentication (authentication into the WorkSpace) and in-session authentication (authentication that's performed after logging in). For example, users can log into their WorkSpaces using smart cards and use their smart cards within their WorkSpace session to authenticate to websites or other applications. By integrating this, you can eliminate the need for the end user to use their username and password when using their WorkSpace and all AD-related authentication can be handled via the user's smart card certificate.

@@ -8,7 +8,6 @@ tags:
   - karpenter
   - cloudformation
   - terraform
-showInHomeFeed: true
 authorGithubAlias: develozombie
 authorName: Jose Yapur
 date: 2023-03-27
@@ -21,7 +20,7 @@ This is a 8-part series about Picturesocial:
 
 In the face of uncertainty, we use logic, positive thinking, prayer, or whatever else seems like it might make an outcome more dependable. But sometimes you just need the right tool. For example, APIs often use frameworks to predict demand, but they cannot always provision compute capacity to serve it exactly when it's needed -- or Just in Time. Facing this uncertain availability, what tool can help?
 
-This may seem obvious for Serverless workloads, as its handled by the cloud provider, but for Kubernetes we use scaling strategies, like HPA (Horizontal Pod Autoscaler), that we explored in previous [posts](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes/). But HPA needs compute capacity from the Node Groups to schedule new pods, otherwise the new ones are evicted. Let’s take a look at how this process still won't solve the problem above.
+This may seem obvious for Serverless workloads, as its handled by the cloud provider, but for Kubernetes we use scaling strategies, like HPA (Horizontal Pod Autoscaler), that we explored in previous [posts](/posts/picturesocial/04-how-to-deploy-an-app-to-kubernetes). But HPA needs compute capacity from the Node Groups to schedule new pods, otherwise the new ones are evicted. Let’s take a look at how this process still won't solve the problem above.
 
 ![POD and worker autoscaling in Kubernetes](images/08-pod-autoscaling-kubernetes.jpg "POD and worker autoscaling in Kubernetes")
 

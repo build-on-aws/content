@@ -10,7 +10,6 @@ tags:
   - cloudwatch
   - java
   - tutorials
-showInHomeFeed: true
 movedFrom: /posts/instrumenting-java-apps-using-opentelemetry
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
