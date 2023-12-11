@@ -37,15 +37,12 @@ Let's say you're working with vectors that have up to 16,000 dimensions. Sounds 
 
 Now, let's talk about speed and accuracy, the two pillars of modern data searches. `pgvector` introduces approximate nearest neighbor (ANN) indexing methods, including the cutting-edge **IVFFLAT** and **HNSW** (hierarchical navigable small worlds), which we discussed earlier. It’s like navigating a complex maze with a highly detailed map. These methods help you zip through massive datasets, finding those near-perfect matches swiftly, without compromising much on the quality of your results. It's all about striking that sweet balance, crucial for applications in generative AI. For more details check this detailed blog on [Performance benchmarking and data ingestion with pgvector and HNSW on Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/accelerate-hnsw-indexing-and-searching-with-pgvector-on-amazon-aurora-postgresql-compatible-edition-and-amazon-rds-for-postgresql/)
 
-<div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-<p>
-    Before running the code, ensure an 'Aurora instance' is configured and all details are added to the '.env file'. Create the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html" style="color: #3498db; text-decoration: underline;">pgvector extension</a> on your Aurora PostgreSQL database cluster:
-    
-    CREATE EXTENSION vector;
 
-</p>
-</div>
-
+> Before running the code, ensure an 'Aurora instance' is configured and all details are added to the '.env file'. Create the [pgvector extension](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html) on your Aurora PostgreSQL database cluster:
+>
+> ```sql
+> CREATE EXTENSION vector;
+> ```
 
 
 Now, lets see how we can get started with Aurora with `pgvector` and `LangChain`.
