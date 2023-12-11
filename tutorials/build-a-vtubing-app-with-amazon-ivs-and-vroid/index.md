@@ -55,7 +55,7 @@ This tutorial consists of five parts:
 
 For brevity, this tutorial will only focus on the key steps needed to load, animate, and live stream your virtual avatar. The complete code example can be found on [Github](#).
 
-## Part 1 - Download your 3D character
+## Part 1 - Download Your 3D Character
 
 For this tutorial, we have created our own 3D character using [VRoid Studio](https://vroid.com/en/studio). VRoid Studio is a 3D character creator tool that lets you export VRM files locally or upload them to VRoid Hub to share with the public. After creating our 3D character, we have saved it in VRM format and made it available [here](https://d1l5n2avb89axj.cloudfront.net/avatar-first.vrm) for use in this tutorial and [on VRoid Hub here](https://hub.vroid.com/en/characters/1692004541821223967/models/6410417122824343972). VRM is a file format for handling 3D character models.
 
