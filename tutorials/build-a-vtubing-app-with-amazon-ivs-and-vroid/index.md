@@ -61,7 +61,7 @@ For this tutorial, we have created our own 3D character using [VRoid Studio](htt
 
 > You can optionally integrate with the [VRoid Hub API](https://developer.vroid.com/en/api/) to programmatically download and use other 3D characters from VRoid Hub.
 
-## Part 2 - Setup HTML to display the camera feed and live stream controls
+## Part 2 - Setup HTML To Display the Camera Feed and Live Stream Controls
 
 Create the following HTML in an `index.html`. In the `<body>` element, we first add a `<video>` element for displaying the front facing camera feed. This will be useful to see how well our avatar mimics our own movements. Additionally, add buttons to join what is known in Amazon IVS terminology as a stage. A stage is a virtual space where participants exchange audio and/or video. Joining a stage will enable us to live stream our avatar to the stage audience or other participants in the stage. We will also add a modal containing a form to add a participant token. A participant token can be thought of as a password needed to join a stage. It also identifies to Amazon IVS which stage someone wants to join. Later on in this tutorial, we will explain how to create a stage and a participant token. In the `<head>` tag, we have added some CSS styling files which you can find on the Github repo here.
 
