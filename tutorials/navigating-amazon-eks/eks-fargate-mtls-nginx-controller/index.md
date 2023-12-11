@@ -56,7 +56,7 @@ Some limitations to keep in mind:
 
 ## Overview
 
-This tutorial is part of a series on managing security-sensitive workloads using Amazon EKS, and it's dedicated to ensuring secure communications between Kubernetes workloads with mTLS in Amazon EKS Fargate. This tutorial builds on an existing [Amazon EKS cluster with Fargate](https://quip-amazon.com/qQUzAskUSBMy/Building-an-Amazon-EKS-Cluster-Preconfigured-to-Run-Sensitive-Workloads) configured for running sensitive workloads. It covers the following components:
+This tutorial is part of a series on managing security-sensitive workloads using Amazon EKS, and it's dedicated to ensuring secure communications between Kubernetes workloads with mTLS in Amazon EKS Fargate. This tutorial builds on an existing [Amazon EKS cluster with Fargate](https://community.aws/tutorials/navigating-amazon-eks/eks-cluster-financial-workload) configured for running financial workloads. It covers the following components:
 
 * [**Ingress-Nginx Controller**](https://kubernetes.github.io/ingress-nginx/deploy/#aws): It is an Ingress controller for Kubernetes using [NGINX](https://www.nginx.org/) as a reverse proxy and load balancer. It can enable [Client Certificate Authentication](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#client-certificate-authentication) using additional annotations in Ingress Rule to achieve mTLS.
 * [**AWS Certificate Manager Private CA**](https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#create-ca-console-procedure): enables creation of private certificate authority (CA) hierarchies, including root and subordinate CAs, without the investment and maintenance costs of operating an on-premises CA.
