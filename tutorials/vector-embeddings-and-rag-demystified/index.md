@@ -11,21 +11,18 @@ spaces:
   - gen-ai
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
-date: 2023-11-15
+date: 2023-12-11
 ---
 
-## What’s this Vector Buzz?
-
-Ever wondered how apps suggest songs like those on Amazon Music, or products that perfectly match your taste on Amazon.com? Dive into the world of vector databases, where data isn't just stored in tables and rows but is mapped as geometric points in space.
+Ever wondered how music apps suggest songs to you, or shopping apps suggest products that perfectly match your taste? To understand how, you have to dive into the world of vector databases, where data isn't just stored in tables and rows but is mapped as geometric points in space.
 
 ![Introduction](images/amazon-shopping.png)
 
 In the rapidly evolving landscape of data engineering and machine learning, the concept of vector embeddings has emerged as a cornerstone for a myriad of innovative applications. As we navigate through the era of generative AI and Large Language Models (LLMs), understanding and utilizing vector embeddings has become increasingly critical. A compelling example of this is in personalized recommendation systems, such as those used by streaming services. These platforms use vector embeddings to analyze users' viewing habits, translating titles, descriptions, and feedback into a mathematical space. This allows an LLM to identify what content a user is likely to enjoy based on how closely the vector of a new movie matches vectors of content they previously liked. This blog post aims to demystify the world of vector embeddings and explore their pivotal role in enhancing our interactions with vast data sets, ensuring AI systems can offer personalized, contextually relevant recommendations.
 
-Through this post, we will embark on a journey to understand the nuts and bolts of vector embeddings and how we can store those embeddings in a vector store using Amazon Bedrock, Amazon Aurora and LangChain. From understanding the basic concept of an embedding to exploring advanced vector storage techniques and indexing methods, we will cover all the essential aspects that make vector embeddings an indispensable tool in modern data engineering and machine learning.
+Through this post, we will embark on a journey to understand the nuts and bolts of vector embeddings and how we can store those embeddings in a vector store using Amazon Bedrock, Amazon Aurora, and LangChain. From understanding the basic concept of an embedding to exploring advanced vector storage techniques and indexing methods, we will cover all the essential aspects that make vector embeddings an indispensable tool in modern data engineering and machine learning.
 
-This marks the beginning of our two-part blog series. In this first installment, we delve into the fundamentals of vector embeddings. We'll explore what embeddings are, why they're crucial in the realm of AI, and delve into the methods of storing and indexing them. This foundational understanding sets the stage for part two, where we'll navigate the various vector storage solutions available on AWS. Here, we'll discuss how to effectively store your embeddings and utilize them in conjunction with LLMs to create robust, AI-powered applications. Additionally, we will introduce and leverage `LangChain`, an [tool](https://python.langchain.com/docs/get_started/introduction) that enhances our journey into the practical application of these concepts, demonstrating how to seamlessly integrate these technologies into real-world AI solutions.
-
+This marks the beginning of our two-part blog series. In this first installment, we delve into the fundamentals of vector embeddings. We'll explore what embeddings are, why they're crucial in the realm of AI, and delve into the methods of storing and indexing them. This foundational understanding sets the stage for part two, where we'll navigate the various vector storage solutions available on AWS. Here, we'll discuss how to effectively store your embeddings and utilize them in conjunction with LLMs to create robust, AI-powered applications. Additionally, we will introduce and leverage `LangChain`, a [tool](https://python.langchain.com/docs/get_started/introduction) that enhances our journey into the practical application of these concepts, demonstrating how to seamlessly integrate these technologies into real-world AI solutions.
 
 ## Embeddings
 
@@ -41,9 +38,18 @@ In image processing, we create embeddings by pulling out specific features from 
 
 The rise of **Convolutional Neural Networks (CNNs)** has significantly changed our approach to image analysis. CNNs, especially when pre-trained on large datasets like [ImageNet](https://www.image-net.org/download.php), use what are known as `filters` or `kernels`. 
 
+<<<<<<< HEAD
 > ## Convolutional Neural Networks (CNNs)
 >
 > A CNN operates by examining small portions of an image and recognizing various features like lines, colors, and shapes. It then progressively combines these features to understand more complex structures within the image, such as objects or faces. When applied to a new image, CNNs are capable of generating detailed and insightful vector representations. These representations are not just pixel-level data but a more profound understanding of the image's content, making CNNs invaluable in areas like facial recognition, medical imaging, and autonomous vehicles. Their ability to learn from vast amounts of data and identify intricate patterns makes them a cornerstone of modern image processing techniques.
+=======
+<div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
+    <h2 style="color: #2980b9;">Convolutional Neural Networks (CNNs)</h2>
+    <p>
+        A CNN operates by examining small portions of an image and recognizing various features like lines, colors, and shapes. It then progressively combines these features to understand more complex structures within the image, such as objects or faces. When applied to a new image, CNNs are capable of generating detailed and insightful vector representations. These representations are not just pixel-level data but a more profound understanding of the image's content, making CNNs invaluable in areas like facial recognition, medical imaging, and autonomous vehicles. Their ability to learn from vast amounts of data and identify intricate patterns makes them a cornerstone of modern image processing techniques.
+    </p>
+</div>
+>>>>>>> 3ca2117a08ef711fa264d2275b7679a244553316
 
 For both `textual` and `visual` data, the trend has shifted towards **transformer-based models**.
 
