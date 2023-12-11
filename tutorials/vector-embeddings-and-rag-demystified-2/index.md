@@ -33,17 +33,20 @@ For the purpose of this blog, we will explore using Amazon Aurora or Amazon RDS 
 
 Imagine stepping into the world of PostgreSQL databases, where managing high-dimensional vector data just got a whole lot easier, thanks to Amazon Aurora and Amazon RDS for PostgreSQL, and their integration with `pgvector`. This isn't just another technical add-on; it's a [community-driven extension](https://github.com/pgvector/pgvector) that transforms the way we handle vectors in databases. Think of `pgvector` as a bridge connecting the robustness of relational databases with the dynamic world of vector data.
 
-Picture this: You're working with vectors that have up to 16,000 dimensions. Sounds daunting, right? But here's where `pgvector` shines, making it practical by optimizing indexing for up to 2,000 dimensions, thus tailoring your similarity search performance to be both efficient and effective. It's like having a superpower in your database toolkit, especially if you're already a fan of PostgreSQL and have your data neatly structured.
+Let's say you're working with vectors that have up to 16,000 dimensions. Sounds daunting, right? But here's where `pgvector` shines, making it practical by optimizing indexing for up to 2,000 dimensions, thus tailoring your similarity search performance to be both efficient and effective. It's like having a superpower in your database toolkit, especially if you're already a fan of PostgreSQL and have your data neatly structured.
 
 Now, let's talk about speed and accuracy, the two pillars of modern data searches. `pgvector` introduces approximate nearest neighbor (ANN) indexing methods, including the cutting-edge **IVFFLAT** and **HNSW** (hierarchical navigable small worlds), which we discussed earlier. It’s like navigating a complex maze with a highly detailed map. These methods help you zip through massive datasets, finding those near-perfect matches swiftly, without compromising much on the quality of your results. It's all about striking that sweet balance, crucial for applications in generative AI. For more details check this detailed blog on [Performance benchmarking and data ingestion with pgvector and HNSW on Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/accelerate-hnsw-indexing-and-searching-with-pgvector-on-amazon-aurora-postgresql-compatible-edition-and-amazon-rds-for-postgresql/)
 
 <div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
 <p>
-    Before running the code, ensure an 'Aurora instance' is configured and all details are added to the '.env file'. Create the 'pgvector extension' on your Aurora PostgreSQL database cluster:
+    Before running the code, ensure an 'Aurora instance' is configured and all details are added to the '.env file'. Create the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html" style="color: #3498db; text-decoration: underline;">pgvector extension</a> on your Aurora PostgreSQL database cluster:
     
     CREATE EXTENSION vector;
+
 </p>
 </div>
+
+
 
 Now, lets see how we can get started with Aurora with `pgvector` and `LangChain`.
 
@@ -61,14 +64,14 @@ load_dotenv()
 COLLECTION_NAME = "my_collection"
 
 # Construct the connection string to the PostgreSQL database
-CONNECTION_STRING = PGVector.connection_string_from_db_params(                                                  
-                                                                driver=os.getenv("PGVECTOR_DRIVER"),
-                                                                user=os.getenv("PGVECTOR_USER"),
-                                                                password=os.getenv("PGVECTOR_PASSWORD"),
-                                                                host=os.getenv("PGVECTOR_HOST"),
-                                                                port=os.getenv("PGVECTOR_PORT"),
-                                                                database=os.getenv("PGVECTOR_DATABASE"),
-                                                            )
+CONNECTION_STRING = PGVector.connection_string_from_db_param(                                                  
+            driver=os.getenv("PGVECTOR_DRIVER"),
+            user=os.getenv("PGVECTOR_USER"),
+            password=os.getenv("PGVECTOR_PASSWORD"),
+            host=os.getenv("PGVECTOR_HOST"),
+            port=os.getenv("PGVECTOR_PORT"),
+            database=os.getenv("PGVECTOR_DATABASE"),
+        )
 
 # Initialize the text embedding model
 embeddings = BedrockEmbeddings()
