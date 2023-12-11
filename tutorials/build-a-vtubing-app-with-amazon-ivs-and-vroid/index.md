@@ -188,7 +188,7 @@ loader.load(
 );
 ```
 
-## Part 4 - Animating a virtual character with your own body movements
+## Part 4 - Animating a Virtual Character With Your Own Body Movements
 
 To start animating your virtual character, add `<script>` elements for the [Kalidokit](https://github.com/yeemachine/kalidokit) library, [MediaPipe Holistic](https://github.com/google/mediapipe/blob/master/docs/solutions/holistic.md) library, and camera utility module from MediaPipe to the `<head>` element in `index.html`. MediaPipe Holistic is a computer vision pipeline used to track a user’s body movements, facial expressions, and hand gestures. This is useful for animating your digital avatar to mimic your own movements. Kalidokit includes the use of blendshapes for facial animation and kinematics solvers for body movements to create more realistic digital avatars. Blendshapes are a technique used in character animation to create a wide range of facial animations. Kinematics solvers are algorithms used to calculate the position and orientation of an avatar’s limbs. When making our avatar animate, aka character rigging, a kinematics solver helps determine how a character’s joints and bones should move to achieve a desired pose or animation. In short, MediaPipe Holistic tracks your physical movements while Kalidokit takes those as inputs to animate your avatar. The camera utility module from MediaPipe will simplify the process of providing our front-facing camera input to MediaPipe Holistic. MediaPipe Holistic needs this camera input to do hand, face and body movement tracking.
 
