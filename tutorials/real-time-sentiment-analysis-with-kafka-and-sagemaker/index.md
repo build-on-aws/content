@@ -41,7 +41,7 @@ In this tutorial, we'll show you an example of using a model run by SageMaker an
 
 ---
 
-## Step 1 - Set up Apache Kafka cluster
+## Step 1 - Set up an Apache Kafka® cluster
 
 ### Secure connection between AWS SageMaker and Apache Kafka
 To access an Apache Kafka cluster from a Sagemaker Jupiter Notebook and establish a TLS connection you need to have this data from your cluster:
