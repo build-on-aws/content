@@ -1,37 +1,40 @@
 ---
 title: "Getting started with your Raspberry Pi Pico W and AWS IoT Core in under 15 minutes"
-description: In this guide, we will walk you through quickly connecting your Raspberry Pi Pico-W to AWS IoT Core, so you can start building your cloud-connected IoT project.
+description: In this guide, we will walk you through quickly connecting your Raspberry Pi Pico W to AWS IoT Core, so you can start building your cloud-connected IoT project.
 tags:
   - iot
   - iot-core
   - micropython
   - raspberry-pi
   - pico-w
-authorGithubAlias: felerp, vdhanota
-authorName: Perry Feler, Varinder Dhanota
-date: 2023-12-07
+authorGithubAlias: vdhanota
+authorName: Varinder Dhanota
+additionalAuthors:
+  - authorGithubAlias: pfeler
+    authorName: Perry Feler
+date: 2023-12-15
 ---
 
 Let’s assume that you have an amazing idea for a new Internet of Things (IoT) project. You want to leverage the Raspberry Pi Pico W microcontroller board for its low cost, versatility, and built-in wireless capabilities. You also want to connect it to AWS to take advantage of the choice and flexibility of over 200 fully-featured services.
 
 The Raspberry Pi Pico W (“Pico W”) is a compact, low-cost, dual core microcontroller board that has built-in 2.4GHz 802.11n wireless LAN and Bluetooth 5.2 connectivity, making it easy to get your device connected to a network. You can learn about the Raspberry Pi Pico series of boards [here](https://www.raspberrypi.com/products/raspberry-pi-pico/).
 
-AWS IoT Core helps you securely connect and manage IoT devices at scale. Through IoT Core, your devices can exchange messages using MQTT, HTTP, or WebSockets protocols, and interact with AWS services.
+[AWS IoT Core](https://aws.amazon.com/iot-core/) helps you securely connect and manage IoT devices at scale. Through IoT Core, your devices can exchange messages using MQTT, HTTP, or WebSockets protocols, and interact with AWS services.
 
 In this guide, we will walk you through quickly connecting your Raspberry Pi Pico W device to AWS IoT Core, so you can start building your cloud-connected IoT project.
 
 Here are the main steps:
 
-- Creating a *Thing* in AWS IoT Core, and setting up the certificates and IoT Policy
+- Create a *Thing* in AWS IoT Core, and set up the certificates and IoT Policy
 - Configure your Pico W device to connect to AWS IoT Core
-- Test and validate sending data from the Pico W to AWS
-- Sending data back from AWS to the Pico W
+- Test and validate by sending data from the Pico W to AWS
+- Send data back from AWS to the Pico W
 
 The best way to learn about AWS IoT is to get hands-on experience. So let’s jump into setting up your first device and getting it connected!
 
 ## Requirements
 
-Before we get started, make sure you have the following items ready:
+Before we get started, make sure you have the following ready:
 
 - AWS account with console access
 - Raspberry Pi Pico W hardware device
@@ -63,7 +66,7 @@ AWS CloudShell is a browser-based command prompt that you can access from within
    THING_NAME=RaspberryPiPicoW
    ```
 
-   - A *Thing* is a virtual representation of a hardware device in AWS IoT. Each *Thing* needs a unique name. In this example, we are using `RaspberryPiPicoW` for illustration purposes, but you can select any name
+   - Each *Thing* needs a unique name. In this example, we are using `RaspberryPiPicoW` for illustration purposes, but you can select any name
 
    - The name will be stored in an environment variable for later steps
 
@@ -272,7 +275,7 @@ You will connect your Pico W device to your development computer via the micro U
 
    ![Thonny toolbar run button](images/Thonny_toolbar.jpg)
 
-## Validate messages are flowing between the Pico W and AWS IoT Core
+## Validate message flow between the Pico W and AWS IoT Core
 
 Now that we have configured the Pico W device and its corresponding *Thing* in AWS IoT Core, we are ready to test.
 
@@ -348,7 +351,7 @@ In this guide we showed you how to quickly setup and on-board your Raspberry Pi 
 
 We used the browser-based AWS CloudShell command-line interface to create a virtual representation of the device as a *Thing* in AWS IoT Core. We also created the certificates and set its permissions via the IoT Policy. We then used the Thonny IDE to configure the device locally by installing the required MicroPython libraries and certificates, and then modified the `main.py` script. Finally, we validated the device’s connectivity with AWS IoT Core by sending messages to AWS IoT and observing them in the MQTT test client. We also sent messages back to the device to manipulate the device’s on-board LED.
 
-Now that your device is connected, you are set to explore and learn more about the various other features in AWS IoT Core, including the ability to leverage other AWS services. For example, you can create rules to save your device’s data to Amazon Simple Storage Service (S3), or a variety of databases, such as Amazon Relational Database Service (RDS), Amazon DynamoDB, or Amazon TimeStream. You can also send alerts via Amazon Simple Notification Service (SNS), or trigger code using AWS Lambda when certain conditions are detected. Check out the [Next Steps and Learn More](#next-steps-and-learn-more) section for suggested resources to continue your learning.
+Now that your device is connected, you are set to explore and learn more about the various other features in AWS IoT Core, including the ability to leverage other AWS services. For example, you can create rules to save your device’s data to Amazon Simple Storage Service (S3), or a variety of databases, such as Amazon Relational Database Service (RDS), Amazon DynamoDB, or Amazon TimeStream. You can also send alerts via Amazon Simple Notification Service (SNS), or trigger code using AWS Lambda when certain conditions are detected.
 
 ## Next Steps and Learn More
 
