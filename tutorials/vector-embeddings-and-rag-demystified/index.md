@@ -31,11 +31,7 @@ This marks the beginning of our two-part blog series. In this first installment,
 
 Let's start with the basics: what is an **embedding**? An embedding is a numerical representation of content in a form that machines can process and understand. The essence of the process is to convert an object, such as an image or text, into a vector that encapsulates its semantic content while discarding irrelevant details as much as possible. An embedding takes a piece of content, like a word, sentence, or image, and maps it into a multi-dimensional vector space. The distance between two embeddings indicates the semantic similarity between the corresponding concepts.
 
-<div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-    <p>
-        Consider the terms <span style="font-weight:bold; color: #c0392b;">'coffee'</span> and <span style="font-weight:bold; color: #16a085;">'tea'</span>. In a hypothetical vocabulary space, these two could be transformed into numerical vectors. If we visualize this in a 3-dimensional vector space, <span style="color: #c0392b;">'coffee'</span> might be represented as <span style="background-color: #f1c40f; border-radius: 4px; padding: 2px;">[1.2, -0.9, 0.3]</span> and <span style="color: #16a085;">'tea'</span> as <span style="background-color: #f1c40f; border-radius: 4px; padding: 2px;">[1.0, -0.8, 0.5]</span>. Such numerical vectors carry semantic information, indicating that <span style="color: #c0392b;">'coffee'</span> and <span style="color: #16a085;">'tea'</span> are conceptually similar to each other due to their association with hot beverages and would likely be positioned closer together in the vector space than either would be to unrelated concepts like 'astronomy' or 'philosophy'.
-    </p>
-</div>
+> Consider the terms '**coffee**' and '**tea**'. In a hypothetical vocabulary space, these two could be transformed into numerical vectors. If we visualize this in a 3-dimensional vector space, '**coffee**' might be represented as `[1.2, -0.9, 0.3]` and '**tea**' as `[1.0, -0.8, 0.5]`. Such numerical vectors carry semantic information, indicating that '**coffee**' and '**tea**' are conceptually similar to each other due to their association with hot beverages and would likely be positioned closer together in the vector space than either would be to unrelated concepts like '**astronomy**' or '**philosophy**'.
 
 When it comes to text analysis, several strategies exist for converting words into vectors. Initially, one of the simpler techniques was the **bag-of-words model**. Here, words within a text are represented by their frequency of occurrence. [Scikit-learn](https://scikit-learn.org/stable/), a powerful Python Library, encapsulates this method within its `CountVectorizer` tool. For a while, this was the standard—until the introduction of **word2vec**.
 
@@ -45,12 +41,9 @@ In image processing, we create embeddings by pulling out specific features from 
 
 The rise of **Convolutional Neural Networks (CNNs)** has significantly changed our approach to image analysis. CNNs, especially when pre-trained on large datasets like [ImageNet](https://www.image-net.org/download.php), use what are known as `filters` or `kernels`. 
 
-<div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-    <h2 style="color: #2980b9;">Convolutional Neural Networks (CNNs)</h2>
-    <p>
-        A CNN operates by examining small portions of an image and recognizing various features like lines, colors and shapes. It then progressively combines these features to understand more complex structures within the image, such as objects or faces. When applied to a new image, CNNs are capable of generating detailed and insightful vector representations. These representations are not just pixel-level data but a more profound understanding of the image's content, making CNNs invaluable in areas like facial recognition, medical imaging, and autonomous vehicles. Their ability to learn from vast amounts of data and identify intricate patterns makes them a cornerstone of modern image processing techniques.
-    </p>
-</div>
+> ## Convolutional Neural Networks (CNNs)
+>
+> A CNN operates by examining small portions of an image and recognizing various features like lines, colors, and shapes. It then progressively combines these features to understand more complex structures within the image, such as objects or faces. When applied to a new image, CNNs are capable of generating detailed and insightful vector representations. These representations are not just pixel-level data but a more profound understanding of the image's content, making CNNs invaluable in areas like facial recognition, medical imaging, and autonomous vehicles. Their ability to learn from vast amounts of data and identify intricate patterns makes them a cornerstone of modern image processing techniques.
 
 For both `textual` and `visual` data, the trend has shifted towards **transformer-based models**.
 
@@ -60,15 +53,14 @@ These transformer-based models consider the context and order of elements in the
 
 Embeddings transform data into numerical vectors, making them highly adaptable tools. They enable us to apply mathematical operations to assess similarities or integrate them into various machine learning models. Their uses are diverse, ranging from search and similarity assessments to categorization and topic identification. A practical example is sentiment analysis, where embeddings of product reviews can be evaluated for their closeness to '`positive`' or '`negative`' sentiment indicators. This flexibility makes embeddings a fundamental component in many data-driven applications.
 
-<div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-    <h2 style="color: #2980b9;">Distance Metrics Between Embeddings</h2>
-    <p>There are different distance metrics used in vector similarity calculations such as:</p>
-    <ul>
-        <li><strong>Euclidean distance:</strong> It measures the straight-line distance between two vectors in a vector space. It ranges from 0 to infinity, where 0 represents identical vectors, and larger values represent increasingly dissimilar vectors.</li>
-        <li><strong>Cosine distance:</strong> This similarity measure calculates the cosine of the angle between two vectors in a vector space. It ranges from -1 to 1, where 1 represents identical vectors, 0 represents orthogonal vectors, and -1 represents vectors that are diametrically opposed.</li>
-        <li><strong>Dot product:</strong> This measure reflects the product of the magnitudes of two vectors and the cosine of the angle between them. Its range extends from -∞ to ∞, with a positive value indicating vectors that point in the same direction, 0 indicating orthogonal vectors, and a negative value indicating vectors that point in opposite directions.</li>
-    </ul>
-</div>
+> ## Distance Metrics Between Embeddings
+>
+> There are different distance metrics used in vector similarity calculations such as:
+>
+> - **Euclidean distance:** It measures the straight-line distance between two vectors in a vector space. It ranges from 0 to infinity, where 0 represents identical vectors, and larger values represent increasingly dissimilar vectors.
+> - **Cosine distance:** This similarity measure calculates the cosine of the angle between two vectors in a vector space. It ranges from -1 to 1, where 1 represents identical vectors, 0 represents orthogonal vectors, and -1 represents vectors that are diametrically opposed.
+> - **Dot product:** This measure reflects the product of the magnitudes of two vectors and the cosine of the angle between them. Its range extends from -∞ to ∞, with a positive value indicating vectors that point in the same direction, 0 indicating orthogonal vectors, and a negative value indicating vectors that point in opposite directions.
+
 
 These distance metrics go beyond theoretical mathematics and are extensively employed in a variety of vector databases, including Aurora, OpenSearch, and other vector stores. We'll explore their practical application in Aurora using `pgvector` for similarity searches.
 
@@ -233,11 +225,11 @@ Understanding how to represent any data point as a `vector` is crucial, but equa
 
 **Vector search** involves representing each data point as a `vector` in a high-dimensional space, capturing the data's features or characteristics. The aim is to identify vectors most similar to a given query vector. We've seen how these vector embeddings, numerical arrays representing coordinates in a high-dimensional space, are crucial in measuring distances using metrics like `cosine similarity` or `euclidean distance`, which we discussed earlier.
 
-<div style="border: 2px solid #3498db; padding: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-    <h3 style="color: #2980b9;">E-commerce Product Recommendation</h3>
-    <p>Imagine an e-commerce platform where each product has a vector representing its features like color, size, category, and user ratings. When a user searches for a product, the search query is converted into a vector. The system then performs a vector search to find products with similar feature vectors, suggesting these as recommendations.</p>
-    <p>This process requires efficient vector storage. A vector storage mechanism is essential for storing and retrieving vector embeddings. While standalone solutions exist for this, vector databases like Amazon Aurora (with 'pgvector'), Amazon OpenSearch, and Amazon Kendra offer more integrated functionalities. They not only store but also manage large sets of vectors, using indexing mechanisms for efficient similarity searches. We will dive into vector stores/database in the next section.</p>
-</div>
+> ## E-commerce Product Recommendation
+>
+> Imagine an e-commerce platform where each product has a vector representing its features like color, size, category, and user ratings. When a user searches for a product, the search query is converted into a vector. The system then performs a vector search to find products with similar feature vectors, suggesting these as recommendations.
+>
+> This process requires efficient vector storage. A vector storage mechanism is essential for storing and retrieving vector embeddings. While standalone solutions exist for this, vector databases like Amazon Aurora (with 'pgvector'), Amazon OpenSearch, and Amazon Kendra offer more integrated functionalities. They not only store but also manage large sets of vectors, using indexing mechanisms for efficient similarity searches. We will dive into vector stores/database in the next section.
 
 ### Delving Deeper Into Vector Storage
 
@@ -251,10 +243,9 @@ To optimize vector search, we typically consider these aspects:
 
 **Indexing** in the context of vector embeddings is a method of organizing data to optimize its retrieval. It’s akin to indexing in traditional database systems, where it allows quicker access to records. For vector embeddings, indexing aims to structure the vectors so that similar vectors are stored adjacently, enabling fast proximity or similarity searches. Algorithms like K-dimensional trees (k-d trees) are commonly applied, but many others like Ball Trees, Annoy, and FAISS are often implemented, especially for high-dimensional vectors.
 
-<div style="border: 2px solid #3498db; padding: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-    <h3 style="color: #2980b9;">K-Nearest Neighbor (KNN)</h3>
-    <p>K-Nearest Neighbor (KNN) is a straightforward algorithm used for classification and regression tasks. In KNN, the class or value of a data point is determined by its k nearest neighbors in the training dataset.</p>
-</div>
+> ## K-Nearest Neighbor (KNN)
+>
+> K-Nearest Neighbor (KNN) is a straightforward algorithm used for classification and regression tasks. In KNN, the class or value of a data point is determined by its k nearest neighbors in the training dataset.
 
 Here's how the K-NN algorithm works at a high level:
 
@@ -351,13 +342,12 @@ When you search for a specific node, you begin at the top layer. If you find a c
 
 ![HNSW](images/hnsw_4.png)
 
-<div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-    <p>
-In addition to HNSW and KNN, there are other ways to find similar items or patterns using graphs, such as with Graph Neural Networks (GNN) and Graph Convolutional Networks (GCN). These methods use the connections and relationships in graphs to search for similarities. There's also the Annoy (Approximate Nearest Neighbors Oh Yeah) algorithm, which sorts vectors using a tree structure made of random divisions, kind of like sorting books on shelves based on different categories. Annoy is user-friendly and good for quickly finding items that are almost, but not exactly, the same.
+> ## Advanced Graph-Based Similarity Search Techniques
+>
+>In addition to HNSW and KNN, there are other ways to find similar items or patterns using graphs, such as with Graph Neural Networks (GNN) and Graph Convolutional Networks (GCN). These methods use the connections and relationships in graphs to search for similarities. There's also the Annoy (Approximate Nearest Neighbors Oh Yeah) algorithm, which sorts vectors using a tree structure made of random divisions, kind of like sorting books on shelves based on different categories. Annoy is user-friendly and good for quickly finding items that are almost, but not exactly, the same.
+>
+>When choosing one of these methods, it's important to consider how fast you need the search to be, how precise the results should be, and how much computer memory you can use. The right choice depends on what the specific task needs and the type of data you're working with.
 
-When choosing one of these methods, it's important to consider how fast you need the search to be, how precise the results should be, and how much computer memory you can use. The right choice depends on what the specific task needs and the type of data you're working with.
-    </p>
-</div>
 
 ## Vector Libraries
 
@@ -378,12 +368,14 @@ A vector database is a type of database that is specifically designed to handle 
 
 In essence, vector databases are like advanced tools for organizing and navigating vast and varied data collections. They are especially beneficial for scenarios where quick and efficient searching through different types of data, converted into vector fingerprints, is crucial. These databases are popular because they are optimized for scalability and representing and retrieving data in high-dimensional vector spaces. Traditional databases are not designed to efficiently handle large-dimensional vectors, such as those used to represent images or text embeddings.
 
-<div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-    <h2 style="color: #2980b9;">Applications of Vector Databases</h2>
-    <p>Vector databases are key in managing and analyzing machine learning models and their embeddings. They shine in similarity or semantic search, enabling quick and efficient navigation through massive datasets of text, images, or videos to find items matching specific queries based on vector similarities. This technology finds diverse applications, including:</p>
-    <p>For <strong>Anomaly Detection</strong>, vector databases compare embeddings to identify unusual patterns, crucial in areas like fraud detection and network security. In <strong>Personalization</strong>, they enhance recommendation systems by aligning similar vectors with user preferences. In the realm of <strong>Natural Language Processing (NLP)</strong>, these databases facilitate tasks like sentiment analysis and text classification by effectively comparing and analyzing text represented as vector embeddings.</p>
-    <p>As the technology evolves, vector databases continue to find new and innovative applications, broadening the scope of how we handle and analyze large datasets in various fields.</p>
-</div>
+> ## Applications of Vector Databases
+>
+> Vector databases are key in managing and analyzing machine learning models and their embeddings. They shine in similarity or semantic search, enabling quick and efficient navigation through massive datasets of text, images, or videos to find items matching specific queries based on vector similarities. This technology finds diverse applications, including:
+>
+> For **Anomaly Detection**, vector databases compare embeddings to identify unusual patterns, crucial in areas like fraud detection and network security. In **Personalization**, they enhance recommendation systems by aligning similar vectors with user preferences. In the realm of **Natural Language Processing (NLP)**, these databases facilitate tasks like sentiment analysis and text classification by effectively comparing and analyzing text represented as vector embeddings.
+>
+> As the technology evolves, vector databases continue to find new and innovative applications, broadening the scope of how we handle and analyze large datasets in various fields.
+
 
 ## Summary
 
