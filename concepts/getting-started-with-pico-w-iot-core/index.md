@@ -1,5 +1,5 @@
 ---
-title: "Getting started with your Raspberry Pi Pico W and AWS IoT Core in under 15 minutes"
+title: "Getting started with your Raspberry Pi Pico W and AWS IoT Core in under 30 minutes"
 description: In this guide, we will walk you through quickly connecting your Raspberry Pi Pico W to AWS IoT Core, so you can start building your cloud-connected IoT project.
 tags:
   - iot
