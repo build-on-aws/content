@@ -12,7 +12,7 @@ tags:
 authorGithubAlias: anelook
 authorName: Olena Kutsenko
 githubUserLabel: community
-date: 2023-11-28
+date: 2023-12-11
 ---
 
 Ever wondered how to enrich your real-time streaming data with machine learning-driven analysis? Whether it is event or anomaly detection, automated alerts and notifications, network or sentiment analysis, you can leverage the power of machine learning algorithms to gain valuable insights and make informed decisions. By integrating machine learning into your real-time streaming data pipeline, you open up a world of possibilities for all kinds of data analysis.
@@ -35,7 +35,7 @@ In this tutorial, we'll show you an example of using a model run by SageMaker an
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://raw.githubusercontent.com/Aiven-Labs/sentiment-analysis-kafka-sagemaker/main/sentiment-analysis.ipynb)    |
 | 💰 Cost to complete | Free when using the AWS Free Tier and Aiven for Apache Kafka |
 | 🔨 Services used | - Kinesis Data Streams <br> - Kinesis Data Analytics <br> - S3 bucket <br> - Glue Data Catalog |
-| ⏰ Last Updated     | 2023-06-29                           |
+| ⏰ Last Updated     | 2023-12-11                           |
 
 | ToC |
 |-----|
