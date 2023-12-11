@@ -2,13 +2,12 @@
 title: "Real-Time Sentiment Analysis Using Apache Kafka and SageMaker Jupyter Notebooks"
 description: "Learn how to enrich real-time social media records that are going through Apache Kafka stream with sentiment analysis using SageMaker and Jupyter Notebooks."
 tags:
-    - tutorials
-    - aws
-    - list-of-other-tags-as-kebab-case-like-this-with-dashes-separating-and-all-lower-case-like-below
-    - apache-kafka
     - sentiment-analysis
     - sage-maker
     - jupiter-notebook
+    - tutorials
+    - aws
+    - apache-kafka
 authorGithubAlias: anelook
 authorName: Olena Kutsenko
 githubUserLabel: community
