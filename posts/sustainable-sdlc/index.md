@@ -7,10 +7,14 @@ tags:
   - best practices
 images:
   banner: images/s-sdlc-phases.jpg
-authorGithubAlias: ranbirsh
+spaces:
+  - cost-optimization
+waves:
+  - cost
+authorGithubAlias: singhr2
 authorName: Ranbir Singh
 additionalAuthors: 
-  - authorGithubAlias: ghm
+  - authorGithubAlias: sammk87
     authorName: Sam Mokhtari
 date: 2023-11-08
 ---
