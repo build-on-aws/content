@@ -11,6 +11,7 @@ tags:
     - jupiter-notebook
 authorGithubAlias: anelook
 authorName: Olena Kutsenko
+githubUserLabel: community
 date: 2023-11-28
 ---
 
@@ -26,35 +27,39 @@ In this tutorial, we'll show you an example of using a model run by SageMaker an
 
 ## Prerequisites
 
-| Attributes                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ✅ AWS Level        | Intermediate - 200                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ⏱ Time to complete  | 20 minutes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 💰 Cost to complete | Free when using the AWS Free Tier and Aiven for Apache Kafka                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Attributes          |                                   |
+| ------------------- | -------------------------------------- |
+| ✅ AWS Level        | Intermediate - 200                             |
+| ⏱ Time to complete  | 20 mins                      |
 | 🧩 Prerequisites    | - AWS account and access to SageMaker Studio. Follow this link to [set up your AWS account](https://aws.amazon.com/resources/create-account/) if you don’t have any. <br>- Apache Kafka. We’ll be using [Aiven for Apache Kafka cluster](https://aiven.io/kafka), which you can create at no cost for this tutorial as part of a free trial. Follow this link to [register for Aiven for Apache Kafka](https://go.aiven.io/olena-signup). <br>- Data for sentiment analysis. Follow [steps described in this article](https://aiven.io/developer/mastodon-kafka-js) to stream mastodon data to Apache Kafka topic. |
-| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://raw.githubusercontent.com/Aiven-Labs/sentiment-analysis-kafka-sagemaker/main/sentiment-analysis.ipynb)                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ⏰ Last Updated     | 2023-11-28                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://raw.githubusercontent.com/Aiven-Labs/sentiment-analysis-kafka-sagemaker/main/sentiment-analysis.ipynb)    |
+| 💰 Cost to complete | Free when using the AWS Free Tier and Aiven for Apache Kafka |
+| 🔨 Services used | - Kinesis Data Streams <br> - Kinesis Data Analytics <br> - S3 bucket <br> - Glue Data Catalog |
+| ⏰ Last Updated     | 2023-06-29                           |
 
 | ToC |
 |-----|
 
 ---
 
-## Step 1 - Set up an Apache Kafka® cluster
+## Step 1 - Set up an Apache Kafka cluster
 
 ### Secure connection between AWS SageMaker and Apache Kafka
+
 To access an Apache Kafka cluster from a Sagemaker Jupiter Notebook and establish a TLS connection you need to have this data from your cluster:
+
 - service URI of your Apache Kafka cluster
 - files containing access key,  access certificate and CA certificate of your Apache Kafka services.
 
-All of those you can get from Aiven for Apache Kafka service landing page.
-![Get credentials to access Aiven for Apache Kafka](images/Aiven-service.png)
+All of those you can get from [Aiven for Apache Kafka](https://aiven.io/kafka) service landing page.
+![Get credentials to access Aiven for Apache Kafka](images/Aiven-service.webp)
 
 Keep this data ready, we'll use it in the steps below.
 
 ### Apache Kafka topics for input and output data
+
 We'll need three topics in your Apache Kafka cluster:
+
 - **social_media_messages** - this is the topic that contains data to be analised.
 - **enriched_data** - this topic will be filled in with the analysis result
 - **processing_errors** - this topic will be collecting information on the errors during data analysis.
@@ -82,7 +87,7 @@ Select Set up for single user (Quick setup) and wait till a new domain is establ
 
 Once you'll land into Amazon SageMaker Studio, select JumpStart:
 
-![Select JumpStart in  Amazon SageMaker Studio](images/JumpStart.png)
+![Select JumpStart in  Amazon SageMaker Studio](images/JumpStart.webp)
 
 Here you can search for one of already existing and trained models. We want a model that is trained to do text classifications. Different models have different advantages and disadvantages, select a model taking into account type of text you want to analyse and the length of text snippet. Social media messages from Mastodon are quite short, so we'll go for a model "DistilBERT Base Multilingual Cased". You can find it by using the search bar. Select the one for text classification:
 ![select-model.png](images/Fselect-model.png)
@@ -97,6 +102,7 @@ When the model is deployed, open the demo notebook. You'll be prompted to set up
 In this demo notebook you can make test requests for text classification. We'll be modifying the existing instructions as the part of the next step.
 
 ## Step 3 - Write code
+
 Now it is time to write the code!  Feel free to clean the existing cells, we'll replace the example code with our own logic.
 
 If you want to skip explanations and just to copy the result , load [the final notebook code](https://raw.githubusercontent.com/Aiven-Labs/sentiment-analysis-kafka-sagemaker/main/sentiment-analysis.ipynb) (don't forget to add the information about your Kafka instance!). Alternatively, follow the more detailed step-by-step instructions below.
@@ -104,16 +110,16 @@ If you want to skip explanations and just to copy the result , load [the final n
 The first step is to install Apache Kafka python library. For this create a new cell and add this instruction:
 
 ```bash
-  !pip install confluent-kafka
+!pip install confluent-kafka
 ```
 
 Next we'll import dependencies that we need:
 
 ```python
-  from confluent_kafka import Producer, Consumer, KafkaError # to produce and consume data from Apache Kafka topics
-  import boto3 # to programmatically create, configure, and manage AWS resources
-  import json # to work with social media messages that are represented as JSON objects
-  import re # for helper functionality to clean HTML tags from social media messages
+from confluent_kafka import Producer, Consumer, KafkaError # to produce and consume data from Apache Kafka topics
+import boto3 # to programmatically create, configure, and manage AWS resources
+import json # to work with social media messages that are represented as JSON objects
+import re # for helper functionality to clean HTML tags from social media messages
 ```
 
 Now let's define a function that we'll later use to run model inference and get predictions based in provided text:
@@ -171,6 +177,7 @@ def get_clean_content(json_object):
     only_text = re.sub(CLEANR, '', content)
     return only_text
 ```
+
 Create Apache Kafka producer and logic to process data that we want to send to the topics:
 
 ```python
@@ -254,15 +261,16 @@ To see that data was successfully sent to Apache Kafka topic **enriched_data** g
 ![Getting topic messages from the topic](images/topic-messages.png)
 
 Now you can go through all the processed records:
-![Example of enriched message](images/enriched_data.png)
+![Example of enriched message](images/enriched_data.webp)
 
-You can also check the topic with errors that occured during processing:
+You can also check the topic with errors that occurred during processing:
 
-![Error example](images/example_error_message.png)
+![Error example](images/example_error_message.webp)
 
 ## Clean up
+
 Don't forget to clean up the resources you've used.
-For Sagemaker you need to clean up created Endpoint, Endpoint configuration, running Model and Notebook instances. Check https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-cleanup.html for more details.
+For Sagemaker you need to clean up created Endpoint, Endpoint configuration, running Model and Notebook instances. Check [https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-cleanup.html](https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-cleanup.html) for more details.
 
 In Aiven for Apache Kafka select "Delete service" in the menu:
 ![Delete Apache Kafka service](images/delete-kafka.png)
