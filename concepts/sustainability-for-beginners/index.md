@@ -18,7 +18,6 @@ date: 2023-11-22
 ## Overview
 
 Sustainability is a broad concept that can mean different things to different people. In the world of cloud computing, it is important to understand the impact IT(Information Technology) has on our environment. This blog serves as a useful starting point to build literacy around commonly referred sustainability terms and acronyms in cloud sustainability conversations. This is not a complete list but should be able to help you get started. The blog also highlights some of key programs and tools that AWS customers can leverage to help them in measuring and reducing environmental impact from their workloads.
-
 <br><br>
 
 ### Environmental, Social, and Corporate Governance (ESG)
