@@ -210,7 +210,7 @@ If everything goes as planned we should see that our queue has been created in t
 
 ## Clean Up
 
-To clean-up your AWS account, remember to delete the following resources:
+To clean up your AWS account, remember to delete the following resources:
 
 * The SQS Queue created by Terraform
 * The S3 bucket we created to store the Terraform state files
