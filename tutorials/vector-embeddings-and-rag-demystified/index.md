@@ -13,7 +13,7 @@ authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2023-12-12
 ---
-
+<test>
 Ever wondered how music apps suggest songs to you, or shopping apps suggest products that perfectly match your taste? To understand how, you have to dive into the world of vector databases, where data isn't just stored in tables and rows but is mapped as geometric points in space.
 
 ![Introduction](images/amazon-shopping.png)
