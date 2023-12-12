@@ -62,7 +62,7 @@ In this tutorial, you will:
 
 ![View services that have been opted-in for backups](images/image02.png)
 
-    * On the **Configure resources** page, use the toggle switches to enable or disable the services used with AWS Backup. In this case, enable DynamoDB. Choose **Confirm** when your services are configured. 
+* On the **Configure resources** page, use the toggle switches to enable or disable the services used with AWS Backup. In this case, enable DynamoDB. Choose **Confirm** when your services are configured. 
 
 ![Enable DynamoDB backups](images/image03.png)
 
@@ -115,7 +115,7 @@ Instead of using the Default vault or another existing vault, you can create a n
 
 ![Select newly created backup vault as vault to be used](images/image10.png)
 
-* Choose the **Default role** for the** **** IAM role**, as shown in the screenshot below. If the AWS Backup **Default role** is not present in your account, one will be automatically created for you with the correct permissions.
+* Choose the **Default role** for the** **IAM role**, as shown in the screenshot below. If the AWS Backup **Default role** is not present in your account, one will be automatically created for you with the correct permissions.
 
 ![Select AWS Backup deault role](images/image11.png)
 
@@ -156,7 +156,7 @@ In AWS Backup, a backup plan can be created to schedule and to define how you wa
 ![Congigure new backup plan according to screenshot... continued](images/image16.png)
 
 * For **Copy to destination**, leave this unselected, since this tutorial covers backups within the same AWS Region.
-* For **Advanced backup settings**, **** leave **Windows VSS** unchecked. This setting enables application-consistent backups for third-party applications that are running on Amazon EC2 instances. You can refer to the [documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup%20Yesterday%20KH%20Ken%20Hui,%20October%2011,%202023%20at%202:43%20pm%20Ken%20Hui%C2%B728h) for more details.
+* For **Advanced backup settings**, leave **Windows VSS** unchecked. This setting enables application-consistent backups for third-party applications that are running on Amazon EC2 instances. You can refer to the [documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup%20Yesterday%20KH%20Ken%20Hui,%20October%2011,%202023%20at%202:43%20pm%20Ken%20Hui%C2%B728h) for more details.
 * Then, choose the **Create plan** button.
 
 ![Congigure new backup plan according to screenshot... continued](images/image17.png)
@@ -164,25 +164,25 @@ In AWS Backup, a backup plan can be created to schedule and to define how you wa
 **3.2 — Assign resources to the backup plan**
 When you assign a resource to a backup plan, that resource is backed up automatically according to the backup plan. The backups for that resource are managed according to the backup plan. You can assign resources using tags or resource IDs. Using tags to assign resources is a simple and scalable way to back up multiple resources.
 
-* Select the created backup plan and choose the **Assign resources **** **button.
+* Select the created backup plan and choose the **Assign resources** button.
 
 ![Click on Assign resources button](images/image18.png)
 
 * You will be redirected to another window where you can assign resources to your new backup plan. For **Resource assignment name**, enter a name such as *DynamoDB-resources*.
-* Choose the **Default role** for the** **** IAM role**, as shown in the screenshot below. If the AWS Backup **Default role** is not present in your account, one will be automatically created for you with the correct permissions.
+* Choose the **Default role** for the **IAM role**, as shown in the screenshot below. If the AWS Backup **Default role** is not present in your account, one will be automatically created for you with the correct permissions.
 
 ![Create Resource assignment name and assign AWS Backup Default role](images/image19.png)
 
 * AWS Backup provides two options for assigning resources to a backup plan. In this tutorial, you will include your DynamoDB table as a specific resource in your new backup plan.
     * **Include all resource types** - This option will select all resources and it can be further refined with key value pair selection in the step below.
-    * **Include** **specific resource types** - This option will allow you to select the specific resource types, including DynamoDB, you will want to back up with this backup rule.
+    * **Include specific resource types** - This option will allow you to select the specific resource types, including DynamoDB, you will want to back up with this backup rule.
 * Select **Include specific resource types** and you will be presented with additional options to choose the resource type you want to back up.
 * In the **Select specific resource types** section, use the **Select resource types** drop-down list and select **DynamoDB**.
 * For **Table names**, use the **choose resources** drop-down list and select **Music**.
 
 ![Assign resources according to screenshot](images/image20.png)
 
-* Skip to the bottom and select the **Assign resources** button. **** The will assign the DynamoDB table, named *Music*, as a resource to the backup plan.
+* Skip to the bottom and select the **Assign resources** button. This will assign the DynamoDB table, named *Music*, as a resource to the backup plan.
 * You will be redirected to another page where you will see the details for your newly created backup plan. You will see your **Backup rules** and **Resource assignments**.
 
 ![Selte DynamoDB as assigned resource](images/image21.png)
@@ -197,19 +197,19 @@ A backup, or recovery point, represents the content of a resource, such as an Am
 
 ![Select recovery point to restore](images/image22.png)
 
-* In the recovery point page, select the **Restore** **** ****button.
+* In the recovery point page, select the **Restore** button.
 
 ![Click on Restore button to initiate restore](images/image23.png)
 
 ]**4.2 — Configuring a restore job**
 
 * The restore of the recovery point ARN will bring you to a **Restore backup** screen that will have the **Original table name**, and other configurations.
-    * For **New table name**, enter a name such as DynamoDB-restore.
+    * For **New table name**, enter a name such as *DynamoDB-restore*.
 
 ![Create name for new table](images/image24.png)
 
 * For **Encryption key,** choose the A**mazon DynamoDB-owned key**. You also have the option of choosing a different KMS key for encrypting you restored DynamoDB table.
-* Choose the **Default role** for the** **Restore** role**, as shown in the screenshot below. If the AWS Backup **Default role** is not present in your account, one will be automatically created for you with the correct permissions.
+* Choose the **Default role** for the **Restore role**, as shown in the screenshot below. If the AWS Backup **Default role** is not present in your account, one will be automatically created for you with the correct permissions.
 * Verify all your entries, and choose **Restore backup**.
 
 ![Configure restore options according to screenshot](images/image25.png)
