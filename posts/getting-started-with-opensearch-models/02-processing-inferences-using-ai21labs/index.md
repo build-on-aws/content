@@ -35,6 +35,8 @@ To keep you focused and engaged, this tutorial will assume that you are using a 
 2. `cd getting-started-with-opensearch-models`
 3. `docker compose up -d`
 
+> Recommended: Docker Desktop users should set host memory utilization to a minimum of 4 GB by opening Docker Desktop and selecting Settings → Resources.
+
 This starts two services: an `opensearch` instance, an `opensearch-dashboards` instance. You will use the OpenSearch instance to deploy the model and execute inferences. As for the OpenSearch Dashboards instance, you will leverage the feature [Developer Tools](https://opensearch.org/docs/latest/dashboards/dev-tools/index-dev/) as IDE to run commands. Keep in mind that it may take several minutes for the services to start up, as Docker may need to pull their images first from the repositories. This local OpenSearch cluster was configured to intentionally disable security. While this is good for development environments, keep in mind that this is not a best practice for production workloads.
 
 To verify if OpenSearch is up and running, you can go to your browser and point to the following location:
