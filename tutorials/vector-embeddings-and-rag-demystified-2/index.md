@@ -10,18 +10,21 @@ spaces:
   - gen-ai
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
-date: 2023-11-15
+date: 2023-12-12
 ---
 
 Welcome to the second part of our enlightening journey in the world of vector embeddings. In the [first part](TBA) of this series, we laid the groundwork by exploring the essentials of vector embeddings, from their fundamental concepts to their storage and indexing methods. We learned about the transformative role these embeddings play in AI and machine learning, and we started to scratch the surface of how tools like Amazon Bedrock and LangChain can be utilized to harness the power of these embeddings.
 
-As we continue our exploration, Part 2 promises to dive deeper into the practical aspects of vector embeddings. We're shifting our focus to few of the vector storage solutions available on AWS and how they can be effectively used to store and manage your embeddings. 
+As we continue our exploration, we will dive deeper into the practical aspects of vector embeddings. We're shifting our focus to few of the vector storage solutions available on AWS and how they can be used effectively to store and manage your embeddings. 
 
 We'll discuss how services like Amazon Aurora can be optimized for vector storage, providing you with the know-how to make the most of AWS's robust infrastructure. Moreover, we'll see how LangChain, an innovative tool introduced in [Part 1](TBA), plays a pivotal role in bridging the gap between vector embeddings and LLMs, making the integration process seamless and straightforward.
 
-By the end of this part, you will have a comprehensive understanding of the practical applications of vector embeddings in AWS environments. 
+By the end, you will have a comprehensive understanding of the practical applications of vector embeddings in AWS environments. 
 
-## Vector databases on AWS
+| ToC |
+|-----|
+
+## Vector Databases on AWS
 
 AWS offers various services for selecting the right vector database, such as **Amazon Kendra** for low-code solutions, **Amazon OpenSearch** Service for NoSQL enthusiasts, and **Amazon RDS/Aurora** PostgreSQL for SQL users.
 
@@ -29,21 +32,19 @@ AWS offers various services for selecting the right vector database, such as **A
 
 For the purpose of this blog, we will explore using Amazon Aurora or Amazon RDS with `pgvector` as a vector store. 
 
-## Amazon RDS/Aurora with `pgvector` and `LangChain`
+## Amazon RDS/Aurora With `pgvector` and `LangChain`
 
 Imagine stepping into the world of PostgreSQL databases, where managing high-dimensional vector data just got a whole lot easier, thanks to Amazon Aurora and Amazon RDS for PostgreSQL, and their integration with `pgvector`. This isn't just another technical add-on; it's a [community-driven extension](https://github.com/pgvector/pgvector) that transforms the way we handle vectors in databases. Think of `pgvector` as a bridge connecting the robustness of relational databases with the dynamic world of vector data.
 
 Let's say you're working with vectors that have up to 16,000 dimensions. Sounds daunting, right? But here's where `pgvector` shines, making it practical by optimizing indexing for up to 2,000 dimensions, thus tailoring your similarity search performance to be both efficient and effective. It's like having a superpower in your database toolkit, especially if you're already a fan of PostgreSQL and have your data neatly structured.
 
-Now, let's talk about speed and accuracy, the two pillars of modern data searches. `pgvector` introduces approximate nearest neighbor (ANN) indexing methods, including the cutting-edge **IVFFLAT** and **HNSW** (hierarchical navigable small worlds), which we discussed earlier. It’s like navigating a complex maze with a highly detailed map. These methods help you zip through massive datasets, finding those near-perfect matches swiftly, without compromising much on the quality of your results. It's all about striking that sweet balance, crucial for applications in generative AI. For more details check this detailed blog on [Performance benchmarking and data ingestion with pgvector and HNSW on Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/accelerate-hnsw-indexing-and-searching-with-pgvector-on-amazon-aurora-postgresql-compatible-edition-and-amazon-rds-for-postgresql/)
-
+Now, let's talk about speed and accuracy, the two pillars of modern data searches. `pgvector` introduces approximate nearest neighbor (ANN) indexing methods, including the cutting-edge **IVFFLAT** and **HNSW** (hierarchical navigable small worlds), which we discussed earlier. It’s like navigating a complex maze with a highly detailed map. These methods help you zip through massive datasets, finding those near-perfect matches swiftly, without compromising much on the quality of your results. It's all about striking that sweet balance, crucial for applications in generative AI. For more details check this detailed blog on [Performance benchmarking and data ingestion with pgvector and HNSW on Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/accelerate-hnsw-indexing-and-searching-with-pgvector-on-amazon-aurora-postgresql-compatible-edition-and-amazon-rds-for-postgresql/).
 
 > Before running the code, ensure an 'Aurora instance' is configured and all details are added to the '.env file'. Create the [pgvector extension](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html) on your Aurora PostgreSQL database cluster:
 >
 > ```sql
 > CREATE EXTENSION vector;
 > ```
-
 
 Now, lets see how we can get started with Aurora with `pgvector` and `LangChain`.
 
@@ -100,11 +101,11 @@ We can see the collection we created, `my_collection`.
 
 ![Vector Store on AWS](images/sql_lc_show_tables_2.png)
 
-We expect the embeddings table to be empty since we haven't stored any embeddings yet.
+We expect the embeddings table to be empty, since we haven't stored any embeddings yet.
 
 ![Vector Store on AWS](images/sql_lc_show_tables_3.png)
 
-Now, let's create some vectors and store their embeddings in the Aurora database.
+Now let's create some vectors and store their embeddings in the Aurora database.
 
 ```python
 # List of textual data for vector embedding conversion
@@ -123,13 +124,13 @@ We can verify these newly added vectors in our database.
 
 ![Vector Store on AWS](images/sql_lc_show_tables_4.png)
 
-## Document Loading using `LangChain`
+## Document Loading Using `LangChain`
 
 Now that we know how to create embeddings and store them in a vector store, let's see how to load an entire document. In the real world, data often comes in document form, and we need to store it in a vector store before any downstream operations like similarity search.
 
 LangChain provides document loaders for various data formats, such as PDFs, text files, HTML documents, and more.
 
-We'll download the book "The Elements of Statistical Learning" by Trevor and Robert, embed it using `BedrockEmbeddings`, and store the entire book in the Aurora database using LangChain's `document_loaders` module.
+We'll download the book, "The Elements of Statistical Learning" by Trevor Hastie, Robert Tibshirani, and Jerome Friedman, embed it using `BedrockEmbeddings`, and store the entire book in the Aurora database using LangChain's `document_loaders` module.
 
 ```python
 # Import necessary modules and classes for document loading, text splitting, embedding, and vector storage
@@ -250,11 +251,10 @@ As we continue to push the boundaries of what's possible with machine learning a
 
 With the embedded vectors now at our disposal, the potential use cases are vast and exciting. From enhancing search functionality within applications to creating dynamic recommendation systems, the integration of vector stores into our data strategies is an important step in harnessing the full potential of AI and machine learning technologies.
 
-## Summay
+## Summary
 
 In this second part of our series, we dove into the practical applications of vector embeddings using AWS services. We focused on Amazon Aurora and Amazon RDS, integrated with `pgvector`, showcasing how these tools can effectively manage high-dimensional vector data. By exploring the setup and use of vector stores in Amazon Aurora and employing LangChain, we demonstrated how to create, store, and utilize vector embeddings for complex data retrieval and processing tasks.
 
 We highlighted the innovative use of Retrieval-Augmented Generation (RAG) in enhancing language model responses, demonstrating the power of combining vector storage with AI models for more accurate and contextually relevant results. 
 
 For further exploration and to deepen your understanding, you are encouraged to check out this [GitHub page](https://github.com/build-on-aws/llm-rag-vectordb-python) which includes, sample applications, and tutorials showcasing the capabilities of Amazon Bedrock with Python. These will guide you in integrating Bedrock with databases, utilizing RAG techniques, and experimenting with LangChain and Streamlit.
-
