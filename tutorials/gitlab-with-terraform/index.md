@@ -208,7 +208,7 @@ Once we have this written, commit this to the repository using the same method a
 
 If everything goes as planned we should see that our queue has been created in the pipeline's logs, as well as in the AWS Console if we navigate to the SQS page.
 
-## Clean-up
+## Clean Up
 
 To clean-up your AWS account, remember to delete the following resources:
 
