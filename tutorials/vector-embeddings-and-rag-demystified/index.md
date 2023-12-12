@@ -11,7 +11,7 @@ spaces:
   - gen-ai
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
-date: 2023-12-11
+date: 2023-12-12
 ---
 
 Ever wondered how music apps suggest songs to you, or shopping apps suggest products that perfectly match your taste? To understand how, you have to dive into the world of vector databases, where data isn't just stored in tables and rows but is mapped as geometric points in space.
@@ -23,6 +23,9 @@ In the rapidly evolving landscape of data engineering and machine learning, the 
 Through this post, we will embark on a journey to understand the nuts and bolts of vector embeddings and how we can store those embeddings in a vector store using Amazon Bedrock, Amazon Aurora, and LangChain. From understanding the basic concept of an embedding to exploring advanced vector storage techniques and indexing methods, we will cover all the essential aspects that make vector embeddings an indispensable tool in modern data engineering and machine learning.
 
 This marks the beginning of our two-part blog series. In this first installment, we delve into the fundamentals of vector embeddings. We'll explore what embeddings are, why they're crucial in the realm of AI, and delve into the methods of storing and indexing them. This foundational understanding sets the stage for part two, where we'll navigate the various vector storage solutions available on AWS. Here, we'll discuss how to effectively store your embeddings and utilize them in conjunction with LLMs to create robust, AI-powered applications. Additionally, we will introduce and leverage `LangChain`, a [tool](https://python.langchain.com/docs/get_started/introduction) that enhances our journey into the practical application of these concepts, demonstrating how to seamlessly integrate these technologies into real-world AI solutions.
+
+| ToC |
+|-----|
 
 ## Embeddings
 
@@ -41,12 +44,6 @@ The rise of **Convolutional Neural Networks (CNNs)** has significantly changed o
 > ## Convolutional Neural Networks (CNNs)
 >
 > A CNN operates by examining small portions of an image and recognizing various features like lines, colors, and shapes. It then progressively combines these features to understand more complex structures within the image, such as objects or faces. When applied to a new image, CNNs are capable of generating detailed and insightful vector representations. These representations are not just pixel-level data but a more profound understanding of the image's content, making CNNs invaluable in areas like facial recognition, medical imaging, and autonomous vehicles. Their ability to learn from vast amounts of data and identify intricate patterns makes them a cornerstone of modern image processing techniques.
-<div style="border: 2px solid #3498db; padding: 20px; margin-top: 20px; border-radius: 10px; background-color: #eaf2f8; font-family: 'Comic Sans MS', cursive, sans-serif; color: #2c3e50;">
-    <h2 style="color: #2980b9;">Convolutional Neural Networks (CNNs)</h2>
-    <p>
-        A CNN operates by examining small portions of an image and recognizing various features like lines, colors, and shapes. It then progressively combines these features to understand more complex structures within the image, such as objects or faces. When applied to a new image, CNNs are capable of generating detailed and insightful vector representations. These representations are not just pixel-level data but a more profound understanding of the image's content, making CNNs invaluable in areas like facial recognition, medical imaging, and autonomous vehicles. Their ability to learn from vast amounts of data and identify intricate patterns makes them a cornerstone of modern image processing techniques.
-    </p>
-</div>
 
 For both `textual` and `visual` data, the trend has shifted towards **transformer-based models**.
 
@@ -63,7 +60,6 @@ Embeddings transform data into numerical vectors, making them highly adaptable t
 > - **Euclidean distance:** It measures the straight-line distance between two vectors in a vector space. It ranges from 0 to infinity, where 0 represents identical vectors, and larger values represent increasingly dissimilar vectors.
 > - **Cosine distance:** This similarity measure calculates the cosine of the angle between two vectors in a vector space. It ranges from -1 to 1, where 1 represents identical vectors, 0 represents orthogonal vectors, and -1 represents vectors that are diametrically opposed.
 > - **Dot product:** This measure reflects the product of the magnitudes of two vectors and the cosine of the angle between them. Its range extends from -∞ to ∞, with a positive value indicating vectors that point in the same direction, 0 indicating orthogonal vectors, and a negative value indicating vectors that point in opposite directions.
-
 
 These distance metrics go beyond theoretical mathematics and are extensively employed in a variety of vector databases, including Aurora, OpenSearch, and other vector stores. We'll explore their practical application in Aurora using `pgvector` for similarity searches.
 
@@ -220,7 +216,7 @@ Text: Sunny skies today.
 Embedding: [1.21875, 0.122558594, ..., -0.021362305]  # An array of length 1536 
 ```
 
-To learn more about **LangChain**, including its use with vectors, I recommend referring to the book ["Generative AI with LangChain" by Ben Auffarth](https://learning.oreilly.com/library/view/generative-ai-with/9781835083468/). This book provided valuable insights while I was learning about **LangChain**, and I have incorporated several of its narratives into this blog post.
+To learn more about **LangChain**, including its use with vectors, I recommend referring to the book, ["Generative AI with LangChain" by Ben Auffarth](https://learning.oreilly.com/library/view/generative-ai-with/9781835083468/). This book provided valuable insights while I was learning about **LangChain**, and I have incorporated several of its narratives into this blog post.
 
 ## How Can We Store Embeddings?
 
@@ -228,8 +224,8 @@ Understanding how to represent any data point as a `vector` is crucial, but equa
 
 **Vector search** involves representing each data point as a `vector` in a high-dimensional space, capturing the data's features or characteristics. The aim is to identify vectors most similar to a given query vector. We've seen how these vector embeddings, numerical arrays representing coordinates in a high-dimensional space, are crucial in measuring distances using metrics like `cosine similarity` or `euclidean distance`, which we discussed earlier.
 
-> ## E-commerce Product Recommendation
->
+### E-commerce Product Recommendation
+
 > Imagine an e-commerce platform where each product has a vector representing its features like color, size, category, and user ratings. When a user searches for a product, the search query is converted into a vector. The system then performs a vector search to find products with similar feature vectors, suggesting these as recommendations.
 >
 > This process requires efficient vector storage. A vector storage mechanism is essential for storing and retrieving vector embeddings. While standalone solutions exist for this, vector databases like Amazon Aurora (with 'pgvector'), Amazon OpenSearch, and Amazon Kendra offer more integrated functionalities. They not only store but also manage large sets of vectors, using indexing mechanisms for efficient similarity searches. We will dive into vector stores/database in the next section.
@@ -272,10 +268,11 @@ Alternative algorithms for vector search includes the following, these algorithm
 - **Locality-sensitive hashing**
 - **Hierarchical Navigable Small World (HNSW)**
 
-Before we dive into each of these algorithms in details, I'd like to extend my gratitude to [Damien Benveniste](https://www.udemy.com/user/damien-benveniste-2/) for his insightful lecture on [Introduction to LangChain](https://www.udemy.com/course/introduction-to-langchain/). His course is a fantastic resource for anyone looking to deepen their understanding of LangChain, and I highly recommend checking it out. The graphics used in the following sections are sourced from his lecture notes, providing a visual complement to our exploration. His contributions have been invaluable in enhancing the depth and clarity of the content we're about to discuss.
+Before we dive into each of these algorithms in detail, I'd like to extend my gratitude to [Damien Benveniste](https://www.udemy.com/user/damien-benveniste-2/) for his insightful lecture, [Introduction to LangChain](https://www.udemy.com/course/introduction-to-langchain/). His course is a fantastic resource for anyone looking to deepen their understanding of LangChain, and I highly recommend checking it out. The graphics used in the following sections are sourced from his lecture notes, providing a visual complement to our exploration. His contributions have been invaluable in enhancing the depth and clarity of the content we're about to discuss.
 
 ### Product Quantization (PO)
-Its a technique that divides the vector space into smaller subspaces and quantizes each subspace separately. This reduces the dimensionality of the vectors and allows for efficient storage and search. 
+
+Product Quantization a technique that divides the vector space into smaller subspaces and quantizes each subspace separately. This reduces the dimensionality of the vectors and allows for efficient storage and search. 
 
 1. **Vector Breakdown**: The first step in PQ involves breaking down each high-dimensional vector into smaller `sub-vectors`. By dividing the vector into segments, PQ can manage each piece individually, simplifying the subsequent clustering process.
 
@@ -327,7 +324,7 @@ Imagine you're in a large room full of points, each representing different piece
 
 In the above example, we connected each new node to the two most similar neighbors, but we could have chosen another number of similar neighbors. When building the graph, we need to decide on a metric for similarity such that the search is optimized for the specific metric used to query items. Initially, when adding nodes, the density is low and the edges will tend to capture nodes that are far apart in similarity. Little by little, the density increases, and the edges start to be shorter and shorter. As a consequence, the graph is composed of long edges that allow us to traverse long distances in the graph and short edges that capture closer neighbors. Because of it, we can quickly traverse the graph from one side to the other and look for nodes at a specific location in the vector space.
 
-For example, let’s have a query vector. We want to find the nearest neighbor,
+For example, let’s have a query vector. We want to find the nearest neighbor.
 
 ![HNSW](images/hnsw_2.png)
 
@@ -345,8 +342,8 @@ When you search for a specific node, you begin at the top layer. If you find a c
 
 ![HNSW](images/hnsw_4.png)
 
-> ## Advanced Graph-Based Similarity Search Techniques
->
+### Advanced Graph-Based Similarity Search Techniques
+
 >In addition to HNSW and KNN, there are other ways to find similar items or patterns using graphs, such as with Graph Neural Networks (GNN) and Graph Convolutional Networks (GCN). These methods use the connections and relationships in graphs to search for similarities. There's also the Annoy (Approximate Nearest Neighbors Oh Yeah) algorithm, which sorts vectors using a tree structure made of random divisions, kind of like sorting books on shelves based on different categories. Annoy is user-friendly and good for quickly finding items that are almost, but not exactly, the same.
 >
 >When choosing one of these methods, it's important to consider how fast you need the search to be, how precise the results should be, and how much computer memory you can use. The right choice depends on what the specific task needs and the type of data you're working with.
@@ -364,21 +361,19 @@ Vector libraries are tools for managing and searching through large groups of ve
 
 4. **nmslib (Non-Metric Space Library)**: It’s an open-source tool that's good at searching through non-metric spaces (spaces where distance isn't measured in the usual way). It uses different algorithms like HNSW and SW-graph for searching.
 
-
 ## Vector Databases 
 
 A vector database is a type of database that is specifically designed to handle vector embeddings making it easier to search and query data objects. It offers additional features such as data management, metadata storage and filtering, and scalability. While a vector storage focuses solely on storing and retrieving vector embeddings, a vector database provides a more comprehensive solution for managing and querying vector data. Vector databases can be particularly useful for applications that involve large amounts of data and require flexible and efficient search capabilities across various types of vectorized data, such as text, images, audio, video, and more.
 
 In essence, vector databases are like advanced tools for organizing and navigating vast and varied data collections. They are especially beneficial for scenarios where quick and efficient searching through different types of data, converted into vector fingerprints, is crucial. These databases are popular because they are optimized for scalability and representing and retrieving data in high-dimensional vector spaces. Traditional databases are not designed to efficiently handle large-dimensional vectors, such as those used to represent images or text embeddings.
 
-> ## Applications of Vector Databases
->
+## Applications of Vector Databases
+
 > Vector databases are key in managing and analyzing machine learning models and their embeddings. They shine in similarity or semantic search, enabling quick and efficient navigation through massive datasets of text, images, or videos to find items matching specific queries based on vector similarities. This technology finds diverse applications, including:
 >
 > For **Anomaly Detection**, vector databases compare embeddings to identify unusual patterns, crucial in areas like fraud detection and network security. In **Personalization**, they enhance recommendation systems by aligning similar vectors with user preferences. In the realm of **Natural Language Processing (NLP)**, these databases facilitate tasks like sentiment analysis and text classification by effectively comparing and analyzing text represented as vector embeddings.
 >
 > As the technology evolves, vector databases continue to find new and innovative applications, broadening the scope of how we handle and analyze large datasets in various fields.
-
 
 ## Summary
 
