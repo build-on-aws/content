@@ -1,6 +1,6 @@
 ---
 title: "Streamline AWS Deployments with GitLab CI and Terraform"
-description: "A step-by-step guide for deploying infrastructure using CI/CD"
+description: "A step-by-step guide for deploying infrastructure using CI/CD."
 tags:
     - devops
     - terraform
