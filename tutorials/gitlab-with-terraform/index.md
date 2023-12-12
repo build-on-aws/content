@@ -12,7 +12,7 @@ authorName: Kaizad Wadia
 date: 2023-12-20
 ---
 
-Deploying infrastructure to AWS manually can be time-consuming and prone to errors. In this post, we'll go over how to set up a CI/CD pipeline for automated AWS deployments using GitLab and Terraform.
+Deploying infrastructure to AWS manually can be time consuming and prone to errors.  MISTAKES CAN EASILY HAPPEN BECAUSE XYZ. In this post, we'll go over how to set up a CI/CD pipeline for automated AWS deployments using GitLab and Terraform. 
 
 ## Overview
 
