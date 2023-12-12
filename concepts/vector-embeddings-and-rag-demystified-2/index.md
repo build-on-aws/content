@@ -5,10 +5,10 @@ tags:
   - data-engineering
   - machine-learning
   - vector-database
-  - gen-ai
+  - generative-ai
   - ai-ml
 spaces:
-  - gen-ai
+  - generative-ai
 authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2023-12-12
