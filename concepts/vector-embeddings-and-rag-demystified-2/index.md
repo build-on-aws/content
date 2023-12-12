@@ -6,6 +6,7 @@ tags:
   - machine-learning
   - vector-database
   - gen-ai
+  - ai-ml
 spaces:
   - gen-ai
 authorGithubAlias: debnsuma
@@ -13,11 +14,11 @@ authorName: Suman Debnath
 date: 2023-12-12
 ---
 
-Welcome to the second part of our enlightening journey in the world of vector embeddings. In the [first part](TBA) of this series, we laid the groundwork by exploring the essentials of vector embeddings, from their fundamental concepts to their storage and indexing methods. We learned about the transformative role these embeddings play in AI and machine learning, and we started to scratch the surface of how tools like [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) and [LangChain](https://python.langchain.com/docs/get_started/introduction) can be utilized to harness the power of these embeddings.
+Welcome to the second part of our enlightening journey in the world of vector embeddings. In the [first part](community.aws/concepts/vector-embeddings-and-rag-demystified) of this series, we laid the groundwork by exploring the essentials of vector embeddings, from their fundamental concepts to their storage and indexing methods. We learned about the transformative role these embeddings play in AI and machine learning, and we started to scratch the surface of how tools like [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) and [LangChain](https://python.langchain.com/docs/get_started/introduction) can be utilized to harness the power of these embeddings.
 
 As we continue our exploration, we will dive deeper into the practical aspects of vector embeddings. We're shifting our focus to few of the vector storage solutions available on AWS and how they can be used effectively to store and manage your embeddings. 
 
-We'll discuss how services like [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html) can be optimized for vector storage, providing you with the know-how to make the most of AWS's robust infrastructure. Moreover, we'll see how [LangChain](https://python.langchain.com/docs/get_started/introduction), an innovative tool introduced in [Part 1](TBA), plays a pivotal role in bridging the gap between vector embeddings and LLMs, making the integration process seamless and straightforward.
+We'll discuss how services like [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) can be optimized for vector storage, providing you with the know-how to make the most of AWS's robust infrastructure. Moreover, we'll see how [LangChain](https://python.langchain.com/docs/get_started/introduction), an innovative tool introduced in [Part 1](community.aws/concepts/vector-embeddings-and-rag-demystified), plays a pivotal role in bridging the gap between vector embeddings and LLMs, making the integration process seamless and straightforward.
 
 By the end, you will have a comprehensive understanding of the practical applications of vector embeddings in AWS environments. 
 
@@ -26,27 +27,27 @@ By the end, you will have a comprehensive understanding of the practical applica
 
 ## Vector Databases on AWS
 
-AWS offers various services for selecting the right vector database, such as **[Amazon Kendra](https://docs.aws.amazon.com/kendra/latest/dg/what-is-kendra.html)** for low-code solutions, **[Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html)** Service for NoSQL enthusiasts, and **[Amazon RDS/Aurora](https://docs.aws.amazon.com/rds/)** PostgreSQL for SQL users.
+AWS offers various services for selecting the right vector database, such as **[Amazon Kendra](https://docs.aws.amazon.com/kendra/latest/dg/what-is-kendra.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2)** for low-code solutions, **[Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2)** Service for NoSQL enthusiasts, and **[Amazon RDS/Aurora](https://docs.aws.amazon.com/rds/)** PostgreSQL for SQL users.
 
 ![Vector Store on AWS](images/vector_store_aws.png)
 
-For the purpose of this blog, we will explore using [Amazon Aurora/RDS](https://docs.aws.amazon.com/rds/) with `pgvector` as a vector store. 
+For the purpose of this blog, we will explore using [Amazon Aurora/RDS](https://docs.aws.amazon.com/rds/?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) with `pgvector` as a vector store. 
 
 ## Amazon RDS/Aurora With `pgvector` and `LangChain`
 
-Imagine stepping into the world of PostgreSQL databases, where managing high-dimensional vector data just got a whole lot easier, thanks to [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html) and [Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html), and their integration with `pgvector`. This isn't just another technical add-on; it's a [community-driven extension](https://github.com/pgvector/pgvector) that transforms the way we handle vectors in databases. Think of `pgvector` as a bridge connecting the robustness of relational databases with the dynamic world of vector data.
+Imagine stepping into the world of PostgreSQL databases, where managing high-dimensional vector data just got a whole lot easier, thanks to [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) and [Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2), and their integration with `pgvector`. This isn't just another technical add-on; it's a [community-driven extension](https://github.com/pgvector/pgvector) that transforms the way we handle vectors in databases. Think of `pgvector` as a bridge connecting the robustness of relational databases with the dynamic world of vector data.
 
 Let's say you're working with vectors that have up to 16,000 dimensions. Sounds daunting, right? But here's where `pgvector` shines, making it practical by optimizing indexing for up to 2,000 dimensions, thus tailoring your similarity search performance to be both efficient and effective. It's like having a superpower in your database toolkit, especially if you're already a fan of PostgreSQL and have your data neatly structured.
 
 Now, let's talk about speed and accuracy, the two pillars of modern data searches. `pgvector` introduces approximate nearest neighbor (ANN) indexing methods, including the cutting-edge **IVFFLAT** and **HNSW** (hierarchical navigable small worlds), which we discussed earlier. It’s like navigating a complex maze with a highly detailed map. These methods help you zip through massive datasets, finding those near-perfect matches swiftly, without compromising much on the quality of your results. It's all about striking that sweet balance, crucial for applications in generative AI. For more details check this detailed blog on [Performance benchmarking and data ingestion with pgvector and HNSW on Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/accelerate-hnsw-indexing-and-searching-with-pgvector-on-amazon-aurora-postgresql-compatible-edition-and-amazon-rds-for-postgresql/).
 
-> Before running the code, ensure an 'Aurora instance' is configured and all details are added to the '.env file'. Create the [pgvector extension](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html) on your Aurora PostgreSQL database cluster:
+> Before running the code, ensure an 'Aurora instance' is configured and all details are added to the '.env file'. Create the [pgvector extension](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraPostgreSQL.Extensions.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) on your Aurora PostgreSQL database cluster:
 >
 > ```sql
 > CREATE EXTENSION vector;
 > ```
 
-Now, lets see how we can get started with [Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html)  with `pgvector` and `LangChain`.
+Now, lets see how we can get started with [Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2)  with `pgvector` and `LangChain`.
 
 ```python
 from langchain.embeddings import BedrockEmbeddings
@@ -83,9 +84,9 @@ store = PGVector(
                 )
 ```
 
-Here we set up a vector store using `pgvector` for PostgreSQL on [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html).
+Here we set up a vector store using `pgvector` for PostgreSQL on [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2).
 
-1. **Import Statements**: We import classes from `langchain` for handling embeddings, connecting to [Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) LLM, and interfacing with a PostgreSQL database.
+1. **Import Statements**: We import classes from `langchain` for handling embeddings, connecting to [Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) LLM, and interfacing with a PostgreSQL database.
 2. **Collection Name**: We define the table in the database where vector embeddings will be stored.
 3. **Connection String**: We construct a connection string using environment variables.
 4. **Text Embedding Model**: We initialize `BedrockEmbeddings`, likely a pre-trained model for generating vector embeddings from text.
@@ -200,7 +201,7 @@ After setting up the vector store and populating it with embeddings, we can leve
 
 Before proceeding, let's discuss [Retrieval-Augmented Generation (RAG)](https://arxiv.org/abs/2005.11401), a methodology combining information retrieval with new content generation. In machine learning, RAG systems first retrieve relevant documents based on a query, then use a language model to generate responses that synthesize the retrieved data, particularly useful in question-answering systems.
 
-Now, let's utilize [Amazon Aurora/RDS](https://docs.aws.amazon.com/rds/) with `pgvector` and `LangChain` for storage and retrieval of vector embeddings.
+Now, let's utilize [Amazon Aurora/RDS](https://docs.aws.amazon.com/rds/?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) with `pgvector` and `LangChain` for storage and retrieval of vector embeddings.
 
 ```python
 from langchain.llms import Bedrock
@@ -253,8 +254,8 @@ With the embedded vectors now at our disposal, the potential use cases are vast 
 
 ## Summary
 
-In this second part of our series, we dove into the practical applications of vector embeddings using AWS services. We focused on [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html) and [Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html), integrated with `pgvector`, showcasing how these tools can effectively manage high-dimensional vector data. By exploring the setup and use of vector stores in Amazon Aurora and employing [LangChain](https://python.langchain.com/docs/get_started/introduction), we demonstrated how to create, store, and utilize vector embeddings for complex data retrieval and processing tasks.
+In this second part of [our series](community.aws/concepts/vector-embeddings-and-rag-demystified), we dove into the practical applications of vector embeddings using AWS services. We focused on [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) and [Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2), integrated with `pgvector`, showcasing how these tools can effectively manage high-dimensional vector data. By exploring the setup and use of vector stores in Amazon Aurora and employing [LangChain](https://python.langchain.com/docs/get_started/introduction), we demonstrated how to create, store, and utilize vector embeddings for complex data retrieval and processing tasks.
 
 We highlighted the innovative use of Retrieval-Augmented Generation (RAG) in enhancing language model responses, demonstrating the power of combining vector storage with AI models for more accurate and contextually relevant results. 
 
-For further exploration and to deepen your understanding, you are encouraged to check out this [GitHub page](https://github.com/build-on-aws/llm-rag-vectordb-python) which includes, sample applications, and tutorials showcasing the capabilities of [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) with Python. These will guide you in integrating Bedrock with databases, utilizing RAG techniques, and experimenting with [LangChain](https://python.langchain.com/docs/get_started/introduction) and Streamlit.
+For further exploration and to deepen your understanding, you are encouraged to check out this [GitHub page](https://github.com/build-on-aws/llm-rag-vectordb-python) which includes, sample applications, and tutorials showcasing the capabilities of [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html?sc_channel=el&sc_campaign=genai&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=vector-embeddings-and-rag-demystified-2) with Python. These will guide you in integrating Bedrock with databases, utilizing RAG techniques, and experimenting with [LangChain](https://python.langchain.com/docs/get_started/introduction) and Streamlit.
