@@ -13,14 +13,14 @@ authorGithubAlias: debnsuma
 authorName: Suman Debnath
 date: 2023-12-12
 ---
-<test>
+
 Ever wondered how music apps suggest songs to you, or shopping apps suggest products that perfectly match your taste? To understand how, you have to dive into the world of vector databases, where data isn't just stored in tables and rows but is mapped as geometric points in space.
 
 ![Introduction](images/amazon-shopping.png)
 
 In the rapidly evolving landscape of data engineering and machine learning, the concept of vector embeddings has emerged as a cornerstone for a myriad of innovative applications. As we navigate through the era of generative AI and Large Language Models (LLMs), understanding and utilizing vector embeddings has become increasingly critical. A compelling example of this is in personalized recommendation systems, such as those used by streaming services. These platforms use vector embeddings to analyze users' viewing habits, translating titles, descriptions, and feedback into a mathematical space. This allows an LLM to identify what content a user is likely to enjoy based on how closely the vector of a new movie matches vectors of content they previously liked. This blog post aims to demystify the world of vector embeddings and explore their pivotal role in enhancing our interactions with vast data sets, ensuring AI systems can offer personalized, contextually relevant recommendations.
 
-Through this post, we will embark on a journey to understand the nuts and bolts of vector embeddings and how we can store those embeddings in a vector store using Amazon Bedrock, Amazon Aurora, and LangChain. From understanding the basic concept of an embedding to exploring advanced vector storage techniques and indexing methods, we will cover all the essential aspects that make vector embeddings an indispensable tool in modern data engineering and machine learning.
+Through this post, we will embark on a journey to understand the nuts and bolts of vector embeddings and how we can store those embeddings in a vector store using [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html), [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html), and [LangChain](https://python.langchain.com/docs/get_started/introduction). From understanding the basic concept of an embedding to exploring advanced vector storage techniques and indexing methods, we will cover all the essential aspects that make vector embeddings an indispensable tool in modern data engineering and machine learning.
 
 This marks the beginning of our two-part blog series. In this first installment, we delve into the fundamentals of vector embeddings. We'll explore what embeddings are, why they're crucial in the realm of AI, and delve into the methods of storing and indexing them. This foundational understanding sets the stage for part two, where we'll navigate the various vector storage solutions available on AWS. Here, we'll discuss how to effectively store your embeddings and utilize them in conjunction with LLMs to create robust, AI-powered applications. Additionally, we will introduce and leverage `LangChain`, a [tool](https://python.langchain.com/docs/get_started/introduction) that enhances our journey into the practical application of these concepts, demonstrating how to seamlessly integrate these technologies into real-world AI solutions.
 
@@ -61,7 +61,7 @@ Embeddings transform data into numerical vectors, making them highly adaptable t
 > - **Cosine distance:** This similarity measure calculates the cosine of the angle between two vectors in a vector space. It ranges from -1 to 1, where 1 represents identical vectors, 0 represents orthogonal vectors, and -1 represents vectors that are diametrically opposed.
 > - **Dot product:** This measure reflects the product of the magnitudes of two vectors and the cosine of the angle between them. Its range extends from -∞ to ∞, with a positive value indicating vectors that point in the same direction, 0 indicating orthogonal vectors, and a negative value indicating vectors that point in opposite directions.
 
-These distance metrics go beyond theoretical mathematics and are extensively employed in a variety of vector databases, including Aurora, OpenSearch, and other vector stores. We'll explore their practical application in Aurora using `pgvector` for similarity searches.
+These distance metrics go beyond theoretical mathematics and are extensively employed in a variety of vector databases, including [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html), [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html), and other vector stores. We'll explore their practical application in Aurora using `pgvector` for similarity searches.
 
 ![Introduction](images/distance.png)
 
@@ -131,7 +131,7 @@ Embedding lengths: [1536, 1536, 1536, 1536, 1536]
 ```
 
 This code performs the following actions:
-- Initializes a session with AWS using `boto3` and creates a client for the `bedrock-runtime` service.
+- Initializes a session with AWS using [`Boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) and creates a client for the `bedrock-runtime` service.
 - Defines a function `get_embedding`, which accepts a text input, then utilizes the **Amazon Titan Embeddings** model to transform this text into an `embedding`. Once the embedding is generated, the function returns the embedding vector.
 
 #### Creating Embeddings Using LangChain
@@ -216,7 +216,7 @@ Text: Sunny skies today.
 Embedding: [1.21875, 0.122558594, ..., -0.021362305]  # An array of length 1536 
 ```
 
-To learn more about **LangChain**, including its use with vectors, I recommend referring to the book, ["Generative AI with LangChain" by Ben Auffarth](https://learning.oreilly.com/library/view/generative-ai-with/9781835083468/). This book provided valuable insights while I was learning about **LangChain**, and I have incorporated several of its narratives into this blog post.
+To learn more about [LangChain](https://python.langchain.com/docs/get_started/introduction), including its use with vectors, I recommend referring to the book, ["Generative AI with LangChain" by Ben Auffarth](https://learning.oreilly.com/library/view/generative-ai-with/9781835083468/). This book provided valuable insights while I was learning about **LangChain**, and I have incorporated several of its narratives into this blog post.
 
 ## How Can We Store Embeddings?
 
@@ -228,7 +228,7 @@ Understanding how to represent any data point as a `vector` is crucial, but equa
 
 > Imagine an e-commerce platform where each product has a vector representing its features like color, size, category, and user ratings. When a user searches for a product, the search query is converted into a vector. The system then performs a vector search to find products with similar feature vectors, suggesting these as recommendations.
 >
-> This process requires efficient vector storage. A vector storage mechanism is essential for storing and retrieving vector embeddings. While standalone solutions exist for this, vector databases like Amazon Aurora (with 'pgvector'), Amazon OpenSearch, and Amazon Kendra offer more integrated functionalities. They not only store but also manage large sets of vectors, using indexing mechanisms for efficient similarity searches. We will dive into vector stores/database in the next section.
+> This process requires efficient vector storage. A vector storage mechanism is essential for storing and retrieving vector embeddings. While standalone solutions exist for this, vector databases like [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html) (with 'pgvector'), [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html), and [Amazon Kendra](https://docs.aws.amazon.com/kendra/latest/dg/what-is-kendra.html) offer more integrated functionalities. They not only store but also manage large sets of vectors, using indexing mechanisms for efficient similarity searches. We will dive into vector stores/database in the next section.
 
 ### Delving Deeper Into Vector Storage
 
@@ -236,7 +236,7 @@ To optimize vector search, we typically consider these aspects:
 
 - **Indexing**: This is about organizing vectors to speed up retrieval. Techniques like k-d trees or Annoy are employed for this.
 - **Vector libraries**: These offer functions for operations like dot product and vector indexing.
-- **Vector databases**: They are specifically designed for storing, managing, and retrieving vast sets of vectors. Examples include Amazon Aurora (with `pgvector`), Amazon OpenSearch, and Amazon Kendra, which utilize indexing for efficient searches.
+- **Vector databases**: They are specifically designed for storing, managing, and retrieving vast sets of vectors. Examples include [Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html) (with `pgvector`), [Amazon OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html), and [Amazon Kendra](https://docs.aws.amazon.com/kendra/latest/dg/what-is-kendra.html), which utilize indexing for efficient searches.
 
 ## Vector Indexing
 
@@ -268,7 +268,7 @@ Alternative algorithms for vector search includes the following, these algorithm
 - **Locality-sensitive hashing**
 - **Hierarchical Navigable Small World (HNSW)**
 
-Before we dive into each of these algorithms in detail, I'd like to extend my gratitude to [Damien Benveniste](https://www.udemy.com/user/damien-benveniste-2/) for his insightful lecture, [Introduction to LangChain](https://www.udemy.com/course/introduction-to-langchain/). His course is a fantastic resource for anyone looking to deepen their understanding of LangChain, and I highly recommend checking it out. The graphics used in the following sections are sourced from his lecture notes, providing a visual complement to our exploration. His contributions have been invaluable in enhancing the depth and clarity of the content we're about to discuss.
+Before we dive into each of these algorithms in detail, I'd like to extend my gratitude to [Damien Benveniste](https://www.udemy.com/user/damien-benveniste-2/) for his insightful lecture, [Introduction to LangChain](https://www.udemy.com/course/introduction-to-langchain/). His course is a fantastic resource for anyone looking to deepen their understanding of [LangChain](https://python.langchain.com/docs/get_started/introduction), and I highly recommend checking it out. The graphics used in the following sections are sourced from his lecture notes, providing a visual complement to our exploration. His contributions have been invaluable in enhancing the depth and clarity of the content we're about to discuss.
 
 ### Product Quantization (PO)
 
@@ -379,8 +379,8 @@ In essence, vector databases are like advanced tools for organizing and navigati
 
 In this blog, we embarked on a comprehensive journey, starting with the basics of vector embeddings and exploring their vital role in text and image processing. We delved into various techniques like the bag-of-words, word2vec, and CNNs, gaining insights into how these methods transform raw data into meaningful vector representations. Our exploration extended to the crucial aspects of storing and indexing vector embeddings, and the significant contributions of vector libraries and databases in this realm.
 
-Further, we learned how to create vector embeddings using tools like Amazon Bedrock with Boto3, as well as the Open Source Library LangChain. This provided us with practical insights into embedding generation and manipulation.
+Further, we learned how to create vector embeddings using tools like [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) with [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html), as well as the Open Source Library [LangChain](https://python.langchain.com/docs/get_started/introduction). This provided us with practical insights into embedding generation and manipulation.
 
 We also examined various techniques for vector indexing and the use of vector libraries as storage solutions for our embeddings. With these foundational concepts in place, we're now ready to dive into part two of this blog series. Here, we'll focus on leveraging different AWS services for storing vector embeddings. This will include an in-depth look at how these services synergize with LLMs to enhance AI and machine learning applications.
 
-For those eager to deepen their understanding and apply these concepts, I recommend visiting this [GitHub page](https://github.com/build-on-aws/llm-rag-vectordb-python). It offers a wealth of resources, including sample applications and tutorials, demonstrating the capabilities of Amazon Bedrock with Python. These resources are designed to guide you through integrating Bedrock with databases, employing RAG techniques, and experimenting with LangChain and Streamlit for practical, hands-on experience.
+For those eager to deepen their understanding and apply these concepts, I recommend visiting this [GitHub page](https://github.com/build-on-aws/llm-rag-vectordb-python). It offers a wealth of resources, including sample applications and tutorials, demonstrating the capabilities of [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) with Python. These resources are designed to guide you through integrating [Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) with databases, employing RAG techniques, and experimenting with [LangChain](https://python.langchain.com/docs/get_started/introduction) and [Streamlit](https://docs.streamlit.io/) for practical, hands-on experience.
