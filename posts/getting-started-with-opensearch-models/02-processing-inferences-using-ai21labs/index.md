@@ -17,7 +17,7 @@ images:
   background: images/tutorial_banner.png
 authorGithubAlias: riferrei
 authorName: Ricardo Ferreira
-date: 2023-12-01
+date: 2023-12-12
 ---
 
 | ToC |
@@ -35,7 +35,7 @@ To keep you focused and engaged, this tutorial will assume that you are using a 
 2. `cd getting-started-with-opensearch-models`
 3. `docker compose up -d`
 
-This starts two services: an `opensearch` instance, an `opensearch-dashboards` instance. You will use the OpenSearch instance to deploy the model and execute inferences. As for the OpenSearch Dashboards instance, you will leverage the feature [Developer Tools](https://opensearch.org/docs/latest/dashboards/dev-tools/index-dev/) as IDE to run commands. Keep in mind that it may take several minutes for the services to start up, as Docker may need to pull their images first from the repositories.
+This starts two services: an `opensearch` instance, an `opensearch-dashboards` instance. You will use the OpenSearch instance to deploy the model and execute inferences. As for the OpenSearch Dashboards instance, you will leverage the feature [Developer Tools](https://opensearch.org/docs/latest/dashboards/dev-tools/index-dev/) as IDE to run commands. Keep in mind that it may take several minutes for the services to start up, as Docker may need to pull their images first from the repositories. This local OpenSearch cluster was configured to intentionally disable security. While this is good for development environments, keep in mind that this is not a best practice for production workloads.
 
 To verify if OpenSearch is up and running, you can go to your browser and point to the following location:
 
@@ -65,7 +65,7 @@ You should see a JSON payload with the following content:
 }
 ```
 
-If the `status` field is showing as `green`, this means your opensearch cluster is ready for business. Since OpenSearch uses the [ML Commons Framework](https://github.com/opensearch-project/ml-commons), it is important to ensure everything is fully initialized before you start sending tasks. To check if the ML Commons Framework plugin is initialized, go to your browser and point to the following location:
+If the `status` field is showing as `green`, this means your OpenSearch cluster is ready for business. Since OpenSearch uses the [ML Commons Framework](https://github.com/opensearch-project/ml-commons), it is important to ensure everything is fully initialized before you start sending tasks. To check if the ML Commons Framework plugin is initialized, go to your browser and point to the following location:
 
 [http://localhost:9200/.plugins-ml-config](http://localhost:9200/.plugins-ml-config)
 
@@ -152,8 +152,6 @@ Executing this command should produce the following output:
 }
 ```
 
-Now let's understand what you just did.
-
 Later on in this tutorial, you will see that after deploying the model, a change in the connector blueprint created for AI21 Labs Jurassic 2 will be needed. By default, you are not allowed to change connector blueprints. While this is a good thing for production clusters, during development, ML developers may need to make changes to the connector blueprints, so you need to configure OpenSearch to allow this. For this reason, the `plugins.ml_commons.update_connector.enabled` setting was used.
 
 Your OpenSearch cluster is now ready. Everything done so far was required for you to be able to start what this tutorial really is about: teaching you how to deploy and test models. Let's see how this is done in the following sections.
@@ -179,7 +177,18 @@ You should see a JSON payload with the following content:
 }
 ```
 
-Please take a note of the value of the field `model_group_id`. When you register the model later on, you will be required to specify to which model group the model will belong to.
+Please take a note of the value of the field `model_group_id`. When you register the model later on, you will be required to specify to which model group the model will belong to. Alternatively, you can search for the model group with the following command:
+
+```json
+GET _plugins/_ml/model_groups/_search
+{
+  "query": {
+    "match": {
+      "name": "amazon_bedrock_models"
+    }
+  }
+}
+```
 
 ## Creating a connector blueprint
 

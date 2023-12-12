@@ -17,7 +17,7 @@ images:
   background: images/tutorial_banner.png
 authorGithubAlias: jhart0
 authorName: Josh Hart
-date: 2023-12-01
+date: 2023-12-12
 ---
 
 | ToC |
@@ -287,7 +287,7 @@ GET /nlp_pqa_2/_search
 ![neural search response](images/neural_search_response.png)
 Additionally, an ingestion pipeline can be created that allows for the embeddings to be generated as documents are written to OpenSearch. This allows OpenSearch to function as a vector database for generative AI applications, whilst storing the original attributes of the document in place. This is useful for RAG use-cases such as augmented chatbots and intelligent document retrieval.
 
-To do this, an ingestion pipeline is defined when the k-NN index is created. This pipeline maps a source attribute on the indexed document to a vector attribute of a specified size. In this example the “question” string attribute is being mapped to a “question_vector” vector attribute of size 384. The same approach works for other vector sizes, such as the 1536 shape used by [Amazon Bedrock’s Titan Embeddings](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html) model:
+To do this, an ingestion pipeline is defined when the k-NN index is created. This pipeline maps a source attribute on the indexed document to a vector attribute of a specified number of dimensions. In this example the “question” string attribute is being mapped to a “question_vector” vector attribute of size 384. The same approach works for other vector sizes, such as the 1536 shape used by [Amazon Bedrock’s Titan Embeddings](https://docs.aws.amazon.com/bedrock/latest/userguide/embeddings.html) model:
 
 ```
 PUT _ingest/pipeline/nlp-pipeline
