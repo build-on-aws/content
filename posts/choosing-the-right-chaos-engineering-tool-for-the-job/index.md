@@ -50,7 +50,7 @@ For more information on using FIS to stop EC2 instances, please visit [here](htt
 ### Single AZ Architecture
 ![Figure1](images/figure1.png)
 ### Multi-AZ Architecture
-![Figure2](images/figure2.png)
+![Figure2](images/figure2a.png)
 
 ## Tools available
 
