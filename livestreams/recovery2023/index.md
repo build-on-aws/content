@@ -53,3 +53,72 @@ If you would like get notified about this, download these fancy *Calendar blocke
 - December 12 - [Google Cal](https://www.google.com/calendar/render?action=TEMPLATE&text=AWS%20re%3AInvent%20re%3ACovery%202023&location=twitch.tv%2Faws&details=Sit%20back%2C%20relax%2C%20grab%20a%20warm%20beverage%20%E2%98%95%EF%B8%8F%2C%20and%20join%20us%20as%20we%20take%20some%20to%20recover%2C%20recap%20and%20build%20things%20with%20the%20latest%20and%20greatest%20launches%20from%20AWS%20re%3AInvent%202023.&dates=20231212T150000Z%2F20231212T200000Z) | [iCal](https://pages.awscloud.com/rs/112-TZM-766/images/EV_AWS-re-Invent-re-Covery-2023_Dec-2023.ics?version=0)
 - December 13 - [Google Cal](https://www.google.com/calendar/render?action=TEMPLATE&text=AWS%20re%3AInvent%20re%3ACovery%202023&location=twitch.tv%2Faws&details=Sit%20back%2C%20relax%2C%20grab%20a%20warm%20beverage%20%E2%98%95%EF%B8%8F%2C%20and%20join%20us%20as%20we%20take%20some%20to%20recover%2C%20recap%20and%20build%20things%20with%20the%20latest%20and%20greatest%20launches%20from%20AWS%20re%3AInvent%202023.&dates=20231213T150000Z%2F20231213T200000Z) | [iCal](https://pages.awscloud.com/rs/112-TZM-766/images/EV_AWS-re-Invent-re-Covery-2023_Dec-2023_13Dec.ics?version=0)
 - December 14 - [Google Cal](https://www.google.com/calendar/render?action=TEMPLATE&text=AWS%20re%3AInvent%20re%3ACovery%202023&location=twitch.tv%2Faws&details=Sit%20back%2C%20relax%2C%20grab%20a%20warm%20beverage%20%E2%98%95%EF%B8%8F%2C%20and%20join%20us%20as%20we%20take%20some%20to%20recover%2C%20recap%20and%20build%20things%20with%20the%20latest%20and%20greatest%20launches%20from%20AWS%20re%3AInvent%202023.&dates=20231214T160000Z%2F20231214T200000Z) | [iCal](https://pages.awscloud.com/rs/112-TZM-766/images/EV_AWS-re-Invent-re-Covery-2023_Dec-202314Dec.ics?version=0)
+
+---
+
+## Show notes
+
+If you've missed the live show, fear not, here are the show notes, links and videos from each of the days for your viewing pleasure! 💜
+
+### Day 1 - Serverless Bonanza
+
+On the first day we leaned our focus to serverless applications. Namely we built a bunch of Lambda functions, and deployed some React applications. Here are some of the highlights:
+
+We kicked off the show with **Chris** and **Brandon**, as we discussed the finer points on *Do people still build stuff with Visual Basic or not* 🤔 But then we looked at how do you write **.NET Lambda functions**. Easy, you use [Microsoft Visual Studio](https://visualstudio.microsoft.com/) with the [AWS Toolkit for Visual Studio](https://aws.amazon.com/visualstudio/). What Brandon showcased here is how easy it is to author a Lambda function, deploy it to the cloud, and run AND test it all from the comfort of your IDE ☕️ .  Check out that portion of the stream in the video below 👇
+
+https://www.twitch.tv/videos/2002678011
+
+In the second part, we bid farewell to Brandon and Chris, and we have **Erik** enter the stage. Yes, it's time for some [AWS Amplify](https://aws.amazon.com/amplify/) 🎉 Specifically in this segment we are looking at a *Preview* feature of AWS Amplify - [Gen 2](https://docs.amplify.aws/gen2/). This gives You a chance to use Amplify to build front-end AND back-end applications with the power of TypeScript and CDK! In this segment, Erik and Darko deploy a simple *NextJS* application to AWS, and implement an Authentication feature to it with [AWS CDK](https://aws.amazon.com/cdk/) and [Amazon Cognito](https://aws.amazon.com/cognito/). Check out how it went, and our amazing Holiday spirit in the video below 👇
+
+https://www.twitch.tv/videos/2002678012
+
+Let's got back to Lambda functions, as we are joined by **Julian** and the most amazing **Linda**, and we take a peek at some of the features and improvements to Lambda Functions that came from this year's re:Invent. In the following segment Julian demonstrates us the new [scaling capabilities of Lambda](https://aws.amazon.com/blogs/aws/aws-lambda-functions-now-scale-12-times-faster-when-handling-high-volume-requests/) and it's new [advanced logging controls](https://aws.amazon.com/blogs/compute/introducing-advanced-logging-controls-for-aws-lambda-functions/).
+
+What stood out for me in this segment is how fast we can get Lambda functions to spin up. If you want to see how fast it takes to have 10 000 (TEN THOUSAND) concurrent executions of Lambda functions, and how long it takes Lambda to process 200K SQS messages, check out the video below 👇
+
+https://www.twitch.tv/videos/2002678010
+
+Lastly, it's time for me (Darko) to attempt a thing. And *attempt* is the key word - I wanted to use my new found knowledge of .NET Lambda functions, and deploy a **PoweShell** Lambda function... yes! It's almost the same thing! 😅 This is all possible by using a custom [AWS Lambda PowerShell runtime](https://github.com/awslabs/aws-lambda-powershell-runtime) and [AWS SAM](https://github.com/awslabs/aws-lambda-powershell-runtime). 
+
+This time we, almost got to the solution on time, but we ran out of time. So here is a challenge for you, dear reader:
+
+- Create a Lambda Function that uses [this](https://github.com/awslabs/aws-lambda-powershell-runtime) PowerShell runtime
+- Modify one of the existing example lambda functions to include the `AWS.Tools.S3` PowerShell module
+- Make it upload a file with a random name to an S3 Bucket
+- Now, make a new S3 bucket that uses the [Amazon S3 Express One Zone high performance](https://aws.amazon.com/blogs/aws/new-amazon-s3-express-one-zone-high-performance-storage-class/) storage class
+- See how fast those Lambda functions can create file in that bucket.
+- ????
+- Profit 🥳
+
+And, enjoy the video 👇
+
+https://www.twitch.tv/videos/2002678009
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
