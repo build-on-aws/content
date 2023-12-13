@@ -53,6 +53,14 @@ For more information on using FIS to stop EC2 instances, please visit [here](htt
 ### Figure2
 ![Figure2](images/figure2a.png)
 
+You can expand your chaos experiments to simulate the loss of an Availability Zone or even an entire AWS region.
+
+An availability zone (AZ) failure refers to an outage or disruption that impacts a single AZ within an AWS region. When architecting fault tolerant systems, it's important to design your architecture to withstand the loss of an entire AZ. For example, distributing critical infrastructure across multiple AZs ensures that a failure in one AZ won't take down your entire application. To simulate a loss of power to an AZ during chaos testing, you could terminate the resources running in that AZ like EC2 instances, Autoscaling Groups, RDS databases etc. Doing so allows you to validate that your system can maintain availability despite the loss of a single AZ. You can learn more about using FIS to simulate power loss to an AZ [here](https://docs.aws.amazon.com/fis/latest/userguide/az-availability-scenario.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
+
+A region failure refers to a disruption that impacts an entire AWS region. This would involve the loss of multiple AZs within that region simultaneously. A region failure is a low probability, high impact event but chaos engineering helps you prepare for worst-case scenarios. To simulate a loss of connectivity to an AWS region for chaos testing, you could disable all the API endpoints for a region or revoke access to the AWS accounts that host your resources in that region, and pause S3 and DynamoDB replication. Running such an extreme failure scenario ensures that you have disaster recovery plans to shift entirely to a separate region if needed. Testing region-level disasters will build confidence that you can maintain business continuity even during major outages. You can learn more about using FIS to simulate connectivity loss to a region [here](https://docs.aws.amazon.com/fis/latest/userguide/cross-region-scenario.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
+
+The comparison chart towards the end of this article lists the chaos engineering tools can simulate the failure scenarios in the same or similar method described. 
+
 ## Tools available
 
 There are a number of chaos engineering tools available today, and most will have at least some level of integration with AWS so they can be used to run experiments against your AWS workloads. In the following section we will introduce several options.
