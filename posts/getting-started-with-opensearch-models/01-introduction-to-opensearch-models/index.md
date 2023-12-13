@@ -33,48 +33,13 @@ Let's get started.
 
 ## Motivations for OpenSearch models
 
-[Say My Name](https://en.wikipedia.org/wiki/Say_My_Name) is a popular song from the band Destiny's Child, often associated with the pop singer super star [Beyoncé](https://en.wikipedia.org/wiki/Beyonc%C3%A9) since she was part of the band during the late 90s. At least this is what most search engines may give back to you. They are based on keyword-based retrieval systems, such as [BM25](https://en.wikipedia.org/wiki/Okapi_BM25), which use ranking functions to estimate the relevance of documents to a given search query. The problem of it is that it cannot provide answers beyond keyword similarities, and for us human beings, this is not enough. We understand relevance in a far broader sense, which involves semantics, contextual awareness, and general world knowledge. Therefore, we need to augment existing search engines with semantic search. Using semantic search, you would also get as a result a reference to the seventh episode from the fifth season of the TV show [Breaking Bad](https://en.wikipedia.org/wiki/Breaking_Bad). This is the episode where the character Walter White confirms for the first time that he is the infamous Heisenberg.
+[Say My Name](https://en.wikipedia.org/wiki/Say_My_Name) is a popular song from the band Destiny's Child, often associated with the pop singer super star [Beyoncé](https://en.wikipedia.org/wiki/Beyonc%C3%A9) since she was part of the band during the late 90s. At least this is what most search engines may give back to you. They are based on keyword-based retrieval systems, such as [BM25](https://en.wikipedia.org/wiki/Okapi_BM25), which use ranking functions to estimate the relevance of documents to a given search query. The problem of it is that it cannot provide answers beyond keyword similarities, and for us human beings, this is not enough.
+
+We understand relevance in a far broader sense, which involves semantics, contextual awareness, and general world knowledge. Therefore, we need to augment existing search engines with semantic search. Using semantic search, you would also get as a result a reference to the seventh episode from the fifth season of the TV show [Breaking Bad](https://en.wikipedia.org/wiki/Breaking_Bad). This is the episode where the character Walter White confirms for the first time that he is the infamous Heisenberg.
 
 The support for semantic search was introduced into OpenSearch version 2.9, and it allows ML developers to train and deploy models into OpenSearch clusters. This support is provided by the [OpenSearch ML Commons Framework](https://github.com/opensearch-project/ml-commons). The idea behind this project is to simplify the process of defining, deploying, and using models using REST APIs, a programming model that is known and accessible to many developers. Instead of learning frameworks specialized in ML, they can use REST and JSON, which provide simpler programming constructs.
 
-Consider [this tutorial](https://opensearch.org/docs/latest/ml-commons-plugin/semantic-search/#tutorial) as an example of a pre-trained model based on [Hugging Face](https://huggingface.co) that can be invoked using the prediction API. In the example below, the identifier `cleMb4kBJ1eYAeTMFFg4` represents the model deployed on OpenSearch. This is how a developer can invoke this model:
-
-```
-POST /_plugins/_ml/_predict/text_embedding/cleMb4kBJ1eYAeTMFFg4
-{
-  "text_docs":[ "today is sunny"],
-  "return_number": true,
-  "target_response": ["sentence_embedding"]
-}
-```
-
-The response of this inference, once executed, will be provided in the JSON format. A developer can easily process this JSON response in any programming language to retrieve the text embeddings of the provided prompt.
-
-```json
-{
-   "inference_results":[
-      {
-         "output":[
-            {
-               "name":"sentence_embedding",
-               "data_type":"FLOAT32",
-               "shape":[
-                  768
-               ],
-               "data":[
-                  0.25517133,
-                  -0.28009856,
-                  0.48519906,
-                  "..."
-               ]
-            }
-         ]
-      }
-   ]
-}
-```
-
-Similarly, the same deployed model could be used in searches:
+Consider [this tutorial](https://opensearch.org/docs/latest/ml-commons-plugin/semantic-search/#tutorial) as an example of a pre-trained model based on [Hugging Face](https://huggingface.co) that can be invoked using the prediction API. In the example below, the identifier `cleMb4kBJ1eYAeTMFFg4` represents the model deployed on OpenSearch. This is how a developer can invoke this model with a search:
 
 ```json
 GET /my-nlp-index/_search
@@ -87,7 +52,7 @@ GET /my-nlp-index/_search
   "query": {
     "neural": {
       "passage_embedding": {
-        "query_text": "wild west",
+        "query_text": "say my name",
         "**model_id**": "cleMb4kBJ1eYAeTMFFg4",
         "k": 5
       }
