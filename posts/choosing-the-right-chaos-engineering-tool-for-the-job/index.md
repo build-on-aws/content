@@ -4,6 +4,7 @@ description: Basic guide for choosing chaos engineering tools for your AWS workl
 tags:
   - chaos-engineering
   - fault-injection-simulator
+  - fault-injection-service
   - chaostoolkit
   - gremlin
   - resilience
@@ -142,12 +143,12 @@ In this article we shared with you what Chaos Engineering is and how it can be a
 
 After reading this blog you might want to get some hands-on practice with chaos engineering. The best training option depends on your preferred learning style and depth of knowledge desired. we recommend starting with fundamental training like the [Chaos Engineering course](https://www.linkedin.com/learning/devops-foundations-chaos-engineering), [O'Reilly book](https://www.oreilly.com/library/view/chaos-engineering/9781492043850/), or [AWS re:Invent sessions](https://www.oreilly.com/library/view/chaos-engineering/9781492043850/) then progressing to hands-on workshops and conference sessions. Developing chaos engineering skills takes practice.
 
-The AWS Well Architected Labs has a 300 level lab available [here](https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_of_ec2_rds_and_s3/) which will walk you through multiple chaos experiments including EC2 instance failure, AZ failure, and RDS instance failover. The labs include both API script based experiments and Fault Injection Simulator experiments.
+The AWS Well Architected Labs has a 300 level lab available [here](https://wellarchitectedlabs.com/reliability/300_labs/300_testing_for_resiliency_of_ec2_rds_and_s3/) which will walk you through multiple chaos experiments including EC2 instance failure, AZ failure, and RDS instance failover. The labs include both API script based experiments and Fault Injection Service experiments.
 
 ### External resources
 
-- Chaos Engineering with AWS Fault Injection Simulator: [https://www.youtube.com/watch?v=AThR8dFmPP4](https://www.youtube.com/watch?v=AThR8dFmPP4)
-- Chaos engineering leveraging AWS Fault Injection Simulator in a multi-account AWS environment: [https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/](https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
-- AWS Fault Injection Simulator blogs: [https://aws.amazon.com/blogs/devops/tag/aws-fault-injection-simulator/](https://aws.amazon.com/blogs/devops/tag/aws-fault-injection-simulator/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
+- Chaos Engineering with AWS Fault Injection Service: [https://www.youtube.com/watch?v=AThR8dFmPP4](https://www.youtube.com/watch?v=AThR8dFmPP4)
+- Chaos engineering leveraging AWS Fault Injection Service in a multi-account AWS environment: [https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/](https://aws.amazon.com/blogs/mt/chaos-engineering-leveraging-aws-fault-injection-simulator-in-a-multi-account-aws-environment/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
+- AWS Fault Injection Service blogs: [https://aws.amazon.com/blogs/devops/tag/aws-fault-injection-simulator/](https://aws.amazon.com/blogs/devops/tag/aws-fault-injection-simulator/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
 - How Finbourne Assures Resiliency Through Chaos Engineering Events Every 17 min: [https://www.youtube.com/watch?v=lkDq9g43djw](https://www.youtube.com/watch?v=lkDq9g43djw)
 - DPG Media Successfully Launches Video On Demand Service with Gremlin and AWS: [https://aws.amazon.com/partners/success/dpg-media-gremlin/?did=ps_card&trk=ps_card](https://aws.amazon.com/partners/success/dpg-media-gremlin/?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=choosing-the-right-chaos-engineering-tool-for-the-job)
