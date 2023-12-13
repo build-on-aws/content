@@ -24,6 +24,8 @@ additionalAuthors:
     authorName: Suman Debnath
   - authorGithubAlias: vsenger
     authorName: Vinicius Senger
+  - authorGithubAlias: elizabethfuentes12
+    authorName: Elizabeth Fuentes
 date: 2023-11-23
 ---
 
