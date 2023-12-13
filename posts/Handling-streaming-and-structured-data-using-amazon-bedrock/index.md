@@ -9,6 +9,9 @@ spaces:
   - generative-ai
 waves:
   - generative-ai
+images:
+  banner: images/cover.jpg
+  hero: images/cover.jpg
 authorGithubAlias: cobbweb
 githubUserLabel: community
 authorName: Andrew Bucknall
@@ -177,7 +180,7 @@ company in this XML is only about 2 or 3 tokens bigger than it's JSON equivalent
 
 Another benefit to using XML is that it's much easier to parse a partially streamed response. Say a user asks for a list of 100 companies, even with Claude’s speedy responses you'd still be looking at a loading spinner for over 60 seconds. 
 
-Instead, by leveraging Bedrock's [InvokeModelWithResponseStream](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html), you can do an easy string search to look for completed `</comp>` tags as you build up the streamed response, and then parse just that `<comp>`` block in a data structure and send it onto the client. This is definitely a crude option, so you may also want to look into your runtime ecosystem to see if there's any partial XML processing libraries available.
+Instead, by leveraging Bedrock's [InvokeModelWithResponseStream](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html), you can do an easy string search to look for completed `</comp>` tags as you build up the streamed response, and then parse just that `<comp>` block in a data structure and send it onto the client. This is definitely a crude option, so you may also want to look into your runtime ecosystem to see if there's any partial XML processing libraries available.
 
 ## Example: Parsing streamed XML in real time using Go
 

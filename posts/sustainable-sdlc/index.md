@@ -7,10 +7,14 @@ tags:
   - best practices
 images:
   banner: images/s-sdlc-phases.jpg
-authorGithubAlias: ranbirsh
+spaces:
+  - cost-optimization
+waves:
+  - cost
+authorGithubAlias: singhr2
 authorName: Ranbir Singh
 additionalAuthors: 
-  - authorGithubAlias: ghm
+  - authorGithubAlias: sammk87
     authorName: Sam Mokhtari
 date: 2023-11-08
 ---
@@ -73,8 +77,6 @@ The following sections captures some of the sustainability related best practice
 ### Development
 
 **Choose Energy efficient programming language**: Choose energy efficient programming languages for development.  5 most energy-efficient programming languages as suggested in [Energy Efficiency across Programming Languages](https://greenlab.di.uminho.pt/wp-content/uploads/2017/10/sleFinal.pdf) are C, C++, Java, Rust and Ada. Python is not a great option from energy efficiency perspective. Checkout [AWS re:Invent 2022 - Sustainability in the cloud with Rust and AWS Graviton (DOP315)](https://www.youtube.com/watch?v=HKAl4tSCp7o) for more details.  
-
-https://www.youtube.com/watch?v=HKAl4tSCp7o
 
 **Remove or refactor unused assets**:  You should target to remove any code blocks in the existing application which are no longer required. This will help in keeping the codebase smaller as well as makes it easier to maintain application.  Plan to perform periodic analysis on resources and stop/decommission unused ones. If the development resources are not accessed 24/7, it would be recommended to turn them off when not in use. For more details, checkout [SUS03-BP02 Remove or refactor workload components with low or no use](https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/sus_sus_software_a3.html?sc_channel=el&sc_campaign=costwave&sc_content=sustainable-sdlc&sc_geo=mult&sc_country=mult&sc_outcome=acq) page for more details.  
 
