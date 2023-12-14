@@ -83,7 +83,7 @@ You can use SageMaker Ground Truth to create highly accurate training datasets. 
 
 You can use SageMaker ML Governance to monitor the entire process of your machine learning models from training to deployment. This give you the ability to deploy responsible models by monitoring the model, detecting biases and more to meet regulatory requirements and increase trust in AI systems.
 
-### Deploying machine learning models at scale
+### Deploying Machine Learning Models at Scale
 
 SageMaker MLOps gives you the abilities to deploy ML models at scale by providing CI/CD pipelines for model building and deployment, model monitoring, automated drift detection and retraining, integration with Git/GitHub for version control and collaboration, and tools for experiment tracking and model lineage. With these capablities you can operationalize ML models into production, manage large volume of ML expirements, and more to improve efficiency and reduce errors while improving the productivity of teams.
 
