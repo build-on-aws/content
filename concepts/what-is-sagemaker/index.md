@@ -41,7 +41,7 @@ SageMaker makes model building easier by providing pre-built containers and algo
 
 ### Training models
 
-SageMaker offers a fully-managed machine learning platform to help engineers and data scientists quickly build, train, and deploy high-quality models at any scale. You need to specify the compute resources you need like GPU type and number of instances. By using features such as [GPU instances and training compilers](https://aws.amazon.com/sagemaker/faqs), training time and costs can be significantly reduced.
+SageMaker offers a fully managed machine learning platform to help engineers and data scientists quickly build, train, and deploy high quality models at any scale. You need to specify the compute resources you need like GPU type and number of instances. By using features such as [GPU instances and training compilers](https://aws.amazon.com/sagemaker/faqs), training time and costs can be significantly reduced.
 
 ### Deploying models
 
