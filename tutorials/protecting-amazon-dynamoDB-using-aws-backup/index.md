@@ -8,12 +8,10 @@ tags:
   - data-protection
 authorGithubAlias: kenhui
 authorName: Kenneth Hui
-date: 2023-12-12
+date: 2023-12-14
 ---
 
-## Overview
-
-AWS customers, across different industries, need to meet regulatory compliance or business continuity requirements for protecting and recovering their data. If a data loss event occurs, customers want a simple backup solution that can enable them to quickly recover and resume normal business operations. using [AWS Backup](https://aws.amazon.com/backup/), a fully managed AWS service, you can centralize and automate data protection across multiple AWS services, including database services such as DynamoDB. Users of [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) can use AWS Backup to protect the data in their Amazon DynamoDB tables, following a specific frequency and retention period they define. You can use AWS Backup to restore a database table that may have become corrupted through a softwre error or inadvertently deleted by a user. You can also use AWS Backup reporting capabilities to demonstrate compliance by showing proof that you have backed up your databases. After you configure your backup policies and assign Amazon DynamoDB resources to the policies, AWS Backup automates the creation of Amazon DynamoDB on-demand backups and securely stores the backups in an encrypted backup vault that you designate in your backup plan. Following a data-loss event, customers can use AWS Backup to recover their DynamoDB tables.
+AWS customers, across different industries, need to meet regulatory compliance or business continuity requirements for protecting and recovering their data. If a data loss event occurs, customers want a simple backup solution that can enable them to quickly recover and resume normal business operations. Using [AWS Backup](https://docs.aws.amazon.com/aws-backup), a fully managed AWS service, can centralize and automate data protection across multiple AWS services, including database services such as DynamoDB. Users of [Amazon DynamoDB](https://docs.aws.amazon.com/dynamodb/) can use AWS Backup to protect the data in their Amazon DynamoDB tables, following a specific frequency and retention period they define. You can use AWS Backup to restore a database table that may have become corrupted through a software error or inadvertently deleted by a user. You can also use AWS Backup reporting capabilities to demonstrate compliance by showing proof that you have backed up your databases. After you configure your backup policies and assign Amazon DynamoDB resources to the policies, AWS Backup automates the creation of Amazon DynamoDB on-demand backups and securely stores the backups in an encrypted backup vault that you designate in your backup plan. Following a data-loss event, customers can use AWS Backup to recover their DynamoDB tables.
 
 AWS Backup currently supports DynamoDB on-demand backups but not point-in-time restores for DynamoDB. AWS Backup enhances DynamoDB on-demand backups by enabling you to schedule and to manage the lifecycle of your backups. You can also monitor and audit backups across AWS services, including DynamoDB.
 
@@ -30,7 +28,7 @@ Before starting this tutorial, you will need the following:
 | 💰 Cost to complete | For DynamoDB pricing, refer to the [DynamoDB pricing page](https://aws.amazon.com/dynamodb/pricing?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup) <br> For AWS Backup pricing, refer to the [AWS Backup pricing page](https://aws.amazon.com/backup/pricing?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup)   |
 | 🧩 Prerequisites    | An [AWS account](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). For more information on using AWS Backup for the first time, view the [AWS Backup documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup).<br>- [An Amazon DynamoDB table to protect. For information on how to create the sample table that is used for this tutorial, visit the documentation on [Getting started with Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup).|                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-11-20                             |
+| ⏰ Last Updated     | 2023-12-14                             |
 
 | ToC |
 |-----|
@@ -49,7 +47,7 @@ In this tutorial, you will:
 
 **1.1 — Sign in**
 
-* Log in to the [AWS Management Console](https://console.aws.amazon.com/), and navigate to the AWS Backup console. Confirm that you are configuring AWS Backup in the same Region as your DynamoDB table.
+* Log in to the [AWS Management Console](https://console.aws.amazon.com/) and navigate to the AWS Backup console. Confirm that you are configuring AWS Backup in the same Region as your DynamoDB table.
 
 ![Navigate to the AWS Backup console](images/image01.png)
 
@@ -81,7 +79,7 @@ In this tutorial, you will:
 
 ![Click on the Create on-demand backup button](images/image05.png)
 
-**2.3.1 - Configure on-demand backup job  setting for an Amazon DynamoDB table**
+**2.3.1 - Configure on-demand backup job setting for an Amazon DynamoDB table**
 
 * On the **Create on-demand backup** page, choose the **Resource type** that you want to back up; choose **DynamoDB, from the list of supported resources,** to back up an Amazon DynamoDB table.
 * Choose the **Table** **name** of the DynamoDB resource that you want to protect.
@@ -93,6 +91,7 @@ In this tutorial, you will:
 ![Configure an on-demand backup as shown in screenshot](images/image06.png)
 
 **2.3.2 — Create a new backup vault**
+
 Instead of using the Default vault or another existing vault, you can create a new backup vault.
 
 * On the **Create on-demand backup** page, choose **Create new Backup vault** This opens a new browser tab with the **Create a backup vault** page.
@@ -134,7 +133,7 @@ In AWS Backup, a backup plan can be created to schedule and to define how you wa
 ![Click on Create Backup plan button](images/image13.png)
 
 * AWS Backup provides three options to create a backup plan: in this tutorial, you will build a new plan.
-    * **Start with a template -** You can create a new backup plan based on the configurations in an existing plan. Be aware that backup plans created by AWS Backup are based on backup best practices and common backup policy configurations available in the [AWS Backup Developer Guide](https://docs.aws.amazon.com/aws-backup/latest/devguide/about-backup-plans.html). When you select an existing backup plan to start from, the configurations from that backup plan are automatically populated for your new backup plan. You can then change any of these configurations according to your backup requirements.
+    * **Start with a template -** You can create a new backup plan based on the configurations in an existing plan. Be aware that backup plans created by AWS Backup are based on backup best practices and common backup policy configurations available in the [AWS Backup Developer Guide](https://docs.aws.amazon.com/aws-backup/latest/devguide/about-backup-plans.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). When you select an existing backup plan to start from, the configurations from that backup plan are automatically populated for your new backup plan. You can then change any of these configurations according to your backup requirements.
     * **Build a new plan -** You can create a new backup plan by specifying each of the backup configuration details, as described in the next section. You can choose from the recommended default configurations.
     * **Define a plan using JSON**: You can modify the JSON expression of an existing backup plan or create a new expression.
 * Choose **Build a new plan**.
@@ -162,6 +161,7 @@ In AWS Backup, a backup plan can be created to schedule and to define how you wa
 ![Congigure new backup plan according to screenshot... continued](images/image17.png)
 
 **3.2 — Assign resources to the backup plan**
+
 When you assign a resource to a backup plan, that resource is backed up automatically according to the backup plan. The backups for that resource are managed according to the backup plan. You can assign resources using tags or resource IDs. Using tags to assign resources is a simple and scalable way to back up multiple resources.
 
 * Select the created backup plan and choose the **Assign resources** button.
@@ -201,7 +201,7 @@ A backup, or recovery point, represents the content of a resource, such as an Am
 
 ![Click on Restore button to initiate restore](images/image23.png)
 
-]**4.2 — Configuring a restore job**
+**4.2 — Configuring a restore job**
 
 * The restore of the recovery point ARN will bring you to a **Restore backup** screen that will have the **Original table name**, and other configurations.
     * For **New table name**, enter a name such as *DynamoDB-restore*.
@@ -224,7 +224,7 @@ A backup, or recovery point, represents the content of a resource, such as an Am
 
 * Open the restored table and confirm that it is identical to original *Music* table.
 
-### Step 5: Clean-Up
+### Step 5: Cleanup
 
 In the following steps, you can clean up the resources you created in this tutorial. It is a best practice to delete resources that you are no longer using so that you are not continually charged for them.
 
