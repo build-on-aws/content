@@ -99,7 +99,7 @@ Fraud is a major challenge that many companies face today, including [Mastercard
 
 ### Forecasting
 
-It is possible to leverage Amazon SageMaker to build forecasting models that predict future sales, demand, and other metrics. Forecasting takes past data and uses it to predict trends that may reoccur in the future. SageMaker provides built-in algorithms like DeepAR that are optimized for time-series forecasting. By bringing your historical time-series data into SageMaker notebooks, you can train forecasting models that learn patterns and seasonality in the data. These models can then be deployed into production to generate forecasts on an ongoing basis.
+It is possible to leverage Amazon SageMaker to build forecasting models that predict future sales, demand, and other metrics. Forecasting takes past data and uses it to predict trends that may reoccur in the future. SageMaker provides built-in algorithms like DeepAR that are optimized for time series forecasting. By bringing your historical time series data into SageMaker notebooks, you can train forecasting models that learn patterns and seasonality in the data. These models can then be deployed into production to generate forecasts on an ongoing basis.
 
 ## Conclusion
 
