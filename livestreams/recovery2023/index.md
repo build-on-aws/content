@@ -94,3 +94,44 @@ This time we, almost got to the solution on time, but we ran out of time. So her
 And, enjoy the video 👇
 
 https://www.twitch.tv/videos/2002678009
+
+### Day 2 - Data & Streaming fun
+
+Would you look at that, day 2 has come and gone, and has left some *amazing* content in its wake! Today, I was joined by three *amazing* Amazonians, as we look at all things Data and Video Streaming. And we also got a chance to play around with some hardware. Today I wanted to focus on Data, and Data related launches so that is exactly what we did, but we also used the opportunity to put our *old-man-in-tech* hats on and talk about the "good" old times!
+
+Speaking of Good Old times, the first thing we did this morning (and by "we" I am talking about **Tony** and **Ibrahim**) is look at the latest feature of [Amazon RDS](https://aws.amazon.com/rds/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq) - A "new" Database engine! Yes, now you can launch [IBM Db2 Databases](https://aws.amazon.com/blogs/aws/getting-started-with-new-amazon-rds-for-db2/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq) on RDS 💾 What a time to be alive.
+
+What really stood out for me here, is that you actually need a licence key from IBM to be able to launch it. I've never seen things work such a way in the cloud, but I guess this is a very special type of Database. And for all the jokes we made, this is a very important launch for all those customers who are looking to migrate legacy workloads to the cloud, who are looking to gain from all the benefits of a fully-managed database, while still running their most critical workloads. Go give IBM Db2 on RDS a look. 👏
+
+Oh two more things that can be a snag when launching this database (as of the time of writing this):
+
+1. Create a *Parameter Group* that contains your IBM Site code and the Licence key
+2. When creating a Db2 RDS instance, by default there is no database created, so make sure to check that option when launching
+
+Enjoy the video of us doing exactly this 👇
+
+https://www.twitch.tv/videos/2003625229
+
+With the advent of AI/ML, we are in need of more and more data to be processed. Lot's of times that data sits in some sort of a Data Warehouse like [Amazon Redshift](https://aws.amazon.com/redshift/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq) but to get that data from production databases to there, you need to run some ETL - Extract, Transform, and Load - Operations on it. Historically this would require specific services and tooling to sit in-between these databases and perform all this. Well, this is no more! Now you can get your data *straight* from an Amazon RDS database into something like Amazon Redshift with [zero-ETL](https://aws.amazon.com/blogs/big-data/announcing-zero-etl-integrations-with-aws-databases-and-amazon-redshift/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq) 🔥
+
+In the following segment, Tony and Ibrahim showcase just that. We also share this wonderful [lab](https://catalog.us-east-1.prod.workshops.aws/workshops/428641a0-1414-4fb7-8de6-a38c053ee19e/en-US) you can follow yourself if you want to check out how this works. More in the video below 👇
+
+https://www.twitch.tv/videos/2003625227
+
+Lastly, here was the fun part of the Data focused segment of the stream -  watching Darko fail! Yes, we've looked at the latest feature coming out of Amazon ElastiCache - [ElastiCache Serverless](https://aws.amazon.com/blogs/aws/amazon-elasticache-serverless-for-redis-and-memcached-now-generally-available/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq). This gives you the ability to launch an Redis or Memcached cluster that is able to launch in under a minute and can instantly scale based on usage! 😎 
+
+We started out great, and we managed to launch it without issues. However we ran into issues in connecting to the cache using `redis6-cli`. After a lot of trial and tribulations we figured it out. A single cli parameter of `--tls` was the culprit! 😧 Yes, since we are encrypting the data in transit, we needed to tell the redis tool to use TLS! Oh well!
+
+If you want to see the tool in action, as well as us scratching our heads, check out the video below 👇
+
+https://www.twitch.tv/videos/2003625228
+
+Alright, it's time for **Todd**. 🥳 And straight off the bat Todd brings his a-game! Yes, he made fun things with microcontrollers! 😍 In this segment, Todd showcases how he used an [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller, the Twitch API and [Amazon Bedrock](https://aws.amazon.com/bedrock/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq) to play music notes that Twitch chat shares with us, from a speaker attached to the ESP32 and attempt the song that was played! 🎵 
+
+Oh, and he built an ugly Christmas sweater that lights up whenever we get a new Twitch channel follower! 😍 Check out these shenanigans below 👇
+
+https://www.twitch.tv/videos/2003625236
+
+Last, but definitely not least, Todd showcases some of the latest features of [Amazon IVS](https://aws.amazon.com/ivs/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq). A service that enables you to create your own live streaming platforms and tools. In this segment we looked at a way you can run your own **real-time** live streams with **server side compositing** with Amazon IVS. If you want to do it yourself, Todd has given us this [fancy document](https://gist.github.com/recursivecodes/3c95b560895ca8588e1770a249adbf65) that outlines all the steps we did. But if you want just to watch us do this, and more, check out the video below 👇
+
+https://www.twitch.tv/videos/2003625230
