@@ -1,6 +1,6 @@
 ---
 title: "What is Amazon SageMaker?"
-description: "Leveraging Amazon SageMaker for Scalable and Robust ML Workflows"
+description: "Leverage Amazon SageMaker for scalable and robust ML workflows."
 tags:
     - ai-ml
     - sagemaker
