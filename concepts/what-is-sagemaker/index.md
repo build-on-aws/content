@@ -29,7 +29,7 @@ Companies are using SageMaker for various machine learning applications such as 
 
 ## Key Capabilities and Features of Amazon SageMaker
 
-### Managing machine learning workflows
+### Managing Machine Learning Workflows
 
 SageMaker Studio provides an integrated web environment for end-to-end ML workflows. This will let you to easily setup projects, track experiments, organize models and data, visualize results, and collaborate. This allows you to use popular programming languages such as Python and R in a notebook interface very similar to Jupyter Lab.
 
