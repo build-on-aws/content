@@ -27,7 +27,7 @@ SageMaker provides end-to-end capabilities for a typical machine learning workfl
 
 Companies are using SageMaker for various machine learning applications such as forecasting, recommendation engines, fraud detection and Generative AI. The service continues to evolve by adding new algorithms, instance types, and integrations. Overall, SageMaker aims to reduce the complexity faced by developers when building impactful machine learning models.
 
-## Key Capabilities and features of Amazon SageMaker
+## Key Capabilities and Features of Amazon SageMaker
 
 ### Managing machine learning workflows
 
