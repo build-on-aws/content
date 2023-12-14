@@ -35,7 +35,7 @@ SageMaker Studio provides an integrated web environment for end-to-end ML workfl
 
 ![SageMaker Studio](images/studio.png "SageMaker Studio for end-to-end ML workflows")
 
-### Building models
+### Building Models
 
 SageMaker makes model building easier by providing pre-built containers and algorithms. You provide an algorithm, training code, and dataset, and train it on the provided infrastructure. In addition SageMaker supports popular frameworks like TensorFlow, PyTorch, and XGBoost. You can also bring your own frameworks using custom containers. This flexibility allows rapid testing of different approaches.
 
