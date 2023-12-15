@@ -61,7 +61,7 @@ If you would like get notified about this, download these fancy *Calendar blocke
 
 If you've missed the live show, fear not, here are the show notes, links and videos from each of the days for your viewing pleasure! 💜
 
-### Day 1 - Serverless Bonanza
+### Day 1 - Serverless Bonanza 🚀
 
 On the first day we leaned our focus to serverless applications. Namely we built a bunch of Lambda functions, and deployed some React applications. Here are some of the highlights:
 
@@ -95,7 +95,7 @@ And, enjoy the video 👇
 
 https://www.twitch.tv/videos/2002678009
 
-### Day 2 - Data & Streaming fun
+### Day 2 - Data & Streaming fun 💾
 
 Would you look at that, day 2 has come and gone, and has left some *amazing* content in its wake! Today, I was joined by three *amazing* Amazonians, as we look at all things Data and Video Streaming. And we also got a chance to play around with some hardware. Today I wanted to focus on Data, and Data related launches so that is exactly what we did, but we also used the opportunity to put our *old-man-in-tech* hats on and talk about the "good" old times!
 
@@ -135,3 +135,21 @@ https://www.twitch.tv/videos/2003625236
 Last, but definitely not least, Todd showcases some of the latest features of [Amazon IVS](https://aws.amazon.com/ivs/?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-live&sc_geo=mult&sc_country=mult&sc_outcome=acq). A service that enables you to create your own live streaming platforms and tools. In this segment we looked at a way you can run your own **real-time** live streams with **server side compositing** with Amazon IVS. If you want to do it yourself, Todd has given us this [fancy document](https://gist.github.com/recursivecodes/3c95b560895ca8588e1770a249adbf65) that outlines all the steps we did. But if you want just to watch us do this, and more, check out the video below 👇
 
 https://www.twitch.tv/videos/2003625230
+
+### Day 3 - Generative AI gonna Generate 🧠
+
+And, finally, day 3 and the final day of this year's re:Cap streams is here. It's been quite a ride, and it's time for us to wrap it up with something fun, something useful, and something everyone is talking about: *Generative AI*. And today I am joined by none other than **Brooke**, **Francois**, and **Chris**. Let's see what happens today!
+
+First off, we are welcomed by Francois and Chris. Our resident experts in all things AWS Toolkit and Visual studio. Like on day 1 we are getting a first-hand demo on how the AWS Toolkit works in Visual Studio, but this time with a slight lean on how [Amazon CodeWhisperer]() nails creating some .NET code. What stood out for me here is how CodeWhisperer is concious of the entire context of your written code. For example, the .NET example used by Francois is writing to an Amazon DynamoDB database. Seems simple enough, right? Well, the AWS SDK for .NET has two ways of writing to this DB. And depending on what module is imported CodeWhisperer suggests different code snippets that adhere to said module - magical 🔮 
+
+Oh, and if you wish to see CodeWhisperer and its *chat functionality* in action on the JetBrains Rider IDE, you can see it in the video below 👇
+
+https://www.twitch.tv/videos/2004434867
+
+Lastly, as we are wrapping up today, **Broke** and I decided to have some fun. Now, with [PartyRock](https://partyrock.aws/), a free generative AI playground where you can build applications with the power of Generative AI, with Generative AI. YES! 🥳 What we have built here is an application which will summarize AWS Blog posts, and give you a version of it with a thick Australian Slang (Brooke, as our resident Aussie, has confirmed it's authenticity). On top of that, we've also introduced a chat bot which you can ask questions about the blog post. Yowza! 
+
+Check out the way we built it, how much we laughed, and the tool in action below 👇
+
+https://www.twitch.tv/videos/2004434868
+
+And that's all folks. We really hope you enjoyed these three days of live streams. We hope you will come back again next year. And we hope to see you soon LIVE 🟣 on a Twitch channel near you! 💜
