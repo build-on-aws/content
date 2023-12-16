@@ -58,7 +58,7 @@ The figure below shows the reference architecture, where the client can access t
 
 ### 1. **Create Lambda Functions as Part of Your GenAI Application Interacting With Foundation Models via Bedrock**
 
-I use this [example](https://github.com/mavi888/sam-bedrock-lambda) as a simplified GenAI application, where Lambda functions interacting with Amazon Bedrock to generate text.
+I use this [example](https://github.com/mavi888/sam-bedrock-lambda) as a simplified GenAI application, where Lambda functions interact with Amazon Bedrock to generate text.
 
 ![Lambda Function](images/lambda.png)
 
