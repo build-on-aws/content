@@ -73,7 +73,7 @@ Configure VPC settings:
 ![VPC-2](images/vpc_2.png)
 
 **Note:**
-  - When creating VPC, choose Tenancy with "Default", since Lambda doesn't work with "[Dedicated](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)" tenancy for now.
+  - When creating VPC choose Tenancy with "Default" since Lambda doesn't work with "[Dedicated](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)" tenancy for now.
     To connect to resources in a dedicated VPC, [peer it to a second VPC with default tenancy](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-dedicated-vpc/).
 
   - It is a good idea to have at least **2** AZs([Availability Zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)) and **2 subnets** considering **resilience**.
