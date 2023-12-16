@@ -206,4 +206,4 @@ If your application uses additional AWS beyond Amazon Lambda--and it interacts w
 **AWS PrivateLink** is powerful to privately connect your services on VPC with **Amazon Bedrock**.
 With AWS PrivateLink, you can further control who can access your application and what actions they can take via Security Group and Endpoint Policy.
 
-Building up your GenAI with **Amazon Bedrock**, your prompts and your data is not used in AWS's first class models or 3rd party models; data remains in the region where they were created; all the customization (fine-tuning model) you do with the model is per customer, per tenant, completely isolated, encrypted, and maintained completely separated from the models themselves.
+Building up your GenAI with **Amazon Bedrock**, your prompts and your data is not used in AWS's first class models or third party models; data remains in the region where they were created; all the customization (fine-tuning model) you do with the model is per customer, per tenant, completely isolated, encrypted, and maintained completely separated from the models themselves.
