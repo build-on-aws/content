@@ -1,5 +1,5 @@
 ---
-title: "How to build GenAI application using Amazon Bedrock with AWS PrivateLink to protect your data privacy"  
+title: "Build GenAI Applications Using Amazon Bedrock With AWS PrivateLink To Protect Your Data Privacy"  
 description: "Manage and protect data security and compliance standards."
 tags:  
   - Amazon Bedrock
