@@ -142,7 +142,7 @@ Now your Lambda function is connected with your VPC. You can repeat the same ste
 
   In order to connect your VPC and Amazon Bedrock service using AWS PrivateLink, you need to create an [**interface VPC endpoint**](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html#create-interface-endpoint-aws).
 
-  From VPC console, create endpoint:
+  From VPC console, create an endpoint:
 
   ![Bedrock-VPC-endpoint-1](images/bedrock-endpoint-1.png)
 
