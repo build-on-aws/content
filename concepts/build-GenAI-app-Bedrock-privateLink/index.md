@@ -42,7 +42,7 @@ The figure below shows how AWS PrivateLink works.
 Security benefits of AWS PrivateLink:
 - **Regulatory Compliance** (e.g. **HIPAA**, **PCI**) - preventing sensitive data (e.g.PII) from traversing through the internet.
 - **Privately access AWS services** - connecting your VPC to AWS services privately. 
-  You can configure security groups of services (e.g. ***Lambda***) on your VPC, so to control the access to the corresponding AWS services (e.g. ***Bedrock***) as well.
+You can configure security groups of services (e.g. ***Lambda***) on your VPC to control the access to the corresponding AWS services (e.g. ***Bedrock***) as well.
 
 In addition to the security benefit, AWS PrivateLink also makes it easier to connect AWS services across different AWS accounts and VPCs to simplify your network architecture.
 
