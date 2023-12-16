@@ -27,7 +27,7 @@ As you can see, Amazon Bedrock provides you comprehensive security and complianc
 
 ## AWS PrivateLink
 
-Privacy breaches on the internet present genuine risks, with [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html), you can link your own VPCs, on-premise networks, and supported AWS services (e.g. Amazon Lambda, Amazon Bedrock) privately (private IP) without exposing your data to the public internet.
+Privacy breaches on the internet present genuine risks but with [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) you can link your own VPCs, on-premise networks, and supported AWS services (e.g. Amazon Lambda, Amazon Bedrock) privately (private IP) without exposing your data to the public internet.
 
 The figure below shows how AWS PrivateLink works.
 
