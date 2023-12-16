@@ -138,7 +138,7 @@ Lambda function is by default running on the Lambda service VPC with public inte
 
 Now your Lambda function is connected with your VPC. You can repeat the same steps for other Lambda functions.
 
-### 5. **Create Bedrock VPC endpoint**
+### 5. **Create a Bedrock VPC Endpoint**
 
   In order to connect your VPC and Amazon Bedrock service using AWS PrivateLink, you need to create an [**interface VPC endpoint**](https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html#create-interface-endpoint-aws).
 
