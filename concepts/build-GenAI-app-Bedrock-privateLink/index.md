@@ -48,7 +48,7 @@ In addition to the security benefit, AWS PrivateLink also makes it easier to con
 
 ## How To Build a GenAI Application With AWS PrivateLink to Amazon Bedrock
 
-There are many patterns to build up GenAI application with Amazon Bedrock. Let's focus on demonstration of how to establish private link with Bedrock, with ***Amazon Lambda function*** as the key component of a GenAI application.
+There are many patterns to build up GenAI application with Amazon Bedrock. Let's focus on demonstration of how to establish a private link with Bedrock with ***Amazon Lambda function*** as the key component of a GenAI application.
 
 The figure below shows the reference architecture, where the client can access to the GenAI application via AWS PrivateLink. Client can be on-premise or on AWS VPC (which can be the same or different from where the GenAI application located). Be aware that the GenAI application should be on the **same region** with the connected Amazon Bedrock endpoint. As the time of writing this blog post, Amazon Bedrock is not supported in all the AWS Regions, so remember to check the [supported regions](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html#bedrock-regions).
 
