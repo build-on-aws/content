@@ -199,7 +199,7 @@ Detailed logs from Lambda function's corresponding **CloudWatch logs** are like 
 ### Summary
 This example is focusing on Lambda as GenAI application key component.
 
-If your application uses additional AWS beyond Amazon Lambda--and it interacts with Amazon Bedrock and supports VPC connections--then the same approach described in this blog can also be applied to those services.
+If your application uses additional AWS beyond Amazon Lambda - and it interacts with Amazon Bedrock and supports VPC connections - then the same approach described in this blog can also be applied to those services.
 
 
 ## Conclusion
