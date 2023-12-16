@@ -46,7 +46,7 @@ You can configure security groups of services (e.g. ***Lambda***) on your VPC to
 
 In addition to the security benefit, AWS PrivateLink also makes it easier to connect AWS services across different AWS accounts and VPCs to simplify your network architecture.
 
-## How to build a GenAI application with AWS PrivateLink to Amazon Bedrock
+## How To Build a GenAI Application With AWS PrivateLink to Amazon Bedrock
 
 There are many patterns to build up GenAI application with Amazon Bedrock. Let's focus on demonstration of how to establish private link with Bedrock, with ***Amazon Lambda function*** as the key component of a GenAI application.
 
