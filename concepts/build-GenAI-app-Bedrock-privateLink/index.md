@@ -78,7 +78,7 @@ Configure VPC settings:
 
   - It is a good idea to have at least **2** AZs([Availability Zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/)) and **2 subnets** considering **resilience**.
 
-  - You have the option to choose the specific AZs. This is useful since not all AZs support **Bedrock VPC endpoint**. To identify which AZs in an [**AWS region**](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) support Bedrock VPC endpoint, run the following command.
+  - You have the option to choose the specific AZs. This is useful since not all AZs support **Bedrock VPC endpoint**. To identify which AZs are in an [**AWS region**](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) and support Bedrock VPC endpoint, run the following command:
 
 ```go
 //Replace <region> with your chosen region
