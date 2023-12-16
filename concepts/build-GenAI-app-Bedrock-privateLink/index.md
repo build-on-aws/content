@@ -54,7 +54,7 @@ The figure below shows the reference architecture, where the client can access t
 
 ![PrivateLink to Bedrock](images/lambda-bedrock-architecture.png)
 
- One way to build this up, follow the steps below:
+ One way to build this up is to follow the steps below:
 
 ### 1. **Create Lambda functions as part of your GenAI application interacting with Foundation Models via Bedrock**
 
