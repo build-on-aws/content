@@ -180,7 +180,7 @@ Configure endpoint policy:
 
 ### 6. **Test Your GenAI Application With PrivateLink Connection to Amazon Bedrock**
 
-After all the above steps, it is time to test your GenAI application by invoking lambda functions.
+After all the above steps, it is time to test your GenAI application by invoking Lambda functions.
 
 Test can be executed form your client, or from Lambda console:
 
