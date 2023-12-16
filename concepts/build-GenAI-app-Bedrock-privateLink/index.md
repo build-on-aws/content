@@ -103,7 +103,7 @@ Setup inbound and outbound rules:
 ![SG-2](images/sg_2.png)
 
    
-### 4. **Connect your Lambda functions to your VPC**
+### 4. **Connect Your Lambda Functions to Your VPC**
 
 Lambda function is by default running on the Lambda service VPC with public internet access. To connect your lambda function to your own VPC, use a [Hyperplane ENI (Elastic Network Interface)](https://docs.aws.amazon.com/lambda/latest/dg/foundation-networking.html#foundation-nw-connecting). Hyperplane ENIs provide NAT capabilities from the Lambda VPC to your account VPC. When create or update a Lambda function, Lambda allocates one Hyperplane ENI for each subnet in the function's VPC configuration.
 
