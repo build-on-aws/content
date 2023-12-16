@@ -85,7 +85,7 @@ Configure VPC settings:
  aws ec2 describe-vpc-endpoint-services --service-names com.amazonaws.<region>.bedrock-runtime --region <region>
 ```
 
-An example of use-east-1 like this:
+An example of use-east-1 is like this:
 
 ![Bedrock-AZ](images/bedrock_az.png)
 
