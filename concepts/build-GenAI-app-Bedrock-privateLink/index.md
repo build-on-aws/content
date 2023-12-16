@@ -90,7 +90,7 @@ An example of use-east-1 is like this:
 ![Bedrock-AZ](images/bedrock_az.png)
 
 
-### 3. **Create Security Group in the VPC**
+### 3. **Create a Security Group in the VPC**
    
    [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) controls the traffic that is allowed to reach (***inbound rules***) and leave (***outbound rules***) the resources that it is associated with.
    In this example, create a security group with inbound rule allowing **HTTPS** protocol.
