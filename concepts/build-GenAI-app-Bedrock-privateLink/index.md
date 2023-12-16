@@ -94,7 +94,7 @@ An example of use-east-1 is like this:
    
    [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) controls the traffic that is allowed to reach (***inbound rules***) and leave (***outbound rules***) the resources that it is associated with.
    In this example, create a security group with inbound rule allowing **HTTPS** protocol.
-   Limit the source IP addresses if you only need to allow list of specific IP address to access your application.
+   Limit the source IP addresses if you only need to allow a list of specific IP addresses to access your application.
 
 ![SG-1](images/sg_1.png)
 
