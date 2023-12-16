@@ -178,7 +178,7 @@ Configure endpoint policy:
 ![Bedrock-VPC-endpoint-policy](images/bedrock-endpoint-policy.png)
 
 
-### 6. **Test your GenAI application with PrivateLink connection to Amazon Bedrock**
+### 6. **Test Your GenAI Application With PrivateLink Connection to Amazon Bedrock**
 
 After all the above steps, it is time to test your GenAI application by invoking lambda functions.
 
