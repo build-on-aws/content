@@ -6,6 +6,7 @@ tags:
   - GenAI
   - Private Link
   - Data Privacy
+  - Security & Compliance
 authorGithubAlias: Xiaoyuao988
 authorName: Xiaoyu Xing
 date: 2023-12-20
@@ -15,7 +16,7 @@ Most would likely agree that **Data Privacy** is an important issue that cannot 
 
 [Amazon Bedrock](https://aws.amazon.com/bedrock/security-compliance/), a fully managed service, allows you to build generative AI applications that support data security and compliance standards, including **GDPR** and **HIPAA**.
 
-With **Amazon Bedrock**, ***(not limited to)***
+With **Amazon Bedrock**,
 * Your **content** (e.g. prompt data, fine-tuning data, vector store data with RAG (***Retrieval Augmented Generation***) etc.) is not shared with a third party model providers (including AWS).
 * You can use **AWS PrivateLink** to establish private connectivity between the **Foundation Models (FM)** and on-premises networks or your **AWS VPC (Virtual Private Cloud)**, without exposing your traffic to the **public internet**. (***This blog post's focus***)
 * Your data is always **encrypted in transit** (***TLS1.2***) and **at rest**. You can use your own keys or [AWS KMS (Key Management Service)](https://aws.amazon.com/kms/) keys to encrypt the data.
@@ -23,7 +24,7 @@ With **Amazon Bedrock**, ***(not limited to)***
   You can further configure VPC for fine-tuning jobs with Bedrock, which prevent the **training data** from being accessible over the internet.
 * **Potential misuse** is prevented by [Bedrock abuse detection](https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html). This feature **automatically** ***(no human review or access to user inputs or model outputs)*** identifies and mitigates potential violations of AWS's [Acceptable Use Policy (AUP)](https://aws.amazon.com/aup/) and [Responsible AI Policy](https://aws.amazon.com/machine-learning/responsible-ai/policy/), or a third party model provider's AUP.
 
-As you can see, Amazon Bedrock provides you comprehensive security and compliance capabilities. Let's dive a bit deeper on using **AWS PrivateLink** to establish private connectivity between your **GenAI application** and the FMs or your fine-tuned models on **Amazon Bedrock**.
+As you can see, Amazon Bedrock provides you comprehensive security and compliance capabilities. Here I just list some of them. Let's dive a bit deeper on using **AWS PrivateLink** to establish private connectivity between your **GenAI application** and the FMs or your fine-tuned models on **Amazon Bedrock**.
 
 ## AWS PrivateLink
 
@@ -31,7 +32,7 @@ Privacy breaches on the internet present genuine risks but with [AWS PrivateLink
 
 The figure below shows how AWS PrivateLink works.
 
-**Interface VPC endpoint**, powered by **PrivateLink**, connect you to: 
+**Interface VPC endpoint**, powered by **PrivateLink**, connect you to:
 - other AWS services
 - services hosted by AWS Partners
 - supported solutions available in AWS Marketplaces
@@ -62,7 +63,7 @@ I use this [example](https://github.com/mavi888/sam-bedrock-lambda) as a simplif
 
 ![Lambda Function](images/lambda.png)
 
-### 2. **Create VPC with private subnets**
+### 2. **Create VPC with Private subnets**
 
 From VPC console:
 
