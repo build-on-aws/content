@@ -182,7 +182,7 @@ Configure endpoint policy:
 
 After all the above steps, it is time to test your GenAI application by invoking Lambda functions.
 
-Test can be executed form your client, or from Lambda console:
+The test can be executed form your client or from a Lambda console:
 
   ![Test-1](images/test_1.png)
 
