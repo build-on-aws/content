@@ -150,7 +150,7 @@ Now your Lambda function is connected with your VPC. You can repeat the same ste
 
   ![Bedrock-VPC-endpoint-2](images/bedrock-endpoint-2.png)
 
-  Choose VPC and private subnets created in step 2:
+  Choose VPC and private subnets created in step two:
 
   ![Bedrock-VPC-endpoint-3](images/bedrock-endpoint-3.png)
 
