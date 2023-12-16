@@ -21,7 +21,7 @@ With **Amazon Bedrock**, ***(not limited to)***
 * Your data is always **encrypted in transit** (***TLS1.2***) and **at rest**. You can use your own keys or [AWS KMS (Key Management Service)](https://aws.amazon.com/kms/) keys to encrypt the data.
 * You can encrypt and store **customized (fine-tuned) models** with KMS key that either managed by AWS or by yourself.
   You can further configure VPC for fine-tuning jobs with Bedrock, which prevent the **training data** from being accessible over the internet.
-* **Potential misuse** is prevented by [Bedrock abuse detection](https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html). This feature **automatically** ***(no human review or access to user inputs or model outputs)*** identifies and mitigates potential violations of AWS's [Acceptable Use Policy (AUP)](https://aws.amazon.com/aup/) and [Responsible AI Policy](https://aws.amazon.com/machine-learning/responsible-ai/policy/), or a 3rd party model provider's AUP.
+* **Potential misuse** is prevented by [Bedrock abuse detection](https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html). This feature **automatically** ***(no human review or access to user inputs or model outputs)*** identifies and mitigates potential violations of AWS's [Acceptable Use Policy (AUP)](https://aws.amazon.com/aup/) and [Responsible AI Policy](https://aws.amazon.com/machine-learning/responsible-ai/policy/), or a third party model provider's AUP.
 
 As you can see, Amazon Bedrock provides you comprehensive security and compliance capabilities. Let's dive a bit deeper on using **AWS PrivateLink** to establish private connectivity between your **GenAI application** and the FMs or your fine-tuned models on **Amazon Bedrock**.
 
