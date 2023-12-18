@@ -9,18 +9,26 @@ tags:
   - aws
 space:
   - generative-ai
-authorGithubAlias: alinadima
-authorName: Alina Dima
+authorGithubAlias: haywse
+authorName: Wooseok Ha
+additionalAuthors:
+  - authorGithubAlias: Linbo-Liu
+    authorName: Linbo Liu
+  - authorGithubAlias: lukejhuan
+    authorName: Luke Huan
 date: 2023-12-20
 ---
 
 |ToC|
 |---|
 
+![a human hand reaches toward a robotic hand, which extends from the screen of a computer](images/headerimage.jpeg)
+
 Generative AI has been grabbing headlines for over a year now, but while general large language models (LLMs) are among the most visible implementations of the technology, more specialized implementations have been rapidly changing how developers build and interface with cloud technology on many levels. We are a team of applied scientists that has been applying the incredible power of LLMs to a particular process: helping DevOps engineers to troubleshoot operational problems more effectively.
 
 While we built our tool, called DevOps Guru, we learned a great deal about the limitations of LLMs in a DevOps setting, the challenges of knowledge graph construction, and — perhaps most interestingly — the unpredictable nature of prompts. These limitations led us to dive deeper into prompt engineering as a means to circumvent them. In this blog, we share the insights acquired through this exploration and offer practical suggestions for extracting optimized output from LLMs despite these constraints.
 
+## The Project
 
 2. Limitations of LLMs in DevOps
 
