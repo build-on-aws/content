@@ -9,11 +9,13 @@ tags:
   - aws
 space:
   - generative-ai
-
-
+authorGithubAlias: alinadima
+authorName: Alina Dima
+date: 2023-12-20
 ---
 
-
+|ToC|
+|---|
 
 Generative AI has been grabbing headlines for over a year now, but while general large language models (LLMs) are among the most visible implementations of the technology, more specialized implementations have been rapidly changing how developers build and interface with cloud technology on many levels. We are a team of applied scientists that has been applying the incredible power of LLMs to a particular process: helping DevOps engineers to troubleshoot operational problems more effectively.
 
