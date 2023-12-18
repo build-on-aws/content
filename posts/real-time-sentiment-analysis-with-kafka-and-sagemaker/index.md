@@ -89,7 +89,7 @@ Once you'll land into Amazon SageMaker Studio, select JumpStart:
 ![Select JumpStart in  Amazon SageMaker Studio](images/JumpStart.webp)
 
 Here you can search for one of already existing and trained models. We want a model that is trained to do text classifications. Different models have different advantages and disadvantages, select a model taking into account type of text you want to analyse and the length of text snippet. Social media messages from Mastodon are quite short, so we'll go for a model "DistilBERT Base Multilingual Cased". You can find it by using the search bar. Select the one for text classification:
-![select-model.png](images/Fselect-model.png)
+![select-model.png](images/select-model.png)
 
 Click to deploy the model and wait till it has been prepared:
 ![deploy-model.png](images/deploy-model.png)
