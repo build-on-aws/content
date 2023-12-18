@@ -33,7 +33,7 @@ In this tutorial, we'll show you an example of using a model run by SageMaker an
 | 🧩 Prerequisites    | - AWS account and access to SageMaker Studio. Follow this link to [set up your AWS account](https://aws.amazon.com/resources/create-account/) if you don’t have any. <br>- Apache Kafka. We’ll be using [Aiven for Apache Kafka cluster](https://aiven.io/kafka), which you can create at no cost for this tutorial as part of a free trial. Follow this link to [register for Aiven for Apache Kafka](https://go.aiven.io/olena-signup). <br>- Data for sentiment analysis. Follow [steps described in this article](https://aiven.io/developer/mastodon-kafka-js) to stream mastodon data to Apache Kafka topic. |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://raw.githubusercontent.com/Aiven-Labs/sentiment-analysis-kafka-sagemaker/main/sentiment-analysis.ipynb)    |
 | 💰 Cost to complete | Free when using the AWS Free Tier and Aiven for Apache Kafka |
-| 🔨 Services used | - SageMaker <br> - Kinesis Data Analytics <br> - S3 bucket <br> - Glue Data Catalog |
+| 🔨 Services used | - SageMaker  |
 | ⏰ Last Updated     | 2023-12-11                           |
 
 | ToC |
