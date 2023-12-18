@@ -4,12 +4,12 @@ description: "A step-by-step guide for deploying infrastructure using CI/CD."
 tags:
     - devops
     - terraform
-    - CICD
+    - ci-cd
     - infrastructure-as-code
     - gitlab
 authorGithubAlias: kaizadwadia
 authorName: Kaizad Wadia
-date: 2023-12-20
+date: 2023-12-18
 ---
 
 Deploying infrastructure to AWS manually can be time consuming and prone to errors. Mistakes can easily happen because manual processes rely on humans repeating the same tasks without validation checks, leading to configuration errors, inconsistencies, and drift from the desired state. In this post, we'll go over how to set up a CI/CD pipeline for automating AWS deployments using GitLab and Terraform.
@@ -35,7 +35,7 @@ You need an AWS account and a GitLab (free trial) account. Note that the steps i
 | 💰 Cost to complete | Free Tier Eligible      |
 | 🧩 Prerequisites    | [AWS Account](https://aws.amazon.com/resources/create-account/) and [GitLab Account](https://gitlab.com/-/trial_registrations/new?glm_source=about.gitlab.com/&glm_content=default-saas-trial)|
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎    |
-| ⏰ Last Updated     | 2023-12-20                             |
+| ⏰ Last Updated     | 2023-12-18                             |
 
 ## Walkthrough
 
@@ -59,7 +59,7 @@ resource "aws_sqs_queue" "queue" {
 }
 ```
 
-Now we can save this code by pressing Ctrl + s (Cmd + s on Mac) and commit the code to the main branch by going to the source control tab on the sidebar (third from the top) and clicking "Commit to 'main'". If a warning pops up we can override it by clicking "Continue" instead of creating a new branch.
+Now we can save this code by pressing Ctrl + s (Cmd + s on Mac) and commit the code to the main branch by going to the source control tab on the sidebar (third from the top) and clicking "Commit to 'main'". If a warning pops up, we can override it by clicking "Continue" instead of creating a new branch.
 
 ![Commit to main](images/commitide.png)
 
@@ -75,15 +75,15 @@ To do this, navigate to IAM in the AWS Management Console, and then click on "Id
 
 Make sure that the option for OpenID Connect is selected on the top, this is because OpenID Connect allows you to configure trust relationships with third party accounts including but not limited to GitLab. Also ensure that the provider URL is GitLab's root URL, `https://gitlab.com` as well as the Audience. The provider URL is the URL from which the OpenID configuration is obtained. You can view the OpenID configuration for GitLab yourself by navigating to [gitlab.com/.well-known/openid-configuration](gitlab.com/.well-known/openid-configuration). Note that if you are using a self-managed instance of GitLab (that is publicly available on the internet) you would need to use the root URL of that instance instead of gitlab.com. In this case, check that your instance supports OpenID connect by navigating to the OpenID configuration URL using your instance's root domain.
 
-Once you have completely filled out the information, you can click on "Get thumbprint" to retrieve the thumbprint from the URL you supplied. [The OIDC thumbprint page in the AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html) describes how this thumbprint is obtained. Click on "Add provider". We have now configured GitLab as an Identity Provider in our AWS Account.
+Once you have completely filled out the information, you can click on "Get thumbprint" to retrieve the thumbprint from the URL you supplied. [The OIDC thumbprint page in the AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=gitlab-with-terraform) describes how this thumbprint is obtained. Click on "Add provider". We have now configured GitLab as an Identity Provider in our AWS Account.
 
 ### Create an IAM Role for GitLab CI
 
-To create an IAM Role that our CI/CD pipeline can assume to make deployments click on "Roles" under "Access Management" in the IAM page and then click on the "Create role" button on the top right of the page. In the first step, configuring the trusted entity means providing access to our identity provider we created before. For this, select on "Web identity", which should allow you to select "gitlab.com" as the identity provider from the dropdown menu and "https://gitlab.com" as the audience, similar to the below image.
+To create an IAM Role that our CI/CD pipeline can assume to make deployments, click on "Roles" under "Access Management" in the IAM page and then click on the "Create role" button on the top right of the page. In the first step, configuring the trusted entity means providing access to our identity provider we created before. For this, select on "Web identity", which should allow you to select "gitlab.com" as the identity provider from the dropdown menu and "https://gitlab.com" as the audience, similar to the below image.
 
 ![Trusted Entities Creation](images/iamrole1.png)
 
-Once that is done, clicking "next" should allow us to select IAM policies which determine what permissions GitLab should have. For the purposes of this tutorial, we will provide full access only to three services: S3, DynamoDB and SQS by attaching the following policies:
+Once that is done, clicking "next" should allow us to select IAM policies which determine what permissions GitLab should have. For the purposes of this tutorial, we will provide full access only to three services: Amazon S3, DynamoDB, and SQS by attaching the following policies:
 
 * AmazonS3FullAccess
 * AmazonDynamoDBFullAccess
@@ -176,7 +176,7 @@ deploy:
     - terraform apply -auto-approve
 ```
 
-This YAML definition creates a stage called "deploy" that only runs when commited to the 'main' branch, using the Terraform Light Docker image. The magic is in the ID token which is the web identity token used to assume the IAM Role we created earlier in the [third step](#create-an-iam-role-for-gitlab-ci). This is now provided in the environment variable, `GITLAB_OIDC_TOKEN` and available in the container to use. In the `before_script`, we are performing the configuration used in the process that assumes the IAM role with the web identity token and saving it under the AWS CLI profile called "oidc". [Profiles in the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) allow you to configure and store credentials and settings for different AWS accounts or IAM users, keeping them separate and switching between them easily. Save the YAML file, and in the next section, we will bring everything together and deploy the code to AWS.
+This YAML definition creates a stage called "deploy" that only runs when commited to the 'main' branch, using the Terraform Light Docker image. The magic is in the ID token which is the web identity token used to assume the IAM Role we created earlier in the [third step](#create-an-iam-role-for-gitlab-ci). This is now provided in the environment variable, `GITLAB_OIDC_TOKEN` and available in the container to use. In the `before_script`, we are performing the configuration used in the process that assumes the IAM role with the web identity token and saving it under the AWS CLI profile called "oidc". [Profiles in the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=gitlab-with-terraform) allow you to configure and store credentials and settings for different AWS accounts or IAM users, keeping them separate and switching between them easily. Save the YAML file, and in the next section, we will bring everything together and deploy the code to AWS.
 
 ### Deploy the Script
 
@@ -200,7 +200,7 @@ provider "aws" {
 }
 ```
 
-Make sure to replace "XXXX" with the actual name of the S3 bucket we created earlier. Note that the profile "oidc" is the same as the profile created by the pipeline, so that the Terraform script knows the role to assume while provisioning the resources. The same applies with the profile for the provider. Note that these two don't necessarily need to be the same, so you could use one role for accessing the backend and another for deploying the resources. The "key" parameter in the backend denotes the name of the file that is created to manage the Terraform state in the S3 bucket. The "encrypt" parameter determines whether [SSE-S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html) is used to encrypt the file in the bucket.
+Make sure to replace "XXXX" with the actual name of the S3 bucket we created earlier. Note that the profile "oidc" is the same as the profile created by the pipeline, so that the Terraform script knows the role to assume while provisioning the resources. The same applies with the profile for the provider. Note that these two don't necessarily need to be the same, so you could use one role for accessing the backend and another for deploying the resources. The "key" parameter in the backend denotes the name of the file that is created to manage the Terraform state in the S3 bucket. The "encrypt" parameter determines whether [SSE-S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html?sc_channel=el&sc_campaign=tutorial&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=gitlab-with-terraform) is used to encrypt the file in the bucket.
 
 Once we have this written, commit this to the repository using the same method as in the [first step](#build-the-repository). When we do so, our pipeline should start automatically upon committing our code to the main branch. We can see it through GitLab if we go back to our repository's home page and click on "Jobs" under the "Build" dropdown menu on the sidebar.
 
@@ -219,7 +219,7 @@ To clean up your AWS account, remember to delete the following resources:
 
 ## Conclusion
 
-And that's it! We've set up an automated AWS deployment pipeline using GitLab and Terraform best practices. Now anytime you push changes to your infrastructure code, GitLab CI will trigger Terraform to deploy those changes to AWS.
+And that's it! We've set up an automated AWS deployment pipeline using GitLab and Terraform best practices. Now any time you push changes to your infrastructure code, GitLab CI will trigger Terraform to deploy those changes to AWS.
 
 In this post we covered configuring IAM permissions and roles for GitLab, creating S3 and DynamoDB resources to store remote state, writing a Terraform script to deploy infrastructure, setting up a .gitlab-ci.yml pipeline to execute on commits, and testing our automated deployments.
 
