@@ -1,3 +1,20 @@
+---
+title: "We Build an LLM-Powered DevOps Guru. Here's What We Learned Along the Way"
+description: "A team of AWS applied scientists tried to help DevOps engineers. They learned a lot about large language models as they did."
+tags:
+  - llms
+  - gen-ai
+  - generative-ai
+  - devops
+  - aws
+space:
+  - generative-ai
+
+
+---
+
+
+
 Generative AI has been grabbing headlines for over a year now, but while general large language models (LLMs) are among the most visible implementations of the technology, more specialized implementations have been rapidly changing how developers build and interface with cloud technology on many levels. We are a team of applied scientists that has been applying the incredible power of LLMs to a particular process: helping DevOps engineers to troubleshoot operational problems more effectively.
 
 While we built our tool, called DevOps Guru, we learned a great deal about the limitations of LLMs in a DevOps setting, the challenges of knowledge graph construction, and — perhaps most interestingly — the unpredictable nature of prompts. These limitations led us to dive deeper into prompt engineering as a means to circumvent them. In this blog, we share the insights acquired through this exploration and offer practical suggestions for extracting optimized output from LLMs despite these constraints.
