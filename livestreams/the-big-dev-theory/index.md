@@ -32,13 +32,13 @@ https://youtu.be/b0FeFtvkHiw
 Join us for our upcoming episodes!
 | Season | Episode | Date | Link to Watch | Guest| Title |
 |-|--|--|--|--|-|
-|Season 5 | **Episode 3** | 2023/12/05 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Auth0 | Building a secure B2C Application using Auth0 by Okta |
-|Season 5 | **Episode 4** | 2023/12/12 (10am ET, 7am PT) | [Watch here](https://www.twitch.tv/aws/) | Auth0 | Building a secure B2B Application using Auth0 by Okta |
 |Season 5 | **Episode 5** | 2023/12/19 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Auth0 | Secure your AWS AppSync GraphQL APIs with Auth0 by Okta |
 
 Past episodes
 | Season | Episode | Date Shown | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
+|Season 5 | **Episode 4** | 2023/12/12 | [Watch here](https://www.twitch.tv/videos/2002953612) | Auth0 | [Show notes](/livestreams/the-big-dev-theory/2023-12-12) |
+|Season 5 | **Episode 3** | 2023/12/05 | [Watch here](https://www.twitch.tv/videos/1996626561) | Auth0 | [Show notes](/livestreams/the-big-dev-theory/2023-12-05) |
 |Season 5 | **Episode 2** | 2023/11/21 | [Watch here](https://www.twitch.tv/aws/) | Mendix | [Show notes](/livestreams/the-big-dev-theory/2023-11-21) |
 |Season 5 | **Episode 1** | 2023/11/14 | [Watch here](https://www.twitch.tv/aws/) | Mendix | [Show notes](/livestreams/the-big-dev-theory/2023-11-14) |
 |-|--|--|--|--|-|
