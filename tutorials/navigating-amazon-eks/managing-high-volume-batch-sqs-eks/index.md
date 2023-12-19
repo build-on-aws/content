@@ -38,7 +38,7 @@ Before you begin this tutorial, you need to:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=managing-high-volume-batch-sqs-eks)|                           |
-| 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL?page=eks-managing-high-volume-batch-sqs" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| 📢 Feedback            | <a href="https://pulse.aws/survey/Z8XBGQEL?page=eks-managing-high-volume-batch-sqs" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated     | 2023-09-29                             |
 
 | ToC |
