@@ -14,6 +14,8 @@ authorName: Wooseok Ha
 additionalAuthors:
   - authorGithubAlias: Linbo-Liu
     authorName: Linbo Liu
+  - authorGithubAlias: behroozomidvar
+    authorName: Behrooz Omidvar-Tehrani
   - authorGithubAlias: lukejhuan
     authorName: Luke Huan
 date: 2023-12-20
