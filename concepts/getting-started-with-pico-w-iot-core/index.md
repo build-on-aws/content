@@ -196,6 +196,7 @@ You will connect your Pico W device to your development computer via the micro U
 4. Install the MQTT client on your Pico W:
 
    *a.* In Thonny, under the **Tools** menu, select **Manage Packages**.
+
    *b.* In the search box, enter `umqtt.simple`, and click **Search**.
 
       ![Thonny package search](images/Thonny_umqtt_simple_package.jpg)
@@ -216,24 +217,24 @@ You will connect your Pico W device to your development computer via the micro U
 
    *a.* In the **RP2040 device** portion (bottom) of the **Files** pane, create a folder in the root called `certs`:
 
-      *i.* Click the menu icon (**≡**) and select **New Directory**.
-      *ii.* Enter the name `certs`.
+      - Click the menu icon (**≡**) and select **New Directory**.
+      - Enter the name `certs`.
 
          ![Thonny cert folder](images/Thonny_certs_folder.jpg)
 
-      *iii.* Click **OK**.
-      *iv.* Double click on the `certs` folder to go into it.
+      - Click **OK**.
+      - Double click on the `certs` folder to go into it.
 
    *b.* From the **This computer** (top) portion of the **Files** pane, browse to the location of the downloaded certificate files on your local computer:
 
-      *i.* Select each `.DER` file individually.
-      *ii.* Right-click each `.DER` file and select **Upload to /certs**.
+      - Select each `.DER` file individually.
+      - Right-click each `.DER` file and select **Upload to /certs**.
 
    *c.* From the **RP2040 device** portion (bottom) of the **Files** pane, you should now see the two `.DER` files in the certs folder on the device.
 
       ![Thonny cert upload to Pico W](images/Thonny_certs_on_pico_w.jpg)
 
-6. Create the `main.py` script on the Pico W device to connect to AWS IoT Core:
+7. Create the `main.py` script on the Pico W device to connect to AWS IoT Core:
 
    - You will create a file called `main.py` in the root of your Pico W device. Your device will execute this script every time it powers-up.
 
@@ -264,6 +265,7 @@ You will connect your Pico W device to your development computer via the micro U
       - If you have any special characters in your SSID or password, you may need to escape them with a `\` character.
 
    *g.* Replace the *Thing* name:
+   
       - The sample code uses  `CLIENT_ID = b’RaspberryPiPicoW’`, but if you defined a different *Thing* name earlier, substitute that name for `RaspberryPiPicoW`.
 
    *h.* Replace the AWS IoT Endpoint:
@@ -276,7 +278,7 @@ You will connect your Pico W device to your development computer via the micro U
 
    - **Tip**: The code is heavily commented. Feel free to browse through the remainder of the `main.py` script to see what the various sections do.
 
-7. Click the **Run current script** button in Thonny to execute the script for testing. Otherwise, the device will execute `main.py` at power-up.
+9. Click the **Run current script** button in Thonny to execute the script for testing. Otherwise, the device will execute `main.py` at power-up.
 
    ![Thonny toolbar run button](images/Thonny_toolbar.jpg)
 
@@ -311,17 +313,18 @@ The device’s `main.py` script also subscribes to a topic (defined as `SUB_TOPI
 1. Staying within the AWS IoT MQTT test client, click on **Publish to topic**:
 
    *a.* Enter the **topic name** for publishing: `/RaspberryPiPicoW/light`.
+   
    *b.* For the **message payload**, clear the box and paste in the following JSON payload:
 
       ```json
       { "state": "on" }
       ```
 
-2. Click **Publish** to send the message to the device.
+3. Click **Publish** to send the message to the device.
 
-3. When the device receives the message, the on-board LED will illuminate (Green).
+4. When the device receives the message, the on-board LED will illuminate (Green).
 
-4. You can also turn the light off by sending another message with following JSON payload:
+5. You can also turn the light off by sending another message with following JSON payload:
 
    ```json
    { "state": "off" }
@@ -335,18 +338,18 @@ In AWS IoT Core console:
 
 1. You can see the IoT *Thing*:
 
-   *a.* In the left column, under **Manage**, select **All Devices** > **Things**.
+   - In the left column, under **Manage**, select **All Devices** > **Things**.
       - It will list all of your AWS IoT *Things*.
       - Click any of them for more details.
 
 2. You can see the IoT Policy:
 
-   *a.* In the left column, under **Manage**, select **Security** > **Policies**.
+   - In the left column, under **Manage**, select **Security** > **Policies**.
       - It will list all of your AWS IoT Policies.
       - Click any of them for more details.
 
 3. You can see the Certificates:
-   *a.* In the left column, under **Manage**, select **Security** > **Certificates**.
+   - In the left column, under **Manage**, select **Security** > **Certificates**.
       - It will list all of your AWS IoT Certificates.
       - Click any of them for more details.
 
