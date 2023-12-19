@@ -29,7 +29,7 @@ In addition, many companies want agility, faster time to market, and improved sp
 | ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devops&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
-| 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| 📢 Feedback            | <a href="https://pulse.aws/survey/Z8XBGQEL?page=eks-cluster-windows-fargate" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-11-30                                                    |
 
 | ToC |

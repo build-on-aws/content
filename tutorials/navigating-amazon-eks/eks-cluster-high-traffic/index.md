@@ -27,7 +27,7 @@ This tutorial shows you how to create a managed node groups-based Amazon EKS clu
 | ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
-| 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| 📢 Feedback            | <a href="https://pulse.aws/survey/Z8XBGQEL?page=eks-cluster-high-traffic" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-08-29                                                      |
 
 | ToC |
