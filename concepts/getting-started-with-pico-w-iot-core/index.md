@@ -1,6 +1,6 @@
 ---
 title: "Getting started with your Raspberry Pi Pico W and AWS IoT Core in under 30 minutes"
-description: In this guide, we will walk you through quickly connecting your Raspberry Pi Pico W to AWS IoT Core, so you can start building your cloud-connected IoT project.
+description: "In this guide, we will walk you through quickly connecting your Raspberry Pi Pico W to AWS IoT Core, so you can start building your cloud-connected IoT project."
 tags:
   - iot
   - iot-core
@@ -12,16 +12,16 @@ authorName: Varinder Dhanota
 additionalAuthors:
   - authorGithubAlias: pfeler
     authorName: Perry Feler
-date: 2023-12-22
+date: 2023-12-19
 ---
 
 Let’s assume that you have an amazing idea for a new Internet of Things (IoT) project. What hardware makes sense for your use case? And how do you easily connect it to the AWS cloud?
 
-There is a lot of variety in IoT hardware, but given device constraints, there can also be many challenges – such as limited connectivity options, or integration complexity with other components. Security and software support can also vary. For many, a general purpose, all-in-one solution is ideal to accelerate development.
+There is a lot of variety in IoT hardware, and given device constraints, there also can be many challenges – such as limited connectivity options, or integration complexity with other components. Security and software support can also vary. For many, a general purpose, all-in-one solution is ideal to accelerate development.
 
-One popular hardware choice is the Raspberry Pi Pico W (“Pico W”) microcontroller board for its low cost, versatility, and built-in wireless capabilities. It is a compact, dual core microcontroller board that has built-in 2.4GHz 802.11n wireless LAN and Bluetooth 5.2 connectivity, making it easy to get your device connected to a network. You can learn about the Raspberry Pi Pico series of boards [here](https://www.raspberrypi.com/products/raspberry-pi-pico/).
+One popular hardware choice is the Raspberry Pi Pico W (“Pico W”) microcontroller board, for its low cost, versatility, and built-in wireless capabilities. It is a compact, dual core microcontroller board that has built-in 2.4GHz 802.11n wireless LAN and Bluetooth 5.2 connectivity, making it easy to get your device connected to a network. (You can learn about the Raspberry Pi Pico series of boards [here](https://www.raspberrypi.com/products/raspberry-pi-pico/).)
 
-The next step will be to connect it to AWS to take advantage of the choice and flexibility of over 200 fully-featured services – ranging from IoT data ingest, data storage, analytics, and more – allowing you to build a robust IoT solution. The starting point will be [AWS IoT Core](https://aws.amazon.com/iot-core/), which helps you securely connect and manage IoT devices at scale. Through IoT Core, your devices can exchange messages using MQTT, HTTP, or WebSockets protocols, and interact with downstream services.
+Once you have a Pico W, though, the next step is to connect it to AWS to take advantage of the choice and flexibility of over 200 fully-featured services – ranging from IoT data ingest, data storage, analytics, and more – allowing you to build a robust IoT solution. The starting point for all of this will be [AWS IoT Core](https://docs.aws.amazon.com/iot/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=getting-started-with-pico-w-iot-core), which helps you securely connect and manage IoT devices at scale. Through IoT Core, your devices can exchange messages using MQTT, HTTP, or WebSockets protocols, and interact with downstream services.
 
 In this guide, we will walk you through quickly connecting your Raspberry Pi Pico W device to AWS IoT Core, so you can start building your cloud-connected IoT project.
 
@@ -33,6 +33,9 @@ Here are the main steps:
 - Send data back from AWS to the Pico W
 
 The best way to learn about AWS IoT is to get hands-on experience. So let’s jump into setting up your first device and getting it connected!
+
+| ToC |
+|-----|
 
 ## Requirements
 
@@ -46,7 +49,7 @@ Before we get started, make sure you have the following ready:
 
 ## Creating a *Thing* in AWS IoT Core
 
-In this section, we will use [AWS CloudShell](https://aws.amazon.com/cloudshell/) to issue AWS Command Line Interface (CLI) commands for creating an AWS IoT *Thing*. In AWS IoT, a *Thing* is a virtual representation of a hardware device in the cloud - in this case, your Pico W device. Then, we will generate the digital certificates and keys needed for mutual authentication between your Pico W device and AWS IoT Core. Finally, we will create an IoT Policy that will define the access permissions for your device in AWS, and attach the policy so it takes effect.
+In this section, we will use [AWS CloudShell](https://docs.aws.amazon.com/cloudshell/?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=getting-started-with-pico-w-iot-core) to issue AWS Command Line Interface (CLI) commands for creating an AWS IoT *Thing*. In AWS IoT, a *Thing* is a virtual representation of a hardware device in the cloud - in this case, your Pico W device. Then, we will generate the digital certificates and keys needed for mutual authentication between your Pico W device and AWS IoT Core. Finally, we will create an IoT Policy that will define the access permissions for your device in AWS, and attach the policy so it takes effect.
 
 AWS CloudShell is a browser-based command prompt that you can access from within the AWS Console. It allows you to quickly run AWS CLI commands, without having to install and configure the AWS CLI on your development computer.
 
@@ -116,7 +119,7 @@ AWS CloudShell is a browser-based command prompt that you can access from within
 
    - Once attached to a *Thing* in AWS IoT, this IoT Policy will control what that *Thing* can access.
 
-   - **Caution:** This IoT policy is overly permissive but is easiest for illustration purposes. Practicing least privilege is a security best practice - hence permissions should be locked-down to permit devices to only access what they need, and nothing more. For more details and best practices on writing IoT policies, please refer to [Best Practice 1.2 – Assign least privilege access to devices](https://docs.aws.amazon.com/wellarchitected/latest/iot-lens-checklist/best-practice-1-2.html).
+   - **Caution:** This IoT policy is overly permissive but is easiest for illustration purposes. Practicing least privilege is a security best practice - hence permissions should be locked-down to permit devices to only access what they need, and nothing more. For more details and best practices on writing IoT policies, please refer to [Best Practice 1.2 – Assign least privilege access to devices](https://docs.aws.amazon.com/wellarchitected/latest/iot-lens-checklist/best-practice-1-2.html?sc_channel=el&sc_campaign=post&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=getting-started-with-pico-w-iot-core).
 
 9. Attach the IoT Policy to the certificate:
 
@@ -143,25 +146,25 @@ AWS CloudShell is a browser-based command prompt that you can access from within
 
 12. Download the certificate and key files from CloudShell:
 
-    1. You will need 2 files, and they will need to be downloaded one at a time.
+    - You will need 2 files, and they will need to be downloaded one at a time.
 
-    2. In the CloudShell window, click **Actions**.
+    *a.* In the CloudShell window, click **Actions**.
 
        ![CloudShell action menu](images/CloudShell_actions_menu.jpg)
 
-    3. Select **Download file**.
+    *b.* Select **Download file**.
 
-    4. You will be prompted to provide the path/name of each file. As the files have been saved to ~ (current user's home directory), you can just enter the filename. Download the key file `key.der`.
+    *c.* You will be prompted to provide the path/name of each file. As the files have been saved to ~ (current user's home directory), you can just enter the filename. Download the key file `key.der`.
 
        ![CloudShell download key](images/CloudShell_download_key.jpg)
 
-    5. Click the **Download** button.
+    *d.* Click the **Download** button.
 
-    6. Do this step again for certificate file `cert.der`.
+    *e.* Do this step again for certificate file `cert.der`.
 
        ![CloudShell download certificate](images/CloudShell_download_cert.jpg)
 
-    7. Note where your browser saves those files to your local computer. You will need them shortly.
+    - Note where your browser saves those files to your local computer. You will need them shortly.
 
 13. Get and save the IoT Endpoint url for later:
 
@@ -192,16 +195,16 @@ You will connect your Pico W device to your development computer via the micro U
 
 4. Install the MQTT client on your Pico W:
 
-   1. In Thonny, under the **Tools** menu, select **Manage Packages**.
-   2. In the search box, enter `umqtt.simple`, and click **Search**.
+   *a.* In Thonny, under the **Tools** menu, select **Manage Packages**.
+   *b.* In the search box, enter `umqtt.simple`, and click **Search**.
 
       ![Thonny package search](images/Thonny_umqtt_simple_package.jpg)
 
-   3. Select `umqtt.simple` from the search results and install the latest stable version of the package.
+   *c.* Select `umqtt.simple` from the search results and install the latest stable version of the package.
 
       ![Thonny package install](images/Thonny_umqtt_simple_install_screen.jpg)
 
-   4. Click **Close**.
+   *d.* Click **Close**.
 
 5. Upload certificate and key files to your Pico W device:
 
@@ -211,22 +214,22 @@ You will connect your Pico W device to your development computer via the micro U
 
      ![Thonny file panes](images/Thonny_panes.jpg)
 
-   1. In the **RP2040 device** portion (bottom) of the **Files** pane, create a folder in the root called `certs`:
+   *a.* In the **RP2040 device** portion (bottom) of the **Files** pane, create a folder in the root called `certs`:
 
-      1. Click the menu icon (**≡**) and select **New Directory**.
-      2. Enter the name `certs`.
+      *i.* Click the menu icon (**≡**) and select **New Directory**.
+      *ii.* Enter the name `certs`.
 
          ![Thonny cert folder](images/Thonny_certs_folder.jpg)
 
-      3. Click **OK**.
-      4. Double click on the `certs` folder to go into it.
+      *iii.* Click **OK**.
+      *iv.* Double click on the `certs` folder to go into it.
 
-   2. From the **This computer** (top) portion of the **Files** pane, browse to the location of the downloaded certificate files on your local computer:
+   *b.* From the **This computer** (top) portion of the **Files** pane, browse to the location of the downloaded certificate files on your local computer:
 
-      1. Select each `.DER` file individually.
-      2. Right-click each `.DER` file and select **Upload to /certs**.
+      *i.* Select each `.DER` file individually.
+      *ii.* Right-click each `.DER` file and select **Upload to /certs**.
 
-   3. From the **RP2040 device** portion (bottom) of the **Files** pane, you should now see the two `.DER` files in the certs folder on the device.
+   *c.* From the **RP2040 device** portion (bottom) of the **Files** pane, you should now see the two `.DER` files in the certs folder on the device.
 
       ![Thonny cert upload to Pico W](images/Thonny_certs_on_pico_w.jpg)
 
@@ -236,40 +239,40 @@ You will connect your Pico W device to your development computer via the micro U
 
    - Below ([Appendix 1](#appendix-1-mainpy)), we have provided sample code that you can paste into it. Before you can connect your device to AWS IoT Core, you must update this script with some additional configuration information, such as local wifi credentials, device name, and your AWS IoT Core Endpoint.
 
-   1. With your Pico W device still connected to your development computer, open Thonny.
+   *a.* With your Pico W device still connected to your development computer, open Thonny.
 
-   2. Navigate to the root of the device (bottom half of **Files** pane).
+   *b.* Navigate to the root of the device (bottom half of **Files** pane).
 
-   3. Click the menu icon (**≡**), and select **New File**.
+   *c.* Click the menu icon (**≡**), and select **New File**.
 
       ![Thonny new file](images/Thonny_new_file.jpg)
 
-   4. Enter the filename: `main.py`.
+   *d.* Enter the filename: `main.py`.
 
       ![Thonny main.py file](images/Thonny_main_py_file.jpg)
 
-   5. Copy and paste the sample code (from [Appendix 1](#appendix-1-mainpy)) into the `main.py` file.
+   *e.* Copy and paste the sample code (from [Appendix 1](#appendix-1-mainpy)) into the `main.py` file.
 
       - We will be making minor adjustments to the sample code. All required edits are grouped together and occur in between the comment lines `Start code modification` and `End code modification`. The area is clearly marked by a full line of `#` characters.
 
-   6. Replace the Wifi credentials:
+   *f.* Replace the Wifi credentials:
 
-      1. `SSID = b‘<your wifi network name>’`
-      2. `PASS = b‘<your wifi password>’`
+      - `SSID = b‘<your wifi network name>’`
+      - `PASS = b‘<your wifi password>’`
          &nbsp;
 
       - If you have any special characters in your SSID or password, you may need to escape them with a `\` character.
 
-   7. Replace the *Thing* name:
-      1. The sample code uses  `CLIENT_ID = b’RaspberryPiPicoW’`, but if you defined a different *Thing* name earlier, substitute that name for `RaspberryPiPicoW`.
+   *g.* Replace the *Thing* name:
+      - The sample code uses  `CLIENT_ID = b’RaspberryPiPicoW’`, but if you defined a different *Thing* name earlier, substitute that name for `RaspberryPiPicoW`.
 
-   8. Replace the AWS IoT Endpoint:
+   *h.* Replace the AWS IoT Endpoint:
    
-      1. Refer to the output of Step 13 in [Creating a Thing in AWS IoT Core](#creating-a-thing-in-aws-iot-core) to get your AWS IoT Endpoint.
+      - Refer to the output of Step 13 in [Creating a Thing in AWS IoT Core](#creating-a-thing-in-aws-iot-core) to get your AWS IoT Endpoint.
 
-      2. Paste the AWS IoT Endpoint into `AWS_ENDPOINT = b’<your IoT Endpoint value here>‘`.
+      - Paste the AWS IoT Endpoint into `AWS_ENDPOINT = b’<your IoT Endpoint value here>‘`.
 
-   9. Save the `main.py` file to update changes.
+   *i.* Save the `main.py` file to update changes.
 
    - **Tip**: The code is heavily commented. Feel free to browse through the remainder of the `main.py` script to see what the various sections do.
 
@@ -283,7 +286,7 @@ Now that we have configured the Pico W device and its corresponding *Thing* in A
 
 From within Thonny:
 
-1. When you run the `main.py` script in Thonny, if the device is successfully connecting and your configuration is valid, you will start to see messages appearing in the **Shell** pane every 5 seconds. You will see messages starting with `Publishing topic...`.
+When you run the `main.py` script in Thonny, if the device is successfully connecting and your configuration is valid, you will start to see messages appearing in the **Shell** pane every 5 seconds. You will see messages starting with `Publishing topic...`.
 
 We can then validate that MQTT messages are flowing to AWS IoT Core by following these steps:
 
@@ -295,7 +298,7 @@ We can then validate that MQTT messages are flowing to AWS IoT Core by following
 
 4. In the right pane, click **Subscribe to a topic**:
 
-   1. In the **Topic filter** text box, enter the topic defined as `PUB_TOPIC` in the `main.py` file. In our example: `/RaspberryPiPicoW/temperature`.
+   - In the **Topic filter** text box, enter the topic defined as `PUB_TOPIC` in the `main.py` file. In our example: `/RaspberryPiPicoW/temperature`.
 
       ![MQTT client subscribe](images/MQTT_client_subscribe.jpg)
 
@@ -307,8 +310,8 @@ The device’s `main.py` script also subscribes to a topic (defined as `SUB_TOPI
 
 1. Staying within the AWS IoT MQTT test client, click on **Publish to topic**:
 
-   1. Enter the **topic name** for publishing: `/RaspberryPiPicoW/light`.
-   2. For the **message payload**, clear the box and paste in the following JSON payload:
+   *a.* Enter the **topic name** for publishing: `/RaspberryPiPicoW/light`.
+   *b.* For the **message payload**, clear the box and paste in the following JSON payload:
 
       ```json
       { "state": "on" }
@@ -332,18 +335,18 @@ In AWS IoT Core console:
 
 1. You can see the IoT *Thing*:
 
-   1. In the left column, under **Manage**, select **All Devices** > **Things**.
+   *a.* In the left column, under **Manage**, select **All Devices** > **Things**.
       - It will list all of your AWS IoT *Things*.
       - Click any of them for more details.
 
 2. You can see the IoT Policy:
 
-   1. In the left column, under **Manage**, select **Security** > **Policies**.
+   *a.* In the left column, under **Manage**, select **Security** > **Policies**.
       - It will list all of your AWS IoT Policies.
       - Click any of them for more details.
 
 3. You can see the Certificates:
-   1. In the left column, under **Manage**, select **Security** > **Certificates**.
+   *a.* In the left column, under **Manage**, select **Security** > **Certificates**.
       - It will list all of your AWS IoT Certificates.
       - Click any of them for more details.
 
