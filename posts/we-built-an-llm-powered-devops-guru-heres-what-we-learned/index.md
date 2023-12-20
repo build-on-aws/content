@@ -55,9 +55,7 @@ Stochasticity refers to the variable outputs of an LLM given identical inputs (o
 
 **Prompt:**
 
-> ```
-> How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.
-> ```
+> `How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.`
 
 We obtained two different responses over the course of two runs.
 
@@ -77,25 +75,25 @@ Robustness, for our purposes, refers to consistent quality of ouput given minor 
 
 **Prompt 1:**
 
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.`
+> How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.
 
 **Prompt 2:**
 
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about remediation recommendations. Let's think step by step.`
+> How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about remediation recommendations. Let's think step by step.
 
 We found prompt 2 generated a response with higher quality.
 
 **Prompt 1:**
 
-`What actions should I take to perform the recommendations provided in the above conversation?`
+> What actions should I take to perform the recommendations provided in the above conversation?
 
 **Prompt 2:**
 
-`What action should I take to perform the recommendations provided in the above conversation?`
+> What action should I take to perform the recommendations provided in the above conversation?
 
 **Prompt 3:**
 
-`How to perform the recommendations provided in the above conversation?`
+> How to perform the recommendations provided in the above conversation?
 
 We found prompt 2 generated recommendations of better quality.
 
@@ -111,29 +109,29 @@ When prompting LLMs with a chain-of-thoughts, we provide the model with conversa
 
 **Prompt:**
 
-`Can you identify the primary root causes related to Replication lag in Amazon ElastiCache Redis? Present this information as an enumerated list, formatted as follows:`
-
-`Example: The primary root causes related to Replication lag in Amazon ElastiCache Redis are:`     
-`1. First identified cause`       
-`2. Second identified cause`      
-`3. ...`
+> Can you identify the primary root causes related to Replication lag in Amazon ElastiCache Redis? Present this information as an enumerated list, formatted as follows:
+> 
+> Example: The primary root causes related to Replication lag in Amazon ElastiCache Redis are:    
+> 1. First identified cause 
+> 2. Second identified cause   
+> 3. ...
 
 **Answer from the LLM with Overloaded Conversation History:**
 
-`According to the provided context, high replication lag in Amazon ElastiCache Redis is generally a side effect of excessive write activity, network capacity exhaustion, or underlying service degradation. Additionally, synchronization of Redis is initiated during backup, replacement, and scaling events, which is a compute-intensive workload that can cause latencies. It's also important to control the volume of new connections when using the ElastiCache in-transit encryption feature due to the extra time and CPU utilization needed by the TLS handshake.`
+> According to the provided context, high replication lag in Amazon ElastiCache Redis is generally a side effect of excessive write activity, network capacity exhaustion, or underlying service degradation. Additionally, synchronization of Redis is initiated during backup, replacement, and scaling events, which is a compute-intensive workload that can cause latencies. It's also important to control the volume of new connections when using the ElastiCache in-transit encryption feature due to the extra time and CPU utilization needed by the TLS handshake.
 
 **By contrast, here is the answer from the LLM without Overloaded Conversation History:**
 
-`The primary root causes related to Replication lag in Amazon ElastiCache Redis are:`
-`1. Excessive write activity: High replication lag is generally a side effect of excessive write activity.`
-`2. Network capacity exhaustion: Replication lag can be caused by network exhaustion.`
-`3. Underlying service degradation: Replication lag can also be caused by underlying service degradation.`
-`4. Full synchronization: Full synchronization is a more complex process, involving the creation of a snapshot on the primary node, and could lead to performance degradation.`
-`5. Slow commands: Slow commands can block the Redis engine and cause an increase in the EngineCPUUtilization metric in CloudWatch.`
+> The primary root causes related to Replication lag in Amazon ElastiCache Redis are:
+> 1. Excessive write activity: High replication lag is generally a side effect of excessive write activity.
+> 2. Network capacity exhaustion: Replication lag can be caused by network exhaustion.
+> 3. Underlying service degradation: Replication lag can also be caused by underlying service degradation.
+> 4. Full synchronization: Full synchronization is a more complex process, involving the creation of a snapshot on the primary node, and could lead to performance degradation.
+> 5. Slow commands: Slow commands can block the Redis engine and cause an increase in the EngineCPUUtilization metric in CloudWatch.
 
 The above examples suggest that LLMs overloaded with conversation history may not follow the response format as reliably as LLMs that are not overloaded. This indicates the potential influence of the volume of conversation history on the LLM’s ability to accurately respond to prompts. Furthermore, storing excessive conversation history can consume a substantial portion of the available input tokens, limiting the number of tokens available for input prompts including the retrieved documents and user query. This is an example of a token limit error message caused by storing excessive conversation history:
 
-`InvalidRequestError: This model's maximum context length is 4097 tokens. However, your messages resulted in 4164 tokens. Please reduce the length of the messages.`
+> InvalidRequestError: This model's maximum context length is 4097 tokens. However, your messages resulted in 4164 tokens. Please reduce the length of the messages.
 
 ### Do Not Request Output in JSON Format 
 
@@ -141,11 +139,11 @@ The LLM sometimes makes an error when processing prompts to output response in J
 
 **Prompt:**
 
-`Can you identify the primary root causes related to {ops_issue} in Amazon ElastiCache Redis? Present this information in a JSON format, where the key is "root_causes" and the value is a list containing these root causes.`
+> Can you identify the primary root causes related to {ops_issue} in Amazon ElastiCache Redis? Present this information in a JSON format, where the key is "root_causes" and the value is a list containing these root causes.
 
 **Answer:**
 
-`I'm sorry, but the given context does not provide a JSON format with the key "root_causes" and a list of values related to the primary root causes of Replication lag in Amazon ElastiCache Redis. However, based on the context provided, some of the primary root causes of Replication lag in Amazon ElastiCache Redis include excessive write activity, network capacity exhaustion, and underlying service degradation.`
+> I'm sorry, but the given context does not provide a JSON format with the key "root_causes" and a list of values related to the primary root causes of Replication lag in Amazon ElastiCache Redis. However, based on the context provided, some of the primary root causes of Replication lag in Amazon ElastiCache Redis include excessive write activity, network capacity exhaustion, and underlying service degradation.
 
 ## Developing Best Practices for Prompt Engineering
 
@@ -156,7 +154,7 @@ First, stochasticity shows that even identical prompts could lead to different r
 We can address the issue of model robustness by introducing a prompt template that utilizes question calibration. To this end, we can collect best practices for prompt engineering through crowdsourcing, which allows us to construct a database of templates. For each user’s query, we first retrieve the most similar query from the template database and calibrate the question by the template before passing into LLM. Specifically, in Phase I, we extract the most similar query template from our database to align with the user’s initial question. This calibration step serves to reshape the question into a format that can elicit a high-quality response. In Phase II, the revised query is then entered into the LLM, which leverages LLM to generate remediation recommendations. Regarding the prompt templates, we find that:
 
 1. Substituting `how to` with `what action should I take` to tends to yield higher quality response.
-2. Incorporating the title of relevant Knowledge Center pages when providing additional context allows elicits responses with more precise insights to be derived from the Knowledge center pages. 
+2. Incorporating the title of relevant Knowledge Center pages when providing additional context elicits responses with more precise insights to be derived from the Knowledge center pages. 
 3. By prompting the LLM to `Be specific about the remediation recommendations`, we direct it to provide detailed and actionable insights with more concrete resolutions.
 
 Additionally, it is recommended to avoid overloading an extensive conversation history, as it can potentially hurt the efficiency of the response generation. Moreover, caution is advised when requesting outputs in JSON format, given that it can often diminish the quality of the model’s responses. 
