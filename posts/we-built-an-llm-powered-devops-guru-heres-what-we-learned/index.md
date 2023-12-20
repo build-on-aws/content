@@ -7,7 +7,9 @@ tags:
   - generative-ai
   - devops
   - aws
-space:
+spaces:
+  - generative-ai
+waves:
   - generative-ai
 authorGithubAlias: haywse
 authorName: Wooseok Ha
