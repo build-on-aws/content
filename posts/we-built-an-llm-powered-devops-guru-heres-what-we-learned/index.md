@@ -53,7 +53,7 @@ Stochasticity refers to the variable outputs of an LLM given identical inputs (o
 
 Prompt:
 
-```
+```text
 How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.
 ```
 
