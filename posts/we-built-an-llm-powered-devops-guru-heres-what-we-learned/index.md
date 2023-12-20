@@ -55,7 +55,7 @@ Stochasticity refers to the variable outputs of an LLM given identical inputs (o
 
 **Prompt:**
 
-> `How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.`
+> How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.
 
 We obtained two different responses over the course of two runs.
 
@@ -81,7 +81,7 @@ Robustness, for our purposes, refers to consistent quality of ouput given minor 
 
 > How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about remediation recommendations. Let's think step by step.
 
-We found prompt 2 generated a response with higher quality.
+We found prompt 2 (above) generated a response with higher quality.
 
 **Prompt 1:**
 
