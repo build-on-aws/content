@@ -63,11 +63,11 @@ We obtained two different responses over the course of two runs.
 
 **Answer 1:**
 
-`The "mount.nfs: Connection timed out" error can occur when there is an issue with the security group associated with your EFS file system and worker nodes. Here are the steps you can take to troubleshoot and resolve the issue:`
+> The "mount.nfs: Connection timed out" error can occur when there is an issue with the security group associated with your EFS file system and worker nodes. Here are the steps you can take to troubleshoot and resolve the issue: [list of steps]
 
 **Answer 2:**
 
-`The "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in Amazon EKS can have several root causes. Here are some steps you can take to troubleshoot and resolve the issue:`
+> The "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in Amazon EKS can have several root causes. Here are some steps you can take to troubleshoot and resolve the issue: [list of steps]
 
 Answer 1 was able to immediately identify the root cause based on the Knowledge Center page. It provided the correct recommendation in the first place, although later suggested a few irrelevant solutions. Answer 2 failed to provide a precise root cause ("can have several root causes"). It had the correct recommendation in the second place. Given these observations, we consider Answer 1 having much higher quality than Answer 2.
 
