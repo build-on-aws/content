@@ -268,8 +268,11 @@ Answer:
 `To resolve the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS, you can take the following recommended actions:`
 
 `1. Verify that the mount targets are configured correctly.`
+
 `2. Verify that the security group associated with your EFS file system and worker nodes allows NFS traffic.`
+
 `3. Confirm that the cluster's VPC uses the Amazon DNS server.`
+
 `4. Verify that you have "iam" mount options in the persistent volume definition when using a restrictive file system policy.`
 
 `You can find more details on how to perform these actions in the previous conversation.`
@@ -293,20 +296,35 @@ Answer:
 `Sure, here are the step-by-step instructions to verify and update the security group associated with your EFS file system and worker nodes to allow NFS traffic:`
 
 `1. Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/.`
+
 `2. In the navigation pane, choose "Security Groups".`
+
 `3. Select the security group that's associated with your EFS file system.`
+
 `4. Choose the "Inbound Rules" tab, and then choose "Edit".`
+
 `5. Choose "Add Rule".`
+
 `6. In the "Type" list, choose "NFS".`
+
 `7. In the "Source" list, choose "Custom".`
+
 `8. In the "CIDR" field, enter the CIDR for your cluster's VPC. For example, if your VPC CIDR is 10.0.0.0/16, enter 10.0.0.0/16.`
+
 `9. Choose "Save Rules".`
+
 `10. Select the security group that's associated with your worker nodes.`
+
 `11. Choose the "Outbound Rules" tab, and then choose "Edit".`
+
 `12. Choose "Add Rule".`
+
 `13. In the "Type" list, choose "NFS".`
+
 `14. In the "Destination" list, choose "Custom".`
+
 `15. In the "CIDR" field, enter the CIDR for your EFS file system. For example, if your EFS file system CIDR is 172.31.0.0/16, enter 172.31.0.0/16.`
+
 `16. Choose "Save Rules".`
 
 `After completing these steps, your EFS file system and worker nodes should allow NFS traffic, and you should be able to mount your Amazon EFS volumes in your Amazon EKS cluster without encountering the 'mount.nfs: Connection timed out' error.`
