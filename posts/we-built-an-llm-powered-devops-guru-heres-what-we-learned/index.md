@@ -28,7 +28,7 @@ date: 2023-12-20
 
 Generative AI has been grabbing headlines for over a year now, but while general large language models (LLMs) are among the most visible implementations of the technology, more specialized implementations have been rapidly changing how developers build and interface with cloud technology on many levels. We are a team of applied scientists at AWS that has been using the incredible power of LLMs to support a particular process: helping DevOps engineers to troubleshoot operational problems more effectively.
 
-While we built our tool, called DevOps Guru, we learned a great deal about the limitations of LLMs in a DevOps setting, the challenges of knowledge graph construction, and — perhaps most interestingly — the unpredictable nature of prompts. These limitations led us to dive deeper into prompt engineering as a means to circumvent them. In this blog, we share the insights acquired through this exploration and offer practical suggestions for extracting optimized output from LLMs despite these constraints.
+While we built [our tool, called DevOps Guru](https://docs.aws.amazon.com/devops-guru/?sc_channel=el&sc_campaign=genaiwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=we-built-an-llm-powered-devops-guru-heres-what-we-learned), we learned a great deal about the limitations of LLMs in a DevOps setting, the challenges of knowledge graph construction, and — perhaps most interestingly — the unpredictable nature of prompts. These limitations led us to dive deeper into prompt engineering as a means to circumvent them. In this blog, we share the insights acquired through this exploration and offer practical suggestions for extracting optimized output from LLMs despite these constraints.
 
 ## The Project
 
@@ -51,13 +51,25 @@ Below we provide specific instances that illustrate these limitations for OpenAI
 
 Stochasticity refers to the variable outputs of an LLM given identical inputs (or prompts). We provided the following prompt to ChatGPT, along with information from the AWS Knowledge Center pages for additional context. (See "Appendix A. Stochasticity: Same prompt, different responses" for comprehensive details of the responses generated.)
 
-Prompt: `How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.`
+Prompt:
+
+```
+How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.
+```
 
 We obtained two different responses over the course of two runs.
 
-Answer 1: `The "mount.nfs: Connection timed out" error can occur when there is an issue with the security group associated with your EFS file system and worker nodes.` (correct! immediately identified the root cause) `Here are the steps you can take to troubleshoot and resolve the issue:` (correct)
+Answer 1:
 
-Answer 2: `The "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in Amazon EKS can have several root causes.` (not correct based on the Knowledge Center page) `Here are some steps you can take to troubleshoot and resolve the issue:`
+```
+The "mount.nfs: Connection timed out" error can occur when there is an issue with the security group associated with your EFS file system and worker nodes. [correct! immediately identified the root cause] `Here are the steps you can take to troubleshoot and resolve the issue: [correct]
+```
+
+Answer 2:
+
+```
+The "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in Amazon EKS can have several root causes. [not correct based on the Knowledge Center page] Here are some steps you can take to troubleshoot and resolve the issue:
+```
 
 Answer 1 was able to immediately identify the root cause based on the Knowledge Center page. It provided the correct recommendation in the first place, although later suggested a few irrelevant solutions. Answer 2 failed to provide a precise root cause ("can have several root causes"). It had the correct recommendation in the second place. Given these observations, we consider Answer 1 having much higher quality than Answer 2.
 
@@ -65,17 +77,37 @@ Answer 1 was able to immediately identify the root cause based on the Knowledge 
 
 Robustness, for our purposes, refers to consistent quality of ouput given minor alterations in prompt phrasing - even when those alterations maintain the semantic intent. Below, we provided two nearly identical prompts, which yielded drastically different responses. Although stochasticity can often be the cause of varied responses, we conducted the conversation three times to verify that the differences in quality were not a result of stochasticity. (See "Appendix B. Vulnerability: Similar prompts, different responses" for details of the conversations.)
 
-Prompt 1: `How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.`
+Prompt 1:
 
-Prompt 2: `How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about remediation recommendations. Let's think step by step.`
+```
+How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.
+```
+
+Prompt 2:
+
+```
+How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about remediation recommendations. Let's think step by step.
+```
 
 We found prompt 2 generated a response with higher quality.
 
-Prompt 1: `What actions should I take to perform the recommendations provided in the above conversation?`
+Prompt 1:
 
-Prompt 2: `What action should I take to perform the recommendations provided in the above conversation?`
+```
+What actions should I take to perform the recommendations provided in the above conversation?
+```
 
-Prompt 3: `How to perform the recommendations provided in the above conversation?`
+Prompt 2:
+
+```
+What action should I take to perform the recommendations provided in the above conversation?
+```
+
+Prompt 3:
+
+```
+How to perform the recommendations provided in the above conversation?
+```
 
 We found prompt 2 generated recommendations of better quality.
 
@@ -119,7 +151,9 @@ The primary root causes related to Replication lag in Amazon ElastiCache Redis a
 
 The above examples suggest that LLMs overloaded with conversation history may not follow the response format as reliably as LLMs that are not overloaded. This indicates the potential influence of the volume of conversation history on the LLM’s ability to accurately respond to prompts. Furthermore, storing excessive conversation history can consume a substantial portion of the available input tokens, limiting the number of tokens available for input prompts including the retrieved documents and user query. This is an example of a token limit error message caused by storing excessive conversation history:
 
-`InvalidRequestError: This model's maximum context length is 4097 tokens. However, your messages resulted in 4164 tokens. Please reduce the length of the messages.`
+```
+InvalidRequestError: This model's maximum context length is 4097 tokens. However, your messages resulted in 4164 tokens. Please reduce the length of the messages.
+```
 
 ### Do Not Request Output in JSON Format 
 
@@ -176,7 +210,9 @@ We present the details of our conversation with a gpt-3.5-turbo. We aim at troub
 
 We provided the following prompt.
 
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.`
+```
+How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.
+```
 
 We obtained the two different responses in two runs.
 
@@ -245,15 +281,20 @@ By following these steps, you should be able to troubleshoot and resolve the "mo
 ### Appendix B. Vulnerability: Similar prompts, different responses
 
 We repeat the conversation three times to ensure that the varying quality is due to stochasticity.
+
 Prompt 1 (low quality):
 
 Query:
 
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.`
+```
+How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.
+```
 
 Answer:
 
-`The most likely root cause of the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS is that the security group associated with your EFS file system and worker nodes does not allow NFS traffic. To resolve this error, you should verify that the security group associated with your EFS file system and worker nodes allows NFS traffic. Specifically, the security group that's associated with your worker nodes where the pods are failing to mount the EFS volume must have an outbound rule that allows NFS traffic (port 2049) to the EFS file system. Additionally, your EFS file system's security group must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC. Allow port 2049 for inbound traffic.`
+```
+The most likely root cause of the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS is that the security group associated with your EFS file system and worker nodes does not allow NFS traffic. To resolve this error, you should verify that the security group associated with your EFS file system and worker nodes allows NFS traffic. Specifically, the security group that's associated with your worker nodes where the pods are failing to mount the EFS volume must have an outbound rule that allows NFS traffic (port 2049) to the EFS file system. Additionally, your EFS file system's security group must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC. Allow port 2049 for inbound traffic.
+```
 
 Query:
 
@@ -276,15 +317,21 @@ Prompt 2 (high quality):
 
 Query:
 
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.`
+```
+How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.
+```
 
 Answer:
 
-`The most likely root cause of the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS is that the security group associated with your EFS file system and worker nodes does not allow NFS traffic. To resolve this error, you should verify that the security group associated with your EFS file system and worker nodes allows NFS traffic. Specifically, the security group for your EFS file system must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC, and the security group for your worker nodes must have an outbound rule that allows NFS traffic (port 2049) to the EFS file system. If the security group does not allow NFS traffic, then the pods that are mounting the file system will return the 'mount.nfs: Connection timed out' error.`
+```
+The most likely root cause of the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS is that the security group associated with your EFS file system and worker nodes does not allow NFS traffic. To resolve this error, you should verify that the security group associated with your EFS file system and worker nodes allows NFS traffic. Specifically, the security group for your EFS file system must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC, and the security group for your worker nodes must have an outbound rule that allows NFS traffic (port 2049) to the EFS file system. If the security group does not allow NFS traffic, then the pods that are mounting the file system will return the 'mount.nfs: Connection timed out' error.
+```
 
 Query:
 
-`What actions should I take to perform the recommendations provided in the above conversation?`
+```
+What actions should I take to perform the recommendations provided in the above conversation?
+```
 
 Answer:
 
@@ -315,7 +362,9 @@ Prompt 3 (low quality):
 
 Query:
 
-`How to perform the recommendations provided in the above conversation?`
+```
+How to perform the recommendations provided in the above conversation?
+```
 
 Answer:
 
