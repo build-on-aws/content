@@ -1,5 +1,5 @@
 ---
-title: "We Build an LLM-Powered DevOps Guru. Here's What We Learned Along the Way"
+title: "We Built an LLM-Powered DevOps Guru. Here's What We Learned Along the Way"
 description: "A team of AWS applied scientists tried to help DevOps engineers. They learned a lot about large language models as they did."
 tags:
   - llms
@@ -47,51 +47,53 @@ DevOps interactive troubleshooting is an automated chat system that can analyze 
 
 Through our empirical study, we have found that the foundational LLM supporting DevOps interactive troubleshooting is usually prone to two major limitations: 1) Stochasticity: With exactly identical prompts, the LLM generated different responses with varying quality due to its probabilistic nature and empirical implementation, even when temperature was set to zero. 2) Lack of robustness to the change in the prompt: Minor alteration in the phrasing of a prompt, even those that preserve the semantic intent, can result in different responses with varying quality.
 
-Below we provide specific instances that illustrate these limitations for OpenAI’s GPT-3.5.
+Below we provide specific instances in OpenAI’s GPT-3.5.
 
 ### Stochasticity
 
-Stochasticity refers to the variable outputs of an LLM given identical inputs (or prompts). We provided the following prompt to ChatGPT, along with information from the AWS Knowledge Center pages for additional context. (See "Appendix A. Stochasticity: Same prompt, different responses" for comprehensive details of the responses generated.)
+Stochasticity refers to the variable outputs of an LLM given identical inputs (or prompts). We provided the following prompt to ChatGPT, along with information from the AWS Knowledge Center pages for additional context.
 
-Prompt:
+**Prompt:**
 
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.`
+> ```
+> How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.
+> ```
 
 We obtained two different responses over the course of two runs.
 
-Answer 1:
+**Answer 1:**
 
-`The "mount.nfs: Connection timed out" error can occur when there is an issue with the security group associated with your EFS file system and worker nodes.` [correct! immediately identified the root cause] `Here are the steps you can take to troubleshoot and resolve the issue:` [correct]
+`The "mount.nfs: Connection timed out" error can occur when there is an issue with the security group associated with your EFS file system and worker nodes. Here are the steps you can take to troubleshoot and resolve the issue:`
 
-Answer 2:
+**Answer 2:**
 
-`The "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in Amazon EKS can have several root causes.` [not correct based on the Knowledge Center page] `Here are some steps you can take to troubleshoot and resolve the issue:`
+`The "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in Amazon EKS can have several root causes. Here are some steps you can take to troubleshoot and resolve the issue:`
 
 Answer 1 was able to immediately identify the root cause based on the Knowledge Center page. It provided the correct recommendation in the first place, although later suggested a few irrelevant solutions. Answer 2 failed to provide a precise root cause ("can have several root causes"). It had the correct recommendation in the second place. Given these observations, we consider Answer 1 having much higher quality than Answer 2.
 
 ### Robustness 
 
-Robustness, for our purposes, refers to consistent quality of ouput given minor alterations in prompt phrasing - even when those alterations maintain the semantic intent. Below, we provided two nearly identical prompts, which yielded drastically different responses. Although stochasticity can often be the cause of varied responses, we conducted the conversation three times to verify that the differences in quality were not a result of stochasticity. (See "Appendix B. Vulnerability: Similar prompts, different responses" for details of the conversations.)
+Robustness, for our purposes, refers to consistent quality of ouput given minor alterations in prompt phrasing - even when those alterations maintain the semantic intent. Below, we provided two nearly identical prompts, which yielded drastically different responses. Although stochasticity can often be the cause of varied responses, we conducted the conversation three times to verify that the differences in quality were not a result of stochasticity.
 
-Prompt 1:
+**Prompt 1:**
 
 `How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.`
 
-Prompt 2:
+**Prompt 2:**
 
 `How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about remediation recommendations. Let's think step by step.`
 
 We found prompt 2 generated a response with higher quality.
 
-Prompt 1:
+**Prompt 1:**
 
 `What actions should I take to perform the recommendations provided in the above conversation?`
 
-Prompt 2:
+**Prompt 2:**
 
 `What action should I take to perform the recommendations provided in the above conversation?`
 
-Prompt 3:
+**Prompt 3:**
 
 `How to perform the recommendations provided in the above conversation?`
 
@@ -107,8 +109,7 @@ In the process of KG construction, sets of symptoms along with related issues an
 
 When prompting LLMs with a chain-of-thoughts, we provide the model with conversation history. This allows the model to remember the context from our previous conversation and make better inferences for the current query. However, we have found that an excessive amount of conversation history can distract the model, making it difficult to focus on the given query. This can lead to degraded quality of model’s response on knowledge extraction. 
 
-Prompt:
-
+**Prompt:**
 
 `Can you identify the primary root causes related to Replication lag in Amazon ElastiCache Redis? Present this information as an enumerated list, formatted as follows:`
 
@@ -117,11 +118,11 @@ Prompt:
 `2. Second identified cause`      
 `3. ...`
 
-Answer from the LLM with Overloaded Conversation History:
+**Answer from the LLM with Overloaded Conversation History:**
 
 `According to the provided context, high replication lag in Amazon ElastiCache Redis is generally a side effect of excessive write activity, network capacity exhaustion, or underlying service degradation. Additionally, synchronization of Redis is initiated during backup, replacement, and scaling events, which is a compute-intensive workload that can cause latencies. It's also important to control the volume of new connections when using the ElastiCache in-transit encryption feature due to the extra time and CPU utilization needed by the TLS handshake.`
 
-By contrast, here is the answer from the LLM without Overloaded Conversation History:
+**By contrast, here is the answer from the LLM without Overloaded Conversation History:**
 
 `The primary root causes related to Replication lag in Amazon ElastiCache Redis are:`
 `1. Excessive write activity: High replication lag is generally a side effect of excessive write activity.`
@@ -138,11 +139,11 @@ The above examples suggest that LLMs overloaded with conversation history may no
 
 The LLM sometimes makes an error when processing prompts to output response in JSON format. 
 
-Prompt:
+**Prompt:**
 
 `Can you identify the primary root causes related to {ops_issue} in Amazon ElastiCache Redis? Present this information in a JSON format, where the key is "root_causes" and the value is a list containing these root causes.`
 
-Answer:
+**Answer:**
 
 `I'm sorry, but the given context does not provide a JSON format with the key "root_causes" and a list of values related to the primary root causes of Replication lag in Amazon ElastiCache Redis. However, based on the context provided, some of the primary root causes of Replication lag in Amazon ElastiCache Redis include excessive write activity, network capacity exhaustion, and underlying service degradation.`
 
@@ -173,180 +174,3 @@ We believe that our exploration of LLMs extends beyond DevOps, and we recognize 
 By analyzing the intent of customer questions and implementing a question calibration, we can anticipate responses of high accuracy from LLMs. But lengthy conversations and extensive customer usage data can easily overload the system’s conversation history. That said, providing the entire conversation history is often unnecessary to generate accurate responses to customer questions. In such cases, we can analyze conversation flows to determine the necessary history to be provided to LLMs for current responses. This not only ensures the system’s efficient operation by preventing it from being overwhelmed with information but also maintains the accuracy and relevance of response, thereby enhancing user experience and trust in the LLM-powered chat system.
 
 Enhancing systems’ robustness and output quality through prompt engineering is a continuous endeavor. It is crucial to experiment with varying prompts to find the anticipated response from LLMs, iterating through different prompt engineering techniques and question calibrations. Resources such as OpenAI’s Best Practices for Prompt Engineering can also be valuable guides in determining the optimal prompts for different use cases. We encourage practitioners to engage in the dynamic area of prompt engineering, leveraging the potentials of LLMs to build a system with better user experiences.
-
-### Appendix A. Stochasticity: Same prompt, different responses
-
-We present the details of our conversation with a gpt-3.5-turbo. We aim at troubleshooting mount.nfs: Connection timed out error for EFS mount volume in EKS. We provided the LLM with the following four Knowledge Center pages for contextual reference.
-
-- https://repost.aws/knowledge-center/eks-troubleshoot-efs-volume-mount-issues
-- https://repost.aws/knowledge-center/eks-persistent-storage
-- https://repost.aws/knowledge-center/eks-pods-encryption-efs
-- https://repost.aws/knowledge-center/eks-troubleshoot-ebs-volume-mounts
-
-We provided the following prompt.
-
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Let's think step by step.`
-
-We obtained the two different responses in two runs.
-
-Answer 1:
-
-`The "mount.nfs: Connection timed out" error can occur when there is an issue with the security group associated with your EFS file system and worker nodes.` [correct! immediately identified the root cause] `Here are the steps you can take to troubleshoot and resolve the issue:` [correct]
-
-`1. Verify that the security group associated with your EFS file system and worker nodes allows NFS traffic. The security group for your EFS file system must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC. Allow port 2049 for inbound traffic. The security group that's associated with your worker nodes where the pods are failing to mount the EFS volume must have an outbound rule that allows NFS traffic (port 2049) to the EFS file system.` [correct]
-
-`2. If the security group doesn't allow NFS traffic, then the pods that are mounting the file system return the following errors: "mount.nfs: Connection timed out" and "Unable to attach or mount volumes: timed out waiting for the condition".` [correct]
-
-`3. If the security group is configured correctly, verify that the mount targets are configured correctly. Be sure to create the EFS mount targets in each Availability Zone where the EKS nodes are running. If you don't correctly create the mount targets, then the pods that are mounting the EFS file system return an error similar to the following message: "Failed to resolve "fs-xxxxxx.efs.us-west-2.amazonaws.com" - check that your file system ID is correct".` [Based on the KC page, security group issue is the only root cause. So this is not relevant, although correct.]
-
-`4. If the mount targets are configured correctly, check if the subdirectory is created in your EFS file system if you're mounting the pod to a subdirectory. When you add sub paths in persistent volumes, the EFS CSI driver doesn't create the subdirectory path in the file system. The directories must be already present for the mount operation to succeed. If the sub path isn't present in the file system, then the pods fail with the following error: "mount.nfs4: mounting fs-18xxxxxx.efs.us-east-1.amazonaws.com:/path-in-dir:/ failed, reason given by server: No such file or directory".` [Based on the KC page, security group issue is the only root cause. So this is not relevant, although correct.]
-
-`5. Finally, confirm that the cluster's VPC uses the Amazon DNS server. When you mount the EFS with the EFS CSI driver, the EFS mount helper requires that you use the Amazon DNS server for the VPC. If the cluster VPC uses a custom DNS server, then configure this DNS server to forward all *.amazonaws.com requests to the Amazon DNS server. If these requests aren't forwarded, then the pods fail with an error similar to the following message: "Failed to resolve "fs-4 fxxxxxx.efs.us-west-2.amazonaws.com" - check that your file system ID is correct."` [Based on the KC page, security group issue is the only root cause. So this is not relevant, although correct.]
-
-`I hope this helps you troubleshoot and resolve the "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in your Amazon EKS cluster.`
-
-Answer 2:
-
-`The "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in Amazon EKS can have several root causes.` [not correct based on the KC page] `Here are some steps you can take to troubleshoot and resolve the issue:`
-
-`1. Verify that the mount targets are configured correctly: Make sure that you have created the EFS mount targets in each Availability Zone where the EKS nodes are running. If you don't correctly create the mount targets, then the pods that are mounting the EFS file system return an error similar to the following message:`
-
-`"Output: mount.nfs4: mounting fs-18xxxxxx.efs.us-east-1.amazonaws.com:/path-in-dir:/ failed, reason given by server: No such file or directory"` [correct but not relevant]
-
-`2. Verify that the security group associated with your EFS file system and worker nodes allows NFS traffic: Your EFS file system's security group must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC. Allow port 2049 for inbound traffic. The security group that's associated with your worker nodes where the pods are failing to mount the EFS volume must have an outbound rule. Specifically, this outbound rule must allow NFS traffic (port 2049) to the EFS file system.` [correct]
-
-`3. Confirm that the cluster's VPC uses the Amazon DNS server: When you mount the EFS with the EFS CSI driver, the EFS mount helper requires that you use the Amazon DNS server for the VPC. To verify the DNS server, log in to the worker node and run the following command:`
-
-`$ cat /etc/resolv.conf`
-
-`If the cluster VPC uses a custom DNS server, then configure this DNS server to forward all *.amazonaws.com requests to the Amazon DNS server. If these requests aren't forwarded, then the pods fail with an error similar to the following message:`
-
-`"Output: Failed to resolve "fs-4 fxxxxxx.efs.us-west-2.amazonaws.com" - check that your file system ID is correct."`
-
-[correct but not relevant]
-
-`4. Verify that the subdirectory is created in your EFS file system if you're mounting the pod to a subdirectory: When you add sub paths in persistent volumes, the EFS CSI driver doesn't create the subdirectory path in the file system. The directories must be already present for the mount operation to succeed. If the sub path isn't present in the file system, then the pods fail with the following error:`
-
-`"Output: mount.nfs4: mounting fs-18xxxxxx.efs.us-east-1.amazonaws.com:/path-in-dir:/ failed, reason given by server: No such file or directory"`
-
-[correct but not relevant]
-
-`5. Verify that the Amazon EFS CSI driver controller service account is annotated with the correct IAM role and the IAM role has the required permissions: To verify that the service account that the efs-csi-controller pods use has the correct annotation, run the following command:`
-
-`$ kubectl describe sa efs-csi-controller-sa -n kube-system`
-
-`Verify that the following annotation is present:`
-
-`eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/eksctl-my-cluster-addon-iamservicea-Role1-1S3J3GJZJZJZJ`
-
-`Verify that you completed the following steps:`
-
-`- You created the IAM OIDC provider for the cluster.`
-
-[correct but not relevant]
-
-`By following these steps, you should be able to troubleshoot and resolve the "mount.nfs: Connection timed out" error when mounting Amazon EFS volumes in Amazon EKS.`
-
-### Appendix B. Vulnerability: Similar prompts, different responses
-
-We repeat the conversation three times to ensure that the varying quality is due to stochasticity.
-
-Prompt 1 (low quality):
-
-Query:
-
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.`
-
-Answer:
-
-`The most likely root cause of the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS is that the security group associated with your EFS file system and worker nodes does not allow NFS traffic. To resolve this error, you should verify that the security group associated with your EFS file system and worker nodes allows NFS traffic. Specifically, the security group that's associated with your worker nodes where the pods are failing to mount the EFS volume must have an outbound rule that allows NFS traffic (port 2049) to the EFS file system. Additionally, your EFS file system's security group must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC. Allow port 2049 for inbound traffic.`
-
-Query:
-
-`What actions should I take to perform the recommendations provided in the above conversation?`
-
-Answer:
-
-`To resolve the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS, you can take the following recommended actions:`
-
-`1. Verify that the mount targets are configured correctly.`
-
-`2. Verify that the security group associated with your EFS file system and worker nodes allows NFS traffic.`
-
-`3. Confirm that the cluster's VPC uses the Amazon DNS server.`
-
-`4. Verify that you have "iam" mount options in the persistent volume definition when using a restrictive file system policy.`
-
-`You can find more details on how to perform these actions in the previous conversation.`
-
-Prompt 2 (high quality):
-
-Query:
-
-`How do I troubleshoot issues with my Amazon EFS volume mounts in Amazon EKS? Specifically, I'm seeing 'mount.nfs: Connection timed out' error. What is the root cause? Can you recommend an action to resolve the error? Only provide me with the most likely root cause. Be specific about your remediation recommendations. Let's think step by step.`
-
-Answer:
-
-`The most likely root cause of the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS is that the security group associated with your EFS file system and worker nodes does not allow NFS traffic. To resolve this error, you should verify that the security group associated with your EFS file system and worker nodes allows NFS traffic. Specifically, the security group for your EFS file system must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC, and the security group for your worker nodes must have an outbound rule that allows NFS traffic (port 2049) to the EFS file system. If the security group does not allow NFS traffic, then the pods that are mounting the file system will return the 'mount.nfs: Connection timed out' error.`
-
-Query:
-
-`What actions should I take to perform the recommendations provided in the above conversation?`
-
-Answer:
-
-`Sure, here are the step-by-step instructions to verify and update the security group associated with your EFS file system and worker nodes to allow NFS traffic:`
-
-`1. Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/.`
-
-`2. In the navigation pane, choose "Security Groups".`
-
-`3. Select the security group that's associated with your EFS file system.`
-
-`4. Choose the "Inbound Rules" tab, and then choose "Edit".`
-
-`5. Choose "Add Rule".`
-
-`6. In the "Type" list, choose "NFS".`
-
-`7. In the "Source" list, choose "Custom".`
-
-`8. In the "CIDR" field, enter the CIDR for your cluster's VPC. For example, if your VPC CIDR is 10.0.0.0/16, enter 10.0.0.0/16.`
-
-`9. Choose "Save Rules".`
-
-`10. Select the security group that's associated with your worker nodes.`
-
-`11. Choose the "Outbound Rules" tab, and then choose "Edit".`
-
-`12. Choose "Add Rule".`
-
-`13. In the "Type" list, choose "NFS".`
-
-`14. In the "Destination" list, choose "Custom".`
-
-`15. In the "CIDR" field, enter the CIDR for your EFS file system. For example, if your EFS file system CIDR is 172.31.0.0/16, enter 172.31.0.0/16.`
-
-`16. Choose "Save Rules".`
-
-`After completing these steps, your EFS file system and worker nodes should allow NFS traffic, and you should be able to mount your Amazon EFS volumes in your Amazon EKS cluster without encountering the 'mount.nfs: Connection timed out' error.`
-
-Prompt 3 (low quality):
-
-Query:
-
-`How to perform the recommendations provided in the above conversation?`
-
-Answer:
-
-`To resolve the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS, you can perform the following recommended steps:`
-
-`1. Verify that the mount targets are configured correctly: Create the EFS mount targets in each Availability Zone where the EKS nodes are running. If you don't correctly create the mount targets, then the pods that are mounting the EFS file system return an error similar to the following message:`
-
-`2. Verify that the security group associated with your EFS file system and worker nodes allows NFS traffic: Your EFS file system's security group must have an inbound rule that allows NFS traffic from the CIDR for your cluster's VPC. Allow port 2049 for inbound traffic. The security group that's associated with your worker nodes where the pods are failing to mount the EFS volume must have an outbound rule. Specifically, this outbound rule must allow NFS traffic (port 2049) to the EFS file system.`
-
-`3. Confirm that the cluster's VPC uses the Amazon DNS server: When you mount the EFS with the EFS CSI driver, the EFS mount helper requires that you use the Amazon DNS server for the VPC. If the cluster VPC uses a custom DNS server, then configure this DNS server to forward all *.amazonaws.com requests to the Amazon DNS server.`
-
-`4. Verify that you have "iam" mount options in the persistent volume definition when using a restrictive file system policy: In some cases, the EFS file system policy is configured to restrict mount permissions to specific IAM roles. In this case, the EFS mount helper requires that the -o iam mount option pass during the mount operation. Include the spec.mountOptions property to allow the CSI driver to add the iam mount option.`
-
-`Performing these steps should help you resolve the 'mount.nfs: Connection timed out' error when mounting Amazon EFS volumes in Amazon EKS.`
