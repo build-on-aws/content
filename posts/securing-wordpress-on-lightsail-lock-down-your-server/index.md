@@ -3,7 +3,7 @@ title: "Securing Wordpress on Lightsail: Lock Down Your Server"
 description: "This how-to demonstrates how to secure a Lightsail instance running Wordpress. It covers managing the AWS account, steps to secure a Lightsail instance, and how to automate updates and maintenance."
 tags:
     - lightsail
-    - dordpress
+    - wordpress
     - security
     - maintenance
     - aws

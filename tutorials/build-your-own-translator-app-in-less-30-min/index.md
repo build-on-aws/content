@@ -5,7 +5,7 @@ tags:
     - ai-ml
     - aws
     - tutorials
-    - chatbot
+    - chatbots
 
 authorGithubAlias: elizabethfuentes12
 authorName: Elizabeth Fuentes Leone

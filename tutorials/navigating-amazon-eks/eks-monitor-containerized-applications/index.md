@@ -2,9 +2,11 @@
 title: "Easily Monitor Containerized Applications with Amazon CloudWatch Container Insights"
 description: "How to collect, aggregate, and analyze metrics from your containerized applications using Amazon CloudWatch Container Insights."
 tags:
+    - eks-cluster-setup
     - eks-container-insight
     - eks
     - kubernetes
+    - eksctl
     - tutorials
     - aws
 showInHomeFeed: true
@@ -34,7 +36,7 @@ In this tutorial, you will configure your Amazon EKS cluster, deploy containeriz
 | ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=appswave&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
-| 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
+| 📢 Feedback            | <a href="https://pulse.aws/survey/Z8XBGQEL?page=eks-monitor-containerized-apps" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | ⏰ Last Updated        | 2023-10-02                                                      |
 
 | ToC |

@@ -6,7 +6,7 @@ tags:
   - generative-ai
   - sagemaker
   - falcon
-  - llm
+  - llms
   - aws
   - build-on-live
   - twitch
@@ -40,9 +40,6 @@ The last option `option.enable_streaming=true` is the one that does the magic ðŸ
 Check out the recording here:
 
 https://www.twitch.tv/videos/1922979917
-
-
-?sc_channel=el&sc_campaign=livestreams&sc_content=build-on-generative-ai&sc_geo=mult&sc_country=mult&sc_outcome=acq
 
 ## Links from today's episode
 

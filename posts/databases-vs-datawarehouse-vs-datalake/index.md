@@ -3,8 +3,8 @@ title: "Data Lake vs Data Warehouse vs Databases: Which Meets Your Storage Needs
 description: "Databases, Data warehouses, and Data Lakes all have different purposes and use-cases, but understanding those differences isn't always easy. Here's a quick guide to help you navigate the sometimes-confusing world of cloud storage."
 tags:
   - databases
-  - data warehouse
-  - data lake
+  - data-warehouses
+  - data-lakes
   - storage
   - cloud
   - redshift

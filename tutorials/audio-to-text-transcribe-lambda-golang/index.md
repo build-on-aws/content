@@ -2,7 +2,7 @@
 title: 'Build a Serverless Application for Audio to Text conversion'
 description: Learn how to use Amazon Transcribe and AWS Lambda to build an audio to text conversion application written in Go.
 tags:
-  - go
+  - golang
   - serverless
   - ai-ml
   - cdk

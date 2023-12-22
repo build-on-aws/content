@@ -3,8 +3,7 @@ title: "Fast Pre-trained Model Deployment - The code only approach"
 description: Deploying pre-trained and foundation models quickly, and programmatically, using Amazon SageMaker JumpStart, and the SageMaker SDK.
 tags:
   - generative-ai
-  - machine-learning
-  - artificial-intelligence
+  - ai-ml
 spaces:
   - generative-ai
 waves:

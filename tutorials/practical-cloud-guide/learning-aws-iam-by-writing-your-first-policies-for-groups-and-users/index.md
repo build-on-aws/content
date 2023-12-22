@@ -4,7 +4,6 @@ description: "Managing users and access to resources is part of a cloud administ
 tags:
     - tutorials
     - aws-iam
-    - identity-access-management
     - it-pros
     - security
 authorGithubAlias: spara

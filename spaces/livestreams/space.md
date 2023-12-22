@@ -9,4 +9,5 @@ pinnedPosts:
   - /livestreams/the-big-dev-theory
   - /livestreams/build-on-live-events/open-source-and-machine-learning
   - /livestreams/build-on-generative-ai
+  - /livestreams/lets-talk-about-data
 ---

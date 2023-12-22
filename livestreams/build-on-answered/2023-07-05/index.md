@@ -2,7 +2,7 @@
 title: "Build On Answered | All About Terraform | S01 EP08"
 description: "Check out the latest episode with Kerim Satirli from Hashicorp as we review some of the top viewed Terraform questions in the AWS Collective on Stack Overflow."
 tags:
-    - iam
+    - aws-iam
     - stack-overflow
     - aws-stack-overflow-collective
     - aws

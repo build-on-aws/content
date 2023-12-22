@@ -6,15 +6,18 @@ tags:
   - sagemaker
   - llama2
   - falcon
-  - llm
+  - llms
   - aws
   - build-on-live
   - twitch
+spaces:
+  - generative-ai
+  - livestreams
+waves:
+  - generative-ai
 authorGithubAlias: darko-mesaros
 authorName: Darko Mesaros
 date: 2023-08-14
-spaces:
-  - livestreams
 ---
 
 ![Screenshot of the llama2 training diagram](images/paperscr.webp "Training of Llama 2-Chat")

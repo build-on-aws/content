@@ -4,9 +4,12 @@ description: This article discusses how Generative AI can be used as a learning 
 tags:
   - generative-ai
   - cybersecurity
-  - security
   - it-pros
   - security
+spaces:
+  - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2023-10-05

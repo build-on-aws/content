@@ -6,7 +6,7 @@ tags:
     - lambda
     - dynamodb
     - eventbridge
-    - stepfunctions
+    - step-functions
     - serverless
     - resilience
 waves:

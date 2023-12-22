@@ -17,6 +17,8 @@ date: 2023-09-01
 |ToC|
 |---|
 
+**Note**: _This is the first in a two-part series. [Part 2 can be read here](/posts/amazon-search-chaos-engineering-journey)_
+
 This is a story about Chaos Engineering, and how the high scale distributed services that power Search on [Amazon.com](http://amazon.com?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=how-search-uses-chaos-engineering) use it to ensure that all customers can search Amazon’s expansive catalog whenever they need to. Chaos Engineering enables teams to experiment with faults or load to better understand how their applications will react, and therefore improve resilience. And this is also a story about DevOps, and how a single team dedicated to resilience was able to create technologies and drive changes that made it easier for the multiple teams that are part of Search to run Chaos experiments on the many services powering Search.
 
 If you are looking to implement Chaos Engineering to improve resilience, looking for how to create an effective model to empower builders, or both, then read on.
@@ -125,6 +127,9 @@ For the chaos experiment, the events include a combination of adding synthetic l
 Chaos Engineering is a great way to better understand the resilience of your services. And AWS FIS is a great service for creating and running chaos experiments on AWS. Two-pizza teams in Search could have each independently began using FIS and running experiments. But by adopting a DevOps culture that focused on **enabling teams to do more**, the Search Resilience team was able to make the process even easier for Search two-pizza teams, and add many valuable features that make chaos engineering more effective across all of Search.
 
 ## You May Also Be Interested In
+
+**[Engineering Resilience: Lessons from Amazon Search's Chaos Engineering Journey](/posts/amazon-search-chaos-engineering-journey)**
+* Learn about the Search Resilience team, detailing their progression from running load tests in the production environment to adopting chaos engineering and conducting numerous large-scale experiments 
 
 **[Big Trucks, Jackie Chan movies, and millions of cardboard boxes: How Amazon Does DevOps in Real Life](/posts/how-amazon-does-devops-in-real-life)**
 * Read about three more examples of Amazon teams using DevOps to drive resilience

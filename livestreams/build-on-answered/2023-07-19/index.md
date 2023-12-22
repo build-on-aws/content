@@ -2,7 +2,7 @@
 title: "Build On Answered | All About Boto3, Auto Scaling, and Chaos engineering | S01 EP09"
 description: "Join us for Build On Answered, the Twitch show where expert hosts review top viewed questions from the AWS Stack Overflow Collective live on air!"
 tags:
-    - iam
+    - aws-iam
     - stack-overflow
     - aws-stack-overflow-collective
     - aws

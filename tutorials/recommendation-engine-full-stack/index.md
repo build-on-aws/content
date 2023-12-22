@@ -5,7 +5,7 @@ tags:
   - ai-ml
   - data-visualization
   - sagemaker
-  - apigateway
+  - api-gateway
   - tutorials
 authorGithubAlias: pkamra
 authorName: Piyali Kamra

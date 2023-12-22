@@ -47,6 +47,9 @@ Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check u
 
 | Episode | Name | Date | Link to Show Notes
 |--|--|--|--|
+| S02E30 | Generating Fake Star Wars quotes with Amazon Bedrock - PART 5 | 2023-10-12 | [Show Notes](/livestreams/build-on-weekly/2023-10-12) |
+| S02E29 | Detect and Remediate cost waste | 2023-09-21 | [Show Notes](/livestreams/build-on-weekly/2023-09-21) |
+| S02E28 | Build Your Own Recommendation Engine on AWS - PART 2 | 2023-09-07 | [Show Notes](/livestreams/build-on-weekly/2023-09-07) |
 | S02E27 | Wordpress in the Cloud on the cheap | 2023-08-31 | [Show Notes](/livestreams/build-on-weekly/2023-08-31) |
 | S02E26 | Migrating Rust 🦀 applications to ARM | 2023-08-17 | [Show Notes](/livestreams/build-on-weekly/2023-08-17) |
 | S02E25 | Hosting a REACT app on AWS, Star Wars quotes generator - PART 4 | 2023-08-10 | [Show Notes](/livestreams/build-on-weekly/2023-08-10) |

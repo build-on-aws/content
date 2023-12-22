@@ -5,10 +5,14 @@ tags:
   - generative-ai
   - ai-ml
   - codewhisperer
+  - students
 images:
   banner: images/banner.jpg
   hero: images/banner.jpg
 spaces:
+  - generative-ai
+  - students
+waves:
   - generative-ai
 authorGithubAlias: jlooper
 authorName: Jen Looper

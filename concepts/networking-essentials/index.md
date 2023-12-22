@@ -2,8 +2,8 @@
 title: "AWS Networking Essentials"
 description: "An essential guide to cloud networking on AWS."
 tags:
-  - cloud networking
-  - aws networking
+  - cloud-networking
+  - aws-networking
   - essentials
   - aws
   - vpc

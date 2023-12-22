@@ -7,6 +7,10 @@ tags:
   - security
   - it-pros
   - codewhisperer
+spaces:
+  - generative-ai
+waves:
+  - generative-ai
 authorGithubAlias: 8carroll
 authorName: Brandon Carroll
 date: 2023-10-06

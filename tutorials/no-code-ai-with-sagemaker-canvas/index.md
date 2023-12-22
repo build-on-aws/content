@@ -4,7 +4,7 @@ description: "How To Build Stock Price Prediction Without Writing a Single Line 
 tags:
   - ai-ml
   - sagemaker
-  - no-code
+  - low-code-no-code
   - forecast
   - tutorials
   - s3

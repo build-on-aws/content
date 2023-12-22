@@ -4,7 +4,7 @@ description: "Do you know what is the best long context Large Language Model? ðŸ
 tags:
   - l-eval
   - generative-ai
-  - llm
+  - llms
   - aws
   - build-on-live
   - twitch

@@ -43,7 +43,7 @@ The **Unit Price** component refers to the rate you pay per-service per time-uni
 
 The **Usage** component is the more important part of this formula. If an EC2 instance is not being used at all, it doesn’t matter if you save 60% of the cost via a purchase plan, it’s still 40% waste.
 
-This is why the [FinOps practice](https://www.infracost.io/finops/) should be engineering-led. The core work that needs to be done under the FinOps umbrella requires engineering effort. Engineering is required for cost optimization, tagging of resources, and [right-sizing](https://community.aws/posts/rightsizing-the-right-way) decisions. Engineering is required to do the cost-benefit analysis for each action.
+This is why the [FinOps practice](https://www.infracost.io/finops/) should be engineering-led. The core work that needs to be done under the FinOps umbrella requires engineering effort. Engineering is required for cost optimization, tagging of resources, and right-sizing decisions. Engineering is required to do the cost-benefit analysis for each action.
 
 Now that you know the overall formula, try to identify where the biggest usage components of your infrastructure are. These will be your first target for optimization.
 

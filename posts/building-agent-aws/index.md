@@ -4,7 +4,7 @@ description: "Tips and guidance on building a Generative AI Agent."
 tags:
   - agents
   - python
-  - huggingface
+  - hugging-face
   - generative-ai
   - ai-ml
 spaces:

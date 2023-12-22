@@ -2,7 +2,7 @@
 title: 'Build a Serverless Application for Image Label Detection'
 description: Learn how to use Amazon Rekognition and AWS Lambda to extract image labels using the Go programming language.
 tags:
-  - go
+  - golang
   - serverless
   - ai-ml
   - cdk

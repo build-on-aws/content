@@ -5,7 +5,7 @@ tags:
   - application-resilience
   - shared-responsibility
   - digital-transformation
-  - resiliency
+  - resilience
 spaces:
   - devops
 waves:
