@@ -1,5 +1,5 @@
 ---
-title: Boosting our efficiency by 50% using generative AI and Amazon Bedrock
+title: Boosting our fintech efficiency by 50% using generative AI and Amazon Bedrock
 description: At LoanOptions.ai, we provide an online platform for business and personal loans. As a fintech startup, a key hurdle is simplifying financial information to provide efficient and positive user experiences. This can be challenging as financial information can often be expansive, complex and difficult to understand without domain expertise. With generative AI, we identify an opportunity to develop a solution. Learn about our journey building an AI application using Amazon Bedrock.
 tags:
   - generative-ai
