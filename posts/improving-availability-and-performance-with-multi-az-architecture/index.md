@@ -13,6 +13,7 @@ spaces:
 authorGithubAlias: hechkh
 authorName: Hechmi Khelifi
 date: 2023-07-06
+
 ---
  
 Using multiple Availability Zones (AZs) is crucial for achieving resilience and high availability of your architecture. It enables you to distribute your resources across different physical locations, which helps protect against potential failures, safeguard against single points of failure, and improve availability.
