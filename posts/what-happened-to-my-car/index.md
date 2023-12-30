@@ -8,6 +8,8 @@ tags:
     - aws-well-architected
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: crichey
 authorName: Clark Richey
 date: 2023-07-12

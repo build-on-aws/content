@@ -11,6 +11,8 @@ tags:
     - resilience
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: JimmyDqv
 authorName: Jimmy Dahlqvist
 githubUserLabel: community-builder

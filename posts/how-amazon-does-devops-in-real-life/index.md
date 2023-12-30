@@ -9,6 +9,7 @@ tags:
   - deployment
 spaces:
   - devops
+  - resilience
 waves:
   - devops
   - resilience

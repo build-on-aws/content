@@ -9,6 +9,8 @@ tags:
     - disaster-recovery
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-07-03

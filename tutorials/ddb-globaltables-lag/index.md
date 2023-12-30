@@ -8,6 +8,8 @@ tags:
     - resilience
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: crichey
 authorName: Clark Richey
 date: 2023-09-12

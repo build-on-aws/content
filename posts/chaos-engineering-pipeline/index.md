@@ -10,6 +10,7 @@ waves:
   - resilience
 spaces:
   - devops
+  - resilience
 authorGithubAlias: gunnargrosch
 authorName: Gunnar Grosch
 date: 2023-09-22

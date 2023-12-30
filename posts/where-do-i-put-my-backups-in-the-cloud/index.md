@@ -9,6 +9,8 @@ tags:
     - aws
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: jmoran8888
 authorName: Jennifer Moran
 date: 2023-07-14

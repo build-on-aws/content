@@ -9,6 +9,8 @@ tags:
   - disaster-recovery
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: psammy-github
 authorName: Paul Sammy
 githubUserLabel: community

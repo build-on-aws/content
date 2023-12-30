@@ -9,6 +9,8 @@ tags:
     - chaos-engineering
 waves:
   - resilience
+spaces:
+  - resilience
 images:
   background: images/hero_resilience.jpg
   banner: images/hero_resilience.jpg

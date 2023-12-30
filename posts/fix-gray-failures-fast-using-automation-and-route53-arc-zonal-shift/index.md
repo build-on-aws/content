@@ -8,6 +8,8 @@ tags:
   - gray-failure
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: CryptikCode
 authorName: Fred Akinyemi
 date: 2023-07-24

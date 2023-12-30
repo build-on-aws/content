@@ -9,6 +9,8 @@ tags:
     - devops
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: wirjo
 authorName: Daniel Wirjo
 additionalAuthors: 

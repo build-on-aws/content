@@ -9,6 +9,8 @@ tags:
   - fault-injection-simulator
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: takieddine-sbiai
 authorName: Takieddine Sbiai
 additionalAuthors:

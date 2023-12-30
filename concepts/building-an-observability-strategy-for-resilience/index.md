@@ -9,6 +9,8 @@ tags:
     - disaster-recovery
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: khubyar
 authorName: Khubyar Behramsha
 date: 2023-10-23

@@ -10,6 +10,8 @@ tags:
   - aws-resilience-hub
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: TheFuz
 authorName: Mahanth Jayadeva
 date: 2023-03-16

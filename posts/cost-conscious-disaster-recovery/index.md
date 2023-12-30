@@ -9,6 +9,7 @@ waves:
   - resilience
 spaces:
   - cost-optimization
+  - resilience
 authorGithubAlias: sjeversaws
 authorName: Steven Evers
 additionalAuthors:

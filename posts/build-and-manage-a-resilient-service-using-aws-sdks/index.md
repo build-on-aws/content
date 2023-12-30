@@ -11,6 +11,8 @@ tags:
   - aws
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: Laren-AWS
 authorName: Laren Crawford
 date: 2023-09-06
