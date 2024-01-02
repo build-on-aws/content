@@ -13,6 +13,7 @@ tags:
   - aws
 spaces:
   - devops
+  - resilience
 waves:
   - resilience
 images:

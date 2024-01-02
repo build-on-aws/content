@@ -9,6 +9,8 @@ tags:
   - fault-injection-simulator
 waves:
   - resilience
+spaces:
+  - resilience
 authorGithubAlias: setheliot
 authorName: Seth Eliot
 date: 2023-09-01

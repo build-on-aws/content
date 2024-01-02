@@ -13,6 +13,8 @@ date: 2023-10-20
 showInHomeFeed: true
 waves:
     - resilience
+spaces:
+  - resilience
 ---
 
 An efficient response strategy is crucial to ensuring that businesses can quickly and effectively respond to incidents and reduce loss in revenue, data, customer trust, or compliance. In this blog, we'll go through the key steps in designing and implementing an incident management strategy covering the four steps of incident response as defined by NIST, namely: preparation, detection & analysis, containment & recovery, and correction of errors & continuous improvement. Lastly, we will discuss the importance of management buy-in and explore the role of automation in helping organizations improve their response capabilities.
