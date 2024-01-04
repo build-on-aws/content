@@ -32,6 +32,13 @@ If you’re attending re:Invent 2023, there’s plenty to learn about designing 
 ---
 OK, re:Invent 2023 is over, but that does not mean you can't see the talks. Breakout sessions are recorded, and we have added **video** links below to any of the sessions that have recordings.
 
+*Plus* a bonus. Here are five *more* can't-miss resilience talks from re:Invent 2023, that you can watch:
+* [ARC310 | Detecting and mitigating gray failures](https://www.youtube.com/watch?v=LzIZ-dEzgEw)
+* [ARC308 | Best practices for creating multi-Region architectures on AWS](https://www.youtube.com/watch?v=_vGlnzPZigU)
+* [ARC313 | A consistent approach to resilience analysis for critical workloads](https://www.youtube.com/watch?v=fEOeP08cQdk)
+* [ARC315 | Gain confidence in system correctness & resilience with formal methods](https://www.youtube.com/watch?v=FdXZXnkMDxs)
+* [ARC316 | Practice like you play: How Amazon scales resilience to new heights](https://www.youtube.com/watch?v=r3J0fEgNCLQ)
+
 ---
 
 ## The resilience kiosk: Get help from AWS resilience experts
