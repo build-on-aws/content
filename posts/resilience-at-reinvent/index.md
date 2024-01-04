@@ -30,7 +30,7 @@ Running your application can be a challenge. Unexpected usage patterns, componen
 If you’re attending re:Invent 2023, there’s plenty to learn about designing resilient applications. Here we’ll share our picks of what you should check out.
 
 ---
-OK, re:Invent 2023 is over, but that does not mean you can't see the talks. Breakout sessions are recorded, and we have added **video** links below to any of the sessions that have recordings.
+OK, re:Invent 2023 is over, but you can still watch these talks. Breakout sessions are recorded, and we have added **video** links below to any of the sessions that have recordings.
 
 *Plus* a bonus. Here are five *more* can't-miss resilience talks from re:Invent 2023, that you can watch:
 * [ARC310 | Detecting and mitigating gray failures](https://www.youtube.com/watch?v=LzIZ-dEzgEw)
