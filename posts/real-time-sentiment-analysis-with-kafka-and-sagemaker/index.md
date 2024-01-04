@@ -4,7 +4,7 @@ description: "Learn how to enrich real-time social media records that are going 
 tags:
     - sentiment-analysis
     - sage-maker
-    - jupiter-notebook
+    - jupyter-notebook
     - tutorials
     - aws
     - apache-kafka
@@ -20,9 +20,9 @@ In this tutorial, we'll show you an example of using a model run by SageMaker an
 
 ## What you will learn
 
-- How to establish connection between an AWS SageMaker Jupiter Notebook and an Apache Kafka cluster.
+- How to establish connection between an AWS SageMaker Jupyter Notebook and an Apache Kafka cluster.
 - How to consume data from an Apache Kafka topic and enhance it using an AI model that runs on SageMaker.
-- How to produce data back to Apache Kafka from the SageMaker Jupiter Notebook.
+- How to produce data back to Apache Kafka from the SageMaker Jupyter Notebook.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ In this tutorial, we'll show you an example of using a model run by SageMaker an
 | 🧩 Prerequisites    | - AWS account and access to SageMaker Studio. Follow this link to [set up your AWS account](https://aws.amazon.com/resources/create-account/) if you don’t have any. <br>- Apache Kafka. We’ll be using [Aiven for Apache Kafka cluster](https://aiven.io/kafka), which you can create at no cost for this tutorial as part of a free trial. Follow this link to [register for Aiven for Apache Kafka](https://go.aiven.io/olena-signup). <br>- Data for sentiment analysis. Follow [steps described in this article](https://aiven.io/developer/mastodon-kafka-js) to stream mastodon data to Apache Kafka topic. |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://raw.githubusercontent.com/Aiven-Labs/sentiment-analysis-kafka-sagemaker/main/sentiment-analysis.ipynb)    |
 | 💰 Cost to complete | Free when using the AWS Free Tier and Aiven for Apache Kafka |
-| 🔨 Services used | - Kinesis Data Streams <br> - Kinesis Data Analytics <br> - S3 bucket <br> - Glue Data Catalog |
+| 🔨 Services used | - SageMaker  |
 | ⏰ Last Updated     | 2023-12-11                           |
 
 | ToC |
@@ -45,7 +45,7 @@ In this tutorial, we'll show you an example of using a model run by SageMaker an
 
 ### Secure connection between AWS SageMaker and Apache Kafka
 
-To access an Apache Kafka cluster from a Sagemaker Jupiter Notebook and establish a TLS connection you need to have this data from your cluster:
+To access an Apache Kafka cluster from a Sagemaker Jupyter Notebook and establish a TLS connection you need to have this data from your cluster:
 
 - service URI of your Apache Kafka cluster
 - files containing access key,  access certificate and CA certificate of your Apache Kafka services.
@@ -74,7 +74,7 @@ Once done you should see three topics ready:
 
 We recommend you use [JavaScript-based data generator](https://github.com/Aiven-Labs/mastodon-to-kafka) to get a stream of social media data. However, you can also stream any other data that you want to perform analysis on, just make sure to adjust the property names in the code.
 
-## Step 2 - Set up Sagemaker and a Jupiter Notebook
+## Step 2 - Set up Sagemaker and a Jupyter Notebook
 
 To access to SageMaker studio you'll need to create a domain first:
 
@@ -89,7 +89,7 @@ Once you'll land into Amazon SageMaker Studio, select JumpStart:
 ![Select JumpStart in  Amazon SageMaker Studio](images/JumpStart.webp)
 
 Here you can search for one of already existing and trained models. We want a model that is trained to do text classifications. Different models have different advantages and disadvantages, select a model taking into account type of text you want to analyse and the length of text snippet. Social media messages from Mastodon are quite short, so we'll go for a model "DistilBERT Base Multilingual Cased". You can find it by using the search bar. Select the one for text classification:
-![select-model.png](images/Fselect-model.png)
+![select-model.png](images/select-model.png)
 
 Click to deploy the model and wait till it has been prepared:
 ![deploy-model.png](images/deploy-model.png)
