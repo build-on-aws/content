@@ -432,7 +432,7 @@ Running this will return a JSON response (see truncated example below), indicati
 
 To programmatically access this from our web app, let’s create a Lambda function. Head over to the Lambda console and create a function with Python 3.9 as the runtime. Add the following code to your Lambda function
 
-This code uses the AWS SDK for Python to invoke the Stable Diffusion XL model we just added through the Bedrock console. The model will return the generate image a base64 encoded string. We will return that as a JSON response in our Lambda function for consumption by our web app. In our Lambda function, we expect the JSON request body that is sent to contain the prompt describing the generated image, the desired width, and the desired height in pixels.
+This code uses the AWS SDK for Python to invoke the Stable Diffusion XL model we just added through the Bedrock console. In our Lambda function, we expect the JSON request body that is sent to contain the prompt describing the generated image, the desired width, and the desired height in pixels. Those parameters will then be passed to the AWS SDK for Python to invoke the Stable Diffusion model and return the generated image as a base64 encoded string. We will then return the base64 encoded string from our Lambda function as a JSON object for consumption by our web app.
 
 ```python
 import io
