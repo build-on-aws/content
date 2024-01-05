@@ -7,10 +7,10 @@ tags:
   - twitch
   - vtubing
 images:
-  thumbnail: images/vtubing-ivs-demo.gif
-  banner: images/vtubing-ivs-demo.gif
-  hero: images/vtubing-ivs-demo.gif
-  background: images/vtubing-ivs-demo.gif
+  thumbnail: images/simple-vtuber-demo-amazon-ivs.gif
+  banner: images/simple-vtuber-demo-amazon-ivs.gif
+  hero: images/simple-vtuber-demo-amazon-ivs.gif
+  background: images/simple-vtuber-demo-amazon-ivs.gif
 authorGithubAlias: tonyv
 authorName: Tony Vu
 date: 2023-12-15
@@ -22,7 +22,7 @@ Virtual YouTubing, or V-Tubing for short, is the practice among live streamers o
 
 With that context set, I will walk you through a step by step process of building a web app to render a 3D character from VRoid Hub, animate it based on your body movements, and live stream to Amazon Interactive Video Service (IVS). [VRoid Hub](https://hub.vroid.com/en) is an online platform created by Pixiv used to host and share 3D character models. You will be using a model we created and uploaded to VRoid Hub as your avatar. The Three VRM SDK from Pixiv will be used for rendering the digital character. VRM is a file format for handling 3D character models. To have your avatar animate and mimic your body movements, you will be using the MediaPipe Holistic library and [Kalidokit](https://github.com/yeemachine/kalidokit).
 
-> The code for this tutorial is available on [Github](#). You can also try a [live demo](https://dev.d218eir1ybnzul.amplifyapp.com/) of this web app.
+> The code for this tutorial is available on [Github](https://github.com/aws-samples/simple-vtuber-demo-for-amazon-ivs). You can also try a [live demo](https://dev.d218eir1ybnzul.amplifyapp.com/) of this web app.
 
 ## What You Will Learn
 
@@ -36,7 +36,7 @@ With that context set, I will walk you through a step by step process of buildin
 | ⏱ Time to complete  | 60 minutes                                                                                                        |
 | 💰 Cost to complete | Free when using the AWS Free Tier                                                                                 |
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>                                             |
-| 💻 Code Sample      | [GitHub](#)                                                                                                       |
+| 💻 Code Sample      | [GitHub](https://github.com/aws-samples/simple-vtuber-demo-for-amazon-ivs)                                        |
 | 📢 Feedback         | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ? |
 | ⏰ Last Updated     | 2023-12-15                                                                                                        |
 
@@ -70,8 +70,8 @@ Create the following HTML in an `index.html`. In the `<body>` element, we first 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Amazon IVS VTuber Demo</title>
-    <meta name="description" content="Amazon IVS VTuber Demo" />
+    <title>Simple VTuber Demo for Amazon IVS</title>
+    <meta name="description" content="Simple VTuber Demo for Amazon IVS" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="modal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" />
