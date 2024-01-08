@@ -29,14 +29,21 @@ https://youtu.be/b0FeFtvkHiw
 
 ## Schedule
 
-Join us for our upcoming episodes!
+### Join us for our upcoming episodes in 2024
 | Season | Episode | Date | Link to Watch | Guest| Title |
 |-|--|--|--|--|-|
-|Season 5 | **Episode 5** | 2023/12/19 (11am ET, 8am PT) | [Watch here](https://www.twitch.tv/aws/) | Auth0 | Secure your AWS AppSync GraphQL APIs with Auth0 by Okta |
+|Season 1 | **Episode 1** | 2024/01/30 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | TBC |
+|Season 1 | **Episode 2** | 2024/02/06 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | TBC |
+|Season 1 | **Episode 3** | 2024/02/12 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | TBC |
+|-|--|--|--|--|-|
+|Season 1 | **Episode 4** | 2024/02/20 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | TBC |
+|Season 1 | **Episode 5** | 2024/02/27 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | TBC |
+|Season 1 | **Episode 6** | 2024/03/05 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | TBC |
 
-Past episodes
+### Past episodes 2023
 | Season | Episode | Date Shown | Link to Watch | Guest| Link to Show Notes |
 |-|--|--|--|--|-|
+|Season 5 | **Episode 5** | 2023/12/19 | [Watch here](https://www.twitch.tv/videos/2008394010) | Auth0 | [Show notes](/livestreams/the-big-dev-theory/2023-12-19) |
 |Season 5 | **Episode 4** | 2023/12/12 | [Watch here](https://www.twitch.tv/videos/2002953612) | Auth0 | [Show notes](/livestreams/the-big-dev-theory/2023-12-12) |
 |Season 5 | **Episode 3** | 2023/12/05 | [Watch here](https://www.twitch.tv/videos/1996626561) | Auth0 | [Show notes](/livestreams/the-big-dev-theory/2023-12-05) |
 |Season 5 | **Episode 2** | 2023/11/21 | [Watch here](https://www.twitch.tv/aws/) | Mendix | [Show notes](/livestreams/the-big-dev-theory/2023-11-21) |
