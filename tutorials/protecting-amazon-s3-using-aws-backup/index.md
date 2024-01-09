@@ -7,7 +7,7 @@ tags:
   - data-protection
 authorGithubAlias: hurami
 authorName: Enrique Ramirez
-date: 2024-1-9
+date: 2024-01-09
 ---
 
 With [AWS Backup](https://aws.amazon.com/backup/), a fully managed and compliance-ready service, you can centralize and automate data protection across AWS services. Using AWS Backup, you can protect key data stores on demand, on a specific schedule by creating a backup plan, and for specific resources by using tags, which help you organize and classify your AWS resources. If you need to meet enterprise governance or industry compliance requirements, you can define backups that follow a specific frequency and retention period. AWS Backup provides unlimited retention options and the ability to create backups as frequently as every hour. You can also use AWS Backup to copy backups across AWS Regions and accounts.
