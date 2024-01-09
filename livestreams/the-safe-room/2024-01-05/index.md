@@ -1,6 +1,6 @@
 ---
 title: "The Safe Room | S5 - E1 | Unlocking AWS Logging Power with Assisted Log Enabler"
-description: "Join us in the Season 5 premiere of "The Safe Room" as we delve into the world of AWS logging and security. Our host, Shannon Brazil, introduces the Assisted Log Enabler for AWS by the AWS Customer Incident Response Team, covering its functionality, new features, and practical applications."
+description: "Join us in the Season 5 premiere of 'The Safe Room' as we delve into the world of AWS logging and security. Our host, Shannon Brazil, introduces the Assisted Log Enabler for AWS by the AWS Customer Incident Response Team, covering its functionality, new features, and practical applications."
 tags:
   - aws
   - security
