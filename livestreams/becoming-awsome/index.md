@@ -20,7 +20,6 @@ images:
 ![Becoming AWSome](images/V1b.png)
 
 
-
 "Becoming AWSome," hosted by Ray Thomas & Jenna Lass, is a live weekly show on AWS’s Twitch Channel (www.Twitch.tv/AWS), which premiered on Feb. 7th, 2023. It offers viewers an unscripted, behind-the-scenes insight into AWS's culture and opportunities. Distinctively, it's the first Talent Acquisition-focused podcast on the AWS channel, carving out a unique audience niche amidst other tech-centric shows centered on AWS’s services.
 
 Diving deep into professional experience and personal interests, Amazon insiders introduce audiences to the "Humans of AWS," showcasing the brilliant minds and passionate hearts that power AWS. It's a rare glimpse into the personalities and innovators shaping the future of cloud computing. 
