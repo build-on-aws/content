@@ -13,7 +13,7 @@ spaces:
   - livestreams
 ---
 
-![Screenshot from the stream](images/thumbnail.png)
+![Screenshot from the stream](images/thumbnail.webp)
 
 ## Episode Synopsis
 In the Season 5 premiere of "The Safe Room," we take an in-depth look at the Assisted Log Enabler for AWS, a cutting-edge tool developed by the AWS Customer Incident Response Team. Host Shannon Brazil and guest Cydney Stude (also co-author of the tool) guides viewers through a comprehensive exploration of this tool, focusing on its critical role in AWS logging and security.
@@ -24,7 +24,7 @@ In the Season 5 premiere of "The Safe Room," we take an in-depth look at the Ass
 
 - **Step-by-Step Guide:** The episode features a step-by-step demonstration of setting up the Assisted Log Enabler, making it accessible even for those with limited technical expertise in AWS.
 
-![demo](images/E1-demosmall.png)
+![demo](images/E1-demo.webp)
 
 - **Highlighting New Features:** The spotlight is on the latest additions to the tool, including Elastic Load Balancing Access Logs, GuardDuty Enablement, and WAFv2 Logging. We discuss the significance of these features and how they enhance AWS security and logging capabilities.
 
