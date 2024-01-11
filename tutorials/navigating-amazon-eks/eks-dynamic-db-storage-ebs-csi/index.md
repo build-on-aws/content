@@ -237,7 +237,7 @@ spec:
         name: data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: gp2
+        storageClassName: ebs-sc
         resources:
           requests:
             storage: 30Gi
