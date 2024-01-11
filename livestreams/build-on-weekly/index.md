@@ -5,11 +5,11 @@ tags:
   - aws
   - build-on-live
   - twitch
-authorGithubAlias: gogococo
-authorName: Jacquie Grindrod
+authorGithubAlias: darko-mesaros
+authorName: Darko Mesaros 
 additionalAuthors: 
-  - authorGithubAlias: darko-mesaros
-    authorName: Darko Mesaros
+  - authorGithubAlias: gaonkarr
+    authorName: Rohini Gaonkar
 date: 2023-03-31
 images:
   hero: ./images/BOW_BANNER_V1.png
@@ -18,7 +18,7 @@ images:
   background: ./images/BOW_Logo.png
 ---
 
-![Image of Jacquie and Darko enjoying the live stream together](images/bow-header.webp)
+![Image of Rohini and Darko enjoying the live stream together](images/wpfordarko-rohini.webp)
 
 👋 Hello friends and welcome to Build On Weekly, a [Twitch show](https://www.twitch.tv/aws) where we build something together every week while answering questions from our favourite people - you! We'll build anything that helps you solve problems: whether it's Open Source or AWS, from operators, developers, data or security specialists to anyone in between. Join us every Thursday at 9am PT to learn live with us through hands on keyboard coding and stay for the lively conversations with expert guests.
 
@@ -26,17 +26,21 @@ images:
 
 Everyone is friends, so join in the conversation both on or off the air with your hosts!
 
-- Dark Mesaroš (Дарко Месарош), Senior Developer Advocate: Seattle, WA based resident retro hardware aficionado who loves yelling into the camera about the cloud while he learns, breaks and builds it. If you could summon him with one word it would be: Commodore 64. Talk with him on [Twitter](https://twitter.com/darkosubotica) or [LinkedIn](https://www.linkedin.com/in/darko-mesaros/).
-- Jacquie Grindrod, Senior Developer Advocate: Located in Vancouver, BC she's an avid gamer who applies her passion for problem solving to challenges based in systems, people and anything in-between. If you could summon her with one word it would be: DevOps. Talk with her on [Twitter](https://twitter.com/devopsjacquie) or [LinkedIn](https://www.linkedin.com/in/jacquelyne-grindrod/).
+- Darko Mesaroš (Дарко Месарош), Principal Developer Advocate: Seattle, WA based resident retro hardware aficionado who loves yelling into the camera about the cloud while he learns, breaks and builds it. If you could summon him with one word it would be: Commodore 64. Talk with him on [Twitter/X](https://twitter.com/darkosubotica) or [LinkedIn](https://www.linkedin.com/in/darko-mesaros/).
+
+- Rohini Gaonkar (रोहिणी गांवकर), Senior Developer Advocate: Living in Toronto, ON is a fervent builder at heart, whether it's assembling intricate models, or piecing together digital solutions. She is passionate about sharing her knowledge on architectural best practices and DevOps. If you could summon her with one word it would be: Architect. Talk with her on [Twitter/X](https://twitter.com/rohini_gaonkar) or [LinkedIn](https://www.linkedin.com/in/rohinigaonkar/).
+
+## Apply to Be a Guest Speaker 📅
+
+Are you passionate about building innovative solutions? Have you recently created something incredible you're itching to share? Whether it's in the realm of Open Source, AWS, or anything from development to data or security, we want to hear about it! Join us as a Guest Speaker in 2024! 🔗 [Click here to apply](https://pulse.aws/application/T7WYU0QT).
 
 ## Contact 📬
 
-If you have any ideas, suggestions, comments. Feel free to email us at [build-on-weekly@amazon.com](mailto:build-on-weekly@amazon.com)
+If you have any ideas, suggestions, comments, feel free to email us at [build-on-weekly@amazon.com](mailto:build-on-weekly@amazon.com)
 
 ## Schedule 📆
 
 Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check us out on [twitch.tv/aws](https://twitch.tv/aws) 👇
-
 <a href="https://twitch.tv/aws"><img src="images/twitch_button_small.jpg" style="margin-left: 0" alt=""/></a>
 
 ---
