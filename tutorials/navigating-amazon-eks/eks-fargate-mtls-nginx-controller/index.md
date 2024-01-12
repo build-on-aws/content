@@ -14,7 +14,7 @@ spaces:
   - kubernetes
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
-date: 2023-01-12
+date: 2024-01-12
 ---
 
 The flexibility of the cloud helps organizations to scale as quickly as possible while generating immense application traffic. But preventing “man-in-the-middle attacks” or other forms of cyber-attacks becomes a necessity for these businesses - even as they build solutions such as Microservice architectures, Business-to-business (B2B) APIs, User Authentications, Content Delivery, Internet of Things (IoT) sensors and many more. Mutual Transport Layer Security (mTLS) helps them to improve the security of their applications - or to comply with industry standards or a specific compliance requirement - by ensuring that the integrity of the parties at each end of a network connection are proven to each other. In microservice architectures, a service mesh is predominantly used to provide the infrastructure you need to safely implement mTLS between services. Configuring a service mesh introduces more components and complexity, such as sidecar proxies, control plane components, and the need to manage configurations and policies.
@@ -40,7 +40,7 @@ Some limitations to keep in mind:
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devops&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-01-12                                                    |
+| ⏰ Last Updated        | 2024-01-12                                                    |
 
 | ToC |
 |-----|
