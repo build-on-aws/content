@@ -47,7 +47,7 @@ SageMaker offers a fully managed machine learning platform to help engineers and
 
 You can use SageMaker to easily deploy machine learning models for real time or batch predictions. Once your model is trained in SageMaker, it can be deployed to create an endpoint. This endpoint is a REST API that receives prediction requests, runs the request through the deployed model, and returns predictions.
 
-### Monitoring models
+### Monitoring Models
 
 SageMaker provides tools to monitor the health and performance of machine learning models deployed as endpoints. Developers can enable continuous monitoring on a model endpoint which will track key performance metrics like invocation count, latency, and memory usage. This allows detecting when a model endpoint is unhealthy or performing poorly.
 
