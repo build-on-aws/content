@@ -15,7 +15,7 @@ images:
   background: images/amazon-ivs-real-time-background-replacement-demo.gif
 authorGithubAlias: tonyv
 authorName: Tony Vu
-date: 2024-01-112
+date: 2024-01-12
 ---
 
 > The duration of the image generation process in the animation above has been shortened to more quickly demonstrate the background replacement effect.
