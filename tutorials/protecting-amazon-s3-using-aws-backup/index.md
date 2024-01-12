@@ -7,10 +7,10 @@ tags:
   - data-protection
 authorGithubAlias: hurami
 authorName: Enrique Ramirez
-date: 2024-01-09
+date: 2024-01-12
 ---
 
-With [AWS Backup](https://aws.amazon.com/backup/), a fully managed and compliance-ready service, you can centralize and automate data protection across AWS services. Using AWS Backup, you can protect key data stores on demand, on a specific schedule by creating a backup plan, and for specific resources by using tags, which help you organize and classify your AWS resources. If you need to meet enterprise governance or industry compliance requirements, you can define backups that follow a specific frequency and retention period. AWS Backup provides unlimited retention options and the ability to create backups as frequently as every hour. You can also use AWS Backup to copy backups across AWS Regions and accounts.
+With [AWS Backup](https://docs.aws.amazon.com/aws-backup/?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup), a fully managed and compliance-ready service, you can centralize and automate data protection across AWS services. Using AWS Backup, you can protect key data stores on demand, on a specific schedule by creating a backup plan, and for specific resources by using tags, which help you organize and classify your AWS resources. If you need to meet enterprise governance or industry compliance requirements, you can define backups that follow a specific frequency and retention period. AWS Backup provides unlimited retention options and the ability to create backups as frequently as every hour. You can also use AWS Backup to copy backups across AWS Regions and accounts.
 
 Amazon S3 is natively integrated with AWS Backup, a fully managed, policy-based service that you can use to centrally define backup policies to protect your data in Amazon S3. After you define your backup policies and assign Amazon S3 resources to the policies, AWS Backup automates the creation of Amazon S3 backups and securely stores the backups in an encrypted backup vault that you designate in your backup plan.
 
@@ -31,9 +31,9 @@ Before starting this tutorial, you will need the following:
 | ✅ AWS Level        | Intermediate - 200                         |
 | ⏱ Time to complete  | 30 minutes                             |
 | 💰 Cost to complete | For Amazon S3 pricing, refer to the [Amazon S3 pricing page](https://aws.amazon.com/s3/pricing/?gclid=CjwKCAiA-vOsBhAAEiwAIWR0TbUvLaxvlh_vYvsHbK5iyvvDgQRYUITRelkedMQihF1pt7NfKhUAlRoCYgIQAvD_BwE&trk=20e04791-939c-4db9-8964-ee54c41bc6ad&sc_channel=ps&ef_id=CjwKCAiA-vOsBhAAEiwAIWR0TbUvLaxvlh_vYvsHbK5iyvvDgQRYUITRelkedMQihF1pt7NfKhUAlRoCYgIQAvD_BwE:G:s&s_kwcid=AL!4422!3!651751060962!e!!g!!amazon%20s3%20pricing!19852662362!145019251177) <br> For AWS Backup pricing, refer to the [AWS Backup pricing page](https://aws.amazon.com/backup/pricing/)   |
-| 🧩 Prerequisites    | An [AWS account](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup). For more information on using AWS Backup for the first time, view the [AWS Backup documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup?sc_channel=el&sc_campaign=resiliencewave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protect-dynamodb-with-awsbackup).<br>- [An Amazon S3 Bucket to protect. For information on how to create the sample bucket that is used for this tutorial, visit the documentation on [Getting started with Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html).|                           |
+| 🧩 Prerequisites    | An [AWS account](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup). For more information on using AWS Backup for the first time, view the [AWS Backup documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/setting-up.html?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup).<br>- [An Amazon S3 Bucket to protect. For information on how to create the sample bucket that is used for this tutorial, visit the documentation on [Getting started with Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup).|                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2024-1-9                             |
+| ⏰ Last Updated     | 2024-1-12                             |
 
 ## What You Will Accomplish
 
@@ -65,7 +65,7 @@ In this tutorial, you will:
 * On the **Configure resources** page, use the toggle switches to enable or disable the services used with AWS Backup. In this case, select **Amazon S3**. Choose **Confirm** when your services are configured. 
 * Please note:
   * AWS resources that you're backing up should be in the Region that you're using for this tutorial. Your resources must all be in the same AWS Region. This tutorial uses the US East (N. Virginia) Region (us-east-1).
-  * Amazon S3 buckets require versioning to be enabled prior to initiating a backup job, for additional information refer to the Amazon S3 documentation on [versioning for S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html).
+  * Amazon S3 buckets require versioning to be enabled prior to initiating a backup job, for additional information refer to the Amazon S3 documentation on [versioning for S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup).
   
 **2.2 — Create an on-demand backup job of an Amazon S3 bucket**
 Back in the [AWS Backup console](https://console.aws.amazon.com/backup), under **My account**, select **Protected resources** in the left navigation pane. Then choose the **Create on-demand backup** button.
@@ -127,7 +127,7 @@ Back in the [AWS Backup console](https://console.aws.amazon.com/backup), under *
 
 **3.2.1 — Configure a backup plan for an Amazon S3 Bucket (continued)**
 * AWS Backup provides three ways to get started using the AWS Backup console:
-    * **Start from an existing plan**: You can create a new backup plan based on the configurations in an existing plan. Be aware that backup plans created by AWS Backup are based on backup best practices and common backup policy configurations available in the [AWS Backup Developer Guide](https://docs.aws.amazon.com/aws-backup/latest/devguide/about-backup-plans.html). When you select an existing backup plan to start from, the configurations from that backup plan are automatically populated for your new backup plan. You can then change any of these configurations according to your backup requirements.
+    * **Start from an existing plan**: You can create a new backup plan based on the configurations in an existing plan. Be aware that backup plans created by AWS Backup are based on backup best practices and common backup policy configurations available in the [AWS Backup Developer Guide](https://docs.aws.amazon.com/aws-backup/latest/devguide/about-backup-plans.html?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup). When you select an existing backup plan to start from, the configurations from that backup plan are automatically populated for your new backup plan. You can then change any of these configurations according to your backup requirements.
     * **Build a new plan from scratch**: You can create a new backup plan by specifying each of the backup configuration details, as described in the next section. You can choose from the recommended default configurations.
     * **Define a plan using JSON**: You can modify the JSON expression of an existing backup plan or create a new expression.
     * **Backup plan name** — You must provide a unique backup plan name. If you try to create a backup plan that is identical to an existing plan, you get an *AlreadyExistsException* error.
@@ -143,8 +143,8 @@ Once the **Build a new plan** option is selected, the following options are pres
 * In the **Backup vault** section, you can select the default vault or one of the pre-existing vaults. Backups created by a backup rule are organized in the backup vault that you specify in the backup rule. You can use backup vaults to set the AWS KMS encryption key that is used to encrypt backups in the backup vault and to control access to the backups in the backup vault. You can also add tags to backup vaults to help you organize them. If you don't want to use the default vault, you can create your own.
 * **Create new Backup vault** - Instead of using the default backup vault that is automatically created for you on the AWS Backup console, you can create specific backup vaults to save and organize groups of backups in the same vault.
 * In the **Backup Frequency** section, choose **Daily**. The backup frequency determines how often a backup is created. You can choose a frequency of every 12 hours, daily, weekly, or monthly. When selecting weekly, you can specify which days of the week you want backups to be taken. When selecting monthly, you can choose a specific day of the month.
-* AWS Backup for Amazon S3 supports **continuous and periodic backups**. Refer to the [AWS Backup for Amazon S3](https://docs.aws.amazon.com/aws-backup/latest/devguide/s3-backups.html) documentation for additional details. By not selecting **Enable continuous backup for point-in-time-recovery (PITR)** the backup created through this plan will be periodic.
-* In the **Backup window** section, select **Use backup window defaults**, which initiates the backup job at 5 AM UTC (Coordinated Universal Time) and lasts 8 hours. If you would like to customize the backup frequency, refer to the [documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/creating-a-backup-plan.html) for more information.
+* AWS Backup for Amazon S3 supports **continuous and periodic backups**. Refer to the [AWS Backup for Amazon S3](https://docs.aws.amazon.com/aws-backup/latest/devguide/s3-backups.html?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup) documentation for additional details. By not selecting **Enable continuous backup for point-in-time-recovery (PITR)** the backup created through this plan will be periodic.
+* In the **Backup window** section, select **Use backup window defaults**, which initiates the backup job at 5 AM UTC (Coordinated Universal Time) and lasts 8 hours. If you would like to customize the backup frequency, refer to the [documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/creating-a-backup-plan.html?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup) for more information.
 * In the **Transition to cold storage** section, select **Never**.
 * In the **Retention period** section, select **Days** and enter *7* as the number of days that you want to retain the backup.
 
@@ -161,7 +161,7 @@ Once the **Build a new plan** option is selected, the following options are pres
 **Note**: Cross-region copy incurs additional data transfer costs. You can refer to the [AWS Backup pricing page](https://aws.amazon.com/backup/pricing/) for more details.
 
 * **Tags added to recovery points**: The tags that you list here are automatically added to backups when they are created.
-* **Advanced backup settings**: Enables application-consistent backups for third-party applications that are running on Amazon EC2 instances. Currently, AWS Backup supports Windows VSS backups. This is only applicable for EC2 instances running SQL Server or Exchange databases. You can refer to the [documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html) for more details.
+* **Advanced backup settings**: Enables application-consistent backups for third-party applications that are running on Amazon EC2 instances. Currently, AWS Backup supports Windows VSS backups. This is only applicable for EC2 instances running SQL Server or Exchange databases. You can refer to the [documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html?sc_channel=el&sc_campaign=tutorials&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=protecting-amazon-s3-using-aws-backup) for more details.
 * Then, choose the **Create plan** button. Once the plan is created, tags and resources can be added to the backup plan.
 
 ![AWS Backup Plan Advanced Settings](images/image11.png)
@@ -172,7 +172,6 @@ When you assign a resource to a backup plan, that resource is backed up automati
 
 * **Resource assignment name**: Provide a resource assignment name.
 * **IAM role**: When creating a tag-based backup plan, if you choose a role other than **Default role**, make sure that it has the necessary permissions to back up all tagged resources. AWS Backup tries to process all resources with the selected tags. If it encounters a resource that it doesn't have permission to access, the backup plan fails.
-
 
 ![AWS Backup Plan Resource Assignment](images/image12.png)
 
@@ -229,6 +228,6 @@ In the following steps, you clean up the resources you created in this tutorial.
 
 *Note: This process can take several seconds to complete.*
 
-### Next steps
+### Conclusion
 
 Congratulations! In this tutorial, you learned how to protect your Amazon S3 bucket using AWS Backup by creating on-demand and scheduled backups, and restoring deleted objects to the source bucket.
