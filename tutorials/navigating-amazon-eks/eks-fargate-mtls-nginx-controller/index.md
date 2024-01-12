@@ -14,17 +14,17 @@ spaces:
   - kubernetes
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
-date: 2023-12-30
+date: 2023-01-12
 ---
 
-Businesses are leveraging the benefits of the cloud as they migrate their workloads to the cloud. The flexibility of the cloud helps organizations to scale as quickly as possible while generating immense application traffic. Preventing “man-in-the-middle attacks” or other forms of cyber-attacks becomes a necessity for these businesses building solutions such as Microservice architectures, Business-to-business (B2B) APIs, User Authentications, Content Delivery, Internet of Things (IoT) sensors and many more. Mutual Transport Layer Security (mTLS) helps businesses to improve the security of their applications or to comply with industry standards or a specific compliance requirement by ensuring that the integrity of the parties at each end of a network connection are proven to each other. In microservice architectures, a service mesh is predominantly used to provide the infrastructure you need to safely implement mTLS between services. Configuring a service mesh introduces more components and complexity, such as sidecar proxies, control plane components, and the need to manage configurations and policies.
+The flexibility of the cloud helps organizations to scale as quickly as possible while generating immense application traffic. But preventing “man-in-the-middle attacks” or other forms of cyber-attacks becomes a necessity for these businesses - even as they build solutions such as Microservice architectures, Business-to-business (B2B) APIs, User Authentications, Content Delivery, Internet of Things (IoT) sensors and many more. Mutual Transport Layer Security (mTLS) helps them to improve the security of their applications - or to comply with industry standards or a specific compliance requirement - by ensuring that the integrity of the parties at each end of a network connection are proven to each other. In microservice architectures, a service mesh is predominantly used to provide the infrastructure you need to safely implement mTLS between services. Configuring a service mesh introduces more components and complexity, such as sidecar proxies, control plane components, and the need to manage configurations and policies.
 
-In this tutorial, I’ll show you how to set up mTLS for an application running on Amazon Elastic Kubernetes Service (Amazon EKS) Fargate using NGINX Ingress Controller and ACM Private CA without using a service mesh. Mutual TLS adds extra layer to secure Kubernetes workload traffic. It can be used for business-to-business applications or standards such as [Open Banking](https://docs.aws.amazon.com/wellarchitected/latest/financial-services-industry-lens/open-banking.html).
+In this tutorial, I’ll show you how to set up mTLS for an application running on Amazon Elastic Kubernetes Service (Amazon EKS) Fargate using NGINX Ingress Controller and ACM Private CA without using a service mesh. Mutual TLS adds extra layer to secure Kubernetes workload traffic. It can be used for business-to-business applications or standards such as [Open Banking](https://docs.aws.amazon.com/wellarchitected/latest/financial-services-industry-lens/open-banking.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=eks-fargate-mtls-nginx-controller).
 
 This tutorial addresses two challenges:
 
-1. Setting up NGINX Ingress Controller on Amazon EKS Fargate
-2. Configuring mTLS with NGINX Ingress Controller using certificate issued by ACM Private CA
+1. Setting up NGINX Ingress Controller on Amazon EKS Fargate.
+2. Configuring mTLS with NGINX Ingress Controller using certificate issued by ACM Private CA.
 
 Some limitations to keep in mind:
 
@@ -40,7 +40,7 @@ Some limitations to keep in mind:
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devops&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-12-30                                                    |
+| ⏰ Last Updated        | 2023-01-12                                                    |
 
 | ToC |
 |-----|
@@ -70,9 +70,9 @@ This tutorial is part of a series on managing security-sensitive workloads using
 
 ## Step 1: Configure the Cluster
 
-In this section, you will configure the Amazon EKS cluster with only [Fargate Profiles](https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html). For step-by-step guidance, check out the tutorial at [Building an Amazon EKS Cluster Pre-configured for Financial Workload](https://community.aws/tutorials/navigating-amazon-eks/eks-cluster-financial-workload).
+In this section, you will configure the Amazon EKS cluster with only [Fargate Profiles](https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=eks-fargate-mtls-nginx-controller). For step-by-step guidance, check out the tutorial at [Building an Amazon EKS Cluster Pre-configured for Financial Workload](https://community.aws/tutorials/navigating-amazon-eks/eks-cluster-financial-workload).
 
-## Step 2: Install and configure the cluster components
+## Step 2: Install and Configure the Cluster Components
 
 ### Install ALB Controller on Fargate using Helm option
 
@@ -252,7 +252,7 @@ kubectl logs -f $(kubectl get po | egrep -o 'external-dns[A-Za-z0-9-]+')
 
 ## Step 3: Create Private Certificate Authority
 
-Follow the steps below to create an [AWS Certificate Manager Private CA](https://docs.aws.amazon.com/privateca/latest/userguide/create-CA.html) with RSA 2048 selected as the key algorithm in the same region as the cluster.
+Follow the steps below to create an [AWS Certificate Manager Private CA](https://docs.aws.amazon.com/privateca/latest/userguide/create-CA.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=eks-fargate-mtls-nginx-controller) with RSA 2048 selected as the key algorithm in the same region as the cluster.
 
 1. To create a private certificate authority, execute the content below in your terminal, replace [example.com](http://example.com/) with your own value:
 
@@ -692,4 +692,4 @@ aws acm-pca delete-certificate-authority --certificate-authority-arn $ROOT_CA_AR
 
 ## Conclusion
 
-In this tutorial, you’ve successfully set up a mutual TLS for an application running in Amazon EKS on Fargate using a customized NGINX Ingress controller installation to deploy [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) that is provisioned by [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html). To explore more tutorials, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials).
+In this tutorial, you’ve successfully set up a mutual TLS for an application running in Amazon EKS on Fargate using a customized NGINX Ingress controller installation to deploy [Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=eks-fargate-mtls-nginx-controller) that is provisioned by [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html?sc_channel=el&sc_campaign=devopswave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=eks-fargate-mtls-nginx-controller). To explore more tutorials, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials).
