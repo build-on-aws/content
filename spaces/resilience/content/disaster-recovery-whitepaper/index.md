@@ -11,7 +11,7 @@ showInHomeFeed: true
 images:
   banner: images/dr_strategies.jpg
   hero: images/dr_strategies.jpg
-  thumbnail: images/dr_strategies.jpg
+  thumbnail: images/dr_strategies_thumb.jpg
 spaces:
   - resilience
 ---
