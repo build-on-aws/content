@@ -11,13 +11,13 @@ authorGithubAlias: awslady
 authorName: Shannon Brazil
 date: 2023-11-22
 images:
-  hero: ./images/saferoom-header.webp
-  thumbnail: ./images/saferoom-banner.webp
+  hero: ./images/saferoom-banner.webp
+  thumbnail: ./images/saferoom-logo.webp
   banner: ./images/saferoom-banner.webp
   background: ./images/saferoom-logo.webp
 ---
 
-![image description](images/saferoom-header.webp)
+![Hosts of The Safe Room](images/saferoom-header.webp)
 
 "The Safe Room" is an engaging Twitch series focused on cloud security and incident response in AWS environments. Hosted by Shannon Brazil, Paul Keser, and Hammad Jawaid, the show covers a wide range of topics from AWS tool utilization to real-world case studies. Viewers can expect to gain in-depth knowledge, practical skills, and insights directly from AWS professionals. Whether you're a seasoned security expert or new to cloud computing, "The Safe Room" offers valuable learnings for all.
 
