@@ -1,6 +1,6 @@
 ---
 title: "Installing and Configuring Karpenter on Fargate for Autoscaling in Amazon EKS"
-description: Doing less to improve the efficiency and cost of running workloads
+description: "Doing less to improve the efficiency and cost of running workloads."
 tags:
     - eks-cluster-setup
     - eks
@@ -14,7 +14,7 @@ spaces:
   - kubernetes
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
-date: 2024-01-30
+date: 2024-01-12
 ---
 
 Customers seeking to architect their Kubernetes cluster for best practices maximise on autoscaling which is an important concept in the [AWS well-architected](https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc&wa-guidance-whitepapers.sort-by=item.additionalFields.sortDate&wa-guidance-whitepapers.sort-order=desc) framework. As workloads increases and often times with changing compute capacity requirements, organizations wants to adapt to these changes but with concerns for selecting the resource types and sizes optimized for workload requirements and ultimately avoid unnecessary costs. 
@@ -32,7 +32,7 @@ When you deploy Karpenter in your Kubernetes cluster, it installs the Karpenter 
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devops&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2024-01-30                                                    |
+| ⏰ Last Updated        | 2024-01-12                                                    |
 
 | ToC |
 |-----|
@@ -73,7 +73,7 @@ export AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output te
 export TEMPOUT=$(mktemp)
 ```
 
-1. Copy and paste the content below in your terminal to use CloudFormation to set up the infrastructure needed by the EKS cluster. 
+2. Copy and paste the content below in your terminal to use CloudFormation to set up the infrastructure needed by the EKS cluster. 
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/aws/karpenter-provider-aws/"${KARPENTER_VERSION}"/website/content/en/preview/getting-started/getting-started-with-karpenter/cloudformation.yaml  > $TEMPOUT \
@@ -90,7 +90,7 @@ curl -fsSL https://raw.githubusercontent.com/aws/karpenter-provider-aws/"${KARPE
 Above is a graphical representation of the interrelationship between the resources such as SQS queue, events rules and IAM role that the CloudFormation template will deploy. 
 Now, we're ready to create our Amazon EKS cluster. This process takes several minutes to complete. If you'd like to monitor the status, see the [AWS CloudFormation](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2) console and change the region if you are creating the cluster in a different AWS region.
 
-1. Copy and paste the content below in your terminal to create the Amazon EKS cluster.
+3. Copy and paste the content below in your terminal to create the Amazon EKS cluster.
 
 ```yaml
 eksctl create cluster -f - <<EOF
@@ -129,7 +129,7 @@ fargateProfiles:
 EOF
 ```
 
-1. Verify the cluster creation by executing the commands below in your terminal:
+4. Verify the cluster creation by executing the commands below in your terminal:
 
 ```bash
 export CLUSTER_ENDPOINT="$(aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.endpoint" --output text)"
@@ -148,7 +148,7 @@ helm registry logout public.ecr.aws
 docker logout public.ecr.aws
 ```
 
-1. Proceed to install Karpenter with the command below:
+2. Proceed to install Karpenter with the command below:
 
 ```bash
 helm upgrade --install karpenter oci://public.ecr.aws/karpenter/karpenter --version "${KARPENTER_VERSION}" --namespace "${KARPENTER_NAMESPACE}" --create-namespace \
@@ -245,19 +245,19 @@ This NodePool will create EC2 spot instances as the capacity we need to run subs
 kubectl create deployment app --image=public.ecr.aws/nginx/nginx:latest --replicas=0
 ```
 
-1. Now we are ready to observe how Karpenter autoscale and provision EC2 compute capacity needed by pods. Open a second terminal and run the command below to monitor Karpenter:
+2. Now we are ready to observe how Karpenter autoscale and provision EC2 compute capacity needed by pods. Open a second terminal and run the command below to monitor Karpenter:
 
 ```bash
 kubectl logs -f -n kube-system -l app.kubernetes.io/name=karpenter -c controller
 ```
 
-1. In the previous terminal, run the command below to scale the workload and watch the Karpenter controller logs in the other terminal:
+3. In the previous terminal, run the command below to scale the workload and watch the Karpenter controller logs in the other terminal:
 
 ```bash
 kubectl scale deployment app --replicas 5
 ```
 
-1. The previous command will launch 5 pods that needs to be scheduled on an EC2 worker node(s). Verify Karpenter has launched the pods on EC2 instance worker node:
+4. The previous command will launch 5 pods that needs to be scheduled on an EC2 worker node(s). Verify Karpenter has launched the pods on EC2 instance worker node:
 
 ```bash
 kubectl get pods -o wide
