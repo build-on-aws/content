@@ -13,7 +13,7 @@ images:
   background: images/simple-vtuber-demo-amazon-ivs.gif
 authorGithubAlias: tonyv
 authorName: Tony Vu
-date: 2024-01-15
+date: 2024-01-12
 ---
 
 Have you ever wanted to express yourself in a more imaginative way under the guise of a virtual character? Imagine if you could create or summon a virtual avatar of your liking, have it mimic your body movements on camera, and stream to thousands. In this tutorial, you will learn how to do just that by creating your own VTubing app.
@@ -38,7 +38,7 @@ With that context set, I will walk you through a step by step process of buildin
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/)<br>                                             |
 | 💻 Code Sample      | [GitHub](https://github.com/aws-samples/simple-vtuber-demo-for-amazon-ivs)                                        |
 | 📢 Feedback         | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ? |
-| ⏰ Last Updated     | 2024-01-15                                                                                                        |
+| ⏰ Last Updated     | 2024-01-12                                                                                                        |
 
 | ToC |
 | --- |
