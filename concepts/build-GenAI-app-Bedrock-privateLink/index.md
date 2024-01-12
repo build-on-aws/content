@@ -9,7 +9,7 @@ tags:
   - Security & Compliance
 authorGithubAlias: Xiaoyuao988
 authorName: Xiaoyu Xing
-date: 2023-12-20
+date: 2024-01-12
 ---
 
 Most would likely agree that **Data Privacy** is an important issue that cannot be overlooked when it comes to data analytics and machine learning. **Generative AI** is making waves, but without proper security control, Generative AI tools could be susceptible to data theft. This could lead to unauthorized access or disclosure of sensitive information, potentially leading to privacy violations and possible misuse of both sensitive personal data or intellectual property.
