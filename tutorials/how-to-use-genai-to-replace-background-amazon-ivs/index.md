@@ -6,8 +6,6 @@ tags:
   - aws
   - generative-ai
   - amazon-ivs
-spaces:
-  - generative-ai
 waves:
   - generative-ai
 images:
@@ -17,7 +15,7 @@ images:
   background: images/amazon-ivs-real-time-background-replacement-demo.gif
 authorGithubAlias: tonyv
 authorName: Tony Vu
-date: 2024-01-15
+date: 2024-01-112
 ---
 
 > The duration of the image generation process in the animation above has been shortened to more quickly demonstrate the background replacement effect.
@@ -45,7 +43,7 @@ In this article, we will walk you through a step-by-step process on how to creat
 | 🧩 Prerequisites    | - [AWS Account](https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/getting-started-create-account.html)   |
 | 💻 Code Sample      | [GitHub](https://github.com/aws-samples/amazon-ivs-real-time-background-replacement-demo-for-web)                 |
 | 📢 Feedback         | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ? |
-| ⏰ Last Updated     | 2024-01-15                                                                                                        |
+| ⏰ Last Updated     | 2024-01-12                                                                                                        |
 
 | ToC |
 | --- |
