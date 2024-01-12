@@ -5,8 +5,6 @@ tags:
   - generative-ai
   - bedrock
   - claude
-spaces:
-  - generative-ai
 waves:
   - generative-ai
 images:
