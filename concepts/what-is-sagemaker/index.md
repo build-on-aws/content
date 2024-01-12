@@ -65,7 +65,7 @@ SageMaker Clarify lets you detect bias in models and explains predictions by pro
 
 ### SageMaker Data Wrangler
 
-You can use this feature to quickly prepare and clean data for machine learning without writing any code. you can also use it to combine datasets, transform data, handle missing values, and perform other data preparation and feature engineering tasks to get data ready for training machine learning models.
+You can use this feature to quickly prepare and clean data for machine learning without writing any code. You can also use it to combine datasets, transform data, handle missing values, and perform other data preparation and feature engineering tasks to get data ready for training machine learning models.
 
 ![SageMaker Data Wrangler](images/datawrangler.png)
 
