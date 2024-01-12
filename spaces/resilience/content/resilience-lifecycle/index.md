@@ -8,6 +8,7 @@ date: 2023-10-06
 showInHomeFeed: true
 images:
   banner: images/resilience_lifecycle.jpg
+  thumbnail: images/resilience_lifecycle.jpg
   hero: images/resilience_lifecycle.jpg
 spaces:
   - resilience
