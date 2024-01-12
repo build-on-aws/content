@@ -59,7 +59,7 @@ SageMaker Canvas is a GUI interface that allows you to quickly build, train and 
 
 ### SageMaker Clarify
 
-SageMaker Clarify lets you detect bias in models and explains predictions by providing metrics to identify biases against certain groups in training data and models. you can get individual predictions, which will show you which input features most influenced a specific prediction, which will help in debugging the behaviour of the model.
+SageMaker Clarify lets you detect bias in models and explains predictions by providing metrics to identify biases against certain groups in training data and models. You can get individual predictions, which will show you which input features most influenced a specific prediction, which will help in debugging the behaviour of the model.
 
 ![SageMaker Clarify](images/clarify.png)
 
