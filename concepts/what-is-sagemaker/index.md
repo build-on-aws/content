@@ -43,7 +43,7 @@ SageMaker makes model building easier by providing pre-built containers and algo
 
 SageMaker offers a fully managed machine learning platform to help engineers and data scientists quickly build, train, and deploy high quality models at any scale. You need to specify the compute resources you need like GPU type and number of instances. By using features such as [GPU instances and training compilers](https://aws.amazon.com/sagemaker/faqs), training time and costs can be significantly reduced.
 
-### Deploying models
+### Deploying Models
 
 You can use SageMaker to easily deploy machine learning models for real time or batch predictions. Once your model is trained in SageMaker, it can be deployed to create an endpoint. This endpoint is a REST API that receives prediction requests, runs the request through the deployed model, and returns predictions.
 
