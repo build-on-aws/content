@@ -39,7 +39,7 @@ SageMaker Studio provides an integrated web environment for end-to-end ML workfl
 
 SageMaker makes model building easier by providing pre-built containers and algorithms. You provide an algorithm, training code, and dataset, and train it on the provided infrastructure. In addition SageMaker supports popular frameworks like TensorFlow, PyTorch, and XGBoost. You can also bring your own frameworks using custom containers. This flexibility allows rapid testing of different approaches.
 
-### Training models
+### Training Models
 
 SageMaker offers a fully managed machine learning platform to help engineers and data scientists quickly build, train, and deploy high quality models at any scale. You need to specify the compute resources you need like GPU type and number of instances. By using features such as [GPU instances and training compilers](https://aws.amazon.com/sagemaker/faqs), training time and costs can be significantly reduced.
 
