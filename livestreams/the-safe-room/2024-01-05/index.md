@@ -36,8 +36,13 @@ This episode is an essential watch for AWS users of all levels, offering valuabl
 
 Check out the recordings here:
 
-Full Episode: https://www.twitch.tv/videos/2023830976   
-Tool Demo only: https://www.twitch.tv/videos/2023837692
+Full Episode: 
+
+https://www.twitch.tv/videos/2023830976   
+
+Tool Demo only:
+
+https://www.twitch.tv/videos/2023837692
 
 ## Links from today's episode
 
