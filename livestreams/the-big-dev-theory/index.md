@@ -25,63 +25,61 @@ https://youtu.be/b0FeFtvkHiw
 
 [**Stuart Clark**](https://twitter.com/bigevilbeard), Senior Developer Advocate @ AWS
 
-[**Adrian SanMiguel**](https://twitter.com/ar_sanmiguel), Principal Solutions Architect, Strategic Partner Engagements @ AWS
+[**Shannon Brazil**](https://twitter.com/4n6lady), Incident Responder - Threat Detection & Incident Response  @ AWS
 
 ## Schedule
 
 ### Join us for our upcoming episodes in 2024
 | Season | Episode | Date | Link to Watch | Guest| Title |
 |-|--|--|--|--|-|
-|Season 1 | **Episode 1** | 2024/01/30 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | TBC |
-|Season 1 | **Episode 2** | 2024/02/06 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | TBC |
-|Season 1 | **Episode 3** | 2024/02/12 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | TBC |
+|Season 1 | **Episode 1** | 2024/01/30 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | AI-driven Database optimization: meet EverSQL by Aiven |
+|Season 1 | **Episode 2** | 2024/02/06 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | Serverless data warehousing in realtime with Aiven for clickhouse, Lambda and S3|
+|Season 1 | **Episode 3** | 2024/02/13 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | Aiven | Real-Time Sentiment Analysis Using Apache Kafka and SageMaker Jupyter Notebooks|
 |-|--|--|--|--|-|
-|Season 1 | **Episode 4** | 2024/02/20 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | TBC |
-|Season 1 | **Episode 5** | 2024/02/27 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | TBC |
-|Season 1 | **Episode 6** | 2024/03/05 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | TBC |
+|Season 1 | **Episode 4** | 2024/02/20 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | Designing new architectures for your ML application using Cloudcraft |
+|Season 1 | **Episode 5** | 2024/02/27 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | How to design new architectures with budget in mind using Cloudcraft and Cloud Cost Management |
+|Season 1 | **Episode 6** | 2024/03/05 (11am ET, 8am PT) | [Tune In](https://www.twitch.tv/aws/) | DataDog | Automatically generate real-time diagrams of your entire AWS architecture |
 
 ### Past episodes 2023
-| Season | Episode | Date Shown | Link to Watch | Guest| Link to Show Notes |
+| Season | Episode | Date Shown | Guest| Title| Watch Now / Show Notes |
 |-|--|--|--|--|-|
-|Season 5 | **Episode 5** | 2023/12/19 | [Watch here](https://www.twitch.tv/videos/2008394010) | Auth0 | [Show notes](/livestreams/the-big-dev-theory/2023-12-19) |
-|Season 5 | **Episode 4** | 2023/12/12 | [Watch here](https://www.twitch.tv/videos/2002953612) | Auth0 | [Show notes](/livestreams/the-big-dev-theory/2023-12-12) |
-|Season 5 | **Episode 3** | 2023/12/05 | [Watch here](https://www.twitch.tv/videos/1996626561) | Auth0 | [Show notes](/livestreams/the-big-dev-theory/2023-12-05) |
-|Season 5 | **Episode 2** | 2023/11/21 | [Watch here](https://www.twitch.tv/aws/) | Mendix | [Show notes](/livestreams/the-big-dev-theory/2023-11-21) |
-|Season 5 | **Episode 1** | 2023/11/14 | [Watch here](https://www.twitch.tv/aws/) | Mendix | [Show notes](/livestreams/the-big-dev-theory/2023-11-14) |
+|Season 5 | **Episode 5** | 2023/12/19 | Auth0 | Secure your AWS AppSync GraphQL APIs with Auth0 by Okta | [Show notes](/livestreams/the-big-dev-theory/2023-12-19) |
+|Season 5 | **Episode 4** | 2023/12/12 | Auth0 | Building a secure B2B Application using Auth0 by Okta | [Show notes](/livestreams/the-big-dev-theory/2023-12-12) |
+|Season 5 | **Episode 3** | 2023/12/05 | Auth0 | Building a secure B2C Application using Auth0 by Okta | [Show notes](/livestreams/the-big-dev-theory/2023-12-05) |
+|Season 5 | **Episode 2** | 2023/11/21| Mendix | Build your own AWS smart AI connector, using the AWS Java SDK. | [Show notes](/livestreams/the-big-dev-theory/2023-11-21) |
+|Season 5 | **Episode 1** | 2023/11/14| Mendix | Learn how to incorporate AWS into your Mendix Development | [Show notes](/livestreams/the-big-dev-theory/2023-11-14) |
 |-|--|--|--|--|-|
-|Season 4 | **Episode 5** | 2023/11/07 | [Watch here](https://www.twitch.tv/videos/1971158252)| Rootly | [Show notes](/livestreams/the-big-dev-theory/2023-11-07) |
+|Season 4 | **Episode 5** | 2023/11/07 | Rootly | Rootly is Improving the On-call Experience for Developers | [Show notes](/livestreams/the-big-dev-theory/2023-11-07) |
+|Season 4 | **Episode 4** | 2023/10/24 | Canva | The Evolution of AI and ML at Canva | [Show notes](/livestreams/the-big-dev-theory/2023-10-24) |
+|Season 4 | **Episode 3** | 2023/10/17 | Grafana Labs | Grafana Cloud: Simplifying AWS Observability | [Show notes](/livestreams/the-big-dev-theory/2023-10-17) |
+|Season 4 | **Episode 1** | 2023/10/03 | Grafana Labs | Exploring Grafana's Observability Beyond Visualization | [Show notes](/livestreams/the-big-dev-theory/2023-10-03) |
 |-|--|--|--|--|-|
-|Season 4 | **Episode 4** | 2023/10/24 | [Watch here](https://www.twitch.tv/videos/1959817612) | Canva | [Show notes](/livestreams/the-big-dev-theory/2023-10-24) |
+|Season 3 | **Episode 9** | 2023/09/26 | JIT | Protecting a modern app (PT2) From AWS deployment to cloud-native vigilance | [Show notes](/livestreams/the-big-dev-theory/2023-09-26) |
+|Season 3 | **Episode 8** | 2023/09/19 | JIT | Protecting a modern app (PT1) Elevating security by integrating in your CI/CD |[Show notes](/livestreams/the-big-dev-theory/2023-09-19) |
+|Season 3 | **Episode 7** | 2023/09/12 | JIT | From Startup Security to AWS Success: Navigating the DevSecOps Journey |[Show notes](/livestreams/the-big-dev-theory/2023-09-12) |
+|Season 3 | **Episode 6** | 2023/09/05 | LoginID | LoginID ID Verification button with FIDO-Passkeys strong authentication | [Show notes](/livestreams/the-big-dev-theory/2023-09-05) |
+|Season 3 | **Episode 5** | 2023/08/29 | LoginID | LoginID FIDO-Passkeys strong authentication - Build on top of Cognito | [Show notes](/livestreams/the-big-dev-theory/2023-08-29) |
+|Season 3 | **Episode 4** | 2023/08/22 | LoginID | LoginID FIDO-Passkeys strong authentication - Simple SDKs/APIs |[Show notes](/livestreams/the-big-dev-theory/2023-08-22) |
+|Season 3 | **Episode 3** | 2023/08/15 | MongoDB | Why it Matters? Modeling Documents with MongoDB | [Show notes](/livestreams/the-big-dev-theory/2023-08-15) |
+|Season 3 | **Episode 2** | 2023/08/08 | MongoDB | Fraud Detection with MongoDB Atlas and Amazon SageMaker Canvas | [Show notes](/livestreams/the-big-dev-theory/2023-08-08) |
+|Season 3 | **Episode 1** | 2023/08/01 | MongoDB | Live Building the MongoDB Leafsteroids Game Demo | [Show notes](/livestreams/the-big-dev-theory/2023-08-01) |
 |-|--|--|--|--|-|
-|Season 4 | **Episode 3** | 2023/10/17 | [Watch here](https://www.twitch.tv/videos/1953959698) | Grafana Labs |[Show notes](/livestreams/the-big-dev-theory/2023-10-17) |
-|Season 4 | **Episode 1** | 2023/10/03 | [Watch here](https://www.twitch.tv/videos/1942293847) | Grafana Labs |[Show notes](/livestreams/the-big-dev-theory/2023-10-03) |
+|Season 2 | **Episode 9** | 2023/07/25 | JetBrains | Building a CI/CD pipeline for a Unity game in TeamCity on AWS | [Show notes](/livestreams/the-big-dev-theory/2023-07-25) |
+|Season 2 | **Episode 8** | 2023/07/18 | JetBrains | AWS for .NET with JetBrains Rider | [Show notes](/livestreams/the-big-dev-theory/2023-07-18) |
+|Season 2 | **Episode 7** | 2023/07/11 | JetBrains | Java and Kotlin on AWS with IntelliJ IDEA | [Show notes](/livestreams/the-big-dev-theory/2023-07-11) |
+|Season 2 | **Episode 6** | 2023/05/16 | Stacktape | AWS using Stacktape - backend services) | [Show notes](/livestreams/the-big-dev-theory/2023-05-16) |
+|Season 2 | **Episode 5** | 2023/06/06 | Stacktape | AWS using Stacktape - frontend services) | [Show notes](/livestreams/the-big-dev-theory/2023-06-06) |
+|Season 2 | **Episode 4** | 2023/06/20 | Stacktape | AWS using Stacktape - securing the application) | [Show notes](/livestreams/the-big-dev-theory/2023-06-20) |
+|Season 2 | **Episode 3** | 2023/05/02 | Snowflake | Forecasting with Snowflake and Facebook Prophet using Snowpark for Python | [Show notes](/livestreams/the-big-dev-theory/2023-05-02) |
+|Season 2 | **Episode 2** | 2023/04/18 | Snowflake | Image recognition using Python, PyTorch, OpenAI and Streamlit in Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-04-18) |
+|Season 2 | **Episode 1** | 2023/04/11 | Snowflake | Getting started with Python in Snowflake with SageMaker Studio | [Show notes](/livestreams/the-big-dev-theory/2023-04-11) |
 |-|--|--|--|--|-|
-|Season 3 | **Episode 9** | 2023/09/26 | [Watch here](https://www.twitch.tv/videos/1935703774) | JIT | [Show notes](/livestreams/the-big-dev-theory/2023-09-26) |
-|Season 3 | **Episode 8** | 2023/09/19 | [Watch here](https://www.twitch.tv/videos/1930313107) | JIT | [Show notes](/livestreams/the-big-dev-theory/2023-09-19) |
-|Season 3 | **Episode 7** | 2023/09/12 | [Watch here](https://www.twitch.tv/videos/1923687049) | JIT | [Show notes](/livestreams/the-big-dev-theory/2023-09-12) |
-|Season 3 | **Episode 6** | 2023/09/05 | [Watch here](https://www.twitch.tv/videos/1918449852) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-09-05) |
-|Season 3 | **Episode 5** | 2023/08/29 | [Watch here](https://www.twitch.tv/videos/1911734242) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-08-29) |
-|Season 3 | **Episode 4** | 2023/08/22 | [Watch here](https://www.twitch.tv/videos/1906303935) | LoginID | [Show notes](/livestreams/the-big-dev-theory/2023-08-22) |
-|Season 3 | **Episode 3** | 2023/08/15 | [Watch here](https://www.twitch.tv/videos/1900160060) | MongoDB | [Show notes](/livestreams/the-big-dev-theory/2023-08-15) |
-|Season 3 | **Episode 2** | 2023/08/08 | [Watch here](https://www.twitch.tv/videos/1896908029) | MongoDB | [Show notes](/livestreams/the-big-dev-theory/2023-08-08) |
-|Season 3 | **Episode 1** | 2023/08/01 | [Watch here](https://www.twitch.tv/videos/1887392666) | MongoDB | [Show notes](/livestreams/the-big-dev-theory/2023-08-01) |
-|-|--|--|--|--|-|
-|Season 2 | **Episode 9** | 2023/07/25 | [Watch here](https://www.twitch.tv/videos/1882050229) | JetBrains | [Show notes](/livestreams/the-big-dev-theory/2023-07-25) |
-|Season 2 | **Episode 8** | 2023/07/18 | [Watch here](https://www.twitch.tv/videos/1875882155) | JetBrains | [Show notes](/livestreams/the-big-dev-theory/2023-07-18) |
-|Season 2 | **Episode 7** | 2023/07/11 | [Watch here](https://www.twitch.tv/videos/1869833405) | JetBrains | [Show notes](/livestreams/the-big-dev-theory/2023-07-11) |
-|Season 2 | **Episode 6** | 2023/05/16 | [Watch here](https://www.twitch.tv/videos/1821487954) | Stacktape | [Show notes](/livestreams/the-big-dev-theory/2023-05-16) |
-|Season 2 | **Episode 5** | 2023/06/06 | [Watch here](https://www.twitch.tv/videos/1839973932) | Stacktape | [Show notes](/livestreams/the-big-dev-theory/2023-06-06) |
-|Season 2 | **Episode 4** | 2023/06/20 | [Watch here](https://www.twitch.tv/videos/1851832780) | Stacktape | [Show notes](/livestreams/the-big-dev-theory/2023-06-20) |
-|Season 2 | **Episode 3** | 2023/05/02 | [Watch here](https://www.twitch.tv/videos/1810223487) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-05-02) |
-|Season 2 | **Episode 2** | 2023/04/18 | [Watch here](https://www.twitch.tv/videos/1797793882) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-04-18) |
-|Season 2 | **Episode 1** | 2023/04/11 | [Watch here](https://www.twitch.tv/videos/1791544011) | Snowflake | [Show notes](/livestreams/the-big-dev-theory/2023-04-11) |
-|-|--|--|--|--|-|
-|Season 1 | **Episode 9** | 2023/03/21 | [Watch here](https://www.twitch.tv/videos/1777973888) | Datadog | [Show notes](/livestreams/the-big-dev-theory/2023-03-21) |
-|Season 1 | **Episode 8** | 2023/03/14 | [Watch here](https://www.twitch.tv/videos/1777964452) | Datadog | [Show notes](/livestreams/the-big-dev-theory/2023-03-14) |
-|Season 1 | **Episode 7** | 2023/03/07 | [Watch here](https://www.twitch.tv/videos/1777977174) | Datadog | [Show notes](/livestreams/the-big-dev-theory/2023-03-07) |
-|Season 1 | **Episode 6** | 2023/02/21 | [Watch here](https://www.twitch.tv/videos/1777986027) | Vercel | [Show notes](/livestreams/the-big-dev-theory/2023-02-21) |
-|Season 1 | **Episode 5** | 2023/02/14 | [Watch here](https://www.twitch.tv/videos/1777992194) | Vercel | [Show notes](/livestreams/the-big-dev-theory/2023-02-14) |
-|Season 1 | **Episode 4** | 2023/02/07 | [Watch here](https://www.twitch.tv/videos/1777989080) | Vercel | [Show notes](/livestreams/the-big-dev-theory/2023-02-07) |
-|Season 1 | **Episode 3** | 2023/01/24 | [Watch here](https://www.twitch.tv/videos/1778034293) | Cycode | [Show notes](/livestreams/the-big-dev-theory/2023-01-24) |
-|Season 1 | **Episode 2** | 2023/01/17 | [Watch here](https://www.twitch.tv/videos/1778034229) | Cycode | [Show notes](/livestreams/the-big-dev-theory/2023-01-17) |
-|Season 1 | **Episode 1** | 2023/01/10 | [Watch here](https://www.twitch.tv/videos/1778017615) | Cycode | [Show notes](/livestreams/the-big-dev-theory/2023-01-10) |
+|Season 1 | **Episode 9** | 2023/03/21 | Datadog | Event-Driven Automation: Proactive Monitoring and Datadog Workflows |[Show notes](/livestreams/the-big-dev-theory/2023-03-21) |
+|Season 1 | **Episode 8** | 2023/03/14 | Datadog | Datadog Serverless: An Introduction to Serverless Applications & Monitoring | [Show notes](/livestreams/the-big-dev-theory/2023-03-14) |
+|Season 1 | **Episode 7** | 2023/03/07 | Datadog | Unlock the Power of Observability with Datadog and AWS |[Show notes](/livestreams/the-big-dev-theory/2023-03-07) |
+|Season 1 | **Episode 6** | 2023/02/21 | Vercel | A Deep Dive into Vercel + AWS |[Show notes](/livestreams/the-big-dev-theory/2023-02-21) |
+|Season 1 | **Episode 5** | 2023/02/14 | Vercel | Let's get hands on with Next.js 13! |[Show notes](/livestreams/the-big-dev-theory/2023-02-14) |
+|Season 1 | **Episode 4** | 2023/02/07 | Vercel | Back to the Basics: An Intro to Vercel, React, and Next.js |[Show notes](/livestreams/the-big-dev-theory/2023-02-07) |
+|Season 1 | **Episode 3** | 2023/01/24 | Cycode | Learning from Log4j incident |[Show notes](/livestreams/the-big-dev-theory/2023-01-24) |
+|Season 1 | **Episode 2** | 2023/01/17 | Cycode | Got Security Risks? | [Show notes](/livestreams/the-big-dev-theory/2023-01-17) |
+|Season 1 | **Episode 1** | 2023/01/10 | Cycode | Implementing modern CI/CD pipeline using Github and AWS |[Show notes](/livestreams/the-big-dev-theory/2023-01-10) |
