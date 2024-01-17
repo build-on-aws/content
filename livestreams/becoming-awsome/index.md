@@ -49,10 +49,9 @@ Come learn live with us as we meet incredible HUMANS at AWS for the first time a
 
 ### Episodes
 
-| Episode | Name | Date | Link to Show Notes
-|--|--|--|--|
+| Episode | Guest | Title | Date | Link to Video
+|--|--|--|--|--|
+| S04E03 | Alioune Thiam | Sr. Systems Development Engineer & BR | 2024-01-16| [Link to show notes](/livestreams/becoming-awsome/2024-01-16) |
+| S04E02 | Laura Watts  | Principal CSM & BR  | 2024-01-09 | [Link to show notes](/livestreams/becoming-awsome/2024-01-09) |
+| S03E29 | Sara Kleiman | Sr. Program Manager & BR  | 2023-12-19 | [Link to show notes](/livestreams/becoming-awsome/2023-12-19) |
 
-
-| S04E03 | Becoming AWSome Featuring Alioune Thiam | 2024-01-16  | [Link to show notes](livestreams/becoming-awsome/2024-01-16)
-| S04E02 | Becoming AWSome Featuring Laura Watts | 2024-01-09  | [Link to show notes](livestreams/becoming-awsome/2024-01-09)
-| S03E23 | Becoming AWSome Featuring Sara Kleiman | 2023-12-19  | [Link to show notes](livestreams/becoming-awsome/2023-12-19)
