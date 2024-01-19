@@ -7,14 +7,13 @@ tags:
     - kubernetes
     - tutorials
     - aws
-showInHomeFeed: true
 waves:
   - devops
 spaces:
   - kubernetes
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
-date: 2024-01-12
+date: 2024-01-19
 ---
 
 The flexibility of the cloud helps organizations to scale as quickly as possible while generating immense application traffic. But preventing “man-in-the-middle attacks” or other forms of cyber-attacks becomes a necessity for these businesses - even as they build solutions such as Microservice architectures, Business-to-business (B2B) APIs, User Authentications, Content Delivery, Internet of Things (IoT) sensors and many more. Mutual Transport Layer Security (mTLS) helps them to improve the security of their applications - or to comply with industry standards or a specific compliance requirement - by ensuring that the integrity of the parties at each end of a network connection are proven to each other. In microservice architectures, a service mesh is predominantly used to provide the infrastructure you need to safely implement mTLS between services. Configuring a service mesh introduces more components and complexity, such as sidecar proxies, control plane components, and the need to manage configurations and policies.
@@ -40,7 +39,7 @@ Some limitations to keep in mind:
 | ⏱ Time to complete     | 30 minutes                                                      |
 | 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devops&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2024-01-12                                                    |
+| ⏰ Last Updated        | 2024-01-19                                                    |
 
 | ToC |
 |-----|
@@ -79,7 +78,7 @@ In this section, you will configure the Amazon EKS cluster with only [Fargate Pr
 Retrieve the VPC automatically created for the cluster and substitute values below with your own:
 
 ```bash
-export AWS_DEFAULT_REGION*=*"us-east-2"
+export AWS_DEFAULT_REGION="us-east-2"
 export vpcid=$(aws eks describe-cluster --name fg-security-quickstart --query 'cluster.resourcesVpcConfig.vpcId' --output text)
 export mycluster=fg-security-quickstart
 export region="us-east-2"
@@ -111,7 +110,7 @@ Privileged containers aren't supported on Fargate. The default NGINX Ingress con
 curl -O https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/aws/deploy.yaml
 ```
 
-2. Edit the downloaded deploy.yaml file to make the following changes:
+2. Edit the downloaded `deploy.yaml`` file to make the following changes:
 
 Locate the line text below and change the loadbalancer type to `nlb-ip` as shown below:
 
@@ -283,7 +282,7 @@ ROOT_CA_CSR=`aws acm-pca get-certificate-authority-csr \
     --query Csr --output text`
 ```
 
-3. Issue the root certificate with the csr file from the previous step. Note that if you are using AWS CLI version 2, you will need to pass the CSR data through encoding prior to invoking the 'issue-certificate' command.
+3. Issue the root certificate with the csr file from the previous step. Note that if you are using AWS CLI version 2, you will need to pass the CSR data through encoding prior to invoking the `issue-certificate` command.
 
 ```bash
 AWS_CLI_VERSION=$(aws --version 2>&1 | cut -d/ -f2 | cut -d. -f1)
@@ -334,14 +333,14 @@ echo $ROOT_CA_ARN
 ## Step 4: Install AWS-PCA-ISSUER
 
 The [AWS PrivateCA Issuer plugin](https://github.com/cert-manager/aws-privateca-issuer) acts as an addon to cert-manager that signs certificate requests using ACM Private CA.
-Define your environment variable:
+Define your environment variables:
 
 ```bash
 export ROOT_CA_ARN="YOUR_PRIVATE_CA_ARN"
 export SERVICES_DOMAIN="example.com"
 ```
 
-Remember to replace YOUR_PRIVATE_CA_ARN and [example.com](http://example.com/) with your own values.
+Remember to replace `YOUR_PRIVATE_CA_ARN` and [example.com](http://example.com/) with your own values.
 The AWS PCA Issuer plugin works as an addon to the cert-manager that signs off certificate requests using AWS Certificate Manager Private Certificate Authority. 
 
 1. Copy and paste the command below in your terminal to create a `pca-iam-policy.json` file:
@@ -366,7 +365,7 @@ cat << EOF > pca-iam-policy.json
 EOF
 ```
 
-2. Create and IAM policy called AWSPCAIssuerIAMPolicy with the command below:
+2. Create and IAM policy called `AWSPCAIssuerIAMPolicy` with the command below:
 
 ```bash
 aws iam create-policy --policy-name AWSPCAIssuerIAMPolicy --policy-document file://pca-iam-policy.json
@@ -390,7 +389,7 @@ eksctl create iamserviceaccount \
 --region us-east-2
 ```
 
-Replace the IAM_POLICY_ARN with the ARN value retrieved previously.
+Replace the `IAM_POLICY_ARN` with the ARN value retrieved previously.
 
 4. Add the AWS PCA Issuer Helm repository and run the helm install command:
 
