@@ -14,10 +14,10 @@ spaces:
   - kubernetes
 authorGithubAlias: berry2012
 authorName: Olawale Olaleye
-date: 2024-01-12
+date: 2024-01-19
 ---
 
-Customers seeking to architect their Kubernetes cluster for best practices maximise on autoscaling which is an important concept in the [AWS well-architected](https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc&wa-guidance-whitepapers.sort-by=item.additionalFields.sortDate&wa-guidance-whitepapers.sort-order=desc) framework. As workloads increases and often times with changing compute capacity requirements, organizations wants to adapt to these changes but with concerns for selecting the resource types and sizes optimized for workload requirements and ultimately avoid unnecessary costs. 
+Customers seeking to architect their Kubernetes cluster for best practices maximise on autoscaling which is an important concept in the [AWS well-architected](https://aws.amazon.com/architecture/well-architected/?wa-lens-whitepapers.sort-by=item.additionalFields.sortDate&wa-lens-whitepapers.sort-order=desc&wa-guidance-whitepapers.sort-by=item.additionalFields.sortDate&wa-guidance-whitepapers.sort-order=desc&sc_channel=el&sc_campaign=devops&sc_content=eks-karpenter-fargate&sc_geo=mult&sc_country=mult&sc_outcome=acq) framework. As workloads increases and often times with changing compute capacity requirements, organizations wants to adapt to these changes but with concerns for selecting the resource types and sizes optimized for workload requirements and ultimately avoid unnecessary costs. 
 
 Karpenter is an open-source cluster autoscaler that automatically provisions new nodes in response to unschedulable pods in Kubernetes cluster. With Karpenter, you don’t need to create several node groups to achieve flexibility and diversity if you want to isolate nodes based on operating systems or compute type. For example, you may have a cluster that consist of GPU, CPU and Habana Gaudi accelerators instance types, to achieve this without Karpenter, you will need to create dedicated node groups for each instance type and use [nodeSelectors](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) to achieve node selection constraint. 
 
@@ -30,9 +30,9 @@ When you deploy Karpenter in your Kubernetes cluster, it installs the Karpenter 
 |------------------------|-----------------------------------------------------------------|
 | ✅ AWS experience      | 200 - Intermediate                                              |
 | ⏱ Time to complete     | 30 minutes                                                      |
-| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devops&sc_content=eks-monitor-containerized-applications&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
+| 🧩 Prerequisites       | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devops&sc_content=eks-karpenter-fargate&sc_geo=mult&sc_country=mult&sc_outcome=acq)|
 | 📢 Feedback            | <a href="https://www.pulse.aws/survey/Z8XBGQEL" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2024-01-12                                                    |
+| ⏰ Last Updated        | 2024-01-19                                                    |
 
 | ToC |
 |-----|
@@ -49,8 +49,8 @@ Before you begin this tutorial, you need to:
 
 Using the `eksctl` cluster template that follows, you'll build an Amazon EKS cluster with Fargate profile to provide the compute capacity we need to run the core clusters components in the karpenter and kube-system namespaces. It configures the following components:
 
-* **Fargate Profile:** [AWS Fargate](https://aws.amazon.com/fargate/) is a compute engine for EKS that removes the need to configure, manage, and scale EC2 instances. Fargate ensures Availability Zone spread while removing the complexity of managing EC2 infrastructure and works to ensure that pods in a Replica Service are balanced across Availability Zones. 
-* **Authentication:** Necessary IAM Roles for Service Accounts (IRSAs) mappings to enable communication between Kubernetes pods and AWS services. This includes the Karpenter Controller responsible for provisioning EC2 compute capacity needed in the cluster. Additionally, an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=appswave&sc_content=eks-cluster-high-traffic&sc_geo=mult&sc_country=mult&sc_outcome=acq) enables seamless and secure communication.
+* **Fargate Profile:** [AWS Fargate](https://aws.amazon.com/fargate/?sc_channel=el&sc_campaign=devops&sc_content=eks-karpenter-fargate&sc_geo=mult&sc_country=mult&sc_outcome=acq) is a compute engine for EKS that removes the need to configure, manage, and scale EC2 instances. Fargate ensures Availability Zone spread while removing the complexity of managing EC2 infrastructure and works to ensure that pods in a Replica Service are balanced across Availability Zones. 
+* **Authentication:** Necessary IAM Roles for Service Accounts (IRSAs) mappings to enable communication between Kubernetes pods and AWS services. This includes the Karpenter Controller responsible for provisioning EC2 compute capacity needed in the cluster. Additionally, an [OpenID Connect (OIDC) endpoint](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html?sc_channel=el&sc_campaign=devops&sc_content=eks-karpenter-fargate&sc_geo=mult&sc_country=mult&sc_outcome=acq) enables seamless and secure communication.
 * **Identity Mappings**: Necessary mapping for the Karpenter IAM principal and the required cluster's role-based access control (RBAC) configuration in the Amazon EKS control plane.
 * **Sample Application Deployment:** Create a sample deployment to validate that Karpenter autoscales compute capacity needed as pod counts increase.
 
@@ -311,4 +311,4 @@ Upon completion, you should see the following response output:
 
 ## Conclusion
 
-In this article, you've successfully set up an Amazon EKS cluster with Karpenter deployed on Fargate to autoscale the cluster with the needed EC2 compute capacity as your workload increases. With Fargate providing compute capacity for the Karpenter pods, you will not need to manage that node. Karpenter manages the lifecycle of the other nodes in the EKS cluster. To explore more tutorials, check out [Navigating Amazon EKS](https://community.aws/tutorials/navigating-amazon-eks#list-of-all-tutorials).
+In this article, you've successfully set up an Amazon EKS cluster with Karpenter deployed on Fargate to autoscale the cluster with the needed EC2 compute capacity as your workload increases. With Fargate providing compute capacity for the Karpenter pods, you will not need to manage that node. Karpenter manages the lifecycle of the other nodes in the EKS cluster. To explore more tutorials, check out [Navigating Amazon EKS](/tutorials/navigating-amazon-eks#list-of-all-tutorials).
