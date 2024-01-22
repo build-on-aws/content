@@ -22,7 +22,7 @@ In this episode of Lets Talk About Data we discuss about Amazon Security Lake an
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1959956395
+https://www.twitch.tv/videos/1971031389
 
 
 ## Hosts of the show 🎤

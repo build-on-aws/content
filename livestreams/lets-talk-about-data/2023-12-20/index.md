@@ -22,7 +22,7 @@ In this episode of Lets Talk About Data we discuss about Vector databases and em
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/2010811840?collection=BEUpZw5lUxeLJA&filter=collections&sort=time
+https://www.twitch.tv/videos/2010811840
 
 
 ## Hosts of the show 🎤

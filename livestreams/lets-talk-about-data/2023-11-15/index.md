@@ -22,7 +22,7 @@ In this show we discuss about Data monetisation strategies and how organisations
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1983392065?collection=BEUpZw5lUxeLJA&filter=collections&sort=time
+https://www.twitch.tv/videos/1983392065
 
 
 ## Hosts of the show 🎤

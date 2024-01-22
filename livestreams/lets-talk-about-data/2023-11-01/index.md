@@ -22,7 +22,7 @@ In this show we discuss about Amazon Aurora, Redshift and Quicksight and how org
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1971030897?collection=BEUpZw5lUxeLJA&filter=collections&sort=time
+https://www.twitch.tv/videos/1971030897
 
 
 ## Hosts of the show 🎤

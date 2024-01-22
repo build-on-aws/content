@@ -22,7 +22,7 @@ In this episode of Lets Talk About Data we discuss how to consolidate your RDS O
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1985940707?collection=BEUpZw5lUxeLJA&filter=collections&sort=time
+https://www.twitch.tv/videos/1985940707
 
 
 ## Hosts of the show 🎤

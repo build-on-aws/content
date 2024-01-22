@@ -22,7 +22,7 @@ In this episode of Lets Talk About Data we discuss about latest announcement fro
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1996783596?collection=BEUpZw5lUxeLJA&filter=collections&sort=time
+https://www.twitch.tv/videos/1996748024
 
 ## Hosts of the show 🎤
 
