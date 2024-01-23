@@ -14,6 +14,10 @@ posts:
     - eks-monitor-containerized-applications
     - automating-dns-records-for-microservices-using-externaldns
     - eks-integrate-secrets-manager
+    - eks-fargate-mtls-nginx-controller
+    - eks-karpenter-fargate
+    - eks-cluster-financial-workload
+    - eks-cluster-windows-fargate
 
 --- 
 |ToC|
@@ -51,6 +55,9 @@ The following tutorials are included in this stage:
 * [Building an IPv6-based EKS Cluster for Globally Scalable Applications](/tutorials/navigating-amazon-eks/eks-cluster-ipv6-globally-scalable)
 * [Building an Amazon EKS Cluster Preconfigured to Run Asynchronous Batch Tasks](/tutorials/navigating-amazon-eks/eks-cluster-batch-processing)
 * [Building an Amazon EKS Cluster Preconfigured to Run High Traffic Microservices](/tutorials/navigating-amazon-eks/eks-cluster-high-traffic)
+* [Installing and Configuring Karpenter on Fargate for Autoscaling in Amazon EKS](/tutorials/navigating-amazon-eks/eks-karpenter-fargate)
+* [Building an Amazon EKS Cluster Preconfigured to Run Financial Workloads](/tutorials/navigating-amazon-eks/eks-cluster-financial-workload)
+* [Deploying Amazon EKS Windows Managed Node Groups and Fargate Nodes](/tutorials/navigating-amazon-eks/eks-cluster-windows-fargate)
 
 ### Stage 2: Enhance and Extend Cluster Capabilities
 
@@ -73,6 +80,8 @@ The following tutorials are included in this stage:
 * [Easily Monitor Containerized Applications with Amazon CloudWatch Container Insights](/tutorials/navigating-amazon-eks/eks-monitor-containerized-applications)
 * [Managing Asynchronous Tasks with SQS and EFS Persistent Storage in Amazon EKS](/tutorials/navigating-amazon-eks/managing-high-volume-batch-sqs-eks)
 * [Easily Consume AWS Secrets Manager Secrets from your Amazon EKS Workloads](/tutorials/navigating-amazon-eks/eks-integrate-secrets-manager)
+* [mTLS in Amazon EKS Fargate with NGINX Ingress Controller and ACM PCA](/tutorials/navigating-amazon-eks/eks-fargate-mtls-nginx-controller)
+
 
 ## List of all Tutorials
 
