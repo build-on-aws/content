@@ -19,7 +19,7 @@ images:
   background: images/overview-01.gif
 authorGithubAlias: viktoriasemaan
 authorName: Viktoria Semaan
-date: 2023-08-11
+date: 2023-07-24
 ---
 
 When was the last time you watched a YouTube video to learn something new? According to a [recent survey](https://www.techsmith.com/blog/video-statistics/) most respondents view videos 2-to-4 times per week, and [in a 2019 Google study](https://www.thinkwithgoogle.com/marketing-strategies/video/youtube-learning-statistics/), 86% of U.S. viewers said they used YouTube to learn new things.
@@ -43,7 +43,7 @@ You will be able to apply these steps to other use cases by selecting different 
 | 💰 Cost to complete | Free when using the OpenAI API credit or less than $0.10      |
 | 🧩 Prerequisites    | - [Amazon SageMaker Studio Lab Account](https://studiolab.sagemaker.aws?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=build-ai-with-hf-chatgpt) <br>-  [Foundational knowledge of Python](https://catalog.us-east-1.prod.workshops.aws/workshops/3d705026-9edc-40e8-b353-bdabb116c89c/)    |                           |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated     | 2023-07-22                             |
+| ⏰ Last Updated     | 2023-07-24                             |
 
 | ToC |
 |-----|

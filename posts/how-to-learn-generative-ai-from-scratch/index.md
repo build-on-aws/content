@@ -12,7 +12,7 @@ waves:
     - generative-ai
 authorGithubAlias: brookejamieson
 authorName: Brooke Jamieson
-date: 2023-10-06
+date: 2023-10-03
 images:
   banner: images/how-to-learn-genai-from-scratch.webp
   hero: images/how-to-learn-genai-from-scratch.webp
