@@ -105,7 +105,7 @@ When the agent finishes assembling the response, they respond to Whatapp through
 
 3- [Get started with the Messenger API for Instagram](https://www.youtube.com/watch?v=Pi2KxYeGMXo&list=PLX_K_BlBdZKi4GOFmJ9_67og7pMzm2vXH&index=5&t=376s&pp=gAQBiAQB)
 
-## Step 1: Previous Configuration
+### Step 1: Previous Configuration
 
 ✅ **Clone the repo**
 
@@ -155,7 +155,7 @@ This agent maintains the history of the conversation, which is stored in the `se
 if diferencia > 300:  #session time in seg
 `
 
-## Step 2: Deploy The App With CDK.
+### Step 2: Deploy The App With CDK.
 
 Follow steps [here](/customer-support-bot/README.md)
 
@@ -187,13 +187,13 @@ This stack automatically creates an Amazon Kendra Index with the data source tha
 ![Amazon Kendra Data Sources](images/Kendra_datasources.jpg "Fig 7. Amazon Kendra Data Sources")
 
 
-## Step 3: Activate WhatsApp Messaging In The App
+### Step 3: Activate WhatsApp Messaging In The App
 
 Go to AWS Secrets Manager and edit the WhatsApp settings and replace them with Facebook Developer settings.
 
 ![Digrama parte 1](images/secret.png "Fig 8. Activate WhatsApp Messaging In The App")
 
-## Step 4: Configure Webhook In Facebook Developer Application
+### Step 4: Configure Webhook In Facebook Developer Application
 
 
 ![Digrama parte 1](images/webhook.png "Fig 9. Configure Webhook In Facebook Developer Application")
