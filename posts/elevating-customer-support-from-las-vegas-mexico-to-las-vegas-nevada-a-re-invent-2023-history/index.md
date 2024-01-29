@@ -24,7 +24,7 @@ date: 2024-01-29
 |ToC|
 |---|
 
-What was an exciting trip to Las Vegas for a presentation as speaker on re:Invent 2023 turned into an unexpected journey to an unknown destination. A booking mishap resulted in the speaker gaining an airline ticket to Las Vegas, New Mexico instead of the well-known Las Vegas. This hilarious error set the stage for investigating how advanced technologies like AI and RAG can revolutionize traditional support channel models, turning a complicated ticket change into a quick solution through fluid conversation.
+What was an exciting trip to Las Vegas for a presentation as speaker on re:Invent 2023 turned into an unexpected journey to an unknown destination. A booking mishap resulted in the speaker gaining an airline ticket to Las Vegas, New Mexico instead of the well-known Las Vegas. This hilarious error set the stage for investigating how advanced technologies like generative AI and [Retrieval Augmented Generation(RAG)](https://aws.amazon.com/what-is/retrieval-augmented-generation/) can revolutionize traditional support channel models, turning a complicated ticket change into a quick solution through fluid conversation.
 
 This blog will guide you through building a Whatsapp Travel Assistant Application that uses an LLM assistant. It can understand and communicate in multiple languages, both written and spoken, with the goal of providing self-service assistance through natural conversations and remembering previous interactions to solve [common travel issues](https://github.com/build-on-aws/elevating-customer-support-with-rag-langchain-agent-bedrock-dynamodb-and-kendra/blob/main/customer-support-bot/airline-qa-base). Capable of checking the status of passenger flights, as well as the data related to their trip, using your reservation number or passenger identification. 
 
@@ -79,11 +79,11 @@ The transcribe_done Lambda Function is triggered once the Transcribe Job is comp
 
 Here we explain the heart ❤️  and brain 🧠 of the Travel Assistant.
 
-The Travel Assistant is managed by a [Langchain Agent](https://python.langchain.com/docs/modules/agents/), a framework for developing LLM applications, who uses the [Amazon Bedrock](https://aws.amazon.com/bedrock/) API to understand and respond through natural language by invoking a [foundational models](https://community.aws/posts/how-to-choose-your-llm). This travel assistant employs [Anthropic Claude](https://aws.amazon.com/bedrock/claude/), from which the assistant gains multilingual capabilities. 
+The Travel Assistant is managed by a [Langchain Agent](https://python.langchain.com/docs/modules/agents/), a framework for developing LLM applications, who uses the [Amazon Bedrock](https://aws.amazon.com/bedrock/) API to understand and respond through natural language by invoking a [foundational models](https://community.aws/posts/how-to-choose-your-llm). This Travel Assistant employs [Anthropic Claude](https://aws.amazon.com/bedrock/claude/), from which the assistant gains multilingual capabilities. 
 
 By using [Retrieval Augmented Generation (RAG)](https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-customize-rag.html), the assistant can extract passenger details from an [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) table and answer questions about how to resolve specific cases to a knowledge base in [Amazon Kendra](https://aws.amazon.com/kendra/).
 
-In order to have seamless conversations that recall past messages, we use the [Langchain feature for memory management](https://python.langchain.com/docs/modules/memory/types/). This feature stores conversation content in a DynamoDB Table called *SessionTable*. To handle session duration, we use a DynamoDB table named  *user_metadata*, this table stores the user’s metadata and session start, which is queried and compared with a define max session duration during each interaction. Change session duration [here](https://github.com/build-on-aws/elevating-customer-support-with-rag-langchain-agent-bedrock-dynamodb-and-kendra/blob/main/customer-support-bot/lambdas/code/langchain_agent_text/lambda_function.py). 
+In order to have seamless conversations that [recall past messages](https://community.aws/posts/working-with-your-live-data-using-langchain), we use the [Langchain feature for memory management](https://python.langchain.com/docs/modules/memory/types/). This feature stores conversation content in a DynamoDB Table called *SessionTable*. To handle session duration, we use a DynamoDB table named  *user_metadata*, this table stores the user’s metadata and session start, which is queried and compared with a define max session duration during each interaction. Change session duration [here](https://github.com/build-on-aws/elevating-customer-support-with-rag-langchain-agent-bedrock-dynamodb-and-kendra/blob/main/customer-support-bot/lambdas/code/langchain_agent_text/lambda_function.py). 
 
 >📚 **Tip:** [Kenton Blacutt](https://github.com/KBB99), an AWS Associate Cloud App Developer, collaborated with Langchain, creating the [Amazon Dynamodb based memory class](https://github.com/langchain-ai/langchain/pull/1058) that allows us to store the history of a langchain agent in an [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html?sc_channel=el&sc_campaign=genaiwave&sc_content=working-with-your-live-data-using-langchain&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
@@ -249,6 +249,8 @@ Thanks! 🧔🏻‍♂️👩🏻
 🚀 Some links for you to continue learning and building:
 
 - [How To Choose Your LLM](https://community.aws/posts/how-to-choose-your-llm)
+
+- [Working With Your Live Data Using LangChain](https://community.aws/posts/working-with-your-live-data-using-langchain)
 
 - [Integrating Foundation Models into Your Code with Amazon Bedrock](https://www.youtube.com/watch?v=ab1mbj0acDo)
 
