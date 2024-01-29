@@ -18,7 +18,7 @@ images:
   background: ./images/BOW_Logo.png
 ---
 
-![Image of Rohini and Darko enjoying the live stream together](images/wpfordarko-rohini.webp)
+![Image of Rohini and Darko enjoying the live stream together](images/Darko-Rohini-BoW-Banner.webp)
 
 👋 Hello friends and welcome to Build On Weekly, a [Twitch show](https://www.twitch.tv/aws) where we build something together every week while answering questions from our favourite people - you! We'll build anything that helps you solve problems: whether it's Open Source or AWS, from operators, developers, data or security specialists to anyone in between. Join us every Thursday at 9am PT to learn live with us through hands on keyboard coding and stay for the lively conversations with expert guests.
 
@@ -28,7 +28,7 @@ Everyone is friends, so join in the conversation both on or off the air with you
 
 - Darko Mesaroš (Дарко Месарош), Principal Developer Advocate: Seattle, WA based resident retro hardware aficionado who loves yelling into the camera about the cloud while he learns, breaks and builds it. If you could summon him with one word it would be: Commodore 64. Talk with him on [Twitter/X](https://twitter.com/darkosubotica) or [LinkedIn](https://www.linkedin.com/in/darko-mesaros/).
 
-- Rohini Gaonkar (रोहिणी गांवकर), Senior Developer Advocate: Living in Toronto, ON is a fervent builder at heart, whether it's assembling intricate models, or piecing together digital solutions. She is passionate about sharing her knowledge on architectural best practices and DevOps. If you could summon her with one word it would be: Architect. Talk with her on [Twitter/X](https://twitter.com/rohini_gaonkar) or [LinkedIn](https://www.linkedin.com/in/rohinigaonkar/).
+- Rohini Gaonkar (रोहिणी गांवकर), Senior Developer Advocate: Living in Toronto, ON is a fervent builder at heart, whether it's assembling intricate models, or piecing together digital solutions. She is passionate about sharing her knowledge on architectural best practices and DevOps. If you could summon her with one word it would be: Architect. Talk with her on [Twitter/X](https://twitter.com/rohini_gaonkar), [LinkedIn](https://www.linkedin.com/in/rohinigaonkar/) or [Instagram](https://www.instagram.com/techwithrohini/).
 
 ## Apply to Be a Guest Speaker 📅
 
@@ -46,6 +46,14 @@ Come learn live with us! We stream **every Thursday at 9am PT/Noon ET**. Check u
 ---
 
 ## Show notes
+
+### SEASON 03:
+
+| Episode | Name | Date | Link to Show Notes
+|--|--|--|--|
+| S03E01 | Welcome to Season 3 - Application Composer | 2024-01-25 | [Show Notes](/livestreams/build-on-weekly/2024-01-25) |
+| S03E02 | Serverless Containers Deep Dive with AJ | 2024-02-01 | [Show Notes](/livestreams/build-on-weekly/2024-02-01) |
+
 
 ### SEASON 02:
 
