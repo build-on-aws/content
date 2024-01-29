@@ -12,11 +12,11 @@ tags:
     - python
 waves:
   - devops
-authorGithubAlias: darko-mesaros
-authorName: Darko Mesaros
+authorGithubAlias: cobusbernard
+authorName: Cobus Bernard
 additionalAuthors: 
-  - authorGithubAlias: cobusbernard
-    authorName: Cobus Bernard
+  - authorGithubAlias: darko-mesaros
+    authorName: Darko Mesaros
 date: 2023-04-21
 ---
 
