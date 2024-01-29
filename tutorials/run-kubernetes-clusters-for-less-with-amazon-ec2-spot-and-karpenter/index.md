@@ -13,9 +13,9 @@ spaces:
   - devops
 waves:
   - cost
-authorGithubAlias: chrismld
-authorName: Christian Melendez
-date: 2023-09-07
+authorGithubAlias: chrismld, jakesky 
+authorName: Christian Melendez, Jake Kudiersky
+date: 2024-01-29
 ---
 | ToC |
 |-----|
