@@ -273,7 +273,7 @@ spec:
         resources:
           requests:
             cpu: 512m
-            memory: 256M
+            memory: 512Mi
 EOF
 kubectl apply -f workload.yaml
 ```
@@ -416,6 +416,14 @@ Review what happens by looking at the Karpenter logs, as soon as the Spot interr
 
 You can also go back to the terminal where you listed all the nodes, and you'll see how the interrupted instance was cordoned, and when the new instance was launched.
 
+Alternatively to vizualise the consolidation process, you can use [eks-node-viewer](https://github.com/awslabs/eks-node-viewer). `eks-node-viewer` a tool for visualizing dynamic node usage within a cluster. It was originally developed as an internal tool at AWS for demonstrating consolidation with Karpenter. It displays the scheduled pod resource requests vs the allocatable capacity on the node.
+
+To launch it execute the following in a **new** Cloud9 terminal tab:
+
+```bash
+eks-node-viewer
+```
+
 > 💡 Tip: You might end up seeing only one/two Spot nodes running, and if you review the Karpenter logs, you’ll see that it was because of the consolidation process.
 
 ## Step 7: (Optional) Deploy a Stateful Workload
@@ -425,7 +433,7 @@ You can still launch On-Demand Instances in a cluster that’s also running Spot
 Deploy the following application to simulate a stateful workload:
 
 ```bash
-cat <<EOF | kubectl apply -f -
+cat <<EOF > workload-stateful.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -451,6 +459,7 @@ spec:
             cpu: 512m
             memory: 512Mi
 EOF
+kubectl apply -f workload-stateful.yaml
 ```
 
 Same as before, wait one minute, and you should see all pods running and one On-Demand node running:
