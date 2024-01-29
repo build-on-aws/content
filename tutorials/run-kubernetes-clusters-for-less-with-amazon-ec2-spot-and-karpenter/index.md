@@ -249,33 +249,34 @@ If it’s a Spot Instance, Karpenter uses the `price-capacity-optimized` (PCO) a
 You’re now going to see Karpenter in action. Your default `NodePool` can launch both On-Demand and Spot Instances, but Karpenter considers the constraints you configure within a pod to launch the right node(s). Let’s create a Deployment with a [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) to run the pods on Spot instances. To do so, run the following command:
 
 ```bash
-cat <<EOF > inflate-spot.yaml
+cat <<EOF > workload.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: inflate-spot
+  name: stateless
 spec:
-  replicas: 0
+  replicas: 10
   selector:
     matchLabels:
-      app: inflate-spot
+      app: stateless
   template:
     metadata:
       labels:
-        app: inflate-spot
+        app: stateless
     spec:
       nodeSelector:
         intent: apps
         karpenter.sh/capacity-type: spot
       containers:
       - image: public.ecr.aws/eks-distro/kubernetes/pause:v1.29.0-eks-1-29-latest
-        name: inflate-spot
+        name: app
         resources:
           requests:
-            cpu: "1"
+            cpu: 512m
             memory: 256M
 EOF
-kubectl apply -f inflate-spot.yaml
+kubectl apply -f workload.yaml
+```
 
 As there are no nodes that match the pod’s requirements, all pods will be `Pending`, making Karpenter react and launch the nodes, similar to this output:
 
