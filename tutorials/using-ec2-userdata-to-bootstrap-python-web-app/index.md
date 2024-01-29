@@ -34,7 +34,7 @@ Manually setting up and configuring the packages required to run a Python web ap
 | 🧩 Prerequisites       | - [AWS account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>-CDK installed: Visit [Get Started with AWS CDK](https://aws.amazon.com/getting-started/guides/setup-cdk/) to learn more.  |
 | 💻 Code Sample         | Code sample used in tutorial on [GitHub](https://github.com/build-on-aws/sample-python-web-app)                             |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
-| ⏰ Last Updated        | 2023-04-11                                                      |
+| ⏰ Last Updated        | 2024-01-29                                                      |
 
 | ToC |
 |-----|
@@ -49,7 +49,7 @@ First, let's check if our CDK version is up to date — this guide is based on v
 ```bash
 cdk --version
 
-# 2.35.0 (build 85e2735)
+# 2.122.0 (build 7e77e02)
 ```
 
 If you see output showing `1.x.x`, or you just want to ensure you are on the latest version, run the following:
@@ -182,12 +182,12 @@ We also need to be able to access our instance via `http` (port 80). To allow tr
     );
 ```
 
-We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (AMI - pronounced "Ay-Em-Eye") — for this tutorial, we will be using the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) AMI for X86_64 CPU architecture. We will also pass the IAM role and VPC created earlier, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Just use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+We're now ready to create the EC2 instance using a pre-built [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq) (AMI - pronounced "Ay-Em-Eye") — for this tutorial, we will be using the [Amazon Linux 2023](https://aws.amazon.com/linux/amazon-linux-2023/) AMI for X86_64 CPU architecture. We will also pass the IAM role and VPC created earlier, and the instance type to run on, in your case, a `t2.micro` that has 1 vCPU and 1GB of memory. If you are running this tutorial in one of the newer AWS Regions, the `t2.micro` type may not be available. Just use the `t3.micro` one instead. To view all the different instance types, see the [EC2 instance types page](https://aws.amazon.com/ec2/instance-types/?sc_channel=el&sc_campaign=devopswave&sc_content=cicdcdkpthnec2aws&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 ```typescript
     // the AMI to be used for the EC2 Instance
     const ami = new AmazonLinuxImage({
-      generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
+      generation: AmazonLinuxGeneration.AMAZON_LINUX_2023,
       cpuType: AmazonLinuxCpuType.X86_64,
     });
 
@@ -214,9 +214,9 @@ Here is the user data bash script we will be attaching to the EC2 Instance. Make
 yum update -y
 yum groupinstall -y "Development Tools"
 amazon-linux-extras install -y nginx1
-yum install -y nginx python3 python3-pip python3-devel ruby wget
-pip3 install pipenv wheel
-pip3 install uwsgi
+yum install -y nginx python3.11 python3.11-pip python3.11-devel ruby wget
+python3.11 -m pip install pipenv wheel
+python3.11 -m pip install uwsgi
 
 # Code Deploy Agent
 cd /home/ec2-user
@@ -263,7 +263,7 @@ import { Vpc, SubnetType, Peer, Port, AmazonLinuxGeneration,
 
 import { Role, ServicePrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
 
-export class PythonEc2BlogpostStack extends cdk.Stack {
+export class Ec2CdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     // IAM
@@ -322,7 +322,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
     // This is the Python Web server that we will be using
     // Get the latest AmazonLinux 2 AMI for the given region
     const ami = new AmazonLinuxImage({
-      generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
+      generation: AmazonLinuxGeneration.AMAZON_LINUX_2023,
       cpuType: AmazonLinuxCpuType.X86_64,
     });
 
@@ -447,7 +447,7 @@ On to the `Build` stage: we are not actually building anything, but rather testi
     // Build Action
     const pythonTestProject = new PipelineProject(this, 'pythonTestProject',{
       environment: {
-        buildImage: LinuxBuildImage.AMAZON_LINUX_2_3
+        buildImage: LinuxBuildImage.AMAZON_LINUX_2_5
       }
     });
 
@@ -514,7 +514,7 @@ import { PipelineProject, LinuxBuildImage } from 'aws-cdk-lib/aws-codebuild';
 import { ServerDeploymentGroup, ServerApplication, InstanceTagSet } from 'aws-cdk-lib/aws-codedeploy';
 import { SecretValue } from 'aws-cdk-lib';
 
-export class PythonEc2BlogpostStack extends cdk.Stack {
+export class Ec2CdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     // IAM
@@ -573,7 +573,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
     // This is the Python Web server that we will be using
     // Get the latest AmazonLinux 2 AMI for the given region
     const ami = new AmazonLinuxImage({
-      generation: AmazonLinuxGeneration.AMAZON_LINUX_2,
+      generation: AmazonLinuxGeneration.AMAZON_LINUX_2023,
       cpuType: AmazonLinuxCpuType.X86_64,
     });
 
@@ -636,7 +636,7 @@ export class PythonEc2BlogpostStack extends cdk.Stack {
     // Build Action
     const pythonTestProject = new PipelineProject(this, 'pythonTestProject', {
       environment: {
-        buildImage: LinuxBuildImage.AMAZON_LINUX_2_3
+        buildImage: LinuxBuildImage.AMAZON_LINUX_2_5
       }
     });
     
@@ -724,7 +724,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.7
+      python: 3.11
     commands:
       - echo Entered the install phase...
       - pip install pipenv
@@ -803,7 +803,7 @@ systemctl enable nginx.service
 
 chown nginx:nginx -R /var/www/SampleApp/
 cd /var/www/SampleApp
-/usr/local/bin/pipenv install
+pipenv install
 ```
 
 `start_server.sh`
@@ -812,6 +812,24 @@ cd /var/www/SampleApp
 #!/bin/bash -xe
 systemctl restart mywebapp.uwsgi.service
 systemctl restart nginx.service
+```
+
+Lastly, make sure to update the `Pipfile` at the root of your sample application repository so it reflects the following:
+```toml
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+flask = "*"
+boto3 = "*"
+uwsgi = "*"
+
+[requires]
+python_version = "3.11"
 ```
 
 Once all these files are created, the sample application directory should look like this:
@@ -896,9 +914,9 @@ Ec2CdkStack: creating CloudFormation changeset...
 ✨  Deployment time: 27.74s
 
 Outputs:
-PythonEc2BlogpostStack.IPAddress = 18.236.81.182
+PythonEc2BlogpostStack.IPAddress = x.x.x.x
 Stack ARN:
-arn:aws:cloudformation:us-west-2:123456789000:stack/PythonEc2BlogpostStack/59f1e560-grunf-11ed-afno1-06f3bbc9cf63
+arn:aws:cloudformation:us-west-2:123456789000:stack/Ec2CdkStack/59f1e560-grunf-11ed-afno1-06f3bbc9cf63
 
 ✨  Total time: 29.11s
 ```
