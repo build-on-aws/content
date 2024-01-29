@@ -1,6 +1,6 @@
 ---
 title: "Elevating Customer Support With a Whatsapp Travel Assistant: From Las Vegas, Mexico to Las Vegas, Nevada. A re:Invent 2023 History."
-description: ""
+description: "WhatsApp Travel Assistant app can understand conversations in any language, using RAG can deliver sophisticated responses by querying Amazon Kendra and DynamoDB tables. It manages conversation memory in DynamoDB and session time to provide a self-service travel experience through natural language conversations across any language."
 tags:
     - ai-ml
     - generative-ai
