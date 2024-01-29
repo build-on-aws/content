@@ -498,5 +498,12 @@ aws cloudformation delete-stack --stack-name fis-spot-and-karpenter
 
 Using Spot Instances for your Kubernetes data plane nodes helps you reduce computing costs. As long as your workloads are fault-tolerant, stateless, and can use a variety of instance types, you can use Spot. Karpenter allows you to simplify the process of configuring your EKS cluster with a high-instance type diversification, and provisions only the capacity you need.
 
-You can learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html), or dive deeper into the Karpenter concepts [here](https://karpenter.sh/docs/concepts/).
+### Workshops
+You can learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html)
+
+### Blueprints
+This [repository](https://github.com/aws-samples/karpenter-blueprints) includes a list of common workload scenarios
+
+### Docuementation
+Dive deeper into the Karpenter concepts [here](https://karpenter.sh/docs/concepts/)
 
