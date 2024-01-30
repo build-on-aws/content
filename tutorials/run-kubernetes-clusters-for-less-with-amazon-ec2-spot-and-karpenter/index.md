@@ -20,8 +20,6 @@ date: 2024-01-29
 | ToC |
 |-----|
 
-**contributors:** [@jakeskyaws](https://github.com/jakeskyaws)
-
 One of the main cost factors for Kubernetes clusters relies on the compute layer for the data plane. Running Kubernetes clusters on Amazon EC2 Spot Instances is a great way to reduce your compute costs significantly. When using Spot Instances, you can get up to a 90% price discount compared to On-Demand Instances. 
 
 Spot is a great match for workloads that are stateless, fault-tolerant, and flexible applications such as big data, containerized workloads, CI/CD, web servers, high-performance computing (HPC), and test & development workloads. Containers often match with these characteristics as they’re Spot-friendly. For non Spot-friendly workloads, like stateful applications within your cluster, you can continue using On-Demand Instances.
@@ -44,7 +42,8 @@ One of the main advantages of using Karpenter is the simplicity of configuring S
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)<br> - [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)<br> - [Helm](https://helm.sh/docs/intro/install/)<br> |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | 💾 Code                | [Download the code](https://github.com/build-on-aws/run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter) |
-| ⏰ Last Updated        | 2023-10-05                                                     |
+| 🛠 Contributors        | [@jakeskyaws](https://github.com/jakeskyaws) |
+| ⏰ Last Updated        | 2024-1-30                                                    |
 
 ## Prerequisites
 
