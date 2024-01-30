@@ -35,7 +35,7 @@ https://www.twitch.tv/videos/1983392065
 
 ## Links from today's episode
 
-* [Data Monetization Whitepaper](https://docs.aws.amazon.com/whitepapers/latest/aws-caf-business-perspective/data-monetization.html))))
+* [Data Monetization Whitepaper](https://docs.aws.amazon.com/whitepapers/latest/aws-caf-business-perspective/data-monetization.html)
 * [AWS Lake Formation](https://aws.amazon.com/lake-formation)
 * [Redshift Data Sharing](https://aws.amazon.com/redshift/features/data-sharing/?nc=sn&loc=2&dn=4)
 * [AWS Data Exchange](https://aws.amazon.com/blogs/awsmarketplace/monetize-your-custom-http-apis-via-aws-data-exchange/)
