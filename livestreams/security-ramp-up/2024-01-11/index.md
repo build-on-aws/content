@@ -13,7 +13,7 @@ spaces:
   - livestreams
 ---
 
-![Screenshot from the stream](images/S2episode-1.png)
+![Screenshot from the stream](images/S2episode-1.webp)
 
 ### Check out the recording here:
 

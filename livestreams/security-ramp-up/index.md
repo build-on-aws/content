@@ -10,13 +10,13 @@ tags:
 authorName: security-ramp-up
 date: 2024-01-17
 images:
-  hero:  ./images/security-ramp-up-banner.png
-  thumbnail: ./images/security-ramp-up-logo.png
-  banner: ./images/security-ramp-up-banner.png
-  background: ./images/security-ramp-up-logo.png
+  hero:  ./images/security-ramp-up-banner.webp
+  thumbnail: ./images/security-ramp-up-logo.webp
+  banner: ./images/security-ramp-up-banner.webp
+  background: ./images/security-ramp-up-logo.webp
 ---
 
-![picture from Christmas show](images/security-ramp-up-show-picture.png)
+![picture from Christmas show](images/security-ramp-up-show-picture.webp)
 
 Our show is tailored for those embarking on the AWS security journey, addressing the common challenge of complexity and being overwhelmed. Drawing on our experience as AWS security engineers, we create a safe and practical learning environment. Our series focuses on real-life experiences with hands-on activities, ensuring viewers gain relevant skills applicable to various AWS deployments. By demystifying AWS security, we aim to empower individuals to confidently navigate and contribute to the field. Join us for an accessible and comprehensive introduction to AWS security, exploring the rewards and challenges of a career in this dynamic field.
 
