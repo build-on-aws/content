@@ -22,7 +22,7 @@ In this episode of Lets Talk About Data we discuss about Amazon Security Lake an
 
 Check out the recording here:
 
-https://www.twitch.tv/videos/1959956395
+https://www.twitch.tv/videos/1971031389
 
 
 ## Hosts of the show 🎤
@@ -35,11 +35,11 @@ https://www.twitch.tv/videos/1959956395
 
 ## Links from today's episode
 
-* Security Lake - https://aws.amazon.com/security-lake/
-* OpenSearch - https://opensearch.org/docs/latest/
-* OpenSearch Usecases - https://opensearch.org/docs/latest/data-prepper/common-use-cases/common-use-cases/
-* OpenSearch capabilities - https://opensearch.org/docs/latest/version-history/
-* Pricing - https://aws.amazon.com/opensearch-service/pricing/
+* [Security Lake](https://aws.amazon.com/security-lake/)
+* [OpenSearch](https://opensearch.org/docs/latest/)
+* [OpenSearch Usecases](https://opensearch.org/docs/latest/data-repper/common-use-cases/common-use-cases/)
+* [OpenSearch capabilities](https://opensearch.org/docs/latest/version-history/)
+* [Pricing](https://aws.amazon.com/opensearch-service/pricing/)
 
 ## Reach out to the hosts and guests:
 

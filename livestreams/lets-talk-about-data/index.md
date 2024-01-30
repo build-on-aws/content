@@ -22,6 +22,7 @@ images:
 
 The “Lets Talk About Data” twitch show is a weekly update for data professionals looking for the latest news and information on AWS data services across the cloud! The show covers regular service updates, technical deep dives, new service launches, and interviews in the data space. We have AWS colleagues, community builders, AWS data Hero's and customers as guests on the show.  Show Location  https://www.twitch.tv/aws every Wednesday at 4pm CET.
 
+
 ## Hosts of the show 🎤
 
 - **Tony Mullen** is a Senior Database Specialist Solution Architect based in Manchester. With a focus on relational database engines, he assists customers in migrating and modernizing their database workloads to AWS but has a keen interest in all things data.  Talk with him on [LinkedIn](https://www.linkedin.com/in/tony-mullen-8b05927/).
@@ -37,6 +38,15 @@ If you have any questions, comments, or ideas, **reach out** to us. Feel free to
 ## Schedule 📆
 
 Come learn live with us! We stream every Wednesday at 4pm CET.
+
+
+### SEASON 02
+
+| Episode | Name| Date | Link to Watch | Link to Show Notes |
+|--|--|--|--|--|
+| **S2E01** | Infrastructure as code and automating tasks for RDS.| January 3, 2024 | [Watch here](https://www.twitch.tv/videos/2021548860) |[Show Notes](/livestreams/lets-talk-about-data/2024-01-03) |
+| **S2E02** | Migrating a relational workload to modern data platform| January 10, 2024 | [Watch here](https://www.twitch.tv/videos/2028364008) |[Show Notes](/livestreams/lets-talk-about-data/2024-01-10) |
+
 
 ### SEASON 01
 
@@ -72,3 +82,5 @@ Come learn live with us! We stream every Wednesday at 4pm CET.
 | **S1E28** | Aurora, Redshift & Quicksight | Nov 1, 2023 | [Watch here](https://www.twitch.tv/videos/1971031389) |[Show Notes](/livestreams/lets-talk-about-data/2023-11-01) |
 | **S1E29** | Data monetisation | Nov 15, 2023 | [Watch here](https://www.twitch.tv/videos/1983392065) |[Show Notes](/livestreams/lets-talk-about-data/2023-11-15) |
 | **S1E30** | How to consolidate your RDS Oracle instances using  Multitenant | Nov 22, 2023 | [Watch here](https://www.twitch.tv/videos/1985940707) |[Show Notes](/livestreams/lets-talk-about-data/2023-11-22) |
+| **S1E31** | Re:invent Re-cap for Data | Dec 6, 2023 | [Watch here](https://www.twitch.tv/videos/1996783596?collection=BEUpZw5lUxeLJA&filter=collections&sort=time) |[Show Notes](/livestreams/lets-talk-about-data/2023-12-06) |
+| **S1E32** | Vector databases and embeddings with pgvector | Dec 20, 2023 | [Watch here](https://quip-amazon.com/yDc5Aj7k5NbP/Lets-Talk-About-Data-Show-Schedule-2023#temp:C:ZbF41f40c46deaa4eedadea12dcc) |[Show Notes](/livestreams/lets-talk-about-data/2023-12-20) |
