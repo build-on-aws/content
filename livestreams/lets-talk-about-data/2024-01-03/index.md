@@ -33,11 +33,10 @@ https://www.twitch.tv/videos/2021548860
 
 ## Links from today's episode
 
-* Getting started with Terraform - https://developer.hashicorp.com/terraform/tutorials/aws-get-started
-* Terraform - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance
-* Instance Scheduler on AWS - https://aws.amazon.com/solutions/implementations/instance-scheduler-on-aws/
-* Implementation guide: - https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/solution-overview.html
-
+* [Getting started with Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started)
+* [Terraform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance)
+* [Instance Scheduler on AWS](https://aws.amazon.com/solutions/implementations/instance-scheduler-on-aws/)
+* [Implementation guide:](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/solution-overview.html)
 
 ## Reach out to the hosts and guests:
 

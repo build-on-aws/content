@@ -35,10 +35,10 @@ https://www.twitch.tv/videos/1985940707
 
 ## Links from today's episode
 
-* Multitenant - https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-rds-oracle-supports-oracle-multitenant/
-* Working with CDB’s in RDS for oracle - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-multitenant.html
-* RDS mutlitenant best practices - https://aws.amazon.com/blogs/database/multitenant-best-practices-for-amazon-rds-custom-for-oracle/
-* Migration over database link - https://aws.amazon.com/blogs/database/migrate-oracle-database-to-amazon-rds-for-oracle-over-a-database-link-for-space-savings-and-reclamation/
+* [Multitenant](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-rds-oracle-supports-oracle-multitenant/)
+* [Working with CDB’s in RDS for oracle](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-multitenant.html)
+* [RDS mutlitenant best practices](https://aws.amazon.com/blogs/database/multitenant-best-practices-for-amazon-rds-custom-for-oracle/)
+* [Migration over database link](https://aws.amazon.com/blogs/database/migrate-oracle-database-to-amazon-rds-for-oracle-over-a-database-link-for-space-savings-and-reclamation/)
 
 ## Reach out to the hosts and guests:
 
