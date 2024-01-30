@@ -32,7 +32,7 @@ I’ll guide you on the steps you need to follow to configure an EKS cluster wit
 
 Karpenter is an open-source node provisioning project built for Kubernetes. As new pods continue coming to your cluster, either because you increased the number of replicas manually or through an Horizontal Pod Autoscaling [(HPA)](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) policy or through a Kubernetes Event-driven Autoscaling [(KEDA)](https://aws.amazon.com/blogs/mt/proactive-autoscaling-kubernetes-workloads-keda-metrics-ingested-into-aws-amp/?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) event, at some point your data plane nodes will be at full capacity, causing you to have pending (unschedulable) pods. The Karpenter controller reacts to this problem, and aggregates the capacity of these pending pods by evaluating scheduling constraints (resource requests, nodeselectors, affinities, tolerations, and topology spread constraints). Then, Karpenter provisions the right nodes that meet the requirements of these pending pods.
 
-One of the main advantages of using Karpenter is the simplicity of configuring Spot best practices like instance type diversification (multiple families, sizes, generations, etc) in what Karpenter calls a provisioner. If you’re getting started with Spot in Amazon Elastic Kubernetes Service (EKS) or are struggling with the complexity of configuring multiple node groups, I recommend using Karpenter. However, if you’re already using CA and want to start spending less, you can find the detailed configuration to use Spot with CA [here](https://aws.amazon.com/tutorials/amazon-eks-with-spot-instances/?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+One of the main advantages of using Karpenter is the simplicity of configuring Spot best practices like instance type diversification (multiple families, sizes, generations, etc) in what Karpenter calls a `NodePool`. If you’re getting started with Spot in Amazon Elastic Kubernetes Service (EKS) or are struggling with the complexity of configuring multiple node groups, I recommend using Karpenter. However, if you’re already using CA and want to start spending less, you can find the detailed configuration to use Spot with CA [here](https://aws.amazon.com/tutorials/amazon-eks-with-spot-instances/?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 | Attributes             |                                                                 |
 |------------------------|-----------------------------------------------------------------|
@@ -42,7 +42,8 @@ One of the main advantages of using Karpenter is the simplicity of configuring S
 | 🧩 Prerequisites    | - [AWS Account](https://aws.amazon.com/resources/create-account/?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq)<br>- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) <br> - [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)<br> - [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)<br> - [Helm](https://helm.sh/docs/intro/install/)<br> |
 | 📢 Feedback            | <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">Any feedback, issues, or just a</a> 👍 / 👎 ?    |
 | 💾 Code                | [Download the code](https://github.com/build-on-aws/run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter) |
-| ⏰ Last Updated        | 2023-10-05                                                     |
+| 🛠 Contributors        | [@jakeskyaws](https://github.com/jakeskyaws) |
+| ⏰ Last Updated        | 2024-1-30                                                    |
 
 ## Prerequisites
 
@@ -93,7 +94,7 @@ terraform version
 helm version
 ```
 
-> 💡 **NOTE**: If one of the above CLI tools is not installed yet, wait around 3 more minutes while the Cloud9 setup finishes.
+> 💡 **NOTE**: If the CloudFormation stack has not reached the "CREATE_COMPLETE" status, the CLI tools may not have been installed yet. Please wait until the stack completes before proceeding with any CLI commands..
 
 ## Step 2: Create an EKS Cluster with Karpenter Using EKS Blueprints for Terraform
 
@@ -130,9 +131,9 @@ karpenter-5f97c944df-bm85s 1/1   Running 0        15m
 karpenter-5f97c944df-xr9jf 1/1   Running 0        15m
 ```
 
-## Step 3: Set Up a Karpenter Provisioner
+## Step 3: Set Up a Karpenter NodePool
 
-The EKS cluster already has a static managed node group configured in advance for the `kube-system` and `karpenter` namespaces, and it’s going to be only one you’ll need. For the rest of pods, Karpenter will launch nodes through a `Provisioner` CRD. The Provisioner sets constraints on the nodes that can be created by Karpenter and the pods that can run on those nodes. A single Karpenter provisioner is capable of handling many different pod shapes, and for this tutorial you’ll only create the `default` provisioner.
+The EKS cluster already has a static managed node group configured in advance for the `kube-system` and `karpenter` namespaces, and it’s going to be only one you’ll need. For the rest of pods, Karpenter will launch nodes through a [NodePool](https://karpenter.sh/docs/concepts/nodepools/) CRD. The NodePool sets constraints on the nodes that can be created by Karpenter and the pods that can run on those nodes. A single Karpenter NodePool is capable of handling many different pod shapes, and for this tutorial you’ll only create the `default` NodePool.
 
 > 💡 Tip: Karpenter simplifies the data plane capacity management using an approach called **group-less auto scaling**. This is because Karpenter is no longer using node groups, which match with [Auto Scaling groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), to launch nodes. Over time, clusters using the paradigm of running different types of applications (that require different capacity types), end up with a complex configuration and operational model where node groups must be defined and provided in advance.
 
@@ -159,78 +160,94 @@ export KARPENTER_NODE_IAM_ROLE_NAME=$(terraform output -raw node_instance_profil
 
 > 💡 NOTE: If you're working with an existing EKS cluster, make sure to set the proper values for the previous environment variables as we'll use those values to setup the Karpenter provsioner.
 
-Let’s create a default provisioner by running the following commands:
+Let’s create a default `NodePool` by running the following commands:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: karpenter.sh/v1alpha5
-kind: Provisioner
+apiVersion: karpenter.sh/v1beta1
+kind: NodePool
+metadata:
+  name: default 
+spec:  
+  template:
+    metadata:
+      labels:
+        intent: apps
+    spec:
+      requirements:
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64", "arm64"]
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: Gt
+          values: ["4"]
+        - key: "karpenter.k8s.aws/instance-memory"
+          operator: Gt
+          values: ["8191"] # 8 * 1024 - 1
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["spot", "on-demand"]
+        - key: karpenter.k8s.aws/instance-category
+          operator: In
+          values: ["c", "m", "r"]
+      nodeClassRef:
+        apiVersion: karpenter.k8s.aws/v1beta1
+        kind: EC2NodeClass
+        name: default
+      kubelet:
+        systemReserved:
+          cpu: 100m
+          memory: 100Mi
+  disruption:
+    consolidationPolicy: WhenUnderutilized
+    expireAfter: 168h # 7 * 24h = 168h
+  
+---   
+
+apiVersion: karpenter.k8s.aws/v1beta1
+kind: EC2NodeClass
 metadata:
   name: default
 spec:
-  labels:
-    intent: apps
-  requirements:
-    - key: "karpenter.sh/capacity-type"
-      operator: In
-      values: ["spot", "on-demand"]
-    - key: "karpenter.k8s.aws/instance-category"
-      operator: In
-      values: ["c", "m", "r"]
-    - key: "karpenter.k8s.aws/instance-cpu"
-      operator: Gt
-      values: ["1"]
-    - key: "karpenter.k8s.aws/instance-memory"
-      operator: Gt
-      values: ["2047"] # 2 * 1024 - 1
-  limits:
-    resources:
-      cpu: 100
-      memory: 200Gi
-  consolidation:
-    enabled: true
-  ttlSecondsUntilExpired: 604800 # 7 Days = 7 * 24 * 60 * 60 Seconds
-  providerRef:
-    name: default
----
-apiVersion: karpenter.k8s.aws/v1alpha1
-kind: AWSNodeTemplate
-metadata:
-  name: default
-spec:
-  subnetSelector:
-    karpenter.sh/discovery: ${CLUSTER_NAME}
-  securityGroupSelector:
-    karpenter.sh/discovery: ${CLUSTER_NAME}
-  instanceProfile: ${KARPENTER_NODE_IAM_ROLE_NAME}
+  amiFamily: AL2
+  subnetSelectorTerms:          
+    - tags:
+        karpenter.sh/discovery: ${CLUSTER_NAME}
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: ${CLUSTER_NAME}
+  role: ${KARPENTER_NODE_IAM_ROLE_NAME}
   tags:
-    karpenter.sh/discovery: ${CLUSTER_NAME}
     project: build-on-aws
-    KarpenterProvisionerName: "default"
-    NodeType: "default"
+    IntentLabel: apps
+    KarpenterNodePoolName: default
+    NodeType: default
     intent: apps
+    karpenter.sh/discovery: ${CLUSTER_NAME}
 EOF
 ```
 
-Let me highlight a few important settings from the default `Provisioner` you just created:
+Karpenter is now active and ready to begin provisioning nodes.
 
-* `requirements`: Here’s where you define the type of nodes Karpenter can launch. Be as flexible as possible and let Karpenter choose the right instance type based on the pod requirements. For this `Provisioner`, you’re saying Karpenter can launch either Spot or On-Demand Instances, families including `c`, `m` and `r`, with a minimum of 4 vCPUs and 8 GiB of memory. With this configuration, you’re choosing around 150 instance types from the 700+ available today in AWS. Read the next section to understand why this is important.
-* `limits`: This is how you constrain the maximum amount of resources that the `Provisioner` will manage. Karpenter can launch instances with different specs, so instead of limiting a max number of instances (as you’d typically do in an Auto Scaling group), you define a maximum of vCPUs or memory to limit the number of nodes to launch. Karpenter provides a [metric to monitor the percentage usage](https://karpenter.sh/docs/concepts/metrics/#karpenter_provisioner_usage_pct) of this `Provisioner` based on the limits you configure.
-* `consolidation`: Karpenter does a great job at launching only the nodes you need, but as pods can come an go, at some point in time the cluster capacity can end up in a fragmented state. To avoid fragmentation and optimize the compute nodes in your cluster, you can enable [consolidation](https://karpenter.sh/docs/concepts/deprovisioning/#consolidation). When enabled, Karpenter works to actively reduce cluster cost by identifying when nodes can be removed, as their workloads will run on other nodes in the cluster, and when nodes can be replaced with cheaper variants due to a change in the workloads.
-* `ttlSecondsUntilExpired`: Here’s where you define when a node will be deleted. This is useful to force new nodes with up-to-date AMI’s. In this example we have set the value to 7 days.
-* `providerRef`: This is where you reference the template to launch a node. An `AWSNodeTemplate` is where you define which subnets, security groups, and IAM role the nodes will use. You can set node tags or even configure a [user-data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq). To learn more about which other configurations are available, go [here](https://karpenter.sh/docs/concepts/node-templates/).
+Let me highlight a few important settings from the default `NodePool` you just created:
 
-You can also learn more about which other configuration properties are available for a `Provisioner` [here](https://karpenter.sh/docs/concepts/provisioners/).
+* `requirements`: Here’s where you define the type of nodes Karpenter can launch. Be as flexible as possible and let Karpenter choose the right instance type based on the pod requirements. For this `NodePool`, you’re saying Karpenter can launch either Spot or On-Demand Instances, families including `c`, `m` and `r`, with a minimum of 4 vCPUs and 8 GiB of memory. With this configuration, you’re choosing around 150 instance types from the 700+ available today in AWS. Read the next section to understand why this is important.
+* `limits`: This is how you constrain the maximum amount of resources that the `NodePool` will manage. Karpenter can launch instances with different specs, so instead of limiting a max number of instances (as you’d typically do in an Auto Scaling group), you define a maximum of vCPUs or memory to limit the number of nodes to launch. Karpenter provides a [metric to monitor the percentage usage](https://karpenter.sh/docs/reference/metrics/) of this `NodePool` based on the limits you configure.
+* `disruption`: Karpenter does a great job at launching only the nodes you need, but as pods can come an go, at some point in time the cluster capacity can end up in a fragmented state. To avoid fragmentation and optimize the compute nodes in your cluster, you can enable [consolidation](https://karpenter.sh/docs/concepts/disruption/#consolidation). When enabled, Karpenter automatically discovers disruptable nodes and spins up replacements when needed.
+* `expireAfter`: Here’s where you define when a node will be deleted. This is useful to force new nodes with up-to-date AMI’s. In this example we have set the value to 7 days.
+* `nodeClassRef`: This is where you reference the template to launch a node. An `EC2NodeClass` is where you define which subnets, security groups, and IAM role the nodes will use. You can set node tags or even configure a [user-data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq). To learn more about which other configurations are available, go [here](https://karpenter.sh/docs/concepts/nodeclasses/).
+
+You can also learn more about which other configuration properties are available for a `NodePool` [here](https://karpenter.sh/docs/concepts/nodepools/).
 
 ### Why Is It a Good Practice To Configure a Diverse Set of Instance Types?
 
-As you noticed, with the above `Provisioner` we’re basically letting Karpenter choose from a diverse set of instance types to launch the best instance type possible. If it’s an On-Demand Instance, Karpenter uses the `lowest-price` allocation strategy to launch the cheapest instance type that has available capacity. When you use multiple instance types, you can avoid the [InsufficientInstanceCapacity error](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
+As you noticed, with the above `NodePool` we’re basically letting Karpenter choose from a diverse set of instance types to launch the best instance type possible. If it’s an On-Demand Instance, Karpenter uses the `lowest-price` allocation strategy to launch the cheapest instance type that has available capacity. When you use multiple instance types, you can avoid the [InsufficientInstanceCapacity error](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq).
 
 If it’s a Spot Instance, Karpenter uses the `price-capacity-optimized` (PCO) allocation strategy. PCO looks at both price and capacity availability to launch from the [Spot Instance pools](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html#spot-features?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq) that are the least likely to be interrupted and have the lowest possible price. For Spot Instances, applying diversification is key. Spot Instances are spare capacity that can be reclaimed by EC2 when it is required. Karpenter allows you to diversify extensively to replace reclaimed Spot Instances automatically with instances from other pools where capacity is available.
 
 ## Step 4: Deploy a Spot-friendly Workload
 
-You’re now going to see Karpenter in action. Your default `Provisioner` can launch both On-Demand and Spot Instances, but Karpenter considers the constraints you configure within a pod to launch the right node(s). Let’s create a Deployment with a [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) to run the pods on Spot instances. To do so, run the following command:
+You’re now going to see Karpenter in action. Your default `NodePool` can launch both On-Demand and Spot Instances, but Karpenter considers the constraints you configure within a pod to launch the right node(s). Let’s create a Deployment with a [nodeSelector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) to run the pods on Spot instances. To do so, run the following command:
 
 ```bash
 cat <<EOF > workload.yaml
@@ -252,8 +269,8 @@ spec:
         intent: apps
         karpenter.sh/capacity-type: spot
       containers:
-      - name: app
-        image: public.ecr.aws/eks-distro/kubernetes/pause:3.7
+      - image: public.ecr.aws/eks-distro/kubernetes/pause:v1.29.0-eks-1-29-latest
+        name: app
         resources:
           requests:
             cpu: 512m
@@ -289,17 +306,18 @@ Karpenter logs should look similar to this (I’m including only the lines I wan
 
 ```bash
 $ kl
-2023-08-25T10:10:20.704Z    INFO    controller.provisioner    found provisionable pod(s)    {"commit": "34d50bf-dirty", "pods": 10}
-2023-08-25T10:10:20.704Z    INFO    controller.provisioner    computed new machine(s) to fit pod(s)    {"commit": "34d50bf-dirty", "machines": 1, "pods": 10}
-2023-08-25T10:10:20.725Z    INFO    controller.provisioner    created machine    {"commit": "34d50bf-dirty", "provisioner": "default", "requests": {"cpu":"5245m","memory":"5Gi","pods":"12"}, "instance-types": "c3.2xlarge, c3.4xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge and 95 other(s)"}
-2023-08-25T10:10:23.976Z    INFO    controller.machine.lifecycle    launched machine    {"commit": "34d50bf-dirty", "machine": "default-zx45m", "provisioner": "default", "provider-id": "aws:///eu-west-1b/i-0f89c0a89d0a78ae7", "instance-type": "m5.2xlarge", "zone": "eu-west-1b", "capacity-type": "spot", "allocatable": {"cpu":"7910m","ephemeral-storage":"17Gi","memory":"29317Mi","pods":"58"}}
+{"level":"INFO","time":"2024-01-28T21:14:32.625Z","logger":"controller.provisioner","message":"computed new nodeclaim(s) to fit pod(s)","commit":"1072d3b","nodeclaims":1,"pods":10}
+
+{"level":"INFO","time":"2024-01-28T21:14:32.652Z","logger":"controller.provisioner","message":"created nodeclaim","commit":"1072d3b","nodepool":"default","nodeclaim":"default-8blnj","requests":{"cpu":"5330m","memory":"5360Mi","pods":"14"},"instance-types":"c4.2xlarge, c4.4xlarge, c5.2xlarge, c5.4xlarge, c5a.2xlarge and 95 other(s)"}
+
+{"level":"INFO","time":"2024-01-28T21:14:36.823Z","logger":"controller.nodeclaim.lifecycle","message":"launched nodeclaim","commit":"1072d3b","nodeclaim":"default-8blnj","nodepool":"default","provider-id":"aws:///eu-west-2a/i-094792dc93778aa2a","instance-type":"c7g.2xlarge","zone":"eu-west-2a","capacity-type":"spot","allocatable":{"cpu":"7810m","ephemeral-storage":"17Gi","memory":"14003Mi","pods":"58","vpc.amazonaws.com/pod-eni":"38"}}
 ```
 
 By reading the logs, you can see that Karpenter:
 
 * Noticed there were 10 pending pods, and decided that can fit all pods in only one node.
 * Is considering the kubelet and kube-proxy `Daemonsets` (2 additional pods), and is aggregating all resources need for 12 pods. Moreover, Karpenter noticed that 100 instance types match these requirements.
-* Launched an `m5.2xlarge` Spot Instance in `eu-west-1b` as this was the pool with more spare capacity with lowest price.
+* Launched an `c7g.2xlarge` Spot Instance in `eu-west-2a` as this was the pool with more spare capacity with lowest price.
 
 ## Step 5: Spread Pods Within Multiple AZs
 
@@ -343,15 +361,15 @@ kubectl get nodes -L karpenter.sh/capacity-type,beta.kubernetes.io/instance-type
 You should see an output similar to this:
 
 ```bash
-NAME                                         STATUS   ROLES    AGE    VERSION               CAPACITY-TYPE   INSTANCE-TYPE   ZONE
-ip-10-0-123-233.eu-west-1.compute.internal   Ready    <none>   2m4s   v1.27.3-eks-a5565ad   spot            m5.large       eu-west-1c
-ip-10-0-34-248.eu-west-1.compute.internal    Ready    <none>   2m3s   v1.27.3-eks-a5565ad   spot            m5.large       eu-west-1a
-ip-10-0-76-166.eu-west-1.compute.internal    Ready    <none>   2m4s   v1.27.3-eks-a5565ad   spot            m5.large       eu-west-1b
+NAME                                         STATUS     ROLES    AGE   VERSION               CAPACITY-TYPE   INSTANCE-TYPE   ZONE
+ip-10-0-102-121.eu-west-2.compute.internal   NotReady   <none>   1s    v1.29.0-eks-5e0fdde   spot            m7g.2xlarge     eu-west-2c
+ip-10-0-36-60.eu-west-2.compute.internal     NotReady   <none>   4s    v1.29.0-eks-5e0fdde   spot            c7g.2xlarge     eu-west-2a
+ip-10-0-92-180.eu-west-2.compute.internal    NotReady   <none>   4s    v1.29.0-eks-5e0fdde   spot            c7g.2xlarge     eu-west-2b
 ```
 
 ## Step 6: (Optional) Simulate Spot Interruption
 
-You can simulate a Spot interruption to test the resiliency of your applications. As I said before, Spot is spare capacity for steep discounts in exchange for returning them when EC2 needs the capacity back. Spot interruptions have a 2 minute notice before EC2 reclaims the instance. Karpenter can watch these interruptions (the cluster you created with Terraform is already configured this way). When this happens, the `Provisioner` starts a new node as soon as it sees the Spot interruption warning. Karpenter’s average node startup time means that, generally, there is sufficient time for the new node to become ready and to move the pods to the new node before the node is reclaimed.
+You can simulate a Spot interruption to test the resiliency of your applications. As I said before, Spot is spare capacity for steep discounts in exchange for returning them when EC2 needs the capacity back. Spot interruptions have a 2 minute notice before EC2 reclaims the instance. Karpenter can watch these interruptions (the cluster you created with Terraform is already configured this way). When this happens, the `NodePool` starts a new node as soon as it sees the Spot interruption warning. Karpenter’s average node startup time means that, generally, there is sufficient time for the new node to become ready and to move the pods to the new node before the node is reclaimed.
 
 You can simulate a [Spot interruption using Fault Injection Simulator (FIS)](https://docs.aws.amazon.com/fis/latest/userguide/fis-tutorial-spot-interruptions.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq). To do this, you can either do it through the [console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/initiate-a-spot-instance-interruption.html?sc_channel=el&sc_campaign=costwave&sc_content=run-kubernetes-clusters-for-less-with-amazon-ec2-spot-and-karpenter&sc_geo=mult&sc_country=mult&sc_outcome=acq), or using the [Amazon EC2 Spot Interrupter](https://github.com/aws/amazon-ec2-spot-interrupter) CLI. 
 
@@ -390,25 +408,28 @@ aws fis start-experiment --experiment-template-id $FIS_EXP_TEMP_ID --no-cli-page
 Review what happens by looking at the Karpenter logs, as soon as the Spot interruption warning lands, Karpenter immediately cordons and drains the node, but also launches a replacement instance:
 
 ```bash
-2023-08-25T11:27:12.266Z    DEBUG    controller.interruption    removing offering from offerings    {"commit": "34d50bf-dirty", "queue": "karpenter-spot-and-karpenter", "messageKind": "SpotInterruptionKind", "machine": "default-dc58z", "action": "CordonAndDrain", "node": "ip-10-0-99-126.eu-west-1.compute.internal", "reason": "SpotInterruptionKind", "instance-type": "m5.2xlarge", "zone": "eu-west-1c", "capacity-type": "spot", "ttl": "3m0s"}
-2023-08-25T11:27:12.281Z    INFO    controller.interruption    initiating delete for machine from interruption message    {"commit": "34d50bf-dirty", "queue": "karpenter-spot-and-karpenter", "messageKind": "SpotInterruptionKind", "machine": "default-dc58z", "action": "CordonAndDrain", "node": "ip-10-0-99-126.eu-west-1.compute.internal"}
-2023-08-25T11:27:12.317Z    INFO    controller.termination    cordoned node    {"commit": "34d50bf-dirty", "node": "ip-10-0-99-126.eu-west-1.compute.internal"}
-2023-08-25T11:27:13.544Z    DEBUG    controller.provisioner    10 out of 684 instance types were excluded because they would breach provisioner limits    {"commit": "34d50bf-dirty", "provisioner": "default"}
-2023-08-25T11:27:13.568Z    INFO    controller.provisioner    found provisionable pod(s)    {"commit": "34d50bf-dirty", "pods": 3}
-2023-08-25T11:27:13.568Z    INFO    controller.provisioner    computed new machine(s) to fit pod(s)    {"commit": "34d50bf-dirty", "machines": 1, "pods": 3}
-2023-08-25T11:27:13.584Z    INFO    controller.provisioner    created machine    {"commit": "34d50bf-dirty", "provisioner": "default", "requests": {"cpu":"1661m","memory":"1536Mi","pods":"5"}, "instance-types": "c3.2xlarge, c3.4xlarge, c4.2xlarge, c4.4xlarge, c5.2xlarge and 95 other(s)"}
-2023-08-25T11:27:13.786Z    INFO    controller.termination    deleted node    {"commit": "34d50bf-dirty", "node": "ip-10-0-99-126.eu-west-1.compute.internal"}
-2023-08-25T11:27:14.062Z    INFO    controller.machine.termination    deleted machine    {"commit": "34d50bf-dirty", "machine": "default-dc58z", "node": "ip-10-0-99-126.eu-west-1.compute.internal", "provisioner": "default", "provider-id": "aws:///eu-west-1c/i-06391b132dcc25a0b"}
-2023-08-25T11:27:16.675Z    INFO    controller.machine.lifecycle    launched machine    {"commit": "34d50bf-dirty", "machine": "default-kj2x5", "provisioner": "default", "provider-id": "aws:///eu-west-1c/i-0769cccd857ada568", "instance-type": "m6i.2xlarge", "zone": "eu-west-1c", "capacity-type": "spot", "allocatable": {"cpu":"7910m","ephemeral-storage":"17Gi","memory":"29317Mi","pods":"58"}}
+{"level":"INFO","time":"2024-01-29T08:47:30.575Z","logger":"controller.interruption","message":"initiating delete from interruption message","commit":"1072d3b","queue":"karpenter-spot-and-karpenter","messageKind":"SpotInterruptionKind","nodeclaim":"default-4w54b","action":"CordonAndDrain","node":"ip-10-0-36-60.eu-west-2.compute.internal"}
+{"level":"INFO","time":"2024-01-29T08:47:30.603Z","logger":"controller.node.termination","message":"tainted node","commit":"1072d3b","node":"ip-10-0-36-60.eu-west-2.compute.internal"}
+{"level":"INFO","time":"2024-01-29T08:47:31.963Z","logger":"controller.provisioner","message":"found provisionable pod(s)","commit":"1072d3b","pods":"default/stateless-7956bd8d4c-48mj9, default/stateless-7956bd8d4c-spsqr, default/stateless-7956bd8d4c-sm4cp","duration":"18.833162ms"}
+{"level":"INFO","time":"2024-01-29T08:47:31.963Z","logger":"controller.provisioner","message":"computed new nodeclaim(s) to fit pod(s)","commit":"1072d3b","nodeclaims":1,"pods":3}
+{"level":"INFO","time":"2024-01-29T08:47:31.997Z","logger":"controller.provisioner","message":"created nodeclaim","commit":"1072d3b","nodepool":"default","nodeclaim":"default-6p2qb","requests":{"cpu":"1746m","memory":"1776Mi","pods":"7"},"instance-types":"c4.2xlarge, c4.4xlarge, {"level":"INFO","time":"2024-01-29T08:47:34.823Z","logger":"controller.nodeclaim.lifecycle","message":"launched nodeclaim","commit":"1072d3b","nodeclaim":"default-6p2qb","nodepool":"default","provider-id":"aws:///eu-west-2a/i-005ca44c327470d09","instance-type":"m7g.2xlarge","zone":"eu-west-2a","capacity-type":"spot","allocatable":{"cpu":"7810m","ephemeral-storage":"17Gi","memory":"29158Mi","pods":"58","vpc.amazonaws.com/pod-eni":"38"}}
 ```
 
 You can also go back to the terminal where you listed all the nodes, and you'll see how the interrupted instance was cordoned, and when the new instance was launched.
+
+Alternatively to vizualise the consolidation process, you can use [eks-node-viewer](https://github.com/awslabs/eks-node-viewer). `eks-node-viewer` a tool for visualizing dynamic node usage within a cluster. It was originally developed as an internal tool at AWS for demonstrating consolidation with Karpenter. It displays the scheduled pod resource requests vs the allocatable capacity on the node.
+
+To launch it execute the following in a **new** Cloud9 terminal tab:
+
+```bash
+eks-node-viewer
+```
 
 > 💡 Tip: You might end up seeing only one/two Spot nodes running, and if you review the Karpenter logs, you’ll see that it was because of the consolidation process.
 
 ## Step 7: (Optional) Deploy a Stateful Workload
 
-You can still launch On-Demand Instances in a cluster that’s also running Spot Instances for those non Spot-friendly workloads. Continue using the default Karpenter `Provisioner` you created before. But make sure you’re configuring the workload properly. One way of doing it is to use a similar approach for the Spot-friendly workload by using a `nodeSelector`.
+You can still launch On-Demand Instances in a cluster that’s also running Spot Instances for those non Spot-friendly workloads. Continue using the default Karpenter `NodePool` you created before. But make sure you’re configuring the workload properly. One way of doing it is to use a similar approach for the Spot-friendly workload by using a `nodeSelector`.
 
 Deploy the following application to simulate a stateful workload:
 
@@ -433,7 +454,7 @@ spec:
         karpenter.sh/capacity-type: on-demand
       containers:
       - name: app
-        image: public.ecr.aws/eks-distro/kubernetes/pause:3.7
+        image: public.ecr.aws/eks-distro/kubernetes/pause:v1.29.0-eks-1-29-latest
         resources:
           requests:
             cpu: 512m
@@ -446,8 +467,11 @@ Same as before, wait one minute, and you should see all pods running and one On-
 
 ```bash
 $ kubectl get nodes -L karpenter.sh/capacity-type,beta.kubernetes.io/instance-type,topology.kubernetes.io/zone -l karpenter.sh/capacity-type=on-demand
-NAME STATUS ROLES AGE VERSION CAPACITY-TYPE INSTANCE-TYPE ZONE
-ip-10-0-102-206.eu-west-1.compute.internal Ready <none> 46s v1.27.3-eks-a5565ad on-demand c6a.2xlarge eu-west-1c
+```
+
+```bash
+NAME                                         STATUS   ROLES    AGE   VERSION               CAPACITY-TYPE   INSTANCE-TYPE   ZONE
+ip-10-0-107-229.eu-west-2.compute.internal   Ready    <none>   13s   v1.29.0-eks-5e0fdde   on-demand       c6g.2xlarge     eu-west-2c
 ```
 
 You can review the Karpenter logs as well, you’ll see a similar behavior as before with the Spot-friendly workload.
@@ -475,4 +499,12 @@ aws cloudformation delete-stack --stack-name fis-spot-and-karpenter
 
 Using Spot Instances for your Kubernetes data plane nodes helps you reduce computing costs. As long as your workloads are fault-tolerant, stateless, and can use a variety of instance types, you can use Spot. Karpenter allows you to simplify the process of configuring your EKS cluster with a high-instance type diversification, and provisions only the capacity you need.
 
-You can learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html), or dive deeper into the Karpenter concepts [here](https://karpenter.sh/docs/concepts/).
+### Workshops
+You can learn more about using Karpenter on EKS with [this hands-on workshop](https://ec2spotworkshops.com/karpenter.html)
+
+### Blueprints
+This [repository](https://github.com/aws-samples/karpenter-blueprints) includes a list of common workload scenarios
+
+### Docuementation
+Dive deeper into the Karpenter concepts [here](https://karpenter.sh/docs/concepts/)
+
