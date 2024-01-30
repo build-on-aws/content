@@ -13,12 +13,14 @@ spaces:
   - devops
 waves:
   - cost
-authorGithubAlias: chrismld, jakesky 
-authorName: Christian Melendez, Jake Kudiersky
+authorGithubAlias: chrismld
+authorName: Christian Melendez
 date: 2024-01-29
 ---
 | ToC |
 |-----|
+
+**contributors:** [@jakeskyaws](https://github.com/jakeskyaws)
 
 One of the main cost factors for Kubernetes clusters relies on the compute layer for the data plane. Running Kubernetes clusters on Amazon EC2 Spot Instances is a great way to reduce your compute costs significantly. When using Spot Instances, you can get up to a 90% price discount compared to On-Demand Instances. 
 
