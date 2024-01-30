@@ -35,12 +35,12 @@ https://www.twitch.tv/videos/1996748024
 
 ## Links from today's episode
 
-* Aurora Limitless - https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-aurora-limitless-database/
-* Amazon RDS DB2 GA - https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-rds-db2/
-* Amazon DocumentDB I/O-Optimized - https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-documentdb-i-o-optimized/
-* Amazon DynamoDB zero-ETL integration with Amazon OpenSearch Service - https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-dynamodb-zero-etl-integration-amazon-opensearch-service/
-* Vector search for Amazon DocumentDB - https://aws.amazon.com/about-aws/whats-new/2023/11/vector-search-amazon-documentdb/
-* Amazon Neptune Analytics is now generally available - https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-neptune-analytics/
+* [Aurora Limitless](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-aurora-limitless-database/)
+* [Amazon RDS DB2 GA](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-rds-db2/)
+* [Amazon DocumentDB I/O-Optimized](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-documentdb-i-o-optimized/)
+* [Amazon DynamoDB zero-ETL integration with Amazon OpenSearch Service](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-dynamodb-zero-etl-integration-amazon-opensearch-service/)
+* [Vector search for Amazon DocumentDB](https://aws.amazon.com/about-aws/whats-new/2023/11/vector-search-amazon-documentdb/)
+* [Amazon Neptune Analytics is now generally available](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-neptune-analytics/)
 
 ## Reach out to the hosts and guests:
 

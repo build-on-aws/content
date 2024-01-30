@@ -34,8 +34,6 @@ https://www.twitch.tv/videos/1971030897
 
 [**Ajinkya Soitkar**](https://www.linkedin.com/in/ajinkya-soitkar/), Database Specialist Solutions Architect @ AWS
 
-## Links from today's episode
-
 
 ## Reach out to the hosts and guests:
 

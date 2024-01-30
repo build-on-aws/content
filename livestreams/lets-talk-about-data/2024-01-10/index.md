@@ -35,13 +35,13 @@ https://www.twitch.tv/videos/2028364008
 
 ## Links from today's episode
 
-* EMR - https://aws.amazon.com/emr/
-* EventBridge - https://aws.amazon.com/eventbridge/
-* Glue - https://aws.amazon.com/glue/
-* Quicksight - https://aws.amazon.com/quicksight/
-* Opensearch - https://aws.amazon.com/opensource/
-* Dataset used in demo- https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-dataopens
-* Hudi - https://hudi.apache.org/
+* [EMR](https://aws.amazon.com/emr/)
+* [EventBridge](https://aws.amazon.com/eventbridge/)
+* [Glue](https://aws.amazon.com/glue/)
+* [Quicksight](https://aws.amazon.com/quicksight/)
+* [Opensearch](https://aws.amazon.com/opensource/)
+* [Dataset used in demo](https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-dataopens)
+* [Hudi](https://hudi.apache.org/)
 
 ## Reach out to the hosts and guests:
 
