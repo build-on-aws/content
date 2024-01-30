@@ -7,7 +7,7 @@ tags:
   - incident-response
   - tutorials
   - twitch
-authorName: * [**Ben Fletcher**](www.linkedin.com/in/decisivefuture), AWS CIRT @ AWS
+authorName: security-ramp-up
 date: 2024-01-17
 images:
   hero:  ./images/security-ramp-up-banner.png
