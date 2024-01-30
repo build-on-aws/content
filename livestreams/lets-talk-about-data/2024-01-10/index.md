@@ -35,10 +35,17 @@ https://www.twitch.tv/videos/2028364008
 
 ## Links from today's episode
 
-* [Getting started with Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started)
-* [Terraform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance)
-* [Instance Scheduler on AWS](https://aws.amazon.com/solutions/implementations/instance-scheduler-on-aws/)
-* [Implementation guide:](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/solution-overview.html)
+[**Chris Turner**](https://www.linkedin.com/in/cturner3/), Senior Data Engineer @ CDL Software
+
+## Links from today's episode
+
+* [EMR](https://aws.amazon.com/emr/)
+* [EventBridge](https://aws.amazon.com/eventbridge/)
+* [Glue](https://aws.amazon.com/glue/)
+* [Quicksight](https://aws.amazon.com/quicksight/)
+* [Opensearch](https://aws.amazon.com/opensource/)
+* [Dataset used in demo](https://www.data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-47e5ce24a11f/road-safety-dataopens)
+* [Hudi](https://hudi.apache.org/)
 
 ## Reach out to the hosts and guests:
 
