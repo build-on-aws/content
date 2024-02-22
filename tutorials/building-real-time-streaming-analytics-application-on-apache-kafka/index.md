@@ -40,14 +40,14 @@ In this tutorial, we will:
 
 * Start a Serverless Amazon MSK Cluster
 * Produce streaming data to MSK Serverless using Kafka Client Container
-* Consume and process the streaming data using Amazon Kinesis Data Analytics
+* Consume and process the streaming data using Amazon Managed Service for Apache Flink (MFA)
 * Visualise streaming data in Amazon OpenSearch Service
 
 Let’s get started!
 
 ## Architecture
 
-The following architecture provides an overview of all the AWS resources and services that we will use to write real-time clickstream data to the Kafka cluster and subsequently consume it. We make use of AWS Fargate to deploy a container application that produces sample clickstream data to the MSK Serverless cluster. The clickstream data is consumed by an Apache Flink application running in Amazon Kinesis Data Analytics. More specifically, the Flink application processes the clickstream by *windowing*, which involves splitting the data stream into buckets of finite size. We rely on these windows to apply computations and analyze the data within each one. Finally, the resulting analyses are written to Amazon OpenSearch Service for visualisation.
+The following architecture provides an overview of all the AWS resources and services that we will use to write real-time clickstream data to the Kafka cluster and subsequently consume it. We make use of AWS Fargate to deploy a container application that produces sample clickstream data to the MSK Serverless cluster. The clickstream data is consumed by an Apache Flink application running in Amazon Managed Service for Apache Flink. More specifically, the Flink application processes the clickstream by *windowing*, which involves splitting the data stream into buckets of finite size. We rely on these windows to apply computations and analyze the data within each one. Finally, the resulting analyses are written to Amazon OpenSearch Service for visualisation.
 
 ![Overview of the proposed architecture with the featured AWS services](images/architecture.jpg)
 
@@ -86,7 +86,7 @@ Once the application is successfully built you should see a following message in
 
 Maven packages the compiled source code of the project in a distributable JAR format in the directory `flink-clickstream-consumer/target/` named `ClickStreamProcessor-1.0.jar`. If you want to better understand the inner workings of the Flink application, you can have a look at the `ClickstreamProcessor.java` file in the `src` directory. This is the entry point of the Java application where the `main` function resides.
 
-Next, we have to provide Amazon Kinesis Data Analytics with the JAR file by uploading it to Amazon S3.
+Next, we have to provide Amazon Managed Service for Apache Flink with the JAR file by uploading it to Amazon S3.
 
 ### Step 3: Upload the File to Amazon S3
 
@@ -106,7 +106,7 @@ Next, we have to provide Amazon Kinesis Data Analytics with the JAR file by uplo
 
 !['Add files' button to select and upload local files to the S3 bucket](images/add_files_to_bucket.png)
 
-Perfect! Now, that the JAR file is uploaded to the S3 bucket, we can easily run the Flink application in Kinesis Data Analytics without having to manage any servers. Note that we can either upload the package as JAR file, or can compress the package and upload it as a ZIP file.
+Perfect! Now, that the JAR file is uploaded to the S3 bucket, we can easily run the Flink application in Amazon Managed Service for Apache Flink without having to manage any servers. Note that we can either upload the package as JAR file, or can compress the package and upload it as a ZIP file.
 
 ### Step 4:  Create a Stack using AWS CloudFormation
 
@@ -114,7 +114,7 @@ Next, we'll create a CloudFormation stack and automatically deploy the following
 
 * `Amazon OpenSearch Cluster`: This is where we can visualize the consumed clickstream data. It is deployed in private subnets of a VPC.
 * `Amazon ECS Cluster + Task definition`: The container application that generates the sample clickstream data runs inside the ECS cluster as a Fargate task.
-* `Amazon Kinesis Data Analytics`: This is where the Flink application runs, consuming the clickstream data from the MSK cluster, processing it and writing it to the OpenSearch Service.
+* `Amazon Managed Service for Apache Flink`: This is where the Flink application runs, consuming the clickstream data from the MSK cluster, processing it and writing it to the OpenSearch Service.
 * `Amazon EC2 Instance (Kafka client)`: This EC2 instance serves as a Kafka client and allows us to interact with the MSK cluster by among other things creating Kafka topics.
 * `Amazon EC2 Instance (Nginx proxy)`: This EC2 instance serves as a Nginx proxy and allows us to access the OpenSearch Dashboard from outside of the VPC, i.e., from the Internet.
 * `Security groups`: Security groups help us to control the traffic that is allowed to reach and leave a particular resource.
@@ -274,21 +274,21 @@ In the last step, we successfully created an ECS producer task. Now we have to c
 
 Apache Avro is a data serialization system that allows for efficient and compact encoding of structured data, especially in big data or streaming data use cases. To this end, Avro provides a compact binary format for data storage and exchange. The producer makes use of a Avro serializer provided by the AWS Glue Schema Registry and automatically registers the schema version in the Glue Schema Registry.
 
-### Step 9: Consume Clickstream Data Using Kinesis Data Analytics
+### Step 9: Consume Clickstream Data Using Managed Service for Apache Flink
 
-We have set up the MSK Serverless Cluster and are continuously writing clickstream data to the cluster. Now, we would like to consume the clickstream data from the MSK Serverless cluster using Amazon Kinesis Data Analytics and Flink. The Apache Flink Application processes the clickstream data in real-time and writes the analyses to Amazon OpenSearch Service.
+We have set up the MSK Serverless Cluster and are continuously writing clickstream data to the cluster. Now, we would like to consume the clickstream data from the MSK Serverless cluster using Amazon Managed Service for Apache Flink. The Apache Flink application processes the clickstream data in real-time and writes the analyses to Amazon OpenSearch Service.
 
-The OpenSearch Service is already deployed in your AWS account and the Dashboard is already configured. What's missing are the correct runtime parameters for the Kinesis Data Analytics application.
+The OpenSearch Service is already deployed in your AWS account and the Dashboard is already configured. What's missing are the correct runtime parameters for the Flink application.
 
-1. Navigate to the [AWS Kinesis Analytics console](https://console.aws.amazon.com/kinesisanalytics/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka) and click on the open streaming application `KDAFlinkCLickstream-msk-serverless-stack`.
+1. Navigate to the [Managed Apache Flink console](https://console.aws.amazon.com/flink/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka) and click on the open streaming application `KDAFlinkCLickstream-msk-serverless-stack`.
 
 2. Configure and update the application by clicking on the `Configure` button.
 
-![Flink application view within the Kinesis Data Analytics console](images/kda_configure.png)
+![Flink application view within the Managed Apache Flink console](images/kda_configure.png)
 
 3. Scroll down to the `Runtime properties`. Update `BootstrapServers` to the MSK Serverless cluster endpoint you have written down earlier. Keep the rest of the values as default.
 
-![Runtime properties of the Flink application within the Kinesis Data Analytics console](images/kda_runtime_properties.png)
+![Runtime properties of the Flink application within the Managed Apache Flink console](images/kda_runtime_properties.png)
 
 4. Finally, save your changes.
 
@@ -296,7 +296,7 @@ The OpenSearch Service is already deployed in your AWS account and the Dashboard
 
 ![KDA Run Application](images/kda_run_application.png)
 
-6. Once the Kinesis Analytics application is running, click on `Open Apache Flink dashboard` to open the Flink dashboard.
+6. Once the Flink application is running, click on `Open Apache Flink dashboard` to open the Flink dashboard.
 
 !['Open Apache Flink dashboard' button in the Flink application](images/kda_open_dashboard.png)
 
@@ -312,11 +312,11 @@ In addition, we can see the status of each task, as well as the `Bytes Received`
 
 ![DAG to show the flow of data and data statistics](images/kda_dag.png)
 
-We have now successfully setup a Kinesis Analytics application that reads messages from a Kafka topic, processes the data, and then writes the analyses to Amazon OpenSearch Service. Let’s check the data in the OpenSearch dashboard!
+We have now successfully setup a Flink application that reads messages from a Kafka topic, processes the data, and then writes the analyses to Amazon OpenSearch Service. Let’s check the data in the OpenSearch dashboard!
 
 ### Step 10: View Clickstream Data in the Amazon OpenSearch Dashboard
 
-In this final step, we want to see the dashboard visualisation generated based on the ingested data from Kinesis Analytics application.
+In this final step, we want to see the dashboard visualisation generated based on the ingested data from the Flink application.
 
 1. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation/?sc_channel=el&sc_campaign=datamlwave&sc_geo=mult&sc_country=mult&sc_outcome=acq&sc_content=building-real-time-streaming-analytics-application-on-apache-kafka) and click on the stack that we created earlier. Go to the `Outputs` tab of the stack.
 
@@ -364,7 +364,7 @@ Now that you’ve finished building a real-time streaming analytics application 
 
 ## Conclusion
 
-Congratulations! You have built a real-time streaming analytics application on Apache Kafka. More specifically, you have set up an ECS task to produce sample clickstream data to the MSK Serverless Cluster. This clickstream data is then consumed by a Flink application running in Amazon Kinesis Analytics, processed and written to Amazon OpenSearch.
+Congratulations! You have built a real-time streaming analytics application on Apache Kafka. More specifically, you have set up an ECS task to produce sample clickstream data to the MSK Serverless Cluster. This clickstream data is then consumed by a Flink application running in Amazon Managed Service for Apache Flink, processed and written to Amazon OpenSearch.
 
 If you want to learn more about streaming and Apache Kafka on AWS, you can check out the following blog posts:
 
