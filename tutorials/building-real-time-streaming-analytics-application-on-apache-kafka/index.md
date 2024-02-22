@@ -49,7 +49,7 @@ Let’s get started!
 
 The following architecture provides an overview of all the AWS resources and services that we will use to write real-time clickstream data to the Kafka cluster and subsequently consume it. We make use of AWS Fargate to deploy a container application that produces sample clickstream data to the MSK Serverless cluster. The clickstream data is consumed by an Apache Flink application running in Amazon Managed Service for Apache Flink. More specifically, the Flink application processes the clickstream by *windowing*, which involves splitting the data stream into buckets of finite size. We rely on these windows to apply computations and analyze the data within each one. Finally, the resulting analyses are written to Amazon OpenSearch Service for visualisation.
 
-![Overview of the proposed architecture with the featured AWS services](images/architecture.jpg)
+![Overview of the proposed architecture with the featured AWS services](images/architecture.png)
 
 ## Implementation
 
