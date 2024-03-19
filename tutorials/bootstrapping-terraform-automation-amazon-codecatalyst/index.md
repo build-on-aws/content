@@ -50,13 +50,11 @@ Automating your infrastructure is a great idea, but you need infrastructure to a
 1. Using Terraform without storing the state file to bootstrap, then add in the state file configurations to store it
 
 We will be using the 3rd option, have a look at the [Stack Overflow](https://stackoverflow.com/questions/47913041/initial-setup-of-terraform-backend-using-terraform/) discussion around approaches for more details on the trade-offs.
-<!-- If you prefer to use the AWS CLI, a [script](https://github.com/build-on-aws/bootstrapping-terraform-automation-for-github-actions/_bootstrap/aws_cli_tf_bootstrap.sh) is also included in the code repo for this tutorial that you can run via [AWS CloudShell](https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html?sc_channel=el&sc_campaign=devopswave&sc_content=cicdctfbtstrpaws&sc_geo=mult&sc_country=mult&sc_outcome=acq) in your AWS account see the [bootstrapping with AWS CLI and CloudShell](#bootstrapping-with-aws-cli-and-cloudshell) section further down. -->
+
 
 ## Getting started
 
 Let's get started setting this up! Make sure you are logged into your AWS, and CodeCatalyst accounts in the same browser.
-
-<!-- This guide will use CodeCatalyst Code Repositories, but you can also use GitHub. If you prefer GitHub, see the section on [setting up GitHub repo](#setting-up-dev-environment-with-github-repo) below, then come back to this step. -->
 
 ### Setting up a CodeCatalyst Space, Project, Repo, and Environment
 
@@ -71,8 +69,6 @@ Next, we need to create a new Project, click on the `Create Project` button, sel
 Now we need to create a new repository for our code. Click `Code` in the left-side navigation menu, then on `Source repositories`, `Add repository` and choose `Create repository`. Set a repository name (we will use `bootstrapping-terraform-automation-for-amazon-codecatalyst` in this tutorial), add a description, and `Terraform` for the `.gitignore file`:
 
 ![Dialog for creating a CodeCatalyst repo](./images/create_codecatalyst_repo.png)
-
-<!-- (Optional): If you are using a GitHub repo, open the `Installed extensions` tab, and install the `GitHub repositories` extension by clicking on `Browse Amazon CodeCatalyst catalog` - this will take you through a series of steps to set up access. The next step is to link your AWS Account, and then we are ready to create our first project. -->
 
 Lastly, we need to set up the AWS environment we will use for our workflow. In the left-side navigation menu, click on `CI/CD`, then on `Environments`, and then `Create environment`. Add the `Environment name`, `Description`, choose your AWS account from the dropdown under `AWS account connection`, and click `Create environment`.
 
@@ -954,54 +950,3 @@ To remove all the resources we created in this project, follow the following ste
 ## Conclusion
 
 Congratulations! You've now bootstrapped Terraform with CodeCatalyst, and can deploy any infrastructure changes using a pull request workflow. If you enjoyed this tutorial, found an issues, or have feedback for us, <a href="https://pulse.buildon.aws/survey/DEM0H5VW" target="_blank">please send it our way!</a>
-
-<!-- ## Bootstrapping with AWS CLI and CloudShell -->
-
-<!-- 
-## Setting up Dev Environment with GitHub repo
-
-You can also use GitHub for this tutorial, first you will need to create a new repo for our infrastructure using Terraform for the `.gitignore` template, a suitable repo name (we will use `bootstrapping-terraform-automation-amazon-codecatalyst`), and an appropriate license.
-
-![Details to create a new GitHub repo called `bootstrapping-terraform-automation-for-amazon-codecatalyst`, with the Terraform `.gitignore`, and using the `MIT-0` license.](./images/new_github_repo.png)
-
-Next, you will need to set up a development environment, and will be using the built-in ones provided by CodeCatalyst. In your space, click on `Create Dev Environment` under the `Your Dev Environments` section, then select `Cloud9` - this tutorial with use Cloud9. Select `Create an empty Dev Environment`, add an `Alias` of `TerraformBootstrap`, and then click the `Create` button.
-
-![Dialog to create a dev environment, with the `Create an empty Dev Environment` selected, and the `alias` set to `TerraformBootstrap`](./images/create_dev_environment_github_repo.png)
-
-It will take 1 - 2 minutes to provision your development environment, and once done, you will be presented with a welcome screen:
-
-![Cloud9 web based IDE view](./images/cloud9_dev_environment.png)
-
-To access your repository on GitHub, we need to create or add an SSH key pair to our environment. We recommend creating a new key, and adding it to your GitHub account by using `ssh-keygen -t ecdsa -b 521`, using the default location, and adding a passphrase. Use the terminal in the bottom half of the Cloud9 IDE:
-
-```bash
-$ ssh-keygen -t ecdsa -b 521
-Generating public/private ecdsa key pair.
-Enter file in which to save the key (/home/mde-user/.ssh/id_ecdsa): 
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
-Your identification has been saved in /home/mde-user/.ssh/id_ecdsa.
-Your public key has been saved in /home/mde-user/.ssh/id_ecdsa.pub.
-The key fingerprint is:
-SHA256:qoZsKx9rHD7RHTB3+tYfWWYHWCGLcd03FZhHJ1w58/I mde-user@ip-10-2-124-31.us-west-2.compute.internal
-The key's randomart image is:
-+---[ECDSA 521]---+
-|          . o=B*B|
-|    o . .  +.=+B+|
-|     + o  . . ..*|
-|      o       = o|
-|   . . oS.   = + |
-|  o . ..o . o   E|
-| +.+  ..   . .   |
-|. Oo..      .    |
-| =++.            |
-+----[SHA256]-----+
-```
-
-Next, you need to add the SSH key to your GitHub account. Use `cat ~/.ssh/id_ecdsa.pub` to output the public part of the key, highlight it and copy it using `ctrl` + `c` (or `cmd` + `c` on Mac), then add it via [GitHub](https://github.com/settings/ssh/new). It should look like this:
-
-![Dialog on GitHub to add a new SSH key with the name set to `Cloud9`, and the public part of the key pasted in](./images/github_new_ssh_key.png)
-
-Lastly, go back to your new GitHub repo, click on the `Code` button, select `SSH`, and the click on the button of two files next to the string starting with `git@github.com`. The icon should be replace with a green checkmark after you clicked it. Back in your Cloud9 terminal, type `git clone ` (note the space after `clone`), and the paste in the repo location using `ctrl` + `v` (or `cmd` + 'v' on Mac), and press enter.
-
-You are now ready to continue with the tutorial, can go back to [bootstrapping Terraform](#bootstrapping-terraform) now. -->
