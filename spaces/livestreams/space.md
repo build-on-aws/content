@@ -11,4 +11,5 @@ pinnedPosts:
   - /livestreams/build-on-generative-ai
   - /livestreams/lets-talk-about-data
   - /livestreams/keys-to-aws-optimization
+  - /livestreams/aws-tech-tales
 ---
